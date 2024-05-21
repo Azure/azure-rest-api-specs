@@ -120,9 +120,9 @@ model AzureChatExtensionRetrievedDocument {
   @encodedName("application/json", "rerank_score")
   rerankScore?: float32;
 
-  /** 
+  /**
    * Represents the rationale for filtering the document. If the document does not undergo filtering,
-   * this field will remain unset. 
+   * this field will remain unset.
    */
   @encodedName("application/json", "filter_reason")
   filterReason?: AzureChatExtensionRetrieveDocumentFilterReason;

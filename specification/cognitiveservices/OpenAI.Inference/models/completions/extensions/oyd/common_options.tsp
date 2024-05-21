@@ -38,17 +38,17 @@ alias OnYourDataCommonChatExtensionConfiguration = {
   @doc("Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.")
   @encodedName("application/json", "role_information")
   roleInformation?: string;
-  
-  /** 
-   * The max number of rewritten queries should be send to search provider for one user message. If not specified, 
-   * the system will decide the number of queries to send. 
+
+  /**
+   * The max number of rewritten queries should be send to search provider for one user message. If not specified,
+   * the system will decide the number of queries to send.
    */
   @encodedName("application/json", "max_search_queries")
   @added(ServiceApiVersions.v2024_05_01_Preview)
   maxSearchQueries?: int32;
 
-  /** 
-   * If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail. 
+  /**
+   * If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.
    * If not specified, or specified as false, the request will fail if any search query fails.
    */
   @encodedName("application/json", "allow_partial_results")

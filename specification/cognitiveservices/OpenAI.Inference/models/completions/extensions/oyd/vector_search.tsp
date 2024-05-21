@@ -96,7 +96,7 @@ model OnYourDataModelIdVectorizationSource
 /** The authentication types supported with Azure OpenAI On Your Data vector search. */
 @added(ServiceApiVersions.v2024_05_01_Preview)
 union OnYourDataVectorSearchAuthenticationType {
-  string, 
+  string,
 
   /** Authentication via API key. */
   apiKey: "api_key",
@@ -105,7 +105,7 @@ union OnYourDataVectorSearchAuthenticationType {
   accessToken: "access_token",
 }
 
-/** 
+/**
  * The authentication options for Azure OpenAI On Your Data vector search.
  */
 @discriminator("type")
@@ -115,7 +115,7 @@ model OnYourDataVectorSearchAuthenticationOptions {
   type: OnYourDataVectorSearchAuthenticationType;
 }
 
-/** 
+/**
  * The authentication options for Azure OpenAI On Your Data when using an API key.
  */
 @added(ServiceApiVersions.v2024_05_01_Preview)
