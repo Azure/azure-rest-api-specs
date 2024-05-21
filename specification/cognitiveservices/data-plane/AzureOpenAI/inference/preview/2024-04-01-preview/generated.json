@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure OpenAI API",
-    "version": "2024-03-01-preview",
+    "version": "2024-04-01-preview",
     "description": "Azure OpenAI APIs for completions and search",
     "x-typespec-generated": [
       {
@@ -153,6 +153,9 @@
           },
           {
             "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.timestampGranularities"
           },
           {
             "$ref": "#/parameters/AudioTranscriptionOptions.model"
@@ -517,6 +520,9 @@
             "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
           },
           {
+            "$ref": "#/parameters/AudioTranscriptionOptions.timestampGranularities"
+          },
+          {
             "$ref": "#/parameters/AudioTranscriptionOptions.model"
           }
         ],
@@ -664,6 +670,14 @@
           "items": {
             "$ref": "#/definitions/AudioTranscriptionSegment"
           }
+        },
+        "words": {
+          "type": "array",
+          "description": "A collection of information about the timing of each processed word.",
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionWord"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -742,6 +756,17 @@
           "type": "number",
           "format": "float",
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
+        },
+        "timestamp_granularities": {
+          "type": "array",
+          "description": "The timestamp granularities to populate for this transcription.\n`response_format` must be set `verbose_json` to use timestamp granularities.\nEither or both of these options are supported: `word`, or `segment`.\nNote: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.",
+          "default": [
+            "segment"
+          ],
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionTimestampGranularity"
+          },
+          "x-ms-client-name": "timestampGranularities"
         },
         "model": {
           "type": "string",
@@ -823,6 +848,55 @@
         "no_speech_prob",
         "tokens",
         "seek"
+      ]
+    },
+    "AudioTranscriptionTimestampGranularity": {
+      "type": "string",
+      "description": "Defines the timestamp granularities that can be requested on a verbose transcription response.",
+      "enum": [
+        "word",
+        "segment"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionTimestampGranularity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "word",
+            "value": "word",
+            "description": "Indicates that responses should include timing information about each transcribed word. Note that generating word\ntimestamp information will incur additional response latency."
+          },
+          {
+            "name": "segment",
+            "value": "segment",
+            "description": "Indicates that responses should include timing and other information about each transcribed audio segment. Audio\nsegment timestamp information does not incur any additional latency."
+          }
+        ]
+      }
+    },
+    "AudioTranscriptionWord": {
+      "type": "object",
+      "description": "Extended information about a single transcribed word, as provided on responses when the 'word' timestamp granularity is provided.",
+      "properties": {
+        "word": {
+          "type": "string",
+          "description": "The textual content of the word."
+        },
+        "start": {
+          "type": "number",
+          "format": "float",
+          "description": "The start time of the word relative to the beginning of the audio, expressed in seconds."
+        },
+        "end": {
+          "type": "number",
+          "format": "float",
+          "description": "The end time of the word relative to the beginning of the audio, expressed in seconds."
+        }
+      },
+      "required": [
+        "word",
+        "start",
+        "end"
       ]
     },
     "AudioTranslation": {
@@ -2726,6 +2800,27 @@
         "license"
       ]
     },
+    "ContentFilterDetailedResults": {
+      "type": "object",
+      "description": "Represents a structured collection of result details for content filtering.",
+      "properties": {
+        "filtered": {
+          "type": "boolean",
+          "description": "A value indicating whether or not the content has been filtered."
+        },
+        "details": {
+          "type": "array",
+          "description": "The collection of detailed blocklist result information.",
+          "items": {
+            "$ref": "#/definitions/ContentFilterBlocklistIdResult"
+          }
+        }
+      },
+      "required": [
+        "filtered",
+        "details"
+      ]
+    },
     "ContentFilterDetectionResult": {
       "type": "object",
       "description": "Represents the outcome of a detection operation performed by content filtering.",
@@ -2788,11 +2883,8 @@
           "description": "Describes whether profanity was detected."
         },
         "custom_blocklists": {
-          "type": "array",
+          "$ref": "#/definitions/ContentFilterDetailedResults",
           "description": "Describes detection results against configured custom blocklists.",
-          "items": {
-            "$ref": "#/definitions/ContentFilterBlocklistIdResult"
-          },
           "x-ms-client-name": "customBlocklists"
         },
         "error": {
@@ -2802,6 +2894,11 @@
         "jailbreak": {
           "$ref": "#/definitions/ContentFilterDetectionResult",
           "description": "Whether a jailbreak attempt was detected in the prompt."
+        },
+        "indirect_attack": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Whether an indirect attack was detected in the prompt.",
+          "x-ms-client-name": "indirectAttack"
         }
       }
     },
@@ -2831,11 +2928,8 @@
           "description": "Describes whether profanity was detected."
         },
         "custom_blocklists": {
-          "type": "array",
+          "$ref": "#/definitions/ContentFilterDetailedResults",
           "description": "Describes detection results against configured custom blocklists.",
-          "items": {
-            "$ref": "#/definitions/ContentFilterBlocklistIdResult"
-          },
           "x-ms-client-name": "customBlocklists"
         },
         "error": {
@@ -3933,7 +4027,9 @@
             "mp3",
             "opus",
             "aac",
-            "flac"
+            "flac",
+            "wav",
+            "pcm"
           ],
           "x-ms-enum": {
             "name": "SpeechGenerationResponseFormat",
@@ -3958,6 +4054,16 @@
                 "name": "flac",
                 "value": "flac",
                 "description": "Use FLAC as the audio output format. FLAC is a fully lossless format optimized for maximum quality at the expense of size."
+              },
+              {
+                "name": "wav",
+                "value": "wav",
+                "description": "Use uncompressed WAV as the audio output format, suitable for low-latency applications to avoid decoding overhead."
+              },
+              {
+                "name": "pcm",
+                "value": "pcm",
+                "description": "Use uncompressed PCM as the audio output format, which is similar to WAV but contains raw samples in 24kHz (16-bit signed, low-endian), without the header."
               }
             ]
           },
@@ -4145,6 +4251,41 @@
       "type": "number",
       "format": "float",
       "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.timestampGranularities": {
+      "name": "timestamp_granularities",
+      "in": "formData",
+      "description": "The timestamp granularities to populate for this transcription.\n`response_format` must be set `verbose_json` to use timestamp granularities.\nEither or both of these options are supported: `word`, or `segment`.\nNote: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "word",
+          "segment"
+        ],
+        "x-ms-enum": {
+          "name": "AudioTranscriptionTimestampGranularity",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "word",
+              "value": "word",
+              "description": "Indicates that responses should include timing information about each transcribed word. Note that generating word\ntimestamp information will incur additional response latency."
+            },
+            {
+              "name": "segment",
+              "value": "segment",
+              "description": "Indicates that responses should include timing and other information about each transcribed audio segment. Audio\nsegment timestamp information does not incur any additional latency."
+            }
+          ]
+        }
+      },
+      "default": [
+        "segment"
+      ],
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "timestampGranularities"
     },
     "AudioTranslationOptions.file": {
       "name": "file",
