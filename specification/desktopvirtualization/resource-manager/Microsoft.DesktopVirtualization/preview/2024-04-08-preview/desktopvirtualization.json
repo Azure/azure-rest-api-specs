@@ -3649,6 +3649,9 @@
             "type": "integer",
             "format": "int32",
             "description": "Initial number of items to skip."
+          },
+          {
+            "$ref": "#/parameters/vmPathParameter"
           }
         ],
         "responses": {
@@ -10000,14 +10003,15 @@
       "minLength": 1,
       "x-ms-parameter-location": "method"
     },
-    "OperationIdParameter": {
-      "name": "operationId",
-      "in": "path",
-      "required": true,
+    "vmPathParameter": {
+      "name": "vmPath",
+      "in": "query",
+      "required": false,
       "type": "string",
-      "description": "The Guid of the operation.",
-      "maxLength": 36,
-      "minLength": 36,
+      "description": "The path to the VM.",
+      "pattern": "^[A-Z][a-z][0-9][@./-_ ]*$",
+      "maxLength": 1092,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     }
   }
