@@ -176,7 +176,7 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(TextTranslation.TranslateParameters.suggestedFrom,
-  "fromLanguage",
+  "from_language",
   "python"
 );
 
