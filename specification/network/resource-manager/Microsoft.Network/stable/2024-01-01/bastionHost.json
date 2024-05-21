@@ -648,11 +648,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of this Bastion Host.",
+          "description": "The name of the sku of this Bastion Host.",
           "enum": [
             "Basic",
             "Standard",
-            "Developer"
+            "Developer",
+            "Premium"
           ],
           "default": "Standard",
           "x-ms-enum": {
@@ -797,6 +798,11 @@
           "type": "boolean",
           "default": false,
           "description": "Enable/Disable Kerberos feature of the Bastion Host resource."
+        },
+        "enableSessionRecording": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/Disable Session Recording feature of the Bastion Host resource."
         }
       },
       "description": "Properties of the Bastion Host."
