@@ -89,50 +89,51 @@ model OnYourDataModelIdVectorizationSource
   modelId: string;
 }
 
-/** TODO docs */
+/** The authentication types supported with Azure OpenAI On Your Data vector search. */
 @added(ServiceApiVersions.v2024_05_01_Preview)
 union OnYourDataVectorSearchAuthenticationType {
   string, 
 
-
-  @doc("Authentication via API key.")
+  /** Authentication via API key. */
   apiKey: "api_key",
 
-  @doc("Authentication via access token.")
+  /** Authentication via access token. */
   accessToken: "access_token",
 }
 
-/** TODO docs */
+/** 
+ * The authentication options for Azure OpenAI On Your Data vector search.
+ */
 @discriminator("type")
 @added(ServiceApiVersions.v2024_05_01_Preview)
 model OnYourDataVectorSearchAuthenticationOptions {
-  @doc("The type of authentication to use.")
+  /** The type of authentication to use. */
   type: OnYourDataVectorSearchAuthenticationType;
 }
 
-@doc("""
-The authentication options for Azure OpenAI On Your Data when using an API key.
-""")
-@added(ServiceApiVersions.v2024_02_15_Preview)
+/** 
+ * The authentication options for Azure OpenAI On Your Data when using an API key.
+ */
+@added(ServiceApiVersions.v2024_05_01_Preview)
 model OnYourDataVectorSearchApiKeyAuthenticationOptions
   extends OnYourDataVectorSearchAuthenticationOptions {
-  @doc("The authentication type of API key.")
+  /** The authentication type of API key. */
   type: OnYourDataVectorSearchAuthenticationType.apiKey;
 
-  @doc("The API key to use for authentication.")
+  /** The API key to use for authentication. */
   key: string;
 }
 
-@doc("""
-The authentication options for Azure OpenAI On Your Data when using access token.
-""")
-@added(ServiceApiVersions.v2024_02_15_Preview)
+/**
+ * The authentication options for Azure OpenAI On Your Data vector search when using access token.
+ */
+@added(ServiceApiVersions.v2024_05_01_Preview)
 model OnYourDataVectorSearchAccessTokenAuthenticationOptions
   extends OnYourDataVectorSearchAuthenticationOptions {
-  @doc("The authentication type of access token.")
+  /** The authentication type of access token. */
   type: OnYourDataVectorSearchAuthenticationType.accessToken;
 
-  @doc("The access token to use for authentication.")
+  /** The access token to use for authentication. */
   @encodedName("application/json", "access_token")
   accessToken: string;
 }
