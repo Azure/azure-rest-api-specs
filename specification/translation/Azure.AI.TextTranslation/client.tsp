@@ -57,7 +57,7 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(TextTranslation.DictionaryExamplesParameters.from,
-  "fromLanguage",
+  "from_language",
   "python"
 );
 
