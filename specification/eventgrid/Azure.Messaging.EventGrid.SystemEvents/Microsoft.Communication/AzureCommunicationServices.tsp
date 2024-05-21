@@ -1056,7 +1056,7 @@ union CommunicationIdentifierModelKind {
   /** Unknown */
   "unknown",
 
-  /** Communcation User */
+  /** Communication User */
   "communicationUser",
 
   /** Phone Number */
@@ -1222,7 +1222,7 @@ model AcsMessageInteractiveListReplyContent {
   /** The title of the selected list item */
   title?: string;
 
-  /** The sescription of the selected row */
+  /** The description of the selected row */
   description?: string;
 }
 
@@ -1266,7 +1266,7 @@ union AcsInteractiveReplyKind {
 
 /** Message channel kind */
 union AcsMessageChannelKind {
-  /** Updated message channel type is Whatsapp */
+  /** Updated message channel type is WhatsApp */
   "whatsapp",
 
   string,
