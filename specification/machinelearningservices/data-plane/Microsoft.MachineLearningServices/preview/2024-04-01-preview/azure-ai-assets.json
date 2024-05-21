@@ -76,7 +76,7 @@
     "/indexes": {
       "get": {
         "operationId": "Indexes_ListLatest",
-        "description": "List the latest version of each index.",
+        "description": "List the latest version of each index. Latest is defined by most recent created by date.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -124,7 +124,7 @@
     "/indexes/{name}": {
       "get": {
         "operationId": "Indexes_GetLatest",
-        "description": "Get latest Index.",
+        "description": "Get latest version of the Index. Latest is defined by most recent created by date.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -168,7 +168,7 @@
     "/indexes/{name}:getNextVersion": {
       "post": {
         "operationId": "Indexes_GetNextVersion",
-        "description": "Get next Index version.",
+        "description": "Get next Index version. This returns the latest version + 1.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -212,7 +212,7 @@
     "/indexes/{name}/versions": {
       "get": {
         "operationId": "Indexes_List",
-        "description": "The most basic operation.",
+        "description": "List the versions of an Index given the name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -236,7 +236,7 @@
           {
             "name": "orderBy",
             "in": "query",
-            "description": "Ordering of list: Please choose OrderBy value from ['createdtime', 'modifiedtime'].",
+            "description": "Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].",
             "required": false,
             "type": "string"
           },
@@ -290,7 +290,7 @@
     "/indexes/{name}/versions/{version}": {
       "get": {
         "operationId": "Indexes_Get",
-        "description": "Fetch a IndexVersion by name.",
+        "description": "Get a specific version of an Index.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -415,7 +415,7 @@
         },
         "stage": {
           "type": "string",
-          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
+          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.",
           "default": "Development"
         },
         "description": {
@@ -519,7 +519,7 @@
         },
         "stage": {
           "type": "string",
-          "description": "Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.",
+          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.",
           "default": "Development"
         },
         "description": {
