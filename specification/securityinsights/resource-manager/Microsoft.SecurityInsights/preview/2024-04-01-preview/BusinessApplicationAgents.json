@@ -47,7 +47,7 @@
             "name": "agentToUpsert",
             "description": "The Business Application Agent",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
             }
           }
         ],
@@ -55,13 +55,13 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
             }
           },
           "default": {
@@ -114,7 +114,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
             }
           },
           "default": {
@@ -218,7 +218,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/AgentsList"
+              "$ref": "#/definitions/BusinessApplicationAgentsList"
             }
           },
           "default": {
@@ -289,7 +289,7 @@
             "name": "systemToUpsert",
             "description": "The system to upsert.",
             "schema": {
-              "$ref": "#/definitions/System"
+              "$ref": "#/definitions/SystemResource"
             }
           }
         ],
@@ -297,13 +297,13 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/System"
+              "$ref": "#/definitions/SystemResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/System"
+              "$ref": "#/definitions/SystemResource"
             }
           },
           "default": {
@@ -366,7 +366,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/System"
+              "$ref": "#/definitions/SystemResource"
             }
           },
           "default": {
@@ -504,7 +504,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Systems_GetAll": {
+          "Systems_List": {
             "$ref": "./examples/businessApplicationAgents/systems/Systems_List.json"
           }
         }
@@ -717,7 +717,7 @@
     }
   },
   "definitions": {
-    "Agent": {
+    "BusinessApplicationAgentResource": {
       "description": "Describes the configuration of a Business Application Agent.",
       "required": [
         "properties"
@@ -810,14 +810,14 @@
         ]
       }
     },
-    "AgentsList": {
+    "BusinessApplicationAgentsList": {
       "description": "List of agents.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Agent"
+            "$ref": "#/definitions/BusinessApplicationAgentResource"
           }
         },
         "nextLink": {
@@ -1177,10 +1177,10 @@
     },
     "Log": {
       "description": "Describes a log.",
-      "type": "object",
       "required": [
         "type"
       ],
+      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/LogType"
@@ -1523,7 +1523,7 @@
       },
       "x-ms-discriminator-value": "SAP"
     },
-    "System": {
+    "SystemResource": {
       "description": "Describes the system within the agent.",
       "required": [
         "properties"
@@ -1578,6 +1578,7 @@
           "$ref": "#/definitions/SystemsConfiguration"
         },
         "displayName": {
+          "minLength": 1,
           "type": "string"
         },
         "lastModifiedTimeUtc": {
@@ -1641,7 +1642,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/System"
+            "$ref": "#/definitions/SystemResource"
           }
         },
         "nextLink": {
@@ -1651,32 +1652,32 @@
     }
   },
   "parameters": {
-    "Agent": {
-      "name": "agent",
-      "description": "The business application agent",
+    "BusinessApplicationAgentResource": {
+      "name": "businessApplicationAgentResource",
+      "description": "The Business Application Agent Resource",
       "required": true,
       "in": "body",
       "x-ms-parameter-location": "method",
       "schema": {
-        "$ref": "#/definitions/Agent"
+        "$ref": "#/definitions/BusinessApplicationAgentResource"
       }
     },
-    "AgentId": {
+    "BusinessApplicationAgentId": {
       "in": "path",
-      "name": "agentId",
-      "description": "Agent ID",
+      "name": "businessApplicationAgentId",
+      "description": "BusinessApplicationAgent ID",
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
     },
-    "System": {
-      "name": "system",
-      "description": "The system",
+    "SystemResource": {
+      "name": "systemResource",
+      "description": "The system resource",
       "required": true,
       "in": "body",
       "x-ms-parameter-location": "method",
       "schema": {
-        "$ref": "#/definitions/System"
+        "$ref": "#/definitions/SystemResource"
       }
     },
     "SystemId": {
