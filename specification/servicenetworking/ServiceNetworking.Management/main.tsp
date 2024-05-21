@@ -224,27 +224,45 @@ model ResourceId {
 
 //----------------------- Paths -----------------------
 @armResourceOperations
-interface AssociationsInterface
-  extends ResourceInstanceOperations<Association, AssociationProperties>,
-    ResourceListByParent<Association> {}
+interface AssociationsInterface {
+  get is ArmResourceRead<Association>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Association>;
+  update is ArmResourcePatchSync<Association, AssociationProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<Association>;
+  listByResourceGroup is ArmResourceListByParent<Association>;
+}
 
 @armResourceOperations
-interface FrontendsInterface
-  extends ResourceInstanceOperations<Frontend, FrontendProperties>,
-    ResourceListByParent<Frontend> {}
+interface FrontendsInterface {
+  get is ArmResourceRead<Frontend>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Frontend>;
+  update is ArmResourcePatchSync<Frontend, FrontendProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<Frontend>;
+  listByResourceGroup is ArmResourceListByParent<Frontend>;
+}
 
 @added(Versions.v2024_05_01_preview)
 @removed(Versions.v2023_11_01)
 @armResourceOperations
-interface SecurityPoliciesInterface
-  extends ResourceInstanceOperations<SecurityPolicy, SecurityPolicyProperties>,
-    ResourceListByParent<SecurityPolicy> {}
+interface SecurityPoliciesInterface {
+  get is ArmResourceRead<SecurityPolicy>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SecurityPolicy>;
+  update is ArmResourcePatchSync<SecurityPolicy, SecurityPolicyProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<SecurityPolicy>;
+  listByResourceGroup is ArmResourceListByParent<SecurityPolicy>;
+}
 
 @armResourceOperations
-interface TrafficControllerInterface
-  extends TrackedResourceOperations<
-      TrafficController,
-      TrafficControllerProperties
-    > {}
+interface TrafficControllerInterface {
+  get is ArmResourceRead<TrafficController>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TrafficController>;
+  update is ArmResourcePatchSync<
+    TrafficController,
+    TrafficControllerProperties
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<TrafficController>;
+  listByResourceGroup is ArmResourceListByParent<TrafficController>;
+  listBySubscription is ArmListBySubscription<TrafficController>;
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
