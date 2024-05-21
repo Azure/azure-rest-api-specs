@@ -45,6 +45,12 @@
             "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         },
@@ -71,7 +77,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/PathId"
+            "$ref": "#/parameters/PathUuid"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -88,6 +94,12 @@
             "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         },
@@ -108,13 +120,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/PathId"
+            "$ref": "#/parameters/PathTranslationId"
           },
           {
             "in": "query",
             "name": "forceDelete",
             "type": "boolean",
-            "description": "Set this to true if you want to delete a translation with content editing translations. Otherwise, the delete operation will fail.",
+            "description": "Set this to true if you want to delete a full translation with content editing translations. Otherwise, the delete operation will fail.",
             "default": false
           },
           {
@@ -122,13 +134,30 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "retry-after": {
+                "description": "Indicate the minimum number of seconds the client should wait before polling (GETing) the status monitor URL again for an update.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         },
@@ -144,7 +173,7 @@
         ],
         "description": "Creates a new translation.",
         "operationId": "Translations_Create",
-        "consumes": [
+        "translation": [
           "application/json"
         ],
         "produces": [
@@ -152,7 +181,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/PathId"
+            "$ref": "#/parameters/PathTranslationId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -172,12 +201,20 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Translation"
+            },
+            "headers": {
             }
           },
           "default": {
             "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         },
@@ -187,18 +224,75 @@
           }
         }
       }
+    },
+    "/operations/{id}": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Gets operation info.",
+        "operationId": "Operations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "The ID of the operation",
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_operation.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "OperationId": {
+      "description": "Resource id",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64
+    },
     "Status": {
       "description": "Status of a resource.",
       "enum": [
         "NotStarted",
         "Running",
         "Succeeded",
-        "Failed",
-        "Disabling",
-        "Disabled"
+        "Failed"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -261,8 +355,10 @@
       "type": "object",
       "properties": {
         "id": {
-          "$ref": "#/definitions/ResourceId"
-        },
+          "description": "Translation ID",
+          "type": "string",
+          "format": "uuid"
+        },        
         "description": {
           "description": "Translation description",
           "type": "string"
@@ -285,7 +381,7 @@
         "fullTranslationId": {
           "description": "Optional full translation ID for content editing, if not provided, then bill with full translation, the specified translation must be full translation.",
           "type": "string",
-          "format": "guid"
+          "format": "uuid"
         },
         "videoFileUrl": {
           "description": "Translation video file url",
@@ -342,6 +438,18 @@
           "description": "Subtitle max char count per segment.",
           "format": "int32",
           "type": "integer"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
         }
       }
     }
@@ -424,21 +532,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "PathId": {
+    "PathTranslationId": {
       "name": "id",
       "in": "path",
-      "description": "The ID of the resource.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-      "minLength": 3,
-      "maxLength": 64,
-      "x-ms-parameter-location": "method"
-    },
-    "PathUuid": {
-      "name": "id",
-      "in": "path",
-      "description": "The resource ID, which should be UUID.",
+      "description": "User provided resource ID, which should be UUID.",
       "required": true,
       "type": "string",
       "format": "uuid",
