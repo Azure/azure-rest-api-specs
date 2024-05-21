@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure AI Health Insights",
-    "version": "2024-04-01",
+    "version": "2024-09-31",
     "description": "Azure AI Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.",
     "x-typespec-generated": [
       {
@@ -115,11 +115,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Gets the status and details of the Radiology Insights job.": {
-            "$ref": "./examples/SuccessfulRadiologyInsightsResponse.json"
-          }
         }
       },
       "put": {
@@ -209,11 +204,6 @@
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Creates a Radiology Insights job with the given request body.": {
-            "$ref": "./examples/SuccessfulRadiologyInsightsRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2101,6 +2091,130 @@
       ],
       "x-ms-discriminator-value": "genericProcedureRecommendation"
     },
+    "GuidanceInference": {
+      "type": "object",
+      "description": "A guidance inference.",
+      "properties": {
+        "finding": {
+          "$ref": "#/definitions/FindingInference",
+          "description": "The finding associated with the guidance."
+        },
+        "identifier": {
+          "$ref": "#/definitions/Fhir.R4.CodeableConcept",
+          "description": "The guidance identifier, as a concept"
+        },
+        "suppressorsWithOptions": {
+          "type": "array",
+          "description": "The suppressors, if any, with their options.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/SuppressorWithOptions"
+          },
+          "x-ms-identifiers": []
+        },
+        "ranking": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicates the priority of the guidance."
+        },
+        "guidanceRecommendations": {
+          "$ref": "#/definitions/GuidanceRecommendations",
+          "description": "The recommendations associated with the guidance, if any."
+        }
+      },
+      "required": [
+        "finding",
+        "identifier",
+        "ranking"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "guidance"
+    },
+    "GuidanceOptions": {
+      "type": "object",
+      "description": "Guidance options.",
+      "properties": {
+        "showGuidanceInHistory": {
+          "type": "boolean",
+          "description": "If this is true, also show guidances from a clinical history section."
+        }
+      },
+      "required": [
+        "showGuidanceInHistory"
+      ]
+    },
+    "GuidanceRecommendations": {
+      "type": "object",
+      "description": "Contains possible recommendations linked to the guidance, with their priority, and possibly missing options needed to create recommendations.",
+      "properties": {
+        "recommendations": {
+          "type": "array",
+          "description": "The recommendations.",
+          "items": {
+            "$ref": "#/definitions/FollowupRecommendationInference"
+          },
+          "x-ms-identifiers": []
+        },
+        "highestPriorityRecommendationIndices": {
+          "type": "array",
+          "description": "The indices (starting from 0) in array 'recommendations' of the recommendation with the highest priority.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "recommendationsFound": {
+          "$ref": "#/definitions/GuidanceRecommendationsFoundType",
+          "description": "See the explanation in GuidanceRecommendationsFoundType."
+        },
+        "missingRecommendationOptions": {
+          "type": "array",
+          "description": "This is filled if and only if the value of 'recommendationsFound' is 'moreInfoNeededToDetermineRecommendations'. Each value of this array is a suppressor name.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "highestPriorityRecommendationIndices",
+        "recommendationsFound",
+        "missingRecommendationOptions"
+      ]
+    },
+    "GuidanceRecommendationsFoundType": {
+      "type": "string",
+      "description": "Guidance recommendations found types, indicating whether one or more recommendations have been found, and if not, if more information is needed for finding them.",
+      "enum": [
+        "recommendationNeeded",
+        "noRecommendationNeeded",
+        "moreInfoNeededToDetermineRecommendations"
+      ],
+      "x-ms-enum": {
+        "name": "GuidanceRecommendationsFoundType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RecommendationNeeded",
+            "value": "recommendationNeeded",
+            "description": "recommendation_needed means that at least one recommendation is in array 'recommendations'."
+          },
+          {
+            "name": "NoRecommendationNeeded",
+            "value": "noRecommendationNeeded",
+            "description": "noRecommendationNeeded means that array 'recommendations' is null, and the code found that there are no recommendations."
+          },
+          {
+            "name": "MoreInfoNeededToDetermineRecommendations",
+            "value": "moreInfoNeededToDetermineRecommendations",
+            "description": "more_info_needed_to_determine_recommendations means that array 'recommendations' is null, but there might be recommendations that the code was not able to find."
+          }
+        ]
+      }
+    },
     "HealthInsightsErrorResponse": {
       "type": "object",
       "description": "A response containing error details.",
@@ -2544,6 +2658,197 @@
         "kind"
       ]
     },
+    "QualityMeasureComplianceType": {
+      "type": "string",
+      "description": "Whether the document is compliant.",
+      "enum": [
+        "notEligible",
+        "performanceNotMet",
+        "performanceMet",
+        "denominatorException"
+      ],
+      "x-ms-enum": {
+        "name": "QualityMeasureComplianceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotEligible",
+            "value": "notEligible",
+            "description": "not eligible"
+          },
+          {
+            "name": "PerformanceNotMet",
+            "value": "performanceNotMet",
+            "description": "performance not met"
+          },
+          {
+            "name": "PerformanceMet",
+            "value": "performanceMet",
+            "description": "performance met"
+          },
+          {
+            "name": "DenominatorException",
+            "value": "denominatorException",
+            "description": "denominator exception"
+          }
+        ]
+      }
+    },
+    "QualityMeasureInference": {
+      "type": "object",
+      "description": "A MIPS ('measure based incentive payment system') quality measure.",
+      "properties": {
+        "denominator": {
+          "type": "string",
+          "description": "The denominator, which identifies the mips kind."
+        },
+        "compliance": {
+          "$ref": "#/definitions/QualityMeasureComplianceType",
+          "description": "Whether the document is compliant or not."
+        },
+        "options": {
+          "type": "array",
+          "description": "The mips options, if any.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "denominator",
+        "compliance"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "qualityMeasure"
+    },
+    "QualityMeasureOptions": {
+      "type": "object",
+      "description": "Quality Measure Options.",
+      "properties": {
+        "measureTypes": {
+          "type": "array",
+          "description": "Id(s) of the MIPS measures that need to be evaluated in the document",
+          "items": {
+            "$ref": "#/definitions/QualityMeasureType"
+          }
+        }
+      },
+      "required": [
+        "measureTypes"
+      ]
+    },
+    "QualityMeasureType": {
+      "type": "string",
+      "description": "Mips types that can be checked by the engine.",
+      "enum": [
+        "mips76",
+        "mips147",
+        "mips195",
+        "mips360",
+        "mips364",
+        "mips405",
+        "mips406",
+        "mips436",
+        "mips145",
+        "acrad36",
+        "acrad37",
+        "acrad38",
+        "acrad39",
+        "acrad40",
+        "acrad41",
+        "acrad42"
+      ],
+      "x-ms-enum": {
+        "name": "QualityMeasureType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mips76",
+            "value": "mips76",
+            "description": "Mips 76"
+          },
+          {
+            "name": "Mips147",
+            "value": "mips147",
+            "description": "Mips 147"
+          },
+          {
+            "name": "Mips195",
+            "value": "mips195",
+            "description": "Mips 195"
+          },
+          {
+            "name": "Mips360",
+            "value": "mips360",
+            "description": "Mips 360"
+          },
+          {
+            "name": "Mips364",
+            "value": "mips364",
+            "description": "Mips 364"
+          },
+          {
+            "name": "Mips405",
+            "value": "mips405",
+            "description": "Mips 405"
+          },
+          {
+            "name": "Mips406",
+            "value": "mips406",
+            "description": "Mips 406"
+          },
+          {
+            "name": "Mips436",
+            "value": "mips436",
+            "description": "Mips 436"
+          },
+          {
+            "name": "Mips145",
+            "value": "mips145",
+            "description": "Mips 145"
+          },
+          {
+            "name": "Acrad36",
+            "value": "acrad36",
+            "description": "Acrad 36"
+          },
+          {
+            "name": "Acrad37",
+            "value": "acrad37",
+            "description": "Acrad 37"
+          },
+          {
+            "name": "Acrad38",
+            "value": "acrad38",
+            "description": "Acrad 38"
+          },
+          {
+            "name": "Acrad39",
+            "value": "acrad39",
+            "description": "Acrad 39"
+          },
+          {
+            "name": "Acrad40",
+            "value": "acrad40",
+            "description": "Acrad 40"
+          },
+          {
+            "name": "Acrad41",
+            "value": "acrad41",
+            "description": "Acrad 41"
+          },
+          {
+            "name": "Acrad42",
+            "value": "acrad42",
+            "description": "Acrad 42"
+          }
+        ]
+      }
+    },
     "RadiologyCodeWithTypes": {
       "type": "object",
       "description": "Radiology code with types : used in imaging procedure recommendation for contrast and view.",
@@ -2617,6 +2922,14 @@
         "findingOptions": {
           "$ref": "#/definitions/FindingOptions",
           "description": "Finding options."
+        },
+        "guidanceOptions": {
+          "$ref": "#/definitions/GuidanceOptions",
+          "description": "Guidance options."
+        },
+        "qualityMeasureOptions": {
+          "$ref": "#/definitions/QualityMeasureOptions",
+          "description": "qualityMeasureOptions"
         }
       }
     },
@@ -2948,6 +3261,37 @@
         ]
       }
     },
+    "ScoringAndAssessmentInference": {
+      "type": "object",
+      "description": "An actionable finding with a score for a certain unit, e.g. for 'BIRADS 5'",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Category, e.g. BIRADS"
+        },
+        "value": {
+          "$ref": "#/definitions/StringValueWithUnit",
+          "description": "The value. Either this is filled, or fields minimumValue and maximumValue are filled."
+        },
+        "minimumValue": {
+          "$ref": "#/definitions/StringValueWithUnit",
+          "description": "The minimum, if the value is a range."
+        },
+        "maximumValue": {
+          "$ref": "#/definitions/StringValueWithUnit",
+          "description": "The maximum, if the value is a range."
+        }
+      },
+      "required": [
+        "category"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RadiologyInsightsInference"
+        }
+      ],
+      "x-ms-discriminator-value": "scoringAndAssessment"
+    },
     "SexMismatchInference": {
       "type": "object",
       "description": "A notification for a sex mismatch is displayed when the gender, personal pronouns, gender-related body parts, or gender-related procedures mentioned in a patient's clinical document are either inconsistent or do not match the gender specified in the patient information.",
@@ -2990,6 +3334,70 @@
           }
         ]
       }
+    },
+    "StringValueWithUnit": {
+      "type": "object",
+      "description": "A value, represented as a string because it can contain, with the optional unit. Used by ScoringAndAssessmentInference.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "String value."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SuppressorWithOptions": {
+      "type": "object",
+      "description": "A suppressor with one or more options. This is used from GuidanceInference.",
+      "properties": {
+        "suppressor": {
+          "type": "string",
+          "description": "The suppressor."
+        },
+        "extension": {
+          "type": "array",
+          "description": "Represents the tokens of the supressor and options.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
+        },
+        "sizes": {
+          "type": "array",
+          "description": "A list of sizes, in the same format as the sizes of findings.",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Fhir.R4.ObservationComponent"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "maximumDiameterAsInText": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "This can be filled if the suppressor is about the maximum diameter."
+        },
+        "options": {
+          "type": "array",
+          "description": "The option values of this suppressor.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "suppressor",
+        "extension",
+        "options"
+      ]
     },
     "TimePeriod": {
       "type": "object",

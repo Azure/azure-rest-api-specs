@@ -6,6 +6,8 @@ import "./model.radiologyinsights.valuesets.tsp";
 
 using TypeSpec.Rest;
 
+using TypeSpec.Versioning;
+
 namespace AzureHealthInsights;
 
 @doc("Contains the list of patients, and configuration data.")
@@ -38,6 +40,14 @@ model RadiologyInsightsInferenceOptions {
 
   @doc("Finding options.")
   findingOptions?: FindingOptions;
+
+  @added(ApiVersion.v2024_09_31)
+  @doc("Guidance options.")
+  guidanceOptions?: GuidanceOptions;
+
+  @added(ApiVersion.v2024_09_31)
+  @doc("qualityMeasureOptions")
+  qualityMeasureOptions?: QualityMeasureOptions;
 }
 
 @doc("Follow-up recommendation options.")
@@ -56,6 +66,20 @@ model FollowupRecommendationOptions {
 model FindingOptions {
   @doc("If this is true, provide the sentence that contains the first token of the finding's clinical indicator (i.e. the medical problem), if there is one. This sentence is provided as an extension with url 'ci_sentence', next to the token evidence. Default is false.")
   provideFocusedSentenceEvidence?: boolean;
+}
+
+@added(ApiVersion.v2024_09_31)
+@doc("Guidance options.")
+model GuidanceOptions {
+  @doc("If this is true, also show guidances from a clinical history section.")
+  showGuidanceInHistory: boolean;
+}
+
+@added(ApiVersion.v2024_09_31)
+@doc("Quality Measure Options.")
+model QualityMeasureOptions {
+  @doc("Id(s) of the MIPS measures that need to be evaluated in the document")
+  measureTypes: Array<QualityMeasureType>;
 }
 
 @doc("Response for the Radiology Insights request.")
@@ -333,4 +357,113 @@ model FollowupCommunicationInference extends RadiologyInsightsInference {
 
   @doc("Communication was acknowledged.")
   wasAcknowledged: boolean;
+}
+
+// For scoring and assessment:
+@doc("An actionable finding with a score for a certain unit, e.g. for 'BIRADS 5'")
+@added(ApiVersion.v2024_09_31)
+model ScoringAndAssessmentInference extends RadiologyInsightsInference {
+  @doc("Inference type.")
+  kind: RadiologyInsightsInferenceType.ScoringAndAssessment;
+
+  @doc("Category, e.g. BIRADS")
+  category: string;
+
+  @doc("The value. Either this is filled, or fields minimumValue and maximumValue are filled.")
+  value?: StringValueWithUnit;
+
+  @doc("The minimum, if the value is a range.")
+  minimumValue?: StringValueWithUnit;
+
+  @doc("The maximum, if the value is a range.")
+  maximumValue?: StringValueWithUnit;
+}
+
+@added(ApiVersion.v2024_09_31)
+@doc("A value, represented as a string because it can contain, with the optional unit. Used by ScoringAndAssessmentInference.")
+model StringValueWithUnit {
+  @doc("String value.")
+  value: string;
+
+  @doc("Unit.")
+  unit?: string;
+}
+// For guidance:
+
+@added(ApiVersion.v2024_09_31)
+@doc("A guidance inference.")
+model GuidanceInference extends RadiologyInsightsInference {
+  @doc("Inference type.")
+  kind: RadiologyInsightsInferenceType.Guidance;
+
+  @doc("The finding associated with the guidance.")
+  finding: FindingInference;
+
+  @doc("The guidance identifier, as a concept")
+  identifier: Fhir.R4.CodeableConcept;
+
+  @doc("The suppressors, if any, with their options.")
+  @minItems(1)
+  suppressorsWithOptions?: Array<SuppressorWithOptions>;
+
+  @doc("Indicates the priority of the guidance.")
+  ranking: int32;
+
+  @doc("The recommendations associated with the guidance, if any.")
+  guidanceRecommendations?: GuidanceRecommendations;
+}
+
+@added(ApiVersion.v2024_09_31)
+@doc("Contains possible recommendations linked to the guidance, with their priority, and possibly missing options needed to create recommendations.")
+model GuidanceRecommendations {
+  @doc("The recommendations.")
+  recommendations?: Array<FollowupRecommendationInference>;
+
+  @doc("The indices (starting from 0) in array 'recommendations' of the recommendation with the highest priority.")
+  highestPriorityRecommendationIndices: Array<int32>;
+
+  @doc("See the explanation in GuidanceRecommendationsFoundType.")
+  recommendationsFound: GuidanceRecommendationsFoundType;
+
+  @doc("This is filled if and only if the value of 'recommendationsFound' is 'moreInfoNeededToDetermineRecommendations'. Each value of this array is a suppressor name.")
+  missingRecommendationOptions: Array<string>;
+}
+
+@added(ApiVersion.v2024_09_31)
+@doc("A suppressor with one or more options. This is used from GuidanceInference.")
+model SuppressorWithOptions {
+  @doc("The suppressor.")
+  suppressor: string;
+
+  @doc("Represents the tokens of the supressor and options.")
+  @minItems(1)
+  extension: Array<Fhir.R4.Extension>;
+
+  @doc("A list of sizes, in the same format as the sizes of findings.")
+  @minItems(1)
+  sizes?: Array<Array<Fhir.R4.ObservationComponent>>;
+
+  @doc("This can be filled if the suppressor is about the maximum diameter.")
+  maximumDiameterAsInText?: Fhir.R4.Quantity;
+
+  @doc("The option values of this suppressor.")
+  @minItems(1)
+  options: Array<string>;
+}
+
+// For quality measure:
+@added(ApiVersion.v2024_09_31)
+@doc("A MIPS ('measure based incentive payment system') quality measure.")
+model QualityMeasureInference extends RadiologyInsightsInference {
+  @doc("Inference type.")
+  kind: RadiologyInsightsInferenceType.QualityMeasure;
+
+  @doc("The denominator, which identifies the mips kind.")
+  denominator: string;
+
+  @doc("Whether the document is compliant or not.")
+  compliance: QualityMeasureComplianceType;
+
+  @doc("The mips options, if any.")
+  options?: Array<string>;
 }

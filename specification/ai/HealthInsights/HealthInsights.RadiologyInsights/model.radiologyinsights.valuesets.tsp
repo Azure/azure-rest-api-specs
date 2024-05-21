@@ -2,6 +2,8 @@ import "../HealthInsights.Common/model.common.fhir.elements.tsp";
 
 namespace AzureHealthInsights;
 
+using TypeSpec.Versioning;
+
 @doc("A Radiology Insights inference types.")
 union RadiologyInsightsInferenceType {
   string,
@@ -35,6 +37,15 @@ union RadiologyInsightsInferenceType {
 
   @doc("Radiology Procedure inference type")
   RadiologyProcedure: "radiologyProcedure",
+
+  @doc("Scoring and assessment inference type")
+  ScoringAndAssessment: "scoringAndAssessment",
+
+  @doc("Guidance inference type")
+  Guidance: "guidance",
+
+  @doc("Guidance measure inference type")
+  QualityMeasure: "qualityMeasure",
 }
 
 @doc("Laterality discrepancy type")
@@ -188,4 +199,91 @@ union DiseaseCourseType {
 
   @doc("Seasonal course")
   SeasonalCourse: "seasonalCourse",
+}
+
+@added(ApiVersion.v2024_09_31)
+@doc("Guidance recommendations found types, indicating whether one or more recommendations have been found, and if not, if more information is needed for finding them.")
+union GuidanceRecommendationsFoundType {
+  string,
+
+  @doc("recommendation_needed means that at least one recommendation is in array 'recommendations'.")
+  RecommendationNeeded: "recommendationNeeded",
+
+  @doc("noRecommendationNeeded means that array 'recommendations' is null, and the code found that there are no recommendations.")
+  NoRecommendationNeeded: "noRecommendationNeeded",
+
+  @doc("more_info_needed_to_determine_recommendations means that array 'recommendations' is null, but there might be recommendations that the code was not able to find.")
+  MoreInfoNeededToDetermineRecommendations: "moreInfoNeededToDetermineRecommendations",
+}
+
+@added(ApiVersion.v2024_09_31)
+@doc("Whether the document is compliant.")
+union QualityMeasureComplianceType {
+  string,
+
+  @doc("not eligible")
+  NotEligible: "notEligible",
+
+  @doc("performance not met")
+  PerformanceNotMet: "performanceNotMet",
+
+  @doc("performance met")
+  PerformanceMet: "performanceMet",
+
+  @doc("denominator exception")
+  DenominatorException: "denominatorException",
+}
+
+@added(ApiVersion.v2024_09_31)
+@doc("Mips types that can be checked by the engine.")
+union QualityMeasureType {
+  string,
+
+  @doc("Mips 76")
+  Mips76: "mips76",
+
+  @doc("Mips 147")
+  Mips147: "mips147",
+
+  @doc("Mips 195")
+  Mips195: "mips195",
+
+  @doc("Mips 360")
+  Mips360: "mips360",
+
+  @doc("Mips 364")
+  Mips364: "mips364",
+
+  @doc("Mips 405")
+  Mips405: "mips405",
+
+  @doc("Mips 406")
+  Mips406: "mips406",
+
+  @doc("Mips 436")
+  Mips436: "mips436",
+
+  @doc("Mips 145")
+  Mips145: "mips145",
+
+  @doc("Acrad 36")
+  Acrad36: "acrad36",
+
+  @doc("Acrad 37")
+  Acrad37: "acrad37",
+
+  @doc("Acrad 38")
+  Acrad38: "acrad38",
+
+  @doc("Acrad 39")
+  Acrad39: "acrad39",
+
+  @doc("Acrad 40")
+  Acrad40: "acrad40",
+
+  @doc("Acrad 41")
+  Acrad41: "acrad41",
+
+  @doc("Acrad 42")
+  Acrad42: "acrad42",
 }
