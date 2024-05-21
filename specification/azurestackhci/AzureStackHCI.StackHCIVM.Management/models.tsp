@@ -1368,7 +1368,7 @@ model VirtualMachineInstanceManagedDiskParameters {
 @added(Versions.v2024_05_01_test_preview)
 @doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
 model VMDiskSecurityProfile {
-  @doc("Specifies the EncryptionType of the managed disk. If setting to NonPersistedTPM, VM Guest State is not encrypted, OS disk is not encrypted. NOTE: It can be set for only Confidential VMs.")
+  @doc("Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs.")
   securityEncryptionType?: SecurityEncryptionType;
 }
 
