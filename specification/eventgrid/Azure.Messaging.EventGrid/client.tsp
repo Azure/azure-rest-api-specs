@@ -3,20 +3,20 @@ import "./main.tsp";
 import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
-
+using Microsoft.EventGrid;
 
 
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 // NEED TO CHANGE THIS VERSION TO THE LATEST VERSION
-@TypeSpec.Versioning.useDependency(Microsoft.EventGrid.ServiceApiVersions.v2023_10_01_preview)
+@TypeSpec.Versioning.useDependency(ServiceApiVersions.v2023_10_01_preview)
 namespace Customizations{
 
     // Python specific customizations
     @client({ name: "EventGridPublisherClient", service: Microsoft.EventGrid}, "python")
     interface Client1 {
-    publishCloudEvent is Microsoft.EventGrid.publishCloudEvent;
-    publishCloudEvents is Microsoft.EventGrid.publishCloudEvents;
+    send is publishCloudEvent;
+    sendEvents is publishCloudEvents;
     }
 
     @client({
@@ -24,18 +24,18 @@ namespace Customizations{
     service: Microsoft.EventGrid
     }, "python")
     interface Client2 {
-    receive is Microsoft.EventGrid.receiveCloudEvents;
-    acknowledge is Microsoft.EventGrid.acknowledgeCloudEvents;
-    release is Microsoft.EventGrid.releaseCloudEvents;
-    reject is Microsoft.EventGrid.rejectCloudEvents;
-    renewLock is Microsoft.EventGrid.renewCloudEventLocks;
+    receive is receiveCloudEvents;
+    acknowledge is acknowledgeCloudEvents;
+    release is releaseCloudEvents;
+    reject is rejectCloudEvents;
+    renewLock is renewCloudEventLocks;
     }
 
     // Other Language specific customizations
     @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "csharp")
     interface ClientSender {
-    publishCloudEvent is Microsoft.EventGrid.publishCloudEvent;
-    publishCloudEvents is Microsoft.EventGrid.publishCloudEvents;
+    publishCloudEvent is publishCloudEvent;
+    publishCloudEvents is publishCloudEvents;
     }
 
     @client({
@@ -43,17 +43,17 @@ namespace Customizations{
     service: Microsoft.EventGrid
     }, "csharp")
     interface ClientReceiver {
-    receive is Microsoft.EventGrid.receiveCloudEvents;
-    acknowledge is Microsoft.EventGrid.acknowledgeCloudEvents;
-    release is Microsoft.EventGrid.releaseCloudEvents;
-    reject is Microsoft.EventGrid.rejectCloudEvents;
-    renewLock is Microsoft.EventGrid.renewCloudEventLocks;
+    receive is receiveCloudEvents;
+    acknowledge is acknowledgeCloudEvents;
+    release is releaseCloudEvents;
+    reject is rejectCloudEvents;
+    renewLock is renewCloudEventLocks;
     }
 
     @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "js")
     interface ClientSender1 {
-    publishCloudEvent is Microsoft.EventGrid.publishCloudEvent;
-    publishCloudEvents is Microsoft.EventGrid.publishCloudEvents;
+    publishCloudEvent is publishCloudEvent;
+    publishCloudEvents is publishCloudEvents;
     }
 
     @client({
@@ -61,17 +61,17 @@ namespace Customizations{
     service: Microsoft.EventGrid
     }, "js")
     interface ClientReceiver1 {
-    receive is Microsoft.EventGrid.receiveCloudEvents;
-    acknowledge is Microsoft.EventGrid.acknowledgeCloudEvents;
-    release is Microsoft.EventGrid.releaseCloudEvents;
-    reject is Microsoft.EventGrid.rejectCloudEvents;
-    renewLock is Microsoft.EventGrid.renewCloudEventLocks;
+    receive is receiveCloudEvents;
+    acknowledge is acknowledgeCloudEvents;
+    release is releaseCloudEvents;
+    reject is rejectCloudEvents;
+    renewLock is renewCloudEventLocks;
     }
 
     @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "java")
     interface ClientSender2 {
-    publishCloudEvent is Microsoft.EventGrid.publishCloudEvent;
-    publishCloudEvents is Microsoft.EventGrid.publishCloudEvents;
+    publishCloudEvent is publishCloudEvent;
+    publishCloudEvents is publishCloudEvents;
     }
 
     @client({
@@ -79,17 +79,17 @@ namespace Customizations{
     service: Microsoft.EventGrid
     }, "java")
     interface ClientReceiver2 {
-    receive is Microsoft.EventGrid.receiveCloudEvents;
-    acknowledge is Microsoft.EventGrid.acknowledgeCloudEvents;
-    release is Microsoft.EventGrid.releaseCloudEvents;
-    reject is Microsoft.EventGrid.rejectCloudEvents;
-    renewLock is Microsoft.EventGrid.renewCloudEventLocks;
+    receive is receiveCloudEvents;
+    acknowledge is acknowledgeCloudEvents;
+    release is releaseCloudEvents;
+    reject is rejectCloudEvents;
+    renewLock is renewCloudEventLocks;
     }
 
     @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "go")
     interface ClientSender3 {
-    publishCloudEvent is Microsoft.EventGrid.publishCloudEvent;
-    publishCloudEvents is Microsoft.EventGrid.publishCloudEvents;
+    publishCloudEvent is publishCloudEvent;
+    publishCloudEvents is publishCloudEvents;
     }
 
     @client({
@@ -97,11 +97,11 @@ namespace Customizations{
     service: Microsoft.EventGrid
     }, "go")
     interface ClientReceiver3 {
-    receive is Microsoft.EventGrid.receiveCloudEvents;
-    acknowledge is Microsoft.EventGrid.acknowledgeCloudEvents;
-    release is Microsoft.EventGrid.releaseCloudEvents;
-    reject is Microsoft.EventGrid.rejectCloudEvents;
-    renewLock is Microsoft.EventGrid.renewCloudEventLocks;
+    receive is receiveCloudEvents;
+    acknowledge is acknowledgeCloudEvents;
+    release is releaseCloudEvents;
+    reject is rejectCloudEvents;
+    renewLock is renewCloudEventLocks;
     }
 
 }
@@ -109,23 +109,31 @@ namespace Customizations{
 
 
 // Python specific customizations
-@@access(Microsoft.EventGrid.publishCloudEvent, Access.internal, "python");
-@@access(Microsoft.EventGrid.publishCloudEvents, Access.internal, "python");
-@@access(Microsoft.EventGrid.receiveCloudEvents, Access.internal, "python");
+@@access(publishCloudEvent, Access.internal, "python");
+@@access(publishCloudEvents, Access.internal, "python");
+@@access(receiveCloudEvents, Access.internal, "python");
 
-@@access(Microsoft.EventGrid.acknowledgeCloudEvents, Access.internal, "python");
-@@access(Microsoft.EventGrid.releaseCloudEvents, Access.internal, "python");
-@@access(Microsoft.EventGrid.rejectCloudEvents, Access.internal, "python");
-@@access(Microsoft.EventGrid.renewCloudEventLocks, Access.internal, "python");
+@@access(acknowledgeCloudEvents, Access.internal, "python");
+@@access(releaseCloudEvents, Access.internal, "python");
+@@access(rejectCloudEvents, Access.internal, "python");
+@@access(renewCloudEventLocks, Access.internal, "python");
 
-@@access(Microsoft.EventGrid.AcknowledgeOptions, Access.internal, "python");
-@@access(Microsoft.EventGrid.ReleaseOptions, Access.internal, "python");
-@@access(Microsoft.EventGrid.RejectOptions, Access.internal, "python");
-@@access(Microsoft.EventGrid.RenewLockOptions, Access.internal, "python");
+@@access(AcknowledgeOptions, Access.internal, "python");
+@@access(ReleaseOptions, Access.internal, "python");
+@@access(RejectOptions, Access.internal, "python");
+@@access(RenewLockOptions, Access.internal, "python");
 
-@@access(Microsoft.EventGrid.AcknowledgeResult, Access.public, "python");
-@@access(Microsoft.EventGrid.ReleaseResult, Access.public, "python");
-@@access(Microsoft.EventGrid.RejectResult, Access.public, "python");
-@@access(Microsoft.EventGrid.RenewCloudEventLocksResult, Access.public, "python");
-@@access(Microsoft.EventGrid.ReleaseDelay, Access.public, "python");
-@@access(Microsoft.EventGrid.FailedLockToken, Access.public, "python");
+@@access(AcknowledgeResult, Access.public, "python");
+@@access(ReleaseResult, Access.public, "python");
+@@access(RejectResult, Access.public, "python");
+@@access(RenewCloudEventLocksResult, Access.public, "python");
+@@access(ReleaseDelay, Access.public, "python");
+@@access(FailedLockToken, Access.public, "python");
+
+
+// All Language customizations
+@@clientName(ReleaseDelay.By0Seconds, "NoDelay");
+@@clientName(ReleaseDelay.By10Seconds, "TenSeconds");
+@@clientName(ReleaseDelay.By3600Seconds, "OneHour");
+@@clientName(ReleaseDelay.By600Seconds, "TenMinutes");
+@@clientName(ReleaseDelay.By60Seconds, "OneMinute");
