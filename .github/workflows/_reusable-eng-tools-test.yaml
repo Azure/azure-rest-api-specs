@@ -13,15 +13,15 @@ jobs:
   test:
     strategy:
       matrix:
-        runs-on: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
         node-version: [18, 20]
         exclude:
-          - runs-on: ubuntu-latest
+          - os: ubuntu-latest
             node-version: 20
-          - runs-on: windows-latest
+          - os: windows-latest
             node-version: 18
 
-    runs-on: ${{ matrix.runs-on }}
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -47,3 +47,10 @@ jobs:
       - run: npm run test:ci
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report-${{ matrix.os }}-${{ matrix.node-version }}
+          path: ./eng/tools/${{ inputs.package }}/coverage
+          if-no-files-found: ignore
