@@ -35,7 +35,7 @@ model SnapshotResource extends Azure.ResourceManager.Foundations.ProxyResource {
    */
   @extension("x-ms-client-flatten", true)
   @extension("x-ms-client-name", "properties")
-  properties: SnapshotProperties;
+  properties?: SnapshotProperties;
 }
 
 @armResourceOperations

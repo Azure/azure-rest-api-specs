@@ -1,10 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "../models/models.tsp";
 import "../operations.tsp";
 
+
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -166,4 +169,14 @@ interface ReportResources {
 );
 @@doc(ReportResources.checkNameAvailability::parameters.body,
   "NameAvailabilityRequest object."
+);
+
+@@encodedName(ReportResources.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+
+@@encodedName(ReportResources.syncCertRecord::parameters.body,
+  "application/json",
+  "parameters"
 );

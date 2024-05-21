@@ -39,7 +39,7 @@ model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
 
 
   /**
-   * Properties of the webhook.
+   * Webhook property.
    */
   @extension("x-ms-client-flatten", true)
   @extension("x-ms-client-name", "properties")
@@ -107,11 +107,4 @@ interface WebhookResources {
 @@encodedName(WebhookResources.update::parameters.properties,
   "application/json",
   "parameters"
-);
-
-
-@@clientName(WebhookResources.createOrUpdate::parameters.parameters, "properties");
-@@encodedName(WebhookResources.createOrUpdate::parameters.parameters,
-  "application/json",
-  "properties"
 );

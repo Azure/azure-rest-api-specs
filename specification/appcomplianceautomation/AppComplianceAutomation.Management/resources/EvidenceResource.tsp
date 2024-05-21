@@ -66,7 +66,7 @@ interface EvidenceResources {
   >;
 
   /**
-   * Delete an AppComplianceAutomation evidence.
+   *  Delete an existent evidence from a specified report
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Evidences_Delete")

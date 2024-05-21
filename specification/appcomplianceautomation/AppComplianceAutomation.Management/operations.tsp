@@ -32,7 +32,7 @@ interface AcatOperations {
   >(
     ...HttpParameters,
     /** The body parameters for the operation. */
-    parameters: BodyParameter,
+    @doc("Resource create parameters.") @bodyRoot parameters: BodyParameter,
   ): Response | ErrorResponse;
 
   /**
