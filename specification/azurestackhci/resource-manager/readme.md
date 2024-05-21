@@ -105,16 +105,6 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/hciCommon.json
 ```
 
-### Tag: package-preview-2024-02-01
-
-These settings apply only when `--tag=package-preview-2024-02-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-02-01'
-input-file:
-  - Microsoft.AzureStackHCI/operations/preview/2024-02-01-preview/operations.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/openapi.json
-```
-
 ### Tag: package-2024-01
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.

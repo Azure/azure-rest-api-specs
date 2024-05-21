@@ -383,8 +383,8 @@ union IPPoolTypeEnum {
 
 @doc("The ARM ID for a Network Interface.")
 model NetworkInterfaceArmReference {
-  @doc("The ARM ID for a Network Interface.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is already shipped. Changing the casing is a breaking change."
+  @doc("The ARM ID for a Network Interface.")
   ID?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
