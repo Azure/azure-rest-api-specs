@@ -189,10 +189,6 @@ These settings apply only when `--tag=package-2024-05-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-05-01-preview'
 input-file:
   - Microsoft.Elastic/preview/2024-05-01-preview/elastic.json
-suppressions:
-  - code: ResourceNameRestriction
-    from: elastic.json
-    reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions.
 ```
 
 ---
