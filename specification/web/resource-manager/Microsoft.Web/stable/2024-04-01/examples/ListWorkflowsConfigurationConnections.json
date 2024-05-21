@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "testsite2",
+    "slot": "staging",
+    "configurationName": "connections",
+    "api-version": "2024-04-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/testsite2/workflowconfigurations/connections",
+        "name": "testsite2/connections",
+        "type": "Microsoft.Web/sites/workflowsconfiguration",
+        "location": "USAAnywhere",
+        "properties": {
+          "files": {
+            "connections.json": {
+              "managedApiConnections": {
+                "office365": {
+                  "api": {
+                    "id": "string"
+                  },
+                  "connection": {
+                    "id": "string"
+                  },
+                  "connectionRuntimeUrl": "string",
+                  "authentication": {
+                    "type": "Raw",
+                    "scheme": "Key",
+                    "parameter": "@appsetting('office365-connectionKey')"
+                  }
+                }
+              }
+            }
+          },
+          "health": {
+            "state": "Healthy"
+          }
+        }
+      }
+    }
+  }
+}

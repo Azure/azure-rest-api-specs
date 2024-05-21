@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "test-rg",
+    "name": "test-ase",
+    "api-version": "2024-04-01",
+    "customDnsSuffixConfiguration": {
+      "properties": {
+        "dnsSuffix": "contoso.com",
+        "certificateUrl": "https://test-kv.vault.azure.net/secrets/contosocert",
+        "keyVaultReferenceIdentity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/test-rg/providers/microsoft.managedidentity/userassignedidentities/test-user-mi"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/configurations/customdnssuffix",
+        "name": "customDnsSuffix",
+        "type": "Microsoft.Web/hostingEnvironments/configurations/customdnssuffix",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "provisioningDetails": null,
+          "dnsSuffix": "contoso.com",
+          "certificateUrl": "https://test-kv.vault.azure.net/secrets/contosocert",
+          "keyVaultReferenceIdentity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/test-rg/providers/microsoft.managedidentity/userassignedidentities/test-user-mi"
+        }
+      }
+    }
+  }
+}
