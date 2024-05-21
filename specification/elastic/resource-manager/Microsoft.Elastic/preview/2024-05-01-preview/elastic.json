@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Elastic",
-    "version": "2024-05-01-preview"
+    "version": "2024-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -445,7 +445,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -500,7 +500,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -569,7 +569,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -630,7 +630,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -684,7 +684,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -695,8 +695,7 @@
           }
         }
       }
-    }
-  },
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listMonitoredResources": {
       "post": {
         "tags": [
@@ -2677,6 +2676,39 @@
         }
       }
     },
+    "SubscriptionList": {
+      "description": "The request to update subscriptions needed to be monitored by the Datadog monitor resource.",
+      "type": "object",
+      "properties": {
+        "operation": {
+          "description": "The operation for the patch on the resource.",
+          "enum": [
+            "AddBegin",
+            "AddComplete",
+            "DeleteBegin",
+            "DeleteComplete",
+            "Active"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Operation"
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "monitoredSubscriptionList": {
+          "description": "List of subscriptions and the state of the monitoring.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredSubscription"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "MonitoredResourceListResponse": {
       "description": "Response of a list operation.",
       "type": "object",
@@ -2692,6 +2724,41 @@
         "nextLink": {
           "description": "Link to the next set of results, if any.",
           "type": "string"
+        }
+      }
+    },
+    "MonitoredSubscriptionProperties": {
+      "description": "The request to update subscriptions needed to be monitored by the Datadog monitor resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The id of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the monitored subscription resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SubscriptionList"
+        }
+      }
+    },
+    "MonitoredSubscriptionPropertiesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredSubscriptionProperties"
+          }
         }
       }
     },
@@ -2851,6 +2918,40 @@
         "nextLink": {
           "description": "Link to the next set of results, if any.",
           "type": "string"
+        }
+      }
+    },
+    "MonitoredSubscription": {
+      "description": "The list of subscriptions and it's monitoring status by current Datadog monitor.",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscriptionId to be monitored.",
+          "required": [
+            "subscriptionId"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "description": "The state of monitoring.",
+          "enum": [
+            "InProgress",
+            "Active",
+            "Failed",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Status"
+          },
+          "type": "string"
+        },
+        "error": {
+          "description": "The reason of not monitoring the subscription.",
+          "type": "string"
+        },
+        "tagRules": {
+          "$ref": "#/definitions/MonitoringTagRulesProperties"
         }
       }
     },
@@ -3240,64 +3341,6 @@
           "description": "Stack Versions that this version can upgrade to",
           "items": {
             "type": "string"
-          }
-        }
-      }
-    },
-    "SubscriptionList": {
-      "description": "The request to update subscriptions needed to be monitored by the Elastic monitor resource.",
-      "type": "object",
-      "properties": {
-        "operation": {
-          "description": "The operation for the patch on the resource.",
-          "enum": [
-            "AddBegin",
-            "AddComplete",
-            "DeleteBegin",
-            "DeleteComplete",
-            "Active"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "Operation"
-          },
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
-        },
-    "MonitoredSubscriptionProperties": {
-      "description": "The request to update subscriptions needed to be monitored by the Elastic monitor resource.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the monitored subscription resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The id of the monitored subscription resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the monitored subscription resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/SubscriptionList"
-        }
-      }
-    },
-    "MonitoredSubscriptionPropertiesList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MonitoredSubscriptionProperties"
           }
         }
       }
