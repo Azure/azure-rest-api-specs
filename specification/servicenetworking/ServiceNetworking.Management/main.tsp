@@ -30,7 +30,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 //----------------------- Frontends -----------------------
-/** Frontend Subresource of Traffic Controller. */
+/** Frontend Sub Resource of Traffic Controller. */
 @parentResource(TrafficController)
 model Frontend is TrackedResource<FrontendProperties> {
   /** Frontends */
