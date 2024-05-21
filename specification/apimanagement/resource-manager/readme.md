@@ -57,6 +57,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimdocumentations.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimemailtemplates.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimgateways.json
+  - Microsoft.ApiManagement/preview/2023-09-01-preview/apimgatewayConfigConnections.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimgroups.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimidentityprovider.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimissues.json
@@ -92,6 +93,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimworkspacecertificates.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimworkspacediagnostics.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimworkspaceloggers.json
+  - Microsoft.ApiManagement/preview/2023-09-01-preview/apimworkspacelinks.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimworkspaces.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/definitions.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/operationStatuses.json

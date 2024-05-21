@@ -7986,6 +7986,101 @@
       },
       "description": "Properties of the Gateway contract."
     },
+    "WorkspaceLinksBaseProperties": {
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/service/workspaces"
+              }
+            ]
+          },
+          "description": "The link to the API Management service workspace."
+        },
+        "gateways": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceLinksGateway"
+          },
+          "description": "The array of linked gateways."
+        }
+      }
+    },
+    "WorkspaceLinksGateway": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/gateways"
+              }
+            ]
+          },
+          "description": "The link to the API Management gateway."
+        }
+      }
+    },
+    "ApiManagementWorkspaceLinksProperties": {
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkspaceLinksBaseProperties"
+        }
+      ],
+      "description": "Properties of an API Management workspaceLinks resource."
+    },
+    "ApiManagementWorkspaceLinksResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiManagementWorkspaceLinksProperties",
+          "description": "Properties of the API Management WorkspaceLinks."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "A single API Management WorkspaceLinks in List or Get response."
+    },
+    "ApiManagementWorkspaceLinksListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiManagementWorkspaceLinksResource"
+          },
+          "description": "Result of the List API Management WorkspaceLinks operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of API Management services."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The response of the List API Management WorkspaceLink operation."
+    },
     "ResourceLocationDataContract": {
       "type": "object",
       "properties": {
