@@ -51,9 +51,9 @@ alias OnYourDataCommonChatExtensionConfiguration = {
    * If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.
    * If not specified, or specified as false, the request will fail if any search query fails.
    */
-  @encodedName("application/json", "allow_partial_results")
+  @encodedName("application/json", "allow_partial_result")
   @added(ServiceApiVersions.v2024_05_01_Preview)
-  allowPartialResults?: boolean = false;
+  allowPartialResult?: boolean = false;
 
   /** The included properties of the output context. If not specified, the default value is `citations` and `intent`. */
   @encodedName("application/json", "include_contexts")

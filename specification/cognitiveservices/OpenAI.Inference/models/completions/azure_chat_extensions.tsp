@@ -114,11 +114,11 @@ model AzureChatExtensionRetrievedDocument {
 
   /** The original search score of the retrieved document. */
   @encodedName("application/json", "original_search_score")
-  originalSearchScore?: float32;
+  originalSearchScore?: float64;
 
   /** The rerank score of the retrieved document. */
   @encodedName("application/json", "rerank_score")
-  rerankScore?: float32;
+  rerankScore?: float64;
 
   /**
    * Represents the rationale for filtering the document. If the document does not undergo filtering,
