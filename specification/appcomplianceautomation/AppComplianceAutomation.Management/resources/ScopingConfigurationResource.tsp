@@ -29,7 +29,7 @@ namespace Microsoft.AppComplianceAutomation;
 )
 model ScopingConfigurationResource
   extends Azure.ResourceManager.Foundations.ProxyResource {
-  @key("scopingConfiguration")
+  @key("scopingConfigurationName")
   @segment("scopingConfigurations")
   @visibility("read")
   @doc("The scoping configuration of the specific report.")
