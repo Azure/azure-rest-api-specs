@@ -15,6 +15,7 @@ namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("Defines the HybridIdentityMetadata.")
+@extension("x-ms-azure-resource", true)
 @singleton("default")
 @parentResource(VirtualMachineInstance)
 model HybridIdentityMetadata

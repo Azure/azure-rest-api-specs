@@ -384,7 +384,8 @@ union IPPoolTypeEnum {
 @doc("The ARM ID for a Network Interface.")
 model NetworkInterfaceArmReference {
   @doc("The ARM ID for a Network Interface.")
-  id?: armResourceIdentifier<[
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is already shipped. Changing the casing is a breaking change."
+  ID?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
     }
@@ -432,11 +433,15 @@ model StorageContainerArmReference {
 }
 
 @doc("The ARM ID for a Gallery Image.")
-model GalleryImageArmReference {
-  @doc("The ARM ID for a Storage Container.")
+model ImageArmReference {
+  @doc("The ARM ID for an image resource used by the virtual machine instance.")
+  @visibility("create", "read")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/galleryImages";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/marketplaceGalleryImages";
     }
   ]>;
 }
@@ -461,6 +466,7 @@ model GalleryImageProperties {
   ]>;
 
   @doc("location of the image the gallery image should be created from")
+  @secret
   imagePath?: string;
 
   @doc("Operating system type that the gallery image uses [Windows, Linux]")
@@ -538,6 +544,7 @@ model GalleryOSDiskImage {
 }
 
 @doc("The observed state of gallery images")
+@extension("x-ms-client-flatten", true)
 model GalleryImageStatus {
   @doc("GalleryImage provisioning error code")
   errorCode?: string;
@@ -591,8 +598,8 @@ model LogicalNetworkProperties {
   @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("Subnet - list of subnets under the logical network")
-  @extension("x-ms-identifiers", ["properties", "name"])
   subnets?: Subnet[];
 
   @doc("Provisioning state of the logical network.")
@@ -635,6 +642,7 @@ model SubnetProperties {
   @doc("IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'")
   ipAllocationMethod?: IpAllocationMethodEnum;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
   ipConfigurationReferences?: NetworkInterfaceArmReference[];
 
@@ -644,8 +652,8 @@ model SubnetProperties {
   @doc("Route table resource.")
   routeTable?: RouteTable;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("network associated pool of IP Addresses")
-  @extension("x-ms-identifiers", ["ipPoolType", "name", "start", "end", "info"])
   ipPools?: IPPool[];
 
   @doc("Vlan to use for the subnet")
@@ -673,8 +681,8 @@ model RouteTable {
 
 @doc("RouteTablePropertiesFormat - Route Table resource.")
 model RouteTableProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("Collection of routes contained within a route table.")
-  @extension("x-ms-identifiers", ["properties", "name"])
   routes?: Route[];
 }
 
@@ -733,11 +741,12 @@ model IPPoolInfo {
 
 @doc("Network Security Group resource.")
 model NetworkSecurityGroupProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
-  networkInterfaceReferences?: NetworkInterfaceArmReference[];
+  networkInterfaces?: NetworkInterfaceArmReference[];
 
-  @doc("A collection of references to subnets that are currently using this NSG")
+  @doc("A collection of references to logical networks that are currently using this NSG")
   @visibility("read")
   subnets?: LogicalNetworkArmReference[];
 
@@ -782,8 +791,8 @@ model SecurityRuleProperties {
 
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
-  @extension("x-ms-identifiers", ["name", "properties"])
   ipConfigurations?: IPConfiguration[];
 
   @doc("MacAddress - The MAC address of the network interface.")
@@ -806,6 +815,7 @@ model NetworkInterfaceProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
+@extension("x-ms-client-flatten", true)
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
   @visibility("read", "create")
@@ -846,6 +856,7 @@ model InterfaceDNSSettings {
 }
 
 @doc("The observed state of network interfaces")
+@extension("x-ms-client-flatten", true)
 model NetworkInterfaceStatus {
   @doc("NetworkInterface provisioning error code")
   errorCode?: string;
@@ -867,6 +878,7 @@ model NetworkInterfaceStatusProvisioningStatus {
 }
 
 @doc("The observed state of logical networks")
+@extension("x-ms-client-flatten", true)
 model LogicalNetworkStatus {
   @doc("LogicalNetwork provisioning error code")
   errorCode?: string;
@@ -928,6 +940,7 @@ model MarketplaceGalleryImageProperties {
 }
 
 @doc("The observed state of marketplace gallery images")
+@extension("x-ms-client-flatten", true)
 model MarketplaceGalleryImageStatus {
   @doc("MarketplaceGalleryImage provisioning error code")
   errorCode?: string;
@@ -994,6 +1007,7 @@ model StorageContainerProperties {
 }
 
 @doc("The observed state of storage containers")
+@extension("x-ms-client-flatten", true)
 model StorageContainerStatus {
   @doc("StorageContainer provisioning error code")
   errorCode?: string;
@@ -1070,6 +1084,7 @@ model VirtualHardDiskProperties {
 }
 
 @doc("The observed state of virtual hard disks")
+@extension("x-ms-client-flatten", true)
 model VirtualHardDiskStatus {
   @doc("VirtualHardDisk provisioning error code")
   errorCode?: string;
@@ -1142,7 +1157,7 @@ model VirtualMachineInstanceProperties {
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
 model VirtualMachineInstancePropertiesHardwareProfile {
   @doc("Enum of VM Sizes")
-  vmSize?: VmSizeEnum;
+  vmSize?: VmSizeEnum = VmSizeEnum.Default;
 
   @doc("number of processors for the virtual machine instance")
   processors?: int32;
@@ -1169,6 +1184,7 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
   targetMemoryBuffer?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
@@ -1179,6 +1195,7 @@ model VirtualMachineInstancePropertiesNetworkProfile {
 model VirtualMachineInstancePropertiesOsProfile {
   @doc("AdminPassword - admin password")
   @visibility("create")
+  @secret
   adminPassword?: string;
 
   @doc("AdminUsername - admin username")
@@ -1214,7 +1231,7 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
 @doc("SSH configuration for Linux based VMs running on Azure")
 model SshConfiguration {
   @doc("The list of SSH public keys used to authenticate with linux based VMs.")
-  @extension("x-ms-identifiers", ["path", "keyData"])
+  @extension("x-ms-identifiers", ["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -1251,7 +1268,7 @@ model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
 model VirtualMachineInstancePropertiesSecurityProfile {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "TPM is a short form. It is the correct case"
   @doc("Enable TPM flag")
-  enableTPM?: boolean;
+  enableTPM?: boolean = false;
 
   @doc("Uefi settings of the virtual machine instance")
   uefiSettings?: VirtualMachineInstancePropertiesSecurityProfileUefiSettings;
@@ -1263,7 +1280,7 @@ model VirtualMachineInstancePropertiesSecurityProfile {
 @doc("Uefi settings - Specifies whether secure boot should be enabled on the virtual machine instance.")
 model VirtualMachineInstancePropertiesSecurityProfileUefiSettings {
   @doc("Specifies whether secure boot should be enabled on the virtual machine instance.")
-  secureBootEnabled?: boolean;
+  secureBootEnabled?: boolean = false;
 }
 
 @doc("StorageProfile - contains information about the disks and storage information for the virtual machine instance")
@@ -1273,7 +1290,7 @@ model VirtualMachineInstancePropertiesStorageProfile {
 
   @doc("Which Image to use for the virtual machine instance")
   @visibility("read", "create")
-  imageReference?: GalleryImageArmReference;
+  imageReference?: ImageArmReference;
 
   @doc("VHD to attach as OS disk")
   osDisk?: VirtualMachineInstancePropertiesStorageProfileOsDisk;
@@ -1296,9 +1313,11 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
 @doc("HTTP Proxy configuration for the VM.")
 model HttpProxyConfiguration {
   @doc("The HTTP proxy server endpoint to use.")
+  @secret
   httpProxy?: string;
 
   @doc("The HTTPS proxy server endpoint to use.")
+  @secret
   httpsProxy?: string;
 
   @doc("The endpoints that should not go through proxy.")
@@ -1319,11 +1338,8 @@ model VirtualMachineConfigAgentInstanceView {
   @doc("The VM Config Agent full version.")
   vmConfigAgentVersion?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("The resource status information.")
-  @extension(
-    "x-ms-identifiers",
-    ["code", "level", "displayStatus", "message", "time"]
-  )
   statuses?: InstanceViewStatus[];
 }
 
@@ -1347,6 +1363,7 @@ model InstanceViewStatus {
 }
 
 @doc("The observed state of virtual machine instances")
+@extension("x-ms-client-flatten", true)
 model VirtualMachineInstanceStatus {
   @doc("VirtualMachine provisioning error code")
   errorCode?: string;
@@ -1451,6 +1468,7 @@ model StorageProfileUpdate {
   dataDisks?: VirtualHardDiskArmReference[];
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
@@ -1567,5 +1585,6 @@ model GuestCredential {
 
   @doc("The password to connect with the guest.")
   @visibility("create", "update")
+  @secret
   password?: string;
 }

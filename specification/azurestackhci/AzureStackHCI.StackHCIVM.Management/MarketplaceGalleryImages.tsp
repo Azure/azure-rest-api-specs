@@ -13,6 +13,8 @@ namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The marketplace gallery image resource definition.")
+@extension("x-ms-azure-resource", true)
+@extension("x-ms-client-flatten", true)
 model MarketplaceGalleryImage
   is TrackedResource<MarketplaceGalleryImageProperties> {
   @doc("Name of the marketplace gallery image")
