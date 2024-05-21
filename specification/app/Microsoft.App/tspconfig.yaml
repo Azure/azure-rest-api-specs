@@ -1,0 +1,36 @@
+parameters:  
+  "service-dir":
+    default: "sdk/microsoft.app"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":    
+    package-dir: "microsoft-app"
+    package-name: "{package-dir}"  
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    package-dir: "Microsoft.App"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "microsoft-app-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/microsoft-app-rest"
+      description: "Microsoft.App Service"
+  "@azure-tools/typespec-java":
+    package-dir: "microsoft-app"
+    namespace: com.microsoft.app
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
