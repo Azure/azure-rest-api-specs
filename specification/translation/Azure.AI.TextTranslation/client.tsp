@@ -34,6 +34,10 @@ using Azure.ClientGenerator.Core;
   "SourceLanguage",
   "java"
 );
+@@clientName(TextTranslation.DictionaryLookupParameters.from,
+  "fromLanguage",
+  "python"
+);
 
 @@clientName(TextTranslation.DictionaryLookupParameters.to,
   "TargetLanguage",
@@ -51,6 +55,10 @@ using Azure.ClientGenerator.Core;
 @@clientName(TextTranslation.DictionaryExamplesParameters.from,
   "SourceLanguage",
   "java"
+);
+@@clientName(TextTranslation.DictionaryExamplesParameters.from,
+  "fromLanguage",
+  "python"
 );
 
 @@clientName(TextTranslation.DictionaryExamplesParameters.to,
@@ -130,6 +138,10 @@ using Azure.ClientGenerator.Core;
   "SourceLanguage",
   "java"
 );
+@@clientName(TextTranslation.TranslateParameters.from,
+  "fromLanguage",
+  "python"
+);
 
 @@clientName(TextTranslation.TranslateParameters.to,
   "TargetLanguages",
@@ -162,6 +174,10 @@ using Azure.ClientGenerator.Core;
 @@clientName(TextTranslation.TranslateParameters.suggestedFrom,
   "SuggestedSourceLanguage",
   "java"
+);
+@@clientName(TextTranslation.TranslateParameters.suggestedFrom,
+  "fromLanguage",
+  "python"
 );
 
 @@clientName(TextTranslation.TranslatedTextAlignment.proj,
