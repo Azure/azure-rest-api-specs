@@ -8,6 +8,7 @@ using Azure.ClientGenerator.Core;
 
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
+// NEED TO CHANGE THIS VERSION TO THE LATEST VERSION
 @TypeSpec.Versioning.useDependency(Microsoft.EventGrid.ServiceApiVersions.v2023_10_01_preview)
 namespace Customizations{
 
