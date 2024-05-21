@@ -13,11 +13,11 @@ namespace DocumentIntelligence;
 
 alias ServiceTraits = NoConditionalRequests &
   NoRepeatableRequests &
-  NoClientRequestId;
+  SupportsClientRequestId;
 
 op DocumentIntelligenceOperation<
   TParams extends TypeSpec.Reflection.Model,
-  TResponse extends TypeSpec.Reflection.Model
+  TResponse extends TypeSpec.Reflection.Model & Foundations.RetryAfterHeader
 > is Foundations.Operation<TParams, TResponse, ServiceTraits, ErrorResponse>;
 
 alias DIResourceOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
@@ -28,11 +28,12 @@ op DocumentIntelligenceLongRunningOperation<
   TResponse extends TypeSpec.Reflection.Model
 > is Foundations.Operation<
   TParams,
-  AcceptedResponse & {
-    @pollingLocation
-    @header("Operation-Location")
-    operationLocation: ResourceLocation<TResponse>;
-  },
+  AcceptedResponse &
+    Foundations.RetryAfterHeader & {
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: ResourceLocation<TResponse>;
+    },
   ServiceTraits,
   ErrorResponse
 >;
@@ -97,6 +98,7 @@ model DocumentClassifierAnalyzeRequestParams {
 
 @doc("Analyze from stream request parameters.")
 model AnalyzeFromStreamRequestParams {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "This union cannot be open"
   @doc("Input content type.")
   @header
   contentType:
@@ -113,7 +115,7 @@ model AnalyzeFromStreamRequestParams {
     | "application/vnd.openxmlformats-officedocument.presentationml.presentation";
 
   @doc("Input content.")
-  @body
+  @bodyRoot
   input: bytes;
 }
 
@@ -167,7 +169,7 @@ interface DocumentModels {
       contentType: "application/json";
 
       @doc("Analyze request parameters.")
-      @body
+      @bodyRoot
       analyzeRequest?: AnalyzeDocumentRequest;
     },
     AnalyzeResultOperation
@@ -184,7 +186,7 @@ interface DocumentModels {
   buildModel is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Build request parameters.")
-      @body
+      @bodyRoot
       buildRequest: BuildDocumentModelRequest;
     },
     DocumentModelBuildOperationDetails
@@ -198,7 +200,7 @@ interface DocumentModels {
   composeModel is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Compose request parameters.")
-      @body
+      @bodyRoot
       composeRequest: ComposeDocumentModelRequest;
     },
     DocumentModelComposeOperationDetails
@@ -214,7 +216,7 @@ interface DocumentModels {
   authorizeModelCopy is DocumentIntelligenceOperation<
     {
       @doc("Authorize copy request parameters.")
-      @body
+      @bodyRoot
       authorizeCopyRequest: AuthorizeCopyRequest;
     },
     CopyAuthorization
@@ -234,7 +236,7 @@ interface DocumentModels {
       modelId: string;
 
       @doc("Copy to request parameters.")
-      @body
+      @bodyRoot
       copyToRequest: CopyAuthorization;
     },
     DocumentModelCopyToOperationDetails
@@ -288,7 +290,7 @@ interface DocumentClassifiers {
   buildClassifier is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Build request parameters.")
-      @body
+      @bodyRoot
       buildRequest: BuildDocumentClassifierRequest;
     },
     DocumentClassifierBuildOperationDetails
@@ -333,7 +335,7 @@ interface DocumentClassifiers {
       contentType: "application/json";
 
       @doc("Classify request parameters.")
-      @body
+      @bodyRoot
       classifyRequest: ClassifyDocumentRequest;
     },
     AnalyzeResultOperation

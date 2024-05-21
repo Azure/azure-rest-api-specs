@@ -1,161 +1,182 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
 @doc("Metrics for pass/fail criteria.")
-enum PFMetrics {
-  @doc("Pass fail criteria for response time metric in milliseconds.")
-  response_time_ms,
+union PFMetrics {
+  string,
 
-  @doc("Pass fail criteria for latency metric in milliseconds.") latency,
-  @doc("Pass fail criteria for error metric.") error,
-  @doc("Pass fail criteria for total requests.") requests,
-  @doc("Pass fail criteria for request per second.") requests_per_sec,
+  @doc("Pass fail criteria for response time metric in milliseconds.")
+  "response_time_ms",
+
+  @doc("Pass fail criteria for latency metric in milliseconds.") "latency",
+  @doc("Pass fail criteria for error metric.") "error",
+  @doc("Pass fail criteria for total requests.") "requests",
+  @doc("Pass fail criteria for request per second.") "requests_per_sec",
 }
 
 @doc("Aggregation functions for pass/fail criteria.")
-enum PFAgFunc {
-  @doc("Criteria applies for count value.") count,
-  @doc("Criteria applies for given percentage value.") percentage,
-  @doc("Criteria applies for avg value.") avg,
-  @doc("Criteria applies for 50th percentile value.") p50,
-  @doc("Criteria applies for 90th percentile value.") p90,
-  @doc("Criteria applies for 95th percentile value.") p95,
-  @doc("Criteria applies for 99th percentile value.") p99,
-  @doc("Criteria applies for minimum value.") min,
-  @doc("Criteria applies for maximum value.") max,
+union PFAgFunc {
+  string,
+  @doc("Criteria applies for count value.") "count",
+  @doc("Criteria applies for given percentage value.") "percentage",
+  @doc("Criteria applies for avg value.") "avg",
+  @doc("Criteria applies for 50th percentile value.") "p50",
+  @doc("Criteria applies for 90th percentile value.") "p90",
+  @doc("Criteria applies for 95th percentile value.") "p95",
+  @doc("Criteria applies for 99th percentile value.") "p99",
+  @doc("Criteria applies for minimum value.") "min",
+  @doc("Criteria applies for maximum value.") "max",
 }
 
 @doc("Action to take on failure of pass/fail criteria.")
-enum PFAction {
-  @doc("Test will continue to run even if pass fail metric criteria metric gets failed.")
-  continue,
+union PFAction {
+  string,
 
-  @doc("Test run will stop if pass fail criteria metric is not passed.") stop,
+  @doc("Test will continue to run even if pass fail metric criteria metric gets failed.")
+  continue: "continue",
+
+  @doc("Test run will stop if pass fail criteria metric is not passed.")
+  stop: "stop",
 }
 
 @doc("Pass/fail criteria result.")
-enum PFResult {
-  @doc("Given pass fail criteria metric has passed.") passed,
-  @doc("Given pass fail criteria metric couldn't determine.") undetermined,
-  @doc("Given pass fail criteria metric has failed.") failed,
+union PFResult {
+  string,
+  @doc("Given pass fail criteria metric has passed.") "passed",
+  @doc("Given pass fail criteria metric couldn't determine.") "undetermined",
+  @doc("Given pass fail criteria metric has failed.") "failed",
 }
 
 @doc("Types of secrets supported.")
-enum SecretType {
-  @doc("If the secret is stored in an Azure Key Vault.") AKV_SECRET_URI,
-  @doc("If the secret value provided as plain text.") SECRET_VALUE,
+union SecretType {
+  string,
+  @doc("If the secret is stored in an Azure Key Vault.") "AKV_SECRET_URI",
+  @doc("If the secret value provided as plain text.") "SECRET_VALUE",
 }
 
 @doc("Types of certificates supported.")
-enum CertificateType {
-  @doc("If the certificate is stored in an Azure Key Vault.") AKV_CERT_URI,
+union CertificateType {
+  string,
+  @doc("If the certificate is stored in an Azure Key Vault.") "AKV_CERT_URI",
 }
 
 @doc("Types of file supported.")
-enum FileType {
-  @doc("If the file is a JMX script.") JMX_FILE,
-  @doc("If the file is a user properties file.") USER_PROPERTIES,
+union FileType {
+  string,
+  @doc("If the file is a JMX script.") "JMX_FILE",
+  @doc("If the file is a user properties file.") "USER_PROPERTIES",
 
   @doc("If the file is not among any of the other supported file types.")
-  ADDITIONAL_ARTIFACTS,
+  "ADDITIONAL_ARTIFACTS",
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a compressed archive containing a collection of various artifacts or resources.")
-  ZIPPED_ARTIFACTS,
+  "ZIPPED_ARTIFACTS",
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a JSON config file to define the requests for a URL test.")
-  URL_TEST_CONFIG_JSON,
+  "URL_TEST_CONFIG_JSON",
 }
 
 @doc("File status.")
-enum FileStatus {
-  @doc("File is not validated.") NOT_VALIDATED,
-  @doc("File is validated.") VALIDATION_SUCCESS,
-  @doc("File validation is failed.") VALIDATION_FAILURE,
-  @doc("File validation is in progress.") VALIDATION_INITIATED,
-  @doc("Validation is not required.") VALIDATION_NOT_REQUIRED,
+union FileStatus {
+  string,
+  @doc("File is not validated.") "NOT_VALIDATED",
+  @doc("File is validated.") "VALIDATION_SUCCESS",
+  @doc("File validation is failed.") "VALIDATION_FAILURE",
+  @doc("File validation is in progress.") "VALIDATION_INITIATED",
+  @doc("Validation is not required.") "VALIDATION_NOT_REQUIRED",
 }
 
 @doc("Test result based on pass/fail criteria.")
-enum PFTestResult {
-  @doc("Pass/fail criteria has passed.") PASSED,
-  @doc("Pass/fail criteria is not applicable.") NOT_APPLICABLE,
-  @doc("Pass/fail criteria has failed.") FAILED,
+union PFTestResult {
+  string,
+  @doc("Pass/fail criteria has passed.") "PASSED",
+  @doc("Pass/fail criteria is not applicable.") "NOT_APPLICABLE",
+  @doc("Pass/fail criteria has failed.") "FAILED",
 }
 
 @doc("Test run status.")
-enum Status {
-  @doc("Test run request is accepted.") ACCEPTED,
-  @doc("Test run is not yet started.") NOTSTARTED,
-  @doc("Test run is provisioning.") PROVISIONING,
-  @doc("Test run is provisioned.") PROVISIONED,
-  @doc("Test run is getting configured.") CONFIGURING,
-  @doc("Test run configuration is done.") CONFIGURED,
-  @doc("Test run has started executing.") EXECUTING,
-  @doc("Test run execution is completed.") EXECUTED,
-  @doc("Test run is getting deprovisioned.") DEPROVISIONING,
-  @doc("Test run is deprovisioned.") DEPROVISIONED,
-  @doc("Test run is completed.") DONE,
-  @doc("Test run is being cancelled.") CANCELLING,
-  @doc("Test run request is cancelled.") CANCELLED,
-  @doc("Test run request is failed.") FAILED,
-  @doc("Test run JMX file is validated.") VALIDATION_SUCCESS,
-  @doc("Test run JMX file validation is failed.") VALIDATION_FAILURE,
+union Status {
+  string,
+  @doc("Test run request is accepted.") "ACCEPTED",
+  @doc("Test run is not yet started.") "NOTSTARTED",
+  @doc("Test run is provisioning.") "PROVISIONING",
+  @doc("Test run is provisioned.") "PROVISIONED",
+  @doc("Test run is getting configured.") "CONFIGURING",
+  @doc("Test run configuration is done.") "CONFIGURED",
+  @doc("Test run has started executing.") "EXECUTING",
+  @doc("Test run execution is completed.") "EXECUTED",
+  @doc("Test run is getting deprovisioned.") "DEPROVISIONING",
+  @doc("Test run is deprovisioned.") "DEPROVISIONED",
+  @doc("Test run is completed.") "DONE",
+  @doc("Test run is being cancelled.") "CANCELLING",
+  @doc("Test run request is cancelled.") "CANCELLED",
+  @doc("Test run request is failed.") "FAILED",
+  @doc("Test run JMX file is validated.") "VALIDATION_SUCCESS",
+  @doc("Test run JMX file validation is failed.") "VALIDATION_FAILURE",
 }
 
 @doc("Aggregation type.")
-enum AggregationType {
-  @doc("Average value.") Average,
-  @doc("Total count.") Count,
-  @doc("Aggregation will be average in this case.") None,
-  @doc("Total sum.") Total,
-  @doc("90th percentile.") Percentile90,
-  @doc("95th percentile.") Percentile95,
-  @doc("99th percentile.") Percentile99,
+union AggregationType {
+  string,
+  @doc("Average value.") "Average",
+  @doc("Total count.") "Count",
+  @doc("Aggregation will be average in this case.") "None",
+  @doc("Total sum.") "Total",
+  @doc("90th percentile.") "Percentile90",
+  @doc("95th percentile.") "Percentile95",
+  @doc("99th percentile.") "Percentile99",
 }
 
 @doc("Metric unit.")
-enum MetricUnit {
-  @doc("No unit specified.") NotSpecified,
-  @doc("Percentage.") Percent,
-  @doc("Value count.") Count,
-  @doc("Seconds.") Seconds,
-  @doc("Milliseconds") Milliseconds,
-  @doc("Bytes") Bytes,
-  @doc("Bytes per second") BytesPerSecond,
-  @doc("Count per second") CountPerSecond,
+union MetricUnit {
+  string,
+  @doc("No unit specified.") "NotSpecified",
+  @doc("Percentage.") "Percent",
+  @doc("Value count.") "Count",
+  @doc("Seconds.") "Seconds",
+  @doc("Milliseconds") "Milliseconds",
+  @doc("Bytes") "Bytes",
+  @doc("Bytes per second") "BytesPerSecond",
+  @doc("Count per second") "CountPerSecond",
 }
 
 @doc("Time Grain")
-enum TimeGrain {
+union TimeGrain {
+  string,
+
   @doc("5 seconds, available only if test run duration is less than 10 minutes.")
-  PT5S,
+  PT5S: "PT5S",
 
   @doc("10 seconds, available only if test run duration is less than 10 minutes.")
-  PT10S,
+  PT10S: "PT10S",
 
-  @doc("1 minute") PT1M,
+  @doc("1 minute")
+  PT1M: "PT1M",
 
   @doc("5 minutes, available only if test run duration is greater than 1 minute.")
-  PT5M,
+  PT5M: "PT5M",
 
   @doc("1 hour, available only if test run duration is greater than 1 minute.")
-  PT1H,
+  PT1H: "PT1H",
 }
 
 @added(APIVersions.v2023_04_01_preview)
 @doc("Test kind")
-enum TestKind {
-  @doc("URL Test") URL,
-  @doc("JMX Test") JMX,
+union TestKind {
+  string,
+  @doc("URL Test") "URL",
+  @doc("JMX Test") "JMX",
 }
 
 @doc("Test file info.")
@@ -830,7 +851,7 @@ model DimensionFilter {
 
 @doc("The response to a metrics query.")
 @friendlyName("Metrics")
-// using friendlyName to change the name of the model due to issue in using projectedName '@projectedName("json", "Metrics")' https://github.com/microsoft/typespec/issues/2276
+// using friendlyName to change the name of the model due to issue in using projectedName '@encodedName("application/json", "Metrics")' https://github.com/microsoft/typespec/issues/2276
 model Metrics is Azure.Core.Page<TimeSeriesElement>;
 
 @doc("The time series returned when a data query is performed.")
@@ -892,7 +913,7 @@ model MetricDimensionsRequest {
   The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
   """)
   @query
-  @projectedName("python", "time_interval")
+  @clientName("time_interval", "python")
   timespan: string;
 }
 

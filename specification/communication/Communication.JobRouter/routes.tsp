@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace AzureCommunicationRoutingService;
 
@@ -113,12 +115,12 @@ interface JobRouterOperations {
 
   @summary("Reclassify a job.")
   @doc("Reclassify a job.")
-  @projectedName("client", "reclassifyJob")
+  @clientName("reclassifyJob")
   reclassify is Operations.ResourceAction<
     RouterJob,
     {
       @doc("Request object for reclassifying a job.")
-      @body
+      @bodyRoot
       options?: ReclassifyJobOptions;
     },
     ReclassifyJobResultWithOkResponse
@@ -126,12 +128,12 @@ interface JobRouterOperations {
 
   @summary("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @doc("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
-  @projectedName("client", "cancelJob")
+  @clientName("cancelJob")
   cancel is Operations.ResourceAction<
     RouterJob,
     {
       @doc("Request model for cancelling job.")
-      @body
+      @bodyRoot
       options?: CancelJobOptions;
     },
     CancelJobResultWithOkResponse
@@ -139,12 +141,12 @@ interface JobRouterOperations {
 
   @summary("Completes an assigned job.")
   @doc("Completes an assigned job.")
-  @projectedName("client", "completeJob")
+  @clientName("completeJob")
   complete is Operations.ResourceAction<
     RouterJobAssignment,
     {
       @doc("Request model for completing job.")
-      @body
+      @bodyRoot
       options?: CompleteJobOptions;
     },
     CompleteJobResultWithOkResponse
@@ -152,12 +154,12 @@ interface JobRouterOperations {
 
   @summary("Closes a completed job.")
   @doc("Closes a completed job.")
-  @projectedName("client", "closeJob")
+  @clientName("closeJob")
   close is Operations.ResourceAction<
     RouterJobAssignment,
     {
       @doc("Request model for closing job.")
-      @body
+      @bodyRoot
       options?: CloseJobOptions;
     },
     CloseJobResultWithOkResponse
@@ -183,12 +185,12 @@ interface JobRouterOperations {
 
   @summary("Unassign a job.")
   @doc("Unassign a job.")
-  @projectedName("client", "unassignJob")
+  @clientName("unassignJob")
   unassign is Operations.ResourceAction<
     RouterJobAssignment,
     {
       @doc("Request body for unassign route.")
-      @body
+      @bodyRoot
       options?: UnassignJobOptions;
     },
     UnassignJobResult
@@ -196,17 +198,17 @@ interface JobRouterOperations {
 
   @summary("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
   @doc("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
-  @projectedName("client", "acceptJobOffer")
+  @clientName("acceptJobOffer")
   accept is Operations.ResourceAction<RouterJobOffer, {}, AcceptJobOfferResult>;
 
   @summary("Declines an offer to work on a job.")
   @doc("Declines an offer to work on a job.")
-  @projectedName("client", "declineJobOffer")
+  @clientName("declineJobOffer")
   decline is Operations.ResourceAction<
     RouterJobOffer,
     {
       @doc("Request model for declining offer.")
-      @body
+      @bodyRoot
       options?: DeclineJobOfferOptions;
     },
     DeclineJobOfferResultWithOkResponse

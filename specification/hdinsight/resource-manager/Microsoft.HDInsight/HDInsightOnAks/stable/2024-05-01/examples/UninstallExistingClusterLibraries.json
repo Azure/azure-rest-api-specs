@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "hiloResourceGroup",
+    "api-version": "2024-05-01",
+    "clusterPoolName": "clusterPool",
+    "clusterName": "cluster",
+    "operation": {
+      "properties": {
+        "action": "Uninstall",
+        "libraries": [
+          {
+            "properties": {
+              "type": "pypi",
+              "name": "tensorflow"
+            }
+          },
+          {
+            "properties": {
+              "type": "maven",
+              "groupId": "org.apache.flink",
+              "name": "flink-connector-hudi"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "http://azure.async.operation/status"
+      }
+    }
+  }
+}

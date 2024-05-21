@@ -3,7 +3,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@access(ImageAnalysis.analyzeFromBuffer, Access.internal, "csharp");
+@@access(ImageAnalysis.analyzeFromImageData, Access.internal, "csharp");
 @@access(ImageAnalysis.analyzeFromUrl, Access.internal, "csharp");
 
 @@access(ImageAnalysis.CaptionResult, Access.public, "csharp");
@@ -26,9 +26,9 @@ using Azure.ClientGenerator.Core;
 @@access(ImageAnalysis.SmartCropsResult, Access.public, "csharp");
 @@access(ImageAnalysis.TagsResult, Access.public, "csharp");
 
-@@projectedName(ImageAnalysis.VisualFeatures, "csharp", "VisualFeaturesImpl");
+@@clientName(ImageAnalysis.VisualFeatures, "VisualFeaturesImpl", "csharp");
 
-@@access(ImageAnalysis.analyzeFromBuffer, Access.internal, "java");
+@@access(ImageAnalysis.analyzeFromImageData, Access.internal, "java");
 @@access(ImageAnalysis.analyzeFromUrl, Access.internal, "java");
 
 @@access(ImageAnalysis.CaptionResult, Access.public, "java");
@@ -52,7 +52,7 @@ using Azure.ClientGenerator.Core;
 @@access(ImageAnalysis.TagsResult, Access.public, "java");
 @@access(ImageAnalysis.VisualFeatures, Access.public, "java");
 
-@@access(ImageAnalysis.analyzeFromBuffer, Access.internal, "python");
+@@access(ImageAnalysis.analyzeFromImageData, Access.internal, "python");
 @@access(ImageAnalysis.analyzeFromUrl, Access.internal, "python");
 
 @@access(ImageAnalysis.CaptionResult, Access.public, "python");

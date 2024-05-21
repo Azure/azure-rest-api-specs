@@ -2,24 +2,24 @@
   "swagger": "2.0",
   "info": {
     "title": "LoadTest Client",
+    "version": "2022-12-01",
     "description": "LoadTest client provides access to LoadTest Resource and it's status operations.",
-    "version": "2022-12-01"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      },
-      "description": "Azure Active Directory OAuth2"
-    }
-  },
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
       "azure_auth": [
@@ -27,131 +27,188 @@
       ]
     }
   ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "LoadTests"
+    },
+    {
+      "name": "Quotas"
+    }
+  ],
   "paths": {
     "/providers/Microsoft.LoadTestService/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "description": "Lists all the available API operations for Load Test Resource.",
-        "operationId": "Operations_List",
-        "produces": [
-          "application/json"
-        ],
+        "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "Resource provider error response about the failure.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/loadTests": {
+      "get": {
+        "operationId": "LoadTests_ListBySubscription",
+        "tags": [
+          "LoadTests"
+        ],
+        "description": "List LoadTestResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LoadTestResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         },
         "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
+          "List LoadTestResource resources by subscription ID.": {
+            "$ref": "./examples/LoadTests_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas": {
       "get": {
+        "operationId": "Quotas_List",
         "tags": [
           "Quotas"
         ],
-        "description": "Lists all the available quota per region per subscription.",
-        "operationId": "Quotas_List",
-        "produces": [
-          "application/json"
-        ],
+        "description": "List quotas for a given subscription Id.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/QuotaResourceList"
+              "$ref": "#/definitions/QuotaResourceListResult"
             }
           },
           "default": {
-            "description": "Resource provider error response about the failure.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List quotas for a given subscription Id.": {
+            "$ref": "./examples/Quotas_List.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Quotas_List": {
-            "$ref": "./examples/Quotas_List.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}": {
       "get": {
+        "operationId": "Quotas_Get",
         "tags": [
           "Quotas"
         ],
         "description": "Get the available quota for a quota bucket per region per subscription.",
-        "operationId": "Quotas_Get",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/QuotaBucketNameParameter"
+            "name": "quotaBucketName",
+            "in": "path",
+            "description": "The quota name.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/QuotaResource"
             }
           },
           "default": {
-            "description": "Resource provider error response about the failure.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Quotas_Get": {
+          "Get the available quota for a quota bucket per region per subscription.": {
             "$ref": "./examples/Quotas_Get.json"
           }
         }
@@ -159,429 +216,397 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/locations/{location}/quotas/{quotaBucketName}/checkAvailability": {
       "post": {
+        "operationId": "Quotas_CheckAvailability",
         "tags": [
           "Quotas"
         ],
         "description": "Check Quota Availability on quota bucket per region per subscription.",
-        "operationId": "Quotas_CheckAvailability",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/QuotaBucketNameParameter"
+            "name": "quotaBucketName",
+            "in": "path",
+            "description": "The quota name.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
-            "in": "body",
             "name": "QuotaBucketRequest",
-            "description": "Quota Bucket Request data",
+            "in": "body",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QuotaBucketRequest"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CheckQuotaAvailabilityResponse"
             }
           },
           "default": {
-            "description": "Resource provider error response about the failure.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Quotas_CheckAvailability": {
+          "Check Quota Availability on quota bucket per region per subscription.": {
             "$ref": "./examples/Quotas_CheckAvailability.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.LoadTestService/loadTests": {
-      "get": {
-        "tags": [
-          "LoadTests"
-        ],
-        "description": "Lists loadtests resources in a subscription.",
-        "operationId": "LoadTests_ListBySubscription",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/LoadTestResourcePageList"
-            }
-          },
-          "default": {
-            "description": "Resource provider error response about the failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "LoadTests_ListBySubscription": {
-            "$ref": "./examples/LoadTests_ListBySubscription.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests": {
       "get": {
+        "operationId": "LoadTests_ListByResourceGroup",
         "tags": [
           "LoadTests"
         ],
-        "description": "Lists loadtest resources in a resource group.",
-        "operationId": "LoadTests_ListByResourceGroup",
-        "produces": [
-          "application/json"
-        ],
+        "description": "List LoadTestResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- list of loadtests resources retrieved",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LoadTestResourcePageList"
+              "$ref": "#/definitions/LoadTestResourceListResult"
             }
           },
           "default": {
-            "description": "Resource provider error response about the failure.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List LoadTestResource resources by resource group.": {
+            "$ref": "./examples/LoadTests_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "LoadTests_ListByResourceGroup": {
-            "$ref": "./examples/LoadTests_ListByResourceGroup.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}": {
       "get": {
+        "operationId": "LoadTests_Get",
         "tags": [
           "LoadTests"
         ],
-        "description": "Get a LoadTest resource.",
-        "operationId": "LoadTests_Get",
-        "produces": [
-          "application/json"
-        ],
+        "description": "Get a LoadTestResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/LoadTestNameParameter"
+            "name": "loadTestName",
+            "in": "path",
+            "description": "Load Test name",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- loadtest resource retrieved",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             }
           },
           "default": {
-            "description": "Resource provider error response about the failure.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "LoadTests_Get": {
+          "Get a LoadTestResource.": {
             "$ref": "./examples/LoadTests_Get.json"
           }
         }
       },
       "put": {
+        "operationId": "LoadTests_CreateOrUpdate",
         "tags": [
           "LoadTests"
         ],
-        "description": "Create or update LoadTest resource.",
-        "operationId": "LoadTests_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "Create a LoadTestResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/LoadTestNameParameter"
+            "name": "loadTestName",
+            "in": "path",
+            "description": "Load Test name",
+            "required": true,
+            "type": "string"
           },
           {
-            "in": "body",
             "name": "LoadTestResource",
-            "description": "LoadTest resource data",
+            "in": "body",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
-            }
+            },
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Resource 'LoadTestResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             }
           },
           "201": {
-            "description": "Created -- LoadTest resource created",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
+            "description": "Resource 'LoadTestResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "Resource provider error response about the failure.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "LoadTests_CreateOrUpdate": {
+          "Create a LoadTestResource": {
             "$ref": "./examples/LoadTests_CreateOrUpdate.json"
           }
-        }
-      },
-      "patch": {
-        "tags": [
-          "LoadTests"
-        ],
-        "description": "Update a loadtest resource.",
-        "operationId": "LoadTests_Update",
-        "x-ms-long-running-operation": true,
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "consumes": [
-          "application/json"
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LoadTests_Update",
+        "tags": [
+          "LoadTests"
         ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "Update a LoadTestResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/LoadTestNameParameter"
+            "name": "loadTestName",
+            "in": "path",
+            "description": "Load Test name",
+            "required": true,
+            "type": "string"
           },
           {
-            "in": "body",
             "name": "LoadTestResourcePatchRequestBody",
-            "description": "LoadTest resource update data",
+            "in": "body",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LoadTestResourcePatchRequestBody"
-            }
+              "$ref": "#/definitions/LoadTestResourceUpdate"
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- resource updated",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             }
           },
           "202": {
-            "description": "Accepted -- LoadTest resource patch request accepted",
+            "description": "Resource update request accepted.",
             "headers": {
               "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
-            "description": "Resource provider error response about the failure.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "LoadTests_Update": {
+          "Update a LoadTestResource.": {
             "$ref": "./examples/LoadTests_Update.json"
           }
-        }
-      },
-      "delete": {
-        "tags": [
-          "LoadTests"
-        ],
-        "description": "Delete a LoadTest resource.",
-        "operationId": "LoadTests_Delete",
-        "x-ms-long-running-operation": true,
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "produces": [
-          "application/json"
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LoadTests_Delete",
+        "tags": [
+          "LoadTests"
         ],
+        "description": "Delete a LoadTestResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/LoadTestNameParameter"
+            "name": "loadTestName",
+            "in": "path",
+            "description": "Load Test name",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK -- resource deleted"
-          },
           "202": {
-            "description": "Accepted -- LoadTest resource delete request accepted",
+            "description": "Resource deletion accepted.",
             "headers": {
               "Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "No Content -- resource deleted"
+            "description": "Resource does not exist."
           },
           "default": {
-            "description": "Resource provider error response about the failure.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "LoadTests_Delete": {
+          "Delete a LoadTestResource.": {
             "$ref": "./examples/LoadTests_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}/outboundNetworkDependenciesEndpoints": {
       "get": {
-        "tags": [
-          "LoadTest"
-        ],
         "operationId": "LoadTests_ListOutboundNetworkDependenciesEndpoints",
-        "description": "Lists the endpoints that agents may call as part of load testing.",
-        "x-ms-examples": {
-          "ListOutboundNetworkDependencies": {
-            "$ref": "./examples/LoadTests_ListOutboundNetworkDependenciesEndpoints.json"
-          }
-        },
-        "produces": [
-          "application/json"
+        "tags": [
+          "LoadTests"
         ],
+        "description": "Lists the endpoints that agents may call as part of load testing.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/LoadTestNameParameter"
+            "name": "loadTestName",
+            "in": "path",
+            "description": "Load Test name",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The operation was successful. The response contains a list of outbound network dependency endpoints.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+              "$ref": "#/definitions/PagedOutboundEnvironmentEndpoint"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the endpoints that agents may call as part of load testing.": {
+            "$ref": "./examples/LoadTests_ListOutboundNetworkDependenciesEndpoints.json"
           }
         },
         "x-ms-pageable": {
@@ -591,131 +616,62 @@
     }
   },
   "definitions": {
-    "LoadTestResourcePageList": {
-      "description": "List of resources page result.",
+    "CheckQuotaAvailabilityResponse": {
       "type": "object",
+      "description": "Check quota availability response object.",
       "properties": {
-        "value": {
-          "description": "List of resources in current page.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LoadTestResource"
-          }
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
         },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string"
-        }
-      }
-    },
-    "LoadTestResource": {
-      "type": "object",
-      "description": "LoadTest details",
-      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
         "properties": {
-          "description": "Load Test resource properties",
-          "$ref": "#/definitions/LoadTestProperties",
+          "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
+          "description": "Check quota availability response properties.",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The type of identity used for the resource."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
+      "required": [
+        "id",
+        "type"
       ]
     },
-    "LoadTestResourcePatchRequestBody": {
-      "description": "LoadTest resource patch request body.",
+    "CheckQuotaAvailabilityResponseProperties": {
       "type": "object",
+      "description": "Check quota availability response properties.",
       "properties": {
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-nullable": true
+        "isAvailable": {
+          "type": "boolean",
+          "description": "True/False indicating whether the quota request be granted based on availability."
         },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The type of identity used for the resource."
-        },
-        "properties": {
-          "description": "Load Test resource properties",
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "properties": {
-            "description": {
-              "description": "Description of the resource.",
-              "maxLength": 512,
-              "type": "string"
-            },
-            "encryption": {
-              "description": "CMK Encryption property.",
-              "type": "object",
-              "$ref": "#/definitions/EncryptionProperties"
-            }
-          }
-        }
-      }
-    },
-    "LoadTestProperties": {
-      "description": "LoadTest resource properties.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Description of the resource.",
-          "maxLength": 512,
-          "type": "string"
-        },
-        "provisioningState": {
-          "description": "Resource provisioning state.",
-          "$ref": "#/definitions/ResourceState",
-          "readOnly": true
-        },
-        "dataPlaneURI": {
-          "description": "Resource data plane URI.",
-          "maxLength": 2083,
+        "availabilityStatus": {
           "type": "string",
-          "readOnly": true
-        },
-        "encryption": {
-          "description": "CMK Encryption property.",
-          "type": "object",
-          "$ref": "#/definitions/EncryptionProperties"
+          "description": "Message indicating additional details to add to quota support request."
         }
       }
     },
     "EncryptionProperties": {
-      "description": "Key and identity details for Customer Managed Key encryption of load test resource",
       "type": "object",
+      "description": "Key and identity details for Customer Managed Key encryption of load test resource.",
       "properties": {
         "identity": {
-          "type": "object",
-          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
-          "properties": {
-            "type": {
-              "type": "string",
-              "enum": [
-                "SystemAssigned",
-                "UserAssigned"
-              ],
-              "x-ms-enum": {
-                "name": "type",
-                "modelAsString": true
-              },
-              "description": "Managed identity type to use for accessing encryption key Url"
-            },
-            "resourceId": {
-              "type": "string",
-              "description": "user assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId",
-              "x-nullable": true
-            }
-          }
+          "$ref": "#/definitions/EncryptionPropertiesIdentity",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
         },
         "keyUrl": {
           "type": "string",
@@ -723,39 +679,266 @@
         }
       }
     },
-    "ResourceState": {
-      "description": "Resources provisioning states.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Deleted"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ResourceState",
-        "modelAsString": true
+    "EncryptionPropertiesIdentity": {
+      "type": "object",
+      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/type",
+          "description": "Managed identity type to use for accessing encryption key Url."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.",
+          "x-nullable": true
+        }
       }
     },
-    "QuotaResourceList": {
-      "description": "List of quota bucket objects. It contains a URL link to get the next set of results.",
+    "EndpointDependency": {
       "type": "object",
+      "description": "A domain name and connection details used to access a dependency.",
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable supplemental information about the dependency and when it is applicable.",
+          "readOnly": true
+        },
+        "endpointDetails": {
+          "type": "array",
+          "description": "The list of connection details for this endpoint.",
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "port"
+          ]
+        }
+      },
+      "required": [
+        "domainName"
+      ]
+    },
+    "EndpointDetail": {
+      "type": "object",
+      "description": "Details about the connection between the Batch service and the endpoint.",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port an endpoint is connected to.",
+          "readOnly": true
+        }
+      }
+    },
+    "LoadTestProperties": {
+      "type": "object",
+      "description": "LoadTest resource properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the resource.",
+          "maxLength": 512
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "dataPlaneURI": {
+          "type": "string",
+          "description": "Resource data plane URI.",
+          "maxLength": 2083,
+          "readOnly": true
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperties",
+          "description": "CMK Encryption property."
+        }
+      }
+    },
+    "LoadTestResource": {
+      "type": "object",
+      "description": "LoadTest details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LoadTestProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LoadTestResourceListResult": {
+      "type": "object",
+      "description": "The response of a LoadTestResource list operation.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The LoadTestResource items on this page",
           "items": {
-            "$ref": "#/definitions/QuotaResource"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "List of quota bucket objects provided by the loadtestservice.",
-          "readOnly": true
+            "$ref": "#/definitions/LoadTestResource"
+          }
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of quota bucket objects results (if there are any).",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LoadTestResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the LoadTestResource.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/LoadTestResourceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LoadTestResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the LoadTestResource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the resource.",
+          "maxLength": 512
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperties",
+          "description": "CMK Encryption property."
+        }
+      }
+    },
+    "OutboundEnvironmentEndpoint": {
+      "type": "object",
+      "description": "A collection of related endpoints from the same service for which the Batch service requires outbound access.",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The type of service that Azure Load Testing connects to.",
           "readOnly": true
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "The endpoints for this service to which the Batch service makes outbound calls.",
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "domainName"
+          ]
+        }
+      }
+    },
+    "PagedOutboundEnvironmentEndpoint": {
+      "type": "object",
+      "description": "Values returned by the List operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OutboundEnvironmentEndpoint items on this page",
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaBucketRequest": {
+      "type": "object",
+      "description": "Request object of new quota for a quota bucket.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaBucketRequestProperties",
+          "description": "Request object of new quota for a quota bucket.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "QuotaBucketRequestProperties": {
+      "type": "object",
+      "description": "New quota request request properties.",
+      "properties": {
+        "currentUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current quota usage of the quota bucket.",
+          "minimum": 0
+        },
+        "currentQuota": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current quota limit of the quota bucket.",
+          "minimum": 0
+        },
+        "newQuota": {
+          "type": "integer",
+          "format": "int32",
+          "description": "New quota limit of the quota bucket.",
+          "minimum": 0
+        },
+        "dimensions": {
+          "$ref": "#/definitions/QuotaBucketRequestPropertiesDimensions",
+          "description": "Dimensions for new quota request."
+        }
+      }
+    },
+    "QuotaBucketRequestPropertiesDimensions": {
+      "type": "object",
+      "description": "Dimensions for new quota request.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription Id dimension for new quota request of the quota bucket.",
+          "minLength": 1
+        },
+        "location": {
+          "type": "string",
+          "description": "Location dimension for new quota request of the quota bucket.",
+          "minLength": 1
         }
       }
     },
@@ -764,223 +947,126 @@
       "description": "Quota bucket details object.",
       "properties": {
         "properties": {
-          "description": "Quota bucket resource properties.",
           "$ref": "#/definitions/QuotaResourceProperties",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "QuotaResourceProperties": {
-      "description": "Quota bucket resource properties.",
+    "QuotaResourceListResult": {
       "type": "object",
+      "description": "The response of a QuotaResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuotaResource items on this page",
+          "items": {
+            "$ref": "#/definitions/QuotaResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaResourceProperties": {
+      "type": "object",
+      "description": "Quota bucket resource properties.",
       "properties": {
         "limit": {
-          "description": "Current quota limit of the quota bucket.",
           "type": "integer",
-          "minimum": 0,
-          "format": "int32"
+          "format": "int32",
+          "description": "Current quota limit of the quota bucket.",
+          "minimum": 0
         },
         "usage": {
-          "description": "Current quota usage of the quota bucket.",
           "type": "integer",
-          "minimum": 0,
-          "format": "int32"
+          "format": "int32",
+          "description": "Current quota usage of the quota bucket.",
+          "minimum": 0
         },
         "provisioningState": {
-          "description": "Resource provisioning state.",
           "$ref": "#/definitions/ResourceState",
+          "description": "Resource provisioning state.",
           "readOnly": true
         }
       }
     },
-    "CheckQuotaAvailabilityResponse": {
-      "description": "Check quota availability response object.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "Check quota availability response properties.",
-          "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ]
-    },
-    "CheckQuotaAvailabilityResponseProperties": {
-      "description": "Check quota availability response properties.",
-      "type": "object",
-      "properties": {
-        "isAvailable": {
-          "description": "True/False indicating whether the quota request be granted based on availability.",
-          "type": "boolean"
-        },
-        "availabilityStatus": {
-          "description": "Message indicating additional details to add to quota support request.",
-          "type": "string"
-        }
-      }
-    },
-    "QuotaBucketRequest": {
-      "description": "Request object of new quota for a quota bucket.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "New quota request request properties.",
-          "$ref": "#/definitions/QuotaBucketRequestProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ]
-    },
-    "QuotaBucketRequestProperties": {
-      "description": "New quota request request properties.",
-      "type": "object",
-      "properties": {
-        "currentUsage": {
-          "description": "Current quota usage of the quota bucket.",
-          "type": "integer",
-          "minimum": 0,
-          "format": "int32"
-        },
-        "currentQuota": {
-          "description": "Current quota limit of the quota bucket.",
-          "type": "integer",
-          "minimum": 0,
-          "format": "int32"
-        },
-        "newQuota": {
-          "description": "New quota limit of the quota bucket.",
-          "type": "integer",
-          "minimum": 0,
-          "format": "int32"
-        },
-        "dimensions": {
-          "description": "Dimensions for new quota request.",
-          "type": "object",
-          "properties": {
-            "subscriptionId": {
-              "description": "Subscription Id dimension for new quota request of the quota bucket.",
-              "type": "string",
-              "minLength": 1
-            },
-            "location": {
-              "description": "Location dimension for new quota request of the quota bucket.",
-              "type": "string",
-              "minLength": 1
-            }
+    "ResourceState": {
+      "type": "string",
+      "description": "Resources provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted state."
           }
-        }
+        ]
+      },
+      "readOnly": true
+    },
+    "type": {
+      "type": "string",
+      "description": "Managed identity type to use for accessing encryption key Url.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned identity."
+          }
+        ]
       }
-    },
-    "OutboundEnvironmentEndpointCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          },
-          "x-ms-identifiers": [],
-          "description": "The collection of outbound network dependency endpoints returned by the listing operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The continuation token."
-        }
-      },
-      "description": "Values returned by the List operation."
-    },
-    "OutboundEnvironmentEndpoint": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The type of service that Azure Load Testing connects to."
-        },
-        "endpoints": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/EndpointDependency"
-          },
-          "x-ms-identifiers": [
-            "domainName"
-          ],
-          "description": "The endpoints for this service to which the Batch service makes outbound calls."
-        }
-      },
-      "description": "A collection of related endpoints from the same service for which the Batch service requires outbound access."
-    },
-    "EndpointDependency": {
-      "type": "object",
-      "properties": {
-        "domainName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard."
-        },
-        "description": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Human-readable supplemental information about the dependency and when it is applicable."
-        },
-        "endpointDetails": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/EndpointDetail"
-          },
-          "x-ms-identifiers": [
-            "port"
-          ],
-          "description": "The list of connection details for this endpoint."
-        }
-      },
-      "description": "A domain name and connection details used to access a dependency."
-    },
-    "EndpointDetail": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "description": "The port an endpoint is connected to."
-        }
-      },
-      "description": "Details about the connection between the Batch service and the endpoint."
     }
   },
-  "parameters": {
-    "LoadTestNameParameter": {
-      "in": "path",
-      "name": "loadTestName",
-      "description": "Load Test name.",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
-    },
-    "QuotaBucketNameParameter": {
-      "in": "path",
-      "name": "quotaBucketName",
-      "description": "Quota Bucket name.",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
-    }
-  }
+  "parameters": {}
 }

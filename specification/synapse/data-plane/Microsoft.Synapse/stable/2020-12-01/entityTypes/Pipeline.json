@@ -1947,6 +1947,21 @@
         }
       }
     },
+    "PostgreSqlV2Source": {
+      "description": "A copy activity source for PostgreSQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SybaseSource": {
       "description": "A copy activity source for Sybase databases.",
       "type": "object",
@@ -3276,6 +3291,21 @@
         }
       }
     },
+    "GoogleBigQueryV2Source": {
+      "description": "A copy activity Google BigQuery service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "GreenplumSource": {
       "description": "A copy activity Greenplum Database source.",
       "type": "object",
@@ -3781,6 +3811,28 @@
       ]
     },
     "SnowflakeSource": {
+      "description": "A copy activity snowflake source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Snowflake Sql query. Type: string (or Expression with resultType string)."
+        },
+        "exportSettings": {
+          "$ref": "#/definitions/SnowflakeExportCopyCommand",
+          "description": "Snowflake export settings."
+        }
+      },
+      "required": [
+        "exportSettings"
+      ]
+    },
+    "SnowflakeV2Source": {
       "description": "A copy activity snowflake source.",
       "type": "object",
       "allOf": [
@@ -4547,6 +4599,26 @@
       "properties": {
         "preCopyScript": {
           "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "importSettings": {
+          "$ref": "#/definitions/SnowflakeImportCopyCommand",
+          "description": "Snowflake import settings."
+        }
+      }
+    },
+    "SnowflakeV2Sink": {
+      "description": "A copy activity snowflake sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
         },
         "importSettings": {
@@ -7459,16 +7531,8 @@
           "description": "The query text. Type: string (or Expression with resultType string)."
         },
         "type": {
-          "x-ms-enum": {
-            "name": "ScriptType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Query",
-            "NonQuery"
-          ],
-          "type": "string",
-          "description": "The type of the query. Type: string."
+          "type": "object",
+          "description": "The type of the query. Please refer to the ScriptType for valid options. Type: string (or Expression with resultType string)."
         },
         "parameters": {
           "type": "array",
@@ -7554,6 +7618,18 @@
           "type": "object",
           "description": "The wait time to get a response from SharePoint Online. Default value is 5 minutes (00:05:00). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
+      }
+    },
+    "ScriptType": {
+      "description": "The type of the ScriptActivityScriptBlock.",
+      "type": "string",
+      "enum": [
+        "Query",
+        "NonQuery"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptType",
+        "modelAsString": true
       }
     },
     "SqlPartitionOption": {
@@ -7940,10 +8016,14 @@
       "properties": {
         "SOQLQuery": {
           "type": "object",
-          "description": "Database query. Type: string (or Expression with resultType string)."
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
         },
-        "readBehavior": {
-          "description": "The read behavior for the operation. Default is query. Allowed values: query/queryAll. Type: string (or Expression with resultType string).",
+        "query": {
+          "type": "object",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
+        },
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
       }
@@ -7959,28 +8039,20 @@
       "properties": {
         "SOQLQuery": {
           "type": "object",
-          "description": "Database query. Type: string (or Expression with resultType string)."
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
         },
-        "readBehavior": {
-          "description": "The read behavior for the operation. Default is query. Allowed values: query/queryAll. Type: string (or Expression with resultType string).",
+        "query": {
+          "type": "object",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
+        },
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         },
         "additionalColumns": {
           "type": "object",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
         }
-      }
-    },
-    "SalesforceV2SourceReadBehavior": {
-      "description": "The Salesforce read behavior for the operation",
-      "type": "string",
-      "enum": [
-        "query",
-        "queryAll"
-      ],
-      "x-ms-enum": {
-        "name": "SalesforceV2SourceReadBehavior",
-        "modelAsString": true
       }
     },
     "SalesforceV2Sink": {
@@ -8042,6 +8114,63 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "ServiceNowV2Source": {
+      "description": "A copy activity ServiceNowV2 server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "expression": {
+          "type": "object",
+          "description": "Expression to filter data from source.",
+          "$ref": "#/definitions/ExpressionV2"
+        }
+      }
+    },
+    "ExpressionV2": {
+      "description": "Nested representation of a complex expression.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "x-ms-enum": {
+            "name": "ExpressionV2Type",
+            "modelAsString": true
+          },
+          "enum": [
+            "Constant",
+            "Field",
+            "Unary",
+            "Binary",
+            "NAry"
+          ],
+          "type": "string",
+          "description": "Type of expressions supported by the system. Type: string."
+        },
+        "value": {
+          "description": "Value for Constant/Field Type: string.",
+          "type": "string"
+        },
+        "operators": {
+          "description": "Expression operator value Type: list of strings.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Type: string."
+          }
+        },
+        "operands": {
+          "description": "List of nested expressions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressionV2",
+            "description": "Type: ExpressionV2."
+          }
         }
       }
     }

@@ -29,6 +29,11 @@ openapi-type: arm
 tag: package-2023-07-20-preview
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
 ### Tag: package-2023-07-20-preview
 
 These settings apply only when `--tag=package-2023-07-20-preview` is specified on the command line.
@@ -36,6 +41,15 @@ These settings apply only when `--tag=package-2023-07-20-preview` is specified o
 ```yaml $(tag) == 'package-2023-07-20-preview'
 input-file:
   - Microsoft.AzureLargeInstance/preview/2023-07-20-preview/azurelargeinstance.json
+```
+
+### Tag: package-2024-04-10
+
+These settings apply only when `--tag=package-2024-04-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-10'
+input-file:
+  - Microsoft.AzureLargeInstance/stable/2024-04-10/azurelargeinstance.json
 ```
 
 ---
@@ -49,7 +63,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

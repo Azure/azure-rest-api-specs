@@ -1,0 +1,47 @@
+parameters:
+  "service-dir":
+    default: "sdk/openai"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@typespec/openapi3"
+# - "@azure-tools/typespec-java"
+# - "@azure-tools/typespec-csharp"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/../"
+    output-file: "data-plane/OpenAI.Assistants/OpenApiV2/{version-status}/{version}/assistants_generated.json"
+    examples-directory: "{project-root}/examples"
+    omit-unreachable-types: true
+  "@typespec/openapi3":
+    emitter-output-dir: "{project-root}/../"
+    output-file: "data-plane/OpenAI.Assistants/OpenApiV3/{version}/assistants_generated.yaml"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.OpenAI.Assistants"
+    namespace: "Azure.AI.OpenAI.Assistants"
+    clear-output-folder: true
+    model-namespace: false
+    generate-protocol-methods: false
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-ai-openai-assistants"
+    namespace: "com.azure.ai.openai.assistants"
+    partial-update: true
+    enable-sync-stack: true
+    generate-tests: false
+    custom-types-subpackage: "implementation.models"
+    custom-types: "FileListResponse,OpenAIPageableListOfAssistant,OpenAIPageableListOfAssistantFile,OpenAIPageableListOfMessageFile,OpenAIPageableListOfRunStep,OpenAIPageableListOfThreadMessage,OpenAIPageableListOfThreadRun"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "openai"
+    generateMetadata: false
+    generateTest: false
+    isModularLibrary: true
+    packageDetails:
+      name: "@azure/openai-assistants"
+    flavor: azure
