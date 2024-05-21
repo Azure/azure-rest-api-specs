@@ -895,7 +895,7 @@
         }
       }
     },
-    "ArcAgentProfile": {
+        "ArcAgentProfile": {
       "description": "Defines the Arc Agent properties for the clusters.",
       "type": "object",
       "properties": {
@@ -918,14 +918,14 @@
         },
         "systemComponents": {
           "type": "array",
-          "description": "List of system extensions can be installed on the cluster resource.",
+          "description": "List of system extensions that are installed on the cluster resource.",
           "items": {
             "$ref": "#/definitions/SystemComponent"
           }
         },
         "agentErrors": {
           "type": "array",
-          "description": "List of agent and agent component errors on the cluster resource.",
+          "description": "List of arc agentry and system components errors on the cluster resource.",
           "items": {
             "$ref": "#/definitions/AgentError"
           }
@@ -965,7 +965,7 @@
       }
     },
     "SystemComponent": {
-      "description": "System Extension and its desired versions to be installed on the cluster resource.",
+      "description": "System extensions and its current versions installed on the cluster resource.",
       "type": "object",
       "properties": {
         "type": {
@@ -979,12 +979,12 @@
         "majorVersion": {
           "type": "integer",
           "format": "int32",
-          "description": "Major Version of the system extension to be installed on the cluster resource."
+          "description": "Major Version of the system extension that is currently installed on the cluster resource."
         },
         "currentVersion": {
           "type": "string",
           "readOnly": true,
-          "description": "Version of the system extension is currently installed on the cluster resource."
+          "description": "Version of the system extension that is currently installed on the cluster resource."
         }
       }
     },
