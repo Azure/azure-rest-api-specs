@@ -72,6 +72,10 @@ model OnYourDataDeploymentNameVectorizationSource
   @doc("The embedding model deployment name within the same Azure OpenAI resource. This enables you to use vector search without Azure OpenAI api-key and without Azure OpenAI public network access.")
   @encodedName("application/json", "deployment_name")
   deploymentName: string;
+
+  /** The number of dimensions the embeddings should have. Only supported in `text-embedding-3` and later models. */
+  @added(ServiceApiVersions.v2024_05_01_Preview)
+  dimensions?: int32;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
