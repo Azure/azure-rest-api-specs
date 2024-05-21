@@ -27,7 +27,7 @@ model InvestigationResource is ExtensionResource<InvestigationProperties> {
   @segment("investigations")
   @visibility("read")
   // Should be 255-2 charachters long, without any of these invalid chars- :@/#%&+*<>?\\
-  @pattern("^[^:@/#%&+*<>\\?]{2,253}$")
+  @pattern("^[^:@/#&+*<>\\?]{2,253}$")
   name: string;
 }
 
@@ -73,22 +73,14 @@ union Sensitivity {
 @doc("Denotes the state of the investigation operation.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 union InvestigationProvisioningState {
+  string,
+  ResourceProvisioningState,
+
   @doc("No investigation operation state")
-  None: "none",
+  None: "None",
 
   @doc("Running investigation operation state")
-  Running: "running",
-
-  @doc("Investigation operation succeeded")
-  Succeeded: "succeeded",
-
-  @doc("Investigation operation failed")
-  Failed: "failed",
-
-  @doc("Investigation operation canceled")
-  Canceled: "canceled",
-
-  string,
+  Running: "Running",
 }
 
 /**

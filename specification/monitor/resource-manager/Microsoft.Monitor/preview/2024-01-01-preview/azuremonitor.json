@@ -120,7 +120,7 @@
             "description": "The name of the investigation.",
             "required": true,
             "type": "string",
-            "pattern": "^[^:@/#%&+*<>\\?]{2,253}$"
+            "pattern": "^[^:@/#&+*<>\\?]{2,253}$"
           }
         ],
         "responses": {
@@ -162,7 +162,7 @@
             "description": "The name of the investigation.",
             "required": true,
             "type": "string",
-            "pattern": "^[^:@/#%&+*<>\\?]{2,253}$"
+            "pattern": "^[^:@/#&+*<>\\?]{2,253}$"
           },
           {
             "name": "investigation",
@@ -231,7 +231,7 @@
             "description": "The name of the investigation.",
             "required": true,
             "type": "string",
-            "pattern": "^[^:@/#%&+*<>\\?]{2,253}$"
+            "pattern": "^[^:@/#&+*<>\\?]{2,253}$"
           }
         ],
         "responses": {
@@ -1568,40 +1568,40 @@
       "type": "string",
       "description": "Denotes the state of the investigation operation.",
       "enum": [
-        "none",
-        "running",
-        "succeeded",
-        "failed",
-        "canceled"
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "None",
+        "Running"
       ],
       "x-ms-enum": {
         "name": "InvestigationProvisioningState",
         "modelAsString": true,
         "values": [
           {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
             "name": "None",
-            "value": "none",
+            "value": "None",
             "description": "No investigation operation state"
           },
           {
             "name": "Running",
-            "value": "running",
+            "value": "Running",
             "description": "Running investigation operation state"
-          },
-          {
-            "name": "Succeeded",
-            "value": "succeeded",
-            "description": "Investigation operation succeeded"
-          },
-          {
-            "name": "Failed",
-            "value": "failed",
-            "description": "Investigation operation failed"
-          },
-          {
-            "name": "Canceled",
-            "value": "canceled",
-            "description": "Investigation operation canceled"
           }
         ]
       },
