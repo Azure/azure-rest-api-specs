@@ -18,6 +18,10 @@ namespace ClientCustomizations;
 @@clientName(GroupingResult, "FaceGroupingResult");
 @@clientName(LivenessDecision, "FaceLivenessDecision");
 @@clientName(ImageType, "FaceImageType");
+@@clientName(FaceList, "FaceListData");
+@@clientName(LargeFaceList, "FaceLargeFaceListData");
+@@clientName(PersonGroup, "PersonGroupData");
+@@clientName(LargePersonGroup, "LargePersonGroupData");
 
 @@access(DetectionModel, Access.public);
 @@access(RecognitionModel, Access.public);
@@ -64,6 +68,114 @@ interface FaceClient {
   findSimilar is FaceRecognitionOperations.findSimilar;
   verifyFaceToFace is FaceRecognitionOperations.verifyFaceToFace;
   group is FaceRecognitionOperations.group;
+}
+
+@client({
+  name: "FaceServiceClient",
+  service: Face
+})
+namespace FaceServiceClient
+{
+  @operationGroup
+  interface FaceList {
+    create is FaceListOperations.createFaceList;
+    delete is FaceListOperations.deleteFaceList;
+    get is FaceListOperations.getFaceList;
+    update is FaceListOperations.updateFaceList;
+    getFaceLists is FaceListOperations.getFaceLists;
+    addFaceFromUrl is FaceListOperations.addFaceListFaceFromUrl;
+    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+    addFace is FaceListOperations.addFaceListFace;
+    deleteFace is FaceListOperations.deleteFaceListFace;
+  }
+
+  @operationGroup
+  interface LargeFaceList {
+    create is FaceListOperations.createLargeFaceList;
+    delete is FaceListOperations.deleteLargeFaceList;
+    get is FaceListOperations.getLargeFaceList;
+    update is FaceListOperations.updateLargeFaceList;
+    getLargeFaceLists is FaceListOperations.getLargeFaceLists;
+    getTrainingStatus is FaceListOperations.getLargeFaceListTrainingStatus;
+    train is FaceListOperations.trainLargeFaceList;
+    addFaceFromUrl is FaceListOperations.addLargeFaceListFaceFromUrl;
+    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+    addFace is FaceListOperations.addLargeFaceListFace;
+    deleteFace is FaceListOperations.deleteLargeFaceListFace;
+    getFace is FaceListOperations.getLargeFaceListFace;
+    updateFace is FaceListOperations.updateLargeFaceListFace;
+    getFaces is FaceListOperations.getLargeFaceListFaces;
+  }
+
+  @operationGroup
+  interface PersonGroup {
+    create is PersonGroupOperations.createPersonGroup;
+    delete is PersonGroupOperations.deletePersonGroup;
+    get is PersonGroupOperations.getPersonGroup;
+    update is PersonGroupOperations.updatePersonGroup;
+    getPersonGroups is PersonGroupOperations.getPersonGroups;
+    getTrainingStatus is PersonGroupOperations.getPersonGroupTrainingStatus;
+    train is PersonGroupOperations.trainPersonGroup;
+    createPerson is PersonGroupOperations.createPersonGroupPerson;
+    deletePerson is PersonGroupOperations.deletePersonGroupPerson;
+    getPerson is PersonGroupOperations.getPersonGroupPerson;
+    updatePerson is PersonGroupOperations.updatePersonGroupPerson;
+    getPersons is PersonGroupOperations.getPersonGroupPersons;
+    addFaceToPersonFromUrl is PersonGroupOperations.addPersonGroupPersonFaceFromUrl;
+    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+    addFaceToPerson is PersonGroupOperations.addPersonGroupPersonFace;
+    deleteFaceInPerson is PersonGroupOperations.deletePersonGroupPersonFace;
+    getFaceFromPerson is PersonGroupOperations.getPersonGroupPersonFace;
+    updateFaceInPerson is PersonGroupOperations.updatePersonGroupPersonFace;
+  }
+
+  @operationGroup
+  interface LargePersonGroup {
+    create is PersonGroupOperations.createLargePersonGroup;
+    delete is PersonGroupOperations.deleteLargePersonGroup;
+    get is PersonGroupOperations.getLargePersonGroup;
+    update is PersonGroupOperations.updateLargePersonGroup;
+    getLargePersonGroups is PersonGroupOperations.getLargePersonGroups;
+    getTrainingStatus is PersonGroupOperations.getLargePersonGroupTrainingStatus;
+    train is PersonGroupOperations.trainLargePersonGroup;
+    createPerson is PersonGroupOperations.createLargePersonGroupPerson;
+    deletePerson is PersonGroupOperations.deleteLargePersonGroupPerson;
+    getPerson is PersonGroupOperations.getLargePersonGroupPerson;
+    updatePerson is PersonGroupOperations.updateLargePersonGroupPerson;
+    getPersons is PersonGroupOperations.getLargePersonGroupPersons;
+    addFaceToPersonFromUrl is PersonGroupOperations.addLargePersonGroupPersonFaceFromUrl;
+    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+    addFaceToPerson is PersonGroupOperations.addLargePersonGroupPersonFace;
+    deleteFaceInPerson is PersonGroupOperations.deleteLargePersonGroupPersonFace;
+    getFaceFromPerson is PersonGroupOperations.getLargePersonGroupPersonFace;
+    updateFaceInPerson is PersonGroupOperations.updateLargePersonGroupPersonFace;
+  }
+
+  @operationGroup
+  interface PersonDirectory {
+    createPerson is PersonDirectoryOperations.createPerson;
+    deletePerson is PersonDirectoryOperations.deletePerson;
+    getPerson is PersonDirectoryOperations.getPerson;
+    updatePerson is PersonDirectoryOperations.updatePerson;
+    getPersons is PersonDirectoryOperations.getPersons;
+    getDynamicPersonGroupReferences is PersonDirectoryOperations.getDynamicPersonGroupReferences;
+    addFaceToPersonFromUrl is PersonDirectoryOperations.addPersonFaceFromUrl;
+    #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+    addFaceToPerson is PersonDirectoryOperations.addPersonFace;
+    deleteFaceInPerson is PersonDirectoryOperations.deletePersonFace;
+    getFaceFromPerson is PersonDirectoryOperations.getPersonFace;
+    updateFaceInPerson is PersonDirectoryOperations.updatePersonFace;
+    getFaceFromPersons is PersonDirectoryOperations.getPersonFaces;
+
+    createDynamicPersonGroupWithPerson is PersonDirectoryOperations.createDynamicPersonGroupWithPerson;
+    createDynamicPersonGroup is PersonDirectoryOperations.createDynamicPersonGroup;
+    deleteDynamicPersonGroup is PersonDirectoryOperations.deleteDynamicPersonGroup;
+    getDynamicPersonGroup is PersonDirectoryOperations.getDynamicPersonGroup;
+    updateDynamicPersonGroupWithPersonChanges is PersonDirectoryOperations.updateDynamicPersonGroupWithPersonChanges;
+    updateDynamicPersonGroup is PersonDirectoryOperations.updateDynamicPersonGroup;
+    getDynamicPersonGroups is PersonDirectoryOperations.getDynamicPersonGroups;
+    getDynamicPersonGroupPersons is PersonDirectoryOperations.getDynamicPersonGroupPersons;
+  }
 }
 
 @client({
