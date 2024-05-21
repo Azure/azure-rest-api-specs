@@ -20,9 +20,9 @@ interface AcatOperations {
    * @param Response The response or union of responses for success.
    * @param ErrorResponse The error response.
    */
-/**
- * Base template for Acat report PUT Operations.
- */
+  /**
+   * Base template for Acat report PUT Operations.
+   */
   @doc("Base template for Acat report PUT Operations.")
   AcatCreateOperation<
     HttpParameters extends {},
@@ -31,6 +31,7 @@ interface AcatOperations {
     ErrorResponse extends {}
   >(
     ...HttpParameters,
+
     /** The body parameters for the operation. */
     @doc("Resource create parameters.") @bodyRoot parameters: BodyParameter,
   ): Response | ErrorResponse;

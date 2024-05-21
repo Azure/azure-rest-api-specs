@@ -6,7 +6,6 @@ import "@typespec/rest";
 import "../models/models.tsp";
 import "../operations.tsp";
 
-
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -156,7 +155,6 @@ interface ReportResources {
     Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
   >;
 }
-
 
 @@doc(ReportResources.createOrUpdate::parameters.parameters,
   "Parameters for the create or update operation"

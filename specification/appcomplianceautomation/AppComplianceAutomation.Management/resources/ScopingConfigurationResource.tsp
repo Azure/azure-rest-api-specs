@@ -27,7 +27,8 @@ namespace Microsoft.AppComplianceAutomation;
 @Azure.ResourceManager.Private.armResourceInternal(
   ScopingConfigurationProperties
 )
-model ScopingConfigurationResource extends Azure.ResourceManager.Foundations.ProxyResource {
+model ScopingConfigurationResource
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   @key("scopingConfiguration")
   @segment("scopingConfigurations")
   @visibility("read")
@@ -79,4 +80,3 @@ interface ScopingConfigurationResources {
 @@doc(ScopingConfigurationResources.createOrUpdate::parameters.parameters,
   "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using 'default' as the name."
 );
-

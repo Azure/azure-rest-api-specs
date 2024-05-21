@@ -36,15 +36,12 @@ model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @path
   name: string;
 
-
-
   /**
    * Webhook property.
    */
   @extension("x-ms-client-flatten", true)
   @extension("x-ms-client-name", "properties")
   properties: WebhookProperties; // Replace 'WebhookProperties' with the actual type
-  
 }
 
 @armResourceOperations
@@ -74,7 +71,8 @@ interface WebhookResources {
     WebhookResource,
     WebhookResourcePatch,
     Response = ArmResponse<WebhookResource>,
-    Error = ErrorResponse>;
+    Error = ErrorResponse
+  >;
 
   /**
    * Delete an AppComplianceAutomation webhook.
