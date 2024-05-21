@@ -1,3 +1,6 @@
+parameters:  
+  "service-dir":
+    default: "sdk/databasewatcher"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -7,6 +10,10 @@ options:
     examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Watcher.json"
     use-read-only-status-schema: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-databasewatcher"
+    package-name: "{package-dir}"
+    flavor: "azure"
 linter:
   extends:
     - "@azure-tools/typespec-azure-resource-manager/all"
