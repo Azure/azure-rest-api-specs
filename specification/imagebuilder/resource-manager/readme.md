@@ -142,3 +142,11 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: imagebuilder.json
+    reason: Needed value. Exception provided in API Design review meeting.
