@@ -139,7 +139,7 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(TextTranslation.TranslateParameters.from,
-  "fromLanguage",
+  "from_language",
   "python"
 );
 
