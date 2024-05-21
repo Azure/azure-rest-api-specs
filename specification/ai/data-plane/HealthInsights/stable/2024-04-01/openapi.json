@@ -39,13 +39,19 @@
       "AzureKey": []
     },
     {
-      "AADToken": [
+      "EntraIdToken": [
         "https://cognitiveservices.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "AADToken": {
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "The secret key for your Azure Cognitive Services subscription.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "EntraIdToken": {
       "type": "oauth2",
       "description": "The Azure Active Directory OAuth2 Flow",
       "flow": "accessCode",
@@ -54,12 +60,6 @@
         "https://cognitiveservices.azure.com/.default": ""
       },
       "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
-    },
-    "AzureKey": {
-      "type": "apiKey",
-      "description": "The secret key for your Azure Cognitive Services subscription.",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
     }
   },
   "tags": [
@@ -178,15 +178,15 @@
               "$ref": "#/definitions/RadiologyInsightsJob"
             },
             "headers": {
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -196,15 +196,15 @@
               "$ref": "#/definitions/RadiologyInsightsJob"
             },
             "headers": {
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -293,6 +293,10 @@
           "description": "Inner error."
         }
       }
+    },
+    "Azure.Core.RequestIdResponseHeader": {
+      "type": "object",
+      "description": "Provides the 'x-ms-request-id' header to enable request correlation in responses."
     },
     "ClinicalDocumentType": {
       "type": "string",
@@ -2123,10 +2127,23 @@
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
+        },
+        "requestId": {
+          "type": "object",
+          "description": "An opaque, globally-unique, server-generated string identifier for the request.",
+          "properties": {
+            "response": {
+              "$ref": "#/definitions/Azure.Core.RequestIdResponseHeader"
+            }
+          },
+          "required": [
+            "response"
+          ]
         }
       },
       "required": [
-        "error"
+        "error",
+        "requestId"
       ]
     },
     "ImagingProcedure": {

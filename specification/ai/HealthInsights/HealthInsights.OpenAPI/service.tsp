@@ -16,7 +16,7 @@ using TypeSpec.Versioning;
     endpoint: url,
   }
 )
-@useAuth(AzureKey | AADToken)
+@useAuth(AzureKey | EntraIdToken)
 namespace AzureHealthInsights;
 
 @doc("The secret key for your Azure Cognitive Services subscription.")
@@ -25,15 +25,8 @@ model AzureKey
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style for AAD"
 @doc("The Azure Active Directory OAuth2 Flow")
-model AADToken
-  is OAuth2Auth<[
-    {
-      type: OAuth2FlowType.authorizationCode;
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
-      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token";
-      scopes: ["https://cognitiveservices.azure.com/.default"];
-    }
-  ]>;
+model EntraIdToken
+  is Azure.Core.AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum ApiVersion {
