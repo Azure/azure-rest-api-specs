@@ -34,8 +34,8 @@ namespace Customizations{
     // Other Language specific customizations
     @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "csharp")
     interface ClientSender {
-    publishCloudEvent is publishCloudEvent;
-    publishCloudEvents is publishCloudEvents;
+    send is publishCloudEvent;
+    sendEvents is publishCloudEvents;
     }
 
     @client({
@@ -52,8 +52,8 @@ namespace Customizations{
 
     @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "js")
     interface ClientSender1 {
-    publishCloudEvent is publishCloudEvent;
-    publishCloudEvents is publishCloudEvents;
+    send is publishCloudEvent;
+    sendEvents is publishCloudEvents;
     }
 
     @client({
@@ -70,8 +70,8 @@ namespace Customizations{
 
     @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "java")
     interface ClientSender2 {
-    publishCloudEvent is publishCloudEvent;
-    publishCloudEvents is publishCloudEvents;
+    send is publishCloudEvent;
+    sendEvents is publishCloudEvents;
     }
 
     @client({
@@ -88,8 +88,8 @@ namespace Customizations{
 
     @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "go")
     interface ClientSender3 {
-    publishCloudEvent is publishCloudEvent;
-    publishCloudEvents is publishCloudEvents;
+    send is publishCloudEvent;
+    sendEvents is publishCloudEvents;
     }
 
     @client({
