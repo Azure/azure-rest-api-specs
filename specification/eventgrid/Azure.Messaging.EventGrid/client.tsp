@@ -137,3 +137,5 @@ namespace Customizations{
 @@clientName(ReleaseDelay.By3600Seconds, "OneHour");
 @@clientName(ReleaseDelay.By600Seconds, "TenMinutes");
 @@clientName(ReleaseDelay.By60Seconds, "OneMinute");
+
+@@clientName(ReceiveResult.value, "details");
