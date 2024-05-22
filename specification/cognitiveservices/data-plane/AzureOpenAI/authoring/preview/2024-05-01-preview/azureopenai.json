@@ -1848,6 +1848,40 @@
         }
       }
     },
+    "OperationState": {
+      "title": "OperationState",
+      "description": "The state of a job or item.",
+      "enum": [
+        "notRunning",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "notRunning",
+            "description": "The operation is not yet queued to be processed in the future."
+          },
+          {
+            "value": "running",
+            "description": "The operation has started to be processed."
+          },
+          {
+            "value": "succeeded",
+            "description": "The operation has successfully be processed and is ready for consumption."
+          },
+          {
+            "value": "failed",
+            "description": "The operation has completed processing with a failure and cannot be further consumed."
+          }
+        ]
+      }
+    },
     "Purpose": {
       "title": "Purpose",
       "description": "The intended purpose of the uploaded documents. Use \"fine-tune\" for fine-tuning. This allows us to validate the format of the uploaded file.",
