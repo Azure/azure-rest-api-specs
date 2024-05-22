@@ -2714,6 +2714,11 @@
             "$ref": "#/definitions/MonitoredSubscription"
           },
           "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource",
+          "readOnly": true
         }
       }
     },
@@ -2738,6 +2743,7 @@
     "MonitoredSubscriptionProperties": {
       "description": "The request to update subscriptions needed to be monitored by the Elastic monitor resource.",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "name": {
           "description": "Name of the monitored subscription resource.",
@@ -2767,6 +2773,10 @@
           "items": {
             "$ref": "#/definitions/MonitoredSubscriptionProperties"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
         }
       }
     },
