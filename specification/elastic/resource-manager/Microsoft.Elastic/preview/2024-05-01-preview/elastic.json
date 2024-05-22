@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Elastic",
-    "version": "2024-01-01-preview"
+    "version": "2024-05-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -450,7 +450,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Monitors_GetMonitoredSubscriptions": {
@@ -563,9 +563,6 @@
               "$ref": "#/definitions/MonitoredSubscriptionProperties"
             }
           },
-          "202": {
-            "description": "Success"
-          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -625,6 +622,11 @@
             }
           },
           "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "description": "Success"
           },
           "default": {
@@ -672,10 +674,12 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
-          },
           "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "description": "Success"
           },
           "204": {
@@ -3513,6 +3517,7 @@
       "description": "Monitor resource name",
       "required": true,
       "type": "string",
+      "pattern": "^.*$",
       "x-ms-parameter-location": "method"
     },
     "RuleSetNameParameter": {
