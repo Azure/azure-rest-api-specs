@@ -169,7 +169,7 @@
     "/indexes/{name}:getNextVersion": {
       "post": {
         "operationId": "Indexes_GetNextVersion",
-        "description": "Get next Index version. This returns the latest version + 1.",
+        "description": "Get next Index version, defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -503,7 +503,7 @@
     "/prompts/{name}:getNextVersion": {
       "post": {
         "operationId": "Prompts_GetNextVersion",
-        "description": "Get next Prompt version. This returns the latest version + 1.",
+        "description": "Get next Prompt version, defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"

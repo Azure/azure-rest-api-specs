@@ -83,7 +83,7 @@ model PagedPrompt {
 
 @doc("Next version definition.")
 model VersionInfo {
-  @doc("Next version as defined by the server.")
+  @doc("Next version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.")
   nextVersion?: int64;
 
   @doc("Current latest version of the resource.")
