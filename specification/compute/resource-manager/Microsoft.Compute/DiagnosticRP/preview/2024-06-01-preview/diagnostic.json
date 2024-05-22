@@ -3,7 +3,7 @@
   "info": {
     "title": "ComputeDiagnosticResourceProviderClient",
     "description": "The Compute Diagnostic Resource Provider Client",
-    "version": "2024-06-01-preview"
+    "version": "2024-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -401,93 +401,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/placementScores/spot/generate": {
-      "get": {
-        "tags": [
-          "placementscores_spot"
-        ],
-        "operationId": "SpotPlacementScores_Get",
-        "description": "Gets Spot Placement Scores metadata.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ComputeDiagnosticBase"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the get call failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the metadata of Spot Placement Scores.": {
-            "$ref": "./examples/GetSpotPlacementScores.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/placementScores/spot/generate": {
-      "post": {
-        "tags": [
-          "spotPlacementScores"
-        ],
-        "operationId": "SpotPlacementScores_Post",
-        "description": "Generates placement scores for Spot VM skus.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "spotPlacementScoresInput",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SpotPlacementScoresInput"
-            },
-            "description": "SpotPlacementScores object supplied in the body of the Post spot placement scores operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SpotPlacementScoresResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Returns spot VM placement scores for given configurations.": {
-            "$ref": "./examples/GenerateSpotPlacementScores.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -733,71 +646,6 @@
         }
       },
       "description": "SpotPlacementRecommender API response."
-    },
-    "SpotPlacementScoresInput": {
-      "type": "object",
-      "properties": {
-        "desiredLocations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The desired regions"
-        },
-        "desiredSizes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSize"
-          },
-          "description": "The desired resource SKUs."
-        },
-        "desiredCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Desired instance count per region/zone based on the scope."
-        },
-        "availabilityZones": {
-          "type": "boolean",
-          "description": "Defines if the scope is zonal or regional."
-        }
-      },
-      "description": "SpotPlacementScores API Input."
-    },
-    "SpotPlacementScoresResponse": {
-      "type": "object",
-      "properties": {
-        "desiredLocations": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The desired regions"
-        },
-        "desiredSizes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSize"
-          },
-          "description": "The desired resource SKUs."
-        },
-        "desiredCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Desired instance count per region/zone based on the scope."
-        },
-        "availabilityZones": {
-          "type": "boolean",
-          "description": "Defines if the scope is zonal or regional."
-        },
-        "placementScores": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PlacementScore"
-          },
-          "description": "The spot placement scores."
-        }
-      },
-      "description": "SpotPlacementScores API response."
     },
     "ResourceSize": {
       "type": "object",
