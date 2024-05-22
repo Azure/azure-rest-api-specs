@@ -15,7 +15,7 @@
         "description": "This method creates an video analysis task, which can then be used to generate video insights.",
         "operationId": "CreateTask",
         "consumes": [
-          "application/json-patch+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -55,7 +55,8 @@
           "CreateTask_MaximumSet_Gen": {
             "$ref": "./examples/CreateTask_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
