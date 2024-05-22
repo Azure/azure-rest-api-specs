@@ -47,11 +47,7 @@
           "description": "Resource Etag."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
+      "$ref": "#/definitions/Resource"
     },
     "TrackedResource": {
       "title": "Tracked Resource",
@@ -82,21 +78,13 @@
       "required": [
         "location"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
+      "$ref": "#/definitions/Resource"
     },
     "ProxyResource": {
       "title": "Proxy Resource",
       "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
+      "$ref": "#/definitions/Resource"
     },
     "ResourceModelWithAllowedPropertySet": {
       "description": "The resource model definition containing the full set of allowed properties for a resource. Except properties bag, there cannot be a top level property outside of this set.",
@@ -126,32 +114,16 @@
           "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. "
         },
         "identity": {
-          "allOf": [
-            {
-              "$ref": "./managedidentity.json#/definitions/ManagedServiceIdentity"
-            }
-          ]
+          "$ref": "./managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "sku": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/Sku"
-            }
-          ]
+          "$ref": "#/definitions/Sku"
         },
         "plan": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/Plan"
-            }
-          ]
+          "$ref": "#/definitions/Plan" 
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        }
-      ],
+      "$ref": "#/definitions/TrackedResource",
       "x-ms-azure-resource": true
     },
     "SkuTier": {
