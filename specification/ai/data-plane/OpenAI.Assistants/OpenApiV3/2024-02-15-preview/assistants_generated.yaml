@@ -940,12 +940,14 @@ components:
       description: The status of an assistant deletion operation.
     AssistantStreamEvent:
       anyOf:
-        - $ref: '#/components/schemas/ThreadStreamEvent'
-        - $ref: '#/components/schemas/RunStreamEvent'
-        - $ref: '#/components/schemas/RunStepStreamEvent'
-        - $ref: '#/components/schemas/MessageStreamEvent'
-        - $ref: '#/components/schemas/ErrorEvent'
-        - $ref: '#/components/schemas/DoneEvent'
+        - type: string
+        - anyOf:
+            - $ref: '#/components/schemas/ThreadStreamEvent'
+            - $ref: '#/components/schemas/RunStreamEvent'
+            - $ref: '#/components/schemas/RunStepStreamEvent'
+            - $ref: '#/components/schemas/MessageStreamEvent'
+            - $ref: '#/components/schemas/ErrorEvent'
+            - $ref: '#/components/schemas/DoneEvent'
       description: |-
         Each event in a server-sent events stream has an `event` and `data` property:
 

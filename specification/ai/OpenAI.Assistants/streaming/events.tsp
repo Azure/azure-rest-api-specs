@@ -23,6 +23,7 @@ We may add additional events over time, so we recommend handling unknown events 
 in your code.
 """)
 union AssistantStreamEvent {
+  string,
 
     | ThreadStreamEvent
     | RunStreamEvent
