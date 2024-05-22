@@ -11,11 +11,11 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Fabric;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" ""
+#suppress "@typespec/http/metadata-ignored" ""
 @doc("PrivateEndpointConnection Object")
 @parentResource(PrivateLinkServiceForFabric)
 model PrivateEndpointConnection
@@ -122,8 +122,8 @@ interface CustomizedArmResourceOperation {
   @armResourceCreateOrUpdate(Resource)
   @put
   ArmResourceUpdateSync<
-    Resource extends ArmResource,
-    BaseParameters = DefaultBaseParameters<Resource>,
+    Resource extends Azure.ResourceManager.Foundations.Resource,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
     Parameters extends {} = {},
     Response extends {} = ArmResourceUpdatedResponse<Resource>,
     Error extends {} = ErrorResponse
@@ -138,8 +138,8 @@ interface CustomizedArmResourceOperation {
   @doc("Delete a {name}", Resource)
   @armResourceDelete(Resource)
   ArmResourceDeleteNoOkAsync<
-    Resource extends ArmResource,
-    BaseParameters = DefaultBaseParameters<Resource>,
+    Resource extends Azure.ResourceManager.Foundations.Resource,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
     LroHeaders extends TypeSpec.Reflection.Model = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader,
     Parameters extends {} = {},

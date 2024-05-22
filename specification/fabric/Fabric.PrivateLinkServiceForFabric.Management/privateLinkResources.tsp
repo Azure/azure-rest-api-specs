@@ -11,14 +11,15 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Fabric;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" ""
+#suppress "@typespec/http/metadata-ignored" ""
 @doc("PrivateLinkResource Object")
 @parentResource(PrivateLinkServiceForFabric)
-model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+model PrivateLinkResource
+  is ProxyResource<PrivateLinkResourceProperties> {
   @doc("Name")
   @key("privateLinkResourceName")
   @path

@@ -11,7 +11,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Fabric;
 
@@ -77,7 +76,7 @@ model ArmOperationStatus {
 
   @doc("Operation Error Detail")
   @visibility("read")
-  error?: ErrorDetail;
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
