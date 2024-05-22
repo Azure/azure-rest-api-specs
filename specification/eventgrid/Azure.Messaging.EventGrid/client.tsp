@@ -86,14 +86,14 @@ namespace Customizations{
     renewLock is renewCloudEventLocks;
     }
 
-    @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "go")
+    @client({ name: "SenderClient", service: Microsoft.EventGrid}, "go")
     interface ClientSender3 {
     send is publishCloudEvent;
     sendEvents is publishCloudEvents;
     }
 
     @client({
-    name: "EventGridReceiverClient",
+    name: "ReceiverClient",
     service: Microsoft.EventGrid
     }, "go")
     interface ClientReceiver3 {
