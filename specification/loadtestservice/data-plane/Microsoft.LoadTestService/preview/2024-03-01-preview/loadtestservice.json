@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Load Testing",
-    "version": "2022-11-01",
+    "version": "2024-03-01-preview",
     "description": "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
     "x-typespec-generated": [
       {
@@ -1368,7 +1368,10 @@
             "enum": [
               "JMX_FILE",
               "USER_PROPERTIES",
-              "ADDITIONAL_ARTIFACTS"
+              "ADDITIONAL_ARTIFACTS",
+              "ZIPPED_ARTIFACTS",
+              "URL_TEST_CONFIG_JSON",
+              "TEST_SCRIPT"
             ],
             "x-ms-enum": {
               "name": "FileType",
@@ -1388,6 +1391,21 @@
                   "name": "ADDITIONAL_ARTIFACTS",
                   "value": "ADDITIONAL_ARTIFACTS",
                   "description": "If the file is not among any of the other supported file types."
+                },
+                {
+                  "name": "ZIPPED_ARTIFACTS",
+                  "value": "ZIPPED_ARTIFACTS",
+                  "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
+                },
+                {
+                  "name": "URL_TEST_CONFIG_JSON",
+                  "value": "URL_TEST_CONFIG_JSON",
+                  "description": "If the file is a JSON config file to define the requests for a URL test."
+                },
+                {
+                  "name": "TEST_SCRIPT",
+                  "value": "TEST_SCRIPT",
+                  "description": "If the file is a test script."
                 }
               ]
             }
@@ -1718,6 +1736,45 @@
         }
       }
     },
+    "ArtifactsContainerInfo": {
+      "type": "object",
+      "description": "Artifacts container info.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "This is a SAS URI to an Azure Storage Container that contains the test run artifacts."
+        },
+        "expireDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry time of the container (RFC 3339 literal format)"
+        }
+      }
+    },
+    "AutoStopCriteria": {
+      "type": "object",
+      "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window.",
+      "properties": {
+        "autoStopDisabled": {
+          "type": "boolean",
+          "description": "Whether auto-stop should be disabled. The default value is false.",
+          "default": false
+        },
+        "errorRate": {
+          "type": "number",
+          "format": "float",
+          "description": "Threshold percentage of errors on which test run should be automatically stopped. Allowed values are in range of 0.0-100.0",
+          "default": 90
+        },
+        "errorRateTimeWindowInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time window during which the error percentage should be evaluated in seconds.",
+          "default": 60
+        }
+      }
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -1850,6 +1907,11 @@
       "type": "object",
       "description": "Metrics dimension values.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The dimension name",
+          "readOnly": true
+        },
         "value": {
           "type": "array",
           "description": "The dimension value",
@@ -1923,7 +1985,10 @@
       "enum": [
         "JMX_FILE",
         "USER_PROPERTIES",
-        "ADDITIONAL_ARTIFACTS"
+        "ADDITIONAL_ARTIFACTS",
+        "ZIPPED_ARTIFACTS",
+        "URL_TEST_CONFIG_JSON",
+        "TEST_SCRIPT"
       ],
       "x-ms-enum": {
         "name": "FileType",
@@ -1943,6 +2008,21 @@
             "name": "ADDITIONAL_ARTIFACTS",
             "value": "ADDITIONAL_ARTIFACTS",
             "description": "If the file is not among any of the other supported file types."
+          },
+          {
+            "name": "ZIPPED_ARTIFACTS",
+            "value": "ZIPPED_ARTIFACTS",
+            "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
+          },
+          {
+            "name": "URL_TEST_CONFIG_JSON",
+            "value": "URL_TEST_CONFIG_JSON",
+            "description": "If the file is a JSON config file to define the requests for a URL test."
+          },
+          {
+            "name": "TEST_SCRIPT",
+            "value": "TEST_SCRIPT",
+            "description": "If the file is a test script."
           }
         ]
       }
@@ -1969,6 +2049,14 @@
         "optionalLoadTestConfig": {
           "$ref": "#/definitions/OptionalLoadTestConfig",
           "description": "Configuration for quick load test"
+        },
+        "regionalLoadTestConfig": {
+          "type": "array",
+          "description": "Region distribution configuration for the load test.",
+          "items": {
+            "$ref": "#/definitions/RegionalConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2212,6 +2300,16 @@
         "endpointUrl": {
           "type": "string",
           "description": "Test URL. Provide the complete HTTP URL. For example, https://contoso-app.azurewebsites.net/login"
+        },
+        "requestsPerSecond": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Target throughput (requests per second). This may not be necessarily achieved. The actual throughput will be lower if the application is not capable of handling it."
+        },
+        "maxResponseTimeInMs": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum response time in milliseconds of the API/endpoint."
         },
         "virtualUsers": {
           "type": "integer",
@@ -2540,6 +2638,25 @@
         }
       }
     },
+    "RegionalConfiguration": {
+      "type": "object",
+      "description": "Region distribution configuration for the load test.",
+      "properties": {
+        "engineInstances": {
+          "type": "integer",
+          "format": "int32",
+          "description": "  The number of engine instances to execute load test in specified region. Supported values are in range of 1-400."
+        },
+        "region": {
+          "type": "string",
+          "description": "Azure region name.\nThe region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as \"eastus\".\nThe region name must match one of the strings in the \"Name\" column returned from running the \"az account list-locations -o table\" Azure CLI command."
+        }
+      },
+      "required": [
+        "engineInstances",
+        "region"
+      ]
+    },
     "ResourceMetric": {
       "type": "object",
       "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
@@ -2774,6 +2891,10 @@
           "$ref": "#/definitions/PassFailCriteria",
           "description": "Pass fail criteria for a test."
         },
+        "autoStopCriteria": {
+          "$ref": "#/definitions/AutoStopCriteria",
+          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
+        },
         "secrets": {
           "type": "object",
           "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the\nsecret is stored in an Azure Key Vault, the value should be the secret\nidentifier and the type should be AKV_SECRET_URI. If the secret is stored\nelsewhere, the secret value should be provided directly and the type should be\nSECRET_VALUE.",
@@ -2795,6 +2916,10 @@
         "loadTestConfiguration": {
           "$ref": "#/definitions/LoadTestConfiguration",
           "description": "The load test configuration."
+        },
+        "baselineTestRunId": {
+          "type": "string",
+          "description": "Id of the test run to be marked as baseline to view trends of client-side metrics from recent test runs"
         },
         "inputArtifacts": {
           "$ref": "#/definitions/TestInputArtifacts",
@@ -2823,6 +2948,14 @@
         "subnetId": {
           "type": "string",
           "description": "Subnet ID on which the load test instances should run."
+        },
+        "kind": {
+          "$ref": "#/definitions/TestKind",
+          "description": "Kind of test."
+        },
+        "publicIPDisabled": {
+          "type": "boolean",
+          "description": "Inject load test engines without deploying public IP for outbound access"
         },
         "keyvaultReferenceIdentityType": {
           "type": "string",
@@ -2923,6 +3056,10 @@
           "$ref": "#/definitions/PassFailCriteria",
           "description": "Pass fail criteria for a test."
         },
+        "autoStopCriteria": {
+          "$ref": "#/definitions/AutoStopCriteria",
+          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
+        },
         "secrets": {
           "type": "object",
           "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the\nsecret is stored in an Azure Key Vault, the value should be the secret\nidentifier and the type should be AKV_SECRET_URI. If the secret is stored\nelsewhere, the secret value should be provided directly and the type should be\nSECRET_VALUE.",
@@ -2945,6 +3082,10 @@
           "$ref": "#/definitions/LoadTestConfiguration",
           "description": "The load test configuration."
         },
+        "baselineTestRunId": {
+          "type": "string",
+          "description": "Id of the test run to be marked as baseline to view trends of client-side metrics from recent test runs"
+        },
         "description": {
           "type": "string",
           "description": "The test description.",
@@ -2959,6 +3100,14 @@
         "subnetId": {
           "type": "string",
           "description": "Subnet ID on which the load test instances should run."
+        },
+        "kind": {
+          "$ref": "#/definitions/TestKind",
+          "description": "Kind of test."
+        },
+        "publicIPDisabled": {
+          "type": "boolean",
+          "description": "Inject load test engines without deploying public IP for outbound access"
         },
         "keyvaultReferenceIdentityType": {
           "type": "string",
@@ -3030,6 +3179,10 @@
           "$ref": "#/definitions/TestFileInfo",
           "description": "File info"
         },
+        "urlTestConfigFileInfo": {
+          "$ref": "#/definitions/TestFileInfo",
+          "description": "The config json file for url based test"
+        },
         "additionalFileInfo": {
           "type": "array",
           "description": "Additional supported files for the test run",
@@ -3039,6 +3192,36 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
+      }
+    },
+    "TestKind": {
+      "type": "string",
+      "description": "Test kind",
+      "enum": [
+        "URL",
+        "JMX",
+        "Locust"
+      ],
+      "x-ms-enum": {
+        "name": "TestKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "URL",
+            "value": "URL",
+            "description": "URL Test"
+          },
+          {
+            "name": "JMX",
+            "value": "JMX",
+            "description": "JMX Test"
+          },
+          {
+            "name": "Locust",
+            "value": "Locust",
+            "description": "Locust Test"
+          }
+        ]
       }
     },
     "TestRun": {
@@ -3056,6 +3239,10 @@
         "passFailCriteria": {
           "$ref": "#/definitions/PassFailCriteria",
           "description": "Pass fail criteria for a test."
+        },
+        "autoStopCriteria": {
+          "$ref": "#/definitions/AutoStopCriteria",
+          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
         },
         "secrets": {
           "type": "object",
@@ -3087,6 +3274,14 @@
         "testRunStatistics": {
           "type": "object",
           "description": "Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.\nThe sampler name is the same as the name mentioned in the test script.\nSampler name \"Total\" represents the aggregated statistics of all the samplers.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestRunStatistics"
+          },
+          "readOnly": true
+        },
+        "regionalStatistics": {
+          "type": "object",
+          "description": "Regional statistics. Key is the Azure region name and value is the test run statistics.\nThe region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as \"eastus\".\nThe region name must match one of the strings in the \"Name\" column returned from running the \"az account list-locations -o table\" Azure CLI command.",
           "additionalProperties": {
             "$ref": "#/definitions/TestRunStatistics"
           },
@@ -3166,6 +3361,16 @@
         "subnetId": {
           "type": "string",
           "description": "Subnet ID on which the load test instances should run.",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/TestKind",
+          "description": "Type of test.",
+          "readOnly": true
+        },
+        "publicIPDisabled": {
+          "type": "boolean",
+          "description": "Inject load test engines without deploying public IP for outbound access",
           "readOnly": true
         },
         "createdDateTime": {
@@ -3274,6 +3479,10 @@
           "$ref": "#/definitions/PassFailCriteria",
           "description": "Pass fail criteria for a test."
         },
+        "autoStopCriteria": {
+          "$ref": "#/definitions/AutoStopCriteria",
+          "description": "Auto stop criteria for a test. This will automatically stop a load test if the error percentage is high for a certain time window."
+        },
         "secrets": {
           "type": "object",
           "description": "Secrets can be stored in an Azure Key Vault or any other secret store. If the\nsecret is stored in an Azure Key Vault, the value should be the secret\nidentifier and the type should be AKV_SECRET_URI. If the secret is stored\nelsewhere, the secret value should be provided directly and the type should be\nSECRET_VALUE.",
@@ -3375,6 +3584,10 @@
           "$ref": "#/definitions/TestRunFileInfo",
           "description": "File info"
         },
+        "urlTestConfigFileInfo": {
+          "$ref": "#/definitions/TestRunFileInfo",
+          "description": "The config json file for url based test"
+        },
         "additionalFileInfo": {
           "type": "array",
           "description": "Additional supported files for the test run",
@@ -3397,6 +3610,10 @@
         "logsFileInfo": {
           "$ref": "#/definitions/TestRunFileInfo",
           "description": "File info"
+        },
+        "artifactsContainerInfo": {
+          "$ref": "#/definitions/ArtifactsContainerInfo",
+          "description": "The container for test run artifacts."
         }
       }
     },
