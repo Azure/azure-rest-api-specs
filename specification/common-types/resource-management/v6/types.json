@@ -128,7 +128,7 @@
         "identity": {
           "allOf": [
             {
-              "$ref": "#/definitions/Identity"
+              "$ref": "./managedidentity.json#/definitions/ManagedServiceIdentity"
             }
           ]
         },
@@ -196,35 +196,6 @@
       "required": [
         "name"
       ]
-    },
-    "Identity": {
-      "description": "Identity for the resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "format": "uuid",
-          "description": "The principal ID of resource identity. The value must be an UUID."
-        },
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "format": "uuid",
-          "description": "The tenant ID of resource. The value must be an UUID."
-        },
-        "type": {
-          "type": "string",
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        }
-      }
     },
     "Plan": {
       "type": "object",
