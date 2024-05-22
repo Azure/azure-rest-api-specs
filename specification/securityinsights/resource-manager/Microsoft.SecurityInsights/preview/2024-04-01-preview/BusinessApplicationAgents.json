@@ -779,19 +779,15 @@
     },
     "AgentSystem": {
       "description": "Describes the configuration of a system inside the agent.",
-      "required": [
-        "type"
-      ],
       "type": "object",
       "properties": {
-        "agentSystemName": {
+        "systemResourceName": {
           "type": "string"
         },
-        "type": {
-          "$ref": "#/definitions/AgentType"
+        "systemDisplayName": {
+          "type": "string"
         }
-      },
-      "discriminator": "type"
+      }
     },
     "AgentType": {
       "description": "Type of the agent",
@@ -885,30 +881,6 @@
         "secretSource": {
           "description": "The secret source of the agent.\r\nAzureKeyVault|EnvironmentVariable are the options",
           "$ref": "#/definitions/SecretSource"
-        },
-        "type": {
-          "$ref": "#/definitions/AgentType"
-        }
-      },
-      "x-ms-discriminator-value": "SAP"
-    },
-    "SapAgentSystem": {
-      "description": "Describes the configuration of an SAP system inside the agent.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AgentSystem"
-        }
-      ],
-      "properties": {
-        "sapSystemId": {
-          "type": "string"
-        },
-        "sapClientId": {
-          "type": "string"
-        },
-        "agentSystemName": {
-          "type": "string"
         },
         "type": {
           "$ref": "#/definitions/AgentType"
