@@ -5,6 +5,24 @@
     "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the people in an image.  It also has other features like categorizing the content of images, and describing an image with complete English sentences.",
     "version": "2024-03-01-preview"
   },
+  "security": [
+    {
+      "AzureAuth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AzureAuth": {
+      "type": "oauth2",
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "flow": "application",
+      "description": "Azure Active Directory OAuth2 Authentication",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
+    }
+  },
   "paths": {
     "/retrieval/indexes/{indexName}": {
       "put": {
@@ -12,10 +30,10 @@
           "IngestionApi"
         ],
         "summary": "Creates an index for the documents to be ingested.",
-        "description": "This method creates an index, which can then be used to ingest documents.\r\nAn index needs to be created before ingestion can be performed.",
+        "description": "This method creates an index, which can then be used to ingest documents.\r\nAn index needs to be created before ingestion can be performed.\nThis method will fail if the specified index already exists.",
         "operationId": "CreateIndex",
         "consumes": [
-          "application/json-patch+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -46,6 +64,17 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/GetIngestionIndexResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -89,6 +118,11 @@
           },
           "default": {
             "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -146,6 +180,11 @@
           },
           "default": {
             "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -182,6 +221,17 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -239,6 +289,11 @@
           },
           "default": {
             "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -303,6 +358,17 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/IngestionResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -371,6 +437,11 @@
           },
           "default": {
             "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -418,6 +489,11 @@
           },
           "default": {
             "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -485,6 +561,11 @@
           },
           "default": {
             "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -544,6 +625,11 @@
           },
           "default": {
             "description": "Error",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
