@@ -1329,6 +1329,45 @@
         }
       }
     },
+    "SmbStorage": {
+      "description": "SMB storage properties",
+      "type": "object",
+      "properties": {
+        "host": {
+          "description": "The host name or IP address of the SMB server.",
+          "type": "string"
+        },
+        "shareName": {
+          "description": "The path to the SMB shared folder.",
+          "type": "string"
+        },
+        "username": {
+          "description": "The user to log on to the SMB server.",
+          "type": "string"
+        },
+        "domain": {
+          "description": "The domain name for the user.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password for the user.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "accessMode": {
+          "description": "Access mode for storage",
+          "enum": [
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AccessMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "CertificateKeyVaultProperties": {
       "description": "Properties for a certificate stored in a Key Vault.",
       "type": "object",
