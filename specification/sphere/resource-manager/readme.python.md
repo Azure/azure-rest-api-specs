@@ -9,7 +9,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-sphere
 namespace: azure.mgmt.sphere
-package-version: 1.0.0b1
+package-version: 1.0.0b2
 clear-output-folder: true
 ```
 
