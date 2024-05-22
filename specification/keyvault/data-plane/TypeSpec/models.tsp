@@ -86,11 +86,23 @@ union DeletionRecoveryLevel {
  */
 union JsonWebKeyType {
   string,
+
+  /** Elliptic Curve. */
   EC: "EC",
+
+  /** Elliptic Curve with a private key which is not exportable from the HSM. */
   EC_HSM: "EC-HSM",
+
+  /** RSA (https://tools.ietf.org/html/rfc3447). */
   RSA: "RSA",
+
+  /** RSA with a private key which is not exportable from the HSM. */
   RSA_HSM: "RSA-HSM",
+
+  /** Octet sequence (used to represent symmetric keys). */
   oct: "oct",
+
+  /** Octet sequence with a private key which is not exportable from the HSM. */
   oct_HSM: "oct-HSM",
 }
 
@@ -99,38 +111,72 @@ union JsonWebKeyType {
  */
 union JsonWebKeyCurveName {
   string,
+
+  /** The NIST P-256 elliptic curve, AKA SECG curve SECP256R1. */
   P_256: "P-256",
+
+  /** The NIST P-384 elliptic curve, AKA SECG curve SECP384R1. */
   P_384: "P-384",
+
+  /** The NIST P-521 elliptic curve, AKA SECG curve SECP521R1. */
   P_521: "P-521",
+
+  /** The SECG SECP256K1 elliptic curve. */
   P_256K: "P-256K",
 }
 
+/**
+ * Supported usages of a certificate key.
+ */
 union KeyUsageType {
   string,
+
+  /** Indicates that the certificate key can be used as a digital signature. */
   digitalSignature: "digitalSignature",
+
+  /** Indicates that the certificate key can be used for authentication. */
   nonRepudiation: "nonRepudiation",
+
+  /** Indicates that the certificate key can be used for key encryption. */
   keyEncipherment: "keyEncipherment",
+
+  /** Indicates that the certificate key can be used for data encryption. */
   dataEncipherment: "dataEncipherment",
+
+  /** Indicates that the certificate key can be used to determine key agreement, such as a key created using the Diffie-Hellman key agreement algorithm. */
   keyAgreement: "keyAgreement",
+
+  /** Indicates that the certificate key can be used to sign certificates. */
   keyCertSign: "keyCertSign",
+
+  /** Indicates that the certificate key can be used to sign a certificate revocation list. */
   cRLSign: "cRLSign",
+
+  /** Indicates that the certificate key can be used for encryption only. */
   encipherOnly: "encipherOnly",
+
+  /** Indicates that the certificate key can be used for decryption only. */
   decipherOnly: "decipherOnly",
 }
 
 /**
  * The type of the action.
  */
-@fixed
-enum ActionType {
-  EmailContacts,
-  AutoRenew,
+union ActionType {
+  string,
+
+  /** A certificate policy that will email certificate contacts. */
+  EmailContacts: "EmailContacts",
+
+  /** A certificate policy that will auto-renew a certificate. */
+  AutoRenew: "AutoRenew",
 }
 
 /**
  * The certificate list result.
  */
-// model CertificateListResult is Azure.Core.Page<CertificateItem>;
+model CertificateListResult is Azure.Core.Page<CertificateItem>;
+
 /**
  * The certificate item containing certificate metadata.
  */
@@ -139,7 +185,8 @@ model CertificateItem {
   /**
    * Certificate identifier.
    */
-  @key
+  @visibility("read")
+  @key // The ID isn't really the key; it should be the certificate name, but we don't have this attribute on the model
   id: string;
 
   /**
@@ -162,7 +209,9 @@ model CertificateItem {
 /**
  * The certificate management attributes.
  */
-model CertificateAttributes extends Attributes {
+model CertificateAttributes {
+  ...Attributes;
+
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
    * enabled, otherwise 0.
@@ -257,7 +306,9 @@ model Error {
  * A Deleted Certificate consisting of its previous id, attributes and its tags,
  * as well as information on when it will be purged.
  */
-model DeletedCertificateBundle extends CertificateBundle {
+model DeletedCertificateBundle {
+  ...CertificateBundle;
+
   /**
    * The url of the recovery object, used to identify and recover the deleted
    * certificate.
@@ -282,14 +333,12 @@ model DeletedCertificateBundle extends CertificateBundle {
 /**
  * A certificate bundle consists of a certificate (X509) plus its attributes.
  */
-@resource("certificates")
 model CertificateBundle {
   /**
    * The certificate id.
    */
   @visibility("read")
-  @key
-  id: string;
+  id?: string;
 
   /**
    * The key id.
@@ -559,12 +608,14 @@ model IssuerParameters {
 /**
  * The contacts for the vault certificates.
  */
+@resource("certificates/contacts")
 model Contacts {
   /**
    * Identifier for the contacts collection.
    */
   @visibility("read")
-  id?: string;
+  @key
+  id: string;
 
   /**
    * The contact list for the vault certificates.
@@ -602,12 +653,12 @@ model CertificateIssuerListResult is Azure.Core.Page<CertificateIssuerItem>;
 /**
  * The certificate issuer item containing certificate issuer metadata.
  */
-@resource("issuers")
-@parentResource(CertificateItem)
+@resource("certificates/issuers")
 model CertificateIssuerItem {
   /**
    * Certificate Identifier.
    */
+  @visibility("read")
   @key
   id: string;
 
@@ -731,15 +782,12 @@ model IssuerAttributes {
 /**
  * The issuer for Key Vault certificate.
  */
-@resource("issuers")
-@parentResource(CertificateItem)
 model IssuerBundle {
   /**
    * Identifier for the issuer object.
    */
   @visibility("read")
-  @key
-  id: string;
+  id?: string;
 
   /**
    * The issuer provider.
@@ -961,15 +1009,11 @@ model CertificateMergeParameters {
 /**
  * The backup certificate result, containing the backup blob.
  */
-@resource("backup")
-@parentResource(CertificateItem)
 model BackupCertificateResult {
   /**
    * The backup blob containing the backed up certificate.
    */
-  @visibility("read")
-  @key
-  value: bytes;
+  value?: bytes;
 }
 
 /**
@@ -992,12 +1036,13 @@ model DeletedCertificateListResult is Azure.Core.Page<DeletedCertificateItem>;
  * The deleted certificate item containing metadata about the deleted certificate.
  */
 @resource("deletedcertificates")
-model DeletedCertificateItem extends CertificateItem {
+model DeletedCertificateItem {
+  ...CertificateItem;
+
   /**
    * The url of the recovery object, used to identify and recover the deleted
    * certificate.
    */
-  @key
   recoveryId: string;
 
   /**
