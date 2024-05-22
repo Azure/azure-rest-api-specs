@@ -9,7 +9,7 @@ using Microsoft.EventGrid;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 // NEED TO CHANGE THIS VERSION TO THE LATEST VERSION
-@TypeSpec.Versioning.useDependency(ServiceApiVersions.v2023_10_01_preview)
+@TypeSpec.Versioning.useDependency(ServiceApiVersions.v2024_06_01)
 namespace Customizations{
 
     // Python specific customizations
