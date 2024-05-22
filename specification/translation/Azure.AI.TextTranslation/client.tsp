@@ -184,10 +184,6 @@ using Azure.ClientGenerator.Core;
   "SuggestedSourceLanguage",
   "java"
 );
-@@clientName(TextTranslation.TranslateParameters.suggestedFrom,
-  "from_language",
-  "python"
-);
 
 @@clientName(TextTranslation.TranslatedTextAlignment.proj,
   "Projections",
