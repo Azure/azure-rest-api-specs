@@ -460,7 +460,9 @@
           },
           "enum": [
             "SQL",
-            "Windows"
+            "Windows",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
           ],
           "type": "string",
           "description": "The type used for authentication. Type: string."
@@ -481,6 +483,10 @@
         "alwaysEncryptedSettings": {
           "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
           "description": "Sql always encrypted properties."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
