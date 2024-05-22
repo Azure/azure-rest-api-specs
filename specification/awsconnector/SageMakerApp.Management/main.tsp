@@ -50,7 +50,7 @@ model SageMakerApp is TrackedResource<SageMakerAppProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SageMakerApp")
 model SageMakerAppProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsSageMakerAppProperties;
 
   ...AwsCommonProperties;
@@ -62,26 +62,26 @@ model SageMakerAppProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsSageMakerApp")
 model AwsSageMakerAppProperties {
-  @doc("Gets and sets the property appArn. The Amazon Resource Name (ARN) of the app.")
+  @doc("The Amazon Resource Name (ARN) of the app.")
   appArn?: string;
 
-  @doc("Gets and sets the property appName. The name of the app.")
+  @doc("The name of the app.")
   appName?: string;
 
-  @doc("Gets and sets the property appType. The type of app.")
+  @doc("The type of app.")
   appType?: AppType;
 
-  @doc("Gets and sets the property domainId. The domain ID.")
+  @doc("The domain ID.")
   domainId?: string;
 
-  @doc("Gets and sets the property resourceSpec. The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.")
+  @doc("The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.")
   resourceSpec?: ResourceSpec;
 
-  @doc("Gets and sets the property tags. A list of tags to apply to the app.")
+  @doc("A list of tags to apply to the app.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property userProfileName. The user profile name.")
+  @doc("The user profile name.")
   userProfileName?: string;
 }
 
@@ -111,13 +111,13 @@ union AppType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ResourceSpec")
 model ResourceSpec {
-  @doc("Gets and sets the property instanceType. The instance type that the image version runs on.")
+  @doc("The instance type that the image version runs on.")
   instanceType?: ResourceSpecInstanceType;
 
-  @doc("Gets and sets the property sageMakerImageArn. The ARN of the SageMaker image that the image version belongs to.")
+  @doc("The ARN of the SageMaker image that the image version belongs to.")
   sageMakerImageArn?: string;
 
-  @doc("Gets and sets the property sageMakerImageVersionArn. The ARN of the image version created on the instance.")
+  @doc("The ARN of the image version created on the instance.")
   sageMakerImageVersionArn?: string;
 }
 
@@ -321,10 +321,10 @@ union ResourceSpecInstanceType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 

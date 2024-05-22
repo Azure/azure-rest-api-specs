@@ -383,11 +383,11 @@
       "properties": {
         "arn": {
           "type": "string",
-          "description": "Gets and sets the property arn. The Amazon Resource Name (ARN) of the Amazon ECS cluster, such as arn:aws:ecs:us-east-2:123456789012:cluster/MyECSCluster."
+          "description": "Property arn"
         },
         "capacityProviders": {
           "type": "array",
-          "description": "Gets and sets the property capacityProviders.",
+          "description": "The short name of one or more capacity providers to associate with the cluster. A capacity provider must be associated with a cluster before it can be included as part of the default capacity provider strategy of the cluster or used in a capacity provider strategy when calling the [CreateService](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html) or [RunTask](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html) actions. If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must be created but not associated with another cluster. New Auto Scaling group capacity providers can be created with the [CreateCapacityProvider](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCapacityProvider.html) API operation. To use a FARGATElong capacity provider, specify either the ``FARGATE`` or ``FARGATE_SPOT`` capacity providers. The FARGATElong capacity providers are available to all accounts and only need to be associated with a cluster to be used. The [PutCapacityProvider](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProvider.html) API operation is used to update the list of available capacity providers for a cluster after the cluster is created.",
           "items": {
             "type": "string"
           },
@@ -395,11 +395,11 @@
         },
         "clusterName": {
           "type": "string",
-          "description": "Gets and sets the property clusterName. A user-generated string that you use to identify your cluster. If you don't specify a name, AWS CloudFormation generates a unique physical ID for the name."
+          "description": "A user-generated string that you use to identify your cluster. If you don't specify a name, CFNlong generates a unique physical ID for the name."
         },
         "clusterSettings": {
           "type": "array",
-          "description": "Gets and sets the property clusterSettings.",
+          "description": "The settings to use when creating a cluster. This parameter is used to turn on CloudWatch Container Insights for a cluster.",
           "items": {
             "$ref": "#/definitions/ClusterSettings"
           },
@@ -407,11 +407,11 @@
         },
         "configuration": {
           "$ref": "#/definitions/ClusterConfiguration",
-          "description": "Gets and sets the property configuration. The configurations to be set at cluster level."
+          "description": "The execute command configuration for the cluster. The execute command configuration for the cluster."
         },
         "defaultCapacityProviderStrategy": {
           "type": "array",
-          "description": "Gets and sets the property defaultCapacityProviderStrategy.",
+          "description": "The default capacity provider strategy for the cluster. When services or tasks are run in the cluster with no launch type or capacity provider strategy specified, the default capacity provider strategy is used.",
           "items": {
             "$ref": "#/definitions/CapacityProviderStrategyItem"
           },
@@ -419,11 +419,11 @@
         },
         "serviceConnectDefaults": {
           "$ref": "#/definitions/ServiceConnectDefaults",
-          "description": "Gets and sets the property serviceConnectDefaults. Service Connect Configuration default for all services or tasks within this cluster"
+          "description": "Use this parameter to set a default Service Connect namespace. After you set a default Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as client services in the namespace. This setting only applies to new services that set the ``enabled`` parameter to ``true`` in the ``ServiceConnectConfiguration``. You can set the namespace of each service individually in the ``ServiceConnectConfiguration`` to override this default parameter. Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*. Use this parameter to set a default Service Connect namespace. After you set a default Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as client services in the namespace. This setting only applies to new services that set the ``enabled`` parameter to ``true`` in the ``ServiceConnectConfiguration``. You can set the namespace of each service individually in the ``ServiceConnectConfiguration`` to override this default parameter. Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*."
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags.",
+          "description": "The metadata that you apply to the cluster to help you categorize and organize them. Each tag consists of a key and an optional value. You define both. The following basic restrictions apply to tags:  +  Maximum number of tags per resource - 50  +  For each resource, each tag key must be unique, and each tag key can have only one value.  +  Maximum key length - 128 Unicode characters in UTF-8  +  Maximum value length - 256 Unicode characters in UTF-8  +  If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.  +  Tag keys and values are case-sensitive.  +  Do not use ``aws:``, ``AWS:``, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -438,16 +438,16 @@
         "base": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property base."
+          "description": "The *base* value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a *base* defined. If no value is specified, the default value of ``0`` is used."
         },
         "capacityProvider": {
           "type": "string",
-          "description": "Gets and sets the property capacityProvider."
+          "description": "The short name of the capacity provider."
         },
         "weight": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property weight."
+          "description": "The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied. If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail. An example scenario for using weights is defining a strategy that contains two capacity providers and both have a weight of ``1``, then when the ``base`` is satisfied, the tasks will be split evenly across the two capacity providers. Using that same logic, if you specify a weight of ``1`` for *capacityProviderA* and a weight of ``4`` for *capacityProviderB*, then for every one task that's run using *capacityProviderA*, four tasks would use *capacityProviderB*."
         }
       }
     },
@@ -457,7 +457,7 @@
       "properties": {
         "executeCommandConfiguration": {
           "$ref": "#/definitions/ExecuteCommandConfiguration",
-          "description": "Gets and sets the property executeCommandConfiguration. The configuration for ExecuteCommand."
+          "description": "The details of the execute command configuration. The details of the execute command configuration."
         }
       }
     },
@@ -467,11 +467,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name."
+          "description": "The name of the cluster setting. The value is ``containerInsights`` ."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "The value to set for the cluster setting. The supported values are ``enabled`` and ``disabled``.  If you set ``name`` to ``containerInsights`` and ``value`` to ``enabled``, CloudWatch Container Insights will be on for the cluster, otherwise it will be off unless the ``containerInsights`` account setting is turned on. If a cluster value is specified, it will override the ``containerInsights`` value set with [PutAccountSetting](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSetting.html) or [PutAccountSettingDefault](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutAccountSettingDefault.html)."
         }
       }
     },
@@ -522,42 +522,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsEcsClusterProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -581,15 +581,15 @@
       "properties": {
         "kmsKeyId": {
           "type": "string",
-          "description": "Gets and sets the property kmsKeyId."
+          "description": "Specify an KMSlong key ID to encrypt the data between the local client and the container."
         },
         "logConfiguration": {
           "$ref": "#/definitions/ExecuteCommandLogConfiguration",
-          "description": "Gets and sets the property logConfiguration. The session logging configuration for ExecuteCommand."
+          "description": "The log configuration for the results of the execute command actions. The logs can be sent to CloudWatch Logs or an Amazon S3 bucket. When ``logging=OVERRIDE`` is specified, a ``logConfiguration`` must be provided. The log configuration for the results of the execute command actions. The logs can be sent to CloudWatch Logs or an Amazon S3 bucket."
         },
         "logging": {
           "type": "string",
-          "description": "Gets and sets the property logging."
+          "description": "The log setting to use for redirecting logs for your execute command results. The following log settings are available.  +   ``NONE``: The execute command session is not logged.  +   ``DEFAULT``: The ``awslogs`` configuration in the task definition is used. If no logging parameter is specified, it defaults to this value. If no ``awslogs`` log driver is configured in the task definition, the output won't be logged.  +   ``OVERRIDE``: Specify the logging details as a part of ``logConfiguration``. If the ``OVERRIDE`` logging option is specified, the ``logConfiguration`` is required."
         }
       }
     },
@@ -599,23 +599,23 @@
       "properties": {
         "cloudWatchEncryptionEnabled": {
           "type": "boolean",
-          "description": "Gets and sets the property cloudWatchEncryptionEnabled."
+          "description": "Determines whether to use encryption on the CloudWatch logs. If not specified, encryption will be off."
         },
         "cloudWatchLogGroupName": {
           "type": "string",
-          "description": "Gets and sets the property cloudWatchLogGroupName."
+          "description": "The name of the CloudWatch log group to send logs to.  The CloudWatch log group must already be created."
         },
         "s3BucketName": {
           "type": "string",
-          "description": "Gets and sets the property s3BucketName."
+          "description": "The name of the S3 bucket to send logs to.  The S3 bucket must already be created."
         },
         "s3EncryptionEnabled": {
           "type": "boolean",
-          "description": "Gets and sets the property s3EncryptionEnabled."
+          "description": "Determines whether to use encryption on the S3 logs. If not specified, encryption is not used."
         },
         "s3KeyPrefix": {
           "type": "string",
-          "description": "Gets and sets the property s3KeyPrefix."
+          "description": "An optional folder in the S3 bucket to place logs in."
         }
       }
     },
@@ -680,7 +680,7 @@
       "properties": {
         "namespace": {
           "type": "string",
-          "description": "Gets and sets the property `namespace`. Service Connect Namespace Name or ARN default for all services or tasks within this cluster"
+          "description": "The namespace name or full Amazon Resource Name (ARN) of the CMAPlong namespace that's used when you create a service and don't specify a Service Connect configuration. The namespace name can include up to 1024 characters. The name is case-sensitive. The name can't include hyphens (-), tilde (~), greater than (>), less than (<), or slash (/). If you enter an existing namespace name or ARN, then that namespace will be used. Any namespace type is supported. The namespace must be in this account and this AWS Region. If you enter a new name, a CMAPlong namespace will be created. Amazon ECS creates a CMAP namespace with the 'API calls' method of instance discovery only. This instance discovery method is the 'HTTP' namespace type in the CLIlong. Other types of instance discovery aren't used by Service Connect. If you update the cluster with an empty string ``''`` for the namespace name, the cluster configuration for Service Connect is removed. Note that the namespace will remain in CMAP and must be deleted separately. For more information about CMAPlong, see [Working with Services](https://docs.aws.amazon.com/cloud-map/latest/dg/working-with-services.html) in the *Developer Guide*."
         }
       }
     },
@@ -690,30 +690,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key."
+          "description": "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key)."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

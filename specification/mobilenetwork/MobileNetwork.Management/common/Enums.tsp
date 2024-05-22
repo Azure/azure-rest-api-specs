@@ -6,7 +6,6 @@ import "@typespec/openapi";
 
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
@@ -157,17 +156,6 @@ union UeState {
 
   @doc("UE state is unknown.")
   Unknown: "Unknown",
-
-  string,
-}
-
-@doc("Infrastructure Type Definitions")
-union InfrastructureType {
-  @doc("Azure Core")
-  AzureCore: "AzureCore",
-
-  @doc("Azure Operator Nexus")
-  AzureOperatorNexus: "AzureOperatorNexus",
 
   string,
 }

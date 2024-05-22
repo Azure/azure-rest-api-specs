@@ -1,0 +1,26 @@
+parameters:
+  "service-dir":
+    default: ""
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+  # - "@azure-tools/typespec-providerhub-controller"
+options:
+  # "@azure-tools/typespec-providerhub-controller":
+  #   emitter-output-dir: "{output-dir}/Controllers"
+  #   registration-output-path: "{output-dir}/Registration/registration.json"
+  #   include-operation-controller: false
+  #   include-cancellation-token: true
+  #   include-subscription-lifecycle-controller: true
+  #   include-versioning-classes: true
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-resource-manager/all"

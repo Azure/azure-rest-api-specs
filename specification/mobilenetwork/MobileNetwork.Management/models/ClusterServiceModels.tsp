@@ -1,8 +1,10 @@
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 import "../common/CommonModels.tsp";
 
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MobileNetwork;
 
@@ -26,9 +28,22 @@ model ClusterServiceResourceProperties {
   @extension("x-ms-identifiers", ["type"])
   componentParameters: QualifiedComponentDeploymentParameters[];
 
+  @added(Versions.v2024_05_15_preview)
+  @doc("OIDC Issuer URL for the Cluster Service to create the federated credentials")
+  oidcIssuerUrl: URL;
+
+  @added(Versions.v2024_05_15_preview)
+  @doc("User Assigned Managed Identity (UAMI) resource identifier that has access to the customer provided Azure Key Vault")
+  uamiResourceId: UamiIdPropertyIdProperty;
+
   @doc("Operational status")
   @visibility("read")
   operationalStatus?: OperationalStatus;
+
+  @added(Versions.v2024_05_15_preview)
+  @doc("Associated cluster workload resource identifiers")
+  @visibility("read")
+  associatedWorkloadResources?: AssociatedClusterWorkloadIdProperty[];
 }
 
 @doc("Cluster Service cluster type specific data.")
@@ -37,7 +52,7 @@ model ClusterServiceClusterTypeSpecificData {
   @doc("Cluster Type")
   type: ClusterType;
 
-  @doc("Custom Location resource ID")
+  @doc("Kubernetes Service Custom Location resource ID")
   customLocationId: CustomLocationIdProperty;
 }
 
@@ -53,4 +68,8 @@ model ClusterServiceNexusAksClusterData
   extends ClusterServiceClusterTypeSpecificData {
   @doc("Nexus Operator Kubenetes Service Properties.")
   type: ClusterType.NexusAks;
+
+  @added(Versions.v2024_05_15_preview)
+  @doc("Operator Nexus Cluster Custom Location resource ID")
+  nexusCustomLocationId: CustomLocationIdProperty;
 }

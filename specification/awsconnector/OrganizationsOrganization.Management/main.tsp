@@ -51,7 +51,7 @@ model OrganizationsOrganization
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OrganizationsOrganization")
 model OrganizationsOrganizationProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsOrganizationsOrganizationProperties;
 
   ...AwsCommonProperties;
@@ -63,25 +63,25 @@ model OrganizationsOrganizationProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsOrganizationsOrganization")
 model AwsOrganizationsOrganizationProperties {
-  @doc("Gets and sets the property arn. The Amazon Resource Name (ARN) of an organization.")
+  @doc("The Amazon Resource Name (ARN) of an organization.")
   arn?: string;
 
-  @doc("Gets and sets the property featureSet. Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.")
-  featureSet?: FeatureSet;
+  @doc("Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.")
+  featureSet?: FeatureSet = "ALL";
 
-  @doc("Gets and sets the property id. The unique identifier (ID) of an organization.")
+  @doc("The unique identifier (ID) of an organization.")
   id?: string;
 
-  @doc("Gets and sets the property managementAccountArn. The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.")
+  @doc("The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.")
   managementAccountArn?: string;
 
-  @doc("Gets and sets the property managementAccountEmail. The email address that is associated with the AWS account that is designated as the management account for the organization.")
+  @doc("The email address that is associated with the AWS account that is designated as the management account for the organization.")
   managementAccountEmail?: string;
 
-  @doc("Gets and sets the property managementAccountId. The unique identifier (ID) of the management account of an organization.")
+  @doc("The unique identifier (ID) of the management account of an organization.")
   managementAccountId?: string;
 
-  @doc("Gets and sets the property rootId. The unique identifier (ID) for the root.")
+  @doc("The unique identifier (ID) for the root.")
   rootId?: string;
 }
 

@@ -50,7 +50,7 @@ model Ec2Vpc is TrackedResource<Ec2VpcProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2Vpc")
 model Ec2VpcProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2VpcProperties;
 
   ...AwsCommonProperties;
@@ -62,43 +62,43 @@ model Ec2VpcProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2Vpc")
 model AwsEc2VpcProperties {
-  @doc("Gets and sets the property cidrBlock. The primary IPv4 CIDR block for the VPC.")
+  @doc("The IPv4 network range for the VPC, in CIDR notation. For example, ``10.0.0.0/16``. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``. You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.")
   cidrBlock?: string;
 
-  @doc("Gets and sets the property cidrBlockAssociations. A list of IPv4 CIDR block association IDs for the VPC.")
+  @doc("Property cidrBlockAssociations")
   @extension("x-ms-identifiers", [])
   cidrBlockAssociations?: string[];
 
-  @doc("Gets and sets the property defaultNetworkAcl. The default network ACL ID that is associated with the VPC.")
+  @doc("Property defaultNetworkAcl")
   defaultNetworkAcl?: string;
 
-  @doc("Gets and sets the property defaultSecurityGroup. The default security group ID that is associated with the VPC.")
+  @doc("Property defaultSecurityGroup")
   defaultSecurityGroup?: string;
 
-  @doc("Gets and sets the property enableDnsHostnames. Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs.")
+  @doc("Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support). You can only enable DNS hostnames if you've enabled DNS support.")
   enableDnsHostnames?: boolean;
 
-  @doc("Gets and sets the property enableDnsSupport. Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range 'plus two' succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default.")
+  @doc("Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range 'plus two' succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).")
   enableDnsSupport?: boolean;
 
-  @doc("Gets and sets the property instanceTenancy. The allowed tenancy of instances launched into the VPC.'default': An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.'dedicated': An instance launched into the VPC is a Dedicated Instance by default, unless you explicitly specify a tenancy of host during instance launch. You cannot specify a tenancy of default during instance launch.Updating InstanceTenancy requires no replacement only if you are updating its value from 'dedicated' to 'default'. Updating InstanceTenancy from 'default' to 'dedicated' requires replacement.")
+  @doc("The allowed tenancy of instances launched into the VPC.  +  ``default``: An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.  +  ``dedicated``: An instance launched into the VPC runs on dedicated hardware by default, unless you explicitly specify a tenancy of ``host`` during instance launch. You cannot specify a tenancy of ``default`` during instance launch.   Updating ``InstanceTenancy`` requires no replacement only if you are updating its value from ``dedicated`` to ``default``. Updating ``InstanceTenancy`` from ``default`` to ``dedicated`` requires replacement.")
   instanceTenancy?: string;
 
-  @doc("Gets and sets the property ipv4IpamPoolId. The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR")
+  @doc("The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*. You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.")
   ipv4IpamPoolId?: string;
 
-  @doc("Gets and sets the property ipv4NetmaskLength. The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool")
+  @doc("The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.")
   ipv4NetmaskLength?: int32;
 
-  @doc("Gets and sets the property ipv6CidrBlocks. A list of IPv6 CIDR blocks that are associated with the VPC.")
+  @doc("Property ipv6CidrBlocks")
   @extension("x-ms-identifiers", [])
   ipv6CidrBlocks?: string[];
 
-  @doc("Gets and sets the property tags. The tags for the VPC.")
+  @doc("The tags for the VPC.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property vpcId. The Id for the model.")
+  @doc("Property vpcId")
   vpcId?: string;
 }
 
@@ -108,10 +108,10 @@ model AwsEc2VpcProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("The tag key.")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("The tag value.")
   value?: string;
 }
 

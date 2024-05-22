@@ -887,13 +887,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Resource 'AmfDeploymentResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/AmfDeploymentResource"
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'AmfDeploymentResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/AmfDeploymentResource"
             },
@@ -1169,13 +1169,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Resource 'ClusterServiceResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ClusterServiceResource"
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'ClusterServiceResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ClusterServiceResource"
             },
@@ -4125,13 +4125,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Resource 'NrfDeploymentResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/NrfDeploymentResource"
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'NrfDeploymentResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/NrfDeploymentResource"
             },
@@ -4407,13 +4407,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Resource 'NssfDeploymentResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/NssfDeploymentResource"
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'NssfDeploymentResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/NssfDeploymentResource"
             },
@@ -4689,13 +4689,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Resource 'ObservabilityServiceResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ObservabilityServiceResource"
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'ObservabilityServiceResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ObservabilityServiceResource"
             },
@@ -8869,13 +8869,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Resource 'SmfDeploymentResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/SmfDeploymentResource"
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'SmfDeploymentResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/SmfDeploymentResource"
             },
@@ -9151,13 +9151,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Resource 'UpfDeploymentResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/UpfDeploymentResource"
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'UpfDeploymentResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/UpfDeploymentResource"
             },
@@ -9398,13 +9398,11 @@
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Azure for Operators 5G Core AMF secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "clusterService": {
           "$ref": "#/definitions/ClusterServiceIdProperty",
@@ -9914,7 +9912,7 @@
         },
         "customLocationId": {
           "$ref": "#/definitions/CustomLocationIdProperty",
-          "description": "Custom Location resource ID"
+          "description": "Kubernetes Service Custom Location resource ID"
         }
       },
       "discriminator": "type",
@@ -10145,7 +10143,9 @@
     },
     "ComponentDeploymentSecrets": {
       "type": "string",
-      "description": "Containerized Network Function (CNF) Component Secrets"
+      "format": "password",
+      "description": "Containerized Network Function (CNF) Component Secrets",
+      "x-ms-secret": true
     },
     "ComponentDeploymentType": {
       "type": "string",
@@ -10172,36 +10172,6 @@
         "id"
       ],
       "x-ms-azure-resource": true
-    },
-    "CoreNetworkType": {
-      "type": "string",
-      "description": "The core network technology generation (5G core, EPC / 4G core or EPC / 4G + 5G core).",
-      "enum": [
-        "5GC",
-        "EPC",
-        "EPC + 5GC"
-      ],
-      "x-ms-enum": {
-        "name": "CoreNetworkType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "5GC",
-            "value": "5GC",
-            "description": "5G core"
-          },
-          {
-            "name": "EPC",
-            "value": "EPC",
-            "description": "EPC / 4G core"
-          },
-          {
-            "name": "EPC + 5GC",
-            "value": "EPC + 5GC",
-            "description": "Combined EPC / 4G and 5G core"
-          }
-        ]
-      }
     },
     "CustomLocationIdProperty": {
       "type": "string",
@@ -10440,54 +10410,6 @@
         "id"
       ],
       "x-ms-azure-resource": true
-    },
-    "DeploymentType": {
-      "type": "string",
-      "description": "The deployment type of the packet core software (Single Node / Multi Node).",
-      "enum": [
-        "Single Node",
-        "Multi Node"
-      ],
-      "x-ms-enum": {
-        "name": "DeploymentType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Single Node",
-            "value": "Single Node",
-            "description": "The packet core software will be deployed on single standalone server."
-          },
-          {
-            "name": "Multi Node",
-            "value": "Multi Node",
-            "description": "The packet core software will be deployed on multiple servers and supports high availability."
-          }
-        ]
-      }
-    },
-    "DesiredInstallationState": {
-      "type": "string",
-      "description": "The desired installation state of the packet core.",
-      "enum": [
-        "Uninstalled",
-        "Installed"
-      ],
-      "x-ms-enum": {
-        "name": "DesiredInstallationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Uninstalled",
-            "value": "Uninstalled",
-            "description": "Don't install the packet core."
-          },
-          {
-            "name": "Installed",
-            "value": "Installed",
-            "description": "Install the packet core."
-          }
-        ]
-      }
     },
     "DiagnosticsPackage": {
       "type": "object",
@@ -11405,30 +11327,6 @@
         }
       }
     },
-    "InfrastructureType": {
-      "type": "string",
-      "description": "Infrastructure Type Definitions",
-      "enum": [
-        "AzureCore",
-        "AzureOperatorNexus"
-      ],
-      "x-ms-enum": {
-        "name": "InfrastructureType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureCore",
-            "value": "AzureCore",
-            "description": "Azure Core"
-          },
-          {
-            "name": "AzureOperatorNexus",
-            "value": "AzureOperatorNexus",
-            "description": "Azure Operator Nexus"
-          }
-        ]
-      }
-    },
     "Installation": {
       "type": "object",
       "description": "The installation state of the packet core.",
@@ -11746,29 +11644,6 @@
         }
       }
     },
-    "ManagedResourceGroupConfiguration": {
-      "type": "object",
-      "description": "ManagedResourceGroupConfiguration represents the configuration of the resource group managed by Azure.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name for the managed resource group. If not specified, the unique name is automatically generated.",
-          "maxLength": 75,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the managed resource group. If not specified, the location of the parent resource is chosen.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
-    },
     "ManagedServiceIdentity": {
       "type": "object",
       "description": "Managed service identity (User assigned identity).",
@@ -11779,7 +11654,7 @@
         },
         "userAssignedIdentities": {
           "$ref": "#/definitions/UserAssignedIdentities",
-          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests."
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests."
         }
       },
       "required": [
@@ -11846,30 +11721,6 @@
         }
       }
     },
-    "MetricsIngestionEnabled": {
-      "type": "string",
-      "description": "Whether to enable metrics ingestion for this radio access network. NOTE: this creates a metrics ingestion endpoint extension resource which introduces additional charges.",
-      "enum": [
-        "Disabled",
-        "Enabled"
-      ],
-      "x-ms-enum": {
-        "name": "MetricsIngestionEnabled",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Don't enable metrics ingestion."
-          },
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enable metrics ingestion."
-          }
-        ]
-      }
-    },
     "MmeId": {
       "type": "object",
       "description": "MME identifier.",
@@ -11898,10 +11749,6 @@
       "type": "string",
       "description": "Mobile network code.",
       "pattern": "^\\d{2,3}$"
-    },
-    "MobileCoreScalingUnitSku": {
-      "type": "string",
-      "description": "Mobile Core Scaling Unit SKU Definition"
     },
     "MobileNetwork": {
       "type": "object",
@@ -12093,30 +11940,6 @@
         }
       }
     },
-    "NaptEnabled": {
-      "type": "string",
-      "description": "Whether network address and port translation is enabled.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "NaptEnabled",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "NAPT is enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "NAPT is disabled"
-          }
-        ]
-      }
-    },
     "NexusCloudServicesNetworkResourceId": {
       "type": "object",
       "description": "Reference to a Nexus Cloud Services Network resource.",
@@ -12282,13 +12105,11 @@
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Azure for Operators 5G Core NRF secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "clusterService": {
           "$ref": "#/definitions/ClusterServiceIdProperty",
@@ -12382,13 +12203,11 @@
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Azure for Operators 5G Core NSSF secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "clusterService": {
           "$ref": "#/definitions/ClusterServiceIdProperty",
@@ -13382,54 +13201,6 @@
         }
       }
     },
-    "PreemptionCapability": {
-      "type": "string",
-      "description": "Preemption capability.",
-      "enum": [
-        "NotPreempt",
-        "MayPreempt"
-      ],
-      "x-ms-enum": {
-        "name": "PreemptionCapability",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotPreempt",
-            "value": "NotPreempt",
-            "description": "Cannot preempt"
-          },
-          {
-            "name": "MayPreempt",
-            "value": "MayPreempt",
-            "description": "May preempt"
-          }
-        ]
-      }
-    },
-    "PreemptionVulnerability": {
-      "type": "string",
-      "description": "Preemption vulnerability.",
-      "enum": [
-        "NotPreemptable",
-        "Preemptable"
-      ],
-      "x-ms-enum": {
-        "name": "PreemptionVulnerability",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotPreemptable",
-            "value": "NotPreemptable",
-            "description": "Cannot be preempted"
-          },
-          {
-            "name": "Preemptable",
-            "value": "Preemptable",
-            "description": "May be preempted"
-          }
-        ]
-      }
-    },
     "Protocol": {
       "type": "string",
       "description": "IP protocol.",
@@ -13624,13 +13395,11 @@
         },
         "secrets": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Deployment secrets",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         }
       },
       "required": [
@@ -14659,7 +14428,7 @@
     },
     "SiteProvisioning": {
       "type": "object",
-      "description": "The provisioning state of a resource e.g. SIM/SIM policy on a site. The dictionary keys will ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}. The dictionary values will be from the \"SiteProvisioningState\" enum.",
+      "description": "The provisioning state of a resource e.g. SIM/SIM policy on a site. The dictionary keys will be Azure resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}. The dictionary values will be from the \"SiteProvisioningState\" enum.",
       "additionalProperties": {
         "$ref": "#/definitions/SiteProvisioningState"
       }
@@ -14929,13 +14698,11 @@
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Azure for Operators 5G Core SMF secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "clusterService": {
           "$ref": "#/definitions/ClusterServiceIdProperty",
@@ -15630,13 +15397,11 @@
         },
         "secretsParameters": {
           "$ref": "#/definitions/ComponentDeploymentSecrets",
-          "format": "password",
           "description": "Azure for Operators 5G Core F secrets parameters",
           "x-ms-mutability": [
             "update",
             "create"
-          ],
-          "x-ms-secret": true
+          ]
         },
         "clusterService": {
           "$ref": "#/definitions/ClusterServiceIdProperty",
@@ -15675,13 +15440,9 @@
         }
       }
     },
-    "UsageSku": {
-      "type": "string",
-      "description": "Usage SKU Definition"
-    },
     "UserAssignedIdentities": {
       "type": "object",
-      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
       "x-nullable": true,
       "additionalProperties": {
         "$ref": "#/definitions/UserAssignedIdentity"
@@ -15827,24 +15588,6 @@
         ]
       }
     },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-05-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_05_01_preview",
-            "value": "2024-05-01-preview",
-            "description": "May 01, 2024 Preview API Version"
-          }
-        ]
-      }
-    },
     "VirtualNetworkResourceId": {
       "type": "object",
       "description": "Reference to an virtual network resource, to be used as an interface for an Edge Virtual Network.",
@@ -15858,18 +15601,6 @@
         "id"
       ],
       "x-ms-azure-resource": true
-    },
-    "VnfAgentDeploymentIdProperty": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "Reference to a VNF agent deployment resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.MobilePacketCore/vnfAgentDeployments"
-          }
-        ]
-      }
     },
     "WifiSsid": {
       "type": "object",

@@ -51,7 +51,7 @@ model NetworkFirewallFirewall
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NetworkFirewallFirewall")
 model NetworkFirewallFirewallProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsNetworkFirewallFirewallProperties;
 
   ...AwsCommonProperties;
@@ -63,43 +63,43 @@ model NetworkFirewallFirewallProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsNetworkFirewallFirewall")
 model AwsNetworkFirewallFirewallProperties {
-  @doc("Gets and sets the property deleteProtection.")
+  @doc("Property deleteProtection")
   deleteProtection?: boolean;
 
-  @doc("Gets and sets the property description.")
+  @doc("Property description")
   description?: string;
 
-  @doc("Gets and sets the property endpointIds.")
+  @doc("Property endpointIds")
   @extension("x-ms-identifiers", [])
   endpointIds?: string[];
 
-  @doc("Gets and sets the property firewallArn. A resource ARN.")
+  @doc("A resource ARN.")
   firewallArn?: string;
 
-  @doc("Gets and sets the property firewallId.")
+  @doc("Property firewallId")
   firewallId?: string;
 
-  @doc("Gets and sets the property firewallName.")
+  @doc("Property firewallName")
   firewallName?: string;
 
-  @doc("Gets and sets the property firewallPolicyArn. A resource ARN.")
+  @doc("A resource ARN.")
   firewallPolicyArn?: string;
 
-  @doc("Gets and sets the property firewallPolicyChangeProtection.")
+  @doc("Property firewallPolicyChangeProtection")
   firewallPolicyChangeProtection?: boolean;
 
-  @doc("Gets and sets the property subnetChangeProtection.")
+  @doc("Property subnetChangeProtection")
   subnetChangeProtection?: boolean;
 
-  @doc("Gets and sets the property subnetMappings.")
+  @doc("Property subnetMappings")
   @extension("x-ms-identifiers", [])
   subnetMappings?: SubnetMapping[];
 
-  @doc("Gets and sets the property tags.")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property vpcId.")
+  @doc("Property vpcId")
   vpcId?: string;
 }
 
@@ -109,10 +109,10 @@ model AwsNetworkFirewallFirewallProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SubnetMapping")
 model SubnetMapping {
-  @doc("Gets and sets the property ipAddressType. A IPAddressType")
+  @doc("A IPAddressType")
   ipAddressType?: string;
 
-  @doc("Gets and sets the property subnetId. A SubnetId.")
+  @doc("A SubnetId.")
   subnetId?: string;
 }
 
@@ -122,10 +122,10 @@ model SubnetMapping {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 

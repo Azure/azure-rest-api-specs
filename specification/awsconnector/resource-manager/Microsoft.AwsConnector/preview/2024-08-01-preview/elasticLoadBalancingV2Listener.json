@@ -383,36 +383,36 @@
       "properties": {
         "authenticateCognitoConfig": {
           "$ref": "#/definitions/AuthenticateCognitoConfig",
-          "description": "Gets and sets the property authenticateCognitoConfig."
+          "description": "[HTTPS listeners] Information for using Amazon Cognito to authenticate users. Specify only when ``Type`` is ``authenticate-cognito``. Specifies information required when integrating with Amazon Cognito to authenticate users."
         },
         "authenticateOidcConfig": {
           "$ref": "#/definitions/AuthenticateOidcConfig",
-          "description": "Gets and sets the property authenticateOidcConfig."
+          "description": "[HTTPS listeners] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when ``Type`` is ``authenticate-oidc``. Specifies information required using an identity provide (IdP) that is compliant with OpenID Connect (OIDC) to authenticate users."
         },
         "fixedResponseConfig": {
           "$ref": "#/definitions/FixedResponseConfig",
-          "description": "Gets and sets the property fixedResponseConfig."
+          "description": "[Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``. Specifies information required when returning a custom HTTP response."
         },
         "forwardConfig": {
           "$ref": "#/definitions/ForwardConfig",
-          "description": "Gets and sets the property forwardConfig."
+          "description": "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``. Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``."
         },
         "order": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property order."
+          "description": "The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first."
         },
         "redirectConfig": {
           "$ref": "#/definitions/RedirectConfig",
-          "description": "Gets and sets the property redirectConfig."
+          "description": "[Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``. Information about a redirect action. A URI consists of the following components: protocol://hostname:port/path?query. You must modify at least one of the following components to avoid a redirect loop: protocol, hostname, port, or path. Any components that you do not modify retain their original values. You can reuse URI components using the following reserved keywords:  +  #{protocol}  +  #{host}  +  #{port}  +  #{path} (the leading '/' is removed)  +  #{query}   For example, you can change the path to '/new/#{path}', the hostname to 'example.#{host}', or the query to '#{query}&value=xyz'."
         },
         "targetGroupArn": {
           "type": "string",
-          "description": "Gets and sets the property targetGroupArn."
+          "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead."
         },
         "type": {
           "type": "string",
-          "description": "Gets and sets the property type."
+          "description": "The type of action."
         }
       }
     },
@@ -422,38 +422,38 @@
       "properties": {
         "authenticationRequestExtraParams": {
           "type": "object",
-          "description": "Gets and sets the property authenticationRequestExtraParams.",
+          "description": "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "onUnauthenticatedRequest": {
           "type": "string",
-          "description": "Gets and sets the property onUnauthenticatedRequest."
+          "description": "The behavior if the user is not authenticated. The following are possible values:  +  deny```` - Return an HTTP 401 Unauthorized error.  +  allow```` - Allow the request to be forwarded to the target.  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value."
         },
         "scope": {
           "type": "string",
-          "description": "Gets and sets the property scope."
+          "description": "The set of user claims to be requested from the IdP. The default is ``openid``. To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP."
         },
         "sessionCookieName": {
           "type": "string",
-          "description": "Gets and sets the property sessionCookieName."
+          "description": "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie."
         },
         "sessionTimeout": {
           "type": "string",
-          "description": "Gets and sets the property sessionTimeout."
+          "description": "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days)."
         },
         "userPoolArn": {
           "type": "string",
-          "description": "Gets and sets the property userPoolArn."
+          "description": "The Amazon Resource Name (ARN) of the Amazon Cognito user pool."
         },
         "userPoolClientId": {
           "type": "string",
-          "description": "Gets and sets the property userPoolClientId."
+          "description": "The ID of the Amazon Cognito user pool client."
         },
         "userPoolDomain": {
           "type": "string",
-          "description": "Gets and sets the property userPoolDomain."
+          "description": "The domain prefix or fully-qualified domain name of the Amazon Cognito user pool."
         }
       }
     },
@@ -463,54 +463,54 @@
       "properties": {
         "authenticationRequestExtraParams": {
           "type": "object",
-          "description": "Gets and sets the property authenticationRequestExtraParams.",
+          "description": "The query parameters (up to 10) to include in the redirect request to the authorization endpoint.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "authorizationEndpoint": {
           "type": "string",
-          "description": "Gets and sets the property authorizationEndpoint."
+          "description": "The authorization endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
         },
         "clientId": {
           "type": "string",
-          "description": "Gets and sets the property clientId."
+          "description": "The OAuth 2.0 client identifier."
         },
         "clientSecret": {
           "type": "string",
-          "description": "Gets and sets the property clientSecret."
+          "description": "The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set ``UseExistingClientSecret`` to true."
         },
         "issuer": {
           "type": "string",
-          "description": "Gets and sets the property issuer."
+          "description": "The OIDC issuer identifier of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
         },
         "onUnauthenticatedRequest": {
           "type": "string",
-          "description": "Gets and sets the property onUnauthenticatedRequest."
+          "description": "The behavior if the user is not authenticated. The following are possible values:  +  deny```` - Return an HTTP 401 Unauthorized error.  +  allow```` - Allow the request to be forwarded to the target.  +  authenticate```` - Redirect the request to the IdP authorization endpoint. This is the default value."
         },
         "scope": {
           "type": "string",
-          "description": "Gets and sets the property scope."
+          "description": "The set of user claims to be requested from the IdP. The default is ``openid``. To verify which scope values your IdP supports and how to separate multiple values, see the documentation for your IdP."
         },
         "sessionCookieName": {
           "type": "string",
-          "description": "Gets and sets the property sessionCookieName."
+          "description": "The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie."
         },
         "sessionTimeout": {
           "type": "string",
-          "description": "Gets and sets the property sessionTimeout."
+          "description": "The maximum duration of the authentication session, in seconds. The default is 604800 seconds (7 days)."
         },
         "tokenEndpoint": {
           "type": "string",
-          "description": "Gets and sets the property tokenEndpoint."
+          "description": "The token endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
         },
         "useExistingClientSecret": {
           "type": "boolean",
-          "description": "Gets and sets the property useExistingClientSecret."
+          "description": "Indicates whether to use the existing client secret when modifying a rule. If you are creating a rule, you can omit this parameter or set it to false."
         },
         "userInfoEndpoint": {
           "type": "string",
-          "description": "Gets and sets the property userInfoEndpoint."
+          "description": "The user info endpoint of the IdP. This must be a full URL, including the HTTPS protocol, the domain, and the path."
         }
       }
     },
@@ -520,7 +520,7 @@
       "properties": {
         "alpnPolicy": {
           "type": "array",
-          "description": "Gets and sets the property alpnPolicy.",
+          "description": "[TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.",
           "items": {
             "type": "string"
           },
@@ -528,7 +528,7 @@
         },
         "certificates": {
           "type": "array",
-          "description": "Gets and sets the property certificates.",
+          "description": "The default SSL server certificate for a secure listener. You must provide exactly one certificate if the listener protocol is HTTPS or TLS. To create a certificate list for a secure listener, use [AWS::ElasticLoadBalancingV2::ListenerCertificate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html).",
           "items": {
             "$ref": "#/definitions/Certificate"
           },
@@ -536,7 +536,7 @@
         },
         "defaultActions": {
           "type": "array",
-          "description": "Gets and sets the property defaultActions.",
+          "description": "The actions for the default rule. You cannot define a condition for a default rule. To create additional rules for an Application Load Balancer, use [AWS::ElasticLoadBalancingV2::ListenerRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html).",
           "items": {
             "$ref": "#/definitions/Action"
           },
@@ -544,28 +544,28 @@
         },
         "listenerArn": {
           "type": "string",
-          "description": "Gets and sets the property listenerArn."
+          "description": "Property listenerArn"
         },
         "loadBalancerArn": {
           "type": "string",
-          "description": "Gets and sets the property loadBalancerArn."
+          "description": "The Amazon Resource Name (ARN) of the load balancer."
         },
         "mutualAuthentication": {
           "$ref": "#/definitions/MutualAuthentication",
-          "description": "Gets and sets the property mutualAuthentication."
+          "description": "The mutual authentication configuration information. Specifies the configuration information for mutual authentication."
         },
         "port": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property port."
+          "description": "The port on which the load balancer is listening. You cannot specify a port for a Gateway Load Balancer."
         },
         "protocol": {
           "type": "string",
-          "description": "Gets and sets the property protocol."
+          "description": "The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP. You can’t specify the UDP or TCP_UDP protocol if dual-stack mode is enabled. You cannot specify a protocol for a Gateway Load Balancer."
         },
         "sslPolicy": {
           "type": "string",
-          "description": "Gets and sets the property sslPolicy."
+          "description": "[HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported. Updating the security policy can result in interruptions if the load balancer is handling a high volume of traffic. For more information, see [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies) in the *Application Load Balancers Guide* and [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies) in the *Network Load Balancers Guide*."
         }
       }
     },
@@ -575,7 +575,7 @@
       "properties": {
         "certificateArn": {
           "type": "string",
-          "description": "Gets and sets the property certificateArn."
+          "description": "The Amazon Resource Name (ARN) of the certificate."
         }
       }
     },
@@ -626,42 +626,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsElasticLoadBalancingV2ListenerProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -685,15 +685,15 @@
       "properties": {
         "contentType": {
           "type": "string",
-          "description": "Gets and sets the property contentType."
+          "description": "The content type. Valid Values: text/plain | text/css | text/html | application/javascript | application/json"
         },
         "messageBody": {
           "type": "string",
-          "description": "Gets and sets the property messageBody."
+          "description": "The message."
         },
         "statusCode": {
           "type": "string",
-          "description": "Gets and sets the property statusCode."
+          "description": "The HTTP response code (2XX, 4XX, or 5XX)."
         }
       }
     },
@@ -703,11 +703,11 @@
       "properties": {
         "targetGroupStickinessConfig": {
           "$ref": "#/definitions/TargetGroupStickinessConfig",
-          "description": "Gets and sets the property targetGroupStickinessConfig."
+          "description": "Information about the target group stickiness for a rule. Information about the target group stickiness for a rule."
         },
         "targetGroups": {
           "type": "array",
-          "description": "Gets and sets the property targetGroups.",
+          "description": "Information about how traffic will be distributed between multiple target groups in a forward rule.",
           "items": {
             "$ref": "#/definitions/TargetGroupTuple"
           },
@@ -721,15 +721,15 @@
       "properties": {
         "ignoreClientCertificateExpiry": {
           "type": "boolean",
-          "description": "Gets and sets the property ignoreClientCertificateExpiry."
+          "description": "Indicates whether expired client certificates are ignored."
         },
         "mode": {
           "type": "string",
-          "description": "Gets and sets the property mode."
+          "description": "The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value is ``off``."
         },
         "trustStoreArn": {
           "type": "string",
-          "description": "Gets and sets the property trustStoreArn."
+          "description": "The Amazon Resource Name (ARN) of the trust store."
         }
       }
     },
@@ -794,27 +794,27 @@
       "properties": {
         "host": {
           "type": "string",
-          "description": "Gets and sets the property host."
+          "description": "The hostname. This component is not percent-encoded. The hostname can contain #{host}."
         },
         "path": {
           "type": "string",
-          "description": "Gets and sets the property path."
+          "description": "The absolute path, starting with the leading '/'. This component is not percent-encoded. The path can contain #{host}, #{path}, and #{port}."
         },
         "port": {
           "type": "string",
-          "description": "Gets and sets the property port."
+          "description": "The port. You can specify a value from 1 to 65535 or #{port}."
         },
         "protocol": {
           "type": "string",
-          "description": "Gets and sets the property protocol."
+          "description": "The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP."
         },
         "query": {
           "type": "string",
-          "description": "Gets and sets the property query."
+          "description": "The query parameters, URL-encoded when necessary, but not percent-encoded. Do not include the leading '?', as it is automatically added. You can specify any of the reserved keywords."
         },
         "statusCode": {
           "type": "string",
-          "description": "Gets and sets the property statusCode."
+          "description": "The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary (HTTP 302)."
         }
       }
     },
@@ -825,11 +825,11 @@
         "durationSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property durationSeconds."
+          "description": "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days)."
         },
         "enabled": {
           "type": "boolean",
-          "description": "Gets and sets the property enabled."
+          "description": "Indicates whether target group stickiness is enabled."
         }
       }
     },
@@ -839,31 +839,13 @@
       "properties": {
         "targetGroupArn": {
           "type": "string",
-          "description": "Gets and sets the property targetGroupArn."
+          "description": "The Amazon Resource Name (ARN) of the target group."
         },
         "weight": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property weight."
+          "description": "The weight. The range is 0 to 999."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

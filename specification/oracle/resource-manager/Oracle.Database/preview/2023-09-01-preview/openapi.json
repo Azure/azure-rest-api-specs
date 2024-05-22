@@ -46,6 +46,9 @@
       "name": "CloudVmClusters"
     },
     {
+      "name": "SystemVersions"
+    },
+    {
       "name": "VirtualNetworkAddresses"
     },
     {
@@ -851,6 +854,57 @@
           "Get a GiVersion by name": {
             "$ref": "./examples/giVersions_get.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/locations/{location}/systemVersions": {
+      "post": {
+        "operationId": "SystemVersions_ListByFilter",
+        "tags": [
+          "SystemVersions"
+        ],
+        "description": "List Exadata System Versions by the provided filter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body of read begin list",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SystemVersionsFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SystemVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Exadata System Versions by the provided filter": {
+            "$ref": "./examples/systemVersions_listSystemVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -5877,7 +5931,10 @@
           "description": "Operating system version of the image.",
           "minLength": 1,
           "maxLength": 255,
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sshPublicKeys": {
           "type": "array",
@@ -8981,6 +9038,84 @@
           }
         ]
       }
+    },
+    "SystemVersion": {
+      "type": "object",
+      "description": "SystemVersion resource Definition",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SystemVersionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SystemVersionListResult": {
+      "type": "object",
+      "description": "The response of a SystemVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SystemVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/SystemVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SystemVersionProperties": {
+      "type": "object",
+      "description": "System Version Resource model",
+      "properties": {
+        "systemVersion": {
+          "type": "string",
+          "description": "A valid Oracle System Version",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "systemVersion"
+      ]
+    },
+    "SystemVersionsFilter": {
+      "type": "object",
+      "description": "SystemVersions filter",
+      "properties": {
+        "giVersion": {
+          "type": "string",
+          "description": "Grid Infrastructure version"
+        },
+        "shape": {
+          "type": "string",
+          "description": "Exadata shape"
+        },
+        "latestVersionFilter": {
+          "type": "boolean",
+          "description": "Filter list to display only latest versions"
+        }
+      },
+      "required": [
+        "giVersion",
+        "shape"
+      ]
     },
     "TlsAuthenticationType": {
       "type": "string",

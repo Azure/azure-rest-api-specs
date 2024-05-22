@@ -383,31 +383,31 @@
       "properties": {
         "accountId": {
           "type": "string",
-          "description": "Gets and sets the property accountId. If the account was created successfully, the unique identifier (ID) of the new account."
+          "description": "If the account was created successfully, the unique identifier (ID) of the new account."
         },
         "accountName": {
           "type": "string",
-          "description": "Gets and sets the property accountName. The friendly name of the member account."
+          "description": "The friendly name of the member account."
         },
         "arn": {
           "type": "string",
-          "description": "Gets and sets the property arn. The Amazon Resource Name (ARN) of the account."
+          "description": "The Amazon Resource Name (ARN) of the account."
         },
         "email": {
           "type": "string",
-          "description": "Gets and sets the property email. The email address of the owner to assign to the new member account."
+          "description": "The email address of the owner to assign to the new member account."
         },
         "joinedMethod": {
           "$ref": "#/definitions/JoinedMethod",
-          "description": "Gets and sets the property joinedMethod. The method by which the account joined the organization."
+          "description": "The method by which the account joined the organization."
         },
         "joinedTimestamp": {
           "type": "string",
-          "description": "Gets and sets the property joinedTimestamp. The date the account became a part of the organization."
+          "description": "The date the account became a part of the organization."
         },
         "parentIds": {
           "type": "array",
-          "description": "Gets and sets the property parentIds. List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.",
+          "description": "List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.",
           "items": {
             "type": "string"
           },
@@ -415,15 +415,16 @@
         },
         "roleName": {
           "type": "string",
-          "description": "Gets and sets the property roleName. The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified."
+          "description": "The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.",
+          "default": "OrganizationAccountAccessRole"
         },
         "status": {
           "$ref": "#/definitions/Status",
-          "description": "Gets and sets the property status. The status of the account in the organization."
+          "description": "The status of the account in the organization."
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags. A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.",
+          "description": "A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -502,42 +503,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsOrganizationsAccountProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -646,30 +647,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key. The key identifier, or name, of the tag."
+          "description": "The key identifier, or name, of the tag."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value. The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null."
+          "description": "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

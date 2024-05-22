@@ -51,7 +51,7 @@ model Ec2Instance is ExtensionResource<Ec2InstanceProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2Instance")
 model Ec2InstanceProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2InstanceProperties;
 
   ...AwsCommonProperties;
@@ -63,183 +63,183 @@ model Ec2InstanceProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2Instance")
 model AwsEc2InstanceProperties {
-  @doc("Gets and sets the property amiLaunchIndex.<p>The AMI launch index, which can be used to find this instance in the launch group.</p>")
+  @doc("<p>The AMI launch index, which can be used to find this instance in the launch group.</p>")
   amiLaunchIndex?: int32;
 
-  @doc("Gets and sets the property architecture.<p>The architecture of the image.</p>")
+  @doc("<p>The architecture of the image.</p>")
   architecture?: ArchitectureValuesEnumValue;
 
-  @doc("Gets and sets the property blockDeviceMappings.<p>Any block device mapping entries for the instance.</p>")
+  @doc("<p>Any block device mapping entries for the instance.</p>")
   @extension("x-ms-identifiers", [])
   blockDeviceMappings?: InstanceBlockDeviceMapping[];
 
-  @doc("Gets and sets the property bootMode.<p>The boot mode that was specified by the AMI. If the value is <code>uefi-preferred</code>, the AMI supports both UEFI and Legacy BIOS. The <code>currentInstanceBootMode</code> parameter is the boot mode that is used to boot the instance at launch or start.</p> <note> <p>The operating system contained in the AMI must be configured to support the specified boot mode.</p> </note> <p>For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
+  @doc("<p>The boot mode that was specified by the AMI. If the value is <code>uefi-preferred</code>, the AMI supports both UEFI and Legacy BIOS. The <code>currentInstanceBootMode</code> parameter is the boot mode that is used to boot the instance at launch or start.</p> <note> <p>The operating system contained in the AMI must be configured to support the specified boot mode.</p> </note> <p>For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   bootMode?: BootModeValuesEnumValue;
 
-  @doc("Gets and sets the property capacityReservationId.<p>The ID of the Capacity Reservation.</p>")
+  @doc("<p>The ID of the Capacity Reservation.</p>")
   capacityReservationId?: string;
 
-  @doc("Gets and sets the property capacityReservationSpecification.<p>Information about the Capacity Reservation targeting option.</p>")
+  @doc("<p>Information about the Capacity Reservation targeting option.</p>")
   capacityReservationSpecification?: CapacityReservationSpecificationResponse;
 
-  @doc("Gets and sets the property clientToken.<p>The idempotency token you provided when you launched the instance, if applicable.</p>")
+  @doc("<p>The idempotency token you provided when you launched the instance, if applicable.</p>")
   clientToken?: string;
 
-  @doc("Gets and sets the property cpuOptions.<p>The CPU options for the instance.</p>")
+  @doc("<p>The CPU options for the instance.</p>")
   cpuOptions?: CpuOptions;
 
-  @doc("Gets and sets the property currentInstanceBootMode.<p>The boot mode that is used to boot the instance at launch or start. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
+  @doc("<p>The boot mode that is used to boot the instance at launch or start. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   currentInstanceBootMode?: InstanceBootModeValuesEnumValue;
 
-  @doc("Gets and sets the property ebsOptimized.<p>Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.</p>")
+  @doc("<p>Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS Optimized instance.</p>")
   ebsOptimized?: boolean;
 
-  @doc("Gets and sets the property elasticGpuAssociations.<p>Deprecated.</p> <note> <p>Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances.</p> </note>")
+  @doc("<p>Deprecated.</p> <note> <p>Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances.</p> </note>")
   @extension("x-ms-identifiers", [])
   elasticGpuAssociations?: ElasticGpuAssociation[];
 
-  @doc("Gets and sets the property elasticInferenceAcceleratorAssociations.<p>The elastic inference accelerator associated with the instance.</p>")
+  @doc("<p>The elastic inference accelerator associated with the instance.</p>")
   @extension("x-ms-identifiers", [])
   elasticInferenceAcceleratorAssociations?: ElasticInferenceAcceleratorAssociation[];
 
-  @doc("Gets and sets the property enaSupport.<p>Specifies whether enhanced networking with ENA is enabled.</p>")
+  @doc("<p>Specifies whether enhanced networking with ENA is enabled.</p>")
   enaSupport?: boolean;
 
-  @doc("Gets and sets the property enclaveOptions.<p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves.</p>")
+  @doc("<p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves.</p>")
   enclaveOptions?: EnclaveOptions;
 
-  @doc("Gets and sets the property hibernationOptions.<p>Indicates whether the instance is enabled for hibernation.</p>")
+  @doc("<p>Indicates whether the instance is enabled for hibernation.</p>")
   hibernationOptions?: HibernationOptions;
 
-  @doc("Gets and sets the property hypervisor.<p>The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.</p>")
+  @doc("<p>The hypervisor type of the instance. The value <code>xen</code> is used for both Xen and Nitro hypervisors.</p>")
   hypervisor?: HypervisorTypeEnumValue;
 
-  @doc("Gets and sets the property iamInstanceProfile.<p>The IAM instance profile associated with the instance, if applicable.</p>")
+  @doc("<p>The IAM instance profile associated with the instance, if applicable.</p>")
   iamInstanceProfile?: IamInstanceProfile;
 
-  @doc("Gets and sets the property imageId.<p>The ID of the AMI used to launch the instance.</p>")
+  @doc("<p>The ID of the AMI used to launch the instance.</p>")
   imageId?: string;
 
-  @doc("Gets and sets the property instanceId.<p>The ID of the instance.</p>")
+  @doc("<p>The ID of the instance.</p>")
   instanceId?: string;
 
-  @doc("Gets and sets the property instanceLifecycle.<p>Indicates whether this is a Spot Instance or a Scheduled Instance.</p>")
+  @doc("<p>Indicates whether this is a Spot Instance or a Scheduled Instance.</p>")
   instanceLifecycle?: InstanceLifecycleTypeEnumValue;
 
-  @doc("Gets and sets the property instanceType.<p>The instance type.</p>")
+  @doc("<p>The instance type.</p>")
   instanceType?: InstanceTypeEnumValue;
 
-  @doc("Gets and sets the property ipv6Address.<p>The IPv6 address assigned to the instance.</p>")
+  @doc("<p>The IPv6 address assigned to the instance.</p>")
   ipv6Address?: string;
 
-  @doc("Gets and sets the property kernelId.<p>The kernel associated with this instance, if applicable.</p>")
+  @doc("<p>The kernel associated with this instance, if applicable.</p>")
   kernelId?: string;
 
-  @doc("Gets and sets the property keyName.<p>The name of the key pair, if this instance was launched with an associated key pair.</p>")
+  @doc("<p>The name of the key pair, if this instance was launched with an associated key pair.</p>")
   keyName?: string;
 
-  @doc("Gets and sets the property launchTime.<p>The time the instance was launched.</p>")
+  @doc("<p>The time the instance was launched.</p>")
   launchTime?: utcDateTime;
 
-  @doc("Gets and sets the property licenses.<p>The license configurations for the instance.</p>")
+  @doc("<p>The license configurations for the instance.</p>")
   @extension("x-ms-identifiers", [])
   licenses?: LicenseConfiguration[];
 
-  @doc("Gets and sets the property maintenanceOptions.<p>Provides information on the recovery and maintenance options of your instance.</p>")
+  @doc("<p>Provides information on the recovery and maintenance options of your instance.</p>")
   maintenanceOptions?: InstanceMaintenanceOptions;
 
-  @doc("Gets and sets the property metadataOptions.<p>The metadata options for the instance.</p>")
+  @doc("<p>The metadata options for the instance.</p>")
   metadataOptions?: InstanceMetadataOptionsResponse;
 
-  @doc("Gets and sets the property monitoring.<p>The monitoring for the instance.</p>")
+  @doc("<p>The monitoring for the instance.</p>")
   monitoring?: Monitoring;
 
-  @doc("Gets and sets the property networkInterfaces.<p>The network interfaces for the instance.</p>")
+  @doc("<p>The network interfaces for the instance.</p>")
   @extension("x-ms-identifiers", [])
   networkInterfaces?: InstanceNetworkInterface[];
 
-  @doc("Gets and sets the property outpostArn.<p>The Amazon Resource Name (ARN) of the Outpost.</p>")
+  @doc("<p>The Amazon Resource Name (ARN) of the Outpost.</p>")
   outpostArn?: string;
 
-  @doc("Gets and sets the property placement.<p>The location where the instance launched, if applicable.</p>")
+  @doc("<p>The location where the instance launched, if applicable.</p>")
   placement?: Placement;
 
-  @doc("Gets and sets the property platform.<p>The platform. This value is <code>windows</code> for Windows instances; otherwise, it is empty.</p>")
+  @doc("<p>The platform. This value is <code>windows</code> for Windows instances; otherwise, it is empty.</p>")
   platform?: PlatformValuesEnumValue;
 
-  @doc("Gets and sets the property platformDetails.<p>The platform details value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>")
+  @doc("<p>The platform details value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   platformDetails?: string;
 
-  @doc("Gets and sets the property privateDnsName.<p>[IPv4 only] The private DNS hostname name assigned to the instance. This DNS hostname can only be used inside the Amazon EC2 network. This name is not available until the instance enters the <code>running</code> state. </p> <p>The Amazon-provided DNS server resolves Amazon-provided private DNS hostnames if you've enabled DNS resolution and DNS hostnames in your VPC. If you are not using the Amazon-provided DNS server in your VPC, your custom domain name servers must resolve the hostname as appropriate.</p>")
+  @doc("<p>[IPv4 only] The private DNS hostname name assigned to the instance. This DNS hostname can only be used inside the Amazon EC2 network. This name is not available until the instance enters the <code>running</code> state. </p> <p>The Amazon-provided DNS server resolves Amazon-provided private DNS hostnames if you've enabled DNS resolution and DNS hostnames in your VPC. If you are not using the Amazon-provided DNS server in your VPC, your custom domain name servers must resolve the hostname as appropriate.</p>")
   privateDnsName?: string;
 
-  @doc("Gets and sets the property privateDnsNameOptions.<p>The options for the instance hostname.</p>")
+  @doc("<p>The options for the instance hostname.</p>")
   privateDnsNameOptions?: PrivateDnsNameOptionsResponse;
 
-  @doc("Gets and sets the property privateIpAddress.<p>The private IPv4 address assigned to the instance.</p>")
+  @doc("<p>The private IPv4 address assigned to the instance.</p>")
   privateIpAddress?: string;
 
-  @doc("Gets and sets the property productCodes.<p>The product codes attached to this instance, if applicable.</p>")
+  @doc("<p>The product codes attached to this instance, if applicable.</p>")
   @extension("x-ms-identifiers", [])
   productCodes?: ProductCode[];
 
-  @doc("Gets and sets the property publicDnsName.<p>[IPv4 only] The public DNS name assigned to the instance. This name is not available until the instance enters the <code>running</code> state. This name is only available if you've enabled DNS hostnames for your VPC.</p>")
+  @doc("<p>[IPv4 only] The public DNS name assigned to the instance. This name is not available until the instance enters the <code>running</code> state. This name is only available if you've enabled DNS hostnames for your VPC.</p>")
   publicDnsName?: string;
 
-  @doc("Gets and sets the property publicIpAddress.<p>The public IPv4 address, or the Carrier IP address assigned to the instance, if applicable.</p> <p>A Carrier IP address only applies to an instance launched in a subnet associated with a Wavelength Zone.</p>")
+  @doc("<p>The public IPv4 address, or the Carrier IP address assigned to the instance, if applicable.</p> <p>A Carrier IP address only applies to an instance launched in a subnet associated with a Wavelength Zone.</p>")
   publicIpAddress?: string;
 
-  @doc("Gets and sets the property ramdiskId.<p>The RAM disk associated with this instance, if applicable.</p>")
+  @doc("<p>The RAM disk associated with this instance, if applicable.</p>")
   ramdiskId?: string;
 
-  @doc("Gets and sets the property rootDeviceName.<p>The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>")
+  @doc("<p>The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>")
   rootDeviceName?: string;
 
-  @doc("Gets and sets the property rootDeviceType.<p>The root device type used by the AMI. The AMI can use an EBS volume or an instance store volume.</p>")
+  @doc("<p>The root device type used by the AMI. The AMI can use an EBS volume or an instance store volume.</p>")
   rootDeviceType?: DeviceTypeEnumValue;
 
-  @doc("Gets and sets the property securityGroups.<p>The security groups for the instance.</p>")
+  @doc("<p>The security groups for the instance.</p>")
   @extension("x-ms-identifiers", [])
   securityGroups?: GroupIdentifier[];
 
-  @doc("Gets and sets the property sourceDestCheck.<p>Indicates whether source/destination checking is enabled.</p>")
+  @doc("<p>Indicates whether source/destination checking is enabled.</p>")
   sourceDestCheck?: boolean;
 
-  @doc("Gets and sets the property spotInstanceRequestId.<p>If the request is a Spot Instance request, the ID of the request.</p>")
+  @doc("<p>If the request is a Spot Instance request, the ID of the request.</p>")
   spotInstanceRequestId?: string;
 
-  @doc("Gets and sets the property sriovNetSupport.<p>Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>")
+  @doc("<p>Specifies whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>")
   sriovNetSupport?: string;
 
-  @doc("Gets and sets the property state.<p>The current state of the instance.</p>")
+  @doc("<p>The current state of the instance.</p>")
   state?: InstanceState;
 
-  @doc("Gets and sets the property stateReason.<p>The reason for the most recent state transition.</p>")
+  @doc("<p>The reason for the most recent state transition.</p>")
   stateReason?: StateReason;
 
-  @doc("Gets and sets the property stateTransitionReason.<p>The reason for the most recent state transition. This might be an empty string.</p>")
+  @doc("<p>The reason for the most recent state transition. This might be an empty string.</p>")
   stateTransitionReason?: string;
 
-  @doc("Gets and sets the property subnetId.<p>The ID of the subnet in which the instance is running.</p>")
+  @doc("<p>The ID of the subnet in which the instance is running.</p>")
   subnetId?: string;
 
-  @doc("Gets and sets the property tags.<p>Any tags assigned to the instance.</p>")
+  @doc("<p>Any tags assigned to the instance.</p>")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property tpmSupport.<p>If the instance is configured for NitroTPM support, the value is <code>v2.0</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html'>NitroTPM</a> in the <i>Amazon EC2 User Guide</i>.</p>")
+  @doc("<p>If the instance is configured for NitroTPM support, the value is <code>v2.0</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html'>NitroTPM</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   tpmSupport?: string;
 
-  @doc("Gets and sets the property usageOperation.<p>The usage operation value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>")
+  @doc("<p>The usage operation value for the instance. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html'>AMI billing information fields</a> in the <i>Amazon EC2 User Guide</i>.</p>")
   usageOperation?: string;
 
-  @doc("Gets and sets the property usageOperationUpdateTime.<p>The time that the usage operation was last updated.</p>")
+  @doc("<p>The time that the usage operation was last updated.</p>")
   usageOperationUpdateTime?: utcDateTime;
 
-  @doc("Gets and sets the property virtualizationType.<p>The virtualization type of the instance.</p>")
+  @doc("<p>The virtualization type of the instance.</p>")
   virtualizationType?: VirtualizationTypeEnumValue;
 
-  @doc("Gets and sets the property vpcId.<p>The ID of the VPC in which the instance is running.</p>")
+  @doc("<p>The ID of the VPC in which the instance is running.</p>")
   vpcId?: string;
 }
 
@@ -269,7 +269,7 @@ union ArchitectureValues {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ArchitectureValuesEnumValue")
 model ArchitectureValuesEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: ArchitectureValues;
 }
 
@@ -290,7 +290,7 @@ union InstanceBootModeValues {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceBootModeValuesEnumValue")
 model InstanceBootModeValuesEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: InstanceBootModeValues;
 }
 
@@ -314,7 +314,7 @@ union InstanceLifecycleType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceLifecycleTypeEnumValue")
 model InstanceLifecycleTypeEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: InstanceLifecycleType;
 }
 
@@ -332,7 +332,7 @@ union PlatformValues {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PlatformValuesEnumValue")
 model PlatformValuesEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: PlatformValues;
 }
 
@@ -353,7 +353,7 @@ union VirtualizationType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of VirtualizationTypeEnumValue")
 model VirtualizationTypeEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: VirtualizationType;
 }
 
@@ -363,10 +363,10 @@ model VirtualizationTypeEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceBlockDeviceMapping")
 model InstanceBlockDeviceMapping {
-  @doc("Gets and sets the property deviceName.<p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>")
+  @doc("<p>The device name (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>")
   deviceName?: string;
 
-  @doc("Gets and sets the property ebs.<p>Parameters used to automatically set up EBS volumes when the instance is launched.</p>")
+  @doc("<p>Parameters used to automatically set up EBS volumes when the instance is launched.</p>")
   ebs?: EbsInstanceBlockDevice;
 }
 
@@ -390,7 +390,7 @@ union BootModeValues {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of BootModeValuesEnumValue")
 model BootModeValuesEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: BootModeValues;
 }
 
@@ -858,6 +858,9 @@ union InstanceType {
   @doc("InstanceType enum c7gd.medium")
   C7gdMedium: "c7gd.medium",
 
+  @doc("InstanceType enum c7gd.metal")
+  C7gdMetal: "c7gd.metal",
+
   @doc("InstanceType enum c7gd.xlarge")
   C7gdXlarge: "c7gd.xlarge",
 
@@ -1082,6 +1085,36 @@ union InstanceType {
 
   @doc("InstanceType enum g5g.xlarge")
   G5gXlarge: "g5g.xlarge",
+
+  @doc("InstanceType enum g6.12xlarge")
+  G612xlarge: "g6.12xlarge",
+
+  @doc("InstanceType enum g6.16xlarge")
+  G616xlarge: "g6.16xlarge",
+
+  @doc("InstanceType enum g6.24xlarge")
+  G624xlarge: "g6.24xlarge",
+
+  @doc("InstanceType enum g6.2xlarge")
+  G62xlarge: "g6.2xlarge",
+
+  @doc("InstanceType enum g6.48xlarge")
+  G648xlarge: "g6.48xlarge",
+
+  @doc("InstanceType enum g6.4xlarge")
+  G64xlarge: "g6.4xlarge",
+
+  @doc("InstanceType enum g6.8xlarge")
+  G68xlarge: "g6.8xlarge",
+
+  @doc("InstanceType enum g6.xlarge")
+  G6Xlarge: "g6.xlarge",
+
+  @doc("InstanceType enum gr6.4xlarge")
+  Gr64xlarge: "gr6.4xlarge",
+
+  @doc("InstanceType enum gr6.8xlarge")
+  Gr68xlarge: "gr6.8xlarge",
 
   @doc("InstanceType enum h1.16xlarge")
   H116xlarge: "h1.16xlarge",
@@ -1812,6 +1845,9 @@ union InstanceType {
   @doc("InstanceType enum m7gd.medium")
   M7gdMedium: "m7gd.medium",
 
+  @doc("InstanceType enum m7gd.metal")
+  M7gdMetal: "m7gd.metal",
+
   @doc("InstanceType enum m7gd.xlarge")
   M7gdXlarge: "m7gd.xlarge",
 
@@ -2412,6 +2448,9 @@ union InstanceType {
   @doc("InstanceType enum r7gd.medium")
   R7gdMedium: "r7gd.medium",
 
+  @doc("InstanceType enum r7gd.metal")
+  R7gdMetal: "r7gd.metal",
+
   @doc("InstanceType enum r7gd.xlarge")
   R7gdXlarge: "r7gd.xlarge",
 
@@ -2754,7 +2793,7 @@ union InstanceType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceTypeEnumValue")
 model InstanceTypeEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: InstanceType;
 }
 
@@ -2764,10 +2803,10 @@ model InstanceTypeEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CapacityReservationSpecificationResponse")
 model CapacityReservationSpecificationResponse {
-  @doc("Gets and sets the property capacityReservationPreference.<p>Describes the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>")
+  @doc("<p>Describes the instance's Capacity Reservation preferences. Possible preferences include:</p> <ul> <li> <p> <code>open</code> - The instance can run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p> </li> <li> <p> <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.</p> </li> </ul>")
   capacityReservationPreference?: CapacityReservationPreferenceEnumValue;
 
-  @doc("Gets and sets the property capacityReservationTarget.<p>Information about the targeted Capacity Reservation or Capacity Reservation group.</p>")
+  @doc("<p>Information about the targeted Capacity Reservation or Capacity Reservation group.</p>")
   capacityReservationTarget?: CapacityReservationTargetResponse;
 }
 
@@ -2788,7 +2827,7 @@ union HypervisorType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of HypervisorTypeEnumValue")
 model HypervisorTypeEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: HypervisorType;
 }
 
@@ -2809,7 +2848,7 @@ union CapacityReservationPreference {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CapacityReservationPreferenceEnumValue")
 model CapacityReservationPreferenceEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: CapacityReservationPreference;
 }
 
@@ -2819,13 +2858,13 @@ model CapacityReservationPreferenceEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CpuOptions")
 model CpuOptions {
-  @doc("Gets and sets the property amdSevSnp.<p>Indicates whether the instance is enabled for AMD SEV-SNP. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html'>AMD SEV-SNP</a>.</p>")
+  @doc("<p>Indicates whether the instance is enabled for AMD SEV-SNP. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html'>AMD SEV-SNP</a>.</p>")
   amdSevSnp?: AmdSevSnpSpecificationEnumValue;
 
-  @doc("Gets and sets the property coreCount.<p>The number of CPU cores for the instance.</p>")
+  @doc("<p>The number of CPU cores for the instance.</p>")
   coreCount?: int32;
 
-  @doc("Gets and sets the property threadsPerCore.<p>The number of threads per CPU core.</p>")
+  @doc("<p>The number of threads per CPU core.</p>")
   threadsPerCore?: int32;
 }
 
@@ -2846,7 +2885,7 @@ union DeviceType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DeviceTypeEnumValue")
 model DeviceTypeEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: DeviceType;
 }
 
@@ -2856,16 +2895,16 @@ model DeviceTypeEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ElasticGpuAssociation")
 model ElasticGpuAssociation {
-  @doc("Gets and sets the property elasticGpuAssociationId.<p>The ID of the association.</p>")
+  @doc("<p>The ID of the association.</p>")
   elasticGpuAssociationId?: string;
 
-  @doc("Gets and sets the property elasticGpuAssociationState.<p>The state of the association between the instance and the Elastic Graphics accelerator.</p>")
+  @doc("<p>The state of the association between the instance and the Elastic Graphics accelerator.</p>")
   elasticGpuAssociationState?: string;
 
-  @doc("Gets and sets the property elasticGpuAssociationTime.<p>The time the Elastic Graphics accelerator was associated with the instance.</p>")
+  @doc("<p>The time the Elastic Graphics accelerator was associated with the instance.</p>")
   elasticGpuAssociationTime?: string;
 
-  @doc("Gets and sets the property elasticGpuId.<p>The ID of the Elastic Graphics accelerator.</p>")
+  @doc("<p>The ID of the Elastic Graphics accelerator.</p>")
   elasticGpuId?: string;
 }
 
@@ -2886,7 +2925,7 @@ union AmdSevSnpSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AmdSevSnpSpecificationEnumValue")
 model AmdSevSnpSpecificationEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: AmdSevSnpSpecification;
 }
 
@@ -2896,16 +2935,16 @@ model AmdSevSnpSpecificationEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ElasticInferenceAcceleratorAssociation")
 model ElasticInferenceAcceleratorAssociation {
-  @doc("Gets and sets the property elasticInferenceAcceleratorArn.<p> The Amazon Resource Name (ARN) of the elastic inference accelerator. </p>")
+  @doc("<p> The Amazon Resource Name (ARN) of the elastic inference accelerator. </p>")
   elasticInferenceAcceleratorArn?: string;
 
-  @doc("Gets and sets the property elasticInferenceAcceleratorAssociationId.<p> The ID of the association. </p>")
+  @doc("<p> The ID of the association. </p>")
   elasticInferenceAcceleratorAssociationId?: string;
 
-  @doc("Gets and sets the property elasticInferenceAcceleratorAssociationState.<p> The state of the elastic inference accelerator. </p>")
+  @doc("<p> The state of the elastic inference accelerator. </p>")
   elasticInferenceAcceleratorAssociationState?: string;
 
-  @doc("Gets and sets the property elasticInferenceAcceleratorAssociationTime.<p> The time at which the elastic inference accelerator is associated with an instance. </p>")
+  @doc("<p> The time at which the elastic inference accelerator is associated with an instance. </p>")
   elasticInferenceAcceleratorAssociationTime?: utcDateTime;
 }
 
@@ -2915,7 +2954,7 @@ model ElasticInferenceAcceleratorAssociation {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EnclaveOptions")
 model EnclaveOptions {
-  @doc("Gets and sets the property enabled.<p>If this parameter is set to <code>true</code>, the instance is enabled for Amazon Web Services Nitro Enclaves; otherwise, it is not enabled for Amazon Web Services Nitro Enclaves.</p>")
+  @doc("<p>If this parameter is set to <code>true</code>, the instance is enabled for Amazon Web Services Nitro Enclaves; otherwise, it is not enabled for Amazon Web Services Nitro Enclaves.</p>")
   enabled?: boolean;
 }
 
@@ -2925,7 +2964,7 @@ model EnclaveOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of HibernationOptions")
 model HibernationOptions {
-  @doc("Gets and sets the property configured.<p>If <code>true</code>, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.</p>")
+  @doc("<p>If <code>true</code>, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.</p>")
   configured?: boolean;
 }
 
@@ -2935,10 +2974,10 @@ model HibernationOptions {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IamInstanceProfile")
 model IamInstanceProfile {
-  @doc("Gets and sets the property arn.<p>The Amazon Resource Name (ARN) of the instance profile.</p>")
+  @doc("<p>The Amazon Resource Name (ARN) of the instance profile.</p>")
   arn?: string;
 
-  @doc("Gets and sets the property id.<p>The ID of the instance profile.</p>")
+  @doc("<p>The ID of the instance profile.</p>")
   id?: string;
 }
 
@@ -2948,7 +2987,7 @@ model IamInstanceProfile {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LicenseConfiguration")
 model LicenseConfiguration {
-  @doc("Gets and sets the property licenseConfigurationArn.<p>The Amazon Resource Name (ARN) of the license configuration.</p>")
+  @doc("<p>The Amazon Resource Name (ARN) of the license configuration.</p>")
   licenseConfigurationArn?: string;
 }
 
@@ -2958,7 +2997,7 @@ model LicenseConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceMaintenanceOptions")
 model InstanceMaintenanceOptions {
-  @doc("Gets and sets the property autoRecovery.<p>Provides information on the current automatic recovery behavior of your instance.</p>")
+  @doc("<p>Provides information on the current automatic recovery behavior of your instance.</p>")
   autoRecovery?: InstanceAutoRecoveryStateEnumValue;
 }
 
@@ -2979,7 +3018,7 @@ union InstanceAutoRecoveryState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceAutoRecoveryStateEnumValue")
 model InstanceAutoRecoveryStateEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: InstanceAutoRecoveryState;
 }
 
@@ -2989,22 +3028,22 @@ model InstanceAutoRecoveryStateEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceMetadataOptionsResponse")
 model InstanceMetadataOptionsResponse {
-  @doc("Gets and sets the property httpEndpoint.<p>Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.</p> <p>If the value is <code>disabled</code>, you cannot access your instance metadata.</p>")
+  @doc("<p>Indicates whether the HTTP metadata endpoint on your instances is enabled or disabled.</p> <p>If the value is <code>disabled</code>, you cannot access your instance metadata.</p>")
   httpEndpoint?: InstanceMetadataEndpointStateEnumValue;
 
-  @doc("Gets and sets the property httpProtocolIpv6.<p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>")
+  @doc("<p>Indicates whether the IPv6 endpoint for the instance metadata service is enabled or disabled.</p> <p>Default: <code>disabled</code> </p>")
   httpProtocolIpv6?: InstanceMetadataProtocolStateEnumValue;
 
-  @doc("Gets and sets the property httpPutResponseHopLimit.<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p> <p>Default: 1</p> <p>Possible values: Integers from 1 to 64</p>")
+  @doc("<p>The maximum number of hops that the metadata token can travel.</p> <p>Possible values: Integers from <code>1</code> to <code>64</code> </p>")
   httpPutResponseHopLimit?: int32;
 
-  @doc("Gets and sets the property httpTokens.<p>Indicates whether IMDSv2 is required.</p> <ul> <li> <p> <code>optional</code> - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.</p> </li> <li> <p> <code>required</code> - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.</p> </li> </ul>")
+  @doc("<p>Indicates whether IMDSv2 is required.</p> <ul> <li> <p> <code>optional</code> - IMDSv2 is optional, which means that you can use either IMDSv2 or IMDSv1.</p> </li> <li> <p> <code>required</code> - IMDSv2 is required, which means that IMDSv1 is disabled, and you must use IMDSv2.</p> </li> </ul>")
   httpTokens?: HttpTokensStateEnumValue;
 
-  @doc("Gets and sets the property instanceMetadataTags.<p>Indicates whether access to instance tags from the instance metadata is enabled or disabled. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS'>Work with instance tags using the instance metadata</a>.</p>")
+  @doc("<p>Indicates whether access to instance tags from the instance metadata is enabled or disabled. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS'>Work with instance tags using the instance metadata</a>.</p>")
   instanceMetadataTags?: InstanceMetadataTagsStateEnumValue;
 
-  @doc("Gets and sets the property state.<p>The state of the metadata option changes.</p> <p> <code>pending</code> - The metadata options are being updated and the instance is not ready to process metadata traffic with the new selection.</p> <p> <code>applied</code> - The metadata options have been successfully applied on the instance.</p>")
+  @doc("<p>The state of the metadata option changes.</p> <p> <code>pending</code> - The metadata options are being updated and the instance is not ready to process metadata traffic with the new selection.</p> <p> <code>applied</code> - The metadata options have been successfully applied on the instance.</p>")
   state?: InstanceMetadataOptionsStateEnumValue;
 }
 
@@ -3025,7 +3064,7 @@ union InstanceMetadataEndpointState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceMetadataEndpointStateEnumValue")
 model InstanceMetadataEndpointStateEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: InstanceMetadataEndpointState;
 }
 
@@ -3046,7 +3085,7 @@ union HttpTokensState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of HttpTokensStateEnumValue")
 model HttpTokensStateEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: HttpTokensState;
 }
 
@@ -3067,7 +3106,7 @@ union InstanceMetadataOptionsState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceMetadataOptionsStateEnumValue")
 model InstanceMetadataOptionsStateEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: InstanceMetadataOptionsState;
 }
 
@@ -3077,7 +3116,7 @@ model InstanceMetadataOptionsStateEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Monitoring")
 model Monitoring {
-  @doc("Gets and sets the property state.<p>Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.</p>")
+  @doc("<p>Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.</p>")
   state?: MonitoringStateEnumValue;
 }
 
@@ -3098,8 +3137,8 @@ union InstanceMetadataProtocolState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceMetadataProtocolStateEnumValue")
 model InstanceMetadataProtocolStateEnumValue {
-  @doc("Gets and sets the property value.")
-  value?: InstanceMetadataProtocolState;
+  @doc("Property value")
+  value?: InstanceMetadataProtocolState = "disabled";
 }
 
 @doc("MonitoringState enum")
@@ -3125,7 +3164,7 @@ union MonitoringState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MonitoringStateEnumValue")
 model MonitoringStateEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: MonitoringState;
 }
 
@@ -3135,66 +3174,66 @@ model MonitoringStateEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceNetworkInterface")
 model InstanceNetworkInterface {
-  @doc("Gets and sets the property association.<p>The association information for an Elastic IPv4 associated with the network interface.</p>")
+  @doc("<p>The association information for an Elastic IPv4 associated with the network interface.</p>")
   association?: InstanceNetworkInterfaceAssociation;
 
-  @doc("Gets and sets the property attachment.<p>The network interface attachment.</p>")
+  @doc("<p>The network interface attachment.</p>")
   attachment?: InstanceNetworkInterfaceAttachment;
 
-  @doc("Gets and sets the property connectionTrackingConfiguration.<p>A security group connection tracking configuration that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts'>Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>")
+  @doc("<p>A security group connection tracking configuration that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts'>Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>")
   connectionTrackingConfiguration?: ConnectionTrackingSpecificationResponse;
 
-  @doc("Gets and sets the property description.<p>The description.</p>")
+  @doc("<p>The description.</p>")
   description?: string;
 
-  @doc("Gets and sets the property groups.<p>The security groups.</p>")
+  @doc("<p>The security groups.</p>")
   @extension("x-ms-identifiers", [])
   groups?: GroupIdentifier[];
 
-  @doc("Gets and sets the property interfaceType.<p>The type of network interface.</p> <p>Valid values: <code>interface</code> | <code>efa</code> | <code>trunk</code> </p>")
+  @doc("<p>The type of network interface.</p> <p>Valid values: <code>interface</code> | <code>efa</code> | <code>trunk</code> </p>")
   interfaceType?: string;
 
-  @doc("Gets and sets the property ipv4Prefixes.<p>The IPv4 delegated prefixes that are assigned to the network interface.</p>")
+  @doc("<p>The IPv4 delegated prefixes that are assigned to the network interface.</p>")
   @extension("x-ms-identifiers", [])
   ipv4Prefixes?: InstanceIpv4Prefix[];
 
-  @doc("Gets and sets the property ipv6Addresses.<p>The IPv6 addresses associated with the network interface.</p>")
+  @doc("<p>The IPv6 addresses associated with the network interface.</p>")
   @extension("x-ms-identifiers", [])
   ipv6Addresses?: InstanceIpv6Address[];
 
-  @doc("Gets and sets the property ipv6Prefixes.<p>The IPv6 delegated prefixes that are assigned to the network interface.</p>")
+  @doc("<p>The IPv6 delegated prefixes that are assigned to the network interface.</p>")
   @extension("x-ms-identifiers", [])
   ipv6Prefixes?: InstanceIpv6Prefix[];
 
-  @doc("Gets and sets the property macAddress.<p>The MAC address.</p>")
+  @doc("<p>The MAC address.</p>")
   macAddress?: string;
 
-  @doc("Gets and sets the property networkInterfaceId.<p>The ID of the network interface.</p>")
+  @doc("<p>The ID of the network interface.</p>")
   networkInterfaceId?: string;
 
-  @doc("Gets and sets the property ownerId.<p>The ID of the Amazon Web Services account that created the network interface.</p>")
+  @doc("<p>The ID of the Amazon Web Services account that created the network interface.</p>")
   ownerId?: string;
 
-  @doc("Gets and sets the property privateDnsName.<p>The private DNS name.</p>")
+  @doc("<p>The private DNS name.</p>")
   privateDnsName?: string;
 
-  @doc("Gets and sets the property privateIpAddress.<p>The IPv4 address of the network interface within the subnet.</p>")
+  @doc("<p>The IPv4 address of the network interface within the subnet.</p>")
   privateIpAddress?: string;
 
-  @doc("Gets and sets the property privateIpAddresses.<p>The private IPv4 addresses associated with the network interface.</p>")
+  @doc("<p>The private IPv4 addresses associated with the network interface.</p>")
   @extension("x-ms-identifiers", [])
   privateIpAddresses?: InstancePrivateIpAddress[];
 
-  @doc("Gets and sets the property sourceDestCheck.<p>Indicates whether source/destination checking is enabled.</p>")
+  @doc("<p>Indicates whether source/destination checking is enabled.</p>")
   sourceDestCheck?: boolean;
 
-  @doc("Gets and sets the property status.<p>The status of the network interface.</p>")
+  @doc("<p>The status of the network interface.</p>")
   status?: NetworkInterfaceStatusEnumValue;
 
-  @doc("Gets and sets the property subnetId.<p>The ID of the subnet.</p>")
+  @doc("<p>The ID of the subnet.</p>")
   subnetId?: string;
 
-  @doc("Gets and sets the property vpcId.<p>The ID of the VPC.</p>")
+  @doc("<p>The ID of the VPC.</p>")
   vpcId?: string;
 }
 
@@ -3215,7 +3254,7 @@ union InstanceMetadataTagsState {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceMetadataTagsStateEnumValue")
 model InstanceMetadataTagsStateEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: InstanceMetadataTagsState;
 }
 
@@ -3225,31 +3264,31 @@ model InstanceMetadataTagsStateEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Placement")
 model Placement {
-  @doc("Gets and sets the property affinity.<p>The affinity setting for the instance on the Dedicated Host.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>")
+  @doc("<p>The affinity setting for the instance on the Dedicated Host.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>")
   affinity?: string;
 
-  @doc("Gets and sets the property availabilityZone.<p>The Availability Zone of the instance.</p> <p>If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
+  @doc("<p>The Availability Zone of the instance.</p> <p>If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
   availabilityZone?: string;
 
-  @doc("Gets and sets the property groupId.<p>The ID of the placement group that the instance is in. If you specify <code>GroupId</code>, you can't specify <code>GroupName</code>.</p>")
+  @doc("<p>The ID of the placement group that the instance is in. If you specify <code>GroupId</code>, you can't specify <code>GroupName</code>.</p>")
   groupId?: string;
 
-  @doc("Gets and sets the property groupName.<p>The name of the placement group that the instance is in. If you specify <code>GroupName</code>, you can't specify <code>GroupId</code>.</p>")
+  @doc("<p>The name of the placement group that the instance is in. If you specify <code>GroupName</code>, you can't specify <code>GroupId</code>.</p>")
   groupName?: string;
 
-  @doc("Gets and sets the property hostId.<p>The ID of the Dedicated Host on which the instance resides.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>")
+  @doc("<p>The ID of the Dedicated Host on which the instance resides.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a> or <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a>.</p>")
   hostId?: string;
 
-  @doc("Gets and sets the property hostResourceGroupArn.<p>The ARN of the host resource group in which to launch the instances.</p> <p>If you specify this parameter, either omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
+  @doc("<p>The ARN of the host resource group in which to launch the instances.</p> <p>If you specify this parameter, either omit the <b>Tenancy</b> parameter or set it to <code>host</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
   hostResourceGroupArn?: string;
 
-  @doc("Gets and sets the property partitionNumber.<p>The number of the partition that the instance is in. Valid only if the placement group strategy is set to <code>partition</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
+  @doc("<p>The number of the partition that the instance is in. Valid only if the placement group strategy is set to <code>partition</code>.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>.</p>")
   partitionNumber?: int32;
 
-  @doc("Gets and sets the property spreadDomain.<p>Reserved for future use.</p>")
+  @doc("<p>Reserved for future use.</p>")
   spreadDomain?: string;
 
-  @doc("Gets and sets the property tenancy.<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>. The <code>host</code> tenancy is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a> or for T3 instances that are configured for the <code>unlimited</code> CPU credit option.</p>")
+  @doc("<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> runs on single-tenant hardware.</p> <p>This parameter is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet'>CreateFleet</a>. The <code>host</code> tenancy is not supported for <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html'>ImportInstance</a> or for T3 instances that are configured for the <code>unlimited</code> CPU credit option.</p>")
   tenancy?: TenancyEnumValue;
 }
 
@@ -3279,7 +3318,7 @@ union NetworkInterfaceStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NetworkInterfaceStatusEnumValue")
 model NetworkInterfaceStatusEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: NetworkInterfaceStatus;
 }
 
@@ -3289,13 +3328,13 @@ model NetworkInterfaceStatusEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PrivateDnsNameOptionsResponse")
 model PrivateDnsNameOptionsResponse {
-  @doc("Gets and sets the property enableResourceNameDnsAAAARecord.<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>")
+  @doc("<p>Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.</p>")
   enableResourceNameDnsAAAARecord?: boolean;
 
-  @doc("Gets and sets the property enableResourceNameDnsARecord.<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>")
+  @doc("<p>Indicates whether to respond to DNS queries for instance hostnames with DNS A records.</p>")
   enableResourceNameDnsARecord?: boolean;
 
-  @doc("Gets and sets the property hostnameType.<p>The type of hostname to assign to an instance.</p>")
+  @doc("<p>The type of hostname to assign to an instance.</p>")
   hostnameType?: HostnameTypeEnumValue;
 }
 
@@ -3319,7 +3358,7 @@ union Tenancy {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TenancyEnumValue")
 model TenancyEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: Tenancy;
 }
 
@@ -3329,10 +3368,10 @@ model TenancyEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ProductCode")
 model ProductCode {
-  @doc("Gets and sets the property productCodeId.<p>The product code.</p>")
+  @doc("<p>The product code.</p>")
   productCodeId?: string;
 
-  @doc("Gets and sets the property productCodeType.<p>The type of product code.</p>")
+  @doc("<p>The type of product code.</p>")
   productCodeType?: ProductCodeValuesEnumValue;
 }
 
@@ -3353,7 +3392,7 @@ union HostnameType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of HostnameTypeEnumValue")
 model HostnameTypeEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: HostnameType;
 }
 
@@ -3363,10 +3402,10 @@ model HostnameTypeEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of GroupIdentifier")
 model GroupIdentifier {
-  @doc("Gets and sets the property groupId.<p>The ID of the security group.</p>")
+  @doc("<p>The ID of the security group.</p>")
   groupId?: string;
 
-  @doc("Gets and sets the property groupName.<p>The name of the security group.</p>")
+  @doc("<p>The name of the security group.</p>")
   groupName?: string;
 }
 
@@ -3387,7 +3426,7 @@ union ProductCodeValues {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ProductCodeValuesEnumValue")
 model ProductCodeValuesEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: ProductCodeValues;
 }
 
@@ -3397,10 +3436,10 @@ model ProductCodeValuesEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceState")
 model InstanceState {
-  @doc("Gets and sets the property code.<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>")
+  @doc("<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>")
   code?: int32;
 
-  @doc("Gets and sets the property name.<p>The current state of the instance.</p>")
+  @doc("<p>The current state of the instance.</p>")
   name?: InstanceStateNameEnumValue;
 }
 
@@ -3433,7 +3472,7 @@ union InstanceStateName {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceStateNameEnumValue")
 model InstanceStateNameEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: InstanceStateName;
 }
 
@@ -3443,10 +3482,10 @@ model InstanceStateNameEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StateReason")
 model StateReason {
-  @doc("Gets and sets the property code.<p>The reason code for the state change.</p>")
+  @doc("<p>The reason code for the state change.</p>")
   code?: string;
 
-  @doc("Gets and sets the property message.<p>The message for the state change.</p> <ul> <li> <p> <code>Server.InsufficientInstanceCapacity</code>: There was insufficient capacity available to satisfy the launch request.</p> </li> <li> <p> <code>Server.InternalError</code>: An internal error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Server.ScheduledStop</code>: The instance was stopped due to a scheduled retirement.</p> </li> <li> <p> <code>Server.SpotInstanceShutdown</code>: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Server.SpotInstanceTermination</code>: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Client.InstanceInitiatedShutdown</code>: The instance was shut down from the operating system of the instance.</p> </li> <li> <p> <code>Client.InstanceTerminated</code>: The instance was terminated or rebooted during AMI creation.</p> </li> <li> <p> <code>Client.InternalError</code>: A client error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Client.InvalidSnapshot.NotFound</code>: The specified snapshot was not found.</p> </li> <li> <p> <code>Client.UserInitiatedHibernate</code>: Hibernation was initiated on the instance.</p> </li> <li> <p> <code>Client.UserInitiatedShutdown</code>: The instance was shut down using the Amazon EC2 API.</p> </li> <li> <p> <code>Client.VolumeLimitExceeded</code>: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.</p> </li> </ul>")
+  @doc("<p>The message for the state change.</p> <ul> <li> <p> <code>Server.InsufficientInstanceCapacity</code>: There was insufficient capacity available to satisfy the launch request.</p> </li> <li> <p> <code>Server.InternalError</code>: An internal error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Server.ScheduledStop</code>: The instance was stopped due to a scheduled retirement.</p> </li> <li> <p> <code>Server.SpotInstanceShutdown</code>: The instance was stopped because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Server.SpotInstanceTermination</code>: The instance was terminated because the number of Spot requests with a maximum price equal to or higher than the Spot price exceeded available capacity or because of an increase in the Spot price.</p> </li> <li> <p> <code>Client.InstanceInitiatedShutdown</code>: The instance was shut down from the operating system of the instance.</p> </li> <li> <p> <code>Client.InstanceTerminated</code>: The instance was terminated or rebooted during AMI creation.</p> </li> <li> <p> <code>Client.InternalError</code>: A client error caused the instance to terminate during launch.</p> </li> <li> <p> <code>Client.InvalidSnapshot.NotFound</code>: The specified snapshot was not found.</p> </li> <li> <p> <code>Client.UserInitiatedHibernate</code>: Hibernation was initiated on the instance.</p> </li> <li> <p> <code>Client.UserInitiatedShutdown</code>: The instance was shut down using the Amazon EC2 API.</p> </li> <li> <p> <code>Client.VolumeLimitExceeded</code>: The limit on the number of EBS volumes or total storage was exceeded. Decrease usage or request an increase in your account limits.</p> </li> </ul>")
   message?: string;
 }
 
@@ -3456,10 +3495,10 @@ model StateReason {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>")
+  @doc("<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>")
   key?: string;
 
-  @doc("Gets and sets the property value.<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>")
+  @doc("<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>")
   value?: string;
 }
 
@@ -3469,22 +3508,22 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EbsInstanceBlockDevice")
 model EbsInstanceBlockDevice {
-  @doc("Gets and sets the property associatedResource.<p>The ARN of the Amazon ECS or Fargate task to which the volume is attached.</p>")
+  @doc("<p>The ARN of the Amazon ECS or Fargate task to which the volume is attached.</p>")
   associatedResource?: string;
 
-  @doc("Gets and sets the property attachTime.<p>The time stamp when the attachment initiated.</p>")
+  @doc("<p>The time stamp when the attachment initiated.</p>")
   attachTime?: utcDateTime;
 
-  @doc("Gets and sets the property deleteOnTermination.<p>Indicates whether the volume is deleted on instance termination.</p>")
+  @doc("<p>Indicates whether the volume is deleted on instance termination.</p>")
   deleteOnTermination?: boolean;
 
-  @doc("Gets and sets the property status.<p>The attachment state.</p>")
+  @doc("<p>The attachment state.</p>")
   status?: AttachmentStatusEnumValue;
 
-  @doc("Gets and sets the property volumeId.<p>The ID of the EBS volume.</p>")
+  @doc("<p>The ID of the EBS volume.</p>")
   volumeId?: string;
 
-  @doc("Gets and sets the property volumeOwnerId.<p>The ID of the Amazon Web Services account that owns the volume.</p> <p>This parameter is returned only for volumes that are attached to Fargate tasks.</p>")
+  @doc("<p>The ID of the Amazon Web Services account that owns the volume.</p> <p>This parameter is returned only for volumes that are attached to Fargate tasks.</p>")
   volumeOwnerId?: string;
 }
 
@@ -3511,7 +3550,7 @@ union AttachmentStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AttachmentStatusEnumValue")
 model AttachmentStatusEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: AttachmentStatus;
 }
 
@@ -3521,10 +3560,10 @@ model AttachmentStatusEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CapacityReservationTargetResponse")
 model CapacityReservationTargetResponse {
-  @doc("Gets and sets the property capacityReservationId.<p>The ID of the targeted Capacity Reservation.</p>")
+  @doc("<p>The ID of the targeted Capacity Reservation.</p>")
   capacityReservationId?: string;
 
-  @doc("Gets and sets the property capacityReservationResourceGroupArn.<p>The ARN of the targeted Capacity Reservation group.</p>")
+  @doc("<p>The ARN of the targeted Capacity Reservation group.</p>")
   capacityReservationResourceGroupArn?: string;
 }
 
@@ -3534,19 +3573,19 @@ model CapacityReservationTargetResponse {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceNetworkInterfaceAssociation")
 model InstanceNetworkInterfaceAssociation {
-  @doc("Gets and sets the property carrierIp.<p>The carrier IP address associated with the network interface.</p>")
+  @doc("<p>The carrier IP address associated with the network interface.</p>")
   carrierIp?: string;
 
-  @doc("Gets and sets the property customerOwnedIp.<p>The customer-owned IP address associated with the network interface.</p>")
+  @doc("<p>The customer-owned IP address associated with the network interface.</p>")
   customerOwnedIp?: string;
 
-  @doc("Gets and sets the property ipOwnerId.<p>The ID of the owner of the Elastic IP address.</p>")
+  @doc("<p>The ID of the owner of the Elastic IP address.</p>")
   ipOwnerId?: string;
 
-  @doc("Gets and sets the property publicDnsName.<p>The public DNS name.</p>")
+  @doc("<p>The public DNS name.</p>")
   publicDnsName?: string;
 
-  @doc("Gets and sets the property publicIp.<p>The public IP address or Elastic IP address bound to the network interface.</p>")
+  @doc("<p>The public IP address or Elastic IP address bound to the network interface.</p>")
   publicIp?: string;
 }
 
@@ -3556,25 +3595,25 @@ model InstanceNetworkInterfaceAssociation {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceNetworkInterfaceAttachment")
 model InstanceNetworkInterfaceAttachment {
-  @doc("Gets and sets the property attachTime.<p>The time stamp when the attachment initiated.</p>")
+  @doc("<p>The time stamp when the attachment initiated.</p>")
   attachTime?: utcDateTime;
 
-  @doc("Gets and sets the property attachmentId.<p>The ID of the network interface attachment.</p>")
+  @doc("<p>The ID of the network interface attachment.</p>")
   attachmentId?: string;
 
-  @doc("Gets and sets the property deleteOnTermination.<p>Indicates whether the network interface is deleted when the instance is terminated.</p>")
+  @doc("<p>Indicates whether the network interface is deleted when the instance is terminated.</p>")
   deleteOnTermination?: boolean;
 
-  @doc("Gets and sets the property deviceIndex.<p>The index of the device on the instance for the network interface attachment.</p>")
+  @doc("<p>The index of the device on the instance for the network interface attachment.</p>")
   deviceIndex?: int32;
 
-  @doc("Gets and sets the property enaSrdSpecification.<p>Contains the ENA Express settings for the network interface that's attached to the instance.</p>")
+  @doc("<p>Contains the ENA Express settings for the network interface that's attached to the instance.</p>")
   enaSrdSpecification?: InstanceAttachmentEnaSrdSpecification;
 
-  @doc("Gets and sets the property networkCardIndex.<p>The index of the network card.</p>")
+  @doc("<p>The index of the network card.</p>")
   networkCardIndex?: int32;
 
-  @doc("Gets and sets the property status.<p>The attachment state.</p>")
+  @doc("<p>The attachment state.</p>")
   status?: AttachmentStatusEnumValue;
 }
 
@@ -3584,14 +3623,14 @@ model InstanceNetworkInterfaceAttachment {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ConnectionTrackingSpecificationResponse")
 model ConnectionTrackingSpecificationResponse {
-  @doc("Gets and sets the property tcpEstablishedTimeout.<p>Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.</p>")
-  tcpEstablishedTimeout?: int32;
+  @doc("<p>Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.</p>")
+  tcpEstablishedTimeout?: int32 = 432000;
 
-  @doc("Gets and sets the property udpStreamTimeout.<p>Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.</p>")
-  udpStreamTimeout?: int32;
+  @doc("<p>Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.</p>")
+  udpStreamTimeout?: int32 = 180;
 
-  @doc("Gets and sets the property udpTimeout.<p>Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>")
-  udpTimeout?: int32;
+  @doc("<p>Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>")
+  udpTimeout?: int32 = 30;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -3600,7 +3639,7 @@ model ConnectionTrackingSpecificationResponse {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceIpv4Prefix")
 model InstanceIpv4Prefix {
-  @doc("Gets and sets the property ipv4Prefix.<p>One or more IPv4 prefixes assigned to the network interface.</p>")
+  @doc("<p>One or more IPv4 prefixes assigned to the network interface.</p>")
   ipv4Prefix?: string;
 }
 
@@ -3610,10 +3649,10 @@ model InstanceIpv4Prefix {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceIpv6Address")
 model InstanceIpv6Address {
-  @doc("Gets and sets the property ipv6Address.<p>The IPv6 address.</p>")
+  @doc("<p>The IPv6 address.</p>")
   ipv6Address?: string;
 
-  @doc("Gets and sets the property isPrimaryIpv6.<p>Determines if an IPv6 address associated with a network interface is the primary IPv6 address. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html'>RunInstances</a>.</p>")
+  @doc("<p>Determines if an IPv6 address associated with a network interface is the primary IPv6 address. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html'>RunInstances</a>.</p>")
   isPrimaryIpv6?: boolean;
 }
 
@@ -3623,7 +3662,7 @@ model InstanceIpv6Address {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceIpv6Prefix")
 model InstanceIpv6Prefix {
-  @doc("Gets and sets the property ipv6Prefix.<p>One or more IPv6 prefixes assigned to the network interface.</p>")
+  @doc("<p>One or more IPv6 prefixes assigned to the network interface.</p>")
   ipv6Prefix?: string;
 }
 
@@ -3633,16 +3672,16 @@ model InstanceIpv6Prefix {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstancePrivateIpAddress")
 model InstancePrivateIpAddress {
-  @doc("Gets and sets the property association.<p>The association information for an Elastic IP address for the network interface.</p>")
+  @doc("<p>The association information for an Elastic IP address for the network interface.</p>")
   association?: InstanceNetworkInterfaceAssociation;
 
-  @doc("Gets and sets the property primary.<p>Indicates whether this IPv4 address is the primary private IP address of the network interface.</p>")
+  @doc("<p>Indicates whether this IPv4 address is the primary private IP address of the network interface.</p>")
   primary?: boolean;
 
-  @doc("Gets and sets the property privateDnsName.<p>The private IPv4 DNS name.</p>")
+  @doc("<p>The private IPv4 DNS name.</p>")
   privateDnsName?: string;
 
-  @doc("Gets and sets the property privateIpAddress.<p>The private IPv4 address of the network interface.</p>")
+  @doc("<p>The private IPv4 address of the network interface.</p>")
   privateIpAddress?: string;
 }
 
@@ -3652,10 +3691,10 @@ model InstancePrivateIpAddress {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceAttachmentEnaSrdSpecification")
 model InstanceAttachmentEnaSrdSpecification {
-  @doc("Gets and sets the property enaSrdEnabled.<p>Indicates whether ENA Express is enabled for the network interface.</p>")
+  @doc("<p>Indicates whether ENA Express is enabled for the network interface.</p>")
   enaSrdEnabled?: boolean;
 
-  @doc("Gets and sets the property enaSrdUdpSpecification.<p>Configures ENA Express for UDP network traffic.</p>")
+  @doc("<p>Configures ENA Express for UDP network traffic.</p>")
   enaSrdUdpSpecification?: InstanceAttachmentEnaSrdUdpSpecification;
 }
 
@@ -3665,7 +3704,7 @@ model InstanceAttachmentEnaSrdSpecification {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceAttachmentEnaSrdUdpSpecification")
 model InstanceAttachmentEnaSrdUdpSpecification {
-  @doc("Gets and sets the property enaSrdUdpEnabled.<p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, you must first enable ENA Express.</p>")
+  @doc("<p>Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, you must first enable ENA Express.</p>")
   enaSrdUdpEnabled?: boolean;
 }
 
@@ -3688,6 +3727,6 @@ interface Ec2Instances {
 //
 // Related information for backend service:
 // AWS Servcie : EC2
-// Product Version : 3.7.742.0
-// SDK Version : 3.7.314.4
+// Product Version : 3.7.798.0
+// SDK Version : 3.7.325.2
 //--------------------------------------------------------------------------------------------

@@ -50,7 +50,7 @@ model CloudTrailTrail is TrackedResource<CloudTrailTrailProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CloudTrailTrail")
 model CloudTrailTrailProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsCloudTrailTrailProperties;
 
   ...AwsCommonProperties;
@@ -62,62 +62,62 @@ model CloudTrailTrailProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsCloudTrailTrail")
 model AwsCloudTrailTrailProperties {
-  @doc("Gets and sets the property advancedEventSelectors. The advanced event selectors that were used to select events for the data store.")
+  @doc("The advanced event selectors that were used to select events for the data store.")
   @extension("x-ms-identifiers", [])
   advancedEventSelectors?: AdvancedEventSelector[];
 
-  @doc("Gets and sets the property arn.")
+  @doc("Property arn")
   arn?: string;
 
-  @doc("Gets and sets the property cloudWatchLogsLogGroupArn. Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.")
+  @doc("Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.")
   cloudWatchLogsLogGroupArn?: string;
 
-  @doc("Gets and sets the property cloudWatchLogsRoleArn. Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.")
+  @doc("Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.")
   cloudWatchLogsRoleArn?: string;
 
-  @doc("Gets and sets the property enableLogFileValidation. Specifies whether log file validation is enabled. The default is false.")
+  @doc("Specifies whether log file validation is enabled. The default is false.")
   enableLogFileValidation?: boolean;
 
-  @doc("Gets and sets the property eventSelectors. Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail.")
+  @doc("Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail.")
   @extension("x-ms-identifiers", [])
   eventSelectors?: EventSelector[];
 
-  @doc("Gets and sets the property includeGlobalServiceEvents. Specifies whether the trail is publishing events from global services such as IAM to the log files.")
+  @doc("Specifies whether the trail is publishing events from global services such as IAM to the log files.")
   includeGlobalServiceEvents?: boolean;
 
-  @doc("Gets and sets the property insightSelectors. Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail.")
+  @doc("Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail.")
   @extension("x-ms-identifiers", [])
   insightSelectors?: InsightSelector[];
 
-  @doc("Gets and sets the property isLogging. Whether the CloudTrail is currently logging AWS API calls.")
+  @doc("Whether the CloudTrail is currently logging AWS API calls.")
   isLogging?: boolean;
 
-  @doc("Gets and sets the property isMultiRegionTrail. Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.")
+  @doc("Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.")
   isMultiRegionTrail?: boolean;
 
-  @doc("Gets and sets the property isOrganizationTrail. Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.")
+  @doc("Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.")
   isOrganizationTrail?: boolean;
 
-  @doc("Gets and sets the property kmsKeyId. Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.")
+  @doc("Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.")
   kmsKeyId?: string;
 
-  @doc("Gets and sets the property s3BucketName. Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements.")
+  @doc("Specifies the name of the Amazon S3 bucket designated for publishing log files. See Amazon S3 Bucket Naming Requirements.")
   s3BucketName?: string;
 
-  @doc("Gets and sets the property s3KeyPrefix. Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters.")
+  @doc("Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery. For more information, see Finding Your CloudTrail Log Files. The maximum length is 200 characters.")
   s3KeyPrefix?: string;
 
-  @doc("Gets and sets the property snsTopicArn.")
+  @doc("Property snsTopicArn")
   snsTopicArn?: string;
 
-  @doc("Gets and sets the property snsTopicName. Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.")
+  @doc("Specifies the name of the Amazon SNS topic defined for notification of log file delivery. The maximum length is 256 characters.")
   snsTopicName?: string;
 
-  @doc("Gets and sets the property tags.")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property trailName.")
+  @doc("Property trailName")
   trailName?: string;
 }
 
@@ -127,11 +127,11 @@ model AwsCloudTrailTrailProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AdvancedEventSelector")
 model AdvancedEventSelector {
-  @doc("Gets and sets the property fieldSelectors. Contains all selector statements in an advanced event selector.")
+  @doc("Contains all selector statements in an advanced event selector.")
   @extension("x-ms-identifiers", [])
   fieldSelectors?: AdvancedFieldSelector[];
 
-  @doc("Gets and sets the property name. An optional, descriptive name for an advanced event selector, such as 'Log data events for only two S3 buckets'.")
+  @doc("An optional, descriptive name for an advanced event selector, such as 'Log data events for only two S3 buckets'.")
   name?: string;
 }
 
@@ -141,18 +141,18 @@ model AdvancedEventSelector {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EventSelector")
 model EventSelector {
-  @doc("Gets and sets the property dataResources.")
+  @doc("Property dataResources")
   @extension("x-ms-identifiers", [])
   dataResources?: DataResource[];
 
-  @doc("Gets and sets the property excludeManagementEventSources. An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing 'kms.amazonaws.com'. By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.")
+  @doc("An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing 'kms.amazonaws.com'. By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.")
   @extension("x-ms-identifiers", [])
   excludeManagementEventSources?: string[];
 
-  @doc("Gets and sets the property includeManagementEvents. Specify if you want your event selector to include management events for your trail.")
+  @doc("Specify if you want your event selector to include management events for your trail.")
   includeManagementEvents?: boolean;
 
-  @doc("Gets and sets the property readWriteType. Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.")
+  @doc("Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.")
   readWriteType?: EventSelectorReadWriteType;
 }
 
@@ -176,7 +176,7 @@ union EventSelectorReadWriteType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InsightSelector")
 model InsightSelector {
-  @doc("Gets and sets the property insightType. The type of insight to log on a trail.")
+  @doc("The type of insight to log on a trail.")
   insightType?: string;
 }
 
@@ -186,10 +186,10 @@ model InsightSelector {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   key?: string;
 
-  @doc("Gets and sets the property value. The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   value?: string;
 }
 
@@ -199,30 +199,30 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AdvancedFieldSelector")
 model AdvancedFieldSelector {
-  @doc("Gets and sets the property endsWith. An operator that includes events that match the last few characters of the event record field specified as the value of Field.")
+  @doc("An operator that includes events that match the last few characters of the event record field specified as the value of Field.")
   @extension("x-ms-identifiers", [])
   endsWith?: string[];
 
-  @doc("Gets and sets the property equals. An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.")
+  @doc("An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.")
   @extension("x-ms-identifiers", [])
   equals?: string[];
 
-  @doc("Gets and sets the property field. A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.")
+  @doc("A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.")
   field?: string;
 
-  @doc("Gets and sets the property notEndsWith. An operator that excludes events that match the last few characters of the event record field specified as the value of Field.")
+  @doc("An operator that excludes events that match the last few characters of the event record field specified as the value of Field.")
   @extension("x-ms-identifiers", [])
   notEndsWith?: string[];
 
-  @doc("Gets and sets the property notEquals. An operator that excludes events that match the exact value of the event record field specified as the value of Field.")
+  @doc("An operator that excludes events that match the exact value of the event record field specified as the value of Field.")
   @extension("x-ms-identifiers", [])
   notEquals?: string[];
 
-  @doc("Gets and sets the property notStartsWith. An operator that excludes events that match the first few characters of the event record field specified as the value of Field.")
+  @doc("An operator that excludes events that match the first few characters of the event record field specified as the value of Field.")
   @extension("x-ms-identifiers", [])
   notStartsWith?: string[];
 
-  @doc("Gets and sets the property startsWith. An operator that includes events that match the first few characters of the event record field specified as the value of Field.")
+  @doc("An operator that includes events that match the first few characters of the event record field specified as the value of Field.")
   @extension("x-ms-identifiers", [])
   startsWith?: string[];
 }
@@ -233,10 +233,10 @@ model AdvancedFieldSelector {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DataResource")
 model DataResource {
-  @doc("Gets and sets the property type. The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.")
+  @doc("The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.")
   type?: string;
 
-  @doc("Gets and sets the property values. An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.")
+  @doc("An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.")
   @extension("x-ms-identifiers", [])
   values?: string[];
 }

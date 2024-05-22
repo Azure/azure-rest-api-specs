@@ -425,27 +425,27 @@
       "properties": {
         "appArn": {
           "type": "string",
-          "description": "Gets and sets the property appArn. The Amazon Resource Name (ARN) of the app."
+          "description": "The Amazon Resource Name (ARN) of the app."
         },
         "appName": {
           "type": "string",
-          "description": "Gets and sets the property appName. The name of the app."
+          "description": "The name of the app."
         },
         "appType": {
           "$ref": "#/definitions/AppType",
-          "description": "Gets and sets the property appType. The type of app."
+          "description": "The type of app."
         },
         "domainId": {
           "type": "string",
-          "description": "Gets and sets the property domainId. The domain ID."
+          "description": "The domain ID."
         },
         "resourceSpec": {
           "$ref": "#/definitions/ResourceSpec",
-          "description": "Gets and sets the property resourceSpec. The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance."
+          "description": "The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance."
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags. A list of tags to apply to the app.",
+          "description": "A list of tags to apply to the app.",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -453,7 +453,7 @@
         },
         "userProfileName": {
           "type": "string",
-          "description": "Gets and sets the property userProfileName. The user profile name."
+          "description": "The user profile name."
         }
       }
     },
@@ -518,15 +518,15 @@
       "properties": {
         "instanceType": {
           "$ref": "#/definitions/ResourceSpecInstanceType",
-          "description": "Gets and sets the property instanceType. The instance type that the image version runs on."
+          "description": "The instance type that the image version runs on."
         },
         "sageMakerImageArn": {
           "type": "string",
-          "description": "Gets and sets the property sageMakerImageArn. The ARN of the SageMaker image that the image version belongs to."
+          "description": "The ARN of the SageMaker image that the image version belongs to."
         },
         "sageMakerImageVersionArn": {
           "type": "string",
-          "description": "Gets and sets the property sageMakerImageVersionArn. The ARN of the image version created on the instance."
+          "description": "The ARN of the image version created on the instance."
         }
       }
     },
@@ -967,42 +967,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsSageMakerAppProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -1026,30 +1026,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key."
+          "description": "Property key"
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

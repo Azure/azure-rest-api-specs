@@ -50,7 +50,7 @@ model ApiGatewayRestApi is TrackedResource<ApiGatewayRestApiProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ApiGatewayRestApi")
 model ApiGatewayRestApiProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsApiGatewayRestApiProperties;
 
   ...AwsCommonProperties;
@@ -62,56 +62,56 @@ model ApiGatewayRestApiProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsApiGatewayRestApi")
 model AwsApiGatewayRestApiProperties {
-  @doc("Gets and sets the property apiKeySourceType. The source of the API key for metering requests according to a usage plan. Valid values are: ``HEADER`` to read the API key from the ``X-API-Key`` header of a request. ``AUTHORIZER`` to read the API key from the ``UsageIdentifierKey`` from a custom authorizer.")
+  @doc("The source of the API key for metering requests according to a usage plan. Valid values are: ``HEADER`` to read the API key from the ``X-API-Key`` header of a request. ``AUTHORIZER`` to read the API key from the ``UsageIdentifierKey`` from a custom authorizer.")
   apiKeySourceType?: string;
 
-  @doc("Gets and sets the property binaryMediaTypes. The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.")
+  @doc("The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.")
   @extension("x-ms-identifiers", [])
   binaryMediaTypes?: string[];
 
-  @doc("Gets and sets the property body. An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format.")
+  @doc("An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format.")
   body?: string;
 
-  @doc("Gets and sets the property bodyS3Location. The Amazon Simple Storage Service (Amazon S3) location that points to an OpenAPI file, which defines a set of RESTful APIs in JSON or YAML format. ``S3Location`` is a property of the [AWS::ApiGateway::RestApi](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html) resource that specifies the Amazon S3 location of a OpenAPI (formerly Swagger) file that defines a set of RESTful APIs in JSON or YAML. On January 1, 2016, the Swagger Specification was donated to the [OpenAPI initiative](https://docs.aws.amazon.com/https://www.openapis.org/), becoming the foundation of the OpenAPI Specification.")
+  @doc("The Amazon Simple Storage Service (Amazon S3) location that points to an OpenAPI file, which defines a set of RESTful APIs in JSON or YAML format. ``S3Location`` is a property of the [AWS::ApiGateway::RestApi](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html) resource that specifies the Amazon S3 location of a OpenAPI (formerly Swagger) file that defines a set of RESTful APIs in JSON or YAML. On January 1, 2016, the Swagger Specification was donated to the [OpenAPI initiative](https://docs.aws.amazon.com/https://www.openapis.org/), becoming the foundation of the OpenAPI Specification.")
   bodyS3Location?: S3Location;
 
-  @doc("Gets and sets the property cloneFrom. The ID of the RestApi that you want to clone from.")
+  @doc("The ID of the RestApi that you want to clone from.")
   cloneFrom?: string;
 
-  @doc("Gets and sets the property description. The description of the RestApi.")
+  @doc("The description of the RestApi.")
   description?: string;
 
-  @doc("Gets and sets the property disableExecuteApiEndpoint. Specifies whether clients can invoke your API by using the default ``execute-api`` endpoint. By default, clients can invoke your API with the default ``https://{api_id}.execute-api.{region}.amazonaws.com`` endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint")
+  @doc("Specifies whether clients can invoke your API by using the default ``execute-api`` endpoint. By default, clients can invoke your API with the default ``https://{api_id}.execute-api.{region}.amazonaws.com`` endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint")
   disableExecuteApiEndpoint?: boolean;
 
-  @doc("Gets and sets the property endpointConfiguration. A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property. The ``EndpointConfiguration`` property type specifies the endpoint types of a REST API. ``EndpointConfiguration`` is a property of the [AWS::ApiGateway::RestApi](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html) resource.")
+  @doc("A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property. The ``EndpointConfiguration`` property type specifies the endpoint types of a REST API. ``EndpointConfiguration`` is a property of the [AWS::ApiGateway::RestApi](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html) resource.")
   endpointConfiguration?: EndpointConfiguration;
 
-  @doc("Gets and sets the property failOnWarnings. A query parameter to indicate whether to rollback the API update (``true``) or not (``false``) when a warning is encountered. The default value is ``false``.")
+  @doc("A query parameter to indicate whether to rollback the API update (``true``) or not (``false``) when a warning is encountered. The default value is ``false``.")
   failOnWarnings?: boolean;
 
-  @doc("Gets and sets the property minimumCompressionSize. A nullable integer that is used to enable compression (with non-negative between 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null value) on an API. When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Setting it to zero allows compression for any payload size.")
+  @doc("A nullable integer that is used to enable compression (with non-negative between 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null value) on an API. When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Setting it to zero allows compression for any payload size.")
   minimumCompressionSize?: int32;
 
-  @doc("Gets and sets the property mode. This property applies only when you use OpenAPI to define your REST API. The ``Mode`` determines how API Gateway handles resource updates. Valid values are ``overwrite`` or ``merge``.  For ``overwrite``, the new API definition replaces the existing one. The existing API identifier remains unchanged.  For ``merge``, the new API definition is merged with the existing API. If you don't specify this property, a default value is chosen. For REST APIs created before March 29, 2021, the default is ``overwrite``. For REST APIs created after March 29, 2021, the new API definition takes precedence, but any container types such as endpoint configurations and binary media types are merged with the existing API.  Use the default mode to define top-level ``RestApi`` properties in addition to using OpenAPI. Generally, it's preferred to use API Gateway's OpenAPI extensions to model these properties.")
+  @doc("This property applies only when you use OpenAPI to define your REST API. The ``Mode`` determines how API Gateway handles resource updates. Valid values are ``overwrite`` or ``merge``.  For ``overwrite``, the new API definition replaces the existing one. The existing API identifier remains unchanged.  For ``merge``, the new API definition is merged with the existing API. If you don't specify this property, a default value is chosen. For REST APIs created before March 29, 2021, the default is ``overwrite``. For REST APIs created after March 29, 2021, the new API definition takes precedence, but any container types such as endpoint configurations and binary media types are merged with the existing API.  Use the default mode to define top-level ``RestApi`` properties in addition to using OpenAPI. Generally, it's preferred to use API Gateway's OpenAPI extensions to model these properties.")
   mode?: string;
 
-  @doc("Gets and sets the property name. The name of the RestApi. A name is required if the REST API is not based on an OpenAPI specification.")
+  @doc("The name of the RestApi. A name is required if the REST API is not based on an OpenAPI specification.")
   name?: string;
 
-  @doc("Gets and sets the property parameters. Custom header parameters as part of the request. For example, to exclude DocumentationParts from an imported API, set ``ignore=documentation`` as a ``parameters`` value, as in the AWS CLI command of ``aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'``.")
+  @doc("Custom header parameters as part of the request. For example, to exclude DocumentationParts from an imported API, set ``ignore=documentation`` as a ``parameters`` value, as in the AWS CLI command of ``aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'``.")
   parameters?: Record<string>;
 
-  @doc("Gets and sets the property policy. A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``''`` as delimiter and values of ``'execute-api:/'`` and ``'*'``.")
+  @doc("A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``''`` as delimiter and values of ``'execute-api:/'`` and ``'*'``.")
   policy?: string;
 
-  @doc("Gets and sets the property restApiId.")
+  @doc("Property restApiId")
   restApiId?: string;
 
-  @doc("Gets and sets the property rootResourceId.")
+  @doc("Property rootResourceId")
   rootResourceId?: string;
 
-  @doc("Gets and sets the property tags. The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.")
+  @doc("The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -122,16 +122,16 @@ model AwsApiGatewayRestApiProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of S3Location")
 model S3Location {
-  @doc("Gets and sets the property bucket. The name of the S3 bucket where the OpenAPI file is stored.")
+  @doc("The name of the S3 bucket where the OpenAPI file is stored.")
   bucket?: string;
 
-  @doc("Gets and sets the property eTag. The Amazon S3 ETag (a file checksum) of the OpenAPI file. If you don't specify a value, API Gateway skips ETag validation of your OpenAPI file.")
+  @doc("The Amazon S3 ETag (a file checksum) of the OpenAPI file. If you don't specify a value, API Gateway skips ETag validation of your OpenAPI file.")
   eTag?: string;
 
-  @doc("Gets and sets the property key. The file name of the OpenAPI file (Amazon S3 object name).")
+  @doc("The file name of the OpenAPI file (Amazon S3 object name).")
   key?: string;
 
-  @doc("Gets and sets the property version. For versioning-enabled buckets, a specific version of the OpenAPI file.")
+  @doc("For versioning-enabled buckets, a specific version of the OpenAPI file.")
   version?: string;
 }
 
@@ -141,11 +141,11 @@ model S3Location {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EndpointConfiguration")
 model EndpointConfiguration {
-  @doc("Gets and sets the property types. A list of endpoint types of an API (RestApi) or its custom domain name (DomainName). For an edge-optimized API and its custom domain name, the endpoint type is ``'EDGE'``. For a regional API and its custom domain name, the endpoint type is ``REGIONAL``. For a private API, the endpoint type is ``PRIVATE``.")
+  @doc("A list of endpoint types of an API (RestApi) or its custom domain name (DomainName). For an edge-optimized API and its custom domain name, the endpoint type is ``'EDGE'``. For a regional API and its custom domain name, the endpoint type is ``REGIONAL``. For a private API, the endpoint type is ``PRIVATE``.")
   @extension("x-ms-identifiers", [])
   types?: string[];
 
-  @doc("Gets and sets the property vpcEndpointIds. A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for ``PRIVATE`` endpoint type.")
+  @doc("A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for ``PRIVATE`` endpoint type.")
   @extension("x-ms-identifiers", [])
   vpcEndpointIds?: string[];
 }
@@ -156,10 +156,10 @@ model EndpointConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 

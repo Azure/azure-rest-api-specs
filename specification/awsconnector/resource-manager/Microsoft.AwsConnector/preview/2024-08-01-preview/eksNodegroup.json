@@ -383,36 +383,36 @@
       "properties": {
         "amiType": {
           "type": "string",
-          "description": "Gets and sets the property amiType. The AMI type for your node group."
+          "description": "The AMI type for your node group."
         },
         "arn": {
           "type": "string",
-          "description": "Gets and sets the property arn."
+          "description": "Property arn"
         },
         "capacityType": {
           "type": "string",
-          "description": "Gets and sets the property capacityType. The capacity type of your managed node group."
+          "description": "The capacity type of your managed node group."
         },
         "clusterName": {
           "type": "string",
-          "description": "Gets and sets the property clusterName. Name of the cluster to create the node group in."
+          "description": "Name of the cluster to create the node group in."
         },
         "diskSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property diskSize. The root device disk size (in GiB) for your node group instances."
+          "description": "The root device disk size (in GiB) for your node group instances."
         },
         "forceUpdateEnabled": {
           "type": "boolean",
-          "description": "Gets and sets the property forceUpdateEnabled. Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue."
+          "description": "Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue."
         },
         "id": {
           "type": "string",
-          "description": "Gets and sets the property id."
+          "description": "Property id"
         },
         "instanceTypes": {
           "type": "array",
-          "description": "Gets and sets the property instanceTypes. Specify the instance types for a node group.",
+          "description": "Specify the instance types for a node group.",
           "items": {
             "type": "string"
           },
@@ -420,38 +420,38 @@
         },
         "labels": {
           "type": "object",
-          "description": "Gets and sets the property labels. The Kubernetes labels to be applied to the nodes in the node group when they are created.",
+          "description": "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "launchTemplate": {
           "$ref": "#/definitions/LaunchTemplateSpecification",
-          "description": "Gets and sets the property launchTemplate. An object representing a node group's launch template specification. An object representing a launch template specification for AWS EKS Nodegroup."
+          "description": "An object representing a node group's launch template specification. An object representing a launch template specification for AWS EKS Nodegroup."
         },
         "nodeRole": {
           "type": "string",
-          "description": "Gets and sets the property nodeRole. The Amazon Resource Name (ARN) of the IAM role to associate with your node group."
+          "description": "The Amazon Resource Name (ARN) of the IAM role to associate with your node group."
         },
         "nodegroupName": {
           "type": "string",
-          "description": "Gets and sets the property nodegroupName. The unique name to give your node group."
+          "description": "The unique name to give your node group."
         },
         "releaseVersion": {
           "type": "string",
-          "description": "Gets and sets the property releaseVersion. The AMI version of the Amazon EKS-optimized AMI to use with your node group."
+          "description": "The AMI version of the Amazon EKS-optimized AMI to use with your node group."
         },
         "remoteAccess": {
           "$ref": "#/definitions/RemoteAccess",
-          "description": "Gets and sets the property remoteAccess. The remote access (SSH) configuration to use with your node group. An object representing a remote access configuration specification for AWS EKS Nodegroup."
+          "description": "The remote access (SSH) configuration to use with your node group. An object representing a remote access configuration specification for AWS EKS Nodegroup."
         },
         "scalingConfig": {
           "$ref": "#/definitions/ScalingConfig",
-          "description": "Gets and sets the property scalingConfig. The scaling configuration details for the Auto Scaling group that is created for your node group. An object representing a auto scaling group specification for AWS EKS Nodegroup."
+          "description": "The scaling configuration details for the Auto Scaling group that is created for your node group. An object representing a auto scaling group specification for AWS EKS Nodegroup."
         },
         "subnets": {
           "type": "array",
-          "description": "Gets and sets the property subnets. The subnets to use for the Auto Scaling group that is created for your node group.",
+          "description": "The subnets to use for the Auto Scaling group that is created for your node group.",
           "items": {
             "type": "string"
           },
@@ -459,14 +459,14 @@
         },
         "tags": {
           "type": "object",
-          "description": "Gets and sets the property tags. The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
+          "description": "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "taints": {
           "type": "array",
-          "description": "Gets and sets the property taints. The Kubernetes taints to be applied to the nodes in the node group when they are created.",
+          "description": "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
           "items": {
             "$ref": "#/definitions/Taint"
           },
@@ -474,11 +474,11 @@
         },
         "updateConfig": {
           "$ref": "#/definitions/UpdateConfig",
-          "description": "Gets and sets the property updateConfig. The node group update configuration. The node group update configuration."
+          "description": "The node group update configuration. The node group update configuration."
         },
         "version": {
           "type": "string",
-          "description": "Gets and sets the property version. The Kubernetes version to use for your managed nodes."
+          "description": "The Kubernetes version to use for your managed nodes."
         }
       }
     },
@@ -529,42 +529,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsEksNodegroupProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -588,15 +588,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets and sets the property id."
+          "description": "Property id"
         },
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name."
+          "description": "Property name"
         },
         "version": {
           "type": "string",
-          "description": "Gets and sets the property version."
+          "description": "Property version"
         }
       }
     },
@@ -661,11 +661,11 @@
       "properties": {
         "ec2SshKey": {
           "type": "string",
-          "description": "Gets and sets the property ec2SshKey."
+          "description": "Property ec2SshKey"
         },
         "sourceSecurityGroups": {
           "type": "array",
-          "description": "Gets and sets the property sourceSecurityGroups.",
+          "description": "Property sourceSecurityGroups",
           "items": {
             "type": "string"
           },
@@ -680,17 +680,17 @@
         "desiredSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property desiredSize."
+          "description": "Property desiredSize"
         },
         "maxSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property maxSize."
+          "description": "Property maxSize"
         },
         "minSize": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property minSize."
+          "description": "Property minSize"
         }
       }
     },
@@ -700,15 +700,15 @@
       "properties": {
         "effect": {
           "type": "string",
-          "description": "Gets and sets the property effect."
+          "description": "Property effect"
         },
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key."
+          "description": "Property key"
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
       }
     },
@@ -719,31 +719,13 @@
         "maxUnavailable": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property maxUnavailable. The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100. "
+          "description": "The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100."
         },
         "maxUnavailablePercentage": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property maxUnavailablePercentage. The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value."
+          "description": "The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

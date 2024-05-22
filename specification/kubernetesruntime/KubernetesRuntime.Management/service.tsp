@@ -18,7 +18,7 @@ model ServiceProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("A Service resource")
+@doc("A Service resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)")
 model ServiceResource is ExtensionResource<ServiceProperties> {
   @doc("The name of the the service")
   @key("serviceName")

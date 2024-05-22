@@ -50,7 +50,7 @@ model LogsLogGroup is TrackedResource<LogsLogGroupProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LogsLogGroup")
 model LogsLogGroupProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsLogsLogGroupProperties;
 
   ...AwsCommonProperties;
@@ -62,25 +62,25 @@ model LogsLogGroupProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLogsLogGroup")
 model AwsLogsLogGroupProperties {
-  @doc("Gets and sets the property arn. The CloudWatch log group ARN.")
+  @doc("Property arn")
   arn?: string;
 
-  @doc("Gets and sets the property dataProtectionPolicy. The body of the policy document you want to use for this topic.You can only add one policy per topic.The policy must be in JSON string format.Length Constraints: Maximum length of 30720")
+  @doc("Creates a data protection policy and assigns it to the log group. A data protection policy can help safeguard sensitive data that's ingested by the log group by auditing and masking the sensitive log data. When a user who does not have permission to view masked data views a log event that includes masked data, the sensitive data is replaced by asterisks. For more information, including a list of types of data that can be audited and masked, see [Protect sensitive log data with masking](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html).")
   dataProtectionPolicy?: unknown;
 
-  @doc("Gets and sets the property kmsKeyId. The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.")
+  @doc("The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data. To associate an KMS key with the log group, specify the ARN of that KMS key here. If you do so, ingested data is encrypted using this key. This association is stored as long as the data encrypted with the KMS key is still within CWL. This enables CWL to decrypt this data whenever it is requested. If you attempt to associate a KMS key with the log group but the KMS key doesn't exist or is deactivated, you will receive an ``InvalidParameterException`` error. Log group data is always encrypted in CWL. If you omit this key, the encryption does not use KMS. For more information, see [Encrypt log data in using](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html)")
   kmsKeyId?: string;
 
-  @doc("Gets and sets the property logGroupClass. The class of the log group. Possible values are: STANDARD and INFREQUENT_ACCESS, with STANDARD being the default class")
-  logGroupClass?: LogGroupClass;
+  @doc("Specifies the log group class for this log group. There are two classes:  +  The ``Standard`` log class supports all CWL features.  +  The ``Infrequent Access`` log class supports a subset of CWL features and incurs lower costs.   For details about the features supported by each class, see [Log classes](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)")
+  logGroupClass?: LogGroupClass = "STANDARD";
 
-  @doc("Gets and sets the property logGroupName. The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.")
+  @doc("The name of the log group. If you don't specify a name, CFNlong generates a unique ID for the log group.")
   logGroupName?: string;
 
-  @doc("Gets and sets the property retentionInDays. The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1096, 1827, and 3653.")
+  @doc("The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1096, 1827, 2192, 2557, 2922, 3288, and 3653. To set a log group so that its log events do not expire, use [DeleteRetentionPolicy](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html).")
   retentionInDays?: int32;
 
-  @doc("Gets and sets the property tags. An array of key-value pairs to apply to this resource.")
+  @doc("An array of key-value pairs to apply to the log group. For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
@@ -102,10 +102,10 @@ union LogGroupClass {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.")
+  @doc("Property value")
   value?: string;
 }
 

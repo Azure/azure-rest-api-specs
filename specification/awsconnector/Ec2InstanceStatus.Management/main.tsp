@@ -50,7 +50,7 @@ model Ec2InstanceStatus is TrackedResource<Ec2InstanceStatusProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2InstanceStatus")
 model Ec2InstanceStatusProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2InstanceStatusProperties;
 
   ...AwsCommonProperties;
@@ -62,26 +62,26 @@ model Ec2InstanceStatusProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2InstanceStatus")
 model AwsEc2InstanceStatusProperties {
-  @doc("Gets and sets the property availabilityZone.<p>The Availability Zone of the instance.</p>")
+  @doc("<p>The Availability Zone of the instance.</p>")
   availabilityZone?: string;
 
-  @doc("Gets and sets the property events.<p>Any scheduled events associated with the instance.</p>")
+  @doc("<p>Any scheduled events associated with the instance.</p>")
   @extension("x-ms-identifiers", [])
   events?: InstanceStatusEvent[];
 
-  @doc("Gets and sets the property instanceId.<p>The ID of the instance.</p>")
+  @doc("<p>The ID of the instance.</p>")
   instanceId?: string;
 
-  @doc("Gets and sets the property instanceState.<p>The intended state of the instance. <a>DescribeInstanceStatus</a> requires that an instance be in the <code>running</code> state.</p>")
+  @doc("<p>The intended state of the instance. <a>DescribeInstanceStatus</a> requires that an instance be in the <code>running</code> state.</p>")
   instanceState?: InstanceState;
 
-  @doc("Gets and sets the property instanceStatus.<p>Reports impaired functionality that stems from issues internal to the instance, such as impaired reachability.</p>")
+  @doc("<p>Reports impaired functionality that stems from issues internal to the instance, such as impaired reachability.</p>")
   instanceStatus?: InstanceStatusSummary;
 
-  @doc("Gets and sets the property outpostArn.<p>The Amazon Resource Name (ARN) of the Outpost.</p>")
+  @doc("<p>The Amazon Resource Name (ARN) of the Outpost.</p>")
   outpostArn?: string;
 
-  @doc("Gets and sets the property systemStatus.<p>Reports impaired functionality that stems from issues related to the systems that support an instance, such as hardware failures and network connectivity problems.</p>")
+  @doc("<p>Reports impaired functionality that stems from issues related to the systems that support an instance, such as hardware failures and network connectivity problems.</p>")
   systemStatus?: InstanceStatusSummary;
 }
 
@@ -91,22 +91,22 @@ model AwsEc2InstanceStatusProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceStatusEvent")
 model InstanceStatusEvent {
-  @doc("Gets and sets the property code.<p>The event code.</p>")
+  @doc("<p>The event code.</p>")
   code?: EventCodeEnumValue;
 
-  @doc("Gets and sets the property description.<p>A description of the event.</p> <p>After a scheduled event is completed, it can still be described for up to a week. If the event has been completed, this description starts with the following text: [Completed].</p>")
+  @doc("<p>A description of the event.</p> <p>After a scheduled event is completed, it can still be described for up to a week. If the event has been completed, this description starts with the following text: [Completed].</p>")
   description?: string;
 
-  @doc("Gets and sets the property instanceEventId.<p>The ID of the event.</p>")
+  @doc("<p>The ID of the event.</p>")
   instanceEventId?: string;
 
-  @doc("Gets and sets the property notAfter.<p>The latest scheduled end time for the event.</p>")
+  @doc("<p>The latest scheduled end time for the event.</p>")
   notAfter?: utcDateTime;
 
-  @doc("Gets and sets the property notBefore.<p>The earliest scheduled start time for the event.</p>")
+  @doc("<p>The earliest scheduled start time for the event.</p>")
   notBefore?: utcDateTime;
 
-  @doc("Gets and sets the property notBeforeDeadline.<p>The deadline for starting the event.</p>")
+  @doc("<p>The deadline for starting the event.</p>")
   notBeforeDeadline?: utcDateTime;
 }
 
@@ -136,7 +136,7 @@ union EventCode {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EventCodeEnumValue")
 model EventCodeEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: EventCode;
 }
 
@@ -146,10 +146,10 @@ model EventCodeEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceState")
 model InstanceState {
-  @doc("Gets and sets the property code.<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>")
+  @doc("<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>")
   code?: int32;
 
-  @doc("Gets and sets the property name.<p>The current state of the instance.</p>")
+  @doc("<p>The current state of the instance.</p>")
   name?: InstanceStateNameEnumValue;
 }
 
@@ -182,7 +182,7 @@ union InstanceStateName {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceStateNameEnumValue")
 model InstanceStateNameEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: InstanceStateName;
 }
 
@@ -192,11 +192,11 @@ model InstanceStateNameEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceStatusSummary")
 model InstanceStatusSummary {
-  @doc("Gets and sets the property details.<p>The system instance health or application instance health.</p>")
+  @doc("<p>The system instance health or application instance health.</p>")
   @extension("x-ms-identifiers", [])
   details?: InstanceStatusDetails[];
 
-  @doc("Gets and sets the property status.<p>The status.</p>")
+  @doc("<p>The status.</p>")
   status?: SummaryStatusEnumValue;
 }
 
@@ -226,7 +226,7 @@ union SummaryStatus {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SummaryStatusEnumValue")
 model SummaryStatusEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: SummaryStatus;
 }
 
@@ -236,13 +236,13 @@ model SummaryStatusEnumValue {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InstanceStatusDetails")
 model InstanceStatusDetails {
-  @doc("Gets and sets the property impairedSince.<p>The time when a status check failed. For an instance that was launched and impaired, this is the time when the instance was launched.</p>")
+  @doc("<p>The time when a status check failed. For an instance that was launched and impaired, this is the time when the instance was launched.</p>")
   impairedSince?: utcDateTime;
 
-  @doc("Gets and sets the property name.<p>The type of instance status.</p>")
+  @doc("<p>The type of instance status.</p>")
   name?: StatusNameEnumValue;
 
-  @doc("Gets and sets the property status.<p>The status.</p>")
+  @doc("<p>The status.</p>")
   status?: StatusTypeEnumValue;
 }
 
@@ -260,7 +260,7 @@ union StatusName {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatusNameEnumValue")
 model StatusNameEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: StatusName;
 }
 
@@ -287,7 +287,7 @@ union StatusType {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatusTypeEnumValue")
 model StatusTypeEnumValue {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: StatusType;
 }
 
@@ -315,6 +315,6 @@ interface Ec2InstanceStatuses {
 //
 // Related information for backend service:
 // AWS Servcie : EC2
-// Product Version : 3.7.742.0
-// SDK Version : 3.7.314.4
+// Product Version : 3.7.798.0
+// SDK Version : 3.7.325.2
 //--------------------------------------------------------------------------------------------

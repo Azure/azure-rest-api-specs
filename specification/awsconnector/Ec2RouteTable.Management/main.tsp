@@ -50,7 +50,7 @@ model Ec2RouteTable is TrackedResource<Ec2RouteTableProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2RouteTable")
 model Ec2RouteTableProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2RouteTableProperties;
 
   ...AwsCommonProperties;
@@ -62,14 +62,14 @@ model Ec2RouteTableProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2RouteTable")
 model AwsEc2RouteTableProperties {
-  @doc("Gets and sets the property routeTableId. The route table ID.")
+  @doc("Property routeTableId")
   routeTableId?: string;
 
-  @doc("Gets and sets the property tags. Any tags assigned to the route table.")
+  @doc("Any tags assigned to the route table.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property vpcId. The ID of the VPC.")
+  @doc("The ID of the VPC.")
   vpcId?: string;
 }
 
@@ -79,10 +79,10 @@ model AwsEc2RouteTableProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("The tag key.")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("The tag value.")
   value?: string;
 }
 

@@ -50,7 +50,7 @@ model IamVirtualMFADevice is TrackedResource<IamVirtualMFADeviceProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IamVirtualMFADevice")
 model IamVirtualMFADeviceProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsIamVirtualMFADeviceProperties;
 
   ...AwsCommonProperties;
@@ -62,21 +62,21 @@ model IamVirtualMFADeviceProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsIamVirtualMFADevice")
 model AwsIamVirtualMFADeviceProperties {
-  @doc("Gets and sets the property path.")
+  @doc("Property path")
   path?: string;
 
-  @doc("Gets and sets the property serialNumber.")
+  @doc("Property serialNumber")
   serialNumber?: string;
 
-  @doc("Gets and sets the property tags.")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property users.")
+  @doc("Property users")
   @extension("x-ms-identifiers", [])
   users?: string[];
 
-  @doc("Gets and sets the property virtualMfaDeviceName.")
+  @doc("Property virtualMfaDeviceName")
   virtualMfaDeviceName?: string;
 }
 
@@ -86,10 +86,10 @@ model AwsIamVirtualMFADeviceProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   key?: string;
 
-  @doc("Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   value?: string;
 }
 

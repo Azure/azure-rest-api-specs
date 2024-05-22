@@ -383,19 +383,19 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Gets and sets the property description.<p>A description of the security group.</p>"
+          "description": "<p>A description of the security group.</p>"
         },
         "groupId": {
           "type": "string",
-          "description": "Gets and sets the property groupId.<p>The ID of the security group.</p>"
+          "description": "<p>The ID of the security group.</p>"
         },
         "groupName": {
           "type": "string",
-          "description": "Gets and sets the property groupName.<p>The name of the security group.</p>"
+          "description": "<p>The name of the security group.</p>"
         },
         "ipPermissions": {
           "type": "array",
-          "description": "Gets and sets the property ipPermissions.<p>The inbound rules associated with the security group.</p>",
+          "description": "<p>The inbound rules associated with the security group.</p>",
           "items": {
             "$ref": "#/definitions/IpPermission"
           },
@@ -403,7 +403,7 @@
         },
         "ipPermissionsEgress": {
           "type": "array",
-          "description": "Gets and sets the property ipPermissionsEgress.<p>The outbound rules associated with the security group.</p>",
+          "description": "<p>The outbound rules associated with the security group.</p>",
           "items": {
             "$ref": "#/definitions/IpPermission"
           },
@@ -411,11 +411,11 @@
         },
         "ownerId": {
           "type": "string",
-          "description": "Gets and sets the property ownerId.<p>The Amazon Web Services account ID of the owner of the security group.</p>"
+          "description": "<p>The Amazon Web Services account ID of the owner of the security group.</p>"
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags.<p>Any tags assigned to the security group.</p>",
+          "description": "<p>Any tags assigned to the security group.</p>",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -423,7 +423,7 @@
         },
         "vpcId": {
           "type": "string",
-          "description": "Gets and sets the property vpcId.<p>The ID of the VPC for the security group.</p>"
+          "description": "<p>The ID of the VPC for the security group.</p>"
         }
       }
     },
@@ -474,42 +474,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsEc2SecurityGroupProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -534,15 +534,15 @@
         "fromPort": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property fromPort.<p>If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.</p>"
+          "description": "<p>If the protocol is TCP or UDP, this is the start of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).</p>"
         },
         "ipProtocol": {
           "type": "string",
-          "description": "Gets and sets the property ipProtocol.<p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>, <code>icmpv6</code>) or number (see <a href='http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml'>Protocol Numbers</a>).</p> <p>Use <code>-1</code> to specify all protocols. When authorizing security group rules, specifying <code>-1</code> or a protocol number other than <code>tcp</code>, <code>udp</code>, <code>icmp</code>, or <code>icmpv6</code> allows traffic on all ports, regardless of any port range you specify. For <code>tcp</code>, <code>udp</code>, and <code>icmp</code>, you must specify a port range. For <code>icmpv6</code>, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.</p>"
+          "description": "<p>The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>, <code>icmpv6</code>) or number (see <a href='http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml'>Protocol Numbers</a>).</p> <p>Use <code>-1</code> to specify all protocols. When authorizing security group rules, specifying <code>-1</code> or a protocol number other than <code>tcp</code>, <code>udp</code>, <code>icmp</code>, or <code>icmpv6</code> allows traffic on all ports, regardless of any port range you specify. For <code>tcp</code>, <code>udp</code>, and <code>icmp</code>, you must specify a port range. For <code>icmpv6</code>, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.</p>"
         },
         "ipRanges": {
           "type": "array",
-          "description": "Gets and sets the property ipRanges.<p>The IPv4 ranges.</p>",
+          "description": "<p>The IPv4 address ranges.</p>",
           "items": {
             "$ref": "#/definitions/IpRange"
           },
@@ -550,7 +550,7 @@
         },
         "ipv6Ranges": {
           "type": "array",
-          "description": "Gets and sets the property ipv6Ranges.<p>The IPv6 ranges.</p>",
+          "description": "<p>The IPv6 address ranges.</p>",
           "items": {
             "$ref": "#/definitions/Ipv6Range"
           },
@@ -558,7 +558,7 @@
         },
         "prefixListIds": {
           "type": "array",
-          "description": "Gets and sets the property prefixListIds.<p>The prefix list IDs.</p>",
+          "description": "<p>The prefix list IDs.</p>",
           "items": {
             "$ref": "#/definitions/PrefixListId"
           },
@@ -567,11 +567,11 @@
         "toPort": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property toPort.<p>If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.</p>"
+          "description": "<p>If the protocol is TCP or UDP, this is the end of the port range. If the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the start port is -1 (all ICMP types), then the end port must be -1 (all ICMP codes).</p>"
         },
         "userIdGroupPairs": {
           "type": "array",
-          "description": "Gets and sets the property userIdGroupPairs.<p>The security group and Amazon Web Services account ID pairs.</p>",
+          "description": "<p>The security group and Amazon Web Services account ID pairs.</p>",
           "items": {
             "$ref": "#/definitions/UserIdGroupPair"
           },
@@ -585,11 +585,11 @@
       "properties": {
         "cidrIp": {
           "type": "string",
-          "description": "Gets and sets the property cidrIp.<p>The IPv4 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv4 address, use the /32 prefix length.</p>"
+          "description": "<p>The IPv4 address range. You can either specify a CIDR block or a source security group, not both. To specify a single IPv4 address, use the /32 prefix length.</p>"
         },
         "description": {
           "type": "string",
-          "description": "Gets and sets the property description.<p>A description for the security group rule that references this IPv4 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>"
+          "description": "<p>A description for the security group rule that references this IPv4 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>"
         }
       }
     },
@@ -599,11 +599,11 @@
       "properties": {
         "cidrIpv6": {
           "type": "string",
-          "description": "Gets and sets the property cidrIpv6.<p>The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix length.</p>"
+          "description": "<p>The IPv6 address range. You can either specify a CIDR block or a source security group, not both. To specify a single IPv6 address, use the /128 prefix length.</p>"
         },
         "description": {
           "type": "string",
-          "description": "Gets and sets the property description.<p>A description for the security group rule that references this IPv6 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>"
+          "description": "<p>A description for the security group rule that references this IPv6 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*</p>"
         }
       }
     },
@@ -613,11 +613,11 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Gets and sets the property description.<p>A description for the security group rule that references this prefix list ID.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>"
+          "description": "<p>A description for the security group rule that references this prefix list ID.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>"
         },
         "prefixListId": {
           "type": "string",
-          "description": "Gets and sets the property prefixListId.<p>The ID of the prefix.</p>"
+          "description": "<p>The ID of the prefix.</p>"
         }
       }
     },
@@ -682,11 +682,11 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key.<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>"
+          "description": "<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with <code>aws:</code>.</p>"
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value.<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>"
+          "description": "<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.</p>"
         }
       }
     },
@@ -696,50 +696,32 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Gets and sets the property description.<p>A description for the security group rule that references this user ID group pair.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>"
+          "description": "<p>A description for the security group rule that references this user ID group pair.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>"
         },
         "groupId": {
           "type": "string",
-          "description": "Gets and sets the property groupId.<p>The ID of the security group.</p>"
+          "description": "<p>The ID of the security group.</p>"
         },
         "groupName": {
           "type": "string",
-          "description": "Gets and sets the property groupName.<p>[Default VPC] The name of the security group. For a security group in a nondefault VPC, use the security group ID. </p> <p>For a referenced security group in another VPC, this value is not returned if the referenced security group is deleted.</p>"
+          "description": "<p>[Default VPC] The name of the security group. For a security group in a nondefault VPC, use the security group ID. </p> <p>For a referenced security group in another VPC, this value is not returned if the referenced security group is deleted.</p>"
         },
         "peeringStatus": {
           "type": "string",
-          "description": "Gets and sets the property peeringStatus.<p>The status of a VPC peering connection, if applicable.</p>"
+          "description": "<p>The status of a VPC peering connection, if applicable.</p>"
         },
         "userId": {
           "type": "string",
-          "description": "Gets and sets the property userId.<p>The ID of an Amazon Web Services account.</p> <p>For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.</p>"
+          "description": "<p>The ID of an Amazon Web Services account.</p> <p>For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.</p>"
         },
         "vpcId": {
           "type": "string",
-          "description": "Gets and sets the property vpcId.<p>The ID of the VPC for the referenced security group, if applicable.</p>"
+          "description": "<p>The ID of the VPC for the referenced security group, if applicable.</p>"
         },
         "vpcPeeringConnectionId": {
           "type": "string",
-          "description": "Gets and sets the property vpcPeeringConnectionId.<p>The ID of the VPC peering connection, if applicable.</p>"
+          "description": "<p>The ID of the VPC peering connection, if applicable.</p>"
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

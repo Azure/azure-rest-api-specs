@@ -8,7 +8,6 @@ import "./MobileNetwork.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -37,7 +36,7 @@ interface DataNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DataNetwork>;
 
   @doc("Updates data network tags.")
-  @parameterVisibility("read")
+  @parameterVisibility
   updateTags is ArmCustomPatchSync<DataNetwork, TagsObject>;
 
   @doc("Deletes the specified data network.")

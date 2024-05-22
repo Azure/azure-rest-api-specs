@@ -383,40 +383,45 @@
       "properties": {
         "assignIpv6AddressOnCreation": {
           "type": "boolean",
-          "description": "Gets and sets the property assignIpv6AddressOnCreation."
+          "description": "Indicates whether a network interface created in this subnet receives an IPv6 address. The default value is ``false``. If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block."
         },
         "availabilityZone": {
           "type": "string",
-          "description": "Gets and sets the property availabilityZone."
+          "description": "The Availability Zone of the subnet. If you update this property, you must also update the ``CidrBlock`` property."
         },
         "availabilityZoneId": {
           "type": "string",
-          "description": "Gets and sets the property availabilityZoneId."
+          "description": "The AZ ID of the subnet."
         },
         "cidrBlock": {
           "type": "string",
-          "description": "Gets and sets the property cidrBlock."
+          "description": "The IPv4 CIDR block assigned to the subnet. If you update this property, we create a new subnet, and then delete the existing one."
         },
         "enableDns64": {
           "type": "boolean",
-          "description": "Gets and sets the property enableDns64."
+          "description": "Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations. For more information, see [DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-nat64-dns64) in the *User Guide*."
+        },
+        "enableLniAtDeviceIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1)."
         },
         "ipv4IpamPoolId": {
           "type": "string",
-          "description": "Gets and sets the property ipv4IpamPoolId. The ID of an IPv4 IPAM pool you want to use for allocating this subnet's CIDR"
+          "description": "An IPv4 IPAM pool ID for the subnet."
         },
         "ipv4NetmaskLength": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property ipv4NetmaskLength. The netmask length of the IPv4 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool"
+          "description": "An IPv4 netmask length for the subnet."
         },
         "ipv6CidrBlock": {
           "type": "string",
-          "description": "Gets and sets the property ipv6CidrBlock."
+          "description": "The IPv6 CIDR block. If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block."
         },
         "ipv6CidrBlocks": {
           "type": "array",
-          "description": "Gets and sets the property ipv6CidrBlocks.",
+          "description": "The IPv6 network ranges for the subnet, in CIDR notation.",
           "items": {
             "type": "string"
           },
@@ -424,40 +429,40 @@
         },
         "ipv6IpamPoolId": {
           "type": "string",
-          "description": "Gets and sets the property ipv6IpamPoolId. The ID of an IPv6 IPAM pool you want to use for allocating this subnet's CIDR"
+          "description": "An IPv6 IPAM pool ID for the subnet."
         },
         "ipv6Native": {
           "type": "boolean",
-          "description": "Gets and sets the property ipv6Native."
+          "description": "Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*."
         },
         "ipv6NetmaskLength": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property ipv6NetmaskLength. The netmask length of the IPv6 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool"
+          "description": "An IPv6 netmask length for the subnet."
         },
         "mapPublicIpOnLaunch": {
           "type": "boolean",
-          "description": "Gets and sets the property mapPublicIpOnLaunch."
+          "description": "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/)."
         },
         "networkAclAssociationId": {
           "type": "string",
-          "description": "Gets and sets the property networkAclAssociationId."
+          "description": "Property networkAclAssociationId"
         },
         "outpostArn": {
           "type": "string",
-          "description": "Gets and sets the property outpostArn."
+          "description": "The Amazon Resource Name (ARN) of the Outpost."
         },
         "privateDnsNameOptionsOnLaunch": {
           "$ref": "#/definitions/PrivateDnsNameOptionsOnLaunchModelProperties",
-          "description": "Gets and sets the property privateDnsNameOptionsOnLaunch."
+          "description": "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*. Available options:  +  EnableResourceNameDnsAAAARecord (true | false)  +  EnableResourceNameDnsARecord (true | false)  +  HostnameType (ip-name | resource-name)"
         },
         "subnetId": {
           "type": "string",
-          "description": "Gets and sets the property subnetId."
+          "description": "Property subnetId"
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags.",
+          "description": "Any tags assigned to the subnet.",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -465,7 +470,7 @@
         },
         "vpcId": {
           "type": "string",
-          "description": "Gets and sets the property vpcId."
+          "description": "The ID of the VPC the subnet is in. If you update this property, you must also update the ``CidrBlock`` property."
         }
       }
     },
@@ -516,42 +521,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsEc2SubnetProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -575,15 +580,15 @@
       "properties": {
         "enableResourceNameDnsAAAARecord": {
           "type": "boolean",
-          "description": "Gets and sets the property enableResourceNameDnsAAAARecord."
+          "description": "Property enableResourceNameDnsAAAARecord"
         },
         "enableResourceNameDnsARecord": {
           "type": "boolean",
-          "description": "Gets and sets the property enableResourceNameDnsARecord."
+          "description": "Property enableResourceNameDnsARecord"
         },
         "hostnameType": {
           "type": "string",
-          "description": "Gets and sets the property hostnameType."
+          "description": "Property hostnameType"
         }
       }
     },
@@ -648,30 +653,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key."
+          "description": "The tag key."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "The tag value."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

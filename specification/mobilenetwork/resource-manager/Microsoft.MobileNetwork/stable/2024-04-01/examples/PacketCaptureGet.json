@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "packetCoreControlPlaneName": "TestPacketCoreCP",
+    "packetCaptureName": "pc1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pc1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCaptures/pc1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "status": "Stopped",
+          "networkInterfaces": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestADN"
+          ],
+          "bytesToCapturePerPacket": 10000,
+          "totalBytesPerSession": 100000,
+          "timeLimitInSeconds": 100,
+          "outputFiles": [
+            "https://constoso.blob.core.windows.net/diagscontainer/pc1_pcaps-1.tar.zip",
+            "https://constoso.blob.core.windows.net/diagscontainer/pc1_pcaps-2.tar.zip"
+          ]
+        }
+      }
+    }
+  }
+}

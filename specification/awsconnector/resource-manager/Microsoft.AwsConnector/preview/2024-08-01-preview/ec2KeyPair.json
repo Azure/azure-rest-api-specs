@@ -383,31 +383,73 @@
       "properties": {
         "keyFingerprint": {
           "type": "string",
-          "description": "Gets and sets the property keyFingerprint. A short sequence of bytes used for public key verification"
+          "description": "Property keyFingerprint"
         },
         "keyFormat": {
-          "$ref": "#/definitions/KeyFormat",
-          "description": "Gets and sets the property keyFormat. The format of the private key"
+          "type": "string",
+          "description": "The format of the key pair. Default: ``pem``",
+          "default": "pem",
+          "enum": [
+            "pem",
+            "ppk"
+          ],
+          "x-ms-enum": {
+            "name": "KeyFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "pem",
+                "value": "pem",
+                "description": "KeyFormat enum pem"
+              },
+              {
+                "name": "ppk",
+                "value": "ppk",
+                "description": "KeyFormat enum ppk"
+              }
+            ]
+          }
         },
         "keyName": {
           "type": "string",
-          "description": "Gets and sets the property keyName. The name of the SSH key pair"
+          "description": "A unique name for the key pair. Constraints: Up to 255 ASCII characters"
         },
         "keyPairId": {
           "type": "string",
-          "description": "Gets and sets the property keyPairId. An AWS generated ID for the key pair"
+          "description": "Property keyPairId"
         },
         "keyType": {
-          "$ref": "#/definitions/KeyType",
-          "description": "Gets and sets the property keyType. The crypto-system used to generate a key pair."
+          "type": "string",
+          "description": "The type of key pair. Note that ED25519 keys are not supported for Windows instances. If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value. Default: ``rsa``",
+          "default": "rsa",
+          "enum": [
+            "ed25519",
+            "rsa"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ed25519",
+                "value": "ed25519",
+                "description": "KeyType enum ed25519"
+              },
+              {
+                "name": "rsa",
+                "value": "rsa",
+                "description": "KeyType enum rsa"
+              }
+            ]
+          }
         },
         "publicKeyMaterial": {
           "type": "string",
-          "description": "Gets and sets the property publicKeyMaterial. Plain text public key to import"
+          "description": "The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created."
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags. An array of key-value pairs to apply to this resource.",
+          "description": "The tags to apply to the key pair.",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -462,42 +504,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsEc2KeyPairProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -624,30 +666,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+          "description": "The tag key."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+          "description": "The tag value."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

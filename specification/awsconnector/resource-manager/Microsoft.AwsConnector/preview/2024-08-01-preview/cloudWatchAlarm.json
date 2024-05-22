@@ -383,11 +383,12 @@
       "properties": {
         "actionsEnabled": {
           "type": "boolean",
-          "description": "Gets and sets the property actionsEnabled. Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE."
+          "description": "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
+          "default": true
         },
         "alarmActions": {
           "type": "array",
-          "description": "Gets and sets the property alarmActions. The list of actions to execute when this alarm transitions into an ALARM state from any other state.",
+          "description": "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN). For more information about creating alarms and the actions that you can specify, see [PutMetricAlarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html) in the *API Reference*.",
           "items": {
             "type": "string"
           },
@@ -395,28 +396,28 @@
         },
         "alarmDescription": {
           "type": "string",
-          "description": "Gets and sets the property alarmDescription. The description of the alarm."
+          "description": "The description of the alarm."
         },
         "alarmName": {
           "type": "string",
-          "description": "Gets and sets the property alarmName. The name of the alarm."
+          "description": "The name of the alarm. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the alarm name.   If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name."
         },
         "arn": {
           "type": "string",
-          "description": "Gets and sets the property arn. Amazon Resource Name is a unique name for each resource."
+          "description": "Property arn"
         },
         "comparisonOperator": {
           "type": "string",
-          "description": "Gets and sets the property comparisonOperator. The arithmetic operation to use when comparing the specified statistic and threshold."
+          "description": "The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand."
         },
         "datapointsToAlarm": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property datapointsToAlarm. The number of datapoints that must be breaching to trigger the alarm."
+          "description": "The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an 'M out of N' alarm. In that case, this value is the M, and the value that you set for ``EvaluationPeriods`` is the N value. For more information, see [Evaluating an Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation) in the *User Guide*. If you omit this parameter, CW uses the same value here that you set for ``EvaluationPeriods``, and the alarm goes to alarm state if that many consecutive periods are breaching."
         },
         "dimensions": {
           "type": "array",
-          "description": "Gets and sets the property dimensions. The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify Dimensions. Instead, you use Metrics.",
+          "description": "The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify ``Dimensions``. Instead, you use ``Metrics``.",
           "items": {
             "$ref": "#/definitions/Dimension"
           },
@@ -424,20 +425,20 @@
         },
         "evaluateLowSampleCountPercentile": {
           "type": "string",
-          "description": "Gets and sets the property evaluateLowSampleCountPercentile. Used only for alarms based on percentiles."
+          "description": "Used only for alarms based on percentiles. If ``ignore``, the alarm state does not change during periods with too few data points to be statistically significant. If ``evaluate`` or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available."
         },
         "evaluationPeriods": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property evaluationPeriods. The number of periods over which data is compared to the specified threshold."
+          "description": "The number of periods over which data is compared to the specified threshold. If you are setting an alarm that requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an 'M out of N' alarm, this value is the N, and ``DatapointsToAlarm`` is the M. For more information, see [Evaluating an Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation) in the *User Guide*."
         },
         "extendedStatistic": {
           "type": "string",
-          "description": "Gets and sets the property extendedStatistic. The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100."
+          "description": "The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100. For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both. For an alarm based on a math expression, you can't specify ``ExtendedStatistic``. Instead, you use ``Metrics``."
         },
         "insufficientDataActions": {
           "type": "array",
-          "description": "Gets and sets the property insufficientDataActions. The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state.",
+          "description": "The actions to execute when this alarm transitions to the ``INSUFFICIENT_DATA`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
           "items": {
             "type": "string"
           },
@@ -445,11 +446,11 @@
         },
         "metricName": {
           "type": "string",
-          "description": "Gets and sets the property metricName. The name of the metric associated with the alarm."
+          "description": "The name of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you use ``Metrics`` instead and you can't specify ``MetricName``."
         },
         "metrics": {
           "type": "array",
-          "description": "Gets and sets the property metrics. An array that enables you to create an alarm based on the result of a metric math expression.",
+          "description": "An array that enables you to create an alarm based on the result of a metric math expression. Each item in the array either retrieves a metric or performs a math expression. If you specify the ``Metrics`` parameter, you cannot specify ``MetricName``, ``Dimensions``, ``Period``, ``Namespace``, ``Statistic``, ``ExtendedStatistic``, or ``Unit``.",
           "items": {
             "$ref": "#/definitions/MetricDataQuery"
           },
@@ -457,11 +458,11 @@
         },
         "namespace": {
           "type": "string",
-          "description": "Gets and sets the property `namespace`. The namespace of the metric associated with the alarm."
+          "description": "The namespace of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you can't specify ``Namespace`` and you use ``Metrics`` instead. For a list of namespaces for metrics from AWS services, see [Services That Publish Metrics.](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)"
         },
         "okActions": {
           "type": "array",
-          "description": "Gets and sets the property okActions. The actions to execute when this alarm transitions to the OK state from any other state.",
+          "description": "The actions to execute when this alarm transitions to the ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
           "items": {
             "type": "string"
           },
@@ -470,28 +471,36 @@
         "period": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property period. The period in seconds, over which the statistic is applied."
+          "description": "The period, in seconds, over which the statistic is applied. This is required for an alarm based on a metric. Valid values are 10, 30, 60, and any multiple of 60. For an alarm based on a math expression, you can't specify ``Period``, and instead you use the ``Metrics`` parameter. *Minimum:* 10"
         },
         "statistic": {
           "type": "string",
-          "description": "Gets and sets the property statistic. The statistic for the metric associated with the alarm, other than percentile."
+          "description": "The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ``ExtendedStatistic``. For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both. For an alarm based on a math expression, you can't specify ``Statistic``. Instead, you use ``Metrics``."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Property tags",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
         },
         "threshold": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property threshold. In an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND function used as the threshold for the alarm."
+          "description": "The value to compare with the specified statistic."
         },
         "thresholdMetricId": {
           "type": "string",
-          "description": "Gets and sets the property thresholdMetricId. In an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND function used as the threshold for the alarm."
+          "description": "In an alarm based on an anomaly detection model, this is the ID of the ``ANOMALY_DETECTION_BAND`` function used as the threshold for the alarm."
         },
         "treatMissingData": {
           "type": "string",
-          "description": "Gets and sets the property treatMissingData. Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing."
+          "description": "Sets how this alarm is to handle missing data points. Valid values are ``breaching``, ``notBreaching``, ``ignore``, and ``missing``. For more information, see [Configuring How Alarms Treat Missing Data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data) in the *Amazon User Guide*. If you omit this parameter, the default behavior of ``missing`` is used."
         },
         "unit": {
           "type": "string",
-          "description": "Gets and sets the property unit. The unit of the metric associated with the alarm."
+          "description": "The unit of the metric associated with the alarm. Specify this only if you are creating an alarm based on a single metric. Do not specify this if you are specifying a ``Metrics`` array.  You can specify the following values: Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, or None."
         }
       }
     },
@@ -542,42 +551,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsCloudWatchAlarmProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -601,11 +610,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name. The name of the dimension."
+          "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value. The value for the dimension."
+          "description": "The value for the dimension, from 1–255 characters in length."
         }
       }
     },
@@ -615,7 +624,7 @@
       "properties": {
         "dimensions": {
           "type": "array",
-          "description": "Gets and sets the property dimensions. The dimensions for the metric.",
+          "description": "The metric dimensions that you want to be used for the metric that the alarm will watch.",
           "items": {
             "$ref": "#/definitions/Dimension"
           },
@@ -623,11 +632,11 @@
         },
         "metricName": {
           "type": "string",
-          "description": "Gets and sets the property metricName. The name of the metric."
+          "description": "The name of the metric that you want the alarm to watch. This is a required field."
         },
         "namespace": {
           "type": "string",
-          "description": "Gets and sets the property `namespace`. The namespace of the metric."
+          "description": "The namespace of the metric that the alarm will watch."
         }
       }
     },
@@ -637,32 +646,32 @@
       "properties": {
         "accountId": {
           "type": "string",
-          "description": "Gets and sets the property accountId. The ID of the account where the metrics are located, if this is a cross-account alarm."
+          "description": "The ID of the account where the metrics are located, if this is a cross-account alarm."
         },
         "expression": {
           "type": "string",
-          "description": "Gets and sets the property expression. The math expression to be performed on the returned data."
+          "description": "The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. For more information about metric math expressions, see [Metric Math Syntax and Functions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax) in the *User Guide*. Within each MetricDataQuery object, you must specify either ``Expression`` or ``MetricStat`` but not both."
         },
         "id": {
           "type": "string",
-          "description": "Gets and sets the property id. A short name used to tie this object to the results in the response."
+          "description": "A short name used to tie this object to the results in the response. This name must be unique within a single call to ``GetMetricData``. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter."
         },
         "label": {
           "type": "string",
-          "description": "Gets and sets the property label. A human-readable label for this metric or expression."
+          "description": "A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CW dashboard widget, the label is shown. If ``Label`` is omitted, CW generates a default."
         },
         "metricStat": {
           "$ref": "#/definitions/MetricStat",
-          "description": "Gets and sets the property metricStat. The metric to be returned, along with statistics, period, and units. This structure defines the metric to be returned, along with the statistics, period, and units."
+          "description": "The metric to be returned, along with statistics, period, and units. Use this parameter only if this object is retrieving a metric and not performing a math expression on returned data. Within one MetricDataQuery object, you must specify either ``Expression`` or ``MetricStat`` but not both. This structure defines the metric to be returned, along with the statistics, period, and units.  ``MetricStat`` is a property of the [MetricDataQuery](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricdataquery.html) property type."
         },
         "period": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property period. The period in seconds, over which the statistic is applied."
+          "description": "The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` operation that includes a ``StorageResolution of 1 second``."
         },
         "returnData": {
           "type": "boolean",
-          "description": "Gets and sets the property returnData. This option indicates whether to return the timestamps and raw data values of this metric."
+          "description": "This option indicates whether to return the timestamps and raw data values of this metric. When you create an alarm based on a metric math expression, specify ``True`` for this value for only the one math expression that the alarm is based on. You must specify ``False`` for ``ReturnData`` for all the other metrics and expressions used in the alarm. This field is required."
         }
       }
     },
@@ -672,20 +681,20 @@
       "properties": {
         "metric": {
           "$ref": "#/definitions/Metric",
-          "description": "Gets and sets the property metric. The metric to return, including the metric name, namespace, and dimensions. The Metric property type represents a specific metric."
+          "description": "The metric to return, including the metric name, namespace, and dimensions. The ``Metric`` property type represents a specific metric. ``Metric`` is a property of the [MetricStat](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudwatch-alarm-metricstat.html) property type."
         },
         "period": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property period. The granularity, in seconds, of the returned data points."
+          "description": "The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` call that includes a ``StorageResolution`` of 1 second. If the ``StartTime`` parameter specifies a time stamp that is greater than 3 hours ago, you must specify the period as follows or no data points in that time range is returned:  +  Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1 minute).  +  Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5 minutes).  +  Start time greater than 63 days ago - Use a multiple of 3600 seconds (1 hour)."
         },
         "stat": {
           "type": "string",
-          "description": "Gets and sets the property stat. The statistic to return."
+          "description": "The statistic to return. It can include any CW statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *User Guide*."
         },
         "unit": {
           "type": "string",
-          "description": "Gets and sets the property unit. The unit to use for the returned data points."
+          "description": "The unit to use for the returned data points.  Valid values are: Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, or None."
         }
       }
     },
@@ -744,22 +753,18 @@
       },
       "readOnly": true
     },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value for the specified tag key."
+        }
       }
     }
   },

@@ -383,42 +383,42 @@
       "properties": {
         "healthCheckEnabled": {
           "type": "boolean",
-          "description": "Gets and sets the property healthCheckEnabled. Indicates whether health checks are enabled. If the target type is lambda, health checks are disabled by default but can be enabled. If the target type is instance, ip, or alb, health checks are always enabled and cannot be disabled."
+          "description": "Indicates whether health checks are enabled. If the target type is lambda, health checks are disabled by default but can be enabled. If the target type is instance, ip, or alb, health checks are always enabled and cannot be disabled."
         },
         "healthCheckIntervalSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property healthCheckIntervalSeconds. The approximate amount of time, in seconds, between health checks of an individual target."
+          "description": "The approximate amount of time, in seconds, between health checks of an individual target."
         },
         "healthCheckPath": {
           "type": "string",
-          "description": "Gets and sets the property healthCheckPath. [HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck."
+          "description": "[HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck."
         },
         "healthCheckPort": {
           "type": "string",
-          "description": "Gets and sets the property healthCheckPort. The port the load balancer uses when performing health checks on targets. "
+          "description": "The port the load balancer uses when performing health checks on targets."
         },
         "healthCheckProtocol": {
           "type": "string",
-          "description": "Gets and sets the property healthCheckProtocol. The protocol the load balancer uses when performing health checks on targets. "
+          "description": "The protocol the load balancer uses when performing health checks on targets."
         },
         "healthCheckTimeoutSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property healthCheckTimeoutSeconds. The amount of time, in seconds, during which no response from a target means a failed health check."
+          "description": "The amount of time, in seconds, during which no response from a target means a failed health check."
         },
         "healthyThresholdCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property healthyThresholdCount. The number of consecutive health checks successes required before considering an unhealthy target healthy. "
+          "description": "The number of consecutive health checks successes required before considering an unhealthy target healthy."
         },
         "ipAddressType": {
           "type": "string",
-          "description": "Gets and sets the property ipAddressType. The type of IP address used for this target group. The possible values are ipv4 and ipv6. "
+          "description": "The type of IP address used for this target group. The possible values are ipv4 and ipv6."
         },
         "loadBalancerArns": {
           "type": "array",
-          "description": "Gets and sets the property loadBalancerArns. The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.",
+          "description": "The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.",
           "items": {
             "type": "string"
           },
@@ -426,28 +426,28 @@
         },
         "matcher": {
           "$ref": "#/definitions/Matcher",
-          "description": "Gets and sets the property matcher. [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target."
+          "description": "[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target."
         },
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name. The name of the target group."
+          "description": "The name of the target group."
         },
         "port": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property port. The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply. If the protocol is GENEVE, the supported port is 6081."
+          "description": "The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply. If the protocol is GENEVE, the supported port is 6081."
         },
         "protocol": {
           "type": "string",
-          "description": "Gets and sets the property protocol. The protocol to use for routing traffic to the targets."
+          "description": "The protocol to use for routing traffic to the targets."
         },
         "protocolVersion": {
           "type": "string",
-          "description": "Gets and sets the property protocolVersion. [HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2."
+          "description": "[HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2."
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags. The tags.",
+          "description": "The tags.",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -455,11 +455,11 @@
         },
         "targetGroupArn": {
           "type": "string",
-          "description": "Gets and sets the property targetGroupArn. The ARN of the Target Group"
+          "description": "The ARN of the Target Group"
         },
         "targetGroupAttributes": {
           "type": "array",
-          "description": "Gets and sets the property targetGroupAttributes. The attributes.",
+          "description": "The attributes.",
           "items": {
             "$ref": "#/definitions/TargetGroupAttribute"
           },
@@ -467,19 +467,19 @@
         },
         "targetGroupFullName": {
           "type": "string",
-          "description": "Gets and sets the property targetGroupFullName. The full name of the target group."
+          "description": "The full name of the target group."
         },
         "targetGroupName": {
           "type": "string",
-          "description": "Gets and sets the property targetGroupName. The name of the target group."
+          "description": "The name of the target group."
         },
         "targetType": {
           "type": "string",
-          "description": "Gets and sets the property targetType. The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type."
+          "description": "The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type."
         },
         "targets": {
           "type": "array",
-          "description": "Gets and sets the property targets. The targets.",
+          "description": "The targets.",
           "items": {
             "$ref": "#/definitions/TargetDescription"
           },
@@ -488,11 +488,11 @@
         "unhealthyThresholdCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property unhealthyThresholdCount. The number of consecutive health check failures required before considering a target unhealthy."
+          "description": "The number of consecutive health check failures required before considering a target unhealthy."
         },
         "vpcId": {
           "type": "string",
-          "description": "Gets and sets the property vpcId. The identifier of the virtual private cloud (VPC). If the target is a Lambda function, this parameter does not apply."
+          "description": "The identifier of the virtual private cloud (VPC). If the target is a Lambda function, this parameter does not apply."
         }
       }
     },
@@ -543,42 +543,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsElasticLoadBalancingV2TargetGroupProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -602,11 +602,11 @@
       "properties": {
         "grpcCode": {
           "type": "string",
-          "description": "Gets and sets the property grpcCode. You can specify values between 0 and 99. You can specify multiple values, or a range of values. The default value is 12."
+          "description": "You can specify values between 0 and 99. You can specify multiple values, or a range of values. The default value is 12."
         },
         "httpCode": {
           "type": "string",
-          "description": "Gets and sets the property httpCode. For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values or a range of values. "
+          "description": "For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values or a range of values."
         }
       }
     },
@@ -671,11 +671,11 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key. The value for the tag. "
+          "description": "The value for the tag."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value. The key name of the tag. "
+          "description": "The key name of the tag."
         }
       }
     },
@@ -685,16 +685,16 @@
       "properties": {
         "availabilityZone": {
           "type": "string",
-          "description": "Gets and sets the property availabilityZone. An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer."
+          "description": "An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer."
         },
         "id": {
           "type": "string",
-          "description": "Gets and sets the property id. The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address. If the target type is lambda, specify the ARN of the Lambda function. If the target type is alb, specify the ARN of the Application Load Balancer target. "
+          "description": "The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address. If the target type is lambda, specify the ARN of the Lambda function. If the target type is alb, specify the ARN of the Application Load Balancer target."
         },
         "port": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property port. The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is alb, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. Not used if the target is a Lambda function."
+          "description": "The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is alb, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. Not used if the target is a Lambda function."
         }
       }
     },
@@ -704,30 +704,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key. The value of the attribute."
+          "description": "The value of the attribute."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value. The name of the attribute."
+          "description": "The name of the attribute."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

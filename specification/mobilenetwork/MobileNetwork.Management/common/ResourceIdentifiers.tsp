@@ -3,13 +3,14 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MobileNetwork;
 
@@ -231,18 +232,67 @@ scalar ClusterServiceIdProperty
     }
   ]>;
 
-@doc("Reference to a VNF agent deployment resource.")
-scalar VnfAgentDeploymentIdProperty
-  extends armResourceIdentifier<[
-    {
-      type: "Microsoft.MobilePacketCore/vnfAgentDeployments",
-    }
-  ]>;
-
 @doc("Reference to an Azure Arc custom location resource.")
 scalar CustomLocationIdProperty
   extends armResourceIdentifier<[
     {
       type: "Microsoft.ExtendedLocation/customLocations",
+    }
+  ]>;
+
+@added(Versions.v2024_05_15_preview)
+@doc("Reference to a Virtual Network Function (VNF) agent deployment resource.")
+scalar VnfAgentDeploymentIdProperty
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.MobileNetwork/vnfAgentDeployments",
+    }
+  ]>;
+
+@added(Versions.v2024_05_15_preview)
+@doc("Azure resource ID of a User Assigned Managed Identity.")
+scalar UamiIdPropertyIdProperty
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities",
+    }
+  ]>;
+
+@added(Versions.v2024_05_15_preview)
+@doc("Azure resource ID of workload associated with a cluster.")
+scalar AssociatedClusterWorkloadIdProperty
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.MobileNetwork/amfDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/nrfDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/nssfDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/observabilityServices",
+    },
+    {
+      type: "Microsoft.MobileNetwork/smfDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/upfDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/vnfAgentDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/sdmDeployments",
+    }
+  ]>;
+
+@added(Versions.v2024_05_15_preview)
+@doc("Azure resource ID of a Virtualized Network Function (VNF) associated with a Virtual Network Function (VNF) Agent")
+scalar AssociatedVirtualNetworkFunctionIdProperty
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.MobileNetwork/virtualizedMmeDeployments",
     }
   ]>;

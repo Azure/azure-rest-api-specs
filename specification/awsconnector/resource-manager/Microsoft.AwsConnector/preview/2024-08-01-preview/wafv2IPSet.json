@@ -383,7 +383,7 @@
       "properties": {
         "addresses": {
           "type": "array",
-          "description": "Gets and sets the property addresses. List of IPAddresses.",
+          "description": "List of IPAddresses.",
           "items": {
             "type": "string"
           },
@@ -391,31 +391,31 @@
         },
         "arn": {
           "type": "string",
-          "description": "Gets and sets the property arn. ARN of the WAF entity."
+          "description": "ARN of the WAF entity."
         },
         "description": {
           "type": "string",
-          "description": "Gets and sets the property description. Description of the entity."
+          "description": "Description of the entity."
         },
         "ipAddressVersion": {
           "type": "string",
-          "description": "Gets and sets the property ipAddressVersion. Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address."
+          "description": "Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address."
         },
         "id": {
           "type": "string",
-          "description": "Gets and sets the property id. Id of the IPSet"
+          "description": "Id of the IPSet"
         },
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name. Name of the IPSet."
+          "description": "Name of the IPSet."
         },
         "scope": {
           "type": "string",
-          "description": "Gets and sets the property scope. Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway."
+          "description": "Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway."
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags.",
+          "description": "Property tags",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -484,30 +484,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key."
+          "description": "Property key"
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     },
     "Wafv2IPSet": {
@@ -557,42 +539,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsWafv2IPSetProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }

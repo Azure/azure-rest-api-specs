@@ -383,7 +383,7 @@
       "properties": {
         "active": {
           "type": "boolean",
-          "description": "Gets and sets the property active. When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order."
+          "description": "When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order."
         }
       }
     },
@@ -393,11 +393,11 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Gets and sets the property enabled. If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions."
+          "description": "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions."
         },
         "retainStacksOnAccountRemoval": {
           "type": "boolean",
-          "description": "Gets and sets the property retainStacksOnAccountRemoval. If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True."
+          "description": "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True."
         }
       }
     },
@@ -407,19 +407,19 @@
       "properties": {
         "administrationRoleARN": {
           "type": "string",
-          "description": "Gets and sets the property administrationRoleARN. The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account."
+          "description": "The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account."
         },
         "autoDeployment": {
           "$ref": "#/definitions/AutoDeployment",
-          "description": "Gets and sets the property autoDeployment. Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if PermissionModel is SERVICE_MANAGED."
+          "description": "Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if PermissionModel is SERVICE_MANAGED."
         },
         "callAs": {
           "$ref": "#/definitions/CallAs",
-          "description": "Gets and sets the property callAs. Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN."
+          "description": "Specifies the AWS account that you are acting from. By default, SELF is specified. For self-managed permissions, specify SELF; for service-managed permissions, if you are signed in to the organization's management account, specify SELF. If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN."
         },
         "capabilities": {
           "type": "array",
-          "description": "Gets and sets the property capabilities. In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
+          "description": "In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.",
           "items": {
             "type": "string"
           },
@@ -427,23 +427,23 @@
         },
         "description": {
           "type": "string",
-          "description": "Gets and sets the property description. A description of the stack set. You can use the description to identify the stack set's purpose or other important information."
+          "description": "A description of the stack set. You can use the description to identify the stack set's purpose or other important information."
         },
         "executionRoleName": {
           "type": "string",
-          "description": "Gets and sets the property executionRoleName. The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation."
+          "description": "The name of the IAM execution role to use to create the stack set. If you do not specify an execution role, AWS CloudFormation uses the AWSCloudFormationStackSetExecutionRole role for the stack set operation."
         },
         "managedExecution": {
           "$ref": "#/definitions/ActiveModel",
-          "description": "Gets and sets the property managedExecution. Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations."
+          "description": "Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations."
         },
         "operationPreferences": {
           "$ref": "#/definitions/OperationPreferences",
-          "description": "Gets and sets the property operationPreferences. The user-specified preferences for how AWS CloudFormation performs a stack set operation."
+          "description": "The user-specified preferences for how AWS CloudFormation performs a stack set operation."
         },
         "parameters": {
           "type": "array",
-          "description": "Gets and sets the property parameters. The input parameters for the stack set template.",
+          "description": "The input parameters for the stack set template.",
           "items": {
             "$ref": "#/definitions/Parameter"
           },
@@ -451,11 +451,11 @@
         },
         "permissionModel": {
           "$ref": "#/definitions/PermissionModel",
-          "description": "Gets and sets the property permissionModel. Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified."
+          "description": "Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified."
         },
         "stackInstancesGroup": {
           "type": "array",
-          "description": "Gets and sets the property stackInstancesGroup. A group of stack instances with parameters in some specific accounts and regions.",
+          "description": "A group of stack instances with parameters in some specific accounts and regions.",
           "items": {
             "$ref": "#/definitions/StackInstances"
           },
@@ -463,15 +463,15 @@
         },
         "stackSetId": {
           "type": "string",
-          "description": "Gets and sets the property stackSetId. The ID of the stack set that you're creating."
+          "description": "The ID of the stack set that you're creating."
         },
         "stackSetName": {
           "type": "string",
-          "description": "Gets and sets the property stackSetName. The name to associate with the stack set. The name must be unique in the Region where you create your stack set."
+          "description": "The name to associate with the stack set. The name must be unique in the Region where you create your stack set."
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags. The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.",
+          "description": "The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -479,11 +479,11 @@
         },
         "templateBody": {
           "type": "string",
-          "description": "Gets and sets the property templateBody. The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes."
+          "description": "The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes."
         },
         "templateURL": {
           "type": "string",
-          "description": "Gets and sets the property templateURL. Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket."
+          "description": "Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket."
         }
       }
     },
@@ -558,42 +558,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsCloudFormationStackSetProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -617,11 +617,11 @@
       "properties": {
         "accountFilterType": {
           "$ref": "#/definitions/DeploymentTargetsAccountFilterType",
-          "description": "Gets and sets the property accountFilterType. The filter type you want to apply on organizational units and accounts."
+          "description": "The filter type you want to apply on organizational units and accounts."
         },
         "accounts": {
           "type": "array",
-          "description": "Gets and sets the property accounts. AWS accounts that you want to create stack instances in the specified Region(s) for.",
+          "description": "AWS accounts that you want to create stack instances in the specified Region(s) for.",
           "items": {
             "type": "string"
           },
@@ -629,11 +629,11 @@
         },
         "accountsUrl": {
           "type": "string",
-          "description": "Gets and sets the property accountsUrl. Returns the value of the AccountsUrl property."
+          "description": "Returns the value of the AccountsUrl property."
         },
         "organizationalUnitIds": {
           "type": "array",
-          "description": "Gets and sets the property organizationalUnitIds. The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
+          "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
           "items": {
             "type": "string"
           },
@@ -684,30 +684,30 @@
         "failureToleranceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property failureToleranceCount."
+          "description": "Property failureToleranceCount"
         },
         "failureTolerancePercentage": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property failureTolerancePercentage."
+          "description": "Property failureTolerancePercentage"
         },
         "maxConcurrentCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property maxConcurrentCount."
+          "description": "Property maxConcurrentCount"
         },
         "maxConcurrentPercentage": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets and sets the property maxConcurrentPercentage."
+          "description": "Property maxConcurrentPercentage"
         },
         "regionConcurrencyType": {
           "type": "string",
-          "description": "Gets and sets the property regionConcurrencyType. The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time"
+          "description": "The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time"
         },
         "regionOrder": {
           "type": "array",
-          "description": "Gets and sets the property regionOrder.",
+          "description": "Property regionOrder",
           "items": {
             "type": "string"
           },
@@ -721,11 +721,11 @@
       "properties": {
         "parameterKey": {
           "type": "string",
-          "description": "Gets and sets the property parameterKey. The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template."
+          "description": "The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template."
         },
         "parameterValue": {
           "type": "string",
-          "description": "Gets and sets the property parameterValue. The input value associated with the parameter."
+          "description": "The input value associated with the parameter."
         }
       }
     },
@@ -814,11 +814,11 @@
       "properties": {
         "deploymentTargets": {
           "$ref": "#/definitions/DeploymentTargets",
-          "description": "Gets and sets the property deploymentTargets.  The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions."
+          "description": "The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions."
         },
         "parameterOverrides": {
           "type": "array",
-          "description": "Gets and sets the property parameterOverrides. A list of stack set parameters whose values you want to override in the selected stack instances.",
+          "description": "A list of stack set parameters whose values you want to override in the selected stack instances.",
           "items": {
             "$ref": "#/definitions/Parameter"
           },
@@ -826,7 +826,7 @@
         },
         "regions": {
           "type": "array",
-          "description": "Gets and sets the property regions. The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
+          "description": "The names of one or more Regions where you want to create stack instances using the specified AWS account(s).",
           "items": {
             "type": "string"
           },
@@ -840,30 +840,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key. A string used to identify this tag. You can specify a maximum of 127 characters for a tag key."
+          "description": "A string used to identify this tag. You can specify a maximum of 127 characters for a tag key."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value. A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value."
+          "description": "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },

@@ -50,7 +50,7 @@ model LightsailBucket is TrackedResource<LightsailBucketProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LightsailBucket")
 model LightsailBucketProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsLightsailBucketProperties;
 
   ...AwsCommonProperties;
@@ -62,37 +62,37 @@ model LightsailBucketProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsLightsailBucket")
 model AwsLightsailBucketProperties {
-  @doc("Gets and sets the property ableToUpdateBundle. Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly AWS billing cycle.")
+  @doc("Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle. You can update a bucket's bundle only one time within a monthly AWS billing cycle.")
   ableToUpdateBundle?: boolean;
 
-  @doc("Gets and sets the property accessRules. An object that sets the public accessibility of objects in the specified bucket.")
+  @doc("An object that sets the public accessibility of objects in the specified bucket.")
   accessRules?: AccessRules;
 
-  @doc("Gets and sets the property bucketArn.")
+  @doc("Property bucketArn")
   bucketArn?: string;
 
-  @doc("Gets and sets the property bucketName. The name for the bucket.")
+  @doc("The name for the bucket.")
   bucketName?: string;
 
-  @doc("Gets and sets the property bundleId. The ID of the bundle to use for the bucket.")
+  @doc("The ID of the bundle to use for the bucket.")
   bundleId?: string;
 
-  @doc("Gets and sets the property objectVersioning. Specifies whether to enable or disable versioning of objects in the bucket.")
+  @doc("Specifies whether to enable or disable versioning of objects in the bucket.")
   objectVersioning?: boolean;
 
-  @doc("Gets and sets the property readOnlyAccessAccounts. An array of strings to specify the AWS account IDs that can access the bucket.")
+  @doc("An array of strings to specify the AWS account IDs that can access the bucket.")
   @extension("x-ms-identifiers", [])
   readOnlyAccessAccounts?: string[];
 
-  @doc("Gets and sets the property resourcesReceivingAccess. The names of the Lightsail resources for which to set bucket access.")
+  @doc("The names of the Lightsail resources for which to set bucket access.")
   @extension("x-ms-identifiers", [])
   resourcesReceivingAccess?: string[];
 
-  @doc("Gets and sets the property tags. An array of key-value pairs to apply to this resource.")
+  @doc("An array of key-value pairs to apply to this resource.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property url. The URL of the bucket.")
+  @doc("The URL of the bucket.")
   url?: string;
 }
 
@@ -102,10 +102,10 @@ model AwsLightsailBucketProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AccessRules")
 model AccessRules {
-  @doc("Gets and sets the property allowPublicOverrides. A Boolean value that indicates whether the access control list (ACL) permissions that are applied to individual objects override the getObject option that is currently specified.")
+  @doc("A Boolean value that indicates whether the access control list (ACL) permissions that are applied to individual objects override the getObject option that is currently specified.")
   allowPublicOverrides?: boolean;
 
-  @doc("Gets and sets the property getObject. Specifies the anonymous access to all objects in a bucket.")
+  @doc("Specifies the anonymous access to all objects in a bucket.")
   getObject?: string;
 }
 
@@ -115,10 +115,10 @@ model AccessRules {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   key?: string;
 
-  @doc("Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
+  @doc("The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
   value?: string;
 }
 

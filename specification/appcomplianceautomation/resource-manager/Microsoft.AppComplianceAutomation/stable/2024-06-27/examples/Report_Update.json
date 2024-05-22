@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "api-version": "2024-06-27",
+    "parameters": {
+      "properties": {
+        "offerGuid": "00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002",
+        "resources": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+            "resourceOrigin": "Azure",
+            "resourceType": "Microsoft.SignalRService/SignalR"
+          },
+          {
+            "accountId": "000000000000",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/acat-aws/providers/microsoft.security/securityconnectors/acatawsconnector/securityentitydata/aws-iam-user-testuser",
+            "resourceOrigin": "AWS",
+            "resourceType": "iam.user"
+          }
+        ],
+        "storageInfo": {
+          "accountName": "testStorageAccount",
+          "location": "East US",
+          "resourceGroup": "testResourceGroup",
+          "subscriptionId": "00000000-0000-0000-0000-000000000000"
+        },
+        "timeZone": "GMT Standard Time",
+        "triggerTime": "2022-03-04T05:00:00.000Z"
+      }
+    },
+    "reportName": "testReportName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testReportName",
+        "type": "Microsfot.AppComplianceAutomation/reports",
+        "id": "/provider/Microsfot.AppComplianceAutomation/reports/testReportName",
+        "properties": {
+          "certRecords": [
+            {
+              "certificationStatus": "CertIngestion",
+              "controls": [
+                {
+                  "controlId": "Operational_Security_10",
+                  "controlStatus": "Approved"
+                }
+              ],
+              "ingestionStatus": "EvidenceResubmitted",
+              "offerGuid": "00000000-0000-0000-0000-000000000001"
+            }
+          ],
+          "complianceStatus": {
+            "m365": {
+              "failedCount": 0,
+              "manualCount": 0,
+              "passedCount": 0
+            }
+          },
+          "lastTriggerTime": "2022-03-02T05:00:00.000Z",
+          "nextTriggerTime": "2022-03-02T05:00:00.000Z",
+          "offerGuid": "00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002",
+          "provisioningState": "Succeeded",
+          "resources": [
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+              "resourceOrigin": "Azure",
+              "resourceType": "Microsoft.SignalRService/SignalR"
+            },
+            {
+              "accountId": "000000000000",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/acat-aws/providers/microsoft.security/securityconnectors/acatawsconnector/securityentitydata/aws-iam-user-testuser",
+              "resourceOrigin": "AWS",
+              "resourceType": "iam.user"
+            }
+          ],
+          "status": "Active",
+          "storageInfo": {
+            "accountName": "testStorageAccount",
+            "location": "East US",
+            "resourceGroup": "testResourceGroup",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000"
+          },
+          "subscriptions": [
+            "00000000-0000-0000-0000-000000000000"
+          ],
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "timeZone": "GMT Standard Time",
+          "triggerTime": "2022-03-02T05:00:00.000Z"
+        },
+        "systemData": {
+          "createdAt": "2021-05-14T22:34:55.4499903Z",
+          "createdBy": "00000000-0000-0000-0000-000000000000",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-05-14T22:34:55.4499903Z",
+          "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationStatuses/{operationId}",
+        "Location": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationResults/{operationId}"
+      }
+    }
+  },
+  "operationId": "Reports_Update",
+  "title": "Report_Update"
+}

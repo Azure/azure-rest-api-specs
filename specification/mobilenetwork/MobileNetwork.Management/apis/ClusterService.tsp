@@ -7,7 +7,6 @@ import "../models/ClusterServiceModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -31,7 +30,7 @@ model ClusterServiceResource
 @armResourceOperations(ClusterServiceResource)
 interface ClusterServices {
   get is ArmResourceRead<ClusterServiceResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<ClusterServiceResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<ClusterServiceResource>;
   updateTags is ArmTagsPatchSync<ClusterServiceResource>;
   delete is ArmResourceDeleteWithoutOkAsync<ClusterServiceResource>;
   @doc("List all Cluster Services by Resource Group.")

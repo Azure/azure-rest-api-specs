@@ -8,7 +8,6 @@ import "./PacketCoreDataPlane.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -37,7 +36,7 @@ interface AttachedWifiSsids {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<AttachedWifiSsid>;
 
   @doc("Updates an Wi-Fi Attached SSID.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<AttachedWifiSsid, TagsObject>;
 
   @doc("Deletes the specified Wi-Fi Attached SSID.")

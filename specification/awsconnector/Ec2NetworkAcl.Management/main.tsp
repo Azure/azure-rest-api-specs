@@ -50,7 +50,7 @@ model Ec2NetworkAcl is TrackedResource<Ec2NetworkAclProperties> {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2NetworkAcl")
 model Ec2NetworkAclProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2NetworkAclProperties;
 
   ...AwsCommonProperties;
@@ -62,14 +62,14 @@ model Ec2NetworkAclProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2NetworkAcl")
 model AwsEc2NetworkAclProperties {
-  @doc("Gets and sets the property id.")
+  @doc("Property id")
   id?: string;
 
-  @doc("Gets and sets the property tags. The tags to assign to the network ACL.")
+  @doc("The tags for the network ACL.")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 
-  @doc("Gets and sets the property vpcId. The ID of the VPC.")
+  @doc("The ID of the VPC for the network ACL.")
   vpcId?: string;
 }
 
@@ -79,10 +79,10 @@ model AwsEc2NetworkAclProperties {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("The tag key.")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("The tag value.")
   value?: string;
 }
 

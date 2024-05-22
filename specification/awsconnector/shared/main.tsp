@@ -5,29 +5,29 @@ using Azure.ResourceManager;
 namespace Microsoft.AwsConnector;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
 alias AwsCommonProperties = {
-  @doc("Gets and sets the property publicCloudConnectorsResourceId.")
+  @doc("Public Cloud Connectors Resource ID")
   publicCloudConnectorsResourceId?: string;
 
-  @doc("Gets and sets the property awsAccountId.")
+  @doc("AWS Account ID")
   awsAccountId?: string;
 
-  @doc("Gets and sets the property awsResourceName.")
-  awsResourceName?: string;
+  @doc("Amazon Resource Name (ARN)")
+  arn?: string;
 
-  @doc("Gets and sets the property awsSourceSchema.")
+  @doc("Public Cloud Resource Name")
+  publicCloudResourceName?: string;
+
+  @doc("AWS Source Schema")
   awsSourceSchema?: string;
 
-  @doc("Gets and sets the property awsSdkVersion.")
-  awsSdkVersion?: string;
-
-  @doc("Gets and sets the property awsRegion.")
+  @doc("AWS Region")
   awsRegion?: string;
 
-  @doc("Gets and sets the property awsTags.")
+  @doc("AWS Tags")
   awsTags?: Record<string>;
 
   @visibility("read")
-  @doc("Gets and sets the property provisioningState.The status of the last operation.")
+  @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 };
 

@@ -236,11 +236,11 @@
       "properties": {
         "authenticationMode": {
           "$ref": "#/definitions/AccessConfigAuthenticationMode",
-          "description": "Gets and sets the property authenticationMode. Specify the authentication mode that should be used to create your cluster."
+          "description": "Specify the authentication mode that should be used to create your cluster."
         },
         "bootstrapClusterCreatorAdminPermissions": {
           "type": "boolean",
-          "description": "Gets and sets the property bootstrapClusterCreatorAdminPermissions. Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster."
+          "description": "Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster."
         }
       }
     },
@@ -280,23 +280,23 @@
       "properties": {
         "accessConfig": {
           "$ref": "#/definitions/AccessConfig",
-          "description": "Gets and sets the property accessConfig. An object representing the Access Config to use for the cluster."
+          "description": "An object representing the Access Config to use for the cluster."
         },
         "arn": {
           "type": "string",
-          "description": "Gets and sets the property arn. The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod."
+          "description": "The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod."
         },
         "certificateAuthorityData": {
           "type": "string",
-          "description": "Gets and sets the property certificateAuthorityData. The certificate-authority-data for your cluster."
+          "description": "The certificate-authority-data for your cluster."
         },
         "clusterSecurityGroupId": {
           "type": "string",
-          "description": "Gets and sets the property clusterSecurityGroupId. The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication."
+          "description": "The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication."
         },
         "encryptionConfig": {
           "type": "array",
-          "description": "Gets and sets the property encryptionConfig.",
+          "description": "Property encryptionConfig",
           "items": {
             "$ref": "#/definitions/EncryptionConfig"
           },
@@ -304,47 +304,47 @@
         },
         "encryptionConfigKeyArn": {
           "type": "string",
-          "description": "Gets and sets the property encryptionConfigKeyArn. Amazon Resource Name (ARN) or alias of the customer master key (CMK)."
+          "description": "Amazon Resource Name (ARN) or alias of the customer master key (CMK)."
         },
         "endpoint": {
           "type": "string",
-          "description": "Gets and sets the property endpoint. The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com."
+          "description": "The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com."
         },
         "id": {
           "type": "string",
-          "description": "Gets and sets the property id. The unique ID given to your cluster."
+          "description": "The unique ID given to your cluster."
         },
         "kubernetesNetworkConfig": {
           "$ref": "#/definitions/KubernetesNetworkConfig",
-          "description": "Gets and sets the property kubernetesNetworkConfig. The Kubernetes network configuration for the cluster."
+          "description": "The Kubernetes network configuration for the cluster."
         },
         "logging": {
           "$ref": "#/definitions/Logging",
-          "description": "Gets and sets the property logging. Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs."
+          "description": "Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs."
         },
         "name": {
           "type": "string",
-          "description": "Gets and sets the property name. The unique name to give to your cluster."
+          "description": "The unique name to give to your cluster."
         },
         "openIdConnectIssuerUrl": {
           "type": "string",
-          "description": "Gets and sets the property openIdConnectIssuerUrl. The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template."
+          "description": "The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template."
         },
         "outpostConfig": {
           "$ref": "#/definitions/OutpostConfig",
-          "description": "Gets and sets the property outpostConfig. An object representing the Outpost configuration to use for AWS EKS outpost cluster."
+          "description": "An object representing the Outpost configuration to use for AWS EKS outpost cluster."
         },
         "resourcesVpcConfig": {
           "$ref": "#/definitions/ResourcesVpcConfig",
-          "description": "Gets and sets the property resourcesVpcConfig. An object representing the VPC configuration to use for an Amazon EKS cluster."
+          "description": "An object representing the VPC configuration to use for an Amazon EKS cluster."
         },
         "roleArn": {
           "type": "string",
-          "description": "Gets and sets the property roleArn. The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf."
+          "description": "The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf."
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags. An array of key-value pairs to apply to this resource.",
+          "description": "An array of key-value pairs to apply to this resource.",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -352,7 +352,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Gets and sets the property version. The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used."
+          "description": "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used."
         }
       }
     },
@@ -362,7 +362,7 @@
       "properties": {
         "enabledTypes": {
           "type": "array",
-          "description": "Gets and sets the property enabledTypes. Enable control plane logs for your cluster, all log types will be disabled if the array is empty",
+          "description": "Enable control plane logs for your cluster, all log types will be disabled if the array is empty",
           "items": {
             "$ref": "#/definitions/LoggingTypeConfig"
           },
@@ -376,7 +376,7 @@
       "properties": {
         "groupName": {
           "type": "string",
-          "description": "Gets and sets the property groupName. Specify the placement group name of the control place machines for your cluster."
+          "description": "Specify the placement group name of the control place machines for your cluster."
         }
       }
     },
@@ -427,42 +427,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsEksClusterProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -473,11 +473,11 @@
       "properties": {
         "provider": {
           "$ref": "#/definitions/Provider",
-          "description": "Gets and sets the property provider. The encryption provider for the cluster."
+          "description": "The encryption provider for the cluster."
         },
         "resources": {
           "type": "array",
-          "description": "Gets and sets the property resources. Specifies the resources to be encrypted. The only supported value is 'secrets'.",
+          "description": "Specifies the resources to be encrypted. The only supported value is 'secrets'.",
           "items": {
             "type": "string"
           },
@@ -491,15 +491,15 @@
       "properties": {
         "ipFamily": {
           "$ref": "#/definitions/KubernetesNetworkConfigIpFamily",
-          "description": "Gets and sets the property ipFamily. Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on"
+          "description": "Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on"
         },
         "serviceIpv4Cidr": {
           "type": "string",
-          "description": "Gets and sets the property serviceIpv4Cidr. The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. "
+          "description": "The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC."
         },
         "serviceIpv6Cidr": {
           "type": "string",
-          "description": "Gets and sets the property serviceIpv6Cidr. The CIDR block to assign Kubernetes service IP addresses from."
+          "description": "The CIDR block to assign Kubernetes service IP addresses from."
         }
       }
     },
@@ -533,7 +533,7 @@
       "properties": {
         "clusterLogging": {
           "$ref": "#/definitions/ClusterLogging",
-          "description": "Gets and sets the property clusterLogging. The cluster control plane logging configuration for your cluster.  The cluster control plane logging configuration for your cluster. "
+          "description": "The cluster control plane logging configuration for your cluster.  The cluster control plane logging configuration for your cluster."
         }
       }
     },
@@ -543,7 +543,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/LoggingTypeConfigType",
-          "description": "Gets and sets the property type. name of the log type"
+          "description": "name of the log type"
         }
       }
     },
@@ -595,15 +595,15 @@
       "properties": {
         "controlPlaneInstanceType": {
           "type": "string",
-          "description": "Gets and sets the property controlPlaneInstanceType. Specify the Instance type of the machines that should be used to create your cluster."
+          "description": "Specify the Instance type of the machines that should be used to create your cluster."
         },
         "controlPlanePlacement": {
           "$ref": "#/definitions/ControlPlanePlacement",
-          "description": "Gets and sets the property controlPlanePlacement. Specify the placement group of the control plane machines for your cluster. Specify the placement group of the control plane machines for your cluster."
+          "description": "Specify the placement group of the control plane machines for your cluster. Specify the placement group of the control plane machines for your cluster."
         },
         "outpostArns": {
           "type": "array",
-          "description": "Gets and sets the property outpostArns. Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.",
+          "description": "Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.",
           "items": {
             "type": "string"
           },
@@ -617,7 +617,7 @@
       "properties": {
         "keyArn": {
           "type": "string",
-          "description": "Gets and sets the property keyArn. Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key."
+          "description": "Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key."
         }
       }
     },
@@ -682,15 +682,15 @@
       "properties": {
         "endpointPrivateAccess": {
           "type": "boolean",
-          "description": "Gets and sets the property endpointPrivateAccess. Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods."
+          "description": "Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods."
         },
         "endpointPublicAccess": {
           "type": "boolean",
-          "description": "Gets and sets the property endpointPublicAccess. Set this value to false to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is true, which enables public access for your Kubernetes API server."
+          "description": "Set this value to false to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is true, which enables public access for your Kubernetes API server."
         },
         "publicAccessCidrs": {
           "type": "array",
-          "description": "Gets and sets the property publicAccessCidrs. The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.",
+          "description": "The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.",
           "items": {
             "type": "string"
           },
@@ -698,7 +698,7 @@
         },
         "securityGroupIds": {
           "type": "array",
-          "description": "Gets and sets the property securityGroupIds. Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.",
+          "description": "Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.",
           "items": {
             "type": "string"
           },
@@ -706,7 +706,7 @@
         },
         "subnetIds": {
           "type": "array",
-          "description": "Gets and sets the property subnetIds. Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.",
+          "description": "Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.",
           "items": {
             "type": "string"
           },
@@ -720,30 +720,12 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-08-01-preview",
-            "value": "2024-08-01-preview",
-            "description": "2024-08-01-preview api version"
-          }
-        ]
       }
     }
   },
