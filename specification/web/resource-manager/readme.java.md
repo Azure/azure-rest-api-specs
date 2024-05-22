@@ -54,6 +54,37 @@ directive:
     reason: Swagger bug. Function App on ACA is LRO.
 ```
 
+``` yaml $(tag) == 'package-2023-12' && $(java)
+input-file:
+  - Microsoft.CertificateRegistration/stable/2023-12-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2023-12-01/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2023-12-01/CertificateRegistrationProvider.json
+  - Microsoft.DomainRegistration/stable/2023-12-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2023-12-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2023-12-01/DomainRegistrationProvider.json
+  - Microsoft.Web/stable/2023-12-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2023-12-01/AppServicePlans.json
+  - Microsoft.Web/stable/2023-12-01/Certificates.json
+  - Microsoft.Web/stable/2023-12-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2023-12-01/ContainerApps.json
+  - Microsoft.Web/stable/2023-12-01/ContainerAppsRevisions.json
+  - Microsoft.Web/stable/2023-12-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2023-12-01/Diagnostics.json
+  - Microsoft.Web/stable/2023-12-01/Global.json
+  - Microsoft.Web/stable/2023-12-01/KubeEnvironments.json
+  - Microsoft.Web/stable/2023-12-01/Provider.json
+  - Microsoft.Web/stable/2023-12-01/Recommendations.json
+  - Microsoft.Web/stable/2023-12-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2023-12-01/ResourceProvider.json
+  - Microsoft.Web/stable/2023-12-01/StaticSites.json
+  - Microsoft.Web/stable/2023-12-01/WebApps.json
+directive:
+  - from: CommonDefinitions.json
+    where: $.definitions.FunctionsDeployment.properties.storage.properties.type.x-ms-enum
+    transform: >
+      $['name'] = "FunctionsDeploymentStorageType";
+```
+
 ### Tag: profile-hybrid-2020-09-01 and java
 
 These settings apply only when `--tag=profile-hybrid-2020-09-01 --java` is specified on the command line.
