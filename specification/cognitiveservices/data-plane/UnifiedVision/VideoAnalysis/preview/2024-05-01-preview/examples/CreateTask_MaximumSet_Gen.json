@@ -31,7 +31,10 @@
         "completion": {
           "kind": "Gptv",
           "endpoint": "https://microsoft.com/a",
-          "key": "key-1",
+          "authentication": {
+            "kind": "Key",
+            "key": "lzxmsdgjjhthnhurtjm"
+          },
           "deploymentName": "deployment-1"
         }
       },
@@ -49,6 +52,9 @@
   },
   "responses": {
     "201": {
+      "headers": {
+        "location": "https://contoso.com/videoanalysis/videodescription/tasks/task-01?api-version=2024-05-01-preview"
+      },
       "body": {
         "name": "task-01",
         "batchName": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
