@@ -107,7 +107,6 @@ namespace Customizations{
 }
 
 
-
 // Python specific customizations
 @@access(publishCloudEvent, Access.internal, "python");
 @@access(publishCloudEvents, Access.internal, "python");
@@ -137,5 +136,7 @@ namespace Customizations{
 @@clientName(ReleaseDelay.By3600Seconds, "OneHour");
 @@clientName(ReleaseDelay.By600Seconds, "TenMinutes");
 @@clientName(ReleaseDelay.By60Seconds, "OneMinute");
+
+@@clientName(RenewCloudEventLocksResult, "RenewLocksResult");
 
 @@clientName(ReceiveResult.value, "details");
