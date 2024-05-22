@@ -17,6 +17,7 @@ alias KeyVaultOperations = StandardResourceOperations;
  * The GetCertificates operation returns the set of certificates resources in the
  * specified key vault. This operation requires the certificates/list permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.NonPagedResourceList is necessary for Key Vault"
 @summary("List certificates in a specified key vault")
 op getCertificates is Azure.Core.Foundations.NonPagedResourceList<
   CertificateItem,
@@ -43,15 +44,16 @@ op getCertificates is Azure.Core.Foundations.NonPagedResourceList<
  * Delete certificate cannot be used to remove individual versions of a
  * certificate object. This operation requires the certificates/delete permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes a certificate from a specified key vault.")
-@route("/certificates/{certificate-name}")
+@route("/certificates/{certificateName}")
 @delete
-op deleteCertificate is RpcOperation<
+op deleteCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path `certificate-name`: string;
+    @path certificateName: string;
   },
   CertificateItem
 >;
@@ -60,10 +62,11 @@ op deleteCertificate is RpcOperation<
  * Sets the certificate contacts for the specified key vault. This operation
  * requires the certificates/managecontacts permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Sets the certificate contacts for the specified key vault.")
 @route("/certificates/contacts")
 @put
-op setCertificateContacts is RpcOperation<
+op setCertificateContacts is Azure.Core.Foundations.Operation<
   {
     /**
      * The contacts for the key vault certificate.
@@ -78,25 +81,26 @@ op setCertificateContacts is RpcOperation<
  * resources in the specified key vault. This operation requires the
  * certificates/managecontacts permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.NonPagedResourceList is necessary for Key Vault"
 @summary("Lists the certificate contacts for a specified key vault.")
-@route("/certificates/contacts")
-@get
-op getCertificateContacts is RpcOperation<{}, Contacts>;
+op getCertificateContacts is Azure.Core.Foundations.NonPagedResourceList<Contacts>;
 
 /**
  * Deletes the certificate contacts for a specified key vault certificate. This
  * operation requires the certificates/managecontacts permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes the certificate contacts for a specified key vault.")
 @route("/certificates/contacts")
 @delete
-op deleteCertificateContacts is RpcOperation<{}, Contacts>;
+op deleteCertificateContacts is Azure.Core.Foundations.Operation<{}, Contacts>;
 
 /**
  * The GetCertificateIssuers operation returns the set of certificate issuer
  * resources in the specified key vault. This operation requires the
  * certificates/manageissuers/getissuers permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.NonPagedResourceList is necessary for Key Vault"
 @summary("List certificate issuers for a specified key vault.")
 op getCertificateIssuers is Azure.Core.Foundations.NonPagedResourceList<
   CertificateIssuerItem,
@@ -116,22 +120,23 @@ op getCertificateIssuers is Azure.Core.Foundations.NonPagedResourceList<
  * The SetCertificateIssuer operation adds or updates the specified certificate
  * issuer. This operation requires the certificates/setissuers permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Sets the specified certificate issuer.")
-@route("/certificates/issuers/{issuer-name}")
+@route("/certificates/issuers/{issuerName}")
 @put
-op setCertificateIssuer is RpcOperation<
+op setCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the issuer. The value you provide may be copied globally for the
      * purpose of running the service. The value provided should not include
      * personally identifiable or sensitive information.
      */
-    @path
-    `issuer-name`: string;
+    @path issuerName: string;
 
     /**
      * Certificate issuer set parameter.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @flattenProperty
     parameter: CertificateIssuerSetParameters;
@@ -144,24 +149,25 @@ op setCertificateIssuer is RpcOperation<
  * certificate issuer entity. This operation requires the certificates/setissuers
  * permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified certificate issuer.")
-@route("/certificates/issuers/{issuer-name}")
-op updateCertificateIssuer is KeyVaultOperations.ResourceUpdate<
-  IssuerBundle,
+@route("/certificates/issuers/{issuerName}")
+op updateCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the issuer.
      */
-    @path
-    `issuer-name`: string;
+    @path issuerName: string;
 
     /**
      * Certificate issuer update parameter.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @flattenProperty
     parameter: CertificateIssuerUpdateParameters;
-  }
+  },
+  IssuerBundle
 >;
 
 /**
@@ -169,41 +175,46 @@ op updateCertificateIssuer is KeyVaultOperations.ResourceUpdate<
  * resources in the specified key vault. This operation requires the
  * certificates/manageissuers/getissuers permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the specified certificate issuer.")
-op getCertificateIssuer is KeyVaultOperations.ResourceRead<IssuerBundle>; //Azure.Core.Foundations.Operation<
-//   {
-//     /**
-//      * The name of the issuer.
-//      */
-//     @path
-//     `issuer-name`: string;
-//   },
-//   IssuerBundle
-// >;
+@route("/certificates/issuers/{issuerName}")
+@get
+op getCertificateIssuer is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * The name of the issuer.
+     */
+    @path issuerName: string;
+  },
+  IssuerBundle
+>;
 
 /**
  * The DeleteCertificateIssuer operation permanently removes the specified
  * certificate issuer from the vault. This operation requires the
  * certificates/manageissuers/deleteissuers permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes the specified certificate issuer.")
-op deleteCertificateIssuer is KeyVaultOperations.ResourceDelete<IssuerBundle>; //Azure.Core.Foundations.Operation<
-//   {
-//     /**
-//      * The name of the issuer.
-//      */
-//     @path
-//     `issuer-name`: string;
-//   },
-//   IssuerBundle
-// >;
+@route("/certificates/issuers/{issuerName}")
+@delete
+op deleteCertificateIssuer is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * The name of the issuer.
+     */
+    @path issuerName: string;
+  },
+  IssuerBundle
+>;
 
 /**
  * If this is the first version, the certificate resource is created. This
  * operation requires the certificates/create permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Creates a new certificate.")
-@route("/certificates/{certificate-name}/create")
+@route("/certificates/{certificateName}/create")
 @post
 op createCertificate is Azure.Core.Foundations.Operation<
   {
@@ -214,11 +225,12 @@ op createCertificate is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path
-    `certificate-name`: string;
+    certificateName: string;
 
     /**
      * The parameters to create a certificate.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @flattenProperty
     parameters: CertificateCreateParameters;
@@ -233,8 +245,9 @@ op createCertificate is Azure.Core.Foundations.Operation<
  * certificate is in PEM format the PEM file must contain the key as well as x509
  * certificates. Key Vault will only accept a key in PKCS#8 format.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Imports a certificate into a specified key vault.")
-@route("/certificates/{certificate-name}/import")
+@route("/certificates/{certificateName}/import")
 @post
 op importCertificate is Azure.Core.Foundations.Operation<
   {
@@ -245,11 +258,12 @@ op importCertificate is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path
-    `certificate-name`: string;
+    certificateName: string;
 
     /**
      * The parameters to import the certificate.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @flattenProperty
     parameters: CertificateImportParameters;
@@ -262,44 +276,44 @@ op importCertificate is Azure.Core.Foundations.Operation<
  * the specified key vault. This operation requires the certificates/list
  * permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("List the versions of a certificate.")
-@route("/certificates/{certificate-name}/versions")
-op getCertificateVersions is KeyVaultOperations.ResourceList<CertificateItem>; //Azure.Core.Foundations.Operation<
-//   {
-//     /**
-//      * The name of the certificate.
-//      */
-//     @path
-//     `certificate-name`: string;
+@route("/certificates/{certificateName}/versions")
+@get
+op getCertificateVersions is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * The name of the certificate.
+     */
+    @path certificateName: string;
 
-//     /**
-//      * Maximum number of results to return in a page. If not specified the service
-//      * will return up to 25 results.
-//      */
-//     @maxValue(25)
-//     @minValue(1)
-//     @query("maxresults")
-//     maxresults?: int32;
-//   },
-//   CertificateListResult
-// >;
+    /**
+     * Maximum number of results to return in a page. If not specified the service
+     * will return up to 25 results.
+     */
+    @maxValue(25)
+    @minValue(1)
+    @query("maxresults")
+    maxresults?: int32;
+  },
+  CertificateListResult
+>;
 
 /**
  * The GetCertificatePolicy operation returns the specified certificate policy
  * resources in the specified key vault. This operation requires the
  * certificates/get permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the policy for a certificate.")
-@route("/certificates/{certificate-name}/policy")
+@route("/certificates/{certificateName}/policy")
 @get
-op getCertificatePolicy is KeyVaultOperations.ResourceAction<
-  CertificatePolicy,
+op getCertificatePolicy is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate in a given key vault.
      */
-    @path
-    `certificate-name`: string;
+    @path certificateName: string;
   },
   CertificatePolicy
 >;
@@ -308,100 +322,100 @@ op getCertificatePolicy is KeyVaultOperations.ResourceAction<
  * Set specified members in the certificate policy. Leave others as null. This
  * operation requires the certificates/update permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the policy for a certificate.")
-@route("/certificates/{certificate-name}/policy")
+@route("/certificates/{certificateName}/policy")
 @patch
-op updateCertificatePolicy is KeyVaultOperations.ResourceCreateOrUpdate<CertificatePolicy>; //Azure.Core.Foundations.Operation<
-//   {
-//     /**
-//      * The name of the certificate in the given vault.
-//      */
-//     @path
-//     `certificate-name`: string;
+op updateCertificatePolicy is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * The name of the certificate in the given vault.
+     */
+    @path certificateName: string;
 
-//     /**
-//      * The policy for the certificate.
-//      */
-//     @body
-//     certificatePolicy: CertificatePolicy;
-//   },
-//   CertificatePolicy
-// >;
+    /**
+     * The policy for the certificate.
+     */
+    @body certificatePolicy: CertificatePolicy;
+  },
+  CertificatePolicy
+>;
 
 /**
  * The UpdateCertificate operation applies the specified update on the given
  * certificate; the only elements updated are the certificate's attributes. This
  * operation requires the certificates/update permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified attributes associated with the given certificate.")
-@route("/certificates/{certificate-name}/{certificate-version}")
+@route("/certificates/{certificateName}/{certificateVersion}")
 @patch
-op updateCertificate is KeyVaultOperations.ResourceCreateOrUpdate<CertificateBundle>; //Azure.Core.Foundations.Operation<
-//   {
-//     /**
-//      * The name of the certificate in the given key vault.
-//      */
-//     @path
-//     `certificate-name`: string;
+op updateCertificate is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * The name of the certificate in the given key vault.
+     */
+    @path certificateName: string;
 
-//     /**
-//      * The version of the certificate.
-//      */
-//     @path
-//     `certificate-version`: string;
+    /**
+     * The version of the certificate.
+     */
+    @path certificateVersion: string;
 
-//     /**
-//      * The parameters for certificate update.
-//      */
-//     @body
-//     @flattenProperty
-//     parameters: CertificateUpdateParameters;
-//   },
-//   CertificateBundle
-// >;
+    /**
+     * The parameters for certificate update.
+     */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    @body
+    @flattenProperty
+    parameters: CertificateUpdateParameters;
+  },
+  CertificateBundle
+>;
 
 /**
  * Gets information about a specific certificate. This operation requires the
  * certificates/get permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets information about a certificate.")
-@route("/certificates/{certificate-name}/{certificate-version}")
-op getCertificate is KeyVaultOperations.ResourceRead<CertificateBundle>; //Azure.Core.Foundations.Operation<
-//   {
-//     /**
-//      * The name of the certificate in the given vault.
-//      */
-//     @path
-//     `certificate-name`: string;
+@route("/certificates/{certificateName}/{certificateVersion}")
+@get
+op getCertificate is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * The name of the certificate in the given vault.
+     */
+    @path certificateName: string;
 
-//     /**
-//      * The version of the certificate. This URI fragment is optional. If not
-//      * specified, the latest version of the certificate is returned.
-//      */
-//     @path
-//     `certificate-version`: string;
-//   },
-//   CertificateBundle
-// >;
+    /**
+     * The version of the certificate. This URI fragment is optional. If not
+     * specified, the latest version of the certificate is returned.
+     */
+    @path certificateVersion: string;
+  },
+  CertificateBundle
+>;
 
 /**
  * Updates a certificate creation operation that is already in progress. This
  * operation requires the certificates/update permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates a certificate operation.")
-@route("/certificates/{certificate-name}/pending")
+@route("/certificates/{certificateName}/pending")
 @patch
 op updateCertificateOperation is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path
-    `certificate-name`: string;
+    @path certificateName: string;
 
     /**
      * The certificate operation response.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @flattenProperty
     certificateOperation: CertificateOperationUpdateParameter;
@@ -413,16 +427,16 @@ op updateCertificateOperation is Azure.Core.Foundations.Operation<
  * Gets the creation operation associated with a specified certificate. This
  * operation requires the certificates/get permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the creation operation of a certificate.")
-@route("/certificates/{certificate-name}/pending")
+@route("/certificates/{certificateName}/pending")
 @get
 op getCertificateOperation is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path
-    `certificate-name`: string;
+    @path certificateName: string;
   },
   CertificateOperation
 >;
@@ -432,16 +446,16 @@ op getCertificateOperation is Azure.Core.Foundations.Operation<
  * process of being created. The certificate is no longer created. This operation
  * requires the certificates/update permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes the creation operation for a specific certificate.")
-@route("/certificates/{certificate-name}/pending")
+@route("/certificates/{certificateName}/pending")
 @delete
 op deleteCertificateOperation is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path
-    `certificate-name`: string;
+    @path certificateName: string;
   },
   CertificateOperation
 >;
@@ -451,23 +465,24 @@ op deleteCertificateOperation is Azure.Core.Foundations.Operation<
  * certificate chain with a key pair currently available in the service. This
  * operation requires the certificates/create permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
 Merges a certificate or a certificate chain with a key pair existing on the
 server.
 """)
-@route("/certificates/{certificate-name}/pending/merge")
+@route("/certificates/{certificateName}/pending/merge")
 @post
-op mergeCertificate is RpcOperation<
+op mergeCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path
-    `certificate-name`: string;
+    @path certificateName: string;
 
     /**
      * The parameters to merge certificate.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @flattenProperty
     parameters: CertificateMergeParameters;
@@ -480,17 +495,16 @@ op mergeCertificate is RpcOperation<
  * client. All versions of the certificate will be downloaded. This operation
  * requires the certificates/backup permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Backs up the specified certificate.")
-@route("/certificates/{certificate-name}/backup")
+@route("/certificates/{certificateName}/backup")
 @post
-op backupCertificate is KeyVaultOperations.ResourceAction<
-  BackupCertificateResult,
+op backupCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate.
      */
-    @path
-    `certificate-name`: string;
+    @path certificateName: string;
   },
   BackupCertificateResult
 >;
@@ -499,15 +513,16 @@ op backupCertificate is KeyVaultOperations.ResourceAction<
  * Restores a backed up certificate, and all its versions, to a vault. This
  * operation requires the certificates/restore permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Restores a backed up certificate to a vault.")
 @route("/certificates/restore")
 @post
-op restoreCertificate is KeyVaultOperations.ResourceAction<
-  CertificateBundle,
+op restoreCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The parameters to restore the certificate.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @flattenProperty
     parameters: CertificateRestoreParameters;
@@ -522,29 +537,12 @@ op restoreCertificate is KeyVaultOperations.ResourceAction<
  * certificates/get/list permission. This operation can only be enabled on
  * soft-delete enabled vaults.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.NonPagedResourceList is necessary for Key Vault"
 @summary("""
 Lists the deleted certificates in the specified vault currently available for
 recovery.
 """)
-op getDeletedCertificates is KeyVaultOperations.ResourceList<DeletedCertificateItem>; //Azure.Core.Foundations.Operation<
-//   {
-//     /**
-//      * Maximum number of results to return in a page. If not specified the service
-//      * will return up to 25 results.
-//      */
-//     @maxValue(25)
-//     @minValue(1)
-//     @query("maxresults")
-//     maxresults?: int32;
-
-//     /**
-//      * Specifies whether to include certificates which are not completely provisioned.
-//      */
-//     @query("includePending")
-//     includePending?: boolean;
-//   },
-//   DeletedCertificateListResult
-// >;
+op getDeletedCertificates is Azure.Core.Foundations.NonPagedResourceList<DeletedCertificateItem>;
 
 /**
  * The GetDeletedCertificate operation retrieves the deleted certificate
@@ -552,19 +550,19 @@ op getDeletedCertificates is KeyVaultOperations.ResourceList<DeletedCertificateI
  * permanent deletion and the current deletion recovery level. This operation
  * requires the certificates/get permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Retrieves information about the specified deleted certificate.")
-@route("/deletedcertificates/{certificate-name}")
+@route("/deletedcertificates/{certificateName}")
 @get
-op getDeletedCertificate is KeyVaultOperations.ResourceRead<DeletedCertificateItem>; //Azure.Core.Foundations.Operation<
-//   {
-//     /**
-//      * The name of the certificate
-//      */
-//     @path
-//     `certificate-name`: string;
-//   },
-//   DeletedCertificateBundle
-// >;
+op getDeletedCertificate is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * The name of the certificate
+     */
+    @path certificateName: string;
+  },
+  DeletedCertificateBundle
+>;
 
 /**
  * The PurgeDeletedCertificate operation performs an irreversible deletion of the
@@ -572,16 +570,16 @@ op getDeletedCertificate is KeyVaultOperations.ResourceRead<DeletedCertificateIt
  * available if the recovery level does not specify 'Purgeable'. This operation
  * requires the certificate/purge permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Permanently deletes the specified deleted certificate.")
-@route("/deletedcertificates/{certificate-name}")
+@route("/deletedcertificates/{certificateName}")
 @delete
 op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the certificate
      */
-    @path
-    `certificate-name`: string;
+    @path certificateName: string;
   },
   void
 >;
@@ -593,20 +591,19 @@ op purgeDeletedCertificate is Azure.Core.Foundations.Operation<
  * certificate's attributes). This operation requires the certificates/recover
  * permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
 Recovers the deleted certificate back to its current version under
 /certificates.
 """)
-@route("/deletedcertificates/{certificate-name}/recover")
+@route("/deletedcertificates/{certificateName}/recover")
 @post
-op recoverDeletedCertificate is KeyVaultOperations.ResourceAction<
-  DeletedCertificateItem,
+op recoverDeletedCertificate is Azure.Core.Foundations.Operation<
   {
     /**
      * The name of the deleted certificate
      */
-    @path
-    `certificate-name`: string;
+    @path certificateName: string;
   },
   CertificateBundle
 >;
