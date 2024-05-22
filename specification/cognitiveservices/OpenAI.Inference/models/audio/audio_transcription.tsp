@@ -33,6 +33,24 @@ union AudioTranscriptionFormat {
   vtt: "vtt",
 }
 
+@doc("Defines the timestamp granularities that can be requested on a verbose transcription response.")
+@added(ServiceApiVersions.v2024_04_01_Preview)
+union AudioTranscriptionTimestampGranularity {
+  string,
+
+  @doc("""
+  Indicates that responses should include timing information about each transcribed word. Note that generating word
+  timestamp information will incur additional response latency.
+  """)
+  word: "word",
+
+  @doc("""
+  Indicates that responses should include timing and other information about each transcribed audio segment. Audio
+  segment timestamp information does not incur any additional latency.
+  """)
+  segment: "segment",
+}
+
 @doc("""
 The configuration information for an audio transcription request.
 """)
@@ -77,6 +95,18 @@ model AudioTranscriptionOptions {
   If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
   """)
   temperature?: float32;
+
+  @doc("""
+  The timestamp granularities to populate for this transcription.
+  `response_format` must be set `verbose_json` to use timestamp granularities.
+  Either or both of these options are supported: `word`, or `segment`.
+  Note: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.
+  """)
+  @added(ServiceApiVersions.v2024_04_01_Preview)
+  @encodedName("application/json", "timestamp_granularities")
+  timestampGranularities?: AudioTranscriptionTimestampGranularity[] = [
+    AudioTranscriptionTimestampGranularity.segment
+  ];
 
   @doc("""
   The model to use for this transcription request.
@@ -139,6 +169,21 @@ model AudioTranscriptionSegment {
   seek: int32;
 }
 
+@doc("Extended information about a single transcribed word, as provided on responses when the 'word' timestamp granularity is provided.")
+@added(ServiceApiVersions.v2024_04_01_Preview)
+model AudioTranscriptionWord {
+  @doc("The textual content of the word.")
+  word: string;
+
+  @doc("The start time of the word relative to the beginning of the audio, expressed in seconds.")
+  @encode("seconds", float32)
+  start: duration;
+
+  @doc("The end time of the word relative to the beginning of the audio, expressed in seconds.")
+  @encode("seconds", float32)
+  end: duration;
+}
+
 @doc("Result information for an operation that transcribed spoken audio into written text.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranscription {
@@ -163,4 +208,10 @@ model AudioTranscription {
   A collection of information about the timing, probabilities, and other detail of each processed audio segment.
   """)
   segments?: AudioTranscriptionSegment[];
+
+  @doc("""
+  A collection of information about the timing of each processed word.
+  """)
+  @added(ServiceApiVersions.v2024_04_01_Preview)
+  words?: AudioTranscriptionWord[];
 }
