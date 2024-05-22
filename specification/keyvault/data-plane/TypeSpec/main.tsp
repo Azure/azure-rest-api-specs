@@ -14,7 +14,7 @@ using Azure.Core;
  * against the Key Vault service.
  */
 @service({
-  title: "KeyVaultClient",
+  title: "Key Vault",
 })
 @versioned(Versions)
 @server(
@@ -24,7 +24,7 @@ using Azure.Core;
     vaultBaseUrl: url,
   }
 )
-namespace KeyVaultClient;
+namespace KeyVault;
 
 /**
  * The available API versions.

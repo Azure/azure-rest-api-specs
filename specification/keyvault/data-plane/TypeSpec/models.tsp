@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace KeyVaultClient;
+namespace KeyVault;
 
 /**
  * Reflects the deletion recovery level currently in effect for certificates in
@@ -130,16 +130,17 @@ enum ActionType {
 /**
  * The certificate list result.
  */
-model CertificateListResult is Azure.Core.Page<CertificateItem>;
-
+// model CertificateListResult is Azure.Core.Page<CertificateItem>;
 /**
  * The certificate item containing certificate metadata.
  */
+@resource("certificates")
 model CertificateItem {
   /**
    * Certificate identifier.
    */
-  id?: string;
+  @key
+  id: string;
 
   /**
    * The certificate management attributes.
@@ -281,12 +282,14 @@ model DeletedCertificateBundle extends CertificateBundle {
 /**
  * A certificate bundle consists of a certificate (X509) plus its attributes.
  */
+@resource("certificates")
 model CertificateBundle {
   /**
    * The certificate id.
    */
   @visibility("read")
-  id?: string;
+  @key
+  id: string;
 
   /**
    * The key id.
@@ -599,11 +602,14 @@ model CertificateIssuerListResult is Azure.Core.Page<CertificateIssuerItem>;
 /**
  * The certificate issuer item containing certificate issuer metadata.
  */
+@resource("issuers")
+@parentResource(CertificateItem)
 model CertificateIssuerItem {
   /**
    * Certificate Identifier.
    */
-  id?: string;
+  @key
+  id: string;
 
   /**
    * The issuer provider.
@@ -725,12 +731,15 @@ model IssuerAttributes {
 /**
  * The issuer for Key Vault certificate.
  */
+@resource("issuers")
+@parentResource(CertificateItem)
 model IssuerBundle {
   /**
    * Identifier for the issuer object.
    */
   @visibility("read")
-  id?: string;
+  @key
+  id: string;
 
   /**
    * The issuer provider.
@@ -952,12 +961,15 @@ model CertificateMergeParameters {
 /**
  * The backup certificate result, containing the backup blob.
  */
+@resource("backup")
+@parentResource(CertificateItem)
 model BackupCertificateResult {
   /**
    * The backup blob containing the backed up certificate.
    */
   @visibility("read")
-  value?: bytes;
+  @key
+  value: bytes;
 }
 
 /**
@@ -979,12 +991,14 @@ model DeletedCertificateListResult is Azure.Core.Page<DeletedCertificateItem>;
 /**
  * The deleted certificate item containing metadata about the deleted certificate.
  */
+@resource("deletedcertificates")
 model DeletedCertificateItem extends CertificateItem {
   /**
    * The url of the recovery object, used to identify and recover the deleted
    * certificate.
    */
-  recoveryId?: string;
+  @key
+  recoveryId: string;
 
   /**
    * The time when the certificate is scheduled to be purged, in UTC
