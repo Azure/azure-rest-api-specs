@@ -41,6 +41,10 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2024-04-01/registries.json
   - Microsoft.MachineLearningServices/stable/2024-04-01/workspaceFeatures.json
 suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    reason: This provisioningState property is marked as readOnly. However, the definition of the enum is not marked as readOnly and is the reason this suppression is needed
+    where:
+      - $.definitions["ServerlessEndpoint"].properties["provisioningState"]
   - code: AvoidAdditionalProperties
     reason: The headers property here is meant to describe a set of request headers that the user must pass along in their inferencing API request. For that reason, this needs to be represented as an additionalProperties
     where:
