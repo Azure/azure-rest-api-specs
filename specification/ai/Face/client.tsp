@@ -25,7 +25,9 @@ namespace ClientCustomizations;
 @@clientName(ImageType, "FaceImageType");
 
 @@access(FaceAttributeType, Access.public);
+@@usage(FaceAttributeType, Usage.input, "java");
 @@access(FaceDetectionResult, Access.public);
+@@usage(FaceDetectionResult, Usage.output, "java");
 @@access(FaceLandmarks, Access.public);
 @@access(LandmarkCoordinate, Access.public);
 @@access(FaceAttributes, Access.public);
