@@ -9,7 +9,7 @@ using Azure.Core;
 namespace TextTranslation;
 
 @doc("Request parameters for the language API.")
-model GetLanguageParameters {
+model GetSupportedLanguagesParameters {
   ...CommonParameters;
 
   @query
@@ -42,7 +42,7 @@ model GetLanguageParameters {
 }
 
 @doc("Response for the languages API.")
-model GetLanguagesResult {
+model GetSupportedLanguagesResult {
   ...CommonResultHeaders;
 
   @header("ETag")
@@ -63,7 +63,7 @@ model GetLanguagesResult {
   dictionary?: Record<SourceDictionaryLanguage>;
 }
 
-alias CommonLanguageModel = {
+alias BaseLanguage = {
   @doc("Display name of the language in the locale requested via Accept-Language header.")
   name: string;
 
@@ -76,10 +76,10 @@ The value of the translation property is a dictionary of (key, value) pairs. Eac
 A key identifies a language for which text can be translated to or translated from.
 """)
 model TranslationLanguage {
-  ...CommonLanguageModel;
+  ...BaseLanguage;
 
   @doc("Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.")
-  dir: string;
+  dir: LanguageDirectionality;
 }
 
 @doc("""
@@ -88,20 +88,20 @@ Each key is a BCP 47 language tag. A key identifies a language for which text ca
 to another script.
 """)
 model TransliterationLanguage {
-  ...CommonLanguageModel;
+  ...BaseLanguage;
 
   @doc("List of scripts to convert from.")
   scripts: TransliterableScript[];
 }
 
 @doc("Script definition with list of script into which given script can be translitered.")
-model TransliterableScript extends CommonScriptModel {
+model TransliterableScript extends LanguageScript {
   @doc("List of scripts available to convert text to.")
-  toScripts: CommonScriptModel[];
+  toScripts: LanguageScript[];
 }
 
 @doc("Common properties of language script")
-model CommonScriptModel {
+model LanguageScript {
   @doc("Code identifying the script.")
   code: string;
 
@@ -112,19 +112,15 @@ model CommonScriptModel {
   nativeName: string;
 
   @doc("Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.")
-  dir: string;
+  dir: LanguageDirectionality;
 }
-
-alias CommonDictionaryLanguageModel = {
-  ...CommonLanguageModel;
-
-  @doc("Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.")
-  dir: string;
-};
 
 @doc("Properties ot the source dictionary language")
 model SourceDictionaryLanguage {
-  ...CommonDictionaryLanguageModel;
+  ...BaseLanguage;
+
+  @doc("Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.")
+  dir: LanguageDirectionality;
 
   @doc("List of languages with alterative translations and examples for the query expressed in the source language.")
   translations: TargetDictionaryLanguage[];
@@ -132,8 +128,23 @@ model SourceDictionaryLanguage {
 
 @doc("Properties of the target dictionary language")
 model TargetDictionaryLanguage {
-  ...CommonDictionaryLanguageModel;
+  ...BaseLanguage;
+
+  @doc("Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages.")
+  dir: LanguageDirectionality;
 
   @doc("Language code identifying the target language.")
   code: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
+@fixed
+@doc("Language Directionality")
+enum LanguageDirectionality {
+  @doc("Language is written left to right.")
+  LeftToRight: "ltr",
+
+  @doc("Language is written right to left.")
+  RightToLeft: "rtl",
 }
