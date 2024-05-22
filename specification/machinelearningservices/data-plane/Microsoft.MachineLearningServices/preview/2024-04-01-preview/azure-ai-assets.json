@@ -135,7 +135,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           }
         ],
         "responses": {
@@ -168,7 +169,7 @@
     "/indexes/{name}:getNextVersion": {
       "post": {
         "operationId": "Indexes_GetNextVersion",
-        "description": "Get next Index version. This returns the latest version + 1.",
+        "description": "Get next Index version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -179,7 +180,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           }
         ],
         "responses": {
@@ -223,7 +225,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "listViewType",
@@ -301,7 +304,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "version",
@@ -350,7 +354,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$"
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "version",
@@ -429,14 +434,14 @@
         },
         "tags": {
           "type": "object",
-          "description": "Asset's tags.",
+          "description": "Asset's tags. Unlike properties, tags are fully mutable.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "properties": {
           "type": "object",
-          "description": "Asset's properties.",
+          "description": "Asset's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
           "additionalProperties": {
             "type": "string"
           }
@@ -533,14 +538,14 @@
         },
         "tags": {
           "type": "object",
-          "description": "Asset's tags.",
+          "description": "Asset's tags. Unlike properties, tags are fully mutable.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "properties": {
           "type": "object",
-          "description": "Asset's properties.",
+          "description": "Asset's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
           "additionalProperties": {
             "type": "string"
           }
@@ -613,7 +618,7 @@
         "nextVersion": {
           "type": "integer",
           "format": "int64",
-          "description": "Next version as defined by the server."
+          "description": "Next version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'."
         },
         "latestVersion": {
           "type": "string",
