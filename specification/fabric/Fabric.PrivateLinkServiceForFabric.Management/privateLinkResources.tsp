@@ -18,8 +18,7 @@ namespace Microsoft.Fabric;
 #suppress "@typespec/http/metadata-ignored" ""
 @doc("PrivateLinkResource Object")
 @parentResource(PrivateLinkServiceForFabric)
-model PrivateLinkResource
-  is ProxyResource<PrivateLinkResourceProperties> {
+model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   @doc("Name")
   @key("privateLinkResourceName")
   @path
