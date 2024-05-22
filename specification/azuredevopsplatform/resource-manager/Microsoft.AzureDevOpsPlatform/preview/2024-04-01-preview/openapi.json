@@ -229,11 +229,11 @@
         },
         "geography": {
           "type": "string",
-          "description": "Preferred geography of the organization"
+          "description": "Preferred geography of the organization. This should align with the the list of available Azure regions, as found by running az account list-locations --query [].name"
         },
-        "isInternal": {
-          "type": "boolean",
-          "description": "True if the organization is internal to Microsoft. Otherwise false"
+        "organizationScope": {
+          "$ref": "#/definitions/OrganizationScope",
+          "description": "Indicates whether the organization is internal or external to Microsoft."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -244,8 +244,32 @@
       "required": [
         "aadTenantId",
         "displayName",
-        "isInternal"
+        "organizationScope"
       ]
+    },
+    "OrganizationScope": {
+      "type": "string",
+      "description": "Organization Scope enum",
+      "enum": [
+        "Internal",
+        "External"
+      ],
+      "x-ms-enum": {
+        "name": "OrganizationScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Internal",
+            "value": "Internal",
+            "description": "The organization is internal to Microsoft."
+          },
+          {
+            "name": "External",
+            "value": "External",
+            "description": "The organization is external to Microsoft."
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
