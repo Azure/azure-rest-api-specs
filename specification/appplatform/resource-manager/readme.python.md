@@ -23,6 +23,7 @@ default-api-version: "2023-12-01"
 multiapi: true
 clear-output-folder: true
 batch:
+  - tag: package-preview-2024-07
   - tag: package-preview-2024-05
   - tag: package-preview-2024-01
   - tag: package-2023-12
@@ -51,6 +52,16 @@ output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mg
 clear-output-folder: false
 perform-load: false
 ```
+
+### Tag: package-preview-2024-07 and python
+
+These settings apply only when `--tag=package-preview-2024-07 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2024-07' && $(python)
+namespace: azure.mgmt.appplatform.v2024_07_01_preview
+output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2024_07_01_preview
+``
 
 ### Tag: package-preview-2024-05 and python
 
