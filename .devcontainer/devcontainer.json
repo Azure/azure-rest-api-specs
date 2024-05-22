@@ -5,7 +5,9 @@
   },
   "postCreateCommand": "npm install",
   "remoteUser": "root",
-  "remoteEnv": { "PATH": "${containerEnv:PATH}:${containerWorkspaceFolder}/node_modules/.bin" },
+  "remoteEnv": { 
+    "PATH": "${containerEnv:PATH}:${containerWorkspaceFolder}/node_modules/.bin" 
+  },
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "nodeGypDependencies": true,
@@ -25,9 +27,4 @@
       ]
     }
   }
-  /*,
-  update below source folder to your local sdk-repos folder
-  "mounts": [
-    "source=/home/rc/repos/tmp/sdk-repos,target=/workspaces/sdk-repos,type=bind,consistency=cached"
-  ]*/
 }
