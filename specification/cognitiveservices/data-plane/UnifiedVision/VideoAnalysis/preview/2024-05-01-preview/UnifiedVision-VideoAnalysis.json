@@ -6,7 +6,7 @@
     "version": "2024-05-01-preview"
   },
   "paths": {
-    "/videoanalysis/scenedescription/tasks/{taskName}": {
+    "/videoanalysis/videodescription/tasks/{taskName}": {
       "put": {
         "tags": [
           "VideoAnalysis"
@@ -102,7 +102,7 @@
         ],
         "summary": "Deletes a video analysis task.",
         "description": "Deletes a video analysis task independent of the task status.",
-        "operationId": "Deletetask",
+        "operationId": "DeleteTask",
         "parameters": [
           {
             "in": "path",
@@ -129,7 +129,7 @@
         }
       }
     },
-    "/videoanalysis/scenedescription/tasks": {
+    "/videoanalysis/videodescription/tasks": {
       "get": {
         "tags": [
           "VideoAnalysis"
@@ -198,7 +198,9 @@
         "kind": {
           "description": "Specify the authentication mode as a string.",
           "enum": [
-            "Sas"
+            "Sas",
+            "Key",
+            "ManagedIdentity"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -417,8 +419,8 @@
               "format": "uri",
               "type": "string"
             },
-            "key": {
-              "type": "string"
+            "authentication": {
+              "$ref": "#/definitions/AuthenticationModel"
             },
             "deploymentName": {
               "type": "string"
@@ -431,6 +433,39 @@
         "kind",
         "endpoint",
         "key"
+      ]
+    },
+    "KeyAuthenticationModel": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationModel"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Key",
+      "required": [
+        "kind",
+        "key"
+      ]
+    },
+    "ManagedIdentityAuthenticationModel": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationModel"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedIdentity",
+      "required": [
+        "kind"
       ]
     },
     "Metadata": {
@@ -538,7 +573,7 @@
         }
       }
     },
-    "SasAuthentication": {
+    "SasAuthenticationModel": {
       "type": "object",
       "allOf": [
         {
@@ -703,7 +738,8 @@
             "notStarted",
             "running",
             "completed",
-            "failed"
+            "failed",
+            "partiallyCompleted"
           ],
           "type": "string",
           "x-ms-enum": {
