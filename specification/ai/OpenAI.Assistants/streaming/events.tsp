@@ -23,13 +23,14 @@ We may add additional events over time, so we recommend handling unknown events 
 in your code.
 """)
 union AssistantStreamEvent {
+  string,
 
-    | ThreadStreamEvent
-    | RunStreamEvent
-    | RunStepStreamEvent
-    | MessageStreamEvent
-    | ErrorEvent
-    | DoneEvent,
+  | ThreadStreamEvent
+  | RunStreamEvent
+  | RunStepStreamEvent
+  | MessageStreamEvent
+  | ErrorEvent
+  | DoneEvent,
 }
 
 /** Thread operation related streaming events */
