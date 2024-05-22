@@ -31,10 +31,10 @@ model AssetVersion {
   @visibility("read")
   systemData?: SystemData;
 
-  @doc("Asset's tags.")
+  @doc("Asset's tags. Unlike properties, tags are fully mutable.")
   tags?: Record<string>;
 
-  @doc("Asset's properties.")
+  @doc("Asset's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
   properties?: Record<string>;
 }
 

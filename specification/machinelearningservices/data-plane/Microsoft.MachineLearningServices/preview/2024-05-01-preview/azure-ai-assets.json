@@ -135,8 +135,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           }
         ],
         "responses": {
@@ -169,7 +169,7 @@
     "/indexes/{name}:getNextVersion": {
       "post": {
         "operationId": "Indexes_GetNextVersion",
-        "description": "Get next Index version, defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.",
+        "description": "Get next Index version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -180,8 +180,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           }
         ],
         "responses": {
@@ -225,8 +225,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "listViewType",
@@ -304,8 +304,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "version",
@@ -354,8 +354,8 @@
             "description": "Name of the index.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "version",
@@ -469,8 +469,8 @@
             "description": "Name of the prompt",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           }
         ],
         "responses": {
@@ -503,7 +503,7 @@
     "/prompts/{name}:getNextVersion": {
       "post": {
         "operationId": "Prompts_GetNextVersion",
-        "description": "Get next Prompt version, defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.",
+        "description": "Get next Prompt version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -514,8 +514,8 @@
             "description": "Name of the prompt",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           }
         ],
         "responses": {
@@ -559,8 +559,8 @@
             "description": "Name of the prompt",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "listViewType",
@@ -638,8 +638,8 @@
             "description": "Name of the prompt",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "version",
@@ -688,8 +688,8 @@
             "description": "Name of the prompt",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
-            "maxLength": 254
+            "maxLength": 254,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
           },
           {
             "name": "version",
@@ -1027,7 +1027,7 @@
         "nextVersion": {
           "type": "integer",
           "format": "int64",
-          "description": "Next version as defined by the server."
+          "description": "Next version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'."
         },
         "latestVersion": {
           "type": "string",

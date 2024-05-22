@@ -22,7 +22,8 @@ interface Indexes {
   get is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
       @path
       name: string;
 
@@ -40,7 +41,8 @@ interface Indexes {
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
       @path
       name: string;
 
@@ -62,7 +64,8 @@ interface Indexes {
   list is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
       @path
       name: string;
 
@@ -97,7 +100,8 @@ interface Indexes {
   getLatest is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
       @path
       name: string;
     },
@@ -105,13 +109,14 @@ interface Indexes {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-  @doc("Get next Index version. This returns the latest version + 1.")
+  @doc("Get next Index version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.")
   @route("/indexes/{name}:getNextVersion")
   @post
   getNextVersion is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
       @path
       name: string;
     },
@@ -139,7 +144,8 @@ interface Prompts {
   get is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the prompt")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
       @path
       name: string;
 
@@ -157,7 +163,8 @@ interface Prompts {
   createOrUpdate is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the prompt")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
       @path
       name: string;
 
@@ -179,7 +186,8 @@ interface Prompts {
   list is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the prompt")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
       @path
       name: string;
 
@@ -207,7 +215,8 @@ interface Prompts {
   getLatest is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the prompt")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
       @path
       name: string;
     },
@@ -215,13 +224,14 @@ interface Prompts {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
-  @doc("Get next Prompt version. This returns the latest version + 1.")
+  @doc("Get next Prompt version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.")
   @route("/prompts/{name}:getNextVersion")
   @post
   getNextVersion is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the prompt")
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]*$")
+      @maxLength(254)
       @path
       name: string;
     },
