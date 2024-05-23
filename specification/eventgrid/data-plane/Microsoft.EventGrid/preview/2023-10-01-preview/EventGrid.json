@@ -56,7 +56,7 @@
     "/topics/{topicName}:publish": {
       "post": {
         "operationId": "PublishCloudEvent",
-        "description": "Publish Single Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "description": "Publish a single Cloud Event to a namespace topic.",
         "consumes": [
           "application/cloudevents+json; charset=utf-8"
         ],
@@ -106,7 +106,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive": {
       "post": {
         "operationId": "ReceiveCloudEvents",
-        "description": "Receive Batch of Cloud Events from the Event Subscription.",
+        "description": "Receive a batch of Cloud Events from a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -175,7 +175,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge": {
       "post": {
         "operationId": "AcknowledgeCloudEvents",
-        "description": "Acknowledge batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully acknowledged lockTokens, along with other failed lockTokens with their corresponding error information. Successfully acknowledged events will no longer be available to any consumer.",
+        "description": "Acknowledge a batch of Cloud Events. The response will include the set of successfully acknowledged lock tokens, along with other failed lock tokens with their corresponding error information. Successfully acknowledged events will no longer be available to be received by any consumer.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -234,7 +234,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release": {
       "post": {
         "operationId": "ReleaseCloudEvents",
-        "description": "Release batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully released lockTokens, along with other failed lockTokens with their corresponding error information.",
+        "description": "Release a batch of Cloud Events. The response will include the set of successfully released lock tokens, along with other failed lock tokens with their corresponding error information. Successfully released events can be received by consumers.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -258,13 +258,13 @@
             "in": "query",
             "description": "Release cloud events with the specified delay in seconds.",
             "required": false,
-            "type": "number",
+            "type": "string",
             "enum": [
-              0,
-              10,
-              60,
-              600,
-              3600
+              "0",
+              "10",
+              "60",
+              "600",
+              "3600"
             ],
             "x-ms-enum": {
               "name": "ReleaseDelay",
@@ -272,27 +272,27 @@
               "values": [
                 {
                   "name": "By0Seconds",
-                  "value": 0,
+                  "value": "0",
                   "description": "Release the event after 0 seconds."
                 },
                 {
                   "name": "By10Seconds",
-                  "value": 10,
+                  "value": "10",
                   "description": "Release the event after 10 seconds."
                 },
                 {
                   "name": "By60Seconds",
-                  "value": 60,
+                  "value": "60",
                   "description": "Release the event after 60 seconds."
                 },
                 {
                   "name": "By600Seconds",
-                  "value": 600,
+                  "value": "600",
                   "description": "Release the event after 600 seconds."
                 },
                 {
                   "name": "By3600Seconds",
-                  "value": 3600,
+                  "value": "3600",
                   "description": "Release the event after 3600 seconds."
                 }
               ]
@@ -338,7 +338,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject": {
       "post": {
         "operationId": "RejectCloudEvents",
-        "description": "Reject batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully rejected lockTokens, along with other failed lockTokens with their corresponding error information.",
+        "description": "Reject a batch of Cloud Events. The response will include the set of successfully rejected lock tokens, along with other failed lock tokens with their corresponding error information. Successfully rejected events will be dead-lettered and can no longer be received by a consumer.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -397,7 +397,7 @@
     "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock": {
       "post": {
         "operationId": "RenewCloudEventLocks",
-        "description": "Renew lock for batch of Cloud Events. The server responds with an HTTP 200 status code if the request is successfully accepted. The response body will include the set of successfully renewed lockTokens, along with other failed lockTokens with their corresponding error information.",
+        "description": "Renew locks for a batch of Cloud Events. The response will include the set of successfully renewed lock tokens, along with other failed lock tokens with their corresponding error information. Successfully renewed locks will ensure that the associated event is only available to the consumer that holds the renewed lock.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -458,7 +458,7 @@
     "/topics/{topicName}:publish?_overload=publishCloudEvents": {
       "post": {
         "operationId": "PublishCloudEvents",
-        "description": "Publish Batch Cloud Event to namespace topic. In case of success, the server responds with an HTTP 200 status code with an empty JSON object in response. Otherwise, the server can return various error codes. For example, 401: which indicates authorization failure, 403: which indicates quota exceeded or message is too large, 410: which indicates that specific topic is not found, 400: for bad request, and 500: for internal server error. ",
+        "description": "Publish a batch of Cloud Events to a namespace topic.",
         "consumes": [
           "application/cloudevents-batch+json; charset=utf-8"
         ],
