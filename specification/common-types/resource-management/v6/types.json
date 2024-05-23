@@ -47,7 +47,11 @@
           "description": "Resource Etag."
         }
       },
-      "$ref": "#/definitions/Resource"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "TrackedResource": {
       "title": "Tracked Resource",
@@ -78,13 +82,21 @@
       "required": [
         "location"
       ],
-      "$ref": "#/definitions/Resource"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "ProxyResource": {
       "title": "Proxy Resource",
       "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
       "type": "object",
-      "$ref": "#/definitions/Resource"
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "ResourceModelWithAllowedPropertySet": {
       "description": "The resource model definition containing the full set of allowed properties for a resource. Except properties bag, there cannot be a top level property outside of this set.",
