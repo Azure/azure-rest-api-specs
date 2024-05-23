@@ -599,12 +599,12 @@
             "$ref": "#/parameters/Accept-Language"
           },
           {
-            "name": "routeMatrixRequest",
+            "name": "routeMatrixAsyncRequest",
             "in": "body",
             "description": "Request body of RouteMatrix API in GeoJSON format.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RouteMatrixRequest"
+              "$ref": "#/definitions/RouteMatrixAsyncRequest"
             }
           }
         ],
@@ -1036,6 +1036,73 @@
           "$ref": "#/definitions/TravelModeEnum"
         },
         "optimizeRoute": {
+          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastest\" which returns the route to minimize the travel time.\n\nExample: \"optimizeRoute\":\"fastest \"",
+          "type": "string",
+          "default": "fastest",
+          "enum": [
+            "fastest"
+          ],
+          "x-ms-enum": {
+            "name": "RouteMatrixOptimizeRouteEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "fastest",
+                "name": "Fastest",
+                "description": "Finds the fastest route"
+              }
+            ]
+          }
+        },
+        "traffic": {
+          "$ref": "#/definitions/RouteMatrixTrafficEnum"
+        },
+        "avoid": {
+          "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteMatrixAvoidEnum"
+          }
+        },
+        "vehicleSpec": {
+          "$ref": "#/definitions/VehicleSpec"
+        }
+      }
+    },
+    "RouteMatrixAsyncRequest": {
+      "description": "Use to get a route matrix showing the travel time and distance for all possible pairs in a list of origins and destination. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "type": "object",
+      "required": [
+        "type",
+        "features"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "A set of MultiPoint for matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "minimum": 2,
+          "maximum": 2,
+          "items": {
+            "$ref": "#/definitions/InputRouteMatrixFeaturesItem"
+          }
+        },
+        "departAt": {
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "arriveAt": {
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "travelMode": {
+          "$ref": "#/definitions/TravelModeEnum"
+        },
+        "optimizeRoute": {
           "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastest\" which returns the route to minimize the travel time.\n\nExample: \"optimizeRoute\":\"shortest\"",
           "type": "string",
           "default": "fastest",
@@ -1044,7 +1111,7 @@
             "fastest"
           ],
           "x-ms-enum": {
-            "name": "RouteMatrixOptimizeRouteEnum",
+            "name": "RouteMatrixAsyncOptimizeRouteEnum",
             "modelAsString": true,
             "values": [
               {
@@ -1061,29 +1128,7 @@
           }
         },
         "traffic": {
-          "description": "Decides how traffic is considered for computing routes.",
-          "type": "string",
-          "default": "historical",
-          "enum": [
-            "historical",
-            "live"
-          ],
-          "x-ms-enum": {
-            "name": "RouteMatrixTrafficEnum",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "historical",
-                "name": "Historical",
-                "description": "Finds the route based on historical traffic data"
-              },
-              {
-                "value": "live",
-                "name": "Live",
-                "description": "Finds the route based on live traffic data."
-              }
-            ]
-          }
+          "$ref": "#/definitions/RouteMatrixTrafficEnum"
         },
         "avoid": {
           "description": "Specifies something that the route calculation should try to avoid when determining the route.",
@@ -1093,7 +1138,7 @@
           }
         },
         "vehicleSpec": {
-          "$ref": "#/definitions/VehicleSpec"
+          "$ref": "#/definitions/RouteMatrixVehicleSpec"
         }
       }
     },
@@ -2481,7 +2526,7 @@
         }
       }
     },
-    "VehicleSpec": {
+    "RouteMatrixVehicleSpec": {
       "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n `Note`: Only supported for truck travelMode.",
       "type": "object",
       "properties": {
@@ -2538,14 +2583,6 @@
         "axleWeight": {
           "x-ms-client-name": "axleWeightInKilograms",
           "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight restrictions per axle are not considered.",
-          "format": "int64",
-          "type": "integer",
-          "maximum": 1000000,
-          "minimum": 0,
-          "default": 0
-        },
-        "axleCount": {
-          "description": "Number of axles on the vehicle. A value of 0 means that axle restrictions are not considered.",
           "format": "int64",
           "type": "integer",
           "maximum": 1000000,
@@ -2665,6 +2702,28 @@
         }
       }
     },
+    "VehicleSpec": {
+      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n `Note`: Only supported for truck travelMode.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteMatrixVehicleSpec"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "axleCount": {
+              "description": "Number of axles on the vehicle. A value of 0 means that axle restrictions are not considered.",
+              "format": "int64",
+              "type": "integer",
+              "maximum": 1000000,
+              "minimum": 0,
+              "default": 0
+            }
+          }
+        }
+      ]
+    },
     "AvoidEnum": {
       "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tolls\"]",
       "type": "array",
@@ -2735,6 +2794,31 @@
             "value": "unpavedRoads",
             "name": "UnpavedRoads",
             "description": "Avoids unpaved roads."
+          }
+        ]
+      }
+    },
+    "RouteMatrixTrafficEnum": {
+      "description": "Decides how traffic is considered for computing routes.",
+      "type": "string",
+      "default": "historical",
+      "enum": [
+        "historical",
+        "live"
+      ],
+      "x-ms-enum": {
+        "name": "RouteMatrixTrafficEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "historical",
+            "name": "Historical",
+            "description": "Finds the route based on historical traffic data"
+          },
+          {
+            "value": "live",
+            "name": "Live",
+            "description": "Finds the route based on live traffic data."
           }
         ]
       }
