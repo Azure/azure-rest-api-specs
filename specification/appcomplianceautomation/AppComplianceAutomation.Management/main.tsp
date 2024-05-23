@@ -23,7 +23,7 @@ using TypeSpec.Versioning;
   title: "App Compliance Automation Tool for Microsoft 365",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AppComplianceAutomation;
 
 /**
