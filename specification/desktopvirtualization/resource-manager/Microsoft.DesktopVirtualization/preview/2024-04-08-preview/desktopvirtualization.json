@@ -2810,7 +2810,7 @@
               "Location": {
                 "description": "The URL of the resource used to check the status of the asynchronous operation.",
                 "type": "string"
-              },            
+              },
               "Retry-After": {
                 "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
                 "type": "integer",
@@ -8949,7 +8949,8 @@
         },
         "hostPoolType": {
           "enum": [
-            "Pooled"
+            "Pooled",
+            "Personal"
           ],
           "x-ms-enum": {
             "name": "ScalingHostPoolType",
@@ -8958,6 +8959,10 @@
               {
                 "value": "Pooled",
                 "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
+              },
+              {
+                "value": "Personal",
+                "description": "Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost."
               }
             ]
           },
