@@ -6,7 +6,7 @@ RUN wget -q https://packages.microsoft.com/config/ubuntu/22.04/packages-microsof
     -O packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb
 RUN apt-get update -y && apt-get upgrade -y \
-    && apt-get install \
+    && apt-get install -y --no-install-recommends \
     git
 
 RUN npm install -g oav@latest
