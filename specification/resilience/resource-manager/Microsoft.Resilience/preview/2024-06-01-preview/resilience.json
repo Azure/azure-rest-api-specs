@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft.Resilience management service",
-    "version": "2024-03-01-preview",
+    "title": "Microsoft.Resilience",
+    "version": "2024-06-01-preview",
     "description": "Microsoft.Resilience Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -103,9 +103,10 @@
           {
             "name": "resilienceState",
             "in": "path",
-            "description": "The parent resource name",
+            "description": "The resilience resource name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,24}[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -167,86 +168,122 @@
     }
   },
   "definitions": {
-    "ARMResourceId": {
+    "ArnEventType": {
       "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
+      "description": "Azure Resource Notification Event Types.",
+      "enum": [
+        "Snapshot",
+        "Delete",
+        "Move",
+        "Write"
+      ],
+      "x-ms-enum": {
+        "name": "ArnEventType",
+        "modelAsString": true,
+        "values": [
           {
-            "type": "string"
+            "name": "Snapshot",
+            "value": "Snapshot",
+            "description": "Snapshot event."
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Resource delete event."
+          },
+          {
+            "name": "Move",
+            "value": "Move",
+            "description": "Resource move event."
+          },
+          {
+            "name": "Write",
+            "value": "Write",
+            "description": "Resource write event."
           }
         ]
       }
     },
-    "ProvisioningState": {
+    "AzoresClassification": {
+      "type": "object",
+      "description": "Azores Classification tags applied for resource exclusion/assertion.",
+      "properties": {
+        "classification": {
+          "type": "string",
+          "description": "Classification of the resource. e.g. 'Non-Service Critical'."
+        },
+        "categorization": {
+          "type": "string",
+          "description": "Categorization of the resource. e.g. 'DataPlane'."
+        },
+        "usage": {
+          "type": "string",
+          "description": "Usage of the resource."
+        }
+      },
+      "required": [
+        "classification",
+        "categorization",
+        "usage"
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
-      "description": "Provisioning state enum",
+      "description": "The provisioning state of a resource type.",
       "enum": [
-        "Provisioning",
         "Succeeded",
         "Failed",
-        "Canceled",
-        "Accepted",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Deleted",
-        "NotSpecified"
+        "Canceled"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "ResourceProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned."
-          },
-          {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The resource action is successful."
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "The resource action has failed."
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "The resource action has been cancelled."
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "EvaluationResult": {
+      "type": "string",
+      "description": "Evaluation Results.",
+      "enum": [
+        "None",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No evaluation results available."
           },
           {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource provisioning has been accepted."
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Evaluation Failed."
           },
           {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "The resource is being created."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is being updated."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted."
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "The resource has been deleted."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The resource status is unspecified."
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Evaluation Succeeded."
           }
         ]
       },
@@ -256,62 +293,28 @@
       "type": "object",
       "description": "Resilience Properties",
       "properties": {
-        "parentResourceId": {
-          "$ref": "#/definitions/ARMResourceId",
-          "description": "The parent resource id",
+        "eventType": {
+          "$ref": "#/definitions/ArnEventType",
+          "description": "Type of event that triggered the resilience evaluation.",
           "readOnly": true
         },
-        "parentResourceType": {
-          "type": "string",
-          "description": "The parent resource type",
-          "readOnly": true
-        },
-        "parentResourceLocation": {
-          "type": "string",
-          "description": "The parent resource location",
-          "readOnly": true
-        },
-        "zoneResilienceState": {
-          "$ref": "#/definitions/ZoneResilienceState",
-          "description": "Is the resource ZoneAligned, ZoneRedundant, AlwaysAvailable, None",
-          "readOnly": true
-        },
-        "zonesDeployed": {
+        "resilienceProfiles": {
           "type": "array",
-          "description": "Zones where the resource is deployed",
+          "description": "Resilience evaluation for the resource and its dependencies.",
           "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "findings": {
-          "type": "array",
-          "description": "Findings of the zone resilience evaluation",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "relatedResources": {
-          "type": "array",
-          "description": "List of related resource Ids",
-          "items": {
-            "$ref": "#/definitions/ARMResourceId"
+            "$ref": "#/definitions/ResourceResilienceProfile"
           },
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
         }
       },
       "required": [
-        "parentResourceId",
-        "parentResourceType",
-        "parentResourceLocation",
-        "findings",
-        "relatedResources"
+        "eventType",
+        "resilienceProfiles"
       ]
     },
     "ResilienceResource": {
@@ -355,65 +358,134 @@
         "value"
       ]
     },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-03-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_03_01_preview",
-            "value": "2024-03-01-preview",
-            "description": "2024-03-01-preview version"
-          }
-        ]
-      }
+    "ResilienceRuleEvaluation": {
+      "type": "object",
+      "description": "Resilience Rule Evaluation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resilience Rule ID (GUID)."
+        },
+        "targetState": {
+          "$ref": "#/definitions/ResilienceState",
+          "description": "Resilience State that the rule is targeting."
+        },
+        "result": {
+          "$ref": "#/definitions/EvaluationResult",
+          "description": "Evaluation result of the rule."
+        }
+      },
+      "required": [
+        "id",
+        "targetState",
+        "result"
+      ]
     },
-    "ZoneResilienceState": {
+    "ResilienceState": {
       "type": "string",
-      "description": "Availability Zones Resilience state enum",
+      "description": "Resilience states",
       "enum": [
+        "NotApplicable",
+        "NonResilient",
         "ZoneAligned",
         "ZoneRedundant",
-        "AlwaysAvailable",
-        "NotApplicable",
-        "NonResilient"
+        "AlwaysAvailable"
       ],
       "x-ms-enum": {
-        "name": "ZoneResilienceState",
+        "name": "ResilienceState",
         "modelAsString": true,
         "values": [
-          {
-            "name": "ZoneAligned",
-            "value": "ZoneAligned",
-            "description": "The resource is zone-aligned."
-          },
-          {
-            "name": "ZoneRedundant",
-            "value": "ZoneRedundant",
-            "description": "The resource is zone-redundant."
-          },
-          {
-            "name": "AlwaysAvailable",
-            "value": "AlwaysAvailable",
-            "description": "The resource is always-available."
-          },
           {
             "name": "NotApplicable",
             "value": "NotApplicable",
-            "description": "The zone resilience state is not-applicable."
+            "description": "Not Applicable state."
           },
           {
             "name": "NonResilient",
             "value": "NonResilient",
-            "description": "The resource is non-resilient."
+            "description": "Non-resilient state."
+          },
+          {
+            "name": "ZoneAligned",
+            "value": "ZoneAligned",
+            "description": "Zone Aligned state."
+          },
+          {
+            "name": "ZoneRedundant",
+            "value": "ZoneRedundant",
+            "description": "Zone Redundant state."
+          },
+          {
+            "name": "AlwaysAvailable",
+            "value": "AlwaysAvailable",
+            "description": "Always Available state."
           }
         ]
       }
+    },
+    "ResourceResilienceProfile": {
+      "type": "object",
+      "description": "Resilience Profile for a resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure Resource ID of the resource being evaluated.",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource Type of the resource being evaluated."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource being evaluated."
+        },
+        "zones": {
+          "type": "array",
+          "description": "Zones where the resource being evaluated is deployed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "SKU of the resource being evaluated."
+        },
+        "azoresClassification": {
+          "$ref": "#/definitions/AzoresClassification",
+          "description": "Classification assigned to the resource being evaluated."
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC Date and time when the resource was created."
+        },
+        "resilienceEvaluations": {
+          "type": "array",
+          "description": "Resilience Rules for the resource and their evaluation results.",
+          "items": {
+            "$ref": "#/definitions/ResilienceRuleEvaluation"
+          }
+        },
+        "resilienceState": {
+          "$ref": "#/definitions/ResilienceState",
+          "description": "Resilience State of the resource."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "location",
+        "zones",
+        "sku",
+        "azoresClassification",
+        "creationDate",
+        "resilienceEvaluations",
+        "resilienceState"
+      ]
     }
   },
   "parameters": {
