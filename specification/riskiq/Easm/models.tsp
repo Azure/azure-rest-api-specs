@@ -340,7 +340,7 @@ model DeltaDetailsRequest {
   deltaDetailType: DeltaDetailType;
 
   @doc("The number of days prior to retrieve deltas for.")
-  daysPrior?: int32;
+  priorDays?: int32;
 
   @doc("The type of asset")
   kind: GlobalAssetType;
@@ -353,7 +353,7 @@ model DeltaDetailsRequest {
 @Versioning.added(Versions.v2024_03_01_preview)
 model DeltaSummaryRequest {
   @doc("The number of days prior to retrieve deltas for.")
-  daysPrior?: int32;
+  priorDays?: int32;
 
   @doc("expected format to be: yyyy-MM-dd")
   date?: string;
@@ -1865,7 +1865,7 @@ model ObservationResult {
   name: string;
 
   @doc("The list of applicable types.")
-  type: ObservationType[];
+  types: ObservationType[];
 
   @doc("The priority of the observation.")
   priority: ObservationPriority;
