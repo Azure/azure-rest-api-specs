@@ -1,13 +1,5 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-import "./catalog.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,6 +12,7 @@ model Image is ProxyResource<ImageProperties> {
   /**
    * Image name. Use an image GUID for GA versions of the API.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @path
   @key("imageName")
   @segment("images")
@@ -52,7 +45,7 @@ interface Images {
   listByCatalog is ArmResourceListByParent<
     Image,
     {
-      ...BaseParameters<Image>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Image>;
       ...CustomFilterQueryParameter;
       ...CustomTopQueryParameter;
       ...CustomSkipQueryParameter;

@@ -10,6 +10,7 @@ using TypeSpec.Versioning;
 alias DefaultAzureCoreVersion = Azure.Core.Versions.v1_0_Preview_2;
 
 /** The Azure Quantum Workspace REST API version. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This is the version enum"
 enum QuantumWorkspaceAPIVersion {
   /** 2019-11-04-preview */
   @useDependency(DefaultAzureCoreVersion)

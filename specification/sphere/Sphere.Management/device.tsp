@@ -1,13 +1,5 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-import "./deviceGroup.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -43,8 +35,13 @@ interface Devices {
   /**
    * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
    */
-  @parameterVisibility("read")
-  update is ArmCustomPatchAsync<Device, DeviceUpdate, LroHeaders = {}>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
+  @parameterVisibility
+  update is ArmCustomPatchAsync<
+    Device,
+    DeviceUpdate,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Delete a Device

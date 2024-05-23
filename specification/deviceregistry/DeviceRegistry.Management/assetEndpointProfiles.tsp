@@ -69,15 +69,17 @@ model UserAuthentication {
 }
 
 @doc("The mode to authenticate the user of the client at the server.")
-enum UserAuthenticationMode {
+union UserAuthenticationMode {
+  string,
+
   @doc("The user authentication mode is anonymous.")
-  Anonymous,
+  Anonymous: "Anonymous",
 
   @doc("The user authentication mode is an x509 certificate.")
-  Certificate,
+  Certificate: "Certificate",
 
   @doc("The user authentication mode is a username and password.")
-  UsernamePassword,
+  UsernamePassword: "UsernamePassword",
 }
 
 @doc("The credentials for authentication mode UsernamePassword.")
@@ -116,42 +118,18 @@ model OwnCertificate {
 
 @armResourceOperations
 interface AssetEndpointProfiles {
-  @Autorest.example(
-    "./examples/Get_AssetEndpointProfile.json",
-    "Get an Asset Endpoint Profile."
-  )
   get is ArmResourceRead<AssetEndpointProfile>;
 
-  @Autorest.example(
-    "./examples/Create_AssetEndpointProfile.json",
-    "Create an Asset Endpoint Profile."
-  )
   createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
 
-  @Autorest.example(
-    "./examples/Update_AssetEndpointProfile.json",
-    "Patch an Asset Endpoint Profile."
-  )
   update is ArmResourcePatchAsync<
     AssetEndpointProfile,
     AssetEndpointProfileProperties
   >;
 
-  @Autorest.example(
-    "./examples/Delete_AssetEndpointProfile.json",
-    "Delete an Asset Endpoint Profile."
-  )
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;
 
-  @Autorest.example(
-    "./examples/List_AssetEndpointProfiles_ResourceGroup.json",
-    "List Asset Endpoint Profiles in a Resource Group."
-  )
   listByResourceGroup is ArmResourceListByParent<AssetEndpointProfile>;
 
-  @Autorest.example(
-    "./examples/List_AssetEndpointProfiles_Subscription.json",
-    "List Asset Endpoint Profiles in a Subscription."
-  )
   listBySubscription is ArmListBySubscription<AssetEndpointProfile>;
 }

@@ -1,17 +1,6 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/openapi";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
-using OpenAPI;
 
 namespace Microsoft.MobilePacketCore;
 
@@ -34,18 +23,18 @@ namespace Microsoft.MobilePacketCore;
 @armResourceCreateOrUpdate(TResource)
 @put
 op ArmResourceCreateOrUpdate2Async<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   resource: TResource,
 ): ArmUpdatedResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 @doc("ARM resource update successful")
-model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.Resource>
   is ArmResponse<TResource>;
 
 @doc("Provisioning state of the resource")
@@ -69,7 +58,7 @@ union ProvisioningState {
 
 @doc("ARM resource ID of a cluster.")
 scalar ClusterServiceIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.MobilePacketCore/clusterServices",
     }
@@ -77,7 +66,7 @@ scalar ClusterServiceIdProperty
 
 @doc("ARM resource ID of a VNF Agent deployment.")
 scalar VnfAgentDeploymentIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.MobilePacketCore/vnfAgentDeployments",
     }
@@ -85,7 +74,7 @@ scalar VnfAgentDeploymentIdProperty
 
 @doc("ARM resource ID of a custom location.")
 scalar CustomLocationIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ExtendedLocation/customLocations",
     }
