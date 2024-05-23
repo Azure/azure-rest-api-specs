@@ -1835,7 +1835,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an existing private endpoint connection to the Azure AI Search service."
@@ -2066,7 +2066,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a shared private link resource managed by the Azure AI Search service."
@@ -2216,7 +2216,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes a supported private link resource for the Azure AI Search service."
@@ -2311,7 +2311,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Describes an Azure AI Search service and its current state."
@@ -2355,7 +2355,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "The parameters used to update an Azure AI Search service."
@@ -2921,8 +2921,24 @@
       "type": "object",
       "description": "The list of user identities associated with the search service. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
       "additionalProperties": {
-        "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+        "$ref": "#/definitions/UserAssignedManagedIdentity"
       }
+    },
+    "UserAssignedManagedIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of user assigned identity."
+        }
+      },
+      "type": "object",
+      "description": "The details of the user assigned managed identity assigned to the search service."
     },
     "QuotaUsagesListResult": {
       "type": "object",
