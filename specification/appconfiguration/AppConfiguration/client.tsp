@@ -13,3 +13,6 @@ namespace SdkCustomizations;
 @@access(putKeyValue, Access.internal, "python");
 @@access(updateSnapshot, Access.internal, "python");
 @@access(SnapshotUpdateParameters, Access.public, "python");
+
+// .NET specific customizations
+@@clientName(SnapshotStatus, "ConfigurationSnapshotStatus", "csharp");
