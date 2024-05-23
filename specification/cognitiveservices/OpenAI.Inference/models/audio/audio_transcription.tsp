@@ -104,7 +104,7 @@ model AudioTranscriptionOptions {
   """)
   @added(ServiceApiVersions.v2024_04_01_Preview)
   @encodedName("application/json", "timestamp_granularities")
-  timestampGranularities?: AudioTranscriptionTimestampGranularity[] = [
+  timestampGranularities?: AudioTranscriptionTimestampGranularity[] = #[
     AudioTranscriptionTimestampGranularity.segment
   ];
 
