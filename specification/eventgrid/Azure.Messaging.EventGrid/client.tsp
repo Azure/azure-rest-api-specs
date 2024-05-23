@@ -117,11 +117,6 @@ namespace Customizations{
 @@access(rejectCloudEvents, Access.internal, "python");
 @@access(renewCloudEventLocks, Access.internal, "python");
 
-@@access(AcknowledgeOptions, Access.internal, "python");
-@@access(ReleaseOptions, Access.internal, "python");
-@@access(RejectOptions, Access.internal, "python");
-@@access(RenewLockOptions, Access.internal, "python");
-
 @@access(AcknowledgeResult, Access.public, "python");
 @@access(ReleaseResult, Access.public, "python");
 @@access(RejectResult, Access.public, "python");

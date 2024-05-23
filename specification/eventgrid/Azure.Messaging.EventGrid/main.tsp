@@ -189,29 +189,25 @@ namespace Microsoft.EventGrid {
     succeededLockTokens: string[];
   }
 
-  @doc("Array of lock tokens for the corresponding received Cloud Events to be released.")
-  model ReleaseOptions {
+  alias ReleaseOptions = {
     @doc("Array of lock tokens.")
     lockTokens: string[];
-  }
+  };
 
-  @doc("Array of lock tokens for the corresponding received Cloud Events to be acknowledged.")
-  model AcknowledgeOptions {
+  alias AcknowledgeOptions = {
     @doc("Array of lock tokens.")
     lockTokens: string[];
-  }
+  };
 
-  @doc("Array of lock tokens for the corresponding received Cloud Events to be rejected.")
-  model RejectOptions {
+  alias RejectOptions = {
     @doc("Array of lock tokens.")
     lockTokens: string[];
-  }
+  };
 
-  @doc("Array of lock tokens for the corresponding received Cloud Events to be renewed.")
-  model RenewLockOptions {
+  alias RenewLockOptions = {
     @doc("Array of lock tokens.")
     lockTokens: string[];
-  }
+  };
 
   @doc("Topic Resource.")
   @resource("topics")
@@ -304,9 +300,7 @@ namespace Microsoft.EventGrid {
   op acknowledgeCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("AcknowledgeOptions.")
-      @bodyRoot
-      acknowledgeOptions: AcknowledgeOptions;
+      ...AcknowledgeOptions;
     },
     AcknowledgeResult
   >;
@@ -341,9 +335,7 @@ namespace Microsoft.EventGrid {
   op rejectCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("RejectOptions")
-      @bodyRoot
-      rejectOptions: RejectOptions;
+      ...RejectOptions;
     },
     RejectResult
   >;
@@ -358,9 +350,7 @@ namespace Microsoft.EventGrid {
   op renewCloudEventLocks is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("RenewLockOptions")
-      @bodyRoot
-      renewLockOptions: RenewLockOptions;
+      ...RenewLockOptions;
     },
     RenewCloudEventLocksResult
   >;
