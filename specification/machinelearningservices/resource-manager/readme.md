@@ -45,12 +45,10 @@ suppressions:
     reason: This provisioningState property is marked as readOnly. However, the definition of the enum is not marked as readOnly and is the reason this suppression is needed
     where:
       - $.definitions["ServerlessEndpoint"].properties["provisioningState"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}"].put
   - code: AvoidAdditionalProperties
     reason: The headers property here is meant to describe a set of request headers that the user must pass along in their inferencing API request. For that reason, this needs to be represented as an additionalProperties
     where:
       - $.definitions["ServerlessInferenceEndpoint"].properties["headers"]
-      - $.definitions["ServerlessEndpointTrackedResourceArmPaginatedResult"]
   - code: AvoidAdditionalProperties
     reason: As discussed In office hour this conf property is string dictionary and passed by user as per there requirements depending on runtime version. This passed to downstream and we have multiple validation on all required configuration before passing it downstream, All optional property passed as user wants and any failure due to that considered as user error.
     where:
