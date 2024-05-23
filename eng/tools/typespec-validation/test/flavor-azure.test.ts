@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 import { FlavorAzureRule } from "../src/rules/flavor-azure.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
