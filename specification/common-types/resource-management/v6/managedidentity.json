@@ -6,15 +6,6 @@
   },
   "paths": {},
   "definitions": {
-    "UserAssignedIdentities": {
-      "title": "User-Assigned Identities",
-      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
-      "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/UserAssignedIdentity",
-        "x-nullable": true
-      }
-    },
     "UserAssignedIdentity": {
       "type": "object",
       "description": "User assigned identity properties",
@@ -67,7 +58,11 @@
           "$ref": "#/definitions/ManagedServiceIdentityType"
         },
         "userAssignedIdentities": {
-          "$ref": "#/definitions/UserAssignedIdentities"
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
         }
       },
       "required": [
