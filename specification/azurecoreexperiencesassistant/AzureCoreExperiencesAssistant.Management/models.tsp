@@ -19,17 +19,17 @@ model AssistantRequest {
   @doc("User question to the assistant")
   userInput: string;
 
-  @doc("Scenario ID that is relevant to the user question")
-  scenarioId: ScenarioIds;
+  @doc("Scenario type that is relevant to the user question")
+  scenarioType: ScenarioType;
 
-  @doc("Start window for assistant to run analysis on")
+  @doc("Start window for assistant to run analysis on. Formatted as an ISO 8601 UTC timestamp, e.g. YYYY-MM-DDTHH:mm:ss.sssZ")
   windowStartTimestamp?: utcDateTime;
 
-  @doc("End window for assistant to run analysis on")
+  @doc("End window for assistant to run analysis on. Formatted as an ISO 8601 UTC timestamp, e.g. YYYY-MM-DDTHH:mm:ss.sssZ")
   windowEndTimestamp?: utcDateTime;
 
-  @doc("Sub-resource ARM Ids to help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks)")
-  subResourceIds?: string[];
+  @doc("Sub-resource ARM Ids to help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks). Formatted as an arm-id. e.g. /subscriptions/{guid}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}")
+  subResourceIds?: armResourceIdentifier[];
 
   @doc("The Azure Portal context from which the assistant was invoked")
   bladeContext?: PortalBladeContext;
@@ -75,12 +75,12 @@ model AssistantResponse {
 
 @doc("Resource info context")
 model ResourceContext {
-  @doc("Azure resource Id")
-  resourceId: string;
+  @doc("Azure resource Id. Formatted as an arm-id. e.g. /subscriptions/{guid}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}")
+  resourceId: armResourceIdentifier;
 }
 
-@doc("Supported scenario Ids")
-union ScenarioIds {
+@doc("Supported scenario types")
+union ScenarioType {
   /**
    * The disk performance analysis scenario
    */
@@ -89,7 +89,7 @@ union ScenarioIds {
   /**
    * The storage failover analysis scenario
    */
-  StorageDataMigration: "StorageDataMigration",
+  StorageFailover: "StorageFailover",
 
   string,
 }
