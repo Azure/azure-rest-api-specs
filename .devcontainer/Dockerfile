@@ -10,5 +10,6 @@ RUN apt-get update -y && apt-get upgrade -y \
     git
 
 RUN npm install -g oav@latest
+RUN git config --global --add safe.directory /workspaces/azure-rest-api-specs
 
 ENTRYPOINT ["/bin/bash"]
