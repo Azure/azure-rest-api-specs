@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,7 +13,6 @@ namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The marketplace gallery image resource definition.")
-@includeInapplicableMetadataInPayload(false)
 model MarketplaceGalleryImage
   is TrackedResource<MarketplaceGalleryImageProperties> {
   @doc("Name of the marketplace gallery image")
@@ -38,7 +36,7 @@ interface MarketplaceGalleryImages {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to update a marketplace gallery image.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to delete a marketplace gallery image.")

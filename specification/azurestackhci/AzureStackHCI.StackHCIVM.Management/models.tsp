@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using Azure.Core;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureStackHCI;
 
@@ -742,10 +741,6 @@ model NetworkSecurityGroupProperties {
   @visibility("read")
   subnets?: LogicalNetworkArmReference[];
 
-  @doc("The resource GUID property of the network security group resource.")
-  @visibility("read")
-  resourceGuid?: string;
-
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
@@ -1396,7 +1391,7 @@ model GuestAgentInstallStatus {
 
   @doc("Details about the error state.")
   @visibility("read")
-  errorDetails?: ErrorDetail[];
+  errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail[];
 }
 
 @doc("Identity for the resource.")
