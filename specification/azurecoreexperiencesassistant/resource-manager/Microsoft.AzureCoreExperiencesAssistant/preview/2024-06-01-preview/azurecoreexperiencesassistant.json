@@ -141,25 +141,27 @@
           "type": "string",
           "description": "User question to the assistant"
         },
-        "scenarioId": {
-          "$ref": "#/definitions/ScenarioIds",
-          "description": "Scenario ID that is relevant to the user question"
+        "scenarioType": {
+          "$ref": "#/definitions/ScenarioType",
+          "description": "Scenario type that is relevant to the user question"
         },
         "windowStartTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Start window for assistant to run analysis on"
+          "description": "Start window for assistant to run analysis on. Formatted as an ISO 8601 UTC timestamp, e.g. YYYY-MM-DDTHH:mm:ss.sssZ"
         },
         "windowEndTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "End window for assistant to run analysis on"
+          "description": "End window for assistant to run analysis on. Formatted as an ISO 8601 UTC timestamp, e.g. YYYY-MM-DDTHH:mm:ss.sssZ"
         },
         "subResourceIds": {
           "type": "array",
-          "description": "Sub-resource ARM Ids to help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks)",
+          "description": "Sub-resource ARM Ids to help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks). Formatted as an arm-id. e.g. /subscriptions/{guid}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "bladeContext": {
@@ -181,7 +183,7 @@
       },
       "required": [
         "userInput",
-        "scenarioId"
+        "scenarioType"
       ]
     },
     "AssistantResponse": {
@@ -249,22 +251,23 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "Azure resource Id"
+          "format": "arm-id",
+          "description": "Azure resource Id. Formatted as an arm-id. e.g. /subscriptions/{guid}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}"
         }
       },
       "required": [
         "resourceId"
       ]
     },
-    "ScenarioIds": {
+    "ScenarioType": {
       "type": "string",
-      "description": "Supported scenario Ids",
+      "description": "Supported scenario types",
       "enum": [
         "DiskPerformance",
-        "StorageDataMigration"
+        "StorageFailover"
       ],
       "x-ms-enum": {
-        "name": "ScenarioIds",
+        "name": "ScenarioType",
         "modelAsString": true,
         "values": [
           {
@@ -273,8 +276,8 @@
             "description": "The disk performance analysis scenario"
           },
           {
-            "name": "StorageDataMigration",
-            "value": "StorageDataMigration",
+            "name": "StorageFailover",
+            "value": "StorageFailover",
             "description": "The storage failover analysis scenario"
           }
         ]
