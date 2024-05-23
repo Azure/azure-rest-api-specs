@@ -435,7 +435,7 @@ model SuppressorWithOptions {
   @doc("The suppressor.")
   suppressor: string;
 
-  @doc("Represents the tokens of the supressor and options.")
+  @doc("Represents the tokens of the suppressor and options.")
   @minItems(1)
   extension: Array<Fhir.R4.Extension>;
 
