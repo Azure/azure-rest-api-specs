@@ -98,8 +98,8 @@ alias ChatCompletionsCommon = {
   @doc("A unique identifier associated with this chat completions response.")
   id: string;
 
-  @doc("The response object type, which is always `chat.completion`.")
-  object: string;
+  //@doc("The response object type, which is always `chat.completion`.")
+  //object: string;
 
   @doc("""
     The first timestamp associated with generation activity for this completions response,
@@ -140,7 +140,7 @@ using Server Sent Events (SSE).
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-model ChatCompletionsUpdate {
+model StreamingChatCompletionsUpdate {
   ...ChatCompletionsCommon;
 
   @doc("""
@@ -149,7 +149,7 @@ model ChatCompletionsUpdate {
     Token limits and other settings may limit the number of choices generated.
     """)
   @minItems(1)
-  choices: ChatChoiceUpdate[];
+  choices: StreamingChatChoiceUpdate[];
 }
 
 @doc("""
@@ -256,7 +256,7 @@ using Server Sent Events (SSE).
 Generally, `n` choices are generated per provided prompt with a default value of 1.
 Token limits and other settings may limit the number of choices generated.
 """)
-model ChatChoiceUpdate {
+model StreamingChatChoiceUpdate {
   ...ChatChoiceCommon;
 
   @doc("An update to the chat message for a given chat completions prompt.")

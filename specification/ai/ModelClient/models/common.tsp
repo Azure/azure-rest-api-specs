@@ -61,8 +61,8 @@ model EmbeddingsResult {
   @doc("Usage counts for tokens input using the embeddings API.")
   usage: EmbeddingsUsage;
 
-  @doc("The object type of the embeddings result. Will always be `list`.")
-  object: string;
+  //@doc("The object type of the embeddings result. Will always be `list`.")
+  //object: string;
 
   @doc("The model ID used to generate this result.")
   `model`: string;
@@ -79,8 +79,8 @@ model EmbeddingItem {
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
   index: int32;
 
-  @doc("The object type of this embeddings item. Will always be `embedding`.")
-  object: string;
+  //@doc("The object type of this embeddings item. Will always be `embedding`.")
+  //object: string;
 }
 
 @doc("Measurement of the amount of tokens used in this request and response.")
@@ -136,20 +136,6 @@ union ModelType {
   chat: "chat",
 }
 
-@doc("Defines the service behavior when extra parameters are passed in the request payload.")
-union ExtraParameters {
-  string,
-
-  @doc("The service should error when it sees extra parameters in the request payload. This is the default behavior if the service.")
-  error: "error",
-
-  @doc("The service should ignore extra parameters in the request payload. They will not be passed to the back-end AI model.")
-  ignore: "ignore",
-
-  @doc("The service should pass extra parameters to the back-end AI model.")
-  allow: "allow",
-}
-
 alias AdditionalRequestHeaders = {
   @doc("""
   Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.
@@ -170,8 +156,8 @@ union UnknownParams {
   @doc("The service will error if it detected unknown parameters in the request payload. This is the default.")
   error: "error",
 
-  @doc("The servcie will ignore unknown parameters in the request payload.")
-  ingore: "ignore",
+  @doc("The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
+  ignore: "ignore",
 
   @doc("The service will pass unknown parameters to the back-end AI model.")
   allow: "allow",

@@ -30,8 +30,8 @@ using Azure.Core;
 //     endpoint: string,
 //
 //     @doc("Controls what happens if extra parameters are passed in the request payload.")
-//     @header("extra-parameters")
-//     extra_parameters?: ExtraParameters,
+//     @header("unknown-parameters")
+//     unknown_params?: UnknownParams,
 //   }
 // )
 @versioned(ModelClient.Versions)
