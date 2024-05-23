@@ -34,17 +34,17 @@
           },
           {
             "value": "SecuredByPerimeter",
-            "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
+            "description": "The network security perimeter's rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
           }
         ]
       }
     },
     "NetworkSecurityPerimeterConfigurationListResult": {
-      "description": "Result of a list NSP (network security perimeter) configurations request.",
+      "description": "Result of a list effective network security perimeter (NSP) configurations request.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of network security perimeter results.",
+          "description": "Array of network security perimeter configurations.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
@@ -58,7 +58,7 @@
       }
     },
     "NetworkSecurityPerimeterConfiguration": {
-      "description": "Network security perimeter (NSP) configuration resource",
+      "description": "Details of an effective network security perimeter (NSP) configuration",
       "type": "object",
       "allOf": [
         {
@@ -72,7 +72,7 @@
       }
     },
     "NetworkSecurityPerimeterConfigurationProvisioningState": {
-      "description": "Provisioning state of a network security perimeter configuration that is being created or updated.",
+      "description": "Provisioning state of a network security perimeter (NSP) configuration that is being created or updated.",
       "enum": [
         "Succeeded",
         "Creating",
@@ -90,7 +90,7 @@
       }
     },
     "NetworkSecurityPerimeterConfigurationProperties": {
-      "description": "Network security configuration properties.",
+      "description": "Network security perimeter (NSP) configuration properties.",
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -118,7 +118,7 @@
       }
     },
     "ProvisioningIssue": {
-      "description": "Describes a provisioning issue for a network security perimeter configuration",
+      "description": "Describes a provisioning issue affecting a network security perimeter (NSP) configuration",
       "type": "object",
       "readOnly": true,
       "properties": {
@@ -215,7 +215,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Fully qualified Azure resource ID of the NSP resource",
+          "description": "Fully qualified Azure resource ID of the associated network security perimeter (NSP)",
           "type": "string",
           "format": "arm-id",
           "x-ms-arm-id-details": {
@@ -227,12 +227,12 @@
           }
         },
         "perimeterGuid": {
-          "description": "Universal unique ID (UUID) of the network security perimeter",
+          "description": "Universal unique ID (UUID) of the associated network security perimeter (NSP)",
           "type": "string",
           "format": "uuid"
         },
         "location": {
-          "description": "Location of the network security perimeter",
+          "description": "Location of the associated network security perimeter (NSP)",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -295,7 +295,7 @@
           "format": "int32"
         },
         "accessRules": {
-          "description": "List of Access Rules",
+          "description": "List of access rules",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccessRule"
@@ -333,7 +333,7 @@
       }
     },
     "AccessRuleDirection": {
-      "description": "Direction of Access Rule",
+      "description": "Direction of access rule",
       "enum": [
         "Inbound",
         "Outbound"
@@ -355,7 +355,7 @@
       }
     },
     "AccessRuleProperties": {
-      "description": "Properties of Access Rule",
+      "description": "Properties of access rule",
       "type": "object",
       "properties": {
         "direction": {
@@ -385,7 +385,7 @@
           }
         },
         "networkSecurityPerimeters": {
-          "description": "Network security perimeters for inbound rules",
+          "description": "Network security perimeters (NSPs) for inbound rules",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeter"
