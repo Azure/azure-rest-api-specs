@@ -68,7 +68,7 @@
     "/translations/{id}": {
       "get": {
         "tags": [
-          "Translations"
+          "Translation"
         ],
         "description": "Gets the translation identified by the given ID.",
         "operationId": "Translations_Get",
@@ -77,7 +77,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/PathUuid"
+            "$ref": "#/parameters/PathResourceId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -120,14 +120,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/PathTranslationId"
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
-            "in": "query",
-            "name": "forceDelete",
-            "type": "boolean",
-            "description": "Set this to true if you want to delete a full translation with content editing translations. Otherwise, the delete operation will fail.",
-            "default": false
+            "$ref": "#/parameters/PathResourceId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -140,6 +136,11 @@
               "Operation-Id": {
                 "type": "string",
                 "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
               },
               "retry-after": {
                 "description": "Indicate the minimum number of seconds the client should wait before polling (GETing) the status monitor URL again for an update.",
@@ -162,7 +163,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a project": {
+          "Delete a translation": {
             "$ref": "./examples/delete_translation.json"
           }
         }
@@ -181,7 +182,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/PathTranslationId"
+            "$ref": "#/parameters/PathResourceId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -203,6 +204,20 @@
               "$ref": "#/definitions/Translation"
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              },
+              "retry-after": {
+                "description": "Indicate the minimum number of seconds the client should wait before polling (GETing) the status monitor URL again for an update.",
+                "type": "string",
+                "format": "uri"
+              }
             }
           },
           "default": {
@@ -225,26 +240,230 @@
         }
       }
     },
-    "/operations/{id}": {
-      "get": {
+    "/translations/{id}:edit": {
+      "post": {
         "tags": [
-          "Operations"
+          "ContentEditing"
         ],
-        "description": "Gets operation info.",
-        "operationId": "Operations_Get",
+        "description": "Creates a new content editing.",
+        "operationId": "ContentEditing_Create",
+        "translation": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
+            "$ref": "#/parameters/PathResourceId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "translation",
+            "description": "translation definition",
             "required": true,
-            "description": "The ID of the operation",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-            "minLength": 3,
-            "maxLength": 64
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              },
+              "retry-after": {
+                "description": "Indicate the minimum number of seconds the client should wait before polling (GETing) the status monitor URL again for an update.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a project": {
+            "$ref": "./examples/create_content_editing.json"
+          }
+        }
+      }
+    },
+    "/translations/{id}/edit-operations": {
+      "get": {
+        "tags": [
+          "EditOperations"
+        ],
+        "description": "Gets edit operations list info.",
+        "operationId": "EditOperations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathResourceId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedTranslations"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_edit_operations.json"
+          }
+        }
+      }
+    },
+    "/translations/{id}/edit-operations/{operation-id}": {
+      "get": {
+        "tags": [
+          "EditOperation"
+        ],
+        "description": "Gets edit operation info.",
+        "operationId": "EditOperations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathResourceId"
+          },
+          {
+            "$ref": "#/parameters/PathOperationId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_edit_operation.json"
+          }
+        }
+      }
+    },
+    "/translate-operations/{operation-id}": {
+      "get": {
+        "tags": [
+          "TranslateOperations"
+        ],
+        "description": "Gets translate operation info.",
+        "operationId": "TranslateOperations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathOperationId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_translate_operation.json"
+          }
+        }
+      }
+    },
+    "/delete-operations/{operation-id}": {
+      "get": {
+        "tags": [
+          "DeleteOperations"
+        ],
+        "description": "Gets delete operation info.",
+        "operationId": "DeleteOperations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathOperationId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -272,7 +491,7 @@
         },
         "x-ms-examples": {
           "Get Operation": {
-            "$ref": "./examples/get_operation.json"
+            "$ref": "./examples/get_delete_operation.json"
           }
         }
       }
@@ -280,6 +499,13 @@
   },
   "definitions": {
     "OperationId": {
+      "description": "Resource id",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "ResourceId": {
       "description": "Resource id",
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
@@ -346,19 +572,67 @@
         }
       }
     },
-    "Translation": {
-      "description": "Translation",
+    "WebvttFile": {
+      "description": "Translation webvtt file input.",
       "required": [
-        "locale",
-        "projectId"
+        "webvttFileUrl",
+        "webvttFileFormat"
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "Translation webvtt file url",
+          "type": "string",
+          "format": "uri"
+        },
+        "format": {
+          "$ref": "#/definitions/TranslationCreationWebvttFileFormat"
+        }
+      }
+    },
+    "TranslationResult": {
+      "description": "Translation result.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "translatedVideoFileUrl": {
+          "description": "Translated video file URL.",
+          "format": "uri",
+          "type": "string"
+        },
+        "sourceLocaleSubtitleWebvttFileUrl": {
+          "description": "Output source locale subtitle webvtt file.",
+          "type": "string",
+          "format": "uri"
+        },
+        "targetLocaleSubtitleWebvttFileUrl": {
+          "description": "Output target locale subtitle webvtt file.",
+          "type": "string",
+          "format": "uri"
+        },
+        "metadataJsonWebvttFileUrl": {
+          "description": "Output metadata json webvtt file.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "Translation": {
+      "description": "Translation response.",
+      "required": [
+        "id",
+        "sourceLocale",
+        "targetLocale",
+        "voiceKind"
       ],
       "type": "object",
       "properties": {
         "id": {
-          "description": "Translation ID",
-          "type": "string",
-          "format": "uuid"
-        },        
+          "$ref": "#/definitions/ResourceId",
+          "readOnly": true
+        },
         "description": {
           "description": "Translation description",
           "type": "string"
@@ -370,7 +644,8 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/Status"
+          "$ref": "#/definitions/Status",
+          "readOnly": true
         },
         "lastActionDateTime": {
           "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
@@ -378,43 +653,35 @@
           "type": "string",
           "readOnly": true
         },
-        "fullTranslationId": {
-          "description": "Optional full translation ID for content editing, if not provided, then bill with full translation, the specified translation must be full translation.",
-          "type": "string",
-          "format": "uuid"
-        },
         "videoFileUrl": {
           "description": "Translation video file url",
           "type": "string",
           "format": "uri"
         },
-        "webvttFileUrl": {
-          "description": "Translation webvtt file url",
-          "type": "string",
-          "format": "uri"
+        "webvttFile": {
+          "$ref": "#/definitions/webvttFile"
         },
-        "webvttFileFormat": {
-          "$ref": "#/definitions/TranslationCreationWebvttFileFormat"
-        },
-        "translatedVideoFileUrl": {
-          "description": "Output translated video file url",
+        "sourceVideoFileUrl": {
+          "description": "Original video file url",
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "readOnly": true
         },
-        "sourceLocaleSubtitleWebvttFileUrl": {
-          "description": "Output source locale subtitle file url",
-          "type": "string",
-          "format": "uri"
+        "initialInputWebvttFile": {
+          "$ref": "#/definitions/WebvttFile",
+          "readOnly": true
         },
-        "targetLocaleSubtitleWebvttFileUrl": {
-          "description": "Output target locale subtitle file url",
-          "type": "string",
-          "format": "uri"
+        "initialTranslationResult": {
+          "$ref": "#/definitions/TranslationResult",
+          "readOnly": true
         },
-        "metadataJsonWebvttFileUrl": {
-          "description": "Output metadata JSON file url",
-          "type": "string",
-          "format": "uri"
+        "latestInputWebvttFile": {
+          "$ref": "#/definitions/WebvttFile",
+          "readOnly": true
+        },
+        "latestTranslationResult": {
+          "$ref": "#/definitions/TranslationResult",
+          "readOnly": true
         },
         "sourceLocale": {
           "description": "The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
@@ -446,11 +713,11 @@
       "required": [
         "error"
       ],
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error"
-        }
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/Error"
+          }
       }
     }
   },
@@ -532,14 +799,36 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "PathTranslationId": {
+    "PathResourceId": {
       "name": "id",
       "in": "path",
-      "description": "User provided resource ID, which should be UUID.",
+      "description": "The ID of the resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "PathUuid": {
+      "name": "id",
+      "in": "path",
+      "description": "The resource ID, which should be UUID.",
       "required": true,
       "type": "string",
       "format": "uuid",
       "x-ms-parameter-location": "method"
+    },
+    "PathOperationId": {
+      "name": "operation-id",
+      "in": "path",
+      "description": "The operation ID, which should be UUID.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 64
     },
     "HeaderOperationId": {
       "name": "Operation-Id",

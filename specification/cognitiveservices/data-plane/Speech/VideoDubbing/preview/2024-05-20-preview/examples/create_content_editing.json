@@ -3,26 +3,26 @@
       "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
       "Ocp-Apim-Subscription-Key": "{API Key}",
       "api-version": "2024-05-20-preview",
-      "id": "124be2f6-98ef-4eec-abd3-c57e276749dc",
-      "Operation-Id": "3de6ec25-e955-4584-a4c8-4832d0fbee1d",
+      "id": "TranslateMyZhCNVideo",
+      "Operation-Id": "TranslateMyZhCNVideo-ContentEditing-1",
       "translation": {
-        "fullTranslationId": "070f7986-ef17-41d0-ba2b-907f0f28e314",
-        "description": "Translate video from en-US to zh-CN content editing.",
+        "description": "Fix segment duration issue and update subtitle max char.",
         "webvttFileUrl": "https://mystorage.blob.core.windows.net/container1/edit.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
         "webvttFileFormat": "MetadataJson",
-        "subtitleMaxCharCountPerSegment": 80
+        "speakerCount": 3,
+        "subtitleMaxCharCountPerSegment": 60
       },
       "Content-Type": "application/json"
     },
     "responses": {
       "201": {
         "headers": {
-          "Operation-Location": "https://eastus.api.cognitive.microsoft.com/videotranslation/operations/3de6ec25-e955-4584-a4c8-4832d0fbee1d?api-version=2024-02-01-preview",
-          "Operation-Id": "3de6ec25-e955-4584-a4c8-4832d0fbee1d"
+          "Operation-Location": "https://eastus.api.cognitive.microsoft.com/videotranslation/edit-operations/TranslateMyZhCNVideo-ContentEditing-1?api-version=2024-02-01-preview",
+          "Operation-Id": "TranslateMyZhCNVideo-ContentEditing-1"
         },
         "body": {
-          "id": "124be2f6-98ef-4eec-abd3-c57e276749dc",
-          "description": "Translate video from en-US to zh-CN content editing.",
+          "id": "TranslateMyZhCNVideo",
+          "description": "Fix segment duration issue and update subtitle max char.",
           "webvttFileFormat": "MetadataJson",
           "sourceLocale": "en-US",
           "targetLocale": "zh-CN",
@@ -31,12 +31,7 @@
           "subtitleMaxCharCountPerSegment": 80,
           "status": "Running",
           "createdDateTime": "2023-04-01T05:30:00.000Z",
-          "lastActionDateTime": "2023-04-02T10:15:30.000Z",
-          "originalVideoFileUrl": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
-          "translatedVideoFileUrl": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
-          "sourceLocaleSubtitleWebvttFileUrl": "https://xxx.blob.core.windows.net/container1/sourceLocale.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
-          "targetLocaleSubtitleWebvttFileUrl": "https://xxx.blob.core.windows.net/container1/targetLocale.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
-          "metadataJsonWebvttFileUrl": "https://xxx.blob.core.windows.net/container1/metadataJsonLocale.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+          "lastActionDateTime": "2023-04-02T10:15:30.000Z"
         }
       }
     }
