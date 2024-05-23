@@ -55,3 +55,19 @@ directive:
   - suppress: AvoidAnonymousTypes
     reason: The spec is auto-generated. Tracking issue to fix is https://github.com/Azure/typespec-azure-pr/issues/3349
 ```
+
+### Release package-2024-10-01
+
+
+These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10-01'
+input-file:
+  - stable/2024-10-01/openapi.json
+```
+
+```yaml
+directive:
+  - suppress: AvoidAnonymousTypes
+    reason: The spec is auto-generated. Tracking issue to fix is https://github.com/Azure/typespec-azure-pr/issues/3349
+```
