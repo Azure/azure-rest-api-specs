@@ -106,26 +106,25 @@ namespace Customizations{
 
 }
 
-
-// Python specific customizations
-@@access(publishCloudEvent, Access.internal, "python");
-@@access(publishCloudEvents, Access.internal, "python");
-@@access(receiveCloudEvents, Access.internal, "python");
-
-@@access(acknowledgeCloudEvents, Access.internal, "python");
-@@access(releaseCloudEvents, Access.internal, "python");
-@@access(rejectCloudEvents, Access.internal, "python");
-@@access(renewCloudEventLocks, Access.internal, "python");
-
-@@access(AcknowledgeResult, Access.public, "python");
-@@access(ReleaseResult, Access.public, "python");
-@@access(RejectResult, Access.public, "python");
-@@access(RenewCloudEventLocksResult, Access.public, "python");
-@@access(ReleaseDelay, Access.public, "python");
-@@access(FailedLockToken, Access.public, "python");
-
-
 // All Language customizations
+@@access(publishCloudEvent, Access.internal);
+@@access(publishCloudEvents, Access.internal);
+@@access(receiveCloudEvents, Access.internal);
+
+@@access(acknowledgeCloudEvents, Access.internal);
+@@access(releaseCloudEvents, Access.internal);
+@@access(rejectCloudEvents, Access.internal);
+@@access(renewCloudEventLocks, Access.internal);
+
+@@access(AcknowledgeResult, Access.public);
+@@access(ReleaseResult, Access.public);
+@@access(RejectResult, Access.public);
+@@access(RenewCloudEventLocksResult, Access.public);
+@@access(ReleaseDelay, Access.public);
+@@access(FailedLockToken, Access.public);
+
+
+
 @@clientName(ReleaseDelay.By0Seconds, "NoDelay");
 @@clientName(ReleaseDelay.By10Seconds, "TenSeconds");
 @@clientName(ReleaseDelay.By3600Seconds, "OneHour");
