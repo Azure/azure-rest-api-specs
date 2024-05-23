@@ -12,6 +12,8 @@ namespace: azure.mgmt.billing
 package-name: azure-mgmt-billing
 package-version: 0.3.0
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 ``` yaml $(python)
 no-namespace-folders: true
