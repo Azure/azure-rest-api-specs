@@ -10,8 +10,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
-using Autorest;
-using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager.Private;
 
 namespace Microsoft.LoadTestService;
@@ -25,7 +23,7 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   @segment("loadTests")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("Resources provisioning states.")
@@ -164,7 +162,7 @@ model CheckQuotaAvailabilityResponse {
 
   @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
   @visibility("read")
-  systemData?: SystemData;
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 
   @doc("The name of the resource.")
   @visibility("read")

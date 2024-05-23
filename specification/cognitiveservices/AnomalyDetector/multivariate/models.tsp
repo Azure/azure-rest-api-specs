@@ -410,5 +410,9 @@ model ResponseError {
   @doc("Error code.")
   msErrorCode?: string;
 
-  ...ErrorResponse;
+  @doc("Error code.")
+  code: string;
+
+  @doc("Message that explains the error that the service reported.")
+  message: string;
 }
