@@ -6146,7 +6146,7 @@
       "description": "Azure OpenAI Content Filters properties.",
       "type": "object",
       "properties": {
-        "policyType": {
+        "type": {
           "type": "string",
           "enum": [
             "UserManaged",
@@ -6164,37 +6164,18 @@
           "enum": [
             "Default",
             "Deferred",
-            "Blocking"
+            "Blocking",
+            "Asynchronous_filter"
           ],
           "x-ms-enum": {
             "name": "RaiPolicyMode",
             "modelAsString": true
           },
-          "description": "Content Filters mode."
+          "description": "Rai policy mode. The enum value mapping is as below: Default = 0, Deferred=1, Blocking=2, Asynchronous_filter =3. Please use 'Asynchronous_filter' after 2024-06-01-preview. It is the same as 'Deferred' in previous version."
         },
         "basePolicyName": {
           "type": "string",
-          "description": "Name of the base Content Filters."
-        },
-        "promptBlocklists": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RaiBlocklistConfig"
-          },
-          "x-ms-identifiers": [
-            "blocklistName"
-          ],
-          "description": "The list of blocklists for prompt."
-        },
-        "completionBlocklists": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RaiBlocklistConfig"
-          },
-          "x-ms-identifiers": [
-            "blocklistName"
-          ],
-          "description": "The list of blocklists for completion."
+          "description": "Name of Rai policy."
         },
         "contentFilters": {
           "type": "array",
@@ -6205,8 +6186,32 @@
             "name"
           ],
           "description": "The list of Content Filters."
+        },
+        "customBlocklists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomBlocklistConfig"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of custom Blocklist."
         }
       }
+    },
+    "CustomBlocklistConfig": {
+      "description": "Gets or sets the source to which filter applies.",
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/RaiPolicyContentSource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RaiBlocklistConfig"
+        }
+      ]
     },
     "RaiPolicyContentSource": {
       "description": "Content source to apply the Content Filters.",
@@ -6232,7 +6237,7 @@
           "type": "boolean",
           "description": "If the ContentFilter is enabled."
         },
-        "allowedContentLevel": {
+        "severityThreshold": {
           "description": "Level at which content is filtered.",
           "type": "string",
           "enum": [
@@ -6241,7 +6246,7 @@
             "High"
           ],
           "x-ms-enum": {
-            "name": "allowedContentLevel",
+            "name": "ContentLevel",
             "modelAsString": true
           }
         },
@@ -6292,25 +6297,16 @@
       "description": "Azure OpenAI Content Filter.",
       "type": "object",
       "properties": {
-        "policyName": {
+        "name": {
           "type": "string",
           "description": "Name of Content Filter."
         },
-        "description": {
-          "type": "string",
-          "description": "Description of Content Filter."
+        "IsMultiLevelFilter": {
+          "type": "boolean",
+          "description": "If Content Filter is mutilevel."
         },
-        "filterType": {
-          "type": "string",
-          "description": "Content Filter type.",
-          "enum": [
-            "MultiLevel",
-            "Switch"
-          ],
-          "x-ms-enum": {
-            "name": "RaiContentFilterType",
-            "modelAsString": true
-          }
+        "source": {
+          "$ref": "#/definitions/RaiPolicyContentSource"
         }
       }
     },
@@ -6789,4 +6785,3 @@
     }
   }
 }
-
