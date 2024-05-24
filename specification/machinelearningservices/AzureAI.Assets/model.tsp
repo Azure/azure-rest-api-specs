@@ -22,7 +22,7 @@ model AssetVersion {
   id: string;
 
   @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
-  stage: string = "Development";
+  stage?: string = "Development";
 
   @doc("Description information of the asset.")
   description?: string;
