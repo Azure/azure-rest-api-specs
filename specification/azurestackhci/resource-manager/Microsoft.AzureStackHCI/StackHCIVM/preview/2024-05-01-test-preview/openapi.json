@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureStackHCI",
-    "version": "2024-05-01-test-preview",
+    "version": "2024-02-01-preview",
     "description": "Azure Stack HCI management service",
     "x-typespec-generated": [
       {
@@ -22,21 +22,20 @@
   ],
   "security": [
     {
-      "AadOauth2Auth": [
+      "azure_auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "AadOauth2Auth": {
+    "azure_auth": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "flow": "accessCode",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
-      },
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "tags": [
@@ -3477,34 +3476,6 @@
     }
   },
   "definitions": {
-    "AADToken": {
-      "type": "object",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        },
-        "defaultScopes": {
-          "type": "array",
-          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows",
-        "defaultScopes"
-      ]
-    },
     "AttestBootIntegrityPropertyEnum": {
       "type": "string",
       "description": "The status of whether the list of boot integrity properties is validated.",
@@ -3561,54 +3532,6 @@
             "name": "Unknown",
             "value": "Unknown",
             "description": "Attestation certificate status is unknown"
-          }
-        ]
-      }
-    },
-    "AttestDiskSecurityEncryptionTypeEnum": {
-      "type": "string",
-      "description": "Defines type of managed disk security encryption type from attestation token.",
-      "enum": [
-        "NonPersistedTPM",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "AttestDiskSecurityEncryptionTypeEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NonPersistedTPM",
-            "value": "NonPersistedTPM",
-            "description": "Disk security encryption type is SEVSNP"
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Disk security encryption type is unknown"
-          }
-        ]
-      }
-    },
-    "AttestHWPlatformEnum": {
-      "type": "string",
-      "description": "Defines type of hardware platform from attestation token.",
-      "enum": [
-        "SEVSNP",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "AttestHWPlatformEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SEVSNP",
-            "value": "SEVSNP",
-            "description": "AttestHWPlatform is SEVSNP"
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "AttestHWPlatform is unknown"
           }
         ]
       }
@@ -3855,16 +3778,6 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual machine instance.",
-          "readOnly": true
-        },
-        "attestHardwarePlatform": {
-          "$ref": "#/definitions/AttestHWPlatformEnum",
-          "description": "The hardware platform information from attestation token. This only applies to Confidential VM.",
-          "readOnly": true
-        },
-        "attestDiskSecurityEncryptionType": {
-          "$ref": "#/definitions/AttestDiskSecurityEncryptionTypeEnum",
-          "description": "The managed disk security encryption type from attestation token. This only applies to Confidential VM.",
           "readOnly": true
         }
       }
@@ -5308,11 +5221,6 @@
           },
           "readOnly": true
         },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the network security group resource.",
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "The provisioning state of the network security group resource.",
@@ -5619,24 +5527,6 @@
             "name"
           ]
         }
-      }
-    },
-    "SecurityEncryptionType": {
-      "type": "string",
-      "description": "Encryption type of the managed disk enum.",
-      "enum": [
-        "NonPersistedTPM"
-      ],
-      "x-ms-enum": {
-        "name": "SecurityEncryptionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NonPersistedTPM",
-            "value": "NonPersistedTPM",
-            "description": "Non-persisted TPM encryption type"
-          }
-        ]
       }
     },
     "SecurityRule": {
@@ -6514,16 +6404,6 @@
         "value"
       ]
     },
-    "VirtualMachineInstanceManagedDiskParameters": {
-      "type": "object",
-      "description": "The parameters of a managed disk.",
-      "properties": {
-        "securityProfile": {
-          "$ref": "#/definitions/VMDiskSecurityProfile",
-          "description": "Specifies the security profile for the managed disk."
-        }
-      }
-    },
     "VirtualMachineInstanceProperties": {
       "type": "object",
       "description": "Properties under the virtual machine instance resource",
@@ -6831,10 +6711,6 @@
         "osType": {
           "$ref": "#/definitions/OperatingSystemTypes",
           "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux."
-        },
-        "managedDisk": {
-          "$ref": "#/definitions/VirtualMachineInstanceManagedDiskParameters",
-          "description": "The managed disk parameters."
         }
       }
     },
