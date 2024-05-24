@@ -156,6 +156,62 @@ namespace Azure.AI.OpenAI.Assistants {
 
   // Ensure some shared types remain public despite interaction with previously internalized details
 
+  // Ensure generator inclusion of streaming "leaf" types not yet referenced by a route
+
+  @@usage(MessageDeltaTextFileCitationAnnotation, Usage.output);
+  @@access(MessageDeltaTextFileCitationAnnotation, Access.public);
+
+  @@usage(MessageDeltaTextFilePathAnnotation, Usage.output);
+  @@access(MessageDeltaTextFilePathAnnotation, Access.public);
+
+  @@usage(MessageDeltaImageFileContent, Usage.output);
+  @@access(MessageDeltaImageFileContent, Access.public);
+
+  @@usage(MessageDeltaTextContent, Usage.output);
+  @@access(MessageDeltaTextContent, Access.public);
+
+  @@usage(RunStepDeltaMessageCreationObject, Usage.output);
+  @@access(RunStepDeltaMessageCreationObject, Access.public);
+
+  @@usage(RunStepDeltaFunction, Usage.output);
+  @@access(RunStepDeltaFunction, Access.public);
+
+  @@usage(RunStepDeltaCodeInterpreterLogOutput, Usage.output);
+  @@access(RunStepDeltaCodeInterpreterLogOutput, Access.public);
+
+  @@usage(RunStepDeltaCodeInterpreterImageOutputObject, Usage.output);
+  @@access(RunStepDeltaCodeInterpreterImageOutputObject, Access.public);
+
+  @@usage(RunStepDeltaChunk, Usage.output);
+  @@access(RunStepDeltaChunk, Access.public);
+
+  @@usage(MessageDeltaChunk, Usage.output);
+  @@access(MessageDeltaChunk, Access.public);
+
+  // Stream events : made public to expose documentation and make class casting for strongly typed languages easier
+
+  @@usage(AssistantStreamEvent, Usage.output);
+  @@access(AssistantStreamEvent, Access.public);
+
+  @@usage(ThreadStreamEvent, Usage.output);
+  @@access(ThreadStreamEvent, Access.public);
+
+  @@usage(RunStreamEvent, Usage.output);
+  @@access(RunStreamEvent, Access.public);
+
+  @@usage(RunStepStreamEvent, Usage.output);
+  @@access(RunStepStreamEvent, Access.public);
+
+  @@usage(MessageStreamEvent, Usage.output);
+  @@access(MessageStreamEvent, Access.public);
+
+  @@usage(ErrorEvent, Usage.output);
+  @@access(ErrorEvent, Access.public);
+
+  @@usage(DoneEvent, Usage.output);
+  @@access(DoneEvent, Access.public);
+
+  // Ensure some shared types remain public despite interaction with previously internalized details
   @@access(MessageTextFilePathAnnotation, Access.public);
   @@access(MessageTextFileCitationAnnotation, Access.public);
   @@access(ListSortOrder, Access.public);
