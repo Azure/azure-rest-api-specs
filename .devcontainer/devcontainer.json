@@ -1,7 +1,6 @@
 {
   "name": "TypeSpec Dev Container",
   "postCreateCommand": "npm ci",
-  "remoteUser": "root",
   "remoteEnv": { 
     "PATH": "${containerEnv:PATH}:${containerWorkspaceFolder}/node_modules/.bin" 
   },
@@ -10,8 +9,10 @@
     "vscode": {
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
+        "EditorConfig.EditorConfig",
         "esbenp.prettier-vscode",
-        "typespec.typespec-vscode"
+        "typespec.typespec-vscode",
+        "docsmsft.docs-authoring-pack"
       ]
     }
   }
