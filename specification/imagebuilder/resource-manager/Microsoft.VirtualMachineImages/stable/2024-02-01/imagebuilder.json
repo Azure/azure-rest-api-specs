@@ -1177,6 +1177,9 @@
         },
         "artifactTags": {
           "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "Tags that will be applied to the artifact once it has been created/updated by the distributor."
         }
       },
@@ -1653,7 +1656,10 @@
           "description": "Indicates whether or not to automatically run the image template build on template creation or update."
         },
         "managedResourceTags": {
-          "type": "string",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
           "x-ms-mutability": [
             "read",
             "create",
