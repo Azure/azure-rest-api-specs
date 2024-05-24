@@ -5,20 +5,18 @@
     "resourceGroupName": "rg1",
     "bastionHostName": "bastionhosttenant",
     "sku": {
-      "name": "Standard"
+      "name": "Premium"
     },
     "zones": [],
     "parameters": {
       "properties": {
+        "enablePrivateOnlyBastion": true,
         "ipConfigurations": [
           {
             "name": "bastionHostIpConfiguration",
             "properties": {
               "subnet": {
                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/BastionHostSubnet"
-              },
-              "publicIPAddress": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
               }
             }
           }
@@ -29,13 +27,13 @@
   "responses": {
     "200": {
       "body": {
-        "name": "bastionhost",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant'",
+        "name": "bastionhosttenant",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant",
         "type": "Microsoft.Network/bastionHosts",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "location": "West US",
         "sku": {
-          "name": "Standard"
+          "name": "Premium"
         },
         "properties": {
           "provisioningState": "Succeeded",
@@ -47,7 +45,7 @@
           "enableShareableLink": false,
           "enableKerberos": false,
           "enableSessionRecording": false,
-          "enablePrivateOnlyBastion": false,
+          "enablePrivateOnlyBastion": true,
           "ipConfigurations": [
             {
               "name": "bastionHostIpConfiguration",
@@ -59,9 +57,6 @@
                 "privateIPAllocationMethod": "Dynamic",
                 "subnet": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/BastionHostSubnet"
-                },
-                "publicIPAddress": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
                 }
               }
             }
@@ -77,7 +72,7 @@
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "location": "West US",
         "sku": {
-          "name": "Standard"
+          "name": "Premium"
         },
         "properties": {
           "provisioningState": "Succeeded",
@@ -89,7 +84,7 @@
           "enableShareableLink": false,
           "enableKerberos": false,
           "enableSessionRecording": false,
-          "enablePrivateOnlyBastion": false,
+          "enablePrivateOnlyBastion": true,
           "ipConfigurations": [
             {
               "name": "bastionHostIpConfiguration",
@@ -101,9 +96,6 @@
                 "privateIPAllocationMethod": "Dynamic",
                 "subnet": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/BastionHostSubnet"
-                },
-                "publicIPAddress": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
                 }
               }
             }
