@@ -28,7 +28,6 @@ model PrivateEndpointConnection
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("PrivateEndpointConnection Properties")
 model PrivateEndpointConnectionProperties {
   @doc("Private Endpoint")
@@ -58,7 +57,7 @@ model PrivateLinkServiceConnection {
 @doc("Private Endpoint")
 model PrivateEndpoint {
   @doc("Resource Id")
-  id: string;
+  id: armResourceIdentifier;
 }
 
 @doc("Private Link Service Connection State")

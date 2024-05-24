@@ -44,12 +44,16 @@ model PrivateLinkServiceForFabricProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@doc("Operation Identifier Parameter")
-model OperationIdentifierParameter {
-  @doc("Operation Id")
-  @segment("operationResults")
+@doc("Operation Id Parameter")
+model OperationIdParameter {
+  @doc("The ID of an ongoing async operation.")
   @path
-  operationIdentifier: string;
+  @minLength(1)
+  @segment("operationResults")
+  @Azure.ResourceManager.Private.armCommonParameter("OperationIdParameter", Azure.ResourceManager.CommonTypes.Versions.v3)
+  @Azure.ResourceManager.Private.armCommonParameter("OperationIdParameter", Azure.ResourceManager.CommonTypes.Versions.v4)
+  @Azure.ResourceManager.Private.armCommonParameter("OperationIdParameter", Azure.ResourceManager.CommonTypes.Versions.v5)
+  operationId: string;
 }
 
 @doc("Arm Operation Status")
@@ -62,11 +66,11 @@ model ArmOperationStatus {
   @visibility("read")
   name?: string;
 
-  @doc("Operation Start Time")
+  @doc("Operation Start Time in UTC and ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ")
   @visibility("read")
   startTime?: utcDateTime;
 
-  @doc("Operation End Time")
+  @doc("Operation End Time in UTC and ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ")
   @visibility("read")
   endTime?: utcDateTime;
 
@@ -80,6 +84,22 @@ model ArmOperationStatus {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@armResourceOperations
+interface OperationResult {
+  @doc("Get result of an async operation.")
+  op GetOperationResult<
+    Resource extends {},
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
+    Parameters extends {} = OperationIdParameter,
+    Response extends {} = ArmOperationStatus,
+    Error extends {} = ErrorResponse
+  > is Azure.ResourceManager.Foundations.ArmReadOperation<
+    ResourceInstanceParameters<Resource, BaseParameters> & Parameters,
+    Response,
+    Error
+  >;
+}
 
 @armResourceOperations
 interface PrivateLinkServicesForFabric {
@@ -96,9 +116,5 @@ interface PrivateLinkServicesForFabric {
   @doc("update private link service for fabric tags")
   updateTags is ArmTagsPatchSync<PrivateLinkServiceForFabric>;
   @doc("Get private link service for Fabric operation result")
-  getOperationResult is ArmResourceRead<
-    PrivateLinkServiceForFabric,
-    Parameters = OperationIdentifierParameter,
-    Response = ArmOperationStatus
-  >;
+  getOperationResult is OperationResult.GetOperationResult<PrivateLinkServiceForFabric>;
 }

@@ -376,7 +376,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric/privateLinkServicesForFabric/{privateLinkServiceName}/operationResults/{operationIdentifier}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric/privateLinkServicesForFabric/{privateLinkServiceName}/operationResults/{operationId}": {
       "get": {
         "operationId": "PrivateLinkServicesForFabric_GetOperationResult",
         "tags": [
@@ -402,7 +402,7 @@
             "pattern": "^(?:[a-zA-Z0-9]+-?){3,80}$"
           },
           {
-            "$ref": "#/parameters/OperationIdentifierParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
@@ -786,13 +786,13 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Operation Start Time",
+          "description": "Operation Start Time in UTC and ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Operation End Time",
+          "description": "Operation End Time in UTC and ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ",
           "readOnly": true
         },
         "status": {
@@ -901,12 +901,27 @@
         ]
       }
     },
+    "OperationIdParameter": {
+      "type": "object",
+      "description": "Operation Id Parameter",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The ID of an ongoing async operation.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
     "PrivateEndpoint": {
       "type": "object",
       "description": "Private Endpoint",
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "Resource Id"
         }
       },
@@ -1187,14 +1202,5 @@
       }
     }
   },
-  "parameters": {
-    "OperationIdentifierParameter": {
-      "name": "operationIdentifier",
-      "in": "path",
-      "description": "Operation Id",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
