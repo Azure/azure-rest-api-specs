@@ -1,17 +1,9 @@
 {
   "name": "TypeSpec Dev Container",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "npm ci",
   "remoteUser": "root",
   "remoteEnv": { 
     "PATH": "${containerEnv:PATH}:${containerWorkspaceFolder}/node_modules/.bin" 
-  },
-  "features": {
-    "ghcr.io/devcontainers/features/powershell:1": {
-      "version": "latest"
-    }
   },
   "customizations": {
     // Configure properties specific to VS Code.
