@@ -13,30 +13,31 @@ namespace KeyVault;
 
 alias KeyVaultOperations = StandardResourceOperations;
 
+alias KeyVaultListParameters = ListQueryParametersTrait<{
+  /**
+   * Maximum number of results to return in a page. If not specified the service
+   * will return up to 25 results.
+   */
+  @maxValue(25)
+  @minValue(1)
+  @query("maxresults")
+  maxresults?: int32;
+
+  /**
+   * Specifies whether to include certificates which are not completely provisioned.
+   */
+  @query("includePending")
+  includePending?: boolean;
+}>;
+
 /**
  * The GetCertificates operation returns the set of certificates resources in the
  * specified key vault. This operation requires the certificates/list permission.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.NonPagedResourceList is necessary for Key Vault"
 @summary("List certificates in a specified key vault")
-op getCertificates is Azure.Core.Foundations.NonPagedResourceList<
+op getCertificates is KeyVaultOperations.ResourceList<
   CertificateItem,
-  ListQueryParametersTrait<{
-    /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
-     */
-    @maxValue(25)
-    @minValue(1)
-    @query("maxresults")
-    maxresults?: int32;
-
-    /**
-     * Specifies whether to include certificates which are not completely provisioned.
-     */
-    @query("includePending")
-    includePending?: boolean;
-  }>
+  KeyVaultListParameters
 >;
 
 /**
@@ -55,7 +56,7 @@ op deleteCertificate is Azure.Core.Foundations.Operation<
      */
     @path certificateName: string;
   },
-  CertificateItem
+  DeletedCertificateBundle
 >;
 
 /**
@@ -100,9 +101,8 @@ op deleteCertificateContacts is Azure.Core.Foundations.Operation<{}, Contacts>;
  * resources in the specified key vault. This operation requires the
  * certificates/manageissuers/getissuers permission.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.NonPagedResourceList is necessary for Key Vault"
 @summary("List certificate issuers for a specified key vault.")
-op getCertificateIssuers is Azure.Core.Foundations.NonPagedResourceList<
+op getCertificateIssuers is KeyVaultOperations.ResourceList<
   CertificateIssuerItem,
   ListQueryParametersTrait<{
     /**
@@ -152,6 +152,7 @@ op setCertificateIssuer is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified certificate issuer.")
 @route("/certificates/issuers/{issuerName}")
+@patch
 op updateCertificateIssuer is Azure.Core.Foundations.Operation<
   {
     /**
@@ -537,12 +538,14 @@ op restoreCertificate is Azure.Core.Foundations.Operation<
  * certificates/get/list permission. This operation can only be enabled on
  * soft-delete enabled vaults.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.NonPagedResourceList is necessary for Key Vault"
 @summary("""
 Lists the deleted certificates in the specified vault currently available for
 recovery.
 """)
-op getDeletedCertificates is Azure.Core.Foundations.NonPagedResourceList<DeletedCertificateItem>;
+op getDeletedCertificates is KeyVaultOperations.ResourceList<
+  DeletedCertificateItem,
+  KeyVaultListParameters
+>;
 
 /**
  * The GetDeletedCertificate operation retrieves the deleted certificate
