@@ -50,9 +50,18 @@ model OperationIdParameter {
   @path
   @minLength(1)
   @segment("operationResults")
-  @Azure.ResourceManager.Private.armCommonParameter("OperationIdParameter", Azure.ResourceManager.CommonTypes.Versions.v3)
-  @Azure.ResourceManager.Private.armCommonParameter("OperationIdParameter", Azure.ResourceManager.CommonTypes.Versions.v4)
-  @Azure.ResourceManager.Private.armCommonParameter("OperationIdParameter", Azure.ResourceManager.CommonTypes.Versions.v5)
+  @Azure.ResourceManager.Private.armCommonParameter(
+    "OperationIdParameter",
+    Azure.ResourceManager.CommonTypes.Versions.v3
+  )
+  @Azure.ResourceManager.Private.armCommonParameter(
+    "OperationIdParameter",
+    Azure.ResourceManager.CommonTypes.Versions.v4
+  )
+  @Azure.ResourceManager.Private.armCommonParameter(
+    "OperationIdParameter",
+    Azure.ResourceManager.CommonTypes.Versions.v5
+  )
   operationId: string;
 }
 
@@ -88,7 +97,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface OperationResult {
   @doc("Get result of an async operation.")
-  op GetOperationResult<
+  GetOperationResult<
     Resource extends {},
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
     Parameters extends {} = OperationIdParameter,
