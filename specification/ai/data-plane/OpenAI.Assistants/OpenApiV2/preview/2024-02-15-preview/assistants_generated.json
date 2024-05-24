@@ -1623,12 +1623,17 @@
               "properties": {
                 "tool_outputs": {
                   "type": "array",
-                  "description": "The list of tool outputs requested by tool calls from the specified run.",
+                  "description": "A list of tools for which the outputs are being submitted.",
                   "items": {
                     "$ref": "#/definitions/ToolOutput"
                   },
                   "x-ms-client-name": "toolOutputs",
                   "x-ms-identifiers": []
+                },
+                "stream": {
+                  "type": "boolean",
+                  "description": "If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.",
+                  "x-nullable": true
                 }
               },
               "required": [
@@ -1988,23 +1993,30 @@
         },
         "thread": {
           "$ref": "#/definitions/AssistantThreadCreationOptions",
-          "description": "The details used to create the new thread."
+          "description": "The details used to create the new thread. If no thread is provided, an empty one will be created."
         },
         "model": {
           "type": "string",
-          "description": "The overridden model that the assistant should use to run the thread."
+          "description": "The overridden model that the assistant should use to run the thread.",
+          "x-nullable": true
         },
         "instructions": {
           "type": "string",
-          "description": "The overridden system instructions the assistant should use to run the thread."
+          "description": "The overridden system instructions the assistant should use to run the thread.",
+          "x-nullable": true
         },
         "tools": {
           "type": "array",
           "description": "The overridden list of enabled tools the assistant should use to run the thread.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
           },
           "x-ms-identifiers": []
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "If `true`, returns a stream of events that happen during the Run as server-sent events,\nterminating when the Run enters a terminal state with a `data: [DONE]` message."
         },
         "metadata": {
           "type": "object",
@@ -2052,6 +2064,10 @@
             "$ref": "#/definitions/ToolDefinition"
           },
           "x-ms-identifiers": []
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "If `true`, returns a stream of events that happen during the Run as server-sent events,\nterminating when the Run enters a terminal state with a `data: [DONE]` message."
         },
         "metadata": {
           "type": "object",
@@ -2198,6 +2214,30 @@
       ],
       "x-ms-discriminator-value": "function"
     },
+    "IncompleteRunDetails": {
+      "type": "string",
+      "description": "The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.",
+      "enum": [
+        "max_completion_tokens",
+        "max_prompt_tokens"
+      ],
+      "x-ms-enum": {
+        "name": "IncompleteRunDetails",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "maxCompletionTokens",
+            "value": "max_completion_tokens",
+            "description": "Maximum completion tokens exceeded"
+          },
+          {
+            "name": "maxPromptTokens",
+            "value": "max_prompt_tokens",
+            "description": "Maximum prompt tokens exceeded"
+          }
+        ]
+      }
+    },
     "MessageContent": {
       "type": "object",
       "description": "An abstract representation of a single item of thread message content.",
@@ -2283,6 +2323,48 @@
         "file_id"
       ]
     },
+    "MessageIncompleteDetailsReason": {
+      "type": "string",
+      "description": "A set of reasons describing why a message is marked as incomplete.",
+      "enum": [
+        "content_filter",
+        "max_tokens",
+        "run_cancelled",
+        "run_failed",
+        "run_expired"
+      ],
+      "x-ms-enum": {
+        "name": "MessageIncompleteDetailsReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "contentFilter",
+            "value": "content_filter",
+            "description": "The run generating the message was terminated due to content filter flagging."
+          },
+          {
+            "name": "maxTokens",
+            "value": "max_tokens",
+            "description": "The run generating the message exhausted available tokens before completion."
+          },
+          {
+            "name": "runCancelled",
+            "value": "run_cancelled",
+            "description": "The run generating the message was cancelled before completion."
+          },
+          {
+            "name": "runFailed",
+            "value": "run_failed",
+            "description": "The run generating the message failed."
+          },
+          {
+            "name": "runExpired",
+            "value": "run_expired",
+            "description": "The run generating the message expired."
+          }
+        ]
+      }
+    },
     "MessageRole": {
       "type": "string",
       "description": "The possible values for roles attributed to messages in a thread.",
@@ -2307,6 +2389,36 @@
         ]
       }
     },
+    "MessageStatus": {
+      "type": "string",
+      "description": "The possible execution status values for a thread message.",
+      "enum": [
+        "in_progress",
+        "incomplete",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "MessageStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inProgress",
+            "value": "in_progress",
+            "description": "A run is currently creating this message."
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete",
+            "description": "This message is incomplete. See incomplete_details for more information."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "This message was successfully completed by a run."
+          }
+        ]
+      }
+    },
     "MessageTextAnnotation": {
       "type": "object",
       "description": "An abstract representation of an annotation to text thread message content.",
@@ -2318,26 +2430,12 @@
         "text": {
           "type": "string",
           "description": "The textual content associated with this text annotation item."
-        },
-        "start_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The first text index associated with this text annotation.",
-          "x-ms-client-name": "startIndex"
-        },
-        "end_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The last text index associated with this text annotation.",
-          "x-ms-client-name": "endIndex"
         }
       },
       "discriminator": "type",
       "required": [
         "type",
-        "text",
-        "start_index",
-        "end_index"
+        "text"
       ]
     },
     "MessageTextContent": {
@@ -2389,6 +2487,18 @@
           "$ref": "#/definitions/MessageTextFileCitationDetails",
           "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"retrieval\" tool to search files.",
           "x-ms-client-name": "fileCitation"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
         }
       },
       "required": [
@@ -2428,6 +2538,18 @@
           "$ref": "#/definitions/MessageTextFilePathDetails",
           "description": "A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.",
           "x-ms-client-name": "filePath"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
         }
       },
       "required": [
@@ -2580,6 +2702,35 @@
         }
       ],
       "x-ms-discriminator-value": "retrieval"
+    },
+    "RunCompletionUsage": {
+      "type": "object",
+      "description": "Usage statistics related to the run.",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of completion tokens used over the course of the run.",
+          "x-ms-client-name": "completionTokens"
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of prompt tokens used over the course of the run.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of tokens used (prompt + completion).",
+          "x-ms-client-name": "totalTokens"
+        }
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
+      ]
     },
     "RunError": {
       "type": "object",
@@ -2750,6 +2901,16 @@
           "x-nullable": true,
           "x-ms-client-name": "failedAt"
         },
+        "usage": {
+          "type": "object",
+          "description": "Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunStepCompletionUsage"
+            }
+          ]
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -2883,6 +3044,35 @@
       "discriminator": "type",
       "required": [
         "type"
+      ]
+    },
+    "RunStepCompletionUsage": {
+      "type": "object",
+      "description": "Usage statistics related to the run step.",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of completion tokens used over the course of the run step.",
+          "x-ms-client-name": "completionTokens"
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of prompt tokens used over the course of the run step.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of tokens used (prompt + completion).",
+          "x-ms-client-name": "totalTokens"
+        }
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
       ]
     },
     "RunStepDetails": {
@@ -3278,6 +3468,30 @@
           "description": "The ID of the thread that this message belongs to.",
           "x-ms-client-name": "threadId"
         },
+        "status": {
+          "$ref": "#/definitions/MessageStatus",
+          "description": "The status of the message."
+        },
+        "incomplete_details": {
+          "$ref": "#/definitions/MessageIncompleteDetailsReason",
+          "description": "On an incomplete message, details about why the message is incomplete.",
+          "x-nullable": true,
+          "x-ms-client-name": "incompleteDetails"
+        },
+        "completed_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the message was completed.",
+          "x-nullable": true,
+          "x-ms-client-name": "completedAt"
+        },
+        "incomplete_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the message was marked as incomplete.",
+          "x-nullable": true,
+          "x-ms-client-name": "incompleteAt"
+        },
         "role": {
           "$ref": "#/definitions/MessageRole",
           "description": "The role associated with the assistant thread message."
@@ -3322,6 +3536,10 @@
         "object",
         "created_at",
         "thread_id",
+        "status",
+        "incomplete_details",
+        "completed_at",
+        "incomplete_at",
         "role",
         "content",
         "file_ids",
@@ -3449,6 +3667,22 @@
           "x-nullable": true,
           "x-ms-client-name": "failedAt"
         },
+        "incomplete_details": {
+          "$ref": "#/definitions/IncompleteRunDetails",
+          "description": "Details on why the run is incomplete. Will be `null` if the run is not incomplete.",
+          "x-nullable": true,
+          "x-ms-client-name": "incompleteDetails"
+        },
+        "usage": {
+          "type": "object",
+          "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunCompletionUsage"
+            }
+          ]
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -3475,6 +3709,8 @@
         "completed_at",
         "cancelled_at",
         "failed_at",
+        "incomplete_details",
+        "usage",
         "metadata"
       ]
     },
