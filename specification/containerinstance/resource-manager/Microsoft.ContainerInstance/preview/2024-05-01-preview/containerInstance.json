@@ -968,7 +968,8 @@
         "keyValuePairs": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "description": "The list of key value pairs associated with the config map of the container."
           },
           "description": "The key value pairs dictionary in the config map."
         }
@@ -1592,7 +1593,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Th container group profile reference id."
+          "description": "The container group profile reference id.This will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}'."
         },
         "revision": {
           "type": "integer",
@@ -1607,7 +1608,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The standby pool profile reference id."
+          "description": "The standby pool profile reference id.This will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyPoolName}'."
         },
         "failContainerGroupCreateOnReuseFailure": {
           "type": "boolean",
