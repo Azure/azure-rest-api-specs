@@ -532,9 +532,6 @@
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
-            "$ref": "#/parameters/Accept-Language"
-          },
-          {
             "name": "routeMatrixRequest",
             "in": "body",
             "description": "Request body of RouteMatrix API in GeoJSON format.",
@@ -569,7 +566,7 @@
     },
     "/route/matrix:async": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Post Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using an asynchronous (async) request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. As an example, let's say a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call Matrix Route API.\n\n\nFor each route, the travel times and distances are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for async request is **50000** and for sync request it's **2500** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 2500, you might want to make synchronous request. The maximum size of a matrix for this API is **2500** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x50, 60x40, 90x20 (it does not need to be square).\n\n```\nPOST https://atlas.microsoft.com/route/matrix?api-version=2024-06-01-preview&subscription-key={subscription-key}\n```\n\n### Submit Asynchronous Route Matrix Request\nThe Asynchronous API is appropriate for processing big volumes of relatively complex routing requests. When you make a request by using async request, by default the service returns a 202 response code along a redirect URL in the Location field of the response header. This URL should be checked periodically until the status is Succeeded. \n\n\nThe maximum size of a matrix for this API is **50000** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 500x100, 100x100, 280x170. 100x50 (it does not need to be square).\n\n\nThe asynchronous responses are stored for **14** days. The redirect URL returns a 404 response if used after the expiration period.\n\n\n\n\n```\nPOST https://atlas.microsoft.com/route/matrix:async?api-version=2024-06-01-preview&subscription-key={subscription-key}\n```\n\nHere's a typical sequence of asynchronous operations:\n1. Client sends a Route Matrix POST request to Azure Maps\n\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` -  Route Matrix request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Route Matrix request. This could either be a 400 Bad Request or any other Error status code.\n\n\n3. If the Matrix Route request was accepted successfully, the Location header in the response contains the URL to get the status of the request. This status URI looks like the following:\n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{operationId}?api-version=1.0?subscription-key={subscription-key}\n  ```\n\n\n4. Client issues a GET request on the resultUrl obtained in Step 3 to get the results\n\n \n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{operationId}/result?api-version=1.0?subscription-key={subscription-key}\n   ```\n\n\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Post Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using an asynchronous (async) request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. As an example, let's say a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call Matrix Route API.\n\n\nFor each route, the travel times and distances are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for async request is **50000** and for sync request it's **2500** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 2500, you might want to make synchronous request. The maximum size of a matrix for this API is **2500** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x50, 60x40, 90x20 (it does not need to be square).\n\n```\nPOST https://atlas.microsoft.com/route/matrix?api-version=2024-06-01-preview&subscription-key={subscription-key}\n```\n\n### Submit Asynchronous Route Matrix Request\nThe Asynchronous API is appropriate for processing big volumes of relatively complex routing requests. When you make a request by using async request, by default the service returns a 202 response code along a URL in the `Operation-Location` field of the response header. This URL should be checked periodically until the status is Succeeded. \n\n\nThe maximum size of a matrix for this API is **50000** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 500x100, 100x100, 280x170. 100x50 (it does not need to be square).\n\n\nThe asynchronous responses are stored for **14** days. The redirect URL returns a 404 response if used after the expiration period.\n\n\n\n\n```\nPOST https://atlas.microsoft.com/route/matrix:async?api-version=2024-06-01-preview&subscription-key={subscription-key}\n```\n\nHere's a typical sequence of asynchronous operations:\n1. Client sends a Route Matrix POST request to Azure Maps\n\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` -  Route Matrix request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Route Matrix request. This could either be a 400 Bad Request or any other Error status code.\n\n\n3. If the Matrix Route request was accepted successfully, the Location header in the response contains the URL to get the status of the request. This status URI looks like the following:\n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{operationId}?api-version=1.0?subscription-key={subscription-key}\n  ```\n\n\n4. Client can get the results directly from result field once status is Succeeded\n\n \n\n",
         "operationId": "Route_PostRouteMatrixAsync",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -594,9 +591,6 @@
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
           },
           {
             "name": "routeMatrixAsyncRequest",
@@ -671,59 +665,6 @@
             "description": "An unexpected error occurred.",
             "schema": {
               "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
-            },
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
-    "/route/operations/{operationId}/result": {
-      "get": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nGet the result of an asynchronous operation by its operation ID.",
-        "operationId": "Route_GetRouteAsyncOperationResult",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-client-name": "Route_GetAsyncOperationResult",
-        "x-ms-examples": {
-          "Successfully retrieve the async matrix result": {
-            "$ref": "./examples/GetRouteMatrixAsyncResult.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
-          },
-          {
-            "$ref": "#/parameters/OperationId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RouteAsyncResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error occurred.",
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3474,19 +3415,8 @@
         "operationType": {
           "$ref": "#/definitions/RouteOperationTypeEnum"
         },
-        "summary": {
-          "$ref": "#/definitions/RouteOperationSummary"
-        },
         "result": {
-          "description": "The result of async operation",
-          "type": "object",
-          "properties": {
-            "resultUrl": {
-              "description": "URL to the get the result of async operation",
-              "type": "string",
-              "format": "uri"
-            }
-          }
+          "$ref": "#/definitions/RouteAsyncResponse"
         },
         "error": {
           "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
@@ -3521,22 +3451,6 @@
         },
         "totalCount": {
           "description": "Total number of routes within this matrix.",
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "RouteOperationSummary": {
-      "type": "object",
-      "description": "Summary for the route async request",
-      "properties": {
-        "successfulCount": {
-          "description": "Number of successful count within this route operation.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "totalCount": {
-          "description": "Total number of count within this route operation.",
           "type": "integer",
           "format": "int32"
         }
