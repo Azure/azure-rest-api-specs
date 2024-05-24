@@ -13,6 +13,15 @@ using Azure.Core;
  * The key vault client performs cryptographic key operations and vault operations
  * against the Key Vault service.
  */
+@useAuth(
+  OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: ["https://vault.azure.net/.default"],
+    }
+  ]>
+)
 @service({
   title: "Key Vault",
 })
