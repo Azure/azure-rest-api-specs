@@ -189,6 +189,14 @@
         ]
       }
     },
+    "Azure.Core.ipV4Address": {
+      "type": "string",
+      "description": "Represent an IP V4 address serialized as a string.\n\nIt is formatted as four 8-bit fields separated by periods."
+    },
+    "Azure.Core.ipV6Address": {
+      "type": "string",
+      "description": "Represent an IP V6 address serialized as a string.\n\nIt is formatted as eight hex decimal values(16-bit) between 0 and FFFF separated by colon. (i.e. `y:y:y:y:y:y:y:y`)"
+    },
     "Cloud": {
       "type": "string",
       "description": "Cloud enum",
@@ -477,28 +485,28 @@
           "type": "array",
           "description": "IPv4 addresses for the machine",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
           }
         },
         "ipv4MsPrivateAddresses": {
           "type": "array",
           "description": "MS private IPv4 addresses for the machine",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
           }
         },
         "ipv6Addresses": {
           "type": "array",
           "description": "IPv6 addresses for the machine",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.ipV6Address"
           }
         },
         "ipv6LinkLocalAddresses": {
           "type": "array",
           "description": "Link local IPv6 addresses for the machine",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.ipV6Address"
           }
         }
       },

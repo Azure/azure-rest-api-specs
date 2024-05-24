@@ -40,16 +40,16 @@ model VmProperties {
   osProperties: OsProperties;
 
   @doc("IPv4 addresses for the machine")
-  ipv4Addresses: string[];
+  ipv4Addresses: Azure.Core.ipV4Address[];
 
   @doc("MS private IPv4 addresses for the machine")
-  ipv4MsPrivateAddresses: string[];
+  ipv4MsPrivateAddresses: Azure.Core.ipV4Address[];
 
   @doc("IPv6 addresses for the machine")
-  ipv6Addresses: string[];
+  ipv6Addresses: Azure.Core.ipV6Address[];
 
   @doc("Link local IPv6 addresses for the machine")
-  ipv6LinkLocalAddresses: string[];
+  ipv6LinkLocalAddresses: Azure.Core.ipV6Address[];
 }
 
 @doc("OSProperties composed of osVersion, osType, osName, osBuild")
