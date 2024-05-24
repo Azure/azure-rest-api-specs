@@ -5207,7 +5207,7 @@
           "description": "The virtual machine scale set network profile."
         },
         "securityPostureReference": {
-          "$ref": "#/definitions/SecurityPostureReference",
+          "$ref": "#/definitions/SecurityPostureReferenceUpdate",
           "description": "The virtual machine scale set security posture reference."
         },
         "securityProfile": {
@@ -6358,6 +6358,27 @@
       "required": [
         "id"
       ]
+    },
+    "SecurityPostureReferenceUpdate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The security posture reference id in the form of /CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|latest"
+        },
+        "excludeExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of virtual machine extension names to exclude when applying the security posture."
+        },
+        "isOverridable": {
+          "type": "boolean",
+          "description": "Whether the security posture can be overridden by the user."
+        }
+      },
+      "description": "Specifies the security posture to be used in the scale set. Minimum api-version: 2023-03-01",
     }
   }
 }
