@@ -9,11 +9,6 @@
     "PATH": "${containerEnv:PATH}:${containerWorkspaceFolder}/node_modules/.bin" 
   },
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "nodeGypDependencies": true,
-      "version": "lts",
-      "nvmVersion": "latest"
-    },
     "ghcr.io/devcontainers/features/powershell:1": {
       "version": "latest"
     }
@@ -23,7 +18,8 @@
     "vscode": {
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "typespec.typespec-vscode"
       ]
     }
   }
