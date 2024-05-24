@@ -929,6 +929,26 @@
           "format": "int32",
           "readOnly": true
         },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the account.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections associated with the account.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -973,6 +993,26 @@
           "description": "The openAi services details",
           "type": "object",
           "$ref": "#/definitions/OpenAiServicesForPatchRequest"
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the account.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections associated with the account.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
         },
         "provisioningState": {
           "readOnly": true,
