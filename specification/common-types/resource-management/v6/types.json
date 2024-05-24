@@ -135,7 +135,11 @@
           "$ref": "#/definitions/Plan"
         }
       },
-      "$ref": "#/definitions/TrackedResource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
       "x-ms-azure-resource": true
     },
     "SkuTier": {
