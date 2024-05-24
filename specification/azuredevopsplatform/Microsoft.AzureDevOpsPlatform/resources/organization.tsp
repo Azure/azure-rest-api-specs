@@ -26,6 +26,6 @@ model Organization is ProxyResource<OrganizationProperties> {
 
 @armResourceOperations
 interface Organizations {
-  get is ArmLocResourceRead<Organization>;
-  list is ArmLocResourceListByParent<Organization>;
+  get is ArmLocResources.ArmLocResourceRead<Organization>;
+  list is ArmLocResources.ArmLocResourceListByParent<Organization>;
 }
