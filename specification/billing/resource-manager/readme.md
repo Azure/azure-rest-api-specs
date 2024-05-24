@@ -213,7 +213,7 @@ suppressions:
   reason: Breaking Change
 - code: PutRequestResponseSchemeArm
   from: transfers.json
-  reason: Service design forces this behavior. 
+  reason: Design ensures only recipients choose products, not initiators, for security and access reasons. 
 - code: PutResponseCodes
   from: billingProfile.json
   reason: Breaking change
