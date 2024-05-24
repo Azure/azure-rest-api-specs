@@ -82,9 +82,11 @@ op setCertificateContacts is Azure.Core.Foundations.Operation<
  * resources in the specified key vault. This operation requires the
  * certificates/managecontacts permission.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.NonPagedResourceList is necessary for Key Vault"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the certificate contacts for a specified key vault.")
-op getCertificateContacts is Azure.Core.Foundations.NonPagedResourceList<Contacts>;
+@route("/certificates/contacts")
+@get
+op getCertificateContacts is Azure.Core.Foundations.Operation<{}, Contacts>;
 
 /**
  * Deletes the certificate contacts for a specified key vault certificate. This

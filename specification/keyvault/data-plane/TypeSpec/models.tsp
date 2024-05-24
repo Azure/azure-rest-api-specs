@@ -609,14 +609,12 @@ model IssuerParameters {
 /**
  * The contacts for the vault certificates.
  */
-@resource("certificates/contacts")
 model Contacts {
   /**
    * Identifier for the contacts collection.
    */
   @visibility("read")
-  @key
-  id: string;
+  id?: string;
 
   /**
    * The contact list for the vault certificates.
