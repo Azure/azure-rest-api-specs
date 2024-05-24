@@ -1254,7 +1254,7 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
 @doc("List of attached gpus")
 model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs {
   @doc("GPU assignment type")
-  assignmentType?: int64;
+  assignmentType?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("Size of gpu partition in MB for GPU-P")
