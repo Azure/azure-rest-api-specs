@@ -13,7 +13,7 @@
     "/translations": {
       "get": {
         "tags": [
-          "Translations"
+          "VideoTranslation"
         ],
         "description": "Gets a list of translations.",
         "operationId": "Translations_List",
@@ -68,7 +68,7 @@
     "/translations/{id}": {
       "get": {
         "tags": [
-          "Translation"
+          "VideoTranslation"
         ],
         "description": "Gets the translation identified by the given ID.",
         "operationId": "Translations_Get",
@@ -111,7 +111,7 @@
       },
       "delete": {
         "tags": [
-          "Translation"
+          "VideoTranslation"
         ],
         "description": "Deletes the translation identified by the given ID. All data (like webvtt file, content editing translations) of this translation will be deleted automatically.",
         "operationId": "Translations_Delete",
@@ -170,13 +170,10 @@
       },
       "put": {
         "tags": [
-          "Translation"
+          "VideoTranslation"
         ],
         "description": "Creates a new translation.",
         "operationId": "Translations_Create",
-        "translation": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -243,13 +240,10 @@
     "/translations/{id}:edit": {
       "post": {
         "tags": [
-          "ContentEditing"
+          "VideoTranslation"
         ],
         "description": "Creates a new content editing.",
-        "operationId": "ContentEditing_Create",
-        "translation": [
-          "application/json"
-        ],
+        "operationId": "Translations_Edit_Create",
         "produces": [
           "application/json"
         ],
@@ -316,10 +310,10 @@
     "/translations/{id}/edit-operations": {
       "get": {
         "tags": [
-          "EditOperations"
+          "VideoTranslation"
         ],
         "description": "Gets edit operations list info.",
-        "operationId": "EditOperations_Get",
+        "operationId": "Translations_Edit_List",
         "produces": [
           "application/json"
         ],
@@ -361,10 +355,10 @@
     "/translations/{id}/edit-operations/{operation-id}": {
       "get": {
         "tags": [
-          "EditOperation"
+          "VideoTranslation"
         ],
         "description": "Gets edit operation info.",
-        "operationId": "EditOperations_Get",
+        "operationId": "Translations_Edit_Get",
         "produces": [
           "application/json"
         ],
@@ -409,10 +403,10 @@
     "/translate-operations/{operation-id}": {
       "get": {
         "tags": [
-          "TranslateOperations"
+          "VideoTranslation"
         ],
         "description": "Gets translate operation info.",
-        "operationId": "TranslateOperations_Get",
+        "operationId": "TranslationCreateOperations_Get",
         "produces": [
           "application/json"
         ],
@@ -454,10 +448,10 @@
     "/delete-operations/{operation-id}": {
       "get": {
         "tags": [
-          "DeleteOperations"
+          "VideoTranslation"
         ],
         "description": "Gets delete operation info.",
-        "operationId": "DeleteOperations_Get",
+        "operationId": "TranslationDeleteOperations_Get",
         "produces": [
           "application/json"
         ],
@@ -498,12 +492,21 @@
     }
   },
   "definitions": {
-    "OperationId": {
-      "description": "Resource id",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-      "minLength": 3,
-      "maxLength": 64
+    "Operation": {
+      "description": "Operation definition.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "readOnly": true
+        }
+      }
     },
     "ResourceId": {
       "description": "Resource id",
@@ -630,12 +633,24 @@
       "type": "object",
       "properties": {
         "id": {
-          "$ref": "#/definitions/ResourceId",
-          "readOnly": true
+          "$ref": "#/definitions/ResourceId"
         },
         "description": {
           "description": "Translation description",
           "type": "string"
+        },
+        "sourceLocale": {
+          "description": "The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
+        },
+        "targetLocale": {
+          "description": "The target locale of the translation. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
+        },
+        "voiceKind": {
+          "$ref": "#/definitions/VideoTranslationVoiceKind"
         },
         "createdDateTime": {
           "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
@@ -659,7 +674,7 @@
           "format": "uri"
         },
         "webvttFile": {
-          "$ref": "#/definitions/webvttFile"
+          "$ref": "#/definitions/WebvttFile"
         },
         "sourceVideoFileUrl": {
           "description": "Original video file url",
@@ -687,23 +702,10 @@
           "$ref": "#/definitions/TranslationResult",
           "readOnly": true
         },
-        "sourceLocale": {
-          "description": "The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
-          "type": "string",
-          "example": "en-US"
-        },
-        "targetLocale": {
-          "description": "The target locale of the translation. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
-          "type": "string",
-          "example": "en-US"
-        },
         "speakerCount": {
           "description": "Speaker count of the video.",
           "format": "int32",
           "type": "integer"
-        },
-        "voiceKind": {
-          "$ref": "#/definitions/VideoTranslationVoiceKind"
         },
         "subtitleMaxCharCountPerSegment": {
           "description": "Subtitle max char count per segment.",
@@ -722,6 +724,37 @@
           "error": {
             "$ref": "#/definitions/Error"
           }
+      }
+    },
+    "Error": {
+      "description": "Top-level error follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors. This contains an top-level error with error code, message, details, target and an inner error with more descriptive details.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCode"
+        },
+        "target": {
+          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case of invalid model.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Top-level error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Additional supportive details regarding the error and/or expected policies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
       }
     }
   },
