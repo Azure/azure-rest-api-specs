@@ -149,4 +149,9 @@ See configuration in [readme.java.md](./readme.java.md)
 directive:
   - suppress: AvoidAdditionalProperties
     from: imagebuilder.json
+    where: $.definitions.ImageTemplateDistributor.properties.artifactTags
+    where: $.definitions.ImageTemplateProperties.properties.managedResourceTags
+    where: $.definitions.UserAssignedIdentities
+    where: $.definitions.ImageTemplateUpdateParameters.properties.tags
     reason: Needed value. Exception provided in API Design review meeting.
+```
