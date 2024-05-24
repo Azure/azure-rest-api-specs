@@ -216,6 +216,24 @@ union VmSizeEnum {
   string,
 }
 
+@added(Versions.v2024_05_01_test_preview)
+@doc("Gpu Assignment types")
+union GpuAssignmentTypeEnum {
+  @doc("GPU DDA")
+  GpuDDA: "GpuDDA",
+
+  @doc("GPU P")
+  GpuP: "GpuP",
+
+  @doc("GPU PV")
+  GpuPV: "GpuPV",
+
+  @doc("GPU Default")
+  GpuDefault: "GpuDefault",
+
+  string,
+}
+
 @doc("Specifies the SecurityType of the virtual machine. EnableTPM and SecureBootEnabled must be set to true for SecurityType to function.")
 union SecurityTypes {
   @doc("Trusted Launch security type")
@@ -1212,6 +1230,10 @@ model VirtualMachineInstancePropertiesHardwareProfile {
 
   @doc("Dynamic memory config")
   dynamicMemoryConfig?: VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig;
+
+  @added(Versions.v2024_05_01_test_preview)
+  @doc("attached gpus config")
+  virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs;
 }
 
 @doc("Dynamic memory config")
@@ -1226,6 +1248,17 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
 
   @doc("Defines the amount of extra memory that should be reserved for a virtual machine instance at runtime, as a percentage of the total memory that the virtual machine instance is thought to need. This only applies to virtual systems with dynamic memory enabled. This property can be in the range of 5 to 2000.")
   targetMemoryBuffer?: int32;
+}
+
+@added(Versions.v2024_05_01_test_preview)
+@doc("List of attached gpus")
+model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs {
+  @doc("GPU assignment type")
+  assignmentType?: int64;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
+  @doc("Size of gpu partition in MB for GPU-P")
+  partitionSizeMB?: int64;
 }
 
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
@@ -1522,6 +1555,10 @@ model HardwareProfileUpdate {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("RAM in MB for the virtual machine instance")
   memoryMB?: int64;
+
+  @added(Versions.v2024_05_01_test_preview)
+  @doc("attached gpus config")
+  virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs;
 }
 
 @doc("Storage profile update")

@@ -4230,6 +4230,42 @@
         }
       }
     },
+    "GpuAssignmentTypeEnum": {
+      "type": "string",
+      "description": "Gpu Assignment types",
+      "enum": [
+        "GpuDDA",
+        "GpuP",
+        "GpuPV",
+        "GpuDefault"
+      ],
+      "x-ms-enum": {
+        "name": "GpuAssignmentTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GpuDDA",
+            "value": "GpuDDA",
+            "description": "GPU DDA"
+          },
+          {
+            "name": "GpuP",
+            "value": "GpuP",
+            "description": "GPU P"
+          },
+          {
+            "name": "GpuPV",
+            "value": "GpuPV",
+            "description": "GPU PV"
+          },
+          {
+            "name": "GpuDefault",
+            "value": "GpuDefault",
+            "description": "GPU Default"
+          }
+        ]
+      }
+    },
     "GuestAgent": {
       "type": "object",
       "description": "Defines the GuestAgent.",
@@ -4366,6 +4402,10 @@
           "type": "integer",
           "format": "int64",
           "description": "RAM in MB for the virtual machine instance"
+        },
+        "virtualMachineGPUs": {
+          "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs",
+          "description": "attached gpus config"
         }
       }
     },
@@ -6203,7 +6243,7 @@
       "properties": {
         "securityEncryptionType": {
           "$ref": "#/definitions/SecurityEncryptionType",
-          "description": "Specifies the EncryptionType of the managed disk. If setting to NonPersistedTPM, VM Guest State is not encrypted, OS disk is not encrypted. NOTE: It can be set for only Confidential VMs."
+          "description": "Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs."
         }
       }
     },
@@ -6568,6 +6608,10 @@
         "dynamicMemoryConfig": {
           "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig",
           "description": "Dynamic memory config"
+        },
+        "virtualMachineGPUs": {
+          "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs",
+          "description": "attached gpus config"
         }
       }
     },
@@ -6589,6 +6633,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Defines the amount of extra memory that should be reserved for a virtual machine instance at runtime, as a percentage of the total memory that the virtual machine instance is thought to need. This only applies to virtual systems with dynamic memory enabled. This property can be in the range of 5 to 2000."
+        }
+      }
+    },
+    "VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs": {
+      "type": "object",
+      "description": "List of attached gpus",
+      "properties": {
+        "assignmentType": {
+          "type": "integer",
+          "format": "int64",
+          "description": "GPU assignment type"
+        },
+        "partitionSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size of gpu partition in MB for GPU-P"
         }
       }
     },
