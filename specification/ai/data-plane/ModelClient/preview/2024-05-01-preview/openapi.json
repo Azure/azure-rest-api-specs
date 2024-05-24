@@ -21,7 +21,7 @@
   "security": [
     {
       "OAuth2Auth": [
-        "https://cognitiveservices.azure.com/.default"
+        "https://ml.azure.com/.default"
       ]
     }
   ],
@@ -31,7 +31,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
-        "https://cognitiveservices.azure.com/.default": ""
+        "https://ml.azure.com/.default": ""
       }
     }
   },
@@ -48,7 +48,7 @@
           {
             "name": "azureml-model-deployment",
             "in": "header",
-            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.",
+            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.\nThis sets the HTTP request header `azureml-model-deployment`.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "model_deployment"
@@ -56,7 +56,7 @@
           {
             "name": "unknown-parameters",
             "in": "header",
-            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.",
+            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.\nThis sets the HTTP request header `unknown-parameters`.",
             "required": false,
             "type": "string",
             "enum": [
@@ -74,9 +74,9 @@
                   "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
                 },
                 {
-                  "name": "ingore",
+                  "name": "ignore",
                   "value": "ignore",
-                  "description": "The servcie will ignore unknown parameters in the request payload."
+                  "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
                 },
                 {
                   "name": "allow",
@@ -223,7 +223,7 @@
           {
             "name": "azureml-model-deployment",
             "in": "header",
-            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.",
+            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.\nThis sets the HTTP request header `azureml-model-deployment`.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "model_deployment"
@@ -231,7 +231,7 @@
           {
             "name": "unknown-parameters",
             "in": "header",
-            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.",
+            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.\nThis sets the HTTP request header `unknown-parameters`.",
             "required": false,
             "type": "string",
             "enum": [
@@ -249,9 +249,9 @@
                   "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
                 },
                 {
-                  "name": "ingore",
+                  "name": "ignore",
                   "value": "ignore",
-                  "description": "The servcie will ignore unknown parameters in the request payload."
+                  "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
                 },
                 {
                   "name": "allow",
@@ -337,7 +337,7 @@
           {
             "name": "azureml-model-deployment",
             "in": "header",
-            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.",
+            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.\nThis sets the HTTP request header `azureml-model-deployment`.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "model_deployment"
@@ -345,7 +345,7 @@
           {
             "name": "unknown-parameters",
             "in": "header",
-            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.",
+            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.\nThis sets the HTTP request header `unknown-parameters`.",
             "required": false,
             "type": "string",
             "enum": [
@@ -363,9 +363,9 @@
                   "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
                 },
                 {
-                  "name": "ingore",
+                  "name": "ignore",
                   "value": "ignore",
-                  "description": "The servcie will ignore unknown parameters in the request payload."
+                  "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
                 },
                 {
                   "name": "allow",
@@ -620,31 +620,6 @@
         "message"
       ]
     },
-    "ChatChoiceUpdate": {
-      "type": "object",
-      "description": "Represents an update to a single prompt completion when the service is streaming updates \nusing Server Sent Events (SSE).\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
-      "properties": {
-        "index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The ordered index associated with this chat completions choice."
-        },
-        "finish_reason": {
-          "$ref": "#/definitions/CompletionsFinishReason",
-          "description": "The reason that this chat completions choice completed its generated.",
-          "x-nullable": true
-        },
-        "delta": {
-          "$ref": "#/definitions/ChatResponseMessage",
-          "description": "An update to the chat message for a given chat completions prompt."
-        }
-      },
-      "required": [
-        "index",
-        "finish_reason",
-        "delta"
-      ]
-    },
     "ChatCompletions": {
       "type": "object",
       "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
@@ -652,10 +627,6 @@
         "id": {
           "type": "string",
           "description": "A unique identifier associated with this chat completions response."
-        },
-        "object": {
-          "type": "string",
-          "description": "The response object type, which is always `chat.completion`."
         },
         "created": {
           "type": "integer",
@@ -682,7 +653,6 @@
       },
       "required": [
         "id",
-        "object",
         "created",
         "model",
         "usage",
@@ -821,50 +791,6 @@
           }
         ]
       }
-    },
-    "ChatCompletionsUpdate": {
-      "type": "object",
-      "description": "Represents a response update to a chat completions request, when the service is streaming updates \nusing Server Sent Events (SSE).\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A unique identifier associated with this chat completions response."
-        },
-        "object": {
-          "type": "string",
-          "description": "The response object type, which is always `chat.completion`."
-        },
-        "created": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
-        },
-        "model": {
-          "type": "string",
-          "description": "The model used for the chat completion."
-        },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
-        },
-        "choices": {
-          "type": "array",
-          "description": "An update to the collection of completion choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/ChatChoiceUpdate"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "id",
-        "object",
-        "created",
-        "model",
-        "usage",
-        "choices"
-      ]
     },
     "ChatRequestMessage": {
       "type": "object",
@@ -1121,16 +1047,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Index of the prompt to which the EmbeddingItem corresponds."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type of this embeddings item. Will always be `embedding`."
         }
       },
       "required": [
         "embedding",
-        "index",
-        "object"
+        "index"
       ]
     },
     "EmbeddingsResult": {
@@ -1153,10 +1074,6 @@
           "$ref": "#/definitions/EmbeddingsUsage",
           "description": "Usage counts for tokens input using the embeddings API."
         },
-        "object": {
-          "type": "string",
-          "description": "The object type of the embeddings result. Will always be `list`."
-        },
         "model": {
           "type": "string",
           "description": "The model ID used to generate this result."
@@ -1166,7 +1083,6 @@
         "id",
         "data",
         "usage",
-        "object",
         "model"
       ]
     },
@@ -1200,36 +1116,6 @@
         "prompt_tokens",
         "total_tokens"
       ]
-    },
-    "ExtraParameters": {
-      "type": "string",
-      "description": "Defines the service behavior when extra parameters are passed in the request payload.",
-      "enum": [
-        "error",
-        "ignore",
-        "allow"
-      ],
-      "x-ms-enum": {
-        "name": "ExtraParameters",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "error",
-            "value": "error",
-            "description": "The service should error when it sees extra parameters in the request payload. This is the default behavior if the service."
-          },
-          {
-            "name": "ignore",
-            "value": "ignore",
-            "description": "The service should ignore extra parameters in the request payload. They will not be passed to the back-end AI model."
-          },
-          {
-            "name": "allow",
-            "value": "allow",
-            "description": "The service should pass extra parameters to the back-end AI model."
-          }
-        ]
-      }
     },
     "FunctionCall": {
       "type": "object",
@@ -1340,6 +1226,70 @@
         ]
       }
     },
+    "StreamingChatChoiceUpdate": {
+      "type": "object",
+      "description": "Represents an update to a single prompt completion when the service is streaming updates \nusing Server Sent Events (SSE).\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this chat completions choice."
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "The reason that this chat completions choice completed its generated.",
+          "x-nullable": true
+        },
+        "delta": {
+          "$ref": "#/definitions/ChatResponseMessage",
+          "description": "An update to the chat message for a given chat completions prompt."
+        }
+      },
+      "required": [
+        "index",
+        "finish_reason",
+        "delta"
+      ]
+    },
+    "StreamingChatCompletionsUpdate": {
+      "type": "object",
+      "description": "Represents a response update to a chat completions request, when the service is streaming updates \nusing Server Sent Events (SSE).\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model used for the chat completion."
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        },
+        "choices": {
+          "type": "array",
+          "description": "An update to the collection of completion choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/StreamingChatChoiceUpdate"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "created",
+        "model",
+        "usage",
+        "choices"
+      ]
+    },
     "SystemMessage": {
       "type": "object",
       "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
@@ -1403,9 +1353,9 @@
             "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
           },
           {
-            "name": "ingore",
+            "name": "ignore",
             "value": "ignore",
-            "description": "The servcie will ignore unknown parameters in the request payload."
+            "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
           },
           {
             "name": "allow",
