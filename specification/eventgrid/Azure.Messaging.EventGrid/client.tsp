@@ -50,24 +50,6 @@ namespace Customizations{
     renewLock is renewCloudEventLocks;
     }
 
-    @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "js")
-    interface ClientSender1 {
-    send is publishCloudEvent;
-    sendEvents is publishCloudEvents;
-    }
-
-    @client({
-    name: "EventGridReceiverClient",
-    service: Microsoft.EventGrid
-    }, "js")
-    interface ClientReceiver1 {
-    receive is receiveCloudEvents;
-    acknowledge is acknowledgeCloudEvents;
-    release is releaseCloudEvents;
-    reject is rejectCloudEvents;
-    renewLock is renewCloudEventLocks;
-    }
-
     @client({ name: "EventGridSenderClient", service: Microsoft.EventGrid}, "java")
     interface ClientSender2 {
     send is publishCloudEvent;
@@ -124,7 +106,6 @@ namespace Customizations{
 @@access(FailedLockToken, Access.public);
 
 
-
 @@clientName(ReleaseDelay.By0Seconds, "NoDelay");
 @@clientName(ReleaseDelay.By10Seconds, "TenSeconds");
 @@clientName(ReleaseDelay.By3600Seconds, "OneHour");
@@ -134,3 +115,4 @@ namespace Customizations{
 @@clientName(RenewCloudEventLocksResult, "RenewLocksResult");
 
 @@clientName(ReceiveResult.value, "details");
+
