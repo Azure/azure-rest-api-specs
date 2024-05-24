@@ -480,12 +480,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "description": "The configuration name. Only 'default' value is supported.",
-            "in": "path",
-            "name": "configurationName",
-            "pattern": "^.*$",
-            "required": true,
-            "type": "string"
+            "$ref": "#parameters/ConfigurationNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -534,12 +529,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "description": "The configuration name. Only 'default' value is supported.",
-            "in": "path",
-            "name": "configurationName",
-            "pattern": "^.*$",
-            "required": true,
-            "type": "string"
+            "$ref": "#parameters/ConfigurationNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -599,12 +589,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "description": "The configuration name. Only 'default' value is supported.",
-            "in": "path",
-            "name": "configurationName",
-            "pattern": "^.*$",
-            "required": true,
-            "type": "string"
+            "$ref": "#parameters/ConfigurationNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -666,12 +651,7 @@
             "$ref": "#/parameters/MonitorNameParameter"
           },
           {
-            "description": "Configuration name",
-            "in": "path",
-            "name": "configurationName",
-            "pattern": "^.*$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ConfigurationNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3551,6 +3531,15 @@
       "type": "string",
       "pattern": "^[a-z][a-z0-9]*$",
       "x-ms-parameter-location": "method"
+    },
+    "ConfigurationNameParameter": {
+        "description": "The configuration name. Only 'default' value is supported.",
+        "in": "path",
+        "name": "configurationName",
+        "pattern": "^.*$",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
     }
   }
 }
