@@ -14,11 +14,14 @@ namespace Microsoft.MessagingCatalog;
 /**
  * A Messaging Catalog resource
  */
-model MessagingCatalog is TrackedResource<MessagingCatalogProperties> {
+model MessagingCatalog
+  is Azure.ResourceManager.TrackedResource<MessagingCatalogProperties> {
   /**
    * The name of the Messaging Catalog
    */
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,60}$")
+  @minLength(3)
+  @maxLength(60)
   @path
   @key("catalogName")
   @segment("catalogs")
@@ -36,12 +39,12 @@ interface MessagingCatalogs {
   /**
    * Create or update a messaging catalog
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<MessagingCatalog>;
+  create is ArmResourceCreateOrReplaceAsync<MessagingCatalog>;
 
   /**
    * Update a messaging catalogs
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<MessagingCatalog, MessagingCatalogUpdate>;
 
   /**
