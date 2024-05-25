@@ -2360,18 +2360,13 @@
         },
         "valueColumnName": {
           "type": "string",
-          "description": "Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified.",
+          "description": "Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified. The column must be numeric.",
           "minLength": 1,
           "maxLength": 100
-        },
-        "dataType": {
-          "$ref": "#/definitions/ResultDataType",
-          "description": "Data type of the result"
         }
       },
       "required": [
-        "queryText",
-        "dataType"
+        "queryText"
       ],
       "allOf": [
         {
@@ -2400,18 +2395,11 @@
         "logAnalyticsWorkspaceResourceId": {
           "$ref": "#/definitions/LogAnalyticsWorkspaceResourceId",
           "description": "Log Analytics Workspace resource ID"
-        },
-        "logAnalyticsWorkspaceId": {
-          "type": "string",
-          "description": "Log Analytics workspace ID",
-          "minLength": 36,
-          "maxLength": 36
         }
       },
       "required": [
         "authenticationSetting",
-        "logAnalyticsWorkspaceResourceId",
-        "logAnalyticsWorkspaceId"
+        "logAnalyticsWorkspaceResourceId"
       ]
     },
     "LogAnalyticsWorkspaceResourceId": {
@@ -2664,28 +2652,6 @@
       ],
       "x-ms-discriminator-value": "AzureResourceMetric"
     },
-    "ResultDataType": {
-      "type": "string",
-      "description": "Result data type",
-      "enum": [
-        "Numeric",
-        "Text"
-      ],
-      "x-ms-enum": {
-        "name": "ResultDataType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Numeric",
-            "value": "Numeric"
-          },
-          {
-            "name": "Text",
-            "value": "Text"
-          }
-        ]
-      }
-    },
     "SignalAssignment": {
       "type": "object",
       "description": "Group of signal definition assignments",
@@ -2900,8 +2866,7 @@
         "LowerOrEquals",
         "GreaterThan",
         "GreaterOrEquals",
-        "Equals",
-        "Contains"
+        "Equals"
       ],
       "x-ms-enum": {
         "name": "SignalOperator",
@@ -2931,11 +2896,6 @@
             "name": "Equals",
             "value": "Equals",
             "description": "Equal to"
-          },
-          {
-            "name": "Contains",
-            "value": "Contains",
-            "description": "Contains (only applicable for text data type)"
           }
         ]
       }

@@ -22,21 +22,20 @@
   ],
   "security": [
     {
-      "AadOauth2Auth": [
+      "azure_auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "AadOauth2Auth": {
+    "azure_auth": {
       "type": "oauth2",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "flow": "accessCode",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
-      },
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "tags": [
@@ -3477,34 +3476,6 @@
     }
   },
   "definitions": {
-    "AADToken": {
-      "type": "object",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        },
-        "defaultScopes": {
-          "type": "array",
-          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows",
-        "defaultScopes"
-      ]
-    },
     "AttestBootIntegrityPropertyEnum": {
       "type": "string",
       "description": "The status of whether the list of boot integrity properties is validated.",
@@ -5215,11 +5186,6 @@
           },
           "readOnly": true
         },
-        "resourceGuid": {
-          "type": "string",
-          "description": "The resource GUID property of the network security group resource.",
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "The provisioning state of the network security group resource.",
@@ -6119,24 +6085,6 @@
             "type": "string"
           }
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-02-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_02_01_preview",
-            "value": "2024-02-01-preview",
-            "description": "The 2024-02-01-preview API version."
-          }
-        ]
       }
     },
     "VirtualHardDisk": {

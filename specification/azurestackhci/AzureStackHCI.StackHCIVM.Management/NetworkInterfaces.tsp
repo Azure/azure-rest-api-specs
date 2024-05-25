@@ -6,15 +6,12 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The network interface resource definition.")
-@includeInapplicableMetadataInPayload(false)
 model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
   @doc("Name of the network interface")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -37,7 +34,7 @@ interface NetworkInterfaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkInterface>;
 
   @doc("The operation to update a network interface.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<NetworkInterface>;
 
   @doc("The operation to delete a network interface.")

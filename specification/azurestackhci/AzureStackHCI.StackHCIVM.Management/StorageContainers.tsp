@@ -6,14 +6,11 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The storage container resource definition.")
-@includeInapplicableMetadataInPayload(false)
 model StorageContainer is TrackedResource<StorageContainerProperties> {
   @doc("Name of the storage container")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
@@ -36,7 +33,6 @@ interface StorageContainers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<StorageContainer>;
 
   @doc("The operation to update a storage container.")
-  @parameterVisibility("read")
   update is ArmTagsPatchAsync<StorageContainer>;
 
   @doc("The operation to delete a storage container.")
