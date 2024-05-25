@@ -5427,6 +5427,14 @@
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
           "description": "The deployment error."
+        },
+        "diagnostics": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/DeploymentDiagnosticsDefinition"
+          },
+          "description": "Contains diagnostic information collected during validation process."
         }
       },
       "description": "Deployment properties with additional details."
@@ -5501,13 +5509,6 @@
         "properties": {
           "$ref": "#/definitions/DeploymentPropertiesExtended",
           "description": "The template deployment properties."
-        },
-        "diagnostics": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeploymentDiagnosticsDefinition"
-          },
-          "description": "Contains additional information collected during the validation process that might not block a deployment."
         }
       },
       "description": "Information from validate template deployment response."
@@ -6528,10 +6529,11 @@
         },
         "diagnostics": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/DeploymentDiagnosticsDefinition"
           },
-          "description": "List of resource warnings detected by What-If operation."
+          "description": "List of resource diagnostics detected by What-If operation."
         }
       }
     },
