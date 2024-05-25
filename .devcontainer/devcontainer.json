@@ -1,6 +1,8 @@
 {
   "name": "TypeSpec Dev Container",
   "image": "mcr.microsoft.com/devcontainers/typescript-node:dev-20",
+  // Default is 2 cores which is too slow for this codebase
+  "hostRequirements": {"cpus": 4},
   "postCreateCommand": "npm ci",
   "customizations": {
     "vscode": {
