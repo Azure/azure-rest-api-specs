@@ -16,15 +16,6 @@ using Microsoft.EventGrid.SystemEvents;
 
 // [BEGIN] misc renames
 
-@@clientName(MediaLiveEventChannelArchiveHeartbeatEventData.channelLatencyMs,
-  "ChannelLatencyMS",
-  "csharp"
-);
-
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingDurationMs,
-  "RecordingDurationMS",
-  "csharp"
-);
 
 @@clientName(EventHubCaptureFileCreatedEventData.fileUrl, "FileURL", "csharp");
 
@@ -39,6 +30,170 @@ using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime,
   "QueuedOn",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to,
+  "toCommunicationIdentifier",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.from,
+  "fromCommunicationIdentifier",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
+  "deliveryAttemptTimestamp",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
+  "userActionTimestamp",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
+  "engagement",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.EventHubCaptureFileCreatedEventData.fileUrl,
+  "fileurl",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
+  "FhirServiceHostName",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceFhirId,
+  "FhirResourceId",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceVersionId,
+  "FhirResourceVersionId",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceType,
+  "FhirResourceType",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
+  "FhirServiceHostName",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceFhirId,
+  "FhirResourceId",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceVersionId,
+  "FhirResourceVersionId",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceType,
+  "FhirResourceType",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
+  "FhirServiceHostName",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceFhirId,
+  "FhirResourceId",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceVersionId,
+  "FhirResourceVersionId",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceType,
+  "FhirResourceType",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinMetadata.lastUpdated,
+  "$lastUpdated",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.metadata,
+  "$metadata",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.version,
+  "$version",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+  "resourceDetails",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+  "operationalDetails",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.resourceInfo,
+  "resourceDetails",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.operationalInfo,
+  "operationalDetails",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData.queuedDateTime,
+  "queuedOn",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.completedDateTime,
+  "completedOn",
+  "csharp"
+);
+@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
+  "summaryReportBlobUri",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData.channelType,
+  "channelKind",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.channelType,
+  "channelKind",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.media,
+  "mediaContent",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.interactive,
+  "interactiveContent",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent.id,
+  "mediaId",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageContext.id,
+  "messageId",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent.type,
+  "replyKind",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent.id,
+  "buttonId",
+  "csharp"
+);
+
+@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent.id,
+  "listItemId",
   "csharp"
 );
 
@@ -251,124 +406,6 @@ using Microsoft.EventGrid.SystemEvents;
 
 // [BEGIN] ACS renames (and acronym casing)
 
-@@clientName(AcsChatEventBaseProperties,
-  "ACSChatEventBaseProperties",
-  "csharp"
-);
-@@clientName(AcsChatEventInThreadBaseProperties,
-  "ACSChatEventInThreadBaseProperties",
-  "csharp"
-);
-@@clientName(AcsChatMessageDeletedEventData,
-  "ACSChatMessageDeletedEventData",
-  "csharp"
-);
-@@clientName(AcsChatMessageDeletedInThreadEventData,
-  "ACSChatMessageDeletedInThreadEventData",
-  "csharp"
-);
-@@clientName(AcsChatMessageEditedEventData,
-  "ACSChatMessageEditedEventData",
-  "csharp"
-);
-@@clientName(AcsChatMessageEditedInThreadEventData,
-  "ACSChatMessageEditedInThreadEventData",
-  "csharp"
-);
-@@clientName(AcsChatMessageEventBaseProperties,
-  "ACSChatMessageEventBaseProperties",
-  "csharp"
-);
-@@clientName(AcsChatMessageEventInThreadBaseProperties,
-  "ACSChatMessageEventInThreadBaseProperties",
-  "csharp"
-);
-@@clientName(AcsChatMessageReceivedEventData,
-  "ACSChatMessageReceivedEventData",
-  "csharp"
-);
-@@clientName(AcsChatMessageReceivedEventData,
-  "ACSChatMessageReceivedEventData",
-  "csharp"
-);
-@@clientName(AcsChatMessageReceivedInThreadEventData,
-  "ACSChatMessageReceivedInThreadEventData",
-  "csharp"
-);
-@@clientName(AcsChatParticipantAddedToThreadEventData,
-  "ACSChatParticipantAddedToThreadEventData",
-  "csharp"
-);
-@@clientName(AcsChatParticipantAddedToThreadWithUserEventData,
-  "ACSChatParticipantAddedToThreadWithUserEventData",
-  "csharp"
-);
-@@clientName(AcsChatParticipantRemovedFromThreadEventData,
-  "ACSChatParticipantRemovedFromThreadEventData",
-  "csharp"
-);
-@@clientName(AcsChatParticipantRemovedFromThreadWithUserEventData,
-  "ACSChatParticipantRemovedFromThreadWithUserEventData",
-  "csharp"
-);
-@@clientName(AcsChatThreadCreatedEventData,
-  "ACSChatThreadCreatedEventData",
-  "csharp"
-);
-@@clientName(AcsChatThreadCreatedWithUserEventData,
-  "ACSChatThreadCreatedWithUserEventData",
-  "csharp"
-);
-@@clientName(AcsChatThreadDeletedEventData,
-  "ACSChatThreadDeletedEventData",
-  "csharp"
-);
-@@clientName(AcsChatThreadEventBaseProperties,
-  "ACSChatThreadEventBaseProperties",
-  "csharp"
-);
-@@clientName(AcsChatThreadEventInThreadBaseProperties,
-  "ACSChatThreadEventInThreadBaseProperties",
-  "csharp"
-);
-@@clientName(AcsChatThreadParticipantProperties,
-  "ACSChatThreadParticipantProperties",
-  "csharp"
-);
-@@clientName(AcsChatThreadPropertiesUpdatedEventData,
-  "ACSChatThreadPropertiesUpdatedEventData",
-  "csharp"
-);
-@@clientName(AcsChatThreadPropertiesUpdatedPerUserEventData,
-  "ACSChatThreadPropertiesUpdatedPerUserEventData",
-  "csharp"
-);
-@@clientName(AcsChatThreadWithUserDeletedEventData,
-  "ACSChatThreadWithUserDeletedEventData",
-  "csharp"
-);
-@@clientName(AcsEmailDeliveryReportReceivedEventData,
-  "ACSEmailDeliveryReportReceivedEventData",
-  "csharp"
-);
-@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "DeliveryAttemptTimestamp",
-  "csharp"
-);
-
-@@clientName(AcsEmailDeliveryReportStatus,
-  "ACSEmailDeliveryReportStatus",
-  "csharp"
-);
-@@clientName(AcsEmailDeliveryReportStatusDetails,
-  "ACSEmailDeliveryReportStatusDetails",
-  "csharp"
-);
-
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData,
-  "ACSEmailEngagementTrackingReportReceivedEventData",
-  "csharp"
-);
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "Engagement",
   "csharp"
@@ -378,12 +415,7 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-@@clientName(AcsIncomingCallCustomContext,
-  "ACSIncomingCallCustomContext",
-  "csharp"
-);
 
-@@clientName(AcsIncomingCallEventData, "ACSIncomingCallEventData", "csharp");
 @@clientName(AcsIncomingCallEventData.from,
   "FromCommunicationIdentifier",
   "csharp"
@@ -393,9 +425,6 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-@@clientName(AcsInteractiveReplyKind, "ACSInteractiveReplyKind", "csharp");
-@@clientName(AcsMessageButtonContent, "ACSMessageButtonContent", "csharp");
-
 // we expose a custom error type and use this internally.
 @@clientName(AcsMessageChannelEventError,
   "internalACSMessageChannelEventError",
@@ -403,17 +432,8 @@ using Microsoft.EventGrid.SystemEvents;
 );
 @@access(AcsMessageChannelEventError, Access.internal, "csharp");
 
-@@clientName(AcsMessageChannelKind, "ACSMessageChannelKind", "csharp");
+@@clientName(AcsMessageContext.id, "MessageId", "csharp");
 
-@@clientName(AcsMessageContext, "ACSMessageContext", "csharp");
-@@clientName(AcsMessageContext.id, "MessageID", "csharp");
-
-@@clientName(AcsMessageDeliveryStatus, "ACSMessageDeliveryStatus", "csharp");
-
-@@clientName(AcsMessageDeliveryStatusUpdatedEventData,
-  "ACSMessageDeliveryStatusUpdatedEventData",
-  "csharp"
-);
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "ChannelKind",
   "csharp"
@@ -423,37 +443,20 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-@@clientName(AcsMessageEventData, "ACSMessageEventData", "csharp");
+@@clientName(AcsMessageEventData.error, "InternalError", "csharp");
 @@clientName(AcsMessageEventData.receivedTimeStamp,
   "ReceivedTimestamp",
   "csharp"
 );
 
-@@clientName(AcsMessageInteractiveButtonReplyContent,
-  "ACSMessageInteractiveButtonReplyContent",
-  "csharp"
-);
-@@clientName(AcsMessageInteractiveButtonReplyContent.id, "ButtonID", "csharp");
+@@clientName(AcsMessageInteractiveButtonReplyContent.id, "ButtonId", "csharp");
 
-@@clientName(AcsMessageInteractiveContent,
-  "ACSMessageInteractiveContent",
-  "csharp"
-);
 @@clientName(AcsMessageInteractiveContent.type, "ReplyKind", "csharp");
 
-@@clientName(AcsMessageInteractiveListReplyContent.id, "ListItemID", "csharp");
-@@clientName(AcsMessageInteractiveListReplyContent,
-  "ACSMessageInteractiveListReplyContent",
-  "csharp"
-);
+@@clientName(AcsMessageInteractiveListReplyContent.id, "ListItemId", "csharp");
 
-@@clientName(AcsMessageMediaContent, "ACSMessageMediaContent", "csharp");
-@@clientName(AcsMessageMediaContent.id, "MediaID", "csharp");
+@@clientName(AcsMessageMediaContent.id, "MediaId", "csharp");
 
-@@clientName(AcsMessageReceivedEventData,
-  "ACSMessageReceivedEventData",
-  "csharp"
-);
 @@clientName(AcsMessageReceivedEventData.channelType, "ChannelKind", "csharp");
 @@clientName(AcsMessageReceivedEventData.interactive,
   "InteractiveContent",
@@ -465,16 +468,6 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-@@clientName(AcsRecordingChunkInfoProperties,
-  "ACSRecordingChunkInfoProperties",
-  "csharp"
-);
-
-@@clientName(AcsRecordingFileStatusUpdatedEventData,
-  "ACSRecordingFileStatusUpdatedEventData",
-  "csharp"
-);
-
 @@clientName(recordingChannelType, "recordingChannelKind", "csharp");
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
@@ -482,143 +475,21 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-@@clientName(AcsRecordingStorageInfoProperties,
-  "ACSRecordingStorageInfoProperties",
-  "csharp"
-);
-@@clientName(AcsRouterChannelConfiguration,
-  "ACSRouterChannelConfiguration",
-  "csharp"
-);
 
 // we expose a custom error type and use this internally.
 @@clientName(AcsRouterCommunicationError,
-  "internalACSRouterCommunicationError",
+  "internalAcsRouterCommunicationError",
   "csharp"
 );
 @@access(AcsRouterCommunicationError, Access.internal, "csharp");
 
-@@clientName(AcsRouterEventData, "ACSRouterEventData", "csharp");
-@@clientName(AcsRouterJobCancelledEventData,
-  "ACSRouterJobCancelledEventData",
+@@clientName(AcsRouterJobClassificationFailedEventData.errors,
+  "errorsInternal",
   "csharp"
 );
-@@clientName(AcsRouterJobClassificationFailedEventData,
-  "ACSRouterJobClassificationFailedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobClassifiedEventData,
-  "ACSRouterJobClassifiedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobClosedEventData,
-  "ACSRouterJobClosedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobCompletedEventData,
-  "ACSRouterJobCompletedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobDeletedEventData,
-  "ACSRouterJobDeletedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobEventData, "ACSRouterJobEventData", "csharp");
-@@clientName(AcsRouterJobExceptionTriggeredEventData,
-  "ACSRouterJobExceptionTriggeredEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobQueuedEventData,
-  "ACSRouterJobQueuedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobReceivedEventData,
-  "ACSRouterJobReceivedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobSchedulingFailedEventData,
-  "ACSRouterJobSchedulingFailedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobStatus, "ACSRouterJobStatus", "csharp");
-@@clientName(AcsRouterJobUnassignedEventData,
-  "ACSRouterJobUnassignedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobWaitingForActivationEventData,
-  "ACSRouterJobWaitingForActivationEventData",
-  "csharp"
-);
-@@clientName(AcsRouterJobWorkerSelectorsExpiredEventData,
-  "ACSRouterJobWorkerSelectorsExpiredEventData",
-  "csharp"
-);
-@@clientName(AcsRouterLabelOperator, "ACSRouterLabelOperator", "csharp");
-@@clientName(AcsRouterQueueDetails, "ACSRouterQueueDetails", "csharp");
-@@clientName(AcsRouterUpdatedWorkerProperty,
-  "ACSRouterUpdatedWorkerProperty",
-  "csharp"
-);
-@@clientName(AcsRouterWorkerDeletedEventData,
-  "ACSRouterWorkerDeletedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterWorkerDeregisteredEventData,
-  "ACSRouterWorkerDeregisteredEventData",
-  "csharp"
-);
-@@clientName(AcsRouterWorkerEventData, "ACSRouterWorkerEventData", "csharp");
-@@clientName(AcsRouterWorkerOfferAcceptedEventData,
-  "ACSRouterWorkerOfferAcceptedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterWorkerOfferDeclinedEventData,
-  "ACSRouterWorkerOfferDeclinedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterWorkerOfferExpiredEventData,
-  "ACSRouterWorkerOfferExpiredEventData",
-  "csharp"
-);
-@@clientName(AcsRouterWorkerOfferIssuedEventData,
-  "ACSRouterWorkerOfferIssuedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterWorkerOfferRevokedEventData,
-  "ACSRouterWorkerOfferRevokedEventData",
-  "csharp"
-);
-@@clientName(AcsRouterWorkerRegisteredEventData,
-  "ACSRouterWorkerRegisteredEventData",
-  "csharp"
-);
-@@clientName(AcsRouterWorkerSelector, "ACSRouterWorkerSelector", "csharp");
+
 @@clientName(AcsRouterWorkerSelector.labelOperator, "Operator", "csharp");
 @@clientName(AcsRouterWorkerSelector.state, "SelectorState", "csharp");
 @@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "csharp");
-
-@@clientName(AcsRouterWorkerSelectorState,
-  "ACSRouterWorkerSelectorState",
-  "csharp"
-);
-@@clientName(AcsRouterWorkerUpdatedEventData,
-  "ACSRouterWorkerUpdatedEventData",
-  "csharp"
-);
-@@clientName(AcsSmsDeliveryAttemptProperties,
-  "ACSSmsDeliveryAttemptProperties",
-  "csharp"
-);
-@@clientName(AcsSmsDeliveryReportReceivedEventData,
-  "ACSSmsDeliveryReportReceivedEventData",
-  "csharp"
-);
-@@clientName(AcsSmsEventBaseProperties, "ACSSmsEventBaseProperties", "csharp");
-@@clientName(AcsSmsReceivedEventData, "ACSSmsReceivedEventData", "csharp");
-@@clientName(AcsUserDisconnectedEventData,
-  "ACSUserDisconnectedEventData",
-  "csharp"
-);
-@@clientName(AcsUserEngagement, "ACSUserEngagement", "csharp");
 
 // [END] ACS renames (and acronym casing)

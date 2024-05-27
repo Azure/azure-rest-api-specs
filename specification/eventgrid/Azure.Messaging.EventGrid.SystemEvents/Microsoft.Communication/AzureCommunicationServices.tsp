@@ -1275,22 +1275,22 @@ union AcsMessageChannelKind {
 /** Message delivery status */
 union AcsMessageDeliveryStatus {
   /** Read */
-  "Read",
+  "read",
 
   /** Delivered */
-  "Delivered",
+  "delivered",
 
   /** Failed */
-  "Failed",
+  "failed",
 
   /** Sent */
-  "Sent",
+  "sent",
 
   /** Warning */
-  "Warning",
+  "warning",
 
   /** Unknown */
-  "Unknown",
+  "unknown",
 
   string,
 }
