@@ -8,4 +8,9 @@ suppressions:
         - Model Workspace no longer has parameter e_tag
         - Removed operation TablesOperations.create
         - Renamed operation TablesOperations.update to TablesOperations.begin_update
-        
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/operationalinsights/armoperationalinsights
+      breaking-changes:
+        - Operation `*TablesClient.Update` has been changed to LRO, use `*TablesClient.BeginUpdate` instead.
+        - Type of `Cluster.Identity` has been changed from `*Identity` to `*ManagedServiceIdentity`
+        - Type of `ClusterPatch.Identity` has been changed from `*Identity` to `*ManagedServiceIdentity`
