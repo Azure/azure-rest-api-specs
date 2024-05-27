@@ -1520,7 +1520,64 @@
           "maxLength": 300
         },
         "identityProvider": {
-          "type": "string",
+          "type": "object",
+          "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "aad",
+              "dropbox",
+              "github",
+              "google",
+              "linkedin",
+              "oauth2",
+              "oauth2pkce",
+              "salesforcev2",
+              "servicenow",
+              "twitterv2"
+            ],
+            "x-ms-enum": {
+            "name": "IdentityProviderType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "aad",
+                "description": "Azure Active Directory V1."
+              },
+              {
+                "value": "dropbox",
+                "description": "Dropbox."
+              },
+              {
+                "value": "google",
+                "description": "Google"
+              },
+              {
+                "value": "linkedin",
+                "description": "LinkedIn"
+              },
+              {
+                "value": "oauth2",
+                "description": "OAuth 2.0"
+              },
+              {
+                "value": "oauth2pkce",
+                "description": "OAuth 2.0 with PKCE"
+              }, 
+              {
+                "value": "salesforcev2",
+                "description": "Salesforce"
+              }, 
+              {
+                "value": "servicenow",
+                "description": "ServiceNow"
+              },
+              {
+                "value": "twitterv2",
+                "description": "Twitter"
+              }
+            ]
+          },
           "description": "Identity provider name. Must be 1 to 300 characters long."
         },
         "oauth2": {
