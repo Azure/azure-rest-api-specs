@@ -16,7 +16,6 @@ using Microsoft.EventGrid.SystemEvents;
 
 // [BEGIN] misc renames
 
-
 @@clientName(EventHubCaptureFileCreatedEventData.fileUrl, "FileURL", "csharp");
 
 @@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
@@ -415,7 +414,6 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-
 @@clientName(AcsIncomingCallEventData.from,
   "FromCommunicationIdentifier",
   "csharp"
@@ -474,7 +472,6 @@ using Microsoft.EventGrid.SystemEvents;
   "recordingChannelKind",
   "csharp"
 );
-
 
 // we expose a custom error type and use this internally.
 @@clientName(AcsRouterCommunicationError,
