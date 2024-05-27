@@ -2693,7 +2693,9 @@
           "items": {
             "$ref": "#/definitions/MonitoredSubscription"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "properties/subscriptionId"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3533,13 +3535,13 @@
       "x-ms-parameter-location": "method"
     },
     "ConfigurationNameParameter": {
-        "description": "The configuration name. Only 'default' value is supported.",
-        "in": "path",
-        "name": "configurationName",
-        "pattern": "^.*$",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
+      "description": "The configuration name. Only 'default' value is supported.",
+      "in": "path",
+      "name": "configurationName",
+      "pattern": "^.*$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
