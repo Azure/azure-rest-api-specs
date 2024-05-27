@@ -1722,8 +1722,16 @@
               "readOnly": true
             },
             "publicNetworkAccess": {
-              "description": "Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled' or an empty string.",
-              "type": "string"
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "description": "Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled'.",
+              "type": "string",
+              "x-ms-enum": {
+                "name": "PublicNetworkAccess",
+                "modelAsString": true
+              }
             }
           },
           "x-ms-client-flatten": true
