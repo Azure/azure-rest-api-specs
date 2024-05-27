@@ -1,0 +1,38 @@
+{
+    "parameters": {
+      "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+      "Ocp-Apim-Subscription-Key": "{API Key}",
+      "api-version": "2024-05-20-preview"
+    },
+    "responses": {
+      "200": {
+        "headers": {},
+        "body": {
+          "value": [
+            {
+              "id": "Initial",
+              "description": "Translate video from en-US to zh-CN, fix segment issue.",
+              "status": "Succeeded",
+              "createdDateTime": "2023-04-10T05:30:00.000Z",
+              "lastActionDateTime": "2023-04-10T05:15:30.000Z"
+            },
+            {
+              "id": "TranslateMyZhCNVideo-Iteration-1",
+              "description": "Translate video from en-US to zh-CN.",
+              "status": "Failed",
+              "createdDateTime": "2023-04-01T05:30:00.000Z",
+              "lastActionDateTime": "2023-04-10T05:15:30.000Z"
+            },
+            {
+              "id": "TranslateMyZhCNVideo-Iteration-2",
+              "description": "Translate video from en-US to zh-CN.",
+              "status": "Running",
+              "createdDateTime": "2023-04-01T05:30:00.000Z",
+              "lastActionDateTime": "2023-04-10T05:15:30.000Z"
+            }
+          ],
+          "nextLink": "https://eastus.api.cognitive.microsoft.com/video-translation/translations?skip=2&maxpagesize=2&api-version=2024-05-20-preview"
+        }
+      }
+    }
+  }

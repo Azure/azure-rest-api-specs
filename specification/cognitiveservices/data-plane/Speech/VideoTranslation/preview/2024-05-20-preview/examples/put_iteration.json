@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-05-20-preview",
+    "translation-id": "TranslateMyZhCNVideo",
+    "iteration-id": "TranslateMyZhCNVideo-ContentEditing-2",
+    "Operation-Id": "Create-TranslateMyZhCNVideo-ContentEditing-2",
+    "iteration": {
+      "description": "Fix segment duration issue and update subtitle max char.",
+      "input": {
+        "speakerCount": 3,
+        "subtitleMaxCharCountPerSegment": 60,
+        "webvttFile": {
+          "url": "https://xxx.blob.core.windows.net/container1/myvtt.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+          "format": "MetadataJson"
+        }
+      }
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/videotranslation/operations/Create-TranslateMyZhCNVideo-ContentEditing-2?api-version=2024-02-01-preview",
+        "Operation-Id": "TranslateMyZhCNVideo-ContentEditing-1"
+      }
+    }
+  }
+}

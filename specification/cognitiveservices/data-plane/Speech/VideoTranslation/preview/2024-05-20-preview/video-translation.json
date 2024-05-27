@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Video Translation API",
-    "description": "Video translation API to translate video.",
+    "description": "Video  API to translate video.",
     "contact": {
       "name": "Azure AI - Speech Services",
       "url": "https://learn.microsoft.com/azure/ai-services/speech-service/"
@@ -11,7 +11,7 @@
   },
   "paths": {
     "/translations": {
-      "get": {
+      "list": {
         "tags": [
           "VideoTranslation"
         ],
@@ -60,12 +60,12 @@
         },
         "x-ms-examples": {
           "Get all video files": {
-            "$ref": "./examples/get_translations.json"
+            "$ref": "./examples/list_translations.json"
           }
         }
       }
     },
-    "/translations/{id}": {
+    "/translations/{translation-id}": {
       "get": {
         "tags": [
           "VideoTranslation"
@@ -77,7 +77,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/PathResourceId"
+            "$ref": "#/parameters/TranslationPathResourceId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -182,6 +182,9 @@
             "$ref": "#/parameters/PathResourceId"
           },
           {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
             "$ref": "#/parameters/QueryApiVersion"
           },
           {
@@ -237,36 +240,133 @@
         }
       }
     },
-    "/translations/{id}:edit": {
-      "post": {
+    "/translations/{translation-id}/iterations": {
+      "list": {
         "tags": [
           "VideoTranslation"
         ],
-        "description": "Creates a new content editing.",
-        "operationId": "Translations_Edit_Create",
+        "description": "List iterations of the translation.",
+        "operationId": "Iterations_List",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/PathResourceId"
+            "$ref": "#/parameters/TranslationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedIterations"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_edit_operations.json"
+          }
+        }
+      }
+    },
+    "/translations/{translation-id}/iterations/{iteration-id}": {
+      "get": {
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Gets translate iteration info.",
+        "operationId": "Iterations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TranslationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/IterationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_translate_operation.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Creates a new iteration.",
+        "operationId": "Iterations_Create",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TranslationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/IterationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
           },
           {
             "in": "body",
-            "name": "translation",
+            "name": "iteration",
             "description": "translation definition",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Translation"
+              "$ref": "#/definitions/Iteration"
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/Translation"
             },
@@ -302,150 +402,12 @@
         },
         "x-ms-examples": {
           "Create a project": {
-            "$ref": "./examples/create_content_editing.json"
+            "$ref": "./examples/create_translation.json"
           }
         }
       }
     },
-    "/translations/{id}/edit-operations": {
-      "get": {
-        "tags": [
-          "VideoTranslation"
-        ],
-        "description": "Gets edit operations list info.",
-        "operationId": "Translations_Edit_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathResourceId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/PaginatedTranslations"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Operation": {
-            "$ref": "./examples/get_edit_operations.json"
-          }
-        }
-      }
-    },
-    "/translations/{id}/edit-operations/{operation-id}": {
-      "get": {
-        "tags": [
-          "VideoTranslation"
-        ],
-        "description": "Gets edit operation info.",
-        "operationId": "Translations_Edit_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathResourceId"
-          },
-          {
-            "$ref": "#/parameters/PathOperationId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/Translation"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Operation": {
-            "$ref": "./examples/get_edit_operation.json"
-          }
-        }
-      }
-    },
-    "/translate-operations/{operation-id}": {
-      "get": {
-        "tags": [
-          "VideoTranslation"
-        ],
-        "description": "Gets translate operation info.",
-        "operationId": "TranslationCreateOperations_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/PathOperationId"
-          },
-          {
-            "$ref": "#/parameters/QueryApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/Translation"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Operation": {
-            "$ref": "./examples/get_translate_operation.json"
-          }
-        }
-      }
-    },
-    "/delete-operations/{operation-id}": {
+    "/operations/{operation-id}": {
       "get": {
         "tags": [
           "VideoTranslation"
@@ -485,7 +447,7 @@
         },
         "x-ms-examples": {
           "Get Operation": {
-            "$ref": "./examples/get_delete_operation.json"
+            "$ref": "./examples/get_operation.json"
           }
         }
       }
@@ -575,6 +537,27 @@
         }
       }
     },
+    "PaginatedIterations": {
+      "description": "Paginated iteration list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Iteration list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Iteration"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
     "WebvttFile": {
       "description": "Translation webvtt file input.",
       "required": [
@@ -590,35 +573,6 @@
         },
         "format": {
           "$ref": "#/definitions/TranslationCreationWebvttFileFormat"
-        }
-      }
-    },
-    "TranslationResult": {
-      "description": "Translation result.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "translatedVideoFileUrl": {
-          "description": "Translated video file URL.",
-          "format": "uri",
-          "type": "string"
-        },
-        "sourceLocaleSubtitleWebvttFileUrl": {
-          "description": "Output source locale subtitle webvtt file.",
-          "type": "string",
-          "format": "uri"
-        },
-        "targetLocaleSubtitleWebvttFileUrl": {
-          "description": "Output target locale subtitle webvtt file.",
-          "type": "string",
-          "format": "uri"
-        },
-        "metadataJsonWebvttFileUrl": {
-          "description": "Output metadata json webvtt file.",
-          "type": "string",
-          "format": "uri"
         }
       }
     },
@@ -639,6 +593,36 @@
           "description": "Translation description",
           "type": "string"
         },
+        "input": {
+          "$ref": "#/definitions/TranslationInput"
+        },
+        "initialIterationInput": {
+          "$ref": "#/definitions/IterationInput"
+        },
+        "createdDateTime": {
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "translationResult": {
+          "$ref": "#/definitions/TranslationResult",
+          "readOnly": true
+        },
+        "latestInputWebvttFile": {
+          "$ref": "#/definitions/WebvttFile",
+          "readOnly": true
+        },
+        "latestTranslationResult": {
+          "$ref": "#/definitions/TranslationResult",
+          "readOnly": true
+        }
+      }
+    },
+    "TranslationInput": {
+      "description": "Translation input.",
+      "type": "object",
+      "properties": {
         "sourceLocale": {
           "description": "The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "type": "string",
@@ -652,14 +636,66 @@
         "voiceKind": {
           "$ref": "#/definitions/VideoTranslationVoiceKind"
         },
+        "videoFileUrl": {
+          "description": "Translation video file url",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "TranslationResult": {
+      "description": "Translation result.",
+      "type": "object",
+      "properties": {
+        "translatedVideoFileUrl": {
+          "description": "Translated video file URL.",
+          "type": "string",
+          "example": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "sourceLocaleSubtitleWebvttFileUrl": {
+          "description": "Source locale subtitle file URL.",
+          "type": "string",
+          "example": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "targetLocaleSubtitleWebvttFileUrl": {
+          "description": "Target locale subtitle file URL.",
+          "type": "string",
+          "example": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "metadataJsonWebvttFileUrl": {
+          "description": "Metadata json webvtt file URL.",
+          "type": "string",
+          "example": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "report": {
+          "description": "Report file URL.",
+          "type": "string",
+          "example": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        }
+      }
+    },
+    "Iteration": {
+      "description": "Translation iteration.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "description": {
+          "description": "Translation description",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "readOnly": true
+        },
         "createdDateTime": {
           "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "format": "date-time",
           "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/Status",
           "readOnly": true
         },
         "lastActionDateTime": {
@@ -668,40 +704,20 @@
           "type": "string",
           "readOnly": true
         },
-        "videoFileUrl": {
-          "description": "Translation video file url",
-          "type": "string",
-          "format": "uri"
-        },
-        "webvttFile": {
-          "$ref": "#/definitions/WebvttFile"
-        },
-        "sourceVideoFileUrl": {
-          "description": "Original video file url",
-          "type": "string",
-          "format": "uri",
+        "input": {
+          "$ref": "#/definitions/IterationInput",
           "readOnly": true
         },
-        "initialInputWebvttFile": {
-          "$ref": "#/definitions/WebvttFile",
-          "readOnly": true
-        },
-        "translationResult": {
+        "result": {
           "$ref": "#/definitions/TranslationResult",
           "readOnly": true
-        },
-        "initialTranslationResult": {
-          "$ref": "#/definitions/TranslationResult",
-          "readOnly": true
-        },
-        "latestInputWebvttFile": {
-          "$ref": "#/definitions/WebvttFile",
-          "readOnly": true
-        },
-        "latestTranslationResult": {
-          "$ref": "#/definitions/TranslationResult",
-          "readOnly": true
-        },
+        }
+      }
+    },
+    "IterationInput": {
+      "description": "Translation iteration input.",
+      "type": "object",
+      "properties": {
         "speakerCount": {
           "description": "Speaker count of the video.",
           "format": "int32",
@@ -711,6 +727,9 @@
           "description": "Subtitle max char count per segment.",
           "format": "int32",
           "type": "integer"
+        },
+        "webvttFile": {
+          "$ref": "#/definitions/WebvttFile"
         }
       }
     },
@@ -719,11 +738,11 @@
       "required": [
         "error"
       ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "$ref": "#/definitions/Error"
-          }
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
       }
     },
     "Error": {
@@ -840,6 +859,28 @@
       "name": "id",
       "in": "path",
       "description": "The ID of the resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "IterationPathResourceId": {
+      "name": "iteration-id",
+      "in": "path",
+      "description": "The ID of the iteration resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "TranslationPathResourceId": {
+      "name": "translation-id",
+      "in": "path",
+      "description": "The ID of the translation resource.",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
