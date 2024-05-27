@@ -11,7 +11,7 @@
   },
   "paths": {
     "/translations": {
-      "list": {
+      "get": {
         "tags": [
           "VideoTranslation"
         ],
@@ -120,10 +120,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/HeaderOperationId"
+            "$ref": "#/parameters/TranslationPathResourceId"
           },
           {
-            "$ref": "#/parameters/PathResourceId"
+            "$ref": "#/parameters/HeaderOperationId"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -179,7 +179,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/PathResourceId"
+            "$ref": "#/parameters/TranslationPathResourceId"
           },
           {
             "$ref": "#/parameters/HeaderOperationId"
@@ -235,13 +235,13 @@
         },
         "x-ms-examples": {
           "Create a project": {
-            "$ref": "./examples/create_translation.json"
+            "$ref": "./examples/put_translation.json"
           }
         }
       }
     },
     "/translations/{translation-id}/iterations": {
-      "list": {
+      "get": {
         "tags": [
           "VideoTranslation"
         ],
@@ -280,7 +280,7 @@
         },
         "x-ms-examples": {
           "Get Operation": {
-            "$ref": "./examples/get_edit_operations.json"
+            "$ref": "./examples/list_iterations.json"
           }
         }
       }
@@ -328,7 +328,7 @@
         },
         "x-ms-examples": {
           "Get Operation": {
-            "$ref": "./examples/get_translate_operation.json"
+            "$ref": "./examples/get_iteration.json"
           }
         }
       },
@@ -402,7 +402,7 @@
         },
         "x-ms-examples": {
           "Create a project": {
-            "$ref": "./examples/create_translation.json"
+            "$ref": "./examples/put_iteration.json"
           }
         }
       }
@@ -742,6 +742,46 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "ErrorCode": {
+      "description": "Top-level error code",
+      "enum": [
+        "BadRequest",
+        "BadArgument",
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "UnsupportedMediaType",
+        "TooManyRequests",
+        "InternalServerError",
+        "ServiceUnavailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true
+      }
+    },
+    "InnerError": {
+      "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors. This contains required properties error code, message and optional properties target, inner error(this can be nested).",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Detailed error code to help diagnostic.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case of invalid model.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Detailed error message.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
         }
       }
     },
