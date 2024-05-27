@@ -3,7 +3,7 @@
   "info": {
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service",
-    "version": "2024-03-01"
+    "version": "2024-04-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -2140,6 +2140,43 @@
         "modelAsString": true
       }
     },
+    "ApplicationFirewallSettings": {
+      "description": "Application firewall settings for the resource",
+      "type": "object",
+      "properties": {
+        "clientConnectionCountRules": {
+          "description": "Rules to control the client connection count",
+          "maxItems": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientConnectionCountRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClientConnectionCountRule": {
+      "description": "A base class for client connection count rules",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "ThrottleByJwtSignatureRule",
+            "ThrottleByUserIdRule",
+            "ThrottleByJwtCustomClaimRule"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClientConnectionCountRuleDiscriminator",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type"
+    },
     "CustomCertificate": {
       "description": "A custom certificate.",
       "required": [
@@ -3319,6 +3356,9 @@
         "networkACLs": {
           "$ref": "#/definitions/SignalRNetworkACLs"
         },
+        "applicationFirewall": {
+          "$ref": "#/definitions/ApplicationFirewallSettings"
+        },
         "publicNetworkAccess": {
           "description": "Enable or disable public network access. Default to \"Enabled\".\r\nWhen it's Enabled, network ACLs still apply.\r\nWhen it's Disabled, public network access is always disabled no matter what you set in network ACLs.",
           "default": "Enabled",
@@ -3570,6 +3610,73 @@
           "readOnly": true
         }
       }
+    },
+    "ThrottleByJwtCustomClaimRule": {
+      "description": "Throttle the client connection by a custom JWT claim",
+      "required": [
+        "claimName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientConnectionCountRule"
+        }
+      ],
+      "properties": {
+        "claimName": {
+          "description": "The name of the claim in the JWT token. The client connection with the same claim value will be aggregated. If the claim is not found in the token, the connection will be allowed.",
+          "type": "string"
+        },
+        "maxCount": {
+          "format": "int32",
+          "description": "Maximum connection count allowed for the same Jwt claim value. Clients with the same Jwt claim will get rejected if the connection count exceeds this value. Default value is 20.",
+          "default": 20,
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "ThrottleByJwtCustomClaimRule"
+    },
+    "ThrottleByJwtSignatureRule": {
+      "description": "Throttle the client connection by the JWT signature",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientConnectionCountRule"
+        }
+      ],
+      "properties": {
+        "maxCount": {
+          "format": "int32",
+          "description": "Maximum connection count allowed for the same JWT signature. Clients with the same JWT signature will get rejected if the connection count exceeds this value. Default value is 20.",
+          "default": 20,
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "ThrottleByJwtSignatureRule"
+    },
+    "ThrottleByUserIdRule": {
+      "description": "Throttle the client connection by the user ID",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientConnectionCountRule"
+        }
+      ],
+      "properties": {
+        "maxCount": {
+          "format": "int32",
+          "description": "Maximum connection count allowed for the same user ID. Clients with the same user ID will get rejected if the connection count exceeds this value. Default value is 20.",
+          "default": 20,
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "ThrottleByUserIdRule"
     },
     "UpstreamAuthSettings": {
       "description": "Upstream auth settings. If not set, no auth is used for upstream messages.",
