@@ -9790,9 +9790,28 @@
           "description": "The resource id of the container registry used in this build service.",
           "type": "string"
         },
-        "disableDefaultBuilderConfiguration": {
-          "description": "Indicate if the default builder configuration is disabled or not.",
-          "type": "boolean"
+        "defaultBuilderConfiguration": {
+          "description": "Indicate if the default builder configuration is enabled or disabled.",
+          "type": "string",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DefaultBuilderConfigurationState",
+            "values": [
+              {
+                "description": "Enable default builder configuration.",
+                "value": "Enabled"
+              },
+              {
+                "description": "Disable default builder configuration.",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "kPackVersion": {
           "description": "The installed KPack version in this build service.",
