@@ -108,9 +108,11 @@ alias OptionalNullableMetadata = {
 union AssistantsApiResponseFormatOption {
   string,
 
-  /** Default value */
-  "auto" | /** TODO: write */
-  "none" | /** TODO: write  */
+  /** Default value. Let the model handle the return format. */
+  "auto" | 
+  /** Setting the value to `none`, will result in a 400 Bad request. */
+  "none" | 
+  /** Sets the format of the output of the model when a ToolCall is returned.  */
   AssistantsApiResponseFormat,
 }
 
