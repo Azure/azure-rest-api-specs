@@ -359,6 +359,7 @@ model CreateAndRunThreadOptions {
   assistantId: string;
 
   @doc("The details used to create the new thread. If no thread is provided, an empty one will be created.")
+  @doc("The details used to create the new thread. If no thread is provided, an empty one will be created.")
   thread?: AssistantThreadCreationOptions;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"

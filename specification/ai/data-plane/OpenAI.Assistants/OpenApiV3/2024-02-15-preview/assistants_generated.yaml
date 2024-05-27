@@ -1027,12 +1027,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssistantThreadCreationOptions'
           description: The details used to create the new thread. If no thread is provided, an empty one will be created.
+          description: The details used to create the new thread. If no thread is provided, an empty one will be created.
         model:
           type: string
+          nullable: true
           nullable: true
           description: The overridden model that the assistant should use to run the thread.
         instructions:
           type: string
+          nullable: true
           nullable: true
           description: The overridden system instructions the assistant should use to run the thread.
         tools:
@@ -1040,7 +1043,13 @@ components:
           items:
             $ref: '#/components/schemas/ToolDefinition'
           nullable: true
+          nullable: true
           description: The overridden list of enabled tools the assistant should use to run the thread.
+        stream:
+          type: boolean
+          description: |-
+            If `true`, returns a stream of events that happen during the Run as server-sent events,
+            terminating when the Run enters a terminal state with a `data: [DONE]` message.
         stream:
           type: boolean
           description: |-
@@ -1086,6 +1095,11 @@ components:
           description: |-
             If `true`, returns a stream of events that happen during the Run as server-sent events,
             terminating when the Run enters a terminal state with a `data: [DONE]` message.
+        stream:
+          type: boolean
+          description: |-
+            If `true`, returns a stream of events that happen during the Run as server-sent events,
+            terminating when the Run enters a terminal state with a `data: [DONE]` message.
         metadata:
           type: object
           additionalProperties:
@@ -1093,6 +1107,20 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The details used when creating a new run of an assistant thread.
+    DoneEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - done
+      description: Terminal event indicating the successful end of a stream.
+    ErrorEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - error
+      description: Terminal event indicating a server side error while streaming.
     DoneEvent:
       anyOf:
         - type: string
@@ -1186,6 +1214,14 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolDefinition'
       description: The input definition information for a function tool as used to configure an assistant.
+    IncompleteRunDetails:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - max_completion_tokens
+            - max_prompt_tokens
+      description: The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.
     IncompleteRunDetails:
       anyOf:
         - type: string
@@ -1464,6 +1500,27 @@ components:
             - run_failed
             - run_expired
       description: A set of reasons describing why a message is marked as incomplete.
+    MessageIncompleteDetails:
+      type: object
+      required:
+        - reason
+      properties:
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/MessageIncompleteDetailsReason'
+          description: The provided reason describing why the message was marked as incomplete.
+      description: Information providing additional detail about a message entering an incomplete status.
+    MessageIncompleteDetailsReason:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - content_filter
+            - max_tokens
+            - run_cancelled
+            - run_failed
+            - run_expired
+      description: A set of reasons describing why a message is marked as incomplete.
     MessageRole:
       anyOf:
         - type: string
@@ -1472,6 +1529,26 @@ components:
             - user
             - assistant
       description: The possible values for roles attributed to messages in a thread.
+    MessageStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - incomplete
+            - completed
+      description: The possible execution status values for a thread message.
+    MessageStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.message.created
+            - thread.message.in_progress
+            - thread.message.delta
+            - thread.message.completed
+            - thread.message.incomplete
+      description: Message operation related streaming events
     MessageStatus:
       anyOf:
         - type: string
@@ -1599,6 +1676,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/MessageTextFilePathDetails'
           description: A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.
+        start_index:
+          type: integer
+          format: int32
+          description: The first text index associated with this text annotation.
+        end_index:
+          type: integer
+          format: int32
+          description: The last text index associated with this text annotation.
         start_index:
           type: integer
           format: int32
@@ -1839,6 +1924,12 @@ components:
           format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
+        usage:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/RunStepCompletionUsage'
+          nullable: true
+          description: Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.
         usage:
           type: object
           allOf:
@@ -2320,6 +2411,19 @@ components:
             - thread.run.step.cancelled
             - thread.run.step.expired
       description: Run step operation related streaming events
+    RunStepStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.run.step.created
+            - thread.run.step.in_progress
+            - thread.run.step.delta
+            - thread.run.step.completed
+            - thread.run.step.failed
+            - thread.run.step.cancelled
+            - thread.run.step.expired
+      description: Run step operation related streaming events
     RunStepToolCall:
       type: object
       required:
@@ -2365,6 +2469,21 @@ components:
             - message_creation
             - tool_calls
       description: The possible types of run steps.
+    RunStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.run.created
+            - thread.run.queued
+            - thread.run.in_progress
+            - thread.run.requires_action
+            - thread.run.completed
+            - thread.run.failed
+            - thread.run.cancelling
+            - thread.run.cancelled
+            - thread.run.expired
+      description: Run operation related streaming events
     RunStreamEvent:
       anyOf:
         - type: string
@@ -2441,6 +2560,10 @@ components:
         - object
         - created_at
         - thread_id
+        - status
+        - incomplete_details
+        - completed_at
+        - incomplete_at
         - status
         - incomplete_details
         - completed_at
@@ -2530,6 +2653,8 @@ components:
         - failed_at
         - incomplete_details
         - usage
+        - incomplete_details
+        - usage
         - metadata
       properties:
         id:
@@ -2614,6 +2739,17 @@ components:
             - $ref: '#/components/schemas/RunCompletionUsage'
           nullable: true
           description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
+        incomplete_details:
+          oneOf:
+            - $ref: '#/components/schemas/IncompleteRunDetails'
+          nullable: true
+          description: Details on why the run is incomplete. Will be `null` if the run is not incomplete.
+        usage:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/RunCompletionUsage'
+          nullable: true
+          description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
         metadata:
           type: object
           additionalProperties:
@@ -2621,6 +2757,13 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: Data representing a single evaluation run of an assistant thread.
+    ThreadStreamEvent:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - thread.created
+      description: Thread operation related streaming events
     ThreadStreamEvent:
       anyOf:
         - type: string
