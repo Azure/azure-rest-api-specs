@@ -1209,11 +1209,6 @@
                   "type": "boolean",
                   "description": "If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.",
                   "x-nullable": true
-                },
-                "stream": {
-                  "type": "boolean",
-                  "description": "If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.",
-                  "x-nullable": true
                 }
               },
               "required": [
@@ -1481,12 +1476,9 @@
         "thread": {
           "$ref": "#/definitions/AssistantThreadCreationOptions",
           "description": "The details used to create the new thread. If no thread is provided, an empty one will be created."
-          "description": "The details used to create the new thread. If no thread is provided, an empty one will be created."
         },
         "model": {
           "type": "string",
-          "description": "The overridden model that the assistant should use to run the thread.",
-          "x-nullable": true
           "description": "The overridden model that the assistant should use to run the thread.",
           "x-nullable": true
         },
@@ -1494,22 +1486,15 @@
           "type": "string",
           "description": "The overridden system instructions the assistant should use to run the thread.",
           "x-nullable": true
-          "description": "The overridden system instructions the assistant should use to run the thread.",
-          "x-nullable": true
         },
         "tools": {
           "type": "array",
           "description": "The overridden list of enabled tools the assistant should use to run the thread.",
           "x-nullable": true,
-          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
           },
           "x-ms-identifiers": []
-        },
-        "stream": {
-          "type": "boolean",
-          "description": "If `true`, returns a stream of events that happen during the Run as server-sent events,\nterminating when the Run enters a terminal state with a `data: [DONE]` message."
         },
         "stream": {
           "type": "boolean",
@@ -1561,10 +1546,6 @@
             "$ref": "#/definitions/ToolDefinition"
           },
           "x-ms-identifiers": []
-        },
-        "stream": {
-          "type": "boolean",
-          "description": "If `true`, returns a stream of events that happen during the Run as server-sent events,\nterminating when the Run enters a terminal state with a `data: [DONE]` message."
         },
         "stream": {
           "type": "boolean",
@@ -1714,30 +1695,6 @@
         }
       ],
       "x-ms-discriminator-value": "function"
-    },
-    "IncompleteRunDetails": {
-      "type": "string",
-      "description": "The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.",
-      "enum": [
-        "max_completion_tokens",
-        "max_prompt_tokens"
-      ],
-      "x-ms-enum": {
-        "name": "IncompleteRunDetails",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "maxCompletionTokens",
-            "value": "max_completion_tokens",
-            "description": "Maximum completion tokens exceeded"
-          },
-          {
-            "name": "maxPromptTokens",
-            "value": "max_prompt_tokens",
-            "description": "Maximum prompt tokens exceeded"
-          }
-        ]
-      }
     },
     "IncompleteRunDetails": {
       "type": "string",
@@ -1920,36 +1877,6 @@
         ]
       }
     },
-    "MessageStatus": {
-      "type": "string",
-      "description": "The possible execution status values for a thread message.",
-      "enum": [
-        "in_progress",
-        "incomplete",
-        "completed"
-      ],
-      "x-ms-enum": {
-        "name": "MessageStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "inProgress",
-            "value": "in_progress",
-            "description": "A run is currently creating this message."
-          },
-          {
-            "name": "incomplete",
-            "value": "incomplete",
-            "description": "This message is incomplete. See incomplete_details for more information."
-          },
-          {
-            "name": "completed",
-            "value": "completed",
-            "description": "This message was successfully completed by a run."
-          }
-        ]
-      }
-    },
     "MessageTextAnnotation": {
       "type": "object",
       "description": "An abstract representation of an annotation to text thread message content.",
@@ -1966,7 +1893,6 @@
       "discriminator": "type",
       "required": [
         "type",
-        "text"
         "text"
       ]
     },
@@ -2031,18 +1957,6 @@
           "format": "int32",
           "description": "The last text index associated with this text annotation.",
           "x-ms-client-name": "endIndex"
-        },
-        "start_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The first text index associated with this text annotation.",
-          "x-ms-client-name": "startIndex"
-        },
-        "end_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The last text index associated with this text annotation.",
-          "x-ms-client-name": "endIndex"
         }
       },
       "required": [
@@ -2082,18 +1996,6 @@
           "$ref": "#/definitions/MessageTextFilePathDetails",
           "description": "A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.",
           "x-ms-client-name": "filePath"
-        },
-        "start_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The first text index associated with this text annotation.",
-          "x-ms-client-name": "startIndex"
-        },
-        "end_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The last text index associated with this text annotation.",
-          "x-ms-client-name": "endIndex"
         },
         "start_index": {
           "type": "integer",
@@ -2457,16 +2359,6 @@
             }
           ]
         },
-        "usage": {
-          "type": "object",
-          "description": "Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunStepCompletionUsage"
-            }
-          ]
-        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -2600,35 +2492,6 @@
       "discriminator": "type",
       "required": [
         "type"
-      ]
-    },
-    "RunStepCompletionUsage": {
-      "type": "object",
-      "description": "Usage statistics related to the run step.",
-      "properties": {
-        "completion_tokens": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of completion tokens used over the course of the run step.",
-          "x-ms-client-name": "completionTokens"
-        },
-        "prompt_tokens": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of prompt tokens used over the course of the run step.",
-          "x-ms-client-name": "promptTokens"
-        },
-        "total_tokens": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total number of tokens used (prompt + completion).",
-          "x-ms-client-name": "totalTokens"
-        }
-      },
-      "required": [
-        "completion_tokens",
-        "prompt_tokens",
-        "total_tokens"
       ]
     },
     "RunStepCompletionUsage": {
@@ -3067,10 +2930,6 @@
         "incomplete_details",
         "completed_at",
         "incomplete_at",
-        "status",
-        "incomplete_details",
-        "completed_at",
-        "incomplete_at",
         "role",
         "content",
         "assistant_id",
@@ -3206,22 +3065,6 @@
             }
           ]
         },
-        "incomplete_details": {
-          "$ref": "#/definitions/IncompleteRunDetails",
-          "description": "Details on why the run is incomplete. Will be `null` if the run is not incomplete.",
-          "x-nullable": true,
-          "x-ms-client-name": "incompleteDetails"
-        },
-        "usage": {
-          "type": "object",
-          "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/RunCompletionUsage"
-            }
-          ]
-        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -3247,8 +3090,6 @@
         "completed_at",
         "cancelled_at",
         "failed_at",
-        "incomplete_details",
-        "usage",
         "incomplete_details",
         "usage",
         "metadata"
