@@ -27,7 +27,7 @@ These are the global settings for the Managed Network Fabric.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-06-15
+tag: package-2024-02-15-preview
 ```
 
 ### Tag: package-2024-02-15-preview
@@ -36,27 +36,7 @@ These settings apply only when `--tag=package-2024-02-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-02-15-preview'
 input-file:
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/AccessControlLists.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/InternetGatewayRules.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/InternetGateways.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/IpCommunities.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/IpExtendedCommunities.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/IpPrefixes.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/L2IsolationDomains.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/L3IsolationDomains.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NeighborGroups.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkDeviceSkus.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkDevices.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkFabricControllers.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkFabricSkus.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkFabrics.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkPacketBrokers.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkRacks.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkTapRules.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/NetworkTaps.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/Operations.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/RoutePolicies.json
-  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/common.json
+  - Microsoft.ManagedNetworkFabric/preview/2024-02-15-preview/managednetworkfabric.json
 ```
 
 ### Tag: package-2023-06-15
