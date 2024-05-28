@@ -1,8 +1,6 @@
 import "@typespec/http";
 import "@typespec/versioning";
-import "@typespec/openapi3";
 
-using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -243,7 +241,6 @@ model ToolOutput {
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 @added(ServiceApiVersions.v2024_05_01_preview)
-@oneOf
 union AssistantsApiToolChoiceOption {
   /** Specifies how the tool choice will be used */
   AssistantsApiToolChoiceOptionMode /** Specifies a tool the model should use. Use to force the model to call a specific tool. */ | AssistantsNamedToolChoice,

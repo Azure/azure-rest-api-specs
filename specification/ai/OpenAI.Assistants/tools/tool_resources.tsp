@@ -1,10 +1,8 @@
 import "@typespec/http";
 import "@typespec/versioning";
-import "@typespec/openapi3";
 
 import "../main.tsp";
 
-using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -99,7 +97,6 @@ model CreateCodeInterpreterToolResourceOptions {
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 @added(ServiceApiVersions.v2024_05_01_preview)
-@oneOf
 union CreateFileSearchToolResourceOptions {
   /** The vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant. */
   @encodedName("application/json", "vector_store_ids")
