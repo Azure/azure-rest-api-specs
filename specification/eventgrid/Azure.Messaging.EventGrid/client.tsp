@@ -5,6 +5,7 @@ import "@typespec/versioning";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid;
 
+
 @TypeSpec.Versioning.useDependency(ServiceApiVersions.v2024_06_01)
 namespace Customizations {
   @client(
