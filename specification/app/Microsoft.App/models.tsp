@@ -1,33 +1,105 @@
 // import "@typespec/rest";
-// import "@typespec/versioning";
-import "./main.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
+// using TypeSpec.Rest;
 
-// @versioned(Microsoft.App.Versions)
-namespace Microsoft.App;
+// @doc("The request to execute python code.")
+// model PythonCodeExecutionRequest {
+//   @doc("The properties for executing python code.")
+//   properties: PythonCodeExecutionRequestProperties;
+// }
 
-@doc("A widget.")
-@resource("widgets")
-model Widget {
-  @key("widgetName")
-  @doc("The widget name.")
-  @visibility("read")
-  name: string;
+// @doc("The response containing the result of the code execution.")
+// model PythonCodeExecutionResponse {
+//   @doc("The properties of the code execution response.")
+//   properties: PythonCodeExecutionresponseProperties;
+// }
 
-  @doc("The ID of the manufacturer.")
-  manufacturerId: string;
+// @doc("The properties of the code execution request.")
+// model PythonCodeExecutionRequestProperties {
+//   @doc("The code input type of the code execution request.")
+//   codeInputType: CodeInputType;
 
-  @doc("The faked shared model.")
-  sharedModel?: FakedSharedModel;
-}
+//   @doc("The execution type of the code execution request.")
+//   executionType: ExecutionType;
 
-@doc("Faked shared model")
-model FakedSharedModel {
-  @doc("The tag.")
-  tag: string;
+//   @doc("The python code to execute.")
+//   code: string;
 
-  @doc("The created date.")
-  createdDate: utcDateTime;
-}
+//   @doc("Code execution timeout in seconds.")
+//   timeoutInSeconds: string;
+// }
+
+// @doc("Code input type.")
+// union CodeInputType {
+//   string,
+
+//   @doc("Inline.")
+//   inline: "inline",
+
+//   @doc("InlineBase64.")
+//   inlineBase64: "inlineBase64",
+
+//   @doc("InlineText.")
+//   inlineText: "inlineText",
+// }
+
+// @doc("Execution Type")
+// union ExecutionType {
+//   string,
+
+//   @doc("Synchronous")
+//   synchronous: "synchronous",
+// }
+
+// @doc("The properties of the code execution result.")
+// model PythonCodeExecutionresponseProperties {
+//   @doc("The status of the code execution, indicates whether succeeded or not.")
+//   status: CodeExecutionStatus;
+
+//   @doc("The standard output of the code execution.")
+//   stdout: string;
+
+//   @doc("The standard error of the code execution.")
+//   stderr: string;
+
+//   @doc("The result of the code execution.")
+//   result: unknown;
+
+//   @doc("The execution time of the code in milliseconds.")
+//   executionTimeInMilliseconds: integer;
+// }
+
+// @doc("Code execution status.")
+// union CodeExecutionStatus {
+//   string,
+
+//   @doc("The code execution succeeded.")
+//   Success: "success",
+
+//   @doc("The code execution failed.")
+//   Failure: "failure",
+// }
+
+// @doc("A widget.")
+// @resource("widgets")
+// model Widget {
+//   @key("widgetName")
+//   @doc("The widget name.")
+//   @visibility("read")
+//   name: string;
+
+//   @doc("The ID of the manufacturer.")
+//   manufacturerId: string;
+
+//   @doc("The faked shared model.")
+//   sharedModel?: FakedSharedModel;
+// }
+
+// @doc("Faked shared model")
+// model FakedSharedModel {
+//   @doc("The tag.")
+//   tag: string;
+
+//   @doc("The created date.")
+//   createdDate: utcDateTime;
+// }
