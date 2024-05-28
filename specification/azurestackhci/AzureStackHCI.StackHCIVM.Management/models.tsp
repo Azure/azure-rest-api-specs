@@ -1556,7 +1556,7 @@ model HardwareProfileUpdate {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_test_preview)
-  @doc("attached gpus config")
+  @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
   @extension("x-ms-identifiers", ["assignmentType", "partitionSizeMB"])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
