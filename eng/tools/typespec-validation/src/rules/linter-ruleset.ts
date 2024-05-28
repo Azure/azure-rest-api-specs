@@ -40,13 +40,13 @@ export class LinterRulesetRule implements Rule {
 
     let requiredRuleset = "";
     if (rpFolder?.trim()?.endsWith("resource-manager")) {
-      requiredRuleset = "@azure-tools/typespec-azure-resource-manager/all";
+      requiredRuleset = "@azure-tools/typespec-azure-rulesets/resource-manager";
     } else if (rpFolder?.trim()?.endsWith("data-plane")) {
-      requiredRuleset = "@azure-tools/typespec-azure-core/all";
+      requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
     } else if (clientTspExists && !mainTspExists) {
       // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
       // are data-plane (e.g. HealthInsights.TrialMatcher)
-      requiredRuleset = "@azure-tools/typespec-azure-core/all";
+      requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
     } else {
       // Cannot determine if spec is data-plane or resource-manager, so cannot know
       // which linter ruleset is required.
