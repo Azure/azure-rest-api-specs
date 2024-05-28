@@ -37,7 +37,6 @@ interface LogicalNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LogicalNetwork>;
 
   @doc("The operation to update a logical network.")
-  @parameterVisibility
   update is ArmCustomPatchAsync<LogicalNetwork, LogicalNetworksUpdateRequest>;
 
   @doc("The operation to delete a logical network.")

@@ -37,7 +37,6 @@ interface VirtualHardDisks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualHardDisk>;
 
   @doc("The operation to update a virtual hard disk.")
-  @parameterVisibility
   update is ArmTagsPatchAsync<VirtualHardDisk>;
 
   @doc("The operation to delete a virtual hard disk.")

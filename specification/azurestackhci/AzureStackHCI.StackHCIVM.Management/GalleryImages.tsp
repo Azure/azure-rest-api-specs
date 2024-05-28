@@ -37,7 +37,6 @@ interface GalleryImages {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImage>;
 
   @doc("The operation to update a gallery image.")
-  @parameterVisibility
   update is ArmCustomPatchAsync<GalleryImage>;
 
   @doc("The operation to delete a gallery image.")

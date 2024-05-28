@@ -38,7 +38,6 @@ interface MarketplaceGalleryImages {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to update a marketplace gallery image.")
-  @parameterVisibility
   update is ArmCustomPatchAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to delete a marketplace gallery image.")

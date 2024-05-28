@@ -35,7 +35,6 @@ interface NetworkSecurityGroups {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkSecurityGroup>;
 
   @doc("Updates a network security group tags.")
-  @parameterVisibility
   updateTags is ArmTagsPatchAsync<NetworkSecurityGroup, TagsObject>;
 
   @doc("Deletes the specified network security group.")
