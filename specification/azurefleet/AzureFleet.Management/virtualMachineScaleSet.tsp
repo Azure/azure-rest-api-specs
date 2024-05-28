@@ -53,6 +53,8 @@ model VirtualMachineScaleSetListResult {
   @doc("The VirtualMachineScaleSet items on this page")
   value: Array<VirtualMachineScaleSet>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-format" "NextLink is of uri format and need to be defined."
   @doc("The link to the next page of items")
+  @format("uri")
   nextLink?: string;
 }
