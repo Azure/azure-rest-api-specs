@@ -5,11 +5,8 @@ import "@typespec/versioning";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-// NEED TO CHANGE THIS VERSION TO THE LATEST VERSION
 @TypeSpec.Versioning.useDependency(ServiceApiVersions.v2024_06_01)
 namespace Customizations {
-  // Python specific customizations
   @client(
     {
       name: "EventGridPublisherClient",
@@ -37,7 +34,6 @@ namespace Customizations {
     renewLock is renewCloudEventLocks;
   }
 
-  // Other Language specific customizations
   @client(
     {
       name: "EventGridSenderClient",
