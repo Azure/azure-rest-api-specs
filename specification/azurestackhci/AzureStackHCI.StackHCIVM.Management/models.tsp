@@ -1225,9 +1225,11 @@ model VirtualMachineInstancePropertiesHardwareProfile {
   @doc("Dynamic memory config")
   dynamicMemoryConfig?: VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_test_preview)
-  @doc("attached gpus config")
-  virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs;
+  @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
+  @extension("x-ms-identifiers", ["assignmentType", "partitionSizeMB"])
+  virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 
 @doc("Dynamic memory config")
@@ -1244,9 +1246,10 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
   targetMemoryBuffer?: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
 @added(Versions.v2024_05_01_test_preview)
-@doc("List of attached gpus")
-model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs {
+@doc("GPU properties - describes the GPU configuration.")
+model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
   @doc("GPU assignment type")
   assignmentType?: string;
 
@@ -1392,6 +1395,7 @@ model VirtualMachineInstanceManagedDiskParameters {
   securityProfile?: VMDiskSecurityProfile;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case."
 @added(Versions.v2024_05_01_test_preview)
 @doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
 model VMDiskSecurityProfile {
@@ -1550,9 +1554,11 @@ model HardwareProfileUpdate {
   @doc("RAM in MB for the virtual machine instance")
   memoryMB?: int64;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_test_preview)
   @doc("attached gpus config")
-  virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs;
+  @extension("x-ms-identifiers", ["assignmentType", "partitionSizeMB"])
+  virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 
 @doc("Storage profile update")

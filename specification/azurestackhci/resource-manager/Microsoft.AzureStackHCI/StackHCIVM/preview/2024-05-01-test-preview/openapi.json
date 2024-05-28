@@ -4392,8 +4392,15 @@
           "description": "RAM in MB for the virtual machine instance"
         },
         "virtualMachineGPUs": {
-          "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs",
-          "description": "attached gpus config"
+          "type": "array",
+          "description": "attached gpus config",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU"
+          },
+          "x-ms-identifiers": [
+            "assignmentType",
+            "partitionSizeMB"
+          ]
         }
       }
     },
@@ -6598,8 +6605,15 @@
           "description": "Dynamic memory config"
         },
         "virtualMachineGPUs": {
-          "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs",
-          "description": "attached gpus config"
+          "type": "array",
+          "description": "virtualMachineGPUs - list of gpus to be attached to the virtual machine instance",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU"
+          },
+          "x-ms-identifiers": [
+            "assignmentType",
+            "partitionSizeMB"
+          ]
         }
       }
     },
@@ -6624,9 +6638,9 @@
         }
       }
     },
-    "VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPUs": {
+    "VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU": {
       "type": "object",
-      "description": "List of attached gpus",
+      "description": "GPU properties - describes the GPU configuration.",
       "properties": {
         "assignmentType": {
           "type": "string",
