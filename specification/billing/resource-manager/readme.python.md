@@ -17,8 +17,4 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/billing/azure-mgmt-billing/azure/mgmt/billing
 ```
-``` yaml $(python)
-modelerfour:
-  lenient-model-deduplication: true
-```
 
