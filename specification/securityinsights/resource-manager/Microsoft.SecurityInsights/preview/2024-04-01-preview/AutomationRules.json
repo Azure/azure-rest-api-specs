@@ -246,14 +246,14 @@
           {
             "in": "path",
             "name": "entityIdentifier",
-			"description": "Entity identifier.",
+			      "description": "Entity identifier.",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "requestBody",
-			"description": "Describes the request body for triggering a playbook on an entity.",
+			      "description": "Describes the request body for triggering a playbook on an entity.",
             "schema": {
               "$ref": "#/definitions/EntityManualTriggerRequestBody"
             }
@@ -319,7 +319,7 @@
         ],
         "responses": {
           "204": {
-		    "description": "Success",
+		        "description": "Success",
             "schema": {
               "type": "object"
             }
@@ -444,12 +444,12 @@
           "$ref": "#/definitions/AutomationRuleBooleanConditionSupportedOperator"
         },
         "innerConditions": {
-		  "type": "array",
+		      "type": "array",
           "items": {
             "$ref": "#/definitions/AutomationRuleCondition"
           },
-		  "x-ms-identifiers": [],
-		  "minItems": 2,
+		      "x-ms-identifiers": [],
+		      "minItems": 2,
           "maxItems": 10
         }
       }
@@ -1148,7 +1148,7 @@
       "x-ms-discriminator-value": "RunPlaybook",
       "x-ms-client-flatten": true
     },
-	"AutomationRulesList": {
+	  "AutomationRulesList": {
       "type": "object",
       "properties": {
         "value": {
@@ -1188,12 +1188,12 @@
         },
         "conditions": {
           "description": "The conditions to evaluate to determine if the automation rule should be triggered on a given object.",
-		  "type": "array",
+		      "type": "array",
           "maxItems": 50,
           "items": {
             "$ref": "#/definitions/AutomationRuleCondition"
           },
-		  "x-ms-identifiers": [
+		      "x-ms-identifiers": [
             "conditionType"
           ]
         }
@@ -1332,7 +1332,7 @@
       }
     },
     "ManualTriggerRequestBody": {
-	  "type": "object",
+	    "type": "object",
       "required": [
         "logicAppsResourceId"
       ],
@@ -1363,7 +1363,7 @@
         "logicAppResourceId"
       ],
       "properties": {
-	    "logicAppResourceId": {
+	        "logicAppResourceId": {
           "description": "The resource id of the playbook resource.",
           "type": "string",
           "format": "arm-id",
