@@ -225,12 +225,6 @@ union GpuAssignmentTypeEnum {
   @doc("GPU P")
   GpuP: "GpuP",
 
-  @doc("GPU PV")
-  GpuPV: "GpuPV",
-
-  @doc("GPU Default")
-  GpuDefault: "GpuDefault",
-
   string,
 }
 
