@@ -34,11 +34,11 @@ model OpenAIFile {
   @added(ServiceApiVersions.v2024_05_01_preview)
   status?: FileState;
 
-  /** The error message with details in case processing of this file failed. This field is available in Azure OpenAI only.*/
+  /** The error message with details in case processing of this file failed. This field is available in Azure OpenAI only. */
   @encodedName("application/json", "status_details")
   @added(ServiceApiVersions.v2024_05_01_preview)
   statusDetails?: string;
-};
+}
 
 /** The state of the file. */
 @added(ServiceApiVersions.v2024_05_01_preview)
@@ -79,7 +79,7 @@ union FileState {
    * The entity has been deleted but may still be referenced by other entities predating the deletion. It can be categorized as a
    * terminal state.
    */
-  deleted: "deleted"
+  deleted: "deleted",
 }
 
 /** The possible values denoting the intended usage of a file. */

@@ -59,10 +59,9 @@ model AssistantThreadCreationOptions {
 /** The details used to update an existing assistant thread */
 @added(ServiceApiVersions.v2024_02_15_preview)
 model UpdateAssistantThreadOptions {
-
   /** The ID of the thread to modify. */
   @path threadId: string;
-  
+
   /**
    * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
    * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires

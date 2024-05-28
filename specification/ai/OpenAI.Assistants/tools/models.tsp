@@ -34,7 +34,6 @@ model FileSearchToolDefinition extends ToolDefinition {
   type: "file_search";
 }
 
-
 @doc("The input definition information for a function tool as used to configure an assistant.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model FunctionToolDefinition extends ToolDefinition {
@@ -247,8 +246,7 @@ model ToolOutput {
 @oneOf
 union AssistantsApiToolChoiceOption {
   /** Specifies how the tool choice will be used */
-  AssistantsApiToolChoiceOptionMode | /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
-  AssistantsNamedToolChoice,
+  AssistantsApiToolChoiceOptionMode /** Specifies a tool the model should use. Use to force the model to call a specific tool. */ | AssistantsNamedToolChoice,
 }
 
 /** Specifies how the tool choice will be used */
