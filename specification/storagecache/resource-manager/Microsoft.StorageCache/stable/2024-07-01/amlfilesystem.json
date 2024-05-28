@@ -462,6 +462,311 @@
         "operationId": "amlFilesystems_CancelArchive"
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/autoExportJobs/{autoExportJobName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/autoExportJobNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started the auto export job's transition to Deleted state. Poll the auto export job to monitor.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Auto export job deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoExportJob_Delete": {
+            "$ref": "./examples/autoExportJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "tags": [
+          "exportJobs"
+        ],
+        "description": "Schedules an auto export job for deletion.",
+        "operationId": "autoExportJob_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/autoExportJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the auto export job object corresponding to amlFilesystemName.",
+            "schema": {
+              "$ref": "#/definitions/autoExportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "exportJobs_Get": {
+            "$ref": "./examples/autoExportJob_Get.json"
+          }
+        },
+        "tags": [
+          "exportJobs"
+        ],
+        "description": "Returns an auto export job.",
+        "operationId": "autoExportJob_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoExportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the auto export job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "autoExportJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoExportJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The auto export job has been created or updated.",
+            "schema": {
+              "$ref": "#/definitions/AutoExportJob"
+            }
+          },
+          "201": {
+            "description": "auto export job creation has been initiated. Poll the auto export job's provisioningState property to monitor creation progress.",
+            "headers": {
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AutoExportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoExportJob_CreateOrUpdate": {
+            "$ref": "./examples/autoExportJobs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "autoExportJob"
+        ],
+        "description": "Create or update an auto export job.",
+        "operationId": "autoExportJob_CreateOrUpdate"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoExportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the auto export job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "autoExportJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoExportJobUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the auto export job.",
+            "schema": {
+              "$ref": "#/definitions/AutoExportJob"
+            }
+          },
+          "202": {
+            "description": "Auto export job update has been initiated. Poll the auto export job's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoExportJob_Update": {
+            "$ref": "./examples/autoExportJobs_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "autoExportJob"
+        ],
+        "description": "Update an auto export job instance.",
+        "operationId": "autoExportJob_Update"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/autoExportJobs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of auto export jobs. History is maintained for 10 most recent jobs, although more than 10 jobs can be returned in the list if they were run recently. If there are more than 10 job records, the inactive auto export jobs will be automatically deleted from the list 72 hours after completion.Note that entity references might replace complete AmlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/AutoExportJobsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoExportJob_ListByAmlFilesystem": {
+            "$ref": "./examples/autoExportJobs_ListByAmlFilesystem.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "autoExportJob"
+        ],
+        "description": "Returns all the auto export jobs the user has access to under an AML File System.",
+        "operationId": "autoExportJob_ListByAmlFilesystem"
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/importJobs/{importJobName}": {
       "delete": {
         "produces": [
@@ -640,7 +945,7 @@
         "tags": [
           "importJobs"
         ],
-        "description": "Create or update an import job. Import jobs are automatically deleted 72 hours after completion.",
+        "description": "Create or update an import job.",
         "operationId": "importJobs_CreateOrUpdate"
       },
       "patch": {
@@ -740,7 +1045,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of import jobs. Note that entity references might replace complete AmlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "description": "A list of import jobs. History is maintained on 10 most recent jobs, although more than 10 jobs can be present in the list if they were run recently. If there are more than 10 job records, the inactive import jobs will be automatically deleted from the list 72 hours after completion. Note that entity references might replace complete AmlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
             "schema": {
               "$ref": "#/definitions/ImportJobsListResult"
             }
@@ -1370,6 +1675,205 @@
         }
       }
     },
+    "AutoExportJob": {
+      "description": "An auto export job instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Properties of the auto export job.",
+          "properties": {
+            "provisioningState": {
+              "description": "ARM provisioning state.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Creating",
+                "Deleting",
+                "Updating",
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "name": "AutoExportJobProvisioningStateType",
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "adminStatus": {
+              "type": "string",
+              "description": "The administrative status of the auto export job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto export job. By default it is set to 'Enable'.",
+              "default": "Active",
+              "enum": [
+                "Active",
+                "Cancel"
+              ],
+              "x-ms-enum": {
+                "name": "AutoExportJobAdminStatus",
+                "modelAsString": true
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "autoExportPrefixes": {
+              "type": "array",
+              "description": "An array of blob paths/prefixes that get auto exported to the cluster namespace. It has '/' as the default value. Number of maximum allowed paths for now is 1.",
+              "items": {
+                "type": "string"
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
+            "status": {
+              "x-ms-client-flatten": true,
+              "description": "The status of the auto export",
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "state": {
+                  "description": "The operational state of auto export. InProgress indicates the export is running.  Disabling indicates the user has requested to disable the export but the disabling is still in progress. Disabled indicates auto export has been disabled.  DisableFailed indicates the disabling has failed.  Failed means the export was unable to continue, due to a fatal error.",
+                  "type": "string",
+                  "enum": [
+                    "InProgress",
+                    "Disabling",
+                    "Disabled",
+                    "DisableFailed",
+                    "Failed"
+                  ],
+                  "x-ms-enum": {
+                    "name": "AutoExportStatusType",
+                    "modelAsString": true
+                  }
+                },
+                "statusCode": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Server-defined status code for auto export job."
+                },
+                "statusMessage": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Server-defined status message for auto export job."
+                },
+                "totalFilesExported": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Total files exported since the start of the export. This is accumulative, some files may be counted repeatedly.",
+                  "format": "int64"
+                },
+                "totalMiBExported": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Total data (in MiB) exported since the start of the export. This is accumulative, some files may be counted repeatedly.",
+                  "format": "int64"
+                },
+                "totalFilesFailed": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Total files failed to be export since the last successfully completed iteration. This is accumulative, some files may be counted repeatedly.",
+                  "format": "int64"
+                },
+                "exportIterationCount": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Number of iteratons completed since the start of the export.",
+                  "format": "int32"
+                },
+                "lastSuccessfulIterationCompletionTimeUTC": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Time (in UTC) of the last successfully completed export iteration. Look at logging container for details.",
+                  "format": "date-time"
+                },
+                "currentIterationFilesDiscovered": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Files discovered for export in current iteration. It may increase while more export items are found.",
+                  "format": "int64"
+                },
+                "currentIterationMiBDiscovered": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Data (in MiB) discovered for export in current iteration. It may increase while more export items are found.",
+                  "format": "int64"
+                },
+                "currentIterationFilesExported": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Files that have been exported in current iteration.",
+                  "format": "int64"
+                },
+                "currentIterationMiBExported": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Data (in MiB) that have been exported in current iteration.",
+                  "format": "int64"
+                },
+                "currentIterationFilesFailed": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "Files failed to export in current iteration.",
+                  "format": "int64"
+                },
+                "lastStartedTimeUTC": {
+                  "readOnly": true,
+                  "description": "The time (in UTC) the latest auto export job started.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "lastCompletionTimeUTC": {
+                  "readOnly": true,
+                  "description": "The time (in UTC) of the last completed auto export job.",
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "AutoExportJobUpdate": {
+      "description": "An auto export job update instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
+    "AutoExportJobsListResult": {
+      "description": "Result of the request to list auto export jobs. It contains a list of auto export jobs and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of auto export job list results, if there are any.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of auto export jobs.",
+          "items": {
+            "$ref": "#/definitions/AutoExportJob"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ImportJob": {
       "description": "An import job instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
       "x-ms-azure-resource": true,
@@ -1402,12 +1906,33 @@
               "type": "string",
               "readOnly": true
             },
+            "adminStatus": {
+              "type": "string",
+              "description": "The administrative status of the import job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will cancel the current active import job. By default it is set to 'Enable'.",
+              "default": "Active",
+              "enum": [
+                "Active",
+                "Cancel"
+              ],
+              "x-ms-enum": {
+                "name": "ImportJobAdminStatus",
+                "modelAsString": true
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
+            },
             "importPrefixes": {
               "type": "array",
               "description": "An array of blob paths/prefixes that get imported into the cluster namespace. It has '/' as the default value.",
               "items": {
                 "type": "string"
-              }
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
             },
             "conflictResolutionMode": {
               "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
@@ -1446,7 +1971,7 @@
               "properties": {
                 "state": {
                   "readOnly": true,
-                  "description": "The state of the import job. InProgress indicates the import is still running. Canceled indicates it has been canceled by the user. Completed indicates import finished, successfully importing all discovered blobs into the Lustre namespace. CompletedPartial indicates the import finished but some blobs either were found to be conflicting and could not be imported or other errors were encountered. Failed means the import was unable to complete due to a fatal error.",
+                  "description": "The operational state of the import job. InProgress indicates the import is still running. Canceled indicates it has been canceled by the user. Completed indicates import finished, successfully importing all discovered blobs into the Lustre namespace. CompletedPartial indicates the import finished but some blobs either were found to be conflicting and could not be imported or other errors were encountered. Failed means the import was unable to complete due to a fatal error.",
                   "type": "string",
                   "enum": [
                     "InProgress",
@@ -1484,6 +2009,42 @@
                   "type": "integer",
                   "format": "int64"
                 },
+                "importedFiles": {
+                  "readOnly": true,
+                  "description": "New or modified files that have been imported into the filesystem.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "importedDirectories": {
+                  "readOnly": true,
+                  "description": "New or modified directories that have been imported into the filesystem.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "importedSymlinks": {
+                  "readOnly": true,
+                  "description": "Newly added symbolic links into the filesystem.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "preexistingFiles": {
+                  "readOnly": true,
+                  "description": "Files that already exist in the filesystem and have not been modified.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "preexistingDirectories": {
+                  "readOnly": true,
+                  "description": "Directories that already exist in the filesystem and have not been modified.",
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "preexistingSymlinks": {
+                  "readOnly": true,
+                  "description": "Symbolic links that already exist in the filesystem and have not been modified.",
+                  "type": "integer",
+                  "format": "int64"
+                },
                 "blobsImportedPerSecond": {
                   "readOnly": true,
                   "description": "A recent and frequently updated rate of total files, directories, and symlinks imported per second.",
@@ -1492,13 +2053,13 @@
                 },
                 "lastCompletionTime": {
                   "readOnly": true,
-                  "description": "The time of the last completed archive operation",
+                  "description": "The time (in UTC) of the last completed import job.",
                   "type": "string",
                   "format": "date-time"
                 },
                 "lastStartedTime": {
                   "readOnly": true,
-                  "description": "The time the latest archive operation started",
+                  "description": "The time (in UTC) the latest import job started.",
                   "type": "string",
                   "format": "date-time"
                 },
