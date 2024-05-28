@@ -113,7 +113,7 @@
         "tags": [
           "VideoTranslation"
         ],
-        "description": "Deletes the translation identified by the given ID. All data (like webvtt file, content editing translations) of this translation will be deleted automatically.",
+        "description": "Deletes the translation identified by the given ID. All data (like webvtt file, iterations) of this translation will be deleted automatically.",
         "operationId": "Translations_Delete",
         "produces": [
           "application/json"
@@ -412,8 +412,8 @@
         "tags": [
           "VideoTranslation"
         ],
-        "description": "Gets delete operation info.",
-        "operationId": "TranslationDeleteOperations_Get",
+        "description": "Gets operation info.",
+        "operationId": "Operations_Get",
         "produces": [
           "application/json"
         ],
@@ -491,8 +491,8 @@
         "modelAsString": true
       }
     },
-    "TranslationCreationWebvttFileFormat": {
-      "description": "Translation creation file kind.",
+    "WebvttFileKind": {
+      "description": "Webvtt file format.",
       "enum": [
         "SourceLocaleSubtitle",
         "TargetLocaleSubtitle",
@@ -500,11 +500,25 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "TranslationCreationWebvttFileFormat",
-        "modelAsString": true
+        "name": "WebvttFileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SourceLocaleSubtitle",
+            "description": "The webvtt file is plain text format, and the text is the source locale subtitle."
+          },
+          {
+            "value": "TargetLocaleSubtitle",
+            "description": "The webvtt file is plain text format, and the text is the target locale subtitle."
+          },
+          {
+            "value": "MetadataJson",
+            "description": "The webvtt file is metadata JSON format."
+          }
+        ]
       }
     },
-    "VideoTranslationVoiceKind": {
+    "VoiceKind": {
       "description": "Translation voice kind.",
       "enum": [
         "PlatformVoice",
@@ -512,8 +526,18 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "VideoTranslationVoiceKind",
-        "modelAsString": true
+        "name": "VoiceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "PlatformVoice",
+            "description": "The translated video is synthesized with TTS platform voice."
+          },
+          {
+            "value": "PersonalVoice",
+            "description": "The translated video is synthesized with TTS personal voice."
+          }
+        ]
       }
     },
     "PaginatedTranslations": {
@@ -561,8 +585,8 @@
     "WebvttFile": {
       "description": "Translation webvtt file input.",
       "required": [
-        "webvttFileUrl",
-        "webvttFileFormat"
+        "url",
+        "format"
       ],
       "type": "object",
       "properties": {
@@ -571,8 +595,8 @@
           "type": "string",
           "format": "uri"
         },
-        "format": {
-          "$ref": "#/definitions/TranslationCreationWebvttFileFormat"
+        "kind": {
+          "$ref": "#/definitions/WebvttFileKind"
         }
       }
     },
@@ -580,9 +604,7 @@
       "description": "Translation response.",
       "required": [
         "id",
-        "sourceLocale",
-        "targetLocale",
-        "voiceKind"
+        "input"
       ],
       "type": "object",
       "properties": {
@@ -605,22 +627,24 @@
           "type": "string",
           "readOnly": true
         },
-        "translationResult": {
-          "$ref": "#/definitions/TranslationResult",
+        "latestIteration": {
+          "$ref": "#/definitions/Iteration",
           "readOnly": true
         },
-        "latestInputWebvttFile": {
-          "$ref": "#/definitions/WebvttFile",
-          "readOnly": true
-        },
-        "latestTranslationResult": {
-          "$ref": "#/definitions/TranslationResult",
+        "latestCompletedIteration": {
+          "$ref": "#/definitions/Iteration",
           "readOnly": true
         }
       }
     },
     "TranslationInput": {
       "description": "Translation input.",
+      "required": [
+        "sourceLocale",
+        "targetLocale",
+        "voiceKind",
+        "videoFileUrl"
+      ],
       "type": "object",
       "properties": {
         "sourceLocale": {
@@ -634,7 +658,7 @@
           "example": "en-US"
         },
         "voiceKind": {
-          "$ref": "#/definitions/VideoTranslationVoiceKind"
+          "$ref": "#/definitions/VoiceKind"
         },
         "videoFileUrl": {
           "description": "Translation video file url",
@@ -685,7 +709,7 @@
           "$ref": "#/definitions/ResourceId"
         },
         "description": {
-          "description": "Translation description",
+          "description": "Iteration description",
           "type": "string"
         },
         "status": {
@@ -773,7 +797,7 @@
           "type": "string"
         },
         "target": {
-          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case of invalid model.",
+          "description": "The source of the error.",
           "type": "string"
         },
         "message": {
@@ -797,7 +821,7 @@
           "$ref": "#/definitions/ErrorCode"
         },
         "target": {
-          "description": "The source of the error. For example it would be \"model\" or \"model id\" in case of invalid model.",
+          "description": "The source of the error.",
           "type": "string"
         },
         "message": {
@@ -890,20 +914,9 @@
     "QueryFilter": {
       "name": "filter",
       "in": "query",
-      "description": "Filter condition.\r\n  - **Supported properties:** projectId, createdDateTime, locale, kind\r\n  - **Operators:**\r\n    - eq, ne are supported for all properties.\r\n    - gt, ge, lt, le are supported for createdDateTime.\r\n  - **Example:**\r\n    - ```filter=projectId eq 'Jessica'``` (filter by project ID)\r\n    - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\r\n    - ```filter=locale eq 'en-US'``` (filter training set and model by locale)\r\n    - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)",
+      "description": "Filter condition.\r\n  - **Supported properties:** createdDateTime\r\n  - **Operators:**\r\n    - eq, ne are supported for all properties.\r\n    - gt, ge, lt, le are supported for createdDateTime.\r\n  - **Example:**\r\n    - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PathResourceId": {
-      "name": "id",
-      "in": "path",
-      "description": "The ID of the resource.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
-      "minLength": 3,
-      "maxLength": 64,
       "x-ms-parameter-location": "method"
     },
     "IterationPathResourceId": {
@@ -926,15 +939,6 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
       "minLength": 3,
       "maxLength": 64,
-      "x-ms-parameter-location": "method"
-    },
-    "PathUuid": {
-      "name": "id",
-      "in": "path",
-      "description": "The resource ID, which should be UUID.",
-      "required": true,
-      "type": "string",
-      "format": "uuid",
       "x-ms-parameter-location": "method"
     },
     "PathOperationId": {
