@@ -37,6 +37,7 @@ interface NetworkInterfaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkInterface>;
 
   @doc("The operation to update a network interface.")
+  @parameterVisibility
   update is ArmCustomPatchAsync<NetworkInterface>;
 
   @doc("The operation to delete a network interface.")
