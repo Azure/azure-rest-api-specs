@@ -70,7 +70,28 @@ model RunStep {
   @doc("The Unix timestamp, in seconds, representing when this failed.")
   failedAt: utcDateTime | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.")
+  @added(ServiceApiVersions.v2024_02_15_preview)
+  usage?: RunStepCompletionUsage | null; // required in OpenAI, not present in AOpenAI
+
   ...RequiredNullableMetadata;
+}
+
+@doc("Usage statistics related to the run step.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepCompletionUsage {
+  @doc("Number of completion tokens used over the course of the run step.")
+  @encodedName("application/json", "completion_tokens")
+  completionTokens: int64;
+
+  @doc("Number of prompt tokens used over the course of the run step.")
+  @encodedName("application/json", "prompt_tokens")
+  promptTokens: int64;
+
+  @doc("Total number of tokens used (prompt + completion).")
+  @encodedName("application/json", "total_tokens")
+  totalTokens: int64;
 }
 
 @doc("The possible types of run steps.")
@@ -164,4 +185,182 @@ model RunStepError {
 
   @doc("The human-readable text associated with this error.")
   message: string;
+}
+
+//
+// The following types facilitate streaming use.
+//
+
+/** Represents a run step delta i.e. any changed fields on a run step during streaming. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaChunk {
+  /** The identifier of the run step, which can be referenced in API endpoints. */
+  id: string;
+
+  /** The object type, which is always `thread.run.step.delta`. */
+  object: "thread.run.step.delta";
+
+  /** The delta containing the fields that have changed on the run step. */
+  delta: RunStepDelta;
+}
+
+/** Represents the delta payload in a streaming run step delta chunk. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDelta {
+  /** The details of the run step. */
+  @encodedName("application/json", "step_details")
+  stepDetails?: RunStepDeltaDetail;
+}
+
+/** Represents a single run step detail item in a streaming run step's delta payload. */
+@discriminator("type")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaDetail {
+  /** The object type for the run step detail object. */
+  type: string;
+}
+
+/** Represents a message creation within a streaming run step delta. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaMessageCreation extends RunStepDeltaDetail {
+  /** The object type, which is always "message_creation." */
+  type: "message_creation";
+
+  /** The message creation data. */
+  @encodedName("application/json", "message_creation")
+  messageCreation?: RunStepDeltaMessageCreationObject;
+}
+
+/** Represents the data within a streaming run step message creation response object. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaMessageCreationObject {
+  /** The ID of the newly-created message. */
+  @encodedName("application/json", "message_id")
+  messageId?: string;
+}
+
+/** Represents an invocation of tool calls as part of a streaming run step. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaToolCallObject extends RunStepDeltaDetail {
+  /** The object type, which is always "tool_calls." */
+  type: "tool_calls";
+
+  /** The collection of tool calls for the tool call detail item. */
+  @encodedName("application/json", "tool_calls")
+  toolCalls?: RunStepDeltaToolCall[];
+}
+
+/** The abstract base representation of a single tool call within a streaming run step's delta tool call details. */
+@discriminator("type")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaToolCall {
+  /** The index of the tool call detail in the run step's tool_calls array. */
+  index: int32;
+
+  /** The ID of the tool call, used when submitting outputs to the run. */
+  id: string;
+
+  /** The type of the tool call detail item in a streaming run step's details. */
+  type: string;
+}
+
+/** Represents a function tool call within a streaming run step's tool call details. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaFunctionToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "function." */
+  type: "function";
+
+  /** The function data for the tool call. */
+  function?: RunStepDeltaFunction;
+}
+
+/** Represents a retrieval tool call within a streaming run step's tool call details. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaRetrievalToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "retrieval." */
+  type: "retrieval";
+
+  /** Reserved for future use. */
+  @encodedName("application/json", "file_search")
+  fileSearch?: Record<string>;
+}
+
+/** Represents a Code Interpreter tool call within a streaming run step's tool call details. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "code_interpreter." */
+  type: "code_interpreter";
+
+  /** The Code Interpreter data for the tool call. */
+  @encodedName("application/json", "code_interpreter")
+  codeInterpreter?: RunStepDeltaCodeInterpreterDetailItemObject;
+}
+
+/** Represents the function data in a streaming run step delta's function tool call. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaFunction {
+  /** The name of the function. */
+  name?: string;
+
+  /** The arguments passed to the function as input. */
+  arguments?: string;
+
+  /** The output of the function, null if outputs have not yet been submitted. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  output?: string | null;
+}
+
+/** Represents the Code Interpreter tool call data in a streaming run step's tool calls. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaCodeInterpreterDetailItemObject {
+  /** The input into the Code Interpreter tool call. */
+  input?: string;
+
+  /**
+   * The outputs from the Code Interpreter tool call. Code Interpreter can output one or more
+   * items, including text (`logs`) or images (`image`). Each of these are represented by a
+   * different object type.
+   */
+  outputs?: RunStepDeltaCodeInterpreterOutput[];
+}
+
+/** The abstract base representation of a streaming run step tool call's Code Interpreter tool output. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+@discriminator("type")
+model RunStepDeltaCodeInterpreterOutput {
+  /** The index of the output in the streaming run step tool call's Code Interpreter outputs array. */
+  index: int32;
+
+  /** The type of the streaming run step tool call's Code Interpreter output. */
+  type: string;
+}
+
+/** Represents a log output as produced by the Code Interpreter tool and as represented in a streaming run step's delta tool calls collection. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaCodeInterpreterLogOutput
+  extends RunStepDeltaCodeInterpreterOutput {
+  /** The type of the object, which is always "logs." */
+  type: "logs";
+
+  /** The text output from the Code Interpreter tool call. */
+  logs?: string;
+}
+
+/** Represents an image output as produced the Code interpreter tool and as represented in a streaming run step's delta tool calls collection. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaCodeInterpreterImageOutput
+  extends RunStepDeltaCodeInterpreterOutput {
+  /** The object type, which is always "image." */
+  type: "image";
+
+  /** The image data for the Code Interpreter tool call output. */
+  image?: RunStepDeltaCodeInterpreterImageOutputObject;
+}
+
+/** Represents the data for a streaming run step's Code Interpreter tool call image output. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunStepDeltaCodeInterpreterImageOutputObject {
+  /** The file ID for the image. */
+  @encodedName("application/json", "file_id")
+  fileId?: string;
 }

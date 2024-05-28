@@ -7,6 +7,7 @@ import "./messages/main.tsp";
 import "./runs/main.tsp";
 import "./run_steps/main.tsp";
 import "./files/main.tsp";
+import "./streaming/events.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -14,6 +15,15 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
+namespace Azure.AI {
+
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
+namespace Azure.AI.OpenAI {
+
+}
+
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
     {
@@ -36,11 +46,11 @@ using Azure.Core;
 )
 @versioned(ServiceApiVersions)
 @doc("Azure OpenAI APIs for Assistants.")
-namespace Azure.AI.OpenAI.Assistants;
-
-@doc("The known set of supported API versions.")
-enum ServiceApiVersions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The initial version of Azure OpenAI Assistants that corresponds to functionality in OpenAI's first beta release.")
-  v2024_02_15_preview: "2024-02-15-preview",
+namespace Azure.AI.OpenAI.Assistants {
+  @doc("The known set of supported API versions.")
+  enum ServiceApiVersions {
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    @doc("The initial version of Azure OpenAI Assistants that corresponds to functionality in OpenAI's first beta release.")
+    v2024_02_15_preview: "2024-02-15-preview",
+  }
 }

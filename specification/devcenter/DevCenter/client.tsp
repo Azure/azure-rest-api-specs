@@ -170,7 +170,7 @@ interface EnvironmentClientOperations {
 );
 @@clientName(DevCenterService.HardwareProfile, "DevBoxHardwareProfile", "java");
 @@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "java");
-@@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeGb", "java");
+@@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeInGb", "java");
 @@clientName(DevCenterService.ImageReference, "DevBoxImageReference", "java");
 @@clientName(DevCenterService.Schedule, "DevBoxSchedule", "java");
 @@clientName(DevCenterService.Schedule.type, "scheduleType", "java");
@@ -209,7 +209,11 @@ interface EnvironmentClientOperations {
   "java"
 );
 @@clientName(DevCenterService.HardwareProfile.vCPUs, "vCpus", "java");
-@@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryGb", "java");
+@@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryInGb", "java");
+@@clientName(DevCenterService.StopOnDisconnectConfiguration.gracePeriodMinutes,
+  "gracePeriodInMinutes",
+  "java"
+);
 @@clientName(Azure.Core.Foundations.OperationState,
   "DevCenterOperationStatus",
   "java"
