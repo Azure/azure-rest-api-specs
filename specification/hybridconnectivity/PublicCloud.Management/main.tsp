@@ -104,6 +104,7 @@ union Status {
 @doc("Public Cloud Connector")
 model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   @doc("Represent public cloud connectors resource.")
+  @pattern("^(?=.{0,63}[^\\s.]$)(?!.*[<>%&\\?/#])")
   @key("publicCloudConnector")
   @path
   @segment("publicCloudConnectors")
