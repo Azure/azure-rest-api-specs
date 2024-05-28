@@ -598,8 +598,8 @@ model LogicalNetworkProperties {
   @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("Subnet - list of subnets under the logical network")
+  @OpenAPI.extension("x-ms-identifiers", [])
   subnets?: Subnet[];
 
   @doc("Provisioning state of the logical network.")
@@ -642,8 +642,8 @@ model SubnetProperties {
   @doc("IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'")
   ipAllocationMethod?: IpAllocationMethodEnum;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
+  @extension("x-ms-identifiers", [])
   ipConfigurationReferences?: NetworkInterfaceArmReference[];
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
@@ -652,8 +652,8 @@ model SubnetProperties {
   @doc("Route table resource.")
   routeTable?: RouteTable;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("network associated pool of IP Addresses")
+  @extension("x-ms-identifiers", [])
   ipPools?: IPPool[];
 
   @doc("Vlan to use for the subnet")
@@ -681,8 +681,8 @@ model RouteTable {
 
 @doc("RouteTablePropertiesFormat - Route Table resource.")
 model RouteTableProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("Collection of routes contained within a route table.")
+  @extension("x-ms-identifiers", [])
   routes?: Route[];
 }
 
@@ -741,9 +741,9 @@ model IPPoolInfo {
 
 @doc("Network Security Group resource.")
 model NetworkSecurityGroupProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
+  @extension("x-ms-identifiers", [])
   networkInterfaces?: NetworkInterfaceArmReference[];
 
   @doc("A collection of references to logical networks that are currently using this NSG")
@@ -791,8 +791,8 @@ model SecurityRuleProperties {
 
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
+  @extension("x-ms-identifiers", [])
   ipConfigurations?: IPConfiguration[];
 
   @doc("MacAddress - The MAC address of the network interface.")
@@ -1184,10 +1184,10 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
   targetMemoryBuffer?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
+  @extension("x-ms-identifiers", [])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
@@ -1338,8 +1338,8 @@ model VirtualMachineConfigAgentInstanceView {
   @doc("The VM Config Agent full version.")
   vmConfigAgentVersion?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
   @doc("The resource status information.")
+  @extension("x-ms-identifiers", [])
   statuses?: InstanceViewStatus[];
 }
 
@@ -1468,10 +1468,10 @@ model StorageProfileUpdate {
   dataDisks?: VirtualHardDiskArmReference[];
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Preventing a breaking change."
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
+  @extension("x-ms-identifiers", [])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
