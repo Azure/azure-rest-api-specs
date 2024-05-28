@@ -3270,7 +3270,7 @@
           "$ref": "#/definitions/DeltaDetailType",
           "description": "The type of delta detail to retrieve."
         },
-        "daysPrior": {
+        "priorDays": {
           "type": "integer",
           "format": "int32",
           "description": "The number of days prior to retrieve deltas for."
@@ -3391,7 +3391,7 @@
       "type": "object",
       "description": "A request body used to retrieve a delta summary.",
       "properties": {
-        "daysPrior": {
+        "priorDays": {
           "type": "integer",
           "format": "int32",
           "description": "The number of days prior to retrieve deltas for."
@@ -5290,7 +5290,7 @@
           "type": "string",
           "description": "The name of the observation."
         },
-        "type": {
+        "types": {
           "type": "array",
           "description": "The list of applicable types.",
           "items": {
@@ -5314,7 +5314,7 @@
       },
       "required": [
         "name",
-        "type",
+        "types",
         "priority",
         "cvssScoreV2",
         "cvssScoreV3"
