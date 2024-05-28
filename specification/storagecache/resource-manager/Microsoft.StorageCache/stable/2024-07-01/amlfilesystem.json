@@ -7,20 +7,12 @@
   },
   "host": "management.azure.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -37,9 +29,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/amlFilesystems": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -70,18 +60,14 @@
             "$ref": "./examples/amlFilesystems_List.json"
           }
         },
-        "tags": [
-          "amlFilesystems"
-        ],
+        "tags": ["amlFilesystems"],
         "description": "Returns all AML file systems the user has access to under a subscription.",
         "operationId": "amlFilesystems_List"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -115,18 +101,14 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "tags": [
-          "amlFilesystems"
-        ],
+        "tags": ["amlFilesystems"],
         "description": "Returns all AML file systems the user has access to under a resource group.",
         "operationId": "amlFilesystems_ListByResourceGroup"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}": {
       "delete": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -177,16 +159,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "tags": [
-          "amlFilesystems"
-        ],
+        "tags": ["amlFilesystems"],
         "description": "Schedules an AML file system for deletion.",
         "operationId": "amlFilesystems_Delete"
       },
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -220,19 +198,13 @@
             "$ref": "./examples/amlFilesystems_Get.json"
           }
         },
-        "tags": [
-          "amlFilesystems"
-        ],
+        "tags": ["amlFilesystems"],
         "description": "Returns an AML file system.",
         "operationId": "amlFilesystems_Get"
       },
       "put": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -291,19 +263,13 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "amlFilesystems"
-        ],
+        "tags": ["amlFilesystems"],
         "description": "Create or update an AML file system.",
         "operationId": "amlFilesystems_CreateOrUpdate"
       },
       "patch": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -363,18 +329,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "amlFilesystems"
-        ],
+        "tags": ["amlFilesystems"],
         "description": "Update an AML file system instance.",
         "operationId": "amlFilesystems_Update"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/archive": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -413,18 +375,14 @@
             "$ref": "./examples/amlFilesystems_Archive.json"
           }
         },
-        "tags": [
-          "amlFilesystems"
-        ],
+        "tags": ["amlFilesystems"],
         "description": "Archive data from the AML file system.",
         "operationId": "amlFilesystems_Archive"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/cancelArchive": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -455,18 +413,14 @@
             "$ref": "./examples/amlFilesystems_CancelArchive.json"
           }
         },
-        "tags": [
-          "amlFilesystems"
-        ],
+        "tags": ["amlFilesystems"],
         "description": "Cancel archiving data from the AML file system.",
         "operationId": "amlFilesystems_CancelArchive"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/autoExportJobs/{autoExportJobName}": {
       "delete": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -481,7 +435,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/autoExportJobNameParameter"
+            "$ref": "#/parameters/AutoExportJobNameParameter"
           }
         ],
         "responses": {
@@ -509,7 +463,7 @@
           }
         },
         "x-ms-examples": {
-          "autoExportJob_Delete": {
+          "autoExportJobs_Delete": {
             "$ref": "./examples/autoExportJobs_Delete.json"
           }
         },
@@ -517,16 +471,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "tags": [
-          "exportJobs"
-        ],
+        "tags": ["exportJobs"],
         "description": "Schedules an auto export job for deletion.",
-        "operationId": "autoExportJob_Delete"
+        "operationId": "autoExportJobs_Delete"
       },
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -541,14 +491,14 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/autoExportJobNameParameter"
+            "$ref": "#/parameters/AutoExportJobNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Returns the auto export job object corresponding to amlFilesystemName.",
             "schema": {
-              "$ref": "#/definitions/autoExportJob"
+              "$ref": "#/definitions/AutoExportJob"
             }
           },
           "default": {
@@ -559,23 +509,17 @@
           }
         },
         "x-ms-examples": {
-          "exportJobs_Get": {
-            "$ref": "./examples/autoExportJob_Get.json"
+          "autoExportJobs_Get": {
+            "$ref": "./examples/autoExportJobs_Get.json"
           }
         },
-        "tags": [
-          "exportJobs"
-        ],
+        "tags": ["exportJobs"],
         "description": "Returns an auto export job.",
-        "operationId": "autoExportJob_Get"
+        "operationId": "autoExportJobs_Get"
       },
       "put": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -629,7 +573,7 @@
           }
         },
         "x-ms-examples": {
-          "autoExportJob_CreateOrUpdate": {
+          "autoExportJobs_CreateOrUpdate": {
             "$ref": "./examples/autoExportJobs_CreateOrUpdate.json"
           }
         },
@@ -637,19 +581,13 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "autoExportJob"
-        ],
+        "tags": ["autoExportJob"],
         "description": "Create or update an auto export job.",
-        "operationId": "autoExportJob_CreateOrUpdate"
+        "operationId": "autoExportJobs_CreateOrUpdate"
       },
       "patch": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -704,7 +642,7 @@
           }
         },
         "x-ms-examples": {
-          "autoExportJob_Update": {
+          "autoExportJobs_Update": {
             "$ref": "./examples/autoExportJobs_Update.json"
           }
         },
@@ -712,18 +650,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "autoExportJob"
-        ],
+        "tags": ["autoExportJob"],
         "description": "Update an auto export job instance.",
-        "operationId": "autoExportJob_Update"
+        "operationId": "autoExportJobs_Update"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/autoExportJobs": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -753,25 +687,21 @@
           }
         },
         "x-ms-examples": {
-          "autoExportJob_ListByAmlFilesystem": {
+          "autoExportJobs_ListByAmlFilesystem": {
             "$ref": "./examples/autoExportJobs_ListByAmlFilesystem.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "tags": [
-          "autoExportJob"
-        ],
+        "tags": ["autoExportJob"],
         "description": "Returns all the auto export jobs the user has access to under an AML File System.",
-        "operationId": "autoExportJob_ListByAmlFilesystem"
+        "operationId": "autoExportJobs_ListByAmlFilesystem"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/importJobs/{importJobName}": {
       "delete": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -822,16 +752,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "tags": [
-          "importJobs"
-        ],
+        "tags": ["importJobs"],
         "description": "Schedules an import job for deletion.",
         "operationId": "importJobs_Delete"
       },
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -868,19 +794,13 @@
             "$ref": "./examples/importJobs_Get.json"
           }
         },
-        "tags": [
-          "importJobs"
-        ],
+        "tags": ["importJobs"],
         "description": "Returns an import job.",
         "operationId": "importJobs_Get"
       },
       "put": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -942,19 +862,13 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "importJobs"
-        ],
+        "tags": ["importJobs"],
         "description": "Create or update an import job.",
         "operationId": "importJobs_CreateOrUpdate"
       },
       "patch": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1017,18 +931,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "importJobs"
-        ],
+        "tags": ["importJobs"],
         "description": "Update an import job instance.",
         "operationId": "importJobs_Update"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/importJobs": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
@@ -1065,18 +975,14 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "tags": [
-          "importJobs"
-        ],
+        "tags": ["importJobs"],
         "description": "Returns all import jobs the user has access to under an AML File System.",
         "operationId": "importJobs_ListByAmlFilesystem"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/checkAmlFSSubnets": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1116,18 +1022,14 @@
             "$ref": "./examples/checkAmlFSSubnets.json"
           }
         },
-        "tags": [
-          "amlFilesystems"
-        ],
+        "tags": ["amlFilesystems"],
         "description": "Check that subnets will be valid for AML file system create calls.",
         "operationId": "checkAmlFSSubnets"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/getRequiredAmlFSSubnetsSize": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1163,9 +1065,7 @@
             "$ref": "./examples/getRequiredAmlFSSubnetsSize.json"
           }
         },
-        "tags": [
-          "amlFilesystems"
-        ],
+        "tags": ["amlFilesystems"],
         "description": "Get the number of available IP addresses needed for the AML file system information provided.",
         "operationId": "getRequiredAmlFSSubnetsSize"
       }
@@ -1175,10 +1075,7 @@
     "AmlFilesystemIdentity": {
       "type": "object",
       "description": "Managed Identity properties.",
-      "x-ms-mutability": [
-        "read",
-        "create"
-      ],
+      "x-ms-mutability": ["read", "create"],
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -1193,10 +1090,7 @@
         "type": {
           "type": "string",
           "description": "The type of identity used for the resource.",
-          "enum": [
-            "UserAssigned",
-            "None"
-          ],
+          "enum": ["UserAssigned", "None"],
           "x-ms-enum": {
             "name": "AmlFilesystemIdentityType",
             "modelAsString": false
@@ -1232,10 +1126,7 @@
             "type": "string"
           },
           "description": "Availability zones for resources. This field should only contain a single element in the array.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1243,10 +1134,7 @@
           "properties": {
             "storageCapacityTiB": {
               "description": "The size of the AML file system, in TiB. This might be rounded up.",
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ],
+              "x-ms-mutability": ["read", "create"],
               "type": "number",
               "format": "float"
             },
@@ -1274,10 +1162,7 @@
             },
             "filesystemSubnet": {
               "description": "Subnet used for managing the AML file system and for client-facing operations. This subnet should have at least a /24 subnet mask within the VNET's address space.",
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ],
+              "x-ms-mutability": ["read", "create"],
               "$ref": "storagecache.json#/definitions/URLString"
             },
             "clientInfo": {
@@ -1337,9 +1222,7 @@
                   "items": {
                     "$ref": "#/definitions/AmlFilesystemArchive"
                   },
-                  "x-ms-identifiers": [
-                    "filesystemPath"
-                  ]
+                  "x-ms-identifiers": ["filesystemPath"]
                 }
               }
             },
@@ -1480,10 +1363,7 @@
     },
     "AmlFilesystemHsmSettings": {
       "description": "AML file system HSM settings.",
-      "x-ms-mutability": [
-        "read",
-        "create"
-      ],
+      "x-ms-mutability": ["read", "create"],
       "type": "object",
       "properties": {
         "container": {
@@ -1507,10 +1387,7 @@
           }
         }
       },
-      "required": [
-        "container",
-        "loggingContainer"
-      ]
+      "required": ["container", "loggingContainer"]
     },
     "AmlFilesystemRootSquashSettings": {
       "description": "AML file system squash settings.",
@@ -1518,11 +1395,7 @@
         "mode": {
           "type": "string",
           "description": "Squash mode of the AML file system. 'All': User and Group IDs on files will be squashed to the provided values for all users on non-trusted systems. 'RootOnly': User and Group IDs on files will be squashed to provided values for solely the root user on non-trusted systems. 'None': No squashing of User and Group IDs is performed for any users on any systems.",
-          "enum": [
-            "None",
-            "RootOnly",
-            "All"
-          ],
+          "enum": ["None", "RootOnly", "All"],
           "x-ms-enum": {
             "name": "AmlFilesystemSquashMode",
             "modelAsString": true
@@ -1711,18 +1584,12 @@
               "type": "string",
               "description": "The administrative status of the auto export job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto export job. By default it is set to 'Enable'.",
               "default": "Active",
-              "enum": [
-                "Active",
-                "Cancel"
-              ],
+              "enum": ["Active", "Cancel"],
               "x-ms-enum": {
                 "name": "AutoExportJobAdminStatus",
                 "modelAsString": true
               },
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
+              "x-ms-mutability": ["read", "create"]
             },
             "autoExportPrefixes": {
               "type": "array",
@@ -1730,10 +1597,7 @@
               "items": {
                 "type": "string"
               },
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
+              "x-ms-mutability": ["read", "create"]
             },
             "status": {
               "x-ms-client-flatten": true,
@@ -1910,18 +1774,12 @@
               "type": "string",
               "description": "The administrative status of the import job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will cancel the current active import job. By default it is set to 'Enable'.",
               "default": "Active",
-              "enum": [
-                "Active",
-                "Cancel"
-              ],
+              "enum": ["Active", "Cancel"],
               "x-ms-enum": {
                 "name": "ImportJobAdminStatus",
                 "modelAsString": true
               },
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
+              "x-ms-mutability": ["read", "create"]
             },
             "importPrefixes": {
               "type": "array",
@@ -1929,39 +1787,25 @@
               "items": {
                 "type": "string"
               },
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
+              "x-ms-mutability": ["read", "create"]
             },
             "conflictResolutionMode": {
               "description": "How the import job will handle conflicts. For example, if the import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or was not previously imported. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
               "type": "string",
-              "enum": [
-                "Fail",
-                "Skip",
-                "OverwriteIfDirty",
-                "OverwriteAlways"
-              ],
+              "enum": ["Fail", "Skip", "OverwriteIfDirty", "OverwriteAlways"],
               "default": "Fail",
               "x-ms-enum": {
                 "name": "ConflictResolutionMode",
                 "modelAsString": true
               },
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
+              "x-ms-mutability": ["read", "create"]
             },
             "maximumErrors": {
               "description": "Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.",
               "type": "integer",
               "format": "int32",
               "default": 0,
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
+              "x-ms-mutability": ["read", "create"]
             },
             "status": {
               "x-ms-client-flatten": true,
@@ -2157,10 +2001,7 @@
         "location": {
           "description": "Region that the AML file system will be created in.",
           "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "x-ms-mutability": ["create", "read"]
         }
       }
     },
@@ -2175,10 +2016,7 @@
           "properties": {
             "status": {
               "type": "string",
-              "enum": [
-                "Ok",
-                "Invalid"
-              ],
+              "enum": ["Ok", "Invalid"],
               "x-ms-enum": {
                 "name": "FilesystemSubnetStatusType",
                 "modelAsString": true
@@ -2214,10 +2052,7 @@
       }
     },
     "SkuName": {
-      "x-ms-mutability": [
-        "read",
-        "create"
-      ],
+      "x-ms-mutability": ["read", "create"],
       "description": "SKU for the resource.",
       "properties": {
         "name": {
@@ -2250,7 +2085,17 @@
       "minLength": 2,
       "maxLength": 80,
       "x-ms-parameter-location": "method"
+    },
+    "AutoExportJobNameParameter": {
+      "description": "Name for the auto export job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+      "in": "path",
+      "name": "autoExportJobName",
+      "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
     }
   }
 }
-
