@@ -122,7 +122,7 @@ model AssistantCreationOptions {
   @added(ServiceApiVersions.v2024_05_01_preview)
   @minValue(0)
   @maxValue(2)
-  temperature: float32 | null = 1;
+  temperature?: float32 | null = 1;
 
   /**
    * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
@@ -135,7 +135,7 @@ model AssistantCreationOptions {
   @minValue(0)
   @maxValue(1)
   @encodedName("application/json", "top_p")
-  topP: float32 | null = 1;
+  topP?: float32 | null = 1;
 
   /** The response format of the tool calls used by this assistant. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
