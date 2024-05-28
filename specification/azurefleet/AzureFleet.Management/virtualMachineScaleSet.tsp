@@ -53,33 +53,6 @@ model VirtualMachineScaleSetListResult {
   @doc("The VirtualMachineScaleSet items on this page")
   value: Array<VirtualMachineScaleSet>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-format" "NextLink is of uri format and need to be defined."
   @doc("The link to the next page of items")
-  @format("uri")
   nextLink?: string;
-}
-
-@armResourceOperations
-interface VirtualMachineScaleSets {
-  @autoRoute
-  @listsResource(VirtualMachineScaleSet)
-  @armResourceList(VirtualMachineScaleSet)
-  @get
-  @doc("List VirtualMachineScaleSet resources by Fleet")
-  @extension(
-    "x-ms-pageable",
-    {
-      nextLinkName: "nextLink",
-    }
-  )
-  listByFleet(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...ProviderNamespace<Fleet>,
-    ...ResourceNameParameter<
-      Fleet,
-      NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
-    >,
-  ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
 }

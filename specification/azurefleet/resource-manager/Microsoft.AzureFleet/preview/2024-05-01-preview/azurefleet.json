@@ -43,9 +43,6 @@
     },
     {
       "name": "Fleets"
-    },
-    {
-      "name": "VirtualMachineScaleSets"
     }
   ],
   "paths": {
@@ -418,9 +415,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{name}/virtualMachineScaleSets": {
       "get": {
-        "operationId": "VirtualMachineScaleSets_ListByFleet",
+        "operationId": "Fleets_ListVirtualMachineScaleSets",
         "tags": [
-          "VirtualMachineScaleSets"
+          "Fleets"
         ],
         "description": "List VirtualMachineScaleSet resources by Fleet",
         "parameters": [
@@ -456,13 +453,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "VirtualMachineScaleSets_ListByFleet": {
-            "$ref": "./examples/VirtualMachineScaleSets_ListByFleet.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Fleets_ListVirtualMachineScaleSets": {
+            "$ref": "./examples/Fleets_ListVirtualMachineScaleSets.json"
+          }
         }
       }
     }
