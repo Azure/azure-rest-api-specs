@@ -166,7 +166,7 @@ interface DiscoveryGroups {
     AssetChainSummaryResult
   >;
 
-  @doc("Dismiss discovery chain for a given asset")
+  @doc("Dismiss discovery chain for a given asset chain source")
   @action("dismissAssetChain")
   @Versioning.added(Versions.v2024_03_01_preview)
   dismissAssetChain is Operations.ResourceCollectionAction<
