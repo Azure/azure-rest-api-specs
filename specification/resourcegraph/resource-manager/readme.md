@@ -93,6 +93,7 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.ResourceGraph/stable/2021-03-01/resourcegraph.json
+  - Microsoft.ResourceGraph/stable/2021-03-01/graphquery.json
 ```
 
 ### Tag: package-preview-2020-09
@@ -124,6 +125,7 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 ``` yaml $(tag) == 'package-2019-04'
 input-file:
   - Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
+  - Microsoft.ResourceGraph/stable/2019-04-01/graphquery.json
 ```
 
 ### Tag: package-2018-09-preview
