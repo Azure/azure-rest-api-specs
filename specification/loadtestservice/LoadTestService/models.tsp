@@ -72,8 +72,12 @@ union CertificateType {
 @doc("Types of file supported.")
 union FileType {
   string,
-  @doc("If the file is a JMX script.") "JMX_FILE",
-  @doc("If the file is a user properties file.") "USER_PROPERTIES",
+
+  @doc("If the file is a JMX script.")
+  "JMX_FILE",
+
+  @doc("If the file is a user properties file.")
+  "USER_PROPERTIES",
 
   @doc("If the file is not among any of the other supported file types.")
   "ADDITIONAL_ARTIFACTS",
@@ -85,6 +89,10 @@ union FileType {
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a JSON config file to define the requests for a URL test.")
   "URL_TEST_CONFIG_JSON",
+
+  @added(APIVersions.v2024_03_01_preview)
+  @doc("If the file is a test script.")
+  "TEST_SCRIPT",
 }
 
 @doc("File status.")
@@ -175,8 +183,16 @@ union TimeGrain {
 @doc("Test kind")
 union TestKind {
   string,
-  @doc("URL Test") "URL",
-  @doc("JMX Test") "JMX",
+
+  @doc("URL Test")
+  "URL",
+
+  @doc("JMX Test")
+  "JMX",
+
+  @added(APIVersions.v2024_03_01_preview)
+  @doc("Locust Test")
+  "Locust",
 }
 
 @doc("Test file info.")
@@ -358,6 +374,25 @@ not required to upload.
 
   @doc("Configuration for quick load test")
   optionalLoadTestConfig?: OptionalLoadTestConfig;
+
+  @added(APIVersions.v2024_03_01_preview)
+  @doc("Region distribution configuration for the load test.")
+  regionalLoadTestConfig?: RegionalConfiguration[];
+}
+
+@doc("Region distribution configuration for the load test.")
+model RegionalConfiguration {
+  @doc("""
+  The number of engine instances to execute load test in specified region. Supported values are in range of 1-400.
+""")
+  engineInstances: int32;
+
+  @doc("""
+Azure region name.
+The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
+The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
+""")
+  region: string;
 }
 
 @doc("Configuration for quick load test")
@@ -561,9 +596,22 @@ SECRET_VALUE.
   @visibility("read")
   errorDetails?: ErrorDetails[];
 
-  @doc("Test run statistics.")
+  @doc("""
+Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.
+The sampler name is the same as the name mentioned in the test script.
+Sampler name "Total" represents the aggregated statistics of all the samplers.
+""")
   @visibility("read")
   testRunStatistics?: Record<TestRunStatistics>;
+
+  @doc("""
+Regional statistics. Key is the Azure region name and value is the test run statistics.
+The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
+The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
+""")
+  @visibility("read")
+  @added(APIVersions.v2024_03_01_preview)
+  regionalStatistics?: Record<TestRunStatistics>;
 
   @doc("The load test configuration.")
   loadTestConfiguration?: LoadTestConfiguration;

@@ -36,10 +36,11 @@ options:
     package-dir: "azure-ai-vision-face"
     namespace: com.azure.ai.vision.face
     partial-update: true
+    stream-style-serialization: false
     flavor: azure
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
   disable:
     "@azure-tools/typespec-azure-core/operation-missing-api-version": "API version located in the host template"
     "@azure-tools/typespec-azure-core/use-standard-operations": "Most of our operation doesn't fit standard ops"
