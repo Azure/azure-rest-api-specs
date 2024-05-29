@@ -121,10 +121,10 @@ namespace Customizations {
 @@access(publishCloudEvents, Access.internal);
 @@access(receiveCloudEvents, Access.internal);
 
-@@access(acknowledgeCloudEvents, Access.internal);
-@@access(releaseCloudEvents, Access.internal);
-@@access(rejectCloudEvents, Access.internal);
-@@access(renewCloudEventLocks, Access.internal);
+@@access(acknowledgeCloudEvents, Access.internal, "python");
+@@access(releaseCloudEvents, Access.internal, "python");
+@@access(rejectCloudEvents, Access.internal, "python");
+@@access(renewCloudEventLocks, Access.internal, "python");
 
 @@access(AcknowledgeResult, Access.public);
 @@access(ReleaseResult, Access.public);

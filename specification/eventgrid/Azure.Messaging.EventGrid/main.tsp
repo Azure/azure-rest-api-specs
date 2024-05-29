@@ -313,9 +313,7 @@ namespace Microsoft.EventGrid {
   op releaseCloudEvents is StandardOperations.ResourceAction<
     EventSubscription,
     {
-      @doc("ReleaseOptions")
-      @bodyRoot
-      releaseOptions: ReleaseOptions;
+      ...ReleaseOptions;
 
       @added(ServiceApiVersions.v2023_10_01_preview)
       @removed(ServiceApiVersions.v2023_11_01)
