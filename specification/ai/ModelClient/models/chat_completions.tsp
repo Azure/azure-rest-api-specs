@@ -1,8 +1,11 @@
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+
+using Azure.ClientGenerator.Core;
 
 namespace ModelClient;
 
@@ -274,7 +277,8 @@ model ChatRequestMessage {
 A request chat message containing system instructions that influence how the model will generate a chat completions
 response.
 """)
-model SystemMessage extends ChatRequestMessage {
+@clientName("SystemMessage", "python")
+model ChatRequestSystemMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'system' for system messages.")
   role: ChatRole.system;
 
@@ -283,7 +287,8 @@ model SystemMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing user input to the assistant.")
-model UserMessage extends ChatRequestMessage {
+@clientName("UserMessage", "python")
+model ChatRequestUserMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'user' for user messages.")
   role: ChatRole.user;
 
@@ -292,13 +297,14 @@ model UserMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing response or action from the assistant.")
-model AssistantMessage extends ChatRequestMessage {
+@clientName("AssistantMessage", "python")
+model ChatRequestAssistantMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'assistant' for assistant messages.")
   role: ChatRole.assistant;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
-  content: string | null;
+  content?: string | null;
 
   @encodedName("application/json", "tool_calls")
   @doc("""
@@ -309,7 +315,8 @@ model AssistantMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing requested output from a configured tool.")
-model ToolMessage extends ChatRequestMessage {
+@clientName("ToolMessage", "python")
+model ChatRequestToolMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'tool' for tool messages.")
   role: ChatRole.tool;
 

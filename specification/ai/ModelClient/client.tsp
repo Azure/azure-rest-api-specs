@@ -8,19 +8,17 @@ using TypeSpec.Versioning;
 @useDependency(ModelClient.Versions.v2024_05_01_Preview)
 namespace Customizations; // The actual name here doesn't matter and is here for organization purposes only
 
-// TODO: Can we trim this list???
-
-// The "Update" models are used by the hand-written operation method that supports streaming.
+// These models are used by the hand-written operator methods.
 // We need to declare their usage and public access, otherwise they won't be emited in the generated code.
 @@usage(ModelClient.StreamingChatChoiceUpdate, Usage.output);
 @@usage(ModelClient.ChatCompletions, Usage.output);
 @@usage(ModelClient.StreamingChatCompletionsUpdate, Usage.output);
 @@usage(ModelClient.ModelInfo, Usage.output);
 
-@@access(ModelClient.AssistantMessage, Access.public);
+// Since we made all operator methods internal, we need to expliclty say we still want the models they use
+// to be public.
 @@access(ModelClient.CapacityType, Access.public);
 @@access(ModelClient.ChatChoice, Access.public);
-@@access(ModelClient.StreamingChatChoiceUpdate, Access.public);
 @@access(ModelClient.ChatCompletions, Access.public);
 @@access(ModelClient.ChatCompletionsFunctionToolCall, Access.public);
 @@access(ModelClient.ChatCompletionsFunctionToolDefinition, Access.public);
@@ -29,8 +27,11 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(ModelClient.ChatCompletionsToolCall, Access.public);
 @@access(ModelClient.ChatCompletionsToolDefinition, Access.public);
 @@access(ModelClient.ChatCompletionsToolSelectionPreset, Access.public);
-@@access(ModelClient.StreamingChatCompletionsUpdate, Access.public);
+@@access(ModelClient.ChatRequestAssistantMessage, Access.public);
 @@access(ModelClient.ChatRequestMessage, Access.public);
+@@access(ModelClient.ChatRequestSystemMessage, Access.public);
+@@access(ModelClient.ChatRequestToolMessage, Access.public);
+@@access(ModelClient.ChatRequestUserMessage, Access.public);
 @@access(ModelClient.ChatResponseMessage, Access.public);
 @@access(ModelClient.ChatRole, Access.public);
 @@access(ModelClient.CompletionsFinishReason, Access.public);
@@ -44,18 +45,17 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(ModelClient.FunctionCall, Access.public);
 @@access(ModelClient.FunctionDefinition, Access.public);
 @@access(ModelClient.ModelInfo, Access.public);
-@@access(ModelClient.SystemMessage, Access.public);
-@@access(ModelClient.ToolMessage, Access.public);
-@@access(ModelClient.UserMessage, Access.public);
+@@access(ModelClient.StreamingChatChoiceUpdate, Access.public, "python");
+@@access(ModelClient.StreamingChatCompletionsUpdate, Access.public, "python");
 
 // The operators need to be hidden, since we hand-write the public versions of those to
 // 1. Add chat completions streaming (to getChatCompletions operator)
 // 2. Add hyper-params (to getChatCompletions/Embeddings/ImageEmbeddings, all clients)
 // 3. Cache model info (to getModelInfo, all clients)
-@@access(ModelClient.getChatCompletions, Access.internal);
-@@access(ModelClient.getEmbeddings, Access.internal);
-@@access(ModelClient.getImageEmbeddings, Access.internal);
-@@access(ModelClient.getModelInfo, Access.internal);
+@@access(ModelClient.getChatCompletions, Access.internal, "python");
+@@access(ModelClient.getEmbeddings, Access.internal, "python");
+@@access(ModelClient.getImageEmbeddings, Access.internal, "pyton");
+@@access(ModelClient.getModelInfo, Access.internal, "python");
 
 @client({
   name: "ChatCompletionsClient",
@@ -71,7 +71,7 @@ interface Client1 {
   service: ModelClient,
 })
 interface Client2 {
-  embedding is ModelClient.getEmbeddings;
+  embed is ModelClient.getEmbeddings;
   getModelInfo is ModelClient.getModelInfo;
 }
 
@@ -80,6 +80,6 @@ interface Client2 {
   service: ModelClient,
 })
 interface Client3 {
-  embedding is ModelClient.getImageEmbeddings;
+  embed is ModelClient.getImageEmbeddings;
   getModelInfo is ModelClient.getModelInfo;
 }

@@ -46,14 +46,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "azureml-model-deployment",
-            "in": "header",
-            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.\nThis sets the HTTP request header `azureml-model-deployment`.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "model_deployment"
-          },
-          {
             "name": "unknown-parameters",
             "in": "header",
             "description": "Controls what happens if unknown parameters are passed in the JSON request payload.\nThis sets the HTTP request header `unknown-parameters`.",
@@ -221,14 +213,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "azureml-model-deployment",
-            "in": "header",
-            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.\nThis sets the HTTP request header `azureml-model-deployment`.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "model_deployment"
-          },
-          {
             "name": "unknown-parameters",
             "in": "header",
             "description": "Controls what happens if unknown parameters are passed in the JSON request payload.\nThis sets the HTTP request header `unknown-parameters`.",
@@ -333,14 +317,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "azureml-model-deployment",
-            "in": "header",
-            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.\nThis sets the HTTP request header `azureml-model-deployment`.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "model_deployment"
           },
           {
             "name": "unknown-parameters",
@@ -482,34 +458,6 @@
     }
   },
   "definitions": {
-    "AssistantMessage": {
-      "type": "object",
-      "description": "A request chat message representing response or action from the assistant.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
-        },
-        "tool_calls": {
-          "type": "array",
-          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
-          "items": {
-            "$ref": "#/definitions/ChatCompletionsToolCall"
-          },
-          "x-ms-client-name": "toolCalls"
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "assistant"
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -792,6 +740,31 @@
         ]
       }
     },
+    "ChatRequestAssistantMessage": {
+      "type": "object",
+      "description": "A request chat message representing response or action from the assistant.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
     "ChatRequestMessage": {
       "type": "object",
       "description": "An abstract representation of a chat message as provided in a request.",
@@ -805,6 +778,70 @@
       "required": [
         "role"
       ]
+    },
+    "ChatRequestSystemMessage": {
+      "type": "object",
+      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the system message."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ChatRequestToolMessage": {
+      "type": "object",
+      "description": "A request chat message representing requested output from a configured tool.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call resolved by the provided content.",
+          "x-ms-client-name": "toolCallId"
+        }
+      },
+      "required": [
+        "content",
+        "tool_call_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
+    },
+    "ChatRequestUserMessage": {
+      "type": "object",
+      "description": "A request chat message representing user input to the assistant.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the user message, with available input types varying by selected model."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
     },
     "ChatResponseMessage": {
       "type": "object",
@@ -1290,51 +1327,6 @@
         "choices"
       ]
     },
-    "SystemMessage": {
-      "type": "object",
-      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "The contents of the system message."
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "system"
-    },
-    "ToolMessage": {
-      "type": "object",
-      "description": "A request chat message representing requested output from a configured tool.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
-        },
-        "tool_call_id": {
-          "type": "string",
-          "description": "The ID of the tool call resolved by the provided content.",
-          "x-ms-client-name": "toolCallId"
-        }
-      },
-      "required": [
-        "content",
-        "tool_call_id"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "tool"
-    },
     "UnknownParams": {
       "type": "string",
       "description": "Controls what happens if unknown parameters are passed in the JSON request payload.",
@@ -1364,25 +1356,6 @@
           }
         ]
       }
-    },
-    "UserMessage": {
-      "type": "object",
-      "description": "A request chat message representing user input to the assistant.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "The contents of the user message, with available input types varying by selected model."
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "user"
     }
   },
   "parameters": {

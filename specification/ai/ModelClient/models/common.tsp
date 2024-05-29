@@ -138,14 +138,6 @@ union ModelType {
 
 alias AdditionalRequestHeaders = {
   @doc("""
-  Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.
-  Typically used when you want to target a test environment instead of production environment.
-  This sets the HTTP request header `azureml-model-deployment`.
-  """)
-  @header("azureml-model-deployment")
-  model_deployment?: string;
-
-  @doc("""
   Controls what happens if unknown parameters are passed in the JSON request payload.
   This sets the HTTP request header `unknown-parameters`.
   """)
