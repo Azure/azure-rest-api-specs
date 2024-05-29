@@ -5,6 +5,7 @@ import "./models.persondirectory.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Traits;
 using Foundations;
@@ -182,6 +183,7 @@ interface PersonDirectoryOperations {
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   addPersonFaceFromUrl is AddPersonFaceOperation<{
+    @clientName("uri", "csharp")
     @doc("URL of input image.")
     url: url;
   }>;
