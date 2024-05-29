@@ -60,7 +60,7 @@ interface ScopingConfigurationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("ScopingConfiguration_CreateOrUpdate")
-  createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<ScopingConfigurationResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ScopingConfigurationResource>;
 
   /**
    * Clean the AppComplianceAutomation scoping configuration of the specific report.
@@ -77,6 +77,12 @@ interface ScopingConfigurationResources {
   list is ArmResourceListByParent<ScopingConfigurationResource>;
 }
 
-@@doc(ScopingConfigurationResources.createOrUpdate::parameters.parameters,
+@@doc(ScopingConfigurationResources.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using 'default' as the name."
 );
+
+@@encodedName(ScopingConfigurationResources.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@clientName(ScopingConfigurationResources.createOrUpdate::parameters.resource, "parameters");
