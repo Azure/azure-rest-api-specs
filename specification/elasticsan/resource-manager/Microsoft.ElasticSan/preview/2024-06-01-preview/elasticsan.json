@@ -675,10 +675,14 @@
             "description": "Optional, used to purge soft deleted volume groups if set to true.",
             "in": "query",
             "required": false,
-            "type": "boolean",
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
             "x-ms-enum": {
               "name": "purge",
-              "modelAsString": false
+              "modelAsString": true
             }
           }
         ],
@@ -978,10 +982,14 @@
             "description": "Optional, used to purge soft deleted volumes if set to true.",
             "in": "query",
             "required": false,
-            "type": "boolean",
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
             "x-ms-enum": {
               "name": "purge",
-              "modelAsString": false
+              "modelAsString": true
             }
           }
         ],
