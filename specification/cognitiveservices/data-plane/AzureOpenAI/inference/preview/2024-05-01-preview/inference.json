@@ -11056,6 +11056,24 @@
         ],
         "description": "Occurs when a stream ends."
       }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+            "scopes": {}
+          }
+        },
+        "x-tokenInfoFunc": "api.middleware.auth.bearer_auth",
+        "x-scopeValidateFunc": "api.middleware.auth.validate_scopes"
+      },
+      "apiKey": {
+        "type": "apiKey",
+        "name": "api-key",
+        "in": "header"
+      }
     }
   }
 }
