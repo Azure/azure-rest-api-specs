@@ -7,20 +7,12 @@
   },
   "host": "management.azure.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -37,9 +29,7 @@
   "paths": {
     "/providers/Microsoft.StorageCache/operations": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -59,9 +49,7 @@
             }
           }
         },
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "description": "Lists all of the available Resource Provider operations.",
         "x-ms-examples": {
           "Operations_List": {
@@ -76,9 +64,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/skus": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -109,18 +95,14 @@
             "$ref": "./examples/Skus_List.json"
           }
         },
-        "tags": [
-          "SKUs"
-        ],
+        "tags": ["SKUs"],
         "description": "Get the list of StorageCache.Cache SKUs available to this subscription.",
         "operationId": "Skus_List"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/usageModels": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -151,18 +133,14 @@
             "$ref": "./examples/UsageModels_List.json"
           }
         },
-        "tags": [
-          "UsageModels"
-        ],
+        "tags": ["UsageModels"],
         "description": "Get the list of cache usage models available to this subscription.",
         "operationId": "UsageModels_List"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/ascOperations/{operationId}": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -196,18 +174,14 @@
             "$ref": "./examples/AscOperations_Get.json"
           }
         },
-        "tags": [
-          "AscOperations"
-        ],
+        "tags": ["AscOperations"],
         "description": "Gets the status of an asynchronous operation for the Azure HPC Cache",
         "operationId": "AscOperations_Get"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/locations/{location}/usages": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -245,18 +219,14 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "tags": [
-          "AscUsages"
-        ],
+        "tags": ["AscUsages"],
         "description": "Gets the quantity used and quota limit for resources",
         "operationId": "AscUsages_List"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/caches": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -287,18 +257,14 @@
             "$ref": "./examples/Caches_List.json"
           }
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Returns all caches the user has access to under a subscription.",
         "operationId": "Caches_List"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -332,18 +298,14 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Returns all caches the user has access to under a resource group.",
         "operationId": "Caches_ListByResourceGroup"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}": {
       "delete": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -391,16 +353,12 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Schedules a cache for deletion.",
         "operationId": "Caches_Delete"
       },
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -434,19 +392,13 @@
             "$ref": "./examples/Caches_Get.json"
           }
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Returns a cache.",
         "operationId": "Caches_Get"
       },
       "put": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -502,19 +454,13 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Create or update a cache.",
         "operationId": "Caches_CreateOrUpdate"
       },
       "patch": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -576,18 +522,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Update a cache instance.",
         "operationId": "Caches_Update"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/dnsRefresh": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -638,18 +580,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "StorageTargets"
-        ],
+        "tags": ["StorageTargets"],
         "description": "Tells a storage target to refresh its DNS information.",
         "operationId": "StorageTargets_DnsRefresh"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/debugInfo": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -700,18 +638,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Tells a cache to write generate debug info for support to process.",
         "operationId": "Caches_DebugInfo"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/flush": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -762,18 +696,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Tells a cache to write all dirty data to the Storage Target(s). During the flush, clients will see errors returned until the flush is complete.",
         "operationId": "Caches_Flush"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/start": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -824,18 +754,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Tells a Stopped state cache to transition to Active state.",
         "operationId": "Caches_Start"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/stop": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -886,18 +812,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Tells an Active cache to transition to Stopped state.",
         "operationId": "Caches_Stop"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -934,18 +856,14 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "tags": [
-          "StorageTargets"
-        ],
+        "tags": ["StorageTargets"],
         "description": "Returns a list of Storage Targets for the specified cache.",
         "operationId": "StorageTargets_ListByCache"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}": {
       "delete": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1003,16 +921,12 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "tags": [
-          "StorageTargets"
-        ],
+        "tags": ["StorageTargets"],
         "description": "Removes a Storage Target from a cache. This operation is allowed at any time, but if the cache is down or unhealthy, the actual removal of the Storage Target may be delayed until the cache is healthy again. Note that if the cache has data to flush to the Storage Target, the data will be flushed before the Storage Target will be deleted.",
         "operationId": "StorageTargets_Delete"
       },
       "get": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1049,19 +963,13 @@
             "$ref": "./examples/StorageTargets_Get.json"
           }
         },
-        "tags": [
-          "StorageTargets"
-        ],
+        "tags": ["StorageTargets"],
         "description": "Returns a Storage Target from a cache.",
         "operationId": "StorageTargets_Get"
       },
       "put": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1123,18 +1031,14 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "tags": [
-          "StorageTargets"
-        ],
+        "tags": ["StorageTargets"],
         "description": "Create or update a Storage Target. This operation is allowed at any time, but if the cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the cache is healthy again.",
         "operationId": "StorageTargets_CreateOrUpdate"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/flush": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1188,18 +1092,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "StorageTargets"
-        ],
+        "tags": ["StorageTargets"],
         "description": "Tells the cache to write all dirty data to the Storage Target's backend storage. Client requests to this storage target's namespace will return errors until the flush operation completes.",
         "operationId": "StorageTarget_Flush"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/suspend": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1253,18 +1153,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "StorageTargets"
-        ],
+        "tags": ["StorageTargets"],
         "description": "Suspends client access to a storage target.",
         "operationId": "StorageTarget_Suspend"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/resume": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1318,18 +1214,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "StorageTargets"
-        ],
+        "tags": ["StorageTargets"],
         "description": "Resumes client access to a previously suspended storage target.",
         "operationId": "StorageTarget_Resume"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/invalidate": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1383,21 +1275,15 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "StorageTargets"
-        ],
+        "tags": ["StorageTargets"],
         "description": "Invalidate all cached data for a storage target. Cached files are discarded and fetched from the back end on the next request.",
         "operationId": "StorageTarget_Invalidate"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/startPrimingJob": {
       "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1450,18 +1336,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Create a priming job. This operation is only allowed when the cache is healthy.",
         "operationId": "Caches_StartPrimingJob"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/stopPrimingJob": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1517,18 +1399,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Schedule a priming job for deletion.",
         "operationId": "Caches_StopPrimingJob"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/pausePrimingJob": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1584,18 +1462,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Schedule a priming job to be paused.",
         "operationId": "Caches_PausePrimingJob"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/resumePrimingJob": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1651,18 +1525,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Resumes a paused priming job.",
         "operationId": "Caches_ResumePrimingJob"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1713,21 +1583,15 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Upgrade a cache's firmware if a new version is available. Otherwise, this operation has no effect.",
         "operationId": "Caches_UpgradeFirmware"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/spaceAllocation": {
       "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1780,18 +1644,14 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "tags": [
-          "Caches"
-        ],
+        "tags": ["Caches"],
         "description": "Update cache space allocation.",
         "operationId": "Caches_SpaceAllocation"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/restoreDefaults": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1842,9 +1702,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "tags": [
-          "StorageTargets"
-        ],
+        "tags": ["StorageTargets"],
         "description": "Tells a storage target to restore its settings to their default values.",
         "operationId": "StorageTargets_RestoreDefaults"
       }
@@ -1903,9 +1761,7 @@
                   "items": {
                     "$ref": "#/definitions/MetricSpecification"
                   },
-                  "x-ms-identifiers": [
-                    "name"
-                  ]
+                  "x-ms-identifiers": ["name"]
                 },
                 "logSpecifications": {
                   "description": "Details about operations related to logs.",
@@ -1913,9 +1769,7 @@
                   "items": {
                     "$ref": "#/definitions/LogSpecification"
                   },
-                  "x-ms-identifiers": [
-                    "name"
-                  ]
+                  "x-ms-identifiers": ["name"]
                 }
               }
             }
@@ -2060,10 +1914,7 @@
         "location": {
           "description": "Region name string.",
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "name": {
           "description": "Name of cache.",
@@ -2092,10 +1943,7 @@
               "description": "The size of this Cache, in GB.",
               "type": "integer",
               "format": "int32",
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
+              "x-ms-mutability": ["read", "create"]
             },
             "health": {
               "description": "Health of the cache.",
@@ -2130,10 +1978,7 @@
             "subnet": {
               "description": "Subnet used for the cache.",
               "$ref": "#/definitions/URLString",
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
+              "x-ms-mutability": ["read", "create"]
             },
             "upgradeStatus": {
               "description": "Upgrade status of the cache.",
@@ -2166,10 +2011,7 @@
                 "type": "string"
               },
               "description": "Availability zones for resources. This field should only contain a single element in the array.",
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
+              "x-ms-mutability": ["read", "create"]
             },
             "primingJobs": {
               "$ref": "#/definitions/PrimingJobList",
@@ -2183,10 +2025,7 @@
           "type": "object"
         },
         "sku": {
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
+          "x-ms-mutability": ["read", "create"],
           "description": "SKU for the cache.",
           "properties": {
             "name": {
@@ -2203,10 +2042,7 @@
     "CacheIdentity": {
       "type": "object",
       "description": "Cache identity properties.",
-      "x-ms-mutability": [
-        "read",
-        "create"
-      ],
+      "x-ms-mutability": ["read", "create"],
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2317,9 +2153,7 @@
             "$ref": "#/definitions/NfsAccessPolicy"
           },
           "type": "array",
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": ["name"]
         }
       }
     },
@@ -2365,11 +2199,7 @@
           "description": "True if the HPC Cache is joined to the Active Directory domain.",
           "type": "string",
           "readOnly": true,
-          "enum": [
-            "Yes",
-            "No",
-            "Error"
-          ],
+          "enum": ["Yes", "No", "Error"],
           "x-ms-enum": {
             "name": "DomainJoinedType",
             "modelAsString": true
@@ -2387,16 +2217,10 @@
               "description": "Plain text password of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
               "x-ms-secret": true,
               "type": "string",
-              "x-ms-mutability": [
-                "read",
-                "create",
-                "update"
-              ]
+              "x-ms-mutability": ["read", "create", "update"]
             }
           },
-          "required": [
-            "username"
-          ]
+          "required": ["username"]
         }
       },
       "type": "object",
@@ -2417,12 +2241,7 @@
         },
         "usernameSource": {
           "description": "This setting determines how the cache gets username and group names for clients.",
-          "enum": [
-            "AD",
-            "LDAP",
-            "File",
-            "None"
-          ],
+          "enum": ["AD", "LDAP", "File", "None"],
           "x-ms-enum": {
             "name": "UsernameSource",
             "modelAsString": true
@@ -2469,11 +2288,7 @@
           "description": "Indicates whether or not the HPC Cache has performed the username download successfully.",
           "type": "string",
           "readOnly": true,
-          "enum": [
-            "Yes",
-            "No",
-            "Error"
-          ],
+          "enum": ["Yes", "No", "Error"],
           "x-ms-enum": {
             "name": "UsernameDownloadedType",
             "modelAsString": true
@@ -2486,11 +2301,7 @@
             "bindDn": {
               "type": "string",
               "description": "The Bind Distinguished Name identity to be used in the secure LDAP connection. This value is stored encrypted and not returned on response.",
-              "x-ms-mutability": [
-                "read",
-                "create",
-                "update"
-              ]
+              "x-ms-mutability": ["read", "create", "update"]
             },
             "bindPassword": {
               "type": "string",
@@ -2518,10 +2329,7 @@
           "x-ms-identifiers": []
         }
       },
-      "required": [
-        "name",
-        "accessRules"
-      ]
+      "required": ["name", "accessRules"]
     },
     "NfsAccessRule": {
       "type": "object",
@@ -2530,11 +2338,7 @@
         "scope": {
           "description": "Scope for this rule. The scope and filter determine which clients match the rule.",
           "type": "string",
-          "enum": [
-            "default",
-            "network",
-            "host"
-          ],
+          "enum": ["default", "network", "host"],
           "x-ms-enum": {
             "name": "NfsAccessRuleScope",
             "modelAsString": true
@@ -2547,11 +2351,7 @@
         "access": {
           "description": "Access allowed by this rule.",
           "type": "string",
-          "enum": [
-            "no",
-            "ro",
-            "rw"
-          ],
+          "enum": ["no", "ro", "rw"],
           "x-ms-enum": {
             "name": "NfsAccessRuleAccess",
             "modelAsString": true
@@ -2578,10 +2378,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "scope",
-        "access"
-      ]
+      "required": ["scope", "access"]
     },
     "KeyVaultKeyReference": {
       "type": "object",
@@ -2602,10 +2399,7 @@
           }
         }
       },
-      "required": [
-        "keyUrl",
-        "sourceVault"
-      ]
+      "required": ["keyUrl", "sourceVault"]
     },
     "CachesListResult": {
       "description": "Result of the request to list caches. It contains a list of caches and a URL link to get the next set of results.",
@@ -2692,10 +2486,7 @@
         },
         "firmwareUpdateStatus": {
           "description": "True if there is a firmware update ready to install on this cache. The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
-          "enum": [
-            "available",
-            "unavailable"
-          ],
+          "enum": ["available", "unavailable"],
           "x-ms-enum": {
             "name": "FirmwareStatusType",
             "modelAsString": true
@@ -2796,9 +2587,7 @@
     "StorageTargetProperties": {
       "type": "object",
       "description": "Properties of the Storage Target.",
-      "required": [
-        "targetType"
-      ],
+      "required": ["targetType"],
       "properties": {
         "junctions": {
           "description": "List of cache namespace junctions to target for namespace associations.",
@@ -2810,21 +2599,13 @@
         },
         "targetType": {
           "description": "Type of the Storage Target.",
-          "enum": [
-            "nfs3",
-            "clfs",
-            "unknown",
-            "blobNfs"
-          ],
+          "enum": ["nfs3", "clfs", "unknown", "blobNfs"],
           "x-ms-enum": {
             "name": "StorageTargetType",
             "modelAsString": true
           },
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "provisioningState": {
           "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
@@ -2845,12 +2626,7 @@
         },
         "state": {
           "description": "Storage target operational state.",
-          "enum": [
-            "Ready",
-            "Busy",
-            "Suspended",
-            "Flushing"
-          ],
+          "enum": ["Ready", "Busy", "Suspended", "Flushing"],
           "x-ms-enum": {
             "name": "OperationalStateType",
             "modelAsString": true
@@ -2891,10 +2667,7 @@
           "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
           "pattern": "^[-.,0-9a-zA-Z]+$",
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "usageModel": {
           "description": "Identifies the StorageCache usage model to be used for this storage target.",
@@ -2919,10 +2692,7 @@
         "target": {
           "description": "Resource ID of storage container.",
           "$ref": "#/definitions/URLString",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         }
       }
     },
@@ -2943,10 +2713,7 @@
         "target": {
           "description": "Resource ID of the storage container.",
           "$ref": "#/definitions/URLString",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "usageModel": {
           "description": "Identifies the StorageCache usage model to be used for this storage target.",
@@ -2983,9 +2750,7 @@
             "$ref": "#/definitions/ResourceSkuCapabilities"
           },
           "type": "array",
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": ["name"]
         },
         "locations": {
           "readOnly": true,
@@ -3036,10 +2801,7 @@
         },
         "reasonCode": {
           "type": "string",
-          "enum": [
-            "QuotaId",
-            "NotAvailableForSubscription"
-          ],
+          "enum": ["QuotaId", "NotAvailableForSubscription"],
           "x-ms-enum": {
             "name": "ReasonCode",
             "modelAsString": true
@@ -3180,9 +2942,7 @@
             "$ref": "#/definitions/UsageModel"
           },
           "type": "array",
-          "x-ms-identifiers": [
-            "modelName"
-          ]
+          "x-ms-identifiers": ["modelName"]
         }
       },
       "type": "object"
@@ -3202,9 +2962,7 @@
           },
           "readOnly": true,
           "type": "array",
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": ["name"]
         }
       },
       "type": "object"
@@ -3349,17 +3107,12 @@
         "primingJobName": {
           "description": "The priming job name.",
           "$ref": "#/definitions/ResourceName",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "primingManifestUrl": {
           "description": "The URL for the priming manifest file to download. This file must be readable from the HPC Cache. When the file is in Azure blob storage the URL should include a Shared Access Signature (SAS) granting read permissions on the blob.",
           "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ],
+          "x-ms-mutability": ["create"],
           "x-ms-secret": true
         },
         "primingJobId": {
@@ -3370,12 +3123,7 @@
         },
         "primingJobState": {
           "description": "The state of the priming operation.",
-          "enum": [
-            "Queued",
-            "Running",
-            "Paused",
-            "Complete"
-          ],
+          "enum": ["Queued", "Running", "Paused", "Complete"],
           "readOnly": true,
           "type": "string",
           "x-ms-enum": {
@@ -3402,10 +3150,7 @@
           "readOnly": true
         }
       },
-      "required": [
-        "primingJobName",
-        "primingManifestUrl"
-      ],
+      "required": ["primingJobName", "primingManifestUrl"],
       "type": "object"
     },
     "PrimingJobList": {
@@ -3414,9 +3159,7 @@
         "$ref": "#/definitions/PrimingJob"
       },
       "type": "array",
-      "x-ms-identifiers": [
-        "primingJobId"
-      ],
+      "x-ms-identifiers": ["primingJobId"],
       "readOnly": true
     },
     "PrimingJobIdParameter": {
@@ -3428,9 +3171,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "primingJobId"
-      ],
+      "required": ["primingJobId"],
       "type": "object"
     },
     "SpaceAllocationList": {
@@ -3439,9 +3180,7 @@
         "$ref": "#/definitions/StorageTargetSpaceAllocation"
       },
       "type": "array",
-      "x-ms-identifiers": [
-        "name"
-      ],
+      "x-ms-identifiers": ["name"],
       "readOnly": true
     },
     "SpaceAllocationParameter": {
@@ -3450,9 +3189,7 @@
         "$ref": "#/definitions/StorageTargetSpaceAllocation"
       },
       "type": "array",
-      "x-ms-identifiers": [
-        "name"
-      ]
+      "x-ms-identifiers": ["name"]
     },
     "StorageTargetSpaceAllocation": {
       "description": "Storage Target space allocation properties.",
@@ -3493,4 +3230,3 @@
     }
   }
 }
-
