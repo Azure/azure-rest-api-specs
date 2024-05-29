@@ -3,3 +3,7 @@ suppressions:
     - package: azure-mgmt-compute
       breaking-changes:
         - Parameter id of model SecurityPostureReference is now required
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/compute/armcompute
+      breaking-changes:
+        - Type of `SecurityPostureReference.ExcludeExtensions` has been changed from `[]*VirtualMachineExtension` to `[]*string`
