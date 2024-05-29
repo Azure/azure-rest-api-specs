@@ -246,7 +246,8 @@ union AssistantsApiToolChoiceOption {
 
   /** Specifies how the tool choice will be used */
   AssistantsApiToolChoiceOptionMode,
-  /** Specifies a tool the model should use. Use to force the model to call a specific tool. */ 
+
+  /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
   AssistantsNamedToolChoice,
 }
 

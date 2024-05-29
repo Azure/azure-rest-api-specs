@@ -110,7 +110,8 @@ union AssistantsApiResponseFormatOption {
 
   /** The model will handle the return format. */
   AssistantsApiResponseFormatMode,
-  /** Sets the format of the output of the model when a ToolCall is returned.  */
+
+  /** Sets the format of the output of the model when a ToolCall is returned. */
   AssistantsApiResponseFormat,
 }
 
