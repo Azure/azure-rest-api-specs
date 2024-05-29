@@ -23,6 +23,7 @@ alias SessionOperations = Azure.Core.ResourceOperations<SessionTraits>;
 
 interface CodeExecution {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  @doc("Execute code in a session.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/code/execute")
   executeCode is Foundations.Operation<
     {
@@ -44,9 +45,7 @@ interface CodeExecution {
       @segment("sessionPools")
       sessionPoolName: string;
 
-      @doc("The identifier of the session.")
-      @query
-      identifier: string;
+      ...SessionIdentifier;
 
       @doc("The request to execute code.")
       @body

@@ -42,7 +42,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/code/execute": {
       "post": {
         "operationId": "CodeExecution_ExecuteCode",
-        "description": "The most basic operation.",
+        "description": "Execute code in a session.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -72,11 +72,7 @@
             "type": "string"
           },
           {
-            "name": "identifier",
-            "in": "query",
-            "description": "The identifier of the session.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SessionIdentifier"
           },
           {
             "name": "codeExecutionRequest",
