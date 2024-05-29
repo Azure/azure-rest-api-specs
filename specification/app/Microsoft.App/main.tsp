@@ -8,15 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.contoso.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://widget.contoso.com/.default"],
-    }
-  ]>
-)
+@useAuth(AadOauth2Auth<["https://dynamicsessions.io"]>)
 @service({
   title: "Microsoft.App service",
 })
