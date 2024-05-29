@@ -699,25 +699,6 @@
         ]
       }
     },
-    "FakedSharedModel": {
-      "type": "object",
-      "description": "Faked shared model",
-      "properties": {
-        "tag": {
-          "type": "string",
-          "description": "The tag."
-        },
-        "createdDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The created date."
-        }
-      },
-      "required": [
-        "tag",
-        "createdDate"
-      ]
-    },
     "ResourceGroup": {
       "type": "object",
       "description": "Resource group resource.",
@@ -758,29 +739,6 @@
       "required": [
         "subscriptionId"
       ]
-    },
-    "Widget": {
-      "type": "object",
-      "description": "A widget.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The widget name.",
-          "readOnly": true
-        },
-        "manufacturerId": {
-          "type": "string",
-          "description": "The ID of the manufacturer."
-        },
-        "sharedModel": {
-          "$ref": "#/definitions/FakedSharedModel",
-          "description": "The faked shared model."
-        }
-      },
-      "required": [
-        "name",
-        "manufacturerId"
-      ]
     }
   },
   "parameters": {
@@ -800,7 +758,7 @@
       "description": "The identifier of the session.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     }
   }
 }

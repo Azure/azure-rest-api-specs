@@ -1,8 +1,11 @@
+import "@azure-tools/typespec-azure-resource-manager";
+
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
 namespace Microsoft.App;
+using OpenAPI;
 
 @doc("Subscription resource.")
 @resource("subscriptions")
@@ -42,5 +45,6 @@ model SessionPool {
 model SessionIdentifier {
   @doc("The identifier of the session.")
   @query
+  @extension("x-ms-parameter-location", "client")
   identifier: string;
 }
