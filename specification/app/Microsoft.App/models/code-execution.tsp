@@ -64,6 +64,7 @@ model CodeExecutionResponseProperties {
   @doc("The standard error of the code execution.")
   stderr: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   @doc("The result of the code execution.")
   result: unknown;
 

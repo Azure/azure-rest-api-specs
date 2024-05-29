@@ -22,6 +22,7 @@ alias SessionTraits = NoRepeatableRequests &
 alias SessionOperations = Azure.Core.ResourceOperations<SessionTraits>;
 
 interface CodeExecution {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/code/execute")
   executeCode is Foundations.Operation<
     {
@@ -64,6 +65,7 @@ interface CodeExecutionFiles {
   @doc("Delete the file.")
   deleteFile is SessionOperations.ResourceDelete<CodeExecutionFile>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @doc("Get the content of the file.")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/content/{filename}")
@@ -102,6 +104,7 @@ interface CodeExecutionFiles {
     Foundations.ErrorResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/byos" ""
   @doc("Upload a file to a session.")
   uploadFile is SessionOperations.ResourceAction<
     CodeExecutionFile,
