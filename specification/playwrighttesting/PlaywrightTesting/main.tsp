@@ -47,12 +47,6 @@ enum Versions {
 
 // Models ////////////////////
 
-@doc("Server error response object containing details.")
-model ServerError is Azure.Core.Foundations.ErrorResponse {
-  @doc("The error status string from the server.")
-  status: string;
-}
-
 @doc("An account is a parent resource for most of the other service resources. It's directly mapped to an ARM resource and helps to create a link between control-plane and data-plane resources.")
 @resource("accounts")
 model Account {
@@ -194,7 +188,7 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   SupportsClientRequestId;
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ServerError>;
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface AccessTokens {
   // AccessToken Operations
@@ -253,10 +247,7 @@ interface AccessTokens {
   >;
 
   @doc("Validates access-token provided in authorization header for the given account id.")
-  @example(
-    "./AccessTokens_ValidateAccessToken.json",
-    "AccessTokens_ValidateAccessToken"
-  )
+  @example("./AccessTokens_Validate.json", "AccessTokens_Validate")
   @actionSeparator("/")
   validate is Operations.ResourceCollectionAction<
     AccessToken,
@@ -318,5 +309,5 @@ interface Accounts {
     })
     @doc("An opaque, globally-unique, client-generated string identifier for the request.")
     xMsClientRequestId: uuid;
-  } | ServerError;
+  } | Azure.Core.Foundations.ErrorResponse;
 }
