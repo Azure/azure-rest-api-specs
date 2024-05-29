@@ -1,4 +1,3 @@
-import { readFile } from "fs/promises";
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
