@@ -55,6 +55,9 @@ namespace Microsoft.EventGrid {
 
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_11_01: "2023-11-01",
+
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    v2024_06_01: "2024-06-01",
   }
 
   alias StandardOperations = Azure.Core.StandardResourceOperations;
@@ -129,22 +132,22 @@ namespace Microsoft.EventGrid {
 
   @doc("Supported delays for release operation.")
   union ReleaseDelay {
-    int32,
+    string,
 
     @doc("Release the event after 0 seconds.")
-    By0Seconds: 0,
+    By0Seconds: "0",
 
     @doc("Release the event after 10 seconds.")
-    By10Seconds: 10,
+    By10Seconds: "10",
 
     @doc("Release the event after 60 seconds.")
-    By60Seconds: 60,
+    By60Seconds: "60",
 
     @doc("Release the event after 600 seconds.")
-    By600Seconds: 600,
+    By600Seconds: "600",
 
     @doc("Release the event after 3600 seconds.")
-    By3600Seconds: 3600,
+    By3600Seconds: "3600",
   }
 
   @doc("The result of the Publish operation.")
@@ -322,6 +325,7 @@ namespace Microsoft.EventGrid {
 
       @added(ServiceApiVersions.v2023_10_01_preview)
       @removed(ServiceApiVersions.v2023_11_01)
+      @added(ServiceApiVersions.v2024_06_01)
       @doc("Release cloud events with the specified delay in seconds.")
       @query
       releaseDelayInSeconds?: ReleaseDelay;
@@ -348,6 +352,7 @@ namespace Microsoft.EventGrid {
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:renewLock?api-version={apiVersion}
   @added(ServiceApiVersions.v2023_10_01_preview)
   @removed(ServiceApiVersions.v2023_11_01)
+  @added(ServiceApiVersions.v2024_06_01)
   @doc("Renew locks for a batch of Cloud Events. The response will include the set of successfully renewed lock tokens, along with other failed lock tokens with their corresponding error information. Successfully renewed locks will ensure that the associated event is only available to the consumer that holds the renewed lock.")
   @action("renewLock")
   op renewCloudEventLocks is StandardOperations.ResourceAction<
