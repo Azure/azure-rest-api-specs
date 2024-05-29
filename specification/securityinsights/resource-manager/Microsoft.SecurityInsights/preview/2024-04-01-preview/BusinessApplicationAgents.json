@@ -47,7 +47,7 @@
             "name": "agentToUpsert",
             "description": "The Business Application Agent",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
             }
           }
         ],
@@ -55,13 +55,13 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
             }
           },
           "default": {
@@ -114,7 +114,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/BusinessApplicationAgentResource"
             }
           },
           "default": {
@@ -218,7 +218,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/AgentsList"
+              "$ref": "#/definitions/BusinessApplicationAgentsList"
             }
           },
           "default": {
@@ -289,7 +289,7 @@
             "name": "systemToUpsert",
             "description": "The system to upsert.",
             "schema": {
-              "$ref": "#/definitions/System"
+              "$ref": "#/definitions/SystemResource"
             }
           }
         ],
@@ -297,13 +297,13 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/System"
+              "$ref": "#/definitions/SystemResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/System"
+              "$ref": "#/definitions/SystemResource"
             }
           },
           "default": {
@@ -366,7 +366,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/System"
+              "$ref": "#/definitions/SystemResource"
             }
           },
           "default": {
@@ -504,7 +504,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Systems_GetAll": {
+          "Systems_List": {
             "$ref": "./examples/businessApplicationAgents/systems/Systems_List.json"
           }
         }
@@ -717,7 +717,7 @@
     }
   },
   "definitions": {
-    "Agent": {
+    "BusinessApplicationAgentResource": {
       "description": "Describes the configuration of a Business Application Agent.",
       "required": [
         "properties"
@@ -736,18 +736,38 @@
         }
       }
     },
-    "AgentProperties": {
+    "AgentConfiguration": {
       "description": "Describes the configuration of a Business Application Agent.",
       "required": [
-        "type",
-        "displayName"
+        "type"
       ],
       "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/AgentType"
+        }
+      },
+      "discriminator": "type"
+    },
+    "AgentProperties": {
+      "required": [
+        "configuration",
+        "displayName"
+      ],
+      "type": "object",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/AgentConfiguration"
+        },
+        "agentSystems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentSystem"
+          },
+          "readOnly": true
         },
         "displayName": {
+          "minLength": 1,
           "type": "string"
         },
         "lastModifiedTimeUtc": {
@@ -755,8 +775,19 @@
           "type": "string",
           "readOnly": true
         }
-      },
-      "discriminator": "type"
+      }
+    },
+    "AgentSystem": {
+      "description": "Describes the configuration of a system inside the agent.",
+      "type": "object",
+      "properties": {
+        "systemResourceName": {
+          "type": "string"
+        },
+        "systemDisplayName": {
+          "type": "string"
+        }
+      }
     },
     "AgentType": {
       "description": "Type of the agent",
@@ -775,35 +806,17 @@
         ]
       }
     },
-    "AgentsList": {
+    "BusinessApplicationAgentsList": {
       "description": "List of agents.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Agent"
+            "$ref": "#/definitions/BusinessApplicationAgentResource"
           }
         },
         "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "AgentSystem": {
-      "description": "Describes the configuration of a system inside the agent.",
-      "type": "object",
-      "properties": {
-        "agentSystemName": {
-          "description": "The system instance ID inside the agent.\r\nExample: \"0a16301c-5686-42f9-8575-4fe7b64598ba\"",
-          "type": "string"
-        },
-        "sapSystemId": {
-          "description": "The SAP system ID.\r\nExample: \"A4H\"",
-          "type": "string"
-        },
-        "sapClientId": {
-          "description": "The SAP client ID.\r\nExample: \"001\"",
           "type": "string"
         }
       }
@@ -829,16 +842,15 @@
         ]
       }
     },
-    "SapAgent": {
+    "SapAgentConfiguration": {
       "description": "Describes the configuration of a SAP Docker agent.",
       "required": [
-        "type",
-        "displayName"
+        "type"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AgentProperties"
+          "$ref": "#/definitions/AgentConfiguration"
         }
       ],
       "properties": {
@@ -862,11 +874,6 @@
           "pattern": "^\\/?subscriptions\\/([^\\/]+)\\/resourceGroups\\/([^\\/]+)\\/providers\\/Microsoft\\.KeyVault\\/vaults\\/([^\\/]+)$",
           "type": "string"
         },
-        "keyVaultUri": {
-          "description": "Key vault uri to access the key vault.",
-          "pattern": "^https:\\/\\/([a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{2,}))(\\/)?$",
-          "type": "string"
-        },
         "keyVaultAuthenticationMode": {
           "description": "The key mode of the agent.\r\nManagedIdentity|ApplicationIdentity are the options",
           "$ref": "#/definitions/KeyVaultAuthenticationMode"
@@ -875,25 +882,8 @@
           "description": "The secret source of the agent.\r\nAzureKeyVault|EnvironmentVariable are the options",
           "$ref": "#/definitions/SecretSource"
         },
-        "agentSystems": {
-          "description": "The systems that installed in the agent.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentSystem"
-          },
-          "x-ms-identifiers": [],
-          "readOnly": true
-        },
         "type": {
           "$ref": "#/definitions/AgentType"
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "lastModifiedTimeUtc": {
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "SAP"
@@ -985,6 +975,10 @@
         "user": {
           "type": "string",
           "description": "The user to lock"
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "The reason of the failure of the action. Empty if the action is successful."
         }
       },
       "type": "object",
@@ -1001,6 +995,10 @@
         "user": {
           "type": "string",
           "description": "The user to unlock"
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "The reason of the failure of the action. Empty if the action is successful."
         }
       },
       "type": "object",
@@ -1026,6 +1024,10 @@
         },
         "actionStatus": {
           "description": "The status of the action that was performed by the agent",
+          "type": "string"
+        },
+        "failureReason": {
+          "description": "The reason of the failure of the action. Empty if the action is successful.",
           "type": "string"
         }
       }
@@ -1147,10 +1149,10 @@
     },
     "Log": {
       "description": "Describes a log.",
-      "type": "object",
       "required": [
         "type"
       ],
+      "type": "object",
       "properties": {
         "type": {
           "$ref": "#/definitions/LogType"
@@ -1272,18 +1274,6 @@
           },
           {
             "value": "AbapFilesLogs"
-          },
-          {
-            "value": "SysLog"
-          },
-          {
-            "value": "ICM"
-          },
-          {
-            "value": "WorkProcess"
-          },
-          {
-            "value": "Gateway"
           },
           {
             "value": "JavaFilesLogs"
@@ -1505,7 +1495,7 @@
       },
       "x-ms-discriminator-value": "SAP"
     },
-    "System": {
+    "SystemResource": {
       "description": "Describes the system within the agent.",
       "required": [
         "properties"
@@ -1560,6 +1550,7 @@
           "$ref": "#/definitions/SystemsConfiguration"
         },
         "displayName": {
+          "minLength": 1,
           "type": "string"
         },
         "lastModifiedTimeUtc": {
@@ -1623,7 +1614,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/System"
+            "$ref": "#/definitions/SystemResource"
           }
         },
         "nextLink": {
@@ -1633,32 +1624,32 @@
     }
   },
   "parameters": {
-    "Agent": {
-      "name": "agent",
-      "description": "The business application agent",
+    "BusinessApplicationAgentResource": {
+      "name": "businessApplicationAgentResource",
+      "description": "The Business Application Agent Resource",
       "required": true,
       "in": "body",
       "x-ms-parameter-location": "method",
       "schema": {
-        "$ref": "#/definitions/Agent"
+        "$ref": "#/definitions/BusinessApplicationAgentResource"
       }
     },
-    "AgentId": {
+    "BusinessApplicationAgentId": {
       "in": "path",
-      "name": "agentId",
-      "description": "Agent ID",
+      "name": "businessApplicationAgentId",
+      "description": "BusinessApplicationAgent ID",
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
     },
-    "System": {
-      "name": "system",
-      "description": "The system",
+    "SystemResource": {
+      "name": "systemResource",
+      "description": "The system resource",
       "required": true,
       "in": "body",
       "x-ms-parameter-location": "method",
       "schema": {
-        "$ref": "#/definitions/System"
+        "$ref": "#/definitions/SystemResource"
       }
     },
     "SystemId": {
