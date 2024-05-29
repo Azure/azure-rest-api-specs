@@ -64,7 +64,7 @@ union DetectionModel {
   "detection_03",
 }
 
-alias UserDefinedFields = {
+model UserDefinedFields {
   @doc("User defined name, maximum length is 128.")
   @maxLength(128)
   @minLength(1)
@@ -73,9 +73,9 @@ alias UserDefinedFields = {
   @doc("Optional user defined data. Length should not exceed 16K.")
   @maxLength(16384)
   userData?: string;
-};
+}
 
-alias UserDefinedFieldsForUpdate = {
+model UserDefinedFieldsForUpdate {
   @doc("User defined name, maximum length is 128.")
   @maxLength(128)
   @minLength(1)
@@ -84,7 +84,7 @@ alias UserDefinedFieldsForUpdate = {
   @doc("Optional user defined data. Length should not exceed 16K.")
   @maxLength(16384)
   userData?: string;
-};
+}
 
 @doc("Common model for face list and person group.")
 model BaseCollection {
@@ -94,18 +94,18 @@ model BaseCollection {
   recognitionModel?: RecognitionModel;
 }
 
-alias CreateCollectionOptions = {
+model CreateCollectionOptions {
   ...UserDefinedFields;
 
   @doc("The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.")
   recognitionModel?: RecognitionModel = "recognition_01";
-};
+}
 
-alias FaceUserData = {
+model FaceUserData {
   @doc("User-provided data attached to the face. The length limit is 1K.")
   @maxLength(1024)
   userData?: string;
-};
+}
 
 @doc("Common model for persisted face.")
 @resource("persistedfaces")
@@ -118,7 +118,7 @@ model BaseFace {
   ...FaceUserData;
 }
 
-alias AddFaceOptions = {
+model AddFaceOptions {
   @doc("A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.")
   @query({
     format: "csv",
@@ -135,7 +135,7 @@ alias AddFaceOptions = {
   @doc("User-provided data attached to the face. The size limit is 1K.")
   @maxLength(1024)
   userData?: string;
-};
+}
 
 @doc("Response body for adding face.")
 model AddFaceResult {

@@ -43,35 +43,43 @@ op FaceCollectionResourceCreateOperation<TResource extends TypeSpec.Reflection.M
   FaceErrorResponse
 >;
 
+model AddFaceContent is AddFaceOptions {
+  @doc("The format of the HTTP payload.")
+  @header
+  contentType: "application/octet-stream";
+
+  @doc("The image to be analyzed")
+  @body
+  imageContent: bytes;
+}
+
 alias AddFaceSuccess = "A successful call returns a new persistedFaceId.";
 #suppress "@azure-tools/typespec-azure-core/byos" "It's a template."
 @sharedRoute
 @createsResource(TFace)
 op AddFace<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
   TFace,
-  AddFaceOptions & {
-    @doc("The format of the HTTP payload.")
-    @header
-    contentType: "application/octet-stream";
-
-    @doc("The image to be analyzed")
-    @body
-    imageContent: bytes;
-  },
+  AddFaceContent,
   AddFaceResult,
   ServiceTraits,
   FaceErrorResponse
 >;
 
+model AddFaceFromUrlContent is AddFaceOptions {
+  @doc("The format of the HTTP payload.")
+  @header
+  contentType: "application/octet-stream";
+
+  @doc("The image to be analyzed")
+  @body
+  imageContent: bytes;
+}
+
 @sharedRoute
 @createsResource(TFace)
 op AddFaceFromUrl<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
   TFace,
-  AddFaceOptions & {
-    @clientName("uri", "csharp")
-    @doc("URL of input image.")
-    url: url;
-  },
+  AddFaceFromUrlContent,
   AddFaceResult,
   ServiceTraits,
   FaceErrorResponse
