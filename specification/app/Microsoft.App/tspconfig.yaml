@@ -16,11 +16,13 @@ options:
     package-dir: "microsoft-app"
     package-name: "{package-dir}"  
     package-mode: dataplane
+    flavor: azure
   "@azure-tools/typespec-csharp":
     package-dir: "Microsoft.App"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "microsoft-app-rest"
     generateMetadata: true
@@ -28,9 +30,11 @@ options:
     packageDetails:
       name: "@azure-rest/microsoft-app-rest"
       description: "Microsoft.App Service"
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "microsoft-app"
     namespace: com.microsoft.app
+    flavor: azure
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
