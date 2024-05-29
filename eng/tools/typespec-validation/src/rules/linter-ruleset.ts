@@ -25,6 +25,14 @@ export class LinterRulesetRule implements Rule {
 
     const mainTspExists = await host.checkFileExists(join(folder, "main.tsp"));
     const clientTspExists = await host.checkFileExists(join(folder, "client.tsp"));
+    let files = [];
+    if (mainTspExists) {
+      files.push("main.tsp");
+    }
+    if (clientTspExists) {
+      files.push("client.tsp");
+    }
+    stdOutput += `files: ${JSON.stringify(files)}\n`;
 
     const linterExtends = config.linter?.extends;
     stdOutput += `linter.extends: ${JSON.stringify(linterExtends)}`;
