@@ -1,0 +1,967 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Video Translation API",
+    "description": "Video  API to translate video.",
+    "contact": {
+      "name": "Azure AI - Speech Services",
+      "url": "https://learn.microsoft.com/azure/ai-services/speech-service/"
+    },
+    "version": "2024-05-20-preview"
+  },
+  "paths": {
+    "/translations": {
+      "get": {
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Gets a list of translations.",
+        "operationId": "Translations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/QuerySkip"
+          },
+          {
+            "$ref": "#/parameters/QueryMaxPageSize"
+          },
+          {
+            "$ref": "#/parameters/QueryFilter"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PaginatedTranslations"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+          "Get all video files": {
+            "$ref": "./examples/list_translations.json"
+          }
+        }
+      }
+    },
+    "/translations/{TranslationId}": {
+      "get": {
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Gets the translation identified by the given ID.",
+        "operationId": "Translations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TranslationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a project": {
+            "$ref": "./examples/get_translation.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Deletes the translation identified by the given ID. All data (like webvtt file, iterations) of this translation will be deleted automatically.",
+        "operationId": "Translations_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TranslationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Header-Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              },
+              "retry-after": {
+                "description": "Indicate the minimum number of seconds the client should wait before polling the status monitor URL again for an update.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a translation": {
+            "$ref": "./examples/delete_translation.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Creates a new translation.",
+        "operationId": "Translations_Create",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TranslationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "translation",
+            "description": "translation definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Translation"
+            },
+            "headers": {
+              "Header-Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              },
+              "retry-after": {
+                "description": "Indicate the minimum number of seconds the client should wait before polling the status monitor URL again for an update.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a project": {
+            "$ref": "./examples/put_translation.json"
+          }
+        }
+      }
+    },
+    "/translations/{TranslationId}/iterations": {
+      "get": {
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "List iterations of the translation.",
+        "operationId": "Iterations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TranslationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedIterations"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/list_iterations.json"
+          }
+        }
+      }
+    },
+    "/translations/{TranslationId}/iterations/{IterationId}": {
+      "get": {
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Gets translate iteration info.",
+        "operationId": "Iterations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TranslationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/IterationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_iteration.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Creates a new iteration.",
+        "operationId": "Iterations_Create",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TranslationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/IterationPathResourceId"
+          },
+          {
+            "$ref": "#/parameters/HeaderOperationId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "iteration",
+            "description": "Iteration definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Iteration"
+            },
+            "headers": {
+              "Header-Operation-Id": {
+                "type": "string",
+                "description": "ID of the operation."
+              },
+              "Operation-Location": {
+                "description": "The location of the operation job. Use this URL to monitor operation status.",
+                "type": "string",
+                "format": "uri"
+              },
+              "retry-after": {
+                "description": "Indicate the minimum number of seconds the client should wait before polling the status monitor URL again for an update.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a project": {
+            "$ref": "./examples/put_iteration.json"
+          }
+        }
+      }
+    },
+    "/operations/{Path-Operation-Id}": {
+      "get": {
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Gets operation info.",
+        "operationId": "Operations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PathOperationId"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation": {
+            "$ref": "./examples/get_operation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Operation": {
+      "description": "Operation definition.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceId": {
+      "description": "Resource id",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "Status": {
+      "description": "Status of a resource.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
+    },
+    "WebvttFileKind": {
+      "description": "Webvtt file format.",
+      "enum": [
+        "SourceLocaleSubtitle",
+        "TargetLocaleSubtitle",
+        "MetadataJson"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "WebvttFileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SourceLocaleSubtitle",
+            "description": "The webvtt file is plain text format, and the text is the source locale subtitle."
+          },
+          {
+            "value": "TargetLocaleSubtitle",
+            "description": "The webvtt file is plain text format, and the text is the target locale subtitle."
+          },
+          {
+            "value": "MetadataJson",
+            "description": "The webvtt file is metadata JSON format."
+          }
+        ]
+      }
+    },
+    "VoiceKind": {
+      "description": "Translation voice kind.",
+      "enum": [
+        "PlatformVoice",
+        "PersonalVoice"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "VoiceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "PlatformVoice",
+            "description": "The translated video is synthesized with TTS platform voice."
+          },
+          {
+            "value": "PersonalVoice",
+            "description": "The translated video is synthesized with TTS personal voice."
+          }
+        ]
+      }
+    },
+    "PaginatedTranslations": {
+      "description": "Paginated translation list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Translation list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Translation"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedIterations": {
+      "description": "Paginated iteration list",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Iteration list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Iteration"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page.",
+          "format": "uri",
+          "type": "string"
+        }
+      }
+    },
+    "WebvttFile": {
+      "description": "Translation webvtt file input.",
+      "required": [
+        "url",
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "Translation webvtt file url",
+          "type": "string",
+          "format": "uri"
+        },
+        "kind": {
+          "$ref": "#/definitions/WebvttFileKind"
+        }
+      }
+    },
+    "Translation": {
+      "description": "Translation response.",
+      "required": [
+        "input"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "description": {
+          "description": "Translation description",
+          "type": "string"
+        },
+        "input": {
+          "$ref": "#/definitions/TranslationInput"
+        },
+        "initialIterationInput": {
+          "$ref": "#/definitions/IterationInput"
+        },
+        "createdDateTime": {
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestIteration": {
+          "$ref": "#/definitions/Iteration",
+          "readOnly": true
+        },
+        "latestCompletedIteration": {
+          "$ref": "#/definitions/Iteration",
+          "readOnly": true
+        }
+      }
+    },
+    "TranslationInput": {
+      "description": "Translation input.",
+      "required": [
+        "sourceLocale",
+        "targetLocale",
+        "voiceKind",
+        "videoFileUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceLocale": {
+          "description": "The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
+        },
+        "targetLocale": {
+          "description": "The target locale of the translation. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "type": "string",
+          "example": "en-US"
+        },
+        "voiceKind": {
+          "$ref": "#/definitions/VoiceKind"
+        },
+        "videoFileUrl": {
+          "description": "Translation video file url",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "TranslationResult": {
+      "description": "Translation result.",
+      "type": "object",
+      "properties": {
+        "translatedVideoFileUrl": {
+          "description": "Translated video file URL.",
+          "type": "string",
+          "example": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "sourceLocaleSubtitleWebvttFileUrl": {
+          "description": "Source locale subtitle file URL.",
+          "type": "string",
+          "example": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "targetLocaleSubtitleWebvttFileUrl": {
+          "description": "Target locale subtitle file URL.",
+          "type": "string",
+          "example": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "metadataJsonWebvttFileUrl": {
+          "description": "Metadata json webvtt file URL.",
+          "type": "string",
+          "example": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "report": {
+          "description": "Report file URL.",
+          "type": "string",
+          "example": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        }
+      }
+    },
+    "Iteration": {
+      "description": "Translation iteration.",
+      "required": [],
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "description": {
+          "description": "Iteration description",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "input": {
+          "$ref": "#/definitions/IterationInput",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/TranslationResult",
+          "readOnly": true
+        }
+      }
+    },
+    "IterationInput": {
+      "description": "Translation iteration input.",
+      "type": "object",
+      "properties": {
+        "speakerCount": {
+          "description": "Speaker count of the video.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "subtitleMaxCharCountPerSegment": {
+          "description": "Subtitle max char count per segment.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "webvttFile": {
+          "$ref": "#/definitions/WebvttFile"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "ErrorCode": {
+      "description": "Top-level error code",
+      "enum": [
+        "BadRequest",
+        "BadArgument",
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "UnsupportedMediaType",
+        "TooManyRequests",
+        "InternalServerError",
+        "ServiceUnavailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true
+      }
+    },
+    "InnerError": {
+      "description": "Inner error follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors. This contains required properties error code, message and optional properties target, inner error(this can be nested).",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Detailed error code to help diagnostic.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The source of the error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Detailed error message.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "Error": {
+      "description": "Top-level error follows Microsoft Azure REST API Guidelines which is available at https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors. This contains an top-level error with error code, message, details, target and an inner error with more descriptive details.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCode"
+        },
+        "target": {
+          "description": "The source of the error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Top-level error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Additional supportive details regarding the error and/or expected policies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "subscription_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "description": "Provide your Speech resource key here."
+    },
+    "AADToken": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Microsoft identity platform](entra/identity-platform/v2-overview) flows.",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": "https://cognitiveservices.azure.com/.default"
+      }
+    }
+  },
+  "security": [
+    {
+      "subscription_key": [],
+      "AADToken": []
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/video-translation",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://eastus.api.cognitive.microsoft.com).",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "parameters": {
+    "QueryApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "QuerySkip": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "QueryMaxPageSize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of items to include in a single response.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "QueryFilter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter condition.\r\n  - **Supported properties:** createdDateTime\r\n  - **Operators:**\r\n    - eq, ne are supported for all properties.\r\n    - gt, ge, lt, le are supported for createdDateTime.\r\n  - **Example:**\r\n    - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IterationPathResourceId": {
+      "name": "IterationId",
+      "in": "path",
+      "description": "The ID of the iteration resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "TranslationPathResourceId": {
+      "name": "TranslationId",
+      "in": "path",
+      "description": "The ID of the translation resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "PathOperationId": {
+      "name": "Path-Operation-Id",
+      "in": "path",
+      "description": "The operation ID, which should be UUID.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "x-ms-parameter-location": "method",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "HeaderOperationId": {
+      "name": "Header-Operation-Id",
+      "in": "header",
+      "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+      "required": false,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
