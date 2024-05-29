@@ -1592,12 +1592,11 @@ components:
     AssistantsApiResponseFormatOption:
       anyOf:
         - type: string
-        - anyOf:
-            - type: string
-              enum:
-                - auto
-                - none
-            - $ref: '#/components/schemas/AssistantsApiResponseFormat'
+        - type: string
+          enum:
+            - auto
+            - none
+        - $ref: '#/components/schemas/AssistantsApiResponseFormat'
       description: |-
         Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
