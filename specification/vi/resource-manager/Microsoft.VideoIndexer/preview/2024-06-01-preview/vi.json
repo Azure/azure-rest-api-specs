@@ -55,7 +55,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1316,26 +1316,6 @@
           "readOnly": true,
           "type": "string",
           "example": "Read accounts details"
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Available operations of the service.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of operations supported by the Resource Provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "URL to get the next set of operation list results if there are any.",
-          "example": "https://management.azure.com/{operation}?api-version={version}&%24skiptoken={token}"
         }
       }
     },
