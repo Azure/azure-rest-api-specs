@@ -57,6 +57,10 @@ suppressions:
     reason: resourceUri in virtualmachineinstances is the parent resource. It consists of an even number of segmented paths. 
     from: 
       - stackhcivm.json
+  - code: APIVersionPattern
+    reason: received sign off by api reviewer to use special name for test version
+    from:
+      - stackhcivm.json
 ```
 
 ### Tag: package-preview-2024-05
