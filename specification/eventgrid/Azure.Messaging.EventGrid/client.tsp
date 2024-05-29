@@ -119,7 +119,7 @@ namespace Customizations {
 // All Language customizations
 @@access(publishCloudEvent, Access.internal);
 @@access(publishCloudEvents, Access.internal);
-@@access(receiveCloudEvents, Access.internal);
+@@access(receiveCloudEvents, Access.internal, "python");
 
 @@access(acknowledgeCloudEvents, Access.internal, "python");
 @@access(releaseCloudEvents, Access.internal, "python");
