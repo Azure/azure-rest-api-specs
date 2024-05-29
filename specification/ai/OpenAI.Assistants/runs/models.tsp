@@ -95,7 +95,45 @@ model ThreadRun {
   @doc("The Unix timestamp, in seconds, representing when this failed.")
   failedAt: utcDateTime | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @encodedName("application/json", "incomplete_details")
+  @doc("Details on why the run is incomplete. Will be `null` if the run is not incomplete.")
+  incompleteDetails: IncompleteRunDetails | null;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).")
+  @added(ServiceApiVersions.v2024_02_15_preview)
+  usage: RunCompletionUsage | null;
+
   ...RequiredNullableMetadata;
+}
+
+/** The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run. */
+@added(ServiceApiVersions.v2024_02_15_preview)
+union IncompleteRunDetails {
+  string,
+
+  /** Maximum completion tokens exceeded */
+  maxCompletionTokens: "max_completion_tokens",
+
+  /** Maximum prompt tokens exceeded */
+  maxPromptTokens: "max_prompt_tokens",
+}
+
+@doc("Usage statistics related to the run.")
+@added(ServiceApiVersions.v2024_02_15_preview)
+model RunCompletionUsage {
+  @doc("Number of completion tokens used over the course of the run.")
+  @encodedName("application/json", "completion_tokens")
+  completionTokens: int64;
+
+  @doc("Number of prompt tokens used over the course of the run.")
+  @encodedName("application/json", "prompt_tokens")
+  promptTokens: int64;
+
+  @doc("Total number of tokens used (prompt + completion).")
+  @encodedName("application/json", "total_tokens")
+  totalTokens: int64;
 }
 
 @doc("The details used when creating a new run of an assistant thread.")
@@ -124,6 +162,13 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden list of enabled tools that the assistant should use to run the thread.")
   tools?: ToolDefinition[] | null;
+
+  /**
+   * If `true`, returns a stream of events that happen during the Run as server-sent events,
+   * terminating when the Run enters a terminal state with a `data: [DONE]` message.
+   */
+  @added(ServiceApiVersions.v2024_02_15_preview)
+  stream?: boolean;
 
   ...OptionalNullableMetadata;
 }
@@ -202,20 +247,30 @@ model CreateAndRunThreadOptions {
   @doc("The ID of the assistant for which the thread should be created.")
   assistantId: string;
 
-  @doc("The details used to create the new thread.")
+  @doc("The details used to create the new thread. If no thread is provided, an empty one will be created.")
   thread?: AssistantThreadCreationOptions;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden model that the assistant should use to run the thread.")
   @clientName("overrideModelName", "csharp")
-  `model`?: string;
+  `model`?: string | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden system instructions the assistant should use to run the thread.")
   @clientName("overrideInstructions", "csharp")
-  instructions?: string;
+  instructions?: string | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The overridden list of enabled tools the assistant should use to run the thread.")
   @clientName("overrideTools", "csharp")
-  tools?: ToolDefinition[];
+  tools?: ToolDefinition[] | null;
+
+  /**
+   * If `true`, returns a stream of events that happen during the Run as server-sent events,
+   * terminating when the Run enters a terminal state with a `data: [DONE]` message.
+   */
+  @added(ServiceApiVersions.v2024_02_15_preview)
+  stream?: boolean;
 
   ...OptionalNullableMetadata;
 }
