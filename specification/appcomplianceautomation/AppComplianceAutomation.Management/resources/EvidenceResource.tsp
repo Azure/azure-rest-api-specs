@@ -1,11 +1,14 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
+import "@typespec/rest";
 import "../models/models.tsp";
 import "./ReportResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using OpenAPI;
 
@@ -57,7 +60,7 @@ interface EvidenceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Evidences_CreateOrUpdate")
-  createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
     EvidenceResource,
     {
       ...Azure.ResourceManager.Foundations.BaseParameters<EvidenceResource>;
@@ -97,13 +100,25 @@ interface EvidenceResources {
   >;
 }
 
-@@doc(EvidenceResources.createOrUpdate::parameters.parameters,
+@@doc(EvidenceResources.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
 @@encodedName(EvidenceResources.download::parameters.body,
   "application/json",
   "parameters"
 );
+@@OpenAPI.extension(EvidenceResources.download::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@clientName(EvidenceResources.download::parameters.body,
+  "parameters"
+);
 @@doc(EvidenceResources.download::parameters.body,
   "Parameters for the query operation"
+);
+
+@@encodedName(EvidenceResources.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
 );

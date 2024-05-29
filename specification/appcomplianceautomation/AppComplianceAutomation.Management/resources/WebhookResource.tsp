@@ -59,7 +59,7 @@ interface WebhookResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Webhooks_CreateOrUpdate")
-  createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<WebhookResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<WebhookResource>;
 
   /**
    * Update an exiting AppComplianceAutomation webhook.
@@ -95,7 +95,7 @@ interface WebhookResources {
   >;
 }
 
-@@doc(WebhookResources.createOrUpdate::parameters.parameters,
+@@doc(WebhookResources.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
 @@doc(WebhookResources.update::parameters.properties,

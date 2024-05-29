@@ -4,7 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "../models/models.tsp";
-import "../operations.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
@@ -56,7 +55,7 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_CreateOrUpdate")
-  createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReportResource,
     Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
   >;
@@ -156,7 +155,7 @@ interface ReportResources {
   >;
 }
 
-@@doc(ReportResources.createOrUpdate::parameters.parameters,
+@@doc(ReportResources.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
 @@doc(ReportResources.update::parameters.properties,
@@ -178,3 +177,9 @@ interface ReportResources {
   "application/json",
   "parameters"
 );
+
+@@encodedName(ReportResources.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@clientName(ReportResources.createOrUpdate::parameters.resource, "parameters");
