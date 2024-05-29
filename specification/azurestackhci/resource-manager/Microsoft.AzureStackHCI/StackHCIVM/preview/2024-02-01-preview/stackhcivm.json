@@ -3896,25 +3896,9 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      ]
-    },
-    "GalleryImageArmReference": {
-      "type": "object",
-      "description": "The ARM ID for a Gallery Image.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM ID for a Storage Container.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.AzureStackHCI/galleryImages"
-              }
-            ]
-          }
-        }
-      }
+      ],
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true
     },
     "GalleryImageIdentifier": {
       "type": "object",
@@ -3978,7 +3962,9 @@
         },
         "imagePath": {
           "type": "string",
-          "description": "location of the image the gallery image should be created from"
+          "format": "password",
+          "description": "location of the image the gallery image should be created from",
+          "x-ms-secret": true
         },
         "osType": {
           "$ref": "#/definitions/OperatingSystemTypes",
@@ -4040,7 +4026,8 @@
           "format": "int64",
           "description": "The progress of the operation in percentage"
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "GalleryImageStatusDownloadStatus": {
       "type": "object",
@@ -4254,11 +4241,13 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "The password to connect with the guest.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -4288,11 +4277,15 @@
       "properties": {
         "httpProxy": {
           "type": "string",
-          "description": "The HTTP proxy server endpoint to use."
+          "format": "password",
+          "description": "The HTTP proxy server endpoint to use.",
+          "x-ms-secret": true
         },
         "httpsProxy": {
           "type": "string",
-          "description": "The HTTPS proxy server endpoint to use."
+          "format": "password",
+          "description": "The HTTPS proxy server endpoint to use.",
+          "x-ms-secret": true
         },
         "noProxy": {
           "type": "array",
@@ -4325,7 +4318,8 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "HybridIdentityMetadataListResult": {
       "type": "object",
@@ -4413,7 +4407,8 @@
           "$ref": "#/definitions/IPConfigurationProperties",
           "description": "InterfaceIPConfigurationPropertiesFormat properties of IP configuration."
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "IPConfigurationProperties": {
       "type": "object",
@@ -4531,6 +4526,31 @@
         }
       }
     },
+    "ImageArmReference": {
+      "type": "object",
+      "description": "The ARM ID for a Gallery Image.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM ID for an image resource used by the virtual machine instance.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/galleryImages"
+              },
+              {
+                "type": "Microsoft.AzureStackHCI/marketplaceGalleryImages"
+              }
+            ]
+          }
+        }
+      }
+    },
     "InstanceViewStatus": {
       "type": "object",
       "description": "Instance view status.",
@@ -4617,7 +4637,9 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true
     },
     "LogicalNetworkArmReference": {
       "type": "object",
@@ -4672,10 +4694,7 @@
           "items": {
             "$ref": "#/definitions/Subnet"
           },
-          "x-ms-identifiers": [
-            "properties",
-            "name"
-          ]
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
@@ -4722,7 +4741,8 @@
           "$ref": "#/definitions/LogicalNetworkStatusProvisioningStatus",
           "description": "Logical network provisioning status"
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "LogicalNetworkStatusProvisioningStatus": {
       "type": "object",
@@ -4773,7 +4793,9 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true
     },
     "MarketplaceGalleryImageListResult": {
       "type": "object",
@@ -4872,7 +4894,8 @@
           "format": "int64",
           "description": "The progress of the operation in percentage"
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "MarketplaceGalleryImageStatusDownloadStatus": {
       "type": "object",
@@ -4947,13 +4970,15 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true
     },
     "NetworkInterfaceArmReference": {
       "type": "object",
       "description": "The ARM ID for a Network Interface.",
       "properties": {
-        "id": {
+        "ID": {
           "type": "string",
           "format": "arm-id",
           "description": "The ARM ID for a Network Interface.",
@@ -4998,10 +5023,7 @@
           "items": {
             "$ref": "#/definitions/IPConfiguration"
           },
-          "x-ms-identifiers": [
-            "name",
-            "properties"
-          ]
+          "x-ms-identifiers": []
         },
         "macAddress": {
           "type": "string",
@@ -5043,7 +5065,8 @@
           "$ref": "#/definitions/NetworkInterfaceStatusProvisioningStatus",
           "description": "Network interface provisioning status"
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "NetworkInterfaceStatusProvisioningStatus": {
       "type": "object",
@@ -5094,7 +5117,8 @@
           "description": "NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance",
           "items": {
             "$ref": "#/definitions/NetworkInterfaceArmReference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5170,17 +5194,18 @@
       "type": "object",
       "description": "Network Security Group resource.",
       "properties": {
-        "networkInterfaceReferences": {
+        "networkInterfaces": {
           "type": "array",
           "description": "A collection of references to network interfaces that are currently using this NSG.",
           "items": {
             "$ref": "#/definitions/NetworkInterfaceArmReference"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "subnets": {
           "type": "array",
-          "description": "A collection of references to subnets that are currently using this NSG",
+          "description": "A collection of references to logical networks that are currently using this NSG",
           "items": {
             "$ref": "#/definitions/LogicalNetworkArmReference"
           },
@@ -5487,10 +5512,7 @@
           "items": {
             "$ref": "#/definitions/Route"
           },
-          "x-ms-identifiers": [
-            "properties",
-            "name"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5724,8 +5746,7 @@
             "$ref": "#/definitions/SshPublicKey"
           },
           "x-ms-identifiers": [
-            "path",
-            "keyData"
+            "path"
           ]
         }
       }
@@ -5858,7 +5879,9 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true
     },
     "StorageContainerArmReference": {
       "type": "object",
@@ -5948,7 +5971,8 @@
           "$ref": "#/definitions/StorageContainerStatusProvisioningStatus",
           "description": "Storage container's provisioning status"
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "StorageContainerStatusProvisioningStatus": {
       "type": "object",
@@ -6043,7 +6067,8 @@
           "description": "IPConfigurationReferences - list of IPConfigurationReferences",
           "items": {
             "$ref": "#/definitions/NetworkInterfaceArmReference"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "networkSecurityGroup": {
           "$ref": "#/definitions/NetworkSecurityGroupArmReference",
@@ -6059,13 +6084,7 @@
           "items": {
             "$ref": "#/definitions/IPPool"
           },
-          "x-ms-identifiers": [
-            "ipPoolType",
-            "name",
-            "start",
-            "end",
-            "info"
-          ]
+          "x-ms-identifiers": []
         },
         "vlan": {
           "type": "integer",
@@ -6109,7 +6128,9 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true
     },
     "VirtualHardDiskArmReference": {
       "type": "object",
@@ -6226,7 +6247,8 @@
           "$ref": "#/definitions/VirtualHardDiskStatusProvisioningStatus",
           "description": "Provisioning status of the vhd"
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "VirtualHardDiskStatusProvisioningStatus": {
       "type": "object",
@@ -6300,13 +6322,7 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "x-ms-identifiers": [
-            "code",
-            "level",
-            "displayStatus",
-            "message",
-            "time"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6336,7 +6352,9 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true
     },
     "VirtualMachineInstanceListResult": {
       "type": "object",
@@ -6422,8 +6440,155 @@
       "description": "HardwareProfile - Specifies the hardware settings for the virtual machine instance.",
       "properties": {
         "vmSize": {
-          "$ref": "#/definitions/VmSizeEnum",
-          "description": "Enum of VM Sizes"
+          "type": "string",
+          "description": "Enum of VM Sizes",
+          "default": "Default",
+          "enum": [
+            "Default",
+            "Standard_A2_v2",
+            "Standard_A4_v2",
+            "Standard_D2s_v3",
+            "Standard_D4s_v3",
+            "Standard_D8s_v3",
+            "Standard_D16s_v3",
+            "Standard_D32s_v3",
+            "Standard_DS2_v2",
+            "Standard_DS3_v2",
+            "Standard_DS4_v2",
+            "Standard_DS5_v2",
+            "Standard_DS13_v2",
+            "Standard_K8S_v1",
+            "Standard_K8S2_v1",
+            "Standard_K8S3_v1",
+            "Standard_K8S4_v1",
+            "Standard_NK6",
+            "Standard_NK12",
+            "Standard_NV6",
+            "Standard_NV12",
+            "Standard_K8S5_v1",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "VmSizeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Default",
+                "value": "Default",
+                "description": "Default virtual machine size"
+              },
+              {
+                "name": "Standard_A2_v2",
+                "value": "Standard_A2_v2",
+                "description": "Standard A2 v2 virtual machine size"
+              },
+              {
+                "name": "Standard_A4_v2",
+                "value": "Standard_A4_v2",
+                "description": "Standard A4 v2 virtual machine size"
+              },
+              {
+                "name": "Standard_D2s_v3",
+                "value": "Standard_D2s_v3",
+                "description": "Standard D2s v3 virtual machine size"
+              },
+              {
+                "name": "Standard_D4s_v3",
+                "value": "Standard_D4s_v3",
+                "description": "Standard D4s v3 virtual machine size"
+              },
+              {
+                "name": "Standard_D8s_v3",
+                "value": "Standard_D8s_v3",
+                "description": "Standard D8s v3 virtual machine size"
+              },
+              {
+                "name": "Standard_D16s_v3",
+                "value": "Standard_D16s_v3",
+                "description": "Standard D16s v3 virtual machine size"
+              },
+              {
+                "name": "Standard_D32s_v3",
+                "value": "Standard_D32s_v3",
+                "description": "Standard D32s v3 virtual machine size"
+              },
+              {
+                "name": "Standard_DS2_v2",
+                "value": "Standard_DS2_v2",
+                "description": "Standard DS2 v2 virtual machine size"
+              },
+              {
+                "name": "Standard_DS3_v2",
+                "value": "Standard_DS3_v2",
+                "description": "Standard DS3 v2 virtual machine size"
+              },
+              {
+                "name": "Standard_DS4_v2",
+                "value": "Standard_DS4_v2",
+                "description": "Standard DS4 v2 virtual machine size"
+              },
+              {
+                "name": "Standard_DS5_v2",
+                "value": "Standard_DS5_v2",
+                "description": "Standard DS5 v2 virtual machine size"
+              },
+              {
+                "name": "Standard_DS13_v2",
+                "value": "Standard_DS13_v2",
+                "description": "Standard DS13 v2 virtual machine size"
+              },
+              {
+                "name": "Standard_K8S_v1",
+                "value": "Standard_K8S_v1",
+                "description": "Standard K8S v1 virtual machine size"
+              },
+              {
+                "name": "Standard_K8S2_v1",
+                "value": "Standard_K8S2_v1",
+                "description": "Standard K8S2 v1 virtual machine size"
+              },
+              {
+                "name": "Standard_K8S3_v1",
+                "value": "Standard_K8S3_v1",
+                "description": "Standard K8S3 v1 virtual machine size"
+              },
+              {
+                "name": "Standard_K8S4_v1",
+                "value": "Standard_K8S4_v1",
+                "description": "Standard K8S4 v1 virtual machine size"
+              },
+              {
+                "name": "Standard_NK6",
+                "value": "Standard_NK6",
+                "description": "Standard NK6 virtual machine size"
+              },
+              {
+                "name": "Standard_NK12",
+                "value": "Standard_NK12",
+                "description": "Standard NK12 virtual machine size"
+              },
+              {
+                "name": "Standard_NV6",
+                "value": "Standard_NV6",
+                "description": "Standard NV6 virtual machine size"
+              },
+              {
+                "name": "Standard_NV12",
+                "value": "Standard_NV12",
+                "description": "Standard NV12 virtual machine size"
+              },
+              {
+                "name": "Standard_K8S5_v1",
+                "value": "Standard_K8S5_v1",
+                "description": "Standard K8S5 v1 virtual machine size"
+              },
+              {
+                "name": "Custom",
+                "value": "Custom",
+                "description": "Custom virtual machine size"
+              }
+            ]
+          }
         },
         "processors": {
           "type": "integer",
@@ -6471,7 +6636,8 @@
           "description": "NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance",
           "items": {
             "$ref": "#/definitions/NetworkInterfaceArmReference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6481,10 +6647,12 @@
       "properties": {
         "adminPassword": {
           "type": "string",
+          "format": "password",
           "description": "AdminPassword - admin password",
           "x-ms-mutability": [
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "adminUsername": {
           "type": "string",
@@ -6562,7 +6730,8 @@
       "properties": {
         "enableTPM": {
           "type": "boolean",
-          "description": "Enable TPM flag"
+          "description": "Enable TPM flag",
+          "default": false
         },
         "uefiSettings": {
           "$ref": "#/definitions/VirtualMachineInstancePropertiesSecurityProfileUefiSettings",
@@ -6580,7 +6749,8 @@
       "properties": {
         "secureBootEnabled": {
           "type": "boolean",
-          "description": "Specifies whether secure boot should be enabled on the virtual machine instance."
+          "description": "Specifies whether secure boot should be enabled on the virtual machine instance.",
+          "default": false
         }
       }
     },
@@ -6596,7 +6766,7 @@
           }
         },
         "imageReference": {
-          "$ref": "#/definitions/GalleryImageArmReference",
+          "$ref": "#/definitions/ImageArmReference",
           "description": "Which Image to use for the virtual machine instance",
           "x-ms-mutability": [
             "read",
@@ -6663,7 +6833,8 @@
           "$ref": "#/definitions/VirtualMachineInstanceStatusProvisioningStatus",
           "description": "Provisioning status of the virtual machine instance"
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "VirtualMachineInstanceStatusProvisioningStatus": {
       "type": "object",

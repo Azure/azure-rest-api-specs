@@ -13,6 +13,8 @@ namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The logical network resource definition.")
+@extension("x-ms-azure-resource", true)
+@extension("x-ms-client-flatten", true)
 model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
   @doc("Name of the logical network")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
