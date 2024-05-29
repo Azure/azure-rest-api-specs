@@ -40,13 +40,12 @@ model DeidentificationJob {
 
   @doc("Current status of a job.")
   @visibility("read")
-  @lroResult
   @pollingOperationParameter
   status: JobStatus;
 
   @doc("Error when job fails in it's entirety.")
   @visibility("read")
-  @lroErrorResult
+  // @lroErrorResult
   error?: Azure.Core.Foundations.Error;
 
   @doc("Date and time when the job was created.")
@@ -123,17 +122,27 @@ model JobSummary {
 
 @doc("List of statuses a job can have.")
 @lroStatus
-enum JobStatus {
-  ...Azure.Core.Foundations.OperationState,
+union JobStatus {
+  // Cannot use Azure.Core.Foundations.OperationState. because it is not a union type.
 
-  // NotStarted
-  // Running
-  // Succeeded
+  NotStarted: "NotStarted",
+
+  Running: "Running",
+
+  @lroSucceeded
+  Succeeded: "Succeeded",
+
   @lroFailed
   @doc("Job has completed with at least 1 file failing.")
-  PartialFailed,
-  // Failed
-  // Canceled
+  PartialFailed: "PartialFailed",
+
+  @lroFailed
+  Failed: "Failed",
+
+  @lroCanceled
+  Canceled: "Canceled",
+
+  string,
 }
 
 @doc("Storage location.")
@@ -163,38 +172,44 @@ model TargetStorageLocation {
 }
 
 @doc("Enum of supported Data Types.")
-enum DocumentDataType {
+union DocumentDataType {
   @doc("Plain text data type.")
-  PlainText,
+  PlainText: "PlainText",
+
+  string,
 }
 
 @doc("Enum of supported Operation Types.")
-enum OperationType {
+union OperationType {
   @doc("Redact Operation will remove all entities of PHI and replace them with a placeholder value.")
-  Redact,
+  Redact: "Redact",
 
   @doc("Surrogation Operation will replace all entities of PHI with a surrogate value.")
-  Surrogate,
+  Surrogate: "Surrogate",
 
   @doc("Tag Operation will detect all entities of PHI, their type, and return their locations in the document.")
-  Tag,
+  Tag: "Tag",
+
+  string,
 }
 
 // Source: Text Analytics
 @doc("List of supported index encodings.")
-enum StringIndexType {
+union StringIndexType {
   @doc("Iterates over graphemes as defined by the Unicode 8.0.0 standard.")
-  TextElement_v8,
+  TextElement_v8: "TextElement_v8",
 
   @doc("Iterates over Unicode Code Points, the default scheme for Python 3.")
-  UnicodeCodePoint,
+  UnicodeCodePoint: "UnicodeCodePoint",
 
   @doc("Iterates over UTF-16 Code Units, the default scheme for JavaScript, Java, and .NET.")
-  Utf16CodeUnit,
+  Utf16CodeUnit: "UnicodeCodePoint",
+
+  string,
 }
 
 @doc("Request for synchronous De-Identify operation.")
-model DeidentificationRequest {
+model DeidentificationContent {
   @doc("Input text to deidentify.")
   @maxLength(100000) // 100KB
   inputText: string;
