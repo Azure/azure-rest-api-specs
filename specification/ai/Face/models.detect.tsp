@@ -72,7 +72,7 @@ union FaceAttributeType {
   @doc("Whether each face is wearing a mask. Mask type returns 'noMask', 'faceMask', 'otherMaskOrOcclusion', or 'uncertain'. Value returns a boolean 'noseAndMouthCovered' indicating whether nose and mouth are covered.")
   "mask",
 
-  @doc("The overall image quality regarding whether the image being used in the detection is of sufficient quality to attempt face recognition on. The value is an informal rating of low, medium, or high. Only 'high' quality images are recommended for person enrollment and quality at or above 'medium' is recommended for identification scenarios. The attribute is only available when using any combinations of detection models detection_01 or detection_03, and recognition models recognition_03 or recognition_04.")
+  @doc("The overall image quality regarding whether the image being used in the detection is of sufficient quality to attempt face recognition on. The value is an informal rating of low, medium, or high. Only 'high' quality images are recommended for person enrollment and quality at or above 'medium' is recommended for identification scenarios. The attribute is only available when using recognition models recognition_03 or recognition_04.")
   "qualityForRecognition",
 
   @doc("Age in years.")
