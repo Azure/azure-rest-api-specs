@@ -56,14 +56,14 @@ model TranslateParameters {
     Specifies how profanities should be treated in translations.
     Possible values are: NoAction (default), Marked or Deleted.
     """)
-  profanityAction?: ProfanityAction = "NoAction";
+  profanityAction?: ProfanityAction = ProfanityAction.NoAction;
 
   @query
   @doc("""
     Specifies how profanities should be marked in translations.
     Possible values are: Asterisk (default) or Tag. 
     """)
-  profanityMarker?: ProfanityMarker = "Asterisk";
+  profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
   @query
   @doc("""
@@ -144,35 +144,37 @@ model TranslationResult {
 union TextType {
   string,
 
-  /** Plain text. */
+  @doc("Plain text.")
   Plain: "Plain",
 
-  /** HTML-encoded text. */
+  @doc("HTML-encoded text.")
   Html: "Html",
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
+@fixed
 @doc("Translator profanity actions")
-union ProfanityAction {
-  string,
-
-  /** Take no action. */
+enum ProfanityAction {
+  @doc("No Action is taken on profanity")
   NoAction: "NoAction",
 
-  /** Replace the profanity with a specific marker. */
+  @doc("Profanity is marked.")
   Marked: "Marked",
 
-  /** Delete the profanity. */
+  @doc("Profanity is deleted from the translated text.")
   Deleted: "Deleted",
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
+@fixed
 @doc("Translator profanity markers")
-union ProfanityMarker {
-  string,
-
-  /** Replace the profanity with asterisks. */
+enum ProfanityMarker {
+  @doc("Profanity is marked with asterisk.")
   Asterisk: "Asterisk",
 
-  /** Replace the profanity with a specific tag. */
+  @doc("Profanity is marked with the tags.")
   Tag: "Tag",
 }
 
@@ -185,7 +187,7 @@ model TranslatedTextItem {
     An array of translation results. The size of the array matches the number of target 
     languages specified through the to query parameter.
     """)
-  translations: Translation[];
+  translations: TranslationText[];
 
   @doc("""
     Input text in the default script of the source language. sourceText property is present only when 
@@ -209,7 +211,7 @@ model DetectedLanguage {
 }
 
 @doc("Translation result")
-model Translation {
+model TranslationText {
   @doc("A string representing the language code of the target language.")
   to: string;
 
@@ -229,7 +231,7 @@ model Translation {
   @doc("""
     Sentence boundaries in the input and output texts.
     """)
-  sentLen?: SentenceLength;
+  sentLen?: SentenceBoundaries;
 }
 
 @doc("Alignment information object.")
@@ -246,7 +248,7 @@ model TranslatedTextAlignment {
 }
 
 @doc("An object returning sentence boundaries in the input and output texts.")
-model SentenceLength {
+model SentenceBoundaries {
   @doc("""
     An integer array representing the lengths of the sentences in the input text. 
     The length of the array is the number of sentences, and the values are the length of each sentence.
