@@ -52,7 +52,7 @@
     "/accounts/{accountId}": {
       "get": {
         "operationId": "Accounts_GetAccount",
-        "description": "Get details of the ARM resource mapped to an account for the given accountId.",
+        "description": "Get details of the ARM resource mapped to an account for the given accountId. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -61,13 +61,6 @@
             "name": "accountId",
             "in": "path",
             "description": "The account id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "description": "Bearer JWT Access token provided by EntraID.",
             "required": true,
             "type": "string"
           },
@@ -112,7 +105,7 @@
     "/accounts/{accountId}/access-tokens": {
       "get": {
         "operationId": "AccessTokens_ListAccessTokens",
-        "description": "Lists access-tokens for the given account id.",
+        "description": "Lists access-tokens for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -121,13 +114,6 @@
             "name": "accountId",
             "in": "path",
             "description": "The account id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "description": "Bearer JWT Access token provided by EntraID.",
             "required": true,
             "type": "string"
           },
@@ -175,7 +161,7 @@
     "/accounts/{accountId}/access-tokens/{accessTokenId}": {
       "get": {
         "operationId": "AccessTokens_GetAccessToken",
-        "description": "Gets an access-token for the account with given access-token id.",
+        "description": "Gets an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -194,13 +180,6 @@
             "required": true,
             "type": "string",
             "format": "uuid"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "description": "Bearer JWT Access token provided by EntraID.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -241,7 +220,7 @@
       },
       "put": {
         "operationId": "AccessTokens_CreateAccessToken",
-        "description": "Creates an access-token for the account with given access-token id.",
+        "description": "Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -260,13 +239,6 @@
             "required": true,
             "type": "string",
             "format": "uuid"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "description": "Bearer JWT Access token provided by EntraID.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -329,7 +301,7 @@
       },
       "delete": {
         "operationId": "AccessTokens_DeleteAccessToken",
-        "description": "Deletes an access-token for the account with given access-token id.",
+        "description": "Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -348,13 +320,6 @@
             "required": true,
             "type": "string",
             "format": "uuid"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "description": "Bearer JWT Access token provided by EntraID.",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -394,7 +359,7 @@
     "/accounts/{accountId}/access-tokens/validate": {
       "post": {
         "operationId": "AccessTokens_Validate",
-        "description": "Validates access-token provided in authorization header for the given account id.",
+        "description": "Validates access-token provided in authorization header for the given account id. Authorization required is Bearer JWT Access token provided by MPT service.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -403,13 +368,6 @@
             "name": "accountId",
             "in": "path",
             "description": "The account id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "description": "Bearer JWT Access token provided by MPT service.",
             "required": true,
             "type": "string"
           },
@@ -451,7 +409,7 @@
     "/accounts/{accountId}/browsers": {
       "get": {
         "operationId": "Accounts_GetBrowsers",
-        "description": "Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests.",
+        "description": "Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.",
         "parameters": [
           {
             "name": "api-version",
@@ -472,13 +430,6 @@
             "name": "accountId",
             "in": "path",
             "description": "The account id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "description": "Bearer JWT Access token provided by EntraID or MPT service.",
             "required": true,
             "type": "string"
           },

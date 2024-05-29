@@ -193,90 +193,46 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 interface AccessTokens {
   // AccessToken Operations
 
-  @doc("Creates an access-token for the account with given access-token id.")
+  @doc("Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
   @example(
     "./AccessTokens_CreateAccessToken.json",
     "AccessTokens_CreateAccessToken"
   )
-  createAccessToken is Operations.ResourceCreateOrReplace<
-    AccessToken,
-    RequestHeadersTrait<{
-      @header
-      @doc("Bearer JWT Access token provided by EntraID.")
-      authorization: string;
-    }>
-  >;
+  createAccessToken is Operations.ResourceCreateOrReplace<AccessToken>;
 
-  @doc("Gets an access-token for the account with given access-token id.")
+  @doc("Gets an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
   @example("./AccessTokens_GetAccessToken.json", "AccessTokens_GetAccessToken")
-  getAccessToken is Operations.ResourceRead<
-    AccessToken,
-    RequestHeadersTrait<{
-      @header
-      @doc("Bearer JWT Access token provided by EntraID.")
-      authorization: string;
-    }>
-  >;
+  getAccessToken is Operations.ResourceRead<AccessToken>;
 
-  @doc("Deletes an access-token for the account with given access-token id.")
+  @doc("Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
   @example(
     "./AccessTokens_DeleteAccessToken.json",
     "AccessTokens_DeleteAccessToken"
   )
-  deleteAccessToken is Operations.ResourceDelete<
-    AccessToken,
-    RequestHeadersTrait<{
-      @header
-      @doc("Bearer JWT Access token provided by EntraID.")
-      authorization: string;
-    }>
-  >;
+  deleteAccessToken is Operations.ResourceDelete<AccessToken>;
 
-  @doc("Lists access-tokens for the given account id.")
+  @doc("Lists access-tokens for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.")
   @example(
     "./AccessTokens_ListAccessTokens.json",
     "AccessTokens_ListAccessTokens"
   )
-  listAccessTokens is Operations.ResourceList<
-    AccessToken,
-    RequestHeadersTrait<{
-      @header
-      @doc("Bearer JWT Access token provided by EntraID.")
-      authorization: string;
-    }>
-  >;
+  listAccessTokens is Operations.ResourceList<AccessToken>;
 
-  @doc("Validates access-token provided in authorization header for the given account id.")
+  @doc("Validates access-token provided in authorization header for the given account id. Authorization required is Bearer JWT Access token provided by MPT service.")
   @example("./AccessTokens_Validate.json", "AccessTokens_Validate")
   @actionSeparator("/")
-  validate is Operations.ResourceCollectionAction<
-    AccessToken,
-    {},
-    {},
-    RequestHeadersTrait<{
-      @header
-      @doc("Bearer JWT Access token provided by MPT service.")
-      authorization: string;
-    }>
-  >;
+  validate is Operations.ResourceCollectionAction<AccessToken, {}, {}>;
 }
 
 interface Accounts {
   // Accounts Operations
 
-  @doc("Get details of the ARM resource mapped to an account for the given accountId.")
+  @doc("Get details of the ARM resource mapped to an account for the given accountId. Authorization required is Bearer JWT Access token provided by EntraID.")
   @example("./Accounts_GetAccount.json", "Accounts_GetAccount")
-  getAccount is Operations.ResourceRead<
-    Account,
-    RequestHeadersTrait<{
-      @header
-      @doc("Bearer JWT Access token provided by EntraID.")
-      authorization: string;
-    }>
-  >;
+  getAccount is Operations.ResourceRead<Account>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'getBrowsers' should be defined using a signature from the Azure.Core namespace."
-  @doc("Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests.")
+  @doc("Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.")
   @example("./Accounts_GetBrowsers.json", "Accounts_GetBrowsers")
   @route("/accounts/{accountId}/browsers")
   getBrowsers(
@@ -291,10 +247,6 @@ interface Accounts {
     @path
     @doc("The account id.")
     accountId: string,
-
-    @header
-    @doc("Bearer JWT Access token provided by EntraID or MPT service.")
-    authorization: string,
 
     @header({
       name: "x-ms-client-request-id",
