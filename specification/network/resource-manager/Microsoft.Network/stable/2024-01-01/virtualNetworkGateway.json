@@ -4510,7 +4510,8 @@
       "properties": {
         "outboundAuthCertificate": {
           "type": "string",
-          "description": "Outbound authentication certificate."
+          "format": "uri",
+          "description": "Keyvault secret ID for outbound authentication certificate."
         },
         "inboundAuthCertificateSubjectName": {
           "type": "string",
@@ -4521,7 +4522,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Inbound authentication certificate chain."
+          "description": "Inbound authentication certificate public keys."
         }
       },
       "description": "Certificate Authentication information for a certificate based authentication connection."
