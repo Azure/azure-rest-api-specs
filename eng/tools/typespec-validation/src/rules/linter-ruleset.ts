@@ -15,8 +15,7 @@ export class LinterRulesetRule implements Rule {
     let stdOutput = "";
     let errorOutput = "";
 
-    const configFile = join(folder, "tspconfig.yaml");
-    const configText = await readFile(configFile, "utf8");
+    const configText = await host.readTspConfig(folder);
     const config = yamlParse(configText);
 
     const rpFolder =
