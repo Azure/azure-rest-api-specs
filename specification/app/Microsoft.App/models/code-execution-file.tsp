@@ -17,7 +17,7 @@ model CodeExecutionFile {
   @key("filename")
   @segment("files")
   @doc("The name of the file.")
-  @visibility
+  @visibility("create")
   filename: string;
 
   @doc("Code execution file resource properties.")

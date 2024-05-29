@@ -113,6 +113,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "CodeExecution_ExecuteCode_Result": {
+            "$ref": "./examples/CodeExecution_ExecuteCode_Result.json"
+          },
+          "CodeExecution_ExecuteCode_StandardOut": {
+            "$ref": "./examples/CodeExecution_ExecuteCode_StandardOut.json"
+          }
         }
       }
     },
@@ -178,6 +186,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "CodeExecutionFiles_GetFileMetadata": {
+            "$ref": "./examples/CodeExecutionFiles_GetFileMetadata.json"
+          }
         }
       },
       "delete": {
@@ -237,6 +250,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "CodeExecutionFiles_DeleteFile": {
+            "$ref": "./examples/CodeExecutionFiles_DeleteFile.json"
           }
         }
       }
@@ -313,6 +331,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "CodeExecutionFiles_UploadFile": {
+            "$ref": "./examples/CodeExecutionFiles_UploadFile.json"
+          }
         }
       }
     },
@@ -382,6 +405,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "CodeExecutionFiles_GetFileContent": {
+            "$ref": "./examples/CodeExecutionFiles_GetFileContent.json"
           }
         }
       }
@@ -460,7 +488,10 @@
       "properties": {
         "filename": {
           "type": "string",
-          "description": "The name of the file."
+          "description": "The name of the file.",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/CodeExecutionFileProperties",
@@ -544,7 +575,8 @@
           "description": "The code to execute."
         },
         "timeoutInSeconds": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Code execution timeout in seconds."
         }
       },
@@ -572,8 +604,8 @@
       "type": "string",
       "description": "Code execution status.",
       "enum": [
-        "success",
-        "failure"
+        "Success",
+        "Failure"
       ],
       "x-ms-enum": {
         "name": "CodeExecutionStatus",
@@ -581,12 +613,12 @@
         "values": [
           {
             "name": "Success",
-            "value": "success",
+            "value": "Success",
             "description": "The code execution succeeded."
           },
           {
             "name": "Failure",
-            "value": "failure",
+            "value": "Failure",
             "description": "The code execution failed."
           }
         ]
@@ -746,7 +778,7 @@
           {
             "name": "2023-08-01-preview",
             "value": "2023-08-01-preview",
-            "description": "The 2022-11-01-preview version of the Microsoft.App service."
+            "description": "The 2023-08-01-preview version of the Microsoft.App service."
           }
         ]
       }

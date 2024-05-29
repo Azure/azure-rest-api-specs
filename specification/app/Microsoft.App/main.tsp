@@ -26,6 +26,6 @@ namespace Microsoft.App;
 @doc("The Microsoft.App service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2022-11-01-preview version of the Microsoft.App service.")
+  @doc("The 2023-08-01-preview version of the Microsoft.App service.")
   `2023-08-01-preview`,
 }

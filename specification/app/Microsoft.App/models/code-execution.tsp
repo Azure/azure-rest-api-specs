@@ -28,7 +28,7 @@ model CodeExecutionRequestProperties {
   code: string;
 
   @doc("Code execution timeout in seconds.")
-  timeoutInSeconds: string;
+  timeoutInSeconds: int64;
 }
 
 @doc("Code input type.")
@@ -76,10 +76,10 @@ union CodeExecutionStatus {
   string,
 
   @doc("The code execution succeeded.")
-  Success: "success",
+  Success: "Success",
 
   @doc("The code execution failed.")
-  Failure: "failure",
+  Failure: "Failure",
 }
 
 @doc("A widget.")
