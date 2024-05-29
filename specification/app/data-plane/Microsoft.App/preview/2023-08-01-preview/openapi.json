@@ -592,7 +592,7 @@
       "description": "The response containing the result of the code execution.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CodeExecutionresponseProperties",
+          "$ref": "#/definitions/CodeExecutionResponseProperties",
           "description": "The properties of the code execution response."
         }
       },
@@ -600,31 +600,7 @@
         "properties"
       ]
     },
-    "CodeExecutionStatus": {
-      "type": "string",
-      "description": "Code execution status.",
-      "enum": [
-        "Success",
-        "Failure"
-      ],
-      "x-ms-enum": {
-        "name": "CodeExecutionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Success",
-            "value": "Success",
-            "description": "The code execution succeeded."
-          },
-          {
-            "name": "Failure",
-            "value": "Failure",
-            "description": "The code execution failed."
-          }
-        ]
-      }
-    },
-    "CodeExecutionresponseProperties": {
+    "CodeExecutionResponseProperties": {
       "type": "object",
       "description": "The properties of the code execution result.",
       "properties": {
@@ -656,6 +632,30 @@
         "result",
         "executionTimeInMilliseconds"
       ]
+    },
+    "CodeExecutionStatus": {
+      "type": "string",
+      "description": "Code execution status.",
+      "enum": [
+        "Success",
+        "Failure"
+      ],
+      "x-ms-enum": {
+        "name": "CodeExecutionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "The code execution succeeded."
+          },
+          {
+            "name": "Failure",
+            "value": "Failure",
+            "description": "The code execution failed."
+          }
+        ]
+      }
     },
     "CodeInputType": {
       "type": "string",

@@ -13,7 +13,7 @@ model CodeExecutionRequest {
 @doc("The response containing the result of the code execution.")
 model CodeExecutionResponse {
   @doc("The properties of the code execution response.")
-  properties: CodeExecutionresponseProperties;
+  properties: CodeExecutionResponseProperties;
 }
 
 @doc("The properties of the code execution request.")
@@ -54,7 +54,7 @@ union ExecutionType {
 }
 
 @doc("The properties of the code execution result.")
-model CodeExecutionresponseProperties {
+model CodeExecutionResponseProperties {
   @doc("The status of the code execution, indicates whether succeeded or not.")
   status: CodeExecutionStatus;
 
