@@ -41,11 +41,11 @@ model RadiologyInsightsInferenceOptions {
   @doc("Finding options.")
   findingOptions?: FindingOptions;
 
-  @added(ApiVersion.v2024_09_31)
+  @added(ApiVersion.v2024_10_01)
   @doc("Guidance options.")
   guidanceOptions?: GuidanceOptions;
 
-  @added(ApiVersion.v2024_09_31)
+  @added(ApiVersion.v2024_10_01)
   @doc("qualityMeasureOptions")
   qualityMeasureOptions?: QualityMeasureOptions;
 }
@@ -68,14 +68,14 @@ model FindingOptions {
   provideFocusedSentenceEvidence?: boolean;
 }
 
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 @doc("Guidance options.")
 model GuidanceOptions {
   @doc("If this is true, also show guidances from a clinical history section.")
   showGuidanceInHistory: boolean;
 }
 
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 @doc("Quality Measure Options.")
 model QualityMeasureOptions {
   @doc("Id(s) of the MIPS measures that need to be evaluated in the document")
@@ -361,7 +361,7 @@ model FollowupCommunicationInference extends RadiologyInsightsInference {
 
 // For scoring and assessment:
 @doc("An actionable finding with a score for a certain unit, e.g. for 'BIRADS 5'")
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 model ScoringAndAssessmentInference extends RadiologyInsightsInference {
   @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.ScoringAndAssessment;
@@ -379,7 +379,7 @@ model ScoringAndAssessmentInference extends RadiologyInsightsInference {
   maximumValue?: StringValueWithUnit;
 }
 
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 @doc("A value, represented as a string because it can contain, with the optional unit. Used by ScoringAndAssessmentInference.")
 model StringValueWithUnit {
   @doc("String value.")
@@ -390,7 +390,7 @@ model StringValueWithUnit {
 }
 // For guidance:
 
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 @doc("A guidance inference.")
 model GuidanceInference extends RadiologyInsightsInference {
   @doc("Inference type.")
@@ -413,7 +413,7 @@ model GuidanceInference extends RadiologyInsightsInference {
   guidanceRecommendations?: GuidanceRecommendations;
 }
 
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 @doc("Contains possible recommendations linked to the guidance, with their priority, and possibly missing options needed to create recommendations.")
 model GuidanceRecommendations {
   @doc("The recommendations.")
@@ -429,7 +429,7 @@ model GuidanceRecommendations {
   missingRecommendationOptions: Array<string>;
 }
 
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 @doc("A suppressor with one or more options. This is used from GuidanceInference.")
 model SuppressorWithOptions {
   @doc("The suppressor.")
@@ -452,7 +452,7 @@ model SuppressorWithOptions {
 }
 
 // For quality measure:
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 @doc("A MIPS ('measure based incentive payment system') quality measure.")
 model QualityMeasureInference extends RadiologyInsightsInference {
   @doc("Inference type.")

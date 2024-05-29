@@ -38,12 +38,15 @@ union RadiologyInsightsInferenceType {
   @doc("Radiology Procedure inference type")
   RadiologyProcedure: "radiologyProcedure",
 
+  @added(ApiVersion.v2024_10_01)
   @doc("Scoring and assessment inference type")
   ScoringAndAssessment: "scoringAndAssessment",
 
+  @added(ApiVersion.v2024_10_01)
   @doc("Guidance inference type")
   Guidance: "guidance",
 
+  @added(ApiVersion.v2024_10_01)
   @doc("Guidance measure inference type")
   QualityMeasure: "qualityMeasure",
 }
@@ -201,7 +204,7 @@ union DiseaseCourseType {
   SeasonalCourse: "seasonalCourse",
 }
 
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 @doc("Guidance recommendations found types, indicating whether one or more recommendations have been found, and if not, if more information is needed for finding them.")
 union GuidanceRecommendationsFoundType {
   string,
@@ -216,7 +219,7 @@ union GuidanceRecommendationsFoundType {
   MoreInfoNeededToDetermineRecommendations: "moreInfoNeededToDetermineRecommendations",
 }
 
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 @doc("Whether the document is compliant.")
 union QualityMeasureComplianceType {
   string,
@@ -234,7 +237,7 @@ union QualityMeasureComplianceType {
   DenominatorException: "denominatorException",
 }
 
-@added(ApiVersion.v2024_09_31)
+@added(ApiVersion.v2024_10_01)
 @doc("Mips types that can be checked by the engine.")
 union QualityMeasureType {
   string,
