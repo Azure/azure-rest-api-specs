@@ -8,6 +8,7 @@ import "./ReportResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using OpenAPI;
 
@@ -104,6 +105,13 @@ interface EvidenceResources {
 );
 @@encodedName(EvidenceResources.download::parameters.body,
   "application/json",
+  "parameters"
+);
+@@OpenAPI.extension(EvidenceResources.download::parameters.body,
+  "x-ms-client-name",
+  "parameters"
+);
+@@clientName(EvidenceResources.download::parameters.body,
   "parameters"
 );
 @@doc(EvidenceResources.download::parameters.body,
