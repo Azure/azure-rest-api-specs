@@ -18,7 +18,7 @@ namespace Azure.Batch;
 // Interfaces ////////////////////
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@tag("Applications")
+@tag("Application")
 interface Applications {
   @summary("Lists all of the applications available in the specified Account.")
   @doc("""
