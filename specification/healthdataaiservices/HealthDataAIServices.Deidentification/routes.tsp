@@ -50,7 +50,7 @@ op listJobFiles is DeidentifyOperations.ResourceList<
 
   If the job is already complete, this will have no effect. 
   """)
-@route("/{name}:cancel")
+@action("cancel")
 op cancelJob is DeidentifyOperations.ResourceAction<
   DeidentificationJob,
   {},

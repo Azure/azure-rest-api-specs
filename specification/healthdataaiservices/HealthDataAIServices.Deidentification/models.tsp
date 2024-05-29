@@ -10,13 +10,12 @@ namespace HealthDataAIServices.Deidentification;
 @doc("A job containing a batch of documents to deidentify.")
 @resource("jobs")
 model DeidentificationJob {
-  @key("name")
+  @key
   @doc("The name of a job.")
   @visibility("read")
   @maxLength(36)
   @minLength(3) // Must be 3 to match regex
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
-  @path
   name: string;
 
   @doc("Storage location to perform the operation on.")
@@ -45,7 +44,6 @@ model DeidentificationJob {
 
   @doc("Error when job fails in it's entirety.")
   @visibility("read")
-  // @lroErrorResult
   error?: Azure.Core.Foundations.Error;
 
   @doc("Date and time when the job was created.")
@@ -148,6 +146,7 @@ union JobStatus {
 @doc("Storage location.")
 model SourceStorageLocation {
   @doc("URL to storage location. Must be a valid Azure Storage SAS URI.")
+  @secret
   location: url;
 
   @doc("Prefix to filter blobs by.")
@@ -163,6 +162,7 @@ model SourceStorageLocation {
 @doc("Storage location.")
 model TargetStorageLocation {
   @doc("URL to storage location. Must be a valid Azure Storage SAS URI.")
+  @secret
   location: url;
 
   @doc("Prefix to filter blobs by.")
