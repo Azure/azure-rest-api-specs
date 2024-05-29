@@ -222,7 +222,7 @@ union GpuAssignmentTypeEnum {
   @doc("GPU DDA")
   GpuDDA: "GpuDDA",
 
-  @doc("GPU P")
+  @doc("GPU Partitioning")
   GpuP: "GpuP",
 
   string,
@@ -1556,7 +1556,7 @@ model HardwareProfileUpdate {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_test_preview)
-  @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
+  @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
   @extension("x-ms-identifiers", ["assignmentType", "partitionSizeMB"])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
