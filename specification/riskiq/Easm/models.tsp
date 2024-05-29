@@ -21,6 +21,16 @@ model PageResultBodyFields<TResultFields, Context = TraitContext.List> {
   };
 }
 
+@trait
+@traitAdded(Versions.v2024_03_01_preview)
+model AssetsListQueryParametersTrait<Parameters, Contexts = unknown> {
+  @traitContext(Contexts)
+  queryParameters: {
+    @traitLocation(TraitLocation.Parameters)
+    parameters: Parameters;
+  };
+}
+
 alias AssetsListTrait = {
   ...PageResultBodyFields<{
     @doc("The total number of items available in the full result set.")
@@ -35,6 +45,11 @@ alias AssetsListTrait = {
     ...SkipQueryParameter;
     ...MaxPageSizeQueryParameter;
     ...MarkParameter;
+  }>;
+  ...AssetsListQueryParametersTrait<{
+    ...ResponseTypeParameter;
+    ...ResponseIncludesParameter;
+    ...RecentOnlyParameter;
   }>;
 };
 alias AssetsUpdateParameter = {
@@ -99,6 +114,44 @@ alias SavedFiltersListTrait = {
     ...FilterQueryParameter;
     ...SkipQueryParameter;
     ...MaxPageSizeQueryParameter;
+  }>;
+};
+
+alias ObservationsParameters = {
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...OrderByParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+  }>;
+};
+
+alias AssetsExportTrait = {
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...OrderByParameter;
+  }>;
+};
+alias ObservationsTrait = {
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...OrderByParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+  }>;
+};
+
+alias DeltaDetailsTrait = {
+  ...QueryParametersTrait<{
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+  }>;
+};
+
+alias CisaCveListTrait = {
+  ...PageResultBodyFields<{
+    @doc("The total number of items available in the full result set.")
+    totalElements?: int64;
   }>;
 };
 
@@ -268,6 +321,42 @@ model AssetUpdateData {
 
   @doc("A list of asset types to cascade the updates to.")
   transfers?: AssetUpdateTransfers;
+}
+
+@doc("A request body used to export an asset.")
+@Versioning.added(Versions.v2024_03_01_preview)
+model AssetsExportRequest {
+  @doc("The name of the file to export.")
+  fileName: string;
+
+  @doc("The columns to export.")
+  columns: string[];
+}
+
+@doc("A request body used to retrieve a list of deltas.")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DeltaDetailsRequest {
+  @doc("The type of delta detail to retrieve.")
+  deltaDetailType: DeltaDetailType;
+
+  @doc("The number of days prior to retrieve deltas for.")
+  priorDays?: int32;
+
+  @doc("The type of asset")
+  kind: GlobalAssetType;
+
+  @doc("expected format to be: yyyy-MM-dd")
+  date?: string;
+}
+
+@doc("A request body used to retrieve a delta summary.")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DeltaSummaryRequest {
+  @doc("The number of days prior to retrieve deltas for.")
+  priorDays?: int32;
+
+  @doc("expected format to be: yyyy-MM-dd")
+  date?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1368,6 +1457,104 @@ model ObservedValue {
   count?: int64;
   recent?: boolean;
 }
+
+@doc("Result for each of the delta detail response")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DeltaResult {
+  @doc("Shows the asset kind")
+  kind: GlobalAssetType;
+
+  @doc("Shows the asset name")
+  name: string;
+
+  @doc("Shows the date when the asset was originally created")
+  createdAt: utcDateTime;
+
+  @doc("Shows the date when the asset was last updated, usually the date the we trying to pull up the results for")
+  updatedAt: utcDateTime;
+
+  @doc("Shows the inventory state")
+  state: GlobalInventoryState;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
+@pagedResult
+model DeltaPageResult {
+  @doc("The total number of items available in the full result set.")
+  totalElements?: int64;
+
+  @doc("The link to access the next page of results.  Not set if at the end of the result set.")
+  @nextLink
+  nextLink?: string;
+
+  @doc("The items in the current page of results.")
+  @items
+  value?: DeltaResult[];
+}
+
+@doc("Define response body for getting delta summary")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DeltaSummaryResult {
+  @doc("Contains added, removed, and difference values for the whole range either 7 or 30 days")
+  summary: DeltaRangeResult;
+
+  @doc("Contains added, removed, count, and difference values for each day")
+  daily: DeltaDateResult[];
+}
+
+@doc("Contains added, removed, and difference values for the whole range either 7 or 30 days")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DeltaRangeResult {
+  @doc("The range of dates requested")
+  range: int64;
+
+  @doc("The total amount of assets removed over a date range")
+  removed: int64;
+
+  @doc("The total amount of assets added over a date range")
+  added: int64;
+
+  @doc("The total amount of assets changed removed over a date range")
+  difference: int64;
+
+  @doc("A list of summary changes per asset kind")
+  kindSummaries: DeltaTypeResponse[];
+}
+
+@doc("The type of Delta response for each asset kind")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DeltaTypeResponse {
+  @doc("The kind of asset")
+  kind: GlobalAssetType;
+
+  @doc("The amount of assets removed for one asset kind")
+  removed: int64;
+
+  @doc("The amount of assets added for one asset kind")
+  added: int64;
+
+  @doc("The amount of assets changed for one asset kind")
+  difference: int64;
+}
+
+@doc("Date information for the delta response")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DeltaDateResult {
+  @doc("The date that is being requested")
+  date: utcDateTime;
+
+  @doc("A list of summary counts per day")
+  deltas: DailyDeltaTypeResponse[];
+}
+
+@doc("Delta response for each day")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DailyDeltaTypeResponse extends DeltaTypeResponse {
+  @doc("The current number of assets for one asset kind")
+  count: int64;
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("A list of asset types to cascade the updates to.")
 union AssetUpdateTransfers {
@@ -1389,6 +1576,108 @@ union ReportBillableAssetBreakdownKind {
   "domain",
   "host",
   "ipAddress",
+}
+
+@doc("A list of global inventory states.")
+@Versioning.added(Versions.v2024_03_01_preview)
+union GlobalInventoryState {
+  string,
+
+  @doc("candidate")
+  "candidate",
+
+  @doc("candidate investigate")
+  "candidateInvestigate",
+
+  @doc("confirmed")
+  "confirmed",
+
+  @doc("associated")
+  "associated",
+
+  @doc("associated partner")
+  "associatedPartner",
+
+  @doc("associated third party")
+  "associatedThirdParty",
+
+  @doc("archived")
+  "archived",
+
+  @doc("dismissed")
+  "dismissed",
+
+  @doc("auto confirmed")
+  "autoconfirmed",
+}
+
+@doc("A list of asset response type")
+@Versioning.added(Versions.v2024_03_01_preview)
+union AssetResponseType {
+  string,
+
+  @doc("Return only the asset id.")
+  "id",
+
+  @doc("Return the standard set of asset fields.")
+  "standard",
+
+  @doc("Return the full set of asset fields.")
+  "full",
+
+  @doc("Return a reduced set of fields.")
+  "reduced",
+}
+
+@doc("A list of delta detail type")
+@Versioning.added(Versions.v2024_03_01_preview)
+union DeltaDetailType {
+  string,
+
+  @doc("added")
+  "added",
+
+  @doc("removed")
+  "removed",
+}
+
+@doc("A list of global asset type")
+@Versioning.added(Versions.v2024_03_01_preview)
+union GlobalAssetType {
+  string,
+
+  @doc("page")
+  "page",
+
+  @doc("resource")
+  "resource",
+
+  @doc("mail server")
+  "mailServer",
+
+  @doc("name server")
+  "nameServer",
+
+  @doc("host")
+  "host",
+
+  @doc("domain")
+  "domain",
+
+  @doc("ip address")
+  "ipAddress",
+
+  @doc("ip block")
+  "ipBlock",
+
+  @doc("autonomous system number")
+  "as",
+
+  @doc("contact")
+  "contact",
+
+  @doc("ssl certificate")
+  "sslCert",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1539,10 +1828,84 @@ union SslCertAssetValidationType {
   "extendedValidation",
 }
 
+@doc("A list of observation types")
+@Versioning.added(Versions.v2024_03_01_preview)
+union ObservationType {
+  string,
+
+  @doc("common vulnerabilities and exposures")
+  "cve",
+
+  @doc("insight")
+  "insight",
+}
+
+@doc("A list of observation priorities")
+@Versioning.added(Versions.v2024_03_01_preview)
+union ObservationPriority {
+  string,
+
+  @doc("high")
+  "high",
+
+  @doc("medium")
+  "medium",
+
+  @doc("low")
+  "low",
+
+  @doc("none")
+  "none",
+}
+
+@doc("The result response for the observation")
+@Versioning.added(Versions.v2024_03_01_preview)
+model ObservationResult {
+  @doc("The name of the observation.")
+  name: string;
+
+  @doc("The list of applicable types.")
+  types: ObservationType[];
+
+  @doc("The priority of the observation.")
+  priority: ObservationPriority;
+
+  @doc("The CVSS v2 score.")
+  cvssScoreV2: float64;
+
+  @doc("The CVSS v3 score.")
+  cvssScoreV3: float64;
+}
+
+@doc("The page result response for the observation")
+@Versioning.added(Versions.v2024_03_01_preview)
+model ObservationPageResult {
+  @doc("The total number of elements.")
+  totalElements: int64;
+
+  @doc("The summary of observation counts by priority.")
+  prioritySummary: Record<int32>;
+
+  @doc("The list of observation results.")
+  value: ObservationResult[];
+}
+
+@doc("A list of asset chain sources")
+@Versioning.added(Versions.v2024_03_01_preview)
+union AssetChainSource {
+  string,
+
+  @doc("discovery group")
+  "DISCO_GROUP",
+
+  @doc("asset")
+  "ASSET",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @clientName("LogAnalyticsDataConnectionPayload", "csharp")
 model LogAnalyticsDataConnectionData extends DataConnectionData {
-  @doc("The kind of DataConnectionData")
+  @doc("The kind of DataConnectionData ")
   kind: "logAnalytics";
 
   @doc("properties")
@@ -1671,9 +2034,121 @@ model MarkParameter {
   mark?: string;
 }
 
+@doc("Specify the response type.")
+@Versioning.added(Versions.v2024_03_01_preview)
+model ResponseTypeParameter {
+  @doc("Specify the response type. The possible values are: ID, STANDARD, FULL, REDUCED")
+  @query("responseType")
+  responseType?: AssetResponseType;
+}
+
+@doc("The prameter of responseIncludes")
+@Versioning.added(Versions.v2024_03_01_preview)
+model ResponseIncludesParameter {
+  @query({
+    format: "csv",
+  })
+  @doc("The properties to include in the response.")
+  responseIncludes?: string[];
+}
+
+@doc("The prameter of responseIncludes")
+@Versioning.added(Versions.v2024_03_01_preview)
+model RecentOnlyParameter {
+  @query("recentOnly")
+  @doc("If it's recent only.")
+  recentOnly?: boolean;
+}
+
 @doc("An expression on the resource type that selects the resources to be returned.")
 model RequiredFilterParameter {
   @doc("An expression on the resource type that selects the resources to be returned.")
   @query("filter")
   filter: string;
+}
+
+@resource("cisaCves")
+@doc("cisa cve in a given workspace.")
+@Versioning.added(Versions.v2024_03_01_preview)
+model CisaCveResult {
+  @key("cveId")
+  @visibility("read")
+  @doc("The CVE ID of the vulnerability in the format CVE-YYYY-NNNN, note that the number portion can have more than 4 digits.")
+  cveId: string;
+
+  @doc("The vendor or project name for the vulnerability.")
+  vendorProject: string;
+
+  @doc("The vulnerability product")
+  product: string;
+
+  @doc("The name of the vulnerability")
+  vulnerabilityName: string;
+
+  @doc("A short description of the vulnerability")
+  shortDescription: string;
+
+  @doc("The required action to address the vulnerability")
+  requiredAction: string;
+
+  @doc("Any additional notes about the vulnerability")
+  notes: string;
+
+  @doc("The date the vulnerability was added to the catalog in the format YYYY-MM-DD")
+  dateAdded: utcDateTime;
+
+  @doc("The date the required action is due in the format YYYY-MM-DD")
+  dueDate: utcDateTime;
+
+  @doc("The date the vulnerability was updated")
+  updatedAt: utcDateTime;
+
+  @doc("The number of assets affected by the vulnerability")
+  count: int64;
+}
+
+@doc("AssetChainRequest containing information needed for the retrieval of the asset chain summary.")
+@Versioning.added(Versions.v2024_03_01_preview)
+model AssetChainRequest {
+  @doc("Asset chain source.")
+  assetChainSource: AssetChainSource;
+
+  @doc("A collection of asset chain source ids.")
+  sourceIds: string[];
+}
+
+@doc("Response for the asset chain summary.")
+@Versioning.added(Versions.v2024_03_01_preview)
+model AssetChainSummaryResult {
+  @doc("A list of asset chain summaries per asset kind")
+  affectedAssetsSummary: AssetChainKindSummaryResult[];
+
+  @doc("A list of disco group summaries")
+  affectedGroupsSummary: DiscoGroupSummaryResult[];
+
+  @doc("The list of exceptions")
+  errors?: ErrorResponse[];
+}
+
+@doc("A list of asset chain summaries per asset kind")
+@Versioning.added(Versions.v2024_03_01_preview)
+model AssetChainKindSummaryResult {
+  @doc("The kind of asset")
+  kind: AssetKind;
+
+  @doc("The amount of assets affected for a given asset kind")
+  affectedCount: int64;
+}
+
+@doc("A list of disco group summaries")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DiscoGroupSummaryResult {
+  @doc("The system generated unique id for the resource.")
+  id: string;
+
+  @doc("The caller provided unique name for the resource.")
+  name: string;
+
+  @doc("The name that can be used for display purposes.")
+  displayName: string;
 }
