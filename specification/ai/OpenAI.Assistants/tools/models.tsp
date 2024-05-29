@@ -242,8 +242,12 @@ model ToolOutput {
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 @added(ServiceApiVersions.v2024_05_01_preview)
 union AssistantsApiToolChoiceOption {
+  string,
+
   /** Specifies how the tool choice will be used */
-  AssistantsApiToolChoiceOptionMode /** Specifies a tool the model should use. Use to force the model to call a specific tool. */ | AssistantsNamedToolChoice,
+  AssistantsApiToolChoiceOptionMode,
+  /** Specifies a tool the model should use. Use to force the model to call a specific tool. */ 
+  AssistantsNamedToolChoice,
 }
 
 /** Specifies how the tool choice will be used */
@@ -254,7 +258,7 @@ union AssistantsApiToolChoiceOptionMode {
   /** The model will not call a function and instead generates a message. */
   none: "none",
 
-  /** TShe model can pick between generating a message or calling a function. */
+  /** The model can pick between generating a message or calling a function. */
   auto: "auto",
 }
 /** Specifies a tool the model should use. Use to force the model to call a specific tool. */

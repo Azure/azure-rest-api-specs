@@ -1589,13 +1589,18 @@ components:
       description: |-
         An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.
         If `text` the model can return text or any value needed.
-    AssistantsApiResponseFormatOption:
+    AssistantsApiResponseFormatMode:
       anyOf:
         - type: string
         - type: string
           enum:
             - auto
             - none
+      description: Represents the mode in which the model will handle the return format of a tool call.
+    AssistantsApiResponseFormatOption:
+      anyOf:
+        - type: string
+        - $ref: '#/components/schemas/AssistantsApiResponseFormatMode'
         - $ref: '#/components/schemas/AssistantsApiResponseFormat'
       description: |-
         Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
@@ -1608,6 +1613,7 @@ components:
         if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
     AssistantsApiToolChoiceOption:
       anyOf:
+        - type: string
         - $ref: '#/components/schemas/AssistantsApiToolChoiceOptionMode'
         - $ref: '#/components/schemas/AssistantsNamedToolChoice'
       description: |-
