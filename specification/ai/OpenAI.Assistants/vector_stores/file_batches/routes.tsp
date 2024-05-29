@@ -44,7 +44,7 @@ op getVectorStoreFileBatch(
   /** The ID of the vector store that the file batch belongs to. */
   @path vectorStoreId: string,
 
-  /** The ID of the file batch being retrieved.. */
+  /** The ID of the file batch being retrieved. */
   @path batchId: string,
 ): VectorStoreFileBatch;
 
