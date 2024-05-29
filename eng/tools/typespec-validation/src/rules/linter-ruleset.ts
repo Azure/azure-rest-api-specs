@@ -8,7 +8,8 @@ import { TsvHost } from "../tsv-host.js";
 export class LinterRulesetRule implements Rule {
   readonly name = "LinterRuleset";
 
-  readonly description = "Specs must select correct linter ruleset";
+  readonly description =
+    "Ensures each spec includes the correct linter ruleset (data-plane or management-plane)";
 
   async execute(host: TsvHost, folder: string): Promise<RuleResult> {
     let success = true;
@@ -22,6 +23,9 @@ export class LinterRulesetRule implements Rule {
       config.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
     stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
 
+    const mainTspExists = await host.checkFileExists(join(folder, "main.tsp"));
+    const clientTspExists = await host.checkFileExists(join(folder, "client.tsp"));
+
     const linterExtends = config.linter?.extends;
     stdOutput += `linter.extends: ${JSON.stringify(linterExtends)}`;
 
@@ -30,25 +34,20 @@ export class LinterRulesetRule implements Rule {
       requiredRuleset = "@azure-tools/typespec-azure-rulesets/resource-manager";
     } else if (rpFolder?.trim()?.endsWith("data-plane")) {
       requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
+    } else if (clientTspExists && !mainTspExists) {
+      // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
+      // are data-plane (e.g. HealthInsights.TrialMatcher)
+      requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
     } else {
-      const clientTspExists = await host.checkFileExists(join(folder, "client.tsp"));
-      const mainTspExists = await host.checkFileExists(join(folder, "main.tsp"));
-
-      if (clientTspExists && !mainTspExists) {
-        // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
-        // are data-plane (e.g. HealthInsights.TrialMatcher)
-        requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
-      } else {
-        // Cannot determine if spec is data-plane or resource-manager, so cannot know
-        // which linter ruleset is required.
-        success = false;
-        errorOutput +=
-          "tspconfig.yaml must define the following property:\n" +
-          "\n" +
-          "options:\n" +
-          '  "@azure-tools/typespec-autorest":\n' +
-          '    azure-resource-provider-folder: "data-plane" | "resource-manager"\n';
-      }
+      // Cannot determine if spec is data-plane or resource-manager, so cannot know
+      // which linter ruleset is required.
+      success = false;
+      errorOutput +=
+        "tspconfig.yaml must define the following property:\n" +
+        "\n" +
+        "options:\n" +
+        '  "@azure-tools/typespec-autorest":\n' +
+        '    azure-resource-provider-folder: "data-plane" | "resource-manager"\n';
     }
 
     if (requiredRuleset && !linterExtends?.includes(requiredRuleset)) {
