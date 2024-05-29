@@ -1,0 +1,736 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft PlaywrightTesting AuthManager Service API",
+    "version": "2023-10-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "api.playwright-int.io",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://preview.playwright-int.io/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://preview.playwright-int.io/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/accounts/{accountId}": {
+      "get": {
+        "operationId": "Accounts_GetAccount",
+        "description": "Get details of the ARM resource mapped to an account for the given accountId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_GetAccount": {
+            "$ref": "./examples/Accounts_GetAccount.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/access-tokens": {
+      "get": {
+        "operationId": "AccessTokens_ListAccessTokens",
+        "description": "List access-tokens for a given accountId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedAccessToken"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessTokens_ListAccessTokens": {
+            "$ref": "./examples/AccessTokens_ListAccessTokens.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/accounts/{accountId}/access-tokens/{accessTokenId}": {
+      "get": {
+        "operationId": "AccessTokens_GetAccessToken",
+        "description": "Get an access-token for given access-token id in guid format.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessTokenId",
+            "in": "path",
+            "description": "The access-token id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessTokens_GetAccessToken": {
+            "$ref": "./examples/AccessTokens_GetAccessToken.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AccessTokens_CreateAccessToken",
+        "description": "Creates an access-token with given access-token id in guid format.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessTokenId",
+            "in": "path",
+            "description": "The access-token id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessTokens_CreateAccessToken": {
+            "$ref": "./examples/AccessTokens_CreateAccessToken.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AccessTokens_DeleteAccessToken",
+        "description": "Revoke an access-token with given access-token id in guid format.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accessTokenId",
+            "in": "path",
+            "description": "The access-token id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessTokens_DeleteAccessToken": {
+            "$ref": "./examples/AccessTokens_DeleteAccessToken.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessToken": {
+      "type": "object",
+      "description": "Model of an access-token linked to an account.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The access-token id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The access-token name.",
+          "minLength": 3,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "jwtToken": {
+          "type": "string",
+          "description": "The access-token value in JWT format.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The access-token createdAt utcDateTime.",
+          "readOnly": true
+        },
+        "expiryAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The access-token expiryAt utcDateTime.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/AccessTokenState",
+          "description": "The access-token state - Active | Expired.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "expiryAt"
+      ]
+    },
+    "AccessTokenState": {
+      "type": "string",
+      "description": "The access-token state.",
+      "enum": [
+        "Active",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "AccessTokenState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The access-token is Active."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The access-token is Expired."
+          }
+        ]
+      }
+    },
+    "Account": {
+      "type": "object",
+      "description": "An account is a parent resource for most of the other service resources. It's directly mapped to an ARM resource and helps to create a link between control-plane and data-plane resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The account id.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The ARM fully-qualified resource id for the account.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The account name.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/AccountState",
+          "description": "The state of account - Active | Inactive",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The ARM-based subscription id for the account.",
+          "readOnly": true
+        },
+        "subscriptionState": {
+          "$ref": "#/definitions/SubscriptionState",
+          "description": "The ARM-based subscription state - Registered | Unregistered | Warned | Suspended | Deleted",
+          "readOnly": true
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Azure tenant id of the account.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The account resource ARM location, for eg. eastus, southeastasia.",
+          "readOnly": true
+        },
+        "regionalAffinity": {
+          "type": "string",
+          "description": "This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "scalableExecution": {
+          "type": "string",
+          "description": "When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "reporting": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "resourceId",
+        "name",
+        "state",
+        "subscriptionId",
+        "subscriptionState",
+        "tenantId",
+        "location"
+      ]
+    },
+    "AccountState": {
+      "type": "string",
+      "description": "The account state.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "AccountState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The account is Active."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "The account is Inactive."
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "PagedAccessToken": {
+      "type": "object",
+      "description": "Paged collection of AccessToken items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AccessToken items on this page",
+          "items": {
+            "$ref": "#/definitions/AccessToken"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SubscriptionState": {
+      "type": "string",
+      "description": "The ARM-based subscription state.",
+      "enum": [
+        "Registered",
+        "Warned",
+        "Suspended",
+        "Deleted",
+        "Unregistered"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Registered",
+            "value": "Registered",
+            "description": "The subscription state is Registered."
+          },
+          {
+            "name": "Warned",
+            "value": "Warned",
+            "description": "The subscription state is Warned."
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "The subscription state is Suspended."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The subscription state is Deleted."
+          },
+          {
+            "name": "Unregistered",
+            "value": "Unregistered",
+            "description": "The subscription state is Unregistered."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
