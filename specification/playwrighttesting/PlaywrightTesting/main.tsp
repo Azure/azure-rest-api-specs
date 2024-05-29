@@ -15,8 +15,11 @@ using Azure.Core.Traits;
 using Autorest;
 
 @server(
-  "https://api.playwright-int.io",
-  "Azure Playwright Service API Endpoint"
+  "https://{region}.api.playwright.microsoft.com",
+  "Microsoft Azure Playwright Service API Endpoint",
+  {
+    region: string,
+  }
 )
 @useAuth(
   [
@@ -24,7 +27,7 @@ using Autorest;
       {
         type: OAuth2FlowType.implicit,
         authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-        scopes: ["https://preview.playwright-int.io/.default"],
+        scopes: ["https://playwright.microsoft.com/.default"],
       }
     ]>
   ]
@@ -37,12 +40,18 @@ namespace Microsoft.PlaywrightTesting.AuthManager;
 
 @doc("The PlaywrightTesting Auth Manager service version.")
 enum Versions {
-  @doc("Version 2023-10-01-preview")
+  @doc("Version 2024-06-01-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2023-10-01-preview`,
+  `2024-06-01-preview`,
 }
 
 // Models ////////////////////
+
+@doc("Server error response object containing details.")
+model ServerError is Azure.Core.Foundations.ErrorResponse {
+  @doc("The error status string from the server.")
+  status: string;
+}
 
 @doc("An account is a parent resource for most of the other service resources. It's directly mapped to an ARM resource and helps to create a link between control-plane and data-plane resources.")
 @resource("accounts")
@@ -146,7 +155,7 @@ model AccessToken {
 
   @doc("The access-token createdAt utcDateTime.")
   @visibility("read")
-  createdAt?: utcDateTime;
+  createdAt: utcDateTime;
 
   @doc("The access-token expiryAt utcDateTime.")
   @visibility("read", "create")
@@ -154,7 +163,7 @@ model AccessToken {
 
   @doc("The access-token state - Active | Expired.")
   @visibility("read")
-  state?: AccessTokenState;
+  state: AccessTokenState;
 }
 
 @doc("The access-token state.")
@@ -185,40 +194,129 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   SupportsClientRequestId;
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias Operations = Azure.Core.ResourceOperations<ServiceTraits, ServerError>;
 
 interface AccessTokens {
   // AccessToken Operations
 
-  @doc("Creates an access-token with given access-token id in guid format.")
+  @doc("Creates an access-token for the account with given access-token id.")
   @example(
     "./AccessTokens_CreateAccessToken.json",
     "AccessTokens_CreateAccessToken"
   )
-  createAccessToken is Operations.ResourceCreateOrReplace<AccessToken>;
+  createAccessToken is Operations.ResourceCreateOrReplace<
+    AccessToken,
+    RequestHeadersTrait<{
+      @header
+      @doc("Bearer JWT Access token provided by EntraID.")
+      authorization: string;
+    }>
+  >;
 
-  @doc("Get an access-token for given access-token id in guid format.")
+  @doc("Gets an access-token for the account with given access-token id.")
   @example("./AccessTokens_GetAccessToken.json", "AccessTokens_GetAccessToken")
-  getAccessToken is Operations.ResourceRead<AccessToken>;
+  getAccessToken is Operations.ResourceRead<
+    AccessToken,
+    RequestHeadersTrait<{
+      @header
+      @doc("Bearer JWT Access token provided by EntraID.")
+      authorization: string;
+    }>
+  >;
 
-  @doc("Revoke an access-token with given access-token id in guid format.")
+  @doc("Deletes an access-token for the account with given access-token id.")
   @example(
     "./AccessTokens_DeleteAccessToken.json",
     "AccessTokens_DeleteAccessToken"
   )
-  deleteAccessToken is Operations.ResourceDelete<AccessToken>;
+  deleteAccessToken is Operations.ResourceDelete<
+    AccessToken,
+    RequestHeadersTrait<{
+      @header
+      @doc("Bearer JWT Access token provided by EntraID.")
+      authorization: string;
+    }>
+  >;
 
-  @doc("List access-tokens for a given accountId.")
+  @doc("Lists access-tokens for the given account id.")
   @example(
     "./AccessTokens_ListAccessTokens.json",
     "AccessTokens_ListAccessTokens"
   )
-  listAccessTokens is Operations.ResourceList<AccessToken>;
+  listAccessTokens is Operations.ResourceList<
+    AccessToken,
+    RequestHeadersTrait<{
+      @header
+      @doc("Bearer JWT Access token provided by EntraID.")
+      authorization: string;
+    }>
+  >;
+
+  @doc("Validates access-token provided in authorization header for the given account id.")
+  @example(
+    "./AccessTokens_ValidateAccessToken.json",
+    "AccessTokens_ValidateAccessToken"
+  )
+  @actionSeparator("/")
+  validate is Operations.ResourceCollectionAction<
+    AccessToken,
+    {},
+    {},
+    RequestHeadersTrait<{
+      @header
+      @doc("Bearer JWT Access token provided by MPT service.")
+      authorization: string;
+    }>
+  >;
 }
 
 interface Accounts {
   // Accounts Operations
+
   @doc("Get details of the ARM resource mapped to an account for the given accountId.")
   @example("./Accounts_GetAccount.json", "Accounts_GetAccount")
-  getAccount is Operations.ResourceRead<Account>;
+  getAccount is Operations.ResourceRead<
+    Account,
+    RequestHeadersTrait<{
+      @header
+      @doc("Bearer JWT Access token provided by EntraID.")
+      authorization: string;
+    }>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'getBrowsers' should be defined using a signature from the Azure.Core namespace."
+  @doc("Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests.")
+  @example("./Accounts_GetBrowsers.json", "Accounts_GetBrowsers")
+  @route("/accounts/{accountId}/browsers")
+  getBrowsers(
+    @query("api-version")
+    @doc("The API version to use for this operation.")
+    apiVersion: string,
+
+    @query
+    @doc("The run id provided by client for corresponding remote test run.")
+    runId?: string,
+
+    @path
+    @doc("The account id.")
+    accountId: string,
+
+    @header
+    @doc("Bearer JWT Access token provided by EntraID or MPT service.")
+    authorization: string,
+
+    @header({
+      name: "x-ms-client-request-id",
+    })
+    @doc("An opaque, globally-unique, client-generated string identifier for the request.")
+    xMsClientRequestId?: uuid,
+  ): {
+    @statusCode _: 302;
+
+    @header({
+      name: "x-ms-client-request-id",
+    })
+    @doc("An opaque, globally-unique, client-generated string identifier for the request.")
+    xMsClientRequestId: uuid;
+  } | ServerError;
 }

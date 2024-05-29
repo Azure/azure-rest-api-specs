@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft PlaywrightTesting AuthManager Service API",
-    "version": "2023-10-01-preview",
+    "version": "2024-06-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -12,7 +12,18 @@
   "schemes": [
     "https"
   ],
-  "host": "api.playwright-int.io",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{region}.api.playwright.microsoft.com",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "region",
+        "in": "path",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
@@ -22,7 +33,7 @@
   "security": [
     {
       "OAuth2Auth": [
-        "https://preview.playwright-int.io/.default"
+        "https://playwright.microsoft.com/.default"
       ]
     }
   ],
@@ -32,7 +43,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "https://preview.playwright-int.io/.default": ""
+        "https://playwright.microsoft.com/.default": ""
       }
     }
   },
@@ -50,6 +61,13 @@
             "name": "accountId",
             "in": "path",
             "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer JWT Access token provided by EntraID.",
             "required": true,
             "type": "string"
           },
@@ -74,7 +92,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ServerError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -94,7 +112,7 @@
     "/accounts/{accountId}/access-tokens": {
       "get": {
         "operationId": "AccessTokens_ListAccessTokens",
-        "description": "List access-tokens for a given accountId.",
+        "description": "Lists access-tokens for the given account id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -103,6 +121,13 @@
             "name": "accountId",
             "in": "path",
             "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer JWT Access token provided by EntraID.",
             "required": true,
             "type": "string"
           },
@@ -127,7 +152,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ServerError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -150,7 +175,7 @@
     "/accounts/{accountId}/access-tokens/{accessTokenId}": {
       "get": {
         "operationId": "AccessTokens_GetAccessToken",
-        "description": "Get an access-token for given access-token id in guid format.",
+        "description": "Gets an access-token for the account with given access-token id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -169,6 +194,13 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer JWT Access token provided by EntraID.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -191,7 +223,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ServerError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -209,7 +241,7 @@
       },
       "put": {
         "operationId": "AccessTokens_CreateAccessToken",
-        "description": "Creates an access-token with given access-token id in guid format.",
+        "description": "Creates an access-token for the account with given access-token id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -228,6 +260,13 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer JWT Access token provided by EntraID.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -272,7 +311,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ServerError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -290,7 +329,7 @@
       },
       "delete": {
         "operationId": "AccessTokens_DeleteAccessToken",
-        "description": "Revoke an access-token with given access-token id in guid format.",
+        "description": "Deletes an access-token for the account with given access-token id.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -311,6 +350,13 @@
             "format": "uuid"
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer JWT Access token provided by EntraID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -328,7 +374,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/ServerError"
             },
             "headers": {
               "x-ms-error-code": {
@@ -341,6 +387,138 @@
         "x-ms-examples": {
           "AccessTokens_DeleteAccessToken": {
             "$ref": "./examples/AccessTokens_DeleteAccessToken.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/access-tokens/validate": {
+      "post": {
+        "operationId": "AccessTokens_Validate",
+        "description": "Validates access-token provided in authorization header for the given account id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer JWT Access token provided by MPT service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ServerError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessTokens_ValidateAccessToken": {
+            "$ref": "./AccessTokens_ValidateAccessToken.json"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/browsers": {
+      "get": {
+        "operationId": "Accounts_GetBrowsers",
+        "description": "Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "runId",
+            "in": "query",
+            "description": "The run id provided by client for corresponding remote test run.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The account id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "Bearer JWT Access token provided by EntraID or MPT service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "xMsClientRequestId"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirection",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ServerError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_GetBrowsers": {
+            "$ref": "./examples/Accounts_GetBrowsers.json"
           }
         }
       }
@@ -396,7 +574,9 @@
       "required": [
         "id",
         "name",
-        "expiryAt"
+        "createdAt",
+        "expiryAt",
+        "state"
       ]
     },
     "AccessTokenState": {
@@ -615,19 +795,6 @@
         "message"
       ]
     },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "description": "A response containing error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
       "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -666,6 +833,24 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "ServerError": {
+      "type": "object",
+      "description": "Server error response object containing details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        },
+        "status": {
+          "type": "string",
+          "description": "The error status string from the server."
+        }
+      },
+      "required": [
+        "error",
+        "status"
       ]
     },
     "SubscriptionState": {
