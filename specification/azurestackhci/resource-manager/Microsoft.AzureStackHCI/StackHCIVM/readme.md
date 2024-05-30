@@ -58,18 +58,9 @@ suppressions:
     from: 
       - stackhcivm.json
   - code: APIVersionPattern
-    reason: received sign off by api reviewer to use special name for test version
+    reason: 2024-01-01-test-preview is for internal testing only and recommended by API spec review office hours.
     from:
       - stackhcivm.json
-```
-
-### Tag: package-preview-2024-05
-
-These settings apply only when `--tag=package-preview-2024-05-01-test` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-05-01-test'
-input-file:
-  - preview/2024-05-01-test-preview/openapi.json
 ```
 ### Tag: package-preview-2024-05
 
