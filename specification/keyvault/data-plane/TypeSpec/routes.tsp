@@ -1,19 +1,37 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.Core;
+using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace KeyVaultClient;
+namespace KeyVault;
+
+alias KeyVaultOperations = StandardResourceOperations;
+
+alias KeyVaultListParameters = ListQueryParametersTrait<{
+  /**
+   * Maximum number of results to return in a page. If not specified the service
+   * will return up to 25 results.
+   */
+  @maxValue(25)
+  @minValue(1)
+  @query("maxresults")
+  maxresults?: int32;
+}>;
 
 /**
  *  The SET operation adds a secret to the Azure Key Vault. If the named secret
  * already exists, Azure Key Vault creates a new version of that secret. This
  * operation requires the secrets/set permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Sets a secret in a specified key vault.")
-@route("/secrets/{secret-name}")
+@route("/secrets/{secretName}")
 @put
 op setSecret is Azure.Core.Foundations.Operation<
   {
@@ -24,12 +42,14 @@ op setSecret is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path
-    `secret-name`: string;
+    secretName: string;
 
     /**
      * The parameters for setting the secret.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: SecretSetParameters;
   },
   SecretBundle
@@ -40,8 +60,9 @@ op setSecret is Azure.Core.Foundations.Operation<
  * cannot be applied to an individual version of a secret. This operation requires
  * the secrets/delete permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes a secret from a specified key vault.")
-@route("/secrets/{secret-name}")
+@route("/secrets/{secretName}")
 @delete
 op deleteSecret is Azure.Core.Foundations.Operation<
   {
@@ -49,7 +70,7 @@ op deleteSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path
-    `secret-name`: string;
+    secretName: string;
   },
   DeletedSecretBundle
 >;
@@ -60,8 +81,9 @@ op deleteSecret is Azure.Core.Foundations.Operation<
  * of a secret itself cannot be changed. This operation requires the secrets/set
  * permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the attributes associated with a specified secret in a given key vault.")
-@route("/secrets/{secret-name}/{secret-version}")
+@route("/secrets/{secretName}/{secretVersion}")
 @patch
 op updateSecret is Azure.Core.Foundations.Operation<
   {
@@ -69,18 +91,20 @@ op updateSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path
-    `secret-name`: string;
+    secretName: string;
 
     /**
      * The version of the secret.
      */
     @path
-    `secret-version`: string;
+    secretVersion: string;
 
     /**
      * The parameters for update secret operation.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: SecretUpdateParameters;
   },
   SecretBundle
@@ -90,8 +114,9 @@ op updateSecret is Azure.Core.Foundations.Operation<
  * The GET operation is applicable to any secret stored in Azure Key Vault. This
  * operation requires the secrets/get permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Get a specified secret from a given key vault.")
-@route("/secrets/{secret-name}/{secret-version}")
+@route("/secrets/{secretName}/{secretVersion}")
 @get
 op getSecret is Azure.Core.Foundations.Operation<
   {
@@ -99,14 +124,14 @@ op getSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path
-    `secret-name`: string;
+    secretName: string;
 
     /**
      * The version of the secret. This URI fragment is optional. If not specified, the
      * latest version of the secret is returned.
      */
     @path
-    `secret-version`: string;
+    secretVersion: string;
   },
   SecretBundle
 >;
@@ -118,20 +143,9 @@ op getSecret is Azure.Core.Foundations.Operation<
  * requires the secrets/list permission.
  */
 @summary("List secrets in a specified key vault.")
-@route("/secrets")
-@get
-op getSecrets is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Maximum number of results to return in a page. If not specified, the service
-     * will return up to 25 results.
-     */
-    @maxValue(25)
-    @minValue(1)
-    @query("maxresults")
-    maxresults?: int32;
-  },
-  SecretListResult
+op getSecrets is KeyVaultOperations.ResourceList<
+  SecretItem,
+  KeyVaultListParameters
 >;
 
 /**
@@ -139,8 +153,9 @@ op getSecrets is Azure.Core.Foundations.Operation<
  * values are returned for the secrets. This operations requires the secrets/list
  * permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("List all versions of the specified secret.")
-@route("/secrets/{secret-name}/versions")
+@route("/secrets/{secretName}/versions")
 @get
 op getSecretVersions is Azure.Core.Foundations.Operation<
   {
@@ -148,18 +163,10 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path
-    `secret-name`: string;
-
-    /**
-     * Maximum number of results to return in a page. If not specified, the service
-     * will return up to 25 results.
-     */
-    @maxValue(25)
-    @minValue(1)
-    @query("maxresults")
-    maxresults?: int32;
+    secretName: string;
   },
-  SecretListResult
+  SecretListResult,
+  KeyVaultListParameters
 >;
 
 /**
@@ -168,28 +175,18 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
  * permission.
  */
 @summary("Lists deleted secrets for the specified vault.")
-@route("/deletedsecrets")
-@get
-op getDeletedSecrets is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
-     */
-    @maxValue(25)
-    @minValue(1)
-    @query("maxresults")
-    maxresults?: int32;
-  },
-  DeletedSecretListResult
+op getDeletedSecrets is KeyVaultOperations.ResourceList<
+  DeletedSecretItem,
+  KeyVaultListParameters
 >;
 
 /**
  * The Get Deleted Secret operation returns the specified deleted secret along
  * with its attributes. This operation requires the secrets/get permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the specified deleted secret.")
-@route("/deletedsecrets/{secret-name}")
+@route("/deletedsecrets/{secretName}")
 @get
 op getDeletedSecret is Azure.Core.Foundations.Operation<
   {
@@ -197,7 +194,7 @@ op getDeletedSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path
-    `secret-name`: string;
+    secretName: string;
   },
   DeletedSecretBundle
 >;
@@ -207,8 +204,9 @@ op getDeletedSecret is Azure.Core.Foundations.Operation<
  * possibility of recovery. This operation can only be enabled on a soft-delete
  * enabled vault. This operation requires the secrets/purge permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Permanently deletes the specified secret.")
-@route("/deletedsecrets/{secret-name}")
+@route("/deletedsecrets/{secretName}")
 @delete
 op purgeDeletedSecret is Azure.Core.Foundations.Operation<
   {
@@ -216,7 +214,7 @@ op purgeDeletedSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path
-    `secret-name`: string;
+    secretName: string;
   },
   void
 >;
@@ -226,8 +224,9 @@ op purgeDeletedSecret is Azure.Core.Foundations.Operation<
  * performed on a soft-delete enabled vault. This operation requires the
  * secrets/recover permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Recovers the deleted secret to the latest version.")
-@route("/deletedsecrets/{secret-name}/recover")
+@route("/deletedsecrets/{secretName}/recover")
 @post
 op recoverDeletedSecret is Azure.Core.Foundations.Operation<
   {
@@ -235,7 +234,7 @@ op recoverDeletedSecret is Azure.Core.Foundations.Operation<
      * The name of the deleted secret.
      */
     @path
-    `secret-name`: string;
+    secretName: string;
   },
   SecretBundle
 >;
@@ -245,8 +244,9 @@ op recoverDeletedSecret is Azure.Core.Foundations.Operation<
  * versions of the secret will be downloaded. This operation requires the
  * secrets/backup permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Backs up the specified secret.")
-@route("/secrets/{secret-name}/backup")
+@route("/secrets/{secretName}/backup")
 @post
 op backupSecret is Azure.Core.Foundations.Operation<
   {
@@ -254,7 +254,7 @@ op backupSecret is Azure.Core.Foundations.Operation<
      * The name of the secret.
      */
     @path
-    `secret-name`: string;
+    secretName: string;
   },
   BackupSecretResult
 >;
@@ -263,10 +263,16 @@ op backupSecret is Azure.Core.Foundations.Operation<
  * Restores a backed up secret, and all its versions, to a vault. This operation
  * requires the secrets/restore permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Restores a backed up secret to a vault.")
 @route("/secrets/restore")
 @post
 op restoreSecret is Azure.Core.Foundations.Operation<
-  SecretRestoreParameters,
+  {
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    @body
+    @flattenProperty
+    parameters: SecretRestoreParameters;
+  },
   SecretBundle
 >;
