@@ -116,6 +116,6 @@ interface Evidence {
   "parameters"
 );
 
-@@OpenAPI.extension(Evidence.createOrUpdate::parameters.resource, "x-ms-client-name", "parameters");
+@@OpenAPI.extension(Evidence.createOrUpdate::parameters.resource, "x-ms-client-name", "properties");
 
 @@clientName(Evidence.createOrUpdate::parameters.resource, "parameters");
