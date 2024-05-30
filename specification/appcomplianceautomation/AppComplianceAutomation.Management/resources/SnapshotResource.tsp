@@ -40,7 +40,7 @@ model SnapshotResource extends Azure.ResourceManager.Foundations.ProxyResource {
 
 @armResourceOperations
 @tag("AppComplianceAutomation")
-interface SnapshotResources {
+interface Snapshot {
   /**
    * Get the AppComplianceAutomation snapshot and its properties.
    */
@@ -74,6 +74,6 @@ interface SnapshotResources {
   >;
 }
 
-@@doc(SnapshotResources.download::parameters.body,
+@@doc(Snapshot.download::parameters.body,
   "Parameters for the query operation"
 );
