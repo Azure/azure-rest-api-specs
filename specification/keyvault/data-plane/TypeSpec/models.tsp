@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace KeyVaultClient;
+namespace KeyVault;
 
 /**
  * Reflects the deletion recovery level currently in effect for secrets in the
@@ -13,7 +13,9 @@ namespace KeyVaultClient;
  * deleted by a privileged user; otherwise, only the system can purge the secret,
  * at the end of the retention interval.
  */
-enum DeletionRecoveryLevel {
+union DeletionRecoveryLevel {
+  string,
+
   /**
    * Denotes a vault state in which deletion is an irreversible operation, without
    * the possibility for recovery. This level corresponds to no protection being
@@ -21,7 +23,7 @@ enum DeletionRecoveryLevel {
    * accepting a Delete operation at the entity level or higher (vault, resource
    * group, subscription etc.)
    */
-  Purgeable,
+  Purgeable: "Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -30,7 +32,7 @@ enum DeletionRecoveryLevel {
    * unless a Purge operation is requested, or the subscription is cancelled. System
    * wil permanently delete it after 90 days, if not recovered
    */
-  `Recoverable+Purgeable`,
+  Recoverable_Purgeable: "Recoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -39,7 +41,7 @@ enum DeletionRecoveryLevel {
    * while the subscription is still available. System wil permanently delete it
    * after 90 days, if not recovered
    */
-  Recoverable,
+  Recoverable: "Recoverable",
 
   /**
    * Denotes a vault and subscription state in which deletion is recoverable within
@@ -47,7 +49,7 @@ enum DeletionRecoveryLevel {
    * not permitted, and in which the subscription itself  cannot be permanently
    * canceled. System wil permanently delete it after 90 days, if not recovered
    */
-  `Recoverable+ProtectedSubscription`,
+  Recoverable_ProtectedSubscription: "Recoverable+ProtectedSubscription",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -56,7 +58,7 @@ enum DeletionRecoveryLevel {
    * the retention interval, unless a Purge operation is requested, or the
    * subscription is cancelled.
    */
-  `CustomizedRecoverable+Purgeable`,
+  CustomizedRecoverable_Purgeable: "CustomizedRecoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -65,7 +67,7 @@ enum DeletionRecoveryLevel {
    * deleted entity during the retention interval and while the subscription is
    * still available.
    */
-  CustomizedRecoverable,
+  CustomizedRecoverable: "CustomizedRecoverable",
 
   /**
    * Denotes a vault and subscription state in which deletion is recoverable,
@@ -75,7 +77,7 @@ enum DeletionRecoveryLevel {
    * deleted entity during the retention interval, and also reflects the fact that
    * the subscription itself cannot be cancelled.
    */
-  `CustomizedRecoverable+ProtectedSubscription`,
+  CustomizedRecoverable_ProtectedSubscription: "CustomizedRecoverable+ProtectedSubscription",
 }
 
 /**
@@ -286,16 +288,19 @@ model SecretUpdateParameters {
 /**
  * The secret list result.
  */
+@friendlyName("SecretListResult")
 model SecretListResult is Azure.Core.Page<SecretItem>;
 
 /**
  * The secret item containing secret metadata.
  */
+@resource("secrets")
 model SecretItem {
   /**
    * Secret identifier.
    */
-  id?: string;
+  @key // The ID isn't really the key; it should be the certificate name, but we don't have this attribute on the model
+  id: string;
 
   /**
    * The secret management attributes.
@@ -323,12 +328,16 @@ model SecretItem {
 /**
  * The deleted secret list result
  */
+@friendlyName("DeletedSecretListResult")
 model DeletedSecretListResult is Azure.Core.Page<DeletedSecretItem>;
 
 /**
  * The deleted secret item containing metadata about the deleted secret.
  */
-model DeletedSecretItem extends SecretItem {
+@resource("deletedsecrets")
+model DeletedSecretItem {
+  ...SecretItem;
+
   /**
    * The url of the recovery object, used to identify and recover the deleted secret.
    */
