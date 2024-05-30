@@ -25,36 +25,6 @@ linter:
     assert(result.success);
   });
 
-  it("succeeds with data-plane/old-and-new", async function () {
-    const host = new TsvTestHost();
-    host.readTspConfig = async (_folder: string) => `
-options:
-  "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-core/all"
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
-`;
-    const result = await new LinterRulesetRule().execute(host, TsvTestHost.folder);
-    assert(result.success);
-  });
-
-  it("succeeds with resource-manager/old-and-new", async function () {
-    const host = new TsvTestHost();
-    host.readTspConfig = async (_folder: string) => `
-options:
-  "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "resource-manager"
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-resource-manager/all"
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
-`;
-    const result = await new LinterRulesetRule().execute(host, TsvTestHost.folder);
-    assert(result.success);
-  });
-
   it("succeeds with data-plane/data-plane", async function () {
     const host = new TsvTestHost();
     host.readTspConfig = async (_folder: string) => `
@@ -124,6 +94,40 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 `;
     const result = await new LinterRulesetRule().execute(host, TsvTestHost.folder);
+    assert(!result.success);
+  });
+
+  it("fails with data-plane/old-and-new", async function () {
+    const host = new TsvTestHost();
+    host.readTspConfig = async (_folder: string) => `
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+`;
+    const result = await new LinterRulesetRule().execute(host, TsvTestHost.folder);
+    assert(!result.success);
+  });
+
+  it("fails with resource-manager/old-and-new", async function () {
+    const host = new TsvTestHost();
+    host.readTspConfig = async (_folder: string) => `
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-resource-manager/all"
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+`;
+    const result = await new LinterRulesetRule().execute(host, TsvTestHost.folder);
+
+    console.log(result.stdOutput);
+    console.log(result.errorOutput);
+
     assert(!result.success);
   });
 });
