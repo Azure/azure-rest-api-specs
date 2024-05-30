@@ -125,9 +125,6 @@ linter:
 `;
     const result = await new LinterRulesetRule().execute(host, TsvTestHost.folder);
 
-    console.log(result.stdOutput);
-    console.log(result.errorOutput);
-
     assert(!result.success);
   });
 });
