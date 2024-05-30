@@ -24,7 +24,7 @@ op listVectorStoreFiles(
   /** The ID of the vector store that the files belong to. */
   @path vectorStoreId: string,
 
-  /** Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`. */
+  /** Filter by file status. */
   @query filter?: VectorStoreFileStatusFilter,
 
   ...OpenAIListRequestOptions,

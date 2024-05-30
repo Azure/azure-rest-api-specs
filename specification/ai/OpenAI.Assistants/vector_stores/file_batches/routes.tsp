@@ -81,7 +81,7 @@ op listVectorStoreFileBatchFiles(
   /** The ID of the file batch that the files belong to. */
   @path batchId: string,
 
-  /** Filter by file status. One of `in_progress`, `completed`, `failed`, `cancelled`. */
+  /** Filter by file status. */
   @query filter?: VectorStoreFileStatusFilter,
 
   ...OpenAIListRequestOptions,
