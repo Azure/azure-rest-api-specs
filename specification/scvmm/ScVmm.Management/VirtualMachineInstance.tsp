@@ -25,7 +25,7 @@ model VirtualMachineInstance
 
   /** Gets or sets the extended location. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the linter"
-  @visibility("read")
+  @visibility("read", "create")
   extendedLocation: ExtendedLocation;
 }
 
