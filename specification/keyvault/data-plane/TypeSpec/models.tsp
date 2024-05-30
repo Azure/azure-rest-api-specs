@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace KeyVaultClient;
+namespace KeyVault;
 
 /**
  * JsonWebKey Key Type (kty), as defined in
@@ -16,55 +16,74 @@ enum JsonWebKeyType {
   /**
    * Elliptic Curve.
    */
-  EC,
+  EC: "EC",
 
   /**
    * Elliptic Curve with a private key which is stored in the HSM.
    */
-  `EC-HSM`,
+  EC_HSM: "EC-HSM",
 
   /**
    * RSA (https://tools.ietf.org/html/rfc3447)
    */
-  RSA,
+  RSA: "RSA",
 
   /**
    * RSA with a private key which is stored in the HSM.
    */
-  `RSA-HSM`,
+  RSA_HSM: "RSA-HSM",
 
   /**
    * Octet sequence (used to represent symmetric keys)
    */
-  oct,
+  oct: "oct",
 
   /**
    * Octet sequence (used to represent symmetric keys) which is stored the HSM.
    */
-  `oct-HSM`,
+  oct_HSM: "oct-HSM",
 }
 
 /**
  * JSON web key operations. For more information, see JsonWebKeyOperation.
  */
-enum JsonWebKeyOperation {
-  encrypt,
-  decrypt,
-  sign,
-  verify,
-  wrapKey,
-  unwrapKey,
-  `import`,
-  export,
+union JsonWebKeyOperation {
+  string,
+
+  /** Indicates that the key can be used to encrypt. */
+  encrypt: "encrypt",
+
+  /** Indicates that the key can be used to decrypt. */
+  decrypt: "decrypt",
+
+  /** Indicates that the key can be used to sign. */
+  sign: "sign",
+
+  /** Indicates that the key can be used to verify. */
+  verify: "verify",
+
+  /** Indicates that the key can be used to wrap another key. */
+  wrapKey: "wrapKey",
+
+  /** Indicates that the key can be used to unwrap another key. */
+  unwrapKey: "unwrapKey",
+
+  /** Indicates that the key can be imported during creation. */
+  `import`: "import",
+
+  /** Indicates that the private component of the key can be exported. */
+  export: "export",
 }
 
 /**
- * Reflects the deletion recovery level currently in effect for keys in the
- * current vault. If it contains 'Purgeable' the key can be permanently deleted by
- * a privileged user; otherwise, only the system can purge the key, at the end of
- * the retention interval.
+ * Reflects the deletion recovery level currently in effect for certificates in
+ * the current vault. If it contains 'Purgeable', the certificate can be
+ * permanently deleted by a privileged user; otherwise, only the system can purge
+ * the certificate, at the end of the retention interval.
  */
-enum DeletionRecoveryLevel {
+union DeletionRecoveryLevel {
+  string,
+
   /**
    * Denotes a vault state in which deletion is an irreversible operation, without
    * the possibility for recovery. This level corresponds to no protection being
@@ -72,7 +91,7 @@ enum DeletionRecoveryLevel {
    * accepting a Delete operation at the entity level or higher (vault, resource
    * group, subscription etc.)
    */
-  Purgeable,
+  Purgeable: "Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -81,7 +100,7 @@ enum DeletionRecoveryLevel {
    * unless a Purge operation is requested, or the subscription is cancelled. System
    * wil permanently delete it after 90 days, if not recovered
    */
-  `Recoverable+Purgeable`,
+  Recoverable_Purgeable: "Recoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -90,7 +109,7 @@ enum DeletionRecoveryLevel {
    * while the subscription is still available. System wil permanently delete it
    * after 90 days, if not recovered
    */
-  Recoverable,
+  Recoverable: "Recoverable",
 
   /**
    * Denotes a vault and subscription state in which deletion is recoverable within
@@ -98,7 +117,7 @@ enum DeletionRecoveryLevel {
    * not permitted, and in which the subscription itself  cannot be permanently
    * canceled. System wil permanently delete it after 90 days, if not recovered
    */
-  `Recoverable+ProtectedSubscription`,
+  Recoverable_ProtectedSubscription: "Recoverable+ProtectedSubscription",
 
   /**
    * Denotes a vault state in which deletion is recoverable, and which also permits
@@ -107,7 +126,7 @@ enum DeletionRecoveryLevel {
    * the retention interval, unless a Purge operation is requested, or the
    * subscription is cancelled.
    */
-  `CustomizedRecoverable+Purgeable`,
+  CustomizedRecoverable_Purgeable: "CustomizedRecoverable+Purgeable",
 
   /**
    * Denotes a vault state in which deletion is recoverable without the possibility
@@ -116,7 +135,7 @@ enum DeletionRecoveryLevel {
    * deleted entity during the retention interval and while the subscription is
    * still available.
    */
-  CustomizedRecoverable,
+  CustomizedRecoverable: "CustomizedRecoverable",
 
   /**
    * Denotes a vault and subscription state in which deletion is recoverable,
@@ -126,149 +145,191 @@ enum DeletionRecoveryLevel {
    * deleted entity during the retention interval, and also reflects the fact that
    * the subscription itself cannot be cancelled.
    */
-  `CustomizedRecoverable+ProtectedSubscription`,
+  CustomizedRecoverable_ProtectedSubscription: "CustomizedRecoverable+ProtectedSubscription",
 }
 
 /**
  * Elliptic curve name. For valid values, see JsonWebKeyCurveName.
  */
-enum JsonWebKeyCurveName {
-  /**
-   * The NIST P-256 elliptic curve, AKA SECG curve SECP256R1.
-   */
-  `P-256`,
+union JsonWebKeyCurveName {
+  string,
 
-  /**
-   * The NIST P-384 elliptic curve, AKA SECG curve SECP384R1.
-   */
-  `P-384`,
+  /** The NIST P-256 elliptic curve, AKA SECG curve SECP256R1. */
+  P_256: "P-256",
 
-  /**
-   * The NIST P-521 elliptic curve, AKA SECG curve SECP521R1.
-   */
-  `P-521`,
+  /** The NIST P-384 elliptic curve, AKA SECG curve SECP384R1. */
+  P_384: "P-384",
 
-  /**
-   * The SECG SECP256K1 elliptic curve.
-   */
-  `P-256K`,
+  /** The NIST P-521 elliptic curve, AKA SECG curve SECP521R1. */
+  P_521: "P-521",
+
+  /** The SECG SECP256K1 elliptic curve. */
+  P_256K: "P-256K",
 }
 
 /**
- * algorithm identifier
+ * An algorithm used for encryption and decryption.
  */
-enum JsonWebKeyEncryptionAlgorithm {
-  `RSA-OAEP`,
-  `RSA-OAEP-256`,
-  RSA1_5,
-  A128GCM,
-  A192GCM,
-  A256GCM,
-  A128KW,
-  A192KW,
-  A256KW,
-  A128CBC,
-  A192CBC,
-  A256CBC,
-  A128CBCPAD,
-  A192CBCPAD,
-  A256CBCPAD,
+union JsonWebKeyEncryptionAlgorithm {
+  string,
+
+  /**
+   * RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in
+   * https://tools.ietf.org/html/rfc3447, with the default parameters specified by
+   * RFC 3447 in Section A.2.1. Those default parameters are using a hash function
+   * of SHA-1 and a mask generation function of MGF1 with SHA-1.
+   */
+  `RSA-OAEP`: "RSA-OAEP",
+
+  /** RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256
+   * and a mask generation function of MGF1 with SHA-256.
+   */
+  `RSA-OAEP-256`: "RSA-OAEP-256",
+
+  /** RSAES-PKCS1-V1_5 key encryption, as described in https://tools.ietf.org/html/rfc3447. */
+  RSA1_5: "RSA1_5",
+
+  /** 128-bit AES-GCM. */
+  A128GCM: "A128GCM",
+
+  /** 192-bit AES-GCM. */
+  A192GCM: "A192GCM",
+
+  /** 256-bit AES-GCM. */
+  A256GCM: "A256GCM",
+
+  /** 128-bit AES key wrap. */
+  A128KW: "A128KW",
+
+  /** 192-bit AES key wrap. */
+  A192KW: "A192KW",
+
+  /** 256-bit AES key wrap. */
+  A256KW: "A256KW",
+
+  /** 128-bit AES-CBC. */
+  A128CBC: "A128CBC",
+
+  /** 192-bit AES-CBC. */
+  A192CBC: "A192CBC",
+
+  /** 256-bit AES-CBC. */
+  A256CBC: "A256CBC",
+
+  /** 128-bit AES-CBC with PKCS padding. */
+  A128CBCPAD: "A128CBCPAD",
+
+  /** 192-bit AES-CBC with PKCS padding. */
+  A192CBCPAD: "A192CBCPAD",
+
+  /** 256-bit AES-CBC with PKCS padding. */
+  A256CBCPAD: "A256CBCPAD",
 }
 
 /**
  * The signing/verification algorithm identifier. For more information on possible
  * algorithm types, see JsonWebKeySignatureAlgorithm.
  */
-enum JsonWebKeySignatureAlgorithm {
+union JsonWebKeySignatureAlgorithm {
+  string,
+
   /**
    * RSASSA-PSS using SHA-256 and MGF1 with SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  PS256,
+  PS256: "PS256",
 
   /**
    * RSASSA-PSS using SHA-384 and MGF1 with SHA-384, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  PS384,
+  PS384: "PS384",
 
   /**
    * RSASSA-PSS using SHA-512 and MGF1 with SHA-512, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  PS512,
+  PS512: "PS512",
 
   /**
    * RSASSA-PKCS1-v1_5 using SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  RS256,
+  RS256: "RS256",
 
   /**
    * RSASSA-PKCS1-v1_5 using SHA-384, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  RS384,
+  RS384: "RS384",
 
   /**
    * RSASSA-PKCS1-v1_5 using SHA-512, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  RS512,
+  RS512: "RS512",
 
   /**
    * Reserved
    */
-  RSNULL,
+  RSNULL: "RSNULL",
 
   /**
    * ECDSA using P-256 and SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518.
    */
-  ES256,
+  ES256: "ES256",
 
   /**
    * ECDSA using P-384 and SHA-384, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  ES384,
+  ES384: "ES384",
 
   /**
    * ECDSA using P-521 and SHA-512, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  ES512,
+  ES512: "ES512",
 
   /**
    * ECDSA using P-256K and SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  ES256K,
+  ES256K: "ES256K",
 }
 
 /**
  * The encryption algorithm to use to protected the exported key material
  */
-enum KeyEncryptionAlgorithm {
-  CKM_RSA_AES_KEY_WRAP,
-  RSA_AES_KEY_WRAP_256,
-  RSA_AES_KEY_WRAP_384,
+union KeyEncryptionAlgorithm {
+  string,
+
+  /** The CKM_RSA_AES_KEY_WRAP key wrap mechanism. */
+  CKM_RSA_AES_KEY_WRAP: "CKM_RSA_AES_KEY_WRAP",
+
+  /** The RSA_AES_KEY_WRAP_256 key wrap mechanism. */
+  RSA_AES_KEY_WRAP_256: "RSA_AES_KEY_WRAP_256",
+
+  /** The RSA_AES_KEY_WRAP_384 key wrap mechanism. */
+  RSA_AES_KEY_WRAP_384: "RSA_AES_KEY_WRAP_384",
 }
 
 /**
  * The type of the action. The value should be compared case-insensitively.
  */
-@fixed
-enum ActionType {
+union ActionType {
+  string,
+
   /**
    * Rotate the key based on the key policy.
    */
-  Rotate,
+  Rotate: "Rotate",
 
   /**
    * Trigger Event Grid events. Defaults to 30 days before expiry. Key Vault only.
    */
-  Notify,
+  Notify: "Notify",
 }
 
 /**
@@ -653,16 +714,19 @@ model KeyUpdateParameters {
 /**
  * The key list result.
  */
+@friendlyName("KeyListResult")
 model KeyListResult is Azure.Core.Page<KeyItem>;
 
 /**
  * The key item containing key metadata.
  */
+@resource("keys")
 model KeyItem {
   /**
    * Key identifier.
    */
-  kid?: string;
+  @key // The ID isn't really the key; it should be the key name, but we don't have this attribute on the model
+  kid: string;
 
   /**
    * The key management attributes.
@@ -845,13 +909,17 @@ model KeyReleaseResult {
 /**
  * A list of keys that have been deleted in this vault.
  */
+@friendlyName("DeletedKeyListResult")
 model DeletedKeyListResult is Azure.Core.Page<DeletedKeyItem>;
 
 /**
  * The deleted key item containing the deleted key metadata and information about
  * deletion.
  */
-model DeletedKeyItem extends KeyItem {
+@resource("deletedkeys")
+model DeletedKeyItem {
+  ...KeyItem;
+
   /**
    * The url of the recovery object, used to identify and recover the deleted key.
    */
