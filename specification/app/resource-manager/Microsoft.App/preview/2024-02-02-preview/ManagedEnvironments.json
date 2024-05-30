@@ -1720,6 +1720,18 @@
                 "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnection"
               },
               "readOnly": true
+            },
+            "publicNetworkAccess": {
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "description": "Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled'.",
+              "type": "string",
+              "x-ms-enum": {
+                "name": "PublicNetworkAccess",
+                "modelAsString": true
+              }
             }
           },
           "x-ms-client-flatten": true
