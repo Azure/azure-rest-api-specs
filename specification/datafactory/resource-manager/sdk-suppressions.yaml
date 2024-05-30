@@ -4,11 +4,24 @@ suppressions:
       breaking-changes:
         - Model ManagedIdentityCredential no longer has parameter resource_id
         - Model ExpressionV2 no longer has parameter operator
+        - Removed operation group Operations
   azure-sdk-for-go:
     - package: sdk/resourcemanager/datafactory/armdatafactory
       breaking-changes:
         - Enum `ScriptType` has been removed
         - Field `Operator` of struct `ExpressionV2` has been removed
+        - Function `*ClientFactory.NewOperationsClient` has been removed
+        - Function `*OperationsClient.NewListPager` has been removed
+        - Function `NewOperationsClient` has been removed
+        - Struct `OperationDisplay` has been removed
+        - Struct `OperationListResponse` has been removed
+        - Struct `OperationLogSpecification` has been removed
+        - Struct `OperationMetricAvailability` has been removed
+        - Struct `OperationMetricDimension` has been removed
+        - Struct `OperationMetricSpecification` has been removed
+        - Struct `OperationProperties` has been removed
+        - Struct `OperationServiceSpecification` has been removed
+        - Struct `Operation` has been removed
   azure-sdk-for-js:
     - package: "@azure/arm-datafactory"
       breaking-changes:
@@ -20,3 +33,5 @@ suppressions:
         - Type of parameter type of interface ScriptActivityScriptBlock is changed from ScriptType to any
         - Type of parameter value of interface CredentialListResponse is changed from ManagedIdentityCredentialResource[] to CredentialResource[]
         - Interface ExpressionV2 no longer has parameter operator
+        - Class DataFactoryManagementClient no longer has parameter operations
+        - Removed operation group Operations
