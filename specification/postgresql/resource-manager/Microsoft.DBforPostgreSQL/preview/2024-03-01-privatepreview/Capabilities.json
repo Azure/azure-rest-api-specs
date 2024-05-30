@@ -555,6 +555,19 @@
             "name": "restrictedEnum",
             "modelAsString": true
           }
+        },
+        "indexTuningSupported": {
+          "type": "string",
+          "description": "A value indicating whether in this region for the given subscription or server sku/version/replica-role has index tuning supported. \"Enabled\" means index tuning is supported. \"Disabled\" stands for index tuning is not supported.",
+          "readOnly": true,
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "fastProvisioningSupportedEnum",
+            "modelAsString": true
+          }
         }
       },
       "description": "Capability for the PostgreSQL server"
