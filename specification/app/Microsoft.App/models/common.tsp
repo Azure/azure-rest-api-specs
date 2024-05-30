@@ -56,6 +56,7 @@ model ResourceGroupNameParameter {
   @path
   @maxLength(90)
   @minLength(1)
+  @extension("x-ms-parameter-location", "client")
   resourceGroupName: string;
 }
 
@@ -63,6 +64,7 @@ model ResourceGroupNameParameter {
 model SessionPoolNameParameter {
   @doc("The name of the session pool.")
   @path
+  @extension("x-ms-parameter-location", "client")
   sessionPoolName: string;
 }
 
