@@ -1,22 +1,40 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.Core;
+using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace KeyVaultClient;
+namespace KeyVault;
+
+alias KeyVaultOperations = StandardResourceOperations;
+
+alias KeyVaultListParameters = ListQueryParametersTrait<{
+  /**
+   * Maximum number of results to return in a page. If not specified the service
+   * will return up to 25 results.
+   */
+  @maxValue(25)
+  @minValue(1)
+  @query("maxresults")
+  maxresults?: int32;
+}>;
 
 /**
  * The create key operation can be used to create any key type in Azure Key Vault.
  * If the named key already exists, Azure Key Vault creates a new version of the
  * key. It requires the keys/create permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
 Creates a new key, stores it, then returns key parameters and attributes to the
 client.
 """)
-@route("/keys/{key-name}/create")
+@route("/keys/{keyName}/create")
 @post
 op createKey is Azure.Core.Foundations.Operation<
   {
@@ -28,12 +46,14 @@ op createKey is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * The parameters to create a key.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: KeyCreateParameters;
   },
   KeyBundle
@@ -43,11 +63,12 @@ op createKey is Azure.Core.Foundations.Operation<
  * The operation will rotate the key based on the key policy. It requires the
  * keys/rotate permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
 Creates a new key version, stores it, then returns key parameters, attributes
 and policy to the client.
 """)
-@route("/keys/{key-name}/rotate")
+@route("/keys/{keyName}/rotate")
 @post
 op rotateKey is Azure.Core.Foundations.Operation<
   {
@@ -57,7 +78,7 @@ op rotateKey is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path
-    `key-name`: string;
+    keyName: string;
   },
   KeyBundle
 >;
@@ -67,11 +88,12 @@ op rotateKey is Azure.Core.Foundations.Operation<
  * Vault. If the named key already exists, Azure Key Vault creates a new version
  * of the key. This operation requires the keys/import permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
 Imports an externally created key, stores it, and returns key parameters and
 attributes to the client.
 """)
-@route("/keys/{key-name}")
+@route("/keys/{keyName}")
 @put
 op importKey is Azure.Core.Foundations.Operation<
   {
@@ -82,12 +104,14 @@ op importKey is Azure.Core.Foundations.Operation<
      */
     @pattern("^[0-9a-zA-Z-]+$")
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * The parameters to import a key.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: KeyImportParameters;
   },
   KeyBundle
@@ -99,8 +123,9 @@ op importKey is Azure.Core.Foundations.Operation<
  * which means the key is not usable for Sign/Verify, Wrap/Unwrap or
  * Encrypt/Decrypt operations. This operation requires the keys/delete permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Deletes a key of any type from storage in Azure Key Vault.")
-@route("/keys/{key-name}")
+@route("/keys/{keyName}")
 @delete
 op deleteKey is Azure.Core.Foundations.Operation<
   {
@@ -108,7 +133,7 @@ op deleteKey is Azure.Core.Foundations.Operation<
      * The name of the key to delete.
      */
     @path
-    `key-name`: string;
+    keyName: string;
   },
   DeletedKeyBundle
 >;
@@ -118,11 +143,12 @@ op deleteKey is Azure.Core.Foundations.Operation<
  * Vault. Note: The cryptographic material of a key itself cannot be changed. This
  * operation requires the keys/update permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
 The update key operation changes specified attributes of a stored key and can
 be applied to any key type and key version stored in Azure Key Vault.
 """)
-@route("/keys/{key-name}/{key-version}")
+@route("/keys/{keyName}/{keyVersion}")
 @patch
 op updateKey is Azure.Core.Foundations.Operation<
   {
@@ -130,18 +156,20 @@ op updateKey is Azure.Core.Foundations.Operation<
      * The name of key to update.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * The version of the key to update.
      */
     @path
-    `key-version`: string;
+    keyVersion: string;
 
     /**
      * The parameters of the key to update.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: KeyUpdateParameters;
   },
   KeyBundle
@@ -152,8 +180,9 @@ op updateKey is Azure.Core.Foundations.Operation<
  * symmetric, then no key material is released in the response. This operation
  * requires the keys/get permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the public part of a stored key.")
-@route("/keys/{key-name}/{key-version}")
+@route("/keys/{keyName}/{keyVersion}")
 @get
 op getKey is Azure.Core.Foundations.Operation<
   {
@@ -161,7 +190,7 @@ op getKey is Azure.Core.Foundations.Operation<
      * The name of the key to get.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * Adding the version parameter retrieves a specific version of a key. This URI
@@ -169,7 +198,7 @@ op getKey is Azure.Core.Foundations.Operation<
      * returned.
      */
     @path
-    `key-version`: string;
+    keyVersion: string;
   },
   KeyBundle
 >;
@@ -178,8 +207,9 @@ op getKey is Azure.Core.Foundations.Operation<
  * The full key identifier, attributes, and tags are provided in the response.
  * This operation requires the keys/list permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Retrieves a list of individual key versions with the same key name.")
-@route("/keys/{key-name}/versions")
+@route("/keys/{keyName}/versions")
 @get
 op getKeyVersions is Azure.Core.Foundations.Operation<
   {
@@ -187,7 +217,7 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * Maximum number of results to return in a page. If not specified the service
@@ -209,21 +239,7 @@ op getKeyVersions is Azure.Core.Foundations.Operation<
  * response. This operation requires the keys/list permission.
  */
 @summary("List keys in the specified vault.")
-@route("/keys")
-@get
-op getKeys is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
-     */
-    @maxValue(25)
-    @minValue(1)
-    @query("maxresults")
-    maxresults?: int32;
-  },
-  KeyListResult
->;
+op getKeys is KeyVaultOperations.ResourceList<KeyItem, KeyVaultListParameters>;
 
 /**
  * The Key Backup operation exports a key from Azure Key Vault in a protected
@@ -240,8 +256,9 @@ op getKeys is Azure.Core.Foundations.Operation<
  * be restored in an EU geographical area. This operation requires the key/backup
  * permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Requests that a backup of the specified key be downloaded to the client.")
-@route("/keys/{key-name}/backup")
+@route("/keys/{keyName}/backup")
 @post
 op backupKey is Azure.Core.Foundations.Operation<
   {
@@ -249,7 +266,7 @@ op backupKey is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path
-    `key-name`: string;
+    keyName: string;
   },
   BackupKeyResult
 >;
@@ -268,11 +285,18 @@ op backupKey is Azure.Core.Foundations.Operation<
  * the source Key Vault The user must have RESTORE permission in the target Key
  * Vault. This operation requires the keys/restore permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Restores a backed up key to a vault.")
 @route("/keys/restore")
 @post
 op restoreKey is Azure.Core.Foundations.Operation<
-  KeyRestoreParameters,
+  {
+    /** The parameters to restore the key. */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    @body
+    @flattenProperty
+    parameters: KeyRestoreParameters;
+  },
   KeyBundle
 >;
 
@@ -287,11 +311,12 @@ op restoreKey is Azure.Core.Foundations.Operation<
  * convenience for callers that have a key-reference but do not have access to the
  * public key material. This operation requires the keys/encrypt permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
 Encrypts an arbitrary sequence of bytes using an encryption key that is stored
 in a key vault.
 """)
-@route("/keys/{key-name}/{key-version}/encrypt")
+@route("/keys/{keyName}/{keyVersion}/encrypt")
 @post
 op encrypt is Azure.Core.Foundations.Operation<
   {
@@ -299,18 +324,20 @@ op encrypt is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * The version of the key.
      */
     @path
-    `key-version`: string;
+    keyVersion: string;
 
     /**
      * The parameters for the encryption operation.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -329,8 +356,9 @@ op encrypt is Azure.Core.Foundations.Operation<
  * https://docs.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode
  * for more information.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Decrypts a single block of encrypted data.")
-@route("/keys/{key-name}/{key-version}/decrypt")
+@route("/keys/{keyName}/{keyVersion}/decrypt")
 @post
 op decrypt is Azure.Core.Foundations.Operation<
   {
@@ -338,18 +366,20 @@ op decrypt is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * The version of the key.
      */
     @path
-    `key-version`: string;
+    keyVersion: string;
 
     /**
      * The parameters for the decryption operation.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -360,8 +390,9 @@ op decrypt is Azure.Core.Foundations.Operation<
  * Azure Key Vault since this operation uses the private portion of the key. This
  * operation requires the keys/sign permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Creates a signature from a digest using the specified key.")
-@route("/keys/{key-name}/{key-version}/sign")
+@route("/keys/{keyName}/{keyVersion}/sign")
 @post
 op sign is Azure.Core.Foundations.Operation<
   {
@@ -369,18 +400,20 @@ op sign is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * The version of the key.
      */
     @path
-    `key-version`: string;
+    keyVersion: string;
 
     /**
      * The parameters for the signing operation.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: KeySignParameters;
   },
   KeyOperationResult
@@ -394,8 +427,9 @@ op sign is Azure.Core.Foundations.Operation<
  * a key-reference and not the public portion of the key. This operation requires
  * the keys/verify permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Verifies a signature using a specified key.")
-@route("/keys/{key-name}/{key-version}/verify")
+@route("/keys/{keyName}/{keyVersion}/verify")
 @post
 op verify is Azure.Core.Foundations.Operation<
   {
@@ -403,18 +437,20 @@ op verify is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * The version of the key.
      */
     @path
-    `key-version`: string;
+    keyVersion: string;
 
     /**
      * The parameters for verify operations.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: KeyVerifyParameters;
   },
   KeyVerifyResult
@@ -429,8 +465,9 @@ op verify is Azure.Core.Foundations.Operation<
  * convenience for callers that have a key-reference but do not have access to the
  * public key material. This operation requires the keys/wrapKey permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Wraps a symmetric key using a specified key.")
-@route("/keys/{key-name}/{key-version}/wrapkey")
+@route("/keys/{keyName}/{keyVersion}/wrapkey")
 @post
 op wrapKey is Azure.Core.Foundations.Operation<
   {
@@ -438,18 +475,20 @@ op wrapKey is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * The version of the key.
      */
     @path
-    `key-version`: string;
+    keyVersion: string;
 
     /**
      * The parameters for wrap operation.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -462,11 +501,12 @@ op wrapKey is Azure.Core.Foundations.Operation<
  * Vault since it uses the private portion of the key. This operation requires the
  * keys/unwrapKey permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("""
 Unwraps a symmetric key using the specified key that was initially used for
 wrapping that key.
 """)
-@route("/keys/{key-name}/{key-version}/unwrapkey")
+@route("/keys/{keyName}/{keyVersion}/unwrapkey")
 @post
 op unwrapKey is Azure.Core.Foundations.Operation<
   {
@@ -474,18 +514,20 @@ op unwrapKey is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * The version of the key.
      */
     @path
-    `key-version`: string;
+    keyVersion: string;
 
     /**
      * The parameters for the key operation.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: KeyOperationsParameters;
   },
   KeyOperationResult
@@ -495,8 +537,9 @@ op unwrapKey is Azure.Core.Foundations.Operation<
  * The release key operation is applicable to all key types. The target key must
  * be marked exportable. This operation requires the keys/release permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Releases a key.")
-@route("/keys/{key-name}/{key-version}/release")
+@route("/keys/{keyName}/{keyVersion}/release")
 @post
 op release is Azure.Core.Foundations.Operation<
   {
@@ -504,18 +547,20 @@ op release is Azure.Core.Foundations.Operation<
      * The name of the key to get.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * Adding the version parameter retrieves a specific version of a key.
      */
     @path
-    `key-version`: string;
+    keyVersion: string;
 
     /**
      * The parameters for the key release operation.
      */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
+    @flattenProperty
     parameters: KeyReleaseParameters;
   },
   KeyReleaseResult
@@ -530,20 +575,9 @@ op release is Azure.Core.Foundations.Operation<
  * This operation requires the keys/list permission.
  */
 @summary("Lists the deleted keys in the specified vault.")
-@route("/deletedkeys")
-@get
-op getDeletedKeys is Azure.Core.Foundations.Operation<
-  {
-    /**
-     * Maximum number of results to return in a page. If not specified the service
-     * will return up to 25 results.
-     */
-    @maxValue(25)
-    @minValue(1)
-    @query("maxresults")
-    maxresults?: int32;
-  },
-  DeletedKeyListResult
+op getDeletedKeys is KeyVaultOperations.ResourceList<
+  DeletedKeyItem,
+  KeyVaultListParameters
 >;
 
 /**
@@ -552,8 +586,9 @@ op getDeletedKeys is Azure.Core.Foundations.Operation<
  * invoked on a non soft-delete enabled vault. This operation requires the
  * keys/get permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Gets the public part of a deleted key.")
-@route("/deletedkeys/{key-name}")
+@route("/deletedkeys/{keyName}")
 @get
 op getDeletedKey is Azure.Core.Foundations.Operation<
   {
@@ -561,7 +596,7 @@ op getDeletedKey is Azure.Core.Foundations.Operation<
      * The name of the key.
      */
     @path
-    `key-name`: string;
+    keyName: string;
   },
   DeletedKeyBundle
 >;
@@ -572,8 +607,9 @@ op getDeletedKey is Azure.Core.Foundations.Operation<
  * invoked on a non soft-delete enabled vault. This operation requires the
  * keys/purge permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Permanently deletes the specified key.")
-@route("/deletedkeys/{key-name}")
+@route("/deletedkeys/{keyName}")
 @delete
 op purgeDeletedKey is Azure.Core.Foundations.Operation<
   {
@@ -581,7 +617,7 @@ op purgeDeletedKey is Azure.Core.Foundations.Operation<
      * The name of the key
      */
     @path
-    `key-name`: string;
+    keyName: string;
   },
   void
 >;
@@ -593,8 +629,9 @@ op purgeDeletedKey is Azure.Core.Foundations.Operation<
  * this the inverse of the delete operation on soft-delete enabled vaults. This
  * operation requires the keys/recover permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Recovers the deleted key to its latest version.")
-@route("/deletedkeys/{key-name}/recover")
+@route("/deletedkeys/{keyName}/recover")
 @post
 op recoverDeletedKey is Azure.Core.Foundations.Operation<
   {
@@ -602,7 +639,7 @@ op recoverDeletedKey is Azure.Core.Foundations.Operation<
      * The name of the deleted key.
      */
     @path
-    `key-name`: string;
+    keyName: string;
   },
   KeyBundle
 >;
@@ -611,8 +648,9 @@ op recoverDeletedKey is Azure.Core.Foundations.Operation<
  * The GetKeyRotationPolicy operation returns the specified key policy resources
  * in the specified key vault. This operation requires the keys/get permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Lists the policy for a key.")
-@route("/keys/{key-name}/rotationpolicy")
+@route("/keys/{keyName}/rotationpolicy")
 @get
 op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
   {
@@ -620,7 +658,7 @@ op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
      * The name of the key in a given key vault.
      */
     @path
-    `key-name`: string;
+    keyName: string;
   },
   KeyRotationPolicy
 >;
@@ -629,8 +667,9 @@ op getKeyRotationPolicy is Azure.Core.Foundations.Operation<
  * Set specified members in the key policy. Leave others as undefined. This
  * operation requires the keys/update permission.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the rotation policy for a key.")
-@route("/keys/{key-name}/rotationpolicy")
+@route("/keys/{keyName}/rotationpolicy")
 @put
 op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
   {
@@ -638,7 +677,7 @@ op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
      * The name of the key in the given vault.
      */
     @path
-    `key-name`: string;
+    keyName: string;
 
     /**
      * The policy for the key.
@@ -652,10 +691,17 @@ op updateKeyRotationPolicy is Azure.Core.Foundations.Operation<
 /**
  * Get the requested number of bytes containing random values from a managed HSM.
  */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Get the requested number of bytes containing random values.")
 @route("/rng")
 @post
 op getRandomBytes is Azure.Core.Foundations.Operation<
-  GetRandomBytesRequest,
+  {
+    /** The request object to get random bytes. */
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
+    @body
+    @flattenProperty
+    parameters: GetRandomBytesRequest;
+  },
   RandomBytes
 >;
