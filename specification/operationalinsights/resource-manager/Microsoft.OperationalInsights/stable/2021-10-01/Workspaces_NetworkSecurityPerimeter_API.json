@@ -100,7 +100,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+            "$ref": "#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
           }
         ],
         "responses": {
@@ -145,7 +145,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+            "$ref": "#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
           }
         ],
         "responses": {
@@ -177,5 +177,17 @@
     }
   },
   "definitions": {},
-  "parameters": {}
+  "parameters": {
+    "NetworkSecurityPerimeterConfigurationNameParameter": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "minLength": 1,
+      "maxLength": 512,
+      "x-ms-parameter-location": "method",
+      "description": "The name for a network security perimeter configuration"
+    }
+  }
 }
