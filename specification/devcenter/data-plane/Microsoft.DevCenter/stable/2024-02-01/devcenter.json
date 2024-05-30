@@ -467,7 +467,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -4285,7 +4285,11 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the environment type."
+          "description": "Name of the environment type.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+          "readOnly": true
         },
         "deploymentTargetId": {
           "type": "string",
