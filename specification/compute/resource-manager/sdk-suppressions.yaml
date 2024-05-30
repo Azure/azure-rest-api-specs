@@ -7,3 +7,8 @@ suppressions:
     - package: sdk/resourcemanager/compute/armcompute
       breaking-changes:
         - Type of `SecurityPostureReference.ExcludeExtensions` has been changed from `[]*VirtualMachineExtension` to `[]*string`
+  azure-sdk-for-js:
+    - package: "@azure/arm-compute"
+      breaking-changes:
+        - Parameter id of interface SecurityPostureReference is now required
+        - Type of parameter excludeExtensions of interface SecurityPostureReference is changed from VirtualMachineExtension[] to string[]
