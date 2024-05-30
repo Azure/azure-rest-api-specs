@@ -21,19 +21,6 @@ using Azure.Core;
 @service({
   title: "AI Model Inference",
 })
-// Is this the right way to do this? This results in an error in the emitted Python code.
-// @server(
-//   "{endpoint}",
-//   "An AI endpoint that does chat completions or embeddings",
-//   {
-//     @doc("The AI model service endpoint.")
-//     endpoint: string,
-//
-//     @doc("Controls what happens if extra parameters are passed in the request payload.")
-//     @header("unknown-parameters")
-//     unknown_params?: UnknownParams,
-//   }
-// )
 @versioned(ModelClient.Versions)
 namespace ModelClient;
 

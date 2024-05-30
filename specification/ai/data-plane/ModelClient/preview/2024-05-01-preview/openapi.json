@@ -53,8 +53,8 @@
             "type": "string",
             "enum": [
               "error",
-              "ignore",
-              "allow"
+              "drop",
+              "pass_through"
             ],
             "x-ms-enum": {
               "name": "UnknownParams",
@@ -63,16 +63,16 @@
                 {
                   "name": "error",
                   "value": "error",
-                  "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
+                  "description": "The service will error if it detected unknown parameters in the request payload. This is the service default."
                 },
                 {
-                  "name": "ignore",
-                  "value": "ignore",
+                  "name": "drop",
+                  "value": "drop",
                   "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
                 },
                 {
-                  "name": "allow",
-                  "value": "allow",
+                  "name": "pass_through",
+                  "value": "pass_through",
                   "description": "The service will pass unknown parameters to the back-end AI model."
                 }
               ]
@@ -220,8 +220,8 @@
             "type": "string",
             "enum": [
               "error",
-              "ignore",
-              "allow"
+              "drop",
+              "pass_through"
             ],
             "x-ms-enum": {
               "name": "UnknownParams",
@@ -230,16 +230,16 @@
                 {
                   "name": "error",
                   "value": "error",
-                  "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
+                  "description": "The service will error if it detected unknown parameters in the request payload. This is the service default."
                 },
                 {
-                  "name": "ignore",
-                  "value": "ignore",
+                  "name": "drop",
+                  "value": "drop",
                   "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
                 },
                 {
-                  "name": "allow",
-                  "value": "allow",
+                  "name": "pass_through",
+                  "value": "pass_through",
                   "description": "The service will pass unknown parameters to the back-end AI model."
                 }
               ]
@@ -326,8 +326,8 @@
             "type": "string",
             "enum": [
               "error",
-              "ignore",
-              "allow"
+              "drop",
+              "pass_through"
             ],
             "x-ms-enum": {
               "name": "UnknownParams",
@@ -336,16 +336,16 @@
                 {
                   "name": "error",
                   "value": "error",
-                  "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
+                  "description": "The service will error if it detected unknown parameters in the request payload. This is the service default."
                 },
                 {
-                  "name": "ignore",
-                  "value": "ignore",
+                  "name": "drop",
+                  "value": "drop",
                   "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
                 },
                 {
-                  "name": "allow",
-                  "value": "allow",
+                  "name": "pass_through",
+                  "value": "pass_through",
                   "description": "The service will pass unknown parameters to the back-end AI model."
                 }
               ]
@@ -1332,8 +1332,8 @@
       "description": "Controls what happens if unknown parameters are passed in the JSON request payload.",
       "enum": [
         "error",
-        "ignore",
-        "allow"
+        "drop",
+        "pass_through"
       ],
       "x-ms-enum": {
         "name": "UnknownParams",
@@ -1342,16 +1342,16 @@
           {
             "name": "error",
             "value": "error",
-            "description": "The service will error if it detected unknown parameters in the request payload. This is the default."
+            "description": "The service will error if it detected unknown parameters in the request payload. This is the service default."
           },
           {
-            "name": "ignore",
-            "value": "ignore",
+            "name": "drop",
+            "value": "drop",
             "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
           },
           {
-            "name": "allow",
-            "value": "allow",
+            "name": "pass_through",
+            "value": "pass_through",
             "description": "The service will pass unknown parameters to the back-end AI model."
           }
         ]

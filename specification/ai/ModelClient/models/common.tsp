@@ -149,14 +149,14 @@ alias AdditionalRequestHeaders = {
 union UnknownParams {
   string,
 
-  @doc("The service will error if it detected unknown parameters in the request payload. This is the default.")
+  @doc("The service will error if it detected unknown parameters in the request payload. This is the service default.")
   error: "error",
 
   @doc("The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
-  ignore: "ignore",
+  drop: "drop",
 
   @doc("The service will pass unknown parameters to the back-end AI model.")
-  allow: "allow",
+  pass_through: "pass_through",
 }
 
 alias CapacityAlias = {
