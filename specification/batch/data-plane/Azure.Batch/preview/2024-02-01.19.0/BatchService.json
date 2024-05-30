@@ -51,11 +51,33 @@
       }
     }
   },
-  "tags": [],
+  "tags": [
+    {
+      "name": "Application"
+    },
+    {
+      "name": "Pool"
+    },
+    {
+      "name": "Job"
+    },
+    {
+      "name": "Job Schedule"
+    },
+    {
+      "name": "Task"
+    },
+    {
+      "name": "Node"
+    }
+  ],
   "paths": {
     "/applications": {
       "get": {
-        "operationId": "Batch_ListApplications",
+        "operationId": "Application_ListApplications",
+        "tags": [
+          "Application"
+        ],
         "summary": "Lists all of the applications available in the specified Account.",
         "description": "This operation returns only Applications and versions that are available for\nuse on Compute Nodes; that is, that can be used in an Package reference. For\nadministrator information about applications and versions that are not yet\navailable to Compute Nodes, use the Azure portal or the Azure Resource Manager\nAPI.",
         "parameters": [
@@ -144,7 +166,7 @@
         },
         "x-ms-examples": {
           "List applications": {
-            "$ref": "./examples/ApplicationList.json"
+            "$ref": "./examples/Application_ListApplications.json"
           }
         },
         "x-ms-pageable": {
@@ -154,7 +176,10 @@
     },
     "/applications/{applicationId}": {
       "get": {
-        "operationId": "Batch_GetApplication",
+        "operationId": "Application_GetApplication",
+        "tags": [
+          "Application"
+        ],
         "summary": "Gets information about the specified Application.",
         "description": "This operation returns only Applications and versions that are available for\nuse on Compute Nodes; that is, that can be used in an Package reference. For\nadministrator information about Applications and versions that are not yet\navailable to Compute Nodes, use the Azure portal or the Azure Resource Manager\nAPI.",
         "parameters": [
@@ -239,14 +264,17 @@
         },
         "x-ms-examples": {
           "Get applications": {
-            "$ref": "./examples/ApplicationGet.json"
+            "$ref": "./examples/Application_GetApplication.json"
           }
         }
       }
     },
     "/jobs": {
       "get": {
-        "operationId": "Batch_ListJobs",
+        "operationId": "Job_ListJobs",
+        "tags": [
+          "Job"
+        ],
         "summary": "Lists all of the Jobs in the specified Account.",
         "description": "Lists all of the Jobs in the specified Account.",
         "parameters": [
@@ -364,7 +392,7 @@
         },
         "x-ms-examples": {
           "Job list": {
-            "$ref": "./examples/JobList.json"
+            "$ref": "./examples/Job_ListJobs.json"
           }
         },
         "x-ms-pageable": {
@@ -372,7 +400,10 @@
         }
       },
       "post": {
-        "operationId": "Batch_CreateJob",
+        "operationId": "Job_CreateJob",
+        "tags": [
+          "Job"
+        ],
         "summary": "Creates a Job to the specified Account.",
         "description": "The Batch service supports two ways to control the work done as part of a Job.\nIn the first approach, the user specifies a Job Manager Task. The Batch service\nlaunches this Task when it is ready to start the Job. The Job Manager Task\ncontrols all other Tasks that run under this Job, by using the Task APIs. In\nthe second approach, the user directly controls the execution of Tasks under an\nactive Job, by using the Task APIs. Also note: when naming Jobs, avoid\nincluding sensitive information such as user names or secret project names.\nThis information may appear in telemetry logs accessible to Microsoft Support\nengineers.",
         "consumes": [
@@ -463,17 +494,20 @@
         },
         "x-ms-examples": {
           "Creates a basic job": {
-            "$ref": "./examples/JobCreate_Basic.json"
+            "$ref": "./examples/Job_CreateJob_Basic.json"
           },
           "Creates a complex job": {
-            "$ref": "./examples/JobCreate_Complex.json"
+            "$ref": "./examples/Job_CreateJob_Complex.json"
           }
         }
       }
     },
     "/jobs/{jobId}": {
       "get": {
-        "operationId": "Batch_GetJob",
+        "operationId": "Job_GetJob",
+        "tags": [
+          "Job"
+        ],
         "summary": "Gets information about the specified Job.",
         "description": "Gets information about the specified Job.",
         "parameters": [
@@ -614,12 +648,15 @@
         },
         "x-ms-examples": {
           "Job get": {
-            "$ref": "./examples/JobGet.json"
+            "$ref": "./examples/Job_GetJob.json"
           }
         }
       },
       "put": {
-        "operationId": "Batch_ReplaceJob",
+        "operationId": "Job_ReplaceJob",
+        "tags": [
+          "Job"
+        ],
         "summary": "Updates the properties of the specified Job.",
         "description": "This fully replaces all the updatable properties of the Job. For example, if\nthe Job has constraints associated with it and if constraints is not specified\nwith this request, then the Batch service will remove the existing constraints.",
         "consumes": [
@@ -750,13 +787,16 @@
           }
         },
         "x-ms-examples": {
-          "Job update": {
-            "$ref": "./examples/JobUpdate.json"
+          "Job patch": {
+            "$ref": "./examples/Job_ReplaceJob.json"
           }
         }
       },
       "patch": {
-        "operationId": "Batch_UpdateJob",
+        "operationId": "Job_UpdateJob",
+        "tags": [
+          "Job"
+        ],
         "summary": "Updates the properties of the specified Job.",
         "description": "This replaces only the Job properties specified in the request. For example, if\nthe Job has constraints, and a request does not specify the constraints\nelement, then the Job keeps the existing constraints.",
         "consumes": [
@@ -887,13 +927,16 @@
           }
         },
         "x-ms-examples": {
-          "Job patch": {
-            "$ref": "./examples/JobPatch.json"
+          "Job update": {
+            "$ref": "./examples/Job_UpdateJob.json"
           }
         }
       },
       "delete": {
-        "operationId": "Batch_DeleteJob",
+        "operationId": "Job_DeleteJob",
+        "tags": [
+          "Job"
+        ],
         "summary": "Deletes a Job.",
         "description": "Deleting a Job also deletes all Tasks that are part of that Job, and all Job\nstatistics. This also overrides the retention period for Task data; that is, if\nthe Job contains Tasks which are still retained on Compute Nodes, the Batch\nservices deletes those Tasks' working directories and all their contents.  When\na Delete Job request is received, the Batch service sets the Job to the\ndeleting state. All update operations on a Job that is in deleting state will\nfail with status code 409 (Conflict), with additional information indicating\nthat the Job is being deleted.",
         "parameters": [
@@ -1000,14 +1043,17 @@
         },
         "x-ms-examples": {
           "Delete Job": {
-            "$ref": "./examples/JobDelete.json"
+            "$ref": "./examples/Job_DeleteJob.json"
           }
         }
       }
     },
     "/jobs/{jobId}/addtaskcollection": {
       "post": {
-        "operationId": "Batch_CreateTaskCollection",
+        "operationId": "Task_CreateTaskCollection",
+        "tags": [
+          "Task"
+        ],
         "summary": "Adds a collection of Tasks to the specified Job.",
         "description": "Note that each Task must have a unique ID. The Batch service may not return the\nresults for each Task in the same order the Tasks were submitted in this\nrequest. If the server times out or the connection is closed during the\nrequest, the request may have been partially or fully processed, or not at all.\nIn such cases, the user should re-issue the request. Note that it is up to the\nuser to correctly handle failures when re-issuing a request. For example, you\nshould use the same Task IDs during a retry so that if the prior operation\nsucceeded, the retry will not create extra Tasks unexpectedly. If the response\ncontains any Tasks which failed to add, a client can retry the request. In a\nretry, it is most efficient to resubmit only Tasks that failed to add, and to\nomit Tasks that were successfully added on the first attempt. The maximum\nlifetime of a Task from addition to completion is 180 days. If a Task has not\ncompleted within 180 days of being added it will be terminated by the Batch\nservice and left in whatever state it was in at that time.",
         "consumes": [
@@ -1104,17 +1150,20 @@
         },
         "x-ms-examples": {
           "Creates a basic collection of tasks": {
-            "$ref": "./examples/TaskCreateCollection_Basic.json"
+            "$ref": "./examples/Task_CreateTaskCollection_Basic.json"
           },
           "Creates a complex collection of tasks": {
-            "$ref": "./examples/TaskCreateCollection_Complex.json"
+            "$ref": "./examples/Task_CreateTaskCollection_Complex.json"
           }
         }
       }
     },
     "/jobs/{jobId}/disable": {
       "post": {
-        "operationId": "Batch_DisableJob",
+        "operationId": "Job_DisableJob",
+        "tags": [
+          "Job"
+        ],
         "summary": "Disables the specified Job, preventing new Tasks from running.",
         "description": "The Batch Service immediately moves the Job to the disabling state. Batch then\nuses the disableTasks parameter to determine what to do with the currently\nrunning Tasks of the Job. The Job remains in the disabling state until the\ndisable operation is completed and all Tasks have been dealt with according to\nthe disableTasks option; the Job then moves to the disabled state. No new Tasks\nare started under the Job until it moves back to active state. If you try to\ndisable a Job that is in any state other than active, disabling, or disabled,\nthe request fails with status code 409.",
         "consumes": [
@@ -1246,14 +1295,17 @@
         },
         "x-ms-examples": {
           "Job disable": {
-            "$ref": "./examples/JobDisable.json"
+            "$ref": "./examples/Job_DisableJob.json"
           }
         }
       }
     },
     "/jobs/{jobId}/enable": {
       "post": {
-        "operationId": "Batch_EnableJob",
+        "operationId": "Job_EnableJob",
+        "tags": [
+          "Job"
+        ],
         "summary": "Enables the specified Job, allowing new Tasks to run.",
         "description": "When you call this API, the Batch service sets a disabled Job to the enabling\nstate. After the this operation is completed, the Job moves to the active\nstate, and scheduling of new Tasks under the Job resumes. The Batch service\ndoes not allow a Task to remain in the active state for more than 180 days.\nTherefore, if you enable a Job containing active Tasks which were added more\nthan 180 days ago, those Tasks will not run.",
         "parameters": [
@@ -1373,14 +1425,17 @@
         },
         "x-ms-examples": {
           "Job enable": {
-            "$ref": "./examples/JobEnable.json"
+            "$ref": "./examples/Job_EnableJob.json"
           }
         }
       }
     },
     "/jobs/{jobId}/jobpreparationandreleasetaskstatus": {
       "get": {
-        "operationId": "Batch_ListJobPreparationAndReleaseTaskStatus",
+        "operationId": "Job_ListJobPreparationAndReleaseTaskStatus",
+        "tags": [
+          "Job"
+        ],
         "summary": "Lists the execution status of the Job Preparation and Job Release Task for the\nspecified Job across the Compute Nodes where the Job has run.",
         "description": "This API returns the Job Preparation and Job Release Task status on all Compute\nNodes that have run the Job Preparation or Job Release Task. This includes\nCompute Nodes which have since been removed from the Pool. If this API is\ninvoked on a Job which has no Job Preparation or Job Release Task, the Batch\nservice returns HTTP status code 409 (Conflict) with an error code of\nJobPreparationTaskNotSpecified.",
         "parameters": [
@@ -1494,7 +1549,7 @@
         },
         "x-ms-examples": {
           "Job list preparation and release task status": {
-            "$ref": "./examples/JobListPreparationAndReleaseTaskStatus.json"
+            "$ref": "./examples/Job_ListJobPreparationAndReleaseTaskStatus.json"
           }
         },
         "x-ms-pageable": {
@@ -1504,7 +1559,10 @@
     },
     "/jobs/{jobId}/taskcounts": {
       "get": {
-        "operationId": "Batch_GetJobTaskCounts",
+        "operationId": "Job_GetJobTaskCounts",
+        "tags": [
+          "Job"
+        ],
         "summary": "Gets the Task counts for the specified Job.",
         "description": "Task counts provide a count of the Tasks by active, running or completed Task\nstate, and a count of Tasks which succeeded or failed. Tasks in the preparing\nstate are counted as running. Note that the numbers returned may not always be\nup to date. If you need exact task counts, use a list query.",
         "parameters": [
@@ -1589,14 +1647,17 @@
         },
         "x-ms-examples": {
           "Job get task counts": {
-            "$ref": "./examples/JobGetTaskCounts.json"
+            "$ref": "./examples/Job_GetJobTaskCounts.json"
           }
         }
       }
     },
     "/jobs/{jobId}/tasks": {
       "get": {
-        "operationId": "Batch_ListTasks",
+        "operationId": "Task_ListTasks",
+        "tags": [
+          "Task"
+        ],
         "summary": "Lists all of the Tasks that are associated with the specified Job.",
         "description": "For multi-instance Tasks, information such as affinityId, executionInfo and\nnodeInfo refer to the primary Task. Use the list subtasks API to retrieve\ninformation about subtasks.",
         "parameters": [
@@ -1721,7 +1782,7 @@
         },
         "x-ms-examples": {
           "Task list": {
-            "$ref": "./examples/TaskList.json"
+            "$ref": "./examples/Task_ListTasks.json"
           }
         },
         "x-ms-pageable": {
@@ -1729,7 +1790,10 @@
         }
       },
       "post": {
-        "operationId": "Batch_CreateTask",
+        "operationId": "Task_CreateTask",
+        "tags": [
+          "Task"
+        ],
         "summary": "Creates a Task to the specified Job.",
         "description": "The maximum lifetime of a Task from addition to completion is 180 days. If a\nTask has not completed within 180 days of being added it will be terminated by\nthe Batch service and left in whatever state it was in at that time.",
         "consumes": [
@@ -1827,23 +1891,26 @@
         },
         "x-ms-examples": {
           "Creates a basic task": {
-            "$ref": "./examples/TaskCreate_Basic.json"
+            "$ref": "./examples/Task_CreateTask_Basic.json"
           },
           "Creates a task with container settings": {
-            "$ref": "./examples/TaskCreate_ContainerSettings.json"
+            "$ref": "./examples/Task_CreateTask_ContainerSettings.json"
           },
           "Creates a task with exit conditions": {
-            "$ref": "./examples/TaskCreate_ExitConditions.json"
+            "$ref": "./examples/Task_CreateTask_ExitConditions.json"
           },
           "Creates a task with extra slot requirement": {
-            "$ref": "./examples/TaskCreate_RequiredSlots.json"
+            "$ref": "./examples/Task_CreateTask_RequiredSlots.json"
           }
         }
       }
     },
     "/jobs/{jobId}/tasks/{taskId}": {
       "get": {
-        "operationId": "Batch_GetTask",
+        "operationId": "Task_GetTask",
+        "tags": [
+          "Task"
+        ],
         "summary": "Gets information about the specified Task.",
         "description": "For multi-instance Tasks, information such as affinityId, executionInfo and\nnodeInfo refer to the primary Task. Use the list subtasks API to retrieve\ninformation about subtasks.",
         "parameters": [
@@ -1995,12 +2062,15 @@
         },
         "x-ms-examples": {
           "Task get": {
-            "$ref": "./examples/TaskGet.json"
+            "$ref": "./examples/Task_GetTask.json"
           }
         }
       },
       "put": {
-        "operationId": "Batch_ReplaceTask",
+        "operationId": "Task_ReplaceTask",
+        "tags": [
+          "Task"
+        ],
         "description": "Updates the properties of the specified Task.",
         "consumes": [
           "application/json; odata=minimalmetadata"
@@ -2138,12 +2208,15 @@
         },
         "x-ms-examples": {
           "Task update": {
-            "$ref": "./examples/TaskUpdate.json"
+            "$ref": "./examples/Task_ReplaceTask.json"
           }
         }
       },
       "delete": {
-        "operationId": "Batch_DeleteTask",
+        "operationId": "Task_DeleteTask",
+        "tags": [
+          "Task"
+        ],
         "summary": "Deletes a Task from the specified Job.",
         "description": "When a Task is deleted, all of the files in its directory on the Compute Node\nwhere it ran are also deleted (regardless of the retention time). For\nmulti-instance Tasks, the delete Task operation applies synchronously to the\nprimary task; subtasks and their files are then deleted asynchronously in the\nbackground.",
         "parameters": [
@@ -2257,14 +2330,17 @@
         },
         "x-ms-examples": {
           "Task delete": {
-            "$ref": "./examples/TaskDelete.json"
+            "$ref": "./examples/Task_DeleteTask.json"
           }
         }
       }
     },
     "/jobs/{jobId}/tasks/{taskId}/files": {
       "get": {
-        "operationId": "Batch_ListTaskFiles",
+        "operationId": "Task_ListTaskFiles",
+        "tags": [
+          "Task"
+        ],
         "summary": "Lists the files in a Task's directory on its Compute Node.",
         "description": "Lists the files in a Task's directory on its Compute Node.",
         "parameters": [
@@ -2381,7 +2457,7 @@
         },
         "x-ms-examples": {
           "File list from task": {
-            "$ref": "./examples/FileListFromTask.json"
+            "$ref": "./examples/Task_ListTaskFiles.json"
           }
         },
         "x-ms-pageable": {
@@ -2391,7 +2467,10 @@
     },
     "/jobs/{jobId}/tasks/{taskId}/files/{filePath}": {
       "get": {
-        "operationId": "Batch_GetTaskFile",
+        "operationId": "Task_GetTaskFile",
+        "tags": [
+          "Task"
+        ],
         "description": "Returns the content of the specified Task file.",
         "produces": [
           "application/octet-stream",
@@ -2540,12 +2619,15 @@
         },
         "x-ms-examples": {
           "Get File From Task": {
-            "$ref": "./examples/FileGetFromTask.json"
+            "$ref": "./examples/Task_GetTaskFile.json"
           }
         }
       },
       "delete": {
-        "operationId": "Batch_DeleteTaskFile",
+        "operationId": "Task_DeleteTaskFile",
+        "tags": [
+          "Task"
+        ],
         "summary": "Deletes the specified Task file from the Compute Node where the Task ran.",
         "description": "Deletes the specified Task file from the Compute Node where the Task ran.",
         "parameters": [
@@ -2639,12 +2721,15 @@
         },
         "x-ms-examples": {
           "File delete from task": {
-            "$ref": "./examples/FileDeleteFromTask.json"
+            "$ref": "./examples/Task_DeleteTaskFile.json"
           }
         }
       },
       "head": {
-        "operationId": "Batch_GetTaskFileProperties",
+        "operationId": "Task_GetTaskFileProperties",
+        "tags": [
+          "Task"
+        ],
         "description": "Gets the properties of the specified Task file.",
         "parameters": [
           {
@@ -2779,14 +2864,17 @@
         },
         "x-ms-examples": {
           "File get properties from task": {
-            "$ref": "./examples/FileGetPropertiesFromTask.json"
+            "$ref": "./examples/Task_GetTaskFileProperties.json"
           }
         }
       }
     },
     "/jobs/{jobId}/tasks/{taskId}/reactivate": {
       "post": {
-        "operationId": "Batch_ReactivateTask",
+        "operationId": "Task_ReactivateTask",
+        "tags": [
+          "Task"
+        ],
         "summary": "Reactivates a Task, allowing it to run again even if its retry count has been\nexhausted.",
         "description": "Reactivation makes a Task eligible to be retried again up to its maximum retry\ncount. The Task's state is changed to active. As the Task is no longer in the\ncompleted state, any previous exit code or failure information is no longer\navailable after reactivation. Each time a Task is reactivated, its retry count\nis reset to 0. Reactivation will fail for Tasks that are not completed or that\npreviously completed successfully (with an exit code of 0). Additionally, it\nwill fail if the Job has completed (or is terminating or deleting).",
         "parameters": [
@@ -2913,14 +3001,17 @@
         },
         "x-ms-examples": {
           "Task reactivate": {
-            "$ref": "./examples/TaskReactivate.json"
+            "$ref": "./examples/Task_ReactivateTask.json"
           }
         }
       }
     },
     "/jobs/{jobId}/tasks/{taskId}/subtasksinfo": {
       "get": {
-        "operationId": "Batch_ListSubTasks",
+        "operationId": "Task_ListSubTasks",
+        "tags": [
+          "Task"
+        ],
         "summary": "Lists all of the subtasks that are associated with the specified multi-instance\nTask.",
         "description": "If the Task is not a multi-instance Task then this returns an empty collection.",
         "parameters": [
@@ -3023,7 +3114,7 @@
         },
         "x-ms-examples": {
           "Task list subtasks": {
-            "$ref": "./examples/TaskListSubtasks.json"
+            "$ref": "./examples/Task_ListSubTasks.json"
           }
         },
         "x-ms-pageable": {
@@ -3033,7 +3124,10 @@
     },
     "/jobs/{jobId}/tasks/{taskId}/terminate": {
       "post": {
-        "operationId": "Batch_TerminateTask",
+        "operationId": "Task_TerminateTask",
+        "tags": [
+          "Task"
+        ],
         "summary": "Terminates the specified Task.",
         "description": "When the Task has been terminated, it moves to the completed state. For\nmulti-instance Tasks, the terminate Task operation applies synchronously to the\nprimary task; subtasks are then terminated asynchronously in the background.",
         "parameters": [
@@ -3160,14 +3254,17 @@
         },
         "x-ms-examples": {
           "Task terminate": {
-            "$ref": "./examples/TaskTerminate.json"
+            "$ref": "./examples/Task_TerminateTask.json"
           }
         }
       }
     },
     "/jobs/{jobId}/terminate": {
       "post": {
-        "operationId": "Batch_TerminateJob",
+        "operationId": "Job_TerminateJob",
+        "tags": [
+          "Job"
+        ],
         "summary": "Terminates the specified Job, marking it as completed.",
         "description": "When a Terminate Job request is received, the Batch service sets the Job to the\nterminating state. The Batch service then terminates any running Tasks\nassociated with the Job and runs any required Job release Tasks. Then the Job\nmoves into the completed state. If there are any Tasks in the Job in the active\nstate, they will remain in the active state. Once a Job is terminated, new\nTasks cannot be added and any remaining active Tasks will not be scheduled.",
         "consumes": [
@@ -3299,14 +3396,17 @@
         },
         "x-ms-examples": {
           "Job terminate": {
-            "$ref": "./examples/JobTerminate.json"
+            "$ref": "./examples/Job_TerminateJob.json"
           }
         }
       }
     },
     "/jobschedules": {
       "get": {
-        "operationId": "Batch_ListJobSchedules",
+        "operationId": "JobSchedule_ListJobSchedules",
+        "tags": [
+          "Job Schedule"
+        ],
         "summary": "Lists all of the Job Schedules in the specified Account.",
         "description": "Lists all of the Job Schedules in the specified Account.",
         "parameters": [
@@ -3424,7 +3524,7 @@
         },
         "x-ms-examples": {
           "JobSchedule list": {
-            "$ref": "./examples/JobScheduleList.json"
+            "$ref": "./examples/JobSchedule_ListJobSchedules.json"
           }
         },
         "x-ms-pageable": {
@@ -3432,7 +3532,10 @@
         }
       },
       "post": {
-        "operationId": "Batch_CreateJobSchedule",
+        "operationId": "JobSchedule_CreateJobSchedule",
+        "tags": [
+          "Job Schedule"
+        ],
         "summary": "Creates a Job Schedule to the specified Account.",
         "description": "Creates a Job Schedule to the specified Account.",
         "consumes": [
@@ -3523,17 +3626,20 @@
         },
         "x-ms-examples": {
           "Creates a basic JobSchedule": {
-            "$ref": "./examples/JobScheduleCreate_Basic.json"
+            "$ref": "./examples/JobSchedule_CreateJobSchedule_Basic.json"
           },
           "Creates a complex JobScheduleAdd": {
-            "$ref": "./examples/JobScheduleCreate_Complex.json"
+            "$ref": "./examples/JobSchedule_CreateJobSchedule_Complex.json"
           }
         }
       }
     },
     "/jobschedules/{jobScheduleId}": {
       "get": {
-        "operationId": "Batch_GetJobSchedule",
+        "operationId": "JobSchedule_GetJobSchedule",
+        "tags": [
+          "Job Schedule"
+        ],
         "description": "Gets information about the specified Job Schedule.",
         "parameters": [
           {
@@ -3673,12 +3779,15 @@
         },
         "x-ms-examples": {
           "JobSchedule get": {
-            "$ref": "./examples/JobScheduleGet.json"
+            "$ref": "./examples/JobSchedule_GetJobSchedule.json"
           }
         }
       },
       "put": {
-        "operationId": "Batch_ReplaceJobSchedule",
+        "operationId": "JobSchedule_ReplaceJobSchedule",
+        "tags": [
+          "Job Schedule"
+        ],
         "summary": "Updates the properties of the specified Job Schedule.",
         "description": "This fully replaces all the updatable properties of the Job Schedule. For\nexample, if the schedule property is not specified with this request, then the\nBatch service will remove the existing schedule. Changes to a Job Schedule only\nimpact Jobs created by the schedule after the update has taken place; currently\nrunning Jobs are unaffected.",
         "consumes": [
@@ -3809,13 +3918,16 @@
           }
         },
         "x-ms-examples": {
-          "JobSchedule update": {
-            "$ref": "./examples/JobScheduleUpdate.json"
+          "JobSchedule patch": {
+            "$ref": "./examples/JobSchedule_ReplaceJobSchedule.json"
           }
         }
       },
       "patch": {
-        "operationId": "Batch_UpdateJobSchedule",
+        "operationId": "JobSchedule_UpdateJobSchedule",
+        "tags": [
+          "Job Schedule"
+        ],
         "summary": "Updates the properties of the specified Job Schedule.",
         "description": "This replaces only the Job Schedule properties specified in the request. For\nexample, if the schedule property is not specified with this request, then the\nBatch service will keep the existing schedule. Changes to a Job Schedule only\nimpact Jobs created by the schedule after the update has taken place; currently\nrunning Jobs are unaffected.",
         "consumes": [
@@ -3946,13 +4058,16 @@
           }
         },
         "x-ms-examples": {
-          "JobSchedule patch": {
-            "$ref": "./examples/JobSchedulePatch.json"
+          "JobSchedule update": {
+            "$ref": "./examples/JobSchedule_UpdateJobSchedule.json"
           }
         }
       },
       "delete": {
-        "operationId": "Batch_DeleteJobSchedule",
+        "operationId": "JobSchedule_DeleteJobSchedule",
+        "tags": [
+          "Job Schedule"
+        ],
         "summary": "Deletes a Job Schedule from the specified Account.",
         "description": "When you delete a Job Schedule, this also deletes all Jobs and Tasks under that\nschedule. When Tasks are deleted, all the files in their working directories on\nthe Compute Nodes are also deleted (the retention period is ignored). The Job\nSchedule statistics are no longer accessible once the Job Schedule is deleted,\nthough they are still counted towards Account lifetime statistics.",
         "parameters": [
@@ -4059,12 +4174,15 @@
         },
         "x-ms-examples": {
           "JobSchedule delete": {
-            "$ref": "./examples/JobScheduleDelete.json"
+            "$ref": "./examples/JobSchedule_DeleteJobSchedule.json"
           }
         }
       },
       "head": {
-        "operationId": "Batch_JobScheduleExists",
+        "operationId": "JobSchedule_JobScheduleExists",
+        "tags": [
+          "Job Schedule"
+        ],
         "summary": "Checks the specified Job Schedule exists.",
         "description": "Checks the specified Job Schedule exists.",
         "parameters": [
@@ -4183,14 +4301,17 @@
         },
         "x-ms-examples": {
           "Check Job Schedule Exists": {
-            "$ref": "./examples/JobScheduleExists.json"
+            "$ref": "./examples/JobSchedule_JobScheduleExists.json"
           }
         }
       }
     },
     "/jobschedules/{jobScheduleId}/disable": {
       "post": {
-        "operationId": "Batch_DisableJobSchedule",
+        "operationId": "JobSchedule_DisableJobSchedule",
+        "tags": [
+          "Job Schedule"
+        ],
         "summary": "Disables a Job Schedule.",
         "description": "No new Jobs will be created until the Job Schedule is enabled again.",
         "parameters": [
@@ -4310,14 +4431,17 @@
         },
         "x-ms-examples": {
           "JobSchedule disable": {
-            "$ref": "./examples/JobScheduleDisable.json"
+            "$ref": "./examples/JobSchedule_DisableJobSchedule.json"
           }
         }
       }
     },
     "/jobschedules/{jobScheduleId}/enable": {
       "post": {
-        "operationId": "Batch_EnableJobSchedule",
+        "operationId": "JobSchedule_EnableJobSchedule",
+        "tags": [
+          "Job Schedule"
+        ],
         "summary": "Enables a Job Schedule.",
         "description": "Enables a Job Schedule.",
         "parameters": [
@@ -4437,14 +4561,17 @@
         },
         "x-ms-examples": {
           "JobSchedule enable": {
-            "$ref": "./examples/JobScheduleEnable.json"
+            "$ref": "./examples/JobSchedule_EnableJobSchedule.json"
           }
         }
       }
     },
     "/jobschedules/{jobScheduleId}/jobs": {
       "get": {
-        "operationId": "Batch_ListJobsFromSchedule",
+        "operationId": "Job_ListJobsFromSchedule",
+        "tags": [
+          "Job"
+        ],
         "summary": "Lists the Jobs that have been created under the specified Job Schedule.",
         "description": "Lists the Jobs that have been created under the specified Job Schedule.",
         "parameters": [
@@ -4569,7 +4696,7 @@
         },
         "x-ms-examples": {
           "List Job Under Job Schedule": {
-            "$ref": "./examples/JobListFromJobSchedule.json"
+            "$ref": "./examples/Job_ListJobsFromSchedule.json"
           }
         },
         "x-ms-pageable": {
@@ -4579,7 +4706,10 @@
     },
     "/jobschedules/{jobScheduleId}/terminate": {
       "post": {
-        "operationId": "Batch_TerminateJobSchedule",
+        "operationId": "JobSchedule_TerminateJobSchedule",
+        "tags": [
+          "Job Schedule"
+        ],
         "summary": "Terminates a Job Schedule.",
         "description": "Terminates a Job Schedule.",
         "parameters": [
@@ -4699,14 +4829,17 @@
         },
         "x-ms-examples": {
           "JobSchedule terminate": {
-            "$ref": "./examples/JobScheduleTerminate.json"
+            "$ref": "./examples/JobSchedule_TerminateJobSchedule.json"
           }
         }
       }
     },
     "/nodecounts": {
       "get": {
-        "operationId": "Batch_ListPoolNodeCounts",
+        "operationId": "Pool_ListPoolNodeCounts",
+        "tags": [
+          "Pool"
+        ],
         "description": "Gets the number of Compute Nodes in each state, grouped by Pool. Note that the\nnumbers returned may not always be up to date. If you need exact node counts,\nuse a list query.",
         "parameters": [
           {
@@ -4801,7 +4934,7 @@
         },
         "x-ms-examples": {
           "NodeCountsPayload": {
-            "$ref": "./examples/AccountListPoolNodeCounts.json"
+            "$ref": "./examples/Pool_ListPoolNodeCounts.json"
           }
         },
         "x-ms-pageable": {
@@ -4811,7 +4944,10 @@
     },
     "/pools": {
       "get": {
-        "operationId": "Batch_ListPools",
+        "operationId": "Pool_ListPools",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Lists all of the Pools in the specified Account.",
         "description": "Lists all of the Pools in the specified Account.",
         "parameters": [
@@ -4929,7 +5065,7 @@
         },
         "x-ms-examples": {
           "Pool list": {
-            "$ref": "./examples/PoolList_Basic.json"
+            "$ref": "./examples/Pool_ListPools_Basic.json"
           }
         },
         "x-ms-pageable": {
@@ -4937,7 +5073,10 @@
         }
       },
       "post": {
-        "operationId": "Batch_CreatePool",
+        "operationId": "Pool_CreatePool",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Creates a Pool to the specified Account.",
         "description": "When naming Pools, avoid including sensitive information such as user names or\nsecret project names. This information may appear in telemetry logs accessible\nto Microsoft Support engineers.",
         "consumes": [
@@ -5028,38 +5167,41 @@
         },
         "x-ms-examples": {
           "Creates a VirtualMachineConfiguration pool": {
-            "$ref": "./examples/PoolCreate_VirtualMachineConfiguration.json"
+            "$ref": "./examples/Pool_CreatePool_VirtualMachineConfiguration.json"
           },
           "Creates a VirtualMachineConfiguration pool with OS disk": {
-            "$ref": "./examples/PoolCreate_OSDisk.json"
+            "$ref": "./examples/Pool_CreatePool_OSDisk.json"
           },
           "Creates a VirtualMachineConfiguration pool with ServiceArtifactReference": {
-            "$ref": "./examples/PoolCreate_VirtualMachineConfigurationWithServiceArtifactReference.json"
+            "$ref": "./examples/Pool_CreatePool_VirtualMachineConfigurationWithServiceArtifactReference.json"
           },
           "Creates a VirtualMachineConfiguration pool with containers": {
-            "$ref": "./examples/PoolCreate_VirtualMachineConfigurationWithContainers.json"
+            "$ref": "./examples/Pool_CreatePool_VirtualMachineConfigurationWithContainers.json"
           },
           "Creates a VirtualMachineConfiguration pool with extensions": {
-            "$ref": "./examples/PoolCreate_VirtualMachineConfigurationWithExtensions.json"
+            "$ref": "./examples/Pool_CreatePool_VirtualMachineConfigurationWithExtensions.json"
           },
           "Creates a pool with SecurityProfile": {
-            "$ref": "./examples/PoolCreate_SecurityProfile.json"
+            "$ref": "./examples/Pool_CreatePool_SecurityProfile.json"
           },
           "Creates a pool with accelerated networking": {
-            "$ref": "./examples/PoolCreate_AcceleratedNetworking.json"
+            "$ref": "./examples/Pool_CreatePool_AcceleratedNetworking.json"
           },
           "Creates a pool with mount drive specified": {
-            "$ref": "./examples/PoolCreate_MountConfiguration.json"
+            "$ref": "./examples/Pool_CreatePool_MountConfiguration.json"
           },
           "Creates a simple pool with resourceTags": {
-            "$ref": "./examples/PoolCreate_ResourceTags.json"
+            "$ref": "./examples/Pool_CreatePool_ResourceTags.json"
           }
         }
       }
     },
     "/pools/{poolId}": {
       "get": {
-        "operationId": "Batch_GetPool",
+        "operationId": "Pool_GetPool",
+        "tags": [
+          "Pool"
+        ],
         "description": "Gets information about the specified Pool.",
         "parameters": [
           {
@@ -5199,27 +5341,30 @@
         },
         "x-ms-examples": {
           "Add a VirtualMachineConfiguration pool with OS disk": {
-            "$ref": "./examples/PoolGet_VirtualMachineConfigurationWithOSDisk.json"
+            "$ref": "./examples/Pool_GetPool_VirtualMachineConfigurationWithOSDisk.json"
           },
           "Get a VirtualMachineConfiguration pool with SecurityProfile": {
-            "$ref": "./examples/PoolGet_SecurityProfile.json"
+            "$ref": "./examples/Pool_GetPool_SecurityProfile.json"
           },
           "Get a VirtualMachineConfiguration pool with ServiceArtifactReference": {
-            "$ref": "./examples/PoolGet_VirtualMachineConfigurationWithServiceArtifactReference.json"
+            "$ref": "./examples/Pool_GetPool_VirtualMachineConfigurationWithServiceArtifactReference.json"
           },
           "Get a VirtualMachineConfiguration pool with extensions": {
-            "$ref": "./examples/PoolGet_VirtualMachineConfigurationWithExtensions.json"
+            "$ref": "./examples/Pool_GetPool_VirtualMachineConfigurationWithExtensions.json"
           },
           "Get a pool with AcceleratedNetworking": {
-            "$ref": "./examples/PoolGet_AcceleratedNetworking.json"
+            "$ref": "./examples/Pool_GetPool_AcceleratedNetworking.json"
           },
           "Pool get": {
-            "$ref": "./examples/PoolGet_Basic.json"
+            "$ref": "./examples/Pool_GetPool_Basic.json"
           }
         }
       },
       "patch": {
-        "operationId": "Batch_UpdatePool",
+        "operationId": "Pool_UpdatePool",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Updates the properties of the specified Pool.",
         "description": "This only replaces the Pool properties specified in the request. For example,\nif the Pool has a StartTask associated with it, and a request does not specify\na StartTask element, then the Pool keeps the existing StartTask.",
         "consumes": [
@@ -5351,12 +5496,15 @@
         },
         "x-ms-examples": {
           "Patch the Pool": {
-            "$ref": "./examples/PoolPatch.json"
+            "$ref": "./examples/Pool_UpdatePool.json"
           }
         }
       },
       "delete": {
-        "operationId": "Batch_DeletePool",
+        "operationId": "Pool_DeletePool",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Deletes a Pool from the specified Account.",
         "description": "When you request that a Pool be deleted, the following actions occur: the Pool\nstate is set to deleting; any ongoing resize operation on the Pool are stopped;\nthe Batch service starts resizing the Pool to zero Compute Nodes; any Tasks\nrunning on existing Compute Nodes are terminated and requeued (as if a resize\nPool operation had been requested with the default requeue option); finally,\nthe Pool is removed from the system. Because running Tasks are requeued, the\nuser can rerun these Tasks by updating their Job to target a different Pool.\nThe Tasks can then run on the new Pool. If you want to override the requeue\nbehavior, then you should call resize Pool explicitly to shrink the Pool to\nzero size before deleting the Pool. If you call an Update, Patch or Delete API\non a Pool in the deleting state, it will fail with HTTP status code 409 with\nerror code PoolBeingDeleted.",
         "parameters": [
@@ -5463,12 +5611,15 @@
         },
         "x-ms-examples": {
           "Pool delete": {
-            "$ref": "./examples/PoolDelete.json"
+            "$ref": "./examples/Pool_DeletePool.json"
           }
         }
       },
       "head": {
-        "operationId": "Batch_PoolExists",
+        "operationId": "Pool_PoolExists",
+        "tags": [
+          "Pool"
+        ],
         "description": "Gets basic properties of a Pool.",
         "parameters": [
           {
@@ -5586,14 +5737,17 @@
         },
         "x-ms-examples": {
           "Check Pool Exists": {
-            "$ref": "./examples/PoolExists.json"
+            "$ref": "./examples/Pool_PoolExists.json"
           }
         }
       }
     },
     "/pools/{poolId}/disableautoscale": {
       "post": {
-        "operationId": "Batch_DisablePoolAutoScale",
+        "operationId": "Pool_DisablePoolAutoScale",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Disables automatic scaling for a Pool.",
         "description": "Disables automatic scaling for a Pool.",
         "parameters": [
@@ -5679,14 +5833,17 @@
         },
         "x-ms-examples": {
           "Disable pool autoscale": {
-            "$ref": "./examples/PoolDisableAutoScale.json"
+            "$ref": "./examples/Pool_DisablePoolAutoScale.json"
           }
         }
       }
     },
     "/pools/{poolId}/enableautoscale": {
       "post": {
-        "operationId": "Batch_EnablePoolAutoScale",
+        "operationId": "Pool_EnablePoolAutoScale",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Enables automatic scaling for a Pool.",
         "description": "You cannot enable automatic scaling on a Pool if a resize operation is in\nprogress on the Pool. If automatic scaling of the Pool is currently disabled,\nyou must specify a valid autoscale formula as part of the request. If automatic\nscaling of the Pool is already enabled, you may specify a new autoscale formula\nand/or a new evaluation interval. You cannot call this API for the same Pool\nmore than once every 30 seconds.",
         "consumes": [
@@ -5818,14 +5975,17 @@
         },
         "x-ms-examples": {
           "Pool enable autoscale": {
-            "$ref": "./examples/PoolEnableAutoscale.json"
+            "$ref": "./examples/Pool_EnablePoolAutoscale.json"
           }
         }
       }
     },
     "/pools/{poolId}/evaluateautoscale": {
       "post": {
-        "operationId": "Batch_EvaluatePoolAutoScale",
+        "operationId": "Pool_EvaluatePoolAutoScale",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Gets the result of evaluating an automatic scaling formula on the Pool.",
         "description": "This API is primarily for validating an autoscale formula, as it simply returns\nthe result without applying the formula to the Pool. The Pool must have auto\nscaling enabled in order to evaluate a formula.",
         "consumes": [
@@ -5926,14 +6086,17 @@
         },
         "x-ms-examples": {
           "Pool evaluate autoscale": {
-            "$ref": "./examples/PoolEvaluateAutoscale.json"
+            "$ref": "./examples/Pool_EvaluatePoolAutoscale.json"
           }
         }
       }
     },
     "/pools/{poolId}/nodes": {
       "get": {
-        "operationId": "Batch_ListNodes",
+        "operationId": "Node_ListNodes",
+        "tags": [
+          "Node"
+        ],
         "summary": "Lists the Compute Nodes in the specified Pool.",
         "description": "Lists the Compute Nodes in the specified Pool.",
         "parameters": [
@@ -6047,7 +6210,7 @@
         },
         "x-ms-examples": {
           "Node list": {
-            "$ref": "./examples/NodeList.json"
+            "$ref": "./examples/Node_ListNodes.json"
           }
         },
         "x-ms-pageable": {
@@ -6057,7 +6220,10 @@
     },
     "/pools/{poolId}/nodes/{nodeId}": {
       "get": {
-        "operationId": "Batch_GetNode",
+        "operationId": "Node_GetNode",
+        "tags": [
+          "Node"
+        ],
         "summary": "Gets information about the specified Compute Node.",
         "description": "Gets information about the specified Compute Node.",
         "parameters": [
@@ -6160,14 +6326,17 @@
         },
         "x-ms-examples": {
           "Node get": {
-            "$ref": "./examples/NodeGet_Basic.json"
+            "$ref": "./examples/Node_GetNode.json"
           }
         }
       }
     },
     "/pools/{poolId}/nodes/{nodeId}/disablescheduling": {
       "post": {
-        "operationId": "Batch_DisableNodeScheduling",
+        "operationId": "Node_DisableNodeScheduling",
+        "tags": [
+          "Node"
+        ],
         "summary": "Disables Task scheduling on the specified Compute Node.",
         "description": "You can disable Task scheduling on a Compute Node only if its current\nscheduling state is enabled.",
         "consumes": [
@@ -6272,14 +6441,17 @@
         },
         "x-ms-examples": {
           "Node disable scheduling": {
-            "$ref": "./examples/NodeDisableScheduling.json"
+            "$ref": "./examples/Node_DisableNodeScheduling.json"
           }
         }
       }
     },
     "/pools/{poolId}/nodes/{nodeId}/enablescheduling": {
       "post": {
-        "operationId": "Batch_EnableNodeScheduling",
+        "operationId": "Node_EnableNodeScheduling",
+        "tags": [
+          "Node"
+        ],
         "summary": "Enables Task scheduling on the specified Compute Node.",
         "description": "You can enable Task scheduling on a Compute Node only if its current scheduling\nstate is disabled",
         "parameters": [
@@ -6372,14 +6544,17 @@
         },
         "x-ms-examples": {
           "Node enable scheduling": {
-            "$ref": "./examples/NodeEnableScheduling.json"
+            "$ref": "./examples/Node_EnableNodeScheduling.json"
           }
         }
       }
     },
     "/pools/{poolId}/nodes/{nodeId}/extensions": {
       "get": {
-        "operationId": "Batch_ListNodeExtensions",
+        "operationId": "Node_ListNodeExtensions",
+        "tags": [
+          "Node"
+        ],
         "summary": "Lists the Compute Nodes Extensions in the specified Pool.",
         "description": "Lists the Compute Nodes Extensions in the specified Pool.",
         "parameters": [
@@ -6493,7 +6668,7 @@
         },
         "x-ms-examples": {
           "List compute node extensions": {
-            "$ref": "./examples/BatchNodeExtensionList.json"
+            "$ref": "./examples/Node_ListNodeExtensions.json"
           }
         },
         "x-ms-pageable": {
@@ -6503,7 +6678,10 @@
     },
     "/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}": {
       "get": {
-        "operationId": "Batch_GetNodeExtension",
+        "operationId": "Node_GetNodeExtension",
+        "tags": [
+          "Node"
+        ],
         "summary": "Gets information about the specified Compute Node Extension.",
         "description": "Gets information about the specified Compute Node Extension.",
         "parameters": [
@@ -6613,14 +6791,17 @@
         },
         "x-ms-examples": {
           "Get batch node extension": {
-            "$ref": "./examples/BatchNodeExtensionGet.json"
+            "$ref": "./examples/Node_GetNodeExtension.json"
           }
         }
       }
     },
     "/pools/{poolId}/nodes/{nodeId}/files": {
       "get": {
-        "operationId": "Batch_ListNodeFiles",
+        "operationId": "Node_ListNodeFiles",
+        "tags": [
+          "Node"
+        ],
         "summary": "Lists all of the files in Task directories on the specified Compute Node.",
         "description": "Lists all of the files in Task directories on the specified Compute Node.",
         "parameters": [
@@ -6737,7 +6918,7 @@
         },
         "x-ms-examples": {
           "File list from node": {
-            "$ref": "./examples/FileListFromNode.json"
+            "$ref": "./examples/Node_ListNodeFiles.json"
           }
         },
         "x-ms-pageable": {
@@ -6747,7 +6928,10 @@
     },
     "/pools/{poolId}/nodes/{nodeId}/files/{filePath}": {
       "get": {
-        "operationId": "Batch_GetNodeFile",
+        "operationId": "Node_GetNodeFile",
+        "tags": [
+          "Node"
+        ],
         "description": "Returns the content of the specified Compute Node file.",
         "produces": [
           "application/octet-stream",
@@ -6896,12 +7080,15 @@
         },
         "x-ms-examples": {
           "Get File From Compute Node": {
-            "$ref": "./examples/FileGetFromNode.json"
+            "$ref": "./examples/Node_GetNodeFile.json"
           }
         }
       },
       "delete": {
-        "operationId": "Batch_DeleteNodeFile",
+        "operationId": "Node_DeleteNodeFile",
+        "tags": [
+          "Node"
+        ],
         "summary": "Deletes the specified file from the Compute Node.",
         "description": "Deletes the specified file from the Compute Node.",
         "parameters": [
@@ -6995,12 +7182,15 @@
         },
         "x-ms-examples": {
           "File delete from node": {
-            "$ref": "./examples/FileDeleteFromNode.json"
+            "$ref": "./examples/Node_DeleteNodeFile.json"
           }
         }
       },
       "head": {
-        "operationId": "Batch_GetNodeFileProperties",
+        "operationId": "Node_GetNodeFileProperties",
+        "tags": [
+          "Node"
+        ],
         "description": "Gets the properties of the specified Compute Node file.",
         "parameters": [
           {
@@ -7135,14 +7325,17 @@
         },
         "x-ms-examples": {
           "File get properties from node": {
-            "$ref": "./examples/FileGetPropertiesFromNode.json"
+            "$ref": "./examples/Node_GetNodeFileProperties.json"
           }
         }
       }
     },
     "/pools/{poolId}/nodes/{nodeId}/reboot": {
       "post": {
-        "operationId": "Batch_RebootNode",
+        "operationId": "Node_RebootNode",
+        "tags": [
+          "Node"
+        ],
         "summary": "Restarts the specified Compute Node.",
         "description": "You can restart a Compute Node only if it is in an idle or running state.",
         "consumes": [
@@ -7247,14 +7440,17 @@
         },
         "x-ms-examples": {
           "Node reboot": {
-            "$ref": "./examples/NodeReboot.json"
+            "$ref": "./examples/Node_RebootNode.json"
           }
         }
       }
     },
     "/pools/{poolId}/nodes/{nodeId}/remoteloginsettings": {
       "get": {
-        "operationId": "Batch_GetNodeRemoteLoginSettings",
+        "operationId": "Node_GetNodeRemoteLoginSettings",
+        "tags": [
+          "Node"
+        ],
         "summary": "Gets the settings required for remote login to a Compute Node.",
         "description": "Before you can remotely login to a Compute Node using the remote login\nsettings, you must create a user Account on the Compute Node. This API can be\ninvoked only on Pools created with the virtual machine configuration property.",
         "parameters": [
@@ -7346,14 +7542,17 @@
         },
         "x-ms-examples": {
           "Node get remote login settings": {
-            "$ref": "./examples/NodeGetRemoteLoginSettings.json"
+            "$ref": "./examples/Node_GetNodeRemoteLoginSettings.json"
           }
         }
       }
     },
     "/pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs": {
       "post": {
-        "operationId": "Batch_UploadNodeLogs",
+        "operationId": "Node_UploadNodeLogs",
+        "tags": [
+          "Node"
+        ],
         "summary": "Upload Azure Batch service log files from the specified Compute Node to Azure\nBlob Storage.",
         "description": "This is for gathering Azure Batch service log files in an automated fashion\nfrom Compute Nodes if you are experiencing an error and wish to escalate to\nAzure support. The Azure Batch service log files should be shared with Azure\nsupport to aid in debugging issues with the Batch service.",
         "consumes": [
@@ -7457,14 +7656,17 @@
         },
         "x-ms-examples": {
           "Upload BatchService Logs": {
-            "$ref": "./examples/NodeUploadBatchServiceLogs.json"
+            "$ref": "./examples/Node_UploadNodeLogs.json"
           }
         }
       }
     },
     "/pools/{poolId}/nodes/{nodeId}/users": {
       "post": {
-        "operationId": "Batch_CreateNodeUser",
+        "operationId": "Node_CreateNodeUser",
+        "tags": [
+          "Node"
+        ],
         "summary": "Adds a user Account to the specified Compute Node.",
         "description": "You can add a user Account to a Compute Node only when it is in the idle or\nrunning state.",
         "consumes": [
@@ -7569,14 +7771,17 @@
         },
         "x-ms-examples": {
           "Node create user": {
-            "$ref": "./examples/NodeCreateUser.json"
+            "$ref": "./examples/Node_CreateNodeUser.json"
           }
         }
       }
     },
     "/pools/{poolId}/nodes/{nodeId}/users/{userName}": {
       "put": {
-        "operationId": "Batch_ReplaceNodeUser",
+        "operationId": "Node_ReplaceNodeUser",
+        "tags": [
+          "Node"
+        ],
         "summary": "Updates the password and expiration time of a user Account on the specified Compute Node.",
         "description": "This operation replaces of all the updatable properties of the Account. For\nexample, if the expiryTime element is not specified, the current value is\nreplaced with the default value, not left unmodified. You can update a user\nAccount on a Compute Node only when it is in the idle or running state.",
         "consumes": [
@@ -7688,12 +7893,15 @@
         },
         "x-ms-examples": {
           "Node update user": {
-            "$ref": "./examples/NodeUpdateUser.json"
+            "$ref": "./examples/Node_ReplaceNodeUser.json"
           }
         }
       },
       "delete": {
-        "operationId": "Batch_DeleteNodeUser",
+        "operationId": "Node_DeleteNodeUser",
+        "tags": [
+          "Node"
+        ],
         "summary": "Deletes a user Account from the specified Compute Node.",
         "description": "You can delete a user Account to a Compute Node only when it is in the idle or\nrunning state.",
         "parameters": [
@@ -7780,14 +7988,17 @@
         },
         "x-ms-examples": {
           "Node delete user": {
-            "$ref": "./examples/NodeDeleteUser.json"
+            "$ref": "./examples/Node_DeleteNodeUser.json"
           }
         }
       }
     },
     "/pools/{poolId}/removenodes": {
       "post": {
-        "operationId": "Batch_RemoveNodes",
+        "operationId": "Pool_RemoveNodes",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Removes Compute Nodes from the specified Pool.",
         "description": "This operation can only run when the allocation state of the Pool is steady.\nWhen this operation runs, the allocation state changes from steady to resizing.\nEach request may remove up to 100 nodes.",
         "consumes": [
@@ -7919,14 +8130,17 @@
         },
         "x-ms-examples": {
           "Pool remove nodes": {
-            "$ref": "./examples/PoolRemoveNodes.json"
+            "$ref": "./examples/Pool_RemoveNodes.json"
           }
         }
       }
     },
     "/pools/{poolId}/resize": {
       "post": {
-        "operationId": "Batch_ResizePool",
+        "operationId": "Pool_ResizePool",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Changes the number of Compute Nodes that are assigned to a Pool.",
         "description": "You can only resize a Pool when its allocation state is steady. If the Pool is\nalready resizing, the request fails with status code 409. When you resize a\nPool, the Pool's allocation state changes from steady to resizing. You cannot\nresize Pools which are configured for automatic scaling. If you try to do this,\nthe Batch service returns an error 409. If you resize a Pool downwards, the\nBatch service chooses which Compute Nodes to remove. To remove specific Compute\nNodes, use the Pool remove Compute Nodes API instead.",
         "consumes": [
@@ -8058,14 +8272,17 @@
         },
         "x-ms-examples": {
           "Pool resize": {
-            "$ref": "./examples/PoolResize.json"
+            "$ref": "./examples/Pool_ResizePool.json"
           }
         }
       }
     },
     "/pools/{poolId}/stopresize": {
       "post": {
-        "operationId": "Batch_StopPoolResize",
+        "operationId": "Pool_StopPoolResize",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Stops an ongoing resize operation on the Pool.",
         "description": "This does not restore the Pool to its previous state before the resize\noperation: it only stops any further changes being made, and the Pool maintains\nits current state. After stopping, the Pool stabilizes at the number of Compute\nNodes it was at when the stop operation was done. During the stop operation,\nthe Pool allocation state changes first to stopping and then to steady. A\nresize operation need not be an explicit resize Pool request; this API can also\nbe used to halt the initial sizing of the Pool when it is created.",
         "parameters": [
@@ -8185,14 +8402,17 @@
         },
         "x-ms-examples": {
           "Pool stop resize": {
-            "$ref": "./examples/PoolStopResize.json"
+            "$ref": "./examples/Pool_StopPoolResize.json"
           }
         }
       }
     },
     "/pools/{poolId}/updateproperties": {
       "post": {
-        "operationId": "Batch_ReplacePoolProperties",
+        "operationId": "Pool_ReplacePoolProperties",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Updates the properties of the specified Pool.",
         "description": "This fully replaces all the updatable properties of the Pool. For example, if\nthe Pool has a StartTask associated with it and if StartTask is not specified\nwith this request, then the Batch service will remove the existing StartTask.",
         "consumes": [
@@ -8290,14 +8510,17 @@
         },
         "x-ms-examples": {
           "Pool update": {
-            "$ref": "./examples/PoolUpdate.json"
+            "$ref": "./examples/Pool_ReplacePoolProperties.json"
           }
         }
       }
     },
     "/poolusagemetrics": {
       "get": {
-        "operationId": "Batch_ListPoolUsageMetrics",
+        "operationId": "Pool_ListPoolUsageMetrics",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Lists the usage metrics, aggregated by Pool across individual time intervals,\nfor the specified Account.",
         "description": "If you do not specify a $filter clause including a poolId, the response\nincludes all Pools that existed in the Account in the time range of the\nreturned aggregation intervals. If you do not specify a $filter clause\nincluding a startTime or endTime these filters default to the start and end\ntimes of the last aggregation interval currently available; that is, only the\nlast aggregation interval is returned.",
         "parameters": [
@@ -8409,7 +8632,7 @@
         },
         "x-ms-examples": {
           "Pool list usage metrics": {
-            "$ref": "./examples/PoolListUsageMetrics.json"
+            "$ref": "./examples/Pool_ListPoolUsageMetrics.json"
           }
         },
         "x-ms-pageable": {
@@ -8419,7 +8642,10 @@
     },
     "/supportedimages": {
       "get": {
-        "operationId": "Batch_ListSupportedImages",
+        "operationId": "Pool_ListSupportedImages",
+        "tags": [
+          "Pool"
+        ],
         "summary": "Lists all Virtual Machine Images supported by the Azure Batch service.",
         "description": "Lists all Virtual Machine Images supported by the Azure Batch service.",
         "parameters": [
@@ -8515,7 +8741,7 @@
         },
         "x-ms-examples": {
           "Account list node agent skus": {
-            "$ref": "./examples/AccountListSupportedImages.json"
+            "$ref": "./examples/Pool_ListSupportedImages.json"
           }
         },
         "x-ms-pageable": {
