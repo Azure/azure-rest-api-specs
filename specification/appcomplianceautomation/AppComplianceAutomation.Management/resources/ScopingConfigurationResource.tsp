@@ -86,6 +86,11 @@ interface ScopingConfiguration {
   "parameters"
 );
 
-@@OpenAPI.extension(ScopingConfiguration.createOrUpdate::parameters.resource, "x-ms-client-name", "properties");
+@@OpenAPI.extension(ScopingConfiguration.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "properties"
+);
 
-@@clientName(ScopingConfiguration.createOrUpdate::parameters.resource, "parameters");
+@@clientName(ScopingConfiguration.createOrUpdate::parameters.resource,
+  "parameters"
+);

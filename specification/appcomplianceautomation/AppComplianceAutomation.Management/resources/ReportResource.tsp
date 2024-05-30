@@ -163,7 +163,10 @@ interface Report {
   "parameters"
 );
 
-@@OpenAPI.extension(Report.createOrUpdate::parameters.resource, "x-ms-client-name", "properties");
+@@OpenAPI.extension(Report.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "properties"
+);
 
 @@clientName(Report.createOrUpdate::parameters.resource, "parameters");
 
