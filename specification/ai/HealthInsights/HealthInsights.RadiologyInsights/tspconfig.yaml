@@ -22,12 +22,12 @@ emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-python":
     package-pprint-name: '"Azure Health Insights - Radiology Insights"'
     package-mode: "dataplane"
-    package-version: 1.0.0b1
+    package-version: 1.0.0
     package-dir: "azure-healthinsights-radiologyinsights"
     package-name: "{package-dir}"
     emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
@@ -39,6 +39,7 @@ options:
     partial-update: true
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-health-insights-radiologyinsights"
     flavor: azure
+    stream-style-serialization: false
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true

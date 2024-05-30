@@ -140,6 +140,10 @@
                 "type": "string",
                 "description": "URL location of schema, identified by schema group, schema name, and version."
               },
+              "Schema-Group-Name": {
+                "type": "string",
+                "description": "References schema group."
+              },
               "Schema-Id": {
                 "type": "string",
                 "description": "References specific schema in registry namespace."
@@ -147,10 +151,6 @@
               "Schema-Id-Location": {
                 "type": "string",
                 "description": "URL location of schema, identified by schema ID."
-              },
-              "Schema-Group-Name": {
-                "type": "string",
-                "description": "References schema group."
               },
               "Schema-Name": {
                 "type": "string",
@@ -230,6 +230,10 @@
                 "type": "string",
                 "description": "URL location of schema, identified by schema group, schema name, and version."
               },
+              "Schema-Group-Name": {
+                "type": "string",
+                "description": "References schema group."
+              },
               "Schema-Id": {
                 "type": "string",
                 "description": "References specific schema in registry namespace."
@@ -237,10 +241,6 @@
               "Schema-Id-Location": {
                 "type": "string",
                 "description": "URL location of schema, identified by schema ID."
-              },
-              "Schema-Group-Name": {
-                "type": "string",
-                "description": "References schema group."
               },
               "Schema-Name": {
                 "type": "string",
@@ -374,31 +374,6 @@
               "type": "file"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL location of schema, identified by schema group, schema name, and version."
-              },
-              "Schema-Id": {
-                "type": "string",
-                "description": "References specific schema in registry namespace."
-              },
-              "Schema-Id-Location": {
-                "type": "string",
-                "description": "URL location of schema, identified by schema ID."
-              },
-              "Schema-Group-Name": {
-                "type": "string",
-                "description": "References schema group."
-              },
-              "Schema-Name": {
-                "type": "string",
-                "description": "References schema name."
-              },
-              "Schema-Version": {
-                "type": "integer",
-                "format": "int32",
-                "description": "Version of the returned schema."
-              },
               "Content-Type": {
                 "type": "string",
                 "description": "The content type for given schema.",
@@ -409,6 +384,31 @@
                   "modelAsString": false
                 },
                 "x-nullable": false
+              },
+              "Location": {
+                "type": "string",
+                "description": "URL location of schema, identified by schema group, schema name, and version."
+              },
+              "Schema-Group-Name": {
+                "type": "string",
+                "description": "References schema group."
+              },
+              "Schema-Id": {
+                "type": "string",
+                "description": "References specific schema in registry namespace."
+              },
+              "Schema-Id-Location": {
+                "type": "string",
+                "description": "URL location of schema, identified by schema ID."
+              },
+              "Schema-Name": {
+                "type": "string",
+                "description": "References schema name."
+              },
+              "Schema-Version": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Version of the returned schema."
               }
             }
           },
@@ -460,31 +460,6 @@
               "type": "file"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL location of schema, identified by schema group, schema name, and version."
-              },
-              "Schema-Id": {
-                "type": "string",
-                "description": "References specific schema in registry namespace."
-              },
-              "Schema-Id-Location": {
-                "type": "string",
-                "description": "URL location of schema, identified by schema ID."
-              },
-              "Schema-Group-Name": {
-                "type": "string",
-                "description": "References schema group."
-              },
-              "Schema-Name": {
-                "type": "string",
-                "description": "References schema name."
-              },
-              "Schema-Version": {
-                "type": "integer",
-                "format": "int32",
-                "description": "Version of the returned schema."
-              },
               "Content-Type": {
                 "type": "string",
                 "description": "The content type for given schema.",
@@ -495,6 +470,31 @@
                   "modelAsString": false
                 },
                 "x-nullable": false
+              },
+              "Location": {
+                "type": "string",
+                "description": "URL location of schema, identified by schema group, schema name, and version."
+              },
+              "Schema-Group-Name": {
+                "type": "string",
+                "description": "References schema group."
+              },
+              "Schema-Id": {
+                "type": "string",
+                "description": "References specific schema in registry namespace."
+              },
+              "Schema-Id-Location": {
+                "type": "string",
+                "description": "URL location of schema, identified by schema ID."
+              },
+              "Schema-Name": {
+                "type": "string",
+                "description": "References schema name."
+              },
+              "Schema-Version": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Version of the returned schema."
               }
             }
           },
@@ -679,36 +679,6 @@
       "required": [
         "schemaName"
       ]
-    },
-    "ServiceVersion": {
-      "type": "string",
-      "description": "Represents the Schema Registry API version to use for requests.",
-      "enum": [
-        "2021-10",
-        "2022-10",
-        "2023-07-01"
-      ],
-      "x-ms-enum": {
-        "name": "ServiceVersion",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "V2021_10",
-            "value": "2021-10",
-            "description": "Azure Schema Registry 2021-10 Version"
-          },
-          {
-            "name": "V2022_10",
-            "value": "2022-10",
-            "description": "Azure Schema Registry 2022-10 Version"
-          },
-          {
-            "name": "V2023_07_01",
-            "value": "2023-07-01",
-            "description": "Azure Schema Registry 2023-07-01 Version. This is the default version."
-          }
-        ]
-      }
     }
   },
   "parameters": {

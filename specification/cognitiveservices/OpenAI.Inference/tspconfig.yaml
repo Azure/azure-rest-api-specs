@@ -7,7 +7,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
@@ -30,7 +30,7 @@ options:
     generate-tests: false
     custom-types-subpackage: "implementation.models"
     custom-types: "FunctionCallPreset"
-    customization-class: customization/src/main/java/ChatCompletionsToolCallCustomizations.java
+    customization-class: customization/src/main/java/OpenAICustomizations.java
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "openai"

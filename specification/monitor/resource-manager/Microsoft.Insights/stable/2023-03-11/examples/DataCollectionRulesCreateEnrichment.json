@@ -1,0 +1,272 @@
+{
+  "parameters": {
+    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2",
+    "resourceGroupName": "myResourceGroup",
+    "dataCollectionRuleName": "myCollectionRule",
+    "api-version": "2023-03-11",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "description": "A rule showcasing ingestion time enrichment",
+        "dataCollectionEndpointId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myDataCollectionEndpoint",
+        "references": {
+          "enrichmentData": {
+            "storageBlobs": [
+              {
+                "resourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourcegroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myenrichmentstorage",
+                "blobUrl": "https://myenrichmentstorage.blob.core.windows.net/enrichment",
+                "lookupType": "String",
+                "name": "mytextdatastore"
+              }
+            ]
+          }
+        },
+        "streamDeclarations": {
+          "Custom-TabularDataABC": {
+            "columns": [
+              {
+                "name": "TimeGenerated",
+                "type": "datetime"
+              },
+              {
+                "name": "Message",
+                "type": "string"
+              },
+              {
+                "name": "AdditionalContext",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "dataSources": {
+          "logFiles": [
+            {
+              "streams": [
+                "Custom-TabularDataABC"
+              ],
+              "filePatterns": [
+                "C:\\JavaLogs\\*\\*.log"
+              ],
+              "format": "text",
+              "settings": {
+                "text": {
+                  "recordStartTimestampFormat": "ISO 8601"
+                }
+              },
+              "name": "myTabularLogDataSource"
+            }
+          ]
+        },
+        "destinations": {
+          "logAnalytics": [
+            {
+              "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
+              "name": "centralWorkspace"
+            }
+          ]
+        },
+        "dataFlows": [
+          {
+            "streams": [
+              "Custom-TabularDataABC"
+            ],
+            "destinations": [
+              "centralWorkspace"
+            ],
+            "transformKql": "source | extend LookupData = lookup_string_am('mytextdatastore', Message) | project TimeGenerated, Message, AdditionalContext = LookupData.Message",
+            "outputStream": "Custom-LOGS1_CL"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
+        "name": "myCollectionRule",
+        "type": "Microsoft.Insights/dataCollectionRules",
+        "location": "eastus",
+        "properties": {
+          "description": "A rule showcasing ingestion time enrichment",
+          "immutableId": "dcr-ad96300ff0734d08a6a7195eb2be0000",
+          "dataCollectionEndpointId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myDataCollectionEndpoint",
+          "references": {
+            "enrichmentData": {
+              "storageBlobs": [
+                {
+                  "resourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourcegroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myenrichmentstorage",
+                  "blobUrl": "https://myenrichmentstorage.blob.core.windows.net/enrichment",
+                  "lookupType": "String",
+                  "name": "mytextdatastore"
+                }
+              ]
+            }
+          },
+          "streamDeclarations": {
+            "Custom-TabularDataABC": {
+              "columns": [
+                {
+                  "name": "TimeGenerated",
+                  "type": "datetime"
+                },
+                {
+                  "name": "Message",
+                  "type": "string"
+                },
+                {
+                  "name": "AdditionalContext",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "dataSources": {
+            "logFiles": [
+              {
+                "streams": [
+                  "Custom-TabularDataABC"
+                ],
+                "filePatterns": [
+                  "C:\\JavaLogs\\*\\*.log"
+                ],
+                "format": "text",
+                "settings": {
+                  "text": {
+                    "recordStartTimestampFormat": "ISO 8601"
+                  }
+                },
+                "name": "myTabularLogDataSource"
+              }
+            ]
+          },
+          "destinations": {
+            "logAnalytics": [
+              {
+                "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
+                "workspaceId": "9ba8bc53-bd36-4156-8667-e983e7ae0e4f",
+                "name": "centralWorkspace"
+              }
+            ]
+          },
+          "dataFlows": [
+            {
+              "streams": [
+                "Custom-TabularDataABC"
+              ],
+              "destinations": [
+                "centralWorkspace"
+              ],
+              "transformKql": "source | extend LookupData = lookup_string_am('mytextdatastore', Message) | project TimeGenerated, Message, AdditionalContext = LookupData.Message",
+              "outputStream": "Custom-LOGS1_CL"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-01-30T17:50:40.5383301Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-30T17:50:40.5383301Z"
+        },
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
+        "name": "myCollectionRule",
+        "type": "Microsoft.Insights/dataCollectionRules",
+        "location": "eastus",
+        "properties": {
+          "description": "A rule showcasing ingestion time enrichment",
+          "immutableId": "dcr-ad96300ff0734d08a6a7195eb2be0000",
+          "dataCollectionEndpointId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myDataCollectionEndpoint",
+          "references": {
+            "enrichmentData": {
+              "storageBlobs": [
+                {
+                  "resourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourcegroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myenrichmentstorage",
+                  "blobUrl": "https://myenrichmentstorage.blob.core.windows.net/enrichment",
+                  "lookupType": "String",
+                  "name": "mytextdatastore"
+                }
+              ]
+            }
+          },
+          "streamDeclarations": {
+            "Custom-TabularDataABC": {
+              "columns": [
+                {
+                  "name": "TimeGenerated",
+                  "type": "datetime"
+                },
+                {
+                  "name": "Message",
+                  "type": "string"
+                },
+                {
+                  "name": "AdditionalContext",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "dataSources": {
+            "logFiles": [
+              {
+                "streams": [
+                  "Custom-TabularDataABC"
+                ],
+                "filePatterns": [
+                  "C:\\JavaLogs\\*\\*.log"
+                ],
+                "format": "text",
+                "settings": {
+                  "text": {
+                    "recordStartTimestampFormat": "ISO 8601"
+                  }
+                },
+                "name": "myTabularLogDataSource"
+              }
+            ]
+          },
+          "destinations": {
+            "logAnalytics": [
+              {
+                "workspaceResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/centralTeamWorkspace",
+                "workspaceId": "9ba8bc53-bd36-4156-8667-e983e7ae0e4f",
+                "name": "centralWorkspace"
+              }
+            ]
+          },
+          "dataFlows": [
+            {
+              "streams": [
+                "Custom-TabularDataABC"
+              ],
+              "destinations": [
+                "centralWorkspace"
+              ],
+              "transformKql": "source | extend LookupData = lookup_string_am('mytextdatastore', Message) | project TimeGenerated, Message, AdditionalContext = LookupData.Message",
+              "outputStream": "Custom-LOGS1_CL"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-01-30T17:50:40.5383301Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-30T17:50:40.5383301Z"
+        },
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000"
+      }
+    }
+  }
+}
