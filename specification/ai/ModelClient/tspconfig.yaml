@@ -6,6 +6,7 @@ parameters:
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-ts"
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
@@ -22,3 +23,9 @@ options:
     package-dir: "azure-ai-inference"
     package-name: "{package-dir}"
     flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "sdk/ai/ai-inference"
+    packageDetails:
+      name: "@azure/ai-inference"
+      description: "Inference API for Azure-supported AI models"
+      version: "1.0.0-beta.1"
