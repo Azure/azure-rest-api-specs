@@ -1,6 +1,8 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
+import "@typespec/rest";
 import "../models/models.tsp";
 import "./ReportResource.tsp";
 
@@ -8,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AppComplianceAutomation;
 /**
@@ -39,7 +42,7 @@ model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
 
 @armResourceOperations
 @tag("AppComplianceAutomation")
-interface EvidenceResources {
+interface Evidence {
   /**
    * Get the evidence metadata
    */
@@ -57,7 +60,7 @@ interface EvidenceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Evidences_CreateOrUpdate")
-  createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
     EvidenceResource,
     {
       ...Azure.ResourceManager.Foundations.BaseParameters<EvidenceResource>;
@@ -97,13 +100,22 @@ interface EvidenceResources {
   >;
 }
 
-@@doc(EvidenceResources.createOrUpdate::parameters.parameters,
+@@doc(Evidence.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@encodedName(EvidenceResources.download::parameters.body,
+@@encodedName(Evidence.download::parameters.body,
   "application/json",
   "parameters"
 );
-@@doc(EvidenceResources.download::parameters.body,
+@@doc(Evidence.download::parameters.body,
   "Parameters for the query operation"
 );
+
+@@encodedName(Evidence.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+
+@@OpenAPI.extension(Evidence.createOrUpdate::parameters.resource, "x-ms-client-name", "parameters");
+
+@@clientName(Evidence.createOrUpdate::parameters.resource, "parameters");

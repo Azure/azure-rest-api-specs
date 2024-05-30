@@ -47,7 +47,7 @@ model ScopingConfigurationResource
 
 @armResourceOperations
 @tag("AppComplianceAutomation")
-interface ScopingConfigurationResources {
+interface ScopingConfiguration {
   /**
    * Get the AppComplianceAutomation scoping configuration of the specific report.
    */
@@ -60,7 +60,7 @@ interface ScopingConfigurationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("ScopingConfiguration_CreateOrUpdate")
-  createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<ScopingConfigurationResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ScopingConfigurationResource>;
 
   /**
    * Clean the AppComplianceAutomation scoping configuration of the specific report.
@@ -77,6 +77,15 @@ interface ScopingConfigurationResources {
   list is ArmResourceListByParent<ScopingConfigurationResource>;
 }
 
-@@doc(ScopingConfigurationResources.createOrUpdate::parameters.parameters,
+@@doc(ScopingConfiguration.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using 'default' as the name."
 );
+
+@@encodedName(ScopingConfiguration.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+
+@@OpenAPI.extension(ScopingConfiguration.createOrUpdate::parameters.resource, "x-ms-client-name", "parameters");
+
+@@clientName(ScopingConfiguration.createOrUpdate::parameters.resource, "parameters");

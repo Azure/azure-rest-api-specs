@@ -46,7 +46,7 @@ model WebhookResource extends Azure.ResourceManager.Foundations.ProxyResource {
 
 @armResourceOperations
 @tag("AppComplianceAutomation")
-interface WebhookResources {
+interface Webhook {
   /**
    * Get the AppComplianceAutomation webhook and its properties.
    */
@@ -59,7 +59,7 @@ interface WebhookResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Webhooks_CreateOrUpdate")
-  createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceSync<WebhookResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<WebhookResource>;
 
   /**
    * Update an exiting AppComplianceAutomation webhook.
@@ -95,14 +95,23 @@ interface WebhookResources {
   >;
 }
 
-@@doc(WebhookResources.createOrUpdate::parameters.parameters,
+@@doc(Webhook.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(WebhookResources.update::parameters.properties,
+@@doc(Webhook.update::parameters.properties,
   "Parameters for the create or update operation"
 );
 
-@@encodedName(WebhookResources.update::parameters.properties,
+@@encodedName(Webhook.update::parameters.properties,
   "application/json",
   "parameters"
 );
+
+@@encodedName(Webhook.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+
+@@OpenAPI.extension(Webhook.createOrUpdate::parameters.resource, "x-ms-client-name", "parameters");
+
+@@clientName(Webhook.createOrUpdate::parameters.resource, "parameters");

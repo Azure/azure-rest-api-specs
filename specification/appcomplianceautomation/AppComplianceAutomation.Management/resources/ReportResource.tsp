@@ -4,7 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "../models/models.tsp";
-import "../operations.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
@@ -43,7 +42,7 @@ model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
 
 @armResourceOperations
 @tag("AppComplianceAutomation")
-interface ReportResources {
+interface Report {
   /**
    * Get the AppComplianceAutomation report and its properties.
    */
@@ -56,7 +55,7 @@ interface ReportResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Reports_CreateOrUpdate")
-  createOrUpdate is AcatOperations.AcatResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReportResource,
     Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
   >;
@@ -156,25 +155,34 @@ interface ReportResources {
   >;
 }
 
-@@doc(ReportResources.createOrUpdate::parameters.parameters,
+@@doc(Report.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(ReportResources.update::parameters.properties,
-  "Parameters for the create or update operation"
-);
-@@doc(ReportResources.syncCertRecord::parameters.body,
-  "Parameters for synchronize certification record operation"
-);
-@@doc(ReportResources.checkNameAvailability::parameters.body,
-  "NameAvailabilityRequest object."
-);
-
-@@encodedName(ReportResources.update::parameters.properties,
+@@encodedName(Report.createOrUpdate::parameters.resource,
   "application/json",
   "parameters"
 );
 
-@@encodedName(ReportResources.syncCertRecord::parameters.body,
+@@OpenAPI.extension(Report.createOrUpdate::parameters.resource, "x-ms-client-name", "parameters");
+
+@@clientName(Report.createOrUpdate::parameters.resource, "parameters");
+
+@@doc(Report.update::parameters.properties,
+  "Parameters for the create or update operation"
+);
+@@doc(Report.syncCertRecord::parameters.body,
+  "Parameters for synchronize certification record operation"
+);
+@@doc(Report.checkNameAvailability::parameters.body,
+  "NameAvailabilityRequest object."
+);
+
+@@encodedName(Report.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+
+@@encodedName(Report.syncCertRecord::parameters.body,
   "application/json",
   "parameters"
 );
