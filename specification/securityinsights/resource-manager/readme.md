@@ -73,6 +73,10 @@ input-file:
   - Microsoft.SecurityInsights/preview/2024-04-01-preview/dataConnectorDefinitions.json
   - Microsoft.SecurityInsights/preview/2024-04-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2024-04-01-preview/operations.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/dataConnectors.json
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
 ```
 ### Tag: package-2024-03
 
