@@ -149,12 +149,5 @@ See configuration in [readme.java.md](./readme.java.md)
 directive:
   - suppress: AvoidAdditionalProperties
     from: imagebuilder.json
-    where:
-    - $.definitions.ImageTemplateDistributor.properties.artifactTags
-    - $.definitions.ImageTemplateProperties.properties.managedResourceTags
-    - $.definitions.UserAssignedIdentities
-    - $.definitions.ImageTemplateUpdateParameters.properties.tags
-    - $.definitions.ImageTemplateListResult.properties.value.items
-    - $.definitions.ImageTemplate.properties.properties
-    reason: Needed value. Exception provided in API Design review meeting.
+    reason: Needed value. Exception provided in API Design review meeting. Note - suppressing entire file due to bug with where field. Suppression targets are as follows, $.definitions.ImageTemplateDistributor.properties.artifactTags, $.definitions.ImageTemplateProperties.properties.managedResourceTags, $.definitions.UserAssignedIdentities, $.definitions.ImageTemplateUpdateParameters.properties.tags
 ```
