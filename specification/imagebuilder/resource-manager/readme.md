@@ -151,9 +151,10 @@ directive:
     from: imagebuilder.json
     where:
     - $.definitions.ImageTemplateDistributor.properties.artifactTags
-    - $.definitions.ImageTemplateProperties.*
+    - $.definitions.ImageTemplateProperties.properties.managedResourceTags
     - $.definitions.UserAssignedIdentities
     - $.definitions.ImageTemplateUpdateParameters.properties.tags
     - $.definitions.ImageTemplateListResult.properties.*
+    - $.definitions.ImageTemplate.properties.properties
     reason: Needed value. Exception provided in API Design review meeting.
 ```
