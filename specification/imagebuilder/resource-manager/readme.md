@@ -154,7 +154,7 @@ directive:
     - $.definitions.ImageTemplateProperties.properties.managedResourceTags
     - $.definitions.UserAssignedIdentities
     - $.definitions.ImageTemplateUpdateParameters.properties.tags
-    - $.definitions.ImageTemplateListResult.properties.*
-    - $.definitions.ImageTemplate.properties.properties
+    - $.definitions.ImageTemplateListResult.*
+    - $.definitions.ImageTemplate.*
     reason: Needed value. Exception provided in API Design review meeting.
 ```
