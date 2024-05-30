@@ -27,24 +27,9 @@ interface CodeExecution {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/code/execute")
   executeCode is Foundations.Operation<
     {
-      @doc("The ID of the target subscription. The value must be an UUID.")
-      @path
-      @segment("subscriptions")
-      subscriptionId: uuid;
-
-      @doc("The name of the resource group. The name is case insensitive.")
-      @path
-      @segment("resourceGroups")
-      @maxLength(90)
-      @minLength(1)
-      resourceGroupName: string;
-
-      @doc("The name of the session pool.")
-      @path
-      @key("sessionPoolName")
-      @segment("sessionPools")
-      sessionPoolName: string;
-
+      ...SubscriptionIdParameter;
+      ...ResourceGroupNameParameter;
+      ...SessionPoolNameParameter;
       ...SessionIdentifier;
 
       @doc("The request to execute code.")
@@ -70,33 +55,11 @@ interface CodeExecutionFiles {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sessionPools/{sessionPoolName}/files/content/{filename}")
   getFileContent is Foundations.Operation<
     {
-      @doc("The ID of the target subscription. The value must be an UUID.")
-      @path
-      @segment("subscriptions")
-      subscriptionId: uuid;
-
-      @doc("The name of the resource group. The name is case insensitive.")
-      @path
-      @segment("resourceGroups")
-      @maxLength(90)
-      @minLength(1)
-      resourceGroupName: string;
-
-      @doc("The name of the session pool.")
-      @path
-      @key("sessionPoolName")
-      @segment("sessionPools")
-      sessionPoolName: string;
-
-      @doc("The name of the file.")
-      @path
-      @key("filename")
-      @segment("files")
-      filename: string;
-
-      @doc("The identifier of the session.")
-      @query
-      identifier: string;
+      ...SubscriptionIdParameter;
+      ...ResourceGroupNameParameter;
+      ...SessionPoolNameParameter;
+      ...CodeExecutionFileNameParameter;
+      ...SessionIdentifier;
     },
     bytes,
     {},

@@ -41,6 +41,38 @@ model SessionPool {
   sessionPoolName: string;
 }
 
+@doc("The subscription identifier path parameter.")
+model SubscriptionIdParameter {
+  @doc("The ID of the target subscription. The value must be an UUID.")
+  @path
+  @segment("subscriptions")
+  @extension("x-ms-parameter-location", "client")
+  subscriptionId: uuid;
+}
+
+@doc("The resource group name path parameter.")
+model ResourceGroupNameParameter {
+  @doc("The name of the resource group. The name is case insensitive.")
+  @path
+  @maxLength(90)
+  @minLength(1)
+  resourceGroupName: string;
+}
+
+@doc("The session pool name path parameter.")
+model SessionPoolNameParameter {
+  @doc("The name of the session pool.")
+  @path
+  sessionPoolName: string;
+}
+
+@doc("The code execution name path parameter.")
+model CodeExecutionFileNameParameter {
+  @doc("The name of the file.")
+  @path
+  filename: string;
+}
+
 @doc("Session identifier query parameter.")
 model SessionIdentifier {
   @doc("The identifier of the session.")

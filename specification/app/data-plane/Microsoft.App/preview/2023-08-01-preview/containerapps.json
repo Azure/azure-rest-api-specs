@@ -48,28 +48,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "sessionPoolName",
-            "in": "path",
-            "description": "The name of the session pool.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SessionPoolNameParameter"
           },
           {
             "$ref": "#/parameters/SessionIdentifier"
@@ -338,42 +323,19 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "sessionPoolName",
-            "in": "path",
-            "description": "The name of the session pool.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SessionPoolNameParameter"
           },
           {
-            "name": "filename",
-            "in": "path",
-            "description": "The name of the file.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CodeExecutionFileNameParameter"
           },
           {
-            "name": "identifier",
-            "in": "query",
-            "description": "The identifier of the session.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SessionIdentifier"
           }
         ],
         "responses": {
@@ -748,12 +710,47 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
+    "CodeExecutionFileNameParameter": {
+      "name": "filename",
+      "in": "path",
+      "description": "The name of the file.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
     "SessionIdentifier": {
       "name": "identifier",
       "in": "query",
       "description": "The identifier of the session.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "SessionPoolNameParameter": {
+      "name": "sessionPoolName",
+      "in": "path",
+      "description": "The name of the session pool.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The ID of the target subscription. The value must be an UUID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
       "x-ms-parameter-location": "client"
     }
   }
