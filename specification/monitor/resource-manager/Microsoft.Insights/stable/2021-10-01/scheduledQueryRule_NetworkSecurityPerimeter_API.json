@@ -79,7 +79,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules/{ruleName}/networkSecurityPerimeterConfigurations/{NetworkSecurityPerimeterConfigurationNameParameter}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules/{ruleName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
       "get": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -100,7 +100,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+            "$ref": "#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
           }
         ],
         "responses": {
@@ -124,7 +124,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules/{ruleName}/networkSecurityPerimeterConfigurations/{NetworkSecurityPerimeterConfigurationNameParameter}/reconcile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules/{ruleName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
       "post": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -145,7 +145,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+            "$ref": "#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
           }
         ],
         "responses": {
@@ -187,6 +187,17 @@
       "x-ms-parameter-location": "method",
       "pattern": "^.*$",
       "maxLength": 43
+    },
+    "NetworkSecurityPerimeterConfigurationNameParameter": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "minLength": 1,
+      "maxLength": 512,
+      "x-ms-parameter-location": "method",
+      "description": "The name for a network security perimeter configuration"
     }
   }
 }
