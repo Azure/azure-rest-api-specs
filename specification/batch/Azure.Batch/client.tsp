@@ -14,9 +14,9 @@ namespace Client;
   })
   interface Batch {
     @clientName("listApplicationsInternal", "java")
-    listApplications is Azure.Batch.Applications.listApplications;
+    listApplications is Azure.Batch.Application.listApplications;
     @clientName("getApplicationInternal", "java")
-    getApplication is Azure.Batch.Applications.getApplication;
+    getApplication is Azure.Batch.Application.getApplication;
 
     @clientName("listPoolUsageMetricsInternal", "java")
     listPoolUsageMetrics is Azure.Batch.Pool.listPoolUsageMetrics;
