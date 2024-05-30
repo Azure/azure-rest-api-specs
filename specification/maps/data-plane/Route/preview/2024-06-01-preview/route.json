@@ -71,10 +71,11 @@
     },
     "OperationId": {
       "name": "id",
-      "description": "System generated unique identifier for the asynchronous batch operation after it has been submitted.",
+      "description": "System generated unique identifier for the asynchronous operation after it has been submitted.",
       "type": "string",
-      "maxLength": 43,
-      "minLength": 43,
+      "maxLength": 36,
+      "minLength": 36,
+      "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$",
       "in": "path",
       "required": true
     }
@@ -571,7 +572,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "operation-location",
-          "final-state-schema": "#/definitions/RouteAsyncOperation"
+          "final-state-schema": "#/definitions/RouteOperation"
         },
         "consumes": [
           "application/geo+json"
@@ -631,19 +632,19 @@
     "/route/operations/{id}": {
       "get": {
         "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n Get the status of an asynchronous operation by its operation ID.",
-        "operationId": "Route_GetRouteAsyncOperationsStatus",
+        "operationId": "Route_GetRouteOperationsStatus",
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
           "Get a succeeded operation status": {
-            "$ref": "./examples/GetRouteAsyncOperationStatusSucceeded.json"
+            "$ref": "./examples/GetRouteOperationStatusSucceeded.json"
           },
           "Get a running operation status": {
-            "$ref": "./examples/GetRouteAsyncOperationStatusRunning.json"
+            "$ref": "./examples/GetRouteOperationStatusRunning.json"
           },
           "Get a failed operation status": {
-            "$ref": "./examples/GetRouteAsyncOperationStatusFailed.json"
+            "$ref": "./examples/GetRouteOperationStatusFailed.json"
           }
         },
         "parameters": [
@@ -658,7 +659,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RouteAsyncOperation"
+              "$ref": "#/definitions/RouteOperation"
             }
           },
           "default": {
@@ -680,14 +681,14 @@
     "/route/operations/{id}/result": {
       "get": {
         "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nGet the result of an asynchronous operation by its operation ID.",
-        "operationId": "Route_GetRouteAsyncOperationResult",
+        "operationId": "Route_GetRouteOperationResult",
         "consumes": [
           "application/json"
         ],
         "produces": [
           "application/json"
         ],
-        "x-ms-client-name": "Route_GetAsyncOperationResult",
+        "x-ms-client-name": "Route_GetOperationResult",
         "x-ms-examples": {
           "Successfully retrieve the async matrix result": {
             "$ref": "./examples/GetRouteMatrixAsyncResult.json"
@@ -711,7 +712,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/RouteAsyncResponse"
+              "$ref": "#/definitions/RouteOperationResponse"
             }
           },
           "default": {
@@ -1155,7 +1156,7 @@
         }
       }
     },
-    "RouteAsyncResponse": {
+    "RouteOperationResponse": {
       "type": "object",
       "description": "This object is returned from a successful call.",
       "properties": {
@@ -1174,7 +1175,7 @@
       "description": "Specifies the driving instructions and additional properties for each maneuver point in the route Leg.",
       "allOf": [
         {
-          "$ref": "#/definitions/RouteAsyncResponse"
+          "$ref": "#/definitions/RouteOperationResponse"
         },
         {
           "$ref": "#/definitions/RouteMatrixResponse"
@@ -3425,7 +3426,7 @@
         "outputStorageUrl"
       ]
     },
-    "RouteAsyncOperation": {
+    "RouteOperation": {
       "type": "object",
       "description": "This object is returned from a successful Get Operation request.",
       "properties": {
@@ -3478,6 +3479,16 @@
               "format": "uri"
             }
           }
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the operation was created."
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the operation status was updated."
         },
         "error": {
           "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
