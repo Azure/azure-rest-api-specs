@@ -5255,9 +5255,6 @@
           },
           "description": "Holds configuration customizations for kube-proxy. Any values not defined will use the kube-proxy defaulting behavior. See https://v<version>.docs.kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/ where <version> is represented by a <major version>-<minor version> string. Kubernetes version 1.23 would be '1-23'."
         },
-        "monitoring": {
-          "$ref": "#/definitions/NetworkMonitoring"
-        },
         "advancedNetworking": {
           "$ref": "#/definitions/AdvancedNetworking"
         }
@@ -8887,16 +8884,6 @@
         ]
       },
       "description": "Network dataplane used in the Kubernetes cluster."
-    },
-    "NetworkMonitoring": {
-      "type": "object",
-      "description": "This addon can be used to configure network monitoring and generate network monitoring data in Prometheus format",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Enable or disable the network monitoring plugin on the cluster"
-        }
-      }
     },
     "AdvancedNetworking": {
       "type": "object",
