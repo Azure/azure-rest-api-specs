@@ -77,7 +77,7 @@ These settings apply only when `--tag=package-preview-2024-05-01-test` is specif
 
 ```yaml $(tag) == 'package-preview-2024-05-01-test'
 input-file:
-  - preview/2024-05-01-test-preview/openapi.json
+  - preview/2024-05-01-test-preview/stackhcivm.json
 ```
 
 ### Tag: package-preview-2024-02
