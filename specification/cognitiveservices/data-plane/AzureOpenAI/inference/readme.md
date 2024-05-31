@@ -39,7 +39,7 @@ input-file: stable/2022-12-01/inference.json
 These settings apply only when `--tag=release_2022_12_01_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2022_12_01_autogen'
-input-file: stable/2022-12-01/generated.json
+input-file: stable/2022-12-01/generated/inference.json
 ```
 
 AutoRest-Linter Suppressions
@@ -69,7 +69,7 @@ input-file: stable/2023-05-15/inference.json
 These settings apply only when `--tag=release_2023_05_15_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2023_05_15_autogen'
-input-file: stable/2023-05-15/generated.json
+input-file: stable/2023-05-15/generated/inference.json
 ```
 
 AutoRest-Linter Suppressions
@@ -92,7 +92,7 @@ input-file: preview/2023-06-01-preview/inference.json
 These settings apply only when `--tag=release_2023_06_01_preview_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2023_06_01_preview_autogen'
-input-file: preview/2023-06-01-preview/generated.json
+input-file: preview/2023-06-01-preview/generated/inference.json
 ```
 
 AutoRest-Linter Suppressions
@@ -110,7 +110,7 @@ directive:
 These settings apply only when `--tag=release_2023_07_01_preview_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2023_07_01_preview_autogen'
-input-file: preview/2023-07-01-preview/generated.json
+input-file: preview/2023-07-01-preview/generated/inference.json
 ```
 
 AutoRest-Linter Suppressions
@@ -128,7 +128,7 @@ directive:
 These settings apply only when `--tag=release_2023_08_01_preview_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2023_08_01_preview_autogen'
-input-file: preview/2023-08-01-preview/generated.json
+input-file: preview/2023-08-01-preview/generated/inference.json
 ```
 
 AutoRest-Linter Suppressions
@@ -180,14 +180,14 @@ directive:
 These settings apply only when `--tag=release_2024_02_15_preview_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2024_02_15_preview_autogen'
-input-file: preview/2024-02-15-preview/generated.json
+input-file: preview/2024-02-15-preview/generated/inference.json
 ```
 
 ## AzureOpenAI 2024-03-01-preview (generated)
 These settings apply only when `--tag=release_2024_03_01_preview_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2024_03_01_preview_autogen'
-input-file: preview/2024-03-01-preview/generated.json
+input-file: preview/2024-03-01-preview/generated/inference.json
 ```
 
 ## AzureOpenAI 2024-04-01-preview
@@ -205,8 +205,8 @@ input-file: preview/2024-05-01-preview/inference.json
 ```
 
 ## AzureOpenAI 2024-05-01-preview (generated)
-These settings apply only when `--tag=release_2024_05_01_preview` is specified on the command line.
+These settings apply only when `--tag=release_2024_05_01_preview_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2024_05_01_preview'
-input-file: preview/2024-05-01-preview/generated.json
+input-file: preview/2024-05-01-preview/generated/inference.json
 ```
