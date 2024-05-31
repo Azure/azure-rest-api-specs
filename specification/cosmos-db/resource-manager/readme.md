@@ -27,7 +27,7 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-2024-05
 ```
 
 ### Tag: package-preview-2024-05
@@ -881,13 +881,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
-  - repo: azure-resource-manager-schemas
-  - repo: azure-powershell
 ```
 
 ## C#
