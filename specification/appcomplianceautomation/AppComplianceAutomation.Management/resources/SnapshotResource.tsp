@@ -74,6 +74,4 @@ interface Snapshot {
   >;
 }
 
-@@doc(Snapshot.download::parameters.body,
-  "Parameters for the query operation"
-);
+@@doc(Snapshot.download::parameters.body, "Parameters for the query operation");
