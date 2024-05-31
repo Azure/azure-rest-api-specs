@@ -54,7 +54,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 // 3. Cache model info (to getModelInfo, all clients)
 @@access(ModelClient.getChatCompletions, Access.internal, "python");
 @@access(ModelClient.getEmbeddings, Access.internal, "python");
-@@access(ModelClient.getImageEmbeddings, Access.internal, "pyton");
+@@access(ModelClient.getImageEmbeddings, Access.internal, "python");
 @@access(ModelClient.getModelInfo, Access.internal, "python");
 
 @client({
