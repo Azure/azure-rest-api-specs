@@ -66,8 +66,8 @@
       "required": true,
       "x-ms-parameter-location": "client"
     },
-    "OperationId": {
-      "name": "operationId",
+    "Id": {
+      "name": "id",
       "description": "System generated unique identifier for the asynchronous batch operation after it has been submitted.",
       "type": "string",
       "format": "uuid",
@@ -79,7 +79,7 @@
     }
   },
   "paths": {
-    "/asyncBatch/operations/{operationId}": {
+    "/asyncBatch/operations/{id}": {
       "get": {
         "description": "Get the status of an asynchronous batch operation by its operation ID.",
         "operationId": "AsynchronousBatchManagement_GetOperation",
@@ -105,7 +105,7 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/OperationId"
+            "$ref": "#/parameters/Id"
           }
         ],
         "responses": {
@@ -194,20 +194,20 @@
       "type": "object",
       "description": "This object is returned from a successful Get Operation request.",
       "properties": {
-        "operationId": {
+        "id": {
           "description": "Unique identifier for the asynchronous batch operation.",
           "type": "string"
         },
-        "operationType": {
+        "kind": {
           "type": "string",
-          "description": "Type of asynchronous batch operation",
+          "description": "Kind of asynchronous batch operation",
           "enum": [
             "Geocode",
             "ReverseGeocode",
             "RouteDirections"
           ],
           "x-ms-enum": {
-            "name": "OperationTypeEnum",
+            "name": "KindEnum",
             "modelAsString": true,
             "values": [
               {
@@ -317,8 +317,8 @@
         }
       },
       "required": [
-        "operationId",
-        "operationType",
+        "id",
+        "kind",
         "inputBlobUrl",
         "outputStorageUrl",
         "createdDateTime",
