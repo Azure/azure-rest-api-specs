@@ -80,6 +80,6 @@ interface Client2 {
   service: ModelClient,
 })
 interface Client3 {
-  embed is ModelClient.getImageEmbeddings;
+  embedImage is ModelClient.getImageEmbeddings;
   getModelInfo is ModelClient.getModelInfo;
 }
