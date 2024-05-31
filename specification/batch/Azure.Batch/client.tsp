@@ -225,6 +225,7 @@ interface Batch {
 @@access(Azure.Batch.BatchNodeUserUpdateContent, Access.public, "java");
 @@access(Azure.Batch.BatchNode, Access.public, "java");
 @@access(Azure.Batch.BatchNodeRebootContent, Access.public, "java");
+@@access(Azure.Batch.BatchNodeReimageContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeDisableSchedulingContent, Access.public, "java");
 @@access(Azure.Batch.BatchNodeRemoteLoginSettings, Access.public, "java");
 @@access(Azure.Batch.UploadBatchServiceLogsContent, Access.public, "java");
