@@ -40,7 +40,10 @@ input-file:
 suppressions:
   - code: AvoidAdditionalProperties
     from: desktopvirtualization.json
-    reason: False postive -> additionalProperties showing in the nested object properties, not at the top level. E.g. "object.vmTags.additionalProperties" and not "object.additionalProperties"
+    reason: False postive -> additionalProperties showing in the nested object properties, not at the top level. E.g. "object.vmTags.additionalProperties" and not "object.additionalProperties""
+    where: 
+        - $.definitions.ActiveSessionHostConfigurationProperties.properties.vmTags
+        - $.definitions.SessionHostConfigurationPatchProperties.properties.vmTags 
   - code: XmsPageableForListCalls
     from: desktopvirtualization.json
     reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we will never return a collection hence no need for such list annotations. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
