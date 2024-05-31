@@ -104,17 +104,17 @@ interface Webhook {
 
 @@encodedName(Webhook.update::parameters.properties,
   "application/json",
-  "parameters"
+  "requestBody"
 );
 
 @@encodedName(Webhook.createOrUpdate::parameters.resource,
   "application/json",
-  "parameters"
+  "requestBody"
 );
 
 @@OpenAPI.extension(Webhook.createOrUpdate::parameters.resource,
   "x-ms-client-name",
-  "properties"
+  "requestBody"
 );
 
-@@clientName(Webhook.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Webhook.createOrUpdate::parameters.resource, "requestBody");

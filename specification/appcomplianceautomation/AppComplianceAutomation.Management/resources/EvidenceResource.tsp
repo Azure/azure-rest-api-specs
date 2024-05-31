@@ -105,18 +105,24 @@ interface Evidence {
 );
 @@encodedName(Evidence.download::parameters.body,
   "application/json",
-  "parameters"
+  "requestBody"
 );
+@@clientName(Evidence.download::parameters.body, "requestBody");
+@@OpenAPI.extension(Evidence.download::parameters.body,
+  "x-ms-client-name",
+  "requestBody"
+);
+
 @@doc(Evidence.download::parameters.body, "Parameters for the query operation");
 
 @@encodedName(Evidence.createOrUpdate::parameters.resource,
   "application/json",
-  "parameters"
+  "requestBody"
 );
 
 @@OpenAPI.extension(Evidence.createOrUpdate::parameters.resource,
   "x-ms-client-name",
-  "properties"
+  "requestBody"
 );
 
-@@clientName(Evidence.createOrUpdate::parameters.resource, "parameters");
+@@clientName(Evidence.createOrUpdate::parameters.resource, "requestBody");
