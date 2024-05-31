@@ -160,15 +160,15 @@ interface Report {
 );
 @@encodedName(Report.createOrUpdate::parameters.resource,
   "application/json",
-  "requestBody"
+  "parameters"
 );
 
 @@OpenAPI.extension(Report.createOrUpdate::parameters.resource,
   "x-ms-client-name",
-  "requestBody"
+  "properties"
 );
 
-@@clientName(Report.createOrUpdate::parameters.resource, "requestBody");
+@@clientName(Report.createOrUpdate::parameters.resource, "parameters");
 
 @@doc(Report.update::parameters.properties,
   "Parameters for the create or update operation"
@@ -182,20 +182,10 @@ interface Report {
 
 @@encodedName(Report.update::parameters.properties,
   "application/json",
-  "requestBody"
-);
-@@clientName(Report.update::parameters.properties, "requestBody");
-@@OpenAPI.extension(Report.update::parameters.properties,
-  "x-ms-client-name",
-  "requestBody"
+  "parameters"
 );
 
 @@encodedName(Report.syncCertRecord::parameters.body,
   "application/json",
-  "requestBody"
-);
-@@clientName(Report.syncCertRecord::parameters.body, "requestBody");
-@@OpenAPI.extension(Report.syncCertRecord::parameters.body,
-  "x-ms-client-name",
-  "requestBody"
+  "parameters"
 );

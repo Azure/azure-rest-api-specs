@@ -83,14 +83,14 @@ interface ScopingConfiguration {
 
 @@encodedName(ScopingConfiguration.createOrUpdate::parameters.resource,
   "application/json",
-  "requestBody"
+  "parameters"
 );
 
 @@OpenAPI.extension(ScopingConfiguration.createOrUpdate::parameters.resource,
   "x-ms-client-name",
-  "requestBody"
+  "properties"
 );
 
 @@clientName(ScopingConfiguration.createOrUpdate::parameters.resource,
-  "requestBody"
+  "parameters"
 );

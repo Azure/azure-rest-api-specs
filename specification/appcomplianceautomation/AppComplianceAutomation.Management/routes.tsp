@@ -83,9 +83,9 @@ interface ProviderActions {
 
 @@encodedName(ArmProviderActionAsync::parameters.body,
   "application/json",
-  "requestBody"
+  "parameters"
 );
 @@encodedName(ArmProviderActionSync::parameters.body,
   "application/json",
-  "requestBody"
+  "parameters"
 );
