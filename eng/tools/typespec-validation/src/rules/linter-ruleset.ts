@@ -4,6 +4,15 @@ import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
 
+// Maps deprecated rulesets to the replacement rulesets
+const deprecatedRulesets = new Map<string, string>([
+  ["@azure-tools/typespec-azure-core/all", "@azure-tools/typespec-azure-rulesets/data-plane"],
+  [
+    "@azure-tools/typespec-azure-resource-manager/all",
+    "@azure-tools/typespec-azure-rulesets/resource-manager",
+  ],
+]);
+
 export class LinterRulesetRule implements Rule {
   readonly name = "LinterRuleset";
 
@@ -33,7 +42,7 @@ export class LinterRulesetRule implements Rule {
     }
     stdOutput += `files: ${JSON.stringify(files)}\n`;
 
-    const linterExtends = config?.linter?.extends;
+    const linterExtends: string[] = config?.linter?.extends;
     stdOutput += `linter.extends: ${JSON.stringify(linterExtends)}`;
 
     let requiredRuleset = "";
@@ -55,6 +64,28 @@ export class LinterRulesetRule implements Rule {
         "options:\n" +
         '  "@azure-tools/typespec-autorest":\n' +
         '    azure-resource-provider-folder: "data-plane" | "resource-manager"\n';
+    }
+
+    if (linterExtends) {
+      for (const ruleset of linterExtends) {
+        if (deprecatedRulesets.has(ruleset)) {
+          const newRuleset = deprecatedRulesets.get(ruleset);
+
+          success = false;
+          errorOutput +=
+            "tspconfig.yaml references the following ruleset which is deprecated:\n" +
+            "\n" +
+            "linter:\n" +
+            "  extends:\n" +
+            `    - "${ruleset}"\n` +
+            "\n" +
+            "It should be replaced with the following:\n" +
+            "\n" +
+            "linter:\n" +
+            "  extends:\n" +
+            `    - "${newRuleset}"`;
+        }
+      }
     }
 
     if (requiredRuleset && !linterExtends?.includes(requiredRuleset)) {
