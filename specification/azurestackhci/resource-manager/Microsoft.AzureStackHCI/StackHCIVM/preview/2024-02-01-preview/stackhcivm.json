@@ -4978,7 +4978,7 @@
       "type": "object",
       "description": "The ARM ID for a Network Interface.",
       "properties": {
-        "ID": {
+        "id": {
           "type": "string",
           "format": "arm-id",
           "description": "The ARM ID for a Network Interface.",
@@ -6043,6 +6043,24 @@
         }
       }
     },
+    "SubnetIpConfigurationReference": {
+      "type": "object",
+      "description": "The ARM ID for a Network Interface.",
+      "properties": {
+        "ID": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM ID for a Network Interface.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/networkInterfaces"
+              }
+            ]
+          }
+        }
+      }
+    },
     "SubnetProperties": {
       "type": "object",
       "description": "Properties of the subnet.",
@@ -6066,7 +6084,7 @@
           "type": "array",
           "description": "IPConfigurationReferences - list of IPConfigurationReferences",
           "items": {
-            "$ref": "#/definitions/NetworkInterfaceArmReference"
+            "$ref": "#/definitions/SubnetIpConfigurationReference"
           },
           "x-ms-identifiers": []
         },
