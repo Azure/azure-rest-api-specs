@@ -5,7 +5,7 @@ parameters:
     "additionalDirectories": []
     default: ""
 emit:
-  - ["@azure-tools/typespec-ts"]
+  - "@azure-tools/typespec-autorest"
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
@@ -23,8 +23,10 @@ options:
     package-name: "{package-dir}"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "ai-inference"
+    package-dir: "ai"
+    isModularLibrary: true
     packageDetails:
       name: "@azure/ai-inference"
       description: "Inference API for Azure-supported AI models"
       version: "1.0.0-beta.1"
+    flavor: azure
