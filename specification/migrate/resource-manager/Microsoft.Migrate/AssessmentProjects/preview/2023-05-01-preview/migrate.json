@@ -11547,6 +11547,22 @@
           "format": "float",
           "description": "Write Operations per second.",
           "readOnly": true
+        },
+        "assessedExternalStorageType": {
+          "$ref": "#/definitions/ExternalStorageType",
+          "description": "Associated storage Type recommended for Disk.",
+          "readOnly": true
+        },
+        "estimatedDiskSizeInGB": {
+          "type": "number",
+          "format": "float",
+          "description": "Estimated Disk Size in GB.",
+          "readOnly": true
+        },
+        "suitabilityDetail": {
+          "$ref": "#/definitions/AzureDiskSuitabilityDetail",
+          "description": "Gets the suitability detail.",
+          "readOnly": true
         }
       }
     },
@@ -11870,6 +11886,14 @@
           },
           "x-ms-identifiers": []
         },
+        "avsExternalStorageTypes": {
+          "type": "array",
+          "description": "AVS External Storage Types Supported.",
+          "items": {
+            "$ref": "#/definitions/AvsExternalStorageOptions"
+          },
+          "x-ms-identifiers": []
+        },
         "failuresToTolerateAndRaidLevelValues": {
           "type": "array",
           "description": "FTT and Raid level values.",
@@ -11947,6 +11971,22 @@
             "$ref": "#/definitions/AzureAvsNodeType"
           }
         },
+        "externalStorageTypes": {
+          "type": "array",
+          "description": "AVS external storage types.",
+          "items": {
+            "$ref": "#/definitions/ExternalStorageType"
+          }
+        },
+        "costComponents": {
+          "type": "array",
+          "description": "collection of cost components.",
+          "items": {
+            "$ref": "#/definitions/CostComponent"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "reservedInstance": {
           "$ref": "#/definitions/AzureReservedInstance",
           "description": "Reserved instance."
@@ -12014,6 +12054,24 @@
           "description": "EstimatedNodes AVS SKU for Assessment.",
           "items": {
             "$ref": "#/definitions/AvsEstimatedNode"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "avsEstimatedExternalStorages": {
+          "type": "array",
+          "description": "Estimated External Storage for Assessment.",
+          "items": {
+            "$ref": "#/definitions/AvsEstimatedExternalStorage"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "avsEstimatedNetworks": {
+          "type": "array",
+          "description": "Estimated Externsal Storage for Assessment.",
+          "items": {
+            "$ref": "#/definitions/AvsEstimatedNetwork"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -12152,6 +12210,23 @@
         }
       ]
     },
+    "AvsExternalStorageOptions": {
+      "type": "object",
+      "description": "AVS External Storage specific options.",
+      "properties": {
+        "storageType": {
+          "$ref": "#/definitions/ExternalStorageType",
+          "description": "AVS external storage type."
+        },
+        "targetLocations": {
+          "type": "array",
+          "description": "List of locations where this storage type is available.",
+          "items": {
+            "$ref": "#/definitions/AzureLocation"
+          }
+        }
+      }
+    },
     "AvsNodeSummary": {
       "type": "object",
       "description": "Azure Avs Node summary.",
@@ -12214,6 +12289,64 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "estimatedExternalStorage": {
+          "type": "array",
+          "description": "Estimated External Storage",
+          "items": {
+            "$ref": "#/definitions/EstimatedExternalStorage"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "estimatedNetwork": {
+          "type": "array",
+          "description": "Estimated Network",
+          "items": {
+            "$ref": "#/definitions/EstimatedNetwork"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AvsEstimatedExternalStorage": {
+      "type": "object",
+      "description": "Details on the Estimated External Storage for AVS Assessment.",
+      "properties": {
+        "monthlyPrice": {
+          "type": "number",
+          "format": "float",
+          "description": "Total monthly cost for type of storage."
+        },
+        "storageType": {
+          "$ref": "#/definitions/ExternalStorageType",
+          "description": "Recommended External Storage."
+        },
+        "totalStorageInGB": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted total Storage used in GB."
+        },
+        "storageUtilization": {
+          "type": "number",
+          "format": "float",
+          "description": "Predicted storage utilization."
+        }
+      }
+    },
+    "AvsEstimatedNetwork": {
+      "type": "object",
+      "description": "Details on the Estimated Network Costs for AVS Assessment.",
+      "properties": {
+        "monthlyPrice": {
+          "type": "number",
+          "format": "float",
+          "description": "monthly cost for networktype."
+        },
+        "networkType": {
+          "$ref": "#/definitions/NetworkSkuType",
+          "description": "Recommended Network Sku."
         }
       }
     },
@@ -12419,7 +12552,9 @@
       "type": "string",
       "enum": [
         "Unknown",
-        "AV36"
+        "AV36",       
+        "AV36P",
+        "AV52"
       ],
       "x-ms-enum": {
         "name": "AzureAvsNodeType",
@@ -17650,7 +17785,10 @@
         "MonthlyAzureHybridCostSavings",
         "MonthlySecurityCost",
         "MonthlyPremiumV2StorageCost",
-        "MonthlyLinuxAzureHybridCostSavings"
+        "MonthlyLinuxAzureHybridCostSavings",
+        "MonthlyAvsNodeCost",
+        "MonthlyExternalStorageCost",
+        "MonthlyNetworkCost"
       ],
       "x-ms-enum": {
         "name": "CostComponentName",
@@ -18076,6 +18214,52 @@
         }
       }
     },
+    "EstimatedExternalStorage": {
+      "type": "object",
+      "description": "Estimated external storage",
+      "properties": {
+        "storageType": {
+          "$ref": "#/definitions/ExternalStorageType",
+          "description": "External storage type",
+          "readOnly": true
+        },
+        "totalStorageInGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total storage allocation in GB",
+          "readOnly": true
+        },
+        "storageUtilisation": {
+          "type": "number",
+          "format": "float",
+          "description": "Percent storage utilisation",
+          "readOnly": true
+        },
+        "totalStorageCost": {
+          "type": "number",
+          "format": "float",
+          "description": "Total storage cost",
+          "readOnly": true
+        }
+      }
+    },
+    "EstimatedNetwork": {
+      "type": "object",
+      "description": "Estimated network",
+      "properties": {
+        "skuType": {
+          "$ref": "#/definitions/NetworkSkuType",
+          "description": "Network SKU type.",
+          "readOnly": true
+        },
+        "cost": {
+          "type": "number",
+          "format": "float",
+          "description": "Network Sku type cost.",
+          "readOnly": true
+        }
+      }
+    },
     "EvaluatedAvsMachine": {
       "type": "object",
       "description": "Evaluated AVS machine resource.",
@@ -18431,6 +18615,48 @@
           "type": "string",
           "description": "Is machine ready for migration."
         }
+      }
+    },
+    "ExternalStorageType": {
+      "type": "string",
+      "description": "Different External storage skus.",
+      "enum": [
+        "Unknown",
+        "None",
+        "AnfStandard",
+        "AnfPremium",
+        "AnfUltra"
+      ],
+      "x-ms-enum": {
+        "name": "ExternalStorageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Indicates un-supported external storage."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Indicates No external storage."
+          },
+          {
+            "name": "AnfStandard",
+            "value": "AnfStandard",
+            "description": "ANF external storage with Standard SKU."
+          },
+          {
+            "name": "AnfPremium",
+            "value": "AnfPremium",
+            "description": "ANF external storage with Premium SKU."
+          },
+          {
+            "name": "AnfUltra",
+            "value": "AnfUltra",
+            "description": "ANF external storage with Ultra SKU."
+          }
+        ]
       }
     },
     "FacilitySettings": {
@@ -19805,6 +20031,36 @@
         "hardwareSoftwareCostPercentage",
         "maintenanceCostPercentage"
       ]
+    },
+    "NetworkSkuType": {
+      "type": "string",
+      "description": "Different network skus.",
+      "enum": [
+        "Unknown",
+        "None",
+        "ExpressRouteUltra"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkSkuType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Indicates un-supported network SKU."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Indicates No network SKU."
+          },
+          {
+            "name": "ExpressRouteUltra",
+            "value": "ExpressRouteUltra",
+            "description": "Express Route network type with Ultra SKU."
+          }
+        ]
+      }
     },
     "NodePool": {
       "type": "object",
