@@ -362,6 +362,104 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/getAutoMigrationFreeSlots": {
+      "post": {
+        "summary": "Get auto migration available/free slots",
+        "description": "This method gets the available slots for auto migration for a given single server resource id",
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "GetFreeAutoMigrationSlots",
+        "x-ms-examples": {
+          "GetFreeAutoMigrationSlots": {
+            "$ref": "./examples/GetFreeAutoMigrationSlots.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "migrationScheduleTimeRange",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoMigrationScheduleTimeRange"
+            },
+            "description": "The required parameters for getting available/free slots for auto migration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FreeSlotsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/getLatestAutoMigrationSchedule": {
+      "post": {
+        "summary": "Get latest auto migration schedule",
+        "description": "This method gets the latest auto migration schedule for a given single server resource id",
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "GetAutoMigrationSchedule",
+        "x-ms-examples": {
+          "GetAutoMigrationSchedule": {
+            "$ref": "./examples/GetAutoMigrationSchedule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "migrationScheduleResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoMigrationScheduleResource"
+            },
+            "description": "The required parameters for getting latest auto migration schedule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoMigrationScheduleResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1237,6 +1335,90 @@
         }
       },
       "description": "Represents a migration name's availability."
+    },
+    "AutoMigrationScheduleTimeRange": {
+      "type": "object",
+      "properties": {
+        "startTimeInUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Start time in UTC for migration window"
+        },
+        "endTimeInUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "End time in UTC for migration window"
+        }
+      },
+      "description": "The time range between which the slots are required for."
+    },
+    "FreeSlotsResult": {
+      "type": "object",
+      "properties": {
+        "slotDate": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date where there are slots available",
+          "readOnly": true
+        },
+        "timeSlots": {
+          "description": "A list of available/free slots.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoMigrationScheduleTimeRange"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Capability for the PostgreSQL server"
+    },
+    "AutoMigrationScheduleResource": {
+      "type": "object",
+      "properties": {
+        "sourceDbServerResourceId": {
+          "type": "string",
+          "description": "The Resource ID for the single server"
+        },
+        "autoMigrationStartTimeInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The auto migration schedule start time in UTC."
+        },
+        "autoMigrationEndTimeInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The auto migration schedule end time in UTC."
+        },
+        "autoMigrationScheduleCreateTimeInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The schedule create time in UTC"
+        },
+        "migrationName": {
+          "type": "string",
+          "description": "The migration name if the migration has started."
+        },
+        "scheduleId": {
+          "type": "string",
+          "pattern": "([a-z0-9]){8,8}[-]([a-z0-9]){4,4}[-]([a-z0-9]){4,4}[-]([a-z0-9]){4,4}[-]([a-z0-9]){12,12}",
+          "description": "The automigration schedule id"
+        },
+        "scheduleState": {
+          "enum": [
+            "InProgress",
+            "Canceled",
+            "Failed",
+            "Succeeded"
+          ],
+          "type": "string",
+          "description": "The automigration schedule state.",
+          "x-ms-enum": {
+            "name": "ScheduleState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The schedule details containing source server details to fetch the latest schedule for."
     }
   },
   "parameters": {
