@@ -112,7 +112,7 @@ namespace Customizations {
     acknowledgeEvents is acknowledgeCloudEvents;
     releaseEvents is releaseCloudEvents;
     rejectEvents is rejectCloudEvents;
-    renewLocks is renewCloudEventLocks;
+    renewEventLocks is renewCloudEventLocks;
   }
 }
 
