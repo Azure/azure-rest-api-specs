@@ -370,10 +370,10 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "GetFreeAutoMigrationSlots",
+        "operationId": "GetAutoMigrationFreeSlots",
         "x-ms-examples": {
-          "GetFreeAutoMigrationSlots": {
-            "$ref": "./examples/GetFreeAutoMigrationSlots.json"
+          "GetAutoMigrationFreeSlots": {
+            "$ref": "./examples/Migrations_GetAutoMigrationFreeSlots.json"
           }
         },
         "parameters": [
@@ -422,7 +422,56 @@
         "operationId": "GetAutoMigrationSchedule",
         "x-ms-examples": {
           "GetAutoMigrationSchedule": {
-            "$ref": "./examples/GetAutoMigrationSchedule.json"
+            "$ref": "./examples/Migrations_GetAutoMigrationSchedule.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetDbServerSubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "migrationScheduleResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoMigrationScheduleResource"
+            },
+            "description": "The required parameters for getting latest auto migration schedule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoMigrationScheduleResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/updateAutoMigrationSchedule": {
+      "post": {
+        "summary": "Update auto migration schedule",
+        "description": "This method updates the auto migration schedule for a given single server resource id",
+        "tags": [
+          "Migrations"
+        ],
+        "operationId": "AutoMigrationScheduleUpdate",
+        "x-ms-examples": {
+          "AutoMigrationScheduleUpdate": {
+            "$ref": "./examples/Migrations_Update_AutoMigrationSchedule.json"
           }
         },
         "parameters": [
