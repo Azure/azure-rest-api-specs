@@ -645,6 +645,38 @@
       ],
       "x-ms-discriminator-value": "function"
     },
+    "ChatCompletionsFunctionToolSelection": {
+      "type": "object",
+      "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function that should be called."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ChatCompletionsNamedFunctionToolSelection": {
+      "type": "object",
+      "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/ChatCompletionsFunctionToolSelection",
+          "description": "The function that should be called."
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsNamedToolSelection"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
     "ChatCompletionsNamedToolSelection": {
       "type": "object",
       "description": "An abstract representation of an explicit, named tool selection to use for a chat completions request.",
@@ -721,7 +753,8 @@
       "description": "Represents a generic policy for how a chat completions tool may be selected.",
       "enum": [
         "auto",
-        "none"
+        "none",
+        "required"
       ],
       "x-ms-enum": {
         "name": "ChatCompletionsToolSelectionPreset",
@@ -736,6 +769,11 @@
             "name": "none",
             "value": "none",
             "description": "Specifies that the model should not respond with a tool call and should instead provide a standard chat\ncompletions response. Response content may still be influenced by the provided tool definitions."
+          },
+          {
+            "name": "required",
+            "value": "required",
+            "description": "Specifies that the model should respond with a call to one or more tools."
           }
         ]
       }
