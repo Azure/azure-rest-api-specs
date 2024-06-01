@@ -95,8 +95,8 @@ namespace Customizations {
     },
     "go"
   )
-  interface ClientSender3 {
-    send is publishCloudEvent;
+  interface ClientSenderGo {
+    sendEvent is publishCloudEvent;
     sendEvents is publishCloudEvents;
   }
 
@@ -107,20 +107,26 @@ namespace Customizations {
     },
     "go"
   )
-  interface ClientReceiver3 {
-    receive is receiveCloudEvents;
-    acknowledge is acknowledgeCloudEvents;
-    release is releaseCloudEvents;
-    reject is rejectCloudEvents;
-    renewLock is renewCloudEventLocks;
+  interface ClientReceiverGo {
+    receiveEvents is receiveCloudEvents;
+    acknowledgeEvents is acknowledgeCloudEvents;
+    releaseEvents is releaseCloudEvents;
+    rejectEvents is rejectCloudEvents;
+    renewLocks is renewCloudEventLocks;
   }
 }
 
 // All Language customizations
-@@access(publishCloudEvent, Access.internal);
-@@access(publishCloudEvents, Access.internal);
-@@access(receiveCloudEvents, Access.internal, "python");
 
+// publishCloudEvent access level
+@@access(publishCloudEvent, Access.public, "go"); // making public for Go, it's a simpler fix on the backend than generating it as internal
+@@access(publishCloudEvent, Access.internal);
+
+// publishCloudEvents access level
+@@access(publishCloudEvents, Access.public, "go"); // making public for Go, it's a simpler fix on the backend than generating it as internal
+@@access(publishCloudEvent, Access.internal);
+
+@@access(receiveCloudEvents, Access.internal, "python");
 @@access(acknowledgeCloudEvents, Access.internal, "python");
 @@access(releaseCloudEvents, Access.internal, "python");
 @@access(rejectCloudEvents, Access.internal, "python");
