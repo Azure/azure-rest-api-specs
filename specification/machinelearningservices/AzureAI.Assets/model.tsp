@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -20,8 +21,8 @@ model AssetVersion {
   @visibility("read")
   id: string;
 
-  @doc("Update stage to 'Archive' for soft delete. Default is Development, which means the asset is under development.")
-  stage: string = "Development";
+  @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
+  stage?: string = "Development";
 
   @doc("Description information of the asset.")
   description?: string;
@@ -30,10 +31,10 @@ model AssetVersion {
   @visibility("read")
   systemData?: SystemData;
 
-  @doc("Asset's tags.")
+  @doc("Asset's tags. Unlike properties, tags are fully mutable.")
   tags?: Record<string>;
 
-  @doc("Asset's properties.")
+  @doc("Asset's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
   properties?: Record<string>;
 }
 
@@ -56,9 +57,33 @@ model PagedIndex {
   nextLink?: ResourceLocation<Index>;
 }
 
+@doc("Prompt resource definition")
+@added(Versions.`2024-05-01-preview`)
+model Prompt is AssetVersion {
+  @doc("Default workspace blob storage Ui. Should work across storage types and auth scenarios.")
+  dataUri: string;
+
+  @doc("Relative path of the prompt data file at the dataUri location")
+  templatePath: string;
+}
+
+@doc("Paged collection of PromptVersion items")
+@pagedResult
+@added(Versions.`2024-05-01-preview`)
+model PagedPrompt {
+  @doc("The list of Prompts.")
+  @extension("x-ms-identifiers", [])
+  @items
+  value: Prompt[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<Prompt>;
+}
+
 @doc("Next version definition.")
 model VersionInfo {
-  @doc("Next version as defined by the server.")
+  @doc("Next version as defined by the server. The server keeps track of all versions that are string-representations of integers. If one exists, the nextVersion will be a string representation of the highest integer value + 1. Otherwise, the nextVersion will default to '1'.")
   nextVersion?: int64;
 
   @doc("Current latest version of the resource.")
