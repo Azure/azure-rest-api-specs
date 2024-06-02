@@ -49,4 +49,8 @@ enum Versions {
   @doc("Azure Machine Learning Services api version 2024-04-01-preview.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-04-01-preview`,
+
+  @doc("Azure Machine Learning Services api version 2024-05-01-preview.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `2024-05-01-preview`,
 }
