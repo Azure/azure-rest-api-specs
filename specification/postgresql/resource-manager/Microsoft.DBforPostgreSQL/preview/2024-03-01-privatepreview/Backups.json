@@ -61,28 +61,19 @@
           },
           {
             "$ref": "#/parameters/BackupNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackupResource"
-            },
-            "description": "The required parameters for creating backups."
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BackupResource"
+              "$ref": "#/definitions/ServerBackup"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/BackupResource"
+              "$ref": "#/definitions/ServerBackup"
             }
           },
           "202": {

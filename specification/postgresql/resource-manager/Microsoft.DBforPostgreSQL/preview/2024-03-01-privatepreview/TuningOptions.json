@@ -176,7 +176,7 @@
       "properties": {
         "method": {
           "type": "string",
-          "description": "Method of implementaiton for recommended action"
+          "description": "Method of implementation for recommended action"
         },
         "script": {
           "type": "string",
@@ -364,6 +364,24 @@
         }
       }
     },
+    "TuningOptionsResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id."
+        },
+        "type": {
+          "type": "string",
+          "description": "Tuning options type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the tuning option."
+        }
+      },
+      "description": "Stores property that features impact on some metric if this recommended action is applied."
+    },
     "TuningOptionsListResult": {
       "description": "A list of available tuning options.",
       "type": "object",
@@ -373,7 +391,7 @@
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/parameters/TuningOptionParameter"
+            "$ref": "#/definitions/TuningOptionsResource"
           },
           "x-ms-identifiers": [
             "name"
