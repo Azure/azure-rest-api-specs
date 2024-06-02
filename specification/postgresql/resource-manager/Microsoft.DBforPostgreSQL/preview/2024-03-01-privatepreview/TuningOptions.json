@@ -60,10 +60,10 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/TuningOption"
+            "$ref": "#/parameters/TuningOptionParameter"
           },
           {
-            "$ref": "#/parameters/RecommendationType"
+            "$ref": "#/parameters/RecommendationTypeParameter"
           }
         ],
         "responses": {
@@ -71,6 +71,93 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/IndexRecommendationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions": {
+      "get": {
+        "tags": [
+          "TuningOptions"
+        ],
+        "operationId": "TuningOptions_ListByServer",
+        "x-ms-examples": {
+          "TuningOptions_ListByServer": {
+            "$ref": "./examples/Tuning_ListTuningOptions.json"
+          }
+        },
+        "description": "Retrieve the list of available tuning options.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TuningOptionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}": {
+      "get": {
+        "tags": [
+          "TuningOptions"
+        ],
+        "operationId": "TuningOptions_Get",
+        "x-ms-examples": {
+          "TuningOptions_Get": {
+            "$ref": "./examples/Tuning_GetTuningOption.json"
+          }
+        },
+        "description": "Retrieve the tuning option on a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TuningOptionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TuningOptionsResource"
             }
           },
           "default": {
@@ -266,6 +353,27 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IndexRecommendationResource"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "TuningOptionsListResult": {
+      "description": "A list of available tuning options.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available tuning options.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/parameters/TuningOptionParameter"
           },
           "x-ms-identifiers": [
             "name"
