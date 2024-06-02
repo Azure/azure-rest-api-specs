@@ -6390,7 +6390,7 @@
         },
         "vmSizeId": {
           "type": "string",
-          "description": "The id of the size of a virtual machine connected to a hostpool."
+          "description": "The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v5"
         },
         "diskInfo": {
           "$ref": "#/definitions/DiskInfoProperties",
@@ -6398,6 +6398,7 @@
         },
         "customConfigurationScriptUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
         },
         "imageInfo": {
@@ -6537,7 +6538,7 @@
         },
         "vmSizeId": {
           "type": "string",
-          "description": "The id of the size of a virtual machine connected to a hostpool."
+          "description": "The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v5"
         },
         "diskInfo": {
           "$ref": "#/definitions/DiskInfoProperties",
@@ -6545,6 +6546,7 @@
         },
         "customConfigurationScriptUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning."
         },
         "imageInfo": {
@@ -6623,7 +6625,7 @@
         },
         "vmSizeId": {
           "type": "string",
-          "description": "The id of the size of a virtual machine connected to a hostpool."
+          "description": "The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v5"
         },
         "diskInfo": {
           "$ref": "#/definitions/DiskInfoPatchProperties",
@@ -6631,6 +6633,7 @@
         },
         "customConfigurationScriptUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.",
           "maxLength": 260
         },
@@ -6943,7 +6946,7 @@
         },
         "ouPath": {
           "type": "string",
-          "description": "The ou path."
+          "description": "The organizational unit(OU) path."
         },
         "domainName": {
           "type": "string",
@@ -6970,7 +6973,7 @@
       "properties": {
         "mdmProviderGuid": {
           "type": "string",
-          "description": "The mdm guid."
+          "description": "The Mobile Device Management(MDM) guid."
         }
       }
     },
@@ -6984,10 +6987,12 @@
       "properties": {
         "usernameKeyVaultSecretUri": {
           "type": "string",
+          "format": "uri",
           "description": "The uri to access the secret that the username is stored in."
         },
         "passwordKeyVaultSecretUri": {
           "type": "string",
+          "format": "uri",
           "description": "The uri to access the secret that the password is stored in."
         }
       }
@@ -6998,10 +7003,12 @@
       "properties": {
         "usernameKeyVaultSecretUri": {
           "type": "string",
+          "format": "uri",
           "description": "The uri to access the secret that the username is stored in."
         },
         "passwordKeyVaultSecretUri": {
           "type": "string",
+          "format": "uri",
           "description": "The uri to access the secret that the password is stored in."
         }
       }
@@ -7015,11 +7022,12 @@
       "properties": {
         "subnetId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource ID of the subnet."
         },
         "securityGroupId": {
           "type": "string",
-          "description": "The resource ID of the security group. Any allowable/open ports should be specified in the NSG."
+          "description": "The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG)."
         }
       }
     },
@@ -7029,11 +7037,12 @@
       "properties": {
         "subnetId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The resource ID of the subnet."
         },
         "securityGroupId": {
           "type": "string",
-          "description": "The resource ID of the security group. Any allowable/open ports should be specified in the NSG."
+          "description": "The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG)."
         }
       }
     },
@@ -7129,6 +7138,7 @@
         },
         "storageUri": {
           "type": "string",
+          "format": "uri",
           "description": "Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used."
         }
       },
@@ -7690,6 +7700,7 @@
         },
         "packageLookbackUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Lookback url to third party control plane, is null for native app attach packages"
         },
         "customData": {
@@ -7724,6 +7735,7 @@
         },
         "packageLookbackUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Lookback url to third party control plane, should be null for first party packages"
         },
         "customData": {
@@ -8606,7 +8618,7 @@
         },
         "sessionHostConfiguration": {
           "type": "string",
-          "description": "SessionHostConfiguration version reference at the time the update is initiated, in the format of date time.",
+          "description": "SessionHostConfiguration version reference at the time the update is initiated, in the format of date time. Example: 2024-04-26T04:56:45Z",
           "readOnly": true
         },
         "sessionHostHealthCheckResults": {
