@@ -23,7 +23,6 @@ namespace AzureHealthInsights;
 model AzureKey
   is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style for AAD"
 @doc("The Microsoft Entra Id Flow")
 model EntraIdToken
   is Azure.Core.AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>;
