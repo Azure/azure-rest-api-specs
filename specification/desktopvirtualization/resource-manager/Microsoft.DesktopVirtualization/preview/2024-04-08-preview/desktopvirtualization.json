@@ -2806,17 +2806,6 @@
         "responses": {
           "200": {
             "description": "Successfully initiated hostpool update.",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -2824,10 +2813,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
