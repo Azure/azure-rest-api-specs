@@ -47,7 +47,7 @@ interface Evidence {
    * Get the evidence metadata
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Evidences_Get")
+  @operationId("Evidence_Get")
   get is ArmResourceRead<
     EvidenceResource,
     {
@@ -59,7 +59,7 @@ interface Evidence {
    * Create or Update an evidence a specified report
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Evidences_CreateOrUpdate")
+  @operationId("Evidence_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     EvidenceResource,
     {
@@ -72,14 +72,14 @@ interface Evidence {
    *  Delete an existent evidence from a specified report
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Evidences_Delete")
+  @operationId("Evidence_Delete")
   delete is ArmResourceDeleteSync<EvidenceResource>;
 
   /**
    * Returns a paginated list of evidences for a specified report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Evidences_ListByReport")
+  @operationId("Evidence_ListByReport")
   listByReport is ArmResourceListByParent<
     EvidenceResource,
     {
@@ -92,7 +92,7 @@ interface Evidence {
    * Download evidence file.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Evidences_Download")
+  @operationId("Evidence_Download")
   download is ArmResourceActionSync<
     EvidenceResource,
     EvidenceFileDownloadRequest,

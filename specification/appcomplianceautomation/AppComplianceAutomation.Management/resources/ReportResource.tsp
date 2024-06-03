@@ -47,14 +47,14 @@ interface Report {
    * Get the AppComplianceAutomation report and its properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Reports_Get")
+  @operationId("Report_Get")
   get is ArmResourceRead<ReportResource>;
 
   /**
    * Create a new AppComplianceAutomation report or update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Reports_CreateOrUpdate")
+  @operationId("Report_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReportResource,
     Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
@@ -65,7 +65,7 @@ interface Report {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility
-  @operationId("Reports_Update")
+  @operationId("Report_Update")
   update is ArmCustomPatchAsync<
     ReportResource,
     ReportResourcePatch,
@@ -76,7 +76,7 @@ interface Report {
    * Delete an AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Reports_Delete")
+  @operationId("Report_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ReportResource,
     Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
@@ -86,7 +86,7 @@ interface Report {
    * Get the AppComplianceAutomation report list for the tenant.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Reports_List")
+  @operationId("Report_List")
   list is ArmResourceListByParent<
     ReportResource,
     {
@@ -99,7 +99,7 @@ interface Report {
    * Synchronize attestation record from app compliance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Reports_SyncCertRecord")
+  @operationId("Report_SyncCertRecord")
   syncCertRecord is ArmResourceActionAsync<
     ReportResource,
     SyncCertRecordRequest,
@@ -111,7 +111,7 @@ interface Report {
    * Checks the report's nested resource name availability, e.g: Webhooks, Evidences, Snapshots.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Reports_NestedResourceCheckNameAvailability")
+  @operationId("Report_NestedResourceCheckNameAvailability")
   checkNameAvailability is ArmResourceActionSync<
     ReportResource,
     Azure.ResourceManager.Foundations.CheckNameAvailabilityRequest,
@@ -122,7 +122,7 @@ interface Report {
    * Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Reports_Fix")
+  @operationId("Report_Fix")
   fix is ArmResourceActionAsync<
     ReportResource,
     void,

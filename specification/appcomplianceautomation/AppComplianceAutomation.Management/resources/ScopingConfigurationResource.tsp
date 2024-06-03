@@ -73,7 +73,7 @@ interface ScopingConfiguration {
    * Returns a list format of the singleton scopingConfiguration for a specified report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ScopingConfigurations_List")
+  @operationId("ScopingConfiguration_List")
   list is ArmResourceListByParent<ScopingConfigurationResource>;
 }
 
