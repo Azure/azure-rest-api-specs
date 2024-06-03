@@ -45,6 +45,13 @@ interface MongoClusters {
   /** Check if mongo cluster name is available for use. */
   @action("checkMongoClusterNameAvailability")
   checkNameAvailability is checkLocalNameAvailability;
+  /** Promotes a replica mongo cluster to a primary role. */
+  @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  promote is ArmResourceActionSync<
+    MongoCluster,
+    PromoteReplicaRequest,
+    PromoteReplicaResult
+  >;
 }
 
 /** The properties of a mongo cluster. */
@@ -247,6 +254,40 @@ model MongoClusterReplicaParameters {
 
   /** Description of the connection string */
   location: string;
+}
+
+/** Promote replica request properties. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+model PromoteReplicaRequest {
+
+  /** The promote option to apply to the operation. */
+  promoteOption: PromoteOption;
+
+  /** The mode to apply to the promote operation. Value is optional and defalt value is 'Switchover'. */
+  mode?: PromoteMode;
+}
+
+/** Promote request results. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+model PromoteReplicaResult {
+}
+
+/** The option to apply to a promote operation. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+union PromoteOption {
+  string,
+
+  /** Promote option forces the promotion without waiting for the replica to be caught up to the primary. This can result in data-loss so should only be used during disaster recovery scenarios.*/
+  "Forced",
+}
+
+/** The mode to apply to a promote operation. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+union PromoteMode {
+  string,
+
+  /** Promote mode which switches the primary role to the current cluster. The original primary will be switched to a replica role. */
+  "Switchover",
 }
 
 /** Replica properties of the mongo cluster. */

@@ -1123,6 +1123,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/promote": {
+      "post": {
+        "operationId": "MongoClusters_Promote",
+        "tags": [
+          "MongoClusters"
+        ],
+        "description": "Promotes a replica mongo cluster to a primary role.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mongoClusterName",
+            "in": "path",
+            "description": "The name of the mongo cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 40,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PromoteReplicaRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Promote request results."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Promotes a replica Mongo Cluster resource to a primary role.": {
+            "$ref": "./examples/MongoClusters_ForcePromoteReplica.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/replicas": {
       "get": {
         "operationId": "Replicas_ListByMongoCluster",
@@ -1775,6 +1830,63 @@
       "required": [
         "value"
       ]
+    },
+    "PromoteMode": {
+      "type": "string",
+      "description": "The mode to apply to a promote operation.",
+      "enum": [
+        "Switchover"
+      ],
+      "x-ms-enum": {
+        "name": "PromoteMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Switchover",
+            "value": "Switchover",
+            "description": "Promote mode which switches the primary role to the current cluster. The original primary will be switched to a replica role."
+          }
+        ]
+      }
+    },
+    "PromoteOption": {
+      "type": "string",
+      "description": "The option to apply to a promote operation.",
+      "enum": [
+        "Forced"
+      ],
+      "x-ms-enum": {
+        "name": "PromoteOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Forced",
+            "value": "Forced",
+            "description": "Promote option forces the promotion without waiting for the replica to be caught up to the primary. This can result in data-loss so should only be used during disaster recovery scenarios."
+          }
+        ]
+      }
+    },
+    "PromoteReplicaRequest": {
+      "type": "object",
+      "description": "Promote replica request properties.",
+      "properties": {
+        "promoteOption": {
+          "$ref": "#/definitions/PromoteOption",
+          "description": "The promote option to apply to the operation."
+        },
+        "mode": {
+          "$ref": "#/definitions/PromoteMode",
+          "description": "The mode to apply to the promote operation. Value is optional and defalt value is 'Switchover'."
+        }
+      },
+      "required": [
+        "promoteOption"
+      ]
+    },
+    "PromoteReplicaResult": {
+      "type": "object",
+      "description": "Promote request results."
     },
     "ProvisioningState": {
       "type": "string",

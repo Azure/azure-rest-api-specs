@@ -1,0 +1,101 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  mongoClusterName:
+    type: string
+    prefix: mongoclu
+  replicaClusterName:
+    type: string
+    prefix: replicaclu
+  primaryRegion:
+    type: string
+    value: eastus
+  replicaRegion:
+    type: string
+    value: centralus
+  administratorLoginPassword:
+    type: secureString
+  firewallRuleName:
+    type: string
+    prefix: firewall
+scenarios:
+  - scenario: basic
+    description: Basic scenario for creating, reading and deleting a Mongo Cluster.
+    steps:
+      - step: MongoClusters_NameAvailability
+        exampleFile: ../examples/MongoClusters_NameAvailability.json
+      - step: MongoClusters_CreateOrUpdate
+        exampleFile: ../examples/MongoClusters_Create.json
+        requestUpdate:
+          - replace: /resource/properties/administratorLoginPassword
+            value: $(administratorLoginPassword)
+      - step: MongoClusters_ListByResourceGroup
+        exampleFile: ../examples/MongoClusters_ListByResourceGroup.json
+      - step: MongoClusters_Get
+        exampleFile: ../examples/MongoClusters_Get.json
+      - step: FirewallRules_CreateOrUpdate
+        exampleFile: ../examples/MongoClusters_FirewallRuleCreate.json
+      - step: FirewallRules_ListByMongoCluster
+        exampleFile: ../examples/MongoClusters_FirewallRuleList.json
+      - step: FirewallRules_Get
+        exampleFile: ../examples/MongoClusters_FirewallRuleGet.json
+      - step: MongoClusters_ListConnectionStrings
+        exampleFile: ../examples/MongoClusters_ListConnectionStrings.json
+      - step: MongoClusters_Update
+        exampleFile: ../examples/MongoClusters_PatchDiskSize.json
+      - step: FirewallRules_Delete
+        exampleFile: ../examples/MongoClusters_FirewallRuleDelete.json
+      - step: MongoClusters_Delete
+        exampleFile: ../examples/MongoClusters_Delete.json
+  - scenario: georeplica
+    description: Scenario to create a primary and geo replica, promote the replica and the promote the original primary.
+    steps:
+      - step: MongoClusters_CreateSource
+        exampleFile: ../examples/MongoClusters_Create.json
+        requestUpdate:
+          - replace: /resource/location
+            value: $(primaryRegion)
+          - replace: /resource/properties/administratorLoginPassword
+            value: $(administratorLoginPassword)
+        outputVariables:
+          sourceResourceId:
+            type: string
+            fromResponse: /id
+      - step: MongoClusters_CreateGeoReplica
+        exampleFile: ../examples/MongoClusters_CreateGeoReplica.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(replicaClusterName)
+          - replace: /resource/location
+            value: $(replicaRegion)
+          - replace: /mongoClusterName
+            value: $(replicaClusterName)
+          - replace: /resource/properties/replicaParameters/sourceResourceId
+            value: $(sourceResourceId)
+          - replace: /resource/properties/replicaParameters/sourceLocation
+            value: $(primaryRegion)
+      - step: MongoClusters_ReplicaList
+        exampleFile: ../examples/MongoClusters_RepliaList.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(mongoClusterName)
+      - step: MongoClusters_ForcePromoteReplica
+        exampleFile: ../examples/MongoClusters_ForcePromoteReplica.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(replicaClusterName)
+      - step: MongoClusters_ReplicaList
+        exampleFile: ../examples/MongoClusters_RepliaList.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(replicaClusterName)
+      - step: MongoClusters_ForcePromoteReplica
+        exampleFile: ../examples/MongoClusters_ForcePromoteReplica.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(mongoClusterName)
+      - step: MongoClusters_ReplicaList
+        exampleFile: ../examples/MongoClusters_RepliaList.json
+        requestUpdate:
+          - replace: /mongoClusterName
+            value: $(mongoClusterName)
