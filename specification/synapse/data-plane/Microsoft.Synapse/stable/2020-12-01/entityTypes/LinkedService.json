@@ -1040,6 +1040,10 @@
           "$ref": "../artifacts.json#/definitions/SecretBase",
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference."
         },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The credential reference containing authentication information."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
