@@ -294,10 +294,6 @@
         }
       }
     },
-    "Azure.Core.RequestIdResponseHeader": {
-      "type": "object",
-      "description": "Provides the 'x-ms-request-id' header to enable request correlation in responses."
-    },
     "ClinicalDocumentType": {
       "type": "string",
       "description": "The type of the clinical document.",
@@ -2127,23 +2123,10 @@
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
-        },
-        "requestId": {
-          "type": "object",
-          "description": "An opaque, globally-unique, server-generated string identifier for the request.",
-          "properties": {
-            "response": {
-              "$ref": "#/definitions/Azure.Core.RequestIdResponseHeader"
-            }
-          },
-          "required": [
-            "response"
-          ]
         }
       },
       "required": [
-        "error",
-        "requestId"
+        "error"
       ]
     },
     "ImagingProcedure": {
