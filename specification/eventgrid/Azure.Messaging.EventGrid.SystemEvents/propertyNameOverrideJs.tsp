@@ -12,7 +12,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid.SystemEvents;
 
-@@clientName(AcsRouterWorkerSelector.value, "labelValue", "go");
+@@clientName(AcsRouterWorkerSelector.value, "labelValue", "javascript");
 @@clientName(AcsMessageMediaContent.id, "mediaId", "javascript");
 @@clientName(AcsMessageContext.id, "messageId", "javascript");
 @@clientName(AcsMessageInteractiveContent.type, "replyKind", "javascript");
