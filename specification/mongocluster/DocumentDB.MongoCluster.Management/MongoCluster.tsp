@@ -132,7 +132,7 @@ union CreateMode {
 
   /** Create a replica cluster in the same geographic region as the source cluster. */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
-  "Replica"
+  "Replica",
 }
 
 /** The kind of the node on the cluster. */
@@ -301,5 +301,5 @@ union ReplicationState {
   "Broken",
 
   /** Replication link is re-configuring. */
-  "Reconfiguring"
+  "Reconfiguring",
 }
