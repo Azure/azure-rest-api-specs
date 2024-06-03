@@ -10,7 +10,7 @@ emit:
 # - "@azure-tools/typespec-csharp"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
@@ -35,7 +35,7 @@ options:
     enable-sync-stack: true
     generate-tests: false
     custom-types-subpackage: "implementation.models"
-    custom-types: "FileListResponse,OpenAIPageableListOfAssistant,OpenAIPageableListOfAssistantFile,OpenAIPageableListOfMessageFile,OpenAIPageableListOfRunStep,OpenAIPageableListOfThreadMessage,OpenAIPageableListOfThreadRun"
+    custom-types: "FileListResponse,OpenAIPageableListOfAssistant,OpenAIPageableListOfRunStep,OpenAIPageableListOfThreadMessage,OpenAIPageableListOfThreadRun,OpenAIPageableListOfVectorStore,OpenAIPageableListOfVectorStoreFile"
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "openai"
