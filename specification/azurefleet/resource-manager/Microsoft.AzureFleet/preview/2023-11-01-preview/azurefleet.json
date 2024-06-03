@@ -528,27 +528,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.Foundations.UserAssignedIdentities": {
-      "type": "object",
-      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.\",",
-      "additionalProperties": {
-        "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
-      }
-    },
-    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
-      "type": "object",
-      "description": "A managed identity assigned by the user.",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The active directory client identifier for this principal."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier for this principal."
-        }
-      }
-    },
     "BasePriorityProfile": {
       "type": "object",
       "description": "Contains common properties that are applicable to both Spot and Regular.",
@@ -773,8 +752,11 @@
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentities",
-          "description": "The identities assigned to this resource by the user."
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
         }
       }
     },

@@ -24,21 +24,10 @@ namespace Azure.AI.OpenAI.Assistants {
   );
   @@access(deleteAssistant, Access.internal, "csharp");
   @@clientName(deleteAssistant, "InternalDeleteAssistant", "csharp");
-  @@access(AssistantFileDeletionStatus, Access.internal, "csharp");
-  @@clientName(AssistantFileDeletionStatus,
-    "InternalAssistantFileDeletionStatus",
-    "csharp"
-  );
-  @@access(deleteAssistantFile, Access.internal, "csharp");
-  @@clientName(deleteAssistantFile, "InternalUnlinkAssistantFile", "csharp");
   @@access(deleteThread, Access.internal, "csharp");
   @@clientName(deleteThread, "InternalDeleteThread", "csharp");
   @@access(listAssistants, Access.internal, "csharp");
   @@clientName(listAssistants, "InternalGetAssistants", "csharp");
-  @@access(listAssistantFiles, Access.internal, "csharp");
-  @@clientName(listAssistantFiles, "InternalGetAssistantFiles", "csharp");
-  @@access(listMessageFiles, Access.internal, "csharp");
-  @@clientName(listMessageFiles, "InternalGetMessageFiles", "csharp");
   @@access(listRunSteps, Access.internal, "csharp");
   @@clientName(listRunSteps, "InternalGetRunSteps", "csharp");
   @@access(listMessages, Access.internal, "csharp");
@@ -156,6 +145,62 @@ namespace Azure.AI.OpenAI.Assistants {
 
   // Ensure some shared types remain public despite interaction with previously internalized details
 
+  // Ensure generator inclusion of streaming "leaf" types not yet referenced by a route
+
+  @@usage(MessageDeltaTextFileCitationAnnotation, Usage.output);
+  @@access(MessageDeltaTextFileCitationAnnotation, Access.public);
+
+  @@usage(MessageDeltaTextFilePathAnnotation, Usage.output);
+  @@access(MessageDeltaTextFilePathAnnotation, Access.public);
+
+  @@usage(MessageDeltaImageFileContent, Usage.output);
+  @@access(MessageDeltaImageFileContent, Access.public);
+
+  @@usage(MessageDeltaTextContent, Usage.output);
+  @@access(MessageDeltaTextContent, Access.public);
+
+  @@usage(RunStepDeltaMessageCreationObject, Usage.output);
+  @@access(RunStepDeltaMessageCreationObject, Access.public);
+
+  @@usage(RunStepDeltaFunction, Usage.output);
+  @@access(RunStepDeltaFunction, Access.public);
+
+  @@usage(RunStepDeltaCodeInterpreterLogOutput, Usage.output);
+  @@access(RunStepDeltaCodeInterpreterLogOutput, Access.public);
+
+  @@usage(RunStepDeltaCodeInterpreterImageOutputObject, Usage.output);
+  @@access(RunStepDeltaCodeInterpreterImageOutputObject, Access.public);
+
+  @@usage(RunStepDeltaChunk, Usage.output);
+  @@access(RunStepDeltaChunk, Access.public);
+
+  @@usage(MessageDeltaChunk, Usage.output);
+  @@access(MessageDeltaChunk, Access.public);
+
+  // Stream events : made public to expose documentation and make class casting for strongly typed languages easier
+
+  @@usage(AssistantStreamEvent, Usage.output);
+  @@access(AssistantStreamEvent, Access.public);
+
+  @@usage(ThreadStreamEvent, Usage.output);
+  @@access(ThreadStreamEvent, Access.public);
+
+  @@usage(RunStreamEvent, Usage.output);
+  @@access(RunStreamEvent, Access.public);
+
+  @@usage(RunStepStreamEvent, Usage.output);
+  @@access(RunStepStreamEvent, Access.public);
+
+  @@usage(MessageStreamEvent, Usage.output);
+  @@access(MessageStreamEvent, Access.public);
+
+  @@usage(ErrorEvent, Usage.output);
+  @@access(ErrorEvent, Access.public);
+
+  @@usage(DoneEvent, Usage.output);
+  @@access(DoneEvent, Access.public);
+
+  // Ensure some shared types remain public despite interaction with previously internalized details
   @@access(MessageTextFilePathAnnotation, Access.public);
   @@access(MessageTextFileCitationAnnotation, Access.public);
   @@access(ListSortOrder, Access.public);
@@ -185,6 +230,4 @@ namespace Azure.AI.OpenAI.Assistants {
   // From https://platform.openai.com/docs/assistants/how-it-works
   // "Note that deleting an AssistantFile doesn’t delete the original File object, it simply deletes the association
   // between that File and the Assistant."
-  @@clientName(createAssistantFile, "LinkAssistantFile", "csharp");
-  // 'Unlink' counterpart already renamed for DeletionStatus merge
 }
