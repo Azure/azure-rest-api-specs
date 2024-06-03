@@ -6,155 +6,201 @@ import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
-import "./propertyNameOverrideGo.tsp";
-import "./propertyNameOverrideCsharp.tsp";
-import "./propertyNameOverrideJs.tsp";
+import "./Microsoft.Media/MediaServices.tsp";
+import "./Microsoft.AVS/AVS.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
 
-using Microsoft.EventGrid.SystemEvents;
 using Azure.ClientGenerator.Core;
+using Microsoft.EventGrid.SystemEvents;
 
 @@clientName(AcsIncomingCallEventData.to,
   "toCommunicationIdentifier",
-  "autorest"
+  "csharp"
 );
 @@clientName(AcsIncomingCallEventData.from,
   "fromCommunicationIdentifier",
-  "autorest"
+  "csharp"
 );
-@@clientName(AcsRouterWorkerSelector.value, "labelValue", "autorest");
 
 @@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
   "deliveryAttemptTimestamp",
-  "autorest"
+  "csharp"
 );
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
   "userActionTimestamp",
-  "autorest"
+  "csharp"
 );
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
-  "autorest"
+  "csharp"
 );
 
-@@clientName(EventHubCaptureFileCreatedEventData.fileUrl,
-  "fileurl",
-  "autorest"
-);
+@@clientName(EventHubCaptureFileCreatedEventData.fileUrl, "fileurl", "csharp");
 
 @@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
   "FhirServiceHostName",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirId,
   "FhirResourceId",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceCreatedEventData.resourceVersionId,
   "FhirResourceVersionId",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceCreatedEventData.resourceType,
   "FhirResourceType",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
   "FhirServiceHostName",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirId,
   "FhirResourceId",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceUpdatedEventData.resourceVersionId,
   "FhirResourceVersionId",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceUpdatedEventData.resourceType,
   "FhirResourceType",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
   "FhirServiceHostName",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirId,
   "FhirResourceId",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceVersionId,
   "FhirResourceVersionId",
-  "autorest"
+  "csharp"
 );
 @@clientName(HealthcareFhirResourceDeletedEventData.resourceType,
   "FhirResourceType",
-  "autorest"
+  "csharp"
 );
 
-@@clientName(DeviceTwinMetadata.lastUpdated, "$lastUpdated", "autorest");
-@@clientName(DeviceTwinProperties.metadata, "$metadata", "autorest");
-@@clientName(DeviceTwinProperties.version, "$version", "autorest");
+@@clientName(DeviceTwinMetadata.lastUpdated, "$lastUpdated", "csharp");
+@@clientName(DeviceTwinProperties.metadata, "$metadata", "csharp");
+@@clientName(DeviceTwinProperties.version, "$version", "csharp");
 
 @@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails",
-  "autorest"
+  "csharp"
 );
 @@clientName(ResourceNotificationsResourceUpdatedEventData.operationalInfo,
   "operationalDetails",
-  "autorest"
+  "csharp"
 );
 @@clientName(ResourceNotificationsResourceDeletedEventData.resourceInfo,
   "resourceDetails",
-  "autorest"
+  "csharp"
 );
 @@clientName(ResourceNotificationsResourceDeletedEventData.operationalInfo,
   "operationalDetails",
-  "autorest"
+  "csharp"
 );
 
 @@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime,
   "queuedOn",
-  "autorest"
+  "csharp"
 );
 @@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
   "completedOn",
-  "autorest"
+  "csharp"
 );
 @@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
   "summaryReportBlobUri",
-  "autorest"
+  "csharp"
 );
 
 @@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind",
-  "autorest"
+  "csharp"
 );
 
-@@clientName(AcsMessageReceivedEventData.channelType,
-  "channelKind",
-  "autorest"
-);
+@@clientName(AcsMessageReceivedEventData.channelType, "channelKind", "csharp");
 
-@@clientName(AcsMessageReceivedEventData.media, "mediaContent", "autorest");
+@@clientName(AcsMessageReceivedEventData.media, "mediaContent", "csharp");
 
 @@clientName(AcsMessageReceivedEventData.interactive,
   "interactiveContent",
-  "autorest"
+  "csharp"
 );
 
-@@clientName(AcsMessageMediaContent.id, "mediaId", "autorest");
+@@clientName(AcsMessageMediaContent.id, "mediaId", "csharp");
 
-@@clientName(AcsMessageContext.id, "messageId", "autorest");
+@@clientName(AcsMessageContext.id, "messageId", "csharp");
 
-@@clientName(AcsMessageInteractiveContent.type, "replyKind", "autorest");
+@@clientName(AcsMessageInteractiveContent.type, "replyKind", "csharp");
 
-@@clientName(AcsMessageInteractiveButtonReplyContent.id,
-  "buttonId",
-  "autorest"
+@@clientName(AcsMessageInteractiveButtonReplyContent.id, "buttonId", "csharp");
+
+@@clientName(AcsMessageInteractiveListReplyContent.id, "listItemId", "csharp");
+
+@@clientName(ResourceNotificationsHealthResourcesAnnotatedEventData.resourceInfo,
+  "ResourceDetails",
+  "csharp"
+);
+@@clientName(ResourceNotificationsHealthResourcesAnnotatedEventData.operationalInfo,
+  "OperationalDetails",
+  "csharp"
 );
 
-@@clientName(AcsMessageInteractiveListReplyContent.id,
-  "listItemId",
-  "autorest"
+@@clientName(ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.resourceInfo,
+  "ResourceDetails",
+  "csharp"
 );
+@@clientName(ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData.operationalInfo,
+  "OperationalDetails",
+  "csharp"
+);
+
+@@clientName(ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.resourceInfo,
+  "ResourceDetails",
+  "csharp"
+);
+@@clientName(ResourceNotificationsResourceManagementCreatedOrUpdatedEventData.operationalInfo,
+  "OperationalDetails",
+  "csharp"
+);
+@@clientName(ResourceNotificationsResourceManagementDeletedEventData.resourceInfo,
+  "ResourceDetails",
+  "csharp"
+);
+
+@@clientName(ResourceNotificationsResourceManagementDeletedEventData.operationalInfo,
+  "OperationalDetails",
+  "csharp"
+);
+
+@@clientName(AcsMessageDeliveryStatusUpdatedEventData.receivedTimeStamp,
+  "receivedTimestamp",
+  "csharp"
+);
+
+@@clientName(AcsMessageEventData.receivedTimeStamp,
+  "receivedTimestamp",
+  "csharp"
+);
+
+@@clientName(AcsMessageReceivedEventData.receivedTimeStamp,
+  "receivedTimestamp",
+  "csharp"
+);
+
+@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
+  "recordingChannelKind",
+  "csharp"
+);
+
+@@clientName(AcsRouterWorkerSelector.state, "SelectorState", "csharp");
+@@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "csharp");
+@@clientName(AcsRouterWorkerSelector.value, "labelValue", "csharp");
