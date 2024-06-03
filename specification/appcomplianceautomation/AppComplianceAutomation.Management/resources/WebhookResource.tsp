@@ -51,14 +51,14 @@ interface Webhook {
    * Get the AppComplianceAutomation webhook and its properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Webhooks_Get")
+  @operationId("Webhook_Get")
   get is ArmResourceRead<WebhookResource>;
 
   /**
    * Create a new AppComplianceAutomation webhook or update an exiting AppComplianceAutomation webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Webhooks_CreateOrUpdate")
+  @operationId("Webhook_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<WebhookResource>;
 
   /**
@@ -66,7 +66,7 @@ interface Webhook {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility
-  @operationId("Webhooks_Update")
+  @operationId("Webhook_Update")
   update is ArmCustomPatchSync<
     WebhookResource,
     WebhookResourcePatch,
@@ -78,14 +78,14 @@ interface Webhook {
    * Delete an AppComplianceAutomation webhook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Webhooks_Delete")
+  @operationId("Webhook_Delete")
   delete is ArmResourceDeleteSync<WebhookResource>;
 
   /**
    * Get the AppComplianceAutomation webhook list.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Webhooks_List")
+  @operationId("Webhook_List")
   list is ArmResourceListByParent<
     WebhookResource,
     {

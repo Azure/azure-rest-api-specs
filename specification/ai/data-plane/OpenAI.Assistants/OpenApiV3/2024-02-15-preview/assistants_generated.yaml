@@ -141,156 +141,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AssistantDeletionStatus'
-  /assistants/{assistantId}/files:
-    post:
-      operationId: createAssistantFile
-      description: Attaches a previously uploaded file to an assistant for use by tools that can read files.
-      parameters:
-        - name: assistantId
-          in: path
-          required: true
-          description: The ID of the assistant to attach the file to.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Information about the attached file.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AssistantFile'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                file_id:
-                  type: string
-                  description: The ID of the previously uploaded file to attach.
-              required:
-                - file_id
-    get:
-      operationId: listAssistantFiles
-      description: Gets a list of files attached to a specific assistant, as used by tools that can read files.
-      parameters:
-        - name: assistantId
-          in: path
-          required: true
-          description: The ID of the assistant to retrieve the list of attached files for.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-        - name: order
-          in: query
-          required: false
-          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
-          schema:
-            $ref: '#/components/schemas/ListSortOrder'
-            default: desc
-        - name: after
-          in: query
-          required: false
-          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-        - name: before
-          in: query
-          required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The requested list of files attached to the specified assistant.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - object
-                  - data
-                  - first_id
-                  - last_id
-                  - has_more
-                properties:
-                  object:
-                    type: string
-                    enum:
-                      - list
-                    description: The object type, which is always list.
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AssistantFile'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-  /assistants/{assistantId}/files/{fileId}:
-    get:
-      operationId: getAssistantFile
-      description: Retrieves a file attached to an assistant.
-      parameters:
-        - name: assistantId
-          in: path
-          required: true
-          description: The ID of the assistant associated with the attached file.
-          schema:
-            type: string
-        - name: fileId
-          in: path
-          required: true
-          description: The ID of the file to retrieve.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: A representation of the attached file.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AssistantFile'
-    delete:
-      operationId: deleteAssistantFile
-      description: |-
-        Unlinks a previously attached file from an assistant, rendering it unavailable for use by tools that can read
-        files.
-      parameters:
-        - name: assistantId
-          in: path
-          required: true
-          description: The ID of the assistant from which the specified file should be unlinked.
-          schema:
-            type: string
-        - name: fileId
-          in: path
-          required: true
-          description: The ID of the file to unlink from the specified assistant.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Status information about the requested file association deletion.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AssistantFileDeletionStatus'
   /files:
     get:
       operationId: listFiles
@@ -452,12 +302,7 @@ paths:
       operationId: updateThread
       description: Modifies an existing thread.
       parameters:
-        - name: threadId
-          in: path
-          required: true
-          description: The ID of the thread to modify.
-          schema:
-            type: string
+        - $ref: '#/components/parameters/UpdateAssistantThreadOptions.threadId'
       responses:
         '200':
           description: Information about the modified thread.
@@ -470,14 +315,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metadata:
-                  type: object
-                  additionalProperties:
-                    type: string
-                  nullable: true
-                  description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+              $ref: '#/components/schemas/UpdateAssistantThreadOptions'
     delete:
       operationId: deleteThread
       description: Deletes an existing thread.
@@ -513,34 +351,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThreadMessage'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                role:
-                  allOf:
-                    - $ref: '#/components/schemas/MessageRole'
-                  description: The role to associate with the new message.
-                content:
-                  type: string
-                  description: The textual content for the new message.
-                file_ids:
-                  type: array
-                  items:
-                    type: string
-                  description: A list of up to 10 file IDs to associate with the message, as used by tools like 'code_interpreter' or 'retrieval' that can read files.
-                metadata:
-                  type: object
-                  additionalProperties:
-                    type: string
-                  nullable: true
-                  description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-              required:
-                - role
-                - content
     get:
       operationId: listMessages
       description: Gets a list of messages that exist on a thread.
@@ -672,114 +482,6 @@ paths:
                     type: string
                   nullable: true
                   description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-  /threads/{threadId}/messages/{messageId}/files:
-    get:
-      operationId: listMessageFiles
-      description: Gets a list of previously uploaded files associated with a message from a thread.
-      parameters:
-        - name: threadId
-          in: path
-          required: true
-          description: The ID of the thread containing the message to list files from.
-          schema:
-            type: string
-        - name: messageId
-          in: path
-          required: true
-          description: The ID of the message to list files from.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-        - name: order
-          in: query
-          required: false
-          description: Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.
-          schema:
-            $ref: '#/components/schemas/ListSortOrder'
-            default: desc
-        - name: after
-          in: query
-          required: false
-          description: A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-        - name: before
-          in: query
-          required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The requested list of files associated with the specified message.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - object
-                  - data
-                  - first_id
-                  - last_id
-                  - has_more
-                properties:
-                  object:
-                    type: string
-                    enum:
-                      - list
-                    description: The object type, which is always list.
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/MessageFile'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-  /threads/{threadId}/messages/{messageId}/files/{fileId}:
-    get:
-      operationId: getMessageFile
-      description: Gets information about a file attachment to a message within a thread.
-      parameters:
-        - name: threadId
-          in: path
-          required: true
-          description: The ID of the thread containing the message to get information from.
-          schema:
-            type: string
-        - name: messageId
-          in: path
-          required: true
-          description: The ID of the message to get information from.
-          schema:
-            type: string
-        - name: fileId
-          in: path
-          required: true
-          description: The ID of the file to get information about.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The requested file information.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MessageFile'
   /threads/{threadId}/runs:
     post:
       operationId: createRun
@@ -1123,6 +825,13 @@ components:
       description: The ID of the assistant to modify.
       schema:
         type: string
+    UpdateAssistantThreadOptions.threadId:
+      name: threadId
+      in: path
+      required: true
+      description: The ID of the thread to modify.
+      schema:
+        type: string
   schemas:
     Assistant:
       type: object
@@ -1135,7 +844,6 @@ components:
         - model
         - instructions
         - tools
-        - file_ids
         - metadata
       properties:
         id:
@@ -1171,12 +879,6 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           description: The collection of tools enabled for the assistant.
           default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: A list of attached file IDs, ordered by creation date in ascending order.
-          default: []
         metadata:
           type: object
           additionalProperties:
@@ -1210,12 +912,6 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           description: The collection of tools to enable for the new assistant.
           default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: A list of previously uploaded file IDs to attach to the assistant.
-          default: []
         metadata:
           type: object
           additionalProperties:
@@ -1242,49 +938,6 @@ components:
             - assistant.deleted
           description: The object type, which is always 'assistant.deleted'.
       description: The status of an assistant deletion operation.
-    AssistantFile:
-      type: object
-      required:
-        - id
-        - object
-        - created_at
-        - assistant_id
-      properties:
-        id:
-          type: string
-          description: The identifier, which can be referenced in API endpoints.
-        object:
-          type: string
-          enum:
-            - assistant.file
-          description: The object type, which is always 'assistant.file'.
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp, in seconds, representing when this object was created.
-        assistant_id:
-          type: string
-          description: The assistant ID that the file is attached to.
-      description: Information about a file attached to an assistant, as used by tools that can read files.
-    AssistantFileDeletionStatus:
-      type: object
-      required:
-        - id
-        - deleted
-        - object
-      properties:
-        id:
-          type: string
-          description: The ID of the resource specified for deletion.
-        deleted:
-          type: boolean
-          description: A value indicating whether deletion was successful.
-        object:
-          type: string
-          enum:
-            - assistant.file.deleted
-          description: The object type, which is always 'assistant.file.deleted'.
-      description: The status of an assistant file deletion operation.
     AssistantStreamEvent:
       anyOf:
         - type: string
@@ -1342,11 +995,6 @@ components:
     AssistantThreadCreationOptions:
       type: object
       properties:
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ThreadInitializationMessage'
-          description: The initial messages to associate with the new thread.
         metadata:
           type: object
           additionalProperties:
@@ -1768,30 +1416,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/MessageDeltaTextAnnotation'
       description: Represents a streamed file path annotation applied to a streaming text content part.
-    MessageFile:
-      type: object
-      required:
-        - id
-        - object
-        - created_at
-        - message_id
-      properties:
-        id:
-          type: string
-          description: The identifier, which can be referenced in API endpoints.
-        object:
-          type: string
-          enum:
-            - thread.message.file
-          description: The object type, which is always 'thread.message.file'.
-        created_at:
-          type: integer
-          format: unixtime
-          description: The Unix timestamp, in seconds, representing when this object was created.
-        message_id:
-          type: string
-          description: The ID of the message that this file is attached to.
-      description: Information about a file attached to an assistant thread message.
     MessageImageFileContent:
       type: object
       required:
@@ -1935,7 +1559,7 @@ components:
             - $ref: '#/components/schemas/MessageTextFileCitationDetails'
           description: |-
             A citation within the message that points to a specific quote from a specific file.
-            Generated when the assistant uses the "retrieval" tool to search files.
+            Generated when the assistant uses the "file_search" tool to search files.
         start_index:
           type: integer
           format: int32
@@ -1946,7 +1570,7 @@ components:
           description: The last text index associated with this text annotation.
       allOf:
         - $ref: '#/components/schemas/MessageTextAnnotation'
-      description: A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.
+      description: A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'file_search' tool to search files.
     MessageTextFileCitationDetails:
       type: object
       required:
@@ -2090,19 +1714,6 @@ components:
         mapping:
           function: '#/components/schemas/RequiredFunctionToolCall'
       description: An abstract representation a a tool invocation needed by the model to continue a run.
-    RetrievalToolDefinition:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always 'retrieval'.
-      allOf:
-        - $ref: '#/components/schemas/ToolDefinition'
-      description: The input definition information for a retrieval tool as used to configure an assistant.
     RunCompletionUsage:
       type: object
       required:
@@ -2122,7 +1733,7 @@ components:
           type: integer
           format: int64
           description: Total number of tokens used (prompt + completion).
-      description: Usage statistics related to the run.
+      description: Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).
     RunError:
       type: object
       required:
@@ -2542,24 +2153,6 @@ components:
           type: string
           description: The ID of the newly-created message.
       description: Represents the data within a streaming run step message creation response object.
-    RunStepDeltaRetrievalToolCall:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always "retrieval."
-        file_search:
-          type: object
-          additionalProperties:
-            type: string
-          description: Reserved for future use.
-      allOf:
-        - $ref: '#/components/schemas/RunStepDeltaToolCall'
-      description: Represents a retrieval tool call within a streaming run step's tool call details.
     RunStepDeltaToolCall:
       type: object
       required:
@@ -2581,7 +2174,6 @@ components:
         propertyName: type
         mapping:
           function: '#/components/schemas/RunStepDeltaFunctionToolCall'
-          retrieval: '#/components/schemas/RunStepDeltaRetrievalToolCall'
           code_interpreter: '#/components/schemas/RunStepDeltaCodeInterpreterToolCall'
       description: The abstract base representation of a single tool call within a streaming run step's delta tool call details.
     RunStepDeltaToolCallObject:
@@ -2704,27 +2296,6 @@ components:
           type: string
           description: The ID of the message created by this run step.
       description: The details of a message created as a part of a run step.
-    RunStepRetrievalToolCall:
-      type: object
-      required:
-        - type
-        - retrieval
-      properties:
-        type:
-          type: string
-          enum:
-            - retrieval
-          description: The object type, which is always 'retrieval'.
-        retrieval:
-          type: object
-          additionalProperties:
-            type: string
-          description: The key/value pairs produced by the retrieval tool.
-      allOf:
-        - $ref: '#/components/schemas/RunStepToolCall'
-      description: |-
-        A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents
-        executed retrieval actions.
     RunStepStatus:
       anyOf:
         - type: string
@@ -2765,7 +2336,6 @@ components:
         propertyName: type
         mapping:
           code_interpreter: '#/components/schemas/RunStepCodeInterpreterToolCall'
-          retrieval: '#/components/schemas/RunStepRetrievalToolCall'
           function: '#/components/schemas/RunStepFunctionToolCall'
       description: An abstract representation of a detailed tool call as recorded within a run step for an existing run.
     RunStepToolCallDetails:
@@ -2814,6 +2384,7 @@ components:
       type: string
       enum:
         - 2024-02-15-preview
+        - 2024-05-01-preview
       description: The known set of supported API versions.
     SubmitToolOutputsAction:
       type: object
@@ -2863,34 +2434,6 @@ components:
             - thread.deleted
           description: The object type, which is always 'thread.deleted'.
       description: The status of a thread deletion operation.
-    ThreadInitializationMessage:
-      type: object
-      required:
-        - role
-        - content
-      properties:
-        role:
-          allOf:
-            - $ref: '#/components/schemas/MessageRole'
-          description: The role associated with the assistant thread message. Currently, only 'user' is supported when providing initial messages to a new thread.
-        content:
-          type: string
-          description: The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API.
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: |-
-            A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
-            access files.
-          default: []
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
-      description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
     ThreadMessage:
       type: object
       required:
@@ -2904,7 +2447,8 @@ components:
         - incomplete_at
         - role
         - content
-        - file_ids
+        - assistant_id
+        - run_id
         - metadata
       properties:
         id:
@@ -2927,8 +2471,9 @@ components:
             - $ref: '#/components/schemas/MessageStatus'
           description: The status of the message.
         incomplete_details:
-          oneOf:
-            - $ref: '#/components/schemas/MessageIncompleteDetailsReason'
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/MessageIncompleteDetails'
           nullable: true
           description: On an incomplete message, details about why the message is incomplete.
         completed_at:
@@ -2952,17 +2497,12 @@ components:
           description: The list of content items associated with the assistant thread message.
         assistant_id:
           type: string
+          nullable: true
           description: If applicable, the ID of the assistant that authored this message.
         run_id:
           type: string
+          nullable: true
           description: If applicable, the ID of the run associated with the authoring of this message.
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: |-
-            A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
-            access files.
         metadata:
           type: object
           additionalProperties:
@@ -2982,7 +2522,6 @@ components:
         - model
         - instructions
         - tools
-        - file_ids
         - created_at
         - expires_at
         - started_at
@@ -3034,12 +2573,6 @@ components:
           items:
             $ref: '#/components/schemas/ToolDefinition'
           description: The overridden enabled tools used for this assistant thread run.
-          default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: A list of attached file IDs, ordered by creation date in ascending order.
           default: []
         created_at:
           type: integer
@@ -3107,7 +2640,6 @@ components:
         propertyName: type
         mapping:
           code_interpreter: '#/components/schemas/CodeInterpreterToolDefinition'
-          retrieval: '#/components/schemas/RetrievalToolDefinition'
           function: '#/components/schemas/FunctionToolDefinition'
       description: An abstract representation of an input tool definition that an assistant can use.
     ToolOutput:
@@ -3144,12 +2676,6 @@ components:
             $ref: '#/components/schemas/ToolDefinition'
           description: The modified collection of tools to enable for the assistant.
           default: []
-        file_ids:
-          type: array
-          items:
-            type: string
-          description: The modified list of previously uploaded fileIDs to attach to the assistant.
-          default: []
         metadata:
           type: object
           additionalProperties:
@@ -3157,6 +2683,26 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The request details to use when modifying an existing assistant.
+    UpdateAssistantThreadOptions:
+      type: object
+      properties:
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
+      description: The details used to update an existing assistant thread
+    VectorStoreFileBatchStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - completed
+            - cancelled
+            - failed
+      description: The status of the vector store file batch.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
