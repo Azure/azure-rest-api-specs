@@ -120,11 +120,13 @@ namespace Customizations {
 
 // publishCloudEvent access level
 @@access(publishCloudEvent, Access.public, "go"); // making public for Go, it's a simpler fix on the backend than generating it as internal
-@@access(publishCloudEvent, Access.internal);
+@@access(publishCloudEvent, Access.internal, "python");
+@@access(publishCloudEvent, Access.internal, "java");
 
 // publishCloudEvents access level
 @@access(publishCloudEvents, Access.public, "go"); // making public for Go, it's a simpler fix on the backend than generating it as internal
-@@access(publishCloudEvents, Access.internal);
+@@access(publishCloudEvents, Access.internal, "python");
+@@access(publishCloudEvents, Access.internal, "java");
 
 @@access(receiveCloudEvents, Access.internal, "python");
 @@access(acknowledgeCloudEvents, Access.internal, "python");
