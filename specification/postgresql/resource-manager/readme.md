@@ -64,6 +64,7 @@ input-file:
   - Microsoft.DBforPostgreSQL/preview/2024-03-01-privatepreview/Replicas.json
   - Microsoft.DBforPostgreSQL/preview/2024-03-01-privatepreview/ServerLogs.json
   - Microsoft.DBforPostgreSQL/preview/2024-03-01-privatepreview/ServerStartStopRestart.json
+  - Microsoft.DBforPostgreSQL/preview/2024-03-01-privatepreview/TuningOptions.json
   - Microsoft.DBforPostgreSQL/preview/2024-03-01-privatepreview/ThreatProtection.json
   - Microsoft.DBforPostgreSQL/preview/2024-03-01-privatepreview/VirtualEndpoints.json
   - Microsoft.DBforPostgreSQL/preview/2024-03-01-privatepreview/VirtualNetwork.json

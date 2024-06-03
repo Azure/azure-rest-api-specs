@@ -419,10 +419,10 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "GetAutoMigrationSchedule",
+        "operationId": "GetLatestAutoMigrationSchedule",
         "x-ms-examples": {
-          "GetAutoMigrationSchedule": {
-            "$ref": "./examples/Migrations_GetAutoMigrationSchedule.json"
+          "GetLatestAutoMigrationSchedule": {
+            "$ref": "./examples/Migrations_GetLatestAutoMigrationSchedule.json"
           }
         },
         "parameters": [
@@ -468,9 +468,9 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "AutoMigrationScheduleUpdate",
+        "operationId": "UpdateAutoMigrationSchedule",
         "x-ms-examples": {
-          "AutoMigrationScheduleUpdate": {
+          "UpdateAutoMigrationSchedule": {
             "$ref": "./examples/Migrations_Update_AutoMigrationSchedule.json"
           }
         },
@@ -1416,7 +1416,8 @@
           "items": {
             "$ref": "#/definitions/AutoMigrationScheduleTimeRange"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "description": "Capability for the PostgreSQL server"
