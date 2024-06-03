@@ -735,7 +735,7 @@ model StorageInfo {
 /**
  * Report's properties.
  */
-model ReportBaseProperties {
+alias ReportBaseProperties = {
   /**
    * Report status.
    */
@@ -802,7 +802,7 @@ model ReportBaseProperties {
    */
   @visibility("read")
   provisioningState?: ProvisioningState;
-}
+};
 
 /**
  * Create Report's properties.

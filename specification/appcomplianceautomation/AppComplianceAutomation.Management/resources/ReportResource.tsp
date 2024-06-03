@@ -134,7 +134,7 @@ interface Report {
    * Fix the AppComplianceAutomation report error. e.g: App Compliance Automation Tool service unregistered, automation removed.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("GetScopingQuestions")
+  @operationId("Report_GetScopingQuestions")
   getScopingQuestions is ArmResourceActionSync<
     ReportResource,
     void,
