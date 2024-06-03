@@ -383,6 +383,15 @@ union IPPoolTypeEnum {
 
 @doc("The ARM ID for a Network Interface.")
 model NetworkInterfaceArmReference {
+  @doc("The ARM ID for a Network Interface.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/networkInterfaces";
+    }
+  ]>;
+}
+@doc("The ARM ID for a Network Interface.")
+model SubnetIpConfigurationReference {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is already shipped. Changing the casing is a breaking change."
   @doc("The ARM ID for a Network Interface.")
   ID?: armResourceIdentifier<[
@@ -644,7 +653,7 @@ model SubnetProperties {
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
   @extension("x-ms-identifiers", [])
-  ipConfigurationReferences?: NetworkInterfaceArmReference[];
+  ipConfigurationReferences?: SubnetIpConfigurationReference[];
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
