@@ -31,7 +31,7 @@ namespace Customizations {
     acknowledge is acknowledgeCloudEvents;
     release is releaseCloudEvents;
     reject is rejectCloudEvents;
-    renewLock is renewCloudEventLocks;
+    renewLocks is renewCloudEventLocks;
   }
 
   @client(
@@ -58,7 +58,7 @@ namespace Customizations {
     acknowledge is acknowledgeCloudEvents;
     release is releaseCloudEvents;
     reject is rejectCloudEvents;
-    renewLock is renewCloudEventLocks;
+    renewLocks is renewCloudEventLocks;
   }
 
   @client(
@@ -85,7 +85,7 @@ namespace Customizations {
     acknowledge is acknowledgeCloudEvents;
     release is releaseCloudEvents;
     reject is rejectCloudEvents;
-    renewLock is renewCloudEventLocks;
+    renewLocks is renewCloudEventLocks;
   }
 
   @client(
