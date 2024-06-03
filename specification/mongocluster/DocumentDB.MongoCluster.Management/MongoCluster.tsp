@@ -259,7 +259,6 @@ model MongoClusterReplicaParameters {
 /** Promote replica request properties. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 model PromoteReplicaRequest {
-
   /** The promote option to apply to the operation. */
   promoteOption: PromoteOption;
 
@@ -269,15 +268,14 @@ model PromoteReplicaRequest {
 
 /** Promote request results. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
-model PromoteReplicaResult {
-}
+model PromoteReplicaResult {}
 
 /** The option to apply to a promote operation. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 union PromoteOption {
   string,
 
-  /** Promote option forces the promotion without waiting for the replica to be caught up to the primary. This can result in data-loss so should only be used during disaster recovery scenarios.*/
+  /** Promote option forces the promotion without waiting for the replica to be caught up to the primary. This can result in data-loss so should only be used during disaster recovery scenarios. */
   "Forced",
 }
 
