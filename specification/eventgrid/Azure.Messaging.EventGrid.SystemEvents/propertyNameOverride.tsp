@@ -12,172 +12,149 @@ import "./propertyNameOverrideJs.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
 
+using Microsoft.EventGrid.SystemEvents;
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.to,
+@@clientName(AcsIncomingCallEventData.to,
   "toCommunicationIdentifier",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsIncomingCallEventData.from,
+@@clientName(AcsIncomingCallEventData.from,
   "fromCommunicationIdentifier",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsRouterWorkerSelector.value,
-  "labelValue",
-  "autorest"
-);
+@@clientName(AcsRouterWorkerSelector.value, "labelValue", "autorest");
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
+@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
   "deliveryAttemptTimestamp",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
+@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
   "userActionTimestamp",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
+@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
   "autorest"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.EventHubCaptureFileCreatedEventData.fileUrl,
+@@clientName(EventHubCaptureFileCreatedEventData.fileUrl,
   "fileurl",
   "autorest"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
+@@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
   "FhirServiceHostName",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceFhirId,
+@@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirId,
   "FhirResourceId",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceVersionId,
+@@clientName(HealthcareFhirResourceCreatedEventData.resourceVersionId,
   "FhirResourceVersionId",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceCreatedEventData.resourceType,
+@@clientName(HealthcareFhirResourceCreatedEventData.resourceType,
   "FhirResourceType",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
+@@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
   "FhirServiceHostName",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceFhirId,
+@@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirId,
   "FhirResourceId",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceVersionId,
+@@clientName(HealthcareFhirResourceUpdatedEventData.resourceVersionId,
   "FhirResourceVersionId",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceUpdatedEventData.resourceType,
+@@clientName(HealthcareFhirResourceUpdatedEventData.resourceType,
   "FhirResourceType",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
+@@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
   "FhirServiceHostName",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceFhirId,
+@@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirId,
   "FhirResourceId",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceVersionId,
+@@clientName(HealthcareFhirResourceDeletedEventData.resourceVersionId,
   "FhirResourceVersionId",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.HealthcareFhirResourceDeletedEventData.resourceType,
+@@clientName(HealthcareFhirResourceDeletedEventData.resourceType,
   "FhirResourceType",
   "autorest"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinMetadata.lastUpdated,
-  "$lastUpdated",
-  "autorest"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.metadata,
-  "$metadata",
-  "autorest"
-);
-@@clientName(Microsoft.EventGrid.SystemEvents.DeviceTwinProperties.version,
-  "$version",
-  "autorest"
-);
+@@clientName(DeviceTwinMetadata.lastUpdated, "$lastUpdated", "autorest");
+@@clientName(DeviceTwinProperties.metadata, "$metadata", "autorest");
+@@clientName(DeviceTwinProperties.version, "$version", "autorest");
 
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+@@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+@@clientName(ResourceNotificationsResourceUpdatedEventData.operationalInfo,
   "operationalDetails",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.resourceInfo,
+@@clientName(ResourceNotificationsResourceDeletedEventData.resourceInfo,
   "resourceDetails",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.ResourceNotificationsResourceDeletedEventData.operationalInfo,
+@@clientName(ResourceNotificationsResourceDeletedEventData.operationalInfo,
   "operationalDetails",
   "autorest"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentQueuedEventData.queuedDateTime,
+@@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime,
   "queuedOn",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.completedDateTime,
+@@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
   "completedOn",
   "autorest"
 );
-@@clientName(Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
+@@clientName(StorageTaskAssignmentCompletedEventData.summaryReportBlobUrl,
   "summaryReportBlobUri",
   "autorest"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageDeliveryStatusUpdatedEventData.channelType,
+@@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind",
   "autorest"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.channelType,
+@@clientName(AcsMessageReceivedEventData.channelType,
   "channelKind",
   "autorest"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.media,
-  "mediaContent",
-  "autorest"
-);
+@@clientName(AcsMessageReceivedEventData.media, "mediaContent", "autorest");
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageReceivedEventData.interactive,
+@@clientName(AcsMessageReceivedEventData.interactive,
   "interactiveContent",
   "autorest"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageMediaContent.id,
-  "mediaId",
-  "autorest"
-);
+@@clientName(AcsMessageMediaContent.id, "mediaId", "autorest");
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageContext.id,
-  "messageId",
-  "autorest"
-);
+@@clientName(AcsMessageContext.id, "messageId", "autorest");
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveContent.type,
-  "replyKind",
-  "autorest"
-);
+@@clientName(AcsMessageInteractiveContent.type, "replyKind", "autorest");
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveButtonReplyContent.id,
+@@clientName(AcsMessageInteractiveButtonReplyContent.id,
   "buttonId",
   "autorest"
 );
 
-@@clientName(Microsoft.EventGrid.SystemEvents.AcsMessageInteractiveListReplyContent.id,
+@@clientName(AcsMessageInteractiveListReplyContent.id,
   "listItemId",
   "autorest"
 );
