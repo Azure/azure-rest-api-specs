@@ -22,8 +22,8 @@ interface Locations {
     ...ResourceInstanceParameters<Location>,
 
     @doc("Optionally, check for a specific SKU")
-    @body
-    sku?: ResourceSkuType,
+    @bodyRoot
+    sku?: Sku,
   ): ArmResponse<Trial> | ErrorResponse;
 
   @doc("Return quota for subscription by region")
@@ -61,7 +61,7 @@ interface PrivateClouds {
   update(
     ...ResourceInstanceParameters<PrivateCloud>,
 
-    @body
+    @bodyRoot
     @doc("The private cloud properties to be updated.")
     privateCloudUpdate: PrivateCloudUpdate,
   ): ArmResponse<PrivateCloud> | {
@@ -71,7 +71,7 @@ interface PrivateClouds {
     ...Azure.Core.Foundations.RetryAfterHeader;
     ...LocationHeader;
 
-    @body
+    @bodyRoot
     @doc("The updated private cloud.")
     placementPolicy: PrivateCloud;
   } | ErrorResponse;
@@ -130,7 +130,7 @@ interface Clusters {
   update(
     ...ResourceInstanceParameters<Cluster>,
 
-    @body
+    @bodyRoot
     @doc("The cluster properties to be updated.")
     clusterUpdate: ClusterUpdate,
   ): ArmResponse<Cluster> | {
@@ -140,7 +140,7 @@ interface Clusters {
     ...Azure.Core.Foundations.RetryAfterHeader;
     ...LocationHeader;
 
-    @body
+    @bodyRoot
     @doc("The updated cluster.")
     cluster: Cluster;
   } | ErrorResponse;
@@ -297,7 +297,7 @@ interface WorkloadNetworkSegments {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkSegment,
     WorkloadNetworkSegmentUpdate
@@ -436,7 +436,7 @@ interface WorkloadNetworkPortMirroringProfiles {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdatePortMirroring")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkPortMirroring,
     WorkloadNetworkPortMirroringUpdate
@@ -510,7 +510,7 @@ interface WorkloadNetworkVmGroups {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateVMGroup")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkVMGroup,
     WorkloadNetworkVMGroupUpdate
@@ -596,7 +596,7 @@ interface WorkloadNetworkDnsServices {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsService")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsService,
     WorkloadNetworkDnsServiceUpdate
@@ -670,7 +670,7 @@ interface WorkloadNetworkDnsZones {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsZone")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsZone,
     WorkloadNetworkDnsZoneUpdate
@@ -844,7 +844,7 @@ interface VirtualMachines {
   restrictMovement(
     ...ResourceInstanceParameters<VirtualMachine>,
 
-    @body
+    @bodyRoot
     @doc("The body type of the operation request.")
     restrictMovement: VirtualMachineRestrictMovement,
   ): ArmAcceptedLroResponse | ErrorResponse;
@@ -876,7 +876,7 @@ interface PlacementPolicies {
   update(
     ...ResourceInstanceParameters<PlacementPolicy>,
 
-    @body
+    @bodyRoot
     @doc("The placement policy properties to be updated.")
     placementPolicyUpdate: PlacementPolicyUpdate,
   ): ArmResponse<PlacementPolicy> | {
@@ -884,7 +884,7 @@ interface PlacementPolicies {
     ...Azure.Core.Foundations.RetryAfterHeader;
     ...LocationHeader;
 
-    @body
+    @bodyRoot
     @doc("The updatd placement policy.")
     placementPolicy: PlacementPolicy;
   } | ErrorResponse;
@@ -946,7 +946,7 @@ interface ScriptExecutions {
     ...ResourceInstanceParameters<ScriptExecution>,
 
     #suppress "@azure-tools/typespec-azure-core/request-body-problem"
-    @body
+    @bodyRoot
     @doc("Name of the desired output stream to return. If not provided, will return all. An empty array will return nothing.")
     scriptOutputStreamType?: ScriptOutputStreamType[],
   ): ArmResponse<ScriptExecution> | ErrorResponse;
@@ -984,17 +984,17 @@ interface IscsiPaths {
   delete is ArmResourceDeleteAsync<IscsiPath>;
 }
 
-// use { @body _: void } with the next version of typespec-azure
+// use { @bodyRoot _: void } with the next version of typespec-azure
 // https://github.com/Azure/typespec-azure/issues/3759
 
 // Just like ArmResourceActionSync, but with no request body.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @autoRoute
 @armResourceAction(TResource)
 @post
 op ArmResourceActionSyncNoRequestBody<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse extends TypeSpec.Reflection.Model,
   TBaseParameters = BaseParameters<TResource>
 >(
@@ -1003,9 +1003,9 @@ op ArmResourceActionSyncNoRequestBody<
 
 // Just like ArmResourceActionAsync, but with no request body.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 op ArmResourceActionNoContentAsyncNoRequestBody<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters extends TypeSpec.Reflection.Model = BaseParameters<TResource>
 > is ArmResourceActionAsyncBaseNoRequestBody<
   TResource,
@@ -1015,7 +1015,7 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
 
 // Just like ArmResourceActionAsyncBase, but with no request body.
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @autoRoute
 @extension("x-ms-long-running-operation", true)
 @extension(
@@ -1027,7 +1027,7 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
 @armResourceAction(TResource)
 @post
 op ArmResourceActionAsyncBaseNoRequestBody<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse,
   TBaseParameters extends TypeSpec.Reflection.Model
 >(
