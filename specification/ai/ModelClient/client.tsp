@@ -68,20 +68,3 @@ interface ChatCompletionsClient {
   getModelInfo is ModelClient.getModelInfo;
 }
 
-@client({
-  name: "EmbeddingsClient",
-  service: ModelClient,
-})
-interface EmbeddingsClient {
-  embed is ModelClient.getEmbeddings;
-  getModelInfo is ModelClient.getModelInfo;
-}
-
-@client({
-  name: "ImageEmbeddingsClient",
-  service: ModelClient,
-})
-interface ImageEmbeddingsClient {
-  embed is ModelClient.getImageEmbeddings;
-  getModelInfo is ModelClient.getModelInfo;
-}
