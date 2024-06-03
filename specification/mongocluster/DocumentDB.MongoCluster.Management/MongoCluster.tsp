@@ -57,7 +57,7 @@ model MongoClusterProperties {
   @visibility("create")
   restoreParameters?: MongoClusterRestoreParameters;
 
-  @doc("The parameters to create a replica mongo cluster.")
+  /** The parameters to create a replica mongo cluster. */
   @visibility("create")
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   replicaParameters?: MongoClusterReplicaParameters;
@@ -101,11 +101,11 @@ model MongoClusterProperties {
   @visibility("read")
   privateEndpointConnections?: PrivateEndpointConnection[];
 
-  @doc("List of private endpoint connections.")
+  /** List of private endpoint connections. */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   previewFeatures?: PreviewFeature[];
 
-  @doc("The replication properties for the mongo cluster")
+  /** The replication properties for the mongo cluster */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   @visibility("read")
   replica?: ReplicationProperties;
@@ -121,11 +121,11 @@ union CreateMode {
   /** Create a mongo cluster from a restore point-in-time. */
   "PointInTimeRestore",
 
-  @doc("Create a replica cluster in distinct geographic region from the source cluster.")
+  /** Create a replica cluster in distinct geographic region from the source cluster. */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   "GeoReplica",
 
-  @doc("Create a replica cluster in the same geographic region as the source cluster.")
+  /** Create a replica cluster in the same geographic region as the source cluster. */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   "Replica"
 }
@@ -228,73 +228,73 @@ union PublicNetworkAccess {
   "Disabled",
 }
 
-@doc("Preview features that can be enabled on a mongo cluster.")
+/** Preview features that can be enabled on a mongo cluster. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 union PreviewFeature {
   string,
 }
 
-@doc("Parameters used for replica operations.")
+/** Parameters used for replica operations. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 model MongoClusterReplicaParameters {
-  @doc("The id of the replication source cluster.")
+  /** The id of the replication source cluster. */
   sourceResourceId: string;
 
-  @doc("Description of the connection string")
+  /** Description of the connection string */
   location: string;
 }
 
-@doc("Replica properties of the mongo cluster.")
+/** Replica properties of the mongo cluster. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 model ReplicationProperties {
-  @doc("The resource id the source cluster for the replica cluster.")
+  /** The resource id the source cluster for the replica cluster. */
   @visibility("read")
   sourceResourceId?: string;
 
-  @doc("The replication role of the cluster.")
+  /** The replication role of the cluster */
   @visibility("read")
   role?: ReplicationRole;
 
-  @doc("The replication link state of the replica cluster.")
+  /** The replication link state of the replica cluster. */
   @visibility("read")
   state?: ReplicationState;
 }
 
-@doc("Replication role of the mongo cluster.")
+/** Replication role of the mongo cluster. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 union ReplicationRole {
   string,
 
-  @doc("The cluster is a primary replica.")
+  /** The cluster is a primary replica. */
   "Primary",
 
-  @doc("The cluster is a local asynchronous replica.")
+  /** The cluster is a local asynchronous replica. */
   "AsyncReplica",
 
-  @doc("The cluster is a geo-asynchronous replica.")
+  /** The cluster is a geo-asynchronous replica. */
   "GeoAsyncReplica",
 }
 
-@doc("The state of the replication link between the replica and source cluster.")
+/** The state of the replication link between the replica and source cluster. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 union ReplicationState {
   string,
 
-  @doc("Replication link is active.")
+  /** Replication link is active. */
   "Active",
 
-  @doc("Replication link is catching-up.")
+  /** Replication link is catching-up. */
   "Catchup",
 
-  @doc("Replication link is provisioning.")
+  /** Replication link is provisioning. */
   "Provisioning",
 
-  @doc("Replication link is updating.")
+  /** Replication link is updating. */
   "Updating",
 
-  @doc("Replication link is broken.")
+  /** Replication link is broken. */
   "Broken",
 
-  @doc("Replication link is re-configuring.")
+  /** Replication link is re-configuring. */
   "Reconfiguring"
 }
