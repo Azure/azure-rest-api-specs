@@ -696,7 +696,7 @@ model AcsRouterWorkerSelector {
 
   /** Router Job Worker Selector Value */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "The type of labelValue is object"
-  labelValue: unknown;
+  value: unknown;
 
   /** Router Job Worker Selector Time to Live in Seconds */
   ttlSeconds: float64;

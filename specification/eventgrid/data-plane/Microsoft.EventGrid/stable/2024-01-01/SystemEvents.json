@@ -2277,8 +2277,9 @@
           "$ref": "#/definitions/AcsRouterLabelOperator",
           "description": "Router Job Worker Selector Label Operator"
         },
-        "labelValue": {
-          "description": "Router Job Worker Selector Value"
+        "value": {
+          "description": "Router Job Worker Selector Value",
+          "x-ms-client-name": "labelValue"
         },
         "ttlSeconds": {
           "type": "number",
@@ -2297,7 +2298,7 @@
       },
       "required": [
         "labelOperator",
-        "labelValue",
+        "value",
         "ttlSeconds",
         "state",
         "expirationTime"

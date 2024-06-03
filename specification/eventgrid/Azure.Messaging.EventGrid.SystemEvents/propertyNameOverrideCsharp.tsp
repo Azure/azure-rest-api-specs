@@ -14,7 +14,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid.SystemEvents;
 
-// [BEGIN] misc renames
 
 @@clientName(EventHubCaptureFileCreatedEventData.fileUrl, "FileURL", "csharp");
 
@@ -485,8 +484,8 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-@@clientName(AcsRouterWorkerSelector.labelOperator, "Operator", "csharp");
 @@clientName(AcsRouterWorkerSelector.state, "SelectorState", "csharp");
 @@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "csharp");
+@@clientName(AcsRouterWorkerSelector.value, "labelValue", "csharp");
 
 // [END] ACS renames (and acronym casing)

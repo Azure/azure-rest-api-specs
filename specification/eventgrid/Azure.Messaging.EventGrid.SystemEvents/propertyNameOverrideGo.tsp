@@ -563,6 +563,7 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsRouterWorkerSelector.labelOperator, "Operator", "go");
 @@clientName(AcsRouterWorkerSelector.state, "SelectorState", "go");
 @@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "go");
+@@clientName(AcsRouterWorkerSelector.value, "labelValue", "go");
 
 @@clientName(AcsRouterWorkerSelectorState,
   "ACSRouterWorkerSelectorState",
