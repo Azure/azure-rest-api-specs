@@ -346,7 +346,7 @@ model ChatResponseMessage {
   toolCalls?: ChatCompletionsToolCall[];
 }
 
-// tool_choice: "auto" | "none" | { "type": "function", "name": string }
+// tool_choice: "auto" | "none" | "required" | { "type": "function", "name": string }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCompletionsNamedToolSelection;
@@ -366,6 +366,11 @@ union ChatCompletionsToolSelectionPreset {
   completions response. Response content may still be influenced by the provided tool definitions.
   """)
   none: "none",
+
+  @doc("""
+  Specifies that the model should respond with a call to one or more tools.
+  """)
+  required: "required",
 }
 
 @discriminator("type")
@@ -373,6 +378,22 @@ union ChatCompletionsToolSelectionPreset {
 model ChatCompletionsNamedToolSelection {
   @doc("The object type.")
   type: string;
+}
+
+@doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
+model ChatCompletionsNamedFunctionToolSelection
+  extends ChatCompletionsNamedToolSelection {
+  @doc("The object type, which is always 'function'.")
+  type: "function";
+
+  @doc("The function that should be called.")
+  function: ChatCompletionsFunctionToolSelection;
+}
+
+@doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
+model ChatCompletionsFunctionToolSelection {
+  @doc("The name of the function that should be called.")
+  name: string;
 }
 
 @discriminator("type")

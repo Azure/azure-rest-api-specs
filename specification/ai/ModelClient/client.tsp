@@ -23,6 +23,8 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(ModelClient.ChatCompletionsFunctionToolCall, Access.public);
 @@access(ModelClient.ChatCompletionsFunctionToolDefinition, Access.public);
 @@access(ModelClient.ChatCompletionsNamedToolSelection, Access.public);
+@@access(ModelClient.ChatCompletionsNamedFunctionToolSelection, Access.public);
+@@access(ModelClient.ChatCompletionsFunctionToolSelection, Access.public);
 @@access(ModelClient.ChatCompletionsResponseFormat, Access.public);
 @@access(ModelClient.ChatCompletionsToolCall, Access.public);
 @@access(ModelClient.ChatCompletionsToolDefinition, Access.public);
@@ -54,7 +56,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 // 3. Cache model info (to getModelInfo, all clients)
 @@access(ModelClient.getChatCompletions, Access.internal, "python");
 @@access(ModelClient.getEmbeddings, Access.internal, "python");
-@@access(ModelClient.getImageEmbeddings, Access.internal, "pyton");
+@@access(ModelClient.getImageEmbeddings, Access.internal, "python");
 @@access(ModelClient.getModelInfo, Access.internal, "python");
 
 @client({
