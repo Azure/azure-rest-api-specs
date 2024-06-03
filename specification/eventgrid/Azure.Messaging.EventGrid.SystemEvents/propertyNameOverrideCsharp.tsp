@@ -14,7 +14,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventGrid.SystemEvents;
 
-
 @@clientName(EventHubCaptureFileCreatedEventData.fileUrl, "FileURL", "csharp");
 
 @@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
