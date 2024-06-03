@@ -109,6 +109,11 @@ model MongoClusterProperties {
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   @visibility("read")
   replica?: ReplicationProperties;
+
+  /** The infrastructure version the cluster is provisioned on. */
+  @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  @visibility("read")
+  infrastructureVersion?: string;
 }
 
 /** The mode that the Mongo Cluster is created with. */

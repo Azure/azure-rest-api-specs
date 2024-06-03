@@ -4,8 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
-import "./FirewallRule.tsp";
 import "./MongoCluster.tsp";
+import "./FirewallRule.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./Replica.tsp";
 
