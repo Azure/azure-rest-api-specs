@@ -688,6 +688,10 @@
         "additionalProperties": {
           "$ref": "#/definitions/AzureFirewallAdditionalProperties",
           "description": "The additional properties used to further config this azure firewall."
+        },
+        "autoscaleConfiguration": {
+          "$ref": "#/definitions/AzureFirewallAutoscaleConfiguration",
+          "description": "Properties to manually scale this azure firewall."
         }
       },
       "description": "Properties of the Azure Firewall."
@@ -1337,6 +1341,23 @@
         }
       ],
       "description": "Azure Firewall Packet Capture Parameters resource."
+    },
+    "AzureFirewallAutoscaleConfiguration": {
+      "type": "object",
+      "properties": {
+        "minCapacity": {
+          "type": "integer",
+          "minimum": 2,
+          "description": "The minimum number of capacity units for this azure firewall. Use null to reset the value to the service default.",
+          "x-nullable": true
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "minimum": 2,
+          "description": "The maximum number of capacity units for this azure firewall. Use null to reset the value to the service default.",
+          "x-nullable": true
+        }
+      }
     }
   }
 }
