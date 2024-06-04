@@ -9,3 +9,6 @@ using Azure.ClientGenerator.Core;
 @@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties, "java");
 @@flattenProperty(Azure.ResourceManager.ProxyResource.properties, "java");
 @@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties, "java");
+
+@@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentity, "PrivateCloudIdentity", "java");
+@@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentityType, "ResourceIdentityType", "java");
