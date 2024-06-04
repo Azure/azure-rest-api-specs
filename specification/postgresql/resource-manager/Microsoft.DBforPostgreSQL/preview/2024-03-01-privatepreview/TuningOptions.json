@@ -270,83 +270,106 @@
       },
       "description": "Recommendation details for the recommended action."
     },
+    "IndexRecommendationResourceProperties": {
+      "type": "object",
+      "initialRecommendedTime": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Creation time of this recommendation."
+      },
+      "lastRecommendedTime": {
+        "type": "string",
+        "format": "date-time",
+        "description": "The last refresh of this recommendation."
+      },
+      "timesRecommended": {
+        "format": "int32",
+        "type": "integer",
+        "description": "The number of times this recommendation has encountered."
+      },
+      "improvedQueryIds": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "description": "The ImprovedQueryIds. The list will only be populated for CREATE INDEX recommendations."
+      },
+      "recommendationReason": {
+        "type": "string",
+        "description": "Reason for this recommendation."
+      },
+      "recommendationType": {
+        "type": "string",
+        "description": "Type for this recommendation."
+      },
+      "implementationDetails": {
+        "type": "object",
+        "properties": {
+          "$ref": "#/definitions/ImplementationInfo",
+          "x-ms-client-flatten": true,
+          "description": "Stores implementation details for the recommended action."
+        },
+        "description": "Implementation details for the recommended action"
+      },
+      "analyzedWorkload": {
+        "type": "object",
+        "properties": {
+          "$ref": "#/definitions/WorkloadExaminedInformation",
+          "x-ms-client-flatten": true,
+          "description": "Stores workload information for the recommended action."
+        },
+        "description": "Workload details for the recommended action"
+      },
+      "estimatedImpact": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/ImpactRecord"
+        },
+        "x-ms-identifiers": [
+          "dimensionName"
+        ],
+        "readOnly": true,
+        "description": "The estimated impact of this recommended action"
+      },
+      "details": {
+        "type": "object",
+        "properties": {
+          "$ref": "#/definitions/IndexRecommendationDetails",
+          "x-ms-client-flatten": true,
+          "description": "Stores recommendation details for the recommended action."
+        },
+        "description": "Specific details of this recommended action"
+      },
+      "description": "Index recommendation properties."
+    },
     "IndexRecommendationResource": {
       "type": "object",
       "properties": {
-        "initialRecommendedTime": {
+        "type": {
+          "description": "The type of resource.",
           "type": "string",
-          "format": "date-time",
-          "description": "Creation time of this recommendation."
+          "readOnly": true
         },
-        "lastRecommendedTime": {
+        "kind": {
+          "description": "Kind of index recommendation.",
           "type": "string",
-          "format": "date-time",
-          "description": "The last refresh of this recommendation."
+          "readOnly": true
         },
-        "timesRecommended": {
-          "format": "int32",
-          "type": "integer",
-          "description": "The number of times this recommendation has encountered."
-        },
-        "improvedQueryIds": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "description": "The ImprovedQueryIds. The list will only be populated for CREATE INDEX recommendations."
-        },
-        "recommendationReason": {
+        "id": {
           "type": "string",
-          "description": "Reason for this recommendation."
+          "description": "The id of index recommendation.",
+          "readOnly": true
         },
-        "recommendationType": {
+        "name": {
           "type": "string",
-          "description": "Type for this recommendation."
+          "description": "The name of index recommendation.",
+          "readOnly": true
         },
-        "implementationDetails": {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/ImplementationInfo",
-              "x-ms-client-flatten": true,
-              "description": "Stores implementation details for the recommended action."
-            }
-          },
-          "description": "Implementation details for the recommended action"
-        },
-        "analyzedWorkload": {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/WorkloadExaminedInformation",
-              "x-ms-client-flatten": true,
-              "description": "Stores workload information for the recommended action."
-            }
-          },
-          "description": "Workload details for the recommended action"
-        },
-        "estimatedImpact": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImpactRecord"
-          },
-          "x-ms-identifiers": [
-            "dimensionName"
-          ],
-          "readOnly": true,
-          "description": "The estimated impact of this recommended action"
-        },
-        "details": {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/IndexRecommendationDetails",
-              "x-ms-client-flatten": true,
-              "description": "Stores recommendation details for the recommended action."
-            }
-          },
-          "description": "Specific details of this recommended action"
+        "properties": {
+          "$ref": "#/definitions/IndexRecommendationResourceProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of IndexRecommendationResource."
         }
       },
       "description": "Index recommendation properties."
@@ -356,7 +379,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Collection of available operation details",
+          "description": "Collection of available index recommendations.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -386,7 +409,8 @@
         "name": {
           "type": "string",
           "description": "The name of the tuning option."
-        }
+        },
+        "properties": {}
       },
       "description": "Stores property that features impact on some metric if this recommended action is applied."
     },
