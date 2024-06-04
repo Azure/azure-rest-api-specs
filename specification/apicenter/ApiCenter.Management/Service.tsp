@@ -5,7 +5,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
@@ -21,7 +20,7 @@ model Service is TrackedResource<ServiceProperties> {
   @segment("services")
   name: string;
 
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations

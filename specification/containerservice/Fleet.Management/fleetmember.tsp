@@ -6,7 +6,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
@@ -25,7 +24,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 scalar ClusterResourceId
@@ -79,7 +78,7 @@ interface FleetMembers {
 
   create is ArmResourceCreateOrUpdateAsync<
     FleetMember,
-    BaseParameters<FleetMember> &
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
       IfMatchParameters<FleetMember> &
       IfNoneMatchParameters<FleetMember>
   >;
@@ -91,7 +90,8 @@ interface FleetMembers {
   update is ArmResourcePatchSync<
     FleetMember,
     FleetMemberProperties,
-    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
+      IfMatchParameters<FleetMember>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
@@ -107,7 +107,8 @@ interface FleetMembers {
   updateAsync is ArmResourcePatchAsync<
     FleetMember,
     FleetMemberProperties,
-    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
+      IfMatchParameters<FleetMember>
   >;
 
   #suppress "deprecated" "Existing API"
@@ -116,7 +117,8 @@ interface FleetMembers {
   // All shared routes must agree on the value of the shared parameter.TypeSpec(@typespec/http/shared-inconsistency)
   delete is ArmResourceDeleteAsync<
     FleetMember,
-    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
+      IfMatchParameters<FleetMember>
   >;
 
   listByParent is ArmResourceListByParent<FleetMember>;
