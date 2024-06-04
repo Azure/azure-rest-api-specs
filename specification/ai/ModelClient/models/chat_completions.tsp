@@ -24,6 +24,7 @@ alias ChatCompletionsOptions = {
   frequency in generated text.
   Positive values will make tokens less likely to appear as their frequency increases and
   decrease the likelihood of the model repeating the same statements verbatim.
+  Supported range is [-2, 2].
   """)
   @maxValue(2.0)
   @minValue(-2.0)
@@ -39,6 +40,7 @@ alias ChatCompletionsOptions = {
   presence in generated text.
   Positive values will make tokens less likely to appear when they already exist and increase the
   model's likelihood to output new topics.
+  Supported range is [-2, 2].
   """)
   @maxValue(2.0)
   @minValue(-2.0)
@@ -50,6 +52,7 @@ alias ChatCompletionsOptions = {
   and deterministic.
   It is not recommended to modify temperature and top_p for the same completions request as the
   interaction of these two settings is difficult to predict.
+  Supported range is [0, 1].
   """)
   @maxValue(1.0)
   @minValue(0.0)
@@ -62,6 +65,7 @@ alias ChatCompletionsOptions = {
   considered.
   It is not recommended to modify temperature and top_p for the same completions request as the
   interaction of these two settings is difficult to predict.
+  Supported range is [0, 1].
   """)
   @maxValue(1.0)
   @minValue(0.0)
@@ -346,7 +350,7 @@ model ChatResponseMessage {
   toolCalls?: ChatCompletionsToolCall[];
 }
 
-// tool_choice: "auto" | "none" | { "type": "function", "name": string }
+// tool_choice: "auto" | "none" | "required" | { "type": "function", "name": string }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCompletionsNamedToolSelection;
@@ -366,6 +370,11 @@ union ChatCompletionsToolSelectionPreset {
   completions response. Response content may still be influenced by the provided tool definitions.
   """)
   none: "none",
+
+  @doc("""
+  Specifies that the model should respond with a call to one or more tools.
+  """)
+  required: "required",
 }
 
 @discriminator("type")
@@ -373,6 +382,22 @@ union ChatCompletionsToolSelectionPreset {
 model ChatCompletionsNamedToolSelection {
   @doc("The object type.")
   type: string;
+}
+
+@doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
+model ChatCompletionsNamedFunctionToolSelection
+  extends ChatCompletionsNamedToolSelection {
+  @doc("The object type, which is always 'function'.")
+  type: "function";
+
+  @doc("The function that should be called.")
+  function: ChatCompletionsFunctionToolSelection;
+}
+
+@doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
+model ChatCompletionsFunctionToolSelection {
+  @doc("The name of the function that should be called.")
+  name: string;
 }
 
 @discriminator("type")
