@@ -24,6 +24,7 @@ mode.
 """)
 @discriminator("type")
 model ChatCompletionsResponseFormat {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The discriminated type for the response format.")
   type: string;
 }
@@ -333,6 +334,7 @@ model ChatCompletions {
 @discriminator("type")
 @doc("An abstract representation of structured information about why a chat completions response terminated.")
 model ChatFinishDetails {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }

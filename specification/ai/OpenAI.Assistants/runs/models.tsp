@@ -328,6 +328,7 @@ union RunStatus {
 @doc("An abstract representation of a required action for an assistant thread run to continue.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RequiredAction {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }

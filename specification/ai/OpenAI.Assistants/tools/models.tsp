@@ -14,6 +14,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @discriminator("type")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model ToolDefinition {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
@@ -68,6 +69,7 @@ An abstract representation a a tool invocation needed by the model to continue a
 """)
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RequiredToolCall {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type for the required tool call.")
   type: string;
 
@@ -103,6 +105,7 @@ model RequiredFunctionToolCallDetails {
 @doc("An abstract representation of a detailed tool call as recorded within a run step for an existing run.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepToolCall {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 
@@ -167,6 +170,7 @@ model RunStepCodeInterpreterToolCallDetails {
 @doc("An abstract representation of an emitted output from a code interpreter tool.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepCodeInterpreterToolCallOutput {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }

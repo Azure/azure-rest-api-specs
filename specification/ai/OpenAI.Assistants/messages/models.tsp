@@ -120,6 +120,7 @@ union MessageAttachmentToolDefinition {
 @doc("An abstract representation of a single item of thread message content.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model MessageContent {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
@@ -163,6 +164,7 @@ model MessageTextDetails {
 @doc("An abstract representation of an annotation to text thread message content.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model MessageTextAnnotation {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 
@@ -322,6 +324,7 @@ model MessageDeltaContent {
   index: int32;
 
   /** The type of content for this content part. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   type: string;
 }
 
@@ -372,6 +375,7 @@ model MessageDeltaTextAnnotation {
   index: int32;
 
   /** The type of the text content annotation. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   type: string;
 }
 

@@ -20,6 +20,7 @@ alias ChatMessageContent = string | ChatMessageContentItem[];
 @doc("An abstract representation of a structured content item within a chat message.")
 @discriminator("type")
 model ChatMessageContentItem {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The discriminated object type.")
   type: string;
 }

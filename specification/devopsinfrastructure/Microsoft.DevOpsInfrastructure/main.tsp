@@ -61,6 +61,7 @@ model PoolProperties {
   devCenterProjectResourceId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Defines the organization in which the pool will be used.")
 @discriminator("kind")
 model OrganizationProfile {}
@@ -131,6 +132,7 @@ union AzureDevOpsPermissionType {
   "SpecificAccounts",
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Defines the type of fabric the agent will run on.")
 @discriminator("kind")
 model FabricProfile {}
@@ -286,6 +288,7 @@ model NetworkProfile {
   subnetId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("The agent profile of the machines in the pool.")
 @discriminator("kind")
 model AgentProfile {

@@ -31,6 +31,7 @@ union ChatCompletionsToolSelectionPreset {
 @discriminator("type")
 @doc("An abstract representation of an explicit, named tool selection to use for a chat completions request.")
 model ChatCompletionsNamedToolSelection {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
@@ -59,6 +60,7 @@ model ChatCompletionsFunctionToolSelection {
 @doc("An abstract representation of a tool that can be used by the model to improve a chat completions response.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatCompletionsToolDefinition {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
@@ -85,6 +87,7 @@ chat completion.
 """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatCompletionsToolCall {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 

@@ -28,6 +28,7 @@ model Resource is Record<unknown> {
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "must extends Resource to be able use clientName in both Resource and DomainResource"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("""
 A resource with narrative, extensions, and contained resources
 Based on [FHIR DomainResource](https://www.hl7.org/fhir/domainresource.html)
