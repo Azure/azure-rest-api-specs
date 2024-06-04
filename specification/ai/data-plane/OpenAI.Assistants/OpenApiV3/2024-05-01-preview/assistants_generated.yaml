@@ -1228,12 +1228,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/VectorStoreFile'
       requestBody:
-        description: A File ID that the vector store should use. Useful for tools like `file_search` that can access files.
         required: true
         content:
           application/json:
             schema:
-              type: string
+              type: object
+              properties:
+                file_id:
+                  type: string
+                  description: A File ID that the vector store should use. Useful for tools like `file_search` that can access files.
+              required:
+                - file_id
   /vector_stores/{vectorStoreId}/files/{fileId}:
     get:
       operationId: getVectorStoreFile
@@ -3844,7 +3849,7 @@ components:
     UpdateFileSearchToolResourceOptions:
       type: object
       properties:
-        vectorStoreIds:
+        vector_store_ids:
           type: array
           items:
             type: string
