@@ -7,52 +7,38 @@ using Azure.ClientGenerator.Core;
 using Microsoft.AVS;
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.TrackedResource.properties, "java");
+@@flattenProperty(Azure.ResourceManager.TrackedResource.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
-  "java"
-);
+@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.ProxyResource.properties, "java");
+@@flattenProperty(Azure.ResourceManager.ProxyResource.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
-  "java"
-);
+@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties);
 
 @@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentity,
-  "PrivateCloudIdentity",
-  "java"
-);
+  "PrivateCloudIdentity");
 @@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentityType,
-  "ResourceIdentityType",
-  "java"
-);
+  "ResourceIdentityType");
 
 // operation
-@@friendlyName(Addons.list, "list", "java");
-@@friendlyName(PlacementPolicies.list, "list", "java");
-@@friendlyName(VirtualMachines.list, "list", "java");
-@@friendlyName(HcxEnterpriseSites.list, "list", "java");
-@@friendlyName(ScriptExecutions.list, "list", "java");
-@@friendlyName(ScriptPackages.list, "list", "java");
-@@friendlyName(Datastores.list, "list", "java");
-@@friendlyName(Clusters.list, "list", "java");
-@@friendlyName(ScriptCmdlets.list, "list", "java");
+@@friendlyName(Addons.list, "list");
+@@friendlyName(PlacementPolicies.list, "list");
+@@friendlyName(VirtualMachines.list, "list");
+@@friendlyName(HcxEnterpriseSites.list, "list");
+@@friendlyName(ScriptExecutions.list, "list");
+@@friendlyName(ScriptPackages.list, "list");
+@@friendlyName(Datastores.list, "list");
+@@friendlyName(Clusters.list, "list");
+@@friendlyName(ScriptCmdlets.list, "list");
 
 // model
 @@clientName(VmVmPlacementPolicyProperties,
-  "VmPlacementPolicyProperties",
-  "java"
-);
-@@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
+  "VmPlacementPolicyProperties");
+@@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp");
 @@clientName(WorkloadNetworkPublicIPProvisioningState,
-  "WorkloadNetworkPublicIpProvisioningState",
-  "java"
-);
+  "WorkloadNetworkPublicIpProvisioningState");
 
 // property
-@@clientName(Circuit.expressRouteID, "expressRouteId", "java");
+@@clientName(Circuit.expressRouteID, "expressRouteId");
 @@clientName(Circuit.expressRoutePrivatePeeringID,
-  "expressRoutePrivatePeeringId",
-  "java"
-);
+  "expressRoutePrivatePeeringId");
