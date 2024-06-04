@@ -89,7 +89,6 @@ try {
   Push-Location $SdkRepoRootDirectory
   $commonScript = Join-Path . "eng/common/scripts/TypeSpec-Project-Process.ps1"
   if (Test-Path $commonScript) {
-    Write-Host ". $commonScript -TypeSpecProjectDirectory $TypeSpecProjectDirectory -CommitHash $CommitHash -RepoUrl $RepoUrl"
     . $commonScript -TypeSpecProjectDirectory $TypeSpecProjectDirectory -CommitHash $CommitHash -RepoUrl $RepoUrl
     if ($LASTEXITCODE) {
       exit $LASTEXITCODE
