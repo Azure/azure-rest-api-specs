@@ -67,7 +67,7 @@ This check is owned by One Engineering System. See [1ES PoliCheck] for help.
 > [!IMPORTANT]
 >
 > - This check is never blocking merging of a spec PR, even if it fails.
-> - The `SDK azure-powershell` check is owned by the Shanghai division of the Azure SDK team,
+> - The `SDK azure-powershell` check is owned by the `Azure.Core` team,
     not the core Redmond Azure SDK team.
 
 The owner of this check is Yeming Liu from the Shanghai division of the Azure SDK team.
