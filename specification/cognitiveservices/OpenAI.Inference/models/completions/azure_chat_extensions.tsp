@@ -128,8 +128,8 @@ model AzureChatExtensionRetrievedDocument {
   filterReason?: AzureChatExtensionRetrieveDocumentFilterReason;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Enforcing closed set of values per service release"
 /** The reason for filtering the retrieved document. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Enforcing closed set of values per service release"
 @added(ServiceApiVersions.v2024_05_01_Preview)
 union AzureChatExtensionRetrieveDocumentFilterReason {
   /**
