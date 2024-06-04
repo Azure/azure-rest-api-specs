@@ -17,6 +17,16 @@ using Microsoft.AVS;
 @@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
 );
 
+@@flattenProperty(PrivateCloudUpdate.properties);
+@@flattenProperty(ClusterUpdate.properties);
+@@flattenProperty(WorkloadNetworkSegmentUpdate.properties);
+@@flattenProperty(WorkloadNetworkDhcpUpdate.properties);
+@@flattenProperty(WorkloadNetworkPortMirroringUpdate.properties);
+@@flattenProperty(WorkloadNetworkVMGroupUpdate.properties);
+@@flattenProperty(WorkloadNetworkDnsServiceUpdate.properties);
+@@flattenProperty(WorkloadNetworkDnsZoneUpdate.properties);
+@@flattenProperty(PlacementPolicyUpdate.properties);
+
 @@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity"
 );
