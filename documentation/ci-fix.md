@@ -2,11 +2,17 @@
 
 Short link: [aka.ms/ci-fix]
 
-## Table of Contents
+This guide provides detailed troubleshooting instructions for the [automated validation tooling] checks running on
+[Azure REST API specs PR]s submitted to this repo.
+
+If you need help with your specs PR, please first thoroughly read the [aka.ms/azsdk/pr-getting-help] document.
+
+# Table of Contents
 
 - [CI Fix Guide](#ci-fix-guide)
-  - [Table of Contents](#table-of-contents)
-  - [Prerequisites](#prerequisites)
+- [Table of Contents](#table-of-contents)
+- [Prerequisites](#prerequisites)
+- [Checks troubleshooting guides](#checks-troubleshooting-guides)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
   - [`SDK azure-powershell`](#sdk-azure-powershell)
@@ -37,17 +43,16 @@ Short link: [aka.ms/ci-fix]
   - [`TypeSpec Validation`](#typespec-validation)
     - [Run `tsv` locally](#run-tsv-locally)
   - [`license/cla`](#licensecla)
-  - [Suppression Process](#suppression-process)
-  - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
-  - [Obsolete checks](#obsolete-checks)
+- [Suppression Process](#suppression-process)
+- [Checks not covered by this guide](#checks-not-covered-by-this-guide)
+- [Obsolete checks](#obsolete-checks)
 
-This page provides detailed instructions on how to diagnose, reproduce, fix and get help on various [automated validation tooling] failures on your [Azure REST API specs PR].
 
-For more help, see [aka.ms/azsdk/pr-getting-help] and [aka.ms/azsdk/support].
-
-## Prerequisites
+# Prerequisites
 
 Most guides here require for you to have `npm` installed, which you can get by installing [Node.js](https://nodejs.org/en/download).
+
+# Checks troubleshooting guides
 
 ## `CredScan`
 
@@ -317,7 +322,6 @@ If you need more information on see [cspell configuration](https://cspell.org/co
 
 *Note*: We are trying to move away from one shared dictionary file so try and avoid editing custom-words.txt in the root as it will likely go away in the future.
 
-
 ## `TypeSpec Validation`
 
 This validator will help ensure your TypeSpec project follows [standard conventions](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md) as well ensures that the [generated OpenAPI spec](https://azure.github.io/typespec-azure/docs/emitters/typespec-autorest) files are in-sync with your project.
@@ -345,18 +349,18 @@ If none of the above helped, please reach out on [TypeSpec Discussions Teams cha
 
 This check is owned by One Engineering System. See [1ES GitHub inside Microsoft] for help.
 
-## Suppression Process
+# Suppression Process
 
 In case there are validation errors reported against your service that you believe do not apply,
 we have a suppression process you can follow to permanently remove these reported errors for your specs.
 Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
 
-## Checks not covered by this guide
+# Checks not covered by this guide
 
 If you have an issue with a check that is not covered by this guide and the help at [aka.ms/azsdk/pr-getting-help]
 is not enough,please reach out on the Teams channel: [aka.ms/azsdk/support/specreview-channel].
 
-## Obsolete checks
+# Obsolete checks
 
 Following checks have been removed from the validation toolchain as of August 2023.
 
@@ -364,6 +368,9 @@ Following checks have been removed from the validation toolchain as of August 20
 - Service API Readiness Test
 - Traffic validation
 
+[1ES CredScan]: https://eng.ms/docs/cloud-ai-platform/devdiv/one-engineering-system-1es/1es-docs/1es-pipeline-templates/features/sdlanalysis/credscan
+[1ES GitHub inside Microsoft]: https://eng.ms/docs/more/github-inside-microsoft/policies/cla
+[1ES PoliCheck]: https://eng.ms/docs/cloud-ai-platform/devdiv/one-engineering-system-1es/1es-docs/1es-pipeline-templates/features/sdlanalysis/policheck
 [aka.ms/azsdk/pr-getting-help]: https://aka.ms/azsdk/pr-getting-help
 [aka.ms/azsdk/support]: https://aka.ms/azsdk/support
 [aka.ms/azsdk/support/specreview-channel]: https://aka.ms/azsdk/support/specreview-channel
@@ -372,6 +379,3 @@ Following checks have been removed from the validation toolchain as of August 20
 [automated validation tooling]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-tooling
 [Azure REST API specs PR]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-specs-pr
 [TypeSpec Discussions Teams channel]: https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion%20%F0%9F%90%AE?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47
-[1ES CredScan]: https://eng.ms/docs/cloud-ai-platform/devdiv/one-engineering-system-1es/1es-docs/1es-pipeline-templates/features/sdlanalysis/credscan
-[1ES PoliCheck]: https://eng.ms/docs/cloud-ai-platform/devdiv/one-engineering-system-1es/1es-docs/1es-pipeline-templates/features/sdlanalysis/policheck
-[1ES GitHub inside Microsoft]: https://eng.ms/docs/more/github-inside-microsoft/policies/cla
