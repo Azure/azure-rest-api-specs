@@ -24,11 +24,11 @@ model DeidentificationJob {
   @doc("Target location to store output of operation.")
   targetLocation: TargetStorageLocation;
 
-  @doc("Data type of the input documents.")
-  dataType: DocumentDataType = DocumentDataType.PlainText;
-
   @doc("Operation to perform on the input documents.")
   operation: OperationType = OperationType.Surrogate;
+
+  @doc("Data type of the input documents.")
+  dataType: DocumentDataType = DocumentDataType.PlainText;
 
   @maxLength(16)
   @minLength(1)
@@ -203,7 +203,7 @@ union StringIndexType {
   UnicodeCodePoint: "UnicodeCodePoint",
 
   @doc("Iterates over UTF-16 Code Units, the default scheme for JavaScript, Java, and .NET.")
-  Utf16CodeUnit: "UnicodeCodePoint",
+  Utf16CodeUnit: "Utf16CodeUnit",
 
   string,
 }
@@ -214,14 +214,16 @@ model DeidentificationContent {
   @maxLength(100000) // 100KB
   inputText: string;
 
-  @doc("Data type of the input.")
-  dataType: DocumentDataType = DocumentDataType.PlainText;
-
   @doc("Operation to perform on the input.")
   operation: OperationType = OperationType.Surrogate;
 
+  @doc("Data type of the input.")
+  dataType: DocumentDataType = DocumentDataType.PlainText;
+
+  // This must be set as optional so it isn't included in sdk constructors.
+  // SDKs then overwrite it as internal with appropriate default value for that SDK.
   @doc("Requested Encoding of the tag response indices.")
-  stringIndexType: StringIndexType = StringIndexType.TextElement_v8;
+  stringIndexType?: StringIndexType;
 
   @maxLength(16)
   @doc("Format of the redacted output. Only valid when OperationType is Redact.")
