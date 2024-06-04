@@ -34,6 +34,9 @@ using Microsoft.AVS;
 @@friendlyName(Datastores.list, "list");
 @@friendlyName(Clusters.list, "list");
 @@friendlyName(ScriptCmdlets.list, "list");
+@@friendlyName(Authorizations.list, "list");
+@@friendlyName(CloudLinks.list, "list");
+@@friendlyName(GlobalReachConnections.list, "list");
 
 // model
 @@clientName(VmVmPlacementPolicyProperties, "VmPlacementPolicyProperties");
