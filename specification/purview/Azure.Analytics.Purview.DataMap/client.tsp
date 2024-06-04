@@ -11,18 +11,18 @@ using PurviewDataMap;
 })
 namespace Customizations;
 
-@@projectedName(MoveEntitiesOptions, "csharp", "MoveEntitiesConfig");
-@@projectedName(DateFormat, "csharp", "AtlasDateFormat");
-@@projectedName(NumberFormat, "csharp", "AtlasNumberFormat");
-@@projectedName(TimeZone, "csharp", "AtlasTimeZone");
-@@projectedName(SortType, "csharp", "AtlasSortType");
-@@projectedName(ClassificationAssociateOptions,
-  "csharp",
-  "ClassificationAssociateConfig"
+@@clientName(MoveEntitiesOptions, "MoveEntitiesConfig", "csharp");
+@@clientName(DateFormat, "AtlasDateFormat", "csharp");
+@@clientName(NumberFormat, "AtlasNumberFormat", "csharp");
+@@clientName(TimeZone, "AtlasTimeZone", "csharp");
+@@clientName(SortType, "AtlasSortType", "csharp");
+@@clientName(ClassificationAssociateOptions,
+  "ClassificationAssociateConfig",
+  "csharp"
 );
-@@projectedName(QueryOptions, "csharp", "QueryConfig");
-@@projectedName(SuggestOptions, "csharp", "SuggestConfig");
-@@projectedName(AutoCompleteOptions, "csharp", "AutoCompleteConfig");
+@@clientName(QueryOptions, "QueryConfig", "csharp");
+@@clientName(SuggestOptions, "SuggestConfig", "csharp");
+@@clientName(AutoCompleteOptions, "AutoCompleteConfig", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup

@@ -1386,7 +1386,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/BackupShortTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseExtensions.json
-- ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseOperations.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseUsages.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/LedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/OutboundFirewallRules.json
@@ -1405,7 +1404,6 @@ input-file:
 - ./Microsoft.Sql/preview/2021-11-01-preview/ManagedServerDnsAliases.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAdvancedThreatProtectionSettings.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseMoveOperations.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceDtcs.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/SynapseLinkWorkspaces.json
@@ -1423,6 +1421,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-08-01-preview/ServerConfigurationOptions.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/StartStopManagedInstanceSchedules.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/TransparentDataEncryptions.json
+- ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseOperations.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/IPv6FirewallRules.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentBaseline.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/SqlVulnerabilityAssessmentExecuteScan.json
@@ -1436,12 +1435,13 @@ input-file:
 - ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentScanResult.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentScans.json
 - ./Microsoft.Sql/preview/2022-11-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
-- ./Microsoft.Sql/preview/2023-02-01-preview/FailoverGroups.json
+- ./Microsoft.Sql/preview/2023-05-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/InstancePools.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/LongTermRetentionBackups.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/LongTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2023-05-01-preview/Servers.json
+- ./Microsoft.Sql/preview/2023-05-01-preview/ReplicationLinks.json
 
 # Needed when there is more than one input file
 override-info:
@@ -2943,7 +2943,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

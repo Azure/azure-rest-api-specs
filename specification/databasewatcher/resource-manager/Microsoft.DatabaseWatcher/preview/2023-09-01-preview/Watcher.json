@@ -330,14 +330,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -387,14 +387,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -639,14 +639,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -707,14 +707,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -772,14 +772,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1246,8 +1246,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1261,10 +1260,7 @@
         "privateLinkResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource id of the resource the shared private link resource is for.",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "description": "The resource id of the resource the shared private link resource is for."
         },
         "groupId": {
           "type": "string",
@@ -1527,30 +1523,6 @@
         ]
       }
     },
-    "TargetCollectionStatus": {
-      "type": "string",
-      "description": "The target states.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "TargetCollectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Denotes a target that is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Denotes a target that is disabled."
-          }
-        ]
-      }
-    },
     "TargetListResult": {
       "type": "object",
       "description": "The response of a Target list operation.",
@@ -1565,8 +1537,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1593,30 +1564,6 @@
           "type": "string",
           "description": "The server name to use in the connection string when connecting to a target. Port number and instance name must be specified separately.",
           "maxLength": 200
-        },
-        "targetCollectionStatus": {
-          "type": "string",
-          "description": "The target collection status.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "string",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Denotes a target that is enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Denotes a target that is disabled."
-              }
-            ]
-          }
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1649,30 +1596,14 @@
         },
         "akvTargetUser": {
           "type": "string",
-          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target."
+          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target.",
+          "pattern": "^[a-zA-Z0-9-]{1,127}$"
         },
         "akvTargetPassword": {
           "type": "string",
-          "description": "The path to the Key Vault secret storing the password for authentication to a target."
+          "description": "The path to the Key Vault secret storing the password for authentication to a target.",
+          "pattern": "^[a-zA-Z0-9-]{1,127}$"
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Versions info.",
-      "enum": [
-        "2023-09-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_09_01_preview",
-            "value": "2023-09-01-preview",
-            "description": "The 2023-09-01-preview version."
-          }
-        ]
       }
     },
     "Watcher": {
@@ -1713,8 +1644,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [

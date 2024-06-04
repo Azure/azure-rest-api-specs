@@ -1,15 +1,16 @@
 {
+  "operationId": "GroupQuotas_Update",
   "parameters": {
-    "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
     "api-version": "2023-06-01-preview",
     "GroupQuotasPatchRequestBody": {
       "properties": {
-        "displayName": "GroupQuota1",
+        "displayName": "UpdatedGroupQuota1",
         "additionalAttributes": {
           "groupId": {
             "groupingIdType": "ServiceTreeId",
-            "value": "yourServiceTreeIdHere"
+            "value": "UpdatedServiceTreeIdHere"
           },
           "environment": "Production"
         }
@@ -20,11 +21,11 @@
     "200": {
       "body": {
         "properties": {
-          "displayName": "GroupQuota1",
+          "displayName": "UpdatedGroupQuota1",
           "additionalAttributes": {
             "groupId": {
               "groupingIdType": "ServiceTreeId",
-              "value": "yourServiceTreeIdHere"
+              "value": "UpdatedServiceTreeIdHere"
             },
             "environment": "Production"
           },
@@ -37,7 +38,10 @@
     },
     "202": {
       "headers": {
-        "location": "https://contoso.com/operationstatus"
+        "location": "https://contoso.com/operationstatus",
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Operation-Location": "https://contoso.com/operationstatus",
+        "retry-after": 30
       }
     }
   }

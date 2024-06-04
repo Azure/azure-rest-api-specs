@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "accountName": "MyAccount",
+    "api-version": "2024-02-05-preview",
+    "properties": {
+      "tags": {
+        "key1": "value1"
+      }
+    },
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MyAccount",
+        "type": "Microsoft.CodeSigning/codeSigningAccounts",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/MyAccount",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "Basic"
+          }
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status",
+        "location": "http://azure.async.operation/status"
+      }
+    }
+  },
+  "operationId": "CodeSigningAccounts_Update",
+  "title": "Update a trusted signing account."
+}

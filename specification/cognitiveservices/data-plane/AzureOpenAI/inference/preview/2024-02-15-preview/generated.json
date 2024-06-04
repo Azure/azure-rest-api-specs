@@ -1795,6 +1795,10 @@
           },
           "x-ms-identifiers": []
         },
+        "model": {
+          "type": "string",
+          "description": "The model name used for this completions request."
+        },
         "prompt_filter_results": {
           "type": "array",
           "description": "Content filtering results for zero or more prompts in the request. In a streaming request,\nresults for different prompts may arrive at different times or in different orders.",
@@ -2679,18 +2683,18 @@
       "type": "object",
       "description": "Represents the outcome of an evaluation against a custom blocklist as performed by content filtering.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the custom blocklist evaluated."
-        },
         "filtered": {
           "type": "boolean",
           "description": "A value indicating whether or not the content has been filtered."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the custom blocklist evaluated."
         }
       },
       "required": [
-        "id",
-        "filtered"
+        "filtered",
+        "id"
       ]
     },
     "ContentFilterCitedDetectionResult": {
@@ -2744,18 +2748,18 @@
       "type": "object",
       "description": "Information about filtered content severity level and if it has been filtered or not.",
       "properties": {
-        "severity": {
-          "$ref": "#/definitions/ContentFilterSeverity",
-          "description": "Ratings for the intensity and risk level of filtered content."
-        },
         "filtered": {
           "type": "boolean",
           "description": "A value indicating whether or not the content has been filtered."
+        },
+        "severity": {
+          "$ref": "#/definitions/ContentFilterSeverity",
+          "description": "Ratings for the intensity and risk level of filtered content."
         }
       },
       "required": [
-        "severity",
-        "filtered"
+        "filtered",
+        "severity"
       ]
     },
     "ContentFilterResultDetailsForPrompt": {
@@ -3627,15 +3631,10 @@
           "type": "string",
           "format": "uri",
           "description": "Specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings. The api-version query parameter is not allowed."
-        },
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "Specifies the authentication options to use when retrieving embeddings from the specified endpoint."
         }
       },
       "required": [
-        "endpoint",
-        "authentication"
+        "endpoint"
       ],
       "allOf": [
         {
