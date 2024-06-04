@@ -16,16 +16,25 @@ options:
     examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   # Uncomment this line and add "@azure-tools/typespec-python" to your package.json to generate Python code
-  "@azure-tools/typespec-python":
-    flavor: azure
-    "basic-setup-py": true
-    "package-version": "4.9.0b1"
-    "package-dir": "azure-keyvault-certificates"
-    "package-name": "azure-keyvault-certificates"
-    "output-path": "."
+  # "@azure-tools/typespec-python":
+  #   flavor: azure
+  #   "basic-setup-py": true
+  #   "package-version": "4.9.0b1"
+  #   "package-dir": "azure-keyvault-certificates"
+  #   "package-name": "azure-keyvault-certificates"
+  #   "output-path": "."
   # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
   # "@azure-tools/typespec-java": true
   # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
   # "@azure-tools/typespec-csharp": true
   # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
-  # "@azure-tools/typespec-ts": true
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    output-path: "."
+    package-dir: "keyvault"
+    isModularLibrary: true
+    packageDetails:
+      version: "4.9.0-beta.1"
+      description: "Azure Key Vault Certificates"
+      name: "@azure/keyvault-certificates"
+
