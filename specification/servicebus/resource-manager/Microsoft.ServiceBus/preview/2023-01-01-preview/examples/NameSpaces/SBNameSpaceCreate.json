@@ -16,6 +16,19 @@
         "tag2": "value2"
       },
       "properties": {
+        "geoDataReplication": {
+          "maxReplicationLagDurationInSeconds": 300,
+          "locations": [
+              {
+                  "locationName": "eastus",
+                  "roleType": "Primary"
+              },
+              {
+                  "locationName": "southcentralus",
+                  "roleType": "Secondary"
+              }
+          ]
+        },
         "premiumMessagingPartitions": 2
       }
     }
@@ -37,6 +50,19 @@
           "tag2": "value2"
         },
         "properties": {
+          "geoDataReplication": {
+            "maxReplicationLagDurationInSeconds": 300,
+            "locations": [
+                {
+                    "locationName": "eastus",
+                    "roleType": "Primary"
+                },
+                {
+                    "locationName": "southcentralus",
+                    "roleType": "Secondary"
+                }
+            ]
+          },
           "provisioningState": "Created",
           "metricId": "5f750a97-50d9-4e36-8081-c9ee4c0210d4:sdk-namespace-2924",
           "createdAt": "2017-05-25T22:26:36.76Z",
