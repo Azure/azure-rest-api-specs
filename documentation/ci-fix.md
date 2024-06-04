@@ -32,10 +32,10 @@ Short link: [aka.ms/ci-fix]
   - [APIView Failures: troubleshooting guides](#apiview-failures-troubleshooting-guides)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
     - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
+  - [`SDK azure-sdk-for-*` checks, like `SDK azure-sdk-for-go`](#sdk-azure-sdk-for--checks-like-sdk-azure-sdk-for-go)
   - [Suppression Process](#suppression-process)
   - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
   - [Obsolete checks](#obsolete-checks)
-
 
 This page provides detailed instructions on how to diagnose, reproduce, fix and get help on various [automated validation tooling] failures on your [Azure REST API specs PR].
 
@@ -286,14 +286,46 @@ Various APIViews are generated as part of the Azure REST API specs PR build. Amo
 5. If not present, the APIView parser for the language failed to generate the `APIView Token Artifacts`.
 6. Please contact [APIView Support Teams Channel] for assistance.
 
+## `SDK azure-sdk-for-*` checks, like `SDK azure-sdk-for-go`
+
+> [!IMPORTANT]
+>
+> - The `SDK azure-sdk-for-*` checks are owned by the Shanghai division of the Azure SDK team,
+    not the core Redmond Azure SDK team.
+> - Only `SDK azure-sdk-for-go` check failure will block a specs PR, because this check serves as a canary for the
+    entire `SDK azure-sdk-for-*` family of checks.
+
+If you have an issue or with any of checks listed in the first column of the table below:
+
+| Check name                        | Owner          |
+|-----------------------------------|----------------|
+| `SDK azure-sdk-for-go`            | Ray Chen       |
+| `SDK azure-sdk-for-java`          | Weidong Xu     |
+| `SDK azure-sdk-for-js`            | Qiaoqiao Zhang |
+| `SDK azure-sdk-for-net`           | Wei Hu         |
+| `SDK azure-sdk-for-net-track2`    | Wei Hu         |
+| `SDK azure-sdk-for-python`        | Yuchao Yan     |
+| `SDK azure-sdk-for-python-track2` | Yuchao Yan     |
+
+Do the following:
+
+- Attempt to diagnose the issue yourself:
+  - Look at the affected PR's `checks` tab for the failing check.
+  - Click on the `View Azure DevOps build log for more details.` link from that tab and inspect the devOps logs.
+    For example, for `SDK azure-sdk-for-go` check look into the `SDK azure-sdk-fo-go` job, `SDK Automation` task logs.
+- If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
+  to the owner of the check per the aforementioned table.
+
 ## Suppression Process
 
-In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs. Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
+In case there are validation errors reported against your service that you believe do not apply,
+we have a suppression process you can follow to permanently remove these reported errors for your specs.
+Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
 
 ## Checks not covered by this guide
 
-If you have an issue with a check that is not covered by this guide and the help at [aka.ms/azsdk/pr-getting-help] is not enough,
-please reach out on the Teams channel: [aka.ms/azsdk/support/specreview-channel].
+If you have an issue with a check that is not covered by this guide and the help at [aka.ms/azsdk/pr-getting-help]
+is not enough,please reach out on the Teams channel: [aka.ms/azsdk/support/specreview-channel].
 
 ## Obsolete checks
 
