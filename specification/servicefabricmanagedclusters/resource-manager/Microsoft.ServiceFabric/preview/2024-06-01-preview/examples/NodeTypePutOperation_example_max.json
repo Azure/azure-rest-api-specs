@@ -4,7 +4,7 @@
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
     "nodeTypeName": "BE-testResourceGroup-testRegion-test",
-    "api-version": "2024-04-01",
+    "api-version": "2024-06-01-preview",
     "parameters": {
       "properties": {
         "isPrimary": false,
@@ -147,6 +147,16 @@
               }
             ]
           }
+        ],
+        "vmApplications": [
+          {
+            "configurationReference": "https://mystorageaccount.blob.core.windows.net/containername/blobname",
+            "enableAutomaticUpgrade": true,
+            "order": 1,
+            "packageReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+            "tags": "SampleTag",
+            "treatFailureAsDeploymentFailure": false
+          }
         ]
       }
     }
@@ -154,8 +164,8 @@
   "responses": {
     "202": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-04-01",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-04-01"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-06-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-06-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
@@ -308,14 +318,24 @@
                 }
               ]
             }
+          ],
+          "vmApplications": [
+            {
+              "configurationReference": "https://mystorageaccount.blob.core.windows.net/containername/blobname",
+              "enableAutomaticUpgrade": true,
+              "order": 1,
+              "packageReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+              "tags": "SampleTag",
+              "treatFailureAsDeploymentFailure": false
+            }
           ]
         }
       }
     },
     "200": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-04-01",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-04-01"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-06-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2024-06-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
@@ -467,6 +487,16 @@
                   }
                 }
               ]
+            }
+          ],
+          "vmApplications": [
+            {
+              "configurationReference": "https://mystorageaccount.blob.core.windows.net/containername/blobname",
+              "enableAutomaticUpgrade": true,
+              "order": 1,
+              "packageReferenceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+              "tags": "SampleTag",
+              "treatFailureAsDeploymentFailure": false
             }
           ]
         }

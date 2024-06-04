@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2024-04-01"
+    "version": "2024-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1274,6 +1274,16 @@
         "computerNamePrefix": {
           "type": "string",
           "description": "Specifies the computer name prefix. Limited to 9 characters. If specified, allows for a longer name to be specified for the node type name."
+        },
+        "vmApplications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmApplication"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Specifies the gallery applications that should be made available to the underlying VMSS."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1527,6 +1537,48 @@
         }
       },
       "description": "Specifies set of certificates that should be installed onto the virtual machines."
+    },
+    "VmApplication": {
+      "type": "object",
+      "required": [
+        "packageReferenceId"
+      ],
+      "properties": {
+        "configurationReference": {
+          "type": "string",
+          "description": "Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the underlying VMSS."
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional, Specifies the order in which the packages have to be installed."
+        },
+        "packageReferenceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/galleries/applications/versions"
+              }
+            ]
+          },
+          "description": "Specifies the GalleryApplicationVersion resource id on the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}."
+        },
+        "tags": {
+          "type": "string",
+          "description": "Optional, Specifies a passthrough value for more generic context."
+        },
+        "treatFailureAsDeploymentFailure": {
+          "type": "boolean",
+          "description": "Optional, If true, any failure for any operation in the VmApplication will fail the deployment."
+        }
+      },
+      "description": "Specifies the gallery application that should be made available to the underlying VMSS."
     },
     "VmImagePlan": {
       "type": "object",
@@ -1997,7 +2049,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-04-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-06-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
