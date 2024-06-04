@@ -26,7 +26,7 @@ These are the global settings for the mongocluster.
 
 ```yaml
 openapi-type: arm
-tag: package-2024-03-01-preview
+tag: package-2024-06-01-preview
 ```
 
 ### Tag: package-2024-06-01-preview
