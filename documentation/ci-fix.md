@@ -32,6 +32,7 @@ Short link: [aka.ms/ci-fix]
   - [APIView Failures: troubleshooting guides](#apiview-failures-troubleshooting-guides)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
     - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
+  - [`SDK azure-powershell`](#sdk-azure-powershell)
   - [`SDK azure-sdk-for-*` checks, like `SDK azure-sdk-for-go`](#sdk-azure-sdk-for--checks-like-sdk-azure-sdk-for-go)
   - [Suppression Process](#suppression-process)
   - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
@@ -285,6 +286,18 @@ Various APIViews are generated as part of the Azure REST API specs PR build. Amo
 4. Below `Read Temp File` find the .json object and search within to locate the `apiViewArtifact` property.
 5. If not present, the APIView parser for the language failed to generate the `APIView Token Artifacts`.
 6. Please contact [APIView Support Teams Channel] for assistance.
+
+## `SDK azure-powershell`
+
+> [!IMPORTANT]
+>
+> - This check is never blocking merging of a spec PR , even if it fails.
+> - The `SDK azure-powershell` check is owned by the Shanghai division of the Azure SDK team,
+    not the core Redmond Azure SDK team.
+
+
+The owner of this check is Yeming Liu from the Shanghai division of the Azure SDK team.
+Please reach out to him with with any questions or concerns.
 
 ## `SDK azure-sdk-for-*` checks, like `SDK azure-sdk-for-go`
 
