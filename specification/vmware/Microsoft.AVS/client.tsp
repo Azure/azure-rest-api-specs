@@ -6,9 +6,13 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.AVS;
 
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.TrackedResource.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.ProxyResource.properties, "java");
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties, "java");
 
 @@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentity, "PrivateCloudIdentity", "java");
