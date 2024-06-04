@@ -43,6 +43,7 @@ op getThread(@path threadId: string): AssistantThread;
  * Modifies an existing thread.
  *
  * @param threadId The ID of the thread to modify.
+ * @param updateAssistantThreadOptions The details of the modification to perform on a specified thread.
  * @returns Information about the modified thread.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -51,10 +52,7 @@ op getThread(@path threadId: string): AssistantThread;
 @post
 @route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op updateThread(
-  @path threadId: string,
-  ...OptionalNullableMetadata,
-): AssistantThread;
+op updateThread(...UpdateAssistantThreadOptions): AssistantThread;
 
 /**
  * Deletes an existing thread.

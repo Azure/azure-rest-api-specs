@@ -24,21 +24,10 @@ namespace Azure.AI.OpenAI.Assistants {
   );
   @@access(deleteAssistant, Access.internal, "csharp");
   @@clientName(deleteAssistant, "InternalDeleteAssistant", "csharp");
-  @@access(AssistantFileDeletionStatus, Access.internal, "csharp");
-  @@clientName(AssistantFileDeletionStatus,
-    "InternalAssistantFileDeletionStatus",
-    "csharp"
-  );
-  @@access(deleteAssistantFile, Access.internal, "csharp");
-  @@clientName(deleteAssistantFile, "InternalUnlinkAssistantFile", "csharp");
   @@access(deleteThread, Access.internal, "csharp");
   @@clientName(deleteThread, "InternalDeleteThread", "csharp");
   @@access(listAssistants, Access.internal, "csharp");
   @@clientName(listAssistants, "InternalGetAssistants", "csharp");
-  @@access(listAssistantFiles, Access.internal, "csharp");
-  @@clientName(listAssistantFiles, "InternalGetAssistantFiles", "csharp");
-  @@access(listMessageFiles, Access.internal, "csharp");
-  @@clientName(listMessageFiles, "InternalGetMessageFiles", "csharp");
   @@access(listRunSteps, Access.internal, "csharp");
   @@clientName(listRunSteps, "InternalGetRunSteps", "csharp");
   @@access(listMessages, Access.internal, "csharp");
@@ -241,6 +230,4 @@ namespace Azure.AI.OpenAI.Assistants {
   // From https://platform.openai.com/docs/assistants/how-it-works
   // "Note that deleting an AssistantFile doesn’t delete the original File object, it simply deletes the association
   // between that File and the Assistant."
-  @@clientName(createAssistantFile, "LinkAssistantFile", "csharp");
-  // 'Unlink' counterpart already renamed for DeletionStatus merge
 }
