@@ -357,8 +357,8 @@ Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed gu
 
 # Checks not covered by this guide
 
-If you have an issue with a check that is not covered by this guide and the help at [aka.ms/azsdk/pr-getting-help]
-is not enough,please reach out on the Teams channel: [aka.ms/azsdk/support/specreview-channel].
+If you have an issue with a check that is not covered by this guide and the help at [aka.ms/azsdk/pr-getting-help],
+see [aka.ms/azsdk/support].
 
 # Obsolete checks
 
@@ -373,7 +373,6 @@ Following checks have been removed from the validation toolchain as of August 20
 [1ES PoliCheck]: https://eng.ms/docs/cloud-ai-platform/devdiv/one-engineering-system-1es/1es-docs/1es-pipeline-templates/features/sdlanalysis/policheck
 [aka.ms/azsdk/pr-getting-help]: https://aka.ms/azsdk/pr-getting-help
 [aka.ms/azsdk/support]: https://aka.ms/azsdk/support
-[aka.ms/azsdk/support/specreview-channel]: https://aka.ms/azsdk/support/specreview-channel
 [aka.ms/ci-fix]: https://aka.ms/ci-fix
 [APIView Support Teams Channel]: https://teams.microsoft.com/l/channel/19%3A3adeba4aa1164f1c889e148b1b3e3ddd%40thread.skype/APIView?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47
 [automated validation tooling]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-tooling
