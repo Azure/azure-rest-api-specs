@@ -71,7 +71,7 @@ This check is owned by One Engineering System. See [1ES PoliCheck] for help.
     not the Azure SDK team.
 
 The owner of this check is Yeming Liu from the `Azure.Core` team.
-Please reach out to him with with any questions.
+Please reach out to him with any questions.
 
 ## `SDK azure-sdk-for-*` checks, like `SDK azure-sdk-for-go`
 
