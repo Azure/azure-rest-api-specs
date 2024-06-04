@@ -56,7 +56,7 @@ model AssetProperties {
 
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must have the format <ModuleCR.metadata.namespace>/<ModuleCR.metadata.name>.")
   @visibility("read", "create")
-  assetEndpointProfileUri: string;
+  assetEndpointProfileUri: url;
 
   @doc("An integer that is incremented each time the resource is modified.")
   @visibility("read")
@@ -66,7 +66,7 @@ model AssetProperties {
   manufacturer?: string;
 
   @doc("Asset manufacturer URI.")
-  manufacturerUri?: string;
+  manufacturerUri?: url;
 
   @doc("Asset model name.")
   // `model` is a reserved keyname. Wrap in double quotes
@@ -82,7 +82,7 @@ model AssetProperties {
   softwareRevision?: string;
 
   @doc("Reference to the documentation.")
-  documentationUri?: string;
+  documentationUri?: url;
 
   @doc("Asset serial number.")
   serialNumber?: string;
@@ -207,7 +207,8 @@ interface Assets {
 
   createOrReplace is ArmResourceCreateOrReplaceAsync<Asset>;
 
-  update is ArmResourcePatchAsync<Asset, AssetProperties>;
+  @parameterVisibility
+  update is ArmCustomPatchAsync<Asset, AssetProperties>;
 
   delete is ArmResourceDeleteWithoutOkAsync<Asset>;
 
