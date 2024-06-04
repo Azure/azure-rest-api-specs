@@ -1364,6 +1364,9 @@ directive:
   - suppress: AvoidAdditionalProperties
     from: resources.json
     reason: Breaking change in order to change the property names for multiple API's. Will fix in the future.
+  - suppress: AvoidAdditionalProperties
+    from: changes.json
+    reason: "Change properties including the dictionary of individual property changes are dynamic types. where clause is not working on all parent fields using this property bag, hence we're suppressing the entire file for now."
   - suppress: XmsExamplesRequired
     from: resources.json
     reason: Xms Examples required is a pre-existing lint error. Not related to this version release. Will fix in the future.

@@ -48,10 +48,10 @@
         "description": "Obtains a list of change resources from the past 14 days for the target resource",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceProviderNamespaceParameter"
@@ -63,7 +63,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/$top"
@@ -82,7 +82,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -105,10 +105,10 @@
         "description": "Obtains the specified change resource for the target resource",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceProviderNamespaceParameter"
@@ -120,7 +120,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ChangeResourceIdParameter"
@@ -136,7 +136,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -166,7 +166,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -182,6 +182,7 @@
         "targetResourceId": {
           "description": "The fully qualified ID of the target resource that was changed",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         },
         "targetResourceType": {
@@ -200,7 +201,7 @@
           ],
           "x-ms-enum": {
             "name": "ChangeType",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "Update",
@@ -233,13 +234,14 @@
       "type": "object",
       "properties": {
         "correlationId": {
-          "description": "The ARM correlation ID of the change resource",
+          "description": "The Azure correlation ID of the change resource",
           "type": "string",
           "readOnly": true
         },
         "timestamp": {
           "description": "The time the change(s) on the target resource ocurred",
           "type": "string",
+          "format": "date-time",
           "readOnly": true
         },
         "changesCount": {
@@ -264,7 +266,7 @@
           "readOnly": true
         },
         "changedBy": {
-          "description": "The entity that made the change(s)",
+          "description": "The identifier i.e. email id or application id of the entity that made the change(s)",
           "type": "string",
           "readOnly": true
         },
@@ -311,13 +313,14 @@
           "readOnly": true
         },
         "operation": {
-          "description": "The Azure Resource Provider operation that was invoked to make the change(s). See [here](https://learn.microsoft.com/en-us/azure/role-based-access-control/resource-provider-operations) for a full list of possible values",
+          "description": "The Azure Resource Provider operation that was invoked to make the change(s). See [here](https://learn.microsoft.com/azure/role-based-access-control/resource-provider-operations) for a full list of possible values",
           "type": "string",
           "readOnly": true
         },
         "changeControlId": {
           "description": "The resource identifier of the change control resource associated with this change record.",
           "type": "string",
+          "format": "arm-id",
           "readOnly": true
         }
       }
@@ -347,27 +350,12 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "ResourceProviderNamespaceParameter": {
       "name": "resourceProviderNamespace",
       "in": "path",
       "required": true,
       "type": "string",
+      "maxLength": 256,
       "description": "The name of the resource provider namespace.",
       "x-ms-parameter-location": "method"
     },
@@ -376,6 +364,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "maxLength": 256,
       "description": "The name of the resource type.",
       "x-ms-parameter-location": "method"
     },
@@ -385,14 +374,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource.",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request.",
       "x-ms-parameter-location": "method"
     },
     "ChangeResourceIdParameter": {
