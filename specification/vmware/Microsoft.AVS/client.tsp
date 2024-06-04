@@ -28,6 +28,18 @@ using Microsoft.AVS;
   "java"
 );
 
+// operation
+@@clientName(Addons.list, "list", "java");
+@@clientName(PlacementPolicies.list, "list", "java");
+@@clientName(VirtualMachines.list, "list", "java");
+@@clientName(HcxEnterpriseSites.list, "list", "java");
+@@clientName(ScriptExecutions.list, "list", "java");
+@@clientName(ScriptPackages.list, "list", "java");
+@@clientName(Datastores.list, "list", "java");
+@@clientName(Clusters.list, "list", "java");
+@@clientName(ScriptCmdlets.list, "list", "java");
+
+// model
 @@clientName(VmVmPlacementPolicyProperties,
   "VmPlacementPolicyProperties",
   "java"
@@ -37,3 +49,7 @@ using Microsoft.AVS;
   "WorkloadNetworkPublicIpProvisioningState",
   "java"
 );
+
+// property
+@@clientName(Circuit.expressRouteID, "expressRouteId", "java");
+@@clientName(Circuit.expressRoutePrivatePeeringID, "expressRoutePrivatePeeringId", "java");
