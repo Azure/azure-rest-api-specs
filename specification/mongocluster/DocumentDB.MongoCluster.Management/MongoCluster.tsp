@@ -262,7 +262,7 @@ model PromoteReplicaRequest {
   /** The promote option to apply to the operation. */
   promoteOption: PromoteOption;
 
-  /** The mode to apply to the promote operation. Value is optional and defalt value is 'Switchover'. */
+  /** The mode to apply to the promote operation. Value is optional and default value is 'Switchover'. */
   mode?: PromoteMode;
 }
 
