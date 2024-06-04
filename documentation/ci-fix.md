@@ -293,7 +293,7 @@ Various APIViews are generated as part of the Azure REST API specs PR build. Amo
 > - The `SDK azure-sdk-for-*` checks are owned by the Shanghai division of the Azure SDK team,
     not the core Redmond Azure SDK team.
 > - Only `SDK azure-sdk-for-go` check failure will block a specs PR, because this check serves as a canary for the
-    entire `SDK azure-sdk-for-*` family of checks.
+    entire `SDK azure-sdk-for-*` group of checks.
 
 If you have an issue or with any of checks listed in the first column of the table below:
 
@@ -309,11 +309,11 @@ If you have an issue or with any of checks listed in the first column of the tab
 
 Do the following:
 
-- Attempt to diagnose the issue yourself:
-  - Look at the affected PR's `checks` tab for the failing check.
-  - Click on the `View Azure DevOps build log for more details.` link from that tab and inspect the devOps logs.
-    For example, for `SDK azure-sdk-for-go` check look into the `SDK azure-sdk-fo-go` job, `SDK Automation` task logs.
-- If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
+1. Attempt to diagnose the issue yourself:
+    1. Look at the affected PR's `checks` tab for the failing check.
+    1. Click on the `View Azure DevOps build log for more details.` link from that tab and inspect the devOps logs.
+       For example, for `SDK azure-sdk-for-go` check look into the `SDK azure-sdk-fo-go` job, `SDK Automation` task logs.
+1. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
   to the owner of the check per the aforementioned table.
 
 ## Suppression Process
