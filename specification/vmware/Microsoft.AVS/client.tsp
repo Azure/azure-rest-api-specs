@@ -6,6 +6,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.AVS;
 
+// flatten
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.TrackedResource.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
@@ -17,22 +18,24 @@ using Microsoft.AVS;
 @@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
 );
 
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(PrivateCloudUpdate.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(ClusterUpdate.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(WorkloadNetworkSegmentUpdate.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(WorkloadNetworkDhcpUpdate.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(WorkloadNetworkPortMirroringUpdate.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(WorkloadNetworkVMGroupUpdate.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(WorkloadNetworkDnsServiceUpdate.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(WorkloadNetworkDnsZoneUpdate.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(PlacementPolicyUpdate.properties);
-
-@@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentity,
-  "PrivateCloudIdentity"
-);
-@@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentityType,
-  "ResourceIdentityType"
-);
 
 // operation
 @@friendlyName(Addons.list, "list");
@@ -49,6 +52,13 @@ using Microsoft.AVS;
 @@friendlyName(GlobalReachConnections.list, "list");
 
 // model
+@@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentity,
+  "PrivateCloudIdentity"
+);
+@@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentityType,
+  "ResourceIdentityType"
+);
+
 @@clientName(VmVmPlacementPolicyProperties, "VmPlacementPolicyProperties");
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp");
 @@clientName(WorkloadNetworkPublicIPProvisioningState,
