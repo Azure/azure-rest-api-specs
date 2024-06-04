@@ -10,7 +10,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
-using Autorest;
 using Azure.ResourceManager.Private;
 
 namespace Microsoft.LoadTestService;

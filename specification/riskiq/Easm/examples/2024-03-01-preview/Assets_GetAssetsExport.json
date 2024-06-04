@@ -1,0 +1,33 @@
+{
+  "operationId": "Assets_GetAssetsExport",
+  "title": "Assets_GetAssetsExport",
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workspaceName": "ThisisaWorkspace",
+    "fileName": "ThisisaFileName",
+    "filter": "state%20%3D%20%22confirmed%22",
+    "orderBy": "name",
+    "body": {
+      "fileName": "ThisisaFileName",
+      "columns": [
+        "asset",
+        "name"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "ThisisaTaskId",
+        "startedAt": "2022-05-02T19:30:14.432+00:00",
+        "completedAt": "2022-05-02T19:30:54.432+00:00",
+        "lastPolledAt": "2022-05-02T19:30:19.432+00:00",
+        "state": "complete",
+        "phase": "complete",
+        "reason": "This is a Task id"
+      }
+    }
+  }
+}
