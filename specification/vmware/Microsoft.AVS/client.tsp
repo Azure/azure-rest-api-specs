@@ -29,15 +29,15 @@ using Microsoft.AVS;
 );
 
 // operation
-@@clientName(Addons.list, "list", "java");
-@@clientName(PlacementPolicies.list, "list", "java");
-@@clientName(VirtualMachines.list, "list", "java");
-@@clientName(HcxEnterpriseSites.list, "list", "java");
-@@clientName(ScriptExecutions.list, "list", "java");
-@@clientName(ScriptPackages.list, "list", "java");
-@@clientName(Datastores.list, "list", "java");
-@@clientName(Clusters.list, "list", "java");
-@@clientName(ScriptCmdlets.list, "list", "java");
+@@friendlyName(Addons.list, "list", "java");
+@@friendlyName(PlacementPolicies.list, "list", "java");
+@@friendlyName(VirtualMachines.list, "list", "java");
+@@friendlyName(HcxEnterpriseSites.list, "list", "java");
+@@friendlyName(ScriptExecutions.list, "list", "java");
+@@friendlyName(ScriptPackages.list, "list", "java");
+@@friendlyName(Datastores.list, "list", "java");
+@@friendlyName(Clusters.list, "list", "java");
+@@friendlyName(ScriptCmdlets.list, "list", "java");
 
 // model
 @@clientName(VmVmPlacementPolicyProperties,
