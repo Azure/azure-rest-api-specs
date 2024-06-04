@@ -1,0 +1,62 @@
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+
+namespace Microsoft.Workloads;
+/**
+ * Define the Server Instance resource.
+ */
+@parentResource(SAPInstance)
+model ServerInstance is ProxyResource<ServerInstanceProperties> {
+  /**
+   * The name of the Server instance resource for SAP Migration.
+   */
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$")
+  @path
+  @key("serverInstanceName")
+  @segment("serverInstances")
+  @visibility("read")
+  name: string;
+}
+
+@armResourceOperations
+interface ServerInstances {
+  /**
+   * Gets the Server Instance resource.
+   */
+  get is ArmResourceRead<ServerInstance>;
+
+  /**
+   * Creates the Server Instance resource. This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
+   */
+  create is ArmResourceCreateOrReplaceAsync<ServerInstance>;
+
+  /**
+   * Updates the Server Instance resource. This operation on a resource by end user will return a Bad Request error.
+   */
+  @parameterVisibility
+  update is ArmCustomPatchSync<ServerInstance, UpdateServerInstanceRequest>;
+
+  /**
+   * Deletes the Server Instance resource. This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
+   */
+  #suppress "deprecated" ""
+  @removed(Versions.v2024_06_01_preview)
+  @sharedRoute
+  @renamedFrom(Versions.v2024_06_01_preview, "delete")
+  deleteOld is ArmResourceDeleteAsync<ServerInstance>;
+
+  /**
+   * Deletes the Server Instance resource. This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.
+   */
+  @added(Versions.v2024_06_01_preview)
+  @sharedRoute
+  delete is ArmResourceDeleteWithoutOkAsync<ServerInstance>;
+
+  /**
+   * Lists the Server Instance resources for the given SAP Instance resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Supporting existing name."
+  list is ArmResourceListByParent<ServerInstance>;
+}
