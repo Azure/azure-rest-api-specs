@@ -41,7 +41,7 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
   @path
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
