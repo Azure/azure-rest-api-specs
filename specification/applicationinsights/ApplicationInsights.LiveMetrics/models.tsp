@@ -48,7 +48,7 @@ model IsSubscribedOperationRequestParameters {
   configurationEtag?: eTag;
 
   @doc("Data contract between Application Insights client SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
-  @body
+  @bodyRoot
   monitoringDataPoint?: MonitoringDataPoint;
 }
 
@@ -95,7 +95,7 @@ model PublishOperationRequestParameters {
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Need to follow the existing SDK contract."
   @doc("Data contract between the client and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
-  @body
+  @bodyRoot
   monitoringDataPoints?: MonitoringDataPoint[];
 }
 
@@ -182,45 +182,47 @@ model CollectionConfigurationError {
  * Collection configuration error type reported by the client SDK.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
-enum CollectionConfigurationErrorType {
+union CollectionConfigurationErrorType {
+  string,
+
   /** Unknown error type. */
-  Unknown,
+  Unknown: "Unknown",
 
   /** Performance counter parsing error. */
-  PerformanceCounterParsing,
+  PerformanceCounterParsing: "PerformanceCounterParsing",
 
   /** Performance counter unexpected error. */
-  PerformanceCounterUnexpected,
+  PerformanceCounterUnexpected: "PerformanceCounterUnexpected",
 
   /** Performance counter duplicate ids. */
-  PerformanceCounterDuplicateIds,
+  PerformanceCounterDuplicateIds: "PerformanceCounterDuplicateIds",
 
   /** Document stream duplication ids. */
-  DocumentStreamDuplicateIds,
+  DocumentStreamDuplicateIds: "DocumentStreamDuplicateIds",
 
   /** Document stream failed to create. */
-  DocumentStreamFailureToCreate,
+  DocumentStreamFailureToCreate: "DocumentStreamFailureToCreate",
 
   /** Document stream failed to create filter unexpectedly. */
-  DocumentStreamFailureToCreateFilterUnexpected,
+  DocumentStreamFailureToCreateFilterUnexpected: "DocumentStreamFailureToCreateFilterUnexpected",
 
   /** Metric duplicate ids. */
-  MetricDuplicateIds,
+  MetricDuplicateIds: "MetricDuplicateIds",
 
   /** Metric telemetry type unsupported. */
-  MetricTelemetryTypeUnsupported,
+  MetricTelemetryTypeUnsupported: "MetricTelemetryTypeUnsupported",
 
   /** Metric failed to create. */
-  MetricFailureToCreate,
+  MetricFailureToCreate: "MetricFailureToCreate",
 
   /** Metric failed to create filter unexpectedly. */
-  MetricFailureToCreateFilterUnexpected,
+  MetricFailureToCreateFilterUnexpected: "MetricFailureToCreateFilterUnexpected",
 
   /** Filter failed to create unexpectedly. */
-  FilterFailureToCreateUnexpected,
+  FilterFailureToCreateUnexpected: "FilterFailureToCreateUnexpected",
 
   /** Collection configuration failed to create unexpectedly. */
-  CollectionConfigurationFailureToCreateUnexpected,
+  CollectionConfigurationFailureToCreateUnexpected: "CollectionConfigurationFailureToCreateUnexpected",
 }
 
 /**
@@ -267,24 +269,26 @@ model DocumentIngress {
 }
 
 @doc("Document type")
-enum DocumentType {
+union DocumentType {
+  string,
+
   @doc("Represents a request telemetry type.")
-  Request,
+  Request: "Request",
 
   @doc("Represents a remote dependency telemetry type.")
-  RemoteDependency,
+  RemoteDependency: "RemoteDependency",
 
   @doc("Represents an exception telemetry type.")
-  Exception,
+  Exception: "Exception",
 
   @doc("Represents an event telemetry type.")
-  Event,
+  Event: "Event",
 
   @doc("Represents a trace telemetry type.")
-  Trace,
+  Trace: "Trace",
 
   @doc("Represents an unknown telemetry type.")
-  Unknown,
+  Unknown: "Unknown",
 }
 
 /**
@@ -447,27 +451,29 @@ model DocumentFilterConjunctionGroupInfo {
 }
 
 @doc("Telemetry type.")
-enum TelemetryType {
+union TelemetryType {
+  string,
+
   @doc("Represents a request telemetry type.")
-  Request,
+  Request: "Request",
 
   @doc("Represents a dependency telemetry type.")
-  Dependency,
+  Dependency: "Dependency",
 
   @doc("Represents an exception telemetry type.")
-  Exception,
+  Exception: "Exception",
 
   @doc("Represents an event telemetry type.")
-  Event,
+  Event: "Event",
 
   @doc("Represents a metric telemetry type.")
-  Metric,
+  Metric: "Metric",
 
   @doc("Represents a performance counter telemetry type.")
-  PerformanceCounter,
+  PerformanceCounter: "PerformanceCounter",
 
   @doc("Represents a trace telemetry type.")
-  Trace,
+  Trace: "Trace",
 }
 
 /**
@@ -495,18 +501,20 @@ model DerivedMetricInfo {
 }
 
 @doc("Aggregation type.")
-enum AggregationType {
+union AggregationType {
+  string,
+
   @doc("Average")
-  Avg,
+  Avg: "Avg",
 
   @doc("Sum")
-  Sum,
+  Sum: "Sum",
 
   @doc("Minimum")
-  Min,
+  Min: "Min",
 
   @doc("Maximum")
-  Max,
+  Max: "Max",
 }
 
 /**
@@ -536,30 +544,32 @@ model FilterInfo {
 /**
  * Enum representing the different types of predicates.
  */
-enum PredicateType {
+union PredicateType {
+  string,
+
   @doc("Represents an equality predicate.")
-  Equal,
+  Equal: "Equal",
 
   @doc("Represents a not-equal predicate.")
-  NotEqual,
+  NotEqual: "NotEqual",
 
   @doc("Represents a less-than predicate.")
-  LessThan,
+  LessThan: "LessThan",
 
   @doc("Represents a greater-than predicate.")
-  GreaterThan,
+  GreaterThan: "GreaterThan",
 
   @doc("Represents a less-than-or-equal predicate.")
-  LessThanOrEqual,
+  LessThanOrEqual: "LessThanOrEqual",
 
   @doc("Represents a greater-than-or-equal predicate.")
-  GreaterThanOrEqual,
+  GreaterThanOrEqual: "GreaterThanOrEqual",
 
   @doc("Represents a contains predicate.")
-  Contains,
+  Contains: "Contains",
 
   @doc("Represents a does-not-contain predicate.")
-  DoesNotContain,
+  DoesNotContain: "DoesNotContain",
 }
 
 /**

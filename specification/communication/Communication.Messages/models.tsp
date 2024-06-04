@@ -15,72 +15,84 @@ using Azure.Core.Traits;
 namespace Azure.Communication.MessagesService;
 
 @doc("The type of message. Supports text, image, template.")
-enum CommunicationMessageKind {
+union CommunicationMessageKind {
+  string,
+
   @doc("Text message type.")
-  text,
+  text: "text",
 
   @doc("Image message type.")
-  image,
+  image: "image",
 
   @doc("Template message type.")
-  template,
+  template: "template",
 }
 
 @doc("The WhatsApp button sub type.")
-enum WhatsAppMessageButtonSubType {
+union WhatsAppMessageButtonSubType {
+  string,
+
   @doc("The WhatsApp button sub type is quick reply.")
-  quickReply,
+  quickReply: "quickReply",
 
   @doc("The WhatsApp button sub type is url.")
-  url,
+  url: "url",
 }
 
 @doc("The aggregated template status.")
-enum MessageTemplateStatus {
+union MessageTemplateStatus {
+  string,
+
   @doc("Message template is approved.")
-  approved,
+  approved: "approved",
 
   @doc("Message template is rejected.")
-  rejected,
+  rejected: "rejected",
 
   @doc("Message template is pending.")
-  pending,
+  pending: "pending",
 
   @doc("Message template is paused.")
-  paused,
+  paused: "paused",
 }
 
 @doc("The type of the template parameter.")
-enum MessageTemplateValueKind {
+union MessageTemplateValueKind {
+  string,
+
   @doc("The text template parameter type.")
-  text,
+  text: "text",
 
   @doc("The image template parameter type.")
-  image,
+  image: "image",
 
   @doc("The document template parameter type.")
-  document,
+  document: "document",
 
   @doc("The video template parameter type.")
-  video,
+  video: "video",
 
   @doc("The location template parameter type.")
-  location,
+  location: "location",
 
   @doc("The quick action template parameter type.")
-  quickAction,
+  quickAction: "quickAction",
 }
 
 @doc("The type of the communication messages channel.")
-enum CommunicationMessagesChannel {
+union CommunicationMessagesChannel {
+  string,
+
   @doc("The WhatsApp communication messages channel type.")
-  whatsApp,
+  whatsApp: "whatsApp",
 }
 
 @doc("The type of the message template.")
-enum MessageTemplateBindingsKind {
+union MessageTemplateBindingsKind {
+  string,
+
   @doc("The WhatsApp template type.")
-  whatsApp,
+  whatsApp: "whatsApp",
 }
 
 @discriminator("kind")
@@ -316,7 +328,7 @@ model CommunicationChannel {
 @doc("A data stream.")
 model MessageDataStream {
   @key
-  @visibility("read")
+  @visibility("none") // this model is only used as a parameter
   @doc("The stream ID.")
   @clientName("mediaId", "java")
   id: string;

@@ -1,4 +1,4 @@
-# Code Signing
+# Trusted Signing
 
 > see https://aka.ms/autorest
 
@@ -49,7 +49,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-cli-extensions
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net-track2

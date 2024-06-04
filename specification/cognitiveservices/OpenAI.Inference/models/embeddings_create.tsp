@@ -39,10 +39,31 @@ model EmbeddingsOptions {
     """)
   input: string[];
 
+  @encodedName("application/json", "encoding_format")
+  @added(ServiceApiVersions.v2024_03_01_Preview)
+  @doc("The response encoding format to use for embedding data.")
+  encodingFormat?: EmbeddingEncodingFormat = EmbeddingEncodingFormat.float;
+
+  @added(ServiceApiVersions.v2024_03_01_Preview)
+  @doc("The number of dimensions the resulting output embeddings should have. Only supported in `text-embedding-3` and later models.")
+  dimensions?: int32;
+
   @doc("When using Azure OpenAI, specifies the input type to use for embedding search.")
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "input_type")
   inputType?: string;
+}
+
+@doc("Represents the available formats for embeddings data on responses.")
+@added(ServiceApiVersions.v2024_03_01_Preview)
+union EmbeddingEncodingFormat {
+  string,
+
+  @doc("Specifies that responses should provide arrays of floats for each embedding.")
+  float: "float",
+
+  @doc("Specifies that responses should provide a base64-encoded string for each embedding.")
+  base64: "base64",
 }
 
 @doc("""

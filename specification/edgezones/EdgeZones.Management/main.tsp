@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -9,7 +8,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace("Microsoft.EdgeZones")
 @service({
@@ -30,111 +28,110 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Provisioning State")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Updating State")
-  Updating,
+  Updating: "Updating",
 
   @doc("Deleting State")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Accepted State")
-  Accepted,
+  Accepted: "Accepted",
 }
 
-@doc("The Azure Extended Zone registration status for a subscription.")
-enum RegistrationState {
-  @doc("Not Registered State")
-  NotRegistered,
+@doc("The Azure Extended Zone registration status for a subscription")
+union RegistrationState {
+  string,
 
-  @doc("Pending Register State")
-  PendingRegister,
+  @doc("Subscription not registered for the Azure Extended Zone")
+  NotRegistered: "NotRegistered",
 
-  @doc("Registered State")
-  Registered,
+  @doc("Subscription pending registration for the Azure Extended Zone")
+  PendingRegister: "PendingRegister",
 
-  @doc("Pending Unregister State")
-  PendingUnregister,
+  @doc("Subscription is registered for the Azure Extended Zone")
+  Registered: "Registered",
+
+  @doc("Subscription is pending unregistering for the Azure Extended Zone")
+  PendingUnregister: "PendingUnregister",
 }
 
-@doc("The properties of an AzureExtendedZone Resource")
-model AzureExtendedZoneProperties {
+@doc("The properties of an Extended Zone resource.")
+model ExtendedZoneProperties {
   @visibility("read")
-  @doc("The status of the last operation.")
+  @doc("Status of the last operation performed by the subscription on the Edge Zone resource")
   provisioningState?: ProvisioningState;
 
   @visibility("read")
-  @doc("AzureExtendedZone registration approved or not")
+  @doc("Indicates the Azure Extended Zone registration’s approval status.")
   registrationState?: RegistrationState;
 
-  @doc("AzureExtendedZone displayName")
+  @visibility("read")
+  @doc("Display name of the Azure Extended Zone.")
   displayName: string;
 
-  @doc("AzureExtendedZone regionalDisplayName")
+  @visibility("read")
+  @doc("Regional display name of the Azure Extended Zone.")
   regionalDisplayName: string;
 
-  @doc("AzureExtendedZone regionType")
+  @visibility("read")
+  @doc("Type of region for the Azure Extended Zone.")
   regionType: string;
 
-  @doc("AzureExtendedZone regionCategory")
+  @visibility("read")
+  @doc("Category of region for the Azure Extended Zone.")
   regionCategory: string;
 
-  @doc("AzureExtendedZone geography")
+  @visibility("read")
+  @doc("Geography of the Azure Extended Zone.")
   geography: string;
 
-  @doc("AzureExtendedZone geographyGroup")
+  @visibility("read")
+  @doc("The Geography Group of the Azure Extended Zone.")
   geographyGroup: string;
 
-  @doc("AzureExtendedZone longitude")
+  @visibility("read")
+  @doc("The Longitude of the Azure Extended Zone.")
   longitude: string;
 
-  @doc("AzureExtendedZone latitude")
+  @visibility("read")
+  @doc("The Latitude of the Azure Extended Zone.")
   latitude: string;
 
-  @doc("AzureExtendedZone homeLocation")
+  @visibility("read")
+  @doc("The Home Location of the Azure Extended Zone.")
   homeLocation: string;
 }
 
-@doc("An AzureExtendedZone resource")
+@doc("Resource that represents an Azure Extended Zone available to a subscription for registering and unregistering.")
 @subscriptionResource
-model AzureExtendedZone is ProxyResource<AzureExtendedZoneProperties> {
-  @doc("The name of the AzureExtendedZone")
+model ExtendedZone is ProxyResource<ExtendedZoneProperties> {
+  @doc("The name of the ExtendedZone")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("azureExtendedZoneName")
-  @segment("azureExtendedZones")
+  @key("extendedZoneName")
+  @segment("extendedZones")
   @path
   name: string;
 }
 
-// We will use this in an interface
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations must be inside an interface declaration."
-@autoRoute
-@armResourceAction(TResource)
-@post
-@doc("Arm Resource Action Taking no request body object and returning result object")
-op ArmResourceActionNoBodySync<
-  TResource extends ArmResource,
-  TBaseParameters = BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResource> | ErrorResponse;
-
-@doc("AzureExtendedZone operations")
+@doc("ExtendedZone operations")
 @armResourceOperations
-interface AzureExtendedZones {
-  @doc("Get an Azure Extended Zone for a subscription")
-  get is ArmResourceRead<AzureExtendedZone>;
+interface ExtendedZones {
+  @doc("Gets an Azure Extended Zone for a subscription")
+  get is ArmResourceRead<ExtendedZone>;
 
-  @doc("Lists the Azure Extended Zones for a subscription")
-  listBySubscription is ArmListBySubscription<AzureExtendedZone>;
+  @doc("Lists the Azure Extended Zones available to a subscription")
+  listBySubscription is ArmListBySubscription<ExtendedZone>;
 
-  @doc("Registers a subscription for an Azure Extended Zone")
-  register is ArmResourceActionNoBodySync<AzureExtendedZone>;
+  @doc("Registers a subscription for an Extended Zone")
+  register is ArmResourceActionSync<ExtendedZone, void, ExtendedZone>;
 
-  @doc("Unregisters a subscription for an Azure Extended Zone")
-  unregister is ArmResourceActionNoBodySync<AzureExtendedZone>;
+  @doc("Unregisters a subscription for an Extended Zone")
+  unregister is ArmResourceActionSync<ExtendedZone, void, ExtendedZone>;
 }
