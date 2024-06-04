@@ -7,3 +7,5 @@ using Azure.ClientGenerator.Core;
 
 @@flattenProperty(Azure.ResourceManager.TrackedResource.properties, "java");
 @@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties, "java");
+@@flattenProperty(Azure.ResourceManager.ProxyResource.properties, "java");
+@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties, "java");
