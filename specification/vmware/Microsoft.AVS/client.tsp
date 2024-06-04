@@ -52,4 +52,7 @@ using Microsoft.AVS;
 
 // property
 @@clientName(Circuit.expressRouteID, "expressRouteId", "java");
-@@clientName(Circuit.expressRoutePrivatePeeringID, "expressRoutePrivatePeeringId", "java");
+@@clientName(Circuit.expressRoutePrivatePeeringID,
+  "expressRoutePrivatePeeringId",
+  "java"
+);
