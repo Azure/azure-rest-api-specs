@@ -34,51 +34,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions": {
-      "get": {
-        "tags": [
-          "TuningOptions"
-        ],
-        "operationId": "TuningOptions_ListByServer",
-        "x-ms-examples": {
-          "TuningOptions_ListByServer": {
-            "$ref": "./examples/Tuning_ListTuningOptions.json"
-          }
-        },
-        "description": "Retrieve the list of available tuning options.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TuningOptionsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}": {
       "get": {
         "tags": [
@@ -121,6 +76,51 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions": {
+      "get": {
+        "tags": [
+          "TuningOptions"
+        ],
+        "operationId": "TuningOptions_ListByServer",
+        "x-ms-examples": {
+          "TuningOptions_ListByServer": {
+            "$ref": "./examples/Tuning_ListTuningOptions.json"
+          }
+        },
+        "description": "Retrieve the list of available tuning options.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TuningOptionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -310,8 +310,7 @@
             "$ref": "#/definitions/ImplementationInfo",
             "x-ms-client-flatten": true,
             "description": "Stores implementation details for the recommended action."
-          },
-          "description": "Implementation details for the recommended action"
+          }
         },
         "analyzedWorkload": {
           "type": "object",
@@ -319,8 +318,7 @@
             "$ref": "#/definitions/WorkloadExaminedInformation",
             "x-ms-client-flatten": true,
             "description": "Stores workload information for the recommended action."
-          },
-          "description": "Workload details for the recommended action"
+          }
         },
         "estimatedImpact": {
           "type": "array",
@@ -339,8 +337,7 @@
             "$ref": "#/definitions/IndexRecommendationDetails",
             "x-ms-client-flatten": true,
             "description": "Stores recommendation details for the recommended action."
-          },
-          "description": "Specific details of this recommended action"
+          }
         }
       },
       "description": "Index recommendation properties."
