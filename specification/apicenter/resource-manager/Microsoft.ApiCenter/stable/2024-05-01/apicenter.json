@@ -666,6 +666,74 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/importFromApim": {
+      "post": {
+        "operationId": "Services_ImportFromApim",
+        "tags": [
+          "Services"
+        ],
+        "description": "Imports APIs from Azure API Management.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of Azure API Center service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportFromApimRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The import operation was successfully completed."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/services/{serviceName}/metadataSchemas": {
       "get": {
         "operationId": "MetadataSchemas_List",
@@ -4471,6 +4539,23 @@
       "required": [
         "url"
       ]
+    },
+    "ImportFromApimRequest": {
+      "type": "object",
+      "description": "The import from Azure API Management request.",
+      "properties": {
+        "sourceResourceIds": {
+          "type": "array",
+          "description": "An entity the metadata schema is requested for.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ImportFromApimSuccessResult": {
+      "type": "object",
+      "description": "The import operation was successfully completed."
     },
     "License": {
       "type": "object",

@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApiCenter;
 @doc("The service entity.")
@@ -42,5 +43,12 @@ interface Services {
     Service,
     MetadataSchemaExportRequest,
     MetadataSchemaExportResult
+  >;
+  @doc("Imports APIs from Azure API Management.")
+  @added(Versions.v2024_05_01)
+  importFromApim is ArmResourceActionAsync<
+    Service,
+    ImportFromApimRequest,
+    ImportFromApimSuccessResult
   >;
 }
