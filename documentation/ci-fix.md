@@ -29,11 +29,14 @@ Short link: [aka.ms/ci-fix]
   - [`Swagger ApiDocPreview`](#swagger-apidocpreview)
   - [`TypeSpec Validation`](#typespec-validation)
     - [Run `tsv` locally](#run-tsv-locally)
-  - [APIView Failures: troubleshooting guides](#apiview-failures-troubleshooting-guides)
+  - [`Swagger APIView`](#swagger-apiview)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
     - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
   - [`SDK azure-powershell`](#sdk-azure-powershell)
   - [`SDK azure-sdk-for-*` checks, like `SDK azure-sdk-for-go`](#sdk-azure-sdk-for--checks-like-sdk-azure-sdk-for-go)
+  - [`PoliCheck`](#policheck)
+  - [`CredScan`](#credscan)
+  - [`license/cla`](#licensecla)
   - [Suppression Process](#suppression-process)
   - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
   - [Obsolete checks](#obsolete-checks)
@@ -266,7 +269,7 @@ that the generated OpenAPI spec files were not in-sync with the TypeSpec project
 
 If none of the above helped, please reach out on [TypeSpec Discussions Teams channel].
 
-## APIView Failures: troubleshooting guides
+## `Swagger APIView`
 
 Various APIViews are generated as part of the Azure REST API specs PR build. Among these are TypeSpec and Swagger as well as any other language that is being generated in the run. When everything is successful you should see a comment box similar to the picture below showing the APIViews generated for TypeSpec or Swagger, plus all other languages being generated.
 
@@ -328,6 +331,18 @@ Do the following:
 1. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
   to the owner of the check per the aforementioned table.
 
+## `PoliCheck`
+
+This check is owned by One Engineering System. See [1ES PoliCheck] for help.
+
+## `CredScan`
+
+This check is owned by One Engineering System. See [1ES CredScan] for help.
+
+## `license/cla`
+
+This check is owned by One Engineering System. See [1ES GitHub inside Microsoft] for help.
+
 ## Suppression Process
 
 In case there are validation errors reported against your service that you believe do not apply,
@@ -355,3 +370,6 @@ Following checks have been removed from the validation toolchain as of August 20
 [automated validation tooling]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-tooling
 [Azure REST API specs PR]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-specs-pr
 [TypeSpec Discussions Teams channel]: https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion%20%F0%9F%90%AE?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47
+[1ES CredScan]: https://eng.ms/docs/cloud-ai-platform/devdiv/one-engineering-system-1es/1es-docs/1es-pipeline-templates/features/sdlanalysis/credscan
+[1ES PoliCheck]: https://eng.ms/docs/cloud-ai-platform/devdiv/one-engineering-system-1es/1es-docs/1es-pipeline-templates/features/sdlanalysis/policheck
+[1ES GitHub inside Microsoft]: https://eng.ms/docs/more/github-inside-microsoft/policies/cla
