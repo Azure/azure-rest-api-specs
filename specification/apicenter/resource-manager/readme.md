@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2024-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-05-01'
 input-file:
-  - Microsoft.ApiCenter/preview/2024-05-01/apicenter.json
+  - Microsoft.ApiCenter/stable/2024-05-01/apicenter.json
 ```
 ### Tag: package-2024-03-15-preview
 
