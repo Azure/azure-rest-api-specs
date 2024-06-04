@@ -146,6 +146,26 @@ directive:
   - remove-operation: NetworkConfigurations_Update
   - remove-operation: NetworkConfigurations_CreateOrUpdate
   - remove-operation: NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope
+
+  - remove-operation: Licenses_Update #PATCH
+  - remove-operation: LicenseProfiles_Get
+  - remove-operation: LicenseProfiles_Delete
+  - remove-operation: LicenseProfiles_Update
+  - remove-operation: LicenseProfiles_List
+  - remove-operation: LicenseProfiles_CreateOrUpdate
+
+  # we will generate a seperate SDK for them
+  - remove-operation: Gateways_CreateOrUpdate
+  - remove-operation: Gateways_Get
+  - remove-operation: Gateways_ListByResourceGroup
+  - remove-operation: Gateways_ListBySubscription
+  - remove-operation: Gateways_Delete
+  - remove-operation: Gateways_Update
+  - remove-operation: Settings_Update
+  - remove-operation: Settings_Get
+  - remove-operation: Settings_Patch
+
+
 ```
 
 
