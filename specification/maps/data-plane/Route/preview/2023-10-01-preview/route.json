@@ -64,7 +64,7 @@
     "Accept-Language": {
       "name": "Accept-Language",
       "in": "header",
-      "description": "Language in which routing results should be returned. \n\nFor more information, see [Localization support in Azure Maps](https://learn.microsoft.com/en-us/azure/azure-maps/supported-languages#routing-v2-services-preview-supported-languages) for details.",
+      "description": "Language in which routing results should be returned. \n\nFor more information, see [Localization support in Azure Maps](https://learn.microsoft.com/en-us/azure/azure-maps/supported-languages#routing-v2-services-preview-supported-languages).",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "client"
@@ -73,7 +73,8 @@
   "paths": {
     "/route/directions": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Route Directions API returns the ideal route between an origin and destination for automobile (driving), commercial trucks and walking routes. The route passes through a series of waypoints if specified. A waypoint is a geographical location defined by longitude and latitude that is used for navigational purposes. The route considers factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. More routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nThe Route Directions considers local laws, vehicle dimensions, cargo type, max speed, bridge and tunnel heights to calculate the truck specific routes and avoid complex maneuvers and difficult roads. Not all trucks can travel the same routes as other vehicles due to certain restrictions based on the vehicle profile or cargo type. For example, highways often have separate speed limits for trucks, some roads don't allow trucks with flammable or hazardous materials, and there can be height and weight restriction on bridges.\n\nUp to 25 waypoints and 10 viaWaypoints between any two waypoints is supported for driving and walking routes. Each set of waypoints creates a separate route Leg. ViaWaypoints define the route path and can be used for route creation through specific locations, but they don't create route Legs. Truck routes support up to 150 waypoints but don't support viaWaypoints.\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "summary": "Use to get the best route between an origin and destination for automobile, commercial trucks and walking routes.",
+        "description": "\n\nThe `Route Directions` API is an HTTP `POST` request that returns the ideal route between an origin and destination for automobile (driving), commercial trucks and walking routes. The route passes through a series of waypoints if specified. A waypoint is a geographical location defined by longitude and latitude that is used for navigational purposes. The route considers factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nThe API returns the distance, estimated travel time, and a representation of the route geometry. More routing information such as an optimized waypoint order or turn by turn instructions is also available, depending on the parameters used.\n\nThe Route Directions considers local laws, vehicle dimensions, cargo type, max speed, bridge and tunnel heights to calculate the truck specific routes and avoid complex maneuvers and difficult roads. Not all trucks can travel the same routes as other vehicles due to certain restrictions based on the vehicle profile or cargo type. For example, highways often have separate speed limits for trucks, some roads don't allow trucks with flammable or hazardous materials, and there can be height and weight restriction on bridges.\n\nUp to 25 waypoints and 10 viaWaypoints between any two waypoints is supported for driving and walking routes. Each set of waypoints creates a separate route Leg. ViaWaypoints define the route path and can be used for route creation through specific locations, but they don't create route Legs. Truck routes support up to 150 waypoints but don't support viaWaypoints.\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n",
         "operationId": "Route_PostDirections",
         "consumes": [
           "application/geo+json"
@@ -133,7 +134,8 @@
     },
     "/route/directions:batch": {
       "post": {
-        "description": "**Directions Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Route Directions Batch API sends batches of up to **100** queries as a single call to the [Route Directions API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-directions?view=rest-maps-2023-10-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions:batch?api-version=2023-10-01-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"optionalId\": \"bbc9c0f6-ab52-49d8-a788-a658fa654c94\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"optionalId\": \"a191de3c-1268-4986-98f0-03f0a5d9302a\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [Request body](https://docs.microsoft.com/en-us/rest/api/maps/route-v2/post-directions#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route-v2/post-directions#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "summary": "Use to send a batch of queries to the [Route Directions](/rest/api/maps/route/post-directions?view=rest-maps-2023-10-01-preview) API in a single synchronous request.",
+        "description": "\n\n\nThe `Route Directions Batch` API is an HTTP `POST` request that sends batches of up to **100** queries in a single call to the [Route Directions](/rest/api/maps/route/post-directions?view=rest-maps-2023-10-01-preview) API.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions:batch?api-version=2023-10-01-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"optionalId\": \"bbc9c0f6-ab52-49d8-a788-a658fa654c94\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"optionalId\": \"a191de3c-1268-4986-98f0-03f0a5d9302a\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 0,\n            \"pointType\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"pointIndex\": 1,\n            \"pointType\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummary\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [Request body](/rest/api/maps/route/post-directions?view=rest-maps-2023-10-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](/rest/api/maps/route/post-directions#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Route_PostDirectionsBatch",
         "consumes": [
           "application/json"
@@ -208,7 +210,7 @@
         },
         "features": {
           "type": "array",
-          "description": "Driving and walking routes are defined by a set of waypoints(stops) and viaWaypoints (intermediate locations that the route must pass through). You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. Truck route supports up to 150 waypoints and viaWaypoints are not supported.\n\nA route must have a minimum of 2 waypoints and the start and end points of the route cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON Point feature object along with pointIndex that specifies the order of the locations. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "description": "Driving and walking routes are defined by a set of waypoints(stops) and viaWaypoints (intermediate locations that the route must pass through). You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. Truck route supports up to 150 waypoints and viaWaypoints are not supported.\n\nA route must have a minimum of 2 waypoints and the start and end points of the route cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON Point feature object along with pointIndex that specifies the order of the locations. For more information on the GeoJSON format, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
           "minimum": 2,
           "items": {
             "$ref": "#/definitions/InputWaypointFeaturesItem"
@@ -243,12 +245,12 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
         "arriveAt": {
-          "description": "The date and time of arrival at the destination point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe arriveAt value must be in the future. The arriveAt parameter cannot be used in conjunction with departAt.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
@@ -425,7 +427,7 @@
       ]
     },
     "FeatureCollection": {
-      "description": "`GeoJSON` FeatureCollection object that contains a list of Features. Refer to [RFC 7946, section 3.3](https://www.rfc-editor.org/rfc/rfc7946#section-3.3) for details.",
+      "description": "`GeoJSON` `FeatureCollection` object that contains a list of Features. For more information, see [RFC 7946, section 3.3](https://www.rfc-editor.org/rfc/rfc7946#section-3.3).",
       "type": "object",
       "properties": {
         "type": {
@@ -462,13 +464,13 @@
           "readOnly": true
         },
         "durationInSeconds": {
-          "description": "Estimated travel time in seconds property that includes the delay due to real-time traffic. Note that even when traffic=false travelTimeInSeconds still includes the delay due to traffic. If DepartAt is in the future, travel time is calculated using time-dependent historic traffic data.",
+          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
         },
         "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is provided if optimizeRoute includes traffic considerations.",
+          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
@@ -477,7 +479,7 @@
     },
     "FeatureTypeEnum": {
       "type": "string",
-      "description": "Specifies the `GeoJSON` type. The only supported object type is FeatureCollection. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "Specifies the `GeoJSON` type. The only supported object type is `FeatureCollection`. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "enum": [
         "FeatureCollection"
       ],
@@ -487,14 +489,14 @@
         "values": [
           {
             "value": "FeatureCollection",
-            "description": "Specifies the `GeoJSON` FeatureCollection object type."
+            "description": "Specifies the `GeoJSON` `FeatureCollection` object type."
           }
         ]
       }
     },
     "FeaturesItemTypeEnum": {
       "type": "string",
-      "description": "Specifies the `GeoJSON` type. The only supported object type is Feature. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "Specifies the `GeoJSON` type. The only supported object type is Feature. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "enum": [
         "Feature"
       ],
@@ -521,7 +523,7 @@
     },
     "Features": {
       "type": "array",
-      "description": "`GeoJSON` feature object that contains Geometry object and additional properties. Refer to [RFC 7946, Section 3.2](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) for details.",
+      "description": "`GeoJSON` feature object that contains Geometry object and additional properties. For more information, see [RFC 7946, Section 3.2](https://www.rfc-editor.org/rfc/rfc7946#section-3.2).",
       "items": {
         "$ref": "#/definitions/FeaturesItem"
       }
@@ -552,10 +554,10 @@
     },
     "Geometry": {
       "type": "object",
-      "description": "A valid `GeoJSON` Geometry object. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "A valid `GeoJSON` Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "properties": {
         "type": {
-          "description": "Specifies the geometry type for the 'GeoJSON` Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+          "description": "Specifies the geometry type for the 'GeoJSON` Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
           "type": "string"
         }
       },
@@ -566,7 +568,7 @@
     },
     "PointGeometry": {
       "type": "object",
-      "description": "Specifies the `GeoJSON` Point Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "Specifies the `GeoJSON` Point Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "x-ms-discriminator-value": "Point",
       "allOf": [
         {
@@ -579,7 +581,7 @@
     },
     "MultiLineStringGeometry": {
       "type": "object",
-      "description": "Specifies the `GeoJSON` MultiLineString Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "Specifies the `GeoJSON` MultiLineString Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "x-ms-discriminator-value": "MultiLineString",
       "allOf": [
         {
@@ -592,7 +594,7 @@
     },
     "InputWaypointFeaturesItem": {
       "type": "object",
-      "description": "Specifies the input waypoint and viaWaypoint `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "Specifies the input waypoint and viaWaypoint `GeoJSON` feature object and additional properties. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "properties": {
         "type": {
           "$ref": "#/definitions/FeaturesItemTypeEnum"
@@ -662,7 +664,7 @@
           "$ref": "#/definitions/Order"
         },
         "compassDirection": {
-          "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
+          "description": "The direction of travel associated with a maneuver on a route, such as south or southwest. `Note`: Only supported for driving travelMode.",
           "type": "string",
           "readOnly": true
         },
@@ -688,7 +690,7 @@
           }
         },
         "towardsRoadName": {
-          "description": "The name of the street that the route goes towards in the first ManeuverPoint.",
+          "description": "The name of the street that the route goes towards in the first `ManeuverPoint`.",
           "type": "string",
           "readOnly": true
         },
@@ -703,7 +705,7 @@
           "readOnly": true
         },
         "durationInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance`.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
@@ -716,7 +718,7 @@
     "ViaWaypointProperties": {
       "x-ms-discriminator-value": "ViaWaypoint",
       "type": "object",
-      "description": "Specifies the properties of a ViaWaypoint which is a waypoint that must be passed through or visited along a route or trip.",
+      "description": "Specifies the properties of a `ViaWaypoint` which is a waypoint that must be passed through or visited along a route or trip.",
       "allOf": [
         {
           "$ref": "#/definitions/FeatureProperties"
@@ -766,13 +768,13 @@
               "readOnly": true
             },
             "durationInSeconds": {
-              "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+              "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
               "format": "int64",
               "type": "integer",
               "readOnly": true
             },
             "durationTrafficInSeconds": {
-              "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is provided if optimizeRoute includes traffic considerations.",
+              "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
               "format": "int64",
               "type": "integer",
               "readOnly": true
@@ -784,12 +786,12 @@
               "$ref": "#/definitions/TrafficCongestionEnum"
             },
             "departureTime": {
-              "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+              "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
               "format": "date-time",
               "readOnly": true
             },
             "arrivalTime": {
-              "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+              "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
               "format": "date-time",
               "readOnly": true
             },
@@ -888,13 +890,13 @@
           "readOnly": true
         },
         "durationInSeconds": {
-          "description": "Estimated travel time in seconds property that includes the delay due to real-time traffic. Note that even when traffic=false travelTimeInSeconds still includes the delay due to traffic. If DepartAt is in the future, travel time is calculated using time-dependent historic traffic data.",
+          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
         },
         "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is provided if optimizeRoute includes traffic considerations.",
+          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
@@ -920,24 +922,24 @@
           "readOnly": true
         },
         "durationInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
         },
         "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is provided if optimizeRoute includes traffic considerations.",
+          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
         },
         "departureTime": {
-          "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+          "description": "The estimated departure time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
           "format": "date-time",
           "readOnly": true
         },
         "arrivalTime": {
-          "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either departAt or arrivalAt. If not, then the UTC time will be used.",
+          "description": "The estimated arrival time for the leg, which takes into account the traffic conditions, is formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
           "format": "date-time",
           "readOnly": true
         },
@@ -969,13 +971,13 @@
           "readOnly": true
         },
         "durationInSeconds": {
-          "description": "The time, in seconds, that it takes to travel the corresponding travelDistance by the sub-leg.",
+          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
         },
         "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is provided if optimizeRoute includes traffic considerations.",
+          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
           "format": "int64",
           "type": "integer",
           "readOnly": true
@@ -1024,7 +1026,7 @@
       "type": "integer"
     },
     "Hint": {
-      "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element.",
+      "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element. `Note`: Only supported for driving travelMode.",
       "type": "object",
       "properties": {
         "hintType": {
@@ -1045,7 +1047,7 @@
       "type": "object",
       "properties": {
         "compassDegrees": {
-          "description": "The direction in degrees.",
+          "description": "The direction in degrees. `Note`: Only supported for driving travelMode.",
           "readOnly": true,
           "type": "number"
         },
@@ -1522,7 +1524,7 @@
       }
     },
     "RoadTypeEnum": {
-      "description": "The type of road.",
+      "description": "The type of road. `Note`: Only supported for driving travelMode.",
       "type": "string",
       "enum": [
         "NotApplicable",
@@ -1655,7 +1657,7 @@
       }
     },
     "TrafficCongestionEnum": {
-      "description": "The level of traffic congestion along the route.",
+      "description": "The level of traffic congestion along the route. `Note`: Only supported for driving travelMode",
       "type": "string",
       "enum": [
         "Unknown",
@@ -1714,7 +1716,7 @@
           "readOnly": true
         },
         "hints": {
-          "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element and a route step can contain more than one hint.",
+          "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element and a route step can contain more than one hint. `Note`: Only supported for driving travelMode",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Hint"
@@ -1779,6 +1781,14 @@
         "axleWeight": {
           "x-ms-client-name": "axleWeightInKilograms",
           "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight restrictions per axle are not considered.",
+          "format": "int64",
+          "type": "integer",
+          "maximum": 1000000,
+          "minimum": 0,
+          "default": 0
+        },
+        "axleCount": {
+          "description": "Number of axles on the vehicle. A value of 0 means that axle restrictions are not considered.",
           "format": "int64",
           "type": "integer",
           "maximum": 1000000,

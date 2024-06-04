@@ -6,7 +6,6 @@
 
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -28,6 +27,7 @@ namespace Microsoft.StandbyPool;
 enum Versions {
   @doc("API Version 2023-12-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2023-12-01-preview`,
 }
@@ -36,9 +36,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning state")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Resource is being deleted.")
-  Deleting,
+  Deleting: "Deleting",
 }

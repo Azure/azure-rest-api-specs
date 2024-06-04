@@ -1,0 +1,27 @@
+{
+  "operationId": "DocumentModels_BuildModel",
+  "title": "Build Document Model",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-02-29-preview",
+    "buildRequest": {
+      "modelId": "myCustomModel",
+      "description": "Custom model description",
+      "buildMode": "template",
+      "azureBlobSource": {
+        "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer?mySasToken",
+        "prefix": "trainingDocs/"
+      },
+      "tags": {
+        "createdBy": "myUserId"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://myendpoint.cognitiveservices.azure.com/documentintelligence/operations/b704bb00-d130-4f3f-a1d8-ca96de3eabb4?api-version=2024-02-29-preview"
+      }
+    }
+  }
+}

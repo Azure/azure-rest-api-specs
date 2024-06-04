@@ -1,13 +1,17 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "./common.tsp";
 
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 @doc("Defines available options for the underlying response format of output transcription information.")
-@added(ServiceApiVersions.v2023_09_01_Preview)
-enum AudioTranscriptionFormat {
+@added(ServiceApiVersions.v2024_02_15_Preview)
+union AudioTranscriptionFormat {
+  string,
+
   @doc("Use a response body that is a JSON object containing a single 'text' field for the transcription.")
   json: "json",
 
@@ -29,16 +33,34 @@ enum AudioTranscriptionFormat {
   vtt: "vtt",
 }
 
+@doc("Defines the timestamp granularities that can be requested on a verbose transcription response.")
+@added(ServiceApiVersions.v2024_04_01_Preview)
+union AudioTranscriptionTimestampGranularity {
+  string,
+
+  @doc("""
+  Indicates that responses should include timing information about each transcribed word. Note that generating word
+  timestamp information will incur additional response latency.
+  """)
+  word: "word",
+
+  @doc("""
+  Indicates that responses should include timing and other information about each transcribed audio segment. Audio
+  segment timestamp information does not incur any additional latency.
+  """)
+  segment: "segment",
+}
+
 @doc("""
 The configuration information for an audio transcription request.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranscriptionOptions {
   @doc("""
   The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:
    flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
   """)
-  @projectedName("csharp", "AudioData")
+  @clientName("AudioData", "csharp")
   file: bytes;
 
   @doc("""
@@ -75,12 +97,24 @@ model AudioTranscriptionOptions {
   temperature?: float32;
 
   @doc("""
+  The timestamp granularities to populate for this transcription.
+  `response_format` must be set `verbose_json` to use timestamp granularities.
+  Either or both of these options are supported: `word`, or `segment`.
+  Note: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.
+  """)
+  @added(ServiceApiVersions.v2024_04_01_Preview)
+  @encodedName("application/json", "timestamp_granularities")
+  timestampGranularities?: AudioTranscriptionTimestampGranularity[] = [
+    AudioTranscriptionTimestampGranularity.segment
+  ];
+
+  @doc("""
   The model to use for this transcription request.
   """)
   // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
-  @projectedName("csharp", "DeploymentName")
+  @clientName("DeploymentName", "csharp")
   `model`?: string;
 }
 
@@ -89,7 +123,7 @@ Extended information about a single segment of transcribed audio data.
 Segments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not
 necessarily sentences.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranscriptionSegment {
   @doc("The 0-based index of this segment within a transcription.")
   id: int32;
@@ -110,7 +144,7 @@ model AudioTranscriptionSegment {
 
   @doc("The average log probability associated with this audio segment.")
   @encodedName("application/json", "avg_logprob")
-  @projectedName("csharp", "AverageLogProbability")
+  @clientName("AverageLogProbability", "csharp")
   avgLogprob: float32;
 
   @doc("The compression ratio of this audio segment.")
@@ -119,7 +153,7 @@ model AudioTranscriptionSegment {
 
   @doc("The probability of no speech detection within this audio segment.")
   @encodedName("application/json", "no_speech_prob")
-  @projectedName("csharp", "NoSpeechProbability")
+  @clientName("NoSpeechProbability", "csharp")
   noSpeechProb: float32;
 
   @doc("The token IDs matching the transcribed text in this audio segment.")
@@ -135,14 +169,29 @@ model AudioTranscriptionSegment {
   seek: int32;
 }
 
+@doc("Extended information about a single transcribed word, as provided on responses when the 'word' timestamp granularity is provided.")
+@added(ServiceApiVersions.v2024_04_01_Preview)
+model AudioTranscriptionWord {
+  @doc("The textual content of the word.")
+  word: string;
+
+  @doc("The start time of the word relative to the beginning of the audio, expressed in seconds.")
+  @encode("seconds", float32)
+  start: duration;
+
+  @doc("The end time of the word relative to the beginning of the audio, expressed in seconds.")
+  @encode("seconds", float32)
+  end: duration;
+}
+
 @doc("Result information for an operation that transcribed spoken audio into written text.")
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranscription {
   @doc("The transcribed text for the provided audio data.")
   text: string;
 
   @doc("The label that describes which operation type generated the accompanying response data.")
-  @projectedName("csharp", "InternalAudioTaskLabel")
+  @clientName("InternalAudioTaskLabel", "csharp")
   task?: AudioTaskLabel;
 
   @doc("""
@@ -159,4 +208,10 @@ model AudioTranscription {
   A collection of information about the timing, probabilities, and other detail of each processed audio segment.
   """)
   segments?: AudioTranscriptionSegment[];
+
+  @doc("""
+  A collection of information about the timing of each processed word.
+  """)
+  @added(ServiceApiVersions.v2024_04_01_Preview)
+  words?: AudioTranscriptionWord[];
 }

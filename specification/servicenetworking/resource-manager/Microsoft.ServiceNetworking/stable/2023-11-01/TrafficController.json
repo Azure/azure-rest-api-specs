@@ -367,20 +367,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -684,20 +681,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1001,20 +995,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1129,12 +1120,20 @@
     },
     "AssociationType": {
       "type": "string",
+      "description": "Association Type Enum",
       "enum": [
         "subnets"
       ],
       "x-ms-enum": {
         "name": "AssociationType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "subnets",
+            "value": "subnets",
+            "description": "Association of Type Subnet"
+          }
+        ]
       }
     },
     "AssociationUpdate": {
@@ -1170,7 +1169,7 @@
     },
     "Frontend": {
       "type": "object",
-      "description": "Frontend Subresource of Traffic Controller.",
+      "description": "Frontend Sub Resource of Traffic Controller.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/FrontendProperties",
@@ -1240,6 +1239,7 @@
     },
     "ProvisioningState": {
       "type": "string",
+      "description": "Resource Provisioning State Enum",
       "enum": [
         "Provisioning",
         "Updating",
@@ -1255,31 +1255,38 @@
         "values": [
           {
             "name": "Provisioning",
-            "value": "Provisioning"
+            "value": "Provisioning",
+            "description": "Resource in Provisioning State"
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Resource in Updating State"
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Resource in Deleting State"
           },
           {
             "name": "Accepted",
-            "value": "Accepted"
+            "value": "Accepted",
+            "description": "Resource in Accepted State"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Resource in Succeeded State"
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Resource in Failed State"
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Resource in Canceled State"
           }
         ]
       }

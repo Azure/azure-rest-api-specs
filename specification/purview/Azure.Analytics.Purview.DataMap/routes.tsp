@@ -50,7 +50,7 @@ alias OkResponse<T> = {
   @statusCode
   status: 200;
 
-  @body
+  @bodyRoot
   data: T;
 };
 
@@ -253,7 +253,7 @@ Null updates are not possible.
 
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
       @doc("The value of the attribute.")
-      @body
+      @bodyRoot
       body: unknown;
     },
     EntityMutationResult,
@@ -341,7 +341,7 @@ Null updates are not possible.
       guid: string;
 
       @doc("An array of classifications to be added.")
-      @body
+      @bodyRoot
       body: AtlasClassification[];
     },
     void,
@@ -361,7 +361,7 @@ Null updates are not possible.
       guid: string;
 
       @doc("An array of classifications to be updated.")
-      @body
+      @bodyRoot
       body: AtlasClassification[];
     },
     void,
@@ -536,7 +536,7 @@ be changed to other unique attributes)
       attribute?: string;
 
       @doc("An array of classification to be added.")
-      @body
+      @bodyRoot
       body: AtlasClassification[];
     },
     void,
@@ -563,7 +563,7 @@ be changed to other unique attributes)
       attribute?: string;
 
       @doc("An array of classification to be updated.")
-      @body
+      @bodyRoot
       body: AtlasClassification[];
     },
     void,
@@ -660,7 +660,7 @@ example. qualifiedName can be changed to other unique attributes)
 
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("Business metadata payload")
-      @body
+      @bodyRoot
       body: Record<Record<unknown>>;
     },
     void,
@@ -687,7 +687,7 @@ default is false.
 
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("BusinessMetadata payload")
-      @body
+      @bodyRoot
       body: Record<Record<unknown>>;
     },
     void,
@@ -712,7 +712,7 @@ default is false.
 
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("Business metadata attribute payload")
-      @body
+      @bodyRoot
       body: Record<unknown>;
     },
     void,
@@ -737,7 +737,7 @@ default is false.
 
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
       @doc("Business metadata attribute payload")
-      @body
+      @bodyRoot
       body: Record<unknown>;
     },
     void,
@@ -753,7 +753,7 @@ default is false.
     {},
     {
       @header contentType: "application/octet-stream";
-      @body body: bytes;
+      @bodyRoot body: bytes;
     },
     {}
   >;
@@ -765,10 +765,7 @@ default is false.
   @route("/atlas/v2/entity/businessmetadata/import")
   @post
   importBusinessMetadata is AtlasImportOperation<
-    {
-      @doc("InputStream of file")
-      file: bytes;
-    },
+    BusinessMetadataOptions,
     BulkImportResult,
     MultipartFormDataRequestHeadersTraits
   >;
@@ -786,7 +783,7 @@ default is false.
       guid: string;
 
       @doc("set of labels to be deleted")
-      @body
+      @bodyRoot
       body?: string[];
     },
     void,
@@ -806,7 +803,7 @@ default is false.
       guid: string;
 
       @doc("set of labels to be set to the entity")
-      @body
+      @bodyRoot
       body?: string[];
     },
     void,
@@ -826,7 +823,7 @@ default is false.
       guid: string;
 
       @doc("set of labels to be added")
-      @body
+      @bodyRoot
       body?: string[];
     },
     void,
@@ -867,7 +864,7 @@ be changed to other unique attributes)
       attribute?: string;
 
       @doc("set of labels to be deleted")
-      @body
+      @bodyRoot
       body?: string[];
     },
     void,
@@ -910,7 +907,7 @@ be changed to other unique attributes)
       attribute?: string;
 
       @doc("set of labels to be set")
-      @body
+      @bodyRoot
       body?: string[];
     },
     void,
@@ -953,7 +950,7 @@ be changed to other unique attributes)
       attribute?: string;
 
       @doc("set of labels to be added")
-      @body
+      @bodyRoot
       body?: string[];
     },
     void,
@@ -1029,7 +1026,7 @@ and
   createCategories is AtlasOperation<
     {
       @doc("An array of glossary category definitions to be created.")
-      @body
+      @bodyRoot
       body: AtlasGlossaryCategory[];
     },
     OkResponse<AtlasGlossaryCategory[]>,
@@ -1111,7 +1108,7 @@ updating shortDescription and longDescription for category.
 A map containing keys as attribute names and values as corresponding attribute
 values for partial update.
 """)
-      @body
+      @bodyRoot
       body: Record<string>;
     },
     AtlasGlossaryCategory,
@@ -1259,7 +1256,7 @@ shortDescription, longDescription, abbreviation, usage and status for term.
 A map containing keys as attribute names and values as corresponding attribute
 values to be updated.
 """)
-      @body
+      @bodyRoot
       body: Record<string>;
     },
     AtlasGlossaryTerm,
@@ -1278,7 +1275,7 @@ values to be updated.
       includeTermHierarchy?: boolean;
 
       @doc("An array of glossary term definitions to be created in bulk.")
-      @body
+      @bodyRoot
       body: AtlasGlossaryTerm[];
     },
     OkResponse<AtlasGlossaryTerm[]>,
@@ -1335,7 +1332,7 @@ is an alternative to assign a term to multiple entities.
       termId: string;
 
       @doc("An array of related object IDs to which the term has to be associated.")
-      @body
+      @bodyRoot
       body: AtlasRelatedObjectId[];
     },
     void,
@@ -1355,7 +1352,7 @@ is an alternative to assign a term to multiple entities.
       termId: string;
 
       @doc("An array of related object IDs from which the term has to be dissociated.")
-      @body
+      @bodyRoot
       body: AtlasRelatedObjectId[];
     },
     void,
@@ -1553,7 +1550,7 @@ using 'ignoreTermsAndCategories=true' to reduce response body size.
 A map containing keys as attribute names and values as corresponding attribute
 values.
 """)
-      @body
+      @bodyRoot
       body: Record<string>;
     },
     AtlasGlossary,

@@ -30,13 +30,22 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
+### Tag: package-2018-03-preview
+
+These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-preview'
+input-file:
+- preview/2018-03-28/queue.json
+```
+
 ### Tag: package-2018-03
 
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-03'
 input-file:
-- preview/2018-03-28/queue.json
+- stable/2018-03-28/queue.json
 ```
 
 ### Suppression

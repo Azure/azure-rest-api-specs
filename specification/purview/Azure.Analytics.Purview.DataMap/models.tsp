@@ -7,7 +7,9 @@ using TypeSpec.Http;
 namespace PurviewDataMap;
 
 @doc("Enum for business attribute update behavior")
-enum BusinessAttributeUpdateBehavior {
+union BusinessAttributeUpdateBehavior {
+  string,
+
   @doc("Ignore the business attribute payload for update.")
   Ignore: "ignore",
 
@@ -19,7 +21,9 @@ enum BusinessAttributeUpdateBehavior {
 }
 
 @doc("Status - can be active or deleted")
-enum EntityStatus {
+union EntityStatus {
+  string,
+
   @doc("The status is active.")
   Active: "ACTIVE",
 
@@ -28,7 +32,9 @@ enum EntityStatus {
 }
 
 @doc("Status for term assignment")
-enum AtlasTermAssignmentStatus {
+union AtlasTermAssignmentStatus {
+  string,
+
   @doc("The status is discovered.")
   Discovered: "DISCOVERED",
 
@@ -52,7 +58,9 @@ enum AtlasTermAssignmentStatus {
 }
 
 @doc("Type for sorting")
-enum SortType {
+union SortType {
+  string,
+
   @doc("No sorting order")
   None: "NONE",
 
@@ -64,7 +72,9 @@ enum SortType {
 }
 
 @doc("Status for import")
-enum ImportStatus {
+union ImportStatus {
+  string,
+
   @doc("Success")
   Success: "SUCCESS",
 
@@ -73,7 +83,9 @@ enum ImportStatus {
 }
 
 @doc("Status for atlas term relationship")
-enum AtlasTermRelationshipStatus {
+union AtlasTermRelationshipStatus {
+  string,
+
   @doc("draft")
   Draft: "DRAFT",
 
@@ -91,22 +103,26 @@ enum AtlasTermRelationshipStatus {
 }
 
 @doc("Status for term")
-enum TermStatus {
+union TermStatus {
+  string,
+
   @doc("draft")
-  Draft,
+  Draft: "Draft",
 
   @doc("approved")
-  Approved,
+  Approved: "Approved",
 
   @doc("alert")
-  Alert,
+  Alert: "Alert",
 
   @doc("expired")
-  Expired,
+  Expired: "Expired",
 }
 
 @doc("Status for atlas relationship")
-enum StatusAtlasRelationship {
+union StatusAtlasRelationship {
+  string,
+
   @doc("active")
   Active: "ACTIVE",
 
@@ -115,7 +131,9 @@ enum StatusAtlasRelationship {
 }
 
 @doc("Lineage direction")
-enum LineageDirection {
+union LineageDirection {
+  string,
+
   @doc("input")
   Input: "INPUT",
 
@@ -127,7 +145,9 @@ enum LineageDirection {
 }
 
 @doc("Cardinality")
-enum CardinalityValue {
+union CardinalityValue {
+  string,
+
   @doc("single")
   Single: "SINGLE",
 
@@ -139,7 +159,9 @@ enum CardinalityValue {
 }
 
 @doc("Type Category")
-enum TypeCategory {
+union TypeCategory {
+  string,
+
   @doc("primitive")
   Primitive: "PRIMITIVE",
 
@@ -172,7 +194,9 @@ enum TypeCategory {
 }
 
 @doc("Rounding Mode")
-enum RoundingMode {
+union RoundingMode {
+  string,
+
   @doc("up")
   Up: "UP",
 
@@ -199,7 +223,9 @@ enum RoundingMode {
 }
 
 @doc("Relationship Category")
-enum RelationshipCategory {
+union RelationshipCategory {
+  string,
+
   @doc("association")
   Association: "ASSOCIATION",
 
@@ -211,39 +237,41 @@ enum RelationshipCategory {
 }
 
 @doc("Search Filter Operator")
-enum FilterOperator {
+union FilterOperator {
+  string,
+
   @doc("equal")
-  eq,
+  eq: "eq",
 
   @doc("not equal")
-  ne,
+  ne: "ne",
 
   @doc("greater than")
-  gt,
+  gt: "gt",
 
   @doc("less than")
-  lt,
+  lt: "lt",
 
   @doc("greater than or equal to")
-  ge,
+  ge: "ge",
 
   @doc("less than or equal to")
-  le,
+  le: "le",
 
   @doc("contains")
-  contains,
+  contains: "contains",
 
   @doc("start with")
-  startswith,
+  startswith: "startswith",
 
   @doc("prefix")
-  prefix,
+  prefix: "prefix",
 
   @doc("time range")
-  timerange,
+  timerange: "timerange",
 
   @doc("exists")
-  exists,
+  exists: "exists",
 }
 
 @doc("""
@@ -550,6 +578,12 @@ model BulkImportResult {
 
   @doc("successful importInfoList")
   successImportInfoList?: ImportInfo[];
+}
+
+@doc("Business metadata to send to the service")
+model BusinessMetadataOptions {
+  @doc("InputStream of file")
+  file: bytes;
 }
 
 @doc("ImportInfo")
@@ -949,7 +983,9 @@ model SearchFacetSort {
 }
 
 @doc("Search sort order")
-enum SearchSortOrder {
+union SearchSortOrder {
+  string,
+
   @doc("Use ascending order for sorting")
   Ascend: "asc",
 
