@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure OpenAI API",
-    "version": "2024-03-01-preview",
+    "version": "2024-05-01-preview",
     "description": "Azure OpenAI APIs for completions and search",
     "x-typespec-generated": [
       {
@@ -153,6 +153,9 @@
           },
           {
             "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+          },
+          {
+            "$ref": "#/parameters/AudioTranscriptionOptions.timestampGranularities"
           },
           {
             "$ref": "#/parameters/AudioTranscriptionOptions.model"
@@ -517,6 +520,9 @@
             "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
           },
           {
+            "$ref": "#/parameters/AudioTranscriptionOptions.timestampGranularities"
+          },
+          {
             "$ref": "#/parameters/AudioTranscriptionOptions.model"
           }
         ],
@@ -664,6 +670,14 @@
           "items": {
             "$ref": "#/definitions/AudioTranscriptionSegment"
           }
+        },
+        "words": {
+          "type": "array",
+          "description": "A collection of information about the timing of each processed word.",
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionWord"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -742,6 +756,17 @@
           "type": "number",
           "format": "float",
           "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
+        },
+        "timestamp_granularities": {
+          "type": "array",
+          "description": "The timestamp granularities to populate for this transcription.\n`response_format` must be set `verbose_json` to use timestamp granularities.\nEither or both of these options are supported: `word`, or `segment`.\nNote: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.",
+          "default": [
+            "segment"
+          ],
+          "items": {
+            "$ref": "#/definitions/AudioTranscriptionTimestampGranularity"
+          },
+          "x-ms-client-name": "timestampGranularities"
         },
         "model": {
           "type": "string",
@@ -823,6 +848,55 @@
         "no_speech_prob",
         "tokens",
         "seek"
+      ]
+    },
+    "AudioTranscriptionTimestampGranularity": {
+      "type": "string",
+      "description": "Defines the timestamp granularities that can be requested on a verbose transcription response.",
+      "enum": [
+        "word",
+        "segment"
+      ],
+      "x-ms-enum": {
+        "name": "AudioTranscriptionTimestampGranularity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "word",
+            "value": "word",
+            "description": "Indicates that responses should include timing information about each transcribed word. Note that generating word\ntimestamp information will incur additional response latency."
+          },
+          {
+            "name": "segment",
+            "value": "segment",
+            "description": "Indicates that responses should include timing and other information about each transcribed audio segment. Audio\nsegment timestamp information does not incur any additional latency."
+          }
+        ]
+      }
+    },
+    "AudioTranscriptionWord": {
+      "type": "object",
+      "description": "Extended information about a single transcribed word, as provided on responses when the 'word' timestamp granularity is provided.",
+      "properties": {
+        "word": {
+          "type": "string",
+          "description": "The textual content of the word."
+        },
+        "start": {
+          "type": "number",
+          "format": "float",
+          "description": "The start time of the word relative to the beginning of the audio, expressed in seconds."
+        },
+        "end": {
+          "type": "number",
+          "format": "float",
+          "description": "The end time of the word relative to the beginning of the audio, expressed in seconds."
+        }
+      },
+      "required": [
+        "word",
+        "start",
+        "end"
       ]
     },
     "AudioTranslation": {
@@ -1137,6 +1211,92 @@
         "content"
       ]
     },
+    "AzureChatExtensionRetrieveDocumentFilterReason": {
+      "type": "string",
+      "description": "The reason for filtering the retrieved document.",
+      "enum": [
+        "score",
+        "rerank"
+      ],
+      "x-ms-enum": {
+        "name": "AzureChatExtensionRetrieveDocumentFilterReason",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "score",
+            "value": "score",
+            "description": "The document is filtered by original search score threshold defined by `strictness` configure."
+          },
+          {
+            "name": "rerank",
+            "value": "rerank",
+            "description": "The document is not filtered by original search score threshold, but is filtered by rerank score and `top_n_documents` configure."
+          }
+        ]
+      }
+    },
+    "AzureChatExtensionRetrievedDocument": {
+      "type": "object",
+      "description": "The retrieved document.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the citation."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the citation."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the citation."
+        },
+        "filepath": {
+          "type": "string",
+          "description": "The file path of the citation."
+        },
+        "chunk_id": {
+          "type": "string",
+          "description": "The chunk ID of the citation."
+        },
+        "search_queries": {
+          "type": "array",
+          "description": "The search queries used to retrieve the document.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "searchQueries"
+        },
+        "data_source_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the data source.",
+          "x-ms-client-name": "dataSourceIndex"
+        },
+        "original_search_score": {
+          "type": "number",
+          "format": "double",
+          "description": "The original search score of the retrieved document.",
+          "x-ms-client-name": "originalSearchScore"
+        },
+        "rerank_score": {
+          "type": "number",
+          "format": "double",
+          "description": "The rerank score of the retrieved document.",
+          "x-ms-client-name": "rerankScore"
+        },
+        "filter_reason": {
+          "$ref": "#/definitions/AzureChatExtensionRetrieveDocumentFilterReason",
+          "description": "Represents the rationale for filtering the document. If the document does not undergo filtering,\nthis field will remain unset.",
+          "x-ms-client-name": "filterReason"
+        }
+      },
+      "required": [
+        "content",
+        "search_queries",
+        "data_source_index"
+      ]
+    },
     "AzureChatExtensionType": {
       "type": "string",
       "description": "  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat\n  completions request that should use Azure OpenAI chat extensions to augment the response behavior.\n  The use of this configuration is compatible only with Azure OpenAI.",
@@ -1194,6 +1354,15 @@
         "intent": {
           "type": "string",
           "description": "The detected intent from the chat history, used to pass to the next turn to carry over the context."
+        },
+        "all_retrieved_documents": {
+          "type": "array",
+          "description": "All the retrieved documents.",
+          "items": {
+            "$ref": "#/definitions/AzureChatExtensionRetrievedDocument"
+          },
+          "x-ms-client-name": "allRetrievedDocuments",
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1272,6 +1441,26 @@
           "type": "string",
           "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
           "x-ms-client-name": "roleInformation"
+        },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
         },
         "database_name": {
           "type": "string",
@@ -1496,6 +1685,26 @@
           "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
           "x-ms-client-name": "roleInformation"
         },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
+        },
         "project_resource_id": {
           "type": "string",
           "description": "The resource ID of the Azure Machine Learning project.",
@@ -1569,6 +1778,26 @@
           "type": "string",
           "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
           "x-ms-client-name": "roleInformation"
+        },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
         },
         "endpoint": {
           "type": "string",
@@ -2726,6 +2955,27 @@
         "license"
       ]
     },
+    "ContentFilterDetailedResults": {
+      "type": "object",
+      "description": "Represents a structured collection of result details for content filtering.",
+      "properties": {
+        "filtered": {
+          "type": "boolean",
+          "description": "A value indicating whether or not the content has been filtered."
+        },
+        "details": {
+          "type": "array",
+          "description": "The collection of detailed blocklist result information.",
+          "items": {
+            "$ref": "#/definitions/ContentFilterBlocklistIdResult"
+          }
+        }
+      },
+      "required": [
+        "filtered",
+        "details"
+      ]
+    },
     "ContentFilterDetectionResult": {
       "type": "object",
       "description": "Represents the outcome of a detection operation performed by content filtering.",
@@ -2788,11 +3038,8 @@
           "description": "Describes whether profanity was detected."
         },
         "custom_blocklists": {
-          "type": "array",
+          "$ref": "#/definitions/ContentFilterDetailedResults",
           "description": "Describes detection results against configured custom blocklists.",
-          "items": {
-            "$ref": "#/definitions/ContentFilterBlocklistIdResult"
-          },
           "x-ms-client-name": "customBlocklists"
         },
         "error": {
@@ -2802,6 +3049,11 @@
         "jailbreak": {
           "$ref": "#/definitions/ContentFilterDetectionResult",
           "description": "Whether a jailbreak attempt was detected in the prompt."
+        },
+        "indirect_attack": {
+          "$ref": "#/definitions/ContentFilterDetectionResult",
+          "description": "Whether an indirect attack was detected in the prompt.",
+          "x-ms-client-name": "indirectAttack"
         }
       }
     },
@@ -2831,11 +3083,8 @@
           "description": "Describes whether profanity was detected."
         },
         "custom_blocklists": {
-          "type": "array",
+          "$ref": "#/definitions/ContentFilterDetailedResults",
           "description": "Describes detection results against configured custom blocklists.",
-          "items": {
-            "$ref": "#/definitions/ContentFilterBlocklistIdResult"
-          },
           "x-ms-client-name": "customBlocklists"
         },
         "error": {
@@ -2960,6 +3209,26 @@
           "type": "string",
           "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
           "x-ms-client-name": "roleInformation"
+        },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
         },
         "endpoint": {
           "type": "string",
@@ -3451,6 +3720,11 @@
         "jailbreak": {
           "$ref": "#/definitions/ContentFilterDetectionResult",
           "description": "Whether a jailbreak attempt was detected in the prompt."
+        },
+        "custom_blocklists": {
+          "$ref": "#/definitions/ContentFilterDetailedResults",
+          "description": "Information about customer block lists and if something was detected the associated list ID.",
+          "x-ms-client-name": "customBlocklists"
         }
       }
     },
@@ -3614,6 +3888,36 @@
       ],
       "x-ms-discriminator-value": "connection_string"
     },
+    "OnYourDataContextProperty": {
+      "type": "string",
+      "description": "The context property.",
+      "enum": [
+        "citations",
+        "intent",
+        "all_retrieved_documents"
+      ],
+      "x-ms-enum": {
+        "name": "OnYourDataContextProperty",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "citations",
+            "value": "citations",
+            "description": "The `citations` property."
+          },
+          {
+            "name": "intent",
+            "value": "intent",
+            "description": "The `intent` property."
+          },
+          {
+            "name": "allRetrievedDocuments",
+            "value": "all_retrieved_documents",
+            "description": "The `all_retrieved_documents` property."
+          }
+        ]
+      }
+    },
     "OnYourDataDeploymentNameVectorizationSource": {
       "type": "object",
       "description": "The details of a a vectorization source, used by Azure OpenAI On Your Data when applying vector search, that is based\non an internal embeddings model deployment name in the same Azure OpenAI resource.",
@@ -3622,6 +3926,11 @@
           "type": "string",
           "description": "The embedding model deployment name within the same Azure OpenAI resource. This enables you to use vector search without Azure OpenAI api-key and without Azure OpenAI public network access.",
           "x-ms-client-name": "deploymentName"
+        },
+        "dimensions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of dimensions the embeddings should have. Only supported in `text-embedding-3` and later models."
         }
       },
       "required": [
@@ -3662,10 +3971,15 @@
           "type": "string",
           "format": "uri",
           "description": "Specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings. The api-version query parameter is not allowed."
+        },
+        "authentication": {
+          "$ref": "#/definitions/OnYourDataVectorSearchAuthenticationOptions",
+          "description": "Specifies the authentication options to use when retrieving embeddings from the specified endpoint."
         }
       },
       "required": [
-        "endpoint"
+        "endpoint",
+        "authentication"
       ],
       "allOf": [
         {
@@ -3748,6 +4062,83 @@
         }
       ],
       "x-ms-discriminator-value": "user_assigned_managed_identity"
+    },
+    "OnYourDataVectorSearchAccessTokenAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data vector search when using access token.",
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "description": "The access token to use for authentication.",
+          "x-ms-client-name": "accessToken"
+        }
+      },
+      "required": [
+        "access_token"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataVectorSearchAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "access_token"
+    },
+    "OnYourDataVectorSearchApiKeyAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data when using an API key.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The API key to use for authentication."
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnYourDataVectorSearchAuthenticationOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "api_key"
+    },
+    "OnYourDataVectorSearchAuthenticationOptions": {
+      "type": "object",
+      "description": "The authentication options for Azure OpenAI On Your Data vector search.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OnYourDataVectorSearchAuthenticationType",
+          "description": "The type of authentication to use."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "OnYourDataVectorSearchAuthenticationType": {
+      "type": "string",
+      "description": "The authentication types supported with Azure OpenAI On Your Data vector search.",
+      "enum": [
+        "api_key",
+        "access_token"
+      ],
+      "x-ms-enum": {
+        "name": "OnYourDataVectorSearchAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "apiKey",
+            "value": "api_key",
+            "description": "Authentication via API key."
+          },
+          {
+            "name": "accessToken",
+            "value": "access_token",
+            "description": "Authentication via access token."
+          }
+        ]
+      }
     },
     "OnYourDataVectorizationSource": {
       "type": "object",
@@ -3843,6 +4234,26 @@
           "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit.",
           "x-ms-client-name": "roleInformation"
         },
+        "max_search_queries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max number of rewritten queries should be send to search provider for one user message. If not specified,\nthe system will decide the number of queries to send.",
+          "x-ms-client-name": "maxSearchQueries"
+        },
+        "allow_partial_result": {
+          "type": "boolean",
+          "description": "If specified as true, the system will allow partial search results to be used and the request fails if all the queries fail.\nIf not specified, or specified as false, the request will fail if any search query fails.",
+          "default": false,
+          "x-ms-client-name": "allowPartialResult"
+        },
+        "include_contexts": {
+          "type": "array",
+          "description": "The included properties of the output context. If not specified, the default value is `citations` and `intent`.",
+          "items": {
+            "$ref": "#/definitions/OnYourDataContextProperty"
+          },
+          "x-ms-client-name": "includeContexts"
+        },
         "environment": {
           "type": "string",
           "description": "The environment name of Pinecone."
@@ -3928,7 +4339,9 @@
             "mp3",
             "opus",
             "aac",
-            "flac"
+            "flac",
+            "wav",
+            "pcm"
           ],
           "x-ms-enum": {
             "name": "SpeechGenerationResponseFormat",
@@ -3953,6 +4366,16 @@
                 "name": "flac",
                 "value": "flac",
                 "description": "Use FLAC as the audio output format. FLAC is a fully lossless format optimized for maximum quality at the expense of size."
+              },
+              {
+                "name": "wav",
+                "value": "wav",
+                "description": "Use uncompressed WAV as the audio output format, suitable for low-latency applications to avoid decoding overhead."
+              },
+              {
+                "name": "pcm",
+                "value": "pcm",
+                "description": "Use uncompressed PCM as the audio output format, which is similar to WAV but contains raw samples in 24kHz (16-bit signed, low-endian), without the header."
               }
             ]
           },
@@ -4140,6 +4563,41 @@
       "type": "number",
       "format": "float",
       "x-ms-parameter-location": "method"
+    },
+    "AudioTranscriptionOptions.timestampGranularities": {
+      "name": "timestamp_granularities",
+      "in": "formData",
+      "description": "The timestamp granularities to populate for this transcription.\n`response_format` must be set `verbose_json` to use timestamp granularities.\nEither or both of these options are supported: `word`, or `segment`.\nNote: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "word",
+          "segment"
+        ],
+        "x-ms-enum": {
+          "name": "AudioTranscriptionTimestampGranularity",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "word",
+              "value": "word",
+              "description": "Indicates that responses should include timing information about each transcribed word. Note that generating word\ntimestamp information will incur additional response latency."
+            },
+            {
+              "name": "segment",
+              "value": "segment",
+              "description": "Indicates that responses should include timing and other information about each transcribed audio segment. Audio\nsegment timestamp information does not incur any additional latency."
+            }
+          ]
+        }
+      },
+      "default": [
+        "segment"
+      ],
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "timestampGranularities"
     },
     "AudioTranslationOptions.file": {
       "name": "file",
