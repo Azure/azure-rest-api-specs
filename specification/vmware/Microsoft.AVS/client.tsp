@@ -9,16 +9,20 @@ using Microsoft.AVS;
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.TrackedResource.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties);
+@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties
+);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.ProxyResource.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties);
+@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
+);
 
 @@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentity,
-  "PrivateCloudIdentity");
+  "PrivateCloudIdentity"
+);
 @@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentityType,
-  "ResourceIdentityType");
+  "ResourceIdentityType"
+);
 
 // operation
 @@friendlyName(Addons.list, "list");
@@ -32,13 +36,14 @@ using Microsoft.AVS;
 @@friendlyName(ScriptCmdlets.list, "list");
 
 // model
-@@clientName(VmVmPlacementPolicyProperties,
-  "VmPlacementPolicyProperties");
+@@clientName(VmVmPlacementPolicyProperties, "VmPlacementPolicyProperties");
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp");
 @@clientName(WorkloadNetworkPublicIPProvisioningState,
-  "WorkloadNetworkPublicIpProvisioningState");
+  "WorkloadNetworkPublicIpProvisioningState"
+);
 
 // property
 @@clientName(Circuit.expressRouteID, "expressRouteId");
 @@clientName(Circuit.expressRoutePrivatePeeringID,
-  "expressRoutePrivatePeeringId");
+  "expressRoutePrivatePeeringId"
+);
