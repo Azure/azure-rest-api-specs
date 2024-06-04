@@ -841,6 +841,10 @@
           "format": "int32",
           "type": "integer",
           "description": "The number of partitions of a Service Bus namespace. This property is only applicable to Premium SKU namespaces. The default value is 1 and possible values are 1, 2 and 4"
+        },
+        "geoDataReplication": {
+          "$ref": "#/definitions/GeoDataReplicationProperties",
+          "description": "Geo Data Replication settings for the namespace"
         }
       },
       "description": "Properties of the namespace."
@@ -898,10 +902,6 @@
         "alternateName": {
           "type": "string",
           "description": "Alternate name for namespace"
-        },
-        "geoDataReplication": {
-          "$ref": "#/definitions/GeoDataReplicationProperties",
-          "description": "Geo Data Replication settings for the namespace"
         }
       },
       "description": "Properties of the namespace."

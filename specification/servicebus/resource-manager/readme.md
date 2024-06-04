@@ -257,5 +257,36 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: ConsistentPatchProperties
+    from: namespace-preview.json
+    reason: Not a mandatory check
+
+  - suppress: ResourceNameRestriction
+    from: namespace-preview.json
+    reason: Not a mandatory check
+  
+  - suppress: ResourceNameRestriction
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: PathResourceTypeNameCamelCase
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+```
 
 
