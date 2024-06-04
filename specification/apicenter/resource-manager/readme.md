@@ -24,12 +24,21 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Azure API Center.
 
+
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2024-03-15-preview
+tag: 2024-05-01
 ```
 
+### Tag: package-2024-05-01
+
+These settings apply only when `--tag=package-2024-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05-01'
+input-file:
+  - Microsoft.ApiCenter/preview/2024-05-01/apicenter.json
+```
 ### Tag: package-2024-03-15-preview
 
 These settings apply only when `--tag=package-2024-03-15-preview` is specified on the command line.
