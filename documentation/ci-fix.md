@@ -291,10 +291,9 @@ Various APIViews are generated as part of the Azure REST API specs PR build. Amo
 
 > [!IMPORTANT]
 >
-> - This check is never blocking merging of a spec PR , even if it fails.
+> - This check is never blocking merging of a spec PR, even if it fails.
 > - The `SDK azure-powershell` check is owned by the Shanghai division of the Azure SDK team,
     not the core Redmond Azure SDK team.
-
 
 The owner of this check is Yeming Liu from the Shanghai division of the Azure SDK team.
 Please reach out to him with with any questions or concerns.
