@@ -88,7 +88,7 @@ interface Client3 {
 
 // The following is to update names as necessary for specific programming languages.
 // Done in this file to provide a single point of reference for any renames.
-@@clientName(Azure.OpenAI.ChatCompletionOptions.top_p, "NucleusSamplingFactor", "csharp")
-@@clientName(Azure.OpenAI.ChatCompletionOptions.stop, "StopSequences", "csharp")
-@@clientName(Azure.OpenAI.ChatCompletionOptions.stream, "InternalShouldStreamResponse", "csharp")
-@@clientName(Azure.OpenAI.ChatChoice.delta, "InternalStreamingDeltaMessage", "csharp")
+@@clientName(Azure.OpenAI.ChatCompletionOptions.top_p, "NucleusSamplingFactor", "csharp");
+@@clientName(Azure.OpenAI.ChatCompletionOptions.stop, "StopSequences", "csharp");
+@@clientName(Azure.OpenAI.ChatCompletionOptions.stream, "InternalShouldStreamResponse", "csharp");
+@@clientName(Azure.OpenAI.ChatChoice.delta, "InternalStreamingDeltaMessage", "csharp");
