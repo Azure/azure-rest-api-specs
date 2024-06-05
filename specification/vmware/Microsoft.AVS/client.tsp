@@ -64,17 +64,23 @@ using Microsoft.AVS;
 );
 
 @@clientName(VmVmPlacementPolicyProperties, "VmPlacementPolicyProperties");
-@@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp");
+@@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
 @@clientName(WorkloadNetworkPublicIPProvisioningState,
-  "WorkloadNetworkPublicIpProvisioningState"
+  "WorkloadNetworkPublicIpProvisioningState",
+  "java"
 );
 
 // property
-@@clientName(Circuit.expressRouteID, "expressRouteId");
+@@clientName(Circuit.expressRouteID, "expressRouteId", "java");
 @@clientName(Circuit.expressRoutePrivatePeeringID,
-  "expressRoutePrivatePeeringId"
+  "expressRoutePrivatePeeringId",
+  "java"
 );
 @@clientName(WorkloadNetworkPublicIPProperties,
-  "WorkloadNetworkPublicIpProperties"
+  "WorkloadNetworkPublicIpProperties",
+  "java"
 );
-@@clientName(WorkloadNetworkPublicIPProperties.publicIPBlock, "publicIpBlock");
+@@clientName(WorkloadNetworkPublicIPProperties.publicIPBlock,
+  "publicIpBlock",
+  "java"
+);
