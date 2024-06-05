@@ -26,9 +26,19 @@ These are the global settings for the DeveloperHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-08
+tag: package-preview-2024-05
 ```
 
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.DevHub/preview/2024-05-01-preview/workflow.json
+  - Microsoft.DevHub/preview/2024-05-01-preview/iac.json
+```
 
 ### Tag: package-2023-08
 
@@ -70,6 +80,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-java
 ```
 
 ## Python
