@@ -279,26 +279,23 @@ interface WorkloadNetworks {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_List")
   list is ArmResourceListByParent<WorkloadNetwork>;
-}
-
-@armResourceOperations
-interface WorkloadNetworkSegments {
+  
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListSegments")
-  list is ArmResourceListByParent<WorkloadNetworkSegment>;
+  listSegments is ArmResourceListByParent<WorkloadNetworkSegment>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetSegment")
-  get is ArmResourceRead<WorkloadNetworkSegment>;
+  getSegment is ArmResourceRead<WorkloadNetworkSegment>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_CreateSegments")
-  create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkSegment>;
+  createSegments is ArmResourceCreateOrUpdateAsync<WorkloadNetworkSegment>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  updateSegments is ArmCustomPatchAsync<
     WorkloadNetworkSegment,
     WorkloadNetworkSegmentUpdate
   >;
@@ -310,27 +307,27 @@ interface WorkloadNetworkSegments {
   deleteSegment is ArmResourceDeleteAsync<WorkloadNetworkSegment>;
 }
 
-@@encodedName(WorkloadNetworkSegments.create::parameters.resource,
+@@encodedName(WorkloadNetworks.createSegments::parameters.resource,
   "application/json",
   "workloadNetworkSegment"
 );
-@@clientName(WorkloadNetworkSegments.create::parameters.resource,
+@@clientName(WorkloadNetworks.createSegments::parameters.resource,
   "workloadNetworkSegment"
 );
-@@OpenAPI.extension(WorkloadNetworkSegments.create::parameters.resource,
+@@OpenAPI.extension(WorkloadNetworks.createSegments::parameters.resource,
   "x-ms-client-name",
   "workloadNetworkSegment"
 );
 
-@@encodedName(WorkloadNetworkSegments.update::parameters.properties,
+@@encodedName(WorkloadNetworks.updateSegments::parameters.properties,
   "application/json",
   "workloadNetworkSegment"
 );
-@@clientName(WorkloadNetworkSegments.update::parameters.properties,
+@@clientName(WorkloadNetworks.updateSegments::parameters.properties,
   "application/json",
   "workloadNetworkSegment"
 );
-@@OpenAPI.extension(WorkloadNetworkSegments.update::parameters.properties,
+@@OpenAPI.extension(WorkloadNetworks.updateSegments::parameters.properties,
   "x-ms-client-name",
   "workloadNetworkSegment"
 );
