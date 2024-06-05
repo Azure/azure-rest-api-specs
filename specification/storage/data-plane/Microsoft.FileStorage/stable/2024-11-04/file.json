@@ -261,6 +261,15 @@
           },
           {
             "$ref": "#/parameters/EnableSnapshotVirtualDirectoryAccess"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingEnabled"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingMaxBandwidthMips"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingMaxIops"
           }
         ],
         "responses": {
@@ -1445,6 +1454,15 @@
           },
           {
             "$ref": "#/parameters/EnableSnapshotVirtualDirectoryAccess"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingEnabled"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingMaxBandwidthMips"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingMaxIops"
           }
         ],
         "responses": {
@@ -7189,6 +7207,32 @@
         "format": "file"
       },
       "x-ms-parameter-location": "method"
+    },
+    "PaidBurstingEnabled": {
+      "name": "x-ms-share-paid-bursting-enabled",
+      "x-ms-client-name": "paidBurstingEnabled",
+      "description": "Optional. Boolean. Default if not specified is false. This property enables paid bursting.",
+      "in": "header",
+      "required": false,
+      "type": "boolean"
+    },
+    "PaidBurstingMaxBandwidthMips": {
+      "name": "x-ms-share-paid-bursting-max-bandwidth-mibps",
+      "x-ms-client-name": "paidBurstingMaxBandwidthMips",
+      "description": "Optional. Integer. Default if not specified is the maximum throughput the file share can support. Current maximum for a file share is 10,340  MiB/sec.",
+      "in": "header",
+      "required": false,
+      "type": "integer",
+      "format": "int64"
+    },
+    "PaidBurstingMaxIops": {
+      "name": "x-ms-share-paid-bursting-max-iops",
+      "x-ms-client-name": "paidBurstingMaxIops",
+      "description": "Optional. Integer. Default if not specified is the maximum IOPS the file share can support. Current maximum for a file share is 102,400 IOPS.",
+      "in": "header",
+      "required": false,
+      "type": "integer",
+      "format": "int64"
     },
     "Prefix": {
       "name": "prefix",
