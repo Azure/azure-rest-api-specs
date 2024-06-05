@@ -279,7 +279,7 @@ interface WorkloadNetworks {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_List")
   list is ArmResourceListByParent<WorkloadNetwork>;
-  
+
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListSegments")
   listSegments is ArmResourceListByParent<WorkloadNetworkSegment>;
