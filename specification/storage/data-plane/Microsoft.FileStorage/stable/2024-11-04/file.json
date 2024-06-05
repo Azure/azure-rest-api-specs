@@ -1344,6 +1344,9 @@
             "$ref": "#/parameters/FilePermissionKeyRequired"
           },
           {
+            "$ref": "#/parameters/FilePermissionKeyFormat"
+          },
+          {
             "$ref": "#/parameters/Timeout"
           },
           {
@@ -6543,6 +6546,17 @@
         "permission": {
           "type": "string",
           "description": "The permission in the Security Descriptor Definition Language (SDDL)."
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "SDDL",
+            "binary"
+          ],
+          "x-ms-enum": {
+            "name": "FilePermissionKeyFormat",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -6980,6 +6994,23 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "FilePermissionKeyFormat": {
+      "name": "x-ms-file-permission-format",
+      "x-ms-client-name": "FilePermissionKeyFormat",
+      "description": "Optional. Available for version 2023-06-01 and later. Specifies the format in which the permission is returned. Acceptable values are SDDL or binary. If x-ms-file-permission-format is unspecified or explicitly set to SDDL, the permission is returned in SDDL format. If x-ms-file-permission-format is explicitly set to binary, the permission is returned as a base64 string representing the binary encoding of the permission",
+      "in": "header",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "SDDL",
+        "binary"
+      ],
+      "x-ms-enum": {
+        "name": "FilePermissionKeyFormat",
+        "modelAsString": false
+      }
     },
     "FilePermissionKeyRequired": {
       "name": "x-ms-file-permission-key",
