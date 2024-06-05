@@ -98,6 +98,15 @@ input-file:
   - AsyncBatchManagement/preview/2024-04-01-preview/asyncBatchManagement.json
 ```
 
+### Tag: package-2024-04-01
+
+These settings apply only when `--tag=package-2024-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-01'
+input-file:
+  - Render/stable/2024-04-01/render.json
+```
+
 ### Tag: package-deprecated
 
 These settings apply only when `--tag=package-deprecated` is specified on the command line.

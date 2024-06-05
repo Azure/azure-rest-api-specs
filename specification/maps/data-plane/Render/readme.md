@@ -27,7 +27,7 @@ These are the global settings for Render Client.
 ``` yaml
 title: RenderClient
 openapi-type: data-plane
-tag: package-2024-04
+tag: package-2024-04-01
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
@@ -48,11 +48,11 @@ directive:
 ```
 
 
-### Tag: package-2024-04
+### Tag: package-2024-04-01
 
-These settings apply only when `--tag=package-2024-04` is specified on the command line.
+These settings apply only when `--tag=package-2024-04-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04'
+```yaml $(tag) == 'package-2024-04-01'
 input-file:
   - stable/2024-04-01/render.json
 ```
