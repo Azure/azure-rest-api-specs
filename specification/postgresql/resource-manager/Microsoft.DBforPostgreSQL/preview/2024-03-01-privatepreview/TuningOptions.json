@@ -79,6 +79,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations": {
+      "get": {
+        "tags": [
+          "TuningOptions"
+        ],
+        "operationId": "TuningOptions_ListRecommendations",
+        "x-ms-examples": {
+          "TuningOptions_ListRecommendations": {
+            "$ref": "./examples/Tuning_GetRecommendedIndexes.json"
+          }
+        },
+        "description": "Retrieve the list of available tuning index recommendations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TuningOptionParameter"
+          },
+          {
+            "$ref": "#/parameters/RecommendationTypeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IndexRecommendationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions": {
       "get": {
         "tags": [
@@ -123,95 +174,9 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/tuningOptions/{tuningOption}/recommendations": {
-      "get": {
-        "tags": [
-          "TuningOptions"
-        ],
-        "operationId": "TuningRecommendedIndexes_List",
-        "x-ms-examples": {
-          "TuningRecommendedIndexes_List": {
-            "$ref": "./examples/Tuning_GetRecommendedIndexes.json"
-          }
-        },
-        "description": "Retrieve the list of available tuning index recommendations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/TuningOptionParameter"
-          },
-          {
-            "$ref": "#/parameters/RecommendationTypeParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/IndexRecommendationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
-    "ImplementationInfo": {
-      "type": "object",
-      "properties": {
-        "method": {
-          "type": "string",
-          "description": "Method of implementation for recommended action"
-        },
-        "script": {
-          "type": "string",
-          "description": "Implementation script for the recommended action"
-        }
-      },
-      "description": "The implementation details for the recommended action."
-    },
-    "WorkloadExaminedInformation": {
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Workload start time."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Workload end time."
-        },
-        "queryCount": {
-          "format": "int32",
-          "type": "integer",
-          "description": "Workload query examined count. For DROP INDEX will be 0."
-        }
-      },
-      "description": "The workload information for the recommended action."
-    },
     "ImpactRecord": {
       "type": "object",
       "properties": {
@@ -307,18 +272,37 @@
         "implementationDetails": {
           "type": "object",
           "properties": {
-            "$ref": "#/definitions/ImplementationInfo",
-            "x-ms-client-flatten": true,
-            "description": "Stores implementation details for the recommended action."
-          }
+            "method": {
+              "type": "string",
+              "description": "Method of implementation for recommended action"
+            },
+            "script": {
+              "type": "string",
+              "description": "Implementation script for the recommended action"
+            }
+          },
+          "description": "Stores implementation details for the recommended action."
         },
         "analyzedWorkload": {
           "type": "object",
           "properties": {
-            "$ref": "#/definitions/WorkloadExaminedInformation",
-            "x-ms-client-flatten": true,
-            "description": "Stores workload information for the recommended action."
-          }
+            "startTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Workload start time."
+            },
+            "endTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Workload end time."
+            },
+            "queryCount": {
+              "format": "int32",
+              "type": "integer",
+              "description": "Workload query examined count. For DROP INDEX will be 0."
+            }
+          },
+          "description": "Stores workload information for the recommended action."
         },
         "estimatedImpact": {
           "type": "array",
@@ -332,7 +316,6 @@
           "description": "The estimated impact of this recommended action"
         },
         "details": {
-          "type": "object",
           "properties": {
             "$ref": "#/definitions/IndexRecommendationDetails",
             "x-ms-client-flatten": true,
