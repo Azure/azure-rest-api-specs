@@ -88,7 +88,4 @@ interface Client3 {
 
 // The following is to update names as necessary for specific programming languages.
 // Done in this file to provide a single point of reference for any renames.
-@@clientName(ModelClient.ChatCompletionsOptions::parameters.top_p, "NucleusSamplingFactor", "csharp");
-@@clientName(ModelClient.ChatCompletionsOptions::parameters.stop, "StopSequences", "csharp");
-@@clientName(ModelClient.ChatCompletionsOptions::parameters.stream, "InternalShouldStreamResponse", "csharp");
 @@clientName(ModelClient.StreamingChatChoiceUpdate.delta, "InternalStreamingDeltaMessage", "csharp");
