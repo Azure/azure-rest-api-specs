@@ -125,7 +125,7 @@ interface AssetEndpointProfiles {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     AssetEndpointProfile,
-    AssetEndpointProfileProperties
+    AssetEndpointProfile
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;
