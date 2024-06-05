@@ -76,6 +76,4 @@ using Microsoft.AVS;
 @@clientName(WorkloadNetworkPublicIPProperties,
   "WorkloadNetworkPublicIpProperties"
 );
-@@clientName(WorkloadNetworkPublicIPProperties.publicIPBlock,
-  "publicIpBlock"
-);
+@@clientName(WorkloadNetworkPublicIPProperties.publicIPBlock, "publicIpBlock");
