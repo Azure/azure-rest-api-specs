@@ -6,6 +6,9 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.AVS;
 
+// client
+@@clientName(Microsoft.AVS, "Avs", "java");
+
 // flatten
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.TrackedResource.properties);
@@ -69,4 +72,10 @@ using Microsoft.AVS;
 @@clientName(Circuit.expressRouteID, "expressRouteId");
 @@clientName(Circuit.expressRoutePrivatePeeringID,
   "expressRoutePrivatePeeringId"
+);
+@@clientName(WorkloadNetworkPublicIPProperties,
+  "WorkloadNetworkPublicIpProperties"
+);
+@@clientName(WorkloadNetworkPublicIPProperties.publicIPBlock,
+  "publicIpBlock"
 );
