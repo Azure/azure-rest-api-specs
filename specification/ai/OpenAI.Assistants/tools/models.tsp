@@ -287,7 +287,7 @@ union AssistantsNamedToolChoiceType {
   fileSearch: "file_search",
 }
 
-/** The function name that will be used, if using the `funtion` tool */
+/** The function name that will be used, if using the `function` tool */
 @added(ServiceApiVersions.v2024_05_01_preview)
 model FunctionName {
   /** The name of the function to call */

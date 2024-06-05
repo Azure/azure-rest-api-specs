@@ -26,6 +26,9 @@
         "x-ms-examples": {
           "PutStorageTaskAssignment": {
             "$ref": "./examples/storageTaskAssignmentsCrud/PutStorageTaskAssignment.json"
+          },
+          "PutStorageTaskAssignmentRequiredProperties": {
+            "$ref": "./examples/storageTaskAssignmentsCrud/PutStorageTaskAssignmentRequiredProperties.json"
           }
         },
         "parameters": [
@@ -276,12 +279,6 @@
             "description": "Optional, specifies the maximum number of storage task assignment Ids to be included in the list response."
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "type": "string",
-            "description": "Optional. When specified, it can be used to query using reporting properties."
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -336,7 +333,7 @@
             "name": "$filter",
             "in": "query",
             "type": "string",
-            "description": "Optional. When specified, it can be used to query using reporting properties."
+            "description": "Optional. When specified, it can be used to query using reporting properties. See [Constructing Filter Strings](https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#constructing-filter-strings) for details."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -396,7 +393,7 @@
             "name": "$filter",
             "in": "query",
             "type": "string",
-            "description": "Optional. When specified, it can be used to query using reporting properties."
+            "description": "Optional. When specified, it can be used to query using reporting properties. See [Constructing Filter Strings](https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#constructing-filter-strings) for details."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -433,8 +430,11 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "description": "The storage task assignment."
     },
@@ -507,7 +507,6 @@
         }
       },
       "required": [
-        "target",
         "trigger"
       ],
       "description": "Execution context of the storage task assignment."
@@ -530,9 +529,6 @@
           "description": "List of object prefixes to be excluded from task execution. If there is a conflict between include and exclude prefixes, the exclude prefix will be the determining factor"
         }
       },
-      "required": [
-        "prefix"
-      ],
       "description": "Target helps provide filter parameters for the objects in the storage account and forms the execution context for the storage task"
     },
     "ExecutionTrigger": {
@@ -675,7 +671,7 @@
       "type": "object",
       "properties": {
         "target": {
-          "$ref": "#/definitions/ExecutionTargetUpdate",
+          "$ref": "#/definitions/ExecutionTarget",
           "description": "Execution target of the storage task assignment"
         },
         "trigger": {
@@ -684,26 +680,6 @@
         }
       },
       "description": "Execution context of the storage task assignment update."
-    },
-    "ExecutionTargetUpdate": {
-      "type": "object",
-      "properties": {
-        "prefix": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of object prefixes to be included for task execution"
-        },
-        "excludePrefix": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of object prefixes to be excluded from task execution. If there is a conflict between include and exclude prefixes, the exclude prefix will be the determining factor"
-        }
-      },
-      "description": "Target helps provide filter parameters for the objects in the storage account and forms the execution context for the storage task"
     },
     "ExecutionTriggerUpdate": {
       "type": "object",
