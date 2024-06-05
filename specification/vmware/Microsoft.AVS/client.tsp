@@ -53,6 +53,7 @@ using Microsoft.AVS;
 @@friendlyName(Authorizations.list, "list");
 @@friendlyName(CloudLinks.list, "list");
 @@friendlyName(GlobalReachConnections.list, "list");
+@@friendlyName(WorkloadNetworks.list, "list");
 
 // model
 @@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentity,
