@@ -209,28 +209,19 @@ interface AccessTokens {
   // AccessToken Operations
 
   @doc("Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
-  @example(
-    "./AccessTokens_CreateAccessToken.json",
-    "AccessTokens_CreateAccessToken"
-  )
+  @example("./AccessTokens_Create.json", "AccessTokens_Create")
   createAccessToken is Operations.ResourceCreateOrReplace<AccessToken>;
 
   @doc("Gets an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
-  @example("./AccessTokens_GetAccessToken.json", "AccessTokens_GetAccessToken")
+  @example("./AccessTokens_Get.json", "AccessTokens_Get")
   getAccessToken is Operations.ResourceRead<AccessToken>;
 
   @doc("Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
-  @example(
-    "./AccessTokens_DeleteAccessToken.json",
-    "AccessTokens_DeleteAccessToken"
-  )
+  @example("./AccessTokens_Delete.json", "AccessTokens_Delete")
   deleteAccessToken is Operations.ResourceDelete<AccessToken>;
 
   @doc("Lists access-tokens for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.")
-  @example(
-    "./AccessTokens_ListAccessTokens.json",
-    "AccessTokens_ListAccessTokens"
-  )
+  @example("./AccessTokens_List.json", "AccessTokens_List")
   listAccessTokens is Operations.ResourceList<AccessToken>;
 
   @doc("Validates access-token provided in authorization header for the given account id. Authorization required is Bearer JWT Access token provided by MPT service.")
@@ -266,12 +257,12 @@ interface Accounts {
   // Accounts Operations
 
   @doc("Get details of the ARM resource mapped to an account for the given accountId. Authorization required is Bearer JWT Access token provided by EntraID.")
-  @example("./Accounts_GetAccount.json", "Accounts_GetAccount")
+  @example("./Accounts_Get.json", "Accounts_Get")
   getAccount is Operations.ResourceRead<Account>;
 
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
   @doc("Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.")
-  @example("./Accounts_GetBrowsers.json", "Accounts_GetBrowsers")
+  @example("./AccountBrowsers_Get.json", "AccountBrowsers_Get")
   @route("/accounts/{accountId}/browsers")
   getBrowsers is RpcOperation<
     GetBrowsersParams,
