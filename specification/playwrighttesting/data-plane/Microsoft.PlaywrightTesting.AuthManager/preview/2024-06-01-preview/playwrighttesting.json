@@ -52,7 +52,7 @@
   "paths": {
     "/accounts/{accountId}": {
       "get": {
-        "operationId": "Accounts_GetAccount",
+        "operationId": "Accounts_Get",
         "description": "Get details of the ARM resource mapped to an account for the given accountId. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
@@ -98,14 +98,14 @@
         },
         "x-ms-examples": {
           "Accounts_Get": {
-            "$ref": "./Accounts_Get.json"
+            "$ref": "./examples/Accounts_Get.json"
           }
         }
       }
     },
     "/accounts/{accountId}/access-tokens": {
       "get": {
-        "operationId": "AccessTokens_ListAccessTokens",
+        "operationId": "AccessTokens_List",
         "description": "Lists access-tokens for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
@@ -151,7 +151,7 @@
         },
         "x-ms-examples": {
           "AccessTokens_List": {
-            "$ref": "./AccessTokens_List.json"
+            "$ref": "./examples/AccessTokens_List.json"
           }
         },
         "x-ms-pageable": {
@@ -161,7 +161,7 @@
     },
     "/accounts/{accountId}/access-tokens/{accessTokenId}": {
       "get": {
-        "operationId": "AccessTokens_GetAccessToken",
+        "operationId": "AccessTokens_Get",
         "description": "Gets an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
@@ -215,12 +215,12 @@
         },
         "x-ms-examples": {
           "AccessTokens_Get": {
-            "$ref": "./AccessTokens_Get.json"
+            "$ref": "./examples/AccessTokens_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "AccessTokens_CreateAccessToken",
+        "operationId": "AccessTokens_Create",
         "description": "Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
@@ -296,12 +296,12 @@
         },
         "x-ms-examples": {
           "AccessTokens_Create": {
-            "$ref": "./AccessTokens_Create.json"
+            "$ref": "./examples/AccessTokens_Create.json"
           }
         }
       },
       "delete": {
-        "operationId": "AccessTokens_DeleteAccessToken",
+        "operationId": "AccessTokens_Delete",
         "description": "Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
@@ -352,7 +352,7 @@
         },
         "x-ms-examples": {
           "AccessTokens_Delete": {
-            "$ref": "./AccessTokens_Delete.json"
+            "$ref": "./examples/AccessTokens_Delete.json"
           }
         }
       }
@@ -491,8 +491,11 @@
           }
         },
         "x-ms-examples": {
-          "AccountBrowsers_Get": {
-            "$ref": "./AccountBrowsers_Get.json"
+          "AccountBrowsers_GetBrowsers": {
+            "$ref": "./Accounts_GetBrowsers.json"
+          },
+          "Accounts_GetBrowsers": {
+            "$ref": "./examples/Accounts_GetBrowsers.json"
           }
         }
       }
