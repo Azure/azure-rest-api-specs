@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "resourceGroupName": "resourceGroupName",
+    "edgeClusterMachineSkuName": "edgeClusterMachineSkuName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/edgeClusterMachineSkus/edgeClusterMachineSkuName",
+        "name": "edgeClusterMachineSkuName",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/edgeClusterMachineSkus",
+        "properties": {
+          "cpus": [
+            {
+              "modelName": "Contoso Server-90010L processor"
+            }
+          ],
+          "memory": {
+            "sizeGB": 768
+          },
+          "devices": [
+            {
+              "address": "0000:01:00.0",
+              "addresses": [
+                "0000:01:00.0"
+              ],
+              "bus": "pci",
+              "class": "storage",
+              "extra": "Generation 2",
+              "sizeGB": 512
+            },
+            {
+              "addresses": [
+                "0000:03:00.0",
+                "0000:03:00.1",
+                "0000:03:00.2",
+                "0000:03:00.3"
+              ],
+              "bus": "pci",
+              "class": "network",
+              "model": "M-6581",
+              "portCount": 4,
+              "vendor": "Contoso"
+            },
+            {
+              "address": "0000:04:00.0",
+              "bus": "pci",
+              "class": "communication",
+              "memory": 16,
+              "model": "FPGA-1000",
+              "vendor": "Contoso"
+            }
+          ],
+          "system": {
+            "vendor": "Contoso",
+            "productName": "System Product Name"
+          }
+        }
+      }
+    }
+  }
+}

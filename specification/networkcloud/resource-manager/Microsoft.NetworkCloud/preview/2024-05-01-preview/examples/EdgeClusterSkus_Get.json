@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "resourceGroupName": "resourceGroupName",
+    "edgeClusterSkuName": "edgeClusterSkuName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/edgeClusterSkus/edgeClusterSkuName",
+        "name": "edgeClusterSkuName",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/edgeClusterSkus",
+        "properties": {
+          "machineSkuSupport": [
+            {
+              "machineSkuId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/edgeClusterMachineSkus/edgeClusterMachineSkuName",
+              "versionRange": {
+                "excluded": [
+                  "1.0.3"
+                ],
+                "supportedBegin": "1.0.0",
+                "unsupportedBegin": "1.1.0"
+              }
+            }
+          ],
+          "fabricManagedBy": "User",
+          "maximumNodeQuantity": 1,
+          "minimumNodeQuantity": 1,
+          "ptpRequired": "False",
+          "usageDomain": {
+            "platform": "FarEdge",
+            "purpose": "SingleNodeGeneralPurpose",
+            "variant": "Contoso"
+          }
+        }
+      }
+    }
+  }
+}
