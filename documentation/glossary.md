@@ -2,13 +2,27 @@
 
 This article defines some of the terms used in the articles under `documentation` directory.
 
+## Grouping directory
+
+A `grouping directory`, denoted as `<groupingDir>` in the [directory structure article], is a root folder for
+a set of data-plane `service` folders. It is a subfolder of `data-plane` folder.
+
+Each `service` in given `grouping directory` must [**version uniformly**][uniform versioning article] but each `service`
+within a `grouping directory` can version independently of each other.
+
+A `grouping directory` can be seen as a more free-form equivalent of the ARM `service group`, but for data-plane services.
+
+Specifically, all services grouped in given `groping directory` do not share any ARM **Resource Provider (RP) namespace**
+and are not related to ARM in any way.
+
 ## Resource type
 
 In case of ARM, a `service` is a collection of `resource types` or `resource type groups`.
 
 ## Service
- 
-A `service` is a set of operation endpoints (typically HTTP REST API endpoints) that [**version uniformly**][uniform versioning article].
+
+A `service` is a set of operation endpoints (typically HTTP REST API endpoints)
+that [**version uniformly**][uniform versioning article].
 
 A `service` corresponds to a cohesive, uniformly versioned experience for the customer with HTTP REST API surface,
 documentation portal and language SDKs. For example, [Azure Kubernetes Service].
@@ -27,7 +41,7 @@ A data-plane service has a path of form:
 > Some existing services follow different directory structure layouts.
 > All such layouts are legacy, deprecated, and not allowed going forward.
 
-For example, [`specification/containerservice/resource-manager/Microsoft.ContainerService/aks`] 
+For example, [`specification/containerservice/resource-manager/Microsoft.ContainerService/aks`]
 is a folder for the `aks` service within the `Microsoft.ContainerService` ARM Resource Provider namespace.
 
 You can learn more about how a `service` maps to its directory in the [directory structure article].
@@ -35,6 +49,9 @@ You can learn more about how a `service` maps to its directory in the [directory
 ## Service group
 
 A `service group` is a set of services that share a common ARM **Resource Provider (RP) namespace**, `RPNS`.
+
+Each `service` in given `service group` must [**version uniformly**][uniform versioning article] but each `service`
+within a `service group` can version independently of each other.
 
 A `service group` has a path of form:
 
