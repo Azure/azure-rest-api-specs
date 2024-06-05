@@ -7,6 +7,7 @@ import "./sqlMiTarget.tsp";
 import "./sqlVmTarget.tsp";
 import "./sharedPrivateLinkResource.tsp";
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Using invalid versions of ManagedIdentity"
 @service({
   title: "Microsoft.DatabaseWatcher",
 })
@@ -39,7 +40,7 @@ model Watcher is TrackedResource<WatcherProperties> {
   @segment("watchers")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("The RP specific properties of the resource.")

@@ -48,7 +48,7 @@ model IsSubscribedOperationRequestParameters {
   configurationEtag?: eTag;
 
   @doc("Data contract between Application Insights client SDK and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
-  @body
+  @bodyRoot
   monitoringDataPoint?: MonitoringDataPoint;
 }
 
@@ -95,7 +95,7 @@ model PublishOperationRequestParameters {
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Need to follow the existing SDK contract."
   @doc("Data contract between the client and Live Metrics. /QuickPulseService.svc/ping uses this as a backup source of machine name, instance name and invariant version.")
-  @body
+  @bodyRoot
   monitoringDataPoints?: MonitoringDataPoint[];
 }
 
