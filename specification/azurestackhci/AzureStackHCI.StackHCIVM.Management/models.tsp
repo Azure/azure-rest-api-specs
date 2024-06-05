@@ -1256,6 +1256,9 @@ model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("Size of gpu partition in MB for GPU-P")
   partitionSizeMB?: int64;
+
+  @doc("Name of the GPU")
+  name?: string;
 }
 
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
