@@ -6,7 +6,6 @@ import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
@@ -382,7 +381,7 @@ model Resource {
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
   @visibility("read")
-  systemData?: SystemData;
+  systemData?: Foundations.SystemData;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "For backward compatibility"
@@ -420,7 +419,7 @@ interface Investigations {
   listAtResource is ArmResourceListByParent<
     InvestigationResource,
     {
-      ...BaseParameters<InvestigationResource>;
+      ...Foundations.BaseParameters<InvestigationResource>;
 
       /**
        * The number of results to get. If null is passed, returns all Investigations.
@@ -451,10 +450,6 @@ interface Investigations {
   "application/json",
   "investigation"
 );
-// @@extension(Investigations.createOrUpdateAtResource::parameters.resource,
-//   "x-ms-client-name",
-//   "investigation"
-// );
 @@doc(Investigations.createOrUpdateAtResource::parameters.resource,
   "Investigation body to create/update"
 );
