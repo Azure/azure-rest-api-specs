@@ -13,12 +13,13 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://{region}.api.playwright.microsoft.com",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "region",
+        "name": "endpoint",
         "in": "path",
+        "description": "Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:\n  https://{region}.api.playwright.microsoft.com).",
         "required": true,
         "type": "string"
       }
@@ -412,12 +413,7 @@
         "description": "Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The API version to use for this operation.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "runId",
@@ -427,6 +423,34 @@
             "type": "string"
           },
           {
+            "name": "os",
+            "in": "query",
+            "description": "The os provided by client for remote test runs.",
+            "required": false,
+            "type": "string",
+            "default": "linux",
+            "enum": [
+              "linux",
+              "windows"
+            ],
+            "x-ms-enum": {
+              "name": "OS",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Linux",
+                  "value": "linux",
+                  "description": "Linux OS."
+                },
+                {
+                  "name": "Windows",
+                  "value": "windows",
+                  "description": "Windows OS."
+                }
+              ]
+            }
+          },
+          {
             "name": "accountId",
             "in": "path",
             "description": "The account id.",
@@ -434,19 +458,18 @@
             "type": "string"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "xMsClientRequestId"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "302": {
             "description": "Redirection",
             "headers": {
+              "location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The redirect target URL to run test on remote browsers."
+              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",

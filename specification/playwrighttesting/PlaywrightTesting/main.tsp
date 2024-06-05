@@ -15,10 +15,14 @@ using Azure.Core.Traits;
 using Autorest;
 
 @server(
-  "https://{region}.api.playwright.microsoft.com",
+  "{endpoint}",
   "Microsoft Azure Playwright Service API Endpoint",
   {
-    region: string,
+    @doc("""
+Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:
+  https://{region}.api.playwright.microsoft.com).
+""")
+    endpoint: string,
   }
 )
 @useAuth(
@@ -165,10 +169,10 @@ union AccessTokenState {
   string,
 
   @doc("The access-token is Active.")
-  "Active",
+  Active: "Active",
 
   @doc("The access-token is Expired.")
-  "Expired",
+  Expired: "Expired",
 }
 
 @doc("The enablement status of a feature.")
@@ -180,6 +184,17 @@ union EnablementStatus {
 
   @doc("The feature is Disabled.")
   Disabled: "Disabled",
+}
+
+@doc("The os to configure for remote test runs.")
+union OS {
+  string,
+
+  @doc("Linux OS.")
+  Linux: "linux",
+
+  @doc("Windows OS.")
+  Windows: "windows",
 }
 
 // Operations ////////////////////
@@ -224,6 +239,29 @@ interface AccessTokens {
   validate is Operations.ResourceCollectionAction<AccessToken, {}, {}>;
 }
 
+alias GetBrowsersParams = {
+  @query
+  @doc("The run id provided by client for corresponding remote test run.")
+  runId?: string;
+
+  @query
+  @doc("The os provided by client for remote test runs.")
+  os?: OS = OS.Linux;
+
+  @path
+  @doc("The account id.")
+  accountId: string;
+};
+
+alias GetBrowsersResponse = {
+  @statusCode
+  _: 302;
+
+  @header
+  @doc("The redirect target URL to run test on remote browsers.")
+  location: url;
+};
+
 interface Accounts {
   // Accounts Operations
 
@@ -231,35 +269,13 @@ interface Accounts {
   @example("./Accounts_GetAccount.json", "Accounts_GetAccount")
   getAccount is Operations.ResourceRead<Account>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'getBrowsers' should be defined using a signature from the Azure.Core namespace."
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
   @doc("Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.")
   @example("./Accounts_GetBrowsers.json", "Accounts_GetBrowsers")
   @route("/accounts/{accountId}/browsers")
-  getBrowsers(
-    @query("api-version")
-    @doc("The API version to use for this operation.")
-    apiVersion: string,
-
-    @query
-    @doc("The run id provided by client for corresponding remote test run.")
-    runId?: string,
-
-    @path
-    @doc("The account id.")
-    accountId: string,
-
-    @header({
-      name: "x-ms-client-request-id",
-    })
-    @doc("An opaque, globally-unique, client-generated string identifier for the request.")
-    xMsClientRequestId?: uuid,
-  ): {
-    @statusCode _: 302;
-
-    @header({
-      name: "x-ms-client-request-id",
-    })
-    @doc("An opaque, globally-unique, client-generated string identifier for the request.")
-    xMsClientRequestId: uuid;
-  } | Azure.Core.Foundations.ErrorResponse;
+  getBrowsers is RpcOperation<
+    GetBrowsersParams,
+    GetBrowsersResponse,
+    ServiceTraits
+  >;
 }

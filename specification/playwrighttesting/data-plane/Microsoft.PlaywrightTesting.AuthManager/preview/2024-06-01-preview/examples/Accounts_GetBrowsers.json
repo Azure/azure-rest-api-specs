@@ -3,9 +3,14 @@
   "operationId": "Accounts_GetBrowsers",
   "parameters": {
     "api-version": "2024-06-01-preview",
-    "accountId": "sampleAccountId"
+    "accountId": "sampleAccountId",
+    "os": "linux"
   },
   "responses": {
-    "302": {}
+    "302": {
+      "headers": {
+        "location": "wss://{region}.api.playwright.microsoft.com/redirectURL?api-version=2024-06-01-preview&os=linux"
+      }
+    }
   }
 }

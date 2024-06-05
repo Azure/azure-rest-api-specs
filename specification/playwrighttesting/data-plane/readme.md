@@ -27,7 +27,7 @@ These are the global settings for the playwrighttesting.
 ```yaml
 openapi-type: data-plane
 tag: package-2024-06-01-preview
-title: [[Title]]
+title: Azure Playwright testing data-plane service
 security: AADToken
 security-scopes: [[SecurityScopes]]
 ```
