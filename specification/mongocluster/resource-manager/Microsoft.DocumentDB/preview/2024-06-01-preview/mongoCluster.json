@@ -422,6 +422,9 @@
           "Disables public network access on a Mongo Cluster resource with a private endpoint connection.": {
             "$ref": "./examples/MongoClusters_PatchPrivateNetworkAccess.json"
           },
+          "Resets the administrator login password.": {
+            "$ref": "./examples/MongoClusters_ResetPassword.json"
+          },
           "Updates a Mongo Cluster resource": {
             "$ref": "./examples/MongoClusters_Update.json"
           },
@@ -1161,8 +1164,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Promote request results."
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1175,7 +1189,11 @@
           "Promotes a replica Mongo Cluster resource to a primary role.": {
             "$ref": "./examples/MongoClusters_ForcePromoteReplica.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/replicas": {
@@ -2016,7 +2034,7 @@
           "description": "The replication role of the cluster",
           "readOnly": true
         },
-        "state": {
+        "replicationState": {
           "$ref": "#/definitions/ReplicationState",
           "description": "The replication link state of the replica cluster.",
           "readOnly": true

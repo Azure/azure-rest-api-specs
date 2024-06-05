@@ -47,10 +47,9 @@ interface MongoClusters {
   checkNameAvailability is checkLocalNameAvailability;
   /** Promotes a replica mongo cluster to a primary role. */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
-  promote is ArmResourceActionSync<
+  promote is ArmResourceActionNoResponseContentAsync<
     MongoCluster,
-    PromoteReplicaRequest,
-    PromoteReplicaResult
+    PromoteReplicaRequest
   >;
 }
 
@@ -301,7 +300,7 @@ model ReplicationProperties {
 
   /** The replication link state of the replica cluster. */
   @visibility("read")
-  state?: ReplicationState;
+  replicationState?: ReplicationState;
 }
 
 /** Replication role of the mongo cluster. */

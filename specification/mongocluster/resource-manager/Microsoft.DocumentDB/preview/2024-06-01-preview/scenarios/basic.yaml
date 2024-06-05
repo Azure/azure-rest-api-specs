@@ -15,6 +15,8 @@ variables:
     value: centralus
   administratorLoginPassword:
     type: secureString
+  administratorLoginPassword2:
+    type: secureString
   firewallRuleName:
     type: string
     prefix: firewall
@@ -41,10 +43,15 @@ scenarios:
         exampleFile: ../examples/MongoClusters_FirewallRuleGet.json
       - step: MongoClusters_ListConnectionStrings
         exampleFile: ../examples/MongoClusters_ListConnectionStrings.json
-      - step: MongoClusters_Update
+      - step: MongoClusters_UpdateDiskSize
         exampleFile: ../examples/MongoClusters_PatchDiskSize.json
       - step: FirewallRules_Delete
         exampleFile: ../examples/MongoClusters_FirewallRuleDelete.json
+      - step: MongoClusters_ResetPassword
+        exampleFile: ../examples/MongoClusters_ResetPassword.json
+        requestUpdate:
+          - replace: /resource/properties/administratorLoginPassword
+            value: $(administratorLoginPassword2)
       - step: MongoClusters_Delete
         exampleFile: ../examples/MongoClusters_Delete.json
   - scenario: georeplica
