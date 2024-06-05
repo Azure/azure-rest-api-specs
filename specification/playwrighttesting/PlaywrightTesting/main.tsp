@@ -262,7 +262,7 @@ interface Accounts {
 
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
   @doc("Gets remote browsers corresponding to given accountId and redirects the client for running MPT tests. Authorization required is Bearer JWT Access token provided by EntraID or MPT Service.")
-  @example("./Accounts_GetBrowsers.json", "AccountBrowsers_GetBrowsers")
+  @example("./Accounts_GetBrowsers.json", "Accounts_GetBrowsers")
   @route("/accounts/{accountId}/browsers")
   getBrowsers is RpcOperation<
     GetBrowsersParams,
