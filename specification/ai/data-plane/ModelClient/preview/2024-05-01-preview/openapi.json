@@ -519,30 +519,6 @@
         }
       }
     },
-    "CapacityType": {
-      "type": "string",
-      "description": "Whether your capacity has been affected by the usage amount (token count) reported here.",
-      "enum": [
-        "usage",
-        "fixed"
-      ],
-      "x-ms-enum": {
-        "name": "CapacityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "usage",
-            "value": "usage",
-            "description": "Your capacity has been affected by the usage amount (token count) reported here."
-          },
-          {
-            "name": "fixed",
-            "value": "fixed",
-            "description": "Your capacity has not been affected by the usage amount (token count) reported here."
-          }
-        ]
-      }
-    },
     "ChatChoice": {
       "type": "object",
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -984,10 +960,6 @@
       "type": "object",
       "description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and\nother consumers.",
       "properties": {
-        "capacity_type": {
-          "$ref": "#/definitions/CapacityType",
-          "description": "Indicates whether your capacity has been affected by the usage amount (token count) reported here."
-        },
         "completion_tokens": {
           "type": "integer",
           "format": "int32",
@@ -1005,7 +977,6 @@
         }
       },
       "required": [
-        "capacity_type",
         "completion_tokens",
         "prompt_tokens",
         "total_tokens"
@@ -1165,10 +1136,6 @@
       "type": "object",
       "description": "Measurement of the amount of tokens used in this request and response.",
       "properties": {
-        "capacity_type": {
-          "$ref": "#/definitions/CapacityType",
-          "description": "Indicates whether your capacity has been affected by the usage amount (token count) reported here."
-        },
         "input_tokens": {
           "type": "integer",
           "format": "int32",
@@ -1186,7 +1153,6 @@
         }
       },
       "required": [
-        "capacity_type",
         "input_tokens",
         "prompt_tokens",
         "total_tokens"

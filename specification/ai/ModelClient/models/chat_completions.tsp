@@ -165,8 +165,6 @@ Counts consider all tokens across prompts, choices, choice alternates, best_of g
 other consumers.
 """)
 model CompletionsUsage {
-  ...CapacityAlias;
-
   @doc("The number of tokens generated across all completions emissions.")
   completion_tokens: int32;
 

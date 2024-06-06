@@ -17,7 +17,6 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 
 // Since we made all operator methods internal, we need to expliclty say we still want the models they use
 // to be public.
-@@access(ModelClient.CapacityType, Access.public);
 @@access(ModelClient.ChatChoice, Access.public);
 @@access(ModelClient.ChatCompletions, Access.public);
 @@access(ModelClient.ChatCompletionsFunctionToolCall, Access.public);
