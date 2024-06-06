@@ -7,6 +7,7 @@ using Microsoft.LoadTestService;
 
 @useDependency(APIVersions.v2022_11_01)
 @useDependency(APIVersions.v2023_04_01_preview)
+@useDependency(APIVersions.v2024_05_01_preview)
 namespace Customizations;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -71,7 +72,7 @@ interface TestProfileAdministrationOperations {
 }
 
 @client({
-  name: "TestProfileRunClient",
+  name: "TestProfileRunAdministrationClient",
   service: Microsoft.LoadTestService,
 })
 interface TestProfileRunOperations {
