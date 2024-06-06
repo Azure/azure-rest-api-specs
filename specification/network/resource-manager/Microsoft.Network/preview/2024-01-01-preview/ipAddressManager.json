@@ -1,0 +1,1127 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "IPAddressManagerClient - Public Preview",
+    "version": "2024-01-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools": {
+      "get": {
+        "tags": [
+          "IpamPool"
+        ],
+        "summary": "Gets list of Pool resources at Network Manager level.",
+        "operationId": "IpamPools_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Optional skip token.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Optional num entries to skip.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Optional num entries to show.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          },
+          {
+            "in": "query",
+            "name": "sortKey",
+            "description": "Optional key by which to sort.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sortValue",
+            "description": "Optional sort value for pagination.",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of IpamPool",
+            "schema": {
+              "$ref": "#/definitions/IpamPoolList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IpamPools_List": {
+            "$ref": "./examples/IpamPools_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}": {
+      "put": {
+        "tags": [
+          "IpamPool"
+        ],
+        "summary": "Creates/Updates the Pool resource.",
+        "operationId": "IpamPools_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "IP Address Manager Pool resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pool resource object to create/update.",
+            "schema": {
+              "$ref": "#/definitions/IpamPool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pool was updated",
+            "schema": {
+              "$ref": "#/definitions/IpamPool"
+            }
+          },
+          "201": {
+            "description": "Pool was created",
+            "schema": {
+              "$ref": "#/definitions/IpamPool"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IpamPools_Create": {
+            "$ref": "./examples/IpamPools_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IpamPool"
+        ],
+        "summary": "Updates the specific Pool resource.",
+        "operationId": "IpamPools_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "IP Address Manager Pool resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pool resource object to update partially.",
+            "schema": {
+              "$ref": "#/definitions/IpamPoolUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pool was updated",
+            "schema": {
+              "$ref": "#/definitions/IpamPool"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IpamPools_Update": {
+            "$ref": "./examples/IpamPools_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "IpamPool"
+        ],
+        "summary": "Gets the specific Pool resource.",
+        "operationId": "IpamPools_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "Pool resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IpamPool",
+            "schema": {
+              "$ref": "#/definitions/IpamPool"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IpamPools_Get": {
+            "$ref": "./examples/IpamPools_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IpamPool"
+        ],
+        "summary": "Delete the Pool resource.",
+        "operationId": "IpamPools_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "Pool resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Pool delete request accepted and will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Pool delete request succeeded"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "IpamPools_Delete": {
+            "$ref": "./examples/IpamPools_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/getPoolUsage": {
+      "post": {
+        "tags": [
+          "IpamPool"
+        ],
+        "summary": "Get the Pool Usage.",
+        "operationId": "IpamPools_GetPoolUsage",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "Pool resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Show the summary of usage info of ipamPool",
+            "schema": {
+              "$ref": "#/definitions/PoolUsage"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IpamPools_GetPoolUsage": {
+            "$ref": "./examples/IpamPools_GetPoolUsage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/listAssociatedResources": {
+      "post": {
+        "tags": [
+          "IpamPool"
+        ],
+        "summary": "List Associated Resource in the Pool.",
+        "operationId": "IpamPools_ListAssociatedResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "Pool resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of PoolAssociation",
+            "schema": {
+              "$ref": "#/definitions/PoolAssociationList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IpamPools_ListAssociatedResources": {
+            "$ref": "./examples/IpamPools_ListAssociatedResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/staticCidrs": {
+      "get": {
+        "tags": [
+          "StaticCidr"
+        ],
+        "summary": "Gets list of Static CIDR resources at Network Manager level.",
+        "operationId": "StaticCidrs_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "Pool resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Optional skip token.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Optional num entries to skip.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Optional num entries to show.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          },
+          {
+            "in": "query",
+            "name": "sortKey",
+            "description": "Optional key by which to sort.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sortValue",
+            "description": "Optional sort value for pagination.",
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of StaticCidr",
+            "schema": {
+              "$ref": "#/definitions/StaticCidrList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "StaticCidrs_List": {
+            "$ref": "./examples/StaticCidrs_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/staticCidrs/{staticCidrName}": {
+      "put": {
+        "tags": [
+          "StaticCidr"
+        ],
+        "summary": "Creates/Updates the Static CIDR resource.",
+        "operationId": "StaticCidrs_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "IP Address Manager Pool resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "staticCidrName",
+            "description": "Static Cidr allocation name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "StaticCidr resource object to create/update.",
+            "schema": {
+              "$ref": "#/definitions/StaticCidr"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Static CIDR was updated",
+            "schema": {
+              "$ref": "#/definitions/StaticCidr"
+            }
+          },
+          "201": {
+            "description": "Static CIDR was created",
+            "schema": {
+              "$ref": "#/definitions/StaticCidr"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StaticCidrs_Create": {
+            "$ref": "./examples/StaticCidrs_Create.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "StaticCidr"
+        ],
+        "summary": "Gets the specific Static CIDR resource.",
+        "operationId": "StaticCidrs_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "Pool resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "staticCidrName",
+            "description": "StaticCidr resource name to retrieve.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Static CIDR",
+            "schema": {
+              "$ref": "#/definitions/StaticCidr"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StaticCidrs_Get": {
+            "$ref": "./examples/StaticCidrs_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StaticCidr"
+        ],
+        "summary": "Delete the Static CIDR resource.",
+        "operationId": "StaticCidrs_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "networkManagerName",
+            "description": "Network Manager resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "poolName",
+            "description": "Pool resource name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "in": "path",
+            "name": "staticCidrName",
+            "description": "StaticCidr resource name to delete.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Static CIDR delete request accepted and will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Static CIDR delete request succeeded"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "StaticCidrs_Delete": {
+            "$ref": "./examples/StaticCidrs_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IpType": {
+      "description": "Enumeration to indicate the IP type.",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IpType"
+      }
+    },
+    "IpamPool": {
+      "description": "Instance of Pool resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IpamPoolProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "IpamPoolList": {
+      "description": "List of IpamPool",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpamPool"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "IpamPoolProperties": {
+      "description": "Properties of IpamPool resource properties which are specific to the Pool resource.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "ipAddressType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpType"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "parentPoolName": {
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "IpamPoolUpdate": {
+      "description": "Represents the IpamPool update API request interface.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/IpamPoolUpdateProperties"
+        }
+      }
+    },
+    "IpamPoolUpdateProperties": {
+      "description": "Represents the IpamPool update properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      }
+    },
+    "PoolAssociation": {
+      "description": "IpamPool association information.",
+      "required": [
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "poolId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "reservedPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "totalNumberOfIPAddresses": {
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfReservedIPAddresses": {
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationExpiresAt": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PoolAssociationList": {
+      "description": "List of PoolAssociation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PoolAssociation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "PoolUsage": {
+      "description": "IpamPool usage information.",
+      "type": "object",
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "childPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceBasics"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "allocatedAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "reservedAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "availableAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "totalNumberOfIPAddresses": {
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfAllocatedIPAddresses": {
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfReservedIPAddresses": {
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfAvailableIPAddresses": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "Provisioning states of a resource.",
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ProvisioningState"
+      }
+    },
+    "ResourceBasics": {
+      "description": "Representation of basic Azure resource information.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "StaticCidr": {
+      "description": "Instance of StaticCidr resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticCidrProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StaticCidrList": {
+      "description": "List of StaticCidr",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticCidr"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "StaticCidrProperties": {
+      "description": "Properties of StaticCidr resource.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "numberOfIPAddressesToAllocate": {
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "totalNumberOfIPAddresses": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
