@@ -29,7 +29,7 @@ op detectUnivariateEntireSeries is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body
+    @bodyRoot
     options: UnivariateDetectionOptions;
   },
   // TResponse
@@ -48,7 +48,7 @@ op detectUnivariateLastPoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body
+    @bodyRoot
     options: UnivariateDetectionOptions;
   },
   // TResponse
@@ -64,7 +64,7 @@ op detectUnivariateChangePoint is UnivariateServiceAction<
   // TParams
   {
     @doc("Method of univariate anomaly detection.")
-    @body
+    @bodyRoot
     options: UnivariateChangePointDetectionOptions;
   },
   // TResponse

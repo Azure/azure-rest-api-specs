@@ -27,15 +27,50 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-preview-2024-02
+tag: package-preview-2024-05
 ```
 
+### Tag: package-preview-2024-05
 
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/networkSecurityPerimeter.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/services.json
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/throughputpool.json
+```
+
+### Tag: package-2024-05
+
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05'
+input-file:
+  - Microsoft.DocumentDB/stable/2024-05-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2024-05-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2024-05-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2024-05-15/notebook.json
+  - Microsoft.DocumentDB/stable/2024-05-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2024-05-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2024-05-15/rbac.json
+  - Microsoft.DocumentDB/stable/2024-05-15/restorable.json
+  - Microsoft.DocumentDB/stable/2024-05-15/services.json
+```
 ### Tag: package-preview-2024-02
 
 These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-02'
+``` yaml $(tag) == 'package-preview-2024-02'
 input-file:
   - Microsoft.DocumentDB/preview/2024-02-15-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2024-02-15-preview/dataTransferService.json
@@ -50,6 +85,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2024-02-15-preview/services.json
   - Microsoft.DocumentDB/preview/2024-02-15-preview/throughputpool.json
 ```
+
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
@@ -827,6 +863,9 @@ directive:
   - suppress: PutResponseSchemaDescription
     from: cosmos-db.json
     reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: AvoidAdditionalProperties
+    from: managedCassandra.json
+    reason: Temporarily suppressing existing linter errors and will be fixed later
 
 ```
 
