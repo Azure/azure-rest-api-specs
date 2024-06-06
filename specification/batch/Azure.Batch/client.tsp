@@ -14,148 +14,148 @@ namespace Client;
 })
 interface Batch {
   @clientName("listApplicationsInternal", "java")
-  listApplications is Azure.Batch.Application.listApplications;
+  listApplications is Azure.Batch.Applications.listApplications;
   @clientName("getApplicationInternal", "java")
-  getApplication is Azure.Batch.Application.getApplication;
+  getApplication is Azure.Batch.Applications.getApplication;
 
   @clientName("listPoolUsageMetricsInternal", "java")
-  listPoolUsageMetrics is Azure.Batch.Pool.listPoolUsageMetrics;
+  listPoolUsageMetrics is Azure.Batch.Pools.listPoolUsageMetrics;
   @clientName("createPoolInternal", "java")
-  createPool is Azure.Batch.Pool.createPool;
+  createPool is Azure.Batch.Pools.createPool;
   @clientName("listPoolsInternal", "java")
-  listPools is Azure.Batch.Pool.listPools;
+  listPools is Azure.Batch.Pools.listPools;
   @clientName("deletePoolInternal", "java")
-  deletePool is Azure.Batch.Pool.deletePool;
+  deletePool is Azure.Batch.Pools.deletePool;
   @clientName("poolExistsInternal", "java")
-  poolExists is Azure.Batch.Pool.poolExists;
+  poolExists is Azure.Batch.Pools.poolExists;
   @clientName("getPoolInternal", "java")
-  getPool is Azure.Batch.Pool.getPool;
+  getPool is Azure.Batch.Pools.getPool;
   @clientName("updatePoolInternal", "java")
-  updatePool is Azure.Batch.Pool.updatePool;
+  updatePool is Azure.Batch.Pools.updatePool;
   @clientName("disablePoolAutoScaleInternal", "java")
-  disablePoolAutoScale is Azure.Batch.Pool.disablePoolAutoScale;
+  disablePoolAutoScale is Azure.Batch.Pools.disablePoolAutoScale;
   @clientName("enablePoolAutoScaleInternal", "java")
-  enablePoolAutoScale is Azure.Batch.Pool.enablePoolAutoScale;
+  enablePoolAutoScale is Azure.Batch.Pools.enablePoolAutoScale;
   @clientName("evaluatePoolAutoScaleInternal", "java")
-  evaluatePoolAutoScale is Azure.Batch.Pool.evaluatePoolAutoScale;
+  evaluatePoolAutoScale is Azure.Batch.Pools.evaluatePoolAutoScale;
   @clientName("resizePoolInternal", "java")
-  resizePool is Azure.Batch.Pool.resizePool;
+  resizePool is Azure.Batch.Pools.resizePool;
   @clientName("stopPoolResizeInternal", "java")
-  stopPoolResize is Azure.Batch.Pool.stopPoolResize;
+  stopPoolResize is Azure.Batch.Pools.stopPoolResize;
   @clientName("replacePoolPropertiesInternal", "java")
-  replacePoolProperties is Azure.Batch.Pool.replacePoolProperties;
+  replacePoolProperties is Azure.Batch.Pools.replacePoolProperties;
   @clientName("removeNodesInternal", "java")
-  removeNodes is Azure.Batch.Pool.removeNodes;
+  removeNodes is Azure.Batch.Pools.removeNodes;
   @clientName("listSupportedImagesInternal", "java")
-  listSupportedImages is Azure.Batch.Pool.listSupportedImages;
+  listSupportedImages is Azure.Batch.Pools.listSupportedImages;
   @clientName("listPoolNodeCountsInternal", "java")
-  listPoolNodeCounts is Azure.Batch.Pool.listPoolNodeCounts;
+  listPoolNodeCounts is Azure.Batch.Pools.listPoolNodeCounts;
 
   @clientName("deleteJobInternal", "java")
-  deleteJob is Azure.Batch.Job.deleteJob;
+  deleteJob is Azure.Batch.Jobs.deleteJob;
   @clientName("getJobInternal", "java")
-  getJob is Azure.Batch.Job.getJob;
+  getJob is Azure.Batch.Jobs.getJob;
   @clientName("updateJobInternal", "java")
-  updateJob is Azure.Batch.Job.updateJob;
+  updateJob is Azure.Batch.Jobs.updateJob;
   @clientName("replaceJobInternal", "java")
-  replaceJob is Azure.Batch.Job.replaceJob;
+  replaceJob is Azure.Batch.Jobs.replaceJob;
   @clientName("disableJobInternal", "java")
-  disableJob is Azure.Batch.Job.disableJob;
+  disableJob is Azure.Batch.Jobs.disableJob;
   @clientName("enableJobInternal", "java")
-  enableJob is Azure.Batch.Job.enableJob;
+  enableJob is Azure.Batch.Jobs.enableJob;
   @clientName("terminateJobInternal", "java")
-  terminateJob is Azure.Batch.Job.terminateJob;
+  terminateJob is Azure.Batch.Jobs.terminateJob;
   @clientName("createJobInternal", "java")
-  createJob is Azure.Batch.Job.createJob;
+  createJob is Azure.Batch.Jobs.createJob;
   @clientName("listJobsInternal", "java")
-  listJobs is Azure.Batch.Job.listJobs;
+  listJobs is Azure.Batch.Jobs.listJobs;
   @clientName("listJobsFromScheduleInternal", "java")
-  listJobsFromSchedule is Azure.Batch.Job.listJobsFromSchedule;
+  listJobsFromSchedule is Azure.Batch.Jobs.listJobsFromSchedule;
   @clientName("listJobPreparationAndReleaseTaskStatusInternal", "java")
-  listJobPreparationAndReleaseTaskStatus is Azure.Batch.Job.listJobPreparationAndReleaseTaskStatus;
+  listJobPreparationAndReleaseTaskStatus is Azure.Batch.Jobs.listJobPreparationAndReleaseTaskStatus;
   @clientName("getJobTaskCountsInternal", "java")
-  getJobTaskCounts is Azure.Batch.Job.getJobTaskCounts;
+  getJobTaskCounts is Azure.Batch.Jobs.getJobTaskCounts;
 
   @clientName("jobScheduleExistsInternal", "java")
-  jobScheduleExists is Azure.Batch.JobSchedule.jobScheduleExists;
+  jobScheduleExists is Azure.Batch.JobSchedules.jobScheduleExists;
   @clientName("deleteJobScheduleInternal", "java")
-  deleteJobSchedule is Azure.Batch.JobSchedule.deleteJobSchedule;
+  deleteJobSchedule is Azure.Batch.JobSchedules.deleteJobSchedule;
   @clientName("getJobScheduleInternal", "java")
-  getJobSchedule is Azure.Batch.JobSchedule.getJobSchedule;
+  getJobSchedule is Azure.Batch.JobSchedules.getJobSchedule;
   @clientName("updateJobScheduleInternal", "java")
-  updateJobSchedule is Azure.Batch.JobSchedule.updateJobSchedule;
+  updateJobSchedule is Azure.Batch.JobSchedules.updateJobSchedule;
   @clientName("replaceJobScheduleInternal", "java")
-  replaceJobSchedule is Azure.Batch.JobSchedule.replaceJobSchedule;
+  replaceJobSchedule is Azure.Batch.JobSchedules.replaceJobSchedule;
   @clientName("disableJobScheduleInternal", "java")
-  disableJobSchedule is Azure.Batch.JobSchedule.disableJobSchedule;
+  disableJobSchedule is Azure.Batch.JobSchedules.disableJobSchedule;
   @clientName("enableJobScheduleInternal", "java")
-  enableJobSchedule is Azure.Batch.JobSchedule.enableJobSchedule;
+  enableJobSchedule is Azure.Batch.JobSchedules.enableJobSchedule;
   @clientName("terminateJobScheduleInternal", "java")
-  terminateJobSchedule is Azure.Batch.JobSchedule.terminateJobSchedule;
+  terminateJobSchedule is Azure.Batch.JobSchedules.terminateJobSchedule;
   @clientName("createJobScheduleInternal", "java")
-  createJobSchedule is Azure.Batch.JobSchedule.createJobSchedule;
+  createJobSchedule is Azure.Batch.JobSchedules.createJobSchedule;
   @clientName("listJobSchedulesInternal", "java")
-  listJobSchedules is Azure.Batch.JobSchedule.listJobSchedules;
+  listJobSchedules is Azure.Batch.JobSchedules.listJobSchedules;
 
   @clientName("createTaskInternal", "java")
-  createTask is Azure.Batch.Task.createTask;
+  createTask is Azure.Batch.Tasks.createTask;
   @clientName("listTasksInternal", "java")
-  listTasks is Azure.Batch.Task.listTasks;
+  listTasks is Azure.Batch.Tasks.listTasks;
   @clientName("createTaskCollectionInternal", "java")
-  createTaskCollection is Azure.Batch.Task.createTaskCollection;
+  createTaskCollection is Azure.Batch.Tasks.createTaskCollection;
   @clientName("deleteTaskInternal", "java")
-  deleteTask is Azure.Batch.Task.deleteTask;
+  deleteTask is Azure.Batch.Tasks.deleteTask;
   @clientName("getTaskInternal", "java")
-  getTask is Azure.Batch.Task.getTask;
+  getTask is Azure.Batch.Tasks.getTask;
   @clientName("replaceTaskInternal", "java")
-  replaceTask is Azure.Batch.Task.replaceTask;
+  replaceTask is Azure.Batch.Tasks.replaceTask;
   @clientName("listSubTasksInternal", "java")
-  listSubTasks is Azure.Batch.Task.listSubTasks;
+  listSubTasks is Azure.Batch.Tasks.listSubTasks;
   @clientName("terminateTaskInternal", "java")
-  terminateTask is Azure.Batch.Task.terminateTask;
+  terminateTask is Azure.Batch.Tasks.terminateTask;
   @clientName("reactivateTaskInternal", "java")
-  reactivateTask is Azure.Batch.Task.reactivateTask;
+  reactivateTask is Azure.Batch.Tasks.reactivateTask;
   @clientName("deleteTaskFileInternal", "java")
-  deleteTaskFile is Azure.Batch.Task.deleteTaskFile;
+  deleteTaskFile is Azure.Batch.Tasks.deleteTaskFile;
   @clientName("getTaskFileInternal", "java")
-  getTaskFile is Azure.Batch.Task.getTaskFile;
+  getTaskFile is Azure.Batch.Tasks.getTaskFile;
   @clientName("getTaskFilePropertiesInternal", "java")
-  getTaskFileProperties is Azure.Batch.Task.getTaskFileProperties;
+  getTaskFileProperties is Azure.Batch.Tasks.getTaskFileProperties;
   @clientName("listTaskFilesInternal", "java")
-  listTaskFiles is Azure.Batch.Task.listTaskFiles;
+  listTaskFiles is Azure.Batch.Tasks.listTaskFiles;
 
   @clientName("createNodeUserInternal", "java")
-  createNodeUser is Azure.Batch.Node.createNodeUser;
+  createNodeUser is Azure.Batch.Nodes.createNodeUser;
   @clientName("deleteNodeUserInternal", "java")
-  deleteNodeUser is Azure.Batch.Node.deleteNodeUser;
+  deleteNodeUser is Azure.Batch.Nodes.deleteNodeUser;
   @clientName("replaceNodeUserInternal", "java")
-  replaceNodeUser is Azure.Batch.Node.replaceNodeUser;
+  replaceNodeUser is Azure.Batch.Nodes.replaceNodeUser;
   @clientName("getNodeInternal", "java")
-  getNode is Azure.Batch.Node.getNode;
+  getNode is Azure.Batch.Nodes.getNode;
   @clientName("rebootNodeInternal", "java")
-  rebootNode is Azure.Batch.Node.rebootNode;
+  rebootNode is Azure.Batch.Nodes.rebootNode;
   @clientName("disableNodeSchedulingInternal", "java")
-  disableNodeScheduling is Azure.Batch.Node.disableNodeScheduling;
+  disableNodeScheduling is Azure.Batch.Nodes.disableNodeScheduling;
   @clientName("enableNodeSchedulingInternal", "java")
-  enableNodeScheduling is Azure.Batch.Node.enableNodeScheduling;
+  enableNodeScheduling is Azure.Batch.Nodes.enableNodeScheduling;
   @clientName("getNodeRemoteLoginSettingsInternal", "java")
-  getNodeRemoteLoginSettings is Azure.Batch.Node.getNodeRemoteLoginSettings;
+  getNodeRemoteLoginSettings is Azure.Batch.Nodes.getNodeRemoteLoginSettings;
   @clientName("uploadNodeLogsInternal", "java")
-  uploadNodeLogs is Azure.Batch.Node.uploadNodeLogs;
+  uploadNodeLogs is Azure.Batch.Nodes.uploadNodeLogs;
   @clientName("listNodesInternal", "java")
-  listNodes is Azure.Batch.Node.listNodes;
+  listNodes is Azure.Batch.Nodes.listNodes;
   @clientName("getNodeExtensionInternal", "java")
-  getNodeExtension is Azure.Batch.Node.getNodeExtension;
+  getNodeExtension is Azure.Batch.Nodes.getNodeExtension;
   @clientName("listNodeExtensionsInternal", "java")
-  listNodeExtensions is Azure.Batch.Node.listNodeExtensions;
+  listNodeExtensions is Azure.Batch.Nodes.listNodeExtensions;
   @clientName("deleteNodeFileInternal", "java")
-  deleteNodeFile is Azure.Batch.Node.deleteNodeFile;
+  deleteNodeFile is Azure.Batch.Nodes.deleteNodeFile;
   @clientName("getNodeFileInternal", "java")
-  getNodeFile is Azure.Batch.Node.getNodeFile;
+  getNodeFile is Azure.Batch.Nodes.getNodeFile;
   @clientName("getNodeFilePropertiesInternal", "java")
-  getNodeFileProperties is Azure.Batch.Node.getNodeFileProperties;
+  getNodeFileProperties is Azure.Batch.Nodes.getNodeFileProperties;
   @clientName("listNodeFilesInternal", "java")
-  listNodeFiles is Azure.Batch.Node.listNodeFiles;
+  listNodeFiles is Azure.Batch.Nodes.listNodeFiles;
 }
 
 // operation overrides
@@ -174,10 +174,10 @@ interface Batch {
 );
 
 // Api overrides
-@@access(Azure.Batch.Pool.poolExists, Access.internal, "csharp");
-@@access(Azure.Batch.JobSchedule.jobScheduleExists, Access.internal, "csharp");
-@@access(Azure.Batch.Task.getTaskFileProperties, Access.internal, "csharp");
-@@access(Azure.Batch.Node.getNodeFileProperties, Access.internal, "csharp");
+@@access(Azure.Batch.Pools.poolExists, Access.internal, "csharp");
+@@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
+@@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
+@@access(Azure.Batch.Nodes.getNodeFileProperties, Access.internal, "csharp");
 
 // model overrides
 @@access(Azure.Batch.BatchApplicationListResult, Access.public, "java");
