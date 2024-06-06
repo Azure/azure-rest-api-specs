@@ -424,9 +424,14 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "enum": [
+        "index"
+      ],
       "description": "The name of the tuning option.",
-      "pattern": "([-a-z0-9]){3,63}",
-      "x-ms-parameter-location": "method"
+      "x-ms-enum": {
+        "name": "TuningOptionEnum",
+        "modelAsString": true
+      }
     },
     "RecommendationTypeParameter": {
       "name": "recommendationType",
@@ -440,8 +445,7 @@
       "x-ms-enum": {
         "name": "RecommendationType",
         "modelAsString": true
-      },
-      "x-ms-parameter-location": "method"
+      }
     }
   }
 }
