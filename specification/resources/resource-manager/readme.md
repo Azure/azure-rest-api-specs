@@ -105,6 +105,27 @@ input-file:
 
 ### Tag: package-policy-2023-04
 
+These settings apply only when `--tag=package-policy-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2023-04'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2023-04-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2023-04-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2023-04-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2023-04-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2023-04-01/policyAssignments.json
+- Microsoft.Authorization/preview/2022-07-01-preview/policyExemptions.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariables.json
+- Microsoft.Authorization/preview/2022-08-01-preview/policyVariableValues.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
+### Tag: package-policy-2023-04-only
+
 These settings apply only when `--tag=package-policy-2023-04-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2023-04-only'
