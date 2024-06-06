@@ -58,3 +58,27 @@ interface TestRunOperations {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   stopTestRun is LoadTestRun.stop;
 }
+
+@client({
+  name: "TestProfileAdministrationClient",
+  service: Microsoft.LoadTestService,
+})
+interface TestProfileAdministrationOperations {
+  createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
+  deleteTestProfile is TestProfileAdministration.deleteTestProfile;
+  getTestProfile is TestProfileAdministration.getTestProfile;
+  listTestProfiles is TestProfileAdministration.listTestProfiles;
+}
+
+@client({
+  name: "TestProfileRunClient",
+  service: Microsoft.LoadTestService,
+})
+interface TestProfileRunOperations {
+  createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
+  deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
+  getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
+  listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
+  stopTestProfileRun is TestProfileRunAdministration.stop;
+}

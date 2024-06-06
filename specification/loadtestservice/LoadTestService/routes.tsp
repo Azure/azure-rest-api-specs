@@ -4,6 +4,7 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
+import "./models.testprofile.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
@@ -436,5 +437,65 @@ numeric, underscore or hyphen characters.
       testRunId: string;
     },
     TestRunServerMetricConfig
+  >;
+}
+
+@tag("TestProfile")
+@added(APIVersions.v2024_05_01_preview)
+interface TestProfileAdministration {
+  @summary("Create a new test profile or update an existing test profile.")
+  @doc("Create a new test profile or update an existing test profile by providing the test profile Id.")
+  createOrUpdateTestProfile is StandardResourceOperations.ResourceCreateOrUpdate<TestProfile>;
+
+  @summary("Delete a test profile.")
+  @doc("Delete a test profile by its test profile Id.")
+  deleteTestProfile is StandardResourceOperations.ResourceDelete<TestProfile>;
+
+  @summary("Get load test profile details.")
+  @doc("Get load test profile details by test profile Id.")
+  getTestProfile is StandardResourceOperations.ResourceRead<TestProfile>;
+
+  @summary("List test profiles.")
+  @doc("""
+  Get all test profiles for the given filters.
+  """)
+  listTestProfiles is StandardResourceOperations.ResourceList<
+    TestProfile,
+    ListQueryParametersTrait<ListTestProfileQueryParams>
+  >;
+}
+
+@tag("TestProfileRun")
+@added(APIVersions.v2024_05_01_preview)
+interface TestProfileRunAdministration {
+  @summary("Get test profile run details.")
+  @doc("Get test profile run details by test profile run Id.")
+  getTestProfileRun is StandardResourceOperations.ResourceRead<TestProfileRun>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Create and start a new test profile run.")
+  @doc("Create and start a new test profile run with the given test profile run Id.")
+  createOrUpdateTestProfileRun is StandardResourceOperations.ResourceCreateOrUpdate<TestProfileRun>;
+
+  @summary("Delete an existing load test profile run.")
+  @doc("Delete an existing load test profile run by providing the test profile run Id.")
+  deleteTestProfileRun is StandardResourceOperations.ResourceDelete<TestProfileRun>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
+  @summary("Stop test profile run.")
+  @doc("Stop test profile run for the given test profile run Id.")
+  @operationId("TestProfileRunAdministration_StopTestProfileRun")
+  stop is StandardResourceOperations.ResourceAction<
+    TestProfileRun,
+    {},
+    TestProfileRun,
+    {}
+  >;
+
+  @summary("List test profile runs.")
+  @doc("Get all test profile runs for the given filters.")
+  listTestProfileRuns is StandardResourceOperations.ResourceList<
+    TestProfileRun,
+    ListQueryParametersTrait<ListTestProfileRunQueryParams>
   >;
 }

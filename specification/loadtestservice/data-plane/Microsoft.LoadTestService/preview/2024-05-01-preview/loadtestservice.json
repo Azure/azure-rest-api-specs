@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Load Testing",
-    "version": "2023-04-01-preview",
+    "version": "2024-05-01-preview",
     "description": "These APIs allow end users to create, view and run load tests using Azure Load Test Service.",
     "x-typespec-generated": [
       {
@@ -55,9 +55,523 @@
     },
     {
       "name": "TestRun"
+    },
+    {
+      "name": "TestProfile"
+    },
+    {
+      "name": "TestProfileRun"
     }
   ],
   "paths": {
+    "/test-profile-runs": {
+      "get": {
+        "operationId": "TestProfileRunAdministration_ListTestProfileRuns",
+        "tags": [
+          "TestProfileRun"
+        ],
+        "summary": "List test profile runs.",
+        "description": "Get all test profile runs for the given filters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileRunQueryParams.maxpagesize"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileRunQueryParams.minStartDateTime"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileRunQueryParams.maxStartDateTime"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileRunQueryParams.minEndDateTime"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileRunQueryParams.maxEndDateTime"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileRunQueryParams.createdDateStartTime"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileRunQueryParams.createdDateEndTime"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileRunQueryParams.testProfileRunIds"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileRunQueryParams.testProfileIds"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileRunQueryParams.statuses"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTestProfileRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all test profile runs for the specified filters.": {
+            "$ref": "./examples/ListTestProfileRuns.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/test-profile-runs/{testProfileRunId}": {
+      "get": {
+        "operationId": "TestProfileRunAdministration_GetTestProfileRun",
+        "tags": [
+          "TestProfileRun"
+        ],
+        "summary": "Get test profile run details.",
+        "description": "Get test profile run details by test profile run Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testProfileRunId",
+            "in": "path",
+            "description": "Unique identifier for the test profile run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestProfileRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a test profile run after the run has executed.": {
+            "$ref": "./examples/GetTestProfileRun_Executed.json"
+          },
+          "Get a test profile run while the run is executing.": {
+            "$ref": "./examples/GetTestProfileRun_Executing.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TestProfileRunAdministration_CreateOrUpdateTestProfileRun",
+        "tags": [
+          "TestProfileRun"
+        ],
+        "summary": "Create and start a new test profile run.",
+        "description": "Create and start a new test profile run with the given test profile run Id.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testProfileRunId",
+            "in": "path",
+            "description": "Unique identifier for the test profile run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestProfileRunCreateOrUpdate"
+            },
+            "x-ms-client-name": "resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestProfileRun"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TestProfileRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/update and start a test profile run": {
+            "$ref": "./examples/CreateOrUpdateTestProfileRun.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TestProfileRunAdministration_DeleteTestProfileRun",
+        "tags": [
+          "TestProfileRun"
+        ],
+        "summary": "Delete an existing load test profile run.",
+        "description": "Delete an existing load test profile run by providing the test profile run Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testProfileRunId",
+            "in": "path",
+            "description": "Unique identifier for the test profile run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a test profile run": {
+            "$ref": "./examples/DeleteTestProfileRun.json"
+          }
+        }
+      }
+    },
+    "/test-profile-runs/{testProfileRunId}:stop": {
+      "post": {
+        "operationId": "TestProfileRunAdministration_StopTestProfileRun",
+        "tags": [
+          "TestProfileRun"
+        ],
+        "summary": "Stop test profile run.",
+        "description": "Stop test profile run for the given test profile run Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testProfileRunId",
+            "in": "path",
+            "description": "Unique identifier for the test profile run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestProfileRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop a test profile run": {
+            "$ref": "./examples/StopTestProfileRun.json"
+          }
+        }
+      }
+    },
+    "/test-profiles": {
+      "get": {
+        "operationId": "TestProfileAdministration_ListTestProfiles",
+        "tags": [
+          "TestProfile"
+        ],
+        "summary": "List test profiles.",
+        "description": "Get all test profiles for the given filters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileQueryParams.maxpagesize"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileQueryParams.lastModifiedStartTime"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileQueryParams.lastModifiedEndTime"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileQueryParams.testProfileIds"
+          },
+          {
+            "$ref": "#/parameters/ListTestProfileQueryParams.testIds"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTestProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all test profiles for the specified filters.": {
+            "$ref": "./examples/ListTestProfiles.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/test-profiles/{testProfileId}": {
+      "get": {
+        "operationId": "TestProfileAdministration_GetTestProfile",
+        "tags": [
+          "TestProfile"
+        ],
+        "summary": "Get load test profile details.",
+        "description": "Get load test profile details by test profile Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testProfileId",
+            "in": "path",
+            "description": "Unique identifier for the test profile, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a test profile.": {
+            "$ref": "./examples/GetTestProfile.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TestProfileAdministration_CreateOrUpdateTestProfile",
+        "tags": [
+          "TestProfile"
+        ],
+        "summary": "Create a new test profile or update an existing test profile.",
+        "description": "Create a new test profile or update an existing test profile by providing the test profile Id.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testProfileId",
+            "in": "path",
+            "description": "Unique identifier for the test profile, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestProfileCreateOrUpdate"
+            },
+            "x-ms-client-name": "resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestProfile"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TestProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a test profile": {
+            "$ref": "./examples/CreateOrUpdateTestProfile.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TestProfileAdministration_DeleteTestProfile",
+        "tags": [
+          "TestProfile"
+        ],
+        "summary": "Delete a test profile.",
+        "description": "Delete a test profile by its test profile Id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testProfileId",
+            "in": "path",
+            "description": "Unique identifier for the test profile, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a test profile": {
+            "$ref": "./examples/DeleteTestProfile.json"
+          }
+        }
+      }
+    },
     "/test-runs": {
       "get": {
         "operationId": "LoadTestRun_ListTestRuns",
@@ -1370,7 +1884,8 @@
               "USER_PROPERTIES",
               "ADDITIONAL_ARTIFACTS",
               "ZIPPED_ARTIFACTS",
-              "URL_TEST_CONFIG_JSON"
+              "URL_TEST_CONFIG_JSON",
+              "TEST_SCRIPT"
             ],
             "x-ms-enum": {
               "name": "FileType",
@@ -1400,6 +1915,11 @@
                   "name": "URL_TEST_CONFIG_JSON",
                   "value": "URL_TEST_CONFIG_JSON",
                   "description": "If the file is a JSON config file to define the requests for a URL test."
+                },
+                {
+                  "name": "TEST_SCRIPT",
+                  "value": "TEST_SCRIPT",
+                  "description": "If the file is a test script."
                 }
               ]
             }
@@ -1620,9 +2140,15 @@
         "Count",
         "None",
         "Total",
+        "Percentile75",
         "Percentile90",
         "Percentile95",
-        "Percentile99"
+        "Percentile96",
+        "Percentile97",
+        "Percentile98",
+        "Percentile99",
+        "Percentile999",
+        "Percentile9999"
       ],
       "x-ms-enum": {
         "name": "AggregationType",
@@ -1649,6 +2175,11 @@
             "description": "Total sum."
           },
           {
+            "name": "Percentile75",
+            "value": "Percentile75",
+            "description": "75th percentile."
+          },
+          {
             "name": "Percentile90",
             "value": "Percentile90",
             "description": "90th percentile."
@@ -1659,9 +2190,34 @@
             "description": "95th percentile."
           },
           {
+            "name": "Percentile96",
+            "value": "Percentile96",
+            "description": "96th percentile."
+          },
+          {
+            "name": "Percentile97",
+            "value": "Percentile97",
+            "description": "97th percentile."
+          },
+          {
+            "name": "Percentile98",
+            "value": "Percentile98",
+            "description": "98th percentile."
+          },
+          {
             "name": "Percentile99",
             "value": "Percentile99",
             "description": "99th percentile."
+          },
+          {
+            "name": "Percentile999",
+            "value": "Percentile999",
+            "description": "99.9th percentile."
+          },
+          {
+            "name": "Percentile9999",
+            "value": "Percentile9999",
+            "description": "99.99th percentile."
           }
         ]
       }
@@ -1981,7 +2537,8 @@
         "USER_PROPERTIES",
         "ADDITIONAL_ARTIFACTS",
         "ZIPPED_ARTIFACTS",
-        "URL_TEST_CONFIG_JSON"
+        "URL_TEST_CONFIG_JSON",
+        "TEST_SCRIPT"
       ],
       "x-ms-enum": {
         "name": "FileType",
@@ -2011,9 +2568,88 @@
             "name": "URL_TEST_CONFIG_JSON",
             "value": "URL_TEST_CONFIG_JSON",
             "description": "If the file is a JSON config file to define the requests for a URL test."
+          },
+          {
+            "name": "TEST_SCRIPT",
+            "value": "TEST_SCRIPT",
+            "description": "If the file is a test script."
           }
         ]
       }
+    },
+    "FunctionFlexConsumptionResourceConfiguration": {
+      "type": "object",
+      "description": "Resource configuration instance for a Flex Consumption based Azure Function App.",
+      "properties": {
+        "instanceMemoryMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory size of the instance. Supported values are 512, 2048, 2096."
+        },
+        "httpConcurrency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "HTTP Concurrency for the function app."
+        }
+      },
+      "required": [
+        "instanceMemoryMB",
+        "httpConcurrency"
+      ]
+    },
+    "FunctionFlexConsumptionResourceConfigurationCreateOrUpdate": {
+      "type": "object",
+      "description": "Resource configuration instance for a Flex Consumption based Azure Function App.",
+      "properties": {
+        "instanceMemoryMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory size of the instance. Supported values are 512, 2048, 2096."
+        },
+        "httpConcurrency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "HTTP Concurrency for the function app."
+        }
+      }
+    },
+    "FunctionFlexConsumptionTargetResourceConfigurations": {
+      "type": "object",
+      "description": "Configurations for a Function App using Flex Consumption Plan.",
+      "properties": {
+        "configurations": {
+          "type": "object",
+          "description": "A map of configurations for a Function app using Flex Consumption Plan.",
+          "additionalProperties": {
+            "$ref": "#/definitions/FunctionFlexConsumptionResourceConfiguration"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetResourceConfigurations"
+        }
+      ],
+      "x-ms-discriminator-value": "FunctionFlexConsumption"
+    },
+    "FunctionFlexConsumptionTargetResourceConfigurationsCreateOrUpdate": {
+      "type": "object",
+      "description": "Configurations for a Function App using Flex Consumption Plan.",
+      "properties": {
+        "configurations": {
+          "type": "object",
+          "description": "A map of configurations for a Function app using Flex Consumption Plan.",
+          "additionalProperties": {
+            "$ref": "#/definitions/FunctionFlexConsumptionResourceConfigurationCreateOrUpdate"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetResourceConfigurationsCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "FunctionFlexConsumption"
     },
     "LoadTestConfiguration": {
       "type": "object",
@@ -2037,6 +2673,14 @@
         "optionalLoadTestConfig": {
           "$ref": "#/definitions/OptionalLoadTestConfig",
           "description": "Configuration for quick load test"
+        },
+        "regionalLoadTestConfig": {
+          "type": "array",
+          "description": "Region distribution configuration for the load test.",
+          "items": {
+            "$ref": "#/definitions/RegionalConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2316,9 +2960,15 @@
         "percentage",
         "avg",
         "p50",
+        "p75",
         "p90",
         "p95",
+        "p96",
+        "p97",
+        "p98",
         "p99",
+        "p99.9",
+        "p99.99",
         "min",
         "max"
       ],
@@ -2347,6 +2997,11 @@
             "description": "Criteria applies for 50th percentile value."
           },
           {
+            "name": "p75",
+            "value": "p75",
+            "description": "Criteria applies for 75th percentile value."
+          },
+          {
             "name": "p90",
             "value": "p90",
             "description": "Criteria applies for 90th percentile value."
@@ -2357,9 +3012,34 @@
             "description": "Criteria applies for 95th percentile value."
           },
           {
+            "name": "p96",
+            "value": "p96",
+            "description": "Criteria applies for 96th percentile value."
+          },
+          {
+            "name": "p97",
+            "value": "p97",
+            "description": "Criteria applies for 97th percentile value."
+          },
+          {
+            "name": "p98",
+            "value": "p98",
+            "description": "Criteria applies for 98th percentile value."
+          },
+          {
             "name": "p99",
             "value": "p99",
             "description": "Criteria applies for 99th percentile value."
+          },
+          {
+            "name": "p99.9",
+            "value": "p99.9",
+            "description": "Criteria applies for 99.9th percentile value."
+          },
+          {
+            "name": "p99.99",
+            "value": "p99.99",
+            "description": "Criteria applies for 99.99th percentile value."
           },
           {
             "name": "min",
@@ -2520,6 +3200,50 @@
         "value"
       ]
     },
+    "PagedTestProfile": {
+      "type": "object",
+      "description": "Paged collection of TestProfile items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/TestProfile"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTestProfileRun": {
+      "type": "object",
+      "description": "Paged collection of TestProfileRun items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TestProfileRun items on this page",
+          "items": {
+            "$ref": "#/definitions/TestProfileRun"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedTestRun": {
       "type": "object",
       "description": "Paged collection of TestRun items",
@@ -2616,6 +3340,91 @@
           "description": "Outcome of the test run.",
           "readOnly": true
         }
+      }
+    },
+    "RecommendationCategory": {
+      "type": "string",
+      "description": "Category of Recommendation.",
+      "enum": [
+        "ThroughputOptimized",
+        "CostOptimized"
+      ],
+      "x-ms-enum": {
+        "name": "RecommendationCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ThroughputOptimized",
+            "value": "ThroughputOptimized",
+            "description": "The recommendation for this category optimizes the throughput/RPS (Requests per Second) of the app."
+          },
+          {
+            "name": "CostOptimized",
+            "value": "CostOptimized",
+            "description": "The recommendation for this category optimizes the cost of the app."
+          }
+        ]
+      }
+    },
+    "RegionalConfiguration": {
+      "type": "object",
+      "description": "Region distribution configuration for the load test.",
+      "properties": {
+        "engineInstances": {
+          "type": "integer",
+          "format": "int32",
+          "description": "  The number of engine instances to execute load test in specified region. Supported values are in range of 1-400."
+        },
+        "region": {
+          "type": "string",
+          "description": "Azure region name.\nThe region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as \"eastus\".\nThe region name must match one of the strings in the \"Name\" column returned from running the \"az account list-locations -o table\" Azure CLI command."
+        }
+      },
+      "required": [
+        "engineInstances",
+        "region"
+      ]
+    },
+    "RequestDataLevel": {
+      "type": "string",
+      "description": "Request data collection level for test run",
+      "enum": [
+        "NONE",
+        "ERRORS"
+      ],
+      "x-ms-enum": {
+        "name": "RequestDataLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NONE",
+            "value": "NONE",
+            "description": "No request data will be collected"
+          },
+          {
+            "name": "ERRORS",
+            "value": "ERRORS",
+            "description": "Request data will be collected in case of failed requests"
+          }
+        ]
+      }
+    },
+    "ResourceKind": {
+      "type": "string",
+      "description": "Kind of the resource on which test profile is created.",
+      "enum": [
+        "FunctionFlexConsumption"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FunctionFlexConsumption",
+            "value": "FunctionFlexConsumption",
+            "description": "Resource is a Azure FunctionApp on Flex Consumption Plan."
+          }
+        ]
       }
     },
     "ResourceMetric": {
@@ -2843,6 +3652,42 @@
           }
         ]
       }
+    },
+    "TargetResourceConfigurations": {
+      "type": "object",
+      "description": "Configurations of a target resource. This varies with the kind of resource.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ResourceKind",
+          "description": "Kind of the resource for which the configurations apply.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "TargetResourceConfigurationsCreateOrUpdate": {
+      "type": "object",
+      "description": "Configurations of a target resource. This varies with the kind of resource.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ResourceKind",
+          "description": "Kind of the resource for which the configurations apply.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "Test": {
       "type": "object",
@@ -3160,7 +4005,8 @@
       "description": "Test kind",
       "enum": [
         "URL",
-        "JMX"
+        "JMX",
+        "Locust"
       ],
       "x-ms-enum": {
         "name": "TestKind",
@@ -3175,6 +4021,334 @@
             "name": "JMX",
             "value": "JMX",
             "description": "JMX Test"
+          },
+          {
+            "name": "Locust",
+            "value": "Locust",
+            "description": "Locust Test"
+          }
+        ]
+      }
+    },
+    "TestProfile": {
+      "type": "object",
+      "description": "The Test Profile Model. A Test Profile resource enables you to set up a test profile which contains various configurations for a supported resource type and a load test to execute on that resource.",
+      "properties": {
+        "testProfileId": {
+          "type": "string",
+          "description": "Unique identifier for the test profile, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+          "minLength": 2,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9_-]*$",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the test profile.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the test profile.",
+          "maxLength": 100
+        },
+        "testId": {
+          "type": "string",
+          "description": "Associated test ID for the test profile. This property is required for creating a Test Profile and it's not allowed to be updated.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Target resource ID on which the test profile is created. This property is required for creating a Test Profile and it's not allowed to be updated.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetResourceConfigurations": {
+          "$ref": "#/definitions/TargetResourceConfigurations",
+          "description": "Configurations of the target resource on which testing would be done."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation datetime(RFC 3339 literal format).",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user that created.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last Modified datetime(RFC 3339 literal format).",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The user that last modified.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "testProfileId"
+      ]
+    },
+    "TestProfileCreateOrUpdate": {
+      "type": "object",
+      "description": "The Test Profile Model. A Test Profile resource enables you to set up a test profile which contains various configurations for a supported resource type and a load test to execute on that resource.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the test profile.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the test profile.",
+          "maxLength": 100
+        },
+        "testId": {
+          "type": "string",
+          "description": "Associated test ID for the test profile. This property is required for creating a Test Profile and it's not allowed to be updated.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Target resource ID on which the test profile is created. This property is required for creating a Test Profile and it's not allowed to be updated.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetResourceConfigurations": {
+          "$ref": "#/definitions/TargetResourceConfigurationsCreateOrUpdate",
+          "description": "Configurations of the target resource on which testing would be done."
+        }
+      }
+    },
+    "TestProfileRun": {
+      "type": "object",
+      "description": "The Test Profile Run Model. Test Profile Run resource enables you to instantiate an already created test profile and run load tests to get recommendations on the optimal configuration for the target resource.",
+      "properties": {
+        "testProfileRunId": {
+          "type": "string",
+          "description": "Unique identifier for the test profile run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+          "minLength": 2,
+          "maxLength": 50,
+          "pattern": "^[a-z0-9_-]*$",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the test profile run.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "The test profile run description",
+          "maxLength": 100
+        },
+        "testProfileId": {
+          "type": "string",
+          "description": "Associated test profile ID for the test profile run. This is required to create a test profile run and can't be updated.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Target resource ID on which the test profile run is created",
+          "readOnly": true
+        },
+        "targetResourceConfigurations": {
+          "$ref": "#/definitions/TargetResourceConfigurations",
+          "description": "Configurations of the target resource on which the test profile ran.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/TestProfileRunStatus",
+          "description": "The test profile run status.",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "type": "array",
+          "description": "Error details if there is any failure in test profile run. These errors are specific to the Test Profile Run.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The test profile run start DateTime(RFC 3339 literal format).",
+          "readOnly": true
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The test profile run end DateTime(RFC 3339 literal format).",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Test profile run duration in seconds.",
+          "readOnly": true
+        },
+        "testRunDetails": {
+          "type": "object",
+          "description": "Details of the test runs ran as part of the test profile run.\nKey is the testRunId of the corresponding testRun.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestRunDetail"
+          },
+          "readOnly": true
+        },
+        "recommendations": {
+          "type": "array",
+          "description": "Recommendations provided based on a successful test profile run.",
+          "items": {
+            "$ref": "#/definitions/TestProfileRunRecommendation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation datetime(RFC 3339 literal format).",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user that created.",
+          "readOnly": true
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last Modified datetime(RFC 3339 literal format).",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The user that last modified.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "testProfileRunId"
+      ]
+    },
+    "TestProfileRunCreateOrUpdate": {
+      "type": "object",
+      "description": "The Test Profile Run Model. Test Profile Run resource enables you to instantiate an already created test profile and run load tests to get recommendations on the optimal configuration for the target resource.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name for the test profile run.",
+          "minLength": 2,
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "The test profile run description",
+          "maxLength": 100
+        },
+        "testProfileId": {
+          "type": "string",
+          "description": "Associated test profile ID for the test profile run. This is required to create a test profile run and can't be updated.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "TestProfileRunRecommendation": {
+      "type": "object",
+      "description": "A recommendation object that provides a list of configuration that optimizes its category.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/RecommendationCategory",
+          "description": "Category of the recommendation."
+        },
+        "configurations": {
+          "type": "array",
+          "description": "List of configurations IDs for which the recommendation is applicable. These are a subset of the provided target resource configurations.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "TestProfileRunStatus": {
+      "type": "string",
+      "description": "Test profile run status.",
+      "enum": [
+        "ACCEPTED",
+        "NOTSTARTED",
+        "EXECUTING",
+        "DONE",
+        "CANCELLING",
+        "CANCELLED",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "TestProfileRunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACCEPTED",
+            "value": "ACCEPTED",
+            "description": "Test profile run request is accepted."
+          },
+          {
+            "name": "NOTSTARTED",
+            "value": "NOTSTARTED",
+            "description": "Test profile run is not yet started."
+          },
+          {
+            "name": "EXECUTING",
+            "value": "EXECUTING",
+            "description": "Test profile run has started executing."
+          },
+          {
+            "name": "DONE",
+            "value": "DONE",
+            "description": "Test profile run has completed successfully."
+          },
+          {
+            "name": "CANCELLING",
+            "value": "CANCELLING",
+            "description": "Test profile run is being cancelled."
+          },
+          {
+            "name": "CANCELLED",
+            "value": "CANCELLED",
+            "description": "Test profile run is cancelled."
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "Test profile run has failed."
           }
         ]
       }
@@ -3229,6 +4403,14 @@
         "testRunStatistics": {
           "type": "object",
           "description": "Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.\nThe sampler name is the same as the name mentioned in the test script.\nSampler name \"Total\" represents the aggregated statistics of all the samplers.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestRunStatistics"
+          },
+          "readOnly": true
+        },
+        "regionalStatistics": {
+          "type": "object",
+          "description": "Regional statistics. Key is the Azure region name and value is the test run statistics.\nThe region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as \"eastus\".\nThe region name must match one of the strings in the \"Name\" column returned from running the \"az account list-locations -o table\" Azure CLI command.",
           "additionalProperties": {
             "$ref": "#/definitions/TestRunStatistics"
           },
@@ -3314,6 +4496,14 @@
           "$ref": "#/definitions/TestKind",
           "description": "Type of test.",
           "readOnly": true
+        },
+        "requestDataLevel": {
+          "$ref": "#/definitions/RequestDataLevel",
+          "description": "Request data collection level for test run"
+        },
+        "debugLogsEnabled": {
+          "type": "boolean",
+          "description": "Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise"
         },
         "publicIPDisabled": {
           "type": "boolean",
@@ -3468,8 +4658,42 @@
           "type": "string",
           "description": "The test run description.",
           "maxLength": 100
+        },
+        "requestDataLevel": {
+          "$ref": "#/definitions/RequestDataLevel",
+          "description": "Request data collection level for test run"
+        },
+        "debugLogsEnabled": {
+          "type": "boolean",
+          "description": "Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise"
         }
       }
+    },
+    "TestRunDetail": {
+      "type": "object",
+      "description": "Details of a particular test run for a test profile run.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Status of the test run."
+        },
+        "configurationId": {
+          "type": "string",
+          "description": "ID of the configuration on which the test ran."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Key value pair of extra properties associated with the test run.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "configurationId",
+        "properties"
+      ]
     },
     "TestRunFileInfo": {
       "type": "object",
@@ -3561,6 +4785,10 @@
         "artifactsContainerInfo": {
           "$ref": "#/definitions/ArtifactsContainerInfo",
           "description": "The container for test run artifacts."
+        },
+        "reportFileInfo": {
+          "$ref": "#/definitions/TestRunFileInfo",
+          "description": "The report file for the test run."
         }
       }
     },
@@ -3671,6 +4899,42 @@
           "type": "number",
           "format": "double",
           "description": "99 percentile response time.",
+          "readOnly": true
+        },
+        "pct75ResTime": {
+          "type": "number",
+          "format": "double",
+          "description": "75 percentile response time.",
+          "readOnly": true
+        },
+        "pct96ResTime": {
+          "type": "number",
+          "format": "double",
+          "description": "96 percentile response time.",
+          "readOnly": true
+        },
+        "pct97ResTime": {
+          "type": "number",
+          "format": "double",
+          "description": "97 percentile response time.",
+          "readOnly": true
+        },
+        "pct98ResTime": {
+          "type": "number",
+          "format": "double",
+          "description": "98 percentile response time.",
+          "readOnly": true
+        },
+        "pct999ResTime": {
+          "type": "number",
+          "format": "double",
+          "description": "99.9 percentile response time.",
+          "readOnly": true
+        },
+        "pct9999ResTime": {
+          "type": "number",
+          "format": "double",
+          "description": "99.99 percentile response time.",
           "readOnly": true
         },
         "throughput": {
@@ -3824,6 +5088,136 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "ListTestProfileQueryParams.lastModifiedEndTime": {
+      "name": "lastModifiedEndTime",
+      "in": "query",
+      "description": "End DateTime(RFC 3339 literal format) of the last updated time range to filter test profiles.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileQueryParams.lastModifiedStartTime": {
+      "name": "lastModifiedStartTime",
+      "in": "query",
+      "description": "Start DateTime(RFC 3339 literal format) of the last updated time range to filter test profiles.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileQueryParams.maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "Maximum number of results to include in a single response.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileQueryParams.testIds": {
+      "name": "testIds",
+      "in": "query",
+      "description": "Comma separated list IDs of the tests which should be associated with the test profiles to fetch.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileQueryParams.testProfileIds": {
+      "name": "testProfileIds",
+      "in": "query",
+      "description": "Comma separated list of IDs of the test profiles to filter.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileRunQueryParams.createdDateEndTime": {
+      "name": "createdDateEndTime",
+      "in": "query",
+      "description": "End DateTime(RFC 3339 literal format) of the created time range to filter test profile runs.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileRunQueryParams.createdDateStartTime": {
+      "name": "createdDateStartTime",
+      "in": "query",
+      "description": "Start DateTime(RFC 3339 literal format) of the created time range to filter test profile runs.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileRunQueryParams.maxEndDateTime": {
+      "name": "maxEndDateTime",
+      "in": "query",
+      "description": "Maximum End DateTime(RFC 3339 literal format) of the test profile runs to filter on.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileRunQueryParams.maxStartDateTime": {
+      "name": "maxStartDateTime",
+      "in": "query",
+      "description": "Maximum Start DateTime(RFC 3339 literal format) of the test profile runs to filter on.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileRunQueryParams.maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "Maximum number of results to include in a single response.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileRunQueryParams.minEndDateTime": {
+      "name": "minEndDateTime",
+      "in": "query",
+      "description": "Minimum End DateTime(RFC 3339 literal format) of the test profile runs to filter on.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileRunQueryParams.minStartDateTime": {
+      "name": "minStartDateTime",
+      "in": "query",
+      "description": "Minimum Start DateTime(RFC 3339 literal format) of the test profile runs to filter on.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileRunQueryParams.statuses": {
+      "name": "statuses",
+      "in": "query",
+      "description": "Comma separated list of Statuses of the test profile runs to filter.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileRunQueryParams.testProfileIds": {
+      "name": "testProfileIds",
+      "in": "query",
+      "description": "Comma separated IDs of the test profiles which should be associated with the test profile runs to fetch.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTestProfileRunQueryParams.testProfileRunIds": {
+      "name": "testProfileRunIds",
+      "in": "query",
+      "description": "Comma separated list of IDs of the test profile runs to filter.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "ListTestQueryParams.lastModifiedEndTime": {
       "name": "lastModifiedEndTime",
