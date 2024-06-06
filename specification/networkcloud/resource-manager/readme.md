@@ -66,6 +66,14 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusterManagers/{clusterManagerName}"].patch.parameters[4].schema.properties.identity
   - code: PatchBodyParametersSchema
     from: networkcloud.json
+    reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/edgeClusters/{edgeClusterName}"].patch.parameters[4].schema.properties.identity
+  - code: PatchBodyParametersSchema
+    from: networkcloud.json
+    reason: Nested objects that share a structure with PUT have required fields. The required field is present in the patch structure as well, because it reuses types. The nested structure needs to be updated in full by the user.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/edgeClusters/{edgeClusterName}"].patch.parameters[4].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    from: networkcloud.json
     reason: Nested objects that share a structure with PUT have required fields. The required field is present in the patch structure as well, because it reuses types. The nested structure needs to be updated in full by the user.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}"].patch.parameters[4].schema.properties.properties
 ```
