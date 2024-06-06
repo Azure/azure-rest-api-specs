@@ -158,6 +158,14 @@ interface Batch {
   listNodeFiles is Azure.Batch.Nodes.listNodeFiles;
 }
 
+// C SHARP OVERRIDES
+// Api overrides
+@@access(Azure.Batch.Pools.poolExists, Access.internal, "csharp");
+@@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
+@@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
+@@access(Azure.Batch.Nodes.getNodeFileProperties, Access.internal, "csharp");
+
+// JAVA OVERRIDES
 // operation overrides
 @@access(Azure.Batch.ListOperation, Access.internal, "java");
 @@access(Azure.Batch.ReadOperation, Access.internal, "java");
@@ -172,12 +180,6 @@ interface Batch {
   Access.internal,
   "java"
 );
-
-// Api overrides
-@@access(Azure.Batch.Pools.poolExists, Access.internal, "csharp");
-@@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
-@@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
-@@access(Azure.Batch.Nodes.getNodeFileProperties, Access.internal, "csharp");
 
 // model overrides
 @@access(Azure.Batch.BatchApplicationListResult, Access.public, "java");
