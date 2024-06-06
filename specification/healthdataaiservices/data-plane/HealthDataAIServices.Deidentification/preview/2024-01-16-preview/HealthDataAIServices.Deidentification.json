@@ -54,7 +54,7 @@
   "paths": {
     "/deid": {
       "post": {
-        "operationId": "Deidentification_Deidentify",
+        "operationId": "Deidentify",
         "summary": "Realtime Synchronous Deidentification.",
         "description": "A remote procedure call (RPC) operation.",
         "parameters": [
@@ -67,7 +67,7 @@
             "description": "The request body for realtime deidentification.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeidentifyOptions"
+              "$ref": "#/definitions/DeidentificationContent"
             }
           }
         ],
@@ -75,7 +75,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeidentifyResult"
+              "$ref": "#/definitions/DeidentificationResult"
             }
           },
           "default": {
@@ -93,14 +93,14 @@
         },
         "x-ms-examples": {
           "Realtime Synchronous Deidentification.": {
-            "$ref": "./examples/Deidentification_Deidentify.json"
+            "$ref": "./examples/Deidentify.json"
           }
         }
       }
     },
     "/jobs": {
       "get": {
-        "operationId": "Deidentification_ListJobs",
+        "operationId": "ListJobs",
         "summary": "List De-Identify Jobs",
         "description": "Resource list operation template.",
         "parameters": [
@@ -121,7 +121,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedDeidentifyJob"
+              "$ref": "#/definitions/PagedDeidentificationJob"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -146,7 +146,7 @@
         },
         "x-ms-examples": {
           "List De-Identify Jobs": {
-            "$ref": "./examples/Deidentification_ListJobs.json"
+            "$ref": "./examples/ListJobs.json"
           }
         },
         "x-ms-pageable": {
@@ -156,7 +156,7 @@
     },
     "/jobs/{name}": {
       "get": {
-        "operationId": "Deidentification_GetJob",
+        "operationId": "GetJob",
         "summary": "Get a De-Identify Job",
         "description": "Resource read operation template.",
         "parameters": [
@@ -181,7 +181,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeidentifyJob"
+              "$ref": "#/definitions/DeidentificationJob"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -206,12 +206,12 @@
         },
         "x-ms-examples": {
           "Get a De-Identify Job": {
-            "$ref": "./examples/Deidentification_GetJob.json"
+            "$ref": "./examples/GetJob.json"
           }
         }
       },
       "put": {
-        "operationId": "Deidentification_CreateJob",
+        "operationId": "CreateJob",
         "summary": "Create a De-Identify Job",
         "description": "Long-running resource create or replace operation template.",
         "parameters": [
@@ -237,7 +237,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeidentifyJobCreateOrUpdate"
+              "$ref": "#/definitions/DeidentificationJob"
             }
           }
         ],
@@ -245,36 +245,36 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeidentifyJob"
+              "$ref": "#/definitions/DeidentificationJob"
             },
             "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/DeidentifyJob"
+              "$ref": "#/definitions/DeidentificationJob"
             },
             "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
             }
           },
@@ -293,13 +293,13 @@
         },
         "x-ms-examples": {
           "Create a De-Identify Job": {
-            "$ref": "./examples/Deidentification_CreateJob.json"
+            "$ref": "./examples/CreateJob.json"
           }
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Deidentification_DeleteJob",
+        "operationId": "DeleteJob",
         "summary": "Delete a De-Identify Job",
         "description": "Removes the record of the job from the service. Does not delete any files.",
         "parameters": [
@@ -346,14 +346,14 @@
         },
         "x-ms-examples": {
           "Delete a De-Identify Job": {
-            "$ref": "./examples/Deidentification_DeleteJob.json"
+            "$ref": "./examples/DeleteJob.json"
           }
         }
       }
     },
-    "/jobs/{name}:cancelJob": {
+    "/jobs/{name}:cancel": {
       "post": {
-        "operationId": "Deidentification_CancelJob",
+        "operationId": "CancelJob",
         "summary": "Cancel a De-Identify Job",
         "description": "Cancels a job that is in progress. \n\nThe job will be marked as canceled and the service will stop processing the job. The service will not delete any files that have already been processed.\n\nIf the job is already complete, this will have no effect. ",
         "parameters": [
@@ -378,7 +378,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeidentifyJob"
+              "$ref": "#/definitions/DeidentificationJob"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -403,14 +403,14 @@
         },
         "x-ms-examples": {
           "Cancel a De-Identify Job": {
-            "$ref": "./examples/Deidentification_CancelJob.json"
+            "$ref": "./examples/CancelJob.json"
           }
         }
       }
     },
     "/jobs/{name}/files": {
       "get": {
-        "operationId": "Deidentification_ListJobFiles",
+        "operationId": "ListJobFiles",
         "summary": "List processed files within a Job",
         "description": "Resource list operation template.",
         "parameters": [
@@ -466,7 +466,7 @@
         },
         "x-ms-examples": {
           "List processed files within a Job": {
-            "$ref": "./examples/Deidentification_ListJobFiles.json"
+            "$ref": "./examples/ListJobFiles.json"
           }
         },
         "x-ms-pageable": {
@@ -583,7 +583,82 @@
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
-    "DeidentifyJob": {
+    "DeidentificationContent": {
+      "type": "object",
+      "description": "Request for synchronous De-Identify operation.",
+      "properties": {
+        "inputText": {
+          "type": "string",
+          "description": "Input text to deidentify.",
+          "maxLength": 100000
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation to perform on the input.",
+          "default": "Surrogate",
+          "enum": [
+            "Redact",
+            "Surrogate",
+            "Tag"
+          ],
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Redact",
+                "value": "Redact",
+                "description": "Redact Operation will remove all entities of PHI and replace them with a placeholder value."
+              },
+              {
+                "name": "Surrogate",
+                "value": "Surrogate",
+                "description": "Surrogation Operation will replace all entities of PHI with a surrogate value."
+              },
+              {
+                "name": "Tag",
+                "value": "Tag",
+                "description": "Tag Operation will detect all entities of PHI, their type, and return their locations in the document."
+              }
+            ]
+          }
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the input.",
+          "default": "PlainText",
+          "enum": [
+            "PlainText"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentDataType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PlainText",
+                "value": "PlainText",
+                "description": "Plain text data type."
+              }
+            ]
+          }
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "Requested Encoding of the tag response indices."
+        },
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when OperationType is Redact.",
+          "maxLength": 16
+        }
+      },
+      "required": [
+        "inputText",
+        "operation",
+        "dataType"
+      ]
+    },
+    "DeidentificationJob": {
       "type": "object",
       "description": "A job containing a batch of documents to deidentify.",
       "properties": {
@@ -603,15 +678,55 @@
           "$ref": "#/definitions/TargetStorageLocation",
           "description": "Target location to store output of operation."
         },
-        "dataType": {
-          "$ref": "#/definitions/DocumentDataType",
-          "description": "Data type of the input documents.",
-          "default": "PlainText"
-        },
         "operation": {
-          "$ref": "#/definitions/OperationType",
+          "type": "string",
           "description": "Operation to perform on the input documents.",
-          "default": "Surrogate"
+          "default": "Surrogate",
+          "enum": [
+            "Redact",
+            "Surrogate",
+            "Tag"
+          ],
+          "x-ms-enum": {
+            "name": "OperationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Redact",
+                "value": "Redact",
+                "description": "Redact Operation will remove all entities of PHI and replace them with a placeholder value."
+              },
+              {
+                "name": "Surrogate",
+                "value": "Surrogate",
+                "description": "Surrogation Operation will replace all entities of PHI with a surrogate value."
+              },
+              {
+                "name": "Tag",
+                "value": "Tag",
+                "description": "Tag Operation will detect all entities of PHI, their type, and return their locations in the document."
+              }
+            ]
+          }
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the input documents.",
+          "default": "PlainText",
+          "enum": [
+            "PlainText"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentDataType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PlainText",
+                "value": "PlainText",
+                "description": "Plain text data type."
+              }
+            ]
+          }
         },
         "redactionFormat": {
           "type": "string",
@@ -657,86 +772,13 @@
         "name",
         "sourceLocation",
         "targetLocation",
-        "dataType",
         "operation",
+        "dataType",
         "status",
         "createdAt"
       ]
     },
-    "DeidentifyJobCreateOrUpdate": {
-      "type": "object",
-      "description": "A job containing a batch of documents to deidentify.",
-      "properties": {
-        "sourceLocation": {
-          "$ref": "#/definitions/SourceStorageLocation",
-          "description": "Storage location to perform the operation on."
-        },
-        "targetLocation": {
-          "$ref": "#/definitions/TargetStorageLocation",
-          "description": "Target location to store output of operation."
-        },
-        "dataType": {
-          "$ref": "#/definitions/DocumentDataType",
-          "description": "Data type of the input documents.",
-          "default": "PlainText"
-        },
-        "operation": {
-          "$ref": "#/definitions/OperationType",
-          "description": "Operation to perform on the input documents.",
-          "default": "Surrogate"
-        },
-        "redactionFormat": {
-          "type": "string",
-          "description": "Format of the redacted output. Only valid when Operation is Redact.",
-          "minLength": 1,
-          "maxLength": 16
-        }
-      },
-      "required": [
-        "sourceLocation",
-        "targetLocation",
-        "dataType",
-        "operation"
-      ]
-    },
-    "DeidentifyOptions": {
-      "type": "object",
-      "description": "Request for synchronous De-Identify operation.",
-      "properties": {
-        "inputText": {
-          "type": "string",
-          "description": "Input text to deidentify.",
-          "maxLength": 100000
-        },
-        "dataType": {
-          "$ref": "#/definitions/DocumentDataType",
-          "description": "Data type of the input.",
-          "default": "PlainText"
-        },
-        "operation": {
-          "$ref": "#/definitions/OperationType",
-          "description": "Operation to perform on the input.",
-          "default": "Surrogate"
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "Requested Encoding of the tag response indices.",
-          "default": "TextElement_v8"
-        },
-        "redactionFormat": {
-          "type": "string",
-          "description": "Format of the redacted output. Only valid when OperationType is Redact.",
-          "maxLength": 16
-        }
-      },
-      "required": [
-        "inputText",
-        "dataType",
-        "operation",
-        "stringIndexType"
-      ]
-    },
-    "DeidentifyResult": {
+    "DeidentificationResult": {
       "type": "object",
       "description": "Response for synchronous De-Identify operation.",
       "properties": {
@@ -748,24 +790,6 @@
           "$ref": "#/definitions/PhiTaggerResult",
           "description": "Result of the tag operation. Only available for Tag Operation."
         }
-      }
-    },
-    "DocumentDataType": {
-      "type": "string",
-      "description": "Enum of supported Data Types.",
-      "enum": [
-        "PlainText"
-      ],
-      "x-ms-enum": {
-        "name": "DocumentDataType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PlainText",
-            "value": "PlainText",
-            "description": "Plain text data type."
-          }
-        ]
       }
     },
     "FileLocation": {
@@ -827,9 +851,9 @@
         "NotStarted",
         "Running",
         "Succeeded",
+        "PartialFailed",
         "Failed",
-        "Canceled",
-        "PartialFailed"
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "JobStatus",
@@ -837,33 +861,28 @@
         "values": [
           {
             "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "The operation has not started."
+            "value": "NotStarted"
           },
           {
             "name": "Running",
-            "value": "Running",
-            "description": "The operation is in progress."
+            "value": "Running"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation has completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation has been canceled by the user."
+            "value": "Succeeded"
           },
           {
             "name": "PartialFailed",
             "value": "PartialFailed",
             "description": "Job has completed with at least 1 file failing."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
           }
         ]
       }
@@ -906,45 +925,15 @@
         "bytesProcessed"
       ]
     },
-    "OperationType": {
-      "type": "string",
-      "description": "Enum of supported Operation Types.",
-      "enum": [
-        "Redact",
-        "Surrogate",
-        "Tag"
-      ],
-      "x-ms-enum": {
-        "name": "OperationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Redact",
-            "value": "Redact",
-            "description": "Redact Operation will remove all entities of PHI and replace them with a placeholder value."
-          },
-          {
-            "name": "Surrogate",
-            "value": "Surrogate",
-            "description": "Surrogation Operation will replace all entities of PHI with a surrogate value."
-          },
-          {
-            "name": "Tag",
-            "value": "Tag",
-            "description": "Tag Operation will detect all entities of PHI, their type, and return their locations in the document."
-          }
-        ]
-      }
-    },
-    "PagedDeidentifyJob": {
+    "PagedDeidentificationJob": {
       "type": "object",
-      "description": "Paged collection of DeidentifyJob items",
+      "description": "Paged collection of DeidentificationJob items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DeidentifyJob items on this page",
+          "description": "The DeidentificationJob items on this page",
           "items": {
-            "$ref": "#/definitions/DeidentifyJob"
+            "$ref": "#/definitions/DeidentificationJob"
           },
           "x-ms-identifiers": []
         },
@@ -1212,9 +1201,35 @@
           "x-ms-identifiers": []
         },
         "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
+          "type": "string",
           "description": "Requested Encoding of the tag response indices.",
-          "default": "TextElement_v8"
+          "default": "TextElement_v8",
+          "enum": [
+            "TextElement_v8",
+            "UnicodeCodePoint",
+            "Utf16CodeUnit"
+          ],
+          "x-ms-enum": {
+            "name": "StringIndexType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TextElement_v8",
+                "value": "TextElement_v8",
+                "description": "Iterates over graphemes as defined by the Unicode 8.0.0 standard."
+              },
+              {
+                "name": "UnicodeCodePoint",
+                "value": "UnicodeCodePoint",
+                "description": "Iterates over Unicode Code Points, the default scheme for Python 3."
+              },
+              {
+                "name": "Utf16CodeUnit",
+                "value": "Utf16CodeUnit",
+                "description": "Iterates over UTF-16 Code Units, the default scheme for JavaScript, Java, and .NET."
+              }
+            ]
+          }
         },
         "path": {
           "type": "string",
@@ -1239,8 +1254,9 @@
       "properties": {
         "location": {
           "type": "string",
-          "format": "uri",
-          "description": "URL to storage location. Must be a valid Azure Storage SAS URI."
+          "format": "password",
+          "description": "URL to storage location. Must be a valid Azure Storage SAS URI.",
+          "x-ms-secret": true
         },
         "prefix": {
           "type": "string",
@@ -1302,8 +1318,9 @@
       "properties": {
         "location": {
           "type": "string",
-          "format": "uri",
-          "description": "URL to storage location. Must be a valid Azure Storage SAS URI."
+          "format": "password",
+          "description": "URL to storage location. Must be a valid Azure Storage SAS URI.",
+          "x-ms-secret": true
         },
         "prefix": {
           "type": "string",

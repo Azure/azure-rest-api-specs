@@ -1,6 +1,6 @@
 {
   "title": "List De-Identify Jobs",
-  "operationId": "Deidentification_ListJobs",
+  "operationId": "ListJobs",
   "parameters": {
     "api-version": "2024-01-16-preview",
     "maxpagesize": 10,
@@ -14,20 +14,24 @@
           {
             "name": "documents_smith_1",
             "sourceLocation": {
-              "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
               "prefix": "/documents",
               "extensions": [
                 "*"
               ]
             },
             "targetLocation": {
-              "location": "https://blobtest.blob.core.windows.net/container?sp=r&st=2024-01-24T18:11:10Z&se=2024-01-25T02:11:10Z&spr=https&sv=2022-11-02&sr=c&sig=signature%3D",
               "prefix": "/documents"
             },
-            "dataType": "PlainText",
             "operation": "Redact",
+            "dataType": "PlainText",
             "redactionFormat": "[{type}]",
-            "status": "Succeeded",
+            "status": "NotStarted",
+            "error": {
+              "code": "FileNotFound",
+              "message": "File was moved after job started.",
+              "target": "SourceFile",
+              "details": []
+            },
             "createdAt": "2024-01-25T23:27:43.009Z",
             "startedAt": "2024-01-25T23:27:43.009Z",
             "lastUpdatedAt": "2024-01-26T01:15:00.009Z",
@@ -40,7 +44,7 @@
             }
           }
         ],
-        "nextLink": "https://deidtest.api.deid.azure.com/jobs?top=10&skip=10&maxpagesize=10"
+        "nextLink": "https://microsoft.com/a"
       }
     }
   }

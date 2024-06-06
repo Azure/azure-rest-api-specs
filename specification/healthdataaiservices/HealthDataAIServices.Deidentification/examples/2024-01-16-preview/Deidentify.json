@@ -1,12 +1,12 @@
 {
   "title": "Realtime Synchronous Deidentification.",
-  "operationId": "Deidentification_Deidentify",
+  "operationId": "Deidentify",
   "parameters": {
     "api-version": "2024-01-16-preview",
     "body": {
       "inputText": "Hello my name is John Smith.",
-      "dataType": "PlainText",
       "operation": "Redact",
+      "dataType": "PlainText",
       "stringIndexType": "TextElement_v8",
       "redactionFormat": "[{type}]"
     }
@@ -26,6 +26,7 @@
             }
           ],
           "stringIndexType": "TextElement_v8",
+          "path": "/documents/patient_doc_1",
           "etag": "0x000000000000000"
         }
       }

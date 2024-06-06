@@ -255,96 +255,95 @@ model PhiTaggerResult {
 }
 
 @doc("List of PHI Entities.")
-enum PhiCategory {
+union PhiCategory {
   @doc("Unknown PHI Type.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Account Number.")
-  Account,
+  Account: "Account",
 
   @doc("Age.")
-  Age,
+  Age: "Age",
 
   @doc("Biological Identifier, such as a fingerprint or retinal scan")
-  @projectedName("python", "BIO_ID")
-  BioID,
+  BioID: "BioID",
 
   @doc("City.")
-  City,
+  City: "City",
 
   @doc("Country or Region.")
-  CountryOrRegion,
+  CountryOrRegion: "CountryOrRegion",
 
   @doc("Date.")
-  Date,
+  Date: "Date",
 
   @doc("Device ID or serial numbers.")
-  Device,
+  Device: "Device",
 
   @doc("Doctor's Name.")
-  Doctor,
+  Doctor: "Doctor",
 
   @doc("Email Addresses.")
-  Email,
+  Email: "Email",
 
   @doc("Fax Number.")
-  Fax,
+  Fax: "Fax",
 
   @doc("Health Plan ID Numbers.")
-  HealthPlan,
+  HealthPlan: "HealthPlan",
 
   @doc("Hospital Name.")
-  Hospital,
+  Hospital: "Hospital",
 
   @doc("Id Numbers. Such as a passport number.")
-  @projectedName("python", "ID_NUM")
-  IDNum,
+  IDNum: "IDNum",
 
   @doc("IP Address.")
-  @projectedName("python", "IP_ADDRESS")
-  IPAddress,
+  IPAddress: "IPAddress",
 
   @doc("License. Such as a driver's license or medical license")
-  License,
+  License: "License",
 
   @doc("Location Other. Such as Golden Gate Park.")
-  LocationOther,
+  LocationOther: "LocationOther",
 
   @doc("Medical Record Number.")
-  MedicalRecord,
+  MedicalRecord: "MedicalRecord",
 
   @doc("Organization. Such as a company name")
-  Organization,
+  Organization: "Organization",
 
   @doc("Patient Name.")
-  Patient,
+  Patient: "Patient",
 
   @doc("Phone Number.")
-  Phone,
+  Phone: "Phone",
 
   @doc("Profession.")
-  Profession,
+  Profession: "Profession",
 
   @doc("Social Security Numbers in the US.")
-  SocialSecurity,
+  SocialSecurity: "SocialSecurity",
 
   @doc("State")
-  State,
+  State: "State",
 
   @doc("Street.")
-  Street,
+  Street: "Street",
 
   @doc("Web URL.")
-  Url,
+  Url: "Url",
 
   @doc("Usernames, such as a social media handle")
-  Username,
+  Username: "Username",
 
   @doc("Vehicle IDs, such as license plates or VIN numbers")
-  Vehicle,
+  Vehicle: "Vehicle",
 
   @doc("Zip Code.")
-  Zip,
+  Zip: "Zip",
+
+  string,
 }
 
 @doc("Phi Entity tag in the input.")
