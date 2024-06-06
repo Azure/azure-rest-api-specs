@@ -2670,7 +2670,7 @@
           "readOnly": true
         },
         "kind": {
-          "description": "Kind of resource.",
+          "description": "Kind of resource. If the resouce is an app, you can refer to https://github.com/Azure/app-service-linux-docs/blob/master/Things_You_Should_Know/kind_property.md#app-service-resource-kind-reference for details supported values for kind.",
           "type": "string"
         },
         "location": {
@@ -3119,6 +3119,11 @@
             "managedEnvironmentId": {
               "description": "Azure Resource Manager ID of the customer's selected Managed Environment on which to host this app. This must be of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}",
               "type": "string"
+            },
+            "sku": {
+              "description": "Current SKU of application based on associated App Service Plan. Some valid SKU values are Free, Shared, Basic, Dynamic, FlexConsumption, Standard, Premium, PremiumV2, PremiumV3, Isolated, IsolatedV2",
+              "type": "string",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
