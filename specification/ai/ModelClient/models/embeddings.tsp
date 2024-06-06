@@ -22,9 +22,7 @@ alias EmbeddingsOptions = {
   dimensions?: int32;
 
   @doc("""
-  Optional. The number of dimensions the resulting output embeddings should have.
-  Passing null causes the model to use its default value.
-  Returns a 422 error if the model doesn't support the value or parameter.
+  Optional. The desired format for the returned embeddings.
   """)
   encoding_format?: EmbeddingEncodingFormat;
 

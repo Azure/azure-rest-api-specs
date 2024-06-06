@@ -18,7 +18,8 @@ namespace ModelClient;
 @doc("""
 Gets chat completions for the provided chat messages.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
+provided prompt data. The method makes a REST API call to the `/chat/completions` route 
+on the given endpoint.
 """)
 @actionSeparator("/")
 @route("chat/completions")
@@ -30,7 +31,10 @@ op getChatCompletions is Azure.Core.RpcOperation<
   ChatCompletions
 >;
 
-@doc("Return the embeddings for a given text prompt.")
+@doc("""
+Return the embedding vectors for given text prompts.
+The method makes a REST API call to the `/embeddings` route on the given endpoint.
+""")
 @actionSeparator("/")
 @route("embeddings")
 op getEmbeddings is Azure.Core.RpcOperation<
@@ -41,7 +45,10 @@ op getEmbeddings is Azure.Core.RpcOperation<
   EmbeddingsResult
 >;
 
-@doc("Return the embeddings for given images.")
+@doc("""
+Return the embedding vectors for given images.
+The method makes a REST API call to the `/images/embeddings` route on the given endpoint.
+""")
 @actionSeparator("/")
 @route("images/embeddings")
 op getImageEmbeddings is Azure.Core.RpcOperation<
@@ -52,7 +59,10 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
   EmbeddingsResult
 >;
 
-@doc("Returns information about the AI model.")
+@doc("""
+Returns information about the AI model.
+The method makes a REST API call to the `/info` route on the given endpoint.
+""")
 @actionSeparator("/")
 @route("info")
 @get

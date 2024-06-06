@@ -24,6 +24,7 @@ alias ChatCompletionsOptions = {
   frequency in generated text.
   Positive values will make tokens less likely to appear as their frequency increases and
   decrease the likelihood of the model repeating the same statements verbatim.
+  Supported range is [-2, 2].
   """)
   @maxValue(2.0)
   @minValue(-2.0)
@@ -39,6 +40,7 @@ alias ChatCompletionsOptions = {
   presence in generated text.
   Positive values will make tokens less likely to appear when they already exist and increase the
   model's likelihood to output new topics.
+  Supported range is [-2, 2].
   """)
   @maxValue(2.0)
   @minValue(-2.0)
@@ -50,6 +52,7 @@ alias ChatCompletionsOptions = {
   and deterministic.
   It is not recommended to modify temperature and top_p for the same completions request as the
   interaction of these two settings is difficult to predict.
+  Supported range is [0, 1].
   """)
   @maxValue(1.0)
   @minValue(0.0)
@@ -62,6 +65,7 @@ alias ChatCompletionsOptions = {
   considered.
   It is not recommended to modify temperature and top_p for the same completions request as the
   interaction of these two settings is difficult to predict.
+  Supported range is [0, 1].
   """)
   @maxValue(1.0)
   @minValue(0.0)
@@ -161,8 +165,6 @@ Counts consider all tokens across prompts, choices, choice alternates, best_of g
 other consumers.
 """)
 model CompletionsUsage {
-  ...CapacityAlias;
-
   @doc("The number of tokens generated across all completions emissions.")
   completion_tokens: int32;
 

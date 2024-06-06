@@ -85,8 +85,6 @@ model EmbeddingItem {
 
 @doc("Measurement of the amount of tokens used in this request and response.")
 model EmbeddingsUsage {
-  ...CapacityAlias;
-
   @doc("Number of tokens in the request prompt.")
   input_tokens: int32;
 
@@ -157,20 +155,4 @@ union UnknownParams {
 
   @doc("The service will pass unknown parameters to the back-end AI model.")
   pass_through: "pass_through",
-}
-
-alias CapacityAlias = {
-  @doc("Indicates whether your capacity has been affected by the usage amount (token count) reported here.")
-  capacity_type: CapacityType;
-};
-
-@doc("Whether your capacity has been affected by the usage amount (token count) reported here.")
-union CapacityType {
-  string,
-
-  @doc("Your capacity has been affected by the usage amount (token count) reported here.")
-  usage: "usage",
-
-  @doc("Your capacity has not been affected by the usage amount (token count) reported here.")
-  fixed: "fixed",
 }
