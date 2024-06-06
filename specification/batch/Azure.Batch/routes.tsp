@@ -18,8 +18,8 @@ namespace Azure.Batch;
 // Interfaces ////////////////////
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@tag("Application")
-interface Application {
+@tag("Applications")
+interface Applications {
   @summary("Lists all of the applications available in the specified Account.")
   @doc("""
     This operation returns only Applications and versions that are available for
@@ -56,8 +56,8 @@ interface Application {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" ""
-@tag("Pool")
-interface Pool {
+@tag("Pools")
+interface Pools {
   @summary("""
     Lists the usage metrics, aggregated by Pool across individual time intervals,
     for the specified Account.
@@ -390,8 +390,8 @@ interface Pool {
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
-@tag("Job")
-interface Job {
+@tag("Jobs")
+interface Jobs {
   @summary("Deletes a Job.")
   @doc("""
     Deleting a Job also deletes all Tasks that are part of that Job, and all Job
@@ -705,8 +705,8 @@ interface Job {
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@tag("Job Schedule")
-interface JobSchedule {
+@tag("Job Schedules")
+interface JobSchedules {
   @summary("Checks the specified Job Schedule exists.")
   @doc("Checks the specified Job Schedule exists.")
   @route("/jobschedules/{jobScheduleId}")
@@ -900,8 +900,8 @@ interface JobSchedule {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-@tag("Task")
-interface Task {
+@tag("Tasks")
+interface Tasks {
   @summary("Creates a Task to the specified Job.")
   @doc("""
     The maximum lifetime of a Task from addition to completion is 180 days. If a
@@ -1244,8 +1244,8 @@ interface Task {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-@tag("Node")
-interface Node {
+@tag("Nodes")
+interface Nodes {
   @summary("Adds a user Account to the specified Compute Node.")
   @doc("""
     You can add a user Account to a Compute Node only when it is in the idle or
