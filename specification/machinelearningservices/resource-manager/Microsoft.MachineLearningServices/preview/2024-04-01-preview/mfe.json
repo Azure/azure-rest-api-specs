@@ -7047,17 +7047,12 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "in": "query",
-            "name": "expirableSecret",
-            "type": "boolean",
-            "default": false
-          },
-          {
-            "in": "query",
-            "name": "expireAfterHours",
-            "type": "integer",
-            "format": "int32",
-            "default": 1
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecretExpiry"
+            }
           }
         ],
         "responses": {
@@ -28551,6 +28546,19 @@
             "read"
           ],
           "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "SecretExpiry": {
+      "type": "object",
+      "properties": {
+        "expirableSecret": {
+          "type": "boolean"
+        },
+        "expireAfterHours": {
+          "format": "int32",
+          "type": "integer"
         }
       },
       "additionalProperties": false
