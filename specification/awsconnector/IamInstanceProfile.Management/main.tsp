@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-portal-core";
 import "@typespec/openapi";
 import "../shared/main.tsp";
 
@@ -14,6 +15,7 @@ using OpenAPI;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
+using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
@@ -34,6 +36,13 @@ enum Versions {
 
 //---------------------------------------------- IamInstanceProfiles ----------------------------------------------
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+@about({
+  displayNames: {
+    singular: "IAM Instance Profile",
+    plural: "IAM Instance Profiles",
+  },
+  keywords: ["Microsoft.AwsConnector", "IAM", "Instance", "Profiles"],
+})
 @doc("A Microsoft.AwsConnector resource")
 model IamInstanceProfile is TrackedResource<IamInstanceProfileProperties> {
   @doc("Name of IamInstanceProfile")

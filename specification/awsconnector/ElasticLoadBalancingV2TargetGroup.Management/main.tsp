@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-portal-core";
 import "@typespec/openapi";
 import "../shared/main.tsp";
 
@@ -14,6 +15,7 @@ using OpenAPI;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
+using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
@@ -34,6 +36,21 @@ enum Versions {
 
 //---------------------------------------------- ElasticLoadBalancingV2TargetGroups ----------------------------------------------
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+@about({
+  displayNames: {
+    singular: "Elastic Load Balancing V2 Target Group",
+    plural: "Elastic Load Balancing V2 Target Groups",
+  },
+  keywords: [
+    "Microsoft.AwsConnector",
+    "Elastic",
+    "Load",
+    "Balancing",
+    "V2",
+    "Target",
+    "Groups"
+  ],
+})
 @doc("A Microsoft.AwsConnector resource")
 model ElasticLoadBalancingV2TargetGroup
   is TrackedResource<ElasticLoadBalancingV2TargetGroupProperties> {

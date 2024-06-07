@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-portal-core";
 import "@typespec/openapi";
 import "../shared/main.tsp";
 
@@ -14,6 +15,7 @@ using OpenAPI;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
+using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
@@ -34,6 +36,13 @@ enum Versions {
 
 //---------------------------------------------- Route53HostedZones ----------------------------------------------
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+@about({
+  displayNames: {
+    singular: "Route53 Hosted Zone",
+    plural: "Route53 Hosted Zones",
+  },
+  keywords: ["Microsoft.AwsConnector", "Route53", "Hosted", "Zones"],
+})
 @doc("A Microsoft.AwsConnector resource")
 model Route53HostedZone is TrackedResource<Route53HostedZoneProperties> {
   @doc("Name of Route53HostedZone")
