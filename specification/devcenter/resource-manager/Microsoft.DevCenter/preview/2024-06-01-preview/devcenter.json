@@ -2641,6 +2641,237 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "description": "Lists images for a project.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+          }
+        ],
+        "operationId": "Images_ListByProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_ListByProject": {
+            "$ref": "./examples/Images_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/images/{imageName}": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "description": "Gets an image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectImageNameParameter"
+          }
+        ],
+        "operationId": "Images_GetByProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_GetByProject": {
+            "$ref": "./examples/Images_GetByProject.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/images/{imageName}/versions": {
+      "get": {
+        "tags": [
+          "Image Versions"
+        ],
+        "description": "Lists versions for an image.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectImageNameParameter"
+          }
+        ],
+        "operationId": "ImageVersions_ListByProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageVersions_ListByProject": {
+            "$ref": "./examples/ImageVersions_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/images/{imageName}/versions/{versionName}": {
+      "get": {
+        "tags": [
+          "Image Versions"
+        ],
+        "description": "Gets an image version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectImageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          }
+        ],
+        "operationId": "ImageVersions_GetByProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageVersions_GetByProject": {
+            "$ref": "./examples/ImageVersions_GetByProject.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/listSkus": {
+      "post": {
+        "tags": [
+          "Project SKUs"
+        ],
+        "description": "Lists SKUs available to the project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          }
+        ],
+        "operationId": "Skus_ListByProject",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "vdi.json#/definitions/SkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_ListByProject": {
+            "$ref": "./examples/Skus_ListByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/attachednetworks": {
       "get": {
         "tags": [
@@ -4700,6 +4931,107 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "List Image Definitions in the catalog.",
+        "operationId": "ProjectCatalogImageDefinitions_ListByProjectCatalog",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ImageDefinitions_ListByProjectCatalog": {
+            "$ref": "./examples/ImageDefinitions_ListByProjectCatalog.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets an Image Definition from the catalog",
+        "operationId": "ProjectCatalogImageDefinitions_GetByProjectCatalog",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageDefinitions_GetByProjectCatalog": {
+            "$ref": "./examples/ImageDefinitions_GetByProjectCatalog.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6297,7 +6629,8 @@
     "CatalogItemType": {
       "description": "Indicates catalog item types.",
       "enum": [
-        "EnvironmentDefinition"
+        "EnvironmentDefinition",
+        "ImageDefinition"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -6648,6 +6981,54 @@
           "type": "string"
         }
       }
+    },
+    "ImageDefinitionListResult": {
+      "description": "Results of the Image Definition list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageDefinition"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageDefinition": {
+      "description": "Represents a definition for an Image.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Image Definition properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImageDefinitionProperties"
+        }
+      }
+    },
+    "ImageDefinitionProperties": {
+      "description": "Properties of an Image Definition.",
+      "type": "object",
+      "properties": {
+        "imageReference": {
+          "$ref": "vdi.json#/definitions/ImageReference",
+          "description": "Image reference information."
+        }
+      },
+      "required": [
+        "imageReference"
+      ]
     }
   },
   "parameters": {
@@ -6739,6 +7120,17 @@
       "minLength": 3,
       "maxLength": 80
     },
+    "ProjectImageNameParameter": {
+      "name": "imageName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the image.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9~][a-zA-Z0-9-.~]{0,151}[a-zA-Z0-9]$",
+      "minLength": 3,
+      "maxLength": 153
+    },
     "VersionNameParameter": {
       "name": "versionName",
       "in": "path",
@@ -6828,7 +7220,17 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63
+    },
+    "ImageDefinitionNameParameter": {
+      "name": "imageDefinitionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Image Definition.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63
     }
   }
 }
-

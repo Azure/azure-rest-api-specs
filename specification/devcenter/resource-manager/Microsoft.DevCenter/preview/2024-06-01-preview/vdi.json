@@ -221,6 +221,9 @@
           },
           "Pools_CreateOrUpdateWithManagedNetwork": {
             "$ref": "./examples/Pools_PutWithManagedNetwork.json"
+          },
+          "Pools_CreateOrUpdateWithValueDevBoxDefinition": {
+            "$ref": "./examples/Pools_PutWithValueDevBoxDefinition.json"
           }
         }
       },
@@ -1091,9 +1094,17 @@
       "description": "Properties of a Pool. These properties can be updated after the resource has been created.",
       "type": "object",
       "properties": {
+        "devBoxDefinitionType": {
+          "description": "Indicates if the pool is created from an existing Dev Box Definition or if one is provided directly.",
+          "$ref": "#/definitions/PoolDevBoxDefinitionType"
+        },
         "devBoxDefinitionName": {
-          "description": "Name of a Dev Box definition in parent Project of this Pool",
+          "description": "Name of a Dev Box definition in parent Project of this Pool. Will be ignored if devBoxDefinitionType is Value.",
           "type": "string"
+        },
+        "devBoxDefinition": {
+          "description": "A definition of the machines that are created from this Pool. Will be ignored if devBoxDefinitionType is Reference or not provided.",
+          "$ref": "#/definitions/PoolDevBoxDefinition"
         },
         "networkConnectionName": {
           "description": "Name of a Network Connection in parent Project of this Pool",
@@ -1176,6 +1187,25 @@
         "localAdministrator"
       ]
     },
+    "PoolDevBoxDefinition": {
+      "description": "Represents a definition for a Developer Machine.",
+      "type": "object",
+      "properties": {
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "Image reference information."
+        },
+        "sku": {
+          "description": "The SKU for Dev Boxes created from the Pool.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku"
+        },
+        "activeImageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "description": "Image reference information for the currently active image (only populated during updates).",
+          "readOnly": true
+        }
+      }
+    },
     "HealthStatus": {
       "description": "Health status indicating whether a pool is available to create Dev Boxes.",
       "enum": [
@@ -1251,6 +1281,18 @@
       ],
       "x-ms-enum": {
         "name": "VirtualNetworkType",
+        "modelAsString": true
+      }
+    },
+    "PoolDevBoxDefinitionType": {
+      "description": "Indicates if the pool is created from an existing Dev Box Definition or if one is provided directly.",
+      "type": "string",
+      "enum": [
+        "Reference",
+        "Value"
+      ],
+      "x-ms-enum": {
+        "name": "PoolDevBoxDefinitionType",
         "modelAsString": true
       }
     },
@@ -1914,4 +1956,3 @@
     }
   }
 }
-
