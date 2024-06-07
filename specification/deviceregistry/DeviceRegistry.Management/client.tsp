@@ -6,7 +6,10 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.DeviceRegistry;
 
 @@clientName(Asset, "DeviceRegistryAsset", "csharp");
-@@clientName(AssetEndpointProfile, "DeviceRegistryAssetEndpointProfile", "csharp");
+@@clientName(AssetEndpointProfile,
+  "DeviceRegistryAssetEndpointProfile",
+  "csharp"
+);
 @@clientName(ExtendedLocation, "DeviceRegistryExtendedLocation", "csharp");
 @@clientName(Event, "AssetEvent", "csharp");
 @@clientName(ProvisioningState, "DeviceRegistryProvisioningState", "csharp");

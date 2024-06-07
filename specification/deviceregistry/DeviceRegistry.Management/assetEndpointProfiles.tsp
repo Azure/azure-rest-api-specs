@@ -123,10 +123,7 @@ interface AssetEndpointProfiles {
   createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
 
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    AssetEndpointProfile,
-    AssetEndpointProfile
-  >;
+  update is ArmCustomPatchAsync<AssetEndpointProfile, AssetEndpointProfile>;
 
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;
 
