@@ -41,7 +41,7 @@ enum Versions {
     singular: "Lambda Function",
     plural: "Lambda Functions",
   },
-  keywords: ["Microsoft.AwsConnector", "Lambda", "Functions"],
+  keywords: ["Microsoft.AwsConnector", "Lambda", "Function"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model LambdaFunction is TrackedResource<LambdaFunctionProperties> {

@@ -47,7 +47,7 @@ enum Versions {
     "Load",
     "Balancing",
     "V2",
-    "Listeners"
+    "Listener"
   ],
 })
 @doc("A Microsoft.AwsConnector resource")

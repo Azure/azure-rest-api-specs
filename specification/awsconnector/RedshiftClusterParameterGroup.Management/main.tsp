@@ -46,7 +46,7 @@ enum Versions {
     "Redshift",
     "Cluster",
     "Parameter",
-    "Groups"
+    "Group"
   ],
 })
 @doc("A Microsoft.AwsConnector resource")

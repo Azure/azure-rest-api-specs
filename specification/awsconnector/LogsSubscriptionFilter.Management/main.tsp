@@ -41,7 +41,7 @@ enum Versions {
     singular: "Logs Subscription Filter",
     plural: "Logs Subscription Filters",
   },
-  keywords: ["Microsoft.AwsConnector", "Logs", "Subscription", "Filters"],
+  keywords: ["Microsoft.AwsConnector", "Logs", "Subscription", "Filter"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model LogsSubscriptionFilter

@@ -41,7 +41,7 @@ enum Versions {
     singular: "Macie Allow List",
     plural: "Macie Allow Lists",
   },
-  keywords: ["Microsoft.AwsConnector", "Macie", "Allow", "Lists"],
+  keywords: ["Microsoft.AwsConnector", "Macie", "Allow", "List"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model MacieAllowList is TrackedResource<MacieAllowListProperties> {

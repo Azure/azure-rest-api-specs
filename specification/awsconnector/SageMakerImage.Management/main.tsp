@@ -41,7 +41,7 @@ enum Versions {
     singular: "Sage Maker Image",
     plural: "Sage Maker Images",
   },
-  keywords: ["Microsoft.AwsConnector", "Sage", "Maker", "Images"],
+  keywords: ["Microsoft.AwsConnector", "Sage", "Maker", "Image"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model SageMakerImage is TrackedResource<SageMakerImageProperties> {

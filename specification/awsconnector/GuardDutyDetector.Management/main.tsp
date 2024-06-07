@@ -41,7 +41,7 @@ enum Versions {
     singular: "Guard Duty Detector",
     plural: "Guard Duty Detectors",
   },
-  keywords: ["Microsoft.AwsConnector", "Guard", "Duty", "Detectors"],
+  keywords: ["Microsoft.AwsConnector", "Guard", "Duty", "Detector"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model GuardDutyDetector is TrackedResource<GuardDutyDetectorProperties> {

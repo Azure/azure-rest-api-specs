@@ -41,7 +41,7 @@ enum Versions {
     singular: "Cloud Formation Stack Set",
     plural: "Cloud Formation Stack Sets",
   },
-  keywords: ["Microsoft.AwsConnector", "Cloud", "Formation", "Stack", "Sets"],
+  keywords: ["Microsoft.AwsConnector", "Cloud", "Formation", "Stack", "Set"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model CloudFormationStackSet

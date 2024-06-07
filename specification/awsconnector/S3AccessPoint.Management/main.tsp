@@ -41,7 +41,7 @@ enum Versions {
     singular: "S3 Access Point",
     plural: "S3 Access Points",
   },
-  keywords: ["Microsoft.AwsConnector", "S3", "Access", "Points"],
+  keywords: ["Microsoft.AwsConnector", "S3", "Access", "Point"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model S3AccessPoint is TrackedResource<S3AccessPointProperties> {

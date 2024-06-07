@@ -41,7 +41,7 @@ enum Versions {
     singular: "Api Gateway Rest Api",
     plural: "Api Gateway Rest Apis",
   },
-  keywords: ["Microsoft.AwsConnector", "Api", "Gateway", "Rest", "Apis"],
+  keywords: ["Microsoft.AwsConnector", "Api", "Gateway", "Rest", "Api"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model ApiGatewayRestApi is TrackedResource<ApiGatewayRestApiProperties> {

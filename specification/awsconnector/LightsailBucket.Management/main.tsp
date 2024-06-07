@@ -41,7 +41,7 @@ enum Versions {
     singular: "Lightsail Bucket",
     plural: "Lightsail Buckets",
   },
-  keywords: ["Microsoft.AwsConnector", "Lightsail", "Buckets"],
+  keywords: ["Microsoft.AwsConnector", "Lightsail", "Bucket"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model LightsailBucket is TrackedResource<LightsailBucketProperties> {

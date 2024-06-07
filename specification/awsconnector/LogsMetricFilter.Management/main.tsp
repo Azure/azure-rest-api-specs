@@ -41,7 +41,7 @@ enum Versions {
     singular: "Logs Metric Filter",
     plural: "Logs Metric Filters",
   },
-  keywords: ["Microsoft.AwsConnector", "Logs", "Metric", "Filters"],
+  keywords: ["Microsoft.AwsConnector", "Logs", "Metric", "Filter"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model LogsMetricFilter is TrackedResource<LogsMetricFilterProperties> {

@@ -41,7 +41,7 @@ enum Versions {
     singular: "EC2 Route Table",
     plural: "EC2 Route Tables",
   },
-  keywords: ["Microsoft.AwsConnector", "EC2", "Route", "Tables"],
+  keywords: ["Microsoft.AwsConnector", "EC2", "Route", "Table"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Ec2RouteTable is TrackedResource<Ec2RouteTableProperties> {

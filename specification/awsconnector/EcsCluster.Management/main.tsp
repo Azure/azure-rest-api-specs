@@ -41,7 +41,7 @@ enum Versions {
     singular: "ECS Cluster",
     plural: "ECS Clusters",
   },
-  keywords: ["Microsoft.AwsConnector", "ECS", "Clusters"],
+  keywords: ["Microsoft.AwsConnector", "ECS", "Cluster"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model EcsCluster is TrackedResource<EcsClusterProperties> {

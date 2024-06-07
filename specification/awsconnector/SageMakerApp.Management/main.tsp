@@ -41,7 +41,7 @@ enum Versions {
     singular: "Sage Maker App",
     plural: "Sage Maker Apps",
   },
-  keywords: ["Microsoft.AwsConnector", "Sage", "Maker", "Apps"],
+  keywords: ["Microsoft.AwsConnector", "Sage", "Maker", "App"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model SageMakerApp is TrackedResource<SageMakerAppProperties> {

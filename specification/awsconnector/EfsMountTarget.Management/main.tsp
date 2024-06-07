@@ -41,7 +41,7 @@ enum Versions {
     singular: "EFS Mount Target",
     plural: "EFS Mount Targets",
   },
-  keywords: ["Microsoft.AwsConnector", "EFS", "Mount", "Targets"],
+  keywords: ["Microsoft.AwsConnector", "EFS", "Mount", "Target"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model EfsMountTarget is TrackedResource<EfsMountTargetProperties> {

@@ -41,7 +41,7 @@ enum Versions {
     singular: "SNS Topic",
     plural: "SNS Topics",
   },
-  keywords: ["Microsoft.AwsConnector", "SNS", "Topics"],
+  keywords: ["Microsoft.AwsConnector", "SNS", "Topic"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model SnsTopic is TrackedResource<SnsTopicProperties> {

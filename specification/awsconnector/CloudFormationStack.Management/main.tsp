@@ -41,7 +41,7 @@ enum Versions {
     singular: "Cloud Formation Stack",
     plural: "Cloud Formation Stacks",
   },
-  keywords: ["Microsoft.AwsConnector", "Cloud", "Formation", "Stacks"],
+  keywords: ["Microsoft.AwsConnector", "Cloud", "Formation", "Stack"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model CloudFormationStack is TrackedResource<CloudFormationStackProperties> {

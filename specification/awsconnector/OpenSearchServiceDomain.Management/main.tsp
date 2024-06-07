@@ -41,7 +41,7 @@ enum Versions {
     singular: "Open Search Service Domain",
     plural: "Open Search Service Domains",
   },
-  keywords: ["Microsoft.AwsConnector", "Open", "Search", "Service", "Domains"],
+  keywords: ["Microsoft.AwsConnector", "Open", "Search", "Service", "Domain"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model OpenSearchServiceDomain

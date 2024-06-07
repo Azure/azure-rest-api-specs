@@ -41,7 +41,7 @@ enum Versions {
     singular: "Network Firewall Rule Group",
     plural: "Network Firewall Rule Groups",
   },
-  keywords: ["Microsoft.AwsConnector", "Network", "Firewall", "Rule", "Groups"],
+  keywords: ["Microsoft.AwsConnector", "Network", "Firewall", "Rule", "Group"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model NetworkFirewallRuleGroup

@@ -41,7 +41,7 @@ enum Versions {
     singular: "Route53 Hosted Zone",
     plural: "Route53 Hosted Zones",
   },
-  keywords: ["Microsoft.AwsConnector", "Route53", "Hosted", "Zones"],
+  keywords: ["Microsoft.AwsConnector", "Route53", "Hosted", "Zone"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Route53HostedZone is TrackedResource<Route53HostedZoneProperties> {

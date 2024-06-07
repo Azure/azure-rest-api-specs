@@ -41,7 +41,7 @@ enum Versions {
     singular: "Cloud Trail Trail",
     plural: "Cloud Trail Trails",
   },
-  keywords: ["Microsoft.AwsConnector", "Cloud", "Trail", "Trails"],
+  keywords: ["Microsoft.AwsConnector", "Cloud", "Trail", "Trail"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model CloudTrailTrail is TrackedResource<CloudTrailTrailProperties> {

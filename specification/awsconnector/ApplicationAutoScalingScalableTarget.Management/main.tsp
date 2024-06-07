@@ -47,7 +47,7 @@ enum Versions {
     "Auto",
     "Scaling",
     "Scalable",
-    "Targets"
+    "Target"
   ],
 })
 @doc("A Microsoft.AwsConnector resource")

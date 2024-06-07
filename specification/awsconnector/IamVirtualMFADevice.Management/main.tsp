@@ -41,7 +41,7 @@ enum Versions {
     singular: "IAM Virtual MFADevice",
     plural: "IAM Virtual MFADevices",
   },
-  keywords: ["Microsoft.AwsConnector", "IAM", "Virtual", "MFADevices"],
+  keywords: ["Microsoft.AwsConnector", "IAM", "Virtual", "MFADevice"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model IamVirtualMFADevice is TrackedResource<IamVirtualMFADeviceProperties> {

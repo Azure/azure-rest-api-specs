@@ -41,7 +41,7 @@ enum Versions {
     singular: "Cloud Watch Alarm",
     plural: "Cloud Watch Alarms",
   },
-  keywords: ["Microsoft.AwsConnector", "Cloud", "Watch", "Alarms"],
+  keywords: ["Microsoft.AwsConnector", "Cloud", "Watch", "Alarm"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model CloudWatchAlarm is TrackedResource<CloudWatchAlarmProperties> {

@@ -41,7 +41,7 @@ enum Versions {
     singular: "Api Gateway Stage",
     plural: "Api Gateway Stages",
   },
-  keywords: ["Microsoft.AwsConnector", "Api", "Gateway", "Stages"],
+  keywords: ["Microsoft.AwsConnector", "Api", "Gateway", "Stage"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model ApiGatewayStage is TrackedResource<ApiGatewayStageProperties> {

@@ -41,7 +41,7 @@ enum Versions {
     singular: "IAM Managed Policy",
     plural: "IAM Managed Policies",
   },
-  keywords: ["Microsoft.AwsConnector", "IAM", "Managed", "Policies"],
+  keywords: ["Microsoft.AwsConnector", "IAM", "Managed", "Policy"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model IamManagedPolicy is TrackedResource<IamManagedPolicyProperties> {

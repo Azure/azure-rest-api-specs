@@ -41,7 +41,7 @@ enum Versions {
     singular: "RDS DBInstance",
     plural: "RDS DBInstances",
   },
-  keywords: ["Microsoft.AwsConnector", "RDS", "DBInstances"],
+  keywords: ["Microsoft.AwsConnector", "RDS", "DBInstance"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model RdsDBInstance is TrackedResource<RdsDBInstanceProperties> {

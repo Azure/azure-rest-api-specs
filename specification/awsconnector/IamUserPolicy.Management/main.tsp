@@ -41,7 +41,7 @@ enum Versions {
     singular: "IAM User Policy",
     plural: "IAM User Policies",
   },
-  keywords: ["Microsoft.AwsConnector", "IAM", "User", "Policies"],
+  keywords: ["Microsoft.AwsConnector", "IAM", "User", "Policy"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model IamUserPolicy is TrackedResource<IamUserPolicyProperties> {

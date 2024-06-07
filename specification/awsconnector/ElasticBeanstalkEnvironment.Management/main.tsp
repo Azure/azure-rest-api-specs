@@ -41,7 +41,7 @@ enum Versions {
     singular: "Elastic Beanstalk Environment",
     plural: "Elastic Beanstalk Environments",
   },
-  keywords: ["Microsoft.AwsConnector", "Elastic", "Beanstalk", "Environments"],
+  keywords: ["Microsoft.AwsConnector", "Elastic", "Beanstalk", "Environment"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model ElasticBeanstalkEnvironment

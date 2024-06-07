@@ -41,7 +41,7 @@ enum Versions {
     singular: "EKS Nodegroup",
     plural: "EKS Nodegroups",
   },
-  keywords: ["Microsoft.AwsConnector", "EKS", "Nodegroups"],
+  keywords: ["Microsoft.AwsConnector", "EKS", "Nodegroup"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model EksNodegroup is TrackedResource<EksNodegroupProperties> {

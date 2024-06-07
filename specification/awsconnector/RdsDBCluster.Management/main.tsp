@@ -41,7 +41,7 @@ enum Versions {
     singular: "RDS DBCluster",
     plural: "RDS DBClusters",
   },
-  keywords: ["Microsoft.AwsConnector", "RDS", "DBClusters"],
+  keywords: ["Microsoft.AwsConnector", "RDS", "DBCluster"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model RdsDBCluster is TrackedResource<RdsDBClusterProperties> {

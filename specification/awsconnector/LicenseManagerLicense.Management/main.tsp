@@ -41,7 +41,7 @@ enum Versions {
     singular: "License Manager License",
     plural: "License Manager Licenses",
   },
-  keywords: ["Microsoft.AwsConnector", "License", "Manager", "Licenses"],
+  keywords: ["Microsoft.AwsConnector", "License", "Manager", "License"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model LicenseManagerLicense

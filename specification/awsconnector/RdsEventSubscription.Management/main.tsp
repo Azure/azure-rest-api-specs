@@ -41,7 +41,7 @@ enum Versions {
     singular: "RDS Event Subscription",
     plural: "RDS Event Subscriptions",
   },
-  keywords: ["Microsoft.AwsConnector", "RDS", "Event", "Subscriptions"],
+  keywords: ["Microsoft.AwsConnector", "RDS", "Event", "Subscription"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model RdsEventSubscription is TrackedResource<RdsEventSubscriptionProperties> {

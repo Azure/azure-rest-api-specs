@@ -41,7 +41,7 @@ enum Versions {
     singular: "EC2 Key Pair",
     plural: "EC2 Key Pairs",
   },
-  keywords: ["Microsoft.AwsConnector", "EC2", "Key", "Pairs"],
+  keywords: ["Microsoft.AwsConnector", "EC2", "Key", "Pair"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Ec2KeyPair is TrackedResource<Ec2KeyPairProperties> {

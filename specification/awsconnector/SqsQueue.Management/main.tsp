@@ -41,7 +41,7 @@ enum Versions {
     singular: "SQS Queue",
     plural: "SQS Queues",
   },
-  keywords: ["Microsoft.AwsConnector", "SQS", "Queues"],
+  keywords: ["Microsoft.AwsConnector", "SQS", "Queue"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model SqsQueue is TrackedResource<SqsQueueProperties> {

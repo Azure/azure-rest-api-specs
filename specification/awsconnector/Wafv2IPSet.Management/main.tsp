@@ -41,7 +41,7 @@ enum Versions {
     singular: "WAFv2 IPSet",
     plural: "WAFv2 IPSets",
   },
-  keywords: ["Microsoft.AwsConnector", "WAFv2", "IPSets"],
+  keywords: ["Microsoft.AwsConnector", "WAFv2", "IPSet"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Wafv2IPSet is TrackedResource<Wafv2IPSetProperties> {

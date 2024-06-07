@@ -41,7 +41,7 @@ enum Versions {
     singular: "Network Firewall Firewall",
     plural: "Network Firewall Firewalls",
   },
-  keywords: ["Microsoft.AwsConnector", "Network", "Firewall", "Firewalls"],
+  keywords: ["Microsoft.AwsConnector", "Network", "Firewall", "Firewall"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model NetworkFirewallFirewall

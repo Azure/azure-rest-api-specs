@@ -41,7 +41,7 @@ enum Versions {
     singular: "S3 Bucket",
     plural: "S3 Buckets",
   },
-  keywords: ["Microsoft.AwsConnector", "S3", "Buckets"],
+  keywords: ["Microsoft.AwsConnector", "S3", "Bucket"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model S3Bucket is TrackedResource<S3BucketProperties> {

@@ -41,7 +41,7 @@ enum Versions {
     singular: "EC2 Security Group",
     plural: "EC2 Security Groups",
   },
-  keywords: ["Microsoft.AwsConnector", "EC2", "Security", "Groups"],
+  keywords: ["Microsoft.AwsConnector", "EC2", "Security", "Group"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Ec2SecurityGroup is TrackedResource<Ec2SecurityGroupProperties> {

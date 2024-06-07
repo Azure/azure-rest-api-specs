@@ -41,7 +41,7 @@ enum Versions {
     singular: "KMS Key",
     plural: "KMS Keys",
   },
-  keywords: ["Microsoft.AwsConnector", "KMS", "Keys"],
+  keywords: ["Microsoft.AwsConnector", "KMS", "Key"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model KmsKey is TrackedResource<KmsKeyProperties> {

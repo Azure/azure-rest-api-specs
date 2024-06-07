@@ -41,7 +41,7 @@ enum Versions {
     singular: "EC2 Instance Status",
     plural: "EC2 Instance Statuses",
   },
-  keywords: ["Microsoft.AwsConnector", "EC2", "Instance", "Statuses"],
+  keywords: ["Microsoft.AwsConnector", "EC2", "Instance", "Status"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Ec2InstanceStatus is TrackedResource<Ec2InstanceStatusProperties> {

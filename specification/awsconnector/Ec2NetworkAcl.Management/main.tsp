@@ -41,7 +41,7 @@ enum Versions {
     singular: "EC2 Network Acl",
     plural: "EC2 Network Acls",
   },
-  keywords: ["Microsoft.AwsConnector", "EC2", "Network", "Acls"],
+  keywords: ["Microsoft.AwsConnector", "EC2", "Network", "Acl"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Ec2NetworkAcl is TrackedResource<Ec2NetworkAclProperties> {

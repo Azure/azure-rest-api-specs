@@ -41,7 +41,7 @@ enum Versions {
     singular: "Logs Log Group",
     plural: "Logs Log Groups",
   },
-  keywords: ["Microsoft.AwsConnector", "Logs", "Log", "Groups"],
+  keywords: ["Microsoft.AwsConnector", "Logs", "Log", "Group"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model LogsLogGroup is TrackedResource<LogsLogGroupProperties> {

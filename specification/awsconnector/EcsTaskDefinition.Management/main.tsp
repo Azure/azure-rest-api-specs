@@ -41,7 +41,7 @@ enum Versions {
     singular: "ECS Task Definition",
     plural: "ECS Task Definitions",
   },
-  keywords: ["Microsoft.AwsConnector", "ECS", "Task", "Definitions"],
+  keywords: ["Microsoft.AwsConnector", "ECS", "Task", "Definition"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model EcsTaskDefinition is TrackedResource<EcsTaskDefinitionProperties> {

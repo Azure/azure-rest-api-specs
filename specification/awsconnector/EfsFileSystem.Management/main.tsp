@@ -41,7 +41,7 @@ enum Versions {
     singular: "EFS File System",
     plural: "EFS File Systems",
   },
-  keywords: ["Microsoft.AwsConnector", "EFS", "File", "Systems"],
+  keywords: ["Microsoft.AwsConnector", "EFS", "File", "System"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model EfsFileSystem is TrackedResource<EfsFileSystemProperties> {

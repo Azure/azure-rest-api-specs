@@ -41,7 +41,7 @@ enum Versions {
     singular: "Dynamo DB Table",
     plural: "Dynamo DB Tables",
   },
-  keywords: ["Microsoft.AwsConnector", "Dynamo", "DB", "Tables"],
+  keywords: ["Microsoft.AwsConnector", "Dynamo", "DB", "Table"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model DynamoDBTable is TrackedResource<DynamoDBTableProperties> {

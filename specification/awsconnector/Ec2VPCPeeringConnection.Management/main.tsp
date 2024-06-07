@@ -41,7 +41,7 @@ enum Versions {
     singular: "EC2 VPCPeering Connection",
     plural: "EC2 VPCPeering Connections",
   },
-  keywords: ["Microsoft.AwsConnector", "EC2", "VPCPeering", "Connections"],
+  keywords: ["Microsoft.AwsConnector", "EC2", "VPCPeering", "Connection"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Ec2VPCPeeringConnection

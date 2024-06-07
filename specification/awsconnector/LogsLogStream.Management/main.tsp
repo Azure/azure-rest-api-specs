@@ -41,7 +41,7 @@ enum Versions {
     singular: "Logs Log Stream",
     plural: "Logs Log Streams",
   },
-  keywords: ["Microsoft.AwsConnector", "Logs", "Log", "Streams"],
+  keywords: ["Microsoft.AwsConnector", "Logs", "Log", "Stream"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model LogsLogStream is TrackedResource<LogsLogStreamProperties> {

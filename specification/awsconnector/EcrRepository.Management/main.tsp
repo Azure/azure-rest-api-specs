@@ -41,7 +41,7 @@ enum Versions {
     singular: "ECR Repository",
     plural: "ECR Repositories",
   },
-  keywords: ["Microsoft.AwsConnector", "ECR", "Repositories"],
+  keywords: ["Microsoft.AwsConnector", "ECR", "Repository"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model EcrRepository is TrackedResource<EcrRepositoryProperties> {

@@ -41,7 +41,7 @@ enum Versions {
     singular: "IAM Instance Profile",
     plural: "IAM Instance Profiles",
   },
-  keywords: ["Microsoft.AwsConnector", "IAM", "Instance", "Profiles"],
+  keywords: ["Microsoft.AwsConnector", "IAM", "Instance", "Profile"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model IamInstanceProfile is TrackedResource<IamInstanceProfileProperties> {

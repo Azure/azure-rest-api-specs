@@ -41,7 +41,7 @@ enum Versions {
     singular: "Redshift Cluster",
     plural: "Redshift Clusters",
   },
-  keywords: ["Microsoft.AwsConnector", "Redshift", "Clusters"],
+  keywords: ["Microsoft.AwsConnector", "Redshift", "Cluster"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model RedshiftCluster is TrackedResource<RedshiftClusterProperties> {

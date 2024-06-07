@@ -41,7 +41,7 @@ enum Versions {
     singular: "WAFv2 Web ACLAssociation",
     plural: "WAFv2 Web ACLAssociations",
   },
-  keywords: ["Microsoft.AwsConnector", "WAFv2", "Web", "ACLAssociations"],
+  keywords: ["Microsoft.AwsConnector", "WAFv2", "Web", "ACLAssociation"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Wafv2WebACLAssociation

@@ -41,7 +41,7 @@ enum Versions {
     singular: "Organizations Organization",
     plural: "Organizations Organizations",
   },
-  keywords: ["Microsoft.AwsConnector", "Organizations", "Organizations"],
+  keywords: ["Microsoft.AwsConnector", "Organizations", "Organization"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model OrganizationsOrganization

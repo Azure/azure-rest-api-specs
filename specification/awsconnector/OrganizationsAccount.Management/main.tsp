@@ -41,7 +41,7 @@ enum Versions {
     singular: "Organizations Account",
     plural: "Organizations Accounts",
   },
-  keywords: ["Microsoft.AwsConnector", "Organizations", "Accounts"],
+  keywords: ["Microsoft.AwsConnector", "Organizations", "Account"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model OrganizationsAccount is TrackedResource<OrganizationsAccountProperties> {

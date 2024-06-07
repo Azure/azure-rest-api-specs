@@ -41,7 +41,7 @@ enum Versions {
     singular: "IAM Server Certificate",
     plural: "IAM Server Certificates",
   },
-  keywords: ["Microsoft.AwsConnector", "IAM", "Server", "Certificates"],
+  keywords: ["Microsoft.AwsConnector", "IAM", "Server", "Certificate"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model IamServerCertificate is TrackedResource<IamServerCertificateProperties> {

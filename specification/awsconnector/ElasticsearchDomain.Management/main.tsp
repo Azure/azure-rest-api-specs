@@ -41,7 +41,7 @@ enum Versions {
     singular: "Elasticsearch Domain",
     plural: "Elasticsearch Domains",
   },
-  keywords: ["Microsoft.AwsConnector", "Elasticsearch", "Domains"],
+  keywords: ["Microsoft.AwsConnector", "Elasticsearch", "Domain"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model ElasticsearchDomain is TrackedResource<ElasticsearchDomainProperties> {

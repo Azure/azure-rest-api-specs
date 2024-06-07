@@ -41,7 +41,7 @@ enum Versions {
     singular: "EC2 Network Interface",
     plural: "EC2 Network Interfaces",
   },
-  keywords: ["Microsoft.AwsConnector", "EC2", "Network", "Interfaces"],
+  keywords: ["Microsoft.AwsConnector", "EC2", "Network", "Interface"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Ec2NetworkInterface is TrackedResource<Ec2NetworkInterfaceProperties> {

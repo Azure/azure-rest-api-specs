@@ -46,7 +46,7 @@ enum Versions {
     "Network",
     "Firewall",
     "Firewall",
-    "Policies"
+    "Policy"
   ],
 })
 @doc("A Microsoft.AwsConnector resource")

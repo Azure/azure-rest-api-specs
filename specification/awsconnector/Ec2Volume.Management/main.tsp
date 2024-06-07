@@ -41,7 +41,7 @@ enum Versions {
     singular: "EC2 Volume",
     plural: "EC2 Volumes",
   },
-  keywords: ["Microsoft.AwsConnector", "EC2", "Volumes"],
+  keywords: ["Microsoft.AwsConnector", "EC2", "Volume"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Ec2Volume is TrackedResource<Ec2VolumeProperties> {

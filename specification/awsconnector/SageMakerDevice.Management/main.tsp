@@ -41,7 +41,7 @@ enum Versions {
     singular: "Sage Maker Device",
     plural: "Sage Maker Devices",
   },
-  keywords: ["Microsoft.AwsConnector", "Sage", "Maker", "Devices"],
+  keywords: ["Microsoft.AwsConnector", "Sage", "Maker", "Device"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model SageMakerDevice is TrackedResource<SageMakerDeviceProperties> {

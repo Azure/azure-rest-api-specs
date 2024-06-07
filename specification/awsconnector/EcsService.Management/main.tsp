@@ -41,7 +41,7 @@ enum Versions {
     singular: "ECS Service",
     plural: "ECS Services",
   },
-  keywords: ["Microsoft.AwsConnector", "ECS", "Services"],
+  keywords: ["Microsoft.AwsConnector", "ECS", "Service"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model EcsService is TrackedResource<EcsServiceProperties> {

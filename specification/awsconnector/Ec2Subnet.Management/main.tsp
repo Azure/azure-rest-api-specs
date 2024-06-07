@@ -41,7 +41,7 @@ enum Versions {
     singular: "EC2 Subnet",
     plural: "EC2 Subnets",
   },
-  keywords: ["Microsoft.AwsConnector", "EC2", "Subnets"],
+  keywords: ["Microsoft.AwsConnector", "EC2", "Subnet"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Ec2Subnet is TrackedResource<Ec2SubnetProperties> {

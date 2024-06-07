@@ -41,7 +41,7 @@ enum Versions {
     singular: "IAM Group",
     plural: "IAM Groups",
   },
-  keywords: ["Microsoft.AwsConnector", "IAM", "Groups"],
+  keywords: ["Microsoft.AwsConnector", "IAM", "Group"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model IamGroup is TrackedResource<IamGroupProperties> {

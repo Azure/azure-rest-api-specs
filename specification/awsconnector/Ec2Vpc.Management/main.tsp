@@ -41,7 +41,7 @@ enum Versions {
     singular: "EC2 VPC",
     plural: "EC2 VPCS",
   },
-  keywords: ["Microsoft.AwsConnector", "EC2", "VPCS"],
+  keywords: ["Microsoft.AwsConnector", "EC2", "VPC"],
 })
 @doc("A Microsoft.AwsConnector resource")
 model Ec2Vpc is TrackedResource<Ec2VpcProperties> {
