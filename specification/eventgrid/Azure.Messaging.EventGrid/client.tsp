@@ -133,22 +133,20 @@ namespace Customizations {
 @@access(acknowledgeCloudEvents, Access.internal, "python");
 @@access(releaseCloudEvents, Access.internal, "python");
 @@access(rejectCloudEvents, Access.internal, "python");
+@@access(renewCloudEventLocks, Access.internal, "python");
 
-@@access(renewCloudEventLocks, Access.internal, "csharp");
 @@access(receiveCloudEvents, Access.internal, "csharp");
 @@access(acknowledgeCloudEvents, Access.internal, "csharp");
 @@access(releaseCloudEvents, Access.internal, "csharp");
 @@access(rejectCloudEvents, Access.internal, "csharp");
 @@access(renewCloudEventLocks, Access.internal, "csharp");
 
-@@access(renewCloudEventLocks, Access.internal, "java");
 @@access(receiveCloudEvents, Access.internal, "java");
 @@access(acknowledgeCloudEvents, Access.internal, "java");
 @@access(releaseCloudEvents, Access.internal, "java");
 @@access(rejectCloudEvents, Access.internal, "java");
 @@access(renewCloudEventLocks, Access.internal, "java");
 
-@@access(renewCloudEventLocks, Access.internal, "javascript");
 @@access(receiveCloudEvents, Access.internal, "javascript");
 @@access(acknowledgeCloudEvents, Access.internal, "javascript");
 @@access(releaseCloudEvents, Access.internal, "javascript");
