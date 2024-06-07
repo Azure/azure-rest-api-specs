@@ -120,15 +120,24 @@ namespace Customizations {
 
 // publishCloudEvent access level
 @@access(publishCloudEvent, Access.internal, "python");
+@@access(publishCloudEvent, Access.internal, "csharp");
+
 
 // publishCloudEvents access level
 @@access(publishCloudEvents, Access.internal, "python");
+@@access(publishCloudEvents, Access.internal, "csharp");
+
 
 @@access(receiveCloudEvents, Access.internal, "python");
 @@access(acknowledgeCloudEvents, Access.internal, "python");
 @@access(releaseCloudEvents, Access.internal, "python");
 @@access(rejectCloudEvents, Access.internal, "python");
 @@access(renewCloudEventLocks, Access.internal, "python");
+@@access(receiveCloudEvents, Access.internal, "csharp");
+@@access(acknowledgeCloudEvents, Access.internal, "csharp");
+@@access(releaseCloudEvents, Access.internal, "csharp");
+@@access(rejectCloudEvents, Access.internal, "csharp");
+@@access(renewCloudEventLocks, Access.internal, "csharp");
 
 @@access(AcknowledgeResult, Access.public);
 @@access(ReleaseResult, Access.public);
