@@ -1,7 +1,6 @@
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
-using Azure.Portal;
 
 namespace Microsoft.AwsConnector;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
