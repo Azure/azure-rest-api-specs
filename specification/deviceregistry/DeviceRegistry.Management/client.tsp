@@ -11,3 +11,5 @@ namespace Microsoft.DeviceRegistry;
 @@clientName(Event, "AssetEvent", "csharp");
 @@clientName(ProvisioningState, "DeviceRegistryProvisioningState", "csharp");
 @@clientName(ExtendedLocation.type, "ExtendedLocationType", "csharp");
+@@access(OperationStatus.get, Access.internal, "csharp");
+@@access(Operations.list, Access.internal, "csharp");
