@@ -55,6 +55,7 @@ interface Report {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Report_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReportResource,
     Azure.ResourceManager.Foundations.BaseParameters<ReportResource>

@@ -34,6 +34,7 @@ interface GalleryImages {
   get is ArmResourceRead<GalleryImage>;
 
   @doc("The operation to create or update a gallery image. Please note some properties can be set only during gallery image creation.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImage>;
 
   @doc("The operation to update a gallery image.")

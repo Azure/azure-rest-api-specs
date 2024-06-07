@@ -32,6 +32,7 @@ interface VmmServers {
   get is ArmResourceRead<VmmServer>;
   /** Onboards the SCVmm fabric as an Azure VmmServer resource. */
   @summary("Implements VmmServers PUT method.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VmmServer>;
   /** Updates the VmmServers resource. */
   @summary("Implements VmmServers PATCH method.")

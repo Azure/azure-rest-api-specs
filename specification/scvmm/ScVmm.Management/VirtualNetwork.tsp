@@ -32,6 +32,7 @@ interface VirtualNetworks {
   get is ArmResourceRead<VirtualNetwork>;
   /** Onboards the ScVmm virtual network as an Azure virtual network resource. */
   @summary("Implements VirtualNetworks PUT method.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualNetwork>;
   /** Updates the VirtualNetworks resource. */
   @summary("Implements the VirtualNetworks PATCH method.")

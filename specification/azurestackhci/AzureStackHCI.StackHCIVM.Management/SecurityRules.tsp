@@ -31,6 +31,7 @@ interface SecurityRules {
   get is ArmResourceRead<SecurityRule>;
 
   @doc("Creates or updates a security rule in the specified resource group.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SecurityRule>;
 
   @doc("Deletes the specified security rule.")

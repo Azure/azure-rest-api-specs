@@ -31,6 +31,7 @@ interface GuestAgents {
   get is ArmResourceRead<GuestAgent>;
 
   @doc("Create Or Update GuestAgent.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<GuestAgent>;
 
   @doc("Implements GuestAgent DELETE method.")

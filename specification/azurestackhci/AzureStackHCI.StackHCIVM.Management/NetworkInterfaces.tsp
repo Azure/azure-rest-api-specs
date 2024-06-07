@@ -34,6 +34,7 @@ interface NetworkInterfaces {
   get is ArmResourceRead<NetworkInterface>;
 
   @doc("The operation to create or update a network interface. Please note some properties can be set only during network interface creation.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkInterface>;
 
   @doc("The operation to update a network interface.")

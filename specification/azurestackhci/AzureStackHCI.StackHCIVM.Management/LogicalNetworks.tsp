@@ -34,6 +34,7 @@ interface LogicalNetworks {
   get is ArmResourceRead<LogicalNetwork>;
 
   @doc("The operation to create or update a logical network. Please note some properties can be set only during logical network creation.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LogicalNetwork>;
 
   @doc("The operation to update a logical network.")

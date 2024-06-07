@@ -33,6 +33,7 @@ interface VirtualMachineTemplates {
   get is ArmResourceRead<VirtualMachineTemplate>;
   /** Onboards the ScVmm VM Template as an Azure VM Template resource. */
   @summary("Implements VirtualMachineTemplates PUT method.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineTemplate>;
   /** Updates the VirtualMachineTemplate resource. */
   @summary("Implements the VirtualMachineTemplate PATCH method.")
