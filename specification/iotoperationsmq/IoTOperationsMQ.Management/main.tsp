@@ -38,6 +38,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface Mq {
   get is ArmResourceRead<MqResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MqResource>;
   update is ArmResourcePatchSync<MqResource, MqProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<MqResource>;
@@ -49,6 +50,7 @@ interface Mq {
 @armResourceOperations
 interface Broker {
   get is ArmResourceRead<BrokerResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerResource>;
   update is ArmResourcePatchSync<BrokerResource, BrokerProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerResource>;
@@ -59,6 +61,7 @@ interface Broker {
 @armResourceOperations
 interface BrokerListener {
   get is ArmResourceRead<BrokerListenerResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerListenerResource>;
   update is ArmResourcePatchSync<
     BrokerListenerResource,
@@ -72,6 +75,7 @@ interface BrokerListener {
 @armResourceOperations
 interface BrokerAuthentication {
   get is ArmResourceRead<BrokerAuthenticationResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthenticationResource>;
   update is ArmResourcePatchSync<
     BrokerAuthenticationResource,
@@ -85,6 +89,7 @@ interface BrokerAuthentication {
 @armResourceOperations
 interface BrokerAuthorization {
   get is ArmResourceRead<BrokerAuthorizationResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthorizationResource>;
   update is ArmResourcePatchSync<
     BrokerAuthorizationResource,
@@ -98,6 +103,7 @@ interface BrokerAuthorization {
 @armResourceOperations
 interface MqttBridgeConnector {
   get is ArmResourceRead<MqttBridgeConnectorResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MqttBridgeConnectorResource>;
   update is ArmResourcePatchSync<
     MqttBridgeConnectorResource,
@@ -111,6 +117,7 @@ interface MqttBridgeConnector {
 @armResourceOperations
 interface MqttBridgeTopicMap {
   get is ArmResourceRead<MqttBridgeTopicMapResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MqttBridgeTopicMapResource>;
   update is ArmResourcePatchSync<
     MqttBridgeTopicMapResource,
@@ -124,6 +131,7 @@ interface MqttBridgeTopicMap {
 @armResourceOperations
 interface DiagnosticService {
   get is ArmResourceRead<DiagnosticServiceResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DiagnosticServiceResource>;
   update is ArmResourcePatchSync<
     DiagnosticServiceResource,
@@ -137,6 +145,7 @@ interface DiagnosticService {
 @armResourceOperations
 interface DataLakeConnector {
   get is ArmResourceRead<DataLakeConnectorResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataLakeConnectorResource>;
   update is ArmResourcePatchSync<
     DataLakeConnectorResource,
@@ -150,6 +159,7 @@ interface DataLakeConnector {
 @armResourceOperations
 interface DataLakeConnectorTopicMap {
   get is ArmResourceRead<DataLakeTopicMapResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataLakeTopicMapResource>;
   update is ArmResourcePatchSync<
     DataLakeTopicMapResource,
@@ -163,6 +173,7 @@ interface DataLakeConnectorTopicMap {
 @armResourceOperations
 interface KafkaConnector {
   get is ArmResourceRead<KafkaConnectorResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<KafkaConnectorResource>;
   update is ArmResourcePatchSync<
     KafkaConnectorResource,
@@ -176,6 +187,7 @@ interface KafkaConnector {
 @armResourceOperations
 interface KafkaConnectorTopicMap {
   get is ArmResourceRead<KafkaTopicMapResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<KafkaTopicMapResource>;
   update is ArmResourcePatchSync<
     KafkaTopicMapResource,

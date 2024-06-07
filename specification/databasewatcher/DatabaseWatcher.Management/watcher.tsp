@@ -106,6 +106,7 @@ union KustoOfferingType {
 @armResourceOperations
 interface Watchers {
   get is ArmResourceRead<Watcher>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Watcher>;
   update is ArmResourcePatchAsync<Watcher, WatcherProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Watcher>;

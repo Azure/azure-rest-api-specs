@@ -36,6 +36,7 @@ model BgpPeerProperties {
 @armResourceOperations(BgpPeer)
 interface BgpPeers {
   get is ArmResourceRead<BgpPeer>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BgpPeer>;
   @sharedRoute
   @added(Versions.v2024_03_01)

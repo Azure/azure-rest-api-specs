@@ -77,6 +77,7 @@ model StandbyVirtualMachinePoolElasticityProfile {
 @armResourceOperations
 interface StandbyVirtualMachinePools {
   get is ArmResourceRead<StandbyVirtualMachinePoolResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyVirtualMachinePoolResource>;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
   update is ArmResourcePatchSync<

@@ -30,6 +30,7 @@ interface Images {
   /**
    * Create a Image
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Image>;
 
   /**

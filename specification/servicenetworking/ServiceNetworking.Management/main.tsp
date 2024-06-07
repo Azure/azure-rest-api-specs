@@ -223,6 +223,7 @@ model ResourceId {
 @armResourceOperations
 interface AssociationsInterface {
   get is ArmResourceRead<Association>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Association>;
   update is ArmResourcePatchSync<Association, AssociationProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
@@ -232,6 +233,7 @@ interface AssociationsInterface {
 @armResourceOperations
 interface FrontendsInterface {
   get is ArmResourceRead<Frontend>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Frontend>;
   update is ArmResourcePatchSync<Frontend, FrontendProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Frontend>;
@@ -242,6 +244,7 @@ interface FrontendsInterface {
 @armResourceOperations
 interface SecurityPoliciesInterface {
   get is ArmResourceRead<SecurityPolicy>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SecurityPolicy>;
   update is ArmResourcePatchSync<SecurityPolicy, SecurityPolicyProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<SecurityPolicy>;
@@ -251,6 +254,7 @@ interface SecurityPoliciesInterface {
 @armResourceOperations
 interface TrafficControllerInterface {
   get is ArmResourceRead<TrafficController>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TrafficController>;
   update is ArmResourcePatchSync<
     TrafficController,

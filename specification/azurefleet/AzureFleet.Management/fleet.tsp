@@ -212,6 +212,7 @@ union EvictionPolicy {
 @armResourceOperations
 interface Fleets {
   get is ArmResourceRead<Fleet>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Fleet>;
   update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Fleet>;

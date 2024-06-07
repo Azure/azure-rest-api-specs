@@ -18,6 +18,7 @@ interface Pools {
       `final-state-via`: "location",
     }
   )
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Pool>;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
   update is ArmResourcePatchAsync<Pool, PoolProperties>;

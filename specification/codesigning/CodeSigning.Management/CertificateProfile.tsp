@@ -28,6 +28,7 @@ interface CertificateProfiles {
   get is ArmResourceRead<CertificateProfile>;
 
   @doc("Create a certificate profile.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<CertificateProfile>;
 
   @doc("Delete a certificate profile.")

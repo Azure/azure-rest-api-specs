@@ -80,6 +80,7 @@ model PipelineStage is Record<unknown> {
 @armResourceOperations
 interface Pipelines {
   get is ArmResourceRead<Pipeline>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Pipeline>;
   update is ArmCustomPatchSync<Pipeline>;
   delete is ArmResourceDeleteWithoutOkAsync<Pipeline>;

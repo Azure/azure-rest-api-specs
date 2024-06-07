@@ -401,6 +401,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface Pools {
   get is ArmResourceRead<Pool>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Pool>;
   update is ArmResourcePatchAsync<Pool, PoolProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;

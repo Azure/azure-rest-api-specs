@@ -46,6 +46,7 @@ model SolutionProperties {
 @armResourceOperations
 interface Solutions {
   get is ArmResourceRead<Solution>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Solution>;
   update is ArmCustomPatchSync<Solution>;
   delete is ArmResourceDeleteWithoutOkAsync<Solution>;

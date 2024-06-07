@@ -18,6 +18,7 @@ interface Snapshots {
       `final-state-via`: "location",
     }
   )
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Snapshot>;
   delete is ArmResourceDeleteWithoutOkAsync<Snapshot>;
   listByPool is ArmResourceListByParent<Snapshot>;

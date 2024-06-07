@@ -29,6 +29,7 @@ interface Deployments {
   /**
    * Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Deployment>;
 
   /**

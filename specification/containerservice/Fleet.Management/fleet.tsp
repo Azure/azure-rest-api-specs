@@ -184,6 +184,7 @@ interface Fleets {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "changing the operation-id on an existing operation is an SDK breaking change"
   @doc("Creates or updates a Fleet.")
   @operationId("Fleets_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     Fleet,
     Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
