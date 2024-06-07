@@ -122,10 +122,12 @@ namespace Customizations {
 @@access(publishCloudEvent, Access.internal, "python");
 @@access(publishCloudEvent, Access.internal, "csharp");
 @@access(publishCloudEvent, Access.internal, "java");
+@@access(publishCloudEvent, Access.internal, "javascript");
 
 @@access(publishCloudEvents, Access.internal, "python");
 @@access(publishCloudEvents, Access.internal, "csharp");
 @@access(publishCloudEvents, Access.internal, "java");
+@@access(publishCloudEvents, Access.internal, "javascript");
 
 @@access(receiveCloudEvents, Access.internal, "python");
 @@access(acknowledgeCloudEvents, Access.internal, "python");
@@ -145,6 +147,13 @@ namespace Customizations {
 @@access(releaseCloudEvents, Access.internal, "java");
 @@access(rejectCloudEvents, Access.internal, "java");
 @@access(renewCloudEventLocks, Access.internal, "java");
+
+@@access(renewCloudEventLocks, Access.internal, "javascript");
+@@access(receiveCloudEvents, Access.internal, "javascript");
+@@access(acknowledgeCloudEvents, Access.internal, "javascript");
+@@access(releaseCloudEvents, Access.internal, "javascript");
+@@access(rejectCloudEvents, Access.internal, "javascript");
+@@access(renewCloudEventLocks, Access.internal, "javascript");
 
 
 //Mark models as public (except ReceiveResult, PublishResult)
