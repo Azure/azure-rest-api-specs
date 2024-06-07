@@ -6292,16 +6292,25 @@
       "description": "Azure OpenAI Content Filter.",
       "type": "object",
       "properties": {
-        "name": {
+        "policyName": {
           "type": "string",
           "description": "Name of Content Filter."
         },
-        "isMultiLevelFilter": {
-          "type": "boolean",
-          "description": "If the Content Filter has multi severity levels(Low, Medium, or High)."
+        "description": {
+          "type": "string",
+          "description": "Description of Content Filter."
         },
-        "source": {
-          "$ref": "#/definitions/RaiPolicyContentSource"
+        "filterType": {
+          "type": "string",
+          "description": "Content Filter type.",
+          "enum": [
+            "MultiLevel",
+            "Switch"
+          ],
+          "x-ms-enum": {
+            "name": "RaiContentFilterType",
+            "modelAsString": true
+          }
         }
       }
     },
