@@ -400,7 +400,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/FreeSlotsResult"
+              "$ref": "#/definitions/FreeSlotsListResult"
             }
           },
           "default": {
@@ -495,6 +495,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "200": {
             "description": "OK",
             "schema": {
@@ -1400,6 +1408,26 @@
         }
       },
       "description": "The time range between which the slots are required for."
+    },
+    "FreeSlotsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FreeSlotsResult"
+          },
+          "readOnly": true,
+          "description": "A list of available/free slot dates.",
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of free slot dates.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "A list of available/free slot dates."
     },
     "FreeSlotsResult": {
       "type": "object",
