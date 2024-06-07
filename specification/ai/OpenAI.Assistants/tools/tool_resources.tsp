@@ -160,5 +160,6 @@ model UpdateCodeInterpreterToolResourceOptions {
 model UpdateFileSearchToolResourceOptions {
   /** A list of vector store IDs to override the current list of the assistant. */
   @maxItems(1)
+  @encodedName("application/json", "vector_store_ids")
   vectorStoreIds?: string[];
 }

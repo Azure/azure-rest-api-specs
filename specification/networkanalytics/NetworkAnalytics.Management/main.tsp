@@ -532,6 +532,7 @@ interface DataProductsCatalogs {
 @armResourceOperations
 interface DataTypes {
   @doc("Create data type resource.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<DataType>;
 
   @doc("Retrieve data type resource.")
@@ -563,6 +564,7 @@ interface DataTypes {
 @armResourceOperations
 interface DataProducts {
   @doc("Create data product resource.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<DataProduct>;
 
   @doc("Retrieve data product resource.")

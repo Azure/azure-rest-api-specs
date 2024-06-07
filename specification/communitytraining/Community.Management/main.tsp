@@ -138,6 +138,7 @@ model CommunityTrainingProperties {
 @armResourceOperations
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<CommunityTraining>;
   update is ArmResourcePatchAsync<
     CommunityTraining,

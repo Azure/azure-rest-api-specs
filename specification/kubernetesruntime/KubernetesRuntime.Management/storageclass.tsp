@@ -282,6 +282,7 @@ model StorageClassResource is ExtensionResource<StorageClassProperties> {
 @armResourceOperations(StorageClassResource)
 interface StorageClass {
   get is ArmResourceRead<StorageClassResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<StorageClassResource>;
   update is ArmCustomPatchAsync<
     StorageClassResource,

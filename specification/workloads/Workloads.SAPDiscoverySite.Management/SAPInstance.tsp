@@ -32,6 +32,7 @@ interface SAPInstances {
   /**
    * Creates the SAP Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<SAPInstance>;
 
   /**

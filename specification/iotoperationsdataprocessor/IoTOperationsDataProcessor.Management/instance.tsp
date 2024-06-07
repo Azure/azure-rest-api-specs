@@ -42,6 +42,7 @@ model InstanceProperties {
 @armResourceOperations
 interface Instances {
   get is ArmResourceRead<Instance>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Instance>;
   update is ArmCustomPatchSync<Instance>;
   delete is ArmResourceDeleteWithoutOkAsync<Instance>;

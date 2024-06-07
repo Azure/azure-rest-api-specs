@@ -205,6 +205,7 @@ model AssetStatusError {
 interface Assets {
   get is ArmResourceRead<Asset>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrReplace is ArmResourceCreateOrReplaceAsync<Asset>;
 
   update is ArmResourcePatchAsync<Asset, AssetProperties>;

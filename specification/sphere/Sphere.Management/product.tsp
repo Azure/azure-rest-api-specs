@@ -37,6 +37,7 @@ interface Products {
   /**
    * Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Product>;
 
   /**

@@ -29,6 +29,7 @@ interface Catalogs {
   /**
    * Create a Catalog
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Catalog>;
 
   /**

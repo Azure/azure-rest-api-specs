@@ -42,43 +42,9 @@ model Assistant {
   @doc("The collection of tools enabled for the assistant.")
   tools: ToolDefinition[] = #[];
 
-  /**
-   * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
-   * tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "tool_resources")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources: ToolResources | null;
-
-  /**
-   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
-   * while lower values like 0.2 will make it more focused and deterministic.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  @minValue(0)
-  @maxValue(2)
-  temperature: float32 | null = 1;
-
-  /**
-   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
-   * So 0.1 means only the tokens comprising the top 10% probability mass are considered.
-   *
-   * We generally recommend altering this or temperature but not both.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  @minValue(0)
-  @maxValue(1)
-  @encodedName("application/json", "top_p")
-  topP: float32 | null = 1;
-
-  /** The response format of the tool calls used by this assistant. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "response_format")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  responseFormat?: AssistantsApiResponseFormatOption | null;
+  @encodedName("application/json", "file_ids")
+  @doc("A list of attached file IDs, ordered by creation date in ascending order.")
+  fileIds: string[] = #[];
 
   ...RequiredNullableMetadata;
 }
@@ -105,43 +71,9 @@ model AssistantCreationOptions {
   @doc("The collection of tools to enable for the new assistant.")
   tools?: ToolDefinition[] = #[];
 
-  /**
-   * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
-   * tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "tool_resources")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources?: CreateToolResourcesOptions | null;
-
-  /**
-   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
-   * while lower values like 0.2 will make it more focused and deterministic.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32 | null = 1;
-
-  /**
-   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
-   * So 0.1 means only the tokens comprising the top 10% probability mass are considered.
-   *
-   * We generally recommend altering this or temperature but not both.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  @minValue(0)
-  @maxValue(1)
-  @encodedName("application/json", "top_p")
-  topP?: float32 | null = 1;
-
-  /** The response format of the tool calls used by this assistant. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "response_format")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  responseFormat?: AssistantsApiResponseFormatOption | null;
+  @encodedName("application/json", "file_ids")
+  @doc("A list of previously uploaded file IDs to attach to the assistant.")
+  fileIds?: string[] = #[];
 
   ...OptionalNullableMetadata;
 }
@@ -171,42 +103,9 @@ model UpdateAssistantOptions {
   @doc("The modified collection of tools to enable for the assistant.")
   tools?: ToolDefinition[] = #[];
 
-  /**
-   * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example,
-   * the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
-   */
-  @encodedName("application/json", "tool_resources")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  toolResources?: UpdateToolResourcesOptions;
-
-  /**
-   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
-   * while lower values like 0.2 will make it more focused and deterministic.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32 | null = 1;
-
-  /**
-   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
-   * So 0.1 means only the tokens comprising the top 10% probability mass are considered.
-   *
-   * We generally recommend altering this or temperature but not both.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  @minValue(0)
-  @maxValue(1)
-  @encodedName("application/json", "top_p")
-  topP?: float32 | null = 1;
-
-  /** The response format of the tool calls used by this assistant. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "response_format")
-  @added(ServiceApiVersions.v2024_05_01_preview)
-  responseFormat?: AssistantsApiResponseFormatOption | null;
+  @encodedName("application/json", "file_ids")
+  @doc("The modified list of previously uploaded fileIDs to attach to the assistant.")
+  fileIds?: string[] = #[];
 
   ...OptionalNullableMetadata;
 }

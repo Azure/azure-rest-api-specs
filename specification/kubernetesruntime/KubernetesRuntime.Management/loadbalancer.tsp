@@ -55,6 +55,7 @@ model LoadBalancerProperties {
 @armResourceOperations(LoadBalancer)
 interface LoadBalancers {
   get is ArmResourceRead<LoadBalancer>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<LoadBalancer>;
   @sharedRoute
   @added(Versions.v2024_03_01)

@@ -94,6 +94,8 @@ interface Accounts
   checkNameAvailability is checkGlobalNameAvailability;
 }
 
+@@Azure.Core.useFinalStateVia(Accounts.createOrUpdate, "azure-async-operation");
+
 @doc("The location of subscription quota resource.")
 @subscriptionResource
 model Location {

@@ -119,6 +119,7 @@ namespace SplitIO.Experimentation {
   @armResourceOperations
   interface ExperimentationWorkspaces {
     get is ArmResourceRead<ExperimentationWorkspace>;
+    @Azure.Core.useFinalStateVia("azure-async-operation")
     create is ArmResourceCreateOrUpdateAsync<ExperimentationWorkspace>;
     update is ArmResourcePatchAsync<
       ExperimentationWorkspace,

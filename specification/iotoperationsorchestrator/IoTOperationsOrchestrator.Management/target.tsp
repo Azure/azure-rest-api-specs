@@ -76,6 +76,7 @@ model BindingProperties {
 @armResourceOperations
 interface Targets {
   get is ArmResourceRead<Target>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Target>;
   update is ArmCustomPatchSync<Target>;
   delete is ArmResourceDeleteWithoutOkAsync<Target>;

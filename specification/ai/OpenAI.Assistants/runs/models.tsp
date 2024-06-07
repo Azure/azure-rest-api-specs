@@ -53,6 +53,10 @@ model ThreadRun {
   @doc("The overridden enabled tools used for this assistant thread run.")
   tools: ToolDefinition[] = #[];
 
+  @encodedName("application/json", "file_ids")
+  @doc("A list of attached file IDs, ordered by creation date in ascending order.")
+  fileIds: string[] = #[];
+
   @encodedName("application/json", "created_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")

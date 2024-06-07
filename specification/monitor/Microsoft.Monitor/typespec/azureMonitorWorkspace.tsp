@@ -89,6 +89,7 @@ interface AzureMonitorWorkspaces {
   @doc("Returns the specific Azure Monitor workspace")
   get is ArmResourceRead<AzureMonitorWorkspace>;
   @doc("Create or update a workspace")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AzureMonitorWorkspace>;
   @doc("Updates part of a workspace")
   update is ArmResourcePatchSync<

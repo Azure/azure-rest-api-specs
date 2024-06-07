@@ -12,6 +12,7 @@ using TypeSpec.Rest;
 @armResourceOperations
 interface SharedPrivateLinkResources {
   get is ArmResourceRead<SharedPrivateLinkResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<SharedPrivateLinkResource>;
   delete is ArmResourceDeleteWithoutOkAsync<SharedPrivateLinkResource>;
   listByParent is ArmResourceListByParent<SharedPrivateLinkResource>;

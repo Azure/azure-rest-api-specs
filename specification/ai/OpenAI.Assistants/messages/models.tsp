@@ -23,9 +23,12 @@ model ThreadMessageOptions {
    */
   content: string;
 
-  /** A list of files attached to the message, and the tools they should be added to. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  attachments?: MessageAttachment[] | null;
+  @encodedName("application/json", "file_ids")
+  @doc("""
+  A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
+  access files.
+  """)
+  fileIds?: string[] = #[];
 
   ...OptionalNullableMetadata;
 }

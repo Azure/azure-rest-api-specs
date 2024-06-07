@@ -57,6 +57,7 @@ interface Organizations
       OrganizationProperties
     > {
   get is ArmResourceRead<InformaticaOrganizationResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaOrganizationResource>;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
   update is ArmCustomPatchSync<
@@ -83,6 +84,7 @@ interface Organizations
 interface ServerlessRuntimes
   extends ProxyResourceOperations<InformaticaServerlessRuntimeResource> {
   get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
   update is ArmCustomPatchSync<

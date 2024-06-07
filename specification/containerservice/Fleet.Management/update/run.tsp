@@ -334,6 +334,7 @@ model SkipProperties {
 interface UpdateRuns {
   get is ArmResourceRead<UpdateRun>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     UpdateRun,
     Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &

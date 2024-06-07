@@ -30,6 +30,7 @@ interface Devices {
   /**
    * Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Device>;
 
   /**
@@ -40,7 +41,8 @@ interface Devices {
   update is ArmCustomPatchAsync<
     Device,
     DeviceUpdate,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = Device> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

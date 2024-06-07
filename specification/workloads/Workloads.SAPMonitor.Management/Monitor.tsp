@@ -31,6 +31,7 @@ interface Monitors {
   /**
    * Creates a SAP monitor for the specified subscription, resource group, and resource name.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<Monitor>;
 
   /**
