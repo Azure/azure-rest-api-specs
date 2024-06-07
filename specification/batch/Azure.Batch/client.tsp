@@ -101,19 +101,31 @@ interface Batch {
 @@clientName(Batch.listApplications, "listApplicationsInternal", "java");
 @@clientName(Batch.getApplication, "getApplicationInternal", "java");
 
-@@clientName(Batch.listPoolUsageMetrics, "listPoolUsageMetricsInternal", "java");
+@@clientName(Batch.listPoolUsageMetrics,
+  "listPoolUsageMetricsInternal",
+  "java"
+);
 @@clientName(Batch.createPool, "createPoolInternal", "java");
 @@clientName(Batch.listPools, "listPoolsInternal", "java");
 @@clientName(Batch.deletePool, "deletePoolInternal", "java");
 @@clientName(Batch.poolExists, "poolExistsInternal", "java");
 @@clientName(Batch.getPool, "getPoolInternal", "java");
 @@clientName(Batch.updatePool, "updatePoolInternal", "java");
-@@clientName(Batch.disablePoolAutoScale, "disablePoolAutoScaleInternal", "java");
+@@clientName(Batch.disablePoolAutoScale,
+  "disablePoolAutoScaleInternal",
+  "java"
+);
 @@clientName(Batch.enablePoolAutoScale, "enablePoolAutoScaleInternal", "java");
-@@clientName(Batch.evaluatePoolAutoScale, "evaluatePoolAutoScaleInternal", "java");
+@@clientName(Batch.evaluatePoolAutoScale,
+  "evaluatePoolAutoScaleInternal",
+  "java"
+);
 @@clientName(Batch.resizePool, "resizePoolInternal", "java");
 @@clientName(Batch.stopPoolResize, "stopPoolResizeInternal", "java");
-@@clientName(Batch.replacePoolProperties, "replacePoolPropertiesInternal", "java");
+@@clientName(Batch.replacePoolProperties,
+  "replacePoolPropertiesInternal",
+  "java"
+);
 @@clientName(Batch.removeNodes, "removeNodesInternal", "java");
 @@clientName(Batch.listSupportedImages, "listSupportedImagesInternal", "java");
 @@clientName(Batch.listPoolNodeCounts, "listPoolNodeCountsInternal", "java");
@@ -127,8 +139,14 @@ interface Batch {
 @@clientName(Batch.terminateJob, "terminateJobInternal", "java");
 @@clientName(Batch.createJob, "createJobInternal", "java");
 @@clientName(Batch.listJobs, "listJobsInternal", "java");
-@@clientName(Batch.listJobsFromSchedule, "listJobsFromScheduleInternal", "java");
-@@clientName(Batch.listJobPreparationAndReleaseTaskStatus, "listJobPreparationAndReleaseTaskStatusInternal", "java");
+@@clientName(Batch.listJobsFromSchedule,
+  "listJobsFromScheduleInternal",
+  "java"
+);
+@@clientName(Batch.listJobPreparationAndReleaseTaskStatus,
+  "listJobPreparationAndReleaseTaskStatusInternal",
+  "java"
+);
 @@clientName(Batch.getJobTaskCounts, "getJobTaskCountsInternal", "java");
 
 @@clientName(Batch.jobScheduleExists, "jobScheduleExistsInternal", "java");
@@ -138,13 +156,19 @@ interface Batch {
 @@clientName(Batch.replaceJobSchedule, "replaceJobScheduleInternal", "java");
 @@clientName(Batch.disableJobSchedule, "disableJobScheduleInternal", "java");
 @@clientName(Batch.enableJobSchedule, "enableJobScheduleInternal", "java");
-@@clientName(Batch.terminateJobSchedule, "terminateJobScheduleInternal", "java");
+@@clientName(Batch.terminateJobSchedule,
+  "terminateJobScheduleInternal",
+  "java"
+);
 @@clientName(Batch.createJobSchedule, "createJobScheduleInternal", "java");
 @@clientName(Batch.listJobSchedules, "listJobSchedulesInternal", "java");
 
 @@clientName(Batch.createTask, "createTaskInternal", "java");
 @@clientName(Batch.listTasks, "listTasksInternal", "java");
-@@clientName(Batch.createTaskCollection, "createTaskCollectionInternal", "java");
+@@clientName(Batch.createTaskCollection,
+  "createTaskCollectionInternal",
+  "java"
+);
 @@clientName(Batch.deleteTask, "deleteTaskInternal", "java");
 @@clientName(Batch.getTask, "getTaskInternal", "java");
 @@clientName(Batch.replaceTask, "replaceTaskInternal", "java");
@@ -153,7 +177,10 @@ interface Batch {
 @@clientName(Batch.reactivateTask, "reactivateTaskInternal", "java");
 @@clientName(Batch.deleteTaskFile, "deleteTaskFileInternal", "java");
 @@clientName(Batch.getTaskFile, "getTaskFileInternal", "java");
-@@clientName(Batch.getTaskFileProperties, "getTaskFilePropertiesInternal", "java");
+@@clientName(Batch.getTaskFileProperties,
+  "getTaskFilePropertiesInternal",
+  "java"
+);
 @@clientName(Batch.listTaskFiles, "listTaskFilesInternal", "java");
 
 @@clientName(Batch.createNodeUser, "createNodeUserInternal", "java");
@@ -161,16 +188,28 @@ interface Batch {
 @@clientName(Batch.replaceNodeUser, "replaceNodeUserInternal", "java");
 @@clientName(Batch.getNode, "getNodeInternal", "java");
 @@clientName(Batch.rebootNode, "rebootNodeInternal", "java");
-@@clientName(Batch.disableNodeScheduling, "disableNodeSchedulingInternal", "java");
-@@clientName(Batch.enableNodeScheduling, "enableNodeSchedulingInternal", "java");
-@@clientName(Batch.getNodeRemoteLoginSettings, "getNodeRemoteLoginSettingsInternal", "java");
+@@clientName(Batch.disableNodeScheduling,
+  "disableNodeSchedulingInternal",
+  "java"
+);
+@@clientName(Batch.enableNodeScheduling,
+  "enableNodeSchedulingInternal",
+  "java"
+);
+@@clientName(Batch.getNodeRemoteLoginSettings,
+  "getNodeRemoteLoginSettingsInternal",
+  "java"
+);
 @@clientName(Batch.uploadNodeLogs, "uploadNodeLogsInternal", "java");
 @@clientName(Batch.listNodes, "listNodesInternal", "java");
 @@clientName(Batch.getNodeExtension, "getNodeExtensionInternal", "java");
 @@clientName(Batch.listNodeExtensions, "listNodeExtensionsInternal", "java");
 @@clientName(Batch.deleteNodeFile, "deleteNodeFileInternal", "java");
 @@clientName(Batch.getNodeFile, "getNodeFileInternal", "java");
-@@clientName(Batch.getNodeFileProperties, "getNodeFilePropertiesInternal", "java");
+@@clientName(Batch.getNodeFileProperties,
+  "getNodeFilePropertiesInternal",
+  "java"
+);
 @@clientName(Batch.listNodeFiles, "listNodeFilesInternal", "java");
 
 // operation overrides
