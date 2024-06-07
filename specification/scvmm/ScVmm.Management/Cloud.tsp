@@ -32,6 +32,7 @@ interface Clouds {
   get is ArmResourceRead<Cloud>;
   /** Onboards the ScVmm fabric cloud as an Azure cloud resource. */
   @summary("Implements Clouds PUT method.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Cloud>;
   /** Updates the Clouds resource. */
   @summary("Implements the Clouds PATCH method.")

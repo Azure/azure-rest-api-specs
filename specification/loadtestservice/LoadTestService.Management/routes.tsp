@@ -32,6 +32,7 @@ interface LoadTests {
   listByResourceGroup is ArmResourceListByParent<LoadTestResource>;
   get is ArmResourceRead<LoadTestResource>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     LoadTestResource,
     LroHeaders = ArmAsyncOperationHeader &
@@ -43,6 +44,7 @@ interface LoadTests {
     LoadTestResource,
     LoadTestProperties,
     LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader<FinalResult = LoadTestResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

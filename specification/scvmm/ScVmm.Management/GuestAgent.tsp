@@ -31,6 +31,7 @@ interface GuestAgents {
   get is ArmResourceRead<GuestAgent>;
   /** Create Or Update GuestAgent. */
   @summary("Implements GuestAgent PUT method.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<GuestAgent>;
   /** Implements GuestAgent DELETE method. */
   @summary("Deletes a GuestAgent resource.")

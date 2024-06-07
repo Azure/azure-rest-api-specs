@@ -35,6 +35,7 @@ interface MarketplaceGalleryImages {
   get is ArmResourceRead<MarketplaceGalleryImage>;
 
   @doc("The operation to create or update a marketplace gallery image. Please note some properties can be set only during marketplace gallery image creation.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to update a marketplace gallery image.")

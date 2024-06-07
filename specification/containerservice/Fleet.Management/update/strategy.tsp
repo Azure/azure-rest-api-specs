@@ -55,6 +55,7 @@ model FleetUpdateStrategyProperties {
 interface FleetUpdateStrategies {
   get is ArmResourceRead<FleetUpdateStrategy>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FleetUpdateStrategy,
     Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &

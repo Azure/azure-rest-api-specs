@@ -32,6 +32,7 @@ interface NetworkSecurityGroups {
   get is ArmResourceRead<NetworkSecurityGroup>;
 
   @doc("Creates or updates a network security group in the specified resource group.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkSecurityGroup>;
 
   @doc("Updates a network security group tags.")

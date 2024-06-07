@@ -120,6 +120,7 @@ model OwnCertificate {
 interface AssetEndpointProfiles {
   get is ArmResourceRead<AssetEndpointProfile>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
 
   update is ArmResourcePatchAsync<

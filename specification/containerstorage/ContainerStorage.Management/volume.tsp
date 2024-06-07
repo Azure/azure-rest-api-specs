@@ -18,6 +18,7 @@ interface Volumes {
       `final-state-via`: "location",
     }
   )
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Volume>;
   delete is ArmResourceDeleteWithoutOkAsync<Volume>;
   update is ArmResourcePatchAsync<Volume, VolumeProperties>;

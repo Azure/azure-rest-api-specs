@@ -76,6 +76,7 @@ union FleetMemberProvisioningState {
 interface FleetMembers {
   get is ArmResourceRead<FleetMember>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     FleetMember,
     Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &

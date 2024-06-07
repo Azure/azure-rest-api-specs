@@ -29,6 +29,7 @@ interface ProviderInstances {
   /**
    * Creates a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<ProviderInstance>;
 
   /**

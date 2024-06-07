@@ -37,6 +37,7 @@ interface VirtualMachineInstances {
   get is ArmResourceRead<VirtualMachineInstance>;
 
   @doc("The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineInstance>;
 
   @doc("The operation to update a virtual machine instance.")

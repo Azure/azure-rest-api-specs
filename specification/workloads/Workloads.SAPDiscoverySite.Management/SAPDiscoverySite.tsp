@@ -36,6 +36,7 @@ interface SAPDiscoverySites {
   /**
    * Creates a discovery site resource for SAP Migration. This resource will be used to run system discovery and assessment with Azure Migrate.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<SAPDiscoverySite>;
 
   /**

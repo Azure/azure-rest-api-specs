@@ -57,6 +57,7 @@ model NetworkFunctionResourceProperties {
 @armResourceOperations(NetworkFunctionResource)
 interface NetworkFunctions {
   get is ArmResourceRead<NetworkFunctionResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFunctionResource>;
   updateTags is ArmTagsPatchSync<NetworkFunctionResource>;
   delete is ArmResourceDeleteSync<NetworkFunctionResource>;

@@ -47,6 +47,7 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
 @armResourceOperations
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OrganizationResource>;
   update is ArmResourcePatchAsync<OrganizationResource, OrganizationProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;

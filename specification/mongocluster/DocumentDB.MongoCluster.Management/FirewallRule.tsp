@@ -38,6 +38,7 @@ interface FirewallRules {
   get is ArmResourceRead<FirewallRule>;
   /** Creates a new firewall rule or updates an existing firewall rule on a mongo cluster. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Need to support existing 202 response for PUT operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
     Response = ArmAcceptedLroResponse<"Resource operation accepted."> | ArmResourceUpdatedResponse<FirewallRule> | ArmResourceCreatedResponse<

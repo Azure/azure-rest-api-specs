@@ -247,6 +247,7 @@ interface PipelineGroups {
   get is ArmResourceRead<PipelineGroup>;
 
   @doc("Create or update a pipeline group instance.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PipelineGroup>;
 
   @doc("Delete a pipeline group instance.")

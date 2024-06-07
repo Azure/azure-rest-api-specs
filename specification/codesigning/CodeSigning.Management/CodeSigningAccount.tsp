@@ -26,6 +26,7 @@ interface CodeSigningAccounts {
   get is ArmResourceRead<CodeSigningAccount>;
 
   @doc("Create a trusted Signing Account.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<CodeSigningAccount>;
 
   @doc("Update a trusted signing account.")

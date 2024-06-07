@@ -18,6 +18,7 @@ interface PrivateEndpointConnections {
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
   /** Create a Private endpoint connection */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Need to support existing 202 response for PUT operations"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnectionResource,
     Response = ArmAcceptedLroResponse<"Resource operation accepted."> | ArmResourceUpdatedResponse<PrivateEndpointConnectionResource> | ArmResourceCreatedResponse<

@@ -32,6 +32,7 @@ interface AvailabilitySets {
   get is ArmResourceRead<AvailabilitySet>;
   /** Onboards the ScVmm availability set as an Azure resource. */
   @summary("Implements AvailabilitySets PUT method.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AvailabilitySet,
     LroHeaders = ArmAsyncOperationHeader &

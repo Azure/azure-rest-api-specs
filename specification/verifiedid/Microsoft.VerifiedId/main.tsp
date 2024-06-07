@@ -71,6 +71,7 @@ model AuthorityProperties {
 @armResourceOperations(Authority)
 interface Authorities {
   get is ArmResourceRead<Authority>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Authority>;
   update is ArmResourcePatchSync<Authority, AuthorityProperties>;
   delete is ArmResourceDeleteSync<Authority>;

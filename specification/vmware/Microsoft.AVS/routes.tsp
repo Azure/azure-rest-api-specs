@@ -44,6 +44,7 @@ interface PrivateClouds {
 
   get is ArmResourceRead<PrivateCloud>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PrivateCloud>;
 
   // This could be modeled with ArmCustomPatchAsync if a 202 response with no body is used instead of a 201.
@@ -113,6 +114,7 @@ interface Clusters {
 
   get is ArmResourceRead<Cluster>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Cluster>;
 
   // This could be modeled with ArmCustomPatchAsync if a 202 response with no body is used instead of a 201.
@@ -171,6 +173,7 @@ interface Datastores {
 
   get is ArmResourceRead<Datastore>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Datastore>;
 
   #suppress "deprecated"
@@ -221,6 +224,7 @@ interface Authorizations {
 
   get is ArmResourceRead<ExpressRouteAuthorization>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ExpressRouteAuthorization,
     BaseParameters<PrivateCloud>
@@ -251,6 +255,7 @@ interface GlobalReachConnections {
 
   get is ArmResourceRead<GlobalReachConnection>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<GlobalReachConnection>;
 
   #suppress "deprecated"
@@ -293,6 +298,7 @@ interface WorkloadNetworkSegments {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_CreateSegments")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkSegment>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -357,6 +363,7 @@ interface WorkloadNetworkDhcpConfigurations {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_CreateDhcp")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkDhcp>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -432,6 +439,7 @@ interface WorkloadNetworkPortMirroringProfiles {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_CreatePortMirroring")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkPortMirroring>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -506,6 +514,7 @@ interface WorkloadNetworkVmGroups {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_CreateVMGroup")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkVMGroup>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -592,6 +601,7 @@ interface WorkloadNetworkDnsServices {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_CreateDnsService")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkDnsService>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -666,6 +676,7 @@ interface WorkloadNetworkDnsZones {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_CreateDnsZone")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkDnsZone>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -739,6 +750,7 @@ interface WorkloadNetworkPublicIps {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_CreatePublicIP")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkPublicIP>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PublicIPIdParameter should be last, but it is breaking to correct it."
@@ -786,6 +798,7 @@ interface CloudLinks {
 
   get is ArmResourceRead<CloudLink>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudLink>;
 
   #suppress "deprecated"
@@ -811,6 +824,7 @@ interface Addons {
 
   get is ArmResourceRead<Addon>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Addon>;
 
   #suppress "deprecated"
@@ -840,7 +854,6 @@ interface VirtualMachines {
   @doc("Enable or disable DRS-driven VM movement restriction")
   @armResourceAction(Location)
   @post
-  @extension("x-ms-long-running-operation", true)
   restrictMovement(
     ...ResourceInstanceParameters<VirtualMachine>,
 
@@ -858,6 +871,7 @@ interface PlacementPolicies {
 
   get is ArmResourceRead<PlacementPolicy>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PlacementPolicy>;
 
   // 202 response has a body, but it should not to match ArmCustomPatchAsync.
@@ -932,6 +946,7 @@ interface ScriptExecutions {
 
   get is ArmResourceRead<ScriptExecution>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ScriptExecution>;
 
   #suppress "deprecated"
@@ -977,6 +992,7 @@ interface IscsiPaths {
 
   get is ArmResourceRead<IscsiPath>;
 
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<IscsiPath>;
 
   #suppress "deprecated"

@@ -34,6 +34,7 @@ interface VirtualHardDisks {
   get is ArmResourceRead<VirtualHardDisk>;
 
   @doc("The operation to create or update a virtual hard disk. Please note some properties can be set only during virtual hard disk creation.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualHardDisk>;
 
   @doc("The operation to update a virtual hard disk.")
