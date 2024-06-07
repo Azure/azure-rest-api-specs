@@ -40,7 +40,7 @@ union ResourceKind {
   string,
 
   @doc("Resource is a Azure FunctionApp on Flex Consumption Plan.")
-  FunctionFlexConsumption: "FunctionFlexConsumption",
+  FunctionsFlexConsumption: "FunctionsFlexConsumption",
 }
 
 @doc("Test profile run status.")
@@ -132,7 +132,7 @@ model FunctionFlexConsumptionTargetResourceConfigurations
     The kind value to use when providing configuration.
     This should typically be not changed from its value.
     """)
-  kind: ResourceKind.FunctionFlexConsumption;
+  kind: ResourceKind.FunctionsFlexConsumption;
 
   @doc("A map of configurations for a Function app using Flex Consumption Plan.")
   configurations?: Record<FunctionFlexConsumptionResourceConfiguration>;
