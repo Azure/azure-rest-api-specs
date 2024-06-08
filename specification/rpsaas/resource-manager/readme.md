@@ -5,7 +5,12 @@
 ```yaml
 openapi-type: arm 
 openapi-subtype: rpaas
-tag: 2020-01-01-preview
+tag: package-2024-06-01-preview
+```
+
+```yaml $(tag) == 'package-2024-06-01-preview'
+input-file:
+  - Microsoft.Contoso/preview/2024-06-01-preview/openapi.json
 ```
 
 ```yaml $(tag) == '2020-01-01-preview'
