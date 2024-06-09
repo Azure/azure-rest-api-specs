@@ -37,13 +37,11 @@ interface FabricCapacities {
   listByResourceGroup is ArmResourceListByParent<FabricCapacity>;
   listBySubscription is ArmListBySubscription<FabricCapacity>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "No request payload and no response payload"
   @doc("Resume operation of the specified Fabric capacity instance.")
-  resume is ArmResourceActionAsync<FabricCapacity, void, void>;
+  resume is ArmResourceActionNoResponseContentAsync<FabricCapacity, void>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "No request payload and no response payload"
   @doc("Suspend operation of the specified Fabric capacity instance.")
-  suspend is ArmResourceActionAsync<FabricCapacity, void, void>;
+  suspend is ArmResourceActionNoResponseContentAsync<FabricCapacity, void>;
 
   checkNameAvailability is checkLocalNameAvailability;
 
