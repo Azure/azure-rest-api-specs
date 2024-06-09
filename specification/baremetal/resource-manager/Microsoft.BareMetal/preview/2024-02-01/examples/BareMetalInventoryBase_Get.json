@@ -1,0 +1,34 @@
+{
+  "operationId": "bareMetalInventoryBase_Get",
+  "title": "bareMetalInventoryBase_Get",
+  "parameters": {
+    "region": "westus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "rackId": "123-ky4-02",
+            "availabilityZone": "AZ1",
+            "bareMetalServerBaseList": [
+              {
+                "serverId": "123",
+                "switchPortsList": [
+                  {
+                    "switchName": "switch1",
+                    "connectedToPort": "port1"
+                  },
+                  {
+                    "switchName": "switch2",
+                    "connectedToPort": "port2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
