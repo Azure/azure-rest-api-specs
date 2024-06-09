@@ -1,0 +1,30 @@
+{
+  "operationId": "DelegatedIdentities_ListByResourceGroup",
+  "title": "DelegatedIdentities_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CloudDevicePlatform/delegatedIdentities/myIdentity",
+            "type": "Microsoft.CloudDevicePlatform/delegatedIdentities",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded"
+            },
+            "identity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "type": "SystemAssigned"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
