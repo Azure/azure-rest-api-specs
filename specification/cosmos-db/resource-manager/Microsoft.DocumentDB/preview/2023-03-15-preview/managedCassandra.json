@@ -425,6 +425,126 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterClusterResource}/backupRestores": {
+      "get": {
+        "operationId": "CassandraClusters_ListRestore",
+        "description": "List Restores on this cluster",
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraGetRestore": {
+            "$ref": "./examples/CosmosDBManagedCassandraGetRestore.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success, the restores will be listed"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed..",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterClusterResource}/backupRestores/{backupId}": {
+      "post": {
+        "operationId": "CassandraClusters_RestoreBackup",
+        "description": "Trigger restore of the specified back-up id on the cluster",
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraRestore": {
+            "$ref": "./examples/CosmosDBManagedCassandraRestore.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/backupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully triggered Restore. This will continue asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CassandraClusterRestoreResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed..",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterClusterResource}/restoreStatus/{restoreId}": {
+      "get": {
+        "operationId": "CassandraClusters_GetRestore",
+        "description": "Get information about a restore that has been triggered.",
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraGetRestore": {
+            "$ref": "./examples/CosmosDBManagedCassandraGetRestore.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/restoreNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The following restore operation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/CassandraClusterRestoreInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed..",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/dataCenters": {
       "get": {
         "operationId": "CassandraDataCenters_List",
@@ -1228,6 +1348,17 @@
       "maxLength": 15,
       "pattern": "^[0-9]+$"
     },
+    "restoreNameParameter": {
+      "name": "backupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Id of a restore of a Cassandra cluster.",
+      "minLength": 1,
+      "maxLength": 15,
+      "pattern": "^[0-9]+$"
+    },
     "repairRunId": {
       "name": "repairRunId",
       "in": "path",
@@ -1894,6 +2025,53 @@
           "description": "The retention period (hours) of the backups. If you want to retain data forever, set retention to 0.",
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "CassandraClusterRestoreResult": {
+      "type": "object",
+      "properties": {
+        "exitCode": {
+          "description": "The exit code returned by the command.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "commandOutput": {
+          "description": "The output from the command.",
+          "type": "string"
+        },
+        "commandErrorOutput": {
+          "description": "The error generated from the command.",
+          "type": "string"
+        },
+        "backupId": {
+          "description": "Backup Id to restore.",
+          "type": "string"
+        },
+        "startTimestamp": {
+          "description": "Starting time of restore.",
+          "type": "string"
+        }
+      }
+    },
+    "CassandraClusterRestoreInfo": {
+      "type": "object",
+      "properties": {
+        "backupId": {
+          "description": "Restore's Backup Id.",
+          "type": "string"
+        },
+        "startTimestamp": {
+          "description": "Time that the restore started.",
+          "type": "string"
+        },
+        "restoreId": {
+          "description": "Restore Id.",
+          "type": "string"
+        },
+        "nodeMap": {
+          "description": "Map of nodes and their restore status.",
+          "type": "string"
         }
       }
     },
