@@ -1360,7 +1360,7 @@ model WorkloadNetworkDhcpServer extends WorkloadNetworkDhcpEntity {
   serverAddress?: string;
 
   @doc("DHCP Server Lease Time.")
-  leaseTime?: int32;
+  leaseTime?: int64;
 
   @doc("Type of DHCP: SERVER or RELAY.")
   dhcpType: DhcpTypeEnum.SERVER;
