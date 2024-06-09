@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2023-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-11-01'
 input-file:
-  - Microsoft.Fabric/stable/2023-11-01/openapi.json
+  - Microsoft.Fabric/stable/2023-11-01/fabric.json
 ```
 ---
 
