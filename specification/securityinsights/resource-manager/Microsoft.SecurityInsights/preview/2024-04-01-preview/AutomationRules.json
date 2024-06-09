@@ -624,7 +624,8 @@
     },
     "AutomationRulePropertyArrayConditionSupportedArrayConditionType": {
       "enum": [
-        "AnyItem"
+        "AnyItem",
+        "AllItems"
       ],
       "type": "string",
       "example": "AnyItem",
@@ -635,6 +636,10 @@
           {
             "value": "AnyItem",
             "description": "Evaluate the condition as true if any item fulfills it"
+          },
+          {
+            "value": "AllItems",
+            "description": "Evaluate the condition as true if all the items fulfill it"
           }
         ]
       }
@@ -642,7 +647,8 @@
     "AutomationRulePropertyArrayConditionSupportedArrayType": {
       "enum": [
         "CustomDetails",
-        "CustomDetailValues"
+        "CustomDetailValues",
+        "IncidentLabels"
       ],
       "type": "string",
       "example": "CustomDetails",
@@ -657,6 +663,10 @@
           {
             "value": "CustomDetailValues",
             "description": "Evaluate the condition on a custom detail's values"
+          },
+          {
+            "value": "IncidentLabels",
+            "description": "Evaluate the condition on the incident labels"
           }
         ]
       }
