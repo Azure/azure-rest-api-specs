@@ -104,6 +104,8 @@ input-file:
 suppressions:
   - code: ImplementPrivateEndpointAPIs
     reason: False alarm.
+  - code: MissingSegmentsInNestedResourceListOperation
+    reason: False alarm.
 ```
 
 ### Tag: package-2023-11-preview
