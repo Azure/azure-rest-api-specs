@@ -291,6 +291,9 @@
           },
           "Create a scale set with SecurityType as ConfidentialVM and NonPersistedTPM securityEncryptionType": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSecurityTypeConfidentialVMWithNonPersistedTPM.json"
+          },
+          "Create a scale set with zonalPlatformFaultDomainAlignMode as Aligned": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithZonalPlatformFaultDomainAlignMode.json"
           }
         }
       },
@@ -5331,6 +5334,10 @@
         "resiliencyPolicy": {
           "$ref": "#/definitions/ResiliencyPolicy",
           "description": "Policy for Resiliency"
+        },
+        "zonalPlatformFaultDomainAlignMode": {
+          "$ref": "#/definitions/ZonalPlatformFaultDomainAlignMode",
+          "description": "Specifies the align mode between Virtual Machine Scale Set compute and storage Fault Domain count."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -6347,6 +6354,18 @@
         }
       },
       "description": "Specifies the security posture to be used for all virtual machines in the scale set. Minimum api-version: 2023-03-01"
+    },
+    "ZonalPlatformFaultDomainAlignMode": {
+      "type": "string",
+      "description": "Specifies the align mode between Virtual Machine Scale Set compute and storage Fault Domain count.",
+      "enum": [
+        "Aligned",
+        "Unaligned"
+      ],
+      "x-ms-enum": {
+        "name": "ZonalPlatformFaultDomainAlignMode",
+        "modelAsString": true
+      }
     }
   }
 }
