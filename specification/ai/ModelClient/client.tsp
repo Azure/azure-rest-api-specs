@@ -45,6 +45,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(ModelClient.FunctionCall, Access.public);
 @@access(ModelClient.FunctionDefinition, Access.public);
 @@access(ModelClient.ModelInfo, Access.public);
+@@access(ModelClient.ModelType, Access.public);
 @@access(ModelClient.StreamingChatChoiceUpdate, Access.public, "python");
 @@access(ModelClient.StreamingChatCompletionsUpdate, Access.public, "python");
 @@access(ModelClient.ChatMessageContentItem, Access.public);
