@@ -98,6 +98,12 @@ input-file:
   - Microsoft.Network/stable/2024-01-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2024-01-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2024-01-01/webapplicationfirewall.json
+
+suppressions:
+  - code: ImplementPrivateEndpointAPIs
+    reason: False alarm.
+  - code: PatchIdentityProperty
+    reason: False alarm.
 ```
 
 ### Tag: package-2023-11-preview

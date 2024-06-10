@@ -593,6 +593,9 @@
           },
           "Create subnet with sharing scope": {
             "$ref": "./examples/SubnetCreateWithSharingScope.json"
+          },
+          "Create subnet with service endpoints with network identifier": {
+            "$ref": "./examples/SubnetCreateServiceEndpointNetworkIdentifier.json"
           }
         }
       }
@@ -1683,6 +1686,10 @@
         "service": {
           "type": "string",
           "description": "The type of the endpoint service."
+        },
+        "networkIdentifier": {
+          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
+          "description": "Public IP Address Resource as network identifier."
         },
         "locations": {
           "type": "array",
