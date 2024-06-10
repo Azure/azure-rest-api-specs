@@ -23,13 +23,13 @@ using Azure.Core.Traits;
   title: "Azure Machine Learning Data Plane Services",
 })
 @server(
-  "{endpoint}/genericasset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
+  "{endpoint}/genericasset/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}",
   "Machinelearning Services Asset APIs",
   {
     @doc("""
 Supported Azure-AI asset endpoints.
 """)
-    endpoint: string,
+    endpoint: url,
 
     @doc("The ID of the target subscription.")
     subscriptionId: string,
@@ -49,4 +49,8 @@ enum Versions {
   @doc("Azure Machine Learning Services api version 2024-04-01-preview.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-04-01-preview`,
+
+  @doc("Azure Machine Learning Services api version 2024-05-01-preview.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `2024-05-01-preview`,
 }
