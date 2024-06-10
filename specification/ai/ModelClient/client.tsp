@@ -48,6 +48,11 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(ModelClient.ModelInfo, Access.public);
 @@access(ModelClient.StreamingChatChoiceUpdate, Access.public, "python");
 @@access(ModelClient.StreamingChatCompletionsUpdate, Access.public, "python");
+@@access(ModelClient.ChatMessageContentItem, Access.public);
+@@access(ModelClient.ChatMessageTextContentItem, Access.public);
+@@access(ModelClient.ChatMessageImageContentItem, Access.public);
+@@access(ModelClient.ChatMessageImageUrl, Access.public);
+@@access(ModelClient.ChatMessageImageDetailLevel, Access.public);
 
 // The operators need to be hidden, since we hand-write the public versions of those to
 // 1. Add chat completions streaming (to getChatCompletions operator)
