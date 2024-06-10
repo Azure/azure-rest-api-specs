@@ -6,7 +6,7 @@ using Azure.ResourceManager;
 
 @armProviderNamespace
 @service({
-  title: "Azure CIS FRP"
+  title: "Azure CIS FRP",
 })
 @doc("CloudSprout Service")
 @versioned(Microsoft.AzureCis.Versions)
