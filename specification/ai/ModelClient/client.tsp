@@ -72,19 +72,25 @@ interface Client1 {
   getModelInfo is ModelClient.getModelInfo;
 }
 
-@client({
-  name: "EmbeddingsClient",
-  service: ModelClient,
-}, "python")
+@client(
+  {
+    name: "EmbeddingsClient",
+    service: ModelClient,
+  },
+  "python"
+)
 interface Client2 {
   embed is ModelClient.getEmbeddings;
   getModelInfo is ModelClient.getModelInfo;
 }
 
-@client({
-  name: "ImageEmbeddingsClient",
-  service: ModelClient,
-}, "python")
+@client(
+  {
+    name: "ImageEmbeddingsClient",
+    service: ModelClient,
+  },
+  "python"
+)
 interface Client3 {
   embed is ModelClient.getImageEmbeddings;
   getModelInfo is ModelClient.getModelInfo;
