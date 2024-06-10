@@ -4,18 +4,25 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 // operation overrides
-@@access(Azure.Batch.BatchOps.ListOperation, Access.internal, "java");
-@@access(Azure.Batch.BatchOps.ReadOperation, Access.internal, "java");
-@@access(Azure.Batch.BatchOps.DeleteOperation, Access.internal, "java");
-@@access(Azure.Batch.BatchOps.CreateOperation, Access.internal, "java");
-@@access(Azure.Batch.BatchOps.UpdateOperation, Access.internal, "java");
-@@access(Azure.Batch.BatchOps.ReplaceOperation, Access.internal, "java");
-@@access(Azure.Batch.BatchOps.PostOperation, Access.internal, "java");
-@@access(Azure.Batch.BatchOps.ResourceInfoOperation, Access.internal, "java");
-@@access(Azure.Batch.BatchOps.ResourceInfoOperationWithAdditionalResponse,
+@@access(Azure.Batch.ListOperation, Access.internal, "java");
+@@access(Azure.Batch.ReadOperation, Access.internal, "java");
+@@access(Azure.Batch.DeleteOperation, Access.internal, "java");
+@@access(Azure.Batch.CreateOperation, Access.internal, "java");
+@@access(Azure.Batch.UpdateOperation, Access.internal, "java");
+@@access(Azure.Batch.ReplaceOperation, Access.internal, "java");
+@@access(Azure.Batch.PostOperation, Access.internal, "java");
+@@access(Azure.Batch.FileOperation, Access.internal, "java");
+@@access(Azure.Batch.HeadFileOperation, Access.internal, "java");
+@@access(Azure.Batch.ResourceInfoOperationWithAdditionalResponse,
   Access.internal,
   "java"
 );
+
+// Api overrides
+@@access(Azure.Batch.Batch.poolExists, Access.internal, "csharp");
+@@access(Azure.Batch.Batch.jobScheduleExists, Access.internal, "csharp");
+@@access(Azure.Batch.Batch.getTaskFileProperties, Access.internal, "csharp");
+@@access(Azure.Batch.Batch.getNodeFileProperties, Access.internal, "csharp");
 
 // model overrides
 @@access(Azure.Batch.BatchApplicationListResult, Access.public, "java");
