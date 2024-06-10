@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
@@ -25,6 +24,7 @@ model AzureLargeStorageInstance
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 @armResourceOperations
 @clientName("AzureLargeStorageInstance")
 interface AzureLargeStorageInstances {
