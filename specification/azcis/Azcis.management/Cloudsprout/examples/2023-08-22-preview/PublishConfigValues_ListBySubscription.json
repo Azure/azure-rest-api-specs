@@ -1,0 +1,42 @@
+{
+  "title": "ListBySubscription PublishConfigValue",
+  "operationId": "PublishConfigValues_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "api-version": "2023-08-22-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCIS/publishConfigValues/prodUSEastAzcis",
+            "name": "prodUSEastAzcis",
+            "type": "Microsoft.AzureCIS/publishConfigValues",
+            "properties": {
+              "publishValues": [
+                {
+                  "Moniker": "test_namespace_one.test_label_one",
+                  "Value": "test_value_one",
+                  "Scope": {
+                    "GeoType": "Cloud",
+                    "GeoValue": "Public"
+                  }
+                },
+                {
+                  "Moniker": "test_namespace_two.test_label_two",
+                  "Value": "test_value_two",
+                  "Scope": {
+                    "GeoType": "Cloud",
+                    "GeoValue": "Public"
+                  }
+                }
+              ],
+              "cloudSproutEnv": "Test"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
