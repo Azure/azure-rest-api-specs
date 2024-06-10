@@ -389,9 +389,17 @@
           "type": "string",
           "description": "The name of the tuning option."
         },
-        "properties": {}
+        "properties": {
+          "$ref": "#/definitions/TuningOptionsResourceProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of Tuning Options resource."
+        }
       },
       "description": "Stores property that features impact on some metric if this recommended action is applied."
+    },
+    "TuningOptionsResourceProperties": {
+      "type": "object",
+      "description": "Properties for the PostgreSQL flexible server tuning option resource."
     },
     "TuningOptionsListResult": {
       "description": "A list of available tuning options.",
