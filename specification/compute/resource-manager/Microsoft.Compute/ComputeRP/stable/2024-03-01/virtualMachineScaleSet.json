@@ -5318,10 +5318,6 @@
           "$ref": "#/definitions/PriorityMixPolicy",
           "description": "Specifies the desired targets for mixing Spot and Regular priority VMs within the same VMSS Flex instance."
         },
-        "zonalPlatformFaultDomainAlignMode": {
-          "$ref": "#/definitions/ZonalPlatformFaultDomainAlignMode",
-          "description": "Specifies the align mode between Virtual Machine Scale Set compute and storage Fault Domain count."
-        },
         "timeCreated": {
           "readOnly": true,
           "type": "string",
@@ -6351,18 +6347,6 @@
         }
       },
       "description": "Specifies the security posture to be used for all virtual machines in the scale set. Minimum api-version: 2023-03-01"
-    },
-    "ZonalPlatformFaultDomainAlignMode": {
-      "type": "string",
-      "description": "Specifies the align mode between Virtual Machine Scale Set compute and storage Fault Domain count.",
-      "enum": [
-        "Aligned",
-        "Unaligned"
-      ],
-      "x-ms-enum": {
-        "name": "ZonalPlatformFaultDomainAlignMode",
-        "modelAsString": true
-      }
     }
   }
 }
