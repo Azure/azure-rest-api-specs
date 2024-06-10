@@ -63,6 +63,29 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(ModelClient.getImageEmbeddings, Access.internal, "python");
 @@access(ModelClient.getModelInfo, Access.internal, "python");
 
+// We use shorter names in the Python client library
+@@clientName(ModelClient.ChatRequestSystemMessage, "SystemMessage", "python");
+@@clientName(ModelClient.ChatRequestUserMessage, "UserMessage", "python");
+@@clientName(ModelClient.ChatRequestAssistantMessage,
+  "AssistantMessage",
+  "python"
+);
+@@clientName(ModelClient.ChatRequestToolMessage, "ToolMessage", "python");
+@@clientName(ModelClient.ChatMessageContentItem, "ContentItem", "python");
+@@clientName(ModelClient.ChatMessageTextContentItem,
+  "TextContentItem",
+  "python"
+);
+@@clientName(ModelClient.ChatMessageImageContentItem,
+  "ImageContentItem",
+  "python"
+);
+@@clientName(ModelClient.ChatMessageImageUrl, "ImageUrl", "python");
+@@clientName(ModelClient.ChatMessageImageDetailLevel,
+  "ImageDetailLevel",
+  "python"
+);
+
 @client({
   name: "ChatCompletionsClient",
   service: ModelClient,

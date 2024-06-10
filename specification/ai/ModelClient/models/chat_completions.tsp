@@ -279,7 +279,6 @@ model ChatRequestMessage {
 A request chat message containing system instructions that influence how the model will generate a chat completions
 response.
 """)
-@clientName("SystemMessage", "python")
 model ChatRequestSystemMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'system' for system messages.")
   role: ChatRole.system;
@@ -289,7 +288,6 @@ model ChatRequestSystemMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing user input to the assistant.")
-@clientName("UserMessage", "python")
 model ChatRequestUserMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'user' for user messages.")
   role: ChatRole.user;
@@ -300,7 +298,6 @@ model ChatRequestUserMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing response or action from the assistant.")
-@clientName("AssistantMessage", "python")
 model ChatRequestAssistantMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'assistant' for assistant messages.")
   role: ChatRole.assistant;
@@ -318,7 +315,6 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing requested output from a configured tool.")
-@clientName("ToolMessage", "python")
 model ChatRequestToolMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'tool' for tool messages.")
   role: ChatRole.tool;
