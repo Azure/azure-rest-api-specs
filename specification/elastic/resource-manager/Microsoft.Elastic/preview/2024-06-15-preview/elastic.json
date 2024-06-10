@@ -2128,6 +2128,59 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/resubscribe": {
+      "post": {
+        "tags": [
+          "Organizations_Resubscribe"
+        ],
+        "summary": "List of upgradable versions for a given monitor resource.",
+        "operationId": "Organizations_Resubscribe",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resubscribe Properties",
+            "schema": {
+              "$ref": "#/definitions/ResubscribeProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResubscribeResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpgradableVersions_Details": {
+            "$ref": "./examples/Organizations_Resubscribe.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3505,7 +3558,43 @@
           "type": "string"
         }
       }
-    }
+    },
+    "ResubscribeProperties": {
+      "description": "Resubscribe Properties",
+      "type": "object",
+      "properties": {
+        "planId": {
+          "description": "Newly selected plan Id to create the new Marketplace subscription for Resubscribe",
+          "type": "string"
+        },
+        "term": {
+          "description": "Newly selected term to create the new Marketplace subscription for Resubscribe",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Newly selected Azure Subscription Id in which the new Marketplace subscription will be created for Resubscribe",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Newly selected Azure resource group in which the new Marketplace subscription will be created for Resubscribe",
+          "type": "string"
+        },
+        "organizationId": {
+          "description": "Organization Id of the Elastic Organization that needs to be resubscribed",
+          "type": "string"
+        }
+      }
+    },
+    "ResubscribeResponse": {
+      "description": "Resubscribe Response",
+      "type": "object",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "description": "This will be the newly created MarketplaceSubscriptionId for resubscribing the organization.",
+          "type": "string"
+        }
+      }
+    }    
   },
   "parameters": {
     "MonitorNameParameter": {
