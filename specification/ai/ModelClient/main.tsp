@@ -21,6 +21,7 @@ using Azure.Core;
 @service({
   title: "AI Model Inference",
 })
+@clientName("Inference", "javascript");
 @versioned(ModelClient.Versions)
 namespace ModelClient;
 
