@@ -1,14 +1,13 @@
 {
     "parameters": {
-      "subscriptionId": "00000000-0000-0000-0000-000000000001",
-      "resourceGroupName": "my-resource-group",
+      "groupId": "my-management-group-id",
       "deploymentName": "my-deployment",
       "api-version": "2024-07-01",
       "parameters": {
         "properties": {
+          "location": "eastus",
           "templateLink": {
-            "uri": "https://example.com/exampleTemplate.json",
-            "queryString": "sv=2019-02-02&st=2019-04-29T22%3A18%3A26Z&se=2019-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=xxxxxxxx0xxxxxxxxxxxxx%2bxxxxxxxxxxxxxxxxxxxx%3d"
+            "uri": "https://example.com/exampleTemplate.json"
           },
           "parameters": {},
           "mode": "Incremental"
@@ -18,12 +17,12 @@
     "responses": {
       "200": {
         "body": {
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+          "id": "/providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Resources/deployments/my-deployment",
           "name": "my-deployment",
           "type": "Microsoft.Resources/deployments",
           "properties": {
             "templateLink": {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Resources/TemplateSpecs/TemplateSpec-Name/versions/v1",
+              "uri": "https://example.com/exampleTemplate.json",
               "contentVersion": "1.0.0.0"
             },
             "templateHash": "0000000000000000000",
@@ -35,12 +34,12 @@
             "correlationId": "00000000-0000-0000-0000-000000000000",
             "providers": [
               {
-                "namespace": "Microsoft.Storage",
+                "namespace": "Microsoft.Authorization",
                 "resourceTypes": [
                   {
-                    "resourceType": "storageAccounts",
+                    "resourceType": "policyAssignments",
                     "locations": [
-                      "eastus"
+                      null
                     ]
                   }
                 ]
@@ -48,7 +47,9 @@
             ],
             "dependencies": [],
             "validatedResources": [
-              "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Storage/storageAccounts/my-storage-account"
+              {
+                "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment"
+              }
             ],
             "diagnostics": [
                 {
