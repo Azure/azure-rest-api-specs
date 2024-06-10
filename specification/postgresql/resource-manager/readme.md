@@ -90,6 +90,9 @@ suppressions:
   - code: PutResponseCodes
     from: Backups.json
     reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: Backups.json
+    reason: FlexibleServers namespace is already returning 202 as response for PUT. These APIs are under same namespace and hence keeping it as-is.
 ```
 
 
