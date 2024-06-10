@@ -9,19 +9,44 @@
       "body": {
         "value": [
           {
-            "policyName": "Hate",
-            "description": "Multi-level filter for hate speech.",
-            "filterType": "MultiLevel"
+            "name": "Hate",
+            "isMultiLevelFilter": true
           },
           {
-            "policyName": "Sexual",
-            "description": "Multi-level filter for sexual content.",
-            "filterType": "MultiLevel"
+            "name": "Sexual",
+            "isMultiLevelFilter": true
           },
           {
-            "policyName": "HateSpeechPatterns",
-            "description": "Global blocklist for hate speech.",
-            "filterType": "Switch"
+            "name": "Violence",
+            "isMultiLevelFilter": true
+          },
+          {
+            "name": "Selfharm",
+            "isMultiLevelFilter": true
+          },
+          {
+            "name": "Jailbreak",
+            "isMultiLevelFilter": false,
+            "source": "Prompt"
+          },
+          {
+            "name": "Protected Material Text",
+            "isMultiLevelFilter": false,
+            "source": "Completion"
+          },
+          {
+            "name": "Protected Material Code",
+            "isMultiLevelFilter": false,
+            "source": "Completion"
+          },
+          {
+            "name": "Profanity",
+            "isMultiLevelFilter": false
+          },
+          {
+            "name": "Indirect Attack",
+            "isMultiLevelFilter": false,
+            "source": "Prompt"
           }
         ]
       }
