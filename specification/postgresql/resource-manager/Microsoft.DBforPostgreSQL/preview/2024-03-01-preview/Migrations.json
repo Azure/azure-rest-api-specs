@@ -370,7 +370,7 @@
         "tags": [
           "Migrations"
         ],
-        "operationId": "GetAutoMigrationFreeSlots",
+        "operationId": "GetAutoMigrationFreeSlots_List",
         "x-ms-examples": {
           "GetAutoMigrationFreeSlots": {
             "$ref": "./examples/Migrations_GetAutoMigrationFreeSlots.json"
@@ -515,6 +515,10 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     }
