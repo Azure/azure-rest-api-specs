@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-03
+tag: package-preview-2024-05
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -148,6 +148,16 @@ directive:
   - remove-operation: NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope
 ```
 
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-05-20-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-05-20-preview/privateLinkScopes.json
+```
 
 ### Tag: package-preview-2024-03
 
