@@ -3631,15 +3631,10 @@
           "type": "string",
           "format": "uri",
           "description": "Specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings. The api-version query parameter is not allowed."
-        },
-        "authentication": {
-          "$ref": "#/definitions/OnYourDataAuthenticationOptions",
-          "description": "Specifies the authentication options to use when retrieving embeddings from the specified endpoint."
         }
       },
       "required": [
-        "endpoint",
-        "authentication"
+        "endpoint"
       ],
       "allOf": [
         {
