@@ -8,7 +8,9 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+
 namespace Microsoft.ApiCenter;
+
 @doc("The service entity.")
 model Service is TrackedResource<ServiceProperties> {
   @doc("The name of Azure API Center service.")
@@ -19,9 +21,12 @@ model Service is TrackedResource<ServiceProperties> {
   @key("serviceName")
   @segment("services")
   name: string;
-
+  
+  ...ResourceSkuProperty;
   ...ManagedServiceIdentityProperty;
 }
+
+@@added(Service.sku, Versions.v2024_05_01);
 
 @armResourceOperations
 interface Services {

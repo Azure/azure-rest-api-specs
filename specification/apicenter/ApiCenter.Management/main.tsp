@@ -201,15 +201,15 @@ model ArmResponseWithEtag<T> {
   ...Body<T>;
 }
 
-@added(Versions.v2024_05_01)
 model IfMatchParameters<T> {
+  @added(Versions.v2024_05_01)
   @doc("The request should only proceed if an entity matches this string.")
   @header("If-Match")
   ifMatch?: string;
 }
 
-@added(Versions.v2024_05_01)
 model IfNoneMatchParameters<T> {
+  @added(Versions.v2024_05_01)
   @header("If-None-Match")
   @doc("The request should only proceed if no entity matches this string.")
   ifNoneMatch?: string;
