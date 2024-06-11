@@ -4,7 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace ModelClient;
+namespace Model;
 
 alias EmbeddingsOptions = {
   @doc("""

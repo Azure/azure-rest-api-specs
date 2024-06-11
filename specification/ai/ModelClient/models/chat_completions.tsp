@@ -7,7 +7,7 @@ using TypeSpec.Http;
 
 using Azure.ClientGenerator.Core;
 
-namespace ModelClient;
+namespace Model;
 
 alias ChatCompletionsOptions = {
   @doc("""
