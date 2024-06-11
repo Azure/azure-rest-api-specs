@@ -249,51 +249,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/getAppKey": {
-      "post": {
-        "tags": [
-          "AppKey"
-        ],
-        "summary": "Get the app key for a given monitor resource.",
-        "operationId": "Monitors_GetAppKey",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DatadogAppKey"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Monitors_GetDefaultKey": {
-            "$ref": "./examples/GetAppKey.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/getDefaultKey": {
       "post": {
         "tags": [
@@ -1688,34 +1643,6 @@
         "properties": {
           "$ref": "#/definitions/CreateResourceSupportedProperties",
           "description": "Represents the properties of the resource."
-        }
-      }
-    },
-    "DatadogAppKey": {
-      "required": [
-        "key"
-      ],
-      "type": "object",
-      "properties": {
-        "createdBy": {
-          "description": "The user that created the App key.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the App key.",
-          "type": "string"
-        },
-        "key": {
-          "description": "The value of the App key.",
-          "type": "string"
-        },
-        "organizationId": {
-          "description": "The organization Id associated with the App key.",
-          "type": "string"
-        },
-        "revoked": {
-          "description": "The app key is revoked or not.",
-          "type": "boolean"
         }
       }
     },
