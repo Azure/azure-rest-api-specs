@@ -368,7 +368,7 @@
       "properties": {
         "publishValues": {
           "type": "array",
-          "description": "PublishValues.",
+          "description": "The array of config whose value needs to be published.",
           "items": {
             "$ref": "#/definitions/PublishValue"
           },
@@ -380,7 +380,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/PublishConfigValuesProvisioningState",
-          "description": "Provisioning state",
+          "description": "Resource Provisioning state",
           "readOnly": true
         }
       },
@@ -390,11 +390,11 @@
     },
     "PublishValue": {
       "type": "object",
-      "description": "PublishValue.",
+      "description": "The config whose value needs to be published.",
       "properties": {
         "moniker": {
           "type": "string",
-          "description": "Moniker"
+          "description": "The unique name in CloudSprout whose value needs to be published."
         },
         "value": {
           "type": "string",
