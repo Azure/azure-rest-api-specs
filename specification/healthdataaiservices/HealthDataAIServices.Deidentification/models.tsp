@@ -174,7 +174,7 @@ model TargetStorageLocation {
 @doc("Enum of supported Data Types.")
 union DocumentDataType {
   @doc("Plain text data type.")
-  PlainText: "PlainText",
+  Plaintext: "Plaintext",
 
   string,
 }
