@@ -249,61 +249,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listAppKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/getAppKey": {
       "post": {
         "tags": [
           "AppKey"
         ],
-        "summary": "List the app keys for a given monitor resource.",
-        "operationId": "Monitors_ListAppKeys",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DatadogAppKeyListResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Monitors_ListApiKeys": {
-            "$ref": "./examples/AppKeys_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/getDefaultAppKey": {
-      "post": {
-        "tags": [
-          "AppKey"
-        ],
-        "summary": "Get the default app key for a given monitor resource.",
-        "operationId": "Monitors_GetDefaultAppKey",
+        "summary": "Get the app key for a given monitor resource.",
+        "operationId": "Monitors_GetAppKey",
         "produces": [
           "application/json"
         ],
@@ -337,59 +289,7 @@
         },
         "x-ms-examples": {
           "Monitors_GetDefaultKey": {
-            "$ref": "./examples/AppKeys_GetDefaultKey.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/setDefaultAppKey": {
-      "post": {
-        "tags": [
-          "AppKey"
-        ],
-        "summary": "Set the default app key.",
-        "operationId": "Monitors_SetDefaultAppKey",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/DatadogAppKey"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Monitors_SetDefaultKey": {
-            "$ref": "./examples/AppKeys_SetDefaultKey.json"
+            "$ref": "./examples/GetAppKey.json"
           }
         }
       }
@@ -1852,23 +1752,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DatadogApiKey"
-          }
-        },
-        "nextLink": {
-          "description": "Link to the next set of results, if any.",
-          "type": "string"
-        }
-      }
-    },
-    "DatadogAppKeyListResponse": {
-      "description": "Response of a list operation.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Results of a list operation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DatadogAppKey"
           }
         },
         "nextLink": {
