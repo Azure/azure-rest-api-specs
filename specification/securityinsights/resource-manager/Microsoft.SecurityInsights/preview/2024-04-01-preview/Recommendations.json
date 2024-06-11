@@ -73,6 +73,9 @@
               "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -307,8 +310,16 @@
             "$ref": "#/definitions/Recommendation"
           },
           "description": "An list of recommendations"
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       },
+      "required": [
+        "value"
+      ],
       "type": "object"
     },
     "RecommendedSuggestion": {
