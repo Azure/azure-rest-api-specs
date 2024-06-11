@@ -26,16 +26,3 @@ import "./Microsoft.EventGrid/EventGrid.tsp";
 import "./Microsoft.ResourceNotifications/ResourceNotifications.tsp";
 
 import "./propertyNameOverride.tsp";
-
-/** Azure Messaging EventGrid SystemEvents */
-@service({
-  title: "Azure.Messaging.SystemEvents",
-})
-@versioned(ServiceApiVersions)
-namespace Microsoft.EventGrid.SystemEvents {
-  using TypeSpec.Versioning;
-
-  enum ServiceApiVersions {
-    v2024_01_01: "2024-01-01",
-  }
-}
