@@ -15,14 +15,14 @@ namespace Microsoft.AzureCis;
 
 @doc("PublishConfigValuesResource properties")
 model PublishConfigValuesResourceProperties {
-  @doc("PublishValues.")
+  @doc("Publish value array.")
   @extension("x-ms-identifiers", [])
   publishValues: Array<PublishValue>;
 
   @doc("CloudSprout environment to publish the value to. Optional.")
   cloudSproutEnv?: string;
 
-  @doc("Provisioning state")
+  @doc("Resource Provisioning state")
   @visibility("read")
   provisioningState?: PublishConfigValuesProvisioningState;
 }
@@ -39,7 +39,7 @@ model PublishConfigValuesResource
   name: string;
 }
 
-@doc("PublishValue.")
+@doc("Publish Value model.")
 model PublishValue {
   @doc("Moniker")
   moniker: string;
