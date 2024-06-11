@@ -4,7 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Model;
+namespace AI.Model;
 
 @doc("Represents the input types used for embedding search.")
 union EmbeddingInputType {

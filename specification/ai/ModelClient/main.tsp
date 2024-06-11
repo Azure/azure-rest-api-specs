@@ -22,7 +22,7 @@ using Azure.Core;
   title: "AI Model Inference",
 })
 @versioned(ModelClient.Versions)
-namespace Model;
+namespace AI.Model;
 
 @doc("The ModelClient service versions.")
 enum Versions {
