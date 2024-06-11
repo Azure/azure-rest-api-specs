@@ -844,6 +844,58 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
+      },
+      "get": {
+        "operationId": "InboundSecurityRule_Get",
+        "description": "Retrieves the available specified Network Virtual Appliance Inbound Security Rules Collection.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Virtual Appliance."
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of security rule collection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the requested Network Virtual Appliance Inbound Security Rules Collection resource.",
+            "schema": {
+              "$ref": "#/definitions/InboundSecurityRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Network Virtual Appliance Inbound Security Rules": {
+            "$ref": "./examples/InboundSecurityRuleGet.json"
+          }
+        }
       }
     }
   },
