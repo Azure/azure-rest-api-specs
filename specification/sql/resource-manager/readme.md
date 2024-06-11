@@ -3141,7 +3141,4 @@ directive:
     reason: This warning gives many positives for existing APIs that cannot be changed.
   - suppress: EnumInsteadOfBoolean
     reason: This warning gives many positives for existing APIs that cannot be changed.
-  - suppress: Invalid_Type
-    from: DatabaseAdvisors.json
-    reason: The work is in progress by the feature team.
 ```
