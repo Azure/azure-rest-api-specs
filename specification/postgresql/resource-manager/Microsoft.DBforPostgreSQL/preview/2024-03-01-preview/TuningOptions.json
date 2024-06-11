@@ -226,11 +226,11 @@
         },
         "indexColumns": {
           "type": "string",
-          "description": "Index columns."
+          "description": "Index columns. These will be semi-column separated."
         },
         "includedColumns": {
           "type": "string",
-          "description": "Index included columns."
+          "description": "Index included columns. These will be semi-column separated."
         }
       },
       "description": "Recommendation details for the recommended action."
@@ -241,12 +241,12 @@
         "initialRecommendedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Creation time of this recommendation."
+          "description": "Creation time of this recommendation in UTC date-time string format."
         },
         "lastRecommendedTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The last refresh of this recommendation."
+          "description": "The last refresh of this recommendation in UTC date-time string format."
         },
         "timesRecommended": {
           "format": "int32",
@@ -289,12 +289,12 @@
             "startTime": {
               "type": "string",
               "format": "date-time",
-              "description": "Workload start time."
+              "description": "Workload start time in UTC date-time string format."
             },
             "endTime": {
               "type": "string",
               "format": "date-time",
-              "description": "Workload end time."
+              "description": "Workload end time in UTC date-time string format."
             },
             "queryCount": {
               "format": "int32",
