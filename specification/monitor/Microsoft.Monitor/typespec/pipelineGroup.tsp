@@ -246,8 +246,13 @@ interface PipelineGroups {
   @doc("Returns the specific pipeline group instance.")
   get is ArmResourceRead<PipelineGroup>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create or update a pipeline group instance.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<PipelineGroup>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    PipelineGroup,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Delete a pipeline group instance.")
   delete is ArmResourceDeleteWithoutOkAsync<PipelineGroup>;

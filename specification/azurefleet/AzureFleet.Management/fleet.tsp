@@ -212,7 +212,12 @@ union EvictionPolicy {
 @armResourceOperations
 interface Fleets {
   get is ArmResourceRead<Fleet>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Fleet>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Fleet,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Fleet>;
   listByResourceGroup is ArmResourceListByParent<Fleet>;

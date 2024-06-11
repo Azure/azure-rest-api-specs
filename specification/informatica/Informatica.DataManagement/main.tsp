@@ -57,7 +57,12 @@ interface Organizations
       OrganizationProperties
     > {
   get is ArmResourceRead<InformaticaOrganizationResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaOrganizationResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    InformaticaOrganizationResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
@@ -83,7 +88,12 @@ interface Organizations
 interface ServerlessRuntimes
   extends ProxyResourceOperations<InformaticaServerlessRuntimeResource> {
   get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    InformaticaServerlessRuntimeResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,

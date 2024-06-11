@@ -334,11 +334,14 @@ model SkipProperties {
 interface UpdateRuns {
   get is ArmResourceRead<UpdateRun>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE AT NEXT VERSION"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     UpdateRun,
     Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
       IfMatchParameters<UpdateRun> &
-      IfNoneMatchParameters<UpdateRun>
+      IfNoneMatchParameters<UpdateRun>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "deprecated" "Existing API"
