@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -26,6 +27,10 @@ model PlannedQuotaResourceProperties {
 
   @doc("Stage name")
   stage?: string;
+
+  @doc("Region name")
+  @added(Versions.v2023_08_22)
+  region: string;
 
   @doc("Plan version")
   planVersion?: string;
