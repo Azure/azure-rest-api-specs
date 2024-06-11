@@ -262,6 +262,9 @@
           "Create a scale set with priority mix policy": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithPriorityMixPolicy.json"
           },
+          "Create a scale set with sku profile": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSkuProfile.json"
+          },
           "Create a VMSS with an extension with protectedSettingsFromKeyVault": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithProtectedSettingsFromKeyVault.json"
           },
@@ -4052,6 +4055,41 @@
       },
       "description": "Specifies the target splits for Spot and Regular priority VMs within a scale set with flexible orchestration mode. With this property the customer is able to specify the base number of regular priority VMs created as the VMSS flex instance scales out and the split between Spot and Regular priority VMs after this base target has been reached."
     },
+    "SkuProfile": {
+      "type": "object",
+      "properties": {
+        "vmSizes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuProfileVMSize"
+          },
+          "description": "Specifies the VM sizes for the virtual machine scale set."
+        },
+        "allocationStrategy": {
+          "type": "string",
+          "description": "Species the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.",
+          "enum": [
+            "LowestPrice",
+            "CapacityOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "AllocationStrategy",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes and an allocation strategy."
+    },
+    "SkuProfileVMSize": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Specifies the name of the VM Size."
+        }
+      },
+      "description": "Specifies the VM Size."
+    },
     "OrchestrationMode": {
       "type": "string",
       "description": "Specifies the orchestration mode for the virtual machine scale set.",
@@ -5331,6 +5369,10 @@
         "resiliencyPolicy": {
           "$ref": "#/definitions/ResiliencyPolicy",
           "description": "Policy for Resiliency"
+        },
+        "skuProfile": {
+          "$ref": "#/definitions/SkuProfile",
+          "description": "Specifies the sku profile for the virtual machine scale set."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -5384,6 +5426,10 @@
         "resiliencyPolicy": {
           "$ref": "#/definitions/ResiliencyPolicy",
           "description": "Policy for Resiliency"
+        },
+        "skuProfile": {
+          "$ref": "#/definitions/SkuProfile",
+          "description": "Specifies the sku profile for the virtual machine scale set."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
