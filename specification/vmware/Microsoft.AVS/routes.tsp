@@ -300,7 +300,7 @@ interface WorkloadNetworkSegments {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkSegment,
-    WorkloadNetworkSegmentUpdate
+    WorkloadNetworkSegment
   >;
 
   #suppress "deprecated"
@@ -361,7 +361,7 @@ interface WorkloadNetworkDhcpConfigurations {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDhcp")
-  update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcpUpdate>;
+  update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcp>;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -439,7 +439,7 @@ interface WorkloadNetworkPortMirroringProfiles {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkPortMirroring,
-    WorkloadNetworkPortMirroringUpdate
+    WorkloadNetworkPortMirroring
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PortMirroringProfileParameter should be last, but it is breaking to correct it."
@@ -513,7 +513,7 @@ interface WorkloadNetworkVmGroups {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkVMGroup,
-    WorkloadNetworkVMGroupUpdate
+    WorkloadNetworkVMGroup
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "VmGroupIdParameter should be last, but it is breaking to correct it."
@@ -599,7 +599,7 @@ interface WorkloadNetworkDnsServices {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsService,
-    WorkloadNetworkDnsServiceUpdate
+    WorkloadNetworkDnsService
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsServiceIdParameter should be last, but it is breaking to correct it."
@@ -673,7 +673,7 @@ interface WorkloadNetworkDnsZones {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsZone,
-    WorkloadNetworkDnsZoneUpdate
+    WorkloadNetworkDnsZone
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsZoneIdParameter should be last, but it is breaking to correct it."
