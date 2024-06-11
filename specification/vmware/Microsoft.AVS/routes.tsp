@@ -298,10 +298,7 @@ interface WorkloadNetworkSegments {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    WorkloadNetworkSegment,
-    WorkloadNetworkSegment
-  >;
+  update is ArmCustomPatchAsync<WorkloadNetworkSegment, WorkloadNetworkSegment>;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -511,10 +508,7 @@ interface WorkloadNetworkVmGroups {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateVMGroup")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    WorkloadNetworkVMGroup,
-    WorkloadNetworkVMGroup
-  >;
+  update is ArmCustomPatchAsync<WorkloadNetworkVMGroup, WorkloadNetworkVMGroup>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "VmGroupIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -671,10 +665,7 @@ interface WorkloadNetworkDnsZones {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsZone")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    WorkloadNetworkDnsZone,
-    WorkloadNetworkDnsZone
-  >;
+  update is ArmCustomPatchAsync<WorkloadNetworkDnsZone, WorkloadNetworkDnsZone>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsZoneIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
