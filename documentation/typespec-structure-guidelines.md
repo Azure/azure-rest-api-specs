@@ -4,9 +4,9 @@
   - [Service folder structure](#service-folder-structure)
   - [Libraries for service groups](#libraries-for-service-groups)
 - [Specification versioning](#specification-versioning)
-    - [Organizing services in folders](#organizing-services-in-folders)
-    - [Utilizing feature branches](#utilizing-feature-branches)
-    - [Publishing specifications](#publishing-specifications)
+  - [Organizing services in folders](#organizing-services-in-folders)
+  - [Utilizing feature branches](#utilizing-feature-branches)
+  - [Publishing specifications](#publishing-specifications)
 
 # Guidelines for TypeSpec project repositories
 
@@ -18,7 +18,7 @@ This document provides guidelines for managing TypeSpec projects for Azure. It o
 
 The structure of TypeSpec project repositories starts with the [specification](https://aka.ms/azsdk/spec-dirs) folder, serving as the root for all service specifications. Each child folder, denoted as `<azureTeam>`, corresponds to a service specification for a specific Azure team. In more complex scenarios, such as larger teams, the `<azureTeam>` folder can host multiple services, forming what is known as a service group.
 
-The `<azureTeam>` folder can include multiple `<typeSpecFolder>`s, each containing the TypeSpec specification for a given service or service group.
+The `<azureTeam>` folder can include multiple `<typeSpecSrc>` folders, each containing the TypeSpec specification for a given service or service group.
 
 A given TypeSpec project folder can represent various scenarios:
 
