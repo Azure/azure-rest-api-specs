@@ -20,4 +20,5 @@ input-file:
   - preview/2023-08-22-preview/genevaActions.json
   - preview/2023-08-22-preview/plannedQuota.json
   - preview/2023-08-22-preview/pav2.json
+  - preview/2023-08-22-preview/cloudSprout.json
 ```
