@@ -44,15 +44,15 @@ union ChatMessageImageDetailLevel {
   auto: "auto",
 
   @doc("""
-  Specifies that image evaluation should be constrained to the 'low-res' model that may be faster and consume fewer
-  tokens but may also be less accurate for highly detailed images.
-  """)
+    Specifies that image evaluation should be constrained to the 'low-res' model that may be faster and consume fewer
+    tokens but may also be less accurate for highly detailed images.
+    """)
   low: "low",
 
   @doc("""
-  Specifies that image evaluation should enable the 'high-res' model that may be more accurate for highly detailed
-  images but may also be slower and consume more tokens.
-  """)
+    Specifies that image evaluation should enable the 'high-res' model that may be more accurate for highly detailed
+    images but may also be slower and consume more tokens.
+    """)
   high: "high",
 }
 
@@ -74,9 +74,9 @@ model ChatMessageImageUrl {
   url: url;
 
   @doc("""
-  The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
-  accuracy.
-  """)
+    The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
+    accuracy.
+    """)
   detail?: ChatMessageImageDetailLevel;
 }
 
@@ -90,9 +90,9 @@ model ChatRequestMessage {
 
 @added(ServiceApiVersions.v2023_05_15)
 @doc("""
-A request chat message containing system instructions that influence how the model will generate a chat completions
-response.
-""")
+  A request chat message containing system instructions that influence how the model will generate a chat completions
+  response.
+  """)
 model ChatRequestSystemMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'system' for system messages.")
   role: ChatRole.system;
@@ -133,17 +133,17 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   @encodedName("application/json", "tool_calls")
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
-  The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
-  completions request to resolve as configured.
-  """)
+    The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
+    completions request to resolve as configured.
+    """)
   toolCalls?: ChatCompletionsToolCall[];
 
   @added(ServiceApiVersions.v2023_07_01_Preview)
   @encodedName("application/json", "function_call")
   @doc("""
-  The function call that must be resolved and have its output appended to subsequent input messages for the chat
-  completions request to resolve as configured.
-  """)
+    The function call that must be resolved and have its output appended to subsequent input messages for the chat
+    completions request to resolve as configured.
+    """)
   functionCall?: FunctionCall;
 }
 
@@ -189,23 +189,23 @@ model ChatResponseMessage {
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "tool_calls")
   @doc("""
-  The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
-  completions request to resolve as configured.
-  """)
+    The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
+    completions request to resolve as configured.
+    """)
   toolCalls?: ChatCompletionsToolCall[];
 
   @added(ServiceApiVersions.v2023_07_01_Preview)
   @encodedName("application/json", "function_call")
   @doc("""
-  The function call that must be resolved and have its output appended to subsequent input messages for the chat
-  completions request to resolve as configured.
-  """)
+    The function call that must be resolved and have its output appended to subsequent input messages for the chat
+    completions request to resolve as configured.
+    """)
   functionCall?: FunctionCall;
 
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
-  If Azure OpenAI chat extensions are configured, this array represents the incremental steps performed by those
-  extensions while processing the chat completions request.
-  """)
+    If Azure OpenAI chat extensions are configured, this array represents the incremental steps performed by those
+    extensions while processing the chat completions request.
+    """)
   context?: AzureChatExtensionsMessageContext;
 }

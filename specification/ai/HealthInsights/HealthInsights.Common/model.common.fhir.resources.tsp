@@ -6,9 +6,9 @@ namespace Fhir.R4;
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 @doc("""
-Resource is the ancestor of DomainResource from which most resources are derived. Bundle, Parameters, and Binary extend Resource directly.
-Based on [FHIR Resource](https://www.hl7.org/fhir/r4/resource.html
-""")
+  Resource is the ancestor of DomainResource from which most resources are derived. Bundle, Parameters, and Binary extend Resource directly.
+  Based on [FHIR Resource](https://www.hl7.org/fhir/r4/resource.html
+  """)
 model Resource is Record<unknown> {
   @doc("The type of resource")
   resourceType: string;
@@ -30,9 +30,9 @@ model Resource is Record<unknown> {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "must extends Resource to be able use clientName in both Resource and DomainResource"
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("""
-A resource with narrative, extensions, and contained resources
-Based on [FHIR DomainResource](https://www.hl7.org/fhir/domainresource.html)
-""")
+  A resource with narrative, extensions, and contained resources
+  Based on [FHIR DomainResource](https://www.hl7.org/fhir/domainresource.html)
+  """)
 @discriminator("resourceType")
 model DomainResource extends Resource {
   @doc("Text summary of the resource, for human interpretation")
@@ -50,9 +50,9 @@ model DomainResource extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 @doc("""
-Detailed information about conditions, problems or diagnoses
-Based on [FHIR Condition](https://www.hl7.org/fhir/R4/condition.html)
-""")
+  Detailed information about conditions, problems or diagnoses
+  Based on [FHIR Condition](https://www.hl7.org/fhir/R4/condition.html)
+  """)
 model Condition extends DomainResource {
   @doc("resourceType")
   resourceType: "Condition";
@@ -122,9 +122,9 @@ model Condition extends DomainResource {
 }
 
 @doc("""
-Stage/grade, usually assessed formally
-Based on [FHIR Condition.Stage](https://www.hl7.org/fhir/R4/condition.html)
-""")
+  Stage/grade, usually assessed formally
+  Based on [FHIR Condition.Stage](https://www.hl7.org/fhir/R4/condition.html)
+  """)
 model ConditionStage {
   @doc("Simple summary (disease specific)")
   summary?: CodeableConcept;
@@ -135,9 +135,9 @@ model ConditionStage {
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 @doc("""
-Detailed information about observations
-Based on [FHIR Observation](https://www.hl7.org/fhir/R4/observation.html)
-""")
+  Detailed information about observations
+  Based on [FHIR Observation](https://www.hl7.org/fhir/R4/observation.html)
+  """)
 model Observation extends DomainResource {
   @doc("resourceType")
   resourceType: "Observation";
@@ -234,9 +234,9 @@ model Observation extends DomainResource {
 }
 
 @doc("""
-Provides guide for interpretation of component result
-Based on [FHIR Observation.referenceRange](https://www.hl7.org/fhir/R4/observation.html)
-""")
+  Provides guide for interpretation of component result
+  Based on [FHIR Observation.referenceRange](https://www.hl7.org/fhir/R4/observation.html)
+  """)
 model ObservationReferenceRange {
   @doc("Low Range, if relevant")
   low?: Quantity;
@@ -259,9 +259,9 @@ model ObservationReferenceRange {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
-Component results
-Based on [FHIR Observation.component](https://www.hl7.org/fhir/R4/observation.html)
-""")
+  Component results
+  Based on [FHIR Observation.component](https://www.hl7.org/fhir/R4/observation.html)
+  """)
 model ObservationComponent extends Element {
   @doc("Type of component observation (code / type)")
   code: CodeableConcept;
@@ -279,9 +279,9 @@ model ObservationComponent extends Element {
 }
 
 @doc("""
-Observation Status
-Based on [FHIR ObservationStatus](https://www.hl7.org/fhir/R4/valueset-observation-status.html)
-""")
+  Observation Status
+  Based on [FHIR ObservationStatus](https://www.hl7.org/fhir/R4/valueset-observation-status.html)
+  """)
 union ObservationStatusCodeType {
   string,
 
@@ -312,9 +312,9 @@ union ObservationStatusCodeType {
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 @doc("""
-Detailed information about Research Study
-Based on [FHIR ResearchStudy](https://www.hl7.org/fhir/R4/researchstudy.html)
-""")
+  Detailed information about Research Study
+  Based on [FHIR ResearchStudy](https://www.hl7.org/fhir/R4/researchstudy.html)
+  """)
 model ResearchStudy extends DomainResource {
   @doc("resourceType")
   resourceType: "ResearchStudy";
@@ -409,8 +409,8 @@ alias ResearchStudyObjective = {
 };
 
 @doc("""
-https://www.hl7.org/fhir/R4/codesystem-research-study-status.html
-""")
+  https://www.hl7.org/fhir/R4/codesystem-research-study-status.html
+  """)
 union ResearchStudyStatusCodeType {
   string,
 

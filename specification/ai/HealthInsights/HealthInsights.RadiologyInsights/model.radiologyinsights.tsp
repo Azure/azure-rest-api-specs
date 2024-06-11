@@ -95,18 +95,18 @@ model RadiologyInsightsPatientResult {
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("""
-An inference made by the Radiology Insights model regarding a patient.
-  - AgeMismatch
-  - SexMismatch
-  - LateralityDiscrepancy
-  - CompleteOrderDiscrepancy
-  - LimitedOrderDiscrepancy
-  - Finding
-  - CriticalResult
-  - FollowupRecommendation
-  - RadiologyProcedure
-  - FollowupCommunication
-""")
+  An inference made by the Radiology Insights model regarding a patient.
+    - AgeMismatch
+    - SexMismatch
+    - LateralityDiscrepancy
+    - CompleteOrderDiscrepancy
+    - LimitedOrderDiscrepancy
+    - Finding
+    - CriticalResult
+    - FollowupRecommendation
+    - RadiologyProcedure
+    - FollowupCommunication
+  """)
 @discriminator("kind")
 model RadiologyInsightsInference {
   ...Fhir.R4.Extendible;

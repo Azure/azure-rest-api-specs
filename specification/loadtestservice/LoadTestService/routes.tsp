@@ -36,13 +36,13 @@ interface LoadTestAdministration {
   getTest is StandardResourceOperations.ResourceRead<Test>;
 
   @summary("""
-Get all load tests by the fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
-""")
+    Get all load tests by the fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+    """)
   @doc("""
-Get all load tests by the fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
-""")
+    Get all load tests by the fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+    """)
   listTests is StandardResourceOperations.ResourceList<
     Test,
     ListQueryParametersTrait<ListTestQueryParams>
@@ -51,15 +51,15 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743"
   #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
   @summary("""
-Upload input file for a given test Id. File size can't be more than 50 MB.
-Existing file with same name for the given test will be overwritten. File
-should be provided in the request body as application/octet-stream.
-""")
+    Upload input file for a given test Id. File size can't be more than 50 MB.
+    Existing file with same name for the given test will be overwritten. File
+    should be provided in the request body as application/octet-stream.
+    """)
   @doc("""
-Upload input file for a given test Id. File size can't be more than 50 MB.
-Existing file with same name for the given test will be overwritten. File
-should be provided in the request body as application/octet-stream.
-""")
+    Upload input file for a given test Id. File size can't be more than 50 MB.
+    Existing file with same name for the given test will be overwritten. File
+    should be provided in the request body as application/octet-stream.
+    """)
   @route("/tests/{testId}/files/{fileName}")
   @put
   uploadTestFile is Azure.Core.Foundations.Operation<
@@ -69,9 +69,9 @@ should be provided in the request body as application/octet-stream.
       contentType: "application/octet-stream";
 
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -117,9 +117,9 @@ numeric, underscore or hyphen characters.
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -141,9 +141,9 @@ numeric, underscore or hyphen characters.
   getAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -165,9 +165,9 @@ numeric, underscore or hyphen characters.
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -189,9 +189,9 @@ numeric, underscore or hyphen characters.
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -245,9 +245,9 @@ interface LoadTestRun {
   listMetricNamespaces is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -265,9 +265,9 @@ numeric, underscore or hyphen characters.
   listMetricDefinitions is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -289,9 +289,9 @@ numeric, underscore or hyphen characters.
   listMetrics is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -318,9 +318,9 @@ numeric, underscore or hyphen characters.
   listMetricDimensionValues is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -348,9 +348,9 @@ numeric, underscore or hyphen characters.
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique Id for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique Id for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -366,21 +366,21 @@ numeric, underscore or hyphen characters.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("""
-Get associated app component (collection of azure resources) for the given test
-run.
-""")
+    Get associated app component (collection of azure resources) for the given test
+    run.
+    """)
   @doc("""
-Get associated app component (collection of azure resources) for the given test
-run.
-""")
+    Get associated app component (collection of azure resources) for the given test
+    run.
+    """)
   @route("/test-runs/{testRunId}/app-components")
   @get
   getAppComponents is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -402,9 +402,9 @@ numeric, underscore or hyphen characters.
       contentType: "application/merge-patch+json";
 
       @doc("""
-Unique Id for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique Id for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)
@@ -426,9 +426,9 @@ numeric, underscore or hyphen characters.
   getServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @doc("""
-Unique name for the load test run, must contain only lower-case alphabetic,
-numeric, underscore or hyphen characters.
-""")
+        Unique name for the load test run, must contain only lower-case alphabetic,
+        numeric, underscore or hyphen characters.
+        """)
       @path
       @maxLength(50)
       @minLength(2)

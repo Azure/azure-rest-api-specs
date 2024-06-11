@@ -195,9 +195,9 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "additional_instructions")
   @doc("""
-  Additional instructions to append at the end of the instructions for the run. This is useful for modifying the behavior
-  on a per-run basis without overriding other instructions.
-  """)
+    Additional instructions to append at the end of the instructions for the run. This is useful for modifying the behavior
+    on a per-run basis without overriding other instructions.
+    """)
   additionalInstructions?: string | null;
 
   /** Adds additional messages to the thread before creating the run. */

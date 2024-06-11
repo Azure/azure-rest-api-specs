@@ -429,9 +429,9 @@ union DataProductUserRole {
   "Reader",
 
   @doc("""
-Field to specify user of type SensitiveReader.
-This user has privileged access to read sensitive data of a data product.
-""")
+    Field to specify user of type SensitiveReader.
+    This user has privileged access to read sensitive data of a data product.
+    """)
   "SensitiveReader",
 }
 

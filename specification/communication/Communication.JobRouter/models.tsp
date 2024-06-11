@@ -380,13 +380,13 @@ model ClassificationPolicy {
 }
 
 @doc("""
-A rule of one of the following types:
-StaticRule:  A rule providing static rules that always return the same result, regardless of input.
-DirectMapRule:  A rule that return the same labels as the input labels.
-ExpressionRule: A rule providing inline expression rules.
-FunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.
-WebhookRule: A rule providing a binding to a webserver following OAuth2.0 authentication protocol.
-""")
+  A rule of one of the following types:
+  StaticRule:  A rule providing static rules that always return the same result, regardless of input.
+  DirectMapRule:  A rule that return the same labels as the input labels.
+  ExpressionRule: A rule providing inline expression rules.
+  FunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.
+  WebhookRule: A rule providing a binding to a webserver following OAuth2.0 authentication protocol.
+  """)
 @discriminator("kind")
 model RouterRule {
   @doc("The type discriminator describing a sub-type of RouterRule")
@@ -590,11 +590,11 @@ model RouterJobAssignment {
 }
 
 @doc("""
-A matching mode of one of the following types:
-QueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.
-ScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. At specified time, matching of a worker to the job will not start automatically.
-SuspendMode: Used when matching workers to a job needs to be suspended.
-""")
+  A matching mode of one of the following types:
+  QueueAndMatchMode: Used when matching worker to a job is required to be done right after job is queued.
+  ScheduleAndSuspendMode: Used for scheduling jobs to be queued at a future time. At specified time, matching of a worker to the job will not start automatically.
+  SuspendMode: Used when matching workers to a job needs to be suspended.
+  """)
 @discriminator("kind")
 model JobMatchingMode {
   @doc("The type discriminator describing a sub-type of JobMatchingMode.")

@@ -65,8 +65,8 @@ model FunctionDefinition {
 
 @discriminator("type")
 @doc("""
-An abstract representation a a tool invocation needed by the model to continue a run.
-""")
+  An abstract representation a a tool invocation needed by the model to continue a run.
+  """)
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RequiredToolCall {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -114,9 +114,9 @@ model RunStepToolCall {
 }
 
 @doc("""
-A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
-represents inputs and outputs consumed and emitted by the code interpreter.
-""")
+  A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
+  represents inputs and outputs consumed and emitted by the code interpreter.
+  """)
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepCodeInterpreterToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'code_interpreter'.")
@@ -128,9 +128,9 @@ model RunStepCodeInterpreterToolCall extends RunStepToolCall {
 }
 
 @doc("""
-A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents
-executed file search.
-""")
+  A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents
+  executed file search.
+  """)
 @added(ServiceApiVersions.v2024_05_01_preview)
 model RunStepFileSearchToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'file_search'.")
@@ -142,9 +142,9 @@ model RunStepFileSearchToolCall extends RunStepToolCall {
 }
 
 @doc("""
-A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
-and output consumed and emitted by the specified function.
-""")
+  A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
+  and output consumed and emitted by the specified function.
+  """)
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepFunctionToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'function'.")

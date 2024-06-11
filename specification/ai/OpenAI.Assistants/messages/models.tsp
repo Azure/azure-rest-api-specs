@@ -182,9 +182,9 @@ model MessageTextFileCitationAnnotation extends MessageTextAnnotation {
 
   @encodedName("application/json", "file_citation")
   @doc("""
-  A citation within the message that points to a specific quote from a specific file.
-  Generated when the assistant uses the "file_search" tool to search files.
-  """)
+    A citation within the message that points to a specific quote from a specific file.
+    Generated when the assistant uses the "file_search" tool to search files.
+    """)
   fileCitation: MessageTextFileCitationDetails;
 
   @encodedName("application/json", "start_index")
