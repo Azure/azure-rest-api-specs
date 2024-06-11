@@ -243,15 +243,20 @@ union PublicNetworkAccess {
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 union PreviewFeature {
   string,
+
+  /** Enables geo replicas preview feature. The feature must be set at create-time on new cluster to enable linking a geo-replica cluster to it. */
+  "GeoReplicas",
 }
 
 /** Parameters used for replica operations. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 model MongoClusterReplicaParameters {
   /** The id of the replication source cluster. */
+  @visibility("create")
   sourceResourceId: string;
 
   /** Description of the connection string */
+  @visibility("create")
   location: string;
 }
 

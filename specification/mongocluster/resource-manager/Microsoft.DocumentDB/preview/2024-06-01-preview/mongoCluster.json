@@ -1552,11 +1552,17 @@
       "properties": {
         "sourceResourceId": {
           "type": "string",
-          "description": "The id of the replication source cluster."
+          "description": "The id of the replication source cluster.",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "location": {
           "type": "string",
-          "description": "Description of the connection string"
+          "description": "Description of the connection string",
+          "x-ms-mutability": [
+            "create"
+          ]
         }
       },
       "required": [
@@ -1765,7 +1771,21 @@
     },
     "PreviewFeature": {
       "type": "string",
-      "x-nullable": false
+      "description": "Preview features that can be enabled on a mongo cluster.",
+      "enum": [
+        "GeoReplicas"
+      ],
+      "x-ms-enum": {
+        "name": "PreviewFeature",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GeoReplicas",
+            "value": "GeoReplicas",
+            "description": "Enables geo replicas preview feature. The feature must be set at create-time on new cluster to enable linking a geo-replica cluster to it."
+          }
+        ]
+      }
     },
     "PrivateEndpointConnectionResource": {
       "type": "object",
