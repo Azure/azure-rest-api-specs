@@ -13,6 +13,12 @@ using Azure.ResourceManager;
 using Azure.Core;
 using TypeSpec.OpenAPI;
 
+@doc("Microsoft.MessagingConnectors Resource Provider management API.")
+@armProviderNamespace
+@service({
+  title: "Microsoft.MessagingConnectors management service",
+})
+@versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
 @doc("A Connector resource Azure")

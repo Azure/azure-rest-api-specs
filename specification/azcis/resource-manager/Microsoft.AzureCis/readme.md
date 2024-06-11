@@ -22,3 +22,12 @@ input-file:
   - preview/2023-08-22-preview/pav2.json
   - preview/2023-08-22-preview/cloudSprout.json
 ```
+
+### Tag: 2023-08-22
+
+These settings apply only when `--tag=2023-08-22` is specified on the command line.
+
+```yaml $(tag) == '2023-08-22'
+input-file:
+  - stable/2023-08-22/plannedQuota.json
+```

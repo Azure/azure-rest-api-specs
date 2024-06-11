@@ -11,6 +11,12 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
+@doc("Microsoft.MessagingConnectors Resource Provider management API.")
+@armProviderNamespace
+@service({
+  title: "Microsoft.MessagingConnectors management service",
+})
+@versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
 @doc("Provisioning states of Connector ARM Resource")
@@ -394,4 +400,50 @@ model MySqlSourceConnectorProperties extends ConnectorProperties {
 
   @doc("Tables used as source.")
   tableNames: string;
+}
+
+@doc("Type of DataRange")
+union DataRangeType {
+  @doc("Unknown type")
+  Unknown: "Unknown",
+
+  @doc("Max limit range type")
+  Limit: "Limit",
+
+  string,
+}
+
+@doc("Base config for DataRange")
+@discriminator("type")
+model DataRangeBaseConfig {
+  @doc("type of dataRange")
+  type: DataRangeType;
+}
+
+@doc("DataRange by max records limit")
+model DataRangeLimit extends DataRangeBaseConfig {
+  @doc("Limit type of DataRange")
+  type: DataRangeType.Limit;
+
+  @doc("Max Limit for DataRange")
+  limit: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+@doc("Properties of one DataPreview")
+model DataPreviewProperties {
+  @doc("Properties of one Connector Source")
+  connectorProperties: ConnectorProperties;
+
+  @doc("DataRange for DataPreview")
+  dataRange: DataRangeBaseConfig;
+}
+
+@doc("Properties of DataPreview results")
+model DataPreviewResults {
+  @doc("Count of DataPreview results")
+  count: int32;
+
+  @doc("Content of DataPreview results")
+  results: string[];
 }

@@ -28,18 +28,9 @@ These are the global settings for the Nginx API.
 title: NginxManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-01
+tag: package-preview-2024-06-01
 ```
 
-
-### Tag: package-preview-2024-01
-
-These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-01'
-input-file:
-  - NGINX.NGINXPLUS/preview/2024-01-01-preview/swagger.json
-```
 ### Tag: package-2021-05-01-preview
 
 These settings apply only when `--tag=package-2021-05-01-preview` is specified on the command line.
@@ -83,4 +74,22 @@ These settings apply only when `--tag=package-2023-09-01` is specified on the co
 ``` yaml $(tag) == 'package-2023-09-01'
 input-file:
 - NGINX.NGINXPLUS/stable/2023-09-01/swagger.json
+```
+
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - NGINX.NGINXPLUS/preview/2024-01-01-preview/swagger.json
+```
+
+### Tag: package-preview-2024-06-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06-01'
+input-file:
+  - NGINX.NGINXPLUS/preview/2024-06-01-preview/swagger.json
 ```
