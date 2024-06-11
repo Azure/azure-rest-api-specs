@@ -69,5 +69,3 @@ interface NestedResourceTypes {
   listByResourceGroup is ArmResourceListByParent<NestedResourceType>;
   listBySubscription is ArmListBySubscription<NestedResourceType>;
 }
-
-@@segment(NestedResourceTypes.get::parameters, "abcd");
