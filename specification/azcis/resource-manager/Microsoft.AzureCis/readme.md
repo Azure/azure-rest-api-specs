@@ -20,7 +20,6 @@ input-file:
   - preview/2023-08-22-preview/genevaActions.json
   - preview/2023-08-22-preview/plannedQuota.json
   - preview/2023-08-22-preview/pav2.json
-  - preview/2023-08-22-preview/cloudSprout.json
 ```
 
 ### Tag: 2023-08-22
@@ -30,4 +29,13 @@ These settings apply only when `--tag=2023-08-22` is specified on the command li
 ```yaml $(tag) == '2023-08-22'
 input-file:
   - stable/2023-08-22/plannedQuota.json
+```
+
+### Tag: 2024-06-11-preview
+
+These settings apply only when `--tag=2024-06-11-preview` is specified on the command line.
+
+```yaml $(tag) == '2024-06-11-preview'
+input-file:
+  - preview/2024-06-11-preview/cloudSprout.json
 ```
