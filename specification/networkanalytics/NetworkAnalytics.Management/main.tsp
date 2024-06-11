@@ -531,8 +531,13 @@ interface DataProductsCatalogs {
 @added(Versions.v2023_11_15)
 @armResourceOperations
 interface DataTypes {
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create data type resource.")
-  create is ArmResourceCreateOrUpdateAsync<DataType>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    DataType,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Retrieve data type resource.")
   get is ArmResourceRead<DataType>;
@@ -562,8 +567,13 @@ interface DataTypes {
 @added(Versions.v2023_11_15)
 @armResourceOperations
 interface DataProducts {
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create data product resource.")
-  create is ArmResourceCreateOrUpdateAsync<DataProduct>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    DataProduct,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Retrieve data product resource.")
   get is ArmResourceRead<DataProduct>;

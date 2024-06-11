@@ -401,7 +401,12 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface Pools {
   get is ArmResourceRead<Pool>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Pool>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Pool,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchAsync<Pool, PoolProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
