@@ -7049,7 +7049,7 @@
           {
             "in": "body",
             "name": "body",
-            "required": true,
+            "description": "Secret expiry information.",
             "schema": {
               "$ref": "#/definitions/SecretExpiry"
             }
@@ -28551,13 +28551,16 @@
       "additionalProperties": false
     },
     "SecretExpiry": {
+      "description": "Secret expiration configuration.",
       "type": "object",
       "properties": {
         "expirableSecret": {
+          "description": "Indicates if the secret is expirable.",
           "type": "boolean"
         },
         "expireAfterHours": {
           "format": "int32",
+          "description": "Number of hours after which the secret will expire.",
           "type": "integer"
         }
       },
