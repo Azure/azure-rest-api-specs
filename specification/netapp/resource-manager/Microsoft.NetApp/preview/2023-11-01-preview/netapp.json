@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2023-11-01",
+    "version": "2023-11-01-preview",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -886,6 +886,171 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateEncryption": {
+      "post": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_MigrateEncryptionKey",
+        "summary": "Migrate volumes encryption key source.",
+        "description": "Migrates all volumes in a VNet to a different encryption key source (Microsoft-managed key or Azure Key Vault). Operation fails if targeted volumes share encryption sibling set with volumes from another account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "The required parameters to perform encryption migration.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/encryptionMigrationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Accounts_MigrateEncryptionKey": {
+            "$ref": "examples/Accounts_MigrateEncryptionKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/getKeyVaultStatus": {
+      "post": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_GetChangeKeyVaultInformation",
+        "summary": "Get information about how volumes under NetApp account are encrypted.",
+        "description": "Contains data from encryption.keyVaultProperties as well as information about which private endpoint is used by each encryption sibling set. Response from this endpoint can be modified and used as request body for POST request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Accounts_GetChangeKeyVaultInformation": {
+            "$ref": "examples/Accounts_GetChangeKeyVaultInformation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/changeKeyVault": {
+      "post": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_ChangeKeyVault",
+        "summary": "Change Key Vault/Managed HSM that is used for encryption of volumes under NetApp account.",
+        "description": "Affects existing volumes that are encrypted with Key Vault/Managed HSM, and new volumes. Supports MHSM to Key Vault, Key Vault to MHSM, MHSM to MHSM and Key Vault to Key Vault.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "The required parameters to perform encryption migration.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/changeKeyVault"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Accounts_ChangeKeyVault": {
+            "$ref": "examples/Accounts_ChangeKeyVault.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools": {
       "get": {
         "summary": "Describe all Capacity Pools",
@@ -1612,6 +1777,61 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/splitCloneFromParent": {
+      "post": {
+        "tags": [
+          "Split clone volume"
+        ],
+        "summary": "Split clone from parent volume",
+        "description": " Split operation to convert clone volume to an independent volume.",
+        "operationId": "Volumes_SplitCloneFromParent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Volumes_SplitClone": {
+            "$ref": "examples/Volumes_SplitClone.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/breakFileLocks": {
       "post": {
         "tags": [
@@ -2188,6 +2408,249 @@
         "x-ms-examples": {
           "Volumes_ReInitializeReplication": {
             "$ref": "examples/Volumes_ReInitializeReplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/peerClusterForOnPremMigration": {
+      "post": {
+        "summary": "Start Cluster peering",
+        "description": "Starts peering the cluster for this migration volume",
+        "tags": [
+          "Volumes OnPrem Migration"
+        ],
+        "operationId": "Volumes_PeerClusterForOnPremMigration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Cluster peer request object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/peerClusterForVolumeMigrationRequest"
+            }
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/clusterPeerCommandResponse"
+        },
+        "x-ms-examples": {
+          "Volumes_PeerClusterForOnPremMigration": {
+            "$ref": "examples/Volumes_PeerClusterForOnPremMigration.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/clusterPeerCommandResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/createOnPremMigrationReplication": {
+      "post": {
+        "summary": "Start migration process",
+        "description": "Starts SVM peering and returns a command to be run on the external ONTAP to accept it.  Once the SVMs have been peered a SnapMirror will be created",
+        "tags": [
+          "Volumes OnPrem Migration"
+        ],
+        "operationId": "Volumes_CreateOnPremMigrationReplication",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/svmPeerCommandResponse"
+        },
+        "x-ms-examples": {
+          "Volumes_CreateOnPremMigrationReplication": {
+            "$ref": "examples/Volumes_CreateOnPremMigrationReplication.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/svmPeerCommandResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/finalizeOnPremMigration": {
+      "post": {
+        "summary": "Finalize migration process",
+        "description": "Finalizes the migration of a volume by performing a final sync on the replication, breaking and releasing the replication, and breaking the cluster peering if no other migration is active.",
+        "tags": [
+          "Volumes OnPrem Migration Finalize"
+        ],
+        "operationId": "Volumes_FinalizeOnPremMigration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Volumes_FinalizeOnPremMigration": {
+            "$ref": "examples/Volumes_FinalizeOnPremMigration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/performReplicationTransfer": {
+      "post": {
+        "tags": [
+          "Volumes OnPrem Migration"
+        ],
+        "summary": "Perform a replication transfer",
+        "description": "Performs an adhoc replication transfer on a volume with volumeType Migration",
+        "operationId": "Volumes_PerformReplicationTransfer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Volumes_PerformReplicationTransfer": {
+            "$ref": "examples/Volumes_PerformReplicationTransfer.json"
           }
         }
       }
@@ -5461,6 +5924,13 @@
         "subnetId": {
           "type": "string",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
+        },
+        "availabilityZone": {
+          "title": "Logical availability zone",
+          "type": "string",
+          "example": "1",
+          "x-nullable": true,
+          "description": "The Azure Resource logical availability zone which is used within zone mapping lookup for the subscription and region. The lookup will retrieve the physical zone where volume is placed."
         }
       }
     },
@@ -5656,6 +6126,20 @@
           "readOnly": true,
           "x-nullable": true,
           "description": "Shows the status of disableShowmount for all volumes under the subscription, null equals false"
+        },
+        "nfsV4IDDomain": {
+          "type": "string",
+          "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$",
+          "x-nullable": true,
+          "example": "defaultv4IDDomain.com"
+        },
+        "isMultiAdEnabled": {
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": true,
+          "description": "This will have true value only if account is Multiple AD enabled."
         }
       }
     },
@@ -6177,7 +6661,7 @@
           "title": "size",
           "type": "integer",
           "format": "int64",
-          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiply of 1099511627776).",
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiply of 4398046511104).",
           "default": 4398046511104
         },
         "qosType": {
@@ -6469,7 +6953,7 @@
         },
         "volumeType": {
           "type": "string",
-          "description": "What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection",
+          "description": "What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection. For creating clone volume, set type to ShortTermClone",
           "example": "DataProtection"
         },
         "dataProtection": {
@@ -6500,6 +6984,34 @@
               "$ref": "#/definitions/volumeRelocationProperties"
             }
           }
+        },
+        "acceptGrowCapacityPoolForShortTermCloneSplit": {
+          "title": "acceptGrowCapacityPoolForShortTermCloneSplit",
+          "type": "string",
+          "description": "While auto splitting the short term clone volume, if the parent pool does not have enough space to accommodate the volume after split, it will be automatically resized, which will lead to increased billing. To accept capacity pool size auto grow and create a short term clone volume, set the property as accepted.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "enum": [
+            "Accepted",
+            "Declined"
+          ],
+          "x-ms-enum": {
+            "name": "acceptGrowCapacityPoolForShortTermCloneSplit",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Accepted",
+                "description": "Auto grow capacity pool for short term clone split is accepted."
+              },
+              {
+                "value": "Declined",
+                "description": "Auto grow capacity pool for short term clone split is declined. Short term clone volume creation will not be allowed, to create short term clone volume accept auto grow capacity pool."
+              }
+            ]
+          },
+          "example": "Accepted"
         },
         "isRestoring": {
           "type": "boolean",
@@ -6802,6 +7314,18 @@
           "example": "/subscriptions/aaaaaaaa-1234-1234-1224-234567891011/resourceGroups/testGroup/providers/Microsoft.NetApp/netAppAccounts/accountOriginatingResourceId/capacityPools/originatingResourceIdPool/volumes/theOriginalVolume/snapshots/theSnapshot",
           "readOnly": true,
           "x-nullable": true
+        },
+        "inheritedSizeInBytes": {
+          "title": "inheritedSizeInBytes",
+          "type": "integer",
+          "format": "int64",
+          "description": "Space shared by short term clone volume with parent volume in bytes.",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "language": {
+          "title": "language",
+          "$ref": "#/definitions/VolumeLanguage"
         }
       }
     },
@@ -6934,11 +7458,47 @@
         },
         "remoteVolumeResourceId": {
           "type": "string",
-          "description": "The resource ID of the remote volume."
+          "description": "The resource ID of the remote volume. Required for cross region and cross zone replication",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "remotePath": {
+          "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
+          "type": "object",
+          "$ref": "#/definitions/remotePath",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "remoteVolumeRegion": {
           "type": "string",
           "description": "The remote region for the other end of the Volume Replication."
+        }
+      }
+    },
+    "remotePath": {
+      "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
+      "type": "object",
+      "required": [
+        "externalHostName",
+        "serverName",
+        "volumeName"
+      ],
+      "properties": {
+        "externalHostName": {
+          "type": "string",
+          "description": "The Path to a ONTAP Host"
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The name of a server on the ONTAP Host"
+        },
+        "volumeName": {
+          "type": "string",
+          "description": "The name of a volume on the server"
         }
       }
     },
@@ -6949,6 +7509,15 @@
         "remoteVolumeResourceId"
       ],
       "properties": {
+        "replicationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "UUID v4 used to identify the replication.",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "5ee41ce4-8f44-4ecd-ad89-8c1e573fe3b8"
+        },
         "endpointType": {
           "type": "string",
           "description": "Indicates whether the local volume is the source or destination for the Volume Replication",
@@ -8044,6 +8613,365 @@
         ]
       }
     },
+    "VolumeLanguage": {
+      "title": "VolumeLanguage",
+      "type": "string",
+      "x-nullable": true,
+      "description": "Language supported for volume.",
+      "enum": [
+        "c.utf-8",
+        "utf8mb4",
+        "ar",
+        "ar.utf-8",
+        "hr",
+        "hr.utf-8",
+        "cs",
+        "cs.utf-8",
+        "da",
+        "da.utf-8",
+        "nl",
+        "nl.utf-8",
+        "en",
+        "en.utf-8",
+        "fi",
+        "fi.utf-8",
+        "fr",
+        "fr.utf-8",
+        "de",
+        "de.utf-8",
+        "he",
+        "he.utf-8",
+        "hu",
+        "hu.utf-8",
+        "it",
+        "it.utf-8",
+        "ja",
+        "ja.utf-8",
+        "ja-v1",
+        "ja-v1.utf-8",
+        "ja-jp.pck",
+        "ja-jp.pck.utf-8",
+        "ja-jp.932",
+        "ja-jp.932.utf-8",
+        "ja-jp.pck-v2",
+        "ja-jp.pck-v2.utf-8",
+        "ko",
+        "ko.utf-8",
+        "no",
+        "no.utf-8",
+        "pl",
+        "pl.utf-8",
+        "pt",
+        "pt.utf-8",
+        "c",
+        "ro",
+        "ro.utf-8",
+        "ru",
+        "ru.utf-8",
+        "zh",
+        "zh.utf-8",
+        "zh.gbk",
+        "zh.gbk.utf-8",
+        "zh-tw.big5",
+        "zh-tw.big5.utf-8",
+        "zh-tw",
+        "zh-tw.utf-8",
+        "sk",
+        "sk.utf-8",
+        "sl",
+        "sl.utf-8",
+        "es",
+        "es.utf-8",
+        "sv",
+        "sv.utf-8",
+        "tr",
+        "tr.utf-8",
+        "en-us",
+        "en-us.utf-8"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "c.utf-8",
+            "description": "Posix with UTF-8"
+          },
+          {
+            "value": "utf8mb4",
+            "description": "UTF-8 with 4 byte character support"
+          },
+          {
+            "value": "ar",
+            "description": "Arabic - Deprecated"
+          },
+          {
+            "value": "ar.utf-8",
+            "description": "Arabic with UTF-8"
+          },
+          {
+            "value": "hr",
+            "description": "Croatian - Deprecated"
+          },
+          {
+            "value": "hr.utf-8",
+            "description": "Croatian with UTF-8"
+          },
+          {
+            "value": "cs",
+            "description": "Czech - Deprecated"
+          },
+          {
+            "value": "cs.utf-8",
+            "description": "Czech with UTF-8"
+          },
+          {
+            "value": "da",
+            "description": "Danish - Deprecated"
+          },
+          {
+            "value": "da.utf-8",
+            "description": "Danish with UTF-8"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch - Deprecated"
+          },
+          {
+            "value": "nl.utf-8",
+            "description": "Dutch with UTF-8"
+          },
+          {
+            "value": "en",
+            "description": "English - Deprecated"
+          },
+          {
+            "value": "en.utf-8",
+            "description": "English with UTF-8"
+          },
+          {
+            "value": "fi",
+            "description": "Finnish - Deprecated"
+          },
+          {
+            "value": "fi.utf-8",
+            "description": "Finnish with UTF-8"
+          },
+          {
+            "value": "fr",
+            "description": "French - Deprecated"
+          },
+          {
+            "value": "fr.utf-8",
+            "description": "French with UTF-8"
+          },
+          {
+            "value": "de",
+            "description": "German - Deprecated"
+          },
+          {
+            "value": "de.utf-8",
+            "description": "German with UTF-8"
+          },
+          {
+            "value": "he",
+            "description": "Hebrew - Deprecated"
+          },
+          {
+            "value": "he.utf-8",
+            "description": "Hebrew with UTF-8"
+          },
+          {
+            "value": "hu",
+            "description": "Hungarian - Deprecated"
+          },
+          {
+            "value": "hu.utf-8",
+            "description": "Hungarian with UTF-8"
+          },
+          {
+            "value": "it",
+            "description": "Italian - Deprecated"
+          },
+          {
+            "value": "it.utf-8",
+            "description": "Italian with UTF-8"
+          },
+          {
+            "value": "ja",
+            "description": "Japanese euc-j - Deprecated"
+          },
+          {
+            "value": "ja.utf-8",
+            "description": "Japanese euc-j with UTF-8"
+          },
+          {
+            "value": "ja-v1",
+            "description": "Japanese euc-j - Deprecated"
+          },
+          {
+            "value": "ja-v1.utf-8",
+            "description": "Japanese euc-j with UTF-8"
+          },
+          {
+            "value": "ja-jp.pck",
+            "description": "Japanese pck"
+          },
+          {
+            "value": "ja-jp.pck.utf-8",
+            "description": "Japanese pck with UTF-8 - Deprecated"
+          },
+          {
+            "value": "ja-jp.932",
+            "description": "Japanese cp932"
+          },
+          {
+            "value": "ja-jp.932.utf-8",
+            "description": "Japanese cp932 with UTF-8 - Deprecated"
+          },
+          {
+            "value": "ja-jp.pck-v2",
+            "description": "Japanese pck - sjis"
+          },
+          {
+            "value": "ja-jp.pck-v2.utf-8",
+            "description": "Japanese pck - sjis with UTF-8 - Deprecated"
+          },
+          {
+            "value": "ko",
+            "description": "Korean - Deprecated"
+          },
+          {
+            "value": "ko.utf-8",
+            "description": "Korean with UTF-8"
+          },
+          {
+            "value": "no",
+            "description": "Norwegian - Deprecated"
+          },
+          {
+            "value": "no.utf-8",
+            "description": "Norwegian with UTF-8"
+          },
+          {
+            "value": "pl",
+            "description": "Polish - Deprecated"
+          },
+          {
+            "value": "pl.utf-8",
+            "description": "Polish with UTF-8"
+          },
+          {
+            "value": "pt",
+            "description": "Portuguese - Deprecated"
+          },
+          {
+            "value": "pt.utf-8",
+            "description": "Portuguese with UTF-8"
+          },
+          {
+            "value": "c",
+            "description": "Posix - Deprecated"
+          },
+          {
+            "value": "ro",
+            "description": "Romanian - Deprecated"
+          },
+          {
+            "value": "ro.utf-8",
+            "description": "Romanian with UTF-8"
+          },
+          {
+            "value": "ru",
+            "description": "Russian - Deprecated"
+          },
+          {
+            "value": "ru.utf-8",
+            "description": "Russian with UTF-8"
+          },
+          {
+            "value": "zh",
+            "description": "Simplified Chinese - Deprecated"
+          },
+          {
+            "value": "zh.utf-8",
+            "description": "Simplified Chinese with UTF-8"
+          },
+          {
+            "value": "zh.gbk",
+            "description": "Simplified gbk Chinese"
+          },
+          {
+            "value": "zh.gbk.utf-8",
+            "description": "Simplified gbk Chinese with UTF-8 - Deprecated"
+          },
+          {
+            "value": "zh-tw.big5",
+            "description": "Traditional Chinese BIG 5"
+          },
+          {
+            "value": "zh-tw.big5.utf-8",
+            "description": "Traditional Chinese BIG 5 with UTF-8 - Deprecated"
+          },
+          {
+            "value": "zh-tw",
+            "description": "Traditional Chinese EUC-TW"
+          },
+          {
+            "value": "zh-tw.utf-8",
+            "description": "Traditional Chinese EUC-TW with UTF-8 - Deprecated"
+          },
+          {
+            "value": "sk",
+            "description": "Slovak - Deprecated"
+          },
+          {
+            "value": "sk.utf-8",
+            "description": "Slovak with UTF-8"
+          },
+          {
+            "value": "sl",
+            "description": "Slovenian - Deprecated"
+          },
+          {
+            "value": "sl.utf-8",
+            "description": "Slovenian with UTF-8"
+          },
+          {
+            "value": "es",
+            "description": "Spanish - Deprecated"
+          },
+          {
+            "value": "es.utf-8",
+            "description": "Spanish with UTF-8"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish - Deprecated"
+          },
+          {
+            "value": "sv.utf-8",
+            "description": "Swedish with UTF-8"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish - Deprecated"
+          },
+          {
+            "value": "tr.utf-8",
+            "description": "Turkish with UTF-8"
+          },
+          {
+            "value": "en-us",
+            "description": "US English - Deprecated"
+          },
+          {
+            "value": "en-us.utf-8",
+            "description": "US English with UTF-8"
+          }
+        ]
+      }
+    },
     "volumeQuotaRulesList": {
       "description": "List of Volume Quota Rules",
       "type": "object",
@@ -8816,6 +9744,44 @@
         "modelAsString": false
       }
     },
+    "encryptionMigrationRequest": {
+      "description": "Encryption migration request",
+      "type": "object",
+      "required": [
+        "virtualNetworkId",
+        "privateEndpointId"
+      ],
+      "properties": {
+        "virtualNetworkId": {
+          "title": "virtualNetworkId",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks"
+              }
+            ]
+          },
+          "description": "Identifier for the virtual network",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/vnet1"
+        },
+        "privateEndpointId": {
+          "title": "privateEndpointId",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateEndpoints"
+              }
+            ]
+          },
+          "description": "Identifier of the private endpoint to reach the Azure Key Vault",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privateIP1"
+        }
+      }
+    },
     "coolAccessRetrievalPolicy": {
       "type": "string",
       "description": "coolAccessRetrievalPolicy determines the data retrieval behavior from the cool tier to standard storage based on the read pattern for cool access enabled volumes. The possible values for this field are: \n Default - Data will be pulled from cool tier to standard storage on random reads. This policy is the default.\n OnRead - All client-driven data read is pulled from cool tier to standard storage on both sequential and random reads.\n Never - No client-driven data is pulled from cool tier to standard storage.",
@@ -9251,6 +10217,120 @@
           "type": "string",
           "description": "The ResourceId of the Backup Vault",
           "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1"
+        }
+      }
+    },
+    "changeKeyVault": {
+      "description": "Change key vault request",
+      "type": "object",
+      "required": [
+        "keyVaultUri",
+        "keyName",
+        "keyVaultResourceId",
+        "keyVaultPrivateEndpoints"
+      ],
+      "properties": {
+        "keyVaultUri": {
+          "title": "keyVaultUri",
+          "description": "The URI of the key vault/managed HSM that should be used for encryption.",
+          "type": "string",
+          "example": "https://my-key-vault.managedhsm.azure.net"
+        },
+        "keyName": {
+          "title": "keyName",
+          "description": "The name of the key that should be used for encryption.",
+          "type": "string",
+          "example": "rsaKeyName"
+        },
+        "keyVaultResourceId": {
+          "title": "keyVaultResourceId",
+          "description": "Azure resource ID of the key vault/managed HSM that should be used for encryption.",
+          "type": "string",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.KeyVault/managedHSMs/my-hsm"
+        },
+        "keyVaultPrivateEndpoints": {
+          "title": "keyVaultPrivateEndpoints",
+          "description": "Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/keyVaultPrivateEndpoint"
+          },
+          "x-ms-identifiers": [
+            "virtualNetworkId"
+          ]
+        }
+      }
+    },
+    "keyVaultPrivateEndpoint": {
+      "title": "keyVaultPrivateEndpoint",
+      "description": "Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.",
+      "type": "object",
+      "properties": {
+        "virtualNetworkId": {
+          "title": "virtualNetworkId",
+          "type": "string",
+          "description": "Identifier for the virtual network id",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/vnet1"
+        },
+        "privateEndpointId": {
+          "title": "privateEndpointId",
+          "type": "string",
+          "description": "Identifier of the private endpoint to reach the Azure Key Vault",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privateIP1"
+        }
+      }
+    },
+    "clusterPeerCommandResponse": {
+      "description": "Information about cluster peering process",
+      "type": "object",
+      "properties": {
+        "peerAcceptCommand": {
+          "description": "A command that needs to be run on the external ONTAP to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>",
+          "type": "string"
+        }
+      }
+    },
+    "svmPeerCommandResponse": {
+      "description": "Information about SVM peering process",
+      "type": "object",
+      "properties": {
+        "svmPeeringCommand": {
+          "description": "A command that needs to be run on the external ONTAP to accept SVM peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>",
+          "type": "string"
+        }
+      }
+    },
+    "peerClusterForVolumeMigrationRequest": {
+      "description": "Source cluster properties for a cluster peer request",
+      "type": "object",
+      "required": [
+        "peerAddresses"
+      ],
+      "properties": {
+        "peerAddresses": {
+          "type": "array",
+          "minItems": 1,
+          "description": "A list of IC-LIF IPs that can be used to connect to the on-prem cluster",
+          "example": [
+            "0.0.0.1",
+            "0.0.0.2",
+            "0.0.0.3",
+            "0.0.0.4",
+            "0.0.0.5",
+            "0.0.0.6"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "remotePath": {
+          "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
+          "type": "object",
+          "$ref": "#/definitions/remotePath",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     }
