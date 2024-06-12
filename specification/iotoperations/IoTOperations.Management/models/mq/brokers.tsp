@@ -130,7 +130,7 @@ model Frontend {
 @doc("Broker Diagnostic Setting properties")
 model Diagnostics {
   @doc("The log settings of the broker.")
-  logs?: DiagnosticsLogs;
+  logs?: BrokerDiagnosticsLogs;
 
   @doc("The metrics properties.")
   metrics?: Metrics;
@@ -143,7 +143,7 @@ model Diagnostics {
 }
 
 @doc("Broker Diagnostic Log properties")
-model DiagnosticsLogs {
+model BrokerDiagnosticsLogs {
   @doc("How often to export the logs to the open telemetry collector.")
   @minValue(1)
   @maxValue(300)
@@ -246,7 +246,7 @@ model Traces {
   openTelemetryCollectorAddress?: string;
 
   @doc("The self tracing properties.")
-  selfTracing?: SelfTracing;
+  selfTracing?: BrokerSelfTracing;
 
   @doc("The span channel capacity.")
   @minValue(1000)
@@ -266,7 +266,7 @@ union TracesMode {
 }
 
 @doc("Broker Diagnostic Self tracing properties")
-model SelfTracing {
+model BrokerSelfTracing {
   @doc("The toggle to enable/disable self tracing.")
   mode?: SelfTracingMode = SelfTracingMode.Enabled;
 
@@ -522,6 +522,11 @@ model ClientConfig {
   @minValue(1)
   @maxValue(4294967295)
   maxMessageExpirySeconds?: int32;
+
+  @doc("Max message size for a packet in Bytes.")
+  @minValue(1)
+  @maxValue(268435456)
+  maxPacketSizeBytes?: int32;
 
   @doc("The limit on the number of queued messages for a subscriber.")
   subscriberQueueLimit?: SubscriberQueueLimit;

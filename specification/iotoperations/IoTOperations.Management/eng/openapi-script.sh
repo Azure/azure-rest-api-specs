@@ -30,6 +30,9 @@ for file in resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/
     jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp ^[a-z0-9][a-z0-9-]*[a-z0-9]$" then "resource-name123" else . end)' $file > temp.json && mv temp.json $file
     jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp ^[0-9]+[KMGTPE]$" then "500M" else . end)' $file > temp.json && mv temp.json $file
     jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp ^https://.*$" then "https://www.example.com" else . end)' $file > temp.json && mv temp.json $file
+    jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp .*.*.kusto.windows.net" then "cluster.region.kusto.windows.net" else . end)' $file > temp.json && mv temp.json $file
+    jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp .*.blob.core.windows.net" then "myaccount.blob.core.windows.net" else . end)' $file > temp.json && mv temp.json $file
+    jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp .*.fabric.microsoft.com" then "myaccount.fabric.microsoft.com" else . end)' $file > temp.json && mv temp.json $file
 done
 
 for file in resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/examples/*.json; do
@@ -44,6 +47,12 @@ for file in resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/
         jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("BrokerListener") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/listeners/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
     elif [[ $operationId == Broker* ]]; then
         jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("Broker") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
+    elif [[ $operationId == DataFlowProfile* ]]; then
+        jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("DataFlowProfile") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
+    elif [[ $operationId == DataFlowEndpoint* ]]; then
+        jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("DataFlowEndpoint") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
+    elif [[ $operationId == DataFlow* ]]; then
+        jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("DataFlow") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123/dataflows/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
     fi
 done
 
@@ -58,6 +67,9 @@ npx tsp compile IoTOperations.Management/.
 # Prettier
 echo "Running prettier..."
 npx prettier --write **/*.json
+
+echo "Formatting Specs"
+npx tsv IoTOperations.Management
 
 echo "Completed generating the specs and the examples!"
 echo "Done!"

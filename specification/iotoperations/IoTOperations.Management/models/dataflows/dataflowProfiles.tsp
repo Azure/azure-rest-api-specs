@@ -9,7 +9,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
-
 /** ******************* */
 /**
  * dataflowProfile resource type model details.
@@ -34,11 +33,11 @@ model DataFlowProfileResource is TrackedResource<DataFlowProfileProperties> {
 @doc("DataFlowProfile Resource properties")
 model DataFlowProfileProperties {
   @doc("Spec defines the desired identities of NBC diagnostics settings.")
-  diagnostics?: DataFlowProfileDiagnostics;
+  diagnostics?: ProfileDiagnostics;
 
   @doc("To manually scale the dataflow profile, specifcy the maximum number of instances you want to run.")
   @minValue(1)
-  @maxValue(10)
+  @maxValue(20)
   maxInstances?: int32;
 
   @doc("Node tolerations. Optional; see https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/.")
@@ -50,18 +49,15 @@ model DataFlowProfileProperties {
 }
 
 @doc("DataFlowProfile Diagnostics properties")
-model DataFlowProfileDiagnostics {
-  @doc("The format for the logs generated.")
-  logFormat?: string = "text";
-
-  @doc("The level for the logs generated.")
-  logLevel?: string = "info";
+model ProfileDiagnostics {
+  @doc("The log settings of the broker.")
+  logs?: ProfileDiagnosticsLogs;
 
   @doc("The metrics settings for the dataflow.")
-  metrics?: DataFlowProfileDiagnosticsMetrics;
+  metrics?: DiagnosticsMetrics;
 
   @doc("The traces settings for the dataflow.")
-  traces?: DataFlowProfileDiagnosticsTraces;
+  traces?: DiagnosticsTraces;
 }
 
 @doc("Mode properties")
@@ -75,12 +71,29 @@ union Mode {
   Disabled: "Disabled",
 }
 
+@doc("Broker Diagnostic Log properties")
+model ProfileDiagnosticsLogs {
+  @doc("How often to export the logs to the open telemetry collector.")
+  @minValue(1)
+  @maxValue(300)
+  exportIntervalSeconds?: int32 = 30;
+
+  @doc("The level of logs to export.")
+  exportLogLevel?: string = "error";
+
+  @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
+  level?: string = "info";
+
+  @doc("The open telemetry collector endpoint to export to.")
+  openTelemetryCollectorAddress?: string;
+}
+
 @doc("DataFlowProfile Diagnostics Metrics properties")
-model DataFlowProfileDiagnosticsMetrics {
+model DiagnosticsMetrics {
   @doc("The time used to determine if a metric is stale and drop from the metrics cache.")
   @minValue(60)
   @maxValue(600)
-  cacheTimeoutSeconds?: int32 = 600;
+  stalenessTimeSeconds?: int32 = 600;
 
   @doc("The mode for metrics.")
   mode?: Mode = Mode.Enabled;
@@ -93,7 +106,7 @@ model DataFlowProfileDiagnosticsMetrics {
   @doc("The open telemetry collector endpoint to export to.")
   openTelemetryCollectorAddress?: string;
 
-  @doc("The prometheus port for the metrics.")
+  @doc("The prometheus port to expose the metrics.")
   @minValue(0)
   @maxValue(65535)
   prometheusPort?: int32 = 9600;
@@ -105,7 +118,7 @@ model DataFlowProfileDiagnosticsMetrics {
 }
 
 @doc("DataFlowProfile Diagnostics Traces properties")
-model DataFlowProfileDiagnosticsTraces {
+model DiagnosticsTraces {
   @doc("The cache size in megabytes.")
   @minValue(1)
   @maxValue(128)
@@ -123,7 +136,7 @@ model DataFlowProfileDiagnosticsTraces {
   openTelemetryCollectorAddress?: string;
 
   @doc("The selfTracing settings for the traces.")
-  selfTracing?: DataFlowProfileDiagnosticsTracesSelfTracing;
+  selfTracing?: DataFlowSelfTracing;
 
   @doc("The span channel capacity.")
   @minValue(1000)
@@ -132,7 +145,7 @@ model DataFlowProfileDiagnosticsTraces {
 }
 
 @doc("DataFlowProfile Diagnostics Traces SelfTracing properties")
-model DataFlowProfileDiagnosticsTracesSelfTracing {
+model DataFlowSelfTracing {
   @doc("The mode for selfTracing.")
   mode?: Mode = Mode.Enabled;
 

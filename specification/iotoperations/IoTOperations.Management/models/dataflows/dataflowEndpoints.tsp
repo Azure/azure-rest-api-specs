@@ -208,10 +208,10 @@ union DataFlowEndpointFabricPathType {
   string,
 
   @doc("FILES")
-  "files",
+  Files: "Files",
 
   @doc("TABLES")
-  "tables",
+  Tables: "Tables",
 }
 
 @doc("Kafka endpoint properties")
@@ -223,7 +223,7 @@ model DataFlowEndpointKafka {
   batching?: DataFlowEndpointKafkaBatching;
 
   @doc("Compression. Can be none, gzip, lz4, or snappy. No effect if the endpoint is used as a source.")
-  compression?: DataFlowEndpointKafkaCompression.none;
+  compression?: DataFlowEndpointKafkaCompression.None;
 
   @doc("Consumer group ID.")
   consumerGroupId?: string;
@@ -235,10 +235,10 @@ model DataFlowEndpointKafka {
   host?: string;
 
   @doc("Kafka acks. Can be all, one, or zero. No effect if the endpoint is used as a source.")
-  kafkaAcks?: DataFlowEndpointKafkaAcks.all;
+  kafkaAcks?: DataFlowEndpointKafkaAcks.All;
 
   @doc("Partition handling strategy. Can be default or static. No effect if the endpoint is used as a source.")
-  partitionStrategy?: DataFlowEndpointKafkaPartitionStrategy.default;
+  partitionStrategy?: DataFlowEndpointKafkaPartitionStrategy.Default;
 
   @doc("TLS configuration.")
   tls: DataFlowEndpointKafkaTls;
@@ -273,13 +273,13 @@ union DataFlowEndpointAuthenticationSaslType {
   string,
 
   @doc("PLAIN")
-  "plain",
+  Plain: "Plain",
 
   @doc("SCRAM_SHA_256")
-  "scramSha256",
+  ScramSha256: "ScramSha256",
 
   @doc("SCRAM_SHA_512")
-  "scramSha512",
+  ScramSha512: "ScramSha512",
 }
 
 @doc("DataFlowEndpoint Authentication X509 properties")
@@ -314,16 +314,16 @@ union DataFlowEndpointKafkaCompression {
   string,
 
   @doc("NONE")
-  none: "none",
+  None: "None",
 
-  @doc("gzip")
-  gzip: "gzip",
+  @doc("Gzip")
+  Gzip: "Gzip",
 
   @doc("SNAPPY")
-  snappy: "snappy",
+  Snappy: "Snappy",
 
   @doc("LZ4")
-  lz4: "lz4",
+  Lz4: "Lz4",
 }
 
 @doc("DataFlowEndpoint Kafka Acks properties")
@@ -331,13 +331,13 @@ union DataFlowEndpointKafkaAcks {
   string,
 
   @doc("ZERO")
-  zero: "zero",
+  Zero: "Zero",
 
   @doc("ONE")
-  one: "one",
+  One: "One",
 
   @doc("ALL")
-  all: "all",
+  All: "All",
 }
 
 @doc("DataFlowEndpoint Kafka Partition Strategy properties")
@@ -345,16 +345,16 @@ union DataFlowEndpointKafkaPartitionStrategy {
   string,
 
   @doc("Default: Assigns messages to random partitions, using a round-robin algorithm.")
-  default: "default",
+  Default: "Default",
 
   @doc("Static: Assigns messages to a fixed partition number that's derived from the instance ID of the dataflow.")
-  static: "static",
+  Static: "Static",
 
   @doc("TOPIC")
-  topic: "topic",
+  Topic: "Topic",
 
   @doc("PROPERTY")
-  property: "property",
+  Property: "Property",
 }
 
 @doc("DataFlowEndpoint Kafka Tls properties")
@@ -421,7 +421,7 @@ union MqttProtocolType {
   Mqtt: "Mqtt",
 
   @doc("protocol websocket")
-  WebSocket: "WebSocket",
+  WebSockets: "WebSockets",
 }
 
 @doc("Mqtt Retain types")
@@ -461,7 +461,7 @@ model DataFlowEndpointMqttSessionExpirySeconds {
   @doc("Number of clients to use for shared subscription.")
   @minValue(0)
   @maxValue(255)
-  groupMinimumShareNumber: int32;
+  groupShareNumber: int32;
 
   @doc("Shared subscription group name.")
   groupName: string;
