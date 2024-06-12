@@ -117,6 +117,13 @@ enum Versions {
 
 @@clientName(Services.exportMetadataSchema::parameters.body, "payload");
 
+@@encodedName(Services.importFromApim::parameters.body,
+  "application/json",
+  "payload"
+);
+
+@@clientName(Services.importFromApim::parameters.body, "payload");
+
 @@visibility(Azure.Core.Page.nextLink, "read");
 @@visibility(Azure.Core.Page.value, "read");
 /**

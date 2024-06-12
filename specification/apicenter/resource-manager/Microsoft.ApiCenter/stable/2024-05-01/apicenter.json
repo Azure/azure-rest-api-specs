@@ -694,13 +694,14 @@
             "pattern": "^[a-zA-Z0-9-]{3,90}$"
           },
           {
-            "name": "body",
+            "name": "payload",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImportFromApimRequest"
-            }
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -726,6 +727,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Services_ImportFromApim": {
+            "$ref": "./examples/Services_ImportFromApim.json"
           }
         },
         "x-ms-long-running-operation-options": {
