@@ -174,12 +174,37 @@ interface DevBoxes {
     }
   >;
 
+ #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
+  //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
+  @doc("Deletes a Dev Box.")
+  @pollingOperation(OperationStatuses.get)
+  @deletesResource(DevBox)
+  deleteDevBox is Azure.Core.Foundations.ResourceOperation<
+    DevBox,
+    {},
+    {
+      @statusCode statusCode: 202;
+
+      @header("Location")
+      location: string;
+
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+
+      @bodyRoot body: OperationStatus;
+    } | {
+      @statusCode statusCode: 204;
+    }
+  >;
+
+/*
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
   //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
   @doc("Deletes a Dev Box.")
   @pollingOperation(OperationStatuses.get)
   @delete
-  deleteDevBox is StandardResourceOperations.LongRunningResourceDelete<DevBox>;
+  deleteDevBox is StandardResourceOperations.LongRunningResourceDelete<DevBox>;*/
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
   @doc("Starts a Dev Box.")
