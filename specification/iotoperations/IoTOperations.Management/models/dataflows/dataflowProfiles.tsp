@@ -35,7 +35,7 @@ model DataFlowProfileProperties {
   @doc("Spec defines the desired identities of NBC diagnostics settings.")
   diagnostics?: ProfileDiagnostics;
 
-  @doc("To manually scale the dataflow profile, specifcy the maximum number of instances you want to run.")
+  @doc("To manually scale the dataflow profile, specify the maximum number of instances you want to run.")
   @minValue(1)
   @maxValue(20)
   maxInstances?: int32;

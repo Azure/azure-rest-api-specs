@@ -392,7 +392,7 @@ model DataFlowEndpointMqtt {
   @doc("Whether or not to keep the retain setting.")
   retain?: MqttRetainType = MqttRetainType.Keep;
 
-  @doc("The max numer of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.")
+  @doc("The max number of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.")
   @minValue(0)
   maxInflightMessages?: int32 = 100;
 

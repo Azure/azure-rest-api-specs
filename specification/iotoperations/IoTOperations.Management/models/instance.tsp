@@ -63,10 +63,10 @@ model ObservabilityProperties {
 @doc("The metrics properties.")
 model MetricsProperties {
   @doc("The OpenTelemetry Collector address.")
-  opentelemetryCollectorAddres: string;
+  opentelemetryCollectorAddress: string;
 
   @minValue(1)
   @maxValue(300)
   @doc("Metrics interval.")
-  exportIntervalSecounds?: int32;
+  exportIntervalSeconds?: int32;
 }

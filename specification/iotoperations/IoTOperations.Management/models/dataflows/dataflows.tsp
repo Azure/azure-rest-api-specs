@@ -76,6 +76,9 @@ model DataFlowBuiltInTransformation {
   @OpenAPI.extension("x-ms-identifiers", [])
   map?: DataFlowBuiltInTransformationMap[] = [];
 
+  @doc("Serialization format. Optional; defaults to JSON.")
+  serializationFormat?: SerializationFormat = SerializationFormat.Json;
+
   @doc("Schema CR reference.")
   schemaRef?: string;
 }
@@ -110,6 +113,26 @@ model DataFlowBuiltInTransformationMap {
   output: string;
 }
 
+@doc("Serialization Format properties")
+union SerializationFormat {
+  string,
+
+  @doc("AVROBinary")
+  AvroBinary: "AvroBinary",
+
+  @doc("AVROJson")
+  AvroJson: "AvroJson",
+
+  @doc("Delta")
+  Delta: "Delta",
+
+  @doc("JSON")
+  Json: "Json",
+
+  @doc("Parquet")
+  Parquet: "Parquet",
+}
+
 @doc("DataFlow Destination Operation properties")
 model DataFlowDestinationOperation {
   @doc("Reference to the Endpoint CR. Can be of MQTT, Kafka, Fabric, ADLS, ADX type.")
@@ -132,6 +155,9 @@ model DataFlowSourceOperation {
 
   @doc("List of source paths. Can be MQTT or Kafka topics. Supports wildcards # and +.")
   paths: string[];
+
+  @doc("Serialization format. Optional; defaults to JSON.")
+  serializationFormat?: SerializationFormat = SerializationFormat.Json;
 
   @doc("Schema CR reference. JSON and Avro schema supported. Data will be deserialized according to the schema, and dropped if it doesn't match. Optional; required if data source isn't JSON.")
   schemaRef?: string;

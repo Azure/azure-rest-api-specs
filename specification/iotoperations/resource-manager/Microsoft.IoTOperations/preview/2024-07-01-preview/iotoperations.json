@@ -4069,6 +4069,49 @@
           },
           "x-ms-identifiers": []
         },
+        "serializationFormat": {
+          "type": "string",
+          "description": "Serialization format. Optional; defaults to JSON.",
+          "default": "Json",
+          "enum": [
+            "AvroBinary",
+            "AvroJson",
+            "Delta",
+            "Json",
+            "Parquet"
+          ],
+          "x-ms-enum": {
+            "name": "SerializationFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AvroBinary",
+                "value": "AvroBinary",
+                "description": "AVROBinary"
+              },
+              {
+                "name": "AvroJson",
+                "value": "AvroJson",
+                "description": "AVROJson"
+              },
+              {
+                "name": "Delta",
+                "value": "Delta",
+                "description": "Delta"
+              },
+              {
+                "name": "Json",
+                "value": "Json",
+                "description": "JSON"
+              },
+              {
+                "name": "Parquet",
+                "value": "Parquet",
+                "description": "Parquet"
+              }
+            ]
+          }
+        },
         "schemaRef": {
           "type": "string",
           "description": "Schema CR reference."
@@ -4884,7 +4927,7 @@
         "maxInflightMessages": {
           "type": "integer",
           "format": "int32",
-          "description": "The max numer of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.",
+          "description": "The max number of messages to keep in flight. For subscribe, this is the receive maximum. For publish, this is the maximum number of messages to send before waiting for an ack.",
           "default": 100,
           "minimum": 0
         },
@@ -5120,7 +5163,7 @@
         "maxInstances": {
           "type": "integer",
           "format": "int32",
-          "description": "To manually scale the dataflow profile, specifcy the maximum number of instances you want to run.",
+          "description": "To manually scale the dataflow profile, specify the maximum number of instances you want to run.",
           "minimum": 1,
           "maximum": 20
         },
@@ -5373,6 +5416,49 @@
           "description": "List of source paths. Can be MQTT or Kafka topics. Supports wildcards # and +.",
           "items": {
             "type": "string"
+          }
+        },
+        "serializationFormat": {
+          "type": "string",
+          "description": "Serialization format. Optional; defaults to JSON.",
+          "default": "Json",
+          "enum": [
+            "AvroBinary",
+            "AvroJson",
+            "Delta",
+            "Json",
+            "Parquet"
+          ],
+          "x-ms-enum": {
+            "name": "SerializationFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AvroBinary",
+                "value": "AvroBinary",
+                "description": "AVROBinary"
+              },
+              {
+                "name": "AvroJson",
+                "value": "AvroJson",
+                "description": "AVROJson"
+              },
+              {
+                "name": "Delta",
+                "value": "Delta",
+                "description": "Delta"
+              },
+              {
+                "name": "Json",
+                "value": "Json",
+                "description": "JSON"
+              },
+              {
+                "name": "Parquet",
+                "value": "Parquet",
+                "description": "Parquet"
+              }
+            ]
           }
         },
         "schemaRef": {
@@ -5974,11 +6060,11 @@
       "type": "object",
       "description": "The metrics properties.",
       "properties": {
-        "opentelemetryCollectorAddres": {
+        "opentelemetryCollectorAddress": {
           "type": "string",
           "description": "The OpenTelemetry Collector address."
         },
-        "exportIntervalSecounds": {
+        "exportIntervalSeconds": {
           "type": "integer",
           "format": "int32",
           "description": "Metrics interval.",
@@ -5987,7 +6073,7 @@
         }
       },
       "required": [
-        "opentelemetryCollectorAddres"
+        "opentelemetryCollectorAddress"
       ]
     },
     "Mode": {
@@ -6466,6 +6552,48 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "Self tracing disabled."
+          }
+        ]
+      }
+    },
+    "SerializationFormat": {
+      "type": "string",
+      "description": "Serialization Format properties",
+      "enum": [
+        "AvroBinary",
+        "AvroJson",
+        "Delta",
+        "Json",
+        "Parquet"
+      ],
+      "x-ms-enum": {
+        "name": "SerializationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AvroBinary",
+            "value": "AvroBinary",
+            "description": "AVROBinary"
+          },
+          {
+            "name": "AvroJson",
+            "value": "AvroJson",
+            "description": "AVROJson"
+          },
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta"
+          },
+          {
+            "name": "Json",
+            "value": "Json",
+            "description": "JSON"
+          },
+          {
+            "name": "Parquet",
+            "value": "Parquet",
+            "description": "Parquet"
           }
         ]
       }
