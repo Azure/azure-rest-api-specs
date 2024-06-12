@@ -207,8 +207,10 @@ interface Assets {
 
   createOrReplace is ArmResourceCreateOrReplaceAsync<Asset>;
 
-  @removed(Versions.)
-  update is ArmResourcePatchAsync<Asset, AssetProperties>;
+  @renamedFrom(Versions.v2023_11_01_preview, "update")
+  @removed(Versions.v2024_06_01_preview)
+  @route("removed")
+  update1 is ArmResourcePatchAsync<Asset, AssetProperties>;
 
   @added(Versions.v2024_06_01_preview)
   @parameterVisibility

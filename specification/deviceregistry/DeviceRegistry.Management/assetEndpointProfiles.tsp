@@ -122,8 +122,10 @@ interface AssetEndpointProfiles {
 
   createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
 
+  @renamedFrom(Versions.v2023_11_01_preview, "update")
+  @route("removed")
   @removed(Versions.v2024_06_01_preview)
-  update is ArmResourcePatchAsync<
+  update1 is ArmResourcePatchAsync<
     AssetEndpointProfile,
     AssetEndpointProfileProperties
   >;
