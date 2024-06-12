@@ -9042,6 +9042,266 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions": {
+      "get": {
+        "operationId": "MarketplaceSubscriptions_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceSubscriptionResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "List containers.",
+        "tags": [
+          "MarketplaceSubscription"
+        ],
+        "x-ms-examples": {
+          "List Workspace Marketplace Subscription.": {
+            "$ref": "./examples/Workspace/MarketplaceSubscription/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}": {
+      "delete": {
+        "operationId": "MarketplaceSubscriptions_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "description": "Marketplace Subscription name.",
+            "in": "path",
+            "name": "name",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10,
+                "type": "integer"
+              },
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "format": "duration",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "Delete Marketplace Subscription (asynchronous).",
+        "tags": [
+          "MarketplaceSubscription"
+        ],
+        "x-ms-examples": {
+          "Delete Workspace Marketplace Subscription.": {
+            "$ref": "./examples/Workspace/MarketplaceSubscription/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "operationId": "MarketplaceSubscriptions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "description": "Container name.",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceSubscriptionResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "Get container.",
+        "tags": [
+          "MarketplaceSubscription"
+        ],
+        "x-ms-examples": {
+          "Get Workspace Marketplace Subscription.": {
+            "$ref": "./examples/Workspace/MarketplaceSubscription/get.json"
+          }
+        }
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "MarketplaceSubscriptions_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "description": "Marketplace Subscription name.",
+            "in": "path",
+            "name": "name",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Marketplace Subscription entity to apply during operation.",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MarketplaceSubscriptionResource"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update request is successful.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceSubscriptionResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "format": "duration",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/MarketplaceSubscriptionResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "Create or update Marketplace Subscription (asynchronous).",
+        "tags": [
+          "MarketplaceSubscription"
+        ],
+        "x-ms-examples": {
+          "CreateOrUpdate Workspace Marketplace Subscription.": {
+            "$ref": "./examples/Workspace/MarketplaceSubscription/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models": {
       "get": {
         "tags": [
