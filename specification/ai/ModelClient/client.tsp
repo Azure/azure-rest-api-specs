@@ -8,16 +8,14 @@ using TypeSpec.Versioning;
 @useDependency(ModelClient.Versions.v2024_05_01_Preview)
 namespace Customizations; // The actual name here doesn't matter and is here for organization purposes only
 
-// These models are used by the hand-written operator methods.
-// We need to declare their usage and public access, otherwise they won't be emited in the generated code.
-@@usage(ModelClient.StreamingChatChoiceUpdate, Usage.output);
+// Are these needed?
 @@usage(ModelClient.ChatCompletions, Usage.output);
-@@usage(ModelClient.StreamingChatCompletionsUpdate, Usage.output);
 @@usage(ModelClient.ModelInfo, Usage.output);
+@@usage(ModelClient.StreamingChatChoiceUpdate, Usage.output);
+@@usage(ModelClient.StreamingChatCompletionsUpdate, Usage.output);
 
-// Since we made all operator methods internal, we need to expliclty say we still want the models they use
-// to be public.
-@@access(ModelClient.CapacityType, Access.public);
+// Since we made all operator methods internal, we need to expliclty
+// say we still want the models they use to be public.
 @@access(ModelClient.ChatChoice, Access.public);
 @@access(ModelClient.ChatCompletions, Access.public);
 @@access(ModelClient.ChatCompletionsFunctionToolCall, Access.public);
@@ -47,17 +45,46 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(ModelClient.FunctionCall, Access.public);
 @@access(ModelClient.FunctionDefinition, Access.public);
 @@access(ModelClient.ModelInfo, Access.public);
+@@access(ModelClient.ModelType, Access.public);
 @@access(ModelClient.StreamingChatChoiceUpdate, Access.public, "python");
 @@access(ModelClient.StreamingChatCompletionsUpdate, Access.public, "python");
+@@access(ModelClient.ChatMessageContentItem, Access.public);
+@@access(ModelClient.ChatMessageTextContentItem, Access.public);
+@@access(ModelClient.ChatMessageImageContentItem, Access.public);
+@@access(ModelClient.ChatMessageImageUrl, Access.public);
+@@access(ModelClient.ChatMessageImageDetailLevel, Access.public);
 
 // The operators need to be hidden, since we hand-write the public versions of those to
 // 1. Add chat completions streaming (to getChatCompletions operator)
 // 2. Add hyper-params (to getChatCompletions/Embeddings/ImageEmbeddings, all clients)
-// 3. Cache model info (to getModelInfo, all clients)
+// 3. Cache model info (to getModelInfo, all clients, Python only)
 @@access(ModelClient.getChatCompletions, Access.internal, "python");
 @@access(ModelClient.getEmbeddings, Access.internal, "python");
 @@access(ModelClient.getImageEmbeddings, Access.internal, "python");
 @@access(ModelClient.getModelInfo, Access.internal, "python");
+
+// We use shorter names in the Python client library
+@@clientName(ModelClient.ChatRequestSystemMessage, "SystemMessage", "python");
+@@clientName(ModelClient.ChatRequestUserMessage, "UserMessage", "python");
+@@clientName(ModelClient.ChatRequestAssistantMessage,
+  "AssistantMessage",
+  "python"
+);
+@@clientName(ModelClient.ChatRequestToolMessage, "ToolMessage", "python");
+@@clientName(ModelClient.ChatMessageContentItem, "ContentItem", "python");
+@@clientName(ModelClient.ChatMessageTextContentItem,
+  "TextContentItem",
+  "python"
+);
+@@clientName(ModelClient.ChatMessageImageContentItem,
+  "ImageContentItem",
+  "python"
+);
+@@clientName(ModelClient.ChatMessageImageUrl, "ImageUrl", "python");
+@@clientName(ModelClient.ChatMessageImageDetailLevel,
+  "ImageDetailLevel",
+  "python"
+);
 
 @client({
   name: "ChatCompletionsClient",
@@ -68,19 +95,25 @@ interface Client1 {
   getModelInfo is ModelClient.getModelInfo;
 }
 
-@client({
-  name: "EmbeddingsClient",
-  service: ModelClient,
-})
+@client(
+  {
+    name: "EmbeddingsClient",
+    service: ModelClient,
+  },
+  "python"
+)
 interface Client2 {
   embed is ModelClient.getEmbeddings;
   getModelInfo is ModelClient.getModelInfo;
 }
 
-@client({
-  name: "ImageEmbeddingsClient",
-  service: ModelClient,
-})
+@client(
+  {
+    name: "ImageEmbeddingsClient",
+    service: ModelClient,
+  },
+  "python"
+)
 interface Client3 {
   embedImage is ModelClient.getImageEmbeddings;
   getModelInfo is ModelClient.getModelInfo;

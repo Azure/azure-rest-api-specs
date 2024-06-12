@@ -168,8 +168,6 @@ Counts consider all tokens across prompts, choices, choice alternates, best_of g
 other consumers.
 """)
 model CompletionsUsage {
-  ...CapacityAlias;
-
   @doc("The number of tokens generated across all completions emissions.")
   completion_tokens: int32;
 
@@ -284,7 +282,6 @@ model ChatRequestMessage {
 A request chat message containing system instructions that influence how the model will generate a chat completions
 response.
 """)
-@clientName("SystemMessage", "python")
 model ChatRequestSystemMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'system' for system messages.")
   role: ChatRole.system;
@@ -294,17 +291,16 @@ model ChatRequestSystemMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing user input to the assistant.")
-@clientName("UserMessage", "python")
 model ChatRequestUserMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'user' for user messages.")
   role: ChatRole.user;
 
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
   @doc("The contents of the user message, with available input types varying by selected model.")
-  content: string;
+  content: string | ChatMessageContentItem[];
 }
 
 @doc("A request chat message representing response or action from the assistant.")
-@clientName("AssistantMessage", "python")
 model ChatRequestAssistantMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'assistant' for assistant messages.")
   role: ChatRole.assistant;
@@ -322,7 +318,6 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing requested output from a configured tool.")
-@clientName("ToolMessage", "python")
 model ChatRequestToolMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'tool' for tool messages.")
   role: ChatRole.tool;
@@ -477,4 +472,62 @@ model FunctionCall {
   your function.
   """)
   arguments: string;
+}
+
+@doc("An abstract representation of a structured content item within a chat message.")
+@discriminator("type")
+model ChatMessageContentItem {
+  @doc("The discriminated object type.")
+  type: string;
+}
+
+@doc("A structured chat content item containing plain text.")
+model ChatMessageTextContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'text' for this type.")
+  type: "text";
+
+  @doc("The content of the message.")
+  text: string;
+}
+
+@doc("A structured chat content item containing an image reference.")
+model ChatMessageImageContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'image_url' for this type.")
+  type: "image_url";
+
+  @doc("An internet location, which must be accessible to the model,from which the image may be retrieved.")
+  @encodedName("application/json", "image_url")
+  imageUrl: ChatMessageImageUrl;
+}
+
+@doc("An internet location from which the model may retrieve an image.")
+model ChatMessageImageUrl {
+  @doc("The URL of the image.")
+  url: url;
+
+  @doc("""
+  The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
+  accuracy.
+  """)
+  detail?: ChatMessageImageDetailLevel;
+}
+
+@doc("A representation of the possible image detail levels for image-based chat completions message content.")
+union ChatMessageImageDetailLevel {
+  string,
+
+  @doc("Specifies that the model should determine which detail level to apply using heuristics like image size.")
+  auto: "auto",
+
+  @doc("""
+  Specifies that image evaluation should be constrained to the 'low-res' model that may be faster and consume fewer
+  tokens but may also be less accurate for highly detailed images.
+  """)
+  low: "low",
+
+  @doc("""
+  Specifies that image evaluation should enable the 'high-res' model that may be more accurate for highly detailed
+  images but may also be slower and consume more tokens.
+  """)
+  high: "high",
 }

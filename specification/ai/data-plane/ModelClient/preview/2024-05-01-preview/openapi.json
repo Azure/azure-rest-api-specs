@@ -519,30 +519,6 @@
         }
       }
     },
-    "CapacityType": {
-      "type": "string",
-      "description": "Whether your capacity has been affected by the usage amount (token count) reported here.",
-      "enum": [
-        "usage",
-        "fixed"
-      ],
-      "x-ms-enum": {
-        "name": "CapacityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "usage",
-            "value": "usage",
-            "description": "Your capacity has been affected by the usage amount (token count) reported here."
-          },
-          {
-            "name": "fixed",
-            "value": "fixed",
-            "description": "Your capacity has not been affected by the usage amount (token count) reported here."
-          }
-        ]
-      }
-    },
     "ChatChoice": {
       "type": "object",
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -778,6 +754,107 @@
         ]
       }
     },
+    "ChatMessageContentItem": {
+      "type": "object",
+      "description": "An abstract representation of a structured content item within a chat message.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The discriminated object type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ChatMessageImageContentItem": {
+      "type": "object",
+      "description": "A structured chat content item containing an image reference.",
+      "properties": {
+        "image_url": {
+          "$ref": "#/definitions/ChatMessageImageUrl",
+          "description": "An internet location, which must be accessible to the model,from which the image may be retrieved.",
+          "x-ms-client-name": "imageUrl"
+        }
+      },
+      "required": [
+        "image_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "image_url"
+    },
+    "ChatMessageImageDetailLevel": {
+      "type": "string",
+      "description": "A representation of the possible image detail levels for image-based chat completions message content.",
+      "enum": [
+        "auto",
+        "low",
+        "high"
+      ],
+      "x-ms-enum": {
+        "name": "ChatMessageImageDetailLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Specifies that the model should determine which detail level to apply using heuristics like image size."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Specifies that image evaluation should be constrained to the 'low-res' model that may be faster and consume fewer\ntokens but may also be less accurate for highly detailed images."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "Specifies that image evaluation should enable the 'high-res' model that may be more accurate for highly detailed\nimages but may also be slower and consume more tokens."
+          }
+        ]
+      }
+    },
+    "ChatMessageImageUrl": {
+      "type": "object",
+      "description": "An internet location from which the model may retrieve an image.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the image."
+        },
+        "detail": {
+          "$ref": "#/definitions/ChatMessageImageDetailLevel",
+          "description": "The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and\naccuracy."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "ChatMessageTextContentItem": {
+      "type": "object",
+      "description": "A structured chat content item containing plain text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The content of the message."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessageContentItem"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
     "ChatRequestAssistantMessage": {
       "type": "object",
       "description": "A request chat message representing response or action from the assistant.",
@@ -867,7 +944,6 @@
       "description": "A request chat message representing user input to the assistant.",
       "properties": {
         "content": {
-          "type": "string",
           "description": "The contents of the user message, with available input types varying by selected model."
         }
       },
@@ -984,10 +1060,6 @@
       "type": "object",
       "description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and\nother consumers.",
       "properties": {
-        "capacity_type": {
-          "$ref": "#/definitions/CapacityType",
-          "description": "Indicates whether your capacity has been affected by the usage amount (token count) reported here."
-        },
         "completion_tokens": {
           "type": "integer",
           "format": "int32",
@@ -1005,7 +1077,6 @@
         }
       },
       "required": [
-        "capacity_type",
         "completion_tokens",
         "prompt_tokens",
         "total_tokens"
@@ -1165,10 +1236,6 @@
       "type": "object",
       "description": "Measurement of the amount of tokens used in this request and response.",
       "properties": {
-        "capacity_type": {
-          "$ref": "#/definitions/CapacityType",
-          "description": "Indicates whether your capacity has been affected by the usage amount (token count) reported here."
-        },
         "input_tokens": {
           "type": "integer",
           "format": "int32",
@@ -1186,7 +1253,6 @@
         }
       },
       "required": [
-        "capacity_type",
         "input_tokens",
         "prompt_tokens",
         "total_tokens"

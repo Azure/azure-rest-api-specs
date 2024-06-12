@@ -196,6 +196,11 @@ model ImageGenerationPromptFilterResults {
 
   @doc("Whether a jailbreak attempt was detected in the prompt.")
   jailbreak?: ContentFilterDetectionResult;
+
+  /** Information about customer block lists and if something was detected the associated list ID. */
+  @encodedName("application/json", "custom_blocklists")
+  @added(ServiceApiVersions.v2024_05_01_Preview)
+  customBlocklists?: ContentFilterDetailedResults;
 }
 
 @doc("""
