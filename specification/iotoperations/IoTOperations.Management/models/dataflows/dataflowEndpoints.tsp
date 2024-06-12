@@ -9,7 +9,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
-
 /** ******************* */
 /**
  * dataflowEndpoint resource type model details.
