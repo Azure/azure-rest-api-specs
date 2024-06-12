@@ -249,7 +249,11 @@ The recommended workaround is to add `use-read-only-status-schema: true` to your
 
 ### `PatchBodyParameterSchema`
 
-The root cause is a bug in typespec-azure: https://github.com/Azure/typespec-azure/issues/383.  The workaround in this issue should be applied to the spec TypeSpec sources.  The LintDiff error should **not** be ignored or suppressed.
+The root cause is a bug in typespec-azure:
+
+https://github.com/Azure/typespec-azure/issues/383.
+
+The workaround in this issue should be applied to the spec TypeSpec sources.  The LintDiff error should **not** be ignored or suppressed.
 
 ## `Swagger ModelValidation`
 
