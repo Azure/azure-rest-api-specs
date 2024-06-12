@@ -72,7 +72,7 @@ interface TestProfileAdministrationOperations {
 }
 
 @client({
-  name: "TestProfileRunAdministrationClient",
+  name: "TestProfileRunClient",
   service: Microsoft.LoadTestService,
 })
 interface TestProfileRunOperations {

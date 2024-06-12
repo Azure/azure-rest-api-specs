@@ -440,25 +440,31 @@ numeric, underscore or hyphen characters.
   >;
 }
 
+// NOTE(mitsha): In clients.tsp, when we use `op is <Op>` syntax, it removes all the decorators defined on the interface
+// including the @added decorator and causes tsp compile client.tsp to fail. To handle this, @added is added at each operation level instead.
+// Do the same whenever routes are added in a new API Version
 @tag("TestProfile")
-@added(APIVersions.v2024_05_01_preview)
 interface TestProfileAdministration {
   @summary("Create a new test profile or update an existing test profile.")
   @doc("Create a new test profile or update an existing test profile by providing the test profile Id.")
+  @added(APIVersions.v2024_05_01_preview)
   createOrUpdateTestProfile is StandardResourceOperations.ResourceCreateOrUpdate<TestProfile>;
 
   @summary("Delete a test profile.")
   @doc("Delete a test profile by its test profile Id.")
+  @added(APIVersions.v2024_05_01_preview)
   deleteTestProfile is StandardResourceOperations.ResourceDelete<TestProfile>;
 
   @summary("Get load test profile details.")
   @doc("Get load test profile details by test profile Id.")
+  @added(APIVersions.v2024_05_01_preview)
   getTestProfile is StandardResourceOperations.ResourceRead<TestProfile>;
 
   @summary("List test profiles.")
   @doc("""
   Get all test profiles for the given filters.
   """)
+  @added(APIVersions.v2024_05_01_preview)
   listTestProfiles is StandardResourceOperations.ResourceList<
     TestProfile,
     ListQueryParametersTrait<ListTestProfileQueryParams>
@@ -466,25 +472,28 @@ interface TestProfileAdministration {
 }
 
 @tag("TestProfileRun")
-@added(APIVersions.v2024_05_01_preview)
 interface TestProfileRunAdministration {
   @summary("Get test profile run details.")
   @doc("Get test profile run details by test profile run Id.")
+  @added(APIVersions.v2024_05_01_preview)
   getTestProfileRun is StandardResourceOperations.ResourceRead<TestProfileRun>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Create and start a new test profile run.")
   @doc("Create and start a new test profile run with the given test profile run Id.")
+  @added(APIVersions.v2024_05_01_preview)
   createOrUpdateTestProfileRun is StandardResourceOperations.ResourceCreateOrUpdate<TestProfileRun>;
 
   @summary("Delete an existing load test profile run.")
   @doc("Delete an existing load test profile run by providing the test profile run Id.")
+  @added(APIVersions.v2024_05_01_preview)
   deleteTestProfileRun is StandardResourceOperations.ResourceDelete<TestProfileRun>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   @summary("Stop test profile run.")
   @doc("Stop test profile run for the given test profile run Id.")
   @operationId("TestProfileRunAdministration_StopTestProfileRun")
+  @added(APIVersions.v2024_05_01_preview)
   stop is StandardResourceOperations.ResourceAction<
     TestProfileRun,
     {},
@@ -494,6 +503,7 @@ interface TestProfileRunAdministration {
 
   @summary("List test profile runs.")
   @doc("Get all test profile runs for the given filters.")
+  @added(APIVersions.v2024_05_01_preview)
   listTestProfileRuns is StandardResourceOperations.ResourceList<
     TestProfileRun,
     ListQueryParametersTrait<ListTestProfileRunQueryParams>
