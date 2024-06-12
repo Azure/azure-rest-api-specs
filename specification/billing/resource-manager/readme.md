@@ -90,9 +90,6 @@ suppressions:
   from: billingSubscription.json
   reason: Breaking change
 - code: AvoidAdditionalProperties
-  from: policy.json
-  reason: Service design forces behavior
-- code: AvoidAdditionalProperties
   from: reservation.json
   reason: False positive. Used for "tags"
 - code: AvoidAnonymousTypes

@@ -12,86 +12,21 @@
   },
   "paths": {},
   "definitions": {
-    "Error": {
-      "description": "The error detail.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "The error target.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "The error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "additionalInfo": {
-          "description": "The resource management error additional info.",
-          "type": "array",
-          "items": {
-            "description": "The resource management error additional info.",
-            "type": "object",
-            "properties": {
-              "type": {
-                "description": "The additional info type.",
-                "type": "string",
-                "readOnly": true
-              },
-              "info": {
-                "description": "The additional info.",
-                "type": "object",
-                "readOnly": true
-              }
-            }
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "Resource": {
       "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Fully qualified resource ID for the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
         "tags": {
           "description": "Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
