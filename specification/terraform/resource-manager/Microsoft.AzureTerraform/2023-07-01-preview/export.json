@@ -1,266 +1,266 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "AzureTerraformResourceProviderClient",
-      "description": "The Azure Terraform management API provides a RESTful set of web services that used to manage your Azure Terraform resources.",
-      "version": "2023-07-01-preview"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-      "https"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
-      }
-    ],
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
-        }
-      }
-    },
-    "paths": {
-      "/providers/Microsoft.AzureTerraform/operations": {
-        "get": {
-          "tags": [
-            "Operations"
-          ],
-          "description": "Lists all of the available RP operations.",
-          "operationId": "Operations_List",
-          "parameters": [
-            {
-              "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The request has succeeded.",
-              "schema": {
-                "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
-              }
-            },
-            "default": {
-              "description": "Resource Provider error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          },
-          "x-ms-examples": {
-            "Get a list of operations for a resource provider": {
-              "$ref": "./examples/ListOperations.json"
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform": {
-        "post": {
-          "tags": [
-            "ExportTerraform"
-          ],
-          "operationId": "ExportTerraform",
-          "description": "Exports the Terraform configuration used for the specified scope.",
-          "parameters": [
-            {
-              "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "#/parameters/ExportParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK - Returns the template.",
-              "schema": {
-                "$ref": "#/definitions/ExportResult"
-              }
-            },           
-            "202":{
-              "description":"Accept"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-examples": {
-            "ExportTerraform": {
-              "$ref": "./examples/ExportTerraform.json"
-            }
-          }
-        }
-      }
-    },
-    "definitions": {
-      "ExportResourceParameter": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/BaseExportParameter"
-          }
-        ],
-        "description": "Export parameter for a single resource",
-        "required": [
-          "resourceId"
-        ],
-        "properties": {
-          "resourceId": {
-            "description": "The id of the resource to be exported",
-            "type": "string"
-          },
-          "name": {
-            "description": "The Terraform resource name",
-            "type": "string",
-            "default": "res-0"
-          }
-        },
-        "type": "object"
-      },
-      "ExportResourceGroupParameter": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/BaseExportParameter"
-          }
-        ],
-        "description": "Export parameter for a resource group",
-        "required": [
-          "resourceGroupName"
-        ],
-        "properties": {
-          "resourceGroupName": {
-            "description": "The name of the resource group to be exported",
-            "type": "string"
-          },
-          "namePattern": {
-            "description": "The pattern of the Terraform resources",
-            "type": "string",
-            "default": "res-"
-          }
-        },
-        "type": "object"
-      },
-      "ExportQueryParameter": {
-        "allOf": [
-          {
-            "$ref": "#/definitions/BaseExportParameter"
-          }
-        ],
-        "description": "Export parameter for resources queried by ARG (Azure Resource Graph)",
-        "required": [
-          "query"
-        ],
-        "properties": {
-          "query": {
-            "description": "The ARG where predicate. Note that you can combine multiple conditions in one `where` predicate, e.g. `resourceGroup =~ \"my-rg\" and type =~ \"microsoft.network/virtualnetworks\"`",
-            "type": "string"
-          },
-          "namePattern": {
-            "description": "The pattern of the Terraform resources",
-            "type": "string",
-            "default": "res-"
-          },
-          "recursive": {
-            "description": "Whether to recursively list child resources of the query result",
-            "type": "boolean",
-            "default": false
-          }
-        },
-        "type": "object"
-      },
-      "BaseExportParameter": {
-        "description": "The base export parameter",
-        "discriminator": "type",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/definitions/Type",
-            "description": "The parameter type"
-          },
-          "targetProvider": {
-            "description": "The target Azure Terraform Provider",
-            "type": "string",
-            "enum": [
-              "azurerm",
-              "azapi"
-            ],
-            "default": "azurerm"
-          }
-        },
-        "type": "object"
-      },
-      "Type": {
-        "description": "The parameter type",
-        "type": "string",
-        "enum": [
-          "ExportResourceParameter",
-          "ExportResourceGroupParameter",
-          "ExportQueryParameter"
-        ],
-        "x-ms-enum": {
-          "name": "parameterType",
-          "modelAsString": true
-        }
-      },
-      "ExportResult": {
-        "type": "object",
-        "description": "The Terraform export result",
-        "properties": {
-          "configuration": {
-            "type": "string",
-            "description": "The Terraform configuration content"
-          },
-          "skippedResources": {
-            "description": "A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "errors": {
-            "description": "A list of errors derived during exporting each resource",
-            "type": "array",
-            "items": {
-              "type": "object",
-              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
-            },
-            "x-ms-identifiers": []
-          }
-        }
-      }
-    },
-    "parameters": {
-      "ExportParameter": {
-        "description": "The export parameter",
-        "in": "body",
-        "name": "exportParameter",
-        "required": true,
-        "schema": {
-          "$ref": "#/definitions/BaseExportParameter"
-        },
-        "x-ms-parameter-location": "method"
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureTerraformResourceProviderClient",
+    "description": "The Azure Terraform management API provides a RESTful set of web services that used to manage your Azure Terraform resources.",
+    "version": "2023-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
     }
+  },
+  "paths": {
+    "/providers/Microsoft.AzureTerraform/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of operations for a resource provider": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureTerraform/exportTerraform": {
+      "post": {
+        "tags": [
+          "ExportTerraform"
+        ],
+        "operationId": "ExportTerraform",
+        "description": "Exports the Terraform configuration used for the specified scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExportParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the template.",
+            "schema": {
+              "$ref": "#/definitions/ExportResult"
+            }
+          },
+          "202": {
+            "description": "Accept"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportTerraform": {
+            "$ref": "./examples/ExportTerraform.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExportResourceParameter": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExportParameter"
+        }
+      ],
+      "description": "Export parameter for a single resource",
+      "required": [
+        "resourceId"
+      ],
+      "properties": {
+        "resourceId": {
+          "description": "The id of the resource to be exported",
+          "type": "string"
+        },
+        "name": {
+          "description": "The Terraform resource name",
+          "type": "string",
+          "default": "res-0"
+        }
+      },
+      "type": "object"
+    },
+    "ExportResourceGroupParameter": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExportParameter"
+        }
+      ],
+      "description": "Export parameter for a resource group",
+      "required": [
+        "resourceGroupName"
+      ],
+      "properties": {
+        "resourceGroupName": {
+          "description": "The name of the resource group to be exported",
+          "type": "string"
+        },
+        "namePattern": {
+          "description": "The pattern of the Terraform resources",
+          "type": "string",
+          "default": "res-"
+        }
+      },
+      "type": "object"
+    },
+    "ExportQueryParameter": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExportParameter"
+        }
+      ],
+      "description": "Export parameter for resources queried by ARG (Azure Resource Graph)",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "description": "The ARG where predicate. Note that you can combine multiple conditions in one `where` predicate, e.g. `resourceGroup =~ \"my-rg\" and type =~ \"microsoft.network/virtualnetworks\"`",
+          "type": "string"
+        },
+        "namePattern": {
+          "description": "The pattern of the Terraform resources",
+          "type": "string",
+          "default": "res-"
+        },
+        "recursive": {
+          "description": "Whether to recursively list child resources of the query result",
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "type": "object"
+    },
+    "BaseExportParameter": {
+      "description": "The base export parameter",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Type",
+          "description": "The parameter type"
+        },
+        "targetProvider": {
+          "description": "The target Azure Terraform Provider",
+          "type": "string",
+          "enum": [
+            "azurerm",
+            "azapi"
+          ],
+          "default": "azurerm"
+        }
+      },
+      "type": "object"
+    },
+    "Type": {
+      "description": "The parameter type",
+      "type": "string",
+      "enum": [
+        "ExportResourceParameter",
+        "ExportResourceGroupParameter",
+        "ExportQueryParameter"
+      ],
+      "x-ms-enum": {
+        "name": "parameterType",
+        "modelAsString": true
+      }
+    },
+    "ExportResult": {
+      "type": "object",
+      "description": "The Terraform export result",
+      "properties": {
+        "configuration": {
+          "type": "string",
+          "description": "The Terraform configuration content"
+        },
+        "skippedResources": {
+          "description": "A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "errors": {
+          "description": "A list of errors derived during exporting each resource",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ExportParameter": {
+      "description": "The export parameter",
+      "in": "body",
+      "name": "exportParameter",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/BaseExportParameter"
+      },
+      "x-ms-parameter-location": "method"
+    }
   }
+}
