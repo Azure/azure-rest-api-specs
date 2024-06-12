@@ -122,14 +122,15 @@ interface AssetEndpointProfiles {
 
   createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
 
+  @sharedRoute
   @renamedFrom(Versions.v2023_11_01_preview, "update")
-  @route("removed")
   @removed(Versions.v2024_06_01_preview)
-  update1 is ArmResourcePatchAsync<
+  updateOld is ArmResourcePatchAsync<
     AssetEndpointProfile,
     AssetEndpointProfileProperties
   >;
 
+  @sharedRoute
   @added(Versions.v2024_06_01_preview)
   @parameterVisibility
   update is ArmCustomPatchAsync<AssetEndpointProfile, AssetEndpointProfile>;
