@@ -17,13 +17,13 @@ interface OracleSubscriptionLevelResource<
     ResourceRead<T>,
     ResourceUpdateAsync<T, TProperties>,
     ResourceDeleteWithoutOkAsync<T> {
-      #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "REMOVE THIS SUPPRESSION AT THE NEXT API VERSION UPDATE"
-      @Azure.Core.useFinalStateVia("azure-async-operation")
-      createOrUpdate is ArmResourceCreateOrUpdateAsync<
-        T,
-        LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-      >;
-    }
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "REMOVE THIS SUPPRESSION AT THE NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    T,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+}
 
 @armResourceOperations(T)
 interface OracleTrackedResource<
@@ -50,16 +50,14 @@ interface OracleLocationBasedResource<T extends Foundations.Resource>
 interface OracleChildResource<
   T extends Foundations.Resource,
   TProperties extends TypeSpec.Reflection.Model
->
-  extends ResourceRead<T>,
-    ResourceDeleteWithoutOkAsync<T> {
-      #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "REMOVE THIS SUPPRESSION AT THE NEXT API VERSION UPDATE"
-      @Azure.Core.useFinalStateVia("azure-async-operation")
-      createOrUpdate is ArmResourceCreateOrUpdateAsync<
-        T,
-        LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-      >;
-    }
+> extends ResourceRead<T>, ResourceDeleteWithoutOkAsync<T> {
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "REMOVE THIS SUPPRESSION AT THE NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    T,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+}
 
 @armResourceOperations
 interface ListActions {
