@@ -350,12 +350,30 @@
               "$ref": "#/definitions/ElasticMonitorResource"
             }
           },
+          "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorResource"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
           "default": {
             "description": "Default error response.",
             "schema": {
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Monitors_Update": {
@@ -2166,10 +2184,18 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ResubscribeResponse"
-            }
+            "description": "Success"
+          },
+          "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
@@ -2177,6 +2203,10 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Organizations_Resubscribe": {
@@ -3584,16 +3614,6 @@
         },
         "organizationId": {
           "description": "Organization Id of the Elastic Organization that needs to be resubscribed",
-          "type": "string"
-        }
-      }
-    },
-    "ResubscribeResponse": {
-      "description": "Resubscribe Response",
-      "type": "object",
-      "properties": {
-        "marketplaceSubscriptionId": {
-          "description": "This will be the newly created MarketplaceSubscriptionId for resubscribing the organization.",
           "type": "string"
         }
       }
