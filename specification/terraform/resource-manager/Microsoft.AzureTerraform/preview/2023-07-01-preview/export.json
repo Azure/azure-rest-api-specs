@@ -90,7 +90,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Accept"
+            "description": "Accept",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -99,6 +104,7 @@
             }
           }
         },
+        "x-ms-long-running-operation":true,
         "x-ms-examples": {
           "ExportTerraform": {
             "$ref": "./examples/ExportTerraform.json"
@@ -200,6 +206,21 @@
             "azurerm",
             "azapi"
           ],
+          "x-ms-enum":{
+            "name":"TargetProvider",
+            "values":[
+              {
+                "name":"AzureRMProvider",
+                "value":"azurerm",
+                "description":"Export to AzureRM provider"
+              },
+              {
+                "name":"AzApiProvider",
+                "value":"azapi",
+                "description":"Export to AzApi provider"
+              }
+            ]
+          },
           "default": "azurerm"
         }
       },
