@@ -57,7 +57,7 @@ model ConfigurationProperties {
 @doc("The metrics configuration.")
 model ObservabilityProperties {
   @doc("The metrics properties.")
-  metrics: MetricsProperties;
+  metrics?: MetricsProperties;
 }
 
 @doc("The metrics properties.")
@@ -65,6 +65,8 @@ model MetricsProperties {
   @doc("The OpenTelemetry Collector address.")
   opentelemetryCollectorAddres: string;
 
+  @minValue(1)
+  @maxValue(300)
   @doc("Metrics interval.")
-  exportIntervalSecounds: int32;
+  exportIntervalSecounds?: int32;
 }

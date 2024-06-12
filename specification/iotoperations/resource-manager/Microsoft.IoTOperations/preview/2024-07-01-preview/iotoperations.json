@@ -5981,12 +5981,13 @@
         "exportIntervalSecounds": {
           "type": "integer",
           "format": "int32",
-          "description": "Metrics interval."
+          "description": "Metrics interval.",
+          "minimum": 1,
+          "maximum": 300
         }
       },
       "required": [
-        "opentelemetryCollectorAddres",
-        "exportIntervalSecounds"
+        "opentelemetryCollectorAddres"
       ]
     },
     "Mode": {
@@ -6097,10 +6098,7 @@
           "$ref": "#/definitions/MetricsProperties",
           "description": "The metrics properties."
         }
-      },
-      "required": [
-        "metrics"
-      ]
+      }
     },
     "OperatorValues": {
       "type": "string",
