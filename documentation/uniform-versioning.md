@@ -1,3 +1,6 @@
+| Short Link: | [aka.ms/azsdk/uniform-versioning](https://aka.ms/azsdk/uniform-versioning) |
+|--|--|
+
 # Uniform versioning
 
 > [!NOTE]
@@ -11,7 +14,7 @@ In brief, it means:
 > If a new service API version is released, also a new documentation reference must be released to describe it.
 > Similarly, a new version of given SDK package must be released to refer to the new service version.
 
-Each `service` within a `service group` can version independently of each other.
+Each `service` within a `service group` or `grouping directory` can version independently of each other.
 
 ## Uniform versioning rules
 
@@ -55,7 +58,7 @@ The **uniform versioning** has several implications and implementation decisions
 ### No API version mixing within a service
 
 - Nowhere within a service, documentation for it, or SDK referencing it,
-  can multiple service API versions be mixed. as such:
+  can multiple service API versions be mixed. As such:
   - `preview` API versions cannot be mixed with `stable` API versions.
   - No HTTP API endpoint for given API version can have any kind of dependency on service endpoint from any other API version.
   - The above apply to a stand-alone service as well as to a service that is a member of a `service group`.
