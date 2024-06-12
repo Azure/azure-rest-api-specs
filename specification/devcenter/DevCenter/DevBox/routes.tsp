@@ -183,15 +183,16 @@ interface DevBoxes {
     DevBox,
     {},
     Foundations.AcceptedResponse<OperationStatus &
-    {  
-      @header("Location")
-      location: string;
-    } & 
-    {  
-      @pollingLocation
-      @header("Operation-Location")
-      operationLocation: string;
-    }> 
+        {  
+          @header("Location")
+          location: string;
+        } & 
+        {  
+          @pollingLocation
+          @header("Operation-Location")
+          operationLocation: string;
+        }
+    > 
     | TypeSpec.Http.Response<204>
   >;
 
