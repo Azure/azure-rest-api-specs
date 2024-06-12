@@ -1221,6 +1221,7 @@ model TestRunIdPathParameter {
 @doc("Request data collection level for test run")
 union RequestDataLevel {
   string,
+
   @doc("No request data will be collected")
   NONE: "NONE",
 
