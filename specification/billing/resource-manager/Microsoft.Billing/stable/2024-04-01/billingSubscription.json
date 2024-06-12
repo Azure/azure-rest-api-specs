@@ -397,6 +397,12 @@
               "$ref": "#/definitions/BillingSubscriptionAlias"
             }
           },
+          "201": {
+            "description": "The billing subscription alias.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionAlias"
+            }
+          },
           "202": {
             "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
             "headers": {
@@ -1341,6 +1347,23 @@
           "description": "The ID of the billing subscription with the subscription alias.",
           "type": "string",
           "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "New",
+            "Pending",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1636,18 +1659,12 @@
         "provisioningState": {
           "description": "The provisioning state of the resource during a long-running operation.",
           "enum": [
-            "NotSpecified",
-            "Accepted",
-            "Running",
-            "Ready",
-            "Creating",
-            "Created",
-            "Deleting",
-            "Deleted",
+            "Succeeded",
             "Canceled",
             "Failed",
-            "Succeeded",
-            "Updating"
+            "New",
+            "Pending",
+            "Provisioning"
           ],
           "type": "string",
           "readOnly": true,
