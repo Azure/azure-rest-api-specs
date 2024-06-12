@@ -13347,6 +13347,40 @@
       },
       "additionalProperties": false
     },
+    "ContentSafety": {
+      "additionalProperties": false,
+      "properties": {
+        "contentSafetyStatus": {
+          "$ref": "#/definitions/ContentSafetyStatus",
+          "description": "[Required] Specifies the status of content safety."
+        }
+      },
+      "required": [
+        "contentSafetyStatus"
+      ],
+      "type": "object"
+    },
+    "ContentSafetyStatus": {
+      "additionalProperties": false,
+      "description": "Specifies the status of content safety.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ContentSafetyStatus",
+        "values": [
+          {
+            "value": "Enabled"
+          },
+          {
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
     "CreateMonitorAction": {
       "required": [
         "monitorDefinition"
@@ -18090,6 +18124,188 @@
       "x-ms-discriminator-value": "Managed",
       "additionalProperties": false
     },
+    "MarketplacePlan": {
+      "additionalProperties": false,
+      "properties": {
+        "offerId": {
+          "description": "The Offer ID of the Marketplace Plan.",
+          "readOnly": true,
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "planId": {
+          "description": "The Plan ID of the Marketplace Plan.",
+          "readOnly": true,
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "publisherId": {
+          "description": "The Publisher ID of the Marketplace Plan.",
+          "readOnly": true,
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "type": "object"
+    },
+    "MarketplaceSubscription": {
+      "additionalProperties": false,
+      "properties": {
+        "marketplacePlan": {
+          "$ref": "#/definitions/MarketplacePlan",
+          "description": "Marketplace Plan associated with the Marketplace Subscription.",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
+          "description": "Current status of the Marketplace Subscription.",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "modelId": {
+          "description": "[Required] Target Marketplace Model ID to create a Marketplace Subscription for.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/MarketplaceSubscriptionProvisioningState",
+          "description": "Provisioning State of the Marketplace Subscription.",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "modelId"
+      ],
+      "type": "object",
+      "x-ms-client-name": "MarketplaceSubscriptionProperties"
+    },
+    "MarketplaceSubscriptionProvisioningState": {
+      "additionalProperties": false,
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Updating",
+        "Canceled"
+      ],
+      "readOnly": true,
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MarketplaceSubscriptionProvisioningState",
+        "values": [
+          {
+            "description": "MarketplaceSubscription is being created.",
+            "value": "Creating"
+          },
+          {
+            "description": "MarketplaceSubscription is being deleted.",
+            "value": "Deleting"
+          },
+          {
+            "description": "MarketplaceSubscription is successfully provisioned.",
+            "value": "Succeeded"
+          },
+          {
+            "description": "MarketplaceSubscription provisioning failed.",
+            "value": "Failed"
+          },
+          {
+            "description": "MarketplaceSubscription is being updated.",
+            "value": "Updating"
+          },
+          {
+            "description": "MarketplaceSubscription is canceled.",
+            "value": "Canceled"
+          }
+        ]
+      }
+    },
+    "MarketplaceSubscriptionResource": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Azure Resource Manager resource envelope.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MarketplaceSubscription",
+          "description": "[Required] Additional attributes of the entity."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "x-ms-client-name": "MarketplaceSubscription"
+    },
+    "MarketplaceSubscriptionResourceArmPaginatedResult": {
+      "additionalProperties": false,
+      "description": "A paginated list of MarketplaceSubscription entities.",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of MarketplaceSubscription objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type MarketplaceSubscription.",
+          "items": {
+            "$ref": "#/definitions/MarketplaceSubscriptionResource"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "MarketplaceSubscriptionStatus": {
+      "additionalProperties": false,
+      "enum": [
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MarketplaceSubscriptionStatus",
+        "values": [
+          {
+            "description": "The customer can now use the Marketplace Subscription's\nmodel and will be billed.",
+            "value": "Subscribed"
+          },
+          {
+            "description": "The customer could not be billed for the Marketplace Subscription.\nThe customer will not be able to access the model.",
+            "value": "Suspended"
+          },
+          {
+            "description": "Marketplace Subscriptions reach this state in response to an explicit customer or CSP action.\nA Marketplace Subscription can also be canceled implicitly, as a result of nonpayment of dues,\nafter being in the Suspended state for some time.",
+            "value": "Unsubscribed"
+          }
+        ]
+      }
+    },
     "MaterializationComputeResource": {
       "description": "DTO object representing compute resource",
       "type": "object",
@@ -18233,6 +18449,16 @@
         }
       },
       "additionalProperties": false
+    },
+    "ModelSettings": {
+      "additionalProperties": false,
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "type": "object"
     },
     "ModelSize": {
       "description": "Image model size.",
@@ -19850,6 +20076,26 @@
       },
       "additionalProperties": false
     },
+    "PartialMinimalTrackedResourceWithSkuAndIdentity": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartialMinimalTrackedResource"
+        }
+      ],
+      "description": "Strictly used in update requests.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/PartialManagedServiceIdentity",
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
+        },
+        "sku": {
+          "$ref": "#/definitions/PartialSku",
+          "description": "Sku details required for ARM contract for Autoscaling."
+        }
+      },
+      "type": "object"
+    },
     "PartialSku": {
       "description": "Common SKU definition.",
       "type": "object",
@@ -21155,6 +21401,209 @@
         ]
       },
       "additionalProperties": false
+    },
+    "ServerlessEndpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "authMode": {
+          "$ref": "#/definitions/ServerlessInferenceEndpointAuthMode",
+          "description": "[Required] Specifies the authentication mode for the Serverless endpoint."
+        },
+        "contentSafety": {
+          "$ref": "#/definitions/ContentSafety",
+          "description": "Specifies the content safety options. If omitted, the default content safety settings will be configured",
+          "x-nullable": true
+        },
+        "endpointState": {
+          "$ref": "#/definitions/ServerlessEndpointState",
+          "description": "The current state of the ServerlessEndpoint.",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "inferenceEndpoint": {
+          "$ref": "#/definitions/ServerlessInferenceEndpoint",
+          "description": "The inference uri to target when making requests against the serverless endpoint",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "marketplaceSubscriptionId": {
+          "description": "The MarketplaceSubscription Azure ID associated to this ServerlessEndpoint.",
+          "readOnly": true,
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "modelSettings": {
+          "$ref": "#/definitions/ModelSettings",
+          "description": "The model settings (model id) for the model being serviced on the ServerlessEndpoint.",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EndpointProvisioningState",
+          "description": "Provisioning state for the endpoint.",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "authMode"
+      ],
+      "type": "object",
+      "x-ms-client-name": "ServerlessEndpointProperties"
+    },
+    "ServerlessEndpointState": {
+      "additionalProperties": false,
+      "description": "State of the Serverless Endpoint.",
+      "enum": [
+        "Unknown",
+        "Creating",
+        "Deleting",
+        "Suspending",
+        "Reinstating",
+        "Online",
+        "Suspended",
+        "CreationFailed",
+        "DeletionFailed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ServerlessEndpointState",
+        "values": [
+          {
+            "value": "Unknown"
+          },
+          {
+            "value": "Creating"
+          },
+          {
+            "value": "Deleting"
+          },
+          {
+            "value": "Suspending"
+          },
+          {
+            "value": "Reinstating"
+          },
+          {
+            "value": "Online"
+          },
+          {
+            "value": "Suspended"
+          },
+          {
+            "value": "CreationFailed"
+          },
+          {
+            "value": "DeletionFailed"
+          }
+        ]
+      }
+    },
+    "ServerlessEndpointTrackedResource": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
+        },
+        "kind": {
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerlessEndpoint",
+          "description": "[Required] Additional attributes of the entity."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "Sku details required for ARM contract for Autoscaling."
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "type": "object",
+      "x-ms-client-name": "ServerlessEndpoint"
+    },
+    "ServerlessEndpointTrackedResourceArmPaginatedResult": {
+      "additionalProperties": false,
+      "description": "A paginated list of ServerlessEndpoint entities.",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of ServerlessEndpoint objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type ServerlessEndpoint.",
+          "items": {
+            "$ref": "#/definitions/ServerlessEndpointTrackedResource"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ServerlessInferenceEndpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "headers": {
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "description": "Specifies any required headers to target this serverless endpoint.",
+          "readOnly": true,
+          "type": "object",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "uri": {
+          "description": "[Required] The inference uri to target when making requests against the Serverless Endpoint.",
+          "format": "uri",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "type": "object"
+    },
+    "ServerlessInferenceEndpointAuthMode": {
+      "additionalProperties": false,
+      "enum": [
+        "Key"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ServerlessInferenceEndpointAuthMode",
+        "values": [
+          {
+            "value": "Key"
+          }
+        ]
+      }
     },
     "ServiceDataAccessAuthIdentity": {
       "enum": [
