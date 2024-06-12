@@ -182,20 +182,17 @@ interface DevBoxes {
   deleteDevBox is Azure.Core.Foundations.ResourceOperation<
     DevBox,
     {},
-    {
-      @statusCode statusCode: 202;
-
+    Foundations.AcceptedResponse<OperationStatus &
+    {  
       @header("Location")
       location: string;
-
+    } & 
+    {  
       @pollingLocation
       @header("Operation-Location")
       operationLocation: string;
-
-      @bodyRoot body: OperationStatus;
-    } | {
-      @statusCode statusCode: 204;
-    }
+    }> 
+    | TypeSpec.Http.Response<204>
   >;
 
 /*
