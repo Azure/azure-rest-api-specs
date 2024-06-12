@@ -253,7 +253,7 @@ The root cause is a bug in typespec-azure:
 
 https://github.com/Azure/typespec-azure/issues/383.
 
-The workaround in this issue should be applied to the spec TypeSpec sources.  The LintDiff error should **not** be ignored or suppressed.
+Please see the issue above for the suggested workaround and apply it directly to the spec TypeSpec sources.  The LintDiff error should **not** be ignored or suppressed.
 
 ## `Swagger ModelValidation`
 
