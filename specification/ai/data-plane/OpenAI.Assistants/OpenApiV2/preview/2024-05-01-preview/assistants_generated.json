@@ -1941,14 +1941,22 @@
             "type": "string"
           },
           {
-            "name": "file_id",
+            "name": "body",
             "in": "body",
-            "description": "A File ID that the vector store should use. Useful for tools like `file_search` that can access files.",
             "required": true,
             "schema": {
-              "type": "string"
-            },
-            "x-ms-client-name": "fileId"
+              "type": "object",
+              "properties": {
+                "file_id": {
+                  "type": "string",
+                  "description": "A File ID that the vector store should use. Useful for tools like `file_search` that can access files.",
+                  "x-ms-client-name": "fileId"
+                }
+              },
+              "required": [
+                "file_id"
+              ]
+            }
           }
         ],
         "responses": {
@@ -4590,13 +4598,14 @@
       "type": "object",
       "description": "Request object to update `file_search` tool resources.",
       "properties": {
-        "vectorStoreIds": {
+        "vector_store_ids": {
           "type": "array",
           "description": "A list of vector store IDs to override the current list of the assistant.",
           "maxItems": 1,
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "vectorStoreIds"
         }
       }
     },
