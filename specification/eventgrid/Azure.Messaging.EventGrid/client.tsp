@@ -118,11 +118,16 @@ namespace Customizations {
 
 // All Language customizations
 
-// publishCloudEvent access level
+//Operation Access Level
 @@access(publishCloudEvent, Access.internal, "python");
+@@access(publishCloudEvent, Access.internal, "csharp");
+@@access(publishCloudEvent, Access.internal, "java");
+@@access(publishCloudEvent, Access.internal, "javascript");
 
-// publishCloudEvents access level
 @@access(publishCloudEvents, Access.internal, "python");
+@@access(publishCloudEvents, Access.internal, "csharp");
+@@access(publishCloudEvents, Access.internal, "java");
+@@access(publishCloudEvents, Access.internal, "javascript");
 
 @@access(receiveCloudEvents, Access.internal, "python");
 @@access(acknowledgeCloudEvents, Access.internal, "python");
@@ -130,6 +135,26 @@ namespace Customizations {
 @@access(rejectCloudEvents, Access.internal, "python");
 @@access(renewCloudEventLocks, Access.internal, "python");
 
+@@access(receiveCloudEvents, Access.internal, "csharp");
+@@access(acknowledgeCloudEvents, Access.internal, "csharp");
+@@access(releaseCloudEvents, Access.internal, "csharp");
+@@access(rejectCloudEvents, Access.internal, "csharp");
+@@access(renewCloudEventLocks, Access.internal, "csharp");
+
+@@access(receiveCloudEvents, Access.internal, "java");
+@@access(acknowledgeCloudEvents, Access.internal, "java");
+@@access(releaseCloudEvents, Access.internal, "java");
+@@access(rejectCloudEvents, Access.internal, "java");
+@@access(renewCloudEventLocks, Access.internal, "java");
+
+@@access(receiveCloudEvents, Access.internal, "javascript");
+@@access(acknowledgeCloudEvents, Access.internal, "javascript");
+@@access(releaseCloudEvents, Access.internal, "javascript");
+@@access(rejectCloudEvents, Access.internal, "javascript");
+@@access(renewCloudEventLocks, Access.internal, "javascript");
+
+//Mark models as public (except ReceiveResult, PublishResult)
+//BUG: Bypassing Go for now as it marks all models as internal
 @@access(AcknowledgeResult, Access.public);
 @@access(ReleaseResult, Access.public);
 @@access(RejectResult, Access.public);
@@ -137,12 +162,15 @@ namespace Customizations {
 @@access(ReleaseDelay, Access.public);
 @@access(FailedLockToken, Access.public);
 
+//Rename Enum
 @@clientName(ReleaseDelay.By0Seconds, "NoDelay");
 @@clientName(ReleaseDelay.By10Seconds, "TenSeconds");
 @@clientName(ReleaseDelay.By3600Seconds, "OneHour");
 @@clientName(ReleaseDelay.By600Seconds, "TenMinutes");
 @@clientName(ReleaseDelay.By60Seconds, "OneMinute");
 
+//Rename RenewLocksResult
 @@clientName(RenewCloudEventLocksResult, "RenewLocksResult");
 
+//Rename value to details (ReceiveResult internal)
 @@clientName(ReceiveResult.value, "details");
