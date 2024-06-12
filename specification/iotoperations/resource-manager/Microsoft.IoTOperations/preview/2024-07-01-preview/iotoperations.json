@@ -3923,6 +3923,19 @@
         }
       }
     },
+    "ConfigurationProperties": {
+      "type": "object",
+      "description": "The configuration of a Instance resource.",
+      "properties": {
+        "observability": {
+          "$ref": "#/definitions/ObservabilityProperties",
+          "description": "The Azure IoT Operations version."
+        }
+      },
+      "required": [
+        "observability"
+      ]
+    },
     "CpuState": {
       "type": "string",
       "description": "CpuState properties",
@@ -5681,8 +5694,19 @@
           "type": "string",
           "description": "The Azure IoT Operations version.",
           "readOnly": true
+        },
+        "configuration": {
+          "$ref": "#/definitions/ConfigurationProperties",
+          "description": "Configuration.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
-      }
+      },
+      "required": [
+        "configuration"
+      ]
     },
     "InstanceResource": {
       "type": "object",
@@ -5924,6 +5948,25 @@
         ]
       }
     },
+    "MetricsProperties": {
+      "type": "object",
+      "description": "The metrics properties.",
+      "properties": {
+        "opentelemetryCollectorAddres": {
+          "type": "string",
+          "description": "The OpenTelemetry Collector address."
+        },
+        "exportIntervalSecounds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Metrics interval."
+        }
+      },
+      "required": [
+        "opentelemetryCollectorAddres",
+        "exportIntervalSecounds"
+      ]
+    },
     "Mode": {
       "type": "string",
       "description": "Mode properties",
@@ -6022,6 +6065,19 @@
         "key",
         "operator",
         "value"
+      ]
+    },
+    "ObservabilityProperties": {
+      "type": "object",
+      "description": "The metrics configuration.",
+      "properties": {
+        "metrics": {
+          "$ref": "#/definitions/MetricsProperties",
+          "description": "The metrics properties."
+        }
+      },
+      "required": [
+        "metrics"
       ]
     },
     "OperatorValues": {
