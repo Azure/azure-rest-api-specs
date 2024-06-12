@@ -252,12 +252,10 @@ union PreviewFeature {
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 model MongoClusterReplicaParameters {
   /** The id of the replication source cluster. */
-  @visibility("create")
   sourceResourceId: string;
 
-  /** Description of the connection string */
-  @visibility("create")
-  location: string;
+  /** The location of the source cluster */
+  sourceLocation: string;
 }
 
 /** Promote replica request properties. */
@@ -288,7 +286,7 @@ union PromoteOption {
 union PromoteMode {
   string,
 
-  /** Promote mode which switches the primary role to the current cluster. The original primary will be switched to a replica role. */
+  /** Promotion will switch the current replica cluster to the primary role and the original primary will be switched to a replica role, maintaining the replication link. */
   "Switchover",
 }
 

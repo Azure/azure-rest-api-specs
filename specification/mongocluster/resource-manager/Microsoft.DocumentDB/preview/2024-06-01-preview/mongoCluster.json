@@ -1552,22 +1552,16 @@
       "properties": {
         "sourceResourceId": {
           "type": "string",
-          "description": "The id of the replication source cluster.",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "description": "The id of the replication source cluster."
         },
-        "location": {
+        "sourceLocation": {
           "type": "string",
-          "description": "Description of the connection string",
-          "x-ms-mutability": [
-            "create"
-          ]
+          "description": "The location of the source cluster"
         }
       },
       "required": [
         "sourceResourceId",
-        "location"
+        "sourceLocation"
       ]
     },
     "MongoClusterRestoreParameters": {
@@ -1882,7 +1876,7 @@
           {
             "name": "Switchover",
             "value": "Switchover",
-            "description": "Promote mode which switches the primary role to the current cluster. The original primary will be switched to a replica role."
+            "description": "Promotion will switch the current replica cluster to the primary role and the original primary will be switched to a replica role, maintaining the replication link."
           }
         ]
       }
