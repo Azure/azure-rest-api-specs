@@ -10,6 +10,9 @@ import "./models/mq/brokers.tsp";
 import "./models/mq/authentications.tsp";
 import "./models/mq/authorizations.tsp";
 import "./models/mq/listeners.tsp";
+import "./models/dataflows/dataflowEndpoints.tsp";
+import "./models/dataflows/dataflowProfiles.tsp";
+import "./models/dataflows/dataflows.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -28,10 +31,10 @@ namespace Microsoft.IoTOperations;
 
 /** Api versions */
 enum Versions {
-  /** 2024-06-01-preview version */
+  /** 2024-07-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-06-01-preview`,
+  `2024-07-01-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -85,4 +88,33 @@ interface BrokerAuthorization {
   update is ArmTagsPatchSync<BrokerAuthorizationResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthorizationResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerAuthorizationResource>;
+}
+// /instances/dataflowProfiles resource Operations
+@armResourceOperations
+interface DataFlowProfile {
+  get is ArmResourceRead<DataFlowProfileResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowProfileResource>;
+  update is ArmTagsPatchSync<DataFlowProfileResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataFlowProfileResource>;
+  listByResourceGroup is ArmResourceListByParent<DataFlowProfileResource>;
+}
+
+// /instance/dataflowProfiles/dataflows resource Operations
+@armResourceOperations
+interface DataFlow {
+  get is ArmResourceRead<DataFlowResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowResource>;
+  update is ArmTagsPatchSync<DataFlowResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataFlowResource>;
+  listByResourceGroup is ArmResourceListByParent<DataFlowResource>;
+}
+
+// /instance/dataflowEndpoints resource Operations
+@armResourceOperations
+interface DataFlowEndpoint {
+  get is ArmResourceRead<DataFlowEndpointResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowEndpointResource>;
+  update is ArmTagsPatchSync<DataFlowEndpointResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataFlowEndpointResource>;
+  listByResourceGroup is ArmResourceListByParent<DataFlowEndpointResource>;
 }
