@@ -167,7 +167,10 @@ interface Clusters {
 interface Datastores {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("Datastores_List")
-  list is ArmResourceListByParent<Datastore>;
+  list is ArmResourceListByParent<
+    Datastore,
+    Response = ArmResponse<ResourceList<Datastore>>
+  >;
 
   get is ArmResourceRead<Datastore>;
 

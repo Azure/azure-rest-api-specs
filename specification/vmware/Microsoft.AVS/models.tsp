@@ -2224,3 +2224,8 @@ model ResourceSkuRequired {
   @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
   sku: Foundations.Sku;
 }
+
+@doc("The response of a {name} list operation.", Resource)
+@friendlyName("{name}List", Resource)
+model ResourceList<Resource extends Foundations.Resource>
+  is Azure.Core.Page<Resource>;
