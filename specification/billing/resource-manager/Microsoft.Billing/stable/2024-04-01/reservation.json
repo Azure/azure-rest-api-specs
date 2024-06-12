@@ -397,20 +397,15 @@
       "type": "object",
       "description": "Details of a reservation order being returned.",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "etag": {
           "type": "integer",
           "format": "int32"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Identifier of the reservation order"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Name of the reservation order"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -421,26 +416,19 @@
         "tags": {
           "description": "Tags for this reservation",
           "$ref": "#/definitions/Tags"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Type of resource. \"Microsoft.Capacity/reservations\""
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       }
     },
     "Reservation": {
       "type": "object",
       "description": "The definition of the reservation.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "description": "The id of the reservation.",
-          "readOnly": true,
-          "type": "string"
-        },
         "location": {
           "description": "The location of the reservation.",
           "type": "string",
@@ -452,11 +440,6 @@
         "etag": {
           "type": "integer",
           "format": "int32"
-        },
-        "name": {
-          "description": "The name of the reservation.",
-          "readOnly": true,
-          "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/ReservationProperty",
@@ -472,14 +455,6 @@
           "$ref": "#/definitions/ReservationSkuProperty",
           "description": "The sku information associated to this reservation",
           "type": "object"
-        },
-        "type": {
-          "description": "The type of the reservation.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       }
     },
