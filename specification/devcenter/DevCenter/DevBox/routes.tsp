@@ -178,46 +178,8 @@ interface DevBoxes {
   //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
   @doc("Deletes a Dev Box.")
   @pollingOperation(OperationStatuses.get)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @delete
-  deleteDevBox is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      devBoxName: string;
-    },
-    {
-      @statusCode statusCode: 202;
-
-      @header("Location")
-      location: string;
-
-      @pollingLocation
-      @header("Operation-Location")
-      operationLocation: string;
-
-      @bodyRoot body: OperationStatus;
-    } | {
-      @statusCode statusCode: 204;
-    }
-  >;
+  deleteDevBox is StandardResourceOperations.LongRunningResourceDelete<DevBox>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
   @doc("Starts a Dev Box.")
