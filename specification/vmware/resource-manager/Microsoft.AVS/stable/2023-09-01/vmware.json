@@ -291,7 +291,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateCloudList"
+              "$ref": "#/definitions/PrivateCloudsList"
             }
           },
           "default": {
@@ -2089,7 +2089,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PlacementPolicyList"
+              "$ref": "#/definitions/PlacementPoliciesList"
             }
           },
           "default": {
@@ -2468,7 +2468,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineList"
+              "$ref": "#/definitions/VirtualMachinesList"
             }
           },
           "default": {
@@ -3547,7 +3547,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScriptExecutionList"
+              "$ref": "#/definitions/ScriptExecutionsList"
             }
           },
           "default": {
@@ -3870,7 +3870,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScriptPackageList"
+              "$ref": "#/definitions/ScriptPackagesList"
             }
           },
           "default": {
@@ -3983,7 +3983,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScriptCmdletList"
+              "$ref": "#/definitions/ScriptCmdletsList"
             }
           },
           "default": {
@@ -4502,7 +4502,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkDnsServiceList"
+              "$ref": "#/definitions/WorkloadNetworkDnsServicesList"
             }
           },
           "default": {
@@ -4814,7 +4814,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkDnsZoneList"
+              "$ref": "#/definitions/WorkloadNetworkDnsZonesList"
             }
           },
           "default": {
@@ -5543,7 +5543,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkPublicIPList"
+              "$ref": "#/definitions/WorkloadNetworkPublicIPsList"
             }
           },
           "default": {
@@ -5780,7 +5780,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkSegmentList"
+              "$ref": "#/definitions/WorkloadNetworkSegmentsList"
             }
           },
           "default": {
@@ -6117,7 +6117,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkVirtualMachineList"
+              "$ref": "#/definitions/WorkloadNetworkVirtualMachinesList"
             }
           },
           "default": {
@@ -6219,7 +6219,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkVMGroupList"
+              "$ref": "#/definitions/WorkloadNetworkVMGroupsList"
             }
           },
           "default": {
@@ -8425,27 +8425,7 @@
       ],
       "x-ms-discriminator-value": "Credential"
     },
-    "PlacementPolicy": {
-      "type": "object",
-      "description": "A vSphere Distributed Resource Scheduler (DRS) placement policy",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PlacementPolicyProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PlacementPolicyList": {
+    "PlacementPoliciesList": {
       "type": "object",
       "description": "The response of a PlacementPolicy list operation.",
       "properties": {
@@ -8464,6 +8444,26 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "PlacementPolicy": {
+      "type": "object",
+      "description": "A vSphere Distributed Resource Scheduler (DRS) placement policy",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlacementPolicyProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "PlacementPolicyProperties": {
@@ -9027,6 +9027,27 @@
         }
       }
     },
+    "PrivateCloudsList": {
+      "type": "object",
+      "description": "The response of a PrivateCloud list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateCloud items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateCloud"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Quota": {
       "type": "object",
       "description": "Subscription quotas",
@@ -9115,27 +9136,6 @@
         ]
       }
     },
-    "ScriptCmdletList": {
-      "type": "object",
-      "description": "The response of a ScriptCmdlet list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ScriptCmdlet items on this page",
-          "items": {
-            "$ref": "#/definitions/ScriptCmdlet"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ScriptCmdletProperties": {
       "type": "object",
       "description": "Properties of a pre-canned script",
@@ -9202,6 +9202,27 @@
       },
       "readOnly": true
     },
+    "ScriptCmdletsList": {
+      "type": "object",
+      "description": "The response of a ScriptCmdlet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScriptCmdlet items on this page",
+          "items": {
+            "$ref": "#/definitions/ScriptCmdlet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ScriptExecution": {
       "type": "object",
       "description": "An instance of a script executed by a user - custom or AVS",
@@ -9220,27 +9241,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ScriptExecutionList": {
-      "type": "object",
-      "description": "The response of a ScriptExecution list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ScriptExecution items on this page",
-          "items": {
-            "$ref": "#/definitions/ScriptExecution"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ScriptExecutionParameter": {
@@ -9452,6 +9452,27 @@
       },
       "readOnly": true
     },
+    "ScriptExecutionsList": {
+      "type": "object",
+      "description": "The response of a ScriptExecution list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScriptExecution items on this page",
+          "items": {
+            "$ref": "#/definitions/ScriptExecution"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ScriptOutputStreamType": {
       "type": "string",
       "description": "Script Output Stream type",
@@ -9506,27 +9527,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "ScriptPackageList": {
-      "type": "object",
-      "description": "The response of a ScriptPackage list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ScriptPackage items on this page",
-          "items": {
-            "$ref": "#/definitions/ScriptPackage"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ScriptPackageProperties": {
@@ -9590,6 +9590,27 @@
         ]
       },
       "readOnly": true
+    },
+    "ScriptPackagesList": {
+      "type": "object",
+      "description": "The response of a ScriptPackage list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScriptPackage items on this page",
+          "items": {
+            "$ref": "#/definitions/ScriptPackage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ScriptParameter": {
       "type": "object",
@@ -9872,27 +9893,6 @@
         }
       ]
     },
-    "VirtualMachineList": {
-      "type": "object",
-      "description": "The response of a VirtualMachine list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The VirtualMachine items on this page",
-          "items": {
-            "$ref": "#/definitions/VirtualMachine"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "VirtualMachineProperties": {
       "type": "object",
       "description": "Virtual Machine Properties",
@@ -9988,6 +9988,27 @@
           }
         ]
       }
+    },
+    "VirtualMachinesList": {
+      "type": "object",
+      "description": "The response of a VirtualMachine list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualMachine items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualMachine"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "VisibilityParameterEnum": {
       "type": "string",
@@ -10367,27 +10388,6 @@
         }
       ]
     },
-    "WorkloadNetworkDnsServiceList": {
-      "type": "object",
-      "description": "The response of a WorkloadNetworkDnsService list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The WorkloadNetworkDnsService items on this page",
-          "items": {
-            "$ref": "#/definitions/WorkloadNetworkDnsService"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "WorkloadNetworkDnsServiceProperties": {
       "type": "object",
       "description": "NSX DNS Service Properties",
@@ -10492,6 +10492,27 @@
         }
       }
     },
+    "WorkloadNetworkDnsServicesList": {
+      "type": "object",
+      "description": "The response of a WorkloadNetworkDnsService list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkloadNetworkDnsService items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkloadNetworkDnsService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "WorkloadNetworkDnsZone": {
       "type": "object",
       "description": "NSX DNS Zone",
@@ -10510,27 +10531,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "WorkloadNetworkDnsZoneList": {
-      "type": "object",
-      "description": "The response of a WorkloadNetworkDnsZone list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The WorkloadNetworkDnsZone items on this page",
-          "items": {
-            "$ref": "#/definitions/WorkloadNetworkDnsZone"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "WorkloadNetworkDnsZoneProperties": {
@@ -10635,6 +10635,27 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "WorkloadNetworkDnsZonesList": {
+      "type": "object",
+      "description": "The response of a WorkloadNetworkDnsZone list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkloadNetworkDnsZone items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkloadNetworkDnsZone"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "WorkloadNetworkGateway": {
       "type": "object",
@@ -10936,27 +10957,6 @@
         }
       ]
     },
-    "WorkloadNetworkPublicIPList": {
-      "type": "object",
-      "description": "The response of a WorkloadNetworkPublicIP list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The WorkloadNetworkPublicIP items on this page",
-          "items": {
-            "$ref": "#/definitions/WorkloadNetworkPublicIP"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "WorkloadNetworkPublicIPProperties": {
       "type": "object",
       "description": "NSX Public IP Block Properties",
@@ -11031,6 +11031,27 @@
       },
       "readOnly": true
     },
+    "WorkloadNetworkPublicIPsList": {
+      "type": "object",
+      "description": "The response of a WorkloadNetworkPublicIP list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkloadNetworkPublicIP items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkloadNetworkPublicIP"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "WorkloadNetworkSegment": {
       "type": "object",
       "description": "NSX Segment",
@@ -11049,27 +11070,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "WorkloadNetworkSegmentList": {
-      "type": "object",
-      "description": "The response of a WorkloadNetworkSegment list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The WorkloadNetworkSegment items on this page",
-          "items": {
-            "$ref": "#/definitions/WorkloadNetworkSegment"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "WorkloadNetworkSegmentPortVif": {
@@ -11201,6 +11201,27 @@
         }
       }
     },
+    "WorkloadNetworkSegmentsList": {
+      "type": "object",
+      "description": "The response of a WorkloadNetworkSegment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkloadNetworkSegment items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkloadNetworkSegment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "WorkloadNetworkVMGroup": {
       "type": "object",
       "description": "NSX VM Group",
@@ -11219,27 +11240,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "WorkloadNetworkVMGroupList": {
-      "type": "object",
-      "description": "The response of a WorkloadNetworkVMGroup list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The WorkloadNetworkVMGroup items on this page",
-          "items": {
-            "$ref": "#/definitions/WorkloadNetworkVMGroup"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "WorkloadNetworkVMGroupProperties": {
@@ -11334,6 +11334,27 @@
         }
       }
     },
+    "WorkloadNetworkVMGroupsList": {
+      "type": "object",
+      "description": "The response of a WorkloadNetworkVMGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkloadNetworkVMGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkloadNetworkVMGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "WorkloadNetworkVirtualMachine": {
       "type": "object",
       "description": "NSX Virtual Machine",
@@ -11352,27 +11373,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "WorkloadNetworkVirtualMachineList": {
-      "type": "object",
-      "description": "The response of a WorkloadNetworkVirtualMachine list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The WorkloadNetworkVirtualMachine items on this page",
-          "items": {
-            "$ref": "#/definitions/WorkloadNetworkVirtualMachine"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "WorkloadNetworkVirtualMachineProperties": {
@@ -11394,6 +11394,27 @@
           "readOnly": true
         }
       }
+    },
+    "WorkloadNetworkVirtualMachinesList": {
+      "type": "object",
+      "description": "The response of a WorkloadNetworkVirtualMachine list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkloadNetworkVirtualMachine items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkloadNetworkVirtualMachine"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {

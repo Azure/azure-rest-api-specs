@@ -40,7 +40,7 @@ interface PrivateClouds {
   @operationId("PrivateClouds_List")
   list is ArmResourceListByParent<
     PrivateCloud,
-    Response = ArmResponse<ResourceList<PrivateCloud>>
+    Response = ArmResponse<ResourceList<PrivateCloud, "{name}sList">>
   >;
 
   listInSubscription is ArmListBySubscription<
@@ -311,7 +311,7 @@ interface WorkloadNetworkSegments {
   @operationId("WorkloadNetworks_ListSegments")
   list is ArmResourceListByParent<
     WorkloadNetworkSegment,
-    Response = ArmResponse<ResourceList<WorkloadNetworkSegment>>
+    Response = ArmResponse<ResourceList<WorkloadNetworkSegment, "{name}sList">>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -536,7 +536,7 @@ interface WorkloadNetworkVmGroups {
   @operationId("WorkloadNetworks_ListVMGroups")
   list is ArmResourceListByParent<
     WorkloadNetworkVMGroup,
-    Response = ArmResponse<ResourceList<WorkloadNetworkVMGroup>>
+    Response = ArmResponse<ResourceList<WorkloadNetworkVMGroup, "{name}sList">>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -611,7 +611,10 @@ interface WorkloadNetworkVirtualMachines {
   @operationId("WorkloadNetworks_ListVirtualMachines")
   list is ArmResourceListByParent<
     WorkloadNetworkVirtualMachine,
-    Response = ArmResponse<ResourceList<WorkloadNetworkVirtualMachine>>
+    Response = ArmResponse<ResourceList<
+      WorkloadNetworkVirtualMachine,
+      "{name}sList"
+    >>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -628,7 +631,10 @@ interface WorkloadNetworkDnsServices {
   @operationId("WorkloadNetworks_ListDnsServices")
   list is ArmResourceListByParent<
     WorkloadNetworkDnsService,
-    Response = ArmResponse<ResourceList<WorkloadNetworkDnsService>>
+    Response = ArmResponse<ResourceList<
+      WorkloadNetworkDnsService,
+      "{name}sList"
+    >>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -705,7 +711,7 @@ interface WorkloadNetworkDnsZones {
   @operationId("WorkloadNetworks_ListDnsZones")
   list is ArmResourceListByParent<
     WorkloadNetworkDnsZone,
-    Response = ArmResponse<ResourceList<WorkloadNetworkDnsZone>>
+    Response = ArmResponse<ResourceList<WorkloadNetworkDnsZone, "{name}sList">>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -781,7 +787,7 @@ interface WorkloadNetworkPublicIps {
   @operationId("WorkloadNetworks_ListPublicIPs")
   list is ArmResourceListByParent<
     WorkloadNetworkPublicIP,
-    Response = ArmResponse<ResourceList<WorkloadNetworkPublicIP>>
+    Response = ArmResponse<ResourceList<WorkloadNetworkPublicIP, "{name}sList">>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -891,7 +897,7 @@ interface VirtualMachines {
   @operationId("VirtualMachines_List")
   list is ArmResourceListByParent<
     VirtualMachine,
-    Response = ArmResponse<ResourceList<VirtualMachine>>
+    Response = ArmResponse<ResourceList<VirtualMachine, "{name}sList">>
   >;
 
   get is ArmResourceRead<VirtualMachine>;
@@ -916,7 +922,10 @@ interface PlacementPolicies {
   @operationId("PlacementPolicies_List")
   list is ArmResourceListByParent<
     PlacementPolicy,
-    Response = ArmResponse<ResourceList<PlacementPolicy>>
+    Response = ArmResponse<ResourceList<
+      PlacementPolicy,
+      "PlacementPoliciesList"
+    >>
   >;
 
   get is ArmResourceRead<PlacementPolicy>;
@@ -975,7 +984,7 @@ interface ScriptPackages {
   @operationId("ScriptPackages_List")
   list is ArmResourceListByParent<
     ScriptPackage,
-    Response = ArmResponse<ResourceList<ScriptPackage>>
+    Response = ArmResponse<ResourceList<ScriptPackage, "{name}sList">>
   >;
 
   get is ArmResourceRead<ScriptPackage>;
@@ -987,7 +996,7 @@ interface ScriptCmdlets {
   @operationId("ScriptCmdlets_List")
   list is ArmResourceListByParent<
     ScriptCmdlet,
-    Response = ArmResponse<ResourceList<ScriptCmdlet>>
+    Response = ArmResponse<ResourceList<ScriptCmdlet, "{name}sList">>
   >;
 
   get is ArmResourceRead<ScriptCmdlet>;
@@ -999,7 +1008,7 @@ interface ScriptExecutions {
   @operationId("ScriptExecutions_List")
   list is ArmResourceListByParent<
     ScriptExecution,
-    Response = ArmResponse<ResourceList<ScriptExecution>>
+    Response = ArmResponse<ResourceList<ScriptExecution, "{name}sList">>
   >;
 
   get is ArmResourceRead<ScriptExecution>;

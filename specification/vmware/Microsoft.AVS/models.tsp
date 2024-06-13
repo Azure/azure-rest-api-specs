@@ -2226,6 +2226,8 @@ model ResourceSkuRequired {
 }
 
 @doc("The response of a {name} list operation.", Resource)
-@friendlyName("{name}List", Resource)
-model ResourceList<Resource extends Foundations.Resource>
-  is Azure.Core.Page<Resource>;
+@friendlyName(FriendlyNameFormat, Resource)
+model ResourceList<
+  Resource extends Foundations.Resource,
+  FriendlyNameFormat extends valueof string = "{name}List"
+> is Azure.Core.Page<Resource>;
