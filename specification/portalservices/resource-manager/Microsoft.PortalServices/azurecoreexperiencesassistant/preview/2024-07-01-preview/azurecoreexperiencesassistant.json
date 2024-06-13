@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft.AzureCoreExperiencesAssistant",
-    "version": "2024-06-01-preview",
+    "title": "Microsoft.PortalServices",
+    "version": "2024-07-01-preview",
     "description": "Microsoft.AzureCoreExperiencesAssistant Resource Provider management API",
     "x-typespec-generated": [
       {
@@ -47,7 +47,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.AzureCoreExperiencesAssistant/invokeAssistant": {
+    "/{resourceId}/providers/Microsoft.PortalServices/{resourceId}/invokeAssistant": {
       "post": {
         "operationId": "AzureCoreExperiencesAssistant_InvokeAssistant",
         "tags": [
@@ -56,7 +56,15 @@
         "description": "Send a chat to the assistant",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The ARM Id of the resource we are invoking the reqeust on",
+            "required": true,
+            "type": "string",
+            "format": "arm-id"
           },
           {
             "name": "assistantRequest",
@@ -78,7 +86,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -92,7 +100,7 @@
         }
       }
     },
-    "/providers/Microsoft.AzureCoreExperiencesAssistant/operations": {
+    "/providers/Microsoft.PortalServices/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
@@ -101,20 +109,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },

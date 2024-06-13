@@ -9,17 +9,9 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.Core;
 
-namespace Microsoft.AzureCoreExperiencesAssistant;
-
-/** The available API versions. */
-enum Versions {
-  /** 2024-06-01-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2024_06_01_preview: "2024-06-01-preview",
-}
+namespace Microsoft.PortalServices;
 
 @armResourceOperations
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -28,10 +20,14 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface AzureCoreExperiencesAssistant {
   @doc("Send a chat to the assistant")
   @armResourceAction(AssistantRequest)
-  @route("/providers/Microsoft.AzureCoreExperiencesAssistant/")
+  @route("{resourceId}/providers/Microsoft.PortalServices/")
   @post
   invokeAssistant(
     ...ApiVersionParameter,
+
+    @doc("The ARM Id of the resource we are invoking the reqeust on")
+    @path
+    resourceId: armResourceIdentifier,
 
     @doc("The request body.")
     @body
