@@ -418,6 +418,69 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.Sku": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.SkuTier": {
+      "type": "string",
+      "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "The Free service tier."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "The Basic service tier."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard service tier."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium service tier."
+          }
+        ]
+      }
+    },
     "CommunityTraining": {
       "type": "object",
       "description": "A CommunityProviderHub resource",
@@ -541,7 +604,7 @@
       "description": "The type used for update operations of the CommunityTraining.",
       "properties": {
         "sku": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.Sku",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         },
         "tags": {
