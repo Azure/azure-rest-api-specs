@@ -633,7 +633,7 @@ union RuntimeType {
 model InformaticaOrganizationResourceUpdate
   is OptionalProperties<UpdateableProperties<OmitProperties<
     InformaticaOrganizationResource,
-    "name"
+    "name" | "properties"
   >>> {
   /** Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource */
   properties?: OrganizationPropertiesCustomUpdate;
@@ -682,7 +682,7 @@ model CompanyDetailsUpdate
 model InformaticaServerlessRuntimeResourceUpdate
   is OptionalProperties<UpdateableProperties<OmitProperties<
     InformaticaServerlessRuntimeResource,
-    "name"
+    "name" | "properties"
   >>> {
   /** Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource */
   properties?: ServerlessRuntimePropertiesCustomUpdate;
