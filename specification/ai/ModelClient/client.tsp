@@ -36,12 +36,12 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(ModelClient.ChatRole, Access.public);
 @@access(ModelClient.CompletionsFinishReason, Access.public);
 @@access(ModelClient.CompletionsUsage, Access.public);
-@@access(ModelClient.EmbeddingEncodingFormat, Access.public);
-@@access(ModelClient.EmbeddingInput, Access.public);
-@@access(ModelClient.EmbeddingInputType, Access.public);
-@@access(ModelClient.EmbeddingItem, Access.public);
-@@access(ModelClient.EmbeddingsResult, Access.public);
-@@access(ModelClient.EmbeddingsUsage, Access.public);
+@@access(ModelClient.EmbeddingEncodingFormat, Access.public, "python");
+@@access(ModelClient.EmbeddingInput, Access.public, "python");
+@@access(ModelClient.EmbeddingInputType, Access.public, "python");
+@@access(ModelClient.EmbeddingItem, Access.public, "python");
+@@access(ModelClient.EmbeddingsResult, Access.public, "python");
+@@access(ModelClient.EmbeddingsUsage, Access.public, "python");
 @@access(ModelClient.FunctionCall, Access.public);
 @@access(ModelClient.FunctionDefinition, Access.public);
 @@access(ModelClient.ModelInfo, Access.public);
@@ -59,8 +59,8 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 // 2. Add hyper-params (to getChatCompletions/Embeddings/ImageEmbeddings, all clients)
 // 3. Cache model info (to getModelInfo, all clients, Python only)
 @@access(ModelClient.getChatCompletions, Access.internal, "python");
-@@access(ModelClient.getEmbeddings, Access.internal, "python");
-@@access(ModelClient.getImageEmbeddings, Access.internal, "python");
+@@access(ModelClient.getEmbeddings, Access.internal);
+@@access(ModelClient.getImageEmbeddings, Access.internal);
 @@access(ModelClient.getModelInfo, Access.internal, "python");
 
 // We use shorter names in the Python client library
