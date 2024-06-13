@@ -104,11 +104,11 @@
         "kind": {
           "description": "The kind of the TI object",
           "enum": [
-            "AttackPattern",
-            "Identity",
-            "Indicator",
-            "Relationship",
-            "ThreatActor"
+            "attack-pattern",
+            "identity",
+            "indicator",
+            "relationship",
+            "threat-actor"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -117,33 +117,30 @@
             "values": [
               {
                 "description": "A TI object that represents an attack pattern.",
-                "value": "AttackPattern"
+                "value": "attack-pattern"
               },
               {
                 "description": "A TI object that represents an identity.",
-                "value": "Identity"
+                "value": "identity"
               },
               {
                 "description": "A TI object that represents an indicator.",
-                "value": "Indicator"
+                "value": "indicator"
               },
               {
                 "description": "A TI object that represents a relationship between two TI objects.",
-                "value": "Relationship"
+                "value": "relationship"
               },
               {
                 "description": "A TI object that represents a threat actor.",
-                "value": "ThreatActor"
+                "value": "threat-actor"
               }
             ]
           }
         }
       },
       "discriminator": "kind",
-      "type": "object",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "ThreatIntelligenceList": {
       "description": "List all the threat intelligence objects on the workspace that match the provided query.",
@@ -171,7 +168,6 @@
       "properties": {
         "data": {
           "description": "The core STIX object that this TI object represents.",
-          "readOnly": true,
           "type": "object",
           "additionalProperties": {}
         },
@@ -183,7 +179,6 @@
         },
         "source": {
           "description": "The source name for this TI object.",
-          "readOnly": true,
           "type": "string"
         },
         "firstIngestedTimeUtc": {
@@ -484,22 +479,7 @@
     },
     "UserInfo": {
       "description": "Data about a user or client application.",
-      "properties": {
-        "objectId": {
-          "description": "The user's object ID.",
-          "readOnly": true,
-          "format": "uuid",
-          "type": "string"
-        },
-        "email": {
-          "description": "The user's email address.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The user's name.",
-          "type": "string"
-        }
-      },
+      "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
       "type": "object"
     },
     "ThreatActor": {
