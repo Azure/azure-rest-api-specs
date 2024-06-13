@@ -70,48 +70,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/osOptions/default": {
-      "get": {
-        "tags": [
-          "ManagedClusters"
-        ],
-        "operationId": "ManagedClusters_GetOSOptions",
-        "summary": "Gets supported OS options in the specified subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceTypeParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OSOptionProfile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Container Service OS Options": {
-            "$ref": "./examples/ContainerServiceGetOSOptions.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/kubernetesVersions": {
       "get": {
         "tags": [
@@ -8019,70 +7977,6 @@
           "description": "The type of the extended location."
         }
       }
-    },
-    "OSOptionProperty": {
-      "type": "object",
-      "properties": {
-        "os-type": {
-          "type": "string",
-          "description": "The OS type."
-        },
-        "enable-fips-image": {
-          "type": "boolean",
-          "description": "Whether the image is FIPS-enabled."
-        }
-      },
-      "required": [
-        "os-type",
-        "enable-fips-image"
-      ],
-      "description": "OS option property."
-    },
-    "OSOptionPropertyList": {
-      "type": "object",
-      "properties": {
-        "osOptionPropertyList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OSOptionProperty"
-          },
-          "x-ms-identifiers": [],
-          "description": "The list of OS options."
-        }
-      },
-      "required": [
-        "osOptionPropertyList"
-      ],
-      "description": "The list of OS option properties."
-    },
-    "OSOptionProfile": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID of the OS option resource."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the OS option resource."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the OS option resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/OSOptionPropertyList",
-          "description": "The list of OS options.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "The OS option profile."
     },
     "GuardrailsAvailableVersionsProperties": {
       "type": "object",
