@@ -47,7 +47,7 @@
     }
   ],
   "paths": {
-    "/{resourceId}/providers/Microsoft.PortalServices/{resourceId}/invokeAssistant": {
+    "/providers/Microsoft.PortalServices/invokeAssistant": {
       "post": {
         "operationId": "AzureCoreExperiencesAssistant_InvokeAssistant",
         "tags": [
@@ -57,14 +57,6 @@
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "resourceId",
-            "in": "path",
-            "description": "The ARM Id of the resource we are invoking the request on",
-            "required": true,
-            "type": "string",
-            "format": "arm-id"
           },
           {
             "name": "assistantRequest",
@@ -78,7 +70,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssistantResponse"
             }
