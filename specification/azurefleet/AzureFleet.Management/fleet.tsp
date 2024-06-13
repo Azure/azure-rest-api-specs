@@ -217,4 +217,25 @@ interface Fleets {
   delete is ArmResourceDeleteWithoutOkAsync<Fleet>;
   listByResourceGroup is ArmResourceListByParent<Fleet>;
   listBySubscription is ArmListBySubscription<Fleet>;
+  @autoRoute
+  @listsResource(VirtualMachineScaleSet)
+  @armResourceList(VirtualMachineScaleSet)
+  @get
+  @doc("List VirtualMachineScaleSet resources by Fleet")
+  @extension(
+    "x-ms-pageable",
+    {
+      nextLinkName: "nextLink",
+    }
+  )
+  listVirtualMachineScaleSets(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...ProviderNamespace<Fleet>,
+    ...ResourceNameParameter<
+      Fleet,
+      NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+    >,
+  ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
 }
