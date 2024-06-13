@@ -25,7 +25,7 @@ interface AzureCoreExperiencesAssistant {
   invokeAssistant(
     ...ApiVersionParameter,
 
-    @doc("The ARM Id of the resource we are invoking the reqeust on")
+    @doc("The ARM Id of the resource we are invoking the request on")
     @path
     resourceId: armResourceIdentifier,
 
