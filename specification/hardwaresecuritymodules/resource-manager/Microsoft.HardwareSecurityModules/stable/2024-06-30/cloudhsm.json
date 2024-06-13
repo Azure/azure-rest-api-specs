@@ -611,7 +611,7 @@
           {
             "name": "backupRequestProperties",
             "in": "body",
-            "description": "Azure storage Resource Uri.",
+            "description": "Azure Storage blob container URI",
             "schema": {
               "$ref": "#/definitions/BackupRequestProperties"
             }
@@ -1365,32 +1365,42 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Status of the backup operation"
+          "description": "Status of the backup/restore operation",
+          "readOnly": true,
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "BackupRestoreOperationStatus",
+            "modelAsString": true
+          }
         },
         "statusDetails": {
           "type": "string",
-          "description": "The status details of backup operation"
+          "description": "The status details of backup/restore operation"
         },
         "error": {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "Error encountered, if any, during the backup operation."
+          "description": "Error encountered, if any, during the backup/restore operation."
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "The start time of the backup operation in UTC"
+          "description": "The start time of the backup/restore operation in UTC"
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "The end time of the backup operation in UTC",
+          "description": "The end time of the backup/restore operation in UTC",
           "x-nullable": true
         },
         "jobId": {
           "type": "string",
-          "description": "Identifier for the backup operation."
+          "description": "Identifier for the backup/restore operation."
         }
       },
       "description": "Backup and Restore operation common properties"
