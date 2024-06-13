@@ -43,7 +43,7 @@ model InstanceProperties {
   @visibility("read")
   version?: string;
 
-  @doc("Configuration.")
+  @doc("Observability configurations.")
   @visibility("read", "create")
   configuration: ConfigurationProperties;
 }
