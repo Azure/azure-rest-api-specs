@@ -26,9 +26,64 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-04
+tag: package-preview-2024-07
 ```
 
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/machineLearningServices.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/mfe.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/registries.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/workspaceFeatures.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: As discussed In office hour this conf property is string dictionary and passed by user as per there requirements depending on runtime version. This passed to downstream and we have multiple validation on all required configuration before passing it downstream, All optional property passed as user wants and any failure due to that considered as user error.
+    where:
+      - $.definitions["SparkJob"].properties["conf"]
+  - code: AvoidAdditionalProperties
+    reason: This is for feature parity with other job type like commandjob, sweepjob etc. We have one interface for all type of job and other job take environment variable like this to match with them we also pass environment variable in this format. please check existing "CommandJob" in same file.
+    where:
+      - $.definitions["SparkJob"].properties["environmentVariables"]
+  - code: PatchBodyParametersSchema
+    reason: This is already exist in preview version api version, the reason we have required mark for the property inside is those are the only format we allow user to update this whole encryption property.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: AvoidAdditionalProperties
+    reason: These schemas are already in production use,.
+    where:
+      - $.definitions.WorkspaceUpdateParameters.properties.properties.properties.managedNetwork.properties.outboundRules
+      - $.definitions.WorkspacePropertiesUpdateParameters.properties.managedNetwork.properties.outboundRules
+      - $.definitions.EndpointModels.properties.value.items.properties.capabilities
+      - $.definitions.AccountModel.properties.finetuneCapabilities
+      - $.definitions.AccountModel.properties.capabilities
+      - $.definitions.EndpointModels.properties.value.items.properties.finetuneCapabilities
+      - $.definitions.CustomKeysWorkspaceConnectionProperties.properties.credentials.properties.keys
+      - $.definitions.CustomKeys.properties.keys
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+      - $.definitions.PATAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.SASAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.UsernamePasswordAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.NoneAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.ManagedIdentityAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.WorkspaceConnectionPropertiesV2BasicResource.properties.properties.properties.metadata
+      - $.definitions.WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult.properties.value.items.properties.properties.properties.metadata
+      - $.definitions.AADAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.AccessKeyAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.AccountKeyAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.ApiKeyAuthWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.CustomKeysWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.OAuth2AuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.ServicePrincipalAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+```
 
 ### Tag: package-2024-04
 
