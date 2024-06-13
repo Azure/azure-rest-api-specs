@@ -1,0 +1,102 @@
+{
+  "title": "MySqlSourceConnector CreateOrUpdate",
+  "operationId": "ConnectorOperations_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "resourceGroupName": "abcd",
+    "api-version": "2024-05-01-preview",
+    "name": "mySqlSourceConnector1",
+    "resource": {
+      "location": "East US",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      },
+      "properties": {
+        "connectorProperties": {
+          "connectorType": "MySqlSource",
+          "eventHubConfig": {
+            "namespaceHostName": "ns",
+            "eventHubName": "eh",
+            "connectionString": "connectionString1"
+          },
+          "maxTasks": 1,
+          "valueConverter": "JsonConverter",
+          "hostName": "hostName.mysql.com",
+          "port": 8080,
+          "databaseName": "databaseName1",
+          "username": "username1",
+          "password": "",
+          "serverId": 1,
+          "tableNames": "tableNames1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/mySqlSourceConnector1",
+        "name": "mySqlSourceConnector1",
+        "type": "Microsoft.MessagingConnectors/connector",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "connectorProperties": {
+            "connectorType": "MySqlSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "hostName": "hostName.mysql.com",
+            "port": 8080,
+            "databaseName": "databaseName1",
+            "username": "username1",
+            "serverId": 1,
+            "tableNames": "tableNames1",
+            "connectorState": "Running"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/mySqlSourceConnector2",
+        "name": "mySqlSourceConnector2",
+        "type": "Microsoft.MessagingConnectors/connector",
+        "location": "East US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "connectorProperties": {
+            "connectorType": "MySqlSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "hostName": "hostName.mysql.com",
+            "port": 8080,
+            "databaseName": "databaseName1",
+            "username": "username1",
+            "serverId": 1,
+            "tableNames": "tableNames1",
+            "connectorState": "Creating"
+          },
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  }
+}

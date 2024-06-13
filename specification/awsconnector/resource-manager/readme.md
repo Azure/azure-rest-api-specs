@@ -26,7 +26,7 @@ These are the global settings for the awsconnector.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: providerHub
+openapi-subtype: rpaas
 tag: package-2024-08-01-preview
 ```
 
@@ -159,7 +159,6 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
@@ -174,10 +173,6 @@ See configuration in [readme.az.md](./readme.az.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
 
 ## TypeScript
 

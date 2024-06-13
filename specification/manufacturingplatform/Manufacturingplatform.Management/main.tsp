@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -41,28 +40,30 @@ model MdsResource is TrackedResource<MdsResourceProperties> {
   @visibility("read")
   name: string;
 
-  ...ManagedServiceIdentity;
-  ...ResourceSku;
+  ...ManagedServiceIdentityProperty;
+  ...ResourceSkuProperty;
 }
 
 @@added(MdsResource.sku, Versions.v2024_02_01_preview);
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
-
-  @doc("Initial provisioning in progress")
-  Provisioning,
-
-  @doc("Update in progress")
-  Updating,
-
-  @doc("Deletion in progress")
-  Deleting,
-
-  @doc("Change accepted for processing")
-  Accepted,
+union ProvisioningState {
+  string,
+  /** Resource has been created. */
+  Succeeded:"Succeeded",
+  /** Resource creation failed. */
+  Failed:"Failed",
+  /** Resource creation was canceled. */
+  Canceled:"Canceled",
+  /** The resource is being provisioned */
+  Provisioning:"Provisioning",
+  /** The resource is updating */
+  Updating:"Updating",
+  /** The resource is being deleted */
+  Deleting:"Deleting",
+  /** The resource create request has been accepted */
+  Accepted:"Accepted"
 }
 
 @doc("Details of the ManufacturingPlatform MdsResource.")
@@ -96,7 +97,8 @@ model MdsResourceProperties {
 
   @visibility("read", "create")
   @doc("Continuous Export Period.")
-  continuousExportPeriod: int32;
+  @madeOptional(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  continuousExportPeriod?: int32 = 0;
 
   @visibility("read")
   @doc("Service Url")
@@ -153,13 +155,18 @@ model MdsResourceProperties {
   functionAppProfile?: FunctionAppProfile;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
-  @visibility("read")
+  @visibility("read","create", "update")
   @doc("Profile of OpenAI Resource.")
   openAIProfile?: OpenAIProfile;
 
   @visibility("read")
   @doc("Configuration of the managed resource group associated with the resource.")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+
+  @visibility("read")
+  @doc("Managed On Behalf Of Configuration.")
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   @visibility("read", "create", "update")
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
@@ -185,6 +192,12 @@ model MdsResourceProperties {
   @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
   @doc("Profile of Fabric resources.")
   fabricProfile?: FabricProfile;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
+  @doc("Profile of User Managed OpenAI Resource.")
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @visibility("read", "create", "update")
+  userManagedOpenAIProfile?: UserManagedOpenAIProfile;
 }
 
 @doc("The properties related to Aks Resource")
@@ -333,6 +346,46 @@ model OpenAIProfile {
   @doc("Resource Id of OpenAI Resource")
   @visibility("read")
   id?: string;
+
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @doc("GPT Model Name")
+  @visibility("read", "create", "update")
+  gptModelName?: string;
+
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @doc("GPT Model Version")
+  @visibility("read", "create", "update")
+  gptModelVersion?: string;
+
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @doc("GPT Model Capacity")
+  @visibility("read", "create", "update")
+  gptModelCapacity?: int32;
+
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @doc("GPT Model SKU Name")
+  @visibility("read", "create", "update")
+  gptModelSkuName?: string;
+
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @doc("Embedding Model Name")
+  @visibility("read", "create")
+  embeddingModelName?: string;
+
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @doc("Embedding Model Version")
+  @visibility("read", "create")
+  embeddingModelVersion?: string;
+
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @doc("Embedding Model SKU Name")
+  @visibility("read", "create", "update")
+  embeddingModelSkuName?: string;
+
+  @added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+  @doc("Embedding Model Capacity")
+  @visibility("read", "create", "update")
+  embeddingModelCapacity?: int32;
 }
 
 @doc("Configuration of the managed resource group associated with the resource.")
@@ -342,6 +395,22 @@ model ManagedResourceGroupConfiguration {
 
   @doc("The resource group location.")
   location: string;
+}
+
+@added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+@doc("Configuration of the managed on behalf of resource.")
+model ManagedOnBehalfOfConfiguration {
+  @visibility("read")
+  @doc("Associated MoboBrokerResources.")
+  moboBrokerResources: MoboBrokerResource[];
+}
+
+@added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+@doc("MoboBroker resource.")
+model MoboBrokerResource {
+  @visibility("read")
+  @doc("Resource Id of MoboBrokerResource")
+  id: string;
 }
 
 @doc("The properties related to Azure Machine Learning Resource")
@@ -380,6 +449,27 @@ model FabricProfile {
   oneLakePath: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AI is a well-known abbreviation"
+@doc("The properties related to User Managed OpenAI Resource")
+@added(Microsoft.ManufacturingPlatform.Versions.v2024_02_01_preview)
+model UserManagedOpenAIProfile {
+  @doc("Resource Id of OpenAI Resource")
+  @visibility("read", "create", "update")
+  id: string;
+
+  @doc("GPT Model Deployment Name")
+  @visibility("read", "create", "update")
+  gptModelDeploymentName: string;
+
+  @doc("Embedding Model Deployment Name")
+  @visibility("read", "create", "update")
+  embeddingModelDeploymentName: string;
+  
+  @doc("Embedding Model Type")
+  @visibility("read", "create")
+  embeddingModelType: string;
+}
+
 @armResourceOperations(MdsResource)
 interface ManufacturingDataServices {
   get is ArmResourceRead<MdsResource>;
@@ -402,7 +492,7 @@ interface ManufacturingDataServices {
 @armResourceAction(TResource)
 @post
 op ArmResourceListActionSync<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse extends {},
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(

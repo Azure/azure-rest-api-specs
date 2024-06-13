@@ -24,7 +24,7 @@ namespace Microsoft.Monitor;
 @doc("A pipeline group definition.")
 model PipelineGroup is TrackedResource<PipelineGroupProperties> {
   @doc("The name of pipeline group. The name is case insensitive.")
-  @pattern("^(?!-)[a-zA-Z0-9-]{3,10}[^-]$")
+  @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
   @key("pipelineGroupName")
   @path
   @segment("pipelineGroups")
@@ -189,8 +189,14 @@ model Pipeline {
 union PipelineType {
   string,
 
+  @added(Versions.v2024_10_01)
   @doc("Pipeline for logs telemetry.")
-  Logs: "logs",
+  Logs: "Logs",
+
+  @removed(Versions.v2024_10_01)
+  @renamedFrom(Versions.v2024_10_01, "Logs")
+  @doc("Pipeline for logs telemetry.")
+  LogsPreview: "logs",
 }
 
 @doc("Networking configuration for the pipeline group instance.")
