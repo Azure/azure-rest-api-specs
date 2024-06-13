@@ -35,6 +35,8 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
     - [`AvoidAnonymousParameter`, `AvoidAnonymousTypes`, `IntegerTypeMustHaveFormat`](#avoidanonymousparameter-avoidanonymoustypes-integertypemusthaveformat)
     - [`AvoidAnonymousTypes` inside a 202 response](#avoidanonymoustypes-inside-a-202-response)
     - [`OAuth2Auth` causes `XmsEnumValidation`](#oauth2auth-causes-xmsenumvalidation)
+    - [`ProvisioningStateMustBeReadOnly`](#provisioningstatemustbereadonly)
+    - [`PatchBodyParameterSchema`](#patchbodyparameterschema)
   - [`Swagger ModelValidation`](#swagger-modelvalidation)
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
     - [Prettier reference](#prettier-reference)
@@ -235,6 +237,23 @@ TypeSpec using `OAuth2Auth` may generate the following OpenAPI:
 ```
 
 Which causes error `XmsEnumValidation`.  The recommended workaround is to add `omit-unreachable-types: true` to your `tspconfig.yaml`.
+
+### `ProvisioningStateMustBeReadOnly`
+
+The root cause is bugs in `azure-openapi-validator` and `oav`:
+
+https://github.com/Azure/azure-openapi-validator/issues/637
+https://github.com/Azure/oav/issues/848
+
+The recommended workaround is to add `use-read-only-status-schema: true` to your `tspconfig.yaml`.
+
+### `PatchBodyParameterSchema`
+
+The root cause is a bug in typespec-azure:
+
+https://github.com/Azure/typespec-azure/issues/383.
+
+Please see the issue above for the suggested workaround and apply it directly to the spec TypeSpec sources.  The LintDiff error should **not** be ignored or suppressed.
 
 ## `Swagger ModelValidation`
 
