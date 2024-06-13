@@ -117,19 +117,19 @@ model DataFlowBuiltInTransformationMap {
 union SerializationFormat {
   string,
 
-  @doc("AVROBinary")
+  @doc("AVROBinary Format")
   AvroBinary: "AvroBinary",
 
-  @doc("AVROJson")
+  @doc("AVROJson Format")
   AvroJson: "AvroJson",
 
-  @doc("Delta")
+  @doc("Delta Format")
   Delta: "Delta",
 
-  @doc("JSON")
+  @doc("JSON Format")
   Json: "Json",
 
-  @doc("Parquet")
+  @doc("Parquet Format")
   Parquet: "Parquet",
 }
 

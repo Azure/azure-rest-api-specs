@@ -206,10 +206,10 @@ model DataFlowEndpointFabricOneLakeNames {
 union DataFlowEndpointFabricPathType {
   string,
 
-  @doc("FILES")
+  @doc("FILES Type")
   Files: "Files",
 
-  @doc("TABLES")
+  @doc("TABLES Type")
   Tables: "Tables",
 }
 
@@ -271,13 +271,13 @@ model DataFlowEndpointAuthenticationSasl {
 union DataFlowEndpointAuthenticationSaslType {
   string,
 
-  @doc("PLAIN")
+  @doc("PLAIN Type")
   Plain: "Plain",
 
-  @doc("SCRAM_SHA_256")
+  @doc("SCRAM_SHA_256 Type")
   ScramSha256: "ScramSha256",
 
-  @doc("SCRAM_SHA_512")
+  @doc("SCRAM_SHA_512 Type")
   ScramSha512: "ScramSha512",
 }
 
@@ -312,16 +312,16 @@ model DataFlowEndpointKafkaBatching {
 union DataFlowEndpointKafkaCompression {
   string,
 
-  @doc("NONE")
+  @doc("NONE Option")
   None: "None",
 
-  @doc("Gzip")
+  @doc("Gzip Option")
   Gzip: "Gzip",
 
-  @doc("SNAPPY")
+  @doc("SNAPPY Option")
   Snappy: "Snappy",
 
-  @doc("LZ4")
+  @doc("LZ4 Option")
   Lz4: "Lz4",
 }
 
@@ -329,13 +329,13 @@ union DataFlowEndpointKafkaCompression {
 union DataFlowEndpointKafkaAcks {
   string,
 
-  @doc("ZERO")
+  @doc("ZERO Option")
   Zero: "Zero",
 
-  @doc("ONE")
+  @doc("ONE Option")
   One: "One",
 
-  @doc("ALL")
+  @doc("ALL Option")
   All: "All",
 }
 
@@ -349,10 +349,10 @@ union DataFlowEndpointKafkaPartitionStrategy {
   @doc("Static: Assigns messages to a fixed partition number that's derived from the instance ID of the dataflow.")
   Static: "Static",
 
-  @doc("TOPIC")
+  @doc("TOPIC Option")
   Topic: "Topic",
 
-  @doc("PROPERTY")
+  @doc("PROPERTY Option")
   Property: "Property",
 }
 
