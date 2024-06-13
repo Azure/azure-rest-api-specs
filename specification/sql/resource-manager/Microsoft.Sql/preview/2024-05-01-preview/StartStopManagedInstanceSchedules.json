@@ -1,0 +1,401 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/startStopSchedules": {
+      "get": {
+        "tags": [
+          "StartStopManagedInstanceSchedules"
+        ],
+        "description": "Lists the managed instance's Start/Stop schedules.",
+        "operationId": "StartStopManagedInstanceSchedules_ListByInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Start/Stop schedules.",
+            "schema": {
+              "$ref": "#/definitions/StartStopManagedInstanceScheduleListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 StartStopOfManagedInstanceIsDisabled - Start and stop operation on managed instance is not enabled.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleSubscriptionNotEnabledForFeature - User attempted to use Start/Stop feature without having the subscription allowlisted for the appropriate subscription feature.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleFeatureDisabled - User attempted to use the scheduled Start/Stop Azure SQL Managed Instance feature, which is disabled.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleNotSupportedOnSKU - Scheduled Start/Stop operation is not supported on the given SKU.\n\n * 400 ManagementServiceStopManagedInstanceHostedOnRdfePlatform - Stop executed on the instance that is not running with Feature Wave November 2022\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleOverlap - Overlap in schedule pairs.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleSmallTimespan - Time between two successive actions is less than 1 hour.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ManagementServiceStartStopManagedInstanceScheduleNotFound - Schedule does not exist for a given managed instance.\n\n * 409 ManagementServiceStartStopManagedInstanceScheduleConflictingOperation - The attempted create/update/delete operation of Start/Stop schedule on the Azure SQL Managed Instance failed. The schedule was either not created or couldn't be updated/deleted as it was busy with an ongoing scheduled operation. Please retry your request later.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Lists the managed instance's Start/Stop schedules.": {
+            "$ref": "./examples/StartStopManagedInstanceScheduleList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/startStopSchedules/{startStopScheduleName}": {
+      "get": {
+        "tags": [
+          "StartStopManagedInstanceSchedules"
+        ],
+        "description": "Gets the managed instance's Start/Stop schedule.",
+        "operationId": "StartStopManagedInstanceSchedules_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "startStopScheduleName",
+            "in": "path",
+            "description": "Name of the managed instance Start/Stop schedule.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "StartStopScheduleName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the Start/Stop schedule.",
+            "schema": {
+              "$ref": "#/definitions/StartStopManagedInstanceSchedule"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 204 ManagementServiceStartStopManagedInstanceScheduleNameInvalid - User attempted to perform CRUD operation of Start/Stop schedule with a schedule name different from 'default'\n\n * 400 StartStopOfManagedInstanceIsDisabled - Start and stop operation on managed instance is not enabled.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleSubscriptionNotEnabledForFeature - User attempted to use Start/Stop feature without having the subscription allowlisted for the appropriate subscription feature.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleFeatureDisabled - User attempted to use the scheduled Start/Stop Azure SQL Managed Instance feature, which is disabled.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleNotSupportedOnSKU - Scheduled Start/Stop operation is not supported on the given SKU.\n\n * 400 ManagementServiceStopManagedInstanceHostedOnRdfePlatform - Stop executed on the instance that is not running with Feature Wave November 2022\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleOverlap - Overlap in schedule pairs.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleSmallTimespan - Time between two successive actions is less than 1 hour.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleCreateOrUpdateRequestParametersInvalid - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleCreateOrUpdateRequestTimeZoneInvalid - The provided time zone parameter is invalid.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleCreateOrUpdateRequestScheduleInvalid - The provided Start/Stop schedule is invalid. The schedule either contains no items in the schedule list or some of the items in the list have invalid values. \n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ManagementServiceStartStopManagedInstanceScheduleNotFound - Schedule does not exist for a given managed instance.\n\n * 404 ManagementServiceStartStopManagedInstanceScheduleNameInvalid - User attempted to perform CRUD operation of Start/Stop schedule with a schedule name different from 'default'\n\n * 409 ManagementServiceStartStopManagedInstanceScheduleConflictingOperation - The attempted create/update/delete operation of Start/Stop schedule on the Azure SQL Managed Instance failed. The schedule was either not created or couldn't be updated/deleted as it was busy with an ongoing scheduled operation. Please retry your request later.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the managed instance's Start/Stop schedule.": {
+            "$ref": "./examples/StartStopManagedInstanceScheduleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StartStopManagedInstanceSchedules"
+        ],
+        "description": "Creates or updates the managed instance's Start/Stop schedule.",
+        "operationId": "StartStopManagedInstanceSchedules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "startStopScheduleName",
+            "in": "path",
+            "description": "Name of the managed instance Start/Stop schedule.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "StartStopScheduleName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested managed instance Start/Stop schedule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartStopManagedInstanceSchedule"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the Start/Stop schedule.",
+            "schema": {
+              "$ref": "#/definitions/StartStopManagedInstanceSchedule"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 204 ManagementServiceStartStopManagedInstanceScheduleNameInvalid - User attempted to perform CRUD operation of Start/Stop schedule with a schedule name different from 'default'\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleCreateOrUpdateRequestParametersInvalid - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleCreateOrUpdateRequestTimeZoneInvalid - The provided time zone parameter is invalid.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleCreateOrUpdateRequestScheduleInvalid - The provided Start/Stop schedule is invalid. The schedule either contains no items in the schedule list or some of the items in the list have invalid values. \n\n * 400 StartStopOfManagedInstanceIsDisabled - Start and stop operation on managed instance is not enabled.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleSubscriptionNotEnabledForFeature - User attempted to use Start/Stop feature without having the subscription allowlisted for the appropriate subscription feature.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleFeatureDisabled - User attempted to use the scheduled Start/Stop Azure SQL Managed Instance feature, which is disabled.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleNotSupportedOnSKU - Scheduled Start/Stop operation is not supported on the given SKU.\n\n * 400 ManagementServiceStopManagedInstanceHostedOnRdfePlatform - Stop executed on the instance that is not running with Feature Wave November 2022\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleOverlap - Overlap in schedule pairs.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleSmallTimespan - Time between two successive actions is less than 1 hour.\n\n * 404 ManagementServiceStartStopManagedInstanceScheduleNameInvalid - User attempted to perform CRUD operation of Start/Stop schedule with a schedule name different from 'default'\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ManagementServiceStartStopManagedInstanceScheduleNotFound - Schedule does not exist for a given managed instance.\n\n * 409 ManagementServiceStartStopManagedInstanceScheduleConflictingOperation - The attempted create/update/delete operation of Start/Stop schedule on the Azure SQL Managed Instance failed. The schedule was either not created or couldn't be updated/deleted as it was busy with an ongoing scheduled operation. Please retry your request later.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "201": {
+            "description": "Successfully created the Start/Stop schedule.",
+            "schema": {
+              "$ref": "#/definitions/StartStopManagedInstanceSchedule"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates the managed instance's Start/Stop schedule with all optional parameters specified.": {
+            "$ref": "./examples/StartStopManagedInstanceScheduleCreateOrUpdateMax.json"
+          },
+          "Creates or updates the managed instance's Start/Stop schedule with no optional parameters specified.": {
+            "$ref": "./examples/StartStopManagedInstanceScheduleCreateOrUpdateMin.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StartStopManagedInstanceSchedules"
+        ],
+        "description": "Deletes the managed instance's Start/Stop schedule.",
+        "operationId": "StartStopManagedInstanceSchedules_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "startStopScheduleName",
+            "in": "path",
+            "description": "Name of the managed instance Start/Stop schedule.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "StartStopScheduleName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the Start/Stop schedule."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 204 ManagementServiceStartStopManagedInstanceScheduleNotFound - Schedule does not exist for a given managed instance.\n\n * 204 ManagementServiceStartStopManagedInstanceScheduleNameInvalid - User attempted to perform CRUD operation of Start/Stop schedule with a schedule name different from 'default'\n\n * 400 StartStopOfManagedInstanceIsDisabled - Start and stop operation on managed instance is not enabled.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleSubscriptionNotEnabledForFeature - User attempted to use Start/Stop feature without having the subscription allowlisted for the appropriate subscription feature.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleFeatureDisabled - User attempted to use the scheduled Start/Stop Azure SQL Managed Instance feature, which is disabled.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleNotSupportedOnSKU - Scheduled Start/Stop operation is not supported on the given SKU.\n\n * 400 ManagementServiceStopManagedInstanceHostedOnRdfePlatform - Stop executed on the instance that is not running with Feature Wave November 2022\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleOverlap - Overlap in schedule pairs.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleSmallTimespan - Time between two successive actions is less than 1 hour.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleCreateOrUpdateRequestParametersInvalid - The provided set of parameters in the body of the request is either empty or invalid.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleCreateOrUpdateRequestTimeZoneInvalid - The provided time zone parameter is invalid.\n\n * 400 ManagementServiceStartStopManagedInstanceScheduleCreateOrUpdateRequestScheduleInvalid - The provided Start/Stop schedule is invalid. The schedule either contains no items in the schedule list or some of the items in the list have invalid values. \n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ManagementServiceStartStopManagedInstanceScheduleNameInvalid - User attempted to perform CRUD operation of Start/Stop schedule with a schedule name different from 'default'\n\n * 409 ManagementServiceStartStopManagedInstanceScheduleConflictingOperation - The attempted create/update/delete operation of Start/Stop schedule on the Azure SQL Managed Instance failed. The schedule was either not created or couldn't be updated/deleted as it was busy with an ongoing scheduled operation. Please retry your request later.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified Start/Stop schedule does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the managed instance's Start/Stop schedule.": {
+            "$ref": "./examples/StartStopManagedInstanceScheduleDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ScheduleItem": {
+      "description": "Schedule info describing when the server should be started or stopped.",
+      "required": [
+        "startDay",
+        "startTime",
+        "stopDay",
+        "stopTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startDay": {
+          "description": "Start day.",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "Start time.",
+          "type": "string"
+        },
+        "stopDay": {
+          "description": "Stop day.",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": true
+          }
+        },
+        "stopTime": {
+          "description": "Stop time.",
+          "type": "string"
+        }
+      }
+    },
+    "StartStopManagedInstanceSchedule": {
+      "description": "Managed instance's Start/Stop schedule.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../common/v1/types.json#/definitions/systemData",
+          "description": "System data of the scheduled resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/StartStopManagedInstanceScheduleProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StartStopManagedInstanceScheduleListResult": {
+      "description": "Managed instance's Start/Stop schedule list result.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StartStopManagedInstanceSchedule"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StartStopManagedInstanceScheduleProperties": {
+      "description": "Properties of managed instance's Start/Stop schedule.",
+      "required": [
+        "scheduleList"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the schedule.",
+          "default": "",
+          "type": "string"
+        },
+        "timeZoneId": {
+          "description": "The time zone of the schedule.",
+          "default": "UTC",
+          "type": "string"
+        },
+        "scheduleList": {
+          "description": "Schedule list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduleItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextRunAction": {
+          "description": "Next action to be executed (Start or Stop)",
+          "type": "string",
+          "readOnly": true
+        },
+        "nextExecutionTime": {
+          "description": "Timestamp when the next action will be executed in the corresponding schedule time zone.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

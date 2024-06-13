@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "sqlcrudtest-7398",
+    "serverName": "sqlcrudtest-7398",
+    "api-version": "2024-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/networkSecurityPerimeterConfigurations/00000001-2222-3333-4444-111144444444.assoc1",
+            "name": "00000001-2222-3333-4444-111144444444.assoc1",
+            "type": "Microsoft.Sql/servers/networkSecurityPerimeterConfigurations",
+            "properties": {
+              "provisioningState": "Accepted",
+              "networkSecurityPerimeter": {
+                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/networkRG/providers/Microsoft.Network/networkSecurityPerimeters/perimeter1",
+                "location": "japaneast"
+              },
+              "resourceAssociation": {
+                "name": "assoc1",
+                "accessMode": "Enforced"
+              },
+              "profile": {
+                "name": "profile1",
+                "accessRulesVersion": "0",
+                "accessRules": [
+                  {
+                    "name": "rule1",
+                    "properties": {
+                      "direction": "Inbound",
+                      "addressPrefixes": [
+                        "148.0.0.0/8",
+                        "152.4.6.0/24"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

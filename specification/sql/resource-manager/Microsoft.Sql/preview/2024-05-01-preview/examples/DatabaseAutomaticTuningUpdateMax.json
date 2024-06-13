@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "c3aa9078-0000-0000-0000-e36f151182d7",
+    "resourceGroupName": "default-sql-onebox",
+    "serverName": "testsvr11",
+    "databaseName": "db1",
+    "api-version": "2024-05-01-preview",
+    "parameters": {
+      "properties": {
+        "desiredState": "Auto",
+        "options": {
+          "createIndex": {
+            "desiredState": "Off"
+          },
+          "dropIndex": {
+            "desiredState": "On"
+          },
+          "forceLastGoodPlan": {
+            "desiredState": "Default"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/c3aa9078-0000-0000-0000-e36f151182d7/resourceGroups/default-sql-onebox/providers/Microsoft.Sql/servers/testsvr11/databases/db1/automaticTuning/current",
+        "name": "current",
+        "type": "Microsoft.Sql/servers/databases/automaticTuning",
+        "properties": {
+          "desiredState": "Auto",
+          "actualState": "Auto",
+          "options": {
+            "forceLastGoodPlan": {
+              "desiredState": "Default",
+              "actualState": "On",
+              "reasonCode": 2,
+              "reasonDesc": "AutoConfigured"
+            },
+            "createIndex": {
+              "desiredState": "Off",
+              "actualState": "Off"
+            },
+            "dropIndex": {
+              "desiredState": "On",
+              "actualState": "On"
+            },
+            "maintainIndex": {
+              "desiredState": "Default",
+              "actualState": "Off",
+              "reasonCode": 2,
+              "reasonDesc": "AutoConfigured"
+            }
+          }
+        }
+      }
+    }
+  }
+}

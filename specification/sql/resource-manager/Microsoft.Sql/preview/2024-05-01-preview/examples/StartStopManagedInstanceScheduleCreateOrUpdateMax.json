@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "schedulerg",
+    "managedInstanceName": "schedulemi",
+    "startStopScheduleName": "default",
+    "api-version": "2024-05-01-preview",
+    "parameters": {
+      "properties": {
+        "timeZoneId": "Central European Standard Time",
+        "description": "This is a schedule for our Dev/Test environment.",
+        "scheduleList": [
+          {
+            "startDay": "Thursday",
+            "startTime": "18:00",
+            "stopDay": "Thursday",
+            "stopTime": "17:00"
+          },
+          {
+            "startDay": "Thursday",
+            "startTime": "15:00",
+            "stopDay": "Thursday",
+            "stopTime": "14:00"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/schedulerg/providers/Microsoft.Sql/managedInstances/schedulemi/startStopSchedules/default",
+        "name": "default",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2021-08-26T04:41:33.937Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-27T04:41:33.937Z"
+        },
+        "properties": {
+          "description": "This is a schedule for our Dev/Test environment.",
+          "nextExecutionTime": "2021-08-26T14:00:00",
+          "nextRunAction": "Stop",
+          "scheduleList": [
+            {
+              "startDay": "Thursday",
+              "startTime": "06:00 PM",
+              "stopDay": "Thursday",
+              "stopTime": "05:00 PM"
+            },
+            {
+              "startDay": "Thursday",
+              "startTime": "03:00 PM",
+              "stopDay": "Thursday",
+              "stopTime": "02:00 PM"
+            }
+          ],
+          "timeZoneId": "Central European Standard Time"
+        },
+        "type": "Microsoft.Sql/managedInstances/startStopSchedules"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/schedulerg/providers/Microsoft.Sql/managedInstances/schedulemi/startStopSchedules/default",
+        "name": "default",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2021-08-26T04:41:33.937Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-26T04:41:33.937Z"
+        },
+        "properties": {
+          "description": "This is a schedule for our Dev/Test environment.",
+          "nextExecutionTime": "2021-08-26T14:00:00",
+          "nextRunAction": "Stop",
+          "scheduleList": [
+            {
+              "startDay": "Thursday",
+              "startTime": "06:00 PM",
+              "stopDay": "Thursday",
+              "stopTime": "05:00 PM"
+            },
+            {
+              "startDay": "Thursday",
+              "startTime": "03:00 PM",
+              "stopDay": "Thursday",
+              "stopTime": "02:00 PM"
+            }
+          ],
+          "timeZoneId": "Central European Standard Time"
+        },
+        "type": "Microsoft.Sql/managedInstances/startStopSchedules"
+      }
+    }
+  }
+}
