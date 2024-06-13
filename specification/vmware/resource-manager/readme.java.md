@@ -14,4 +14,7 @@ directive:
 - from: managedidentity.json
   where: definitions.SystemAssignedServiceIdentityType
   transform: $["x-ms-enum"].name = "ResourceIdentityType"
+- from: vmware.json
+  where: definitions.Addon.properties.properties
+  transform: $["x-ms-mutability"] = undefined
 ```
