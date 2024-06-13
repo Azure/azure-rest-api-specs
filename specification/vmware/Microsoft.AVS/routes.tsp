@@ -40,7 +40,7 @@ interface PrivateClouds {
   @operationId("PrivateClouds_List")
   list is ArmResourceListByParent<
     PrivateCloud,
-    Response = ArmResponse<ResourceList<PrivateCloud, "{name}sList">>
+    Response = ArmResponse<ResourceList<PrivateCloud>>
   >;
 
   listInSubscription is ArmListBySubscription<

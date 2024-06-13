@@ -291,7 +291,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateCloudsList"
+              "$ref": "#/definitions/PrivateCloudList"
             }
           },
           "default": {
@@ -9026,27 +9026,6 @@
           "description": "The type of DNS zone to use."
         }
       }
-    },
-    "PrivateCloudsList": {
-      "type": "object",
-      "description": "The response of a PrivateCloud list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateCloud items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateCloud"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "Quota": {
       "type": "object",
