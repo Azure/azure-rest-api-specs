@@ -46,7 +46,6 @@ interface OperationStatus {
     provider: "Microsoft.DeviceRegistry",
 
     ...LocationParameter,
-
     ...Foundations.OperationIdParameter,
   ): ArmResponse<OperationStatusResult> | ErrorResponse;
 }
