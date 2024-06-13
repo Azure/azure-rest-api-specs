@@ -152,7 +152,7 @@ model DataProduct is TrackedResource<DataProductProperties> {
   @maxLength(63)
   name: string;
 
-  ...ManagedServiceIdentityProperty;
+  ...Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("The data product properties.")

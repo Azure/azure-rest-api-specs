@@ -46,7 +46,7 @@ model FleetUpdate {
 }
 
 model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Legacy.ManagedServiceIdentityV4>>;
 
 model ResourcePlanUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.Plan>>;
