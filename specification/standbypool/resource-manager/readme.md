@@ -38,6 +38,10 @@ suppressions:
     reason: OperationId "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource" does seem to be a Noun_Verb
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
 
 ### Tag: package-preview-2023-12
 
@@ -63,8 +67,13 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-cli-extensions
   - repo: azure-powershell
+  - repo: azure-sdk-for-go
 ```
 
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)

@@ -10,7 +10,9 @@ namespace Azure.OpenAI;
 
 @doc("The available voices for text-to-speech.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum SpeechVoice {
+union SpeechVoice {
+  string,
+
   @doc("The Alloy voice.")
   alloy: "alloy",
 
@@ -32,7 +34,9 @@ enum SpeechVoice {
 
 @doc("The supported audio output formats for text-to-speech.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum SpeechGenerationResponseFormat {
+union SpeechGenerationResponseFormat {
+  string,
+
   @doc("Use MP3 as the audio output format. MP3 is the default, general-purpose format.")
   mp3: "mp3",
 
@@ -44,6 +48,14 @@ enum SpeechGenerationResponseFormat {
 
   @doc("Use FLAC as the audio output format. FLAC is a fully lossless format optimized for maximum quality at the expense of size.")
   flac: "flac",
+
+  @doc("Use uncompressed WAV as the audio output format, suitable for low-latency applications to avoid decoding overhead.")
+  @added(ServiceApiVersions.v2024_04_01_Preview)
+  wav: "wav",
+
+  @doc("Use uncompressed PCM as the audio output format, which is similar to WAV but contains raw samples in 24kHz (16-bit signed, low-endian), without the header.")
+  @added(ServiceApiVersions.v2024_04_01_Preview)
+  pcm: "pcm",
 }
 
 @doc("A representation of the request options that control the behavior of a text-to-speech operation.")
@@ -83,6 +95,6 @@ model SpeechGenerationResponse {
   contentType: "application/octet-stream";
 
   @doc("The generated audio, generated in the requested audio output format.")
-  @body
+  @bodyRoot
   audio: bytes;
 }

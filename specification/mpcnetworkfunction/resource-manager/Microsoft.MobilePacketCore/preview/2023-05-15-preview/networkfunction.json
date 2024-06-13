@@ -250,13 +250,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM resource update successful",
+            "description": "Resource 'NetworkFunctionResource' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/NetworkFunctionResource"
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'NetworkFunctionResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/NetworkFunctionResource"
             },
@@ -485,8 +485,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -752,24 +751,6 @@
             "name": "NexusProduction",
             "value": "NexusProduction",
             "description": "Nexus Production SKU"
-          }
-        ]
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "API Versions",
-      "enum": [
-        "2023-05-15-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_05_15_preview",
-            "value": "2023-05-15-preview",
-            "description": "May 15, 2023 Preview API Version"
           }
         ]
       }

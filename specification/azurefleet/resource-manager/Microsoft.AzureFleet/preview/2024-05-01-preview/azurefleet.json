@@ -1,0 +1,1017 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AzureFleet",
+    "version": "2024-05-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Fleets"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureFleet/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureFleet/fleets": {
+      "get": {
+        "operationId": "Fleets_ListBySubscription",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "List Fleet resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fleets_ListBySubscription": {
+            "$ref": "./examples/Fleets_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets": {
+      "get": {
+        "operationId": "Fleets_ListByResourceGroup",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "List Fleet resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fleets_ListByResourceGroup": {
+            "$ref": "./examples/Fleets_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{fleetName}": {
+      "get": {
+        "operationId": "Fleets_Get",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Get a Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Compute Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fleets_Get": {
+            "$ref": "./examples/Fleets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Fleets_CreateOrUpdate",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Create a Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Compute Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Fleet' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          },
+          "201": {
+            "description": "Resource 'Fleet' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fleets_CreateOrUpdate": {
+            "$ref": "./examples/Fleets_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Fleets_Update",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Update a Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Compute Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Fleet"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fleets_Update": {
+            "$ref": "./examples/Fleets_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Fleets_Delete",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Delete a Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Compute Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fleets_Delete": {
+            "$ref": "./examples/Fleets_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{name}/virtualMachineScaleSets": {
+      "get": {
+        "operationId": "Fleets_ListVirtualMachineScaleSets",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "List VirtualMachineScaleSet resources by Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Fleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fleets_ListVirtualMachineScaleSets": {
+            "$ref": "./examples/Fleets_ListVirtualMachineScaleSets.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.Foundations.ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "System and user assigned managed identity."
+          }
+        ]
+      }
+    },
+    "BasePriorityProfile": {
+      "type": "object",
+      "description": "Contains common properties that are applicable to both Spot and Regular.",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total capacity to achieve. It is currently in terms of number of VMs.",
+          "minimum": 0
+        },
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum capacity to achieve which cannot be updated. If we will not be able to \"guarantee\" minimum capacity, we will reject the request in the sync path itself.",
+          "minimum": 0
+        }
+      }
+    },
+    "ComputeProfile": {
+      "type": "object",
+      "description": "Compute Profile to use for running user's workloads.",
+      "properties": {
+        "baseVirtualMachineProfile": {
+          "$ref": "../../../../../compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile",
+          "description": "Base Virtual Machine Profile Properties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
+        },
+        "computeApiVersion": {
+          "type": "string",
+          "description": "Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machine scale sets and Virtual Machines.\nThe default value will be the latest supported computeApiVersion by Compute Fleet."
+        },
+        "platformFaultDomainCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of fault domains to use when creating the underlying VMSS.\nA fault domain is a logical group of hardware within an Azure datacenter.\nVMs in the same fault domain share a common power source and network switch.\nIf not specified, defaults to 1, which represents \"Max Spreading\" (using as many fault domains as possible).\nThis property cannot be updated."
+        }
+      },
+      "required": [
+        "baseVirtualMachineProfile"
+      ]
+    },
+    "ComputeProfileUpdate": {
+      "type": "object",
+      "description": "Compute Profile to use for running user's workloads.",
+      "properties": {
+        "baseVirtualMachineProfile": {
+          "$ref": "../../../../../compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile",
+          "description": "Base Virtual Machine Profile Properties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
+        },
+        "computeApiVersion": {
+          "type": "string",
+          "description": "Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machine scale sets and Virtual Machines.\nThe default value will be the latest supported computeApiVersion by Compute Fleet."
+        },
+        "platformFaultDomainCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of fault domains to use when creating the underlying VMSS.\nA fault domain is a logical group of hardware within an Azure datacenter.\nVMs in the same fault domain share a common power source and network switch.\nIf not specified, defaults to 1, which represents \"Max Spreading\" (using as many fault domains as possible).\nThis property cannot be updated."
+        }
+      }
+    },
+    "EvictionPolicy": {
+      "type": "string",
+      "description": "Different kind of eviction policies",
+      "enum": [
+        "Delete",
+        "Deallocate"
+      ],
+      "x-ms-enum": {
+        "name": "EvictionPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "When evicted, the Spot VM will be deleted and the corresponding capacity will be updated to reflect this."
+          },
+          {
+            "name": "Deallocate",
+            "value": "Deallocate",
+            "description": "When evicted, the Spot VM will be deallocated/stopped"
+          }
+        ]
+      }
+    },
+    "Fleet": {
+      "type": "object",
+      "description": "An Compute Fleet resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "zones": {
+          "type": "array",
+          "description": "Zones in which the Compute Fleet is available",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FleetListResult": {
+      "type": "object",
+      "description": "The response of a Fleet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Fleet items on this page",
+          "items": {
+            "$ref": "#/definitions/Fleet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetProperties": {
+      "type": "object",
+      "description": "Details of the Compute Fleet.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "spotPriorityProfile": {
+          "$ref": "#/definitions/SpotPriorityProfile",
+          "description": "Configuration Options for Spot instances in Compute Fleet."
+        },
+        "regularPriorityProfile": {
+          "$ref": "#/definitions/RegularPriorityProfile",
+          "description": "Configuration Options for Regular instances in Compute Fleet."
+        },
+        "vmSizesProfile": {
+          "type": "array",
+          "description": "List of VM sizes supported for Compute Fleet",
+          "items": {
+            "$ref": "#/definitions/VmSizeProfile"
+          },
+          "x-ms-identifiers": []
+        },
+        "computeProfile": {
+          "$ref": "#/definitions/ComputeProfile",
+          "description": "Compute Profile to use for running user's workloads."
+        }
+      },
+      "required": [
+        "vmSizesProfile",
+        "computeProfile"
+      ]
+    },
+    "FleetPropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the Compute Fleet.",
+      "properties": {
+        "spotPriorityProfile": {
+          "$ref": "#/definitions/SpotPriorityProfile",
+          "description": "Configuration Options for Spot instances in Compute Fleet."
+        },
+        "regularPriorityProfile": {
+          "$ref": "#/definitions/RegularPriorityProfile",
+          "description": "Configuration Options for Regular instances in Compute Fleet."
+        },
+        "vmSizesProfile": {
+          "type": "array",
+          "description": "List of VM sizes supported for Compute Fleet",
+          "items": {
+            "$ref": "#/definitions/VmSizeProfile"
+          },
+          "x-ms-identifiers": []
+        },
+        "computeProfile": {
+          "$ref": "#/definitions/ComputeProfileUpdate",
+          "description": "Compute Profile to use for running user's workloads."
+        }
+      }
+    },
+    "FleetUpdate": {
+      "type": "object",
+      "description": "Fleet Update Model",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentityUpdate",
+          "description": "Updatable managed service identity"
+        },
+        "plan": {
+          "$ref": "#/definitions/ResourcePlanUpdate",
+          "description": "Updatable resource plan"
+        },
+        "properties": {
+          "$ref": "#/definitions/FleetPropertiesUpdate",
+          "description": "RP-specific updatable properties"
+        }
+      }
+    },
+    "ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Migrating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Initial creation in progress."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Update in progress."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress."
+          },
+          {
+            "name": "Migrating",
+            "value": "Migrating",
+            "description": "Resource is being migrated from one subscription or resource group to another."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RegularPriorityAllocationStrategy": {
+      "type": "string",
+      "description": "Regular VM Allocation strategy types for Compute Fleet",
+      "enum": [
+        "LowestPrice",
+        "Prioritized"
+      ],
+      "x-ms-enum": {
+        "name": "RegularPriorityAllocationStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LowestPrice",
+            "value": "LowestPrice",
+            "description": "Default. VM sizes distribution will be determined to optimize for price."
+          },
+          {
+            "name": "Prioritized",
+            "value": "Prioritized",
+            "description": "VM sizes distribution will be determined to optimize for the 'priority' as specified for each vm size."
+          }
+        ]
+      }
+    },
+    "RegularPriorityProfile": {
+      "type": "object",
+      "description": "Configuration Options for Regular instances in Compute Fleet.",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total capacity to achieve. It is currently in terms of number of VMs.",
+          "minimum": 0
+        },
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum capacity to achieve which cannot be updated. If we will not be able to \"guarantee\" minimum capacity, we will reject the request in the sync path itself.",
+          "minimum": 0
+        },
+        "allocationStrategy": {
+          "$ref": "#/definitions/RegularPriorityAllocationStrategy",
+          "description": "Allocation strategy to follow when determining the VM sizes distribution for Regular VMs."
+        }
+      }
+    },
+    "ResourcePlanUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A user defined name of the 3rd Party Artifact that is being procured."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic"
+        },
+        "product": {
+          "type": "string",
+          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding. "
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "A publisher provided promotion code as provisioned in Data Market for the said product/artifact."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the desired product/artifact."
+        }
+      }
+    },
+    "SpotAllocationStrategy": {
+      "type": "string",
+      "description": "Spot allocation strategy types for Compute Fleet",
+      "enum": [
+        "PriceCapacityOptimized",
+        "LowestPrice",
+        "CapacityOptimized"
+      ],
+      "x-ms-enum": {
+        "name": "SpotAllocationStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PriceCapacityOptimized",
+            "value": "PriceCapacityOptimized",
+            "description": "Default. VM sizes distribution will be determined to optimize for both price and capacity."
+          },
+          {
+            "name": "LowestPrice",
+            "value": "LowestPrice",
+            "description": "VM sizes distribution will be determined to optimize for price. Note: Capacity will still be considered here but will be given much less weight."
+          },
+          {
+            "name": "CapacityOptimized",
+            "value": "CapacityOptimized",
+            "description": "VM sizes distribution will be determined to optimize for capacity."
+          }
+        ]
+      }
+    },
+    "SpotPriorityProfile": {
+      "type": "object",
+      "description": "Configuration Options for Spot instances in Compute Fleet.",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total capacity to achieve. It is currently in terms of number of VMs.",
+          "minimum": 0
+        },
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum capacity to achieve which cannot be updated. If we will not be able to \"guarantee\" minimum capacity, we will reject the request in the sync path itself.",
+          "minimum": 0
+        },
+        "maxPricePerVM": {
+          "type": "number",
+          "format": "float",
+          "description": "Price per hour of each Spot VM will never exceed this."
+        },
+        "evictionPolicy": {
+          "$ref": "#/definitions/EvictionPolicy",
+          "description": "Eviction Policy to follow when evicting Spot VMs."
+        },
+        "allocationStrategy": {
+          "$ref": "#/definitions/SpotAllocationStrategy",
+          "description": "Allocation strategy to follow when determining the VM sizes distribution for Spot VMs."
+        },
+        "maintain": {
+          "type": "boolean",
+          "description": "Flag to enable/disable continuous goal seeking for the desired capacity and restoration of evicted Spot VMs.\nIf maintain is enabled, AzureFleetRP will use all VM sizes in vmSizesProfile to create new VMs (if VMs are evicted deleted)\nor update existing VMs with new VM sizes (if VMs are evicted deallocated or failed to allocate due to capacity constraint) in order to achieve the desired capacity.\nMaintain is enabled by default."
+        }
+      }
+    },
+    "VirtualMachineScaleSet": {
+      "type": "object",
+      "description": "An AzureFleet's virtualMachineScaleSet",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the virtualMachineScaleSet",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The compute RP resource id of the virtualMachineScaleSet \n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}\"",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the virtualMachineScaleSet",
+          "readOnly": true
+        },
+        "operationStatus": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "This represents the operationStatus of the VMSS in response to the last operation that was performed on it by Azure Fleet resource.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../compute/resource-manager/Microsoft.Compute/common-types/v1/common.json#/definitions/ApiError",
+          "description": "Error Information when `operationStatus` is `Failed`",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "operationStatus"
+      ]
+    },
+    "VirtualMachineScaleSetListResult": {
+      "type": "object",
+      "description": "The response of a VirtualMachineScaleSet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualMachineScaleSet items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VmSizeProfile": {
+      "type": "object",
+      "description": "Specifications about a VM Size. This will also contain the corresponding rank and weight in future.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The Sku name (e.g. 'Standard_DS1_v2')"
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The rank of the VM size. This is used with 'RegularPriorityAllocationStrategy.Prioritized'\nThe lower the number, the higher the priority. Starting with 0.",
+          "minimum": 0,
+          "maximum": 65535
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  },
+  "parameters": {}
+}

@@ -8,7 +8,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace("Microsoft.EdgeZones")
 @service({
@@ -29,35 +28,38 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Provisioning State")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Updating State")
-  Updating,
+  Updating: "Updating",
 
   @doc("Deleting State")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Accepted State")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("The Azure Extended Zone registration status for a subscription")
-enum RegistrationState {
+union RegistrationState {
+  string,
+
   @doc("Subscription not registered for the Azure Extended Zone")
-  NotRegistered,
+  NotRegistered: "NotRegistered",
 
   @doc("Subscription pending registration for the Azure Extended Zone")
-  PendingRegister,
+  PendingRegister: "PendingRegister",
 
   @doc("Subscription is registered for the Azure Extended Zone")
-  Registered,
+  Registered: "Registered",
 
   @doc("Subscription is pending unregistering for the Azure Extended Zone")
-  PendingUnregister,
+  PendingUnregister: "PendingUnregister",
 }
 
 @doc("The properties of an Extended Zone resource.")
@@ -118,19 +120,6 @@ model ExtendedZone is ProxyResource<ExtendedZoneProperties> {
   name: string;
 }
 
-// We will use this in an interface
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations must be inside an interface declaration."
-@autoRoute
-@armResourceAction(TResource)
-@post
-@doc("Arm Resource Action Taking no request body object and returning result object")
-op ArmResourceActionNoBodySync<
-  TResource extends ArmResource,
-  TBaseParameters = BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResource> | ErrorResponse;
-
 @doc("ExtendedZone operations")
 @armResourceOperations
 interface ExtendedZones {
@@ -141,8 +130,8 @@ interface ExtendedZones {
   listBySubscription is ArmListBySubscription<ExtendedZone>;
 
   @doc("Registers a subscription for an Extended Zone")
-  register is ArmResourceActionNoBodySync<ExtendedZone>;
+  register is ArmResourceActionSync<ExtendedZone, void, ExtendedZone>;
 
   @doc("Unregisters a subscription for an Extended Zone")
-  unregister is ArmResourceActionNoBodySync<ExtendedZone>;
+  unregister is ArmResourceActionSync<ExtendedZone, void, ExtendedZone>;
 }

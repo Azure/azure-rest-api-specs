@@ -7411,6 +7411,10 @@
           "description": "The integration runtime reference.",
           "$ref": "../artifacts.json#/definitions/IntegrationRuntimeReference"
         },
+        "continuationSettings": {
+          "description": "Continuation settings for execute data flow activity.",
+          "$ref": "#/definitions/ContinuationSettingsReference"
+        },
         "compute": {
           "description": "Compute properties for data flow activity.",
           "type": "object",
@@ -7445,6 +7449,24 @@
       "required": [
         "dataflow"
       ]
+    },
+    "ContinuationSettingsReference": {
+      "description": "Continuation settings for execute data flow activity.",
+      "type": "object",
+      "properties": {
+        "continuationTtlInMinutes": {
+          "description": "Continuation TTL in minutes.",
+          "type": "object"
+        },
+        "idleCondition": {
+          "description": "Idle condition.",
+          "type": "object"
+        },
+        "customizedCheckpointKey": {
+          "description": "Customized checkpoint key.",
+          "type": "object"
+        }
+      }
     },
     "DataFlowComputeType": {
       "description": "All available DataFlowComputeType values.",
@@ -7531,16 +7553,8 @@
           "description": "The query text. Type: string (or Expression with resultType string)."
         },
         "type": {
-          "x-ms-enum": {
-            "name": "ScriptType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Query",
-            "NonQuery"
-          ],
-          "type": "string",
-          "description": "The type of the query. Type: string."
+          "type": "object",
+          "description": "The type of the query. Please refer to the ScriptType for valid options. Type: string (or Expression with resultType string)."
         },
         "parameters": {
           "type": "array",
@@ -7626,6 +7640,18 @@
           "type": "object",
           "description": "The wait time to get a response from SharePoint Online. Default value is 5 minutes (00:05:00). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
+      }
+    },
+    "ScriptType": {
+      "description": "The type of the ScriptActivityScriptBlock.",
+      "type": "string",
+      "enum": [
+        "Query",
+        "NonQuery"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptType",
+        "modelAsString": true
       }
     },
     "SqlPartitionOption": {
@@ -8012,7 +8038,11 @@
       "properties": {
         "SOQLQuery": {
           "type": "object",
-          "description": "Database query. Type: string (or Expression with resultType string)."
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
         },
         "includeDeletedObjects": {
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
@@ -8031,7 +8061,11 @@
       "properties": {
         "SOQLQuery": {
           "type": "object",
-          "description": "Database query. Type: string (or Expression with resultType string)."
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
         },
         "includeDeletedObjects": {
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
@@ -8134,7 +8168,8 @@
             "Constant",
             "Field",
             "Unary",
-            "Binary"
+            "Binary",
+            "NAry"
           ],
           "type": "string",
           "description": "Type of expressions supported by the system. Type: string."
@@ -8143,9 +8178,13 @@
           "description": "Value for Constant/Field Type: string.",
           "type": "string"
         },
-        "operator": {
-          "description": "Expression operator value Type: string.",
-          "type": "string"
+        "operators": {
+          "description": "Expression operator value Type: list of strings.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Type: string."
+          }
         },
         "operands": {
           "description": "List of nested expressions.",
