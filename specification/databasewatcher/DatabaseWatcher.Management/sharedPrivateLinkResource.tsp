@@ -12,7 +12,12 @@ using TypeSpec.Rest;
 @armResourceOperations
 interface SharedPrivateLinkResources {
   get is ArmResourceRead<SharedPrivateLinkResource>;
-  create is ArmResourceCreateOrUpdateAsync<SharedPrivateLinkResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    SharedPrivateLinkResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<SharedPrivateLinkResource>;
   listByParent is ArmResourceListByParent<SharedPrivateLinkResource>;
 }
