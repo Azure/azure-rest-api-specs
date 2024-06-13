@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace Microsoft.AzureCoreExperiencesAssistant;
+namespace Microsoft.PortalServices;
 
 @doc("Request object to the assistant")
 model AssistantRequest {
