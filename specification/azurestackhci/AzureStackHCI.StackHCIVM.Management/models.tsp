@@ -946,6 +946,13 @@ model MarketplaceGalleryImageProperties {
   @doc("The observed state of marketplace gallery images")
   @visibility("read")
   status?: MarketplaceGalleryImageStatus;
+
+  @doc("Resource ID of the source virtual machine from whose OS disk the gallery image is created.")
+  sourceVirtualMachineId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualMachineInstance";
+    }
+  ]>;
 }
 
 @doc("The observed state of marketplace gallery images")
@@ -1093,6 +1100,9 @@ model VirtualHardDiskProperties {
   @doc("The observed state of virtual hard disks")
   @visibility("read")
   status?: VirtualHardDiskStatus;
+
+  @doc("SAS URL for uploading the virtual hard disk. This URL provides secure, time-limited access to upload data directly to an Azure managed virtual hard disk.")
+  uploadSasUrl?: string;
 }
 
 @doc("The observed state of virtual hard disks")
