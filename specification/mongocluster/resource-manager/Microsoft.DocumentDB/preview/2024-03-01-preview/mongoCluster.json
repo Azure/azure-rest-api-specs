@@ -1119,21 +1119,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.PrivateEndpointConnection": {
-      "type": "object",
-      "description": "The private endpoint connection resource",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The private endpoint connection properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "ConnectionString": {
       "type": "object",
       "description": "Connection string for the mongo cluster",
@@ -1365,7 +1350,7 @@
           "type": "array",
           "description": "List of private endpoint connections.",
           "items": {
-            "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         }

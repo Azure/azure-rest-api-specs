@@ -192,7 +192,7 @@ model Encryption {
   @doc("The URI of the key vault.")
   keyVaultUri: string;
 
-  ...ManagedServiceIdentityProperty;
+  ...Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("Elastic San Pool Properties")

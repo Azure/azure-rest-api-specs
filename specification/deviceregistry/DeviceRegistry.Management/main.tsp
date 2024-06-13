@@ -47,22 +47,8 @@ interface OperationStatus {
 
     ...LocationParameter,
 
-    @path
-    @segment("operationStatuses")
-    @minLength(1)
-    @doc("The ID of an ongoing async operation.")
-    @armCommonParameter(
-      "OperationIdParameter",
-      Azure.ResourceManager.CommonTypes.Versions.v3
-    )
-    @armCommonParameter(
-      "OperationIdParameter",
-      Azure.ResourceManager.CommonTypes.Versions.v4
-    )
-    @armCommonParameter(
-      "OperationIdParameter",
-      Azure.ResourceManager.CommonTypes.Versions.v5
-    )
-    operationId: string,
+    ...Foundations.OperationIdParameter,
   ): ArmResponse<OperationStatusResult> | ErrorResponse;
 }
+
+@@segment(OperationStatus.get::parameters.operationId, "operationStatuses");
