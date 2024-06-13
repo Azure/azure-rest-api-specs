@@ -42,20 +42,23 @@ union ProvisioningState {
 union ProfileType {
   string,
 
-  @doc("Used for signing files which are distributed publicly.")
+  @doc("Used for signing code files which are distributed publicly.")
   PublicTrust: "PublicTrust",
 
-  @doc("Used for signing files which are distributed internally within organization or group boundary.")
+  @doc("Used for signing code files which are distributed internally within organization or group boundary.")
   PrivateTrust: "PrivateTrust",
 
   @doc("Used for signing CI policy files.")
   PrivateTrustCIPolicy: "PrivateTrustCIPolicy",
 
-  @doc("Used for signing files which are run in secure vbs enclave.")
+  @doc("Used for signing code files which are run in secure vbs enclave.")
   VBSEnclave: "VBSEnclave",
 
-  @doc("Used for signing files for testing purpose.")
+  @doc("Used for signing code files for testing purpose.")
   PublicTrustTest: "PublicTrustTest",
+
+  @doc("Used for signing content files.")
+  C2PAContentCredentials: "C2PAContentCredentials",
 }
 
 @doc("Status of the certificate profiles.")
