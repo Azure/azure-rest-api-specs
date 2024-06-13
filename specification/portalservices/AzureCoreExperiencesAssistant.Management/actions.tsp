@@ -20,17 +20,13 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface AzureCoreExperiencesAssistant {
   @doc("Send a chat to the assistant")
   @armResourceAction(AssistantRequest)
-  @route("{resourceId}/providers/Microsoft.PortalServices/")
+  @route("/providers/Microsoft.PortalServices")
   @post
   invokeAssistant(
     ...ApiVersionParameter,
 
-    @doc("The ARM Id of the resource we are invoking the request on")
-    @path
-    resourceId: armResourceIdentifier,
-
     @doc("The request body.")
     @body
     assistantRequest: AssistantRequest,
-  ): AssistantResponse | ErrorResponse;
+  ): ArmResponse<AssistantResponse> | ErrorResponse;
 }
