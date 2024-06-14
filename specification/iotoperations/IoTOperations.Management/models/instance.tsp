@@ -42,31 +42,4 @@ model InstanceProperties {
   @doc("The Azure IoT Operations version.")
   @visibility("read")
   version?: string;
-
-  @doc("Observability configurations.")
-  @visibility("read", "create")
-  configuration: ConfigurationProperties;
-}
-
-@doc("The configuration of a Instance resource.")
-model ConfigurationProperties {
-  @doc("The Azure IoT Operations version.")
-  observability: ObservabilityProperties;
-}
-
-@doc("The metrics configuration.")
-model ObservabilityProperties {
-  @doc("The metrics properties.")
-  metrics?: MetricsProperties;
-}
-
-@doc("The metrics properties.")
-model MetricsProperties {
-  @doc("The OpenTelemetry Collector address.")
-  opentelemetryCollectorAddress: string;
-
-  @minValue(1)
-  @maxValue(300)
-  @doc("Metrics interval.")
-  exportIntervalSeconds?: int32;
 }

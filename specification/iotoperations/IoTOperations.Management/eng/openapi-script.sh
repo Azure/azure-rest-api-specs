@@ -36,6 +36,8 @@ for file in resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/
 done
 
 for file in resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/examples/*.json; do
+
+    # The following Jq commands replace ids with properly formatted ARM Ids
     operationId=$(jq -r '.operationId' $file)
     if [[ $operationId == Instance* ]]; then
         jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("Instance") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
@@ -54,6 +56,9 @@ for file in resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/
     elif [[ $operationId == DataFlow* ]]; then
         jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("DataFlow") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123/dataflows/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
     fi
+
+    # The following Jq command chops down numbers that are greater than 10000 to 10000, the OAV generate examples tool will not respect the min/max value required by typespec
+    jq 'walk(if type == "number" then . % 10000 else . end)' $file > temp.json && mv temp.json $file
 done
 
 # Copy the examples to the management directory

@@ -17,6 +17,7 @@ import "./models/dataflows/dataflows.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -106,6 +107,8 @@ interface DataFlow {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowResource>;
   update is ArmTagsPatchSync<DataFlowResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataFlowResource>;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("Dataflow_ListByProfileResource")
   listByResourceGroup is ArmResourceListByParent<DataFlowResource>;
 }
 
