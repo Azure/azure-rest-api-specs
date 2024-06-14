@@ -55,11 +55,14 @@ model FleetUpdateStrategyProperties {
 interface FleetUpdateStrategies {
   get is ArmResourceRead<FleetUpdateStrategy>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE AT NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FleetUpdateStrategy,
     Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
       IfMatchParameters<FleetUpdateStrategy> &
-      IfNoneMatchParameters<FleetUpdateStrategy>
+      IfNoneMatchParameters<FleetUpdateStrategy>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "deprecated" "Existing API"
