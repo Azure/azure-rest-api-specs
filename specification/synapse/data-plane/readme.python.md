@@ -12,11 +12,7 @@ package-version: 0.1.0
 clear-output-folder: true
 credential-scopes: https://dev.azuresynapse.net/.default
 batch:
-  - package-spark: true
   - package-artifacts: true
-  - package-access-control: true
-  - package-vnet: true
-  - package-monitoring: true
 ```
 ``` yaml $(package-spark)
 no-namespace-folders: true
