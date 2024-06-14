@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "ruleName": "ExampleIpFirewallRule",
+    "api-version": "2023-05-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/firewallRules/ExampleIpFirewallRule",
+        "type": "Microsoft.Synapse/workspaces/firewallRules",
+        "name": "ExampleIpFirewallRule",
+        "properties": {
+          "startIpAddress": "10.0.0.0",
+          "endIpAddress": "10.0.0.254",
+          "provisioningState": "Deleting"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2023-05-01",
+        "Location": "https://management.azure.com/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-05-01"
+      }
+    },
+    "204": {}
+  }
+}
