@@ -10,7 +10,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 2
+        # Checkout all history for all branches.  Required to merge origin/main.
+        fetch-depth: 0
+
+    - name: git merge origin/main
+      run: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/main
 
     - name: Setup Node and run `npm ci`
       uses: ./.github/actions/setup-node-npm-ci
