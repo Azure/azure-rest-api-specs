@@ -8,9 +8,12 @@ jobs:
     vmImage: ubuntu-22.04
 
   steps:
+  - script: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/main
+    displayName: git merge origin/main
+
   - template: /eng/pipelines/templates/steps/npm-install.yml
 
   - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
+      $(Build.SourcesDirectory)/eng/scripts/TypeSpec-Validation.ps1 -GitClean -BaseCommitish HEAD~2 -Verbose
     displayName: Validate Impacted Specs
     ignoreLASTEXITCODE: true
