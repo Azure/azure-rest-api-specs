@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Web PubSub Service REST API",
-    "version": "2023-07-01"
+    "version": "2024-01-01"
   },
   "paths": {
     "/api/health": {
@@ -230,6 +230,21 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "clientType",
+            "description": "The type of client. Case-insensitive. If not set, it's \"Default\". For Web PubSub for Socket.IO, only the default value is supported. For Web PubSub, the valid values are 'Default' and 'MQTT'.",
+            "type": "string",
+            "default": "Default",
+            "enum": [
+              "Default",
+              "MQTT"
+            ],
+            "x-ms-enum": {
+              "name": "WebPubSubClientType",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
