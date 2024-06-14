@@ -1,4 +1,4 @@
-name: Setup Node 20 and run `npm ci`
+name: Setup Node 20 and run `npm install --no-package-lock`
 description: Uses specified Node version and runs npm commands to set up the environment for REST API CI
 
 inputs:
@@ -14,7 +14,7 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - run: npm ci
+    - run: npm install --no-package-lock
       shell: bash
 
     - run: npm ls -a

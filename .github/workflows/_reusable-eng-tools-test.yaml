@@ -50,7 +50,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}.x
 
-      - run: npm ci
+      - run: npm install --no-package-lock
         shell: pwsh
 
       - run: npm ls -a
