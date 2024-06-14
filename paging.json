@@ -1,0 +1,85 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Paging Test Service",
+    "description": "Long-running Operation for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/paging/noitemname": {
+      "post": {
+        "x-ms-pageable": {
+          "nextLinkName": "@odata.nextLink",
+          "itemName": "values",
+          "operationName": "examplePagingNext"
+        },
+        "operationId": "examplePaging",
+        "description": "Paging whose operation we want to override to have subsequent calls be post.",
+        "responses": {
+          "200": {
+            "description": "A list of products",
+            "schema": {
+              "$ref": "#/definitions/ProductResultValue"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/{nextLink}": {
+      "post": {
+        "operationId": "examplePagingNext",
+        "description": "Subsequent post calls to the next link",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for list operation.",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of products",
+            "schema": {
+              "$ref": "#/definitions/ProductResultValue"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProductResultValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        },
+        "@odata.nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
