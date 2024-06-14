@@ -272,6 +272,7 @@ model ProviderSpecificProperties {
   /**
    * The provider type. For example, the value can be SapHana.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @visibility("read", "create")
   providerType: string;
 }

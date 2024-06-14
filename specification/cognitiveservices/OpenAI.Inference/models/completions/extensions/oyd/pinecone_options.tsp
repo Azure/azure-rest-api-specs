@@ -12,15 +12,15 @@ using Azure.ClientGenerator.Core;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-A specific representation of configurable options for Pinecone when using it as an Azure OpenAI chat
-extension.
-""")
+  A specific representation of configurable options for Pinecone when using it as an Azure OpenAI chat
+  extension.
+  """)
 model PineconeChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
   @doc("""
-  The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
-  default value for Pinecone.
-  """)
+    The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
+    default value for Pinecone.
+    """)
   type: AzureChatExtensionType.pinecone;
 
   @doc("The parameters to use when configuring Azure OpenAI chat extensions.")

@@ -51,7 +51,7 @@ model ThreadRun {
   instructions: string;
 
   @doc("The overridden enabled tools used for this assistant thread run.")
-  tools: ToolDefinition[] = [];
+  tools: ToolDefinition[] = #[];
 
   @encodedName("application/json", "created_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
@@ -195,9 +195,9 @@ model CreateRunOptions {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "additional_instructions")
   @doc("""
-  Additional instructions to append at the end of the instructions for the run. This is useful for modifying the behavior
-  on a per-run basis without overriding other instructions.
-  """)
+    Additional instructions to append at the end of the instructions for the run. This is useful for modifying the behavior
+    on a per-run basis without overriding other instructions.
+    """)
   additionalInstructions?: string | null;
 
   /** Adds additional messages to the thread before creating the run. */
@@ -328,6 +328,7 @@ union RunStatus {
 @doc("An abstract representation of a required action for an assistant thread run to continue.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RequiredAction {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
