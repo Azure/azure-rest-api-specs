@@ -8,6 +8,7 @@ using Microsoft.AVS;
 
 // client
 @@clientName(Microsoft.AVS, "Avs", "java");
+@@clientName(Microsoft.AVS, "AVS", "python");
 
 // flatten
 #suppress "deprecated" "property flatten for SDK backward compatibility"
