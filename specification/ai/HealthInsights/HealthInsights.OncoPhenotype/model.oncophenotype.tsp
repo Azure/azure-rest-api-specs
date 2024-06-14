@@ -49,8 +49,8 @@ model OncoPhenotypeInference {
   evidence?: InferenceEvidence[];
 
   @doc("""
-An identifier for a clinical case, if there are multiple clinical cases regarding the same patient.
-""")
+    An identifier for a clinical case, if there are multiple clinical cases regarding the same patient.
+    """)
   caseId?: string;
 }
 
@@ -59,15 +59,15 @@ model OncoPhenotypeModelConfiguration {
   ...ModelConfiguration;
 
   @doc("""
-A list of inference types to be inferred for the current request.
-This could be used if only part of the Onco Phenotype inferences are required.
-If this list is omitted or empty, the model will return all the inference types.
-""")
+    A list of inference types to be inferred for the current request.
+    This could be used if only part of the Onco Phenotype inferences are required.
+    If this list is omitted or empty, the model will return all the inference types.
+    """)
   inferenceTypes?: OncoPhenotypeInferenceType[];
 
   @doc("""
-An indication whether to perform a preliminary step on the patient's documents to determine whether they relate to a Cancer case.
-""")
+    An indication whether to perform a preliminary step on the patient's documents to determine whether they relate to a Cancer case.
+    """)
   checkForCancerCase?: boolean = false;
 }
 

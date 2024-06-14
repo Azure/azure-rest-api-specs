@@ -52,9 +52,9 @@ model DocumentModelAnalyzeRequestParams {
   pages?: string;
 
   @doc("""
-  Locale hint for text recognition and document analysis.  Value may contain only
-  the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").
-  """)
+    Locale hint for text recognition and document analysis.  Value may contain only
+    the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").
+    """)
   @query
   locale?: string;
 
@@ -208,9 +208,9 @@ interface DocumentModels {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("""
-  Generates authorization to copy a document model to this location with
-  specified modelId and optional description.
-  """)
+    Generates authorization to copy a document model to this location with
+    specified modelId and optional description.
+    """)
   @route("/documentModels:authorizeCopy")
   @post
   authorizeModelCopy is DocumentIntelligenceOperation<
