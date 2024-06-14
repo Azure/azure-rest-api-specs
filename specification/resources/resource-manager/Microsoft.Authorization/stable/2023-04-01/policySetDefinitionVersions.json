@@ -679,6 +679,10 @@
           "type": "string",
           "description": "The ID of the policy definition or policy set definition."
         },
+        "definitionVersion": {
+          "type": "string",
+          "description": "The version of the policy definition to use."
+        },
         "parameters": {
           "description": "The parameter values for the referenced policy rule. The keys are the parameter names.",
           "$ref": "./policyAssignments.json#/definitions/ParameterValues"
@@ -795,7 +799,8 @@
       "required": true,
       "type": "string",
       "pattern": "^\\d+\\.\\d+\\.\\d+$",
-      "description": "The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number"
+      "description": "The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+      "x-ms-parameter-location": "method"
     },
     "PolicySetDefinitionsFilterParameter": {
       "name": "$filter",

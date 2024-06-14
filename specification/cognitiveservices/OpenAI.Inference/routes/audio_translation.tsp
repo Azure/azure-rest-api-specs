@@ -19,8 +19,8 @@ namespace Azure.OpenAI;
 #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "non-model response value needed"
 @doc("""
-Gets English language transcribed text and associated metadata from provided spoken audio data.
-""")
+  Gets English language transcribed text and associated metadata from provided spoken audio data.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @actionSeparator("/")
 @action("audio/translations")
@@ -34,8 +34,8 @@ op getAudioTranslationAsPlainText is Azure.Core.ResourceAction<
 
 #suppress "@azure-tools/typespec-azure-core/byos" "representation of existing multipart/form-data operation"
 @doc("""
-Gets English language transcribed text and associated metadata from provided spoken audio data.
-""")
+  Gets English language transcribed text and associated metadata from provided spoken audio data.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @actionSeparator("/")
 @action("audio/translations")

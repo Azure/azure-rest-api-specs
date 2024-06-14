@@ -600,7 +600,7 @@ model Location is ProxyResource<LocationProperties> {
   @key("location")
   @path
   @segment("locations")
-  @Azure.ResourceManager.Private.armCommonParameter(
+  @Azure.ResourceManager.CommonTypes.Private.armCommonParameter(
     "LocationParameter",
     Azure.ResourceManager.CommonTypes.Versions.v5
   )
@@ -672,11 +672,11 @@ model PrivateCloudUpdateProperties {
   encryption?: Encryption;
 
   @doc("""
-Array of additional networks noncontiguous with networkBlock. Networks must be
-unique and non-overlapping across VNet in your subscription, on-premise, and
-this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
-(A.B.C.D/X).
-""")
+    Array of additional networks noncontiguous with networkBlock. Networks must be
+    unique and non-overlapping across VNet in your subscription, on-premise, and
+    this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
+    (A.B.C.D/X).
+    """)
   extendedNetworkBlocks?: string[];
 
   @doc("The type of DNS zone to use.")
@@ -703,11 +703,11 @@ model PrivateCloudProperties {
   encryption?: Encryption;
 
   @doc("""
-Array of additional networks noncontiguous with networkBlock. Networks must be
-unique and non-overlapping across VNet in your subscription, on-premise, and
-this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
-(A.B.C.D/X).
-""")
+    Array of additional networks noncontiguous with networkBlock. Networks must be
+    unique and non-overlapping across VNet in your subscription, on-premise, and
+    this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
+    (A.B.C.D/X).
+    """)
   extendedNetworkBlocks?: string[];
 
   @doc("The provisioning state")
@@ -722,10 +722,10 @@ this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
   endpoints?: Endpoints;
 
   @doc("""
-The block of addresses should be unique across VNet in your subscription as
-well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where
-A,B,C,D are between 0 and 255, and X is between 0 and 22
-""")
+    The block of addresses should be unique across VNet in your subscription as
+    well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where
+    A,B,C,D are between 0 and 255, and X is between 0 and 22
+    """)
   networkBlock: string;
 
   @doc("Network used to access vCenter Server and NSX-T Manager")
@@ -761,15 +761,15 @@ A,B,C,D are between 0 and 255, and X is between 0 and 22
   externalCloudLinks?: string[];
 
   @doc("""
-A secondary expressRoute circuit from a separate AZ. Only present in a
-stretched private cloud
-""")
+    A secondary expressRoute circuit from a separate AZ. Only present in a
+    stretched private cloud
+    """)
   secondaryCircuit?: Circuit;
 
   @doc("""
-Flag to indicate whether the private cloud has the quota for provisioned NSX
-Public IP count raised from 64 to 1024
-""")
+    Flag to indicate whether the private cloud has the quota for provisioned NSX
+    Public IP count raised from 64 to 1024
+    """)
   @visibility("read")
   nsxPublicIpQuotaRaised?: NsxPublicIpQuotaRaisedEnum;
 
@@ -887,15 +887,15 @@ model IdentitySource {
   ssl?: SslEnum;
 
   @doc("""
-The ID of an Active Directory user with a minimum of read-only access to Base
-DN for users and group
-""")
+    The ID of an Active Directory user with a minimum of read-only access to Base
+    DN for users and group
+    """)
   username?: string;
 
   @doc("""
-The password of the Active Directory user with a minimum of read-only access to
-Base DN for users and groups.
-""")
+    The password of the Active Directory user with a minimum of read-only access to
+    Base DN for users and groups.
+    """)
   @secret
   password?: string;
 }
@@ -1045,9 +1045,9 @@ model DiskPoolVolume {
   lunName: string;
 
   @doc("""
-Mode that describes whether the LUN has to be mounted as a datastore or
-attached as a LUN
-""")
+    Mode that describes whether the LUN has to be mounted as a datastore or
+    attached as a LUN
+    """)
   mountOption?: MountOptionEnum = MountOptionEnum.MOUNT;
 
   @doc("Device path")
@@ -1173,16 +1173,16 @@ model GlobalReachConnectionProperties {
   provisioningState?: GlobalReachConnectionProvisioningState;
 
   @doc("""
-The network used for global reach carved out from the original network block
-provided for the private cloud
-""")
+    The network used for global reach carved out from the original network block
+    provided for the private cloud
+    """)
   @visibility("read")
   addressPrefix?: string;
 
   @doc("""
-Authorization key from the peer express route used for the global reach
-connection
-""")
+    Authorization key from the peer express route used for the global reach
+    connection
+    """)
   authorizationKey?: string;
 
   @doc("The connection status of the global reach connection")
@@ -1190,15 +1190,15 @@ connection
   circuitConnectionStatus?: GlobalReachConnectionStatus;
 
   @doc("""
-Identifier of the ExpressRoute Circuit to peer with in the global reach
-connection
-""")
+    Identifier of the ExpressRoute Circuit to peer with in the global reach
+    connection
+    """)
   peerExpressRouteCircuit?: string;
 
   @doc("""
-The ID of the Private Cloud's ExpressRoute Circuit that is participating in the
-global reach connection
-""")
+    The ID of the Private Cloud's ExpressRoute Circuit that is participating in the
+    global reach connection
+    """)
   expressRouteId?: string;
 }
 
@@ -1331,9 +1331,9 @@ union DhcpTypeEnum {
   string,
 }
 @doc("""
-Base class for WorkloadNetworkDhcpServer and WorkloadNetworkDhcpRelay to
-inherit from
-""")
+  Base class for WorkloadNetworkDhcpServer and WorkloadNetworkDhcpRelay to
+  inherit from
+  """)
 @discriminator("dhcpType")
 model WorkloadNetworkDhcpEntity {
   @doc("Type of DHCP: SERVER or RELAY.")
@@ -1360,7 +1360,7 @@ model WorkloadNetworkDhcpServer extends WorkloadNetworkDhcpEntity {
   serverAddress?: string;
 
   @doc("DHCP Server Lease Time.")
-  leaseTime?: int32;
+  leaseTime?: int64;
 
   @doc("Type of DHCP: SERVER or RELAY.")
   dhcpType: DhcpTypeEnum.SERVER;
@@ -1945,9 +1945,9 @@ union ScriptCmdletAudience {
 @doc("An parameter that the script will accept")
 model ScriptParameter {
   @doc("""
-The type of parameter the script is expecting. psCredential is a
-PSCredentialObject
-""")
+    The type of parameter the script is expecting. psCredential is a
+    PSCredentialObject
+    """)
   @visibility("read")
   type?: ScriptParameterTypes;
 
@@ -1959,9 +1959,9 @@ PSCredentialObject
   description?: string;
 
   @doc("""
-Should this parameter be visible to arm and passed in the parameters argument
-when executing
-""")
+    Should this parameter be visible to arm and passed in the parameters argument
+    when executing
+    """)
   @visibility("read")
   visibility?: VisibilityParameterEnum;
 
@@ -1992,15 +1992,15 @@ model ScriptExecutionProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("""
-Parameters that will be hidden/not visible to ARM, such as passwords and
-credentials
-""")
+    Parameters that will be hidden/not visible to ARM, such as passwords and
+    credentials
+    """)
   hiddenParameters?: ScriptExecutionParameter[];
 
   @doc("""
-Error message if the script was able to run, but if the script itself had
-errors or powershell threw an exception
-""")
+    Error message if the script was able to run, but if the script itself had
+    errors or powershell threw an exception
+    """)
   failureReason?: string;
 
   @doc("Time limit for execution")
@@ -2224,3 +2224,10 @@ model ResourceSkuRequired {
   @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
   sku: Foundations.Sku;
 }
+
+@doc("The response of a {name} list operation.", Resource)
+@friendlyName(FriendlyNameFormat, Resource)
+model ResourceList<
+  Resource extends Foundations.Resource,
+  FriendlyNameFormat extends valueof string = "{name}List"
+> is Azure.Core.Page<Resource>;
