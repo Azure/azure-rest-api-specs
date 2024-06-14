@@ -1434,7 +1434,7 @@
           "type": "string"
         },
         "instance": {
-          "description": "The instance name. Only 2 digits are allowed.",
+          "description": "The instance number. Only 2 digits are allowed.",
           "minLength": 1,
           "pattern": "^\\d{2}$",
           "type": "string"
@@ -1445,10 +1445,9 @@
           "pattern": "^GMT[+-]\\d+$",
           "type": "string"
         },
-        "suffix": {
-          "description": "The suffix of the port. 2 digits only.",
-          "default": "13",
-          "pattern": "^\\d{2}$",
+        "port": {
+          "description": "The port of the SOAP connection to SAP Control.",
+          "pattern": "^\\d{1,5}$",
           "type": "string"
         },
         "httpsConfiguration": {
