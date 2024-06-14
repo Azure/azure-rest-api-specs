@@ -56,6 +56,9 @@ jobs:
     vmImage: $(OSVmImage)
 
   steps:
+  - script: git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" merge -Xours origin/main
+    displayName: git merge origin/main
+
   - template: /eng/pipelines/templates/steps/npm-install.yml
 
   - pwsh: |
