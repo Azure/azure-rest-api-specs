@@ -5288,16 +5288,27 @@
         }
       }
     },
-    "IntegrationRuntimeReference": {
-      "description": "Integration runtime reference type.",
+    "Reference": {
+      "discriminator": "type",
+      "description": "Base reference type.",
       "properties": {
         "type": {
           "type": "string",
-          "description": "Type of integration runtime.",
-          "enum": [
-            "IntegrationRuntimeReference"
-          ]
-        },
+          "description": "Type of reference."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "IntegrationRuntimeReference": {
+      "description": "Integration runtime reference type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Reference"
+        }
+      ],
+      "properties": {
         "referenceName": {
           "type": "string",
           "description": "Reference integration runtime name."
@@ -5308,9 +5319,9 @@
         }
       },
       "required": [
-        "type",
         "referenceName"
-      ]
+      ],
+      "x-ms-discriminator-value": "IntegrationRuntimeReference"
     },
     "IntegrationRuntimeResource": {
       "description": "Integration runtime resource type.",
@@ -6094,13 +6105,15 @@
     },
     "PipelineReference": {
       "description": "Pipeline reference type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Reference"
+        }
+      ],
       "properties": {
         "type": {
           "type": "string",
-          "description": "Pipeline reference type.",
-          "enum": [
-            "PipelineReference"
-          ]
+          "description": "Type of reference"
         },
         "referenceName": {
           "type": "string",
@@ -6114,7 +6127,8 @@
       "required": [
         "type",
         "referenceName"
-      ]
+      ],
+      "x-ms-discriminator-value": "PipelineReference"
     },
     "TriggerPipelineReference": {
       "description": "Pipeline that needs to be triggered with the given parameters.",
@@ -6259,13 +6273,15 @@
     },
     "DatasetReference": {
       "description": "Dataset reference type.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Reference"
+        }
+      ],
       "properties": {
         "type": {
           "type": "string",
-          "description": "Dataset reference type.",
-          "enum": [
-            "DatasetReference"
-          ]
+          "description": "Type of reference"
         },
         "referenceName": {
           "type": "string",
@@ -6279,7 +6295,8 @@
       "required": [
         "type",
         "referenceName"
-      ]
+      ],
+      "x-ms-discriminator-value": "DatasetReference"
     },
     "DatasetResource": {
       "description": "Dataset resource type.",
@@ -6318,18 +6335,12 @@
     "LinkedServiceReference": {
       "description": "Linked service reference type.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Reference"
+        }
+      ],
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Linked service reference type.",
-          "enum": [
-            "LinkedServiceReference"
-          ],
-          "x-ms-enum": {
-            "name": "Type",
-            "modelAsString": true
-          }
-        },
         "referenceName": {
           "type": "string",
           "description": "Reference LinkedService name."
@@ -6340,9 +6351,9 @@
         }
       },
       "required": [
-        "type",
         "referenceName"
-      ]
+      ],
+      "x-ms-discriminator-value": "LinkedServiceReference"
     },
     "LinkedServiceResource": {
       "description": "Linked service resource type.",
