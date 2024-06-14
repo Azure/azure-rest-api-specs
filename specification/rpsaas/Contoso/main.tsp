@@ -7,6 +7,7 @@ import "./employee.tsp";
 import "./nestedResourceType.tsp";
 import "./extensionResourceType.tsp";
 import "./cluster.tsp";
+import "./desk.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
