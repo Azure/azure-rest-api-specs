@@ -200,6 +200,12 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** The type of blob. */
     blobType?: string;
 
+    /** The current tier of the blob. */
+    accessTier?: string;
+
+    /** The previous tier of the blob. */
+    previousTier?: string;
+
     /** The path to the blob. */
     url?: string;
 
