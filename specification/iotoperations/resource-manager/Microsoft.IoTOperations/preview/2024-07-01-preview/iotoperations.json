@@ -282,6 +282,10 @@
               "$ref": "#/definitions/InstanceResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -594,6 +598,10 @@
               "$ref": "#/definitions/BrokerResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -956,6 +964,10 @@
               "$ref": "#/definitions/BrokerAuthenticationResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1338,6 +1350,10 @@
               "$ref": "#/definitions/BrokerAuthorizationResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1720,6 +1736,10 @@
               "$ref": "#/definitions/BrokerListenerResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2068,6 +2088,10 @@
               "$ref": "#/definitions/DataFlowEndpointResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2392,6 +2416,10 @@
               "$ref": "#/definitions/DataFlowProfileResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2553,7 +2581,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles/{dataflowProfileName}/dataflows": {
       "get": {
-        "operationId": "Dataflow_ListByProfileResource",
+        "operationId": "DataFlow_ListByProfileResource",
         "tags": [
           "DataFlow"
         ],
@@ -2602,8 +2630,8 @@
           }
         },
         "x-ms-examples": {
-          "Dataflow_ListByProfileResource": {
-            "$ref": "./examples/Dataflow_ListByProfileResource_MaximumSet_Gen.json"
+          "DataFlow_ListByProfileResource": {
+            "$ref": "./examples/DataFlow_ListByProfileResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2740,6 +2768,10 @@
               "$ref": "#/definitions/DataFlowResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3127,11 +3159,7 @@
         "properties": {
           "$ref": "#/definitions/BrokerAuthenticationProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3326,11 +3354,7 @@
         "properties": {
           "$ref": "#/definitions/BrokerAuthorizationProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3484,11 +3508,7 @@
         "properties": {
           "$ref": "#/definitions/BrokerListenerProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3673,11 +3693,7 @@
         "properties": {
           "$ref": "#/definitions/BrokerProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5063,11 +5079,7 @@
         "properties": {
           "$ref": "#/definitions/DataFlowEndpointProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5172,11 +5184,7 @@
         "properties": {
           "$ref": "#/definitions/DataFlowProfileProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5289,11 +5297,7 @@
         "properties": {
           "$ref": "#/definitions/DataFlowProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5799,11 +5803,7 @@
         "properties": {
           "$ref": "#/definitions/InstanceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6692,8 +6692,7 @@
           "type": "integer",
           "format": "int64",
           "description": "The maximum length of the queue before messages start getting dropped.",
-          "minimum": 1,
-          "maximum": 9223372036854776000
+          "minimum": 1
         },
         "strategy": {
           "type": "string",

@@ -63,18 +63,18 @@ model DataFlowOperation {
 model DataFlowBuiltInTransformation {
   @doc("Enrich data from MQ State Store. Dataset references a key in MQ State Store.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  enrich?: DataFlowBuiltInTransformationEnrich[] = [];
+  enrich?: DataFlowBuiltInTransformationEnrich[] = #[];
 
   @doc("Filters input record or datapoints based on condition.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  filter?: DataFlowBuiltInTransformationFilter[] = [];
+  filter?: DataFlowBuiltInTransformationFilter[] = #[];
 
   @doc("ID of the transformation.")
   id: string;
 
   @doc("Maps input to output message.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  map?: DataFlowBuiltInTransformationMap[] = [];
+  map?: DataFlowBuiltInTransformationMap[] = #[];
 
   @doc("Serialization format. Optional; defaults to JSON.")
   serializationFormat?: SerializationFormat = SerializationFormat.Json;

@@ -82,13 +82,13 @@ model PrincipalDefinition {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  attributes?: Record<string>[] = [];
+  attributes?: Record<string>[] = #[];
 
   @doc("A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection.")
-  clientIds?: string[] = [];
+  clientIds?: string[] = #[];
 
   @doc("A list of usernames that match the clients. The usernames are case-sensitive and must match the usernames provided by the clients during authentication.")
-  usernames?: string[] = [];
+  usernames?: string[] = #[];
 }
 
 @doc("Broker Resource Rule properties. This defines the objects that represent the actions or topics, such as - method.Connect, method.Publish, etc.")
@@ -97,7 +97,7 @@ model BrokerResourceRule {
   method: BrokerResourceDefinitionMethods;
 
   @doc("A list of topics or topic patterns that match the topics that the clients can publish or subscribe to. This subfield is required if the method is Publish or Subscribe.")
-  topics?: string[] = [];
+  topics?: string[] = #[];
 }
 
 @doc("BrokerResourceDefinitionMethods methods allowed")

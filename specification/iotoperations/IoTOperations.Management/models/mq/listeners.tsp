@@ -148,10 +148,10 @@ model CertManagerIssuerRef {
 @doc("Subject Alternative Names (SANs) for certificate.")
 model SanForCert {
   @doc("DNS SANs.")
-  dns: string[] = [];
+  dns: string[] = #[];
 
   @doc("IP address SANs.")
-  ip: string[] = [];
+  ip: string[] = #[];
 }
 
 @doc("CertManagerIssuerKind properties")
