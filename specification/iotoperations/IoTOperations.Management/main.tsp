@@ -108,7 +108,7 @@ interface DataFlow {
   update is ArmTagsPatchSync<DataFlowResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataFlowResource>;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Dataflow_ListByProfileResource")
+  @operationId("DataFlow_ListByProfileResource")
   listByResourceGroup is ArmResourceListByParent<DataFlowResource>;
 }
 
