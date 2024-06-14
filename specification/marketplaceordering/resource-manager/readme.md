@@ -111,6 +111,16 @@ csharp:
   namespace: Microsoft.Azure.Management.MarketplaceOrdering
   output-folder: $(csharp-sdks-folder)/marketplaceordering/Microsoft.Azure.Management.MarketplaceOrdering/src/Generated
   clear-output-folder: true
+directive:
+  - from: Agreements.json
+    where: $.paths..responses.default.schema["$ref"]
+    transform: return $.replace(/ErrorResponse/, "CloudError")
+  - from: Agreements.json
+    where: $
+    transform: $.definitions.CloudError = $.definitions.ErrorResponse
+  - from: Agreements.json
+    where: $
+    transform: delete $.definitions.ErrorResponse
 ```
 
 
