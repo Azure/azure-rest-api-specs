@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2.0",
+    "operationId": "{operationId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "operationId": "{operationId}",
+        "created": "2021-04-20T22:43:14.9401559+00:00",
+        "status": "Succeeded",
+        "warning": {
+          "code": "dwgConversionProblem",
+          "details": [
+            {
+              "code": "warning",
+              "details": [
+                {
+                  "code": "automaticRepairPerformed",
+                  "message": "Automatically repaired invalid polygon. POLYGON ((52.557512889874715 3237.2266389202996, 52.557512889874772 3237.2266389202996, 56.16640116141366 3236.9496825301903, 52.557512889874715 3237.2266389202996))",
+                  "innererror": {
+                    "levelOrdinal": 0,
+                    "layerName": "A-WALL-SHEL-EXST",
+                    "geometry": "MULTIPOINT ((-122.130341223074 47.642036567433), (-122.130341223074 47.642036567433), (-122.130340426662 47.64203593971), (-122.130341223074 47.642036567433))",
+                    "code": null,
+                    "message": "Issue with entity or entities in this layer."
+                  }
+                },
+                {
+                  "code": "verticalPenetrationError",
+                  "message": "Encountered a vertical penetration unit (Name: MVP504) with no vertical penetration areas above or below it. Feature will be treated as a unit.",
+                  "innererror": {
+                    "levelOrdinal": 4,
+                    "layerName": "RM$AZURE",
+                    "geometry": "POLYGON ((-122.130497737611 47.641751989056, -122.130458179214 47.641725254031, -122.130477420927 47.641712250205, -122.130516979324 47.641738985223, -122.130497737611 47.641751989056))",
+                    "code": null,
+                    "message": "Issue with entity or entities in this layer."
+                  }
+                },
+                {
+                  "code": "wallOutsideLevel",
+                  "message": "Ignoring wall found outside level",
+                  "innererror": {
+                    "levelOrdinal": 0,
+                    "layerName": "S-COLS-EXST",
+                    "geometry": "POLYGON ((-122.130335088338 47.641260342151, -122.130329351718 47.641264219062, -122.130323615216 47.641260342071, -122.130329351836 47.641256465161, -122.130335088338 47.641260342151))",
+                    "code": null,
+                    "message": "Issue with entity or entities in this layer."
+                  }
+                },
+                {
+                  "code": "manifestWarning",
+                  "message": "Ignoring unexpected JSON property: unitProperties[0].nonWheelchairAccessible with value False"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "headers": {
+        "Resource-Location": "https://us.atlas.microsoft.com/conversions/{conversion-id}?api-version=2.0"
+      }
+    }
+  }
+}

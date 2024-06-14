@@ -269,10 +269,16 @@
         "operationId": "Conversion_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
-            "$ref": "./examples/conversion/Conversion_GetOperationStillRunning.json"
+            "$ref": "./examples/conversion/Conversion_GetOperation_Running.json"
+          },
+          "Get the status of an operation which has finished successfully": {
+            "$ref": "./examples/conversion/Conversion_GetOperation_Success.json"
           },
           "Get the status of an operation which has finished successfully, with non-fatal warnings": {
-            "$ref": "./examples/conversion/Conversion_GetOperation.json"
+            "$ref": "./examples/conversion/Conversion_GetOperation_Success_Warnings.json"
+          },
+          "Get the status of an operation which has failed": {
+            "$ref": "./examples/conversion/Conversion_GetOperation_Fail.json"
           }
         },
         "parameters": [
@@ -285,10 +291,19 @@
         ],
         "responses": {
           "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
+            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult2"
+            },
+            "headers": {
+              "Resource-Location": {
+                "type": "string",
+                "description": "If successful, a URI where details on the newly created resource can be found."
+              }
+            }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default2"
           }
         }
       }
