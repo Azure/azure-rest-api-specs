@@ -32,8 +32,13 @@ interface StorageContainers {
   @doc("Gets a storage container")
   get is ArmResourceRead<StorageContainer>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a storage container. Please note some properties can be set only during storage container creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<StorageContainer>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    StorageContainer,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("The operation to update a storage container.")
   update is ArmTagsPatchAsync<StorageContainer>;

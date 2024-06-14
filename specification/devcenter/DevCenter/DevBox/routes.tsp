@@ -265,9 +265,9 @@ interface DevBoxes {
   >;
 
   @doc("""
-    Lists customization groups on the Dev Box. Listed customization groups exclude 
-    task information unless specified via the include parameter.
-  """)
+      Lists customization groups on the Dev Box. Listed customization groups exclude 
+      task information unless specified via the include parameter.
+    """)
   @added(APIVersions.v2024_05_01_preview)
   listCustomizationGroups is StandardResourceOperations.ResourceList<
     CustomizationGroup,
@@ -279,8 +279,8 @@ interface DevBoxes {
   >;
 
   @doc("""
-    Gets a customization group.
-  """)
+      Gets a customization group.
+    """)
   @added(APIVersions.v2024_05_01_preview)
   getCustomizationGroup is StandardResourceOperations.ResourceRead<CustomizationGroup>;
 
@@ -309,9 +309,9 @@ interface DevBoxes {
       projectName: string;
 
       @doc("""
-        The AAD object id of the user. If value is 'me', the identity is taken from the 
-        authentication context.
-      """)
+          The AAD object id of the user. If value is 'me', the identity is taken from the 
+          authentication context.
+        """)
       @maxLength(36)
       @minLength(2)
       @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
@@ -354,9 +354,9 @@ interface DevBoxes {
       projectName: string;
 
       @doc("""
-        The AAD object id of the user. If value is 'me', the identity is taken from the 
-        authentication context.
-      """)
+          The AAD object id of the user. If value is 'me', the identity is taken from the 
+          authentication context.
+        """)
       @maxLength(36)
       @minLength(2)
       @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")

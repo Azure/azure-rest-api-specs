@@ -14,10 +14,10 @@ using Azure.ClientGenerator.Core;
 namespace Azure.OpenAI;
 
 @doc("""
-The configuration information for a completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  The configuration information for a completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 model CompletionsOptions {
   @doc("The prompts to generate completions from.")
   @clientName("Prompts", "csharp")
@@ -142,10 +142,10 @@ model CompletionsOptions {
 }
 
 @doc("""
-Representation of the response data from a completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  Representation of the response data from a completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 model Completions {
   @doc("A unique identifier associated with this completions response.")
   id: string;
@@ -159,9 +159,9 @@ model Completions {
   created: utcDateTime;
 
   @doc("""
-  Content filtering results for zero or more prompts in the request. In a streaming request,
-  results for different prompts may arrive at different times or in different orders.
-  """)
+    Content filtering results for zero or more prompts in the request. In a streaming request,
+    results for different prompts may arrive at different times or in different orders.
+    """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @encodedName("application/json", "prompt_filter_results")
   promptFilterResults?: ContentFilterResultsForPrompt[];
@@ -180,10 +180,10 @@ model Completions {
 }
 
 @doc("""
-The representation of a single prompt completion as part of an overall completions request.
-Generally, `n` choices are generated per provided prompt with a default value of 1.
-Token limits and other settings may limit the number of choices generated.
-""")
+  The representation of a single prompt completion as part of an overall completions request.
+  Generally, `n` choices are generated per provided prompt with a default value of 1.
+  Token limits and other settings may limit the number of choices generated.
+  """)
 model Choice {
   @doc("The generated text for a given completions prompt.")
   text: string;
@@ -192,10 +192,10 @@ model Choice {
   index: int32;
 
   @doc("""
-  Information about the content filtering category (hate, sexual, violence, self_harm), if it
-  has been detected, as well as the severity level (very_low, low, medium, high-scale that
-  determines the intensity and risk level of harmful content) and if it has been filtered or not.
-  """)
+    Information about the content filtering category (hate, sexual, violence, self_harm), if it
+    has been detected, as well as the severity level (very_low, low, medium, high-scale that
+    determines the intensity and risk level of harmful content) and if it has been filtered or not.
+    """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @encodedName("application/json", "content_filter_results")
   contentFilterResults?: ContentFilterResultsForChoice;
@@ -215,8 +215,8 @@ model Choice {
 alias NullableFloat = float32 | null;
 
 @doc("""
-Representation of a log probabilities model for a completions generation.
-""")
+  Representation of a log probabilities model for a completions generation.
+  """)
 model CompletionsLogProbabilityModel {
   @doc("The textual forms of tokens evaluated in this probability model.")
   tokens: string[];
