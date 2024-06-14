@@ -28,7 +28,8 @@ interface MongoClusters {
   /** Create or update a mongo cluster. Update overwrites all properties for the resource. To only modify some of the properties, use PATCH. */
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MongoCluster>;
   /** Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition. */
-  update is ArmResourcePatchAsync<MongoCluster, MongoClusterProperties>;
+  @parameterVisibility
+  update is ArmCustomPatchAsync<MongoCluster, MongoCluster>;
   /** Deletes a mongo cluster. */
   delete is ArmResourceDeleteWithoutOkAsync<MongoCluster>;
   /** List all the mongo clusters in a given resource group. */

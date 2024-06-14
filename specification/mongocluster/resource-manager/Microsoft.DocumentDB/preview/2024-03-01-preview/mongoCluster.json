@@ -380,7 +380,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MongoClusterUpdate"
+              "$ref": "#/definitions/MongoCluster"
             }
           }
         ],
@@ -1446,64 +1446,6 @@
             "description": "The mongo cluster resource is being dropped."
           }
         ]
-      }
-    },
-    "MongoClusterUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the MongoCluster.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/MongoClusterUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "MongoClusterUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the MongoCluster.",
-      "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login for the mongo cluster.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "administratorLoginPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "The password of the administrator login.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        },
-        "serverVersion": {
-          "type": "string",
-          "description": "The Mongo DB server version. Defaults to the latest available version if not specified."
-        },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Whether or not public endpoint access is allowed for this mongo cluster."
-        },
-        "nodeGroupSpecs": {
-          "type": "array",
-          "description": "The list of node group specs in the cluster.",
-          "items": {
-            "$ref": "#/definitions/NodeGroupSpec"
-          },
-          "x-ms-identifiers": []
-        }
       }
     },
     "NodeGroupProperties": {
