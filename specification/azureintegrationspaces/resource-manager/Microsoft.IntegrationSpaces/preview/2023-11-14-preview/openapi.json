@@ -22,20 +22,21 @@
   ],
   "security": [
     {
-      "azure_auth": [
+      "AadOauth2Auth": [
         "user_impersonation"
       ]
     }
   ],
   "securityDefinitions": {
-    "azure_auth": {
+    "AadOauth2Auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
+        "user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [
@@ -44,9 +45,6 @@
     },
     {
       "name": "Spaces"
-    },
-    {
-      "name": "InfrastructureResources"
     },
     {
       "name": "Applications"
@@ -59,6 +57,9 @@
     },
     {
       "name": "BusinessProcessVersions"
+    },
+    {
+      "name": "InfrastructureResources"
     }
   ],
   "paths": {
@@ -86,11 +87,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1265,8 +1261,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The business process development artifact success response."
+          "204": {
+            "description": "ARM operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1470,11 +1466,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "ListApplicationResourceByApplication": {
-            "$ref": "./examples/ApplicationResources_ListByApplication.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1516,7 +1507,7 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the application resource.",
+            "description": "The name of the resource",
             "required": true,
             "type": "string",
             "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
@@ -1534,11 +1525,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetApplicationResource": {
-            "$ref": "./examples/ApplicationResources_Get.json"
           }
         }
       },
@@ -1577,7 +1563,7 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the application resource.",
+            "description": "The name of the resource",
             "required": true,
             "type": "string",
             "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
@@ -1610,11 +1596,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdateApplicationResource": {
-            "$ref": "./examples/ApplicationResources_CreateOrUpdate.json"
           }
         }
       },
@@ -1653,7 +1634,7 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the application resource.",
+            "description": "The name of the resource",
             "required": true,
             "type": "string",
             "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
@@ -1680,11 +1661,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PatchApplicationResource": {
-            "$ref": "./examples/ApplicationResources_Patch.json"
           }
         }
       },
@@ -1723,7 +1699,7 @@
           {
             "name": "resourceName",
             "in": "path",
-            "description": "The name of the application resource.",
+            "description": "The name of the resource",
             "required": true,
             "type": "string",
             "pattern": "[a-zA-Z0-9_.()-]{0,79}$"
@@ -1741,11 +1717,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteApplicationResource": {
-            "$ref": "./examples/ApplicationResources_Delete.json"
           }
         }
       }
@@ -1858,8 +1829,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The business process development artifact success response."
+          "204": {
+            "description": "ARM operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2323,6 +2294,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ApplicationResourceUpdateProperties",
+          "description": "The updatable properties of the ApplicationResource.",
           "x-ms-client-flatten": true
         }
       }
@@ -2358,6 +2330,7 @@
         },
         "properties": {
           "$ref": "#/definitions/ApplicationUpdateProperties",
+          "description": "The updatable properties of the Application.",
           "x-ms-client-flatten": true
         }
       }
@@ -2581,6 +2554,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BusinessProcessUpdateProperties",
+          "description": "The updatable properties of the BusinessProcess.",
           "x-ms-client-flatten": true
         }
       }
@@ -2762,6 +2736,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InfrastructureResourceUpdateProperties",
+          "description": "The updatable properties of the InfrastructureResource.",
           "x-ms-client-flatten": true
         }
       }
@@ -2845,7 +2820,8 @@
             "value": "Accepted"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "SaveOrGetBusinessProcessDevelopmentArtifactResponse": {
       "type": "object",
@@ -2857,7 +2833,8 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system data of the business process development artifact."
+          "description": "The system data of the business process development artifact.",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/BusinessProcessDevelopmentArtifactProperties",
@@ -2954,6 +2931,7 @@
         },
         "properties": {
           "$ref": "#/definitions/SpaceUpdateProperties",
+          "description": "The updatable properties of the Space.",
           "x-ms-client-flatten": true
         }
       }
@@ -2967,11 +2945,6 @@
           "description": "The description of the resource."
         }
       }
-    },
-    "SuccessfulBusinessProcessDevelopmentArtifactResponse": {
-      "type": "object",
-      "description": "The business process development artifact success response.",
-      "properties": {}
     },
     "TrackingCorrelationContext": {
       "type": "object",
@@ -3033,7 +3006,8 @@
           "type": "object",
           "description": "The properties to be collected for event.",
           "additionalProperties": {
-            "$ref": "#/definitions/object"
+            "additionalProperties": {},
+            "type": "object"
           }
         }
       }
@@ -3044,7 +3018,8 @@
       "properties": {
         "$schema": {
           "type": "string",
-          "description": "The tracking definition schema uri."
+          "description": "The tracking definition schema uri.",
+          "x-ms-client-name": "schema"
         },
         "businessProcess": {
           "$ref": "#/definitions/BusinessProcessReference",
@@ -3059,10 +3034,23 @@
         }
       }
     },
-    "object": {
-      "type": "object",
-      "description": "Represent a model",
-      "properties": {}
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2023-11-14-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_11_14_preview",
+            "value": "2023-11-14-preview",
+            "description": "The 2023-11-14-preview API version."
+          }
+        ]
+      }
     }
   },
   "parameters": {
