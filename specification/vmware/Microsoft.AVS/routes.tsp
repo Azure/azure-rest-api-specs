@@ -34,13 +34,20 @@ interface Locations {
   ): ArmResponse<Quota> | ErrorResponse;
 }
 
+alias PrivateCloudList = ResourceList<PrivateCloud>;
 @armResourceOperations
 interface PrivateClouds {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("PrivateClouds_List")
-  list is ArmResourceListByParent<PrivateCloud>;
+  list is ArmResourceListByParent<
+    PrivateCloud,
+    Response = ArmResponse<PrivateCloudList>
+  >;
 
-  listInSubscription is ArmListBySubscription<PrivateCloud>;
+  listInSubscription is ArmListBySubscription<
+    PrivateCloud,
+    Response = ArmResponse<PrivateCloudList>
+  >;
 
   get is ArmResourceRead<PrivateCloud>;
 
@@ -114,7 +121,10 @@ interface PrivateClouds {
 interface Clusters {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("Clusters_List")
-  list is ArmResourceListByParent<Cluster>;
+  list is ArmResourceListByParent<
+    Cluster,
+    Response = ArmResponse<ResourceList<Cluster>>
+  >;
 
   get is ArmResourceRead<Cluster>;
 
@@ -177,7 +187,10 @@ interface Clusters {
 interface Datastores {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("Datastores_List")
-  list is ArmResourceListByParent<Datastore>;
+  list is ArmResourceListByParent<
+    Datastore,
+    Response = ArmResponse<ResourceList<Datastore>>
+  >;
 
   get is ArmResourceRead<Datastore>;
 
@@ -207,7 +220,10 @@ interface Datastores {
 interface HcxEnterpriseSites {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("HcxEnterpriseSites_List")
-  list is ArmResourceListByParent<HcxEnterpriseSite>;
+  list is ArmResourceListByParent<
+    HcxEnterpriseSite,
+    Response = ArmResponse<ResourceList<HcxEnterpriseSite>>
+  >;
 
   get is ArmResourceRead<HcxEnterpriseSite>;
 
@@ -232,7 +248,10 @@ interface HcxEnterpriseSites {
 interface Authorizations {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("Authorizations_List")
-  list is ArmResourceListByParent<ExpressRouteAuthorization>;
+  list is ArmResourceListByParent<
+    ExpressRouteAuthorization,
+    Response = ArmResponse<ResourceList<ExpressRouteAuthorization>>
+  >;
 
   get is ArmResourceRead<ExpressRouteAuthorization>;
 
@@ -265,7 +284,10 @@ interface Authorizations {
 interface GlobalReachConnections {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("GlobalReachConnections_List")
-  list is ArmResourceListByParent<GlobalReachConnection>;
+  list is ArmResourceListByParent<
+    GlobalReachConnection,
+    Response = ArmResponse<ResourceList<GlobalReachConnection>>
+  >;
 
   get is ArmResourceRead<GlobalReachConnection>;
 
@@ -301,14 +323,20 @@ interface WorkloadNetworks {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_List")
-  list is ArmResourceListByParent<WorkloadNetwork>;
+  list is ArmResourceListByParent<
+    WorkloadNetwork,
+    Response = ArmResponse<ResourceList<WorkloadNetwork>>
+  >;
 }
 
 @armResourceOperations
 interface WorkloadNetworkSegments {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListSegments")
-  list is ArmResourceListByParent<WorkloadNetworkSegment>;
+  list is ArmResourceListByParent<
+    WorkloadNetworkSegment,
+    Response = ArmResponse<ResourceList<WorkloadNetworkSegment, "{name}sList">>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetSegment")
@@ -368,7 +396,10 @@ interface WorkloadNetworkSegments {
 interface WorkloadNetworkDhcpConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListDhcp")
-  list is ArmResourceListByParent<WorkloadNetworkDhcp>;
+  list is ArmResourceListByParent<
+    WorkloadNetworkDhcp,
+    Response = ArmResponse<ResourceList<WorkloadNetworkDhcp>>
+  >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DhcpIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -443,7 +474,10 @@ interface WorkloadNetworkDhcpConfigurations {
 interface WorkloadNetworkGateways {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListGateways")
-  list is ArmResourceListByParent<WorkloadNetworkGateway>;
+  list is ArmResourceListByParent<
+    WorkloadNetworkGateway,
+    Response = ArmResponse<ResourceList<WorkloadNetworkGateway>>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetGateway")
@@ -457,7 +491,10 @@ interface WorkloadNetworkGateways {
 interface WorkloadNetworkPortMirroringProfiles {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListPortMirroring")
-  list is ArmResourceListByParent<WorkloadNetworkPortMirroring>;
+  list is ArmResourceListByParent<
+    WorkloadNetworkPortMirroring,
+    Response = ArmResponse<ResourceList<WorkloadNetworkPortMirroring>>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetPortMirroring")
@@ -536,7 +573,10 @@ interface WorkloadNetworkPortMirroringProfiles {
 interface WorkloadNetworkVmGroups {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListVMGroups")
-  list is ArmResourceListByParent<WorkloadNetworkVMGroup>;
+  list is ArmResourceListByParent<
+    WorkloadNetworkVMGroup,
+    Response = ArmResponse<ResourceList<WorkloadNetworkVMGroup, "{name}sList">>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetVMGroup")
@@ -613,7 +653,13 @@ interface WorkloadNetworkVmGroups {
 interface WorkloadNetworkVirtualMachines {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListVirtualMachines")
-  list is ArmResourceListByParent<WorkloadNetworkVirtualMachine>;
+  list is ArmResourceListByParent<
+    WorkloadNetworkVirtualMachine,
+    Response = ArmResponse<ResourceList<
+      WorkloadNetworkVirtualMachine,
+      "{name}sList"
+    >>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetVirtualMachine")
@@ -627,7 +673,13 @@ interface WorkloadNetworkVirtualMachines {
 interface WorkloadNetworkDnsServices {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListDnsServices")
-  list is ArmResourceListByParent<WorkloadNetworkDnsService>;
+  list is ArmResourceListByParent<
+    WorkloadNetworkDnsService,
+    Response = ArmResponse<ResourceList<
+      WorkloadNetworkDnsService,
+      "{name}sList"
+    >>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetDnsService")
@@ -706,7 +758,10 @@ interface WorkloadNetworkDnsServices {
 interface WorkloadNetworkDnsZones {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListDnsZones")
-  list is ArmResourceListByParent<WorkloadNetworkDnsZone>;
+  list is ArmResourceListByParent<
+    WorkloadNetworkDnsZone,
+    Response = ArmResponse<ResourceList<WorkloadNetworkDnsZone, "{name}sList">>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetDnsZone")
@@ -784,7 +839,10 @@ interface WorkloadNetworkDnsZones {
 interface WorkloadNetworkPublicIps {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListPublicIPs")
-  list is ArmResourceListByParent<WorkloadNetworkPublicIP>;
+  list is ArmResourceListByParent<
+    WorkloadNetworkPublicIP,
+    Response = ArmResponse<ResourceList<WorkloadNetworkPublicIP, "{name}sList">>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetPublicIP")
@@ -840,7 +898,10 @@ interface WorkloadNetworkPublicIps {
 interface CloudLinks {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("CloudLinks_List")
-  list is ArmResourceListByParent<CloudLink>;
+  list is ArmResourceListByParent<
+    CloudLink,
+    Response = ArmResponse<ResourceList<CloudLink>>
+  >;
 
   get is ArmResourceRead<CloudLink>;
 
@@ -870,7 +931,10 @@ interface CloudLinks {
 interface Addons {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("Addons_List")
-  list is ArmResourceListByParent<Addon>;
+  list is ArmResourceListByParent<
+    Addon,
+    Response = ArmResponse<ResourceList<Addon>>
+  >;
 
   get is ArmResourceRead<Addon>;
 
@@ -900,7 +964,10 @@ interface Addons {
 interface VirtualMachines {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("VirtualMachines_List")
-  list is ArmResourceListByParent<VirtualMachine>;
+  list is ArmResourceListByParent<
+    VirtualMachine,
+    Response = ArmResponse<ResourceList<VirtualMachine, "{name}sList">>
+  >;
 
   get is ArmResourceRead<VirtualMachine>;
 
@@ -922,7 +989,13 @@ interface VirtualMachines {
 interface PlacementPolicies {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("PlacementPolicies_List")
-  list is ArmResourceListByParent<PlacementPolicy>;
+  list is ArmResourceListByParent<
+    PlacementPolicy,
+    Response = ArmResponse<ResourceList<
+      PlacementPolicy,
+      "PlacementPoliciesList"
+    >>
+  >;
 
   get is ArmResourceRead<PlacementPolicy>;
 
@@ -983,7 +1056,10 @@ interface PlacementPolicies {
 interface ScriptPackages {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("ScriptPackages_List")
-  list is ArmResourceListByParent<ScriptPackage>;
+  list is ArmResourceListByParent<
+    ScriptPackage,
+    Response = ArmResponse<ResourceList<ScriptPackage, "{name}sList">>
+  >;
 
   get is ArmResourceRead<ScriptPackage>;
 }
@@ -992,7 +1068,10 @@ interface ScriptPackages {
 interface ScriptCmdlets {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("ScriptCmdlets_List")
-  list is ArmResourceListByParent<ScriptCmdlet>;
+  list is ArmResourceListByParent<
+    ScriptCmdlet,
+    Response = ArmResponse<ResourceList<ScriptCmdlet, "{name}sList">>
+  >;
 
   get is ArmResourceRead<ScriptCmdlet>;
 }
@@ -1001,7 +1080,10 @@ interface ScriptCmdlets {
 interface ScriptExecutions {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("ScriptExecutions_List")
-  list is ArmResourceListByParent<ScriptExecution>;
+  list is ArmResourceListByParent<
+    ScriptExecution,
+    Response = ArmResponse<ResourceList<ScriptExecution, "{name}sList">>
+  >;
 
   get is ArmResourceRead<ScriptExecution>;
 
