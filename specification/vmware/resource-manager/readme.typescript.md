@@ -13,3 +13,13 @@ typescript:
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
+
+```yaml $(typescript)
+directive:
+- from: managedidentity.json
+  where: definitions.SystemAssignedServiceIdentity
+  transform: $["x-ms-client-name"] = "PrivateCloudIdentity"
+- from: managedidentity.json
+  where: definitions.SystemAssignedServiceIdentityType
+  transform: $["x-ms-enum"].name = "ResourceIdentityType"
+```

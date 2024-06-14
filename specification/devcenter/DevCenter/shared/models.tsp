@@ -70,9 +70,9 @@ model Project {
   description?: string;
 
   @doc("""
-When specified, indicates the maximum number of Dev Boxes a single user can
-create across all pools in the project.
-""")
+    When specified, indicates the maximum number of Dev Boxes a single user can
+    create across all pools in the project.
+    """)
   @minValue(0)
   maxDevBoxesPerUser?: int32;
 
