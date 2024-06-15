@@ -429,7 +429,6 @@ model NodeGroupProperties {
 /** The high availability properties of the cluster. */
 @added(Versions.v2024_07_01)
 model HighAvailabilityProperties {
-
   /** The high availability mode of the cluster. */
   mode?: HighAvailabilityMode;
 }
