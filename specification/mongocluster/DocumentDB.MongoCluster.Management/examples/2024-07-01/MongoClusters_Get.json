@@ -30,20 +30,25 @@
           "provisioningState": "Succeeded",
           "administratorLogin": "mongoAdmin",
           "serverVersion": "5.0",
-          "nodeGroupSpecs": [
-            {
-              "kind": "Shard",
-              "sku": "M30",
-              "diskSizeGB": 128,
-              "enableHa": true,
-              "nodeCount": 4
-            }
-          ],
+          "storage": {
+            "sizeGb": 128
+          },
+          "compute": {
+            "tier": "M30"
+          },
+          "sharding": {
+            "shardCount": 4
+          },
+          "highAvailability": {
+            "mode": "SameZone"
+          },
+          "backup": {
+            "earliestRestoreTime": "2023-01-13T20:07:35Z"
+          },
           "previewFeatures": [],
           "infrastructureVersion": "1.0",
           "publicNetworkAccess": "Enabled",
-          "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
-          "earliestRestoreTime": "2023-01-13T20:07:35Z"
+          "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com"
         },
         "location": "westus2"
       }

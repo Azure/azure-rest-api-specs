@@ -27,22 +27,27 @@
           "provisioningState": "Succeeded",
           "administratorLogin": "mongoAdmin",
           "serverVersion": "5.0",
-          "nodeGroupSpecs": [
-            {
-              "kind": "Shard",
-              "sku": "M30",
-              "diskSizeGB": 128,
-              "enableHa": true,
-              "nodeCount": 3
-            }
-          ],
+          "storage": {
+            "sizeGb": 128
+          },
+          "compute": {
+            "tier": "M30"
+          },
+          "sharding": {
+            "shardCount": 3
+          },
+          "highAvailability": {
+            "mode": "SameZone"
+          },
+          "backup": {
+            "earliestRestoreTime": "2023-01-13T20:07:35Z"
+          },
           "previewFeatures": [
             "GeoReplicas"
           ],
           "infrastructureVersion": "2.0",
           "publicNetworkAccess": "Enabled",
           "connectionString": "mongodb+srv://<user>:<password>@myReplicaMongoCluster.mongocluster.cosmos.azure.com",
-          "earliestRestoreTime": "2023-01-13T20:07:35Z",
           "replica": {
             "role": "GeoAsyncReplica",
             "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/mySourceMongoCluster",
@@ -61,22 +66,27 @@
           "provisioningState": "Succeeded",
           "administratorLogin": "mongoAdmin",
           "serverVersion": "5.0",
-          "nodeGroupSpecs": [
-            {
-              "kind": "Shard",
-              "sku": "M30",
-              "diskSizeGB": 128,
-              "enableHa": true,
-              "nodeCount": 3
-            }
-          ],
+          "storage": {
+            "sizeGb": 128
+          },
+          "compute": {
+            "tier": "M30"
+          },
+          "sharding": {
+            "shardCount": 1
+          },
+          "highAvailability": {
+            "mode": "SameZone"
+          },
+          "backup": {
+            "earliestRestoreTime": "2023-01-13T20:07:35Z"
+          },
           "previewFeatures": [
             "GeoReplicas"
           ],
           "infrastructureVersion": "2.0",
           "publicNetworkAccess": "Enabled",
           "connectionString": "mongodb+srv://<user>:<password>@myReplicaMongoCluster.mongocluster.cosmos.azure.com",
-          "earliestRestoreTime": "2023-01-13T20:07:35Z",
           "replica": {
             "role": "GeoAsyncReplica",
             "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/mySourceMongoCluster",
