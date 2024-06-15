@@ -220,8 +220,15 @@ model IpRange {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
 interface DstsApplications {
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsApplicationResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    DstsApplicationResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   listBySubscription is ArmListBySubscription<DstsApplicationResource>;
   listByResourceGroup is ArmResourceListByParent<DstsApplicationResource>;
   get is ArmResourceRead<DstsApplicationResource>;
 }
+
+@@visibility(DstsApplicationResource.properties, "read", "create");
