@@ -16,6 +16,7 @@ using TypeSpec.Versioning;
 })
 @versioned(SplitIO.Experimentation.Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SplitIO is a case-sensitive name."
 namespace SplitIO.Experimentation;
 
 @doc("Supported API versions for the SplitIO.Experimentation resource provider.")
