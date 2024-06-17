@@ -106,7 +106,12 @@ model Subnet {
 @armResourceOperations
 interface StandbyContainerGroupPools {
   get is ArmResourceRead<StandbyContainerGroupPoolResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyContainerGroupPoolResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    StandbyContainerGroupPoolResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyContainerGroupPoolResource>;
   update is ArmResourcePatchSync<
     StandbyContainerGroupPoolResource,

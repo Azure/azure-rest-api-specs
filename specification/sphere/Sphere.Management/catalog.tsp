@@ -29,7 +29,12 @@ interface Catalogs {
   /**
    * Create a Catalog
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Catalog>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Catalog,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a Catalog
