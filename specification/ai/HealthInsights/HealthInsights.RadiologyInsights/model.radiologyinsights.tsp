@@ -33,7 +33,7 @@ model RadiologyInsightsModelConfiguration {
   locale?: string;
 }
 
-@doc("Options regarding follow up recommendation inferences and finding inferences.")
+@doc("Options regarding follow up recommendation inferences, finding inferences, guidance inferences and quality measure inferences.")
 model RadiologyInsightsInferenceOptions {
   @doc("Follow-up recommendation options.")
   followupRecommendationOptions?: FollowupRecommendationOptions;
@@ -79,7 +79,7 @@ model GuidanceOptions {
 @doc("Quality Measure Options.")
 model QualityMeasureOptions {
   @doc("Id(s) of the MIPS measures that need to be evaluated in the document")
-  measureTypes: Array<QualityMeasureType>;
+  measureTypes: Array<string>;
 }
 
 @doc("Response for the Radiology Insights request.")
@@ -409,22 +409,18 @@ model GuidanceInference extends RadiologyInsightsInference {
   @minItems(1)
   presentGuidanceInformation?: Array<PresentGuidanceInformation>;
 
-  @doc("The suppressors, if any, with their options.")
-  @minItems(1)
-  suppressorsWithOptions?: Array<SuppressorWithOptions>;
-
-  @doc("Indicates the priority of the guidance.")
+  @doc("If this is higher than 1, this guidance inference has less specified information than another guidance inference for the same identifier.")
   ranking: int32;
 
   @doc("The recommendations associated with the guidance, if any.")
-  guidanceRecommendations?: GuidanceRecommendations;
+  guidanceRecommendationProposals?: GuidanceRecommendationProposals;
 }
 
 @added(ApiVersion.v2024_10_01)
 @doc("Contains information whether a recommendation can be proposed or not, the link to the proposed follow-up recommendations if any, and possibly missing information needed to determine follow-up.")
-model GuidanceRecommendations {
+model GuidanceRecommendationProposals {
   @doc("The proposed follow-up recommendations, if any.")
-  recommendations?: Array<FollowupRecommendationInference>;
+  recommendationProposals?: Array<FollowupRecommendationInference>;
 
   @doc("See the explanation in GuidanceRecommendationsFoundType.")
   recommendationsFound: GuidanceRecommendationsFoundType;
@@ -437,7 +433,7 @@ model GuidanceRecommendations {
 @doc("An item of the structured information (e.g. laterality or size) and one or more corresponding details (e.g. left or size-value)")
 model PresentGuidanceInformation {
   @doc("The item of the structured information ")
-  suppressor: string;
+  key: string;
 
   @doc("Represents the tokens of the item and details.")
   @minItems(1)
@@ -452,29 +448,7 @@ model PresentGuidanceInformation {
 
   @doc("The list of item values that are mentioned in the report.")
   @minItems(1)
-  options: Array<string>;
-}
-
-@added(ApiVersion.v2024_10_01)
-@doc("A suppressor with one or more options. This is used from GuidanceInference.")
-model SuppressorWithOptions {
-  @doc("The suppressor.")
-  suppressor: string;
-
-  @doc("Represents the tokens of the suppressor and options.")
-  @minItems(1)
-  extension: Array<Fhir.R4.Extension>;
-
-  @doc("A list of sizes, in the same format as the sizes of findings.")
-  @minItems(1)
-  sizes?: Array<Array<Fhir.R4.ObservationComponent>>;
-
-  @doc("This can be filled if the suppressor is about the maximum diameter.")
-  maximumDiameterAsInText?: Fhir.R4.Quantity;
-
-  @doc("The option values of this suppressor.")
-  @minItems(1)
-  options: Array<string>;
+  values: Array<string>;
 }
 
 // For quality measure:

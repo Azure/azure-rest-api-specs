@@ -2122,22 +2122,13 @@
           },
           "x-ms-identifiers": []
         },
-        "suppressorsWithOptions": {
-          "type": "array",
-          "description": "The suppressors, if any, with their options.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/SuppressorWithOptions"
-          },
-          "x-ms-identifiers": []
-        },
         "ranking": {
           "type": "integer",
           "format": "int32",
-          "description": "Indicates the priority of the guidance."
+          "description": "If this is higher than 1, this guidance inference has less specified information than another guidance inference for the same identifier."
         },
-        "guidanceRecommendations": {
-          "$ref": "#/definitions/GuidanceRecommendations",
+        "guidanceRecommendationProposals": {
+          "$ref": "#/definitions/GuidanceRecommendationProposals",
           "description": "The recommendations associated with the guidance, if any."
         }
       },
@@ -2166,11 +2157,11 @@
         "showGuidanceInHistory"
       ]
     },
-    "GuidanceRecommendations": {
+    "GuidanceRecommendationProposals": {
       "type": "object",
       "description": "Contains information whether a recommendation can be proposed or not, the link to the proposed follow-up recommendations if any, and possibly missing information needed to determine follow-up.",
       "properties": {
-        "recommendations": {
+        "recommendationProposals": {
           "type": "array",
           "description": "The proposed follow-up recommendations, if any.",
           "items": {
@@ -2651,7 +2642,7 @@
       "type": "object",
       "description": "An item of the structured information (e.g. laterality or size) and one or more corresponding details (e.g. left or size-value)",
       "properties": {
-        "suppressor": {
+        "key": {
           "type": "string",
           "description": "The item of the structured information "
         },
@@ -2679,7 +2670,7 @@
           "$ref": "#/definitions/Fhir.R4.Quantity",
           "description": "The maximum diameter value, if the item is about the maximum diameter."
         },
-        "options": {
+        "values": {
           "type": "array",
           "description": "The list of item values that are mentioned in the report.",
           "minItems": 1,
@@ -2689,9 +2680,9 @@
         }
       },
       "required": [
-        "suppressor",
+        "key",
         "extension",
-        "options"
+        "values"
       ]
     },
     "ProcedureRecommendation": {
@@ -2790,121 +2781,13 @@
           "type": "array",
           "description": "Id(s) of the MIPS measures that need to be evaluated in the document",
           "items": {
-            "$ref": "#/definitions/QualityMeasureType"
+            "type": "string"
           }
         }
       },
       "required": [
         "measureTypes"
       ]
-    },
-    "QualityMeasureType": {
-      "type": "string",
-      "description": "Mips types that can be checked by the engine.",
-      "enum": [
-        "mips76",
-        "mips147",
-        "mips195",
-        "mips360",
-        "mips364",
-        "mips405",
-        "mips406",
-        "mips436",
-        "mips145",
-        "acrad36",
-        "acrad37",
-        "acrad38",
-        "acrad39",
-        "acrad40",
-        "acrad41",
-        "acrad42"
-      ],
-      "x-ms-enum": {
-        "name": "QualityMeasureType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Mips76",
-            "value": "mips76",
-            "description": "Mips 76"
-          },
-          {
-            "name": "Mips147",
-            "value": "mips147",
-            "description": "Mips 147"
-          },
-          {
-            "name": "Mips195",
-            "value": "mips195",
-            "description": "Mips 195"
-          },
-          {
-            "name": "Mips360",
-            "value": "mips360",
-            "description": "Mips 360"
-          },
-          {
-            "name": "Mips364",
-            "value": "mips364",
-            "description": "Mips 364"
-          },
-          {
-            "name": "Mips405",
-            "value": "mips405",
-            "description": "Mips 405"
-          },
-          {
-            "name": "Mips406",
-            "value": "mips406",
-            "description": "Mips 406"
-          },
-          {
-            "name": "Mips436",
-            "value": "mips436",
-            "description": "Mips 436"
-          },
-          {
-            "name": "Mips145",
-            "value": "mips145",
-            "description": "Mips 145"
-          },
-          {
-            "name": "Acrad36",
-            "value": "acrad36",
-            "description": "Acrad 36"
-          },
-          {
-            "name": "Acrad37",
-            "value": "acrad37",
-            "description": "Acrad 37"
-          },
-          {
-            "name": "Acrad38",
-            "value": "acrad38",
-            "description": "Acrad 38"
-          },
-          {
-            "name": "Acrad39",
-            "value": "acrad39",
-            "description": "Acrad 39"
-          },
-          {
-            "name": "Acrad40",
-            "value": "acrad40",
-            "description": "Acrad 40"
-          },
-          {
-            "name": "Acrad41",
-            "value": "acrad41",
-            "description": "Acrad 41"
-          },
-          {
-            "name": "Acrad42",
-            "value": "acrad42",
-            "description": "Acrad 42"
-          }
-        ]
-      }
     },
     "RadiologyCodeWithTypes": {
       "type": "object",
@@ -2970,7 +2853,7 @@
     },
     "RadiologyInsightsInferenceOptions": {
       "type": "object",
-      "description": "Options regarding follow up recommendation inferences and finding inferences.",
+      "description": "Options regarding follow up recommendation inferences, finding inferences, guidance inferences and quality measure inferences.",
       "properties": {
         "followupRecommendationOptions": {
           "$ref": "#/definitions/FollowupRecommendationOptions",
@@ -3407,53 +3290,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "SuppressorWithOptions": {
-      "type": "object",
-      "description": "A suppressor with one or more options. This is used from GuidanceInference.",
-      "properties": {
-        "suppressor": {
-          "type": "string",
-          "description": "The suppressor."
-        },
-        "extension": {
-          "type": "array",
-          "description": "Represents the tokens of the suppressor and options.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
-        "sizes": {
-          "type": "array",
-          "description": "A list of sizes, in the same format as the sizes of findings.",
-          "minItems": 1,
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Fhir.R4.ObservationComponent"
-            }
-          },
-          "x-ms-identifiers": []
-        },
-        "maximumDiameterAsInText": {
-          "$ref": "#/definitions/Fhir.R4.Quantity",
-          "description": "This can be filled if the suppressor is about the maximum diameter."
-        },
-        "options": {
-          "type": "array",
-          "description": "The option values of this suppressor.",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "suppressor",
-        "extension",
-        "options"
       ]
     },
     "TimePeriod": {
