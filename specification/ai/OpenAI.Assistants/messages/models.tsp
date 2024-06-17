@@ -120,6 +120,7 @@ union MessageAttachmentToolDefinition {
 @doc("An abstract representation of a single item of thread message content.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model MessageContent {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
@@ -163,6 +164,7 @@ model MessageTextDetails {
 @doc("An abstract representation of an annotation to text thread message content.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model MessageTextAnnotation {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 
@@ -180,9 +182,9 @@ model MessageTextFileCitationAnnotation extends MessageTextAnnotation {
 
   @encodedName("application/json", "file_citation")
   @doc("""
-  A citation within the message that points to a specific quote from a specific file.
-  Generated when the assistant uses the "file_search" tool to search files.
-  """)
+    A citation within the message that points to a specific quote from a specific file.
+    Generated when the assistant uses the "file_search" tool to search files.
+    """)
   fileCitation: MessageTextFileCitationDetails;
 
   @encodedName("application/json", "start_index")
@@ -322,6 +324,7 @@ model MessageDeltaContent {
   index: int32;
 
   /** The type of content for this content part. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   type: string;
 }
 
@@ -372,6 +375,7 @@ model MessageDeltaTextAnnotation {
   index: int32;
 
   /** The type of the text content annotation. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   type: string;
 }
 

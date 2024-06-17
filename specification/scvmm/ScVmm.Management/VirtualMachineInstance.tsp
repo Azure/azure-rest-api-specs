@@ -57,8 +57,13 @@ interface VirtualMachineInstances {
   @summary("Gets a virtual machine.")
   get is ArmResourceRead<VirtualMachineInstance>;
   /** The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation. */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @summary("Implements virtual machine PUT method.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineInstance>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    VirtualMachineInstance,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   /** The operation to update a virtual machine instance. */
   @summary("Updates a virtual machine.")
   @extension(
