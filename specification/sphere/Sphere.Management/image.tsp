@@ -30,7 +30,12 @@ interface Images {
   /**
    * Create a Image
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Image>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Image,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Delete a Image
