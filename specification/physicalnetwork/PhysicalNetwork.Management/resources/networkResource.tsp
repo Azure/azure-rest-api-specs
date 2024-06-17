@@ -45,7 +45,7 @@ model NetworkDeviceResource
 
 @armResourceOperations
 interface NetworkDevices {
-  getNetworkDevice is ArmLocResourceRead<NetworkDeviceResource>;
+  get is ArmLocResourceRead<NetworkDeviceResource>;
   list is ArmLocResourceListByParent<NetworkDeviceResource>;
 }
 
