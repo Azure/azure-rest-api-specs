@@ -79,7 +79,7 @@ model GuidanceOptions {
 @doc("Quality Measure Options.")
 model QualityMeasureOptions {
   @doc("Id(s) of the MIPS measures that need to be evaluated in the document")
-  measureTypes: Array<string>;
+  measureTypes: Array<QualityMeasureType>;
 }
 
 @doc("Response for the Radiology Insights request.")
@@ -434,7 +434,7 @@ model GuidanceRecommendationProposals {
 @doc("An item of the structured information (e.g. laterality or size) and one or more corresponding details (e.g. left or size-value)")
 model PresentGuidanceInformation {
   @doc("The item of the structured information ")
-  key: string;
+  presentGuidanceItem: string;
 
   @doc("Represents the tokens of the item and details.")
   @minItems(1)
@@ -449,7 +449,7 @@ model PresentGuidanceInformation {
 
   @doc("The list of item values that are mentioned in the report.")
   @minItems(1)
-  values: Array<string>;
+  presentGuidanceValues: Array<string>;
 }
 
 // For quality measure:

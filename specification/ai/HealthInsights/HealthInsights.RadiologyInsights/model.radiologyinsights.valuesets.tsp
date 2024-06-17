@@ -236,3 +236,78 @@ union QualityMeasureComplianceType {
   @doc("denominator exception")
   DenominatorException: "denominatorException",
 }
+
+@added(ApiVersion.v2024_10_01)
+@doc("Mips types that can be checked by the engine.")
+union QualityMeasureType {
+  string,
+
+  @doc("Mips 76")
+  Mips76: "mips76",
+
+  @doc("Mips 147")
+  Mips147: "mips147",
+
+  @doc("Mips 195")
+  Mips195: "mips195",
+
+  @doc("Mips 360")
+  Mips360: "mips360",
+
+  @doc("Mips 364")
+  Mips364: "mips364",
+
+  @doc("Mips 405")
+  Mips405: "mips405",
+
+  @doc("Mips 406")
+  Mips406: "mips406",
+
+  @doc("Mips 436")
+  Mips436: "mips436",
+
+  @doc("Mips 145")
+  Mips145: "mips145",
+
+  @doc("Acrad 36")
+  Acrad36: "acrad36",
+
+  @doc("Acrad 37")
+  Acrad37: "acrad37",
+
+  @doc("Acrad 38")
+  Acrad38: "acrad38",
+
+  @doc("Acrad 39")
+  Acrad39: "acrad39",
+
+  @doc("Acrad 40")
+  Acrad40: "acrad40",
+
+  @doc("Acrad 41")
+  Acrad41: "acrad41",
+
+  @doc("Acrad 42")
+  Acrad42: "acrad42",
+
+  @doc("Mednax55")
+  Mednax55: "mednax55",
+
+  @doc("Msn13")
+  Msn13: "msn13",
+
+  @doc("Msn15")
+  Msn15: "msn15",
+
+  @doc("Qmm26")
+  Qmm26: "qmm26",
+
+  @doc("Qmm17")
+  Qmm17: "qmm17",
+
+  @doc("Qmm18")
+  Qmm18: "qmm18",
+
+  @doc("Qmm19")
+  Qmm19: "qmm19",
+}
