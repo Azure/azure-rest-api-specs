@@ -55,7 +55,12 @@ model LoadBalancerProperties {
 @armResourceOperations(LoadBalancer)
 interface LoadBalancers {
   get is ArmResourceRead<LoadBalancer>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<LoadBalancer>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    LoadBalancer,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   @sharedRoute
   @added(Versions.v2024_03_01)
   delete is ArmResourceDeleteSync<LoadBalancer>;

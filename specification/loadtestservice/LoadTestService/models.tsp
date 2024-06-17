@@ -269,12 +269,12 @@ model Test {
   autoStopCriteria?: AutoStopCriteria;
 
   @doc("""
-Secrets can be stored in an Azure Key Vault or any other secret store. If the
-secret is stored in an Azure Key Vault, the value should be the secret
-identifier and the type should be AKV_SECRET_URI. If the secret is stored
-elsewhere, the secret value should be provided directly and the type should be
-SECRET_VALUE.
-""")
+    Secrets can be stored in an Azure Key Vault or any other secret store. If the
+    secret is stored in an Azure Key Vault, the value should be the secret
+    identifier and the type should be AKV_SECRET_URI. If the secret is stored
+    elsewhere, the secret value should be provided directly and the type should be
+    SECRET_VALUE.
+    """)
   secrets?: Record<Secret>;
 
   @doc("Certificates metadata.")
@@ -352,9 +352,9 @@ model PassFailMetric {
   requestName?: string;
 
   @doc("""
-The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
-100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
-""")
+    The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
+    100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
+    """)
   value?: float64;
 
   @doc("Action taken after the threshold is met. Default is ‘continue’.")
@@ -406,23 +406,23 @@ model AutoStopCriteria {
 @doc("Configurations for the load test.")
 model LoadTestConfiguration {
   @doc("""
-The number of engine instances to execute load test. Supported values are in range of 1-400. Required for creating a new test.
-""")
+    The number of engine instances to execute load test. Supported values are in range of 1-400. Required for creating a new test.
+    """)
   engineInstances?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "CSV is an abbervation and should be all caps"
   @doc("""
-If false, Azure Load Testing copies and processes your input files unmodified
-across all test engine instances. If true, Azure Load Testing splits the CSV
-input data evenly across all engine instances. If you provide multiple CSV
-files, each file will be split evenly.
-""")
+    If false, Azure Load Testing copies and processes your input files unmodified
+    across all test engine instances. If true, Azure Load Testing splits the CSV
+    input data evenly across all engine instances. If you provide multiple CSV
+    files, each file will be split evenly.
+    """)
   splitAllCSVs?: boolean = false;
 
   @doc("""
-If true, optionalLoadTestConfig is required and JMX script for the load test is
-not required to upload.
-""")
+    If true, optionalLoadTestConfig is required and JMX script for the load test is
+    not required to upload.
+    """)
   quickStartTest?: boolean = false;
 
   @doc("Configuration for quick load test")
@@ -436,15 +436,15 @@ not required to upload.
 @doc("Region distribution configuration for the load test.")
 model RegionalConfiguration {
   @doc("""
-  The number of engine instances to execute load test in specified region. Supported values are in range of 1-400.
-""")
+      The number of engine instances to execute load test in specified region. Supported values are in range of 1-400.
+    """)
   engineInstances: int32;
 
   @doc("""
-Azure region name.
-The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
-The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
-""")
+    Azure region name.
+    The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
+    The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
+    """)
   region: string;
 }
 
@@ -526,10 +526,10 @@ model FileInfo {
 @doc("Test app components")
 model TestAppComponents {
   @doc("""
-Azure resource collection { resource id (fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object } 
-""")
+    Azure resource collection { resource id (fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+    : resource object } 
+    """)
   components: Record<AppComponent>;
 
   @doc("Test identifier")
@@ -540,12 +540,12 @@ subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/lo
 }
 
 @doc("""
-An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
-""")
+  An Azure resource object (Refer azure generic resource model :https://docs.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)
+  """)
 model AppComponent {
   @doc("""
-fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
-""")
+    fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}
+    """)
   @visibility("read")
   resourceId: string;
 
@@ -577,20 +577,20 @@ model TestServerMetricConfig {
   testId?: string;
 
   @doc("""
-Azure resource metrics collection {metric id : metrics object} (Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
-for metric id).
-""")
+    Azure resource metrics collection {metric id : metrics object} (Refer :
+    https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+    for metric id).
+    """)
   metrics: Record<ResourceMetric>;
 
   ...SystemMetaData;
 }
 
 @doc("""
-Associated metric definition for particular metrics of the azure resource (
-Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
-""")
+  Associated metric definition for particular metrics of the azure resource (
+  Refer :
+  https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).
+  """)
 model ResourceMetric {
   @doc("Unique name for metric.")
   @visibility("read")
@@ -631,12 +631,12 @@ model TestRun {
   autoStopCriteria?: AutoStopCriteria;
 
   @doc("""
-Secrets can be stored in an Azure Key Vault or any other secret store. If the
-secret is stored in an Azure Key Vault, the value should be the secret
-identifier and the type should be AKV_SECRET_URI. If the secret is stored
-elsewhere, the secret value should be provided directly and the type should be
-SECRET_VALUE.
-""")
+    Secrets can be stored in an Azure Key Vault or any other secret store. If the
+    secret is stored in an Azure Key Vault, the value should be the secret
+    identifier and the type should be AKV_SECRET_URI. If the secret is stored
+    elsewhere, the secret value should be provided directly and the type should be
+    SECRET_VALUE.
+    """)
   secrets?: Record<Secret>;
 
   @doc("Certificates metadata")
@@ -650,18 +650,18 @@ SECRET_VALUE.
   errorDetails?: ErrorDetails[];
 
   @doc("""
-Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.
-The sampler name is the same as the name mentioned in the test script.
-Sampler name "Total" represents the aggregated statistics of all the samplers.
-""")
+    Test run statistics. Key is the sampler name and value is the set of statistics for performance metrics like response time, throughput, etc. from the load test run.
+    The sampler name is the same as the name mentioned in the test script.
+    Sampler name "Total" represents the aggregated statistics of all the samplers.
+    """)
   @visibility("read")
   testRunStatistics?: Record<TestRunStatistics>;
 
   @doc("""
-Regional statistics. Key is the Azure region name and value is the test run statistics.
-The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
-The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
-""")
+    Regional statistics. Key is the Azure region name and value is the test run statistics.
+    The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
+    The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
+    """)
   @visibility("read")
   @added(APIVersions.v2024_03_01_preview)
   regionalStatistics?: Record<TestRunStatistics>;
@@ -948,9 +948,9 @@ model MetricDefinition {
   unit?: MetricUnit;
 
   @doc("""
-Metric availability specifies the time grain (aggregation interval or
-frequency).
-""")
+    Metric availability specifies the time grain (aggregation interval or
+    frequency).
+    """)
   metricAvailabilities?: MetricAvailability[];
 }
 
@@ -966,20 +966,20 @@ model NameAndDesc {
 @doc("Metric availability specifies the time grain (aggregation interval or frequency)")
 model MetricAvailability {
   @doc("""
-The time grain specifies the aggregation interval for the metric. Expressed as
-a duration 'PT1M', 'PT1H', etc.
-""")
+    The time grain specifies the aggregation interval for the metric. Expressed as
+    a duration 'PT1M', 'PT1H', etc.
+    """)
   timeGrain?: TimeGrain;
 }
 
 @doc("Filters to fetch the set of metric.")
 model MetricRequestPayload {
   @doc("""
-Get metrics for specific dimension values. Example: Metric contains dimension
-like SamplerName, Error. To retrieve all the time series data where SamplerName
-is equals to HTTPRequest1 or HTTPRequest2, the DimensionFilter value will be
-{\"SamplerName\", [\"HTTPRequest1\", \"HTTPRequest2\"}
-""")
+    Get metrics for specific dimension values. Example: Metric contains dimension
+    like SamplerName, Error. To retrieve all the time series data where SamplerName
+    is equals to HTTPRequest1 or HTTPRequest2, the DimensionFilter value will be
+    {\"SamplerName\", [\"HTTPRequest1\", \"HTTPRequest2\"}
+    """)
   filters?: DimensionFilter[];
 }
 
@@ -1053,8 +1053,8 @@ model MetricDimensionsRequest {
   metricNamespace: string;
 
   @doc("""
-  The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
-  """)
+    The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
+    """)
   @query
   @clientName("time_interval", "python")
   timespan: string;
@@ -1063,10 +1063,10 @@ model MetricDimensionsRequest {
 @doc("Test run app component")
 model TestRunAppComponents {
   @doc("""
-Azure resource collection { resource id (fully qualified resource Id e.g
-subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
-: resource object } 
-""")
+    Azure resource collection { resource id (fully qualified resource Id e.g
+    subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})
+    : resource object } 
+    """)
   components: Record<AppComponent>;
 
   @doc("Test run identifier")
@@ -1083,10 +1083,10 @@ model TestRunServerMetricConfig {
   testRunId?: string;
 
   @doc("""
-Azure resource metrics collection {metric id : metrics object} (Refer :
-https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
-for metric id).
-""")
+    Azure resource metrics collection {metric id : metrics object} (Refer :
+    https://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition
+    for metric id).
+    """)
   metrics?: Record<ResourceMetric>;
 
   ...SystemMetaData;
@@ -1095,11 +1095,11 @@ for metric id).
 @doc("Query parameters for list test run operation")
 model OldTestRunIdQueryParam {
   @doc("""
-Existing test run identifier that should be rerun, if this is provided, the
-test will run with the JMX file, configuration and app components from the
-existing test run. You can override the configuration values for new test run
-in the request body.
-""")
+    Existing test run identifier that should be rerun, if this is provided, the
+    test will run with the JMX file, configuration and app components from the
+    existing test run. You can override the configuration values for new test run
+    in the request body.
+    """)
   @query
   oldTestRunId?: string;
 }
@@ -1107,17 +1107,17 @@ in the request body.
 @doc("Parameters for list test run operation")
 model ListTestRunQueryParams {
   @doc("""
-Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
-asc. Supported fields - executedDateTime
-""")
+    Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
+    asc. Supported fields - executedDateTime
+    """)
   @query
   orderby?: string;
 
   @doc("""
-Prefix based, case sensitive search on searchable fields - description,
-executedUser. For example, to search for a test run, with description 500 VUs,
-the search parameter can be 500.
-""")
+    Prefix based, case sensitive search on searchable fields - description,
+    executedUser. For example, to search for a test run, with description 500 VUs,
+    the search parameter can be 500.
+    """)
   @query
   search?: string;
 
@@ -1145,29 +1145,29 @@ the search parameter can be 500.
 @doc("Parameters for list test operation")
 model ListTestQueryParams {
   @doc("""
-Sort on the supported fields in (field asc/desc) format. eg:
-lastModifiedDateTime asc. Supported fields - lastModifiedDateTime
-""")
+    Sort on the supported fields in (field asc/desc) format. eg:
+    lastModifiedDateTime asc. Supported fields - lastModifiedDateTime
+    """)
   @query
   orderby?: string;
 
   @doc("""
-Prefix based, case sensitive search on searchable fields - displayName,
-createdBy. For example, to search for a test, with display name is Login Test,
-the search parameter can be Login.
-""")
+    Prefix based, case sensitive search on searchable fields - displayName,
+    createdBy. For example, to search for a test, with display name is Login Test,
+    the search parameter can be Login.
+    """)
   @query
   search?: string;
 
   @doc("""
-Start DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
-""")
+    Start DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
+    """)
   @query
   lastModifiedStartTime?: utcDateTime;
 
   @doc("""
-End DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
-""")
+    End DateTime(RFC 3339 literal format) of the last updated time range to filter tests.
+    """)
   @query
   lastModifiedEndTime?: utcDateTime;
 

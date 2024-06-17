@@ -34,23 +34,29 @@ interface Locations {
   ): ArmResponse<Quota> | ErrorResponse;
 }
 
+alias PrivateCloudList = ResourceList<PrivateCloud>;
 @armResourceOperations
 interface PrivateClouds {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("PrivateClouds_List")
   list is ArmResourceListByParent<
     PrivateCloud,
-    Response = ArmResponse<ResourceList<PrivateCloud>>
+    Response = ArmResponse<PrivateCloudList>
   >;
 
   listInSubscription is ArmListBySubscription<
     PrivateCloud,
-    Response = ArmResponse<ResourceList<PrivateCloud>>
+    Response = ArmResponse<PrivateCloudList>
   >;
 
   get is ArmResourceRead<PrivateCloud>;
 
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<PrivateCloud>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    PrivateCloud,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   // This could be modeled with ArmCustomPatchAsync if a 202 response with no body is used instead of a 201.
   // update is ArmCustomPatchAsync<PrivateCloud, PrivateCloudUpdate>;
@@ -122,7 +128,12 @@ interface Clusters {
 
   get is ArmResourceRead<Cluster>;
 
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Cluster>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Cluster,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   // This could be modeled with ArmCustomPatchAsync if a 202 response with no body is used instead of a 201.
   // update is ArmCustomPatchAsync<Cluster, ClusterUpdate>;
@@ -183,7 +194,12 @@ interface Datastores {
 
   get is ArmResourceRead<Datastore>;
 
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Datastore>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Datastore,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -239,9 +255,12 @@ interface Authorizations {
 
   get is ArmResourceRead<ExpressRouteAuthorization>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST REMOVE AT NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ExpressRouteAuthorization,
-    BaseParameters<PrivateCloud>
+    BaseParameters<PrivateCloud>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "deprecated"
@@ -272,7 +291,12 @@ interface GlobalReachConnections {
 
   get is ArmResourceRead<GlobalReachConnection>;
 
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<GlobalReachConnection>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    GlobalReachConnection,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -319,16 +343,18 @@ interface WorkloadNetworkSegments {
   get is ArmResourceRead<WorkloadNetworkSegment>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateSegments")
-  create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkSegment>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    WorkloadNetworkSegment,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    WorkloadNetworkSegment,
-    WorkloadNetworkSegmentUpdate
-  >;
+  update is ArmCustomPatchAsync<WorkloadNetworkSegment, WorkloadNetworkSegment>;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -386,12 +412,18 @@ interface WorkloadNetworkDhcpConfigurations {
   ): ArmResponse<WorkloadNetworkDhcp> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateDhcp")
-  create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkDhcp>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    WorkloadNetworkDhcp,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDhcp")
-  update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcpUpdate>;
+  @parameterVisibility
+  update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcp>;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -467,15 +499,20 @@ interface WorkloadNetworkPortMirroringProfiles {
   get is ArmResourceRead<WorkloadNetworkPortMirroring>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreatePortMirroring")
-  create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkPortMirroring>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    WorkloadNetworkPortMirroring,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdatePortMirroring")
   @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkPortMirroring,
-    WorkloadNetworkPortMirroringUpdate
+    WorkloadNetworkPortMirroring
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PortMirroringProfileParameter should be last, but it is breaking to correct it."
@@ -544,16 +581,18 @@ interface WorkloadNetworkVmGroups {
   get is ArmResourceRead<WorkloadNetworkVMGroup>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateVMGroup")
-  create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkVMGroup>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    WorkloadNetworkVMGroup,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateVMGroup")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    WorkloadNetworkVMGroup,
-    WorkloadNetworkVMGroupUpdate
-  >;
+  update is ArmCustomPatchAsync<WorkloadNetworkVMGroup, WorkloadNetworkVMGroup>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "VmGroupIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -642,15 +681,20 @@ interface WorkloadNetworkDnsServices {
   get is ArmResourceRead<WorkloadNetworkDnsService>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateDnsService")
-  create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkDnsService>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    WorkloadNetworkDnsService,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsService")
   @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsService,
-    WorkloadNetworkDnsServiceUpdate
+    WorkloadNetworkDnsService
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsServiceIdParameter should be last, but it is breaking to correct it."
@@ -719,16 +763,18 @@ interface WorkloadNetworkDnsZones {
   get is ArmResourceRead<WorkloadNetworkDnsZone>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateDnsZone")
-  create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkDnsZone>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    WorkloadNetworkDnsZone,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsZone")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    WorkloadNetworkDnsZone,
-    WorkloadNetworkDnsZoneUpdate
-  >;
+  update is ArmCustomPatchAsync<WorkloadNetworkDnsZone, WorkloadNetworkDnsZone>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsZoneIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -795,8 +841,13 @@ interface WorkloadNetworkPublicIps {
   get is ArmResourceRead<WorkloadNetworkPublicIP>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreatePublicIP")
-  create is ArmResourceCreateOrUpdateAsync<WorkloadNetworkPublicIP>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    WorkloadNetworkPublicIP,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PublicIPIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -846,7 +897,12 @@ interface CloudLinks {
 
   get is ArmResourceRead<CloudLink>;
 
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudLink>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    CloudLink,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -874,7 +930,12 @@ interface Addons {
 
   get is ArmResourceRead<Addon>;
 
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Addon>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Addon,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -930,7 +991,12 @@ interface PlacementPolicies {
 
   get is ArmResourceRead<PlacementPolicy>;
 
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<PlacementPolicy>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    PlacementPolicy,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   // 202 response has a body, but it should not to match ArmCustomPatchAsync.
   // update is ArmCustomPatchAsync<PlacementPolicy, PlacementPolicyUpdate>;
@@ -1013,7 +1079,12 @@ interface ScriptExecutions {
 
   get is ArmResourceRead<ScriptExecution>;
 
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<ScriptExecution>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    ScriptExecution,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -1058,7 +1129,12 @@ interface IscsiPaths {
 
   get is ArmResourceRead<IscsiPath>;
 
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<IscsiPath>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    IscsiPath,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"

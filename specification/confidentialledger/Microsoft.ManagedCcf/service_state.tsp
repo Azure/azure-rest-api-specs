@@ -58,6 +58,7 @@ union NodeStatus {
   "Retired",
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Common type for attestation information, describing the cryptographically-endorsed claim of what code is executing, and what platform it is executing on. Derived types contain platform-specific details.")
 @discriminator("format")
 model QuoteInfo {}

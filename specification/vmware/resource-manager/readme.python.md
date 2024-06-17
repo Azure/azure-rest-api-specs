@@ -18,3 +18,13 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-avs/azure/mgmt/avs
 ```
+
+``` yaml $(python)
+directive:
+- from: managedidentity.json
+  where: definitions.SystemAssignedServiceIdentity
+  transform: $["x-ms-client-name"] = "PrivateCloudIdentity"
+- from: managedidentity.json
+  where: definitions.SystemAssignedServiceIdentityType
+  transform: $["x-ms-enum"].name = "ResourceIdentityType"
+```

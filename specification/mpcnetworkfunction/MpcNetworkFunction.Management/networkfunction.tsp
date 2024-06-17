@@ -57,7 +57,12 @@ model NetworkFunctionResourceProperties {
 @armResourceOperations(NetworkFunctionResource)
 interface NetworkFunctions {
   get is ArmResourceRead<NetworkFunctionResource>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkFunctionResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    NetworkFunctionResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   updateTags is ArmTagsPatchSync<NetworkFunctionResource>;
   delete is ArmResourceDeleteSync<NetworkFunctionResource>;
   listByResourceGroup is ArmResourceListByParent<NetworkFunctionResource>;
