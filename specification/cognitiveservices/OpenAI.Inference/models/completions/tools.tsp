@@ -16,21 +16,22 @@ union ChatCompletionsToolSelectionPreset {
   string,
 
   @doc("""
-  Specifies that the model may either use any of the tools provided in this chat completions request or
-  instead return a standard chat completions response as if no tools were provided.
-  """)
+    Specifies that the model may either use any of the tools provided in this chat completions request or
+    instead return a standard chat completions response as if no tools were provided.
+    """)
   auto: "auto",
 
   @doc("""
-  Specifies that the model should not respond with a tool call and should instead provide a standard chat
-  completions response. Response content may still be influenced by the provided tool definitions.
-  """)
+    Specifies that the model should not respond with a tool call and should instead provide a standard chat
+    completions response. Response content may still be influenced by the provided tool definitions.
+    """)
   none: "none",
 }
 
 @discriminator("type")
 @doc("An abstract representation of an explicit, named tool selection to use for a chat completions request.")
 model ChatCompletionsNamedToolSelection {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
@@ -59,14 +60,15 @@ model ChatCompletionsFunctionToolSelection {
 @doc("An abstract representation of a tool that can be used by the model to improve a chat completions response.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatCompletionsToolDefinition {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-The definition information for a chat completions function tool that can call a function in response to a tool call.
-""")
+  The definition information for a chat completions function tool that can call a function in response to a tool call.
+  """)
 model ChatCompletionsFunctionToolDefinition
   extends ChatCompletionsToolDefinition {
   @doc("The object name, which is always 'function'.")
@@ -80,11 +82,12 @@ model ChatCompletionsFunctionToolDefinition
 
 @discriminator("type")
 @doc("""
-An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested
-chat completion.
-""")
+  An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested
+  chat completion.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatCompletionsToolCall {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 
@@ -94,9 +97,9 @@ model ChatCompletionsToolCall {
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents
-a function invocation needed for a subsequent chat completions request to resolve.
-""")
+  A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents
+  a function invocation needed for a subsequent chat completions request to resolve.
+  """)
 model ChatCompletionsFunctionToolCall extends ChatCompletionsToolCall {
   @doc("The type of tool call, in this case always 'function'.")
   type: "function";

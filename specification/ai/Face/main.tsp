@@ -23,9 +23,9 @@ using TypeSpec.Versioning;
   "Azure AI Face API",
   {
     @doc("""
-Supported Cognitive Services endpoints (protocol and hostname, for example:
-https://{resource-name}.cognitiveservices.azure.com).
-""")
+      Supported Cognitive Services endpoints (protocol and hostname, for example:
+      https://{resource-name}.cognitiveservices.azure.com).
+      """)
     endpoint: url,
 
     @doc("API Version")
