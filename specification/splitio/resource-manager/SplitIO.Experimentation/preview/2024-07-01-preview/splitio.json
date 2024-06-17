@@ -493,6 +493,10 @@
           "type": "string",
           "description": "Application id used for access to the experimentation workspace."
         },
+        "defaultRole": {
+          "$ref": "#/definitions/DataPlaneRole",
+          "description": "A default role given to a user calling the Split.IO data plane when the user has no assigned role."
+        },
         "dataPlaneEndpoint": {
           "type": "string",
           "description": "Endpoint used for access to the experimentation workspace.",
@@ -510,6 +514,10 @@
         "applicationId": {
           "type": "string",
           "description": "Application id used for access to the experimentation workspace."
+        },
+        "defaultRole": {
+          "$ref": "#/definitions/DataPlaneRole",
+          "description": "A default role given to a user calling the Split.IO data plane when the user has no assigned role."
         }
       }
     },
@@ -539,6 +547,33 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "DataPlaneRole": {
+      "type": "string",
+      "description": "Role required for data plane access.",
+      "enum": [
+        "None",
+        "ExperimentationDataReader",
+        "ExperimentationDataOwner"
+      ],
+      "x-ms-enum": {
+        "name": "DataPlaneRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "ExperimentationDataReader",
+            "value": "ExperimentationDataReader"
+          },
+          {
+            "name": "ExperimentationDataOwner",
+            "value": "ExperimentationDataOwner"
           }
         ]
       }

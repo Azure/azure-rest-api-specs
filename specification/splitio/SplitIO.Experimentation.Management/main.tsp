@@ -44,9 +44,20 @@ model AccessPolicy {
   @doc("Application id used for access to the experimentation workspace.")
   applicationId: string;
 
+  @doc("A default role given to a user calling the Split.IO data plane when the user has no assigned role.")
+  defaultRole?: DataPlaneRole;
+
   @doc("Endpoint used for access to the experimentation workspace.")
   @visibility("read")
   dataPlaneEndpoint?: string;
+}
+
+@doc("Role required for data plane access.")
+union DataPlaneRole {
+  None: "None",
+  ExperimentationDataReader: "ExperimentationDataReader",
+  ExperimentationDataOwner: "ExperimentationDataOwner",
+  string,
 }
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
