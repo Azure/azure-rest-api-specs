@@ -40,10 +40,86 @@
   },
   "tags": [
     {
+      "name": "NetworkDevices"
+    },
+    {
       "name": "Operations"
     }
   ],
   "paths": {
+    "/providers/Microsoft.PhysicalNetwork/locations/{location}/networkDevices": {
+      "get": {
+        "operationId": "NetworkDevices_ListByResourceGroup",
+        "tags": [
+          "NetworkDevices"
+        ],
+        "description": "List NetworkDeviceResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkDeviceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.PhysicalNetwork/locations/{location}/networkDevices/{deviceName}": {
+      "get": {
+        "operationId": "NetworkDevices_GetNetworkDevice",
+        "tags": [
+          "NetworkDevices"
+        ],
+        "description": "Get a NetworkDeviceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The network device's name, same as Hostname.The network device's name, same as Hostname.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-._]{1,58}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkDeviceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.PhysicalNetwork/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -68,11 +144,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -155,40 +226,41 @@
         "dcRackLocation"
       ]
     },
-    "NetworkDevices": {
+    "NetworkDeviceResource": {
       "type": "object",
-      "description": "Network Devices",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource's ARM ID",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.PhysicalNetwork/networkDevices"
-              }
-            ]
+        "properties": {
+          "$ref": "#/definitions/NetworkDeviceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkDeviceResourceListResult": {
+      "type": "object",
+      "description": "The response of a NetworkDeviceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkDeviceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkDeviceResource"
           }
         },
-        "type": {
+        "nextLink": {
           "type": "string",
-          "description": "The resource's ARM type"
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource's location in ARM format, i.e. eastus NOT useast"
-        },
-        "kind": {
-          "type": "string",
-          "description": "The NgsDeviceType"
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "id",
-        "type",
-        "location",
-        "kind"
+        "value"
       ]
     },
     "ProvisioningState": {
