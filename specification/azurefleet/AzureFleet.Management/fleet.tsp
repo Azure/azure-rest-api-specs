@@ -46,7 +46,7 @@ model FleetUpdate {
 }
 
 model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Legacy.ManagedServiceIdentityV4>>;
 
 model ResourcePlanUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.Plan>>;
@@ -93,24 +93,24 @@ model FleetProperties {
 @doc("Compute Profile to use for running user's workloads.")
 model ComputeProfile {
   @doc("""
-  Base Virtual Machine Profile Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile"
-  """)
+    Base Virtual Machine Profile Properties to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile"
+    """)
   baseVirtualMachineProfile: BaseVirtualMachineProfile;
 
   @doc("""
-  Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machine scale sets and Virtual Machines.
-  The default value will be the latest supported computeApiVersion by Compute Fleet.
-  """)
+    Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machine scale sets and Virtual Machines.
+    The default value will be the latest supported computeApiVersion by Compute Fleet.
+    """)
   computeApiVersion?: string;
 
   @added(Versions.v2024_05_01_preview)
   @doc("""
-  Specifies the number of fault domains to use when creating the underlying VMSS.
-  A fault domain is a logical group of hardware within an Azure datacenter.
-  VMs in the same fault domain share a common power source and network switch.
-  If not specified, defaults to 1, which represents "Max Spreading" (using as many fault domains as possible).
-  This property cannot be updated.
-  """)
+    Specifies the number of fault domains to use when creating the underlying VMSS.
+    A fault domain is a logical group of hardware within an Azure datacenter.
+    VMs in the same fault domain share a common power source and network switch.
+    If not specified, defaults to 1, which represents "Max Spreading" (using as many fault domains as possible).
+    This property cannot be updated.
+    """)
   platformFaultDomainCount?: int32;
 }
 
@@ -125,9 +125,9 @@ model VmSizeProfile {
 
   @added(Versions.v2024_05_01_preview)
   @doc("""
-  The rank of the VM size. This is used with 'RegularPriorityAllocationStrategy.Prioritized'
-  The lower the number, the higher the priority. Starting with 0.
-  """)
+    The rank of the VM size. This is used with 'RegularPriorityAllocationStrategy.Prioritized'
+    The lower the number, the higher the priority. Starting with 0.
+    """)
   @minValue(0)
   @maxValue(65535)
   rank?: int32;
@@ -158,11 +158,11 @@ model SpotPriorityProfile is BasePriorityProfile {
 
   @added(Versions.v2024_05_01_preview)
   @doc("""
-  Flag to enable/disable continuous goal seeking for the desired capacity and restoration of evicted Spot VMs.
-  If maintain is enabled, AzureFleetRP will use all VM sizes in vmSizesProfile to create new VMs (if VMs are evicted deleted)
-  or update existing VMs with new VM sizes (if VMs are evicted deallocated or failed to allocate due to capacity constraint) in order to achieve the desired capacity.
-  Maintain is enabled by default.
-  """)
+    Flag to enable/disable continuous goal seeking for the desired capacity and restoration of evicted Spot VMs.
+    If maintain is enabled, AzureFleetRP will use all VM sizes in vmSizesProfile to create new VMs (if VMs are evicted deleted)
+    or update existing VMs with new VM sizes (if VMs are evicted deallocated or failed to allocate due to capacity constraint) in order to achieve the desired capacity.
+    Maintain is enabled by default.
+    """)
   maintain?: boolean;
 }
 
@@ -212,9 +212,35 @@ union EvictionPolicy {
 @armResourceOperations
 interface Fleets {
   get is ArmResourceRead<Fleet>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Fleet>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Fleet,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Fleet>;
   listByResourceGroup is ArmResourceListByParent<Fleet>;
   listBySubscription is ArmListBySubscription<Fleet>;
+  @autoRoute
+  @listsResource(VirtualMachineScaleSet)
+  @armResourceList(VirtualMachineScaleSet)
+  @get
+  @doc("List VirtualMachineScaleSet resources by Fleet")
+  @extension(
+    "x-ms-pageable",
+    {
+      nextLinkName: "nextLink",
+    }
+  )
+  listVirtualMachineScaleSets(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...ProviderNamespace<Fleet>,
+    ...ResourceNameParameter<
+      Fleet,
+      NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
+    >,
+  ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
 }

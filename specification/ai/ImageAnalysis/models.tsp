@@ -29,9 +29,9 @@ model ImageBoundingBox {
 @doc("Represents a generated phrase that describes the content of the whole image.")
 model CaptionResult {
   @doc("""
-  A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.
-  Higher values indicating higher confidence.
-  """)
+    A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.
+    Higher values indicating higher confidence.
+    """)
   @minValue(0.0)
   @maxValue(1.0)
   confidence: float32;
@@ -42,16 +42,16 @@ model CaptionResult {
 }
 
 @doc("""
-A region at the desired aspect ratio that can be used as image thumbnail.
-The region preserves as much content as possible from the analyzed image, with priority given to detected faces.
-""")
+  A region at the desired aspect ratio that can be used as image thumbnail.
+  The region preserves as much content as possible from the analyzed image, with priority given to detected faces.
+  """)
 model CropRegion {
   @doc("""
-  The aspect ratio of the crop region.
-  Aspect ratio is calculated by dividing the width of the region in pixels by its height in pixels.
-  The aspect ratio will be in the range 0.75 to 1.8 (inclusive) if provided by the developer during the analyze call.
-  Otherwise, it will be in the range 0.5 to 2.0 (inclusive).
-  """)
+    The aspect ratio of the crop region.
+    Aspect ratio is calculated by dividing the width of the region in pixels by its height in pixels.
+    The aspect ratio will be in the range 0.75 to 1.8 (inclusive) if provided by the developer during the analyze call.
+    Otherwise, it will be in the range 0.5 to 2.0 (inclusive).
+    """)
   @minValue(0.0)
   aspectRatio: float32;
 
@@ -62,9 +62,9 @@ model CropRegion {
 @doc("Represents a generated phrase that describes the content of the whole image or a region in the image")
 model DenseCaption {
   @doc("""
-  A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.
-  Higher values indicating higher confidence.
-  """)
+    A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.
+    Higher values indicating higher confidence.
+    """)
   @minValue(0.0)
   @maxValue(1.0)
   confidence: float32;
@@ -78,9 +78,9 @@ model DenseCaption {
 }
 
 @doc("""
-Represents a list of up to 10 image captions for different regions of the image.
-The first caption always applies to the whole image.
-""")
+  Represents a list of up to 10 image captions for different regions of the image.
+  The first caption always applies to the whole image.
+  """)
 model DenseCaptionsResult {
   @doc("The list of image captions.")
   @minItems(1)
@@ -105,9 +105,9 @@ model DetectedPerson {
   boundingBox: ImageBoundingBox;
 
   @doc("""
-  A score, in the range of 0 to 1 (inclusive), representing the confidence that this detection was accurate.
-  Higher values indicating higher confidence.
-  """)
+    A score, in the range of 0 to 1 (inclusive), representing the confidence that this detection was accurate.
+    Higher values indicating higher confidence.
+    """)
   @visibility("read")
   @minValue(0.0)
   @maxValue(1.0)
@@ -172,9 +172,9 @@ model ImageAnalysisResult {
   caption?: CaptionResult;
 
   @doc("""
-  The up to 10 generated phrases, the first describing the content of the whole image,
-  and the others describing the content of different regions of the image.
-  """)
+    The up to 10 generated phrases, the first describing the content of the whole image,
+    and the others describing the content of different regions of the image.
+    """)
   @encodedName("application/json", "denseCaptionsResult")
   denseCaptions?: DenseCaptionsResult;
 
@@ -197,9 +197,9 @@ model ImageAnalysisResult {
   read?: ReadResult;
 
   @doc("""
-  A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
-  These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
-  """)
+    A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
+    These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
+    """)
   @encodedName("application/json", "smartCropsResult")
   smartCrops?: SmartCropsResult;
 
@@ -244,9 +244,9 @@ model ReadResult {
 }
 
 @doc("""
-Smart cropping result. A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
-These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
-""")
+  Smart cropping result. A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
+  These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
+  """)
 model SmartCropsResult {
   @doc("A list of crop regions.")
   @minItems(1)
@@ -255,14 +255,14 @@ model SmartCropsResult {
 }
 
 @doc("""
-A content entity observation in the image. A tag can be a physical object, living being, scenery, or action
-that appear in the image.
-""")
+  A content entity observation in the image. A tag can be a physical object, living being, scenery, or action
+  that appear in the image.
+  """)
 model DetectedTag {
   @doc("""
-  A score, in the range of 0 to 1 (inclusive), representing the confidence that this entity was observed.
-  Higher values indicating higher confidence.
-  """)
+    A score, in the range of 0 to 1 (inclusive), representing the confidence that this entity was observed.
+    Higher values indicating higher confidence.
+    """)
   @minValue(0.0)
   @maxValue(1.0)
   confidence: float32;
@@ -273,9 +273,9 @@ model DetectedTag {
 }
 
 @doc("""
-A list of entities observed in the image. Tags can be physical objects, living being, scenery, or actions
-that appear in the image.
-""")
+  A list of entities observed in the image. Tags can be physical objects, living being, scenery, or actions
+  that appear in the image.
+  """)
 model TagsResult {
   @doc("A list of tags.")
   @minItems(0)
