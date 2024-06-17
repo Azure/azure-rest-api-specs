@@ -3,4 +3,4 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.ScVmm, "ScVmmMgmtClient", "python");
+@@clientName(Microsoft.ScVmm, "ScVmmMgmt", "python");
