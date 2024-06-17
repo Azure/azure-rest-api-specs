@@ -29,12 +29,12 @@ namespace Qumulo.Storage;
  */
 enum Versions {
   /**
-   * The 2024-02-01-preview API version.
+   * The 2024-02-01 Stable API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2_preview)
-  v2_preview: "2024-02-01-preview",
+  v2_stable: "2024-02-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
