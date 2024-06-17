@@ -1630,7 +1630,7 @@ model WorkloadNetworkDnsZoneProperties {
   sourceIp?: string;
 
   @doc("Number of DNS Services using the DNS zone.")
-  dnsServices?: int32;
+  dnsServices?: int64;
 
   @doc("The provisioning state")
   @visibility("read")
