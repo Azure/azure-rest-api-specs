@@ -1248,13 +1248,6 @@ model WorkloadNetworkSegment
   name: string;
 }
 
-@doc("NSX Segment update")
-model WorkloadNetworkSegmentUpdate {
-  @doc("The updatable properties of a Segment update")
-  @extension("x-ms-client-flatten", true)
-  properties?: WorkloadNetworkSegmentProperties;
-}
-
 @doc("NSX Segment Properties")
 model WorkloadNetworkSegmentProperties {
   @doc("Display name of the segment.")
@@ -1315,13 +1308,6 @@ model DhcpIdParameter {
   @pattern("^[-\\w\\._]+$")
   @path
   dhcpId: string;
-}
-
-@doc("NSX DHCP update")
-model WorkloadNetworkDhcpUpdate {
-  @doc("The updatable properties of a DHCP update")
-  @extension("x-ms-client-flatten", false)
-  properties?: WorkloadNetworkDhcpEntity;
 }
 
 @doc("Type of DHCP: SERVER or RELAY.")
@@ -1423,13 +1409,6 @@ model PortMirroringProfileParameter {
   portMirroringId: string;
 }
 
-@doc("NSX Port Mirroring update")
-model WorkloadNetworkPortMirroringUpdate {
-  @doc("The updatable properties of a Port Mirroring update")
-  @extension("x-ms-client-flatten", true)
-  properties?: WorkloadNetworkPortMirroringProperties;
-}
-
 @doc("NSX Port Mirroring Properties")
 model WorkloadNetworkPortMirroringProperties {
   @doc("Display name of the port mirroring profile.")
@@ -1475,14 +1454,6 @@ model VmGroupIdParameter {
   @pattern("^[-\\w\\._]+$")
   @path
   vmGroupId: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
-@doc("NSX VM Group update")
-model WorkloadNetworkVMGroupUpdate {
-  @doc("The updatable properties of a VM Group update")
-  @extension("x-ms-client-flatten", true)
-  properties?: WorkloadNetworkVMGroupProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
@@ -1552,13 +1523,6 @@ model DnsServiceIdParameter {
   dnsServiceId: string;
 }
 
-@doc("NSX DNS Service update")
-model WorkloadNetworkDnsServiceUpdate {
-  @doc("The updatable properties of a DNS Service update")
-  @extension("x-ms-client-flatten", true)
-  properties?: WorkloadNetworkDnsServiceProperties;
-}
-
 @doc("NSX DNS Service Properties")
 model WorkloadNetworkDnsServiceProperties {
   @doc("Display name of the DNS Service.")
@@ -1606,13 +1570,6 @@ model DnsZoneIdParameter {
   @pattern("^[-\\w\\._]+$")
   @path
   dnsZoneId: string;
-}
-
-@doc("NSX DNS Zone update")
-model WorkloadNetworkDnsZoneUpdate {
-  @doc("The updatable properties of a DNS Zone update")
-  @extension("x-ms-client-flatten", true)
-  properties?: WorkloadNetworkDnsZoneProperties;
 }
 
 @doc("NSX DNS Zone Properties")
