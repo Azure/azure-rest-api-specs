@@ -30,9 +30,36 @@ union PFAgFunc {
   @doc("Criteria applies for given percentage value.") "percentage",
   @doc("Criteria applies for avg value.") "avg",
   @doc("Criteria applies for 50th percentile value.") "p50",
+
+  @doc("Criteria applies for 75th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p75",
+
   @doc("Criteria applies for 90th percentile value.") "p90",
   @doc("Criteria applies for 95th percentile value.") "p95",
+
+  @doc("Criteria applies for 96th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p96",
+
+  @doc("Criteria applies for 97th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p97",
+
+  @doc("Criteria applies for 98th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p98",
+
   @doc("Criteria applies for 99th percentile value.") "p99",
+
+  @doc("Criteria applies for 99.9th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p99.9",
+
+  @doc("Criteria applies for 99.99th percentile value.")
+  @added(APIVersions.v2024_05_01_preview)
+  "p99.99",
+
   @doc("Criteria applies for minimum value.") "min",
   @doc("Criteria applies for maximum value.") "max",
 }
@@ -141,9 +168,35 @@ union AggregationType {
   @doc("Total count.") "Count",
   @doc("Aggregation will be average in this case.") "None",
   @doc("Total sum.") "Total",
+
+  @doc("75th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile75",
+
   @doc("90th percentile.") "Percentile90",
   @doc("95th percentile.") "Percentile95",
+
+  @doc("96th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile96",
+
+  @doc("97th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile97",
+
+  @doc("98th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile98",
+
   @doc("99th percentile.") "Percentile99",
+
+  @doc("99.9th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile999",
+
+  @doc("99.99th percentile.")
+  @added(APIVersions.v2024_05_01_preview)
+  "Percentile9999",
 }
 
 @doc("Metric unit.")
@@ -286,7 +339,7 @@ model PassFailMetric {
 
   @doc("""
     The aggregation function to be applied on the client metric. Allowed functions
-    - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
+    - ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,
     ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
     ‘count’ - for requests
     """)
@@ -675,6 +728,14 @@ model TestRun {
   @visibility("read")
   kind?: TestKind;
 
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("Request data collection level for test run")
+  requestDataLevel?: RequestDataLevel;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise")
+  debugLogsEnabled?: boolean;
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
@@ -737,6 +798,36 @@ model TestRunStatistics {
   @visibility("read")
   pct3ResTime?: float64;
 
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("75 percentile response time.")
+  @visibility("read")
+  pct75ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("96 percentile response time.")
+  @visibility("read")
+  pct96ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("97 percentile response time.")
+  @visibility("read")
+  pct97ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("98 percentile response time.")
+  @visibility("read")
+  pct98ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("99.9 percentile response time.")
+  @visibility("read")
+  pct999ResTime?: float64;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("99.99 percentile response time.")
+  @visibility("read")
+  pct9999ResTime?: float64;
+
   @doc("Throughput.")
   @visibility("read")
   throughput?: float64;
@@ -796,6 +887,10 @@ model TestRunOutputArtifacts {
   @doc("The container for test run artifacts.")
   @added(APIVersions.v2023_04_01_preview)
   artifactsContainerInfo?: ArtifactsContainerInfo;
+
+  @added(APIVersions.v2024_05_01_preview)
+  @doc("The report file for the test run.")
+  reportFileInfo?: TestRunFileInfo;
 }
 
 @doc("Artifacts container info.")
@@ -1120,6 +1215,18 @@ model TestRunIdPathParameter {
   @key
   @pattern("^[a-z0-9_-]*$")
   testRunId: string;
+}
+
+@added(APIVersions.v2024_05_01_preview)
+@doc("Request data collection level for test run")
+union RequestDataLevel {
+  string,
+
+  @doc("No request data will be collected")
+  NONE: "NONE",
+
+  @doc("Request data will be collected in case of failed requests")
+  ERRORS: "ERRORS",
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
