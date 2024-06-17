@@ -500,17 +500,6 @@ union BrokerMemoryProfile {
   High: "High",
 }
 
-@doc("The enum defining deployment mode of the broker deployment")
-union DeploymentMode {
-  string,
-
-  @doc("Automatically provision Frontend and Backend pods based on the number of available nodes.")
-  Auto: "Auto",
-
-  @doc("Use Cardinality property to set the number of Frontend and Backend pods.")
-  Manual: "Manual",
-}
-
 @doc("The settings of Client Config.")
 model ClientConfig {
   @doc("Upper bound of Session Expiry Interval, in seconds.")
