@@ -24,22 +24,22 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.PhysicalNetwork;
 
 enum Versions {
-    /** 2024-06-01-preview version */
-   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-   v2024_06_01_preview: "2024-06-01-preview",
- }
+  /** 2024-06-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_06_01_preview: "2024-06-01-preview",
+}
 
 alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-._]{1,58}[a-zA-Z0-9]$";
 
-model NetworkDeviceResource is Azure.ResourceManager.ProxyResource<NetworkDeviceProperties>{
+model NetworkDeviceResource
+  is Azure.ResourceManager.ProxyResource<NetworkDeviceProperties> {
   /** The network device's name, same as Hostname. */
   @key("deviceName")
   @segment("networkDevices")
   @path
   @pattern(resourceNameRegex)
-  /** The network device's name, same as Hostname. */
   name: string;
 }
 
@@ -48,7 +48,6 @@ interface NetworkDevices {
   getNetworkDevice is ArmLocResourceRead<NetworkDeviceResource>;
   list is ArmLocResourceListByParent<NetworkDeviceResource>;
 }
-
 
 model LocationInstanceParameters<T extends Azure.ResourceManager.Foundations.Resource> {
   ...ApiVersionParameter;
