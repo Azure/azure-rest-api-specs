@@ -2176,14 +2176,14 @@
         "missingGuidanceInformation": {
           "type": "array",
           "description": "Contains all missing items that are needed to determine follow-up. This is filled if and only if the value of 'recommendationsFound' is 'moreInfoNeededToDetermineRecommendations'.",
+          "minItems": 1,
           "items": {
             "type": "string"
           }
         }
       },
       "required": [
-        "recommendationsFound",
-        "missingGuidanceInformation"
+        "recommendationsFound"
       ]
     },
     "GuidanceRecommendationsFoundType": {
@@ -2746,25 +2746,26 @@
       "type": "object",
       "description": "A QualityMeasure inference captures the  MIPS ('measure based incentive payment system') quality measure criteria in the document that are used to measure the data completeness.",
       "properties": {
-        "denominator": {
+        "qualityMeasureDenominator": {
           "type": "string",
           "description": "The denominator, which identifies the QualityMeasure kind."
         },
-        "compliance": {
+        "complianceType": {
           "$ref": "#/definitions/QualityMeasureComplianceType",
           "description": "The ComplianceType indicates whether the document is compliant for the specified QualityMeasure or not, or if exceptions apply."
         },
         "qualityCriteria": {
           "type": "array",
           "description": "List of quality criteria identified in the document, if any. ",
+          "minItems": 1,
           "items": {
             "type": "string"
           }
         }
       },
       "required": [
-        "denominator",
-        "compliance"
+        "qualityMeasureDenominator",
+        "complianceType"
       ],
       "allOf": [
         {

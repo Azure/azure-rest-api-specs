@@ -426,7 +426,8 @@ model GuidanceRecommendationProposals {
   recommendationsFound: GuidanceRecommendationsFoundType;
 
   @doc("Contains all missing items that are needed to determine follow-up. This is filled if and only if the value of 'recommendationsFound' is 'moreInfoNeededToDetermineRecommendations'.")
-  missingGuidanceInformation: Array<string>;
+  @minItems(1)
+  missingGuidanceInformation?: Array<string>;
 }
 
 @added(ApiVersion.v2024_10_01)
@@ -459,11 +460,12 @@ model QualityMeasureInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.QualityMeasure;
 
   @doc("The denominator, which identifies the QualityMeasure kind.")
-  denominator: string;
+  qualityMeasureDenominator: string;
 
   @doc("The ComplianceType indicates whether the document is compliant for the specified QualityMeasure or not, or if exceptions apply.")
-  compliance: QualityMeasureComplianceType;
+  complianceType: QualityMeasureComplianceType;
 
   @doc("List of quality criteria identified in the document, if any. ")
+  @minItems(1)
   qualityCriteria?: Array<string>;
 }
