@@ -4,7 +4,7 @@
 
 This is the AutoRest configuration file for computeschedule.
 
-## Getting Started
+## Getting Started 
 
 To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
@@ -27,16 +27,16 @@ These are the global settings for the computeschedule.
 ```yaml
 openapi-subtype: providerHub
 openapi-type: arm
-tag: package-2023-12-01-preview 
+tag: package-2024-06-01-preview
 ```
 
-### Tag: package-2023-12-01-preview
+### Tag: package-2024-06-01-preview
 
-These settings apply only when `--tag=package-2023-12-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-12-01-preview'
+```yaml $(tag) == 'package-2024-06-01-preview'
 input-file:
-  - Microsoft.ComputeSchedule/preview/2023-12-01-preview/computeschedule.json
+  - Microsoft.ComputeSchedule/preview/2024-06-01-preview/computeschedule.json
 ```
 
 ---

@@ -24,17 +24,17 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the azurestackhci.
 
-```yaml
+``` yaml
 title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-03
+tag: package-preview-2024-06
 ```
 
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: R3020
     from:
@@ -51,6 +51,7 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - hciCommon.json
 
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
@@ -70,6 +71,7 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - edgeNodePool.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -77,20 +79,105 @@ suppressions:
       - deploymentSettings.json
       - clusters.json
       - securitySettings.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/uploadCertificate"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/createClusterIdentity"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/extendSoftwareAssuranceBenefit"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}"]
+      - arcSettings.json
+      - extensions.json
+      - offers.json
+      - publishers.json
+      - skus.json 
+      - updateRuns.json
+      - updates.json
+      - updateSummaries.json
+
+  - code: ParametersInPointGet
+    reason: already used in GA api version, fixing it will cause a breaking change
+    from: 
+      - offers.json
+      - skus.json
 
   - code: PatchPropertiesCorrespondToPutProperties
     reason: already used in GA api version, fixing it will cause breaking change
     from:
       - clusters.json
+  
+  - code: PatchBodyParametersSchema
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - clusters.json
+
+  - code: PutResponseCodes
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - clusters.json
+      - arcSettings.json
+      - updateRuns.json
+      - updates.json
+      - updateSummaries.json
+    
+  - code: ConsistentPatchProperties
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - arcSettings.json
+
+  - code: PostResponseCodes
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - arcSettings.json
+      - updates.json
+  
+  - code: DeleteResponseCodes
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - clusters.json
+      - extensions.json
+      - arcSettings.json
+      - updateRuns.json
+      - updates.json
+      - updateSummaries.json
+  
+  - code: LroLocationHeader
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - extensions.json
+      - clusters.json
+      - arcSettings.json
+      - updateRuns.json
+      - updates.json
+      - updateSummaries.json
+
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: already working without the properties section, adding it will break polymorphism
+    from:
+      - edgeDevices.json
+
+  - code: XmsPageableForListCalls
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - operations.json
+      - updateSummaries.json
+
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    reason: these are not tracked resources, so tags are not needed
+    from:
+      - updates.json
+      - updateRuns.json
+      - updateSummaries.json
+
+  - code: TrackedResourcePatchOperation
+    reason: these are not tracked resources, so no tags and corresponding patch operation is needed
+    from:
+      - updates.json
+      - updateRuns.json
+      - updateSummaries.json
+
+  - code: AvoidAdditionalProperties
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - updates.json
+
+  - code: EvenSegmentedPathForPutOperation
+    reason: already used in GA api version, fixing it will cause breaking change
+    from:
+      - updateSummaries.json
 
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
@@ -108,25 +195,94 @@ suppressions:
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
 ```
 
+
+### Tag: package-preview-2024-06
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - preview/2024-06-01-preview/edgeNodePool.json
+  - preview/2024-03-01-preview/arcSettings.json
+  - preview/2024-03-01-preview/clusters.json
+  - preview/2024-03-01-preview/deploymentSettings.json
+  - preview/2024-03-01-preview/edgeDevices.json
+  - preview/2024-03-01-preview/extensions.json
+  - preview/2024-03-01-preview/offers.json
+  - ../operations/preview/2024-03-01-preview/operations.json
+  - preview/2024-03-01-preview/publishers.json
+  - preview/2024-03-01-preview/skus.json
+  - preview/2024-03-01-preview/updateRuns.json
+  - preview/2024-03-01-preview/updateSummaries.json
+  - preview/2024-03-01-preview/updates.json
+  - preview/2024-03-01-preview/securitySettings.json
+```
+
+---
+
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - stable/2024-04-01/arcSettings.json
+  - stable/2024-04-01/clusters.json
+  - stable/2024-04-01/deploymentSettings.json
+  - stable/2024-04-01/edgeDevices.json
+  - stable/2024-04-01/extensions.json
+  - stable/2024-04-01/hciCommon.json
+  - stable/2024-04-01/offers.json
+  - ../operations/stable/2024-04-01/operations.json
+  - stable/2024-04-01/publishers.json
+  - stable/2024-04-01/securitySettings.json
+  - stable/2024-04-01/skus.json
+  - stable/2024-04-01/updateRuns.json
+  - stable/2024-04-01/updateSummaries.json
+  - stable/2024-04-01/updates.json
+```
 ### Tag: package-preview-2024-03
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-03'
+``` yaml $(tag) == 'package-preview-2024-03'
 input-file:
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/clusters.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/deploymentSettings.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/edgeDevices.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/extensions.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/offers.json
-  - Microsoft.AzureStackHCI/operations/preview/2024-03-01-preview/operations.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/publishers.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/skus.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/updateRuns.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/updateSummaries.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/updates.json
-  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/securitySettings.json
+  - preview/2024-03-01-preview/arcSettings.json
+  - preview/2024-03-01-preview/clusters.json
+  - preview/2024-03-01-preview/deploymentSettings.json
+  - preview/2024-03-01-preview/edgeDevices.json
+  - preview/2024-03-01-preview/extensions.json
+  - preview/2024-03-01-preview/offers.json
+  - ../operations/preview/2024-03-01-preview/operations.json
+  - preview/2024-03-01-preview/publishers.json
+  - preview/2024-03-01-preview/skus.json
+  - preview/2024-03-01-preview/updateRuns.json
+  - preview/2024-03-01-preview/updateSummaries.json
+  - preview/2024-03-01-preview/updates.json
+  - preview/2024-03-01-preview/securitySettings.json
 ```
 
 ---
+
+# Code Generation
+
+## Swagger to SDK
+
+This section describes what SDK should be generated by the automatic system.
+This is not used by Autorest itself.
+
+``` yaml $(swagger-to-sdk)
+swagger-to-sdk:
+  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_azurestackhci']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js azurestackhci/resource-manager
+  - repo: azure-powershell
+```
+

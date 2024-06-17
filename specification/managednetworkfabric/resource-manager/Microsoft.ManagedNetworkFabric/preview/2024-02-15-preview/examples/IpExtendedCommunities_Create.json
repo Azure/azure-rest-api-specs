@@ -1,0 +1,102 @@
+{
+  "title": "IpExtendedCommunities_Create_MaximumSet_Gen",
+  "operationId": "IpExtendedCommunities_Create",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "ipExtendedCommunityName": "example-ipExtendedCommunity",
+    "resource": {
+      "properties": {
+        "annotation": "annotation",
+        "ipExtendedCommunityRules": [
+          {
+            "action": "Permit",
+            "sequenceNumber": 4155123341,
+            "routeTargets": [
+              "1234:2345"
+            ]
+          }
+        ],
+        "administrativeState": "Enabled"
+      },
+      "tags": {
+        "KeyId": "KeyValue"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "ipExtendedCommunityRules": [
+            {
+              "action": "Permit",
+              "sequenceNumber": 4155123341,
+              "routeTargets": [
+                "1234:2345"
+              ]
+            }
+          ],
+          "configurationState": "Succeeded",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled"
+        },
+        "tags": {
+          "KeyId": "KeyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/example-ipExtendedCommunity",
+        "name": "example-ipExtendedCommunity",
+        "type": "microsoft.managednetworkfabric/ipExtendedCommunities",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "ipExtendedCommunityRules": [
+            {
+              "action": "Permit",
+              "sequenceNumber": 4155123341,
+              "routeTargets": [
+                "1234:2345"
+              ]
+            }
+          ],
+          "configurationState": "Succeeded",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled"
+        },
+        "tags": {
+          "KeyId": "KeyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/example-ipExtendedCommunity",
+        "name": "example-ipExtendedCommunity",
+        "type": "microsoft.managednetworkfabric/ipExtendedCommunities",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    }
+  }
+}

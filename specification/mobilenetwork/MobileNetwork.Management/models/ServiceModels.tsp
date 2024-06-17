@@ -7,24 +7,28 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MobileNetwork;
 
 @doc("Traffic control permission.")
-enum TrafficControlPermission {
+union TrafficControlPermission {
   @doc("Traffic matching this rule is allowed to flow.")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Traffic matching this rule is not allowed to flow.")
-  Blocked,
+  Blocked: "Blocked",
+
+  string,
 }
 
 @doc("Service data flow direction.")
-enum SdfDirection {
+union SdfDirection {
   @doc("Traffic flowing from the UE to the data network.")
-  Uplink,
+  Uplink: "Uplink",
 
   @doc("Traffic flowing from the data network to the UE.")
-  Downlink,
+  Downlink: "Downlink",
 
   @doc("Traffic flowing both to and from the UE.")
-  Bidirectional,
+  Bidirectional: "Bidirectional",
+
+  string,
 }
 
 @doc("Service properties.")

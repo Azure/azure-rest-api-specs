@@ -3,9 +3,11 @@ import "../common/CommonModels.tsp";
 namespace Microsoft.MobileNetwork;
 
 @doc("Wi-Fi Vendor for the SSID.")
-enum WifiVendor {
+union WifiVendor {
   @doc("Wifi vendor RuckusCommscope.")
-  RuckusCommscope,
+  RuckusCommscope: "RuckusCommscope",
+
+  string,
 }
 
 @doc("Wi-Fi SSID properties.")

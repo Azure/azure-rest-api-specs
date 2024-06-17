@@ -7,7 +7,6 @@ import "../models/RadioAccessNetworkModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -35,7 +34,7 @@ interface RadioAccessNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<RadioAccessNetwork>;
 
   @doc("Updates a radio access network.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<RadioAccessNetwork, TagsObject>;
 
   @doc("Deletes the specified radio access network.")

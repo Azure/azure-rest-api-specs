@@ -7,42 +7,48 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MobileNetwork;
 
 @doc("The state of this packet core control plane version.")
-enum VersionState {
+union VersionState {
   @doc("The state of this version is unknown.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("This version is a preview and is not suitable for production use.")
-  Preview,
+  Preview: "Preview",
 
   @doc("This version is currently being validated.")
-  Validating,
+  Validating: "Validating",
 
   @doc("This version failed validation.")
-  ValidationFailed,
+  ValidationFailed: "ValidationFailed",
 
   @doc("This version is active and suitable for production use.")
-  Active,
+  Active: "Active",
 
   @doc("This version is deprecated and is no longer supported.")
-  Deprecated,
+  Deprecated: "Deprecated",
+
+  string,
 }
 
 @doc("Indicates whether this is the recommended version to use for new packet core control plane deployments.")
-enum RecommendedVersion {
+union RecommendedVersion {
   @doc("This is the recommended version to use for new packet core control plane deployments.")
-  Recommended,
+  Recommended: "Recommended",
 
   @doc("This is not the recommended version to use for new packet core control plane deployments.")
-  NotRecommended,
+  NotRecommended: "NotRecommended",
+
+  string,
 }
 
 @doc("Indicates whether this version is obsolete.")
-enum ObsoleteVersion {
+union ObsoleteVersion {
   @doc("This version is obsolete for use in new packet core control plane deployments.")
-  Obsolete,
+  Obsolete: "Obsolete",
 
   @doc("This version is not obsolete for use in new packet core control plane deployments.")
-  NotObsolete,
+  NotObsolete: "NotObsolete",
+
+  string,
 }
 
 @doc("Packet core control plane version properties.")

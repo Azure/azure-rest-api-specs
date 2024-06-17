@@ -8,7 +8,6 @@ import "./PacketCoreControlPlane.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -19,6 +18,7 @@ namespace Microsoft.MobileNetwork;
 @parentResource(PacketCoreControlPlane)
 model UeInfo is ProxyResource<UeInfoPropertiesFormat> {
   @doc("IMSI of a UE.")
+  @pattern(".*")
   @path
   @key("ueId")
   @segment("ues")

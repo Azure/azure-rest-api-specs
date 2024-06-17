@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Update.tsp";
-import "../Microsoft.Edge.Shared";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -33,3 +32,5 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_01_preview: "2024-02-01-preview",
 }
+
+@@visibility(Azure.Core.Page.nextLink);

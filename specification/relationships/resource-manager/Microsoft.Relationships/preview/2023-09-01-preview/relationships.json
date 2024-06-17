@@ -43,246 +43,13 @@
       "name": "Operations"
     },
     {
-      "name": "ComponentOfRelationships"
+      "name": "DependencyOfRelationships"
     },
     {
-      "name": "DependencyOfRelationships"
+      "name": "ServiceGroupMemberRelationships"
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Relationships/componentOf": {
-      "get": {
-        "operationId": "ComponentOfRelationships_List",
-        "tags": [
-          "ComponentOfRelationships"
-        ],
-        "description": "List ComponentOfRelationship resources by parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ComponentOfRelationshipListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ComponentOfRelationships_List": {
-            "$ref": "./examples/ComponentOfRelationships_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.Relationships/componentOf/{name}": {
-      "get": {
-        "operationId": "ComponentOfRelationships_Get",
-        "tags": [
-          "ComponentOfRelationships"
-        ],
-        "description": "Get a ComponentOfRelationship",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of componentOf relationship.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]{3,64}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ComponentOfRelationship"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ComponentOfRelationships_Get": {
-            "$ref": "./examples/ComponentOfRelationships_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "ComponentOfRelationships_CreateOrUpdate",
-        "tags": [
-          "ComponentOfRelationships"
-        ],
-        "description": "Create a ComponentOfRelationship",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of componentOf relationship.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]{3,64}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ComponentOfRelationship"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'ComponentOfRelationship' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ComponentOfRelationship"
-            }
-          },
-          "201": {
-            "description": "Resource 'ComponentOfRelationship' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ComponentOfRelationship"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ComponentOfRelationships_CreateOrUpdate": {
-            "$ref": "./examples/ComponentOfRelationships_CreateOrUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "ComponentOfRelationships_Update",
-        "tags": [
-          "ComponentOfRelationships"
-        ],
-        "description": "Update a ComponentOfRelationship",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of componentOf relationship.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]{3,64}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ComponentOfRelationshipUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ComponentOfRelationship"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ComponentOfRelationships_Update": {
-            "$ref": "./examples/ComponentOfRelationships_Update.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "ComponentOfRelationships_Delete",
-        "tags": [
-          "ComponentOfRelationships"
-        ],
-        "description": "Delete a ComponentOfRelationship",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of componentOf relationship.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]{3,64}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource deleted successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ComponentOfRelationships_Delete": {
-            "$ref": "./examples/ComponentOfRelationships_Delete.json"
-          }
-        }
-      }
-    },
     "/{resourceUri}/providers/Microsoft.Relationships/dependencyOf": {
       "get": {
         "operationId": "DependencyOfRelationships_List",
@@ -292,7 +59,7 @@
         "description": "List DependencyOfRelationship resources by parent",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -300,7 +67,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DependencyOfRelationshipListResult"
             }
@@ -308,7 +75,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -331,7 +98,7 @@
         "description": "Get a DependencyOfRelationship",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -347,7 +114,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DependencyOfRelationship"
             }
@@ -355,7 +122,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -373,7 +140,7 @@
         "description": "Create a DependencyOfRelationship",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -407,12 +174,19 @@
             "description": "Resource 'DependencyOfRelationship' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/DependencyOfRelationship"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -420,58 +194,11 @@
           "DependencyOfRelationships_CreateOrUpdate": {
             "$ref": "./examples/DependencyOfRelationships_CreateOrUpdate.json"
           }
-        }
-      },
-      "patch": {
-        "operationId": "DependencyOfRelationships_Update",
-        "tags": [
-          "DependencyOfRelationships"
-        ],
-        "description": "Update a DependencyOfRelationship",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of dependencyOf relationship.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]{3,64}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DependencyOfRelationshipUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DependencyOfRelationship"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
         },
-        "x-ms-examples": {
-          "DependencyOfRelationships_Update": {
-            "$ref": "./examples/DependencyOfRelationships_Update.json"
-          }
-        }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DependencyOfRelationships_Delete",
@@ -481,7 +208,7 @@
         "description": "Delete a DependencyOfRelationship",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
@@ -500,18 +227,211 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "DependencyOfRelationships_Delete": {
             "$ref": "./examples/DependencyOfRelationships_Delete.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Relationships/serviceGroupMember": {
+      "get": {
+        "operationId": "ServiceGroupMemberRelationships_List",
+        "tags": [
+          "ServiceGroupMemberRelationships"
+        ],
+        "description": "List ServiceGroupMemberRelationship resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationshipListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceGroupMemberRelationships_List": {
+            "$ref": "./examples/ServiceGroupMemberRelationships_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Relationships/serviceGroupMember/{name}": {
+      "get": {
+        "operationId": "ServiceGroupMemberRelationships_Get",
+        "tags": [
+          "ServiceGroupMemberRelationships"
+        ],
+        "description": "Get a ServiceGroupMemberRelationship",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ServiceGroupMember relationship.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationship"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceGroupMemberRelationships_Get": {
+            "$ref": "./examples/ServiceGroupMemberRelationships_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServiceGroupMemberRelationships_CreateOrUpdate",
+        "tags": [
+          "ServiceGroupMemberRelationships"
+        ],
+        "description": "Create a ServiceGroupMemberRelationship",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ServiceGroupMember relationship.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationship"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ServiceGroupMemberRelationship' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationship"
+            }
+          },
+          "201": {
+            "description": "Resource 'ServiceGroupMemberRelationship' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServiceGroupMemberRelationship"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceGroupMemberRelationships_CreateOrUpdate": {
+            "$ref": "./examples/ServiceGroupMemberRelationships_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ServiceGroupMemberRelationships_Delete",
+        "tags": [
+          "ServiceGroupMemberRelationships"
+        ],
+        "description": "Delete a ServiceGroupMemberRelationship",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ServiceGroupMember relationship.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceGroupMemberRelationships_Delete": {
+            "$ref": "./examples/ServiceGroupMemberRelationships_Delete.json"
           }
         }
       }
@@ -525,20 +445,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -554,126 +474,6 @@
     }
   },
   "definitions": {
-    "ComponentOfOrigins": {
-      "type": "string",
-      "description": "The possible origins of a componentOf relationship.",
-      "enum": [
-        "ServiceExplicitlyCreated",
-        "UserExplicitlyCreated"
-      ],
-      "x-ms-enum": {
-        "name": "ComponentOfOrigins",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ServiceExplicitlyCreated",
-            "value": "ServiceExplicitlyCreated",
-            "description": "The relationship was explicitly created by a system."
-          },
-          {
-            "name": "UserExplicitlyCreated",
-            "value": "UserExplicitlyCreated",
-            "description": "The relationship was explicitly created by a user."
-          }
-        ]
-      }
-    },
-    "ComponentOfRelationship": {
-      "type": "object",
-      "description": "Defines a componentOf relationship resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ComponentOfRelationshipProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ComponentOfRelationshipListResult": {
-      "type": "object",
-      "description": "The response of a ComponentOfRelationship list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ComponentOfRelationship items on this page",
-          "items": {
-            "$ref": "#/definitions/ComponentOfRelationship"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ComponentOfRelationshipProperties": {
-      "type": "object",
-      "description": "componentOf relationship properties.",
-      "properties": {
-        "sourceId": {
-          "type": "string",
-          "description": "The source of the current relationship.",
-          "readOnly": true
-        },
-        "targetId": {
-          "type": "string",
-          "description": "The target of the current relationship."
-        },
-        "originInformation": {
-          "type": "object",
-          "description": "Information about the origin of the relationship.",
-          "properties": {
-            "relationshipOriginType": {
-              "$ref": "#/definitions/ComponentOfOrigins",
-              "description": "Identifies the origin type of the relationship.",
-              "readOnly": true
-            }
-          },
-          "required": [
-            "relationshipOriginType"
-          ],
-          "readOnly": true
-        }
-      },
-      "required": [
-        "sourceId",
-        "targetId",
-        "originInformation"
-      ]
-    },
-    "ComponentOfRelationshipUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the ComponentOfRelationship.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ComponentOfRelationshipUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ComponentOfRelationshipUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the ComponentOfRelationship.",
-      "properties": {
-        "targetId": {
-          "type": "string",
-          "description": "The target of the current relationship."
-        }
-      }
-    },
     "DependencyOfOrigins": {
       "type": "string",
       "description": "The possible origins of a dependencyOf relationship.",
@@ -686,12 +486,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "ServiceExplicitlyCreated",
+            "name": "serviceExplicitlyCreated",
             "value": "ServiceExplicitlyCreated",
             "description": "The relationship was explicitly created by a system."
           },
           {
-            "name": "UserExplicitlyCreated",
+            "name": "userExplicitlyCreated",
             "value": "UserExplicitlyCreated",
             "description": "The relationship was explicitly created by a user."
           }
@@ -714,7 +514,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -752,6 +552,11 @@
           "type": "string",
           "description": "The target of the current relationship."
         },
+        "metadata": {
+          "$ref": "#/definitions/RelationshipMetadata",
+          "description": "Metadata about the relationship.",
+          "readOnly": true
+        },
         "originInformation": {
           "type": "object",
           "description": "Information about the origin of the relationship.",
@@ -760,38 +565,219 @@
               "$ref": "#/definitions/DependencyOfOrigins",
               "description": "Identifies the origin type of the relationship.",
               "readOnly": true
+            },
+            "discoveryEngine": {
+              "type": "string",
+              "description": "The name of the discovery engine that created the relationship.",
+              "readOnly": true
             }
           },
           "required": [
             "relationshipOriginType"
           ],
           "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the relationship.",
+          "readOnly": true
         }
       },
       "required": [
         "sourceId",
         "targetId",
+        "metadata",
         "originInformation"
       ]
     },
-    "DependencyOfRelationshipUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the DependencyOfRelationship.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DependencyOfRelationshipUpdateProperties",
-          "x-ms-client-flatten": true
-        }
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The relationship is being provisioned"
+          }
+        ]
       }
     },
-    "DependencyOfRelationshipUpdateProperties": {
+    "RelationshipMetadata": {
       "type": "object",
-      "description": "The updatable properties of the DependencyOfRelationship.",
+      "description": "Provides information about the relationship properties.",
       "properties": {
+        "sourceType": {
+          "type": "string",
+          "description": "The type of the relationship source resource.",
+          "readOnly": true
+        },
+        "targetType": {
+          "type": "string",
+          "description": "The type of the relationship target resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceType",
+        "targetType"
+      ]
+    },
+    "ServiceGroupMemberOrigins": {
+      "type": "string",
+      "description": "The possible origins of a ServiceGroupMember relationship.",
+      "enum": [
+        "ServiceExplicitlyCreated",
+        "UserExplicitlyCreated"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceGroupMemberOrigins",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "serviceExplicitlyCreated",
+            "value": "ServiceExplicitlyCreated",
+            "description": "The relationship was explicitly created by a system."
+          },
+          {
+            "name": "userExplicitlyCreated",
+            "value": "UserExplicitlyCreated",
+            "description": "The relationship was explicitly created by a user."
+          }
+        ]
+      }
+    },
+    "ServiceGroupMemberRelationship": {
+      "type": "object",
+      "description": "Defines a ServiceGroupMember relationship resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceGroupMemberRelationshipProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServiceGroupMemberRelationshipListResult": {
+      "type": "object",
+      "description": "The response of a ServiceGroupMemberRelationship list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServiceGroupMemberRelationship items on this page",
+          "items": {
+            "$ref": "#/definitions/ServiceGroupMemberRelationship"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServiceGroupMemberRelationshipProperties": {
+      "type": "object",
+      "description": "ServiceGroupMember relationship properties.",
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "description": "The source of the current relationship.",
+          "readOnly": true
+        },
         "targetId": {
           "type": "string",
           "description": "The target of the current relationship."
+        },
+        "metadata": {
+          "$ref": "#/definitions/RelationshipMetadata",
+          "description": "Metadata about the relationship.",
+          "readOnly": true
+        },
+        "originInformation": {
+          "type": "object",
+          "description": "Information about the origin of the relationship.",
+          "properties": {
+            "relationshipOriginType": {
+              "$ref": "#/definitions/ServiceGroupMemberOrigins",
+              "description": "Identifies the origin type of the relationship.",
+              "readOnly": true
+            },
+            "discoveryEngine": {
+              "type": "string",
+              "description": "The name of the discovery engine that created the relationship.",
+              "readOnly": true
+            }
+          },
+          "required": [
+            "relationshipOriginType"
+          ],
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the relationship.",
+          "readOnly": true
         }
+      },
+      "required": [
+        "sourceId",
+        "targetId",
+        "metadata",
+        "originInformation"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Relationships RP API Versions",
+      "enum": [
+        "2023-09-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2023-09-01-preview",
+            "value": "2023-09-01-preview",
+            "description": "2023-09-01-preview version"
+          }
+        ]
       }
     }
   },

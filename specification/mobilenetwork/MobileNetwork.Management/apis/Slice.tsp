@@ -8,7 +8,6 @@ import "./MobileNetwork.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -37,7 +36,7 @@ interface Slices {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Slice>;
 
   @doc("Updates slice tags.")
-  @parameterVisibility("read")
+  @parameterVisibility
   updateTags is ArmCustomPatchSync<Slice, TagsObject>;
 
   @doc("Deletes the specified network slice.")

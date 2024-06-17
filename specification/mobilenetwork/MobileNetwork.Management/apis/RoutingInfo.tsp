@@ -8,7 +8,6 @@ import "./PacketCoreControlPlane.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,6 +19,7 @@ namespace Microsoft.MobileNetwork;
 @parentResource(PacketCoreControlPlane)
 model RoutingInfoModel is ProxyResource<RoutingInfoPropertiesFormat> {
   @doc("The name of the routing info.")
+  @pattern(".*")
   @path
   @key("routingInfo")
   @segment("routingInfo")

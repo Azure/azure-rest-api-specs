@@ -7,15 +7,17 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MobileNetwork;
 
 @doc("The state of the SIM resource.")
-enum SimState {
+union SimState {
   @doc("The SIM is disabled because not all configuration required for enabling is present.")
-  Disabled,
+  Disabled: "Disabled",
 
   @doc("The SIM is enabled.")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The SIM cannot be enabled because some of the associated configuration is invalid.")
-  Invalid,
+  Invalid: "Invalid",
+
+  string,
 }
 
 @doc("Common SIM properties.")

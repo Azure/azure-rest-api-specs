@@ -122,6 +122,10 @@ model PublicCloudConnectorProperties {
   @doc("The resource provisioning state.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
+
+  @doc("Connector primary identifier.")
+  @visibility("read")
+  connectorPrimaryIdentifier?: string;
 }
 
 @doc("Enum of host cloud the public cloud connector is referencing.")

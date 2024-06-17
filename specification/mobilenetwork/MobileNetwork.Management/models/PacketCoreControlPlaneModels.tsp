@@ -6,158 +6,172 @@ using Azure.Core;
 
 namespace Microsoft.MobileNetwork;
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "For backward compatibility."
 @doc("The deployment type of the packet core software (Single Node / Multi Node).")
-@fixed
-enum DeploymentType {
+union DeploymentType {
   @doc("The packet core software will be deployed on single standalone server.")
-  `Single Node`,
+  `Single Node`: "Single Node",
 
   @doc("The packet core software will be deployed on multiple servers and supports high availability.")
-  `Multi Node`,
+  `Multi Node`: "Multi Node",
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "For backward compatibility."
 @doc("The core network technology generation (5G core, EPC / 4G core or EPC / 4G + 5G core).")
-@fixed
-enum CoreNetworkType {
+union CoreNetworkType {
   @doc("5G core")
-  `5GC`,
+  `5GC`: "5GC",
 
   @doc("EPC / 4G core")
-  EPC,
+  EPC: "EPC",
 
   @doc("Combined EPC / 4G and 5G core")
-  `EPC + 5GC`,
+  `EPC + 5GC`: "EPC + 5GC",
 }
 
 @doc("The SKU of the packet core control plane resource. The SKU list may change over time when a new SKU gets added or an exiting SKU gets removed.")
-enum BillingSku {
+union BillingSku {
   @doc("100 Mbps, 20 active SIMs plan, 2 RANs")
-  G0,
+  G0: "G0",
 
   @doc("1 Gbps, 100 active SIMs plan, 5 RANs")
-  G1,
+  G1: "G1",
 
   @doc("2 Gbps, 200 active SIMs plan, 10 RANs")
-  G2,
+  G2: "G2",
 
   @doc("5 Gbps, 500 active SIMs plan")
-  G5,
+  G5: "G5",
 
   @doc("10 Gbps, 1000 active SIMs plan")
-  G10,
+  G10: "G10",
+
+  string,
 }
 
 @doc("The desired installation state of the packet core.")
-enum DesiredInstallationState {
+union DesiredInstallationState {
   @doc("Don't install the packet core.")
-  Uninstalled,
+  Uninstalled: "Uninstalled",
 
   @doc("Install the packet core.")
-  Installed,
+  Installed: "Installed",
+
+  string,
 }
 
 @doc("The installation state of the packet core.")
-enum InstallationState {
+union InstallationState {
   @doc("The packet core is uninstalled.")
-  Uninstalled,
+  Uninstalled: "Uninstalled",
 
   @doc("The packet core is installing.")
-  Installing,
+  Installing: "Installing",
 
   @doc("The packet core is installed.")
-  Installed,
+  Installed: "Installed",
 
   @doc("The packet core is updating its configuration.")
-  Updating,
+  Updating: "Updating",
 
   @doc("The packet core is upgrading to a different software version.")
-  Upgrading,
+  Upgrading: "Upgrading",
 
   @doc("The packet core is uninstalling.")
-  Uninstalling,
+  Uninstalling: "Uninstalling",
 
   @doc("The packet core is reinstalling.")
-  Reinstalling,
+  Reinstalling: "Reinstalling",
 
   @doc("The packet core is rolling back to its previous version.")
-  RollingBack,
+  RollingBack: "RollingBack",
 
   @doc("The packet core is in failed state.")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 @doc("Whether a reinstall of the packet core is required to pick up the latest configuration changes.")
-enum ReinstallRequired {
+union ReinstallRequired {
   @doc("A reinstall of the packet core is required.")
-  Required,
+  Required: "Required",
 
   @doc("A reinstall of the packet core is not required.")
-  NotRequired,
+  NotRequired: "NotRequired",
+
+  string,
 }
 
 @doc("The reason or list of reasons why a packet core has not been installed or requires a reinstall.")
-enum InstallationReason {
+union InstallationReason {
   @doc("The packet core has not been installed as the mobile network does not have any applicable configured slices.")
-  NoSlices,
+  NoSlices: "NoSlices",
 
   @doc("The packet core has not been installed as there is no configured data plane for this packet core.")
-  NoPacketCoreDataPlane,
+  NoPacketCoreDataPlane: "NoPacketCoreDataPlane",
 
   @doc("The packet core has not been installed as the packet core has no attached data networks.")
-  NoAttachedDataNetworks,
+  NoAttachedDataNetworks: "NoAttachedDataNetworks",
 
   @doc("A reinstall is required as the packet core is running with out-of-date PLMN ID.")
-  PublicLandMobileNetworkIdentifierHasChanged,
+  PublicLandMobileNetworkIdentifierHasChanged: "PublicLandMobileNetworkIdentifierHasChanged",
 
   @doc("A reinstall is required as the packet core is running with out-of-date control plane access interface information.")
-  ControlPlaneAccessInterfaceHasChanged,
+  ControlPlaneAccessInterfaceHasChanged: "ControlPlaneAccessInterfaceHasChanged",
 
   @doc("A reinstall is required as the packet core is running with out-of-date user plane core interface.")
-  UserPlaneAccessInterfaceHasChanged,
+  UserPlaneAccessInterfaceHasChanged: "UserPlaneAccessInterfaceHasChanged",
 
   @doc("A reinstall is required as the packet core is running with out-of-date user plane access interface.")
-  UserPlaneDataInterfaceHasChanged,
+  UserPlaneDataInterfaceHasChanged: "UserPlaneDataInterfaceHasChanged",
 
   @doc("A reinstall is required as the packet core is running with out-of-date control plane access network virtual IP address.")
-  ControlPlaneAccessVirtualIpv4AddressesHasChanged,
+  ControlPlaneAccessVirtualIpv4AddressesHasChanged: "ControlPlaneAccessVirtualIpv4AddressesHasChanged",
 
   @doc("A reinstall is required as the packet core is running with out-of-date user plane access network virtual IP address.")
-  UserPlaneAccessVirtualIpv4AddressesHasChanged,
+  UserPlaneAccessVirtualIpv4AddressesHasChanged: "UserPlaneAccessVirtualIpv4AddressesHasChanged",
+
+  string,
 }
 
 @doc("How to authenticate users who access local diagnostics APIs.")
-enum AuthenticationType {
+union AuthenticationType {
   @doc("Use AAD SSO to authenticate the user (this requires internet access).")
-  AAD,
+  AAD: "AAD",
 
   @doc("Use locally stored passwords to authenticate the user.")
-  Password,
+  Password: "Password",
+
+  string,
 }
 
 @doc("The certificate's provisioning state")
-enum CertificateProvisioningState {
+union CertificateProvisioningState {
   @doc("The certificate has not been provisioned.")
-  NotProvisioned,
+  NotProvisioned: "NotProvisioned",
 
   @doc("The certificate has been provisioned.")
-  Provisioned,
+  Provisioned: "Provisioned",
 
   @doc("The certificate failed to be provisioned. The \"reason\" property explains why.")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 @doc("The provisioning state of the private keys for SUPI concealment.")
-enum HomeNetworkPrivateKeysProvisioningState {
+union HomeNetworkPrivateKeysProvisioningState {
   @doc("Provisioning of the private keys for SUPI concealment has not been attempted.")
-  NotProvisioned,
+  NotProvisioned: "NotProvisioned",
 
   @doc("The private keys for SUPI concealment are successfully provisioned.")
-  Provisioned,
+  Provisioned: "Provisioned",
 
   @doc("Provisioning of the private keys for SUPI concealment has failed.")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 @doc("Packet core control plane properties.")

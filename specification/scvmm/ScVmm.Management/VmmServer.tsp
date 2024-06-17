@@ -5,7 +5,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
 
@@ -54,7 +53,7 @@ interface VmmServers {
   delete is ArmResourceDeleteWithoutOkAsync<
     VmmServer,
     {
-      ...BaseParameters<VmmServer>;
+      ...Foundations.BaseParameters<VmmServer>;
       ...QueryForceDelete;
     }
   >;

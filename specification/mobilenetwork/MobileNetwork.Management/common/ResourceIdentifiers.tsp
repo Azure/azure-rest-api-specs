@@ -3,13 +3,14 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MobileNetwork;
 
@@ -17,7 +18,7 @@ namespace Microsoft.MobileNetwork;
 @extension("x-ms-azure-resource", true)
 model NexusTrunkedNetworkResourceId {
   @doc("Nexus Trunked Network resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.NetworkCloud/trunkedNetworks";
     }
@@ -28,7 +29,7 @@ model NexusTrunkedNetworkResourceId {
 @extension("x-ms-azure-resource", true)
 model EdgeVirtualNetworkResourceId {
   @doc("Edge Virtual Network resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/packetCoreControlPlanes/packetCoreDataPlanes/edgeVirtualNetworks";
     }
@@ -39,7 +40,7 @@ model EdgeVirtualNetworkResourceId {
 @extension("x-ms-azure-resource", true)
 model EdgeNetworkSecurityGroupResourceId {
   @doc("Edge Network Security Group Resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/mobileNetworks/edgeNetworkSecurityGroups";
     }
@@ -50,7 +51,7 @@ model EdgeNetworkSecurityGroupResourceId {
 @extension("x-ms-azure-resource", true)
 model SiteResourceId {
   @doc("Site resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/mobileNetworks/sites";
     }
@@ -61,7 +62,7 @@ model SiteResourceId {
 @extension("x-ms-azure-resource", true)
 model AzureStackEdgeDeviceResourceId {
   @doc("Azure Stack Edge device resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.DataBoxEdge/dataBoxEdgeDevices";
     }
@@ -73,7 +74,7 @@ model AzureStackEdgeDeviceResourceId {
 @extension("x-ms-azure-resource", true)
 model AzureStackHCIClusterResourceId {
   @doc("Azure Stack HCI cluster resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/clusters";
     }
@@ -84,7 +85,7 @@ model AzureStackHCIClusterResourceId {
 @extension("x-ms-azure-resource", true)
 model NexusEdgeClusterResourceId {
   @doc("Nexus Edge Cluster resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.NetworkCloud/edgeClusters";
     }
@@ -95,7 +96,7 @@ model NexusEdgeClusterResourceId {
 @extension("x-ms-azure-resource", true)
 model ConnectedClusterResourceId {
   @doc("Azure Arc custom location resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.Kubernetes/connectedClusters";
     }
@@ -106,7 +107,7 @@ model ConnectedClusterResourceId {
 @extension("x-ms-azure-resource", true)
 model CustomLocationResourceId {
   @doc("Azure Arc custom location resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.ExtendedLocation/customLocations";
     }
@@ -117,7 +118,7 @@ model CustomLocationResourceId {
 @extension("x-ms-azure-resource", true)
 model NexusCloudServicesNetworkResourceId {
   @doc("Nexus Cloud Services Network resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.NetworkCloud/cloudServicesNetworks";
     }
@@ -128,7 +129,7 @@ model NexusCloudServicesNetworkResourceId {
 @extension("x-ms-azure-resource", true)
 model NexusL3NetworkResourceId {
   @doc("Nexus L3 Network resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.NetworkCloud/l3Networks";
     }
@@ -139,7 +140,7 @@ model NexusL3NetworkResourceId {
 @extension("x-ms-azure-resource", true)
 model AttachedDataNetworkResourceId {
   @doc("Attached data network resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/packetCoreControlPlanes/packetCoreDataPlanes/attachedDataNetworks";
     }
@@ -150,7 +151,7 @@ model AttachedDataNetworkResourceId {
 @extension("x-ms-azure-resource", true)
 model SimPolicyResourceId {
   @doc("SIM policy resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/mobileNetworks/simPolicies";
     }
@@ -161,7 +162,7 @@ model SimPolicyResourceId {
 @extension("x-ms-azure-resource", true)
 model SliceResourceId {
   @doc("Slice resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/mobileNetworks/slices";
     }
@@ -172,7 +173,7 @@ model SliceResourceId {
 @extension("x-ms-azure-resource", true)
 model SimGroupResourceId {
   @doc("SIM group resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/simGroups";
     }
@@ -183,7 +184,7 @@ model SimGroupResourceId {
 @extension("x-ms-azure-resource", true)
 model MobileNetworkResourceId {
   @doc("Mobile network resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/mobileNetworks";
     }
@@ -194,7 +195,7 @@ model MobileNetworkResourceId {
 @extension("x-ms-azure-resource", true)
 model DataNetworkResourceId {
   @doc("Data network resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/mobileNetworks/dataNetworks";
     }
@@ -205,7 +206,7 @@ model DataNetworkResourceId {
 @extension("x-ms-azure-resource", true)
 model ServiceResourceId {
   @doc("Service resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/mobileNetworks/services";
     }
@@ -216,7 +217,7 @@ model ServiceResourceId {
 @extension("x-ms-azure-resource", true)
 model PacketCoreControlPlaneResourceId {
   @doc("Packet core control plane resource ID.")
-  id: ResourceIdentifier<[
+  id: armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/packetCoreControlPlanes";
     }
@@ -225,24 +226,73 @@ model PacketCoreControlPlaneResourceId {
 
 @doc("Reference to a cluster service resource.")
 scalar ClusterServiceIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends armResourceIdentifier<[
     {
       type: "Microsoft.MobileNetwork/clusterServices",
     }
   ]>;
 
-@doc("Reference to a VNF agent deployment resource.")
-scalar VnfAgentDeploymentIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+@doc("Reference to an Azure Arc custom location resource.")
+scalar CustomLocationIdProperty
+  extends armResourceIdentifier<[
     {
-      type: "Microsoft.MobilePacketCore/vnfAgentDeployments",
+      type: "Microsoft.ExtendedLocation/customLocations",
     }
   ]>;
 
-@doc("Reference to an Azure Arc custom location resource.")
-scalar CustomLocationIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+@added(Versions.v2024_05_15_preview)
+@doc("Reference to a Virtual Network Function (VNF) agent deployment resource.")
+scalar VnfAgentDeploymentIdProperty
+  extends armResourceIdentifier<[
     {
-      type: "Microsoft.ExtendedLocation/customLocations",
+      type: "Microsoft.MobileNetwork/vnfAgentDeployments",
+    }
+  ]>;
+
+@added(Versions.v2024_05_15_preview)
+@doc("Azure resource ID of a User Assigned Managed Identity.")
+scalar UamiIdPropertyIdProperty
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities",
+    }
+  ]>;
+
+@added(Versions.v2024_05_15_preview)
+@doc("Azure resource ID of workload associated with a cluster.")
+scalar AssociatedClusterWorkloadIdProperty
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.MobileNetwork/amfDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/nrfDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/nssfDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/observabilityServices",
+    },
+    {
+      type: "Microsoft.MobileNetwork/smfDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/upfDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/vnfAgentDeployments",
+    },
+    {
+      type: "Microsoft.MobileNetwork/sdmDeployments",
+    }
+  ]>;
+
+@added(Versions.v2024_05_15_preview)
+@doc("Azure resource ID of a Virtualized Network Function (VNF) associated with a Virtual Network Function (VNF) Agent")
+scalar AssociatedVirtualNetworkFunctionIdProperty
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.MobileNetwork/virtualizedMmeDeployments",
     }
   ]>;

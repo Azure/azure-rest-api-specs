@@ -1,9 +1,9 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "../shared/main.tsp";
 
@@ -12,18 +12,25 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
 @service({
   title: "Microsoft.AwsConnector",
-  version: "2024-08-01-preview",
 })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AwsConnector;
+
+/** Api versions */
+enum Versions {
+  /** 2024-08-01-preview api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2024-08-01-preview`,
+}
 
 //---------------------------------------------- NetworkFirewallFirewallPolicies ----------------------------------------------
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
@@ -40,9 +47,11 @@ model NetworkFirewallFirewallPolicy
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NetworkFirewallFirewallPolicy")
 model NetworkFirewallFirewallPolicyProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsNetworkFirewallFirewallPolicyProperties;
 
   ...AwsCommonProperties;
@@ -50,172 +59,198 @@ model NetworkFirewallFirewallPolicyProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsNetworkFirewallFirewallPolicy")
 model AwsNetworkFirewallFirewallPolicyProperties {
-  @doc("Gets and sets the property description.")
+  @doc("Property description")
   description?: string;
 
-  @doc("Gets and sets the property firewallPolicy.")
+  @doc("Property firewallPolicy")
   firewallPolicy?: FirewallPolicy;
 
-  @doc("Gets and sets the property firewallPolicyArn. A resource ARN.")
+  @doc("A resource ARN.")
   firewallPolicyArn?: string;
 
-  @doc("Gets and sets the property firewallPolicyId.")
+  @doc("Property firewallPolicyId")
   firewallPolicyId?: string;
 
-  @doc("Gets and sets the property firewallPolicyName.")
+  @doc("Property firewallPolicyName")
   firewallPolicyName?: string;
 
-  @doc("Gets and sets the property tags.")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of FirewallPolicy")
 model FirewallPolicy {
-  @doc("Gets and sets the property policyVariables.")
+  @doc("Property policyVariables")
   policyVariables?: RuleVariablesModel;
 
-  @doc("Gets and sets the property statefulDefaultActions.")
+  @doc("Property statefulDefaultActions")
   @extension("x-ms-identifiers", [])
   statefulDefaultActions?: string[];
 
-  @doc("Gets and sets the property statefulEngineOptions.")
+  @doc("Property statefulEngineOptions")
   statefulEngineOptions?: StatefulEngineOptions;
 
-  @doc("Gets and sets the property statefulRuleGroupReferences.")
+  @doc("Property statefulRuleGroupReferences")
   @extension("x-ms-identifiers", [])
   statefulRuleGroupReferences?: StatefulRuleGroupReference[];
 
-  @doc("Gets and sets the property statelessCustomActions.")
+  @doc("Property statelessCustomActions")
   @extension("x-ms-identifiers", [])
   statelessCustomActions?: CustomAction[];
 
-  @doc("Gets and sets the property statelessDefaultActions.")
+  @doc("Property statelessDefaultActions")
   @extension("x-ms-identifiers", [])
   statelessDefaultActions?: string[];
 
-  @doc("Gets and sets the property statelessFragmentDefaultActions.")
+  @doc("Property statelessFragmentDefaultActions")
   @extension("x-ms-identifiers", [])
   statelessFragmentDefaultActions?: string[];
 
-  @doc("Gets and sets the property statelessRuleGroupReferences.")
+  @doc("Property statelessRuleGroupReferences")
   @extension("x-ms-identifiers", [])
   statelessRuleGroupReferences?: StatelessRuleGroupReference[];
 
-  @doc("Gets and sets the property tlsInspectionConfigurationArn. A resource ARN.")
+  @doc("A resource ARN.")
   tlsInspectionConfigurationArn?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RuleVariables")
 model RuleVariablesModel {
-  @doc("Gets and sets the property ruleVariables.")
-  @projectedName("csharp", "ruleVariablescsharp")
+  @doc("Property ruleVariables")
+  @clientName("ruleVariablescsharp", "csharp")
   ruleVariables?: Record<IPSet>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatefulEngineOptions")
 model StatefulEngineOptions {
-  @doc("Gets and sets the property ruleOrder.")
+  @doc("Property ruleOrder")
   ruleOrder?: string;
 
-  @doc("Gets and sets the property streamExceptionPolicy.")
+  @doc("Property streamExceptionPolicy")
   streamExceptionPolicy?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatefulRuleGroupReference")
 model StatefulRuleGroupReference {
-  @doc("Gets and sets the property override.")
+  @doc("Property override")
   override?: StatefulRuleGroupOverride;
 
-  @doc("Gets and sets the property priority.")
+  @doc("Property priority")
   priority?: int32;
 
-  @doc("Gets and sets the property resourceArn. A resource ARN.")
+  @doc("A resource ARN.")
   resourceArn?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CustomAction")
 model CustomAction {
-  @doc("Gets and sets the property actionDefinition.")
+  @doc("Property actionDefinition")
   actionDefinition?: ActionDefinition;
 
-  @doc("Gets and sets the property actionName.")
+  @doc("Property actionName")
   actionName?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatelessRuleGroupReference")
 model StatelessRuleGroupReference {
-  @doc("Gets and sets the property priority.")
+  @doc("Property priority")
   priority?: int32;
 
-  @doc("Gets and sets the property resourceArn. A resource ARN.")
+  @doc("A resource ARN.")
   resourceArn?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IPSet")
 model IPSet {
-  @doc("Gets and sets the property definition.")
+  @doc("Property definition")
   @extension("x-ms-identifiers", [])
   definition?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StatefulRuleGroupOverride")
 model StatefulRuleGroupOverride {
-  @doc("Gets and sets the property action.")
+  @doc("Property action")
   action?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ActionDefinition")
 model ActionDefinition {
-  @doc("Gets and sets the property publishMetricAction.")
+  @doc("Property publishMetricAction")
   publishMetricAction?: PublishMetricAction;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
-  @doc("Gets and sets the property dimensions.")
+  @doc("Property dimensions")
   @extension("x-ms-identifiers", [])
   dimensions?: Dimension[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Dimension")
 model Dimension {
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 

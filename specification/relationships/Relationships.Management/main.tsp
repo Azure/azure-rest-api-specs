@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -15,11 +14,18 @@ using Azure.ResourceManager.Foundations;
 @armProviderNamespace
 @service({
   title: "Microsoft.Relationships Management Service",
-  version: "2023-09-01-preview",
 })
 @doc("Microsoft.Relationships Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.Relationships;
+
+/** Relationships RP API Versions */
+enum Versions {
+  /** 2023-09-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2023-09-01-preview`,
+}
 
 /*
  * Base relationship types definitions
@@ -34,6 +40,33 @@ model RelationshipOriginInformation<TOrigin = string> {
   @doc("Identifies the origin type of the relationship.")
   @visibility("read")
   relationshipOriginType: TOrigin;
+
+  @doc("The name of the discovery engine that created the relationship.")
+  @visibility("read")
+  discoveryEngine?: string;
+}
+
+@doc("Provides information about the relationship properties.")
+model RelationshipMetadata {
+  @doc("The type of the relationship source resource.")
+  @visibility("read")
+  sourceType: string;
+
+  @doc("The type of the relationship target resource.")
+  @visibility("read")
+  targetType: string;
+}
+
+/**
+ * The provisioning state of a resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum"
+@lroStatus
+enum ProvisioningState {
+  ...ResourceProvisioningState,
+
+  /** The relationship is being provisioned */
+  Provisioning,
 }
 
 @doc("Base relationship properties.")
@@ -45,40 +78,17 @@ model BaseRelationshipProperties<TOrigin> {
   @doc("The target of the current relationship.")
   targetId: string;
 
+  @doc("Metadata about the relationship.")
+  @visibility("read")
+  metadata: RelationshipMetadata;
+
   @doc("Information about the origin of the relationship.")
   @visibility("read")
   originInformation: RelationshipOriginInformation<TOrigin>;
-}
 
-/*
- * componentOf relationship type definitions
- */
-
-@doc("The possible origins of a componentOf relationship.")
-enum ComponentOfOrigins {
-  @doc("The relationship was explicitly created by a system.")
-  ServiceExplicitlyCreated,
-
-  @doc("The relationship was explicitly created by a user.")
-  UserExplicitlyCreated,
-}
-
-// Relationships.RP is an unmanaged RP, so I think we can ignore provisioning state
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("componentOf relationship properties.")
-model ComponentOfRelationshipProperties
-  extends BaseRelationshipProperties<ComponentOfOrigins> {}
-
-@doc("Defines a componentOf relationship resource.")
-model ComponentOfRelationship
-  is ExtensionResource<ComponentOfRelationshipProperties> {
-  @doc("Name of componentOf relationship.")
-  @pattern("^[a-zA-Z0-9]{3,64}$")
+  @doc("The provisioning state of the relationship.")
   @visibility("read")
-  @key
-  @path
-  @segment("componentOf")
-  name: string;
+  provisioningState?: ProvisioningState;
 }
 
 /*
@@ -86,19 +96,19 @@ model ComponentOfRelationship
  */
 
 @doc("The possible origins of a dependencyOf relationship.")
-enum DependencyOfOrigins {
+union DependencyOfOrigins {
   @doc("The relationship was explicitly created by a system.")
-  ServiceExplicitlyCreated,
+  serviceExplicitlyCreated: ServiceExplicitlyCreated,
 
   @doc("The relationship was explicitly created by a user.")
-  UserExplicitlyCreated,
+  userExplicitlyCreated: UserExplicitlyCreated,
+
+  string,
 }
 
-// Relationships.RP is an unmanaged RP, so I think we can ignore provisioning state
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("dependencyOf relationship properties.")
 model DependencyOfRelationshipProperties
-  extends BaseRelationshipProperties<DependencyOfOrigins> {}
+  is BaseRelationshipProperties<DependencyOfOrigins>;
 
 @doc("Defines a dependencyOf relationship resource.")
 model DependencyOfRelationship
@@ -113,31 +123,53 @@ model DependencyOfRelationship
 }
 
 /*
+ * ServiceGroupMember relationship type definition
+ */
+
+@doc("The possible origins of a ServiceGroupMember relationship.")
+union ServiceGroupMemberOrigins {
+  @doc("The relationship was explicitly created by a system.")
+  serviceExplicitlyCreated: ServiceExplicitlyCreated,
+
+  @doc("The relationship was explicitly created by a user.")
+  userExplicitlyCreated: UserExplicitlyCreated,
+
+  string,
+}
+
+@doc("ServiceGroupMember relationship properties.")
+model ServiceGroupMemberRelationshipProperties
+  is BaseRelationshipProperties<ServiceGroupMemberOrigins>;
+
+@doc("Defines a ServiceGroupMember relationship resource.")
+model ServiceGroupMemberRelationship
+  is ExtensionResource<ServiceGroupMemberRelationshipProperties> {
+  @doc("Name of ServiceGroupMember relationship.")
+  @pattern("^[a-zA-Z0-9]{3,64}$")
+  @visibility("read")
+  @key
+  @path
+  @segment("serviceGroupMember")
+  name: string;
+}
+
+/*
  * Microsoft.Relationships RP interface definitions
  */
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-interface Relationships<
-  TRelationship extends ArmResource,
-  TProperties extends {}
-> extends ExtensionResourceCollectionOperations<TRelationship> {
+interface Relationships<TRelationship extends ArmResource> {
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TRelationship>;
   get is ArmResourceRead<TRelationship>;
-  createOrUpdate is ArmResourceCreateOrReplaceSync<TRelationship>;
-  update is ArmResourcePatchSync<TRelationship, TProperties>;
   delete is ArmResourceDeleteSync<TRelationship>;
+  listByParent is ArmResourceListByParent<TRelationship>;
 }
 
-@armResourceOperations(ComponentOfRelationship)
-interface ComponentOfRelationships
-  extends Relationships<
-      ComponentOfRelationship,
-      ComponentOfRelationshipProperties
-    > {}
-
-@armResourceOperations(DependencyOfRelationship)
+@armResourceOperations
 interface DependencyOfRelationships
-  extends Relationships<
-      DependencyOfRelationship,
-      DependencyOfRelationshipProperties
-    > {}
+  extends Relationships<DependencyOfRelationship> {}
+
+@armResourceOperations
+interface ServiceGroupMemberRelationships
+  extends Relationships<ServiceGroupMemberRelationship> {}

@@ -1,7 +1,6 @@
 ﻿import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
@@ -60,21 +59,23 @@ model ExposureWorkflowProperties {
 }
 
 @doc("Exposure Workflow Status")
-enum ExposureWorkflowStatus {
+union ExposureWorkflowStatus {
+  string,
+
   @doc("Workflow status is waiting.")
-  Waiting,
+  Waiting: "Waiting",
 
   @doc("Workflow started or in-progress.")
-  Active,
+  Active: "Active",
 
   @doc("Workflow reached completion successfully.")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Workflow is cancelled.")
-  Cancelled,
+  Cancelled: "Cancelled",
 
   @doc("workflow reached completion with Failed status.")
-  Failed,
+  Failed: "Failed",
 }
 
 @doc("Exposure workflow ring configuration Properties")

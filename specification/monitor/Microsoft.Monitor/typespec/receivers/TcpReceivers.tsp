@@ -25,9 +25,11 @@ model UdpReceiver is TcpReceiver {
 }
 
 @doc("Encoding types for streams.")
-enum StreamEncodingType {
+union StreamEncodingType {
+  string,
+
   @doc("No encoding validation. Treats the file as a stream of raw bytes.")
-  nop,
+  nop: "nop",
 
   @doc("UTF-8 encoding.")
   utf_8: "utf-8",
@@ -39,8 +41,8 @@ enum StreamEncodingType {
   utf_16be: "utf-16be",
 
   @doc("ASCII encoding.")
-  ascii,
+  ascii: "ascii",
 
   @doc("The Big5 Chinese character encoding.")
-  big5,
+  big5: "big5",
 }

@@ -8,7 +8,6 @@ import "./Ues.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,6 +19,7 @@ namespace Microsoft.MobileNetwork;
 @parentResource(UeInfo)
 model ExtendedUeInfo is ProxyResource<ExtendedUeInfoProperties> {
   @doc("The name of the extended UE info.")
+  @pattern(".*")
   @path
   @key("extendedInformation")
   @segment("extendedInformation")

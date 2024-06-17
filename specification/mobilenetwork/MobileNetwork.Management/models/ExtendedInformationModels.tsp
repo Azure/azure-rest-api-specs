@@ -7,39 +7,45 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MobileNetwork;
 
 @doc("Packet Data Network Type.")
-enum PdnType {
+union PdnType {
   @doc("Packet Data Network Type IPv4.")
-  IPV4,
+  IPV4: "IPV4",
+
+  string,
 }
 
 @doc("Radio connection establishment cause.")
-enum RrcEstablishmentCause {
+union RrcEstablishmentCause {
   @doc("Emergency Cause.")
-  Emergency,
+  Emergency: "Emergency",
 
   @doc("Mobile Originated Data.")
-  MobileOriginatedData,
+  MobileOriginatedData: "MobileOriginatedData",
 
   @doc("Mobile Originated Signaling.")
-  MobileOriginatedSignaling,
+  MobileOriginatedSignaling: "MobileOriginatedSignaling",
 
   @doc("Mobile Terminated Data.")
-  MobileTerminatedData,
+  MobileTerminatedData: "MobileTerminatedData",
 
   @doc("Mobile Terminated Signaling.")
-  MobileTerminatedSignaling,
+  MobileTerminatedSignaling: "MobileTerminatedSignaling",
 
   @doc("Short Message Service.")
-  SMS,
+  SMS: "SMS",
+
+  string,
 }
 
 @doc("The UE's usage setting.")
-enum UeUsageSetting {
+union UeUsageSetting {
   @doc("Data Centric.")
-  DataCentric,
+  DataCentric: "DataCentric",
 
   @doc("Voice Centric.")
-  VoiceCentric,
+  VoiceCentric: "VoiceCentric",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility. The resource ExtendedInformation is for retrieving the information of the resources only."

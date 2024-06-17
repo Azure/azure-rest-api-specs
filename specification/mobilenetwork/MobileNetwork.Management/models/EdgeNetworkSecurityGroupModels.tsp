@@ -7,42 +7,48 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MobileNetwork;
 
 @doc("Network protocol this rule applies to.")
-enum SecurityRuleProtocol {
+union SecurityRuleProtocol {
   @doc("Transmission control protocol.")
-  TCP,
+  TCP: "TCP",
 
   @doc("User datagram protocol.")
-  UDP,
+  UDP: "UDP",
 
   @doc("Internet control message protocol.")
-  ICMP,
+  ICMP: "ICMP",
 
   @doc("Encapsulating security payload.")
-  ESP,
+  ESP: "ESP",
 
   @doc("Wildcard character, representing any protocol.")
   Asterisk: "*",
 
   @doc("Authentication header.")
-  AH,
+  AH: "AH",
+
+  string,
 }
 
 @doc("Whether network traffic is allowed or denied.")
-enum EdgeSecurityRuleAccess {
+union EdgeSecurityRuleAccess {
   @doc("Allow network traffic.")
-  Allow,
+  Allow: "Allow",
 
   @doc("Deny network traffic.")
-  Deny,
+  Deny: "Deny",
+
+  string,
 }
 
 @doc("The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. Direction is based on device attached to the edge network, Inbound means towards the device attached, and outbound means away from the device attached.")
-enum EdgeSecurityRuleDirection {
+union EdgeSecurityRuleDirection {
   @doc("Traffic towards the device attached.")
-  Inbound,
+  Inbound: "Inbound",
 
   @doc("Traffic away from the device attached.")
-  Outbound,
+  Outbound: "Outbound",
+
+  string,
 }
 
 @doc("Edge Network Security Group properties.")

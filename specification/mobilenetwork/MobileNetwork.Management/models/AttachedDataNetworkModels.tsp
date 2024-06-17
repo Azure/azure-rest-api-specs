@@ -7,12 +7,14 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MobileNetwork;
 
 @doc("Whether network address and port translation is enabled.")
-enum NaptEnabled {
+union NaptEnabled {
   @doc("NAPT is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("NAPT is disabled")
-  Disabled,
+  Disabled: "Disabled",
+
+  string,
 }
 
 @doc("Data network properties.")

@@ -8,7 +8,6 @@ import "./PacketCoreDataPlane.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -38,7 +37,7 @@ interface AttachedDataNetworks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<AttachedDataNetwork>;
 
   @doc("Updates an attached data network tags.")
-  @parameterVisibility("read")
+  @parameterVisibility
   updateTags is ArmCustomPatchSync<AttachedDataNetwork, TagsObject>;
 
   @doc("Deletes the specified attached data network.")

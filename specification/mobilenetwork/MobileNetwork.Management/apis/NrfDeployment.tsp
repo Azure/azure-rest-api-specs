@@ -7,7 +7,6 @@ import "../models/NrfDeploymentModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -31,7 +30,7 @@ model NrfDeploymentResource
 @armResourceOperations(NrfDeploymentResource)
 interface NrfDeployments {
   get is ArmResourceRead<NrfDeploymentResource>;
-  createOrUpdate is ArmResourceCreateOrUpdate2Async<NrfDeploymentResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<NrfDeploymentResource>;
   updateTags is ArmTagsPatchSync<NrfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<NrfDeploymentResource>;
   @doc("List all Network Repository Function Deployments by Resource Group.")
