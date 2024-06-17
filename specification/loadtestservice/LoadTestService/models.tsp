@@ -338,11 +338,11 @@ model PassFailMetric {
   clientMetric?: PFMetrics;
 
   @doc("""
-  The aggregation function to be applied on the client metric. Allowed functions
-  - ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,
-  ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
-  ‘count’ - for requests
-  """)
+    The aggregation function to be applied on the client metric. Allowed functions
+    - ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,
+    ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
+    ‘count’ - for requests
+    """)
   aggregate?: PFAgFunc;
 
   @doc("The comparison operator. Supported types ‘>’, ‘<’ ")

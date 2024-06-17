@@ -462,8 +462,8 @@ interface TestProfileAdministration {
 
   @summary("List test profiles.")
   @doc("""
-  Get all test profiles for the given filters.
-  """)
+    Get all test profiles for the given filters.
+    """)
   @added(APIVersions.v2024_05_01_preview)
   listTestProfiles is StandardResourceOperations.ResourceList<
     TestProfile,
