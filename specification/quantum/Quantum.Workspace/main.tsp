@@ -52,20 +52,20 @@ using OpenAPI;
 })
 namespace Quantum.Workspace.Services {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
-  There is no support for JsonPatch in Azure.Core.
-  The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
-  See https://github.com/Azure/typespec-azure/issues/475
-  """
+    There is no support for JsonPatch in Azure.Core.
+    The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
+    See https://github.com/Azure/typespec-azure/issues/475
+    """
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
-  We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
-  See https://github.com/Azure/typespec-azure/issues/494
-  """
+    We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
+    See https://github.com/Azure/typespec-azure/issues/494
+    """
   interface Jobs extends Quantum.Workspace.Operations.JobOperations {}
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
-  We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
-  See https://github.com/Azure/typespec-azure/issues/494
-  """
+    We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
+    See https://github.com/Azure/typespec-azure/issues/494
+    """
   interface Sessions extends Quantum.Workspace.Operations.SessionOperations {}
 
   interface Providers extends Quantum.Workspace.Operations.ProviderOperations {}
