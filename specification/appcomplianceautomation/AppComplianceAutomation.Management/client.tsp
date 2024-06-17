@@ -3,4 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.AppComplianceAutomation, "AppComplianceAutomationMgmt", "python");
+@@clientName(Microsoft.AppComplianceAutomation,
+  "AppComplianceAutomationMgmt",
+  "python"
+);
