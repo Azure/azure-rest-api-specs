@@ -40,7 +40,7 @@ model Assistant {
   instructions: string | null;
 
   @doc("The collection of tools enabled for the assistant.")
-  tools: ToolDefinition[] = [];
+  tools: ToolDefinition[] = #[];
 
   /**
    * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
@@ -103,7 +103,7 @@ model AssistantCreationOptions {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The collection of tools to enable for the new assistant.")
-  tools?: ToolDefinition[] = [];
+  tools?: ToolDefinition[] = #[];
 
   /**
    * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
@@ -169,7 +169,7 @@ model UpdateAssistantOptions {
   instructions?: string | null;
 
   @doc("The modified collection of tools to enable for the assistant.")
-  tools?: ToolDefinition[] = [];
+  tools?: ToolDefinition[] = #[];
 
   /**
    * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example,
