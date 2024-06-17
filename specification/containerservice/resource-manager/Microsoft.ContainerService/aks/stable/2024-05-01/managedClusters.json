@@ -5085,7 +5085,8 @@
           "enum": [
             "Unmanaged",
             "None",
-            "NodeImage"
+            "NodeImage",
+            "SecurityPatch"
           ],
           "x-ms-enum": {
             "name": "nodeOSUpgradeChannel",
@@ -5102,6 +5103,10 @@
               {
                 "value": "NodeImage",
                 "description": "AKS will update the nodes with a newly patched VHD containing security fixes and bugfixes on a weekly cadence. With the VHD update machines will be rolling reimaged to that VHD following maintenance windows and surge settings. No extra VHD cost is incurred when choosing this option as AKS hosts the images."
+              },
+              {
+                "value": "SecurityPatch",
+                "description": "AKS downloads and updates the nodes with tested security updates. These updates honor the maintenance window settings and produce a new VHD that is used on new nodes. On some occasions it's not possible to apply the updates in place, in such cases the existing nodes will also be re-imaged to the newly produced VHD in order to apply the changes. This option incurs an extra cost of hosting the new Security Patch VHDs in your resource group for just in time consumption."
               }
             ]
           },
