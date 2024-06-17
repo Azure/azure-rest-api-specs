@@ -21,7 +21,7 @@ namespace SplitIO.Experimentation;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v1_preview: "2024-03-01-preview",
+  v1_preview: "2024-07-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -44,20 +44,9 @@ model AccessPolicy {
   @doc("Application id used for access to the experimentation workspace.")
   applicationId: string;
 
-  @doc("A default role given to a user calling the Split.IO data plane when the user has no assigned role.")
-  defaultRole?: DataPlaneRole;
-
   @doc("Endpoint used for access to the experimentation workspace.")
   @visibility("read")
   dataPlaneEndpoint?: string;
-}
-
-@doc("Role required for data plane access.")
-union DataPlaneRole {
-  None: "None",
-  ExperimentationDataReader: "ExperimentationDataReader",
-  ExperimentationDataOwner: "ExperimentationDataOwner",
-  string,
 }
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
