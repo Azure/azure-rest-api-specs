@@ -189,6 +189,14 @@
         ]
       }
     },
+    "Azure.Core.ipV4Address": {
+      "type": "string",
+      "description": "Represent an IP V4 address serialized as a string.\n\nIt is formatted as four 8-bit fields separated by periods."
+    },
+    "Azure.Core.ipV6Address": {
+      "type": "string",
+      "description": "Represent an IP V6 address serialized as a string.\n\nIt is formatted as eight hex decimal values(16-bit) between 0 and FFFF separated by colon. (i.e. `y:y:y:y:y:y:y:y`)"
+    },
     "Cloud": {
       "type": "string",
       "description": "Cloud enum",
@@ -402,6 +410,24 @@
         ]
       }
     },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-01-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_01_01_preview",
+            "value": "2024-01-01-preview",
+            "description": "2024-10-01-preview version"
+          }
+        ]
+      }
+    },
     "VmProperties": {
       "type": "object",
       "description": "VirtualMachine Properties",
@@ -454,6 +480,34 @@
         "osProperties": {
           "$ref": "#/definitions/OsProperties",
           "description": "OS Properties for the machine"
+        },
+        "ipv4Addresses": {
+          "type": "array",
+          "description": "IPv4 addresses for the machine",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
+          }
+        },
+        "ipv4MsPrivateAddresses": {
+          "type": "array",
+          "description": "MS private IPv4 addresses for the machine",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
+          }
+        },
+        "ipv6Addresses": {
+          "type": "array",
+          "description": "IPv6 addresses for the machine",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV6Address"
+          }
+        },
+        "ipv6LinkLocalAddresses": {
+          "type": "array",
+          "description": "Link local IPv6 addresses for the machine",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV6Address"
+          }
         }
       },
       "required": [
@@ -463,7 +517,11 @@
         "datacenterCode",
         "cloud",
         "status",
-        "osProperties"
+        "osProperties",
+        "ipv4Addresses",
+        "ipv4MsPrivateAddresses",
+        "ipv6Addresses",
+        "ipv6LinkLocalAddresses"
       ]
     },
     "VmResource": {

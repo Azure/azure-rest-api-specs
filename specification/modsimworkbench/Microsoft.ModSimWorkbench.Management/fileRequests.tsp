@@ -59,12 +59,14 @@ model FileRequestInternalMetadata {
 }
 
 @doc("File request approval.")
-enum FileRequestAction {
+union FileRequestAction {
+  string,
+
   @doc("Approve request.")
-  Approve,
+  Approve: "Approve",
 
   @doc("Reject request.")
-  Reject,
+  Reject: "Reject",
 }
 
 @doc("Parameters for managing file request.")
@@ -83,7 +85,7 @@ model FileRequestProperties {
 
   @visibility("read")
   @doc("The unique identifier if the file associated with this request.")
-  fileId: ResourceIdentifier<[
+  fileId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ModSimWorkbench/files";
     }

@@ -2,6 +2,7 @@ import "./LiftrBase.Storage/main.tsp";
 import "@typespec/openapi";
 
 @armProviderNamespace
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @useLibraryNamespace(LiftrBase.Storage)
 @service({
   title: "PureStorage.Block",
@@ -24,6 +25,12 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v1_preview: "2023-06-01-preview",
+
+  @doc("Version 2 preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v2_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v2_preview: "2024-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -42,6 +49,29 @@ interface Reservations
   getResourceLimits(
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<LimitDetails> | ErrorResponse;
+
+  @added(Versions.v2_preview)
+  @doc("Change the marketplace plan of the reservation.")
+  @armResourceAction(Reservation)
+  @action("changePlan")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @post
+  changePlan(
+    ...ResourceInstanceParameters<Reservation>,
+
+    /** The payload containing change plan parameters */
+    @body
+    changePlanParameters: MarketplacePlanUpdate,
+  ): ArmAcceptedLroResponse<
+    "Resource Operation accepted",
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
 }
 
 @doc("Storage Pool resource type.")
@@ -56,7 +86,7 @@ model StoragePool is TrackedResource<StoragePoolProperties> {
   @pattern("^[a-zA-Z0-9\\-_]{1,127}$")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("Properties of a Storage Pool resource.")
@@ -162,7 +192,7 @@ interface StoragePools {
     properties: StoragePoolEnableAvs,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
-    ArmCombinedLroHeaders
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
   @doc("Disable AVS on storage pool")
@@ -180,7 +210,7 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
-    ArmCombinedLroHeaders
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
   @doc("Finalize AVS on storage pool")
@@ -198,7 +228,7 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
-    ArmCombinedLroHeaders
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
   @doc("Enable VSphere plugin on storage pool")
@@ -220,7 +250,7 @@ interface StoragePools {
     properties: StoragePoolEnableVspherePlugin,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
-    ArmCombinedLroHeaders
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
   @doc("Disable VSphere plugin on storage pool")
@@ -238,7 +268,7 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
-    ArmCombinedLroHeaders
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
   @doc("Upgrade VSphere plugin on storage pool")
@@ -256,7 +286,7 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
-    ArmCombinedLroHeaders
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 }
 
@@ -460,15 +490,17 @@ model Alert {
 }
 
 @doc("The severity level of the alert.")
-enum AlertLevel {
-  @doc("Information level.")
+union AlertLevel {
+  /** Information level */
   Info: "info",
 
-  @doc("Warning level.")
+  /** Warning level */
   Warning: "warning",
 
-  @doc("Error level.")
+  /** Error level */
   Error: "error",
+
+  string,
 }
 
 @doc("Storage Pool enable AVS")
@@ -537,14 +569,13 @@ interface AvsStorageContainers {
 @doc("The AVS Storage Container Volume resource type.")
 @parentResource(AvsStorageContainer)
 model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
-  @doc("Id of Storage Container Volume.")
-  @segment("volumes")
-  @key("volumeId")
-  @visibility("read")
-  @path
-  @minLength(1)
-  @maxLength(127)
-  name: string;
+  /** Id of Storage Container Volume */
+  ...ResourceNameParameter<
+    AvsStorageContainerVolume,
+    "volumeId",
+    "volumes",
+    NamePattern = "^[a-zA-Z0-9]{1,127}$"
+  >;
 }
 
 @doc("Volume properties.")
@@ -633,13 +664,15 @@ model VolumeConsistencyGroup {
   consistencyGroupId: string;
 }
 
-@doc("Enum of possible Volume types.")
-enum VolumeType {
-  @doc("Azure Volume Type.")
+@doc("Volume types.")
+union VolumeType {
+  /** Azure Volume Type */
   Azure: "azure",
 
-  @doc("AVS Volume Type.")
+  /** AVS Volume Type */
   AVS: "avs",
+
+  string,
 }
 
 @doc("AVS disk details.")
@@ -682,14 +715,13 @@ interface AvsStorageContainerVolumes {
 
 @parentResource(StoragePool)
 model AvsVm is ProxyResource<AvsVmProperties> {
-  @doc("Id of AVS VM.")
-  @segment("avsVms")
-  @key("avsVmId")
-  @visibility("read")
-  @path
-  @minLength(1)
-  @maxLength(127)
-  name: string;
+  /** Id of AVS VM */
+  ...ResourceNameParameter<
+    AvsVm,
+    "avsVmId",
+    "avsVms",
+    NamePattern = "^[a-zA-Z0-9]{1,127}$"
+  >;
 }
 
 @doc("AVS VM properties.")
@@ -761,19 +793,23 @@ model AvsVmDetails {
   avsVmInternalId: string;
 }
 
-@doc("Enum of possible VM types.")
-enum VmType {
-  @doc("vvol Vm Type.")
+@doc("VM types.")
+union VmType {
+  /** vvol Vm Type */
   vVol: "vvol",
+
+  string,
 }
 
-@doc("Enum of possible Volume container types.")
-enum VolumeContainerType {
-  @doc("Azure Volume Container Type.")
+@doc("Volume container types.")
+union VolumeContainerType {
+  /** Azure Volume Container Type */
   Azure: "azure",
 
-  @doc("AVS Volume Container Type.")
+  /** AVS Volume Container Type */
   AVS: "avs",
+
+  string,
 }
 
 @armResourceOperations
@@ -787,14 +823,13 @@ interface AvsVms {
 @doc("The AVS VM Volume resource type.")
 @parentResource(AvsVm)
 model AvsVmVolume is ProxyResource<VolumeProperties> {
-  @doc("Id of AVS VM Volume.")
-  @segment("avsVmVolumes")
-  @key("volumeId")
-  @visibility("read")
-  @path
-  @minLength(1)
-  @maxLength(127)
-  name: string;
+  /** Id of AVS VM Volume */
+  ...ResourceNameParameter<
+    AvsVmVolume,
+    "volumeId",
+    "avsVmVolumes",
+    NamePattern = "^[a-zA-Z0-9]{1,127}$"
+  >;
 }
 
 @armResourceOperations

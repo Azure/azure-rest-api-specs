@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2024-06-27",
+    "parameters": {
+      "downloadType": "ResourceList",
+      "offerGuid": "00000000-0000-0000-0000-000000000001",
+      "reportCreatorTenantId": "00000000-0000-0000-0000-000000000000"
+    },
+    "reportName": "testReportName",
+    "snapshotName": "testSnapshotName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resourceList": [
+          {
+            "resourceGroup": "myResourceGroup",
+            "resourceId": "mySignalRService",
+            "resourceType": "SignalR",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationStatuses/{operationId}",
+        "Location": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationResults/{operationId}"
+      }
+    }
+  },
+  "operationId": "Snapshots_Download",
+  "title": "Snapshot_Download_ResourceList"
+}

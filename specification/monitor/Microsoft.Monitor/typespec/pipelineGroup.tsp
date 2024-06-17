@@ -24,7 +24,7 @@ namespace Microsoft.Monitor;
 @doc("A pipeline group definition.")
 model PipelineGroup is TrackedResource<PipelineGroupProperties> {
   @doc("The name of pipeline group. The name is case insensitive.")
-  @pattern("^(?!-)[a-zA-Z0-9-]{3,10}[^-]$")
+  @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
   @key("pipelineGroupName")
   @path
   @segment("pipelineGroups")
@@ -85,21 +85,23 @@ model Receiver {
 }
 
 @doc("The receiver type.")
-enum ReceiverType {
+union ReceiverType {
+  string,
+
   @doc("Linux syslog.")
-  Syslog,
+  Syslog: "Syslog",
 
   @doc("Receives data from azure monitor agent receiver.")
-  Ama,
+  Ama: "Ama",
 
   @doc("Receives data from another pipeline group.")
-  PipelineGroup,
+  PipelineGroup: "PipelineGroup",
 
   @doc("Receives data from a OTLP collector.")
-  OTLP,
+  OTLP: "OTLP",
 
   @doc("Receives data from an UDP collector.")
-  UDP,
+  UDP: "UDP",
 }
 
 @doc("Processor Info.")
@@ -116,9 +118,11 @@ model Processor {
 }
 
 @doc("The processor type.")
-enum ProcessorType {
+union ProcessorType {
+  string,
+
   @doc("Batch processor.")
-  Batch,
+  Batch: "Batch",
 }
 
 @doc("Exporter Info.")
@@ -138,12 +142,14 @@ model Exporter {
 }
 
 @doc("The exporter type.")
-enum ExporterType {
+union ExporterType {
+  string,
+
   @doc("Export logs to Azure Monitor Workspace.")
-  AzureMonitorWorkspaceLogs,
+  AzureMonitorWorkspaceLogs: "AzureMonitorWorkspaceLogs",
 
   @doc("Export data to another pipeline group instance.")
-  PipelineGroup,
+  PipelineGroup: "PipelineGroup",
 }
 
 @doc("Service Info.")
@@ -180,9 +186,17 @@ model Pipeline {
 }
 
 @doc("The pipeline type.")
-enum PipelineType {
+union PipelineType {
+  string,
+
+  @added(Versions.v2024_10_01)
   @doc("Pipeline for logs telemetry.")
-  Logs: "logs",
+  Logs: "Logs",
+
+  @removed(Versions.v2024_10_01)
+  @renamedFrom(Versions.v2024_10_01, "Logs")
+  @doc("Pipeline for logs telemetry.")
+  LogsPreview: "logs",
 }
 
 @doc("Networking configuration for the pipeline group instance.")
@@ -200,9 +214,11 @@ model NetworkingConfiguration {
 }
 
 @doc("The mode of the external networking.")
-enum ExternalNetworkingMode {
+union ExternalNetworkingMode {
+  string,
+
   @doc("Load balancer only.")
-  LoadBalancerOnly,
+  LoadBalancerOnly: "LoadBalancerOnly",
 }
 
 @doc("Networking route configuration.")

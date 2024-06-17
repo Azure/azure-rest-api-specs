@@ -11,6 +11,12 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
+@doc("Microsoft.MessagingConnectors Resource Provider management API.")
+@armProviderNamespace
+@service({
+  title: "Microsoft.MessagingConnectors management service",
+})
+@versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
 @doc("Provisioning states of Connector ARM Resource")
@@ -168,7 +174,7 @@ model EventHubConfig {
   connectionString: string;
 }
 
-@doc("Properties of one arm connector resource")
+@doc("Properties of one arm resource")
 model ResourceProperties {
   @doc("Properties of one Connector")
   connectorProperties: ConnectorProperties;
@@ -423,6 +429,7 @@ model DataRangeLimit extends DataRangeBaseConfig {
   limit: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("Properties of one DataPreview")
 model DataPreviewProperties {
   @doc("Properties of one Connector Source")

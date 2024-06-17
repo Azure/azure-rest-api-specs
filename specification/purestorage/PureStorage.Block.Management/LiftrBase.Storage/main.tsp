@@ -10,7 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.Reflection;
-using Azure.ResourceManager.Foundations;
 
 @versioned(LiftrBase.Storage.Versions)
 @armLibraryNamespace
@@ -27,7 +26,7 @@ enum Versions {
 @doc("Reservation resource type.")
 @friendlyName("Reservation")
 model Reservation<TProperties extends Model = ReservationProperties>
-  is TrackedResource<TProperties> {
+  is Azure.ResourceManager.TrackedResource<TProperties> {
   @doc("The name of the reservation.")
   @segment("reservations")
   @key("reservationName")
@@ -41,7 +40,7 @@ model Reservation<TProperties extends Model = ReservationProperties>
 
 @armResourceOperations
 interface Reservations<
-  TReservation extends ArmResource = Reservation,
+  TReservation extends Foundations.Resource = Reservation,
   TReservationProperties extends Model = ReservationProperties
 > {
   get is ArmResourceRead<TReservation>;

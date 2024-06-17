@@ -74,12 +74,14 @@ model IngestionSettings {
 }
 
 @doc("State of the public network access.")
-enum PublicNetworkAccess {
+union PublicNetworkAccess {
+  string,
+
   @doc("The public network access is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The public network access is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @armResourceOperations

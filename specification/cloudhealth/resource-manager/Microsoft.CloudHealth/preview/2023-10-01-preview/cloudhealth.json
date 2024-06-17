@@ -339,14 +339,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -396,14 +396,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1600,7 +1600,13 @@
       ],
       "x-ms-enum": {
         "name": "AuthenticationKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity"
+          }
+        ]
       }
     },
     "AuthenticationSetting": {
@@ -2017,36 +2023,6 @@
         "y"
       ]
     },
-    "EntityImpact": {
-      "type": "string",
-      "description": "Type of impact an entity has on health state propagation",
-      "enum": [
-        "Standard",
-        "Limited",
-        "Suppressed"
-      ],
-      "x-ms-enum": {
-        "name": "EntityImpact",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard impact"
-          },
-          {
-            "name": "Limited",
-            "value": "Limited",
-            "description": "Limited impact"
-          },
-          {
-            "name": "Suppressed",
-            "value": "Suppressed",
-            "description": "Suppressed impact"
-          }
-        ]
-      }
-    },
     "EntityListResult": {
       "type": "object",
       "description": "The response of a Entity list operation.",
@@ -2384,18 +2360,13 @@
         },
         "valueColumnName": {
           "type": "string",
-          "description": "Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified.",
+          "description": "Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified. The column must be numeric.",
           "minLength": 1,
           "maxLength": 100
-        },
-        "dataType": {
-          "$ref": "#/definitions/ResultDataType",
-          "description": "Data type of the result"
         }
       },
       "required": [
-        "queryText",
-        "dataType"
+        "queryText"
       ],
       "allOf": [
         {
@@ -2424,18 +2395,11 @@
         "logAnalyticsWorkspaceResourceId": {
           "$ref": "#/definitions/LogAnalyticsWorkspaceResourceId",
           "description": "Log Analytics Workspace resource ID"
-        },
-        "logAnalyticsWorkspaceId": {
-          "type": "string",
-          "description": "Log Analytics workspace ID",
-          "minLength": 36,
-          "maxLength": 36
         }
       },
       "required": [
         "authenticationSetting",
-        "logAnalyticsWorkspaceResourceId",
-        "logAnalyticsWorkspaceId"
+        "logAnalyticsWorkspaceResourceId"
       ]
     },
     "LogAnalyticsWorkspaceResourceId": {
@@ -2484,7 +2448,33 @@
       ],
       "x-ms-enum": {
         "name": "MetricAggregationType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "Average",
+            "value": "Average"
+          },
+          {
+            "name": "Count",
+            "value": "Count"
+          },
+          {
+            "name": "Minimum",
+            "value": "Minimum"
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum"
+          },
+          {
+            "name": "Total",
+            "value": "Total"
+          }
+        ]
       }
     },
     "PrometheusMetricsSignalDefinitionProperties": {
@@ -2513,54 +2503,6 @@
         }
       ],
       "x-ms-discriminator-value": "PrometheusMetricsQuery"
-    },
-    "RefreshInterval": {
-      "type": "string",
-      "description": "Refresh interval in ISO duration format",
-      "enum": [
-        "PT1M",
-        "PT5M",
-        "PT10M",
-        "PT30M",
-        "PT1H",
-        "PT2H"
-      ],
-      "x-ms-enum": {
-        "name": "RefreshInterval",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PT1M",
-            "value": "PT1M",
-            "description": "One Minute"
-          },
-          {
-            "name": "PT5M",
-            "value": "PT5M",
-            "description": "Five Minutes"
-          },
-          {
-            "name": "PT10M",
-            "value": "PT10M",
-            "description": "Ten Minutes"
-          },
-          {
-            "name": "PT30M",
-            "value": "PT30M",
-            "description": "Thirty Minutes"
-          },
-          {
-            "name": "PT1H",
-            "value": "PT1H",
-            "description": "One Hour"
-          },
-          {
-            "name": "PT2H",
-            "value": "PT2H",
-            "description": "Two Hours"
-          }
-        ]
-      }
     },
     "Relationship": {
       "type": "object",
@@ -2611,6 +2553,12 @@
           "$ref": "#/definitions/HealthModelProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name",
+          "minLength": 1,
+          "maxLength": 100
         },
         "parentEntityName": {
           "$ref": "#/definitions/stringResourceName",
@@ -2704,18 +2652,6 @@
       ],
       "x-ms-discriminator-value": "AzureResourceMetric"
     },
-    "ResultDataType": {
-      "type": "string",
-      "description": "Result data type",
-      "enum": [
-        "Numeric",
-        "Text"
-      ],
-      "x-ms-enum": {
-        "name": "ResultDataType",
-        "modelAsString": true
-      }
-    },
     "SignalAssignment": {
       "type": "object",
       "description": "Group of signal definition assignments",
@@ -2732,28 +2668,6 @@
       },
       "required": [
         "signalDefinitions"
-      ]
-    },
-    "SignalAssignmentGroup": {
-      "type": "object",
-      "description": "A grouping of signal assignments and link to a data source",
-      "properties": {
-        "signalAssignments": {
-          "type": "array",
-          "description": "Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.",
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/SignalAssignment"
-          },
-          "x-ms-identifiers": []
-        },
-        "authenticationSetting": {
-          "$ref": "#/definitions/stringResourceName",
-          "description": "Reference to the name of the authentication setting which is used for querying the data source"
-        }
-      },
-      "required": [
-        "authenticationSetting"
       ]
     },
     "SignalDefinition": {
@@ -2927,7 +2841,21 @@
       ],
       "x-ms-enum": {
         "name": "SignalKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureResourceMetric",
+            "value": "AzureResourceMetric"
+          },
+          {
+            "name": "LogAnalyticsQuery",
+            "value": "LogAnalyticsQuery"
+          },
+          {
+            "name": "PrometheusMetricsQuery",
+            "value": "PrometheusMetricsQuery"
+          }
+        ]
       }
     },
     "SignalOperator": {
@@ -2938,8 +2866,7 @@
         "LowerOrEquals",
         "GreaterThan",
         "GreaterOrEquals",
-        "Equals",
-        "Contains"
+        "Equals"
       ],
       "x-ms-enum": {
         "name": "SignalOperator",
@@ -2969,11 +2896,6 @@
             "name": "Equals",
             "value": "Equals",
             "description": "Equal to"
-          },
-          {
-            "name": "Contains",
-            "value": "Contains",
-            "description": "Contains (only applicable for text data type)"
           }
         ]
       }

@@ -40,10 +40,13 @@
   },
   "tags": [
     {
-      "name": "Operations"
+      "name": "ConnectorOperations"
     },
     {
-      "name": "ConnectorOperations"
+      "name": "DataPreviewInstanceOperations"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
@@ -122,10 +125,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/locations/{location}/dataPreview": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/locations/{location}/dataPreview/default/preview": {
       "post": {
-        "operationId": "DataPreviewOperations_DataPreview",
-        "description": "LocationLevel Async operation",
+        "operationId": "DataPreviewInstanceOperations_Preview",
+        "tags": [
+          "DataPreviewInstanceOperations"
+        ],
+        "description": "create one dataPreview task",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -148,7 +154,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DataPreviewResults"
             }
@@ -1198,6 +1204,26 @@
       ],
       "x-ms-discriminator-value": "CosmosDbSource"
     },
+    "DataPreviewInstance": {
+      "type": "object",
+      "description": "A dataPreview resource Azure",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataPreviewProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "DataPreviewProperties": {
       "type": "object",
       "description": "Properties of one DataPreview",
@@ -1480,32 +1506,6 @@
       ],
       "x-ms-discriminator-value": "KinesisSource"
     },
-    "LocationLevelBaseParameters": {
-      "type": "object",
-      "description": "Base Parameters for Location Level operation",
-      "properties": {
-        "apiVersion": {
-          "type": "string",
-          "description": "The API version to use for this operation.",
-          "minLength": 1
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The ID of the target subscription.",
-          "minLength": 1
-        },
-        "location": {
-          "type": "string",
-          "description": "The location name.",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "apiVersion",
-        "subscriptionId",
-        "location"
-      ]
-    },
     "MySqlSourceConnectorProperties": {
       "type": "object",
       "description": "Configuration for MySqlSourceConnector",
@@ -1699,7 +1699,7 @@
     },
     "ResourceProperties": {
       "type": "object",
-      "description": "Properties of one arm connector resource",
+      "description": "Properties of one arm resource",
       "properties": {
         "connectorProperties": {
           "$ref": "#/definitions/ConnectorProperties",
@@ -1792,24 +1792,6 @@
         }
       ],
       "x-ms-discriminator-value": "SqlServerSource"
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Microsoft.MessagingConnectors api versions.",
-      "enum": [
-        "2024-05-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_05_01_preview",
-            "value": "2024-05-01-preview",
-            "description": "2024-05-01-preview version"
-          }
-        ]
-      }
     }
   },
   "parameters": {}

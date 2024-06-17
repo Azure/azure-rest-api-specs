@@ -38,25 +38,25 @@ tag: package-preview-2024-02-01
 directive:
   - suppress: R3020
     from:
-      - preview/2024-02-01-preview/openapi.json
+      - stackhcivm.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
     reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
     from: 
-      - openapi.json
+      - stackhcivm.json
   - code: DefinitionsPropertiesNamesCamelCase
     reason: There is a false positive reporting the two letter acronym ID should be lower camel case. The property is correctly capitalized according to guidance.
     from: 
-      - openapi.json
+      - stackhcivm.json
   - code:  XmsPageableForListCalls
     reason: XmsPageable not needed for GET calls
     from:
-      - openapi.json
+      - stackhcivm.json
   - code: EvenSegmentedPathForPutOperation
     reason: resourceUri in virtualmachineinstances is the parent resource. It consists of an even number of segmented paths. 
     from: 
-      - openapi.json
+      - stackhcivm.json
 ```
 
 ### Tag: package-preview-2024-02
@@ -65,5 +65,5 @@ These settings apply only when `--tag=package-preview-2024-02-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2024-02-01'
 input-file:
-  - preview/2024-02-01-preview/openapi.json
+  - preview/2024-02-01-preview/stackhcivm.json
 ```

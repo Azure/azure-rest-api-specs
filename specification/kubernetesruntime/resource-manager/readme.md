@@ -27,7 +27,7 @@ These are the global settings for the kubernetesruntime.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-10-01
+tag: package-preview-2024-05-01
 
 suppressions:
   - code: ConsistentPatchProperties
@@ -52,6 +52,16 @@ These settings apply only when `--tag=package-2024-03-01` is specified on the co
 input-file:
   - Microsoft.KubernetesRuntime/stable/2024-03-01/kubernetesruntime.json
 ```
+
+### Tag: package-preview-2024-05-01
+
+These settings apply only when `--tag=package-preview-2024-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05-01'
+input-file:
+  - Microsoft.KubernetesRuntime/preview/2024-05-01-preview/kubernetesruntime.json
+```
+
 
 ---
 

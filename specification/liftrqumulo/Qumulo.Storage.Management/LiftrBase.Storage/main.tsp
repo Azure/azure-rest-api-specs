@@ -64,7 +64,8 @@ model FileSystemResourceProperties {
   /**
    * Private IPs of the resource
    */
-  privateIps?: string[];
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is the correct name"
+  privateIPs?: string[];
 
   /**
    * Initial administrator password of the resource

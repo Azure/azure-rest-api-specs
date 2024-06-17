@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
@@ -29,7 +28,7 @@ model ExposureGroup is ProxyResource<ExposureGroupProperties> {
 
 @doc("Group Properties")
 model ExposureGroupProperties {
-  #suppress "@azure-tools/typespec-providerhub/no-identifier-property-in-array-item" "Error items have no unique identifier."
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Error items have no unique identifier."
   @doc("filter conditions.")
   filterConditions: Array<FilterCondition>;
 

@@ -40,7 +40,7 @@ interface ConnectivityStatuses {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ConnectivityStatus,
     BaseParameters<ConnectivityStatus>,
-    ArmAsyncOperationHeader
+    ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

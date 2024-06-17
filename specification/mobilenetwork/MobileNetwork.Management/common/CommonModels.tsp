@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 import "./Enums.tsp";
 import "./Operations.tsp";
@@ -10,10 +11,10 @@ import "./ResourceIdentifiers.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MobileNetwork;
 
@@ -55,7 +56,7 @@ model AsyncOperationStatus {
   properties?: {};
 
   @doc("If present, details of the operation error.")
-  error?: ErrorDetail;
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @doc("Interface properties")
@@ -122,11 +123,11 @@ model ManagedServiceIdentity {
   @doc("Type of managed service identity (currently only UserAssigned allowed).")
   type: ManagedServiceIdentityType;
 
-  @doc("The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.")
+  @doc("The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.")
   userAssignedIdentities?: UserAssignedIdentities;
 }
 
-@doc("The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.")
+@doc("The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be Azure resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.")
 @extension("x-nullable", true)
 model UserAssignedIdentities {
   ...Record<UserAssignedIdentity>;
@@ -143,7 +144,7 @@ model UserAssignedIdentity {
   clientId?: uuid;
 }
 
-@doc("The provisioning state of a resource e.g. SIM/SIM policy on a site. The dictionary keys will ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}. The dictionary values will be from the \"SiteProvisioningState\" enum.")
+@doc("The provisioning state of a resource e.g. SIM/SIM policy on a site. The dictionary keys will be Azure resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}. The dictionary values will be from the \"SiteProvisioningState\" enum.")
 model SiteProvisioning {
   ...Record<SiteProvisioningState>;
 }
@@ -244,21 +245,8 @@ model QualifiedComponentDeploymentParameters {
   parameters?: ComponentDeploymentParameters;
 
   @doc("Deployment secrets")
-  @secret
   @visibility("create", "update")
   secrets?: ComponentDeploymentSecrets;
-}
-
-@doc("ManagedResourceGroupConfiguration represents the configuration of the resource group managed by Azure.")
-model ManagedResourceGroupConfiguration {
-  @doc("The name for the managed resource group. If not specified, the unique name is automatically generated.")
-  @visibility("create", "read")
-  @maxLength(75)
-  name?: string;
-
-  @doc("The location of the managed resource group. If not specified, the location of the parent resource is chosen.")
-  @visibility("create", "read")
-  location?: string;
 }
 
 // Scalar
@@ -326,12 +314,6 @@ scalar Port extends string;
 @pattern("^(any|(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2])))$")
 scalar RemoteIp extends string;
 
-@doc("Usage SKU Definition")
-scalar UsageSku extends string;
-
-@doc("Mobile Core Scaling Unit SKU Definition")
-scalar MobileCoreScalingUnitSku extends string;
-
 @doc("Azure for Operators 5G Core Release Version.")
 scalar ReleaseVersion extends string;
 
@@ -339,7 +321,16 @@ scalar ReleaseVersion extends string;
 scalar ComponentDeploymentParameters extends string;
 
 @doc("Containerized Network Function (CNF) Component Secrets")
+@secret
 scalar ComponentDeploymentSecrets extends string;
 
 @doc("Containerized Network Function (CNF) Component Deployment Type")
 scalar ComponentDeploymentType extends string;
+
+@added(Versions.v2024_05_15_preview)
+@doc("URL string")
+scalar URL extends string;
+
+@added(Versions.v2024_05_15_preview)
+@doc("Non-builtin local users")
+scalar AdditionalLocalUsername extends string;

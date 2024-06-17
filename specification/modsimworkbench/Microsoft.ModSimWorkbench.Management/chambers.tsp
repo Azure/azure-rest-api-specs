@@ -92,18 +92,20 @@ model LicenseServices {
 }
 
 @doc("License service provider")
-enum LicenseServiceProvider {
+union LicenseServiceProvider {
+  string,
+
   @doc("Ansys license service provider")
-  ansys,
+  ansys: "ansys",
 
   @doc("Cadence license service provider")
-  cadence,
+  cadence: "cadence",
 
   @doc("Siemens license service provider")
-  siemens,
+  siemens: "siemens",
 
   @doc("Synopsys license service provider")
-  synopsys,
+  synopsys: "synopsys",
 }
 
 @doc("Parameters for restarting license service")

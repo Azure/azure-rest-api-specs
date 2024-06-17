@@ -5,7 +5,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using OpenAPI;
 
@@ -52,7 +51,7 @@ interface AvailabilitySets {
   delete is ArmResourceDeleteWithoutOkAsync<
     AvailabilitySet,
     {
-      ...BaseParameters<AvailabilitySet>;
+      ...Foundations.BaseParameters<AvailabilitySet>;
       ...QueryForceDelete;
     },
     LroHeaders = ArmAsyncOperationHeader &

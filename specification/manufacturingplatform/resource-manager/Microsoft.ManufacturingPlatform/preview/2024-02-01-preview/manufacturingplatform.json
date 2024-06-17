@@ -60,7 +60,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -102,7 +102,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MdsResourceListResult"
             }
@@ -144,7 +144,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MdsResourceListResult"
             }
@@ -194,7 +194,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MdsResource"
             }
@@ -207,7 +207,7 @@
           }
         },
         "x-ms-examples": {
-          "ManufacturingDataServices_Get": {
+          "ManufacturingDataServices_Get_MaximumSet_Gen": {
             "$ref": "./examples/ManufacturingDataServices_Get_MaximumSet_Gen.json"
           }
         }
@@ -274,7 +274,7 @@
           }
         },
         "x-ms-examples": {
-          "ManufacturingDataServices_CreateOrUpdate": {
+          "ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
@@ -319,7 +319,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MdsResource"
             }
@@ -327,14 +327,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -384,19 +384,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -408,9 +408,6 @@
         "x-ms-examples": {
           "ManufacturingDataServices_Delete": {
             "$ref": "./examples/ManufacturingDataServices_Delete_MaximumSet_Gen.json"
-          },
-          "ManufacturingDataServices_Delete_MinimumSet": {
-            "$ref": "./examples/ManufacturingDataServices_Delete_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -447,7 +444,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AvailableVersionListResult"
             }
@@ -460,11 +457,8 @@
           }
         },
         "x-ms-examples": {
-          "ManufacturingDataServices_ListAvailableVersions": {
+          "ManufacturingDataServices_ListAvailableVersions_MaximumSet_Gen": {
             "$ref": "./examples/ManufacturingDataServices_ListAvailableVersions_MaximumSet_Gen.json"
-          },
-          "ManufacturingDataServices_ListAvailableVersions_MinimumSet": {
-            "$ref": "./examples/ManufacturingDataServices_ListAvailableVersions_MinimumSet_Gen.json"
           }
         }
       }
@@ -721,6 +715,23 @@
         }
       }
     },
+    "ManagedOnBehalfOfConfiguration": {
+      "type": "object",
+      "description": "Configuration of the managed on behalf of resource.",
+      "properties": {
+        "moboBrokerResources": {
+          "type": "array",
+          "description": "Associated MoboBrokerResources.",
+          "items": {
+            "$ref": "#/definitions/MoboBrokerResource"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "moboBrokerResources"
+      ]
+    },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
       "description": "Configuration of the managed resource group associated with the resource.",
@@ -847,6 +858,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Continuous Export Period.",
+          "default": 0,
           "x-ms-mutability": [
             "read",
             "create"
@@ -900,11 +912,20 @@
         "openAIProfile": {
           "$ref": "#/definitions/OpenAIProfile",
           "description": "Profile of OpenAI Resource.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "managedResourceGroupConfiguration": {
           "$ref": "#/definitions/ManagedResourceGroupConfiguration",
           "description": "Configuration of the managed resource group associated with the resource.",
+          "readOnly": true
+        },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed On Behalf Of Configuration.",
           "readOnly": true
         },
         "amlProfile": {
@@ -948,11 +969,19 @@
             "update",
             "create"
           ]
+        },
+        "userManagedOpenAIProfile": {
+          "$ref": "#/definitions/UserManagedOpenAIProfile",
+          "description": "Profile of User Managed OpenAI Resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
-        "aadApplicationId",
-        "continuousExportPeriod"
+        "aadApplicationId"
       ]
     },
     "MdsResourceUpdate": {
@@ -1011,6 +1040,15 @@
             "create"
           ]
         },
+        "openAIProfile": {
+          "$ref": "#/definitions/OpenAIProfile",
+          "description": "Profile of OpenAI Resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "amlProfile": {
           "$ref": "#/definitions/AmlProfileUpdate",
           "description": "Profile of Azure Machine Learning Resource.",
@@ -1028,8 +1066,31 @@
             "update",
             "create"
           ]
+        },
+        "userManagedOpenAIProfile": {
+          "$ref": "#/definitions/UserManagedOpenAIProfileUpdate",
+          "description": "Profile of User Managed OpenAI Resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
+    },
+    "MoboBrokerResource": {
+      "type": "object",
+      "description": "MoboBroker resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of MoboBrokerResource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "MonitoringProfile": {
       "type": "object",
@@ -1050,6 +1111,78 @@
           "type": "string",
           "description": "Resource Id of OpenAI Resource",
           "readOnly": true
+        },
+        "gptModelName": {
+          "type": "string",
+          "description": "GPT Model Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gptModelVersion": {
+          "type": "string",
+          "description": "GPT Model Version",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gptModelCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "GPT Model Capacity",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gptModelSkuName": {
+          "type": "string",
+          "description": "GPT Model SKU Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "embeddingModelName": {
+          "type": "string",
+          "description": "Embedding Model Name",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "embeddingModelVersion": {
+          "type": "string",
+          "description": "Embedding Model Version",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "embeddingModelSkuName": {
+          "type": "string",
+          "description": "Embedding Model SKU Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "embeddingModelCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Embedding Model Capacity",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -1087,22 +1220,22 @@
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "Initial provisioning in progress"
+            "description": "The resource is being provisioned"
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "Update in progress"
+            "description": "The resource is updating"
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Deletion in progress"
+            "description": "The resource is being deleted"
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "Change accepted for processing"
+            "description": "The resource create request has been accepted"
           }
         ]
       }
@@ -1173,28 +1306,84 @@
         "cosmosId"
       ]
     },
-    "Versions": {
-      "type": "string",
-      "description": "Supported API versions for the Microsoft.ManufacturingPlatform resource provider.",
-      "enum": [
-        "2023-02-01-preview",
-        "2024-02-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_02_01_preview",
-            "value": "2023-02-01-preview",
-            "description": "The 2023-02-01-preview version."
-          },
-          {
-            "name": "v2024_02_01_preview",
-            "value": "2024-02-01-preview",
-            "description": "The 2024-02-01-preview version."
-          }
-        ]
+    "UserManagedOpenAIProfile": {
+      "type": "object",
+      "description": "The properties related to User Managed OpenAI Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of OpenAI Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gptModelDeploymentName": {
+          "type": "string",
+          "description": "GPT Model Deployment Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "embeddingModelDeploymentName": {
+          "type": "string",
+          "description": "Embedding Model Deployment Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "embeddingModelType": {
+          "type": "string",
+          "description": "Embedding Model Type",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "gptModelDeploymentName",
+        "embeddingModelDeploymentName",
+        "embeddingModelType"
+      ]
+    },
+    "UserManagedOpenAIProfileUpdate": {
+      "type": "object",
+      "description": "The properties related to User Managed OpenAI Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of OpenAI Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gptModelDeploymentName": {
+          "type": "string",
+          "description": "GPT Model Deployment Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "embeddingModelDeploymentName": {
+          "type": "string",
+          "description": "Embedding Model Deployment Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
       }
     }
   },

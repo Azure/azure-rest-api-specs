@@ -20,7 +20,6 @@ import "../Operations.Management/models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -29,7 +28,6 @@ using TypeSpec.Versioning;
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Microsoft.AzureStackHCI",
 })
@@ -48,19 +46,3 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_01_preview: "2024-02-01-preview",
 }
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "AADToken is the correct case."
-#suppress "@azure-tools/typespec-azure-core/x-ms-enum extension" "type is correct"
-@doc("The Azure Active Directory OAuth2 Flow")
-model AADToken
-  is OAuth2Auth<[
-    {
-      type: OAuth2FlowType.authorizationCode;
-      authorizationUrl: "https://api.example.com/oauth2/authorize";
-      tokenUrl: "https://api.example.com/oauth2/token";
-      scopes: [
-        "https://management.azure.com/read",
-        "https://management.azure.com/write"
-      ];
-    }
-  ]>;
