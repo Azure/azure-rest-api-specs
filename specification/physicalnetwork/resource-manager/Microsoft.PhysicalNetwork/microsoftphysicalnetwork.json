@@ -1,269 +1,269 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Microsoft.PhysicalNetwork management service",
-      "version": "2024-06-01",
-      "description": "Microsoft.PhysicalNetwork Resource Provider management API.",
-      "x-typespec-generated": [
-        {
-          "emitter": "@azure-tools/typespec-autorest"
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.PhysicalNetwork management service",
+    "version": "2024-06-01",
+    "description": "Microsoft.PhysicalNetwork Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.PhysicalNetwork/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkDeviceProperties": {
+      "type": "object",
+      "description": "Network Device Properties",
+      "properties": {
+        "dcCode": {
+          "type": "string",
+          "description": "The datacenter short code"
+        },
+        "loopbackV4": {
+          "type": "string",
+          "description": "The device's IPv4 address"
+        },
+        "loopbackV6": {
+          "type": "string",
+          "description": "The device's IPv6 address"
+        },
+        "managementV4": {
+          "type": "string",
+          "description": "The management console's IPv4 address"
+        },
+        "managementV6": {
+          "type": "string",
+          "description": "The management console's IPv6 address"
+        },
+        "preferredIp": {
+          "type": "string",
+          "description": "The device's preferred IP address"
+        },
+        "hardwareSku": {
+          "type": "string",
+          "description": "The device's hardware SKU"
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "The device's NgsDeviceType"
+        },
+        "cluster": {
+          "type": "string",
+          "description": "The cluster the device belongs to"
+        },
+        "cloudType": {
+          "type": "string",
+          "description": "The cloud the device is in"
+        },
+        "deploymentType": {
+          "type": "string",
+          "description": "The device's deployment type"
+        },
+        "dcRackLocation": {
+          "type": "string",
+          "description": "The device's rack location"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dcCode",
+        "loopbackV4",
+        "loopbackV6",
+        "managementV4",
+        "managementV6",
+        "preferredIp",
+        "hardwareSku",
+        "deviceType",
+        "cluster",
+        "cloudType",
+        "deploymentType",
+        "dcRackLocation"
       ]
     },
-    "schemes": [
-      "https"
-    ],
-    "host": "management.azure.com",
-    "produces": [
-      "application/json"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
-      }
-    ],
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "description": "Azure Active Directory OAuth2 Flow.",
-        "flow": "implicit",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
-        }
-      }
-    },
-    "tags": [
-      {
-        "name": "Operations"
-      }
-    ],
-    "paths": {
-      "/providers/Microsoft.PhysicalNetwork/operations": {
-        "get": {
-          "operationId": "Operations_List",
-          "tags": [
-            "Operations"
-          ],
-          "description": "List the operations for the provider",
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Azure operation completed successfully.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+    "NetworkDevices": {
+      "type": "object",
+      "description": "Network Devices",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource's ARM ID",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.PhysicalNetwork/networkDevices"
               }
-            },
-            "default": {
-              "description": "An unexpected error response.",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-              }
-            }
-          },
-          "x-ms-examples": {
-            "Operations_List": {
-              "$ref": "./examples/Operations_List.json"
-            }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          }
-        }
-      }
-    },
-    "definitions": {
-      "NetworkDeviceProperties": {
-        "type": "object",
-        "description": "Network Device Properties",
-        "properties": {
-          "dcCode": {
-            "type": "string",
-            "description": "The datacenter short code"
-          },
-          "loopbackV4": {
-            "type": "string",
-            "description": "The device's IPv4 address"
-          },
-          "loopbackV6": {
-            "type": "string",
-            "description": "The device's IPv6 address"
-          },
-          "managementV4": {
-            "type": "string",
-            "description": "The management console's IPv4 address"
-          },
-          "managementV6": {
-            "type": "string",
-            "description": "The management console's IPv6 address"
-          },
-          "preferredIp": {
-            "type": "string",
-            "description": "The device's preferred IP address"
-          },
-          "hardwareSku": {
-            "type": "string",
-            "description": "The device's hardware SKU"
-          },
-          "deviceType": {
-            "type": "string",
-            "description": "The device's NgsDeviceType"
-          },
-          "cluster": {
-            "type": "string",
-            "description": "The cluster the device belongs to"
-          },
-          "cloudType": {
-            "type": "string",
-            "description": "The cloud the device is in"
-          },
-          "deploymentType": {
-            "type": "string",
-            "description": "The device's deployment type"
-          },
-          "dcRackLocation": {
-            "type": "string",
-            "description": "The device's rack location"
-          },
-          "provisioningState": {
-            "$ref": "#/definitions/ProvisioningState",
-            "description": "Provisioning state",
-            "readOnly": true
+            ]
           }
         },
-        "required": [
-          "dcCode",
-          "loopbackV4",
-          "loopbackV6",
-          "managementV4",
-          "managementV6",
-          "preferredIp",
-          "hardwareSku",
-          "deviceType",
-          "cluster",
-          "cloudType",
-          "deploymentType",
-          "dcRackLocation"
+        "type": {
+          "type": "string",
+          "description": "The resource's ARM type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource's location in ARM format, i.e. eastus NOT useast"
+        },
+        "kind": {
+          "type": "string",
+          "description": "The NgsDeviceType"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "location",
+        "kind"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state enum",
+      "enum": [
+        "Provisioning",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource action is successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource action has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource action has been cancelled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning has been accepted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The resource has been deleted."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource status is unspecified."
+          }
         ]
       },
-      "NetworkDevices": {
-        "type": "object",
-        "description": "Network Devices",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "The resource's ARM ID",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.PhysicalNetwork/networkDevices"
-                }
-              ]
-            }
-          },
-          "type": {
-            "type": "string",
-            "description": "The resource's ARM type"
-          },
-          "location": {
-            "type": "string",
-            "description": "The resource's location in ARM format, i.e. eastus NOT useast"
-          },
-          "kind": {
-            "type": "string",
-            "description": "The NgsDeviceType"
-          }
-        },
-        "required": [
-          "id",
-          "type",
-          "location",
-          "kind"
-        ]
-      },
-      "ProvisioningState": {
-        "type": "string",
-        "description": "Provisioning state enum",
-        "enum": [
-          "Provisioning",
-          "Succeeded",
-          "Failed",
-          "Canceled",
-          "Accepted",
-          "Creating",
-          "Updating",
-          "Deleting",
-          "Deleted",
-          "NotSpecified"
-        ],
-        "x-ms-enum": {
-          "name": "ProvisioningState",
-          "modelAsString": true,
-          "values": [
-            {
-              "name": "Provisioning",
-              "value": "Provisioning",
-              "description": "The resource is being provisioned."
-            },
-            {
-              "name": "Succeeded",
-              "value": "Succeeded",
-              "description": "The resource action is successful."
-            },
-            {
-              "name": "Failed",
-              "value": "Failed",
-              "description": "The resource action has failed."
-            },
-            {
-              "name": "Canceled",
-              "value": "Canceled",
-              "description": "The resource action has been cancelled."
-            },
-            {
-              "name": "Accepted",
-              "value": "Accepted",
-              "description": "The resource provisioning has been accepted."
-            },
-            {
-              "name": "Creating",
-              "value": "Creating",
-              "description": "The resource is being created."
-            },
-            {
-              "name": "Updating",
-              "value": "Updating",
-              "description": "The resource is being updated."
-            },
-            {
-              "name": "Deleting",
-              "value": "Deleting",
-              "description": "The resource is being deleted."
-            },
-            {
-              "name": "Deleted",
-              "value": "Deleted",
-              "description": "The resource has been deleted."
-            },
-            {
-              "name": "NotSpecified",
-              "value": "NotSpecified",
-              "description": "The resource status is unspecified."
-            }
-          ]
-        },
-        "readOnly": true
-      }
-    },
-    "parameters": {}
-  }
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}
