@@ -15,6 +15,7 @@ using TypeSpec.Versioning;
   title: "Split.IO Experimentation",
 })
 @versioned(SplitIO.Experimentation.Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace SplitIO.Experimentation;
 
 @doc("Supported API versions for the SplitIO.Experimentation resource provider.")
@@ -54,8 +55,11 @@ model AccessPolicy {
 
 @doc("Role required for data plane access.")
 union DataPlaneRole {
+  /** None data plane role is assigned to user by default. */
   None: "None",
+  /** ExperimentationDataReader data plane role is assigned to user by default. */
   ExperimentationDataReader: "ExperimentationDataReader",
+  /** ExperimentationDataOwner data plane role is assigned to user by default. */
   ExperimentationDataOwner: "ExperimentationDataOwner",
   string,
 }
@@ -104,8 +108,8 @@ model ExperimentationWorkspace
   @path
   name: string;
 
-  ...ResourceSku;
-  ...ManagedServiceIdentity;
+  ...ResourceSkuProperty;
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
