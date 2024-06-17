@@ -1047,6 +1047,96 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+        ],
+        "operationId": "OperationResult_Get",
+        "description": "Get the result of a long running azure asynchronous operation.",
+        "x-ms-examples": {
+          "OperationResult_Get": {
+            "$ref": "./examples/OperationResult_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/operationStatuses/{operationId}": {
+      "get": {
+        "tags": [
+        ],
+        "operationId": "OperationStatus_Get",
+        "description": "Get the status of a long running azure asynchronous operation.",
+        "x-ms-examples": {
+          "OperationStatus_Get": {
+            "$ref": "./examples/OperationStatus_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        }
+      }
     }
   },
   "parameters": {
