@@ -9,7 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "SplitIO is a case-sensitive name"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SplitIO is a case-sensitive name."
 @armProviderNamespace
 @service({
   title: "Split.IO Experimentation",
