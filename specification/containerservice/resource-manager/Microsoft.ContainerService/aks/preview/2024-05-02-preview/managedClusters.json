@@ -6519,7 +6519,12 @@
           "description": "List of orchestrator types and versions available for upgrade."
         },
         "componentsByReleases": {
-          "$ref": "#/definitions/ComponentsByReleases"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentsByRelease"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of components grouped by kubernetes major.minor version."
         }
       },
       "required": [
@@ -6970,7 +6975,12 @@
           "description": "List of orchestrator types and versions available for upgrade."
         },
         "componentsByReleases": {
-          "$ref": "#/definitions/ComponentsByReleases"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentsByRelease"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of components grouped by kubernetes major.minor version."
         },
         "latestNodeImageVersion": {
           "type": "string",
@@ -9971,7 +9981,7 @@
         }
       }
     },
-    "ComponentsByReleases": {
+    "ComponentsByRelease": {
       "type": "object",
       "properties": {
         "kubernetesVersion": {
@@ -9983,6 +9993,7 @@
           "items": {
             "$ref": "#/definitions/Component"
           },
+          "x-ms-identifiers": [],
           "description": "components of current or upgraded Kubernetes version in the cluster."
         }
       },
