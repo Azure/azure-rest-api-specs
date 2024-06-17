@@ -2103,7 +2103,7 @@
     },
     "GuidanceInference": {
       "type": "object",
-      "description": "A guidance inference.",
+      "description": "A guidance inference collects structured information about a specific finding in the report and can possibly propose appropriate follow-up recommendations, based upon established, evidence-based best practices i.e. ACR guidelines.",
       "properties": {
         "finding": {
           "$ref": "#/definitions/FindingInference",
@@ -2112,6 +2112,15 @@
         "identifier": {
           "$ref": "#/definitions/Fhir.R4.CodeableConcept",
           "description": "The guidance identifier, as a concept"
+        },
+        "presentGuidanceInformation": {
+          "type": "array",
+          "description": "presentGuidanceInformation lists each item of the structured information (e.g. laterality) and corresponding details (left, right, bilateral) that is present in the document.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/PresentGuidanceInformation"
+          },
+          "x-ms-identifiers": []
         },
         "suppressorsWithOptions": {
           "type": "array",
@@ -2150,7 +2159,7 @@
       "properties": {
         "showGuidanceInHistory": {
           "type": "boolean",
-          "description": "If this is true, also show guidances from a clinical history section."
+          "description": "If this is true, also show guidances from a clinical history section i.e. if the first token of the associated finding's clinical indicator is in this section. Default is false."
         }
       },
       "required": [
@@ -2159,40 +2168,31 @@
     },
     "GuidanceRecommendations": {
       "type": "object",
-      "description": "Contains possible recommendations linked to the guidance, with their priority, and possibly missing options needed to create recommendations.",
+      "description": "Contains information whether a recommendation can be proposed or not, the link to the proposed follow-up recommendations if any, and possibly missing information needed to determine follow-up.",
       "properties": {
         "recommendations": {
           "type": "array",
-          "description": "The recommendations.",
+          "description": "The proposed follow-up recommendations, if any.",
           "items": {
             "$ref": "#/definitions/FollowupRecommendationInference"
           },
           "x-ms-identifiers": []
         },
-        "highestPriorityRecommendationIndices": {
-          "type": "array",
-          "description": "The indices (starting from 0) in array 'recommendations' of the recommendation with the highest priority.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
         "recommendationsFound": {
           "$ref": "#/definitions/GuidanceRecommendationsFoundType",
           "description": "See the explanation in GuidanceRecommendationsFoundType."
         },
-        "missingRecommendationOptions": {
+        "missingGuidanceInformation": {
           "type": "array",
-          "description": "This is filled if and only if the value of 'recommendationsFound' is 'moreInfoNeededToDetermineRecommendations'. Each value of this array is a suppressor name.",
+          "description": "Contains all missing items that are needed to determine follow-up. This is filled if and only if the value of 'recommendationsFound' is 'moreInfoNeededToDetermineRecommendations'.",
           "items": {
             "type": "string"
           }
         }
       },
       "required": [
-        "highestPriorityRecommendationIndices",
         "recommendationsFound",
-        "missingRecommendationOptions"
+        "missingGuidanceInformation"
       ]
     },
     "GuidanceRecommendationsFoundType": {
@@ -2647,6 +2647,53 @@
         ]
       }
     },
+    "PresentGuidanceInformation": {
+      "type": "object",
+      "description": "An item of the structured information (e.g. laterality or size) and one or more corresponding details (e.g. left or size-value)",
+      "properties": {
+        "suppressor": {
+          "type": "string",
+          "description": "The item of the structured information "
+        },
+        "extension": {
+          "type": "array",
+          "description": "Represents the tokens of the item and details.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
+        },
+        "sizes": {
+          "type": "array",
+          "description": "A list of size values, if the item is about size.",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Fhir.R4.ObservationComponent"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "maximumDiameterAsInText": {
+          "$ref": "#/definitions/Fhir.R4.Quantity",
+          "description": "The maximum diameter value, if the item is about the maximum diameter."
+        },
+        "options": {
+          "type": "array",
+          "description": "The list of item values that are mentioned in the report.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "suppressor",
+        "extension",
+        "options"
+      ]
+    },
     "ProcedureRecommendation": {
       "type": "object",
       "description": "The procedure recommendation can be a generic procedure or an imaging procedure.",
@@ -2706,19 +2753,19 @@
     },
     "QualityMeasureInference": {
       "type": "object",
-      "description": "A MIPS ('measure based incentive payment system') quality measure.",
+      "description": "A QualityMeasure inference captures the  MIPS ('measure based incentive payment system') quality measure criteria in the document that are used to measure the data completeness.",
       "properties": {
         "denominator": {
           "type": "string",
-          "description": "The denominator, which identifies the mips kind."
+          "description": "The denominator, which identifies the QualityMeasure kind."
         },
         "compliance": {
           "$ref": "#/definitions/QualityMeasureComplianceType",
-          "description": "Whether the document is compliant or not."
+          "description": "The ComplianceType indicates whether the document is compliant for the specified QualityMeasure or not, or if exceptions apply."
         },
-        "options": {
+        "qualityCriteria": {
           "type": "array",
-          "description": "The mips options, if any.",
+          "description": "List of quality criteria identified in the document, if any. ",
           "items": {
             "type": "string"
           }
@@ -2902,7 +2949,7 @@
     },
     "RadiologyInsightsInference": {
       "type": "object",
-      "description": "An inference made by the Radiology Insights model regarding a patient.\n  - AgeMismatch\n  - SexMismatch\n  - LateralityDiscrepancy\n  - CompleteOrderDiscrepancy\n  - LimitedOrderDiscrepancy\n  - Finding\n  - CriticalResult\n  - FollowupRecommendation\n  - RadiologyProcedure\n  - FollowupCommunication",
+      "description": "An inference made by the Radiology Insights model regarding a patient.\n  - AgeMismatch\n  - SexMismatch\n  - LateralityDiscrepancy\n  - CompleteOrderDiscrepancy\n  - LimitedOrderDiscrepancy\n  - Finding\n  - CriticalResult\n  - FollowupRecommendation\n  - RadiologyProcedure\n  - FollowupCommunication\n  - ClinicalGuidance \n  - QualityMeasure \n  - ScoringAndAssessment ",
       "properties": {
         "kind": {
           "type": "string",
@@ -2939,7 +2986,7 @@
         },
         "qualityMeasureOptions": {
           "$ref": "#/definitions/QualityMeasureOptions",
-          "description": "qualityMeasureOptions"
+          "description": "QualityMeasureOptions."
         }
       }
     },
@@ -3273,7 +3320,7 @@
     },
     "ScoringAndAssessmentInference": {
       "type": "object",
-      "description": "An actionable finding with a score for a certain unit, e.g. for 'BIRADS 5'",
+      "description": "Identifies and highlights Risk, Scoring, Assessment and Classifications and correspondent values dictated in a report, e.g. 'BIRADS 5'",
       "properties": {
         "category": {
           "type": "string",
@@ -3281,7 +3328,7 @@
         },
         "value": {
           "$ref": "#/definitions/StringValueWithUnit",
-          "description": "The value. Either this is filled, or fields minimumValue and maximumValue are filled."
+          "description": "The value. If the value is a range, use fields minimumValue and maximumValue."
         },
         "minimumValue": {
           "$ref": "#/definitions/StringValueWithUnit",
@@ -3347,7 +3394,7 @@
     },
     "StringValueWithUnit": {
       "type": "object",
-      "description": "A value, represented as a string because it can contain, with the optional unit. Used by ScoringAndAssessmentInference.",
+      "description": "A value, represented as a string because it can contain alphanumeric or mathematical characters, along with the optional unit. Used by ScoringAndAssessmentInference.",
       "properties": {
         "value": {
           "type": "string",

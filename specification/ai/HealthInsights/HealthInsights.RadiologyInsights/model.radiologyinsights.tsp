@@ -46,7 +46,7 @@ model RadiologyInsightsInferenceOptions {
   guidanceOptions?: GuidanceOptions;
 
   @added(ApiVersion.v2024_10_01)
-  @doc("qualityMeasureOptions")
+  @doc("QualityMeasureOptions.")
   qualityMeasureOptions?: QualityMeasureOptions;
 }
 
@@ -71,7 +71,7 @@ model FindingOptions {
 @added(ApiVersion.v2024_10_01)
 @doc("Guidance options.")
 model GuidanceOptions {
-  @doc("If this is true, also show guidances from a clinical history section.")
+  @doc("If this is true, also show guidances from a clinical history section i.e. if the first token of the associated finding's clinical indicator is in this section. Default is false.")
   showGuidanceInHistory: boolean;
 }
 
@@ -129,6 +129,9 @@ An inference made by the Radiology Insights model regarding a patient.
   - FollowupRecommendation
   - RadiologyProcedure
   - FollowupCommunication
+  - ClinicalGuidance 
+  - QualityMeasure 
+  - ScoringAndAssessment 
 """)
 @discriminator("kind")
 model RadiologyInsightsInference {
@@ -360,7 +363,7 @@ model FollowupCommunicationInference extends RadiologyInsightsInference {
 }
 
 // For scoring and assessment:
-@doc("An actionable finding with a score for a certain unit, e.g. for 'BIRADS 5'")
+@doc("Identifies and highlights Risk, Scoring, Assessment and Classifications and correspondent values dictated in a report, e.g. 'BIRADS 5'")
 @added(ApiVersion.v2024_10_01)
 model ScoringAndAssessmentInference extends RadiologyInsightsInference {
   @doc("Inference type.")
@@ -369,7 +372,7 @@ model ScoringAndAssessmentInference extends RadiologyInsightsInference {
   @doc("Category, e.g. BIRADS")
   category: string;
 
-  @doc("The value. Either this is filled, or fields minimumValue and maximumValue are filled.")
+  @doc("The value. If the value is a range, use fields minimumValue and maximumValue.")
   value?: StringValueWithUnit;
 
   @doc("The minimum, if the value is a range.")
@@ -380,7 +383,7 @@ model ScoringAndAssessmentInference extends RadiologyInsightsInference {
 }
 
 @added(ApiVersion.v2024_10_01)
-@doc("A value, represented as a string because it can contain, with the optional unit. Used by ScoringAndAssessmentInference.")
+@doc("A value, represented as a string because it can contain alphanumeric or mathematical characters, along with the optional unit. Used by ScoringAndAssessmentInference.")
 model StringValueWithUnit {
   @doc("String value.")
   value: string;
@@ -388,10 +391,10 @@ model StringValueWithUnit {
   @doc("Unit.")
   unit?: string;
 }
-// For guidance:
+// For guidance: Clinical Guidance or (Guided) Follow-up Finding
 
 @added(ApiVersion.v2024_10_01)
-@doc("A guidance inference.")
+@doc("A guidance inference collects structured information about a specific finding in the report and can possibly propose appropriate follow-up recommendations, based upon established, evidence-based best practices i.e. ACR guidelines.")
 model GuidanceInference extends RadiologyInsightsInference {
   @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.Guidance;
@@ -401,6 +404,10 @@ model GuidanceInference extends RadiologyInsightsInference {
 
   @doc("The guidance identifier, as a concept")
   identifier: Fhir.R4.CodeableConcept;
+
+  @doc("presentGuidanceInformation lists each item of the structured information (e.g. laterality) and corresponding details (left, right, bilateral) that is present in the document.")
+  @minItems(1)
+  presentGuidanceInformation?: Array<PresentGuidanceInformation>;
 
   @doc("The suppressors, if any, with their options.")
   @minItems(1)
@@ -414,19 +421,38 @@ model GuidanceInference extends RadiologyInsightsInference {
 }
 
 @added(ApiVersion.v2024_10_01)
-@doc("Contains possible recommendations linked to the guidance, with their priority, and possibly missing options needed to create recommendations.")
+@doc("Contains information whether a recommendation can be proposed or not, the link to the proposed follow-up recommendations if any, and possibly missing information needed to determine follow-up.")
 model GuidanceRecommendations {
-  @doc("The recommendations.")
+  @doc("The proposed follow-up recommendations, if any.")
   recommendations?: Array<FollowupRecommendationInference>;
-
-  @doc("The indices (starting from 0) in array 'recommendations' of the recommendation with the highest priority.")
-  highestPriorityRecommendationIndices: Array<int32>;
 
   @doc("See the explanation in GuidanceRecommendationsFoundType.")
   recommendationsFound: GuidanceRecommendationsFoundType;
 
-  @doc("This is filled if and only if the value of 'recommendationsFound' is 'moreInfoNeededToDetermineRecommendations'. Each value of this array is a suppressor name.")
-  missingRecommendationOptions: Array<string>;
+  @doc("Contains all missing items that are needed to determine follow-up. This is filled if and only if the value of 'recommendationsFound' is 'moreInfoNeededToDetermineRecommendations'.")
+  missingGuidanceInformation: Array<string>;
+}
+
+@added(ApiVersion.v2024_10_01)
+@doc("An item of the structured information (e.g. laterality or size) and one or more corresponding details (e.g. left or size-value)")
+model PresentGuidanceInformation {
+  @doc("The item of the structured information ")
+  suppressor: string;
+
+  @doc("Represents the tokens of the item and details.")
+  @minItems(1)
+  extension: Array<Fhir.R4.Extension>;
+
+  @doc("A list of size values, if the item is about size.")
+  @minItems(1)
+  sizes?: Array<Array<Fhir.R4.ObservationComponent>>;
+
+  @doc("The maximum diameter value, if the item is about the maximum diameter.")
+  maximumDiameterAsInText?: Fhir.R4.Quantity;
+
+  @doc("The list of item values that are mentioned in the report.")
+  @minItems(1)
+  options: Array<string>;
 }
 
 @added(ApiVersion.v2024_10_01)
@@ -453,17 +479,17 @@ model SuppressorWithOptions {
 
 // For quality measure:
 @added(ApiVersion.v2024_10_01)
-@doc("A MIPS ('measure based incentive payment system') quality measure.")
+@doc("A QualityMeasure inference captures the  MIPS ('measure based incentive payment system') quality measure criteria in the document that are used to measure the data completeness.")
 model QualityMeasureInference extends RadiologyInsightsInference {
   @doc("Inference type.")
   kind: RadiologyInsightsInferenceType.QualityMeasure;
 
-  @doc("The denominator, which identifies the mips kind.")
+  @doc("The denominator, which identifies the QualityMeasure kind.")
   denominator: string;
 
-  @doc("Whether the document is compliant or not.")
+  @doc("The ComplianceType indicates whether the document is compliant for the specified QualityMeasure or not, or if exceptions apply.")
   compliance: QualityMeasureComplianceType;
 
-  @doc("The mips options, if any.")
-  options?: Array<string>;
+  @doc("List of quality criteria identified in the document, if any. ")
+  qualityCriteria?: Array<string>;
 }
