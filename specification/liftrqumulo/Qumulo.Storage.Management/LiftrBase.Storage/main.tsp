@@ -116,7 +116,7 @@ model FileSystemResourceUpdate {
   /**
    * The managed service identities assigned to this resource.
    */
-  identity?: Azure.ResourceManager.ManagedServiceIdentityProperty;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Resource tags.
