@@ -11,10 +11,10 @@ using Azure.ClientGenerator.Core;
 namespace Azure.OpenAI;
 
 @doc("""
-The configuration information for an embeddings request.
-Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
-recommendations, and other similar scenarios.
-""")
+  The configuration information for an embeddings request.
+  Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
+  recommendations, and other similar scenarios.
+  """)
 model EmbeddingsOptions {
   @doc("""
     An identifier for the caller or end user of the operation. This may be used for tracking
@@ -33,7 +33,7 @@ model EmbeddingsOptions {
   @doc("""
     Input texts to get embeddings for, encoded as a an array of strings.
     Each input must not exceed 2048 tokens in length.
-
+    
     Unless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,
     as we have observed inferior results when newlines are present.
     """)
@@ -67,10 +67,10 @@ union EmbeddingEncodingFormat {
 }
 
 @doc("""
-Representation of the response data from an embeddings request.
-Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
-recommendations, and other similar scenarios.
-""")
+  Representation of the response data from an embeddings request.
+  Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
+  recommendations, and other similar scenarios.
+  """)
 model Embeddings {
   @doc("Embedding values for the prompts submitted in the request.")
   data: EmbeddingItem[];

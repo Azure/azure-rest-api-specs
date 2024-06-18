@@ -27,7 +27,7 @@ These are the global settings for the elastic.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-05-01-preview
+tag: package-2024-06-15-preview
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -189,6 +189,15 @@ These settings apply only when `--tag=package-2024-05-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-05-01-preview'
 input-file:
   - Microsoft.Elastic/preview/2024-05-01-preview/elastic.json
+```
+
+### Tag: package-2024-06-15-preview
+
+These settings apply only when `--tag=package-2024-06-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-15-preview'
+input-file:
+  - Microsoft.Elastic/preview/2024-06-15-preview/elastic.json
 ```
 
 ---
