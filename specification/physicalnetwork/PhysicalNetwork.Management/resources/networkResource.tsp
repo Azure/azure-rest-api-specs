@@ -80,7 +80,7 @@ model LocationCollectionParameters<T extends Azure.ResourceManager.Foundations.R
 op ArmLocResourceListByParent<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>,
-  TParentName extends valueof string = "",
+  TParentName extends valueof string = "Location",
   TParentFriendlyName extends valueof string = ""
 >(
   ...LocationCollectionParameters<TResource>,
