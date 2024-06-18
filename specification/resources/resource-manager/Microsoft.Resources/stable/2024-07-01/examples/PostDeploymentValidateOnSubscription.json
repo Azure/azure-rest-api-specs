@@ -4,8 +4,8 @@
       "deploymentName": "my-deployment",
       "api-version": "2024-07-01",
       "parameters": {
+        "location": "eastus",
         "properties": {
-          "location": "eastus",
           "templateLink": {
             "uri": "https://example.com/exampleTemplate.json"
           },
@@ -68,6 +68,19 @@
                     "message": "Nested deployments are expanded up to: '50' in total. Nested deployments exceeding this count are skipped from expansion."
                 }
             ]
+          }
+        }
+      },
+      "202": {
+        "headers": {
+          "Location": "/subscriptions/00000000-0000-0000-0000-000000000001/operationResults/XXXXXXXXXXXXXXX?api-version=2024-07-01"
+        }
+      },
+      "400": {
+        "body": {
+          "error": {
+            "code": "InvalidTemplateDeployment",
+            "message": "Validation failed"
           }
         }
       }
