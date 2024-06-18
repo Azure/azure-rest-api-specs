@@ -115,7 +115,7 @@ union FileType {
 
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a JSON config file to define the requests for a URL test.")
-  "URL_TEST_CONFIG_JSON",
+  "URL_TEST_CONFIG",
 
   @added(APIVersions.v2024_03_01_preview)
   @doc("If the file is a test script.")
