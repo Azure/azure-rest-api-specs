@@ -68,7 +68,7 @@ interface CertificateProfileOperations {
   @pollingOperation(CertificateProfileOperations.getSigningStatus)
   sign is StandardResourceOperations.LongRunningResourceAction<
     CertificateProfileName,
-    SigningPayloadOptions,
+    KeepModel<SigningPayloadOptions>,
     SignResult,
     Foundations.ErrorResponse,
     SigningRequestHeadersTraits
@@ -186,6 +186,10 @@ model BytesBody<ContentType> {
   @doc("The content type of the x509 cert.")
   @header
   contentType: ContentType;
+}
+
+model KeepModel<T> {
+  @bodyRoot body: T;
 }
 
 alias SigningRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
