@@ -842,6 +842,13 @@
           "description": "Object id of RP Service Principal",
           "type": "string",
           "readOnly": true
+        },
+        "secretsLocations": {
+          "description":"List of Secret Locations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretsLocations"
+          }
         }
       }
     },
@@ -864,6 +871,13 @@
         "desiredProperties": {
           "description": "Desired properties of the cluster.",
           "$ref": "#/definitions/ClusterDesiredProperties"
+        },
+        "secretsLocations": {
+          "description":"List of Secret Locations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretsLocations"
+          }
         }
       }
     },
@@ -1534,6 +1548,31 @@
       },
       "additionalProperties": false,
       "readOnly": true
+    },
+    "SecretsLocations": {
+      "description":"List of Secret Locations",
+      "type": "array",
+      "items": {
+          "description": "Secret location",
+          "type": "object",
+          "properties": {
+            "secretsLocationName": {
+                "description": "Types of the secret stored",
+                "type": "string",
+                "enum": [
+                  "BackupSecrets"
+                ],
+                "x-ms-enum": {
+                  "name":"SecretsLocationName",
+                  "modelAsString":true
+                }
+            },
+            "secretsLocation": {
+                "description":"URI of secret Location",
+                "type":"string"
+            }
+          }
+      }
     }
   },
   "parameters": {
