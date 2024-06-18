@@ -128,6 +128,9 @@
           "Entity_Create": {
             "$ref": "./examples/Entity_Create.json"
           },
+          "Entity_CreateOrUpdateWithRichText": {
+            "$ref": "./examples/Entity_CreateOrUpdateWithRichText.json"
+          },
           "Entity_Update": {
             "$ref": "./examples/Entity_Update.json"
           }
@@ -435,11 +438,7 @@
         ],
         "parameters": [
           {
-            "name": "file",
-            "in": "formData",
-            "description": "InputStream of file",
-            "required": true,
-            "type": "file"
+            "$ref": "#/parameters/BusinessMetadataOptions"
           }
         ],
         "responses": {
@@ -6821,6 +6820,20 @@
         }
       }
     },
+    "BusinessMetadataOptions": {
+      "type": "object",
+      "description": "Business metadata to send to the service",
+      "properties": {
+        "file": {
+          "type": "string",
+          "format": "byte",
+          "description": "InputStream of file"
+        }
+      },
+      "required": [
+        "file"
+      ]
+    },
     "CardinalityValue": {
       "type": "string",
       "description": "Cardinality",
@@ -8225,6 +8238,14 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "BusinessMetadataOptions": {
+      "name": "file",
+      "in": "formData",
+      "description": "InputStream of file",
+      "required": true,
+      "type": "file",
+      "x-ms-parameter-location": "method"
     }
   }
 }

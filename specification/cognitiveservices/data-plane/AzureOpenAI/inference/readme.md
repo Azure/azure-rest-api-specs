@@ -175,3 +175,38 @@ directive:
   - suppress: RequiredReadOnlyProperties
     reason: Parameter is read only
 ```
+
+## AzureOpenAI 2024-02-15-preview (generated)
+These settings apply only when `--tag=release_2024_02_15_preview_autogen` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_02_15_preview_autogen'
+input-file: preview/2024-02-15-preview/generated.json
+```
+
+## AzureOpenAI 2024-03-01-preview (generated)
+These settings apply only when `--tag=release_2024_03_01_preview_autogen` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_03_01_preview_autogen'
+input-file: preview/2024-03-01-preview/generated.json
+```
+
+## AzureOpenAI 2024-04-01-preview
+These settings apply only when `--tag=release_2024_04_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_04_01_preview'
+input-file: preview/2024-04-01-preview/inference.json
+```
+
+## AzureOpenAI 2024-05-01-preview
+These settings apply only when `--tag=release_2024_05_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_05_01_preview'
+input-file: preview/2024-05-01-preview/inference.json
+```
+
+## AzureOpenAI 2024-05-01-preview
+These settings apply only when `--tag=release_2024_05_01_preview_autogen` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_05_01_preview_autogen'
+input-file: preview/2024-05-01-preview/generated.json
+```

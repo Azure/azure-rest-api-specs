@@ -26,15 +26,63 @@ These are the global settings for the DesktopVirtualizationClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-01
+tag: package-preview-2024-04
 ```
 
+
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.DesktopVirtualization/preview/2024-04-08-preview/desktopvirtualization.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: desktopvirtualization.json
+    reason: False postive -> additionalProperties showing in the nested object properties, not at the top level. E.g. "object.vmTags.additionalProperties" and not "object.additionalProperties". We cannot manually exclude using where clauses because of an active bug on this rule. When this is fixed, we should be able to add a (single) where clause.
+  - code: XmsPageableForListCalls
+    from: desktopvirtualization.json
+    reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we will never return a collection hence no need for such list annotations. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
+    where:
+        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default'].*
+        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostUpdateStatuses/default'].*
+        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default'].*
+        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/activeSessionHostConfigurations/default'].*
+  - code: EvenSegmentedPathForPutOperation
+    from: desktopvirtualization.json
+    reason: False postive -> we have a singleton element in the collection, per recommendation from ARM API review, meaning that we won't have an "even" number of segments. Learn more about this (approved) scenario @  ARM RPC Guidance https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#singleton-resources
+    where:
+        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default']
+        - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostConfigurations/default']
+```
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.DesktopVirtualization/stable/2024-04-03/desktopvirtualization.json
+```
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.DesktopVirtualization/preview/2024-03-06-preview/desktopvirtualization.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: desktopvirtualization.json
+    reason: Pattern restriction will be a breaking change. Update for next stable version. Work item to fix https://microsoft.visualstudio.com/OS/_workitems/edit/47527278
+```
 
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-01'
+``` yaml $(tag) == 'package-preview-2024-01'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2024-01-16-preview/desktopvirtualization.json
 suppressions:
@@ -42,6 +90,7 @@ suppressions:
     from: desktopvirtualization.json
     reason: Pattern restriction will be a breaking change. Update for next stable version. Work item to fix https://microsoft.visualstudio.com/OS/_workitems/edit/47527278
 ```
+
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
@@ -247,7 +296,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

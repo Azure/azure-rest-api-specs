@@ -1,24 +1,60 @@
+using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.Core;
 
 namespace AzureHealthInsights;
+
+@doc("Provides status details for long running operations.")
+model HealthInsightsJobBase {
+  @key("id")
+  @doc("The unique ID of the job.")
+  @visibility("read")
+  @maxLength(36)
+  @minLength(3)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
+  id: string;
+
+  @doc("The status of the job.")
+  @visibility("read")
+  @lroStatus
+  status: JobStatus;
+
+  @doc("The date and time when the processing job was created.")
+  @visibility("read")
+  createdAt?: utcDateTime;
+
+  @doc("The date and time when the processing job is set to expire.")
+  @visibility("read")
+  expiresAt?: utcDateTime;
+
+  @doc("The date and time when the processing job was last updated.")
+  @visibility("read")
+  updatedAt?: utcDateTime;
+
+  @doc("Error object that describes the error when status is \"Failed\".")
+  @visibility("read")
+  error?: Foundations.Error;
+}
 
 @doc("ConditionStage")
 model ConditionStage {
   @doc("""
-  Simple summary (disease specific)
-  see: https://www.hl7.org/fhir/valueset-condition-stage.html
-""")
+      Simple summary (disease specific)
+      see: https://www.hl7.org/fhir/valueset-condition-stage.html
+    """)
   summary: Fhir.R4.CodeableConcept;
 
   @doc("""
-  Kind of staging
-  see: https://www.hl7.org/fhir/valueset-condition-stage-kind.html
-  """)
+    Kind of staging
+    see: https://www.hl7.org/fhir/valueset-condition-stage-kind.html
+    """)
   type?: Fhir.R4.CodeableConcept;
 }
 
 @doc("InterpretationType ")
-enum InterpretationType {
+union InterpretationType {
+  string,
+
   @doc("Normal")
   Normal: "normal",
 
@@ -51,10 +87,12 @@ enum InterpretationType {
 }
 
 @doc("""
-ObservationStatusType based on FHIR valueset observation-status
-see: https://www.hl7.org/fhir/codesystem-observation-status.html
-""")
-enum ObservationStatusType {
+  ObservationStatusType based on FHIR valueset observation-status
+  see: https://www.hl7.org/fhir/codesystem-observation-status.html
+  """)
+union ObservationStatusType {
+  string,
+
   @doc("The existence of the observation is registered, but there is no result yet available.")
   Registered: "registered",
 
@@ -62,9 +100,9 @@ enum ObservationStatusType {
   Preliminary: "preliminary",
 
   @doc("""
-  The observation is complete and there are no further actions needed. Additional information such as 'released', 'signed', etc would be represented using [Provenance](provenance.html) which provides not only the act but also the actors and dates and other related data.
-  These act states would be associated with an observation status of `preliminary` until they are all completed and then a status of `final` would be applied.
-  """)
+    The observation is complete and there are no further actions needed. Additional information such as 'released', 'signed', etc would be represented using [Provenance](provenance.html) which provides not only the act but also the actors and dates and other related data.
+    These act states would be associated with an observation status of `preliminary` until they are all completed and then a status of `final` would be applied.
+    """)
   Final: "final",
 
   @doc("Subsequent to being Final, the observation has been modified subsequent.  This includes updates/new information and corrections.")
@@ -84,10 +122,12 @@ enum ObservationStatusType {
 }
 
 @doc("""
-ConditionDiagnosisSeverityType based on SNOMED CT International edition 31-July 2022
-see: http://snomed.info/sct
-""")
-enum ConditionDiagnosisSeverityType {
+  ConditionDiagnosisSeverityType based on SNOMED CT International edition 31-July 2022
+  see: http://snomed.info/sct
+  """)
+union ConditionDiagnosisSeverityType {
+  string,
+
   @doc("Severe ( http://snomed.info/sct#24484000 ))")
   Severe: "severe",
 
@@ -99,9 +139,11 @@ enum ConditionDiagnosisSeverityType {
 }
 
 @doc("""
-ConditionCategoryType based on FHIR valueset condition-category
-""")
-enum ConditionCategoryType {
+  ConditionCategoryType based on FHIR valueset condition-category
+  """)
+union ConditionCategoryType {
+  string,
+
   @doc("An item on a problem list that can be managed over time and can be expressed by a practitioner (e.g. physician, nurse), patient or related person.")
   ProblemListItem: "problemListItem",
 
@@ -110,10 +152,12 @@ enum ConditionCategoryType {
 }
 
 @doc("""
-VerificationStatusType based of FHIR valueset condition-ver-status.
-see: https://terminology.hl7.org/5.1.0/CodeSystem-condition-ver-status.html
-""")
-enum VerificationStatusType {
+  VerificationStatusType based of FHIR valueset condition-ver-status.
+  see: https://terminology.hl7.org/5.1.0/CodeSystem-condition-ver-status.html
+  """)
+union VerificationStatusType {
+  string,
+
   @doc("There is not sufficient diagnostic and/or clinical evidence to treat this as a confirmed condition.")
   Unconfirmed: "unconfirmed",
 
@@ -133,35 +177,11 @@ enum VerificationStatusType {
   EnteredInError: "enteredInError",
 }
 
-// @doc("""
-// ClinicalStatusType based on FHIR ValueSet condition-clinical.
-// See: https://terminology.hl7.org/5.1.0/CodeSystem-condition-clinical.html
-// """)
-// enum ClinicalStatusType {
-//   @doc("The subject is currently experiencing the condition or situation, there is evidence of the condition or situation, or considered to be a significant risk.")
-//   Active: "active";
-//   @doc("The subject is experiencing a reoccurrence or repeating of a previously resolved condition or situation, e.g. urinary tract infection, food insecurity.")
-//   Recurrence: "recurrence";
-//   @doc("The subject is experiencing a return of a condition or situation after a period of improvement or remission, e.g. relapse of cancer, alcoholism.")
-//   Relapse: "relapse";
-//   @doc("The subject is no longer experiencing the condition or situation and there is no longer evidence or appreciable risk of the condition or situation.")
-//   Inactive: "inactive";
-//   @doc("The subject is not presently experiencing the condition or situation, but there is a risk of the condition or situation returning.")
-//   Remission: "remission";
-//   @doc("The subject is not presently experiencing the condition or situation and there is a negligible perceived risk of the condition or situation returning.")
-//   Resolved: "resolved";
-//   @doc("""
-//   The authoring/source system does not know which of the status values currently applies for this condition.
-//   Note: This concept is not to be used for 'other' - one of the listed statuses is presumed to apply, but the authoring/source system does not know which.
-//   """)
-//   Unknown: "unknown";
-// }
-
 @doc("""
-A location given as a combination of city, state and country/region. It could specify a city, a state or a country/region.
-In case a city is specified, either state +country/region or country/region (for countries/regions where there are no states) should be added.
-In case a state is specified (without a city), country/region should be added.
-""")
+  A location given as a combination of city, state and country/region. It could specify a city, a state or a country/region.
+  In case a city is specified, either state +country/region or country/region (for countries/regions where there are no states) should be added.
+  In case a state is specified (without a city), country/region should be added.
+  """)
 model GeographicLocation {
   @doc("City name.")
   city?: string;
@@ -183,17 +203,19 @@ model TimePeriod {
 }
 
 @doc("Procedure information")
-model OrderedProcedure is Fhir.R4.Extendible {
+model OrderedProcedure {
   @doc("Procedure code")
   code?: Fhir.R4.CodeableConcept;
 
   @doc("Procedure description")
   description?: string;
+
+  ...Fhir.R4.Extendible;
 }
 
 @doc("""
-A piece of clinical information, expressed as a code in a clinical coding system.
-""")
+  A piece of clinical information, expressed as a code in a clinical coding system.
+  """)
 model ClinicalCodedElement {
   @doc("The clinical coding system, e.g. ICD-10, SNOMED-CT, UMLS.")
   system: string;

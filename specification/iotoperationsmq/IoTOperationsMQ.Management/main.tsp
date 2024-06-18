@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -21,11 +20,17 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft.IoTOperationsMQ management service",
-  version: "2023-10-04-preview",
 })
+@versioned(Versions)
 @doc("Microsoft.IoTOperationsMQ Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.IoTOperationsMQ;
+
+/** Api versions */
+enum Versions {
+  /** 2023-10-04-preview preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-10-04-preview`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -33,7 +38,12 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface Mq {
   get is ArmResourceRead<MqResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<MqResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    MqResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<MqResource, MqProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<MqResource>;
   listByResourceGroup is ArmResourceListByParent<MqResource>;
@@ -44,7 +54,12 @@ interface Mq {
 @armResourceOperations
 interface Broker {
   get is ArmResourceRead<BrokerResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    BrokerResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<BrokerResource, BrokerProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerResource>;
@@ -54,7 +69,12 @@ interface Broker {
 @armResourceOperations
 interface BrokerListener {
   get is ArmResourceRead<BrokerListenerResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerListenerResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    BrokerListenerResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<
     BrokerListenerResource,
     BrokerListenerProperties
@@ -67,7 +87,12 @@ interface BrokerListener {
 @armResourceOperations
 interface BrokerAuthentication {
   get is ArmResourceRead<BrokerAuthenticationResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthenticationResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    BrokerAuthenticationResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<
     BrokerAuthenticationResource,
     BrokerAuthenticationProperties
@@ -80,7 +105,12 @@ interface BrokerAuthentication {
 @armResourceOperations
 interface BrokerAuthorization {
   get is ArmResourceRead<BrokerAuthorizationResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthorizationResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    BrokerAuthorizationResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<
     BrokerAuthorizationResource,
     BrokerAuthorizationProperties
@@ -93,7 +123,12 @@ interface BrokerAuthorization {
 @armResourceOperations
 interface MqttBridgeConnector {
   get is ArmResourceRead<MqttBridgeConnectorResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<MqttBridgeConnectorResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    MqttBridgeConnectorResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<
     MqttBridgeConnectorResource,
     MqttBridgeConnectorProperties
@@ -106,7 +141,12 @@ interface MqttBridgeConnector {
 @armResourceOperations
 interface MqttBridgeTopicMap {
   get is ArmResourceRead<MqttBridgeTopicMapResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<MqttBridgeTopicMapResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    MqttBridgeTopicMapResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<
     MqttBridgeTopicMapResource,
     MqttBridgeTopicMapProperties
@@ -119,7 +159,12 @@ interface MqttBridgeTopicMap {
 @armResourceOperations
 interface DiagnosticService {
   get is ArmResourceRead<DiagnosticServiceResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiagnosticServiceResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    DiagnosticServiceResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<
     DiagnosticServiceResource,
     DiagnosticServiceProperties
@@ -132,7 +177,12 @@ interface DiagnosticService {
 @armResourceOperations
 interface DataLakeConnector {
   get is ArmResourceRead<DataLakeConnectorResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataLakeConnectorResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    DataLakeConnectorResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<
     DataLakeConnectorResource,
     DataLakeConnectorProperties
@@ -145,7 +195,12 @@ interface DataLakeConnector {
 @armResourceOperations
 interface DataLakeConnectorTopicMap {
   get is ArmResourceRead<DataLakeTopicMapResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataLakeTopicMapResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    DataLakeTopicMapResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<
     DataLakeTopicMapResource,
     DataLakeConnectorTopicMapProperties
@@ -158,7 +213,12 @@ interface DataLakeConnectorTopicMap {
 @armResourceOperations
 interface KafkaConnector {
   get is ArmResourceRead<KafkaConnectorResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<KafkaConnectorResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    KafkaConnectorResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<
     KafkaConnectorResource,
     KafkaConnectorProperties
@@ -171,7 +231,12 @@ interface KafkaConnector {
 @armResourceOperations
 interface KafkaConnectorTopicMap {
   get is ArmResourceRead<KafkaTopicMapResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<KafkaTopicMapResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    KafkaTopicMapResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<
     KafkaTopicMapResource,
     KafkaTopicMapProperties

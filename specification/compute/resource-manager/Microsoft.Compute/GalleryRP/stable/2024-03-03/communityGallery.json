@@ -364,11 +364,6 @@
           "type": "string",
           "description": "Resource name"
         },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource location"
-        },
         "type": {
           "readOnly": true,
           "type": "string",
@@ -379,6 +374,11 @@
           "$ref": "#/definitions/CommunityGalleryIdentifier"
         }
       },
+      "allOf": [
+      {
+        "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+      }
+      ],
       "description": "Base information about the community gallery resource in azure compute gallery."
     },
     "CommunityGalleryArtifactTags": {

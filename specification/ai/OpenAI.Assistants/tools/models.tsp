@@ -14,6 +14,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @discriminator("type")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model ToolDefinition {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
@@ -25,11 +26,11 @@ model CodeInterpreterToolDefinition extends ToolDefinition {
   type: "code_interpreter";
 }
 
-@doc("The input definition information for a retrieval tool as used to configure an assistant.")
-@added(ServiceApiVersions.v2024_02_15_preview)
-model RetrievalToolDefinition extends ToolDefinition {
-  @doc("The object type, which is always 'retrieval'.")
-  type: "retrieval";
+@doc("The input definition information for a file search tool as used to configure an assistant.")
+@added(ServiceApiVersions.v2024_05_01_preview)
+model FileSearchToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'file_search'.")
+  type: "file_search";
 }
 
 @doc("The input definition information for a function tool as used to configure an assistant.")
@@ -64,10 +65,11 @@ model FunctionDefinition {
 
 @discriminator("type")
 @doc("""
-An abstract representation a a tool invocation needed by the model to continue a run.
-""")
+  An abstract representation a a tool invocation needed by the model to continue a run.
+  """)
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RequiredToolCall {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type for the required tool call.")
   type: string;
 
@@ -103,6 +105,7 @@ model RequiredFunctionToolCallDetails {
 @doc("An abstract representation of a detailed tool call as recorded within a run step for an existing run.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepToolCall {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 
@@ -111,36 +114,37 @@ model RunStepToolCall {
 }
 
 @doc("""
-A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
-represents inputs and outputs consumed and emitted by the code interpreter.
-""")
+  A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that
+  represents inputs and outputs consumed and emitted by the code interpreter.
+  """)
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepCodeInterpreterToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'code_interpreter'.")
   type: "code_interpreter";
 
-  @projectedName("json", "code_interpreter")
+  @encodedName("application/json", "code_interpreter")
   @doc("The details of the tool call to the code interpreter tool.")
   codeInterpreter: RunStepCodeInterpreterToolCallDetails;
 }
 
 @doc("""
-A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents
-executed retrieval actions.
-""")
-@added(ServiceApiVersions.v2024_02_15_preview)
-model RunStepRetrievalToolCall extends RunStepToolCall {
-  @doc("The object type, which is always 'retrieval'.")
-  type: "retrieval";
+  A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents
+  executed file search.
+  """)
+@added(ServiceApiVersions.v2024_05_01_preview)
+model RunStepFileSearchToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'file_search'.")
+  type: "file_search";
 
-  @doc("The key/value pairs produced by the retrieval tool.")
-  retrieval: Record<string>;
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "file_search")
+  fileSearch: Record<string>;
 }
 
 @doc("""
-A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
-and output consumed and emitted by the specified function.
-""")
+  A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
+  and output consumed and emitted by the specified function.
+  """)
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepFunctionToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'function'.")
@@ -166,6 +170,7 @@ model RunStepCodeInterpreterToolCallDetails {
 @doc("An abstract representation of an emitted output from a code interpreter tool.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepCodeInterpreterToolCallOutput {
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
@@ -195,7 +200,7 @@ model RunStepCodeInterpreterImageOutput
 @doc("An image reference emitted by a code interpreter tool in response to a tool call by the model.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepCodeInterpreterImageReference {
-  @projectedName("json", "file_id")
+  @encodedName("application/json", "file_id")
   @doc("The ID of the file associated with this image.")
   fileId: string;
 }
@@ -224,9 +229,71 @@ model RunStepFunctionToolCallDetails {
 @added(ServiceApiVersions.v2024_02_15_preview)
 model ToolOutput {
   @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
-  @projectedName("json", "tool_call_id")
+  @encodedName("application/json", "tool_call_id")
   toolCallId?: string;
 
   @doc("The output from the tool to be submitted.")
   output?: string;
+}
+
+/**
+ * Controls which (if any) tool is called by the model.
+ * - `none` means the model will not call any tools and instead generates a message.
+ * - `auto` is the default value and means the model can pick between generating a message or calling a tool.
+ * Specifying a particular tool like `{"type": "file_search"}` or `{"type": "function", "function": {"name": "my_function"}}`
+ * forces the model to call that tool.
+ */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+@added(ServiceApiVersions.v2024_05_01_preview)
+union AssistantsApiToolChoiceOption {
+  string,
+
+  /** Specifies how the tool choice will be used */
+  AssistantsApiToolChoiceOptionMode,
+
+  /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
+  AssistantsNamedToolChoice,
+}
+
+/** Specifies how the tool choice will be used */
+@added(ServiceApiVersions.v2024_05_01_preview)
+union AssistantsApiToolChoiceOptionMode {
+  string,
+
+  /** The model will not call a function and instead generates a message. */
+  none: "none",
+
+  /** The model can pick between generating a message or calling a function. */
+  auto: "auto",
+}
+/** Specifies a tool the model should use. Use to force the model to call a specific tool. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model AssistantsNamedToolChoice {
+  /** the type of tool. If type is `function`, the function name must be set. */
+  type: AssistantsNamedToolChoiceType;
+
+  /** The name of the function to call */
+  function?: FunctionName;
+}
+
+/** Available tool types for assistants named tools. */
+@added(ServiceApiVersions.v2024_05_01_preview)
+union AssistantsNamedToolChoiceType {
+  string,
+
+  /** Tool type `function` */
+  function: "function",
+
+  /** Tool type `code_interpreter` */
+  codeInterpreter: "code_interpreter",
+
+  /** Tool type `file_search` */
+  fileSearch: "file_search",
+}
+
+/** The function name that will be used, if using the `function` tool */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model FunctionName {
+  /** The name of the function to call */
+  name: string;
 }

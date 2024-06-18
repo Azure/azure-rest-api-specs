@@ -5,12 +5,13 @@ emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
   disable:
     "@azure-tools/typespec-azure-core/composition-over-inheritance": "New rule"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
     examples-directory: "examples"
     output-file: "{azure-resource-provider-folder}/Microsoft.Easm/{version-status}/{version}/easm.json"
@@ -19,12 +20,14 @@ options:
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "defendereasm-rest"
     packageDetails:
       name: "@azure-rest/defender-easm-rest"
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-analytics-defender-easm"
     namespace: com.azure.analytics.defender.easm
     partial-update: true
-  
+    flavor: azure

@@ -5,7 +5,9 @@ namespace Azure.AI.ChatProtocol;
 using TypeSpec.Http;
 
 @doc("Representation of the reason why a chat session has finished processing.")
-enum FinishReason {
+union FinishReason {
+  string,
+
   @doc("Completion ended normally.")
   stopped: "stop",
 
@@ -14,7 +16,9 @@ enum FinishReason {
 }
 
 @doc("A representation of the intended purpose of a message.")
-enum ChatRole {
+union ChatRole {
+  string,
+
   @doc("The role that provides input to the completion.")
   user: "user",
 
@@ -29,9 +33,9 @@ enum ChatRole {
 model ContextProperty {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Protocol defines the type as Record<any>"
   @doc("""
-  Context allows the chat app to receive extra parameters from the client, such as temperature, functions, or
-  customer_info. These parameters are specific to the chat app and not understood by the generic clients.
-  """)
+    Context allows the chat app to receive extra parameters from the client, such as temperature, functions, or
+    customer_info. These parameters are specific to the chat app and not understood by the generic clients.
+    """)
   context?: Record<unknown>;
 }
 
@@ -39,16 +43,18 @@ model ContextProperty {
 model StateProperty {
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "The protocol defines these as any (object/scalar) for now"
   @doc("""
-  Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend
-  being used. The client must send back the data in this field unchanged in subsequent requests, until the chat app
-  sends a new one. The data in this field can be used to implement stateful services, such as remembering previous
-  conversations or user preferences.
-  """)
+    Field that allows the chat app to store and retrieve data, the structure of such data is dependant on the backend
+    being used. The client must send back the data in this field unchanged in subsequent requests, until the chat app
+    sends a new one. The data in this field can be used to implement stateful services, such as remembering previous
+    conversations or user preferences.
+    """)
   sessionState?: unknown;
 }
 
 @doc("Identifies the type of a message.")
-enum MessageKind {
+union MessageKind {
+  string,
+
   @doc("The message context is text.")
   text: "text",
 }

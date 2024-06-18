@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.OpenAI.Assistants;
 
@@ -42,7 +44,7 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 @route("/files")
 op uploadFile(
   @header contentType: "multipart/form-data",
-  @projectedName("csharp", "Data") file: bytes,
+  @clientName("Data", "csharp") file: bytes,
   purpose: FilePurpose,
 
   /*
@@ -63,7 +65,7 @@ op uploadFile(
 @route("/files/{fileId}")
 op deleteFile(
   @doc("The ID of the file to delete.")
-  @projectedName("json", "file_id")
+  @encodedName("application/json", "file_id")
   @path
   fileId: string,
 ): FileDeletionStatus;
@@ -78,6 +80,18 @@ op deleteFile(
 op getFile(
   @doc("The ID of the file to retrieve.")
   @path
-  @projectedName("json", "file_id")
+  @encodedName("application/json", "file_id")
   fileId: string,
 ): OpenAIFile;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+@get
+@route("/files/{fileId}/content")
+@doc("Returns information about a specific file. Does not retrieve file content.")
+op getFileContent(
+  @doc("The ID of the file to retrieve.")
+  @path
+  @encodedName("application/json", "file_id")
+  fileId: string,
+): bytes;

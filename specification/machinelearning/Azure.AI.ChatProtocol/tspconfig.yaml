@@ -2,16 +2,17 @@ parameters:
   "service-dir":
     default: "sdk/machinelearning"
 emit:
-   - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-autorest"
 #  - "@typespec/openapi3"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/../"
     output-file: "{azure-resource-provider-folder}/Azure.AI.ChatProtocol/{version-status}/{version}/generated.json"
     azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
     examples-directory: examples
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
@@ -19,15 +20,19 @@ options:
     namespace: "Azure.AI.ChatProtocol"
     clear-output-folder: true
     model-namespace: false
+    flavor: azure
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-chatprotocol"
     package-name: "{package-dir}"
     package-mode: dataplane
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "ai-chat-protocol"
     isModularLibrary: true
     packageDetails:
       name: "@azure/ai-chat-protocol"
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-chatprotocol"
     namespace: "com.azure.ai.chatprotocol"
+    flavor: azure

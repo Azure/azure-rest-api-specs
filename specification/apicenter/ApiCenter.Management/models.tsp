@@ -1,8 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApiCenter;
 
@@ -16,189 +19,214 @@ model OdataFilterParameter {
 }
 
 /** The expected types of origin */
-enum Origin {
+union Origin {
+  string,
+
   /** Origin with User */
-  user,
+  "user",
 
   /** Origin with System */
-  system,
+  "system",
 
   /** Origin with user and system */
-  `user,system`,
+  "user,system",
 }
 
 /** The type of action */
-enum ActionType {
+union ActionType {
+  string,
+
   /** an internal action */
-  Internal,
+  "Internal",
 }
 
 /** The provisioning state of the resource */
-enum ProvisioningState {
-  ...Azure.ResourceManager.ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  Azure.ResourceManager.ResourceProvisioningState,
 }
 
 /** The type of managed service identity */
-enum ManagedServiceIdentityType {
+union ManagedServiceIdentityType {
+  string,
+
   /** No identity */
-  None,
+  "None",
 
   /** Assigned by the system */
-  SystemAssigned,
+  "SystemAssigned",
 
   /** assigned by the user */
-  UserAssigned,
+  "UserAssigned",
 
   /** Both system-assigned and user-assigned identities */
-  `SystemAssigned,UserAssigned`,
+  "SystemAssigned,UserAssigned",
 }
 
 /** How the resource was created */
-enum CreatedByType {
+union CreatedByType {
+  string,
+
   /** Created by user */
-  User,
+  "User",
 
   /** Created by Application */
-  Application,
+  "Application",
 
   /** Created by Managed Identity */
-  ManagedIdentity,
+  "ManagedIdentity",
 
   /** Created By Key */
-  Key,
+  "Key",
 }
 
 /** Assignment entity for Metadata */
-enum MetadataAssignmentEntity {
+union MetadataAssignmentEntity {
+  string,
+
   /** Assigned to API */
-  api,
+  "api",
 
   /** Assigned to Environment */
-  environment,
+  "environment",
 
   /** Assigned to Deployment */
-  deployment,
+  "deployment",
 }
 
 /** The format for schema export */
-enum MetadataSchemaExportFormat {
+union MetadataSchemaExportFormat {
+  string,
+
   @doc("The inlined content of a schema document.")
-  inline,
+  "inline",
 
   @doc("The link to a schema document. The URL is valid for 5 minutes.")
-  link,
+  "link",
 }
 
 /** The kind of the API */
-enum ApiKind {
+union ApiKind {
+  string,
+
   /** A Representational State Transfer Api */
-  rest,
+  "rest",
 
   /** A Graph query language Api */
-  graphql,
+  "graphql",
 
   /** A gRPC Api */
-  grpc,
+  "grpc",
 
   /** A SOAP Api */
-  soap,
+  "soap",
 
   /** Web Hook */
-  webhook,
+  "webhook",
 
   /** Web Socket */
-  websocket,
+  "websocket",
 }
 
 /** The stage of the Api development lifecycle */
-enum LifecycleStage {
+union LifecycleStage {
+  string,
+
   /** design stage */
-  design,
+  "design",
 
   /** development stage */
-  development,
+  "development",
 
   /** testing stage */
-  testing,
+  "testing",
 
   /** In preview */
-  preview,
+  "preview",
 
   /** In production */
-  production,
+  "production",
 
   /** deprecated stage */
-  deprecated,
+  "deprecated",
 
   /** Retired stage */
-  retired,
+  "retired",
 }
 
 /** Source format for imported Api spec */
-enum ApiSpecImportSourceFormat {
-  @doc("The inlined content of a specification document.") inline,
+union ApiSpecImportSourceFormat {
+  string,
+  @doc("The inlined content of a specification document.") "inline",
 
   @doc("""
-The link to a specification document hosted on a publicly accessible internet
-address.
-""")
-  link,
+    The link to a specification document hosted on a publicly accessible internet
+    address.
+    """)
+  "link",
 }
 
 /** Result format for exported Api spec */
-enum ApiSpecExportResultFormat {
-  @doc("The inlined content of a specification document.") inline,
+union ApiSpecExportResultFormat {
+  string,
+  @doc("The inlined content of a specification document.") "inline",
 
   @doc("The link to the result of the export operation. The URL is valid for 5 minutes.")
-  link,
+  "link",
 }
 
 /** State of the Deployment */
-enum DeploymentState {
+union DeploymentState {
+  string,
+
   /** Active State */
-  active,
+  "active",
 
   /** Inactive State */
-  inactive,
+  "inactive",
 }
 
 /** The kind of environment */
-enum EnvironmentKind {
+union EnvironmentKind {
+  string,
+
   /** Development environment */
-  development,
+  "development",
 
   /** Testing environment */
-  testing,
+  "testing",
 
   /** Staging environment */
-  staging,
+  "staging",
 
   /** Production environment */
-  production,
+  "production",
 }
 
 /** The type of environment server */
-enum EnvironmentServerType {
+union EnvironmentServerType {
+  string,
+
   /** Api Management Server */
-  `Azure API Management`,
+  "Azure API Management",
 
   /** Compute server */
-  `Azure compute service`,
+  "Azure compute service",
 
   /** Apigee server */
-  `Apigee API Management`,
+  "Apigee API Management",
 
   /** AWS Api Gateway server */
-  `AWS API Gateway`,
+  "AWS API Gateway",
 
   /** Kong API Gateway server */
-  `Kong API Gateway`,
+  "Kong API Gateway",
 
   /** Kubernetes server */
-  Kubernetes,
+  "Kubernetes",
 
   /** Mulesoft Api Management server */
-  `MuleSoft API Management`,
+  "MuleSoft API Management",
 }
 
 @doc("The properties of the service.")
@@ -206,6 +234,10 @@ model ServiceProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2024_03_15_preview)
+  @doc("Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.")
+  restore?: boolean = false;
 }
 
 @doc("The metadata schema export request.")
@@ -230,6 +262,7 @@ model MetadataSchemaProperties {
   schema: string;
 
   @doc("The assignees")
+  @extension("x-ms-identifiers", [])
   assignedTo?: MetadataAssignment[];
 }
 
@@ -285,9 +318,11 @@ model ApiProperties {
 
   @doc("The set of external documentation")
   @maxItems(20)
+  @extension("x-ms-identifiers", [])
   externalDocumentation?: ExternalDocumentation[];
 
   @doc("The set of contacts")
+  @extension("x-ms-identifiers", [])
   contacts?: Contact[];
 
   @doc("The license information for the API.")
@@ -342,16 +377,16 @@ model License {
   name?: string;
 
   @doc("""
-URL pointing to the license details. The URL field is mutually exclusive of the
-identifier field.
-""")
+    URL pointing to the license details. The URL field is mutually exclusive of the
+    identifier field.
+    """)
   @maxLength(200)
   url?: url;
 
   @doc("""
-SPDX license information for the API. The identifier field is mutually
-exclusive of the URL field.
-""")
+    SPDX license information for the API. The identifier field is mutually
+    exclusive of the URL field.
+    """)
   @maxLength(50)
   identifier?: url;
 }
@@ -509,4 +544,15 @@ model Onboarding {
   @maxItems(1)
   @doc("The location of the development portal")
   developerPortalUri?: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@added(Versions.v2024_03_15_preview)
+@doc("Deleted service properties.")
+model DeletedServiceProperties {
+  @doc("UTC date and time when the service will be automatically purged. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
+  scheduledPurgeDate?: utcDateTime;
+
+  @doc("UTC date and time when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
+  softDeletionDate?: utcDateTime;
 }
