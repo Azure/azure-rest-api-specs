@@ -21,6 +21,8 @@ model DataFlowResource is TrackedResource<DataFlowProperties> {
   @key("dataflowName")
   @path
   @segment("dataflows")
+  @minlength(3)
+  @maxlength(63)
   name: string;
 
   // Extended location is not included in TrackedResource yet

@@ -21,6 +21,8 @@ model DataFlowEndpointResource is TrackedResource<DataFlowEndpointProperties> {
   @key("dataflowEndpointName")
   @path
   @segment("dataflowEndpoints")
+  @minlength(3)
+  @maxlength(63)
   name: string;
 
   // Extended location is not included in TrackedResource yet
