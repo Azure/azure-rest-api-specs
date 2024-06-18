@@ -76,11 +76,14 @@ union FleetMemberProvisioningState {
 interface FleetMembers {
   get is ArmResourceRead<FleetMember>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "must change at next release"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     FleetMember,
     Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
       IfMatchParameters<FleetMember> &
-      IfNoneMatchParameters<FleetMember>
+      IfNoneMatchParameters<FleetMember>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
