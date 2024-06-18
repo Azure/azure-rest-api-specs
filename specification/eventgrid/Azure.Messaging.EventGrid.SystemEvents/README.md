@@ -40,4 +40,4 @@ Adding `@usage` and `@access` to `client.tsp`:
     - Install the emitter `npm install @azure-tools/typespec-autorest`
     - Under `/Azure.Messaging.EventGrid.SystemEvents/`:
         - Run `npx tsp compile main.tsp --emit @azure-tools/typespec-autorest`
-3) Verify the generated swagger under `/data-plane/Microsoft.EventGrid/2024-01-01/` is accurate.
+3) Verify the generated swagger under `/data-plane/Microsoft.EventGrid/2024-01-01/` accurately depicts your system events and commit it.
