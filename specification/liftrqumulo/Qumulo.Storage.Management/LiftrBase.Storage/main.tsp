@@ -153,7 +153,8 @@ model FileSystemResourceUpdateProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(FileSystemResourceProperties)
-model FileSystemResource is Azure.ResourceManager.TrackedResource<FileSystemResourceProperties> {
+model FileSystemResource
+  is Azure.ResourceManager.TrackedResource<FileSystemResourceProperties> {
   /**
    * Name of the File System resource
    */
