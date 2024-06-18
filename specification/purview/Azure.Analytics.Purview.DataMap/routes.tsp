@@ -2051,8 +2051,8 @@ interface Type {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-  Create all atlas type definitions in bulk. Please avoid recreating existing types..
-  """)
+    Create all atlas type definitions in bulk. Please avoid recreating existing types.
+    """)
   @route("/atlas/v2/types/typedefs")
   @post
   bulkCreate is AtlasOperation<AtlasTypesDef, AtlasTypesDef, {}>;
