@@ -71,9 +71,6 @@ model AdvancedSettings {
 
   @doc("Certificate rotation and private key configuration.")
   internalCerts?: CertManagerCertOptions;
-
-  @doc("The details of Tolerations that are applied to all Broker pods.")
-  tolerations?: NodeTolerations;
 }
 
 @doc("Encrypted properties")

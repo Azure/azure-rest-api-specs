@@ -70,7 +70,7 @@ model DataFlowBuiltInTransformation {
   filter?: DataFlowBuiltInTransformationFilter[] = #[];
 
   @doc("ID of the transformation.")
-  id: string;
+  name: string;
 
   @doc("Maps input to output message.")
   @OpenAPI.extension("x-ms-identifiers", [])
@@ -139,7 +139,7 @@ model DataFlowDestinationOperation {
   endpointRef: string;
 
   @doc("ID of the destination.")
-  id: string;
+  name: string;
 
   @doc("Destination path, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
   path: string;
@@ -151,7 +151,7 @@ model DataFlowSourceOperation {
   endpointRef: string;
 
   @doc("ID of the source.")
-  id: string;
+  name: string;
 
   @doc("List of source paths. Can be MQTT or Kafka topics. Supports wildcards # and +.")
   paths: string[];

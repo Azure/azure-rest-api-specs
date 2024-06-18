@@ -40,9 +40,6 @@ model DataFlowProfileProperties {
   @maxValue(20)
   maxInstances?: int32;
 
-  @doc("Node tolerations. Optional; see https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/.")
-  tolerations?: NodeTolerations;
-
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -55,9 +52,6 @@ model ProfileDiagnostics {
 
   @doc("The metrics settings for the dataflow.")
   metrics?: DiagnosticsMetrics;
-
-  @doc("The traces settings for the dataflow.")
-  traces?: DiagnosticsTraces;
 }
 
 @doc("Mode properties")
@@ -115,33 +109,6 @@ model DiagnosticsMetrics {
   @minValue(1)
   @maxValue(60)
   updateIntervalSeconds?: int32 = 30;
-}
-
-@doc("DataFlowProfile Diagnostics Traces properties")
-model DiagnosticsTraces {
-  @doc("The cache size in megabytes.")
-  @minValue(1)
-  @maxValue(128)
-  cacheSizeMegabytes?: int32 = 16;
-
-  @doc("The mode for traces.")
-  mode?: Mode = Mode.Enabled;
-
-  @doc("How often to export the metrics to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  exportIntervalSeconds?: int32 = 30;
-
-  @doc("The openTelemetryCollectorAddress for the traces.")
-  openTelemetryCollectorAddress?: string;
-
-  @doc("The selfTracing settings for the traces.")
-  selfTracing?: DataFlowSelfTracing;
-
-  @doc("The span channel capacity.")
-  @minValue(1000)
-  @maxValue(100000)
-  spanChannelCapacity?: int32 = 1000;
 }
 
 @doc("DataFlowProfile Diagnostics Traces SelfTracing properties")
