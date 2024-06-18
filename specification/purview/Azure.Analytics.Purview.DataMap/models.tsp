@@ -1983,3 +1983,7 @@ model AtlasTypeDefHeader {
   @doc("The name of the type definition.")
   name?: string;
 }
+
+model KeepModel<T> {
+  @bodyRoot body: T;
+}

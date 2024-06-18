@@ -61,3 +61,7 @@ op OaiLongRunningRpcOperation<
   Traits,
   TErrorResponse
 >;
+
+model KeepModel<T> {
+  @bodyRoot body: T;
+}

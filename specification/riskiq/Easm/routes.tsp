@@ -149,7 +149,7 @@ interface DiscoveryGroups {
   @get
   @clientName("GetDiscoveryGroupRuns", "csharp")
   listRuns is Foundations.Operation<
-    DiscoGroupsListRunsParameter,
+    KeepModel<DiscoGroupsListRunsParameter>,
     DiscoRunPageResult
   >;
 
@@ -203,7 +203,7 @@ interface Reports {
   @route("/reports/assets:getSnapshot")
   @post
   getSnapshot is Foundations.Operation<
-    ReportAssetSnapshotRequest,
+    KeepModel<ReportAssetSnapshotRequest>,
     ReportAssetSnapshotResult
   >;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -211,7 +211,7 @@ interface Reports {
   @route("/reports/assets:getSummary")
   @post
   getSummary is Foundations.Operation<
-    ReportAssetSummaryRequest,
+    KeepModel<ReportAssetSummaryRequest>,
     ReportAssetSummaryResult
   >;
 
@@ -221,7 +221,7 @@ interface Reports {
   @route("/reports/assets:getSnapshotExport")
   @post
   getSnapshotExport is Foundations.Operation<
-    ReportAssetSnapshotExportRequest,
+    KeepModel<ReportAssetSnapshotExportRequest>,
     Task
   >;
 }

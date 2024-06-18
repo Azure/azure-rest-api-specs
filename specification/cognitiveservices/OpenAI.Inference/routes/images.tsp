@@ -54,7 +54,7 @@ op getAzureBatchImageGenerationOperationStatus is RpcOperation<
   }
 )
 op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
-  ImageGenerationOptions,
+  KeepModel<ImageGenerationOptions>,
   BatchImageGenerationOperationResponse,
   BatchImageGenerationOperationResponse
 >;

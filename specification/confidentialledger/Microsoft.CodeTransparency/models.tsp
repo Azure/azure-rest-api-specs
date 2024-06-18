@@ -269,3 +269,7 @@ model CodeTransparencyConfigurationPolicy {
   accepted_algorithms?: string[];
   accepted_did_issuers?: string[];
 }
+
+model KeepModel<T> {
+  @bodyRoot body: T;
+}
