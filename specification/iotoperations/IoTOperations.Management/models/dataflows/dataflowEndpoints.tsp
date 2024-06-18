@@ -439,7 +439,7 @@ union MqttRetainType {
 @doc("Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry. Default Kubernetes authentication with audience set to aio-mq-internal")
 model DataFlowEndpointMqttAuthentication {
   @doc("Kubernetes service account token authentication. Default audience if not set is aio-mq-internal")
-  ServiceAccountToken?: DataFlowEndpointAuthenticationSasl;
+  serviceAccountToken?: DataFlowEndpointAuthenticationSasl;
 
   @doc("System-assigned managed identity authentication.")
   systemAssignedManagedIdentity?: DataFlowEndpointAuthenticationSystemAssignedManagedIdentity;

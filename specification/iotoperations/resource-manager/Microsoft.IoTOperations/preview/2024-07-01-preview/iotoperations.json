@@ -2008,6 +2008,8 @@
             "description": "Name of Instance dataflowEndpoint resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           }
         ],
@@ -2063,6 +2065,8 @@
             "description": "Name of Instance dataflowEndpoint resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -2148,6 +2152,8 @@
             "description": "Name of Instance dataflowEndpoint resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -2212,6 +2218,8 @@
             "description": "Name of Instance dataflowEndpoint resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           }
         ],
@@ -2336,6 +2344,8 @@
             "description": "Name of Instance dataflowProfile resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           }
         ],
@@ -2391,6 +2401,8 @@
             "description": "Name of Instance dataflowProfile resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -2476,6 +2488,8 @@
             "description": "Name of Instance dataflowProfile resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -2540,6 +2554,8 @@
             "description": "Name of Instance dataflowProfile resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           }
         ],
@@ -2612,6 +2628,8 @@
             "description": "Name of Instance dataflowProfile resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           }
         ],
@@ -2672,6 +2690,8 @@
             "description": "Name of Instance dataflowProfile resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -2680,6 +2700,8 @@
             "description": "Name of Instance dataflowProfile dataflow resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           }
         ],
@@ -2735,6 +2757,8 @@
             "description": "Name of Instance dataflowProfile resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -2743,6 +2767,8 @@
             "description": "Name of Instance dataflowProfile dataflow resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -2828,6 +2854,8 @@
             "description": "Name of Instance dataflowProfile resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -2836,6 +2864,8 @@
             "description": "Name of Instance dataflowProfile dataflow resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -2900,6 +2930,8 @@
             "description": "Name of Instance dataflowProfile resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
@@ -2908,6 +2940,8 @@
             "description": "Name of Instance dataflowProfile dataflow resource",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           }
         ],
@@ -2985,10 +3019,6 @@
         "internalCerts": {
           "$ref": "#/definitions/CertManagerCertOptions",
           "description": "Certificate rotation and private key configuration."
-        },
-        "tolerations": {
-          "$ref": "#/definitions/NodeTolerations",
-          "description": "The details of Tolerations that are applied to all Broker pods."
         }
       }
     },
@@ -4059,7 +4089,7 @@
           },
           "x-ms-identifiers": []
         },
-        "id": {
+        "name": {
           "type": "string",
           "description": "ID of the transformation."
         },
@@ -4121,7 +4151,7 @@
         }
       },
       "required": [
-        "id"
+        "name"
       ]
     },
     "DataFlowBuiltInTransformationEnrich": {
@@ -4196,7 +4226,7 @@
           "type": "string",
           "description": "Reference to the Endpoint CR. Can be of MQTT, Kafka, Fabric, ADLS, ADX type."
         },
-        "id": {
+        "name": {
           "type": "string",
           "description": "ID of the destination."
         },
@@ -4207,7 +4237,7 @@
       },
       "required": [
         "endpointRef",
-        "id",
+        "name",
         "path"
       ]
     },
@@ -4672,7 +4702,7 @@
           "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
           "description": "User-assigned managed identity authentication."
         },
-        "x509": {
+        "x509Credentials": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
         }
@@ -4963,7 +4993,7 @@
       "type": "object",
       "description": "Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry. Default Kubernetes authentication with audience set to aio-mq-internal",
       "properties": {
-        "kubernetes": {
+        "serviceAccountToken": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationSasl",
           "description": "Kubernetes service account token authentication. Default audience if not set is aio-mq-internal"
         },
@@ -4975,7 +5005,7 @@
           "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
           "description": "User-assigned managed identity authentication."
         },
-        "x509": {
+        "x509Credentials": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
         }
@@ -5149,7 +5179,11 @@
           "$ref": "#/definitions/DataFlowSourceOperation",
           "description": "Source configuration."
         }
-      }
+      },
+      "required": [
+        "destination",
+        "source"
+      ]
     },
     "DataFlowProfileProperties": {
       "type": "object",
@@ -5165,10 +5199,6 @@
           "description": "To manually scale the dataflow profile, specify the maximum number of instances you want to run.",
           "minimum": 1,
           "maximum": 20
-        },
-        "tolerations": {
-          "$ref": "#/definitions/NodeTolerations",
-          "description": "Node tolerations. Optional; see https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -5398,7 +5428,7 @@
           "type": "string",
           "description": "Reference to the Endpoint CR. Can only be of MQTT and Kafka type."
         },
-        "id": {
+        "name": {
           "type": "string",
           "description": "ID of the source."
         },
@@ -5459,7 +5489,7 @@
       },
       "required": [
         "endpointRef",
-        "id",
+        "name",
         "paths"
       ]
     },
@@ -5549,69 +5579,6 @@
           "default": 30,
           "minimum": 1,
           "maximum": 60
-        }
-      }
-    },
-    "DiagnosticsTraces": {
-      "type": "object",
-      "description": "DataFlowProfile Diagnostics Traces properties",
-      "properties": {
-        "cacheSizeMegabytes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The cache size in megabytes.",
-          "default": 16,
-          "minimum": 1,
-          "maximum": 128
-        },
-        "mode": {
-          "type": "string",
-          "description": "The mode for traces.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "Mode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Mode is equivalent to True"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Mode is equivalent to False."
-              }
-            ]
-          }
-        },
-        "exportIntervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often to export the metrics to the open telemetry collector.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 300
-        },
-        "openTelemetryCollectorAddress": {
-          "type": "string",
-          "description": "The openTelemetryCollectorAddress for the traces."
-        },
-        "selfTracing": {
-          "$ref": "#/definitions/DataFlowSelfTracing",
-          "description": "The selfTracing settings for the traces."
-        },
-        "spanChannelCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The span channel capacity.",
-          "default": 1000,
-          "minimum": 1000,
-          "maximum": 100000
         }
       }
     },
@@ -6267,10 +6234,6 @@
         "metrics": {
           "$ref": "#/definitions/DiagnosticsMetrics",
           "description": "The metrics settings for the dataflow."
-        },
-        "traces": {
-          "$ref": "#/definitions/DiagnosticsTraces",
-          "description": "The traces settings for the dataflow."
         }
       }
     },
