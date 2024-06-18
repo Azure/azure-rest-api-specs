@@ -6621,6 +6621,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Secret expiry information.",
+            "schema": {
+              "$ref": "#/definitions/SecretExpiry"
+            }
           }
         ],
         "responses": {
@@ -22113,6 +22121,22 @@
             "description": "Use the custom seasonality value."
           }
         ]
+      },
+      "additionalProperties": false
+    },
+    "SecretExpiry": {
+      "description": "Secret expiration configuration.",
+      "type": "object",
+      "properties": {
+        "expirableSecret": {
+          "description": "Indicates if the secret is expirable.",
+          "type": "boolean"
+        },
+        "expireAfterHours": {
+          "format": "int32",
+          "description": "Number of hours after which the secret will expire.",
+          "type": "integer"
+        }
       },
       "additionalProperties": false
     },
