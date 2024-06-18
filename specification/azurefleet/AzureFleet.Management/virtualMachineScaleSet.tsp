@@ -22,9 +22,9 @@ model VirtualMachineScaleSet {
   name: string;
 
   @doc("""
-  The compute RP resource id of the virtualMachineScaleSet 
-  "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}"
-  """)
+    The compute RP resource id of the virtualMachineScaleSet 
+    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}"
+    """)
   @visibility("read")
   id: string;
 
@@ -57,29 +57,4 @@ model VirtualMachineScaleSetListResult {
   @doc("The link to the next page of items")
   @format("uri")
   nextLink?: string;
-}
-
-@armResourceOperations
-interface VirtualMachineScaleSets {
-  @autoRoute
-  @listsResource(VirtualMachineScaleSet)
-  @armResourceList(VirtualMachineScaleSet)
-  @get
-  @doc("List VirtualMachineScaleSet resources by Fleet")
-  @extension(
-    "x-ms-pageable",
-    {
-      nextLinkName: "nextLink",
-    }
-  )
-  listByFleet(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...ProviderNamespace<Fleet>,
-    ...ResourceNameParameter<
-      Fleet,
-      NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
-    >,
-  ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
 }

@@ -7,6 +7,7 @@ using Microsoft.LoadTestService;
 
 @useDependency(APIVersions.v2022_11_01)
 @useDependency(APIVersions.v2023_04_01_preview)
+@useDependency(APIVersions.v2024_05_01_preview)
 namespace Customizations;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -57,4 +58,28 @@ interface TestRunOperations {
   listTestRuns is LoadTestRun.listTestRuns;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   stopTestRun is LoadTestRun.stop;
+}
+
+@client({
+  name: "TestProfileAdministrationClient",
+  service: Microsoft.LoadTestService,
+})
+interface TestProfileAdministrationOperations {
+  createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
+  deleteTestProfile is TestProfileAdministration.deleteTestProfile;
+  getTestProfile is TestProfileAdministration.getTestProfile;
+  listTestProfiles is TestProfileAdministration.listTestProfiles;
+}
+
+@client({
+  name: "TestProfileRunClient",
+  service: Microsoft.LoadTestService,
+})
+interface TestProfileRunOperations {
+  createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
+  deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
+  getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
+  listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
+  stopTestProfileRun is TestProfileRunAdministration.stop;
 }

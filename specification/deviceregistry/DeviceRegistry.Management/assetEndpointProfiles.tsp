@@ -120,10 +120,17 @@ model OwnCertificate {
 interface AssetEndpointProfiles {
   get is ArmResourceRead<AssetEndpointProfile>;
 
-  createOrReplace is ArmResourceCreateOrReplaceAsync<AssetEndpointProfile>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
+    AssetEndpointProfile,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
-  @parameterVisibility
-  update is ArmCustomPatchAsync<AssetEndpointProfile, AssetEndpointProfile>;
+  update is ArmResourcePatchAsync<
+    AssetEndpointProfile,
+    AssetEndpointProfileProperties
+  >;
 
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;
 
