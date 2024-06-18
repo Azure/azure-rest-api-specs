@@ -1,5 +1,5 @@
 import "@azure-tools/typespec-azure-resource-manager";
-import "../../../models/exadata/virtualNetworkAddress.tsp";
+import "../../models/exadata/virtualNetworkAddress.tsp";
 
 using Azure.ResourceManager;
 using Autorest;

@@ -1,5 +1,6 @@
-import "../../../models/oraclesubscription/oracleSubscription.tsp";
-
+import "../../models/oraclesubscription/oracleSubscription.tsp";
+import "../../versions.tsp"
+;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Autorest;

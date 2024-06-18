@@ -1,4 +1,4 @@
-import "../../../models/exadata/dnsPrivateZones.tsp";
+import "../../models/exadata/dnsPrivateZones.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
