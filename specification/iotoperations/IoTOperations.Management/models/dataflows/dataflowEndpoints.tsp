@@ -257,7 +257,7 @@ model DataFlowEndpointKafkaAuthentication {
   userAssignedManagedIdentity?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
 
   @doc("X.509 certificate authentication.")
-  x509?: DataFlowEndpointAuthenticationX509;
+  x509Credentials?: DataFlowEndpointAuthenticationX509;
 }
 
 @doc("DataFlowEndpoint Authentication Sasl properties")
@@ -448,7 +448,7 @@ model DataFlowEndpointMqttAuthentication {
   userAssignedManagedIdentity?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
 
   @doc("X.509 certificate authentication.")
-  x509?: DataFlowEndpointAuthenticationX509;
+  x509Credentials?: DataFlowEndpointAuthenticationX509;
 }
 
 @doc("DataFlowEndpoint Authentication Kubernetes properties")
