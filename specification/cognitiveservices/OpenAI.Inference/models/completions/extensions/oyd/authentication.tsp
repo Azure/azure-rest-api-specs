@@ -5,8 +5,8 @@ namespace Azure.OpenAI;
 using TypeSpec.Versioning;
 
 @doc("""
-The authentication types supported with Azure OpenAI On Your Data.
-""")
+  The authentication types supported with Azure OpenAI On Your Data.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 union OnYourDataAuthenticationType {
   string,
@@ -42,8 +42,8 @@ model OnYourDataAuthenticationOptions {
 }
 
 @doc("""
-The authentication options for Azure OpenAI On Your Data when using an API key.
-""")
+  The authentication options for Azure OpenAI On Your Data when using an API key.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataApiKeyAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -55,8 +55,8 @@ model OnYourDataApiKeyAuthenticationOptions
 }
 
 @doc("""
-The authentication options for Azure OpenAI On Your Data when using a connection string.
-""")
+  The authentication options for Azure OpenAI On Your Data when using a connection string.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataConnectionStringAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -69,8 +69,8 @@ model OnYourDataConnectionStringAuthenticationOptions
 }
 
 @doc("""
-The authentication options for Azure OpenAI On Your Data when using an Elasticsearch key and key ID pair.
-""")
+  The authentication options for Azure OpenAI On Your Data when using an Elasticsearch key and key ID pair.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataKeyAndKeyIdAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -86,8 +86,8 @@ model OnYourDataKeyAndKeyIdAuthenticationOptions
 }
 
 @doc("""
-The authentication options for Azure OpenAI On Your Data when using an Elasticsearch encoded API key.
-""")
+  The authentication options for Azure OpenAI On Your Data when using an Elasticsearch encoded API key.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataEncodedApiKeyAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -100,8 +100,8 @@ model OnYourDataEncodedApiKeyAuthenticationOptions
 }
 
 @doc("""
-The authentication options for Azure OpenAI On Your Data when using access token.
-""")
+  The authentication options for Azure OpenAI On Your Data when using access token.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataAccessTokenAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -114,8 +114,8 @@ model OnYourDataAccessTokenAuthenticationOptions
 }
 
 @doc("""
-The authentication options for Azure OpenAI On Your Data when using a system-assigned managed identity.
-""")
+  The authentication options for Azure OpenAI On Your Data when using a system-assigned managed identity.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataSystemAssignedManagedIdentityAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
@@ -124,8 +124,8 @@ model OnYourDataSystemAssignedManagedIdentityAuthenticationOptions
 }
 
 @doc("""
-The authentication options for Azure OpenAI On Your Data when using a user-assigned managed identity.
-""")
+  The authentication options for Azure OpenAI On Your Data when using a user-assigned managed identity.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model OnYourDataUserAssignedManagedIdentityAuthenticationOptions
   extends OnYourDataAuthenticationOptions {
