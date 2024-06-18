@@ -205,21 +205,6 @@ union DiseaseCourseType {
 }
 
 @added(ApiVersion.v2024_10_01)
-@doc("Guidance recommendations found types, indicating whether one or more recommendations have been found, and if not, if more information is needed for finding them.")
-union GuidanceRecommendationsFoundType {
-  string,
-
-  @doc("recommendation_needed means that at least one recommendation is in array 'recommendations'.")
-  RecommendationNeeded: "recommendationNeeded",
-
-  @doc("noRecommendationNeeded means that array 'recommendations' is null, and the code found that there are no recommendations.")
-  NoRecommendationNeeded: "noRecommendationNeeded",
-
-  @doc("more_info_needed_to_determine_recommendations means that array 'recommendations' is null, but there might be recommendations that the code was not able to find.")
-  MoreInfoNeededToDetermineRecommendations: "moreInfoNeededToDetermineRecommendations",
-}
-
-@added(ApiVersion.v2024_10_01)
 @doc("Whether the document is compliant.")
 union QualityMeasureComplianceType {
   string,

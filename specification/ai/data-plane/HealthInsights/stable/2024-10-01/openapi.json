@@ -2127,9 +2127,22 @@
           "format": "int32",
           "description": "If this is higher than 1, this guidance inference has less specified information than another guidance inference for the same identifier."
         },
-        "guidanceRecommendationProposals": {
-          "$ref": "#/definitions/GuidanceRecommendationProposals",
-          "description": "The recommendations associated with the guidance, if any."
+        "recommendationProposals": {
+          "type": "array",
+          "description": "The proposed follow-up recommendations, if any.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/FollowupRecommendationInference"
+          },
+          "x-ms-identifiers": []
+        },
+        "missingGuidanceInformation": {
+          "type": "array",
+          "description": "Contains all missing items that are needed to determine follow-up.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -2156,65 +2169,6 @@
       "required": [
         "showGuidanceInHistory"
       ]
-    },
-    "GuidanceRecommendationProposals": {
-      "type": "object",
-      "description": "Contains information whether a recommendation can be proposed or not, the link to the proposed follow-up recommendations if any, and possibly missing information needed to determine follow-up.",
-      "properties": {
-        "recommendationProposals": {
-          "type": "array",
-          "description": "The proposed follow-up recommendations, if any.",
-          "items": {
-            "$ref": "#/definitions/FollowupRecommendationInference"
-          },
-          "x-ms-identifiers": []
-        },
-        "recommendationsFound": {
-          "$ref": "#/definitions/GuidanceRecommendationsFoundType",
-          "description": "See the explanation in GuidanceRecommendationsFoundType."
-        },
-        "missingGuidanceInformation": {
-          "type": "array",
-          "description": "Contains all missing items that are needed to determine follow-up. This is filled if and only if the value of 'recommendationsFound' is 'moreInfoNeededToDetermineRecommendations'.",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "recommendationsFound"
-      ]
-    },
-    "GuidanceRecommendationsFoundType": {
-      "type": "string",
-      "description": "Guidance recommendations found types, indicating whether one or more recommendations have been found, and if not, if more information is needed for finding them.",
-      "enum": [
-        "recommendationNeeded",
-        "noRecommendationNeeded",
-        "moreInfoNeededToDetermineRecommendations"
-      ],
-      "x-ms-enum": {
-        "name": "GuidanceRecommendationsFoundType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RecommendationNeeded",
-            "value": "recommendationNeeded",
-            "description": "recommendation_needed means that at least one recommendation is in array 'recommendations'."
-          },
-          {
-            "name": "NoRecommendationNeeded",
-            "value": "noRecommendationNeeded",
-            "description": "noRecommendationNeeded means that array 'recommendations' is null, and the code found that there are no recommendations."
-          },
-          {
-            "name": "MoreInfoNeededToDetermineRecommendations",
-            "value": "moreInfoNeededToDetermineRecommendations",
-            "description": "more_info_needed_to_determine_recommendations means that array 'recommendations' is null, but there might be recommendations that the code was not able to find."
-          }
-        ]
-      }
     },
     "HealthInsightsErrorResponse": {
       "type": "object",

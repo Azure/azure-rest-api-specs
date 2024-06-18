@@ -412,20 +412,11 @@ model GuidanceInference extends RadiologyInsightsInference {
   @doc("If this is higher than 1, this guidance inference has less specified information than another guidance inference for the same identifier.")
   ranking: int32;
 
-  @doc("The recommendations associated with the guidance, if any.")
-  guidanceRecommendationProposals?: GuidanceRecommendationProposals;
-}
-
-@added(ApiVersion.v2024_10_01)
-@doc("Contains information whether a recommendation can be proposed or not, the link to the proposed follow-up recommendations if any, and possibly missing information needed to determine follow-up.")
-model GuidanceRecommendationProposals {
-  @doc("The proposed follow-up recommendations, if any.")
+  @doc("The proposed follow-up recommendations, if any. If this is filled, missingGuidanceInformation cannot be filled (and vice versa).")
+  @minItems(1)
   recommendationProposals?: Array<FollowupRecommendationInference>;
 
-  @doc("See the explanation in GuidanceRecommendationsFoundType.")
-  recommendationsFound: GuidanceRecommendationsFoundType;
-
-  @doc("Contains all missing items that are needed to determine follow-up. This is filled if and only if the value of 'recommendationsFound' is 'moreInfoNeededToDetermineRecommendations'.")
+  @doc("Contains all missing items that are needed to determine follow-up.")
   @minItems(1)
   missingGuidanceInformation?: Array<string>;
 }
