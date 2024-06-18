@@ -45,7 +45,6 @@ model PlanUpdate {
 
   @doc("The version of the desired product/artifact.")
   version?: string;
-  
 }
 
 @doc("CloudAccountProvisioningState enum")
