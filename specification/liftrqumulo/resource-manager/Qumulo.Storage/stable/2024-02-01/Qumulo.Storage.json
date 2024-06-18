@@ -427,6 +427,16 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.ManagedServiceIdentityProperty": {
+      "type": "object",
+      "description": "The managed service identities envelope.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
     "FileSystemResourceListResult": {
       "type": "object",
       "description": "The response of a FileSystemResource list operation.",
@@ -593,14 +603,10 @@
         "properties": {
           "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -669,7 +675,7 @@
       "description": "The type used for update operations of the FileSystemResource.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -716,24 +722,6 @@
       "required": [
         "email"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2024-02-01"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2_stable",
-            "value": "2024-02-01",
-            "description": "The 2024-02-01 Stable API version."
-          }
-        ]
-      }
     }
   },
   "parameters": {}

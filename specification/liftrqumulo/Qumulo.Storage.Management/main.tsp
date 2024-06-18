@@ -22,6 +22,7 @@ using LiftrBase;
   title: "Qumulo.Storage",
 })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Qumulo.Storage;
 
 /**
@@ -63,7 +64,7 @@ interface FileSystems {
    * Update a FileSystemResource
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @parameterVisibility("read")
+  @parameterVisibility
   @operationId("FileSystems_Update")
   update is ArmCustomPatchSync<FileSystemResource, FileSystemResourceUpdate>;
 

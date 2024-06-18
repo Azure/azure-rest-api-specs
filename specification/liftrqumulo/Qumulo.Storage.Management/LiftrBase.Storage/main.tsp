@@ -23,7 +23,7 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2_preview: "2024-02-01-preview",
 }
 
@@ -164,5 +164,5 @@ model FileSystemResource is Azure.ResourceManager.TrackedResource<FileSystemReso
   @pattern("^[a-zA-Z0-9_-]*$")
   name: string;
 
-  ...ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
