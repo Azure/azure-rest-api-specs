@@ -53,10 +53,10 @@ model DataFlowOperation {
   builtInTransformation?: DataFlowBuiltInTransformation;
 
   @doc("Destination configuration.")
-  destination?: DataFlowDestinationOperation;
+  destination: DataFlowDestinationOperation;
 
   @doc("Source configuration.")
-  source?: DataFlowSourceOperation;
+  source: DataFlowSourceOperation;
 }
 
 @doc("DataFlow BuiltIn Transformation properties")
