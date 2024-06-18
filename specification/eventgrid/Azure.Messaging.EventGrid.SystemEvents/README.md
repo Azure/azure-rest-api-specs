@@ -34,10 +34,11 @@ Adding `@usage` and `@access` to `client.tsp`:
 
 # For Service System Events PR Approval
 
-1) Write your service's system events in TypeSpec
-2) Generate the swagger for your service's system events. [Doc](https://typespec.io/docs)
+1) Write your service's system events in TypeSpec.
+2) Generate the swagger for your service's system events off of TypeSpec, following the steps below:
     - Install TypeSpec `npm install @typespec/compiler`
     - Install the emitter `npm install @azure-tools/typespec-autorest`
     - Under `/Azure.Messaging.EventGrid.SystemEvents/`:
         - Run `npx tsp compile main.tsp --emit @azure-tools/typespec-autorest`
 3) Verify the generated swagger under `/data-plane/Microsoft.EventGrid/2024-01-01/` accurately depicts your system events and commit it.
+4) Final PR should contain the TypeSpec and the Swagger generated from the TypeSpec.
