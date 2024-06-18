@@ -102,3 +102,7 @@ model EmbeddingsUsage {
   @encodedName("application/json", "total_tokens")
   totalTokens: int32;
 }
+
+model KeepModel<T> {
+  @bodyRoot body: T;
+}

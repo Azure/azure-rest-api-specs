@@ -20,7 +20,7 @@ namespace Azure.OpenAI;
 @action("images/generations")
 op getImageGenerations is Azure.Core.ResourceAction<
   Deployment,
-  ImageGenerationOptions,
+  KeepModel<ImageGenerationOptions>,
   ImageGenerations
 >;
 

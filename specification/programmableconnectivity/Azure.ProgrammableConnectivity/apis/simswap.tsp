@@ -14,14 +14,14 @@ interface SimSwap {
   @doc("Provides timestamp of latest SIM swap")
   retrieve is Operations.ResourceAction<
     SimSwapEndpoint,
-    SimSwapRetrievalContent,
+    KeepModel<SimSwapRetrievalContent>,
     SimSwapRetrievalResult
   >;
 
   @doc("Verifies if a SIM swap has been performed during a past period (defined in the request with 'maxAgeHours' attribute). Returns 'True' if a SIM swap has occured.")
   verify is Operations.ResourceAction<
     SimSwapEndpoint,
-    SimSwapVerificationContent,
+    KeepModel<SimSwapVerificationContent>,
     SimSwapVerificationResult
   >;
 }

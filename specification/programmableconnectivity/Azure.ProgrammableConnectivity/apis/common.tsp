@@ -104,3 +104,7 @@ model Ipv6Address {
   @doc("User equipment port.")
   port: int32;
 }
+
+model KeepModel<T> {
+  @bodyRoot body: T;
+}

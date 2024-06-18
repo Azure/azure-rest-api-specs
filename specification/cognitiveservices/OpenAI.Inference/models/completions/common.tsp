@@ -72,3 +72,7 @@ union ChatRole {
   @added(ServiceApiVersions.v2024_02_15_Preview)
   tool: "tool",
 }
+
+model KeepModel<T> {
+  @bodyRoot body: T;
+}

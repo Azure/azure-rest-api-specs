@@ -23,3 +23,7 @@ alias AudioTextResponse = {
   @bodyRoot
   body: string;
 };
+
+model KeepModel<T> {
+  @bodyRoot body: T;
+}

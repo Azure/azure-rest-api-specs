@@ -781,6 +781,10 @@ model CountOfRecordsHeader {
   countOfRecords?: int32;
 }
 
+model KeepModel<T> {
+  @bodyRoot body: T;
+}
+
 alias FilterQueryParameters = QueryParametersTrait<{
   ...FilterQueryParameter;
 }>;
@@ -843,7 +847,7 @@ interface Accounts {
   @doc("Create or update up to 100 Numbers on the specified account.")
   createOrUpdateNumbers is Operations.ResourceAction<
     AccountResource,
-    BatchNumbers,
+    KeepModel<BatchNumbers>,
     BatchNumbers
   >;
 
@@ -852,7 +856,7 @@ interface Accounts {
   @doc("Delete up to 100 Numbers on the specified account.")
   deleteNumbers is Operations.ResourceAction<
     AccountResource,
-    BatchNumbersDelete,
+    KeepModel<BatchNumbersDelete>,
     NoContentResponse
   >;
 
@@ -893,7 +897,7 @@ interface Accounts {
   @doc("Get a list of Teams Available Capabilities on the specified account.")
   getTeamsAvailableCapabilities is Operations.ResourceAction<
     AccountResource,
-    NumberIdentifiers,
+    KeepModel<NumberIdentifiers>,
     TeamsAvailableCapabilities
   >;
 
