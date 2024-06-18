@@ -33,8 +33,13 @@ interface VirtualHardDisks {
   @doc("Gets a virtual hard disk")
   get is ArmResourceRead<VirtualHardDisk>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a virtual hard disk. Please note some properties can be set only during virtual hard disk creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualHardDisk>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualHardDisk,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("The operation to update a virtual hard disk.")
   update is ArmTagsPatchAsync<VirtualHardDisk>;
