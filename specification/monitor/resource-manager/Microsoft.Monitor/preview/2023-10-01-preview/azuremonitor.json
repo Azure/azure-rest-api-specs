@@ -299,6 +299,10 @@
               "$ref": "#/definitions/AzureMonitorWorkspace"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -573,6 +577,10 @@
               "$ref": "#/definitions/PipelineGroup"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -741,21 +749,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.PrivateEndpointConnection": {
-      "type": "object",
-      "description": "The private endpoint connection resource",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The private endpoint connection properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "AzureMonitorWorkspace": {
       "type": "object",
       "description": "An Azure Monitor Workspace definition.",
@@ -763,11 +756,7 @@
         "properties": {
           "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "etag": {
           "type": "string",
@@ -876,7 +865,7 @@
           "type": "array",
           "description": "List of private endpoint connections.",
           "items": {
-            "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         },
@@ -1259,11 +1248,7 @@
         "properties": {
           "$ref": "#/definitions/PipelineGroupProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
