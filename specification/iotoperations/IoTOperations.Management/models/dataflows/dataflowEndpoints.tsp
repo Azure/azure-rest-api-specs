@@ -20,9 +20,9 @@ model DataFlowEndpointResource is TrackedResource<DataFlowEndpointProperties> {
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("dataflowEndpointName")
   @path
+  @minLength(3)
+  @maxLength(63)
   @segment("dataflowEndpoints")
-  @minlength(3)
-  @maxlength(63)
   name: string;
 
   // Extended location is not included in TrackedResource yet

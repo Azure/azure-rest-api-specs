@@ -20,9 +20,9 @@ model DataFlowProfileResource is TrackedResource<DataFlowProfileProperties> {
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("dataflowProfileName")
   @path
+  @minLength(3)
+  @maxLength(63)
   @segment("dataflowProfiles")
-  @minlength(3)
-  @maxlength(63)
   name: string;
 
   // Extended location is not included in TrackedResource yet
