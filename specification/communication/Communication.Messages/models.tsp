@@ -374,3 +374,7 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
 }
+
+model KeepModel<T> {
+  @bodyRoot body: T;
+}

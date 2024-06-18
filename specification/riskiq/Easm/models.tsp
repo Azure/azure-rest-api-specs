@@ -2155,3 +2155,7 @@ model DiscoGroupSummaryResult {
   @doc("The name that can be used for display purposes.")
   displayName: string;
 }
+
+model KeepModel<T> {
+  @bodyRoot body: T;
+}

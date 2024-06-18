@@ -41,7 +41,7 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getAssetsExport is Operations.ResourceCollectionAction<
     AssetResource,
-    AssetsExportRequest,
+    KeepModel<AssetsExportRequest>,
     Task,
     AssetsExportTrait
   >;
@@ -61,7 +61,7 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getDeltaDetails is Operations.ResourceCollectionAction<
     AssetResource,
-    DeltaDetailsRequest,
+    KeepModel<DeltaDetailsRequest>,
     DeltaPageResult,
     DeltaDetailsTrait
   >;
@@ -71,7 +71,7 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getDeltaSummary is Operations.ResourceCollectionAction<
     AssetResource,
-    DeltaSummaryRequest,
+    KeepModel<DeltaSummaryRequest>,
     DeltaSummaryResult,
     {}
   >;
@@ -90,7 +90,7 @@ interface DataConnections {
   @action("validate")
   validateDataConnection is Operations.ResourceCollectionAction<
     DataConnection,
-    DataConnectionData,
+    KeepModel<DataConnectionData>,
     ValidateResult
   >;
   @doc("Retrieve a data connection with a given dataConnectionName.")
@@ -102,7 +102,7 @@ interface DataConnections {
   @put
   createOrReplaceDataConnection is Foundations.ResourceOperation<
     DataConnection,
-    DataConnectionData,
+    KeepModel<DataConnectionData>,
     DataConnection
   >;
 
@@ -122,7 +122,7 @@ interface DiscoveryGroups {
   @clientName("ValidateDiscoveryGroup", "csharp")
   validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
-    DiscoGroupData,
+    KeepModel<DiscoGroupData>,
     ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
@@ -162,7 +162,7 @@ interface DiscoveryGroups {
   @Versioning.added(Versions.v2024_03_01_preview)
   getAssetChainSummary is Operations.ResourceCollectionAction<
     DiscoGroup,
-    AssetChainRequest,
+    KeepModel<AssetChainRequest>,
     AssetChainSummaryResult
   >;
 
@@ -171,7 +171,7 @@ interface DiscoveryGroups {
   @Versioning.added(Versions.v2024_03_01_preview)
   dismissAssetChain is Operations.ResourceCollectionAction<
     DiscoGroup,
-    AssetChainRequest,
+    KeepModel<AssetChainRequest>,
     Task
   >;
 }
