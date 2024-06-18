@@ -156,6 +156,7 @@ namespace Customizations {
 //Mark models as public (except ReceiveResult, PublishResult)
 //BUG: Bypassing Go for now as it marks all models as internal
 @@access(AcknowledgeResult, Access.public);
+@@access(ReceiveResult, Access.public, "java");
 @@access(ReleaseResult, Access.public);
 @@access(RejectResult, Access.public);
 @@access(RenewCloudEventLocksResult, Access.public);
