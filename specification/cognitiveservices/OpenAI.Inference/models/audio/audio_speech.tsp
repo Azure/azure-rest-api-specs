@@ -48,6 +48,14 @@ union SpeechGenerationResponseFormat {
 
   @doc("Use FLAC as the audio output format. FLAC is a fully lossless format optimized for maximum quality at the expense of size.")
   flac: "flac",
+
+  @doc("Use uncompressed WAV as the audio output format, suitable for low-latency applications to avoid decoding overhead.")
+  @added(ServiceApiVersions.v2024_04_01_Preview)
+  wav: "wav",
+
+  @doc("Use uncompressed PCM as the audio output format, which is similar to WAV but contains raw samples in 24kHz (16-bit signed, low-endian), without the header.")
+  @added(ServiceApiVersions.v2024_04_01_Preview)
+  pcm: "pcm",
 }
 
 @doc("A representation of the request options that control the behavior of a text-to-speech operation.")
@@ -70,8 +78,8 @@ model SpeechGenerationOptions {
   speed?: float32 = 1.0;
 
   @doc("""
-  The model to use for this text-to-speech request.
-  """)
+    The model to use for this text-to-speech request.
+    """)
   // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
@@ -87,6 +95,6 @@ model SpeechGenerationResponse {
   contentType: "application/octet-stream";
 
   @doc("The generated audio, generated in the requested audio output format.")
-  @body
+  @bodyRoot
   audio: bytes;
 }

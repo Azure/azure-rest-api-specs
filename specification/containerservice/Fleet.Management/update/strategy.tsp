@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
@@ -31,7 +30,7 @@ model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 @doc("The provisioning state of the UpdateStrategy resource.")
@@ -56,18 +55,28 @@ model FleetUpdateStrategyProperties {
 interface FleetUpdateStrategies {
   get is ArmResourceRead<FleetUpdateStrategy>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE AT NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     FleetUpdateStrategy,
-    BaseParameters<FleetUpdateStrategy> &
+    Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
       IfMatchParameters<FleetUpdateStrategy> &
-      IfNoneMatchParameters<FleetUpdateStrategy>
+      IfNoneMatchParameters<FleetUpdateStrategy>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "deprecated" "Existing API"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
-  delete is FleetArmResourceDeleteAsync<
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  delete is ArmResourceDeleteAsync<
     FleetUpdateStrategy,
-    BaseParameters<FleetUpdateStrategy> & IfMatchParameters<FleetUpdateStrategy>
+    Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
+      IfMatchParameters<FleetUpdateStrategy>
   >;
 
   listByParent is ArmResourceListByParent<FleetUpdateStrategy>;

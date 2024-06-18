@@ -15,10 +15,10 @@ using Azure.Core;
 namespace Azure.OpenAI;
 
 @doc("""
-Gets completions for the provided input prompts.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  Gets completions for the provided input prompts.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 @actionSeparator("/")
 @action("completions") //@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<
@@ -28,10 +28,10 @@ op getCompletions is Azure.Core.ResourceAction<
 >;
 
 @doc("""
-Gets chat completions for the provided chat messages.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  Gets chat completions for the provided chat messages.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 @added(ServiceApiVersions.v2023_05_15)
 @actionSeparator("/")
 @action("chat/completions") //@convenientAPI(true)

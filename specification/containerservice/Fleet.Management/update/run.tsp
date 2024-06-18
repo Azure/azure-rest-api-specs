@@ -9,9 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
-using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
@@ -30,7 +27,7 @@ model UpdateRun is ProxyResource<UpdateRunProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 @doc("The provisioning state of the UpdateRun resource.")
@@ -54,14 +51,14 @@ model UpdateRunProperties {
 
   @doc("""
     The resource id of the FleetUpdateStrategy resource to reference.
-
+    
     When creating a new run, there are three ways to define a strategy for the run:
     1. Define a new strategy in place: Set the "strategy" field.
     2. Use an existing strategy: Set the "updateStrategyId" field. (since 2023-08-15-preview)
     3. Use the default strategy to update all the members one by one: Leave both "updateStrategyId" and "strategy" unset. (since 2023-08-15-preview)
-
+    
     Setting both "updateStrategyId" and "strategy" is invalid.
-
+    
     UpdateRuns created by "updateStrategyId" snapshot the referenced UpdateStrategy at the time of creation and store it in the "strategy" field. 
     Subsequent changes to the referenced FleetUpdateStrategy resource do not propagate.
     UpdateRunStrategy changes can be made directly on the "strategy" field before launching the UpdateRun.
@@ -70,10 +67,10 @@ model UpdateRunProperties {
   updateStrategyId?: FleetUpdateStrategyResourceId;
 
   @doc("""
-The strategy defines the order in which the clusters will be updated.
-If not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.
-The strategy of the UpdateRun can be modified until the run is started.
-""")
+    The strategy defines the order in which the clusters will be updated.
+    If not set, all members will be updated sequentially. The UpdateRun status will show a single UpdateStage and a single UpdateGroup targeting all members.
+    The strategy of the UpdateRun can be modified until the run is started.
+    """)
   strategy?: UpdateRunStrategy;
 
   @doc("The update to be applied to all clusters in the UpdateRun. The managedClusterUpdate can be modified until the run is started.")
@@ -317,10 +314,10 @@ model SkipTarget {
   type: TargetType;
 
   @doc("""
-  The skip target's name. 
-  To skip a member/group/stage, use the member/group/stage's name;
-  Tp skip an after stage wait, use the parent stage's name.
-  """)
+    The skip target's name. 
+    To skip a member/group/stage, use the member/group/stage's name;
+    Tp skip an after stage wait, use the parent stage's name.
+    """)
   name: string;
 }
 
@@ -337,42 +334,44 @@ model SkipProperties {
 interface UpdateRuns {
   get is ArmResourceRead<UpdateRun>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE AT NEXT VERSION"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     UpdateRun,
-    BaseParameters<UpdateRun> &
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
       IfMatchParameters<UpdateRun> &
-      IfNoneMatchParameters<UpdateRun>
+      IfNoneMatchParameters<UpdateRun>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "deprecated" "Existing API"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
-  )
-  delete is FleetArmResourceDeleteAsync<
+  delete is ArmResourceDeleteAsync<
     UpdateRun,
-    BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
+      IfMatchParameters<UpdateRun>
   >;
 
   listByParent is ArmResourceListByParent<UpdateRun>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Starts an UpdateRun.")
-  start is ArmResourceNoRequestBodyActionAsync<
+  start is ArmResourceActionAsync<
     UpdateRun,
+    void,
     UpdateRun,
-    BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
+      IfMatchParameters<UpdateRun>
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Stops an UpdateRun.")
-  stop is ArmResourceNoRequestBodyActionAsync<
+  stop is ArmResourceActionAsync<
     UpdateRun,
+    void,
     UpdateRun,
-    BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
+      IfMatchParameters<UpdateRun>
   >;
 
   @doc("Skips one or a combination of member/group/stage/afterStageWait(s) of an update run.")
@@ -381,6 +380,7 @@ interface UpdateRuns {
     UpdateRun,
     SkipProperties,
     UpdateRun,
-    BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
+    Azure.ResourceManager.Foundations.BaseParameters<UpdateRun> &
+      IfMatchParameters<UpdateRun>
   >;
 }

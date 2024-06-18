@@ -6,20 +6,24 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ContainerStorage;
 
 @armResourceOperations
 interface Snapshots {
   get is ArmResourceRead<Snapshot>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "location",
     }
   )
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Snapshot>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Snapshot,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Snapshot>;
   listByPool is ArmResourceListByParent<Snapshot>;
 }
