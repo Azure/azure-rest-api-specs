@@ -283,7 +283,7 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "202": {
@@ -593,7 +593,7 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "202": {
@@ -977,7 +977,7 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "202": {
@@ -1368,9 +1368,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the validation result.",
+            "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "202": {
@@ -1830,9 +1830,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the validation result.",
+            "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentValidateResult"
+              "$ref": "#/definitions/DeploymentExtended"
             }
           },
           "202": {
@@ -5528,15 +5528,6 @@
         }
       },
       "description": "The template deployment validation detected failures."
-    },
-    "DeploymentValidateResult": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DeploymentExtended",
-          "description": "The template deployment properties."
-        }
-      },
-      "description": "Information from validate template deployment response."
     },
     "DeploymentExtended": {
       "properties": {
