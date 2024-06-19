@@ -952,38 +952,21 @@
       ]
     },
     "RpSkuTier": {
-      "type": "object",
+      "type": "string",
       "description": "The name of the Azure pricing tier to which the SKU applies.",
-      "properties": {
-        "fabric": {
-          "type": "string",
-          "description": "Fabric tier",
-          "enum": [
-            "Fabric"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
+      "enum": [
+        "Fabric"
+      ],
+      "x-ms-enum": {
+        "name": "RpSkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "fabric",
+            "value": "Fabric",
+            "description": "Fabric tier"
           }
-        }
-      },
-      "required": [
-        "fabric"
-      ]
-    },
-    "RpSkuTierUpdate": {
-      "type": "object",
-      "description": "The name of the Azure pricing tier to which the SKU applies.",
-      "properties": {
-        "fabric": {
-          "type": "string",
-          "description": "Fabric tier",
-          "enum": [
-            "Fabric"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
+        ]
       }
     },
     "RpSkuUpdate": {
@@ -995,7 +978,7 @@
           "description": "The name of the SKU level."
         },
         "tier": {
-          "$ref": "#/definitions/RpSkuTierUpdate",
+          "$ref": "#/definitions/RpSkuTier",
           "description": "The name of the Azure pricing tier to which the SKU applies."
         }
       }

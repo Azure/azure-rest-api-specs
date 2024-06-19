@@ -36,9 +36,11 @@ model RpSku {
 }
 
 @doc("The name of the Azure pricing tier to which the SKU applies.")
-model RpSkuTier {
+union RpSkuTier {
+  string,
+
   @doc("Fabric tier")
-  fabric: "Fabric";
+  fabric: "Fabric",
 }
 
 @doc("The administration properties of the Fabric capacity resource")
