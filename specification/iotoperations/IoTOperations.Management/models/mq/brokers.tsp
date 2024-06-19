@@ -177,14 +177,13 @@ model DiskBackedMessageBuffer {
   ephemeralVolumeClaimSpec?: VolumeClaimSpec;
 
   @doc("The max size of the message buffer on disk. If a PVC template is specified using one of ephemeralVolumeClaimSpec or persistentVolumeClaimSpec, then this size is used as the request and limit sizes of that template. If neither ephemeralVolumeClaimSpec nor persistentVolumeClaimSpec are specified, then an emptyDir volume is mounted with this size as its limit. See <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir> for details.")
-  @pattern("^[0-9]+[KMGTPE]$") // TODO - Consume comment and Pattern later from PR
+  @pattern("^[0-9]+[KMGTPE]$")
   maxSize: string;
 
   @doc("Use the specified persistent volume claim template to mount a persistent volume for the message buffer.")
   persistentVolumeClaimSpec?: VolumeClaimSpec;
 }
 
-// Add VolumeClaimSpec model
 @doc("VolumeClaimSpec properties")
 model VolumeClaimSpec {
   @doc("AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1")
@@ -213,7 +212,6 @@ model VolumeClaimSpec {
   volumeName?: string;
 }
 
-// Add VolumeClaimDataSource model
 @doc("VolumeClaimDataSource properties")
 model VolumeClaimDataSource {
   @doc("APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.")
@@ -226,7 +224,6 @@ model VolumeClaimDataSource {
   name: string;
 }
 
-// Add VolumeClaimDataSourceRef model
 @doc("VolumeClaimDataSourceRef properties")
 model VolumeClaimDataSourceRef {
   @doc("APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.")
@@ -239,7 +236,6 @@ model VolumeClaimDataSourceRef {
   name: string;
 }
 
-// Add VolumeClaimResourceRequirements model
 @doc("VolumeClaimResourceRequirements properties")
 model VolumeClaimResourceRequirements {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
@@ -251,7 +247,6 @@ model VolumeClaimResourceRequirements {
   requests?: Record<string>;
 }
 
-// Add VolumeClaimSpecSelector model
 @doc("VolumeClaimSpecSelector properties")
 model VolumeClaimSpecSelector {
   @doc("MatchExpressions is a list of label selector requirements. The requirements are ANDed.")
@@ -263,7 +258,6 @@ model VolumeClaimSpecSelector {
   matchLabels?: Record<string>;
 }
 
-// Add VolumeClaimSpecSelectorMatchExpressions model
 @doc("VolumeClaimSpecSelectorMatchExpressions properties")
 model VolumeClaimSpecSelectorMatchExpressions {
   @doc("key is the label key that the selector applies to.")
@@ -360,7 +354,7 @@ union PrivateKeyRotationPolicy {
 @doc("The memory profile settings of the Broker")
 union BrokerMemoryProfile {
   string,
-  @doc("Tiny memory profile.") // We can improve the description here !!
+  @doc("Tiny memory profile.")
   Tiny: "Tiny",
 
   @doc("Low memory profile.")

@@ -48,8 +48,8 @@ model BrokerAuthenticatorMethods {
   @doc("Custom authentication configuration.")
   custom?: BrokerAuthenticatorMethodCustom;
 
-  @doc("SAT authentication configuration.")
-  sat?: BrokerAuthenticatorMethodSat;
+  @doc("ServiceAccountToken authentication configuration.")
+  serviceAccountToken?: BrokerAuthenticatorMethodSat;
 
   @doc("X.509 authentication configuration.")
   x509?: BrokerAuthenticatorMethodX509;
@@ -94,7 +94,6 @@ model BrokerAuthenticatorMethodX509 {
   trustedClientCaCert?: string = "client-ca";
 }
 
-// Add BrokerAuthenticatorMethodX509Attributes model
 @doc("BrokerAuthenticatorMethodX509Attributes properties.")
 model BrokerAuthenticatorMethodX509Attributes {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"

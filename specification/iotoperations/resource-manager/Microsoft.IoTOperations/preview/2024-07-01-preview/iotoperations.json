@@ -3371,9 +3371,9 @@
           "$ref": "#/definitions/BrokerAuthenticatorMethodCustom",
           "description": "Custom authentication configuration."
         },
-        "sat": {
+        "serviceAccountToken": {
           "$ref": "#/definitions/BrokerAuthenticatorMethodSat",
-          "description": "SAT authentication configuration."
+          "description": "ServiceAccountToken authentication configuration."
         },
         "x509": {
           "$ref": "#/definitions/BrokerAuthenticatorMethodX509",
@@ -3486,10 +3486,6 @@
       "type": "object",
       "description": "Defines an MQTT broker listener. A listener is a collection of ports on which the broker accepts connections from clients.",
       "properties": {
-        "brokerRef": {
-          "type": "string",
-          "description": "Broker associated with this listener."
-        },
         "ports": {
           "type": "array",
           "description": "Ports on which this listener accepts client connections.",
@@ -3543,7 +3539,6 @@
         }
       },
       "required": [
-        "brokerRef",
         "ports"
       ]
     },
@@ -4036,26 +4031,13 @@
           "description": "Serialization format. Optional; defaults to JSON.",
           "default": "Json",
           "enum": [
-            "AvroBinary",
-            "AvroJson",
             "Delta",
-            "Json",
-            "Parquet"
+            "Json"
           ],
           "x-ms-enum": {
-            "name": "SerializationFormat",
+            "name": "TransformationSerializationFormat",
             "modelAsString": true,
             "values": [
-              {
-                "name": "AvroBinary",
-                "value": "AvroBinary",
-                "description": "AVROBinary Format"
-              },
-              {
-                "name": "AvroJson",
-                "value": "AvroJson",
-                "description": "AVROJson Format"
-              },
               {
                 "name": "Delta",
                 "value": "Delta",
@@ -4065,11 +4047,6 @@
                 "name": "Json",
                 "value": "Json",
                 "description": "JSON Format"
-              },
-              {
-                "name": "Parquet",
-                "value": "Parquet",
-                "description": "Parquet Format"
               }
             ]
           }
@@ -5238,10 +5215,6 @@
           },
           "x-ms-identifiers": []
         },
-        "profileRef": {
-          "type": "string",
-          "description": "Reference to the DataflowProfile CR."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -5249,8 +5222,7 @@
         }
       },
       "required": [
-        "operations",
-        "profileRef"
+        "operations"
       ]
     },
     "DataFlowResource": {
@@ -5338,47 +5310,23 @@
           "description": "Serialization format. Optional; defaults to JSON.",
           "default": "Json",
           "enum": [
-            "AvroBinary",
-            "AvroJson",
-            "Delta",
-            "Json",
-            "Parquet"
+            "Json"
           ],
           "x-ms-enum": {
-            "name": "SerializationFormat",
+            "name": "SourceSerializationFormat",
             "modelAsString": true,
             "values": [
-              {
-                "name": "AvroBinary",
-                "value": "AvroBinary",
-                "description": "AVROBinary Format"
-              },
-              {
-                "name": "AvroJson",
-                "value": "AvroJson",
-                "description": "AVROJson Format"
-              },
-              {
-                "name": "Delta",
-                "value": "Delta",
-                "description": "Delta Format"
-              },
               {
                 "name": "Json",
                 "value": "Json",
                 "description": "JSON Format"
-              },
-              {
-                "name": "Parquet",
-                "value": "Parquet",
-                "description": "Parquet Format"
               }
             ]
           }
         },
         "schemaRef": {
           "type": "string",
-          "description": "Schema CR reference. JSON and Avro schema supported. Data will be deserialized according to the schema, and dropped if it doesn't match. Optional; required if data source isn't JSON."
+          "description": "Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match."
         }
       },
       "required": [
@@ -6183,48 +6131,6 @@
         }
       }
     },
-    "SerializationFormat": {
-      "type": "string",
-      "description": "Serialization Format properties",
-      "enum": [
-        "AvroBinary",
-        "AvroJson",
-        "Delta",
-        "Json",
-        "Parquet"
-      ],
-      "x-ms-enum": {
-        "name": "SerializationFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AvroBinary",
-            "value": "AvroBinary",
-            "description": "AVROBinary Format"
-          },
-          {
-            "name": "AvroJson",
-            "value": "AvroJson",
-            "description": "AVROJson Format"
-          },
-          {
-            "name": "Delta",
-            "value": "Delta",
-            "description": "Delta Format"
-          },
-          {
-            "name": "Json",
-            "value": "Json",
-            "description": "JSON Format"
-          },
-          {
-            "name": "Parquet",
-            "value": "Parquet",
-            "description": "Parquet Format"
-          }
-        ]
-      }
-    },
     "ServiceType": {
       "type": "string",
       "description": "Kubernetes Service Types supported by Listener",
@@ -6251,6 +6157,24 @@
             "name": "NodePort",
             "value": "NodePort",
             "description": "Node Port Service."
+          }
+        ]
+      }
+    },
+    "SourceSerializationFormat": {
+      "type": "string",
+      "description": "Serialization Format properties",
+      "enum": [
+        "Json"
+      ],
+      "x-ms-enum": {
+        "name": "SourceSerializationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Json",
+            "value": "Json",
+            "description": "JSON Format"
           }
         ]
       }
@@ -6477,6 +6401,30 @@
           "minimum": 1000,
           "maximum": 100000
         }
+      }
+    },
+    "TransformationSerializationFormat": {
+      "type": "string",
+      "description": "Transformation Format properties",
+      "enum": [
+        "Delta",
+        "Json"
+      ],
+      "x-ms-enum": {
+        "name": "TransformationSerializationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta Format"
+          },
+          {
+            "name": "Json",
+            "value": "Json",
+            "description": "JSON Format"
+          }
+        ]
       }
     },
     "VolumeClaimDataSource": {

@@ -41,9 +41,6 @@ model DataFlowProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   operations: DataFlowOperation[];
 
-  @doc("Reference to the DataflowProfile CR.")
-  profileRef: string;
-
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -79,7 +76,7 @@ model DataFlowBuiltInTransformation {
   map?: DataFlowBuiltInTransformationMap[] = #[];
 
   @doc("Serialization format. Optional; defaults to JSON.")
-  serializationFormat?: SerializationFormat = SerializationFormat.Json;
+  serializationFormat?: TransformationSerializationFormat = TransformationSerializationFormat.Json;
 
   @doc("Schema CR reference.")
   schemaRef?: string;
@@ -116,23 +113,20 @@ model DataFlowBuiltInTransformationMap {
 }
 
 @doc("Serialization Format properties")
-union SerializationFormat {
+union SourceSerializationFormat {
   string,
+  @doc("JSON Format")
+  Json: "Json",
+}
 
-  @doc("AVROBinary Format")
-  AvroBinary: "AvroBinary",
-
-  @doc("AVROJson Format")
-  AvroJson: "AvroJson",
-
+@doc("Transformation Format properties")
+union TransformationSerializationFormat {
+  string,
   @doc("Delta Format")
   Delta: "Delta",
 
   @doc("JSON Format")
   Json: "Json",
-
-  @doc("Parquet Format")
-  Parquet: "Parquet",
 }
 
 @doc("DataFlow Destination Operation properties")
@@ -159,8 +153,8 @@ model DataFlowSourceOperation {
   paths: string[];
 
   @doc("Serialization format. Optional; defaults to JSON.")
-  serializationFormat?: SerializationFormat = SerializationFormat.Json;
+  serializationFormat?: SourceSerializationFormat = SourceSerializationFormat.Json;
 
-  @doc("Schema CR reference. JSON and Avro schema supported. Data will be deserialized according to the schema, and dropped if it doesn't match. Optional; required if data source isn't JSON.")
+  @doc("Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match.")
   schemaRef?: string;
 }
