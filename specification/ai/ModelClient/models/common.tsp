@@ -21,9 +21,9 @@ union EmbeddingInputType {
 }
 
 @doc("""
-The format of the embeddings result.
-Returns a 422 error if the model doesn't support the value or parameter.
-""")
+  The format of the embeddings result.
+  Returns a 422 error if the model doesn't support the value or parameter.
+  """)
 union EmbeddingEncodingFormat {
   string,
 
@@ -47,10 +47,10 @@ union EmbeddingEncodingFormat {
 }
 
 @doc("""
-Representation of the response data from an embeddings request.
-Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
-recommendations, and other similar scenarios.
-""")
+  Representation of the response data from an embeddings request.
+  Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
+  recommendations, and other similar scenarios.
+  """)
 model EmbeddingsResult {
   @doc("Unique identifier for the embeddings result.")
   id: string;
@@ -89,10 +89,10 @@ model EmbeddingsUsage {
   input_tokens: int32;
 
   @doc("""
-  Number of tokens used for the prompt sent to the AI model. Typically identical to `input_tokens`.
-  However, certain AI models may add extra tokens to the input hence the number can be higher.
-  (for example when input_type="query").
-  """)
+    Number of tokens used for the prompt sent to the AI model. Typically identical to `input_tokens`.
+    However, certain AI models may add extra tokens to the input hence the number can be higher.
+    (for example when input_type="query").
+    """)
   prompt_tokens: int32;
 
   @doc("Total number of tokens transacted in this request/response.")
@@ -136,9 +136,9 @@ union ModelType {
 
 alias AdditionalRequestHeaders = {
   @doc("""
-  Controls what happens if unknown parameters are passed in the JSON request payload.
-  This sets the HTTP request header `unknown-parameters`.
-  """)
+    Controls what happens if unknown parameters are passed in the JSON request payload.
+    This sets the HTTP request header `unknown-parameters`.
+    """)
   @header("unknown-parameters")
   unknown_params?: UnknownParams;
 };
