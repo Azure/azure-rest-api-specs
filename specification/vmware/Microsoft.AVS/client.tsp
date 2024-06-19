@@ -27,18 +27,6 @@ using Microsoft.AVS;
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(ClusterUpdate.properties);
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkSegmentUpdate.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkDhcpUpdate.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkPortMirroringUpdate.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkVMGroupUpdate.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkDnsServiceUpdate.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(WorkloadNetworkDnsZoneUpdate.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(PlacementPolicyUpdate.properties);
 
 // operation
