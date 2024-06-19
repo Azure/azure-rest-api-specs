@@ -465,6 +465,57 @@
     }
   },
   "definitions": {
+    "ApiError": {
+      "type": "object",
+      "description": "ApiError for Fleet",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "The Api error details",
+          "items": {
+            "$ref": "#/definitions/ApiErrorBase"
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ]
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError",
+          "description": "The Api inner error"
+        }
+      }
+    },
+    "ApiErrorBase": {
+      "type": "object",
+      "description": "Api error base.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      }
+    },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType": {
       "type": "string",
       "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
@@ -540,25 +591,6 @@
       "required": [
         "baseVirtualMachineProfile"
       ]
-    },
-    "ComputeProfileUpdate": {
-      "type": "object",
-      "description": "Compute Profile to use for running user's workloads.",
-      "properties": {
-        "baseVirtualMachineProfile": {
-          "$ref": "../../../../../compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile",
-          "description": "Base Virtual Machine Profile Properties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
-        },
-        "computeApiVersion": {
-          "type": "string",
-          "description": "Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machine scale sets and Virtual Machines.\nThe default value will be the latest supported computeApiVersion by Compute Fleet."
-        },
-        "platformFaultDomainCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the number of fault domains to use when creating the underlying VMSS.\nA fault domain is a logical group of hardware within an Azure datacenter.\nVMs in the same fault domain share a common power source and network switch.\nIf not specified, defaults to 1, which represents \"Max Spreading\" (using as many fault domains as possible).\nThis property cannot be updated."
-        }
-      }
     },
     "EvictionPolicy": {
       "type": "string",
@@ -671,32 +703,6 @@
         "computeProfile"
       ]
     },
-    "FleetPropertiesUpdate": {
-      "type": "object",
-      "description": "Details of the Compute Fleet.",
-      "properties": {
-        "spotPriorityProfile": {
-          "$ref": "#/definitions/SpotPriorityProfile",
-          "description": "Configuration Options for Spot instances in Compute Fleet."
-        },
-        "regularPriorityProfile": {
-          "$ref": "#/definitions/RegularPriorityProfile",
-          "description": "Configuration Options for Regular instances in Compute Fleet."
-        },
-        "vmSizesProfile": {
-          "type": "array",
-          "description": "List of VM sizes supported for Compute Fleet",
-          "items": {
-            "$ref": "#/definitions/VmSizeProfile"
-          },
-          "x-ms-identifiers": []
-        },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfileUpdate",
-          "description": "Compute Profile to use for running user's workloads."
-        }
-      }
-    },
     "FleetUpdate": {
       "type": "object",
       "description": "Fleet Update Model",
@@ -717,8 +723,22 @@
           "description": "Updatable resource plan"
         },
         "properties": {
-          "$ref": "#/definitions/FleetPropertiesUpdate",
+          "$ref": "#/definitions/FleetProperties",
           "description": "RP-specific updatable properties"
+        }
+      }
+    },
+    "InnerError": {
+      "type": "object",
+      "description": "Inner error details.",
+      "properties": {
+        "exceptionType": {
+          "type": "string",
+          "description": "The exception type."
+        },
+        "errorDetail": {
+          "type": "string",
+          "description": "The internal error message or exception dump."
         }
       }
     },
@@ -957,7 +977,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "../../../../../compute/resource-manager/Microsoft.Compute/common-types/v1/common.json#/definitions/ApiError",
+          "$ref": "#/definitions/ApiError",
           "description": "Error Information when `operationStatus` is `Failed`",
           "readOnly": true
         }
