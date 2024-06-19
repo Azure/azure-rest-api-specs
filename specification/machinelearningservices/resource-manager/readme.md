@@ -8,7 +8,8 @@ This is the AutoRest configuration file for Machine Learning Services.
 
 ## Getting Started
 
-To build the SDK for Azure Machine Learning, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Azure Machine Learning, simply [Install AutoRest](https://aka.ms/autorest/install) and
+  in this folder, run:
 
 > `autorest`
 
@@ -29,7 +30,6 @@ openapi-type: arm
 tag: package-preview-2024-07
 ```
 
-
 ### Tag: package-preview-2024-07
 
 These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
@@ -40,6 +40,40 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2024-07-01-preview/mfe.json
   - Microsoft.MachineLearningServices/preview/2024-07-01-preview/registries.json
   - Microsoft.MachineLearningServices/preview/2024-07-01-preview/workspaceFeatures.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: As discussed In office hour this conf property is string dictionary and passed by user as per there 
+      requirements depending on runtime version. This passed to downstream and we have multiple validation on all 
+      required configuration before passing it downstream, All optional property passed as user wants and 
+      any failure due to that considered as user error.
+    where:
+      - $.definitions["SparkJob"].properties["conf"]
+  - code: AvoidAdditionalProperties
+    reason: This is for feature parity with other job type like commandjob, sweepjob etc. We have one interface for all 
+       type of job and other job take environment variable like this to match with them we also pass environment 
+       variable in this format. please check existing "CommandJob" in same file.
+    where:
+      - $.definitions["SparkJob"].properties["environmentVariables"]
+  - code: PatchBodyParametersSchema
+    reason: This is already exist in preview version api version, the reason we have required mark for the property 
+        inside is those are the only format we allow user to update this whole encryption property.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: AvoidAdditionalProperties
+    reason: These schemas are already in production use,.
+    where:
+      - $.definitions.CustomKeys.properties.keys
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without 
+      breaking the customer.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+ - code: AvoidAdditionalProperties
+    reason: The headers property here is meant to describe a set of request headers that the user must pass along in 
+       their inferencing API request. For that reason, this needs to be represented as an additionalProperties
+    where:
+      - $.definitions["ServerlessInferenceEndpoint"].properties["headers"]
 ```
 
 ### Tag: package-2024-04
@@ -54,23 +88,31 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2024-04-01/workspaceFeatures.json
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
-    reason: This provisioningState property is marked as readOnly. However, the definition of the enum is not marked as readOnly and is the reason this suppression is needed
+    reason: This provisioningState property is marked as readOnly. However, the definition of the enum is not marked as 
+       readOnly and is the reason this suppression is needed
     where:
       - $.definitions["ServerlessEndpoint"].properties["provisioningState"]
   - code: AvoidAdditionalProperties
-    reason: The headers property here is meant to describe a set of request headers that the user must pass along in their inferencing API request. For that reason, this needs to be represented as an additionalProperties
+    reason: The headers property here is meant to describe a set of request headers that the user must pass along in 
+        their inferencing API request. For that reason, this needs to be represented as an additionalProperties
     where:
       - $.definitions["ServerlessInferenceEndpoint"].properties["headers"]
   - code: AvoidAdditionalProperties
-    reason: As discussed In office hour this conf property is string dictionary and passed by user as per there requirements depending on runtime version. This passed to downstream and we have multiple validation on all required configuration before passing it downstream, All optional property passed as user wants and any failure due to that considered as user error.
+    reason: As discussed In office hour this conf property is string dictionary and passed by user as per there 
+       requirements depending on runtime version. This passed to downstream and we have multiple validation on all 
+      required configuration before passing it downstream, All optional property passed as user wants and any failure 
+      due to that considered as user error.
     where:
       - $.definitions["SparkJob"].properties["conf"]
   - code: AvoidAdditionalProperties
-    reason: This is for feature parity with other job type like commandjob, sweepjob etc. We have one interface for all type of job and other job take environment variable like this to match with them we also pass environment variable in this format. please check existing "CommandJob" in same file.
+    reason: This is for feature parity with other job type like commandjob, sweepjob etc. We have one interface for all 
+      type of job and other job take environment variable like this to match with them we also pass environment variable
+    in this format. please check existing "CommandJob" in same file.
     where:
       - $.definitions["SparkJob"].properties["environmentVariables"]
   - code: PatchBodyParametersSchema
-    reason: This is already exist in preview version api version, the reason we have required mark for the property inside is those are the only format we allow user to update this whole encryption property.
+    reason: This is already exist in preview version api version, the reason we have required mark for the property 
+       inside is those are the only format we allow user to update this whole encryption property.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
   - code: ProvisioningStateSpecifiedForLROPut
@@ -107,11 +149,11 @@ suppressions:
       - $.definitions.OAuth2AuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
       - $.definitions.ServicePrincipalAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
   - code: GuidUsage
-    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
+    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without 
+       breaking the customer.
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
 ```
-
 
 ### Tag: package-preview-2024-04
 
@@ -126,7 +168,8 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2024-04-01-preview/workspaceRP.json
 suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: Below APIs are created for migration, the existing API contract is like this and won't able to change, got exceptions from ARM reviewer.
+    reason: Below APIs are created for migration, the existing API contract is like this and won't able to change, got 
+       exceptions from ARM reviewer.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
@@ -134,6 +177,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
 ```
+
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
@@ -151,7 +195,8 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}"].post
   - code: AvoidAdditionalProperties
-    reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have strictly typed properties.
+    reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have 
+       strictly typed properties.
     where:
       - $.definitions["CustomModelFineTuning"].properties["hyperParameters"]
   - code: AvoidAdditionalProperties
@@ -177,7 +222,8 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
   - code: AvoidAdditionalProperties
-    reason: This is an external reference right now, we will have full control on the schema returned in the upcoming version and will avoid this.
+    reason: This is an external reference right now, we will have full control on the schema returned in the upcoming 
+       version and will avoid this.
     from: workspaceRP.json
     where:
       - $.definitions.AccountModel.properties.finetuneCapabilities
@@ -185,7 +231,8 @@ suppressions:
       - $.definitions.EndpointModels.properties.value.items.properties.capabilities
       - $.definitions.EndpointModels.properties.value.items.properties.finetuneCapabilities
   - code: GuidUsage
-    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
+    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without 
+      breaking the customer.
     from: workspaceRP.json    
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
