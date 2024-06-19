@@ -28,7 +28,7 @@ model DeidentificationJob {
   operation: OperationType = OperationType.Surrogate;
 
   @doc("Data type of the input documents.")
-  dataType: DocumentDataType = DocumentDataType.PlainText;
+  dataType: DocumentDataType = DocumentDataType.Plaintext;
 
   @maxLength(16)
   @minLength(1)
@@ -218,7 +218,7 @@ model DeidentificationContent {
   operation: OperationType = OperationType.Surrogate;
 
   @doc("Data type of the input.")
-  dataType: DocumentDataType = DocumentDataType.PlainText;
+  dataType: DocumentDataType = DocumentDataType.Plaintext;
 
   // This must be set as optional so it isn't included in sdk constructors.
   // SDKs then overwrite it as internal with appropriate default value for that SDK.
