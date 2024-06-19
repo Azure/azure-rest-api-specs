@@ -700,6 +700,16 @@
           "description": "Open ID Connect (OIDC) Issuer Profile for the connected cluster.",
           "$ref": "#/definitions/OidcIssuerProfile"
         },
+        "configurationSettings": {
+          "description": "Configuration settings for customizing the behavior of the connected cluster.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ConfigurationSettings"
+          },
+          "x-ms-identifiers": [],
+          "x-nullable": true
+        },
         "miscellaneousProperties": {
           "description": "More properties related to the Connected Cluster",
           "type": "object",
@@ -892,6 +902,31 @@
         "selfHostedIssuerUrl": {
           "type": "string",
           "description": "The issuer url for public cloud clusters - AKS, EKS, GKE - used for the workload identity feature."
+        }
+      }
+    },
+    "ConfigurationSettings": {
+      "type": "object",
+      "properties": {
+        "feature": {
+          "type": "string",
+          "description": "Specifies the name of the feature for the configuration setting."
+        },
+        "settings": {
+          "type": "object",
+          "description": "The configuration settings for the feature that do not contain any sensitive or secret information.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The configuration settings for the feature that contain any sensitive or secret information.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
