@@ -777,36 +777,6 @@
         }
       }
     },
-    "MoveResourcesRequest": {
-      "type": "object",
-      "description": "Move resources request payload.",
-      "properties": {
-        "targetResourceGroup": {
-          "type": "string",
-          "description": "The target resource group where the resources will be moved."
-        },
-        "resources": {
-          "type": "array",
-          "description": "The list of resources to move.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.Fabric/capacities"
-                }
-              ]
-            }
-          }
-        }
-      },
-      "required": [
-        "targetResourceGroup",
-        "resources"
-      ]
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The resource provisioning state.",
@@ -845,7 +815,7 @@
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "Resource is provisioning"
+            "description": "Resource is creating"
           },
           {
             "name": "Updating",
@@ -982,21 +952,38 @@
       ]
     },
     "RpSkuTier": {
-      "type": "string",
+      "type": "object",
       "description": "The name of the Azure pricing tier to which the SKU applies.",
-      "enum": [
-        "Fabric"
-      ],
-      "x-ms-enum": {
-        "name": "RpSkuTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Fabric",
-            "value": "Fabric",
-            "description": "Fabric tier"
+      "properties": {
+        "fabric": {
+          "type": "string",
+          "description": "Fabric tier",
+          "enum": [
+            "Fabric"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
           }
-        ]
+        }
+      },
+      "required": [
+        "fabric"
+      ]
+    },
+    "RpSkuTierUpdate": {
+      "type": "object",
+      "description": "The name of the Azure pricing tier to which the SKU applies.",
+      "properties": {
+        "fabric": {
+          "type": "string",
+          "description": "Fabric tier",
+          "enum": [
+            "Fabric"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
       }
     },
     "RpSkuUpdate": {
@@ -1008,7 +995,7 @@
           "description": "The name of the SKU level."
         },
         "tier": {
-          "$ref": "#/definitions/RpSkuTier",
+          "$ref": "#/definitions/RpSkuTierUpdate",
           "description": "The name of the Azure pricing tier to which the SKU applies."
         }
       }
