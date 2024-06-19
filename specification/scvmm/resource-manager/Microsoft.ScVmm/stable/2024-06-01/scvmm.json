@@ -3142,11 +3142,7 @@
         "properties": {
           "$ref": "#/definitions/AvailabilitySetProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3228,7 +3224,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -3278,11 +3274,7 @@
         "properties": {
           "$ref": "#/definitions/CloudProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3399,7 +3391,7 @@
           "x-ms-client-name": "storageQosPolicies"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -3495,11 +3487,7 @@
         "properties": {
           "$ref": "#/definitions/GuestAgentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3562,7 +3550,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
@@ -3831,11 +3819,7 @@
         "properties": {
           "$ref": "#/definitions/InventoryItemProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "kind": {
           "type": "string",
@@ -3908,7 +3892,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -4300,7 +4284,7 @@
         ]
       }
     },
-    "ResourceProvisioningState": {
+    "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the resource.",
       "enum": [
@@ -4314,7 +4298,7 @@
         "Created"
       ],
       "x-ms-enum": {
-        "name": "ResourceProvisioningState",
+        "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -4625,16 +4609,15 @@
         "properties": {
           "$ref": "#/definitions/VirtualMachineInstanceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Gets or sets the extended location.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -4709,7 +4692,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -4829,11 +4812,7 @@
         "properties": {
           "$ref": "#/definitions/VirtualMachineTemplateProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5020,7 +4999,7 @@
           ]
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -5046,11 +5025,7 @@
         "properties": {
           "$ref": "#/definitions/VirtualNetworkProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5129,7 +5104,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -5155,11 +5130,7 @@
         "properties": {
           "$ref": "#/definitions/VmInstanceHybridIdentityMetadataProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -5203,7 +5174,7 @@
           "description": "Gets or sets the Public Key."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
@@ -5236,11 +5207,7 @@
         "properties": {
           "$ref": "#/definitions/VmmServerProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5319,7 +5286,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
         }
