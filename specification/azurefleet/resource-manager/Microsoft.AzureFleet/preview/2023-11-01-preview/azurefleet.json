@@ -557,20 +557,6 @@
         "baseVirtualMachineProfile"
       ]
     },
-    "ComputeProfileUpdate": {
-      "type": "object",
-      "description": "Compute Profile to use for running user's workloads.",
-      "properties": {
-        "baseVirtualMachineProfile": {
-          "$ref": "../../../../../compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile",
-          "description": "Base Virtual Machine Profile Properties to be specified according to \"specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile\""
-        },
-        "computeApiVersion": {
-          "type": "string",
-          "description": "Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machine scale sets and Virtual Machines.\nThe default value will be the latest supported computeApiVersion by Compute Fleet."
-        }
-      }
-    },
     "EvictionPolicy": {
       "type": "string",
       "description": "Different kind of eviction policies",
@@ -682,32 +668,6 @@
         "computeProfile"
       ]
     },
-    "FleetPropertiesUpdate": {
-      "type": "object",
-      "description": "Details of the Compute Fleet.",
-      "properties": {
-        "spotPriorityProfile": {
-          "$ref": "#/definitions/SpotPriorityProfile",
-          "description": "Configuration Options for Spot instances in Compute Fleet."
-        },
-        "regularPriorityProfile": {
-          "$ref": "#/definitions/RegularPriorityProfile",
-          "description": "Configuration Options for Regular instances in Compute Fleet."
-        },
-        "vmSizesProfile": {
-          "type": "array",
-          "description": "List of VM sizes supported for Compute Fleet",
-          "items": {
-            "$ref": "#/definitions/VmSizeProfile"
-          },
-          "x-ms-identifiers": []
-        },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfileUpdate",
-          "description": "Compute Profile to use for running user's workloads."
-        }
-      }
-    },
     "FleetUpdate": {
       "type": "object",
       "description": "Fleet Update Model",
@@ -728,7 +688,7 @@
           "description": "Updatable resource plan"
         },
         "properties": {
-          "$ref": "#/definitions/FleetPropertiesUpdate",
+          "$ref": "#/definitions/FleetProperties",
           "description": "RP-specific updatable properties"
         }
       }

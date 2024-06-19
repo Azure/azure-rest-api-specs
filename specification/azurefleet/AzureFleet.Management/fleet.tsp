@@ -218,6 +218,7 @@ interface Fleets {
     Fleet,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Fleet>;
   listByResourceGroup is ArmResourceListByParent<Fleet>;
