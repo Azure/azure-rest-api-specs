@@ -62,8 +62,8 @@ model DataFlowEndpointDataExplorer {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
   authentication: DataFlowEndpointDataExplorerAuthentication;
 
-  @doc("Batching configuration. Optional; no batching if omitted.")
-  batching?: DataFlowEndpointDataExplorerBatching;
+  @doc("Azure Data Explorer endpoint batching configuration.")
+  batching?: BatchingConfiguration;
 
   @doc("Database name.")
   database: string;
@@ -100,26 +100,13 @@ model DataFlowEndpointAuthenticationUserAssignedManagedIdentity {
   tenantId: string;
 }
 
-@doc("Azure Data Explorer Batching properties")
-model DataFlowEndpointDataExplorerBatching {
-  @doc("Batching latency in seconds.")
-  @minValue(0)
-  @maxValue(65535)
-  latencySeconds?: int32 = 60;
-
-  @doc("Maximum number of messages in a batch.")
-  @minValue(0)
-  @maxValue(4294967295)
-  maxMessages?: int32 = 100000;
-}
-
 @doc("Azure Data Lake endpoint properties")
 model DataFlowEndpointDataLakeStorage {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
   authentication: DataFlowEndpointDataLakeStorageAuthentication;
 
-  @doc("Batching configuration.")
-  batching?: DataFlowEndpointDataLakeStorageBatching;
+  @doc("Azure Data Lake endpoint batching configuration.")
+  batching?: BatchingConfiguration;
 
   @doc("Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .")
   @pattern(".*.blob.core.windows.net")
@@ -136,19 +123,6 @@ model DataFlowEndpointDataLakeStorageAuthentication {
 
   @doc("User-assigned managed identity authentication.")
   userAssignedManagedIdentity?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
-}
-
-@doc("Azure Data Lake endpoint Batching properties")
-model DataFlowEndpointDataLakeStorageBatching {
-  @doc("Batching latency in seconds.")
-  @minValue(0)
-  @maxValue(65535)
-  latencySeconds?: int32 = 60;
-
-  @doc("Maximum number of messages in a batch.")
-  @minValue(0)
-  @maxValue(4294967295)
-  maxMessages?: int32 = 100000;
 }
 
 @doc("Microsoft Fabric endpoint properties")
@@ -236,10 +210,10 @@ model DataFlowEndpointKafka {
   host?: string;
 
   @doc("Kafka acks. Can be all, one, or zero. No effect if the endpoint is used as a source.")
-  kafkaAcks?: DataFlowEndpointKafkaAcks.All;
+  kafkaAcks?: DataFlowEndpointKafkaAcks = DataFlowEndpointKafkaAcks.All;
 
   @doc("Partition handling strategy. Can be default or static. No effect if the endpoint is used as a source.")
-  partitionStrategy?: DataFlowEndpointKafkaPartitionStrategy.Default;
+  partitionStrategy?: DataFlowEndpointKafkaPartitionStrategy = DataFlowEndpointKafkaPartitionStrategy.Default;
 
   @doc("TLS configuration.")
   tls: DataFlowEndpointKafkaTls;

@@ -130,3 +130,16 @@ model SelfTracing {
   @maxValue(300)
   intervalSeconds?: int32 = 30;
 }
+
+@doc("Batching configuration")
+model BatchingConfiguration {
+  @doc("Batching latency in seconds.")
+  @minValue(0)
+  @maxValue(65535)
+  latencySeconds?: int32 = 60;
+
+  @doc("Maximum number of messages in a batch.")
+  @minValue(0)
+  @maxValue(4294967295)
+  maxMessages?: int32 = 100000;
+}

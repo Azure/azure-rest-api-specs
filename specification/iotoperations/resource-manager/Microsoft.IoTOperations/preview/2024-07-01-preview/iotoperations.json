@@ -3160,6 +3160,28 @@
         "redundancyFactor"
       ]
     },
+    "BatchingConfiguration": {
+      "type": "object",
+      "description": "Batching configuration",
+      "properties": {
+        "latencySeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Batching latency in seconds.",
+          "default": 60,
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "maxMessages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of messages in a batch.",
+          "default": 100000,
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      }
+    },
     "BrokerAuthenticationProperties": {
       "type": "object",
       "description": "BrokerAuthentication Resource properties",
@@ -4267,8 +4289,8 @@
           "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
         },
         "batching": {
-          "$ref": "#/definitions/DataFlowEndpointDataExplorerBatching",
-          "description": "Batching configuration. Optional; no batching if omitted."
+          "$ref": "#/definitions/BatchingConfiguration",
+          "description": "Azure Data Explorer endpoint batching configuration."
         },
         "database": {
           "type": "string",
@@ -4300,28 +4322,6 @@
         }
       }
     },
-    "DataFlowEndpointDataExplorerBatching": {
-      "type": "object",
-      "description": "Azure Data Explorer Batching properties",
-      "properties": {
-        "latencySeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Batching latency in seconds.",
-          "default": 60,
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "maxMessages": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of messages in a batch.",
-          "default": 100000,
-          "minimum": 0,
-          "maximum": 4294967295
-        }
-      }
-    },
     "DataFlowEndpointDataLakeStorage": {
       "type": "object",
       "description": "Azure Data Lake endpoint properties",
@@ -4331,8 +4331,8 @@
           "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
         },
         "batching": {
-          "$ref": "#/definitions/DataFlowEndpointDataLakeStorageBatching",
-          "description": "Batching configuration."
+          "$ref": "#/definitions/BatchingConfiguration",
+          "description": "Azure Data Lake endpoint batching configuration."
         },
         "host": {
           "type": "string",
@@ -4360,28 +4360,6 @@
         "userAssignedManagedIdentity": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
           "description": "User-assigned managed identity authentication."
-        }
-      }
-    },
-    "DataFlowEndpointDataLakeStorageBatching": {
-      "type": "object",
-      "description": "Azure Data Lake endpoint Batching properties",
-      "properties": {
-        "latencySeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Batching latency in seconds.",
-          "default": 60,
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "maxMessages": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of messages in a batch.",
-          "default": 100000,
-          "minimum": 0,
-          "maximum": 4294967295
         }
       }
     },
@@ -4537,21 +4515,69 @@
         "kafkaAcks": {
           "type": "string",
           "description": "Kafka acks. Can be all, one, or zero. No effect if the endpoint is used as a source.",
+          "default": "All",
           "enum": [
+            "Zero",
+            "One",
             "All"
           ],
           "x-ms-enum": {
-            "modelAsString": false
+            "name": "DataFlowEndpointKafkaAcks",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Zero",
+                "value": "Zero",
+                "description": "ZERO Option"
+              },
+              {
+                "name": "One",
+                "value": "One",
+                "description": "ONE Option"
+              },
+              {
+                "name": "All",
+                "value": "All",
+                "description": "ALL Option"
+              }
+            ]
           }
         },
         "partitionStrategy": {
           "type": "string",
           "description": "Partition handling strategy. Can be default or static. No effect if the endpoint is used as a source.",
+          "default": "Default",
           "enum": [
-            "Default"
+            "Default",
+            "Static",
+            "Topic",
+            "Property"
           ],
           "x-ms-enum": {
-            "modelAsString": false
+            "name": "DataFlowEndpointKafkaPartitionStrategy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Default",
+                "value": "Default",
+                "description": "Default: Assigns messages to random partitions, using a round-robin algorithm."
+              },
+              {
+                "name": "Static",
+                "value": "Static",
+                "description": "Static: Assigns messages to a fixed partition number that's derived from the instance ID of the dataflow."
+              },
+              {
+                "name": "Topic",
+                "value": "Topic",
+                "description": "TOPIC Option"
+              },
+              {
+                "name": "Property",
+                "value": "Property",
+                "description": "PROPERTY Option"
+              }
+            ]
           }
         },
         "tls": {
