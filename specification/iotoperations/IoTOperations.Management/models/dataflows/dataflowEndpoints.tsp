@@ -198,7 +198,7 @@ model DataFlowEndpointKafka {
   batching?: DataFlowEndpointKafkaBatching;
 
   @doc("Compression. Can be none, gzip, lz4, or snappy. No effect if the endpoint is used as a source.")
-  compression?: DataFlowEndpointKafkaCompression.None;
+  compression?: DataFlowEndpointKafkaCompression = DataFlowEndpointKafkaCompression.None;
 
   @doc("Consumer group ID.")
   consumerGroupId?: string;

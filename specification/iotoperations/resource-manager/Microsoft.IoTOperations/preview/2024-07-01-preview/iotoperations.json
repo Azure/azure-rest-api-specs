@@ -4470,11 +4470,38 @@
         "compression": {
           "type": "string",
           "description": "Compression. Can be none, gzip, lz4, or snappy. No effect if the endpoint is used as a source.",
+          "default": "None",
           "enum": [
-            "None"
+            "None",
+            "Gzip",
+            "Snappy",
+            "Lz4"
           ],
           "x-ms-enum": {
-            "modelAsString": false
+            "name": "DataFlowEndpointKafkaCompression",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None",
+                "description": "NONE Option"
+              },
+              {
+                "name": "Gzip",
+                "value": "Gzip",
+                "description": "Gzip Option"
+              },
+              {
+                "name": "Snappy",
+                "value": "Snappy",
+                "description": "SNAPPY Option"
+              },
+              {
+                "name": "Lz4",
+                "value": "Lz4",
+                "description": "LZ4 Option"
+              }
+            ]
           }
         },
         "consumerGroupId": {
