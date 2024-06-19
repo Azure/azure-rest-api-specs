@@ -36,11 +36,9 @@ model RpSku {
 }
 
 @doc("The name of the Azure pricing tier to which the SKU applies.")
-union RpSkuTier {
-  string,
-
+model RpSkuTier {
   @doc("Fabric tier")
-  Fabric: "Fabric",
+  fabric: "Fabric";
 }
 
 @doc("The administration properties of the Fabric capacity resource")
@@ -56,7 +54,7 @@ union ProvisioningState {
   /** Resource is deleting */
   Deleting: "Deleting",
 
-  /** Resource is provisioning */
+  /** Resource is creating */
   Provisioning: "Provisioning",
 
   /** Resource is updating */
@@ -103,15 +101,6 @@ union State {
   Preparing: "Preparing",
 
   string,
-}
-
-@doc("Move resources request payload.")
-model MoveResourcesRequest {
-  @doc("The target resource group where the resources will be moved.")
-  targetResourceGroup: string;
-
-  @doc("The list of resources to move.")
-  resources: Array<string>;
 }
 
 @doc("An object that represents enumerating SKUs for new resources.")
