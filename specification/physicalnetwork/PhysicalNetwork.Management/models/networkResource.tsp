@@ -14,16 +14,16 @@ model NetworkDeviceProperties {
   dcCode: string;
 
   @doc("The device's IPv4 address")
-  loopbackV4: string;
+  loopbackIpV4: string;
 
   @doc("The device's IPv6 address")
-  loopbackV6: string;
+  loopbackIpV6: string;
 
   @doc("The management console's IPv4 address")
-  managementV4: string;
+  managementIpV4: string;
 
   @doc("The management console's IPv6 address")
-  managementV6: string;
+  managementIpV6: string;
 
   @doc("The device's preferred IP address")
   preferredIp: string;
