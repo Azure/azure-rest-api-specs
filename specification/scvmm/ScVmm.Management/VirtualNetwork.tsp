@@ -31,8 +31,13 @@ interface VirtualNetworks {
   @summary("Gets a VirtualNetwork.")
   get is ArmResourceRead<VirtualNetwork>;
   /** Onboards the ScVmm virtual network as an Azure virtual network resource. */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @summary("Implements VirtualNetworks PUT method.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualNetwork>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    VirtualNetwork,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   /** Updates the VirtualNetworks resource. */
   @summary("Implements the VirtualNetworks PATCH method.")
   @extension(
