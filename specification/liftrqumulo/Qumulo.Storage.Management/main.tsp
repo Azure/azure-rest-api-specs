@@ -35,7 +35,7 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-  v2_stable: "2024-02-01",
+  v2_stable: "2024-06-19",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
