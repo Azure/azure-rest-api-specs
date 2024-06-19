@@ -68,6 +68,7 @@ cp -r resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/exampl
 # Recompile the typespecs in the management directory
 echo "Recompiling the typespecs in the management directory..."
 npx tsp compile IoTOperations.Management/.
+npx tsv IoTOperations.Management/.
 
 # Prettier
 echo "Running prettier..."

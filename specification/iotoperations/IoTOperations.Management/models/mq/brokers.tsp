@@ -354,6 +354,7 @@ union PrivateKeyRotationPolicy {
 @doc("The memory profile settings of the Broker")
 union BrokerMemoryProfile {
   string,
+
   @doc("Tiny memory profile.")
   Tiny: "Tiny",
 

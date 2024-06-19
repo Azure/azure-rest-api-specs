@@ -115,6 +115,7 @@ model DataFlowBuiltInTransformationMap {
 @doc("Serialization Format properties")
 union SourceSerializationFormat {
   string,
+
   @doc("JSON Format")
   Json: "Json",
 }
@@ -122,6 +123,7 @@ union SourceSerializationFormat {
 @doc("Transformation Format properties")
 union TransformationSerializationFormat {
   string,
+
   @doc("Delta Format")
   Delta: "Delta",
 
