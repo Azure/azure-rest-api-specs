@@ -640,6 +640,29 @@ model OsProfileForVmInstance {
   /** Gets os version. */
   @visibility("read")
   osVersion?: string;
+
+  /** Gets or sets the domain name. */
+  domainName?: string;
+
+  /** Gets or sets the domain username. */
+  domainUsername?: string;
+
+  /** Password of the domain the VM has to join. */
+  @visibility("create", "update")
+  @secret
+  domainPassword?: string;
+
+  /** Gets or sets the workgroup. */
+  workgroup?: string;
+
+  /** Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx */
+  productKey?: string;
+
+  /** Gets or sets the index value of the timezone. */
+  timezone?: int32;
+
+  /** Get or sets the commands to be run once at the time of creation separated by semicolons. */
+  runOnceCommands?: string;
 }
 
 /** Defines the resource properties. */
@@ -849,6 +872,13 @@ model GuestAgentProperties {
   /** Provisioning state of the resource. */
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  /** The resource id of the private link scope this machine is assigned to, if any. */
+  privateLinkScopeResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridCompute/privateLinkScopes";
+    }
+  ]>;
 }
 
 /** Username / Password Credentials to connect to guest. */
