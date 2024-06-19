@@ -7,5 +7,5 @@ client-flattened-annotation-target: disabled
 title: AppComplianceAutomationClient
 service-name: "App Compliance Automation"
 uuid-as-string: true
-stream-style-serialization: true
+output-model-immutable: true
 ```
