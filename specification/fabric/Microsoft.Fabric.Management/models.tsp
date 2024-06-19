@@ -56,7 +56,7 @@ union ProvisioningState {
   /** Resource is deleting */
   Deleting: "Deleting",
 
-  /** Resource is creating */
+  /** Resource is provisioning */
   Provisioning: "Provisioning",
 
   /** Resource is updating */
