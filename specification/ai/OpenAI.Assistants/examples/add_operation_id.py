@@ -3,6 +3,9 @@
 import json
 import pathlib
 
+# README: this script assumes you are running it from OpenAI.Assistants/examples
+# USAGE: run the command `py .\add_operatio_id.py`
+
 # Function to convert snake case to Pascal case
 def snake_to_pascal(name):
     # Split the name by underscores, capitalize each word, then join them together
