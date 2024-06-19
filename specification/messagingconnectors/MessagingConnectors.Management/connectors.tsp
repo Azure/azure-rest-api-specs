@@ -10,14 +10,19 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using TypeSpec.OpenAPI;
 
+@doc("Microsoft.MessagingConnectors Resource Provider management API.")
+@armProviderNamespace
+@service({
+  title: "Microsoft.MessagingConnectors management service",
+})
+@versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
 @doc("A Connector resource Azure")
-model ConnectorInstance is TrackedResource<ConnectorProperties> {
+model ConnectorInstance is TrackedResource<ResourceProperties> {
   @doc("Name of the Connector resource.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]")
   @path

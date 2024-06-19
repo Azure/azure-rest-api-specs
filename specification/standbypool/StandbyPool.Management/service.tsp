@@ -6,7 +6,6 @@
 
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -35,6 +34,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2023-12-01-preview`,
+
+  @doc("API Version 2024-03-01-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2024-03-01-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -46,4 +50,14 @@ enum ProvisioningState {
 
   @doc("Resource is being deleted.")
   Deleting,
+}
+
+@added(Microsoft.StandbyPool.Versions.`2024-03-01-preview`)
+@doc("Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.")
+model PoolResourceStateCount {
+  @doc("The state that the pooled resources count is for.")
+  state: string;
+
+  @doc("The count of pooled resources in the given state.")
+  count: int64;
 }

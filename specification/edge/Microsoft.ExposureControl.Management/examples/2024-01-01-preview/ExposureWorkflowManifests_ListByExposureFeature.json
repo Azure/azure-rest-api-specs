@@ -1,0 +1,60 @@
+{
+  "title": "ExposureWorkflowManifests_ListByExposureFeature",
+  "operationId": "ExposureWorkflowManifests_ListByExposureFeature",
+  "parameters": {
+    "api-version": "2024-01-01-preview",
+    "subscriptionId": "dc4ac3fc-8889-44d6-a8f8-a8fa229c659e",
+    "resourceGroupName": "rgexposurecontrol",
+    "featureName": "TestFeature",
+    "top": 24,
+    "skip": 11,
+    "maxpagesize": 13,
+    "filter": "bdkcnrpfaodvwlhtjijzlttytvk"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "manifestDiscriminator": "ubuntu:offer:sku:*",
+              "overrideDefaultStartRing": "Ring1",
+              "ringConfigurations": [
+                {
+                  "ringName": "Ring1",
+                  "status": "Waiting",
+                  "progressionSetting": {
+                    "method": {
+                      "operationType": "TimeBased",
+                      "gateDelay": "PT40M",
+                      "statusPollingInterval": "PT40M"
+                    },
+                    "gateStatus": "Open",
+                    "onSuccessRing": "pycgowszxfjpygq",
+                    "onFailureRing": "xmmwdkrigav"
+                  },
+                  "exposureGroupResourceIds": [
+                    "rtulznjfw"
+                  ]
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureFeatures/TestFeature/ExposureWorkflowManifests/TestManifest",
+            "name": "TestManifest",
+            "type": "Microsoft.Edge/ExposureWorkflowManifests",
+            "systemData": {
+              "createdBy": "gtnobmt",
+              "createdByType": "User",
+              "createdAt": "2024-01-22T22:40:16.487Z",
+              "lastModifiedBy": "wwsmzkhomqr",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-01-22T22:40:16.487Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

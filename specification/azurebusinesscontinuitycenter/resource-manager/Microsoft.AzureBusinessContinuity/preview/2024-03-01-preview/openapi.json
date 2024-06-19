@@ -1,0 +1,1438 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AzureBusinessContinuity management service.",
+    "version": "2024-03-01-preview",
+    "description": "microsoft.azurebusinesscontinuity Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "UnifiedProtectedItem"
+    },
+    {
+      "name": "DeletedUnifiedProtectedItem"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.AzureBusinessContinuity/unifiedProtectedItems": {
+      "get": {
+        "operationId": "UnifiedProtectedItem_List",
+        "tags": [
+          "UnifiedProtectedItem"
+        ],
+        "description": "List UnifiedProtectedItemResource resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnifiedProtectedItemResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnifiedProtectedItem_List": {
+            "$ref": "./examples/Upi_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureBusinessContinuity/unifiedProtectedItems/{unifiedProtectedItemsName}": {
+      "get": {
+        "operationId": "UnifiedProtectedItem_Get",
+        "tags": [
+          "UnifiedProtectedItem"
+        ],
+        "description": "Get a UnifiedProtectedItemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "unifiedProtectedItemsName",
+            "in": "path",
+            "description": "The name of the unified protected item.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9;/_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UnifiedProtectedItemResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnifiedProtectedItem_Get": {
+            "$ref": "./examples/Upi_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureBusinessContinuity/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureBusinessContinuity/deletedUnifiedProtectedItems": {
+      "get": {
+        "operationId": "DeletedUnifiedProtectedItem_ListBySubscription",
+        "tags": [
+          "DeletedUnifiedProtectedItem"
+        ],
+        "description": "List DeletedUnifiedProtectedItemResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeletedUnifiedProtectedItemResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletedUnifiedProtectedItem_ListBySubscription": {
+            "$ref": "./examples/DeletedUpi_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBusinessContinuity/deletedUnifiedProtectedItems": {
+      "get": {
+        "operationId": "DeletedUnifiedProtectedItem_ListByResourceGroup",
+        "tags": [
+          "DeletedUnifiedProtectedItem"
+        ],
+        "description": "List DeletedUnifiedProtectedItemResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeletedUnifiedProtectedItemResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletedUnifiedProtectedItem_ListByResourceGroup": {
+            "$ref": "./examples/DeletedUpi_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBusinessContinuity/deletedUnifiedProtectedItems/{deletedUnifiedProtectedItemsName}": {
+      "get": {
+        "operationId": "DeletedUnifiedProtectedItem_Get",
+        "tags": [
+          "DeletedUnifiedProtectedItem"
+        ],
+        "description": "Get a DeletedUnifiedProtectedItemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deletedUnifiedProtectedItemsName",
+            "in": "path",
+            "description": "The name of the deleted unified protected item.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9;/_]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeletedUnifiedProtectedItemResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletedUnifiedProtectedItem_Get": {
+            "$ref": "./examples/DeletedUpi_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureBackupAzureBlobsPropertyBag": {
+      "type": "object",
+      "description": "Provider specific property for Azure blob workload for Microsoft Azure backup solution provider.",
+      "properties": {
+        "deletionTime": {
+          "type": "string",
+          "description": "Soft delete time."
+        },
+        "scheduledPurgeTime": {
+          "type": "string",
+          "description": "Scheduled purge time."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Backup policy id."
+        },
+        "vaultLocation": {
+          "type": "string",
+          "description": "Location of the backup vault."
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "Data source type."
+        }
+      },
+      "required": [
+        "deletionTime",
+        "scheduledPurgeTime",
+        "policyId",
+        "vaultLocation",
+        "dataSourceType"
+      ]
+    },
+    "AzureBackupAzureDatabaseForPostgreSqlPropertyBag": {
+      "type": "object",
+      "description": "Provider specific property for Azure postgre database workload for Microsoft Azure backup solution provider.",
+      "properties": {
+        "deletionTime": {
+          "type": "string",
+          "description": "Soft delete time."
+        },
+        "scheduledPurgeTime": {
+          "type": "string",
+          "description": "Scheduled purge time."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Backup policy id."
+        },
+        "vaultLocation": {
+          "type": "string",
+          "description": "Location of the backup vault."
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "Data source type."
+        }
+      },
+      "required": [
+        "deletionTime",
+        "scheduledPurgeTime",
+        "policyId",
+        "vaultLocation",
+        "dataSourceType"
+      ]
+    },
+    "AzureBackupAzureDisksPropertyBag": {
+      "type": "object",
+      "description": "Provider specific property for Azure disk workload for Microsoft Azure backup solution provider.",
+      "properties": {
+        "deletionTime": {
+          "type": "string",
+          "description": "Soft delete time."
+        },
+        "scheduledPurgeTime": {
+          "type": "string",
+          "description": "Scheduled purge time."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Backup policy id."
+        },
+        "vaultLocation": {
+          "type": "string",
+          "description": "Location of the backup vault."
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "Data source type."
+        }
+      },
+      "required": [
+        "deletionTime",
+        "scheduledPurgeTime",
+        "policyId",
+        "vaultLocation",
+        "dataSourceType"
+      ]
+    },
+    "AzureBackupAzureFilesharePropertyBag": {
+      "type": "object",
+      "description": "Provider specific property for Azure fileshare for Microsoft Azure backup solution provider.",
+      "properties": {
+        "deferredDeleteSyncTime": {
+          "type": "string",
+          "description": "Soft delete time."
+        },
+        "deferredDeleteTimeRemaining": {
+          "type": "string",
+          "description": "Time remaining for permanent deletion of softdeleted item."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Backup policy id."
+        },
+        "vaultLocation": {
+          "type": "string",
+          "description": "Location of the backup vault."
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "Workload type of protected items."
+        },
+        "backupManagementType": {
+          "type": "string",
+          "description": "Backup management type of protected items."
+        }
+      },
+      "required": [
+        "vaultLocation",
+        "workloadType",
+        "backupManagementType"
+      ]
+    },
+    "AzureBackupAzureVirtualMachinePropertyBag": {
+      "type": "object",
+      "description": "Provider specific property for Azure Virtual machine for Microsoft Azure backup solution provider.",
+      "properties": {
+        "deferredDeleteSyncTime": {
+          "type": "string",
+          "description": "Soft delete time."
+        },
+        "deferredDeleteTimeRemaining": {
+          "type": "string",
+          "description": "Time remaining for permanent deletion of softdeleted item."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Backup policy id."
+        },
+        "vaultLocation": {
+          "type": "string",
+          "description": "Location of the backup vault."
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "Workload type of protected items."
+        },
+        "backupManagementType": {
+          "type": "string",
+          "description": "Backup management type of protected items."
+        }
+      },
+      "required": [
+        "vaultLocation",
+        "workloadType",
+        "backupManagementType"
+      ]
+    },
+    "AzureBackupAzureVmSapHanaPropertyBag": {
+      "type": "object",
+      "description": "Provider specific property for SAP Hana on Azure virtual machine for Microsoft Azure backup solution provider.",
+      "properties": {
+        "deferredDeleteSyncTime": {
+          "type": "string",
+          "description": "Soft delete time."
+        },
+        "deferredDeleteTimeRemaining": {
+          "type": "string",
+          "description": "Time remaining for permanent deletion of softdeleted item."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Backup policy id."
+        },
+        "vaultLocation": {
+          "type": "string",
+          "description": "Location of the backup vault."
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "Workload type of protected items."
+        },
+        "backupManagementType": {
+          "type": "string",
+          "description": "Backup management type of protected items."
+        }
+      },
+      "required": [
+        "vaultLocation",
+        "workloadType",
+        "backupManagementType"
+      ]
+    },
+    "AzureBackupAzureVmSqlPropertyBag": {
+      "type": "object",
+      "description": "Provider specific property for SAP Hana on Azure virtual machine for Microsoft Azure backup solution provider.",
+      "properties": {
+        "deferredDeleteSyncTime": {
+          "type": "string",
+          "description": "Soft delete time."
+        },
+        "deferredDeleteTimeRemaining": {
+          "type": "string",
+          "description": "Time remaining for permanent deletion of softdeleted item."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Backup policy id."
+        },
+        "vaultLocation": {
+          "type": "string",
+          "description": "Location of the backup vault."
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "Workload type of protected items."
+        },
+        "backupManagementType": {
+          "type": "string",
+          "description": "Backup management type of protected items."
+        }
+      },
+      "required": [
+        "vaultLocation",
+        "workloadType",
+        "backupManagementType"
+      ]
+    },
+    "AzureBackupKubernetesServicesPropertyBag": {
+      "type": "object",
+      "description": "Provider specific property for AKS workload for Microsoft Azure backup solution provider.",
+      "properties": {
+        "deletionTime": {
+          "type": "string",
+          "description": "Soft delete time."
+        },
+        "scheduledPurgeTime": {
+          "type": "string",
+          "description": "Scheduled purge time."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Backup policy id."
+        },
+        "vaultLocation": {
+          "type": "string",
+          "description": "Location of the backup vault."
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "Data source type."
+        }
+      },
+      "required": [
+        "deletionTime",
+        "scheduledPurgeTime",
+        "policyId",
+        "vaultLocation",
+        "dataSourceType"
+      ]
+    },
+    "BCDRDataSecurityLevel": {
+      "type": "string",
+      "description": "Enum for BCDR security level.",
+      "enum": [
+        "NotAvailable",
+        "None",
+        "Minimum",
+        "Adequate",
+        "Maximum"
+      ],
+      "x-ms-enum": {
+        "name": "BCDRDataSecurityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotAvailable",
+            "value": "NotAvailable",
+            "description": "Not available."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Protected item is not secured."
+          },
+          {
+            "name": "Minimum",
+            "value": "Minimum",
+            "description": "Protected item is secured with minimum security."
+          },
+          {
+            "name": "Adequate",
+            "value": "Adequate",
+            "description": "Protected item is secured with adequate security."
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum",
+            "description": "Protected item is secured with maximum security."
+          }
+        ]
+      }
+    },
+    "ClusterType": {
+      "type": "string",
+      "description": "enum for Supported cluster based data source types.",
+      "enum": [
+        "NotAvailable",
+        "AzureVmWorkloadSQLAvailabilityGroup",
+        "AzureVmWorkloadSAPHanaHSR"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotAvailable",
+            "value": "NotAvailable",
+            "description": "Not a cluster."
+          },
+          {
+            "name": "AzureVmWorkloadSQLAvailabilityGroup",
+            "value": "AzureVmWorkloadSQLAvailabilityGroup",
+            "description": "SQL AlwaysOn Availability Group."
+          },
+          {
+            "name": "AzureVmWorkloadSAPHanaHSR",
+            "value": "AzureVmWorkloadSAPHanaHSR",
+            "description": "SAP Hana System Replication."
+          }
+        ]
+      }
+    },
+    "DataSourceInformation": {
+      "type": "object",
+      "description": "Definition of Data source information.",
+      "properties": {
+        "dataSourceType": {
+          "$ref": "#/definitions/DataSourceType",
+          "description": "Datasource type."
+        },
+        "dataSourceId": {
+          "type": "string",
+          "description": "Data source id."
+        }
+      },
+      "required": [
+        "dataSourceType",
+        "dataSourceId"
+      ]
+    },
+    "DataSourceType": {
+      "type": "string",
+      "description": "enum for Supported data source types.",
+      "enum": [
+        "AzureVirtualMachine",
+        "AzureVmSQL",
+        "AzureFileshare",
+        "AzureVmSAPHana",
+        "AzureDatabaseForPostgreSql",
+        "AzureDisks",
+        "AzureBlobs",
+        "KubernetesServices",
+        "VMwareMachine"
+      ],
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureVirtualMachine",
+            "value": "AzureVirtualMachine",
+            "description": "Azure Virtual Machine."
+          },
+          {
+            "name": "AzureVmSQL",
+            "value": "AzureVmSQL",
+            "description": "SQL running on Azure Virtual Machine."
+          },
+          {
+            "name": "AzureFileshare",
+            "value": "AzureFileshare",
+            "description": "Azure file share."
+          },
+          {
+            "name": "AzureVmSAPHana",
+            "value": "AzureVmSAPHana",
+            "description": "SAP Hana running on Azure Virtual Machine."
+          },
+          {
+            "name": "AzureDatabaseForPostgreSql",
+            "value": "AzureDatabaseForPostgreSql",
+            "description": "AzureDatabase for PostgreSql."
+          },
+          {
+            "name": "AzureDisks",
+            "value": "AzureDisks",
+            "description": "Azure Disks."
+          },
+          {
+            "name": "AzureBlobs",
+            "value": "AzureBlobs",
+            "description": "Azure Blobs."
+          },
+          {
+            "name": "KubernetesServices",
+            "value": "KubernetesServices",
+            "description": "Azure Kubernetes Services."
+          },
+          {
+            "name": "VMwareMachine",
+            "value": "VMwareMachine",
+            "description": "VMware Machine."
+          }
+        ]
+      }
+    },
+    "DeletedUnifiedProtectedItemResource": {
+      "type": "object",
+      "description": "A DeletedUnifiedProtectedItem represents a protected item by backup or replication solution of deleted resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UnifiedProtectedItemProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeletedUnifiedProtectedItemResourceListResult": {
+      "type": "object",
+      "description": "The response of a DeletedUnifiedProtectedItemResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeletedUnifiedProtectedItemResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DeletedUnifiedProtectedItemResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LinkedResourceInformation": {
+      "type": "object",
+      "description": "Information of linked resource.",
+      "properties": {
+        "linkedResourceId": {
+          "type": "string",
+          "description": "Id of linked resource."
+        },
+        "linkedResourceType": {
+          "type": "string",
+          "description": "Type of linked resource."
+        },
+        "isAzureManagedLinkedResource": {
+          "type": "boolean",
+          "description": "Is data source managed by azure or not."
+        },
+        "isCluster": {
+          "type": "boolean",
+          "description": "Is data source is cluster resource or not."
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "Cluster Name."
+        },
+        "clusterType": {
+          "$ref": "#/definitions/ClusterType",
+          "description": "Cluster Type."
+        },
+        "clusterNodes": {
+          "type": "array",
+          "description": "List of cluster nodes.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "linkedResourceId",
+        "linkedResourceType",
+        "isAzureManagedLinkedResource",
+        "isCluster"
+      ]
+    },
+    "NullableBoolPropertyInfo": {
+      "type": "object",
+      "description": "Definition of nullable bool property info.",
+      "properties": {
+        "propertyValue": {
+          "type": "boolean",
+          "description": "Value of the property if its available."
+        },
+        "isAvailable": {
+          "type": "boolean",
+          "description": "Flag, if property has value or not."
+        }
+      },
+      "required": [
+        "isAvailable"
+      ]
+    },
+    "NullableDateTimePropertyInfo": {
+      "type": "object",
+      "description": "Definition of nullable date time property info.",
+      "properties": {
+        "propertyValue": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Value of the property if its available."
+        },
+        "isAvailable": {
+          "type": "boolean",
+          "description": "Flag, if property has value or not."
+        }
+      },
+      "required": [
+        "propertyValue",
+        "isAvailable"
+      ]
+    },
+    "NullableIntPropertyInfo": {
+      "type": "object",
+      "description": "Definition of nullable int property info.",
+      "properties": {
+        "propertyValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Value of the property if its available."
+        },
+        "isAvailable": {
+          "type": "boolean",
+          "description": "Flag, if property has value or not."
+        }
+      },
+      "required": [
+        "propertyValue",
+        "isAvailable"
+      ]
+    },
+    "ProtectionStatus": {
+      "type": "string",
+      "description": "Enum for protection status.",
+      "enum": [
+        "Protected",
+        "PendingProtection",
+        "ProtectionPaused"
+      ],
+      "x-ms-enum": {
+        "name": "ProtectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Protected",
+            "value": "Protected",
+            "description": "Resource is protected."
+          },
+          {
+            "name": "PendingProtection",
+            "value": "PendingProtection",
+            "description": "Protection configured but first backup is pending."
+          },
+          {
+            "name": "ProtectionPaused",
+            "value": "ProtectionPaused",
+            "description": "Protection paused."
+          }
+        ]
+      }
+    },
+    "ProviderSpecificProperties": {
+      "type": "object",
+      "description": "Definition of provider specific properties."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ReferencedObject": {
+      "type": "object",
+      "description": "Definition of ReferenceObject.",
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      }
+    },
+    "ReferencedObjects": {
+      "type": "object",
+      "description": "Dictionary of reference objects.",
+      "additionalProperties": {
+        "$ref": "#/definitions/ReferencedObject"
+      }
+    },
+    "RegionSpecificPropertiesForProtectedItem": {
+      "type": "object",
+      "description": "Definition of Protected item region specific property.",
+      "properties": {
+        "protectionStatus": {
+          "$ref": "#/definitions/ProtectionStatus",
+          "description": "Protection status of protected item."
+        },
+        "protectedItemState": {
+          "type": "string",
+          "description": "Protection state of protected item."
+        },
+        "configuredRpoInMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Configured RPO for protected item in minutes."
+        },
+        "latestRecoveryPoint": {
+          "$ref": "#/definitions/NullableDateTimePropertyInfo",
+          "description": "Latest recoverypoint time."
+        },
+        "oldestRecoveryPoint": {
+          "$ref": "#/definitions/NullableDateTimePropertyInfo",
+          "description": "Oldest recoverypoint time."
+        },
+        "configuredMaximumRetentionInDays": {
+          "$ref": "#/definitions/NullableIntPropertyInfo",
+          "description": "Minimum retention period in days."
+        }
+      },
+      "required": [
+        "protectionStatus",
+        "protectedItemState",
+        "latestRecoveryPoint",
+        "oldestRecoveryPoint",
+        "configuredMaximumRetentionInDays"
+      ]
+    },
+    "RegionSpecificPropertiesForUnifiedProtectedItem": {
+      "type": "object",
+      "description": "UPI property.",
+      "properties": {
+        "configuredRpoInMinutes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Configured RPO for UPI in minutes."
+        },
+        "latestRecoveryPoint": {
+          "$ref": "#/definitions/NullableDateTimePropertyInfo",
+          "description": "Latest recoverypoint time."
+        },
+        "oldestRecoveryPoint": {
+          "$ref": "#/definitions/NullableDateTimePropertyInfo",
+          "description": "Oldest recoverypoint time."
+        },
+        "minimumConfiguredRetentionInDays": {
+          "$ref": "#/definitions/NullableIntPropertyInfo",
+          "description": "Minimum retention period in days."
+        },
+        "maximumConfiguredRetentionInDays": {
+          "$ref": "#/definitions/NullableIntPropertyInfo",
+          "description": "Maximum retention period in days."
+        }
+      },
+      "required": [
+        "latestRecoveryPoint",
+        "oldestRecoveryPoint",
+        "minimumConfiguredRetentionInDays",
+        "maximumConfiguredRetentionInDays"
+      ]
+    },
+    "SolutionSpecificProtectedItem": {
+      "type": "object",
+      "description": "Definition of solution specific protected item.",
+      "properties": {
+        "solutionDisplayName": {
+          "type": "string",
+          "description": "Solution display name."
+        },
+        "solutionProviderName": {
+          "type": "string",
+          "description": "Solution provider name."
+        },
+        "protectedItemId": {
+          "type": "string",
+          "description": "Protected item id."
+        },
+        "protectedItemFriendlyName": {
+          "type": "string",
+          "description": "Protected item name."
+        },
+        "protectedItemPrimaryRegion": {
+          "type": "string",
+          "description": "Protected item primary region."
+        },
+        "protectedItemSecondaryRegion": {
+          "type": "string",
+          "description": "Protected item secondary region."
+        },
+        "primaryRegionProtectionDetails": {
+          "$ref": "#/definitions/RegionSpecificPropertiesForProtectedItem",
+          "description": "Protected item protection details for primary region."
+        },
+        "secondaryRegionProtectionDetails": {
+          "$ref": "#/definitions/RegionSpecificPropertiesForProtectedItem",
+          "description": "Protected item protection details for secondary region."
+        },
+        "allowedOperations": {
+          "type": "array",
+          "description": "Allowed operations on protected item.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bcdrDataSecurityLevel": {
+          "$ref": "#/definitions/BCDRDataSecurityLevel",
+          "description": "BCDR Security score of protected item."
+        },
+        "temporaryProperties": {
+          "$ref": "#/definitions/TemporaryProperties",
+          "description": "Temporary properties."
+        },
+        "providerSpecificProperties": {
+          "$ref": "#/definitions/ProviderSpecificProperties",
+          "description": "Provider specific properties."
+        },
+        "isDeletedResource": {
+          "$ref": "#/definitions/NullableBoolPropertyInfo",
+          "description": "Is deleted resource or not."
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated time of protected item."
+        },
+        "dictionaryOfResourceTypeToLastEventTime": {
+          "type": "object",
+          "description": "Dictionary of resource type to last event time.",
+          "additionalProperties": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "referencedObjects": {
+          "$ref": "#/definitions/ReferencedObjects",
+          "description": "Properties for referenced objects."
+        }
+      },
+      "required": [
+        "solutionDisplayName",
+        "solutionProviderName",
+        "protectedItemId",
+        "protectedItemFriendlyName",
+        "allowedOperations",
+        "bcdrDataSecurityLevel",
+        "temporaryProperties",
+        "lastUpdatedTime",
+        "dictionaryOfResourceTypeToLastEventTime",
+        "referencedObjects"
+      ]
+    },
+    "SolutionSpecificProtectionProperties": {
+      "type": "object",
+      "description": "Definition of solution specific protected item.",
+      "properties": {
+        "allowedOperationsPerSolution": {
+          "type": "array",
+          "description": "List of allowed operations.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "allowedOperationsPerSolution"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets and sets the property key."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value."
+        }
+      }
+    },
+    "TemporaryProperties": {
+      "type": "object",
+      "description": "Definition of temporary properties.",
+      "properties": {
+        "deferredDeleteSyncTime": {
+          "type": "string",
+          "description": "Deferred delete sync time."
+        },
+        "deferredDeleteTimeRemaining": {
+          "type": "string",
+          "description": "Deferred delete time remaining."
+        },
+        "scheduledPurgeTime": {
+          "type": "string",
+          "description": "Scheduled purge time."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy id."
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "Workload type."
+        },
+        "clusterType": {
+          "$ref": "#/definitions/ClusterType",
+          "description": "Cluster type."
+        },
+        "clusterNodes": {
+          "type": "array",
+          "description": "Cluster node names.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "workloadType"
+      ]
+    },
+    "UPIProtectionStatus": {
+      "type": "string",
+      "description": "enum for UPI protection status.",
+      "enum": [
+        "NotProtected",
+        "Protected",
+        "PendingProtection",
+        "ProtectionPaused"
+      ],
+      "x-ms-enum": {
+        "name": "UPIProtectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotProtected",
+            "value": "NotProtected",
+            "description": "Resource is not Protected."
+          },
+          {
+            "name": "Protected",
+            "value": "Protected",
+            "description": "Resource is Protected."
+          },
+          {
+            "name": "PendingProtection",
+            "value": "PendingProtection",
+            "description": "Protection configured but first backup is pending."
+          },
+          {
+            "name": "ProtectionPaused",
+            "value": "ProtectionPaused",
+            "description": "Protection paused."
+          }
+        ]
+      }
+    },
+    "UPISchemaVersion": {
+      "type": "string",
+      "description": "enum for UPI schema version.",
+      "enum": [
+        "V1"
+      ],
+      "x-ms-enum": {
+        "name": "UPISchemaVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V1",
+            "value": "V1",
+            "description": "V1 schema version."
+          }
+        ]
+      }
+    },
+    "UnifiedProtectedItemProperties": {
+      "type": "object",
+      "description": "Definition of unified protected item properties.",
+      "properties": {
+        "upiSchemaVersion": {
+          "$ref": "#/definitions/UPISchemaVersion",
+          "description": "Unified property item schema version.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "The friendly name of the protected item.",
+          "readOnly": true
+        },
+        "dataSourceInformation": {
+          "$ref": "#/definitions/DataSourceInformation",
+          "description": "Data source information of protected item.",
+          "readOnly": true
+        },
+        "linkedResourceInformation": {
+          "$ref": "#/definitions/LinkedResourceInformation",
+          "description": "Linked resource information of the protected item.",
+          "readOnly": true
+        },
+        "isProtectedInPrimaryRegion": {
+          "type": "boolean",
+          "description": "Datasource is protected in primary region or not.",
+          "readOnly": true
+        },
+        "isProtectedInSecondaryRegion": {
+          "type": "boolean",
+          "description": "Datasource is protected in secondary region or not.",
+          "readOnly": true
+        },
+        "protectionStatusInPrimaryRegion": {
+          "$ref": "#/definitions/UPIProtectionStatus",
+          "description": "Protection status of Datasource in primary region.",
+          "readOnly": true
+        },
+        "protectionStatusInSecondaryRegion": {
+          "$ref": "#/definitions/UPIProtectionStatus",
+          "description": "Protection status of Datasource in secondary region.",
+          "readOnly": true
+        },
+        "maximumBcdrDataSecurity": {
+          "$ref": "#/definitions/BCDRDataSecurityLevel",
+          "description": "Security Level of protected item",
+          "readOnly": true
+        },
+        "primaryRegionProtectionDetails": {
+          "$ref": "#/definitions/RegionSpecificPropertiesForUnifiedProtectedItem",
+          "description": "Primary region properties of protected item.",
+          "readOnly": true
+        },
+        "secondaryRegionProtectionDetails": {
+          "$ref": "#/definitions/RegionSpecificPropertiesForUnifiedProtectedItem",
+          "description": "Secondary region properties of protected item.",
+          "readOnly": true
+        },
+        "solutionSpecificProtectionProperties": {
+          "type": "object",
+          "description": "Dictionary for solution specific properties.",
+          "additionalProperties": {
+            "$ref": "#/definitions/SolutionSpecificProtectionProperties"
+          },
+          "readOnly": true
+        },
+        "protectedItems": {
+          "type": "array",
+          "description": "Detail of protected item.",
+          "items": {
+            "$ref": "#/definitions/SolutionSpecificProtectedItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "distinctBcdrSolutionProviderNames": {
+          "type": "array",
+          "description": "List of distinct solution provider names.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "distinctSolutionNames": {
+          "type": "array",
+          "description": "List of distinct solution names.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "TenantId of the protected items.",
+          "readOnly": true
+        },
+        "deletedPiLastEventTimeMap": {
+          "type": "object",
+          "description": "Map of deleted protected item Id to last event time.",
+          "additionalProperties": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "upiSchemaVersion",
+        "friendlyName",
+        "dataSourceInformation",
+        "linkedResourceInformation",
+        "isProtectedInPrimaryRegion",
+        "isProtectedInSecondaryRegion",
+        "protectionStatusInPrimaryRegion",
+        "protectionStatusInSecondaryRegion",
+        "maximumBcdrDataSecurity",
+        "primaryRegionProtectionDetails",
+        "solutionSpecificProtectionProperties",
+        "protectedItems",
+        "distinctBcdrSolutionProviderNames",
+        "distinctSolutionNames",
+        "tenantId",
+        "deletedPiLastEventTimeMap"
+      ]
+    },
+    "UnifiedProtectedItemResource": {
+      "type": "object",
+      "description": "A UnifiedProtectedItem represents a protected item by backup or replication solution.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UnifiedProtectedItemProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UnifiedProtectedItemResourceListResult": {
+      "type": "object",
+      "description": "The response of a UnifiedProtectedItemResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UnifiedProtectedItemResource items on this page",
+          "items": {
+            "$ref": "#/definitions/UnifiedProtectedItemResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Microsoft.AzureBusinessContinuity Resource Provider supported API versions.",
+      "enum": [
+        "2024-03-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_03_01_preview",
+            "value": "2024-03-01-preview",
+            "description": "Microsoft.AzureBusinessContinuity Resource Provider management API version 2024-03-01-preview."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

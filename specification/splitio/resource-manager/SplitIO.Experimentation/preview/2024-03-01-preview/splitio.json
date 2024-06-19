@@ -186,8 +186,9 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
+            "minLength": 5,
             "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
+            "pattern": "^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           }
         ],
         "responses": {
@@ -232,8 +233,9 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
+            "minLength": 5,
             "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
+            "pattern": "^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
             "name": "resource",
@@ -304,8 +306,9 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
+            "minLength": 5,
             "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
+            "pattern": "^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
             "name": "properties",
@@ -327,14 +330,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -377,25 +380,23 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
+            "minLength": 5,
             "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
+            "pattern": "^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -420,13 +421,10 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/exchangeToken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/dataPlaneApplications/{applicationId}/exchangeToken": {
       "post": {
-        "operationId": "ExperimentationWorkspaces_ExchangeToken",
-        "tags": [
-          "ExperimentationWorkspaces"
-        ],
-        "description": "A synchronous resource action.",
+        "operationId": "DataPlaneApplications_ExchangeToken",
+        "description": "The action to exchange Split.IO data plane authentication token.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -440,27 +438,35 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "The name of the ExperimentationWorkspace resource",
+            "description": "The name of the ExperimentationWorkspace resource.",
             "required": true,
             "type": "string",
+            "minLength": 5,
             "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
+            "pattern": "^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
-            "name": "body",
+            "name": "applicationId",
+            "in": "path",
+            "description": "The id of the Split.IO data plane authentication application.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exchangeTokenParameters",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameter of exchange token action.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExchangeTokenRequest"
+              "$ref": "#/definitions/ExchangeTokenParameters"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ExchangeTokenResponse"
+              "$ref": "#/definitions/ExchangeTokenResult"
             }
           },
           "default": {
@@ -471,8 +477,8 @@
           }
         },
         "x-ms-examples": {
-          "ExperimentationWorkspacesExchangeToken": {
-            "$ref": "./examples/ExperimentationWorkspacesExchangeToken.json"
+          "DataPlaneApplicationsExchangeToken": {
+            "$ref": "./examples/DataPlaneApplicationsExchangeToken.json"
           }
         }
       }
@@ -557,9 +563,9 @@
         }
       }
     },
-    "ExchangeTokenRequest": {
+    "ExchangeTokenParameters": {
       "type": "object",
-      "description": "The request body for exchanging Split.IO data plane authentication token.",
+      "description": "The exchange token parameters for exchanging Split.IO data plane authentication token.",
       "properties": {
         "token": {
           "type": "string",
@@ -577,9 +583,9 @@
         "resource"
       ]
     },
-    "ExchangeTokenResponse": {
+    "ExchangeTokenResult": {
       "type": "object",
-      "description": "The response body that contains the bearer token which is used for Split.IO data plane authentication.",
+      "description": "The exchange token result that contains the bearer token which is used for Split.IO data plane authentication.",
       "properties": {
         "token": {
           "type": "string",

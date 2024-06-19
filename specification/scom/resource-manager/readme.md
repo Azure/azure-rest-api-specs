@@ -27,7 +27,7 @@ These are the global settings for the scom.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01-01-preview
+tag: package-2024-06-15-preview
 ```
 
 ### Tag: package-2021-06-30-preview
@@ -89,7 +89,6 @@ input-file:
   - Microsoft.Scom/stable/2023-10-30/managedGateways.json
   - Microsoft.Scom/stable/2023-10-30/commonTypes.json
 ```
----
 
 ### Tag: package-2024-01-01-preview
 
@@ -102,6 +101,46 @@ input-file:
   - Microsoft.Scom/preview/2024-01-01-preview/managedGateways.json
   - Microsoft.Scom/preview/2024-01-01-preview/commonTypes.json
 ```
+
+### Tag: package-2024-03-07-preview
+
+These settings apply only when `--tag=2024-03-07-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-07-preview'
+input-file:
+  - Microsoft.Scom/preview/2024-03-07-preview/scom.json
+  - Microsoft.Scom/preview/2024-03-07-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2024-03-07-preview/managedGateways.json
+  - Microsoft.Scom/preview/2024-03-07-preview/commonTypes.json
+  - Microsoft.Scom/preview/2024-03-07-preview/linkedGrafanaInstances.json
+```
+
+### Tag: package-2024-06-05-preview
+
+These settings apply only when `--tag=2024-06-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-05-preview'
+input-file:
+  - Microsoft.Scom/preview/2024-06-05-preview/scom.json
+  - Microsoft.Scom/preview/2024-06-05-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2024-06-05-preview/managedGateways.json
+  - Microsoft.Scom/preview/2024-06-05-preview/commonTypes.json
+  - Microsoft.Scom/preview/2024-06-05-preview/linkedGrafanaInstances.json
+```
+
+### Tag: package-2024-06-15-preview
+
+These settings apply only when `--tag=2024-06-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-15-preview'
+input-file:
+  - Microsoft.Scom/preview/2024-06-15-preview/scom.json
+  - Microsoft.Scom/preview/2024-06-15-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2024-06-15-preview/managedGateways.json
+  - Microsoft.Scom/preview/2024-06-15-preview/commonTypes.json
+  - Microsoft.Scom/preview/2024-06-15-preview/linkedGrafanaInstances.json
+```
+
 ---
 
 # Code Generation

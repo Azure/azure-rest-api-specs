@@ -14,21 +14,23 @@ namespace Microsoft.Edge;
 /**
  * The Status
  */
-enum ConnectivityStatusEnum {
+union ConnectivityStatusEnum {
+  string,
+
   /**
    * The device is in Connected state
    */
-  Connected,
+  Connected: "Connected",
 
   /**
    * The device was NotRecentlyConnected
    */
-  NotRecentlyConnected,
+  NotRecentlyConnected: "NotRecentlyConnected",
 
   /**
    * The device NeedsAttention
    */
-  NeedsAttention,
+  NeedsAttention: "NeedsAttention",
 }
 
 /**
@@ -66,4 +68,12 @@ model ConnectivityStatusUpdateProperties {
    * The Status
    */
   status?: ConnectivityStatusEnum;
+}
+
+/**
+ * The ProvisioningState
+ */
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 }

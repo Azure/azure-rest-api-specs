@@ -27,7 +27,7 @@ These are the global settings for the Qumulo.Storage.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-10
+tag: package-2024-02-01-preview
 ```
 
 

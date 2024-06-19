@@ -19,21 +19,23 @@
           "tag2": "value2"
         },
         "properties": {
-          "connectorType": "ConfluentSource",
-          "connectorDirection": "Source",
-          "eventHubConfig": {
-            "namespaceHostName": "ns",
-            "eventHubName": "eh"
+          "connectorProperties": {
+            "connectorType": "ConfluentSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "bootstrapServers": "bootstrapServers.confluent.com",
+            "topic": "topic1",
+            "consumerGroup": "consumerGroup1",
+            "autoOffsetReset": "autoOffsetReset",
+            "user": "user1",
+            "connectorState": "Running"
           },
-          "maxTasks": 1,
-          "valueConverter": "JsonConverter",
-          "bootstrapServers": "bootstrapServers.confluent.com",
-          "topic": "topic1",
-          "consumerGroup": "consumerGroup1",
-          "autoOffsetReset": "autoOffsetReset",
-          "user": "user1",
-          "provisioningState": "Succeeded",
-          "connectorState": "Running"
+          "provisioningState": "Succeeded"
         }
       }
     }

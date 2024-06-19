@@ -63,21 +63,23 @@ model PromotionData {
 }
 
 @doc("Subscription states")
-enum State {
+union State {
+  string,
+
   @doc("Registered subscription state")
-  Registered,
+  Registered: "Registered",
 
   @doc("Unregistered subscription state")
-  Unregistered,
+  Unregistered: "Unregistered",
 
   @doc("Warned subscription state")
-  Warned,
+  Warned: "Warned",
 
   @doc("Suspended subscription state")
-  Suspended,
+  Suspended: "Suspended",
 
   @doc("Deleted subscription state")
-  Deleted,
+  Deleted: "Deleted",
 }
 
 @doc("The Subscription billing properties")
@@ -120,102 +122,114 @@ model BillingAccount {
 }
 
 @doc("Subscription billing types")
-enum BillingType {
+union BillingType {
+  string,
+
   @doc("Legacy billing type")
-  Legacy,
+  Legacy: "Legacy",
 
   @doc("Modern billing type")
-  Modern,
+  Modern: "Modern",
 }
 
 @doc("Subscription channel type")
-enum ChannelType {
+union ChannelType {
+  string,
+
   @doc("None channel type")
-  None,
+  None: "None",
 
   @doc("Internal channel type")
-  Internal,
+  Internal: "Internal",
 
   @doc("FieldLed channel type")
-  FieldLed,
+  FieldLed: "FieldLed",
 
   @doc("CustomerLed channel type")
-  CustomerLed,
+  CustomerLed: "CustomerLed",
 
   @doc("Partnerled channel type")
-  PartnerLed,
+  PartnerLed: "PartnerLed",
 }
 
 @doc("Subscription state payment type")
-enum PaymentType {
+union PaymentType {
+  string,
+
   @doc("None payment type")
-  None,
+  None: "None",
 
   @doc("Paid payment type")
-  Paid,
+  Paid: "Paid",
 
   @doc("Free payment type")
-  Free,
+  Free: "Free",
 
   @doc("Entitlement payment type")
-  Entitlement,
+  Entitlement: "Entitlement",
 
   @doc("SponsoredPlus payment type")
-  SponsoredPlus,
+  SponsoredPlus: "SponsoredPlus",
 
   @doc("Sponsored payment type")
-  Sponsored,
+  Sponsored: "Sponsored",
 
   @doc("Benefit payment type")
-  Benefit,
+  Benefit: "Benefit",
 }
 
 @doc("Subscription tier")
-enum Tier {
+union Tier {
+  string,
+
   @doc("Unknown tier")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Standard tier")
-  Standard,
+  Standard: "Standard",
 
   @doc("Premium tier")
-  Premium,
+  Premium: "Premium",
 
   @doc("Priority tier")
-  Priority,
+  Priority: "Priority",
 }
 
 @doc("Subscription workload type")
-enum WorkloadType {
+union WorkloadType {
+  string,
+
   @doc("None workload type")
-  None,
+  None: "None",
 
   @doc("Development test workload type")
-  DevTest,
+  DevTest: "DevTest",
 
   @doc("Production workload type")
-  Production,
+  Production: "Production",
 }
 
 @doc("CostCategory for internal subscription")
-enum CostCategory {
+union CostCategory {
+  string,
+
   @doc("None cost category")
-  None,
+  None: "None",
 
   @doc("FR cost category")
-  FR,
+  FR: "FR",
 
   @doc("FG cost category")
-  FG,
+  FG: "FG",
 
   @doc("FS cost category")
-  FS,
+  FS: "FS",
 
   @doc("FX cost category")
-  FX,
+  FX: "FX",
 
   @doc("FB cost category")
-  FB,
+  FB: "FB",
 }
 
 @doc("The Subscription policies")

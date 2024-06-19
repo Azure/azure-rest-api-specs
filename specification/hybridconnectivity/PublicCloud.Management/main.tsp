@@ -38,6 +38,7 @@ model GenerateAwsTemplateRequest {
   @doc("The name of public cloud connector")
   connectorId: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("The list of solution types and their settings")
   solutionTypes?: Array<SolutionTypeSettings>;
 }
@@ -55,6 +56,7 @@ model SolutionTypeSettings {
 
 @doc("Public connector permissions.")
 model TestPermissionResponse {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Solution type permissions.")
   solutionTypes: Array<SolutionTypePermissions>;
 }
@@ -72,28 +74,33 @@ model SolutionTypePermissions {
 }
 
 @doc("Solution types.")
-enum SolutionTypeEnum {
+union SolutionTypeEnum {
+  string,
+
   @doc("Asset Management solution type")
-  `Microsoft.AssetManagement`,
+  `Microsoft.AssetManagement`: "Microsoft.AssetManagement",
 
   @doc("Hybrid Compute Onboard solution type")
-  `Microsoft.HybridCompute.Onboard`,
+  `Microsoft.HybridCompute.Onboard`: "Microsoft.HybridCompute.Onboard",
 
   @doc("VWan Provisioning solution type")
-  `Microsoft.HybridNetwork.VWan.Provision`,
+  `Microsoft.HybridNetwork.VWan.Provision`: "Microsoft.HybridNetwork.VWan.Provision",
 }
 
 @doc("Connection status.")
-enum Status {
+union Status {
+  string,
+
   @doc("Connected status")
-  Connected,
+  Connected: "Connected",
 
   @doc("Disconnected status")
-  Disconnected,
+  Disconnected: "Disconnected",
 }
 
 //------------------- Public Cloud Connector -------------------
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern"
 @doc("Public Cloud Connector")
 model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   @doc("Represent public cloud connectors resource.")
@@ -115,12 +122,18 @@ model PublicCloudConnectorProperties {
   @doc("The resource provisioning state.")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
+
+  @doc("Connector primary identifier.")
+  @visibility("read")
+  connectorPrimaryIdentifier?: string;
 }
 
 @doc("Enum of host cloud the public cloud connector is referencing.")
-enum HostType {
+union HostType {
+  string,
+
   @doc("AWS state")
-  AWS,
+  AWS: "AWS",
 }
 
 @doc("cloud profile for AWS.")
@@ -139,6 +152,7 @@ model AwsCloudProfile {
 
 //------------------- Solution Configuration -------------------
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern"
 @doc("Solution Configuration")
 model SolutionConfiguration
   is ExtensionResource<SolutionConfigurationProperties> {
@@ -163,8 +177,7 @@ model SolutionConfigurationProperties {
 
   @doc("The status of solution configurations")
   @visibility("read")
-  @knownValues(SolutionConfigurationStatus)
-  status?: string;
+  status?: SolutionConfigurationStatus;
 
   @doc("The detailed message of status details")
   @visibility("read")
@@ -176,22 +189,25 @@ model SolutionConfigurationProperties {
 }
 
 @doc("Solution Configuration Status.")
-enum SolutionConfigurationStatus {
+union SolutionConfigurationStatus {
   @doc("New status")
-  New,
+  New: "New",
 
   @doc("InProgress status")
-  InProgress,
+  InProgress: "InProgress",
 
   @doc("Canceled status")
-  Completed,
+  Completed: "Completed",
 
   @doc("Failed status")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 //------------------- Solution Type -------------------
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern"
 model SolutionTypeResource is ProxyResource<SolutionTypeProperties> {
   @doc("Solution Type resource")
   @segment("solutionTypes")
@@ -212,6 +228,7 @@ model SolutionTypeProperties {
   @doc("The locations this solution is supported in.")
   supportedAzureRegions?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("Array of solution settings and its description.")
   solutionSettings?: SolutionTypeSettingsProperties[];
 }
@@ -239,6 +256,7 @@ model SolutionTypeSettingsProperties {
 
 //------------------- Inventory -------------------
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern"
 @parentResource(SolutionConfiguration)
 model InventoryResource is ProxyResource<InventoryProperties> {
   @doc("Inventory resource")
@@ -267,17 +285,21 @@ model InventoryProperties {
   statusDetails?: string;
 
   @doc("The resource provisioning state.")
+  @visibility("read")
   provisioningState?: ResourceProvisioningState;
 }
 
 @doc("Cloud Native Type enum.")
-enum CloudNativeType {
+union CloudNativeType {
+  string,
+
   @doc("ec2 enum.")
-  ec2,
+  ec2: "ec2",
 }
 
 //------------------- Shared -------------------
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "will move to a more structured model when stable/GA"
 @doc("Solution settings")
 model SolutionSettings is Record<string>;
 
@@ -330,6 +352,7 @@ interface SolutionConfigurations {
     SolutionConfigurationProperties
   >;
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
+  listByWidget is ArmResourceListAtScope<SolutionConfiguration>;
 }
 
 @armResourceOperations

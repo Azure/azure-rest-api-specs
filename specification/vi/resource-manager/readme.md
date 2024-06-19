@@ -63,9 +63,19 @@ These are the global settings for the adp.
 title: ViManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-11
+tag: package-2024-03-01-preview
 ```
 
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03-01-preview'
+version: 2024-03-01-preview
+version-with-underscores: 2024-03-01-preview
+input-file:
+  - Microsoft.VideoIndexer/preview/2024-03-01-preview/vi.json
+```
 
 ### Tag: package-preview-2023-11
 

@@ -561,7 +561,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -874,7 +875,8 @@
             "description": "Represents an accepted operation."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ResourceAccessRules": {
       "type": "object",
@@ -971,7 +973,8 @@
         "2022-11-15-preview",
         "2023-03-31-preview",
         "2023-04-30-preview",
-        "2023-11-15"
+        "2023-11-15",
+        "2024-04-01-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -996,6 +999,11 @@
             "name": "v2023_11_15",
             "value": "2023-11-15",
             "description": "The 2023-11-15 stable version."
+          },
+          {
+            "name": "v2024_04_01_preview",
+            "value": "2024-04-01-preview",
+            "description": "The 2024-04-01-preview version."
           }
         ]
       }

@@ -3,7 +3,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-providerhub";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -57,14 +56,14 @@ model DataSource {
 }
 
 scalar LogAnalyticsWorkspaceResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces",
     }
   ]>;
 
 scalar StorageAccountResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts",
     }
@@ -86,8 +85,9 @@ model LogAnalytics {
 model ExperimentationWorkspace
   is TrackedResource<ExperimentationWorkspaceProperties> {
   @key("workspaceName")
-  @pattern("^[^<>%&:\\?/#]*$")
   @segment("experimentationWorkspaces")
+  @pattern("^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @minLength(5)
   @maxLength(50)
   @doc("The name of the ExperimentationWorkspace resource")
   @path
@@ -95,24 +95,6 @@ model ExperimentationWorkspace
 
   ...ResourceSku;
   ...ManagedServiceIdentity;
-}
-
-@doc("The request body for exchanging Split.IO data plane authentication token.")
-model ExchangeTokenRequest {
-  @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
-  @secret
-  token: string;
-
-  @doc("The resource of Split.IO data plane authentication token.")
-  resource: string;
-}
-
-@doc("The response body that contains the bearer token which is used for Split.IO data plane authentication.")
-model ExchangeTokenResponse {
-  @doc("The bearer token that is used for Split.IO data plane authentication.")
-  @visibility("read")
-  @secret
-  token: string;
 }
 
 @armResourceOperations
@@ -123,12 +105,55 @@ interface ExperimentationWorkspaces {
     ExperimentationWorkspace,
     ExperimentationWorkspaceProperties
   >;
-  delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
+  delete is ArmResourceDeleteWithoutOkAsync<ExperimentationWorkspace>;
   listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
   listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
-  exchangeToken is ArmResourceActionSync<
-    ExperimentationWorkspace,
-    ExchangeTokenRequest,
-    ExchangeTokenResponse
-  >;
+}
+
+@doc("The exchange token parameters for exchanging Split.IO data plane authentication token.")
+model ExchangeTokenParameters {
+  @doc("The bearer token that is used for exchanging Split.IO data plane authentication token.")
+  @secret
+  token: string;
+
+  @doc("The resource of Split.IO data plane authentication token.")
+  resource: string;
+}
+
+@doc("The exchange token result that contains the bearer token which is used for Split.IO data plane authentication.")
+model ExchangeTokenResult {
+  @doc("The bearer token that is used for Split.IO data plane authentication.")
+  @visibility("read")
+  @secret
+  token: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/SplitIO.Experimentation/experimentationWorkspaces/{workspaceName}/dataPlaneApplications/{applicationId}")
+interface DataPlaneApplications {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Need to remove autoroute"
+  @doc("The action to exchange Split.IO data plane authentication token.")
+  @route("exchangeToken")
+  @post
+  @action
+  exchangeToken(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    @doc("The name of the ExperimentationWorkspace resource.")
+    @path
+    @pattern("^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+    @minLength(5)
+    @maxLength(50)
+    workspaceName: string,
+
+    @doc("The id of the Split.IO data plane authentication application.")
+    @path
+    applicationId: string,
+
+    @doc("The parameter of exchange token action.")
+    @body
+    exchangeTokenParameters: ExchangeTokenParameters,
+  ): ExchangeTokenResult | ErrorResponse;
 }

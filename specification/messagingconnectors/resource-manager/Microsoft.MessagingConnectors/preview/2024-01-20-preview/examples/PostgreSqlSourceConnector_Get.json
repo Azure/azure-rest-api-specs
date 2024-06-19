@@ -19,21 +19,23 @@
           "tag2": "value2"
         },
         "properties": {
-          "connectorType": "PostgreSqlSource",
-          "connectorDirection": "Source",
-          "eventHubConfig": {
-            "namespaceHostName": "ns",
-            "eventHubName": "eh"
+          "connectorProperties": {
+            "connectorType": "PostgreSqlSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "hostName": "hostName.postgresql.com",
+            "port": 8080,
+            "databaseName": "databaseName1",
+            "username": "username1",
+            "replicationSlotName": "slotA",
+            "connectorState": "Running"
           },
-          "maxTasks": 1,
-          "valueConverter": "JsonConverter",
-          "hostName": "hostName.postgresql.com",
-          "port": 8080,
-          "databaseName": "databaseName1",
-          "username": "username1",
-          "replicationSlotName": "slotA",
-          "provisioningState": "Succeeded",
-          "connectorState": "Running"
+          "provisioningState": "Succeeded"
         }
       }
     }

@@ -418,14 +418,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -735,14 +735,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -782,7 +782,19 @@
       ],
       "x-ms-enum": {
         "name": "CheckNameAvailabilityReason",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Name not available if the name is invalid."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "Name not available if the name is already in use."
+          }
+        ]
       }
     },
     "CheckNameAvailabilityRequest": {
@@ -871,7 +883,7 @@
       "description": "Details of the CommunicationsGateway resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },
@@ -897,7 +909,7 @@
         },
         "connectivity": {
           "$ref": "#/definitions/Connectivity",
-          "description": "How to connect back to the operator network, e.g. MAPS",
+          "description": "How to connect back to the Operator Network, e.g. MAPS",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1093,7 +1105,7 @@
     },
     "Connectivity": {
       "type": "string",
-      "description": "How this deployment connects back to the operator network",
+      "description": "How this deployment connects back to the Operator Network",
       "enum": [
         "PublicAddress"
       ],
@@ -1104,7 +1116,7 @@
           {
             "name": "PublicAddress",
             "value": "PublicAddress",
-            "description": "This deployment connects to the operator network using a Public IP address, e.g. when using MAPS"
+            "description": "This deployment connects to the Operator Network using a Public IP address, e.g. when using MAPS"
           }
         ]
       }
@@ -1139,7 +1151,7 @@
       "properties": {
         "operatorAddresses": {
           "type": "array",
-          "description": "IP address to use to contact the operator network from this region",
+          "description": "IP address to use to contact the Operator Network from this region",
           "items": {
             "type": "string"
           },
@@ -1192,16 +1204,16 @@
         "operatorAddresses"
       ]
     },
-    "ProvisioningState": {
+    "ResourceProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the resource.",
+      "description": "The provisioning state of a resource type.",
       "enum": [
         "Succeeded",
         "Failed",
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "ResourceProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -1367,7 +1379,7 @@
       "description": "Details of the TestLine resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },

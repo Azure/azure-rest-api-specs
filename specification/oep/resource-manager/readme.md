@@ -27,14 +27,31 @@ These are the global settings for the MEDS.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-11-12
+tag: package-2024-05-21
+```
+### Tag: package-2024-05-21
+
+These settings apply only when `--tag=package-2024-05-21` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05-21'
+input-file:
+  - Microsoft.OpenEnergyPlatform/stable/2024-05-21/oep.json
+```
+
+### Tag: package-2024-02-09-preview
+
+These settings apply only when `--tag=package-2024-02-09-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-09-preview'
+input-file:
+  - Microsoft.OpenEnergyPlatform/preview/2024-02-09-preview/oep.json
 ```
 
 ### Tag: package-2023-11
 
 These settings apply only when `--tag=package-2023-11-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11-12'
+``` yaml $(tag) == 'package-2023-11-12'
 input-file:
   - Microsoft.OpenEnergyPlatform/stable/2023-11-12/oep.json
 ```
@@ -43,10 +60,11 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.OpenEnergyPlatform/stable/2023-06-12/oep.json
 ```
+
 ### Tag: package-2021-06-01-preview
 
 These settings apply only when `--tag=package-2021-06-01-preview` is specified on the command line.

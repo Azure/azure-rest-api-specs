@@ -7,7 +7,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.KubernetesRuntime;
 
-@doc("A LoadBalancer resource")
+@doc("A LoadBalancer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)")
 model LoadBalancer is ExtensionResource<LoadBalancerProperties> {
   @doc("The name of the LoadBalancer")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
@@ -18,15 +18,17 @@ model LoadBalancer is ExtensionResource<LoadBalancerProperties> {
 }
 
 @doc("Enum of advertise mode")
-enum AdvertiseMode {
+union AdvertiseMode {
+  string,
+
   @doc("ARP advertise mode")
-  ARP,
+  ARP: "ARP",
 
   @doc("BGP advertise mode")
-  BGP,
+  BGP: "BGP",
 
   @doc("both ARP and BGP advertise mode")
-  Both,
+  Both: "Both",
 }
 
 @doc("Details of the LoadBalancer.")
@@ -34,6 +36,7 @@ model LoadBalancerProperties {
   @doc("IP Range")
   addresses: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The type of the field is a record because it is a mapping of labels in the customer cluster"
   @doc("A dynamic label mapping to select related services. For instance, if you want to create a load balancer only for services with label \"a=b\", then please specify {\"a\": \"b\"} in the field.")
   serviceSelector?: Record<string>;
 

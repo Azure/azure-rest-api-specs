@@ -311,6 +311,51 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/listSimGroups": {
+      "post": {
+        "tags": [
+          "MobileNetworks"
+        ],
+        "operationId": "MobileNetworks_ListSimGroups",
+        "description": "Gets all the SIM groups assigned to a mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of SIM group resources.",
+            "schema": {
+              "$ref": "./simGroup.json#/definitions/SimGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SIM groups in a mobile network": {
+            "$ref": "./examples/SimGroupListByMobileNetwork.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -363,10 +408,26 @@
             "mnc"
           ]
         },
+        "azureMapAccount": {
+          "$ref": "./common.json#/definitions/AzureMapAccountResourceId",
+          "description": "Azure Map Account to be attached to the Mobile Network."
+        },
         "serviceKey": {
           "type": "string",
           "readOnly": true,
           "description": "The mobile network resource identifier"
+        },
+        "endpointSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/EndpointSecurityGroup"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "The list of endpoint security groups used in the mobile network.",
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [

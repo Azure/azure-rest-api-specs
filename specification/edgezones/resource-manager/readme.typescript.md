@@ -11,5 +11,4 @@ typescript:
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
-title: MicrosoftEdgeZonesClient
 ```

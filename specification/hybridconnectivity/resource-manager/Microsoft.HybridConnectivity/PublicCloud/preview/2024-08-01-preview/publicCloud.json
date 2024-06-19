@@ -56,6 +56,45 @@
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations": {
+      "get": {
+        "operationId": "SolutionConfigurations_List",
+        "tags": [
+          "SolutionConfigurations"
+        ],
+        "description": "List SolutionConfiguration resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionConfigurations_List": {
+            "$ref": "./examples/SolutionConfigurations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}": {
       "get": {
         "operationId": "SolutionConfigurations_Get",
@@ -755,14 +794,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1032,7 +1071,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The resource provisioning state."
+          "description": "The resource provisioning state.",
+          "readOnly": true
         }
       }
     },
@@ -1137,6 +1177,11 @@
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The resource provisioning state.",
           "readOnly": true
+        },
+        "connectorPrimaryIdentifier": {
+          "type": "string",
+          "description": "Connector primary identifier.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1191,6 +1236,27 @@
         }
       ]
     },
+    "SolutionConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a SolutionConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SolutionConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/SolutionConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "SolutionConfigurationProperties": {
       "type": "object",
       "description": "Solution configuration resource.",
@@ -1209,40 +1275,8 @@
           "description": "Solution settings"
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/SolutionConfigurationStatus",
           "description": "The status of solution configurations",
-          "enum": [
-            "New",
-            "InProgress",
-            "Completed",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "string",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "New",
-                "value": "New",
-                "description": "New status"
-              },
-              {
-                "name": "InProgress",
-                "value": "InProgress",
-                "description": "InProgress status"
-              },
-              {
-                "name": "Completed",
-                "value": "Completed",
-                "description": "Canceled status"
-              },
-              {
-                "name": "Failed",
-                "value": "Failed",
-                "description": "Failed status"
-              }
-            ]
-          },
           "readOnly": true
         },
         "statusDetails": {
@@ -1549,24 +1583,6 @@
       "required": [
         "solutionTypes"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Hybrid Connectivity Management service version.",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_08_01",
-            "value": "2024-08-01-preview",
-            "description": "Version 2024-08-01-preview"
-          }
-        ]
-      }
     }
   },
   "parameters": {

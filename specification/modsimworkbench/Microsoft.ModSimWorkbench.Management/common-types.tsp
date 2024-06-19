@@ -1,9 +1,8 @@
+import "@typespec/http";
+import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
-import "./common-types.tsp";
-import "./chambers.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -12,46 +11,46 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 
-@armProviderNamespace("Microsoft.ModSimWorkbench")
 @service({
   title: "ModSimWorkbench Control Plane API",
-  version: "2021-03-01-preview",
 })
-@doc("Provides operations for working with ModSimWorkbench")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
 
-@doc("ModSimWorkbench service version.")
+@doc("The ModSimWorkbench Control Plane API version.")
 enum Versions {
-  @doc("Version 2022-08-31")
+  @doc("Version 2021-03-01-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2021-03-01-preview`,
 }
 
 @doc("The provisioning state of a resource.")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+
+  // extend ARM common provisioning state
+  ResourceProvisioningState,
 
   @doc("Resource has unknown state.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Resource is being validated.")
-  Validating,
+  Validating: "Validating",
 
   @doc("Resource provisioning in progress.")
-  Processing,
+  Processing: "Processing",
 
   @doc("Resource is being deleted.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Resource provisioning action accepted.")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Resource has been deleted.")
-  Deleted,
+  Deleted: "Deleted",
 }
 
 @doc("The property for specifying the status of the last operation.")
@@ -62,18 +61,20 @@ model ProvisioningStateProperty {
 }
 
 @doc("The power state of a resource.")
-enum PowerState {
+union PowerState {
+  string,
+
   @doc("Resource is Running.")
-  Running,
+  Running: "Running",
 
   @doc("Resource is Stopped.")
-  Stopped,
+  Stopped: "Stopped",
 
   @doc("Resource is Starting.")
-  Starting,
+  Starting: "Starting",
 
   @doc("Resource is Stopping.")
-  Stopping,
+  Stopping: "Stopping",
 }
 
 @doc("The property for specifying the power state.")
@@ -114,7 +115,7 @@ model TimestampProperty {
 @doc("Property for result.")
 model ResultProperty {
   @doc("Result of the operation.")
-  result: string;
+  result?: string;
 }
 
 @doc("Common interface for all tracked resources")
@@ -126,19 +127,21 @@ interface ProxyResourceOperations<T extends ProxyResourceBase> {
 @doc("Common interface for all tracked resources")
 interface BaseResourceOperations<
   T extends TrackedResourceBase,
-  P extends TypeSpec.Reflection.Model
+  P extends TypeSpec.Reflection.Model,
+  U extends TypeSpec.Reflection.Model = P
 > {
   get is ArmResourceRead<T>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<T>;
-  update is ArmResourcePatchAsync<T, P>;
+  update is ArmResourcePatchAsync<T, U>;
   delete is ArmResourceDeleteWithoutOkAsync<T>;
 }
 
 @doc("Common interface of all nested resources")
 interface NestedResourceOperations<
   T extends TrackedResourceBase,
-  P extends TypeSpec.Reflection.Model
-> extends BaseResourceOperations<T, P> {
+  P extends TypeSpec.Reflection.Model,
+  U extends TypeSpec.Reflection.Model = P
+> extends BaseResourceOperations<T, P, U> {
   list is ArmResourceListByParent<T>;
 }
 

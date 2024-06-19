@@ -13,20 +13,22 @@
         "tag2": "value2"
       },
       "properties": {
-        "connectorType": "ConfluentSource",
-        "eventHubConfig": {
-          "namespaceHostName": "ns",
-          "eventHubName": "eh",
-          "connectionString": "connectionString1"
-        },
-        "maxTasks": 1,
-        "valueConverter": "JsonConverter",
-        "bootstrapServers": "bootstrapServers.confluent.com",
-        "topic": "topic1",
-        "consumerGroup": "consumerGroup1",
-        "autoOffsetReset": "autoOffsetReset",
-        "user": "user1",
-        "password": ""
+        "connectorProperties": {
+          "connectorType": "ConfluentSource",
+          "eventHubConfig": {
+            "namespaceHostName": "ns",
+            "eventHubName": "eh",
+            "connectionString": "connectionString1"
+          },
+          "maxTasks": 1,
+          "valueConverter": "JsonConverter",
+          "bootstrapServers": "bootstrapServers.confluent.com",
+          "topic": "topic1",
+          "consumerGroup": "consumerGroup1",
+          "autoOffsetReset": "autoOffsetReset",
+          "user": "user1",
+          "password": ""
+        }
       }
     }
   },
@@ -42,21 +44,23 @@
           "tag2": "value2"
         },
         "properties": {
-          "connectorType": "ConfluentSource",
-          "connectorDirection": "Source",
-          "eventHubConfig": {
-            "namespaceHostName": "ns",
-            "eventHubName": "eh"
+          "connectorProperties": {
+            "connectorType": "ConfluentSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "bootstrapServers": "bootstrapServers.confluent.com",
+            "topic": "topic1",
+            "consumerGroup": "consumerGroup1",
+            "autoOffsetReset": "autoOffsetReset",
+            "user": "user1",
+            "connectorState": "Running"
           },
-          "maxTasks": 1,
-          "valueConverter": "JsonConverter",
-          "bootstrapServers": "bootstrapServers.confluent.com",
-          "topic": "topic1",
-          "consumerGroup": "consumerGroup1",
-          "autoOffsetReset": "autoOffsetReset",
-          "user": "user1",
-          "provisioningState": "Succeeded",
-          "connectorState": "Running"
+          "provisioningState": "Succeeded"
         }
       }
     },
@@ -71,21 +75,23 @@
           "tag2": "value2"
         },
         "properties": {
-          "connectorType": "ConfluentSource",
-          "connectorDirection": "Source",
-          "eventHubConfig": {
-            "namespaceHostName": "ns",
-            "eventHubName": "eh"
+          "connectorProperties": {
+            "connectorType": "ConfluentSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "bootstrapServers": "bootstrapServers.confluent.com",
+            "topic": "topic1",
+            "consumerGroup": "consumerGroup1",
+            "autoOffsetReset": "autoOffsetReset",
+            "user": "user1",
+            "connectorState": "Creating"
           },
-          "maxTasks": 1,
-          "valueConverter": "JsonConverter",
-          "bootstrapServers": "bootstrapServers.confluent.com",
-          "topic": "topic1",
-          "consumerGroup": "consumerGroup1",
-          "autoOffsetReset": "autoOffsetReset",
-          "user": "user1",
-          "provisioningState": "Creating",
-          "connectorState": "Creating"
+          "provisioningState": "Creating"
         }
       }
     }

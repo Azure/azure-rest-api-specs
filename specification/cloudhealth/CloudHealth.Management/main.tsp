@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -11,21 +10,27 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace(ProviderName)
 @service({
   title: ProviderName,
-  version: "2023-10-01-preview",
 })
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
+@versioned(Versions)
 namespace Microsoft.CloudHealth;
+
+@doc("API Versions")
+enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2023-10-01-preview")
+  v2023_10_01_preview: "2023-10-01-preview",
+}
 
 alias ProviderName = "Microsoft.CloudHealth";
 
-// Regex for all our resource name validations
+// Regex for all our resource name validations. Up to 60 characters, alphanumeric and hyphens, must start and end with an alphanumeric character
 alias resourceNameRegex = "^[a-zA-Z0-9][a-zA-Z0-9-]{1,58}[a-zA-Z0-9]$";
 
 @pattern(resourceNameRegex)
@@ -46,8 +51,8 @@ model HealthModel is TrackedResource<HealthModelProperties> {
   @segment("healthmodels")
   name: stringResourceName;
 
-  ...ManagedServiceIdentity;
-  ...ResourceSku;
+  ...ManagedServiceIdentityProperty;
+  ...ResourceSkuProperty;
 }
 
 @doc("HealthModel properties")
@@ -63,10 +68,11 @@ model HealthModelProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Health Model provisioning states")
-enum HealthModelProvisioningState {
-  ...ResourceProvisioningState, // include standard provisioning states
-  Creating,
-  Deleting,
+union HealthModelProvisioningState {
+  string,
+  ResourceProvisioningState, // include standard provisioning states
+  Creating: "Creating",
+  Deleting: "Deleting",
 }
 
 @doc("A signal definition in a health model")
@@ -81,10 +87,11 @@ model SignalDefinition is ProxyResource<SignalDefinitionProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Supported signal kinds as discriminator")
-enum SignalKind {
-  AzureResourceMetric,
-  LogAnalyticsQuery,
-  PrometheusMetricsQuery,
+union SignalKind {
+  string,
+  AzureResourceMetric: "AzureResourceMetric",
+  LogAnalyticsQuery: "LogAnalyticsQuery",
+  PrometheusMetricsQuery: "PrometheusMetricsQuery",
 }
 
 @doc("SignalDefinition properties")
@@ -103,8 +110,9 @@ model SignalDefinitionProperties {
   signalKind: SignalKind;
 
   @doc("Interval in which the signal is being evaluated. Defaults to PT1M.")
-  refreshInterval?: RefreshInterval = RefreshInterval.PT1M;
+  refreshInterval?: RefreshInterval = "PT1M";
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
@@ -115,9 +123,6 @@ model SignalDefinitionProperties {
 
   @doc("Evaluation rules for the signal definition")
   evaluationRules: EvaluationRule;
-
-  @doc("Signal definition enabled state")
-  enabledState: SignalEnabledState;
 
   @visibility("read")
   @doc("Date when the signal definition was (soft-)deleted")
@@ -165,42 +170,48 @@ model DynamicDetectionRule {
 }
 
 @doc("ML-based model variants")
-enum DynamicThresholdModel {
+union DynamicThresholdModel {
+  string,
+
   @doc("Anomaly detection model")
-  AnomalyDetection,
+  AnomalyDetection: "AnomalyDetection",
 }
 
 @doc("Threshold direction for dynamic thresholds")
-enum DynamicThresholdDirection {
+union DynamicThresholdDirection {
+  string,
+
   @doc("Lower than")
-  LowerThan,
+  LowerThan: "LowerThan",
 
   @doc("Greater than")
-  GreaterThan,
+  GreaterThan: "GreaterThan",
 
   @doc("Greater or Lower Than")
-  GreaterOrLowerThan,
+  GreaterOrLowerThan: "GreaterOrLowerThan",
 }
 
 @doc("Refresh interval in ISO duration format")
-enum RefreshInterval {
+union RefreshInterval {
+  string,
+
   @doc("One Minute")
-  PT1M,
+  PT1M: "PT1M",
 
   @doc("Five Minutes")
-  PT5M,
+  PT5M: "PT5M",
 
   @doc("Ten Minutes")
-  PT10M,
+  PT10M: "PT10M",
 
   @doc("Thirty Minutes")
-  PT30M,
+  PT30M: "PT30M",
 
   @doc("One Hour")
-  PT1H,
+  PT1H: "PT1H",
 
   @doc("Two Hours")
-  PT2H,
+  PT2H: "PT2H",
 }
 
 @doc("Azure Resource Metric Signal Definition properties")
@@ -254,13 +265,10 @@ model LogAnalyticsQuerySignalDefinitionProperties
   @maxLength(100)
   timeGrain?: string;
 
-  @doc("Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified.")
+  @doc("Name of the column in the result set to evaluate against the thresholds. Defaults to the first column in the result set if not specified. The column must be numeric.")
   @minLength(1)
   @maxLength(100)
   valueColumnName?: string;
-
-  @doc("Data type of the result")
-  dataType: ResultDataType;
 }
 
 @doc("Prometheus Metrics Signal Definition properties")
@@ -281,49 +289,35 @@ model PrometheusMetricsSignalDefinitionProperties
 }
 
 @doc("Signal operator")
-enum SignalOperator {
+union SignalOperator {
+  string,
+
   @doc("Lower than")
-  LowerThan,
+  LowerThan: "LowerThan",
 
   @doc("Lower than or equal to")
-  LowerOrEquals,
+  LowerOrEquals: "LowerOrEquals",
 
   @doc("Greater than")
-  GreaterThan,
+  GreaterThan: "GreaterThan",
 
   @doc("Greater than or equal to")
-  GreaterOrEquals,
+  GreaterOrEquals: "GreaterOrEquals",
 
   @doc("Equal to")
-  Equals,
-
-  @doc("Contains (only applicable for text data type)")
-  Contains,
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
-@doc("Signal enabled state")
-enum SignalEnabledState {
-  Enabled,
-  Disabled,
+  Equals: "Equals",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Metric aggregation type")
-enum MetricAggregationType {
-  None,
-  Average,
-  Count,
-  Minimum,
-  Maximum,
-  Total,
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
-@doc("Result data type")
-enum ResultDataType {
-  Numeric,
-  Text,
+union MetricAggregationType {
+  string,
+  None: "None",
+  Average: "Average",
+  Count: "Count",
+  Minimum: "Minimum",
+  Maximum: "Maximum",
+  Total: "Total",
 }
 
 @doc("An authentication setting in a health model")
@@ -338,8 +332,9 @@ model AuthenticationSetting is ProxyResource<AuthenticationSettingProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
 @doc("Supported kinds of authentication settings as discriminator")
-enum AuthenticationKind {
-  ManagedIdentity,
+union AuthenticationKind {
+  string,
+  ManagedIdentity: "ManagedIdentity",
   // More will be added later here
 }
 
@@ -404,8 +399,9 @@ model EntityProperties {
   healthObjective?: float32;
 
   @doc("Impact of the entity in health state propagation")
-  impact?: EntityImpact = EntityImpact.Standard;
+  impact?: EntityImpact = "Standard";
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   @doc("Optional set of labels (key-value pairs)") // Since Entity is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
@@ -483,18 +479,13 @@ model SignalAssignment {
 @doc("A grouping of signal assignments for an Azure resource")
 model AzureResourceSignalGroup is SignalAssignmentGroup {
   @doc("Azure resource ID")
-  azureResourceId: ResourceIdentifier;
+  azureResourceId: armResourceIdentifier<[]>;
 }
 
 @doc("A grouping of signal assignments for a Log Analytics Workspace")
 model LogAnalyticsSignalGroup is SignalAssignmentGroup {
   @doc("Log Analytics Workspace resource ID")
   logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
-
-  @doc("Log Analytics workspace ID") // Ideally, we dont need this since we also have the Resource Id. But at the moment we need this ID for querying
-  @minLength(36)
-  @maxLength(36)
-  logAnalyticsWorkspaceId: string;
 }
 
 @doc("A grouping of signal assignments for a Azure Monitor Workspace")
@@ -504,27 +495,37 @@ model AzureMonitorWorkspaceSignalGroup is SignalAssignmentGroup {
 }
 
 @doc("Type of impact an entity has on health state propagation")
-enum EntityImpact {
+union EntityImpact {
+  string,
+
   @doc("Standard impact")
-  Standard,
+  Standard: "Standard",
 
   @doc("Limited impact")
-  Limited,
+  Limited: "Limited",
 
   @doc("Suppressed impact")
-  Suppressed,
+  Suppressed: "Suppressed",
 }
 
 @doc("Health state of an entity")
-enum HealthState {
+union HealthState {
+  string,
+
   @doc("Healthy status")
-  Healthy,
+  Healthy: "Healthy",
 
   @doc("Degraded status")
-  Degraded,
+  Degraded: "Degraded",
 
   @doc("Error status (Unhealthy)")
-  Error,
+  Error: "Error",
+
+  @doc("Unknown status")
+  Unknown: "Unknown",
+
+  @doc("Deleted status")
+  Deleted: "Deleted",
 }
 
 @doc("Visual position of the entity")
@@ -537,14 +538,14 @@ model EntityCoordinates {
 }
 
 scalar LogAnalyticsWorkspaceResourceId
-  extends ResourceIdentifier<[
+  extends armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces",
     }
   ]>;
 
 scalar AzureMonitorWorkspaceResourceId
-  extends ResourceIdentifier<[
+  extends armResourceIdentifier<[
     {
       type: "Microsoft.Monitor/accounts",
     }
@@ -566,6 +567,11 @@ model RelationshipProperties {
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
 
+  @doc("Display name")
+  @minLength(1)
+  @maxLength(100)
+  displayName?: string;
+
   @doc("Resource name of the parent entity")
   @visibility("create", "read") // this cannot be changed
   parentEntityName: stringResourceName;
@@ -574,6 +580,7 @@ model RelationshipProperties {
   @visibility("create", "read") // this cannot be changed
   childEntityName: stringResourceName;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
   @doc("Optional set of labels (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
@@ -615,9 +622,6 @@ model DiscoveryRuleProperties {
   @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
   authenticationSetting: stringResourceName;
 
-  @doc("Whether to create an entity for the discovery rule itself. If set, all discovered entities will be children of this entity.")
-  showEntity: DiscoveryRuleShowEntityBehavior;
-
   @doc("Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted.")
   discoverRelationships: DiscoveryRuleRelationshipDiscoveryBehavior;
 
@@ -637,31 +641,26 @@ model DiscoveryRuleProperties {
   numberOfDiscoveredEntities?: int32;
 }
 
-@doc("Discovery rule show entity behavior")
-enum DiscoveryRuleShowEntityBehavior {
-  @doc("Create an entity for the discovery rule itself")
-  Enabled,
-
-  @doc("Do not create entity for discovery rule")
-  Disabled,
-}
-
 @doc("Discovery rule relationship discovery behavior")
-enum DiscoveryRuleRelationshipDiscoveryBehavior {
+union DiscoveryRuleRelationshipDiscoveryBehavior {
+  string,
+
   @doc("Automatically attempt to discover relationships")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Do not automatically attempt to discover relationships")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("Discovery rule recommended signal behavior")
-enum DiscoveryRuleRecommendedSignalsBehavior {
+union DiscoveryRuleRecommendedSignalsBehavior {
+  string,
+
   @doc("Automatically add recommended signals")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Do not automatically add recommended signals")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 alias TimestampQueryParam = {
@@ -670,7 +669,7 @@ alias TimestampQueryParam = {
   timestamp?: utcDateTime;
 };
 
-@armResourceOperations
+@armResourceOperations(HealthModel)
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
   create is ArmResourceCreateOrUpdateAsync<HealthModel>;
@@ -680,7 +679,7 @@ interface HealthModels {
   listBySubscription is ArmListBySubscription<HealthModel>;
 }
 
-@armResourceOperations
+@armResourceOperations(SignalDefinition)
 interface SignalDefinitions {
   get is ArmResourceRead<SignalDefinition>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<SignalDefinition>;
@@ -688,11 +687,12 @@ interface SignalDefinitions {
 
   listByParent is ArmResourceListByParent<
     SignalDefinition,
-    BaseParameters<SignalDefinition> & TimestampQueryParam
+    Azure.ResourceManager.Foundations.BaseParameters<SignalDefinition> &
+      TimestampQueryParam
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(AuthenticationSetting)
 interface AuthenticationSettings {
   get is ArmResourceRead<AuthenticationSetting>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<AuthenticationSetting>;
@@ -701,7 +701,7 @@ interface AuthenticationSettings {
   listByParent is ArmResourceListByParent<AuthenticationSetting>;
 }
 
-@armResourceOperations
+@armResourceOperations(Entity)
 interface Entities {
   get is ArmResourceRead<Entity>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Entity>;
@@ -709,11 +709,12 @@ interface Entities {
 
   listByParent is ArmResourceListByParent<
     Entity,
-    BaseParameters<Entity> & TimestampQueryParam
+    Azure.ResourceManager.Foundations.BaseParameters<Entity> &
+      TimestampQueryParam
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(Relationship)
 interface Relationships {
   get is ArmResourceRead<Relationship>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<Relationship>;
@@ -721,11 +722,12 @@ interface Relationships {
 
   listByParent is ArmResourceListByParent<
     Relationship,
-    BaseParameters<Relationship> & TimestampQueryParam
+    Azure.ResourceManager.Foundations.BaseParameters<Relationship> &
+      TimestampQueryParam
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(DiscoveryRule)
 interface DiscoveryRules {
   get is ArmResourceRead<DiscoveryRule>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<DiscoveryRule>;
@@ -733,6 +735,7 @@ interface DiscoveryRules {
 
   listByParent is ArmResourceListByParent<
     DiscoveryRule,
-    BaseParameters<DiscoveryRule> & TimestampQueryParam
+    Azure.ResourceManager.Foundations.BaseParameters<DiscoveryRule> &
+      TimestampQueryParam
   >;
 }

@@ -27,19 +27,21 @@
           "tag3": "value3"
         },
         "properties": {
-          "connectorType": "KinesisSource",
-          "connectorDirection": "Source",
-          "eventHubConfig": {
-            "namespaceHostName": "ns",
-            "eventHubName": "eh"
+          "connectorProperties": {
+            "connectorType": "KinesisSource",
+            "connectorDirection": "Source",
+            "eventHubConfig": {
+              "namespaceHostName": "ns",
+              "eventHubName": "eh"
+            },
+            "maxTasks": 1,
+            "valueConverter": "JsonConverter",
+            "awsAccessKeyId": "awsAccessKeyId1",
+            "awsKinesisRegion": "global",
+            "awsKinesisStreamName": "streamName1",
+            "connectorState": "Running"
           },
-          "maxTasks": 1,
-          "valueConverter": "JsonConverter",
-          "awsAccessKeyId": "awsAccessKeyId1",
-          "awsKinesisRegion": "global",
-          "awsKinesisStreamName": "streamName1",
-          "provisioningState": "Succeeded",
-          "connectorState": "Running"
+          "provisioningState": "Succeeded"
         }
       }
     }

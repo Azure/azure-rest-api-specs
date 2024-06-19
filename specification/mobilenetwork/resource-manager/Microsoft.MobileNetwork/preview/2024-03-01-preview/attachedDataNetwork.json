@@ -192,6 +192,9 @@
         "x-ms-examples": {
           "Create attached data network": {
             "$ref": "./examples/AttachedDataNetworkCreate.json"
+          },
+          "Create attached data network, using Edge Virtual Network Subnets": {
+            "$ref": "./examples/AttachedDataNetworkCreateWithEdgeSubnets.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -356,7 +359,7 @@
           },
           "minItems": 1,
           "uniqueItems": true,
-          "description": "The user equipment (UE) address pool prefixes for the attached data network from which the packet core instance will dynamically assign IP addresses to UEs.\nThe packet core instance assigns an IP address to a UE when the UE sets up a PDU session.\n You must define at least one of userEquipmentAddressPoolPrefix and userEquipmentStaticAddressPoolPrefix. If you define both, they must be of the same size."
+          "description": "The user equipment (UE) address pool prefixes for the attached data network from which the packet core instance will dynamically assign IP addresses to UEs.\nThe packet core instance assigns an IP address to a UE when the UE sets up a PDU session.\nYou must define either userEquipmentAddressPools, or at least one of userEquipmentAddressPoolPrefix or userEquipmentStaticAddressPoolPrefix. If you define more than one, they must be of the same size."
         },
         "userEquipmentStaticAddressPoolPrefix": {
           "type": "array",
@@ -365,7 +368,17 @@
           },
           "minItems": 1,
           "uniqueItems": true,
-          "description": "The user equipment (UE) address pool prefixes for the attached data network from which the packet core instance will assign static IP addresses to UEs.\nThe packet core instance assigns an IP address to a UE when the UE sets up a PDU session. The static IP address for a specific UE is set in StaticIPConfiguration on the corresponding SIM resource.\nAt least one of userEquipmentAddressPoolPrefix and userEquipmentStaticAddressPoolPrefix must be defined. If both are defined, they must be of the same size."
+          "description": "The user equipment (UE) address pool prefixes for the attached data network from which the packet core instance will assign static IP addresses to UEs.\nThe packet core instance assigns an IP address to a UE when the UE sets up a PDU session. The static IP address for a specific UE is set in StaticIPConfiguration on the corresponding SIM resource.\nYou must define either userEquipmentAddressPools, or at least one of userEquipmentAddressPoolPrefix or userEquipmentStaticAddressPoolPrefix. If you define more than one, they must be of the same size."
+        },
+        "userEquipmentAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/UserEquipmentAddressPool"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "x-ms-identifiers": [],
+          "description": "The user equipment (UE) address pool prefixes for the attached data network from which the packet core instance will assign IP addresses to UEs. Can contain either static or dynamic UE IP Pools.\nThe packet core instance assigns an IP address to a UE when the UE sets up a PDU session. For a static UE IP Pool, the static IP address for a specific UE is set in StaticIPConfiguration on the corresponding SIM resource.\nYou must define either userEquipmentAddressPools, or at least one of userEquipmentAddressPoolPrefix or userEquipmentStaticAddressPoolPrefix. If you define more than one, they must be of the same size."
         }
       },
       "required": [
