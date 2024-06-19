@@ -11,33 +11,33 @@ namespace DocumentTranslation;
 @doc("Document Translate Request Content")
 model DocumentTranslateContent {
   @doc("""
-  Specifies source language of the input document.
-  If this parameter isn't specified, automatic language detection is applied to determine the source language.
-  For example if the source document is written in English, then use sourceLanguage=en
-  """)
+    Specifies source language of the input document.
+    If this parameter isn't specified, automatic language detection is applied to determine the source language.
+    For example if the source document is written in English, then use sourceLanguage=en
+    """)
   @query("sourceLanguage")
   sourceLanguage?: string;
 
   @doc("""
-  Specifies the language of the output document.
-  The target language must be one of the supported languages included in the translation scope.
-  For example if you want to translate the document in German language, then use targetLanguage=de 
-  """)
+    Specifies the language of the output document.
+    The target language must be one of the supported languages included in the translation scope.
+    For example if you want to translate the document in German language, then use targetLanguage=de 
+    """)
   @query("targetLanguage")
   targetLanguage: string;
 
   @doc("""
-  A string specifying the category (domain) of the translation. This parameter is used to get translations 
-  from a customized system built with Custom Translator. Add the Category ID from your Custom Translator 
-  project details to this parameter to use your deployed customized system. Default value is: general.
-  """)
+    A string specifying the category (domain) of the translation. This parameter is used to get translations 
+    from a customized system built with Custom Translator. Add the Category ID from your Custom Translator 
+    project details to this parameter to use your deployed customized system. Default value is: general.
+    """)
   @query("category")
   category?: string = "general";
 
   @doc("""
-  Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
-  Possible values are: true (default) or false.
-  """)
+    Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
+    Possible values are: true (default) or false.
+    """)
   @query("allowFallback")
   allowFallback?: boolean;
 
@@ -84,10 +84,10 @@ union StorageSource {
 
 @doc("List of possible additional output formats")
 union AdditionalOutputFileFormat {
-  /** No additional format */
+  @doc("No additional format")
   None: "None",
 
-  /** OpenXmlWord format */
+  @doc("OpenXmlWord format")
   OpenXmlWord: "OpenXmlWord",
 
   string,
@@ -183,9 +183,9 @@ model SourceInput {
   filter?: DocumentFilter;
 
   @doc("""
-Language code
-If none is specified, we will perform auto detect on the document
-""")
+    Language code
+    If none is specified, we will perform auto detect on the document
+    """)
   language?: string;
 
   @doc("Storage Source")
@@ -195,18 +195,18 @@ If none is specified, we will perform auto detect on the document
 @doc("Document filter")
 model DocumentFilter {
   @doc("""
-A case-sensitive prefix string to filter documents in the source path for
-translation. 
-For example, when using a Azure storage blob Uri, use the prefix
-to restrict sub folders for translation.
-""")
+    A case-sensitive prefix string to filter documents in the source path for
+    translation. 
+    For example, when using a Azure storage blob Uri, use the prefix
+    to restrict sub folders for translation.
+    """)
   prefix?: string;
 
   @doc("""
-A case-sensitive suffix string to filter documents in the source path for
-translation. 
-This is most often use for file extensions
-""")
+    A case-sensitive suffix string to filter documents in the source path for
+    translation. 
+    This is most often use for file extensions
+    """)
   suffix?: string;
 }
 
@@ -231,13 +231,13 @@ model TargetInput {
 @doc("Glossary / translation memory for the request")
 model Glossary {
   @doc("""
-Location of the glossary. 
-We will use the file extension to extract the
-formatting if the format parameter is not supplied.
-
-If the translation
-language pair is not present in the glossary, it will not be applied
-""")
+    Location of the glossary. 
+    We will use the file extension to extract the
+    formatting if the format parameter is not supplied.
+    
+    If the translation
+    language pair is not present in the glossary, it will not be applied
+    """)
   glossaryUrl: string;
 
   @doc("Format")
@@ -251,26 +251,26 @@ language pair is not present in the glossary, it will not be applied
 }
 
 @doc("""
-Contains unified error information used for HTTP responses across any Cognitive
-Service. Instances
-can be created either through
-Microsoft.CloudAI.Containers.HttpStatusExceptionV2 or by returning it directly
-from
-a controller.
-""")
+  Contains unified error information used for HTTP responses across any Cognitive
+  Service. Instances
+  can be created either through
+  Microsoft.CloudAI.Containers.HttpStatusExceptionV2 or by returning it directly
+  from
+  a controller.
+  """)
 @error
 model TranslationErrorResponse {
   @doc("""
-This contains an outer error with error code, message, details, target and an
-inner error with more descriptive details.
-""")
+    This contains an outer error with error code, message, details, target and an
+    inner error with more descriptive details.
+    """)
   error?: TranslationError;
 }
 
 @doc("""
-This contains an outer error with error code, message, details, target and an
-inner error with more descriptive details.
-""")
+  This contains an outer error with error code, message, details, target and an
+  inner error with more descriptive details.
+  """)
 model TranslationError {
   @doc("Enums containing high level error codes.")
   code: TranslationErrorCode;
@@ -279,32 +279,32 @@ model TranslationError {
   message: string;
 
   @doc("""
-Gets the source of the error. 
-For example it would be \"documents\" or
-\"document id\" in case of invalid document.
-""")
+    Gets the source of the error. 
+    For example it would be \"documents\" or
+    \"document id\" in case of invalid document.
+    """)
   @visibility("read")
   target?: string;
 
   @doc("""
-New Inner Error format which conforms to Cognitive Services API Guidelines
-which is available at
-https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-This
-contains required properties ErrorCode, message and optional properties target,
-details(key value pair), inner error(this can be nested).
-""")
+    New Inner Error format which conforms to Cognitive Services API Guidelines
+    which is available at
+    https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+    This
+    contains required properties ErrorCode, message and optional properties target,
+    details(key value pair), inner error(this can be nested).
+    """)
   innerError?: InnerTranslationError;
 }
 
 @doc("""
-New Inner Error format which conforms to Cognitive Services API Guidelines
-which is available at
-https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-This
-contains required properties ErrorCode, message and optional properties target,
-details(key value pair), inner error(this can be nested).
-""")
+  New Inner Error format which conforms to Cognitive Services API Guidelines
+  which is available at
+  https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+  This
+  contains required properties ErrorCode, message and optional properties target,
+  details(key value pair), inner error(this can be nested).
+  """)
 model InnerTranslationError {
   @doc("Gets code error string.")
   code: string;
@@ -313,21 +313,21 @@ model InnerTranslationError {
   message: string;
 
   @doc("""
-Gets the source of the error. 
-For example it would be \"documents\" or
-\"document id\" in case of invalid document.
-""")
+    Gets the source of the error. 
+    For example it would be \"documents\" or
+    \"document id\" in case of invalid document.
+    """)
   @visibility("read")
   target?: string;
 
   @doc("""
-New Inner Error format which conforms to Cognitive Services API Guidelines
-which is available at
-https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
-This
-contains required properties ErrorCode, message and optional properties target,
-details(key value pair), inner error(this can be nested).
-""")
+    New Inner Error format which conforms to Cognitive Services API Guidelines
+    which is available at
+    https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.
+    This
+    contains required properties ErrorCode, message and optional properties target,
+    details(key value pair), inner error(this can be nested).
+    """)
   innerError?: InnerTranslationError;
 }
 
@@ -360,9 +360,9 @@ model TranslationStatus {
   status: Status;
 
   @doc("""
-This contains an outer error with error code, message, details, target and an
-inner error with more descriptive details.
-""")
+    This contains an outer error with error code, message, details, target and an
+    inner error with more descriptive details.
+    """)
   error?: TranslationError;
 
   @doc("Status Summary")
@@ -416,9 +416,9 @@ model DocumentStatus {
   to: string;
 
   @doc("""
-This contains an outer error with error code, message, details, target and an
-inner error with more descriptive details.
-""")
+    This contains an outer error with error code, message, details, target and an
+    inner error with more descriptive details.
+    """)
   error?: TranslationError;
 
   @doc("Progress of the translation if available")

@@ -33,8 +33,13 @@ interface LogicalNetworks {
   @doc("The operation to get a logical network.")
   get is ArmResourceRead<LogicalNetwork>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a logical network. Please note some properties can be set only during logical network creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<LogicalNetwork>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    LogicalNetwork,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("The operation to update a logical network.")
   @parameterVisibility
