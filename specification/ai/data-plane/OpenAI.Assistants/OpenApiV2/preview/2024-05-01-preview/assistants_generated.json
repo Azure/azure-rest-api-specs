@@ -165,6 +165,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a list of assistants.": {
+            "$ref": "./examples/list_assistants.json"
+          }
         }
       },
       "post": {
@@ -189,7 +194,7 @@
           }
         },
         "x-ms-examples": {
-          "Assistants_CreateAssistant": {
+          "Create an assistant with a model and instructions.": {
             "$ref": "./examples/create_assistant.json"
           }
         }
@@ -260,6 +265,11 @@
             "schema": {
               "$ref": "#/definitions/AssistantDeletionStatus"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an assistant.": {
+            "$ref": "./examples/delete_assistant.json"
           }
         }
       }
@@ -514,6 +524,11 @@
               "$ref": "#/definitions/AssistantThread"
             }
           }
+        },
+        "x-ms-examples": {
+          "Creates a thread.": {
+            "$ref": "./examples/create_thread.json"
+          }
         }
       }
     },
@@ -582,6 +597,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadDeletionStatus"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a thread.": {
+            "$ref": "./examples/delete_thread.json"
           }
         }
       }
@@ -706,6 +726,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "List Messages": {
+            "$ref": "./examples/list_messages.json"
+          }
         }
       },
       "post": {
@@ -736,6 +761,11 @@
               "$ref": "#/definitions/ThreadMessage"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create a message.": {
+            "$ref": "./examples/create_message.json"
+          }
         }
       }
     },
@@ -765,6 +795,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadMessage"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a message.": {
+            "$ref": "./examples/get_message.json"
           }
         }
       },
@@ -928,6 +963,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a list of runs belonging to a thread.": {
+            "$ref": "./examples/list_runs.json"
+          }
         }
       },
       "post": {
@@ -958,6 +998,11 @@
               "$ref": "#/definitions/ThreadRun"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create a run.": {
+            "$ref": "./examples/create_run.json"
+          }
         }
       }
     },
@@ -987,6 +1032,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a run.": {
+            "$ref": "./examples/get_run.json"
           }
         }
       },
@@ -1063,6 +1113,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancels a run that is `in_progress`.\n": {
+            "$ref": "./examples/cancel_run.json"
           }
         }
       }
@@ -1187,6 +1242,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a list of run steps belonging to a run.": {
+            "$ref": "./examples/list_run_steps.json"
+          }
         }
       }
     },
@@ -1223,6 +1283,11 @@
             "schema": {
               "$ref": "#/definitions/RunStep"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a run step.": {
+            "$ref": "./examples/get_run_step.json"
           }
         }
       }
@@ -1281,6 +1346,11 @@
               "$ref": "#/definitions/ThreadRun"
             }
           }
+        },
+        "x-ms-examples": {
+          "When a run has the `status: \"requires_action\"` and `required_action.type` is `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.\n": {
+            "$ref": "./examples/submit_tool_outputs_to_run.json"
+          }
         }
       }
     },
@@ -1304,6 +1374,11 @@
             "schema": {
               "$ref": "#/definitions/ThreadRun"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a thread and run it in one request.": {
+            "$ref": "./examples/create_thread_and_run.json"
           }
         }
       }
@@ -1414,6 +1489,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a list of vector stores.": {
+            "$ref": "./examples/list_vector_stores.json"
+          }
         }
       },
       "post": {
@@ -1435,6 +1515,11 @@
             "schema": {
               "$ref": "#/definitions/VectorStore"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a vector store.": {
+            "$ref": "./examples/create_vector_store.json"
           }
         }
       }
@@ -1488,6 +1573,11 @@
               "$ref": "#/definitions/VectorStore"
             }
           }
+        },
+        "x-ms-examples": {
+          "Modifies a vector store.": {
+            "$ref": "./examples/modify_vector_store.json"
+          }
         }
       },
       "delete": {
@@ -1508,6 +1598,11 @@
             "schema": {
               "$ref": "#/definitions/VectorStoreDeletionStatus"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a vector store.": {
+            "$ref": "./examples/delete_vector_store.json"
           }
         }
       }
@@ -1554,6 +1649,11 @@
             "schema": {
               "$ref": "#/definitions/VectorStoreFileBatch"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a vector store file batch.": {
+            "$ref": "./examples/create_vector_store_file_batch.json"
           }
         }
       }
@@ -1614,6 +1714,11 @@
             "schema": {
               "$ref": "#/definitions/VectorStoreFileBatch"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.": {
+            "$ref": "./examples/cancel_vector_store_file_batch.json"
           }
         }
       }
@@ -1932,6 +2037,11 @@
               ]
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a list of vector store files.": {
+            "$ref": "./examples/list_vector_store_files.json"
+          }
         }
       },
       "post": {
@@ -1970,6 +2080,11 @@
             "schema": {
               "$ref": "#/definitions/VectorStoreFile"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a vector store file by attaching a File to a vector store.": {
+            "$ref": "./examples/create_vector_store_file.json"
           }
         }
       }
@@ -2028,6 +2143,11 @@
             "schema": {
               "$ref": "#/definitions/VectorStoreFileDeletionStatus"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the delete file endpoint.": {
+            "$ref": "./examples/delete_vector_store_file.json"
           }
         }
       }
