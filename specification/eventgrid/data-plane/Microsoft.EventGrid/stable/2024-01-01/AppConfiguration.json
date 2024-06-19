@@ -1,0 +1,91 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-01",
+    "title": "Schema of AppConfiguration events published to Azure Event Grid",
+    "description": "Describes the schema of the AppConfiguration events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "AppConfigurationKeyValueDeletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key used to identify the key-value that was deleted."
+        },
+        "label": {
+          "type": "string",
+          "description": "The label, if any, used to identify the key-value that was deleted."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag representing the key-value that was deleted."
+        },
+        "syncToken": {
+          "type": "string",
+          "description": "The sync token representing the server state after the event."
+        }
+      }
+    },
+    "AppConfigurationKeyValueModifiedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key used to identify the key-value that was modified."
+        },
+        "label": {
+          "type": "string",
+          "description": "The label, if any, used to identify the key-value that was modified."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag representing the new state of the key-value."
+        },
+        "syncToken": {
+          "type": "string",
+          "description": "The sync token representing the server state after the event."
+        }
+      }
+    },
+    "AppConfigurationSnapshotCreatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotCreated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AppConfigurationSnapshotEventData"
+        }
+      ]
+    },
+    "AppConfigurationSnapshotEventData": {
+      "type": "object",
+      "description": "Schema of common properties of snapshot events",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the snapshot."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag representing the new state of the snapshot."
+        },
+        "syncToken": {
+          "type": "string",
+          "description": "The sync token representing the server state after the event."
+        }
+      }
+    },
+    "AppConfigurationSnapshotModifiedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.SnapshotModified event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AppConfigurationSnapshotEventData"
+        }
+      ]
+    }
+  }
+}

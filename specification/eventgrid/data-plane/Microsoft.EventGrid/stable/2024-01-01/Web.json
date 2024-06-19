@@ -1,0 +1,685 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-01",
+    "title": "Schema of Web events published to Azure Event Grid",
+    "description": "Describes the schema of the Web events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "AppAction": {
+      "type": "string",
+      "description": "Type of action of the operation",
+      "enum": [
+        "Restarted",
+        "Stopped",
+        "ChangedAppSettings",
+        "Started",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AppAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Restarted",
+            "value": "Restarted",
+            "description": "Web app was restarted."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "Web app was stopped."
+          },
+          {
+            "name": "ChangedAppSettings",
+            "value": "ChangedAppSettings",
+            "description": "There was an operation to change app setting on the web app."
+          },
+          {
+            "name": "Started",
+            "value": "Started",
+            "description": "The job has started."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The job has completed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The job has failed to complete."
+          }
+        ]
+      }
+    },
+    "AppEventTypeDetail": {
+      "type": "object",
+      "description": "Detail of action on the app.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/Web.AppAction",
+          "description": "Type of action of the operation."
+        }
+      },
+      "required": [
+        "action"
+      ]
+    },
+    "AppServicePlanAction": {
+      "type": "string",
+      "description": "Type of action on the app service plan.",
+      "enum": [
+        "Updated"
+      ],
+      "x-ms-enum": {
+        "name": "AppServicePlanAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Updated",
+            "value": "Updated",
+            "description": "App Service plan is being updated."
+          }
+        ]
+      }
+    },
+    "AppServicePlanEventTypeDetail": {
+      "type": "object",
+      "description": "Detail of action on the app service plan.",
+      "properties": {
+        "stampKind": {
+          "$ref": "#/definitions/Web.StampKind",
+          "description": "Kind of environment where app service plan is."
+        },
+        "action": {
+          "$ref": "#/definitions/Web.AppServicePlanAction",
+          "description": "Type of action on the app service plan."
+        },
+        "status": {
+          "$ref": "#/definitions/Web.AsyncStatus",
+          "description": "Asynchronous operation status of the operation on the app service plan."
+        }
+      },
+      "required": [
+        "stampKind",
+        "action",
+        "status"
+      ]
+    },
+    "AsyncStatus": {
+      "type": "string",
+      "description": "Asynchronous operation status of the operation on the app service plan.",
+      "enum": [
+        "Started",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AsyncStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Started",
+            "value": "Started",
+            "description": "Async operation has started."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Async operation has completed."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Async operation failed to complete."
+          }
+        ]
+      }
+    },
+    "StampKind": {
+      "type": "string",
+      "description": "Kind of environment where app service plan is.",
+      "enum": [
+        "Public",
+        "AseV1",
+        "AseV2"
+      ],
+      "x-ms-enum": {
+        "name": "StampKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "Public",
+            "description": "App Service Plan is running on a public stamp."
+          },
+          {
+            "name": "AseV1",
+            "value": "AseV1",
+            "description": "App Service Plan is running on an App Service Environment V1."
+          },
+          {
+            "name": "AseV2",
+            "value": "AseV2",
+            "description": "App Service Plan is running on an App Service Environment V2."
+          }
+        ]
+      }
+    },
+    "WebAppServicePlanUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppServicePlanUpdated event.",
+      "properties": {
+        "appServicePlanEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppServicePlanEventTypeDetail",
+          "description": "Detail of action on the app service plan."
+        },
+        "sku": {
+          "$ref": "#/definitions/Web.WebAppServicePlanUpdatedEventDataSku",
+          "description": "sku of app service plan."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the app service plan that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the app service plan API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the app service plan API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the app service plan API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appServicePlanEventTypeDetail",
+        "sku"
+      ]
+    },
+    "WebAppServicePlanUpdatedEventDataSku": {
+      "type": "object",
+      "description": "sku of app service plan.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of app service plan sku."
+        },
+        "Tier": {
+          "type": "string",
+          "description": "tier of app service plan sku."
+        },
+        "Size": {
+          "type": "string",
+          "description": "size of app service plan sku."
+        },
+        "Family": {
+          "type": "string",
+          "description": "family of app service plan sku."
+        },
+        "Capacity": {
+          "type": "string",
+          "description": "capacity of app service plan sku."
+        }
+      }
+    },
+    "WebAppUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.AppUpdated event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebBackupOperationCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationCompleted event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebBackupOperationFailedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationFailed event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebBackupOperationStartedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.BackupOperationStarted event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebRestoreOperationCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationCompleted event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebRestoreOperationFailedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationFailed event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebRestoreOperationStartedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.RestoreOperationStarted event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebSlotSwapCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapCompleted event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebSlotSwapFailedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapFailed event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebSlotSwapStartedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapStarted event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebSlotSwapWithPreviewCancelledEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewCancelled event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    },
+    "WebSlotSwapWithPreviewStartedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Web.SlotSwapWithPreviewStarted event.",
+      "properties": {
+        "appEventTypeDetail": {
+          "$ref": "#/definitions/Web.AppEventTypeDetail",
+          "description": "Detail of action on the app."
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the web site that had this event."
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "The client request id generated by the app service for the site API operation that triggered this event."
+        },
+        "correlationRequestId": {
+          "type": "string",
+          "description": "The correlation request id generated by the app service for the site API operation that triggered this event."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "The request id generated by the app service for the site API operation that triggered this event."
+        },
+        "address": {
+          "type": "string",
+          "description": "HTTP request URL of this operation."
+        },
+        "verb": {
+          "type": "string",
+          "description": "HTTP verb of this operation."
+        }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
+    }
+  }
+}
