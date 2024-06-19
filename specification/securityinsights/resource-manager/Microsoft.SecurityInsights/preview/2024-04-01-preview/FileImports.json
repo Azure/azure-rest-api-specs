@@ -173,6 +173,12 @@
               "$ref": "#/definitions/FileImport"
             }
           },
+          "200" :{
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/FileImport"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -212,6 +218,11 @@
         "responses": {
           "202": {
             "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/FileImport"
             }
