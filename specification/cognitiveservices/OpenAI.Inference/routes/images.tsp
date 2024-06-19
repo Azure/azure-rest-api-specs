@@ -20,7 +20,7 @@ namespace Azure.OpenAI;
 @action("images/generations")
 op getImageGenerations is Azure.Core.ResourceAction<
   Deployment,
-  KeepModel<ImageGenerationOptions>,
+  BodyParameter<ImageGenerationOptions>,
   ImageGenerations
 >;
 
@@ -54,7 +54,7 @@ op getAzureBatchImageGenerationOperationStatus is RpcOperation<
   }
 )
 op beginAzureBatchImageGeneration is OaiLongRunningRpcOperation<
-  KeepModel<ImageGenerationOptions>,
+  BodyParameter<ImageGenerationOptions>,
   BatchImageGenerationOperationResponse,
   BatchImageGenerationOperationResponse
 >;

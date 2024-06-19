@@ -1623,7 +1623,7 @@ interface Discovery {
   @route("/search/query")
   @post
   query is Azure.Core.Foundations.Operation<
-    KeepModel<QueryOptions>,
+    BodyParameter<QueryOptions>,
     QueryResult,
     {},
     AtlasErrorResponse
@@ -1634,7 +1634,7 @@ interface Discovery {
   @route("/search/suggest")
   @post
   suggest is Azure.Core.Foundations.Operation<
-    KeepModel<SuggestOptions>,
+    BodyParameter<SuggestOptions>,
     SuggestResult,
     {},
     AtlasErrorResponse
@@ -1645,7 +1645,7 @@ interface Discovery {
   @route("/search/autocomplete")
   @post
   autoComplete is Azure.Core.Foundations.Operation<
-    KeepModel<AutoCompleteOptions>,
+    BodyParameter<AutoCompleteOptions>,
     AutoCompleteResult,
     {},
     AtlasErrorResponse

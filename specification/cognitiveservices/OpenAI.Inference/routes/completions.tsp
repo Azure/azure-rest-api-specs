@@ -23,7 +23,7 @@ namespace Azure.OpenAI;
 @action("completions") //@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<
   Deployment,
-  KeepModel<CompletionsOptions>,
+  BodyParameter<CompletionsOptions>,
   Completions
 >;
 

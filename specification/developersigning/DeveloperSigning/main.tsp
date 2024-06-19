@@ -68,7 +68,7 @@ interface CertificateProfileOperations {
   @pollingOperation(CertificateProfileOperations.getSigningStatus)
   sign is StandardResourceOperations.LongRunningResourceAction<
     CertificateProfileName,
-    KeepModel<SigningPayloadOptions>,
+    BodyParameter<SigningPayloadOptions>,
     SignResult,
     Foundations.ErrorResponse,
     SigningRequestHeadersTraits
@@ -188,7 +188,8 @@ model BytesBody<ContentType> {
   contentType: ContentType;
 }
 
-model KeepModel<T> {
+alias BodyParameter<T, name extends string = "body"> = {
+  @friendlyName(name)
   @bodyRoot body: T;
 }
 

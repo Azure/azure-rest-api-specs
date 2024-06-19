@@ -41,7 +41,7 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getAssetsExport is Operations.ResourceCollectionAction<
     AssetResource,
-    KeepModel<AssetsExportRequest>,
+    BodyParameter<AssetsExportRequest>,
     Task,
     AssetsExportTrait
   >;
@@ -61,7 +61,7 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getDeltaDetails is Operations.ResourceCollectionAction<
     AssetResource,
-    KeepModel<DeltaDetailsRequest>,
+    BodyParameter<DeltaDetailsRequest>,
     DeltaPageResult,
     DeltaDetailsTrait
   >;
@@ -71,7 +71,7 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getDeltaSummary is Operations.ResourceCollectionAction<
     AssetResource,
-    KeepModel<DeltaSummaryRequest>,
+    BodyParameter<DeltaSummaryRequest>,
     DeltaSummaryResult,
     {}
   >;
@@ -90,7 +90,7 @@ interface DataConnections {
   @action("validate")
   validateDataConnection is Operations.ResourceCollectionAction<
     DataConnection,
-    KeepModel<DataConnectionData>,
+    BodyParameter<DataConnectionData>,
     ValidateResult
   >;
   @doc("Retrieve a data connection with a given dataConnectionName.")
@@ -102,7 +102,7 @@ interface DataConnections {
   @put
   createOrReplaceDataConnection is Foundations.ResourceOperation<
     DataConnection,
-    KeepModel<DataConnectionData>,
+    BodyParameter<DataConnectionData>,
     DataConnection
   >;
 
@@ -122,7 +122,7 @@ interface DiscoveryGroups {
   @clientName("ValidateDiscoveryGroup", "csharp")
   validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
-    KeepModel<DiscoGroupData>,
+    BodyParameter<DiscoGroupData>,
     ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
@@ -149,7 +149,7 @@ interface DiscoveryGroups {
   @get
   @clientName("GetDiscoveryGroupRuns", "csharp")
   listRuns is Foundations.Operation<
-    KeepModel<DiscoGroupsListRunsParameter>,
+    BodyParameter<DiscoGroupsListRunsParameter>,
     DiscoRunPageResult
   >;
 
@@ -162,7 +162,7 @@ interface DiscoveryGroups {
   @Versioning.added(Versions.v2024_03_01_preview)
   getAssetChainSummary is Operations.ResourceCollectionAction<
     DiscoGroup,
-    KeepModel<AssetChainRequest>,
+    BodyParameter<AssetChainRequest>,
     AssetChainSummaryResult
   >;
 
@@ -171,7 +171,7 @@ interface DiscoveryGroups {
   @Versioning.added(Versions.v2024_03_01_preview)
   dismissAssetChain is Operations.ResourceCollectionAction<
     DiscoGroup,
-    KeepModel<AssetChainRequest>,
+    BodyParameter<AssetChainRequest>,
     Task
   >;
 }
@@ -203,7 +203,7 @@ interface Reports {
   @route("/reports/assets:getSnapshot")
   @post
   getSnapshot is Foundations.Operation<
-    KeepModel<ReportAssetSnapshotRequest>,
+    BodyParameter<ReportAssetSnapshotRequest>,
     ReportAssetSnapshotResult
   >;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -211,7 +211,7 @@ interface Reports {
   @route("/reports/assets:getSummary")
   @post
   getSummary is Foundations.Operation<
-    KeepModel<ReportAssetSummaryRequest>,
+    BodyParameter<ReportAssetSummaryRequest>,
     ReportAssetSummaryResult
   >;
 
@@ -221,7 +221,7 @@ interface Reports {
   @route("/reports/assets:getSnapshotExport")
   @post
   getSnapshotExport is Foundations.Operation<
-    KeepModel<ReportAssetSnapshotExportRequest>,
+    BodyParameter<ReportAssetSnapshotExportRequest>,
     Task
   >;
 }

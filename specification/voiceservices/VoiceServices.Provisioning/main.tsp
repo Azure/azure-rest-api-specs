@@ -781,7 +781,8 @@ model CountOfRecordsHeader {
   countOfRecords?: int32;
 }
 
-model KeepModel<T> {
+alias BodyParameter<T, name extends string = "body"> = {
+  @friendlyName(name)
   @bodyRoot body: T;
 }
 
@@ -847,7 +848,7 @@ interface Accounts {
   @doc("Create or update up to 100 Numbers on the specified account.")
   createOrUpdateNumbers is Operations.ResourceAction<
     AccountResource,
-    KeepModel<BatchNumbers>,
+    BodyParameter<BatchNumbers>,
     BatchNumbers
   >;
 
@@ -856,7 +857,7 @@ interface Accounts {
   @doc("Delete up to 100 Numbers on the specified account.")
   deleteNumbers is Operations.ResourceAction<
     AccountResource,
-    KeepModel<BatchNumbersDelete>,
+    BodyParameter<BatchNumbersDelete>,
     NoContentResponse
   >;
 
@@ -897,7 +898,7 @@ interface Accounts {
   @doc("Get a list of Teams Available Capabilities on the specified account.")
   getTeamsAvailableCapabilities is Operations.ResourceAction<
     AccountResource,
-    KeepModel<NumberIdentifiers>,
+    BodyParameter<NumberIdentifiers>,
     TeamsAvailableCapabilities
   >;
 

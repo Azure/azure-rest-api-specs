@@ -73,6 +73,8 @@ union ChatRole {
   tool: "tool",
 }
 
-model KeepModel<T> {
+alias BodyParameter<T, name extends string = "body"> = {
+  @friendlyName(name)
   @bodyRoot body: T;
 }
+
