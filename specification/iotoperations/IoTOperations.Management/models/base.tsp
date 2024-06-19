@@ -91,7 +91,6 @@ model DiagnosticsLogs {
   openTelemetryCollectorAddress?: string;
 }
 
-
 @doc("Diagnostic Metrics properties")
 model Metrics {
   @doc("The time used to determine if a metric is stale and drop from the metrics cache.")

@@ -73,7 +73,6 @@ model AdvancedSettings {
   internalCerts?: CertManagerCertOptions;
 }
 
-
 @doc("Cardinality properties")
 model Cardinality {
   @doc("The backend broker desired properties")
@@ -171,7 +170,6 @@ model Traces {
   @maxValue(100000)
   spanChannelCapacity?: int32 = 1000;
 }
-
 
 @doc("DiskBackedMessageBuffer properties")
 model DiskBackedMessageBuffer {
