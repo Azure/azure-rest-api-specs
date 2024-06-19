@@ -2629,6 +2629,9 @@
             "$ref": "./examples/VirtualMachines_RestrictMovement.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -4363,7 +4366,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkDhcpUpdate"
+              "$ref": "#/definitions/WorkloadNetworkDhcp"
             },
             "x-ms-client-name": "workloadNetworkDhcp"
           }
@@ -4685,7 +4688,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkDnsServiceUpdate"
+              "$ref": "#/definitions/WorkloadNetworkDnsService"
             },
             "x-ms-client-name": "workloadNetworkDnsService"
           }
@@ -4997,7 +5000,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkDnsZoneUpdate"
+              "$ref": "#/definitions/WorkloadNetworkDnsZone"
             },
             "x-ms-client-name": "workloadNetworkDnsZone"
           }
@@ -5414,7 +5417,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkPortMirroringUpdate"
+              "$ref": "#/definitions/WorkloadNetworkPortMirroring"
             },
             "x-ms-client-name": "workloadNetworkPortMirroring"
           }
@@ -5972,7 +5975,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkSegmentUpdate"
+              "$ref": "#/definitions/WorkloadNetworkSegment"
             },
             "x-ms-client-name": "workloadNetworkSegment"
           }
@@ -6402,7 +6405,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/WorkloadNetworkVMGroupUpdate"
+              "$ref": "#/definitions/WorkloadNetworkVMGroup"
             },
             "x-ms-client-name": "workloadNetworkVMGroup"
           }
@@ -6513,11 +6516,7 @@
         "properties": {
           "$ref": "#/definitions/AddonProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -6903,11 +6902,7 @@
         "properties": {
           "$ref": "#/definitions/CloudLinkProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -7037,11 +7032,7 @@
         "properties": {
           "$ref": "#/definitions/ClusterProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
@@ -7233,11 +7224,7 @@
         "properties": {
           "$ref": "#/definitions/DatastoreProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -7753,11 +7740,7 @@
         "properties": {
           "$ref": "#/definitions/ExpressRouteAuthorizationProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -7856,11 +7839,7 @@
         "properties": {
           "$ref": "#/definitions/GlobalReachConnectionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -7997,11 +7976,7 @@
         "properties": {
           "$ref": "#/definitions/HcxEnterpriseSiteProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -8198,11 +8173,7 @@
         "properties": {
           "$ref": "#/definitions/IscsiPathProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -8453,11 +8424,7 @@
         "properties": {
           "$ref": "#/definitions/PlacementPolicyProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -8692,11 +8659,7 @@
         "properties": {
           "$ref": "#/definitions/PrivateCloudProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
@@ -9078,11 +9041,7 @@
         "properties": {
           "$ref": "#/definitions/ScriptCmdletProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -9209,11 +9168,7 @@
         "properties": {
           "$ref": "#/definitions/ScriptExecutionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -9495,11 +9450,7 @@
         "properties": {
           "$ref": "#/definitions/ScriptPackageProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -9859,11 +9810,7 @@
         "properties": {
           "$ref": "#/definitions/VirtualMachineProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -10090,11 +10037,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadNetworkProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -10110,11 +10053,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadNetworkDhcpEntity",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -10147,29 +10086,6 @@
           "$ref": "#/definitions/WorkloadNetworkDhcpProvisioningState",
           "description": "The provisioning state",
           "readOnly": true
-        },
-        "revision": {
-          "type": "integer",
-          "format": "int64",
-          "description": "NSX revision number."
-        }
-      },
-      "discriminator": "dhcpType",
-      "required": [
-        "dhcpType"
-      ]
-    },
-    "WorkloadNetworkDhcpEntityUpdate": {
-      "type": "object",
-      "description": "Base class for WorkloadNetworkDhcpServer and WorkloadNetworkDhcpRelay to\ninherit from",
-      "properties": {
-        "dhcpType": {
-          "$ref": "#/definitions/DhcpTypeEnum",
-          "description": "Type of DHCP: SERVER or RELAY."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the DHCP entity."
         },
         "revision": {
           "type": "integer",
@@ -10273,27 +10189,6 @@
       ],
       "x-ms-discriminator-value": "RELAY"
     },
-    "WorkloadNetworkDhcpRelayUpdate": {
-      "type": "object",
-      "description": "NSX DHCP Relay",
-      "properties": {
-        "serverAddresses": {
-          "type": "array",
-          "description": "DHCP Relay Addresses. Max 3.",
-          "minItems": 1,
-          "maxItems": 3,
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/WorkloadNetworkDhcpEntityUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "RELAY"
-    },
     "WorkloadNetworkDhcpServer": {
       "type": "object",
       "description": "NSX DHCP Server",
@@ -10315,38 +10210,6 @@
       ],
       "x-ms-discriminator-value": "SERVER"
     },
-    "WorkloadNetworkDhcpServerUpdate": {
-      "type": "object",
-      "description": "NSX DHCP Server",
-      "properties": {
-        "serverAddress": {
-          "type": "string",
-          "description": "DHCP Server Address."
-        },
-        "leaseTime": {
-          "type": "integer",
-          "format": "int64",
-          "description": "DHCP Server Lease Time."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/WorkloadNetworkDhcpEntityUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "SERVER"
-    },
-    "WorkloadNetworkDhcpUpdate": {
-      "type": "object",
-      "description": "NSX DHCP update",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WorkloadNetworkDhcpEntityUpdate",
-          "description": "The updatable properties of a DHCP update",
-          "x-ms-client-flatten": false
-        }
-      }
-    },
     "WorkloadNetworkDnsService": {
       "type": "object",
       "description": "NSX DNS Service",
@@ -10354,11 +10217,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadNetworkDnsServiceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -10460,17 +10319,6 @@
       },
       "readOnly": true
     },
-    "WorkloadNetworkDnsServiceUpdate": {
-      "type": "object",
-      "description": "NSX DNS Service update",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WorkloadNetworkDnsServiceProperties",
-          "description": "The updatable properties of a DNS Service update",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "WorkloadNetworkDnsServicesList": {
       "type": "object",
       "description": "The response of a WorkloadNetworkDnsService list operation.",
@@ -10499,11 +10347,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadNetworkDnsZoneProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -10540,7 +10384,7 @@
         },
         "dnsServices": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Number of DNS Services using the DNS zone."
         },
         "provisioningState": {
@@ -10604,17 +10448,6 @@
       },
       "readOnly": true
     },
-    "WorkloadNetworkDnsZoneUpdate": {
-      "type": "object",
-      "description": "NSX DNS Zone update",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WorkloadNetworkDnsZoneProperties",
-          "description": "The updatable properties of a DNS Zone update",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "WorkloadNetworkDnsZonesList": {
       "type": "object",
       "description": "The response of a WorkloadNetworkDnsZone list operation.",
@@ -10643,11 +10476,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadNetworkGatewayProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -10725,11 +10554,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadNetworkPortMirroringProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -10845,17 +10670,6 @@
       },
       "readOnly": true
     },
-    "WorkloadNetworkPortMirroringUpdate": {
-      "type": "object",
-      "description": "NSX Port Mirroring update",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WorkloadNetworkPortMirroringProperties",
-          "description": "The updatable properties of a Port Mirroring update",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "WorkloadNetworkProperties": {
       "type": "object",
       "description": "The properties of a workload network",
@@ -10923,11 +10737,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadNetworkPublicIPProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -11038,11 +10848,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadNetworkSegmentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -11169,17 +10975,6 @@
         }
       }
     },
-    "WorkloadNetworkSegmentUpdate": {
-      "type": "object",
-      "description": "NSX Segment update",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WorkloadNetworkSegmentProperties",
-          "description": "The updatable properties of a Segment update",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "WorkloadNetworkSegmentsList": {
       "type": "object",
       "description": "The response of a WorkloadNetworkSegment list operation.",
@@ -11208,11 +11003,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadNetworkVMGroupProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -11302,17 +11093,6 @@
       },
       "readOnly": true
     },
-    "WorkloadNetworkVMGroupUpdate": {
-      "type": "object",
-      "description": "NSX VM Group update",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WorkloadNetworkVMGroupProperties",
-          "description": "The updatable properties of a VM Group update",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "WorkloadNetworkVMGroupsList": {
       "type": "object",
       "description": "The response of a WorkloadNetworkVMGroup list operation.",
@@ -11341,11 +11121,7 @@
         "properties": {
           "$ref": "#/definitions/WorkloadNetworkVirtualMachineProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

@@ -37,7 +37,12 @@ interface Products {
   /**
    * Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Product>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Product,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
