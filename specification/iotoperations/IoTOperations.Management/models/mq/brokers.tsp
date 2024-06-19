@@ -42,7 +42,7 @@ model BrokerProperties {
   cardinality?: Cardinality;
 
   @doc("Spec defines the desired identities of MQTT broker diagnostics settings.")
-  diagnostics?: Diagnostics;
+  diagnostics?: BrokerDiagnostics;
 
   @visibility("read", "create")
   @doc("Settings of Disk Backed Message Buffer.")
@@ -67,22 +67,12 @@ model AdvancedSettings {
   clients?: ClientConfig;
 
   @doc("The setting to enable or disable encryption of internal Traffic.")
-  encryptInternalTraffic?: Encrypt = Encrypt.Enabled;
+  encryptInternalTraffic?: Mode = Mode.Enabled;
 
   @doc("Certificate rotation and private key configuration.")
   internalCerts?: CertManagerCertOptions;
 }
 
-@doc("Encrypted properties")
-union Encrypt {
-  string,
-
-  @doc("Internal traffic encryption enabled.")
-  Enabled: "Enabled",
-
-  @doc("Internal traffic encryption disabled.")
-  Disabled: "Disabled",
-}
 
 @doc("Cardinality properties")
 model Cardinality {
@@ -125,9 +115,9 @@ model Frontend {
 }
 
 @doc("Broker Diagnostic Setting properties")
-model Diagnostics {
+model BrokerDiagnostics {
   @doc("The log settings of the broker.")
-  logs?: BrokerDiagnosticsLogs;
+  logs?: DiagnosticsLogs;
 
   @doc("The metrics properties.")
   metrics?: Metrics;
@@ -139,68 +129,10 @@ model Diagnostics {
   traces?: Traces;
 }
 
-@doc("Broker Diagnostic Log properties")
-model BrokerDiagnosticsLogs {
-  @doc("How often to export the logs to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  exportIntervalSeconds?: int32 = 30;
-
-  @doc("The level of logs to export.")
-  exportLogLevel?: string = "error";
-
-  @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
-  level?: string = "info";
-
-  @doc("The open telemetry collector endpoint to export to.")
-  openTelemetryCollectorAddress?: string;
-}
-
-@doc("Broker Diagnostic Metrics properties")
-model Metrics {
-  @doc("The time used to determine if a metric is stale and drop from the metrics cache.")
-  @minValue(60)
-  @maxValue(600)
-  stalenessTimeSeconds?: int32 = 600;
-
-  @doc("The toggle to enable/disable metrics.")
-  mode?: MetricsEnabled = MetricsEnabled.Enabled;
-
-  @doc("How often to export the metrics to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  exportIntervalSeconds?: int32 = 30;
-
-  @doc("The open telemetry collector endpoint to export to.")
-  openTelemetryCollectorAddress?: string;
-
-  @doc("The prometheus port to expose the metrics.")
-  @minValue(0)
-  @maxValue(65535)
-  prometheusPort?: int32 = 9600;
-
-  @doc("How often to refresh the metrics.")
-  @minValue(1)
-  @maxValue(60)
-  updateIntervalSeconds?: int32 = 30;
-}
-
-// metrics enabled and disabled mode
-@doc("MetricsEnabled properties")
-union MetricsEnabled {
-  string,
-
-  @doc("Metrics enabled.")
-  Enabled: "Enabled",
-
-  @doc("Metrics disabled.")
-  Disabled: "Disabled",
-}
-
 @doc("Broker Diagnostic Self check properties")
 model SelfCheck {
   @doc("The toggle to enable/disable self check.")
-  mode?: SelfCheckMode = SelfCheckMode.Enabled;
+  mode?: Mode = Mode.Enabled;
 
   @doc("The self check interval.")
   @minValue(30)
@@ -213,17 +145,6 @@ model SelfCheck {
   timeoutSeconds?: int32 = 15;
 }
 
-@doc("SelfCheckMode properties")
-union SelfCheckMode {
-  string,
-
-  @doc("Self check enabled.")
-  Enabled: "Enabled",
-
-  @doc("Self check disabled.")
-  Disabled: "Disabled",
-}
-
 @doc("Broker Diagnostic Trace properties")
 model Traces {
   @doc("The cache size in megabytes.")
@@ -232,7 +153,7 @@ model Traces {
   cacheSizeMegabytes?: int32 = 16;
 
   @doc("The toggle to enable/disable traces.")
-  mode?: TracesMode = TracesMode.Enabled;
+  mode?: Mode = Mode.Enabled;
 
   @doc("How often to export the metrics to the open telemetry collector.")
   @minValue(1)
@@ -243,7 +164,7 @@ model Traces {
   openTelemetryCollectorAddress?: string;
 
   @doc("The self tracing properties.")
-  selfTracing?: BrokerSelfTracing;
+  selfTracing?: SelfTracing;
 
   @doc("The span channel capacity.")
   @minValue(1000)
@@ -251,38 +172,6 @@ model Traces {
   spanChannelCapacity?: int32 = 1000;
 }
 
-@doc("TracesMode properties")
-union TracesMode {
-  string,
-
-  @doc("Traces enabled.")
-  Enabled: "Enabled",
-
-  @doc("Traces disabled.")
-  Disabled: "Disabled",
-}
-
-@doc("Broker Diagnostic Self tracing properties")
-model BrokerSelfTracing {
-  @doc("The toggle to enable/disable self tracing.")
-  mode?: SelfTracingMode = SelfTracingMode.Enabled;
-
-  @doc("The self tracing interval.")
-  @minValue(1)
-  @maxValue(300)
-  intervalSeconds?: int32 = 30;
-}
-
-@doc("SelfTracingMode properties")
-union SelfTracingMode {
-  string,
-
-  @doc("Self tracing enabled.")
-  Enabled: "Enabled",
-
-  @doc("Self tracing disabled.")
-  Disabled: "Disabled",
-}
 
 @doc("DiskBackedMessageBuffer properties")
 model DiskBackedMessageBuffer {
@@ -409,18 +298,7 @@ union OperatorValues {
 @doc("GenerateResourceLimits properties")
 model GenerateResourceLimits {
   @doc("The toggle to enable/disable cpu resource limits.")
-  cpu?: CpuState = CpuState.Enabled;
-}
-
-@doc("CpuState properties")
-union CpuState {
-  string,
-
-  @doc("CPU resource limits enabled.")
-  Enabled: "Enabled",
-
-  @doc("CPU resource limits disabled.")
-  Disabled: "Disabled",
+  cpu?: Mode = Mode.Enabled;
 }
 
 @doc("Cert Manager Cert properties")

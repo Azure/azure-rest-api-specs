@@ -3000,18 +3000,18 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Encrypt",
+            "name": "Mode",
             "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Internal traffic encryption enabled."
+                "description": "Enabled is equivalent to True"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Internal traffic encryption disabled."
+                "description": "Disabled is equivalent to False."
               }
             ]
           }
@@ -3035,18 +3035,18 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "CacheState",
+            "name": "Mode",
             "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Enable cache"
+                "description": "Enabled is equivalent to True"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Disable cache"
+                "description": "Disabled is equivalent to False."
               }
             ]
           }
@@ -3438,31 +3438,25 @@
         }
       }
     },
-    "BrokerDiagnosticsLogs": {
+    "BrokerDiagnostics": {
       "type": "object",
-      "description": "Broker Diagnostic Log properties",
+      "description": "Broker Diagnostic Setting properties",
       "properties": {
-        "exportIntervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often to export the logs to the open telemetry collector.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 300
+        "logs": {
+          "$ref": "#/definitions/DiagnosticsLogs",
+          "description": "The log settings of the broker."
         },
-        "exportLogLevel": {
-          "type": "string",
-          "description": "The level of logs to export.",
-          "default": "error"
+        "metrics": {
+          "$ref": "#/definitions/Metrics",
+          "description": "The metrics properties."
         },
-        "level": {
-          "type": "string",
-          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
-          "default": "info"
+        "selfCheck": {
+          "$ref": "#/definitions/SelfCheck",
+          "description": "The self check properties."
         },
-        "openTelemetryCollectorAddress": {
-          "type": "string",
-          "description": "The open telemetry collector endpoint to export to."
+        "traces": {
+          "$ref": "#/definitions/Traces",
+          "description": "The trace properties."
         }
       }
     },
@@ -3649,7 +3643,7 @@
           ]
         },
         "diagnostics": {
-          "$ref": "#/definitions/Diagnostics",
+          "$ref": "#/definitions/BrokerDiagnostics",
           "description": "Spec defines the desired identities of MQTT broker diagnostics settings."
         },
         "diskBackedMessageBuffer": {
@@ -3828,69 +3822,6 @@
         }
       }
     },
-    "BrokerSelfTracing": {
-      "type": "object",
-      "description": "Broker Diagnostic Self tracing properties",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "description": "The toggle to enable/disable self tracing.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "SelfTracingMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Self tracing enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Self tracing disabled."
-              }
-            ]
-          }
-        },
-        "intervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The self tracing interval.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 300
-        }
-      }
-    },
-    "CacheState": {
-      "type": "string",
-      "description": "CacheState properties",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "CacheState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enable cache"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disable cache"
-          }
-        ]
-      }
-    },
     "Cardinality": {
       "type": "object",
       "description": "Cardinality properties",
@@ -4041,30 +3972,6 @@
           "minimum": 0,
           "maximum": 65535
         }
-      }
-    },
-    "CpuState": {
-      "type": "string",
-      "description": "CpuState properties",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "CpuState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "CPU resource limits enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "CPU resource limits disabled."
-          }
-        ]
       }
     },
     "DataFlowBuiltInTransformation": {
@@ -4727,12 +4634,12 @@
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Mode is equivalent to True"
+                "description": "Enabled is equivalent to True"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Mode is equivalent to False."
+                "description": "Disabled is equivalent to False."
               }
             ]
           }
@@ -4854,12 +4761,12 @@
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Mode is equivalent to True"
+                "description": "Enabled is equivalent to True"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Mode is equivalent to False."
+                "description": "Disabled is equivalent to False."
               }
             ]
           }
@@ -5051,12 +4958,12 @@
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Mode is equivalent to True"
+                "description": "Enabled is equivalent to True"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Mode is equivalent to False."
+                "description": "Disabled is equivalent to False."
               }
             ]
           }
@@ -5287,12 +5194,12 @@
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Mode is equivalent to True"
+                "description": "Enabled is equivalent to True"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Mode is equivalent to False."
+                "description": "Disabled is equivalent to False."
               }
             ]
           }
@@ -5381,45 +5288,6 @@
         }
       }
     },
-    "DataFlowSelfTracing": {
-      "type": "object",
-      "description": "DataFlowProfile Diagnostics Traces SelfTracing properties",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "description": "The mode for selfTracing.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "Mode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Mode is equivalent to True"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Mode is equivalent to False."
-              }
-            ]
-          }
-        },
-        "intervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The self tracing interval.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 300
-        }
-      }
-    },
     "DataFlowSourceOperation": {
       "type": "object",
       "description": "DataFlow Source Operation properties",
@@ -5495,10 +5363,10 @@
     },
     "Diagnostics": {
       "type": "object",
-      "description": "Broker Diagnostic Setting properties",
+      "description": "Diagnostic Setting properties",
       "properties": {
         "logs": {
-          "$ref": "#/definitions/BrokerDiagnosticsLogs",
+          "$ref": "#/definitions/DiagnosticsLogs",
           "description": "The log settings of the broker."
         },
         "metrics": {
@@ -5515,70 +5383,31 @@
         }
       }
     },
-    "DiagnosticsMetrics": {
+    "DiagnosticsLogs": {
       "type": "object",
-      "description": "DataFlowProfile Diagnostics Metrics properties",
+      "description": "Diagnostic Log properties",
       "properties": {
-        "stalenessTimeSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The time used to determine if a metric is stale and drop from the metrics cache.",
-          "default": 600,
-          "minimum": 60,
-          "maximum": 600
-        },
-        "mode": {
-          "type": "string",
-          "description": "The mode for metrics.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "Mode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Mode is equivalent to True"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Mode is equivalent to False."
-              }
-            ]
-          }
-        },
         "exportIntervalSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "How often to export the metrics to the open telemetry collector.",
+          "description": "How often to export the logs to the open telemetry collector.",
           "default": 30,
           "minimum": 1,
           "maximum": 300
         },
+        "exportLogLevel": {
+          "type": "string",
+          "description": "The level of logs to export.",
+          "default": "error"
+        },
+        "level": {
+          "type": "string",
+          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
+          "default": "info"
+        },
         "openTelemetryCollectorAddress": {
           "type": "string",
           "description": "The open telemetry collector endpoint to export to."
-        },
-        "prometheusPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The prometheus port to expose the metrics.",
-          "default": 9600,
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "updateIntervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often to refresh the metrics.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 60
         }
       }
     },
@@ -5603,30 +5432,6 @@
       "required": [
         "maxSize"
       ]
-    },
-    "Encrypt": {
-      "type": "string",
-      "description": "Encrypted properties",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "Encrypt",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Internal traffic encryption enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Internal traffic encryption disabled."
-          }
-        ]
-      }
     },
     "ExtendedLocation": {
       "type": "object",
@@ -5701,18 +5506,18 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "CpuState",
+            "name": "Mode",
             "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "CPU resource limits enabled."
+                "description": "Enabled is equivalent to True"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "CPU resource limits disabled."
+                "description": "Disabled is equivalent to False."
               }
             ]
           }
@@ -5886,7 +5691,7 @@
     },
     "Metrics": {
       "type": "object",
-      "description": "Broker Diagnostic Metrics properties",
+      "description": "Diagnostic Metrics properties",
       "properties": {
         "stalenessTimeSeconds": {
           "type": "integer",
@@ -5905,18 +5710,18 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "MetricsEnabled",
+            "name": "Mode",
             "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Metrics enabled."
+                "description": "Enabled is equivalent to True"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Metrics disabled."
+                "description": "Disabled is equivalent to False."
               }
             ]
           }
@@ -5951,30 +5756,6 @@
         }
       }
     },
-    "MetricsEnabled": {
-      "type": "string",
-      "description": "MetricsEnabled properties",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "MetricsEnabled",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Metrics enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Metrics disabled."
-          }
-        ]
-      }
-    },
     "Mode": {
       "type": "string",
       "description": "Mode properties",
@@ -5989,12 +5770,12 @@
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "Mode is equivalent to True"
+            "description": "Enabled is equivalent to True"
           },
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "Mode is equivalent to False."
+            "description": "Disabled is equivalent to False."
           }
         ]
       }
@@ -6046,34 +5827,6 @@
           }
         ]
       }
-    },
-    "NodeTolerations": {
-      "type": "object",
-      "description": "Defines the Node Tolerations details",
-      "properties": {
-        "effect": {
-          "type": "string",
-          "description": "Toleration effect."
-        },
-        "key": {
-          "type": "string",
-          "description": "Toleration key."
-        },
-        "operator": {
-          "$ref": "#/definitions/TolerationOperator",
-          "description": "Toleration operator like 'Exists', 'Equal' etc."
-        },
-        "value": {
-          "type": "string",
-          "description": "Toleration Value."
-        }
-      },
-      "required": [
-        "effect",
-        "key",
-        "operator",
-        "value"
-      ]
     },
     "OperatorValues": {
       "type": "string",
@@ -6228,40 +5981,12 @@
       "description": "DataFlowProfile Diagnostics properties",
       "properties": {
         "logs": {
-          "$ref": "#/definitions/ProfileDiagnosticsLogs",
-          "description": "The log settings of the broker."
+          "$ref": "#/definitions/DiagnosticsLogs",
+          "description": "The log settings for the dataflow profile."
         },
         "metrics": {
-          "$ref": "#/definitions/DiagnosticsMetrics",
-          "description": "The metrics settings for the dataflow."
-        }
-      }
-    },
-    "ProfileDiagnosticsLogs": {
-      "type": "object",
-      "description": "Broker Diagnostic Log properties",
-      "properties": {
-        "exportIntervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often to export the logs to the open telemetry collector.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 300
-        },
-        "exportLogLevel": {
-          "type": "string",
-          "description": "The level of logs to export.",
-          "default": "error"
-        },
-        "level": {
-          "type": "string",
-          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
-          "default": "info"
-        },
-        "openTelemetryCollectorAddress": {
-          "type": "string",
-          "description": "The open telemetry collector endpoint to export to."
+          "$ref": "#/definitions/Metrics",
+          "description": "The metrics settings for the dataflow profile."
         }
       }
     },
@@ -6359,18 +6084,18 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "SelfCheckMode",
+            "name": "Mode",
             "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Self check enabled."
+                "description": "Enabled is equivalent to True"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Self check disabled."
+                "description": "Disabled is equivalent to False."
               }
             ]
           }
@@ -6393,52 +6118,43 @@
         }
       }
     },
-    "SelfCheckMode": {
-      "type": "string",
-      "description": "SelfCheckMode properties",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SelfCheckMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Self check enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Self check disabled."
+    "SelfTracing": {
+      "type": "object",
+      "description": "Diagnostic Self tracing properties",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "The toggle to enable/disable self tracing.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "Mode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled is equivalent to True"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled is equivalent to False."
+              }
+            ]
           }
-        ]
-      }
-    },
-    "SelfTracingMode": {
-      "type": "string",
-      "description": "SelfTracingMode properties",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SelfTracingMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Self tracing enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Self tracing disabled."
-          }
-        ]
+        },
+        "intervalSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The self tracing interval.",
+          "default": 30,
+          "minimum": 1,
+          "maximum": 300
+        }
       }
     },
     "SerializationFormat": {
@@ -6674,30 +6390,6 @@
         }
       }
     },
-    "TolerationOperator": {
-      "type": "string",
-      "description": "The enum defining type of TolerationOperator accepted.",
-      "enum": [
-        "Equal",
-        "Exists"
-      ],
-      "x-ms-enum": {
-        "name": "TolerationOperator",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Equal",
-            "value": "Equal",
-            "description": "Equal operator."
-          },
-          {
-            "name": "Exists",
-            "value": "Exists",
-            "description": "Exists operator."
-          }
-        ]
-      }
-    },
     "Traces": {
       "type": "object",
       "description": "Broker Diagnostic Trace properties",
@@ -6719,18 +6411,18 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "TracesMode",
+            "name": "Mode",
             "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "Traces enabled."
+                "description": "Enabled is equivalent to True"
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "Traces disabled."
+                "description": "Disabled is equivalent to False."
               }
             ]
           }
@@ -6748,7 +6440,7 @@
           "description": "The open telemetry collector endpoint to export to."
         },
         "selfTracing": {
-          "$ref": "#/definitions/BrokerSelfTracing",
+          "$ref": "#/definitions/SelfTracing",
           "description": "The self tracing properties."
         },
         "spanChannelCapacity": {
@@ -6759,30 +6451,6 @@
           "minimum": 1000,
           "maximum": 100000
         }
-      }
-    },
-    "TracesMode": {
-      "type": "string",
-      "description": "TracesMode properties",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "TracesMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Traces enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Traces disabled."
-          }
-        ]
       }
     },
     "VolumeClaimDataSource": {

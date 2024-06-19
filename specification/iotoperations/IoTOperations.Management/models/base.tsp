@@ -20,6 +20,7 @@ union ExtendedLocationType {
   @doc("CustomLocation type")
   "CustomLocation",
 }
+
 @doc("The enum defining status of resource.")
 union ProvisioningState {
   string,
@@ -38,30 +39,15 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-@doc("Defines the Node Tolerations details")
-model NodeTolerations {
-  @doc("Toleration effect.")
-  effect: string;
-
-  @doc("Toleration key.")
-  key: string;
-
-  @doc("Toleration operator like 'Exists', 'Equal' etc.")
-  operator: TolerationOperator;
-
-  @doc("Toleration Value.")
-  value: string;
-}
-
-@doc("The enum defining type of TolerationOperator accepted.")
-union TolerationOperator {
+@doc("Mode properties")
+union Mode {
   string,
 
-  @doc("Equal operator.")
-  Equal: "Equal",
+  @doc("Enabled is equivalent to True")
+  Enabled: "Enabled",
 
-  @doc("Exists operator.")
-  Exists: "Exists",
+  @doc("Disabled is equivalent to False.")
+  Disabled: "Disabled",
 }
 
 @doc("X509 Certificate Authentication properties.")
@@ -71,4 +57,76 @@ model X509ManualCertificate {
 
   @doc("Certificate K8S namespace. Omit to use current namespace.")
   secretNamespace?: string;
+}
+
+@doc("Diagnostic Setting properties")
+model Diagnostics {
+  @doc("The log settings of the broker.")
+  logs?: DiagnosticsLogs;
+
+  @doc("The metrics properties.")
+  metrics?: Metrics;
+
+  @doc("The self check properties.")
+  selfCheck?: SelfCheck;
+
+  @doc("The trace properties.")
+  traces?: Traces;
+}
+
+@doc("Diagnostic Log properties")
+model DiagnosticsLogs {
+  @doc("How often to export the logs to the open telemetry collector.")
+  @minValue(1)
+  @maxValue(300)
+  exportIntervalSeconds?: int32 = 30;
+
+  @doc("The level of logs to export.")
+  exportLogLevel?: string = "error";
+
+  @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
+  level?: string = "info";
+
+  @doc("The open telemetry collector endpoint to export to.")
+  openTelemetryCollectorAddress?: string;
+}
+
+
+@doc("Diagnostic Metrics properties")
+model Metrics {
+  @doc("The time used to determine if a metric is stale and drop from the metrics cache.")
+  @minValue(60)
+  @maxValue(600)
+  stalenessTimeSeconds?: int32 = 600;
+
+  @doc("The toggle to enable/disable metrics.")
+  mode?: Mode = Mode.Enabled;
+
+  @doc("How often to export the metrics to the open telemetry collector.")
+  @minValue(1)
+  @maxValue(300)
+  exportIntervalSeconds?: int32 = 30;
+
+  @doc("The open telemetry collector endpoint to export to.")
+  openTelemetryCollectorAddress?: string;
+
+  @doc("The prometheus port to expose the metrics.")
+  @minValue(0)
+  @maxValue(65535)
+  prometheusPort?: int32 = 9600;
+
+  @doc("How often to refresh the metrics.")
+  @minValue(1)
+  @maxValue(60)
+  updateIntervalSeconds?: int32 = 30;
+}
+@doc("Diagnostic Self tracing properties")
+model SelfTracing {
+  @doc("The toggle to enable/disable self tracing.")
+  mode?: Mode = Mode.Enabled;
+
+  @doc("The self tracing interval.")
+  @minValue(1)
+  @maxValue(300)
+  intervalSeconds?: int32 = 30;
 }
