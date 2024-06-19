@@ -574,7 +574,7 @@ model AvsStorageContainerVolume is ProxyResource<VolumeProperties> {
     AvsStorageContainerVolume,
     "volumeId",
     "volumes",
-    NamePattern = "^[a-zA-Z0-9\\-]{1,127}$"
+    NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
 
@@ -828,7 +828,7 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
     AvsVmVolume,
     "volumeId",
     "avsVmVolumes",
-    NamePattern = "^[a-zA-Z0-9\\-]{1,127}$"
+    NamePattern = "^[a-fA-F0-9\-]{1,64}$"
   >;
 }
 
