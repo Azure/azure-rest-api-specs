@@ -828,7 +828,7 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
     AvsVmVolume,
     "volumeId",
     "avsVmVolumes",
-    NamePattern = "^[a-fA-F0-9\-]{1,64}$"
+    NamePattern = "^[a-fA-F0-9\\-]{1,64}$"
   >;
 }
 
