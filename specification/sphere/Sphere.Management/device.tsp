@@ -3,7 +3,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.AzureSphere;
+namespace Microsoft.AzureSphereMgmt;
 /**
  * An device resource belonging to a device group resource.
  */

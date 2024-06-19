@@ -26,7 +26,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.AzureSphere;
+namespace Microsoft.AzureSphereMgmt;
 
 /**
  * The available API versions.

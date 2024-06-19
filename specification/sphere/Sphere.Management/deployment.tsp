@@ -2,7 +2,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
-namespace Microsoft.AzureSphere;
+namespace Microsoft.AzureSphereMgmt;
 /**
  * An deployment resource belonging to a device group resource.
  */

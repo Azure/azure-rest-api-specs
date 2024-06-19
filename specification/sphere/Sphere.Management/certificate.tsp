@@ -3,7 +3,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Microsoft.AzureSphere;
+namespace Microsoft.AzureSphereMgmt;
 /**
  * An certificate resource belonging to a catalog resource.
  */

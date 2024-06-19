@@ -3,7 +3,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using OpenAPI;
 
-namespace Microsoft.AzureSphere;
+namespace Microsoft.AzureSphereMgmt;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
