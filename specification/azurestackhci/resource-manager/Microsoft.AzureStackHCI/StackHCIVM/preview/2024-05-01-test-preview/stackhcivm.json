@@ -3539,6 +3539,54 @@
         ]
       }
     },
+    "AttestDiskSecurityEncryptionTypeEnum": {
+      "type": "string",
+      "description": "Defines type of managed disk security encryption type from attestation token.",
+      "enum": [
+        "NonPersistedTPM",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "AttestDiskSecurityEncryptionTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NonPersistedTPM",
+            "value": "NonPersistedTPM",
+            "description": "Disk security encryption type is non-persisted Trusted Platform Module (TPM)"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Disk security encryption type is unknown"
+          }
+        ]
+      }
+    },
+    "AttestHWPlatformEnum": {
+      "type": "string",
+      "description": "Defines type of hardware platform from attestation token.",
+      "enum": [
+        "SEVSNP",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "AttestHWPlatformEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SEVSNP",
+            "value": "SEVSNP",
+            "description": "AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "AttestHWPlatform is unknown"
+          }
+        ]
+      }
+    },
     "AttestHealthStatusEnum": {
       "type": "string",
       "description": "The health status of attestation validation and parsing",
@@ -4147,12 +4195,12 @@
           {
             "name": "GpuDDA",
             "value": "GpuDDA",
-            "description": "GPU DDA"
+            "description": "Attach Graphics Processing Unit (GPU) using Discrete Device Assignment (DDA)"
           },
           {
             "name": "GpuP",
             "value": "GpuP",
-            "description": "GPU Partitioning"
+            "description": "Attach Graphics Processing Unit (GPU) using GPU Partitioning"
           }
         ]
       }

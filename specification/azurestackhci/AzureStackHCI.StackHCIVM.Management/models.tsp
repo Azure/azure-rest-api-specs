@@ -219,10 +219,10 @@ union VmSizeEnum {
 @added(Versions.v2024_05_01_test_preview)
 @doc("Gpu Assignment types")
 union GpuAssignmentTypeEnum {
-  @doc("GPU DDA")
+  @doc("Attach Graphics Processing Unit (GPU) using Discrete Device Assignment (DDA)")
   GpuDDA: "GpuDDA",
 
-  @doc("GPU Partitioning")
+  @doc("Attach Graphics Processing Unit (GPU) using GPU Partitioning")
   GpuP: "GpuP",
 
   string,
@@ -361,7 +361,7 @@ union AttestHealthStatusEnum {
 @added(Versions.v2024_05_01_test_preview)
 @doc("Defines type of hardware platform from attestation token.")
 union AttestHWPlatformEnum {
-  @doc("AttestHWPlatform is SEVSNP")
+  @doc("AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)")
   SEVSNP: "SEVSNP",
 
   @doc("AttestHWPlatform is unknown")
@@ -373,7 +373,7 @@ union AttestHWPlatformEnum {
 @added(Versions.v2024_05_01_test_preview)
 @doc("Defines type of managed disk security encryption type from attestation token.")
 union AttestDiskSecurityEncryptionTypeEnum {
-  @doc("Disk security encryption type is SEVSNP")
+  @doc("Disk security encryption type is non-persisted Trusted Platform Module (TPM)")
   NonPersistedTPM: "NonPersistedTPM",
 
   @doc("Disk security encryption type is unknown")
