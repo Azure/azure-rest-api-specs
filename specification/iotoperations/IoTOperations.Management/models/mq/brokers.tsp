@@ -116,7 +116,7 @@ model Frontend {
 
 @doc("Broker Diagnostic Setting properties")
 model BrokerDiagnostics {
-  @doc("The log settings of the broker.")
+  @doc("The log settings.")
   logs?: DiagnosticsLogs;
 
   @doc("The metrics properties.")

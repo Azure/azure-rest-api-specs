@@ -61,7 +61,7 @@ model X509ManualCertificate {
 
 @doc("Diagnostic Setting properties")
 model Diagnostics {
-  @doc("The log settings of the broker.")
+  @doc("The log settings.")
   logs?: DiagnosticsLogs;
 
   @doc("The metrics properties.")

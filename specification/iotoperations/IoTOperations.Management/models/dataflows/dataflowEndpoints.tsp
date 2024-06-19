@@ -119,7 +119,7 @@ model DataFlowEndpointDataLakeStorage {
   authentication: DataFlowEndpointDataLakeStorageAuthentication;
 
   @doc("Batching configuration.")
-  batching?: DataFlowEndpointDataLateStorageBatching;
+  batching?: DataFlowEndpointDataLakeStorageBatching;
 
   @doc("Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .")
   @pattern(".*.blob.core.windows.net")
@@ -139,7 +139,7 @@ model DataFlowEndpointDataLakeStorageAuthentication {
 }
 
 @doc("Azure Data Lake endpoint Batching properties")
-model DataFlowEndpointDataLateStorageBatching {
+model DataFlowEndpointDataLakeStorageBatching {
   @doc("Batching latency in seconds.")
   @minValue(0)
   @maxValue(65535)
