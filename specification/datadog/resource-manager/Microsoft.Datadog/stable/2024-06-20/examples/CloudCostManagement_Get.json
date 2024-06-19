@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2024-06-20",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "requestBody": {
+      "cloudCostConfig": {
+        "exportData": [
+          {
+            "exportDataType": "Direct",
+            "storageAccountId": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/myMonitor"
+            ]
+          },
+          {
+            "exportDataType": "Amortized",
+            "storageAccountId": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/myMonitor",
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/myMonitor1"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "cloudCostConfig": {
+          "exportData": [
+            {
+              "exportDataType": "Direct",
+              "storageAccountId": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/myMonitor"
+              ]
+            },
+            {
+              "exportDataType": "Amortized",
+              "storageAccountId": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/myMonitor",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/accounts/myMonitor1"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

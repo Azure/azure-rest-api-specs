@@ -201,6 +201,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/cloudCostManagement": {
+      "post": {
+        "tags": [
+          "cloudCost"
+        ],
+        "summary": "List the api keys for a given monitor resource.",
+        "operationId": "Monitors_CloudCostProperties",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CloudCostConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CloudCostConfig"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_CloudCostProperties": {
+            "$ref": "./examples/CloudCostManagement_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listApiKeys": {
       "post": {
         "tags": [
@@ -1643,6 +1695,42 @@
         "properties": {
           "$ref": "#/definitions/CreateResourceSupportedProperties",
           "description": "Represents the properties of the resource."
+        }
+      }
+    },
+    "ExportData": {
+      "type": "object",
+      "properties": {
+        "exportDataType": {
+          "type": "string",
+          "enum": [
+            "Direct",
+            "Amortized"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ExportDataType"
+          },
+          "description": "The type of export to be read from the given stoarge accounts."
+        },
+        "storageAccountId": {
+          "type": "array",
+          "description": "The list of the storage account where the exports are enabled and to be read.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CloudCostConfig": {
+      "type": "object",
+      "properties": {
+        "exportData": {
+          "description": "Lists all the data exports configured for this monitor",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportData"
+          }
         }
       }
     },
