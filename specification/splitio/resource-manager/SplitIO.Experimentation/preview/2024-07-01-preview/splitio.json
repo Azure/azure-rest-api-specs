@@ -452,7 +452,7 @@
           {
             "name": "applicationId",
             "in": "path",
-            "description": "The id of the Split.IO data plane authentication application.",
+            "description": "The id of the Split.IO data plane authentication application in Guid format.",
             "required": true,
             "type": "string"
           },
@@ -503,6 +503,7 @@
         },
         "dataPlaneEndpoint": {
           "type": "string",
+          "format": "uri",
           "description": "Endpoint used for access to the experimentation workspace.",
           "readOnly": true
         }
@@ -617,7 +618,7 @@
         },
         "resource": {
           "type": "string",
-          "description": "The resource of Split.IO data plane authentication token."
+          "description": "The application ID URI of Split.IO data plane authentication application."
         }
       },
       "required": [

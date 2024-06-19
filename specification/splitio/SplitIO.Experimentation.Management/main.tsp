@@ -53,7 +53,7 @@ namespace SplitIO.Experimentation {
 
     @doc("Endpoint used for access to the experimentation workspace.")
     @visibility("read")
-    dataPlaneEndpoint?: string;
+    dataPlaneEndpoint?:  url;
   }
 
   @doc("Role required for data plane access.")
@@ -137,7 +137,7 @@ namespace SplitIO.Experimentation {
     @secret
     token: string;
 
-    @doc("The resource of Split.IO data plane authentication token.")
+    @doc("The application ID URI of Split.IO data plane authentication application.")
     resource: string;
   }
 
@@ -169,7 +169,7 @@ namespace SplitIO.Experimentation {
       @maxLength(50)
       workspaceName: string,
 
-      @doc("The id of the Split.IO data plane authentication application.")
+      @doc("The id of the Split.IO data plane authentication application in Guid format.")
       @path
       applicationId: string,
 
