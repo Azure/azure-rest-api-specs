@@ -25,9 +25,9 @@ using Azure.Core;
   "Analyze an image to generate a description of its content, detect text, objects and more.",
   {
     @doc("""
-Azure AI Computer Vision endpoint (protocol and hostname, for example:
-https://<resource-name>.cognitiveservices.azure.com).
-""")
+      Azure AI Computer Vision endpoint (protocol and hostname, for example:
+      https://<resource-name>.cognitiveservices.azure.com).
+      """)
     endpoint: url,
   }
 )
