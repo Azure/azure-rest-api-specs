@@ -52,5 +52,5 @@ union ProvisioningState {
    */
   Accepted: "Accepted",
 
-  string
+  string,
 }

@@ -121,7 +121,7 @@ union AccountType {
    */
   UserManaged: "UserManaged",
 
-  string
+  string,
 }
 
 /**
