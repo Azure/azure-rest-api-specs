@@ -31,22 +31,15 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: azurefleet.json
     reason: Suppress Patch rule as properties are defined by Compute RP and cannot be changed in AzureFleet.
-```
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: AvoidAdditionalProperties
-    reason: Property "settings" and "protectedSettings" for 
-    VirtualMachineExtension and VirtualMachineScaleSetExtensionProperties
-    were previously defined like an empty object.
+  - code: AvoidAdditionalProperties
     from: azurefleet.json
     where:
       - $.definitions.VirtualMachineExtensionProperties.properties.protectedSettings
       - $.definitions.VirtualMachineExtensionProperties.properties.settings
       - $.definitions.VirtualMachineScaleSetExtensionProperties.properties.protectedSettings
       - $.definitions.VirtualMachineScaleSetExtensionProperties.properties.settings
+    reason: Property "settings" and "protectedSettings" for VirtualMachineExtension 
+            and VirtualMachineScaleSetExtensionProperties were previously defined like an empty object.
 ```
 
 ### Tag: package-preview-2023-11
@@ -87,6 +80,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
