@@ -136,6 +136,7 @@ model BaseVirtualMachineProfile {
 /**
  * Describes a virtual machine scale set OS profile.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VirtualMachineScaleSetOSProfile {
   /**
    * Specifies the computer name prefix for all of the virtual machines in the scale
@@ -202,6 +203,7 @@ model VirtualMachineScaleSetOSProfile {
    * or the [Azure Key Vault virtual machine extension for
    * Windows](https://docs.microsoft.com/azure/virtual-machines/extensions/key-vault-windows).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "id exists inside sourceVault"
   @OpenAPI.extension("x-ms-identifiers", ["sourceVault/id"])
   secrets?: VaultSecretGroup[];
 
@@ -228,6 +230,7 @@ model WindowsConfiguration {
    * true by default. This will ensure that VM Agent is installed on the VM so that
    * extensions can be added to the VM later.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   provisionVMAgent?: boolean;
 
   /**
@@ -262,12 +265,14 @@ model WindowsConfiguration {
    * Specifies the Windows Remote Management listeners. This enables remote Windows
    * PowerShell.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   winRM?: WinRMConfiguration;
 
   /**
    * Indicates whether VMAgent Platform Updates is enabled for the Windows virtual
    * machine. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   enableVMAgentPlatformUpdates?: boolean;
 }
 
@@ -348,6 +353,7 @@ model PatchSettings {
  * Specifies additional settings to be applied when patch mode AutomaticByPlatform
  * is selected in Windows patch settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model WindowsVMGuestPatchAutomaticByPlatformSettings {
   /**
    * Specifies the reboot setting for all AutomaticByPlatform patch installation
@@ -364,6 +370,7 @@ model WindowsVMGuestPatchAutomaticByPlatformSettings {
 /**
  * Describes Windows Remote Management configuration of the VM
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model WinRMConfiguration {
   /**
    * The list of Windows Remote Management listeners
@@ -375,6 +382,7 @@ model WinRMConfiguration {
 /**
  * Describes Protocol and thumbprint of Windows Remote Management listener
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model WinRMListener {
   /**
    * Specifies the protocol of WinRM listener. Possible values are: **http,**
@@ -422,6 +430,7 @@ model LinuxConfiguration {
    * behavior is to set it to true. This will ensure that VM Agent is installed on
    * the VM so that extensions can be added to the VM later.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   provisionVMAgent?: boolean;
 
   /**
@@ -433,6 +442,7 @@ model LinuxConfiguration {
    * Indicates whether VMAgent Platform Updates is enabled for the Linux virtual
    * machine. Default value is false.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   enableVMAgentPlatformUpdates?: boolean;
 }
 
@@ -502,6 +512,7 @@ model LinuxPatchSettings {
  * Specifies additional settings to be applied when patch mode AutomaticByPlatform
  * is selected in Linux patch settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model LinuxVMGuestPatchAutomaticByPlatformSettings {
   /**
    * Specifies the reboot setting for all AutomaticByPlatform patch installation
@@ -532,6 +543,9 @@ model VaultSecretGroup {
   vaultCertificates?: VaultCertificate[];
 }
 
+/**
+ * Describes SubResource
+ */
 model SubResource {
   /**
    * Resource Id
@@ -602,7 +616,10 @@ model VirtualMachineScaleSetStorageProfile {
   @OpenAPI.extension("x-ms-identifiers", ["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
-  diskControllerType?: string;
+  /**
+   * Specifies the disk controller type configured for the virtual machines in the scale set. Minimum api-version: 2022-08-01
+   */
+  diskControllerType?: DiskControllerTypes;
 }
 
 /**
@@ -667,6 +684,7 @@ model ImageReference is SubResource {
 /**
  * Describes a virtual machine scale set operating system disk.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VirtualMachineScaleSetOSDisk {
   /**
    * The disk name.
@@ -811,6 +829,7 @@ model DiskEncryptionSetParameters is SubResource;
  * Specifies the security profile settings for the managed disk. **Note:** It can
  * only be set for Confidential VMs.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VMDiskSecurityProfile {
   /**
    * Specifies the EncryptionType of the managed disk. It is set to
@@ -868,6 +887,7 @@ model VirtualMachineScaleSetDataDisk {
    * diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be
    * larger than 1023.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   diskSizeGB?: int32;
 
   /**
@@ -888,6 +908,7 @@ model VirtualMachineScaleSetDataDisk {
    * only when StorageAccountType is UltraSSD_LRS. If not specified, a default value
    * would be assigned based on diskSizeGB.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   diskMBpsReadWrite?: int64;
 
   /**
@@ -996,6 +1017,7 @@ model VirtualMachineScaleSetNetworkConfigurationProperties {
   /**
    * Whether IP forwarding enabled on this NIC.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   enableIPForwarding?: boolean;
 
   /**
@@ -1029,6 +1051,7 @@ model VirtualMachineScaleSetNetworkConfigurationDnsSettings {
 /**
  * Describes a virtual machine scale set network profile's IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VirtualMachineScaleSetIPConfiguration {
   /**
    * The IP configuration name.
@@ -1046,6 +1069,7 @@ model VirtualMachineScaleSetIPConfiguration {
  * Describes a virtual machine scale set network profile's IP configuration
  * properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VirtualMachineScaleSetIPConfigurationProperties {
   /**
    * Specifies the identifier of the subnet.
@@ -1102,6 +1126,7 @@ model VirtualMachineScaleSetIPConfigurationProperties {
  * Describes a virtual machines scale set IP Configuration's PublicIPAddress
  * configuration
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VirtualMachineScaleSetPublicIPAddressConfiguration {
   /**
    * The publicIP address configuration name.
@@ -1125,6 +1150,7 @@ model VirtualMachineScaleSetPublicIPAddressConfiguration {
  * Describes a virtual machines scale set IP Configuration's PublicIPAddress
  * configuration
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VirtualMachineScaleSetPublicIPAddressConfigurationProperties {
   /**
    * The idle timeout of the public IP address.
@@ -1163,6 +1189,7 @@ model VirtualMachineScaleSetPublicIPAddressConfigurationProperties {
 /**
  * Describes a virtual machines scale sets network configuration's DNS settings.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings {
   /**
    * The Domain name label.The concatenation of the domain name label and vm index
@@ -1199,6 +1226,7 @@ model VirtualMachineScaleSetIpTag {
  * Describes the public IP Sku. It can only be set with OrchestrationMode as
  * Flexible.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model PublicIPAddressSku {
   /**
    * Specify public IP sku name
@@ -1470,6 +1498,9 @@ model KeyVaultSecretReference {
   sourceVault: SubResource;
 }
 
+/**
+ * Describes a Readonly subresource.
+ */
 model SubResourceReadOnly {
   /**
    * Resource Id
@@ -1500,6 +1531,9 @@ model BillingProfile {
   maxPrice?: float64;
 }
 
+/**
+ * Specifies Scheduled Event related configurations.
+ */
 model ScheduledEventsProfile {
   /**
    * Specifies Terminate Scheduled Event related configurations.
@@ -1512,6 +1546,9 @@ model ScheduledEventsProfile {
   osImageNotificationProfile?: OSImageNotificationProfile;
 }
 
+/**
+ * Specifies Terminate Scheduled Event related configurations.
+ */
 model TerminateNotificationProfile {
   /**
    * Configurable length of time a Virtual Machine being deleted will have to
@@ -1527,6 +1564,10 @@ model TerminateNotificationProfile {
   enable?: boolean;
 }
 
+/**
+ * Specifies OS Image Scheduled Event related configurations.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model OSImageNotificationProfile {
   /**
    * Length of time a Virtual Machine being reimaged or having its OS upgraded will
@@ -1571,6 +1612,7 @@ model ApplicationProfile {
  * Specifies the required information to reference a compute gallery application
  * version
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VMGalleryApplication {
   /**
    * Optional, Specifies a passthrough value for more generic context.
@@ -1622,6 +1664,7 @@ model VirtualMachineScaleSetHardwareProfile {
 /**
  * Specifies VM Size Property settings on the virtual machine.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VMSizeProperties {
   /**
    * Specifies the number of vCPUs available for the VM. When this property is not
@@ -1867,8 +1910,21 @@ model ResourceWithOptionalLocation {
  */
 union VirtualMachinePriorityTypes {
   string,
+
+  /**
+   * Regular Priority
+   */
   Regular: "Regular",
+
+  /**
+   * Low Priority. 'Low' enum will be deprecated in the future,
+   *  please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.
+   */
   Low: "Low",
+
+  /**
+   * Spot Priority
+   */
   Spot: "Spot",
 }
 
@@ -1877,7 +1933,15 @@ union VirtualMachinePriorityTypes {
  */
 union VirtualMachineEvictionPolicyTypes {
   string,
+
+  /**
+   * Deallocate Eviction Policy
+   */
   Deallocate: "Deallocate",
+
+  /**
+   * Delete Eviction Policy
+   */
   Delete: "Delete",
 }
 
@@ -1885,53 +1949,90 @@ union VirtualMachineEvictionPolicyTypes {
  * Specifies the name of the setting to which the content applies. Possible values
  * are: FirstLogonCommands and AutoLogon.
  */
-enum SettingNames {
-  AutoLogon,
-  FirstLogonCommands,
+union SettingNames {
+  string,
+
+  /**
+   * AutoLogon setting
+   */
+  AutoLogon: "AutoLogon",
+
+  /**
+   * FirstLogonCommands setting
+   */
+  FirstLogonCommands: "FirstLogonCommands",
 }
 
 /**
  * Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual
  * machines associated to virtual machine scale set with OrchestrationMode as
- * Flexible.<br /><br /> Possible values are:<br /><br /> **Manual** - You
- * control the application of patches to a virtual machine. You do this by
- * applying patches manually inside the VM. In this mode, automatic updates are
- * disabled; the property WindowsConfiguration.enableAutomaticUpdates must be
- * false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be
- * updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates
- * must be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will
- * automatically updated by the platform. The properties provisionVMAgent and
- * WindowsConfiguration.enableAutomaticUpdates must be true
+ * Flexible.
  */
 union WindowsVMGuestPatchMode {
   string,
+
+  /**
+   * You control the application of patches to a virtual machine.
+   * You do this by applying patches manually inside the VM. In this mode,
+   * automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates
+   * must be false
+   */
   Manual: "Manual",
+
+  /**
+   * The virtual machine will automatically be updated by the OS.
+   *  The property WindowsConfiguration.enableAutomaticUpdates must be true.
+   */
   AutomaticByOS: "AutomaticByOS",
+
+  /**
+   * The virtual machine will automatically updated by the platform. The properties
+   * provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true.
+   */
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
 /**
- * Specifies the mode of VM Guest patch assessment for the IaaS virtual
- * machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You
- * control the timing of patch assessments on a virtual machine.<br /><br />
- * **AutomaticByPlatform** - The platform will trigger periodic patch assessments.
- * The property provisionVMAgent must be true.
+ * Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.
  */
 union WindowsPatchAssessmentMode {
   string,
+
+  /**
+   * You control the timing of patch assessments on a virtual machine.
+   */
   ImageDefault: "ImageDefault",
+
+  /**
+   * The platform will trigger periodic patch assessments. The property provisionVMAgent must be true.
+   */
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
 /**
- * Specifies the reboot setting for all AutomaticByPlatform patch installation
- * operations.
+ * Specifies the reboot setting for all AutomaticByPlatform patch installation operations.
  */
 union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
   string,
+
+  /**
+   * Unknown Reboot setting
+   */
   Unknown: "Unknown",
+
+  /**
+   * IfRequired Reboot setting
+   */
   IfRequired: "IfRequired",
+
+  /**
+   * Never Reboot setting
+   */
   Never: "Never",
+
+  /**
+   * Always Reboot setting
+   */
   Always: "Always",
 }
 
@@ -1939,22 +2040,36 @@ union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
  * Specifies the protocol of WinRM listener. Possible values are: **http,**
  * **https.**
  */
-enum ProtocolTypes {
-  Http,
-  Https,
+union ProtocolTypes {
+  string,
+
+  /**
+   * Http protocol
+   */
+  Http: "Http",
+
+  /**
+   * Https protocol
+   */
+  Https: "Https",
 }
 
 /**
  * Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual
  * machines associated to virtual machine scale set with OrchestrationMode as
- * Flexible.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - The
- * virtual machine's default patching configuration is used. <br /><br />
- * **AutomaticByPlatform** - The virtual machine will be automatically updated by
- * the platform. The property provisionVMAgent must be true
+ * Flexible.
  */
 union LinuxVMGuestPatchMode {
   string,
+
+  /**
+   * The virtual machine's default patching configuration is used.
+   */
   ImageDefault: "ImageDefault",
+
+  /**
+   * The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true.
+   */
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
@@ -1967,7 +2082,15 @@ union LinuxVMGuestPatchMode {
  */
 union LinuxPatchAssessmentMode {
   string,
+
+  /**
+   * You control the timing of patch assessments on a virtual machine.
+   */
   ImageDefault: "ImageDefault",
+
+  /**
+   * The platform will trigger periodic patch assessments.The property provisionVMAgent must be true.
+   */
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
@@ -1977,21 +2100,48 @@ union LinuxPatchAssessmentMode {
  */
 union LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
   string,
+
+  /**
+   * Unknown Reboot setting
+   */
   Unknown: "Unknown",
+
+  /**
+   * IfRequired Reboot setting
+   */
   IfRequired: "IfRequired",
+
+  /**
+   * Never Reboot setting
+   */
   Never: "Never",
+
+  /**
+   * Always Reboot setting
+   */
   Always: "Always",
 }
 
 /**
- * Specifies the caching requirements. Possible values are: **None,**
- * **ReadOnly,** **ReadWrite.** The default values are: **None for Standard
- * storage. ReadOnly for Premium storage**
+ * Specifies the caching requirements.
  */
-enum CachingTypes {
-  None,
-  ReadOnly,
-  ReadWrite,
+union CachingTypes {
+  string,
+
+  /**
+   * 'None' is default for Standard Storage
+   */
+  None: "None",
+
+  /**
+   * 'ReadOnly' is default for Premium Storage
+   */
+  ReadOnly: "ReadOnly",
+
+  /**
+   * 'ReadWrite' is default for OS Disk
+   */
+  ReadWrite: "ReadWrite",
 }
 
 /**
@@ -1999,24 +2149,53 @@ enum CachingTypes {
  * disk if creating a VM from user-image or a specialized VHD. Possible values
  * are: **Windows,** **Linux.**
  */
-enum OperatingSystemTypes {
-  Windows,
-  Linux,
+union OperatingSystemTypes {
+  string,
+
+  /**
+   * Windows OS type
+   */
+  Windows: "Windows",
+
+  /**
+   * Linux OS type
+   */
+  Linux: "Linux",
 }
 
 /**
- * Specifies how the virtual machine should be created. Possible values are:
- * **Attach.** This value is used when you are using a specialized disk to create
- * the virtual machine. **FromImage.** This value is used when you are using an
- * image to create the virtual machine. If you are using a platform image, you
- * also use the imageReference element described above. If you are using a
- * marketplace image, you also use the plan element previously described.
+ * Specifies how the virtual machine should be created.
  */
 union DiskCreateOptionTypes {
   string,
+
+  /**
+   * This value is used when you are using an image to create the virtual machine.
+   * If you are using a platform image, you also use the imageReference element
+   * described above. If you are using a marketplace image, you also use the
+   * plan element previously described.
+   */
   FromImage: "FromImage",
+
+  /**
+   * This value is used when creating an empty data disk.
+   */
   Empty: "Empty",
+
+  /**
+   * This value is used when you are using a specialized disk to create the virtual machine.
+   */
   Attach: "Attach",
+
+  /**
+   * This value is used to create a data disk from a snapshot or another disk.
+   */
+  Copy: "Copy",
+
+  /**
+   * This value is used to create a data disk from a disk restore point.
+   */
+  Restore: "Restore",
 }
 
 /**
@@ -2028,7 +2207,15 @@ union DiskCreateOptionTypes {
  */
 union DiskDeleteOptionTypes {
   string,
+
+  /**
+   * If this value is used, the managed disk is deleted when VM gets deleted.
+   */
   Delete: "Delete",
+
+  /**
+   * If this value is used, the managed disk is retained after VM gets deleted.
+   */
   Detach: "Detach",
 }
 
@@ -2037,6 +2224,10 @@ union DiskDeleteOptionTypes {
  */
 union DiffDiskOptions {
   string,
+
+  /**
+   * Local Option.
+   */
   Local: "Local",
 }
 
@@ -2049,11 +2240,25 @@ union DiffDiskOptions {
  * https://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements
  * and Linux VM at
  * https://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements
+ * Minimum api-version for NvmeDisk: 2024-03-01.
  */
 union DiffDiskPlacement {
   string,
+
+  /**
+   * CacheDisk option.
+   */
   CacheDisk: "CacheDisk",
+
+  /**
+   * Resource Disk option.
+   */
   ResourceDisk: "ResourceDisk",
+
+  /**
+   * NvmeDisk option.
+   */
+  NvmeDisk: "NvmeDisk",
 }
 
 /**
@@ -2071,26 +2276,66 @@ union DiffDiskPlacement {
  */
 union StorageAccountTypes {
   string,
+
+  /**
+   * Standard_LRS option.
+   */
   Standard_LRS: "Standard_LRS",
+
+  /**
+   * Premium_LRS option.
+   */
   Premium_LRS: "Premium_LRS",
+
+  /**
+   * StandardSSD_LRS option.
+   */
   StandardSSD_LRS: "StandardSSD_LRS",
+
+  /**
+   * UltraSSD_LRS option.
+   */
   UltraSSD_LRS: "UltraSSD_LRS",
+
+  /**
+   * Premium_ZRS option.
+   */
   Premium_ZRS: "Premium_ZRS",
+
+  /**
+   * StandardSSD_ZRS option.
+   */
   StandardSSD_ZRS: "StandardSSD_ZRS",
+
+  /**
+   * PremiumV2_LRS option.
+   */
   PremiumV2_LRS: "PremiumV2_LRS",
 }
 
 /**
- * Specifies the EncryptionType of the managed disk. It is set to
- * DiskWithVMGuestState for encryption of the managed disk along with VMGuestState
- * blob, VMGuestStateOnly for encryption of just the VMGuestState blob, and
- * NonPersistedTPM for not persisting firmware state in the VMGuestState blob..
+ * Specifies the EncryptionType of the managed disk.
  * **Note:** It can be set for only Confidential VMs.
  */
 union SecurityEncryptionTypes {
   string,
+
+  /**
+   * EncryptionType of the managed disk is set to VMGuestStateOnly for encryption
+   *  of just the VMGuestState blob.
+   */
   VMGuestStateOnly: "VMGuestStateOnly",
+
+  /**
+   * EncryptionType of the managed disk is set to DiskWithVMGuestState for encryption
+   * of the managed disk along with VMGuestState blob.
+   */
   DiskWithVMGuestState: "DiskWithVMGuestState",
+
+  /**
+   * EncryptionType of the managed disk is set to NonPersistedTPM for not persisting
+   * firmware state in the VMGuestState blob.
+   */
   NonPersistedTPM: "NonPersistedTPM",
 }
 
@@ -2101,6 +2346,10 @@ union SecurityEncryptionTypes {
  */
 union NetworkApiVersion {
   string,
+
+  /**
+   * Initial version supported. Later versions are supported as well.
+   */
   `2020-11-01`: "2020-11-01",
 }
 
@@ -2109,7 +2358,15 @@ union NetworkApiVersion {
  */
 union DeleteOptions {
   string,
+
+  /**
+   * Delete Option
+   */
   Delete: "Delete",
+
+  /**
+   * Detach Option
+   */
   Detach: "Detach",
 }
 
@@ -2119,8 +2376,20 @@ union DeleteOptions {
  */
 union NetworkInterfaceAuxiliaryMode {
   string,
+
+  /**
+   * None Mode
+   */
   None: "None",
+
+  /**
+   * AcceleratedConnections Mode
+   */
   AcceleratedConnections: "AcceleratedConnections",
+
+  /**
+   * Floating Mode
+   */
   Floating: "Floating",
 }
 
@@ -2130,10 +2399,30 @@ union NetworkInterfaceAuxiliaryMode {
  */
 union NetworkInterfaceAuxiliarySku {
   string,
+
+  /**
+   * no sku
+   */
   None: "None",
+
+  /**
+   * A1 sku
+   */
   A1: "A1",
+
+  /**
+   * A2 sku
+   */
   A2: "A2",
+
+  /**
+   * A4 sku
+   */
   A4: "A4",
+
+  /**
+   * A8 sku
+   */
   A8: "A8",
 }
 
@@ -2144,7 +2433,15 @@ union NetworkInterfaceAuxiliarySku {
  */
 union IPVersion {
   string,
+
+  /**
+   * IPv4 version
+   */
   IPv4: "IPv4",
+
+  /**
+   * IPv6 version
+   */
   IPv6: "IPv6",
 }
 
@@ -2156,18 +2453,42 @@ union IPVersion {
  */
 union DomainNameLabelScopeTypes {
   string,
+
+  /**
+   * TenantReuse type
+   */
   TenantReuse: "TenantReuse",
+
+  /**
+   * SubscriptionReuse type
+   */
   SubscriptionReuse: "SubscriptionReuse",
+
+  /**
+   * ResourceGroupReuse type
+   */
   ResourceGroupReuse: "ResourceGroupReuse",
+
+  /**
+   * NoReuse type
+   */
   NoReuse: "NoReuse",
 }
 
 /**
- * Specify public IP sku name
+ * Specify public IP sku name.
  */
 union PublicIPAddressSkuName {
   string,
+
+  /**
+   * Basic sku name
+   */
   Basic: "Basic",
+
+  /**
+   * Standard sku name
+   */
   Standard: "Standard",
 }
 
@@ -2176,7 +2497,15 @@ union PublicIPAddressSkuName {
  */
 union PublicIPAddressSkuTier {
   string,
+
+  /**
+   * Regional sku tier
+   */
   Regional: "Regional",
+
+  /**
+   * Global sku tier
+   */
   Global: "Global",
 }
 
@@ -2187,7 +2516,15 @@ union PublicIPAddressSkuTier {
  */
 union SecurityTypes {
   string,
+
+  /**
+   * TrustedLaunch security type
+   */
   TrustedLaunch: "TrustedLaunch",
+
+  /**
+   * ConfidentialVM security type
+   */
   ConfidentialVM: "ConfidentialVM",
 }
 
@@ -2199,15 +2536,61 @@ union SecurityTypes {
  */
 union Mode {
   string,
+
+  /**
+   * Audit Mode
+   */
   Audit: "Audit",
+
+  /**
+   * Enforce Mode
+   */
   Enforce: "Enforce",
 }
 
 /**
  * The level code.
  */
-enum StatusLevelTypes {
-  Info,
-  Warning,
-  Error,
+union StatusLevelTypes {
+  string,
+
+  /**
+   * Info level
+   */
+  Info: "Info",
+
+  /**
+   * Warning level
+   */
+  Warning: "Warning",
+
+  /**
+   * Error Level
+   */
+  Error: "Error",
+}
+
+/**
+ * Specifies the disk controller type configured for the VM and
+ * VirtualMachineScaleSet. This property is only supported for virtual machines
+ * whose operating system disk and VM sku supports Generation 2
+ * (https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2), please
+ * check the HyperVGenerations capability returned as part of VM sku capabilities
+ * in the response of Microsoft.Compute SKUs api for the region contains V2
+ * (https://docs.microsoft.com/rest/api/compute/resourceskus/list). For more
+ * information about Disk Controller Types supported please refer to
+ * https://aka.ms/azure-diskcontrollertypes.
+ */
+union DiskControllerTypes {
+  string,
+
+  /**
+   * SCSI disk type
+   */
+  SCSI: "SCSI",
+
+  /**
+   * NVMe disk type
+   */
+  NVMe: "NVMe",
 }

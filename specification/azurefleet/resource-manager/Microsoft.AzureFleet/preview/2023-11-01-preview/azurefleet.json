@@ -758,7 +758,7 @@
     },
     "CachingTypes": {
       "type": "string",
-      "description": "Specifies the caching requirements. Possible values are: **None,**\n**ReadOnly,** **ReadWrite.** The default values are: **None for Standard\nstorage. ReadOnly for Premium storage**",
+      "description": "Specifies the caching requirements.",
       "enum": [
         "None",
         "ReadOnly",
@@ -766,7 +766,24 @@
       ],
       "x-ms-enum": {
         "name": "CachingTypes",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "'None' is default for Standard Storage"
+          },
+          {
+            "name": "ReadOnly",
+            "value": "ReadOnly",
+            "description": "'ReadOnly' is default for Premium Storage"
+          },
+          {
+            "name": "ReadWrite",
+            "value": "ReadWrite",
+            "description": "'ReadWrite' is default for OS Disk"
+          }
+        ]
       }
     },
     "CapacityReservationProfile": {
@@ -809,11 +826,13 @@
         "values": [
           {
             "name": "Delete",
-            "value": "Delete"
+            "value": "Delete",
+            "description": "Delete Option"
           },
           {
             "name": "Detach",
-            "value": "Detach"
+            "value": "Detach",
+            "description": "Detach Option"
           }
         ]
       }
@@ -840,17 +859,19 @@
         "values": [
           {
             "name": "Local",
-            "value": "Local"
+            "value": "Local",
+            "description": "Local Option."
           }
         ]
       }
     },
     "DiffDiskPlacement": {
       "type": "string",
-      "description": "Specifies the ephemeral disk placement for operating system disk. This property\ncan be used by user in the request to choose the location i.e, cache disk or\nresource disk space for Ephemeral OS disk provisioning. For more information on\nEphemeral OS disk size requirements, please refer Ephemeral OS disk size\nrequirements for Windows VM at\nhttps://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements\nand Linux VM at\nhttps://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements",
+      "description": "Specifies the ephemeral disk placement for operating system disk. This property\ncan be used by user in the request to choose the location i.e, cache disk or\nresource disk space for Ephemeral OS disk provisioning. For more information on\nEphemeral OS disk size requirements, please refer Ephemeral OS disk size\nrequirements for Windows VM at\nhttps://docs.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements\nand Linux VM at\nhttps://docs.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements\nMinimum api-version for NvmeDisk: 2024-03-01.",
       "enum": [
         "CacheDisk",
-        "ResourceDisk"
+        "ResourceDisk",
+        "NvmeDisk"
       ],
       "x-ms-enum": {
         "name": "DiffDiskPlacement",
@@ -858,11 +879,18 @@
         "values": [
           {
             "name": "CacheDisk",
-            "value": "CacheDisk"
+            "value": "CacheDisk",
+            "description": "CacheDisk option."
           },
           {
             "name": "ResourceDisk",
-            "value": "ResourceDisk"
+            "value": "ResourceDisk",
+            "description": "Resource Disk option."
+          },
+          {
+            "name": "NvmeDisk",
+            "value": "NvmeDisk",
+            "description": "NvmeDisk option."
           }
         ]
       }
@@ -881,13 +909,39 @@
         }
       }
     },
+    "DiskControllerTypes": {
+      "type": "string",
+      "description": "Specifies the disk controller type configured for the VM and\nVirtualMachineScaleSet. This property is only supported for virtual machines\nwhose operating system disk and VM sku supports Generation 2\n(https://docs.microsoft.com/en-us/azure/virtual-machines/generation-2), please\ncheck the HyperVGenerations capability returned as part of VM sku capabilities\nin the response of Microsoft.Compute SKUs api for the region contains V2\n(https://docs.microsoft.com/rest/api/compute/resourceskus/list). For more\ninformation about Disk Controller Types supported please refer to\nhttps://aka.ms/azure-diskcontrollertypes.",
+      "enum": [
+        "SCSI",
+        "NVMe"
+      ],
+      "x-ms-enum": {
+        "name": "DiskControllerTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SCSI",
+            "value": "SCSI",
+            "description": "SCSI disk type"
+          },
+          {
+            "name": "NVMe",
+            "value": "NVMe",
+            "description": "NVMe disk type"
+          }
+        ]
+      }
+    },
     "DiskCreateOptionTypes": {
       "type": "string",
-      "description": "Specifies how the virtual machine should be created. Possible values are:\n**Attach.** This value is used when you are using a specialized disk to create\nthe virtual machine. **FromImage.** This value is used when you are using an\nimage to create the virtual machine. If you are using a platform image, you\nalso use the imageReference element described above. If you are using a\nmarketplace image, you also use the plan element previously described.",
+      "description": "Specifies how the virtual machine should be created.",
       "enum": [
         "FromImage",
         "Empty",
-        "Attach"
+        "Attach",
+        "Copy",
+        "Restore"
       ],
       "x-ms-enum": {
         "name": "DiskCreateOptionTypes",
@@ -895,15 +949,28 @@
         "values": [
           {
             "name": "FromImage",
-            "value": "FromImage"
+            "value": "FromImage",
+            "description": "This value is used when you are using an image to create the virtual machine.\nIf you are using a platform image, you also use the imageReference element \ndescribed above. If you are using a marketplace image, you also use the \nplan element previously described."
           },
           {
             "name": "Empty",
-            "value": "Empty"
+            "value": "Empty",
+            "description": "This value is used when creating an empty data disk."
           },
           {
             "name": "Attach",
-            "value": "Attach"
+            "value": "Attach",
+            "description": "This value is used when you are using a specialized disk to create the virtual machine."
+          },
+          {
+            "name": "Copy",
+            "value": "Copy",
+            "description": "This value is used to create a data disk from a snapshot or another disk."
+          },
+          {
+            "name": "Restore",
+            "value": "Restore",
+            "description": "This value is used to create a data disk from a disk restore point."
           }
         ]
       }
@@ -921,11 +988,13 @@
         "values": [
           {
             "name": "Delete",
-            "value": "Delete"
+            "value": "Delete",
+            "description": "If this value is used, the managed disk is deleted when VM gets deleted."
           },
           {
             "name": "Detach",
-            "value": "Detach"
+            "value": "Detach",
+            "description": "If this value is used, the managed disk is retained after VM gets deleted."
           }
         ]
       }
@@ -955,19 +1024,23 @@
         "values": [
           {
             "name": "TenantReuse",
-            "value": "TenantReuse"
+            "value": "TenantReuse",
+            "description": "TenantReuse type"
           },
           {
             "name": "SubscriptionReuse",
-            "value": "SubscriptionReuse"
+            "value": "SubscriptionReuse",
+            "description": "SubscriptionReuse type"
           },
           {
             "name": "ResourceGroupReuse",
-            "value": "ResourceGroupReuse"
+            "value": "ResourceGroupReuse",
+            "description": "ResourceGroupReuse type"
           },
           {
             "name": "NoReuse",
-            "value": "NoReuse"
+            "value": "NoReuse",
+            "description": "NoReuse type"
           }
         ]
       }
@@ -1131,11 +1204,13 @@
         "values": [
           {
             "name": "IPv4",
-            "value": "IPv4"
+            "value": "IPv4",
+            "description": "IPv4 version"
           },
           {
             "name": "IPv6",
-            "value": "IPv6"
+            "value": "IPv6",
+            "description": "IPv6 version"
           }
         ]
       }
@@ -1162,7 +1237,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Specifies the version of the platform image or marketplace image used to create\nthe virtual machine. The allowed formats are Major.Minor.Build or 'latest'.\nMajor, Minor, and Build are decimal numbers. Specify 'latest' to use the latest\nversion of an image available at deploy time. Even if you use 'latest', the VM\nimage will not automatically update after deploy time even if a new version\nbecomes available. Please do not use field 'version' for gallery image\ndeployment, gallery image should always use 'id' field for deployment, to use 'latest'\nversion of gallery image, just set \n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageName}'\nin the 'id' field without version input."
+          "description": "Specifies the version of the platform image or marketplace image used to create\nthe virtual machine. The allowed formats are Major.Minor.Build or 'latest'.\nMajor, Minor, and Build are decimal numbers. Specify 'latest' to use the latest\nversion of an image available at deploy time. Even if you use 'latest', the VM\nimage will not automatically update after deploy time even if a new version\nbecomes available. Please do not use field 'version' for gallery image\ndeployment, gallery image should always use 'id' field for deployment, to use 'latest'\nversion of gallery image, just set\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageName}'\nin the 'id' field without version input."
         },
         "exactVersion": {
           "type": "string",
@@ -1277,11 +1352,13 @@
         "values": [
           {
             "name": "ImageDefault",
-            "value": "ImageDefault"
+            "value": "ImageDefault",
+            "description": "You control the timing of patch assessments on a virtual machine."
           },
           {
             "name": "AutomaticByPlatform",
-            "value": "AutomaticByPlatform"
+            "value": "AutomaticByPlatform",
+            "description": "The platform will trigger periodic patch assessments.The property provisionVMAgent must be true."
           }
         ]
       }
@@ -1319,19 +1396,23 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "Unknown Reboot setting"
           },
           {
             "name": "IfRequired",
-            "value": "IfRequired"
+            "value": "IfRequired",
+            "description": "IfRequired Reboot setting"
           },
           {
             "name": "Never",
-            "value": "Never"
+            "value": "Never",
+            "description": "Never Reboot setting"
           },
           {
             "name": "Always",
-            "value": "Always"
+            "value": "Always",
+            "description": "Always Reboot setting"
           }
         ]
       }
@@ -1352,7 +1433,7 @@
     },
     "LinuxVMGuestPatchMode": {
       "type": "string",
-      "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual\nmachines associated to virtual machine scale set with OrchestrationMode as\nFlexible.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - The\nvirtual machine's default patching configuration is used. <br /><br />\n**AutomaticByPlatform** - The virtual machine will be automatically updated by\nthe platform. The property provisionVMAgent must be true",
+      "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual\nmachines associated to virtual machine scale set with OrchestrationMode as\nFlexible.",
       "enum": [
         "ImageDefault",
         "AutomaticByPlatform"
@@ -1363,11 +1444,13 @@
         "values": [
           {
             "name": "ImageDefault",
-            "value": "ImageDefault"
+            "value": "ImageDefault",
+            "description": "The virtual machine's default patching configuration is used."
           },
           {
             "name": "AutomaticByPlatform",
-            "value": "AutomaticByPlatform"
+            "value": "AutomaticByPlatform",
+            "description": "The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true."
           }
         ]
       }
@@ -1403,11 +1486,13 @@
         "values": [
           {
             "name": "Audit",
-            "value": "Audit"
+            "value": "Audit",
+            "description": "Audit Mode"
           },
           {
             "name": "Enforce",
-            "value": "Enforce"
+            "value": "Enforce",
+            "description": "Enforce Mode"
           }
         ]
       }
@@ -1424,7 +1509,8 @@
         "values": [
           {
             "name": "2020-11-01",
-            "value": "2020-11-01"
+            "value": "2020-11-01",
+            "description": "Initial version supported. Later versions are supported as well."
           }
         ]
       }
@@ -1443,15 +1529,18 @@
         "values": [
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "None Mode"
           },
           {
             "name": "AcceleratedConnections",
-            "value": "AcceleratedConnections"
+            "value": "AcceleratedConnections",
+            "description": "AcceleratedConnections Mode"
           },
           {
             "name": "Floating",
-            "value": "Floating"
+            "value": "Floating",
+            "description": "Floating Mode"
           }
         ]
       }
@@ -1472,29 +1561,35 @@
         "values": [
           {
             "name": "None",
-            "value": "None"
+            "value": "None",
+            "description": "no sku"
           },
           {
             "name": "A1",
-            "value": "A1"
+            "value": "A1",
+            "description": "A1 sku"
           },
           {
             "name": "A2",
-            "value": "A2"
+            "value": "A2",
+            "description": "A2 sku"
           },
           {
             "name": "A4",
-            "value": "A4"
+            "value": "A4",
+            "description": "A4 sku"
           },
           {
             "name": "A8",
-            "value": "A8"
+            "value": "A8",
+            "description": "A8 sku"
           }
         ]
       }
     },
     "OSImageNotificationProfile": {
       "type": "object",
+      "description": "Specifies OS Image Scheduled Event related configurations.",
       "properties": {
         "notBeforeTimeout": {
           "type": "string",
@@ -1515,7 +1610,19 @@
       ],
       "x-ms-enum": {
         "name": "OperatingSystemTypes",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "Windows OS type"
+          },
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "Linux OS type"
+          }
+        ]
       }
     },
     "PatchSettings": {
@@ -1549,7 +1656,19 @@
       ],
       "x-ms-enum": {
         "name": "ProtocolTypes",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Http",
+            "value": "Http",
+            "description": "Http protocol"
+          },
+          {
+            "name": "Https",
+            "value": "Https",
+            "description": "Https protocol"
+          }
+        ]
       }
     },
     "ProvisioningState": {
@@ -1642,7 +1761,7 @@
     },
     "PublicIPAddressSkuName": {
       "type": "string",
-      "description": "Specify public IP sku name",
+      "description": "Specify public IP sku name.",
       "enum": [
         "Basic",
         "Standard"
@@ -1653,11 +1772,13 @@
         "values": [
           {
             "name": "Basic",
-            "value": "Basic"
+            "value": "Basic",
+            "description": "Basic sku name"
           },
           {
             "name": "Standard",
-            "value": "Standard"
+            "value": "Standard",
+            "description": "Standard sku name"
           }
         ]
       }
@@ -1675,11 +1796,13 @@
         "values": [
           {
             "name": "Regional",
-            "value": "Regional"
+            "value": "Regional",
+            "description": "Regional sku tier"
           },
           {
             "name": "Global",
-            "value": "Global"
+            "value": "Global",
+            "description": "Global sku tier"
           }
         ]
       }
@@ -1784,6 +1907,7 @@
     },
     "ScheduledEventsProfile": {
       "type": "object",
+      "description": "Specifies Scheduled Event related configurations.",
       "properties": {
         "terminateNotificationProfile": {
           "$ref": "#/definitions/TerminateNotificationProfile",
@@ -1797,7 +1921,7 @@
     },
     "SecurityEncryptionTypes": {
       "type": "string",
-      "description": "Specifies the EncryptionType of the managed disk. It is set to\nDiskWithVMGuestState for encryption of the managed disk along with VMGuestState\nblob, VMGuestStateOnly for encryption of just the VMGuestState blob, and\nNonPersistedTPM for not persisting firmware state in the VMGuestState blob..\n**Note:** It can be set for only Confidential VMs.",
+      "description": "Specifies the EncryptionType of the managed disk.\n**Note:** It can be set for only Confidential VMs.",
       "enum": [
         "VMGuestStateOnly",
         "DiskWithVMGuestState",
@@ -1809,15 +1933,18 @@
         "values": [
           {
             "name": "VMGuestStateOnly",
-            "value": "VMGuestStateOnly"
+            "value": "VMGuestStateOnly",
+            "description": "EncryptionType of the managed disk is set to VMGuestStateOnly for encryption\nof just the VMGuestState blob."
           },
           {
             "name": "DiskWithVMGuestState",
-            "value": "DiskWithVMGuestState"
+            "value": "DiskWithVMGuestState",
+            "description": "EncryptionType of the managed disk is set to DiskWithVMGuestState for encryption\nof the managed disk along with VMGuestState blob."
           },
           {
             "name": "NonPersistedTPM",
-            "value": "NonPersistedTPM"
+            "value": "NonPersistedTPM",
+            "description": "EncryptionType of the managed disk is set to NonPersistedTPM for not persisting\nfirmware state in the VMGuestState blob."
           }
         ]
       }
@@ -1878,11 +2005,13 @@
         "values": [
           {
             "name": "TrustedLaunch",
-            "value": "TrustedLaunch"
+            "value": "TrustedLaunch",
+            "description": "TrustedLaunch security type"
           },
           {
             "name": "ConfidentialVM",
-            "value": "ConfidentialVM"
+            "value": "ConfidentialVM",
+            "description": "ConfidentialVM security type"
           }
         ]
       }
@@ -1906,7 +2035,19 @@
       ],
       "x-ms-enum": {
         "name": "SettingNames",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AutoLogon",
+            "value": "AutoLogon",
+            "description": "AutoLogon setting"
+          },
+          {
+            "name": "FirstLogonCommands",
+            "value": "FirstLogonCommands",
+            "description": "FirstLogonCommands setting"
+          }
+        ]
       }
     },
     "SpotAllocationStrategy": {
@@ -2010,7 +2151,24 @@
       ],
       "x-ms-enum": {
         "name": "StatusLevelTypes",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Info",
+            "value": "Info",
+            "description": "Info level"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning level"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error Level"
+          }
+        ]
       }
     },
     "StorageAccountTypes": {
@@ -2031,37 +2189,45 @@
         "values": [
           {
             "name": "Standard_LRS",
-            "value": "Standard_LRS"
+            "value": "Standard_LRS",
+            "description": "Standard_LRS option."
           },
           {
             "name": "Premium_LRS",
-            "value": "Premium_LRS"
+            "value": "Premium_LRS",
+            "description": "Premium_LRS option."
           },
           {
             "name": "StandardSSD_LRS",
-            "value": "StandardSSD_LRS"
+            "value": "StandardSSD_LRS",
+            "description": "StandardSSD_LRS option."
           },
           {
             "name": "UltraSSD_LRS",
-            "value": "UltraSSD_LRS"
+            "value": "UltraSSD_LRS",
+            "description": "UltraSSD_LRS option."
           },
           {
             "name": "Premium_ZRS",
-            "value": "Premium_ZRS"
+            "value": "Premium_ZRS",
+            "description": "Premium_ZRS option."
           },
           {
             "name": "StandardSSD_ZRS",
-            "value": "StandardSSD_ZRS"
+            "value": "StandardSSD_ZRS",
+            "description": "StandardSSD_ZRS option."
           },
           {
             "name": "PremiumV2_LRS",
-            "value": "PremiumV2_LRS"
+            "value": "PremiumV2_LRS",
+            "description": "PremiumV2_LRS option."
           }
         ]
       }
     },
     "SubResource": {
       "type": "object",
+      "description": "Describes SubResource",
       "properties": {
         "id": {
           "type": "string",
@@ -2071,6 +2237,7 @@
     },
     "SubResourceReadOnly": {
       "type": "object",
+      "description": "Describes a Readonly subresource.",
       "properties": {
         "id": {
           "type": "string",
@@ -2081,6 +2248,7 @@
     },
     "TerminateNotificationProfile": {
       "type": "object",
+      "description": "Specifies Terminate Scheduled Event related configurations.",
       "properties": {
         "notBeforeTimeout": {
           "type": "string",
@@ -2227,11 +2395,13 @@
         "values": [
           {
             "name": "Deallocate",
-            "value": "Deallocate"
+            "value": "Deallocate",
+            "description": "Deallocate Eviction Policy"
           },
           {
             "name": "Delete",
-            "value": "Delete"
+            "value": "Delete",
+            "description": "Delete Eviction Policy"
           }
         ]
       }
@@ -2384,15 +2554,18 @@
         "values": [
           {
             "name": "Regular",
-            "value": "Regular"
+            "value": "Regular",
+            "description": "Regular Priority"
           },
           {
             "name": "Low",
-            "value": "Low"
+            "value": "Low",
+            "description": "Low Priority. 'Low' enum will be deprecated in the future,\nplease use 'Spot' as the enum to deploy Azure Spot VM/VMSS."
           },
           {
             "name": "Spot",
-            "value": "Spot"
+            "value": "Spot",
+            "description": "Spot Priority"
           }
         ]
       }
@@ -3027,7 +3200,8 @@
           ]
         },
         "diskControllerType": {
-          "type": "string"
+          "$ref": "#/definitions/DiskControllerTypes",
+          "description": "Specifies the disk controller type configured for the virtual machines in the scale set. Minimum api-version: 2022-08-01"
         }
       }
     },
@@ -3112,7 +3286,7 @@
     },
     "WindowsPatchAssessmentMode": {
       "type": "string",
-      "description": "Specifies the mode of VM Guest patch assessment for the IaaS virtual\nmachine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - You\ncontrol the timing of patch assessments on a virtual machine.<br /><br />\n**AutomaticByPlatform** - The platform will trigger periodic patch assessments.\nThe property provisionVMAgent must be true.",
+      "description": "Specifies the mode of VM Guest patch assessment for the IaaS virtual machine.",
       "enum": [
         "ImageDefault",
         "AutomaticByPlatform"
@@ -3123,18 +3297,20 @@
         "values": [
           {
             "name": "ImageDefault",
-            "value": "ImageDefault"
+            "value": "ImageDefault",
+            "description": "You control the timing of patch assessments on a virtual machine."
           },
           {
             "name": "AutomaticByPlatform",
-            "value": "AutomaticByPlatform"
+            "value": "AutomaticByPlatform",
+            "description": "The platform will trigger periodic patch assessments. The property provisionVMAgent must be true."
           }
         ]
       }
     },
     "WindowsVMGuestPatchAutomaticByPlatformRebootSetting": {
       "type": "string",
-      "description": "Specifies the reboot setting for all AutomaticByPlatform patch installation\noperations.",
+      "description": "Specifies the reboot setting for all AutomaticByPlatform patch installation operations.",
       "enum": [
         "Unknown",
         "IfRequired",
@@ -3147,19 +3323,23 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "Unknown Reboot setting"
           },
           {
             "name": "IfRequired",
-            "value": "IfRequired"
+            "value": "IfRequired",
+            "description": "IfRequired Reboot setting"
           },
           {
             "name": "Never",
-            "value": "Never"
+            "value": "Never",
+            "description": "Never Reboot setting"
           },
           {
             "name": "Always",
-            "value": "Always"
+            "value": "Always",
+            "description": "Always Reboot setting"
           }
         ]
       }
@@ -3180,7 +3360,7 @@
     },
     "WindowsVMGuestPatchMode": {
       "type": "string",
-      "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual\nmachines associated to virtual machine scale set with OrchestrationMode as\nFlexible.<br /><br /> Possible values are:<br /><br /> **Manual** - You\ncontrol the application of patches to a virtual machine. You do this by\napplying patches manually inside the VM. In this mode, automatic updates are\ndisabled; the property WindowsConfiguration.enableAutomaticUpdates must be\nfalse<br /><br /> **AutomaticByOS** - The virtual machine will automatically be\nupdated by the OS. The property WindowsConfiguration.enableAutomaticUpdates\nmust be true. <br /><br /> **AutomaticByPlatform** - the virtual machine will\nautomatically updated by the platform. The properties provisionVMAgent and\nWindowsConfiguration.enableAutomaticUpdates must be true",
+      "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine or virtual\nmachines associated to virtual machine scale set with OrchestrationMode as\nFlexible.",
       "enum": [
         "Manual",
         "AutomaticByOS",
@@ -3192,15 +3372,18 @@
         "values": [
           {
             "name": "Manual",
-            "value": "Manual"
+            "value": "Manual",
+            "description": "You control the application of patches to a virtual machine.\nYou do this by applying patches manually inside the VM. In this mode,\nautomatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates\nmust be false"
           },
           {
             "name": "AutomaticByOS",
-            "value": "AutomaticByOS"
+            "value": "AutomaticByOS",
+            "description": "The virtual machine will automatically be updated by the OS.\nThe property WindowsConfiguration.enableAutomaticUpdates must be true."
           },
           {
             "name": "AutomaticByPlatform",
-            "value": "AutomaticByPlatform"
+            "value": "AutomaticByPlatform",
+            "description": "The virtual machine will automatically updated by the platform. The properties \nprovisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true."
           }
         ]
       }
