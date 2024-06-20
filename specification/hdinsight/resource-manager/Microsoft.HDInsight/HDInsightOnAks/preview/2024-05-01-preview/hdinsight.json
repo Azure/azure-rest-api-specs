@@ -1585,8 +1585,30 @@
       "properties": {
         "clusterPoolVersion": {
           "$ref": "#/definitions/ClusterPoolVersionPattern"
+        },
+        "publicIpTag": {
+          "description": "Gets or sets the IP tag for the public IPs created along with the HDInsightOnAks ClusterPools and Clusters. ",
+          "$ref": "#/definitions/IpTag"
         }
       }
+    },
+    "IpTag": {
+      "type": "object",
+      "required": [
+        "ipTagType",
+        "tag"
+      ],
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "Gets or sets the ipTag type: Example FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "Gets or sets value of the IpTag associated with the public IP. Example HDInsight, SQL, Storage etc"
+        }
+      },
+      "description": "Contains the IpTag associated with the public IP address"
     },
     "ClusterPoolComputeProfile": {
       "type": "object",
@@ -1669,26 +1691,8 @@
           },
           "title": "The IP ranges authorized to access the AKS API server.",
           "description": "IP ranges are specified in CIDR format, e.g. 137.117.106.88/29. This feature is not compatible with private AKS clusters. So you cannot set enablePrivateApiServer to true and apiServerAuthorizedIpRanges at the same time. Currently, this property is not supported and please don't use it."
-        },
-        "publicIpTag": {
-          "description": "Gets or sets the IP tag for the public IPs created along with the HDInsightOnAks ClusterPools and Clusters. ",
-          "$ref": "#/definitions/IpTag"
         }
       }
-    },
-    "IpTag": {
-      "type": "object",
-      "properties": {
-        "ipTagType": {
-          "type": "string",
-          "description": "Gets or sets the ipTag type: Example FirstPartyUsage."
-        },
-        "tag": {
-          "type": "string",
-          "description": "Gets or sets value of the IpTag associated with the public IP. Example HDInsight, SQL, Storage etc"
-        }
-      },
-      "description": "Contains the IpTag associated with the public IP address"
     },
     "ClusterPoolLogAnalyticsProfile": {
       "type": "object",
