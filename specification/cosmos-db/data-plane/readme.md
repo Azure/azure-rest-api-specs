@@ -19,15 +19,21 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
 These are the global settings for the Tables API.
 
 ``` yaml
-azure-validator: true
 openapi-type: data-plane
 tag: package-2019-02
+```
+
+### Tag: package-2019-02-preview
+
+These settings apply only when `--tag=package-2019-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02-preview'
+input-file:
+- Microsoft.Tables/preview/2019-02-02/table.json
 ```
 
 ### Tag: package-2019-02
@@ -36,29 +42,30 @@ These settings apply only when `--tag=package-2019-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-02'
 input-file:
-- Microsoft.Tables/preview/2019-02-02/table.json
+- Microsoft.Tables/stable/2019-02-02/table.json
 ```
 
----
-# Suppressions
+### Suppression
 
 ``` yaml
 directive:
+  - suppress: XmsExamplesRequired
+    reason: The path only supports XML input/output which is not supported
   - suppress: D5001
     where: $["x-ms-paths"]["/?ServiceProperties"].put
-    reason: The path only supports XML input/outputm which is not supported
+    reason: The path only supports XML input/output which is not supported
   - suppress: D5001
     where: $["x-ms-paths"]["/?ServiceProperties"].get
-    reason: The path only supports XML input/outputm which is not supported
+    reason: The path only supports XML input/output which is not supported
   - suppress: D5001
     where: $["x-ms-paths"]["/?ServiceStats"].get
-    reason: The path only supports XML input/outputm which is not supported
+    reason: The path only supports XML input/output which is not supported
   - suppress: D5001
     where: $.paths["/{table}"].get
-    reason: The path only supports XML input/outputm which is not supported
+    reason: The path only supports XML input/output which is not supported
   - suppress: D5001
     where: $.paths["/{table}"].put
-    reason: The path only supports XML input/outputm which is not supported
+    reason: The path only supports XML input/output which is not supported
   - suppress: R3016
     where: $.definitions.TableServiceError.properties.Message
     reason: Response from service is not camel case
