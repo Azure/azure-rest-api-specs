@@ -149,16 +149,16 @@ model ActivationLinks {
 @added(Versions.v20240601_preview)
 @doc("Add Subscription Operation state enum")
 union AddSubscriptionOperationState {
-@doc("Succeeded - State when Add Subscription operation succeeded")
-Succeeded: "Succeeded",
+  @doc("Succeeded - State when Add Subscription operation succeeded")
+  Succeeded: "Succeeded",
 
-@doc("Updating - State when Add Subscription operation is being Updated")
-Updating: "Updating",
+  @doc("Updating - State when Add Subscription operation is being Updated")
+  Updating: "Updating",
 
-@doc("Failed - State when Add Subscription operation failed")
-Failed: "Failed",
+  @doc("Failed - State when Add Subscription operation failed")
+  Failed: "Failed",
 
-string,
+  string,
 }
 
 @added(Versions.v20240601_preview)
@@ -207,7 +207,7 @@ model OracleSubscriptionProperties {
   @doc("State of the add Azure subscription operation on Oracle subscription")
   @visibility("read")
   addSubscriptionOperationState?: AddSubscriptionOperationState;
-  
+
   @added(Versions.v20240601_preview)
   @doc("Status details of the last operation on Oracle subscription")
   @visibility("read")
