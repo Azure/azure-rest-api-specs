@@ -190,8 +190,9 @@ model BytesBody<ContentType> {
 
 alias BodyParameter<T, name extends string = "body"> = {
   @friendlyName(name)
-  @bodyRoot body: T;
-}
+  @bodyRoot
+  body: T;
+};
 
 alias SigningRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
   @doc("An optional client version.")

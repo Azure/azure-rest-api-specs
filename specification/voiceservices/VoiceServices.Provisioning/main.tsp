@@ -783,8 +783,9 @@ model CountOfRecordsHeader {
 
 alias BodyParameter<T, name extends string = "body"> = {
   @friendlyName(name)
-  @bodyRoot body: T;
-}
+  @bodyRoot
+  body: T;
+};
 
 alias FilterQueryParameters = QueryParametersTrait<{
   ...FilterQueryParameter;

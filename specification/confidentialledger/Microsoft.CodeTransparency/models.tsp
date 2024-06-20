@@ -272,5 +272,6 @@ model CodeTransparencyConfigurationPolicy {
 
 alias BodyParameter<T, name extends string = "body"> = {
   @friendlyName(name)
-  @bodyRoot body: T;
-}
+  @bodyRoot
+  body: T;
+};
