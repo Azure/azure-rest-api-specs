@@ -683,18 +683,6 @@
           "type": "string",
           "description": "Specifies that the image or disk that is being used was licensed on-premises.\n<br><br> Possible values for Windows Server operating system are: <br><br>\nWindows_Client <br><br> Windows_Server <br><br> Possible values for Linux\nServer operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS\n(for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for\nWindows\nServer](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing)\n<br><br> [Azure Hybrid Use Benefit for Linux\nServer](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux)\n<br><br> Minimum api-version: 2015-06-15"
         },
-        "priority": {
-          "$ref": "#/definitions/VirtualMachinePriorityTypes",
-          "description": "Specifies the priority for the virtual machines in the scale set. Minimum\napi-version: 2017-10-30-preview."
-        },
-        "evictionPolicy": {
-          "$ref": "#/definitions/VirtualMachineEvictionPolicyTypes",
-          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot\nscale set. For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are\nsupported and the minimum api-version is 2019-03-01. For Azure Spot scale sets,\nboth 'Deallocate' and 'Delete' are supported and the minimum api-version is\n2017-10-30-preview."
-        },
-        "billingProfile": {
-          "$ref": "#/definitions/BillingProfile",
-          "description": "Specifies the billing related details of a Azure Spot VMSS. Minimum\napi-version: 2019-03-01."
-        },
         "scheduledEventsProfile": {
           "$ref": "#/definitions/ScheduledEventsProfile",
           "description": "Specifies Scheduled Event related configurations."
@@ -728,17 +716,6 @@
           "format": "date-time",
           "description": "Specifies the time in which this VM profile for the Virtual Machine Scale Set\nwas created. Minimum API version for this property is 2023-09-01. This value\nwill be added to VMSS Flex VM tags when creating/updating the VMSS VM Profile\nwith minimum api-version 2023-09-01.",
           "readOnly": true
-        }
-      }
-    },
-    "BillingProfile": {
-      "type": "object",
-      "description": "Specifies the billing related details of a Azure Spot VM or VMSS. Minimum\napi-version: 2019-03-01.",
-      "properties": {
-        "maxPrice": {
-          "type": "number",
-          "format": "double",
-          "description": "Specifies the maximum price you are willing to pay for a Azure Spot VM/VMSS.\nThis price is in US Dollars. <br><br> This price will be compared with the\ncurrent Azure Spot price for the VM size. Also, the prices are compared at the\ntime of create/update of Azure Spot VM/VMSS and the operation will only succeed\nif  the maxPrice is greater than the current Azure Spot price. <br><br> The\nmaxPrice will also be used for evicting a Azure Spot VM/VMSS if the current\nAzure Spot price goes beyond the maxPrice after creation of VM/VMSS. <br><br>\nPossible values are: <br><br> - Any decimal value greater than zero. Example:\n0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br>\nYou can set the maxPrice to -1 to indicate that the Azure Spot VM/VMSS should\nnot be evicted for price reasons. Also, the default max price is -1 if it is\nnot provided by you. <br><br>Minimum api-version: 2019-03-01."
         }
       }
     },
@@ -2382,30 +2359,6 @@
         }
       }
     },
-    "VirtualMachineEvictionPolicyTypes": {
-      "type": "string",
-      "description": "Specifies the eviction policy for the Azure Spot VM/VMSS",
-      "enum": [
-        "Deallocate",
-        "Delete"
-      ],
-      "x-ms-enum": {
-        "name": "VirtualMachineEvictionPolicyTypes",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Deallocate",
-            "value": "Deallocate",
-            "description": "Deallocate Eviction Policy"
-          },
-          {
-            "name": "Delete",
-            "value": "Delete",
-            "description": "Delete Eviction Policy"
-          }
-        ]
-      }
-    },
     "VirtualMachineExtension": {
       "type": "object",
       "description": "Describes a Virtual Machine Extension.",
@@ -2538,36 +2491,6 @@
             "type": "string"
           }
         }
-      }
-    },
-    "VirtualMachinePriorityTypes": {
-      "type": "string",
-      "description": "Specifies the priority for a standalone virtual machine or the virtual machines\nin the scale set. 'Low' enum will be deprecated in the future, please use 'Spot'\nas the enum to deploy Azure Spot VM/VMSS.",
-      "enum": [
-        "Regular",
-        "Low",
-        "Spot"
-      ],
-      "x-ms-enum": {
-        "name": "VirtualMachinePriorityTypes",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Regular",
-            "value": "Regular",
-            "description": "Regular Priority"
-          },
-          {
-            "name": "Low",
-            "value": "Low",
-            "description": "Low Priority. 'Low' enum will be deprecated in the future,\nplease use 'Spot' as the enum to deploy Azure Spot VM/VMSS."
-          },
-          {
-            "name": "Spot",
-            "value": "Spot",
-            "description": "Spot Priority"
-          }
-        ]
       }
     },
     "VirtualMachineScaleSet": {

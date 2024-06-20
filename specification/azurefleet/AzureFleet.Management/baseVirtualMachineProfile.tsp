@@ -60,27 +60,6 @@ model BaseVirtualMachineProfile {
   licenseType?: string;
 
   /**
-   * Specifies the priority for the virtual machines in the scale set. Minimum
-   * api-version: 2017-10-30-preview.
-   */
-  priority?: VirtualMachinePriorityTypes;
-
-  /**
-   * Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot
-   * scale set. For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are
-   * supported and the minimum api-version is 2019-03-01. For Azure Spot scale sets,
-   * both 'Deallocate' and 'Delete' are supported and the minimum api-version is
-   * 2017-10-30-preview.
-   */
-  evictionPolicy?: VirtualMachineEvictionPolicyTypes;
-
-  /**
-   * Specifies the billing related details of a Azure Spot VMSS. Minimum
-   * api-version: 2019-03-01.
-   */
-  billingProfile?: BillingProfile;
-
-  /**
    * Specifies Scheduled Event related configurations.
    */
   scheduledEventsProfile?: ScheduledEventsProfile;
@@ -1512,28 +1491,6 @@ model SubResourceReadOnly {
 }
 
 /**
- * Specifies the billing related details of a Azure Spot VM or VMSS. Minimum
- * api-version: 2019-03-01.
- */
-model BillingProfile {
-  /**
-   * Specifies the maximum price you are willing to pay for a Azure Spot VM/VMSS.
-   * This price is in US Dollars. <br><br> This price will be compared with the
-   * current Azure Spot price for the VM size. Also, the prices are compared at the
-   * time of create/update of Azure Spot VM/VMSS and the operation will only succeed
-   * if  the maxPrice is greater than the current Azure Spot price. <br><br> The
-   * maxPrice will also be used for evicting a Azure Spot VM/VMSS if the current
-   * Azure Spot price goes beyond the maxPrice after creation of VM/VMSS. <br><br>
-   * Possible values are: <br><br> - Any decimal value greater than zero. Example:
-   * 0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br>
-   * You can set the maxPrice to -1 to indicate that the Azure Spot VM/VMSS should
-   * not be evicted for price reasons. Also, the default max price is -1 if it is
-   * not provided by you. <br><br>Minimum api-version: 2019-03-01.
-   */
-  maxPrice?: float64;
-}
-
-/**
  * Specifies Scheduled Event related configurations.
  */
 model ScheduledEventsProfile {
@@ -1905,48 +1862,6 @@ model ResourceWithOptionalLocation {
    * Resource tags
    */
   tags?: Record<string>;
-}
-
-/**
- * Specifies the priority for a standalone virtual machine or the virtual machines
- * in the scale set. 'Low' enum will be deprecated in the future, please use 'Spot'
- * as the enum to deploy Azure Spot VM/VMSS.
- */
-union VirtualMachinePriorityTypes {
-  string,
-
-  /**
-   * Regular Priority
-   */
-  Regular: "Regular",
-
-  /**
-   * Low Priority. 'Low' enum will be deprecated in the future,
-   *  please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.
-   */
-  Low: "Low",
-
-  /**
-   * Spot Priority
-   */
-  Spot: "Spot",
-}
-
-/**
- * Specifies the eviction policy for the Azure Spot VM/VMSS
- */
-union VirtualMachineEvictionPolicyTypes {
-  string,
-
-  /**
-   * Deallocate Eviction Policy
-   */
-  Deallocate: "Deallocate",
-
-  /**
-   * Delete Eviction Policy
-   */
-  Delete: "Delete",
 }
 
 /**
