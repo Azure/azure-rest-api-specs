@@ -1,11 +1,110 @@
 {
-"swagger": "2.0",
-"info": {
-"version": "2024-01-01",
-"title": "Schema of DataBox events published to Azure Event Grid",
-"description": "Describes the schema of the DataBox events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
-},
-"paths": {},
-"definitions": {
-"DataBoxCopyCompletedEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyCompleted event.", "properties": {"serialNumber": {"type": "string", "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated."}, "stageName": {"$ref": "#/definitions/DataBox.DataBoxStageName", "description": "Name of the current Stage"}, "stageTime": {"type": "string", "format": "date-time", "description": "The time at which the stage happened."}}, "required": ["stageName", "stageTime"]},"DataBoxCopyStartedEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event.", "properties": {"serialNumber": {"type": "string", "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated."}, "stageName": {"$ref": "#/definitions/DataBox.DataBoxStageName", "description": "Name of the current Stage"}, "stageTime": {"type": "string", "format": "date-time", "description": "The time at which the stage happened."}}, "required": ["stageName", "stageTime"]},"DataBoxOrderCompletedEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.OrderCompleted event.", "properties": {"serialNumber": {"type": "string", "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated."}, "stageName": {"$ref": "#/definitions/DataBox.DataBoxStageName", "description": "Name of the current Stage"}, "stageTime": {"type": "string", "format": "date-time", "description": "The time at which the stage happened."}}, "required": ["stageName", "stageTime"]},"DataBoxStageName" : {"type": "string", "description": "Schema of DataBox Stage Name enumeration.", "enum": ["CopyStarted", "CopyCompleted", "OrderCompleted"], "x-ms-enum": {"name": "DataBoxStageName", "modelAsString": true, "values": [{"name": "CopyStarted", "value": "CopyStarted", "description": "Copy has started"}, {"name": "CopyCompleted", "value": "CopyCompleted", "description": "Copy has completed"}, {"name": "OrderCompleted", "value": "OrderCompleted", "description": "Order has been completed"}]}}}
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-01",
+    "title": "Schema of DataBox events published to Azure Event Grid",
+    "description": "Describes the schema of the DataBox events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "DataBoxCopyCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyCompleted event.",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated."
+        },
+        "stageName": {
+          "$ref": "#/definitions/DataBox.DataBoxStageName",
+          "description": "Name of the current Stage"
+        },
+        "stageTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the stage happened."
+        }
+      },
+      "required": [
+        "stageName",
+        "stageTime"
+      ]
+    },
+    "DataBoxCopyStartedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event.",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated."
+        },
+        "stageName": {
+          "$ref": "#/definitions/DataBox.DataBoxStageName",
+          "description": "Name of the current Stage"
+        },
+        "stageTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the stage happened."
+        }
+      },
+      "required": [
+        "stageName",
+        "stageTime"
+      ]
+    },
+    "DataBoxOrderCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.OrderCompleted event.",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated."
+        },
+        "stageName": {
+          "$ref": "#/definitions/DataBox.DataBoxStageName",
+          "description": "Name of the current Stage"
+        },
+        "stageTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the stage happened."
+        }
+      },
+      "required": [
+        "stageName",
+        "stageTime"
+      ]
+    },
+    "DataBoxStageName": {
+      "type": "string",
+      "description": "Schema of DataBox Stage Name enumeration.",
+      "enum": [
+        "CopyStarted",
+        "CopyCompleted",
+        "OrderCompleted"
+      ],
+      "x-ms-enum": {
+        "name": "DataBoxStageName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CopyStarted",
+            "value": "CopyStarted",
+            "description": "Copy has started"
+          },
+          {
+            "name": "CopyCompleted",
+            "value": "CopyCompleted",
+            "description": "Copy has completed"
+          },
+          {
+            "name": "OrderCompleted",
+            "value": "OrderCompleted",
+            "description": "Order has been completed"
+          }
+        ]
+      }
+    }
+  }
 }

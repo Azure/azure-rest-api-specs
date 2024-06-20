@@ -1,11 +1,106 @@
 {
-"swagger": "2.0",
-"info": {
-"version": "2024-01-01",
-"title": "Schema of Maps events published to Azure Event Grid",
-"description": "Describes the schema of the Maps events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
-},
-"paths": {},
-"definitions": {
-"MapsGeofenceEnteredEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.", "allOf": [{"$ref": "#/definitions/MapsGeofenceEventProperties"}]},"MapsGeofenceEventProperties" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult).", "properties": {"expiredGeofenceGeometryId": {"type": "array", "description": "Lists of the geometry ID of the geofence which is expired relative to the user time in the request.", "items": {"type": "string"}}, "geometries": {"type": "array", "description": "Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence.", "items": {"$ref": "#/definitions/Maps.MapsGeofenceGeometry"}, "x-ms-identifiers": []}, "invalidPeriodGeofenceGeometryId": {"type": "array", "description": "Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.", "items": {"type": "string"}}, "isEventPublished": {"type": "boolean", "description": "True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber."}}, "required": ["geometries"]},"MapsGeofenceExitedEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.", "allOf": [{"$ref": "#/definitions/MapsGeofenceEventProperties"}]},"MapsGeofenceGeometry" : {"type": "object", "description": "The geofence geometry.", "properties": {"deviceId": {"type": "string", "description": "ID of the device."}, "distance": {"type": "number", "format": "float", "description": "Distance from the coordinate to the closest border of the geofence. Positive means the coordinate is outside of the geofence. If the coordinate is outside of the geofence, but more than the value of searchBuffer away from the closest geofence border, then the value is 999. Negative means the coordinate is inside of the geofence. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest geofencing border,then the value is -999. A value of 999 means that there is great confidence the coordinate is well outside the geofence. A value of -999 means that there is great confidence the coordinate is well within the geofence."}, "geometryId": {"type": "string", "description": "The unique ID for the geofence geometry."}, "nearestLat": {"type": "number", "format": "float", "description": "Latitude of the nearest point of the geometry."}, "nearestLon": {"type": "number", "format": "float", "description": "Longitude of the nearest point of the geometry."}, "udId": {"type": "string", "description": "The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API."}}},"MapsGeofenceResultEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.", "allOf": [{"$ref": "#/definitions/MapsGeofenceEventProperties"}]}}
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-01",
+    "title": "Schema of Maps events published to Azure Event Grid",
+    "description": "Describes the schema of the Maps events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "MapsGeofenceEnteredEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MapsGeofenceEventProperties"
+        }
+      ]
+    },
+    "MapsGeofenceEventProperties": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult).",
+      "properties": {
+        "expiredGeofenceGeometryId": {
+          "type": "array",
+          "description": "Lists of the geometry ID of the geofence which is expired relative to the user time in the request.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "geometries": {
+          "type": "array",
+          "description": "Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence.",
+          "items": {
+            "$ref": "#/definitions/Maps.MapsGeofenceGeometry"
+          },
+          "x-ms-identifiers": []
+        },
+        "invalidPeriodGeofenceGeometryId": {
+          "type": "array",
+          "description": "Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isEventPublished": {
+          "type": "boolean",
+          "description": "True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber."
+        }
+      },
+      "required": [
+        "geometries"
+      ]
+    },
+    "MapsGeofenceExitedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MapsGeofenceEventProperties"
+        }
+      ]
+    },
+    "MapsGeofenceGeometry": {
+      "type": "object",
+      "description": "The geofence geometry.",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "ID of the device."
+        },
+        "distance": {
+          "type": "number",
+          "format": "float",
+          "description": "Distance from the coordinate to the closest border of the geofence. Positive means the coordinate is outside of the geofence. If the coordinate is outside of the geofence, but more than the value of searchBuffer away from the closest geofence border, then the value is 999. Negative means the coordinate is inside of the geofence. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest geofencing border,then the value is -999. A value of 999 means that there is great confidence the coordinate is well outside the geofence. A value of -999 means that there is great confidence the coordinate is well within the geofence."
+        },
+        "geometryId": {
+          "type": "string",
+          "description": "The unique ID for the geofence geometry."
+        },
+        "nearestLat": {
+          "type": "number",
+          "format": "float",
+          "description": "Latitude of the nearest point of the geometry."
+        },
+        "nearestLon": {
+          "type": "number",
+          "format": "float",
+          "description": "Longitude of the nearest point of the geometry."
+        },
+        "udId": {
+          "type": "string",
+          "description": "The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API."
+        }
+      }
+    },
+    "MapsGeofenceResultEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MapsGeofenceEventProperties"
+        }
+      ]
+    }
+  }
 }

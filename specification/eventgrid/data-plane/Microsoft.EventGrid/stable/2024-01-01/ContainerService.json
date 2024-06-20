@@ -1,11 +1,98 @@
 {
-"swagger": "2.0",
-"info": {
-"version": "2024-01-01",
-"title": "Schema of ContainerService events published to Azure Event Grid",
-"description": "Describes the schema of the ContainerService events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
-},
-"paths": {},
-"definitions": {
-"ContainerServiceClusterSupportEndedEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event", "allOf": [{"$ref": "#/definitions/ContainerServiceClusterSupportEventData"}]},"ContainerServiceClusterSupportEndingEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event", "allOf": [{"$ref": "#/definitions/ContainerServiceClusterSupportEventData"}]},"ContainerServiceClusterSupportEventData" : {"type": "object", "description": "Schema of common properties of cluster support events", "properties": {"kubernetesVersion": {"type": "string", "description": "The Kubernetes version of the ManagedCluster resource"}}},"ContainerServiceNewKubernetesVersionAvailableEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event", "properties": {"latestSupportedKubernetesVersion": {"type": "string", "description": "The highest PATCH Kubernetes version for the highest MINOR version supported by ManagedCluster resource"}, "latestStableKubernetesVersion": {"type": "string", "description": "The highest PATCH Kubernetes version for the MINOR version considered stable for the ManagedCluster resource"}, "lowestMinorKubernetesVersion": {"type": "string", "description": "The highest PATCH Kubernetes version for the lowest applicable MINOR version available for the ManagedCluster resource"}, "latestPreviewKubernetesVersion": {"type": "string", "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event"}}},"ContainerServiceNodePoolRollingEventData" : {"type": "object", "description": "Schema of common properties of node pool rolling events", "properties": {"nodePoolName": {"type": "string", "description": "The name of the node pool in the ManagedCluster resource"}}},"ContainerServiceNodePoolRollingFailedEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event", "allOf": [{"$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"}]},"ContainerServiceNodePoolRollingStartedEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event", "allOf": [{"$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"}]},"ContainerServiceNodePoolRollingSucceededEventData" : {"type": "object", "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event", "allOf": [{"$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"}]}}
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-01",
+    "title": "Schema of ContainerService events published to Azure Event Grid",
+    "description": "Describes the schema of the ContainerService events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "ContainerServiceClusterSupportEndedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceClusterSupportEventData"
+        }
+      ]
+    },
+    "ContainerServiceClusterSupportEndingEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnding event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceClusterSupportEventData"
+        }
+      ]
+    },
+    "ContainerServiceClusterSupportEventData": {
+      "type": "object",
+      "description": "Schema of common properties of cluster support events",
+      "properties": {
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "The Kubernetes version of the ManagedCluster resource"
+        }
+      }
+    },
+    "ContainerServiceNewKubernetesVersionAvailableEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event",
+      "properties": {
+        "latestSupportedKubernetesVersion": {
+          "type": "string",
+          "description": "The highest PATCH Kubernetes version for the highest MINOR version supported by ManagedCluster resource"
+        },
+        "latestStableKubernetesVersion": {
+          "type": "string",
+          "description": "The highest PATCH Kubernetes version for the MINOR version considered stable for the ManagedCluster resource"
+        },
+        "lowestMinorKubernetesVersion": {
+          "type": "string",
+          "description": "The highest PATCH Kubernetes version for the lowest applicable MINOR version available for the ManagedCluster resource"
+        },
+        "latestPreviewKubernetesVersion": {
+          "type": "string",
+          "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingEventData": {
+      "type": "object",
+      "description": "Schema of common properties of node pool rolling events",
+      "properties": {
+        "nodePoolName": {
+          "type": "string",
+          "description": "The name of the node pool in the ManagedCluster resource"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingFailedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingFailed event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"
+        }
+      ]
+    },
+    "ContainerServiceNodePoolRollingStartedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingStarted event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"
+        }
+      ]
+    },
+    "ContainerServiceNodePoolRollingSucceededEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingSucceeded event",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerServiceNodePoolRollingEventData"
+        }
+      ]
+    }
+  }
 }
