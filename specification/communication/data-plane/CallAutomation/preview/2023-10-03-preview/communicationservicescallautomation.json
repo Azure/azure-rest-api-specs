@@ -613,7 +613,6 @@
           "MidConnections"
         ],
         "summary": "Recognize media from call.",
-        "description": "Recognize media from call.",
         "operationId": "CallMedia_Recognize",
         "parameters": [
           {
@@ -752,7 +751,6 @@
           "MidConnections"
         ],
         "summary": "Send dtmf tones.",
-        "description": "Send dtmf tones.",
         "operationId": "CallMedia_SendDtmfTones",
         "parameters": [
           {
@@ -863,7 +861,6 @@
           "MidConnections"
         ],
         "summary": "Hold participant from the call using identifier.",
-        "description": "Hold participant from the call using identifier.",
         "operationId": "CallMedia_Hold",
         "parameters": [
           {
@@ -910,7 +907,6 @@
           "MidConnections"
         ],
         "summary": "Unhold participants from the call using identifier.",
-        "description": "Unhold participants from the call using identifier.",
         "operationId": "CallMedia_Unhold",
         "parameters": [
           {
@@ -957,7 +953,6 @@
           "MidConnections"
         ],
         "summary": "Hold participant from the call using identifier.",
-        "description": "Hold participant from the call using identifier.",
         "operationId": "CallMedia_StartHoldMusic",
         "parameters": [
           {
@@ -1004,7 +999,6 @@
           "MidConnections"
         ],
         "summary": "Unhold participants from the call using identifier.",
-        "description": "Unhold participants from the call using identifier.",
         "operationId": "CallMedia_StopHoldMusic",
         "parameters": [
           {
@@ -1198,28 +1192,23 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Stop a dialog.",
-        "description": "Stop a dialog.",
         "operationId": "CallDialog_StopDialog",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
-            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
             "name": "dialogId",
             "in": "path",
-            "description": "The dialog id",
             "required": true,
             "type": "string"
           },
           {
             "name": "operationCallbackUri",
             "in": "query",
-            "description": "Operation callback URI.",
             "required": false,
             "type": "string"
           },
@@ -2254,6 +2243,10 @@
         "callbackUri": {
           "description": "The callback uri.",
           "type": "string"
+        },
+        "customCallingContext": {
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Used by customer to send custom calling context to targets when answering On-Behalf-Of call"
         },
         "operationContext": {
           "description": "A customer set value used to track the answering of a call.",
@@ -3336,7 +3329,7 @@
       }
     },
     "CallLocator": {
-      "description": "The locator used for joining or taking action on a call.",
+      "description": "The locator used for joining or taking action on a call",
       "type": "object",
       "properties": {
         "groupCallId": {
