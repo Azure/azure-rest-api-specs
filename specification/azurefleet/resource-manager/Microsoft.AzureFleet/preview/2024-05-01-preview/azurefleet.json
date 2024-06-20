@@ -1146,11 +1146,11 @@
         },
         "version": {
           "type": "string",
-          "description": "Specifies the version of the platform image or marketplace image used to create\nthe virtual machine. The allowed formats are Major.Minor.Build or 'latest'.\nMajor, Minor, and Build are decimal numbers. Specify 'latest' to use the latest\nversion of an image available at deploy time. Even if you use 'latest', the VM\nimage will not automatically update after deploy time even if a new version\nbecomes available. Please do not use field 'version' for gallery image\ndeployment, gallery image should always use 'id' field for deployment, to use\n'latest' version of gallery image, just set\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageName}'\nin the 'id' field without version input."
+          "description": "Specifies the version of the platform image or marketplace image used to create\nthe virtual machine. The allowed formats are Major.Minor.Build or 'latest'.\nMajor, Minor, and Build are decimal numbers. Specify 'latest' to use the latest\nversion of an image available at deploy time. Even if you use 'latest', the VM\nimage will not automatically update after deploy time even if a new version\nbecomes available. Please do not use field 'version' for gallery image\ndeployment, gallery image should always use 'id' field for deployment, to use 'latest'\nversion of gallery image, just set \n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageName}'\nin the 'id' field without version input."
         },
         "exactVersion": {
           "type": "string",
-          "description": "Specifies in decimal numbers, the version of platform image or marketplace\nimage used to create the virtual machine. This readonly field differs from\n'version', only if the value specified in 'version' field is 'latest'.",
+          "description": "Specifies in decimal numbers, the version of platform image or marketplace\nimage used to create the virtual machine. This readonly field differs from 'version',\nonly if the value specified in 'version' field is 'latest'.",
           "readOnly": true
         },
         "sharedGalleryImageId": {
@@ -2366,7 +2366,7 @@
     },
     "VirtualMachinePriorityTypes": {
       "type": "string",
-      "description": "Specifies the priority for a standalone virtual machine or the virtual machines\nin the scale set. 'Low' enum will be deprecated in the future, please use\n'Spot' as the enum to deploy Azure Spot VM/VMSS.",
+      "description": "Specifies the priority for a standalone virtual machine or the virtual machines\nin the scale set. 'Low' enum will be deprecated in the future, please use 'Spot'\nas the enum to deploy Azure Spot VM/VMSS.",
       "enum": [
         "Regular",
         "Low",
@@ -2851,7 +2851,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used\nto overwrite the size of the disk in a virtual machine image. The property\n'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot\nbe larger than 1023."
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used\nto overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB'\nis the number of bytes x 1024^3 for the disk and the value cannot\nbe larger than 1023."
         },
         "osType": {
           "$ref": "#/definitions/OperatingSystemTypes",

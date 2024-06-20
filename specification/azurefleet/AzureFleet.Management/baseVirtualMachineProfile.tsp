@@ -636,8 +636,8 @@ model ImageReference is SubResource {
    * version of an image available at deploy time. Even if you use 'latest', the VM
    * image will not automatically update after deploy time even if a new version
    * becomes available. Please do not use field 'version' for gallery image
-   * deployment, gallery image should always use 'id' field for deployment, to use
-   * 'latest' version of gallery image, just set
+   * deployment, gallery image should always use 'id' field for deployment, to use 'latest'
+   * version of gallery image, just set
    * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageName}'
    * in the 'id' field without version input.
    */
@@ -645,8 +645,8 @@ model ImageReference is SubResource {
 
   /**
    * Specifies in decimal numbers, the version of platform image or marketplace
-   * image used to create the virtual machine. This readonly field differs from
-   * 'version', only if the value specified in 'version' field is 'latest'.
+   * image used to create the virtual machine. This readonly field differs from 'version',
+   * only if the value specified in 'version' field is 'latest'.
    */
   @visibility("read")
   exactVersion?: string;
@@ -702,8 +702,8 @@ model VirtualMachineScaleSetOSDisk {
 
   /**
    * Specifies the size of an empty data disk in gigabytes. This element can be used
-   * to overwrite the size of the disk in a virtual machine image. The property
-   * 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot
+   * to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB'
+   * is the number of bytes x 1024^3 for the disk and the value cannot
    * be larger than 1023.
    */
   diskSizeGB?: int32;
@@ -1862,8 +1862,8 @@ model ResourceWithOptionalLocation {
 
 /**
  * Specifies the priority for a standalone virtual machine or the virtual machines
- * in the scale set. 'Low' enum will be deprecated in the future, please use
- * 'Spot' as the enum to deploy Azure Spot VM/VMSS.
+ * in the scale set. 'Low' enum will be deprecated in the future, please use 'Spot'
+ * as the enum to deploy Azure Spot VM/VMSS.
  */
 union VirtualMachinePriorityTypes {
   string,
