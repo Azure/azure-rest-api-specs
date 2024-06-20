@@ -914,13 +914,7 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Updated the private endpoint connection properties successfully.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "201": {
+          "202": {
             "description": "Created the private endpoint connection properties successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
@@ -929,6 +923,10 @@
               "Azure-AsyncOperation": {
                 "description": "Operation Status Location URI",
                 "type": "string"
+              },
+              "Location": {
+                "type": "string",
+                "description": "Operation Results Location URI"
               }
             }
           },
@@ -978,7 +976,7 @@
                 "type": "string"
               },
               "Location": {
-                "description": "Operation Status Location URI",
+                "description": "Operation Results Location URI",
                 "type": "string"
               },
               "Retry-After": {
@@ -1079,14 +1077,14 @@
           "200": {
             "description": ""
           },
-          "201": {
-            "description": ""
-          },
           "202": {
-            "description": ""
-          },
-          "204": {
-            "description": ""
+            "description": "",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": ""
+              }
+            }
           },
           "default": {
             "schema": {
