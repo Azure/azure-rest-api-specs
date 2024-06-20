@@ -45,10 +45,10 @@ using Microsoft.AVS;
 @@friendlyName(WorkloadNetworks.list, "list");
 
 // model
-@@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentity,
+@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity"
 );
-@@clientName(Azure.ResourceManager.Foundations.SystemAssignedServiceIdentityType,
+@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
   "ResourceIdentityType"
 );
 
