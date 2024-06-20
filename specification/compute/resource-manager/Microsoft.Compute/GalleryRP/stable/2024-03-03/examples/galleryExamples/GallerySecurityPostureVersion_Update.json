@@ -1,0 +1,167 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2024-03-03",
+    "galleryName": "myGalleryName",
+    "securityPostureName": "myGallerySecurityPostureName",
+    "securityPostureVersionName": "1.0.0",
+    "gallerySecurityPostureVersion": {
+      "properties": {
+        "settings": [
+          {
+            "name": "enableBootDiagnostics",
+            "value": "true"
+          },
+          {
+            "name": "enableEncryptionAtHost",
+            "value": "true"
+          },
+          {
+            "name": "securityType",
+            "value": "TrustedLaunch"
+          },
+          {
+            "name": "secureBootEnabled",
+            "value": "true"
+          },
+          {
+            "name": "vTpmEnabled",
+            "value": "true"
+          }
+        ],
+        "targetLocations": [
+          {
+            "name": "Central US EUAP",
+            "regionalReplicaCount": 1
+          },
+          {
+            "name": "East US2 EUAP",
+            "regionalReplicaCount": 1
+          }
+        ],
+        "virtualMachineExtensions": [
+          {
+            "name": "SecurityPostureGuestAttestation",
+            "properties": {
+              "publisher": "Microsoft.Azure.Security.LinuxAttestation",
+              "type": "GuestAttestation",
+              "typeHandlerVersion": "1.0",
+              "autoUpgradeMinorVersion": true,
+              "enableAutomaticUpgrade": false,
+              "settings": {},
+              "protectedSettings": {}
+            }
+          },
+          {
+            "name": "SecurityPostureGuestConfiguration",
+            "properties": {
+              "publisher": "Microsoft.GuestConfiguration",
+              "type": "ConfigurationForLinux",
+              "typeHandlerVersion": "1.0",
+              "autoUpgradeMinorVersion": true,
+              "enableAutomaticUpgrade": false,
+              "settings": {},
+              "protectedSettings": {}
+            }
+          },
+          {
+            "name": "SecurityPostureSecurityAgent",
+            "properties": {
+              "publisher": "Microsoft.Azure.Security.Monitoring",
+              "type": "AzureSecurityLinuxAgent",
+              "typeHandlerVersion": "2.0",
+              "autoUpgradeMinorVersion": true,
+              "enableAutomaticUpgrade": false,
+              "settings": {},
+              "protectedSettings": {}
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "West US",
+        "name": "1.0.0",
+        "type": "Microsoft.Compute/galleries/securityPostures/versions",
+        "id": "/subscriptions/01523d7c-60da-455e-adef-521b547922c4/resourceGroups/galleryPsTestRg98/providers/Microsoft.Compute/galleries/myGalleryName/securityPostures/myGallerySecurityPostureName/versions/1.0.0",
+        "properties": {
+          "settings": [
+            {
+              "name": "enableBootDiagnostics",
+              "value": "true"
+            },
+            {
+              "name": "enableEncryptionAtHost",
+              "value": "true"
+            },
+            {
+              "name": "securityType",
+              "value": "TrustedLaunch"
+            },
+            {
+              "name": "secureBootEnabled",
+              "value": "true"
+            },
+            {
+              "name": "vTpmEnabled",
+              "value": "true"
+            }
+          ],
+          "targetLocations": [
+            {
+              "name": "Central US EUAP",
+              "regionalReplicaCount": 1
+            },
+            {
+              "name": "East US2 EUAP",
+              "regionalReplicaCount": 1
+            }
+          ],
+          "virtualMachineExtensions": [
+            {
+              "name": "SecurityPostureGuestAttestation",
+              "properties": {
+                "publisher": "Microsoft.Azure.Security.LinuxAttestation",
+                "type": "GuestAttestation",
+                "typeHandlerVersion": "1.0",
+                "autoUpgradeMinorVersion": true,
+                "enableAutomaticUpgrade": false,
+                "settings": {},
+                "protectedSettings": {}
+              }
+            },
+            {
+              "name": "SecurityPostureGuestConfiguration",
+              "properties": {
+                "publisher": "Microsoft.GuestConfiguration",
+                "type": "ConfigurationForLinux",
+                "typeHandlerVersion": "1.0",
+                "autoUpgradeMinorVersion": true,
+                "enableAutomaticUpgrade": false,
+                "settings": {},
+                "protectedSettings": {}
+              }
+            },
+            {
+              "name": "SecurityPostureSecurityAgent",
+              "properties": {
+                "publisher": "Microsoft.Azure.Security.Monitoring",
+                "type": "AzureSecurityLinuxAgent",
+                "typeHandlerVersion": "2.0",
+                "autoUpgradeMinorVersion": true,
+                "enableAutomaticUpgrade": false,
+                "settings": {},
+                "protectedSettings": {}
+              }
+            }
+          ],
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  }
+}
