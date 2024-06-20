@@ -33,6 +33,22 @@ suppressions:
     reason: Suppress Patch rule as properties are defined by Compute RP and cannot be changed in AzureFleet.
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    reason: Property "settings" and "protectedSettings" for 
+    VirtualMachineExtension and VirtualMachineScaleSetExtensionProperties
+    were previously defined like an empty object.
+    from: azurefleet.json
+    where:
+      - $.definitions.VirtualMachineExtensionProperties.properties.protectedSettings
+      - $.definitions.VirtualMachineExtensionProperties.properties.settings
+      - $.definitions.VirtualMachineScaleSetExtensionProperties.properties.protectedSettings
+      - $.definitions.VirtualMachineScaleSetExtensionProperties.properties.settings
+```
+
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
