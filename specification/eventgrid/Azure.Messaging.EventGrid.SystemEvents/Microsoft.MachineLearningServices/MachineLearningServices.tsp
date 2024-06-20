@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure Machine Learning Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents;
+namespace Microsoft.EventGrid.SystemEvents.ML;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelRegistered event. */
 model MachineLearningServicesModelRegisteredEventData {

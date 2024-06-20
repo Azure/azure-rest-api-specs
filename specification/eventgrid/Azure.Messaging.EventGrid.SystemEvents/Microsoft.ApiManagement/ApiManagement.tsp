@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure API Management events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents;
+namespace Microsoft.EventGrid.SystemEvents.ApiManagement;
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserCreated event. */
 model ApiManagementUserCreatedEventData {
   ...ApiManagementBase;
