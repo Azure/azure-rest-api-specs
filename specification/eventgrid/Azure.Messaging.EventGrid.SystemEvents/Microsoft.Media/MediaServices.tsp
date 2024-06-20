@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure Media Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents.Media {
+namespace Microsoft.EventGrid.SystemEvents.MediaServices {
   /** State of a Media Job. */
   union MediaJobState {
     /** The job was canceled. This is a final state for the job. */

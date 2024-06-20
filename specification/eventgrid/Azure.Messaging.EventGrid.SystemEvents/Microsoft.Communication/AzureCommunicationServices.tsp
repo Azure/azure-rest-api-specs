@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents.Communication;
+namespace Microsoft.EventGrid.SystemEvents.AzureCommunicationServices;
 
 /** Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event */
 model AcsIncomingCallEventData {

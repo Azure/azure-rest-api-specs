@@ -1,67 +1,11 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "2024-01-01",
-    "title": "Schema of ApiCenter events published to Azure Event Grid",
-    "description": "Describes the schema of the ApiCenter events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
-  },
-  "paths": {},
-  "definitions": {
-    "ApiCenterApiDefinitionAddedEventData": {
-      "type": "object",
-      "description": "Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "API definition title."
-        },
-        "description": {
-          "type": "string",
-          "description": "API definition description."
-        },
-        "specification": {
-          "$ref": "#/definitions/ApiCenter.ApiCenterApiSpecification",
-          "description": "API definition specification."
-        }
-      },
-      "required": [
-        "specification"
-      ]
-    },
-    "ApiCenterApiDefinitionUpdatedEventData": {
-      "type": "object",
-      "description": "Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event.",
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "API definition title."
-        },
-        "description": {
-          "type": "string",
-          "description": "API definition description."
-        },
-        "specification": {
-          "$ref": "#/definitions/ApiCenter.ApiCenterApiSpecification",
-          "description": "API definition specification."
-        }
-      },
-      "required": [
-        "specification"
-      ]
-    },
-    "ApiCenterApiSpecification": {
-      "type": "object",
-      "description": "API specification details.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Specification name."
-        },
-        "version": {
-          "type": "string",
-          "description": "Specification version."
-        }
-      }
-    }
-  }
+"swagger": "2.0",
+"info": {
+"version": "2024-01-01",
+"title": "Schema of ApiCenter events published to Azure Event Grid",
+"description": "Describes the schema of the ApiCenter events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+},
+"paths": {},
+"definitions": {
+"ApiCenterApiDefinitionAddedEventData" : {"type": "object", "description": "Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event.", "properties": {"title": {"type": "string", "description": "API definition title."}, "description": {"type": "string", "description": "API definition description."}, "specification": {"$ref": "#/definitions/ApiCenter.ApiCenterApiSpecification", "description": "API definition specification."}}, "required": ["specification"]},"ApiCenterApiDefinitionUpdatedEventData" : {"type": "object", "description": "Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event.", "properties": {"title": {"type": "string", "description": "API definition title."}, "description": {"type": "string", "description": "API definition description."}, "specification": {"$ref": "#/definitions/ApiCenter.ApiCenterApiSpecification", "description": "API definition specification."}}, "required": ["specification"]},"ApiCenterApiSpecification" : {"type": "object", "description": "API specification details.", "properties": {"name": {"type": "string", "description": "Specification name."}, "version": {"type": "string", "description": "Specification version."}}}}
 }

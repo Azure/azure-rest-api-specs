@@ -618,100 +618,12 @@
         }
       ]
     },
-    "Cache.RedisExportRDBCompletedEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ExportRDBCompleted event.",
-      "properties": {
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the event occurred."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of this event."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of this event. Failed or  succeeded"
-        }
-      },
-      "required": [
-        "timestamp"
-      ]
-    },
-    "Cache.RedisImportRDBCompletedEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ImportRDBCompleted event.",
-      "properties": {
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the event occurred."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of this event."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of this event. Failed or  succeeded"
-        }
-      },
-      "required": [
-        "timestamp"
-      ]
-    },
-    "Cache.RedisPatchingCompletedEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.PatchingCompleted event.",
-      "properties": {
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the event occurred."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of this event."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of this event. Failed or  succeeded"
-        }
-      },
-      "required": [
-        "timestamp"
-      ]
-    },
-    "Cache.RedisScalingCompletedEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ScalingCompleted event.",
-      "properties": {
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the event occurred."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of this event."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of this event. Failed or  succeeded"
-        }
-      },
-      "required": [
-        "timestamp"
-      ]
-    },
-    "Communication.AcsChatEventBaseProperties": {
+    "AzureCommunicationServices.AcsChatEventBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all chat events",
       "properties": {
         "recipientCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the target user"
         },
         "transactionId": {
@@ -727,7 +639,7 @@
         "recipientCommunicationIdentifier"
       ]
     },
-    "Communication.AcsChatEventInThreadBaseProperties": {
+    "AzureCommunicationServices.AcsChatEventInThreadBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all thread-level chat events",
       "properties": {
@@ -741,7 +653,7 @@
         }
       }
     },
-    "Communication.AcsChatMessageDeletedEventData": {
+    "AzureCommunicationServices.AcsChatMessageDeletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.",
       "properties": {
@@ -756,11 +668,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatMessageEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatMessageDeletedInThreadEventData": {
+    "AzureCommunicationServices.AcsChatMessageDeletedInThreadEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.",
       "properties": {
@@ -775,11 +687,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatMessageEventInThreadBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatMessageEditedEventData": {
+    "AzureCommunicationServices.AcsChatMessageEditedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.",
       "properties": {
@@ -806,11 +718,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatMessageEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatMessageEditedInThreadEventData": {
+    "AzureCommunicationServices.AcsChatMessageEditedInThreadEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.",
       "properties": {
@@ -837,11 +749,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatMessageEventInThreadBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatMessageEventBaseProperties": {
+    "AzureCommunicationServices.AcsChatMessageEventBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all chat message events",
       "properties": {
@@ -850,7 +762,7 @@
           "description": "The chat message id"
         },
         "senderCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the sender"
         },
         "senderDisplayName": {
@@ -878,11 +790,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatMessageEventInThreadBaseProperties": {
+    "AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all thread-level chat message events",
       "properties": {
@@ -891,7 +803,7 @@
           "description": "The chat message id"
         },
         "senderCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the sender"
         },
         "senderDisplayName": {
@@ -919,11 +831,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatEventInThreadBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatMessageReceivedEventData": {
+    "AzureCommunicationServices.AcsChatMessageReceivedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
       "properties": {
@@ -944,11 +856,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatMessageEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatMessageReceivedInThreadEventData": {
+    "AzureCommunicationServices.AcsChatMessageReceivedInThreadEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
       "properties": {
@@ -969,11 +881,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatMessageEventInThreadBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatMessageEventInThreadBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatParticipantAddedToThreadEventData": {
+    "AzureCommunicationServices.AcsChatParticipantAddedToThreadEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantAdded event.",
       "properties": {
@@ -983,11 +895,11 @@
           "description": "The time at which the user was added to the thread"
         },
         "addedByCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who added the user"
         },
         "participantAdded": {
-          "$ref": "#/definitions/Communication.AcsChatThreadParticipantProperties",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
           "description": "The details of the user who was added"
         },
         "version": {
@@ -1003,11 +915,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatEventInThreadBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatParticipantAddedToThreadWithUserEventData": {
+    "AzureCommunicationServices.AcsChatParticipantAddedToThreadWithUserEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.",
       "properties": {
@@ -1017,11 +929,11 @@
           "description": "The time at which the user was added to the thread"
         },
         "addedByCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who added the user"
         },
         "participantAdded": {
-          "$ref": "#/definitions/Communication.AcsChatThreadParticipantProperties",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
           "description": "The details of the user who was added"
         }
       },
@@ -1032,11 +944,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatThreadEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatParticipantRemovedFromThreadEventData": {
+    "AzureCommunicationServices.AcsChatParticipantRemovedFromThreadEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.",
       "properties": {
@@ -1046,11 +958,11 @@
           "description": "The time at which the user was removed to the thread"
         },
         "removedByCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who removed the user"
         },
         "participantRemoved": {
-          "$ref": "#/definitions/Communication.AcsChatThreadParticipantProperties",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
           "description": "The details of the user who was removed"
         },
         "version": {
@@ -1066,11 +978,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatEventInThreadBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatParticipantRemovedFromThreadWithUserEventData": {
+    "AzureCommunicationServices.AcsChatParticipantRemovedFromThreadWithUserEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.",
       "properties": {
@@ -1080,11 +992,11 @@
           "description": "The time at which the user was removed to the thread"
         },
         "removedByCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who removed the user"
         },
         "participantRemoved": {
-          "$ref": "#/definitions/Communication.AcsChatThreadParticipantProperties",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
           "description": "The details of the user who was removed"
         }
       },
@@ -1095,16 +1007,16 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatThreadEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatThreadCreatedEventData": {
+    "AzureCommunicationServices.AcsChatThreadCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
       "properties": {
         "createdByCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who created the thread"
         },
         "properties": {
@@ -1123,7 +1035,7 @@
           "type": "array",
           "description": "The list of properties of participants who are part of the thread",
           "items": {
-            "$ref": "#/definitions/Communication.AcsChatThreadParticipantProperties"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
           },
           "x-ms-identifiers": []
         }
@@ -1136,16 +1048,16 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatThreadEventInThreadBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatThreadCreatedWithUserEventData": {
+    "AzureCommunicationServices.AcsChatThreadCreatedWithUserEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
       "properties": {
         "createdByCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who created the thread"
         },
         "properties": {
@@ -1164,7 +1076,7 @@
           "type": "array",
           "description": "The list of properties of participants who are part of the thread",
           "items": {
-            "$ref": "#/definitions/Communication.AcsChatThreadParticipantProperties"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
           },
           "x-ms-identifiers": []
         }
@@ -1177,16 +1089,16 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatThreadEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatThreadDeletedEventData": {
+    "AzureCommunicationServices.AcsChatThreadDeletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.",
       "properties": {
         "deletedByCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who deleted the thread"
         },
         "deleteTime": {
@@ -1201,11 +1113,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatThreadEventInThreadBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatThreadEventBaseProperties": {
+    "AzureCommunicationServices.AcsChatThreadEventBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all chat thread events",
       "properties": {
@@ -1225,11 +1137,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatThreadEventInThreadBaseProperties": {
+    "AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all chat thread events",
       "properties": {
@@ -1249,11 +1161,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatEventInThreadBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatEventInThreadBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatThreadParticipantProperties": {
+    "AzureCommunicationServices.AcsChatThreadParticipantProperties": {
       "type": "object",
       "description": "Schema of the chat thread participant",
       "properties": {
@@ -1262,7 +1174,7 @@
           "description": "The name of the user"
         },
         "participantCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user"
         },
         "metadata": {
@@ -1278,12 +1190,12 @@
         "metadata"
       ]
     },
-    "Communication.AcsChatThreadPropertiesUpdatedEventData": {
+    "AzureCommunicationServices.AcsChatThreadPropertiesUpdatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
       "properties": {
         "editedByCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who updated the thread properties"
         },
         "editTime": {
@@ -1312,16 +1224,16 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatThreadEventInThreadBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventInThreadBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatThreadPropertiesUpdatedPerUserEventData": {
+    "AzureCommunicationServices.AcsChatThreadPropertiesUpdatedPerUserEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
       "properties": {
         "editedByCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who updated the thread properties"
         },
         "editTime": {
@@ -1350,16 +1262,16 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatThreadEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsChatThreadWithUserDeletedEventData": {
+    "AzureCommunicationServices.AcsChatThreadWithUserDeletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.",
       "properties": {
         "deletedByCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who deleted the thread"
         },
         "deleteTime": {
@@ -1374,11 +1286,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsChatThreadEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsEmailDeliveryReportReceivedEventData": {
+    "AzureCommunicationServices.AcsEmailDeliveryReportReceivedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
       "properties": {
@@ -1395,11 +1307,11 @@
           "description": "The Id of the email been sent"
         },
         "status": {
-          "$ref": "#/definitions/Communication.AcsEmailDeliveryReportStatus",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsEmailDeliveryReportStatus",
           "description": "The status of the email. Any value other than Delivered is considered failed."
         },
         "deliveryStatusDetails": {
-          "$ref": "#/definitions/Communication.AcsEmailDeliveryReportStatusDetails",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsEmailDeliveryReportStatusDetails",
           "description": "Detailed information about the status if any"
         },
         "deliveryAttemptTimeStamp": {
@@ -1415,7 +1327,7 @@
         "deliveryAttemptTimeStamp"
       ]
     },
-    "Communication.AcsEmailDeliveryReportStatus": {
+    "AzureCommunicationServices.AcsEmailDeliveryReportStatus": {
       "type": "string",
       "description": "The status of the email. Any value other than Delivered is considered failed.",
       "enum": [
@@ -1463,7 +1375,7 @@
         ]
       }
     },
-    "Communication.AcsEmailDeliveryReportStatusDetails": {
+    "AzureCommunicationServices.AcsEmailDeliveryReportStatusDetails": {
       "type": "object",
       "description": "Detailed information about the status if any",
       "properties": {
@@ -1473,7 +1385,7 @@
         }
       }
     },
-    "Communication.AcsEmailEngagementTrackingReportReceivedEventData": {
+    "AzureCommunicationServices.AcsEmailEngagementTrackingReportReceivedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
       "properties": {
@@ -1504,7 +1416,7 @@
           "description": "The user agent interacting with the email"
         },
         "engagementType": {
-          "$ref": "#/definitions/Communication.AcsUserEngagement",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsUserEngagement",
           "description": "The type of engagement user have with email",
           "x-ms-client-name": "engagement"
         }
@@ -1514,7 +1426,7 @@
         "engagementType"
       ]
     },
-    "Communication.AcsIncomingCallCustomContext": {
+    "AzureCommunicationServices.AcsIncomingCallCustomContext": {
       "type": "object",
       "description": "Custom Context of Incoming Call",
       "properties": {
@@ -1538,17 +1450,17 @@
         "voipHeaders"
       ]
     },
-    "Communication.AcsIncomingCallEventData": {
+    "AzureCommunicationServices.AcsIncomingCallEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
       "properties": {
         "to": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the target user.",
           "x-ms-client-name": "toCommunicationIdentifier"
         },
         "from": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who initiated the call.",
           "x-ms-client-name": "fromCommunicationIdentifier"
         },
@@ -1561,7 +1473,7 @@
           "description": "Display name of caller."
         },
         "customContext": {
-          "$ref": "#/definitions/Communication.AcsIncomingCallCustomContext",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsIncomingCallCustomContext",
           "description": "Custom Context of Incoming Call"
         },
         "incomingCallContext": {
@@ -1579,7 +1491,7 @@
         "customContext"
       ]
     },
-    "Communication.AcsInteractiveReplyKind": {
+    "AzureCommunicationServices.AcsInteractiveReplyKind": {
       "type": "string",
       "description": "Interactive reply kind",
       "enum": [
@@ -1609,7 +1521,7 @@
         ]
       }
     },
-    "Communication.AcsMessageButtonContent": {
+    "AzureCommunicationServices.AcsMessageButtonContent": {
       "type": "object",
       "description": "Message Button Content",
       "properties": {
@@ -1623,7 +1535,7 @@
         }
       }
     },
-    "Communication.AcsMessageChannelEventError": {
+    "AzureCommunicationServices.AcsMessageChannelEventError": {
       "type": "object",
       "description": "Message Channel Event Error",
       "properties": {
@@ -1637,7 +1549,7 @@
         }
       }
     },
-    "Communication.AcsMessageChannelKind": {
+    "AzureCommunicationServices.AcsMessageChannelKind": {
       "type": "string",
       "description": "Message channel kind",
       "enum": [
@@ -1655,7 +1567,7 @@
         ]
       }
     },
-    "Communication.AcsMessageContext": {
+    "AzureCommunicationServices.AcsMessageContext": {
       "type": "object",
       "description": "Message Context",
       "properties": {
@@ -1670,7 +1582,7 @@
         }
       }
     },
-    "Communication.AcsMessageDeliveryStatus": {
+    "AzureCommunicationServices.AcsMessageDeliveryStatus": {
       "type": "string",
       "description": "Message delivery status",
       "enum": [
@@ -1718,7 +1630,7 @@
         ]
       }
     },
-    "Communication.AcsMessageDeliveryStatusUpdatedEventData": {
+    "AzureCommunicationServices.AcsMessageDeliveryStatusUpdatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated event.",
       "properties": {
@@ -1727,11 +1639,11 @@
           "description": "The message id"
         },
         "status": {
-          "$ref": "#/definitions/Communication.AcsMessageDeliveryStatus",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageDeliveryStatus",
           "description": "The updated message status"
         },
         "channelType": {
-          "$ref": "#/definitions/Communication.AcsMessageChannelKind",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageChannelKind",
           "description": "The updated message channel type",
           "x-ms-client-name": "channelKind"
         }
@@ -1742,11 +1654,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsMessageEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageEventData"
         }
       ]
     },
-    "Communication.AcsMessageEventData": {
+    "AzureCommunicationServices.AcsMessageEventData": {
       "type": "object",
       "description": "Schema of common properties of all chat thread events",
       "properties": {
@@ -1764,7 +1676,7 @@
           "description": "The time message was received"
         },
         "error": {
-          "$ref": "#/definitions/Communication.AcsMessageChannelEventError",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageChannelEventError",
           "description": "The channel event error"
         }
       },
@@ -1773,7 +1685,7 @@
         "error"
       ]
     },
-    "Communication.AcsMessageInteractiveButtonReplyContent": {
+    "AzureCommunicationServices.AcsMessageInteractiveButtonReplyContent": {
       "type": "object",
       "description": "Message Interactive button reply content for a user to business message",
       "properties": {
@@ -1788,21 +1700,21 @@
         }
       }
     },
-    "Communication.AcsMessageInteractiveContent": {
+    "AzureCommunicationServices.AcsMessageInteractiveContent": {
       "type": "object",
       "description": "Message Interactive Content",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Communication.AcsInteractiveReplyKind",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsInteractiveReplyKind",
           "description": "The Message interactive reply type",
           "x-ms-client-name": "replyKind"
         },
         "buttonReply": {
-          "$ref": "#/definitions/Communication.AcsMessageInteractiveButtonReplyContent",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageInteractiveButtonReplyContent",
           "description": "The Message Sent when a customer clicks a button"
         },
         "listReply": {
-          "$ref": "#/definitions/Communication.AcsMessageInteractiveListReplyContent",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageInteractiveListReplyContent",
           "description": "The Message Sent when a customer selects an item from a list"
         }
       },
@@ -1812,7 +1724,7 @@
         "listReply"
       ]
     },
-    "Communication.AcsMessageInteractiveListReplyContent": {
+    "AzureCommunicationServices.AcsMessageInteractiveListReplyContent": {
       "type": "object",
       "description": "Message Interactive list reply content for a user to business message",
       "properties": {
@@ -1831,7 +1743,7 @@
         }
       }
     },
-    "Communication.AcsMessageMediaContent": {
+    "AzureCommunicationServices.AcsMessageMediaContent": {
       "type": "object",
       "description": "Message Media Content",
       "properties": {
@@ -1854,7 +1766,7 @@
         }
       }
     },
-    "Communication.AcsMessageReceivedEventData": {
+    "AzureCommunicationServices.AcsMessageReceivedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event.",
       "properties": {
@@ -1863,25 +1775,25 @@
           "description": "The message content"
         },
         "channelType": {
-          "$ref": "#/definitions/Communication.AcsMessageChannelKind",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageChannelKind",
           "description": "The message channel type",
           "x-ms-client-name": "channelKind"
         },
         "media": {
-          "$ref": "#/definitions/Communication.AcsMessageMediaContent",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageMediaContent",
           "description": "The received message media content",
           "x-ms-client-name": "mediaContent"
         },
         "context": {
-          "$ref": "#/definitions/Communication.AcsMessageContext",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageContext",
           "description": "The received message context"
         },
         "button": {
-          "$ref": "#/definitions/Communication.AcsMessageButtonContent",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageButtonContent",
           "description": "The received message button content"
         },
         "interactive": {
-          "$ref": "#/definitions/Communication.AcsMessageInteractiveContent",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageInteractiveContent",
           "description": "The received message interactive content",
           "x-ms-client-name": "interactiveContent"
         }
@@ -1895,11 +1807,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsMessageEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageEventData"
         }
       ]
     },
-    "Communication.AcsRecordingChunkInfoProperties": {
+    "AzureCommunicationServices.AcsRecordingChunkInfoProperties": {
       "type": "object",
       "description": "Schema for all properties of  Recording Chunk Information.",
       "properties": {
@@ -1930,12 +1842,12 @@
         }
       }
     },
-    "Communication.AcsRecordingFileStatusUpdatedEventData": {
+    "AzureCommunicationServices.AcsRecordingFileStatusUpdatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
       "properties": {
         "recordingStorageInfo": {
-          "$ref": "#/definitions/Communication.AcsRecordingStorageInfoProperties",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRecordingStorageInfoProperties",
           "description": "The details of recording storage information"
         },
         "recordingStartTime": {
@@ -1949,15 +1861,15 @@
           "description": "The recording duration in milliseconds"
         },
         "recordingContentType": {
-          "$ref": "#/definitions/Communication.recordingContentType",
+          "$ref": "#/definitions/AzureCommunicationServices.recordingContentType",
           "description": "The recording content type- AudioVideo, or Audio"
         },
         "recordingChannelType": {
-          "$ref": "#/definitions/Communication.recordingChannelType",
+          "$ref": "#/definitions/AzureCommunicationServices.recordingChannelType",
           "description": "The recording  channel type - Mixed, Unmixed"
         },
         "recordingFormatType": {
-          "$ref": "#/definitions/Communication.recordingFormatType",
+          "$ref": "#/definitions/AzureCommunicationServices.recordingFormatType",
           "description": "The recording format type - Mp4, Mp3, Wav"
         },
         "sessionEndReason": {
@@ -1973,7 +1885,7 @@
         "recordingFormatType"
       ]
     },
-    "Communication.AcsRecordingStorageInfoProperties": {
+    "AzureCommunicationServices.AcsRecordingStorageInfoProperties": {
       "type": "object",
       "description": "Schema for all properties of Recording Storage Information.",
       "properties": {
@@ -1981,7 +1893,7 @@
           "type": "array",
           "description": "List of details of recording chunks information",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRecordingChunkInfoProperties"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRecordingChunkInfoProperties"
           },
           "x-ms-identifiers": []
         }
@@ -1990,7 +1902,7 @@
         "recordingChunks"
       ]
     },
-    "Communication.AcsRouterChannelConfiguration": {
+    "AzureCommunicationServices.AcsRouterChannelConfiguration": {
       "type": "object",
       "description": "Router Channel Configuration",
       "properties": {
@@ -2010,7 +1922,7 @@
         }
       }
     },
-    "Communication.AcsRouterCommunicationError": {
+    "AzureCommunicationServices.AcsRouterCommunicationError": {
       "type": "object",
       "description": "Router Communication Error",
       "properties": {
@@ -2027,14 +1939,14 @@
           "description": "Router Communication Error Target"
         },
         "innererror": {
-          "$ref": "#/definitions/Communication.AcsRouterCommunicationError",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterCommunicationError",
           "description": "Router Communication Inner Error"
         },
         "details": {
           "type": "array",
           "description": "List of Router Communication Errors",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterCommunicationError"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterCommunicationError"
           },
           "x-ms-identifiers": []
         }
@@ -2044,7 +1956,7 @@
         "details"
       ]
     },
-    "Communication.AcsRouterEventData": {
+    "AzureCommunicationServices.AcsRouterEventData": {
       "type": "object",
       "description": "Schema of common properties of all Router events",
       "properties": {
@@ -2062,7 +1974,7 @@
         }
       }
     },
-    "Communication.AcsRouterJobCancelledEventData": {
+    "AzureCommunicationServices.AcsRouterJobCancelledEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCancelled event",
       "properties": {
@@ -2077,11 +1989,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobClassificationFailedEventData": {
+    "AzureCommunicationServices.AcsRouterJobClassificationFailedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassificationFailed event",
       "properties": {
@@ -2093,7 +2005,7 @@
           "type": "array",
           "description": "Router Job Classification Failed Errors",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterCommunicationError"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterCommunicationError"
           },
           "x-ms-identifiers": []
         }
@@ -2103,16 +2015,16 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobClassifiedEventData": {
+    "AzureCommunicationServices.AcsRouterJobClassifiedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassified event",
       "properties": {
         "queueDetails": {
-          "$ref": "#/definitions/Communication.AcsRouterQueueDetails",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterQueueDetails",
           "description": "Router Job Queue Info"
         },
         "classificationPolicyId": {
@@ -2128,7 +2040,7 @@
           "type": "array",
           "description": "Router Job Attached Worker Selector",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         }
@@ -2139,11 +2051,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobClosedEventData": {
+    "AzureCommunicationServices.AcsRouterJobClosedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClosed event",
       "properties": {
@@ -2162,11 +2074,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobCompletedEventData": {
+    "AzureCommunicationServices.AcsRouterJobCompletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCompleted event",
       "properties": {
@@ -2181,20 +2093,20 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobDeletedEventData": {
+    "AzureCommunicationServices.AcsRouterJobDeletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobDeleted event",
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobEventData": {
+    "AzureCommunicationServices.AcsRouterJobEventData": {
       "type": "object",
       "description": "Schema of common properties of all Router Job events",
       "properties": {
@@ -2223,11 +2135,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobExceptionTriggeredEventData": {
+    "AzureCommunicationServices.AcsRouterJobExceptionTriggeredEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobExceptionTriggered event",
       "properties": {
@@ -2242,11 +2154,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobQueuedEventData": {
+    "AzureCommunicationServices.AcsRouterJobQueuedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobQueued event",
       "properties": {
@@ -2259,7 +2171,7 @@
           "type": "array",
           "description": "Router Job Queued Attached Worker Selector",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -2267,7 +2179,7 @@
           "type": "array",
           "description": "Router Job Queued Requested Worker Selector",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         }
@@ -2278,16 +2190,16 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobReceivedEventData": {
+    "AzureCommunicationServices.AcsRouterJobReceivedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobReceived event",
       "properties": {
         "jobStatus": {
-          "$ref": "#/definitions/Communication.AcsRouterJobStatus",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobStatus",
           "description": "Router Job Received Job Status"
         },
         "classificationPolicyId": {
@@ -2303,7 +2215,7 @@
           "type": "array",
           "description": "Router Job Received Requested Worker Selectors",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -2325,11 +2237,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobSchedulingFailedEventData": {
+    "AzureCommunicationServices.AcsRouterJobSchedulingFailedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobSchedulingFailed event",
       "properties": {
@@ -2342,7 +2254,7 @@
           "type": "array",
           "description": "Router Job Scheduling Failed Attached Worker Selector Expired",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -2350,7 +2262,7 @@
           "type": "array",
           "description": "Router Job Scheduling Failed Requested Worker Selector Expired",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -2371,11 +2283,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobStatus": {
+    "AzureCommunicationServices.AcsRouterJobStatus": {
       "type": "string",
       "description": "Acs Router Job Status",
       "enum": [
@@ -2459,7 +2371,7 @@
         ]
       }
     },
-    "Communication.AcsRouterJobUnassignedEventData": {
+    "AzureCommunicationServices.AcsRouterJobUnassignedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobUnassigned event",
       "properties": {
@@ -2474,11 +2386,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobWaitingForActivationEventData": {
+    "AzureCommunicationServices.AcsRouterJobWaitingForActivationEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWaitingForActivation event",
       "properties": {
@@ -2491,7 +2403,7 @@
           "type": "array",
           "description": "Router Job Waiting For Activation Worker Selector Expired",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -2499,7 +2411,7 @@
           "type": "array",
           "description": "Router Job Waiting For Activation Requested Worker Selector Expired",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -2521,11 +2433,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterJobWorkerSelectorsExpiredEventData": {
+    "AzureCommunicationServices.AcsRouterJobWorkerSelectorsExpiredEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWorkerSelectorsExpired event",
       "properties": {
@@ -2533,7 +2445,7 @@
           "type": "array",
           "description": "Router Job Worker Selectors Expired Requested Worker Selectors",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -2541,7 +2453,7 @@
           "type": "array",
           "description": "Router Job Worker Selectors Expired Attached Worker Selectors",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         }
@@ -2552,11 +2464,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterJobEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobEventData"
         }
       ]
     },
-    "Communication.AcsRouterLabelOperator": {
+    "AzureCommunicationServices.AcsRouterLabelOperator": {
       "type": "string",
       "description": "Router Job Worker Selector Label Operator",
       "enum": [
@@ -2604,7 +2516,7 @@
         ]
       }
     },
-    "Communication.AcsRouterQueueDetails": {
+    "AzureCommunicationServices.AcsRouterQueueDetails": {
       "type": "object",
       "description": "Router Queue Details",
       "properties": {
@@ -2628,7 +2540,7 @@
         "labels"
       ]
     },
-    "Communication.AcsRouterUpdatedWorkerProperty": {
+    "AzureCommunicationServices.AcsRouterUpdatedWorkerProperty": {
       "type": "string",
       "description": "Worker properties that can be updated",
       "enum": [
@@ -2676,16 +2588,16 @@
         ]
       }
     },
-    "Communication.AcsRouterWorkerDeletedEventData": {
+    "AzureCommunicationServices.AcsRouterWorkerDeletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeleted event",
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterWorkerEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerEventData"
         }
       ]
     },
-    "Communication.AcsRouterWorkerDeregisteredEventData": {
+    "AzureCommunicationServices.AcsRouterWorkerDeregisteredEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeregistered event",
       "properties": {
@@ -2695,7 +2607,7 @@
         }
       }
     },
-    "Communication.AcsRouterWorkerEventData": {
+    "AzureCommunicationServices.AcsRouterWorkerEventData": {
       "type": "object",
       "description": "Schema of common properties of all Router Worker events",
       "properties": {
@@ -2706,11 +2618,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterEventData"
         }
       ]
     },
-    "Communication.AcsRouterWorkerOfferAcceptedEventData": {
+    "AzureCommunicationServices.AcsRouterWorkerOfferAcceptedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferAccepted event",
       "properties": {
@@ -2768,11 +2680,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterWorkerEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerEventData"
         }
       ]
     },
-    "Communication.AcsRouterWorkerOfferDeclinedEventData": {
+    "AzureCommunicationServices.AcsRouterWorkerOfferDeclinedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferDeclined event",
       "properties": {
@@ -2787,11 +2699,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterWorkerEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerEventData"
         }
       ]
     },
-    "Communication.AcsRouterWorkerOfferExpiredEventData": {
+    "AzureCommunicationServices.AcsRouterWorkerOfferExpiredEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferExpired event",
       "properties": {
@@ -2806,11 +2718,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterWorkerEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerEventData"
         }
       ]
     },
-    "Communication.AcsRouterWorkerOfferIssuedEventData": {
+    "AzureCommunicationServices.AcsRouterWorkerOfferIssuedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferIssued event",
       "properties": {
@@ -2876,11 +2788,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterWorkerEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerEventData"
         }
       ]
     },
-    "Communication.AcsRouterWorkerOfferRevokedEventData": {
+    "AzureCommunicationServices.AcsRouterWorkerOfferRevokedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferRevoked event",
       "properties": {
@@ -2895,11 +2807,11 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsRouterWorkerEventData"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerEventData"
         }
       ]
     },
-    "Communication.AcsRouterWorkerRegisteredEventData": {
+    "AzureCommunicationServices.AcsRouterWorkerRegisteredEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerRegistered event",
       "properties": {
@@ -2911,14 +2823,14 @@
           "type": "array",
           "description": "Router Worker Registered Queue Info",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterQueueDetails"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterQueueDetails"
           }
         },
         "channelConfigurations": {
           "type": "array",
           "description": "Router Worker Registered Channel Configuration",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterChannelConfiguration"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterChannelConfiguration"
           },
           "x-ms-identifiers": []
         },
@@ -2949,7 +2861,7 @@
         "tags"
       ]
     },
-    "Communication.AcsRouterWorkerSelector": {
+    "AzureCommunicationServices.AcsRouterWorkerSelector": {
       "type": "object",
       "description": "Router Job Worker Selector",
       "properties": {
@@ -2958,7 +2870,7 @@
           "description": "Router Job Worker Selector Key"
         },
         "labelOperator": {
-          "$ref": "#/definitions/Communication.AcsRouterLabelOperator",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterLabelOperator",
           "description": "Router Job Worker Selector Label Operator"
         },
         "value": {
@@ -2971,7 +2883,7 @@
           "description": "Router Job Worker Selector Time to Live in Seconds"
         },
         "state": {
-          "$ref": "#/definitions/Communication.AcsRouterWorkerSelectorState",
+          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelectorState",
           "description": "Router Job Worker Selector State"
         },
         "expirationTime": {
@@ -2988,7 +2900,7 @@
         "expirationTime"
       ]
     },
-    "Communication.AcsRouterWorkerSelectorState": {
+    "AzureCommunicationServices.AcsRouterWorkerSelectorState": {
       "type": "string",
       "description": "Router Worker Selector State",
       "enum": [
@@ -3012,7 +2924,7 @@
         ]
       }
     },
-    "Communication.AcsRouterWorkerUpdatedEventData": {
+    "AzureCommunicationServices.AcsRouterWorkerUpdatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerUpdated event.",
       "properties": {
@@ -3024,14 +2936,14 @@
           "type": "array",
           "description": "Router Worker Updated Queue Info",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterQueueDetails"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterQueueDetails"
           }
         },
         "channelConfigurations": {
           "type": "array",
           "description": "Router Worker Updated Channel Configuration",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterChannelConfiguration"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterChannelConfiguration"
           },
           "x-ms-identifiers": []
         },
@@ -3058,7 +2970,7 @@
           "type": "array",
           "description": "Router Worker Properties Updated",
           "items": {
-            "$ref": "#/definitions/Communication.AcsRouterUpdatedWorkerProperty"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterUpdatedWorkerProperty"
           }
         }
       },
@@ -3070,7 +2982,7 @@
         "updatedWorkerProperties"
       ]
     },
-    "Communication.AcsSmsDeliveryAttemptProperties": {
+    "AzureCommunicationServices.AcsSmsDeliveryAttemptProperties": {
       "type": "object",
       "description": "Schema for details of a delivery attempt",
       "properties": {
@@ -3094,7 +3006,7 @@
         "timestamp"
       ]
     },
-    "Communication.AcsSmsDeliveryReportReceivedEventData": {
+    "AzureCommunicationServices.AcsSmsDeliveryReportReceivedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.",
       "properties": {
@@ -3110,7 +3022,7 @@
           "type": "array",
           "description": "List of details of delivery attempts made",
           "items": {
-            "$ref": "#/definitions/Communication.AcsSmsDeliveryAttemptProperties"
+            "$ref": "#/definitions/AzureCommunicationServices.AcsSmsDeliveryAttemptProperties"
           },
           "x-ms-identifiers": []
         },
@@ -3130,11 +3042,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsSmsEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsSmsEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsSmsEventBaseProperties": {
+    "AzureCommunicationServices.AcsSmsEventBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all SMS events",
       "properties": {
@@ -3152,7 +3064,7 @@
         }
       }
     },
-    "Communication.AcsSmsReceivedEventData": {
+    "AzureCommunicationServices.AcsSmsReceivedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.",
       "properties": {
@@ -3171,16 +3083,16 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Communication.AcsSmsEventBaseProperties"
+          "$ref": "#/definitions/AzureCommunicationServices.AcsSmsEventBaseProperties"
         }
       ]
     },
-    "Communication.AcsUserDisconnectedEventData": {
+    "AzureCommunicationServices.AcsUserDisconnectedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.",
       "properties": {
         "userCommunicationIdentifier": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
           "description": "The communication identifier of the user who was disconnected"
         }
       },
@@ -3188,7 +3100,7 @@
         "userCommunicationIdentifier"
       ]
     },
-    "Communication.AcsUserEngagement": {
+    "AzureCommunicationServices.AcsUserEngagement": {
       "type": "string",
       "description": "The type of engagement user have with email.",
       "enum": [
@@ -3212,7 +3124,7 @@
         ]
       }
     },
-    "Communication.CommunicationCloudEnvironmentModel": {
+    "AzureCommunicationServices.CommunicationCloudEnvironmentModel": {
       "type": "string",
       "description": "Communication cloud environment model.",
       "enum": [
@@ -3242,12 +3154,12 @@
         ]
       }
     },
-    "Communication.CommunicationIdentifierModel": {
+    "AzureCommunicationServices.CommunicationIdentifierModel": {
       "type": "object",
       "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/Communication.CommunicationIdentifierModelKind",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModelKind",
           "description": "The identifier kind. Only required in responses."
         },
         "rawId": {
@@ -3255,19 +3167,19 @@
           "description": "Raw Id of the identifier. Optional in requests, required in responses."
         },
         "communicationUser": {
-          "$ref": "#/definitions/Communication.CommunicationUserIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationUserIdentifierModel",
           "description": "The communication user."
         },
         "phoneNumber": {
-          "$ref": "#/definitions/Communication.PhoneNumberIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.PhoneNumberIdentifierModel",
           "description": "The phone number."
         },
         "microsoftTeamsUser": {
-          "$ref": "#/definitions/Communication.MicrosoftTeamsUserIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.MicrosoftTeamsUserIdentifierModel",
           "description": "The Microsoft Teams user."
         },
         "microsoftTeamsApp": {
-          "$ref": "#/definitions/Communication.MicrosoftTeamsAppIdentifierModel",
+          "$ref": "#/definitions/AzureCommunicationServices.MicrosoftTeamsAppIdentifierModel",
           "description": "The Microsoft Teams application."
         }
       },
@@ -3279,7 +3191,7 @@
         "microsoftTeamsApp"
       ]
     },
-    "Communication.CommunicationIdentifierModelKind": {
+    "AzureCommunicationServices.CommunicationIdentifierModelKind": {
       "type": "string",
       "description": "Communication model identifier kind",
       "enum": [
@@ -3315,7 +3227,7 @@
         ]
       }
     },
-    "Communication.CommunicationUserIdentifierModel": {
+    "AzureCommunicationServices.CommunicationUserIdentifierModel": {
       "type": "object",
       "description": "A user that got created with an Azure Communication Services resource.",
       "properties": {
@@ -3328,7 +3240,7 @@
         "id"
       ]
     },
-    "Communication.MicrosoftTeamsAppIdentifierModel": {
+    "AzureCommunicationServices.MicrosoftTeamsAppIdentifierModel": {
       "type": "object",
       "description": "A Microsoft Teams application.",
       "properties": {
@@ -3337,7 +3249,7 @@
           "description": "The Id of the Microsoft Teams application"
         },
         "cloud": {
-          "$ref": "#/definitions/Communication.CommunicationCloudEnvironmentModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationCloudEnvironmentModel",
           "description": "The cloud that the Microsoft Teams application belongs to. By default 'public' if missing."
         }
       },
@@ -3346,7 +3258,7 @@
         "cloud"
       ]
     },
-    "Communication.MicrosoftTeamsUserIdentifierModel": {
+    "AzureCommunicationServices.MicrosoftTeamsUserIdentifierModel": {
       "type": "object",
       "description": "A Microsoft Teams user.",
       "properties": {
@@ -3359,7 +3271,7 @@
           "description": "True if the Microsoft Teams user is anonymous. By default false if missing."
         },
         "cloud": {
-          "$ref": "#/definitions/Communication.CommunicationCloudEnvironmentModel",
+          "$ref": "#/definitions/AzureCommunicationServices.CommunicationCloudEnvironmentModel",
           "description": "The cloud that the Microsoft Teams user belongs to. By default 'public' if missing."
         }
       },
@@ -3368,7 +3280,7 @@
         "cloud"
       ]
     },
-    "Communication.PhoneNumberIdentifierModel": {
+    "AzureCommunicationServices.PhoneNumberIdentifierModel": {
       "type": "object",
       "description": "A phone number.",
       "properties": {
@@ -3381,7 +3293,7 @@
         "value"
       ]
     },
-    "Communication.recordingChannelType": {
+    "AzureCommunicationServices.recordingChannelType": {
       "type": "string",
       "description": "Recording channel type",
       "enum": [
@@ -3405,7 +3317,7 @@
         ]
       }
     },
-    "Communication.recordingContentType": {
+    "AzureCommunicationServices.recordingContentType": {
       "type": "string",
       "description": "Recording content type",
       "enum": [
@@ -3429,7 +3341,7 @@
         ]
       }
     },
-    "Communication.recordingFormatType": {
+    "AzureCommunicationServices.recordingFormatType": {
       "type": "string",
       "description": "Recording format type",
       "enum": [
@@ -3898,256 +3810,6 @@
           }
         ]
       }
-    },
-    "Devices.DeviceConnectionStateEventInfo": {
-      "type": "object",
-      "description": "Information about the device connection state event.",
-      "properties": {
-        "sequenceNumber": {
-          "type": "string",
-          "description": "Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number."
-        }
-      }
-    },
-    "Devices.DeviceConnectionStateEventProperties": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).",
-      "properties": {
-        "deviceId": {
-          "type": "string",
-          "description": "The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '."
-        },
-        "moduleId": {
-          "type": "string",
-          "description": "The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '."
-        },
-        "hubName": {
-          "type": "string",
-          "description": "Name of the IoT Hub where the device was created or deleted."
-        },
-        "deviceConnectionStateEventInfo": {
-          "$ref": "#/definitions/Devices.DeviceConnectionStateEventInfo",
-          "description": "Information about the device connection state event."
-        }
-      },
-      "required": [
-        "deviceConnectionStateEventInfo"
-      ]
-    },
-    "Devices.DeviceLifeCycleEventProperties": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted).",
-      "properties": {
-        "deviceId": {
-          "type": "string",
-          "description": "The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '."
-        },
-        "hubName": {
-          "type": "string",
-          "description": "Name of the IoT Hub where the device was created or deleted."
-        },
-        "twin": {
-          "$ref": "#/definitions/Devices.DeviceTwinInfo",
-          "description": "Information about the device twin, which is the cloud representation of application device metadata."
-        }
-      },
-      "required": [
-        "twin"
-      ]
-    },
-    "Devices.DeviceTelemetryEventProperties": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).",
-      "properties": {
-        "body": {
-          "type": "object",
-          "description": "The content of the message from the device.",
-          "additionalProperties": {}
-        },
-        "properties": {
-          "type": "object",
-          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "systemProperties": {
-          "type": "object",
-          "description": "System properties help identify contents and source of the messages.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "body",
-        "properties",
-        "systemProperties"
-      ]
-    },
-    "Devices.DeviceTwinInfo": {
-      "type": "object",
-      "description": "Information about the device twin, which is the cloud representation of application device metadata.",
-      "properties": {
-        "authenticationType": {
-          "type": "string",
-          "description": "Authentication type used for this device: either SAS, SelfSigned, or CertificateAuthority."
-        },
-        "cloudToDeviceMessageCount": {
-          "type": "number",
-          "format": "float",
-          "description": "Count of cloud to device messages sent to this device."
-        },
-        "connectionState": {
-          "type": "string",
-          "description": "Whether the device is connected or disconnected."
-        },
-        "deviceId": {
-          "type": "string",
-          "description": "The unique identifier of the device twin."
-        },
-        "etag": {
-          "type": "string",
-          "description": "A piece of information that describes the content of the device twin. Each etag is guaranteed to be unique per device twin."
-        },
-        "lastActivityTime": {
-          "type": "string",
-          "description": "The ISO8601 timestamp of the last activity."
-        },
-        "properties": {
-          "$ref": "#/definitions/Devices.DeviceTwinInfoProperties",
-          "description": "Properties JSON element."
-        },
-        "status": {
-          "type": "string",
-          "description": "Whether the device twin is enabled or disabled."
-        },
-        "statusUpdateTime": {
-          "type": "string",
-          "description": "The ISO8601 timestamp of the last device twin status update."
-        },
-        "version": {
-          "type": "number",
-          "format": "float",
-          "description": "An integer that is incremented by one each time the device twin is updated."
-        },
-        "x509Thumbprint": {
-          "$ref": "#/definitions/Devices.DeviceTwinInfoX509Thumbprint",
-          "description": "The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate."
-        }
-      },
-      "required": [
-        "properties",
-        "x509Thumbprint"
-      ]
-    },
-    "Devices.DeviceTwinInfoProperties": {
-      "type": "object",
-      "description": "Properties JSON element.",
-      "properties": {
-        "desired": {
-          "$ref": "#/definitions/Devices.DeviceTwinProperties",
-          "description": "A portion of the properties that can be written only by the application back-end, and read by the device."
-        },
-        "reported": {
-          "$ref": "#/definitions/Devices.DeviceTwinProperties",
-          "description": "A portion of the properties that can be written only by the device, and read by the application back-end."
-        }
-      },
-      "required": [
-        "desired",
-        "reported"
-      ]
-    },
-    "Devices.DeviceTwinInfoX509Thumbprint": {
-      "type": "object",
-      "description": "The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.",
-      "properties": {
-        "primaryThumbprint": {
-          "type": "string",
-          "description": "Primary thumbprint for the x509 certificate."
-        },
-        "secondaryThumbprint": {
-          "type": "string",
-          "description": "Secondary thumbprint for the x509 certificate."
-        }
-      }
-    },
-    "Devices.DeviceTwinMetadata": {
-      "type": "object",
-      "description": "Metadata information for the properties JSON document.",
-      "properties": {
-        "lastUpdated": {
-          "type": "string",
-          "description": "The ISO8601 timestamp of the last time the properties were updated.",
-          "x-ms-client-name": "$lastUpdated"
-        }
-      }
-    },
-    "Devices.DeviceTwinProperties": {
-      "type": "object",
-      "description": "A portion of the properties that can be written only by the application back-end, and read by the device.",
-      "properties": {
-        "metadata": {
-          "$ref": "#/definitions/Devices.DeviceTwinMetadata",
-          "description": "Metadata information for the properties JSON document.",
-          "x-ms-client-name": "$metadata"
-        },
-        "version": {
-          "type": "number",
-          "format": "float",
-          "description": "Version of device twin properties.",
-          "x-ms-client-name": "$version"
-        }
-      },
-      "required": [
-        "metadata"
-      ]
-    },
-    "Devices.IotHubDeviceConnectedEventData": {
-      "type": "object",
-      "description": "Event data for Microsoft.Devices.DeviceConnected event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Devices.DeviceConnectionStateEventProperties"
-        }
-      ]
-    },
-    "Devices.IotHubDeviceCreatedEventData": {
-      "type": "object",
-      "description": "Event data for Microsoft.Devices.DeviceCreated event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Devices.DeviceLifeCycleEventProperties"
-        }
-      ]
-    },
-    "Devices.IotHubDeviceDeletedEventData": {
-      "type": "object",
-      "description": "Event data for Microsoft.Devices.DeviceDeleted event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Devices.DeviceLifeCycleEventProperties"
-        }
-      ]
-    },
-    "Devices.IotHubDeviceDisconnectedEventData": {
-      "type": "object",
-      "description": "Event data for Microsoft.Devices.DeviceDisconnected event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Devices.DeviceConnectionStateEventProperties"
-        }
-      ]
-    },
-    "Devices.IotHubDeviceTelemetryEventData": {
-      "type": "object",
-      "description": "Event data for Microsoft.Devices.DeviceTelemetry event.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Devices.DeviceTelemetryEventProperties"
-        }
-      ]
     },
     "EventGrid.EventGridMQTTClientCreatedOrUpdatedEventData": {
       "type": "object",
@@ -5611,6 +5273,256 @@
         "resourceType"
       ]
     },
+    "IotHub.DeviceConnectionStateEventInfo": {
+      "type": "object",
+      "description": "Information about the device connection state event.",
+      "properties": {
+        "sequenceNumber": {
+          "type": "string",
+          "description": "Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number."
+        }
+      }
+    },
+    "IotHub.DeviceConnectionStateEventProperties": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '."
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '."
+        },
+        "hubName": {
+          "type": "string",
+          "description": "Name of the IoT Hub where the device was created or deleted."
+        },
+        "deviceConnectionStateEventInfo": {
+          "$ref": "#/definitions/IotHub.DeviceConnectionStateEventInfo",
+          "description": "Information about the device connection state event."
+        }
+      },
+      "required": [
+        "deviceConnectionStateEventInfo"
+      ]
+    },
+    "IotHub.DeviceLifeCycleEventProperties": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted).",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '."
+        },
+        "hubName": {
+          "type": "string",
+          "description": "Name of the IoT Hub where the device was created or deleted."
+        },
+        "twin": {
+          "$ref": "#/definitions/IotHub.DeviceTwinInfo",
+          "description": "Information about the device twin, which is the cloud representation of application device metadata."
+        }
+      },
+      "required": [
+        "twin"
+      ]
+    },
+    "IotHub.DeviceTelemetryEventProperties": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).",
+      "properties": {
+        "body": {
+          "type": "object",
+          "description": "The content of the message from the device.",
+          "additionalProperties": {}
+        },
+        "properties": {
+          "type": "object",
+          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemProperties": {
+          "type": "object",
+          "description": "System properties help identify contents and source of the messages.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "body",
+        "properties",
+        "systemProperties"
+      ]
+    },
+    "IotHub.DeviceTwinInfo": {
+      "type": "object",
+      "description": "Information about the device twin, which is the cloud representation of application device metadata.",
+      "properties": {
+        "authenticationType": {
+          "type": "string",
+          "description": "Authentication type used for this device: either SAS, SelfSigned, or CertificateAuthority."
+        },
+        "cloudToDeviceMessageCount": {
+          "type": "number",
+          "format": "float",
+          "description": "Count of cloud to device messages sent to this device."
+        },
+        "connectionState": {
+          "type": "string",
+          "description": "Whether the device is connected or disconnected."
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "The unique identifier of the device twin."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A piece of information that describes the content of the device twin. Each etag is guaranteed to be unique per device twin."
+        },
+        "lastActivityTime": {
+          "type": "string",
+          "description": "The ISO8601 timestamp of the last activity."
+        },
+        "properties": {
+          "$ref": "#/definitions/IotHub.DeviceTwinInfoProperties",
+          "description": "Properties JSON element."
+        },
+        "status": {
+          "type": "string",
+          "description": "Whether the device twin is enabled or disabled."
+        },
+        "statusUpdateTime": {
+          "type": "string",
+          "description": "The ISO8601 timestamp of the last device twin status update."
+        },
+        "version": {
+          "type": "number",
+          "format": "float",
+          "description": "An integer that is incremented by one each time the device twin is updated."
+        },
+        "x509Thumbprint": {
+          "$ref": "#/definitions/IotHub.DeviceTwinInfoX509Thumbprint",
+          "description": "The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate."
+        }
+      },
+      "required": [
+        "properties",
+        "x509Thumbprint"
+      ]
+    },
+    "IotHub.DeviceTwinInfoProperties": {
+      "type": "object",
+      "description": "Properties JSON element.",
+      "properties": {
+        "desired": {
+          "$ref": "#/definitions/IotHub.DeviceTwinProperties",
+          "description": "A portion of the properties that can be written only by the application back-end, and read by the device."
+        },
+        "reported": {
+          "$ref": "#/definitions/IotHub.DeviceTwinProperties",
+          "description": "A portion of the properties that can be written only by the device, and read by the application back-end."
+        }
+      },
+      "required": [
+        "desired",
+        "reported"
+      ]
+    },
+    "IotHub.DeviceTwinInfoX509Thumbprint": {
+      "type": "object",
+      "description": "The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.",
+      "properties": {
+        "primaryThumbprint": {
+          "type": "string",
+          "description": "Primary thumbprint for the x509 certificate."
+        },
+        "secondaryThumbprint": {
+          "type": "string",
+          "description": "Secondary thumbprint for the x509 certificate."
+        }
+      }
+    },
+    "IotHub.DeviceTwinMetadata": {
+      "type": "object",
+      "description": "Metadata information for the properties JSON document.",
+      "properties": {
+        "lastUpdated": {
+          "type": "string",
+          "description": "The ISO8601 timestamp of the last time the properties were updated.",
+          "x-ms-client-name": "$lastUpdated"
+        }
+      }
+    },
+    "IotHub.DeviceTwinProperties": {
+      "type": "object",
+      "description": "A portion of the properties that can be written only by the application back-end, and read by the device.",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/IotHub.DeviceTwinMetadata",
+          "description": "Metadata information for the properties JSON document.",
+          "x-ms-client-name": "$metadata"
+        },
+        "version": {
+          "type": "number",
+          "format": "float",
+          "description": "Version of device twin properties.",
+          "x-ms-client-name": "$version"
+        }
+      },
+      "required": [
+        "metadata"
+      ]
+    },
+    "IotHub.IotHubDeviceConnectedEventData": {
+      "type": "object",
+      "description": "Event data for Microsoft.Devices.DeviceConnected event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IotHub.DeviceConnectionStateEventProperties"
+        }
+      ]
+    },
+    "IotHub.IotHubDeviceCreatedEventData": {
+      "type": "object",
+      "description": "Event data for Microsoft.Devices.DeviceCreated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IotHub.DeviceLifeCycleEventProperties"
+        }
+      ]
+    },
+    "IotHub.IotHubDeviceDeletedEventData": {
+      "type": "object",
+      "description": "Event data for Microsoft.Devices.DeviceDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IotHub.DeviceLifeCycleEventProperties"
+        }
+      ]
+    },
+    "IotHub.IotHubDeviceDisconnectedEventData": {
+      "type": "object",
+      "description": "Event data for Microsoft.Devices.DeviceDisconnected event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IotHub.DeviceConnectionStateEventProperties"
+        }
+      ]
+    },
+    "IotHub.IotHubDeviceTelemetryEventData": {
+      "type": "object",
+      "description": "Event data for Microsoft.Devices.DeviceTelemetry event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IotHub.DeviceTelemetryEventProperties"
+        }
+      ]
+    },
     "KeyVault.KeyVaultAccessPolicyChangedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.VaultAccessPolicyChanged event.",
@@ -5971,7 +5883,7 @@
         }
       }
     },
-    "ML.MachineLearningServicesDatasetDriftDetectedEventData": {
+    "MachineLearningServices.MachineLearningServicesDatasetDriftDetectedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event.",
       "properties": {
@@ -6016,7 +5928,7 @@
         "endTime"
       ]
     },
-    "ML.MachineLearningServicesModelDeployedEventData": {
+    "MachineLearningServices.MachineLearningServicesModelDeployedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event.",
       "properties": {
@@ -6048,7 +5960,7 @@
         "serviceProperties"
       ]
     },
-    "ML.MachineLearningServicesModelRegisteredEventData": {
+    "MachineLearningServices.MachineLearningServicesModelRegisteredEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelRegistered event.",
       "properties": {
@@ -6076,7 +5988,7 @@
         "modelProperties"
       ]
     },
-    "ML.MachineLearningServicesRunCompletedEventData": {
+    "MachineLearningServices.MachineLearningServicesRunCompletedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event.",
       "properties": {
@@ -6112,7 +6024,7 @@
         "runProperties"
       ]
     },
-    "ML.MachineLearningServicesRunStatusChangedEventData": {
+    "MachineLearningServices.MachineLearningServicesRunStatusChangedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event.",
       "properties": {
@@ -6247,7 +6159,7 @@
         }
       ]
     },
-    "Media.MediaJobCanceledEventData": {
+    "MediaServices.MediaJobCanceledEventData": {
       "type": "object",
       "description": "Job canceled event data. Schema of the data property of an EventGridEvent for a\nMicrosoft.Media.JobCanceled event.",
       "properties": {
@@ -6255,7 +6167,7 @@
           "type": "array",
           "description": "Gets the Job outputs.",
           "items": {
-            "$ref": "#/definitions/Media.MediaJobOutput"
+            "$ref": "#/definitions/MediaServices.MediaJobOutput"
           },
           "x-ms-identifiers": []
         }
@@ -6265,25 +6177,25 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobCancelingEventData": {
+    "MediaServices.MediaJobCancelingEventData": {
       "type": "object",
       "description": "Job canceling event data. Schema of the data property of an EventGridEvent for\na Microsoft.Media.JobCanceling event.",
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobError": {
+    "MediaServices.MediaJobError": {
       "type": "object",
       "description": "Details of JobOutput errors.",
       "properties": {
         "code": {
-          "$ref": "#/definitions/Media.MediaJobErrorCode",
+          "$ref": "#/definitions/MediaServices.MediaJobErrorCode",
           "description": "Error code describing the error."
         },
         "message": {
@@ -6291,18 +6203,18 @@
           "description": "A human-readable language-dependent representation of the error."
         },
         "category": {
-          "$ref": "#/definitions/Media.MediaJobErrorCategory",
+          "$ref": "#/definitions/MediaServices.MediaJobErrorCategory",
           "description": "Helps with categorization of errors."
         },
         "retry": {
-          "$ref": "#/definitions/Media.MediaJobRetry",
+          "$ref": "#/definitions/MediaServices.MediaJobRetry",
           "description": "Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal."
         },
         "details": {
           "type": "array",
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
-            "$ref": "#/definitions/Media.MediaJobErrorDetail"
+            "$ref": "#/definitions/MediaServices.MediaJobErrorDetail"
           },
           "x-ms-identifiers": []
         }
@@ -6314,7 +6226,7 @@
         "details"
       ]
     },
-    "Media.MediaJobErrorCategory": {
+    "MediaServices.MediaJobErrorCategory": {
       "type": "string",
       "description": "Error categories for Media Job Errors.",
       "enum": [
@@ -6362,7 +6274,7 @@
         ]
       }
     },
-    "Media.MediaJobErrorCode": {
+    "MediaServices.MediaJobErrorCode": {
       "type": "string",
       "description": "Media Job Error Codes.",
       "enum": [
@@ -6434,7 +6346,7 @@
         ]
       }
     },
-    "Media.MediaJobErrorDetail": {
+    "MediaServices.MediaJobErrorDetail": {
       "type": "object",
       "description": "Details of JobOutput errors.",
       "properties": {
@@ -6448,7 +6360,7 @@
         }
       }
     },
-    "Media.MediaJobErroredEventData": {
+    "MediaServices.MediaJobErroredEventData": {
       "type": "object",
       "description": "Job error state event data. Schema of the data property of an EventGridEvent\nfor a Microsoft.Media.JobErrored event.",
       "properties": {
@@ -6456,7 +6368,7 @@
           "type": "array",
           "description": "Gets the Job outputs.",
           "items": {
-            "$ref": "#/definitions/Media.MediaJobOutput"
+            "$ref": "#/definitions/MediaServices.MediaJobOutput"
           },
           "x-ms-identifiers": []
         }
@@ -6466,11 +6378,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobFinishedEventData": {
+    "MediaServices.MediaJobFinishedEventData": {
       "type": "object",
       "description": "Job finished event data. Schema of the data property of an EventGridEvent for a\nMicrosoft.Media.JobFinished event.",
       "properties": {
@@ -6478,7 +6390,7 @@
           "type": "array",
           "description": "Gets the Job outputs.",
           "items": {
-            "$ref": "#/definitions/Media.MediaJobOutput"
+            "$ref": "#/definitions/MediaServices.MediaJobOutput"
           },
           "x-ms-identifiers": []
         }
@@ -6488,11 +6400,11 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobOutput": {
+    "MediaServices.MediaJobOutput": {
       "type": "object",
       "description": "The event data for a Job output.",
       "properties": {
@@ -6501,7 +6413,7 @@
           "description": "The discriminator for derived types."
         },
         "error": {
-          "$ref": "#/definitions/Media.MediaJobError",
+          "$ref": "#/definitions/MediaServices.MediaJobError",
           "description": "Gets the Job output error."
         },
         "label": {
@@ -6514,7 +6426,7 @@
           "description": "Gets the Job output progress."
         },
         "state": {
-          "$ref": "#/definitions/Media.MediaJobState",
+          "$ref": "#/definitions/MediaServices.MediaJobState",
           "description": "Gets the Job output state."
         }
       },
@@ -6526,7 +6438,7 @@
         "state"
       ]
     },
-    "Media.MediaJobOutputAsset": {
+    "MediaServices.MediaJobOutputAsset": {
       "type": "object",
       "description": "The event data for a Job output asset.",
       "properties": {
@@ -6537,57 +6449,57 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobOutput"
+          "$ref": "#/definitions/MediaServices.MediaJobOutput"
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Media.JobOutputAsset"
     },
-    "Media.MediaJobOutputCanceledEventData": {
+    "MediaServices.MediaJobOutputCanceledEventData": {
       "type": "object",
       "description": "Job output canceled event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputCanceled event.",
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobOutputStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobOutputStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobOutputCancelingEventData": {
+    "MediaServices.MediaJobOutputCancelingEventData": {
       "type": "object",
       "description": "Job output canceling event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputCanceling event.",
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobOutputStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobOutputStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobOutputErroredEventData": {
+    "MediaServices.MediaJobOutputErroredEventData": {
       "type": "object",
       "description": "Job output error event data. Schema of the data property of an EventGridEvent\nfor a Microsoft.Media.JobOutputErrored event.",
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobOutputStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobOutputStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobOutputFinishedEventData": {
+    "MediaServices.MediaJobOutputFinishedEventData": {
       "type": "object",
       "description": "Job output finished event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputFinished event.",
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobOutputStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobOutputStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobOutputProcessingEventData": {
+    "MediaServices.MediaJobOutputProcessingEventData": {
       "type": "object",
       "description": "Job output processing event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputProcessing event.",
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobOutputStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobOutputStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobOutputProgressEventData": {
+    "MediaServices.MediaJobOutputProgressEventData": {
       "type": "object",
       "description": "Job Output Progress Event Data. Schema of the Data property of an\n  EventGridEvent for a Microsoft.Media.JobOutputProgress event.",
       "properties": {
@@ -6612,25 +6524,25 @@
         "jobCorrelationData"
       ]
     },
-    "Media.MediaJobOutputScheduledEventData": {
+    "MediaServices.MediaJobOutputScheduledEventData": {
       "type": "object",
       "description": "Job output scheduled event data. Schema of the data property of an\nEventGridEvent for a Microsoft.Media.JobOutputScheduled event.",
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobOutputStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobOutputStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobOutputStateChangeEventData": {
+    "MediaServices.MediaJobOutputStateChangeEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a\n  Microsoft.Media.JobOutputStateChange event.",
       "properties": {
         "previousState": {
-          "$ref": "#/definitions/Media.MediaJobState",
+          "$ref": "#/definitions/MediaServices.MediaJobState",
           "description": "The previous state of the Job."
         },
         "output": {
-          "$ref": "#/definitions/Media.MediaJobOutput",
+          "$ref": "#/definitions/MediaServices.MediaJobOutput",
           "description": "Gets the output."
         },
         "jobCorrelationData": {
@@ -6647,16 +6559,16 @@
         "jobCorrelationData"
       ]
     },
-    "Media.MediaJobProcessingEventData": {
+    "MediaServices.MediaJobProcessingEventData": {
       "type": "object",
       "description": "Job processing event data. Schema of the data property of an EventGridEvent for\na Microsoft.Media.JobProcessing event.",
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobRetry": {
+    "MediaServices.MediaJobRetry": {
       "type": "string",
       "description": "Media Job Retry Options.",
       "enum": [
@@ -6680,16 +6592,16 @@
         ]
       }
     },
-    "Media.MediaJobScheduledEventData": {
+    "MediaServices.MediaJobScheduledEventData": {
       "type": "object",
       "description": "Job scheduled event data. Schema of the data property of an EventGridEvent for\na Microsoft.Media.JobScheduled event.",
       "allOf": [
         {
-          "$ref": "#/definitions/Media.MediaJobStateChangeEventData"
+          "$ref": "#/definitions/MediaServices.MediaJobStateChangeEventData"
         }
       ]
     },
-    "Media.MediaJobState": {
+    "MediaServices.MediaJobState": {
       "type": "string",
       "description": "State of a Media Job.",
       "enum": [
@@ -6743,16 +6655,16 @@
         ]
       }
     },
-    "Media.MediaJobStateChangeEventData": {
+    "MediaServices.MediaJobStateChangeEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a\n  Microsoft.Media.JobStateChange event.",
       "properties": {
         "previousState": {
-          "$ref": "#/definitions/Media.MediaJobState",
+          "$ref": "#/definitions/MediaServices.MediaJobState",
           "description": "The previous state of the Job."
         },
         "state": {
-          "$ref": "#/definitions/Media.MediaJobState",
+          "$ref": "#/definitions/MediaServices.MediaJobState",
           "description": "The new state of the Job."
         },
         "correlationData": {
@@ -6769,7 +6681,7 @@
         "correlationData"
       ]
     },
-    "Media.MediaLiveEventChannelArchiveHeartbeatEventData": {
+    "MediaServices.MediaLiveEventChannelArchiveHeartbeatEventData": {
       "type": "object",
       "description": "Channel Archive heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventChannelArchiveHeartbeat event.",
       "properties": {
@@ -6787,7 +6699,7 @@
         "latencyResultCode"
       ]
     },
-    "Media.MediaLiveEventConnectionRejectedEventData": {
+    "MediaServices.MediaLiveEventConnectionRejectedEventData": {
       "type": "object",
       "description": "Encoder connection rejected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventConnectionRejected event.",
       "properties": {
@@ -6813,7 +6725,7 @@
         }
       }
     },
-    "Media.MediaLiveEventEncoderConnectedEventData": {
+    "MediaServices.MediaLiveEventEncoderConnectedEventData": {
       "type": "object",
       "description": "Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderConnected event.",
       "properties": {
@@ -6835,7 +6747,7 @@
         }
       }
     },
-    "Media.MediaLiveEventEncoderDisconnectedEventData": {
+    "MediaServices.MediaLiveEventEncoderDisconnectedEventData": {
       "type": "object",
       "description": "Encoder disconnected event data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderDisconnected event.",
       "properties": {
@@ -6861,7 +6773,7 @@
         }
       }
     },
-    "Media.MediaLiveEventIncomingDataChunkDroppedEventData": {
+    "MediaServices.MediaLiveEventIncomingDataChunkDroppedEventData": {
       "type": "object",
       "description": "Ingest fragment dropped event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingDataChunkDropped event.",
       "properties": {
@@ -6892,7 +6804,7 @@
         }
       }
     },
-    "Media.MediaLiveEventIncomingStreamReceivedEventData": {
+    "MediaServices.MediaLiveEventIncomingStreamReceivedEventData": {
       "type": "object",
       "description": "Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamReceived event.",
       "properties": {
@@ -6935,7 +6847,7 @@
         }
       }
     },
-    "Media.MediaLiveEventIncomingStreamsOutOfSyncEventData": {
+    "MediaServices.MediaLiveEventIncomingStreamsOutOfSyncEventData": {
       "type": "object",
       "description": "Incoming streams out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamsOutOfSync event.",
       "properties": {
@@ -6965,7 +6877,7 @@
         }
       }
     },
-    "Media.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData": {
+    "MediaServices.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData": {
       "type": "object",
       "description": "Incoming video stream out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync event.",
       "properties": {
@@ -6991,7 +6903,7 @@
         }
       }
     },
-    "Media.MediaLiveEventIngestHeartbeatEventData": {
+    "MediaServices.MediaLiveEventIngestHeartbeatEventData": {
       "type": "object",
       "description": "Ingest heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIngestHeartbeat event.",
       "properties": {
@@ -7066,7 +6978,7 @@
         }
       }
     },
-    "Media.MediaLiveEventTrackDiscontinuityDetectedEventData": {
+    "MediaServices.MediaLiveEventTrackDiscontinuityDetectedEventData": {
       "type": "object",
       "description": "Ingest track discontinuity detected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventTrackDiscontinuityDetected event.",
       "properties": {
@@ -7209,6 +7121,94 @@
         "complianceReasonCode": {
           "type": "string",
           "description": "The compliance reason code. May be empty."
+        }
+      },
+      "required": [
+        "timestamp"
+      ]
+    },
+    "RedisCache.RedisExportRDBCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ExportRDBCompleted event.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the event occurred."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this event."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of this event. Failed or  succeeded"
+        }
+      },
+      "required": [
+        "timestamp"
+      ]
+    },
+    "RedisCache.RedisImportRDBCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ImportRDBCompleted event.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the event occurred."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this event."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of this event. Failed or  succeeded"
+        }
+      },
+      "required": [
+        "timestamp"
+      ]
+    },
+    "RedisCache.RedisPatchingCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.PatchingCompleted event.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the event occurred."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this event."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of this event. Failed or  succeeded"
+        }
+      },
+      "required": [
+        "timestamp"
+      ]
+    },
+    "RedisCache.RedisScalingCompletedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Cache.ScalingCompleted event.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the event occurred."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this event."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of this event. Failed or  succeeded"
         }
       },
       "required": [

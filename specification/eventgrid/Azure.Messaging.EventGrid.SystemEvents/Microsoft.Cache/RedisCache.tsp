@@ -1,5 +1,5 @@
 /** Describes the schema of the Redis Cache events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents.Cache {
+namespace Microsoft.EventGrid.SystemEvents.RedisCache {
   alias RedisBaseEventData = {
     /** The time at which the event occurred. */
     timestamp: utcDateTime;
