@@ -5032,6 +5032,277 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/buildImage": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Builds an image for the specified Image Definition.",
+        "operationId": "ProjectCatalogImageDefinitions_BuildImage",
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ProjectCatalogImageDefinitions_BuildImage": {
+            "$ref": "./examples/ImageDefinitions_BuildImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ListImageBuildTaskGroupsIncludeParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Lists builds for a specified image definition.",
+        "operationId": "ProjectCatalogImageDefinitionBuilds_ListByImageDefinition",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionBuildListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageDefinitionBuilds_ListByImageDefinition": {
+            "$ref": "./examples/ImageDefinitions_ListImageBuildsByImageDefinition.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets a build for a specified image definition.",
+        "operationId": "ProjectCatalogImageDefinitionBuild_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionBuild"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageDefinitionBuilds_GetByImageDefinition": {
+            "$ref": "./examples/ImageDefinitions_GetImageBuild.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/cancel": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Cancels the specified build for an image definition.",
+        "operationId": "ProjectCatalogImageDefinitionBuild_Cancel",
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ImageDefinitionBuilds_CancelByImageDefinition": {
+            "$ref": "./examples/ImageDefinitions_CancelImageBuild.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/getDetails": {
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets Build details",
+        "operationId": "ProjectCatalogImageDefinitionBuild_GetDetails",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionBuildDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectCatalogImageDefinitionBuild_GetErrorDetails": {
+            "$ref": "./examples/ImageDefinitions_GetImageBuildDetails.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7024,11 +7295,305 @@
         "imageReference": {
           "$ref": "vdi.json#/definitions/ImageReference",
           "description": "Image reference information."
+        },
+        "fileUrl": {
+          "description": "The URL to the repository file containing the image definition.",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestBuild": {
+          "$ref": "#/definitions/LatestImageBuild",
+          "description": "Details about the latest build."
         }
-      },
-      "required": [
-        "imageReference"
-      ]
+      }
+    },
+    "LatestImageBuild": {
+      "type": "object",
+      "description": "Details about the latest build.",
+      "properties": {
+        "name": {
+          "description": "Identifier of a build.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the task group.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End time of the task group.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The state of an Image Definition Build.",
+          "$ref": "#/definitions/ImageDefinitionBuildStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageDefinitionBuildStatus": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Running",
+        "ValidationFailed",
+        "Failed",
+        "Cancelled",
+        "TimedOut"
+      ],
+      "description": "The state of an Image Definition Build.",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ImageDefinitionBuildStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "description": "The image build has succeeded."
+          },
+          {
+            "value": "Running",
+            "description": "The image build is running."
+          },
+          {
+            "value": "ValidationFailed",
+            "description": "The built image has failed validation."
+          },
+          {
+            "value": "Failed",
+            "description": "The image build has failed."
+          },
+          {
+            "value": "Cancelled",
+            "description": "The image build has been cancelled."
+          },
+          {
+            "value": "TimedOut",
+            "description": "The image build has timed out."
+          }
+        ]
+      }
+    },
+    "ImageDefinitionBuildListResult": {
+      "description": "Results of the Image Definition Build list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageDefinitionBuild"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageDefinitionBuild": {
+      "description": "Represents a specific build of an Image Definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Image Definition Build properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImageDefinitionBuildProperties"
+        }
+      }
+    },
+    "ImageDefinitionBuildProperties": {
+      "description": "Properties of an Image Definition Build.",
+      "type": "object",
+      "properties": {
+        "imageReference": {
+          "$ref": "vdi.json#/definitions/ImageReference",
+          "description": "The specific image version used by the build.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the build.",
+          "$ref": "#/definitions/ImageDefinitionBuildStatus",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the task group.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End time of the task group.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "Details for image creation error. Populated when the image creation is not successful.",
+          "$ref": "#/definitions/ImageCreationErrorDetails",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageDefinitionBuildDetails": {
+      "description": "Represents a specific build of an Image Definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "imageReference": {
+          "$ref": "vdi.json#/definitions/ImageReference",
+          "description": "The specific image version used by the build.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the build.",
+          "$ref": "#/definitions/ImageDefinitionBuildStatus",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the task group.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End time of the task group.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "Details for image creation error. Populated when the image creation is not successful.",
+          "$ref": "#/definitions/ImageCreationErrorDetails",
+          "readOnly": true
+        },
+        "taskGroups": {
+          "description": "The list of task groups executed during the image definition build.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageDefinitionBuildTaskGroup"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ImageCreationErrorDetails": {
+      "type": "object",
+      "description": "Image creation error details",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error."
+        }
+      }
+    },
+    "ImageDefinitionBuildTaskGroup": {
+      "description": "A task group executed during the image definition build.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the task group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the task group.",
+          "$ref": "#/definitions/ImageDefinitionBuildStatus",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the task group.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End time of the task group.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "tasks": {
+          "description": "The list of tasks executed during the task group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageDefinitionBuildTask"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ImageDefinitionBuildTask": {
+      "description": "A task executed during the image definition build.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the task.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Parameters for the task.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": { "type": "string" },
+              "value": { "type": "string" }
+            },
+            "required": ["key", "value"]
+          }
+        },
+        "displayName": {
+          "description": "Display name to help differentiate multiple instances of the same task.",
+          "type": "string"
+        },
+        "id": {
+          "description": "ID of the task instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the task.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "End time of the task.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the task.",
+          "$ref": "#/definitions/ImageDefinitionBuildStatus",
+          "readOnly": true
+        },
+        "logUri": {
+          "description": "The URI for retrieving logs for the task execution.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -7231,7 +7796,36 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63
+    },
+    "ImageDefinitionBuildNameParameter": {
+      "name": "buildName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the Image Definition Build.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "ListImageBuildTaskGroupsIncludeParameter": {
+      "name": "include",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "collectionFormat": "csv",
+      "items": {
+        "type": "string",
+        "enum": [
+          "taskGroups"
+        ],
+        "x-ms-enum": {
+          "name": "ListImageBuildTaskGroupsIncludeParameter",
+          "modelAsString": true
+        }
+      },
+      "description": "Optional query parameter to specify what properties should be included in the response.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
-
