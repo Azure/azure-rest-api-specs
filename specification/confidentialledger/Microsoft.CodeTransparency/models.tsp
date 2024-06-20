@@ -271,10 +271,8 @@ model CodeTransparencyConfigurationPolicy {
 }
 
 alias BodyParameter<T, name extends valueof string = "body"> = {
-  /**
-  Grouping of body parameters
-  */
   @friendlyName(name)
   @bodyRoot
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Don't want to add documentation"
   body: T;
 };
