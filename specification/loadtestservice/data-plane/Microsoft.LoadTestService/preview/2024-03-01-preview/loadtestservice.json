@@ -1370,7 +1370,7 @@
               "USER_PROPERTIES",
               "ADDITIONAL_ARTIFACTS",
               "ZIPPED_ARTIFACTS",
-              "URL_TEST_CONFIG_JSON",
+              "URL_TEST_CONFIG",
               "TEST_SCRIPT"
             ],
             "x-ms-enum": {
@@ -1398,8 +1398,8 @@
                   "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
                 },
                 {
-                  "name": "URL_TEST_CONFIG_JSON",
-                  "value": "URL_TEST_CONFIG_JSON",
+                  "name": "URL_TEST_CONFIG",
+                  "value": "URL_TEST_CONFIG",
                   "description": "If the file is a JSON config file to define the requests for a URL test."
                 },
                 {
@@ -1987,7 +1987,7 @@
         "USER_PROPERTIES",
         "ADDITIONAL_ARTIFACTS",
         "ZIPPED_ARTIFACTS",
-        "URL_TEST_CONFIG_JSON",
+        "URL_TEST_CONFIG",
         "TEST_SCRIPT"
       ],
       "x-ms-enum": {
@@ -2015,8 +2015,8 @@
             "description": "If the file is a compressed archive containing a collection of various artifacts or resources."
           },
           {
-            "name": "URL_TEST_CONFIG_JSON",
-            "value": "URL_TEST_CONFIG_JSON",
+            "name": "URL_TEST_CONFIG",
+            "value": "URL_TEST_CONFIG",
             "description": "If the file is a JSON config file to define the requests for a URL test."
           },
           {
@@ -2585,7 +2585,7 @@
         },
         "aggregate": {
           "$ref": "#/definitions/PFAgFunc",
-          "description": "The aggregation function to be applied on the client metric. Allowed functions\n- ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,\n‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,\n‘count’ - for requests"
+          "description": "The aggregation function to be applied on the client metric. Allowed functions\n- ‘percentage’ - for error metric , ‘avg’, percentiles like ‘p50’, ‘p90’, & so on, ‘min’,\n‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,\n‘count’ - for requests"
         },
         "condition": {
           "type": "string",

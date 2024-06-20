@@ -30,9 +30,9 @@ using TypeSpec.Versioning;
   "Azure OpenAI APIs for completions and search",
   {
     @doc("""
-Supported Cognitive Services endpoints (protocol and hostname, for example:
-https://westus.api.cognitive.microsoft.com).
-""")
+      Supported Cognitive Services endpoints (protocol and hostname, for example:
+      https://westus.api.cognitive.microsoft.com).
+      """)
     endpoint: string,
   }
 )
@@ -61,4 +61,7 @@ enum ServiceApiVersions {
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_04_01_Preview: "2024-04-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_05_01_Preview: "2024-05-01-preview",
 }
