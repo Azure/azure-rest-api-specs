@@ -99,11 +99,25 @@ union ListenerPortProtocol {
 
 @doc("Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported")
 model TlsCertMethod {
+  @doc("Mode of TLS server certificate management.")
+  mode: TlsCertMethodMode;
+
   @doc("Option 1 - Automatic TLS server certificate management with cert-manager.")
   automatic?: AutomaticCertMethod;
 
   @doc("Option 2 - Manual TLS server certificate management through a defined secret.")
   manual?: X509ManualCertificate;
+}
+
+@doc("Broker Authentication Mode")
+union TlsCertMethodMode {
+  string,
+
+  @doc("Automatic TLS server certificate configuration.")
+  Automatic: "Automatic",
+
+  @doc("Manual TLS server certificate configuration.")
+  Manual: "Manual",
 }
 
 @doc("Automatic TLS server certificate management with cert-manager")

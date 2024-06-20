@@ -46,6 +46,9 @@ model BrokerAuthenticationProperties {
 @doc("Set of broker authentication policies. Only one method is supported for each entry.")
 model BrokerAuthenticatorMethods {
   @doc("Custom authentication configuration.")
+  mode: BrokerAuthenticationMode;
+
+  @doc("Custom authentication configuration.")
   custom?: BrokerAuthenticatorMethodCustom;
 
   @doc("ServiceAccountToken authentication configuration.")
@@ -53,6 +56,20 @@ model BrokerAuthenticatorMethods {
 
   @doc("X.509 authentication configuration.")
   x509?: BrokerAuthenticatorMethodX509;
+}
+
+@doc("Broker Authentication Mode")
+union BrokerAuthenticationMode {
+  string,
+
+  @doc("Custom authentication configuration.")
+  Custom: "Custom",
+
+  @doc("ServiceAccountToken authentication configuration.")
+  ServiceAccountToken: "ServiceAccountToken",
+
+  @doc("X.509 authentication configuration.")
+  X509: "X509",
 }
 
 @doc("Custom method for BrokerAuthentication")

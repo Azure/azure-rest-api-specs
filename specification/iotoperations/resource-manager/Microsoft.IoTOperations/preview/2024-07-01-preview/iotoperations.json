@@ -3022,6 +3022,30 @@
         }
       }
     },
+    "AuthenticationMode": {
+      "type": "string",
+      "description": "Authentication Mode properties",
+      "enum": [
+        "SystemAssignedManagedIdentity",
+        "UserAssignedManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssignedManagedIdentity",
+            "value": "SystemAssignedManagedIdentity",
+            "description": "SystemAssignedManagedIdentity Option"
+          },
+          {
+            "name": "UserAssignedManagedIdentity",
+            "value": "UserAssignedManagedIdentity",
+            "description": "UserAssignedManagedIdentity Option"
+          }
+        ]
+      }
+    },
     "AuthorizationConfig": {
       "type": "object",
       "description": "Broker AuthorizationConfig properties",
@@ -3180,6 +3204,36 @@
           "minimum": 0,
           "maximum": 4294967295
         }
+      }
+    },
+    "BrokerAuthenticationMode": {
+      "type": "string",
+      "description": "Broker Authentication Mode",
+      "enum": [
+        "Custom",
+        "ServiceAccountToken",
+        "X509"
+      ],
+      "x-ms-enum": {
+        "name": "BrokerAuthenticationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom authentication configuration."
+          },
+          {
+            "name": "ServiceAccountToken",
+            "value": "ServiceAccountToken",
+            "description": "ServiceAccountToken authentication configuration."
+          },
+          {
+            "name": "X509",
+            "value": "X509",
+            "description": "X.509 authentication configuration."
+          }
+        ]
       }
     },
     "BrokerAuthenticationProperties": {
@@ -3367,6 +3421,10 @@
       "type": "object",
       "description": "Set of broker authentication policies. Only one method is supported for each entry.",
       "properties": {
+        "mode": {
+          "$ref": "#/definitions/BrokerAuthenticationMode",
+          "description": "Custom authentication configuration."
+        },
         "custom": {
           "$ref": "#/definitions/BrokerAuthenticatorMethodCustom",
           "description": "Custom authentication configuration."
@@ -3379,7 +3437,10 @@
           "$ref": "#/definitions/BrokerAuthenticatorMethodX509",
           "description": "X.509 authentication configuration."
         }
-      }
+      },
+      "required": [
+        "mode"
+      ]
     },
     "BrokerAuthorizationProperties": {
       "type": "object",
@@ -4147,17 +4208,25 @@
         "path"
       ]
     },
-    "DataFlowEndpointAuthenticationKubernetes": {
+    "DataFlowEndpointAuthentication": {
       "type": "object",
-      "description": "DataFlowEndpoint Authentication Kubernetes properties",
+      "description": "Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.",
       "properties": {
-        "audience": {
-          "type": "string",
-          "description": "Audience of the service account."
+        "mode": {
+          "$ref": "#/definitions/AuthenticationMode",
+          "description": "Mode of Authentication."
+        },
+        "systemAssignedManagedIdentity": {
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentity": {
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
         }
       },
       "required": [
-        "audience"
+        "mode"
       ]
     },
     "DataFlowEndpointAuthenticationSasl": {
@@ -4261,10 +4330,6 @@
       "type": "object",
       "description": "Azure Data Explorer endpoint properties",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataFlowEndpointDataExplorerAuthentication",
-          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
-        },
         "batching": {
           "$ref": "#/definitions/BatchingConfiguration",
           "description": "Azure Data Explorer endpoint batching configuration."
@@ -4280,24 +4345,9 @@
         }
       },
       "required": [
-        "authentication",
         "database",
         "host"
       ]
-    },
-    "DataFlowEndpointDataExplorerAuthentication": {
-      "type": "object",
-      "description": "Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.",
-      "properties": {
-        "systemAssignedManagedIdentity": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentity": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        }
-      }
     },
     "DataFlowEndpointDataLakeStorage": {
       "type": "object",
@@ -4329,14 +4379,6 @@
         "accessTokenSecretName": {
           "type": "string",
           "description": "SAS token authentication."
-        },
-        "systemAssignedManagedIdentity": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentity": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
         }
       }
     },
@@ -4402,14 +4444,6 @@
         "accessTokenSecretName": {
           "type": "string",
           "description": "SAS token authentication."
-        },
-        "systemAssignedManagedIdentity": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentity": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
         }
       }
     },
@@ -4630,14 +4664,6 @@
         "sasl": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationSasl",
           "description": "SASL authentication."
-        },
-        "systemAssignedManagedIdentity": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentity": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
         },
         "x509Credentials": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationX509",
@@ -4934,14 +4960,6 @@
           "$ref": "#/definitions/DataFlowEndpointAuthenticationSasl",
           "description": "Kubernetes service account token authentication. Default audience if not set is aio-mq-internal"
         },
-        "systemAssignedManagedIdentity": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentity": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        },
         "x509Credentials": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
@@ -5008,27 +5026,35 @@
       "type": "object",
       "description": "DataFlowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource",
       "properties": {
-        "dataExplorer": {
+        "authentication": {
+          "$ref": "#/definitions/DataFlowEndpointAuthentication",
+          "description": "Authentication configuration."
+        },
+        "endpointType": {
+          "$ref": "#/definitions/EndpointType",
+          "description": "Endpoint Type."
+        },
+        "dataExplorerSettings": {
           "$ref": "#/definitions/DataFlowEndpointDataExplorer",
           "description": "Azure Data Explorer endpoint."
         },
-        "dataLakeStorage": {
+        "dataLakeStorageSettings": {
           "$ref": "#/definitions/DataFlowEndpointDataLakeStorage",
           "description": "Azure Data Lake endpoint."
         },
-        "fabricOneLake": {
+        "fabricOneLakeSettings": {
           "$ref": "#/definitions/DataFlowEndpointFabricOneLake",
           "description": "Microsoft Fabric endpoint."
         },
-        "kafka": {
+        "kafkaSettings": {
           "$ref": "#/definitions/DataFlowEndpointKafka",
           "description": "Kafka endpoint."
         },
-        "localStorage": {
+        "localStorageSettings": {
           "$ref": "#/definitions/DataFlowEndpointLocalStorage",
           "description": "Local persistent volume endpoint."
         },
-        "mqtt": {
+        "mqttSettings": {
           "$ref": "#/definitions/DataFlowEndpointMqtt",
           "description": "Mqtt endpoint."
         },
@@ -5037,7 +5063,11 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "authentication",
+        "endpointType"
+      ]
     },
     "DataFlowEndpointResource": {
       "type": "object",
@@ -5433,6 +5463,54 @@
       "required": [
         "maxSize"
       ]
+    },
+    "EndpointType": {
+      "type": "string",
+      "description": "DataFlowEndpoint Type properties",
+      "enum": [
+        "DataExplorer",
+        "DataLakeStorage",
+        "FabricOneLake",
+        "Kafka",
+        "LocalStorage",
+        "Mqtt"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataExplorer",
+            "value": "DataExplorer",
+            "description": "Azure Data Explorer Type"
+          },
+          {
+            "name": "DataLakeStorage",
+            "value": "DataLakeStorage",
+            "description": "Azure Data Lake Type"
+          },
+          {
+            "name": "FabricOneLake",
+            "value": "FabricOneLake",
+            "description": "Microsoft Fabric Type"
+          },
+          {
+            "name": "Kafka",
+            "value": "Kafka",
+            "description": "Kafka Type"
+          },
+          {
+            "name": "LocalStorage",
+            "value": "LocalStorage",
+            "description": "Local Storage Type"
+          },
+          {
+            "name": "Mqtt",
+            "value": "Mqtt",
+            "description": "Mqtt Type"
+          }
+        ]
+      }
     },
     "ExtendedLocation": {
       "type": "object",
@@ -6357,6 +6435,10 @@
       "type": "object",
       "description": "Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported",
       "properties": {
+        "mode": {
+          "$ref": "#/definitions/TlsCertMethodMode",
+          "description": "Mode of TLS server certificate management."
+        },
         "automatic": {
           "$ref": "#/definitions/AutomaticCertMethod",
           "description": "Option 1 - Automatic TLS server certificate management with cert-manager."
@@ -6365,6 +6447,33 @@
           "$ref": "#/definitions/X509ManualCertificate",
           "description": "Option 2 - Manual TLS server certificate management through a defined secret."
         }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "TlsCertMethodMode": {
+      "type": "string",
+      "description": "Broker Authentication Mode",
+      "enum": [
+        "Automatic",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "TlsCertMethodMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "Automatic TLS server certificate configuration."
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Manual TLS server certificate configuration."
+          }
+        ]
       }
     },
     "Traces": {

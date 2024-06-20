@@ -34,34 +34,60 @@ model DataFlowEndpointResource is TrackedResource<DataFlowEndpointProperties> {
 
 @doc("DataFlowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")
 model DataFlowEndpointProperties {
+  @doc("Authentication configuration.")
+  authentication: DataFlowEndpointAuthentication;
+
+  @doc("Endpoint Type.")
+  endpointType: EndpointType;
+
   @doc("Azure Data Explorer endpoint.")
-  dataExplorer?: DataFlowEndpointDataExplorer;
+  dataExplorerSettings?: DataFlowEndpointDataExplorer;
 
   @doc("Azure Data Lake endpoint.")
-  dataLakeStorage?: DataFlowEndpointDataLakeStorage;
+  dataLakeStorageSettings?: DataFlowEndpointDataLakeStorage;
 
   @doc("Microsoft Fabric endpoint.")
-  fabricOneLake?: DataFlowEndpointFabricOneLake;
+  fabricOneLakeSettings?: DataFlowEndpointFabricOneLake;
 
   @doc("Kafka endpoint.")
-  kafka?: DataFlowEndpointKafka;
+  kafkaSettings?: DataFlowEndpointKafka;
 
   @doc("Local persistent volume endpoint.")
-  localStorage?: DataFlowEndpointLocalStorage;
+  localStorageSettings?: DataFlowEndpointLocalStorage;
 
   @doc("Mqtt endpoint.")
-  mqtt?: DataFlowEndpointMqtt;
+  mqttSettings?: DataFlowEndpointMqtt;
 
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
 
+@doc("DataFlowEndpoint Type properties")
+union EndpointType {
+  string,
+
+  @doc("Azure Data Explorer Type")
+  DataExplorer: "DataExplorer",
+
+  @doc("Azure Data Lake Type")
+  DataLakeStorage: "DataLakeStorage",
+
+  @doc("Microsoft Fabric Type")
+  FabricOneLake: "FabricOneLake",
+
+  @doc("Kafka Type")
+  Kafka: "Kafka",
+
+  @doc("Local Storage Type")
+  LocalStorage: "LocalStorage",
+
+  @doc("Mqtt Type")
+  Mqtt: "Mqtt",
+}
+
 @doc("Azure Data Explorer endpoint properties")
 model DataFlowEndpointDataExplorer {
-  @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
-  authentication: DataFlowEndpointDataExplorerAuthentication;
-
   @doc("Azure Data Explorer endpoint batching configuration.")
   batching?: BatchingConfiguration;
 
@@ -74,12 +100,26 @@ model DataFlowEndpointDataExplorer {
 }
 
 @doc("Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.")
-model DataFlowEndpointDataExplorerAuthentication {
+model DataFlowEndpointAuthentication {
+  @doc("Mode of Authentication.")
+  mode: AuthenticationMode;
+
   @doc("System-assigned managed identity authentication.")
   systemAssignedManagedIdentity?: DataFlowEndpointAuthenticationSystemAssignedManagedIdentity;
 
   @doc("User-assigned managed identity authentication.")
   userAssignedManagedIdentity?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
+}
+
+@doc("Authentication Mode properties")
+union AuthenticationMode {
+  string,
+
+  @doc("SystemAssignedManagedIdentity Option")
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+
+  @doc("UserAssignedManagedIdentity Option")
+  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
 }
 
 @doc("DataFlowEndpoint Authentication SystemAssignedManagedIdentity properties")
@@ -116,13 +156,7 @@ model DataFlowEndpointDataLakeStorage {
 @doc("Azure Data Lake endpoint Authentication properties.  NOTE Enum - Only one method is supported for one entry")
 model DataFlowEndpointDataLakeStorageAuthentication {
   @doc("SAS token authentication.")
-  accessTokenSecretName?: string;
-
-  @doc("System-assigned managed identity authentication.")
-  systemAssignedManagedIdentity?: DataFlowEndpointAuthenticationSystemAssignedManagedIdentity;
-
-  @doc("User-assigned managed identity authentication.")
-  userAssignedManagedIdentity?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
+  accessTokenSecretName?: string; // Bring this up one level?
 }
 
 @doc("Microsoft Fabric endpoint properties")
@@ -147,13 +181,7 @@ model DataFlowEndpointFabricOneLake {
 @doc("Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry")
 model DataFlowEndpointFabricOneLakeAuthentication {
   @doc("SAS token authentication.")
-  accessTokenSecretName?: string;
-
-  @doc("System-assigned managed identity authentication.")
-  systemAssignedManagedIdentity?: DataFlowEndpointAuthenticationSystemAssignedManagedIdentity;
-
-  @doc("User-assigned managed identity authentication.")
-  userAssignedManagedIdentity?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
+  accessTokenSecretName?: string; // Bring this up one level?
 }
 
 @doc("Microsoft Fabric endpoint Batching properties")
@@ -221,14 +249,8 @@ model DataFlowEndpointKafka {
 
 @doc("Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry")
 model DataFlowEndpointKafkaAuthentication {
-  @doc("SASL authentication.")
+  @doc("SASL authentication.") // Bring this up one level?
   sasl?: DataFlowEndpointAuthenticationSasl;
-
-  @doc("System-assigned managed identity authentication.")
-  systemAssignedManagedIdentity?: DataFlowEndpointAuthenticationSystemAssignedManagedIdentity;
-
-  @doc("User-assigned managed identity authentication.")
-  userAssignedManagedIdentity?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
 
   @doc("X.509 certificate authentication.")
   x509Credentials?: DataFlowEndpointAuthenticationX509;
@@ -413,22 +435,10 @@ union MqttRetainType {
 @doc("Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry. Default Kubernetes authentication with audience set to aio-mq-internal")
 model DataFlowEndpointMqttAuthentication {
   @doc("Kubernetes service account token authentication. Default audience if not set is aio-mq-internal")
-  serviceAccountToken?: DataFlowEndpointAuthenticationSasl;
-
-  @doc("System-assigned managed identity authentication.")
-  systemAssignedManagedIdentity?: DataFlowEndpointAuthenticationSystemAssignedManagedIdentity;
-
-  @doc("User-assigned managed identity authentication.")
-  userAssignedManagedIdentity?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
+  serviceAccountToken?: DataFlowEndpointAuthenticationSasl; // Bring this up one level?
 
   @doc("X.509 certificate authentication.")
   x509Credentials?: DataFlowEndpointAuthenticationX509;
-}
-
-@doc("DataFlowEndpoint Authentication Kubernetes properties")
-model DataFlowEndpointAuthenticationKubernetes {
-  @doc("Audience of the service account.")
-  audience: string;
 }
 
 @doc("Mqtt endpoint Session Expiry Seconds properties")
