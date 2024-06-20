@@ -32,7 +32,7 @@ model QueryForceDelete {
 }
 
 /** The provisioning state of the resource. */
-union ResourceProvisioningState {
+union ProvisioningState {
   string,
   Azure.ResourceManager.ResourceProvisioningState,
 
@@ -200,7 +200,7 @@ model VmmServerProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /** Credentials to connect to VmmServer. */
@@ -254,7 +254,7 @@ model CloudProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /** Cloud Capacity model */
@@ -309,7 +309,7 @@ model VirtualNetworkProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /** Defines the resource properties. */
@@ -387,7 +387,7 @@ model VirtualMachineTemplateProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /** Network Interface model */
@@ -510,7 +510,7 @@ model AvailabilitySetProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /** The inventory type */
@@ -550,7 +550,7 @@ model InventoryItemProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /** Defines the resource properties. */
@@ -580,7 +580,7 @@ model VirtualMachineInstanceProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /** Virtual Machine Instance Properties Update model */
@@ -799,7 +799,7 @@ model VmInstanceHybridIdentityMetadataProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /** Defines the create checkpoint action properties. */
@@ -848,7 +848,7 @@ model GuestAgentProperties {
 
   /** Provisioning state of the resource. */
   @visibility("read")
-  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 /** Username / Password Credentials to connect to guest. */
