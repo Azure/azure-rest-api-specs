@@ -732,7 +732,7 @@
           "readOnly": true
         },
         "state": {
-          "$ref": "#/definitions/State",
+          "$ref": "#/definitions/ResourceState",
           "description": "The current state of Microsoft Fabric resource. The state is to indicate more states outside of resource provisioning.",
           "readOnly": true
         },
@@ -779,7 +779,7 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "description": "The resource provisioning state.",
+      "description": "The provisioning state of the Fabric capacity resource.",
       "enum": [
         "Succeeded",
         "Failed",
@@ -821,6 +821,103 @@
             "name": "Updating",
             "value": "Updating",
             "description": "Resource is updating"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ResourceState": {
+      "type": "string",
+      "description": "The state of the Fabric capacity resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Active",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Suspending",
+        "Suspended",
+        "Pausing",
+        "Paused",
+        "Resuming",
+        "Scaling",
+        "Preparing"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Resource is active"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is provisioning"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is deleting"
+          },
+          {
+            "name": "Suspending",
+            "value": "Suspending",
+            "description": "Resource is suspending"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Resource is suspended"
+          },
+          {
+            "name": "Pausing",
+            "value": "Pausing",
+            "description": "Resource is pausing"
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Resource is paused"
+          },
+          {
+            "name": "Resuming",
+            "value": "Resuming",
+            "description": "Resource is resuming"
+          },
+          {
+            "name": "Scaling",
+            "value": "Scaling",
+            "description": "Resource is scaling"
+          },
+          {
+            "name": "Preparing",
+            "value": "Preparing",
+            "description": "Resource is preparing"
           }
         ]
       },
@@ -982,103 +1079,6 @@
           "description": "The name of the Azure pricing tier to which the SKU applies."
         }
       }
-    },
-    "State": {
-      "type": "string",
-      "description": "The resource provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Active",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Suspending",
-        "Suspended",
-        "Pausing",
-        "Paused",
-        "Resuming",
-        "Scaling",
-        "Preparing"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "Resource is active"
-          },
-          {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "Resource is provisioning"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Resource is updating"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Resource is deleting"
-          },
-          {
-            "name": "Suspending",
-            "value": "Suspending",
-            "description": "Resource is suspending"
-          },
-          {
-            "name": "Suspended",
-            "value": "Suspended",
-            "description": "Resource is suspended"
-          },
-          {
-            "name": "Pausing",
-            "value": "Pausing",
-            "description": "Resource is pausing"
-          },
-          {
-            "name": "Paused",
-            "value": "Paused",
-            "description": "Resource is paused"
-          },
-          {
-            "name": "Resuming",
-            "value": "Resuming",
-            "description": "Resource is resuming"
-          },
-          {
-            "name": "Scaling",
-            "value": "Scaling",
-            "description": "Resource is scaling"
-          },
-          {
-            "name": "Preparing",
-            "value": "Preparing",
-            "description": "Resource is preparing"
-          }
-        ]
-      },
-      "readOnly": true
     }
   },
   "parameters": {

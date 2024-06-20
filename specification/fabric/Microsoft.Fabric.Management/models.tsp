@@ -20,7 +20,7 @@ model FabricCapacityProperties {
 
   @doc("The current state of Microsoft Fabric resource. The state is to indicate more states outside of resource provisioning.")
   @visibility("read")
-  state: State;
+  state: ResourceState;
 
   @doc("The capacity administration")
   administration: CapacityAdministration;
@@ -49,7 +49,7 @@ model CapacityAdministration {
   members: Array<string>;
 }
 
-@doc("The resource provisioning state.")
+@doc("The provisioning state of the Fabric capacity resource.")
 union ProvisioningState {
   ResourceProvisioningState,
 
@@ -65,8 +65,8 @@ union ProvisioningState {
   string,
 }
 
-/** The resource provisioning state. */
-union State {
+@doc("The state of the Fabric capacity resource.")
+union ResourceState {
   ResourceProvisioningState,
 
   /** Resource is active */
