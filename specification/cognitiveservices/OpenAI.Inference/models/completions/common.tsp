@@ -1,7 +1,9 @@
 import "@typespec/versioning";
+import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Versioning;
+using Http;
 
 namespace Azure.OpenAI;
 
@@ -72,9 +74,3 @@ union ChatRole {
   @added(ServiceApiVersions.v2024_02_15_Preview)
   tool: "tool",
 }
-
-alias BodyParameter<T, name extends string = "body"> = {
-  @friendlyName(name)
-  @bodyRoot
-  body: T;
-};

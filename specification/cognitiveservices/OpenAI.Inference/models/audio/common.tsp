@@ -23,9 +23,3 @@ alias AudioTextResponse = {
   @bodyRoot
   body: string;
 };
-
-alias BodyParameter<T, name extends string = "body"> = {
-  @friendlyName(name)
-  @bodyRoot
-  body: T;
-};

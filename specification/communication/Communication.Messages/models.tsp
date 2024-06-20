@@ -375,7 +375,10 @@ enum Versions {
   c2024_02_01: "2024-02-01",
 }
 
-alias BodyParameter<T, name extends string = "body"> = {
+alias BodyParameter<T, name extends valueof string = "body"> = {
+  /**
+  Grouping of body parameters
+  */
   @friendlyName(name)
   @bodyRoot
   body: T;

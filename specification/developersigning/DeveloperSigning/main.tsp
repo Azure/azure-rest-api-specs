@@ -188,7 +188,10 @@ model BytesBody<ContentType> {
   contentType: ContentType;
 }
 
-alias BodyParameter<T, name extends string = "body"> = {
+alias BodyParameter<T, name extends valueof string = "body"> = {
+  /**
+  Grouping of body parameters
+  */
   @friendlyName(name)
   @bodyRoot
   body: T;

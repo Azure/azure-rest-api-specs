@@ -270,7 +270,10 @@ model CodeTransparencyConfigurationPolicy {
   accepted_did_issuers?: string[];
 }
 
-alias BodyParameter<T, name extends string = "body"> = {
+alias BodyParameter<T, name extends valueof string = "body"> = {
+  /**
+  Grouping of body parameters
+  */
   @friendlyName(name)
   @bodyRoot
   body: T;
