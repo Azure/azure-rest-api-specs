@@ -4,6 +4,7 @@ import "./models.tsp";
 import "../shared/routes.tsp";
 
 using Azure.Core;
+using Azure.Core.Traits;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -261,6 +262,192 @@ interface DevBoxes {
     DevBox,
     {},
     OperationStatus
+  >;
+
+  @doc("""
+      Lists customization groups on the Dev Box. Listed customization groups exclude 
+      task information unless specified via the include parameter.
+    """)
+  @added(APIVersions.v2024_05_01_preview)
+  listCustomizationGroups is StandardResourceOperations.ResourceList<
+    CustomizationGroup,
+    QueryParametersTrait<{
+      @doc("Optional query parameter to specify what properties should be included in the response.")
+      @query
+      include?: ListCustomizationGroupsIncludeProperty;
+    }>
+  >;
+
+  @doc("""
+      Gets a customization group.
+    """)
+  @added(APIVersions.v2024_05_01_preview)
+  getCustomizationGroup is StandardResourceOperations.ResourceRead<CustomizationGroup>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  // The standard operation names the body as resource, so the generated swagger has parameter
+  //  {
+  //     "name": "resource",
+  //     "in": "body",
+  //  },
+  // instead of the desired
+  //  {
+  //     "name": "body",
+  //     "in": "body",
+  //  }
+  @doc("Applies customizations to the Dev Box.")
+  @put
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationGroups/{customizationGroupName}")
+  @added(APIVersions.v2024_05_01_preview)
+  createCustomizationGroup is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("""
+          The AAD object id of the user. If value is 'me', the identity is taken from the 
+          authentication context.
+        """)
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of a Dev Box.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      devBoxName: string;
+
+      @doc("A customization group name.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      customizationGroupName: string;
+
+      @doc("Represents the body request of a Dev Box creation. Dev Box Pool name is required. Optionally set the owner of the Dev Box as local administrator")
+      @body
+      body: CustomizationGroup;
+    },
+    CustomizationGroup
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No model for this."
+  @doc("Gets the log for a customization task.")
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationGroups/{customizationGroupName}/logs/{customizationTaskId}")
+  @get
+  @added(APIVersions.v2024_05_01_preview)
+  getCustomizationTaskLog is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("""
+          The AAD object id of the user. If value is 'me', the identity is taken from the 
+          authentication context.
+        """)
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of a Dev Box.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      devBoxName: string;
+
+      @doc("A customization group name.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      customizationGroupName: string;
+
+      @doc("A customization task ID.")
+      @maxLength(36)
+      @minLength(36)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
+      @path
+      customizationTaskId: string;
+    },
+    {
+      @doc("Set producer to text/plain")
+      @header
+      contentType: "text/plain";
+
+      @body
+      body: string;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce route with /catalogs, but we only allow list on /projects"
+  @doc("Lists all customization tasks available to the project.")
+  @route("/projects/{projectName}/customizationTasks")
+  @get
+  @added(APIVersions.v2024_05_01_preview)
+  listCustomizationTaskDefinitionsByProject is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+    },
+    CustomizationTaskDefinitionResult
+  >;
+
+  @doc("Gets a customization task.")
+  @added(APIVersions.v2024_05_01_preview)
+  getCustomizationTaskDefinitions is StandardResourceOperations.ResourceRead<CustomizationTaskDefinition>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "StandardOperations produces route on an specific customizationTask, but we want it on the group"
+  @doc("Validates a list of customization tasks.")
+  @route("/projects/{projectName}/customizationTasks:validateGroup")
+  @pollingOperation(OperationStatuses.get)
+  @added(APIVersions.v2024_05_01_preview)
+  validateCustomizationTasksAction is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("Customization tasks to validate.")
+      @body
+      body: CustomizationTaskList;
+    },
+    {
+      @statusCode
+      statusCode: 202;
+
+      @header("Location")
+      location: string;
+
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+
+      @body
+      @added(APIVersions.v2024_05_01_preview)
+      body: CustomizationTaskListValidationOperationResult;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"

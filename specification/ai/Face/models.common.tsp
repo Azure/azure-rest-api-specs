@@ -259,30 +259,30 @@ model GroupingResult {
 }
 
 alias AddFaceDescriptionInList = """
->
-*
-  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
-  * Each person entry can hold up to 248 faces.
-  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
-  * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.
-  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
-  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
-  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model
-""";
+  >
+  *
+    * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+    * Each person entry can hold up to 248 faces.
+    * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+    * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from \"Detect\", there's no guarantee to detect and add the face successfully.
+    * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+    * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+    * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model
+  """;
 
 alias ListRequestOptionsDescriptionInList = """
->
-*
-  * "start" parameter (string, optional) specifies an ID value from which returned entries will have larger IDs based on string comparison. Setting "start" to an empty value indicates that entries should be returned starting from the first item.
-  * "top" parameter (int, optional) determines the maximum number of entries to be returned, with a limit of up to 1000 entries per call. To retrieve additional entries beyond this limit, specify "start" with the personId of the last entry returned in the current call.
-
-> [!TIP]
->
-> * For example, there are total 5 items with their IDs: "itemId1", ..., "itemId5".
->   * "start=&top=" will return all 5 items.
->   * "start=&top=2" will return "itemId1", "itemId2".
->   * "start=itemId2&top=3" will return "itemId3", "itemId4", "itemId5".
-""";
+  >
+  *
+    * "start" parameter (string, optional) specifies an ID value from which returned entries will have larger IDs based on string comparison. Setting "start" to an empty value indicates that entries should be returned starting from the first item.
+    * "top" parameter (int, optional) determines the maximum number of entries to be returned, with a limit of up to 1000 entries per call. To retrieve additional entries beyond this limit, specify "start" with the personId of the last entry returned in the current call.
+  
+  > [!TIP]
+  >
+  > * For example, there are total 5 items with their IDs: "itemId1", ..., "itemId5".
+  >   * "start=&top=" will return all 5 items.
+  >   * "start=&top=2" will return "itemId1", "itemId2".
+  >   * "start=itemId2&top=3" will return "itemId3", "itemId4", "itemId5".
+  """;
 
 @doc("The error object. For comprehensive details on error codes and messages returned by the Face Service, please refer to the following link: https://aka.ms/face-error-codes-and-messages.")
 model FaceError {

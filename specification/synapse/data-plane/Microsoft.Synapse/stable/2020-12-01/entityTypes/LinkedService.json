@@ -412,7 +412,8 @@
           },
           "enum": [
             "SQL",
-            "Windows"
+            "Windows",
+            "UserAssignedManagedIdentity"
           ],
           "type": "string",
           "description": "The type used for authentication. Type: string."
@@ -432,6 +433,10 @@
         "alwaysEncryptedSettings": {
           "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
           "description": "Sql always encrypted properties."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
@@ -1039,6 +1044,10 @@
         "servicePrincipalCredential": {
           "$ref": "../artifacts.json#/definitions/SecretBase",
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The credential reference containing authentication information."
         },
         "encryptedCredential": {
           "type": "object",

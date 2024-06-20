@@ -2,6 +2,8 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+
+import "../main.tsp";
 import "../common/models.tsp";
 import "./models.tsp";
 
@@ -17,9 +19,6 @@ namespace Azure.AI.OpenAI.Assistants;
  * Creates a new message on a specified thread.
  *
  * @param threadId The ID of the thread to create the new message on.
- * @param role The role to associate with the new message.
- * @param content The textual content for the new message.
- * @param fileIds A list of up to 10 file IDs to associate with the message, as used by tools like 'code_interpreter' or 'retrieval' that can read files.
  * @returns A representation of the new message.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
@@ -31,10 +30,11 @@ namespace Azure.AI.OpenAI.Assistants;
 @added(ServiceApiVersions.v2024_02_15_preview)
 op createMessage(
   @path threadId: string,
-  role: MessageRole,
-  content: string,
-  @encodedName("application/json", "file_ids") fileIds?: string[],
-  ...OptionalNullableMetadata,
+
+  /** A single message within an assistant thread, as provided during that thread's creation for its initial state. */
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  @body
+  threadMessageOptions: ThreadMessageOptions,
 ): ThreadMessage;
 
 /**
@@ -52,6 +52,12 @@ op createMessage(
 @added(ServiceApiVersions.v2024_02_15_preview)
 op listMessages(
   @path threadId: string,
+
+  /** Filter messages by the run ID that generated them. */
+  @added(ServiceApiVersions.v2024_05_01_preview)
+  @query
+  runId?: string,
+
   ...OpenAIListRequestOptions,
 ): OpenAIPageableListOf<ThreadMessage>;
 
@@ -89,44 +95,3 @@ op updateMessage(
   @path messageId: string,
   ...OptionalNullableMetadata,
 ): ThreadMessage;
-
-/**
- * Gets a list of previously uploaded files associated with a message from a thread.
- *
- * @param threadId The ID of the thread containing the message to list files from.
- * @param messageId The ID of the message to list files from.
- * @returns The requested list of files associated with the specified message.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@get
-@route("/threads/{threadId}/messages/{messageId}/files")
-@added(ServiceApiVersions.v2024_02_15_preview)
-op listMessageFiles(
-  @path threadId: string,
-  @path messageId: string,
-  ...OpenAIListRequestOptions,
-): OpenAIPageableListOf<MessageFile>;
-
-/**
- * Gets information about a file attachment to a message within a thread.
- *
- * @param threadId The ID of the thread containing the message to get information from.
- * @param messageId The ID of the message to get information from.
- * @param fileId The ID of the file to get information about.
- * @returns The requested file information.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
-@get
-@route("/threads/{threadId}/messages/{messageId}/files/{fileId}")
-@added(ServiceApiVersions.v2024_02_15_preview)
-op getMessageFile(
-  @path threadId: string,
-  @path messageId: string,
-  @path fileId: string,
-): MessageFile;

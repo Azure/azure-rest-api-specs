@@ -33,7 +33,7 @@ model Fleet is TrackedResource<FleetProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.Legacy.ManagedServiceIdentityV4;
 }
 
 @doc("Fleet properties.")
@@ -158,7 +158,7 @@ model FleetPatch {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_06_15_preview)
   @doc("Managed identity.")
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  identity?: Azure.ResourceManager.Legacy.ManagedServiceIdentityV4;
 }
 
 @doc("One credential result item.")
@@ -185,14 +185,17 @@ interface Fleets {
   @doc("Gets a Fleet.")
   get is ArmResourceRead<Fleet>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "must change at next update"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "changing the operation-id on an existing operation is an SDK breaking change"
   @doc("Creates or updates a Fleet.")
   @operationId("Fleets_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     Fleet,
     Azure.ResourceManager.Foundations.BaseParameters<Fleet> &
       IfMatchParameters<Fleet> &
-      IfNoneMatchParameters<Fleet>
+      IfNoneMatchParameters<Fleet>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
