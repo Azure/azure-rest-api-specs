@@ -40,6 +40,12 @@ suppressions:
       - $.definitions.VirtualMachineScaleSetExtensionProperties.properties.settings
     reason: Property "settings" and "protectedSettings" for VirtualMachineExtension 
             and VirtualMachineScaleSetExtensionProperties were previously defined like an empty object.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: azurefleet.json
+    where:
+      - $.definitions.VirtualMachineScaleSetDataDisk.properties.diskIOPSReadWrite
+    reason: Property "diskIOPSReadWrite" does not follow Camel Case and can't be changed as it is being 
+            defined previously in Microsoft.Compute like this.
 ```
 
 ### Tag: package-preview-2023-11
