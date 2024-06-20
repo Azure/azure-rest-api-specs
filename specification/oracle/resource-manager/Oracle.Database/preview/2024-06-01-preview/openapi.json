@@ -1074,10 +1074,6 @@
               "$ref": "#/definitions/OracleSubscription"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1205,6 +1201,63 @@
         "x-ms-examples": {
           "Delete Oracle Subscription": {
             "$ref": "./examples/oracleSubscriptions_delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/addAzureSubscriptions": {
+      "post": {
+        "operationId": "OracleSubscriptions_AddAzureSubscriptions",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "Add Azure Subscriptions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureSubscriptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add Azure Subscriptions to the OracleSubscription": {
+            "$ref": "./examples/oracleSubscriptions_addAzureSubscriptions.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1375,6 +1428,63 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/removeAzureSubscriptions": {
+      "post": {
+        "operationId": "OracleSubscriptions_RemoveAzureSubscriptions",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "Remove Azure Subscriptions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureSubscriptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove Azure Subscriptions from the OracleSubscription": {
+            "$ref": "./examples/oracleSubscriptions_removeAzureSubscriptions.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/autonomousDatabases": {
       "get": {
         "operationId": "AutonomousDatabases_ListByResourceGroup",
@@ -1517,10 +1627,6 @@
               "$ref": "#/definitions/AutonomousDatabase"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1862,10 +1968,6 @@
               "$ref": "#/definitions/AutonomousDatabaseBackup"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2549,10 +2651,6 @@
               "$ref": "#/definitions/CloudExadataInfrastructure"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3017,10 +3115,6 @@
               "$ref": "#/definitions/CloudVmCluster"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3743,10 +3837,6 @@
               "$ref": "#/definitions/VirtualNetworkAddress"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3876,6 +3966,37 @@
         "dbServers"
       ]
     },
+    "AddSubscriptionOperationState": {
+      "type": "string",
+      "description": "Add Subscription Operation state enum",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AddSubscriptionOperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded - State when Add Subscription operation succeeded"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating - State when Add Subscription operation is being Updated"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed - State when Add Subscription operation failed"
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "AllConnectionStringType": {
       "type": "object",
       "description": "The connection string profile to allow clients to group, filter and select connection string values based on structured metadata.",
@@ -3921,7 +4042,11 @@
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseBaseProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -3937,7 +4062,11 @@
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseBackupProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -4740,7 +4869,11 @@
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseCharacterSetProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -5032,7 +5165,11 @@
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseNationalCharacterSetProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -5386,7 +5523,11 @@
         "properties": {
           "$ref": "#/definitions/AutonomousDbVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -5549,6 +5690,22 @@
       },
       "readOnly": true
     },
+    "AzureSubscriptions": {
+      "type": "object",
+      "description": "Azure Subscriptions model",
+      "properties": {
+        "azureSubscriptionIds": {
+          "type": "array",
+          "description": "Azure Subscription Ids to be updated",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "azureSubscriptionIds"
+      ]
+    },
     "CloneType": {
       "type": "string",
       "description": "Clone type enum",
@@ -5626,7 +5783,11 @@
         "properties": {
           "$ref": "#/definitions/CloudExadataInfrastructureProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "zones": {
           "type": "array",
@@ -6031,7 +6192,11 @@
         "properties": {
           "$ref": "#/definitions/CloudVmClusterProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -6947,7 +7112,11 @@
         "properties": {
           "$ref": "#/definitions/DbNodeProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -7251,7 +7420,11 @@
         "properties": {
           "$ref": "#/definitions/DbServerProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -7532,7 +7705,11 @@
         "properties": {
           "$ref": "#/definitions/DbSystemShapeProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -7747,7 +7924,11 @@
         "properties": {
           "$ref": "#/definitions/DnsPrivateViewProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -7875,7 +8056,11 @@
         "properties": {
           "$ref": "#/definitions/DnsPrivateZoneProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -8131,7 +8316,11 @@
         "properties": {
           "$ref": "#/definitions/GiVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -8631,7 +8820,11 @@
         "properties": {
           "$ref": "#/definitions/OracleSubscriptionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "plan": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
@@ -8710,6 +8903,24 @@
           "x-ms-mutability": [
             "update"
           ]
+        },
+        "azureSubscriptionIds": {
+          "type": "array",
+          "description": "Azure subscriptions to be added",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "addSubscriptionOperationState": {
+          "$ref": "#/definitions/AddSubscriptionOperationState",
+          "description": "State of the add Azure subscription operation on Oracle subscription",
+          "readOnly": true
+        },
+        "lastOperationStatusDetail": {
+          "type": "string",
+          "description": "Status details of the last operation on Oracle subscription",
+          "readOnly": true
         }
       }
     },
@@ -9433,7 +9644,11 @@
         "properties": {
           "$ref": "#/definitions/SystemVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -9627,7 +9842,11 @@
         "properties": {
           "$ref": "#/definitions/VirtualNetworkAddressProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
