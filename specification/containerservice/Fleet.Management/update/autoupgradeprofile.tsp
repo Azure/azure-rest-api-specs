@@ -56,7 +56,7 @@ model AutoUpgradeProfileProperties {
   channel: UpgradeChannel;
 
   @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
-  nodeImageSelection?: NodeImageSelection;
+  nodeImageSelection?: AutoUpgradeNodeImageSelection;
 
   @doc("""
     If set to False: the auto upgrade has effect - target managed clusters will be upgraded on schedule.
@@ -82,7 +82,7 @@ enum UpgradeChannel {
   NodeImage,
 }
 
-@doc("The node image upgrade to be applied to the target nodes in update runs created by the auto upgrade.")
+@doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
 @added(Versions.v2024_05_02_preview)
 model AutoUpgradeNodeImageSelection {
   @visibility("create", "read")
