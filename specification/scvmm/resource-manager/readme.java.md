@@ -7,5 +7,5 @@ title: SCVMMClient
 description: "SCVMM Client"
 client-flattened-annotation-target: disabled
 uuid-as-string: true
-stream-style-serialization: true
+output-model-immutable: true
 ```
