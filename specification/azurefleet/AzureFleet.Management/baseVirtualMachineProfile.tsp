@@ -901,7 +901,6 @@ model VirtualMachineScaleSetDataDisk {
    * assigned based on diskSizeGB.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-  @encodedName("application/json", "diskIOPSReadWrite")
   diskIOPSReadWrite?: int64;
 
   /**
