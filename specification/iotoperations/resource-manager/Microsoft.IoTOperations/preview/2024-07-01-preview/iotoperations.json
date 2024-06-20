@@ -3027,7 +3027,10 @@
       "description": "Authentication Mode properties",
       "enum": [
         "SystemAssignedManagedIdentity",
-        "UserAssignedManagedIdentity"
+        "UserAssignedManagedIdentity",
+        "AccessTokenSecretName",
+        "Sasl",
+        "X509Credentials"
       ],
       "x-ms-enum": {
         "name": "AuthenticationMode",
@@ -3042,6 +3045,21 @@
             "name": "UserAssignedManagedIdentity",
             "value": "UserAssignedManagedIdentity",
             "description": "UserAssignedManagedIdentity Option"
+          },
+          {
+            "name": "AccessTokenSecretName",
+            "value": "AccessTokenSecretName",
+            "description": "AccessTokenSecretName Option"
+          },
+          {
+            "name": "Sasl",
+            "value": "Sasl",
+            "description": "Sasl Option"
+          },
+          {
+            "name": "X509Credentials",
+            "value": "X509Credentials",
+            "description": "X509Credentials Option"
           }
         ]
       }
@@ -4223,6 +4241,22 @@
         "userAssignedManagedIdentity": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
           "description": "User-assigned managed identity authentication."
+        },
+        "accessTokenSecretName": {
+          "type": "string",
+          "description": "SAS token authentication."
+        },
+        "sasl": {
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationSasl",
+          "description": "SASL authentication."
+        },
+        "serviceAccountToken": {
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationSasl",
+          "description": "Service Account Token authentication."
+        },
+        "x509Credentials": {
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationX509",
+          "description": "X.509 certificate authentication."
         }
       },
       "required": [
@@ -4353,10 +4387,6 @@
       "type": "object",
       "description": "Azure Data Lake endpoint properties",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataFlowEndpointDataLakeStorageAuthentication",
-          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
-        },
         "batching": {
           "$ref": "#/definitions/BatchingConfiguration",
           "description": "Azure Data Lake endpoint batching configuration."
@@ -4368,19 +4398,8 @@
         }
       },
       "required": [
-        "authentication",
         "host"
       ]
-    },
-    "DataFlowEndpointDataLakeStorageAuthentication": {
-      "type": "object",
-      "description": "Azure Data Lake endpoint Authentication properties.  NOTE Enum - Only one method is supported for one entry",
-      "properties": {
-        "accessTokenSecretName": {
-          "type": "string",
-          "description": "SAS token authentication."
-        }
-      }
     },
     "DataFlowEndpointFabricBatching": {
       "type": "object",
@@ -4408,10 +4427,6 @@
       "type": "object",
       "description": "Microsoft Fabric endpoint properties",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataFlowEndpointFabricOneLakeAuthentication",
-          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
-        },
         "batching": {
           "$ref": "#/definitions/DataFlowEndpointFabricBatching",
           "description": "Batching configuration."
@@ -4431,21 +4446,10 @@
         }
       },
       "required": [
-        "authentication",
         "host",
         "names",
         "oneLakePathType"
       ]
-    },
-    "DataFlowEndpointFabricOneLakeAuthentication": {
-      "type": "object",
-      "description": "Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry",
-      "properties": {
-        "accessTokenSecretName": {
-          "type": "string",
-          "description": "SAS token authentication."
-        }
-      }
     },
     "DataFlowEndpointFabricOneLakeNames": {
       "type": "object",
@@ -4493,10 +4497,6 @@
       "type": "object",
       "description": "Kafka endpoint properties",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataFlowEndpointKafkaAuthentication",
-          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
-        },
         "batching": {
           "$ref": "#/definitions/DataFlowEndpointKafkaBatching",
           "description": "Batching configuration."
@@ -4655,20 +4655,6 @@
             "description": "ALL Option"
           }
         ]
-      }
-    },
-    "DataFlowEndpointKafkaAuthentication": {
-      "type": "object",
-      "description": "Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry",
-      "properties": {
-        "sasl": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationSasl",
-          "description": "SASL authentication."
-        },
-        "x509Credentials": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationX509",
-          "description": "X.509 certificate authentication."
-        }
       }
     },
     "DataFlowEndpointKafkaBatching": {
@@ -4850,10 +4836,6 @@
       "type": "object",
       "description": "Mqtt endpoint properties",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataFlowEndpointMqttAuthentication",
-          "description": "authentication properties. DEFAULT: kubernetes.audience=aio-mq-internal. NOTE - Enum field only property is allowed"
-        },
         "clientIdPrefix": {
           "type": "string",
           "description": "Client ID prefix. Client ID generated by the dataflow is <prefix>-TBD. Optional; no prefix if omitted."
@@ -4949,20 +4931,6 @@
         "tls": {
           "$ref": "#/definitions/DataFlowEndpointMqttTls",
           "description": "TLS configuration."
-        }
-      }
-    },
-    "DataFlowEndpointMqttAuthentication": {
-      "type": "object",
-      "description": "Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry. Default Kubernetes authentication with audience set to aio-mq-internal",
-      "properties": {
-        "serviceAccountToken": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationSasl",
-          "description": "Kubernetes service account token authentication. Default audience if not set is aio-mq-internal"
-        },
-        "x509Credentials": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationX509",
-          "description": "X.509 certificate authentication."
         }
       }
     },
