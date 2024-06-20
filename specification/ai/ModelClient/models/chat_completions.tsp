@@ -96,9 +96,14 @@ alias ChatCompletionsOptions = {
 
   @doc("""
     If specified, the system will make a best effort to sample deterministically such that repeated requests with the
-    same seed and parameters should return the same result. Determinism is not guaranteed."
+    same seed and parameters should return the same result. Determinism is not guaranteed.
     """)
   seed?: int64;
+
+  @doc("""
+    ID of the specific AI model to use, if more than one model is available on the endpoint.
+    """)
+  `model`?: string;
 };
 
 alias ChatCompletionsCommon = {
