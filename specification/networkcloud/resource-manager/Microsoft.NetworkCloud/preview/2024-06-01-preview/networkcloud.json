@@ -11309,7 +11309,6 @@
       }
     },
     "OperationStatusResult": {
-      "description": "The current status of an async operation.",
       "type": "object",
       "title": "The current status of an async operation.",
       "required": [
@@ -11319,7 +11318,8 @@
         "endTime": {
           "description": "The end time of the operation.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "error": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
@@ -11328,32 +11328,33 @@
         },
         "id": {
           "description": "Fully qualified ID for the async operation.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
           "description": "Name of the async operation.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "operations": {
           "description": "The operations list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationStatusResult"
-          }
+          },
+          "readOnly": true
         },
         "percentComplete": {
           "description": "Percent of the operation that is complete.",
           "type": "number",
           "maximum": 100,
-          "minimum": 0
+          "minimum": 0,
+          "readOnly": true
         },
         "properties": {
-          "description": "The list of the resource properties.",
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "additionalProperties": {
-            "type": "object"
-          }
+          "$ref": "#/definitions/OperationStatusResultProperties",
+          "description": "The additional properties of the operation status result.",
+          "x-ms-client-flatten": true
         },
         "resourceId": {
           "description": "Fully qualified ID of the resource against which the original async operation was started.",
@@ -11363,11 +11364,40 @@
         "startTime": {
           "description": "The start time of the operation.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "status": {
           "description": "Operation status.",
           "type": "string"
+        }
+      }
+    },
+    "OperationStatusResultProperties": {
+      "type": "object",
+      "title": "OperationStatusResultProperties represents additional properties of the operation status result.",
+      "properties": {
+        "exitCode": {
+          "description": "For actions that run commands or scripts, the exit code of the script execution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "outputHead": {
+          "description": "For actions that run commands or scripts, the leading bytes of the output of the script execution.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resultRef": {
+          "description": "For actions that run commands or scripts, a reference to the location of the result.",
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        },
+        "resultUrl": {
+          "description": "For actions that run commands or scripts, the URL where the full output of the script output can be retrieved.",
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
         }
       }
     },
