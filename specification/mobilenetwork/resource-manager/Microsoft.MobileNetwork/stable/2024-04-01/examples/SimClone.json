@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testResourceGroupName",
+    "simGroupName": "testSimGroup",
+    "parameters": {
+      "targetSimGroupId": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg2/providers/Microsoft.MobileNetwork/simGroups/testSimGroup1"
+      },
+      "sims": [
+        "testSim",
+        "testSim2"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation",
+        "name": "testOperation",
+        "status": "Succeeded",
+        "startTime": "2021-08-19T03:36:07.000Z",
+        "endTime": "2021-08-19T03:38:07.000Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2023-09-01"
+      }
+    }
+  }
+}

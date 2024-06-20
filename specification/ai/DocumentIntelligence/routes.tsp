@@ -52,9 +52,9 @@ model DocumentModelAnalyzeRequestParams {
   pages?: string;
 
   @doc("""
-  Locale hint for text recognition and document analysis.  Value may contain only
-  the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").
-  """)
+    Locale hint for text recognition and document analysis.  Value may contain only
+    the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").
+    """)
   @query
   locale?: string;
 
@@ -115,7 +115,7 @@ model AnalyzeFromStreamRequestParams {
     | "application/vnd.openxmlformats-officedocument.presentationml.presentation";
 
   @doc("Input content.")
-  @body
+  @bodyRoot
   input: bytes;
 }
 
@@ -169,7 +169,7 @@ interface DocumentModels {
       contentType: "application/json";
 
       @doc("Analyze request parameters.")
-      @body
+      @bodyRoot
       analyzeRequest?: AnalyzeDocumentRequest;
     },
     AnalyzeResultOperation
@@ -186,7 +186,7 @@ interface DocumentModels {
   buildModel is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Build request parameters.")
-      @body
+      @bodyRoot
       buildRequest: BuildDocumentModelRequest;
     },
     DocumentModelBuildOperationDetails
@@ -200,7 +200,7 @@ interface DocumentModels {
   composeModel is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Compose request parameters.")
-      @body
+      @bodyRoot
       composeRequest: ComposeDocumentModelRequest;
     },
     DocumentModelComposeOperationDetails
@@ -208,15 +208,15 @@ interface DocumentModels {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("""
-  Generates authorization to copy a document model to this location with
-  specified modelId and optional description.
-  """)
+    Generates authorization to copy a document model to this location with
+    specified modelId and optional description.
+    """)
   @route("/documentModels:authorizeCopy")
   @post
   authorizeModelCopy is DocumentIntelligenceOperation<
     {
       @doc("Authorize copy request parameters.")
-      @body
+      @bodyRoot
       authorizeCopyRequest: AuthorizeCopyRequest;
     },
     CopyAuthorization
@@ -236,7 +236,7 @@ interface DocumentModels {
       modelId: string;
 
       @doc("Copy to request parameters.")
-      @body
+      @bodyRoot
       copyToRequest: CopyAuthorization;
     },
     DocumentModelCopyToOperationDetails
@@ -290,7 +290,7 @@ interface DocumentClassifiers {
   buildClassifier is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Build request parameters.")
-      @body
+      @bodyRoot
       buildRequest: BuildDocumentClassifierRequest;
     },
     DocumentClassifierBuildOperationDetails
@@ -335,7 +335,7 @@ interface DocumentClassifiers {
       contentType: "application/json";
 
       @doc("Classify request parameters.")
-      @body
+      @bodyRoot
       classifyRequest: ClassifyDocumentRequest;
     },
     AnalyzeResultOperation

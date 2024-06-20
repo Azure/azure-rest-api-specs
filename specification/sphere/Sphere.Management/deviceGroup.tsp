@@ -1,13 +1,5 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-import "./product.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -38,12 +30,17 @@ interface DeviceGroups {
   /**
    * Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DeviceGroup>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DeviceGroup,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<DeviceGroup, DeviceGroupUpdate>;
 
   /**
@@ -59,7 +56,7 @@ interface DeviceGroups {
   listByProduct is ArmResourceListByParent<
     DeviceGroup,
     {
-      ...BaseParameters<DeviceGroup>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<DeviceGroup>;
       ...CustomFilterQueryParameter;
       ...CustomTopQueryParameter;
       ...CustomSkipQueryParameter;

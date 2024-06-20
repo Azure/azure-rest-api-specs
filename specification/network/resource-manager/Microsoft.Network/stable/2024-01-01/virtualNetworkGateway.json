@@ -3567,14 +3567,6 @@
         "enablePrivateLinkFastPath": {
           "type": "boolean",
           "description": "Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled."
-        },
-        "authenticationType": {
-          "$ref": "#/definitions/ConnectionAuthenticationType",
-          "description": "Gateway connection authentication type."
-        },
-        "certificateAuthentication": {
-          "$ref": "#/definitions/CertificateAuthentication",
-          "description": "Certificate Authentication information for a certificate based authentication connection."
         }
       },
       "required": [
@@ -4492,40 +4484,6 @@
         "customBgpIpAddress"
       ],
       "description": "GatewayCustomBgpIpAddressIpConfiguration for a virtual network gateway connection."
-    },
-    "ConnectionAuthenticationType": {
-      "type": "string",
-      "description": "Gateway connection authentication type.",
-      "enum": [
-        "PSK",
-        "Certificate"
-      ],
-      "x-ms-enum": {
-        "name": "ConnectionAuthenticationType",
-        "modelAsString": true
-      }
-    },
-    "CertificateAuthentication": {
-      "type": "object",
-      "properties": {
-        "outboundAuthCertificate": {
-          "type": "string",
-          "format": "uri",
-          "description": "Keyvault secret ID for outbound authentication certificate."
-        },
-        "inboundAuthCertificateSubjectName": {
-          "type": "string",
-          "description": "Inbound authentication certificate subject name."
-        },
-        "inboundAuthCertificateChain": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Inbound authentication certificate public keys."
-        }
-      },
-      "description": "Certificate Authentication information for a certificate based authentication connection."
     }
   }
 }

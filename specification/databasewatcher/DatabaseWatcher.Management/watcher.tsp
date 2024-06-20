@@ -7,6 +7,7 @@ import "./sqlMiTarget.tsp";
 import "./sqlVmTarget.tsp";
 import "./sharedPrivateLinkResource.tsp";
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Using invalid versions of ManagedIdentity"
 @service({
   title: "Microsoft.DatabaseWatcher",
 })
@@ -39,7 +40,7 @@ model Watcher is TrackedResource<WatcherProperties> {
   @segment("watchers")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("The RP specific properties of the resource.")
@@ -105,7 +106,12 @@ union KustoOfferingType {
 @armResourceOperations
 interface Watchers {
   get is ArmResourceRead<Watcher>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Watcher>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Watcher,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchAsync<Watcher, WatcherProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Watcher>;
   listByResourceGroup is ArmResourceListByParent<Watcher>;
