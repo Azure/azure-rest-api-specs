@@ -895,13 +895,14 @@ model VirtualMachineScaleSetDataDisk {
    */
   managedDisk?: VirtualMachineScaleSetManagedDiskParameters;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   /**
    * Specifies the Read-Write IOPS for the managed disk. Should be used only when
    * StorageAccountType is UltraSSD_LRS. If not specified, a default value would be
    * assigned based on diskSizeGB.
    */
   @encodedName("application/json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int64;
+  diskIOPSReadWrite?: int64;
 
   /**
    * Specifies the bandwidth in MB per second for the managed disk. Should be used
@@ -1446,11 +1447,13 @@ model VirtualMachineScaleSetExtensionProperties {
    */
   enableAutomaticUpgrade?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
   /**
    * Json formatted public settings for the extension.
    */
   settings?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
   /**
    * The extension can contain either protectedSettings or
    * protectedSettingsFromKeyVault or no protected settings at all.
@@ -1765,11 +1768,13 @@ model VirtualMachineExtensionProperties {
    */
   enableAutomaticUpgrade?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachine.json#L2095C1-L2102C11"
   /**
    * Json formatted public settings for the extension.
    */
   settings?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachine.json#L2095C1-L2102C11"
   /**
    * The extension can contain either protectedSettings or
    * protectedSettingsFromKeyVault or no protected settings at all.
