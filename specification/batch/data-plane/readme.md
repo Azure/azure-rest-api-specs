@@ -36,7 +36,11 @@ These settings apply only when `--tag=package-2024-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-07'
 input-file:
-  - Microsoft.Batch/stable/2024-07-01/BatchService.json
+  - Microsoft.Batch/stable/2024-07-01.20.0/BatchService.json
+suppressions:
+  - code: LroExtension
+    from: BatchService.json
+    reason: Our LRO behavior does not fit the default behavior
 ```
 
 ### Tag: package-2024-02.19.0-preview
