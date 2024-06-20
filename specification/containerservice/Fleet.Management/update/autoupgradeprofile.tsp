@@ -82,6 +82,24 @@ enum UpgradeChannel {
   NodeImage,
 }
 
+@doc("The node image upgrade to be applied to the target nodes in update runs created by the auto upgrade.")
+@added(Versions.v2024_05_02_preview)
+model AutoUpgradeNodeImageSelection {
+  @visibility("create", "read")
+  @doc("The node image upgrade type.")
+  type: AutoUpgradeNodeImageSelectionType;
+}
+
+@doc("The node image upgrade type.")
+@added(Versions.v2024_05_02_preview)
+enum AutoUpgradeNodeImageSelectionType {
+  @doc("Use the latest image version when upgrading nodes. Clusters may use different image versions (e.g., 'AKSUbuntu-1804gen2containerd-2021.10.12' and 'AKSUbuntu-1804gen2containerd-2021.10.19') because, for example, the latest available version is different in different regions.")
+  Latest,
+
+  @doc("The image versions to upgrade nodes to are selected as described below: for each node pool in managed clusters affected by the update run, the system selects the latest image version such that it is available across all other node pools (in all other clusters) of the same image type. As a result, all node pools of the same image type will be upgraded to the same image version. For example, if the latest image version for image type 'AKSUbuntu-1804gen2containerd' is 'AKSUbuntu-1804gen2containerd-2021.10.12' for a node pool in cluster A in region X, and is 'AKSUbuntu-1804gen2containerd-2021.10.17' for a node pool in cluster B in region Y, the system will upgrade both node pools to image version 'AKSUbuntu-1804gen2containerd-2021.10.12'.")
+  Consistent,
+}
+
 @added(Versions.v2024_05_02_preview)
 @armResourceOperations
 interface AutoUpgradeProfiles {
