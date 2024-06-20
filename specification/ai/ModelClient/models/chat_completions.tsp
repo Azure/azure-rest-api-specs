@@ -9,7 +9,12 @@ using Azure.ClientGenerator.Core;
 
 namespace ModelClient;
 
-alias ChatCompletionsOptions = {
+@doc("""
+The configuration information for a chat completions request.
+Completions support a wide variety of tasks and generate text that continues from or "completes"
+provided prompt data.
+""")
+model ChatCompletionsOptions = {
   @doc("""
   The collection of context messages associated with this chat completions request.
   Typical usage begins with a chat message for the System role that provides instructions for
