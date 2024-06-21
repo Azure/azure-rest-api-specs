@@ -53,7 +53,7 @@ namespace SplitIO.Experimentation {
 
     @doc("Endpoint used for access to the experimentation workspace.")
     @visibility("read")
-    dataPlaneEndpoint?:  url;
+    dataPlaneEndpoint?: url;
   }
 
   @doc("Role required for data plane access.")
