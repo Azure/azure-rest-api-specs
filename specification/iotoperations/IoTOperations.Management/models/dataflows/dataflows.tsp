@@ -41,6 +41,9 @@ model DataFlowProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   operations: DataFlowOperation[];
 
+  @doc("Reference to the DataflowProfile CR.")
+  profileRef: string;
+
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;

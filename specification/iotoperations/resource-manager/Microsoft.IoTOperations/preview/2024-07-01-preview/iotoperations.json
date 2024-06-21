@@ -3565,6 +3565,10 @@
       "type": "object",
       "description": "Defines an MQTT broker listener. A listener is a collection of ports on which the broker accepts connections from clients.",
       "properties": {
+        "brokerRef": {
+          "type": "string",
+          "description": "Broker associated with this listener."
+        },
         "ports": {
           "type": "array",
           "description": "Ports on which this listener accepts client connections.",
@@ -3618,6 +3622,7 @@
         }
       },
       "required": [
+        "brokerRef",
         "ports"
       ]
     },
@@ -4348,7 +4353,7 @@
           "type": "string",
           "description": "Client ID for the user-assigned managed identity."
         },
-        "scope": {
+        "audience": {
           "type": "string",
           "description": "Resource identifier (application ID URI) of the resource, affixed with the .default suffix."
         },
@@ -4359,7 +4364,7 @@
       },
       "required": [
         "clientId",
-        "scope",
+        "audience",
         "tenantId"
       ]
     },
@@ -5194,6 +5199,10 @@
           },
           "x-ms-identifiers": []
         },
+        "profileRef": {
+          "type": "string",
+          "description": "Reference to the DataflowProfile CR."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -5201,7 +5210,8 @@
         }
       },
       "required": [
-        "operations"
+        "operations",
+        "profileRef"
       ]
     },
     "DataFlowResource": {

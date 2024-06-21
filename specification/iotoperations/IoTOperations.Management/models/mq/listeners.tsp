@@ -32,6 +32,9 @@ model BrokerListenerResource is TrackedResource<BrokerListenerProperties> {
 
 @doc("Defines an MQTT broker listener. A listener is a collection of ports on which the broker accepts connections from clients.")
 model BrokerListenerProperties {
+  @doc("Broker associated with this listener.")
+  brokerRef: string;
+
   @doc("Ports on which this listener accepts client connections.")
   @OpenAPI.extension("x-ms-identifiers", ["port"])
   ports: ListenerPort[];

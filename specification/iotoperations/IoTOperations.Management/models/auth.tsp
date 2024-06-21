@@ -20,7 +20,7 @@ model DataFlowEndpointAuthenticationUserAssignedManagedIdentity {
     clientId: string;
 
     @doc("Resource identifier (application ID URI) of the resource, affixed with the .default suffix.")
-    scope: string;
+    audience: string;
 
     @doc("Tenant ID.")
     tenantId: string;
