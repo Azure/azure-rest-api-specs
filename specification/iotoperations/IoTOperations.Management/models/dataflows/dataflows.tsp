@@ -102,7 +102,7 @@ model DataFlowBuiltInTransformationFilter {
 
 @doc("DataFlow BuiltIn Transformation map properties")
 model DataFlowBuiltInTransformationMap {
-  @doc("Type of transofmration.")
+  @doc("Type of transformation.")
   type?: DataFlowMappingType;
 
   @doc("Modify the inputs field(s) to the final output field.")
@@ -152,9 +152,6 @@ model DataFlowDestinationOperation {
   @doc("Reference to the Endpoint CR. Can be of MQTT, Kafka, Fabric, ADLS, ADX type.")
   endpointRef: string;
 
-  @doc("Name of the destination.")
-  name: string;
-
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
   location: string;
 }
@@ -163,9 +160,6 @@ model DataFlowDestinationOperation {
 model DataFlowSourceOperation {
   @doc("Reference to the Endpoint CR. Can only be of MQTT and Kafka type.")
   endpointRef: string;
-
-  @doc("Name of the source.")
-  name: string;
 
   @doc("List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.")
   locations: string[];

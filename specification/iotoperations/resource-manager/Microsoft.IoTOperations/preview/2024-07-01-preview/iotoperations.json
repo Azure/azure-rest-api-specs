@@ -4188,7 +4188,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/DataFlowMappingType",
-          "description": "Type of transofmration."
+          "description": "Type of transformation."
         },
         "expression": {
           "type": "string",
@@ -4219,10 +4219,6 @@
           "type": "string",
           "description": "Reference to the Endpoint CR. Can be of MQTT, Kafka, Fabric, ADLS, ADX type."
         },
-        "name": {
-          "type": "string",
-          "description": "Name of the destination."
-        },
         "location": {
           "type": "string",
           "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription."
@@ -4230,7 +4226,6 @@
       },
       "required": [
         "endpointRef",
-        "name",
         "location"
       ]
     },
@@ -5278,10 +5273,6 @@
           "type": "string",
           "description": "Reference to the Endpoint CR. Can only be of MQTT and Kafka type."
         },
-        "name": {
-          "type": "string",
-          "description": "Name of the source."
-        },
         "locations": {
           "type": "array",
           "description": "List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.",
@@ -5315,7 +5306,6 @@
       },
       "required": [
         "endpointRef",
-        "name",
         "locations"
       ]
     },
