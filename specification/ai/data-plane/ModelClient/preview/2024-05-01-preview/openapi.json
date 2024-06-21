@@ -1240,24 +1240,18 @@
       "type": "object",
       "description": "Measurement of the amount of tokens used in this request and response.",
       "properties": {
-        "input_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of tokens in the request prompt."
-        },
         "prompt_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tokens used for the prompt sent to the AI model. Typically identical to `input_tokens`.\nHowever, certain AI models may add extra tokens to the input hence the number can be higher.\n(for example when input_type=\"query\")."
+          "description": "Number of tokens in the request."
         },
         "total_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of tokens transacted in this request/response."
+          "description": "Total number of tokens transacted in this request/response. Should equal the\nnumber of tokens in the request."
         }
       },
       "required": [
-        "input_tokens",
         "prompt_tokens",
         "total_tokens"
       ]

@@ -103,6 +103,7 @@ alias ChatCompletionsOptions = {
   @doc("""
     ID of the specific AI model to use, if more than one model is available on the endpoint.
     """)
+  @clientName("DeploymentName", "csharp")
   `model`?: string;
 };
 
