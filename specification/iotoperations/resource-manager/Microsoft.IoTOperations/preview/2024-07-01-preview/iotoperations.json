@@ -3230,7 +3230,7 @@
       "enum": [
         "Custom",
         "ServiceAccountToken",
-        "X509"
+        "X509Credentials"
       ],
       "x-ms-enum": {
         "name": "BrokerAuthenticationMethod",
@@ -3247,8 +3247,8 @@
             "description": "ServiceAccountToken authentication configuration."
           },
           {
-            "name": "X509",
-            "value": "X509",
+            "name": "X509Credentials",
+            "value": "X509Credentials",
             "description": "X.509 authentication configuration."
           }
         ]
@@ -3451,7 +3451,7 @@
           "$ref": "#/definitions/BrokerAuthenticatorMethodSat",
           "description": "ServiceAccountToken authentication configuration."
         },
-        "x509": {
+        "x509Credentials": {
           "$ref": "#/definitions/BrokerAuthenticatorMethodX509",
           "description": "X.509 authentication configuration."
         }
@@ -4226,7 +4226,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription."
+          "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -5166,6 +5170,10 @@
       "type": "object",
       "description": "DataFlow Resource properties",
       "properties": {
+        "profileRef": {
+          "type": "string",
+          "description": "Reference to the DataflowProfile CR."
+        },
         "mode": {
           "type": "string",
           "description": "Mode for DataFlow. Optional; defaults to Enabled.",
@@ -5199,10 +5207,6 @@
           },
           "x-ms-identifiers": []
         },
-        "profileRef": {
-          "type": "string",
-          "description": "Reference to the DataflowProfile CR."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -5210,8 +5214,8 @@
         }
       },
       "required": [
-        "operations",
-        "profileRef"
+        "profileRef",
+        "operations"
       ]
     },
     "DataFlowResource": {

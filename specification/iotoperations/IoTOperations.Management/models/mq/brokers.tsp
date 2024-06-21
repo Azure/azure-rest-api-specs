@@ -146,13 +146,13 @@ model SelfCheck {
 
 @doc("Broker Diagnostic Trace properties")
 model Traces {
+  @doc("The toggle to enable/disable traces.")
+  mode?: OperationalMode = OperationalMode.Enabled;
+
   @doc("The cache size in megabytes.")
   @minValue(1)
   @maxValue(128)
   cacheSizeMegabytes?: int32 = 16;
-
-  @doc("The toggle to enable/disable traces.")
-  mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("How often to export the metrics to the open telemetry collector.")
   @minValue(1)

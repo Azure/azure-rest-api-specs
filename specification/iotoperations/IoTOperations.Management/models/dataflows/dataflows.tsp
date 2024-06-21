@@ -34,15 +34,15 @@ model DataFlowResource is TrackedResource<DataFlowProperties> {
 
 @doc("DataFlow Resource properties")
 model DataFlowProperties {
+  @doc("Reference to the DataflowProfile CR.")
+  profileRef: string;
+
   @doc("Mode for DataFlow. Optional; defaults to Enabled.")
   mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("List of operations including source and destination references as well as transformation.")
   @OpenAPI.extension("x-ms-identifiers", [])
   operations: DataFlowOperation[];
-
-  @doc("Reference to the DataflowProfile CR.")
-  profileRef: string;
 
   @visibility("read")
   @doc("The status of the last operation.")
@@ -156,6 +156,7 @@ model DataFlowDestinationOperation {
   endpointRef: string;
 
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
+  @visibility("read", "create")
   `location`: string;
 }
 

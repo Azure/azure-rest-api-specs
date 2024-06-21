@@ -84,13 +84,13 @@ model DiagnosticsLogs {
 
 @doc("Diagnostic Metrics properties")
 model Metrics {
+  @doc("The toggle to enable/disable metrics.")
+  mode?: OperationalMode = OperationalMode.Enabled;
+
   @doc("The time used to determine if a metric is stale and drop from the metrics cache.")
   @minValue(60)
   @maxValue(600)
   stalenessTimeSeconds?: int32 = 600;
-
-  @doc("The toggle to enable/disable metrics.")
-  mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("How often to export the metrics to the open telemetry collector.")
   @minValue(1)
