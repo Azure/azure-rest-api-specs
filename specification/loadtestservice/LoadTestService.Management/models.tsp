@@ -26,6 +26,62 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
+@extensionResource
+@doc("LoadTest mapping resource details")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestMappingResource is ProxyResource<LoadTestMappingProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
+  @doc("Load Test Mapping name")
+  @key("loadTestMappingName")
+  @segment("loadTestMappings")
+  @path
+  name: string;
+}
+
+@doc("Azure LoadTest mapping resource properties.")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestMappingProperties {
+  @doc("Mapped source resource Id.")
+  @maxLength(1024)
+  sourceResourceId: string;
+
+  @doc("Mapped Azure Load Test resource Id.")
+  @maxLength(1024)
+  azureLoadTestingResourceId: string;
+
+  @doc("Mapped Azure Load Test resource test-id.")
+  @maxLength(256)
+  testId: string;
+}
+
+@extensionResource
+@doc("LoadTest profile mapping resource details")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestProfileMappingResource is ProxyResource<LoadTestProfileMappingProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
+  @doc("Load Test Profile Mapping name")
+  @key("loadTestProfileMappingName")
+  @segment("loadTestProfileMappings")
+  @path
+  name: string;
+}
+
+@doc("Azure LoadTest profile mapping resource properties.")
+@added(APIVersions.v2023_12_01_preview)
+model LoadTestProfileMappingProperties {
+  @doc("Mapped source resource Id.")
+  @maxLength(1024)
+  sourceResourceId: string;
+
+  @doc("Mapped Azure Load Test resource Id.")
+  @maxLength(1024)
+  azureLoadTestingResourceId: string;
+
+  @doc("Mapped Azure Load Test resource test-profile-id.")
+  @maxLength(60)
+  testProfileId: string;
+}
+
 @doc("Resources provisioning states.")
 union ResourceState {
   string,
