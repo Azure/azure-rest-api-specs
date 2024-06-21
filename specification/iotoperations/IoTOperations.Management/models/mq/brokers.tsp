@@ -67,7 +67,7 @@ model AdvancedSettings {
   clients?: ClientConfig;
 
   @doc("The setting to enable or disable encryption of internal Traffic.")
-  encryptInternalTraffic?: Mode = Mode.Enabled;
+  encryptInternalTraffic?: OperationalMode = OperationalMode.Enabled;
 
   @doc("Certificate rotation and private key configuration.")
   internalCerts?: CertManagerCertOptions;
@@ -131,7 +131,7 @@ model BrokerDiagnostics {
 @doc("Broker Diagnostic Self check properties")
 model SelfCheck {
   @doc("The toggle to enable/disable self check.")
-  mode?: Mode = Mode.Enabled;
+  mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("The self check interval.")
   @minValue(30)
@@ -152,7 +152,7 @@ model Traces {
   cacheSizeMegabytes?: int32 = 16;
 
   @doc("The toggle to enable/disable traces.")
-  mode?: Mode = Mode.Enabled;
+  mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("How often to export the metrics to the open telemetry collector.")
   @minValue(1)
@@ -266,7 +266,7 @@ union OperatorValues {
 @doc("GenerateResourceLimits properties")
 model GenerateResourceLimits {
   @doc("The toggle to enable/disable cpu resource limits.")
-  cpu?: Mode = Mode.Enabled;
+  cpu?: OperationalMode = OperationalMode.Enabled;
 }
 
 @doc("Cert Manager Cert properties")

@@ -35,7 +35,7 @@ model DataFlowResource is TrackedResource<DataFlowProperties> {
 @doc("DataFlow Resource properties")
 model DataFlowProperties {
   @doc("Mode for DataFlow. Optional; defaults to Enabled.")
-  mode?: Mode = Mode.Enabled;
+  mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("List of operations including source and destination references as well as transformation.")
   @OpenAPI.extension("x-ms-identifiers", [])
@@ -153,13 +153,16 @@ model DataFlowDestinationOperation {
   endpointRef: string;
 
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
-  location: string;
+  `location`: string;
 }
 
 @doc("DataFlow Source Operation properties")
 model DataFlowSourceOperation {
   @doc("Reference to the Endpoint CR. Can only be of MQTT and Kafka type.")
   endpointRef: string;
+
+  @doc("Name of the source.")
+  name: string;
 
   @doc("List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.")
   locations: string[];

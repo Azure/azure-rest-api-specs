@@ -40,7 +40,7 @@ union ProvisioningState {
 }
 
 @doc("Mode properties")
-union Mode {
+union OperationalMode {
   string,
 
   @doc("Enabled is equivalent to True")
@@ -90,7 +90,7 @@ model Metrics {
   stalenessTimeSeconds?: int32 = 600;
 
   @doc("The toggle to enable/disable metrics.")
-  mode?: Mode = Mode.Enabled;
+  mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("How often to export the metrics to the open telemetry collector.")
   @minValue(1)
@@ -114,7 +114,7 @@ model Metrics {
 @doc("Diagnostic Self tracing properties")
 model SelfTracing {
   @doc("The toggle to enable/disable self tracing.")
-  mode?: Mode = Mode.Enabled;
+  mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("The self tracing interval.")
   @minValue(1)
@@ -138,7 +138,7 @@ model BatchingConfiguration {
 @doc("Tls properties")
 model TlsProperties {
   @doc("Mode for TLS.")
-  mode?: Mode = Mode.Enabled;
+  mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("Trusted CA certificate config map.")
   trustedCaCertificateConfigMap?: string;

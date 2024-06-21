@@ -219,7 +219,7 @@ model DataFlowEndpointKafka {
 @doc("Kafka endpoint Batching properties")
 model DataFlowEndpointKafkaBatching {
   @doc("Mode for batching.")
-  mode?: Mode = Mode.Enabled;
+  mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("Batching latency in milliseconds.")
   @minValue(0)
