@@ -18,7 +18,7 @@ interface TrialMatcher {
   @doc("Gets the status and details of the Trial Matcher job.")
   @get
   @route("/trial-matcher/jobs/{id}")
-  getJob is HealthInsightsLongRunningPollOperation<TrialMatcherResult>;
+  getJob is HealthInsightsLongRunningPollOperation<BodyParameter<TrialMatcherResult>>;
 
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"

@@ -294,3 +294,14 @@ model FaceError {
 }
 
 model FaceErrorResponse is Azure.Core.Foundations.ErrorResponseBase<FaceError>;
+
+alias BodyParameter<
+  T,
+  name extends valueof string = "body",
+  doc extends valueof string = "",
+> = {
+  @doc(doc)
+  @friendlyName(name)
+  @bodyRoot
+  body: T;
+};

@@ -28,7 +28,7 @@ namespace Azure.OpenAI;
 @sharedRoute
 op getAudioTranscriptionAsPlainText is Azure.Core.ResourceAction<
   Deployment,
-  BodyParameter<AudioTranscriptionOptions>,  // response_format must be one of: text, srt, vtt
+  BodyParameter<AudioTranscriptionOptions>,
   AudioTextResponse,
   MultipartFormDataRequestHeadersTraits & TextPlainResponseHeadersTraits
 >;

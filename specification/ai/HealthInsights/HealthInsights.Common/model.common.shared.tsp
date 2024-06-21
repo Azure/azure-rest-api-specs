@@ -229,3 +229,14 @@ model ClinicalCodedElement {
   @doc("A value associated with the code within the given clinical coding system.")
   value?: string;
 }
+
+alias BodyParameter<
+  T,
+  name extends valueof string = "body",
+  doc extends valueof string = "",
+> = {
+  @doc(doc)
+  @friendlyName(name)
+  @bodyRoot
+  body: T;
+};

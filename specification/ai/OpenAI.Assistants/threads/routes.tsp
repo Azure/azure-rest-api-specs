@@ -20,7 +20,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/threads")
-op createThread(...AssistantThreadCreationOptions): AssistantThread;
+op createThread(BodyParameter<AssistantThreadCreationOptions>): AssistantThread;
 
 // list threads?
 
@@ -52,7 +52,7 @@ op getThread(@path threadId: string): AssistantThread;
 @post
 @route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op updateThread(...UpdateAssistantThreadOptions): AssistantThread;
+op updateThread(BodyParameter<UpdateAssistantThreadOptions>): AssistantThread;
 
 /**
  * Deletes an existing thread.

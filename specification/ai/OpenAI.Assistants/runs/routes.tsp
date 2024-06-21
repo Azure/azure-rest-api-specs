@@ -139,4 +139,4 @@ op cancelRun(@path threadId: string, @path runId: string): ThreadRun;
 @route("/threads/runs")
 @doc("Creates a new assistant thread and immediately starts a run using that new thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op createThreadAndRun(...CreateAndRunThreadOptions): ThreadRun;
+op createThreadAndRun(BodyParameter<CreateAndRunThreadOptions>): ThreadRun;
