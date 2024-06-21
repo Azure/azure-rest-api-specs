@@ -314,6 +314,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Load Test Profile Mappings by Source Resource Id": {
+            "$ref": "./examples/LoadTestProfileMappings_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -353,6 +358,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Load Test Profile Mapping Resource": {
+            "$ref": "./examples/LoadTestProfileMappings_Get.json"
           }
         }
       },
@@ -405,6 +415,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create a Load Test Profile Mappings resource": {
+            "$ref": "./examples/LoadTestProfileMappings_CreateOrUpdate.json"
+          }
         }
       },
       "patch": {
@@ -450,6 +465,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Update a Load Test Profile Mapping": {
+            "$ref": "./examples/LoadTestProfileMappings_Update.json"
+          }
         }
       },
       "delete": {
@@ -485,6 +505,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Load Test Profile Mapping Resource": {
+            "$ref": "./examples/LoadTestProfileMappings_Delete.json"
           }
         }
       }
@@ -1198,12 +1223,7 @@
           "description": "Mapped Azure Load Test resource test-id.",
           "maxLength": 256
         }
-      },
-      "required": [
-        "sourceResourceId",
-        "azureLoadTestingResourceId",
-        "testId"
-      ]
+      }
     },
     "LoadTestMappingResource": {
       "type": "object",
@@ -1292,12 +1312,7 @@
           "description": "Mapped Azure Load Test resource test-profile-id.",
           "maxLength": 60
         }
-      },
-      "required": [
-        "sourceResourceId",
-        "azureLoadTestingResourceId",
-        "testProfileId"
-      ]
+      }
     },
     "LoadTestProfileMappingResource": {
       "type": "object",

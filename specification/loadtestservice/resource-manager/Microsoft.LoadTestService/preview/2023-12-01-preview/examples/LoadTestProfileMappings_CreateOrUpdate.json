@@ -1,24 +1,23 @@
 {
-  "title": "Create a Load Test Mapping Resource",
-  "operationId": "LoadTestMappings_CreateOrUpdate",
+  "title": "Create a Load Test Profile Mappings resource",
+  "operationId": "LoadTestProfileMappings_CreateOrUpdate",
   "parameters": {
     "api-version": "2023-12-01-preview",
     "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename",
-    "loadTestMappingName": "myLoadTestMapping",
+    "loadTestProfileMappingName": "myLoadTestProfileMapping",
     "resource": {
       "properties": {
-        "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename",
         "azureLoadTestingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/loadTests/myLoadTest",
-        "testId": "123456"
+        "testProfileId": "123456"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename/providers/Microsoft.LoadTestService/loadTestMappings/myLoadTestMapping",
-        "name": "myLoadTestMapping",
-        "type": "Microsoft.LoadTestService/loadTestMappings",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename/providers/Microsoft.LoadTestService/loadTestProfileMappings/myLoadTestProfileMapping",
+        "name": "myLoadTestProfileMapping",
+        "type": "Microsoft.LoadTestService/loadTestProfileMappings",
         "systemData": {
           "createdBy": "userId1001",
           "createdByType": "User",
@@ -30,15 +29,15 @@
         "properties": {
           "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename",
           "azureLoadTestingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/loadTests/myLoadTest",
-          "testId": "123456"
+          "testProfileId": "123456"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename/providers/Microsoft.LoadTestService/loadTestMappings/myLoadTestMapping",
-        "name": "myLoadTestMapping",
-        "type": "Microsoft.LoadTestService/loadTestMappings",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename/providers/Microsoft.LoadTestService/loadTestProfileMappings/myLoadTestProfileMapping",
+        "name": "myLoadTestProfileMapping",
+        "type": "Microsoft.LoadTestService/loadTestProfileMappings",
         "systemData": {
           "createdBy": "userId1001",
           "createdByType": "User",
@@ -50,7 +49,7 @@
         "properties": {
           "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Web/sites/sitename",
           "azureLoadTestingResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/loadTests/myLoadTest",
-          "testId": "123456"
+          "testProfileId": "123456"
         }
       }
     }

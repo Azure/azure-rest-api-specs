@@ -43,21 +43,22 @@ model LoadTestMappingResource is ProxyResource<LoadTestMappingProperties> {
 model LoadTestMappingProperties {
   @doc("Mapped source resource Id.")
   @maxLength(1024)
-  sourceResourceId: string;
+  sourceResourceId?: string;
 
   @doc("Mapped Azure Load Test resource Id.")
   @maxLength(1024)
-  azureLoadTestingResourceId: string;
+  azureLoadTestingResourceId?: string;
 
   @doc("Mapped Azure Load Test resource test-id.")
   @maxLength(256)
-  testId: string;
+  testId?: string;
 }
 
 @extensionResource
 @doc("LoadTest profile mapping resource details")
 @added(APIVersions.v2023_12_01_preview)
-model LoadTestProfileMappingResource is ProxyResource<LoadTestProfileMappingProperties> {
+model LoadTestProfileMappingResource
+  is ProxyResource<LoadTestProfileMappingProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
   @doc("Load Test Profile Mapping name")
   @key("loadTestProfileMappingName")
@@ -71,15 +72,15 @@ model LoadTestProfileMappingResource is ProxyResource<LoadTestProfileMappingProp
 model LoadTestProfileMappingProperties {
   @doc("Mapped source resource Id.")
   @maxLength(1024)
-  sourceResourceId: string;
+  sourceResourceId?: string;
 
   @doc("Mapped Azure Load Test resource Id.")
   @maxLength(1024)
-  azureLoadTestingResourceId: string;
+  azureLoadTestingResourceId?: string;
 
   @doc("Mapped Azure Load Test resource test-profile-id.")
   @maxLength(60)
-  testProfileId: string;
+  testProfileId?: string;
 }
 
 @doc("Resources provisioning states.")

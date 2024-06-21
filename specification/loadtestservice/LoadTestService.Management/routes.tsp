@@ -87,12 +87,13 @@ interface LoadTestMappings {
   @added(APIVersions.v2023_12_01_preview)
   delete is ArmResourceDeleteSync<LoadTestMappingResource>;
 
-  @added(APIVersions.v2023_12_01_preview)
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
+  @added(APIVersions.v2023_12_01_preview)
   update is ArmResourcePatchSync<
     LoadTestMappingResource,
-    LoadTestMappingProperties>;
-  
+    LoadTestMappingProperties
+  >;
+
   @added(APIVersions.v2023_12_01_preview)
   listByScope is ArmResourceListByParent<LoadTestMappingResource>;
 }
@@ -108,11 +109,12 @@ interface LoadTestProfileMappings {
   @added(APIVersions.v2023_12_01_preview)
   delete is ArmResourceDeleteSync<LoadTestProfileMappingResource>;
 
-  @added(APIVersions.v2023_12_01_preview)
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
+  @added(APIVersions.v2023_12_01_preview)
   update is ArmResourcePatchSync<
     LoadTestProfileMappingResource,
-    LoadTestProfileMappingProperties>;
+    LoadTestProfileMappingProperties
+  >;
 
   @added(APIVersions.v2023_12_01_preview)
   listByScope is ArmResourceListByParent<LoadTestProfileMappingResource>;
