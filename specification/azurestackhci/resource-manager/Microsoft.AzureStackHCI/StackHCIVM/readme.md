@@ -58,7 +58,7 @@ suppressions:
     from: 
       - stackhcivm.json
   - code: APIVersionPattern
-    reason: 2024-01-01-test-preview is for internal testing only and recommended by API spec review office hours.
+    reason: 2024-05-01-test-preview is for internal testing only and recommended by API spec review office hours.
     from:
       - stackhcivm.json
 ```
