@@ -160,9 +160,9 @@ union ApiSpecImportSourceFormat {
   @doc("The inlined content of a specification document.") "inline",
 
   @doc("""
-The link to a specification document hosted on a publicly accessible internet
-address.
-""")
+    The link to a specification document hosted on a publicly accessible internet
+    address.
+    """)
   "link",
 }
 
@@ -377,16 +377,16 @@ model License {
   name?: string;
 
   @doc("""
-URL pointing to the license details. The URL field is mutually exclusive of the
-identifier field.
-""")
+    URL pointing to the license details. The URL field is mutually exclusive of the
+    identifier field.
+    """)
   @maxLength(200)
   url?: url;
 
   @doc("""
-SPDX license information for the API. The identifier field is mutually
-exclusive of the URL field.
-""")
+    SPDX license information for the API. The identifier field is mutually
+    exclusive of the URL field.
+    """)
   @maxLength(50)
   identifier?: url;
 }

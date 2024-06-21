@@ -22,14 +22,14 @@ alias ModelConfiguration = {
 @doc("A patient record, including their clinical information and data.")
 model PatientRecord {
   @doc("""
-A given identifier for the patient. Has to be unique across all patients in a single request.
-""")
+    A given identifier for the patient. Has to be unique across all patients in a single request.
+    """)
   @minLength(1)
   id: string;
 
   @doc("""
-Patient structured information, including demographics and known structured clinical information.
-""")
+    Patient structured information, including demographics and known structured clinical information.
+    """)
   details?: PatientDetails;
 
   @doc("Patient encounters/visits.")
@@ -86,10 +86,10 @@ union ClinicalDocumentType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("""
-The type of the content's source.
-In case the source type is 'inline', the content is given as a string (for instance, text).
-In case the source type is 'reference', the content is given as a URI.
-""")
+  The type of the content's source.
+  In case the source type is 'inline', the content is given as a string (for instance, text).
+  In case the source type is 'reference', the content is given as a URI.
+  """)
 union DocumentContentSourceType {
   string,
 
@@ -149,9 +149,9 @@ model PatientEncounter {
   id: string;
 
   @doc("""
-  Time period of the visit.
-  In case of admission, use timePeriod.start to indicate the admission time and timePeriod.end to indicate the discharge time.
-  """)
+    Time period of the visit.
+    In case of admission, use timePeriod.start to indicate the admission time and timePeriod.end to indicate the discharge time.
+    """)
   period?: TimePeriod;
 
   @doc("The class of the encounter.")
@@ -163,33 +163,33 @@ union EncounterClass {
   string,
 
   @doc("""
-  A patient encounter where a patient is admitted by a hospital or equivalent facility, assigned to a location where patients generally stay at least overnight and provided with room, board, and continuous nursing service.
-  """)
+    A patient encounter where a patient is admitted by a hospital or equivalent facility, assigned to a location where patients generally stay at least overnight and provided with room, board, and continuous nursing service.
+    """)
   InPatient: "inpatient",
 
   @doc("""
-  The term ambulatory usually implies that the patient has come to the location and is not assigned to a bed. Sometimes referred to as an outpatient encounter.
-  """)
+    The term ambulatory usually implies that the patient has come to the location and is not assigned to a bed. Sometimes referred to as an outpatient encounter.
+    """)
   Ambulatory: "ambulatory",
 
   @doc("""
-  An encounter where the patient usually will start in different encounter, such as one in the emergency department but then transition to this type of encounter because they require a significant period of treatment and monitoring to determine whether or not their condition warrants an inpatient admission or discharge.
-  """)
+    An encounter where the patient usually will start in different encounter, such as one in the emergency department but then transition to this type of encounter because they require a significant period of treatment and monitoring to determine whether or not their condition warrants an inpatient admission or discharge.
+    """)
   Observation: "observation",
 
   @doc("""
-  A patient encounter that takes place at a dedicated healthcare service delivery location where the patient receives immediate evaluation and treatment, provided until the patient can be discharged or responsibility for the patient's care is transferred elsewhere (for example, the patient could be admitted as an inpatient or transferred to another facility.
-  """)
+    A patient encounter that takes place at a dedicated healthcare service delivery location where the patient receives immediate evaluation and treatment, provided until the patient can be discharged or responsibility for the patient's care is transferred elsewhere (for example, the patient could be admitted as an inpatient or transferred to another facility.
+    """)
   Emergency: "emergency",
 
   @doc("""
-  A patient encounter where the patient is not physically present for the encounter, such as in a telehealth encounter, phone call, or electronic communication.
-  """)
+    A patient encounter where the patient is not physically present for the encounter, such as in a telehealth encounter, phone call, or electronic communication.
+    """)
   Virtual: "virtual",
 
   @doc("""
-  Healthcare encounter that takes place in the residence of the patient or a designee
-  """)
+    Healthcare encounter that takes place in the residence of the patient or a designee
+    """)
   HealthHome: "healthHome",
 }
 
@@ -216,14 +216,14 @@ model DocumentAuthor {
 @doc("The content of the patient document.")
 model DocumentContent {
   @doc("""
-The type of the content's source.
-In case the source type is 'inline', the content is given as a string (for instance, text).
-In case the source type is 'reference', the content is given as a URI.
-""")
+    The type of the content's source.
+    In case the source type is 'inline', the content is given as a string (for instance, text).
+    In case the source type is 'reference', the content is given as a URI.
+    """)
   sourceType: DocumentContentSourceType;
 
   @doc("""
-The content of the document, given either inline (as a string) or as a reference (URI).
-""")
+    The content of the document, given either inline (as a string) or as a reference (URI).
+    """)
   value: string;
 }
