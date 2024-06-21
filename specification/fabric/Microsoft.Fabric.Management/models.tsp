@@ -67,13 +67,14 @@ union ProvisioningState {
 
 @doc("The state of the Fabric capacity resource.")
 union ResourceState {
-  ResourceProvisioningState,
-
   /** Resource is active */
   Active: "Active",
 
   /** Resource is provisioning */
   Provisioning: "Provisioning",
+
+  /** Resource is failed */
+  Failed: "Failed",
 
   /** Resource is updating */
   Updating: "Updating",
@@ -131,7 +132,7 @@ model RpSkuProperties {
   name: string;
 
   @doc("The list of available locations for the SKU")
-  locations: Array<string>;
+  locations: Array<Azure.Core.azureLocation>;
 }
 
 @doc("An object that represents enumerating SKUs for existing resources")

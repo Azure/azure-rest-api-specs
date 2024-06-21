@@ -649,6 +649,10 @@
     }
   },
   "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "CapacityAdministration": {
       "type": "object",
       "description": "The administration properties of the Fabric capacity resource",
@@ -830,11 +834,9 @@
       "type": "string",
       "description": "The state of the Fabric capacity resource.",
       "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
         "Active",
         "Provisioning",
+        "Failed",
         "Updating",
         "Deleting",
         "Suspending",
@@ -850,21 +852,6 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          },
-          {
             "name": "Active",
             "value": "Active",
             "description": "Resource is active"
@@ -873,6 +860,11 @@
             "name": "Provisioning",
             "value": "Provisioning",
             "description": "Resource is provisioning"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource is failed"
           },
           {
             "name": "Updating",
@@ -920,8 +912,7 @@
             "description": "Resource is preparing"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "RpSku": {
       "type": "object",
@@ -975,7 +966,7 @@
           "type": "array",
           "description": "The list of available locations for the SKU",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.azureLocation"
           }
         }
       },
@@ -1039,7 +1030,7 @@
           "type": "array",
           "description": "The list of available locations for the SKU",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.azureLocation"
           }
         }
       },
