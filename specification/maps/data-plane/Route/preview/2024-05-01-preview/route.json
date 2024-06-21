@@ -2128,6 +2128,15 @@
         }
       }
     },
+    "RouteRangeVehicleSpec": {
+      "type": "object",
+      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VehicleSpec"
+        }
+      ]
+    },
     "VehicleSpec": {
       "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n `Note`: Only supported for truck travelMode.",
       "type": "object",
@@ -2326,6 +2335,64 @@
         }
       }
     },
+    "RouteRangeAvoidEnum": {
+      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tolls\"]",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "limitedAccessHighways",
+          "tollRoads",
+          "ferries",
+          "tunnels",
+          "borderCrossings",
+          "lowEmissionZones",
+          "unpavedRoads"
+        ],
+        "x-ms-enum": {
+          "name": "AvoidEnum",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "limitedAccessHighways",
+              "description": "Avoids the use of limited access highways in the route."
+            },
+            {
+              "value": "tollRoads",
+              "description": "Avoids the use of toll roads in the route."
+            },
+            {
+              "value": "ferries",
+              "description": "Avoids the use of ferries in the route."
+            },
+            {
+              "value": "tunnels",
+              "description": "Avoids the use of tunnels in the route."
+            },
+            {
+              "value": "borderCrossings",
+              "description": "Avoids crossing country borders in the route."
+            },
+            {
+              "value": "lowEmissionZones",
+              "description": "Avoids low-emission zones in the route."
+            },
+            {
+              "value": "unpavedRoads",
+              "description": "Avoids unpaved roads in the route."
+            },
+            {
+              "value": "carpools",
+              "description": "Avoids routes that require use of carpool."
+            },
+            {
+              "value": "carTrains",
+              "description": "Avoids car trains."
+            }
+          ]
+        }
+      }
+    },
     "OptionalId": {
       "type": "object",
       "description": "optional Id",
@@ -2512,10 +2579,10 @@
           }
         },
         "avoid": {
-          "$ref": "#/definitions/AvoidEnum"
+          "$ref": "#/definitions/RouteRangeAvoidEnum"
         },
         "vehicleSpec": {
-          "$ref": "#/definitions/VehicleSpec"
+          "$ref": "#/definitions/RouteRangeVehicleSpec"
         },
         "distanceBudgetInMeters ": {
           "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit.",
