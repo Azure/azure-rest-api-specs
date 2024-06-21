@@ -33,7 +33,7 @@ model RadiologyInsightsModelConfiguration {
   locale?: string;
 }
 
-@doc("Options regarding follow up recommendation inferences, finding inferences, guidance inferences and quality measure inferences.")
+@doc("Options regarding follow up recommendation inferences.")
 model RadiologyInsightsInferenceOptions {
   @doc("Follow-up recommendation options.")
   followupRecommendationOptions?: FollowupRecommendationOptions;
