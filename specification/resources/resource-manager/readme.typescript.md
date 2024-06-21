@@ -28,6 +28,8 @@ typescript:
 ```
 
 ```yaml $(typescript) && $(package-deploymentstacks) && !$(profile-content)
+modelerfour:
+  flatten-models: false
 typescript:
   package-name: "@azure/arm-resourcesdeploymentstacks"
   output-folder: "$(typescript-sdks-folder)/sdk/resourcesdeploymentstacks/arm-resourcesdeploymentstacks"
