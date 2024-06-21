@@ -1,0 +1,282 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.Core;
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+using OpenAPI;
+using Azure.ClientGenerator.Core;
+
+namespace VideoAnalysis;
+
+@pattern("^[a-z0-9-_]+$")
+@maxLength(32)
+@minLength(1)
+scalar taskName extends string;
+
+@doc("The ApiVersion query parameter for VideoAnalysisTask API.")
+model VideoAnalysisTaskApiVersionParameter {
+    @doc("The API version to use for this operation.")
+    @query("api-version")
+    @minLength(1)
+    apiVersion?: string;
+}
+
+@doc("Time range considering the offset from 0.0s and lasting a duration.")
+model TimeRange {
+    @doc("Offset in ISO 8601 duration format, i.e., P[n]Y[n]M[n]DT[n]H[n]M[n]S or P[n]W.")
+    offset?: string;
+
+    @doc("Duration in ISO 8601 duration format, i.e., P[n]Y[n]M[n]DT[n]H[n]M[n]S or P[n]W.")
+    duration?: string;
+}
+
+@doc("Authentication method to be used.")
+@discriminator("kind")
+model AuthenticationModel {
+    @doc("Type of authentication used")
+    kind: AuthenticationModelType;
+}
+
+@doc("No authentication model")
+model NoneAuthenticationModel extends AuthenticationModel {
+    kind: AuthenticationModelType.none;
+}
+
+@doc("Key based authentication model")
+model KeyAuthenticationModel extends AuthenticationModel {
+    kind: AuthenticationModelType.key;
+
+    @doc("Key used to authenticate.")
+    key: string;
+}
+
+@doc("Azure Managed Identity authentication model")
+model ManagedIdentityAuthenticationModel extends AuthenticationModel {
+    kind: AuthenticationModelType.managedIdentity;
+}
+
+@doc("Represents the Video Analysis Task response model for the JSON document. Returned after the creation of a video analysis task.")
+model VideoAnalysisTaskResponseModel {
+    @key("taskName")
+    @doc("Video analysis task name information.")
+    @visibility("read", "create")
+    taskName: taskName;
+
+    @doc("Video analysis batch name information.")
+    batchName?: string;
+
+    @doc("Datetime when the video analysis task was created.")
+    createdDateTime?: utcDateTime;
+
+    @doc("Datetime when the video analysis task was last modified.")
+    lastModifiedDateTime?: utcDateTime;
+
+    @doc("Task status.")
+    status?: TaskStatusModel;
+
+    @doc("Error related to the video analysis task.")
+    error?: ErrorResponse;
+
+    @doc("Video analysis task result.")
+    taskResult?: string;
+
+    @doc("Read only. The latest ETag for the dataset. May be used with the 'If-Match' header when updating or deleting a dataset.")
+    @visibility("read")
+    etag?: string;
+}
+
+@doc("A task that describes a video")
+@resource("videodescriptions")
+@error
+model VideoDescriptionTaskRequestModel {
+    @key("taskName")
+    @doc("Video analysis task name information.")
+    @visibility("read", "create")
+    taskName: taskName;
+
+    @doc("TODO - Replace input")
+    input: AzureBlobFileResourceLocationModel;
+
+    @doc("TODO - Replace output")
+    output?: AzureBlobContainerResourceLocationModel;
+
+    @doc("TODO - Replace resource")
+    resource?: string;
+
+    @doc("TODO - Replace properties")
+    properties?: string;
+}
+
+@doc("Resource location model kind")
+union ResourceLocationModelKind {
+    string,
+
+    @doc("Resource Location is publicly available")
+    file: "File",
+
+    @doc("Resource Location is a file on an Azure Storage Account")
+    azureBlobFile: "AzureBlobFile",
+
+    @doc("Resource Location is a container on an Azure Storage Account")
+    azureBlobContainer: "AzureBlobContainer",
+}
+
+@doc("Resource Location")
+@discriminator("kind")
+model ResourceLocationModel {
+    @doc("Resource Location Kind")
+    kind: ResourceLocationModelKind;
+
+    @doc("Preset Configuration")
+    preset: PresetConfigurationModel;
+}
+
+@doc("Files accessed without authentication")
+model FileResourceLocationModel extends ResourceLocationModel {
+    kind: ResourceLocationModelKind.file;
+    url?: url;
+    range?: TimeRange;
+}
+
+@doc("Files accessed without authentication")
+model AuthenticatedResourceModel {
+    @doc("Authentication information")
+    authentication?: AuthenticatedResourceModel;
+}
+
+@doc("Files accessed through Azure Storage Account authentication")
+model AzureBlobFileResourceLocationModel extends ResourceLocationModel {
+    kind: ResourceLocationModelKind.azureBlobFile;
+    url: url;
+    range: TimeRange;
+    ...AuthenticatedResourceModel;
+}
+
+@doc("Files accessed without authentication")
+model AzureBlobContainerResourceLocationModel extends ResourceLocationModel {
+    kind: ResourceLocationModelKind.azureBlobContainer;
+    containerUrl: url;
+    prefix?: string;
+    ...AuthenticatedResourceModel;
+}
+
+@doc("Error response object.")
+@error
+model ErrorResponse {
+    @doc("Error info.")
+    error: Error;
+}
+
+@doc("The error object.")
+@clientName("DocumentIntelligenceError", "csharp")
+model Error {
+    @doc("One of a server-defined set of error codes.")
+    code: string;
+
+    @doc("A human-readable representation of the error.")
+    message: string;
+
+    @doc("The target of the error.")
+    target?: string;
+
+    @doc("An array of details about specific errors that led to this reported error.")
+    details?: Error[];
+
+    @doc("An object containing more specific information than the current object about the error.")
+    innererror?: InnerError;
+}
+
+@doc("An object containing more specific information about the error.")
+model InnerError {
+    @doc("One of a server-defined set of error codes.")
+    code?: string;
+
+    @doc("A human-readable representation of the error.")
+    message?: string;
+
+    #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
+    @doc("Inner error.")
+    @clientName("InnerErrorObject", "csharp")
+    innererror?: InnerError;
+}
+
+@doc("Status and result of the analyze operation.")
+@error
+model AnalyzeResultOperation {
+    @key("taskName")
+    @doc("Video analysis task name information.")
+    @visibility("read", "create")
+    taskName: taskName;
+
+    // @doc("Operation status.  notStarted, running, succeeded, or failed")
+    // status: OperationStatus;
+
+    // @doc("Date and time (UTC) when the analyze operation was submitted.")
+    // createdDateTime: utcDateTime;
+
+    // @doc("Date and time (UTC) when the status was last updated.")
+    // lastUpdatedDateTime: utcDateTime;
+
+    // @doc("Encountered error during document analysis.")
+    // error?: Error;
+
+    // @lroResult
+    // @doc("Document analysis result.")
+    // analyzeResult?: string;
+}
+
+@lroStatus
+@doc("Operation status.")
+union TaskStatusModel {
+    string,
+
+    @doc("The operation has not started yet.")
+    notStarted: "notStarted",
+
+    @doc("The operation is in progress.")
+    running: "running",
+
+    @doc("The operation has failed.")
+    @lroFailed
+    failed: "failed",
+
+    @doc("The operation has succeeded.")
+    @lroSucceeded
+    succeeded: "succeeded",
+
+    @doc("The operation is running and is writting back results.")
+    @lroSucceeded
+    partiallyCompleted: "completed",
+
+    @doc("The operation has failed but wrote partial results back.")
+    partiallyCompletedFailed: "partiallyCompletedFailed",
+
+    @doc("The operation has been canceled.")
+    @lroCanceled
+    canceled: "canceled",
+}
+
+@doc("Preset Configuration")
+union PresetConfigurationModel {
+    string,
+    @doc("Default preset configuration") "default",
+    @doc("Example 1 preset configuration") "example1",
+}
+
+union AuthenticationModelType {
+    string,
+
+    @doc("No authentication")
+    none: "None",
+
+    @doc("Key based authentication")
+    key: "Key",
+
+    @doc("Azure Managed Identity authentication")
+    managedIdentity: "ManagedIdentity",
+}
