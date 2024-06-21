@@ -106,7 +106,7 @@ model DataFlowBuiltInTransformationMap {
   type?: DataFlowMappingType;
 
   @doc("Modify the inputs field(s) to the final output field.")
-  conversion?: string;
+  expression?: string;
 
   @doc("List of fields for mapping in JSON path expression.")
   inputs: string[];
