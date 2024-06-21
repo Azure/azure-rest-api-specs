@@ -174,7 +174,7 @@
         }
       }
     },
-    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyName}": {
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyShortId}": {
       "get": {
         "operationId": "Geographies_Get",
         "tags": [
@@ -194,12 +194,12 @@
             "pattern": "^[a-zA-Z-]{3,24}$"
           },
           {
-            "name": "geographyName",
+            "name": "geographyShortId",
             "in": "path",
-            "description": "The geography name",
+            "description": "The geography short id",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z-]{3,24}$"
+            "pattern": "^[a-zA-Z-]{2,5}$"
           }
         ],
         "responses": {
@@ -223,7 +223,7 @@
         }
       }
     },
-    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyName}/regions": {
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyShortId}/regions": {
       "get": {
         "operationId": "Regions_ListByGeography",
         "tags": [
@@ -243,12 +243,12 @@
             "pattern": "^[a-zA-Z-]{3,24}$"
           },
           {
-            "name": "geographyName",
+            "name": "geographyShortId",
             "in": "path",
-            "description": "The geography name",
+            "description": "The geography short id",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z-]{3,24}$"
+            "pattern": "^[a-zA-Z-]{2,5}$"
           }
         ],
         "responses": {
@@ -275,7 +275,7 @@
         }
       }
     },
-    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyName}/regions/{regionName}": {
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyShortId}/regions/{regionName}": {
       "get": {
         "operationId": "Regions_Get",
         "tags": [
@@ -295,12 +295,12 @@
             "pattern": "^[a-zA-Z-]{3,24}$"
           },
           {
-            "name": "geographyName",
+            "name": "geographyShortId",
             "in": "path",
-            "description": "The geography name",
+            "description": "The geography short id",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z-]{3,24}$"
+            "pattern": "^[a-zA-Z-]{2,5}$"
           },
           {
             "name": "regionName",
@@ -577,7 +577,7 @@
         },
         "fullName": {
           "type": "string",
-          "description": "Full name of geography."
+          "description": "Name of geography."
         },
         "state": {
           "$ref": "#/definitions/State",

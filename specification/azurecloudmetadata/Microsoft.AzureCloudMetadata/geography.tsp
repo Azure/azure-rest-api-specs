@@ -17,11 +17,11 @@ namespace Microsoft.AzureCloudMetadata;
 @tenantResource
 @parentResource(Cloud)
 model Geography is ProxyResource<GeographyProperties> {
-  @doc("The geography name")
+  @doc("The geography short id")
   @segment("geographies")
-  @key("geographyName")
+  @key("geographyShortId")
   @visibility("read")
-  @pattern("^[a-zA-Z-]{3,24}$")
+  @pattern("^[a-zA-Z-]{2,5}$")
   @path
   name: string;
 }
@@ -30,7 +30,7 @@ model Geography is ProxyResource<GeographyProperties> {
 model GeographyProperties {
   ...MetadataProperties;
 
-  /** Full name of geography. */
+  /** Name of geography. */
   fullName: string;
 
   /** State of geography. */
