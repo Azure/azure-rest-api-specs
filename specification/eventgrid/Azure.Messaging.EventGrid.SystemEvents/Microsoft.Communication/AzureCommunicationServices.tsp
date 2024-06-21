@@ -1160,6 +1160,28 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   interactive: AcsMessageInteractiveContent;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageAnalysisCompleted event. */
+interface AcsMessageAnalysisCompletedEventData extends AcsMessageEventData {
+  /** The original message received. */
+  originalMessage: string;
+
+  /** The analysed message channel kind. */
+  channelKind: "whatsapp";
+
+  /** The intent of the analysed message. */
+  intentAnalysis: string;
+
+  /** List of key phrases extracted. */
+  keyPhraseExtraction: string[];
+
+  /** The analysed message language detection. */
+  languageDetection: AcsMessageLanguageDetection;
+
+  /** The analysed message sentiment. */
+  sentiment: AcsMessageSentiment;
+}
+
+
 /** Message Media Content */
 model AcsMessageMediaContent {
   /** The MIME type of the file this media represents */
@@ -1248,6 +1270,27 @@ model AcsMessageChannelEventError {
 
   /** The channel error message */
   channelMessage?: string;
+}
+
+/** Message Analysis Language Detection */
+model AcsMessageLanguageDetection {
+  /** The language of the message. */
+  language: string;
+
+  /** The confidence score of the language detected. */
+  confidenceScore: string;
+
+  /** The translation of the message. */
+  translation: string;
+}
+
+/** Message Analysis Sentiment */
+model AcsMessageSentiment {
+   /** The score of the analysis. */
+    score: number;
+
+    /** The description of the analysis. */
+    description: string;
 }
 
 /** Interactive reply kind */
