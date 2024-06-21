@@ -129,9 +129,6 @@ An inference made by the Radiology Insights model regarding a patient.
   - FollowupRecommendation
   - RadiologyProcedure
   - FollowupCommunication
-  - ClinicalGuidance 
-  - QualityMeasure 
-  - ScoringAndAssessment 
 """)
 @discriminator("kind")
 model RadiologyInsightsInference {
@@ -370,21 +367,28 @@ model ScoringAndAssessmentInference extends RadiologyInsightsInference {
   kind: RadiologyInsightsInferenceType.ScoringAndAssessment;
 
   @doc("Category, e.g. BIRADS")
-  category: string;
+  category: ScoringAndAssessmentCategoryType;
 
-  @doc("The value. If the value is a range, use fields minimumValue and maximumValue.")
-  value?: StringValueWithUnit;
+  @doc("The value. If the value is a range, use field valueRange.")
+  singleValue?: AssessmentStringValueWithUnit;
 
-  @doc("The minimum, if the value is a range.")
-  minimumValue?: StringValueWithUnit;
+  @doc("The range.")
+  valueRange?: AssessmentStringValueWithUnitRange;
+}
 
-  @doc("The maximum, if the value is a range.")
-  maximumValue?: StringValueWithUnit;
+@added(ApiVersion.v2024_10_01)
+@doc("A range of values.")
+model AssessmentStringValueWithUnitRange {
+  @doc("The minimum value.")
+  minimum: AssessmentStringValueWithUnit;
+
+  @doc("The maximum value.")
+  maximum: AssessmentStringValueWithUnit;
 }
 
 @added(ApiVersion.v2024_10_01)
 @doc("A value, represented as a string because it can contain alphanumeric or mathematical characters, along with the optional unit. Used by ScoringAndAssessmentInference.")
-model StringValueWithUnit {
+model AssessmentStringValueWithUnit {
   @doc("String value.")
   value: string;
 
@@ -409,8 +413,8 @@ model GuidanceInference extends RadiologyInsightsInference {
   @minItems(1)
   presentGuidanceInformation?: Array<PresentGuidanceInformation>;
 
-  @doc("If this is higher than 1, this guidance inference has less specified information than another guidance inference for the same identifier.")
-  ranking: int32;
+  @doc("See doc of GuidanceRankingType.")
+  ranking: GuidanceRankingType;
 
   @doc("The proposed follow-up recommendations, if any. If this is filled, missingGuidanceInformation cannot be filled (and vice versa).")
   @minItems(1)
