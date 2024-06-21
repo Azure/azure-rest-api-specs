@@ -4,7 +4,20 @@
     "resourceGroupName": "test-rg",
     "workspaceName": "workspace-1",
     "connectionName": "connection-1",
-    "api-version": "2024-07-01-preview"
+    "api-version": "2024-07-01-preview",
+    "body": {
+      "properties": {
+        "authType": "AccessKey",
+        "credentials": {
+          "accessKeyId": "some_string",
+          "secretAccessKey": "some_string"
+        },
+        "category": "ADLSGen2",
+        "expiryTime": "2020-01-01T00:00:00Z",
+        "target": "some_string",
+        "metadata": {}
+      }
+    }
   },
   "responses": {
     "200": {
@@ -15,11 +28,7 @@
         "type": "Microsoft.MachineLearningServices/workspaces/connections",
         "properties": {
           "authType": "AccessKey",
-          "credentials": {
-            "accessKeyId": "some_string",
-            "secretAccessKey": "some_string"
-          },
-          "category": "CustomKeys",
+          "category": "ADLSGen2",
           "expiryTime": "2020-01-01T00:00:00Z",
           "target": "some_string",
           "metadata": {}
@@ -30,7 +39,7 @@
           "createdByType": "ManagedIdentity",
           "lastModifiedAt": "2020-01-01T00:00:00Z",
           "lastModifiedBy": "some_string",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "Application"
         }
       }
     }
