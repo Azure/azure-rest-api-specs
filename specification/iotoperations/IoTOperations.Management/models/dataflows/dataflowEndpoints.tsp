@@ -117,7 +117,7 @@ model DataFlowEndpointAuthentication {
   sasl?: DataFlowEndpointAuthenticationSasl;
 
   @doc("Service Account Token authentication.")
-  serviceAccountToken?: DataFlowEndpointAuthenticationSasl;
+  serviceAccountToken?: DataFlowEndpointAuthenticationServiceAccountToken;
 
   @doc("X.509 certificate authentication.")
   x509Credentials?: DataFlowEndpointAuthenticationX509;
@@ -156,7 +156,7 @@ model DataFlowEndpointDataLakeStorage {
 @doc("Microsoft Fabric endpoint properties")
 model DataFlowEndpointFabricOneLake {
   @doc("Batching configuration.")
-  batching?: DataFlowEndpointFabricBatching;
+  batching?: BatchingConfiguration;
 
   @doc("Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com.")
   @pattern(".+\\.fabric\\.microsoft\\.com")
@@ -167,19 +167,6 @@ model DataFlowEndpointFabricOneLake {
 
   @doc("Type of location of the data in the workspace. Can be either tables or files.")
   oneLakePathType: DataFlowEndpointFabricPathType;
-}
-
-@doc("Microsoft Fabric endpoint Batching properties")
-model DataFlowEndpointFabricBatching {
-  @doc("Batching latency in seconds.")
-  @minValue(0)
-  @maxValue(65535)
-  latencySecs?: int32 = 60;
-
-  @doc("Maximum number of messages in a batch.")
-  @minValue(0)
-  @maxValue(4294967295)
-  maxMessages?: int32 = 100000;
 }
 
 @doc("Microsoft Fabric endpoint Names properties")

@@ -102,6 +102,9 @@ model DataFlowBuiltInTransformationFilter {
 
 @doc("DataFlow BuiltIn Transformation map properties")
 model DataFlowBuiltInTransformationMap {
+  @doc("Type of transofmration.")
+  type?: DataFlowMappingType;
+
   @doc("Modify the inputs field(s) to the final output field.")
   conversion?: string;
 
@@ -110,6 +113,19 @@ model DataFlowBuiltInTransformationMap {
 
   @doc("Where and how the input fields to be organized in the output record.")
   output: string;
+}
+
+@doc("DataFlow type mapping properties")
+union DataFlowMappingType {
+  string,
+  @doc("New Properties type")
+  NewProperties: "NewProperties",
+
+  @doc("Rename type")
+  Rename: "Rename",
+
+  @doc("Compute type")
+  Compute: "Compute",
 }
 
 @doc("Serialization Format properties")
@@ -139,8 +155,8 @@ model DataFlowDestinationOperation {
   @doc("Name of the destination.")
   name: string;
 
-  @doc("Destination path, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
-  path: string;
+  @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
+  location: string;
 }
 
 @doc("DataFlow Source Operation properties")
@@ -151,8 +167,8 @@ model DataFlowSourceOperation {
   @doc("Name of the source.")
   name: string;
 
-  @doc("List of source paths. Can be MQTT or Kafka topics. Supports wildcards # and +.")
-  paths: string[];
+  @doc("List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.")
+  locations: string[];
 
   @doc("Serialization format. Optional; defaults to JSON.")
   serializationFormat?: SourceSerializationFormat = SourceSerializationFormat.Json;

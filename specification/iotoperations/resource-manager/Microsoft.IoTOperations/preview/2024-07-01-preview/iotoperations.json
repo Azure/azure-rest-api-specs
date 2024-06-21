@@ -4186,6 +4186,10 @@
       "type": "object",
       "description": "DataFlow BuiltIn Transformation map properties",
       "properties": {
+        "type": {
+          "$ref": "#/definitions/DataFlowMappingType",
+          "description": "Type of transofmration."
+        },
         "conversion": {
           "type": "string",
           "description": "Modify the inputs field(s) to the final output field."
@@ -4219,15 +4223,15 @@
           "type": "string",
           "description": "Name of the destination."
         },
-        "path": {
+        "location": {
           "type": "string",
-          "description": "Destination path, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription."
+          "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription."
         }
       },
       "required": [
         "endpointRef",
         "name",
-        "path"
+        "location"
       ]
     },
     "DataFlowEndpointAuthentication": {
@@ -4255,7 +4259,7 @@
           "description": "SASL authentication."
         },
         "serviceAccountToken": {
-          "$ref": "#/definitions/DataFlowEndpointAuthenticationSasl",
+          "$ref": "#/definitions/DataFlowEndpointAuthenticationServiceAccountToken",
           "description": "Service Account Token authentication."
         },
         "x509Credentials": {
@@ -4314,6 +4318,19 @@
           }
         ]
       }
+    },
+    "DataFlowEndpointAuthenticationServiceAccountToken": {
+      "type": "object",
+      "description": "Service Account Token for BrokerAuthentication",
+      "properties": {
+        "audience": {
+          "type": "string",
+          "description": "Audience of the service account. Optional, defaults to the broker internal service account audience."
+        }
+      },
+      "required": [
+        "audience"
+      ]
     },
     "DataFlowEndpointAuthenticationSystemAssignedManagedIdentity": {
       "type": "object",
@@ -4405,34 +4422,12 @@
         "host"
       ]
     },
-    "DataFlowEndpointFabricBatching": {
-      "type": "object",
-      "description": "Microsoft Fabric endpoint Batching properties",
-      "properties": {
-        "latencySecs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Batching latency in seconds.",
-          "default": 60,
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "maxMessages": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of messages in a batch.",
-          "default": 100000,
-          "minimum": 0,
-          "maximum": 4294967295
-        }
-      }
-    },
     "DataFlowEndpointFabricOneLake": {
       "type": "object",
       "description": "Microsoft Fabric endpoint properties",
       "properties": {
         "batching": {
-          "$ref": "#/definitions/DataFlowEndpointFabricBatching",
+          "$ref": "#/definitions/BatchingConfiguration",
           "description": "Batching configuration."
         },
         "host": {
@@ -5032,6 +5027,36 @@
         }
       }
     },
+    "DataFlowMappingType": {
+      "type": "string",
+      "description": "DataFlow type mapping properties",
+      "enum": [
+        "NewProperties",
+        "Rename",
+        "Compute"
+      ],
+      "x-ms-enum": {
+        "name": "DataFlowMappingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NewProperties",
+            "value": "NewProperties",
+            "description": "New Properties type"
+          },
+          {
+            "name": "Rename",
+            "value": "Rename",
+            "description": "Rename type"
+          },
+          {
+            "name": "Compute",
+            "value": "Compute",
+            "description": "Compute type"
+          }
+        ]
+      }
+    },
     "DataFlowOperation": {
       "type": "object",
       "description": "DataFlow Operation properties. NOTE - One only method is allowed to be used for one entry.",
@@ -5257,9 +5282,9 @@
           "type": "string",
           "description": "Name of the source."
         },
-        "paths": {
+        "locations": {
           "type": "array",
-          "description": "List of source paths. Can be MQTT or Kafka topics. Supports wildcards # and +.",
+          "description": "List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.",
           "items": {
             "type": "string"
           }
@@ -5291,7 +5316,7 @@
       "required": [
         "endpointRef",
         "name",
-        "paths"
+        "locations"
       ]
     },
     "Diagnostics": {
