@@ -5670,12 +5670,14 @@
           "$ref": "#/definitions/AccountModel"
         },
         "kind": {
-          "$ref": "#/definitions/Kind",
-          "description": "The Kind of the Model."
+          "$ref": "#/definitions/Kind"
         },
         "skuName": {
-          "$ref": "#/definitions/SkuName",
-          "description": "The SKU of the Model."
+          "$ref": "#/definitions/SkuName"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the model."
         }
       }
     },
@@ -5696,7 +5698,6 @@
           "description": "The datetime of deprecation of the model SKU."
         },
         "capacity": {
-          "description": "The capacity configuration.",
           "$ref": "#/definitions/CapacityConfig"
         },
         "rateLimits": {
