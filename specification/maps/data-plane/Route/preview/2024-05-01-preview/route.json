@@ -198,66 +198,6 @@
         }
       }
     },
-    "/route/directions:asyncBatch": {
-      "post": {
-        "description": "The Directions Asynchronous Batch API is designed for processing large volumes of route direction queries asynchronously. This API is optimized for handling high-volume batch requests without the need for immediate response times, making it ideal for extensive geocoding operations.\n\nAfter submitting your batch request, the service processes the queries in the background. You can check the status of the request periodically and retrieve the results once they are available. This approach is beneficial for applications that can accommodate longer processing times and do not require instant responses.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n### Submitting an Asynchronous Batch Request\n\nTo submit a request, you must provide the following:\n\n- **`inputBlobUrl`**: A URL pointing to a blob storage that contains your batch of geocoding queries. The format of the data should be consistent with that used for the synchronous batch version.\n- **`outputStorageUrl`**: The destination URL where the batch results will be stored upon completion.\n- **`msiClientId`** (optional): The Client ID of a user-assigned managed identity. This is used for authentication and authorization of both `inputBlobUrl` and `outputStorageUrl`. If the managed identity is system-assigned, this field can be left null.\n\nThe response header `Operation-Location` returns a URL with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com`. To ensure that the endpoint returned in the `Operation-Location` header is the same as the submit job endpoint, using the geography endpoint is suggested.",
-        "operationId": "Route_SubmitDirectionsAsynchronousBatch",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location",
-          "final-state-schema": "#/definitions/AsyncBatchOperation"
-        },
-        "x-ms-examples": {
-          "Submit an asynchronous batch job for directions": {
-            "$ref": "./examples/DirectionsAsyncBatch.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
-          },
-          {
-            "name": "directionsAsyncBatchRequestBody",
-            "in": "body",
-            "description": "The request body for directions asynchronous batch request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AsyncBatchRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Operation-Location": {
-                "description": "URL to check the status of the asynchronous operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error occurred.",
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
-            },
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
     "/route/snapToRoads": {
       "post": {
         "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
@@ -2831,33 +2771,6 @@
           }
         }
       }
-    },
-    "AsyncBatchRequestBody": {
-      "type": "object",
-      "description": "Universal asynchronous batch request body.",
-      "properties": {
-        "inputBlobUrl": {
-          "description": "The URL to the input blob containing the batch of queries. This should be a valid URL pointing to a blob of an Azure Storage Account",
-          "type": "string",
-          "format": "uri"
-        },
-        "outputStorageUrl": {
-          "description": "The URL that points to a blob storage where the batch results will be stored.",
-          "type": "string",
-          "format": "uri"
-        },
-        "msiClientId": {
-          "description": "Client ID of a user-assigned managed identity. This is used for authentication and authorization purposes. If the managed identity is system-assigned, this field can be null.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "inputBlobUrl",
-        "outputStorageUrl"
-      ]
-    },
-    "AsyncBatchOperation": {
-      "$ref": "../../../AsyncBatchManagement/preview/2024-04-01-preview/asyncBatchManagement.json#/definitions/AsyncBatchOperation"
     },
     "SnapToRoadsBatchRequestBody": {
       "description": "The list of snap to roads queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
