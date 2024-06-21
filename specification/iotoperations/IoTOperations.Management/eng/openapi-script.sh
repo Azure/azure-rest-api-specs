@@ -30,9 +30,9 @@ for file in resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/
     jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp ^[a-z0-9][a-z0-9-]*[a-z0-9]$" then "resource-name123" else . end)' $file > temp.json && mv temp.json $file
     jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp ^[0-9]+[KMGTPE]$" then "500M" else . end)' $file > temp.json && mv temp.json $file
     jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp ^https://.*$" then "https://www.example.com" else . end)' $file > temp.json && mv temp.json $file
-    jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp .*.*.kusto.windows.net" then "<cluster>.<region>.kusto.windows.net" else . end)' $file > temp.json && mv temp.json $file
-    jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp .*.blob.core.windows.net" then "<account>.blob.core.windows.net" else . end)' $file > temp.json && mv temp.json $file
-    jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp .*.fabric.microsoft.com" then "https://<host>.fabric.microsoft.com" else . end)' $file > temp.json && mv temp.json $file
+    jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp .+\\..+\\.kusto\\.windows\\.net" then "<cluster>.<region>.kusto.windows.net" else . end)' $file > temp.json && mv temp.json $file
+    jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp .+\\.blob\\.core\\.windows\\.net" then "<account>.blob.core.windows.net" else . end)' $file > temp.json && mv temp.json $file
+    jq 'walk(if type == "string" and . == "Replace this value with a string matching RegExp .+\\.fabric\\.microsoft\\.com" then "https://<host>.fabric.microsoft.com" else . end)' $file > temp.json && mv temp.json $file
 done
 
 for file in resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/examples/*.json; do

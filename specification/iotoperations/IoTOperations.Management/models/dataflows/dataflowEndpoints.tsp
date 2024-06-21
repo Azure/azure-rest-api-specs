@@ -95,7 +95,7 @@ model DataFlowEndpointDataExplorer {
   database: string;
 
   @doc("Host of the Azure Data Explorer in the form of <cluster>.<region>.kusto.windows.net .")
-  @pattern(".*.*.kusto.windows.net")
+  @pattern(".+\\..+\\.kusto\\.windows\\.net")
   host: string;
 }
 
@@ -167,7 +167,7 @@ model DataFlowEndpointDataLakeStorage {
   batching?: BatchingConfiguration;
 
   @doc("Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .")
-  @pattern(".*.blob.core.windows.net")
+  @pattern(".+\\.blob\\.core\\.windows\\.net")
   host: string;
 }
 
@@ -177,7 +177,7 @@ model DataFlowEndpointFabricOneLake {
   batching?: DataFlowEndpointFabricBatching;
 
   @doc("Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com.")
-  @pattern(".*.fabric.microsoft.com")
+  @pattern(".+\\.fabric\\.microsoft\\.com")
   host: string;
 
   @doc("Names of the workspace and lakehouse.")
