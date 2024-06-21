@@ -29,7 +29,12 @@ interface ServerInstances {
   /**
    * Creates the Server Instance resource. <br><br>;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
    */
-  create is ArmResourceCreateOrReplaceAsync<ServerInstance>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    ServerInstance,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Updates the Server Instance resource. This operation on a resource by end user will return a Bad Request error.

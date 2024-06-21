@@ -220,6 +220,7 @@ model AssetPageResult {
 @resource("assets")
 model AssetResource {
   /** Discriminator property for AssetResource. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: string;
 
   @doc("The system generated unique id for the resource.")
@@ -483,6 +484,7 @@ model DataConnectionProperties {}
 @clientName("DataConnectionPayload", "csharp")
 model DataConnectionData {
   /** Discriminator property for DataConnectionData. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: string;
 
   @doc("The name of data connection")
@@ -503,6 +505,7 @@ model DataConnectionData {
 @resource("dataConnections")
 model DataConnection {
   /** Discriminator property for DataConnection. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: string;
 
   @doc("The system generated unique id for the resource.")
