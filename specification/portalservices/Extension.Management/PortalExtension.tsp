@@ -16,7 +16,8 @@ namespace Microsoft.PortalServices;
 /**
  * The portal extension resource definition.
  */
-model PortalExtension is TrackedResource<PortalExtensionProperties> {
+model PortalExtension
+  is Azure.ResourceManager.TrackedResource<PortalExtensionProperties> {
   /**
    * The name of the portal extension.
    */
@@ -45,7 +46,6 @@ interface PortalExtensions {
   /**
    * Updates an existing portal extension.
    */
-  @parameterVisibility("read")
   update is ArmCustomPatchSync<PortalExtension, PatchablePortalExtension>;
 
   /**
