@@ -70,7 +70,7 @@ model PolicyList is Azure.Core.Page<Policy>;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Special ARM resource with no property bag"
 @extensionResource
 @segment("policies")
-model Policy extends Azure.ResourceManager.Foundations.ProxyResourceBase {
+model Policy extends Azure.ResourceManager.Foundations.ProxyResource {
   /** The policy kind */
   kind?: string;
 

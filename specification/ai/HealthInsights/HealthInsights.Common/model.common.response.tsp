@@ -63,9 +63,9 @@ model InferenceEvidence {
   patientDataEvidence?: ClinicalNoteEvidence;
 
   @doc("""
-A piece of clinical information, expressed as a code in a clinical coding
-system.
-""")
+    A piece of clinical information, expressed as a code in a clinical coding
+    system.
+    """)
   patientInfoEvidence?: ClinicalCodedElement;
 
   @doc("A value indicating how important this piece of evidence is for the inference.")

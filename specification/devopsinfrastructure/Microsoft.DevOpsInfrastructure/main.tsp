@@ -34,7 +34,7 @@ model Pool is TrackedResource<PoolProperties> {
   @doc("Name of the pool. It needs to be globally unique.")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("Pool properties")
@@ -61,6 +61,7 @@ model PoolProperties {
   devCenterProjectResourceId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Defines the organization in which the pool will be used.")
 @discriminator("kind")
 model OrganizationProfile {}
@@ -131,6 +132,7 @@ union AzureDevOpsPermissionType {
   "SpecificAccounts",
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Defines the type of fabric the agent will run on.")
 @discriminator("kind")
 model FabricProfile {}
@@ -286,6 +288,7 @@ model NetworkProfile {
   subnetId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("The agent profile of the machines in the pool.")
 @discriminator("kind")
 model AgentProfile {
@@ -398,7 +401,12 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface Pools {
   get is ArmResourceRead<Pool>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Pool>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Pool,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchAsync<Pool, PoolProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
@@ -473,10 +481,17 @@ interface ResourceDetails {
   listByPool is ArmResourceListByParent<ResourceDetailsObject>;
 }
 
+/** Represents how SKU capacity scales. */
 union ResourceSkuCapacityScaleType {
   string,
+
+  /** Capacity scales automatically. */
   "Automatic",
+
+  /** Capactiy scales manually. */
   "Manual",
+
+  /** Capacity does not scale. */
   "None",
 }
 
@@ -519,9 +534,14 @@ model ResourceSkuRestrictions {
   reasonCode?: ResourceSkuRestrictionsReasonCode;
 }
 
+/** Describes the kind of SKU restrictions that can exist */
 union ResourceSkuRestrictionsType {
   string,
+
+  /** SKU restricted by location. */
   "Location",
+
+  /** SKU restricted by availability zone. */
   "Zone",
 }
 
@@ -534,9 +554,14 @@ model ResourceSkuRestrictionInfo {
   zones?: string[];
 }
 
+/** Describes the reason for SKU restriction. */
 union ResourceSkuRestrictionsReasonCode {
   string,
+
+  /** The restriction is due to exceeding a quota limitation. */
   "QuotaId",
+
+  /** The restriction is not available for this subscription. */
   "NotAvailableForSubscription",
 }
 

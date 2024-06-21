@@ -745,7 +745,7 @@ model BatchPoolUsageMetrics {
 model BatchAccountListSupportedImagesResult {
   @doc("The list of supported Virtual Machine Images.")
   @items
-  value?: ImageInfo[];
+  value?: BatchSupportedImage[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The URL to get the next set of results.")
@@ -754,10 +754,10 @@ model BatchAccountListSupportedImagesResult {
 }
 
 @doc("""
-A reference to the Azure Virtual Machines Marketplace Image and additional
-information about the Image.
-""")
-model ImageInfo {
+  A reference to the Azure Virtual Machines Marketplace Image and additional
+  information about the Image.
+  """)
+model BatchSupportedImage {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The ID of the Compute Node agent SKU which the Image supports.")
   @clientName("nodeAgentSkuId")
@@ -780,10 +780,10 @@ model ImageInfo {
 }
 
 @doc("""
-A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image.
-To get the list of all Azure Marketplace Image references verified by Azure Batch, see the
-' List Supported Images ' operation.
-""")
+  A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image.
+  To get the list of all Azure Marketplace Image references verified by Azure Batch, see the
+  ' List Supported Images ' operation.
+  """)
 model ImageReference {
   @doc("The publisher of the Azure Virtual Machines Marketplace Image. For example, Canonical or MicrosoftWindowsServer.")
   publisher?: string;
@@ -1012,9 +1012,9 @@ model NameValuePair {
 }
 
 @doc("""
-The result of listing the files on a Compute Node, or the files associated with
-a Task on a Compute Node.
-""")
+  The result of listing the files on a Compute Node, or the files associated with
+  a Task on a Compute Node.
+  """)
 @pagedResult
 model BatchNodeFileListResult {
   @doc("The list of files.")
@@ -1061,9 +1061,9 @@ model FileProperties {
 }
 
 @doc("""
-A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a
-specification used to create each Job.
-""")
+  A Job Schedule that allows recurring Jobs by specifying when to run Jobs and a
+  specification used to create each Job.
+  """)
 model BatchJobSchedule {
   @doc("A string that uniquely identifies the schedule within the Account.")
   @visibility("read")
@@ -1124,8 +1124,8 @@ model BatchJobSchedule {
 }
 
 @doc("""
-Parameters for updating an Azure Batch Job Schedule.
-""")
+  Parameters for updating an Azure Batch Job Schedule.
+  """)
 model BatchJobScheduleUpdateContent {
   @doc("The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time. If you do not specify this element, the existing schedule is left unchanged.")
   schedule?: BatchJobScheduleConfiguration;
@@ -1138,8 +1138,8 @@ model BatchJobScheduleUpdateContent {
 }
 
 @doc("""
-Parameters for creating an Azure Batch Job Schedule
-""")
+  Parameters for creating an Azure Batch Job Schedule
+  """)
 model BatchJobScheduleCreateContent {
   @doc("A string that uniquely identifies the schedule within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).")
   id: string;
@@ -1158,9 +1158,9 @@ model BatchJobScheduleCreateContent {
 }
 
 @doc("""
-The schedule according to which Jobs will be created. All times are fixed
-respective to UTC and are not impacted by daylight saving time.
-""")
+  The schedule according to which Jobs will be created. All times are fixed
+  respective to UTC and are not impacted by daylight saving time.
+  """)
 model BatchJobScheduleConfiguration {
   @doc("The earliest time at which any Job may be created under this Job Schedule. If you do not specify a doNotRunUntil time, the schedule becomes ready to create Jobs immediately.")
   doNotRunUntil?: utcDateTime;
@@ -1188,9 +1188,9 @@ model SecurityProfile {
 }
 
 @doc("""
-Specifies the service artifact reference id used to set same image version
-for all virtual machines in the scale set when using 'latest' image version.
-""")
+  Specifies the service artifact reference id used to set same image version
+  for all virtual machines in the scale set when using 'latest' image version.
+  """)
 model ServiceArtifactReference {
   @doc("The service artifact reference id of ServiceArtifactReference. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}")
   id: string;
@@ -1260,30 +1260,30 @@ model BatchJobConstraints {
 }
 
 @doc("""
-Specifies details of a Job Manager Task.
-The Job Manager Task is automatically started when the Job is created. The
-Batch service tries to schedule the Job Manager Task before any other Tasks in
-the Job. When shrinking a Pool, the Batch service tries to preserve Nodes where
-Job Manager Tasks are running for as long as possible (that is, Compute Nodes
-running 'normal' Tasks are removed before Compute Nodes running Job Manager
-Tasks). When a Job Manager Task fails and needs to be restarted, the system
-tries to schedule it at the highest priority. If there are no idle Compute
-Nodes available, the system may terminate one of the running Tasks in the Pool
-and return it to the queue in order to make room for the Job Manager Task to
-restart. Note that a Job Manager Task in one Job does not have priority over
-Tasks in other Jobs. Across Jobs, only Job level priorities are observed. For
-example, if a Job Manager in a priority 0 Job needs to be restarted, it will
-not displace Tasks of a priority 1 Job. Batch will retry Tasks when a recovery
-operation is triggered on a Node. Examples of recovery operations include (but
-are not limited to) when an unhealthy Node is rebooted or a Compute Node
-disappeared due to host failure. Retries due to recovery operations are
-independent of and are not counted against the maxTaskRetryCount. Even if the
-maxTaskRetryCount is 0, an internal retry due to a recovery operation may
-occur. Because of this, all Tasks should be idempotent. This means Tasks need
-to tolerate being interrupted and restarted without causing any corruption or
-duplicate data. The best practice for long running Tasks is to use some form of
-checkpointing.
-""")
+  Specifies details of a Job Manager Task.
+  The Job Manager Task is automatically started when the Job is created. The
+  Batch service tries to schedule the Job Manager Task before any other Tasks in
+  the Job. When shrinking a Pool, the Batch service tries to preserve Nodes where
+  Job Manager Tasks are running for as long as possible (that is, Compute Nodes
+  running 'normal' Tasks are removed before Compute Nodes running Job Manager
+  Tasks). When a Job Manager Task fails and needs to be restarted, the system
+  tries to schedule it at the highest priority. If there are no idle Compute
+  Nodes available, the system may terminate one of the running Tasks in the Pool
+  and return it to the queue in order to make room for the Job Manager Task to
+  restart. Note that a Job Manager Task in one Job does not have priority over
+  Tasks in other Jobs. Across Jobs, only Job level priorities are observed. For
+  example, if a Job Manager in a priority 0 Job needs to be restarted, it will
+  not displace Tasks of a priority 1 Job. Batch will retry Tasks when a recovery
+  operation is triggered on a Node. Examples of recovery operations include (but
+  are not limited to) when an unhealthy Node is rebooted or a Compute Node
+  disappeared due to host failure. Retries due to recovery operations are
+  independent of and are not counted against the maxTaskRetryCount. Even if the
+  maxTaskRetryCount is 0, an internal retry due to a recovery operation may
+  occur. Because of this, all Tasks should be idempotent. This means Tasks need
+  to tolerate being interrupted and restarted without causing any corruption or
+  duplicate data. The best practice for long running Tasks is to use some form of
+  checkpointing.
+  """)
 model BatchJobManagerTask {
   @doc("A string that uniquely identifies the Job Manager Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters.")
   id: string;
@@ -1322,15 +1322,15 @@ model BatchJobManagerTask {
   runExclusive?: boolean;
 
   @doc("""
-A list of Application Packages that the Batch service will deploy to the
-Compute Node before running the command line.Application Packages are
-downloaded and deployed to a shared directory, not the Task working
-directory. Therefore, if a referenced Application Package is already
-on the Compute Node, and is up to date, then it is not re-downloaded;
-the existing copy on the Compute Node is used. If a referenced Application
-Package cannot be installed, for example because the package has been deleted
-or because download failed, the Task fails.
-""")
+    A list of Application Packages that the Batch service will deploy to the
+    Compute Node before running the command line.Application Packages are
+    downloaded and deployed to a shared directory, not the Task working
+    directory. Therefore, if a referenced Application Package is already
+    on the Compute Node, and is up to date, then it is not re-downloaded;
+    the existing copy on the Compute Node is used. If a referenced Application
+    Package cannot be installed, for example because the package has been deleted
+    or because download failed, the Task fails.
+    """)
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
   @doc("The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.")
@@ -1349,14 +1349,14 @@ model BatchTaskContainerSettings {
   imageName: string;
 
   @doc("The private registry which contains the container Image. This setting can be omitted if was already provided at Pool creation.")
-  registry?: ContainerRegistry;
+  registry?: ContainerRegistryReference;
 
   @doc("The location of the container Task working directory. The default is 'taskWorkingDirectory'.")
   workingDirectory?: ContainerWorkingDirectory;
 }
 
 @doc("A private container registry.")
-model ContainerRegistry {
+model ContainerRegistryReference {
   @doc("The user name to log into the registry server.")
   username?: string;
 
@@ -1372,9 +1372,9 @@ model ContainerRegistry {
 }
 
 @doc("""
-The reference to a user assigned identity associated with the Batch pool which
-a compute node will use.
-""")
+  The reference to a user assigned identity associated with the Batch pool which
+  a compute node will use.
+  """)
 model BatchNodeIdentityReference {
   @doc("The ARM resource id of the user assigned identity.")
   resourceId?: string;
@@ -1405,8 +1405,8 @@ model ResourceFile {
 }
 
 @doc("""
-On every file uploads, Batch service writes two log files to the compute node, 'fileuploadout.txt' and 'fileuploaderr.txt'. These log files are used to learn more about a specific failure.
-""")
+  On every file uploads, Batch service writes two log files to the compute node, 'fileuploadout.txt' and 'fileuploaderr.txt'. These log files are used to learn more about a specific failure.
+  """)
 model OutputFile {
   @doc("A pattern indicating which file(s) to upload. Both relative and absolute paths are supported. Relative paths are relative to the Task working directory. The following wildcards are supported: * matches 0 or more characters (for example pattern abc* would match abc or abcdef), ** matches any directory, ? matches any single character, [abc] matches one character in the brackets, and [a-c] matches one character in the range. Brackets can include a negation to match any character not specified (for example [!abc] matches any character but a, b, or c). If a file name starts with \".\" it is ignored by default but may be matched by specifying it explicitly (for example *.gif will not match .a.gif, but .*.gif will). A simple example: **\\*.txt matches any file that does not start in '.' and ends with .txt in the Task working directory or any subdirectory. If the filename contains a wildcard character it can be escaped using brackets (for example abc[*] would match a file named abc*). Note that both \\ and / are treated as directory separators on Windows, but only / is on Linux. Environment variables (%var% on Windows or $var on Linux) are expanded prior to the pattern being applied.")
   filePattern: string;
@@ -1449,9 +1449,9 @@ model HttpHeader {
 }
 
 @doc("""
-Options for an output file upload operation, including under what conditions
-to perform the upload.
-""")
+  Options for an output file upload operation, including under what conditions
+  to perform the upload.
+  """)
 model OutputFileUploadConfig {
   @doc("The conditions under which the Task output file or set of files should be uploaded. The default is taskcompletion.")
   uploadCondition: OutputFileUploadCondition;
@@ -1497,8 +1497,8 @@ model UefiSettings {
 }
 
 @doc("""
-Specifies the options for the auto user that runs an Azure Batch Task.
-""")
+  Specifies the options for the auto user that runs an Azure Batch Task.
+  """)
 model AutoUserSpecification {
   @doc("The scope for the auto user. The default value is pool. If the pool is running Windows, a value of Task should be specified if stricter isolation between tasks is required, such as if the task mutates the registry in a way which could impact other tasks.")
   scope?: AutoUserScope;
@@ -1517,42 +1517,42 @@ model BatchApplicationPackageReference {
 }
 
 @doc("""
-The settings for an authentication token that the Task can use to perform Batch
-service operations.
-""")
+  The settings for an authentication token that the Task can use to perform Batch
+  service operations.
+  """)
 model AuthenticationTokenSettings {
   @doc("The Batch resources to which the token grants access. The authentication token grants access to a limited set of Batch service operations. Currently the only supported value for the access property is 'job', which grants access to all operations related to the Job which contains the Task.")
   access?: AccessScope[];
 }
 
 @doc("""
-A Job Preparation Task to run before any Tasks of the Job on any given Compute Node.
-You can use Job Preparation to prepare a Node to run Tasks for the Job.
-Activities commonly performed in Job Preparation include: Downloading common
-resource files used by all the Tasks in the Job. The Job Preparation Task can
-download these common resource files to the shared location on the Node.
-(AZ_BATCH_NODE_ROOT_DIR\\shared), or starting a local service on the Node so
-that all Tasks of that Job can communicate with it. If the Job Preparation Task
-fails (that is, exhausts its retry count before exiting with exit code 0),
-Batch will not run Tasks of this Job on the Node. The Compute Node remains
-ineligible to run Tasks of this Job until it is reimaged. The Compute Node
-remains active and can be used for other Jobs. The Job Preparation Task can run
-multiple times on the same Node. Therefore, you should write the Job
-Preparation Task to handle re-execution. If the Node is rebooted, the Job
-Preparation Task is run again on the Compute Node before scheduling any other
-Task of the Job, if rerunOnNodeRebootAfterSuccess is true or if the Job
-Preparation Task did not previously complete. If the Node is reimaged, the Job
-Preparation Task is run again before scheduling any Task of the Job. Batch will
-retry Tasks when a recovery operation is triggered on a Node. Examples of
-recovery operations include (but are not limited to) when an unhealthy Node is
-rebooted or a Compute Node disappeared due to host failure. Retries due to
-recovery operations are independent of and are not counted against the
-maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to
-a recovery operation may occur. Because of this, all Tasks should be
-idempotent. This means Tasks need to tolerate being interrupted and restarted
-without causing any corruption or duplicate data. The best practice for long
-running Tasks is to use some form of checkpointing.
-""")
+  A Job Preparation Task to run before any Tasks of the Job on any given Compute Node.
+  You can use Job Preparation to prepare a Node to run Tasks for the Job.
+  Activities commonly performed in Job Preparation include: Downloading common
+  resource files used by all the Tasks in the Job. The Job Preparation Task can
+  download these common resource files to the shared location on the Node.
+  (AZ_BATCH_NODE_ROOT_DIR\\shared), or starting a local service on the Node so
+  that all Tasks of that Job can communicate with it. If the Job Preparation Task
+  fails (that is, exhausts its retry count before exiting with exit code 0),
+  Batch will not run Tasks of this Job on the Node. The Compute Node remains
+  ineligible to run Tasks of this Job until it is reimaged. The Compute Node
+  remains active and can be used for other Jobs. The Job Preparation Task can run
+  multiple times on the same Node. Therefore, you should write the Job
+  Preparation Task to handle re-execution. If the Node is rebooted, the Job
+  Preparation Task is run again on the Compute Node before scheduling any other
+  Task of the Job, if rerunOnNodeRebootAfterSuccess is true or if the Job
+  Preparation Task did not previously complete. If the Node is reimaged, the Job
+  Preparation Task is run again before scheduling any Task of the Job. Batch will
+  retry Tasks when a recovery operation is triggered on a Node. Examples of
+  recovery operations include (but are not limited to) when an unhealthy Node is
+  rebooted or a Compute Node disappeared due to host failure. Retries due to
+  recovery operations are independent of and are not counted against the
+  maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to
+  a recovery operation may occur. Because of this, all Tasks should be
+  idempotent. This means Tasks need to tolerate being interrupted and restarted
+  without causing any corruption or duplicate data. The best practice for long
+  running Tasks is to use some form of checkpointing.
+  """)
 model BatchJobPreparationTask {
   @doc("A string that uniquely identifies the Job Preparation Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobpreparation'. No other Task in the Job can have the same ID as the Job Preparation Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobPreparationTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict).")
   id?: string;
@@ -1583,23 +1583,23 @@ model BatchJobPreparationTask {
 }
 
 @doc("""
-A Job Release Task to run on Job completion on any Compute Node where the Job has run.
-The Job Release Task runs when the Job ends, because of one of the following:
-The user calls the Terminate Job API, or the Delete Job API while the Job is
-still active, the Job's maximum wall clock time constraint is reached, and the
-Job is still active, or the Job's Job Manager Task completed, and the Job is
-configured to terminate when the Job Manager completes. The Job Release Task
-runs on each Node where Tasks of the Job have run and the Job Preparation Task
-ran and completed. If you reimage a Node after it has run the Job Preparation
-Task, and the Job ends without any further Tasks of the Job running on that
-Node (and hence the Job Preparation Task does not re-run), then the Job Release
-Task does not run on that Compute Node. If a Node reboots while the Job Release
-Task is still running, the Job Release Task runs again when the Compute Node
-starts up. The Job is not marked as complete until all Job Release Tasks have
-completed. The Job Release Task runs in the background. It does not occupy a
-scheduling slot; that is, it does not count towards the taskSlotsPerNode limit
-specified on the Pool.
-""")
+  A Job Release Task to run on Job completion on any Compute Node where the Job has run.
+  The Job Release Task runs when the Job ends, because of one of the following:
+  The user calls the Terminate Job API, or the Delete Job API while the Job is
+  still active, the Job's maximum wall clock time constraint is reached, and the
+  Job is still active, or the Job's Job Manager Task completed, and the Job is
+  configured to terminate when the Job Manager completes. The Job Release Task
+  runs on each Node where Tasks of the Job have run and the Job Preparation Task
+  ran and completed. If you reimage a Node after it has run the Job Preparation
+  Task, and the Job ends without any further Tasks of the Job running on that
+  Node (and hence the Job Preparation Task does not re-run), then the Job Release
+  Task does not run on that Compute Node. If a Node reboots while the Job Release
+  Task is still running, the Job Release Task runs again when the Compute Node
+  starts up. The Job is not marked as complete until all Job Release Tasks have
+  completed. The Job Release Task runs in the background. It does not occupy a
+  scheduling slot; that is, it does not count towards the taskSlotsPerNode limit
+  specified on the Pool.
+  """)
 model BatchJobReleaseTask {
   @doc("A string that uniquely identifies the Job Release Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobrelease'. No other Task in the Job can have the same ID as the Job Release Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobReleaseTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict).")
   id?: string;
@@ -1636,9 +1636,9 @@ model BatchPoolInfo {
 }
 
 @doc("""
-Specifies characteristics for a temporary 'auto pool'. The Batch service will
-create this auto Pool when the Job is submitted.
-""")
+  Specifies characteristics for a temporary 'auto pool'. The Batch service will
+  create this auto Pool when the Job is submitted.
+  """)
 model BatchAutoPoolSpecification {
   @doc("A prefix to be added to the unique identifier when a Pool is automatically created. The Batch service assigns each auto Pool a unique identifier on creation. To distinguish between Pools created for different purposes, you can specify this element to add a prefix to the ID that is assigned. The prefix can be up to 20 characters long.")
   autoPoolIdPrefix?: string;
@@ -1721,9 +1721,9 @@ model BatchPoolSpecification {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("""
-The configuration for Compute Nodes in a Pool based on the Azure Virtual
-Machines infrastructure.
-""")
+  The configuration for Compute Nodes in a Pool based on the Azure Virtual
+  Machines infrastructure.
+  """)
 model VirtualMachineConfiguration {
   @doc("A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use.")
   imageReference: ImageReference;
@@ -1739,16 +1739,16 @@ model VirtualMachineConfiguration {
   dataDisks?: DataDisk[];
 
   @doc("""
-This only applies to Images that contain the Windows operating system, and
-should only be used when you hold valid on-premises licenses for the Compute
-Nodes which will be deployed. If omitted, no on-premises licensing discount is
-applied. Values are:
-
- Windows_Server - The on-premises license is for Windows
-Server.
- Windows_Client - The on-premises license is for Windows Client.
-
-""")
+    This only applies to Images that contain the Windows operating system, and
+    should only be used when you hold valid on-premises licenses for the Compute
+    Nodes which will be deployed. If omitted, no on-premises licensing discount is
+    applied. Values are:
+    
+     Windows_Server - The on-premises license is for Windows
+    Server.
+     Windows_Client - The on-premises license is for Windows Client.
+    
+    """)
   licenseType?: string;
 
   @doc("The container configuration for the Pool. If specified, setup is performed on each Compute Node in the Pool to allow Tasks to run in containers. All regular Tasks and Job manager Tasks run on this Pool must specify the containerSettings property, and all other Tasks may specify it.")
@@ -1781,10 +1781,10 @@ model WindowsConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("""
-Settings which will be used by the data disks associated to Compute Nodes in
-the Pool. When using attached data disks, you need to mount and format the
-disks from within a VM to use them.
-""")
+  Settings which will be used by the data disks associated to Compute Nodes in
+  the Pool. When using attached data disks, you need to mount and format the
+  disks from within a VM to use them.
+  """)
 model DataDisk {
   @doc("The logical unit number. The logicalUnitNumber is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct logicalUnitNumber. The value must be between 0 and 63, inclusive.")
   @clientName("logicalUnitNumber")
@@ -1810,24 +1810,24 @@ model ContainerConfiguration {
   containerImageNames?: string[];
 
   @doc("Additional private registries from which containers can be pulled. If any Images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.")
-  containerRegistries?: ContainerRegistry[];
+  containerRegistries?: ContainerRegistryReference[];
 }
 
 @doc("""
-The disk encryption configuration applied on compute nodes in the pool.
-Disk encryption configuration is not supported on Linux pool created with
-Azure Compute Gallery Image.
-""")
+  The disk encryption configuration applied on compute nodes in the pool.
+  Disk encryption configuration is not supported on Linux pool created with
+  Azure Compute Gallery Image.
+  """)
 model DiskEncryptionConfiguration {
   @doc("The list of disk targets Batch Service will encrypt on the compute node. If omitted, no disks on the compute nodes in the pool will be encrypted. On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified.")
   targets?: DiskEncryptionTarget[];
 }
 
 @doc("""
-For regional placement, nodes in the pool will be allocated in the same region.
-For zonal placement, nodes in the pool will be spread across different zones
-with best effort balancing.
-""")
+  For regional placement, nodes in the pool will be allocated in the same region.
+  For zonal placement, nodes in the pool will be spread across different zones
+  with best effort balancing.
+  """)
 model BatchNodePlacementConfiguration {
   @doc("Node placement Policy type on Batch Pools. Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy.")
   policy?: BatchNodePlacementPolicyType;
@@ -1884,9 +1884,9 @@ model OSDisk {
 }
 
 @doc("""
-Specifies the ephemeral Disk Settings for the operating system disk used by the
-compute node (VM).
-""")
+  Specifies the ephemeral Disk Settings for the operating system disk used by the
+  compute node (VM).
+  """)
 model DiffDiskSettings {
   @doc("Specifies the ephemeral disk placement for operating system disk for all VMs in the pool. This property can be used by user in the request to choose the location e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.")
   placement?: DiffDiskPlacement;
@@ -1923,15 +1923,15 @@ model NetworkConfiguration {
 model BatchPoolEndpointConfiguration {
   @doc("A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.")
   @clientName("inboundNatPools")
-  inboundNATPools: InboundNATPool[];
+  inboundNATPools: InboundNatPool[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("""
-A inbound NAT Pool that can be used to address specific ports on Compute Nodes
-in a Batch Pool externally.
-""")
-model InboundNATPool {
+  A inbound NAT Pool that can be used to address specific ports on Compute Nodes
+  in a Batch Pool externally.
+  """)
+model InboundNatPool {
   @doc("The name of the endpoint. The name must be unique within a Batch Pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400.")
   name: string;
 
@@ -1978,20 +1978,20 @@ model PublicIpAddressConfiguration {
 }
 
 @doc("""
-Batch will retry Tasks when a recovery operation is triggered on a Node.
-Examples of recovery operations include (but are not limited to) when an
-unhealthy Node is rebooted or a Compute Node disappeared due to host failure.
-Retries due to recovery operations are independent of and are not counted
-against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal
-retry due to a recovery operation may occur. Because of this, all Tasks should
-be idempotent. This means Tasks need to tolerate being interrupted and
-restarted without causing any corruption or duplicate data. The best practice
-for long running Tasks is to use some form of checkpointing. In some cases the
-StartTask may be re-run even though the Compute Node was not rebooted. Special
-care should be taken to avoid StartTasks which create breakaway process or
-install/launch services from the StartTask working directory, as this will
-block Batch from being able to re-run the StartTask.
-""")
+  Batch will retry Tasks when a recovery operation is triggered on a Node.
+  Examples of recovery operations include (but are not limited to) when an
+  unhealthy Node is rebooted or a Compute Node disappeared due to host failure.
+  Retries due to recovery operations are independent of and are not counted
+  against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal
+  retry due to a recovery operation may occur. Because of this, all Tasks should
+  be idempotent. This means Tasks need to tolerate being interrupted and
+  restarted without causing any corruption or duplicate data. The best practice
+  for long running Tasks is to use some form of checkpointing. In some cases the
+  StartTask may be re-run even though the Compute Node was not rebooted. Special
+  care should be taken to avoid StartTasks which create breakaway process or
+  install/launch services from the StartTask working directory, as this will
+  block Batch from being able to re-run the StartTask.
+  """)
 model BatchStartTask {
   @doc("The command line of the StartTask. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).")
   commandLine: string;
@@ -2016,9 +2016,9 @@ model BatchStartTask {
 }
 
 @doc("""
-Properties used to create a user used to execute Tasks on an Azure Batch
-Compute Node.
-""")
+  Properties used to create a user used to execute Tasks on an Azure Batch
+  Compute Node.
+  """)
 model UserAccount {
   @doc("The name of the user Account. Names can contain any Unicode characters up to a maximum length of 20.")
   name: string;
@@ -2063,9 +2063,9 @@ model ManagedDisk {
 }
 
 @doc("""
-The Batch service does not assign any meaning to this metadata; it is solely
-for the use of user code.
-""")
+  The Batch service does not assign any meaning to this metadata; it is solely
+  for the use of user code.
+  """)
 model MetadataItem {
   @doc("The name of the metadata item.")
   name: string;
@@ -2167,9 +2167,9 @@ model AzureFileShareConfiguration {
 }
 
 @doc("""
-Contains information about Jobs that have been and will be run under a Job
-Schedule.
-""")
+  Contains information about Jobs that have been and will be run under a Job
+  Schedule.
+  """)
 model BatchJobScheduleExecutionInfo {
   @doc("The next time at which a Job will be created under this schedule. This property is meaningful only if the schedule is in the active state when the time comes around. For example, if the schedule is disabled, no Job will be created at nextRunTime unless the Job is enabled before then.")
   nextRunTime?: utcDateTime;
@@ -2487,9 +2487,9 @@ model BatchJobListResult {
 }
 
 @doc("""
-The result of listing the status of the Job Preparation and Job Release Tasks
-for a Job.
-""")
+  The result of listing the status of the Job Preparation and Job Release Tasks
+  for a Job.
+  """)
 @pagedResult
 model BatchJobPreparationAndReleaseTaskStatusListResult {
   @doc("A list of Job Preparation and Job Release Task execution information.")
@@ -2521,9 +2521,9 @@ model BatchJobPreparationAndReleaseTaskStatus {
 }
 
 @doc("""
-Contains information about the execution of a Job Preparation Task on a Compute
-Node.
-""")
+  Contains information about the execution of a Job Preparation Task on a Compute
+  Node.
+  """)
 model BatchJobPreparationTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -2587,9 +2587,9 @@ model BatchTaskFailureInfo {
 }
 
 @doc("""
-Contains information about the execution of a Job Release Task on a Compute
-Node.
-""")
+  Contains information about the execution of a Job Release Task on a Compute
+  Node.
+  """)
 model BatchJobReleaseTaskExecutionInfo {
   @doc("The time at which the Task started running. If the Task has been restarted or retried, this is the most recent time at which the Task started running.")
   startTime: utcDateTime;
@@ -3026,16 +3026,16 @@ model BatchNodeRemoveContent {
 }
 
 @doc("""
-Batch will retry Tasks when a recovery operation is triggered on a Node.
-Examples of recovery operations include (but are not limited to) when an
-unhealthy Node is rebooted or a Compute Node disappeared due to host failure.
-Retries due to recovery operations are independent of and are not counted
-against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal
-retry due to a recovery operation may occur. Because of this, all Tasks should
-be idempotent. This means Tasks need to tolerate being interrupted and
-restarted without causing any corruption or duplicate data. The best practice
-for long running Tasks is to use some form of checkpointing.
-""")
+  Batch will retry Tasks when a recovery operation is triggered on a Node.
+  Examples of recovery operations include (but are not limited to) when an
+  unhealthy Node is rebooted or a Compute Node disappeared due to host failure.
+  Retries due to recovery operations are independent of and are not counted
+  against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal
+  retry due to a recovery operation may occur. Because of this, all Tasks should
+  be idempotent. This means Tasks need to tolerate being interrupted and
+  restarted without causing any corruption or duplicate data. The best practice
+  for long running Tasks is to use some form of checkpointing.
+  """)
 model BatchTask {
   @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters.")
   @visibility("read")
@@ -3146,8 +3146,8 @@ model BatchTask {
 }
 
 @doc("""
-Parameters for creating an Azure Batch Task.
-""")
+  Parameters for creating an Azure Batch Task.
+  """)
 model BatchTaskCreateContent {
   @doc("A string that uniquely identifies the Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within a Job that differ only by case).")
   id: string;
@@ -3217,9 +3217,9 @@ model ExitConditions {
 }
 
 @doc("""
-How the Batch service should respond if a Task exits with a particular exit
-code.
-""")
+  How the Batch service should respond if a Task exits with a particular exit
+  code.
+  """)
 model ExitCodeMapping {
   @doc("A process exit code.")
   code: int32;
@@ -3238,9 +3238,9 @@ model ExitOptions {
 }
 
 @doc("""
-A range of exit codes and how the Batch service should respond to exit codes
-within that range.
-""")
+  A range of exit codes and how the Batch service should respond to exit codes
+  within that range.
+  """)
 model ExitCodeRangeMapping {
   @doc("The first exit code in the range.")
   start: int32;
@@ -3253,9 +3253,9 @@ model ExitCodeRangeMapping {
 }
 
 @doc("""
-A locality hint that can be used by the Batch service to select a Compute Node
-on which to start a Task.
-""")
+  A locality hint that can be used by the Batch service to select a Compute Node
+  on which to start a Task.
+  """)
 model AffinityInfo {
   @doc("An opaque string representing the location of a Compute Node or a Task that has run previously. You can pass the affinityId of a Node to indicate that this Task needs to run on that Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId: string;
@@ -3316,11 +3316,11 @@ model BatchNodeInfo {
 }
 
 @doc("""
-Multi-instance Tasks are commonly used to support MPI Tasks. In the MPI case,
-if any of the subtasks fail (for example due to exiting with a non-zero exit
-code) the entire multi-instance Task fails. The multi-instance Task is then
-terminated and retried, up to its retry limit.
-""")
+  Multi-instance Tasks are commonly used to support MPI Tasks. In the MPI case,
+  if any of the subtasks fail (for example due to exiting with a non-zero exit
+  code) the entire multi-instance Task fails. The multi-instance Task is then
+  terminated and retried, up to its retry limit.
+  """)
 model MultiInstanceSettings {
   @doc("The number of Compute Nodes required by the Task. If omitted, the default is 1.")
   numberOfInstances?: int32;
@@ -3372,10 +3372,10 @@ model BatchTaskStatistics {
 }
 
 @doc("""
-Specifies any dependencies of a Task. Any Task that is explicitly specified or
-within a dependency range must complete before the dependant Task will be
-scheduled.
-""")
+  Specifies any dependencies of a Task. Any Task that is explicitly specified or
+  within a dependency range must complete before the dependant Task will be
+  scheduled.
+  """)
 model BatchTaskDependencies {
   @doc("The list of Task IDs that this Task depends on. All Tasks in this list must complete successfully before the dependent Task can be scheduled. The taskIds collection is limited to 64000 characters total (i.e. the combined length of all Task IDs). If the taskIds collection exceeds the maximum length, the Add Task request fails with error code TaskDependencyListTooLong. In this case consider using Task ID ranges instead.")
   taskIds?: string[];
@@ -3385,9 +3385,9 @@ model BatchTaskDependencies {
 }
 
 @doc("""
-The start and end of the range are inclusive. For example, if a range has start
-9 and end 12, then it represents Tasks '9', '10', '11' and '12'.
-""")
+  The start and end of the range are inclusive. For example, if a range has start
+  9 and end 12, then it represents Tasks '9', '10', '11' and '12'.
+  """)
 model BatchTaskIdRange {
   @doc("The first Task ID in the range.")
   start: int32;
@@ -3743,9 +3743,9 @@ model InboundEndpoint {
 }
 
 @doc("""
-The Batch Compute Node agent is a program that runs on each Compute Node in the
-Pool and provides Batch capability on the Compute Node.
-""")
+  The Batch Compute Node agent is a program that runs on each Compute Node in the
+  Pool and provides Batch capability on the Compute Node.
+  """)
 model BatchNodeAgentInfo {
   @doc("The version of the Batch Compute Node agent running on the Compute Node. This version number can be checked against the Compute Node agent release notes located at https://github.com/Azure/Batch/blob/master/changelogs/nodeagent/CHANGELOG.md.")
   version: string;

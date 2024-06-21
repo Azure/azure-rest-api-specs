@@ -1,131 +1,202 @@
 {
   "swagger": "2.0",
   "info": {
+    "title": "Azure App Configuration",
     "version": "2023-11-01",
-    "title": "Azure App Configuration"
+    "description": "Azure App Configuration REST API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
   "schemes": [
     "https"
   ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://azconfig.io/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Connection String",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://azconfig.io/.default": ""
+      }
+    }
+  },
+  "tags": [],
   "paths": {
     "/keys": {
       "get": {
-        "tags": [
-          "Keys"
-        ],
-        "summary": "Gets a list of keys.",
         "operationId": "GetKeys",
-        "consumes": [],
+        "summary": "Gets a list of keys.",
+        "description": "Gets a list of keys.",
         "produces": [
           "application/vnd.microsoft.appconfig.keyset+json",
-          "application/problem+json"
+          "application/problem+json",
+          "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "query",
             "description": "A filter for the name of the returned keys.",
+            "required": false,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
           },
           {
             "name": "After",
             "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred to by the specified token.",
-            "type": "string"
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "Accept-Datetime",
             "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified time.",
-            "type": "string"
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyListResult"
             },
             "headers": {
               "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
         },
         "x-ms-examples": {
-          "GetKeys": {
+          "Gets a list of keys.": {
             "$ref": "./examples/GetKeys.json"
           }
         },
         "x-ms-pageable": {
-          "itemName": "items",
           "nextLinkName": "@nextLink"
         }
       },
       "head": {
-        "tags": [
-          "Keys"
-        ],
-        "summary": "Requests the headers and status of the given resource.",
         "operationId": "CheckKeys",
-        "consumes": [],
-        "produces": [],
+        "summary": "Requests the headers and status of the given resource.",
+        "description": "Requests the headers and status of the given resource.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "query",
             "description": "A filter for the name of the returned keys.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "After",
             "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred to by the specified token.",
-            "type": "string"
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
           },
           {
             "name": "Accept-Datetime",
             "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified time.",
-            "type": "string"
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "headers": {
               "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response."
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
-          "CheckKeys": {
+          "Check keys": {
             "$ref": "./examples/CheckKeys.json"
           }
         }
@@ -133,240 +204,402 @@
     },
     "/kv": {
       "get": {
-        "tags": [
-          "KeyValues"
-        ],
-        "summary": "Gets a list of key-values.",
         "operationId": "GetKeyValues",
-        "consumes": [],
+        "summary": "Gets a list of key-values.",
+        "description": "Gets a list of key-values.",
         "produces": [
           "application/vnd.microsoft.appconfig.kvset+json",
-          "application/problem+json"
+          "application/problem+json",
+          "application/json"
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "key",
             "in": "query",
-            "description": "A filter used to match keys. Syntax reference: https://aka.ms/azconfig/docs/keyvaluefiltering",
+            "description": "A filter used to match keys. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
+            "required": false,
             "type": "string"
           },
           {
             "name": "label",
             "in": "query",
-            "description": "A filter used to match labels. Syntax reference: https://aka.ms/azconfig/docs/keyvaluefiltering",
+            "description": "A filter used to match labels. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "After",
             "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred to by the specified token.",
-            "type": "string"
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
           },
           {
             "name": "Accept-Datetime",
             "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified time.",
-            "type": "string"
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
           },
           {
-            "$ref": "#/parameters/KeyValueFields"
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "key",
+                "label",
+                "content_type",
+                "value",
+                "last_modified",
+                "tags",
+                "locked",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
           },
           {
             "name": "snapshot",
             "in": "query",
-            "description": "A filter used get key-values for a snapshot. The value should be the name of the snapshot. Not valid when used with 'key' and 'label' filters.",
+            "description": "A filter used get key-values for a snapshot. The value should be the name of\nthe snapshot. Not valid when used with 'key' and 'label' filters.",
+            "required": false,
             "type": "string"
           },
           {
             "name": "If-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "If-None-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "tags",
             "in": "query",
-            "description": "A filter used to query by tags. Syntax reference: https://aka.ms/azconfig/docs/keyvaluefiltering",
+            "description": "A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
+            "required": false,
             "type": "array",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi",
-            "uniqueItems": true
+            "collectionFormat": "multi"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValueListResult"
             },
             "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
               "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
         },
         "x-ms-examples": {
-          "GetKeyValues": {
-            "$ref": "./examples/GetKeyValues.json"
-          },
-          "GetKeyValues_IfMatch": {
+          "Gets a list of key-values using the If-Match header.": {
             "$ref": "./examples/GetKeyValues_IfMatch.json"
           },
-          "GetKeyValues_IfNoneMatch": {
+          "Gets a list of key-values using the If-None-Match header.": {
             "$ref": "./examples/GetKeyValues_IfNoneMatch.json"
+          },
+          "Gets a list of key-values.": {
+            "$ref": "./examples/GetKeyValues.json"
           }
         },
         "x-ms-pageable": {
-          "itemName": "items",
           "nextLinkName": "@nextLink"
         }
       },
       "head": {
-        "tags": [
-          "KeyValues"
-        ],
-        "summary": "Requests the headers and status of the given resource.",
         "operationId": "CheckKeyValues",
-        "consumes": [],
-        "produces": [],
+        "summary": "Requests the headers and status of the given resource.",
+        "description": "Requests the headers and status of the given resource.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "key",
             "in": "query",
-            "description": "A filter used to match keys. Syntax reference: https://aka.ms/azconfig/docs/keyvaluefiltering",
+            "description": "A filter used to match keys. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
+            "required": false,
             "type": "string"
           },
           {
             "name": "label",
             "in": "query",
-            "description": "A filter used to match labels. Syntax reference: https://aka.ms/azconfig/docs/keyvaluefiltering",
+            "description": "A filter used to match labels. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "After",
             "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred to by the specified token.",
-            "type": "string"
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
           },
           {
             "name": "Accept-Datetime",
             "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified time.",
-            "type": "string"
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
           },
           {
-            "$ref": "#/parameters/KeyValueFields"
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "key",
+                "label",
+                "content_type",
+                "value",
+                "last_modified",
+                "tags",
+                "locked",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
           },
           {
             "name": "snapshot",
             "in": "query",
             "description": "A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.",
+            "required": false,
             "type": "string"
           },
           {
             "name": "If-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "If-None-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "tags",
             "in": "query",
-            "description": "A filter used to query by tags. Syntax reference: https://aka.ms/azconfig/docs/keyvaluefiltering",
+            "description": "A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
+            "required": false,
             "type": "array",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi",
-            "uniqueItems": true
+            "collectionFormat": "multi"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
               "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response."
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
-          "CheckKeyValues": {
-            "$ref": "./examples/CheckKeyValues.json"
-          },
-          "CheckKeyValues_IfMatch": {
+          "Requests the headers and status of the given resource using the If-Match header.": {
             "$ref": "./examples/CheckKeyValues_IfMatch.json"
           },
-          "CheckKeyValues_IfNoneMatch": {
+          "Requests the headers and status of the given resource using the If-None-Match header.": {
             "$ref": "./examples/CheckKeyValues_IfNoneMatch.json"
+          },
+          "Requests the headers and status of the given resource.": {
+            "$ref": "./examples/CheckKeyValues.json"
           }
         }
       }
     },
     "/kv/{key}": {
       "get": {
-        "tags": [
-          "KeyValues"
-        ],
-        "summary": "Gets a single key-value.",
         "operationId": "GetKeyValue",
-        "consumes": [],
+        "summary": "Gets a single key-value.",
+        "description": "Gets a single key-value.",
         "produces": [
           "application/vnd.microsoft.appconfig.kv+json",
-          "application/problem+json"
+          "application/problem+json",
+          "application/json"
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "key",
             "in": "path",
-            "description": "The key of the key-value to retrieve.",
+            "description": "The key of the key-value.",
             "required": true,
             "type": "string"
           },
@@ -374,78 +607,163 @@
             "name": "label",
             "in": "query",
             "description": "The label of the key-value to retrieve.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SyncTokens"
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "key",
+                "label",
+                "content_type",
+                "value",
+                "last_modified",
+                "tags",
+                "locked",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
           },
           {
-            "$ref": "#/parameters/ApiVersion"
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "Accept-Datetime",
             "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified time.",
-            "type": "string"
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
           },
           {
             "name": "If-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "If-None-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/KeyValueFields"
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
               "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
         },
         "x-ms-examples": {
-          "GetKeyValue": {
-            "$ref": "./examples/GetKeyValue.json"
-          },
-          "GetKeyValue_IfMatch": {
+          "Gets a single key-value using the If-Match header.": {
             "$ref": "./examples/GetKeyValue_IfMatch.json"
           },
-          "GetKeyValue_IfNoneMatch": {
+          "Gets a single key-value using the If-None-Match header.": {
             "$ref": "./examples/GetKeyValue_IfNoneMatch.json"
+          },
+          "Gets a single key-value.": {
+            "$ref": "./examples/GetKeyValue.json"
           }
         }
       },
       "put": {
-        "tags": [
-          "KeyValues"
-        ],
-        "summary": "Creates a key-value.",
         "operationId": "PutKeyValue",
+        "summary": "Creates a key-value.",
+        "description": "Creates a key-value.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.kv+json",
+          "application/problem+json",
+          "application/json"
+        ],
         "consumes": [
           "application/vnd.microsoft.appconfig.kv+json",
           "application/vnd.microsoft.appconfig.kvset+json",
@@ -454,11 +772,10 @@
           "application/*+json",
           "application/json-patch+json"
         ],
-        "produces": [
-          "application/vnd.microsoft.appconfig.kv+json",
-          "application/problem+json"
-        ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "key",
             "in": "path",
@@ -470,80 +787,92 @@
             "name": "label",
             "in": "query",
             "description": "The label of the key-value to create.",
+            "required": false,
             "type": "string"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "entity",
             "in": "body",
             "description": "The key-value to create.",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/KeyValue"
             }
-          },
-          {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
               "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
         },
         "x-ms-examples": {
-          "PutKeyValue": {
-            "$ref": "./examples/PutKeyValue.json"
-          },
-          "PutKeyValue_IfMatch": {
+          "Creates a key-value with the If-Match header.": {
             "$ref": "./examples/PutKeyValue_IfMatch.json"
+          },
+          "Creates a key-value.": {
+            "$ref": "./examples/PutKeyValue.json"
           }
         }
       },
       "delete": {
-        "tags": [
-          "KeyValues"
-        ],
-        "summary": "Deletes a key-value.",
         "operationId": "DeleteKeyValue",
-        "consumes": [],
+        "summary": "Deletes a key-value.",
+        "description": "Deletes a key-value.",
         "produces": [
           "application/vnd.microsoft.appconfig.kv+json",
-          "application/problem+json"
+          "application/problem+json",
+          "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "key",
             "in": "path",
@@ -555,72 +884,79 @@
             "name": "label",
             "in": "query",
             "description": "The label of the key-value to delete.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "If-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
               "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "204": {
-            "description": "Success",
+            "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
               "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
         },
         "x-ms-examples": {
-          "DeleteKeyValue": {
-            "$ref": "./examples/DeleteKeyValue.json"
-          },
-          "DeleteKeyValue_IfMatch": {
+          "Deletes a key-value using If-Match header": {
             "$ref": "./examples/DeleteKeyValue_IfMatch.json"
+          },
+          "Deletes a key-value.": {
+            "$ref": "./examples/DeleteKeyValue.json"
           }
         }
       },
       "head": {
-        "tags": [
-          "KeyValues"
-        ],
-        "summary": "Requests the headers and status of the given resource.",
         "operationId": "CheckKeyValue",
-        "consumes": [],
-        "produces": [],
+        "summary": "Requests the headers and status of the given resource.",
+        "description": "Requests the headers and status of the given resource.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "key",
             "in": "path",
@@ -632,622 +968,339 @@
             "name": "label",
             "in": "query",
             "description": "The label of the key-value to retrieve.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "Accept-Datetime",
             "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified time.",
-            "type": "string"
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
           },
           {
             "name": "If-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "If-None-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
-            "$ref": "#/parameters/KeyValueFields"
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "key",
+                "label",
+                "content_type",
+                "value",
+                "last_modified",
+                "tags",
+                "locked",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
               "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response."
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
-          "CheckKeyValue": {
-            "$ref": "./examples/CheckKeyValue.json"
-          },
-          "CheckKeyValue_IfMatch": {
+          "Requests the headers and status of the given resource using the If-Match header.": {
             "$ref": "./examples/CheckKeyValue_IfMatch.json"
           },
-          "CheckKeyValue_IfNoneMatch": {
+          "Requests the headers and status of the given resource using the If-None-Match header.": {
             "$ref": "./examples/CheckKeyValue_IfNoneMatch.json"
-          }
-        }
-      }
-    },
-    "/snapshots": {
-      "get": {
-        "tags": [
-          "Snapshots"
-        ],
-        "summary": "Gets a list of key-value snapshots.",
-        "operationId": "GetSnapshots",
-        "consumes": [],
-        "produces": [
-          "application/vnd.microsoft.appconfig.snapshotset+json",
-          "application/problem+json"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "description": "A filter for the name of the returned snapshots.",
-            "type": "string"
           },
-          {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "After",
-            "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred to by the specified token.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SnapshotFields"
-          },
-          {
-            "$ref": "#/parameters/Status"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SnapshotListResult"
-            },
-            "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetSnapshots": {
-            "$ref": "./examples/GetSnapshots.json"
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "items",
-          "nextLinkName": "@nextLink"
-        }
-      },
-      "head": {
-        "tags": [
-          "Snapshots"
-        ],
-        "summary": "Requests the headers and status of the given resource.",
-        "operationId": "CheckSnapshots",
-        "consumes": [],
-        "produces": [],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "After",
-            "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred to by the specified token.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response."
-          }
-        },
-        "x-ms-examples": {
-          "CheckSnapshots": {
-            "$ref": "./examples/CheckSnapshots.json"
-          }
-        }
-      }
-    },
-    "/snapshots/{name}": {
-      "get": {
-        "tags": [
-          "Snapshots"
-        ],
-        "summary": "Gets a single key-value snapshot.",
-        "operationId": "GetSnapshot",
-        "consumes": [],
-        "produces": [
-          "application/vnd.microsoft.appconfig.snapshot+json",
-          "application/problem+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the key-value snapshot to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SnapshotFields"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            },
-            "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
-              "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
-              },
-              "Link": {
-                "description": "Includes links to related resources.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetSnapshot": {
-            "$ref": "./examples/GetSnapshot.json"
-          },
-          "GetSnapshot_IfMatch": {
-            "$ref": "./examples/GetSnapshot_IfMatch.json"
-          },
-          "GetSnapshot_IfNoneMatch": {
-            "$ref": "./examples/GetSnapshot_IfNoneMatch.json"
-          },
-          "GetSnapshot_Failed": {
-            "$ref": "./examples/GetSnapshot_Failed.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Snapshots"
-        ],
-        "summary": "Creates a key-value snapshot.",
-        "operationId": "CreateSnapshot",
-        "consumes": [
-          "application/vnd.microsoft.appconfig.snapshot+json",
-          "application/json"
-        ],
-        "produces": [
-          "application/vnd.microsoft.appconfig.snapshot+json",
-          "application/problem+json"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the key-value snapshot to create.",
-            "required": true,
-            "type": "string",
-            "maxLength": 256
-          },
-          {
-            "name": "entity",
-            "in": "body",
-            "description": "The key-value snapshot to create.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
-          {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            },
-            "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
-              "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
-              },
-              "Link": {
-                "description": "Includes links to related resources.",
-                "type": "string"
-              },
-              "Operation-Location": {
-                "description": "The URL to track the status of the long running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateSnapshot": {
-            "$ref": "./examples/CreateSnapshot.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "tags": [
-          "Snapshots"
-        ],
-        "summary": "Updates the state of a key-value snapshot.",
-        "operationId": "UpdateSnapshot",
-        "consumes": [
-          "application/json",
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/vnd.microsoft.appconfig.snapshot+json",
-          "application/problem+json"
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the key-value snapshot to update.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "entity",
-            "in": "body",
-            "description": "The parameters used to update the snapshot.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SnapshotUpdateParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            },
-            "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
-              "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
-              },
-              "Link": {
-                "description": "Includes links to related resources.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateSnapshot": {
-            "$ref": "./examples/UpdateSnapshot.json"
-          },
-          "UpdateSnapshot_IfMatch": {
-            "$ref": "./examples/UpdateSnapshot_IfMatch.json"
-          }
-        }
-      },
-      "head": {
-        "tags": [
-          "Snapshots"
-        ],
-        "summary": "Requests the headers and status of the given resource.",
-        "operationId": "CheckSnapshot",
-        "consumes": [],
-        "produces": [],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the key-value snapshot to check.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
-              "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
-              },
-              "Link": {
-                "description": "Includes links to related resources.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response."
-          }
-        },
-        "x-ms-examples": {
-          "CheckSnapshot": {
-            "$ref": "./examples/CheckSnapshot.json"
-          },
-          "CheckSnapshot_IfMatch": {
-            "$ref": "./examples/CheckSnapshot_IfMatch.json"
-          },
-          "CheckSnapshot_IfNoneMatch": {
-            "$ref": "./examples/CheckSnapshot_IfNoneMatch.json"
+          "Requests the headers and status of the given resource.": {
+            "$ref": "./examples/CheckKeyValue.json"
           }
         }
       }
     },
     "/labels": {
       "get": {
-        "tags": [
-          "Labels"
-        ],
-        "summary": "Gets a list of labels.",
         "operationId": "GetLabels",
-        "consumes": [],
+        "summary": "Gets a list of labels.",
+        "description": "Gets a list of labels.",
         "produces": [
           "application/vnd.microsoft.appconfig.labelset+json",
-          "application/problem+json"
+          "application/problem+json",
+          "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "query",
             "description": "A filter for the name of the returned labels.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "After",
             "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred to by the specified token.",
-            "type": "string"
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
           },
           {
             "name": "Accept-Datetime",
             "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified time.",
-            "type": "string"
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
           },
           {
-            "$ref": "#/parameters/LabelFields"
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "name"
+              ],
+              "x-ms-enum": {
+                "name": "LabelFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/LabelListResult"
             },
             "headers": {
               "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
         },
         "x-ms-examples": {
-          "GetLabels": {
+          "Gets a list of labels.": {
             "$ref": "./examples/GetLabels.json"
           }
         },
         "x-ms-pageable": {
-          "itemName": "items",
           "nextLinkName": "@nextLink"
         }
       },
       "head": {
-        "tags": [
-          "Labels"
-        ],
-        "summary": "Requests the headers and status of the given resource.",
         "operationId": "CheckLabels",
-        "consumes": [],
-        "produces": [],
+        "summary": "Requests the headers and status of the given resource.",
+        "description": "Requests the headers and status of the given resource.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "query",
             "description": "A filter for the name of the returned labels.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "After",
             "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred to by the specified token.",
-            "type": "string"
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
           },
           {
             "name": "Accept-Datetime",
             "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified time.",
-            "type": "string"
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
           },
           {
-            "$ref": "#/parameters/LabelFields"
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "name"
+              ],
+              "x-ms-enum": {
+                "name": "LabelFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "headers": {
               "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response."
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
-          "CheckLabels": {
+          "Requests the headers and status of the given resource.": {
             "$ref": "./examples/CheckLabels.json"
           }
         }
@@ -1255,17 +1308,18 @@
     },
     "/locks/{key}": {
       "put": {
-        "tags": [
-          "Locks"
-        ],
-        "summary": "Locks a key-value.",
         "operationId": "PutLock",
-        "consumes": [],
+        "summary": "Locks a key-value.",
+        "description": "Locks a key-value.",
         "produces": [
           "application/vnd.microsoft.appconfig.kv+json",
-          "application/problem+json"
+          "application/problem+json",
+          "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "key",
             "in": "path",
@@ -1277,72 +1331,83 @@
             "name": "label",
             "in": "query",
             "description": "The label, if any, of the key-value to lock.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "If-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "If-None-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
               "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
         },
         "x-ms-examples": {
-          "PutLock": {
-            "$ref": "./examples/PutLock.json"
-          },
-          "PutLock_IfMatch": {
+          "Locks a key-value using If-Match header.": {
             "$ref": "./examples/PutLock_IfMatch.json"
+          },
+          "Locks a key-value.": {
+            "$ref": "./examples/PutLock.json"
           }
         }
       },
       "delete": {
-        "tags": [
-          "Locks"
-        ],
-        "summary": "Unlocks a key-value.",
         "operationId": "DeleteLock",
-        "consumes": [],
+        "summary": "Unlocks a key-value.",
+        "description": "Unlocks a key-value.",
         "produces": [
           "application/vnd.microsoft.appconfig.kv+json",
-          "application/problem+json"
+          "application/problem+json",
+          "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "key",
             "in": "path",
@@ -1354,246 +1419,79 @@
             "name": "label",
             "in": "query",
             "description": "The label, if any, of the key-value to unlock.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "If-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "If-None-Match",
             "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not match the value provided.",
-            "type": "string"
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValue"
             },
             "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
               "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
               }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
         },
         "x-ms-examples": {
-          "DeleteLock": {
-            "$ref": "./examples/DeleteLock.json"
-          },
-          "DeleteLock_IfMatch": {
+          "Unlocks a key-value using If-Match header.": {
             "$ref": "./examples/DeleteLock_IfMatch.json"
-          }
-        }
-      }
-    },
-    "/revisions": {
-      "get": {
-        "tags": [
-          "Revisions"
-        ],
-        "summary": "Gets a list of key-value revisions.",
-        "operationId": "GetRevisions",
-        "consumes": [],
-        "produces": [
-          "application/vnd.microsoft.appconfig.kvset+json",
-          "application/problem+json"
-        ],
-        "parameters": [
-          {
-            "name": "key",
-            "in": "query",
-            "description": "A filter used to match keys. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
-            "type": "string"
           },
-          {
-            "name": "label",
-            "in": "query",
-            "description": "A filter used to match labels. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "After",
-            "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred to by the specified token.",
-            "type": "string"
-          },
-          {
-            "name": "Accept-Datetime",
-            "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified time.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/KeyValueFields"
-          },
-          {
-            "name": "tags",
-            "in": "query",
-            "description": "A filter used to query by tags. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "uniqueItems": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/KeyValueListResult"
-            },
-            "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
-              "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetRevisions": {
-            "$ref": "./examples/GetRevisions.json"
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "items",
-          "nextLinkName": "@nextLink"
-        }
-      },
-      "head": {
-        "tags": [
-          "Revisions"
-        ],
-        "summary": "Requests the headers and status of the given resource.",
-        "operationId": "CheckRevisions",
-        "consumes": [],
-        "produces": [],
-        "parameters": [
-          {
-            "name": "key",
-            "in": "query",
-            "description": "A filter used to match keys. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
-            "type": "string"
-          },
-          {
-            "name": "label",
-            "in": "query",
-            "description": "A filter used to match labels. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SyncTokens"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "After",
-            "in": "query",
-            "description": "Instructs the server to return elements that appear after the element referred to by the specified token.",
-            "type": "string"
-          },
-          {
-            "name": "Accept-Datetime",
-            "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified time.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/KeyValueFields"
-          },
-          {
-            "name": "tags",
-            "in": "query",
-            "description": "A filter used to query by tags. Syntax reference: https://aka.ms/azconfig/docs/restapirevisions",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "uniqueItems": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "headers": {
-              "Sync-Token": {
-                "description": "Enables real-time consistency between requests by providing the returned value in the next request made to the server.",
-                "type": "string"
-              },
-              "ETag": {
-                "description": "An identifier representing the returned state of the resource.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response."
-          }
-        },
-        "x-ms-examples": {
-          "CheckRevisions": {
-            "$ref": "./examples/CheckRevisions.json"
+          "Unlocks a key-value.": {
+            "$ref": "./examples/DeleteLock.json"
           }
         }
       }
     },
     "/operations": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Gets the state of a long running operation.",
         "operationId": "GetOperationDetails",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Gets the state of a long running operation.",
+        "description": "Gets the state of a long running operation.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersion"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "name": "snapshot",
@@ -1601,47 +1499,1233 @@
             "description": "Snapshot identifier for the long running operation.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/OperationDetails"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
         },
         "x-ms-examples": {
-          "GetOperationStatus": {
+          "Gets the state of a long running operation.": {
             "$ref": "./examples/GetOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/revisions": {
+      "get": {
+        "operationId": "GetRevisions",
+        "summary": "Gets a list of key-value revisions.",
+        "description": "Gets a list of key-value revisions.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.kvset+json",
+          "application/problem+json",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "A filter used to match keys. Syntax reference:\nhttps://aka.ms/azconfig/docs/restapirevisions",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "label",
+            "in": "query",
+            "description": "A filter used to match labels. Syntax reference:\nhttps://aka.ms/azconfig/docs/restapirevisions",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "After",
+            "in": "query",
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
+          },
+          {
+            "name": "Accept-Datetime",
+            "in": "header",
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
+          },
+          {
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "key",
+                "label",
+                "content_type",
+                "value",
+                "last_modified",
+                "tags",
+                "locked",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/restapirevisions",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KeyValueListResult"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of key-value revisions.": {
+            "$ref": "./examples/GetRevisions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      },
+      "head": {
+        "operationId": "CheckRevisions",
+        "summary": "Requests the headers and status of the given resource.",
+        "description": "Requests the headers and status of the given resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "A filter used to match keys. Syntax reference:\nhttps://aka.ms/azconfig/docs/restapirevisions",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "label",
+            "in": "query",
+            "description": "A filter used to match labels. Syntax reference:\nhttps://aka.ms/azconfig/docs/restapirevisions",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "After",
+            "in": "query",
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
+          },
+          {
+            "name": "Accept-Datetime",
+            "in": "header",
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
+          },
+          {
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "key",
+                "label",
+                "content_type",
+                "value",
+                "last_modified",
+                "tags",
+                "locked",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "KeyValueFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/restapirevisions",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Requests the headers and status of the given resource.": {
+            "$ref": "./examples/CheckRevisions.json"
+          }
+        }
+      }
+    },
+    "/snapshots": {
+      "get": {
+        "operationId": "GetSnapshots",
+        "summary": "Gets a list of key-value snapshots.",
+        "description": "Gets a list of key-value snapshots.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.snapshotset+json",
+          "application/problem+json",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A filter for the name of the returned snapshots.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "After",
+            "in": "query",
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
+          },
+          {
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "name",
+                "status",
+                "filters",
+                "composition_type",
+                "created",
+                "expires",
+                "retention_period",
+                "size",
+                "items_count",
+                "tags",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "SnapshotFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  },
+                  {
+                    "name": "status",
+                    "value": "status",
+                    "description": "Status field."
+                  },
+                  {
+                    "name": "filters",
+                    "value": "filters",
+                    "description": "Filters field."
+                  },
+                  {
+                    "name": "composition_type",
+                    "value": "composition_type",
+                    "description": "Composition type field."
+                  },
+                  {
+                    "name": "created",
+                    "value": "created",
+                    "description": "Created field."
+                  },
+                  {
+                    "name": "expires",
+                    "value": "expires",
+                    "description": "Expires field."
+                  },
+                  {
+                    "name": "retention_period",
+                    "value": "retention_period",
+                    "description": "Retention period field."
+                  },
+                  {
+                    "name": "size",
+                    "value": "size",
+                    "description": "Size field."
+                  },
+                  {
+                    "name": "items_count",
+                    "value": "items_count",
+                    "description": "Items count field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Used to filter returned snapshots by their status property.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "provisioning",
+                "ready",
+                "archived",
+                "failed"
+              ],
+              "x-ms-enum": {
+                "name": "SnapshotStatus",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "provisioning",
+                    "value": "provisioning",
+                    "description": "Provisioning"
+                  },
+                  {
+                    "name": "ready",
+                    "value": "ready",
+                    "description": "Ready"
+                  },
+                  {
+                    "name": "archived",
+                    "value": "archived",
+                    "description": "Archived"
+                  },
+                  {
+                    "name": "failed",
+                    "value": "failed",
+                    "description": "Failed"
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SnapshotListResult"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of key-value snapshots.": {
+            "$ref": "./examples/GetSnapshots.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      },
+      "head": {
+        "operationId": "CheckSnapshots",
+        "summary": "Requests the headers and status of the given resource.",
+        "description": "Requests the headers and status of the given resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "After",
+            "in": "query",
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Requests the headers and status of the given resource.": {
+            "$ref": "./examples/CheckSnapshots.json"
+          }
+        }
+      }
+    },
+    "/snapshots/{name}": {
+      "get": {
+        "operationId": "GetSnapshot",
+        "summary": "Gets a single key-value snapshot.",
+        "description": "Gets a single key-value snapshot.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.snapshot+json",
+          "application/problem+json",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the snapshot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "name",
+                "status",
+                "filters",
+                "composition_type",
+                "created",
+                "expires",
+                "retention_period",
+                "size",
+                "items_count",
+                "tags",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "SnapshotFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  },
+                  {
+                    "name": "status",
+                    "value": "status",
+                    "description": "Status field."
+                  },
+                  {
+                    "name": "filters",
+                    "value": "filters",
+                    "description": "Filters field."
+                  },
+                  {
+                    "name": "composition_type",
+                    "value": "composition_type",
+                    "description": "Composition type field."
+                  },
+                  {
+                    "name": "created",
+                    "value": "created",
+                    "description": "Created field."
+                  },
+                  {
+                    "name": "expires",
+                    "value": "expires",
+                    "description": "Expires field."
+                  },
+                  {
+                    "name": "retention_period",
+                    "value": "retention_period",
+                    "description": "Retention period field."
+                  },
+                  {
+                    "name": "size",
+                    "value": "size",
+                    "description": "Size field."
+                  },
+                  {
+                    "name": "items_count",
+                    "value": "items_count",
+                    "description": "Items count field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Link": {
+                "type": "string",
+                "description": "Includes links to related resources."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a single key-value snapshot failed.": {
+            "$ref": "./examples/GetSnapshot_Failed.json"
+          },
+          "Gets a single key-value snapshot using If-Match header.": {
+            "$ref": "./examples/GetSnapshot_IfMatch.json"
+          },
+          "Gets a single key-value snapshot using If-None-Match header.": {
+            "$ref": "./examples/GetSnapshot_IfNoneMatch.json"
+          },
+          "Gets a single key-value snapshot.": {
+            "$ref": "./examples/GetSnapshot.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateSnapshot",
+        "summary": "Creates a key-value snapshot.",
+        "description": "Creates a key-value snapshot.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.snapshot+json",
+          "application/problem+json",
+          "application/json"
+        ],
+        "consumes": [
+          "application/vnd.microsoft.appconfig.snapshot+json",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the key-value snapshot to create.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "entity",
+            "in": "body",
+            "description": "The key-value snapshot to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Link": {
+                "type": "string",
+                "description": "Includes links to related resources."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a key-value snapshot.": {
+            "$ref": "./examples/CreateSnapshot.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "UpdateSnapshot",
+        "summary": "Updates the state of a key-value snapshot.",
+        "description": "Updates the state of a key-value snapshot.",
+        "produces": [
+          "application/vnd.microsoft.appconfig.snapshot+json",
+          "application/problem+json",
+          "application/json"
+        ],
+        "consumes": [
+          "application/merge-patch+json",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the key-value snapshot to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "entity",
+            "in": "body",
+            "description": "The parameters used to update the snapshot.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SnapshotUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Link": {
+                "type": "string",
+                "description": "Includes links to related resources."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the state of a key-value snapshot using the If-Match header.": {
+            "$ref": "./examples/UpdateSnapshot_IfMatch.json"
+          },
+          "Updates the state of a key-value snapshot.": {
+            "$ref": "./examples/UpdateSnapshot.json"
+          }
+        }
+      },
+      "head": {
+        "operationId": "CheckSnapshot",
+        "summary": "Requests the headers and status of the given resource.",
+        "description": "Requests the headers and status of the given resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the key-value snapshot to check.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Link": {
+                "type": "string",
+                "description": "Includes links to related resources."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Requests the headers and status of the given resource using If-Match header.": {
+            "$ref": "./examples/CheckSnapshot_IfMatch.json"
+          },
+          "Requests the headers and status of the given resource using If-None-Match header": {
+            "$ref": "./examples/CheckSnapshot_IfNoneMatch.json"
+          },
+          "Requests the headers and status of the given resource.": {
+            "$ref": "./examples/CheckSnapshot.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "CompositionType": {
+      "type": "string",
+      "description": "Composition types.",
+      "enum": [
+        "key",
+        "key_label"
+      ],
+      "x-ms-enum": {
+        "name": "CompositionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "key",
+            "value": "key",
+            "description": "The 'key' composition type."
+          },
+          {
+            "name": "key_label",
+            "value": "key_label",
+            "description": "The 'key_label' composition type."
+          }
+        ]
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "Azure App Configuration error object.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the error."
+        },
+        "title": {
+          "type": "string",
+          "description": "A brief summary of the error."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the parameter that resulted in the error."
+        },
+        "detail": {
+          "type": "string",
+          "description": "A detailed description of the error."
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP status code that the error maps to."
+        }
+      }
+    },
     "Key": {
       "type": "object",
+      "description": "Keys serve as identifiers for key-values and are used to store and retrieve corresponding values.",
       "properties": {
         "name": {
           "type": "string",
-          "readOnly": true,
-          "description": "The name of the key."
+          "description": "The name of the key.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "KeyListResult": {
+      "type": "object",
+      "description": "The result of a list request.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The collection value.",
+          "items": {
+            "$ref": "#/definitions/Key"
+          },
+          "x-ms-identifiers": []
+        },
+        "@nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next set of paged results."
         }
       }
     },
     "KeyValue": {
       "type": "object",
+      "description": "A key-value pair representing application settings.",
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of the key-value."
+          "description": "The key of the key-value.",
+          "readOnly": true
         },
         "label": {
           "type": "string",
@@ -1649,23 +2733,25 @@
         },
         "content_type": {
           "type": "string",
-          "description": "The content type of the value stored within the key-value."
+          "description": "The content type of the value stored within the key-value.",
+          "x-ms-client-name": "contentType"
         },
         "value": {
           "type": "string",
           "description": "The value of the key-value."
         },
         "last_modified": {
-          "format": "date-time",
           "type": "string",
-          "description": "A date representing the last time the key-value was modified."
+          "format": "date-time",
+          "description": "A date representing the last time the key-value was modified.",
+          "x-ms-client-name": "lastModified"
         },
         "tags": {
           "type": "object",
+          "description": "The tags of the key-value",
           "additionalProperties": {
             "type": "string"
-          },
-          "description": "The tags of the key-value"
+          }
         },
         "locked": {
           "type": "boolean",
@@ -1675,225 +2761,178 @@
           "type": "string",
           "description": "A value representing the current state of the resource."
         }
-      }
-    },
-    "Snapshot": {
-      "type": "object",
+      },
       "required": [
-        "filters"
+        "key"
+      ]
+    },
+    "KeyValueFields": {
+      "type": "string",
+      "description": "Key-value fields.",
+      "enum": [
+        "key",
+        "label",
+        "content_type",
+        "value",
+        "last_modified",
+        "tags",
+        "locked",
+        "etag"
       ],
-      "properties": {
-        "name": {
-          "description": "The name of the snapshot.",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "description": "The current status of the snapshot.",
-          "type": "string",
-          "enum": [
-            "provisioning",
-            "ready",
-            "archived",
-            "failed"
-          ],
-          "x-ms-enum": {
-            "name": "SnapshotStatus",
-            "modelAsString": true
+      "x-ms-enum": {
+        "name": "KeyValueFields",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "key",
+            "value": "key",
+            "description": "Key field."
           },
-          "readOnly": true
-        },
-        "filters": {
-          "description": "A list of filters used to filter the key-values included in the snapshot.",
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 3,
-          "items": {
-            "$ref": "#/definitions/KeyValueFilter"
+          {
+            "name": "label",
+            "value": "label",
+            "description": "Label field."
+          },
+          {
+            "name": "content_type",
+            "value": "content_type",
+            "description": "Content type field."
+          },
+          {
+            "name": "value",
+            "value": "value",
+            "description": "Value field."
+          },
+          {
+            "name": "last_modified",
+            "value": "last_modified",
+            "description": "Last modified field."
+          },
+          {
+            "name": "tags",
+            "value": "tags",
+            "description": "Tags field."
+          },
+          {
+            "name": "locked",
+            "value": "locked",
+            "description": "Locked field."
+          },
+          {
+            "name": "etag",
+            "value": "etag",
+            "description": "Etag field."
           }
-        },
-        "composition_type": {
-          "description": "The composition type describes how the key-values within the snapshot are composed. The 'key' composition type ensures there are no two key-values containing the same key. The 'key_label' composition type ensures there are no two key-values containing the same key and label.",
-          "type": "string",
-          "enum": [
-            "key",
-            "key_label"
-          ],
-          "x-ms-enum": {
-            "name": "CompositionType",
-            "modelAsString": true
-          }
-        },
-        "created": {
-          "description": "The time that the snapshot was created.",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "expires": {
-          "description": "The time that the snapshot will expire.",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "retention_period": {
-          "description": "The amount of time, in seconds, that a snapshot will remain in the archived state before expiring. This property is only writable during the creation of a snapshot. If not specified, the default lifetime of key-value revisions will be used.",
-          "type": "integer",
-          "minimum": 3600,
-          "maximum": 7776000,
-          "format": "int64"
-        },
-        "size": {
-          "description": "The size in bytes of the snapshot.",
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true
-        },
-        "items_count": {
-          "description": "The amount of key-values in the snapshot.",
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true
-        },
-        "tags": {
-          "description": "The tags of the snapshot.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "etag": {
-          "description": "A value representing the current state of the snapshot.",
-          "type": "string",
-          "readOnly": true
-        }
+        ]
       }
     },
     "KeyValueFilter": {
-      "description": "Enables filtering of key-values. Syntax reference: https://aka.ms/azconfig/docs/restapisnapshots",
       "type": "object",
-      "required": [
-        "key"
-      ],
+      "description": "Enables filtering of key-values. Syntax reference:\nhttps://aka.ms/azconfig/docs/restapisnapshots",
       "properties": {
         "key": {
-          "description": "Filters key-values by their key field.",
-          "type": "string"
+          "type": "string",
+          "description": "Filters key-values by their key field."
         },
         "label": {
-          "description": "Filters key-values by their label field.",
-          "type": "string"
+          "type": "string",
+          "description": "Filters key-values by their label field."
         },
         "tags": {
-          "description": "Filters key-values by their tags field.",
           "type": "array",
+          "description": "Filters key-values by their tags field.",
           "items": {
             "type": "string"
-          },
-          "uniqueItems": true
-        }
-      }
-    },
-    "SnapshotUpdateParameters": {
-      "description": "Parameters used to update a snapshot.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "The desired status of the snapshot.",
-          "type": "string",
-          "enum": [
-            "provisioning",
-            "ready",
-            "archived",
-            "failed"
-          ],
-          "x-ms-enum": {
-            "name": "SnapshotStatus",
-            "modelAsString": true
           }
         }
-      }
+      },
+      "required": [
+        "key"
+      ]
     },
-    "SnapshotListResult": {
-      "description": "The result of a snapshot list request.",
+    "KeyValueListResult": {
       "type": "object",
+      "description": "The result of a list request.",
       "properties": {
         "items": {
-          "description": "The collection value.",
           "type": "array",
+          "description": "The collection value.",
           "items": {
-            "$ref": "#/definitions/Snapshot"
-          }
+            "$ref": "#/definitions/KeyValue"
+          },
+          "x-ms-identifiers": []
+        },
+        "etag": {
+          "type": "string",
+          "description": "An identifier representing the returned state of the resource."
         },
         "@nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
+          "type": "string",
+          "description": "The URI that can be used to request the next set of paged results."
         }
       }
     },
     "Label": {
       "type": "object",
+      "description": "Labels are used to group key-values.",
       "properties": {
         "name": {
           "type": "string",
-          "readOnly": true,
           "description": "The name of the label."
         }
       }
     },
-    "Error": {
-      "description": "Azure App Configuration error object.",
+    "LabelFields": {
+      "type": "string",
+      "description": "Label fields.",
+      "enum": [
+        "name"
+      ],
+      "x-ms-enum": {
+        "name": "LabelFields",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "name",
+            "value": "name",
+            "description": "Name field."
+          }
+        ]
+      }
+    },
+    "LabelListResult": {
       "type": "object",
+      "description": "The result of a list request.",
       "properties": {
-        "type": {
-          "description": "The type of the error.",
-          "type": "string"
+        "items": {
+          "type": "array",
+          "description": "The collection value.",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "x-ms-identifiers": []
         },
-        "title": {
-          "description": "A brief summary of the error.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the parameter that resulted in the error.",
-          "type": "string"
-        },
-        "detail": {
-          "description": "A detailed description of the error.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The HTTP status code that the error maps to.",
-          "type": "integer"
+        "@nextLink": {
+          "type": "string",
+          "description": "The URI that can be used to request the next set of paged results."
         }
-      },
-      "readOnly": true
+      }
     },
     "OperationDetails": {
-      "description": "Details of a long running operation.",
       "type": "object",
+      "description": "Details of a long running operation.",
       "properties": {
         "id": {
-          "description": "The unique id of the operation.",
-          "type": "string"
+          "type": "string",
+          "description": "The unique id of the operation."
         },
         "status": {
-          "description": "The current status of the operation",
-          "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "State"
-          }
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The current status of the operation"
         },
         "error": {
-          "description": "An error, available when the status is `Failed`, describing why the operation failed.",
-          "$ref": "#/definitions/ErrorDetail"
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "An error, available when the status is `Failed`, describing why the operation\nfailed."
         }
       },
       "required": [
@@ -1901,255 +2940,249 @@
         "status"
       ]
     },
-    "ErrorDetail": {
-      "description": "The details of an error.",
+    "Snapshot": {
       "type": "object",
+      "description": "A snapshot is a named, immutable subset of an App Configuration store's key-values.",
       "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "type": "string"
+        "name": {
+          "type": "string",
+          "description": "The name of the snapshot.",
+          "readOnly": true
         },
-        "message": {
-          "description": "A human-readable representation of the error.",
-          "type": "string"
+        "status": {
+          "$ref": "#/definitions/SnapshotStatus",
+          "description": "The current status of the snapshot.",
+          "readOnly": true
         },
-        "details": {
-          "description": "An array of details about specific errors that led to this reported error.",
+        "filters": {
           "type": "array",
+          "description": "A list of filters used to filter the key-values included in the snapshot.",
+          "minItems": 1,
+          "maxItems": 3,
           "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          }
+            "$ref": "#/definitions/KeyValueFilter"
+          },
+          "x-ms-identifiers": []
         },
-        "innererror": {
-          "description": "An object containing more specific information than the current object about the error.",
-          "$ref": "#/definitions/InnerError"
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "InnerError": {
-      "description": "An object containing specific information about an error.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "type": "string"
+        "composition_type": {
+          "$ref": "#/definitions/CompositionType",
+          "description": "The composition type describes how the key-values within the snapshot are\ncomposed. The 'key' composition type ensures there are no two key-values\ncontaining the same key. The 'key_label' composition type ensures there are no\ntwo key-values containing the same key and label.",
+          "x-ms-client-name": "compositionType"
         },
-        "innererror": {
-          "description": "An object containing more specific information than the current object about the error.",
-          "$ref": "#/definitions/InnerError"
-        }
-      }
-    },
-    "KeyListResult": {
-      "description": "The result of a list request.",
-      "type": "object",
-      "properties": {
-        "items": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Key"
-          }
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time that the snapshot was created.",
+          "readOnly": true
         },
-        "@nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
-        }
-      }
-    },
-    "KeyValueListResult": {
-      "description": "The result of a list request.",
-      "type": "object",
-      "properties": {
-        "items": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyValue"
+        "expires": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time that the snapshot will expire.",
+          "readOnly": true
+        },
+        "retention_period": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of time, in seconds, that a snapshot will remain in the archived\nstate before expiring. This property is only writable during the creation of a\nsnapshot. If not specified, the default lifetime of key-value revisions will be\nused.",
+          "minimum": 3600,
+          "maximum": 7776000,
+          "x-ms-client-name": "retentionPeriod"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size in bytes of the snapshot.",
+          "readOnly": true
+        },
+        "items_count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of key-values in the snapshot.",
+          "readOnly": true,
+          "x-ms-client-name": "itemsCount"
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the snapshot.",
+          "additionalProperties": {
+            "type": "string"
           }
         },
         "etag": {
-          "description": "An identifier representing the returned state of the resource.",
-          "type": "string"
+          "type": "string",
+          "description": "A value representing the current state of the snapshot.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "filters"
+      ]
+    },
+    "SnapshotFields": {
+      "type": "string",
+      "description": "Snapshot fields.",
+      "enum": [
+        "name",
+        "status",
+        "filters",
+        "composition_type",
+        "created",
+        "expires",
+        "retention_period",
+        "size",
+        "items_count",
+        "tags",
+        "etag"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotFields",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "name",
+            "value": "name",
+            "description": "Name field."
+          },
+          {
+            "name": "status",
+            "value": "status",
+            "description": "Status field."
+          },
+          {
+            "name": "filters",
+            "value": "filters",
+            "description": "Filters field."
+          },
+          {
+            "name": "composition_type",
+            "value": "composition_type",
+            "description": "Composition type field."
+          },
+          {
+            "name": "created",
+            "value": "created",
+            "description": "Created field."
+          },
+          {
+            "name": "expires",
+            "value": "expires",
+            "description": "Expires field."
+          },
+          {
+            "name": "retention_period",
+            "value": "retention_period",
+            "description": "Retention period field."
+          },
+          {
+            "name": "size",
+            "value": "size",
+            "description": "Size field."
+          },
+          {
+            "name": "items_count",
+            "value": "items_count",
+            "description": "Items count field."
+          },
+          {
+            "name": "tags",
+            "value": "tags",
+            "description": "Tags field."
+          },
+          {
+            "name": "etag",
+            "value": "etag",
+            "description": "Etag field."
+          }
+        ]
+      }
+    },
+    "SnapshotListResult": {
+      "type": "object",
+      "description": "The result of a snapshot list request.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The collection value.",
+          "items": {
+            "$ref": "#/definitions/Snapshot"
+          },
+          "x-ms-identifiers": []
         },
         "@nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
+          "type": "string",
+          "description": "The URI that can be used to request the next set of paged results."
         }
       }
     },
-    "LabelListResult": {
-      "description": "The result of a list request.",
-      "type": "object",
-      "properties": {
-        "items": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Label"
+    "SnapshotStatus": {
+      "type": "string",
+      "description": "Snapshot status.",
+      "enum": [
+        "provisioning",
+        "ready",
+        "archived",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "provisioning",
+            "value": "provisioning",
+            "description": "Provisioning"
+          },
+          {
+            "name": "ready",
+            "value": "ready",
+            "description": "Ready"
+          },
+          {
+            "name": "archived",
+            "value": "archived",
+            "description": "Archived"
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "Failed"
           }
-        },
-        "@nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
+        ]
+      }
+    },
+    "SnapshotUpdateParameters": {
+      "type": "object",
+      "description": "Parameters used to update a snapshot.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/SnapshotStatus",
+          "description": "The desired status of the snapshot."
         }
       }
     }
   },
   "parameters": {
-    "SyncTokens": {
-      "name": "Sync-Token",
+    "Azure.Core.ClientRequestIdHeader": {
+      "name": "x-ms-client-request-id",
       "in": "header",
-      "description": "Used to guarantee real-time consistency between requests.",
-      "type": "string"
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "clientRequestId"
     },
-    "ApiVersion": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "description": "The API version to be used with the HTTP request.",
-      "required": true,
-      "type": "string"
-    },
-    "Endpoint": {
-      "name": "endpoint",
-      "in": "path",
-      "description": "The endpoint of the App Configuration instance to send requests to.",
+      "description": "The API version to use for this operation.",
       "required": true,
       "type": "string",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
-    },
-    "KeyValueFields": {
-      "name": "$Select",
-      "in": "query",
-      "description": "Used to select what fields are present in the returned resource(s).",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "key",
-          "label",
-          "content_type",
-          "value",
-          "last_modified",
-          "tags",
-          "locked",
-          "etag"
-        ],
-        "x-ms-enum": {
-          "name": "KeyValueFields",
-          "modelAsString": true
-        }
-      },
+      "minLength": 1,
       "x-ms-parameter-location": "method",
-      "collectionFormat": "csv"
-    },
-    "LabelFields": {
-      "name": "$Select",
-      "in": "query",
-      "description": "Used to select what fields are present in the returned resource(s).",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "name"
-        ],
-        "x-ms-enum": {
-          "name": "LabelFields",
-          "modelAsString": true
-        }
-      },
-      "x-ms-parameter-location": "method",
-      "collectionFormat": "csv"
-    },
-    "SnapshotFields": {
-      "name": "$Select",
-      "in": "query",
-      "description": "Used to select what fields are present in the returned resource(s).",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "name",
-          "status",
-          "filters",
-          "composition_type",
-          "created",
-          "expires",
-          "retention_period",
-          "size",
-          "items_count",
-          "tags",
-          "etag"
-        ],
-        "x-ms-enum": {
-          "name": "SnapshotFields",
-          "modelAsString": true
-        }
-      },
-      "x-ms-parameter-location": "method",
-      "collectionFormat": "csv"
-    },
-    "Status": {
-      "name": "status",
-      "in": "query",
-      "description": "Used to filter returned snapshots by their status property.",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": [
-          "provisioning",
-          "ready",
-          "archived",
-          "failed"
-        ],
-        "x-ms-enum": {
-          "name": "SnapshotStatus",
-          "modelAsString": true
-        }
-      },
-      "x-ms-parameter-location": "method",
-      "collectionFormat": "csv"
+      "x-ms-client-name": "apiVersion"
     }
-  },
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "$ref": "#/parameters/Endpoint"
-      }
-    ]
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "Impersonate your user account"
-      }
-    },
-    "connection_string": {
-      "type": "apiKey",
-      "description": "Connection string secret used to connect to an App Config resource.",
-      "name": "Connection String",
-      "in": "header"
-    }
-  },
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    },
-    {
-      "connection_string": []
-    }
-  ]
+  }
 }

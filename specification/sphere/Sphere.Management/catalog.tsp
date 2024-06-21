@@ -1,12 +1,5 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -36,7 +29,12 @@ interface Catalogs {
   /**
    * Create a Catalog
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Catalog>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Catalog,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a Catalog
@@ -74,7 +72,7 @@ interface Catalogs {
     void,
     ResourceListResult<Deployment>,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
       ...CustomFilterQueryParameter;
       ...CustomTopQueryParameter;
       ...CustomSkipQueryParameter;
@@ -90,7 +88,7 @@ interface Catalogs {
     ListDeviceGroupsRequest,
     ResourceListResult<DeviceGroup>,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
       ...CustomFilterQueryParameter;
       ...CustomTopQueryParameter;
       ...CustomSkipQueryParameter;
@@ -106,7 +104,7 @@ interface Catalogs {
     void,
     PagedDeviceInsight,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
       ...CustomFilterQueryParameter;
       ...CustomTopQueryParameter;
       ...CustomSkipQueryParameter;
@@ -122,7 +120,7 @@ interface Catalogs {
     void,
     ResourceListResult<Device>,
     {
-      ...BaseParameters<Catalog>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Catalog>;
       ...CustomFilterQueryParameter;
       ...CustomTopQueryParameter;
       ...CustomSkipQueryParameter;

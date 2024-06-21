@@ -262,11 +262,7 @@
         "properties": {
           "$ref": "#/definitions/ExtendedZoneProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -455,24 +451,6 @@
             "name": "PendingUnregister",
             "value": "PendingUnregister",
             "description": "Subscription is pending unregistering for the Azure Extended Zone"
-          }
-        ]
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Api versions",
-      "enum": [
-        "2024-04-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "2024-04-01-preview",
-            "value": "2024-04-01-preview",
-            "description": "2024-04-01-preview api version"
           }
         ]
       }

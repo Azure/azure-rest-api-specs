@@ -911,11 +911,7 @@
         "properties": {
           "$ref": "#/definitions/ImageVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1105,11 +1101,7 @@
         "properties": {
           "$ref": "#/definitions/PoolProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -1366,11 +1358,7 @@
         "properties": {
           "$ref": "#/definitions/QuotaProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1451,11 +1439,7 @@
         "properties": {
           "$ref": "#/definitions/ResourceDetailsObjectProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1571,11 +1555,7 @@
         "properties": {
           "$ref": "#/definitions/ResourceSkuProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1767,24 +1747,50 @@
     },
     "ResourceSkuRestrictionsReasonCode": {
       "type": "string",
+      "description": "Describes the reason for SKU restriction.",
       "enum": [
         "QuotaId",
         "NotAvailableForSubscription"
       ],
       "x-ms-enum": {
         "name": "ResourceSkuRestrictionsReasonCode",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "QuotaId",
+            "value": "QuotaId",
+            "description": "The restriction is due to exceeding a quota limitation."
+          },
+          {
+            "name": "NotAvailableForSubscription",
+            "value": "NotAvailableForSubscription",
+            "description": "The restriction is not available for this subscription."
+          }
+        ]
       }
     },
     "ResourceSkuRestrictionsType": {
       "type": "string",
+      "description": "Describes the kind of SKU restrictions that can exist",
       "enum": [
         "Location",
         "Zone"
       ],
       "x-ms-enum": {
         "name": "ResourceSkuRestrictionsType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Location",
+            "value": "Location",
+            "description": "SKU restricted by location."
+          },
+          {
+            "name": "Zone",
+            "value": "Zone",
+            "description": "SKU restricted by availability zone."
+          }
+        ]
       }
     },
     "ResourceSkuZoneDetails": {

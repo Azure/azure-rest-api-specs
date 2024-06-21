@@ -4389,6 +4389,11 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "storageIntegration": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -5349,6 +5354,11 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "storageIntegration": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -8359,6 +8369,10 @@
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         },
+        "continuationSettings": {
+          "description": "Continuation settings for execute data flow activity.",
+          "$ref": "#/definitions/ContinuationSettingsReference"
+        },
         "compute": {
           "description": "Compute properties for data flow activity.",
           "type": "object",
@@ -8399,6 +8413,27 @@
       "required": [
         "dataFlow"
       ]
+    },
+    "ContinuationSettingsReference": {
+      "description": "Continuation settings for execute data flow activity.",
+      "type": "object",
+      "properties": {
+        "continuationTtlInMinutes": {
+          "description": "Continuation TTL in minutes.",
+          "x-ms-format": "dfe-int",
+          "type": "object"
+        },
+        "idleCondition": {
+          "description": "Idle condition.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "customizedCheckpointKey": {
+          "description": "Customized checkpoint key.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        }
+      }
     },
     "ExecutePowerQueryActivityTypeProperties": {
       "description": "Execute power query data flow activity properties.",
@@ -9100,7 +9135,12 @@
         "SOQLQuery": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Database query. Type: string (or Expression with resultType string)."
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
         },
         "includeDeletedObjects": {
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
@@ -9121,7 +9161,12 @@
         "SOQLQuery": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Database query. Type: string (or Expression with resultType string)."
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
         },
         "includeDeletedObjects": {
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
@@ -9229,7 +9274,8 @@
             "Constant",
             "Field",
             "Unary",
-            "Binary"
+            "Binary",
+            "NAry"
           ],
           "type": "string",
           "description": "Type of expressions supported by the system. Type: string."
@@ -9238,9 +9284,14 @@
           "description": "Value for Constant/Field Type: string.",
           "type": "string"
         },
-        "operator": {
-          "description": "Expression operator value Type: string.",
-          "type": "string"
+        "operators": {
+          "description": "Expression operator value Type: list of strings.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string."
+          }
         },
         "operands": {
           "description": "List of nested expressions.",

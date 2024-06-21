@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AVS;
@@ -601,7 +600,7 @@ model Location is ProxyResource<LocationProperties> {
   @key("location")
   @path
   @segment("locations")
-  @Azure.ResourceManager.Private.armCommonParameter(
+  @Azure.ResourceManager.CommonTypes.Private.armCommonParameter(
     "LocationParameter",
     Azure.ResourceManager.CommonTypes.Versions.v5
   )
@@ -624,7 +623,7 @@ model LocationProperties {
 @doc("A private cloud resource")
 model PrivateCloud is TrackedResource<PrivateCloudProperties> {
   ...ResourceSkuRequired;
-  ...ManagedSystemAssignedIdentity;
+  ...ManagedSystemAssignedIdentityProperty;
 
   @doc("Name of the private cloud")
   @pattern("^[-\\w\\._]+$")
@@ -644,9 +643,9 @@ model PrivateCloudNameParameter {
 
 @doc("An update to a private cloud resource")
 model PrivateCloudUpdate {
-  ...ArmTagsProperty;
-  ...ResourceSku;
-  ...ManagedSystemAssignedIdentity;
+  ...Foundations.ArmTagsProperty;
+  ...ResourceSkuProperty;
+  ...ManagedSystemAssignedIdentityProperty;
 
   @doc("The updatable properties of a private cloud resource")
   @extension("x-ms-client-flatten", true)
@@ -673,11 +672,11 @@ model PrivateCloudUpdateProperties {
   encryption?: Encryption;
 
   @doc("""
-Array of additional networks noncontiguous with networkBlock. Networks must be
-unique and non-overlapping across VNet in your subscription, on-premise, and
-this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
-(A.B.C.D/X).
-""")
+    Array of additional networks noncontiguous with networkBlock. Networks must be
+    unique and non-overlapping across VNet in your subscription, on-premise, and
+    this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
+    (A.B.C.D/X).
+    """)
   extendedNetworkBlocks?: string[];
 
   @doc("The type of DNS zone to use.")
@@ -704,11 +703,11 @@ model PrivateCloudProperties {
   encryption?: Encryption;
 
   @doc("""
-Array of additional networks noncontiguous with networkBlock. Networks must be
-unique and non-overlapping across VNet in your subscription, on-premise, and
-this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
-(A.B.C.D/X).
-""")
+    Array of additional networks noncontiguous with networkBlock. Networks must be
+    unique and non-overlapping across VNet in your subscription, on-premise, and
+    this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
+    (A.B.C.D/X).
+    """)
   extendedNetworkBlocks?: string[];
 
   @doc("The provisioning state")
@@ -723,10 +722,10 @@ this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
   endpoints?: Endpoints;
 
   @doc("""
-The block of addresses should be unique across VNet in your subscription as
-well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where
-A,B,C,D are between 0 and 255, and X is between 0 and 22
-""")
+    The block of addresses should be unique across VNet in your subscription as
+    well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where
+    A,B,C,D are between 0 and 255, and X is between 0 and 22
+    """)
   networkBlock: string;
 
   @doc("Network used to access vCenter Server and NSX-T Manager")
@@ -762,15 +761,15 @@ A,B,C,D are between 0 and 255, and X is between 0 and 22
   externalCloudLinks?: string[];
 
   @doc("""
-A secondary expressRoute circuit from a separate AZ. Only present in a
-stretched private cloud
-""")
+    A secondary expressRoute circuit from a separate AZ. Only present in a
+    stretched private cloud
+    """)
   secondaryCircuit?: Circuit;
 
   @doc("""
-Flag to indicate whether the private cloud has the quota for provisioned NSX
-Public IP count raised from 64 to 1024
-""")
+    Flag to indicate whether the private cloud has the quota for provisioned NSX
+    Public IP count raised from 64 to 1024
+    """)
   @visibility("read")
   nsxPublicIpQuotaRaised?: NsxPublicIpQuotaRaisedEnum;
 
@@ -888,15 +887,15 @@ model IdentitySource {
   ssl?: SslEnum;
 
   @doc("""
-The ID of an Active Directory user with a minimum of read-only access to Base
-DN for users and group
-""")
+    The ID of an Active Directory user with a minimum of read-only access to Base
+    DN for users and group
+    """)
   username?: string;
 
   @doc("""
-The password of the Active Directory user with a minimum of read-only access to
-Base DN for users and groups.
-""")
+    The password of the Active Directory user with a minimum of read-only access to
+    Base DN for users and groups.
+    """)
   @secret
   password?: string;
 }
@@ -966,7 +965,7 @@ model ClusterProperties {
 
 @doc("An update of a cluster resource")
 model ClusterUpdate {
-  ...ResourceSku;
+  ...ResourceSkuProperty;
 
   @doc("The properties of a cluster resource that may be updated")
   @extension("x-ms-client-flatten", true)
@@ -1046,9 +1045,9 @@ model DiskPoolVolume {
   lunName: string;
 
   @doc("""
-Mode that describes whether the LUN has to be mounted as a datastore or
-attached as a LUN
-""")
+    Mode that describes whether the LUN has to be mounted as a datastore or
+    attached as a LUN
+    """)
   mountOption?: MountOptionEnum = MountOptionEnum.MOUNT;
 
   @doc("Device path")
@@ -1174,16 +1173,16 @@ model GlobalReachConnectionProperties {
   provisioningState?: GlobalReachConnectionProvisioningState;
 
   @doc("""
-The network used for global reach carved out from the original network block
-provided for the private cloud
-""")
+    The network used for global reach carved out from the original network block
+    provided for the private cloud
+    """)
   @visibility("read")
   addressPrefix?: string;
 
   @doc("""
-Authorization key from the peer express route used for the global reach
-connection
-""")
+    Authorization key from the peer express route used for the global reach
+    connection
+    """)
   authorizationKey?: string;
 
   @doc("The connection status of the global reach connection")
@@ -1191,15 +1190,15 @@ connection
   circuitConnectionStatus?: GlobalReachConnectionStatus;
 
   @doc("""
-Identifier of the ExpressRoute Circuit to peer with in the global reach
-connection
-""")
+    Identifier of the ExpressRoute Circuit to peer with in the global reach
+    connection
+    """)
   peerExpressRouteCircuit?: string;
 
   @doc("""
-The ID of the Private Cloud's ExpressRoute Circuit that is participating in the
-global reach connection
-""")
+    The ID of the Private Cloud's ExpressRoute Circuit that is participating in the
+    global reach connection
+    """)
   expressRouteId?: string;
 }
 
@@ -1247,13 +1246,6 @@ model WorkloadNetworkSegment
   @path
   @segment("segments")
   name: string;
-}
-
-@doc("NSX Segment update")
-model WorkloadNetworkSegmentUpdate {
-  @doc("The updatable properties of a Segment update")
-  @extension("x-ms-client-flatten", true)
-  properties?: WorkloadNetworkSegmentProperties;
 }
 
 @doc("NSX Segment Properties")
@@ -1318,13 +1310,6 @@ model DhcpIdParameter {
   dhcpId: string;
 }
 
-@doc("NSX DHCP update")
-model WorkloadNetworkDhcpUpdate {
-  @doc("The updatable properties of a DHCP update")
-  @extension("x-ms-client-flatten", false)
-  properties?: WorkloadNetworkDhcpEntity;
-}
-
 @doc("Type of DHCP: SERVER or RELAY.")
 union DhcpTypeEnum {
   SERVER: "SERVER",
@@ -1332,9 +1317,9 @@ union DhcpTypeEnum {
   string,
 }
 @doc("""
-Base class for WorkloadNetworkDhcpServer and WorkloadNetworkDhcpRelay to
-inherit from
-""")
+  Base class for WorkloadNetworkDhcpServer and WorkloadNetworkDhcpRelay to
+  inherit from
+  """)
 @discriminator("dhcpType")
 model WorkloadNetworkDhcpEntity {
   @doc("Type of DHCP: SERVER or RELAY.")
@@ -1361,7 +1346,7 @@ model WorkloadNetworkDhcpServer extends WorkloadNetworkDhcpEntity {
   serverAddress?: string;
 
   @doc("DHCP Server Lease Time.")
-  leaseTime?: int32;
+  leaseTime?: int64;
 
   @doc("Type of DHCP: SERVER or RELAY.")
   dhcpType: DhcpTypeEnum.SERVER;
@@ -1424,13 +1409,6 @@ model PortMirroringProfileParameter {
   portMirroringId: string;
 }
 
-@doc("NSX Port Mirroring update")
-model WorkloadNetworkPortMirroringUpdate {
-  @doc("The updatable properties of a Port Mirroring update")
-  @extension("x-ms-client-flatten", true)
-  properties?: WorkloadNetworkPortMirroringProperties;
-}
-
 @doc("NSX Port Mirroring Properties")
 model WorkloadNetworkPortMirroringProperties {
   @doc("Display name of the port mirroring profile.")
@@ -1476,14 +1454,6 @@ model VmGroupIdParameter {
   @pattern("^[-\\w\\._]+$")
   @path
   vmGroupId: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
-@doc("NSX VM Group update")
-model WorkloadNetworkVMGroupUpdate {
-  @doc("The updatable properties of a VM Group update")
-  @extension("x-ms-client-flatten", true)
-  properties?: WorkloadNetworkVMGroupProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
@@ -1553,13 +1523,6 @@ model DnsServiceIdParameter {
   dnsServiceId: string;
 }
 
-@doc("NSX DNS Service update")
-model WorkloadNetworkDnsServiceUpdate {
-  @doc("The updatable properties of a DNS Service update")
-  @extension("x-ms-client-flatten", true)
-  properties?: WorkloadNetworkDnsServiceProperties;
-}
-
 @doc("NSX DNS Service Properties")
 model WorkloadNetworkDnsServiceProperties {
   @doc("Display name of the DNS Service.")
@@ -1609,13 +1572,6 @@ model DnsZoneIdParameter {
   dnsZoneId: string;
 }
 
-@doc("NSX DNS Zone update")
-model WorkloadNetworkDnsZoneUpdate {
-  @doc("The updatable properties of a DNS Zone update")
-  @extension("x-ms-client-flatten", true)
-  properties?: WorkloadNetworkDnsZoneProperties;
-}
-
 @doc("NSX DNS Zone Properties")
 model WorkloadNetworkDnsZoneProperties {
   @doc("Display name of the DNS Zone.")
@@ -1631,7 +1587,7 @@ model WorkloadNetworkDnsZoneProperties {
   sourceIp?: string;
 
   @doc("Number of DNS Services using the DNS zone.")
-  dnsServices?: int32;
+  dnsServices?: int64;
 
   @doc("The provisioning state")
   @visibility("read")
@@ -1946,9 +1902,9 @@ union ScriptCmdletAudience {
 @doc("An parameter that the script will accept")
 model ScriptParameter {
   @doc("""
-The type of parameter the script is expecting. psCredential is a
-PSCredentialObject
-""")
+    The type of parameter the script is expecting. psCredential is a
+    PSCredentialObject
+    """)
   @visibility("read")
   type?: ScriptParameterTypes;
 
@@ -1960,9 +1916,9 @@ PSCredentialObject
   description?: string;
 
   @doc("""
-Should this parameter be visible to arm and passed in the parameters argument
-when executing
-""")
+    Should this parameter be visible to arm and passed in the parameters argument
+    when executing
+    """)
   @visibility("read")
   visibility?: VisibilityParameterEnum;
 
@@ -1993,15 +1949,15 @@ model ScriptExecutionProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
   @doc("""
-Parameters that will be hidden/not visible to ARM, such as passwords and
-credentials
-""")
+    Parameters that will be hidden/not visible to ARM, such as passwords and
+    credentials
+    """)
   hiddenParameters?: ScriptExecutionParameter[];
 
   @doc("""
-Error message if the script was able to run, but if the script itself had
-errors or powershell threw an exception
-""")
+    Error message if the script was able to run, but if the script itself had
+    errors or powershell threw an exception
+    """)
   failureReason?: string;
 
   @doc("Time limit for execution")
@@ -2223,5 +2179,12 @@ union IscsiPathProvisioningState {
 @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
 model ResourceSkuRequired {
   @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
-  sku: ResourceSkuType;
+  sku: Foundations.Sku;
 }
+
+@doc("The response of a {name} list operation.", Resource)
+@friendlyName(FriendlyNameFormat, Resource)
+model ResourceList<
+  Resource extends Foundations.Resource,
+  FriendlyNameFormat extends valueof string = "{name}List"
+> is Azure.Core.Page<Resource>;

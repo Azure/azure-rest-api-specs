@@ -28,16 +28,15 @@ using Azure.Core;
   "Analyze harmful content",
   {
     @doc("""
-Supported Cognitive Services endpoints (protocol and hostname, for example:
-https://<resource-name>.cognitiveservices.azure.com).
-""")
+      Supported Cognitive Services endpoints (protocol and hostname, for example:
+      https://<resource-name>.cognitiveservices.azure.com).
+      """)
     endpoint: string,
   }
 )
 @doc("Analyze harmful content")
 namespace ContentSafety;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_10_01: "2023-10-01",
