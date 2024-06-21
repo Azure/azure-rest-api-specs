@@ -3007,6 +3007,19 @@
               "description": "client certificate authentication comma-separated exclusion paths",
               "type": "string"
             },
+            "ipMode": {
+              "description": "Specifies the IP mode of the app.",
+              "enum": [
+                "IPv4",
+                "IPv6",
+                "IPv4AndIPv6"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "IPMode",
+                "modelAsString": false
+              }
+            },
             "hostNamesDisabled": {
               "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
