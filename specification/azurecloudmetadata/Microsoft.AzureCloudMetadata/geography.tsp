@@ -14,6 +14,7 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureCloudMetadata;
 
 /** Geography resource. */
+@tenantResource
 @parentResource(Cloud)
 model Geography is ProxyResource<GeographyProperties> {
   @doc("The geography name")
@@ -28,6 +29,9 @@ model Geography is ProxyResource<GeographyProperties> {
 /** Geography details. */
 model GeographyProperties {
   ...MetadataProperties;
+
+  /** Full name of geography. */
+  fullName: string;
 
   /** State of geography. */
   state: State;

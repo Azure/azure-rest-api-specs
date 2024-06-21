@@ -13,6 +13,7 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureCloudMetadata;
 
 /** Cloud resource. */
+@tenantResource
 model Cloud is ProxyResource<CloudProperties> {
   @doc("The cloud name")
   @segment("clouds")
@@ -55,6 +56,5 @@ union EnvironmentType {
 @armResourceOperations
 interface Clouds {
   get is ArmResourceRead<Cloud>;
-  listByResourceGroup is ArmResourceListByParent<Cloud>;
-  listBySubscription is ArmListBySubscription<Cloud>;
+  list is ArmResourceListByParent<Cloud>;
 }
