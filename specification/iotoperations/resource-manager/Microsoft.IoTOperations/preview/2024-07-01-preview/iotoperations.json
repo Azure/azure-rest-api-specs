@@ -3000,7 +3000,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Mode",
+            "name": "OperationalMode",
             "modelAsString": true,
             "values": [
               {
@@ -3077,7 +3077,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Mode",
+            "name": "OperationalMode",
             "modelAsString": true,
             "values": [
               {
@@ -4537,7 +4537,7 @@
           "description": "Consumer group ID."
         },
         "copyMqttProperties": {
-          "$ref": "#/definitions/Mode",
+          "$ref": "#/definitions/OperationalMode",
           "description": "Copy MQTT properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an MQTT source."
         },
         "host": {
@@ -4664,7 +4664,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Mode",
+            "name": "OperationalMode",
             "modelAsString": true,
             "values": [
               {
@@ -5170,7 +5170,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Mode",
+            "name": "OperationalMode",
             "modelAsString": true,
             "values": [
               {
@@ -5273,6 +5273,10 @@
           "type": "string",
           "description": "Reference to the Endpoint CR. Can only be of MQTT and Kafka type."
         },
+        "name": {
+          "type": "string",
+          "description": "Name of the source."
+        },
         "locations": {
           "type": "array",
           "description": "List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.",
@@ -5306,6 +5310,7 @@
       },
       "required": [
         "endpointRef",
+        "name",
         "locations"
       ]
     },
@@ -5502,7 +5507,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Mode",
+            "name": "OperationalMode",
             "modelAsString": true,
             "values": [
               {
@@ -5708,7 +5713,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Mode",
+            "name": "OperationalMode",
             "modelAsString": true,
             "values": [
               {
@@ -5752,30 +5757,6 @@
           "minimum": 1,
           "maximum": 60
         }
-      }
-    },
-    "Mode": {
-      "type": "string",
-      "description": "Mode properties",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "Mode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Enabled is equivalent to True"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled is equivalent to False."
-          }
-        ]
       }
     },
     "MqttProtocolType": {
@@ -5822,6 +5803,30 @@
             "name": "Never",
             "value": "Never",
             "description": "Never retain messages."
+          }
+        ]
+      }
+    },
+    "OperationalMode": {
+      "type": "string",
+      "description": "Mode properties",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationalMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled is equivalent to True"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled is equivalent to False."
           }
         ]
       }
@@ -6082,7 +6087,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Mode",
+            "name": "OperationalMode",
             "modelAsString": true,
             "values": [
               {
@@ -6129,7 +6134,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Mode",
+            "name": "OperationalMode",
             "modelAsString": true,
             "values": [
               {
@@ -6408,7 +6413,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Mode",
+            "name": "OperationalMode",
             "modelAsString": true,
             "values": [
               {
@@ -6451,7 +6456,7 @@
             "Disabled"
           ],
           "x-ms-enum": {
-            "name": "Mode",
+            "name": "OperationalMode",
             "modelAsString": true,
             "values": [
               {

@@ -201,7 +201,7 @@ model DataFlowEndpointKafka {
   consumerGroupId?: string;
 
   @doc("Copy MQTT properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an MQTT source.")
-  copyMqttProperties?: Mode;
+  copyMqttProperties?: OperationalMode;
 
   @doc("Kafka endpoint host.")
   host?: string;
