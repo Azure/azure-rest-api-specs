@@ -621,7 +621,7 @@
           "200": {
             "description": "OK. Cloud HSM Cluster Backup operation API finished synchronously with Success",
             "schema": {
-              "$ref": "#/definitions/BackupResponse"
+              "$ref": "#/definitions/BackupResult"
             },
             "headers": {
               "x-ms-request-id": {
@@ -699,7 +699,7 @@
           "200": {
             "description": "OK. Cloud HSM Cluster Backup operation API finished synchronously with Success",
             "schema": {
-              "$ref": "#/definitions/BackupResponse"
+              "$ref": "#/definitions/BackupResult"
             },
             "headers": {
               "x-ms-request-id": {
@@ -768,7 +768,7 @@
           "200": {
             "description": "Cloud HSM Cluster Backup Operation status returned",
             "schema": {
-              "$ref": "#/definitions/BackupResponse"
+              "$ref": "#/definitions/BackupResult"
             },
             "headers": {
               "x-ms-request-id": {
@@ -834,7 +834,7 @@
           "200": {
             "description": "OK. Cloud HSM Cluster Restore operation API finished synchronously with Success",
             "schema": {
-              "$ref": "#/definitions/RestoreResponse"
+              "$ref": "#/definitions/RestoreResult"
             },
             "headers": {
               "x-ms-request-id": {
@@ -913,7 +913,7 @@
           "200": {
             "description": "OK. Cloud HSM Cluster Restore operation API finished synchronously with Success",
             "schema": {
-              "$ref": "#/definitions/RestoreResponse"
+              "$ref": "#/definitions/RestoreResult"
             },
             "headers": {
               "x-ms-request-id": {
@@ -982,7 +982,7 @@
           "200": {
             "description": "Cloud HSM Cluster Backup Operation status returned",
             "schema": {
-              "$ref": "#/definitions/RestoreResponse"
+              "$ref": "#/definitions/RestoreResult"
             },
             "headers": {
               "x-ms-request-id": {
@@ -1332,7 +1332,7 @@
         "azureStorageBlobContainerUri"
       ]
     },
-    "BackupResponse": {
+    "BackupResult": {
       "type": "object",
       "properties": {
         "azureStorageBlobContainerUri": {
@@ -1346,21 +1346,21 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BackupRestoreBaseResponse"
+          "$ref": "#/definitions/BackupRestoreBaseResult"
         }
       ],
       "description": "Backup operation Result"
     },
-    "RestoreResponse": {
+    "RestoreResult": {
       "type": "object",
       "description": "Restore operation properties",
       "allOf": [
         {
-          "$ref": "#/definitions/BackupRestoreBaseResponse"
+          "$ref": "#/definitions/BackupRestoreBaseResult"
         }
       ]
     },
-    "BackupRestoreBaseResponse": {
+    "BackupRestoreBaseResult": {
       "type": "object",
       "properties": {
         "status": {
