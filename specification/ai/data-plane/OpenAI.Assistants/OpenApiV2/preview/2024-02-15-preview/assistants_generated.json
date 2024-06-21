@@ -734,32 +734,6 @@
             "$ref": "./examples/list_messages.json"
           }
         }
-      },
-      "post": {
-        "operationId": "CreateMessage",
-        "description": "Creates a new message on a specified thread.",
-        "parameters": [
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "The ID of the thread to create the new message on.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A representation of the new message.",
-            "schema": {
-              "$ref": "#/definitions/ThreadMessage"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a message.": {
-            "$ref": "./examples/create_message.json"
-          }
-        }
       }
     },
     "/threads/{threadId}/messages/{messageId}": {

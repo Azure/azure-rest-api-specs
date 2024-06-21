@@ -334,23 +334,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadDeletionStatus'
   /threads/{threadId}/messages:
-    post:
-      operationId: createMessage
-      description: Creates a new message on a specified thread.
-      parameters:
-        - name: threadId
-          in: path
-          required: true
-          description: The ID of the thread to create the new message on.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: A representation of the new message.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThreadMessage'
     get:
       operationId: listMessages
       description: Gets a list of messages that exist on a thread.
