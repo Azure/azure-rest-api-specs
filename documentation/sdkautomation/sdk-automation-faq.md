@@ -1,3 +1,6 @@
+| Short Link: | [aka.ms/azsdk/sdk-automation-faq](https://aka.ms/azsdk/sdk-automation-faq) |
+|--|--|
+
 # FAQ
 
 ## How to Download the Generated Artifacts
@@ -18,12 +21,4 @@ Let's take Python as an example. The results will be displayed in the pull reque
 5. Locate Generated Artifacts:
    The generated artifacts for Python are located under the `SDK_Artifact_Python` folder.
    ![image](https://github.com/Azure/azure-rest-api-specs/assets/20296335/4cecb794-0ec9-4092-a0cc-b45214438e1e)
-
-
-
-
-
-
-
-
-
+   
