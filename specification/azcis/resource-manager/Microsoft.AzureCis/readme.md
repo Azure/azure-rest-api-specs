@@ -30,3 +30,12 @@ These settings apply only when `--tag=2023-08-22` is specified on the command li
 input-file:
   - stable/2023-08-22/plannedQuota.json
 ```
+
+### Tag: 2024-06-11-preview
+
+These settings apply only when `--tag=2024-06-11-preview` is specified on the command line.
+
+```yaml $(tag) == '2024-06-11-preview'
+input-file:
+  - preview/2024-06-11-preview/cloudSprout.json
+```
