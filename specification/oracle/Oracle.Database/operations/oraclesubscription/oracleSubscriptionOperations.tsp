@@ -53,17 +53,6 @@ interface OracleSubscriptions
     AzureSubscriptions
   >;
 
-  @added(Versions.v20240601_preview)
-  @doc("Remove Azure Subscriptions")
-  @example(
-    "./examples/oracleSubscriptions_removeAzureSubscriptions.json",
-    "Remove Azure Subscriptions from the OracleSubscription"
-  )
-  removeAzureSubscriptions is ArmResourceActionNoResponseContentAsync<
-    OracleSubscription<Plan>,
-    AzureSubscriptions
-  >;
-
   /**
    * @dev Update a resource using the asynchronous call pattern.
    * @template Resource The ArmResource to update.
