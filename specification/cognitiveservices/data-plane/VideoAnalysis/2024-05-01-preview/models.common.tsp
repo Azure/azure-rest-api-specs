@@ -16,7 +16,7 @@ namespace VideoAnalysis;
 @pattern("^[a-z0-9-_]+$")
 @maxLength(32)
 @minLength(1)
-scalar taskName extends string;
+scalar TaskName extends string;
 
 @doc("The ApiVersion query parameter for VideoAnalysisTask API.")
 model VideoAnalysisTaskApiVersionParameter {
@@ -61,11 +61,12 @@ model ManagedIdentityAuthenticationModel extends AuthenticationModel {
 }
 
 @doc("Represents the Video Analysis Task response model for the JSON document. Returned after the creation of a video analysis task.")
+@resource("videodescriptions")
 model VideoAnalysisTaskResponseModel {
     @key("taskName")
     @doc("Video analysis task name information.")
     @visibility("read", "create")
-    taskName: taskName;
+    taskName: TaskName;
 
     @doc("Video analysis batch name information.")
     batchName?: string;
@@ -83,7 +84,7 @@ model VideoAnalysisTaskResponseModel {
     error?: ErrorResponse;
 
     @doc("Video analysis task result.")
-    taskResult?: string;
+    taskResult?: string; // TODO - Should replace Task Result
 
     @doc("Read only. The latest ETag for the dataset. May be used with the 'If-Match' header when updating or deleting a dataset.")
     @visibility("read")
@@ -91,78 +92,119 @@ model VideoAnalysisTaskResponseModel {
 }
 
 @doc("A task that describes a video")
-@resource("videodescriptions")
 @error
 model VideoDescriptionTaskRequestModel {
     @key("taskName")
     @doc("Video analysis task name information.")
     @visibility("read", "create")
-    taskName: taskName;
+    taskName: TaskName;
 
-    @doc("TODO - Replace input")
-    input: AzureBlobFileResourceLocationModel;
+    @doc("Video Analysis Task Input content information")
+    input: InputResourceLocationModel;
 
-    @doc("TODO - Replace output")
-    output?: AzureBlobContainerResourceLocationModel;
+    @doc("Video Analysis Task Output content information")
+    output: OutputResourceLocationModel;
 
-    @doc("TODO - Replace resource")
-    resource?: string;
+    @doc("Resources components used for the Video Analysis Task")
+    resource: Resource;
 
     @doc("TODO - Replace properties")
-    properties?: string;
+    properties?: PropertiesConfigModel;
 }
 
-@doc("Resource location model kind")
-union ResourceLocationModelKind {
-    string,
+@doc("Input resource Location")
+@discriminator("kind")
+model InputResourceLocationModel {
+    @doc("Input resource location kind")
+    kind: InputResourceLocationModelKind;
 
-    @doc("Resource Location is publicly available")
-    file: "File",
-
-    @doc("Resource Location is a file on an Azure Storage Account")
-    azureBlobFile: "AzureBlobFile",
-
-    @doc("Resource Location is a container on an Azure Storage Account")
-    azureBlobContainer: "AzureBlobContainer",
+    @doc("It represents the preset configuration that will be used to run this task")
+    preset: PresetConfigurationModel;
 }
 
 @doc("Resource Location")
 @discriminator("kind")
-model ResourceLocationModel {
-    @doc("Resource Location Kind")
-    kind: ResourceLocationModelKind;
-
-    @doc("Preset Configuration")
-    preset: PresetConfigurationModel;
+model OutputResourceLocationModel {
+    @doc("Input resource location kind")
+    kind: OutputResourceLocationModelKind;
 }
 
 @doc("Files accessed without authentication")
-model FileResourceLocationModel extends ResourceLocationModel {
-    kind: ResourceLocationModelKind.file;
+model FileResourceLocationModel extends InputResourceLocationModel {
+    kind: InputResourceLocationModelKind.file;
     url?: url;
     range?: TimeRange;
 }
 
-@doc("Files accessed without authentication")
+@doc("Authenticated resource definition")
 model AuthenticatedResourceModel {
     @doc("Authentication information")
     authentication?: AuthenticatedResourceModel;
 }
 
 @doc("Files accessed through Azure Storage Account authentication")
-model AzureBlobFileResourceLocationModel extends ResourceLocationModel {
-    kind: ResourceLocationModelKind.azureBlobFile;
+model AzureBlobFileResourceLocationModel extends InputResourceLocationModel {
+    kind: InputResourceLocationModelKind.azureBlobFile;
     url: url;
     range: TimeRange;
     ...AuthenticatedResourceModel;
 }
 
 @doc("Files accessed without authentication")
-model AzureBlobContainerResourceLocationModel extends ResourceLocationModel {
-    kind: ResourceLocationModelKind.azureBlobContainer;
+model AzureBlobContainerResourceLocationModel
+    extends OutputResourceLocationModel {
+    kind: OutputResourceLocationModelKind.azureBlobContainer;
     containerUrl: url;
     prefix?: string;
     ...AuthenticatedResourceModel;
+}
+
+@doc("AI Resources to be used")
+model Resource {
+    @doc("Completion resource model to be used")
+    completion: CompletionResourceModel;
+}
+
+@doc("Completion resource model definition")
+@discriminator("kind")
+model CompletionResourceModel {
+    kind: CompletionResourceModelType;
+}
+
+@doc("Gptv completion resource model definition")
+model GptvCompletionResourceModel extends CompletionResourceModel {
+    @doc("GPTv completion resource model type")
+    kind: CompletionResourceModelType.gptv;
+
+    @doc("Model Endpoint")
+    endpoint: url;
+
+    @doc("Model deployment name")
+    deploymentName?: string;
+
+    ...AuthenticatedResourceModel;
+}
+
+@doc("User defined properties")
+model PropertiesConfigModel {
+    ...Record<PropertyConfigurationModel>;
+}
+
+@doc("Customized Property Configuration")
+@discriminator("kind")
+model PropertyConfigurationModel {
+    kind: PropertyConfigurationModelType;
+}
+
+@doc("Describe property definition")
+model DescribePropertyConfigurationModel extends PropertyConfigurationModel {
+    kind: PropertyConfigurationModelType.describe;
+
+    @doc("Property description")
+    description: string;
+
+    items?: PropertyItemConfigurationModelType;
+    examples?: string[] | string[][];
 }
 
 @doc("Error response object.")
@@ -211,7 +253,7 @@ model AnalyzeResultOperation {
     @key("taskName")
     @doc("Video analysis task name information.")
     @visibility("read", "create")
-    taskName: taskName;
+    taskName: TaskName;
 
     // @doc("Operation status.  notStarted, running, succeeded, or failed")
     // status: OperationStatus;
@@ -268,6 +310,7 @@ union PresetConfigurationModel {
     @doc("Example 1 preset configuration") "example1",
 }
 
+@doc("Authentication model type: None, Key, MI")
 union AuthenticationModelType {
     string,
 
@@ -279,4 +322,45 @@ union AuthenticationModelType {
 
     @doc("Azure Managed Identity authentication")
     managedIdentity: "ManagedIdentity",
+}
+
+@doc("Input resource location model kind")
+union InputResourceLocationModelKind {
+    string,
+
+    @doc("Resource Location is publicly available")
+    file: "File",
+
+    @doc("Resource Location is a file on an Azure Storage Account")
+    azureBlobFile: "AzureBlobFile",
+}
+
+@doc("Output resource location model kind")
+union OutputResourceLocationModelKind {
+    string,
+
+    @doc("Resource Location is a container on an Azure Storage Account")
+    azureBlobContainer: "AzureBlobContainer",
+}
+
+@doc("Completion resources model types")
+union CompletionResourceModelType {
+    string,
+
+    @doc("Completion resource based on GPTv APIs")
+    gptv: "Gptv",
+}
+
+@doc("Property Configuration model types")
+union PropertyConfigurationModelType {
+    string,
+
+    @doc("Describe property configuration type")
+    describe: "describe",
+}
+
+@doc("Property items configuration acceptable types")
+union PropertyItemConfigurationModelType {
+    string,
+    @doc("String items") "string",
 }
