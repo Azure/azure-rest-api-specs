@@ -188,10 +188,14 @@ model BytesBody<ContentType> {
   contentType: ContentType;
 }
 
-alias BodyParameter<T, name extends valueof string = "body"> = {
+alias BodyParameter<
+  T,
+  name extends valueof string = "body",
+  doc extends valueof string = "",
+> = {
+  @doc(doc)
   @friendlyName(name)
   @bodyRoot
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Don't want to add documentation"
   body: T;
 };
 
