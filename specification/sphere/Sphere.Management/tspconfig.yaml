@@ -1,3 +1,6 @@
+parameters:
+  service-dir:
+    default: "sdk/sphere"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azuresphere.json"
     examples-directory: "{project-root}/examples"
   "@azure-tools/typespec-python":
+    service-dir: "sdk/sphere/test"
     "basic-setup-py": true
     "package-version": 3.0.0b6
     "package-name": "azure-mgmt-sphere"
