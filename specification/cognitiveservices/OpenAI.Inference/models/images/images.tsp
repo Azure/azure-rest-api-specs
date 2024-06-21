@@ -19,75 +19,75 @@ union ImageSize {
   string,
 
   @doc("""
-  Very small image size of 256x256 pixels.
-  Only supported with dall-e-2 models.
-  """)
+    Very small image size of 256x256 pixels.
+    Only supported with dall-e-2 models.
+    """)
   size256x256: "256x256",
 
   @doc("""
-  A smaller image size of 512x512 pixels.
-  Only supported with dall-e-2 models.
-  """)
+    A smaller image size of 512x512 pixels.
+    Only supported with dall-e-2 models.
+    """)
   size512x512: "512x512",
 
   @doc("""
-  A standard, square image size of 1024x1024 pixels.
-  Supported by both dall-e-2 and dall-e-3 models.
-  """)
+    A standard, square image size of 1024x1024 pixels.
+    Supported by both dall-e-2 and dall-e-3 models.
+    """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
   size1024x1024: "1024x1024",
 
   @doc("""
-  A wider image size of 1024x1792 pixels.
-  Only supported with dall-e-3 models.
-  """)
+    A wider image size of 1024x1792 pixels.
+    Only supported with dall-e-3 models.
+    """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
   size1792x1024: "1792x1024",
 
   @doc("""
-  A taller image size of 1792x1024 pixels.
-  Only supported with dall-e-3 models.
-  """)
+    A taller image size of 1792x1024 pixels.
+    Only supported with dall-e-3 models.
+    """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
   size1024x1792: "1024x1792",
 }
 
 @doc("""
-An image generation configuration that specifies how the model should prioritize quality, cost, and speed.
-Only configurable with dall-e-3 models.
-""")
+  An image generation configuration that specifies how the model should prioritize quality, cost, and speed.
+  Only configurable with dall-e-3 models.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 union ImageGenerationQuality {
   string,
 
   @doc("""
-  Requests image generation with standard, balanced characteristics of quality, cost, and speed.
-  """)
+    Requests image generation with standard, balanced characteristics of quality, cost, and speed.
+    """)
   standard: "standard",
 
   @doc("""
-  Requests image generation with higher quality, higher cost and lower speed relative to standard.
-  """)
+    Requests image generation with higher quality, higher cost and lower speed relative to standard.
+    """)
   hd: "hd",
 }
 
 @doc("""
-An image generation configuration that specifies how the model should incorporate realism and other visual characteristics.
-Only configurable with dall-e-3 models.
-""")
+  An image generation configuration that specifies how the model should incorporate realism and other visual characteristics.
+  Only configurable with dall-e-3 models.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 union ImageGenerationStyle {
   string,
 
   @doc("""
-  Requests image generation in a natural style with less preference for dramatic and hyper-realistic characteristics.
-  """)
+    Requests image generation in a natural style with less preference for dramatic and hyper-realistic characteristics.
+    """)
   natural: "natural",
 
   @doc("""
-  Requests image generation in a vivid style with a higher preference for dramatic and hyper-realistic
-  characteristics.
-  """)
+    Requests image generation in a vivid style with a higher preference for dramatic and hyper-realistic
+    characteristics.
+    """)
   vivid: "vivid",
 }
 
@@ -107,27 +107,27 @@ union ImageGenerationResponseFormat {
 @added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageGenerationOptions {
   @doc("""
-  The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be
-  inferred as a default.
-  """)
+    The model name or Azure OpenAI model deployment name to use for image generation. If not specified, dall-e-2 will be
+    inferred as a default.
+    """)
   `model`?: string;
 
   @doc("A description of the desired images.")
   prompt: string;
 
   @doc("""
-  The number of images to generate.
-  Dall-e-2 models support values between 1 and 10.
-  Dall-e-3 models only support a value of 1.
-  """)
+    The number of images to generate.
+    Dall-e-2 models support values between 1 and 10.
+    Dall-e-3 models only support a value of 1.
+    """)
   @clientName("ImageCount", "csharp")
   n?: int32 = 1;
 
   @doc("""
-  The desired dimensions for generated images.
-  Dall-e-2 models support 256x256, 512x512, or 1024x1024.
-  Dall-e-3 models support 1024x1024, 1792x1024, or 1024x1792.
-  """)
+    The desired dimensions for generated images.
+    Dall-e-2 models support 256x256, 512x512, or 1024x1024.
+    Dall-e-3 models support 1024x1024, 1792x1024, or 1024x1792.
+    """)
   size?: ImageSize = ImageSize.size1024x1024;
 
   @doc("The format in which image generation response items should be presented.")
@@ -135,16 +135,16 @@ model ImageGenerationOptions {
   responseFormat?: ImageGenerationResponseFormat = ImageGenerationResponseFormat.url;
 
   @doc("""
-  The desired image generation quality level to use.
-  Only configurable with dall-e-3 models.
-  """)
+    The desired image generation quality level to use.
+    Only configurable with dall-e-3 models.
+    """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
   quality?: ImageGenerationQuality = ImageGenerationQuality.standard;
 
   @doc("""
-  The desired image generation style to use.
-  Only configurable with dall-e-3 models.
-  """)
+    The desired image generation style to use.
+    Only configurable with dall-e-3 models.
+    """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
   style?: ImageGenerationStyle = ImageGenerationStyle.vivid;
 
@@ -156,32 +156,32 @@ model ImageGenerationOptions {
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model ImageGenerationContentFilterResults {
   @doc("""
-  Describes language related to anatomical organs and genitals, romantic relationships,
-   acts portrayed in erotic or affectionate terms, physical sexual acts, including
-   those portrayed as an assault or a forced sexual violent act against one’s will,
-   prostitution, pornography, and abuse.
-  """)
+    Describes language related to anatomical organs and genitals, romantic relationships,
+     acts portrayed in erotic or affectionate terms, physical sexual acts, including
+     those portrayed as an assault or a forced sexual violent act against one’s will,
+     prostitution, pornography, and abuse.
+    """)
   sexual?: ContentFilterResult;
 
   @doc("""
-  Describes language related to physical actions intended to hurt, injure, damage, or
-  kill someone or something; describes weapons, etc.
-  """)
+    Describes language related to physical actions intended to hurt, injure, damage, or
+    kill someone or something; describes weapons, etc.
+    """)
   violence?: ContentFilterResult;
 
   @doc("""
-  Describes language attacks or uses that include pejorative or discriminatory language
-  with reference to a person or identity group on the basis of certain differentiating
-  attributes of these groups including but not limited to race, ethnicity, nationality,
-  gender identity and expression, sexual orientation, religion, immigration status, ability
-  status, personal appearance, and body size.
-  """)
+    Describes language attacks or uses that include pejorative or discriminatory language
+    with reference to a person or identity group on the basis of certain differentiating
+    attributes of these groups including but not limited to race, ethnicity, nationality,
+    gender identity and expression, sexual orientation, religion, immigration status, ability
+    status, personal appearance, and body size.
+    """)
   hate?: ContentFilterResult;
 
   @doc("""
-  Describes language related to physical actions intended to purposely hurt, injure,
-  or damage one’s body, or kill oneself.
-  """)
+    Describes language related to physical actions intended to purposely hurt, injure,
+    or damage one’s body, or kill oneself.
+    """)
   @encodedName("application/json", "self_harm")
   selfHarm?: ContentFilterResult;
 }
@@ -196,12 +196,17 @@ model ImageGenerationPromptFilterResults {
 
   @doc("Whether a jailbreak attempt was detected in the prompt.")
   jailbreak?: ContentFilterDetectionResult;
+
+  /** Information about customer block lists and if something was detected the associated list ID. */
+  @encodedName("application/json", "custom_blocklists")
+  @added(ServiceApiVersions.v2024_05_01_Preview)
+  customBlocklists?: ContentFilterDetailedResults;
 }
 
 @doc("""
-A representation of a single generated image, provided as either base64-encoded data or as a URL from which the image
-may be retrieved.
-""")
+  A representation of a single generated image, provided as either base64-encoded data or as a URL from which the image
+  may be retrieved.
+  """)
 @added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageGenerationData {
   @doc("The URL that provides temporary access to download the generated image.")
@@ -217,21 +222,21 @@ model ImageGenerationData {
   contentFilterResults?: ImageGenerationContentFilterResults;
 
   @doc("""
-  The final prompt used by the model to generate the image.
-  Only provided with dall-3-models and only when revisions were made to the prompt.
-  """)
+    The final prompt used by the model to generate the image.
+    Only provided with dall-3-models and only when revisions were made to the prompt.
+    """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "revised_prompt")
   revisedPrompt?: string;
 
   @doc("""
-  Information about the content filtering category (hate, sexual, violence, self_harm), if
-  it has been detected, as well as the severity level (very_low, low, medium, high-scale
-  that determines the intensity and risk level of harmful content) and if it has been
-  filtered or not. Information about jailbreak content and profanity, if it has been detected,
-  and if it has been filtered or not. And information about customer block list, if it has
-  been filtered and its id.
-  """)
+    Information about the content filtering category (hate, sexual, violence, self_harm), if
+    it has been detected, as well as the severity level (very_low, low, medium, high-scale
+    that determines the intensity and risk level of harmful content) and if it has been
+    filtered or not. Information about jailbreak content and profanity, if it has been detected,
+    and if it has been filtered or not. And information about customer block list, if it has
+    been filtered and its id.
+    """)
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "prompt_filter_results")
   promptFilterResults?: ImageGenerationPromptFilterResults;
@@ -241,9 +246,9 @@ model ImageGenerationData {
 @added(ServiceApiVersions.v2023_06_01_Preview)
 model ImageGenerations {
   @doc("""
-  A timestamp representing when this operation was started.
-  Expressed in seconds since the Unix epoch of 1970-01-01T00:00:00+0000.
-  """)
+    A timestamp representing when this operation was started.
+    Expressed in seconds since the Unix epoch of 1970-01-01T00:00:00+0000.
+    """)
   @clientName("createdAt", "java")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
