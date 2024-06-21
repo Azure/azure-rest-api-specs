@@ -2,24 +2,24 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.DataBoxCopyStartedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxCopyStartedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.DataBoxCopyStartedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxCopyStartedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.DataBoxCopyCompletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxCopyCompletedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.DataBoxCopyCompletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxCopyCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.DataBoxOrderCompletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxOrderCompletedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.DataBoxOrderCompletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxOrderCompletedEventData,
   Access.public
 );
 //Enums
-@@usage(Microsoft.EventGrid.SystemEvents.DataBoxStageName, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.DataBoxStageName, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxStageName, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxStageName, Access.public);

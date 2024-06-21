@@ -2,22 +2,22 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateCreatedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.PolicyInsights.PolicyInsightsPolicyStateCreatedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateCreatedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.PolicyInsights.PolicyInsightsPolicyStateCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateChangedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.PolicyInsights.PolicyInsightsPolicyStateChangedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateChangedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.PolicyInsights.PolicyInsightsPolicyStateChangedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateDeletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.PolicyInsights.PolicyInsightsPolicyStateDeletedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateDeletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.PolicyInsights.PolicyInsightsPolicyStateDeletedEventData,
   Access.public
 );
 //Enums

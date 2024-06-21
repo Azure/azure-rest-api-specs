@@ -2,22 +2,22 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.ApiCenter.ApiCenterApiDefinitionAddedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.ApiCenter.ApiCenterApiDefinitionAddedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.ApiCenter.ApiCenterApiDefinitionUpdatedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Apicenter.ApiCenterApiDefinitionUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiCenterApiSpecification,
+@@usage(Microsoft.EventGrid.SystemEvents.ApiCenter.ApiCenterApiSpecification,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiCenterApiSpecification,
+@@access(Microsoft.EventGrid.SystemEvents.ApiCenter.ApiCenterApiSpecification,
   Access.public
 );
 //Enums

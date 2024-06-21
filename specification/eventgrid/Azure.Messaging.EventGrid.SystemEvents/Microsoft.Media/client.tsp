@@ -2,170 +2,170 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobStateChangeEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobStateChangeEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobStateChangeEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobStateChangeEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobError, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobError, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobErrorDetail, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobErrorDetail, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobOutput, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobOutput, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobOutputAsset, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobOutputAsset, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobOutputProgressEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobError, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobError, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorDetail, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorDetail, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutput, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutput, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputAsset, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputAsset, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputProgressEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobOutputProgressEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputProgressEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobOutputStateChangeEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputStateChangeEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobOutputStateChangeEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputStateChangeEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobScheduledEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobScheduledEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobScheduledEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobScheduledEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobProcessingEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobProcessingEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobProcessingEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobProcessingEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobCancelingEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobCancelingEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobCancelingEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobCancelingEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobFinishedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobFinishedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobFinishedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobFinishedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobCanceledEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobCanceledEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobCanceledEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobCanceledEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobErroredEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErroredEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobErroredEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErroredEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobOutputCanceledEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputCanceledEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobOutputCanceledEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputCanceledEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobOutputCancelingEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputCancelingEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobOutputCancelingEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputCancelingEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobOutputErroredEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputErroredEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobOutputErroredEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputErroredEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobOutputFinishedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputFinishedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobOutputFinishedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputFinishedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobOutputProcessingEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputProcessingEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobOutputProcessingEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputProcessingEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobOutputScheduledEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputScheduledEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobOutputScheduledEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputScheduledEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaLiveEventEncoderConnectedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventEncoderConnectedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaLiveEventEncoderConnectedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventEncoderConnectedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaLiveEventConnectionRejectedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventConnectionRejectedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaLiveEventConnectionRejectedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventConnectionRejectedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaLiveEventEncoderDisconnectedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventEncoderDisconnectedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaLiveEventEncoderDisconnectedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventEncoderDisconnectedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaLiveEventIncomingStreamReceivedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventIncomingStreamReceivedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaLiveEventIncomingStreamReceivedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventIncomingStreamReceivedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaLiveEventIncomingStreamsOutOfSyncEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventIncomingStreamsOutOfSyncEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaLiveEventIncomingStreamsOutOfSyncEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventIncomingStreamsOutOfSyncEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventIncomingVideoStreamsOutOfSyncEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaLiveEventIncomingDataChunkDroppedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventIncomingDataChunkDroppedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaLiveEventIncomingDataChunkDroppedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventIncomingDataChunkDroppedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaLiveEventIngestHeartbeatEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventIngestHeartbeatEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaLiveEventIngestHeartbeatEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventIngestHeartbeatEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaLiveEventTrackDiscontinuityDetectedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventTrackDiscontinuityDetectedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaLiveEventTrackDiscontinuityDetectedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventTrackDiscontinuityDetectedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaLiveEventChannelArchiveHeartbeatEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventChannelArchiveHeartbeatEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.MediaLiveEventChannelArchiveHeartbeatEventData,
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaLiveEventChannelArchiveHeartbeatEventData,
   Access.public
 );
 //Enums
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobState, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobState, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobErrorCode, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobErrorCode, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobErrorCategory, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobErrorCategory, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaJobRetry, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaJobRetry, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobState, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobState, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCode, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCode, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCategory, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCategory, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobRetry, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobRetry, Access.public);

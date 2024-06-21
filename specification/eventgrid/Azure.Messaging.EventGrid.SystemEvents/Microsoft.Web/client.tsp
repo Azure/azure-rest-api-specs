@@ -2,102 +2,102 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.AppEventTypeDetail, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AppEventTypeDetail, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.WebAppUpdatedEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.WebAppUpdatedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.AppEventTypeDetail, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.Web.AppEventTypeDetail, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebAppUpdatedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebAppUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebBackupOperationStartedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebBackupOperationStartedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebBackupOperationStartedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebBackupOperationStartedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebBackupOperationCompletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebBackupOperationCompletedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebBackupOperationCompletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebBackupOperationCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebBackupOperationFailedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebBackupOperationFailedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebBackupOperationFailedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebBackupOperationFailedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebRestoreOperationStartedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebRestoreOperationStartedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebRestoreOperationStartedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebRestoreOperationStartedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebRestoreOperationCompletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebRestoreOperationCompletedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebRestoreOperationCompletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebRestoreOperationCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebRestoreOperationFailedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebRestoreOperationFailedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebRestoreOperationFailedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebRestoreOperationFailedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebSlotSwapStartedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebSlotSwapStartedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebSlotSwapStartedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebSlotSwapStartedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebSlotSwapCompletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebSlotSwapCompletedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebSlotSwapCompletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebSlotSwapCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebSlotSwapFailedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebSlotSwapFailedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebSlotSwapFailedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebSlotSwapFailedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebSlotSwapWithPreviewStartedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebSlotSwapWithPreviewStartedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebSlotSwapWithPreviewStartedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebSlotSwapWithPreviewStartedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebSlotSwapWithPreviewCancelledEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebSlotSwapWithPreviewCancelledEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebSlotSwapWithPreviewCancelledEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebSlotSwapWithPreviewCancelledEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebAppServicePlanUpdatedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebAppServicePlanUpdatedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebAppServicePlanUpdatedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebAppServicePlanUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AppServicePlanEventTypeDetail,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.AppServicePlanEventTypeDetail,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.AppServicePlanEventTypeDetail,
+@@access(Microsoft.EventGrid.SystemEvents.Web.AppServicePlanEventTypeDetail,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.WebAppServicePlanUpdatedEventDataSku,
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebAppServicePlanUpdatedEventDataSku,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.WebAppServicePlanUpdatedEventDataSku,
+@@access(Microsoft.EventGrid.SystemEvents.Web.WebAppServicePlanUpdatedEventDataSku,
   Access.public
 );
 //Enums
-@@usage(Microsoft.EventGrid.SystemEvents.AppAction, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AppAction, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.StampKind, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.StampKind, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AppServicePlanAction, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AppServicePlanAction, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AsyncStatus, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AsyncStatus, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.Web.AppAction, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.Web.AppAction, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.Web.StampKind, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.Web.StampKind, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.Web.AppServicePlanAction, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.Web.AppServicePlanAction, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.Web.AsyncStatus, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.Web.AsyncStatus, Access.public);
