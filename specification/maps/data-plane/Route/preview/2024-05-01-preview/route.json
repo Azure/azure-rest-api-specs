@@ -2527,13 +2527,13 @@
           "$ref": "#/definitions/RouteRangeVehicleSpec"
         },
         "distanceBudgetInMeters ": {
-          "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit. If `isSimplifiedPolygon` is true, then the maximum distance is 50000000 meters; otherwise, it is 360000 meters.",
+          "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit. If `isSimplifiedPolygon` is false, then the maximum distance is 360000 meters; otherwise, it is 50000000 meters.",
           "type": "number",
           "minimum": 0,
           "maximum": 50000000
         },
         "timeBudgetInSec": {
-          "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint. If isSimplifiedPolygon is true, then the maximum time is 14400 seconds; otherwise, it is 10000000 seconds.",
+          "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint. If `isSimplifiedPolygon` is false, then the maximum time is 14400 seconds; otherwise, it is 10000000 seconds.",
           "type": "number",
           "minimum": 0,
           "maximum": 10000000
