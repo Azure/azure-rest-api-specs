@@ -27,7 +27,7 @@ namespace Azure.AI.OpenAI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/messages")
-@added(ServiceApiVersions.v2024_05_01_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 op createMessage(
   @path threadId: string,
 

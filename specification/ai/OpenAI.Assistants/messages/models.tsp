@@ -8,7 +8,7 @@ namespace Azure.AI.OpenAI.Assistants;
 using TypeSpec.Versioning;
 
 /** A single message within an assistant thread, as provided during that thread's creation for its initial state. */
-@added(ServiceApiVersions.v2024_05_01_preview)
+@added(ServiceApiVersions.v2024_02_15_preview)
 model ThreadMessageOptions {
   /**
    * The role of the entity that is creating the message. Allowed values include:
@@ -25,6 +25,7 @@ model ThreadMessageOptions {
 
   /** A list of files attached to the message, and the tools they should be added to. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @added(ServiceApiVersions.v2024_05_01_preview)
   attachments?: MessageAttachment[] | null;
 
   ...OptionalNullableMetadata;
