@@ -170,3 +170,29 @@ model KubernetesReference {
   @doc("Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace.")
   `namespace`?: string;
 }
+
+@doc("Cert-Manager issuerRef properties")
+model CertManagerIssuerRef {
+  @doc("group of issuer.")
+  apiGroup: string = "cert-manager.io";
+
+  @doc("kind of issuer (Issuer or ClusterIssuer).")
+  kind: CertManagerIssuerKind;
+
+  @doc("name of issuer.")
+  name: string;
+
+  @doc("Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace.")
+  `namespace`?: string;
+}
+
+@doc("CertManagerIssuerKind properties")
+union CertManagerIssuerKind {
+  string,
+
+  @doc("Issuer kind.")
+  Issuer: "Issuer",
+
+  @doc("ClusterIssuer kind.")
+  ClusterIssuer: "ClusterIssuer",
+}

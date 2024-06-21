@@ -133,18 +133,6 @@ model AutomaticCertMethod {
   secretNamespace?: string;
 }
 
-@doc("Cert-Manager issuerRef properties")
-model CertManagerIssuerRef {
-  @doc("group of issuer.")
-  group: string = "cert-manager.io";
-
-  @doc("kind of issuer (Issuer or ClusterIssuer).")
-  kind: CertManagerIssuerKind;
-
-  @doc("name of issuer.")
-  name: string;
-}
-
 @doc("Subject Alternative Names (SANs) for certificate.")
 model SanForCert {
   @doc("DNS SANs.")
@@ -152,15 +140,4 @@ model SanForCert {
 
   @doc("IP address SANs.")
   ip: string[] = #[];
-}
-
-@doc("CertManagerIssuerKind properties")
-union CertManagerIssuerKind {
-  string,
-
-  @doc("Issuer kind.")
-  Issuer: "Issuer",
-
-  @doc("ClusterIssuer kind.")
-  ClusterIssuer: "ClusterIssuer",
 }

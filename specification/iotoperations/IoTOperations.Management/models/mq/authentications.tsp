@@ -46,7 +46,7 @@ model BrokerAuthenticationProperties {
 @doc("Set of broker authentication policies. Only one method is supported for each entry.")
 model BrokerAuthenticatorMethods {
   @doc("Custom authentication configuration.")
-  mode: BrokerAuthenticationMode;
+  method: BrokerAuthenticationMethod;
 
   @doc("Custom authentication configuration.")
   custom?: BrokerAuthenticatorMethodCustom;
@@ -59,7 +59,7 @@ model BrokerAuthenticatorMethods {
 }
 
 @doc("Broker Authentication Mode")
-union BrokerAuthenticationMode {
+union BrokerAuthenticationMethod {
   string,
 
   @doc("Custom authentication configuration.")

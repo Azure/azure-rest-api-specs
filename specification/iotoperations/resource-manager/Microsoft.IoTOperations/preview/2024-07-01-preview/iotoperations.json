@@ -3022,7 +3022,7 @@
         }
       }
     },
-    "AuthenticationMode": {
+    "AuthenticationMethod": {
       "type": "string",
       "description": "Authentication Mode properties",
       "enum": [
@@ -3033,7 +3033,7 @@
         "X509Credentials"
       ],
       "x-ms-enum": {
-        "name": "AuthenticationMode",
+        "name": "AuthenticationMethod",
         "modelAsString": true,
         "values": [
           {
@@ -3224,7 +3224,7 @@
         }
       }
     },
-    "BrokerAuthenticationMode": {
+    "BrokerAuthenticationMethod": {
       "type": "string",
       "description": "Broker Authentication Mode",
       "enum": [
@@ -3233,7 +3233,7 @@
         "X509"
       ],
       "x-ms-enum": {
-        "name": "BrokerAuthenticationMode",
+        "name": "BrokerAuthenticationMethod",
         "modelAsString": true,
         "values": [
           {
@@ -3439,8 +3439,8 @@
       "type": "object",
       "description": "Set of broker authentication policies. Only one method is supported for each entry.",
       "properties": {
-        "mode": {
-          "$ref": "#/definitions/BrokerAuthenticationMode",
+        "method": {
+          "$ref": "#/definitions/BrokerAuthenticationMethod",
           "description": "Custom authentication configuration."
         },
         "custom": {
@@ -3457,7 +3457,7 @@
         }
       },
       "required": [
-        "mode"
+        "method"
       ]
     },
     "BrokerAuthorizationProperties": {
@@ -3987,7 +3987,7 @@
       "type": "object",
       "description": "Cert-Manager issuerRef properties",
       "properties": {
-        "group": {
+        "apiGroup": {
           "type": "string",
           "description": "group of issuer.",
           "default": "cert-manager.io"
@@ -3999,10 +3999,14 @@
         "name": {
           "type": "string",
           "description": "name of issuer."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace."
         }
       },
       "required": [
-        "group",
+        "apiGroup",
         "kind",
         "name"
       ]
@@ -4230,8 +4234,8 @@
       "type": "object",
       "description": "Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.",
       "properties": {
-        "mode": {
-          "$ref": "#/definitions/AuthenticationMode",
+        "method": {
+          "$ref": "#/definitions/AuthenticationMethod",
           "description": "Mode of Authentication."
         },
         "systemAssignedManagedIdentity": {
@@ -4260,7 +4264,7 @@
         }
       },
       "required": [
-        "mode"
+        "method"
       ]
     },
     "DataFlowEndpointAuthenticationSasl": {

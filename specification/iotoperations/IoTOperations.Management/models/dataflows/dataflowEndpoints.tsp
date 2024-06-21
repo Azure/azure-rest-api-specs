@@ -102,7 +102,7 @@ model DataFlowEndpointDataExplorer {
 @doc("Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.")
 model DataFlowEndpointAuthentication {
   @doc("Mode of Authentication.")
-  mode: AuthenticationMode;
+  method: AuthenticationMethod;
 
   @doc("System-assigned managed identity authentication.")
   systemAssignedManagedIdentity?: DataFlowEndpointAuthenticationSystemAssignedManagedIdentity;
@@ -124,7 +124,7 @@ model DataFlowEndpointAuthentication {
 }
 
 @doc("Authentication Mode properties")
-union AuthenticationMode {
+union AuthenticationMethod {
   string,
 
   @doc("SystemAssignedManagedIdentity Option")
