@@ -80,21 +80,10 @@ model ListenerPort {
   port: int32;
 
   @doc("Protocol to use for client connections.")
-  protocol?: ListenerPortProtocol = ListenerPortProtocol.Mqtt;
+  protocol?: MqttProtocolType = MqttProtocolType.Mqtt;
 
   @doc("TLS server certificate settings for this port. Omit to disable TLS.")
   tls?: TlsCertMethod;
-}
-
-@doc("Mqtt Protocol types")
-union ListenerPortProtocol {
-  string,
-
-  @doc("protocol mqtt")
-  Mqtt: "Mqtt",
-
-  @doc("protocol websockets")
-  WebSockets: "WebSockets",
 }
 
 @doc("Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported")

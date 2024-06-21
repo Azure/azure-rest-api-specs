@@ -50,15 +50,6 @@ union Mode {
   Disabled: "Disabled",
 }
 
-@doc("X509 Certificate Authentication properties.")
-model X509ManualCertificate {
-  @doc("Kubernetes secret containing an X.509 client certificate. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretName: string;
-
-  @doc("Certificate K8S namespace. Omit to use current namespace.")
-  secretNamespace?: string;
-}
-
 @doc("Diagnostic Setting properties")
 model Diagnostics {
   @doc("The log settings.")
@@ -119,6 +110,7 @@ model Metrics {
   @maxValue(60)
   updateIntervalSeconds?: int32 = 30;
 }
+
 @doc("Diagnostic Self tracing properties")
 model SelfTracing {
   @doc("The toggle to enable/disable self tracing.")
@@ -141,4 +133,40 @@ model BatchingConfiguration {
   @minValue(0)
   @maxValue(4294967295)
   maxMessages?: int32 = 100000;
+}
+
+@doc("Tls properties")
+model TlsProperties {
+  @doc("Mode for TLS.")
+  mode?: Mode = Mode.Enabled;
+
+  @doc("Trusted CA certificate config map.")
+  trustedCaCertificateConfigMap?: string;
+}
+
+@doc("Mqtt Protocol types")
+union MqttProtocolType {
+  string,
+
+  @doc("protocol mqtt")
+  Mqtt: "Mqtt",
+
+  @doc("protocol websocket")
+  WebSockets: "WebSockets",
+}
+
+
+@doc("Kubernetes reference")
+model KubernetesReference {
+  @doc("APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.")
+  apiGroup?: string;
+
+  @doc("Kind is the type of resource being referenced")
+  kind: string;
+
+  @doc("Name is the name of resource being referenced")
+  name: string;
+
+  @doc("Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace.")
+  `namespace`?: string;
 }

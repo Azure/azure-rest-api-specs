@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./models/base.tsp";
+import "./models/auth.tsp";
 import "./models/instance.tsp";
 import "./models/mq/brokers.tsp";
 import "./models/mq/authentications.tsp";

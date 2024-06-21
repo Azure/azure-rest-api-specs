@@ -34,11 +34,11 @@ model DataFlowEndpointResource is TrackedResource<DataFlowEndpointProperties> {
 
 @doc("DataFlowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")
 model DataFlowEndpointProperties {
-  @doc("Authentication configuration.")
-  authentication: DataFlowEndpointAuthentication;
-
   @doc("Endpoint Type.")
   endpointType: EndpointType;
+
+  @doc("Authentication configuration.")
+  authentication: DataFlowEndpointAuthentication;
 
   @doc("Azure Data Explorer endpoint.")
   dataExplorerSettings?: DataFlowEndpointDataExplorer;
@@ -111,7 +111,7 @@ model DataFlowEndpointAuthentication {
   userAssignedManagedIdentity?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
 
   @doc("SAS token authentication.")
-  accessTokenSecretName?: string;
+  accessToken?: string;
 
   @doc("SASL authentication.")
   sasl?: DataFlowEndpointAuthenticationSasl;
@@ -133,32 +133,14 @@ union AuthenticationMode {
   @doc("UserAssignedManagedIdentity Option")
   UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
 
-  @doc("AccessTokenSecretName Option")
-  AccessTokenSecretName: "AccessTokenSecretName",
+  @doc("AccessToken Option")
+  AccessToken: "AccessToken",
 
   @doc("Sasl Option")
   Sasl: "Sasl",
 
   @doc("X509Credentials Option")
   X509Credentials: "X509Credentials",
-}
-
-@doc("DataFlowEndpoint Authentication SystemAssignedManagedIdentity properties")
-model DataFlowEndpointAuthenticationSystemAssignedManagedIdentity {
-  @doc("Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration.")
-  audience: string;
-}
-
-@doc("DataFlowEndpoint Authentication UserAssignedManagedIdentity properties")
-model DataFlowEndpointAuthenticationUserAssignedManagedIdentity {
-  @doc("Client ID for the user-assigned managed identity.")
-  clientId: string;
-
-  @doc("Resource identifier (application ID URI) of the resource, affixed with the .default suffix.")
-  scope: string;
-
-  @doc("Tenant ID.")
-  tenantId: string;
 }
 
 @doc("Azure Data Lake endpoint properties")
@@ -186,6 +168,7 @@ model DataFlowEndpointFabricOneLake {
   @doc("Type of location of the data in the workspace. Can be either tables or files.")
   oneLakePathType: DataFlowEndpointFabricPathType;
 }
+
 @doc("Microsoft Fabric endpoint Batching properties")
 model DataFlowEndpointFabricBatching {
   @doc("Batching latency in seconds.")
@@ -243,36 +226,7 @@ model DataFlowEndpointKafka {
   partitionStrategy?: DataFlowEndpointKafkaPartitionStrategy = DataFlowEndpointKafkaPartitionStrategy.Default;
 
   @doc("TLS configuration.")
-  tls: DataFlowEndpointKafkaTls;
-}
-
-@doc("DataFlowEndpoint Authentication Sasl properties")
-model DataFlowEndpointAuthenticationSasl {
-  @doc("Type of SASL authentication. Can be PLAIN, SCRAM-SHA-256, or SCRAM-SHA-512.")
-  saslType: DataFlowEndpointAuthenticationSaslType;
-
-  @doc("Token secret name.")
-  tokenSecretName: string;
-}
-
-@doc("DataFlowEndpoint Authentication Sasl Type properties")
-union DataFlowEndpointAuthenticationSaslType {
-  string,
-
-  @doc("PLAIN Type")
-  Plain: "Plain",
-
-  @doc("SCRAM_SHA_256 Type")
-  ScramSha256: "ScramSha256",
-
-  @doc("SCRAM_SHA_512 Type")
-  ScramSha512: "ScramSha512",
-}
-
-@doc("DataFlowEndpoint Authentication X509 properties")
-model DataFlowEndpointAuthenticationX509 {
-  @doc("Secret name of the X.509 certificate.")
-  secretName: string;
+  tls: TlsProperties;
 }
 
 @doc("Kafka endpoint Batching properties")
@@ -344,15 +298,6 @@ union DataFlowEndpointKafkaPartitionStrategy {
   Property: "Property",
 }
 
-@doc("DataFlowEndpoint Kafka Tls properties")
-model DataFlowEndpointKafkaTls {
-  @doc("Mode for TLS.")
-  mode?: Mode = Mode.Enabled;
-
-  @doc("Trusted CA certificate config map.")
-  trustedCaCertificateConfigMap?: string;
-}
-
 @doc("Local persistent volume endpoint properties")
 model DataFlowEndpointLocalStorage {
   @doc("Persistent volume claim name.")
@@ -394,18 +339,7 @@ model DataFlowEndpointMqtt {
   sharedSubscription?: DataFlowEndpointMqttSessionExpirySeconds;
 
   @doc("TLS configuration.")
-  tls?: DataFlowEndpointMqttTls;
-}
-
-@doc("Mqtt Protocol types")
-union MqttProtocolType {
-  string,
-
-  @doc("protocol mqtt")
-  Mqtt: "Mqtt",
-
-  @doc("protocol websocket")
-  WebSockets: "WebSockets",
+  tls?: TlsProperties;
 }
 
 @doc("Mqtt Retain types")
@@ -427,13 +361,4 @@ model DataFlowEndpointMqttSessionExpirySeconds {
 
   @doc("Shared subscription group name.")
   groupName: string;
-}
-
-@doc("Mqtt endpoint Tls properties")
-model DataFlowEndpointMqttTls {
-  @doc("Mode for TLS.")
-  mode?: Mode = Mode.Enabled;
-
-  @doc("Trusted CA certificate config map.")
-  trustedCaCertificateConfigMap?: string;
 }
