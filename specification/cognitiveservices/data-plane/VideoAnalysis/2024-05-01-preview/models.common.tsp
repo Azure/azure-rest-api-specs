@@ -29,7 +29,7 @@ model VideoAnalysisTaskApiVersionParameter {
 @doc("Time range considering the offset from 0.0s and lasting a duration.")
 model TimeRange {
     @doc("Offset in ISO 8601 duration format, i.e., P[n]Y[n]M[n]DT[n]H[n]M[n]S or P[n]W.")
-    offset?: string;
+    offset: string;
 
     @doc("Duration in ISO 8601 duration format, i.e., P[n]Y[n]M[n]DT[n]H[n]M[n]S or P[n]W.")
     duration?: string;
@@ -69,16 +69,16 @@ model VideoAnalysisTaskResponseModel {
     taskName: TaskName;
 
     @doc("Video analysis batch name information.")
-    batchName?: string;
+    batchName: string;
 
     @doc("Datetime when the video analysis task was created.")
-    createdDateTime?: utcDateTime;
+    createdDateTime: utcDateTime;
 
     @doc("Datetime when the video analysis task was last modified.")
-    lastModifiedDateTime?: utcDateTime;
+    lastModifiedDateTime: utcDateTime;
 
     @doc("Task status.")
-    status?: TaskStatusModel;
+    status: TaskStatusModel;
 
     @doc("Error related to the video analysis task.")
     error?: ErrorResponse;
@@ -88,7 +88,7 @@ model VideoAnalysisTaskResponseModel {
 
     @doc("Read only. The latest ETag for the dataset. May be used with the 'If-Match' header when updating or deleting a dataset.")
     @visibility("read")
-    etag?: string;
+    etag: string;
 }
 
 @doc("A task that describes a video")
@@ -119,7 +119,7 @@ model InputResourceLocationModel {
     kind: InputResourceLocationModelKind;
 
     @doc("It represents the preset configuration that will be used to run this task")
-    preset: PresetConfigurationModel;
+    preset?: PresetConfigurationModel;
 }
 
 @doc("Resource Location")
@@ -132,7 +132,7 @@ model OutputResourceLocationModel {
 @doc("Files accessed without authentication")
 model FileResourceLocationModel extends InputResourceLocationModel {
     kind: InputResourceLocationModelKind.file;
-    url?: url;
+    url: url;
     range?: TimeRange;
 }
 
@@ -146,7 +146,7 @@ model AuthenticatedResourceModel {
 model AzureBlobFileResourceLocationModel extends InputResourceLocationModel {
     kind: InputResourceLocationModelKind.azureBlobFile;
     url: url;
-    range: TimeRange;
+    range?: TimeRange;
     ...AuthenticatedResourceModel;
 }
 
@@ -203,8 +203,7 @@ model DescribePropertyConfigurationModel extends PropertyConfigurationModel {
     @doc("Property description")
     description: string;
 
-    items?: PropertyItemConfigurationModelType;
-    examples?: string[] | string[][];
+    examples?: string[];
 }
 
 @doc("Error response object.")
@@ -245,31 +244,6 @@ model InnerError {
     @doc("Inner error.")
     @clientName("InnerErrorObject", "csharp")
     innererror?: InnerError;
-}
-
-@doc("Status and result of the analyze operation.")
-@error
-model AnalyzeResultOperation {
-    @key("taskName")
-    @doc("Video analysis task name information.")
-    @visibility("read", "create")
-    taskName: TaskName;
-
-    // @doc("Operation status.  notStarted, running, succeeded, or failed")
-    // status: OperationStatus;
-
-    // @doc("Date and time (UTC) when the analyze operation was submitted.")
-    // createdDateTime: utcDateTime;
-
-    // @doc("Date and time (UTC) when the status was last updated.")
-    // lastUpdatedDateTime: utcDateTime;
-
-    // @doc("Encountered error during document analysis.")
-    // error?: Error;
-
-    // @lroResult
-    // @doc("Document analysis result.")
-    // analyzeResult?: string;
 }
 
 @lroStatus
