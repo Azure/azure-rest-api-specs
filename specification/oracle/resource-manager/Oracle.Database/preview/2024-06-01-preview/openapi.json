@@ -1213,6 +1213,63 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/addAzureSubscriptions": {
+      "post": {
+        "operationId": "OracleSubscriptions_AddAzureSubscriptions",
+        "tags": [
+          "OracleSubscriptions"
+        ],
+        "description": "Add Azure Subscriptions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureSubscriptions"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add Azure Subscriptions to the OracleSubscription": {
+            "$ref": "./examples/oracleSubscriptions_addAzureSubscriptions.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Oracle.Database/oracleSubscriptions/default/listActivationLinks": {
       "post": {
         "operationId": "OracleSubscriptions_ListActivationLinks",
@@ -3876,6 +3933,37 @@
         "dbServers"
       ]
     },
+    "AddSubscriptionOperationState": {
+      "type": "string",
+      "description": "Add Subscription Operation state enum",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AddSubscriptionOperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded - State when Add Subscription operation succeeded"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating - State when Add Subscription operation is being Updated"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed - State when Add Subscription operation failed"
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "AllConnectionStringType": {
       "type": "object",
       "description": "The connection string profile to allow clients to group, filter and select connection string values based on structured metadata.",
@@ -5548,6 +5636,22 @@
         ]
       },
       "readOnly": true
+    },
+    "AzureSubscriptions": {
+      "type": "object",
+      "description": "Azure Subscriptions model",
+      "properties": {
+        "azureSubscriptionIds": {
+          "type": "array",
+          "description": "Azure Subscription Ids to be updated",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "azureSubscriptionIds"
+      ]
     },
     "CloneType": {
       "type": "string",
@@ -8710,6 +8814,24 @@
           "x-ms-mutability": [
             "update"
           ]
+        },
+        "azureSubscriptionIds": {
+          "type": "array",
+          "description": "Azure subscriptions to be added",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "addSubscriptionOperationState": {
+          "$ref": "#/definitions/AddSubscriptionOperationState",
+          "description": "State of the add Azure subscription operation on Oracle subscription",
+          "readOnly": true
+        },
+        "lastOperationStatusDetail": {
+          "type": "string",
+          "description": "Status details of the last operation on Oracle subscription",
+          "readOnly": true
         }
       }
     },
