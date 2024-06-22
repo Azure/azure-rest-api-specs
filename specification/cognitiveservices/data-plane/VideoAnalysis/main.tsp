@@ -42,5 +42,5 @@ model AADToken
 enum Versions {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     @doc("The 2024-05-01-preview version of the VideoAnalysis service.")
-    v2024_05_01_preview: "v2024-05-01-preview",
+    v2024_05_01_preview: "2024-05-01-preview",
 }
