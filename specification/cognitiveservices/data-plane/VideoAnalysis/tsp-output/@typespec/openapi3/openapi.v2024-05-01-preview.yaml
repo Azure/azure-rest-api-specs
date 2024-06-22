@@ -1,0 +1,770 @@
+openapi: 3.0.0
+info:
+  title: Video Analysis
+  version: v2024-05-01-preview
+tags:
+  - name: VideoDescription
+paths:
+  /videodescriptions:
+    get:
+      tags:
+        - VideoDescription
+      operationId: VideoDescriptions_list
+      description: Retrieves all video analysis task status.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            x-ms-client-request-id:
+              required: false
+              description: An opaque, globally-unique, client-generated string identifier for the request.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.uuid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedVideoAnalysisTaskResponseModel'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+  /videodescriptions/{taskName}:
+    post:
+      tags:
+        - VideoDescription
+      operationId: VideoDescriptions_create
+      description: Creates a video analysis task for the specified video file.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - $ref: '#/components/parameters/VideoDescriptionTaskRequestModel.taskName'
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoAnalysisTaskResponseModel'
+        '202':
+          description: The request has been accepted for processing, but processing has not yet completed.
+          headers:
+            Retry-After:
+              required: false
+              description: The Retry-After header can indicate how long the client should wait before polling the operation status.
+              schema:
+                type: integer
+                format: int32
+            Operation-Location:
+              required: true
+              schema:
+                type: string
+                format: uri
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  allOf:
+                    - $ref: '#/components/schemas/InputResourceLocationModel'
+                  description: Video Analysis Task Input content information
+                output:
+                  allOf:
+                    - $ref: '#/components/schemas/OutputResourceLocationModel'
+                  description: Video Analysis Task Output content information
+                resource:
+                  allOf:
+                    - $ref: '#/components/schemas/Resource'
+                  description: Resources components used for the Video Analysis Task
+                properties:
+                  allOf:
+                    - $ref: '#/components/schemas/PropertiesConfigModel'
+                  description: TODO - Replace properties
+              required:
+                - input
+                - output
+                - resource
+    get:
+      tags:
+        - VideoDescription
+      operationId: VideoDescriptions_get
+      description: Retrieves the video analysis task status/result.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: taskName
+          in: path
+          required: true
+          description: Video analysis task name information.
+          schema:
+            $ref: '#/components/schemas/TaskName'
+        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            x-ms-client-request-id:
+              required: false
+              description: An opaque, globally-unique, client-generated string identifier for the request.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.uuid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoAnalysisTaskResponseModel'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+    delete:
+      tags:
+        - VideoDescription
+      operationId: VideoDescriptions_delete
+      description: Deletes a video analysis task.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: taskName
+          in: path
+          required: true
+          description: Video analysis task name information.
+          schema:
+            $ref: '#/components/schemas/TaskName'
+        - $ref: '#/components/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId'
+        - $ref: '#/components/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent'
+        - $ref: '#/components/parameters/Azure.Core.ClientRequestIdHeader'
+      responses:
+        '204':
+          description: 'There is no content to send for this request, but the headers may be useful. '
+          headers:
+            Repeatability-Result:
+              required: false
+              description: Indicates whether the repeatable request was accepted or rejected.
+              schema:
+                $ref: '#/components/schemas/RepeatabilityResult'
+            x-ms-client-request-id:
+              required: false
+              description: An opaque, globally-unique, client-generated string identifier for the request.
+              schema:
+                $ref: '#/components/schemas/Azure.Core.uuid'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+security:
+  - AADToken:
+      - https://cognitiveservices.azure.com/.default
+components:
+  parameters:
+    Azure.Core.ClientRequestIdHeader:
+      name: x-ms-client-request-id
+      in: header
+      required: false
+      description: An opaque, globally-unique, client-generated string identifier for the request.
+      schema:
+        $ref: '#/components/schemas/Azure.Core.uuid'
+    Azure.Core.Foundations.ApiVersionParameter:
+      name: api-version
+      in: query
+      required: true
+      description: The API version to use for this operation.
+      schema:
+        type: string
+        minLength: 1
+    Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent:
+      name: Repeatability-First-Sent
+      in: header
+      required: false
+      description: Specifies the date and time at which the request was first created.
+      schema:
+        type: string
+        format: date-time
+    Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId:
+      name: Repeatability-Request-ID
+      in: header
+      required: false
+      description: An opaque, globally-unique, client-generated string identifier for the request.
+      schema:
+        type: string
+    VideoDescriptionTaskRequestModel.taskName:
+      name: taskName
+      in: path
+      required: true
+      description: Video analysis task name information.
+      schema:
+        $ref: '#/components/schemas/TaskName'
+  schemas:
+    AADToken:
+      type: object
+      required:
+        - type
+        - flows
+        - defaultScopes
+      properties:
+        type:
+          type: string
+          enum:
+            - oauth2
+          description: OAuth2 authentication
+        flows:
+          type: array
+          items: {}
+          description: Supported OAuth2 flows
+        defaultScopes:
+          type: array
+          items: {}
+          description: Oauth2 scopes of every flow. Overridden by scope definitions in specific flows
+      description: The Azure Active Directory OAuth2 Flow
+    AuthenticatedResourceModel:
+      type: object
+      properties:
+        authentication:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticatedResourceModel'
+          description: Authentication information
+      description: Authenticated resource definition
+    AuthenticationModel:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationModelType'
+          description: Type of authentication used
+      discriminator:
+        propertyName: kind
+        mapping:
+          None: '#/components/schemas/NoneAuthenticationModel'
+          Key: '#/components/schemas/KeyAuthenticationModel'
+          ManagedIdentity: '#/components/schemas/ManagedIdentityAuthenticationModel'
+      description: Authentication method to be used.
+    AuthenticationModelType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - None
+            - Key
+            - ManagedIdentity
+      description: 'Authentication model type: None, Key, MI'
+    Azure.Core.Foundations.Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: One of a server-defined set of error codes.
+        message:
+          type: string
+          description: A human-readable representation of the error.
+        target:
+          type: string
+          description: The target of the error.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Azure.Core.Foundations.Error'
+          description: An array of details about specific errors that led to this reported error.
+        innererror:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.InnerError'
+          description: An object containing more specific information than the current object about the error.
+      description: The error object.
+    Azure.Core.Foundations.ErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.Error'
+          description: The error object.
+      description: A response containing error details.
+    Azure.Core.Foundations.InnerError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: One of a server-defined set of error codes.
+        innererror:
+          allOf:
+            - $ref: '#/components/schemas/Azure.Core.Foundations.InnerError'
+          description: Inner error.
+      description: An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
+    Azure.Core.uuid:
+      type: string
+      format: uuid
+      description: Universally Unique Identifier
+    AzureBlobContainerResourceLocationModel:
+      type: object
+      required:
+        - kind
+        - containerUrl
+      properties:
+        kind:
+          type: string
+          enum:
+            - AzureBlobContainer
+        containerUrl:
+          type: string
+          format: uri
+        prefix:
+          type: string
+        authentication:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticatedResourceModel'
+          description: Authentication information
+      allOf:
+        - $ref: '#/components/schemas/OutputResourceLocationModel'
+      description: Files accessed without authentication
+    AzureBlobFileResourceLocationModel:
+      type: object
+      required:
+        - kind
+        - url
+      properties:
+        kind:
+          type: string
+          enum:
+            - AzureBlobFile
+        url:
+          type: string
+          format: uri
+        range:
+          $ref: '#/components/schemas/TimeRange'
+        authentication:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticatedResourceModel'
+          description: Authentication information
+      allOf:
+        - $ref: '#/components/schemas/InputResourceLocationModel'
+      description: Files accessed through Azure Storage Account authentication
+    CompletionResourceModel:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          $ref: '#/components/schemas/CompletionResourceModelType'
+      discriminator:
+        propertyName: kind
+        mapping:
+          Gptv: '#/components/schemas/GptvCompletionResourceModel'
+      description: Completion resource model definition
+    CompletionResourceModelType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - Gptv
+      description: Completion resources model types
+    DescribePropertyConfigurationModel:
+      type: object
+      required:
+        - kind
+        - description
+      properties:
+        kind:
+          type: string
+          enum:
+            - describe
+        description:
+          type: string
+          description: Property description
+        examples:
+          type: array
+          items:
+            type: string
+      allOf:
+        - $ref: '#/components/schemas/PropertyConfigurationModel'
+      description: Describe property definition
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: One of a server-defined set of error codes.
+        message:
+          type: string
+          description: A human-readable representation of the error.
+        target:
+          type: string
+          description: The target of the error.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: An array of details about specific errors that led to this reported error.
+        innererror:
+          allOf:
+            - $ref: '#/components/schemas/InnerError'
+          description: An object containing more specific information than the current object about the error.
+      description: The error object.
+    ErrorResponse:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          allOf:
+            - $ref: '#/components/schemas/Error'
+          description: Error info.
+      description: Error response object.
+    FileResourceLocationModel:
+      type: object
+      required:
+        - kind
+        - url
+      properties:
+        kind:
+          type: string
+          enum:
+            - File
+        url:
+          type: string
+          format: uri
+        range:
+          $ref: '#/components/schemas/TimeRange'
+      allOf:
+        - $ref: '#/components/schemas/InputResourceLocationModel'
+      description: Files accessed without authentication
+    GptvCompletionResourceModel:
+      type: object
+      required:
+        - kind
+        - endpoint
+      properties:
+        kind:
+          type: string
+          enum:
+            - Gptv
+          description: GPTv completion resource model type
+        endpoint:
+          type: string
+          format: uri
+          description: Model Endpoint
+        deploymentName:
+          type: string
+          description: Model deployment name
+        authentication:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticatedResourceModel'
+          description: Authentication information
+      allOf:
+        - $ref: '#/components/schemas/CompletionResourceModel'
+      description: Gptv completion resource model definition
+    InnerError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: One of a server-defined set of error codes.
+        message:
+          type: string
+          description: A human-readable representation of the error.
+        innererror:
+          allOf:
+            - $ref: '#/components/schemas/InnerError'
+          description: Inner error.
+      description: An object containing more specific information about the error.
+    InputResourceLocationModel:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          allOf:
+            - $ref: '#/components/schemas/InputResourceLocationModelKind'
+          description: Input resource location kind
+        preset:
+          allOf:
+            - $ref: '#/components/schemas/PresetConfigurationModel'
+          description: It represents the preset configuration that will be used to run this task
+      discriminator:
+        propertyName: kind
+        mapping:
+          File: '#/components/schemas/FileResourceLocationModel'
+          AzureBlobFile: '#/components/schemas/AzureBlobFileResourceLocationModel'
+      description: Input resource Location
+    InputResourceLocationModelKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - File
+            - AzureBlobFile
+      description: Input resource location model kind
+    KeyAuthenticationModel:
+      type: object
+      required:
+        - kind
+        - key
+      properties:
+        kind:
+          type: string
+          enum:
+            - Key
+        key:
+          type: string
+          description: Key used to authenticate.
+      allOf:
+        - $ref: '#/components/schemas/AuthenticationModel'
+      description: Key based authentication model
+    ManagedIdentityAuthenticationModel:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - ManagedIdentity
+      allOf:
+        - $ref: '#/components/schemas/AuthenticationModel'
+      description: Azure Managed Identity authentication model
+    NoneAuthenticationModel:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - None
+      allOf:
+        - $ref: '#/components/schemas/AuthenticationModel'
+      description: No authentication model
+    OutputResourceLocationModel:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          allOf:
+            - $ref: '#/components/schemas/OutputResourceLocationModelKind'
+          description: Input resource location kind
+      discriminator:
+        propertyName: kind
+        mapping:
+          AzureBlobContainer: '#/components/schemas/AzureBlobContainerResourceLocationModel'
+      description: Resource Location
+    OutputResourceLocationModelKind:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - AzureBlobContainer
+      description: Output resource location model kind
+    PagedVideoAnalysisTaskResponseModel:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/VideoAnalysisTaskResponseModel'
+          description: The VideoAnalysisTaskResponseModel items on this page
+        nextLink:
+          type: string
+          format: uri
+          description: The link to the next page of items
+      description: Paged collection of VideoAnalysisTaskResponseModel items
+    PresetConfigurationModel:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - default
+            - example1
+      description: Preset Configuration
+    PropertiesConfigModel:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/PropertyConfigurationModel'
+      description: User defined properties
+    PropertyConfigurationModel:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          $ref: '#/components/schemas/PropertyConfigurationModelType'
+      discriminator:
+        propertyName: kind
+        mapping:
+          describe: '#/components/schemas/DescribePropertyConfigurationModel'
+      description: Customized Property Configuration
+    PropertyConfigurationModelType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - describe
+      description: Property Configuration model types
+    PropertyItemConfigurationModelType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - string
+      description: Property items configuration acceptable types
+    RepeatabilityResult:
+      type: string
+      enum:
+        - accepted
+        - rejected
+      description: Repeatability Result header options
+    Resource:
+      type: object
+      required:
+        - completion
+      properties:
+        completion:
+          allOf:
+            - $ref: '#/components/schemas/CompletionResourceModel'
+          description: Completion resource model to be used
+      description: AI Resources to be used
+    TaskName:
+      type: string
+      minLength: 1
+      maxLength: 32
+      pattern: ^[a-z0-9-_]+$
+    TaskStatusModel:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - notStarted
+            - running
+            - failed
+            - succeeded
+            - completed
+            - partiallyCompletedFailed
+            - canceled
+      description: Operation status.
+    TimeRange:
+      type: object
+      required:
+        - offset
+      properties:
+        offset:
+          type: string
+          description: Offset in ISO 8601 duration format, i.e., P[n]Y[n]M[n]DT[n]H[n]M[n]S or P[n]W.
+        duration:
+          type: string
+          description: Duration in ISO 8601 duration format, i.e., P[n]Y[n]M[n]DT[n]H[n]M[n]S or P[n]W.
+      description: Time range considering the offset from 0.0s and lasting a duration.
+    Versions:
+      type: string
+      enum:
+        - v2024-05-01-preview
+      description: The VideoAnalyis service versions.
+    VideoAnalysis.Versions:
+      type: string
+      enum:
+        - v2024-05-01-preview
+      description: The VideoAnalyis service versions.
+    VideoAnalysisTaskApiVersionParameter:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          minLength: 1
+          description: The API version to use for this operation.
+      description: The ApiVersion query parameter for VideoAnalysisTask API.
+    VideoAnalysisTaskResponseModel:
+      type: object
+      required:
+        - taskName
+        - batchName
+        - createdDateTime
+        - lastModifiedDateTime
+        - status
+        - etag
+      properties:
+        taskName:
+          allOf:
+            - $ref: '#/components/schemas/TaskName'
+          description: Video analysis task name information.
+        batchName:
+          type: string
+          description: Video analysis batch name information.
+        createdDateTime:
+          type: string
+          format: date-time
+          description: Datetime when the video analysis task was created.
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: Datetime when the video analysis task was last modified.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/TaskStatusModel'
+          description: Task status.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/ErrorResponse'
+          description: Error related to the video analysis task.
+        taskResult:
+          type: string
+          description: Video analysis task result.
+        etag:
+          type: string
+          description: Read only. The latest ETag for the dataset. May be used with the 'If-Match' header when updating or deleting a dataset.
+          readOnly: true
+      description: Represents the Video Analysis Task response model for the JSON document. Returned after the creation of a video analysis task.
+  securitySchemes:
+    AADToken:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.example.com/oauth2/authorize
+          tokenUrl: https://api.example.com/oauth2/token
+          scopes:
+            https://cognitiveservices.azure.com/.default: ''
+      description: The Azure Active Directory OAuth2 Flow
+servers:
+  - url: '{endpoint}/videoanalysis'
+    description: Azure AI Video Analysis API
+    variables:
+      endpoint:
+        default: ''
+        description: The Video Analysis service endpoint.
+      apiVersion:
+        default: ''
+        description: API Version
+        enum:
+          - v2024-05-01-preview
