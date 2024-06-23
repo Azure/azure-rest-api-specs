@@ -53,9 +53,6 @@ model NetworkDeviceProperties {
 
 @doc("Provisioning state enum")
 union ProvisioningState {
-  @doc("The resource is being provisioned.")
-  Provisioning: "Provisioning",
-
   @doc("The resource action is successful.")
   Succeeded: "Succeeded",
 
