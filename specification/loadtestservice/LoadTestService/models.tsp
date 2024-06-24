@@ -1042,6 +1042,7 @@ model DimensionValueList {
 model MetricDimensionsRequest {
   @doc("Metric name")
   @query
+  @clientName("metric_name", "python")
   metricname: string;
 
   @doc("The interval (i.e. timegrain) of the query.")
