@@ -20,7 +20,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/assistants")
-op createAssistant(BodyParameter<AssistantCreationOptions>): Assistant;
+op createAssistant(...BodyParameter<AssistantCreationOptions>): Assistant;
 
 /**
  * Gets a list of assistants that were previously created.
@@ -34,7 +34,9 @@ op createAssistant(BodyParameter<AssistantCreationOptions>): Assistant;
 @get
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/assistants")
-op listAssistants(BodyParameter<OpenAIListRequestOptions>): OpenAIPageableListOf<Assistant>;
+op listAssistants(
+  ...BodyParameter<OpenAIListRequestOptions>,
+): OpenAIPageableListOf<Assistant>;
 
 /**
  * Retrieves an existing assistant.
@@ -63,7 +65,7 @@ op getAssistant(@path assistantId: string): Assistant;
 @post
 @route("/assistants/{assistantId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op updateAssistant(BodyParameter<UpdateAssistantOptions>): Assistant;
+op updateAssistant(...BodyParameter<UpdateAssistantOptions>): Assistant;
 
 /**
  * Deletes an assistant.
