@@ -11,7 +11,7 @@ using Azure.ClientGenerator.Core;
 @@usage(Microsoft.EventGrid.SystemEvents.ApiCenter.ApiCenterApiDefinitionUpdatedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.Apicenter.ApiCenterApiDefinitionUpdatedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.ApiCenter.ApiCenterApiDefinitionUpdatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ApiCenter.ApiCenterApiSpecification,
