@@ -6,6 +6,6 @@ These settings apply only when `--java` is specified on the command line.
 
 These settings apply only when `--tag=package-2024-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-07' && $(java)
+``` yaml $(java)
 stream-style-serialization: false 
 ```
