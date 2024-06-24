@@ -201,7 +201,7 @@ model DataFlowEndpointKafka {
   batching?: DataFlowEndpointKafkaBatching;
 
   @doc("Copy MQTT properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an MQTT source.")
-  copyMqttProperties?: OperationalMode = OperationalMode.Enabled;
+  copyMqttProperties?: OperationalMode = OperationalMode.Disabled;
 
   @doc("Compression. Can be none, gzip, lz4, or snappy. No effect if the endpoint is used as a source.")
   compression?: DataFlowEndpointKafkaCompression = DataFlowEndpointKafkaCompression.None;
