@@ -444,7 +444,7 @@ model PresentGuidanceInformation {
 
   @doc("The list of item values that are mentioned in the report.")
   @minItems(1)
-  presentGuidanceValues: Array<string>;
+  presentGuidanceValues?: Array<string>;
 }
 
 // For quality measure:
