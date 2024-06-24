@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
   },
   "responses": {
@@ -44,7 +44,23 @@
               "remoteVendorManagementFeature": "Supported",
               "detailedStatus": "Available",
               "detailedStatusMessage": "Storage appliance is up and running",
-              "managementIpv4Address": "192.0.2.2"
+              "managementIpv4Address": "192.0.2.2",
+              "manufacturer": "Contoso Storage",
+              "model": "ArrayStore-Flash70",
+              "secretRotationStatus": [
+                {
+                  "secretType": "Storage Appliance User",
+                  "lastRotationTime": "2023-09-30T13:27:23.103Z",
+                  "rotationPeriodDays": 60,
+                  "expirePeriodDays": 90,
+                  "secretArchiveReference": {
+                    "keyVaultId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyVaultName",
+                    "secretName": "ffffffff-ffff-ffff-ffff-ffffffffffff-resource-group-cluster-1679871-storage-appliance-credential-manager-ffffffff",
+                    "secretVersion": "02ab6c1f9c0f4982b0632b0d5d74a33b"
+                  }
+                }
+              ],
+              "version": "9.9.9"
             }
           }
         ],

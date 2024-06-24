@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "clusterManagerName": "clusterManagerName",
@@ -9,6 +9,9 @@
       "tags": {
         "key1": "myvalue1",
         "key2": "myvalue2"
+      },
+      "identity": {
+        "type": "SystemAssigned"
       },
       "properties": {
         "fabricControllerId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/fabricControllerName",
@@ -39,6 +42,11 @@
           "key1": "myvalue1",
           "key2": "myvalue2"
         },
+        "identity": {
+          "principalId": "321e7654-e89b-12d3-a456-426655449999",
+          "tenantId": "199e9999-e89b-12d3-a456-426655441111",
+          "type": "SystemAssigned"
+        },
         "properties": {
           "managerExtendedLocation": {
             "type": "CustomLocation",
@@ -56,7 +64,7 @@
               "supportExpiryDate": "2025-01-01"
             }
           ],
-          "provisioningState": "Succeeded",
+          "provisioningState": "Accepted",
           "detailedStatus": "Available",
           "detailedStatusMessage": "cluster manager is up and running",
           "managedResourceGroupConfiguration": {
@@ -83,6 +91,11 @@
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
+        },
+        "identity": {
+          "principalId": "321e7654-e89b-12d3-a456-426655449999",
+          "tenantId": "199e9999-e89b-12d3-a456-426655441111",
+          "type": "SystemAssigned"
         },
         "properties": {
           "managerExtendedLocation": {
@@ -111,7 +124,7 @@
         }
       },
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2023-10-01-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-06-01-preview"
       }
     }
   }

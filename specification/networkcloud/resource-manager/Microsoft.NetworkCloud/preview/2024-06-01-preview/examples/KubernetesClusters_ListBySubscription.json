@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
   },
   "responses": {
@@ -99,7 +99,7 @@
                   "upgradeSettings": {
                     "maxSurge": "1"
                   },
-                  "vmSkuName": "NC_M16_v1",
+                  "vmSkuName": "NC_XXXX",
                   "name": "SystemPool-1"
                 }
               ],
@@ -118,9 +118,9 @@
                   "3"
                 ],
                 "count": 3,
-                "vmSkuName": "NC_G4_v1"
+                "vmSkuName": "NC_XXXX"
               },
-              "kubernetesVersion": "1.24.12-1",
+              "kubernetesVersion": "1.XX.Y",
               "managedResourceGroupConfiguration": {
                 "name": "my-managed-rg",
                 "location": "East US"
@@ -200,7 +200,7 @@
               "provisioningState": "Succeeded",
               "availableUpgrades": [
                 {
-                  "version": "1.24.13-1",
+                  "version": "1.XX.Y",
                   "availabilityLifecycle": "GenerallyAvailable"
                 }
               ],
@@ -211,7 +211,7 @@
               ],
               "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
               "connectedClusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/connectedClusterName",
-              "controlPlaneKubernetesVersion": "1.24.12-1",
+              "controlPlaneKubernetesVersion": "1.XX.Y",
               "detailedStatus": "Available",
               "detailedStatusMessage": "Kubernetes cluster is operational",
               "featureStatuses": [
@@ -232,7 +232,7 @@
                   "detailedStatusMessage": "No issues detected",
                   "diskSizeGB": 120,
                   "image": "myacr.azurecr.io/foobar:latest",
-                  "kubernetesVersion": "1.24.12-1",
+                  "kubernetesVersion": "1.XX.Y",
                   "labels": [
                     {
                       "key": "kubernetes.label",
@@ -261,7 +261,7 @@
                       "value": "true"
                     }
                   ],
-                  "vmSkuName": "NC_M16_v1"
+                  "vmSkuName": "NC_XXXX"
                 }
               ]
             }

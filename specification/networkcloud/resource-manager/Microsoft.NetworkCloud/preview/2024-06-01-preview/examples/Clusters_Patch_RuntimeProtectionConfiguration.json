@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "clusterName": "clusterName",
@@ -38,6 +38,12 @@
         "extendedLocation": {
           "type": "CustomLocation",
           "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterManagerExtendedLocationName"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1": {}
+          }
         },
         "properties": {
           "networkFabricId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabrics/fabricName",
@@ -139,6 +145,13 @@
             "tenantId": "80000000-4000-4000-4000-120000000000",
             "principalId": "00000008-0004-0004-0004-000000000012",
             "applicationId": "12345678-1234-1234-1234-123456789012"
+          },
+          "commandOutputSettings": {
+            "containerUrl": "https://myaccount.blob.core.windows.net/mycontainer?restype=container",
+            "associatedIdentity": {
+              "identityType": "UserAssignedIdentity",
+              "userAssignedIdentityResourceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1"
+            }
           },
           "computeDeploymentThreshold": {
             "type": "PercentSuccess",
@@ -219,6 +232,12 @@
           "type": "CustomLocation",
           "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterManagerExtendedLocationName"
         },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1": {}
+          }
+        },
         "properties": {
           "networkFabricId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabrics/fabricName",
           "clusterType": "SingleRack",
@@ -320,6 +339,13 @@
             "principalId": "00000008-0004-0004-0004-000000000012",
             "applicationId": "12345678-1234-1234-1234-123456789012"
           },
+          "commandOutputSettings": {
+            "containerUrl": "https://myaccount.blob.core.windows.net/mycontainer?restype=container",
+            "associatedIdentity": {
+              "identityType": "UserAssignedIdentity",
+              "userAssignedIdentityResourceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1"
+            }
+          },
           "computeDeploymentThreshold": {
             "type": "PercentSuccess",
             "grouping": "PerCluster",
@@ -377,7 +403,8 @@
         }
       },
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2023-10-01-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-06-01-preview"
       }
     }
   }

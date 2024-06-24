@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "bareMetalMachineName": "bareMetalMachineName"
@@ -61,7 +61,8 @@
           "detailedStatusMessage": "DetailedStatusMessage",
           "serviceTag": "ST1219XXX",
           "kubernetesNodeName": "node01",
-          "kubernetesVersion": "1.21",
+          "kubernetesVersion": "1.28.3",
+          "machineClusterVersion": "3.8.7",
           "osImage": "v20220805e",
           "oamIpv4Address": "192.0.2.1",
           "oamIpv6Address": "0:0:0:0:0:FFFF:7F00:0001",
@@ -81,7 +82,20 @@
             "scanCompletedTime": "2023-09-30T13:27:23.103Z",
             "definitionsLastUpdated": "2023-09-28T13:27:03.008Z",
             "definitionsVersion": "1.2.3"
-          }
+          },
+          "secretRotationStatus": [
+            {
+              "secretType": "Bare Metal Machine Identity - console",
+              "lastRotationTime": "2023-09-30T13:27:23.103Z",
+              "rotationPeriodDays": 60,
+              "expirePeriodDays": 90,
+              "secretArchiveReference": {
+                "keyVaultId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyVaultName",
+                "secretName": "ffffffff-ffff-ffff-ffff-ffffffffffff-resource-group-cluster-1679871-console-credential-manager-ffffffff",
+                "secretVersion": "02ab6c1f9c0f4982b0632b0d5d74a33b"
+              }
+            }
+          ]
         }
       }
     }

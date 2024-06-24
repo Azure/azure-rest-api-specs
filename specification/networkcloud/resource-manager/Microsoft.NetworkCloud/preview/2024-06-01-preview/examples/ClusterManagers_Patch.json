@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "clusterManagerName": "clusterManagerName",
@@ -8,6 +8,13 @@
       "tags": {
         "key1": "myvalue1",
         "key2": "myvalue2"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1": null,
+          "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity2": {}
+        }
       }
     }
   },
@@ -29,6 +36,15 @@
         "tags": {
           "key1": "myvalue1",
           "key2": "myvalue2"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity2": {
+              "clientId": "200e0000-e89b-12d3-a456-426655440000",
+              "principalId": "321e7654-e89b-12d3-a456-426655449999"
+            }
+          }
         },
         "properties": {
           "managerExtendedLocation": {

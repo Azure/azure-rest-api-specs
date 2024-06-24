@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-10-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
     "resourceGroupName": "resourceGroupName",
     "kubernetesClusterName": "kubernetesClusterName",
@@ -20,7 +20,9 @@
         },
         "count": 3,
         "upgradeSettings": {
-          "maxSurge": "1"
+          "maxSurge": "1",
+          "maxUnavailable": "0",
+          "drainTimeout": 1800
         }
       }
     }
@@ -104,9 +106,9 @@
           "upgradeSettings": {
             "maxSurge": "1"
           },
-          "vmSkuName": "NC_M16_v1",
+          "vmSkuName": "NC_XXXX",
           "provisioningState": "Succeeded",
-          "kubernetesVersion": "1.24.3-1",
+          "kubernetesVersion": "1.XX.Y",
           "detailedStatus": "Available",
           "detailedStatusMessage": "Agent pool is available"
         }
@@ -190,15 +192,16 @@
           "upgradeSettings": {
             "maxSurge": "1"
           },
-          "vmSkuName": "NC_M16_v1",
+          "vmSkuName": "NC_XXXX",
           "provisioningState": "Accepted",
-          "kubernetesVersion": "1.24.3-1",
+          "kubernetesVersion": "1.XX.Y",
           "detailedStatus": "Available",
           "detailedStatusMessage": "Agent pool is available"
         }
       },
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2023-10-01-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-06-01-preview"
       }
     }
   }
