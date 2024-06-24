@@ -21,5 +21,9 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 //Enums
-@@usage(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxStageName, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxStageName, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxStageName,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.DataBox.DataBoxStageName,
+  Access.public
+);

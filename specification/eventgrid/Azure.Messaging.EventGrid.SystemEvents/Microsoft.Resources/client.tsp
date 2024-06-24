@@ -56,8 +56,16 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.Resources.ResourceActionCancelEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.Resources.ResourceHttpRequest, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.Resources.ResourceHttpRequest, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.Resources.ResourceAuthorization, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.Resources.ResourceAuthorization, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.Resources.ResourceHttpRequest,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.Resources.ResourceHttpRequest,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.Resources.ResourceAuthorization,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.Resources.ResourceAuthorization,
+  Access.public
+);
 //Enums

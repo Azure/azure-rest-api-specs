@@ -8,10 +8,18 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.IotHub.DeviceLifeCycleEventProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.IotHub.DeviceTwinMetadata, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.IotHub.DeviceTwinMetadata, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.IotHub.DeviceTwinProperties, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.IotHub.DeviceTwinProperties, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.IotHub.DeviceTwinMetadata,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.IotHub.DeviceTwinMetadata,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.IotHub.DeviceTwinProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.IotHub.DeviceTwinProperties,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.IotHub.DeviceTwinInfo, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.IotHub.DeviceTwinInfo, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.IotHub.DeviceConnectionStateEventProperties,

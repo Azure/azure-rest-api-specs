@@ -3,8 +3,12 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 //Models
 @@usage(Microsoft.EventGrid.SystemEvents.Web.AppEventTypeDetail, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.Web.AppEventTypeDetail, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.Web.WebAppUpdatedEventData, Usage.output);
+@@access(Microsoft.EventGrid.SystemEvents.Web.AppEventTypeDetail,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.Web.WebAppUpdatedEventData,
+  Usage.output
+);
 @@access(Microsoft.EventGrid.SystemEvents.Web.WebAppUpdatedEventData,
   Access.public
 );
@@ -97,7 +101,11 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.Web.AppAction, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.Web.StampKind, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.Web.StampKind, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.Web.AppServicePlanAction, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.Web.AppServicePlanAction, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.Web.AppServicePlanAction,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.Web.AppServicePlanAction,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.Web.AsyncStatus, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.Web.AsyncStatus, Access.public);

@@ -116,7 +116,9 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsSmsDeliveryReportReceivedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsSmsReceivedEventData, Usage.output);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsSmsReceivedEventData,
+  Usage.output
+);
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsSmsReceivedEventData,
   Access.public
 );
@@ -264,31 +266,45 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterWorkerRegisteredEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterJobEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterJobEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterJobEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterJobEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterWorkerEventData,
   Usage.output
 );
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterWorkerEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterChannelConfiguration,
   Usage.output
 );
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterChannelConfiguration,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterQueueDetails, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterQueueDetails, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterQueueDetails,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterQueueDetails,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterCommunicationError,
   Usage.output
 );
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterCommunicationError,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterWorkerSelector, Usage.output);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterWorkerSelector,
+  Usage.output
+);
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterWorkerSelector,
   Access.public
 );
@@ -418,13 +434,21 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageReceivedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageMediaContent, Usage.output);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageMediaContent,
+  Usage.output
+);
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageMediaContent,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageContext, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageContext, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageButtonContent, Usage.output);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageContext,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageContext,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageButtonContent,
+  Usage.output
+);
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageButtonContent,
   Access.public
 );
@@ -446,8 +470,12 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageInteractiveListReplyContent,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageEventData, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageEventData, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageChannelEventError,
   Usage.output
 );
@@ -455,15 +483,33 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 //Enums
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterJobStatus, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterJobStatus, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingContentType, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingContentType, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingChannelType, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingChannelType, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingFormatType, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingFormatType, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterLabelOperator, Usage.output);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterJobStatus,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterJobStatus,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingContentType,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingContentType,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingChannelType,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingChannelType,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingFormatType,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.recordingFormatType,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterLabelOperator,
+  Usage.output
+);
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsRouterLabelOperator,
   Access.public
 );
@@ -479,20 +525,30 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsEmailDeliveryReportStatus,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsUserEngagement, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsUserEngagement, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsUserEngagement,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsUserEngagement,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.CommunicationIdentifierModelKind,
   Usage.output
 );
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.CommunicationIdentifierModelKind,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsInteractiveReplyKind, Usage.output);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsInteractiveReplyKind,
+  Usage.output
+);
 @@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsInteractiveReplyKind,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageChannelKind, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageChannelKind, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageChannelKind,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageChannelKind,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AzureCommunicationServices.AcsMessageDeliveryStatus,
   Usage.output
 );

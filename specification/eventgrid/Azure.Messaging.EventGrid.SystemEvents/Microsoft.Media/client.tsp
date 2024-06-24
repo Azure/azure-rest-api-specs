@@ -8,14 +8,30 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobStateChangeEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobError, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobError, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorDetail, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorDetail, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutput, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutput, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputAsset, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputAsset, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobError,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobError,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorDetail,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorDetail,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutput,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutput,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputAsset,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputAsset,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobOutputProgressEventData,
   Usage.output
 );
@@ -161,11 +177,27 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 //Enums
-@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobState, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobState, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCode, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCode, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCategory, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCategory, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobRetry, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobRetry, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobState,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobState,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCode,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCode,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCategory,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobErrorCategory,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobRetry,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.MediaServices.MediaJobRetry,
+  Access.public
+);

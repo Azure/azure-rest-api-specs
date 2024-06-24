@@ -26,6 +26,10 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.Maps.MapsGeofenceEventProperties,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.Maps.MapsGeofenceGeometry, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.Maps.MapsGeofenceGeometry, Access.public);
+@@usage(Microsoft.EventGrid.SystemEvents.Maps.MapsGeofenceGeometry,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.Maps.MapsGeofenceGeometry,
+  Access.public
+);
 //Enums
