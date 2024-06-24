@@ -352,14 +352,48 @@
     }
   },
   "definitions": {
-    "AuthenticatedResourceModel": {
+    "AuthenticationModel": {
       "type": "object",
-      "description": "Authenticated resource definition",
+      "description": "Authentication method to be used.",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/AuthenticatedResourceModel",
-          "description": "Authentication information"
+        "kind": {
+          "$ref": "#/definitions/AuthenticationModelType",
+          "description": "Type of authentication used"
         }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "AuthenticationModelType": {
+      "type": "string",
+      "description": "Authentication model type: None, Key, MI",
+      "enum": [
+        "None",
+        "Key",
+        "ManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationModelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "None",
+            "description": "No authentication"
+          },
+          {
+            "name": "key",
+            "value": "Key",
+            "description": "Key based authentication"
+          },
+          {
+            "name": "managedIdentity",
+            "value": "ManagedIdentity",
+            "description": "Azure Managed Identity authentication"
+          }
+        ]
       }
     },
     "Azure.Core.Foundations.Error": {
@@ -435,7 +469,7 @@
           "type": "string"
         },
         "authentication": {
-          "$ref": "#/definitions/AuthenticatedResourceModel",
+          "$ref": "#/definitions/AuthenticationModel",
           "description": "Authentication information"
         }
       },
@@ -461,7 +495,7 @@
           "$ref": "#/definitions/TimeRange"
         },
         "authentication": {
-          "$ref": "#/definitions/AuthenticatedResourceModel",
+          "$ref": "#/definitions/AuthenticationModel",
           "description": "Authentication information"
         }
       },
@@ -614,7 +648,7 @@
           "description": "Model deployment name"
         },
         "authentication": {
-          "$ref": "#/definitions/AuthenticatedResourceModel",
+          "$ref": "#/definitions/AuthenticationModel",
           "description": "Authentication information"
         }
       },
@@ -687,6 +721,45 @@
           }
         ]
       }
+    },
+    "KeyAuthenticationModel": {
+      "type": "object",
+      "description": "Key based authentication model",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key used to authenticate."
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationModel"
+        }
+      ],
+      "x-ms-discriminator-value": "Key"
+    },
+    "ManagedIdentityAuthenticationModel": {
+      "type": "object",
+      "description": "Azure Managed Identity authentication model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationModel"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedIdentity"
+    },
+    "NoneAuthenticationModel": {
+      "type": "object",
+      "description": "No authentication model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationModel"
+        }
+      ],
+      "x-ms-discriminator-value": "None"
     },
     "OutputResourceLocationModel": {
       "type": "object",

@@ -140,7 +140,7 @@ model FileResourceLocationModel extends InputResourceLocationModel {
 @doc("Authenticated resource definition")
 model AuthenticatedResourceModel {
     @doc("Authentication information")
-    authentication?: AuthenticatedResourceModel;
+    authentication?: AuthenticationModel;
 }
 
 @doc("Files accessed through Azure Storage Account authentication")
