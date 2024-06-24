@@ -710,7 +710,7 @@
       "name": "routeRepresentation",
       "x-ms-client-name": "routeRepresentationForBestOrder",
       "in": "query",
-      "description": "Specifies the representation of the set of routes provided as response. This parameter value can only be used in conjunction with computeBestOrder=true.",
+      "description": "Specifies the representation of the set of routes provided as response.",
       "type": "string",
       "enum": [
         "polyline",
@@ -731,7 +731,7 @@
           },
           {
             "value": "none",
-            "description": "Includes only the optimized waypoint indices but does not include the route geometry in the response."
+            "description": "Includes only the optimized waypoint indices but does not include the route geometry in the response. This parameter value can only be used in conjunction with computeBestOrder=true."
           }
         ]
       },
@@ -828,7 +828,7 @@
     "RouteInstructionsType": {
       "name": "instructionsType",
       "in": "query",
-      "description": "If specified, guidance instructions will be returned. Note that the instructionsType parameter cannot be used in conjunction with routeRepresentation=none",
+      "description": "If specified, guidance instructions will be returned. Note that the instructionsType parameter cannot be used in conjunction with routeRepresentation=none.",
       "type": "string",
       "enum": [
         "coded",
