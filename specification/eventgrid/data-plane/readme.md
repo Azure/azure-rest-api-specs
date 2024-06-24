@@ -254,6 +254,29 @@ These settings apply only when `--tag=package-2024-01-01` is specified on the co
 input-file:
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 - Microsoft.EventGrid/stable/2024-01-01/SystemEvents.json
+- Microsoft.EventGrid/stable/2024-01-01/Storage.json
+- Microsoft.EventGrid/stable/2024-01-01/EventHub.json
+- Microsoft.EventGrid/stable/2024-01-01/Resources.json
+- Microsoft.EventGrid/stable/2024-01-01/DataBox.json
+- Microsoft.EventGrid/stable/2024-01-01/IotHub.json
+- Microsoft.EventGrid/stable/2024-01-01/ContainerRegistry.json
+- Microsoft.EventGrid/stable/2024-01-01/ServiceBus.json
+- Microsoft.EventGrid/stable/2024-01-01/MediaServices.json
+- Microsoft.EventGrid/stable/2024-01-01/Maps.json
+- Microsoft.EventGrid/stable/2024-01-01/AppConfiguration.json
+- Microsoft.EventGrid/stable/2024-01-01/SignalRService.json
+- Microsoft.EventGrid/stable/2024-01-01/KeyVault.json
+- Microsoft.EventGrid/stable/2024-01-01/MachineLearningServices.json
+- Microsoft.EventGrid/stable/2024-01-01/RedisCache.json
+- Microsoft.EventGrid/stable/2024-01-01/Web.json
+- Microsoft.EventGrid/stable/2024-01-01/AzureCommunicationServices.json
+- Microsoft.EventGrid/stable/2024-01-01/PolicyInsights.json
+- Microsoft.EventGrid/stable/2024-01-01/ContainerService.json
+- Microsoft.EventGrid/stable/2024-01-01/ApiManagement.json
+- Microsoft.EventGrid/stable/2024-01-01/HealthcareApis.json
+- Microsoft.EventGrid/stable/2024-01-01/ResourceNotifications.json
+- Microsoft.EventGrid/stable/2024-01-01/AVS.json
+- Microsoft.EventGrid/stable/2024-01-01/ApiCenter.json
 ```
 
 ### Suppression
