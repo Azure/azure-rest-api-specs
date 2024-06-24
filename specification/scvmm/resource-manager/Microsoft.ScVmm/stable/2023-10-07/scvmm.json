@@ -3553,18 +3553,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
-        },
-        "privateLinkScopeResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource id of the private link scope this machine is assigned to, if any.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.HybridCompute/privateLinkScopes"
-              }
-            ]
-          }
         }
       }
     },
@@ -4186,41 +4174,6 @@
           "type": "string",
           "description": "Gets os version.",
           "readOnly": true
-        },
-        "domainName": {
-          "type": "string",
-          "description": "Gets or sets the domain name."
-        },
-        "domainUsername": {
-          "type": "string",
-          "description": "Gets or sets the domain username."
-        },
-        "domainPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "Password of the domain the VM has to join.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        },
-        "workgroup": {
-          "type": "string",
-          "description": "Gets or sets the workgroup."
-        },
-        "productKey": {
-          "type": "string",
-          "description": "Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
-        },
-        "timezone": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the index value of the timezone."
-        },
-        "runOnceCommands": {
-          "type": "string",
-          "description": "Get or sets the commands to be run once at the time of creation separated by semicolons."
         }
       }
     },
