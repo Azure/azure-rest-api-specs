@@ -206,7 +206,7 @@
         "tags": [
           "cloudCostConfig"
         ],
-        "summary": "List of storage account ID to enable the 'Blob Reader' role for given datatype where the cloud cost export is enabled.",
+        "summary": "Provide the cloud cost configuration to read the data from.",
         "operationId": "Monitors_CloudCostConfig",
         "produces": [
           "application/json"
@@ -1698,8 +1698,13 @@
         }
       }
     },
-    "ExportData": {
+    "CloudCostData": {
+      "required": [
+        "exportDataType",
+        "storageAccountId"
+      ],
       "type": "object",
+      "description": "List of storage account ID to enable the 'Blob Reader' role for given datatype where the cloud cost export is enabled.",
       "properties": {
         "exportDataType": {
           "type": "string",
@@ -1725,11 +1730,11 @@
     "CloudCostConfig": {
       "type": "object",
       "properties": {
-        "exportData": {
-          "description": "Lists all the data exports configured for this monitor",
+        "cloudCostData": {
+          "description": "Lists all the data exports configured for this monitor.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExportData"
+            "$ref": "#/definitions/CloudCostData"
           }
         }
       }
