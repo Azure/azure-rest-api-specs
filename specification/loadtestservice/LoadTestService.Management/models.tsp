@@ -33,8 +33,9 @@ model LoadTestMappingResource is ProxyResource<LoadTestMappingProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
   @doc("Load Test Mapping name")
   @key("loadTestMappingName")
-  @segment("loadTestMappings")
   @path
+  @segment("loadTestMappings")
+  @pattern("^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$")
   name: string;
 }
 
@@ -63,8 +64,9 @@ model LoadTestProfileMappingResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
   @doc("Load Test Profile Mapping name")
   @key("loadTestProfileMappingName")
-  @segment("loadTestProfileMappings")
   @path
+  @segment("loadTestProfileMappings")
+  @pattern("^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$")
   name: string;
 }
 
