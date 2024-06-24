@@ -37,6 +37,11 @@
   "security": [
     {
       "AzureKey": []
+    },
+    {
+      "EntraIdToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -45,6 +50,16 @@
       "description": "The secret key for your Azure Cognitive Services subscription.",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
+    },
+    "EntraIdToken": {
+      "type": "oauth2",
+      "description": "The Microsoft Entra Id Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [
@@ -231,33 +246,16 @@
       ],
       "x-ms-discriminator-value": "ageMismatch"
     },
-    "AssessmentStringValueWithUnit": {
-      "type": "object",
-      "description": "A value, represented as a string because it can contain alphanumeric or mathematical characters, along with the optional unit. Used by ScoringAndAssessmentInference.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "String value."
-        },
-        "unit": {
-          "type": "string",
-          "description": "Unit."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AssessmentStringValueWithUnitRange": {
+    "AssessmentValueRange": {
       "type": "object",
       "description": "A range of values.",
       "properties": {
         "minimum": {
-          "$ref": "#/definitions/AssessmentStringValueWithUnit",
+          "type": "string",
           "description": "The minimum value."
         },
         "maximum": {
-          "$ref": "#/definitions/AssessmentStringValueWithUnit",
+          "type": "string",
           "description": "The maximum value."
         }
       },
@@ -2693,8 +2691,7 @@
       },
       "required": [
         "presentGuidanceItem",
-        "extension",
-        "presentGuidanceValues"
+        "extension"
       ]
     },
     "ProcedureRecommendation": {
@@ -2793,6 +2790,7 @@
         "measureTypes": {
           "type": "array",
           "description": "Id(s) of the MIPS measures that need to be evaluated in the document",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/QualityMeasureType"
           }
@@ -3366,7 +3364,7 @@
     },
     "ScoringAndAssessmentCategoryType": {
       "type": "string",
-      "description": "The category that gets a value, e.g. BIARDS, Z-SCORE or FRAX SCORE",
+      "description": "The category that gets a value, e.g. BIRADS, Z-SCORE or FRAX SCORE",
       "enum": [
         "BIRADS",
         "C-RADS COLONIC FINDINGS",
@@ -3588,17 +3586,22 @@
           "$ref": "#/definitions/ScoringAndAssessmentCategoryType",
           "description": "Category, e.g. BIRADS"
         },
+        "categoryDescription": {
+          "type": "string",
+          "description": "The expansion of the category (which is an abbreviation.)"
+        },
         "singleValue": {
-          "$ref": "#/definitions/AssessmentStringValueWithUnit",
+          "type": "string",
           "description": "The value. If the value is a range, use field valueRange."
         },
-        "valueRange": {
-          "$ref": "#/definitions/AssessmentStringValueWithUnitRange",
+        "rangeValue": {
+          "$ref": "#/definitions/AssessmentValueRange",
           "description": "The range."
         }
       },
       "required": [
-        "category"
+        "category",
+        "categoryDescription"
       ],
       "allOf": [
         {

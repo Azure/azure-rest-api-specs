@@ -310,7 +310,7 @@ union GuidanceRankingType {
 }
 
 @added(ApiVersion.v2024_10_01)
-@doc("The category that gets a value, e.g. BIARDS, Z-SCORE or FRAX SCORE")
+@doc("The category that gets a value, e.g. BIRADS, Z-SCORE or FRAX SCORE")
 union ScoringAndAssessmentCategoryType {
   string,
 

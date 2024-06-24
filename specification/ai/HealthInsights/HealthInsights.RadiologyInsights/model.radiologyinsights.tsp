@@ -79,6 +79,7 @@ model GuidanceOptions {
 @doc("Quality Measure Options.")
 model QualityMeasureOptions {
   @doc("Id(s) of the MIPS measures that need to be evaluated in the document")
+  @minItems(1)
   measureTypes: Array<QualityMeasureType>;
 }
 
@@ -371,32 +372,26 @@ model ScoringAndAssessmentInference extends RadiologyInsightsInference {
   @doc("Category, e.g. BIRADS")
   category: ScoringAndAssessmentCategoryType;
 
+  @doc("The expansion of the category (which is an abbreviation.)")
+  categoryDescription: string;
+
   @doc("The value. If the value is a range, use field valueRange.")
-  singleValue?: AssessmentStringValueWithUnit;
+  singleValue?: string;
 
   @doc("The range.")
-  valueRange?: AssessmentStringValueWithUnitRange;
+  rangeValue?: AssessmentValueRange;
 }
 
 @added(ApiVersion.v2024_10_01)
 @doc("A range of values.")
-model AssessmentStringValueWithUnitRange {
+model AssessmentValueRange {
   @doc("The minimum value.")
-  minimum: AssessmentStringValueWithUnit;
+  minimum: string;
 
   @doc("The maximum value.")
-  maximum: AssessmentStringValueWithUnit;
+  maximum: string;
 }
 
-@added(ApiVersion.v2024_10_01)
-@doc("A value, represented as a string because it can contain alphanumeric or mathematical characters, along with the optional unit. Used by ScoringAndAssessmentInference.")
-model AssessmentStringValueWithUnit {
-  @doc("String value.")
-  value: string;
-
-  @doc("Unit.")
-  unit?: string;
-}
 // For guidance: Clinical Guidance or (Guided) Follow-up Finding
 
 @added(ApiVersion.v2024_10_01)
