@@ -58,6 +58,15 @@ interface MongoClusters {
   >;
 }
 
+/** Identifier for a mongo cluster resource. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+scalar MongoClusterResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DocumentDB/mongoClusters",
+    }
+  ]>;
+
 /** The properties of a mongo cluster. */
 model MongoClusterProperties {
   /** The mode to create a mongo cluster. */
@@ -161,7 +170,8 @@ model MongoClusterRestoreParameters {
   pointInTimeUTC?: utcDateTime;
 
   /** Resource ID to locate the source cluster to restore */
-  sourceResourceId?: string;
+  @typeChangedFrom(Microsoft.DocumentDB.Versions.v2024_06_01_preview, string)
+  sourceResourceId?: MongoClusterResourceId;
 }
 
 /** Specification for a node group. */
@@ -257,10 +267,10 @@ union PreviewFeature {
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 model MongoClusterReplicaParameters {
   /** The id of the replication source cluster. */
-  sourceResourceId: string;
+  sourceResourceId: MongoClusterResourceId;
 
   /** The location of the source cluster */
-  sourceLocation: string;
+  sourceLocation: Azure.Core.azureLocation;
 }
 
 /** Promote replica request properties. */
@@ -272,10 +282,6 @@ model PromoteReplicaRequest {
   /** The mode to apply to the promote operation. Value is optional and default value is 'Switchover'. */
   mode?: PromoteMode;
 }
-
-/** Promote request results. */
-@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
-model PromoteReplicaResult {}
 
 /** The option to apply to a promote operation. */
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
@@ -334,18 +340,18 @@ union ReplicationState {
   /** Replication link is active. */
   "Active",
 
-  /** Replication link is catching-up. */
+  /** Replica is catching-up with the primary. This can occur after the replica is created or after a promotion is triggered. */
   "Catchup",
 
-  /** Replication link is provisioning. */
+  /** Replica and replication link to the primary is being created. */
   "Provisioning",
 
-  /** Replication link is updating. */
+  /** Replication link is being updated due to a change on the replica or an upgrade. */
   "Updating",
 
-  /** Replication link is broken. */
+  /** Replication link is broken and the replica may need to be recreated. */
   "Broken",
 
-  /** Replication link is re-configuring. */
+  /** Replication link is re-configuring due to a promotion event. */
   "Reconfiguring",
 }
