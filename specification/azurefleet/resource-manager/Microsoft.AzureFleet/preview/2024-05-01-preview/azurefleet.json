@@ -465,14 +465,14 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Legacy.ManagedServiceIdentityType": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType": {
       "type": "string",
       "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
       "enum": [
         "None",
         "SystemAssigned",
         "UserAssigned",
-        "SystemAssigned, UserAssigned"
+        "SystemAssigned,UserAssigned"
       ],
       "x-ms-enum": {
         "name": "ManagedServiceIdentityType",
@@ -495,7 +495,7 @@
           },
           {
             "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned, UserAssigned",
+            "value": "SystemAssigned,UserAssigned",
             "description": "System and user assigned managed identity."
           }
         ]
@@ -727,12 +727,13 @@
       "description": "The template for adding optional properties.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.Legacy.ManagedServiceIdentityType",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType",
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
           }

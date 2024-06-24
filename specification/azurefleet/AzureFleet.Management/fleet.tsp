@@ -46,10 +46,10 @@ model FleetUpdate {
 }
 
 model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Legacy.ManagedServiceIdentityV4>>;
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>>;
 
 model ResourcePlanUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.Plan>>;
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.Plan>>;
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
