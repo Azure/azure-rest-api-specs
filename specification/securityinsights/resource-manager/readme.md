@@ -26,7 +26,7 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-03
+tag: package-preview-2022-12
 ```
 
 ---
@@ -976,15 +976,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-java
-  - repo: azure-cli-extensions
-  - repo: azure-resource-manager-schemas
-  - repo: azure-powershell
 ```
 
 ## C#
