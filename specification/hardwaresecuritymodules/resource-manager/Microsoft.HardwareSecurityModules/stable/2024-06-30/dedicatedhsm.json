@@ -393,9 +393,10 @@
   "definitions": {
     "ApiEntityReference": {
       "properties": {
-        "id": {
+        "resourceId": {
           "type": "string",
-          "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
+          "description": "The Azure resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...",
+          "format": "arm-id"
         }
       },
       "description": "The API entity reference.",
@@ -403,10 +404,10 @@
     },
     "NetworkInterface": {
       "properties": {
-        "id": {
+        "resourceId": {
           "readOnly": true,
           "type": "string",
-          "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
+          "description": "The Azure resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         },
         "privateIpAddress": {
           "type": "string",
@@ -750,7 +751,7 @@
   },
   "parameters": {
     "DedicatedHsmName": {
-      "name": "name",
+      "name": "dedicatedHsmName",
       "in": "path",
       "required": true,
       "type": "string",
