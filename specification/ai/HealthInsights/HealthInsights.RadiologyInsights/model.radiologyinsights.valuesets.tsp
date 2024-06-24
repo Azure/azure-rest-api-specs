@@ -173,9 +173,9 @@ union RecommendationFindingStatusType {
 }
 
 @doc("""
-DiseaseCourseType value set system url = http://github.com/Azure/HealthInsights/RadiologyInsights/ValueSet/condition-course
-The below values can be used for binding in DiseaseCourseExtension.valueCodeableConcept
-""")
+  DiseaseCourseType value set system url = http://github.com/Azure/HealthInsights/RadiologyInsights/ValueSet/condition-course
+  The below values can be used for binding in DiseaseCourseExtension.valueCodeableConcept
+  """)
 union DiseaseCourseType {
   string,
 

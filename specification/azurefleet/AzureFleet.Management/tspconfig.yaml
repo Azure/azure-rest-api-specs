@@ -7,7 +7,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-resource-manager/all"
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -23,3 +23,13 @@ options:
     namespace: "{package-dir}"
     # Added to support generic model conversion from compute VM types
     use-model-reader-writer: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-computefleet"
+    package-name: "{package-dir}"
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-computefleet"
+    namespace: com.azure.resourcemanager.computefleet
+    service-name: Compute Fleet
+    examples-directory: "examples"
+    flavor: azure
