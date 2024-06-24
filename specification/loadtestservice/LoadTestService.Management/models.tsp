@@ -38,9 +38,9 @@ model LoadTestMappingResource is ProxyResource<LoadTestMappingProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operations on the resource are sync"
 @doc("Azure LoadTest mapping resource properties.")
 @added(APIVersions.v2023_12_01_preview)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operations on the resource are sync"
 model LoadTestMappingProperties {
   @doc("Mapped source resource Id.")
   @maxLength(1024)
@@ -68,9 +68,9 @@ model LoadTestProfileMappingResource
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operations on the resource are sync"
 @doc("Azure LoadTest profile mapping resource properties.")
 @added(APIVersions.v2023_12_01_preview)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Operations on the resource are sync"
 model LoadTestProfileMappingProperties {
   @doc("Mapped source resource Id.")
   @maxLength(1024)
