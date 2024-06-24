@@ -1173,13 +1173,10 @@ model AcsMessageAnalysisCompletedEventData extends AcsMessageEventData {
   intentAnalysis: string;
 
   /** List of key phrases extracted. */
-  keyPhraseExtraction: string[];
+  extractedKeyPhrases: string[];
 
   /** The analysed message language detection. */
   languageDetection: AcsMessageLanguageDetection;
-
-  /** The analysed message sentiment. */
-  sentiment: AcsMessageSentiment;
 }
 
 
@@ -1279,19 +1276,10 @@ model AcsMessageLanguageDetection {
   language: string;
 
   /** The confidence score of the language detected. */
-  confidenceScore: string;
+  confidenceScore: float64;
 
   /** The translation of the message. */
   translation: string;
-}
-
-/** Message Analysis Sentiment */
-model AcsMessageSentiment {
-   /** The score of the analysis. */
-    score: int32;
-
-    /** The description of the analysis. */
-    description: string;
 }
 
 /** Interactive reply kind */
