@@ -1,5 +1,5 @@
 import "@azure-tools/typespec-azure-resource-manager";
-import "../../../models/exadata/dbNodes.tsp";
+import "../../models/exadata/dbNodes.tsp";
 
 using Azure.ResourceManager;
 using Autorest;
