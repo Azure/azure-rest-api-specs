@@ -5,7 +5,7 @@ using Azure.Core.Foundations;
 namespace VideoAnalysis;
 
 alias JobServiceTraits = SupportsRepeatableRequests &
-    NoConditionalRequests &
-    SupportsClientRequestId;
+  NoConditionalRequests &
+  SupportsClientRequestId;
 
 alias JobOperations = Azure.Core.ResourceOperations<JobServiceTraits>;
