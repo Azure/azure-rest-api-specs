@@ -1161,12 +1161,13 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageAnalysisCompleted event. */
-interface AcsMessageAnalysisCompletedEventData extends AcsMessageEventData {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsMessageAnalysisCompletedEventData extends AcsMessageEventData {
   /** The original message received. */
   originalMessage: string;
 
   /** The analysed message channel kind. */
-  channelKind: "whatsapp";
+  channelKind: AcsMessageChannelKind;
 
   /** The intent of the analysed message. */
   intentAnalysis: string;
@@ -1287,7 +1288,7 @@ model AcsMessageLanguageDetection {
 /** Message Analysis Sentiment */
 model AcsMessageSentiment {
    /** The score of the analysis. */
-    score: number;
+    score: int32;
 
     /** The description of the analysis. */
     description: string;
