@@ -1708,7 +1708,7 @@
           "description": "The intent of the analysed message",
           "type": "string"
         },
-        "keyPhraseExtraction": {
+        "extractedKeyPhrases": {
           "description": "List of key phrases extracted",
           "type": "array",
           "items": {
@@ -1718,11 +1718,6 @@
         "languageDetection": {
           "description": "The analysed message language detection",
           "$ref": "#/definitions/AcsMessageLanguageDetection",
-          "type": "object"
-        },
-        "sentiment": {
-          "description": "The analysed message sentiment",
-          "$ref": "#/definitions/AcsMessageSentiment",
           "type": "object"
         }
       },
@@ -2413,28 +2408,14 @@
         },
         "confidenceScore": {
           "description": "The confidence score of the language detected",
-          "type": "string"
+          "type": "number",
+          "format": "float"
         },
         "translation": {
           "description": "The translation of the message",
           "type": "string"
         }
       }
-    },
-    "AcsMessageSentiment": {
-      "description": "Message Analysis Sentiments",
-      "type": "object",
-      "properties": {
-        "score": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The score of the analysis"
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the analysis"
-        }
-      } 
     }
   }
 }

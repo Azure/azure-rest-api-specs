@@ -941,7 +941,7 @@
           "type": "string",
           "description": "The intent of the analysed message."
         },
-        "keyPhraseExtraction": {
+        "extractedKeyPhrases": {
           "type": "array",
           "description": "List of key phrases extracted.",
           "items": {
@@ -951,19 +951,14 @@
         "languageDetection": {
           "$ref": "#/definitions/AcsMessageLanguageDetection",
           "description": "The analysed message language detection."
-        },
-        "sentiment": {
-          "$ref": "#/definitions/AcsMessageSentiment",
-          "description": "The analysed message sentiment."
         }
       },
       "required": [
         "originalMessage",
         "channelKind",
         "intentAnalysis",
-        "keyPhraseExtraction",
-        "languageDetection",
-        "sentiment"
+        "extractedKeyPhrases",
+        "languageDetection"
       ],
       "allOf": [
         {
@@ -1202,7 +1197,8 @@
           "description": "The language of the message."
         },
         "confidenceScore": {
-          "type": "string",
+          "type": "number",
+          "format": "double",
           "description": "The confidence score of the language detected."
         },
         "translation": {
@@ -1282,25 +1278,6 @@
         {
           "$ref": "#/definitions/AcsMessageEventData"
         }
-      ]
-    },
-    "AcsMessageSentiment": {
-      "type": "object",
-      "description": "Message Analysis Sentiment",
-      "properties": {
-        "score": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The score of the analysis."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the analysis."
-        }
-      },
-      "required": [
-        "score",
-        "description"
       ]
     },
     "AcsRecordingChunkInfoProperties": {
