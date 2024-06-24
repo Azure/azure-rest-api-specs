@@ -54,6 +54,7 @@ model DataFlowEndpointAuthenticationServiceAccountToken {
   @doc("Audience of the service account. Optional, defaults to the broker internal service account audience.")
   audience: string;
 }
+
 @doc("DataFlowEndpoint Authentication X509 properties")
 model DataFlowEndpointAuthenticationX509 {
   @doc("Secret name of the X.509 certificate.")

@@ -149,6 +149,9 @@ model Traces {
   @doc("The toggle to enable/disable traces.")
   mode?: OperationalMode = OperationalMode.Enabled;
 
+  @doc("The open telemetry collector endpoint to export to.")
+  openTelemetryCollectorAddress?: string;
+
   @doc("The cache size in megabytes.")
   @minValue(1)
   @maxValue(128)
@@ -158,9 +161,6 @@ model Traces {
   @minValue(1)
   @maxValue(300)
   exportIntervalSeconds?: int32 = 30;
-
-  @doc("The open telemetry collector endpoint to export to.")
-  openTelemetryCollectorAddress?: string;
 
   @doc("The self tracing properties.")
   selfTracing?: SelfTracing;
@@ -173,12 +173,12 @@ model Traces {
 
 @doc("DiskBackedMessageBuffer properties")
 model DiskBackedMessageBuffer {
-  @doc("Use the specified persistent volume claim template to mount a \"generic ephemeral volume\" for the message buffer. See <https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes> for details.")
-  ephemeralVolumeClaimSpec?: VolumeClaimSpec;
-
   @doc("The max size of the message buffer on disk. If a PVC template is specified using one of ephemeralVolumeClaimSpec or persistentVolumeClaimSpec, then this size is used as the request and limit sizes of that template. If neither ephemeralVolumeClaimSpec nor persistentVolumeClaimSpec are specified, then an emptyDir volume is mounted with this size as its limit. See <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir> for details.")
   @pattern("^[0-9]+[KMGTPE]$")
   maxSize: string;
+
+  @doc("Use the specified persistent volume claim template to mount a \"generic ephemeral volume\" for the message buffer. See <https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes> for details.")
+  ephemeralVolumeClaimSpec?: VolumeClaimSpec;
 
   @doc("Use the specified persistent volume claim template to mount a persistent volume for the message buffer.")
   persistentVolumeClaimSpec?: VolumeClaimSpec;
@@ -186,6 +186,15 @@ model DiskBackedMessageBuffer {
 
 @doc("VolumeClaimSpec properties")
 model VolumeClaimSpec {
+  @doc("VolumeName is the binding reference to the PersistentVolume backing this claim.")
+  volumeName?: string;
+
+  @doc("volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. This is a beta feature.")
+  volumeMode?: string;
+
+  @doc("Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1")
+  storageClassName?: string;
+
   @doc("AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1")
   @OpenAPI.extension("x-ms-identifiers", [])
   accessModes?: string[];
@@ -201,15 +210,6 @@ model VolumeClaimSpec {
 
   @doc("A label query over volumes to consider for binding.")
   selector?: VolumeClaimSpecSelector;
-
-  @doc("Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1")
-  storageClassName?: string;
-
-  @doc("volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. This is a beta feature.")
-  volumeMode?: string;
-
-  @doc("VolumeName is the binding reference to the PersistentVolume backing this claim.")
-  volumeName?: string;
 }
 
 @doc("VolumeClaimResourceRequirements properties")
@@ -274,11 +274,11 @@ model CertManagerCertOptions {
   @doc("Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   duration: string;
 
-  @doc("Configuration of certificate private key.")
-  privateKey: CertManagerPrivateKey;
-
   @doc("When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   renewBefore: string;
+
+  @doc("Configuration of certificate private key.")
+  privateKey: CertManagerPrivateKey;
 }
 
 @doc("Cert Manager private key properties")

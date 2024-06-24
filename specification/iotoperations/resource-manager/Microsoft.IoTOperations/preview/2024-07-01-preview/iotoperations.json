@@ -3141,6 +3141,18 @@
           "type": "string",
           "description": "Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes."
         },
+        "secretName": {
+          "type": "string",
+          "description": "Secret for storing server certificate. Any existing data will be overwritten. This is a reference to the secret through an identifying name, not the secret itself."
+        },
+        "secretNamespace": {
+          "type": "string",
+          "description": "Certificate K8S namespace. Omit to use current namespace."
+        },
+        "renewBefore": {
+          "type": "string",
+          "description": "When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes."
+        },
         "issuerRef": {
           "$ref": "#/definitions/CertManagerIssuerRef",
           "description": "cert-manager issuerRef."
@@ -3149,21 +3161,9 @@
           "$ref": "#/definitions/CertManagerPrivateKey",
           "description": "Type of certificate private key."
         },
-        "renewBefore": {
-          "type": "string",
-          "description": "When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes."
-        },
         "san": {
           "$ref": "#/definitions/SanForCert",
           "description": "Additional Subject Alternative Names (SANs) to include in the certificate."
-        },
-        "secretName": {
-          "type": "string",
-          "description": "Secret for storing server certificate. Any existing data will be overwritten. This is a reference to the secret through an identifying name, not the secret itself."
-        },
-        "secretNamespace": {
-          "type": "string",
-          "description": "Certificate K8S namespace. Omit to use current namespace."
         }
       },
       "required": [
@@ -3569,6 +3569,11 @@
           "type": "string",
           "description": "Broker associated with this listener."
         },
+        "serviceName": {
+          "type": "string",
+          "description": "Kubernetes Service name of this listener.",
+          "default": "aio-mq-dmqtt-frontend"
+        },
         "ports": {
           "type": "array",
           "description": "Ports on which this listener accepts client connections.",
@@ -3578,11 +3583,6 @@
           "x-ms-identifiers": [
             "port"
           ]
-        },
-        "serviceName": {
-          "type": "string",
-          "description": "Kubernetes Service name of this listener.",
-          "default": "aio-mq-dmqtt-frontend"
         },
         "serviceType": {
           "type": "string",
@@ -3949,19 +3949,19 @@
           "type": "string",
           "description": "Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes."
         },
-        "privateKey": {
-          "$ref": "#/definitions/CertManagerPrivateKey",
-          "description": "Configuration of certificate private key."
-        },
         "renewBefore": {
           "type": "string",
           "description": "When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes."
+        },
+        "privateKey": {
+          "$ref": "#/definitions/CertManagerPrivateKey",
+          "description": "Configuration of certificate private key."
         }
       },
       "required": [
         "duration",
-        "privateKey",
-        "renewBefore"
+        "renewBefore",
+        "privateKey"
       ]
     },
     "CertManagerIssuerKind": {
@@ -4083,6 +4083,14 @@
       "type": "object",
       "description": "DataFlow BuiltIn Transformation properties",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the transformation."
+        },
+        "schemaRef": {
+          "type": "string",
+          "description": "Schema CR reference."
+        },
         "enrich": {
           "type": "array",
           "description": "Enrich data from MQ State Store. Dataset references a key in MQ State Store.",
@@ -4100,10 +4108,6 @@
             "$ref": "#/definitions/DataFlowBuiltInTransformationFilter"
           },
           "x-ms-identifiers": []
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the transformation."
         },
         "map": {
           "type": "array",
@@ -4138,10 +4142,6 @@
               }
             ]
           }
-        },
-        "schemaRef": {
-          "type": "string",
-          "description": "Schema CR reference."
         }
       },
       "required": [
@@ -4389,10 +4389,6 @@
       "type": "object",
       "description": "Azure Data Explorer endpoint properties",
       "properties": {
-        "batching": {
-          "$ref": "#/definitions/BatchingConfiguration",
-          "description": "Azure Data Explorer endpoint batching configuration."
-        },
         "database": {
           "type": "string",
           "description": "Database name."
@@ -4401,6 +4397,10 @@
           "type": "string",
           "description": "Host of the Azure Data Explorer in the form of <cluster>.<region>.kusto.windows.net .",
           "pattern": ".+\\..+\\.kusto\\.windows\\.net"
+        },
+        "batching": {
+          "$ref": "#/definitions/BatchingConfiguration",
+          "description": "Azure Data Explorer endpoint batching configuration."
         }
       },
       "required": [
@@ -4412,14 +4412,14 @@
       "type": "object",
       "description": "Azure Data Lake endpoint properties",
       "properties": {
-        "batching": {
-          "$ref": "#/definitions/BatchingConfiguration",
-          "description": "Azure Data Lake endpoint batching configuration."
-        },
         "host": {
           "type": "string",
           "description": "Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .",
           "pattern": ".+\\.blob\\.core\\.windows\\.net"
+        },
+        "batching": {
+          "$ref": "#/definitions/BatchingConfiguration",
+          "description": "Azure Data Lake endpoint batching configuration."
         }
       },
       "required": [
@@ -4430,15 +4430,6 @@
       "type": "object",
       "description": "Microsoft Fabric endpoint properties",
       "properties": {
-        "batching": {
-          "$ref": "#/definitions/BatchingConfiguration",
-          "description": "Batching configuration."
-        },
-        "host": {
-          "type": "string",
-          "description": "Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com.",
-          "pattern": ".+\\.fabric\\.microsoft\\.com"
-        },
         "names": {
           "$ref": "#/definitions/DataFlowEndpointFabricOneLakeNames",
           "description": "Names of the workspace and lakehouse."
@@ -4446,12 +4437,21 @@
         "oneLakePathType": {
           "$ref": "#/definitions/DataFlowEndpointFabricPathType",
           "description": "Type of location of the data in the workspace. Can be either tables or files."
+        },
+        "host": {
+          "type": "string",
+          "description": "Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com.",
+          "pattern": ".+\\.fabric\\.microsoft\\.com"
+        },
+        "batching": {
+          "$ref": "#/definitions/BatchingConfiguration",
+          "description": "Batching configuration."
         }
       },
       "required": [
-        "host",
         "names",
-        "oneLakePathType"
+        "oneLakePathType",
+        "host"
       ]
     },
     "DataFlowEndpointFabricOneLakeNames": {
@@ -4500,9 +4500,42 @@
       "type": "object",
       "description": "Kafka endpoint properties",
       "properties": {
+        "consumerGroupId": {
+          "type": "string",
+          "description": "Consumer group ID."
+        },
+        "host": {
+          "type": "string",
+          "description": "Kafka endpoint host."
+        },
         "batching": {
           "$ref": "#/definitions/DataFlowEndpointKafkaBatching",
           "description": "Batching configuration."
+        },
+        "copyMqttProperties": {
+          "type": "string",
+          "description": "Copy MQTT properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an MQTT source.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "OperationalMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled is equivalent to True"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled is equivalent to False."
+              }
+            ]
+          }
         },
         "compression": {
           "type": "string",
@@ -4540,18 +4573,6 @@
               }
             ]
           }
-        },
-        "consumerGroupId": {
-          "type": "string",
-          "description": "Consumer group ID."
-        },
-        "copyMqttProperties": {
-          "$ref": "#/definitions/OperationalMode",
-          "description": "Copy MQTT properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an MQTT source."
-        },
-        "host": {
-          "type": "string",
-          "description": "Kafka endpoint host."
         },
         "kafkaAcks": {
           "type": "string",
@@ -4808,6 +4829,11 @@
           "type": "string",
           "description": "Client ID prefix. Client ID generated by the dataflow is <prefix>-TBD. Optional; no prefix if omitted."
         },
+        "host": {
+          "type": "string",
+          "description": "Host of the MQTT broker in the form of <hostname>:<port>. Optional; connects to IoT MQ if omitted.",
+          "default": "aio-mq-dmqtt-frontend:1883"
+        },
         "protocol": {
           "type": "string",
           "description": "Enable or disable websockets.",
@@ -4832,11 +4858,6 @@
               }
             ]
           }
-        },
-        "host": {
-          "type": "string",
-          "description": "Host of the MQTT broker in the form of <hostname>:<port>. Optional; connects to IoT MQ if omitted.",
-          "default": "aio-mq-dmqtt-frontend:1883"
         },
         "keepAliveSeconds": {
           "type": "integer",
@@ -5283,13 +5304,17 @@
       "type": "object",
       "description": "DataFlow Source Operation properties",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the source."
+        },
         "endpointRef": {
           "type": "string",
           "description": "Reference to the Endpoint CR. Can only be of MQTT and Kafka type."
         },
-        "name": {
+        "schemaRef": {
           "type": "string",
-          "description": "Name of the source."
+          "description": "Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match."
         },
         "locations": {
           "type": "array",
@@ -5316,15 +5341,11 @@
               }
             ]
           }
-        },
-        "schemaRef": {
-          "type": "string",
-          "description": "Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match."
         }
       },
       "required": [
-        "endpointRef",
         "name",
+        "endpointRef",
         "locations"
       ]
     },
@@ -5382,14 +5403,14 @@
       "type": "object",
       "description": "DiskBackedMessageBuffer properties",
       "properties": {
-        "ephemeralVolumeClaimSpec": {
-          "$ref": "#/definitions/VolumeClaimSpec",
-          "description": "Use the specified persistent volume claim template to mount a \"generic ephemeral volume\" for the message buffer. See <https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes> for details."
-        },
         "maxSize": {
           "type": "string",
           "description": "The max size of the message buffer on disk. If a PVC template is specified using one of ephemeralVolumeClaimSpec or persistentVolumeClaimSpec, then this size is used as the request and limit sizes of that template. If neither ephemeralVolumeClaimSpec nor persistentVolumeClaimSpec are specified, then an emptyDir volume is mounted with this size as its limit. See <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir> for details.",
           "pattern": "^[0-9]+[KMGTPE]$"
+        },
+        "ephemeralVolumeClaimSpec": {
+          "$ref": "#/definitions/VolumeClaimSpec",
+          "description": "Use the specified persistent volume claim template to mount a \"generic ephemeral volume\" for the message buffer. See <https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes> for details."
         },
         "persistentVolumeClaimSpec": {
           "$ref": "#/definitions/VolumeClaimSpec",
@@ -5710,14 +5731,6 @@
       "type": "object",
       "description": "Diagnostic Metrics properties",
       "properties": {
-        "stalenessTimeSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The time used to determine if a metric is stale and drop from the metrics cache.",
-          "default": 600,
-          "minimum": 60,
-          "maximum": 600
-        },
         "mode": {
           "type": "string",
           "description": "The toggle to enable/disable metrics.",
@@ -5742,6 +5755,14 @@
               }
             ]
           }
+        },
+        "stalenessTimeSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time used to determine if a metric is stale and drop from the metrics cache.",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 600
         },
         "exportIntervalSeconds": {
           "type": "integer",
@@ -6453,14 +6474,6 @@
       "type": "object",
       "description": "Broker Diagnostic Trace properties",
       "properties": {
-        "cacheSizeMegabytes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The cache size in megabytes.",
-          "default": 16,
-          "minimum": 1,
-          "maximum": 128
-        },
         "mode": {
           "type": "string",
           "description": "The toggle to enable/disable traces.",
@@ -6486,6 +6499,18 @@
             ]
           }
         },
+        "openTelemetryCollectorAddress": {
+          "type": "string",
+          "description": "The open telemetry collector endpoint to export to."
+        },
+        "cacheSizeMegabytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The cache size in megabytes.",
+          "default": 16,
+          "minimum": 1,
+          "maximum": 128
+        },
         "exportIntervalSeconds": {
           "type": "integer",
           "format": "int32",
@@ -6493,10 +6518,6 @@
           "default": 30,
           "minimum": 1,
           "maximum": 300
-        },
-        "openTelemetryCollectorAddress": {
-          "type": "string",
-          "description": "The open telemetry collector endpoint to export to."
         },
         "selfTracing": {
           "$ref": "#/definitions/SelfTracing",
@@ -6560,6 +6581,18 @@
       "type": "object",
       "description": "VolumeClaimSpec properties",
       "properties": {
+        "volumeName": {
+          "type": "string",
+          "description": "VolumeName is the binding reference to the PersistentVolume backing this claim."
+        },
+        "volumeMode": {
+          "type": "string",
+          "description": "volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. This is a beta feature."
+        },
+        "storageClassName": {
+          "type": "string",
+          "description": "Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1"
+        },
         "accessModes": {
           "type": "array",
           "description": "AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1",
@@ -6583,18 +6616,6 @@
         "selector": {
           "$ref": "#/definitions/VolumeClaimSpecSelector",
           "description": "A label query over volumes to consider for binding."
-        },
-        "storageClassName": {
-          "type": "string",
-          "description": "Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1"
-        },
-        "volumeMode": {
-          "type": "string",
-          "description": "volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. This is a beta feature."
-        },
-        "volumeName": {
-          "type": "string",
-          "description": "VolumeName is the binding reference to the PersistentVolume backing this claim."
         }
       }
     },

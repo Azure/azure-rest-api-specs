@@ -63,6 +63,12 @@ model DataFlowOperation {
 
 @doc("DataFlow BuiltIn Transformation properties")
 model DataFlowBuiltInTransformation {
+  @doc("Name of the transformation.")
+  name: string;
+
+  @doc("Schema CR reference.")
+  schemaRef?: string;
+
   @doc("Enrich data from MQ State Store. Dataset references a key in MQ State Store.")
   @OpenAPI.extension("x-ms-identifiers", [])
   enrich?: DataFlowBuiltInTransformationEnrich[] = #[];
@@ -71,18 +77,12 @@ model DataFlowBuiltInTransformation {
   @OpenAPI.extension("x-ms-identifiers", [])
   filter?: DataFlowBuiltInTransformationFilter[] = #[];
 
-  @doc("Name of the transformation.")
-  name: string;
-
   @doc("Maps input to output message.")
   @OpenAPI.extension("x-ms-identifiers", [])
   map?: DataFlowBuiltInTransformationMap[] = #[];
 
   @doc("Serialization format. Optional; defaults to JSON.")
   serializationFormat?: TransformationSerializationFormat = TransformationSerializationFormat.Json;
-
-  @doc("Schema CR reference.")
-  schemaRef?: string;
 }
 
 @doc("DataFlow BuiltIn Transformation enrich properties")
@@ -157,23 +157,23 @@ model DataFlowDestinationOperation {
 
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
   @visibility("read", "create")
-  `location`: string;
+  location: string;
 }
 
 @doc("DataFlow Source Operation properties")
 model DataFlowSourceOperation {
+  @doc("Name of the source.")
+  name: string;
+
   @doc("Reference to the Endpoint CR. Can only be of MQTT and Kafka type.")
   endpointRef: string;
 
-  @doc("Name of the source.")
-  name: string;
+  @doc("Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match.")
+  schemaRef?: string;
 
   @doc("List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.")
   locations: string[];
 
   @doc("Serialization format. Optional; defaults to JSON.")
   serializationFormat?: SourceSerializationFormat = SourceSerializationFormat.Json;
-
-  @doc("Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match.")
-  schemaRef?: string;
 }

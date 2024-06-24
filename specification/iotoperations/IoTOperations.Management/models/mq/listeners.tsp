@@ -35,12 +35,12 @@ model BrokerListenerProperties {
   @doc("Broker associated with this listener.")
   brokerRef: string;
 
+  @doc("Kubernetes Service name of this listener.")
+  serviceName?: string = "aio-mq-dmqtt-frontend";
+
   @doc("Ports on which this listener accepts client connections.")
   @OpenAPI.extension("x-ms-identifiers", ["port"])
   ports: ListenerPort[];
-
-  @doc("Kubernetes Service name of this listener.")
-  serviceName?: string = "aio-mq-dmqtt-frontend";
 
   @doc("Kubernetes Service type of this listener.")
   serviceType?: ServiceType = ServiceType.ClusterIp;
@@ -117,23 +117,23 @@ model AutomaticCertMethod {
   @doc("Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   duration?: string;
 
+  @doc("Secret for storing server certificate. Any existing data will be overwritten. This is a reference to the secret through an identifying name, not the secret itself.")
+  secretName?: string;
+
+  @doc("Certificate K8S namespace. Omit to use current namespace.")
+  secretNamespace?: string;
+
+  @doc("When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
+  renewBefore?: string;
+
   @doc("cert-manager issuerRef.")
   issuerRef: CertManagerIssuerRef;
 
   @doc("Type of certificate private key.")
   privateKey?: CertManagerPrivateKey;
 
-  @doc("When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
-  renewBefore?: string;
-
   @doc("Additional Subject Alternative Names (SANs) to include in the certificate.")
   san?: SanForCert;
-
-  @doc("Secret for storing server certificate. Any existing data will be overwritten. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretName?: string;
-
-  @doc("Certificate K8S namespace. Omit to use current namespace.")
-  secretNamespace?: string;
 }
 
 @doc("Subject Alternative Names (SANs) for certificate.")
