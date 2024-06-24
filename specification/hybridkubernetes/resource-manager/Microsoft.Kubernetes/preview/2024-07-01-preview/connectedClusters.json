@@ -700,6 +700,11 @@
           "description": "Open ID Connect (OIDC) Issuer Profile for the connected cluster.",
           "$ref": "#/definitions/OidcIssuerProfile"
         },
+        "gateway": {
+          "description": "Details of the gateway used by the Arc router for connectivity.",
+          "$ref": "#/definitions/Gateway",
+          "x-nullable": true
+        },
         "configurationSettings": {
           "description": "Configuration settings for customizing the behavior of the connected cluster.",
           "type": "array",
@@ -901,6 +906,19 @@
         "selfHostedIssuerUrl": {
           "type": "string",
           "description": "The issuer url for public cloud clusters - AKS, EKS, GKE - used for the workload identity feature."
+        }
+      }
+    },
+    "Gateway": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the gateway for arc router connectivity is enabled."
+        },
+        "resourceId": {
+          "type": "string",
+            "description": "The resource ID of the gateway used for the Arc router feature."
         }
       }
     },
