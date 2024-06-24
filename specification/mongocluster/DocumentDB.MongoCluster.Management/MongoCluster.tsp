@@ -306,7 +306,7 @@ union PromoteMode {
 model ReplicationProperties {
   /** The resource id the source cluster for the replica cluster. */
   @visibility("read")
-  sourceResourceId?: string;
+  sourceResourceId?: MongoClusterResourceId;
 
   /** The replication role of the cluster */
   @visibility("read")
