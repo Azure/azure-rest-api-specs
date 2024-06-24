@@ -783,11 +783,11 @@ model CountOfRecordsHeader {
 
 alias BodyParameter<
   T,
-  name extends valueof string = "body",
-  doc extends valueof string = "",
+  TName extends valueof string = "body",
+  TDoc extends valueof string = ""
 > = {
-  @doc(doc)
-  @friendlyName(name)
+  @doc(TDoc)
+  @friendlyName(TName)
   @bodyRoot
   body: T;
 };
