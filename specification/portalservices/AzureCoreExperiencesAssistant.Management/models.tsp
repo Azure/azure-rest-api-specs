@@ -19,8 +19,8 @@ model AssistantRequest {
   @doc("User question to the assistant")
   userInput: string;
 
-  @doc("Scenario type that is relevant to the user question")
-  scenarioType: ScenarioType;
+  @doc("Scenario type identifier that is relevant to the user question")
+  scenarioType: string;
 
   @doc("Start window for assistant to run analysis on. Formatted as an ISO 8601 UTC timestamp, e.g. YYYY-MM-DDTHH:mm:ss.sssZ")
   windowStartTimestamp?: utcDateTime;
@@ -77,19 +77,4 @@ model AssistantResponse {
 model ResourceContext {
   @doc("Azure resource Id. Formatted as an arm-id. e.g. /subscriptions/{guid}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}")
   resourceId: armResourceIdentifier;
-}
-
-@doc("Supported scenario types")
-union ScenarioType {
-  /**
-   * The disk performance analysis scenario
-   */
-  DiskPerformance: "DiskPerformance",
-
-  /**
-   * The storage failover analysis scenario
-   */
-  StorageFailover: "StorageFailover",
-
-  string,
 }
