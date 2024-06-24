@@ -854,7 +854,11 @@ interface Accounts {
   @doc("Create or update up to 100 Numbers on the specified account.")
   createOrUpdateNumbers is Operations.ResourceAction<
     AccountResource,
-    BodyParameter<BatchNumbers, "body", "Batch of numbers to create or replace.">,
+    BodyParameter<
+      BatchNumbers,
+      "body",
+      "Batch of numbers to create or replace."
+    >,
     BatchNumbers
   >;
 
@@ -904,7 +908,11 @@ interface Accounts {
   @doc("Get a list of Teams Available Capabilities on the specified account.")
   getTeamsAvailableCapabilities is Operations.ResourceAction<
     AccountResource,
-    BodyParameter<NumberIdentifiers, "body", "List identifiers for a Number resource">,
+    BodyParameter<
+      NumberIdentifiers,
+      "body",
+      "List identifiers for a Number resource"
+    >,
     TeamsAvailableCapabilities
   >;
 
