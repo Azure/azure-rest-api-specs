@@ -31,6 +31,9 @@ model NetworkDeviceProperties {
   @doc("The device's hardware SKU")
   hardwareSku: string;
 
+  @doc("The device's NgsDeviceType")
+  deviceType: string;
+
   @doc("The cluster the device belongs to")
   cluster: string;
 
