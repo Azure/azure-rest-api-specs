@@ -201,12 +201,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/addCloudCostConfig": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/updateCloudCostConfig": {
       "post": {
         "tags": [
           "cloudCostConfig"
         ],
-        "summary": "Provide the cloud cost configuration to read the data from.",
+        "summary": "Provide list of storage account ID to enable the 'Blob Reader' role for given datatype where the cloud cost export is enabled",
         "operationId": "Monitors_CloudCostConfig",
         "produces": [
           "application/json"
@@ -248,7 +248,7 @@
         },
         "x-ms-examples": {
           "Monitors_CloudCostProperties": {
-            "$ref": "./examples/CloudCostConfig_Get.json"
+            "$ref": "./examples/CloudCostConfig_Update.json"
           }
         }
       }
@@ -1723,7 +1723,10 @@
           "description": "The list of the storage account where the exports are enabled and to be read.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": [
+            "storageAccounts"
+          ]
         }
       }
     },
@@ -1735,7 +1738,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudCostData"
-          }
+          },
+          "x-ms-identifiers": [
+            "cloudCostConfig"
+          ]
         }
       }
     },
