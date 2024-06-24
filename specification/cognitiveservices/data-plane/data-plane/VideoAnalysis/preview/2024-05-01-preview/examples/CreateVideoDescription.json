@@ -1,0 +1,61 @@
+{
+  "title": "VideoDescriptions_Create",
+  "operationId": "VideoDescriptions_Create",
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "taskName": "task-01",
+    "body": {
+      "input": {
+        "kind": "azureBlobFile",
+        "url": "https://microsoft.com/a",
+        "range": {
+          "offset": "PT0S",
+          "duration": "PT10S"
+        },
+        "authentication": {
+          "kind": "managedIdentity"
+        },
+        "preset": "default"
+      },
+      "output": {
+        "kind": "azureBlobContainer",
+        "containerUrl": "https://microsoft.com/container",
+        "prefix": "prefix-1",
+        "authentication": {
+          "kind": "managedIdentity"
+        }
+      },
+      "resource": {
+        "completion": {
+          "kind": "gptv",
+          "endpoint": "https://microsoft.com/a",
+          "deploymentName": "deployment-1",
+          "authentication": {
+            "kind": "managedIdentity"
+          }
+        }
+      },
+      "properties": {
+        "scenarioDescription": {
+          "kind": "describe",
+          "description": "Describe the segment focusing on scenario where the segment is happening.",
+          "examples": ["A busy street with people walking and cars driving."]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "taskName": "task-01",
+        "batchName": "dfbmhwirtwfdcygefypgdgyjjrjn",
+        "createdDateTime": "2024-06-22T04:54:17.717Z",
+        "lastModifiedDateTime": "2024-06-22T04:54:17.717Z",
+        "status": "notStarted",
+        "error": {},
+        "taskResult": "",
+        "etag": "u"
+      }
+    }
+  }
+}
