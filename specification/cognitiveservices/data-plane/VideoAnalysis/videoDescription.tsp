@@ -266,7 +266,7 @@ union TaskStatusModel {
     @lroSucceeded
     succeeded: "succeeded",
 
-    @doc("The operation is running and is writting back results.")
+    @doc("The operation is running and is writing back results.")
     @lroSucceeded
     partiallyCompleted: "completed",
 
