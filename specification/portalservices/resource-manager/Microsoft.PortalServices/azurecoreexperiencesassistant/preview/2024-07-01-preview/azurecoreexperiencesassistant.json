@@ -47,21 +47,24 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.PortalServices/invokeAssistant": {
+    "/{resourceUri}/providers/Microsoft.PortalServices/assistant/default/sendChat": {
       "post": {
-        "operationId": "AzureCoreExperiencesAssistant_InvokeAssistant",
+        "operationId": "AzureCoreExperiencesAssistant_SendChat",
         "tags": [
           "AzureCoreExperiencesAssistant"
         ],
-        "description": "Send a chat to the assistant",
+        "description": "Send chat data to the assistant",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "assistantRequest",
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "body",
             "in": "body",
-            "description": "The request body.",
+            "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssistantRequest"
@@ -80,14 +83,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Invoke the Azure Core Experiences Assistant (maximum set)": {
-            "$ref": "./examples/AzureCoreExperiencesAssistant_InvokeAssistant_MaximumSet_Gen.json"
-          },
-          "Invoke the Azure Core Experiences Assistant (minimum set)": {
-            "$ref": "./examples/AzureCoreExperiencesAssistant_InvokeAssistant_MinimumSet_Gen.json"
           }
         }
       }
@@ -133,6 +128,32 @@
     }
   },
   "definitions": {
+    "Assistant": {
+      "type": "object",
+      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The resource-specific properties for this resource.",
+          "properties": {
+            "provisioningState": {
+              "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "AssistantRequest": {
       "type": "object",
       "description": "Request object to the assistant",
@@ -142,8 +163,8 @@
           "description": "User question to the assistant"
         },
         "scenarioType": {
-          "$ref": "#/definitions/ScenarioType",
-          "description": "Scenario type that is relevant to the user question"
+          "type": "string",
+          "description": "Scenario type identifier that is relevant to the user question"
         },
         "windowStartTimestamp": {
           "type": "string",
@@ -207,6 +228,37 @@
         }
       }
     },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ConversationHistoryContext": {
       "type": "object",
       "description": "Use to provide the previous conversation history as added context for this particular user request",
@@ -258,31 +310,17 @@
       "required": [
         "resourceId"
       ]
-    },
-    "ScenarioType": {
-      "type": "string",
-      "description": "Supported scenario types",
-      "enum": [
-        "DiskPerformance",
-        "StorageFailover"
-      ],
-      "x-ms-enum": {
-        "name": "ScenarioType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DiskPerformance",
-            "value": "DiskPerformance",
-            "description": "The disk performance analysis scenario"
-          },
-          {
-            "name": "StorageFailover",
-            "value": "StorageFailover",
-            "description": "The storage failover analysis scenario"
-          }
-        ]
-      }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
 }

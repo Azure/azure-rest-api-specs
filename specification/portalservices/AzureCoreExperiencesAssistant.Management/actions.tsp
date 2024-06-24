@@ -16,17 +16,26 @@ namespace Microsoft.PortalServices;
 @armResourceOperations
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@singleton
+model Assistant
+  is ExtensionResource<{
+    @visibility("read")
+    provisioningState?: ResourceProvisioningState;
+  }> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "There is no defined pattern. The only value can be 'assistant'."
+  @doc("The name of the assistant")
+  @key("name")
+  @path
+  @segment("assistant")
+  name: "assistant";
+}
+
 @armResourceOperations
 interface AzureCoreExperiencesAssistant {
-  @doc("Send a chat to the assistant")
-  @armResourceAction(AssistantRequest)
-  @route("/providers/Microsoft.PortalServices")
-  @post
-  invokeAssistant(
-    ...ApiVersionParameter,
-
-    @doc("The request body.")
-    @body
-    assistantRequest: AssistantRequest,
-  ): ArmResponse<AssistantResponse> | ErrorResponse;
+  @doc("Send chat data to the assistant")
+  sendChat is ArmResourceActionSync<
+    Assistant,
+    AssistantRequest,
+    AssistantResponse
+  >;
 }
