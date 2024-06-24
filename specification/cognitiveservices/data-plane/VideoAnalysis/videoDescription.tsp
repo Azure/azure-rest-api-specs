@@ -331,7 +331,7 @@ union PropertyConfigurationModelType {
   string,
 
   @doc("Describe property configuration type")
-  describe: "describe",
+  describe: "Describe",
 }
 
 @doc("Property items configuration acceptable types")
