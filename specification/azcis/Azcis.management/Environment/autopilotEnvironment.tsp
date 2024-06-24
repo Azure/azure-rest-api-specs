@@ -46,7 +46,12 @@ model EnvironmentResource
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
 interface Environment {
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<EnvironmentResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    EnvironmentResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   listBySubscription is ArmListBySubscription<EnvironmentResource>;
   listByResourceGroup is ArmResourceListByParent<EnvironmentResource>;
   get is ArmResourceRead<EnvironmentResource>;
@@ -71,3 +76,5 @@ union EnvironmentMode {
   @doc("On the All mode all the files including customer files will be copied to the new environment.")
   All: "All",
 }
+
+@@visibility(EnvironmentResource.properties, "read", "create");
