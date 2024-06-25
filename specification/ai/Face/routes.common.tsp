@@ -28,7 +28,7 @@ op FaceResourceCreateWithServiceProvidedName<
   TResponse extends TypeSpec.Reflection.Model = TResource
 > is Foundations.ResourceCollectionOperation<
   TResource,
-  TParams,
+  BodyParameter<TParams>,
   TResponse,
   ServiceTraits,
   FaceErrorResponse
