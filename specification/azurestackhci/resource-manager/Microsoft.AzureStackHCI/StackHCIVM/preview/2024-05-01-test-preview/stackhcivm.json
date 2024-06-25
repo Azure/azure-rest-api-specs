@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureStackHCI",
-    "version": "2024-02-01-preview",
+    "version": "2024-05-01-test-preview",
     "description": "Azure Stack HCI management service",
     "x-typespec-generated": [
       {
@@ -3830,6 +3830,16 @@
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual machine instance.",
           "readOnly": true
+        },
+        "attestHardwarePlatform": {
+          "$ref": "#/definitions/AttestHWPlatformEnum",
+          "description": "The hardware platform information from attestation token. This only applies to Confidential VM.",
+          "readOnly": true
+        },
+        "attestDiskSecurityEncryptionType": {
+          "$ref": "#/definitions/AttestDiskSecurityEncryptionTypeEnum",
+          "description": "The managed disk security encryption type from attestation token. This only applies to Confidential VM.",
+          "readOnly": true
         }
       }
     },
@@ -5061,7 +5071,7 @@
       "type": "object",
       "description": "The ARM ID for a Network Interface.",
       "properties": {
-        "ID": {
+        "id": {
           "type": "string",
           "format": "arm-id",
           "description": "The ARM ID for a Network Interface.",
@@ -5599,6 +5609,24 @@
         }
       }
     },
+    "SecurityEncryptionType": {
+      "type": "string",
+      "description": "Encryption type of the managed disk enum.",
+      "enum": [
+        "NonPersistedTPM"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NonPersistedTPM",
+            "value": "NonPersistedTPM",
+            "description": "Non-persisted TPM encryption type"
+          }
+        ]
+      }
+    },
     "SecurityRule": {
       "type": "object",
       "description": "Security Rule resource.",
@@ -6126,6 +6154,24 @@
         }
       }
     },
+    "SubnetIpConfigurationReference": {
+      "type": "object",
+      "description": "The ARM ID for a Network Interface.",
+      "properties": {
+        "ID": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM ID for a Network Interface.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/networkInterfaces"
+              }
+            ]
+          }
+        }
+      }
+    },
     "SubnetProperties": {
       "type": "object",
       "description": "Properties of the subnet.",
@@ -6149,7 +6195,7 @@
           "type": "array",
           "description": "IPConfigurationReferences - list of IPConfigurationReferences",
           "items": {
-            "$ref": "#/definitions/NetworkInterfaceArmReference"
+            "$ref": "#/definitions/SubnetIpConfigurationReference"
           },
           "x-ms-identifiers": []
         },
@@ -6469,6 +6515,16 @@
       "required": [
         "value"
       ]
+    },
+    "VirtualMachineInstanceManagedDiskParameters": {
+      "type": "object",
+      "description": "The parameters of a managed disk.",
+      "properties": {
+        "securityProfile": {
+          "$ref": "#/definitions/VMDiskSecurityProfile",
+          "description": "Specifies the security profile for the managed disk."
+        }
+      }
     },
     "VirtualMachineInstanceProperties": {
       "type": "object",
@@ -6933,6 +6989,10 @@
         "osType": {
           "$ref": "#/definitions/OperatingSystemTypes",
           "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/VirtualMachineInstanceManagedDiskParameters",
+          "description": "The managed disk parameters."
         }
       }
     },
