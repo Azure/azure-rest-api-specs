@@ -191,9 +191,8 @@ model BytesBody<ContentType> {
 alias BodyParameter<
   T,
   TName extends valueof string = "body",
-  TDoc extends valueof string = ""
+  TDoc extends valueof string = "Body parameter.",
 > = {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Don't force people to provide documentation"
   @doc(TDoc)
   @friendlyName(TName)
   @bodyRoot
