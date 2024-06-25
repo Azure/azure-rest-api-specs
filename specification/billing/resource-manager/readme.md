@@ -248,8 +248,6 @@ suppressions:
 - code: XmsResourceInPutResponse
   from: transfers.json
   reason: Service design forces this behavior
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2021-10
