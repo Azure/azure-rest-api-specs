@@ -259,219 +259,6 @@
         }
       }
     },
-    "/assistants/{assistantId}/files": {
-      "get": {
-        "operationId": "ListAssistantFiles",
-        "description": "Gets a list of files attached to a specific assistant, as used by tools that can read files.",
-        "parameters": [
-          {
-            "name": "assistantId",
-            "in": "path",
-            "description": "The ID of the assistant to retrieve the list of attached files for.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "x-ms-enum": {
-              "name": "ListSortOrder",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ascending",
-                  "value": "asc",
-                  "description": "Specifies an ascending sort order."
-                },
-                {
-                  "name": "descending",
-                  "value": "desc",
-                  "description": "Specifies a descending sort order."
-                }
-              ]
-            }
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested list of files attached to the specified assistant.",
-            "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/AssistantFile"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "CreateAssistantFile",
-        "description": "Attaches a previously uploaded file to an assistant for use by tools that can read files.",
-        "parameters": [
-          {
-            "name": "assistantId",
-            "in": "path",
-            "description": "The ID of the assistant to attach the file to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "file_id": {
-                  "type": "string",
-                  "description": "The ID of the previously uploaded file to attach.",
-                  "x-ms-client-name": "fileId"
-                }
-              },
-              "required": [
-                "file_id"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Information about the attached file.",
-            "schema": {
-              "$ref": "#/definitions/AssistantFile"
-            }
-          }
-        }
-      }
-    },
-    "/assistants/{assistantId}/files/{fileId}": {
-      "get": {
-        "operationId": "GetAssistantFile",
-        "description": "Retrieves a file attached to an assistant.",
-        "parameters": [
-          {
-            "name": "assistantId",
-            "in": "path",
-            "description": "The ID of the assistant associated with the attached file.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fileId",
-            "in": "path",
-            "description": "The ID of the file to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A representation of the attached file.",
-            "schema": {
-              "$ref": "#/definitions/AssistantFile"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DeleteAssistantFile",
-        "description": "Unlinks a previously attached file from an assistant, rendering it unavailable for use by tools that can read\nfiles.",
-        "parameters": [
-          {
-            "name": "assistantId",
-            "in": "path",
-            "description": "The ID of the assistant from which the specified file should be unlinked.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fileId",
-            "in": "path",
-            "description": "The ID of the file to unlink from the specified assistant.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status information about the requested file association deletion.",
-            "schema": {
-              "$ref": "#/definitions/AssistantFileDeletionStatus"
-            }
-          }
-        }
-      }
-    },
     "/files": {
       "get": {
         "operationId": "ListFiles",
@@ -716,28 +503,14 @@
         "description": "Modifies an existing thread.",
         "parameters": [
           {
-            "name": "threadId",
-            "in": "path",
-            "description": "The ID of the thread to modify.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/UpdateAssistantThreadOptions.threadId"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "metadata": {
-                  "type": "object",
-                  "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-                  "x-nullable": true,
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                }
-              }
+              "$ref": "#/definitions/UpdateAssistantThreadOptions"
             }
           }
         ],
@@ -897,44 +670,6 @@
             "description": "The ID of the thread to create the new message on.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "role": {
-                  "$ref": "#/definitions/MessageRole",
-                  "description": "The role to associate with the new message."
-                },
-                "content": {
-                  "type": "string",
-                  "description": "The textual content for the new message."
-                },
-                "file_ids": {
-                  "type": "array",
-                  "description": "A list of up to 10 file IDs to associate with the message, as used by tools like 'code_interpreter' or 'retrieval' that can read files.",
-                  "items": {
-                    "type": "string"
-                  },
-                  "x-ms-client-name": "fileIds"
-                },
-                "metadata": {
-                  "type": "object",
-                  "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-                  "x-nullable": true,
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                }
-              },
-              "required": [
-                "role",
-                "content"
-              ]
-            }
           }
         ],
         "responses": {
@@ -1018,166 +753,6 @@
             "description": "A representation of the modified message.",
             "schema": {
               "$ref": "#/definitions/ThreadMessage"
-            }
-          }
-        }
-      }
-    },
-    "/threads/{threadId}/messages/{messageId}/files": {
-      "get": {
-        "operationId": "ListMessageFiles",
-        "description": "Gets a list of previously uploaded files associated with a message from a thread.",
-        "parameters": [
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "The ID of the thread containing the message to list files from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "The ID of the message to list files from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "x-ms-enum": {
-              "name": "ListSortOrder",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ascending",
-                  "value": "asc",
-                  "description": "Specifies an ascending sort order."
-                },
-                {
-                  "name": "descending",
-                  "value": "desc",
-                  "description": "Specifies a descending sort order."
-                }
-              ]
-            }
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested list of files associated with the specified message.",
-            "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/MessageFile"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "/threads/{threadId}/messages/{messageId}/files/{fileId}": {
-      "get": {
-        "operationId": "GetMessageFile",
-        "description": "Gets information about a file attachment to a message within a thread.",
-        "parameters": [
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "The ID of the thread containing the message to get information from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "The ID of the message to get information from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fileId",
-            "in": "path",
-            "description": "The ID of the file to get information about.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested file information.",
-            "schema": {
-              "$ref": "#/definitions/MessageFile"
             }
           }
         }
@@ -1623,12 +1198,17 @@
               "properties": {
                 "tool_outputs": {
                   "type": "array",
-                  "description": "The list of tool outputs requested by tool calls from the specified run.",
+                  "description": "A list of tools for which the outputs are being submitted.",
                   "items": {
                     "$ref": "#/definitions/ToolOutput"
                   },
                   "x-ms-client-name": "toolOutputs",
                   "x-ms-identifiers": []
+                },
+                "stream": {
+                  "type": "boolean",
+                  "description": "If `true`, returns a stream of events that happen during the Run as server-sent events, terminating when the Run enters a terminal state with a `data: [DONE]` message.",
+                  "x-nullable": true
                 }
               },
               "required": [
@@ -1725,15 +1305,6 @@
           },
           "x-ms-identifiers": []
         },
-        "file_ids": {
-          "type": "array",
-          "description": "A list of attached file IDs, ordered by creation date in ascending order.",
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -1752,7 +1323,6 @@
         "model",
         "instructions",
         "tools",
-        "file_ids",
         "metadata"
       ]
     },
@@ -1788,15 +1358,6 @@
           },
           "x-ms-identifiers": []
         },
-        "file_ids": {
-          "type": "array",
-          "description": "A list of previously uploaded file IDs to attach to the assistant.",
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -1827,72 +1388,6 @@
           "description": "The object type, which is always 'assistant.deleted'.",
           "enum": [
             "assistant.deleted"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "id",
-        "deleted",
-        "object"
-      ]
-    },
-    "AssistantFile": {
-      "type": "object",
-      "description": "Information about a file attached to an assistant, as used by tools that can read files.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always 'assistant.file'.",
-          "enum": [
-            "assistant.file"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The Unix timestamp, in seconds, representing when this object was created.",
-          "x-ms-client-name": "createdAt"
-        },
-        "assistant_id": {
-          "type": "string",
-          "description": "The assistant ID that the file is attached to.",
-          "x-ms-client-name": "assistantId"
-        }
-      },
-      "required": [
-        "id",
-        "object",
-        "created_at",
-        "assistant_id"
-      ]
-    },
-    "AssistantFileDeletionStatus": {
-      "type": "object",
-      "description": "The status of an assistant file deletion operation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the resource specified for deletion."
-        },
-        "deleted": {
-          "type": "boolean",
-          "description": "A value indicating whether deletion was successful."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always 'assistant.file.deleted'.",
-          "enum": [
-            "assistant.file.deleted"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -1949,14 +1444,6 @@
       "type": "object",
       "description": "The details used to create a new assistant thread.",
       "properties": {
-        "messages": {
-          "type": "array",
-          "description": "The initial messages to associate with the new thread.",
-          "items": {
-            "$ref": "#/definitions/ThreadInitializationMessage"
-          },
-          "x-ms-identifiers": []
-        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -1988,23 +1475,30 @@
         },
         "thread": {
           "$ref": "#/definitions/AssistantThreadCreationOptions",
-          "description": "The details used to create the new thread."
+          "description": "The details used to create the new thread. If no thread is provided, an empty one will be created."
         },
         "model": {
           "type": "string",
-          "description": "The overridden model that the assistant should use to run the thread."
+          "description": "The overridden model that the assistant should use to run the thread.",
+          "x-nullable": true
         },
         "instructions": {
           "type": "string",
-          "description": "The overridden system instructions the assistant should use to run the thread."
+          "description": "The overridden system instructions the assistant should use to run the thread.",
+          "x-nullable": true
         },
         "tools": {
           "type": "array",
           "description": "The overridden list of enabled tools the assistant should use to run the thread.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
           },
           "x-ms-identifiers": []
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "If `true`, returns a stream of events that happen during the Run as server-sent events,\nterminating when the Run enters a terminal state with a `data: [DONE]` message."
         },
         "metadata": {
           "type": "object",
@@ -2052,6 +1546,10 @@
             "$ref": "#/definitions/ToolDefinition"
           },
           "x-ms-identifiers": []
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "If `true`, returns a stream of events that happen during the Run as server-sent events,\nterminating when the Run enters a terminal state with a `data: [DONE]` message."
         },
         "metadata": {
           "type": "object",
@@ -2198,6 +1696,30 @@
       ],
       "x-ms-discriminator-value": "function"
     },
+    "IncompleteRunDetails": {
+      "type": "string",
+      "description": "The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.",
+      "enum": [
+        "max_completion_tokens",
+        "max_prompt_tokens"
+      ],
+      "x-ms-enum": {
+        "name": "IncompleteRunDetails",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "maxCompletionTokens",
+            "value": "max_completion_tokens",
+            "description": "Maximum completion tokens exceeded"
+          },
+          {
+            "name": "maxPromptTokens",
+            "value": "max_prompt_tokens",
+            "description": "Maximum prompt tokens exceeded"
+          }
+        ]
+      }
+    },
     "MessageContent": {
       "type": "object",
       "description": "An abstract representation of a single item of thread message content.",
@@ -2210,43 +1732,6 @@
       "discriminator": "type",
       "required": [
         "type"
-      ]
-    },
-    "MessageFile": {
-      "type": "object",
-      "description": "Information about a file attached to an assistant thread message.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The identifier, which can be referenced in API endpoints."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always 'thread.message.file'.",
-          "enum": [
-            "thread.message.file"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The Unix timestamp, in seconds, representing when this object was created.",
-          "x-ms-client-name": "createdAt"
-        },
-        "message_id": {
-          "type": "string",
-          "description": "The ID of the message that this file is attached to.",
-          "x-ms-client-name": "messageId"
-        }
-      },
-      "required": [
-        "id",
-        "object",
-        "created_at",
-        "message_id"
       ]
     },
     "MessageImageFileContent": {
@@ -2283,6 +1768,61 @@
         "file_id"
       ]
     },
+    "MessageIncompleteDetails": {
+      "type": "object",
+      "description": "Information providing additional detail about a message entering an incomplete status.",
+      "properties": {
+        "reason": {
+          "$ref": "#/definitions/MessageIncompleteDetailsReason",
+          "description": "The provided reason describing why the message was marked as incomplete."
+        }
+      },
+      "required": [
+        "reason"
+      ]
+    },
+    "MessageIncompleteDetailsReason": {
+      "type": "string",
+      "description": "A set of reasons describing why a message is marked as incomplete.",
+      "enum": [
+        "content_filter",
+        "max_tokens",
+        "run_cancelled",
+        "run_failed",
+        "run_expired"
+      ],
+      "x-ms-enum": {
+        "name": "MessageIncompleteDetailsReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "contentFilter",
+            "value": "content_filter",
+            "description": "The run generating the message was terminated due to content filter flagging."
+          },
+          {
+            "name": "maxTokens",
+            "value": "max_tokens",
+            "description": "The run generating the message exhausted available tokens before completion."
+          },
+          {
+            "name": "runCancelled",
+            "value": "run_cancelled",
+            "description": "The run generating the message was cancelled before completion."
+          },
+          {
+            "name": "runFailed",
+            "value": "run_failed",
+            "description": "The run generating the message failed."
+          },
+          {
+            "name": "runExpired",
+            "value": "run_expired",
+            "description": "The run generating the message expired."
+          }
+        ]
+      }
+    },
     "MessageRole": {
       "type": "string",
       "description": "The possible values for roles attributed to messages in a thread.",
@@ -2307,6 +1847,36 @@
         ]
       }
     },
+    "MessageStatus": {
+      "type": "string",
+      "description": "The possible execution status values for a thread message.",
+      "enum": [
+        "in_progress",
+        "incomplete",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "MessageStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inProgress",
+            "value": "in_progress",
+            "description": "A run is currently creating this message."
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete",
+            "description": "This message is incomplete. See incomplete_details for more information."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "This message was successfully completed by a run."
+          }
+        ]
+      }
+    },
     "MessageTextAnnotation": {
       "type": "object",
       "description": "An abstract representation of an annotation to text thread message content.",
@@ -2318,26 +1888,12 @@
         "text": {
           "type": "string",
           "description": "The textual content associated with this text annotation item."
-        },
-        "start_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The first text index associated with this text annotation.",
-          "x-ms-client-name": "startIndex"
-        },
-        "end_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The last text index associated with this text annotation.",
-          "x-ms-client-name": "endIndex"
         }
       },
       "discriminator": "type",
       "required": [
         "type",
-        "text",
-        "start_index",
-        "end_index"
+        "text"
       ]
     },
     "MessageTextContent": {
@@ -2383,12 +1939,24 @@
     },
     "MessageTextFileCitationAnnotation": {
       "type": "object",
-      "description": "A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.",
+      "description": "A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'file_search' tool to search files.",
       "properties": {
         "file_citation": {
           "$ref": "#/definitions/MessageTextFileCitationDetails",
-          "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"retrieval\" tool to search files.",
+          "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"file_search\" tool to search files.",
           "x-ms-client-name": "fileCitation"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
         }
       },
       "required": [
@@ -2428,6 +1996,18 @@
           "$ref": "#/definitions/MessageTextFilePathDetails",
           "description": "A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.",
           "x-ms-client-name": "filePath"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
         }
       },
       "required": [
@@ -2571,15 +2151,34 @@
         "id"
       ]
     },
-    "RetrievalToolDefinition": {
+    "RunCompletionUsage": {
       "type": "object",
-      "description": "The input definition information for a retrieval tool as used to configure an assistant.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
+      "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of completion tokens used over the course of the run.",
+          "x-ms-client-name": "completionTokens"
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of prompt tokens used over the course of the run.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of tokens used (prompt + completion).",
+          "x-ms-client-name": "totalTokens"
         }
-      ],
-      "x-ms-discriminator-value": "retrieval"
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
+      ]
     },
     "RunError": {
       "type": "object",
@@ -2750,6 +2349,16 @@
           "x-nullable": true,
           "x-ms-client-name": "failedAt"
         },
+        "usage": {
+          "type": "object",
+          "description": "Usage statistics related to the run step. This value will be `null` while the run step's status is `in_progress`.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunStepCompletionUsage"
+            }
+          ]
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -2885,6 +2494,35 @@
         "type"
       ]
     },
+    "RunStepCompletionUsage": {
+      "type": "object",
+      "description": "Usage statistics related to the run step.",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of completion tokens used over the course of the run step.",
+          "x-ms-client-name": "completionTokens"
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of prompt tokens used over the course of the run step.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of tokens used (prompt + completion).",
+          "x-ms-client-name": "totalTokens"
+        }
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
     "RunStepDetails": {
       "type": "object",
       "description": "An abstract representation of the details for a run step.",
@@ -3017,28 +2655,6 @@
       "required": [
         "message_id"
       ]
-    },
-    "RunStepRetrievalToolCall": {
-      "type": "object",
-      "description": "A record of a call to a retrieval tool, issued by the model in evaluation of a defined tool, that represents\nexecuted retrieval actions.",
-      "properties": {
-        "retrieval": {
-          "type": "object",
-          "description": "The key/value pairs produced by the retrieval tool.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "retrieval"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "retrieval"
     },
     "RunStepStatus": {
       "type": "string",
@@ -3214,41 +2830,6 @@
         "object"
       ]
     },
-    "ThreadInitializationMessage": {
-      "type": "object",
-      "description": "A single message within an assistant thread, as provided during that thread's creation for its initial state.",
-      "properties": {
-        "role": {
-          "$ref": "#/definitions/MessageRole",
-          "description": "The role associated with the assistant thread message. Currently, only 'user' is supported when providing initial messages to a new thread."
-        },
-        "content": {
-          "type": "string",
-          "description": "The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API."
-        },
-        "file_ids": {
-          "type": "array",
-          "description": "A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can\naccess files.",
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "role",
-        "content"
-      ]
-    },
     "ThreadMessage": {
       "type": "object",
       "description": "A single, existing message within an assistant thread.",
@@ -3278,6 +2859,35 @@
           "description": "The ID of the thread that this message belongs to.",
           "x-ms-client-name": "threadId"
         },
+        "status": {
+          "$ref": "#/definitions/MessageStatus",
+          "description": "The status of the message."
+        },
+        "incomplete_details": {
+          "type": "object",
+          "description": "On an incomplete message, details about why the message is incomplete.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/MessageIncompleteDetails"
+            }
+          ],
+          "x-ms-client-name": "incompleteDetails"
+        },
+        "completed_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the message was completed.",
+          "x-nullable": true,
+          "x-ms-client-name": "completedAt"
+        },
+        "incomplete_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the message was marked as incomplete.",
+          "x-nullable": true,
+          "x-ms-client-name": "incompleteAt"
+        },
         "role": {
           "$ref": "#/definitions/MessageRole",
           "description": "The role associated with the assistant thread message."
@@ -3293,20 +2903,14 @@
         "assistant_id": {
           "type": "string",
           "description": "If applicable, the ID of the assistant that authored this message.",
+          "x-nullable": true,
           "x-ms-client-name": "assistantId"
         },
         "run_id": {
           "type": "string",
           "description": "If applicable, the ID of the run associated with the authoring of this message.",
+          "x-nullable": true,
           "x-ms-client-name": "runId"
-        },
-        "file_ids": {
-          "type": "array",
-          "description": "A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can\naccess files.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
         },
         "metadata": {
           "type": "object",
@@ -3322,9 +2926,14 @@
         "object",
         "created_at",
         "thread_id",
+        "status",
+        "incomplete_details",
+        "completed_at",
+        "incomplete_at",
         "role",
         "content",
-        "file_ids",
+        "assistant_id",
+        "run_id",
         "metadata"
       ]
     },
@@ -3399,15 +3008,6 @@
           },
           "x-ms-identifiers": []
         },
-        "file_ids": {
-          "type": "array",
-          "description": "A list of attached file IDs, ordered by creation date in ascending order.",
-          "default": [],
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        },
         "created_at": {
           "type": "integer",
           "format": "unixtime",
@@ -3449,6 +3049,22 @@
           "x-nullable": true,
           "x-ms-client-name": "failedAt"
         },
+        "incomplete_details": {
+          "$ref": "#/definitions/IncompleteRunDetails",
+          "description": "Details on why the run is incomplete. Will be `null` if the run is not incomplete.",
+          "x-nullable": true,
+          "x-ms-client-name": "incompleteDetails"
+        },
+        "usage": {
+          "type": "object",
+          "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RunCompletionUsage"
+            }
+          ]
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -3468,13 +3084,14 @@
         "model",
         "instructions",
         "tools",
-        "file_ids",
         "created_at",
         "expires_at",
         "started_at",
         "completed_at",
         "cancelled_at",
         "failed_at",
+        "incomplete_details",
+        "usage",
         "metadata"
       ]
     },
@@ -3539,15 +3156,20 @@
           },
           "x-ms-identifiers": []
         },
-        "file_ids": {
-          "type": "array",
-          "description": "The modified list of previously uploaded fileIDs to attach to the assistant.",
-          "default": [],
-          "items": {
+        "metadata": {
+          "type": "object",
+          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
+          "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-name": "fileIds"
-        },
+          }
+        }
+      }
+    },
+    "UpdateAssistantThreadOptions": {
+      "type": "object",
+      "description": "The details used to update an existing assistant thread",
+      "properties": {
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -3564,6 +3186,14 @@
       "name": "assistantId",
       "in": "path",
       "description": "The ID of the assistant to modify.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateAssistantThreadOptions.threadId": {
+      "name": "threadId",
+      "in": "path",
+      "description": "The ID of the thread to modify.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

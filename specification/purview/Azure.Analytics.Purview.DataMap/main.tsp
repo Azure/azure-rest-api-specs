@@ -17,11 +17,11 @@ using TypeSpec.Versioning;
   }
 )
 @doc("""
-Purview Data Map Service is a fully managed cloud service whose users can
-discover the data sources they need and understand the data sources they find.
-At the same time, Data Map helps organizations get more value from their
-existing investments. This spec defines REST API of Purview Data Map Service.
-""")
+  Purview Data Map Service is a fully managed cloud service whose users can
+  discover the data sources they need and understand the data sources they find.
+  At the same time, Data Map helps organizations get more value from their
+  existing investments. This spec defines REST API of Purview Data Map Service.
+  """)
 @useAuth(AuthToken)
 @versioned(ApiVersions)
 namespace PurviewDataMap;

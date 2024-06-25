@@ -12,11 +12,8 @@
   "paths": {
     "/{projectId}/classify/iterations/{publishedName}/image": {
       "post": {
-        "tags": [
-          "ImagePredictionApi"
-        ],
-        "summary": "Classify an image and saves the result.",
-        "operationId": "ClassifyImage",
+        "description": "Classify an image and saves the result.",
+        "operationId": "ImageClassifier_ClassifyImage",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -82,11 +79,8 @@
     },
     "/{projectId}/classify/iterations/{publishedName}/image/nostore": {
       "post": {
-        "tags": [
-          "ImagePredictionApi"
-        ],
-        "summary": "Classify an image without saving the result.",
-        "operationId": "ClassifyImageWithNoStore",
+        "description": "Classify an image without saving the result.",
+        "operationId": "ImageClassifier_ClassifyImageWithoutSaving",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -152,11 +146,8 @@
     },
     "/{projectId}/classify/iterations/{publishedName}/url": {
       "post": {
-        "tags": [
-          "ImagePredictionApi"
-        ],
-        "summary": "Classify an image url and saves the result.",
-        "operationId": "ClassifyImageUrl",
+        "description": "Classify an image url and saves the result.",
+        "operationId": "ImageClassifier_ClassifyImageUrl",
         "consumes": [
           "application/json",
           "application/xml",
@@ -226,11 +217,8 @@
     },
     "/{projectId}/classify/iterations/{publishedName}/url/nostore": {
       "post": {
-        "tags": [
-          "ImagePredictionApi"
-        ],
-        "summary": "Classify an image url without saving the result.",
-        "operationId": "ClassifyImageUrlWithNoStore",
+        "description": "Classify an image url without saving the result.",
+        "operationId": "ImageClassifier_ClassifyImageUrlWithoutSaving",
         "consumes": [
           "application/json",
           "application/xml",
@@ -300,11 +288,8 @@
     },
     "/{projectId}/detect/iterations/{publishedName}/image": {
       "post": {
-        "tags": [
-          "ImagePredictionApi"
-        ],
-        "summary": "Detect objects in an image and saves the result.",
-        "operationId": "DetectImage",
+        "description": "Detect objects in an image and saves the result.",
+        "operationId": "ObjectDetector_AnalyzeImage",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -370,11 +355,8 @@
     },
     "/{projectId}/detect/iterations/{publishedName}/image/nostore": {
       "post": {
-        "tags": [
-          "ImagePredictionApi"
-        ],
-        "summary": "Detect objects in an image without saving the result.",
-        "operationId": "DetectImageWithNoStore",
+        "description": "Detect objects in an image without saving the result.",
+        "operationId": "ObjectDetector_AnalyzeImageWithoutSaving",
         "consumes": [
           "multipart/form-data",
           "application/octet-stream"
@@ -440,11 +422,8 @@
     },
     "/{projectId}/detect/iterations/{publishedName}/url": {
       "post": {
-        "tags": [
-          "ImagePredictionApi"
-        ],
-        "summary": "Detect objects in an image url and saves the result.",
-        "operationId": "DetectImageUrl",
+        "description": "Detect objects in an image url and saves the result.",
+        "operationId": "ObjectDetector_AnalyzeImageUrl",
         "consumes": [
           "application/json",
           "application/xml",
@@ -514,11 +493,8 @@
     },
     "/{projectId}/detect/iterations/{publishedName}/url/nostore": {
       "post": {
-        "tags": [
-          "ImagePredictionApi"
-        ],
-        "summary": "Detect objects in an image url without saving the result.",
-        "operationId": "DetectImageUrlWithNoStore",
+        "description": "Detect objects in an image url without saving the result.",
+        "operationId": "ObjectDetector_AnalyzeImageUrlWithoutSaving",
         "consumes": [
           "application/json",
           "application/xml",

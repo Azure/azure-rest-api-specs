@@ -45,6 +45,15 @@ input-file:
   - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
 ```
 
+### Tag: package-preview-2024-04-only
+
+These settings apply only when `--tag=package-preview-2024-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-04-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2024-04-01-preview/fluxconfiguration.json
+```
+
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.

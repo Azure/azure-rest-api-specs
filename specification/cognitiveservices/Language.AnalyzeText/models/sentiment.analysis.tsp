@@ -177,9 +177,10 @@ model TargetRelation {
 /** The type related to the target. */
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 union TargetRelationType {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  /** Assessment relation. */
   assessment: "assessment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  /** Target relation. */
   target: "target",
 }
 

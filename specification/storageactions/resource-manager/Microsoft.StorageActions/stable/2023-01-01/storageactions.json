@@ -358,7 +358,7 @@
           "StorageTasks"
         ],
         "operationId": "StorageTaskAssignment_List",
-        "description": "Lists all the storage tasks available under the given resource group.",
+        "description": "Lists Resource IDs of the Storage Task Assignments associated with this Storage Task.",
         "x-ms-examples": {
           "ListStorageTaskAssignmentsByResourceGroup": {
             "$ref": "./examples/storageTasksList/ListStorageTaskAssignmentIds.json"
@@ -375,7 +375,7 @@
             "name": "$maxpagesize",
             "in": "query",
             "type": "string",
-            "description": "Optional, specifies the maximum number of storage task assignment Ids to be included in the list response."
+            "description": "Optional, specifies the maximum number of Storage Task Assignment Resource IDs to be included in the list response."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -386,7 +386,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- List of storage task assignment Ids retrieved and returned successfully.",
+            "description": "OK -- List of Storage Task Assignment Resource IDs retrieved and returned successfully.",
             "schema": {
               "$ref": "#/definitions/StorageTaskAssignmentsListResult"
             }
@@ -426,7 +426,7 @@
             "name": "$maxpagesize",
             "in": "query",
             "type": "string",
-            "description": "Optional, specifies the maximum number of storage task assignment Ids to be included in the list response."
+            "description": "Optional, specifies the maximum number of Storage Task Assignment Resource IDs to be included in the list response."
           },
           {
             "name": "$filter",
@@ -527,6 +527,10 @@
           "description": "Properties of the storage task."
         }
       },
+      "required": [
+        "identity",
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
@@ -633,7 +637,7 @@
       "properties": {
         "condition": {
           "type": "string",
-          "description": "The condition predicate which is composed of object properties, eg: blob and container properties."
+          "description": "Condition predicate to evaluate each object. See https://aka.ms/storagetaskconditions for valid properties and operators."
         },
         "operations": {
           "type": "array",
@@ -740,7 +744,7 @@
           "readOnly": true
         }
       },
-      "description": "The response from the List Storage Tasks operation."
+      "description": "The response from the List Storage Task operation."
     },
     "StorageTaskAssignmentsListResult": {
       "type": "object",
@@ -752,11 +756,11 @@
             "$ref": "#/definitions/StorageTaskAssignment"
           },
           "x-ms-identifiers": [],
-          "description": "Gets the list of storage task assignment Ids."
+          "description": "List of Storage Task Assignment Resource IDs associated with this Storage Task."
         },
         "nextLink": {
           "type": "string",
-          "description": "Request URL that can be used to query next page of storage task assignment Ids. Returned when total number of requested storage task assignment Ids exceed maximum page size.",
+          "description": "Request URL that can be used to query next page of Resource IDs. Returned when total number of requested Resource IDs exceed maximum page size.",
           "readOnly": true
         }
       },
@@ -768,11 +772,11 @@
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "ARM Id of the storage task assignments, associated with the storage tasks.",
+          "description": "Resource ID of the Storage Task Assignment.",
           "readOnly": true
         }
       },
-      "description": "Fetch the Storage task assignment ARM ids."
+      "description": "Storage Task Assignment associated with this Storage Task."
     },
     "StorageTaskReportSummary": {
       "type": "object",
@@ -822,7 +826,7 @@
               }
             ]
           },
-          "description": "Represents the Storage Task Assignment Id associated with the storage task that provided an execution context."
+          "description": "Resource ID of the Storage Task Assignment associated with this reported run."
         },
         "storageAccountId": {
           "readOnly": true,
@@ -835,7 +839,7 @@
               }
             ]
           },
-          "description": "Represents the Storage Account Id where the storage task definition was applied and executed."
+          "description": "Resource ID of the Storage Account where this reported run executed."
         },
         "startTime": {
           "readOnly": true,
@@ -901,7 +905,7 @@
               }
             ]
           },
-          "description": "Storage Task Arm Id."
+          "description": "Resource ID of the Storage Task applied during this run."
         },
         "taskVersion": {
           "readOnly": true,
@@ -944,7 +948,7 @@
         "container": {
           "type": "object",
           "$ref": "#/definitions/StorageTaskPreviewContainerProperties",
-          "description": "Preview action container properties to be tested for a match with the provided condition."
+          "description": "Properties of a sample container to test for a match with the preview action."
         },
         "blobs": {
           "type": "array",
@@ -952,12 +956,12 @@
             "$ref": "#/definitions/StorageTaskPreviewBlobProperties"
           },
           "x-ms-identifiers": [],
-          "description": "Preview action container properties to be tested for a match with the provided condition."
+          "description": "Properties of some sample blobs in the container to test for matches with the preview action."
         },
         "action": {
           "type": "object",
           "$ref": "#/definitions/StorageTaskPreviewActionCondition",
-          "description": "Preview action container properties to be tested for a match with the provided condition."
+          "description": "Preview action to test"
         }
       },
       "required": [
@@ -1000,7 +1004,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "property for the container name."
+          "description": "Name of test container"
         },
         "metadata": {
           "type": "array",
@@ -1018,7 +1022,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "property for the container name."
+          "description": "Name of test blob"
         },
         "properties": {
           "type": "array",

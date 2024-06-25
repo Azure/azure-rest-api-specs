@@ -37,6 +37,11 @@
   "security": [
     {
       "AzureKey": []
+    },
+    {
+      "EntraIdToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -45,6 +50,16 @@
       "description": "The secret key for your Azure Cognitive Services subscription.",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
+    },
+    "EntraIdToken": {
+      "type": "oauth2",
+      "description": "The Microsoft Entra Id Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [

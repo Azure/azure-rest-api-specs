@@ -42,6 +42,15 @@
             "name": "mytask2",
             "type": "Microsoft.StorageActions/storageTasks",
             "location": "westus",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/c86a9c18-8373-41fa-92d4-1d7bdc16977b/resourceGroups/res6117/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myUserAssignedIdentity": {
+                  "principalId": "aaaaaaaa-0000-0000-0000-000000000000",
+                  "clientId": "bbbbbbbb-0000-0000-0000-000000000000"
+                }
+              }
+            },
             "properties": {
               "enabled": true,
               "description": "Storage task",
@@ -53,6 +62,71 @@
                       "name": "SetBlobTier",
                       "parameters": {
                         "tier": "Hot"
+                      },
+                      "onSuccess": "continue",
+                      "onFailure": "break"
+                    }
+                  ]
+                },
+                "else": {
+                  "operations": [
+                    {
+                      "name": "DeleteBlob",
+                      "onSuccess": "continue",
+                      "onFailure": "break"
+                    }
+                  ]
+                }
+              },
+              "taskVersion": 1,
+              "provisioningState": "Succeeded",
+              "creationTimeInUtc": "2023-07-06T00:24:59.1441663Z"
+            }
+          },
+          {
+            "id": "/subscriptions/c86a9c18-8373-41fa-92d4-1d7bdc16977b/resourceGroups/rg1/providers/Microsoft.StorageActions/storageTasks/mytask3",
+            "name": "mytask3",
+            "type": "Microsoft.StorageActions/storageTasks",
+            "location": "westus",
+            "identity": {
+              "principalId": "aaaaaaaa-0000-aaaa-0000-aaaaaaaaaaaa",
+              "tenantId": "b4a2005c-32c1-434c-bbf0-ff486912fc75",
+              "type": "SystemAssigned"
+            },
+            "properties": {
+              "enabled": true,
+              "description": "Storage task",
+              "action": {
+                "if": {
+                  "condition": "[[equals(AccessTier, 'Cool')]]",
+                  "operations": [
+                    {
+                      "name": "SetBlobTags",
+                      "parameters": {
+                        "tag1": "value1",
+                        "tag2": "value2"
+                      },
+                      "onSuccess": "continue",
+                      "onFailure": "break"
+                    },
+                    {
+                      "name": "SetBlobImmutabilityPolicy",
+                      "parameters": {
+                        "untilDate": "2023-01-01T01:01:01",
+                        "mode": "locked"
+                      },
+                      "onSuccess": "continue",
+                      "onFailure": "break"
+                    },
+                    {
+                      "name": "UndeleteBlob",
+                      "onSuccess": "continue",
+                      "onFailure": "break"
+                    },
+                    {
+                      "name": "SetBlobLegalHold",
+                      "parameters": {
+                        "legalHold": "true"
                       },
                       "onSuccess": "continue",
                       "onFailure": "break"

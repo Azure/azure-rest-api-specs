@@ -7,6 +7,7 @@ import { FormatRule } from "./rules/format.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
+import { getSuppressions, Suppression } from "suppressions";
 
 export async function main() {
   const host = new TsvRunnerHost();
@@ -30,6 +31,13 @@ export async function main() {
     process.exit(1);
   }
   console.log("Running TypeSpecValidation on folder: ", absolutePath);
+
+  const suppressions: Suppression[] = await getSuppressions("TypeSpecValidation", absolutePath);
+  if (suppressions && suppressions[0]) {
+    // Use reason from first matching suppression and ignore rest
+    console.log(`  Suppressed: ${suppressions[0].reason}`);
+    return;
+  }
 
   const rules = [
     new FolderStructureRule(),

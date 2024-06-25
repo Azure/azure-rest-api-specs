@@ -82,3 +82,21 @@ interface RadiologyInsightsClient {
 );
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "java");
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "csharp");
+
+@@clientName(AzureHealthInsights.FollowupCommunicationInference.wasAcknowledged,
+  "acknowledged",
+  "java"
+);
+
+@@clientName(AzureHealthInsights.DocumentAuthor,
+  "ClinicalDocumentAuthor",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.DocumentType,
+  "ClinicalDocumentContentType",
+  "csharp"
+);
+@@clientName(AzureHealthInsights.DocumentContent,
+  "ClinicalDocumentContent",
+  "csharp"
+);

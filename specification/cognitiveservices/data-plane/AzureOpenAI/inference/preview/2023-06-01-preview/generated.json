@@ -1036,18 +1036,18 @@
       "type": "object",
       "description": "Information about filtered content severity level and if it has been filtered or not.",
       "properties": {
-        "severity": {
-          "$ref": "#/definitions/ContentFilterSeverity",
-          "description": "Ratings for the intensity and risk level of filtered content."
-        },
         "filtered": {
           "type": "boolean",
           "description": "A value indicating whether or not the content has been filtered."
+        },
+        "severity": {
+          "$ref": "#/definitions/ContentFilterSeverity",
+          "description": "Ratings for the intensity and risk level of filtered content."
         }
       },
       "required": [
-        "severity",
-        "filtered"
+        "filtered",
+        "severity"
       ]
     },
     "ContentFilterResultDetailsForPrompt": {
