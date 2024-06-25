@@ -964,46 +964,49 @@
         }
       }
     },
-    "Error": {
-      "description": "Standard error object.",
-      "type": "object",
+    "ErrorDetails": {
       "properties": {
         "code": {
-          "description": "Server-defined set of error codes.",
           "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Human-readable representation of the error.",
-          "type": "string",
-          "readOnly": true
+          "description": "Error code."
         },
         "target": {
-          "description": "Target of the error.",
           "type": "string",
-          "readOnly": true
+          "description": "Error target."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      },
+      "description": "Common error details representation."
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target."
         },
         "details": {
-          "description": "Array of details about specific errors that led to this reported error.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/ErrorDetails"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "description": "Error details."
         },
         "innerError": {
-          "description": "Object containing more specific information than  the current object about the error.",
-          "type": "object",
-          "properties": {
-            "innerError": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "readOnly": true
+          "type": "string",
+          "description": "Inner error message."
         }
-      }
-    },
+      },
     "ManagedRGConfiguration": {
       "description": "Managed resource group configuration",
       "type": "object",
