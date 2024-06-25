@@ -5110,9 +5110,6 @@
         },
         {
           "$ref": "#/parameters/ImageDefinitionNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ListImageBuildTaskGroupsIncludeParameter"
         }
       ],
       "get": {
@@ -7820,25 +7817,6 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63
-    },
-    "ListImageBuildTaskGroupsIncludeParameter": {
-      "name": "include",
-      "in": "query",
-      "required": false,
-      "type": "array",
-      "collectionFormat": "csv",
-      "items": {
-        "type": "string",
-        "enum": [
-          "taskGroups"
-        ],
-        "x-ms-enum": {
-          "name": "ListImageBuildTaskGroupsIncludeParameter",
-          "modelAsString": true
-        }
-      },
-      "description": "Optional query parameter to specify what properties should be included in the response.",
-      "x-ms-parameter-location": "method"
     }
   }
 }
