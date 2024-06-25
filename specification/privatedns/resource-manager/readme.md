@@ -211,10 +211,6 @@ directive:
     from: privatedns.json
     suppress: EnumInsteadOfBoolean
     reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
-  - where: $.definitions.VirtualNetworkLinkProperties.properties.nxdomainRedirect
-    from: privatedns.json
-    suppress: EnumInsteadOfBoolean
-    reason: Booleans are used to indicate binary states of the property, enum is not appropriate.
   - where: $.definitions.RecordSetProperties.properties.isAutoRegistered
     from: privatedns.json
     suppress: EnumInsteadOfBoolean

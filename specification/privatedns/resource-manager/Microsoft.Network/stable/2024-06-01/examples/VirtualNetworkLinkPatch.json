@@ -1,7 +1,7 @@
 {
   "parameters": {
     "resourceGroupName": "resourceGroup1",
-    "privateZoneName": "privatezone1.com",
+    "privateZoneName": "privatelink.contoso.com",
     "virtualNetworkLinkName": "virtualNetworkLink1",
     "api-version": "2024-06-01",
     "subscriptionId": "subscriptionId",
@@ -11,14 +11,14 @@
       },
       "properties": {
         "registrationEnabled": true,
-        "nxdomainRedirect": false
+        "resolutionPolicy": "NxDomainRedirect"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/virtualNetworkLinks/virtualNetworkLink1",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatelink.contoso.com/virtualNetworkLinks/virtualNetworkLink1",
         "name": "virtualNetworkLink1",
         "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
         "location": "global",
@@ -28,7 +28,7 @@
             "id": "/subscriptions/virtualNetworkSubscriptionId/resourceGroups/virtualNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/virtualNetworkName"
           },
           "registrationEnabled": true,
-          "nxdomainRedirect": false,
+          "resolutionPolicy": "NxDomainRedirect",
           "virtualNetworkLinkState": "Completed",
           "provisioningState": "Succeeded"
         },

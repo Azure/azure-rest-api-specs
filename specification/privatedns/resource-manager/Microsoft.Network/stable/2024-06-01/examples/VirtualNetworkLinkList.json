@@ -1,7 +1,7 @@
 {
   "parameters": {
     "resourceGroupName": "resourceGroup1",
-    "privateZoneName": "privatezone1.com",
+    "privateZoneName": "privatelink.contoso.com",
     "api-version": "2024-06-01",
     "subscriptionId": "subscriptionId"
   },
@@ -11,7 +11,7 @@
         "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/virtualNetworkLinks?api-version=2024-06-01&$skipToken=skipToken",
         "value": [
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/virtualNetworkLinks/virtualNetworkLink1",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatelink.contoso.com/virtualNetworkLinks/virtualNetworkLink1",
             "name": "virtualNetworkLink1",
             "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
             "location": "global",
@@ -21,7 +21,7 @@
                 "id": "/subscriptions/virtualNetworkSubscriptionId/resourceGroups/virtualNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/virtualNetworkName"
               },
               "registrationEnabled": false,
-              "nxdomainRedirect": false,
+              "resolutionPolicy": "NxDomainRedirect",
               "virtualNetworkLinkState": "Completed",
               "provisioningState": "Succeeded"
             },
@@ -30,7 +30,7 @@
             }
           },
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/virtualNetworkLinks/virtualNetworkLink2",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatelink.contoso.com/virtualNetworkLinks/virtualNetworkLink2",
             "name": "virtualNetworkLink2",
             "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
             "location": "global",
@@ -40,7 +40,7 @@
                 "id": "/subscriptions/virtualNetworkSubscriptionId/resourceGroups/virtualNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/virtualNetworkName"
               },
               "registrationEnabled": true,
-              "nxdomainRedirect": true,
+              "resolutionPolicy": "Default",
               "virtualNetworkLinkState": "InProgress",
               "provisioningState": "Succeeded"
             }
