@@ -668,7 +668,7 @@ interface SubscriptionUsages {
   @armResourceAction(Location)
   @get
   @armResourceList(Location)
-  @doc("Returns quotas by location")
+  @doc("List Quota resources by subscription ID")
   ArmQuotaListActionSync<TResponse>(
     ...SubscriptionIdParameter,
 
@@ -681,7 +681,7 @@ interface SubscriptionUsages {
     ...ApiVersionParameter,
   ): ArmResponse<TResponse> | ErrorResponse;
 
-  @doc("Returns quotas by location")
+  @doc("List Quota resources by subscription ID")
   usages is SubscriptionUsages.ArmQuotaListActionSync<QuotaListResult>;
 }
 
