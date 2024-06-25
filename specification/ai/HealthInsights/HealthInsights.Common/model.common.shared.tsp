@@ -235,6 +235,7 @@ alias BodyParameter<
   TName extends valueof string = "body",
   TDoc extends valueof string = ""
 > = {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Don't force people to provide documentation"
   @doc(TDoc)
   @friendlyName(TName)
   @bodyRoot
