@@ -210,6 +210,7 @@ directive:
 suppressions:
   - code: AvoidAdditionalProperties
     from: containerInstance.json
+    where: $.definitions.ConfigMap
     reason: Using additionalProperties type as the object is user-defined and not subject to any validations at RP level.
 ```
 
