@@ -12,7 +12,7 @@ namespace Microsoft.CodeTransparency;
 @post
 @route("/entries")
 op createEntry is Foundations.Operation<
-  BodyParameter<CoseEntry>,
+  CoseEntry,
   CreateEntryResult,
   ServiceTraits
 >;
