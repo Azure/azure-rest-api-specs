@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
 using OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.LoadTestService;
 
@@ -43,6 +44,7 @@ interface LoadTests {
     LoadTestResource,
     LoadTestProperties,
     LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -72,4 +74,48 @@ interface Quotas {
     QuotaBucketRequest,
     CheckQuotaAvailabilityResponse
   >;
+}
+
+@armResourceOperations
+interface LoadTestMappings {
+  @added(APIVersions.v2023_12_01_preview)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<LoadTestMappingResource>;
+
+  @added(APIVersions.v2023_12_01_preview)
+  get is ArmResourceRead<LoadTestMappingResource>;
+
+  @added(APIVersions.v2023_12_01_preview)
+  delete is ArmResourceDeleteSync<LoadTestMappingResource>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
+  @added(APIVersions.v2023_12_01_preview)
+  update is ArmResourcePatchSync<
+    LoadTestMappingResource,
+    LoadTestMappingProperties
+  >;
+
+  @added(APIVersions.v2023_12_01_preview)
+  listByScope is ArmResourceListByParent<LoadTestMappingResource>;
+}
+
+@armResourceOperations
+interface LoadTestProfileMappings {
+  @added(APIVersions.v2023_12_01_preview)
+  createOrUpdate is ArmResourceCreateOrReplaceSync<LoadTestProfileMappingResource>;
+
+  @added(APIVersions.v2023_12_01_preview)
+  get is ArmResourceRead<LoadTestProfileMappingResource>;
+
+  @added(APIVersions.v2023_12_01_preview)
+  delete is ArmResourceDeleteSync<LoadTestProfileMappingResource>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
+  @added(APIVersions.v2023_12_01_preview)
+  update is ArmResourcePatchSync<
+    LoadTestProfileMappingResource,
+    LoadTestProfileMappingProperties
+  >;
+
+  @added(APIVersions.v2023_12_01_preview)
+  listByScope is ArmResourceListByParent<LoadTestProfileMappingResource>;
 }

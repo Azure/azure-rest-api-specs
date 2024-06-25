@@ -141,6 +141,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   @discriminator("@odata.type")
   model MediaJobOutput {
     /** The discriminator for derived types. */
+    #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
     `@odata.type`: string;
 

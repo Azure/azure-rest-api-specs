@@ -58,18 +58,18 @@ op getKeys is Foundations.ResourceList<
     name?: string;
 
     @doc("""
-  Instructs the server to return elements that appear after the element referred
-  to by the specified token.
-  """)
+      Instructs the server to return elements that appear after the element referred
+      to by the specified token.
+      """)
     @query("After")
     after?: string;
 
     ...syncTokenHeader;
 
     @doc("""
-Requests the server to respond with the state of the resource at the specified
-time.
-""")
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
     @header("Accept-Datetime")
     acceptDatetime?: string;
   },
@@ -95,16 +95,16 @@ op checkKeys is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Instructs the server to return elements that appear after the element referred
-to by the specified token.
-""")
+      Instructs the server to return elements that appear after the element referred
+      to by the specified token.
+      """)
     @query("After")
     after?: string;
 
     @doc("""
-Requests the server to respond with the state of the resource at the specified
-time.
-""")
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
     @header("Accept-Datetime")
     acceptDatetime?: string;
   },
@@ -120,32 +120,32 @@ op getKeyValues is Foundations.ResourceList<
   KeyValue,
   {
     @doc("""
-A filter used to match keys. Syntax reference:
-https://aka.ms/azconfig/docs/keyvaluefiltering
-""")
+      A filter used to match keys. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
     @query("key")
     key?: string;
 
     @doc("""
-A filter used to match labels. Syntax reference:
-https://aka.ms/azconfig/docs/keyvaluefiltering
-""")
+      A filter used to match labels. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
     @query("label")
     label?: string;
 
     ...syncTokenHeader;
 
     @doc("""
-Instructs the server to return elements that appear after the element referred
-to by the specified token.
-""")
+      Instructs the server to return elements that appear after the element referred
+      to by the specified token.
+      """)
     @query("After")
     after?: string;
 
     @doc("""
-Requests the server to respond with the state of the resource at the specified
-time.
-""")
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
     @header("Accept-Datetime")
     acceptDatetime?: string;
 
@@ -157,31 +157,31 @@ time.
     select?: KeyValueFields[];
 
     @doc("""
-A filter used get key-values for a snapshot. The value should be the name of
-the snapshot. Not valid when used with 'key' and 'label' filters.
-""")
+      A filter used get key-values for a snapshot. The value should be the name of
+      the snapshot. Not valid when used with 'key' and 'label' filters.
+      """)
     @query("snapshot")
     snapshot?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
     @header("If-Match")
     ifMatch?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag does not
-match the value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
     @header("If-None-Match")
     ifNoneMatch?: string;
 
     #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
     @doc("""
-A filter used to query by tags. Syntax reference:
-https://aka.ms/azconfig/docs/keyvaluefiltering
-""")
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
     @query({
       name: "tags",
       format: "multi",
@@ -203,32 +203,32 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
 op checkKeyValues is appConfigOperation<
   {
     @doc("""
-A filter used to match keys. Syntax reference:
-https://aka.ms/azconfig/docs/keyvaluefiltering
-""")
+      A filter used to match keys. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
     @query("key")
     key?: string;
 
     @doc("""
-A filter used to match labels. Syntax reference:
-https://aka.ms/azconfig/docs/keyvaluefiltering
-""")
+      A filter used to match labels. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
     @query("label")
     label?: string;
 
     ...syncTokenHeader;
 
     @doc("""
-Instructs the server to return elements that appear after the element referred
-to by the specified token.
-""")
+      Instructs the server to return elements that appear after the element referred
+      to by the specified token.
+      """)
     @query("After")
     after?: string;
 
     @doc("""
-Requests the server to respond with the state of the resource at the specified
-time.
-""")
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
     @header("Accept-Datetime")
     acceptDatetime?: string;
 
@@ -244,24 +244,24 @@ time.
     snapshot?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
     @header("If-Match")
     ifMatch?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag does not
-match the value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
     @header("If-None-Match")
     ifNoneMatch?: string;
 
     #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
     @doc("""
-A filter used to query by tags. Syntax reference:
-https://aka.ms/azconfig/docs/keyvaluefiltering
-""")
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
     @query({
       name: "tags",
       format: "multi",
@@ -291,23 +291,23 @@ op getKeyValue is standardOps.ResourceRead<
       ...syncTokenHeader;
 
       @doc("""
-Requests the server to respond with the state of the resource at the specified
-time.
-""")
+        Requests the server to respond with the state of the resource at the specified
+        time.
+        """)
       @header("Accept-Datetime")
       acceptDatetime?: string;
 
       @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+        Used to perform an operation only if the targeted resource's etag matches the
+        value provided.
+        """)
       @header("If-Match")
       ifMatch?: string;
 
       @doc("""
-Used to perform an operation only if the targeted resource's etag does not
-match the value provided.
-""")
+        Used to perform an operation only if the targeted resource's etag does not
+        match the value provided.
+        """)
       @header("If-None-Match")
       ifNoneMatch?: string;
     }> &
@@ -344,16 +344,16 @@ op putKeyValue is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
     @header("If-Match")
     ifMatch?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag does not
-match the value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
     @header("If-None-Match")
     ifNoneMatch?: string;
 
@@ -384,9 +384,9 @@ op deleteKeyValue is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
     @header("If-Match")
     ifMatch?: string;
   },
@@ -418,23 +418,23 @@ op checkKeyValue is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Requests the server to respond with the state of the resource at the specified
-time.
-""")
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
     @header("Accept-Datetime")
     acceptDatetime?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
     @header("If-Match")
     ifMatch?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag does not
-match the value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
     @header("If-None-Match")
     ifNoneMatch?: string;
 
@@ -459,9 +459,9 @@ op getSnapshots is Foundations.ResourceList<
     name?: string;
 
     @doc("""
-Instructs the server to return elements that appear after the element referred
-to by the specified token.
-""")
+      Instructs the server to return elements that appear after the element referred
+      to by the specified token.
+      """)
     @query("After")
     after?: string;
 
@@ -499,9 +499,9 @@ op checkSnapshots is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Instructs the server to return elements that appear after the element referred
-to by the specified token.
-""")
+      Instructs the server to return elements that appear after the element referred
+      to by the specified token.
+      """)
     @query("After")
     after?: string;
   },
@@ -526,16 +526,16 @@ op getSnapshot is standardOps.ResourceRead<
       ...syncTokenHeader;
 
       @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+        Used to perform an operation only if the targeted resource's etag matches the
+        value provided.
+        """)
       @header("If-Match")
       ifMatch?: string;
 
       @doc("""
-Used to perform an operation only if the targeted resource's etag does not
-match the value provided.
-""")
+        Used to perform an operation only if the targeted resource's etag does not
+        match the value provided.
+        """)
       @header("If-None-Match")
       ifNoneMatch?: string;
     }> &
@@ -605,16 +605,16 @@ op updateSnapshot is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
     @header("If-Match")
     ifMatch?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag does not
-match the value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
     @header("If-None-Match")
     ifNoneMatch?: string;
 
@@ -647,16 +647,16 @@ op checkSnapshot is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
     @header("If-Match")
     ifMatch?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag does not
-match the value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
@@ -682,16 +682,16 @@ op getLabels is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Instructs the server to return elements that appear after the element referred
-to by the specified token.
-""")
+      Instructs the server to return elements that appear after the element referred
+      to by the specified token.
+      """)
     @query("After")
     after?: string;
 
     @doc("""
-Requests the server to respond with the state of the resource at the specified
-time.
-""")
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
     @header("Accept-Datetime")
     acceptDatetime?: string;
 
@@ -722,16 +722,16 @@ op checkLabels is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Instructs the server to return elements that appear after the element referred
-to by the specified token.
-""")
+      Instructs the server to return elements that appear after the element referred
+      to by the specified token.
+      """)
     @query("After")
     after?: string;
 
     @doc("""
-Requests the server to respond with the state of the resource at the specified
-time.
-""")
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
     @header("Accept-Datetime")
     acceptDatetime?: string;
 
@@ -765,16 +765,16 @@ op putLock is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
     @header("If-Match")
     ifMatch?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag does not
-match the value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
@@ -801,16 +801,16 @@ op deleteLock is appConfigOperation<
     ...syncTokenHeader;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag matches the
-value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag matches the
+      value provided.
+      """)
     @header("If-Match")
     ifMatch?: string;
 
     @doc("""
-Used to perform an operation only if the targeted resource's etag does not
-match the value provided.
-""")
+      Used to perform an operation only if the targeted resource's etag does not
+      match the value provided.
+      """)
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
@@ -827,32 +827,32 @@ match the value provided.
 op getRevisions is appConfigOperation<
   {
     @doc("""
-A filter used to match keys. Syntax reference:
-https://aka.ms/azconfig/docs/restapirevisions
-""")
+      A filter used to match keys. Syntax reference:
+      https://aka.ms/azconfig/docs/restapirevisions
+      """)
     @query("key")
     key?: string;
 
     @doc("""
-A filter used to match labels. Syntax reference:
-https://aka.ms/azconfig/docs/restapirevisions
-""")
+      A filter used to match labels. Syntax reference:
+      https://aka.ms/azconfig/docs/restapirevisions
+      """)
     @query("label")
     label?: string;
 
     ...syncTokenHeader;
 
     @doc("""
-Instructs the server to return elements that appear after the element referred
-to by the specified token.
-""")
+      Instructs the server to return elements that appear after the element referred
+      to by the specified token.
+      """)
     @query("After")
     after?: string;
 
     @doc("""
-Requests the server to respond with the state of the resource at the specified
-time.
-""")
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
     @header("Accept-Datetime")
     acceptDatetime?: string;
 
@@ -865,9 +865,9 @@ time.
 
     #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
     @doc("""
-A filter used to query by tags. Syntax reference:
-https://aka.ms/azconfig/docs/restapirevisions
-""")
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/restapirevisions
+      """)
     @query({
       name: "tags",
       format: "multi",
@@ -887,32 +887,32 @@ https://aka.ms/azconfig/docs/restapirevisions
 op checkRevisions is appConfigOperation<
   {
     @doc("""
-A filter used to match keys. Syntax reference:
-https://aka.ms/azconfig/docs/restapirevisions
-""")
+      A filter used to match keys. Syntax reference:
+      https://aka.ms/azconfig/docs/restapirevisions
+      """)
     @query("key")
     key?: string;
 
     @doc("""
-A filter used to match labels. Syntax reference:
-https://aka.ms/azconfig/docs/restapirevisions
-""")
+      A filter used to match labels. Syntax reference:
+      https://aka.ms/azconfig/docs/restapirevisions
+      """)
     @query("label")
     label?: string;
 
     ...syncTokenHeader;
 
     @doc("""
-Instructs the server to return elements that appear after the element referred
-to by the specified token.
-""")
+      Instructs the server to return elements that appear after the element referred
+      to by the specified token.
+      """)
     @query("After")
     after?: string;
 
     @doc("""
-Requests the server to respond with the state of the resource at the specified
-time.
-""")
+      Requests the server to respond with the state of the resource at the specified
+      time.
+      """)
     @header("Accept-Datetime")
     acceptDatetime?: string;
 
@@ -925,9 +925,9 @@ time.
 
     #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
     @doc("""
-A filter used to query by tags. Syntax reference:
-https://aka.ms/azconfig/docs/restapirevisions
-""")
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/restapirevisions
+      """)
     @query({
       name: "tags",
       format: "multi",

@@ -31,8 +31,13 @@ interface Clouds {
   @summary("Gets a Cloud.")
   get is ArmResourceRead<Cloud>;
   /** Onboards the ScVmm fabric cloud as an Azure cloud resource. */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @summary("Implements Clouds PUT method.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Cloud>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Cloud,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   /** Updates the Clouds resource. */
   @summary("Implements the Clouds PATCH method.")
   @extension(
