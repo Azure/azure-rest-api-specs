@@ -191,7 +191,7 @@ model BytesBody<ContentType> {
 alias BodyParameter<
   T,
   TName extends valueof string = "body",
-  TDoc extends valueof string = "Body parameter.",
+  TDoc extends valueof string = "Body parameter."
 > = {
   @doc(TDoc)
   @friendlyName(TName)

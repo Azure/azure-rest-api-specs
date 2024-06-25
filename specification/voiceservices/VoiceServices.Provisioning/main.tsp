@@ -784,7 +784,7 @@ model CountOfRecordsHeader {
 alias BodyParameter<
   T,
   TName extends valueof string = "body",
-  TDoc extends valueof string = "Body parameter.",
+  TDoc extends valueof string = "Body parameter."
 > = {
   @doc(TDoc)
   @friendlyName(TName)

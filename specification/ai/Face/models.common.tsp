@@ -298,7 +298,7 @@ model FaceErrorResponse is Azure.Core.Foundations.ErrorResponseBase<FaceError>;
 alias BodyParameter<
   T,
   TName extends valueof string = "body",
-  TDoc extends valueof string = "Body parameter.",
+  TDoc extends valueof string = "Body parameter."
 > = {
   @doc(TDoc)
   @friendlyName(TName)
