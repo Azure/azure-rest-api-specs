@@ -49,9 +49,5 @@ model DataFlowProfileProperties {
 
 @doc("DataFlowProfile Diagnostics properties")
 model ProfileDiagnostics {
-  @doc("The log settings for the dataflow profile.")
-  logs?: DiagnosticsLogs;
-
-  @doc("The metrics settings for the dataflow profile.")
-  metrics?: Metrics;
+ ...MetricProperties;
 }

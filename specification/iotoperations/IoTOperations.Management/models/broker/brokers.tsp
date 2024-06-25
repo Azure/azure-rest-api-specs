@@ -115,11 +115,7 @@ model Frontend {
 
 @doc("Broker Diagnostic Setting properties")
 model BrokerDiagnostics {
-  @doc("The log settings.")
-  logs?: DiagnosticsLogs;
-
-  @doc("The metrics properties.")
-  metrics?: Metrics;
+  ...MetricProperties;
 
   @doc("The self check properties.")
   selfCheck?: SelfCheck;

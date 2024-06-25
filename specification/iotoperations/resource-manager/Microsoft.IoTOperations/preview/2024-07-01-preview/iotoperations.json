@@ -3545,11 +3545,11 @@
       "properties": {
         "logs": {
           "$ref": "#/definitions/DiagnosticsLogs",
-          "description": "The log settings."
+          "description": "Diagnostic log settings for the resource."
         },
         "metrics": {
           "$ref": "#/definitions/Metrics",
-          "description": "The metrics properties."
+          "description": "The metrics settings for the resource."
         },
         "selfCheck": {
           "$ref": "#/definitions/SelfCheck",
@@ -5770,6 +5770,20 @@
         "port"
       ]
     },
+    "MetricProperties": {
+      "type": "object",
+      "description": "Metric properties",
+      "properties": {
+        "logs": {
+          "$ref": "#/definitions/DiagnosticsLogs",
+          "description": "Diagnostic log settings for the resource."
+        },
+        "metrics": {
+          "$ref": "#/definitions/Metrics",
+          "description": "The metrics settings for the resource."
+        }
+      }
+    },
     "Metrics": {
       "type": "object",
       "description": "Diagnostic Metrics properties",
@@ -6008,11 +6022,11 @@
       "properties": {
         "logs": {
           "$ref": "#/definitions/DiagnosticsLogs",
-          "description": "The log settings for the dataflow profile."
+          "description": "Diagnostic log settings for the resource."
         },
         "metrics": {
           "$ref": "#/definitions/Metrics",
-          "description": "The metrics settings for the dataflow profile."
+          "description": "The metrics settings for the resource."
         }
       }
     },

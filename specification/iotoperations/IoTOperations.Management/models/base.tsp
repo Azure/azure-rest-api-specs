@@ -73,6 +73,15 @@ model Metrics {
   prometheusPort?: int32 = 9600;
 }
 
+@doc("Metric properties")
+model MetricProperties {
+  @doc("Diagnostic log settings for the resource.")
+  logs?: DiagnosticsLogs;
+
+  @doc("The metrics settings for the resource.")
+  metrics?: Metrics;
+}
+
 @doc("OpenTelemetry Export Configuration properties")
 model OpenTelemetryExportConfig {
   @doc("The open telemetry collector endpoint to export to.")
