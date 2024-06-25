@@ -149,7 +149,7 @@ interface DiscoveryGroups {
   @get
   @clientName("GetDiscoveryGroupRuns", "csharp")
   listRuns is Foundations.Operation<
-    BodyParameter<DiscoGroupsListRunsParameter>,
+    DiscoGroupsListRunsParameter,
     DiscoRunPageResult
   >;
 
