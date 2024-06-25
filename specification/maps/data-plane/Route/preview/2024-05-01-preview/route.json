@@ -200,7 +200,7 @@
     },
     "/route/snapToRoads": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n>[!Important]\n> The GPS points must be within 2.5 kilometer of each other.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Route_PostSnapToRoads",
         "consumes": [
           "application/geo+json"
@@ -492,7 +492,7 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
@@ -2405,7 +2405,7 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
         },
         "properties": {
-          "description": "Feature properties.",
+          "description": "Feature properties. For snapToRoads, the properties are empty.",
           "type": "object"
         }
       },
@@ -2468,7 +2468,7 @@
       "description": "Specifies the properties of Route Range",
       "properties": {
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
@@ -2527,16 +2527,16 @@
           "$ref": "#/definitions/RouteRangeVehicleSpec"
         },
         "distanceBudgetInMeters ": {
-          "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit. If `isSimplifiedPolygon` is false, then the maximum distance is 360000 meters; otherwise, it is 500000 meters.",
+          "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit. If `isSimplifiedPolygon` is false, then the maximum distance is 360000 meters; otherwise, it is 50000000 meters.",
           "type": "number",
           "minimum": 0,
-          "maximum": 500000
+          "maximum": 50000000
         },
         "timeBudgetInSec": {
-          "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint. If `isSimplifiedPolygon` is false, then the maximum time is 14400 seconds; otherwise, it is 60000 seconds.",
+          "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint. If `isSimplifiedPolygon` is false, then the maximum time is 14400 seconds; otherwise, it is 10000000 seconds.",
           "type": "number",
           "minimum": 0,
-          "maximum": 60000
+          "maximum": 10000000
         },
         "thrilling": {
           "type": "object",
