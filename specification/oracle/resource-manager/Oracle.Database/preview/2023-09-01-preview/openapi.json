@@ -1074,6 +1074,10 @@
               "$ref": "#/definitions/OracleSubscription"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1513,6 +1517,10 @@
               "$ref": "#/definitions/AutonomousDatabase"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1854,6 +1862,10 @@
               "$ref": "#/definitions/AutonomousDatabaseBackup"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -2537,6 +2549,10 @@
               "$ref": "#/definitions/CloudExadataInfrastructure"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3001,6 +3017,10 @@
               "$ref": "#/definitions/CloudVmCluster"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3723,6 +3743,10 @@
               "$ref": "#/definitions/VirtualNetworkAddress"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -3897,11 +3921,7 @@
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseBaseProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3917,11 +3937,7 @@
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseBackupProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4724,11 +4740,7 @@
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseCharacterSetProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -5020,11 +5032,7 @@
         "properties": {
           "$ref": "#/definitions/AutonomousDatabaseNationalCharacterSetProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -5378,11 +5386,7 @@
         "properties": {
           "$ref": "#/definitions/AutonomousDbVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -5622,11 +5626,7 @@
         "properties": {
           "$ref": "#/definitions/CloudExadataInfrastructureProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "zones": {
           "type": "array",
@@ -6031,11 +6031,7 @@
         "properties": {
           "$ref": "#/definitions/CloudVmClusterProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -6951,11 +6947,7 @@
         "properties": {
           "$ref": "#/definitions/DbNodeProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -7259,11 +7251,7 @@
         "properties": {
           "$ref": "#/definitions/DbServerProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -7544,11 +7532,7 @@
         "properties": {
           "$ref": "#/definitions/DbSystemShapeProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -7763,11 +7747,7 @@
         "properties": {
           "$ref": "#/definitions/DnsPrivateViewProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -7895,11 +7875,7 @@
         "properties": {
           "$ref": "#/definitions/DnsPrivateZoneProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -8155,11 +8131,7 @@
         "properties": {
           "$ref": "#/definitions/GiVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -8659,11 +8631,7 @@
         "properties": {
           "$ref": "#/definitions/OracleSubscriptionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "plan": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
@@ -9465,11 +9433,7 @@
         "properties": {
           "$ref": "#/definitions/SystemVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -9663,11 +9627,7 @@
         "properties": {
           "$ref": "#/definitions/VirtualNetworkAddressProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

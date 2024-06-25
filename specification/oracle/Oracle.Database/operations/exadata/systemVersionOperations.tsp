@@ -1,4 +1,4 @@
-import "../../../models/exadata/systemVersions.tsp";
+import "../../models/exadata/systemVersions.tsp";
 
 using Azure.ResourceManager;
 using Autorest;

@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-04
+tag: package-preview-2024-06
 ```
 
 ## Suppression
@@ -71,6 +71,7 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - edgeNodePool.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -193,6 +194,31 @@ suppressions:
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
 ```
+
+
+### Tag: package-preview-2024-06
+
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06'
+input-file:
+  - preview/2024-06-01-preview/edgeNodePool.json
+  - preview/2024-03-01-preview/arcSettings.json
+  - preview/2024-03-01-preview/clusters.json
+  - preview/2024-03-01-preview/deploymentSettings.json
+  - preview/2024-03-01-preview/edgeDevices.json
+  - preview/2024-03-01-preview/extensions.json
+  - preview/2024-03-01-preview/offers.json
+  - ../operations/preview/2024-03-01-preview/operations.json
+  - preview/2024-03-01-preview/publishers.json
+  - preview/2024-03-01-preview/skus.json
+  - preview/2024-03-01-preview/updateRuns.json
+  - preview/2024-03-01-preview/updateSummaries.json
+  - preview/2024-03-01-preview/updates.json
+  - preview/2024-03-01-preview/securitySettings.json
+```
+
+---
 
 
 ### Tag: package-2024-04

@@ -1177,6 +1177,11 @@
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The resource provisioning state.",
           "readOnly": true
+        },
+        "connectorPrimaryIdentifier": {
+          "type": "string",
+          "description": "Connector primary identifier.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1578,24 +1583,6 @@
       "required": [
         "solutionTypes"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Hybrid Connectivity Management service version.",
-      "enum": [
-        "2024-08-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_08_01",
-            "value": "2024-08-01-preview",
-            "description": "Version 2024-08-01-preview"
-          }
-        ]
-      }
     }
   },
   "parameters": {

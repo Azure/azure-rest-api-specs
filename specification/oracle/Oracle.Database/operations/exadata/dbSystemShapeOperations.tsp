@@ -1,4 +1,4 @@
-import "../../../models/exadata/dbSystemShapes.tsp";
+import "../../models/exadata/dbSystemShapes.tsp";
 
 using Azure.ResourceManager;
 using Autorest;

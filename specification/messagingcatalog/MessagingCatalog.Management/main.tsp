@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
@@ -26,10 +25,8 @@ namespace Microsoft.MessagingCatalog;
  * The available API versions.
  */
 enum Versions {
-  /**
-   * The 2024-03-01-preview API version.
-   */
+  @doc("The 2024-06-01-preview API version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_03_01_preview: "2024-03-01-preview",
+  v2024_03_01_preview: "2024-06-01-preview",
 }

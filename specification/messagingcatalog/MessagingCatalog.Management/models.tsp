@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -17,14 +16,15 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning State")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Resource is updating.")
-  Updating,
+  Updating: "Updating",
 
   @doc("Resource is deleting.")
-  Deleting,
+  Deleting: "Deleting",
 }
 
 @doc("Details of the Message Catalog.")

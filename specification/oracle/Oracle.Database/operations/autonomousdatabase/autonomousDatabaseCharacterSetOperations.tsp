@@ -1,4 +1,4 @@
-import "../../../models/autonomousdatabase/autonomousDatabaseCharacterSet.tsp";
+import "../../models/autonomousdatabase/autonomousDatabaseCharacterSet.tsp";
 
 using Azure.ResourceManager;
 using Autorest;

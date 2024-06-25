@@ -12,7 +12,7 @@ batch:
   - tag: schema-scom-2023-07-07-preview
   - tag: schema-scom-2023-10-30
   - tag: schema-scom-2024-01-01-preview
-  
+  - tag: schema-scom-2024-06-05-preview
   
 ```
 
@@ -83,5 +83,17 @@ input-file:
   - Microsoft.Scom/preview/2024-01-01-preview/monitoredResources.json
   - Microsoft.Scom/preview/2024-01-01-preview/managedGateways.json
   - Microsoft.Scom/preview/2024-01-01-preview/commonTypes.json
+
+```
+
+``` yaml $(tag) == 'schema-scom-2024-06-05-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Scom/preview/2024-06-05-preview/scom.json
+  - Microsoft.Scom/preview/2024-06-05-preview/monitoredResources.json
+  - Microsoft.Scom/preview/2024-06-05-preview/managedGateways.json
+  - Microsoft.Scom/preview/2024-06-05-preview/commonTypes.json
 
 ```

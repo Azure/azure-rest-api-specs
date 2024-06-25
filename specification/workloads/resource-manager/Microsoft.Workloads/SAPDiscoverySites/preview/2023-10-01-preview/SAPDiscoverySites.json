@@ -540,7 +540,7 @@
         "tags": [
           "SAPInstances"
         ],
-        "description": "Creates the SAP Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
+        "description": "Creates the SAP Instance resource. This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -681,7 +681,7 @@
         "tags": [
           "SAPInstances"
         ],
-        "description": "Deletes the SAP Instance resource. <br><br>This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
+        "description": "Deletes the SAP Instance resource. This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -873,7 +873,7 @@
         "tags": [
           "ServerInstances"
         ],
-        "description": "Creates the Server Instance resource. <br><br>;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
+        "description": "Creates the Server Instance resource. This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1030,7 +1030,7 @@
         "tags": [
           "ServerInstances"
         ],
-        "description": "Deletes the Server Instance resource. <br><br>;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
+        "description": "Deletes the Server Instance resource. This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1147,7 +1147,7 @@
         },
         "model": {
           "type": "string",
-          "description": "Specify if the Hardware is a physical server or virtual machine.",
+          "description": "Specify if the Hardware is a physical server or virtual machine.\nFor example, Physical, Virtual.",
           "readOnly": true
         },
         "totalDiskSizeGB": {
@@ -1827,7 +1827,7 @@
         },
         "operatingSystem": {
           "$ref": "#/definitions/OperatingSystem",
-          "description": "This is Operating System on which the host server is running.",
+          "description": "This is name of the Operating System on which the host server is running.",
           "readOnly": true
         },
         "configurationData": {
@@ -1860,24 +1860,6 @@
           "$ref": "#/definitions/ServerInstanceProperties",
           "description": "Server instances properties."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2023-10-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_10_01_preview",
-            "value": "2023-10-01-preview",
-            "description": "The 2023-10-01-preview API version."
-          }
-        ]
       }
     }
   },
