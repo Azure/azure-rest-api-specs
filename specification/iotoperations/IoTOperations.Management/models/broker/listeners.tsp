@@ -30,7 +30,7 @@ model BrokerListenerResource is TrackedResource<BrokerListenerProperties> {
   extendedLocation: ExtendedLocation;
 }
 
-@doc("Defines an MQTT broker listener. A listener is a collection of ports on which the broker accepts connections from clients.")
+@doc("Defines a Broker listener. A listener is a collection of ports on which the broker accepts connections from clients.")
 model BrokerListenerProperties {
   @doc("Broker associated with this listener.")
   brokerRef: string;
@@ -83,7 +83,7 @@ model ListenerPort {
   port: int32;
 
   @doc("Protocol to use for client connections.")
-  protocol?: MqttProtocolType = MqttProtocolType.Mqtt;
+  protocol?: BrokerProtocolType = BrokerProtocolType.Mqtt;
 
   @doc("TLS server certificate settings for this port. Omit to disable TLS.")
   tls?: TlsCertMethod;

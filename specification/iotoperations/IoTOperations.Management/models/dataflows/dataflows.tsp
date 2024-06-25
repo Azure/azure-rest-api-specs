@@ -73,7 +73,7 @@ model DataFlowBuiltInTransformation {
   @doc("Schema CR reference.")
   schemaRef?: string;
 
-  @doc("Enrich data from MQ State Store. Dataset references a key in MQ State Store.")
+  @doc("Enrich data from Broker State Store. Dataset references a key in Broker State Store.")
   @OpenAPI.extension("x-ms-identifiers", [])
   datasets?: DataFlowBuiltInTransformationDataset[] = #[];
 
@@ -99,10 +99,10 @@ model DataFlowBuiltInTransformationDataset {
   @doc("The reference to the schema of this dataset.")
   schemaRef: string;
 
-  @doc("List of fields for enriching from the MQ State Store.")
+  @doc("List of fields for enriching from the Broker State Store.")
   inputs: string[];
 
-  @doc("Condition to enrich data from MQ State Store.")
+  @doc("Condition to enrich data from Broker State Store.")
   expression: string;
 }
 
@@ -191,7 +191,7 @@ model DataFlowDestinationOperation {
   @maxLength(64)
   name?: string;
 
-  @doc("Reference to the Endpoint CR. Can be of MQTT, Kafka, Fabric, ADLS, ADX type.")
+  @doc("Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type.")
   endpointRef: string;
 
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
@@ -205,7 +205,7 @@ model DataFlowSourceOperation {
   @maxLength(64)
   name?: string;
 
-  @doc("Reference to the Dataflow Endpoint resource. Can only be of MQTT and Kafka type.")
+  @doc("Reference to the Dataflow Endpoint resource. Can only be of Broker and Kafka type.")
   endpointRef: string;
 
   @doc("Reference to the resource in Azure Device Registry where the data in the endpoint originates from.")
@@ -217,6 +217,6 @@ model DataFlowSourceOperation {
   @doc("Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match.")
   schemaRef?: string;
 
-  @doc("List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.")
+  @doc("List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.")
   locations: string[];
 }

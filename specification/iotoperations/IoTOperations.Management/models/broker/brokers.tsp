@@ -41,7 +41,7 @@ model BrokerProperties {
   @doc("The cardinality details of the broker.")
   cardinality?: Cardinality;
 
-  @doc("Spec defines the desired identities of MQTT broker diagnostics settings.")
+  @doc("Spec defines the desired identities of Broker broker diagnostics settings.")
   diagnostics?: BrokerDiagnostics;
 
   @visibility("read", "create")

@@ -54,7 +54,7 @@ model AuthorizationConfig {
 
 @doc("AuthorizationConfig Rule Properties")
 model AuthorizationRule {
-  @doc("Give access to MQTT broker methods and topics.")
+  @doc("Give access to Broker methods and topics.")
   @OpenAPI.extension("x-ms-identifiers", [])
   brokerResources: BrokerResourceRule[];
 
@@ -82,7 +82,7 @@ model PrincipalDefinition {
 
 @doc("Broker Resource Rule properties. This defines the objects that represent the actions or topics, such as - method.Connect, method.Publish, etc.")
 model BrokerResourceRule {
-  @doc("Give access for a MQTT method (i.e., Connect, Subscribe, or Publish).")
+  @doc("Give access for a Broker method (i.e., Connect, Subscribe, or Publish).")
   method: BrokerResourceDefinitionMethods;
 
   @doc("A list of topics or topic patterns that match the topics that the clients can publish or subscribe to. This subfield is required if the method is Publish or Subscribe.")

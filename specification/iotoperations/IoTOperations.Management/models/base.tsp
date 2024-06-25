@@ -133,11 +133,11 @@ model TlsProperties {
   trustedCaCertificateConfigMap?: string;
 }
 
-@doc("Mqtt Protocol types")
-union MqttProtocolType {
+@doc("Broker Protocol types")
+union BrokerProtocolType {
   string,
 
-  @doc("protocol mqtt")
+  @doc("protocol broker")
   Mqtt: "Mqtt",
 
   @doc("protocol websocket")
