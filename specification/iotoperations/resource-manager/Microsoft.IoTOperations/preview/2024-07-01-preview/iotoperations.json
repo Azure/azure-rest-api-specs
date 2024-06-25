@@ -5411,13 +5411,9 @@
       "type": "object",
       "description": "Diagnostic Log properties",
       "properties": {
-        "exportIntervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often to export the logs to the open telemetry collector.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 300
+        "opentelemetryExportConfig": {
+          "$ref": "#/definitions/OpenTelemetryExportConfig",
+          "description": "The open telemetry export configuration."
         },
         "exportLogLevel": {
           "type": "string",
@@ -5428,10 +5424,6 @@
           "type": "string",
           "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
           "default": "info"
-        },
-        "openTelemetryCollectorAddress": {
-          "type": "string",
-          "description": "The open telemetry collector endpoint to export to."
         }
       }
     },
@@ -5785,50 +5777,9 @@
       "type": "object",
       "description": "Diagnostic Metrics properties",
       "properties": {
-        "mode": {
-          "type": "string",
-          "description": "The toggle to enable/disable metrics.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "OperationalMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Enabled is equivalent to True"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Disabled is equivalent to False."
-              }
-            ]
-          }
-        },
-        "stalenessTimeSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The time used to determine if a metric is stale and drop from the metrics cache.",
-          "default": 600,
-          "minimum": 60,
-          "maximum": 600
-        },
-        "exportIntervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often to export the metrics to the open telemetry collector.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 300
-        },
-        "openTelemetryCollectorAddress": {
-          "type": "string",
-          "description": "The open telemetry collector endpoint to export to."
+        "opentelemetryExportConfig": {
+          "$ref": "#/definitions/OpenTelemetryExportConfig",
+          "description": "The open telemetry export configuration."
         },
         "prometheusPort": {
           "type": "integer",
@@ -5837,14 +5788,6 @@
           "default": 9600,
           "minimum": 0,
           "maximum": 65535
-        },
-        "updateIntervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often to refresh the metrics.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 60
         }
       }
     },
@@ -5894,6 +5837,24 @@
             "description": "Never retain messages."
           }
         ]
+      }
+    },
+    "OpenTelemetryExportConfig": {
+      "type": "object",
+      "description": "OpenTelemetry Export Configuration properties",
+      "properties": {
+        "otlpGrpcEndpoint": {
+          "type": "string",
+          "description": "The open telemetry collector endpoint to export to."
+        },
+        "exportInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How often to export the metrics to the open telemetry collector.",
+          "default": 30,
+          "minimum": 1,
+          "maximum": 300
+        }
       }
     },
     "OperationalMode": {
@@ -6553,9 +6514,9 @@
             ]
           }
         },
-        "openTelemetryCollectorAddress": {
-          "type": "string",
-          "description": "The open telemetry collector endpoint to export to."
+        "opentelemetryExportConfig": {
+          "$ref": "#/definitions/OpenTelemetryExportConfig",
+          "description": "The open telemetry export configuration."
         },
         "cacheSizeMegabytes": {
           "type": "integer",
@@ -6564,14 +6525,6 @@
           "default": 16,
           "minimum": 1,
           "maximum": 128
-        },
-        "exportIntervalSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "How often to export the metrics to the open telemetry collector.",
-          "default": 30,
-          "minimum": 1,
-          "maximum": 300
         },
         "selfTracing": {
           "$ref": "#/definitions/SelfTracing",

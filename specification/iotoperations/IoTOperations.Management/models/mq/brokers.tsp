@@ -149,18 +149,13 @@ model Traces {
   @doc("The toggle to enable/disable traces.")
   mode?: OperationalMode = OperationalMode.Enabled;
 
-  @doc("The open telemetry collector endpoint to export to.")
-  openTelemetryCollectorAddress?: string;
+  @doc("The open telemetry export configuration.")
+  opentelemetryExportConfig?: OpenTelemetryExportConfig;
 
   @doc("The cache size in megabytes.")
   @minValue(1)
   @maxValue(128)
   cacheSizeMegabytes?: int32 = 16;
-
-  @doc("How often to export the metrics to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  exportIntervalSeconds?: int32 = 30;
 
   @doc("The self tracing properties.")
   selfTracing?: SelfTracing;

@@ -67,10 +67,8 @@ model Diagnostics {
 
 @doc("Diagnostic Log properties")
 model DiagnosticsLogs {
-  @doc("How often to export the logs to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  exportIntervalSeconds?: int32 = 30;
+  @doc("The open telemetry export configuration.")
+  opentelemetryExportConfig?: OpenTelemetryExportConfig;
 
   @doc("The level of logs to export.")
   exportLogLevel?: string = "error";
@@ -78,37 +76,28 @@ model DiagnosticsLogs {
   @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
   level?: string = "info";
 
-  @doc("The open telemetry collector endpoint to export to.")
-  openTelemetryCollectorAddress?: string;
 }
 
 @doc("Diagnostic Metrics properties")
 model Metrics {
-  @doc("The toggle to enable/disable metrics.")
-  mode?: OperationalMode = OperationalMode.Enabled;
-
-  @doc("The time used to determine if a metric is stale and drop from the metrics cache.")
-  @minValue(60)
-  @maxValue(600)
-  stalenessTimeSeconds?: int32 = 600;
-
-  @doc("How often to export the metrics to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  exportIntervalSeconds?: int32 = 30;
-
-  @doc("The open telemetry collector endpoint to export to.")
-  openTelemetryCollectorAddress?: string;
+  @doc("The open telemetry export configuration.")
+  opentelemetryExportConfig?: OpenTelemetryExportConfig;
 
   @doc("The prometheus port to expose the metrics.")
   @minValue(0)
   @maxValue(65535)
   prometheusPort?: int32 = 9600;
+}
 
-  @doc("How often to refresh the metrics.")
+@doc("OpenTelemetry Export Configuration properties")
+model OpenTelemetryExportConfig {
+  @doc("The open telemetry collector endpoint to export to.")
+  otlpGrpcEndpoint?: string;
+
+  @doc("How often to export the metrics to the open telemetry collector.")
   @minValue(1)
-  @maxValue(60)
-  updateIntervalSeconds?: int32 = 30;
+  @maxValue(300)
+  exportInterval?: int32 = 30;
 }
 
 @doc("Diagnostic Self tracing properties")
