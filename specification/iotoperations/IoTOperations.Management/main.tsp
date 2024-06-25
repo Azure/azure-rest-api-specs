@@ -57,7 +57,6 @@ interface Instance {
 interface Broker {
   get is ArmResourceRead<BrokerResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerResource>;
-  update is ArmTagsPatchSync<BrokerResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerResource>;
 }
@@ -67,7 +66,6 @@ interface Broker {
 interface BrokerListener {
   get is ArmResourceRead<BrokerListenerResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerListenerResource>;
-  update is ArmTagsPatchSync<BrokerListenerResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerListenerResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerListenerResource>;
 }
@@ -77,7 +75,6 @@ interface BrokerListener {
 interface BrokerAuthentication {
   get is ArmResourceRead<BrokerAuthenticationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthenticationResource>;
-  update is ArmTagsPatchSync<BrokerAuthenticationResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthenticationResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerAuthenticationResource>;
 }
@@ -87,7 +84,6 @@ interface BrokerAuthentication {
 interface BrokerAuthorization {
   get is ArmResourceRead<BrokerAuthorizationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthorizationResource>;
-  update is ArmTagsPatchSync<BrokerAuthorizationResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthorizationResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerAuthorizationResource>;
 }
@@ -96,7 +92,6 @@ interface BrokerAuthorization {
 interface DataFlowProfile {
   get is ArmResourceRead<DataFlowProfileResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowProfileResource>;
-  update is ArmTagsPatchSync<DataFlowProfileResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataFlowProfileResource>;
   listByResourceGroup is ArmResourceListByParent<DataFlowProfileResource>;
 }
@@ -106,7 +101,6 @@ interface DataFlowProfile {
 interface DataFlow {
   get is ArmResourceRead<DataFlowResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowResource>;
-  update is ArmTagsPatchSync<DataFlowResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataFlowResource>;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DataFlow_ListByProfileResource")
@@ -118,7 +112,6 @@ interface DataFlow {
 interface DataFlowEndpoint {
   get is ArmResourceRead<DataFlowEndpointResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowEndpointResource>;
-  update is ArmTagsPatchSync<DataFlowEndpointResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataFlowEndpointResource>;
   listByResourceGroup is ArmResourceListByParent<DataFlowEndpointResource>;
 }

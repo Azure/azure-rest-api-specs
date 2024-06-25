@@ -626,72 +626,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "Broker_Update",
-        "tags": [
-          "Broker"
-        ],
-        "description": "Update a BrokerResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "brokerName",
-            "in": "path",
-            "description": "Name of broker.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BrokerResourceTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BrokerResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Broker_Update": {
-            "$ref": "./examples/Broker_Update_MaximumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "Broker_Delete",
         "tags": [
@@ -991,82 +925,6 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "BrokerAuthentication_Update",
-        "tags": [
-          "BrokerAuthentication"
-        ],
-        "description": "Update a BrokerAuthenticationResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "brokerName",
-            "in": "path",
-            "description": "Name of broker.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "authenticationName",
-            "in": "path",
-            "description": "Name of Instance broker authentication resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BrokerAuthenticationResourceTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BrokerAuthenticationResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BrokerAuthentication_Update": {
-            "$ref": "./examples/BrokerAuthentication_Update_MaximumSet_Gen.json"
-          }
-        }
       },
       "delete": {
         "operationId": "BrokerAuthentication_Delete",
@@ -1378,82 +1236,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "BrokerAuthorization_Update",
-        "tags": [
-          "BrokerAuthorization"
-        ],
-        "description": "Update a BrokerAuthorizationResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "brokerName",
-            "in": "path",
-            "description": "Name of broker.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "authorizationName",
-            "in": "path",
-            "description": "Name of Instance broker authorization resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BrokerAuthorizationResourceTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BrokerAuthorizationResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BrokerAuthorization_Update": {
-            "$ref": "./examples/BrokerAuthorization_Update_MaximumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "BrokerAuthorization_Delete",
         "tags": [
@@ -1764,82 +1546,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "BrokerListener_Update",
-        "tags": [
-          "BrokerListener"
-        ],
-        "description": "Update a BrokerListenerResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "brokerName",
-            "in": "path",
-            "description": "Name of broker.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "listenerName",
-            "in": "path",
-            "description": "Name of Instance broker listener resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BrokerListenerResourceTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BrokerListenerResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BrokerListener_Update": {
-            "$ref": "./examples/BrokerListener_Update_MaximumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "BrokerListener_Delete",
         "tags": [
@@ -2120,72 +1826,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "DataFlowEndpoint_Update",
-        "tags": [
-          "DataFlowEndpoint"
-        ],
-        "description": "Update a DataFlowEndpointResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "dataflowEndpointName",
-            "in": "path",
-            "description": "Name of Instance dataflowEndpoint resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataFlowEndpointResourceTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DataFlowEndpointResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataFlowEndpoint_Update": {
-            "$ref": "./examples/DataFlowEndpoint_Update_MaximumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "DataFlowEndpoint_Delete",
         "tags": [
@@ -2455,72 +2095,6 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "DataFlowProfile_Update",
-        "tags": [
-          "DataFlowProfile"
-        ],
-        "description": "Update a DataFlowProfileResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "dataflowProfileName",
-            "in": "path",
-            "description": "Name of Instance dataflowProfile resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataFlowProfileResourceTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DataFlowProfileResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataFlowProfile_Update": {
-            "$ref": "./examples/DataFlowProfile_Update_MaximumSet_Gen.json"
-          }
-        }
       },
       "delete": {
         "operationId": "DataFlowProfile_Delete",
@@ -2821,82 +2395,6 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "DataFlow_Update",
-        "tags": [
-          "DataFlow"
-        ],
-        "description": "Update a DataFlowResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "instanceName",
-            "in": "path",
-            "description": "Name of instance.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "dataflowProfileName",
-            "in": "path",
-            "description": "Name of Instance dataflowProfile resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "dataflowName",
-            "in": "path",
-            "description": "Name of Instance dataflowProfile dataflow resource",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataFlowResourceTagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DataFlowResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DataFlow_Update": {
-            "$ref": "./examples/DataFlow_Update_MaximumSet_Gen.json"
-          }
-        }
       },
       "delete": {
         "operationId": "DataFlow_Delete",
@@ -3299,7 +2797,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3323,19 +2821,6 @@
       "required": [
         "value"
       ]
-    },
-    "BrokerAuthenticationResourceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in BrokerAuthenticationResource resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "BrokerAuthenticatorCustomAuth": {
       "type": "object",
@@ -3501,7 +2986,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3525,19 +3010,6 @@
       "required": [
         "value"
       ]
-    },
-    "BrokerAuthorizationResourceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in BrokerAuthorizationResource resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "BrokerDiagnostics": {
       "type": "object",
@@ -3649,7 +3121,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3673,19 +3145,6 @@
       "required": [
         "value"
       ]
-    },
-    "BrokerListenerResourceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in BrokerListenerResource resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "BrokerMemoryProfile": {
       "type": "string",
@@ -3745,7 +3204,7 @@
         },
         "diagnostics": {
           "$ref": "#/definitions/BrokerDiagnostics",
-          "description": "Spec defines the desired identities of Broker broker diagnostics settings."
+          "description": "Spec defines the desired identities of Broker diagnostics settings."
         },
         "diskBackedMessageBuffer": {
           "$ref": "#/definitions/DiskBackedMessageBuffer",
@@ -3858,7 +3317,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3933,19 +3392,6 @@
       "required": [
         "method"
       ]
-    },
-    "BrokerResourceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in BrokerResource resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "Cardinality": {
       "type": "object",
@@ -5059,7 +4505,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5083,19 +4529,6 @@
       "required": [
         "value"
       ]
-    },
-    "DataFlowEndpointResourceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in DataFlowEndpointResource resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "DataFlowMappingType": {
       "type": "string",
@@ -5200,7 +4633,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5224,19 +4657,6 @@
       "required": [
         "value"
       ]
-    },
-    "DataFlowProfileResourceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in DataFlowProfileResource resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "DataFlowProperties": {
       "type": "object",
@@ -5313,7 +4733,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5337,19 +4757,6 @@
       "required": [
         "value"
       ]
-    },
-    "DataFlowResourceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in DataFlowResource resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "DataFlowSourceOperation": {
       "type": "object",

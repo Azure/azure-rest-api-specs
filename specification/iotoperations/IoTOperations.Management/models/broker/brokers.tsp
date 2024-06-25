@@ -14,7 +14,7 @@ namespace Microsoft.IoTOperations;
  */
 @doc("Instance broker resource")
 @parentResource(InstanceResource)
-model BrokerResource is TrackedResource<BrokerProperties> {
+model BrokerResource is ProxyResource<BrokerProperties> {
   @doc("Name of broker.")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("brokerName")
@@ -24,7 +24,7 @@ model BrokerResource is TrackedResource<BrokerProperties> {
   @segment("brokers")
   name: string;
 
-  // Extended location is not included in TrackedResource yet
+  // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility("read", "create")
@@ -41,7 +41,7 @@ model BrokerProperties {
   @doc("The cardinality details of the broker.")
   cardinality?: Cardinality;
 
-  @doc("Spec defines the desired identities of Broker broker diagnostics settings.")
+  @doc("Spec defines the desired identities of Broker diagnostics settings.")
   diagnostics?: BrokerDiagnostics;
 
   @visibility("read", "create")

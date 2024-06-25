@@ -14,8 +14,7 @@ namespace Microsoft.IoTOperations;
  */
 @doc("Instance broker authentication resource")
 @parentResource(BrokerResource)
-model BrokerAuthenticationResource
-  is TrackedResource<BrokerAuthenticationProperties> {
+model BrokerAuthenticationResource is ProxyResource<BrokerAuthenticationProperties> {
   @doc("Name of Instance broker authentication resource")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("authenticationName")
@@ -25,7 +24,7 @@ model BrokerAuthenticationResource
   @segment("authentications")
   name: string;
 
-  // Extended location is not included in TrackedResource yet
+  // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility("read", "create")
