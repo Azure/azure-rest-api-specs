@@ -103,7 +103,7 @@ model DataFlowBuiltInTransformationDataset {
   inputs: string[];
 
   @doc("Condition to enrich data from Broker State Store.")
-  expression: string;
+  expression?: string;
 }
 
 @doc("DataFlow BuiltIn Transformation filter properties")
