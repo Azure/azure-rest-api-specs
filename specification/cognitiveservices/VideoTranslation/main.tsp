@@ -1,0 +1,277 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-autorest";
+import "@typespec/openapi";
+
+using Azure.Core;
+using Azure.Core.Traits;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+
+@doc("Video translation API to translate video from source locale to target locale.")
+@versioned(VideoTranslation.ApiVersions)
+@service({
+  title: "Video Translation",
+})
+@server(
+  "{endpoint}/video-translation",
+  "Translate video from source locale to target locale.",
+  {
+    @doc("Supported Cognitive Services endpoints (protocol and hostname, for example: https://eastus.api.cognitive.microsoft.com).")
+    endpoint: string,
+  }
+)
+@useAuth(KeyAuth | AADToken)
+@tag("VideoTranslation")
+@info({
+  contact: {
+    name: "Azure AI - Speech Services",
+    url: "https://learn.microsoft.com/azure/ai-services/speech-service/"
+  },
+  license: {
+    name: "Copyright (c) Microsoft. All rights reserved."
+  }
+})
+namespace Microsoft.Speech.VideoTranslation;
+
+@doc("Provide your Speech resource key here.")
+model KeyAuth is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style for AAD"
+@doc("These are the [Microsoft identity platform](entra/identity-platform/v2-overview) flows.")
+model AADToken
+  is OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      scopes: ["https://cognitiveservices.azure.com/.default"]
+    }]>;
+
+// alias ops = Azure.Core.StandardResourceOperations;
+// AzureApiKeyAuthentication
+
+alias VideoTranslationServiceTraits = NoRepeatableRequests
+  & NoConditionalRequests
+  & NoClientRequestId;
+alias ops = Azure.Core.ResourceOperations<VideoTranslationServiceTraits>;
+
+enum ApiVersions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("The 2024-05-20-preview version of the VideoTranslation service.")
+  v2024_05_20_preview: "2024-05-20-preview"
+}
+
+@doc("Task status.")
+enum Status {
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+  "Canceled",
+}
+
+@doc("TTS voice kind.")
+enum VoiceKind {
+  "PlatformVoice",
+  "PersonalVoice",
+}
+
+@doc("Webvtt file kind.")
+enum WebvttFileKind {
+  "SourceLocaleSubtitle",
+  "TargetLocaleSubtitle",
+  "MetadataJson",
+}
+
+@doc("Translation webvtt file.")
+model WebvttFile {
+  @doc("Translation webvtt file url.")
+  url: url;
+
+  @doc("Translation webvtt file kind.")
+  kind: WebvttFileKind;
+}
+
+@doc("Locale name, for example: en-US")
+@pattern("^[A-Za-z]{2,4}([_-][A-Za-z]{4})?([_-]([A-Za-z]{2}|[0-9]{3}))?$")
+@minLength(5)
+@maxLength(16)
+scalar localeName extends string;
+
+@doc("Resource ID")
+@pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$")
+@minLength(3)
+@maxLength(64)
+scalar resourceId extends string;
+
+@doc("Translation input.")
+model TranslationInput {
+  @doc("The source locale of the video file. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.")
+  sourceLocale: localeName;
+
+  @doc("The target locale of the translation. Locale code follows BCP-47. You can find the text to speech locale list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.")
+  targetLocale: localeName;
+
+  @doc("Translation voice kind.")
+  voiceKind: VoiceKind;
+
+  @doc("Translation video file url.")
+  videoFileUrl: url;
+}
+
+@doc("Iteration result.")
+model IterationResult {
+  @doc("Translated video file URL.")
+  translatedVideoFileUrl?: url;
+
+  @doc("Source locale subtitle file URL.")
+  sourceLocaleSubtitleWebvttFileUrl?: url;
+
+  @doc("Target locale subtitle file URL.")
+  targetLocaleSubtitleWebvttFileUrl?: url;
+
+  @doc("Metadata json webvtt file URL.")
+  metadataJsonWebvttFileUrl?: url;
+
+  @doc("Report file URL.")
+  reportFileUrl?: url;
+}
+
+@doc("Iteration input.")
+model IterationInput {
+  @doc("Speaker count of the video.")
+  speakerCount?: int32;
+
+  @doc("Subtitle max char count per segment.")
+  subtitleMaxCharCountPerSegment?: int32;
+
+  @doc("Webvtt file for content editing.")
+  webvttFile?: WebvttFile;
+}
+
+@doc("Operation ID header.")
+model OperationIdHeader {
+    @doc("Operation ID.")
+    @header("Operation-Id")
+    @visibility("create")
+    operationId: resourceId;
+}
+
+@doc("Create translation resource for hosting iterations of translating one video file from source locale to target locale.")
+@TypeSpec.Rest.resource("translations")
+model Translation {
+  @doc("Translation resource ID.")
+  @key("translationId")
+  @visibility("read")
+  id: resourceId;
+
+  @doc("Translation input.")
+  input: TranslationInput;
+
+  @doc("Translation description.")
+  description?: string;
+
+  @doc("The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
+  @visibility("read")
+  createdDateTime?: utcDateTime;
+
+  @doc("Latest iteration of the translation.")
+  @visibility("read")
+  latestIteration?: Iteration,
+
+  @doc("Latest completed iteration of the translation.")
+  @visibility("read")
+  latestSucceededIteration?: Iteration,
+}
+
+@doc("Do one iteration to translate one video file from source locale to target locale, webvtt for content editing is optional for requesting parameter.")
+@TypeSpec.Rest.resource("iterations")
+@TypeSpec.Rest.parentResource(Translation)
+model Iteration {
+  @doc("Iteration ID")
+  @key("iterationId")
+  @visibility("read")
+  id: resourceId;
+
+  @doc("Iteration input.")
+  input: IterationInput;
+
+  @doc("Iteration description")
+  description?: string;
+
+  @doc("Iteration status")
+  @visibility("read")
+  status?: Status;
+
+  @doc("The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
+  @visibility("read")
+  createdDateTime?: utcDateTime;
+
+  @doc("The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
+  @visibility("read")
+  lastActionDateTime?: utcDateTime;
+
+  @doc("Iteration result.")
+  @visibility("read")
+  result?: IterationResult;
+}
+
+@doc("Operation.")
+@TypeSpec.Rest.resource("operations")
+model Operation {
+  @doc("Operation ID")
+  @key("operationId")
+  @visibility("read")
+  id: resourceId;
+
+  status?: Status;
+}
+
+interface TranslationOperations {
+  @doc("Creates a translation.")
+  @operationId("TranslationOperations_CreateOrUpdateTranslation")
+  createTranslation is ops.LongRunningResourceCreateOrReplace<
+    Translation,
+    RequestHeadersTrait<OperationIdHeader>>;
+
+  @doc("Fetch a translation by ID.")
+  @operationId("TranslationOperations_GetTranslation")
+  getTranslation is ops.ResourceRead<Translation>;
+
+  @doc("Delete a translation.")
+  @operationId("TranslationOperations_DeleteTranslation")
+  deleteTranslation is ops.ResourceDelete<Translation>;
+
+  @doc("List translation resources.")
+  @operationId("TranslationOperations_ListTranslation")
+  listTranslation is ops.ResourceList<
+    Translation,
+    ListQueryParametersTrait<StandardListQueryParameters>>;
+}
+
+interface Iterations {
+  // Due to PR bulid need both "Create" and "Update" word in operation ID.
+  @doc("Creates an iteration.")
+  @pollingOperation(Operations.getOperation)
+  @operationId("IterationOperations_CreateOrUpdateIteration")
+  createIteration is ops.LongRunningResourceCreateOrReplace<
+    Iteration,
+    RequestHeadersTrait<OperationIdHeader>>;
+
+  @doc("Fetch a iteration by ID.")
+    @operationId("IterationOperations_GetIteration")
+    getIteration is ops.ResourceRead<Iteration>;
+  
+  @doc("List Iteration resources.")
+  @operationId("IterationOperations_ListIteration")
+  listIteration is ops.ResourceList<
+    Iteration,
+    ListQueryParametersTrait<StandardListQueryParameters>>;
+}
+
+interface Operations {
+  @doc("Fetch a operation by ID.")
+  @operationId("OperationOperations_GetOperation")
+  getOperation is ops.ResourceRead<Operation>;
+}
