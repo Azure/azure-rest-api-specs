@@ -10,20 +10,20 @@ namespace Microsoft.IoTOperations;
  */
 @doc("DataFlowEndpoint Authentication SystemAssignedManagedIdentity properties")
 model DataFlowEndpointAuthenticationSystemAssignedManagedIdentity {
-    @doc("Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration.")
-    audience: string;
+  @doc("Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration.")
+  audience: string;
 }
 
 @doc("DataFlowEndpoint Authentication UserAssignedManagedIdentity properties")
 model DataFlowEndpointAuthenticationUserAssignedManagedIdentity {
-    @doc("Client ID for the user-assigned managed identity.")
-    clientId: string;
+  @doc("Client ID for the user-assigned managed identity.")
+  clientId: string;
 
-    @doc("Resource identifier (application ID URI) of the resource, affixed with the .default suffix.")
-    audience: string;
+  @doc("Resource identifier (application ID URI) of the resource, affixed with the .default suffix.")
+  audience: string;
 
-    @doc("Tenant ID.")
-    tenantId: string;
+  @doc("Tenant ID.")
+  tenantId: string;
 }
 
 @doc("DataFlowEndpoint Authentication Sasl properties")
@@ -65,7 +65,6 @@ model DataFlowEndpointAuthenticationX509 {
  *
  * Broker Authentication Models
  */
-
 @doc("Service Account Token for BrokerAuthentication")
 model BrokerAuthenticatorMethodSat {
   @doc("List of allowed audience.")

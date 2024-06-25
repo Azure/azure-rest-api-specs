@@ -84,7 +84,6 @@ model DataFlowBuiltInTransformation {
   @doc("Maps input to output message.")
   @OpenAPI.extension("x-ms-identifiers", [])
   map?: DataFlowBuiltInTransformationMap[] = #[];
-
 }
 
 @doc("DataFlow BuiltIn Transformation dataset properties")
@@ -128,7 +127,7 @@ union FilterType {
   string,
 
   @doc("Filter type")
-  Filter: "Filter"
+  Filter: "Filter",
 }
 
 @doc("DataFlow BuiltIn Transformation map properties")
@@ -164,7 +163,7 @@ union DataFlowMappingType {
   Compute: "Compute",
 
   @doc("Pass-through type")
-  PassThrough: "PassThrough"
+  PassThrough: "PassThrough",
 }
 
 @doc("Serialization Format properties")
