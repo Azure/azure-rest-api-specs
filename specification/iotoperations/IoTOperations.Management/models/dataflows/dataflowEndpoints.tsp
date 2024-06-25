@@ -302,7 +302,7 @@ model DataFlowEndpointMqtt {
   @doc("Enable or disable websockets.")
   protocol?: BrokerProtocolType = BrokerProtocolType.Mqtt;
 
-  @doc("MQTT KeepAlive for connection in seconds.")
+  @doc("Broker KeepAlive for connection in seconds.")
   @minValue(0)
   keepAliveSeconds?: int32 = 60;
 
