@@ -25,7 +25,7 @@ op CustomOperation<
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing spec"
   @doc("Defines the content of the request")
   @bodyRoot
-  requestBody: TBody,
+  body: TBody,
 
   @doc("Mandatory API version parameter")
   @query("api-version")
@@ -46,9 +46,9 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
 @route("languages")
 @summary("Gets the set of languages currently supported by other operations of the Translator.")
 @doc("Gets the set of languages currently supported by other operations of the Translator.")
-op getLanguages is CustomGetOperation<
-  GetLanguageParameters,
-  GetLanguagesResult,
+op getSupportedLanguages is CustomGetOperation<
+  GetSupportedLanguagesParameters,
+  GetSupportedLanguagesResult,
   {},
   ErrorResponse
 >;

@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-03
+tag: package-preview-2024-05
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -132,18 +132,11 @@ directive:
       verb: Set
     remove: true
   - remove-operation: Machines_CreateOrUpdate
-  - remove-operation: MachineRunCommands_Update
   - remove-operation: AgentVersion_List
   - remove-operation: AgentVersion_Get
   - remove-operation: HybridIdentityMetadata_Get
   - remove-operation: HybridIdentityMetadata_ListByMachines
-  - remove-operation: Licenses_Get
   - remove-operation: Licenses_ValidateLicense
-  - remove-operation: Licenses_ListBySubscription
-  - remove-operation: Licenses_ListByResourceGroup
-  - remove-operation: Licenses_Delete
-  - remove-operation: Licenses_Update
-  - remove-operation: Licenses_CreateOrUpdate
   - remove-operation: LicenseProfiles_Get
   - remove-operation: LicenseProfiles_Delete
   - remove-operation: LicenseProfiles_Update
@@ -152,11 +145,19 @@ directive:
   - remove-operation: NetworkConfigurations_Get
   - remove-operation: NetworkConfigurations_Update
   - remove-operation: NetworkConfigurations_CreateOrUpdate
-  - remove-operation: NetworkSecurityPerimeterConfigurations_GetByPrivateLinkScope
-  - remove-operation: NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope
   - remove-operation: NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope
 ```
 
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.HybridCompute/preview/2024-05-20-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2024-05-20-preview/privateLinkScopes.json
+```
 
 ### Tag: package-preview-2024-03
 

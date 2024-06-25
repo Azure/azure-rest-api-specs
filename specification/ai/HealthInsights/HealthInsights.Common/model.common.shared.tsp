@@ -39,15 +39,15 @@ model HealthInsightsJobBase {
 @doc("ConditionStage")
 model ConditionStage {
   @doc("""
-  Simple summary (disease specific)
-  see: https://www.hl7.org/fhir/valueset-condition-stage.html
-""")
+      Simple summary (disease specific)
+      see: https://www.hl7.org/fhir/valueset-condition-stage.html
+    """)
   summary: Fhir.R4.CodeableConcept;
 
   @doc("""
-  Kind of staging
-  see: https://www.hl7.org/fhir/valueset-condition-stage-kind.html
-  """)
+    Kind of staging
+    see: https://www.hl7.org/fhir/valueset-condition-stage-kind.html
+    """)
   type?: Fhir.R4.CodeableConcept;
 }
 
@@ -87,9 +87,9 @@ union InterpretationType {
 }
 
 @doc("""
-ObservationStatusType based on FHIR valueset observation-status
-see: https://www.hl7.org/fhir/codesystem-observation-status.html
-""")
+  ObservationStatusType based on FHIR valueset observation-status
+  see: https://www.hl7.org/fhir/codesystem-observation-status.html
+  """)
 union ObservationStatusType {
   string,
 
@@ -100,9 +100,9 @@ union ObservationStatusType {
   Preliminary: "preliminary",
 
   @doc("""
-  The observation is complete and there are no further actions needed. Additional information such as 'released', 'signed', etc would be represented using [Provenance](provenance.html) which provides not only the act but also the actors and dates and other related data.
-  These act states would be associated with an observation status of `preliminary` until they are all completed and then a status of `final` would be applied.
-  """)
+    The observation is complete and there are no further actions needed. Additional information such as 'released', 'signed', etc would be represented using [Provenance](provenance.html) which provides not only the act but also the actors and dates and other related data.
+    These act states would be associated with an observation status of `preliminary` until they are all completed and then a status of `final` would be applied.
+    """)
   Final: "final",
 
   @doc("Subsequent to being Final, the observation has been modified subsequent.  This includes updates/new information and corrections.")
@@ -122,9 +122,9 @@ union ObservationStatusType {
 }
 
 @doc("""
-ConditionDiagnosisSeverityType based on SNOMED CT International edition 31-July 2022
-see: http://snomed.info/sct
-""")
+  ConditionDiagnosisSeverityType based on SNOMED CT International edition 31-July 2022
+  see: http://snomed.info/sct
+  """)
 union ConditionDiagnosisSeverityType {
   string,
 
@@ -139,8 +139,8 @@ union ConditionDiagnosisSeverityType {
 }
 
 @doc("""
-ConditionCategoryType based on FHIR valueset condition-category
-""")
+  ConditionCategoryType based on FHIR valueset condition-category
+  """)
 union ConditionCategoryType {
   string,
 
@@ -152,9 +152,9 @@ union ConditionCategoryType {
 }
 
 @doc("""
-VerificationStatusType based of FHIR valueset condition-ver-status.
-see: https://terminology.hl7.org/5.1.0/CodeSystem-condition-ver-status.html
-""")
+  VerificationStatusType based of FHIR valueset condition-ver-status.
+  see: https://terminology.hl7.org/5.1.0/CodeSystem-condition-ver-status.html
+  """)
 union VerificationStatusType {
   string,
 
@@ -178,10 +178,10 @@ union VerificationStatusType {
 }
 
 @doc("""
-A location given as a combination of city, state and country/region. It could specify a city, a state or a country/region.
-In case a city is specified, either state +country/region or country/region (for countries/regions where there are no states) should be added.
-In case a state is specified (without a city), country/region should be added.
-""")
+  A location given as a combination of city, state and country/region. It could specify a city, a state or a country/region.
+  In case a city is specified, either state +country/region or country/region (for countries/regions where there are no states) should be added.
+  In case a state is specified (without a city), country/region should be added.
+  """)
 model GeographicLocation {
   @doc("City name.")
   city?: string;
@@ -214,8 +214,8 @@ model OrderedProcedure {
 }
 
 @doc("""
-A piece of clinical information, expressed as a code in a clinical coding system.
-""")
+  A piece of clinical information, expressed as a code in a clinical coding system.
+  """)
 model ClinicalCodedElement {
   @doc("The clinical coding system, e.g. ICD-10, SNOMED-CT, UMLS.")
   system: string;

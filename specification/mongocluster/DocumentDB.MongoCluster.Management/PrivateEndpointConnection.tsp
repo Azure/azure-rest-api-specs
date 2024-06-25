@@ -1,10 +1,3 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "./common.tsp";
-import "./MongoCluster.tsp";
-
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -24,8 +17,16 @@ interface PrivateEndpointConnections {
   /** Get a specific private connection */
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
   /** Create a Private endpoint connection */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST REMOVE AT NEXT API VERSION UPDATE"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Need to support existing 202 response for PUT operations"
-  create is Operations.ArmResourceCreateOrUpdateWithAcceptedAsync<PrivateEndpointConnectionResource>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    PrivateEndpointConnectionResource,
+    Response = ArmAcceptedLroResponse<"Resource operation accepted."> | ArmResourceUpdatedResponse<PrivateEndpointConnectionResource> | ArmResourceCreatedResponse<
+      PrivateEndpointConnectionResource,
+      LroHeaders = {}
+    >
+  >;
   /** Delete the private endpoint connection */
   delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnectionResource>;
 }

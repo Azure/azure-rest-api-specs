@@ -275,9 +275,9 @@ union FilterOperator {
 }
 
 @doc("""
-An instance of an entity along with extended info - like hive_table,
-hive_database.
-""")
+  An instance of an entity along with extended info - like hive_table,
+  hive_database.
+  """)
 model AtlasEntityWithExtInfo {
   ...AtlasEntityExtInfo;
 
@@ -335,9 +335,9 @@ model AtlasEntity {
   relationshipAttributes?: Record<unknown>;
 
   @doc("""
-Status of the entity - can be active or deleted. Deleted entities are not
-removed.
-""")
+    Status of the entity - can be active or deleted. Deleted entities are not
+    removed.
+    """)
   status?: EntityStatus;
 
   @doc("The update time of the record.")
@@ -354,9 +354,9 @@ removed.
 }
 
 @doc("""
-An instance of a classification; it doesn't have an identity, this object
-exists only when associated with an entity.
-""")
+  An instance of a classification; it doesn't have an identity, this object
+  exists only when associated with an entity.
+  """)
 model AtlasClassification {
   ...AtlasStruct;
 
@@ -364,9 +364,9 @@ model AtlasClassification {
   entityGuid?: string;
 
   @doc("""
-Status of the entity - can be active or deleted. Deleted entities are not
-removed.
-""")
+    Status of the entity - can be active or deleted. Deleted entities are not
+    removed.
+    """)
   entityStatus?: EntityStatus;
 
   @doc("Determines if propagations will be removed on entity deletion.")
@@ -389,9 +389,9 @@ model TimeBoundary {
 }
 
 @doc("""
-Captures details of struct contents. Not instantiated directly, used only via
-AtlasEntity, AtlasClassification.
-""")
+  Captures details of struct contents. Not instantiated directly, used only via
+  AtlasEntity, AtlasClassification.
+  """)
 model AtlasStruct {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   @doc("The attributes of the struct.")
@@ -445,9 +445,9 @@ model ContactInfo {
 }
 
 @doc("""
-An instance of an entity along with extended info - like hive_table,
-hive_database.
-""")
+  An instance of an entity along with extended info - like hive_table,
+  hive_database.
+  """)
 model AtlasEntityExtInfo {
   @doc("The referred entities.")
   referredEntities?: Record<AtlasEntity>;
@@ -494,9 +494,9 @@ model AtlasEntityHeader {
   meanings?: AtlasTermAssignmentHeader[];
 
   @doc("""
-Status of the entity - can be active or deleted. Deleted entities are not
-removed.
-""")
+    Status of the entity - can be active or deleted. Deleted entities are not
+    removed.
+    """)
   status?: EntityStatus;
 }
 
@@ -514,9 +514,9 @@ model AtlasErrorResponse {
 }
 
 @doc("""
-An instance of an entity along with extended info - like hive_table,
-hive_database.
-""")
+  An instance of an entity along with extended info - like hive_table,
+  hive_database.
+  """)
 model AtlasEntitiesWithExtInfo {
   ...AtlasEntityExtInfo;
 
@@ -527,9 +527,9 @@ model AtlasEntitiesWithExtInfo {
 @doc("The request payload for classification association.")
 model ClassificationAssociateOptions {
   @doc("""
-An instance of a classification; it doesn't have an identity, this object
-exists only when associated with an entity.
-""")
+    An instance of a classification; it doesn't have an identity, this object
+    exists only when associated with an entity.
+    """)
   classification?: AtlasClassification;
 
   @doc("The GUID of the entity.")
@@ -770,10 +770,10 @@ model AtlasGlossaryTerm {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Recode<unknown> to model Map<String,Object>"
   @doc("""
-The custom attributes of the term, which is map<string,map<string,object>>.
-The
-key of the first layer map is term template name.
-""")
+    The custom attributes of the term, which is map<string,map<string,object>>.
+    The
+    key of the first layer map is term template name.
+    """)
   attributes?: Record<Record<unknown>>;
 
   @doc("An array of related object IDs.")
@@ -869,9 +869,9 @@ model ResourceLink {
 }
 
 @doc("""
-Reference to an object-instance of AtlasEntity type used in relationship
-attribute values
-""")
+  Reference to an object-instance of AtlasEntity type used in relationship
+  attribute values
+  """)
 model AtlasRelatedObjectId {
   ...AtlasObjectId;
 
@@ -879,18 +879,18 @@ model AtlasRelatedObjectId {
   displayText?: string;
 
   @doc("""
-Status of the entity - can be active or deleted. Deleted entities are not
-removed.
-""")
+    Status of the entity - can be active or deleted. Deleted entities are not
+    removed.
+    """)
   entityStatus?: EntityStatus;
 
   @doc("Relationship type")
   relationshipType?: string;
 
   @doc("""
-Captures details of struct contents. Not instantiated directly, used only via
-AtlasEntity, AtlasClassification.
-""")
+    Captures details of struct contents. Not instantiated directly, used only via
+    AtlasEntity, AtlasClassification.
+    """)
   relationshipAttributes?: AtlasStruct;
 
   @doc("The GUID of the relationship.")
@@ -935,15 +935,15 @@ model QueryOptions {
   keywords?: string;
 
   @doc("""
-The limit of the number of the search result. default value is 50; maximum
-value is 1000.
-""")
+    The limit of the number of the search result. default value is 50; maximum
+    value is 1000.
+    """)
   limit?: int32;
 
   @doc("""
-The token used to get next batch of data. Default 'Null' to get the first
-batch, and will return new token in each response unless there's no more data.
-""")
+    The token used to get next batch of data. Default 'Null' to get the first
+    batch, and will return new token in each response unless there's no more data.
+    """)
   continuationToken?: string;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "This is a flexible property"
@@ -1005,9 +1005,9 @@ model SearchTaxonomySetting {
 @doc("The result of the search result.")
 model QueryResult {
   @doc("""
-The total number of search results (not the number of documents in a single
-page).
-""")
+    The total number of search results (not the number of documents in a single
+    page).
+    """)
   @encodedName("application/json", "@search.count")
   searchCount?: int32;
 
@@ -1019,10 +1019,10 @@ page).
   continuationToken?: string;
 
   @doc("""
-A facet list that consists of index fields assetType ,classification,
-contactId, and label. When the facet is specified in the request, the value of
-the facet is returned as an element of @search.facets.
-""")
+    A facet list that consists of index fields assetType ,classification,
+    contactId, and label. When the facet is specified in the request, the value of
+    the facet is returned as an element of @search.facets.
+    """)
   @encodedName("application/json", "@search.facets")
   searchFacets?: SearchFacetResultValue;
 
@@ -1031,10 +1031,10 @@ the facet is returned as an element of @search.facets.
 }
 
 @doc("""
-A facet list that consists of index fields assetType ,classification,
-contactId, and label. When the facet is specified in the request, the value of
-the facet is returned as an element of @search.facets.
-""")
+  A facet list that consists of index fields assetType ,classification,
+  contactId, and label. When the facet is specified in the request, the value of
+  the facet is returned as an element of @search.facets.
+  """)
 model SearchFacetResultValue {
   @doc("Entity type")
   entityType?: SearchFacetItemValue[];
@@ -1079,25 +1079,25 @@ model SearchFacetItemValue {
 @doc("The value item of the search result.")
 model SearchResultValue {
   @doc("""
-The search score calculated by the search engine. The results are ordered by
-search score by default.
-""")
+    The search score calculated by the search engine. The results are ordered by
+    search score by default.
+    """)
   @encodedName("application/json", "@search.score")
   searchScore?: float32;
 
   @doc("""
-A highlight list that consists of index fields id ,qualifiedName, name,
-description, entityType. When the keyword appears in those fields, the value of
-the field, attached with emphasis mark, is returned as an element of
-@search.highlights.
-""")
+    A highlight list that consists of index fields id ,qualifiedName, name,
+    description, entityType. When the keyword appears in those fields, the value of
+    the field, attached with emphasis mark, is returned as an element of
+    @search.highlights.
+    """)
   @encodedName("application/json", "@search.highlights")
   searchHighlights?: SearchHighlights;
 
   @doc("""
-The object type of the record. Object type is the top-level property to
-distinguish whether a record is an asset or a term.
-""")
+    The object type of the record. Object type is the top-level property to
+    distinguish whether a record is an asset or a term.
+    """)
   objectType?: string;
 
   @doc("The create time of the record. The Unix epoch format.")
@@ -1143,9 +1143,9 @@ distinguish whether a record is an asset or a term.
   assetType?: string[];
 
   @doc("""
-The type name of the term. Could be AtlasGlossary, AtlasGlossaryTerm or
-AtlasGlossaryCategory.
-""")
+    The type name of the term. Could be AtlasGlossary, AtlasGlossaryTerm or
+    AtlasGlossaryCategory.
+    """)
   glossaryType?: string;
 
   @doc("The glossary name of the term.")
@@ -1162,11 +1162,11 @@ AtlasGlossaryCategory.
 }
 
 @doc("""
-A highlight list that consists of index fields id ,qualifiedName, name,
-description, entityType. When the keyword appears in those fields, the value of
-the field, attached with emphasis mark, is returned as an element of
-@search.highlights.
-""")
+  A highlight list that consists of index fields id ,qualifiedName, name,
+  description, entityType. When the keyword appears in those fields, the value of
+  the field, attached with emphasis mark, is returned as an element of
+  @search.highlights.
+  """)
 model SearchHighlights {
   @doc("Id")
   id?: string[];
@@ -1205,26 +1205,26 @@ model ContactSearchResultValue {
   info?: string;
 
   @doc("""
-The type of the contact. It can be Expert or Owner for an entity. It can be
-Expert or Steward for a glossary term.
-""")
+    The type of the contact. It can be Expert or Owner for an entity. It can be
+    Expert or Steward for a glossary term.
+    """)
   contactType?: string;
 }
 
 @doc("The payload of suggest request.")
 model SuggestOptions {
   @doc("""
-The keywords applied to all fields that support suggest operation. It must be
-at least 1 character, and no more than 100 characters. In the index schema we
-defined a default suggester which lists all the supported fields and specifies
-a search mode.
-""")
+    The keywords applied to all fields that support suggest operation. It must be
+    at least 1 character, and no more than 100 characters. In the index schema we
+    defined a default suggester which lists all the supported fields and specifies
+    a search mode.
+    """)
   keywords?: string;
 
   @doc("""
-The number of suggestions we hope to return. The default value is 5. The value
-must be a number between 1 and 100.
-""")
+    The number of suggestions we hope to return. The default value is 5. The value
+    must be a number between 1 and 100.
+    """)
   limit?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
@@ -1241,23 +1241,23 @@ model SuggestResult {
 @doc("The value item of the search suggest.")
 model SuggestResultValue {
   @doc("""
-The search score calculated by the search engine. The results are ordered by
-search score by default.
-""")
+    The search score calculated by the search engine. The results are ordered by
+    search score by default.
+    """)
   @encodedName("application/json", "@search.score")
   searchScore?: float32;
 
   @doc("""
-The target text that contains the keyword as prefix. The keyword is wrapped
-with emphasis mark.
-""")
+    The target text that contains the keyword as prefix. The keyword is wrapped
+    with emphasis mark.
+    """)
   @encodedName("application/json", "@search.text")
   searchText?: string;
 
   @doc("""
-The object type of the record. Object type is the top-level property to
-distinguish whether a record is an asset or a term.
-""")
+    The object type of the record. Object type is the top-level property to
+    distinguish whether a record is an asset or a term.
+    """)
   objectType?: string;
 
   @doc("The create time of the record. The Unix epoch format.")
@@ -1303,9 +1303,9 @@ distinguish whether a record is an asset or a term.
   assetType?: string[];
 
   @doc("""
-The type name of the term. Could be AtlasGlossary, AtlasGlossaryTerm or
-AtlasGlossaryCategory.
-""")
+    The type name of the term. Could be AtlasGlossary, AtlasGlossaryTerm or
+    AtlasGlossaryCategory.
+    """)
   glossaryType?: string;
 
   @doc("The glossary name of the term.")
@@ -1324,15 +1324,15 @@ AtlasGlossaryCategory.
 @doc("The payload of autocomplete request.")
 model AutoCompleteOptions {
   @doc("""
-The keywords applied to all fields that support autocomplete operation. It must
-be at least 1 character, and no more than 100 characters.
-""")
+    The keywords applied to all fields that support autocomplete operation. It must
+    be at least 1 character, and no more than 100 characters.
+    """)
   keywords?: string;
 
   @doc("""
-The number of autocomplete results we hope to return. The default value is 50.
-The value must be a number between 1 and 100.
-""")
+    The number of autocomplete results we hope to return. The default value is 50.
+    The value must be a number between 1 and 100.
+    """)
   limit?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
@@ -1671,29 +1671,29 @@ model AtlasClassificationDef {
   ...AtlasStructDef;
 
   @doc("""
-Specifying a list of entityType names in the classificationDef, ensures that
-classifications can
-only be applied to those entityTypes.
-
-Any subtypes of the entity types inherit the restriction.
-
-Any classificationDef subtypes inherit the parents entityTypes restrictions.
-
-Any classificationDef subtypes can further restrict the parents entityTypes
-restrictions by specifying a subset of the entityTypes.
-
-An empty entityTypes list when there are no parent restrictions means there are no
-restrictions.
-
-An empty entityTypes list when there are parent
-restrictions means that the subtype picks up the parents
-restrictions.
-
-If a list of entityTypes are supplied, where one inherits
-from another, this will be rejected. This should encourage cleaner
-classificationsDefs.
-
-""")
+    Specifying a list of entityType names in the classificationDef, ensures that
+    classifications can
+    only be applied to those entityTypes.
+    
+    Any subtypes of the entity types inherit the restriction.
+    
+    Any classificationDef subtypes inherit the parents entityTypes restrictions.
+    
+    Any classificationDef subtypes can further restrict the parents entityTypes
+    restrictions by specifying a subset of the entityTypes.
+    
+    An empty entityTypes list when there are no parent restrictions means there are no
+    restrictions.
+    
+    An empty entityTypes list when there are parent
+    restrictions means that the subtype picks up the parents
+    restrictions.
+    
+    If a list of entityTypes are supplied, where one inherits
+    from another, this will be rejected. This should encourage cleaner
+    classificationsDefs.
+    
+    """)
   entityTypes?: string[];
 
   @doc("An array of sub types.")
@@ -1718,11 +1718,11 @@ model AtlasEntityDef {
 }
 
 @doc("""
-The relationshipEndDef represents an end of the relationship. The end of the
-relationship is defined by a type, an
-attribute name, cardinality and whether
-it  is the container end of the relationship.
-""")
+  The relationshipEndDef represents an end of the relationship. The end of the
+  relationship is defined by a type, an
+  attribute name, cardinality and whether
+  it  is the container end of the relationship.
+  """)
 model AtlasRelationshipAttributeDef {
   ...AtlasAttributeDef;
 
@@ -1757,74 +1757,74 @@ model AtlasEnumElementDef {
 }
 
 @doc("""
-AtlasRelationshipDef is a TypeDef that defines a relationship.
-As with other typeDefs the AtlasRelationshipDef has a name. Once created the
-RelationshipDef has a guid.
-The name and the guid are the 2 ways that the
-RelationshipDef is identified.
-RelationshipDefs have 2 ends, each of which
-specify cardinality, an EntityDef type name and name and optionally
-whether the
-end is a container.
-RelationshipDefs can have AttributeDefs - though only
-primitive types are allowed. 
-RelationshipDefs have a relationshipCategory
-specifying the UML type of relationship required 
-The way EntityDefs and
-RelationshipDefs are intended to be used is that EntityDefs will define
-AttributeDefs these AttributeDefs
-will not specify an EntityDef type name as
-their types.
-RelationshipDefs introduce new attributes to the entity
-instances. For example
-EntityDef A might have attributes attr1,attr2,attr3
-
-EntityDef B might have attributes attr4,attr5,attr6 
-RelationshipDef
-AtoB might define 2 ends 
-
-end1:  type A, name attr7
-end2:  type B, name attr8 
-
-When an instance of EntityDef A is created, it
-will have attributes attr1,attr2,attr3,attr7 
-When an instance of EntityDef
-B is created, it will have attributes attr4,attr5,attr6,attr8
-
-In this way
-relationshipDefs can be authored separately from entityDefs and can inject
-relationship attributes into
-the entity instances
-""")
+  AtlasRelationshipDef is a TypeDef that defines a relationship.
+  As with other typeDefs the AtlasRelationshipDef has a name. Once created the
+  RelationshipDef has a guid.
+  The name and the guid are the 2 ways that the
+  RelationshipDef is identified.
+  RelationshipDefs have 2 ends, each of which
+  specify cardinality, an EntityDef type name and name and optionally
+  whether the
+  end is a container.
+  RelationshipDefs can have AttributeDefs - though only
+  primitive types are allowed. 
+  RelationshipDefs have a relationshipCategory
+  specifying the UML type of relationship required 
+  The way EntityDefs and
+  RelationshipDefs are intended to be used is that EntityDefs will define
+  AttributeDefs these AttributeDefs
+  will not specify an EntityDef type name as
+  their types.
+  RelationshipDefs introduce new attributes to the entity
+  instances. For example
+  EntityDef A might have attributes attr1,attr2,attr3
+  
+  EntityDef B might have attributes attr4,attr5,attr6 
+  RelationshipDef
+  AtoB might define 2 ends 
+  
+  end1:  type A, name attr7
+  end2:  type B, name attr8 
+  
+  When an instance of EntityDef A is created, it
+  will have attributes attr1,attr2,attr3,attr7 
+  When an instance of EntityDef
+  B is created, it will have attributes attr4,attr5,attr6,attr8
+  
+  In this way
+  relationshipDefs can be authored separately from entityDefs and can inject
+  relationship attributes into
+  the entity instances
+  """)
 model AtlasRelationshipDef {
   ...AtlasStructDef;
 
   @doc("""
-The relationshipEndDef represents an end of the relationship. The end of the
-relationship is defined by a type, an
-attribute name, cardinality and whether
-it  is the container end of the relationship.
-""")
+    The relationshipEndDef represents an end of the relationship. The end of the
+    relationship is defined by a type, an
+    attribute name, cardinality and whether
+    it  is the container end of the relationship.
+    """)
   endDef1?: AtlasRelationshipEndDef;
 
   @doc("""
-The relationshipEndDef represents an end of the relationship. The end of the
-relationship is defined by a type, an
-attribute name, cardinality and whether
-it  is the container end of the relationship.
-""")
+    The relationshipEndDef represents an end of the relationship. The end of the
+    relationship is defined by a type, an
+    attribute name, cardinality and whether
+    it  is the container end of the relationship.
+    """)
   endDef2?: AtlasRelationshipEndDef;
 
   @doc("""
-The Relationship category determines the style of relationship around
-containment and lifecycle.
-UML terminology is used for the values.
-ASSOCIATION is a relationship with no containment. 
-COMPOSITION and AGGREGATION are containment relationships.
-The difference being in the lifecycles of the container and its children. 
-In the COMPOSITION case, the children cannot exist without the container.
-For AGGREGATION, the life cycles of the container and children are totally independent.
-""")
+    The Relationship category determines the style of relationship around
+    containment and lifecycle.
+    UML terminology is used for the values.
+    ASSOCIATION is a relationship with no containment. 
+    COMPOSITION and AGGREGATION are containment relationships.
+    The difference being in the lifecycles of the container and its children. 
+    In the COMPOSITION case, the children cannot exist without the container.
+    For AGGREGATION, the life cycles of the container and children are totally independent.
+    """)
   relationshipCategory?: RelationshipCategory;
 
   @doc("The label of the relationship.")
@@ -1832,11 +1832,11 @@ For AGGREGATION, the life cycles of the container and children are totally indep
 }
 
 @doc("""
-The relationshipEndDef represents an end of the relationship. The end of the
-relationship is defined by a type, an
-attribute name, cardinality and whether
-it  is the container end of the relationship.
-""")
+  The relationshipEndDef represents an end of the relationship. The end of the
+  relationship is defined by a type, an
+  attribute name, cardinality and whether
+  it  is the container end of the relationship.
+  """)
 model AtlasRelationshipEndDef {
   @doc("single-valued attribute or multi-valued attribute.")
   cardinality?: CardinalityValue;
@@ -1866,29 +1866,29 @@ model AtlasTypeDef {
 @doc("Extra properties for a type.")
 model AtlasExtraTypeDef {
   @doc("""
-Specifying a list of entityType names in the classificationDef, ensures that
-classifications can
-only be applied to those entityTypes.
-
-Any subtypes of the entity types inherit the restriction.
-
-Any classificationDef subtypes inherit the parents entityTypes restrictions.
-
-Any classificationDef subtypes can further restrict the parents entityTypes
-restrictions by specifying a subset of the entityTypes.
-
-An empty entityTypes list when there are no parent restrictions means there are no
-restrictions.
-
-An empty entityTypes list when there are parent
-restrictions means that the subtype picks up the parents
-restrictions.
-
-If a list of entityTypes are supplied, where one inherits
-from another, this will be rejected. This should encourage cleaner
-classificationsDefs.
-
-""")
+    Specifying a list of entityType names in the classificationDef, ensures that
+    classifications can
+    only be applied to those entityTypes.
+    
+    Any subtypes of the entity types inherit the restriction.
+    
+    Any classificationDef subtypes inherit the parents entityTypes restrictions.
+    
+    Any classificationDef subtypes can further restrict the parents entityTypes
+    restrictions by specifying a subset of the entityTypes.
+    
+    An empty entityTypes list when there are no parent restrictions means there are no
+    restrictions.
+    
+    An empty entityTypes list when there are parent
+    restrictions means that the subtype picks up the parents
+    restrictions.
+    
+    If a list of entityTypes are supplied, where one inherits
+    from another, this will be rejected. This should encourage cleaner
+    classificationsDefs.
+    
+    """)
   entityTypes?: string[];
 
   @doc("An array of sub types.")
@@ -1907,33 +1907,33 @@ classificationsDefs.
   elementDefs?: AtlasEnumElementDef[];
 
   @doc("""
-The relationshipEndDef represents an end of the relationship. The end of the
-relationship is defined by a type, an
-attribute name, cardinality and whether
-it  is the container end of the relationship.
-""")
+    The relationshipEndDef represents an end of the relationship. The end of the
+    relationship is defined by a type, an
+    attribute name, cardinality and whether
+    it  is the container end of the relationship.
+    """)
   endDef1?: AtlasRelationshipEndDef;
 
   @doc("""
-The relationshipEndDef represents an end of the relationship. The end of the
-relationship is defined by a type, an
-attribute name, cardinality and whether
-it  is the container end of the relationship.
-""")
+    The relationshipEndDef represents an end of the relationship. The end of the
+    relationship is defined by a type, an
+    attribute name, cardinality and whether
+    it  is the container end of the relationship.
+    """)
   endDef2?: AtlasRelationshipEndDef;
 
   @doc("""
-The Relationship category determines the style of relationship around
-containment and lifecycle.
-UML terminology is used for the values.
-
-ASSOCIATION is a relationship with no containment. 
-COMPOSITION and AGGREGATION are containment relationships.
-
-The difference being in the lifecycles of the container and its children. 
-In the COMPOSITION case, the children cannot exist without the container. 
-For AGGREGATION, the life cycles of the container and children are totally independent.
-""")
+    The Relationship category determines the style of relationship around
+    containment and lifecycle.
+    UML terminology is used for the values.
+    
+    ASSOCIATION is a relationship with no containment. 
+    COMPOSITION and AGGREGATION are containment relationships.
+    
+    The difference being in the lifecycles of the container and its children. 
+    In the COMPOSITION case, the children cannot exist without the container. 
+    For AGGREGATION, the life cycles of the container and children are totally independent.
+    """)
   relationshipCategory?: RelationshipCategory;
 
   @doc("The label of the relationship.")
