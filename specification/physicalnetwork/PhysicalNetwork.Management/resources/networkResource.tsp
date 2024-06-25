@@ -69,12 +69,12 @@ model LocationCollectionParameters<T extends Azure.ResourceManager.Foundations.R
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations are inside an interface"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid casing"
 @autoRoute
+@doc("List {name}s by location", TResource)
 @get
 @listsResource(TResource)
 @segmentOf(TResource)
 @armRenameListByOperation(TResource, TParentName, TParentFriendlyName) // This must come before @armResourceList!
 @armResourceList(TResource)
-@doc("List NetworkDevice resources by location")
 op ArmLocResourceListByParent<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>,
