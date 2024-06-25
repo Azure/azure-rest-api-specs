@@ -5065,6 +5065,9 @@
           "202": {
             "description": "Accepted. Operation will complete asynchronously.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
               "Location": {
                 "type": "string"
               }
@@ -5230,6 +5233,9 @@
           "202": {
             "description": "Accepted. Operation will complete asynchronously.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
               "Location": {
                 "type": "string"
               }
@@ -5253,13 +5259,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/getDetails": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/getBuildDetails": {
       "post": {
         "tags": [
           "Image Definitions"
         ],
         "description": "Gets Build details",
-        "operationId": "ProjectCatalogImageDefinitionBuild_GetDetails",
+        "operationId": "ProjectCatalogImageDefinitionBuild_GetBuildDetails",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
