@@ -48,8 +48,15 @@ model DsmsAllowlistResource
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
 interface DsmsAllowlist {
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DsmsAllowlistResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    DsmsAllowlistResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   listBySubscription is ArmListBySubscription<DsmsAllowlistResource>;
   listByResourceGroup is ArmResourceListByParent<DsmsAllowlistResource>;
   get is ArmResourceRead<DsmsAllowlistResource>;
 }
+
+@@visibility(DsmsAllowlistResource.properties, "read", "create");

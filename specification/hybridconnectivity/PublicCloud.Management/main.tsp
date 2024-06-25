@@ -104,6 +104,7 @@ union Status {
 @doc("Public Cloud Connector")
 model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   @doc("Represent public cloud connectors resource.")
+  @pattern("^[a-zA-Z0-9-]{3,63}$")
   @key("publicCloudConnector")
   @path
   @segment("publicCloudConnectors")
@@ -157,6 +158,7 @@ model AwsCloudProfile {
 model SolutionConfiguration
   is ExtensionResource<SolutionConfigurationProperties> {
   @doc("Represent Solution Configuration Resource.")
+  @pattern("^[a-zA-Z0-9-]{3,63}$")
   @key("solutionConfiguration")
   @path
   @segment("solutionConfigurations")

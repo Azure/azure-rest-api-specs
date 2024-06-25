@@ -101,8 +101,15 @@ model DstsServiceAccountResource
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
 interface DstsServiceAccount {
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsServiceAccountResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    DstsServiceAccountResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   listBySubscription is ArmListBySubscription<DstsServiceAccountResource>;
   listByResourceGroup is ArmResourceListByParent<DstsServiceAccountResource>;
   get is ArmResourceRead<DstsServiceAccountResource>;
 }
+
+@@visibility(DstsServiceAccountResource.properties, "read", "create");

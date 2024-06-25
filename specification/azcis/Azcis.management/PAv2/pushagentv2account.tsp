@@ -72,8 +72,15 @@ model PushAgentV2AccountResource
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
 interface PushAgentV2Account {
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<PushAgentV2AccountResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    PushAgentV2AccountResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   listBySubscription is ArmListBySubscription<PushAgentV2AccountResource>;
   listByResourceGroup is ArmResourceListByParent<PushAgentV2AccountResource>;
   get is ArmResourceRead<PushAgentV2AccountResource>;
 }
+
+@@visibility(PushAgentV2AccountResource.properties, "read", "create");
