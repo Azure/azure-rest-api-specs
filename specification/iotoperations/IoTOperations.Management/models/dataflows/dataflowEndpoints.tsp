@@ -322,9 +322,6 @@ model DataFlowEndpointMqtt {
   @minValue(0)
   sessionExpirySeconds?: int32 = 3600;
 
-  @doc("Shared subscription configuration.")
-  sharedSubscription?: DataFlowEndpointMqttSessionExpirySeconds;
-
   @doc("TLS configuration.")
   tls?: TlsProperties;
 }
@@ -338,15 +335,4 @@ union MqttRetainType {
 
   @doc("Never retain messages.")
   Never: "Never",
-}
-
-@doc("Mqtt endpoint Session Expiry Seconds properties")
-model DataFlowEndpointMqttSessionExpirySeconds {
-  @doc("Number of clients to use for shared subscription.")
-  @minValue(0)
-  @maxValue(255)
-  groupShareNumber: int32;
-
-  @doc("Shared subscription group name.")
-  groupName: string;
 }

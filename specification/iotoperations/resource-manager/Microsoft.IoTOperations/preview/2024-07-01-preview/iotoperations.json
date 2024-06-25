@@ -4964,36 +4964,11 @@
           "default": 3600,
           "minimum": 0
         },
-        "sharedSubscription": {
-          "$ref": "#/definitions/DataFlowEndpointMqttSessionExpirySeconds",
-          "description": "Shared subscription configuration."
-        },
         "tls": {
           "$ref": "#/definitions/TlsProperties",
           "description": "TLS configuration."
         }
       }
-    },
-    "DataFlowEndpointMqttSessionExpirySeconds": {
-      "type": "object",
-      "description": "Mqtt endpoint Session Expiry Seconds properties",
-      "properties": {
-        "groupShareNumber": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of clients to use for shared subscription.",
-          "minimum": 0,
-          "maximum": 255
-        },
-        "groupName": {
-          "type": "string",
-          "description": "Shared subscription group name."
-        }
-      },
-      "required": [
-        "groupShareNumber",
-        "groupName"
-      ]
     },
     "DataFlowEndpointProperties": {
       "type": "object",
