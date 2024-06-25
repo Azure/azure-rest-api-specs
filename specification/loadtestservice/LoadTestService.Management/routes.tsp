@@ -43,6 +43,7 @@ interface LoadTests {
     LoadTestResource,
     LoadTestProperties,
     LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

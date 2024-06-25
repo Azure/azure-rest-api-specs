@@ -293,21 +293,21 @@ model LLMResource {
 @doc("The request of groundedness detection.")
 model AnalyzeTextGroundednessOptions {
   @doc("""
-  The domain of the text for analysis. Allowed values: Medical, Generic.
-  This field is optional, with a default value of Generic.
-  """)
+    The domain of the text for analysis. Allowed values: Medical, Generic.
+    This field is optional, with a default value of Generic.
+    """)
   domain?: GroundednessDomain = GroundednessDomain.Generic;
 
   @doc("""
-  The task type for the text analysis. Type of task: QnA, Summarization.
-  This field is optional, with a default value of Summarization.
-  """)
+    The task type for the text analysis. Type of task: QnA, Summarization.
+    This field is optional, with a default value of Summarization.
+    """)
   task?: GroundednessTask = GroundednessTask.Summarization;
 
   @doc("""
-  The user's question input in a QnA scenario.
-  This field is optional, but if the task type is set to QnA, it becomes required.
-  """)
+    The user's question input in a QnA scenario.
+    This field is optional, but if the task type is set to QnA, it becomes required.
+    """)
   qna?: QnAOptions;
 
   @doc("The specific text that needs to be checked.")
@@ -315,21 +315,21 @@ model AnalyzeTextGroundednessOptions {
   text: string;
 
   @doc("""
-  Leverages a vast array of grounding sources to validate AI-generated text.
-  Limit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters.
-  """)
+    Leverages a vast array of grounding sources to validate AI-generated text.
+    Limit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters.
+    """)
   groundingSources: string[];
 
   @doc("""
-  A value indicating if the output includes an explanation for the identified groundedness.
-  This field is optional, with a default value of false.
-  """)
+    A value indicating if the output includes an explanation for the identified groundedness.
+    This field is optional, with a default value of false.
+    """)
   reasoning?: boolean;
 
   @doc("""
-  Connection details for the LLM resource. 
-  This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
-  """)
+    Connection details for the LLM resource. 
+    This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
+    """)
   llmResource?: LLMResource;
 }
 
@@ -359,9 +359,9 @@ model UngroundednessDetails {
   length: IndexDetails;
 
   @doc("""
-  The explanation for detected ungroundedness, enhancing understanding.
-  Only when the 'reasoning' field in the input is set to true 'reason' field will be returned.
-  """)
+    The explanation for detected ungroundedness, enhancing understanding.
+    Only when the 'reasoning' field in the input is set to true 'reason' field will be returned.
+    """)
   reason?: string;
 }
 
@@ -372,10 +372,10 @@ model AnalyzeTextGroundednessResult {
   ungroundedDetected: boolean;
 
   @doc("""
-  Specifies the proportion of the text identified as ungrounded, 
-  expressed as a decimal between 0 and 1,
-  where 0 indicates no grounded content and 1 indicates entirely grounded content..
-  """)
+    Specifies the proportion of the text identified as ungrounded, 
+    expressed as a decimal between 0 and 1,
+    where 0 indicates no grounded content and 1 indicates entirely grounded content..
+    """)
   ungroundedPercentage: float32;
 
   @doc("Provides insights into ungrounded content with specific examples and percentages.")
