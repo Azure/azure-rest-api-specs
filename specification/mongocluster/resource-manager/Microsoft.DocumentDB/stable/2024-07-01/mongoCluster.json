@@ -1250,6 +1250,10 @@
     }
   },
   "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "BackupProperties": {
       "type": "object",
       "description": "The backup properties of the cluster. This includes the earliest restore time and retention settings.",
@@ -1602,11 +1606,11 @@
       "description": "Parameters used for replica operations.",
       "properties": {
         "sourceResourceId": {
-          "type": "string",
+          "$ref": "#/definitions/MongoClusterResourceId",
           "description": "The id of the replication source cluster."
         },
         "sourceLocation": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "The location of the source cluster"
         }
       },
@@ -1614,6 +1618,18 @@
         "sourceResourceId",
         "sourceLocation"
       ]
+    },
+    "MongoClusterResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Identifier for a mongo cluster resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.DocumentDB/mongoClusters"
+          }
+        ]
+      }
     },
     "MongoClusterRestoreParameters": {
       "type": "object",
@@ -1625,7 +1641,7 @@
           "description": "UTC point in time to restore a mongo cluster"
         },
         "sourceResourceId": {
-          "type": "string",
+          "$ref": "#/definitions/MongoClusterResourceId",
           "description": "Resource ID to locate the source cluster to restore"
         }
       }
@@ -1906,10 +1922,6 @@
         "promoteOption"
       ]
     },
-    "PromoteReplicaResult": {
-      "type": "object",
-      "description": "Promote request results."
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the last accepted operation.",
@@ -2025,7 +2037,7 @@
       "description": "Replica properties of the mongo cluster.",
       "properties": {
         "sourceResourceId": {
-          "type": "string",
+          "$ref": "#/definitions/MongoClusterResourceId",
           "description": "The resource id the source cluster for the replica cluster.",
           "readOnly": true
         },
@@ -2094,27 +2106,27 @@
           {
             "name": "Catchup",
             "value": "Catchup",
-            "description": "Replication link is catching-up."
+            "description": "Replica is catching-up with the primary. This can occur after the replica is created or after a promotion is triggered."
           },
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "Replication link is provisioning."
+            "description": "Replica and replication link to the primary is being created."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "Replication link is updating."
+            "description": "Replication link is being updated due to a change on the replica or an upgrade."
           },
           {
             "name": "Broken",
             "value": "Broken",
-            "description": "Replication link is broken."
+            "description": "Replication link is broken and the replica may need to be recreated."
           },
           {
             "name": "Reconfiguring",
             "value": "Reconfiguring",
-            "description": "Replication link is re-configuring."
+            "description": "Replication link is re-configuring due to a promotion event."
           }
         ]
       }
