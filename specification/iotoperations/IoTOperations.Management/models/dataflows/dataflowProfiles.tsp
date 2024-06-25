@@ -49,5 +49,5 @@ model DataFlowProfileProperties {
 
 @doc("DataFlowProfile Diagnostics properties")
 model ProfileDiagnostics {
- ...MetricProperties;
+  ...MetricProperties;
 }

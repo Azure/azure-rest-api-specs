@@ -48,6 +48,7 @@ model DataFlowEndpointProperties {
 
   @doc("Microsoft Fabric endpoint.")
   fabricOneLakeSettings?: DataFlowEndpointFabricOneLake;
+
   @doc("Kafka endpoint.")
   kafkaSettings?: DataFlowEndpointKafka;
 
