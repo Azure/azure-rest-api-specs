@@ -207,6 +207,10 @@ directive:
   - suppress: UniqueResourcePaths
     from: containerInstance.json
     reason: false positive, see https://github.com/Azure/azure-openapi-validator/issues/176
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: containerInstance.json
+    reason: Using additionalProperties type as the object is user-defined and not subject to any validations at RP level.
 ```
 
 ---
