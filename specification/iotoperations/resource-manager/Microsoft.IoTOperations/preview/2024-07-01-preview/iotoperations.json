@@ -3109,7 +3109,7 @@
       "properties": {
         "brokerResources": {
           "type": "array",
-          "description": "Give access to MQTT broker methods and topics.",
+          "description": "Give access to Broker methods and topics.",
           "items": {
             "$ref": "#/definitions/BrokerResourceRule"
           },
@@ -3260,7 +3260,7 @@
       "properties": {
         "authenticationMethods": {
           "type": "array",
-          "description": "Defines a set of MQTT authentication methods to be used on `BrokerListeners`. For each array element one authenticator type supported.",
+          "description": "Defines a set of Broker authentication methods to be used on `BrokerListeners`. For each array element one authenticator type supported.",
           "items": {
             "$ref": "#/definitions/BrokerAuthenticatorMethods"
           },
@@ -3563,7 +3563,7 @@
     },
     "BrokerListenerProperties": {
       "type": "object",
-      "description": "Defines an MQTT broker listener. A listener is a collection of ports on which the broker accepts connections from clients.",
+      "description": "Defines a Broker listener. A listener is a collection of ports on which the broker accepts connections from clients.",
       "properties": {
         "brokerRef": {
           "type": "string",
@@ -3745,7 +3745,7 @@
         },
         "diagnostics": {
           "$ref": "#/definitions/BrokerDiagnostics",
-          "description": "Spec defines the desired identities of MQTT broker diagnostics settings."
+          "description": "Spec defines the desired identities of Broker broker diagnostics settings."
         },
         "diskBackedMessageBuffer": {
           "$ref": "#/definitions/DiskBackedMessageBuffer",
@@ -3809,6 +3809,30 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
+      }
+    },
+    "BrokerProtocolType": {
+      "type": "string",
+      "description": "Broker Protocol types",
+      "enum": [
+        "Mqtt",
+        "WebSockets"
+      ],
+      "x-ms-enum": {
+        "name": "BrokerProtocolType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Mqtt",
+            "value": "Mqtt",
+            "description": "protocol broker"
+          },
+          {
+            "name": "WebSockets",
+            "value": "WebSockets",
+            "description": "protocol websocket"
+          }
+        ]
       }
     },
     "BrokerResource": {
@@ -3895,7 +3919,7 @@
       "properties": {
         "method": {
           "$ref": "#/definitions/BrokerResourceDefinitionMethods",
-          "description": "Give access for a MQTT method (i.e., Connect, Subscribe, or Publish)."
+          "description": "Give access for a Broker method (i.e., Connect, Subscribe, or Publish)."
         },
         "topics": {
           "type": "array",
@@ -4119,7 +4143,7 @@
         },
         "datasets": {
           "type": "array",
-          "description": "Enrich data from MQ State Store. Dataset references a key in MQ State Store.",
+          "description": "Enrich data from Broker State Store. Dataset references a key in Broker State Store.",
           "default": [],
           "items": {
             "$ref": "#/definitions/DataFlowBuiltInTransformationDataset"
@@ -4166,21 +4190,20 @@
         },
         "inputs": {
           "type": "array",
-          "description": "List of fields for enriching from the MQ State Store.",
+          "description": "List of fields for enriching from the Broker State Store.",
           "items": {
             "type": "string"
           }
         },
         "expression": {
           "type": "string",
-          "description": "Condition to enrich data from MQ State Store."
+          "description": "Condition to enrich data from Broker State Store."
         }
       },
       "required": [
         "id",
         "schemaRef",
-        "inputs",
-        "expression"
+        "inputs"
       ]
     },
     "DataFlowBuiltInTransformationFilter": {
@@ -4273,7 +4296,7 @@
         },
         "endpointRef": {
           "type": "string",
-          "description": "Reference to the Endpoint CR. Can be of MQTT, Kafka, Fabric, ADLS, ADX type."
+          "description": "Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type."
         },
         "location": {
           "type": "string",
@@ -4565,7 +4588,7 @@
         },
         "copyMqttProperties": {
           "type": "string",
-          "description": "Copy MQTT properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an MQTT source.",
+          "description": "Copy Broker properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an Broker source.",
           "default": "Disabled",
           "enum": [
             "Enabled",
@@ -4874,7 +4897,7 @@
     },
     "DataFlowEndpointMqtt": {
       "type": "object",
-      "description": "Mqtt endpoint properties",
+      "description": "Broker endpoint properties",
       "properties": {
         "clientIdPrefix": {
           "type": "string",
@@ -4882,7 +4905,7 @@
         },
         "host": {
           "type": "string",
-          "description": "Host of the MQTT broker in the form of <hostname>:<port>. Optional; connects to IoT MQ if omitted.",
+          "description": "Host of the Broker in the form of <hostname>:<port>. Optional; connects to Broker if omitted.",
           "default": "aio-mq-dmqtt-frontend:1883"
         },
         "protocol": {
@@ -4894,13 +4917,13 @@
             "WebSockets"
           ],
           "x-ms-enum": {
-            "name": "MqttProtocolType",
+            "name": "BrokerProtocolType",
             "modelAsString": true,
             "values": [
               {
                 "name": "Mqtt",
                 "value": "Mqtt",
-                "description": "protocol mqtt"
+                "description": "protocol broker"
               },
               {
                 "name": "WebSockets",
@@ -4913,7 +4936,7 @@
         "keepAliveSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "MQTT KeepAlive for connection in seconds.",
+          "description": "Broker KeepAlive for connection in seconds.",
           "default": 60,
           "minimum": 0
         },
@@ -4952,7 +4975,7 @@
         "qos": {
           "type": "integer",
           "format": "int32",
-          "description": "Qos for MQTT connection.",
+          "description": "Qos for Broker connection.",
           "default": 1,
           "minimum": 0,
           "maximum": 2
@@ -5004,7 +5027,7 @@
         },
         "mqttSettings": {
           "$ref": "#/definitions/DataFlowEndpointMqtt",
-          "description": "Mqtt endpoint."
+          "description": "Broker endpoint."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -5343,7 +5366,7 @@
         },
         "endpointRef": {
           "type": "string",
-          "description": "Reference to the Dataflow Endpoint resource. Can only be of MQTT and Kafka type."
+          "description": "Reference to the Dataflow Endpoint resource. Can only be of Broker and Kafka type."
         },
         "registryRef": {
           "type": "string",
@@ -5374,7 +5397,7 @@
         },
         "locations": {
           "type": "array",
-          "description": "List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.",
+          "description": "List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.",
           "items": {
             "type": "string"
           }
@@ -5492,7 +5515,7 @@
           {
             "name": "Mqtt",
             "value": "Mqtt",
-            "description": "Mqtt Type"
+            "description": "Broker Type"
           }
         ]
       }
@@ -5748,13 +5771,13 @@
             "WebSockets"
           ],
           "x-ms-enum": {
-            "name": "MqttProtocolType",
+            "name": "BrokerProtocolType",
             "modelAsString": true,
             "values": [
               {
                 "name": "Mqtt",
                 "value": "Mqtt",
-                "description": "protocol mqtt"
+                "description": "protocol broker"
               },
               {
                 "name": "WebSockets",
@@ -5791,33 +5814,9 @@
         }
       }
     },
-    "MqttProtocolType": {
-      "type": "string",
-      "description": "Mqtt Protocol types",
-      "enum": [
-        "Mqtt",
-        "WebSockets"
-      ],
-      "x-ms-enum": {
-        "name": "MqttProtocolType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Mqtt",
-            "value": "Mqtt",
-            "description": "protocol mqtt"
-          },
-          {
-            "name": "WebSockets",
-            "value": "WebSockets",
-            "description": "protocol websocket"
-          }
-        ]
-      }
-    },
     "MqttRetainType": {
       "type": "string",
-      "description": "Mqtt Retain types",
+      "description": "Broker Retain types",
       "enum": [
         "Keep",
         "Never"
