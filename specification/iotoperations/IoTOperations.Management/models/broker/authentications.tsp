@@ -14,7 +14,8 @@ namespace Microsoft.IoTOperations;
  */
 @doc("Instance broker authentication resource")
 @parentResource(BrokerResource)
-model BrokerAuthenticationResource is ProxyResource<BrokerAuthenticationProperties> {
+model BrokerAuthenticationResource
+  is ProxyResource<BrokerAuthenticationProperties> {
   @doc("Name of Instance broker authentication resource")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("authenticationName")
