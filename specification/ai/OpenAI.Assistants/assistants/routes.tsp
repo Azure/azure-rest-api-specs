@@ -34,9 +34,7 @@ op createAssistant(...BodyParameter<AssistantCreationOptions>): Assistant;
 @get
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/assistants")
-op listAssistants(
-  ...OpenAIListRequestOptions,
-): OpenAIPageableListOf<Assistant>;
+op listAssistants(...OpenAIListRequestOptions): OpenAIPageableListOf<Assistant>;
 
 /**
  * Retrieves an existing assistant.
