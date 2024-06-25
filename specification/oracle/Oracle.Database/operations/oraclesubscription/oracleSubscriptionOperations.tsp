@@ -3,6 +3,7 @@ import "../../../models/oraclesubscription/oracleSubscription.tsp";
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Autorest;
+using TypeSpec.Versioning;
 
 namespace Oracle.Database;
 
@@ -40,6 +41,14 @@ interface OracleSubscriptions
   listActivationLinks is ListActions.ArmResourceGetActionAsync<
     OracleSubscription<Plan>,
     ActivationLinks
+  >;
+
+  @added(Versions.v20240601_preview)
+  @added(Versions.v20240601)
+  @doc("Add Azure Subscriptions")
+  addAzureSubscriptions is ArmResourceActionNoResponseContentAsync<
+    OracleSubscription<Plan>,
+    AzureSubscriptions
   >;
 
   /**

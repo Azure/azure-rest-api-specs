@@ -1,5 +1,6 @@
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Oracle.Database;
@@ -145,6 +146,30 @@ model ActivationLinks {
   existingCloudAccountActivationLink?: string;
 }
 
+@added(Versions.v20240601_preview)
+@added(Versions.v20240601)
+@doc("Azure Subscriptions model")
+model AzureSubscriptions {
+  @doc("Azure Subscription Ids to be updated")
+  azureSubscriptionIds: string[];
+}
+
+@added(Versions.v20240601_preview)
+@added(Versions.v20240601)
+@doc("Add Subscription Operation state enum")
+union AddSubscriptionOperationState {
+  @doc("Succeeded - State when Add Subscription operation succeeded")
+  Succeeded: "Succeeded",
+
+  @doc("Updating - State when Add Subscription operation is being Updated")
+  Updating: "Updating",
+
+  @doc("Failed - State when Add Subscription operation failed")
+  Failed: "Failed",
+
+  string,
+}
+
 @doc("Oracle Subscription resource model")
 model OracleSubscriptionProperties {
   @doc("OracleSubscriptionProvisioningState provisioning state")
@@ -174,4 +199,22 @@ model OracleSubscriptionProperties {
   @doc("Intent for the update operation")
   @visibility("update")
   intent?: Intent;
+
+  @added(Versions.v20240601_preview)
+  @added(Versions.v20240601)
+  @doc("Azure subscriptions associated with this OracleSubscription")
+  @visibility("read")
+  azureSubscriptionIds?: string[];
+
+  @added(Versions.v20240601_preview)
+  @added(Versions.v20240601)
+  @doc("State of the add Azure subscription operation on Oracle subscription")
+  @visibility("read")
+  addSubscriptionOperationState?: AddSubscriptionOperationState;
+
+  @added(Versions.v20240601_preview)
+  @added(Versions.v20240601)
+  @doc("Status details of the last operation on Oracle subscription")
+  @visibility("read")
+  lastOperationStatusDetail?: string;
 }
