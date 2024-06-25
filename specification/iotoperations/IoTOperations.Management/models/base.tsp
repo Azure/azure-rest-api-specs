@@ -75,7 +75,6 @@ model DiagnosticsLogs {
 
   @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
   level?: string = "info";
-
 }
 
 @doc("Diagnostic Metrics properties")
