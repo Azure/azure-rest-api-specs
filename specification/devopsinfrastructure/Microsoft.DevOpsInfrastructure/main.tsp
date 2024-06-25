@@ -23,6 +23,7 @@ namespace Microsoft.DevOpsInfrastructure;
 enum Versions {
   /** 2024-04-04-preview preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-04-04-preview`,
 }
 
@@ -653,22 +654,39 @@ interface Sku {
   listByLocation is ArmListBySubscription<ResourceSku>;
 }
 
+/**
+ * Paged response containing resources
+ * @template Resource The type of the values returned in the paged response (must be a resource)
+ */
+@doc("The response of a {name} list operation.", Quota)
+@friendlyName("{name}ListResult", Resource)
+model QuotaListResult is Azure.Core.Page<Quota>;
+
+@armResourceOperations(Location)
+interface SubscriptionUsages {
+  @autoRoute
+  @armResourceAction(Location)
+  @post
+  @doc("Returns quotas by location")
+  ArmQuotaListActionSync<TResponse>(
+    ...ApiVersionParameter,
+  ): ArmResponse<TResponse> | ErrorResponse;
+
+  @doc("Returns quotas by location")
+  listByLocation is SubscriptionUsages.ArmQuotaListActionSync<QuotaListResult>;
+}
+
 @doc("Describes Resource Quota")
 @parentResource(Location)
-model Quota is ProxyResource<QuotaProperties> {
+model Quota {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The name of the quota.")
   @key("quotaName")
   @segment("usages")
   @visibility("read")
   @path
-  name: string;
-}
+  name: QuotaName;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
-@doc("Describes Resource Quota properties")
-model QuotaProperties {
   @doc("The unit of usage measurement.")
   unit: string;
 
@@ -677,9 +695,6 @@ model QuotaProperties {
 
   @doc("The maximum permitted usage of the resource.")
   limit: int64;
-
-  @doc("The details of the quota.")
-  name: QuotaName;
 }
 
 @doc("The Quota Names")
@@ -689,11 +704,6 @@ model QuotaName {
 
   @doc("The localized name of the resource.")
   localizedValue?: string;
-}
-
-@armResourceOperations
-interface SubscriptionUsages {
-  listByLocation is ArmListBySubscription<Quota>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
