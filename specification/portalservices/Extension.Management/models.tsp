@@ -428,6 +428,7 @@ model PortalExtensionListSourcesFolder {
 /**
  * The content metadata of a file
  */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("kind")
 model PortalExtensionListSourcesFile {
   /**
