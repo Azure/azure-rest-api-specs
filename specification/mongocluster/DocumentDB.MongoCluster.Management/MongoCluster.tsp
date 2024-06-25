@@ -215,7 +215,7 @@ model ShardingProperties {
   shardCount?: int32;
 }
 
-/** The high availablility modes for a cluster. */
+/** The high availability modes for a cluster. */
 @added(Versions.v2024_07_01)
 union HighAvailabilityMode {
   string,
@@ -228,9 +228,6 @@ union HighAvailabilityMode {
 
   /** High availability mode is enabled, where each server in a shard is distributed across availability zones. */
   "ZoneRedundant",
-
-  /** High availability mode is enabled, with best-effort to provision as zone-redundant, but will fallback to same zone if capacity for multiple availablity zones is not available. */
-  "ZoneRedundantPreferred",
 }
 
 /** The backup properties of the cluster. This includes the earliest restore time and retention settings. */

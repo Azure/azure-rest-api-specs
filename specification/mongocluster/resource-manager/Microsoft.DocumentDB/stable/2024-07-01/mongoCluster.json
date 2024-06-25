@@ -1391,12 +1391,11 @@
     },
     "HighAvailabilityMode": {
       "type": "string",
-      "description": "The high availablility modes for a cluster.",
+      "description": "The high availability modes for a cluster.",
       "enum": [
         "Disabled",
         "SameZone",
-        "ZoneRedundant",
-        "ZoneRedundantPreferred"
+        "ZoneRedundant"
       ],
       "x-ms-enum": {
         "name": "HighAvailabilityMode",
@@ -1416,11 +1415,6 @@
             "name": "ZoneRedundant",
             "value": "ZoneRedundant",
             "description": "High availability mode is enabled, where each server in a shard is distributed across availability zones."
-          },
-          {
-            "name": "ZoneRedundantPreferred",
-            "value": "ZoneRedundantPreferred",
-            "description": "High availability mode is enabled, with best-effort to provision as zone-redundant, but will fallback to same zone if capacity for multiple availablity zones is not available."
           }
         ]
       }
