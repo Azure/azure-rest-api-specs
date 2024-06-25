@@ -28,12 +28,21 @@ These are the global settings for the Guest Configuration API.
 title: GuestConfigurationClient
 description: Guest Configuration Client
 openapi-type: arm
-tag: package-2022-01-25
+tag: package-2024-04-05
 ```
 
 ``` yaml !$(csharp)
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-2024-04-05
+
+These settings apply only when `--tag=package-2024-04-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-05'
+input-file:
+  - Microsoft.GuestConfiguration/stable/2024-04-05/guestconfiguration.json
 ```
 
 ### Tag: package-2022-01-25
