@@ -58,42 +58,6 @@
     }
   ],
   "paths": {
-    "/listByLocation": {
-      "post": {
-        "operationId": "SubscriptionUsages_ListByLocation",
-        "tags": [
-          "SubscriptionUsages"
-        ],
-        "description": "Returns quotas by location",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SubscriptionUsages_ListByLocation": {
-            "$ref": "./examples/SubscriptionUsages_ListByLocation.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.DevOpsInfrastructure/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -170,6 +134,43 @@
         "x-ms-examples": {
           "Sku_ListByLocation": {
             "$ref": "./examples/Sku_ListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/locations/{location}/usages": {
+      "get": {
+        "operationId": "SubscriptionUsages_Usages",
+        "tags": [
+          "SubscriptionUsages"
+        ],
+        "description": "Returns quotas by location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {

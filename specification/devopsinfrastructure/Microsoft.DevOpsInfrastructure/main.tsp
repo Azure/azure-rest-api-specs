@@ -666,14 +666,23 @@ model QuotaListResult is Azure.Core.Page<Quota>;
 interface SubscriptionUsages {
   @autoRoute
   @armResourceAction(Location)
-  @post
+  @get
+  @armResourceList(Location)
   @doc("Returns quotas by location")
   ArmQuotaListActionSync<TResponse>(
+    ...SubscriptionIdParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.DevOpsInfrastructure",
+
+    ...LocationResourceParameter,
     ...ApiVersionParameter,
   ): ArmResponse<TResponse> | ErrorResponse;
 
   @doc("Returns quotas by location")
-  listByLocation is SubscriptionUsages.ArmQuotaListActionSync<QuotaListResult>;
+  usages is SubscriptionUsages.ArmQuotaListActionSync<QuotaListResult>;
 }
 
 @doc("Describes Resource Quota")
