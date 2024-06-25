@@ -74,6 +74,7 @@ model LocationCollectionParameters<T extends Azure.ResourceManager.Foundations.R
 @segmentOf(TResource)
 @armRenameListByOperation(TResource, TParentName, TParentFriendlyName) // This must come before @armResourceList!
 @armResourceList(TResource)
+@doc("List NetworkDevice resources by location")
 op ArmLocResourceListByParent<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>,
