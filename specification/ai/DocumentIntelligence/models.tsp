@@ -18,18 +18,18 @@ union StringIndexType {
   string,
 
   @doc("""
-  User-perceived display character, or grapheme cluster, as defined by Unicode
-  8.0.0.
-  """)
+    User-perceived display character, or grapheme cluster, as defined by Unicode
+    8.0.0.
+    """)
   textElements: "textElements",
 
   @doc("Character unit represented by a single unicode code point.  Used by Python 3.")
   unicodeCodePoint: "unicodeCodePoint",
 
   @doc("""
-  Character unit represented by a 16-bit Unicode code unit.  Used by JavaScript,
-  Java, and .NET.
-  """)
+    Character unit represented by a 16-bit Unicode code unit.  Used by JavaScript,
+    Java, and .NET.
+    """)
   utf16CodeUnit: "utf16CodeUnit",
 }
 
@@ -41,9 +41,9 @@ union ContentFormat {
   text: "text",
 
   @doc("""
-  Markdown representation of the document content with section headings, tables,
-  etc.
-  """)
+    Markdown representation of the document content with section headings, tables,
+    etc.
+    """)
   markdown: "markdown",
 }
 
@@ -85,9 +85,9 @@ union DocumentSelectionMarkState {
   string,
 
   @doc("""
-  The selection mark is selected, often indicated by a check ✓ or cross X inside
-  the selection mark.
-  """)
+    The selection mark is selected, often indicated by a check ✓ or cross X inside
+    the selection mark.
+    """)
   "selected",
 
   @doc("The selection mark is not selected.")
@@ -279,9 +279,9 @@ union OperationKind {
   documentModelCompose: "documentModelCompose",
 
   @doc("""
-  Copy an existing document model to potentially a different resource, region, or
-  subscription.
-  """)
+    Copy an existing document model to potentially a different resource, region, or
+    subscription.
+    """)
   documentModelCopyTo: "documentModelCopyTo",
 
   @doc("Build a new custom classifier model.")
@@ -354,9 +354,9 @@ model AnalyzeDocumentRequest {
   urlSource?: url;
 
   @doc("""
-  Base64 encoding of the document to analyze.  Either urlSource or base64Source
-  must be specified.
-  """)
+    Base64 encoding of the document to analyze.  Either urlSource or base64Source
+    must be specified.
+    """)
   base64Source?: bytes;
 }
 
@@ -448,9 +448,9 @@ model AnalyzeResult {
   contentFormat?: ContentFormat;
 
   @doc("""
-  Concatenate string representation of all textual and visual elements in reading
-  order.
-  """)
+    Concatenate string representation of all textual and visual elements in reading
+    order.
+    """)
   content: string;
 
   @doc("Analyzed pages.")
@@ -491,9 +491,9 @@ model DocumentPage {
   pageNumber: int32;
 
   @doc("""
-  The general orientation of the content in clockwise direction, measured in
-  degrees between (-180, 180].
-  """)
+    The general orientation of the content in clockwise direction, measured in
+    degrees between (-180, 180].
+    """)
   @minValueExclusive(-180)
   @maxValue(180)
   angle?: float32;
@@ -507,9 +507,9 @@ model DocumentPage {
   height?: float32;
 
   @doc("""
-  The unit used by the width, height, and polygon properties. For images, the
-  unit is \"pixel\". For PDF, the unit is \"inch\".
-  """)
+    The unit used by the width, height, and polygon properties. For images, the
+    unit is \"pixel\". For PDF, the unit is \"inch\".
+    """)
   unit?: LengthUnit;
 
   @doc("Location of the page in the reading order concatenated content.")
@@ -522,9 +522,9 @@ model DocumentPage {
   selectionMarks?: DocumentSelectionMark[];
 
   @doc("""
-  Extracted lines from the page, potentially containing both textual and visual
-  elements.
-  """)
+    Extracted lines from the page, potentially containing both textual and visual
+    elements.
+    """)
   lines?: DocumentLine[];
 
   @doc("Extracted barcodes from the page.")
@@ -535,9 +535,9 @@ model DocumentPage {
 }
 
 @doc("""
-Contiguous region of the concatenated content property, specified as an offset
-and length.
-""")
+  Contiguous region of the concatenated content property, specified as an offset
+  and length.
+  """)
 model DocumentSpan {
   @doc("Zero-based index of the content represented by the span.")
   @minValue(0)
@@ -549,21 +549,21 @@ model DocumentSpan {
 }
 
 @doc("""
-A word object consisting of a contiguous sequence of characters.  For non-space
-delimited languages, such as Chinese, Japanese, and Korean, each character is
-represented as its own word.
-""")
+  A word object consisting of a contiguous sequence of characters.  For non-space
+  delimited languages, such as Chinese, Japanese, and Korean, each character is
+  represented as its own word.
+  """)
 model DocumentWord {
   @doc("Text content of the word.")
   content: string;
 
   // FIXME: No way to specify constraints on array elements without creating new scalar types.
   @doc("""
-  Bounding polygon of the word, with coordinates specified relative to the
-  top-left of the page. The numbers represent the x, y values of the polygon
-  vertices, clockwise from the left (-180 degrees inclusive) relative to the
-  element orientation.
-  """)
+    Bounding polygon of the word, with coordinates specified relative to the
+    top-left of the page. The numbers represent the x, y values of the polygon
+    vertices, clockwise from the left (-180 degrees inclusive) relative to the
+    element orientation.
+    """)
   polygon?: float32[];
 
   @doc("Location of the word in the reading order concatenated content.")
@@ -576,19 +576,19 @@ model DocumentWord {
 }
 
 @doc("""
-A selection mark object representing check boxes, radio buttons, and other
-elements indicating a selection.
-""")
+  A selection mark object representing check boxes, radio buttons, and other
+  elements indicating a selection.
+  """)
 model DocumentSelectionMark {
   @doc("State of the selection mark.")
   state: DocumentSelectionMarkState;
 
   @doc("""
-  Bounding polygon of the selection mark, with coordinates specified relative
-  to the top-left of the page. The numbers represent the x, y values of the
-  polygon vertices, clockwise from the left (-180 degrees inclusive) relative
-  to the element orientation.
-  """)
+    Bounding polygon of the selection mark, with coordinates specified relative
+    to the top-left of the page. The numbers represent the x, y values of the
+    polygon vertices, clockwise from the left (-180 degrees inclusive) relative
+    to the element orientation.
+    """)
   polygon?: float32[];
 
   @doc("Location of the selection mark in the reading order concatenated content.")
@@ -601,19 +601,19 @@ model DocumentSelectionMark {
 }
 
 @doc("""
-A content line object consisting of an adjacent sequence of content elements,
-such as words and selection marks.
-""")
+  A content line object consisting of an adjacent sequence of content elements,
+  such as words and selection marks.
+  """)
 model DocumentLine {
   @doc("Concatenated content of the contained elements in reading order.")
   content: string;
 
   @doc("""
-  Bounding polygon of the line, with coordinates specified relative to the
-  top-left of the page. The numbers represent the x, y values of the polygon
-  vertices, clockwise from the left (-180 degrees inclusive) relative to the
-  element orientation.
-  """)
+    Bounding polygon of the line, with coordinates specified relative to the
+    top-left of the page. The numbers represent the x, y values of the polygon
+    vertices, clockwise from the left (-180 degrees inclusive) relative to the
+    element orientation.
+    """)
   polygon?: float32[];
 
   @doc("Location of the line in the reading order concatenated content.")
@@ -629,11 +629,11 @@ model DocumentBarcode {
   value: string;
 
   @doc("""
-  Bounding polygon of the barcode, with coordinates specified relative to the
-  top-left of the page. The numbers represent the x, y values of the polygon
-  vertices, clockwise from the left (-180 degrees inclusive) relative to the
-  element orientation.
-  """)
+    Bounding polygon of the barcode, with coordinates specified relative to the
+    top-left of the page. The numbers represent the x, y values of the polygon
+    vertices, clockwise from the left (-180 degrees inclusive) relative to the
+    element orientation.
+    """)
   polygon?: float32[];
 
   @doc("Location of the barcode in the reading order concatenated content.")
@@ -654,11 +654,11 @@ model DocumentFormula {
   value: string;
 
   @doc("""
-  Bounding polygon of the formula, with coordinates specified relative to the
-  top-left of the page. The numbers represent the x, y values of the polygon
-  vertices, clockwise from the left (-180 degrees inclusive) relative to the
-  element orientation.
-  """)
+    Bounding polygon of the formula, with coordinates specified relative to the
+    top-left of the page. The numbers represent the x, y values of the polygon
+    vertices, clockwise from the left (-180 degrees inclusive) relative to the
+    element orientation.
+    """)
   polygon?: float32[];
 
   @doc("Location of the formula in the reading order concatenated content.")
@@ -671,9 +671,9 @@ model DocumentFormula {
 }
 
 @doc("""
-A paragraph object consisting with contiguous lines generally with common
-alignment and spacing.
-""")
+  A paragraph object consisting with contiguous lines generally with common
+  alignment and spacing.
+  """)
 model DocumentParagraph {
   @doc("Semantic role of the paragraph.")
   role?: ParagraphRole;
@@ -695,11 +695,11 @@ model BoundingRegion {
   pageNumber: int32;
 
   @doc("""
-  Bounding polygon on the page, or the entire page if not specified.
-  Coordinates specified relative to the top-left of the page. The numbers
-  represent the x, y values of the polygon vertices, clockwise from the left
-  (-180 degrees inclusive) relative to the element orientation.
-  """)
+    Bounding polygon on the page, or the entire page if not specified.
+    Coordinates specified relative to the top-left of the page. The numbers
+    represent the x, y values of the polygon vertices, clockwise from the left
+    (-180 degrees inclusive) relative to the element orientation.
+    """)
   polygon: float32[];
 }
 
@@ -848,15 +848,15 @@ model DocumentFootnote {
 }
 
 @doc("""
-An JSON pointer referencing an element of the document, such as paragraph,
-table, section, etc.
-""")
+  An JSON pointer referencing an element of the document, such as paragraph,
+  table, section, etc.
+  """)
 scalar DocumentElement extends string;
 
 @doc("""
-An object representing a form field with distinct field label (key) and field
-value (may be empty).
-""")
+  An object representing a form field with distinct field label (key) and field
+  value (may be empty).
+  """)
 model DocumentKeyValuePair {
   @doc("Field label of the key-value pair.")
   key: DocumentKeyValueElement;
@@ -888,9 +888,9 @@ model DocumentStyle {
   isHandwritten?: boolean;
 
   @doc("""
-  Visually most similar font from among the set of supported font families, with
-  fallback fonts following CSS convention (ex. 'Arial, sans-serif').
-  """)
+    Visually most similar font from among the set of supported font families, with
+    fallback fonts following CSS convention (ex. 'Arial, sans-serif').
+    """)
   similarFontFamily?: string;
 
   @doc("Font style.")
@@ -919,15 +919,15 @@ model DocumentStyle {
 @doc("An object representing the detected language for a given text span.")
 model DocumentLanguage {
   @doc("""
-  Detected language.  Value may an ISO 639-1 language code (ex. \"en\", \"fr\")
-  or BCP 47 language tag (ex. \"zh-Hans\").
-  """)
+    Detected language.  Value may an ISO 639-1 language code (ex. \"en\", \"fr\")
+    or BCP 47 language tag (ex. \"zh-Hans\").
+    """)
   locale: string;
 
   @doc("""
-  Location of the text elements in the concatenated content the language applies
-  to.
-  """)
+    Location of the text elements in the concatenated content the language applies
+    to.
+    """)
   spans: DocumentSpan[];
 
   @doc("Confidence of correctly identifying the language.")
@@ -1067,9 +1067,9 @@ model AddressValue {
   unit?: string;
 
   @doc("""
-  Districts or boroughs within a city, such as Brooklyn in New York City or City
-  of Westminster in London.
-  """)
+    Districts or boroughs within a city, such as Brooklyn in New York City or City
+    of Westminster in London.
+    """)
   cityDistrict?: string;
 
   @doc("Second-level administrative division used in certain locales.")
@@ -1099,15 +1099,15 @@ model BuildDocumentModelRequest {
   buildMode: DocumentBuildMode;
 
   @doc("""
-  Azure Blob Storage location containing the training data.  Either
-  azureBlobSource or azureBlobFileListSource must be specified.
-  """)
+    Azure Blob Storage location containing the training data.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
-  Azure Blob Storage file list specifying the training data.  Either
-  azureBlobSource or azureBlobFileListSource must be specified.
-  """)
+    Azure Blob Storage file list specifying the training data.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 
   @doc("List of key-value tag attributes associated with the document model.")
@@ -1172,18 +1172,18 @@ model AuthorizeCopyRequest {
 }
 
 @doc("""
-Authorization to copy a document model to the specified target resource and
-modelId.
-""")
+  Authorization to copy a document model to the specified target resource and
+  modelId.
+  """)
 model CopyAuthorization {
   @doc("ID of the target Azure resource where the document model should be copied to.")
   @extension("x-ms-azure-resource", true)
   targetResourceId: string;
 
   @doc("""
-  Location of the target Azure resource where the document model should be copied
-  to.
-  """)
+    Location of the target Azure resource where the document model should be copied
+    to.
+    """)
   targetResourceRegion: string;
 
   @doc("Identifier of the target document model.")
@@ -1268,15 +1268,15 @@ model DocumentModelDetails {
   buildMode?: DocumentBuildMode;
 
   @doc("""
-  Azure Blob Storage location containing the training data.  Either
-  azureBlobSource or azureBlobFileListSource must be specified.
-  """)
+    Azure Blob Storage location containing the training data.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
-  Azure Blob Storage file list specifying the training data.  Either
-  azureBlobSource or azureBlobFileListSource must be specified.
-  """)
+    Azure Blob Storage file list specifying the training data.  Either
+    azureBlobSource or azureBlobFileListSource must be specified.
+    """)
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 
   @doc("Supported document types.")
@@ -1348,17 +1348,17 @@ model ClassifierDocumentTypeDetails {
   sourceKind?: ContentSourceKind;
 
   @doc("""
-  Azure Blob Storage location containing the training data for a classifier
-  document type.  Either azureBlobSource or azureBlobFileListSource must be
-  specified.
-  """)
+    Azure Blob Storage location containing the training data for a classifier
+    document type.  Either azureBlobSource or azureBlobFileListSource must be
+    specified.
+    """)
   azureBlobSource?: AzureBlobContentSource;
 
   @doc("""
-  Azure Blob Storage file list specifying the training data for a classifier
-  document type.  Either azureBlobSource or azureBlobFileListSource must be
-  specified.
-  """)
+    Azure Blob Storage file list specifying the training data for a classifier
+    document type.  Either azureBlobSource or azureBlobFileListSource must be
+    specified.
+    """)
   azureBlobFileListSource?: AzureBlobFileListContentSource;
 }
 
@@ -1404,9 +1404,9 @@ model ClassifyDocumentRequest {
   urlSource?: url;
 
   @doc("""
-  Base64 encoding of the document to classify.  Either urlSource or base64Source
-  must be specified.
-  """)
+    Base64 encoding of the document to classify.  Either urlSource or base64Source
+    must be specified.
+    """)
   base64Source?: bytes;
 }
 
