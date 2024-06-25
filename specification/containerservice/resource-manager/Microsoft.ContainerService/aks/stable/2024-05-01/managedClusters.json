@@ -4598,6 +4598,21 @@
               "title": "Detects similar node pools and balances the number of nodes between them.",
               "description": "Valid values are 'true' and 'false'"
             },
+            "daemonset-eviction-for-empty-nodes": {
+              "type": "boolean",
+              "title": "DaemonSet pods will be gracefully terminated from empty nodes",
+              "description": "If set to true, all daemonset pods on empty nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted."
+            },
+            "daemonset-eviction-for-occupied-nodes": {
+              "type": "boolean",
+              "title": "DaemonSet pods will be gracefully terminated from non-empty nodes",
+              "description": "If set to true, all daemonset pods on occupied nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted."
+            },
+            "ignore-daemonsets-utilization": {
+              "type": "boolean",
+              "title": "Should CA ignore DaemonSet pods when calculating resource utilization for scaling down",
+              "description": "If set to true, the resources used by daemonset will be taken into account when making scaling down decisions."
+            },
             "expander": {
               "type": "string",
               "enum": [
