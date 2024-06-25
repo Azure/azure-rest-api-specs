@@ -4085,38 +4085,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the transformation."
-        },
-        "schemaRef": {
-          "type": "string",
-          "description": "Schema CR reference."
-        },
-        "enrich": {
-          "type": "array",
-          "description": "Enrich data from MQ State Store. Dataset references a key in MQ State Store.",
-          "default": [],
-          "items": {
-            "$ref": "#/definitions/DataFlowBuiltInTransformationEnrich"
-          },
-          "x-ms-identifiers": []
-        },
-        "filter": {
-          "type": "array",
-          "description": "Filters input record or datapoints based on condition.",
-          "default": [],
-          "items": {
-            "$ref": "#/definitions/DataFlowBuiltInTransformationFilter"
-          },
-          "x-ms-identifiers": []
-        },
-        "map": {
-          "type": "array",
-          "description": "Maps input to output message.",
-          "default": [],
-          "items": {
-            "$ref": "#/definitions/DataFlowBuiltInTransformationMap"
-          },
-          "x-ms-identifiers": []
+          "description": "Optional user provided name of the transformation.",
+          "maxLength": 64
         },
         "serializationFormat": {
           "type": "string",
@@ -4142,37 +4112,104 @@
               }
             ]
           }
+        },
+        "schemaRef": {
+          "type": "string",
+          "description": "Schema CR reference."
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Enrich data from MQ State Store. Dataset references a key in MQ State Store.",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/DataFlowBuiltInTransformationDataset"
+          },
+          "x-ms-identifiers": []
+        },
+        "filter": {
+          "type": "array",
+          "description": "Filters input record or datapoints based on condition.",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/DataFlowBuiltInTransformationFilter"
+          },
+          "x-ms-identifiers": []
+        },
+        "map": {
+          "type": "array",
+          "description": "Maps input to output message.",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/DataFlowBuiltInTransformationMap"
+          },
+          "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "name"
-      ]
+      }
     },
-    "DataFlowBuiltInTransformationEnrich": {
+    "DataFlowBuiltInTransformationDataset": {
       "type": "object",
-      "description": "DataFlow BuiltIn Transformation enrich properties",
+      "description": "DataFlow BuiltIn Transformation dataset properties",
       "properties": {
-        "condition": {
+        "id": {
+          "type": "string",
+          "description": "The id of the dataset.",
+          "maxLength": 64
+        },
+        "description": {
+          "type": "string",
+          "description": "A user provided optional description of the dataset.",
+          "maxLength": 256
+        },
+        "schemaRef": {
+          "type": "string",
+          "description": "The reference to the schema of this dataset."
+        },
+        "inputs": {
+          "type": "array",
+          "description": "List of fields for enriching from the MQ State Store.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expression": {
           "type": "string",
           "description": "Condition to enrich data from MQ State Store."
-        },
-        "dataset": {
-          "type": "string",
-          "description": "Dataset reference key in MQ State Store."
         }
       },
       "required": [
-        "condition",
-        "dataset"
+        "id",
+        "schemaRef",
+        "inputs",
+        "expression"
       ]
     },
     "DataFlowBuiltInTransformationFilter": {
       "type": "object",
       "description": "DataFlow BuiltIn Transformation filter properties",
       "properties": {
-        "condition": {
+        "type": {
           "type": "string",
-          "description": "Condition to filter data. Can reference input fields with {n} where n is the index of the input field starting from 1."
+          "description": "The type of dataflow operation.",
+          "default": "Filter",
+          "enum": [
+            "Filter"
+          ],
+          "x-ms-enum": {
+            "name": "FilterType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Filter",
+                "value": "Filter",
+                "description": "Filter type"
+              }
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "A user provided optional description of the filter.",
+          "maxLength": 256
         },
         "inputs": {
           "type": "array",
@@ -4180,11 +4217,15 @@
           "items": {
             "type": "string"
           }
+        },
+        "expression": {
+          "type": "string",
+          "description": "Condition to filter data. Can reference input fields with {n} where n is the index of the input field starting from 1."
         }
       },
       "required": [
-        "condition",
-        "inputs"
+        "inputs",
+        "expression"
       ]
     },
     "DataFlowBuiltInTransformationMap": {
@@ -4195,9 +4236,10 @@
           "$ref": "#/definitions/DataFlowMappingType",
           "description": "Type of transformation."
         },
-        "expression": {
+        "description": {
           "type": "string",
-          "description": "Modify the inputs field(s) to the final output field."
+          "description": "A user provided optional description of the mapping function.",
+          "maxLength": 256
         },
         "inputs": {
           "type": "array",
@@ -4205,6 +4247,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "expression": {
+          "type": "string",
+          "description": "Modify the inputs field(s) to the final output field."
         },
         "output": {
           "type": "string",
@@ -4220,6 +4266,11 @@
       "type": "object",
       "description": "DataFlow Destination Operation properties",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Optional user provided name of the destination.",
+          "maxLength": 64
+        },
         "endpointRef": {
           "type": "string",
           "description": "Reference to the Endpoint CR. Can be of MQTT, Kafka, Fabric, ADLS, ADX type."
@@ -5058,7 +5109,8 @@
       "enum": [
         "NewProperties",
         "Rename",
-        "Compute"
+        "Compute",
+        "PassThrough"
       ],
       "x-ms-enum": {
         "name": "DataFlowMappingType",
@@ -5078,6 +5130,11 @@
             "name": "Compute",
             "value": "Compute",
             "description": "Compute type"
+          },
+          {
+            "name": "PassThrough",
+            "value": "PassThrough",
+            "description": "Pass-through type"
           }
         ]
       }
@@ -5306,22 +5363,16 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the source."
+          "description": "Optional user provided name of the source.",
+          "maxLength": 64
         },
         "endpointRef": {
           "type": "string",
-          "description": "Reference to the Endpoint CR. Can only be of MQTT and Kafka type."
+          "description": "Reference to the Dataflow Endpoint resource. Can only be of MQTT and Kafka type."
         },
-        "schemaRef": {
+        "registryRef": {
           "type": "string",
-          "description": "Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match."
-        },
-        "locations": {
-          "type": "array",
-          "description": "List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.",
-          "items": {
-            "type": "string"
-          }
+          "description": "Reference to the resource in Azure Device Registry where the data in the endpoint originates from."
         },
         "serializationFormat": {
           "type": "string",
@@ -5341,10 +5392,20 @@
               }
             ]
           }
+        },
+        "schemaRef": {
+          "type": "string",
+          "description": "Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match."
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
-        "name",
         "endpointRef",
         "locations"
       ]
@@ -5501,6 +5562,24 @@
             "name": "CustomLocation",
             "value": "CustomLocation",
             "description": "CustomLocation type"
+          }
+        ]
+      }
+    },
+    "FilterType": {
+      "type": "string",
+      "description": "Filter Type properties",
+      "enum": [
+        "Filter"
+      ],
+      "x-ms-enum": {
+        "name": "FilterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Filter",
+            "value": "Filter",
+            "description": "Filter type"
           }
         ]
       }

@@ -63,15 +63,19 @@ model DataFlowOperation {
 
 @doc("DataFlow BuiltIn Transformation properties")
 model DataFlowBuiltInTransformation {
-  @doc("Name of the transformation.")
-  name: string;
+  @doc("Optional user provided name of the transformation.")
+  @maxLength(64)
+  name?: string;
+
+  @doc("Serialization format. Optional; defaults to JSON.")
+  serializationFormat?: TransformationSerializationFormat = TransformationSerializationFormat.Json;
 
   @doc("Schema CR reference.")
   schemaRef?: string;
 
   @doc("Enrich data from MQ State Store. Dataset references a key in MQ State Store.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  enrich?: DataFlowBuiltInTransformationEnrich[] = #[];
+  datasets?: DataFlowBuiltInTransformationDataset[] = #[];
 
   @doc("Filters input record or datapoints based on condition.")
   @OpenAPI.extension("x-ms-identifiers", [])
@@ -81,26 +85,50 @@ model DataFlowBuiltInTransformation {
   @OpenAPI.extension("x-ms-identifiers", [])
   map?: DataFlowBuiltInTransformationMap[] = #[];
 
-  @doc("Serialization format. Optional; defaults to JSON.")
-  serializationFormat?: TransformationSerializationFormat = TransformationSerializationFormat.Json;
 }
 
-@doc("DataFlow BuiltIn Transformation enrich properties")
-model DataFlowBuiltInTransformationEnrich {
-  @doc("Condition to enrich data from MQ State Store.")
-  condition: string;
+@doc("DataFlow BuiltIn Transformation dataset properties")
+model DataFlowBuiltInTransformationDataset {
+  @doc("The id of the dataset.")
+  @maxLength(64)
+  id: string;
 
-  @doc("Dataset reference key in MQ State Store.")
-  dataset: string;
+  @doc("A user provided optional description of the dataset.")
+  @maxLength(256)
+  description?: string;
+
+  @doc("The reference to the schema of this dataset.")
+  schemaRef: string;
+
+  @doc("List of fields for enriching from the MQ State Store.")
+  inputs: string[];
+
+  @doc("Condition to enrich data from MQ State Store.")
+  expression: string;
 }
 
 @doc("DataFlow BuiltIn Transformation filter properties")
 model DataFlowBuiltInTransformationFilter {
-  @doc("Condition to filter data. Can reference input fields with {n} where n is the index of the input field starting from 1.")
-  condition: string;
+  @doc("The type of dataflow operation.")
+  type?: FilterType = FilterType.Filter;
+
+  @doc("A user provided optional description of the filter.")
+  @maxLength(256)
+  description?: string;
 
   @doc("List of fields for filtering in JSON path expression.")
   inputs: string[];
+
+  @doc("Condition to filter data. Can reference input fields with {n} where n is the index of the input field starting from 1.")
+  expression: string;
+}
+
+@doc("Filter Type properties")
+union FilterType {
+  string,
+
+  @doc("Filter type")
+  Filter: "Filter"
 }
 
 @doc("DataFlow BuiltIn Transformation map properties")
@@ -108,11 +136,15 @@ model DataFlowBuiltInTransformationMap {
   @doc("Type of transformation.")
   type?: DataFlowMappingType;
 
-  @doc("Modify the inputs field(s) to the final output field.")
-  expression?: string;
+  @doc("A user provided optional description of the mapping function.")
+  @maxLength(256)
+  description?: string;
 
   @doc("List of fields for mapping in JSON path expression.")
   inputs: string[];
+
+  @doc("Modify the inputs field(s) to the final output field.")
+  expression?: string;
 
   @doc("Where and how the input fields to be organized in the output record.")
   output: string;
@@ -121,6 +153,7 @@ model DataFlowBuiltInTransformationMap {
 @doc("DataFlow type mapping properties")
 union DataFlowMappingType {
   string,
+
   @doc("New Properties type")
   NewProperties: "NewProperties",
 
@@ -129,6 +162,9 @@ union DataFlowMappingType {
 
   @doc("Compute type")
   Compute: "Compute",
+
+  @doc("Pass-through type")
+  PassThrough: "PassThrough"
 }
 
 @doc("Serialization Format properties")
@@ -152,6 +188,10 @@ union TransformationSerializationFormat {
 
 @doc("DataFlow Destination Operation properties")
 model DataFlowDestinationOperation {
+  @doc("Optional user provided name of the destination.")
+  @maxLength(64)
+  name?: string;
+
   @doc("Reference to the Endpoint CR. Can be of MQTT, Kafka, Fabric, ADLS, ADX type.")
   endpointRef: string;
 
@@ -162,18 +202,22 @@ model DataFlowDestinationOperation {
 
 @doc("DataFlow Source Operation properties")
 model DataFlowSourceOperation {
-  @doc("Name of the source.")
-  name: string;
+  @doc("Optional user provided name of the source.")
+  @maxLength(64)
+  name?: string;
 
-  @doc("Reference to the Endpoint CR. Can only be of MQTT and Kafka type.")
+  @doc("Reference to the Dataflow Endpoint resource. Can only be of MQTT and Kafka type.")
   endpointRef: string;
+
+  @doc("Reference to the resource in Azure Device Registry where the data in the endpoint originates from.")
+  registryRef?: string;
+
+  @doc("Serialization format. Optional; defaults to JSON.")
+  serializationFormat?: SourceSerializationFormat = SourceSerializationFormat.Json;
 
   @doc("Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match.")
   schemaRef?: string;
 
   @doc("List of source locations. Can be MQTT or Kafka topics. Supports wildcards # and +.")
   locations: string[];
-
-  @doc("Serialization format. Optional; defaults to JSON.")
-  serializationFormat?: SourceSerializationFormat = SourceSerializationFormat.Json;
 }
