@@ -2526,7 +2526,7 @@
       "enum": [
         "SystemAssignedManagedIdentity",
         "UserAssignedManagedIdentity",
-        "AccessToken",
+        "AccessTokenSecretName",
         "Sasl",
         "X509Credentials"
       ],
@@ -2545,8 +2545,8 @@
             "description": "UserAssignedManagedIdentity Option"
           },
           {
-            "name": "AccessToken",
-            "value": "AccessToken",
+            "name": "AccessTokenSecretName",
+            "value": "AccessTokenSecretName",
             "description": "AccessToken Option"
           },
           {
@@ -3587,6 +3587,7 @@
           "type": "array",
           "description": "Enrich data from Broker State Store. Dataset references a key in Broker State Store.",
           "default": [],
+          "maxItems": 1,
           "items": {
             "$ref": "#/definitions/DataFlowBuiltInTransformationDataset"
           },
@@ -3616,7 +3617,7 @@
       "type": "object",
       "description": "DataFlow BuiltIn Transformation dataset properties",
       "properties": {
-        "id": {
+        "key": {
           "type": "string",
           "description": "The id of the dataset.",
           "maxLength": 64
@@ -3639,12 +3640,11 @@
         },
         "expression": {
           "type": "string",
-          "description": "Condition to enrich data from Broker State Store."
+          "description": "Condition to enrich data from Broker State Store. Example: $1 < 0 || $1 > $2 (Assuming inputs section $1 and $2 are provided)"
         }
       },
       "required": [
-        "id",
-        "schemaRef",
+        "key",
         "inputs"
       ]
     },
@@ -3685,7 +3685,7 @@
         },
         "expression": {
           "type": "string",
-          "description": "Condition to filter data. Can reference input fields with {n} where n is the index of the input field starting from 1."
+          "description": "Condition to filter data. Can reference input fields with {n} where n is the index of the input field starting from 1. Example: $1 < 0 || $1 > $2 (Assuming inputs section $1 and $2 are provided)"
         }
       },
       "required": [
@@ -3715,7 +3715,7 @@
         },
         "expression": {
           "type": "string",
-          "description": "Modify the inputs field(s) to the final output field."
+          "description": "Modify the inputs field(s) to the final output field. Example: $1 * 2.2 (Assuming inputs section $1 is provided)"
         },
         "output": {
           "type": "string",
@@ -3740,18 +3740,14 @@
           "type": "string",
           "description": "Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type."
         },
-        "location": {
+        "dataDestination": {
           "type": "string",
-          "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription."
         }
       },
       "required": [
         "endpointRef",
-        "location"
+        "dataDestination"
       ]
     },
     "DataFlowEndpointAuthentication": {
@@ -3762,27 +3758,27 @@
           "$ref": "#/definitions/AuthenticationMethod",
           "description": "Mode of Authentication."
         },
-        "systemAssignedManagedIdentity": {
+        "systemAssignedManagedIdentitySettings": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationSystemAssignedManagedIdentity",
           "description": "System-assigned managed identity authentication."
         },
-        "userAssignedManagedIdentity": {
+        "userAssignedManagedIdentitySettings": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
           "description": "User-assigned managed identity authentication."
         },
-        "accessToken": {
+        "accessTokenSecretName": {
           "type": "string",
           "description": "SAS token authentication."
         },
-        "sasl": {
+        "saslSettings": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationSasl",
           "description": "SASL authentication."
         },
-        "serviceAccountToken": {
+        "serviceAccountTokenSettings": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationServiceAccountToken",
           "description": "Service Account Token authentication."
         },
-        "x509Credentials": {
+        "x509CredentialsSettings": {
           "$ref": "#/definitions/DataFlowEndpointAuthenticationX509",
           "description": "X.509 certificate authentication."
         }
@@ -4537,7 +4533,8 @@
         "NewProperties",
         "Rename",
         "Compute",
-        "PassThrough"
+        "PassThrough",
+        "BuiltInFunction"
       ],
       "x-ms-enum": {
         "name": "DataFlowMappingType",
@@ -4562,6 +4559,11 @@
             "name": "PassThrough",
             "value": "PassThrough",
             "description": "Pass-through type"
+          },
+          {
+            "name": "BuiltInFunction",
+            "value": "BuiltInFunction",
+            "description": "Built in function type"
           }
         ]
       }
@@ -4570,22 +4572,27 @@
       "type": "object",
       "description": "DataFlow Operation properties. NOTE - One only method is allowed to be used for one entry.",
       "properties": {
-        "builtInTransformation": {
+        "operationType": {
+          "$ref": "#/definitions/OperationType",
+          "description": "Type of operation."
+        },
+        "builtInTransformationSettings": {
           "$ref": "#/definitions/DataFlowBuiltInTransformation",
           "description": "Transformation configuration."
         },
-        "destination": {
+        "destinationSettings": {
           "$ref": "#/definitions/DataFlowDestinationOperation",
           "description": "Destination configuration."
         },
-        "source": {
+        "sourceSettings": {
           "$ref": "#/definitions/DataFlowSourceOperation",
           "description": "Source configuration."
         }
       },
       "required": [
-        "destination",
-        "source"
+        "operationType",
+        "destinationSettings",
+        "sourceSettings"
       ]
     },
     "DataFlowProfileProperties": {
@@ -4596,7 +4603,7 @@
           "$ref": "#/definitions/ProfileDiagnostics",
           "description": "Spec defines the desired identities of NBC diagnostics settings."
         },
-        "maxInstances": {
+        "instanceCount": {
           "type": "integer",
           "format": "int32",
           "description": "To manually scale the dataflow profile, specify the maximum number of instances you want to run.",
@@ -4771,7 +4778,7 @@
           "type": "string",
           "description": "Reference to the Dataflow Endpoint resource. Can only be of Broker and Kafka type."
         },
-        "registryRef": {
+        "assetRef": {
           "type": "string",
           "description": "Reference to the resource in Azure Device Registry where the data in the endpoint originates from."
         },
@@ -4798,7 +4805,7 @@
           "type": "string",
           "description": "Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match."
         },
-        "locations": {
+        "dataSource": {
           "type": "array",
           "description": "List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.",
           "items": {
@@ -4808,7 +4815,7 @@
       },
       "required": [
         "endpointRef",
-        "locations"
+        "dataSource"
       ]
     },
     "DiagnosticsLogs": {
@@ -5241,7 +5248,7 @@
           "type": "string",
           "description": "The open telemetry collector endpoint to export to."
         },
-        "exportInterval": {
+        "exportIntervalSecs": {
           "type": "integer",
           "format": "int32",
           "description": "How often to export the metrics to the open telemetry collector.",
@@ -5249,6 +5256,36 @@
           "minimum": 1,
           "maximum": 300
         }
+      }
+    },
+    "OperationType": {
+      "type": "string",
+      "description": "DataFlow Operation Type properties",
+      "enum": [
+        "Source",
+        "Destination",
+        "BuiltInTransformation"
+      ],
+      "x-ms-enum": {
+        "name": "OperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Source",
+            "value": "Source",
+            "description": "DataFlow Source Operation"
+          },
+          {
+            "name": "Destination",
+            "value": "Destination",
+            "description": "DataFlow Destination Operation"
+          },
+          {
+            "name": "BuiltInTransformation",
+            "value": "BuiltInTransformation",
+            "description": "DataFlow BuiltIn Transformation Operation"
+          }
+        ]
       }
     },
     "OperationalMode": {
@@ -5873,7 +5910,7 @@
             ]
           }
         },
-        "trustedCaCertificateConfigMap": {
+        "trustedCaCertificateConfigMapName": {
           "type": "string",
           "description": "Trusted CA certificate config map."
         }

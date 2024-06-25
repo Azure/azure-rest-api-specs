@@ -51,14 +51,31 @@ model DataFlowProperties {
 
 @doc("DataFlow Operation properties. NOTE - One only method is allowed to be used for one entry.")
 model DataFlowOperation {
+  @doc("Type of operation.")
+  operationType: OperationType;
+
   @doc("Transformation configuration.")
-  builtInTransformation?: DataFlowBuiltInTransformation;
+  builtInTransformationSettings?: DataFlowBuiltInTransformation;
 
   @doc("Destination configuration.")
-  destination: DataFlowDestinationOperation;
+  destinationSettings: DataFlowDestinationOperation;
 
   @doc("Source configuration.")
-  source: DataFlowSourceOperation;
+  sourceSettings: DataFlowSourceOperation;
+}
+
+@doc("DataFlow Operation Type properties")
+union OperationType {
+  string,
+
+  @doc("DataFlow Source Operation")
+  Source: "Source",
+
+  @doc("DataFlow Destination Operation")
+  Destination: "Destination",
+
+  @doc("DataFlow BuiltIn Transformation Operation")
+  BuiltInTransformation: "BuiltInTransformation",
 }
 
 @doc("DataFlow BuiltIn Transformation properties")
@@ -74,6 +91,7 @@ model DataFlowBuiltInTransformation {
   schemaRef?: string;
 
   @doc("Enrich data from Broker State Store. Dataset references a key in Broker State Store.")
+  @maxItems(1)
   @OpenAPI.extension("x-ms-identifiers", [])
   datasets?: DataFlowBuiltInTransformationDataset[] = #[];
 
@@ -90,19 +108,19 @@ model DataFlowBuiltInTransformation {
 model DataFlowBuiltInTransformationDataset {
   @doc("The id of the dataset.")
   @maxLength(64)
-  id: string;
+  key: string;
 
   @doc("A user provided optional description of the dataset.")
   @maxLength(256)
   description?: string;
 
   @doc("The reference to the schema of this dataset.")
-  schemaRef: string;
+  schemaRef?: string;
 
   @doc("List of fields for enriching from the Broker State Store.")
   inputs: string[];
 
-  @doc("Condition to enrich data from Broker State Store.")
+  @doc("Condition to enrich data from Broker State Store. Example: $1 < 0 || $1 > $2 (Assuming inputs section $1 and $2 are provided)")
   expression?: string;
 }
 
@@ -118,7 +136,7 @@ model DataFlowBuiltInTransformationFilter {
   @doc("List of fields for filtering in JSON path expression.")
   inputs: string[];
 
-  @doc("Condition to filter data. Can reference input fields with {n} where n is the index of the input field starting from 1.")
+  @doc("Condition to filter data. Can reference input fields with {n} where n is the index of the input field starting from 1. Example: $1 < 0 || $1 > $2 (Assuming inputs section $1 and $2 are provided)")
   expression: string;
 }
 
@@ -142,7 +160,7 @@ model DataFlowBuiltInTransformationMap {
   @doc("List of fields for mapping in JSON path expression.")
   inputs: string[];
 
-  @doc("Modify the inputs field(s) to the final output field.")
+  @doc("Modify the inputs field(s) to the final output field. Example: $1 * 2.2 (Assuming inputs section $1 is provided)")
   expression?: string;
 
   @doc("Where and how the input fields to be organized in the output record.")
@@ -164,6 +182,9 @@ union DataFlowMappingType {
 
   @doc("Pass-through type")
   PassThrough: "PassThrough",
+
+  @doc("Built in function type")
+  BuiltInFunction: "BuiltInFunction",
 }
 
 @doc("Serialization Format properties")
@@ -195,8 +216,7 @@ model DataFlowDestinationOperation {
   endpointRef: string;
 
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
-  @visibility("read", "create")
-  location: string;
+  dataDestination: string;
 }
 
 @doc("DataFlow Source Operation properties")
@@ -209,7 +229,7 @@ model DataFlowSourceOperation {
   endpointRef: string;
 
   @doc("Reference to the resource in Azure Device Registry where the data in the endpoint originates from.")
-  registryRef?: string;
+  assetRef?: string;
 
   @doc("Serialization format. Optional; defaults to JSON.")
   serializationFormat?: SourceSerializationFormat = SourceSerializationFormat.Json;
@@ -218,5 +238,5 @@ model DataFlowSourceOperation {
   schemaRef?: string;
 
   @doc("List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.")
-  locations: string[];
+  dataSource: string[];
 }

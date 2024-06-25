@@ -105,22 +105,22 @@ model DataFlowEndpointAuthentication {
   method: AuthenticationMethod;
 
   @doc("System-assigned managed identity authentication.")
-  systemAssignedManagedIdentity?: DataFlowEndpointAuthenticationSystemAssignedManagedIdentity;
+  systemAssignedManagedIdentitySettings?: DataFlowEndpointAuthenticationSystemAssignedManagedIdentity;
 
   @doc("User-assigned managed identity authentication.")
-  userAssignedManagedIdentity?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
+  userAssignedManagedIdentitySettings?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
 
   @doc("SAS token authentication.")
-  accessToken?: string;
+  accessTokenSecretName?: string;
 
   @doc("SASL authentication.")
-  sasl?: DataFlowEndpointAuthenticationSasl;
+  saslSettings?: DataFlowEndpointAuthenticationSasl;
 
   @doc("Service Account Token authentication.")
-  serviceAccountToken?: DataFlowEndpointAuthenticationServiceAccountToken;
+  serviceAccountTokenSettings?: DataFlowEndpointAuthenticationServiceAccountToken;
 
   @doc("X.509 certificate authentication.")
-  x509Credentials?: DataFlowEndpointAuthenticationX509;
+  x509CredentialsSettings?: DataFlowEndpointAuthenticationX509;
 }
 
 @doc("Authentication Mode properties")
@@ -134,7 +134,7 @@ union AuthenticationMethod {
   UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
 
   @doc("AccessToken Option")
-  AccessToken: "AccessToken",
+  AccessTokenSecretName: "AccessTokenSecretName",
 
   @doc("Sasl Option")
   Sasl: "Sasl",

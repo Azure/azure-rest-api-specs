@@ -90,7 +90,7 @@ model OpenTelemetryExportConfig {
   @doc("How often to export the metrics to the open telemetry collector.")
   @minValue(1)
   @maxValue(300)
-  exportInterval?: int32 = 30;
+  exportIntervalSecs?: int32 = 30;
 }
 
 @doc("Diagnostic Self tracing properties")
@@ -123,7 +123,7 @@ model TlsProperties {
   mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("Trusted CA certificate config map.")
-  trustedCaCertificateConfigMap?: string;
+  trustedCaCertificateConfigMapName?: string;
 }
 
 @doc("Broker Protocol types")
