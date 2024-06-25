@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureStackHCI",
-    "version": "2024-02-01-preview",
+    "version": "2024-05-01-test-preview",
     "description": "Azure Stack HCI management service",
     "x-typespec-generated": [
       {
@@ -211,6 +211,9 @@
         "x-ms-examples": {
           "PutVirtualMachineInstanceWithGalleryImage": {
             "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gallery_Image.json"
+          },
+          "PutVirtualMachineInstanceWithGpu": {
+            "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Gpu.json"
           },
           "PutVirtualMachineInstanceWithMarketplaceGalleryImage": {
             "$ref": "./examples/VirtualMachineInstances_CreateOrUpdate_Put_Virtual_Machine_Instance_With_Marketplace_Gallery_Image.json"
@@ -3576,6 +3579,54 @@
         ]
       }
     },
+    "AttestDiskSecurityEncryptionTypeEnum": {
+      "type": "string",
+      "description": "Defines type of managed disk security encryption type from attestation token.",
+      "enum": [
+        "NonPersistedTPM",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "AttestDiskSecurityEncryptionTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NonPersistedTPM",
+            "value": "NonPersistedTPM",
+            "description": "Disk security encryption type is non-persisted Trusted Platform Module (TPM)"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Disk security encryption type is unknown"
+          }
+        ]
+      }
+    },
+    "AttestHWPlatformEnum": {
+      "type": "string",
+      "description": "Defines type of hardware platform from attestation token.",
+      "enum": [
+        "SEVSNP",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "AttestHWPlatformEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SEVSNP",
+            "value": "SEVSNP",
+            "description": "AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "AttestHWPlatform is unknown"
+          }
+        ]
+      }
+    },
     "AttestHealthStatusEnum": {
       "type": "string",
       "description": "The health status of attestation validation and parsing",
@@ -3814,6 +3865,16 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual machine instance.",
+          "readOnly": true
+        },
+        "attestHardwarePlatform": {
+          "$ref": "#/definitions/AttestHWPlatformEnum",
+          "description": "The hardware platform information from attestation token. This only applies to Confidential VM.",
+          "readOnly": true
+        },
+        "attestDiskSecurityEncryptionType": {
+          "$ref": "#/definitions/AttestDiskSecurityEncryptionTypeEnum",
+          "description": "The managed disk security encryption type from attestation token. This only applies to Confidential VM.",
           "readOnly": true
         }
       }
@@ -4162,6 +4223,30 @@
         }
       }
     },
+    "GpuAssignmentTypeEnum": {
+      "type": "string",
+      "description": "Gpu Assignment types",
+      "enum": [
+        "GpuDDA",
+        "GpuP"
+      ],
+      "x-ms-enum": {
+        "name": "GpuAssignmentTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GpuDDA",
+            "value": "GpuDDA",
+            "description": "Attach Graphics Processing Unit (GPU) using Discrete Device Assignment (DDA)"
+          },
+          {
+            "name": "GpuP",
+            "value": "GpuP",
+            "description": "Attach Graphics Processing Unit (GPU) using GPU Partitioning"
+          }
+        ]
+      }
+    },
     "GuestAgent": {
       "type": "object",
       "description": "Defines the GuestAgent.",
@@ -4296,6 +4381,14 @@
           "type": "integer",
           "format": "int64",
           "description": "RAM in MB for the virtual machine instance"
+        },
+        "virtualMachineGPUs": {
+          "type": "array",
+          "description": "virtualMachineGPUs - updated list of GPUs on the virtual machine instance",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -5524,6 +5617,24 @@
         }
       }
     },
+    "SecurityEncryptionType": {
+      "type": "string",
+      "description": "Encryption type of the managed disk enum.",
+      "enum": [
+        "NonPersistedTPM"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NonPersistedTPM",
+            "value": "NonPersistedTPM",
+            "description": "Non-persisted TPM encryption type"
+          }
+        ]
+      }
+    },
     "SecurityRule": {
       "type": "object",
       "description": "Security Rule resource.",
@@ -6124,6 +6235,16 @@
         }
       }
     },
+    "VMDiskSecurityProfile": {
+      "type": "object",
+      "description": "Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs",
+      "properties": {
+        "securityEncryptionType": {
+          "$ref": "#/definitions/SecurityEncryptionType",
+          "description": "Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs."
+        }
+      }
+    },
     "VirtualHardDisk": {
       "type": "object",
       "description": "The virtual hard disk resource definition.",
@@ -6387,6 +6508,16 @@
         "value"
       ]
     },
+    "VirtualMachineInstanceManagedDiskParameters": {
+      "type": "object",
+      "description": "The parameters of a managed disk.",
+      "properties": {
+        "securityProfile": {
+          "$ref": "#/definitions/VMDiskSecurityProfile",
+          "description": "Specifies the security profile for the managed disk."
+        }
+      }
+    },
     "VirtualMachineInstanceProperties": {
       "type": "object",
       "description": "Properties under the virtual machine instance resource",
@@ -6613,6 +6744,14 @@
         "dynamicMemoryConfig": {
           "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig",
           "description": "Dynamic memory config"
+        },
+        "virtualMachineGPUs": {
+          "type": "array",
+          "description": "virtualMachineGPUs - list of gpus to be attached to the virtual machine instance",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6636,6 +6775,28 @@
           "description": "Defines the amount of extra memory that should be reserved for a virtual machine instance at runtime, as a percentage of the total memory that the virtual machine instance is thought to need. This only applies to virtual systems with dynamic memory enabled. This property can be in the range of 5 to 2000."
         }
       }
+    },
+    "VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU": {
+      "type": "object",
+      "description": "GPU properties - describes the GPU configuration.",
+      "properties": {
+        "assignmentType": {
+          "$ref": "#/definitions/GpuAssignmentTypeEnum",
+          "description": "GPU assignment type"
+        },
+        "partitionSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size of gpu partition in MB for GPU-P"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the GPU"
+        }
+      },
+      "required": [
+        "assignmentType"
+      ]
     },
     "VirtualMachineInstancePropertiesNetworkProfile": {
       "type": "object",
@@ -6820,6 +6981,10 @@
         "osType": {
           "$ref": "#/definitions/OperatingSystemTypes",
           "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux."
+        },
+        "managedDisk": {
+          "$ref": "#/definitions/VirtualMachineInstanceManagedDiskParameters",
+          "description": "The managed disk parameters."
         }
       }
     },
