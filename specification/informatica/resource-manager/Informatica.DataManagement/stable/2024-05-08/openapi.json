@@ -271,6 +271,10 @@
               "$ref": "#/definitions/InformaticaOrganizationResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -681,6 +685,10 @@
               "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1371,11 +1379,7 @@
         "properties": {
           "$ref": "#/definitions/OrganizationProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1521,11 +1525,7 @@
         "properties": {
           "$ref": "#/definitions/InformaticaServerlessRuntimeProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1605,7 +1605,6 @@
         }
       },
       "required": [
-        "marketplaceSubscriptionId",
         "offerDetails"
       ]
     },
@@ -2231,24 +2230,6 @@
           "description": "Phone number of the user used by for contacting them if needed",
           "maxLength": 40
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Enum representing the versions.",
-      "enum": [
-        "2024-05-08"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_05_08",
-            "value": "2024-05-08",
-            "description": "The 2024-05-08 API version."
-          }
-        ]
       }
     },
     "email": {
