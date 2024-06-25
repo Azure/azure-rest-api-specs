@@ -4028,10 +4028,6 @@
         "name": {
           "type": "string",
           "description": "name of issuer."
-        },
-        "namespace": {
-          "type": "string",
-          "description": "Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace."
         }
       },
       "required": [
@@ -5407,28 +5403,6 @@
         "endpointRef",
         "locations"
       ]
-    },
-    "Diagnostics": {
-      "type": "object",
-      "description": "Diagnostic Setting properties",
-      "properties": {
-        "logs": {
-          "$ref": "#/definitions/DiagnosticsLogs",
-          "description": "The log settings."
-        },
-        "metrics": {
-          "$ref": "#/definitions/Metrics",
-          "description": "The metrics properties."
-        },
-        "selfCheck": {
-          "$ref": "#/definitions/SelfCheck",
-          "description": "The self check properties."
-        },
-        "traces": {
-          "$ref": "#/definitions/Traces",
-          "description": "The trace properties."
-        }
-      }
     },
     "DiagnosticsLogs": {
       "type": "object",

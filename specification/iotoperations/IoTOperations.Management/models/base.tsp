@@ -50,21 +50,6 @@ union OperationalMode {
   Disabled: "Disabled",
 }
 
-@doc("Diagnostic Setting properties")
-model Diagnostics {
-  @doc("The log settings.")
-  logs?: DiagnosticsLogs;
-
-  @doc("The metrics properties.")
-  metrics?: Metrics;
-
-  @doc("The self check properties.")
-  selfCheck?: SelfCheck;
-
-  @doc("The trace properties.")
-  traces?: Traces;
-}
-
 @doc("Diagnostic Log properties")
 model DiagnosticsLogs {
   @doc("The open telemetry export configuration.")
@@ -168,9 +153,6 @@ model CertManagerIssuerRef {
 
   @doc("name of issuer.")
   name: string;
-
-  @doc("Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace.")
-  `namespace`?: string;
 }
 
 @doc("CertManagerIssuerKind properties")
