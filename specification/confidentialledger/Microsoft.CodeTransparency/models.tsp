@@ -269,14 +269,3 @@ model CodeTransparencyConfigurationPolicy {
   accepted_algorithms?: string[];
   accepted_did_issuers?: string[];
 }
-
-alias BodyParameter<
-  T,
-  TName extends valueof string = "body",
-  TDoc extends valueof string = "Body parameter."
-> = {
-  @doc(TDoc)
-  @friendlyName(TName)
-  @bodyRoot
-  body: T;
-};

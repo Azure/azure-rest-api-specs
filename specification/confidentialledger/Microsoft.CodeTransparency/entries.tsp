@@ -1,5 +1,3 @@
-import "./models.tsp";
-
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Rest;
@@ -24,7 +22,7 @@ op createEntry is Foundations.Operation<
 @doc("Get the status the entry operation")
 @route("/operations/{operationId}")
 op getEntryStatus is Foundations.Operation<
-  BodyParameter<OperationIdParameter>,
+  OperationIdParameter,
   GetOperationResult,
   ServiceTraits
 >;
@@ -42,7 +40,7 @@ op listEntryStatuses is Foundations.Operation<
 @doc("Get Entry with or without receipt embedded in its unprotected header")
 @route("/entries/{entryId}")
 op getEntry is Foundations.Operation<
-  BodyParameter<EmbedReceiptParameter>,
+  EmbedReceiptParameter,
   CoseEntry,
   ServiceTraits
 >;
@@ -51,7 +49,7 @@ op getEntry is Foundations.Operation<
 @doc("Get the receipt of an entry given a specific entry id.")
 @route("/entries/{entryId}/receipt")
 op getEntryReceipt is Foundations.Operation<
-  BodyParameter<EntryIdParameter>,
+  EntryIdParameter,
   RawEntry,
   ServiceTraits
 >;
@@ -60,7 +58,7 @@ op getEntryReceipt is Foundations.Operation<
 @doc("Historical query to get a list of entries of a given range")
 @route("/entries/txIds")
 op listEntryIds is Foundations.Operation<
-  BodyParameter<TransactionsRange>,
+  TransactionsRange,
   EntryIds,
   ServiceTraits,
   ServiceUnavailableError | Foundations.ErrorResponse
