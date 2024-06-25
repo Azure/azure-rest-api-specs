@@ -35,7 +35,7 @@ op createAssistant(...BodyParameter<AssistantCreationOptions>): Assistant;
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/assistants")
 op listAssistants(
-  ...BodyParameter<OpenAIListRequestOptions>,
+  ...OpenAIListRequestOptions,
 ): OpenAIPageableListOf<Assistant>;
 
 /**
