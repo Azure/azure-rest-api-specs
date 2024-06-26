@@ -89,6 +89,9 @@
         "x-ms-examples": {
           "Create an availability set.": {
             "$ref": "./examples/availabilitySetExamples/AvailabilitySet_Create.json"
+          },
+          "Create an availability set with Scheduled Event Policy.": {
+            "$ref": "./examples/availabilitySetExamples/AvailabilitySet_Create_WithScheduledEventProfile.json"
           }
         }
       },
@@ -439,6 +442,10 @@
           },
           "x-ms-identifiers": [],
           "description": "The resource status information."
+        },
+        "scheduledEventsPolicy": {
+          "$ref": "./computeRPCommon.json#/definitions/ScheduledEventsPolicy",
+          "description": "Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the availability set."
         }
       },
       "description": "The instance view of a resource."
