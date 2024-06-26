@@ -1491,6 +1491,23 @@
         }
       }
     },
+    "AzureAppConfigProperties": {
+      "x-ms-discriminator-value": "AppConfig",
+      "type": "object",
+      "description": "The resource properties when type is Azure App Configuration",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourcePropertiesBase"
+        }
+      ],
+      "properties": {
+        "connectWithExtension": {
+          "x-nullable": true,
+          "description": "True if connection enables app configuration extension.",
+          "type": "boolean"
+        }
+      }
+    },
     "ConfluentBootstrapServer": {
       "x-ms-discriminator-value": "ConfluentBootstrapServer",
       "type": "object",
