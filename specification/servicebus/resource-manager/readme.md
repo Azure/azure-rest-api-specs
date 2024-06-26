@@ -261,32 +261,19 @@ See configuration in [readme.java.md](./readme.java.md)
 
 ``` yaml
 directive:
-  - suppress: ConsistentPatchProperties
-    from: namespace-preview.json
-    reason: Not a mandatory check
-
   - suppress: ResourceNameRestriction
     from: namespace-preview.json
-    reason: Not a mandatory check
+    reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions.
   
   - suppress: ResourceNameRestriction
     from: AuthorizationRules.json
-    reason: Not a mandatory check
-  - suppress: PathResourceTypeNameCamelCase
-    from: AuthorizationRules.json
-    reason: Not a mandatory check
+    reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions.
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: AuthorizationRules.json
-    reason: Not a mandatory check
+    reason: Authorization rules are not tracked resources.
   - suppress: PutResponseCodes
     from: AuthorizationRules.json
-    reason: Not a mandatory check
-  - suppress: TrackedResourcePatchOperation
-    from: AuthorizationRules.json
-    reason: Not a mandatory check
-  - suppress: SystemDataDefinitionsCommonTypes
-    from: AuthorizationRules.json
-    reason: Not a mandatory check
+    reason: Breaking change in order to change the API response code.
 ```
 
 
