@@ -151,7 +151,7 @@
           "description": "The chat message id"
         },
         "senderCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the sender"
         },
         "senderDisplayName": {
@@ -192,7 +192,7 @@
           "description": "The chat message id"
         },
         "senderCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the sender"
         },
         "senderDisplayName": {
@@ -284,11 +284,11 @@
           "description": "The time at which the user was added to the thread"
         },
         "addedByCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who added the user"
         },
         "participantAdded": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties",
           "description": "The details of the user who was added"
         },
         "version": {
@@ -318,11 +318,11 @@
           "description": "The time at which the user was added to the thread"
         },
         "addedByCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who added the user"
         },
         "participantAdded": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties",
           "description": "The details of the user who was added"
         }
       },
@@ -347,11 +347,11 @@
           "description": "The time at which the user was removed to the thread"
         },
         "removedByCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who removed the user"
         },
         "participantRemoved": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties",
           "description": "The details of the user who was removed"
         },
         "version": {
@@ -381,11 +381,11 @@
           "description": "The time at which the user was removed to the thread"
         },
         "removedByCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who removed the user"
         },
         "participantRemoved": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties",
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties",
           "description": "The details of the user who was removed"
         }
       },
@@ -405,7 +405,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
       "properties": {
         "createdByCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who created the thread"
         },
         "properties": {
@@ -424,7 +424,7 @@
           "type": "array",
           "description": "The list of properties of participants who are part of the thread",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
+            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
           "x-ms-identifiers": []
         }
@@ -446,7 +446,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
       "properties": {
         "createdByCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who created the thread"
         },
         "properties": {
@@ -465,7 +465,7 @@
           "type": "array",
           "description": "The list of properties of participants who are part of the thread",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsChatThreadParticipantProperties"
+            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
           "x-ms-identifiers": []
         }
@@ -487,7 +487,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.",
       "properties": {
         "deletedByCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who deleted the thread"
         },
         "deleteTime": {
@@ -584,7 +584,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
       "properties": {
         "editedByCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who updated the thread properties"
         },
         "editTime": {
@@ -622,7 +622,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
       "properties": {
         "editedByCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who updated the thread properties"
         },
         "editTime": {
@@ -660,7 +660,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.",
       "properties": {
         "deletedByCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who deleted the thread"
         },
         "deleteTime": {
@@ -1028,11 +1028,11 @@
           "description": "The message id"
         },
         "status": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageDeliveryStatus",
+          "$ref": "#/definitions/AcsMessageDeliveryStatus",
           "description": "The updated message status"
         },
         "channelType": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageChannelKind",
+          "$ref": "#/definitions/AcsMessageChannelKind",
           "description": "The updated message channel type",
           "x-ms-client-name": "channelKind"
         }
@@ -1164,25 +1164,25 @@
           "description": "The message content"
         },
         "channelType": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageChannelKind",
+          "$ref": "#/definitions/AcsMessageChannelKind",
           "description": "The message channel type",
           "x-ms-client-name": "channelKind"
         },
         "media": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageMediaContent",
+          "$ref": "#/definitions/AcsMessageMediaContent",
           "description": "The received message media content",
           "x-ms-client-name": "mediaContent"
         },
         "context": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageContext",
+          "$ref": "#/definitions/AcsMessageContext",
           "description": "The received message context"
         },
         "button": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageButtonContent",
+          "$ref": "#/definitions/AcsMessageButtonContent",
           "description": "The received message button content"
         },
         "interactive": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageInteractiveContent",
+          "$ref": "#/definitions/AcsMessageInteractiveContent",
           "description": "The received message interactive content",
           "x-ms-client-name": "interactiveContent"
         }
@@ -1394,7 +1394,7 @@
           "type": "array",
           "description": "Router Job Classification Failed Errors",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterCommunicationError"
+            "$ref": "#/definitions/AcsRouterCommunicationError"
           },
           "x-ms-identifiers": []
         }
@@ -1413,7 +1413,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassified event",
       "properties": {
         "queueDetails": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterQueueDetails",
+          "$ref": "#/definitions/AcsRouterQueueDetails",
           "description": "Router Job Queue Info"
         },
         "classificationPolicyId": {
@@ -1429,7 +1429,7 @@
           "type": "array",
           "description": "Router Job Attached Worker Selector",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         }
@@ -1560,7 +1560,7 @@
           "type": "array",
           "description": "Router Job Queued Attached Worker Selector",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -1568,7 +1568,7 @@
           "type": "array",
           "description": "Router Job Queued Requested Worker Selector",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         }
@@ -1588,7 +1588,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobReceived event",
       "properties": {
         "jobStatus": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterJobStatus",
+          "$ref": "#/definitions/AcsRouterJobStatus",
           "description": "Router Job Received Job Status"
         },
         "classificationPolicyId": {
@@ -1604,7 +1604,7 @@
           "type": "array",
           "description": "Router Job Received Requested Worker Selectors",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -1643,7 +1643,7 @@
           "type": "array",
           "description": "Router Job Scheduling Failed Attached Worker Selector Expired",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -1651,7 +1651,7 @@
           "type": "array",
           "description": "Router Job Scheduling Failed Requested Worker Selector Expired",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -1792,7 +1792,7 @@
           "type": "array",
           "description": "Router Job Waiting For Activation Worker Selector Expired",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -1800,7 +1800,7 @@
           "type": "array",
           "description": "Router Job Waiting For Activation Requested Worker Selector Expired",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -1834,7 +1834,7 @@
           "type": "array",
           "description": "Router Job Worker Selectors Expired Requested Worker Selectors",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         },
@@ -1842,7 +1842,7 @@
           "type": "array",
           "description": "Router Job Worker Selectors Expired Attached Worker Selectors",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelector"
+            "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
           "x-ms-identifiers": []
         }
@@ -2411,7 +2411,7 @@
           "type": "array",
           "description": "List of details of delivery attempts made",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsSmsDeliveryAttemptProperties"
+            "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
           },
           "x-ms-identifiers": []
         },
