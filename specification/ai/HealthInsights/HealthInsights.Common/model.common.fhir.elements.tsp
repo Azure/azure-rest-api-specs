@@ -55,7 +55,7 @@ alias value_x = {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep is much as close to FHIR Spec"
 @doc("""
   Base for all elements
-  Based on [FHIR Element](https://www.hl7.org/fhir/datatypes.html#Element)
+  Based on [FHIR Element](https://www.hl7.org/fhir/R4/element.html)
   """)
 model Extension extends Element {
   @doc("Source of the definition for the extension code - a logical name or a URL.")
