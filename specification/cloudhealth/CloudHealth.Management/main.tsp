@@ -427,14 +427,14 @@ model EntityProperties {
 @doc("Alert configuration for an entity")
 model EntityAlerts {
   @doc("Alert configuration for unhealthy state")
-  unhealthy?: AlertConfigruation;
+  unhealthy?: AlertConfiguration;
 
   @doc("Alert configuration for degraded state")
-  degraded?: AlertConfigruation;
+  degraded?: AlertConfiguration;
 }
 
 @doc("Alert configuration details")
-model AlertConfigruation {
+model AlertConfiguration {
   @doc("The severity of triggered alert.")
   severity: AlertSeverity;
 
