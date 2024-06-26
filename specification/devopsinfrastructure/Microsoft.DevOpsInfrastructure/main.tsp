@@ -23,7 +23,6 @@ namespace Microsoft.DevOpsInfrastructure;
 enum Versions {
   /** 2024-04-04-preview preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-04-04-preview`,
 }
 
@@ -654,35 +653,20 @@ interface Sku {
   listByLocation is ArmListBySubscription<ResourceSku>;
 }
 
-/**
- * Paged response containing resources
- * @template Resource The type of the values returned in the paged response (must be a resource)
- */
-@doc("The response of a {name} list operation.", Quota)
-@friendlyName("{name}ListResult", Resource)
-model QuotaListResult is Azure.Core.Page<Quota>;
-
-@armResourceOperations(Location)
+@armResourceOperations
 interface SubscriptionUsages {
-  @autoRoute
-  @armResourceAction(Location)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Actions must be HTTP Post operations."
+  @action
+  @armProviderNameValue
   @get
   @armResourceList(Location)
   @doc("List Quota resources by subscription ID")
-  ArmQuotaListActionSync<TResponse>(
+  usages(
     ...SubscriptionIdParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.DevOpsInfrastructure",
-
-    ...LocationResourceParameter,
+    ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
+    ...LocationParameter,
     ...ApiVersionParameter,
-  ): ArmResponse<TResponse> | ErrorResponse;
-
-  @doc("List Quota resources by subscription ID")
-  usages is SubscriptionUsages.ArmQuotaListActionSync<QuotaListResult>;
+  ): ArmResponse<Page<Quota>> | ErrorResponse;
 }
 
 @doc("Describes Resource Quota")

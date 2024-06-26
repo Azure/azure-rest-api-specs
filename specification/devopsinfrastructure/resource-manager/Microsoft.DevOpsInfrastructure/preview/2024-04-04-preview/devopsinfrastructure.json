@@ -163,7 +163,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ResourceListResult"
+              "$ref": "#/definitions/PagedQuota"
             }
           },
           "default": {
@@ -1089,6 +1089,27 @@
         }
       }
     },
+    "PagedQuota": {
+      "type": "object",
+      "description": "Paged collection of Quota items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Quota items on this page",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Pool": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -1454,27 +1475,6 @@
         "status",
         "image",
         "imageVersion"
-      ]
-    },
-    "ResourceListResult": {
-      "type": "object",
-      "description": "The response of a Quota list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Quota items on this page",
-          "items": {
-            "$ref": "#/definitions/Quota"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ResourcePredictions": {
