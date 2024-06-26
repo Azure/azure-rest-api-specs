@@ -442,12 +442,12 @@ model AlertConfiguration {
   @minLength(1)
   description?: string;
 
-  @doc("List of action groups to be notified when the alert is triggered.")
+  @doc("List of action group resource IDs to be notified when the alert is triggered.")
   @maxItems(5)
   @minItems(1)
   actionGroupIds: armResourceIdentifier<[
     {
-      type: "microsoft.insights/actiongroups";
+      type: "Microsoft.Insights/actionGroups";
     }
   ]>[];
 }
