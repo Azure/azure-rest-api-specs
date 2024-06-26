@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.PortalServices",
-    "version": "2024-07-01-preview",
+    "version": "2024-04-01-preview",
     "description": "Allows creation and deletion of Azure portal extensions.",
     "x-typespec-generated": [
       {
@@ -96,11 +96,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalTenant_Compilefile_MaximumSet_Gen": {
-            "$ref": "./examples/PortalTenant_Compilefile_MaximumSet_Gen.json"
-          },
-          "PortalTenant_Compilefile_MinimumSet_Gen": {
-            "$ref": "./examples/PortalTenant_Compilefile_MinimumSet_Gen.json"
+          "Compiles a file using inline content.": {
+            "$ref": "./examples/PortalTenant_Compilefile.json"
           }
         }
       }
@@ -131,16 +128,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List the operations for the Microsoft.PortalServices provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -173,13 +167,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all portal extensions on the subscription": {
+            "$ref": "./examples/PortalExtensions_ListBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PortalExtensions_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_ListBySubscription_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -215,13 +209,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all portal extensions on the resourceGroup": {
+            "$ref": "./examples/PortalExtensions_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PortalExtensions_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_ListByResourceGroup_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -268,8 +262,11 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensions_Get_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_Get_MaximumSet_Gen.json"
+          "Get Extension: Declarative portal extension, Not Onboarded": {
+            "$ref": "./examples/PortalExtensions_Get_Get_Extension_Declarative_Portal_Extension_Not_Onboarded.json"
+          },
+          "Get Extension: Microsoft Extension, GA": {
+            "$ref": "./examples/PortalExtensions_Get_Get_Extension_Microsoft_Extension_Ga.json"
           }
         }
       },
@@ -323,10 +320,6 @@
               "$ref": "#/definitions/PortalExtension"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -341,15 +334,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update a portal extension": {
+            "$ref": "./examples/PortalExtensions_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PortalExtensions_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "PortalExtensions_Update",
@@ -403,8 +396,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensions_Update_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_Update_MaximumSet_Gen.json"
+          "Update a PortalExtension": {
+            "$ref": "./examples/PortalExtensions_Update.json"
           }
         }
       },
@@ -460,15 +453,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a portal extension": {
+            "$ref": "./examples/PortalExtensions_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PortalExtensions_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/alter": {
@@ -531,18 +524,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Alter portal extension source files": {
+            "$ref": "./examples/PortalExtensions_Alter.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PortalExtensions_Alter_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_Alter_MaximumSet_Gen.json"
-          },
-          "PortalExtensions_Alter_MinimumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_Alter_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/compileFile": {
@@ -598,8 +588,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensions_CompileFile_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_CompileFile_MaximumSet_Gen.json"
+          "Compile single extension source file": {
+            "$ref": "./examples/PortalExtensions_CompileFile.json"
           }
         }
       }
@@ -646,13 +636,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all deployments on the portal extension": {
+            "$ref": "./examples/PortalExtensionDeployments_ListByExtensions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PortalExtensionDeployments_ListByPortalExtension_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionDeployments_ListByPortalExtension_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -709,8 +699,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensionDeployments_Get_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionDeployments_Get_MaximumSet_Gen.json"
+          "Get a portal extension deployment": {
+            "$ref": "./examples/PortalExtensionDeployments_Get.json"
           }
         }
       },
@@ -773,10 +763,6 @@
               "$ref": "#/definitions/ExtensionDeployment"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -791,15 +777,21 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create Extension Deployment: From Version Resource Id": {
+            "$ref": "./examples/PortalExtensionDeployments_Create_Create_Extension_Deployment_From_Version_Resource_Id.json"
+          },
+          "Create Extension Deployment: Promote existing slot": {
+            "$ref": "./examples/PortalExtensionDeployments_Create_Create_Extension_Deployment_Promote_Existing_Slot.json"
+          },
+          "Create Extension Deployment: Single Stage": {
+            "$ref": "./examples/PortalExtensionDeployments_Create_Create_Extension_Deployment_Single_Stage.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PortalExtensionDeployments_Create_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionDeployments_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "PortalExtensionDeployments_Update",
@@ -863,8 +855,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensionDeployments_Update_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionDeployments_Update_MaximumSet_Gen.json"
+          "Update a portal extension deployment": {
+            "$ref": "./examples/PortalExtensionDeployments_Update.json"
           }
         }
       },
@@ -920,11 +912,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensionDeployments_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionDeployments_Delete_MaximumSet_Gen.json"
-          },
-          "PortalExtensionDeployments_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/PortalExtensionDeployments_Delete_MinimumSet_Gen.json"
+          "Delete a portal extension deployment": {
+            "$ref": "./examples/PortalExtensionDeployments_Delete.json"
           }
         }
       }
@@ -979,11 +968,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensionDeployments_Stop_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionDeployments_Stop_MaximumSet_Gen.json"
-          },
-          "PortalExtensionDeployments_Stop_MinimumSet_Gen": {
-            "$ref": "./examples/PortalExtensionDeployments_Stop_MinimumSet_Gen.json"
+          "Stop deployment": {
+            "$ref": "./examples/PortalExtensionDeployments_Stop.json"
           }
         }
       }
@@ -1054,15 +1040,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Export extension files": {
+            "$ref": "./examples/PortalExtensions_Export.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PortalExtensions_Export_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_Export_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/listSources": {
@@ -1108,8 +1094,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensions_ListSources_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensions_ListSources_MaximumSet_Gen.json"
+          "List sources of the extension": {
+            "$ref": "./examples/PortalExtensions_ListSources.json"
           }
         }
       }
@@ -1156,13 +1142,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all slots on the portal extension": {
+            "$ref": "./examples/PortalExtensionSlots_ListByExtensions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PortalExtensionSlots_ListByPortalExtension_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionSlots_ListByPortalExtension_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -1219,8 +1205,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensionSlots_Get_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionSlots_Get_MaximumSet_Gen.json"
+          "Get a portal extension slot": {
+            "$ref": "./examples/PortalExtensionSlots_Get.json"
           }
         }
       },
@@ -1283,10 +1269,6 @@
               "$ref": "#/definitions/ExtensionSlot"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1301,15 +1283,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates a slot with content from another slot": {
+            "$ref": "./examples/PortalExtensionSlots_CreateOrUpdate_Creates_A_Slot_With_Content_From_Another_Slot.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PortalExtensionSlots_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionSlots_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "PortalExtensionSlots_Update",
@@ -1373,8 +1355,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensionSlots_Update_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionSlots_Update_MaximumSet_Gen.json"
+          "Update a portal extension slot": {
+            "$ref": "./examples/PortalExtensionSlots_Update.json"
           }
         }
       },
@@ -1430,8 +1412,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensionSlots_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionSlots_Delete_MaximumSet_Gen.json"
+          "Delete a portal extension slot": {
+            "$ref": "./examples/PortalExtensionSlots_Delete.json"
           }
         }
       }
@@ -1478,13 +1460,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List all versions on the portal extension": {
+            "$ref": "./examples/PortalExtensionVersions_ListByExtensions.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PortalExtensionVersions_ListByPortalExtension_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionVersions_ListByPortalExtension_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -1541,8 +1523,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensionVersions_Get_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionVersions_Get_MaximumSet_Gen.json"
+          "Get a portal extension version": {
+            "$ref": "./examples/PortalExtensionVersions_Get.json"
           }
         }
       },
@@ -1605,10 +1587,6 @@
               "$ref": "#/definitions/ExtensionVersion"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1623,15 +1601,18 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create Extension Version from Extension": {
+            "$ref": "./examples/PortalExtensionVersions_Create_Create_Extension_Version_From_Extension.json"
+          },
+          "Create Extension Version from External Build Artifact": {
+            "$ref": "./examples/PortalExtensionVersions_Create_Create_Extension_Version_From_External_Build_Artifact.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PortalExtensionVersions_Create_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionVersions_Create_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "PortalExtensionVersions_Update",
@@ -1695,8 +1676,8 @@
           }
         },
         "x-ms-examples": {
-          "PortalExtensionVersions_Update_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionVersions_Update_MaximumSet_Gen.json"
+          "Update a portal extension version": {
+            "$ref": "./examples/PortalExtensionVersions_Update.json"
           }
         }
       },
@@ -1762,18 +1743,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a portal extension version": {
+            "$ref": "./examples/PortalExtensionVersions_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "PortalExtensionVersions_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/PortalExtensionVersions_Delete_MaximumSet_Gen.json"
-          },
-          "PortalExtensionVersions_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/PortalExtensionVersions_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1888,7 +1866,11 @@
         "properties": {
           "$ref": "#/definitions/ExtensionDeploymentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -1989,7 +1971,11 @@
         "properties": {
           "$ref": "#/definitions/ExtensionSlotProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -2060,7 +2046,11 @@
         "properties": {
           "$ref": "#/definitions/ExtensionVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -2235,7 +2225,11 @@
         "properties": {
           "$ref": "#/definitions/PortalExtensionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
