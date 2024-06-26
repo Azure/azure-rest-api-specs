@@ -70,7 +70,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "Delete successful."
@@ -87,7 +93,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       },
       "get": {
@@ -398,7 +404,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "Accepted."
@@ -415,7 +427,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       },
       "get": {
