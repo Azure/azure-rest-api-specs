@@ -131,7 +131,8 @@ directive:
       subject: MachineRunCommand
       verb: Set
     remove: true
-  - remove-operation: Machines_CreateOrUpdate
+
+  # we don't want user to interact with them / we don't support some operations
   - remove-operation: AgentVersion_List
   - remove-operation: AgentVersion_Get
   - remove-operation: HybridIdentityMetadata_Get
@@ -145,7 +146,8 @@ directive:
   - remove-operation: NetworkConfigurations_Get
   - remove-operation: NetworkConfigurations_Update
   - remove-operation: NetworkConfigurations_CreateOrUpdate
-  - remove-operation: NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope
+  - remove-operation: MachineRunCommands_Update #PATCH
+
 ```
 
 
