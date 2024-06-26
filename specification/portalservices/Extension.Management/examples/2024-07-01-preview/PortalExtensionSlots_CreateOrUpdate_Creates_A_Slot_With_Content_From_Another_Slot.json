@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "resource": {
+      "properties": {
+        "source": {
+          "kind": "CopySlot",
+          "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/myfeaturea"
+        }
+      },
+      "location": "eastus"
+    },
+    "portalExtensionName": "declarativeportalextension",
+    "resourceGroupName": "testRG",
+    "slotName": "otherslot",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/myfeaturea",
+        "location": "eastus"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "otherslot",
+        "type": "Microsoft.PortalServices/extensions/slots",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/otherslot",
+        "properties": {
+          "nextStage": "otherslot",
+          "provisioningState": "InProgress",
+          "source": {
+            "kind": "CopySlot",
+            "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/myfeaturea"
+          }
+        },
+        "tags": {},
+        "location": "eastus"
+      }
+    }
+  },
+  "operationId": "PortalExtensionSlots_CreateOrUpdate",
+  "title": "Creates a slot with content from another slot"
+}

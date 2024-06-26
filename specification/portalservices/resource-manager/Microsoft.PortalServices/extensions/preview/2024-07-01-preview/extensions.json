@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.PortalServices",
-    "version": "2024-04-01-preview",
+    "version": "2024-07-01-preview",
     "description": "Allows creation and deletion of Azure portal extensions.",
     "x-typespec-generated": [
       {
@@ -320,6 +320,10 @@
               "$ref": "#/definitions/PortalExtension"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -763,6 +767,10 @@
               "$ref": "#/definitions/ExtensionDeployment"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1269,6 +1277,10 @@
               "$ref": "#/definitions/ExtensionSlot"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1587,6 +1599,10 @@
               "$ref": "#/definitions/ExtensionVersion"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1866,11 +1882,7 @@
         "properties": {
           "$ref": "#/definitions/ExtensionDeploymentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1971,11 +1983,7 @@
         "properties": {
           "$ref": "#/definitions/ExtensionSlotProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2046,11 +2054,7 @@
         "properties": {
           "$ref": "#/definitions/ExtensionVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2225,11 +2229,7 @@
         "properties": {
           "$ref": "#/definitions/PortalExtensionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
