@@ -23,6 +23,7 @@ namespace Microsoft.DevOpsInfrastructure;
 enum Versions {
   /** 2024-04-04-preview preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-04-04-preview`,
 }
 
@@ -674,14 +675,13 @@ interface SubscriptionUsages {
 model Quota {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The name of the quota.")
-  @key("quotaName")
   @segment("usages")
   @visibility("read")
   @path
-  name: QuotaName;
+  name?: QuotaName;
 
   @doc("Fully qualified ARM resource id")
-  id: string;
+  id: armResourceIdentifier;
 
   @doc("The unit of usage measurement.")
   unit: string;
