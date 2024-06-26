@@ -419,6 +419,58 @@ model EntityProperties {
   @visibility("read")
   @doc("Health state of this entity")
   healthState?: HealthState;
+
+  @doc("Alert configuration for this entity")
+  alerts?: EntityAlerts;
+}
+
+@doc("Alert configuration for an entity")
+model EntityAlerts {
+  @doc("Alert configuration for unhealthy state")
+  unhealthy?: AlertConfigruation;
+
+  @doc("Alert configuration for degraded state")
+  degraded?: AlertConfigruation;
+}
+
+@doc("Alert configuration details")
+model AlertConfigruation {
+  @doc("The severity of triggered alert.")
+  severity: AlertSeverity;
+
+  @doc("The alert rule description.")
+  @maxLength(1000)
+  @minLength(1)
+  description?: string;
+
+  @doc("List of action groups to be notified when the alert is triggered.")
+  @maxItems(5)
+  @minItems(1)
+  actionGroupIds: armResourceIdentifier<[
+    {
+      type: "microsoft.insights/actiongroups";
+    }
+  ]>[];
+}
+
+@doc("Severity of an alert")
+union AlertSeverity {
+  string,
+
+  @doc("Critical")
+  Sev0: "Sev0",
+
+  @doc("Error")
+  Sev1: "Sev1",
+
+  @doc("Warning")
+  Sev2: "Sev2",
+
+  @doc("Informational")
+  Sev3: "Sev3",
+
+  @doc("Verbose")
+  Sev4: "Sev4",
 }
 
 @doc("Visual icon definition of an entity")
