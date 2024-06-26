@@ -425,10 +425,10 @@ model EntityProperties {
 
 @doc("Alert configuration for an entity")
 model EntityAlerts {
-  @doc("Alert configuration for unhealthy state")
+  @doc("Alert to be triggered on state change to unhealthy")
   unhealthy?: AlertConfiguration;
 
-  @doc("Alert configuration for degraded state")
+  @doc("Alert to be triggered on state change to degraded")
   degraded?: AlertConfiguration;
 }
 
