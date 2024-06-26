@@ -1,13 +1,11 @@
 parameters:
   "service-dir":
     default: "sdk/VideoTranslation"
-  "dependencies":
-    "additionalDirectories": []
-    default: ""
-
 emit:
   - "@azure-tools/typespec-autorest"
-
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
