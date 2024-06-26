@@ -31,7 +31,7 @@ enum Versions {
 }
 
 @doc("A DurableTaskService resource")
-model Namespace is TrackedResource<NamespaceProperties> {
+model Namespace is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
   @doc("The name of the service")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
   @key("namespaceName")
@@ -40,7 +40,7 @@ model Namespace is TrackedResource<NamespaceProperties> {
   @visibility("read", "create")
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @doc("Update namespace")
@@ -58,7 +58,7 @@ model NamespacePropertiesUpdate
   is OptionalProperties<UpdateableProperties<NamespaceProperties>>;
 
 model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
 
 @doc("Details of the Namespace.")
 model NamespaceProperties {
@@ -76,7 +76,7 @@ model NamespaceProperties {
 
 @doc("An Task Hub resource belonging to the namespace.")
 @parentResource(Namespace)
-model TaskHub is ProxyResource<TaskHubProperties> {
+model TaskHub is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
   @doc("Task Hub name")
   @key("taskHubName")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
@@ -129,6 +129,8 @@ interface TaskHubs {
   get is ArmResourceRead<TaskHub>;
   @doc("Create or update a Task Hub")
   createOrUpdate is ArmResourceCreateOrReplaceSync<TaskHub>;
+  @doc("Update a Task Hub")
+  update is ArmResourcePatchSync<TaskHub, TaskHubProperties>;
   @doc("Delete a Task Hub")
   delete is ArmResourceDeleteSync<TaskHub>;
   @doc("List Task Hubs")
