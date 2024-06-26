@@ -151,6 +151,7 @@ model VirtualMachineScaleSetOSProfile {
     repair disks on Azure Linux VMs using the VMAccess
     Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)
     """)
+  @visibility("create", "update")
   adminPassword?: string;
 
   /**
@@ -160,6 +161,7 @@ model VirtualMachineScaleSetOSProfile {
    * your VM, see [Using cloud-init to customize a Linux VM during
    * creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)
    */
+  @visibility("create", "update")
   customData?: string;
 
   /**
@@ -283,6 +285,7 @@ model AdditionalUnattendContent {
    * the specified path and component. The XML must be less than 4KB and must
    * include the root element for the setting or feature that is being inserted.
    */
+  @visibility("create", "update")
   content?: string;
 }
 
