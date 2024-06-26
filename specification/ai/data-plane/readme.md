@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-05'
 input-file:
-  - Microsoft.OpenAI.Assistants/OpenApiV3/2024-05-01-preview/servicebus.json
+  - OpenAI.Assistants/OpenApiV3/2024-05-01-preview/assistants_generated.yaml
 ```
 
 ### Suppression
