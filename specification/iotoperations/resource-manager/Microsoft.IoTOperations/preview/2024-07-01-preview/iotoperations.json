@@ -2639,13 +2639,9 @@
           "type": "string",
           "description": "Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes."
         },
-        "secretName": {
+        "secretRef": {
           "type": "string",
           "description": "Secret for storing server certificate. Any existing data will be overwritten. This is a reference to the secret through an identifying name, not the secret itself."
-        },
-        "secretNamespace": {
-          "type": "string",
-          "description": "Certificate K8S namespace. Omit to use current namespace."
         },
         "renewBefore": {
           "type": "string",
@@ -3756,7 +3752,7 @@
           "$ref": "#/definitions/DataFlowEndpointAuthenticationUserAssignedManagedIdentity",
           "description": "User-assigned managed identity authentication."
         },
-        "accessTokenSecretName": {
+        "accessTokenSecretRef": {
           "type": "string",
           "description": "SAS token authentication."
         },
@@ -3785,14 +3781,14 @@
           "$ref": "#/definitions/DataFlowEndpointAuthenticationSaslType",
           "description": "Type of SASL authentication. Can be PLAIN, SCRAM-SHA-256, or SCRAM-SHA-512."
         },
-        "tokenSecretName": {
+        "tokenSecretRef": {
           "type": "string",
           "description": "Token secret name."
         }
       },
       "required": [
         "saslType",
-        "tokenSecretName"
+        "tokenSecretRef"
       ]
     },
     "DataFlowEndpointAuthenticationSaslType": {
@@ -3878,13 +3874,13 @@
       "type": "object",
       "description": "DataFlowEndpoint Authentication X509 properties",
       "properties": {
-        "secretName": {
+        "secretRef": {
           "type": "string",
-          "description": "Secret name of the X.509 certificate."
+          "description": "Secret reference of the X.509 certificate."
         }
       },
       "required": [
-        "secretName"
+        "secretRef"
       ]
     },
     "DataFlowEndpointDataExplorer": {
@@ -4314,13 +4310,13 @@
       "type": "object",
       "description": "Local persistent volume endpoint properties",
       "properties": {
-        "persistentVolumeClaimName": {
+        "persistentVolumeClaimRef": {
           "type": "string",
           "description": "Persistent volume claim name."
         }
       },
       "required": [
-        "persistentVolumeClaimName"
+        "persistentVolumeClaimRef"
       ]
     },
     "DataFlowEndpointMqtt": {
@@ -5174,6 +5170,28 @@
         "port"
       ]
     },
+    "LocalKubernetesReference": {
+      "type": "object",
+      "description": "Kubernetes reference",
+      "properties": {
+        "apiGroup": {
+          "type": "string",
+          "description": "APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind is the type of resource being referenced"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name is the name of resource being referenced"
+        }
+      },
+      "required": [
+        "kind",
+        "name"
+      ]
+    },
     "MetricProperties": {
       "type": "object",
       "description": "Metric properties",
@@ -5929,7 +5947,7 @@
             ]
           }
         },
-        "trustedCaCertificateConfigMapName": {
+        "trustedCaCertificateConfigMapRef": {
           "type": "string",
           "description": "Trusted CA certificate config map."
         }
@@ -6059,7 +6077,7 @@
           "x-ms-identifiers": []
         },
         "dataSource": {
-          "$ref": "#/definitions/KubernetesReference",
+          "$ref": "#/definitions/LocalKubernetesReference",
           "description": "This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field."
         },
         "dataSourceRef": {
@@ -6126,17 +6144,13 @@
       "type": "object",
       "description": "X509 Certificate Authentication properties.",
       "properties": {
-        "secretName": {
+        "secretRef": {
           "type": "string",
           "description": "Kubernetes secret containing an X.509 client certificate. This is a reference to the secret through an identifying name, not the secret itself."
-        },
-        "secretNamespace": {
-          "type": "string",
-          "description": "Certificate K8S namespace. Omit to use current namespace."
         }
       },
       "required": [
-        "secretName"
+        "secretRef"
       ]
     }
   },

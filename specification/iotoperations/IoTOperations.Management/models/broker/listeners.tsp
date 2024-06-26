@@ -118,10 +118,7 @@ model AutomaticCertMethod {
   duration?: string;
 
   @doc("Secret for storing server certificate. Any existing data will be overwritten. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretName?: string;
-
-  @doc("Certificate K8S namespace. Omit to use current namespace.")
-  secretNamespace?: string;
+  secretRef?: string;
 
   @doc("When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   renewBefore?: string;

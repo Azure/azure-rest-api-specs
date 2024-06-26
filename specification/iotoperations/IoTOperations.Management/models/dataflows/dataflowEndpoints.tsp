@@ -111,7 +111,7 @@ model DataFlowEndpointAuthentication {
   userAssignedManagedIdentitySettings?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
 
   @doc("SAS token authentication.")
-  accessTokenSecretName?: string;
+  accessTokenSecretRef?: string;
 
   @doc("SASL authentication.")
   saslSettings?: DataFlowEndpointAuthenticationSasl;
@@ -288,7 +288,7 @@ union DataFlowEndpointKafkaPartitionStrategy {
 @doc("Local persistent volume endpoint properties")
 model DataFlowEndpointLocalStorage {
   @doc("Persistent volume claim name.")
-  persistentVolumeClaimName: string;
+  persistentVolumeClaimRef: string;
 }
 
 @doc("Broker endpoint properties")

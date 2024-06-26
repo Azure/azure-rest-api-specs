@@ -32,7 +32,7 @@ model DataFlowEndpointAuthenticationSasl {
   saslType: DataFlowEndpointAuthenticationSaslType;
 
   @doc("Token secret name.")
-  tokenSecretName: string;
+  tokenSecretRef: string;
 }
 
 @doc("DataFlowEndpoint Authentication Sasl Type properties")
@@ -57,8 +57,8 @@ model DataFlowEndpointAuthenticationServiceAccountToken {
 
 @doc("DataFlowEndpoint Authentication X509 properties")
 model DataFlowEndpointAuthenticationX509 {
-  @doc("Secret name of the X.509 certificate.")
-  secretName: string;
+  @doc("Secret reference of the X.509 certificate.")
+  secretRef: string;
 }
 
 /**
@@ -97,10 +97,7 @@ model BrokerAuthenticatorCustomAuth {
 @doc("X509 Certificate Authentication properties.")
 model X509ManualCertificate {
   @doc("Kubernetes secret containing an X.509 client certificate. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretName: string;
-
-  @doc("Certificate K8S namespace. Omit to use current namespace.")
-  secretNamespace?: string;
+  secretRef: string;
 }
 
 @doc("X509 for BrokerAuthentication.")

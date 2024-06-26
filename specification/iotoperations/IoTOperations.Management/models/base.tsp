@@ -131,7 +131,7 @@ model TlsProperties {
   mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("Trusted CA certificate config map.")
-  trustedCaCertificateConfigMapName?: string;
+  trustedCaCertificateConfigMapRef?: string;
 }
 
 @doc("Broker Protocol types")
@@ -147,6 +147,14 @@ union BrokerProtocolType {
 
 @doc("Kubernetes reference")
 model KubernetesReference {
+  ...LocalKubernetesReference;
+
+  @doc("Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace.")
+  `namespace`?: string;
+}
+
+@doc("Kubernetes reference")
+model LocalKubernetesReference {
   @doc("APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.")
   apiGroup?: string;
 
@@ -155,9 +163,6 @@ model KubernetesReference {
 
   @doc("Name is the name of resource being referenced")
   name: string;
-
-  @doc("Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace.")
-  `namespace`?: string;
 }
 
 @doc("Cert-Manager issuerRef properties")
