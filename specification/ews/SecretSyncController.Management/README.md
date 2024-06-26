@@ -13,9 +13,14 @@ Navigate to the root of the repo:
 cd <repo-root>
 ```
 
-Install the dependencies from the package-lock file (also installs [typespec](https://typespec.io/docs)):
+Install the dependencies from the package-lock file:
 ```
 npm ci
+```
+
+Install the [typespec](https://typespec.io/docs) compiler & CLI globally:
+```
+npm install -g @typespec/compiler
 ```
 
 Install the typespec depedencies:
@@ -33,3 +38,7 @@ Run the emitters (defined in `tspconfig.yaml`):
 ```
 tsp compile .
 ```
+
+### Examples
+
+The examples were generated using [oav](https://github.com/Azure/oav) as per instructions [here](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-rest-api-dev-process.md#4-prepare-and-submit-a-pull-request-for-reviewing).

@@ -15,12 +15,7 @@ namespace Microsoft.SecretSyncController;
 model AzureKeyVaultSecretProviderClass
     is TrackedResource<AzureKeyVaultSecretProviderClassProperties> {
     ...ResourceNameParameter<AzureKeyVaultSecretProviderClass>;
-
-    // Extended location is not included in TrackedResource yet
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-    @doc("Edge location of the AzureKeyVaultSecretProviderClass.")
-    @visibility("read", "create")
-    extendedLocation: ExtendedLocationProperty;
+    ...ExtendedLocationProperty;
 }
 
 @doc("The properties of the AzureKeyVaultSecretProviderClass.")
@@ -77,7 +72,7 @@ union AzureKeyVaultObjectType {
 }
 
 @armResourceOperations
-interface AzureKeyVaultSecretProviderClasss {
+interface AzureKeyVaultSecretProviderClasses {
     @doc("Gets the properties of an AzureKeyVaultSecretProviderClass instance.")
     get is ArmResourceRead<AzureKeyVaultSecretProviderClass>;
 

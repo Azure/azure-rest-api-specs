@@ -14,12 +14,7 @@ namespace Microsoft.SecretSyncController;
 @doc("The SecretSync resource.")
 model SecretSync is TrackedResource<SecretSyncProperties> {
     ...ResourceNameParameter<SecretSync>;
-
-    // Extended location is not included in TrackedResource yet
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-    @doc("Edge location of the SecretSync.")
-    @visibility("read", "create")
-    extendedLocation: ExtendedLocationProperty;
+    ...ExtendedLocationProperty;
 }
 
 @doc("The properties of the SecretSync instance.")
@@ -46,7 +41,7 @@ model SecretSyncProperties {
     @OpenAPI.extension("x-ms-identifiers", [])
     objectSecretMapping: KubernetesSecretObjectMapping[];
 
-    @doc("The ForceSynchronization field can be used to force a secret to synchronize. By changing the value in this field, a synchronisation operation is triggered for this SecretSync instance.")
+    @doc("The ForceSynchronization field can be used to force a secret to synchronize. By changing the value in this field, a synchronization operation is triggered for this SecretSync instance.")
     @pattern("^[A-Za-z0-9]([-A-Za-z0-9]+([-._a-zA-Z0-9]?[A-Za-z0-9])*)?")
     @maxLength(253)
     forceSynchronization?: string;
@@ -56,7 +51,7 @@ model SecretSyncProperties {
     status?: SecretSyncStatus;
 }
 
-@doc("Properties defining the mappting between a cloud secret store object and a Kubernetes Secret.")
+@doc("Properties defining the mapping between a cloud secret store object and a Kubernetes Secret.")
 model KubernetesSecretObjectMapping {
     // Doc needs work + add patterns - TODO #28520313 https://msazure.visualstudio.com/One/_workitems/edit/28520313
     @doc("sourcePath is the data source value of the secret defined in the Secret Provider Class. This matches the path of a file in the MountResponse returned from the provider.")
@@ -118,7 +113,7 @@ model SecretSyncCondition {
     @doc("status of the condition, one of True, False, Unknown.")
     status: string;
 
-    @doc("type of condition in CamelCase or in foo.example.com/CamelCase. --- Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to deconflict is important. The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)")
+    @doc("type of condition in CamelCase or in foo.example.com/CamelCase. --- Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to de-conflict is important. The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)")
     type: string;
 }
 
