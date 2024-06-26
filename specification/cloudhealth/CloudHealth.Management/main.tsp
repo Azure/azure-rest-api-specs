@@ -52,7 +52,6 @@ model HealthModel is TrackedResource<HealthModelProperties> {
   name: stringResourceName;
 
   ...ManagedServiceIdentityProperty;
-  ...ResourceSkuProperty;
 }
 
 @doc("HealthModel properties")
