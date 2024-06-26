@@ -3516,6 +3516,80 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualHardDisks/{virtualHardDiskName}/upload": {
+      "post": {
+        "operationId": "VirtualHardDisks_Upload",
+        "tags": [
+          "VirtualHardDisks"
+        ],
+        "description": "The operation to upload a virtual hard disk.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualHardDiskName",
+            "in": "path",
+            "description": "Name of the virtual hard disk",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualHardDisksUploadRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHardDisk"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UploadVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Upload.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -4088,6 +4162,18 @@
           "$ref": "#/definitions/GalleryImageStatus",
           "description": "The observed state of gallery images",
           "readOnly": true
+        },
+        "sourceVirtualMachineId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the source virtual machine from whose OS disk the gallery image is created.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/virtualMachineInstance"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -6334,6 +6420,10 @@
           "format": "int32",
           "description": "Physical sector in bytes"
         },
+        "downloadUrl": {
+          "type": "string",
+          "description": "URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly."
+        },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
@@ -6381,6 +6471,10 @@
         "provisioningStatus": {
           "$ref": "#/definitions/VirtualHardDiskStatusProvisioningStatus",
           "description": "Provisioning status of the vhd"
+        },
+        "uploadStatus": {
+          "$ref": "#/definitions/VirtualHardDiskStatusUploadStatus",
+          "description": "The upload status of the virtual hard disk"
         }
       },
       "x-ms-client-flatten": true
@@ -6396,6 +6490,17 @@
         "status": {
           "$ref": "#/definitions/Status",
           "description": "The status of the operation performed on the virtual hard disk [Succeeded, Failed, InProgress]"
+        }
+      }
+    },
+    "VirtualHardDiskStatusUploadStatus": {
+      "type": "object",
+      "description": "The upload status of the virtual hard disk",
+      "properties": {
+        "uploadedSizeInMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The uploaded sized of the virtual hard disk in MB"
         }
       }
     },
@@ -6424,6 +6529,19 @@
           }
         }
       }
+    },
+    "VirtualHardDisksUploadRequest": {
+      "type": "object",
+      "description": "Request for uploading virtual hard disk.",
+      "properties": {
+        "azureManagedDiskUploadUrl": {
+          "type": "string",
+          "description": "The Azure managed disk SAS URL to upload the virtual hard disk to."
+        }
+      },
+      "required": [
+        "azureManagedDiskUploadUrl"
+      ]
     },
     "VirtualMachineArmReference": {
       "type": "object",

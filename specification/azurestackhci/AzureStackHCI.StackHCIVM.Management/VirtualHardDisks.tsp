@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 
@@ -48,6 +49,7 @@ interface VirtualHardDisks {
   @doc("Lists all of the virtual hard disks in the specified subscription. Use the nextLink property in the response to get the next page of virtual hard disks.")
   listAll is ArmListBySubscription<VirtualHardDisk>;
 
+  @added(Versions.v2024_05_01_test_preview)
   @doc("The operation to upload a virtual hard disk.")
   upload is ArmResourceActionAsync<
     VirtualHardDisk,

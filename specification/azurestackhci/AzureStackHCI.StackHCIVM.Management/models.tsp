@@ -549,6 +549,7 @@ model GalleryImageProperties {
   @visibility("read")
   status?: GalleryImageStatus;
 
+  @added(Versions.v2024_05_01_test_preview)
   @doc("Resource ID of the source virtual machine from whose OS disk the gallery image is created.")
   sourceVirtualMachineId?: armResourceIdentifier<[
     {
@@ -1123,6 +1124,7 @@ model VirtualHardDiskProperties {
   @doc("Physical sector in bytes")
   physicalSectorBytes?: int32;
 
+  @added(Versions.v2024_05_01_test_preview)
   @doc("URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.")
   downloadUrl?: string;
 
@@ -1161,6 +1163,7 @@ model VirtualHardDiskStatus {
   @doc("Provisioning status of the vhd")
   provisioningStatus?: VirtualHardDiskStatusProvisioningStatus;
 
+  @added(Versions.v2024_05_01_test_preview)
   @doc("The upload status of the virtual hard disk")
   uploadStatus?: VirtualHardDiskStatusUploadStatus;
 }
@@ -1174,6 +1177,7 @@ model VirtualHardDiskStatusProvisioningStatus {
   status?: Status;
 }
 
+@added(Versions.v2024_05_01_test_preview)
 @doc("The upload status of the virtual hard disk")
 model VirtualHardDiskStatusUploadStatus {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
