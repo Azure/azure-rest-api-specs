@@ -696,6 +696,9 @@ model Quota {
   @path
   name: QuotaName;
 
+  @doc("Fully qualified ARM resource id")
+  id: string;
+
   @doc("The unit of usage measurement.")
   unit: string;
 

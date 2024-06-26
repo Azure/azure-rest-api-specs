@@ -1355,6 +1355,10 @@
           "description": "The name of the quota.",
           "readOnly": true
         },
+        "id": {
+          "type": "string",
+          "description": "Fully qualified ARM resource id"
+        },
         "unit": {
           "type": "string",
           "description": "The unit of usage measurement."
@@ -1372,6 +1376,7 @@
       },
       "required": [
         "name",
+        "id",
         "unit",
         "currentValue",
         "limit"
@@ -1460,8 +1465,7 @@
           "description": "The Quota items on this page",
           "items": {
             "$ref": "#/definitions/Quota"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
