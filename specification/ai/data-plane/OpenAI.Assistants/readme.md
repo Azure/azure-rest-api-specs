@@ -12,6 +12,16 @@ add-credentials: true
 openapi-type: data-plane
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: INVALID_TYPE
+    from: assistants_generated.json
+    where: $.responses[*].200.body.incomplete_details
+    reason: A bug in oav is preventing a x-nullable attribute on incomplete_details from being honored.
+```
+
 # Releases
 
 ## OpenAI.Assistants 2024-02-15-preview (generated)
