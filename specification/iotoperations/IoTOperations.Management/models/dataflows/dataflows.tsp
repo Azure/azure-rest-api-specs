@@ -87,7 +87,7 @@ model DataFlowBuiltInTransformation {
   @doc("Serialization format. Optional; defaults to JSON.")
   serializationFormat?: TransformationSerializationFormat = TransformationSerializationFormat.Json;
 
-  @doc("Schema CR reference.")
+  @doc("Reference to the schema that describes the output of the transformation.")
   schemaRef?: string;
 
   @doc("Enrich data from Broker State Store. Dataset references a key in Broker State Store.")
@@ -106,7 +106,7 @@ model DataFlowBuiltInTransformation {
 
 @doc("DataFlow BuiltIn Transformation dataset properties")
 model DataFlowBuiltInTransformationDataset {
-  @doc("The id of the dataset.")
+  @doc("The key of the dataset.")
   @maxLength(64)
   key: string;
 
@@ -114,7 +114,7 @@ model DataFlowBuiltInTransformationDataset {
   @maxLength(256)
   description?: string;
 
-  @doc("The reference to the schema of this dataset.")
+  @doc("The reference to the schema that describes the dataset. Allowed: JSON Schema/draft-7.")
   schemaRef?: string;
 
   @doc("List of fields for enriching from the Broker State Store.")
@@ -223,7 +223,7 @@ model DataFlowSourceOperation {
   @doc("Reference to the resource in Azure Device Registry where the data in the endpoint originates from.")
   assetRef?: string;
 
-  @doc("Serialization format. Optional; defaults to JSON.")
+  @doc("Content is a JSON Schema. Allowed: JSON Schema/draft-7.")
   serializationFormat?: SourceSerializationFormat = SourceSerializationFormat.Json;
 
   @doc("Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match.")

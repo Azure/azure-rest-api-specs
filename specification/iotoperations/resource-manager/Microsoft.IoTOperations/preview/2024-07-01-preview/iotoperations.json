@@ -3572,7 +3572,7 @@
         },
         "schemaRef": {
           "type": "string",
-          "description": "Schema CR reference."
+          "description": "Reference to the schema that describes the output of the transformation."
         },
         "datasets": {
           "type": "array",
@@ -3610,7 +3610,7 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The id of the dataset.",
+          "description": "The key of the dataset.",
           "maxLength": 64
         },
         "description": {
@@ -3620,7 +3620,7 @@
         },
         "schemaRef": {
           "type": "string",
-          "description": "The reference to the schema of this dataset."
+          "description": "The reference to the schema that describes the dataset. Allowed: JSON Schema/draft-7."
         },
         "inputs": {
           "type": "array",
@@ -4770,7 +4770,7 @@
         },
         "serializationFormat": {
           "type": "string",
-          "description": "Serialization format. Optional; defaults to JSON.",
+          "description": "Content is a JSON Schema. Allowed: JSON Schema/draft-7.",
           "default": "Json",
           "enum": [
             "Json"
