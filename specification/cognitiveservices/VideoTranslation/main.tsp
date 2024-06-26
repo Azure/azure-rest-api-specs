@@ -65,23 +65,46 @@ enum ApiVersions {
 
 @doc("Task status.")
 union Status {
+  string,
+
+  /** Not started status */
   NotStarted: "NotStarted",
+
+  /** Running status */
   Running: "Running",
+
+  /** Run succeeded status */
   Succeeded: "Succeeded",
+
+  /** Run failed status */
   Failed: "Failed",
+
+  /** Cancelled status */
   Canceled: "Canceled",
 }
 
 @doc("TTS voice kind.")
 union VoiceKind {
+  string,
+
+  /** TTS platform voice */
   PlatformVoice: "PlatformVoice",
+
+  /** TTS personal voice */
   PersonalVoice: "PersonalVoice",
 }
 
 @doc("Webvtt file kind.")
 union WebvttFileKind {
+  string,
+
+  /** Source locale plain text subtitle webvtt file */
   SourceLocaleSubtitle: "SourceLocaleSubtitle",
+
+  /** Target locale plain text subtitle webvtt file */
   TargetLocaleSubtitle: "TargetLocaleSubtitle",
+
+  /** Target locale metadata JSON webvtt file */
   MetadataJson: "MetadataJson",
 }
 
