@@ -2526,7 +2526,7 @@
       "enum": [
         "SystemAssignedManagedIdentity",
         "UserAssignedManagedIdentity",
-        "AccessTokenSecretName",
+        "AccessToken",
         "Sasl",
         "X509Credentials"
       ],
@@ -2545,8 +2545,8 @@
             "description": "UserAssignedManagedIdentity Option"
           },
           {
-            "name": "AccessTokenSecretName",
-            "value": "AccessTokenSecretName",
+            "name": "AccessToken",
+            "value": "AccessToken",
             "description": "AccessToken Option"
           },
           {
@@ -3549,11 +3549,6 @@
       "type": "object",
       "description": "DataFlow BuiltIn Transformation properties",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Optional user provided name of the transformation.",
-          "maxLength": 64
-        },
         "serializationFormat": {
           "type": "string",
           "description": "Serialization format. Optional; defaults to JSON.",
@@ -3731,11 +3726,6 @@
       "type": "object",
       "description": "DataFlow Destination Operation properties",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Optional user provided name of the destination.",
-          "maxLength": 64
-        },
         "endpointRef": {
           "type": "string",
           "description": "Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type."
@@ -4576,6 +4566,11 @@
           "$ref": "#/definitions/OperationType",
           "description": "Type of operation."
         },
+        "name": {
+          "type": "string",
+          "description": "Optional user provided name of the transformation.",
+          "maxLength": 64
+        },
         "builtInTransformationSettings": {
           "$ref": "#/definitions/DataFlowBuiltInTransformation",
           "description": "Transformation configuration."
@@ -4769,11 +4764,6 @@
       "type": "object",
       "description": "DataFlow Source Operation properties",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Optional user provided name of the source.",
-          "maxLength": 64
-        },
         "endpointRef": {
           "type": "string",
           "description": "Reference to the Dataflow Endpoint resource. Can only be of Broker and Kafka type."
@@ -4805,7 +4795,7 @@
           "type": "string",
           "description": "Schema CR reference. Data will be deserialized according to the schema, and dropped if it doesn't match."
         },
-        "dataSource": {
+        "dataSources": {
           "type": "array",
           "description": "List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.",
           "items": {
@@ -4815,7 +4805,7 @@
       },
       "required": [
         "endpointRef",
-        "dataSource"
+        "dataSources"
       ]
     },
     "DiagnosticsLogs": {
@@ -4823,7 +4813,7 @@
       "description": "Diagnostic Log properties",
       "properties": {
         "opentelemetryExportConfig": {
-          "$ref": "#/definitions/OpenTelemetryExportConfig",
+          "$ref": "#/definitions/OpenTelemetryLogExportConfig",
           "description": "The open telemetry export configuration."
         },
         "exportLogLevel": {
@@ -5248,7 +5238,7 @@
           "type": "string",
           "description": "The open telemetry collector endpoint to export to."
         },
-        "exportIntervalSecs": {
+        "exportIntervalSeconds": {
           "type": "integer",
           "format": "int32",
           "description": "How often to export the metrics to the open telemetry collector.",
@@ -5256,7 +5246,36 @@
           "minimum": 1,
           "maximum": 300
         }
-      }
+      },
+      "required": [
+        "otlpGrpcEndpoint"
+      ]
+    },
+    "OpenTelemetryLogExportConfig": {
+      "type": "object",
+      "description": "OpenTelemetry Log Export Configuration properties",
+      "properties": {
+        "otlpGrpcEndpoint": {
+          "type": "string",
+          "description": "The open telemetry collector endpoint to export to."
+        },
+        "exportIntervalSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How often to export the metrics to the open telemetry collector.",
+          "default": 30,
+          "minimum": 1,
+          "maximum": 300
+        },
+        "level": {
+          "type": "string",
+          "description": "The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.",
+          "default": "info"
+        }
+      },
+      "required": [
+        "otlpGrpcEndpoint"
+      ]
     },
     "OperationType": {
       "type": "string",

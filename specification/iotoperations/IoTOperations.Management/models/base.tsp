@@ -53,13 +53,32 @@ union OperationalMode {
 @doc("Diagnostic Log properties")
 model DiagnosticsLogs {
   @doc("The open telemetry export configuration.")
-  opentelemetryExportConfig?: OpenTelemetryExportConfig;
+  opentelemetryExportConfig?: OpenTelemetryLogExportConfig;
 
   @doc("The level of logs to export.")
   exportLogLevel?: string = "error";
 
   @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
   level?: string = "info";
+}
+
+@doc("OpenTelemetry Log Export Configuration properties")
+model OpenTelemetryLogExportConfig {
+  ...OpenTelemetryExportConfig;
+
+  @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
+  level?: string = "info";
+}
+
+@doc("OpenTelemetry Export Configuration properties")
+model OpenTelemetryExportConfig {
+  @doc("The open telemetry collector endpoint to export to.")
+  otlpGrpcEndpoint: string;
+
+  @doc("How often to export the metrics to the open telemetry collector.")
+  @minValue(1)
+  @maxValue(300)
+  exportIntervalSeconds?: int32 = 30;
 }
 
 @doc("Diagnostic Metrics properties")
@@ -80,17 +99,6 @@ model MetricProperties {
 
   @doc("The metrics settings for the resource.")
   metrics?: Metrics;
-}
-
-@doc("OpenTelemetry Export Configuration properties")
-model OpenTelemetryExportConfig {
-  @doc("The open telemetry collector endpoint to export to.")
-  otlpGrpcEndpoint?: string;
-
-  @doc("How often to export the metrics to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  exportIntervalSecs?: int32 = 30;
 }
 
 @doc("Diagnostic Self tracing properties")

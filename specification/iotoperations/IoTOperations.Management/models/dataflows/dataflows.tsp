@@ -54,6 +54,10 @@ model DataFlowOperation {
   @doc("Type of operation.")
   operationType: OperationType;
 
+  @doc("Optional user provided name of the transformation.")
+  @maxLength(64)
+  name?: string;
+
   @doc("Transformation configuration.")
   builtInTransformationSettings?: DataFlowBuiltInTransformation;
 
@@ -80,10 +84,6 @@ union OperationType {
 
 @doc("DataFlow BuiltIn Transformation properties")
 model DataFlowBuiltInTransformation {
-  @doc("Optional user provided name of the transformation.")
-  @maxLength(64)
-  name?: string;
-
   @doc("Serialization format. Optional; defaults to JSON.")
   serializationFormat?: TransformationSerializationFormat = TransformationSerializationFormat.Json;
 
@@ -208,10 +208,6 @@ union TransformationSerializationFormat {
 
 @doc("DataFlow Destination Operation properties")
 model DataFlowDestinationOperation {
-  @doc("Optional user provided name of the destination.")
-  @maxLength(64)
-  name?: string;
-
   @doc("Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type.")
   endpointRef: string;
 
@@ -221,10 +217,6 @@ model DataFlowDestinationOperation {
 
 @doc("DataFlow Source Operation properties")
 model DataFlowSourceOperation {
-  @doc("Optional user provided name of the source.")
-  @maxLength(64)
-  name?: string;
-
   @doc("Reference to the Dataflow Endpoint resource. Can only be of Broker and Kafka type.")
   endpointRef: string;
 
@@ -238,5 +230,5 @@ model DataFlowSourceOperation {
   schemaRef?: string;
 
   @doc("List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.")
-  dataSource: string[];
+  dataSources: string[];
 }

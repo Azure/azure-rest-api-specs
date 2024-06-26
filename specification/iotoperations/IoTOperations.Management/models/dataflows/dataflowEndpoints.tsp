@@ -134,7 +134,7 @@ union AuthenticationMethod {
   UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
 
   @doc("AccessToken Option")
-  AccessTokenSecretName: "AccessTokenSecretName",
+  AccessToken: "AccessToken",
 
   @doc("Sasl Option")
   Sasl: "Sasl",
