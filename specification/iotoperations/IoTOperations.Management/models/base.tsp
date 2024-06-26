@@ -55,9 +55,6 @@ model DiagnosticsLogs {
   @doc("The open telemetry export configuration.")
   opentelemetryExportConfig?: OpenTelemetryLogExportConfig;
 
-  @doc("The level of logs to export.")
-  exportLogLevel?: string = "error";
-
   @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
   level?: string = "info";
 }
