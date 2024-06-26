@@ -78,6 +78,12 @@
         "x-ms-examples": {
           "Operations_List": {
             "$ref": "./examples/Operations_List.json"
+          },
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -117,6 +123,12 @@
         "x-ms-examples": {
           "Namespaces_ListBySubscription": {
             "$ref": "./examples/Namespaces_ListBySubscription.json"
+          },
+          "Namespaces_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Namespaces_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Namespaces_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -159,6 +171,12 @@
         "x-ms-examples": {
           "Namespaces_ListByResourceGroup": {
             "$ref": "./examples/Namespaces_ListByResourceGroup.json"
+          },
+          "Namespaces_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Namespaces_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Namespaces_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -209,6 +227,12 @@
         "x-ms-examples": {
           "Namespaces_Get": {
             "$ref": "./examples/Namespaces_Get.json"
+          },
+          "Namespaces_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Namespaces_Get_MaximumSet_Gen.json"
+          },
+          "Namespaces_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -259,6 +283,10 @@
               "$ref": "#/definitions/Namespace"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -276,6 +304,12 @@
         "x-ms-examples": {
           "Namespaces_CreateOrUpdate": {
             "$ref": "./examples/Namespaces_CreateOrUpdate.json"
+          },
+          "Namespaces_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Namespaces_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Namespaces_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_CreateOrUpdate_MinimumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -348,6 +382,9 @@
         "x-ms-examples": {
           "Namespaces_Update": {
             "$ref": "./examples/Namespaces_Update.json"
+          },
+          "Namespaces_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Namespaces_Update_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -397,6 +434,12 @@
         "x-ms-examples": {
           "Namespaces_Delete": {
             "$ref": "./examples/Namespaces_Delete.json"
+          },
+          "Namespaces_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Namespaces_Delete_MaximumSet_Gen.json"
+          },
+          "Namespaces_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -444,6 +487,12 @@
         "x-ms-examples": {
           "TaskHubs_ListByNamespace": {
             "$ref": "./examples/TaskHubs_ListByNamespace.json"
+          },
+          "TaskHubs_ListByNamespace_MaximumSet_Gen": {
+            "$ref": "./examples/TaskHubs_ListByNamespace_MaximumSet_Gen.json"
+          },
+          "TaskHubs_ListByNamespace_MinimumSet_Gen": {
+            "$ref": "./examples/TaskHubs_ListByNamespace_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -502,6 +551,12 @@
         "x-ms-examples": {
           "TaskHubs_Get": {
             "$ref": "./examples/TaskHubs_Get.json"
+          },
+          "TaskHubs_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TaskHubs_Get_MaximumSet_Gen.json"
+          },
+          "TaskHubs_Get_MinimumSet_Gen": {
+            "$ref": "./examples/TaskHubs_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -570,6 +625,77 @@
         "x-ms-examples": {
           "TaskHubs_CreateOrUpdate": {
             "$ref": "./examples/TaskHubs_CreateOrUpdate.json"
+          },
+          "TaskHubs_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/TaskHubs_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "TaskHubs_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/TaskHubs_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TaskHubs_Update",
+        "tags": [
+          "TaskHubs"
+        ],
+        "description": "Update a Task Hub",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the service",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "taskHubName",
+            "in": "path",
+            "description": "Task Hub name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskHubUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TaskHub"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_Update_MaximumSet_Gen": {
+            "$ref": "./examples/TaskHubs_Update_MaximumSet_Gen.json"
+          },
+          "TaskHubs_Update_MinimumSet_Gen": {
+            "$ref": "./examples/TaskHubs_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -623,23 +749,29 @@
         "x-ms-examples": {
           "TaskHubs_Delete": {
             "$ref": "./examples/TaskHubs_Delete.json"
+          },
+          "TaskHubs_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/TaskHubs_Delete_MaximumSet_Gen.json"
+          },
+          "TaskHubs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/TaskHubs_Delete_MinimumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType": {
       "type": "string",
-      "description": "The kind of managed identity assigned to this resource.",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
       "enum": [
         "None",
         "SystemAssigned",
         "UserAssigned",
-        "SystemAssigned, UserAssigned"
+        "SystemAssigned,UserAssigned"
       ],
       "x-ms-enum": {
-        "name": "ManagedIdentityType",
+        "name": "ManagedServiceIdentityType",
         "modelAsString": true,
         "values": [
           {
@@ -659,24 +791,10 @@
           },
           {
             "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned, UserAssigned",
+            "value": "SystemAssigned,UserAssigned",
             "description": "System and user assigned managed identity."
           }
         ]
-      }
-    },
-    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
-      "type": "object",
-      "description": "A managed identity assigned by the user.",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The active directory client identifier for this principal."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier for this principal."
-        }
       }
     },
     "ManagedServiceIdentityUpdate": {
@@ -684,14 +802,15 @@
       "description": "The template for adding optional properties.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType",
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
           }
         }
       }
@@ -703,11 +822,7 @@
         "properties": {
           "$ref": "#/definitions/NamespaceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -860,11 +975,7 @@
         "properties": {
           "$ref": "#/definitions/TaskHubProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -905,23 +1016,9 @@
         }
       }
     },
-    "Versions": {
-      "type": "string",
-      "description": "API Versions",
-      "enum": [
-        "2024-02-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_02_01_Preview",
-            "value": "2024-02-01-preview",
-            "description": "2024-02-01-preview"
-          }
-        ]
-      }
+    "TaskHubUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the TaskHub."
     }
   },
   "parameters": {}
