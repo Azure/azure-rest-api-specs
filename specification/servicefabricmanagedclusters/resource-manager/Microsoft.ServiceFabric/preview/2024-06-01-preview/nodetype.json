@@ -1545,8 +1545,8 @@
       ],
       "properties": {
         "configurationReference": {
-          "type": "string",
           "format": "uri",
+          "type": "string",
           "description": "Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided."
         },
         "enableAutomaticUpgrade": {
@@ -1570,9 +1570,9 @@
           },
           "description": "Specifies the GalleryApplicationVersion resource id on the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}."
         },
-        "tags": {
+        "vmGalleryTags": {
           "type": "string",
-          "description": "Optional, Specifies a passthrough value for more generic context."
+          "description": "Optional, Specifies a passthrough value for more generic context. Accepts a JSON-formatted string e.g. '{\"Tag1\":\"Value1\",\"Tag2\":\"Value2\"}'."
         },
         "treatFailureAsDeploymentFailure": {
           "type": "boolean",
