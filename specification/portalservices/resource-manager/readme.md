@@ -40,7 +40,7 @@ input-file:
   - Microsoft.PortalServices/copilotSettings/preview/2024-04-01-preview/copilotSettings.json
   - Microsoft.PortalServices/dashboards/preview/2024-04-01-preview/dashboards.json
   - Microsoft.PortalServices/extensions/preview/2024-07-01-preview/extensions.json
-  suppressions:
+suppressions:
   - code: EvenSegmentedPathForPutOperation
     reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @singleton (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
     from:
