@@ -1113,6 +1113,9 @@ model VirtualHardDiskStatus {
 
   @doc("Provisioning status of the vhd")
   provisioningStatus?: VirtualHardDiskStatusProvisioningStatus;
+
+  @doc("The upload status of the virtual hard disk")
+  uploadStatus?: VirtualHardDiskStatusUploadStatus;
 }
 
 @doc("VHD Status provisioning status")
@@ -1124,14 +1127,21 @@ model VirtualHardDiskStatusProvisioningStatus {
   status?: Status;
 }
 
+@doc("The upload status of the virtual hard disk")
+model VirtualHardDiskStatusUploadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
+  @doc("The uploaded sized of the virtual hard disk in MB")
+  uploadedSizeInMB?: int64;
+}
+
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
-@doc("Configuration for uploading virtual hard disk.")
-model VirtualHardDisksUploadConfiguration {
+@doc("Request for uploading virtual hard disk.")
+model VirtualHardDisksUploadRequest {
   @doc("The Azure managed disk SAS URL to upload the virtual hard disk to.")
   azureManagedDiskUploadUrl: string;
 }

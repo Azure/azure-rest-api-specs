@@ -49,8 +49,9 @@ interface VirtualHardDisks {
   listAll is ArmListBySubscription<VirtualHardDisk>;
 
   @doc("The operation to upload a virtual hard disk.")
-  upload is ArmResourceActionNoResponseContentAsync<
+  upload is ArmResourceActionAsync<
     VirtualHardDisk,
-    VirtualHardDisksUploadConfiguration
+    VirtualHardDisksUploadRequest,
+    VirtualHardDisk
   >;
 }
