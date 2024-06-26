@@ -221,7 +221,7 @@
         }
       },
       "put": {
-        "operationId": "TranslationOperations_CreateOrUpdateTranslation",
+        "operationId": "TranslationOperations_CreateOrReplaceTranslation",
         "tags": [
           "VideoTranslation"
         ],
@@ -295,8 +295,11 @@
         },
         "x-ms-examples": {
           "Create Translation": {
-            "$ref": "./examples/TranslationOperations_CreateOrUpdateTranslation.json"
+            "$ref": "./examples/TranslationOperations_CreateOrReplaceTranslation.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -465,7 +468,7 @@
         }
       },
       "put": {
-        "operationId": "IterationOperations_CreateOrUpdateIteration",
+        "operationId": "IterationOperations_CreateOrReplaceIteration",
         "tags": [
           "VideoTranslation"
         ],
@@ -549,8 +552,11 @@
         },
         "x-ms-examples": {
           "Create Iteration": {
-            "$ref": "./examples/IterationOperations_CreateOrUpdateIteration.json"
+            "$ref": "./examples/IterationOperations_CreateOrReplaceIteration.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       }
@@ -724,7 +730,8 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/Status"
+          "$ref": "#/definitions/Status",
+          "description": "Operation status"
         }
       },
       "required": [
@@ -785,7 +792,29 @@
       ],
       "x-ms-enum": {
         "name": "Status",
-        "modelAsString": true
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted"
+          },
+          {
+            "name": "Running",
+            "value": "Running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          }
+        ]
       }
     },
     "Translation": {
@@ -865,7 +894,17 @@
       ],
       "x-ms-enum": {
         "name": "VoiceKind",
-        "modelAsString": true
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "PlatformVoice",
+            "value": "PlatformVoice"
+          },
+          {
+            "name": "PersonalVoice",
+            "value": "PersonalVoice"
+          }
+        ]
       }
     },
     "WebvttFile": {
@@ -897,7 +936,21 @@
       ],
       "x-ms-enum": {
         "name": "WebvttFileKind",
-        "modelAsString": true
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "SourceLocaleSubtitle",
+            "value": "SourceLocaleSubtitle"
+          },
+          {
+            "name": "TargetLocaleSubtitle",
+            "value": "TargetLocaleSubtitle"
+          },
+          {
+            "name": "MetadataJson",
+            "value": "MetadataJson"
+          }
+        ]
       }
     },
     "localeName": {

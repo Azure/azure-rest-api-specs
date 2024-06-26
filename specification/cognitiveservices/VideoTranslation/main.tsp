@@ -27,11 +27,11 @@ using TypeSpec.OpenAPI;
 @info({
   contact: {
     name: "Azure AI - Speech Services",
-    url: "https://learn.microsoft.com/azure/ai-services/speech-service/"
+    url: "https://learn.microsoft.com/azure/ai-services/speech-service/",
   },
   license: {
-    name: "Copyright (c) Microsoft. All rights reserved."
-  }
+    name: "Copyright (c) Microsoft. All rights reserved.",
+  },
 })
 namespace Microsoft.Speech.VideoTranslation;
 
@@ -45,43 +45,44 @@ model AADToken
     {
       type: OAuth2FlowType.implicit;
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
-      scopes: ["https://cognitiveservices.azure.com/.default"]
-    }]>;
+      scopes: ["https://cognitiveservices.azure.com/.default"];
+    }
+  ]>;
 
 // alias ops = Azure.Core.StandardResourceOperations;
 // AzureApiKeyAuthentication
 
-alias VideoTranslationServiceTraits = NoRepeatableRequests
-  & NoConditionalRequests
-  & NoClientRequestId;
+alias VideoTranslationServiceTraits = NoRepeatableRequests &
+  NoConditionalRequests &
+  NoClientRequestId;
 alias ops = Azure.Core.ResourceOperations<VideoTranslationServiceTraits>;
 
 enum ApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2024-05-20-preview version of the VideoTranslation service.")
-  v2024_05_20_preview: "2024-05-20-preview"
+  v2024_05_20_preview: "2024-05-20-preview",
 }
 
 @doc("Task status.")
-enum Status {
-  "NotStarted",
-  "Running",
-  "Succeeded",
-  "Failed",
-  "Canceled",
+union Status {
+  NotStarted: "NotStarted",
+  Running: "Running",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 @doc("TTS voice kind.")
-enum VoiceKind {
-  "PlatformVoice",
-  "PersonalVoice",
+union VoiceKind {
+  PlatformVoice: "PlatformVoice",
+  PersonalVoice: "PersonalVoice",
 }
 
 @doc("Webvtt file kind.")
-enum WebvttFileKind {
-  "SourceLocaleSubtitle",
-  "TargetLocaleSubtitle",
-  "MetadataJson",
+union WebvttFileKind {
+  SourceLocaleSubtitle: "SourceLocaleSubtitle",
+  TargetLocaleSubtitle: "TargetLocaleSubtitle",
+  MetadataJson: "MetadataJson",
 }
 
 @doc("Translation webvtt file.")
@@ -152,10 +153,10 @@ model IterationInput {
 
 @doc("Operation ID header.")
 model OperationIdHeader {
-    @doc("Operation ID.")
-    @header("Operation-Id")
-    @visibility("create")
-    operationId: resourceId;
+  @doc("Operation ID.")
+  @header("Operation-Id")
+  @visibility("create")
+  operationId: resourceId;
 }
 
 @doc("Create translation resource for hosting iterations of translating one video file from source locale to target locale.")
@@ -178,11 +179,11 @@ model Translation {
 
   @doc("Latest iteration of the translation.")
   @visibility("read")
-  latestIteration?: Iteration,
+  latestIteration?: Iteration;
 
   @doc("Latest completed iteration of the translation.")
   @visibility("read")
-  latestSucceededIteration?: Iteration,
+  latestSucceededIteration?: Iteration;
 }
 
 @doc("Do one iteration to translate one video file from source locale to target locale, webvtt for content editing is optional for requesting parameter.")
@@ -225,53 +226,51 @@ model Operation {
   @visibility("read")
   id: resourceId;
 
+  @doc("Operation status")
   status?: Status;
 }
 
 interface TranslationOperations {
   @doc("Creates a translation.")
-  @operationId("TranslationOperations_CreateOrUpdateTranslation")
-  createTranslation is ops.LongRunningResourceCreateOrReplace<
+  @pollingOperation(OperationOperations.getOperation)
+  createOrReplaceTranslation is ops.LongRunningResourceCreateOrReplace<
     Translation,
-    RequestHeadersTrait<OperationIdHeader>>;
+    RequestHeadersTrait<OperationIdHeader>
+  >;
 
   @doc("Fetch a translation by ID.")
-  @operationId("TranslationOperations_GetTranslation")
   getTranslation is ops.ResourceRead<Translation>;
 
   @doc("Delete a translation.")
-  @operationId("TranslationOperations_DeleteTranslation")
   deleteTranslation is ops.ResourceDelete<Translation>;
 
   @doc("List translation resources.")
-  @operationId("TranslationOperations_ListTranslation")
   listTranslation is ops.ResourceList<
     Translation,
-    ListQueryParametersTrait<StandardListQueryParameters>>;
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 }
 
-interface Iterations {
+interface IterationOperations {
   // Due to PR bulid need both "Create" and "Update" word in operation ID.
   @doc("Creates an iteration.")
-  @pollingOperation(Operations.getOperation)
-  @operationId("IterationOperations_CreateOrUpdateIteration")
-  createIteration is ops.LongRunningResourceCreateOrReplace<
+  @pollingOperation(OperationOperations.getOperation)
+  createOrReplaceIteration is ops.LongRunningResourceCreateOrReplace<
     Iteration,
-    RequestHeadersTrait<OperationIdHeader>>;
+    RequestHeadersTrait<OperationIdHeader>
+  >;
 
   @doc("Fetch a iteration by ID.")
-    @operationId("IterationOperations_GetIteration")
-    getIteration is ops.ResourceRead<Iteration>;
-  
+  getIteration is ops.ResourceRead<Iteration>;
+
   @doc("List Iteration resources.")
-  @operationId("IterationOperations_ListIteration")
   listIteration is ops.ResourceList<
     Iteration,
-    ListQueryParametersTrait<StandardListQueryParameters>>;
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 }
 
-interface Operations {
+interface OperationOperations {
   @doc("Fetch a operation by ID.")
-  @operationId("OperationOperations_GetOperation")
   getOperation is ops.ResourceRead<Operation>;
 }
