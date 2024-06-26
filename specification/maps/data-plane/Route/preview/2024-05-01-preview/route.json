@@ -2484,9 +2484,7 @@
           "enum": [
             "shortest",
             "fastestWithoutTraffic",
-            "fastestWithTraffic",
-            "thrillingWithTraffic",
-            "thrillingWithoutTraffic"
+            "fastestWithTraffic"
           ],
           "x-ms-enum": {
             "name": "RouteRangeOptimizeRouteEnum",
@@ -2506,16 +2504,6 @@
                 "value": "fastestWithTraffic",
                 "name": "FastestWithTraffic",
                 "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
-              },
-              {
-                "value": "thrillingWithTraffic",
-                "name": "ThrillingWithTraffic",
-                "description": "The route is calculated to provide a thrilling driving experience using current traffic information."
-              },
-              {
-                "value": "thrillingWithoutTraffic",
-                "name": "ThrillingWithoutTraffic",
-                "description": "The route is calculated to provide a thrilling driving experience without using current traffic information."
               }
             ]
           }
@@ -2537,68 +2525,6 @@
           "type": "number",
           "minimum": 0,
           "maximum": 10000000
-        },
-        "thrilling": {
-          "type": "object",
-          "description": "The thrilling object is used to describe a route with two main characteristics: windingness and hilliness and is used when optimizedRoute is thrilling mode.",
-          "properties": {
-            "windingness": {
-              "description": "Specify the windingness of the route. If unspecified, the default mode is \"normal\".",
-              "type": "string",
-              "default": "normal",
-              "enum": [
-                "normal",
-                "low",
-                "high"
-              ],
-              "x-ms-enum": {
-                "name": "WindingnessEnum",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "normal",
-                    "description": "normal"
-                  },
-                  {
-                    "value": "low",
-                    "description": "low"
-                  },
-                  {
-                    "value": "high",
-                    "description": "high"
-                  }
-                ]
-              }
-            },
-            "hilliness": {
-              "description": "Specify the hilliness of the route. If unspecified, the default mode is \"normal\".",
-              "type": "string",
-              "default": "normal",
-              "enum": [
-                "normal",
-                "low",
-                "high"
-              ],
-              "x-ms-enum": {
-                "name": "HillinessEnum",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "normal",
-                    "description": "normal"
-                  },
-                  {
-                    "value": "low",
-                    "description": "low"
-                  },
-                  {
-                    "value": "high",
-                    "description": "high"
-                  }
-                ]
-              }
-            }
-          }
         },
         "travelMode": {
           "description": "Specify the travel mode. If unspecified, the default mode is \"driving\".",
