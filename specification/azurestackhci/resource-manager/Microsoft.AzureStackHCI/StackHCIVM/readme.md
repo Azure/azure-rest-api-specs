@@ -29,7 +29,7 @@ title: Microsoft.AzureStackHCI
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-02-01
+tag: package-preview-2024-05-01-test
 ```
 
 ## Suppression
@@ -57,6 +57,18 @@ suppressions:
     reason: resourceUri in virtualmachineinstances is the parent resource. It consists of an even number of segmented paths. 
     from: 
       - stackhcivm.json
+  - code: APIVersionPattern
+    reason: 2024-05-01-test-preview is for internal testing only and recommended by API spec review office hours.
+    from:
+      - stackhcivm.json
+```
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05-01-test` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05-01-test'
+input-file:
+  - preview/2024-05-01-test-preview/stackhcivm.json
 ```
 
 ### Tag: package-preview-2024-02
