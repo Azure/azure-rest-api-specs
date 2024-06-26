@@ -30,10 +30,10 @@ model AzureKeyVaultSecretProviderClassProperties {
     keyvaultName: string;
 
     @doc("The user assigned managed identity client ID that should be used to access the Azure Key Vault.")
-    clientId: "string";
+    clientId: string;
 
     @doc("The Azure Active Directory tenant ID that should be used for authenticating requests to the Azure Key Vault.")
-    tenantId: "string";
+    tenantId: string;
 
     @doc("List of objects to synchronize from the specified Azure Key Vault.")
     @OpenAPI.extension("x-ms-identifiers", [])
