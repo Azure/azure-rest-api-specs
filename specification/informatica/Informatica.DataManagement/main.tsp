@@ -303,7 +303,7 @@ model CompanyDetails {
 @doc("Marketplace details.")
 model MarketplaceDetails {
   @doc("Marketplace Subscription Id")
-  marketplaceSubscriptionId: string;
+  marketplaceSubscriptionId?: string;
 
   @doc("Marketplace offer details.")
   offerDetails: OfferDetails;
