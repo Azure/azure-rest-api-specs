@@ -13,7 +13,12 @@ package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python)
+``` yaml $(python) && $(python-mode) == 'update'
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/oracledatabase/azure-mgmt-oracledatabase/azure/mgmt/oracledatabase
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+    basic-setup-py: true
+    output-folder: $(python-sdks-folder)/oracledatabase/azure-mgmt-oracledatabase
 ```
