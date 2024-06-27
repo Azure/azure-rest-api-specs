@@ -68,7 +68,7 @@ interface CertificateProfileOperations {
   @pollingOperation(CertificateProfileOperations.getSigningStatus)
   sign is StandardResourceOperations.LongRunningResourceAction<
     CertificateProfileName,
-    SigningPayloadOptions,
+    BodyParameter<SigningPayloadOptions>,
     SignResult,
     Foundations.ErrorResponse,
     SigningRequestHeadersTraits
@@ -187,6 +187,17 @@ model BytesBody<ContentType> {
   @header
   contentType: ContentType;
 }
+
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};
 
 alias SigningRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
   @doc("An optional client version.")
