@@ -12,7 +12,7 @@
       "description": "Schema of common properties of all chat events",
       "properties": {
         "recipientCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the target user"
         },
         "transactionId": {
@@ -563,7 +563,7 @@
           "description": "The name of the user"
         },
         "participantCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user"
         },
         "metadata": {
@@ -696,11 +696,11 @@
           "description": "The Id of the email been sent"
         },
         "status": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsEmailDeliveryReportStatus",
+          "$ref": "#/definitions/AcsEmailDeliveryReportStatus",
           "description": "The status of the email. Any value other than Delivered is considered failed."
         },
         "deliveryStatusDetails": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsEmailDeliveryReportStatusDetails",
+          "$ref": "#/definitions/AcsEmailDeliveryReportStatusDetails",
           "description": "Detailed information about the status if any"
         },
         "deliveryAttemptTimeStamp": {
@@ -805,7 +805,7 @@
           "description": "The user agent interacting with the email"
         },
         "engagementType": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsUserEngagement",
+          "$ref": "#/definitions/AcsUserEngagement",
           "description": "The type of engagement user have with email",
           "x-ms-client-name": "engagement"
         }
@@ -844,12 +844,12 @@
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
       "properties": {
         "to": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the target user.",
           "x-ms-client-name": "toCommunicationIdentifier"
         },
         "from": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who initiated the call.",
           "x-ms-client-name": "fromCommunicationIdentifier"
         },
@@ -862,7 +862,7 @@
           "description": "Display name of caller."
         },
         "customContext": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsIncomingCallCustomContext",
+          "$ref": "#/definitions/AcsIncomingCallCustomContext",
           "description": "Custom Context of Incoming Call"
         },
         "incomingCallContext": {
@@ -1065,7 +1065,7 @@
           "description": "The time message was received"
         },
         "error": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageChannelEventError",
+          "$ref": "#/definitions/AcsMessageChannelEventError",
           "description": "The channel event error"
         }
       },
@@ -1094,16 +1094,16 @@
       "description": "Message Interactive Content",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsInteractiveReplyKind",
+          "$ref": "#/definitions/AcsInteractiveReplyKind",
           "description": "The Message interactive reply type",
           "x-ms-client-name": "replyKind"
         },
         "buttonReply": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageInteractiveButtonReplyContent",
+          "$ref": "#/definitions/AcsMessageInteractiveButtonReplyContent",
           "description": "The Message Sent when a customer clicks a button"
         },
         "listReply": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsMessageInteractiveListReplyContent",
+          "$ref": "#/definitions/AcsMessageInteractiveListReplyContent",
           "description": "The Message Sent when a customer selects an item from a list"
         }
       },
@@ -1236,7 +1236,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RecordingFileStatusUpdated event.",
       "properties": {
         "recordingStorageInfo": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsRecordingStorageInfoProperties",
+          "$ref": "#/definitions/AcsRecordingStorageInfoProperties",
           "description": "The details of recording storage information"
         },
         "recordingStartTime": {
@@ -1250,15 +1250,15 @@
           "description": "The recording duration in milliseconds"
         },
         "recordingContentType": {
-          "$ref": "#/definitions/AzureCommunicationServices.recordingContentType",
+          "$ref": "#/definitions/recordingContentType",
           "description": "The recording content type- AudioVideo, or Audio"
         },
         "recordingChannelType": {
-          "$ref": "#/definitions/AzureCommunicationServices.recordingChannelType",
+          "$ref": "#/definitions/recordingChannelType",
           "description": "The recording  channel type - Mixed, Unmixed"
         },
         "recordingFormatType": {
-          "$ref": "#/definitions/AzureCommunicationServices.recordingFormatType",
+          "$ref": "#/definitions/recordingFormatType",
           "description": "The recording format type - Mp4, Mp3, Wav"
         },
         "sessionEndReason": {
@@ -1282,7 +1282,7 @@
           "type": "array",
           "description": "List of details of recording chunks information",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRecordingChunkInfoProperties"
+            "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
           },
           "x-ms-identifiers": []
         }
@@ -1328,14 +1328,14 @@
           "description": "Router Communication Error Target"
         },
         "innererror": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterCommunicationError",
+          "$ref": "#/definitions/AcsRouterCommunicationError",
           "description": "Router Communication Inner Error"
         },
         "details": {
           "type": "array",
           "description": "List of Router Communication Errors",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterCommunicationError"
+            "$ref": "#/definitions/AcsRouterCommunicationError"
           },
           "x-ms-identifiers": []
         }
@@ -2212,14 +2212,14 @@
           "type": "array",
           "description": "Router Worker Registered Queue Info",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterQueueDetails"
+            "$ref": "#/definitions/AcsRouterQueueDetails"
           }
         },
         "channelConfigurations": {
           "type": "array",
           "description": "Router Worker Registered Channel Configuration",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterChannelConfiguration"
+            "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
           "x-ms-identifiers": []
         },
@@ -2259,7 +2259,7 @@
           "description": "Router Job Worker Selector Key"
         },
         "labelOperator": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterLabelOperator",
+          "$ref": "#/definitions/AcsRouterLabelOperator",
           "description": "Router Job Worker Selector Label Operator"
         },
         "value": {
@@ -2272,7 +2272,7 @@
           "description": "Router Job Worker Selector Time to Live in Seconds"
         },
         "state": {
-          "$ref": "#/definitions/AzureCommunicationServices.AcsRouterWorkerSelectorState",
+          "$ref": "#/definitions/AcsRouterWorkerSelectorState",
           "description": "Router Job Worker Selector State"
         },
         "expirationTime": {
@@ -2325,14 +2325,14 @@
           "type": "array",
           "description": "Router Worker Updated Queue Info",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterQueueDetails"
+            "$ref": "#/definitions/AcsRouterQueueDetails"
           }
         },
         "channelConfigurations": {
           "type": "array",
           "description": "Router Worker Updated Channel Configuration",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterChannelConfiguration"
+            "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
           "x-ms-identifiers": []
         },
@@ -2359,7 +2359,7 @@
           "type": "array",
           "description": "Router Worker Properties Updated",
           "items": {
-            "$ref": "#/definitions/AzureCommunicationServices.AcsRouterUpdatedWorkerProperty"
+            "$ref": "#/definitions/AcsRouterUpdatedWorkerProperty"
           }
         }
       },
@@ -2481,7 +2481,7 @@
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.",
       "properties": {
         "userCommunicationIdentifier": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModel",
+          "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who was disconnected"
         }
       },
@@ -2548,7 +2548,7 @@
       "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationIdentifierModelKind",
+          "$ref": "#/definitions/CommunicationIdentifierModelKind",
           "description": "The identifier kind. Only required in responses."
         },
         "rawId": {
@@ -2556,19 +2556,19 @@
           "description": "Raw Id of the identifier. Optional in requests, required in responses."
         },
         "communicationUser": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationUserIdentifierModel",
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
           "description": "The communication user."
         },
         "phoneNumber": {
-          "$ref": "#/definitions/AzureCommunicationServices.PhoneNumberIdentifierModel",
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
           "description": "The phone number."
         },
         "microsoftTeamsUser": {
-          "$ref": "#/definitions/AzureCommunicationServices.MicrosoftTeamsUserIdentifierModel",
+          "$ref": "#/definitions/MicrosoftTeamsUserIdentifierModel",
           "description": "The Microsoft Teams user."
         },
         "microsoftTeamsApp": {
-          "$ref": "#/definitions/AzureCommunicationServices.MicrosoftTeamsAppIdentifierModel",
+          "$ref": "#/definitions/MicrosoftTeamsAppIdentifierModel",
           "description": "The Microsoft Teams application."
         }
       },
@@ -2638,7 +2638,7 @@
           "description": "The Id of the Microsoft Teams application"
         },
         "cloud": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationCloudEnvironmentModel",
+          "$ref": "#/definitions/CommunicationCloudEnvironmentModel",
           "description": "The cloud that the Microsoft Teams application belongs to. By default 'public' if missing."
         }
       },
@@ -2660,7 +2660,7 @@
           "description": "True if the Microsoft Teams user is anonymous. By default false if missing."
         },
         "cloud": {
-          "$ref": "#/definitions/AzureCommunicationServices.CommunicationCloudEnvironmentModel",
+          "$ref": "#/definitions/CommunicationCloudEnvironmentModel",
           "description": "The cloud that the Microsoft Teams user belongs to. By default 'public' if missing."
         }
       },

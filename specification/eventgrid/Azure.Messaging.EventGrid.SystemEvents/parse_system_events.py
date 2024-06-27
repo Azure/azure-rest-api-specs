@@ -60,8 +60,11 @@ for definition_name, definition_body in fileContent["definitions"].items():
 
                 # Fix the $ref
                 try:
-                    if definition_body["allOf"]:
-                        definition_body["allOf"][0]["$ref"] = "#/definitions/"+definition_body["allOf"][0]["$ref"].split('.')[1]
+                    try:
+                        if definition_body["allOf"]:
+                            definition_body["allOf"][0]["$ref"] = "#/definitions/"+definition_body["allOf"][0]["$ref"].split('.')[1]
+                    except:
+                        pass
                     for idx in definition_body["properties"]:
                         # either at this point there will be $ref in a dict
                         # or there will be a $ref in a items 

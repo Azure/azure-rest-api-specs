@@ -43,7 +43,7 @@
       "description": "Details of JobOutput errors.",
       "properties": {
         "code": {
-          "$ref": "#/definitions/MediaServices.MediaJobErrorCode",
+          "$ref": "#/definitions/MediaJobErrorCode",
           "description": "Error code describing the error."
         },
         "message": {
@@ -51,18 +51,18 @@
           "description": "A human-readable language-dependent representation of the error."
         },
         "category": {
-          "$ref": "#/definitions/MediaServices.MediaJobErrorCategory",
+          "$ref": "#/definitions/MediaJobErrorCategory",
           "description": "Helps with categorization of errors."
         },
         "retry": {
-          "$ref": "#/definitions/MediaServices.MediaJobRetry",
+          "$ref": "#/definitions/MediaJobRetry",
           "description": "Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal."
         },
         "details": {
           "type": "array",
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
-            "$ref": "#/definitions/MediaServices.MediaJobErrorDetail"
+            "$ref": "#/definitions/MediaJobErrorDetail"
           },
           "x-ms-identifiers": []
         }
@@ -261,7 +261,7 @@
           "description": "The discriminator for derived types."
         },
         "error": {
-          "$ref": "#/definitions/MediaServices.MediaJobError",
+          "$ref": "#/definitions/MediaJobError",
           "description": "Gets the Job output error."
         },
         "label": {
@@ -274,7 +274,7 @@
           "description": "Gets the Job output progress."
         },
         "state": {
-          "$ref": "#/definitions/MediaServices.MediaJobState",
+          "$ref": "#/definitions/MediaJobState",
           "description": "Gets the Job output state."
         }
       },
@@ -386,11 +386,11 @@
       "description": "Schema of the Data property of an EventGridEvent for a\n  Microsoft.Media.JobOutputStateChange event.",
       "properties": {
         "previousState": {
-          "$ref": "#/definitions/MediaServices.MediaJobState",
+          "$ref": "#/definitions/MediaJobState",
           "description": "The previous state of the Job."
         },
         "output": {
-          "$ref": "#/definitions/MediaServices.MediaJobOutput",
+          "$ref": "#/definitions/MediaJobOutput",
           "description": "Gets the output."
         },
         "jobCorrelationData": {
@@ -508,11 +508,11 @@
       "description": "Schema of the Data property of an EventGridEvent for a\n  Microsoft.Media.JobStateChange event.",
       "properties": {
         "previousState": {
-          "$ref": "#/definitions/MediaServices.MediaJobState",
+          "$ref": "#/definitions/MediaJobState",
           "description": "The previous state of the Job."
         },
         "state": {
-          "$ref": "#/definitions/MediaServices.MediaJobState",
+          "$ref": "#/definitions/MediaJobState",
           "description": "The new state of the Job."
         },
         "correlationData": {

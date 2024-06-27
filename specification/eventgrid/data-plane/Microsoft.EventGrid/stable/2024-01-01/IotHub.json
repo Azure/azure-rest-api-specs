@@ -34,7 +34,7 @@
           "description": "Name of the IoT Hub where the device was created or deleted."
         },
         "deviceConnectionStateEventInfo": {
-          "$ref": "#/definitions/IotHub.DeviceConnectionStateEventInfo",
+          "$ref": "#/definitions/DeviceConnectionStateEventInfo",
           "description": "Information about the device connection state event."
         }
       },
@@ -55,7 +55,7 @@
           "description": "Name of the IoT Hub where the device was created or deleted."
         },
         "twin": {
-          "$ref": "#/definitions/IotHub.DeviceTwinInfo",
+          "$ref": "#/definitions/DeviceTwinInfo",
           "description": "Information about the device twin, which is the cloud representation of application device metadata."
         }
       },
@@ -123,7 +123,7 @@
           "description": "The ISO8601 timestamp of the last activity."
         },
         "properties": {
-          "$ref": "#/definitions/IotHub.DeviceTwinInfoProperties",
+          "$ref": "#/definitions/DeviceTwinInfoProperties",
           "description": "Properties JSON element."
         },
         "status": {
@@ -140,7 +140,7 @@
           "description": "An integer that is incremented by one each time the device twin is updated."
         },
         "x509Thumbprint": {
-          "$ref": "#/definitions/IotHub.DeviceTwinInfoX509Thumbprint",
+          "$ref": "#/definitions/DeviceTwinInfoX509Thumbprint",
           "description": "The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate."
         }
       },
@@ -154,11 +154,11 @@
       "description": "Properties JSON element.",
       "properties": {
         "desired": {
-          "$ref": "#/definitions/IotHub.DeviceTwinProperties",
+          "$ref": "#/definitions/DeviceTwinProperties",
           "description": "A portion of the properties that can be written only by the application back-end, and read by the device."
         },
         "reported": {
-          "$ref": "#/definitions/IotHub.DeviceTwinProperties",
+          "$ref": "#/definitions/DeviceTwinProperties",
           "description": "A portion of the properties that can be written only by the device, and read by the application back-end."
         }
       },
@@ -197,7 +197,7 @@
       "description": "A portion of the properties that can be written only by the application back-end, and read by the device.",
       "properties": {
         "metadata": {
-          "$ref": "#/definitions/IotHub.DeviceTwinMetadata",
+          "$ref": "#/definitions/DeviceTwinMetadata",
           "description": "Metadata information for the properties JSON document.",
           "x-ms-client-name": "$metadata"
         },
