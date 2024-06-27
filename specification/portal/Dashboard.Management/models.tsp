@@ -184,9 +184,13 @@ model DashboardPartsPosition {
  */
 @discriminator("type")
 model DashboardPartMetadata {
-  ...Record<unknown>;
+  type: DashboardPartMetadataType;
 }
 
+union DashboardPartMetadataType {  
+  markdown: "Extension/HubsExtension/PartType/MarkdownPart",
+  string
+}
 /**
  * The shared dashboard resource definition.
  */
