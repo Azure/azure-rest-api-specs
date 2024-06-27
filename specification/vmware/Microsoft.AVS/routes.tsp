@@ -354,10 +354,7 @@ interface WorkloadNetworkSegments {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    WorkloadNetworkSegment,
-    WorkloadNetworkSegmentUpdate
-  >;
+  update is ArmCustomPatchAsync<WorkloadNetworkSegment, WorkloadNetworkSegment>;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -425,7 +422,8 @@ interface WorkloadNetworkDhcpConfigurations {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDhcp")
-  update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcpUpdate>;
+  @parameterVisibility
+  update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcp>;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
@@ -514,7 +512,7 @@ interface WorkloadNetworkPortMirroringProfiles {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkPortMirroring,
-    WorkloadNetworkPortMirroringUpdate
+    WorkloadNetworkPortMirroring
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PortMirroringProfileParameter should be last, but it is breaking to correct it."
@@ -594,10 +592,7 @@ interface WorkloadNetworkVmGroups {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateVMGroup")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    WorkloadNetworkVMGroup,
-    WorkloadNetworkVMGroupUpdate
-  >;
+  update is ArmCustomPatchAsync<WorkloadNetworkVMGroup, WorkloadNetworkVMGroup>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "VmGroupIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -699,7 +694,7 @@ interface WorkloadNetworkDnsServices {
   @parameterVisibility
   update is ArmCustomPatchAsync<
     WorkloadNetworkDnsService,
-    WorkloadNetworkDnsServiceUpdate
+    WorkloadNetworkDnsService
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsServiceIdParameter should be last, but it is breaking to correct it."
@@ -779,10 +774,7 @@ interface WorkloadNetworkDnsZones {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsZone")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
-    WorkloadNetworkDnsZone,
-    WorkloadNetworkDnsZoneUpdate
-  >;
+  update is ArmCustomPatchAsync<WorkloadNetworkDnsZone, WorkloadNetworkDnsZone>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsZoneIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
