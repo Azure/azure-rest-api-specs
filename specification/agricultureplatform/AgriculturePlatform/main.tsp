@@ -12,9 +12,8 @@ using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AgriculturePlatform")
 @service({
-  title: "Microsoft.AgriculturePlatform"
+  title: "Microsoft.AgriculturePlatform",
 })
-
 @versioned(Microsoft.AgriculturePlatform.Versions)
 namespace Microsoft.AgriculturePlatform;
 
@@ -25,7 +24,6 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_06_01_preview: "2024-06-01-preview",
 }
-
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -49,20 +47,27 @@ model AgriServiceResource is TrackedResource<AgriServiceResourceProperties> {
 @Azure.Core.lroStatus
 union ProvisioningState {
   string,
+
   /** Resource has been created. */
-  Succeeded:"Succeeded",
+  Succeeded: "Succeeded",
+
   /** Resource creation failed. */
-  Failed:"Failed",
+  Failed: "Failed",
+
   /** Resource creation was canceled. */
-  Canceled:"Canceled",
+  Canceled: "Canceled",
+
   /** The resource is being provisioned */
-  Provisioning:"Provisioning",
+  Provisioning: "Provisioning",
+
   /** The resource is updating */
-  Updating:"Updating",
+  Updating: "Updating",
+
   /** The resource is being deleted */
-  Deleting:"Deleting",
+  Deleting: "Deleting",
+
   /** The resource create request has been accepted */
-  Accepted:"Accepted"
+  Accepted: "Accepted",
 }
 
 @doc("Details of the Agriculture AgriDataManager.")
@@ -81,7 +86,7 @@ model AgriServiceResourceProperties {
 }
 
 @doc("Config of the AgriService instance.")
-model AgriServiceConfig { // include all resources which will be created here in MOBO, properties, endpoints etc. 
+model AgriServiceConfig { // include all resources which will be created here in MOBO, properties, endpoints etc.
   @doc("Instance URI of the AgriService instance.")
   @visibility("read")
   @minLength(2)
@@ -121,23 +126,26 @@ model AgriServiceConfig { // include all resources which will be created here in
 
 @doc("Configuration of the managed on behalf of resource.")
 model ManagedOnBehalfOfConfiguration {
-    @visibility("read")
-    @doc("Associated MoboBrokerResources.")
-    moboBrokerResources: MoboBrokerResource[];
+  @visibility("read")
+  @doc("Associated MoboBrokerResources.")
+  moboBrokerResources: MoboBrokerResource[];
 }
 
 @doc("MoboBroker resource.")
 model MoboBrokerResource {
   @visibility("read")
-   @doc("Resource Id of MoboBrokerResource")
+  @doc("Resource Id of MoboBrokerResource")
   id: string;
 }
 
 @armResourceOperations(AgriServiceResource)
-interface AgriService  {
+interface AgriService {
   get is ArmResourceRead<AgriServiceResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AgriServiceResource>;
-  update is ArmResourcePatchAsync<AgriServiceResource, AgriServiceResourceProperties>;
+  update is ArmResourcePatchAsync<
+    AgriServiceResource,
+    AgriServiceResourceProperties
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<AgriServiceResource>;
   listByResourceGroup is ArmResourceListByParent<AgriServiceResource>;
   listBySubscription is ArmListBySubscription<AgriServiceResource>;
