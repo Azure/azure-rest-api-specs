@@ -44,7 +44,6 @@ interface OracleSubscriptions
   >;
 
   @added(Versions.v20240601_preview)
-  @added(Versions.v20240601)
   @doc("Add Azure Subscriptions")
   @example(
     "./examples/oracleSubscriptions_addAzureSubscriptions.json",

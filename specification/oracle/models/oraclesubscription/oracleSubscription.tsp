@@ -147,7 +147,6 @@ model ActivationLinks {
 }
 
 @added(Versions.v20240601_preview)
-@added(Versions.v20240601)
 @doc("Azure Subscriptions model")
 model AzureSubscriptions {
   @doc("Azure Subscription Ids to be updated")
@@ -155,7 +154,6 @@ model AzureSubscriptions {
 }
 
 @added(Versions.v20240601_preview)
-@added(Versions.v20240601)
 @doc("Add Subscription Operation state enum")
 union AddSubscriptionOperationState {
   @doc("Succeeded - State when Add Subscription operation succeeded")
@@ -201,19 +199,16 @@ model OracleSubscriptionProperties {
   intent?: Intent;
 
   @added(Versions.v20240601_preview)
-  @added(Versions.v20240601)
   @doc("Azure subscriptions associated with this OracleSubscription")
   @visibility("read")
   azureSubscriptionIds?: string[];
 
   @added(Versions.v20240601_preview)
-  @added(Versions.v20240601)
   @doc("State of the add Azure subscription operation on Oracle subscription")
   @visibility("read")
   addSubscriptionOperationState?: AddSubscriptionOperationState;
 
   @added(Versions.v20240601_preview)
-  @added(Versions.v20240601)
   @doc("Status details of the last operation on Oracle subscription")
   @visibility("read")
   lastOperationStatusDetail?: string;
