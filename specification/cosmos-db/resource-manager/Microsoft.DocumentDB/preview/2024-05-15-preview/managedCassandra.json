@@ -641,7 +641,7 @@
           "200": {
             "description": "The following restore operation is in progress.",
             "schema": {
-              "$ref": "#/definitions/CassandraClusterRestoreInfo"
+              "$ref": "#/definitions/CassandraClusterRestoreResult"
             }
           },
           "default": {
@@ -1820,25 +1820,44 @@
     "CassandraClusterRestoreResult": {
       "type": "object",
       "properties": {
-        "exitCode": {
-          "description": "The exit code returned by the command.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "commandOutput": {
-          "description": "The output from the command.",
+        "restoreId": {
+          "description": "The id of the restore job.",
           "type": "string"
         },
-        "commandErrorOutput": {
-          "description": "The error generated from the command.",
+        "state": {
+          "description": "The status of the command.",
           "type": "string"
         },
         "backupId": {
           "description": "Backup Id to restore.",
           "type": "string"
         },
+        "nodes": {
+          "description": "Info on each node's restore.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CassandraClusterNodeRestoreResult"
+          }
+        }
+      }
+    },
+    "CassandraClusterNodeRestoreResult": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "description": "Address of the node.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The status of the command.",
+          "type": "string"
+        },
         "startTimestamp": {
-          "description": "Starting time of restore.",
+          "description": "Time restore started on node.",
+          "type": "string"
+        },
+        "endTimestamp": {
+          "description": "Time restore ended on node.",
           "type": "string"
         }
       }
@@ -1852,6 +1871,10 @@
         },
         "startTimestamp": {
           "description": "Time that the restore started.",
+          "type": "string"
+        },
+        "restoreId": {
+          "description": "Restore Id.",
           "type": "string"
         }
       }
