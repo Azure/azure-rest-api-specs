@@ -1191,6 +1191,7 @@ model VirtualHardDisksUpdateRequest {
   tags?: Record<string>;
 }
 
+@added(Versions.v2024_05_01_test_preview)
 @doc("Request for uploading virtual hard disk.")
 model VirtualHardDisksUploadRequest {
   @doc("The Azure managed disk SAS URL to upload the virtual hard disk to.")
