@@ -84,7 +84,7 @@ union OperationType {
 
 @doc("DataFlow BuiltIn Transformation properties")
 model DataFlowBuiltInTransformation {
-  @doc("Serialization format. Optional; defaults to JSON. Allowed value JSON Schema/draft-7, Paquet. Default: Json")
+  @doc("Serialization format. Optional; defaults to JSON. Allowed value JSON Schema/draft-7, Parquet. Default: Json")
   serializationFormat?: TransformationSerializationFormat = TransformationSerializationFormat.Json;
 
   @doc("Reference to the schema that describes the output of the transformation.")
