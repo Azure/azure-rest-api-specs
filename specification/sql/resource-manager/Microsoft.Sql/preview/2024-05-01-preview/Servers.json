@@ -430,6 +430,9 @@
           },
           "Imports to a new database, using private link for the SQL server and storage account.": {
             "$ref": "./examples/ImportNewDatabaseWithNetworkIsolation.json"
+          },
+          "Imports to a new database, using Managed Identity for the SQL server and storage account.": {
+            "$ref": "./examples/ImportNewDatabaseWithManagedIdentity.json"
           }
         }
       }
@@ -657,7 +660,7 @@
           ]
         },
         "storageKeyType": {
-          "description": "Storage key type.",
+          "description": "Storage key type: StorageAccessKey, SharedAccessKey or ManagedIdentity.",
           "enum": [
             "SharedAccessKey",
             "StorageAccessKey",
@@ -673,7 +676,7 @@
           ]
         },
         "storageKey": {
-          "description": "Storage key.",
+          "description": "Storage key for the storage account. If StorageKeyType is ManagedIdentity, this field should specify the Managed Identity's resource ID.",
           "type": "string",
           "x-ms-mutability": [
             "create"
@@ -687,14 +690,14 @@
           ]
         },
         "administratorLogin": {
-          "description": "Administrator login name.",
+          "description": "Administrator login name. If AuthenticationType is ManagedIdentity, this field should specify the Managed Identity's resource ID.",
           "type": "string",
           "x-ms-mutability": [
             "create"
           ]
         },
         "administratorLoginPassword": {
-          "description": "Administrator login password.",
+          "description": "Administrator login password. If AuthenticationType is ManagedIdentity, this field should not be specified.",
           "type": "string",
           "x-ms-secret": true,
           "x-ms-mutability": [
@@ -702,7 +705,7 @@
           ]
         },
         "authenticationType": {
-          "description": "Authentication type.",
+          "description": "Authentication type used to access the SQL: Sql, ADPassword or ManagedIdentity.",
           "type": "string",
           "x-ms-mutability": [
             "create"

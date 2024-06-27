@@ -176,6 +176,9 @@
           },
           "Export database using database extension.": {
             "$ref": "./examples/ExportDatabaseUsingDatabaseExtensions.json"
+          },
+          "Export database using database extension with Managed Identity.": {
+            "$ref": "./examples/ExportDatabaseUsingDatabaseExtensionsWithManagedIdentity.json"
           }
         }
       }
@@ -225,7 +228,7 @@
           ]
         },
         "storageKeyType": {
-          "description": "Storage key type: StorageAccessKey or SharedAccessKey.",
+          "description": "Storage key type: StorageAccessKey, SharedAccessKey or ManagedIdentity.",
           "enum": [
             "SharedAccessKey",
             "StorageAccessKey",
@@ -241,7 +244,7 @@
           ]
         },
         "storageKey": {
-          "description": "Storage key for the storage account.",
+          "description": "Storage key for the storage account. If StorageKeyType is ManagedIdentity, this field should specify the Managed Identity's resource ID.",
           "type": "string",
           "x-ms-mutability": [
             "create"
@@ -255,14 +258,14 @@
           ]
         },
         "administratorLogin": {
-          "description": "Administrator login name.",
+          "description": "Administrator login name. If AuthenticationType is ManagedIdentity, this field should specify the Managed Identity's resource ID.",
           "type": "string",
           "x-ms-mutability": [
             "create"
           ]
         },
         "administratorLoginPassword": {
-          "description": "Administrator login password.",
+          "description": "Administrator login password. If AuthenticationType is ManagedIdentity, this field should not be specified.",
           "type": "string",
           "x-ms-secret": true,
           "x-ms-mutability": [
@@ -270,7 +273,7 @@
           ]
         },
         "authenticationType": {
-          "description": "Authentication type: SQL authentication or AD password.",
+          "description": "Authentication type used to access the SQL: Sql, ADPassword or ManagedIdentity.",
           "type": "string",
           "x-ms-mutability": [
             "create"
