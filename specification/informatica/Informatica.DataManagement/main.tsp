@@ -233,7 +233,7 @@ model InfaServerlessFetchConfigProperties {
   computeUnits?: string;
 
   @doc("Tenant ID")
-  tenantId?: string;
+  tenantId?: uuid;
 
   @doc("subscription ID")
   subscriptionId?: string;
@@ -348,7 +348,7 @@ model InformaticaProperties {
   informaticaRegion?: string;
 
   @doc("Single sing on URL for informatica organization")
-  singleSignOnUrl?: string;
+  singleSignOnUrl?: url;
 }
 
 @doc("Link Organization")

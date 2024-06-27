@@ -1099,6 +1099,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "CdiConfigProps": {
       "type": "object",
       "description": "Informatica CDI Configuration Properties.",
@@ -1344,7 +1349,7 @@
           "description": "Compute Units"
         },
         "tenantId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Tenant ID"
         },
         "subscriptionId": {
@@ -1433,6 +1438,7 @@
         },
         "singleSignOnUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Single sing on URL for informatica organization"
         }
       }
