@@ -180,9 +180,9 @@
           "format": "date-time",
           "description": "End window for assistant to run analysis on. Formatted as an ISO 8601 UTC timestamp, e.g. YYYY-MM-DDTHH:mm:ss.sssZ"
         },
-        "subResourceIds": {
+        "azureResourceIds": {
           "type": "array",
-          "description": "Sub-resource ARM Ids to help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks). Formatted as an arm-id. e.g. /subscriptions/{guid}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}",
+          "description": "Fully qualified resource IDs of Azure resources that can help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks). Formatted as a fully qualified Azure Resource ID. e.g. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}",
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -218,10 +218,6 @@
         "assistantResult": {
           "type": "string",
           "description": "The response message from the assistant"
-        },
-        "resourceContext": {
-          "$ref": "#/definitions/ResourceContext",
-          "description": "Information about the resource associated with the response"
         },
         "recommendedActions": {
           "type": "array",
@@ -299,20 +295,6 @@
       },
       "required": [
         "bladeName"
-      ]
-    },
-    "ResourceContext": {
-      "type": "object",
-      "description": "Resource info context",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure resource Id. Formatted as an arm-id. e.g. /subscriptions/{guid}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}"
-        }
-      },
-      "required": [
-        "resourceId"
       ]
     }
   },

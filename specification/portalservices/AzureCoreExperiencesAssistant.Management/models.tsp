@@ -28,8 +28,8 @@ model AssistantRequest {
   @doc("End window for assistant to run analysis on. Formatted as an ISO 8601 UTC timestamp, e.g. YYYY-MM-DDTHH:mm:ss.sssZ")
   windowEndTimestamp?: utcDateTime;
 
-  @doc("Sub-resource ARM Ids to help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks). Formatted as an arm-id. e.g. /subscriptions/{guid}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}")
-  subResourceIds?: armResourceIdentifier[];
+  @doc("Fully qualified resource IDs of Azure resources that can help the assistant in it's analysis (e.g. analyzing virtual machine performance issues by looking at its disks). Formatted as a fully qualified Azure Resource ID. e.g. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}")
+  azureResourceIds?: armResourceIdentifier[];
 
   @doc("The Azure Portal context from which the assistant was invoked")
   bladeContext?: PortalBladeContext;
@@ -66,15 +66,6 @@ model AssistantResponse {
   @doc("The response message from the assistant")
   assistantResult?: string;
 
-  @doc("Information about the resource associated with the response")
-  resourceContext?: ResourceContext;
-
   @doc("Recommended actions the user can take in the Azure Portal")
   recommendedActions?: string[];
-}
-
-@doc("Resource info context")
-model ResourceContext {
-  @doc("Azure resource Id. Formatted as an arm-id. e.g. /subscriptions/{guid}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}")
-  resourceId: armResourceIdentifier;
 }
