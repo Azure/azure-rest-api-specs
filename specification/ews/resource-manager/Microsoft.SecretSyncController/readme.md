@@ -38,4 +38,5 @@ These settings apply only when `--tag=package-2024-08-09-preview` is specified o
 input-file:
   - preview/2024-08-09-preview/secretsynccontroller.json
 ```
+
 ---

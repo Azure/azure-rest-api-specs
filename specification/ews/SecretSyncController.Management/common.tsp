@@ -6,6 +6,6 @@ namespace Microsoft.SecretSyncController;
 
 @doc("Provisioning state of the resource.")
 union ProvisioningState {
-    string,
-    ResourceProvisioningState,
+  string,
+  ResourceProvisioningState,
 }
