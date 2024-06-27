@@ -9,7 +9,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/models.tsp";
-import "./Dashboard.tsp";
+import "./TenantConfiguration.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -18,7 +19,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Allows creation and deletion of Azure Shared Dashboards.
+ * Allows creation and deletion of Tenant Configurations for Azure Shared Dashboards.
  */
 @armProviderNamespace
 @service({
