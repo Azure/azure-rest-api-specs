@@ -32,21 +32,11 @@
                       "$context(dataset-name-user-provided1).machine.details.id"
                     ],
                     "expression": "$2 == $1"
-                  },
-                  {
-                    "key": "dataset-name-user-provided2",
-                    "description": "a description of this other dataset",
-                    "schemaRef": "schemaRef-pointing-to-AIO-schema-registry-instance",
-                    "inputs": [
-                      "machineLocation",
-                      "$context(dataset-name-user-provided2).machine.location.city"
-                    ],
-                    "expression": "$2 == $1"
                   }
                 ],
                 "filter": [
                   {
-                    "type": "filter",
+                    "type": "Filter",
                     "description": "this is a user generated string to provide context",
                     "expression": "$1 == $3  && $2 > $4",
                     "inputs": [
