@@ -1,3 +1,4 @@
+import "@azure-tools/typespec-autorest";
 import "./operations/exadata/exadatainfrastructureOperations.tsp";
 import "./operations/exadata/dbServersOperations.tsp";
 import "./operations/exadata/vmclusterOperations.tsp";

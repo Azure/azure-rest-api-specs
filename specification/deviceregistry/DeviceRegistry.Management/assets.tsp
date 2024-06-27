@@ -56,7 +56,7 @@ model AssetProperties {
 
   @doc("A reference to the asset endpoint profile (connection information) used by brokers to connect to an endpoint that provides data points for this asset. Must have the format <ModuleCR.metadata.namespace>/<ModuleCR.metadata.name>.")
   @visibility("read", "create")
-  assetEndpointProfileUri: url;
+  assetEndpointProfileUri: string;
 
   @doc("An integer that is incremented each time the resource is modified.")
   @visibility("read")
@@ -66,7 +66,7 @@ model AssetProperties {
   manufacturer?: string;
 
   @doc("Asset manufacturer URI.")
-  manufacturerUri?: url;
+  manufacturerUri?: string;
 
   @doc("Asset model name.")
   // `model` is a reserved keyname. Wrap in double quotes
@@ -82,7 +82,7 @@ model AssetProperties {
   softwareRevision?: string;
 
   @doc("Reference to the documentation.")
-  documentationUri?: url;
+  documentationUri?: string;
 
   @doc("Asset serial number.")
   serialNumber?: string;
@@ -205,10 +205,14 @@ model AssetStatusError {
 interface Assets {
   get is ArmResourceRead<Asset>;
 
-  createOrReplace is ArmResourceCreateOrReplaceAsync<Asset>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
+    Asset,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
-  @parameterVisibility
-  update is ArmCustomPatchAsync<Asset, Asset>;
+  update is ArmResourcePatchAsync<Asset, AssetProperties>;
 
   delete is ArmResourceDeleteWithoutOkAsync<Asset>;
 

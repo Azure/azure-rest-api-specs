@@ -30,7 +30,12 @@ interface DeviceGroups {
   /**
    * Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DeviceGroup>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DeviceGroup,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
