@@ -242,7 +242,7 @@ model InfaServerlessFetchConfigProperties {
   region?: string;
 
   @doc("Serverless Arm Resource ID")
-  serverlessArmResourceId?: string;
+  serverlessArmResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }
 
 @doc("A Serverless Runtime environment  resource by Informatica.")
@@ -555,10 +555,10 @@ model ApplicationConfigs {
 @doc("Informatica Serverless Runtime Network Interface configurations.")
 model NetworkInterfaceConfiguration {
   @doc("Virtual network resource id")
-  vnetId: string;
+  vnetId: Azure.Core.armResourceIdentifier<[]>;
 
   @doc("Virtual network subnet resource id")
-  subnetId: string;
+  subnetId: Azure.Core.armResourceIdentifier<[]>;
 
   @doc("Virtual network resource guid")
   vnetResourceGuid?: string;
@@ -654,7 +654,7 @@ model OrganizationPropertiesCustomUpdate {
   companyDetails?: CompanyDetailsUpdate;
 
   @doc("Existing Resource Id")
-  existingResourceId?: string;
+  existingResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }
 
 /** Marketplace details */
