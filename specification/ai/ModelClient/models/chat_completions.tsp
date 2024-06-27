@@ -112,6 +112,14 @@ model ChatCompletionsOptions {
     ID of the specific AI model to use, if more than one model is available on the endpoint.
     """)
   `model`?: string;
+
+  @doc("""
+    Additional, model-specific parameters that are not in the
+    standard request payload. They will be added as-is to the root of the JSON in the request body.
+    How the service handles these extra parameters depends on the value of the
+    ``unknown-parameters`` request header. Default value is None.
+    """)
+  ..Record<unknown>;
 }
 
 alias ChatCompletionsCommon = {
