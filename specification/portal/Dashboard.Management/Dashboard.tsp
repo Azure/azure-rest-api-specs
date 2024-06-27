@@ -1,0 +1,67 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Portal;
+/**
+ * The shared dashboard resource definition.
+ */
+model Dashboard is Azure.ResourceManager.TrackedResource<DashboardProperties> {
+  ...ResourceNameParameter<
+    Resource = Dashboard,
+    KeyName = "dashboardName",
+    SegmentName = "dashboards",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface Dashboards {
+  /**
+   * Gets the Dashboard.
+   */
+  get is ArmResourceRead<Dashboard>;
+
+  /**
+   * Creates or updates a Dashboard.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Dashboard>;
+
+  /**
+   * Updates an existing Dashboard.
+   */
+  @parameterVisibility
+  update is ArmCustomPatchSync<Dashboard, PatchableDashboard>;
+
+  /**
+   * Deletes the Dashboard.
+   */
+  delete is ArmResourceDeleteSync<Dashboard>;
+
+  /**
+   * Gets all the Dashboards within a resource group.
+   */
+  listByResourceGroup is ArmResourceListByParent<Dashboard>;
+
+  /**
+   * Gets all the dashboards within a subscription.
+   */
+  listBySubscription is ArmListBySubscription<Dashboard>;
+}
+
+@@maxLength(Dashboard.name, 64);
+@@minLength(Dashboard.name, 3);
+@@doc(Dashboard.name, "The name of the dashboard.");
+@@doc(Dashboards.createOrUpdate::parameters.resource,
+  "The parameters required to create or update a dashboard."
+);
+@@doc(Dashboards.update::parameters.properties,
+  "The updatable fields of a Dashboard."
+);
