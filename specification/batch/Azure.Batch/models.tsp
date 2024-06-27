@@ -3769,6 +3769,12 @@ model BatchNodeRebootContent {
   nodeRebootOption?: BatchNodeRebootOption;
 }
 
+@doc("Parameters for reimaging an Azure Batch Compute Node.")
+model BatchNodeReimageContent {
+  @doc("When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue.")
+  nodeReimageOption?: BatchNodeReimageOption;
+}
+
 @doc("Parameters for disabling scheduling on an Azure Batch Compute Node.")
 model BatchNodeDisableSchedulingContent {
   @doc("What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue.")
