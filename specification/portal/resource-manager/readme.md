@@ -26,9 +26,19 @@ These are the global settings for the portal.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-09-01-preview
+tag: package-preview-2022-12
 ```
 
+
+### Tag: package-preview-2022-12
+
+These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-12'
+input-file:
+  - Microsoft.Portal/preview/2022-12-01-preview/portal.json
+  - Microsoft.Portal/preview/2022-12-01-preview/tenantConfiguration.json
+```
 
 ### Tag: package-2020-09-01-preview
 
