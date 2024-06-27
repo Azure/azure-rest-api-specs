@@ -83,5 +83,10 @@ namespace Informatica.DataManagement {
   @@clientName(RuntimeType.SERVERLESS, "Serverless", "csharp");
   @@clientName(ServerlessMetadataResponse.type, "RuntimeType", "csharp");
 
+  @@clientName(ServerlessRuntimes.serverlessResourceById,
+    "GetServerlessResourceById",
+    "csharp"
+  );
+
   @@usage(ServerlessRuntimeNetworkProfileUpdate, Usage.output);
 }
