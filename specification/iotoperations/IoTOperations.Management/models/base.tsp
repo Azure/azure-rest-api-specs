@@ -64,7 +64,7 @@ model OpenTelemetryLogExportConfig {
   ...OpenTelemetryExportConfig;
 
   @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
-  level?: string = "info";
+  level?: string = "error";
 }
 
 @doc("OpenTelemetry Export Configuration properties")
