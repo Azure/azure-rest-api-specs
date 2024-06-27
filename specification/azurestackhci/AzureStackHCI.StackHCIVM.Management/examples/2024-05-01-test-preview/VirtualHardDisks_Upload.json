@@ -4,11 +4,9 @@
     "resourceGroupName": "test-rg",
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "virtualHardDiskName": "test-vhd",
-    "body": [
-      {
-        "azureManagedDiskUploadUrl": "https://YourStorageAccountName.blob.core.windows.net/YourContainerName/YourVHDBlobName.vhd?<sas-token>"
-      }
-    ]
+    "body": {
+      "azureManagedDiskUploadUrl": "https://YourStorageAccountName.blob.core.windows.net/YourContainerName/YourVHDBlobName.vhd?<sas-token>"
+    }
   },
   "responses": {
     "200": {
@@ -41,7 +39,7 @@
         }
       }
     },
-    "201": {
+    "202": {
       "body": {
         "name": "test-vhd",
         "type": "Microsoft.AzureStackHCI/virtualHardDisks",
