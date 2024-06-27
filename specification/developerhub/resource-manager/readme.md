@@ -26,9 +26,17 @@ These are the global settings for the DeveloperHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-preview-2024-07
 ```
+### Tag: package-preview-2024-07
 
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.DevHub/preview/2024-07-01-preview/workflow.json
+  - Microsoft.DevHub/preview/2024-07-01-preview/iac.json
+```
 
 ### Tag: package-preview-2024-05
 
