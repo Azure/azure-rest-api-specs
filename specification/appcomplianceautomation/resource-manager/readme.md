@@ -30,6 +30,10 @@ openapi-subtype: rpaas
 tag: package-2024-06
 ```
 
+``` yaml $(csharp)
+modelerfour:
+  flatten-models: false
+```
 
 ### Tag: package-2024-06
 
