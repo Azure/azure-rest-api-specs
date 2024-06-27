@@ -29,16 +29,6 @@
                     "$context(dataset-name-user-provided1).machine.details.id"
                   ],
                   "expression": "$2 == $1"
-                },
-                {
-                  "key": "dataset-name-user-provided2",
-                  "description": "a description of this other dataset",
-                  "schemaRef": "schemaRef-pointing-to-AIO-schema-registry-instance",
-                  "inputs": [
-                    "machineLocation",
-                    "$context(dataset-name-user-provided2).machine.location.city"
-                  ],
-                  "expression": "$2 == $1"
                 }
               ],
               "filter": [
@@ -71,7 +61,7 @@
                   "output": "speedLKV"
                 },
                 {
-                  "type": "compute",
+                  "type": "Compute",
                   "description": "this is a user generated string to provide context for the operation",
                   "expression": "$1 * 9/5 + 32",
                   "inputs": [
@@ -158,7 +148,7 @@
                     "output": "speedLKV"
                   },
                   {
-                    "type": "compute",
+                    "type": "Compute",
                     "description": "this is a user generated string to provide context for the operation",
                     "expression": "$1 * 9/5 + 32",
                     "inputs": [
@@ -259,7 +249,7 @@
                     "output": "speedLKV"
                   },
                   {
-                    "type": "compute",
+                    "type": "Compute",
                     "description": "this is a user generated string to provide context for the operation",
                     "expression": "$1 * 9/5 + 32",
                     "inputs": [
