@@ -27,4 +27,7 @@ directive:
 - from: managedidentity.json
   where: definitions.SystemAssignedServiceIdentityType
   transform: $["x-ms-enum"].name = "ResourceIdentityType"
+- from: swagger-document
+  where: paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs"]
+  transform: $.get.operationId = "WorkloadNetworks_ListPublicIps"
 ```
