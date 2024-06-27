@@ -42,7 +42,7 @@ tag: package-locks-2020-05
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2023-04
+tag: package-policy-2024-04-stable
 ```
 
 ``` yaml $(package-resources)
@@ -82,18 +82,23 @@ tag: package-snapshots-2022-11
 ```
 
 ``` yaml $(package-bicep)
-tag: package-2024-04
+tag: package-bicep-2023-11
 ```
 
 
-### Tag: package-2024-04
+### Tag: package-policy-2024-04-stable
 
-These settings apply only when `--tag=package-2024-04` is specified on the command line.
+These settings apply only when `--tag=package-policy-2024-04-stable` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04'
+```yaml $(tag) == 'package-policy-2024-04-stable'
 input-file:
-  - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
+- Microsoft.Authorization/stable/2024-04-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2024-04-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2024-04-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2024-04-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
 ```
+
 ### Tag: package-bicep-2023-11
 
 These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
