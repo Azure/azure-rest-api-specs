@@ -75,7 +75,7 @@ model OpenTelemetryExportConfig {
   @doc("How often to export the metrics to the open telemetry collector.")
   @minValue(1)
   @maxValue(300)
-  exportIntervalSeconds?: int32 = 30;
+  intervalSeconds?: int32 = 30;
 }
 
 @doc("Diagnostic Metrics properties")

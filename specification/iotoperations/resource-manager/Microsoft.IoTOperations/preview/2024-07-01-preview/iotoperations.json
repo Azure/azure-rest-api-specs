@@ -3547,11 +3547,12 @@
       "properties": {
         "serializationFormat": {
           "type": "string",
-          "description": "Serialization format. Optional; defaults to JSON.",
+          "description": "Serialization format. Optional; defaults to JSON. Allowed value JSON Schema/draft-7, Paquet. Default: Json",
           "default": "Json",
           "enum": [
             "Delta",
-            "Json"
+            "Json",
+            "Parquet"
           ],
           "x-ms-enum": {
             "name": "TransformationSerializationFormat",
@@ -3566,6 +3567,11 @@
                 "name": "Json",
                 "value": "Json",
                 "description": "JSON Format"
+              },
+              {
+                "name": "Parquet",
+                "value": "Parquet",
+                "description": "Parquet Format"
               }
             ]
           }
@@ -5251,7 +5257,7 @@
           "type": "string",
           "description": "The open telemetry collector endpoint to export to."
         },
-        "exportIntervalSeconds": {
+        "intervalSeconds": {
           "type": "integer",
           "format": "int32",
           "description": "How often to export the metrics to the open telemetry collector.",
@@ -5272,7 +5278,7 @@
           "type": "string",
           "description": "The open telemetry collector endpoint to export to."
         },
-        "exportIntervalSeconds": {
+        "intervalSeconds": {
           "type": "integer",
           "format": "int32",
           "description": "How often to export the metrics to the open telemetry collector.",
@@ -6008,7 +6014,8 @@
       "description": "Transformation Format properties",
       "enum": [
         "Delta",
-        "Json"
+        "Json",
+        "Parquet"
       ],
       "x-ms-enum": {
         "name": "TransformationSerializationFormat",
@@ -6023,6 +6030,11 @@
             "name": "Json",
             "value": "Json",
             "description": "JSON Format"
+          },
+          {
+            "name": "Parquet",
+            "value": "Parquet",
+            "description": "Parquet Format"
           }
         ]
       }
