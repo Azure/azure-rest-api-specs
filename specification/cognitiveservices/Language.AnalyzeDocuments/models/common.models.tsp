@@ -397,6 +397,14 @@ model DocumentResult {
   statistics?: DocumentStatistics;
 }
 
+model DocumentAnalysisDocumentResult is DocumentResult {
+  /** Location of the input document. */
+  source: DocumentLocation;
+
+  /** Array of document results generated after the analysis. */
+  target: Array<DocumentLocation>;
+}
+
 /** Contains the error object with errors encountered for the processed document. */
 model AnalyzeDocumentsDocumentError {
   /** Document Id. */
