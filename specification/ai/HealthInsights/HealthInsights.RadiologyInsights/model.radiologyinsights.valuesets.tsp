@@ -298,7 +298,7 @@ union QualityMeasureType {
 }
 
 @added(ApiVersion.v2024_10_01)
-@doc("Refers to how imporant a clinical guidance is")
+@doc("Refers to how important a clinical guidance is")
 union GuidanceRankingType {
   string,
 
