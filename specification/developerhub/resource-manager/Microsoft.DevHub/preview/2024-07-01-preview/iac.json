@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-05-01-preview",
+    "version": "2024-07-01-preview",
     "title": "DeveloperHubServiceClient",
     "description": "The AKS Developer Hub Service Client"
   },
@@ -438,6 +438,56 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevHub/iacProfiles/{iacProfileName}/quickTemplate": {
+      "post": {
+        "tags": [
+          "IacProfile"
+        ],
+        "operationId": "IacProfiles_QuickTemplate",
+        "summary": "Create quick start template",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IacProfileParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuickTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/prLinkResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create IacProfile": {
+            "$ref": "./examples/IacProfile_QuickTemplate.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -743,6 +793,20 @@
         "prLink": {
           "type": "string",
           "description": "The link of the pull request."
+        }
+      }
+    },
+    "QuickTemplateRequest":{
+      "type": "object",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "title": "The name of the template.",
+          "description": "Template Name"
+        },
+        "quickStartTemplateType": {
+          "$ref": "#/definitions/QuickStartTemplateType",
+          "description": "The type of quick start template"
         }
       }
     }
