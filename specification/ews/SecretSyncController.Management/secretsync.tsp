@@ -71,11 +71,11 @@ model KubernetesSecretObjectMapping {
 union KubernetesSecretType {
   // https://kubernetes.io/docs/concepts/configuration/secret/#opaque-secrets
   @doc("Opaque is the default secret type.")
-  opaque: "Opaque",
+  Opaque: "Opaque",
 
   // https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets
   @doc("The kubernetes.io/tls secret type is for storing a certificate and its associated key that are typically used for TLS.")
-  tls: "kubernetes.io/tls",
+  Tls: "kubernetes.io/tls",
 
   // extensible union
   string,

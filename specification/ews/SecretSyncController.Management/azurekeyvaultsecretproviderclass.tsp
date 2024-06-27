@@ -30,9 +30,11 @@ model AzureKeyVaultSecretProviderClassProperties {
   keyvaultName: string;
 
   @doc("The user assigned managed identity client ID that should be used to access the Azure Key Vault.")
+  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
   clientId: string;
 
   @doc("The Azure Active Directory tenant ID that should be used for authenticating requests to the Azure Key Vault.")
+  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
   tenantId: string;
 
   @doc("List of objects to synchronize from the specified Azure Key Vault.")
@@ -60,13 +62,13 @@ union AzureKeyVaultObjectType {
   // https://learn.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates
   // https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/configurations/getting-certs-and-keys/
   @doc("Azure Key Vault secret")
-  secret: "secret",
+  Secret: "secret",
 
   @doc("Azure Key Vault key")
-  key: "key",
+  Key: "key",
 
   @doc("Azure Key Vault certificate")
-  cert: "cert",
+  Cert: "cert",
 
   string,
 }
