@@ -27,15 +27,3 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Portal;
-
-/**
- * The available API versions.
- */
-enum Versions {
-  /**
-   * The 2020-09-01-preview API version.
-   */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2022_12_01_preview: "2022-12-01-preview",
-}
