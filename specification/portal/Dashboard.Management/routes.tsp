@@ -11,11 +11,13 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Portal;
 
+@armResourceOperations
 interface ListTenantConfigurationViolationsOperations {
   /**
    * Gets list of items that violate tenant's configuration.
    */
   @route("/providers/Microsoft.Portal/listTenantConfigurationViolations")
+  @armResourceCollectionAction
   @post
   list(...ApiVersionParameter): ArmResponse<ViolationsList> | ErrorResponse;
 }

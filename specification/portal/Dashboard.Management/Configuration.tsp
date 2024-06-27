@@ -13,13 +13,15 @@ namespace Microsoft.Portal;
 /**
  * Tenant configuration.
  */
+@doc("The configuration resource definition.")
 @tenantResource
 model Configuration
-  is Azure.ResourceManager.ProxyResource<ConfigurationProperties> {
+  is Azure.ResourceManager.ProxyResource<ConfigurationPropertiesWithProvisioningState> {
   /**
    * The configuration name. Value must be 'default'
    */
   @path
+  @pattern("^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$")
   @key("configurationName")
   @segment("tenantConfigurations")
   @visibility("read")

@@ -12,8 +12,10 @@ namespace Microsoft.Portal;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The configuration name")
 union ConfigurationName {
   string,
+  @doc("The default configuration name")
   default: "default",
 }
 
@@ -86,6 +88,15 @@ model ErrorDefinition {
   details?: ErrorDefinition[];
 }
 
+@doc("Dashboard Properties with Provisioning state")
+model DashboardPropertiesWithProvisioningState {
+  ...DashboardProperties;
+
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+}
+
 /**
  * The shared dashboard properties.
  */
@@ -99,7 +110,7 @@ model DashboardProperties {
   /**
    * The dashboard metadata.
    */
-  metadata?: Record<Record<unknown>>;
+  metadata?: {};
 }
 
 /**
@@ -201,6 +212,14 @@ model ConfigurationProperties {
   enforcePrivateMarkdownStorage?: boolean;
 }
 
+@doc("Dashboard Properties with Provisioning state")
+model ConfigurationPropertiesWithProvisioningState {
+  ...ConfigurationProperties;
+
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+}
 /**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
