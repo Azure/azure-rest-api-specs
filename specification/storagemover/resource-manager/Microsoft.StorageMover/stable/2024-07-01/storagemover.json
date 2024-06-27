@@ -2386,22 +2386,8 @@
           "readOnly": true
         },
         "latestJobRunStatus": {
-          "enum": [
-            "Queued",
-            "Started",
-            "Running",
-            "CancelRequested",
-            "Canceling",
-            "Canceled",
-            "Failed",
-            "Succeeded"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobRunStatus",
-            "modelAsString": true
-          },
           "description": "The current status of the Job Run in a non-terminal state, if exists.",
+          "$ref": "#/definitions/JobRunStatus",
           "readOnly": true
         },
         "agentName": {
@@ -2525,22 +2511,7 @@
       "properties": {
         "status": {
           "readOnly": true,
-          "enum": [
-            "Queued",
-            "Started",
-            "Running",
-            "CancelRequested",
-            "Canceling",
-            "Canceled",
-            "Failed",
-            "Succeeded",
-            "PausedByBandwidthManagement"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobRunStatus",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/JobRunStatus",
           "description": "The state of the job execution."
         },
         "scanStatus": {
@@ -2751,6 +2722,25 @@
           "readOnly": true
         }
       }
+    },
+    "JobRunStatus": {
+      "enum": [
+        "Queued",
+        "Started",
+        "Running",
+        "CancelRequested",
+        "Canceling",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "PausedByBandwidthManagement"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobRunStatus",
+        "modelAsString": true
+      },
+      "description": "The state of the Job Run execution."
     },
     "ProjectProperties": {
       "description": "Project properties.",
