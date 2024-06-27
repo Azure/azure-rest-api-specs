@@ -10,6 +10,11 @@ using Microsoft.LoadTestService;
 @useDependency(APIVersions.v2024_05_01_preview)
 namespace Customizations;
 
+// Client customizations should be kept here only
+// Model related customizations here (Ref: https://azure.github.io/typespec-azure/docs/howtos/DataPlane%20Generation%20-%20DPG/04renaming):
+@@clientName(MetricDimensionsRequest.metricname, "metric_name", "python");
+@@clientName(MetricDimensionsRequest.timespan, "time_interval", "python");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @client({
   name: "LoadTestAdministrationClient",

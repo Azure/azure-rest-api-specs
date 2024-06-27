@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
@@ -1042,7 +1040,6 @@ model DimensionValueList {
 model MetricDimensionsRequest {
   @doc("Metric name")
   @query
-  @clientName("metric_name", "python")
   metricname: string;
 
   @doc("The interval (i.e. timegrain) of the query.")
@@ -1057,7 +1054,6 @@ model MetricDimensionsRequest {
     The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.
     """)
   @query
-  @clientName("time_interval", "python")
   timespan: string;
 }
 
