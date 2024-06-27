@@ -92,7 +92,10 @@ interface FleetMembers {
   @removed(Versions.v2023_06_15_preview)
   update is ArmCustomPatchSync<
     FleetMember,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<FleetMember, FleetMemberProperties>,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      FleetMember,
+      FleetMemberProperties
+    >,
     Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
       IfMatchParameters<FleetMember>
   >;
@@ -109,7 +112,10 @@ interface FleetMembers {
   )
   updateAsync is ArmCustomPatchAsync<
     FleetMember,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<FleetMember, FleetMemberProperties>,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      FleetMember,
+      FleetMemberProperties
+    >,
     Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
       IfMatchParameters<FleetMember>
   >;

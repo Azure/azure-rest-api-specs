@@ -146,7 +146,10 @@ interface CommunityTrainings {
   >;
   update is ArmCustomPatchAsync<
     CommunityTraining,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<CommunityTraining, CommunityTrainingProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CommunityTraining,
+      CommunityTrainingProperties
+    >
   >;
   delete is ArmResourceDeleteAsync<CommunityTraining>;
   listByResourceGroup is ArmResourceListByParent<CommunityTraining>;

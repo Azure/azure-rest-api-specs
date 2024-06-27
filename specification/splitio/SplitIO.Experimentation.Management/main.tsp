@@ -127,7 +127,10 @@ namespace SplitIO.Experimentation {
     >;
     update is ArmCustomPatchAsync<
       ExperimentationWorkspace,
-      Azure.ResourceManager.Foundations.ResourceUpdateModel<ExperimentationWorkspace, ExperimentationWorkspaceProperties>
+      Azure.ResourceManager.Foundations.ResourceUpdateModel<
+        ExperimentationWorkspace,
+        ExperimentationWorkspaceProperties
+      >
     >;
     delete is ArmResourceDeleteWithoutOkAsync<ExperimentationWorkspace>;
     listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;

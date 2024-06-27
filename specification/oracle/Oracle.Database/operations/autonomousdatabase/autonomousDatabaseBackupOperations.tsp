@@ -19,7 +19,10 @@ interface AutonomousDatabaseBackups
   )
   update is ArmCustomPatchAsync<
     AutonomousDatabaseBackup,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<AutonomousDatabaseBackup, AutonomousDatabaseBackupProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AutonomousDatabaseBackup,
+      AutonomousDatabaseBackupProperties
+    >
   >;
 
   @example(

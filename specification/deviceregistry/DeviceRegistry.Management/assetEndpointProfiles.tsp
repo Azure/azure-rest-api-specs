@@ -129,7 +129,10 @@ interface AssetEndpointProfiles {
 
   update is ArmCustomPatchAsync<
     AssetEndpointProfile,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<AssetEndpointProfile, AssetEndpointProfileProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AssetEndpointProfile,
+      AssetEndpointProfileProperties
+    >
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;

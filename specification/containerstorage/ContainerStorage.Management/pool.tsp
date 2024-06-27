@@ -25,7 +25,10 @@ interface Pools {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
-  update is ArmCustomPatchAsync<Pool, Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>>;
+  update is ArmCustomPatchAsync<
+    Pool,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>
+  >;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
 }
