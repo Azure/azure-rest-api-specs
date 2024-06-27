@@ -119,7 +119,7 @@ model ChatCompletionsOptions {
     How the service handles these extra parameters depends on the value of the
     ``unknown-parameters`` request header. Default value is None.
     """)
-  ..Record<unknown>;
+  ...Record<unknown>;
 }
 
 alias ChatCompletionsCommon = {
