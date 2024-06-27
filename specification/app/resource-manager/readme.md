@@ -26,15 +26,89 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-11
+tag: package-preview-2024-02
 ```
 
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - Microsoft.App/preview/2024-02-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2024-02-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2024-02-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2024-02-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2024-02-02-preview/Builders.json
+  - Microsoft.App/preview/2024-02-02-preview/Builds.json
+  - Microsoft.App/preview/2024-02-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsPatches.json
+  - Microsoft.App/preview/2024-02-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2024-02-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/Global.json
+  - Microsoft.App/preview/2024-02-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/Jobs.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-02-02-preview/SourceControls.json
+  - Microsoft.App/preview/2024-02-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2024-02-02-preview/Usages.json
+  - Microsoft.App/preview/2024-02-02-preview/FunctionsExtension.json
+  - Microsoft.App/preview/2024-02-02-preview/LogicAppsExtension.json
+  - Microsoft.App/preview/2024-02-02-preview/SessionPools.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: JavaComponents.json
+    reason: |
+      Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
+  - suppress: LroErrorContent
+    from: SessionPools.json
+    reason: |
+      Using the same error response as other APIs.
+```
+
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03'
+input-file:
+  - Microsoft.App/stable/2024-03-01/AuthConfigs.json
+  - Microsoft.App/stable/2024-03-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2024-03-01/BillingMeters.json
+  - Microsoft.App/stable/2024-03-01/CommonDefinitions.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2024-03-01/ContainerApps.json
+  - Microsoft.App/stable/2024-03-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2024-03-01/Diagnostics.json
+  - Microsoft.App/stable/2024-03-01/Global.json
+  - Microsoft.App/stable/2024-03-01/Jobs.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2024-03-01/SourceControls.json
+  - Microsoft.App/stable/2024-03-01/Subscriptions.json
+  - Microsoft.App/stable/2024-03-01/Usages.json
+```
 
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-11'
+``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
   - Microsoft.App/preview/2023-11-02-preview/AppResiliency.json
   - Microsoft.App/preview/2023-11-02-preview/AuthConfigs.json
@@ -63,6 +137,7 @@ input-file:
   - Microsoft.App/preview/2023-11-02-preview/JavaComponents.json
   - Microsoft.App/preview/2023-11-02-preview/DotNetComponents.json
 ```
+
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
@@ -102,12 +177,12 @@ directive:
   - suppress: LroErrorContent
     from: Builds.json
     reason: |
-      We are not using the common error response for these new resources to promote consistency 
+      We are not using the common error response for these new resources to promote consistency
       with the rest of the Microsoft.App RP, as it also doesn't use the common-types error.
   - suppress: LroErrorContent
     from: Builders.json
     reason: |
-      We are not using the common error response for these new resources to promote consistency 
+      We are not using the common error response for these new resources to promote consistency
       with the rest of the Microsoft.App RP, as it also doesn't use the common-types error.
 ```
 

@@ -21,7 +21,7 @@
             "stateTransitionTime": "2016-11-21T18:26:39.7108787Z",
             "allocationState": "steady",
             "allocationStateTransitionTime": "2016-11-21T18:27:40.287803Z",
-            "vmSize": "small",
+            "vmSize": "Standard_D1_v2",
             "resizeTimeout": "PT15M",
             "currentDedicatedNodes": 3,
             "currentLowPriorityNodes": 0,
@@ -44,9 +44,14 @@
             "taskSchedulingPolicy": {
               "nodeFillType": "spread"
             },
-            "cloudServiceConfiguration": {
-              "osFamily": "4",
-              "osVersion": "*"
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2016-datacenter-smalldisk",
+                "version": "latest"
+              },
+              "nodeAgentSKUId": "batch.node.windows amd64"
             }
           }
         ]

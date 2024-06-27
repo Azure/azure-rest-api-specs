@@ -7,13 +7,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 title: LargeInstanceMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-azurelargeinstance
-namespace: azure.mgmt.azurelargeinstance
+package-name: azure-mgmt-largeinstance
+namespace: azure.mgmt.largeinstance
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/azurelargeinstance/azure-mgmt-azurelargeinstance/azure/mgmt/azurelargeinstance
+output-folder: $(python-sdks-folder)/largeinstance/azure-mgmt-largeinstance/azure/mgmt/largeinstance
 ```

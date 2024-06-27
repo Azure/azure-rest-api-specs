@@ -28,7 +28,7 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2023-12
+tag: package-2024-04
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -49,11 +49,20 @@ semantic-validator: true
 message-format: json
 ```
 
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.DataProtection/stable/2024-04-01/dataprotection.json
+```
 ### Tag: package-preview-2024-02
 
 These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-02'
+``` yaml $(tag) == 'package-preview-2024-02'
 input-file:
   - Microsoft.DataProtection/preview/2024-02-01-preview/dataprotection.json
 suppressions:
@@ -65,14 +74,24 @@ suppressions:
       reason: Seems like a tool bug, as the flagged contract satisfies the given condition.
 ```
 
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03'
+input-file:
+  - Microsoft.DataProtection/stable/2024-03-01/dataprotection.json
+```
+
 ### Tag: package-2023-12
 
 These settings apply only when `--tag=package-2023-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-12'
+``` yaml $(tag) == 'package-2023-12'
 input-file:
   - Microsoft.DataProtection/stable/2023-12-01/dataprotection.json
 ```
+
 ### Tag: package-2023-11
 
 These settings apply only when `--tag=package-2023-11` is specified on the command line.

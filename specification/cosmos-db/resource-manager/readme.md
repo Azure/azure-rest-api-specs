@@ -30,7 +30,7 @@ openapi-type: arm
 tag: package-preview-2024-07
 ```
 
-### Tag: package-preview-2024-05
+### Tag: package-preview-2024-07
 
 These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
 
@@ -74,7 +74,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-02'
+``` yaml $(tag) == 'package-preview-2024-02'
 input-file:
   - Microsoft.DocumentDB/preview/2024-02-15-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2024-02-15-preview/dataTransferService.json
@@ -89,6 +89,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2024-02-15-preview/services.json
   - Microsoft.DocumentDB/preview/2024-02-15-preview/throughputpool.json
 ```
+
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
@@ -866,6 +867,9 @@ directive:
   - suppress: PutResponseSchemaDescription
     from: cosmos-db.json
     reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: AvoidAdditionalProperties
+    from: managedCassandra.json
+    reason: Temporarily suppressing existing linter errors and will be fixed later
 
 ```
 

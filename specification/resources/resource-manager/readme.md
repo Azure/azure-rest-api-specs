@@ -46,7 +46,7 @@ tag: package-policy-2023-04
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2023-07
+tag: package-resources-2024-03
 ```
 
 ``` yaml $(package-subscriptions)
@@ -70,7 +70,7 @@ tag: package-templatespecs-2022-02
 ```
 
 ``` yaml $(package-deploymentstacks)
-tag: package-deploymentstacks-2022-08-preview
+tag: package-deploymentstacks-2024-03
 ```
 
 ``` yaml $(package-changes)
@@ -82,17 +82,27 @@ tag: package-snapshots-2022-11
 ```
 
 ``` yaml $(package-bicep)
-tag: package-bicep-2023-11
+tag: package-2024-04
 ```
 
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
+```
 ### Tag: package-bicep-2023-11
 
 These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-bicep-2023-11'
+``` yaml $(tag) == 'package-bicep-2023-11'
 input-file:
   - Microsoft.Resources/stable/2023-11-01/bicepClient.json
 ```
+
 ### Tag: package-policy-2023-04
 
 These settings apply only when `--tag=package-policy-2023-04` is specified on the command line.
@@ -112,54 +122,6 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
-
-suppressions:
-  - code: PathForPutOperation
-    from: policyDefinitions.json
-    reason: Policy definitions can be created at management group or subscriptions
-  - code: PathForPutOperation
-    from: policySetDefinitions.json
-    reason: Policy sets can be created at management group or subscriptions
-  - code: PathForPutOperation
-    from: policyAssignments.json
-    reason: Policy assignments can be created at management group or subscriptions
-  - code: PathForPutOperation
-    from: policyDefinitionVersions.json
-    reason: Policy definition versions can be created at management group or subscriptions
-  - code: PathForPutOperation
-    from: policySetDefinitionVersions.json
-    reason: Policy set versions can be created at management group or subscriptions
-  - code: DeleteResponseBodyEmpty
-    from: policyAssignments.json
-    reason: Policy assignment body is returned on delete and this must match API
-  - code: RequestSchemaForTrackedResourcesMustHaveTags
-    from: policyAssignments.json
-    reason: Policy assignments are not tracked resources
-  - code: RepeatedPathInfo
-    from: policyAssignments.json
-    reason: Service requires the scope to be in the body
-  - code: PutResponseSchemaDescription
-    from: policyAssignments.json
-    reason: Service only returns 201 on all successful PUTs
-  - code: PutResponseSchemaDescription
-    from: policyDefinitions.json
-    reason: Service only returns 201 on all successful PUTs
-  - code: PutResponseSchemaDescription
-    from: policySetDefinitions.json
-    reason: Service only returns 201 on all successful PUTs
-  - code: UnSupportedPatchProperties
-    from: policyAssignments.json
-    reason: The location property represents the user-assigned identity location and is changeable for policy assignments
-  - code: PathContainsResourceType
-    from: policyAssignments.json
-    reason: The policy assignment id does contain the resource type
-  - code: ResourceNameRestriction
-    from: policyDefinitionVersions.json
-    reason: Using common types for management group name
-  - code: ResourceNameRestriction
-    from: policySetDefinitionVersions.json
-    reason: Using common types for management group name
-
 ```
 
 ### Tag: package-policy-2023-04-only
@@ -183,7 +145,7 @@ override-info:
 
 These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-deploymentscripts-2023-08'
+``` yaml $(tag) == 'package-deploymentscripts-2023-08'
 input-file:
   - Microsoft.Resources/stable/2023-08-01/deploymentScripts.json
 
@@ -191,6 +153,7 @@ suppressions:
   - code: OperationsAPIImplementation
     reason: OperationsAPI will come from Resources
 ```
+
 ### Tag: package-resources-2023-07
 
 These settings apply only when `--tag=package-resources-2023-07` is specified on the command line.
@@ -198,6 +161,15 @@ These settings apply only when `--tag=package-resources-2023-07` is specified on
 ``` yaml $(tag) == 'package-resources-2023-07'
 input-file:
   - Microsoft.Resources/stable/2023-07-01/resources.json
+```
+
+### Tag: package-resources-2024-03
+
+These settings apply only when `--tag=package-resources-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2024-03'
+input-file:
+  - Microsoft.Resources/stable/2024-03-01/resources.json
 ```
 
 ### Tag: package-2022-12
@@ -692,6 +664,15 @@ These settings apply only when `--tag=package-deploymentstacks-2022-08-preview` 
 ``` yaml $(tag) == 'package-deploymentstacks-2022-08-preview'
 input-file:
 - Microsoft.Resources/preview/2022-08-01-preview/deploymentStacks.json
+```
+
+### Tag: package-deploymentstacks-2024-03
+
+These settings apply only when `--tag=package-deploymentstacks-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-deploymentstacks-2024-03'
+input-file:
+- Microsoft.Resources/stable/2024-03-01/deploymentStacks.json
 ```
 
 ### Tag: package-policy-2016-12
@@ -1350,6 +1331,111 @@ directive:
   - suppress: XmsParameterLocation
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForTrackedResourceTypes
+    from: resources.json
+    reason: Not a tracked resource type. Cannot change anything due to design philosophy in ARM.
+  - suppress: PostResponseCodes
+    from: resources.json
+    reason: Breaking change in order to change the API response code.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: resources.json
+    reason: Tenant level API's are allowed as an exception in ARM repo. It is a breaking change to modify it.
+  - suppress: XmsPageableForListCalls
+    from: resources.json
+    reason: Shared swagger with other teams. We cannot make changes to the API as we don't own it.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: resources.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: DeleteResponseCodes
+    from: resources.json
+    reason: Breaking change in order to change the API response code.
+  - suppress: PutResponseCodes
+    from: resources.json
+    reason: Breaking change in order to change the API response code.
+  - suppress: AvoidAdditionalProperties
+    from: resources.json
+    reason: Breaking change in order to change the property names for multiple API's. Will fix in the future.
+  - suppress: XmsExamplesRequired
+    from: resources.json
+    reason: Xms Examples required is a pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: RequiredReadOnlySystemData
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future
+  - suppress: PathForTrackedResourceTypes
+    from: deploymentStacks.json
+    reason: "A deployment stack resource is a proxy location-mapped resource type."
+  - suppress: TenantLevelAPIsNotAllowed
+    from: deploymentStacks.json
+    reason: "Working with deployment stacks at the management group scope is supported."
+  - suppress: TrackedResourcePatchOperation
+    from: deploymentStacks.json
+    reason: "A deployment stack resource is a proxy location-mapped resource type."
+  - suppress: AvoidAdditionalProperties
+    from: deploymentStacks.json
+    reason: "Deployment properties such as 'parameters', 'outputs', and 'template' are dynamic types. For example, properties of the parameters object are defined by the template content."
+  - suppress: PostResponseCodes
+    from: deploymentStacks.json
+    reason: "Validate endpoints have 200, 202, 400, and default responses. The 400 response inherits the error response."
+  - suppress: LroErrorContent
+    from: deploymentStacks.json
+    reason: Error response is inherited via allOf on flagged response.
+  - suppress: NoErrorCodeResponses
+    from: deploymentStacks.json
+    reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
+  - suppress: MissingXmsErrorResponse
+    from: deploymentStacks.json
+    reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
+  - suppress: DeleteResponseCodes
+    from: deploymentStacks.json
+    reason: Deployment stacks supports synchronous delete with 200 reponse.
+  - supress: OperationsAPIImplementation
+    from: deploymentStacks.json
+    reason: This comes from resources.json
+  - suppress: PathForPutOperation
+    from: policyDefinitions.json
+    reason: Policy definitions can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policySetDefinitions.json
+    reason: Policy sets can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policyAssignments.json
+    reason: Policy assignments can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policyDefinitionVersions.json
+    reason: Policy definition versions can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policySetDefinitionVersions.json
+    reason: Policy set versions can be created at management group or subscriptions
+  - suppress: DeleteResponseBodyEmpty
+    from: policyAssignments.json
+    reason: Policy assignment body is returned on delete and this must match API
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: policyAssignments.json
+    reason: Policy assignments are not tracked resources
+  - suppress: RepeatedPathInfo
+    from: policyAssignments.json
+    reason: Service requires the scope to be in the body
+  - suppress: PutResponseSchemaDescription
+    from: policyAssignments.json
+    reason: Service only returns 201 on all successful PUTs
+  - suppress: PutResponseSchemaDescription
+    from: policyDefinitions.json
+    reason: Service only returns 201 on all successful PUTs
+  - suppress: PutResponseSchemaDescription
+    from: policySetDefinitions.json
+    reason: Service only returns 201 on all successful PUTs
+  - suppress: UnSupportedPatchProperties
+    from: policyAssignments.json
+    reason: The location property represents the user-assigned identity location and is changeable for policy assignments
+  - suppress: PathContainsResourceType
+    from: policyAssignments.json
+    reason: The policy assignment id does contain the resource type
+  - suppress: ResourceNameRestriction
+    from: policyDefinitionVersions.json
+    reason: Using common types for management group name
+  - suppress: ResourceNameRestriction
+    from: policySetDefinitionVersions.json
+    reason: Using common types for management group name
 ```
 
 ---
