@@ -210,7 +210,7 @@ model PatchableDashboard {
 /**
  * Tenant configuration properties.
  */
-model ConfigurationProperties {
+model TenantConfigurationProperties {
   /**
    * When flag is set to true Markdown tile will require external storage configuration (URI). The inline content configuration will be prohibited.
    */
@@ -218,8 +218,8 @@ model ConfigurationProperties {
 }
 
 @doc("Dashboard Properties with Provisioning state")
-model ConfigurationPropertiesWithProvisioningState {
-  ...ConfigurationProperties;
+model TenantConfigurationPropertiesWithProvisioningState {
+  ...TenantConfigurationProperties;
 
   @doc("The status of the last operation.")
   @visibility("read")

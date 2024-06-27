@@ -15,8 +15,8 @@ namespace Microsoft.Portal;
  */
 @doc("The configuration resource definition.")
 @tenantResource
-model Configuration
-  is Azure.ResourceManager.ProxyResource<ConfigurationPropertiesWithProvisioningState> {
+model TenantConfiguration
+  is Azure.ResourceManager.ProxyResource<TenantConfigurationPropertiesWithProvisioningState> {
   /**
    * The configuration name. Value must be 'default'
    */
@@ -29,28 +29,28 @@ model Configuration
 }
 
 @armResourceOperations
-interface Configurations {
+interface TenantConfigurations {
   /**
    * Gets the tenant configuration.
    */
-  get is ArmResourceRead<Configuration>;
+  get is ArmResourceRead<TenantConfiguration>;
 
   /**
    * Create the tenant configuration. If configuration already exists - update it. User has to be a Tenant Admin for this operation.
    */
-  create is ArmResourceCreateOrReplaceSync<Configuration>;
+  create is ArmResourceCreateOrReplaceSync<TenantConfiguration>;
 
   /**
    * Delete the tenant configuration. User has to be a Tenant Admin for this operation.
    */
-  delete is ArmResourceDeleteSync<Configuration>;
+  delete is ArmResourceDeleteSync<TenantConfiguration>;
 
   /**
    * Gets list of the tenant configurations.
    */
-  list is ArmResourceListByParent<Configuration>;
+  list is ArmResourceListByParent<TenantConfiguration>;
 }
 
-@@doc(Configurations.create::parameters.resource,
+@@doc(TenantConfigurations.create::parameters.resource,
   "The parameters required to create or update tenant configuration."
 );
