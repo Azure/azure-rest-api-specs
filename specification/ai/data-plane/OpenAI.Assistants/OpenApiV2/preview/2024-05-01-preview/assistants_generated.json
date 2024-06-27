@@ -179,6 +179,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssistantCreationOptions"
@@ -232,11 +233,16 @@
         "description": "Modifies an existing assistant.",
         "parameters": [
           {
-            "$ref": "#/parameters/UpdateAssistantOptions.assistantId"
+            "name": "assistantId",
+            "in": "path",
+            "description": "The ID of the assistant to modify.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateAssistantOptions"
@@ -546,6 +552,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssistantThreadCreationOptions"
@@ -599,11 +606,16 @@
         "description": "Modifies an existing thread.",
         "parameters": [
           {
-            "$ref": "#/parameters/UpdateAssistantThreadOptions.threadId"
+            "name": "threadId",
+            "in": "path",
+            "description": "The ID of the thread to modify.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateAssistantThreadOptions"
@@ -1415,6 +1427,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateAndRunThreadOptions"
@@ -1556,6 +1569,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VectorStoreOptions"
@@ -5370,22 +5384,5 @@
       }
     }
   },
-  "parameters": {
-    "UpdateAssistantOptions.assistantId": {
-      "name": "assistantId",
-      "in": "path",
-      "description": "The ID of the assistant to modify.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "UpdateAssistantThreadOptions.threadId": {
-      "name": "threadId",
-      "in": "path",
-      "description": "The ID of the thread to modify.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
