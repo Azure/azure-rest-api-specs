@@ -4389,6 +4389,11 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "storageIntegration": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -5349,6 +5354,11 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "storageIntegration": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -8359,6 +8369,10 @@
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         },
+        "continuationSettings": {
+          "description": "Continuation settings for execute data flow activity.",
+          "$ref": "#/definitions/ContinuationSettingsReference"
+        },
         "compute": {
           "description": "Compute properties for data flow activity.",
           "type": "object",
@@ -8399,6 +8413,27 @@
       "required": [
         "dataFlow"
       ]
+    },
+    "ContinuationSettingsReference": {
+      "description": "Continuation settings for execute data flow activity.",
+      "type": "object",
+      "properties": {
+        "continuationTtlInMinutes": {
+          "description": "Continuation TTL in minutes.",
+          "x-ms-format": "dfe-int",
+          "type": "object"
+        },
+        "idleCondition": {
+          "description": "Idle condition.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "customizedCheckpointKey": {
+          "description": "Customized checkpoint key.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        }
+      }
     },
     "ExecutePowerQueryActivityTypeProperties": {
       "description": "Execute power query data flow activity properties.",

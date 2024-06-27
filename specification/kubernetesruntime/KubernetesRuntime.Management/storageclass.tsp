@@ -282,7 +282,12 @@ model StorageClassResource is ExtensionResource<StorageClassProperties> {
 @armResourceOperations(StorageClassResource)
 interface StorageClass {
   get is ArmResourceRead<StorageClassResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<StorageClassResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    StorageClassResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmCustomPatchAsync<
     StorageClassResource,
     StorageClassResourceUpdate
