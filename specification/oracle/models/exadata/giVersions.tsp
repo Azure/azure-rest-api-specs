@@ -22,5 +22,5 @@ model GiVersionProperties {
   @visibility("read")
   @minLength(1)
   @maxLength(255)
-  version: string;
+  version?: string;
 }
