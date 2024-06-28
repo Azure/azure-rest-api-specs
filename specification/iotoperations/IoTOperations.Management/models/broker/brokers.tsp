@@ -14,7 +14,7 @@ namespace Microsoft.IoTOperations;
  */
 @doc("Instance broker resource")
 @parentResource(InstanceResource)
-model BrokerResource is TrackedResource<BrokerProperties> {
+model BrokerResource is ProxyResource<BrokerProperties> {
   @doc("Name of broker.")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("brokerName")
@@ -24,7 +24,7 @@ model BrokerResource is TrackedResource<BrokerProperties> {
   @segment("brokers")
   name: string;
 
-  // Extended location is not included in TrackedResource yet
+  // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility("read", "create")
@@ -41,8 +41,8 @@ model BrokerProperties {
   @doc("The cardinality details of the broker.")
   cardinality?: Cardinality;
 
-  @doc("Spec defines the desired identities of MQTT broker diagnostics settings.")
-  diagnostics?: Diagnostics;
+  @doc("Spec defines the desired identities of Broker diagnostics settings.")
+  diagnostics?: BrokerDiagnostics;
 
   @visibility("read", "create")
   @doc("Settings of Disk Backed Message Buffer.")
@@ -67,24 +67,10 @@ model AdvancedSettings {
   clients?: ClientConfig;
 
   @doc("The setting to enable or disable encryption of internal Traffic.")
-  encryptInternalTraffic?: Encrypt = Encrypt.Enabled;
+  encryptInternalTraffic?: OperationalMode = OperationalMode.Enabled;
 
   @doc("Certificate rotation and private key configuration.")
   internalCerts?: CertManagerCertOptions;
-
-  @doc("The details of Tolerations that are applied to all Broker pods.")
-  tolerations?: NodeTolerations;
-}
-
-@doc("Encrypted properties")
-union Encrypt {
-  string,
-
-  @doc("Internal traffic encryption enabled.")
-  Enabled: "Enabled",
-
-  @doc("Internal traffic encryption disabled.")
-  Disabled: "Disabled",
 }
 
 @doc("Cardinality properties")
@@ -128,12 +114,8 @@ model Frontend {
 }
 
 @doc("Broker Diagnostic Setting properties")
-model Diagnostics {
-  @doc("The log settings of the broker.")
-  logs?: DiagnosticsLogs;
-
-  @doc("The metrics properties.")
-  metrics?: Metrics;
+model BrokerDiagnostics {
+  ...MetricProperties;
 
   @doc("The self check properties.")
   selfCheck?: SelfCheck;
@@ -142,68 +124,10 @@ model Diagnostics {
   traces?: Traces;
 }
 
-@doc("Broker Diagnostic Log properties")
-model DiagnosticsLogs {
-  @doc("How often to export the logs to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  exportIntervalSeconds?: int32 = 30;
-
-  @doc("The level of logs to export.")
-  exportLogLevel?: string = "error";
-
-  @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
-  level?: string = "info";
-
-  @doc("The open telemetry collector endpoint to export to.")
-  openTelemetryCollectorAddress?: string;
-}
-
-@doc("Broker Diagnostic Metrics properties")
-model Metrics {
-  @doc("The time used to determine if a metric is stale and drop from the metrics cache.")
-  @minValue(60)
-  @maxValue(600)
-  stalenessTimeSeconds?: int32 = 600;
-
-  @doc("The toggle to enable/disable metrics.")
-  mode?: MetricsEnabled = MetricsEnabled.Enabled;
-
-  @doc("How often to export the metrics to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  exportIntervalSeconds?: int32 = 30;
-
-  @doc("The open telemetry collector endpoint to export to.")
-  openTelemetryCollectorAddress?: string;
-
-  @doc("The prometheus port to expose the metrics.")
-  @minValue(0)
-  @maxValue(65535)
-  prometheusPort?: int32 = 9600;
-
-  @doc("How often to refresh the metrics.")
-  @minValue(1)
-  @maxValue(60)
-  updateIntervalSeconds?: int32 = 30;
-}
-
-// metrics enabled and disabled mode
-@doc("MetricsEnabled properties")
-union MetricsEnabled {
-  string,
-
-  @doc("Metrics enabled.")
-  Enabled: "Enabled",
-
-  @doc("Metrics disabled.")
-  Disabled: "Disabled",
-}
-
 @doc("Broker Diagnostic Self check properties")
 model SelfCheck {
   @doc("The toggle to enable/disable self check.")
-  mode?: SelfCheckMode = SelfCheckMode.Enabled;
+  mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("The self check interval.")
   @minValue(30)
@@ -216,34 +140,18 @@ model SelfCheck {
   timeoutSeconds?: int32 = 15;
 }
 
-@doc("SelfCheckMode properties")
-union SelfCheckMode {
-  string,
-
-  @doc("Self check enabled.")
-  Enabled: "Enabled",
-
-  @doc("Self check disabled.")
-  Disabled: "Disabled",
-}
-
 @doc("Broker Diagnostic Trace properties")
 model Traces {
+  @doc("The toggle to enable/disable traces.")
+  mode?: OperationalMode = OperationalMode.Enabled;
+
+  @doc("The open telemetry export configuration.")
+  opentelemetryExportConfig?: OpenTelemetryExportConfig;
+
   @doc("The cache size in megabytes.")
   @minValue(1)
   @maxValue(128)
   cacheSizeMegabytes?: int32 = 16;
-
-  @doc("The toggle to enable/disable traces.")
-  mode?: TracesMode = TracesMode.Enabled;
-
-  @doc("How often to export the metrics to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  exportIntervalSeconds?: int32 = 30;
-
-  @doc("The open telemetry collector endpoint to export to.")
-  openTelemetryCollectorAddress?: string;
 
   @doc("The self tracing properties.")
   selfTracing?: SelfTracing;
@@ -254,108 +162,47 @@ model Traces {
   spanChannelCapacity?: int32 = 1000;
 }
 
-@doc("TracesMode properties")
-union TracesMode {
-  string,
-
-  @doc("Traces enabled.")
-  Enabled: "Enabled",
-
-  @doc("Traces disabled.")
-  Disabled: "Disabled",
-}
-
-@doc("Broker Diagnostic Self tracing properties")
-model SelfTracing {
-  @doc("The toggle to enable/disable self tracing.")
-  mode?: SelfTracingMode = SelfTracingMode.Enabled;
-
-  @doc("The self tracing interval.")
-  @minValue(1)
-  @maxValue(300)
-  intervalSeconds?: int32 = 30;
-}
-
-@doc("SelfTracingMode properties")
-union SelfTracingMode {
-  string,
-
-  @doc("Self tracing enabled.")
-  Enabled: "Enabled",
-
-  @doc("Self tracing disabled.")
-  Disabled: "Disabled",
-}
-
 @doc("DiskBackedMessageBuffer properties")
 model DiskBackedMessageBuffer {
+  @doc("The max size of the message buffer on disk. If a PVC template is specified using one of ephemeralVolumeClaimSpec or persistentVolumeClaimSpec, then this size is used as the request and limit sizes of that template. If neither ephemeralVolumeClaimSpec nor persistentVolumeClaimSpec are specified, then an emptyDir volume is mounted with this size as its limit. See <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir> for details.")
+  @pattern("^[0-9]+[KMGTPE]$")
+  maxSize: string;
+
   @doc("Use the specified persistent volume claim template to mount a \"generic ephemeral volume\" for the message buffer. See <https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes> for details.")
   ephemeralVolumeClaimSpec?: VolumeClaimSpec;
-
-  @doc("The max size of the message buffer on disk. If a PVC template is specified using one of ephemeralVolumeClaimSpec or persistentVolumeClaimSpec, then this size is used as the request and limit sizes of that template. If neither ephemeralVolumeClaimSpec nor persistentVolumeClaimSpec are specified, then an emptyDir volume is mounted with this size as its limit. See <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir> for details.")
-  @pattern("^[0-9]+[KMGTPE]$") // TODO - Consume comment and Pattern later from PR
-  maxSize: string;
 
   @doc("Use the specified persistent volume claim template to mount a persistent volume for the message buffer.")
   persistentVolumeClaimSpec?: VolumeClaimSpec;
 }
 
-// Add VolumeClaimSpec model
 @doc("VolumeClaimSpec properties")
 model VolumeClaimSpec {
+  @doc("VolumeName is the binding reference to the PersistentVolume backing this claim.")
+  volumeName?: string;
+
+  @doc("volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. This is a beta feature.")
+  volumeMode?: string;
+
+  @doc("Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1")
+  storageClassName?: string;
+
   @doc("AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1")
   @OpenAPI.extension("x-ms-identifiers", [])
   accessModes?: string[];
 
   @doc("This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field.")
-  dataSource?: VolumeClaimDataSource;
+  dataSource?: LocalKubernetesReference;
 
   @doc("Specifies the object from which to populate the volume with data, if a non-empty volume is desired. This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object. When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value. For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. There are two important differences between DataSource and DataSourceRef: * While DataSource only allows two specific types of objects, DataSourceRef allows any non-core object, as well as PersistentVolumeClaim objects. * While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified. (Beta) Using this field requires the AnyVolumeDataSource feature gate to be enabled.")
-  dataSourceRef?: VolumeClaimDataSourceRef;
+  dataSourceRef?: KubernetesReference;
 
   @doc("Resources represents the minimum resources the volume should have. If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements that are lower than previous value but must still be higher than capacity recorded in the status field of the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources")
   resources?: VolumeClaimResourceRequirements;
 
   @doc("A label query over volumes to consider for binding.")
   selector?: VolumeClaimSpecSelector;
-
-  @doc("Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1")
-  storageClassName?: string;
-
-  @doc("volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. This is a beta feature.")
-  volumeMode?: string;
-
-  @doc("VolumeName is the binding reference to the PersistentVolume backing this claim.")
-  volumeName?: string;
 }
 
-// Add VolumeClaimDataSource model
-@doc("VolumeClaimDataSource properties")
-model VolumeClaimDataSource {
-  @doc("APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.")
-  apiGroup?: string;
-
-  @doc("Kind is the type of resource being referenced")
-  kind: string;
-
-  @doc("Name is the name of resource being referenced")
-  name: string;
-}
-
-// Add VolumeClaimDataSourceRef model
-@doc("VolumeClaimDataSourceRef properties")
-model VolumeClaimDataSourceRef {
-  @doc("APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.")
-  apiGroup?: string;
-
-  @doc("Kind is the type of resource being referenced")
-  kind: string;
-
-  @doc("Name is the name of resource being referenced")
-  name: string;
-}
-
-// Add VolumeClaimResourceRequirements model
 @doc("VolumeClaimResourceRequirements properties")
 model VolumeClaimResourceRequirements {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
@@ -367,7 +214,6 @@ model VolumeClaimResourceRequirements {
   requests?: Record<string>;
 }
 
-// Add VolumeClaimSpecSelector model
 @doc("VolumeClaimSpecSelector properties")
 model VolumeClaimSpecSelector {
   @doc("MatchExpressions is a list of label selector requirements. The requirements are ANDed.")
@@ -379,7 +225,6 @@ model VolumeClaimSpecSelector {
   matchLabels?: Record<string>;
 }
 
-// Add VolumeClaimSpecSelectorMatchExpressions model
 @doc("VolumeClaimSpecSelectorMatchExpressions properties")
 model VolumeClaimSpecSelectorMatchExpressions {
   @doc("key is the label key that the selector applies to.")
@@ -412,18 +257,7 @@ union OperatorValues {
 @doc("GenerateResourceLimits properties")
 model GenerateResourceLimits {
   @doc("The toggle to enable/disable cpu resource limits.")
-  cpu?: CpuState = CpuState.Enabled;
-}
-
-@doc("CpuState properties")
-union CpuState {
-  string,
-
-  @doc("CPU resource limits enabled.")
-  Enabled: "Enabled",
-
-  @doc("CPU resource limits disabled.")
-  Disabled: "Disabled",
+  cpu?: OperationalMode = OperationalMode.Enabled;
 }
 
 @doc("Cert Manager Cert properties")
@@ -431,11 +265,11 @@ model CertManagerCertOptions {
   @doc("Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   duration: string;
 
-  @doc("Configuration of certificate private key.")
-  privateKey: CertManagerPrivateKey;
-
   @doc("When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   renewBefore: string;
+
+  @doc("Configuration of certificate private key.")
+  privateKey: CertManagerPrivateKey;
 }
 
 @doc("Cert Manager private key properties")
@@ -487,7 +321,8 @@ union PrivateKeyRotationPolicy {
 @doc("The memory profile settings of the Broker")
 union BrokerMemoryProfile {
   string,
-  @doc("Tiny memory profile.") // We can improve the description here !!
+
+  @doc("Tiny memory profile.")
   Tiny: "Tiny",
 
   @doc("Low memory profile.")
@@ -498,17 +333,6 @@ union BrokerMemoryProfile {
 
   @doc("High memory profile.")
   High: "High",
-}
-
-@doc("The enum defining deployment mode of the broker deployment")
-union DeploymentMode {
-  string,
-
-  @doc("Automatically provision Frontend and Backend pods based on the number of available nodes.")
-  Auto: "Auto",
-
-  @doc("Use Cardinality property to set the number of Frontend and Backend pods.")
-  Manual: "Manual",
 }
 
 @doc("The settings of Client Config.")
@@ -522,6 +346,11 @@ model ClientConfig {
   @minValue(1)
   @maxValue(4294967295)
   maxMessageExpirySeconds?: int32;
+
+  @doc("Max message size for a packet in Bytes.")
+  @minValue(1)
+  @maxValue(268435456)
+  maxPacketSizeBytes?: int32;
 
   @doc("The limit on the number of queued messages for a subscriber.")
   subscriberQueueLimit?: SubscriberQueueLimit;

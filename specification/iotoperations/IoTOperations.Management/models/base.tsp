@@ -20,6 +20,7 @@ union ExtendedLocationType {
   @doc("CustomLocation type")
   "CustomLocation",
 }
+
 @doc("The enum defining status of resource.")
 union ProvisioningState {
   string,
@@ -38,37 +39,148 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-@doc("Defines the Node Tolerations details")
-model NodeTolerations {
-  @doc("Toleration effect.")
-  effect: string;
-
-  @doc("Toleration key.")
-  key: string;
-
-  @doc("Toleration operator like 'Exists', 'Equal' etc.")
-  operator: TolerationOperator;
-
-  @doc("Toleration Value.")
-  value: string;
-}
-
-@doc("The enum defining type of TolerationOperator accepted.")
-union TolerationOperator {
+@doc("Mode properties")
+union OperationalMode {
   string,
 
-  @doc("Equal operator.")
-  Equal: "Equal",
+  @doc("Enabled is equivalent to True")
+  Enabled: "Enabled",
 
-  @doc("Exists operator.")
-  Exists: "Exists",
+  @doc("Disabled is equivalent to False.")
+  Disabled: "Disabled",
 }
 
-@doc("X509 Certificate Authentication properties.")
-model X509ManualCertificate {
-  @doc("Kubernetes secret containing an X.509 client certificate. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretName: string;
+@doc("Diagnostic Log properties")
+model DiagnosticsLogs {
+  @doc("The open telemetry export configuration.")
+  opentelemetryExportConfig?: OpenTelemetryLogExportConfig;
 
-  @doc("Certificate K8S namespace. Omit to use current namespace.")
-  secretNamespace?: string;
+  @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
+  level?: string = "info";
+}
+
+@doc("OpenTelemetry Log Export Configuration properties")
+model OpenTelemetryLogExportConfig {
+  ...OpenTelemetryExportConfig;
+
+  @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
+  level?: string = "error";
+}
+
+@doc("OpenTelemetry Export Configuration properties")
+model OpenTelemetryExportConfig {
+  @doc("The open telemetry collector endpoint to export to.")
+  otlpGrpcEndpoint: string;
+
+  @doc("How often to export the metrics to the open telemetry collector.")
+  @minValue(1)
+  @maxValue(300)
+  intervalSeconds?: int32 = 30;
+}
+
+@doc("Diagnostic Metrics properties")
+model Metrics {
+  @doc("The open telemetry export configuration.")
+  opentelemetryExportConfig?: OpenTelemetryExportConfig;
+
+  @doc("The prometheus port to expose the metrics.")
+  @minValue(0)
+  @maxValue(65535)
+  prometheusPort?: int32 = 9600;
+}
+
+@doc("Metric properties")
+model MetricProperties {
+  @doc("Diagnostic log settings for the resource.")
+  logs?: DiagnosticsLogs;
+
+  @doc("The metrics settings for the resource.")
+  metrics?: Metrics;
+}
+
+@doc("Diagnostic Self tracing properties")
+model SelfTracing {
+  @doc("The toggle to enable/disable self tracing.")
+  mode?: OperationalMode = OperationalMode.Enabled;
+
+  @doc("The self tracing interval.")
+  @minValue(1)
+  @maxValue(300)
+  intervalSeconds?: int32 = 30;
+}
+
+@doc("Batching configuration")
+model BatchingConfiguration {
+  @doc("Batching latency in seconds.")
+  @minValue(0)
+  @maxValue(65535)
+  latencySeconds?: int32 = 60;
+
+  @doc("Maximum number of messages in a batch.")
+  @minValue(0)
+  @maxValue(4294967295)
+  maxMessages?: int32 = 100000;
+}
+
+@doc("Tls properties")
+model TlsProperties {
+  @doc("Mode for TLS.")
+  mode?: OperationalMode = OperationalMode.Enabled;
+
+  @doc("Trusted CA certificate config map.")
+  trustedCaCertificateConfigMapRef?: string;
+}
+
+@doc("Broker Protocol types")
+union BrokerProtocolType {
+  string,
+
+  @doc("protocol broker")
+  Mqtt: "Mqtt",
+
+  @doc("protocol websocket")
+  WebSockets: "WebSockets",
+}
+
+@doc("Kubernetes reference")
+model KubernetesReference {
+  ...LocalKubernetesReference;
+
+  @doc("Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace.")
+  `namespace`?: string;
+}
+
+@doc("Kubernetes reference")
+model LocalKubernetesReference {
+  @doc("APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required.")
+  apiGroup?: string;
+
+  @doc("Kind is the type of resource being referenced")
+  kind: string;
+
+  @doc("Name is the name of resource being referenced")
+  name: string;
+}
+
+@doc("Cert-Manager issuerRef properties")
+model CertManagerIssuerRef {
+  @doc("group of issuer.")
+  apiGroup: string = "cert-manager.io";
+
+  @doc("kind of issuer (Issuer or ClusterIssuer).")
+  kind: CertManagerIssuerKind;
+
+  @doc("name of issuer.")
+  name: string;
+}
+
+@doc("CertManagerIssuerKind properties")
+union CertManagerIssuerKind {
+  string,
+
+  @doc("Issuer kind.")
+  Issuer: "Issuer",
+
+  @doc("ClusterIssuer kind.")
+  ClusterIssuer: "ClusterIssuer",
 }
