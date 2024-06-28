@@ -34,17 +34,16 @@ namespace Language.ConversationsClientCustomizations;
 
 @@clientName(AnalyzeConversationLROTask, "AnalyzeConversationJobTask", "csharp");
 
-@@clientName(BaseConversation, "ConversationBase", "csharp");
 @@clientName(BasePrediction, "Prediction", "csharp");
 
-@@clientName(LengthUnit.pt, "Point", "csharp");
+@@clientName(LengthUnit.Pt, "Point", "csharp");
 @@clientName(LogicalOperationKind.AND, "And", "csharp");
 @@clientName(LogicalOperationKind.OR, "Or", "csharp");
 
-@@clientName(RedactionCharacter.PerCent, "Percent", "csharp");
+@@clientName(redactionCharacter.perCent, "Percent", "csharp");
 
 @@clientName(TemporalModifier.AfterApprox, "AfterApproximate", "csharp");
 @@clientName(TemporalModifier.BeforeApprox, "BeforeApproximate", "csharp");
 
-@@clientName(RedactedTranscriptContent.Itn, "InverseTextNormalized", "csharp");
-@@clientName(RedactedTranscriptContent.MaskedItn, "MaskedInverseTextNormalized", "csharp");
+@@clientName(RedactedTranscriptContent.itn, "InverseTextNormalized", "csharp");
+@@clientName(RedactedTranscriptContent.maskedItn, "MaskedInverseTextNormalized", "csharp");
