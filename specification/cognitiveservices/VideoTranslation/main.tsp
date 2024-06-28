@@ -49,9 +49,6 @@ model AADToken
     }
   ]>;
 
-// alias ops = Azure.Core.StandardResourceOperations;
-// AzureApiKeyAuthentication
-
 alias VideoTranslationServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
