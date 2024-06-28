@@ -1,0 +1,38 @@
+name: TypeSpec Requirement
+
+on: pull_request
+
+jobs:
+  TypeSpec-Requirement:
+    name: TypeSpec Requirement
+    strategy:
+      fail-fast: false
+      matrix:
+        spec-type: [data-plane, resource-manager]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Required since "HEAD^" is passed to TypeSpec-Requirement.ps1
+          fetch-depth: 2
+
+      - name: Use Node 20.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.0
+
+      - run: npm --version --loglevel info
+
+      - run: npm ci
+
+      - run: npm ls -a
+        continue-on-error: true
+
+      - run: |
+          eng/scripts/TypeSpec-Requirement.ps1 `
+            -BaseCommitish HEAD^ `
+            -TargetCommitish HEAD `
+            -SpecType ${{ matrix.spec-type }}
+        shell: pwsh
