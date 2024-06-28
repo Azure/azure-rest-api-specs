@@ -27,7 +27,7 @@ using TypeSpec.Versioning;
   title: "portal",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Portal;
 
 /**
@@ -35,7 +35,7 @@ namespace Microsoft.Portal;
  */
 enum Versions {
   /**
-   * The 2020-09-01-preview API version.
+   * The 2022-12-01-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
