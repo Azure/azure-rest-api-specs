@@ -37,7 +37,7 @@ namespace Language.ConversationsClientCustomizations;
   "csharp"
 );
 
-@@clientName(BasePrediction, "Prediction", "csharp");
+@@clientName(BasePrediction, "PredictionBase", "csharp");
 
 @@clientName(LengthUnit.Pt, "Point", "csharp");
 @@clientName(LogicalOperationKind.AND, "And", "csharp");
