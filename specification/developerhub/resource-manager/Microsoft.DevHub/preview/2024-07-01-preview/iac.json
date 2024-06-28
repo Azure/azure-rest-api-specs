@@ -685,6 +685,7 @@
         "HCIAKS",
         "HCIARCVM"
       ],
+      "readOnly": true,
       "x-ms-enum": {
         "name": "QuickStartTemplateType",
         "modelAsString": true,
@@ -707,7 +708,7 @@
           }
         ]
       },
-      "description": "Determines the authorization status of requests."
+      "description": "The type of quick start template"
     },
     "IacTemplateDetails": {
       "type": "object",
@@ -804,10 +805,42 @@
           "description": "Template Name"
         },
         "quickStartTemplateType": {
-          "$ref": "#/definitions/QuickStartTemplateType",
+          "$ref": "#/definitions/QuickTemplateType",
           "description": "The type of quick start template"
         }
       }
+    },
+    "QuickTemplateType": {
+      "type": "string",
+      "enum": [
+        "None",
+        "HCI",
+        "HCIAKS",
+        "HCIARCVM"
+      ],
+      "x-ms-enum": {
+        "name": "QuickStartTemplateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "The template has not use quick start template"
+          },
+          {
+            "value": "HCI",
+            "description": "The template use quick start template of HCI"
+          },
+          {
+            "value": "HCIAKS",
+            "description": "The template use quick start template of HCI and AKS"
+          },
+          {
+            "value": "HCIARCVM",
+            "description": "The template use quick start template of HCI and ArcVM"
+          }
+        ]
+      },
+      "description": "The type of quick start template"
     }
   },
   "parameters": {
