@@ -25,7 +25,12 @@
         "type": "/Microsoft.DocumentDB/mongoClusters",
         "properties": {
           "provisioningState": "Succeeded",
-          "administratorLogin": "mongoAdmin",
+          "authentication": {
+            "allowedModes": [ "LocalUser" ]
+          },
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
           "serverVersion": "5.0",
           "storage": {
             "sizeGb": 128
@@ -57,7 +62,12 @@
         "type": "/Microsoft.DocumentDB/mongoClusters",
         "properties": {
           "provisioningState": "Succeeded",
-          "administratorLogin": "mongoAdmin",
+          "authentication": {
+            "allowedModes": [ "LocalUser" ]
+          },
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
           "serverVersion": "5.0",
           "storage": {
             "sizeGb": 128

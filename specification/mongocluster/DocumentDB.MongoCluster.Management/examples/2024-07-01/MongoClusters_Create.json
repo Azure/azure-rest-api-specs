@@ -9,8 +9,10 @@
     "resource": {
       "location": "westus2",
       "properties": {
-        "administratorLogin": "mongoAdmin",
-        "administratorLoginPassword": "password",
+        "administrator": {
+          "userName": "mongoAdmin",
+          "password": "password"
+        },
         "serverVersion": "5.0",
         "storage": {
           "sizeGb": 128
@@ -43,7 +45,12 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
-          "administratorLogin": "mongoAdmin",
+          "authentication": {
+            "allowedModes": [ "LocalUser" ]
+          },
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
           "serverVersion": "5.0",
           "storage": {
             "sizeGb": 128
@@ -83,7 +90,12 @@
         },
         "properties": {
           "provisioningState": "InProgress",
-          "administratorLogin": "mongoAdmin",
+          "authentication": {
+            "allowedModes": [ "LocalUser" ]
+          },
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
           "serverVersion": "5.0",
           "storage": {
             "sizeGb": 128

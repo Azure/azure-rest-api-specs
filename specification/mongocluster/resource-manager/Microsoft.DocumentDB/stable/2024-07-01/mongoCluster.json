@@ -1250,6 +1250,62 @@
     }
   },
   "definitions": {
+    "AdministratorProperties": {
+      "type": "object",
+      "description": "The local administrator login properties.",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "The administrator user name.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "The administrator password.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "AuthenticationMode": {
+      "type": "string",
+      "description": "The authentication modes that are supported on a mongo cluster.",
+      "enum": [
+        "LocalUser"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LocalUser",
+            "value": "LocalUser",
+            "description": "Enables local mongo users with password login. If specified in authentication.allowedModes, the administrator userName and password needs to be included. If not specified in allowedModes, then local mongo user logins will be disabled."
+          }
+        ]
+      }
+    },
+    "AuthenticationProperties": {
+      "type": "object",
+      "description": "The authentication properties of the cluster.",
+      "properties": {
+        "allowedModes": {
+          "type": "array",
+          "description": "The allowed authentication modes on the cluster. Defaults to ['LocalUser'] auth mode only.",
+          "items": {
+            "$ref": "#/definitions/AuthenticationMode"
+          }
+        }
+      }
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -1395,7 +1451,8 @@
       "enum": [
         "Disabled",
         "SameZone",
-        "ZoneRedundant"
+        "ZoneRedundant",
+        "ZoneRedundantPreferred"
       ],
       "x-ms-enum": {
         "name": "HighAvailabilityMode",
@@ -1415,6 +1472,11 @@
             "name": "ZoneRedundant",
             "value": "ZoneRedundant",
             "description": "High availability mode is enabled, where each server in a shard is distributed across availability zones."
+          },
+          {
+            "name": "ZoneRedundantPreferred",
+            "value": "ZoneRedundantPreferred",
+            "description": "High availability mode is enabled and preferences ZoneRedundant if availability zones capacity is available in the region, otherwise falls-back to provisioning with SameZone."
           }
         ]
       }
@@ -1423,9 +1485,19 @@
       "type": "object",
       "description": "The high availability properties of the cluster.",
       "properties": {
+        "targetMode": {
+          "$ref": "#/definitions/HighAvailabilityMode",
+          "description": "The target high availability mode requested for the cluster."
+        },
         "mode": {
           "$ref": "#/definitions/HighAvailabilityMode",
-          "description": "The high availability mode of the cluster."
+          "description": "The current high availability mode the cluster is deployed with.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the high availability configuration for the cluster.",
+          "readOnly": true
         }
       }
     },
@@ -1506,24 +1578,13 @@
             "create"
           ]
         },
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login for the mongo cluster.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationProperties",
+          "description": "Authentication properties of the mongo cluster."
         },
-        "administratorLoginPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "The password of the administrator login.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
+        "administrator": {
+          "$ref": "#/definitions/AdministratorProperties",
+          "description": "The local administrator properties for the mongo cluster."
         },
         "serverVersion": {
           "type": "string",
@@ -1715,24 +1776,13 @@
       "type": "object",
       "description": "The updatable properties of the MongoCluster.",
       "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login for the mongo cluster.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationProperties",
+          "description": "Authentication properties of the mongo cluster."
         },
-        "administratorLoginPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "The password of the administrator login.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
+        "administrator": {
+          "$ref": "#/definitions/AdministratorProperties",
+          "description": "The local administrator properties for the mongo cluster."
         },
         "serverVersion": {
           "type": "string",

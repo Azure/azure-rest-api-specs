@@ -90,12 +90,22 @@ model MongoClusterProperties {
 
   /** The administrator's login for the mongo cluster. */
   @visibility("read", "create", "update")
+  @removed(Versions.v2024_07_01)
   administratorLogin?: string;
 
   /** The password of the administrator login. */
   @visibility("create", "update")
+  @removed(Versions.v2024_07_01)
   @secret
   administratorLoginPassword?: string;
+
+  /** Authentication properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  authentication?: AuthenticationProperties;
+
+  /** The local administrator properties for the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  administrator?: AdministratorProperties;
 
   /** The Mongo DB server version. Defaults to the latest available version if not specified. */
   serverVersion?: string;
@@ -228,6 +238,9 @@ union HighAvailabilityMode {
 
   /** High availability mode is enabled, where each server in a shard is distributed across availability zones. */
   "ZoneRedundant",
+
+  /** High availability mode is enabled and preferences ZoneRedundant if availability zones capacity is available in the region, otherwise falls-back to provisioning with SameZone. */
+  "ZoneRedundantPreferred",
 }
 
 /** The backup properties of the cluster. This includes the earliest restore time and retention settings. */
@@ -426,8 +439,16 @@ model NodeGroupProperties {
 /** The high availability properties of the cluster. */
 @added(Versions.v2024_07_01)
 model HighAvailabilityProperties {
-  /** The high availability mode of the cluster. */
+  /** The target high availability mode requested for the cluster. */
+  targetMode?: HighAvailabilityMode;
+
+  /** The current high availability mode the cluster is deployed with. */
+  @visibility("read")
   mode?: HighAvailabilityMode;
+
+  /** The state of the high availability configuration for the cluster. */
+  @visibility("read")
+  state?: string;
 }
 
 /** The kind of the node on the cluster. */
@@ -437,4 +458,33 @@ union NodeKind {
 
   /** The node is a shard kind. */
   "Shard",
+}
+
+/** The local administrator login properties. */
+@added(Versions.v2024_07_01)
+model AdministratorProperties {
+  /** The administrator user name. */
+  @visibility("read", "create", "update")
+  userName?: string;
+
+  /** The administrator password. */
+  @visibility("create", "update")
+  @secret
+  password?: string;
+}
+
+/** The authentication properties of the cluster. */
+@added(Versions.v2024_07_01)
+model AuthenticationProperties {
+  /** The allowed authentication modes on the cluster. Defaults to ['LocalUser'] auth mode only. */
+  allowedModes?: AuthenticationMode[];
+}
+
+/** The authentication modes that are supported on a mongo cluster. */
+@added(Versions.v2024_07_01)
+union AuthenticationMode {
+  string,
+
+  /** Enables local mongo users with password login. If specified in authentication.allowedModes, the administrator userName and password needs to be included. If not specified in allowedModes, then local mongo user logins will be disabled. */
+  "LocalUser",
 }

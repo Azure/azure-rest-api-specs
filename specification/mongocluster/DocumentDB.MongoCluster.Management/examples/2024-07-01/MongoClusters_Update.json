@@ -8,8 +8,12 @@
     "api-version": "2024-07-01",
     "properties": {
       "properties": {
-        "administratorLogin": "mongoAdmin",
-        "administratorLoginPassword": "password",
+        "authentication": {
+          "allowedModes": [ "LocalUser" ]
+        },
+        "administrator": {
+          "userName": "mongoAdmin"
+        },
         "serverVersion": "5.0",
         "storage": {
           "sizeGb": 256
@@ -23,6 +27,7 @@
         "highAvailability": {
           "mode": "SameZone"
         },
+        "previewFeatures": [],
         "publicNetworkAccess": "Enabled"
       }
     }
@@ -43,7 +48,12 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
-          "administratorLogin": "mongoAdmin",
+          "authentication": {
+            "allowedModes": [ "LocalUser" ]
+          },
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
           "serverVersion": "5.0",
           "storage": {
             "sizeGb": 256
