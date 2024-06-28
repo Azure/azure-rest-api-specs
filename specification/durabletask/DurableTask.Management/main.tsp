@@ -39,16 +39,11 @@ model Namespace is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
   @path
   @visibility("read", "create")
   name: string;
-
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 @doc("Update namespace")
 model NamespaceUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** Updatable managed service identity */
-  identity?: ManagedServiceIdentityUpdate;
 
   /** RP-specific properties */
   properties?: NamespaceProperties;
@@ -56,9 +51,6 @@ model NamespaceUpdate {
 
 model NamespacePropertiesUpdate
   is OptionalProperties<UpdateableProperties<NamespaceProperties>>;
-
-model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
 
 @doc("Details of the Namespace.")
 model NamespaceProperties {
