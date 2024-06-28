@@ -5415,7 +5415,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set"
+          "description": "The virtual machine scale set zones."
         },
         "extendedLocation": {
           "$ref": "../../../common-types/v1/common.json#/definitions/ExtendedLocation",
@@ -5483,6 +5483,13 @@
         "identity": {
           "$ref": "#/definitions/VirtualMachineScaleSetIdentity",
           "description": "The identity of the virtual machine scale set, if configured."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine scale set zones."
         }
       },
       "allOf": [
