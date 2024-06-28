@@ -1,18 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./commonVersions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Versioning;
 
-@versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Portal;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -20,7 +15,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("The configuration name")
 union ConfigurationName {
   string,
-
   @doc("The default configuration name")
   default: "default",
 }

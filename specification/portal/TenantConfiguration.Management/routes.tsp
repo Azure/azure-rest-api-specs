@@ -2,7 +2,7 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "../Common/models.tsp";
+import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;

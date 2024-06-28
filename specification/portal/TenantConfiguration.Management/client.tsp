@@ -1,4 +1,4 @@
-import "../Common/models.tsp";
+import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
