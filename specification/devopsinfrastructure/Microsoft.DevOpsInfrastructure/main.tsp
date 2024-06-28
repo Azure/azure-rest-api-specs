@@ -23,6 +23,7 @@ namespace Microsoft.DevOpsInfrastructure;
 enum Versions {
   /** 2024-04-04-preview preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-04-04-preview`,
 }
 
@@ -61,6 +62,7 @@ model PoolProperties {
   devCenterProjectResourceId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Defines the organization in which the pool will be used.")
 @discriminator("kind")
 model OrganizationProfile {}
@@ -131,6 +133,7 @@ union AzureDevOpsPermissionType {
   "SpecificAccounts",
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("Defines the type of fabric the agent will run on.")
 @discriminator("kind")
 model FabricProfile {}
@@ -286,6 +289,7 @@ model NetworkProfile {
   subnetId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @doc("The agent profile of the machines in the pool.")
 @discriminator("kind")
 model AgentProfile {
@@ -398,7 +402,12 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface Pools {
   get is ArmResourceRead<Pool>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Pool>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Pool,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchAsync<Pool, PoolProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
@@ -645,22 +654,35 @@ interface Sku {
   listByLocation is ArmListBySubscription<ResourceSku>;
 }
 
+@armResourceOperations
+interface SubscriptionUsages {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Actions must be HTTP Post operations."
+  @action
+  @armProviderNameValue
+  @get
+  @armResourceList(Location)
+  @doc("List Quota resources by subscription ID")
+  usages(
+    ...SubscriptionIdParameter,
+    ...Azure.ResourceManager.Foundations.DefaultProviderNamespace,
+    ...LocationParameter,
+    ...ApiVersionParameter,
+  ): ArmResponse<Page<Quota>> | ErrorResponse;
+}
+
 @doc("Describes Resource Quota")
 @parentResource(Location)
-model Quota is ProxyResource<QuotaProperties> {
+model Quota {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The name of the quota.")
-  @key("quotaName")
   @segment("usages")
   @visibility("read")
   @path
-  name: string;
-}
+  name?: QuotaName;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
-@doc("Describes Resource Quota properties")
-model QuotaProperties {
+  @doc("Fully qualified ARM resource id")
+  id: armResourceIdentifier;
+
   @doc("The unit of usage measurement.")
   unit: string;
 
@@ -669,9 +691,6 @@ model QuotaProperties {
 
   @doc("The maximum permitted usage of the resource.")
   limit: int64;
-
-  @doc("The details of the quota.")
-  name: QuotaName;
 }
 
 @doc("The Quota Names")
@@ -681,11 +700,6 @@ model QuotaName {
 
   @doc("The localized name of the resource.")
   localizedValue?: string;
-}
-
-@armResourceOperations
-interface SubscriptionUsages {
-  listByLocation is ArmListBySubscription<Quota>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"

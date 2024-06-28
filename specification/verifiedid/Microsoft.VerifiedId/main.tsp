@@ -71,7 +71,12 @@ model AuthorityProperties {
 @armResourceOperations(Authority)
 interface Authorities {
   get is ArmResourceRead<Authority>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Authority>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Authority,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchSync<Authority, AuthorityProperties>;
   delete is ArmResourceDeleteSync<Authority>;
   listByResourceGroup is ArmResourceListByParent<Authority>;

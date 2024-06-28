@@ -57,7 +57,12 @@ interface Organizations
       OrganizationProperties
     > {
   get is ArmResourceRead<InformaticaOrganizationResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaOrganizationResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    InformaticaOrganizationResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
@@ -83,7 +88,12 @@ interface Organizations
 interface ServerlessRuntimes
   extends ProxyResourceOperations<InformaticaServerlessRuntimeResource> {
   get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    InformaticaServerlessRuntimeResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,
@@ -223,7 +233,7 @@ model InfaServerlessFetchConfigProperties {
   computeUnits?: string;
 
   @doc("Tenant ID")
-  tenantId?: string;
+  tenantId?: uuid;
 
   @doc("subscription ID")
   subscriptionId?: string;
@@ -232,7 +242,7 @@ model InfaServerlessFetchConfigProperties {
   region?: string;
 
   @doc("Serverless Arm Resource ID")
-  serverlessArmResourceId?: string;
+  serverlessArmResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }
 
 @doc("A Serverless Runtime environment  resource by Informatica.")
@@ -293,7 +303,7 @@ model CompanyDetails {
 @doc("Marketplace details.")
 model MarketplaceDetails {
   @doc("Marketplace Subscription Id")
-  marketplaceSubscriptionId: string;
+  marketplaceSubscriptionId?: string;
 
   @doc("Marketplace offer details.")
   offerDetails: OfferDetails;
@@ -338,7 +348,7 @@ model InformaticaProperties {
   informaticaRegion?: string;
 
   @doc("Single sing on URL for informatica organization")
-  singleSignOnUrl?: string;
+  singleSignOnUrl?: url;
 }
 
 @doc("Link Organization")
@@ -545,10 +555,10 @@ model ApplicationConfigs {
 @doc("Informatica Serverless Runtime Network Interface configurations.")
 model NetworkInterfaceConfiguration {
   @doc("Virtual network resource id")
-  vnetId: string;
+  vnetId: Azure.Core.armResourceIdentifier<[]>;
 
   @doc("Virtual network subnet resource id")
-  subnetId: string;
+  subnetId: Azure.Core.armResourceIdentifier<[]>;
 
   @doc("Virtual network resource guid")
   vnetResourceGuid?: string;
@@ -623,7 +633,7 @@ union RuntimeType {
 model InformaticaOrganizationResourceUpdate
   is OptionalProperties<UpdateableProperties<OmitProperties<
     InformaticaOrganizationResource,
-    "name"
+    "name" | "properties"
   >>> {
   /** Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource */
   properties?: OrganizationPropertiesCustomUpdate;
@@ -644,7 +654,7 @@ model OrganizationPropertiesCustomUpdate {
   companyDetails?: CompanyDetailsUpdate;
 
   @doc("Existing Resource Id")
-  existingResourceId?: string;
+  existingResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }
 
 /** Marketplace details */
@@ -672,7 +682,7 @@ model CompanyDetailsUpdate
 model InformaticaServerlessRuntimeResourceUpdate
   is OptionalProperties<UpdateableProperties<OmitProperties<
     InformaticaServerlessRuntimeResource,
-    "name"
+    "name" | "properties"
   >>> {
   /** Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource */
   properties?: ServerlessRuntimePropertiesCustomUpdate;
