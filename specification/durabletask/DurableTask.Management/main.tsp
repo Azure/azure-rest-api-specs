@@ -84,6 +84,8 @@ model TaskHub is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
   @path
   @visibility("read", "create")
   name: string;
+
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 @doc("The properties of Task Hub")
@@ -91,6 +93,11 @@ model TaskHubProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+}
+
+@doc("Update Task Hub")
+model TaskHubUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 @doc("The status of the current operation.")
@@ -130,7 +137,7 @@ interface TaskHubs {
   @doc("Create or update a Task Hub")
   createOrUpdate is ArmResourceCreateOrReplaceSync<TaskHub>;
   @doc("Update a Task Hub")
-  update is ArmResourcePatchSync<TaskHub, TaskHubProperties>;
+  update is ArmCustomPatchAsync<TaskHub, TaskHubUpdate>;
   @doc("Delete a Task Hub")
   delete is ArmResourceDeleteSync<TaskHub>;
   @doc("List Task Hubs")
