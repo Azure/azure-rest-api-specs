@@ -14,7 +14,7 @@ function LogWarning {
   if (Test-SupportsDevOpsLogging) {
     Write-Host ("##vso[task.LogIssue type=warning;]$args" -replace "`n", "%0D%0A")
   }
-  else if (Test-SupportsGitHubLogging) {
+  elseif (Test-SupportsGitHubLogging) {
     Write-Host ("::warning::$args" -replace "`n", "%0D%0A")
   }
   else {
@@ -27,7 +27,7 @@ function LogErrorForFile($file, $errorString)
   if (Test-SupportsDevOpsLogging) {
     Write-Host ("##vso[task.logissue type=error;sourcepath=$file;linenumber=1;columnnumber=1;]$errorString" -replace "`n", "%0D%0A")
   }
-  else if (Test-SupportsGitHubLogging) {
+  elseif (Test-SupportsGitHubLogging) {
     Write-Host ("::error file=$file,line=1,col=1::$errorString" -replace "`n", "%0D%0A")
   }
   else {
@@ -38,7 +38,7 @@ function LogError {
   if (Test-SupportsDevOpsLogging) {
     Write-Host ("##vso[task.LogIssue type=error;]$args" -replace "`n", "%0D%0A")
   }
-  else if (Test-SupportsGitHubLogging) {
+  elseif (Test-SupportsGitHubLogging) {
     Write-Host ("::error::$args" -replace "`n", "%0D%0A")
   }
   else {
@@ -50,7 +50,7 @@ function LogDebug {
   if (Test-SupportsDevOpsLogging) {
     Write-Host "[debug]$args"
   }
-  else if (Test-SupportsGitHubLogging) {
+  elseif (Test-SupportsGitHubLogging) {
     Write-Host "::debug::$args"
   }
   else {
@@ -62,7 +62,7 @@ function LogGroupStart() {
   if (Test-SupportsDevOpsLogging) {
     Write-Host "##[group]$args"
   }
-  else if (Test-SupportsGitHubLogging) {
+  elseif (Test-SupportsGitHubLogging) {
     Write-Host "::group::$args"
   }
 }
@@ -71,7 +71,7 @@ function LogGroupEnd() {
   if (Test-SupportsDevOpsLogging) {
     Write-Host "##[endgroup]"
   }
-  else if (Test-SupportsGitHubLogging) {
+  elseif (Test-SupportsGitHubLogging) {
     Write-Host "::endgroup::"
   }
 }
