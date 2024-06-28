@@ -15,6 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          # Required since "HEAD^" is passed to TypeSpec-Requirement.ps1
           fetch-depth: 2
 
       - name: Use Node 20.0
@@ -29,5 +30,9 @@ jobs:
       - run: npm ls -a
         continue-on-error: true
 
-      - run: eng/scripts/TypeSpec-Requirement.ps1 -SpecType ${{ matrix.spec-type }}
+      - run: |
+          eng/scripts/TypeSpec-Requirement.ps1 `
+            -BaseCommitish HEAD^ `
+            -TargetCommitish HEAD `
+            -SpecType ${{ matrix.spec-type }}
         shell: pwsh
