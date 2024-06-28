@@ -14,8 +14,7 @@ namespace Microsoft.Portal;
  * The shared dashboard resource definition.
  */
 @doc("The shared dashboard resource definition.")
-model Dashboard
-  is Azure.ResourceManager.TrackedResource<DashboardPropertiesWithProvisioningState> {
+model Dashboard is Azure.ResourceManager.TrackedResource<DashboardPropertiesWithProvisioningState> {
   ...ResourceNameParameter<
     Resource = Dashboard,
     KeyName = "dashboardName",
