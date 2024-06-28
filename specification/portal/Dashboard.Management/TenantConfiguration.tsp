@@ -17,15 +17,12 @@ namespace Microsoft.Portal;
 @tenantResource
 model TenantConfiguration
   is Azure.ResourceManager.ProxyResource<TenantConfigurationPropertiesWithProvisioningState> {
-  /**
-   * The configuration name. Value must be 'default'
-   */
-  @path
-  @pattern("^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$")
-  @key("configurationName")
-  @segment("tenantConfigurations")
-  @visibility("read")
-  name: ConfigurationName;
+    ...ResourceNameParameter<
+    Resource = TenantConfiguration,
+    KeyName = "configurationName",
+    SegmentName = "tenantConfigurations",
+    NamePattern = "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
+  >;
 }
 
 @armResourceOperations

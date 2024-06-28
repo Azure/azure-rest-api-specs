@@ -20,7 +20,7 @@ model Dashboard
     Resource = Dashboard,
     KeyName = "dashboardName",
     SegmentName = "dashboards",
-    NamePattern = ""
+    NamePattern = "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
   >;
 }
 

@@ -165,23 +165,10 @@
           {
             "name": "configurationName",
             "in": "path",
-            "description": "The configuration name. Value must be 'default'",
+            "description": "The name of the TenantConfiguration",
             "required": true,
             "type": "string",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "ConfigurationName",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "default",
-                  "value": "default",
-                  "description": "The default configuration name"
-                }
-              ]
-            }
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -217,23 +204,10 @@
           {
             "name": "configurationName",
             "in": "path",
-            "description": "The configuration name. Value must be 'default'",
+            "description": "The name of the TenantConfiguration",
             "required": true,
             "type": "string",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "ConfigurationName",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "default",
-                  "value": "default",
-                  "description": "The default configuration name"
-                }
-              ]
-            }
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
           },
           {
             "name": "resource",
@@ -284,23 +258,10 @@
           {
             "name": "configurationName",
             "in": "path",
-            "description": "The configuration name. Value must be 'default'",
+            "description": "The name of the TenantConfiguration",
             "required": true,
             "type": "string",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "ConfigurationName",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "default",
-                  "value": "default",
-                  "description": "The default configuration name"
-                }
-              ]
-            }
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -429,7 +390,8 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64
+            "maxLength": 64,
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -475,7 +437,8 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64
+            "maxLength": 64,
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
           },
           {
             "name": "resource",
@@ -536,7 +499,8 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64
+            "maxLength": 64,
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
           },
           {
             "name": "properties",
@@ -591,7 +555,8 @@
             "required": true,
             "type": "string",
             "minLength": 3,
-            "maxLength": 64
+            "maxLength": 64,
+            "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
