@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureStackHCI",
-    "version": "2024-05-01-test-preview",
+    "version": "2024-05-01-alpha",
     "description": "Azure Stack HCI management service",
     "x-typespec-generated": [
       {
@@ -6472,12 +6472,27 @@
           "$ref": "#/definitions/VirtualHardDiskStatusProvisioningStatus",
           "description": "Provisioning status of the vhd"
         },
+        "downloadStatus": {
+          "$ref": "#/definitions/VirtualHardDiskStatusDownloadStatus",
+          "description": "The download status of the virtual hard disk"
+        },
         "uploadStatus": {
           "$ref": "#/definitions/VirtualHardDiskStatusUploadStatus",
           "description": "The upload status of the virtual hard disk"
         }
       },
       "x-ms-client-flatten": true
+    },
+    "VirtualHardDiskStatusDownloadStatus": {
+      "type": "object",
+      "description": "The download status of the virtual hard disk",
+      "properties": {
+        "downloadedSizeInMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The downloaded sized of the virtual hard disk in MB"
+        }
+      }
     },
     "VirtualHardDiskStatusProvisioningStatus": {
       "type": "object",
