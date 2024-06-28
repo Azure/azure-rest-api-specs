@@ -73,7 +73,7 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(role, "ParticipantRole", "csharp");
 @@clientName(LuisCallingOptions, "LuisCallingConfig", "csharp");
 
-@@clientName(Entity, "ConversationEntity", "csharp");
+@@clientName(Entity, "NamedEntity", "csharp");
 
 @@clientName(CustomConversationSummarizationTaskParameters,
   "CustomConversationSummarizationTaskInput",
@@ -90,3 +90,6 @@ namespace Language.ConversationsClientCustomizations;
 );
 
 @@clientName(Conversation, "ConversationInput", "csharp");
+
+@@clientName(ConversationPiiCategoriesExclude, "ConversationPiiCategoryExclusions", "csharp");
+@@clientName(ErrorCode, "ConversationErrorCode", "csharp");
