@@ -32,7 +32,10 @@ namespace Language.ConversationsClientCustomizations;
 );
 @@clientName(ShortAnswerOptions.topAnswersWithSpan, "top", "csharp");
 
-@@clientName(AnalyzeConversationLROTask, "AnalyzeConversationJobTask", "csharp");
+@@clientName(AnalyzeConversationLROTask,
+  "AnalyzeConversationJobTask",
+  "csharp"
+);
 
 @@clientName(BasePrediction, "Prediction", "csharp");
 
@@ -46,4 +49,43 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(TemporalModifier.BeforeApprox, "BeforeApproximate", "csharp");
 
 @@clientName(RedactedTranscriptContent.itn, "InverseTextNormalized", "csharp");
-@@clientName(RedactedTranscriptContent.maskedItn, "MaskedInverseTextNormalized", "csharp");
+@@clientName(RedactedTranscriptContent.maskedItn,
+  "MaskedInverseTextNormalized",
+  "csharp"
+);
+@@clientName(Error, "ConversationError", "csharp");
+
+@@clientName(AnalysisParameters, "AnalysisConfig", "csharp");
+@@clientName(LuisParameters, "LuisConfig", "csharp");
+@@clientName(ConversationParameters, "ConversationConfig", "csharp");
+@@clientName(QuestionAnsweringParameters, "QustionAnsweringConfig", "csharp");
+@@clientName(AnswersOptions, "QuestionAnswersConfig", "csharp");
+@@clientName(ShortAnswerOptions, "ShortAnswerConfig", "csharp");
+
+@@clientName(ConversationAnalysisOptions,
+  "ConversationAnalysisInput",
+  "csharp"
+);
+
+@@clientName(Tasks, "ConversationTasks", "csharp");
+@@clientName(State, "ConversationTaskState", "csharp");
+@@clientName(role, "ParticipantRole", "csharp");
+@@clientName(LuisCallingOptions, "LuisCallingConfig", "csharp");
+
+@@clientName(Entity, "ConversationEntity", "csharp");
+
+@@clientName(CustomConversationSummarizationTaskParameters,
+  "CustomConversationSummarizationTaskInput",
+  "csharp"
+);
+@@clientName(ConversationTaskParameters, "ConversationTaskInput", "csharp");
+@@clientName(ConversationSummarizationTaskParameters,
+  "ConversationSummarizationTaskInput",
+  "csharp"
+);
+@@clientName(ConversationPiiTaskParameters,
+  "ConversationPiiTaskInput",
+  "csharp"
+);
+
+@@clientName(Conversation, "ConversationInput", "csharp");
