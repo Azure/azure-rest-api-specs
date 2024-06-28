@@ -151,7 +151,7 @@ model MongoClusterProperties {
   @added(Versions.v2024_07_01)
   compute?: ComputeProperties;
 
-  /** The backup prpoerties of the mongo cluster. */
+  /** The backup properties of the mongo cluster. */
   @added(Versions.v2024_07_01)
   backup?: BackupProperties;
 
