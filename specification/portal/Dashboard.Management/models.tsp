@@ -132,7 +132,7 @@ model DashboardLens {
   /**
    * The dashboard len's metadata.
    */
-  metadata?: Record<Record<unknown>>;
+  metadata?: {};
 }
 
 /**
@@ -177,7 +177,7 @@ model DashboardPartsPosition {
   /**
    * The dashboard part's metadata.
    */
-  metadata?: Record<Record<unknown>>;
+  metadata?: {};
 }
 
 /**
@@ -286,7 +286,7 @@ model MarkdownPartMetadata extends DashboardPartMetadata {
    * Input to dashboard part.
    */
   @OpenAPI.extension("x-ms-identifiers", [])
-  inputs?: Record<unknown>[];
+  inputs?: {}[];
 
   /**
    * Markdown part settings.
