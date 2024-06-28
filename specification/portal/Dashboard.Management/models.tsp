@@ -15,6 +15,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("The configuration name")
 union ConfigurationName {
   string,
+
   @doc("The default configuration name")
   default: "default",
 }
@@ -190,7 +191,8 @@ model DashboardPartMetadata {
 union DashboardPartMetadataType {
   @doc("The markdown part type.")
   markdown: "Extension/HubsExtension/PartType/MarkdownPart",
-  string
+
+  string,
 }
 /**
  * The shared dashboard resource definition.
