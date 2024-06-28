@@ -2,17 +2,17 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "api-version": "2024-07-01",
+    "api-version": "2023-09-01",
     "sshPublicKeyName": "mySshPublicKeyName",
     "parameters": {
-      "encryptionType": "Ed25519"
+      "encryptionType": "RSA"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "privateKey": "{ssh-ed25519 private key}",
-        "publicKey": "{ssh-ed25519 public key}",
+        "privateKey": "{ssh private key}",
+        "publicKey": "{ssh-rsa public key}",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/SshPublicKeys/mySshPublicKeyName"
       }
     }
