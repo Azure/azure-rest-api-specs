@@ -157,6 +157,9 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
             "name": "routeDirectionsBatchRequest",
             "in": "body",
             "description": "The list of route directions queries/requests to process. The list can contain a max of 100 queries for sync version and must contain at least 1 query.",
@@ -195,69 +198,9 @@
         }
       }
     },
-    "/route/directions:asyncBatch": {
-      "post": {
-        "description": "The Directions Asynchronous Batch API is designed for processing large volumes of route direction queries asynchronously. This API is optimized for handling high-volume batch requests without the need for immediate response times, making it ideal for extensive geocoding operations.\n\nAfter submitting your batch request, the service processes the queries in the background. You can check the status of the request periodically and retrieve the results once they are available. This approach is beneficial for applications that can accommodate longer processing times and do not require instant responses.\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. For more information, see [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).\n\n### Submitting an Asynchronous Batch Request\n\nTo submit a request, you must provide the following:\n\n- **`inputBlobUrl`**: A URL pointing to a blob storage that contains your batch of geocoding queries. The format of the data should be consistent with that used for the synchronous batch version.\n- **`outputStorageUrl`**: The destination URL where the batch results will be stored upon completion.\n- **`msiClientId`** (optional): The Client ID of a user-assigned managed identity. This is used for authentication and authorization of both `inputBlobUrl` and `outputStorageUrl`. If the managed identity is system-assigned, this field can be left null.\n\nThe response header `Operation-Location` returns a URL with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com`. To ensure that the endpoint returned in the `Operation-Location` header is the same as the submit job endpoint, using the geography endpoint is suggested.",
-        "operationId": "Route_SubmitDirectionsAsynchronousBatch",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location",
-          "final-state-schema": "#/definitions/AsyncBatchOperation"
-        },
-        "x-ms-examples": {
-          "Submit an asynchronous batch job for directions": {
-            "$ref": "./examples/DirectionsAsyncBatch.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
-          },
-          {
-            "name": "directionsAsyncBatchRequestBody",
-            "in": "body",
-            "description": "The request body for directions asynchronous batch request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AsyncBatchRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Operation-Location": {
-                "description": "URL to check the status of the asynchronous operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error occurred.",
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
-            },
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
     "/route/snapToRoads": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n>[!Important]\n> The GPS points must be within 2.5 kilometer of each other.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Route_PostSnapToRoads",
         "consumes": [
           "application/geo+json"
@@ -339,6 +282,9 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
             "name": "snapToRoadsBatchRequest",
             "in": "body",
             "description": "The list of Snap To Roads queries/requests to process. The list can contain a max of 100 queries for sync version and must contain at least 1 query.",
@@ -400,9 +346,6 @@
           },
           {
             "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/Accept-Language"
           },
           {
             "name": "routeRangeRequest",
@@ -549,7 +492,7 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
@@ -2125,6 +2068,15 @@
         }
       }
     },
+    "RouteRangeVehicleSpec": {
+      "type": "object",
+      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VehicleSpec"
+        }
+      ]
+    },
     "VehicleSpec": {
       "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n `Note`: Only supported for truck travelMode.",
       "type": "object",
@@ -2323,6 +2275,66 @@
         }
       }
     },
+    "RouteRangeAvoidEnum": {
+      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tolls\"]",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "limitedAccessHighways",
+          "tollRoads",
+          "ferries",
+          "tunnels",
+          "borderCrossings",
+          "lowEmissionZones",
+          "unpavedRoads",
+          "carpools",
+          "carTrains"
+        ],
+        "x-ms-enum": {
+          "name": "RouteRangeAvoidEnum",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "limitedAccessHighways",
+              "description": "Avoids the use of limited access highways in the route."
+            },
+            {
+              "value": "tollRoads",
+              "description": "Avoids the use of toll roads in the route."
+            },
+            {
+              "value": "ferries",
+              "description": "Avoids the use of ferries in the route."
+            },
+            {
+              "value": "tunnels",
+              "description": "Avoids the use of tunnels in the route."
+            },
+            {
+              "value": "borderCrossings",
+              "description": "Avoids crossing country borders in the route."
+            },
+            {
+              "value": "lowEmissionZones",
+              "description": "Avoids low-emission zones in the route."
+            },
+            {
+              "value": "unpavedRoads",
+              "description": "Avoids unpaved roads in the route."
+            },
+            {
+              "value": "carpools",
+              "description": "Avoids routes that require use of carpool."
+            },
+            {
+              "value": "carTrains",
+              "description": "Avoids car trains."
+            }
+          ]
+        }
+      }
+    },
     "OptionalId": {
       "type": "object",
       "description": "optional Id",
@@ -2393,7 +2405,7 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
         },
         "properties": {
-          "description": "Feature properties.",
+          "description": "Feature properties. For snapToRoads, the properties are empty.",
           "type": "object"
         }
       },
@@ -2432,7 +2444,7 @@
       "type": "object",
       "properties": {
         "inputIndex": {
-          "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
+          "description": "Identify the corresponding index in the original list of points for each snapped point.",
           "format": "int64",
           "type": "integer"
         },
@@ -2456,7 +2468,7 @@
       "description": "Specifies the properties of Route Range",
       "properties": {
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
@@ -2472,9 +2484,7 @@
           "enum": [
             "shortest",
             "fastestWithoutTraffic",
-            "fastestWithTraffic",
-            "thrillingWithTraffic",
-            "thrillingWithoutTraffic"
+            "fastestWithTraffic"
           ],
           "x-ms-enum": {
             "name": "RouteRangeOptimizeRouteEnum",
@@ -2494,99 +2504,27 @@
                 "value": "fastestWithTraffic",
                 "name": "FastestWithTraffic",
                 "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
-              },
-              {
-                "value": "thrillingWithTraffic",
-                "name": "ThrillingWithTraffic",
-                "description": "The route is calculated to provide a thrilling driving experience using current traffic information."
-              },
-              {
-                "value": "thrillingWithoutTraffic",
-                "name": "ThrillingWithoutTraffic",
-                "description": "The route is calculated to provide a thrilling driving experience without using current traffic information."
               }
             ]
           }
         },
         "avoid": {
-          "$ref": "#/definitions/AvoidEnum"
+          "$ref": "#/definitions/RouteRangeAvoidEnum"
         },
         "vehicleSpec": {
-          "$ref": "#/definitions/VehicleSpec"
+          "$ref": "#/definitions/RouteRangeVehicleSpec"
         },
         "distanceBudgetInMeters ": {
-          "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit.",
+          "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit. If `isSimplifiedPolygon` is false, then the maximum distance is 360000 meters; otherwise, it is 50000000 meters.",
           "type": "number",
           "minimum": 0,
-          "maximum": 500000
+          "maximum": 50000000
         },
         "timeBudgetInSec": {
-          "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint.",
+          "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint. If `isSimplifiedPolygon` is false, then the maximum time is 14400 seconds; otherwise, it is 10000000 seconds.",
           "type": "number",
           "minimum": 0,
-          "maximum": 60000
-        },
-        "thrilling": {
-          "type": "object",
-          "description": "The thrilling object is used to describe a route with two main characteristics: windingness and hilliness and is used when optimizedRoute is thrilling mode.",
-          "properties": {
-            "windingness": {
-              "description": "Specify the windingness of the route. If unspecified, the default mode is \"normal\".",
-              "type": "string",
-              "default": "normal",
-              "enum": [
-                "normal",
-                "low",
-                "high"
-              ],
-              "x-ms-enum": {
-                "name": "WindingnessEnum",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "normal",
-                    "description": "normal"
-                  },
-                  {
-                    "value": "low",
-                    "description": "low"
-                  },
-                  {
-                    "value": "high",
-                    "description": "high"
-                  }
-                ]
-              }
-            },
-            "hilliness": {
-              "description": "Specify the hilliness of the route. If unspecified, the default mode is \"normal\".",
-              "type": "string",
-              "default": "normal",
-              "enum": [
-                "normal",
-                "low",
-                "high"
-              ],
-              "x-ms-enum": {
-                "name": "HillinessEnum",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "normal",
-                    "description": "normal"
-                  },
-                  {
-                    "value": "low",
-                    "description": "low"
-                  },
-                  {
-                    "value": "high",
-                    "description": "high"
-                  }
-                ]
-              }
-            }
-          }
+          "maximum": 10000000
         },
         "travelMode": {
           "description": "Specify the travel mode. If unspecified, the default mode is \"driving\".",
@@ -2761,33 +2699,6 @@
           }
         }
       }
-    },
-    "AsyncBatchRequestBody": {
-      "type": "object",
-      "description": "Universal asynchronous batch request body.",
-      "properties": {
-        "inputBlobUrl": {
-          "description": "The URL to the input blob containing the batch of queries. This should be a valid URL pointing to a blob of an Azure Storage Account",
-          "type": "string",
-          "format": "uri"
-        },
-        "outputStorageUrl": {
-          "description": "The URL that points to a blob storage where the batch results will be stored.",
-          "type": "string",
-          "format": "uri"
-        },
-        "msiClientId": {
-          "description": "Client ID of a user-assigned managed identity. This is used for authentication and authorization purposes. If the managed identity is system-assigned, this field can be null.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "inputBlobUrl",
-        "outputStorageUrl"
-      ]
-    },
-    "AsyncBatchOperation": {
-      "$ref": "../../../AsyncBatchManagement/preview/2024-04-01-preview/asyncBatchManagement.json#/definitions/AsyncBatchOperation"
     },
     "SnapToRoadsBatchRequestBody": {
       "description": "The list of snap to roads queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
