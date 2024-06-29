@@ -80,6 +80,11 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 
+@@clientName(CustomHealthcareTaskParameters,
+  "CustomHealthcareTaskContent",
+  "csharp"
+);
+
 @@clientName(AnalyzeTextLROTaskKind, "AnalyzeTextJobTaskKind", "csharp");
 
 @@clientName(AnalyzeTextLROTask, "AnalyzeTextJobTask", "csharp");
