@@ -99,7 +99,10 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(ErrorCode, "ConversationErrorCode", "csharp");
 
 @@clientName(BaseResolution, "ResolutionBase", "csharp");
-@@clientName(BaseExtraInformation, "NamedEntityExtraInformation", "csharp");
+@@clientName(BaseExtraInformation,
+  "ConversationEntityExtraInformation",
+  "csharp"
+);
 
 @@clientName(TranscriptConversationItem.itn, "InverseTextNormalized", "csharp");
 @@clientName(TranscriptConversationItem.maskedItn,
