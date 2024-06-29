@@ -114,6 +114,4 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(DocumentSentimentValue, "DocumentSentiment", "csharp");
 
-@@clientName(SentenceSentimentValue, "SentenceSentiment", "csharp");
-
 @@clientName(TokenSentimentValue, "TokenSentiment", "csharp");
