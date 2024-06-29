@@ -6,7 +6,10 @@ param (
   [string] $TargetCommitish = "HEAD",
   [Parameter(Position = 2)]
   [string] $SpecType = "data-plane|resource-manager",
-  [string] $CheckAllUnder
+  [string] $CheckAllUnder,
+  # Reserved for testing.  Call using `pwsh -Command '... -_ResponseCache @{"url"=200}'`.
+  [Parameter(DontShow)]
+  [hashtable] $_ResponseCache = @{}
 )
 Set-StrictMode -Version 3
 
@@ -72,7 +75,7 @@ if (!$filesToCheck) {
 }
 else {
   # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
-  $responseCache = @{}
+  $responseCache = $_ResponseCache
 
   # - Forward slashes on both Linux and Windows
   # - May be nested 4 or 5 levels deep, perhaps even deeper
