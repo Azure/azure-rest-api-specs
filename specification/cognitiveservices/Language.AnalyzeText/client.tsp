@@ -197,6 +197,15 @@ namespace Language.AnalyzeTextClientCustomizations;
   "csharp"
 );
 
+@@clientName(CustomAbstractiveSummarizationLROResult,
+  "CustomAbstractiveSummarizationJobTaskResult",
+  "csharp"
+);
+
+@@clientName(HealthcareLROResult, "HealthcareJobTaskResult", "csharp");
+
+@@clientName(KeyPhraseExtractionLROResult, "KeyPhraseJobTaskResult", "csharp");
+
 @@clientName(EntityRecognitionLROResult, "EntitiesJobTaskResult", "csharp");
 
 @@clientName(SentimentLROResult, "SentimentAnalysisJobTaskResult", "csharp");
