@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 using TypeSpec.Versioning;
 using Azure.Core;
 
-namespace Language.Text;
+namespace Language.Text.Healthcare;
 
 /** Supported parameters for a Healthcare task. */
 model HealthcareTaskParameters is PreBuiltTaskParameters {

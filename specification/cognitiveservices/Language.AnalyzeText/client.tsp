@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Language.Text;
+using Language.Text.Healthcare;
 using Azure.ClientGenerator.Core;
 
 namespace Language.AnalyzeTextClientCustomizations;
@@ -69,3 +70,43 @@ namespace Language.AnalyzeTextClientCustomizations;
   "CustomAbstractiveSummarizationTaskContent",
   "csharp"
 );
+
+@@clientName(AbstractiveSummarizationLROResult,
+  "AbstractiveSummarizationTaskResult",
+  "csharp"
+);
+
+@@clientName(ExtractiveSummarizationLROResult,
+  "ExtractiveSummarizationTaskResult",
+  "csharp"
+);
+
+@@clientName(AnalyzeTextLROTaskKind, "AnalyzeTextJobTaskKind", "csharp");
+
+@@clientName(AnalyzeTextLROTask, "AnalyzeTextJobTask", "csharp");
+
+@@clientName(AnalyzeTextLROResult, "AnalyzeTextJobTaskResult", "csharp");
+
+@@clientName(JobState.createdDateTime, "CreatedAt", "csharp");
+
+@@clientName(JobState.expirationDateTime, "ExpiresOn", "csharp");
+
+@@clientName(JobState.lastUpdatedDateTime, "LastUpdatedAt", "csharp");
+
+@@clientName(BaseEntityOverlapPolicy, "EntityOverlapPolicy", "csharp");
+
+@@clientName(BaseTemporalMetadata, "TemporalMetadata", "csharp");
+
+@@clientName(BaseTemporalMetadata.dateValues, "Dates", "csharp");
+
+@@clientName(EntitiesTaskParameters.exclusionList, "Exclusions", "csharp");
+
+@@clientName(EntitiesTaskParameters.inclusionList, "Inclusions", "csharp");
+
+@@clientName(EntityCategory.GPE, "GeoPoliticalEntity", "csharp");
+
+@@clientName(EntityCategory.IP, "IPAddress", "csharp");
+
+@@clientName(EntityCategory.URL, "Uri", "csharp");
+
+@@clientName(ErrorCode, "AnalyzeTextErrorCode", "csharp");
