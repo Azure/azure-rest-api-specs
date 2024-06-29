@@ -7,7 +7,8 @@ param (
   [Parameter(Position = 2)]
   [string] $SpecType = "data-plane|resource-manager",
   [string] $CheckAllUnder,
-  # Reserved for testing.  Call using `pwsh -Command '... -_ResponseCache @{"url"=200}'`.
+  # Reserved for testing.  Call using:
+  # $ pwsh -Command '... -_ResponseCache @{"url"=200}'
   [Parameter(DontShow)]
   [hashtable] $_ResponseCache = @{}
 )
