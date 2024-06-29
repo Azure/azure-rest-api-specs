@@ -39,7 +39,7 @@ using Azure.Core.Traits;
   }
 )
 @versioned(Versions)
-namespace Language.AnalyzeText;
+namespace Language.Text;
 
 /** Analyze Conversations Service Versions */
 enum Versions {

@@ -77,16 +77,16 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(Entity, "NamedEntity", "csharp");
 
 @@clientName(CustomConversationSummarizationTaskParameters,
-  "CustomConversationSummarizationTaskInput",
+  "CustomConversationSummarizationTaskContent",
   "csharp"
 );
-@@clientName(ConversationTaskParameters, "ConversationTaskInput", "csharp");
+@@clientName(ConversationTaskParameters, "ConversationTaskContent", "csharp");
 @@clientName(ConversationSummarizationTaskParameters,
-  "ConversationSummarizationTaskInput",
+  "ConversationSummarizationTaskContent",
   "csharp"
 );
 @@clientName(ConversationPiiTaskParameters,
-  "ConversationPiiTaskInput",
+  "ConversationPiiTaskContent",
   "csharp"
 );
 

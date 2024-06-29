@@ -1,7 +1,7 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-using Language.AnalyzeText;
+using Language.Text;
 using Azure.ClientGenerator.Core;
 
 namespace Language.AnalyzeTextClientCustomizations;

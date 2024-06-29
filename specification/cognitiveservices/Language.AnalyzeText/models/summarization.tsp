@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.AnalyzeText;
+namespace Language.Text;
 
 /** Supported parameters for an Extractive Summarization task. */
 @added(Versions.v2023_04_01)
