@@ -120,3 +120,83 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(DocumentSentimentValue, "DocumentSentiment", "csharp");
 
 @@clientName(TokenSentimentValue, "TokenSentiment", "csharp");
+
+@@clientName(AbstractiveSummarizationLROTask,
+  "AbstractiveSummarizationJobTask",
+  "csharp"
+);
+
+@@clientName(ExtractiveSummarizationLROTask,
+  "ExtractiveSummarizationJobTask",
+  "csharp"
+);
+
+@@clientName(CustomAbstractiveSummarizationLROTask,
+  "CustomAbstractiveSummarizationJobTask",
+  "csharp"
+);
+
+@@clientName(CustomHealthcareLROTask, "CustomHealthcareJobTask", "csharp");
+
+@@clientName(CustomHealthcareLROResult,
+  "CustomHealthcareJobTaskResult",
+  "csharp"
+);
+
+@@clientName(CustomEntitiesLROTask, "CustomEntitiesJobTask", "csharp");
+
+@@clientName(CustomEntityRecognitionLROResult,
+  "CustomEntitiesJobTaskResult",
+  "csharp"
+);
+
+@@clientName(CustomSingleLabelClassificationLROTask,
+  "CustomSingleLabelClassificationJobTask",
+  "csharp"
+);
+
+@@clientName(CustomMultiLabelClassificationLROTask,
+  "CustomMultiLabelClassificationJobTask",
+  "csharp"
+);
+
+@@clientName(EntityLinkingLROTask, "EntityLinkingJobTask", "csharp");
+
+@@clientName(EntitiesLROTask, "EntitiesJobTask", "csharp");
+
+@@clientName(KeyPhraseLROTask, "KeyPhraseJobTask", "csharp");
+
+@@clientName(PiiLROTask, "PiiJobTask", "csharp");
+
+@@clientName(SentimentAnalysisLROTask, "SentimentAnalysisJobTask", "csharp");
+
+@@clientName(CustomSentimentAnalysisLROTask,
+  "CustomSentimentAnalysisJobTask",
+  "csharp"
+);
+
+@@clientName(CustomSentimentAnalysisLROResult,
+  "CustomSentimentAnalysisJobTaskResult",
+  "csharp"
+);
+
+@@clientName(CustomSingleLabelClassificationLROResult,
+  "CustomSingleLabelClassificationJobTaskResult",
+  "csharp"
+);
+
+@@clientName(CustomMultiLabelClassificationLROResult,
+  "CustomMultiLabelClassificationJobTaskResult",
+  "csharp"
+);
+
+@@clientName(EntityLinkingLROResult, "EntityLinkingJobTaskResult", "csharp");
+
+@@clientName(PiiEntityRecognitionLROResult,
+  "PiiEntityRecognitionResult",
+  "csharp"
+);
+
+@@clientName(EntityRecognitionLROResult, "EntitiesJobTaskResult", "csharp");
+
+@@clientName(SentimentLROResult, "SentimentAnalysisJobTaskResult", "csharp");
