@@ -12611,6 +12611,51 @@
       "x-ms-discriminator-value": "AzureFile",
       "additionalProperties": false
     },
+    "AzureOpenAiFineTuning": {
+            "required": [
+                "modelProvider"
+            ],
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/FineTuningVertical"
+                }
+            ],
+            "properties": {
+                "hyperParameters": {
+                    "description": "HyperParameters for fine tuning Azure Open AI model.",
+                    "$ref": "#/definitions/AzureOpenAiHyperParameters",
+                    "x-nullable": true
+                }
+            },
+            "x-ms-discriminator-value": "AzureOpenAI",
+            "additionalProperties": false
+        },
+    "AzureOpenAiHyperParameters": {
+        "description": "Azure Open AI hyperparameters for fine tuning.",
+        "type": "object",
+        "properties": {
+            "learningRateMultiplier": {
+                "format": "double",
+                "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid over fitting.",
+                "type": "number",
+                "x-nullable": true
+            },
+            "batchSize": {
+                "format": "int32",
+                "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.",
+                "type": "integer",
+                "x-nullable": true
+            },
+            "nEpochs": {
+                "format": "int32",
+                "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.",
+                "type": "integer",
+                "x-nullable": true
+            }
+        },
+        "additionalProperties": false
+    },
     "BanditPolicy": {
       "description": "Defines an early termination policy based on slack criteria, and a frequency and delay interval for evaluation",
       "type": "object",
@@ -14260,6 +14305,30 @@
         }
       },
       "additionalProperties": false
+    },
+    "CustomModelFineTuning": {
+            "required": [
+                "modelProvider"
+            ],
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/FineTuningVertical"
+                }
+            ],
+            "properties": {
+                "hyperParameters": {
+                    "description": "HyperParameters for fine tuning custom model.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string",
+                        "x-nullable": true
+                    },
+                    "x-nullable": true
+                }
+            },
+            "x-ms-discriminator-value": "Custom",
+            "additionalProperties": false
     },
     "CustomModelJobInput": {
       "type": "object",
@@ -16538,6 +16607,156 @@
       },
       "additionalProperties": false
     },
+    "FineTuningJob": {
+            "description": "FineTuning Job definition.",
+            "required": [
+                "fineTuningDetails",
+                "jobType",
+                "outputs"
+            ],
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/JobBase"
+                }
+            ],
+            "properties": {
+                "fineTuningDetails": {
+                    "description": "[Required] ",
+                    "$ref": "#/definitions/FineTuningVertical"
+                },
+                "resources": {
+                    "description": "Instance types and other resources for the job",
+                    "default": "{}",
+                    "$ref": "#/definitions/JobResources",
+                    "x-ms-mutability": [
+                        "create",
+                        "read"
+                    ]
+                },
+                "queueSettings": {
+                    "description": "Queue settings for the job",
+                    "$ref": "#/definitions/QueueSettings",
+                    "x-ms-mutability": [
+                        "create",
+                        "read"
+                    ],
+                    "x-nullable": true
+                },
+                "outputs": {
+                    "description": "[Required] ",
+                    "type": "object",
+                    "additionalProperties": {
+                        "description": "Job output definition container information on where to find job output/logs.",
+                        "$ref": "#/definitions/JobOutput",
+                        "x-nullable": true
+                    },
+                    "x-ms-mutability": [
+                        "create",
+                        "read"
+                    ]
+                }
+            },
+            "x-ms-discriminator-value": "FineTuning",
+            "additionalProperties": false
+        },
+    "FineTuningTaskType": {
+        "enum": [
+            "ChatCompletion",
+            "TextCompletion",
+            "TextClassification",
+            "QuestionAnswering",
+            "TextSummarization",
+            "TokenClassification",
+            "TextTranslation",
+            "ImageClassification",
+            "ImageInstanceSegmentation",
+            "ImageObjectDetection",
+            "VideoMultiObjectTracking"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+            "name": "FineTuningTaskType",
+            "modelAsString": true,
+            "values": [
+                {
+                    "value": "ChatCompletion"
+                },
+                {
+                    "value": "TextCompletion"
+                },
+                {
+                    "value": "TextClassification"
+                },
+                {
+                    "value": "QuestionAnswering"
+                },
+                {
+                    "value": "TextSummarization"
+                },
+                {
+                    "value": "TokenClassification"
+                },
+                {
+                    "value": "TextTranslation"
+                },
+                {
+                    "value": "ImageClassification"
+                },
+                {
+                    "value": "ImageInstanceSegmentation"
+                },
+                {
+                    "value": "ImageObjectDetection"
+                },
+                {
+                    "value": "VideoMultiObjectTracking"
+                }
+            ]
+        },
+        "additionalProperties": false
+    },
+    "FineTuningVertical": {
+        "required": [
+            "model",
+            "modelProvider",
+            "taskType",
+            "trainingData"
+        ],
+        "type": "object",
+        "properties": {
+            "modelProvider": {
+                "description": "[Required] Enum to determine the type of fine tuning.",
+                "$ref": "#/definitions/ModelProvider",
+                "x-ms-mutability": [
+                    "create",
+                    "read"
+                ]
+            },
+            "taskType": {
+                "description": "[Required] Fine tuning task type.",
+                "$ref": "#/definitions/FineTuningTaskType",
+                "x-ms-mutability": [
+                    "create",
+                    "read"
+                ]
+            },
+            "trainingData": {
+                "description": "[Required] Training data for fine tuning.",
+                "$ref": "#/definitions/JobInput"
+            },
+            "validationData": {
+                "description": "Validation data for fine tuning.",
+                "$ref": "#/definitions/JobInput",
+                "x-nullable": true
+            },
+            "model": {
+                "description": "[Required] Input model for fine tuning.",
+                "$ref": "#/definitions/MLFlowModelJobInput"
+            }
+        },
+        "discriminator": "modelProvider"
+    },
     "FixedInputData": {
       "description": "Fixed input data definition.",
       "type": "object",
@@ -18286,6 +18505,20 @@
       },
       "additionalProperties": false
     },
+    "JobResources": {
+            "type": "object",
+            "properties": {
+                "instanceTypes": {
+                    "description": "List of instance types to choose from.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-nullable": true
+                }
+            },
+            "additionalProperties": false
+    },
     "JobScheduleAction": {
       "required": [
         "actionType",
@@ -18501,7 +18734,8 @@
         "Command",
         "Sweep",
         "Pipeline",
-        "Spark"
+        "Spark",
+        "FineTuning"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -19202,6 +19436,29 @@
         }
       },
       "additionalProperties": false
+    },
+    "ModelProvider": {
+        "description": "Enum to determine the type of fine tuning.",
+        "enum": [
+            "AzureOpenAI",
+            "Custom"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+            "name": "ModelProvider",
+            "modelAsString": true,
+            "values": [
+                {
+                    "value": "AzureOpenAI",
+                    "description": "Fine tuning using Azure Open AI model."
+                },
+                {
+                    "value": "Custom",
+                    "description": "Fine tuning using custom model."
+                }
+            ]
+        },
+        "additionalProperties": false
     },
     "ModelSettings": {
       "additionalProperties": false,
