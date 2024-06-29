@@ -92,11 +92,22 @@ namespace Language.ConversationsClientCustomizations;
 
 @@clientName(Conversation, "ConversationInput", "csharp");
 
-@@clientName(ConversationPiiCategoriesExclude, "ConversationPiiCategoryExclusions", "csharp");
+@@clientName(ConversationPiiCategoriesExclude,
+  "ConversationPiiCategoryExclusions",
+  "csharp"
+);
 @@clientName(ErrorCode, "ConversationErrorCode", "csharp");
 
 @@clientName(BaseResolution, "ResolutionBase", "csharp");
 @@clientName(BaseExtraInformation, "NamedEntityExtraInformation", "csharp");
 
 @@clientName(TranscriptConversationItem.itn, "InverseTextNormalized", "csharp");
-@@clientName(TranscriptConversationItem.maskedItn, "MaskedInverseTextNormalized", "csharp");
+@@clientName(TranscriptConversationItem.maskedItn,
+  "MaskedInverseTextNormalized",
+  "csharp"
+);
+
+@@clientName(AnalyzeConversationLROTaskKind,
+  "AnalyzeConversationJobTaskKind",
+  "csharp"
+);
