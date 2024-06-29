@@ -2,7 +2,6 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Language.Text;
-using Language.Text.Healthcare;
 using Azure.ClientGenerator.Core;
 
 namespace Language.AnalyzeTextClientCustomizations;
@@ -105,8 +104,16 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(EntityCategory.GPE, "GeoPoliticalEntity", "csharp");
 
-@@clientName(EntityCategory.IP, "IPAddress", "csharp");
+@@clientName(EntityCategory.IP, "IpAddress", "csharp");
 
 @@clientName(EntityCategory.URL, "Uri", "csharp");
 
 @@clientName(ErrorCode, "AnalyzeTextErrorCode", "csharp");
+
+@@clientName(WarningCodeValue, "WarningCode", "csharp");
+
+@@clientName(DocumentSentimentValue, "DocumentSentiment", "csharp");
+
+@@clientName(SentenceSentimentValue, "SentenceSentiment", "csharp");
+
+@@clientName(TokenSentimentValue, "TokenSentiment", "csharp");

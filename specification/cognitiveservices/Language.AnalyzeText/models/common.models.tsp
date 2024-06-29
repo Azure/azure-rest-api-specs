@@ -488,7 +488,7 @@ model PreBuiltTaskParameters is TaskParameters {
 alias ShowStatsQueryParameter = QueryParametersTrait<{
   /** (Optional) if set to true, response will contain request and document level statistics. */
   @query
-  @clientName("showStatistics", "csharp") 
+  @clientName("showStatistics", "csharp")
   showStats?: boolean;
 }>;
 

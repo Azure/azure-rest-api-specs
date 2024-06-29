@@ -4,7 +4,7 @@ using Language.Text;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.Text.Healthcare;
+namespace Language.Text;
 /** Supported parameters for a custom Healthcare task. */
 @added(Versions.v2023_11_15_preview)
 model CustomHealthcareTaskParameters is CustomTaskParameters {

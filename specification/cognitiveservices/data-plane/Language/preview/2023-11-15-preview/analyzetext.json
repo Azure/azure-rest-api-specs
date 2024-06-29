@@ -1327,6 +1327,30 @@
         ]
       }
     },
+    "Association": {
+      "type": "string",
+      "description": "Describes if the entity is the subject of the text or if it describes someone else.",
+      "enum": [
+        "subject",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "Association",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "subject",
+            "value": "subject",
+            "description": "Subject association"
+          },
+          {
+            "name": "other",
+            "value": "other",
+            "description": "Other association"
+          }
+        ]
+      }
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -1380,6 +1404,48 @@
       "required": [
         "metadataKind"
       ]
+    },
+    "Certainty": {
+      "type": "string",
+      "description": "Describes the entities certainty and polarity.",
+      "enum": [
+        "positive",
+        "positivePossible",
+        "neutralPossible",
+        "negativePossible",
+        "negative"
+      ],
+      "x-ms-enum": {
+        "name": "Certainty",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "positive",
+            "value": "positive",
+            "description": "Positive certainty"
+          },
+          {
+            "name": "positivePossible",
+            "value": "positivePossible",
+            "description": "Possibly positive certainty"
+          },
+          {
+            "name": "neutralPossible",
+            "value": "neutralPossible",
+            "description": "Possibly neutral certainty"
+          },
+          {
+            "name": "negativePossible",
+            "value": "negativePossible",
+            "description": "Possibly negative certainty"
+          },
+          {
+            "name": "negative",
+            "value": "negative",
+            "description": "Negative certainty"
+          }
+        ]
+      }
     },
     "ClassificationDocumentResultWithDetectedLanguage": {
       "type": "object",
@@ -1438,6 +1504,30 @@
         "category",
         "confidenceScore"
       ]
+    },
+    "Conditionality": {
+      "type": "string",
+      "description": "Describes any conditionality on the entity.",
+      "enum": [
+        "hypothetical",
+        "conditional"
+      ],
+      "x-ms-enum": {
+        "name": "Conditionality",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "hypothetical",
+            "value": "hypothetical",
+            "description": "Hypothetical conditionality"
+          },
+          {
+            "name": "conditional",
+            "value": "conditional",
+            "description": "Conditional conditionality"
+          }
+        ]
+      }
     },
     "CurrencyMetadata": {
       "type": "object",
@@ -1733,6 +1823,244 @@
         }
       ],
       "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
+    },
+    "CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
+      "type": "object",
+      "description": "Contains the document custom healthcare results with detected language.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Healthcare entities.",
+          "items": {
+            "$ref": "#/definitions/CustomHealthcareEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "relations": {
+          "type": "array",
+          "description": "Healthcare entity relations.",
+          "items": {
+            "$ref": "#/definitions/HealthcareRelation"
+          },
+          "x-ms-identifiers": []
+        },
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "entities",
+        "relations"
+      ]
+    },
+    "CustomHealthcareEntity": {
+      "type": "object",
+      "description": "Contains the custom healthcare entity.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "$ref": "#/definitions/healthcareEntityCategory",
+          "description": "Healthcare Entity Category."
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "assertion": {
+          "$ref": "#/definitions/HealthcareAssertion",
+          "description": "Assertion of the entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'."
+        },
+        "links": {
+          "type": "array",
+          "description": "Entity references in known data sources.",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntityLink"
+          }
+        },
+        "entityComponentInformation": {
+          "type": "array",
+          "description": "(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.",
+          "items": {
+            "$ref": "#/definitions/EntityComponentInformation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore"
+      ]
+    },
+    "CustomHealthcareLROResult": {
+      "type": "object",
+      "description": "Contains the custom healthcare job result.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomHealthcareResult",
+          "description": "Contains the list of document results."
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomHealthcareLROResults"
+    },
+    "CustomHealthcareLROTask": {
+      "type": "object",
+      "description": "Contains the custom healthcare task definition.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/CustomHealthcareTaskParameters",
+          "description": "Contains the custom healthcare task parameters."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomHealthcare"
+    },
+    "CustomHealthcareResult": {
+      "type": "object",
+      "description": "Contains the custom healthcare result for the request.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
+        "documents": {
+          "type": "array",
+          "description": "List of custom healthcare results for the document.",
+          "items": {
+            "$ref": "#/definitions/CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
+          }
+        }
+      },
+      "required": [
+        "errors",
+        "projectName",
+        "deploymentName",
+        "documents"
+      ]
+    },
+    "CustomHealthcareTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a custom Healthcare task.",
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
+        "stringIndexType": {
+          "type": "string",
+          "description": "Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).",
+          "default": "TextElements_v8",
+          "enum": [
+            "TextElements_v8",
+            "UnicodeCodePoint",
+            "Utf16CodeUnit"
+          ],
+          "x-ms-enum": {
+            "name": "StringIndexType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TextElements_v8",
+                "value": "TextElements_v8",
+                "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+              },
+              {
+                "name": "UnicodeCodePoint",
+                "value": "UnicodeCodePoint",
+                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+              },
+              {
+                "name": "Utf16CodeUnit",
+                "value": "Utf16CodeUnit",
+                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "projectName",
+        "deploymentName"
+      ]
     },
     "CustomLabelClassificationResultWithDocumentDetectedLanguage": {
       "type": "object",
@@ -3685,362 +4013,34 @@
         }
       }
     },
-    "Healthcare.Association": {
-      "type": "string",
-      "description": "Describes if the entity is the subject of the text or if it describes someone else.",
-      "enum": [
-        "subject",
-        "other"
-      ],
-      "x-ms-enum": {
-        "name": "Association",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "subject",
-            "value": "subject",
-            "description": "Subject association"
-          },
-          {
-            "name": "other",
-            "value": "other",
-            "description": "Other association"
-          }
-        ]
-      }
-    },
-    "Healthcare.Certainty": {
-      "type": "string",
-      "description": "Describes the entities certainty and polarity.",
-      "enum": [
-        "positive",
-        "positivePossible",
-        "neutralPossible",
-        "negativePossible",
-        "negative"
-      ],
-      "x-ms-enum": {
-        "name": "Certainty",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "positive",
-            "value": "positive",
-            "description": "Positive certainty"
-          },
-          {
-            "name": "positivePossible",
-            "value": "positivePossible",
-            "description": "Possibly positive certainty"
-          },
-          {
-            "name": "neutralPossible",
-            "value": "neutralPossible",
-            "description": "Possibly neutral certainty"
-          },
-          {
-            "name": "negativePossible",
-            "value": "negativePossible",
-            "description": "Possibly negative certainty"
-          },
-          {
-            "name": "negative",
-            "value": "negative",
-            "description": "Negative certainty"
-          }
-        ]
-      }
-    },
-    "Healthcare.Conditionality": {
-      "type": "string",
-      "description": "Describes any conditionality on the entity.",
-      "enum": [
-        "hypothetical",
-        "conditional"
-      ],
-      "x-ms-enum": {
-        "name": "Conditionality",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "hypothetical",
-            "value": "hypothetical",
-            "description": "Hypothetical conditionality"
-          },
-          {
-            "name": "conditional",
-            "value": "conditional",
-            "description": "Conditional conditionality"
-          }
-        ]
-      }
-    },
-    "Healthcare.CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
-      "type": "object",
-      "description": "Contains the document custom healthcare results with detected language.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Healthcare entities.",
-          "items": {
-            "$ref": "#/definitions/Healthcare.CustomHealthcareEntity"
-          },
-          "x-ms-identifiers": []
-        },
-        "relations": {
-          "type": "array",
-          "description": "Healthcare entity relations.",
-          "items": {
-            "$ref": "#/definitions/Healthcare.HealthcareRelation"
-          },
-          "x-ms-identifiers": []
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "entities",
-        "relations"
-      ]
-    },
-    "Healthcare.CustomHealthcareEntity": {
-      "type": "object",
-      "description": "Contains the custom healthcare entity.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Entity text as appears in the request."
-        },
-        "category": {
-          "$ref": "#/definitions/Healthcare.healthcareEntityCategory",
-          "description": "Healthcare Entity Category."
-        },
-        "subcategory": {
-          "type": "string",
-          "description": "(Optional) Entity sub type."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
-        },
-        "assertion": {
-          "$ref": "#/definitions/Healthcare.HealthcareAssertion",
-          "description": "Assertion of the entity."
-        },
-        "name": {
-          "type": "string",
-          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'."
-        },
-        "links": {
-          "type": "array",
-          "description": "Entity references in known data sources.",
-          "items": {
-            "$ref": "#/definitions/Healthcare.HealthcareEntityLink"
-          }
-        },
-        "entityComponentInformation": {
-          "type": "array",
-          "description": "(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.",
-          "items": {
-            "$ref": "#/definitions/EntityComponentInformation"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "text",
-        "category",
-        "offset",
-        "length",
-        "confidenceScore"
-      ]
-    },
-    "Healthcare.CustomHealthcareLROResult": {
-      "type": "object",
-      "description": "Contains the custom healthcare job result.",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/Healthcare.CustomHealthcareResult",
-          "description": "Contains the list of document results."
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomHealthcareLROResults"
-    },
-    "Healthcare.CustomHealthcareLROTask": {
-      "type": "object",
-      "description": "Contains the custom healthcare task definition.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/Healthcare.CustomHealthcareTaskParameters",
-          "description": "Contains the custom healthcare task parameters."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROTask"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomHealthcare"
-    },
-    "Healthcare.CustomHealthcareResult": {
-      "type": "object",
-      "description": "Contains the custom healthcare result for the request.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        },
-        "documents": {
-          "type": "array",
-          "description": "List of custom healthcare results for the document.",
-          "items": {
-            "$ref": "#/definitions/Healthcare.CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
-          }
-        }
-      },
-      "required": [
-        "errors",
-        "projectName",
-        "deploymentName",
-        "documents"
-      ]
-    },
-    "Healthcare.CustomHealthcareTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a custom Healthcare task.",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        },
-        "stringIndexType": {
-          "type": "string",
-          "description": "Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).",
-          "default": "TextElements_v8",
-          "enum": [
-            "TextElements_v8",
-            "UnicodeCodePoint",
-            "Utf16CodeUnit"
-          ],
-          "x-ms-enum": {
-            "name": "StringIndexType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "TextElements_v8",
-                "value": "TextElements_v8",
-                "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
-              },
-              {
-                "name": "UnicodeCodePoint",
-                "value": "UnicodeCodePoint",
-                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
-              },
-              {
-                "name": "Utf16CodeUnit",
-                "value": "Utf16CodeUnit",
-                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "Healthcare.FhirBundle": {
+    "FhirBundle": {
       "type": "object",
       "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.",
       "additionalProperties": {}
     },
-    "Healthcare.HealthcareAssertion": {
+    "HealthcareAssertion": {
       "type": "object",
       "description": "Assertion of the entity.",
       "properties": {
         "conditionality": {
-          "$ref": "#/definitions/Healthcare.Conditionality",
+          "$ref": "#/definitions/Conditionality",
           "description": "Describes any conditionality on the entity."
         },
         "certainty": {
-          "$ref": "#/definitions/Healthcare.Certainty",
+          "$ref": "#/definitions/Certainty",
           "description": "Describes the entities certainty and polarity."
         },
         "association": {
-          "$ref": "#/definitions/Healthcare.Association",
+          "$ref": "#/definitions/Association",
           "description": "Describes if the entity is the subject of the text or if it describes someone else."
         },
         "temporality": {
-          "$ref": "#/definitions/Healthcare.Temporality",
+          "$ref": "#/definitions/Temporality",
           "description": "Describes temporal information regarding the entity."
         }
       }
     },
-    "Healthcare.HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
+    "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
       "type": "object",
       "description": "Result object for the processed Healthcare document with detected language.",
       "properties": {
@@ -4064,7 +4064,7 @@
           "type": "array",
           "description": "Healthcare entities.",
           "items": {
-            "$ref": "#/definitions/Healthcare.HealthcareEntity"
+            "$ref": "#/definitions/HealthcareEntity"
           },
           "x-ms-identifiers": []
         },
@@ -4072,12 +4072,12 @@
           "type": "array",
           "description": "Healthcare entity relations.",
           "items": {
-            "$ref": "#/definitions/Healthcare.HealthcareRelation"
+            "$ref": "#/definitions/HealthcareRelation"
           },
           "x-ms-identifiers": []
         },
         "fhirBundle": {
-          "$ref": "#/definitions/Healthcare.FhirBundle",
+          "$ref": "#/definitions/FhirBundle",
           "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html."
         },
         "detectedLanguage": {
@@ -4092,7 +4092,7 @@
         "relations"
       ]
     },
-    "Healthcare.HealthcareEntity": {
+    "HealthcareEntity": {
       "type": "object",
       "description": "Healthcare entity extracted from the document",
       "properties": {
@@ -4101,7 +4101,7 @@
           "description": "Entity text as appears in the request."
         },
         "category": {
-          "$ref": "#/definitions/Healthcare.healthcareEntityCategory",
+          "$ref": "#/definitions/healthcareEntityCategory",
           "description": "Healthcare Entity Category."
         },
         "subcategory": {
@@ -4124,7 +4124,7 @@
           "description": "Confidence score between 0 and 1 of the extracted entity."
         },
         "assertion": {
-          "$ref": "#/definitions/Healthcare.HealthcareAssertion",
+          "$ref": "#/definitions/HealthcareAssertion",
           "description": "Assertion of the entity."
         },
         "name": {
@@ -4135,7 +4135,7 @@
           "type": "array",
           "description": "Entity references in known data sources.",
           "items": {
-            "$ref": "#/definitions/Healthcare.HealthcareEntityLink"
+            "$ref": "#/definitions/HealthcareEntityLink"
           }
         }
       },
@@ -4147,7 +4147,7 @@
         "confidenceScore"
       ]
     },
-    "Healthcare.HealthcareEntityLink": {
+    "HealthcareEntityLink": {
       "type": "object",
       "description": "Reference to an entity in known data sources.",
       "properties": {
@@ -4165,12 +4165,12 @@
         "id"
       ]
     },
-    "Healthcare.HealthcareLROResult": {
+    "HealthcareLROResult": {
       "type": "object",
       "description": "Healthcare Analyze Text long tunning operation result object.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/Healthcare.HealthcareResult",
+          "$ref": "#/definitions/HealthcareResult",
           "description": "Results of the task."
         }
       },
@@ -4184,12 +4184,12 @@
       ],
       "x-ms-discriminator-value": "HealthcareLROResults"
     },
-    "Healthcare.HealthcareLROTask": {
+    "HealthcareLROTask": {
       "type": "object",
       "description": "The long running task to be performed by the service on the Healthcare input documents.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/Healthcare.HealthcareTaskParameters",
+          "$ref": "#/definitions/HealthcareTaskParameters",
           "description": "Parameters for the Healthcare task."
         }
       },
@@ -4200,19 +4200,19 @@
       ],
       "x-ms-discriminator-value": "Healthcare"
     },
-    "Healthcare.HealthcareRelation": {
+    "HealthcareRelation": {
       "type": "object",
       "description": "Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.",
       "properties": {
         "relationType": {
-          "$ref": "#/definitions/Healthcare.relationType",
+          "$ref": "#/definitions/relationType",
           "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc."
         },
         "entities": {
           "type": "array",
           "description": "The entities in the relation.",
           "items": {
-            "$ref": "#/definitions/Healthcare.HealthcareRelationEntity"
+            "$ref": "#/definitions/HealthcareRelationEntity"
           },
           "x-ms-identifiers": []
         },
@@ -4227,7 +4227,7 @@
         "entities"
       ]
     },
-    "Healthcare.HealthcareRelationEntity": {
+    "HealthcareRelationEntity": {
       "type": "object",
       "description": "Entity in the relation.",
       "properties": {
@@ -4245,7 +4245,7 @@
         "role"
       ]
     },
-    "Healthcare.HealthcareResult": {
+    "HealthcareResult": {
       "type": "object",
       "description": "Result object for the processed Healthcare task.",
       "properties": {
@@ -4268,7 +4268,7 @@
           "type": "array",
           "description": "List of result objects for the processed Healthcare documents.",
           "items": {
-            "$ref": "#/definitions/Healthcare.HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
+            "$ref": "#/definitions/HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
           }
         }
       },
@@ -4278,7 +4278,7 @@
         "documents"
       ]
     },
-    "Healthcare.HealthcareTaskParameters": {
+    "HealthcareTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Healthcare task.",
       "properties": {
@@ -4324,577 +4324,13 @@
           }
         },
         "fhirVersion": {
-          "$ref": "#/definitions/Healthcare.fhirVersion",
+          "$ref": "#/definitions/fhirVersion",
           "description": "The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html."
         },
         "documentType": {
-          "$ref": "#/definitions/Healthcare.healthcareDocumentType",
+          "$ref": "#/definitions/healthcareDocumentType",
           "description": "Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter."
         }
-      }
-    },
-    "Healthcare.Temporality": {
-      "type": "string",
-      "description": "Describes temporal information regarding the entity.",
-      "enum": [
-        "current",
-        "past",
-        "future"
-      ],
-      "x-ms-enum": {
-        "name": "Temporality",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "current",
-            "value": "current",
-            "description": "Current temporality"
-          },
-          {
-            "name": "past",
-            "value": "past",
-            "description": "Past temporality"
-          },
-          {
-            "name": "future",
-            "value": "future",
-            "description": "Future temporality"
-          }
-        ]
-      }
-    },
-    "Healthcare.fhirVersion": {
-      "type": "string",
-      "description": "The FHIR Spec version.",
-      "enum": [
-        "4.0.1"
-      ],
-      "x-ms-enum": {
-        "name": "fhirVersion",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "4.0.1",
-            "value": "4.0.1",
-            "description": "Version 4.0.1"
-          }
-        ]
-      }
-    },
-    "Healthcare.healthcareDocumentType": {
-      "type": "string",
-      "description": "Document type.",
-      "enum": [
-        "None",
-        "ClinicalTrial",
-        "DischargeSummary",
-        "ProgressNote",
-        "HistoryAndPhysical",
-        "Consult",
-        "Imaging",
-        "Pathology",
-        "ProcedureNote"
-      ],
-      "x-ms-enum": {
-        "name": "healthcareDocumentType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None document type"
-          },
-          {
-            "name": "ClinicalTrial",
-            "value": "ClinicalTrial",
-            "description": "Clinical trial document type"
-          },
-          {
-            "name": "DischargeSummary",
-            "value": "DischargeSummary",
-            "description": "Discharge summary document type"
-          },
-          {
-            "name": "ProgressNote",
-            "value": "ProgressNote",
-            "description": "Progress note document type"
-          },
-          {
-            "name": "HistoryAndPhysical",
-            "value": "HistoryAndPhysical",
-            "description": "History and physical document type"
-          },
-          {
-            "name": "Consult",
-            "value": "Consult",
-            "description": "Consult document type"
-          },
-          {
-            "name": "Imaging",
-            "value": "Imaging",
-            "description": "Imaging document type"
-          },
-          {
-            "name": "Pathology",
-            "value": "Pathology",
-            "description": "Pathology document type"
-          },
-          {
-            "name": "ProcedureNote",
-            "value": "ProcedureNote",
-            "description": "Procedure note document type"
-          }
-        ]
-      }
-    },
-    "Healthcare.healthcareEntityCategory": {
-      "type": "string",
-      "description": "Healthcare Entity Category.",
-      "enum": [
-        "BodyStructure",
-        "Age",
-        "Gender",
-        "ExaminationName",
-        "Date",
-        "Direction",
-        "Frequency",
-        "MeasurementValue",
-        "MeasurementUnit",
-        "RelationalOperator",
-        "Time",
-        "GeneOrProtein",
-        "Variant",
-        "AdministrativeEvent",
-        "CareEnvironment",
-        "HealthcareProfession",
-        "Diagnosis",
-        "SymptomOrSign",
-        "ConditionQualifier",
-        "MedicationClass",
-        "MedicationName",
-        "Dosage",
-        "MedicationForm",
-        "MedicationRoute",
-        "FamilyRelation",
-        "TreatmentName",
-        "Ethnicity",
-        "Course",
-        "Expression",
-        "MutationType",
-        "ConditionScale",
-        "Allergen",
-        "Employment",
-        "LivingStatus",
-        "SubstanceUse",
-        "SubstanceUseAmount"
-      ],
-      "x-ms-enum": {
-        "name": "healthcareEntityCategory",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "BodyStructure",
-            "value": "BodyStructure",
-            "description": "Body structure"
-          },
-          {
-            "name": "Age",
-            "value": "Age",
-            "description": "Age"
-          },
-          {
-            "name": "Gender",
-            "value": "Gender",
-            "description": "Gender"
-          },
-          {
-            "name": "ExaminationName",
-            "value": "ExaminationName",
-            "description": "Examination name"
-          },
-          {
-            "name": "Date",
-            "value": "Date",
-            "description": "Date"
-          },
-          {
-            "name": "Direction",
-            "value": "Direction",
-            "description": "Direction"
-          },
-          {
-            "name": "Frequency",
-            "value": "Frequency",
-            "description": "Frequency"
-          },
-          {
-            "name": "MeasurementValue",
-            "value": "MeasurementValue",
-            "description": "Measurement value"
-          },
-          {
-            "name": "MeasurementUnit",
-            "value": "MeasurementUnit",
-            "description": "Measurement unit"
-          },
-          {
-            "name": "RelationalOperator",
-            "value": "RelationalOperator",
-            "description": "Relational operator"
-          },
-          {
-            "name": "Time",
-            "value": "Time",
-            "description": "Time"
-          },
-          {
-            "name": "GeneOrProtein",
-            "value": "GeneOrProtein",
-            "description": "Gene or protein"
-          },
-          {
-            "name": "Variant",
-            "value": "Variant",
-            "description": "Variant"
-          },
-          {
-            "name": "AdministrativeEvent",
-            "value": "AdministrativeEvent",
-            "description": "Administrative event"
-          },
-          {
-            "name": "CareEnvironment",
-            "value": "CareEnvironment",
-            "description": "Care environment"
-          },
-          {
-            "name": "HealthcareProfession",
-            "value": "HealthcareProfession",
-            "description": "Healthcare profession"
-          },
-          {
-            "name": "Diagnosis",
-            "value": "Diagnosis",
-            "description": "Diagnosis"
-          },
-          {
-            "name": "SymptomOrSign",
-            "value": "SymptomOrSign",
-            "description": "Symptom or sign"
-          },
-          {
-            "name": "ConditionQualifier",
-            "value": "ConditionQualifier",
-            "description": "Condition qualifier"
-          },
-          {
-            "name": "MedicationClass",
-            "value": "MedicationClass",
-            "description": "Medication class"
-          },
-          {
-            "name": "MedicationName",
-            "value": "MedicationName",
-            "description": "Medication name"
-          },
-          {
-            "name": "Dosage",
-            "value": "Dosage",
-            "description": "Dosage"
-          },
-          {
-            "name": "MedicationForm",
-            "value": "MedicationForm",
-            "description": "Medication form"
-          },
-          {
-            "name": "MedicationRoute",
-            "value": "MedicationRoute",
-            "description": "Medication route"
-          },
-          {
-            "name": "FamilyRelation",
-            "value": "FamilyRelation",
-            "description": "Family relation"
-          },
-          {
-            "name": "TreatmentName",
-            "value": "TreatmentName",
-            "description": "Treatment name"
-          },
-          {
-            "name": "Ethnicity",
-            "value": "Ethnicity",
-            "description": "Ethnicity"
-          },
-          {
-            "name": "Course",
-            "value": "Course",
-            "description": "Course"
-          },
-          {
-            "name": "Expression",
-            "value": "Expression",
-            "description": "Expression"
-          },
-          {
-            "name": "MutationType",
-            "value": "MutationType",
-            "description": "Mutation type"
-          },
-          {
-            "name": "ConditionScale",
-            "value": "ConditionScale",
-            "description": "Condition scale"
-          },
-          {
-            "name": "Allergen",
-            "value": "Allergen",
-            "description": "Allergen"
-          },
-          {
-            "name": "Employment",
-            "value": "Employment",
-            "description": "Employment"
-          },
-          {
-            "name": "LivingStatus",
-            "value": "LivingStatus",
-            "description": "Living status"
-          },
-          {
-            "name": "SubstanceUse",
-            "value": "SubstanceUse",
-            "description": "Substance use"
-          },
-          {
-            "name": "SubstanceUseAmount",
-            "value": "SubstanceUseAmount",
-            "description": "Substance use amount"
-          }
-        ]
-      }
-    },
-    "Healthcare.relationType": {
-      "type": "string",
-      "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
-      "enum": [
-        "Abbreviation",
-        "DirectionOfBodyStructure",
-        "DirectionOfCondition",
-        "DirectionOfExamination",
-        "DirectionOfTreatment",
-        "DosageOfMedication",
-        "FormOfMedication",
-        "FrequencyOfMedication",
-        "FrequencyOfTreatment",
-        "QualifierOfCondition",
-        "RelationOfExamination",
-        "RouteOfMedication",
-        "TimeOfCondition",
-        "TimeOfEvent",
-        "TimeOfExamination",
-        "TimeOfMedication",
-        "TimeOfTreatment",
-        "UnitOfCondition",
-        "UnitOfExamination",
-        "ValueOfCondition",
-        "ValueOfExamination",
-        "BodySiteOfCondition",
-        "BodySiteOfTreatment",
-        "CourseOfCondition",
-        "CourseOfExamination",
-        "CourseOfMedication",
-        "CourseOfTreatment",
-        "ExaminationFindsCondition",
-        "ExpressionOfGene",
-        "ExpressionOfVariant",
-        "FrequencyOfCondition",
-        "MutationTypeOfGene",
-        "MutationTypeOfVariant",
-        "ScaleOfCondition",
-        "VariantOfGene"
-      ],
-      "x-ms-enum": {
-        "name": "relationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Abbreviation",
-            "value": "Abbreviation",
-            "description": "Abbreviation"
-          },
-          {
-            "name": "DirectionOfBodyStructure",
-            "value": "DirectionOfBodyStructure",
-            "description": "Direction of body structure"
-          },
-          {
-            "name": "DirectionOfCondition",
-            "value": "DirectionOfCondition",
-            "description": "Direction of condition"
-          },
-          {
-            "name": "DirectionOfExamination",
-            "value": "DirectionOfExamination",
-            "description": "Direction of examination"
-          },
-          {
-            "name": "DirectionOfTreatment",
-            "value": "DirectionOfTreatment",
-            "description": "Direction of treatment"
-          },
-          {
-            "name": "DosageOfMedication",
-            "value": "DosageOfMedication",
-            "description": "Dosage of medication"
-          },
-          {
-            "name": "FormOfMedication",
-            "value": "FormOfMedication",
-            "description": "Form of medication"
-          },
-          {
-            "name": "FrequencyOfMedication",
-            "value": "FrequencyOfMedication",
-            "description": "Frequency of medication"
-          },
-          {
-            "name": "FrequencyOfTreatment",
-            "value": "FrequencyOfTreatment",
-            "description": "Frequency of treatment"
-          },
-          {
-            "name": "QualifierOfCondition",
-            "value": "QualifierOfCondition",
-            "description": "Qualifier of condition"
-          },
-          {
-            "name": "RelationOfExamination",
-            "value": "RelationOfExamination",
-            "description": "Relation of examination"
-          },
-          {
-            "name": "RouteOfMedication",
-            "value": "RouteOfMedication",
-            "description": "Route of medication"
-          },
-          {
-            "name": "TimeOfCondition",
-            "value": "TimeOfCondition",
-            "description": "Time of condition"
-          },
-          {
-            "name": "TimeOfEvent",
-            "value": "TimeOfEvent",
-            "description": "Time of event"
-          },
-          {
-            "name": "TimeOfExamination",
-            "value": "TimeOfExamination",
-            "description": "Time of examination"
-          },
-          {
-            "name": "TimeOfMedication",
-            "value": "TimeOfMedication",
-            "description": "Time of medication"
-          },
-          {
-            "name": "TimeOfTreatment",
-            "value": "TimeOfTreatment",
-            "description": "Time of treatment"
-          },
-          {
-            "name": "UnitOfCondition",
-            "value": "UnitOfCondition",
-            "description": "Unit of condition"
-          },
-          {
-            "name": "UnitOfExamination",
-            "value": "UnitOfExamination",
-            "description": "Unit of examination"
-          },
-          {
-            "name": "ValueOfCondition",
-            "value": "ValueOfCondition",
-            "description": "Value of condition"
-          },
-          {
-            "name": "ValueOfExamination",
-            "value": "ValueOfExamination",
-            "description": "Value of examination"
-          },
-          {
-            "name": "BodySiteOfCondition",
-            "value": "BodySiteOfCondition",
-            "description": "Body site of condition"
-          },
-          {
-            "name": "BodySiteOfTreatment",
-            "value": "BodySiteOfTreatment",
-            "description": "Body site of treatment"
-          },
-          {
-            "name": "CourseOfCondition",
-            "value": "CourseOfCondition",
-            "description": "Course of condition"
-          },
-          {
-            "name": "CourseOfExamination",
-            "value": "CourseOfExamination",
-            "description": "Course of examination"
-          },
-          {
-            "name": "CourseOfMedication",
-            "value": "CourseOfMedication",
-            "description": "Course of medication"
-          },
-          {
-            "name": "CourseOfTreatment",
-            "value": "CourseOfTreatment",
-            "description": "Course of treatment"
-          },
-          {
-            "name": "ExaminationFindsCondition",
-            "value": "ExaminationFindsCondition",
-            "description": "Examination finds condition"
-          },
-          {
-            "name": "ExpressionOfGene",
-            "value": "ExpressionOfGene",
-            "description": "Expression of gene"
-          },
-          {
-            "name": "ExpressionOfVariant",
-            "value": "ExpressionOfVariant",
-            "description": "Expression of variant"
-          },
-          {
-            "name": "FrequencyOfCondition",
-            "value": "FrequencyOfCondition",
-            "description": "Frequency of condition"
-          },
-          {
-            "name": "MutationTypeOfGene",
-            "value": "MutationTypeOfGene",
-            "description": "Mutation type of gene"
-          },
-          {
-            "name": "MutationTypeOfVariant",
-            "value": "MutationTypeOfVariant",
-            "description": "Mutation type of variant"
-          },
-          {
-            "name": "ScaleOfCondition",
-            "value": "ScaleOfCondition",
-            "description": "Scale of condition"
-          },
-          {
-            "name": "VariantOfGene",
-            "value": "VariantOfGene",
-            "description": "Variant of gene"
-          }
-        ]
       }
     },
     "InformationMetadata": {
@@ -9878,6 +9314,36 @@
         }
       }
     },
+    "Temporality": {
+      "type": "string",
+      "description": "Describes temporal information regarding the entity.",
+      "enum": [
+        "current",
+        "past",
+        "future"
+      ],
+      "x-ms-enum": {
+        "name": "Temporality",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "current",
+            "value": "current",
+            "description": "Current temporality"
+          },
+          {
+            "name": "past",
+            "value": "past",
+            "description": "Past temporality"
+          },
+          {
+            "name": "future",
+            "value": "future",
+            "description": "Future temporality"
+          }
+        ]
+      }
+    },
     "TimeMetadata": {
       "type": "object",
       "description": "A Metadata for time entity instances.",
@@ -10316,6 +9782,540 @@
             "name": "ListComponent",
             "value": "ListComponent",
             "description": "List component"
+          }
+        ]
+      }
+    },
+    "fhirVersion": {
+      "type": "string",
+      "description": "The FHIR Spec version.",
+      "enum": [
+        "4.0.1"
+      ],
+      "x-ms-enum": {
+        "name": "fhirVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "4.0.1",
+            "value": "4.0.1",
+            "description": "Version 4.0.1"
+          }
+        ]
+      }
+    },
+    "healthcareDocumentType": {
+      "type": "string",
+      "description": "Document type.",
+      "enum": [
+        "None",
+        "ClinicalTrial",
+        "DischargeSummary",
+        "ProgressNote",
+        "HistoryAndPhysical",
+        "Consult",
+        "Imaging",
+        "Pathology",
+        "ProcedureNote"
+      ],
+      "x-ms-enum": {
+        "name": "healthcareDocumentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None document type"
+          },
+          {
+            "name": "ClinicalTrial",
+            "value": "ClinicalTrial",
+            "description": "Clinical trial document type"
+          },
+          {
+            "name": "DischargeSummary",
+            "value": "DischargeSummary",
+            "description": "Discharge summary document type"
+          },
+          {
+            "name": "ProgressNote",
+            "value": "ProgressNote",
+            "description": "Progress note document type"
+          },
+          {
+            "name": "HistoryAndPhysical",
+            "value": "HistoryAndPhysical",
+            "description": "History and physical document type"
+          },
+          {
+            "name": "Consult",
+            "value": "Consult",
+            "description": "Consult document type"
+          },
+          {
+            "name": "Imaging",
+            "value": "Imaging",
+            "description": "Imaging document type"
+          },
+          {
+            "name": "Pathology",
+            "value": "Pathology",
+            "description": "Pathology document type"
+          },
+          {
+            "name": "ProcedureNote",
+            "value": "ProcedureNote",
+            "description": "Procedure note document type"
+          }
+        ]
+      }
+    },
+    "healthcareEntityCategory": {
+      "type": "string",
+      "description": "Healthcare Entity Category.",
+      "enum": [
+        "BodyStructure",
+        "Age",
+        "Gender",
+        "ExaminationName",
+        "Date",
+        "Direction",
+        "Frequency",
+        "MeasurementValue",
+        "MeasurementUnit",
+        "RelationalOperator",
+        "Time",
+        "GeneOrProtein",
+        "Variant",
+        "AdministrativeEvent",
+        "CareEnvironment",
+        "HealthcareProfession",
+        "Diagnosis",
+        "SymptomOrSign",
+        "ConditionQualifier",
+        "MedicationClass",
+        "MedicationName",
+        "Dosage",
+        "MedicationForm",
+        "MedicationRoute",
+        "FamilyRelation",
+        "TreatmentName",
+        "Ethnicity",
+        "Course",
+        "Expression",
+        "MutationType",
+        "ConditionScale",
+        "Allergen",
+        "Employment",
+        "LivingStatus",
+        "SubstanceUse",
+        "SubstanceUseAmount"
+      ],
+      "x-ms-enum": {
+        "name": "healthcareEntityCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BodyStructure",
+            "value": "BodyStructure",
+            "description": "Body structure"
+          },
+          {
+            "name": "Age",
+            "value": "Age",
+            "description": "Age"
+          },
+          {
+            "name": "Gender",
+            "value": "Gender",
+            "description": "Gender"
+          },
+          {
+            "name": "ExaminationName",
+            "value": "ExaminationName",
+            "description": "Examination name"
+          },
+          {
+            "name": "Date",
+            "value": "Date",
+            "description": "Date"
+          },
+          {
+            "name": "Direction",
+            "value": "Direction",
+            "description": "Direction"
+          },
+          {
+            "name": "Frequency",
+            "value": "Frequency",
+            "description": "Frequency"
+          },
+          {
+            "name": "MeasurementValue",
+            "value": "MeasurementValue",
+            "description": "Measurement value"
+          },
+          {
+            "name": "MeasurementUnit",
+            "value": "MeasurementUnit",
+            "description": "Measurement unit"
+          },
+          {
+            "name": "RelationalOperator",
+            "value": "RelationalOperator",
+            "description": "Relational operator"
+          },
+          {
+            "name": "Time",
+            "value": "Time",
+            "description": "Time"
+          },
+          {
+            "name": "GeneOrProtein",
+            "value": "GeneOrProtein",
+            "description": "Gene or protein"
+          },
+          {
+            "name": "Variant",
+            "value": "Variant",
+            "description": "Variant"
+          },
+          {
+            "name": "AdministrativeEvent",
+            "value": "AdministrativeEvent",
+            "description": "Administrative event"
+          },
+          {
+            "name": "CareEnvironment",
+            "value": "CareEnvironment",
+            "description": "Care environment"
+          },
+          {
+            "name": "HealthcareProfession",
+            "value": "HealthcareProfession",
+            "description": "Healthcare profession"
+          },
+          {
+            "name": "Diagnosis",
+            "value": "Diagnosis",
+            "description": "Diagnosis"
+          },
+          {
+            "name": "SymptomOrSign",
+            "value": "SymptomOrSign",
+            "description": "Symptom or sign"
+          },
+          {
+            "name": "ConditionQualifier",
+            "value": "ConditionQualifier",
+            "description": "Condition qualifier"
+          },
+          {
+            "name": "MedicationClass",
+            "value": "MedicationClass",
+            "description": "Medication class"
+          },
+          {
+            "name": "MedicationName",
+            "value": "MedicationName",
+            "description": "Medication name"
+          },
+          {
+            "name": "Dosage",
+            "value": "Dosage",
+            "description": "Dosage"
+          },
+          {
+            "name": "MedicationForm",
+            "value": "MedicationForm",
+            "description": "Medication form"
+          },
+          {
+            "name": "MedicationRoute",
+            "value": "MedicationRoute",
+            "description": "Medication route"
+          },
+          {
+            "name": "FamilyRelation",
+            "value": "FamilyRelation",
+            "description": "Family relation"
+          },
+          {
+            "name": "TreatmentName",
+            "value": "TreatmentName",
+            "description": "Treatment name"
+          },
+          {
+            "name": "Ethnicity",
+            "value": "Ethnicity",
+            "description": "Ethnicity"
+          },
+          {
+            "name": "Course",
+            "value": "Course",
+            "description": "Course"
+          },
+          {
+            "name": "Expression",
+            "value": "Expression",
+            "description": "Expression"
+          },
+          {
+            "name": "MutationType",
+            "value": "MutationType",
+            "description": "Mutation type"
+          },
+          {
+            "name": "ConditionScale",
+            "value": "ConditionScale",
+            "description": "Condition scale"
+          },
+          {
+            "name": "Allergen",
+            "value": "Allergen",
+            "description": "Allergen"
+          },
+          {
+            "name": "Employment",
+            "value": "Employment",
+            "description": "Employment"
+          },
+          {
+            "name": "LivingStatus",
+            "value": "LivingStatus",
+            "description": "Living status"
+          },
+          {
+            "name": "SubstanceUse",
+            "value": "SubstanceUse",
+            "description": "Substance use"
+          },
+          {
+            "name": "SubstanceUseAmount",
+            "value": "SubstanceUseAmount",
+            "description": "Substance use amount"
+          }
+        ]
+      }
+    },
+    "relationType": {
+      "type": "string",
+      "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
+      "enum": [
+        "Abbreviation",
+        "DirectionOfBodyStructure",
+        "DirectionOfCondition",
+        "DirectionOfExamination",
+        "DirectionOfTreatment",
+        "DosageOfMedication",
+        "FormOfMedication",
+        "FrequencyOfMedication",
+        "FrequencyOfTreatment",
+        "QualifierOfCondition",
+        "RelationOfExamination",
+        "RouteOfMedication",
+        "TimeOfCondition",
+        "TimeOfEvent",
+        "TimeOfExamination",
+        "TimeOfMedication",
+        "TimeOfTreatment",
+        "UnitOfCondition",
+        "UnitOfExamination",
+        "ValueOfCondition",
+        "ValueOfExamination",
+        "BodySiteOfCondition",
+        "BodySiteOfTreatment",
+        "CourseOfCondition",
+        "CourseOfExamination",
+        "CourseOfMedication",
+        "CourseOfTreatment",
+        "ExaminationFindsCondition",
+        "ExpressionOfGene",
+        "ExpressionOfVariant",
+        "FrequencyOfCondition",
+        "MutationTypeOfGene",
+        "MutationTypeOfVariant",
+        "ScaleOfCondition",
+        "VariantOfGene"
+      ],
+      "x-ms-enum": {
+        "name": "relationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Abbreviation",
+            "value": "Abbreviation",
+            "description": "Abbreviation"
+          },
+          {
+            "name": "DirectionOfBodyStructure",
+            "value": "DirectionOfBodyStructure",
+            "description": "Direction of body structure"
+          },
+          {
+            "name": "DirectionOfCondition",
+            "value": "DirectionOfCondition",
+            "description": "Direction of condition"
+          },
+          {
+            "name": "DirectionOfExamination",
+            "value": "DirectionOfExamination",
+            "description": "Direction of examination"
+          },
+          {
+            "name": "DirectionOfTreatment",
+            "value": "DirectionOfTreatment",
+            "description": "Direction of treatment"
+          },
+          {
+            "name": "DosageOfMedication",
+            "value": "DosageOfMedication",
+            "description": "Dosage of medication"
+          },
+          {
+            "name": "FormOfMedication",
+            "value": "FormOfMedication",
+            "description": "Form of medication"
+          },
+          {
+            "name": "FrequencyOfMedication",
+            "value": "FrequencyOfMedication",
+            "description": "Frequency of medication"
+          },
+          {
+            "name": "FrequencyOfTreatment",
+            "value": "FrequencyOfTreatment",
+            "description": "Frequency of treatment"
+          },
+          {
+            "name": "QualifierOfCondition",
+            "value": "QualifierOfCondition",
+            "description": "Qualifier of condition"
+          },
+          {
+            "name": "RelationOfExamination",
+            "value": "RelationOfExamination",
+            "description": "Relation of examination"
+          },
+          {
+            "name": "RouteOfMedication",
+            "value": "RouteOfMedication",
+            "description": "Route of medication"
+          },
+          {
+            "name": "TimeOfCondition",
+            "value": "TimeOfCondition",
+            "description": "Time of condition"
+          },
+          {
+            "name": "TimeOfEvent",
+            "value": "TimeOfEvent",
+            "description": "Time of event"
+          },
+          {
+            "name": "TimeOfExamination",
+            "value": "TimeOfExamination",
+            "description": "Time of examination"
+          },
+          {
+            "name": "TimeOfMedication",
+            "value": "TimeOfMedication",
+            "description": "Time of medication"
+          },
+          {
+            "name": "TimeOfTreatment",
+            "value": "TimeOfTreatment",
+            "description": "Time of treatment"
+          },
+          {
+            "name": "UnitOfCondition",
+            "value": "UnitOfCondition",
+            "description": "Unit of condition"
+          },
+          {
+            "name": "UnitOfExamination",
+            "value": "UnitOfExamination",
+            "description": "Unit of examination"
+          },
+          {
+            "name": "ValueOfCondition",
+            "value": "ValueOfCondition",
+            "description": "Value of condition"
+          },
+          {
+            "name": "ValueOfExamination",
+            "value": "ValueOfExamination",
+            "description": "Value of examination"
+          },
+          {
+            "name": "BodySiteOfCondition",
+            "value": "BodySiteOfCondition",
+            "description": "Body site of condition"
+          },
+          {
+            "name": "BodySiteOfTreatment",
+            "value": "BodySiteOfTreatment",
+            "description": "Body site of treatment"
+          },
+          {
+            "name": "CourseOfCondition",
+            "value": "CourseOfCondition",
+            "description": "Course of condition"
+          },
+          {
+            "name": "CourseOfExamination",
+            "value": "CourseOfExamination",
+            "description": "Course of examination"
+          },
+          {
+            "name": "CourseOfMedication",
+            "value": "CourseOfMedication",
+            "description": "Course of medication"
+          },
+          {
+            "name": "CourseOfTreatment",
+            "value": "CourseOfTreatment",
+            "description": "Course of treatment"
+          },
+          {
+            "name": "ExaminationFindsCondition",
+            "value": "ExaminationFindsCondition",
+            "description": "Examination finds condition"
+          },
+          {
+            "name": "ExpressionOfGene",
+            "value": "ExpressionOfGene",
+            "description": "Expression of gene"
+          },
+          {
+            "name": "ExpressionOfVariant",
+            "value": "ExpressionOfVariant",
+            "description": "Expression of variant"
+          },
+          {
+            "name": "FrequencyOfCondition",
+            "value": "FrequencyOfCondition",
+            "description": "Frequency of condition"
+          },
+          {
+            "name": "MutationTypeOfGene",
+            "value": "MutationTypeOfGene",
+            "description": "Mutation type of gene"
+          },
+          {
+            "name": "MutationTypeOfVariant",
+            "value": "MutationTypeOfVariant",
+            "description": "Mutation type of variant"
+          },
+          {
+            "name": "ScaleOfCondition",
+            "value": "ScaleOfCondition",
+            "description": "Scale of condition"
+          },
+          {
+            "name": "VariantOfGene",
+            "value": "VariantOfGene",
+            "description": "Variant of gene"
           }
         ]
       }
