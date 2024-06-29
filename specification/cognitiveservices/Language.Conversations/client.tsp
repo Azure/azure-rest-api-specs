@@ -47,6 +47,7 @@ namespace Language.ConversationsClientCustomizations;
 
 @@clientName(TemporalModifier.AfterApprox, "AfterApproximate", "csharp");
 @@clientName(TemporalModifier.BeforeApprox, "BeforeApproximate", "csharp");
+@@clientName(TemporalModifier.Approx, "Approximate", "csharp");
 
 @@clientName(RedactedTranscriptContent.itn, "InverseTextNormalized", "csharp");
 @@clientName(RedactedTranscriptContent.maskedItn,
@@ -93,3 +94,9 @@ namespace Language.ConversationsClientCustomizations;
 
 @@clientName(ConversationPiiCategoriesExclude, "ConversationPiiCategoryExclusions", "csharp");
 @@clientName(ErrorCode, "ConversationErrorCode", "csharp");
+
+@@clientName(BaseResolution, "ResolutionBase", "csharp");
+@@clientName(BaseExtraInformation, "NamedEntityExtraInformation", "csharp");
+
+@@clientName(TranscriptConversationItem.itn, "InverseTextNormalized", "csharp");
+@@clientName(TranscriptConversationItem.maskedItn, "MaskedInverseTextNormalized", "csharp");
