@@ -102,3 +102,14 @@ model EmbeddingsUsage {
   @encodedName("application/json", "total_tokens")
   totalTokens: int32;
 }
+
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};
