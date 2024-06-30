@@ -103,6 +103,9 @@
           }
         },
         "x-ms-examples": {
+          "ConfigurationVersion_Get": {
+            "$ref": "./examples/ConfigurationVersion_Get_MaximumSet_Gen.json"
+          },
           "ConfigurationVersion_Get_MaximumSet_Gen": {
             "$ref": "./examples/ConfigurationVersion_Get_MaximumSet_Gen.json"
           }
@@ -170,15 +173,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "ConfigurationVersion_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationVersion_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "ConfigurationVersion_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/ConfigurationVersion_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ConfigurationVersion_Update",
@@ -239,15 +245,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "ConfigurationVersion_Update": {
+            "$ref": "./examples/ConfigurationVersion_Update_MaximumSet_Gen.json"
+          },
           "ConfigurationVersion_Update_MaximumSet_Gen": {
             "$ref": "./examples/ConfigurationVersion_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ConfigurationVersion_Delete",
@@ -296,15 +305,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "ConfigurationVersion_Delete": {
+            "$ref": "./examples/ConfigurationVersion_Delete_MaximumSet_Gen.json"
+          },
           "ConfigurationVersion_Delete_MaximumSet_Gen": {
             "$ref": "./examples/ConfigurationVersion_Delete_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{resourceUri}/providers/Microsoft.Edge/useCaseVersionResources/{useCaseVersionResourceName}": {
@@ -345,6 +357,9 @@
           }
         },
         "x-ms-examples": {
+          "UseCaseVersion_Get": {
+            "$ref": "./examples/UseCaseVersion_Get_MaximumSet_Gen.json"
+          },
           "UseCaseVersion_Get_MaximumSet_Gen": {
             "$ref": "./examples/UseCaseVersion_Get_MaximumSet_Gen.json"
           }
@@ -412,15 +427,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "UseCaseVersion_CreateOrUpdate": {
+            "$ref": "./examples/UseCaseVersion_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "UseCaseVersion_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/UseCaseVersion_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "UseCaseVersion_Update",
@@ -481,15 +499,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "UseCaseVersion_Update": {
+            "$ref": "./examples/UseCaseVersion_Update_MaximumSet_Gen.json"
+          },
           "UseCaseVersion_Update_MaximumSet_Gen": {
             "$ref": "./examples/UseCaseVersion_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "UseCaseVersion_Delete",
@@ -538,13 +559,214 @@
             }
           }
         },
+        "x-ms-examples": {
+          "UseCaseVersion_Delete": {
+            "$ref": "./examples/UseCaseVersion_Delete_MaximumSet_Gen.json"
+          },
+          "UseCaseVersion_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/UseCaseVersion_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/capabilityListsResources": {
+      "get": {
+        "operationId": "CapabilityLists_ListBySubscription",
+        "tags": [
+          "CapabilityLists"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityListsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "UseCaseVersion_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/UseCaseVersion_Delete_MaximumSet_Gen.json"
+          "CapabilityLists_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/CapabilityLists_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/deploymentTargetsResources": {
+      "get": {
+        "operationId": "DeploymentTargets_ListBySubscription",
+        "tags": [
+          "DeploymentTargets"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentTargetsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DeploymentTargets_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/DeploymentTargets_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/targetBindingsResources": {
+      "get": {
+        "operationId": "TargetBindings_ListBySubscription",
+        "tags": [
+          "TargetBindings"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TargetBindingsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TargetBindings_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/TargetBindings_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/useCasesResources": {
+      "get": {
+        "operationId": "UseCases_ListBySubscription",
+        "tags": [
+          "UseCases"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UseCasesResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "UseCases_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/UseCases_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/capabilityListsResources": {
+      "get": {
+        "operationId": "CapabilityLists_ListByResourceGroup",
+        "tags": [
+          "CapabilityLists"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityListsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CapabilityLists_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/CapabilityLists_ListByResourceGroup_MaximumSet_Gen.json"
           }
         }
       }
@@ -590,6 +812,9 @@
           }
         },
         "x-ms-examples": {
+          "CapabilityLists_Get": {
+            "$ref": "./examples/CapabilityLists_Get_MaximumSet_Gen.json"
+          },
           "CapabilityLists_Get_MaximumSet_Gen": {
             "$ref": "./examples/CapabilityLists_Get_MaximumSet_Gen.json"
           }
@@ -660,15 +885,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "CapabilityLists_CreateOrUpdate": {
+            "$ref": "./examples/CapabilityLists_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "CapabilityLists_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/CapabilityLists_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "CapabilityLists_Update",
@@ -732,15 +960,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "CapabilityLists_Update": {
+            "$ref": "./examples/CapabilityLists_Update_MaximumSet_Gen.json"
+          },
           "CapabilityLists_Update_MaximumSet_Gen": {
             "$ref": "./examples/CapabilityLists_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "CapabilityLists_Delete",
@@ -792,15 +1023,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "CapabilityLists_Delete": {
+            "$ref": "./examples/CapabilityLists_Delete_MaximumSet_Gen.json"
+          },
           "CapabilityLists_Delete_MaximumSet_Gen": {
             "$ref": "./examples/CapabilityLists_Delete_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurationResources/{dynamicConfigurationResourceName}": {
@@ -852,6 +1086,9 @@
           }
         },
         "x-ms-examples": {
+          "DynamicConfiguration_Get": {
+            "$ref": "./examples/DynamicConfiguration_Get_MaximumSet_Gen.json"
+          },
           "DynamicConfiguration_Get_MaximumSet_Gen": {
             "$ref": "./examples/DynamicConfiguration_Get_MaximumSet_Gen.json"
           }
@@ -930,15 +1167,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "DynamicConfiguration_CreateOrUpdate": {
+            "$ref": "./examples/DynamicConfiguration_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "DynamicConfiguration_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/DynamicConfiguration_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "DynamicConfiguration_Update",
@@ -1010,15 +1250,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "DynamicConfiguration_Update": {
+            "$ref": "./examples/DynamicConfiguration_Update_MaximumSet_Gen.json"
+          },
           "DynamicConfiguration_Update_MaximumSet_Gen": {
             "$ref": "./examples/DynamicConfiguration_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DynamicConfiguration_Delete",
@@ -1078,13 +1321,58 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DynamicConfiguration_Delete": {
+            "$ref": "./examples/DynamicConfiguration_Delete_MaximumSet_Gen.json"
+          },
+          "DynamicConfiguration_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/DynamicConfiguration_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/deploymentTargetsResources": {
+      "get": {
+        "operationId": "DeploymentTargets_ListByResourceGroup",
+        "tags": [
+          "DeploymentTargets"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentTargetsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "DynamicConfiguration_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DynamicConfiguration_Delete_MaximumSet_Gen.json"
+          "DeploymentTargets_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/DeploymentTargets_ListByResourceGroup_MaximumSet_Gen.json"
           }
         }
       }
@@ -1130,6 +1418,9 @@
           }
         },
         "x-ms-examples": {
+          "DeploymentTargets_Get": {
+            "$ref": "./examples/DeploymentTargets_Get_MaximumSet_Gen.json"
+          },
           "DeploymentTargets_Get_MaximumSet_Gen": {
             "$ref": "./examples/DeploymentTargets_Get_MaximumSet_Gen.json"
           }
@@ -1200,15 +1491,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "DeploymentTargets_CreateOrUpdate": {
+            "$ref": "./examples/DeploymentTargets_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "DeploymentTargets_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/DeploymentTargets_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "DeploymentTargets_Update",
@@ -1272,15 +1566,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "DeploymentTargets_Update": {
+            "$ref": "./examples/DeploymentTargets_Update_MaximumSet_Gen.json"
+          },
           "DeploymentTargets_Update_MaximumSet_Gen": {
             "$ref": "./examples/DeploymentTargets_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DeploymentTargets_Delete",
@@ -1332,13 +1629,58 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeploymentTargets_Delete": {
+            "$ref": "./examples/DeploymentTargets_Delete_MaximumSet_Gen.json"
+          },
+          "DeploymentTargets_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/DeploymentTargets_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindingsResources": {
+      "get": {
+        "operationId": "TargetBindings_ListByResourceGroup",
+        "tags": [
+          "TargetBindings"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TargetBindingsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "DeploymentTargets_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DeploymentTargets_Delete_MaximumSet_Gen.json"
+          "TargetBindings_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/TargetBindings_ListByResourceGroup_MaximumSet_Gen.json"
           }
         }
       }
@@ -1384,6 +1726,9 @@
           }
         },
         "x-ms-examples": {
+          "TargetBindings_Get": {
+            "$ref": "./examples/TargetBindings_Get_MaximumSet_Gen.json"
+          },
           "TargetBindings_Get_MaximumSet_Gen": {
             "$ref": "./examples/TargetBindings_Get_MaximumSet_Gen.json"
           }
@@ -1454,15 +1799,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "TargetBindings_CreateOrUpdate": {
+            "$ref": "./examples/TargetBindings_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "TargetBindings_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/TargetBindings_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "TargetBindings_Update",
@@ -1526,15 +1874,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "TargetBindings_Update": {
+            "$ref": "./examples/TargetBindings_Update_MaximumSet_Gen.json"
+          },
           "TargetBindings_Update_MaximumSet_Gen": {
             "$ref": "./examples/TargetBindings_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "TargetBindings_Delete",
@@ -1586,15 +1937,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "TargetBindings_Delete": {
+            "$ref": "./examples/TargetBindings_Delete_MaximumSet_Gen.json"
+          },
           "TargetBindings_Delete_MaximumSet_Gen": {
             "$ref": "./examples/TargetBindings_Delete_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindingsResources/{targetBindingsResourceName}/deploymentInstancesResources/{deploymentInstancesResourceName}": {
@@ -1646,6 +2000,9 @@
           }
         },
         "x-ms-examples": {
+          "DeploymentInstances_Get": {
+            "$ref": "./examples/DeploymentInstances_Get_MaximumSet_Gen.json"
+          },
           "DeploymentInstances_Get_MaximumSet_Gen": {
             "$ref": "./examples/DeploymentInstances_Get_MaximumSet_Gen.json"
           }
@@ -1724,15 +2081,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "DeploymentInstances_CreateOrUpdate": {
+            "$ref": "./examples/DeploymentInstances_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "DeploymentInstances_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/DeploymentInstances_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "DeploymentInstances_Update",
@@ -1804,15 +2164,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "DeploymentInstances_Update": {
+            "$ref": "./examples/DeploymentInstances_Update_MaximumSet_Gen.json"
+          },
           "DeploymentInstances_Update_MaximumSet_Gen": {
             "$ref": "./examples/DeploymentInstances_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DeploymentInstances_Delete",
@@ -1872,13 +2235,58 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeploymentInstances_Delete": {
+            "$ref": "./examples/DeploymentInstances_Delete_MaximumSet_Gen.json"
+          },
+          "DeploymentInstances_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/DeploymentInstances_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/useCasesResources": {
+      "get": {
+        "operationId": "UseCases_ListByResourceGroup",
+        "tags": [
+          "UseCases"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UseCasesResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "DeploymentInstances_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/DeploymentInstances_Delete_MaximumSet_Gen.json"
+          "UseCases_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/UseCases_ListByResourceGroup_MaximumSet_Gen.json"
           }
         }
       }
@@ -1924,6 +2332,9 @@
           }
         },
         "x-ms-examples": {
+          "UseCases_Get": {
+            "$ref": "./examples/UseCases_Get_MaximumSet_Gen.json"
+          },
           "UseCases_Get_MaximumSet_Gen": {
             "$ref": "./examples/UseCases_Get_MaximumSet_Gen.json"
           }
@@ -1994,15 +2405,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "UseCases_CreateOrUpdate": {
+            "$ref": "./examples/UseCases_CreateOrUpdate_MaximumSet_Gen.json"
+          },
           "UseCases_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/UseCases_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "UseCases_Update",
@@ -2066,15 +2480,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "UseCases_Update": {
+            "$ref": "./examples/UseCases_Update_MaximumSet_Gen.json"
+          },
           "UseCases_Update_MaximumSet_Gen": {
             "$ref": "./examples/UseCases_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "UseCases_Delete",
@@ -2126,15 +2543,18 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "UseCases_Delete": {
+            "$ref": "./examples/UseCases_Delete_MaximumSet_Gen.json"
+          },
           "UseCases_Delete_MaximumSet_Gen": {
             "$ref": "./examples/UseCases_Delete_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -2202,6 +2622,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "CapabilityListsResourceListResult": {
+      "type": "object",
+      "description": "The response of a CapabilityListsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CapabilityListsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/CapabilityListsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "CapabilityListsResourceProperties": {
@@ -2444,6 +2885,27 @@
         }
       ]
     },
+    "DeploymentTargetsResourceListResult": {
+      "type": "object",
+      "description": "The response of a DeploymentTargetsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeploymentTargetsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DeploymentTargetsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DeploymentTargetsResourceProperties": {
       "type": "object",
       "description": "Deployment Targets Resource Properties",
@@ -2594,6 +3056,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "TargetBindingsResourceListResult": {
+      "type": "object",
+      "description": "The response of a TargetBindingsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TargetBindingsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/TargetBindingsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "TargetBindingsResourceProperties": {
@@ -2749,6 +3232,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "UseCasesResourceListResult": {
+      "type": "object",
+      "description": "The response of a UseCasesResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UseCasesResource items on this page",
+          "items": {
+            "$ref": "#/definitions/UseCasesResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "UseCasesResourceProperties": {

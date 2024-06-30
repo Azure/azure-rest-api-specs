@@ -36,4 +36,10 @@ interface UseCases{
 
     @doc("Delete a Use Case resource")
     delete is ArmResourceDeleteWithoutOkAsync<UseCasesResource>;
+
+    @doc("List by specified resource group")
+    listByResourceGroup is ArmResourceListByParent<UseCasesResource>;
+
+    @doc("List by subscription")
+    listBySubscription is ArmListBySubscription<UseCasesResource>;
 }

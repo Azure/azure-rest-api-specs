@@ -36,4 +36,10 @@ interface TargetBindings{
 
     @doc("Delete a Target Bindings Resource")
     delete is ArmResourceDeleteWithoutOkAsync<TargetBindingsResource>;
+
+    @doc("List by specified resource group")
+    listByResourceGroup is ArmResourceListByParent<TargetBindingsResource>;
+
+    @doc("List by subscription")
+    listBySubscription is ArmListBySubscription<TargetBindingsResource>;
 }

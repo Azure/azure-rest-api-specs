@@ -36,4 +36,10 @@ interface CapabilityLists{
 
     @doc("Delete a Capability Lists Resource")
     delete is ArmResourceDeleteWithoutOkAsync<CapabilityListsResource>;
+
+    @doc("List by specified resource group")
+    listByResourceGroup is ArmResourceListByParent<CapabilityListsResource>;
+
+    @doc("List by subscription")
+    listBySubscription is ArmListBySubscription<CapabilityListsResource>;
 }

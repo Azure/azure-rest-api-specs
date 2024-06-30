@@ -39,4 +39,10 @@ interface DeploymentTargets{
 
     @doc("Delete a Deployment Targets Resource")
     delete is ArmResourceDeleteWithoutOkAsync<DeploymentTargetsResource>;
+
+    @doc("List by specified resource group")
+    listByResourceGroup is ArmResourceListByParent<DeploymentTargetsResource>;
+
+    @doc("List by subscription")
+    listBySubscription is ArmListBySubscription<DeploymentTargetsResource>;
 }
