@@ -15,7 +15,7 @@ namespace Microsoft.IoTOperations;
 @doc("Instance broker authorizations resource")
 @parentResource(BrokerResource)
 model BrokerAuthorizationResource
-  is TrackedResource<BrokerAuthorizationProperties> {
+  is ProxyResource<BrokerAuthorizationProperties> {
   @doc("Name of Instance broker authorization resource")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("authorizationName")
@@ -25,7 +25,7 @@ model BrokerAuthorizationResource
   @segment("authorizations")
   name: string;
 
-  // Extended location is not included in TrackedResource yet
+  // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility("read", "create")
@@ -45,27 +45,16 @@ model BrokerAuthorizationProperties {
 @doc("Broker AuthorizationConfig properties")
 model AuthorizationConfig {
   @doc("Enable caching of the authorization rules.")
-  cache?: CacheState = CacheState.Enabled;
+  cache?: OperationalMode = OperationalMode.Enabled;
 
   @doc("The authorization rules to follow. If no rule is set, but Authorization Resource is used that would mean DenyAll.")
   @OpenAPI.extension("x-ms-identifiers", [])
   rules?: AuthorizationRule[];
 }
 
-@doc("CacheState properties")
-union CacheState {
-  string,
-
-  @doc("Enable cache")
-  Enabled: "Enabled",
-
-  @doc("Disable cache")
-  Disabled: "Disabled",
-}
-
 @doc("AuthorizationConfig Rule Properties")
 model AuthorizationRule {
-  @doc("Give access to MQTT broker methods and topics.")
+  @doc("Give access to Broker methods and topics.")
   @OpenAPI.extension("x-ms-identifiers", [])
   brokerResources: BrokerResourceRule[];
 
@@ -82,22 +71,22 @@ model PrincipalDefinition {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("A list of key-value pairs that match the attributes of the clients. The attributes are case-sensitive and must match the attributes provided by the clients during authentication.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  attributes?: Record<string>[] = [];
+  attributes?: Record<string>[] = #[];
 
   @doc("A list of client IDs that match the clients. The client IDs are case-sensitive and must match the client IDs provided by the clients during connection.")
-  clientIds?: string[] = [];
+  clientIds?: string[] = #[];
 
   @doc("A list of usernames that match the clients. The usernames are case-sensitive and must match the usernames provided by the clients during authentication.")
-  usernames?: string[] = [];
+  usernames?: string[] = #[];
 }
 
 @doc("Broker Resource Rule properties. This defines the objects that represent the actions or topics, such as - method.Connect, method.Publish, etc.")
 model BrokerResourceRule {
-  @doc("Give access for a MQTT method (i.e., Connect, Subscribe, or Publish).")
+  @doc("Give access for a Broker method (i.e., Connect, Subscribe, or Publish).")
   method: BrokerResourceDefinitionMethods;
 
   @doc("A list of topics or topic patterns that match the topics that the clients can publish or subscribe to. This subfield is required if the method is Publish or Subscribe.")
-  topics?: string[] = [];
+  topics?: string[] = #[];
 }
 
 @doc("BrokerResourceDefinitionMethods methods allowed")
