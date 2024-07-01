@@ -86,6 +86,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_ListByEdgeDevice_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeDeviceJobs_ListByEdgeDevice_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -132,6 +137,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_Get_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeDeviceJobs_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -208,7 +218,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "EdgeDeviceJobs_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "operationId": "EdgeDeviceJobs_Delete",
@@ -268,7 +283,15 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "EdgeDeviceJobs_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeDeviceJobs_Delete_MaximumSet_Gen.json"
+          },
+          "EdgeDeviceJobs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/EdgeDeviceJobs_Delete_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs": {
@@ -313,6 +336,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ClusterJobs_ListByClusters_MaximumSet_Gen": {
+            "$ref": "./examples/ClusterJobs_ListByClusters_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -362,6 +390,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ClusterJobs_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -441,7 +474,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ClusterJobs_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "operationId": "ClusterJobs_Delete",
@@ -504,7 +542,15 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ClusterJobs_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ClusterJobs_Delete_MaximumSet_Gen.json"
+          },
+          "ClusterJobs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ClusterJobs_Delete_MinimumSet_Gen.json"
+          }
+        }
       }
     }
   },
@@ -1190,33 +1236,6 @@
         }
       }
     },
-    "ClusterProperties": {
-      "type": "object",
-      "description": "A ClusterProperties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the cluster.",
-          "readOnly": true
-        }
-      }
-    },
-    "Clusters": {
-      "type": "object",
-      "description": "A Cluster",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ClusterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
     "CollectLogJobProperties": {
       "type": "object",
       "description": "Represents the properties of a log collection job.",
@@ -1569,22 +1588,6 @@
           }
         ]
       }
-    },
-    "EdgeDevice": {
-      "type": "object",
-      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "EdgeDeviceJob": {
       "type": "object",
