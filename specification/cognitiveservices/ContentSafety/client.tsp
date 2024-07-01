@@ -3,7 +3,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2023_10_01)
 namespace Customizations;
 
@@ -32,3 +31,12 @@ interface BlocklistClient {
   listTextBlocklists is ContentSafety.TextBlocklists.listTextBlocklists;
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
+
+@@clientName(ContentSafety.ImageData, "ContentSafetyImageData", "csharp");
+@@clientName(ContentSafety.ImageData, "ContentSafetyImageData", "java");
+@@clientName(ContentSafety.ImageData.blobUrl, "BlobUri", "csharp");
+
+@@clientName(ContentSafety.TextBlocklist.blocklistName, "Name", "csharp");
+@@clientName(ContentSafety.TextBlocklist.blocklistName, "name", "java");
+
+@@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
