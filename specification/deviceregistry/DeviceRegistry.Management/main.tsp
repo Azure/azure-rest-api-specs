@@ -27,6 +27,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2023_11_01_preview: "2023-11-01-preview",
+
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-06-01-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2024_06_01_preview: "2024-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

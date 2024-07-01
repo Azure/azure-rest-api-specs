@@ -1,18 +1,12 @@
 {
-  "title": "Update_Asset",
-  "operationId": "Assets_UpdateOld",
-  "description": "Patch an Asset",
+  "title": "Get_Asset_With_SyncStatus",
+  "operationId": "Assets_Get",
+  "description": "Get an Asset with Sync Status",
   "parameters": {
-    "api-version": "2023-11-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "assetName": "my-asset",
-    "properties": {
-      "properties": {
-        "enabled": false,
-        "displayName": "NewAssetDisplayName"
-      }
-    }
+    "assetName": "my-asset"
   },
   "responses": {
     "200": {
@@ -41,7 +35,7 @@
           "assetType": "MyAssetType",
           "enabled": true,
           "externalAssetId": "8ZBA6LRHU0A458969",
-          "displayName": "NewAssetDisplayName",
+          "displayName": "AssetDisplayName",
           "description": "This is a sample Asset",
           "assetEndpointProfileUri": "https://www.example.com/myAssetEndpointProfile",
           "version": 73766,
@@ -83,13 +77,17 @@
               "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":8,\"queueSize\":4}"
             }
           ],
+          "status": {
+            "errors": [
+              {
+                "code": 500,
+                "message": "Internal Server Error"
+              }
+            ],
+            "version": 1
+          },
           "provisioningState": "Succeeded"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Location": "https://contoso.com/operationstatus"
       }
     }
   }
