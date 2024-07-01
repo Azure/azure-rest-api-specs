@@ -9,17 +9,20 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
+@armProviderNamespace("Microsoft.ModSimWorkbench")
 @service({
   title: "ModSimWorkbench Control Plane API",
-  version: "2021-03-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armProviderNamespace
+@versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
 
 @doc("The application type of the chamber workload.")
-enum EdaType {
+union EdaType {
+  string,
+
   @doc("Workload configured to support semiconductor design")
-  Semiconductor,
+  Semiconductor: "Semiconductor",
 }
 
 @doc("Workload properties.")
@@ -43,9 +46,8 @@ model WorkloadProperties {
 
   @visibility("read", "create")
   @doc("The chamber workload zone.")
-  workloadZone?: Array<string>; // TODO: Change to workloadZones
+  zones?: Array<string>;
 }
-
 @doc("Workload tracked resource.")
 @parentResource(Chamber)
 model Workload is TrackedResource<WorkloadProperties> {

@@ -1,10 +1,11 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
+import "@azure-tools/typespec-azure-portal-core";
 import "../shared/main.tsp";
 
 using TypeSpec.Http;
@@ -12,21 +13,36 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
+using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
 @service({
   title: "Microsoft.AwsConnector",
-  version: "2024-08-01-preview",
 })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AwsConnector;
 
+/** Api versions */
+enum Versions {
+  /** 2024-08-01-preview api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2024-08-01-preview`,
+}
+
 //---------------------------------------------- Ec2VPCEndpoints ----------------------------------------------
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+@about({
+  displayNames: {
+    singular: "EC2 VPCEndpoint",
+    plural: "EC2 VPCEndpoints",
+  },
+  keywords: ["Microsoft.AwsConnector", "EC2", "VPCEndpoint"],
+})
 @doc("A Microsoft.AwsConnector resource")
 model Ec2VPCEndpoint is TrackedResource<Ec2VPCEndpointProperties> {
   @doc("Name of Ec2VPCEndpoint")
@@ -39,9 +55,11 @@ model Ec2VPCEndpoint is TrackedResource<Ec2VPCEndpointProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Ec2VPCEndpoint")
 model Ec2VPCEndpointProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsEc2VPCEndpointProperties;
 
   ...AwsCommonProperties;
@@ -49,52 +67,54 @@ model Ec2VPCEndpointProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsEc2VPCEndpoint")
 model AwsEc2VPCEndpointProperties {
-  @doc("Gets and sets the property creationTimestamp.")
+  @doc("Property creationTimestamp")
   creationTimestamp?: string;
 
-  @doc("Gets and sets the property dnsEntries.")
+  @doc("Property dnsEntries")
   @extension("x-ms-identifiers", [])
   dnsEntries?: string[];
 
-  @doc("Gets and sets the property id.")
+  @doc("Property id")
   id?: string;
 
-  @doc("Gets and sets the property networkInterfaceIds.")
+  @doc("Property networkInterfaceIds")
   @extension("x-ms-identifiers", [])
   networkInterfaceIds?: string[];
 
-  @doc("Gets and sets the property policyDocument. A policy to attach to the endpoint that controls access to the service.")
+  @doc("An endpoint policy, which controls access to the service from the VPC. The default endpoint policy allows full access to the service. Endpoint policies are supported only for gateway and interface endpoints. For CloudFormation templates in YAML, you can provide the policy in JSON or YAML format. CFNlong converts YAML policies to JSON format before calling the API to create or modify the VPC endpoint.")
   policyDocument?: string;
 
-  @doc("Gets and sets the property privateDnsEnabled. Indicate whether to associate a private hosted zone with the specified VPC.")
+  @doc("Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, ``kinesis.us-east-1.amazonaws.com``), which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service. To use a private hosted zone, you must set the following VPC attributes to ``true``: ``enableDnsHostnames`` and ``enableDnsSupport``. This property is supported only for interface endpoints. Default: ``false``")
   privateDnsEnabled?: boolean;
 
-  @doc("Gets and sets the property routeTableIds. One or more route table IDs.")
+  @doc("The IDs of the route tables. Routing is supported only for gateway endpoints.")
   @extension("x-ms-identifiers", [])
   routeTableIds?: string[];
 
-  @doc("Gets and sets the property securityGroupIds. The ID of one or more security groups to associate with the endpoint network interface.")
+  @doc("The IDs of the security groups to associate with the endpoint network interfaces. If this parameter is not specified, we use the default security group for the VPC. Security groups are supported only for interface endpoints.")
   @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
-  @doc("Gets and sets the property serviceName. The service name.")
+  @doc("The name of the endpoint service.")
   serviceName?: string;
 
-  @doc("Gets and sets the property subnetIds. The ID of one or more subnets in which to create an endpoint network interface.")
+  @doc("The IDs of the subnets in which to create endpoint network interfaces. You must specify this property for an interface endpoint or a Gateway Load Balancer endpoint. You can't specify this property for a gateway endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.")
   @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 
-  @doc("Gets and sets the property vpcEndpointType.")
+  @doc("The type of endpoint. Default: Gateway")
   vpcEndpointType?: VpcEndpointType;
 
-  @doc("Gets and sets the property vpcId. The ID of the VPC in which the endpoint will be used.")
+  @doc("The ID of the VPC.")
   vpcId?: string;
 }
 
 @doc("VpcEndpointType enum")
-enum VpcEndpointType {
+union VpcEndpointType {
   @doc("VpcEndpointType enum Gateway")
   Gateway: "Gateway",
 
@@ -103,6 +123,8 @@ enum VpcEndpointType {
 
   @doc("VpcEndpointType enum Interface")
   Interface: "Interface",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."

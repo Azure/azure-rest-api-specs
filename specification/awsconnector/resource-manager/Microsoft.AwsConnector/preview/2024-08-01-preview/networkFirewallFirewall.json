@@ -218,6 +218,10 @@
               "$ref": "#/definitions/NetworkFirewallFirewall"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -286,14 +290,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -343,14 +347,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -383,15 +387,15 @@
       "properties": {
         "deleteProtection": {
           "type": "boolean",
-          "description": "Gets and sets the property deleteProtection."
+          "description": "Property deleteProtection"
         },
         "description": {
           "type": "string",
-          "description": "Gets and sets the property description."
+          "description": "Property description"
         },
         "endpointIds": {
           "type": "array",
-          "description": "Gets and sets the property endpointIds.",
+          "description": "Property endpointIds",
           "items": {
             "type": "string"
           },
@@ -399,31 +403,31 @@
         },
         "firewallArn": {
           "type": "string",
-          "description": "Gets and sets the property firewallArn. A resource ARN."
+          "description": "A resource ARN."
         },
         "firewallId": {
           "type": "string",
-          "description": "Gets and sets the property firewallId."
+          "description": "Property firewallId"
         },
         "firewallName": {
           "type": "string",
-          "description": "Gets and sets the property firewallName."
+          "description": "Property firewallName"
         },
         "firewallPolicyArn": {
           "type": "string",
-          "description": "Gets and sets the property firewallPolicyArn. A resource ARN."
+          "description": "A resource ARN."
         },
         "firewallPolicyChangeProtection": {
           "type": "boolean",
-          "description": "Gets and sets the property firewallPolicyChangeProtection."
+          "description": "Property firewallPolicyChangeProtection"
         },
         "subnetChangeProtection": {
           "type": "boolean",
-          "description": "Gets and sets the property subnetChangeProtection."
+          "description": "Property subnetChangeProtection"
         },
         "subnetMappings": {
           "type": "array",
-          "description": "Gets and sets the property subnetMappings.",
+          "description": "Property subnetMappings",
           "items": {
             "$ref": "#/definitions/SubnetMapping"
           },
@@ -431,7 +435,7 @@
         },
         "tags": {
           "type": "array",
-          "description": "Gets and sets the property tags.",
+          "description": "Property tags",
           "items": {
             "$ref": "#/definitions/Tag"
           },
@@ -439,7 +443,7 @@
         },
         "vpcId": {
           "type": "string",
-          "description": "Gets and sets the property vpcId."
+          "description": "Property vpcId"
         }
       }
     },
@@ -450,11 +454,7 @@
         "properties": {
           "$ref": "#/definitions/NetworkFirewallFirewallProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -490,42 +490,42 @@
       "properties": {
         "awsProperties": {
           "$ref": "#/definitions/AwsNetworkFirewallFirewallProperties",
-          "description": "Gets and sets the property awsProperties."
+          "description": "AWS Properties"
         },
         "publicCloudConnectorsResourceId": {
           "type": "string",
-          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+          "description": "Public Cloud Connectors Resource ID"
         },
         "awsAccountId": {
           "type": "string",
-          "description": "Gets and sets the property awsAccountId."
+          "description": "AWS Account ID"
         },
-        "awsResourceName": {
+        "arn": {
           "type": "string",
-          "description": "Gets and sets the property awsResourceName."
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
         },
         "awsSourceSchema": {
           "type": "string",
-          "description": "Gets and sets the property awsSourceSchema."
-        },
-        "awsSdkVersion": {
-          "type": "string",
-          "description": "Gets and sets the property awsSdkVersion."
+          "description": "AWS Source Schema"
         },
         "awsRegion": {
           "type": "string",
-          "description": "Gets and sets the property awsRegion."
+          "description": "AWS Region"
         },
         "awsTags": {
           "type": "object",
-          "description": "Gets and sets the property awsTags.",
+          "description": "AWS Tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "description": "The status of the last operation.",
           "readOnly": true
         }
       }
@@ -604,11 +604,11 @@
       "properties": {
         "ipAddressType": {
           "type": "string",
-          "description": "Gets and sets the property ipAddressType. A IPAddressType"
+          "description": "A IPAddressType"
         },
         "subnetId": {
           "type": "string",
-          "description": "Gets and sets the property subnetId. A SubnetId."
+          "description": "A SubnetId."
         }
       }
     },
@@ -618,11 +618,11 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "Gets and sets the property key."
+          "description": "Property key"
         },
         "value": {
           "type": "string",
-          "description": "Gets and sets the property value."
+          "description": "Property value"
         }
       }
     }

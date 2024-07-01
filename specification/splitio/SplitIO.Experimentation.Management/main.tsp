@@ -56,14 +56,14 @@ model DataSource {
 }
 
 scalar LogAnalyticsWorkspaceResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces",
     }
   ]>;
 
 scalar StorageAccountResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts",
     }
@@ -85,8 +85,9 @@ model LogAnalytics {
 model ExperimentationWorkspace
   is TrackedResource<ExperimentationWorkspaceProperties> {
   @key("workspaceName")
-  @pattern("^[^<>%&:\\?/#]*$")
   @segment("experimentationWorkspaces")
+  @pattern("^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @minLength(5)
   @maxLength(50)
   @doc("The name of the ExperimentationWorkspace resource")
   @path
@@ -104,7 +105,7 @@ interface ExperimentationWorkspaces {
     ExperimentationWorkspace,
     ExperimentationWorkspaceProperties
   >;
-  delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
+  delete is ArmResourceDeleteWithoutOkAsync<ExperimentationWorkspace>;
   listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
   listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
 }
@@ -142,7 +143,8 @@ interface DataPlaneApplications {
 
     @doc("The name of the ExperimentationWorkspace resource.")
     @path
-    @pattern("^[^<>%&:\\?/#]*$")
+    @pattern("^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+    @minLength(5)
     @maxLength(50)
     workspaceName: string,
 

@@ -1462,6 +1462,12 @@
       "properties": {
         "smtp": {
           "$ref": "#/definitions/Smtp"
+        },
+        "snapshots": {
+          "$ref": "#/definitions/Snapshots"
+        },
+        "users": {
+          "$ref": "#/definitions/Users"
         }
       }
     },
@@ -1500,6 +1506,26 @@
         },
         "skipVerify": {
           "description": "Verify SSL for SMTP server. Default is false\r\nhttps://pkg.go.dev/crypto/tls#Config",
+          "type": "boolean"
+        }
+      }
+    },
+    "Snapshots": {
+      "description": "Grafana Snapshots settings",
+      "type": "object",
+      "properties": {
+        "externalEnabled": {
+          "description": "Set to false to disable external snapshot publish endpoint",
+          "type": "boolean"
+        }
+      }
+    },
+    "Users": {
+      "description": "Grafana users settings",
+      "type": "object",
+      "properties": {
+        "viewersCanEdit": {
+          "description": "Set to true so viewers can access and use explore and perform temporary edits on panels in dashboards they have access to. They cannot save their changes.",
           "type": "boolean"
         }
       }

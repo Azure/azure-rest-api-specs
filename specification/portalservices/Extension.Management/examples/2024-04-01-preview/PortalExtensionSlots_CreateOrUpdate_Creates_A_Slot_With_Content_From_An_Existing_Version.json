@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "resource": {
+      "properties": {
+        "source": {
+          "kind": "Version",
+          "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/someversion"
+        }
+      },
+      "location": "eastus"
+    },
+    "portalExtensionName": "declarativeportalextension",
+    "resourceGroupName": "testRG",
+    "slotName": "myfeaturea",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/myfeaturea",
+      "location": "eastus"
+    },
+    "201": {
+      "body": {
+        "name": "myfeaturea",
+        "type": "Microsoft.PortalServices/extensions/slots",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/myfeaturea",
+        "properties": {
+          "nextStage": "myfeaturea",
+          "provisioningState": "InProgress",
+          "source": {
+            "kind": "Version",
+            "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/someversion"
+          }
+        },
+        "tags": {},
+        "location": "eastus"
+      }
+    }
+  },
+  "operationId": "ExtensionSlots_CreateOrUpdate",
+  "title": "Creates a slot with content from an existing version"
+}

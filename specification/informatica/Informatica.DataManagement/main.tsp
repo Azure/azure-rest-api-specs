@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-apiview";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -9,11 +8,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 @armProviderNamespace
 @service({
   title: "Informatica.DataManagement",
-  version: "2023-08-20-preview",
   description: "Azure Native Services Informatica DataManagement",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
+@versioned(Versions)
+@armCommonTypesVersion("v3")
 namespace Informatica.DataManagement;
 
 using Azure.Core;
@@ -30,7 +28,7 @@ scalar email extends string;
 
 @doc("An Organization Resource by Informatica.")
 model InformaticaOrganizationResource
-  is TrackedResource<OrganizationProperties> {
+  is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
   @key("organizationName")
   @pattern("^[a-zA-Z0-9_-]*$")
   @segment("organizations")
@@ -41,6 +39,18 @@ model InformaticaOrganizationResource
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+/**
+ * Enum representing the versions.
+ */
+enum Versions {
+  /**
+   * The 2024-05-08 API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_05_08: "2024-05-08",
+}
+
 @armResourceOperations
 interface Organizations
   extends Azure.ResourceManager.TrackedResourceOperations<
@@ -49,7 +59,7 @@ interface Organizations
     > {
   get is ArmResourceRead<InformaticaOrganizationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaOrganizationResource>;
-  delete is ArmResourceDeleteAsync<InformaticaOrganizationResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
     InformaticaOrganizationResourceUpdate
@@ -75,7 +85,7 @@ interface ServerlessRuntimes
   extends ProxyResourceOperations<InformaticaServerlessRuntimeResource> {
   get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
-  delete is ArmResourceDeleteAsync<InformaticaServerlessRuntimeResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,
     InformaticaServerlessRuntimeResourceUpdate
@@ -229,7 +239,7 @@ model InfaServerlessFetchConfigProperties {
 @doc("A Serverless Runtime environment  resource by Informatica.")
 @parentResource(InformaticaOrganizationResource)
 model InformaticaServerlessRuntimeResource
-  is ProxyResource<InformaticaServerlessRuntimeProperties> {
+  is Azure.ResourceManager.ProxyResource<InformaticaServerlessRuntimeProperties> {
   @key("serverlessRuntimeName")
   @pattern("^[a-zA-Z0-9_-]*$")
   @segment("serverlessRuntimes")
@@ -284,7 +294,7 @@ model CompanyDetails {
 @doc("Marketplace details.")
 model MarketplaceDetails {
   @doc("Marketplace Subscription Id")
-  marketplaceSubscriptionId: string;
+  marketplaceSubscriptionId?: string;
 
   @doc("Marketplace offer details.")
   offerDetails: OfferDetails;
@@ -552,61 +562,69 @@ model ServerlessRuntimeNetworkProfile {
 }
 
 @doc("Provisioning State of the Organization resource.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   @doc("Organization resource creation request accepted")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Organization resource creation started")
-  Creating,
+  Creating: "Creating",
 
   @doc("Organization resource is being updated")
-  Updating,
+  Updating: "Updating",
 
   @doc("Organization resource deletion started")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Organization resource creation successful")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Organization resource creation failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("Organization resource creation canceled")
-  Canceled,
+  Canceled: "Canceled",
 
   @doc("Organization resource is deleted")
-  Deleted,
+  Deleted: "Deleted",
 
   @doc("Organization resource state is unknown")
-  NotSpecified,
+  NotSpecified: "NotSpecified",
 }
 
 @doc("Various application types of the Serverless Runtime environments")
-enum ApplicationType {
+union ApplicationType {
+  string,
+
   @doc("Data Integration")
-  CDI,
+  CDI: "CDI",
 
   @doc("Advanced Data Integration")
-  CDIE,
+  CDIE: "CDIE",
 }
 
 @doc("Various types of the Platform types.")
-enum PlatformType {
+union PlatformType {
+  string,
+
   @doc("Azure platform type")
-  AZURE,
+  AZURE: "AZURE",
 }
 
 @doc("Various types of the runtime types.")
-enum RuntimeType {
+union RuntimeType {
+  string,
+
   @doc("Serverless Runtime type")
-  SERVERLESS,
+  SERVERLESS: "SERVERLESS",
 }
 
 // additional models for Organizations_patch
 model InformaticaOrganizationResourceUpdate
   is OptionalProperties<UpdateableProperties<OmitProperties<
     InformaticaOrganizationResource,
-    "name"
+    "name" | "properties"
   >>> {
   /** Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource */
   properties?: OrganizationPropertiesCustomUpdate;
@@ -655,7 +673,7 @@ model CompanyDetailsUpdate
 model InformaticaServerlessRuntimeResourceUpdate
   is OptionalProperties<UpdateableProperties<OmitProperties<
     InformaticaServerlessRuntimeResource,
-    "name"
+    "name" | "properties"
   >>> {
   /** Patchable PropertieInformaticaOrganizationPropertiesUpdates of the Organization observability resource */
   properties?: ServerlessRuntimePropertiesCustomUpdate;

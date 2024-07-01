@@ -1,10 +1,11 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
+import "@azure-tools/typespec-azure-portal-core";
 import "../shared/main.tsp";
 
 using TypeSpec.Http;
@@ -12,21 +13,36 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
+using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
 @service({
   title: "Microsoft.AwsConnector",
-  version: "2024-08-01-preview",
 })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AwsConnector;
 
+/** Api versions */
+enum Versions {
+  /** 2024-08-01-preview api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2024-08-01-preview`,
+}
+
 //---------------------------------------------- Wafv2IPSets ----------------------------------------------
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+@about({
+  displayNames: {
+    singular: "WAFv2 IPSet",
+    plural: "WAFv2 IPSets",
+  },
+  keywords: ["Microsoft.AwsConnector", "WAFv2", "IPSet"],
+})
 @doc("A Microsoft.AwsConnector resource")
 model Wafv2IPSet is TrackedResource<Wafv2IPSetProperties> {
   @doc("Name of Wafv2IPSet")
@@ -39,9 +55,11 @@ model Wafv2IPSet is TrackedResource<Wafv2IPSetProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Wafv2IPSet")
 model Wafv2IPSetProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsWafv2IPSetProperties;
 
   ...AwsCommonProperties;
@@ -49,43 +67,47 @@ model Wafv2IPSetProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsWafv2IPSet")
 model AwsWafv2IPSetProperties {
-  @doc("Gets and sets the property addresses. List of IPAddresses.")
+  @doc("List of IPAddresses.")
   @extension("x-ms-identifiers", [])
   addresses?: string[];
 
-  @doc("Gets and sets the property arn. ARN of the WAF entity.")
+  @doc("ARN of the WAF entity.")
   arn?: string;
 
-  @doc("Gets and sets the property description. Description of the entity.")
+  @doc("Description of the entity.")
   description?: string;
 
-  @doc("Gets and sets the property ipAddressVersion. Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.")
+  @doc("Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.")
   ipAddressVersion?: string;
 
-  @doc("Gets and sets the property id. Id of the IPSet")
+  @doc("Id of the IPSet")
   id?: string;
 
-  @doc("Gets and sets the property name. Name of the IPSet.")
+  @doc("Name of the IPSet.")
   name?: string;
 
-  @doc("Gets and sets the property scope. Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.")
+  @doc("Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.")
   scope?: string;
 
-  @doc("Gets and sets the property tags.")
+  @doc("Property tags")
   @extension("x-ms-identifiers", [])
   tags?: Tag[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
-  @doc("Gets and sets the property key.")
+  @doc("Property key")
   key?: string;
 
-  @doc("Gets and sets the property value.")
+  @doc("Property value")
   value?: string;
 }
 

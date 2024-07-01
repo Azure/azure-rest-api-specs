@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -12,129 +11,154 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
+@doc("Microsoft.MessagingConnectors Resource Provider management API.")
+@armProviderNamespace
+@service({
+  title: "Microsoft.MessagingConnectors management service",
+})
+@versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
 @doc("Provisioning states of Connector ARM Resource")
 @lroStatus
-enum ConnectorProvisioningState {
-  ...ResourceProvisioningState,
+union ConnectorProvisioningState {
+  @doc("Resource has been created.")
+  Succeeded: "Succeeded",
+
+  @doc("Resource creation failed.")
+  Failed: "Failed",
+
+  @doc("Resource creation was canceled.")
+  Canceled: "Canceled",
 
   @doc("Accepted State")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Creating State")
-  Creating,
+  Creating: "Creating",
 
   @doc("Updating State")
-  Updating,
+  Updating: "Updating",
+
+  string,
 }
 
 @doc("Business State of Connector")
-enum ConnectorState {
+union ConnectorState {
   @doc("Unknown State")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Creating State")
-  Creating,
+  Creating: "Creating",
 
   @doc("Initializing State")
-  Initializing,
+  Initializing: "Initializing",
 
   @doc("Running State")
-  Running,
+  Running: "Running",
 
   @doc("Updating State")
-  Updating,
+  Updating: "Updating",
 
   @doc("Degraded State")
-  Degraded,
+  Degraded: "Degraded",
 
   @doc("Stopped State")
-  Stopped,
+  Stopped: "Stopped",
 
   @doc("Paused State")
-  Paused,
+  Paused: "Paused",
 
   @doc("Deleting State")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Failed State")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 @doc("Enum of Directions of Connector")
-enum Direction {
+union Direction {
   @doc("Unknown direction")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Source Connector")
-  Source,
+  Source: "Source",
 
   @doc("Sink Connector")
-  Sink,
+  Sink: "Sink",
+
+  string,
 }
 
 @doc("Enum of the type of Connector")
-enum ConnectorType {
+union ConnectorType {
   @doc("Unknown source connector.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Google pub sub source connector.")
-  GooglePubSubSource,
+  GooglePubSubSource: "GooglePubSubSource",
 
   @doc("Amazon kinesis source connector.")
-  KinesisSource,
+  KinesisSource: "KinesisSource",
 
   @doc("Postgre sql source connector.")
-  PostgreSqlSource,
+  PostgreSqlSource: "PostgreSqlSource",
 
   @doc("Sql server source connector.")
-  SqlServerSource,
+  SqlServerSource: "SqlServerSource",
 
   @doc("Cosmos db source connector.")
-  CosmosDbSource,
+  CosmosDbSource: "CosmosDbSource",
 
   @doc("BitCoin source connector.")
-  BitCoinSource,
+  BitCoinSource: "BitCoinSource",
 
   @doc("Kafka source connector.")
-  KafkaSource,
+  KafkaSource: "KafkaSource",
 
   @doc("confluent source connector.")
-  ConfluentSource,
+  ConfluentSource: "ConfluentSource",
 
   @doc("mysql source connector.")
-  MySqlSource,
+  MySqlSource: "MySqlSource",
+
+  string,
 }
 
 @doc("Enum of the type of Converter")
-enum ConverterType {
+union ConverterType {
   @doc("Unknown converter.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("This represents a converter for byte arrays format.")
-  ByteArrayConverter,
+  ByteArrayConverter: "ByteArrayConverter",
 
   @doc("This represents a converter for string format.")
-  StringConverter,
+  StringConverter: "StringConverter",
 
   @doc("This represents a converter for json format.")
-  JsonConverter,
+  JsonConverter: "JsonConverter",
 
   @doc("This represents a converter for Avro format.")
-  AvroConverter,
+  AvroConverter: "AvroConverter",
 
   @doc("This represents a converter for csv format.")
-  CsvConverter,
+  CsvConverter: "CsvConverter",
+
+  string,
 }
 
 @doc("Enum of the OffsetPolicy for CosmosDB connector")
-enum OffsetPolicyForCosmosDB {
+union OffsetPolicyForCosmosDB {
   @doc("use the latest (most recent) source offset,")
-  UseLatestSourceOffset,
+  UseLatestSourceOffset: "UseLatestSourceOffset",
 
   @doc("use the earliest recorded offset")
-  UseEarliestRecordedOffset,
+  UseEarliestRecordedOffset: "UseEarliestRecordedOffset",
+
+  string,
 }
 
 @doc("Basic info for EventHub")
@@ -376,4 +400,50 @@ model MySqlSourceConnectorProperties extends ConnectorProperties {
 
   @doc("Tables used as source.")
   tableNames: string;
+}
+
+@doc("Type of DataRange")
+union DataRangeType {
+  @doc("Unknown type")
+  Unknown: "Unknown",
+
+  @doc("Max limit range type")
+  Limit: "Limit",
+
+  string,
+}
+
+@doc("Base config for DataRange")
+@discriminator("type")
+model DataRangeBaseConfig {
+  @doc("type of dataRange")
+  type: DataRangeType;
+}
+
+@doc("DataRange by max records limit")
+model DataRangeLimit extends DataRangeBaseConfig {
+  @doc("Limit type of DataRange")
+  type: DataRangeType.Limit;
+
+  @doc("Max Limit for DataRange")
+  limit: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+@doc("Properties of one DataPreview")
+model DataPreviewProperties {
+  @doc("Properties of one Connector Source")
+  connectorProperties: ConnectorProperties;
+
+  @doc("DataRange for DataPreview")
+  dataRange: DataRangeBaseConfig;
+}
+
+@doc("Properties of DataPreview results")
+model DataPreviewResults {
+  @doc("Count of DataPreview results")
+  count: int32;
+
+  @doc("Content of DataPreview results")
+  results: string[];
 }

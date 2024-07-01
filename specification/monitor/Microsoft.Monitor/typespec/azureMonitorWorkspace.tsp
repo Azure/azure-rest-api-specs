@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -75,12 +74,14 @@ model IngestionSettings {
 }
 
 @doc("State of the public network access.")
-enum PublicNetworkAccess {
+union PublicNetworkAccess {
+  string,
+
   @doc("The public network access is enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The public network access is disabled")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @armResourceOperations

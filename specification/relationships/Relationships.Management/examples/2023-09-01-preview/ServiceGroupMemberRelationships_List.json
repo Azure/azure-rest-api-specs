@@ -1,0 +1,51 @@
+{
+  "title": "ServiceGroupMemberRelationships_List",
+  "operationId": "ServiceGroupMemberRelationships_List",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "resourceUri": "subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "sourceId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
+              "targetId": "/providers/Microsoft.Management/serviceGroups/sg1",
+              "originInformation": {
+                "relationshipOriginType": "UserExplicitlyCreated"
+              },
+              "metadata": {
+                "sourceType": "Microsoft.DocumentDb/databaseAccounts",
+                "targetType": "Microsoft.Management/serviceGroups"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account/providers/Microsoft.Relationships/ServiceGroupMember/membershipOne",
+            "name": "default",
+            "type": "Microsoft.Relationships/ServiceGroupMember"
+          },
+          {
+            "properties": {
+              "sourceId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
+              "targetId": "/providers/Microsoft.Management/serviceGroups/sg2",
+              "originInformation": {
+                "relationshipOriginType": "UserExplicitlyCreated"
+              },
+              "metadata": {
+                "sourceType": "Microsoft.DocumentDb/databaseAccounts",
+                "targetType": "Microsoft.Management/serviceGroups"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account/providers/Microsoft.Relationships/ServiceGroupMember/membershipTwo",
+            "name": "default",
+            "type": "Microsoft.Relationships/ServiceGroupMember"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

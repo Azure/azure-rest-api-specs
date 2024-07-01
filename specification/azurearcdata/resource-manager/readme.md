@@ -27,7 +27,7 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-03
+tag: package-preview-2024-05
 ```
 
 ``` yaml
@@ -44,11 +44,52 @@ directive:
     reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
 ```
 
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/activeDirectoryConnectors.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/azurearcdata.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/common.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/dataControllers.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/failoverGroups.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/operations.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/postgresInstances.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/sqlManagedInstances.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/sqlServerAvailabilityGroups.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/sqlServerDatabases.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/sqlServerEsuLicenses.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/sqlServerInstances.json
+  - Microsoft.AzureArcData/preview/2024-05-01-preview/sqlServerLicenses.json
+```
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/activeDirectoryConnectors.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/azurearcdata.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/common.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/dataControllers.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/failoverGroups.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/operations.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/postgresInstances.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/sqlManagedInstances.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/sqlServerAvailabilityGroups.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/sqlServerDatabases.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/sqlServerInstances.json
+  - Microsoft.AzureArcData/preview/2024-04-01-preview/sqlServerLicenses.json
+```
+
 ### Tag: package-preview-2024-03
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-03'
+``` yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - Microsoft.AzureArcData/preview/2024-03-01-preview/activeDirectoryConnectors.json
   - Microsoft.AzureArcData/preview/2024-03-01-preview/azurearcdata.json
@@ -63,6 +104,7 @@ input-file:
   - Microsoft.AzureArcData/preview/2024-03-01-preview/sqlServerInstances.json
   - Microsoft.AzureArcData/preview/2024-03-01-preview/sqlServerLicenses.json
 ```
+
 ### Tag: package-preview-2024-02
 
 These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
@@ -87,7 +129,7 @@ input-file:
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01'
+``` yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.AzureArcData/stable/2024-01-01/activeDirectoryConnectors.json
   - Microsoft.AzureArcData/stable/2024-01-01/azurearcdata.json

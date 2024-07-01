@@ -1,0 +1,217 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "resourceGroupName": "resourceGroupName",
+    "edgeClusterName": "edgeClusterName",
+    "edgeClusterParameters": {
+      "location": "location",
+      "tags": {
+        "key1": "myvalue1",
+        "key2": "myvalue2"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1": {}
+        }
+      },
+      "properties": {
+        "entraConfiguration": {
+          "adminGroupObjectIds": [
+            "ffffffff-ffff-ffff-ffff-ffffffffffff"
+          ]
+        },
+        "description": "Edge cluster description value",
+        "edgeClusterSkuId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterSkus/edgeClusterSkuName",
+        "managedResourceGroupConfiguration": {
+          "name": "my-managed-rg",
+          "location": "East US"
+        },
+        "networkFabricId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabrics/networkFabricName",
+        "ptpConfiguration": {
+          "domainNumber": 4,
+          "l2VlanNumber": 501,
+          "networkTransportType": "UDPv4",
+          "udpAddress": "10.0.0.25"
+        },
+        "registrationHubId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/registrationHubs/registrationHubName",
+        "runtimeVersionId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterRuntimeVersions/edgeClusterRuntimeVersionName",
+        "workloadResourceIds": [
+          "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Contoso/workloads/workloadName"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusters/edgeClusterName",
+        "name": "edgeClusterName",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/edgeClusters",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/userIdentity1": {
+              "clientId": "200e0000-e89b-12d3-a456-426655440000",
+              "principalId": "321e7654-e89b-12d3-a456-426655449999"
+            }
+          }
+        },
+        "properties": {
+          "entraConfiguration": {
+            "adminGroupObjectIds": [
+              "ffffffff-ffff-ffff-ffff-ffffffffffff"
+            ]
+          },
+          "description": "Edge cluster description value",
+          "edgeClusterSkuId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterSkus/edgeClusterSkuName",
+          "managedResourceGroupConfiguration": {
+            "name": "my-managed-rg",
+            "location": "East US"
+          },
+          "networkFabricId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabrics/networkFabricName",
+          "ptpConfiguration": {
+            "domainNumber": 4,
+            "l2VlanNumber": 501,
+            "networkTransportType": "UDPv4",
+            "udpAddress": "10.0.0.25"
+          },
+          "registrationHubId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/registrationHubs/registrationHubName",
+          "runtimeVersionId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterRuntimeVersions/edgeClusterRuntimeVersionName",
+          "workloadResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Contoso/workloads/workloadName"
+          ],
+          "availableUpgradeRuntimeVersions": [
+            {
+              "availabilityLifecycle": "GenerallyAvailable",
+              "description": "Available upgrade version description",
+              "supportExpiryDate": "2025-01-01",
+              "targetRuntimeVersionId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterRuntimeVersions/edgeClusterRuntimeVersionName"
+            }
+          ],
+          "connectedClusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/connectedClusterName",
+          "clusterExtendedLocation": {
+            "type": "CustomLocation",
+            "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/edgeClusterExtendedLocationName"
+          },
+          "infrastructureResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "kubernetesVersion": "1.XX.Y",
+          "lifecycleStatus": "Ready",
+          "managementServicesVersion": "v20231201",
+          "requiredEndpointAllowList": [
+            {
+              "domainName": "contoso.com",
+              "port": 443
+            }
+          ],
+          "supportExpiryDate": "2025-01-01",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusters/edgeClusterName",
+        "name": "edgeClusterName",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/edgeClusters",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "identity": {
+          "principalId": "321e7654-e89b-12d3-a456-426655449999",
+          "tenantId": "199e9999-e89b-12d3-a456-426655441111",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "entraConfiguration": {
+            "adminGroupObjectIds": [
+              "ffffffff-ffff-ffff-ffff-ffffffffffff"
+            ]
+          },
+          "description": "Edge cluster description value",
+          "edgeClusterSkuId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterSkus/edgeClusterSkuName",
+          "managedResourceGroupConfiguration": {
+            "name": "my-managed-rg",
+            "location": "East US"
+          },
+          "networkFabricId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/networkFabrics/networkFabricName",
+          "ptpConfiguration": {
+            "domainNumber": 4,
+            "l2VlanNumber": 501,
+            "networkTransportType": "UDPv4",
+            "udpAddress": "10.0.0.25"
+          },
+          "registrationHubId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/registrationHubs/registrationHubName",
+          "runtimeVersionId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterRuntimeVersions/edgeClusterRuntimeVersionName",
+          "workloadResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Contoso/workloads/workloadName"
+          ],
+          "availableUpgradeRuntimeVersions": [
+            {
+              "availabilityLifecycle": "GenerallyAvailable",
+              "description": "Available upgrade version description",
+              "supportExpiryDate": "2025-01-01",
+              "targetRuntimeVersionId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/edgeClusterRuntimeVersions/edgeClusterRuntimeVersionName"
+            }
+          ],
+          "connectedClusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/connectedClusterName",
+          "clusterExtendedLocation": {
+            "type": "CustomLocation",
+            "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/edgeClusterExtendedLocationName"
+          },
+          "infrastructureResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/kubernetesClusters/kubernetesClusterName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l2Networks/l2NetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/l3Networks/l3NetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/trunkedNetworks/trunkedNetworkName",
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "kubernetesVersion": "1.XX.Y",
+          "lifecycleStatus": "Ready",
+          "managementServicesVersion": "v20231201",
+          "requiredEndpointAllowList": [
+            {
+              "domainName": "contoso.com",
+              "port": 443
+            }
+          ],
+          "supportExpiryDate": "2025-01-01",
+          "provisioningState": "Accepted"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-05-01-preview"
+      }
+    }
+  }
+}

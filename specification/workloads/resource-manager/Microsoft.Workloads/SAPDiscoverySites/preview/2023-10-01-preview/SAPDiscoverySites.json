@@ -182,7 +182,7 @@
         "tags": [
           "SAPDiscoverySites"
         ],
-        "description": "Creates a discovery site for SAP Migration.",
+        "description": "Creates a discovery site resource for SAP Migration. This resource will be used to run system discovery and assessment with Azure Migrate.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -334,14 +334,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -372,7 +372,7 @@
         "tags": [
           "SAPDiscoverySites"
         ],
-        "description": "Import a SAP Migration discovery site resource and it's child resources, that is the SAP instances and Server instances.",
+        "description": "Import your SAP systems' inventory using the [Discovery template](https://go.microsoft.com/fwlink/?linkid=2249111) into your SAP Migration discovery site resource and it's child resources, the SAP instances and Server instances.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -402,14 +402,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -540,7 +540,7 @@
         "tags": [
           "SAPInstances"
         ],
-        "description": "Creates the SAP Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
+        "description": "Creates the SAP Instance resource. This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -681,7 +681,7 @@
         "tags": [
           "SAPInstances"
         ],
-        "description": "Deletes the SAP Instance resource. <br><br>This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
+        "description": "Deletes the SAP Instance resource. This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -716,14 +716,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -873,7 +873,7 @@
         "tags": [
           "ServerInstances"
         ],
-        "description": "Creates the Server Instance resource. <br><br>;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
+        "description": "Creates the Server Instance resource. This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1030,7 +1030,7 @@
         "tags": [
           "ServerInstances"
         ],
-        "description": "Deletes the Server Instance resource. <br><br>;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
+        "description": "Deletes the Server Instance resource. This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1073,14 +1073,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1147,7 +1147,7 @@
         },
         "model": {
           "type": "string",
-          "description": "Specify if the Hardware is a physical server or virtual machine.",
+          "description": "Specify if the Hardware is a physical server or virtual machine.\nFor example, Physical, Virtual.",
           "readOnly": true
         },
         "totalDiskSizeGB": {
@@ -1617,22 +1617,6 @@
           "description": "Enter a business function/department identifier to group multiple SIDs.",
           "readOnly": true
         },
-        "serverCount": {
-          "type": "object",
-          "description": "Server count for various SAP Instance type servers ('ASCS', 'DB', 'APP', 'SCS', 'WEBDISP') in this SAP Instance.",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "assessmentReadinessIssues": {
-          "type": "array",
-          "description": "List of issues blocking this Sap system to be assessment ready.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Defines the provisioning states.",
@@ -1843,7 +1827,7 @@
         },
         "operatingSystem": {
           "$ref": "#/definitions/OperatingSystem",
-          "description": "This is Operating System on which the host server is running.",
+          "description": "This is name of the Operating System on which the host server is running.",
           "readOnly": true
         },
         "configurationData": {
@@ -1876,24 +1860,6 @@
           "$ref": "#/definitions/ServerInstanceProperties",
           "description": "Server instances properties."
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "The available API versions.",
-      "enum": [
-        "2023-10-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_10_01_preview",
-            "value": "2023-10-01-preview",
-            "description": "The 2023-10-01-preview API version."
-          }
-        ]
       }
     }
   },

@@ -1,5 +1,4 @@
 import "@typespec/rest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -51,17 +50,35 @@ enum Versions {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 // Various tooling enforces (or at least suggests) that all models should have a provisioning State field, as this means something special to ARM.
+// Needed to add this manually although it is available in azure tools node module
+// because of bug https://github.com/Azure/typespec-azure-pr/issues/4152
+@Azure.Core.lroStatus
+@doc("The provisioning state of a resource type.")
+union ResourceProvisioningState {
+  string,
 
-@doc("Provisioning state of the resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+  @doc("Resource has been created.")
+  Succeeded: "Succeeded",
+
+  @doc("Resource creation failed.")
+  Failed: "Failed",
+
+  @doc("Resource creation was canceled.")
+  Canceled: "Canceled",
 }
+
+//// Needed to remove this because of bug https://github.com/Azure/typespec-azure-pr/issues/4152
+// @doc("Provisioning state of the resource.")
+// union ProvisioningState {
+//   string,
+//   ResourceProvisioningState,
+// }
 
 @doc("General resource properties.")
 model ResourceProperties {
   @doc("Resource provisioning state.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ResourceProvisioningState;
 }
 
 // A helper template for defining empty properties for resource PATCH operations
@@ -110,11 +127,14 @@ model CheckNameAvailabilityRequest {
 }
 
 @doc("Possible reasons for a name not being available.")
-enum CheckNameAvailabilityReason {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The common CheckNameAvailabilityReason does not docs for enum variants in types.json"
-  Invalid,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The common CheckNameAvailabilityReason does not docs for enum variants in types.json"
-  AlreadyExists,
+union CheckNameAvailabilityReason {
+  string,
+
+  @doc("Name not available if the name is invalid.")
+  Invalid: "Invalid",
+
+  @doc("Name not available if the name is already in use.")
+  AlreadyExists: "AlreadyExists",
 }
 
 @doc("The check availability result.")

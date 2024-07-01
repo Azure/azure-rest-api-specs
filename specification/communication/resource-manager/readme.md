@@ -24,11 +24,37 @@ To see additional help and options, run:
 
 These are the global settings for the Azure Communication Services API.
 
-``` yaml
+```yaml
 title: CommunicationServiceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-11
+tag: package-preview-2023-11-21
+```
+
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - Microsoft.Communication/preview/2024-01-01-preview/CommunicationServicesGccm.json
+```
+
+```yaml $(tag) == 'package-preview-2024-01' && $(generate-private)
+input-file:
+  - Microsoft.Communication/preview/2024-01-01-preview/CommunicationServicesGccm-private.json
+```
+
+### Tag: package-preview-2023-11-21
+
+These settings apply only when `--tag=package-preview-2023-11-21` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-11-21'
+input-file:
+  - Microsoft.Communication/preview/2023-11-21-preview/CommunicationServices.json
+  - Microsoft.Communication/preview/2023-11-21-preview/Domains.json
+  - Microsoft.Communication/preview/2023-11-21-preview/EmailServices.json
+  - Microsoft.Communication/preview/2023-11-21-preview/SenderUsernames.json
 ```
 
 ### Tag: package-preview-2023-11
@@ -60,7 +86,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-04'
+```yaml $(tag) == 'package-preview-2023-04'
 input-file:
   - Microsoft.Communication/preview/2023-04-01-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2023-04-01-preview/Domains.json
@@ -72,7 +98,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-03'
+```yaml $(tag) == 'package-2023-03'
 input-file:
   - Microsoft.Communication/stable/2023-03-31/CommunicationServices.json
   - Microsoft.Communication/stable/2023-03-31/Domains.json
@@ -84,7 +110,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2023-03'
+```yaml $(tag) == 'package-preview-2023-03'
 input-file:
   - Microsoft.Communication/preview/2023-03-01-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2023-03-01-preview/Domains.json
@@ -96,7 +122,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-10'
+```yaml $(tag) == 'package-preview-2022-10'
 input-file:
   - Microsoft.Communication/preview/2022-10-01-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2022-10-01-preview/Domains.json
@@ -107,7 +133,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-07'
+```yaml $(tag) == 'package-preview-2022-07'
 input-file:
   - Microsoft.Communication/preview/2022-07-01-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2022-07-01-preview/Domains.json
@@ -118,7 +144,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-03-29` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-03'
+```yaml $(tag) == 'package-preview-2022-03'
 input-file:
   - Microsoft.Communication/preview/2022-03-29-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2022-03-29-preview/Domains.json
@@ -129,7 +155,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2021-10'
+```yaml $(tag) == 'package-preview-2021-10'
 input-file:
   - Microsoft.Communication/preview/2021-10-01-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2021-10-01-preview/EmailServices.json
@@ -140,12 +166,12 @@ input-file:
 
 These settings apply only when `--tag=package-2020-08-20` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-08-20'
+```yaml $(tag) == 'package-2020-08-20'
 input-file:
   - Microsoft.Communication/stable/2020-08-20/CommunicationService.json
 ```
 
-``` yaml $(tag) == 'package-2020-08-20' && $(generate-private)
+```yaml $(tag) == 'package-2020-08-20' && $(generate-private)
 input-file:
   - Microsoft.Communication/stable/2020-08-20/CommunicationService-private.json
 ```
@@ -154,12 +180,12 @@ input-file:
 
 These settings apply only when `--tag=package-2020-08-20-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-08-20-preview'
+```yaml $(tag) == 'package-2020-08-20-preview'
 input-file:
   - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService.json
 ```
 
-``` yaml $(tag) == 'package-2020-08-20-preview' && $(generate-private)
+```yaml $(tag) == 'package-2020-08-20-preview' && $(generate-private)
 input-file:
   - Microsoft.Communication/preview/2020-08-20-preview/CommunicationService-private.json
 ```
@@ -168,12 +194,12 @@ input-file:
 
 These settings apply only when `--tag=package-2019-10-10-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-10-10-preview'
+```yaml $(tag) == 'package-2019-10-10-preview'
 input-file:
   - Microsoft.Communication/preview/2019-10-10-preview/CommunicationService.json
 ```
 
-``` yaml $(tag) == 'package-2019-10-10-preview' && $(generate-private)
+```yaml $(tag) == 'package-2019-10-10-preview' && $(generate-private)
 input-file:
   - Microsoft.Communication/preview/2019-10-10-preview/CommunicationService-private.json
 ```
@@ -182,7 +208,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-09-09-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-09-09-privatepreview' && $(generate-private)
+```yaml $(tag) == 'package-2021-09-09-privatepreview' && $(generate-private)
 input-file:
   - Microsoft.Communication/preview/2021-09-09-privatepreview/EventGridFilters.json
 ```
@@ -196,7 +222,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2

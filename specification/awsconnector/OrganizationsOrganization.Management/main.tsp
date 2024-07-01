@@ -1,10 +1,11 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
+import "@azure-tools/typespec-azure-portal-core";
 import "../shared/main.tsp";
 
 using TypeSpec.Http;
@@ -12,21 +13,36 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
+using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
 @service({
   title: "Microsoft.AwsConnector",
-  version: "2024-08-01-preview",
 })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AwsConnector;
 
+/** Api versions */
+enum Versions {
+  /** 2024-08-01-preview api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2024-08-01-preview`,
+}
+
 //---------------------------------------------- OrganizationsOrganizations ----------------------------------------------
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
+@about({
+  displayNames: {
+    singular: "Organizations Organization",
+    plural: "Organizations Organizations",
+  },
+  keywords: ["Microsoft.AwsConnector", "Organizations", "Organization"],
+})
 @doc("A Microsoft.AwsConnector resource")
 model OrganizationsOrganization
   is TrackedResource<OrganizationsOrganizationProperties> {
@@ -40,9 +56,11 @@ model OrganizationsOrganization
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OrganizationsOrganization")
 model OrganizationsOrganizationProperties {
-  @doc("Gets and sets the property awsProperties.")
+  @doc("AWS Properties")
   awsProperties?: AwsOrganizationsOrganizationProperties;
 
   ...AwsCommonProperties;
@@ -50,37 +68,41 @@ model OrganizationsOrganizationProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsOrganizationsOrganization")
 model AwsOrganizationsOrganizationProperties {
-  @doc("Gets and sets the property arn. The Amazon Resource Name (ARN) of an organization.")
+  @doc("The Amazon Resource Name (ARN) of an organization.")
   arn?: string;
 
-  @doc("Gets and sets the property featureSet. Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.")
-  featureSet?: FeatureSet;
+  @doc("Specifies the feature set supported by the new organization. Each feature set supports different levels of functionality.")
+  featureSet?: FeatureSet = "ALL";
 
-  @doc("Gets and sets the property id. The unique identifier (ID) of an organization.")
+  @doc("The unique identifier (ID) of an organization.")
   id?: string;
 
-  @doc("Gets and sets the property managementAccountArn. The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.")
+  @doc("The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.")
   managementAccountArn?: string;
 
-  @doc("Gets and sets the property managementAccountEmail. The email address that is associated with the AWS account that is designated as the management account for the organization.")
+  @doc("The email address that is associated with the AWS account that is designated as the management account for the organization.")
   managementAccountEmail?: string;
 
-  @doc("Gets and sets the property managementAccountId. The unique identifier (ID) of the management account of an organization.")
+  @doc("The unique identifier (ID) of the management account of an organization.")
   managementAccountId?: string;
 
-  @doc("Gets and sets the property rootId. The unique identifier (ID) for the root.")
+  @doc("The unique identifier (ID) for the root.")
   rootId?: string;
 }
 
 @doc("FeatureSet enum")
-enum FeatureSet {
+union FeatureSet {
   @doc("FeatureSet enum ALL")
   ALL: "ALL",
 
   @doc("FeatureSet enum CONSOLIDATED_BILLING")
   CONSOLIDATED_BILLING: "CONSOLIDATED_BILLING",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."

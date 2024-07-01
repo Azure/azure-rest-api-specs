@@ -26,7 +26,7 @@ These are the global settings for the awsconnector.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: providerHub
+openapi-subtype: rpaas
 tag: package-2024-08-01-preview
 ```
 
@@ -48,6 +48,13 @@ These settings apply only when `--tag=package-2024-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/apiGatewayRestApi.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/apiGatewayStage.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/applicationAutoScalingScalableTarget.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/cloudFormationStack.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/cloudFormationStackSet.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/cloudTrailTrail.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/cloudWatchAlarm.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/dynamoDBTable.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Instance.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2InstanceStatus.json
@@ -61,29 +68,57 @@ input-file:
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2Vpc.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2VPCEndpoint.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/ec2VPCPeeringConnection.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/ecrRepository.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/ecsCluster.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/ecsService.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/ecsTaskDefinition.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/efsFileSystem.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/efsMountTarget.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/eksCluster.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/eksNodegroup.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/elasticBeanstalkEnvironment.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/elasticLoadBalancingV2Listener.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/elasticLoadBalancingV2LoadBalancer.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/elasticLoadBalancingV2TargetGroup.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/elasticsearchDomain.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/guardDutyDetector.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/iamGroup.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/iamInstanceProfile.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/iamManagedPolicy.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/iamServerCertificate.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/iamUserPolicy.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/iamVirtualMFADevice.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/kmsKey.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/lambdaFunction.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/licenseManagerLicense.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/lightsailBucket.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/lightsailInstance.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/logsLogGroup.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/logsLogStream.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/logsMetricFilter.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/logsSubscriptionFilter.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/macieAllowList.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallFirewall.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallFirewallPolicy.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/networkFirewallRuleGroup.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/openSearchServiceDomain.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/operations.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/organizationsAccount.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/organizationsOrganization.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/rdsDBCluster.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/rdsDBInstance.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/rdsEventSubscription.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/redshiftCluster.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/redshiftClusterParameterGroup.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/route53HostedZone.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/s3AccessPoint.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/s3Bucket.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/s3BucketPolicy.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/sageMakerApp.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/sageMakerDevice.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/sageMakerImage.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/snsTopic.json
+  - Microsoft.AwsConnector/preview/2024-08-01-preview/sqsQueue.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/wafv2IPSet.json
   - Microsoft.AwsConnector/preview/2024-08-01-preview/wafv2WebACLAssociation.json
 ```
@@ -124,7 +159,6 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
@@ -139,10 +173,6 @@ See configuration in [readme.az.md](./readme.az.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
 
 ## TypeScript
 

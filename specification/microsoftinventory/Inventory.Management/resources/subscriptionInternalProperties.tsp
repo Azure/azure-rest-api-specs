@@ -14,16 +14,14 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft Inventory",
-  version: "2024-01-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@armCommonTypesVersion(CommonTypes.Versions.v5)
+@versioned(Microsoft.Inventory.Versions)
 namespace Microsoft.Inventory;
 
-@subscriptionResource
 @singleton
 model SubscriptionInternalPropertyResource
-  is ProxyResource<SubscriptionInternalProperties> {
+  is ExtensionResource<SubscriptionInternalProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "There is no defined pattern. The only value can be 'default'."
   @segment("subscriptionInternalProperties")
   @doc("Subscription billing properties")
   @key("subscriptionInternalPropertyName")
