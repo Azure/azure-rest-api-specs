@@ -23,6 +23,13 @@ test.concurrent("Suppression", async ({ expect }) => {
   expect(exitCode).toBe(0);
 });
 
+test.concurrent("Parse error", async ({ expect }) => {
+  const { stdout, exitCode } = await checkAllUnder("specification/parse-error");
+
+  expect(stdout).contains("cannot be parsed as JSON");
+  expect(exitCode).toBe(1);
+});
+
 test.concurrent("No tspconfig.yaml", async ({ expect }) => {
   const { stderr, exitCode } = await checkAllUnder("specification/no-tspconfig");
 
