@@ -1,0 +1,244 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "versionName": "dv1",
+    "compareDeploymentVersionsParameter": {
+      "compareTo": "VersionName2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "changes": [
+          {
+            "resourceType": "Microsoft.Cdn/profiles/afdEndpoints/routes",
+            "resourceId": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1/routes/route1",
+            "resourceName": "route1",
+            "previousProperties": {
+              "customDomains": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+                }
+              ],
+              "originGroup": {
+                "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+              },
+              "originPath": null,
+              "ruleSets": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
+                }
+              ],
+              "supportedProtocols": [
+                "Https",
+                "Http"
+              ],
+              "patternsToMatch": [
+                "/*"
+              ],
+              "cacheConfiguration": {
+                "compressionSettings": {
+                  "contentTypesToCompress": [
+                    "text/html",
+                    "application/octet-stream"
+                  ],
+                  "isCompressionEnabled": true
+                },
+                "queryStringCachingBehavior": "IgnoreQueryString",
+                "queryParameters": null
+              },
+              "forwardingProtocol": "MatchRequest",
+              "linkToDefaultDomain": "Enabled",
+              "httpsRedirect": "Enabled",
+              "enabledState": "Enabled",
+              "grpcState": "Enabled",
+              "provisioningState": "Succeeded",
+              "deploymentStatus": "NotStarted"
+            },
+            "currentProperties": {
+              "customDomains": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+                }
+              ],
+              "originGroup": {
+                "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+              },
+              "originPath": null,
+              "ruleSets": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
+                }
+              ],
+              "supportedProtocols": [
+                "Https"
+              ],
+              "patternsToMatch": [
+                "/*"
+              ],
+              "cacheConfiguration": {
+                "compressionSettings": {
+                  "contentTypesToCompress": [
+                    "text/html",
+                    "application/octet-stream"
+                  ],
+                  "isCompressionEnabled": true
+                },
+                "queryStringCachingBehavior": "IgnoreQueryString",
+                "queryParameters": null
+              },
+              "forwardingProtocol": "MatchRequest",
+              "linkToDefaultDomain": "Enabled",
+              "httpsRedirect": "Enabled",
+              "enabledState": "Enabled",
+              "grpcState": "Enabled",
+              "provisioningState": "Succeeded",
+              "deploymentStatus": "NotStarted"
+            }
+          },
+          {
+            "resourceType": "Microsoft.Cdn/profiles/originGroups",
+            "resourceId": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+            "resourceName": "origingroup1",
+            "previousProperties": null,
+            "currentProperties": {
+              "loadBalancingSettings": {
+                "sampleSize": 3,
+                "successfulSamplesRequired": 3,
+                "additionalLatencyInMilliseconds": 1000
+              },
+              "healthProbeSettings": {
+                "probePath": "/path1",
+                "probeRequestType": "HEAD",
+                "probeProtocol": "Http",
+                "probeIntervalInSeconds": 10
+              },
+              "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+              "provisioningState": "Succeeded",
+              "deploymentStatus": "NotStarted"
+            }
+          },
+          {
+            "resourceType": "Microsoft.Network/frontdoorWebApplicationFirewallPolicies",
+            "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/Policy1",
+            "resourceName": "Policy1",
+            "previousProperties": {
+              "resourceState": "Enabled",
+              "provisioningState": "Succeeded",
+              "policySettings": {
+                "enabledState": "Enabled",
+                "mode": "Prevention",
+                "redirectUrl": "http://www.bing.com",
+                "customBlockResponseStatusCode": 499,
+                "customBlockResponseBody": "PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==",
+                "requestBodyCheck": "Disabled"
+              },
+              "customRules": {
+                "rules": [
+                  {
+                    "name": "Rule1",
+                    "priority": 1,
+                    "enabledState": "Enabled",
+                    "ruleType": "RateLimitRule",
+                    "rateLimitDurationInMinutes": 0,
+                    "rateLimitThreshold": 1000,
+                    "matchConditions": [
+                      {
+                        "matchVariable": "RemoteAddr",
+                        "selector": null,
+                        "operator": "IPMatch",
+                        "negateCondition": false,
+                        "matchValue": [
+                          "192.168.1.0/24",
+                          "10.0.0.0/24"
+                        ],
+                        "transforms": []
+                      }
+                    ],
+                    "action": "Block"
+                  },
+                  {
+                    "name": "Rule2",
+                    "priority": 2,
+                    "enabledState": "Enabled",
+                    "ruleType": "MatchRule",
+                    "rateLimitDurationInMinutes": 0,
+                    "rateLimitThreshold": 0,
+                    "matchConditions": [
+                      {
+                        "matchVariable": "RemoteAddr",
+                        "selector": null,
+                        "operator": "GeoMatch",
+                        "negateCondition": false,
+                        "matchValue": [
+                          "CH"
+                        ]
+                      },
+                      {
+                        "matchVariable": "RequestHeader",
+                        "selector": "UserAgent",
+                        "operator": "Contains",
+                        "negateCondition": false,
+                        "matchValue": [
+                          "windows"
+                        ],
+                        "transforms": [
+                          "Lowercase"
+                        ]
+                      }
+                    ],
+                    "action": "Block"
+                  }
+                ]
+              },
+              "managedRules": {
+                "managedRuleSets": [
+                  {
+                    "ruleSetType": "DefaultRuleSet",
+                    "ruleSetVersion": "1.0",
+                    "ruleSetAction": "Block",
+                    "exclusions": [
+                      {
+                        "matchVariable": "RequestHeaderNames",
+                        "selectorMatchOperator": "Equals",
+                        "selector": "User-Agent"
+                      }
+                    ],
+                    "ruleGroupOverrides": [
+                      {
+                        "ruleGroupName": "SQLI",
+                        "exclusions": [],
+                        "rules": [
+                          {
+                            "ruleId": "942100",
+                            "enabledState": "Enabled",
+                            "action": "Redirect",
+                            "exclusions": []
+                          },
+                          {
+                            "ruleId": "942110",
+                            "enabledState": "Disabled"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "frontendEndpointLinks": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontdoors/fd1/frontendendpoints/fd1-azurefd-net"
+                }
+              ],
+              "securityPolicyLinks": []
+            },
+            "currentProperties": null
+          }
+        ]
+      }
+    }
+  }
+}

@@ -3747,6 +3747,310 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions": {
+      "get": {
+        "operationId": "DeploymentVersions_ListByProfile",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Lists existing deployment versions by profile",
+        "x-ms-examples": {
+          "DeploymentVersions_ListByProfile": {
+            "$ref": "./examples/DeploymentVersions_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersionListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}": {
+      "get": {
+        "operationId": "DeploymentVersions_Get",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Get an existing DeploymentVersion with the specified version name under the specified subscription, resource group and profile.",
+        "x-ms-examples": {
+          "DeploymentVersions_Get": {
+            "$ref": "./examples/DeploymentVersions_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentVersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersion"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeploymentVersions_Update",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Update an existing DeploymentVersion within a profile.",
+        "x-ms-examples": {
+          "DeploymentVersions_Update": {
+            "$ref": "./examples/DeploymentVersions_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentVersionNameParameter"
+          },
+          {
+            "name": "deploymentVersionUpdateProperties",
+            "in": "body",
+            "description": "Deployment version properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeploymentVersion"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}/approve": {
+      "post": {
+        "operationId": "DeploymentVersions_Approve",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Approve the deployment of the version",
+        "x-ms-examples": {
+          "DeploymentVersions_Approve": {
+            "$ref": "./examples/DeploymentVersions_Approve.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentVersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}/compare": {
+      "post": {
+        "operationId": "DeploymentVersions_Compare",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Compare the deployment version to another deployment version",
+        "x-ms-examples": {
+          "DeploymentVersions_Compare": {
+            "$ref": "./examples/DeploymentVersions_Compare.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentVersionNameParameter"
+          },
+          {
+            "name": "compareDeploymentVersionsParameter",
+            "in": "body",
+            "description": "The deployment version to be compared to",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompareDeploymentVersionsParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CompareDeploymentVersionsResponse"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}/rollback": {
+      "post": {
+        "operationId": "DeploymentVersions_Rollback",
+        "tags": [
+          "DeploymentVersions"
+        ],
+        "description": "Roll back a deployment version",
+        "x-ms-examples": {
+          "DeploymentVersions_Rollback": {
+            "$ref": "./examples/DeploymentVersions_Rollback.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentVersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsMetrics": {
       "get": {
         "tags": [
@@ -6269,6 +6573,342 @@
         }
       }
     },
+    "DeploymentVersionChange": {
+      "type": "object",
+      "description": "Deployment change under the profile",
+      "discriminator": "resourceType",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type supported by preview.",
+          "enum": [
+            "Microsoft.Cdn/profiles/afdEndpoints/routes",
+            "Microsoft.Cdn/profiles/originGroups",
+            "Microsoft.Cdn/profiles/originGroups/origins",
+            "Microsoft.Cdn/profiles/ruleSets",
+            "Microsoft.Cdn/profiles/ruleSets/rules",
+            "Microsoft.Cdn/profiles/customDomains",
+            "Microsoft.Cdn/profiles/securityPolicies",
+            "Microsoft.Network/frontdoorWebApplicationFirewallPolicies"
+          ],
+          "x-ms-enum": {
+            "name": "PreviewSupportedResourceType",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id"
+        },
+        "resourceName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "resourceType"
+      ]
+    },
+    "DeploymentVersionRouteChange": {
+      "type": "object",
+      "description": "Deployment change of the route under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/afdEndpoints/routes",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/RouteProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/RouteProperties"
+        }
+      }
+    },
+    "DeploymentVersionAFDOriginGroupChange": {
+      "type": "object",
+      "description": "Deployment change of the origin group under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/originGroups",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/AFDOriginGroupProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/AFDOriginGroupProperties"
+        }
+      }
+    },
+    "DeploymentVersionAFDOriginChange": {
+      "type": "object",
+      "description": "Deployment change of the origin group under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/originGroups/origins",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/AFDOriginProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/AFDOriginProperties"
+        }
+      }
+    },
+    "DeploymentVersionRuleSetChange": {
+      "type": "object",
+      "description": "Deployment change of the rule set under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/ruleSets/rules",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/RuleSetProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/RuleSetProperties"
+        }
+      }
+    },
+    "DeploymentVersionRuleChange": {
+      "type": "object",
+      "description": "Deployment change of the rule under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/ruleSets",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/RuleProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/RuleProperties"
+        }
+      }
+    },
+    "DeploymentVersionAFDDomainChange": {
+      "type": "object",
+      "description": "Deployment change of the custom domain under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/customDomains",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/AFDDomainProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/AFDDomainProperties"
+        }
+      }
+    },
+    "DeploymentVersionSecurityPolicyChange": {
+      "type": "object",
+      "description": "Deployment change of the security policy under the profile",
+      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/securityPolicies",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "#/definitions/SecurityPolicyProperties"
+        },
+        "currentProperties": {
+          "$ref": "#/definitions/SecurityPolicyProperties"
+        }
+      }
+    },
+    "DeploymentVersionWafChange": {
+      "type": "object",
+      "description": "Deployment change of the waf related to the profile",
+      "x-ms-discriminator-value": "Microsoft.Network/frontdoorWebApplicationFirewallPolicies",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionChange"
+        }
+      ],
+      "properties": {
+        "previousProperties": {
+          "$ref": "../../../../../frontdoor/resource-manager/Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json#/definitions/WebApplicationFirewallPolicyProperties"
+        },
+        "currentProperties": {
+          "$ref": "../../../../../frontdoor/resource-manager/Microsoft.Network/stable/2022-05-01/webapplicationfirewall.json#/definitions/WebApplicationFirewallPolicyProperties"
+        }
+      }
+    },
+    "CompareDeploymentVersionsParameter": {
+      "type": "object",
+      "description": "compare deployment versions request parameter",
+      "properties": {
+        "compareTo": {
+          "type": "string",
+          "description": "the deployment version to be compared to"
+        }
+      },
+      "required": [
+        "compareTo"
+      ]
+    },
+    "CompareDeploymentVersionsResponse": {
+      "type": "object",
+      "description": "compare deployment versions response",
+      "properties": {
+        "changes": {
+          "type": "array",
+          "description": "The difference between two deployment versions",
+          "items": {
+            "$ref": "#/definitions/DeploymentVersionChange"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "changes"
+      ]
+    },
+    "DeploymentStages": {
+      "type": "object",
+      "properties": {
+        "preview": {
+          "$ref": "#/definitions/DeploymentStageStatus",
+          "readOnly": true,
+          "description": "Deployment status of preview stage."
+        },
+        "production": {
+          "$ref": "#/definitions/DeploymentStageStatus",
+          "readOnly": true,
+          "description": "Deployment status of production stage."
+        }
+      }
+    },
+    "DeploymentStageStatus": {
+      "type": "object",
+      "properties": {
+        "rolloutStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of a resource.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentRolloutStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DeploymentVersion": {
+      "type": "object",
+      "description": "Deployment version object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentVersionProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeploymentVersionListResult": {
+      "type": "object",
+      "description": "Result of the request to list deployment versions. It contains a list of deployment versions objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of DeploymentVersions within a profile.",
+          "items": {
+            "$ref": "#/definitions/DeploymentVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of deployment version objects if there are any."
+        }
+      }
+    },
+    "DeploymentVersionProperties": {
+      "type": "object",
+      "description": "The JSON object that contains the properties of the deployment version.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentVersionUpdateProperties"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "approvalTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "approvalStatus": {
+          "type": "string",
+          "enum": [
+            "Approved",
+            "NotApproved"
+          ],
+          "x-ms-enum": {
+            "name": "ApprovalStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "stages": {
+          "$ref": "#/definitions/DeploymentStages",
+          "readOnly": true
+        }
+      }
+    },
+    "DeploymentVersionUpdate": {
+      "type": "object",
+      "description": "The domain JSON object required for deployment version creation or update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentVersionUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeploymentVersionUpdateProperties": {
+      "type": "object",
+      "description": "The JSON object that contains the properties of the deployment version.",
+      "properties": {
+        "description": {
+          "type": "string"
+        }
+      }
+    },
     "CheckEndpointNameAvailabilityInput": {
       "description": "Input of CheckNameAvailability API.",
       "type": "object",
@@ -6863,7 +7503,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2023-07-01-preview."
+      "description": "Version of the API to be used with the client request. Current version is 2024-06-01-preview."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -6897,6 +7537,17 @@
       "maxLength": 260,
       "x-ms-parameter-location": "method",
       "description": "Name of the KeyGroup under the profile."
+    },
+    "deploymentVersionNameParameter": {
+      "name": "versionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the DeploymentVersion under the profile."
     }
   }
 }
