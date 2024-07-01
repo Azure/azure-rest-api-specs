@@ -99,10 +99,6 @@ model MongoClusterProperties {
   @secret
   administratorLoginPassword?: string;
 
-  /** Authentication properties of the mongo cluster. */
-  @added(Versions.v2024_07_01)
-  authentication?: AuthenticationProperties;
-
   /** The local administrator properties for the mongo cluster. */
   @added(Versions.v2024_07_01)
   administrator?: AdministratorProperties;
@@ -471,20 +467,4 @@ model AdministratorProperties {
   @visibility("create", "update")
   @secret
   password?: string;
-}
-
-/** The authentication properties of the cluster. */
-@added(Versions.v2024_07_01)
-model AuthenticationProperties {
-  /** The allowed authentication modes on the cluster. Defaults to ['LocalUser'] auth mode only. */
-  allowedModes?: AuthenticationMode[];
-}
-
-/** The authentication modes that are supported on a mongo cluster. */
-@added(Versions.v2024_07_01)
-union AuthenticationMode {
-  string,
-
-  /** Enables local mongo users with password login. If specified in authentication.allowedModes, the administrator userName and password needs to be included. If not specified in allowedModes, then local mongo user logins will be disabled. */
-  "LocalUser",
 }

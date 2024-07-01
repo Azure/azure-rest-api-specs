@@ -1275,37 +1275,6 @@
         }
       }
     },
-    "AuthenticationMode": {
-      "type": "string",
-      "description": "The authentication modes that are supported on a mongo cluster.",
-      "enum": [
-        "LocalUser"
-      ],
-      "x-ms-enum": {
-        "name": "AuthenticationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LocalUser",
-            "value": "LocalUser",
-            "description": "Enables local mongo users with password login. If specified in authentication.allowedModes, the administrator userName and password needs to be included. If not specified in allowedModes, then local mongo user logins will be disabled."
-          }
-        ]
-      }
-    },
-    "AuthenticationProperties": {
-      "type": "object",
-      "description": "The authentication properties of the cluster.",
-      "properties": {
-        "allowedModes": {
-          "type": "array",
-          "description": "The allowed authentication modes on the cluster. Defaults to ['LocalUser'] auth mode only.",
-          "items": {
-            "$ref": "#/definitions/AuthenticationMode"
-          }
-        }
-      }
-    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -1578,10 +1547,6 @@
             "create"
           ]
         },
-        "authentication": {
-          "$ref": "#/definitions/AuthenticationProperties",
-          "description": "Authentication properties of the mongo cluster."
-        },
         "administrator": {
           "$ref": "#/definitions/AdministratorProperties",
           "description": "The local administrator properties for the mongo cluster."
@@ -1776,10 +1741,6 @@
       "type": "object",
       "description": "The updatable properties of the MongoCluster.",
       "properties": {
-        "authentication": {
-          "$ref": "#/definitions/AuthenticationProperties",
-          "description": "Authentication properties of the mongo cluster."
-        },
         "administrator": {
           "$ref": "#/definitions/AdministratorProperties",
           "description": "The local administrator properties for the mongo cluster."
