@@ -179,12 +179,12 @@ else {
     if ($responseStatus -eq 200) {
       LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
     }
-    elseif ($response.StatusCode -eq 404) {
+    elseif ($responseStatus -eq 404) {
       LogInfo "  Branch 'main' does not contain path '$servicePath/stable', so spec is new and must use TypeSpec"
       $pathsWithErrors += $file
     }
     else {
-      LogError "Unexpected response from ${logUrlToStableFolder}: ${response.StatusCode}"
+      LogError "Unexpected response from ${logUrlToStableFolder}: ${responseStatus}"
       LogJobFailure
       exit 1
     }
