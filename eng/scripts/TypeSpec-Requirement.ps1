@@ -63,7 +63,7 @@ $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
 $filesToCheck = $CheckAllUnder ?
-  (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative | ForEach-Object { $_ -replace '\\', '/' }) :
+  (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative -RelativeBasePath $repoPath | ForEach-Object { $_ -replace '\\', '/' }) :
   (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish))
 
 $filesToCheck = $filesToCheck.Where({
@@ -111,16 +111,19 @@ else {
       if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
         LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
 
-        if ($file -match "specification/(?<rpFolder>[^/]+)/") {
-          $rpFolder = $Matches["rpFolder"];
-          $tspConfigs = @(Get-ChildItem -Path (Join-Path $repoPath "specification" $rpFolder) -Recurse -File
-            | Where-Object { $_.Name -eq "tspconfig.yaml" })
+        if ($file -match "^.*specification/[^/]+/") {
+          $rpFolder = $Matches[0];
+          write-host $rpFolder;
+
+          $tspConfigs = @(Get-ChildItem -Path $rpFolder -Recurse -File | Where-Object { $_.Name -eq "tspconfig.yaml" })
+
+          write-host $tspConfigs;
 
           if ($tspConfigs) {
-            LogInfo "  Folder 'specification/$rpFolder' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
+            LogInfo "  Folder '$rpFolder' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
           }
           else {
-            LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$rpFolder' contains no files named 'tspconfig.yaml'." `
+            LogError ("OpenAPI was generated from TypeSpec, but folder '$rpFolder' contains no files named 'tspconfig.yaml'." `
                 + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
             LogJobFailure
             exit 1
