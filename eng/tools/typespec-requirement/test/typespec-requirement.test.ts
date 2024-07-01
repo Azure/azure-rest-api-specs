@@ -19,20 +19,27 @@ test.concurrent("No files to check", async ({ expect }) => {
 test.concurrent("Suppression", async ({ expect }) => {
   const { stdout, exitCode } = await checkAllUnder("specification/suppression");
 
-  expect(stdout).contains("Suppressed");
+  expect(stdout).toContain("Suppressed");
   expect(exitCode).toBe(0);
 });
 
 test.concurrent("Parse error", async ({ expect }) => {
   const { stdout, exitCode } = await checkAllUnder("specification/parse-error");
 
-  expect(stdout).contains("cannot be parsed as JSON");
+  expect(stdout).toContain("cannot be parsed as JSON");
   expect(exitCode).toBe(1);
 });
 
 test.concurrent("No tspconfig.yaml", async ({ expect }) => {
   const { stderr, exitCode } = await checkAllUnder("specification/no-tspconfig");
 
-  expect(stderr).contains("no files named 'tspconfig.yaml'");
+  expect(stderr).toContain("no files named 'tspconfig.yaml'");
   expect(exitCode).toBe(1);
+});
+
+test.concurrent("Success", async ({ expect }) => {
+  const { stdout, exitCode } = await checkAllUnder("specification/success");
+
+  expect(stdout).toContain("was generated from TypeSpec");
+  expect(exitCode).toBe(0);
 });
