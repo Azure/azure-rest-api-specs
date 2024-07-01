@@ -173,6 +173,10 @@ model TextBlocklistItem {
   @doc("BlocklistItem content.")
   @maxLength(128)
   text: string;
+
+  @added(ContentSafety.Versions.v2024_04_15_Preview)
+  @doc("Optional setting. true means this item is a regex matched term, false means this item is an exact matched term. Default value is false.")
+  isRegex?: boolean;
 }
 
 @doc("The request to add blocklistItems to a text blocklist.")
@@ -407,4 +411,469 @@ model AnalyzeTextPromptInjectionResult {
 model TextPromptInjectionResult {
   @doc("Analysis result for whether the prompt is classified as an injection attack.")
   attackDetected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The auto reviewer version.")
+@resource("text/autoReviewers")
+model AutoReviewerVersion {
+  @key
+  @visibility("read", "create", "update")
+  @pattern("^[0-9A-Za-z._~-]+$")
+  @maxLength(64)
+  @doc("The name of the auto reviewer.")
+  autoReviewerName: string;
+
+  @doc("The labels defined in the auto reviewer. There should be a label named 'Other' in the list. The 'Other' label is used to represent the content that does not belong to any other label.")
+  labels: AutoReviewerLabelDetails[];
+
+  @doc("URL of example jsonl blob. Read & write access to the last layer virtual directory is required.")
+  @visibility("create", "read", "update")
+  exampleBlobUrl?: string;
+
+  @doc("Delimiter of blob url. If not provided, '/' will be used as the delimiter to parse the exampleBlobUrl.")
+  @visibility("created", "update", "read")
+  blobDelimiter?: string;
+
+  @doc("URL of copied example jsonl blob. If exampleBlobUrl is not provided in the request, this field will not be shown in the response.")
+  @visibility("read")
+  exampleBlobCopyUrl?: string;
+
+  @doc("Version number of the auto reviewer.")
+  @visibility("read")
+  version: int32;
+
+  @doc("Creation time of the auto reviewer.")
+  @visibility("read")
+  createdTime: utcDateTime;
+
+  @doc("Status of the auto reviewer version.")
+  @visibility("read")
+  status: AutoReviewerOperationStatus;
+
+  @doc("Error of the auto reviewer version if its status is Failed.")
+  @visibility("read")
+  error?: string;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The label details in the auto reviewer.")
+model AutoReviewerLabelDetails {
+  @doc("The name of the label.")
+  labelName: string;
+
+  @doc("The description of the label.")
+  description: string;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+union AutoReviewerOperationStatus {
+  string,
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("List of auto reviewer versions.")
+model AutoReviewerVersionList {
+  @doc("List of auto reviewer versions.")
+  value: AutoReviewerVersion[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text auto reviewing request.")
+model AutoReviewTextOptions {
+  @doc("The text needs to be auto reviewed.")
+  text: string;
+
+  @doc("The name of the auto reviewer.")
+  autoReviewerName: string;
+
+  @doc("The version of the auto reviewer. If not assigned we will use the latest version.")
+  autoReviewerVersion?: int32;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text auto reviewing result.")
+model AutoReviewTextResult {
+  @doc("The output label name.")
+  labelName: string;
+
+  @doc("The reasoning of output label.")
+  reasoning: string;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The auto reviewer operation.")
+@resource("text/autoReviewers/operations")
+model AutoReviewerOperationDetail {
+  @doc("The id of auto reviewer operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of the auto reviewer operation.")
+  status: AutoReviewerOperationStatus;
+
+  @doc("Return error detail when the operation failed.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Text Incident.")
+@resource("text/incidents")
+model TextIncident {
+  @doc("incident name.")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @key("incidentName")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  incidentName: string;
+
+  @doc("Incident definition.")
+  @maxLength(1024)
+  incidentDefinition?: string;
+
+  @doc("Incident created time.")
+  @visibility("read", "query")
+  created: utcDateTime;
+
+  @doc("Incident updated time.")
+  @visibility("read", "query")
+  lastUpdated: utcDateTime;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Incident operation status.")
+union IncidentOperationStatus {
+  string,
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+  "Canceled",
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Sample in a Text Incident.")
+@resource("incidentSamples")
+@parentResource(TextIncident)
+model TextIncidentSample {
+  @doc("incident name.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+
+  @doc("IncidentSample text content.")
+  @maxLength(1024)
+  text?: string;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The request to add incidentSamples to a incident.")
+model AddTextIncidentSamplesOptions {
+  @doc("Array of incidentSamples to add.")
+  incidentSamples: TextIncidentSample[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The response of adding incidentSamples to the incident.")
+model AddTextIncidentSamplesResult {
+  @doc("Array of incidentSamples have been added.")
+  incidentSamples: TextIncidentSample[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The request to remove incidentSamples from a incident.")
+model RemoveTextIncidentSamplesOptions {
+  @doc("Array of incidentSamples to remove.")
+  incidentSampleIds: string[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Image Incident.")
+@resource("image/incidents")
+model ImageIncident {
+  @doc("incident name.")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @key("incidentName")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  incidentName: string;
+
+  @doc("Incident created time.")
+  @visibility("read", "query")
+  created: utcDateTime;
+
+  @doc("Incident updated time.")
+  @visibility("read", "query")
+  lastUpdated: utcDateTime;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Sample in an Image Incident.")
+@resource("incidentSamples")
+@parentResource(ImageIncident)
+model ImageIncidentSample {
+  @doc("incident name.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+
+  @doc("IncidentSample image content.")
+  image?: ImageData;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Sample Result in an Image Incident.")
+@resource("incidentSamples")
+@parentResource(ImageIncident)
+model ImageIncidentSampleResult {
+  @doc("incident name.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+
+  @doc("IncidentSample image content.")
+  image?: ImageDataResult;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The image result is base64 encoded bytes")
+@projectedName("csharp", "ContentSafetyImageDataResult")
+model ImageDataResult {
+  @doc("The Base64 encoding of the image.")
+  content?: bytes;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The request to add incidentSamples to a incident.")
+model AddImageIncidentSamplesOptions {
+  @doc("Array of incidentSamples to add.")
+  incidentSamples: ImageIncidentSample[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The request to remove incidentSamples from a incident.")
+model RemoveImageIncidentSamplesOptions {
+  @doc("Array of incidentSamples to remove.")
+  incidentSampleIds: string[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Sample in a Image Incident.")
+@resource("incidentSamples")
+@parentResource(ImageIncident)
+model ListImageIncidentSampleResult {
+  @doc("incident name.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The response of adding incidentSamples to the incident.")
+model AddImageIncidentSamplesResult {
+  @doc("Array of incidentSamples have been added.")
+  incidentSamples: ListImageIncidentSampleResult[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text detect incidents analysis request.")
+model AnalyzeTextDetectIncidentsOptions {
+  @doc("The text needs to be analyzed if it attempts to detect incidents. We support a maximum of 10 thousands Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(10000)
+  text: string;
+
+  @added(ContentSafety.Versions.v2024_04_15_Preview)
+  @doc("The incidents to detect.")
+  incidentNames: string[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The result of text incident match.")
+model IncidentMatch {
+  @doc("The name of the matched incident.")
+  @maxLength(64)
+  incidentName: string;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The detect incidents analysis request.")
+model DetectIncidentsResult {
+  @doc("The detect incidents match details.")
+  incidentMatches: IncidentMatch[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The image detect incidents analysis request.")
+model AnalyzeImageDetectIncidentsOptions {
+  @doc("The image needs to be analyzed.")
+  image: ImageData;
+
+  @added(ContentSafety.Versions.v2024_04_15_Preview)
+  @doc("The incidents to detect.")
+  incidentNames: string[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text incident operation result.")
+@resource("text/incidents/operations")
+model TextIncidentOperationResult {
+  @doc("The ID of the text incident operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of the text incident operation.")
+  @visibility("read")
+  status: IncidentOperationStatus;
+
+  @doc("Return error detail when the operation failed.")
+  errorMessage?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The image incident operation result.")
+@resource("image/incidents/operations")
+model ImageIncidentOperationResult {
+  @doc("The ID of the image incident operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of the image incident operation.")
+  @visibility("read")
+  status: IncidentOperationStatus;
+
+  @doc("Return error detail when the operation failed.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Incident operation id options.")
+model IncidentOperationIdOptions {
+  @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+  @header("Operation-Id")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  operationId?: string;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@resource("text/categories")
+@doc("Text custom category")
+model TextCustomCategoryVersion {
+  @key
+  @visibility("read", "create", "update")
+  @doc("Name of the custom category")
+  categoryName: string;
+
+  @doc("Definition or description of the custom category.")
+  @visibility("read", "create", "update")
+  definition: string;
+
+  @doc("URL of sample jsonl blob. Read & write access to the last layer virtual directory is required.")
+  @visibility("create", "read", "update")
+  sampleBlobUrl: string;
+
+  @doc("Snapshot of copied sample jsonl blob.")
+  @visibility("read")
+  sampleBlobSnapshotUrl: string;
+
+  @doc("Version number of the custom category.")
+  @visibility("read")
+  version: int32;
+
+  @doc("Creation time of the custom category.")
+  @visibility("read")
+  createdTime: utcDateTime;
+
+  @doc("Status of the custom category")
+  @visibility("read")
+  status: CustomCategoryStatus;
+
+  @doc("Error message if status is Failed.")
+  @visibility("read")
+  errorMessage?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Status of the custom category build.")
+union CustomCategoryStatus {
+  string,
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("List of custom category versions.")
+model TextCustomCategoryVersionList {
+  @doc("List of custom category versions.")
+  value: TextCustomCategoryVersion[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+union CustomCategoryOperationStatus {
+  string,
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The request to query text custom category operation.")
+@resource("text/categories/operations")
+model CustomCategoryOperationDetail {
+  @doc("The ID of the custom category operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of the custom category operation.")
+  @visibility("read")
+  status: CustomCategoryOperationStatus;
+
+  @doc("Return error detail when the operation failed.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The custom category option for text.")
+model AnalyzeTextCustomCategoryOption {
+  @doc("The text needs to be analyzed.")
+  text: string;
+
+  @doc("Custom category name.")
+  categoryName: string;
+
+  @doc("Custom category version, if not assigned use the latest version.")
+  version?: int32;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text analysis result on custom category.")
+model TextCustomCategoryAnalysis {
+  @doc("Whether the custom category is detected.")
+  detected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text analysis response on custom category.")
+model AnalyzeTextCustomCategoryResult {
+  @doc("Analysis result for custom category.")
+  customCategoryAnalysis: TextCustomCategoryAnalysis;
 }
