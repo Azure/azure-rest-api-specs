@@ -2,7 +2,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./EdgeNodePool.tsp";
+//import "./EdgeNodePool.tsp";
+import "./edgeDeviceJobs.tsp";
+import "./clusterJobs.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -32,5 +34,5 @@ enum Versions {
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_06_01_preview: "2024-06-01-preview",
+  v2023_12_01_preview: "2023-12-01-preview",
 }
