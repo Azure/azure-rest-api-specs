@@ -1,53 +1,53 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "1.0",
-        "title": "Common types"
-    },
-    "definitions": {
-        "GraphQueryError": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "object",
-                    "description": "The error object.",
-                    "properties": {
-                        "code": {
-                            "type": "string",
-                            "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
-                        },
-                        "message": {
-                            "type": "string",
-                            "description": "Human-readable representation of the error."
-                        },
-                        "details": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/ErrorFieldContract"
-                            },
-                            "description": "The list of invalid fields send in request, in case of validation error."
-                        }
-                    }
-                }
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Common types"
+  },
+  "definitions": {
+    "GraphQueryError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
             },
-            "description": "Error message body that will indicate why the operation failed."
+            "message": {
+              "type": "string",
+              "description": "Human-readable representation of the error."
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorFieldContract"
+              },
+              "description": "The list of invalid fields send in request, in case of validation error."
+            }
+          }
         }
-    },
-    "parameters": {
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Api Version."
-        },
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Azure subscription Id.",
-            "x-ms-parameter-location": "method"
-        }
+      },
+      "description": "Error message body that will indicate why the operation failed."
     }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Api Version."
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id.",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
