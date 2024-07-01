@@ -2,11 +2,18 @@ import { execa } from 'execa';
 import { join } from 'path';
 import { test } from 'vitest';
 
-async function checkAllUnder(path: string) {
+async function checkAllUnder(path: string, responseCache?: string) {
   const repoRoot = join(__dirname, '..', '..', '..', '..');
-  return await execa("pwsh",
-    ["-File", join('eng', 'scripts', 'TypeSpec-Requirement.ps1'), "-CheckAllUnder", join(__dirname, path)],
-    { cwd: repoRoot, reject: false });
+  const script = join('eng', 'scripts', 'TypeSpec-Requirement.ps1');
+
+  let command = `${script} -CheckAllUnder ${join(__dirname, path)}`;
+  if (responseCache) {
+    command += ` -_ResponseCache ${responseCache}`;
+  }
+
+  console.log(command);
+
+  return await execa("pwsh", ["-Command", command], { cwd: repoRoot, reject: false });
 }
 
 test.concurrent("No files to check", async ({ expect }) => {
@@ -37,9 +44,20 @@ test.concurrent("No tspconfig.yaml", async ({ expect }) => {
   expect(exitCode).toBe(1);
 });
 
-test.concurrent("Success", async ({ expect }) => {
-  const { stdout, exitCode } = await checkAllUnder("specification/success");
+test.concurrent("Generated from TypeSpec", async ({ expect }) => {
+  const { stdout, exitCode } = await checkAllUnder("specification/typespec-generated");
 
   expect(stdout).toContain("was generated from TypeSpec");
+  expect(exitCode).toBe(0);
+});
+
+test.concurrent("Hand-written, exists in main", async ({ expect }) => {
+  const { stdout, exitCode } = await checkAllUnder(
+    "specification/hand-written",
+    '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable"=200}'
+  );
+
+  expect(stdout).toContain("was not generated from TypeSpec");
+  expect(stdout).toContain("'main' contains path");
   expect(exitCode).toBe(0);
 });
