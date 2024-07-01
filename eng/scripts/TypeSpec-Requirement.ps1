@@ -32,9 +32,7 @@ function Get-Suppression {
   $suppression = $suppressions ? $suppressions[0] : $null
 
   if ($suppression) {
-    $path = $suppression["path"]
-
-    # Path must specify a single version (without wildcards) under "preview|stable"
+    # Each path must specify a single version (without wildcards) under "preview|stable"
     # 
     # Allowed:    data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/**/*.json
     # Disallowed: data-plane/Azure.Contoso.WidgetManager/preview/**/*.json
@@ -43,10 +41,14 @@ function Get-Suppression {
     # Include "." since a few specs use versions like "X.Y" instead of "YYYY-MM-DD"
     $singleVersionPattern = "/(preview|stable)/[A-Za-z0-9._-]+/"
 
-    if ($path -notmatch $singleVersionPattern) {
-      LogError ("Invalid path '$path'.  Path must only include one version per suppression.")
-      LogJobFailure
-      exit 1
+    $paths = $suppression["paths"]
+
+    foreach ($path in $paths) {
+      if ($path -notmatch $singleVersionPattern) {
+        LogError ("Invalid path '$path'.  Path must only include one version per suppression.")
+        LogJobFailure
+        exit 1
+      }
     }
   }
 

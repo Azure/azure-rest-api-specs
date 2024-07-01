@@ -1,14 +1,6 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Workloads;
 /**
@@ -44,7 +36,12 @@ interface SAPDiscoverySites {
   /**
    * Creates a discovery site resource for SAP Migration. This resource will be used to run system discovery and assessment with Azure Migrate.
    */
-  create is ArmResourceCreateOrReplaceAsync<SAPDiscoverySite>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    SAPDiscoverySite,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Updates a SAP Migration discovery site resource.
@@ -75,6 +72,6 @@ interface SAPDiscoverySites {
   importEntities is ArmResourceActionAsync<
     SAPDiscoverySite,
     void,
-    OperationStatusResult
+    Foundations.OperationStatusResult
   >;
 }
