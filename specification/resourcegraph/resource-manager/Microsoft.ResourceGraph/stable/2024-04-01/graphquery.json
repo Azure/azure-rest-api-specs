@@ -43,10 +43,10 @@
         "operationId": "GraphQuery_ListBySubscription",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../types/common-types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../types/common-types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -59,7 +59,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -82,13 +82,13 @@
         "operationId": "GraphQuery_List",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../types/common-types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../types/common-types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -101,7 +101,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -124,7 +124,7 @@
         "operationId": "GraphQuery_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../types/common-types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -133,7 +133,7 @@
             "$ref": "#/parameters/GraphQueryResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../types/common-types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -146,7 +146,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -164,7 +164,7 @@
         "operationId": "GraphQuery_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../types/common-types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -173,7 +173,7 @@
             "$ref": "#/parameters/GraphQueryResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../types/common-types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -186,7 +186,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -204,7 +204,7 @@
         "operationId": "GraphQuery_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../types/common-types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -213,7 +213,7 @@
             "$ref": "#/parameters/GraphQueryResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../types/common-types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "properties",
@@ -241,7 +241,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -256,7 +256,7 @@
         "operationId": "GraphQuery_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../types/common-types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -265,7 +265,7 @@
             "$ref": "#/parameters/GraphQueryResourceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../types/common-types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -287,7 +287,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -460,52 +460,9 @@
         }
       },
       "description": "Error Field contract."
-    },
-    "GraphQueryError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
-            },
-            "message": {
-              "type": "string",
-              "description": "Human-readable representation of the error."
-            },
-            "details": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ErrorFieldContract"
-              },
-              "description": "The list of invalid fields send in request, in case of validation error."
-            }
-          }
-        }
-      },
-      "description": "Error message body that will indicate why the operation failed."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription Id.",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version.",
-      "x-ms-parameter-location": "method"
-    },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
