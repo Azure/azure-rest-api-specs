@@ -1,5 +1,6 @@
 /** Describes the schema of the Azure VMware Solution events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents;
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AVS is service acronym and should be in uppercase."
+namespace Microsoft.EventGrid.SystemEvents.AVS;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.PrivateCloudUpdating event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."

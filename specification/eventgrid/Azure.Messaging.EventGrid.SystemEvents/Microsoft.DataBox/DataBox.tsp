@@ -1,5 +1,5 @@
 /** EG DataBox Data Model */
-namespace Microsoft.EventGrid.SystemEvents {
+namespace Microsoft.EventGrid.SystemEvents.DataBox {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.DataBox.CopyStarted event. */
   model DataBoxCopyStartedEventData {
     ...DataBoxBase;

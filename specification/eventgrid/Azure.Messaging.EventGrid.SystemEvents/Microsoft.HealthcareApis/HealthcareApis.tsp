@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure HealthcareApis events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents {
+namespace Microsoft.EventGrid.SystemEvents.HealthcareApis {
   // model HealthcareFhirResourceType is string {}
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.FhirResourceCreated event. */
   model HealthcareFhirResourceCreatedEventData {

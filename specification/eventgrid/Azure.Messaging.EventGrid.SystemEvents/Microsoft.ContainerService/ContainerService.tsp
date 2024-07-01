@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure Kubernetes Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent */
-namespace Microsoft.EventGrid.SystemEvents;
+namespace Microsoft.EventGrid.SystemEvents.ContainerService;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event */
 model ContainerServiceNewKubernetesVersionAvailableEventData {
