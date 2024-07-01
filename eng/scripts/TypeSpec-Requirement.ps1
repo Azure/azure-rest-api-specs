@@ -113,11 +113,7 @@ else {
 
         if ($file -match "^.*specification/[^/]+/") {
           $rpFolder = $Matches[0];
-          write-host $rpFolder;
-
           $tspConfigs = @(Get-ChildItem -Path $rpFolder -Recurse -File | Where-Object { $_.Name -eq "tspconfig.yaml" })
-
-          write-host $tspConfigs;
 
           if ($tspConfigs) {
             LogInfo "  Folder '$rpFolder' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
