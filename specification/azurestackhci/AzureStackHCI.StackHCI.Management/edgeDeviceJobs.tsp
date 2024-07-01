@@ -335,7 +335,7 @@ model LogCollectionSession {
   correlationId?: string;
 }
 /**
- * Edgedevice job properties
+ * Edge device job properties
  */
 @discriminator("jobType")
 model AzureLinuxEdgeDeviceJobProperties {
@@ -348,7 +348,7 @@ model AzureLinuxEdgeDeviceJobProperties {
 }
 
 /**
- * Edgedevice job properties
+ * Edge device job properties
  */
 model EdgeDeviceJobProperties {
   /**
@@ -382,7 +382,7 @@ model EdgeDeviceJobProperties {
   endTimeUtc?: utcDateTime;
 
   /**
-   * Status of Edgedevice job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'
+   * Status of Edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'
    */
   @visibility("read")
   status?: string;
@@ -418,11 +418,11 @@ model EdgeDeviceJobReportedProperties {
 }
 
 /**
- * Edgedevice job for Azure Linux solution.
+ * Edge device job for Azure Linux solution.
  */
 model AzureLinuxEdgeDeviceJob extends EdgeDeviceJob {
   /**
-   * Edgedevice job properties
+   * Edge device job properties
    */
   properties: AzureLinuxEdgeDeviceJobProperties;
 
@@ -586,10 +586,10 @@ model HciCollectLogJobProperties extends HciEdgeDeviceJobProperties {
 }
 
 /**
- * HCI Edgedevice job properties
+ * HCI Edge device job properties
  */
 @discriminator("jobType") 
-@doc("HCI Edgedevice job properties")
+@doc("HCI Edge device job properties")
 model HciEdgeDeviceJobProperties {
   ...EdgeDeviceJobProperties,
   @doc("Job Type to support polymorphic resource.")
@@ -598,11 +598,11 @@ model HciEdgeDeviceJobProperties {
 }
 
 /**
- * Edgedevice job for Azure Stack HCI solution.
+ * Edge device job for Azure Stack HCI solution.
  */
 model HciEdgeDeviceJob extends EdgeDeviceJob {
   /**
-   * HCI Edgedevice job properties
+   * HCI Edge device job properties
    */
   properties: HciEdgeDeviceJobProperties;
 

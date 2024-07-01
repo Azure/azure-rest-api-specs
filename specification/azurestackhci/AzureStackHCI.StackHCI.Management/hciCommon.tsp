@@ -89,7 +89,7 @@ model EceActionStatus {
     status?: string;
   
     /**
-     * List of steps of Edgedevice job.
+     * List of steps of Edge device job.
      */
     @visibility("read")
     @extension("x-ms-identifiers", ["name"])
