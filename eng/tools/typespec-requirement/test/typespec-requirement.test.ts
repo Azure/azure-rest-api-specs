@@ -4,14 +4,9 @@ import { test } from 'vitest';
 
 async function checkAllUnder(path: string) {
   const repoRoot = join(__dirname, '..', '..', '..', '..');
-  const result = await execa("pwsh",
+  return await execa("pwsh",
     ["-File", join('eng', 'scripts', 'TypeSpec-Requirement.ps1'), "-CheckAllUnder", join(__dirname, path)],
     { cwd: repoRoot, reject: false });
-
-  console.log('stdout: ' + result.stdout);
-  console.log('stderr: ' + result.stderr);
-
-  return result;
 }
 
 test.concurrent("No files to check", async ({ expect }) => {
@@ -31,7 +26,6 @@ test.concurrent("Suppression", async ({ expect }) => {
 test.concurrent("No tspconfig.yaml", async ({ expect }) => {
   const { stderr, exitCode } = await checkAllUnder("specification/no-tspconfig");
 
-  console.log('stderr: ' + stderr);
 
   expect(stderr).contains("no files named 'tspconfig.yaml'");
   expect(exitCode).toBe(1);
