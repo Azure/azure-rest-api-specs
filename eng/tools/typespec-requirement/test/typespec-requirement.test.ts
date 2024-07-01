@@ -4,9 +4,14 @@ import { test } from 'vitest';
 
 async function checkAllUnder(path: string) {
   const repoRoot = join(__dirname, '..', '..', '..', '..');
-  return await execa("pwsh",
+  const result = await execa("pwsh",
     ["-File", join('eng', 'scripts', 'TypeSpec-Requirement.ps1'), "-CheckAllUnder", join(__dirname, path)],
     { cwd: repoRoot, reject: false });
+
+  console.log(result.stdout);
+  console.log(result.stderr);
+
+  return result;
 }
 
 test.concurrent("No files to check", async ({ expect }) => {
