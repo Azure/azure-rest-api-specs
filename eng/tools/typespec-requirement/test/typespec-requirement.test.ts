@@ -8,8 +8,8 @@ async function checkAllUnder(path: string) {
     ["-File", join('eng', 'scripts', 'TypeSpec-Requirement.ps1'), "-CheckAllUnder", join(__dirname, path)],
     { cwd: repoRoot, reject: false });
 
-  console.log(result.stdout);
-  console.log(result.stderr);
+  console.log('stdout: ' + result.stdout);
+  console.log('stderr: ' + result.stderr);
 
   return result;
 }
@@ -30,6 +30,8 @@ test.concurrent("Suppression", async ({ expect }) => {
 
 test.concurrent("No tspconfig.yaml", async ({ expect }) => {
   const { stderr, exitCode } = await checkAllUnder("specification/no-tspconfig");
+
+  console.log('stderr: ' + stderr);
 
   expect(stderr).contains("no files named 'tspconfig.yaml'");
   expect(exitCode).toBe(1);
