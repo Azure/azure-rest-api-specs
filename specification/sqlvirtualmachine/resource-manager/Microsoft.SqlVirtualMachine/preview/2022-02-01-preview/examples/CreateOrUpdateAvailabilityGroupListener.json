@@ -8,6 +8,24 @@
     "parameters": {
       "properties": {
         "availabilityGroupName": "ag-test",
+        "availabilityGroupConfiguration": {
+          "replicas": [
+            {
+              "sqlVirtualMachineInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
+              "role": "Primary",
+              "failover": "Manual",
+              "commit": "Synchronous_Commit",
+              "readableSecondary": "Read_Only"
+            },
+            {
+              "sqlVirtualMachineInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm3",
+              "role": "Secondary",
+              "failover": "Automatic",
+              "commit": " Synchronous_Commit ",
+              "readableSecondary": "All"
+            }
+          ]
+        },
         "loadBalancerConfigurations": [
           {
             "privateIpAddress": {
