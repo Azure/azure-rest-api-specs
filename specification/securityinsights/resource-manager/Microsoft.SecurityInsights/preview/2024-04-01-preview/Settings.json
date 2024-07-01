@@ -73,6 +73,9 @@
               "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -201,6 +204,12 @@
               "$ref": "#/definitions/Settings"
             }
           },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Settings"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -221,6 +230,11 @@
             "$ref": "#/definitions/Settings"
           },
           "type": "array"
+        },
+        "nextLink": {
+          "description": "URL to fetch the next set of settings.",
+          "readOnly": true,
+          "type": "string"
         }
       },
       "required": [
@@ -417,7 +431,8 @@
       "name": "settingsName",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z][a-z0-9]*$"
     }
   }
 }
