@@ -566,7 +566,7 @@ model HciSetInformationJobProperties extends HciClusterJobProperties {
   vlanId?: string;
 
   /**
-   * A string with the size to be set for Jumb packet frame size for the storage adapters.
+   * A string with the size to be set for jumbo packet frame size for the storage adapters.
    */
   @encodedName("application/json", "JumboPacket")
   jumboPacket?: string;
