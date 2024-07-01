@@ -55,12 +55,12 @@ model DeidentificationJob {
   startedAt?: utcDateTime;
 
   @doc("""
-  Date and time when the job was completed.
-  
-  If the job is canceled, this is the time when the job was canceled.
-  
-  If the job failed, this is the time when the job failed.
-  """)
+    Date and time when the job was completed.
+    
+    If the job is canceled, this is the time when the job was canceled.
+    
+    If the job failed, this is the time when the job failed.
+    """)
   @visibility("read")
   lastUpdatedAt?: utcDateTime;
 
@@ -370,5 +370,5 @@ model PaginationByTokenQueryParameters {
 
   @query
   @doc("Token to continue a previous query.")
-  nextToken?: string;
+  continuationToken?: string;
 }
