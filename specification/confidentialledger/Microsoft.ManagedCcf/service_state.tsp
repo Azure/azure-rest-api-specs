@@ -226,8 +226,7 @@ model FeedInfo {
 }
 
 @doc("Collection of endorsement feeds, keyed by feed name.")
-model UvmEndorsementFeeds extends Record<FeedInfo> {
-}
+model UvmEndorsementFeeds extends Record<FeedInfo> {}
 
 @doc("Join policy fields specific to nodes running on AMD SEV-SNP hardware.")
 model SnpJoinPolicy {
