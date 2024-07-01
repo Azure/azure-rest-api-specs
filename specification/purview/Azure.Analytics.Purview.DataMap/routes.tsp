@@ -978,12 +978,8 @@ interface Glossary {
   @doc("""
     Get all glossaries. Recommend using limit/offset to get pagination result.
     Recommend using 'ignoreTermsAndCategories=true' and fetch terms/categories
-    separately using 
-    
-     'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'
-    and 
-    
-     'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.
+    separately using 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'
+    and 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.
     """)
   @route("/atlas/v2/glossary")
   @get
@@ -1623,7 +1619,7 @@ interface Discovery {
   @route("/search/query")
   @post
   query is Azure.Core.Foundations.Operation<
-    QueryOptions,
+    BodyParameter<QueryOptions>,
     QueryResult,
     {},
     AtlasErrorResponse
@@ -1634,7 +1630,7 @@ interface Discovery {
   @route("/search/suggest")
   @post
   suggest is Azure.Core.Foundations.Operation<
-    SuggestOptions,
+    BodyParameter<SuggestOptions>,
     SuggestResult,
     {},
     AtlasErrorResponse
@@ -1645,7 +1641,7 @@ interface Discovery {
   @route("/search/autocomplete")
   @post
   autoComplete is Azure.Core.Foundations.Operation<
-    AutoCompleteOptions,
+    BodyParameter<AutoCompleteOptions>,
     AutoCompleteResult,
     {},
     AtlasErrorResponse
@@ -2051,9 +2047,7 @@ interface Type {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-    Create all atlas type definitions in bulk, only new definitions will be
-    created.
-    Any changes to the existing definitions will be discarded.
+    Create all atlas type definitions in bulk. Please avoid recreating existing types.
     """)
   @route("/atlas/v2/types/typedefs")
   @post
