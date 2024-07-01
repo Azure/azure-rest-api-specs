@@ -26,7 +26,6 @@ test.concurrent("Suppression", async ({ expect }) => {
 test.concurrent("No tspconfig.yaml", async ({ expect }) => {
   const { stderr, exitCode } = await checkAllUnder("specification/no-tspconfig");
 
-
   expect(stderr).contains("no files named 'tspconfig.yaml'");
   expect(exitCode).toBe(1);
 });
