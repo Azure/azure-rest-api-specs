@@ -14,7 +14,6 @@ namespace Microsoft.Portal;
  * Tenant configuration.
  */
 @doc("The tenant configuration resource definition.")
-@singleton
 @tenantResource
 model TenantConfiguration
   is Azure.ResourceManager.ProxyResource<TenantConfigurationPropertiesWithProvisioningState> {
