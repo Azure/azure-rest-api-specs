@@ -844,7 +844,7 @@
           "readOnly": true
         },
         "secretsLocations": {
-          "description":"List of Secret Locations",
+          "description": "List of Secret Locations",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SecretsLocations"
@@ -873,7 +873,7 @@
           "$ref": "#/definitions/ClusterDesiredProperties"
         },
         "secretsLocations": {
-          "description":"List of Secret Locations",
+          "description": "List of Secret Locations",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SecretsLocations"
@@ -1550,28 +1550,28 @@
       "readOnly": true
     },
     "SecretsLocations": {
-      "description":"List of Secret Locations",
+      "description": "List of Secret Locations",
       "type": "array",
       "items": {
-          "description": "Secret location",
-          "type": "object",
-          "properties": {
-            "secretsLocationName": {
-                "description": "Types of the secret stored",
-                "type": "string",
-                "enum": [
-                  "BackupSecrets"
-                ],
-                "x-ms-enum": {
-                  "name":"SecretsLocationName",
-                  "modelAsString":true
-                }
-            },
-            "secretsLocation": {
-                "description":"URI of secret Location",
-                "type":"string"
+        "description": "Secret location",
+        "type": "object",
+        "properties": {
+          "secretsLocationName": {
+            "description": "Types of the secret stored",
+            "type": "string",
+            "enum": [
+              "BackupSecrets"
+            ],
+            "x-ms-enum": {
+              "name": "SecretsLocationName",
+              "modelAsString": true
             }
+          },
+          "secretsLocation": {
+            "description": "URI of secret Location",
+            "type": "string"
           }
+        }
       }
     }
   },

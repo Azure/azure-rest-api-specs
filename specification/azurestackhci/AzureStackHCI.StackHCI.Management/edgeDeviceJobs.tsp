@@ -162,12 +162,7 @@ union AzureLinuxEdgeDeviceJobType {
   /**
    * RemoteConnect
    */
-  RemoteConnect: "RemoteConnect",
-
-  /**
-   * EnableSsh
-   */
-  EnableSsh: "EnableSsh",
+  RemoteConnect: "RemoteConnect"
 }
 
 /**
@@ -346,11 +341,7 @@ model LogCollectionSession {
 model AzureLinuxEdgeDeviceJobProperties {
   ...EdgeDeviceJobProperties;
 
-  /**
-   * Indicates whether SSH is enabled on the edge device.
-   */
-  sshEnabled?: boolean;
-
+ 
   @doc("Job Type to support polymorphic resource.")
   @extension("x-ms-mutability", ["create", "read"])
   jobType: AzureLinuxEdgeDeviceJobType;

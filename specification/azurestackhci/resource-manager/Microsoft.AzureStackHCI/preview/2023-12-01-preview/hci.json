@@ -694,16 +694,11 @@
           "x-ms-identifiers": [
             "secretName"
           ]
-        },
-        "sshUser": {
-          "type": "string",
-          "description": "ssh user name."
         }
       },
       "required": [
         "serverName",
-        "hostIpv4Address",
-        "sshUser"
+        "hostIpv4Address"
       ],
       "allOf": [
         {
@@ -892,10 +887,6 @@
           "description": "Reported properties for job",
           "readOnly": true
         },
-        "sshEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether SSH is enabled on the edge device."
-        },
         "jobType": {
           "$ref": "#/definitions/AzureLinuxEdgeDeviceJobType",
           "description": "Job Type to support polymorphic resource.",
@@ -916,8 +907,7 @@
       "enum": [
         "CollectLog",
         "RemoteSupport",
-        "RemoteConnect",
-        "EnableSsh"
+        "RemoteConnect"
       ],
       "x-ms-enum": {
         "name": "AzureLinuxEdgeDeviceJobType",
@@ -937,11 +927,6 @@
             "name": "RemoteConnect",
             "value": "RemoteConnect",
             "description": "RemoteConnect"
-          },
-          {
-            "name": "EnableSsh",
-            "value": "EnableSsh",
-            "description": "EnableSsh"
           }
         ]
       }
@@ -970,8 +955,7 @@
       "description": "ClusterJob Type supported.",
       "enum": [
         "AddServer",
-        "RepairServer",
-        "EnableSsh"
+        "RepairServer"
       ],
       "x-ms-enum": {
         "name": "AzureLinuxJobType",
@@ -986,11 +970,6 @@
             "name": "RepairServer",
             "value": "RepairServer",
             "description": "RepairServer"
-          },
-          {
-            "name": "EnableSsh",
-            "value": "EnableSsh",
-            "description": "EnableSsh"
           }
         ]
       }
@@ -1057,15 +1036,10 @@
             "read",
             "create"
           ]
-        },
-        "sshUser": {
-          "type": "string",
-          "description": "ssh user name."
         }
       },
       "required": [
-        "serverName",
-        "sshUser"
+        "serverName"
       ],
       "allOf": [
         {

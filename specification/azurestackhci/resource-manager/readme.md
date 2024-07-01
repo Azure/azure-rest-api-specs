@@ -60,7 +60,8 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
-      - jobs.json
+      - edgeDeviceJobs.json
+      - clusterJobs.json
       - hciCommon.json
       - edgeNodePool.json
 
@@ -91,7 +92,8 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
-      - jobs.json
+      - edgeDeviceJobs.json
+      - clusterJobs.json
       - common.json
       - edgeNodePool.json
 
@@ -237,7 +239,8 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
-  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/jobs.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/edgeDeviceJobs.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/clusterJobs.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/hciCommon.json
 ```
 

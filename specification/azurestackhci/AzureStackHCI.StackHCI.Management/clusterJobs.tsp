@@ -148,12 +148,7 @@ union AzureLinuxJobType {
   /**
    * RepairServer
    */
-  RepairServer: "RepairServer",
-
-  /**
-   * EnableSsh
-   */
-  EnableSsh: "EnableSsh",
+  RepairServer: "RepairServer"
 }
 
 /**
@@ -332,10 +327,6 @@ model JobReportedProperties {
  */
 model AzureLinuxAddServerJobProperties extends AzureLinuxClusterJobProperties {
   ...AddServerJobProperties,
-   /**
-   * ssh user name.
-   */
-  sshUser: string;
 
   /**
    * Job Type to support polymorphic resource.
@@ -390,11 +381,6 @@ model AzureLinuxRepairServerJobProperties extends AzureLinuxClusterJobProperties
    */
   @visibility("read", "create")
   arcNodeResourceIds?: string[];
-
-  /**
-   * ssh user name.
-   */
-  sshUser: string;
 
   /**
    * ClusterJob Type to support polymorphic resource.
