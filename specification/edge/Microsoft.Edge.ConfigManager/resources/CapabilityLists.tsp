@@ -12,10 +12,8 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 
 @doc("Capability Lists Resource")
-@includeInapplicableMetadataInPayload(false)
 model CapabilityListsResource is TrackedResource<CapabilityListsResourceProperties>{
     ...ResourceNameParameter<CapabilityListsResource>;
 }
@@ -35,7 +33,7 @@ interface CapabilityLists{
     >;
 
     @doc("Delete a Capability Lists Resource")
-    delete is ArmResourceDeleteWithoutOkAsync<CapabilityListsResource>;
+    delete is ArmResourceDeleteSync<CapabilityListsResource>;
 
     @doc("List by specified resource group")
     listByResourceGroup is ArmResourceListByParent<CapabilityListsResource>;

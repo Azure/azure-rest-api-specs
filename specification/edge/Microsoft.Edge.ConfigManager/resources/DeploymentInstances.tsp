@@ -13,10 +13,8 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 
 @doc("Deployment Instances Resource")
-@includeInapplicableMetadataInPayload(false)
 @parentResource(TargetBindingsResource)
 model DeploymentInstancesResource is ProxyResource<DeploymentInstancesResourceProperties>{
     ...ResourceNameParameter<DeploymentInstancesResource>;
@@ -37,5 +35,5 @@ interface DeploymentInstances{
     >;
 
     @doc("Delete a Deployment Instances Resource")
-    delete is ArmResourceDeleteWithoutOkAsync<DeploymentInstancesResource>;
+    delete is ArmResourceDeleteSync<DeploymentInstancesResource>;
 }

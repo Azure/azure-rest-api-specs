@@ -12,10 +12,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("Deployment Targets Resource")
-@includeInapplicableMetadataInPayload(false)
 model DeploymentTargetsResource is TrackedResource<DeploymentTargetsResourceProperties>{
     ...ResourceNameParameter<DeploymentTargetsResource>;
 
@@ -38,7 +37,7 @@ interface DeploymentTargets{
     >;
 
     @doc("Delete a Deployment Targets Resource")
-    delete is ArmResourceDeleteWithoutOkAsync<DeploymentTargetsResource>;
+    delete is ArmResourceDeleteSync<DeploymentTargetsResource>;
 
     @doc("List by specified resource group")
     listByResourceGroup is ArmResourceListByParent<DeploymentTargetsResource>;

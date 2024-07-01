@@ -25,8 +25,8 @@ model TargetBindingsResourceProperties {
     @doc("Target of the Target Bindings")
     target: string;
 
-    @doc("Active Instances of the Target Bindings")
-    activeInstances: string;
+    @doc("Active Instance of the Target Bindings")
+    activeInstance: string;
 
     @doc("Provisioning state of the resource")
     @visibility("read")

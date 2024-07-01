@@ -12,10 +12,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("Use Case Version Resource")
-@includeInapplicableMetadataInPayload(false)
 model UseCaseVersionResource is ExtensionResource<UseCaseVersionResourceProperties>{
     ...ResourceNameParameter<UseCaseVersionResource>;
 
@@ -25,7 +24,6 @@ model UseCaseVersionResource is ExtensionResource<UseCaseVersionResourceProperti
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("Configuration Version Resource")
-@includeInapplicableMetadataInPayload(false)
 model ConfigurationVersionResource is ExtensionResource<ConfigurationVersionResourceProperties>{
     ...ResourceNameParameter<ConfigurationVersionResource>;
 
@@ -48,7 +46,7 @@ interface UseCaseVersion{
     >;
 
     @doc("Delete a Capability Lists Resource")
-    delete is ArmResourceDeleteWithoutOkAsync<UseCaseVersionResource>;
+    delete is ArmResourceDeleteSync<UseCaseVersionResource>;
 }
 
 @armResourceOperations
@@ -66,5 +64,5 @@ interface ConfigurationVersion{
     >;
 
     @doc("Delete a Capability Lists Resource")
-    delete is ArmResourceDeleteWithoutOkAsync<ConfigurationVersionResource>;
+    delete is ArmResourceDeleteSync<ConfigurationVersionResource>;
 }

@@ -30,8 +30,8 @@ model UseCasesResourceProperties {
     @doc("Metadata for the Use Cases")
     metadata: string;
 
-    @doc("Values metadata for the Use Cases")
-    valuesMetadata: string;
+    @doc("Values Metadata File Path for the Use Cases")
+    valuesMetadataFilePath: string;
 
     @doc("Provisioning state of the resource")
     @visibility("read")

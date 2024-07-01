@@ -18,9 +18,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 /** Microsoft.Edge Resource Provider management API. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 
 @armProviderNamespace
 @service({

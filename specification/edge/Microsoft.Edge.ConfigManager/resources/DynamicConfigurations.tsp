@@ -12,15 +12,12 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 
 model Configuration is TrackedResource<ConfigurationProperties> {
     ...ResourceNameParameter<Configuration>;
 }
 
-
 @doc("Dynamic Configuration Resource")
-@includeInapplicableMetadataInPayload(false)
 @parentResource(Configuration)
 model DynamicConfigurationResource is ProxyResource<DynamicConfigurationResourceProperties>{
     ...ResourceNameParameter<DynamicConfigurationResource>;
@@ -41,5 +38,5 @@ interface DynamicConfiguration{
     >;
 
     @doc("Delete a Dynamic Configuration Resource")
-    delete is ArmResourceDeleteWithoutOkAsync<DynamicConfigurationResource>;
+    delete is ArmResourceDeleteSync<DynamicConfigurationResource>;
 }

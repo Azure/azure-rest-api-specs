@@ -12,10 +12,8 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 
 @doc("Target Bindings Resource")
-@includeInapplicableMetadataInPayload(false)
 model TargetBindingsResource is TrackedResource<TargetBindingsResourceProperties>{
     ...ResourceNameParameter<TargetBindingsResource>;
 }
@@ -35,7 +33,7 @@ interface TargetBindings{
     >;
 
     @doc("Delete a Target Bindings Resource")
-    delete is ArmResourceDeleteWithoutOkAsync<TargetBindingsResource>;
+    delete is ArmResourceDeleteSync<TargetBindingsResource>;
 
     @doc("List by specified resource group")
     listByResourceGroup is ArmResourceListByParent<TargetBindingsResource>;
