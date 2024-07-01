@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 import "./common.tsp";
 import "./cose.tsp";
@@ -18,7 +19,8 @@ model StateDigest {
 
   @doc("Hex-encoding of SHA-256 hash of the root of the service's merkle tree. This should be signed by a new member and submitted as an ACK to mark that member as Active.")
   @pattern("^[a-f0-9]{64}$")
-  @projectedName("csharp", "digest")
+  @Azure.ClientGenerator.Core.clientName("digest", "csharp")
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "Linter is not aware of ClientGenerator library"
   stateDigest: string;
 }
 
