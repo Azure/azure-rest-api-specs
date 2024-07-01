@@ -1,0 +1,3040 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceFabricManagementClient",
+    "description": "Azure Service Fabric Resource Provider API Client",
+    "version": "2024-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applicationTypes/{applicationTypeName}": {
+      "get": {
+        "tags": [
+          "ApplicationType"
+        ],
+        "operationId": "ApplicationTypes_Get",
+        "summary": "Gets a Service Fabric managed application type name resource.",
+        "description": "Get a Service Fabric application type name resource created or in the process of being created in the Service Fabric managed cluster resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get an application type": {
+            "$ref": "./examples/ApplicationTypeNameGetOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApplicationType"
+        ],
+        "operationId": "ApplicationTypes_CreateOrUpdate",
+        "summary": "Creates or updates a Service Fabric managed application type name resource.",
+        "description": "Create or update a Service Fabric managed application type name resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application type name resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeResource"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Put an application type": {
+            "$ref": "./examples/ApplicationTypeNamePutOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationType"
+        ],
+        "operationId": "ApplicationTypes_Update",
+        "summary": "Updates the tags of an application type resource of a given managed cluster.",
+        "description": "Updates the tags of an application type resource of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application type resource updated tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Patch an application type": {
+            "$ref": "./examples/ApplicationTypeNamePatchOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApplicationType"
+        ],
+        "operationId": "ApplicationTypes_Delete",
+        "summary": "Deletes a Service Fabric managed application type name resource.",
+        "description": "Delete a Service Fabric managed application type name resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete an application type": {
+            "$ref": "./examples/ApplicationTypeNameDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applicationTypes": {
+      "get": {
+        "tags": [
+          "ApplicationType"
+        ],
+        "operationId": "ApplicationTypes_List",
+        "summary": "Gets the list of application type name resources created in the specified Service Fabric managed cluster resource.",
+        "description": "Gets all application type name resources created or in the process of being created in the Service Fabric managed cluster resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of application type name resources": {
+            "$ref": "./examples/ApplicationTypeNameListOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeResourceList"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applicationTypes/{applicationTypeName}/versions/{version}": {
+      "get": {
+        "tags": [
+          "ApplicationTypeVersion"
+        ],
+        "operationId": "ApplicationTypeVersions_Get",
+        "summary": "Gets a Service Fabric managed application type version resource.",
+        "description": "Get a Service Fabric managed application type version resource created or in the process of being created in the Service Fabric managed application type name resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/version"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get an application type version": {
+            "$ref": "./examples/ApplicationTypeVersionGetOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApplicationTypeVersion"
+        ],
+        "operationId": "ApplicationTypeVersions_CreateOrUpdate",
+        "summary": "Creates or updates a Service Fabric managed application type version resource.",
+        "description": "Create or update a Service Fabric managed application type version resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/version"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application type version resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResource"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Put an application type version": {
+            "$ref": "./examples/ApplicationTypeVersionPutOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResource"
+            }
+          },
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationTypeVersion"
+        ],
+        "operationId": "ApplicationTypeVersions_Update",
+        "summary": "Updates the tags of an application type version resource of a given managed cluster.",
+        "description": "Updates the tags of an application type version resource of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/version"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application type version resource updated tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Patch an application type version": {
+            "$ref": "./examples/ApplicationTypeVersionPatchOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApplicationTypeVersion"
+        ],
+        "operationId": "ApplicationTypeVersions_Delete",
+        "summary": "Deletes a Service Fabric managed application type version resource.",
+        "description": "Delete a Service Fabric managed application type version resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/version"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete an application type version": {
+            "$ref": "./examples/ApplicationTypeVersionDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applicationTypes/{applicationTypeName}/versions": {
+      "get": {
+        "tags": [
+          "ApplicationTypeVersion"
+        ],
+        "operationId": "ApplicationTypeVersions_ListByApplicationTypes",
+        "summary": "Gets the list of application type version resources created in the specified Service Fabric managed application type name resource.",
+        "description": "Gets all application type version resources created or in the process of being created in the Service Fabric managed application type name resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of application type version resources": {
+            "$ref": "./examples/ApplicationTypeVersionListOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResourceList"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/fetchUpgradeStatus": {
+      "post": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_ReadUpgrade",
+        "summary": "Get the status of the latest application upgrade.",
+        "description": "Get the status of the latest application upgrade. It will query the cluster to find the status of the latest application upgrade.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get an application upgrade": {
+            "$ref": "./examples/ApplicationActionGetUpgrade_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The operation was accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/startRollback": {
+      "post": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_StartRollback",
+        "summary": "Send a request to start a rollback of the current application upgrade.",
+        "description": "Send a request to start a rollback of the current application upgrade. This will start rolling back the application to the previous version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Start an application upgrade rollback": {
+            "$ref": "./examples/ApplicationActionStartRollback_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The operation was accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/resumeUpgrade": {
+      "post": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_ResumeUpgrade",
+        "summary": "Send a request to resume the current application upgrade.",
+        "description": "Send a request to resume the current application upgrade. This will resume the application upgrade from where it was paused.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters for resuming an application upgrade.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuntimeResumeApplicationUpgradeParameters"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Resume upgrade": {
+            "$ref": "./examples/ApplicationActionResumeUpgrade_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The operation was accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applications/{applicationName}": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Get",
+        "summary": "Gets a Service Fabric managed application resource.",
+        "description": "Get a Service Fabric managed application resource created or in the process of being created in the Service Fabric cluster resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get an application": {
+            "$ref": "./examples/ApplicationGetOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_CreateOrUpdate",
+        "summary": "Creates or updates a Service Fabric managed application resource.",
+        "description": "Create or update a Service Fabric managed application resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Put an application with minimum parameters": {
+            "$ref": "./examples/ApplicationPutOperation_example_min.json"
+          },
+          "Put an application with maximum parameters": {
+            "$ref": "./examples/ApplicationPutOperation_example_max.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Update",
+        "summary": "Updates the tags of an application resource of a given managed cluster.",
+        "description": "Updates the tags of an application resource of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application resource updated tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Patch an application": {
+            "$ref": "./examples/ApplicationPatchOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Delete",
+        "summary": "Deletes a Service Fabric managed application resource.",
+        "description": "Delete a Service Fabric managed application resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete an application": {
+            "$ref": "./examples/ApplicationDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applications": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_List",
+        "summary": "Gets the list of managed application resources created in the specified Service Fabric cluster resource.",
+        "description": "Gets all managed application resources created or in the process of being created in the Service Fabric cluster resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of application resources": {
+            "$ref": "./examples/ApplicationListOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceList"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applications/{applicationName}/services/{serviceName}": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "operationId": "Services_Get",
+        "summary": "Gets a Service Fabric managed service resource.",
+        "description": "Get a Service Fabric service resource created or in the process of being created in the Service Fabric managed application resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a service": {
+            "$ref": "./examples/ServiceGetOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Service"
+        ],
+        "operationId": "Services_CreateOrUpdate",
+        "summary": "Creates or updates a Service Fabric managed service resource.",
+        "description": "Create or update a Service Fabric managed service resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The service resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "x-ms-examples": {
+          "Put a service with minimum parameters": {
+            "$ref": "./examples/ServicePutOperation_example_min.json"
+          },
+          "Put a service with maximum parameters": {
+            "$ref": "./examples/ServicePutOperation_example_max.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Update",
+        "summary": "Updates the tags of a service resource of a given managed cluster.",
+        "description": "Updates the tags of a service resource of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The service resource updated tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Patch a service": {
+            "$ref": "./examples/ServicePatchOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Service"
+        ],
+        "operationId": "Services_Delete",
+        "summary": "Deletes a Service Fabric managed service resource.",
+        "description": "Delete a Service Fabric managed service resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Delete a service": {
+            "$ref": "./examples/ServiceDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The URL to get the status of an ongoing long-running operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "The URL to get the status of a completed long-running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applications/{applicationName}/services": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "operationId": "Services_ListByApplications",
+        "summary": "Gets the list of service resources created in the specified Service Fabric managed application resource.",
+        "description": "Gets all service resources created or in the process of being created in the Service Fabric managed application resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a list of service resources": {
+            "$ref": "./examples/ServiceListOperation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResourceList"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RuntimeFailureAction": {
+      "type": "string",
+      "description": "The compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations.\nRollback specifies that the upgrade will start rolling back automatically.\nManual indicates that the upgrade will switch to UnmonitoredManual upgrade mode.\n",
+      "enum": [
+        "Rollback",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "FailureAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Rollback",
+            "description": "The upgrade will start rolling back automatically. The value is 0"
+          },
+          {
+            "value": "Manual",
+            "description": "The upgrade will switch to UnmonitoredManual upgrade mode. The value is 1"
+          }
+        ]
+      }
+    },
+    "RuntimeResumeApplicationUpgradeParameters": {
+      "type": "object",
+      "properties": {
+        "upgradeDomainName": {
+          "description": "The upgrade domain name. Expected to be the next upgrade domain if the application is upgrading.",
+          "type": "string"
+        }
+      },
+      "description": "Parameters for Resume Upgrade action. The upgrade domain name must be specified."
+    },
+    "RuntimeUpgradeMode": {
+      "type": "string",
+      "description": "The mode used to monitor health during a rolling upgrade. The values are UnmonitoredAuto, UnmonitoredManual, Monitored, and UnmonitoredDeferred.",
+      "enum": [
+        "UnmonitoredAuto",
+        "UnmonitoredManual",
+        "Monitored"
+      ],
+      "default": "Monitored",
+      "x-ms-enum": {
+        "name": "UpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "UnmonitoredAuto",
+            "description": "The upgrade will proceed automatically without performing any health monitoring. The value is 0"
+          },
+          {
+            "value": "UnmonitoredManual",
+            "description": "The upgrade will stop after completing each upgrade domain, giving the opportunity to manually monitor health before proceeding. The value is 1"
+          },
+          {
+            "value": "Monitored",
+            "description": "The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding. The value is 2"
+          }
+        ]
+      }
+    },
+    "AddRemoveIncrementalNamedPartitionScalingMechanism": {
+      "type": "object",
+      "description": "Represents a scaling mechanism for adding or removing named partitions of a stateless service. Partition names are in the format '0','1'...'N-1'.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScalingMechanism"
+        },
+        {
+          "type": "object",
+          "description": "AddRemoveIncrementalNamedPartitionScalingMechanism"
+        }
+      ],
+      "x-ms-discriminator-value": "AddRemoveIncrementalNamedPartition",
+      "required": [
+        "minPartitionCount",
+        "maxPartitionCount",
+        "scaleIncrement"
+      ],
+      "properties": {
+        "minPartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of named partitions of the service."
+        },
+        "maxPartitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of named partitions of the service."
+        },
+        "scaleIncrement": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances to add or remove during a scaling operation."
+        }
+      }
+    },
+    "ApplicationHealthPolicy": {
+      "type": "object",
+      "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n",
+      "required": [
+        "considerWarningAsError",
+        "maxPercentUnhealthyDeployedApplications"
+      ],
+      "properties": {
+        "considerWarningAsError": {
+          "type": "boolean",
+          "description": "Indicates whether warnings are treated with the same severity as errors."
+        },
+        "maxPercentUnhealthyDeployedApplications": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n"
+        },
+        "defaultServiceTypeHealthPolicy": {
+          "$ref": "#/definitions/ServiceTypeHealthPolicy",
+          "description": "The health policy used by default to evaluate the health of a service type."
+        },
+        "serviceTypeHealthPolicyMap": {
+          "$ref": "#/definitions/ServiceTypeHealthPolicyMap",
+          "description": "The map with service type health policy per service type name. The map is empty by default."
+        }
+      }
+    },
+    "ApplicationParameterList": {
+      "type": "object",
+      "description": "List of application parameters with overridden values from their default values specified in the application manifest.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "ApplicationResource": {
+      "type": "object",
+      "description": "The application resource.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApplicationResourceList": {
+      "type": "object",
+      "description": "The list of application resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of application list results if there are any.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationResourceProperties": {
+      "type": "object",
+      "description": "The application resource properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response"
+        },
+        "version": {
+          "$ref": "#/definitions/ApplicationTypeVersion"
+        },
+        "parameters": {
+          "$ref": "#/definitions/ApplicationParameterList"
+        },
+        "upgradePolicy": {
+          "$ref": "#/definitions/ApplicationUpgradePolicy"
+        },
+        "managedIdentities": {
+          "description": "List of user assigned identities for the application, each mapped to a friendly name.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationUserAssignedIdentity"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ApplicationTypeResource": {
+      "type": "object",
+      "description": "The application type name resource",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationTypeResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApplicationTypeResourceList": {
+      "type": "object",
+      "description": "The list of application type names.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationTypeResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of application type list results if there are any.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationTypeResourceProperties": {
+      "type": "object",
+      "description": "The application type name properties",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response."
+        }
+      }
+    },
+    "ApplicationTypeUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Application type update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Application type update request"
+    },
+    "ApplicationTypeVersion": {
+      "type": "string",
+      "description": "The version of the application type as defined in the application manifest.\nThis name must be the full Arm Resource ID for the referenced application type version.\n"
+    },
+    "ApplicationTypeVersionResource": {
+      "type": "object",
+      "description": "An application type version resource for the specified application type name resource.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationTypeVersionResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApplicationTypeVersionResourceList": {
+      "type": "object",
+      "description": "The list of application type version resources for the specified application type name resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationTypeVersionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of application type version list results if there are any.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationTypeVersionResourceProperties": {
+      "type": "object",
+      "description": "The properties of the application type version resource.",
+      "required": [
+        "appPackageUrl"
+      ],
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response"
+        },
+        "appPackageUrl": {
+          "type": "string",
+          "description": "The URL to the application package"
+        }
+      }
+    },
+    "ApplicationTypeVersionUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Application type version update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Application type version update request"
+    },
+    "ApplicationUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Application update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Application update request"
+    },
+    "ApplicationUpgradePolicy": {
+      "type": "object",
+      "description": "Describes the policy for a monitored application upgrade.",
+      "properties": {
+        "applicationHealthPolicy": {
+          "$ref": "#/definitions/ApplicationHealthPolicy"
+        },
+        "forceRestart": {
+          "$ref": "#/definitions/ForceRestart"
+        },
+        "rollingUpgradeMonitoringPolicy": {
+          "$ref": "#/definitions/RollingUpgradeMonitoringPolicy"
+        },
+        "instanceCloseDelayDuration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade, only for those instances which have a non-zero delay duration configured in the service description."
+        },
+        "upgradeMode": {
+          "$ref": "#/definitions/RollingUpgradeMode"
+        },
+        "upgradeReplicaSetCheckTimeout": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer)."
+        },
+        "recreateApplication": {
+          "type": "boolean",
+          "description": "Determines whether the application should be recreated on update. If value=true, the rest of the upgrade policy parameters are not allowed."
+        }
+      }
+    },
+    "ApplicationUserAssignedIdentity": {
+      "type": "object",
+      "required": [
+        "name",
+        "principalId"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The friendly name of user assigned identity."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        }
+      }
+    },
+    "AveragePartitionLoadScalingTrigger": {
+      "type": "object",
+      "description": "Represents a scaling trigger related to an average load of a metric/resource of a partition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScalingTrigger"
+        },
+        {
+          "type": "object",
+          "description": "AveragePartitionLoadScalingTrigger"
+        }
+      ],
+      "x-ms-discriminator-value": "AveragePartitionLoadTrigger",
+      "required": [
+        "metricName",
+        "lowerLoadThreshold",
+        "upperLoadThreshold",
+        "scaleInterval"
+      ],
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "The name of the metric for which usage should be tracked."
+        },
+        "lowerLoadThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The lower limit of the load below which a scale in operation should be performed."
+        },
+        "upperLoadThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The upper limit of the load beyond which a scale out operation should be performed."
+        },
+        "scaleInterval": {
+          "type": "string",
+          "description": "The period in seconds on which a decision is made whether to scale or not. This property should come in ISO 8601 format \"hh:mm:ss\"."
+        }
+      }
+    },
+    "AverageServiceLoadScalingTrigger": {
+      "type": "object",
+      "description": "Represents a scaling policy related to an average load of a metric/resource of a service.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScalingTrigger"
+        },
+        {
+          "type": "object",
+          "description": "AverageServiceLoadScalingTrigger"
+        }
+      ],
+      "x-ms-discriminator-value": "AverageServiceLoadTrigger",
+      "required": [
+        "metricName",
+        "lowerLoadThreshold",
+        "upperLoadThreshold",
+        "scaleInterval",
+        "useOnlyPrimaryLoad"
+      ],
+      "properties": {
+        "metricName": {
+          "type": "string",
+          "description": "The name of the metric for which usage should be tracked."
+        },
+        "lowerLoadThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The lower limit of the load below which a scale in operation should be performed."
+        },
+        "upperLoadThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The upper limit of the load beyond which a scale out operation should be performed."
+        },
+        "scaleInterval": {
+          "type": "string",
+          "description": "The period in seconds on which a decision is made whether to scale or not. This property should come in ISO 8601 format \"hh:mm:ss\"."
+        },
+        "useOnlyPrimaryLoad": {
+          "type": "boolean",
+          "description": "Flag determines whether only the load of primary replica should be considered for scaling. If set to true, then trigger will only consider the load of primary replicas of stateful service. If set to false, trigger will consider load of all replicas. This parameter cannot be set to true for stateless service."
+        }
+      }
+    },
+    "CorrelationSchemeList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceCorrelation"
+      },
+      "x-ms-identifiers": [
+        "serviceName"
+      ],
+      "description": "A list that describes the correlation of the service with other services."
+    },
+    "ForceRestart": {
+      "type": "boolean",
+      "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).",
+      "default": false
+    },
+    "HealthCheckRetryTimeout": {
+      "type": "string",
+      "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
+    },
+    "HealthCheckStableDuration": {
+      "type": "string",
+      "x-ms-format": "duration-constant",
+      "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
+    },
+    "HealthCheckWaitDuration": {
+      "type": "string",
+      "x-ms-format": "duration-constant",
+      "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
+    },
+    "ManagedIdentity": {
+      "type": "object",
+      "description": "Describes the managed identities for an Azure resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal id of the managed identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant id of the managed identity. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityType"
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentityMap"
+        }
+      }
+    },
+    "ManagedIdentityType": {
+      "type": "string",
+      "description": "The type of managed identity for the resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "None",
+            "description": "Indicates that no identity is associated with the resource."
+          },
+          {
+            "value": "SystemAssigned",
+            "description": "Indicates that system assigned identity is associated with the resource."
+          },
+          {
+            "value": "UserAssigned",
+            "description": "Indicates that user assigned identity is associated with the resource."
+          },
+          {
+            "value": "SystemAssigned, UserAssigned",
+            "description": "Indicates that both system assigned and user assigned identity are associated with the resource."
+          }
+        ]
+      }
+    },
+    "MoveCost": {
+      "type": "string",
+      "description": "Specifies the move cost for the service.",
+      "enum": [
+        "Zero",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "MoveCost",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Zero",
+            "description": "Zero move cost. This value is zero."
+          },
+          {
+            "value": "Low",
+            "description": "Specifies the move cost of the service as Low. The value is 1."
+          },
+          {
+            "value": "Medium",
+            "description": "Specifies the move cost of the service as Medium. The value is 2."
+          },
+          {
+            "value": "High",
+            "description": "Specifies the move cost of the service as High. The value is 3."
+          }
+        ]
+      }
+    },
+    "NamedPartitionScheme": {
+      "type": "object",
+      "description": "Describes the named partition scheme of the service.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Partition"
+        },
+        {
+          "type": "object",
+          "description": "NamedPartitionScheme"
+        }
+      ],
+      "x-ms-discriminator-value": "Named",
+      "required": [
+        "names"
+      ],
+      "properties": {
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Array for the names of the partitions."
+        }
+      }
+    },
+    "Partition": {
+      "type": "object",
+      "discriminator": "partitionScheme",
+      "description": "Describes how the service is partitioned.",
+      "required": [
+        "partitionScheme"
+      ],
+      "properties": {
+        "partitionScheme": {
+          "$ref": "#/definitions/PartitionScheme",
+          "description": "Specifies how the service is partitioned."
+        }
+      }
+    },
+    "PartitionInstanceCountScaleMechanism": {
+      "type": "object",
+      "description": "Represents a scaling mechanism for adding or removing instances of stateless service partition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScalingMechanism"
+        },
+        {
+          "type": "object",
+          "description": "PartitionInstanceCountScaleMechanism"
+        }
+      ],
+      "x-ms-discriminator-value": "ScalePartitionInstanceCount",
+      "required": [
+        "minInstanceCount",
+        "maxInstanceCount",
+        "scaleIncrement"
+      ],
+      "properties": {
+        "minInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of instances of the partition."
+        },
+        "maxInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of instances of the partition."
+        },
+        "scaleIncrement": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of instances to add or remove during a scaling operation."
+        }
+      }
+    },
+    "PartitionScheme": {
+      "type": "string",
+      "description": "Enumerates the ways that a service can be partitioned.",
+      "enum": [
+        "Singleton",
+        "UniformInt64Range",
+        "Named"
+      ],
+      "x-ms-enum": {
+        "name": "PartitionScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Singleton",
+            "description": "Indicates that the partition is based on string names, and is a SingletonPartitionScheme object, The value is 0."
+          },
+          {
+            "value": "UniformInt64Range",
+            "description": "Indicates that the partition is based on Int64 key ranges, and is a UniformInt64RangePartitionScheme object. The value is 1."
+          },
+          {
+            "value": "Named",
+            "description": "Indicates that the partition is based on string names, and is a NamedPartitionScheme object. The value is 2."
+          }
+        ]
+      }
+    },
+    "ProxyResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Azure resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Azure resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location depends on the parent resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Azure resource tags.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      },
+      "description": "The resource model definition for proxy-only resource.",
+      "x-ms-azure-resource": true
+    },
+    "RollingUpgradeMode": {
+      "type": "string",
+      "description": "The mode used to monitor health during a rolling upgrade. The values are Monitored, and UnmonitoredAuto.",
+      "enum": [
+        "Monitored",
+        "UnmonitoredAuto"
+      ],
+      "x-ms-enum": {
+        "name": "RollingUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Monitored",
+            "description": "The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding. The value is 0."
+          },
+          {
+            "value": "UnmonitoredAuto",
+            "description": "The upgrade will proceed automatically without performing any health monitoring. The value is 1."
+          }
+        ]
+      }
+    },
+    "RollingUpgradeMonitoringPolicy": {
+      "type": "object",
+      "description": "The policy used for monitoring the application upgrade",
+      "required": [
+        "failureAction",
+        "healthCheckWaitDuration",
+        "healthCheckStableDuration",
+        "healthCheckRetryTimeout",
+        "upgradeTimeout",
+        "upgradeDomainTimeout"
+      ],
+      "properties": {
+        "failureAction": {
+          "type": "string",
+          "description": "The compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations. Invalid indicates the failure action is invalid. Rollback specifies that the upgrade will start rolling back automatically. Manual indicates that the upgrade will switch to UnmonitoredManual upgrade mode.",
+          "enum": [
+            "Rollback",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "FailureAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Rollback",
+                "description": "Indicates that a rollback of the upgrade will be performed by Service Fabric if the upgrade fails."
+              },
+              {
+                "value": "Manual",
+                "description": "Indicates that a manual repair will need to be performed by the administrator if the upgrade fails. Service Fabric will not proceed to the next upgrade domain automatically."
+              }
+            ]
+          }
+        },
+        "healthCheckWaitDuration": {
+          "$ref": "#/definitions/HealthCheckWaitDuration"
+        },
+        "healthCheckStableDuration": {
+          "$ref": "#/definitions/HealthCheckStableDuration"
+        },
+        "healthCheckRetryTimeout": {
+          "$ref": "#/definitions/HealthCheckRetryTimeout"
+        },
+        "upgradeTimeout": {
+          "$ref": "#/definitions/UpgradeTimeout"
+        },
+        "upgradeDomainTimeout": {
+          "$ref": "#/definitions/UpgradeDomainTimeout"
+        }
+      }
+    },
+    "ScalingMechanism": {
+      "type": "object",
+      "discriminator": "kind",
+      "description": "Describes the mechanism for performing a scaling operation.",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ServiceScalingMechanismKind",
+          "description": "Specifies the mechanism associated with this scaling policy."
+        }
+      }
+    },
+    "ScalingPolicy": {
+      "type": "object",
+      "description": "Specifies a metric to load balance a service during runtime.",
+      "required": [
+        "scalingMechanism",
+        "scalingTrigger"
+      ],
+      "properties": {
+        "scalingMechanism": {
+          "$ref": "#/definitions/ScalingMechanism",
+          "description": "Specifies the mechanism associated with this scaling policy"
+        },
+        "scalingTrigger": {
+          "$ref": "#/definitions/ScalingTrigger",
+          "description": "Specifies the trigger associated with this scaling policy."
+        }
+      }
+    },
+    "ScalingPolicyList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ScalingPolicy"
+      },
+      "x-ms-identifiers": [],
+      "description": "Scaling policies for this service."
+    },
+    "ScalingTrigger": {
+      "type": "object",
+      "discriminator": "kind",
+      "description": "Describes the trigger for performing a scaling operation.",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ServiceScalingTriggerKind",
+          "description": "Specifies the trigger associated with this scaling policy."
+        }
+      }
+    },
+    "ServiceCorrelation": {
+      "type": "object",
+      "description": "Creates a particular correlation between services.",
+      "required": [
+        "scheme",
+        "serviceName"
+      ],
+      "properties": {
+        "scheme": {
+          "$ref": "#/definitions/ServiceCorrelationScheme",
+          "description": "The ServiceCorrelationScheme which describes the relationship between this service and the service specified via ServiceName."
+        },
+        "serviceName": {
+          "$ref": "#/definitions/ServiceName",
+          "description": "The Arm Resource ID of the service that the correlation relationship is established with."
+        }
+      }
+    },
+    "ServiceCorrelationScheme": {
+      "type": "string",
+      "description": "The service correlation scheme.",
+      "enum": [
+        "AlignedAffinity",
+        "NonAlignedAffinity"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceCorrelationScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AlignedAffinity",
+            "description": "Aligned affinity ensures that the primaries of the partitions of the affinitized services are collocated on the same nodes. This is the default and is the same as selecting the Affinity scheme. The value is 0."
+          },
+          {
+            "value": "NonAlignedAffinity",
+            "description": "Non-Aligned affinity guarantees that all replicas of each service will be placed on the same nodes. Unlike Aligned Affinity, this does not guarantee that replicas of particular role will be collocated. The value is 1."
+          }
+        ]
+      }
+    },
+    "ServiceKind": {
+      "type": "string",
+      "description": "The kind of service (Stateless or Stateful).",
+      "enum": [
+        "Stateless",
+        "Stateful"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Stateless",
+            "description": "Does not use Service Fabric to make its state highly available or reliable. The value is 0."
+          },
+          {
+            "value": "Stateful",
+            "description": "Uses Service Fabric to make its state or part of its state highly available and reliable. The value is 1."
+          }
+        ]
+      }
+    },
+    "ServiceLoadMetric": {
+      "type": "object",
+      "description": "Specifies a metric to load balance a service during runtime.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric. If the service chooses to report load during runtime, the load metric name should match the name that is specified in Name exactly. Note that metric names are case sensitive."
+        },
+        "weight": {
+          "$ref": "#/definitions/ServiceLoadMetricWeight",
+          "description": "The service load metric relative weight, compared to other metrics configured for this service, as a number."
+        },
+        "primaryDefaultLoad": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Primary replica."
+        },
+        "secondaryDefaultLoad": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Secondary replica."
+        },
+        "defaultLoad": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Used only for Stateless services. The default amount of load, as a number, that this service creates for this metric."
+        }
+      }
+    },
+    "ServiceLoadMetricsList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceLoadMetric"
+      },
+      "x-ms-identifiers": [],
+      "description": "The service load metrics is given as an array of ServiceLoadMetric objects."
+    },
+    "ServiceLoadMetricWeight": {
+      "type": "string",
+      "description": "Determines the metric weight relative to the other metrics that are configured for this service. During runtime, if two metrics end up in conflict, the Cluster Resource Manager prefers the metric with the higher weight.",
+      "enum": [
+        "Zero",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceLoadMetricWeight",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Zero",
+            "description": "Disables resource balancing for this metric. This value is zero."
+          },
+          {
+            "value": "Low",
+            "description": "Specifies the metric weight of the service load as Low. The value is 1."
+          },
+          {
+            "value": "Medium",
+            "description": "Specifies the metric weight of the service load as Medium. The value is 2."
+          },
+          {
+            "value": "High",
+            "description": "Specifies the metric weight of the service load as High. The value is 3."
+          }
+        ]
+      }
+    },
+    "ServiceName": {
+      "type": "string",
+      "description": "The full ARM Resource ID describing the service resource",
+      "x-sf-clientlib": {
+        "typeName": "ServiceName"
+      }
+    },
+    "ServicePlacementInvalidDomainPolicy": {
+      "type": "object",
+      "description": "Describes the policy to be used for placement of a Service Fabric service where a particular fault or upgrade domain should not be used for placement of the instances or replicas of that service.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServicePlacementPolicy"
+        },
+        {
+          "type": "object",
+          "description": "ServicePlacementInvalidDomainPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "InvalidDomain",
+      "required": [
+        "domainName"
+      ],
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "The name of the domain that should not be used for placement."
+        }
+      }
+    },
+    "ServicePlacementNonPartiallyPlaceServicePolicy": {
+      "type": "object",
+      "description": "The name of the domain that should used for placement as per this policy.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServicePlacementPolicy"
+        },
+        {
+          "type": "object",
+          "description": "ServicePlacementNonPartiallyPlaceServicePolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "NonPartiallyPlaceService"
+    },
+    "ServicePlacementPoliciesList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServicePlacementPolicy"
+      },
+      "x-ms-identifiers": [],
+      "description": "A list that describes the correlation of the service with other services."
+    },
+    "ServicePlacementPolicy": {
+      "type": "object",
+      "discriminator": "type",
+      "description": "Describes the policy to be used for placement of a Service Fabric service.",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ServicePlacementPolicyType"
+        }
+      }
+    },
+    "ServicePlacementPolicyType": {
+      "type": "string",
+      "description": "The type of placement policy for a service fabric service. Following are the possible values.",
+      "enum": [
+        "InvalidDomain",
+        "RequiredDomain",
+        "PreferredPrimaryDomain",
+        "RequiredDomainDistribution",
+        "NonPartiallyPlaceService"
+      ],
+      "x-ms-enum": {
+        "name": "ServicePlacementPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "InvalidDomain",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementInvalidDomainPolicyDescription, which indicates that a particular fault or upgrade domain cannot be used for placement of this service. The value is 0."
+          },
+          {
+            "value": "RequiredDomain",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementRequireDomainDistributionPolicyDescription indicating that the replicas of the service must be placed in a specific domain. The value is 1."
+          },
+          {
+            "value": "PreferredPrimaryDomain",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementPreferPrimaryDomainPolicyDescription, which indicates that if possible the Primary replica for the partitions of the service should be located in a particular domain as an optimization. The value is 2."
+          },
+          {
+            "value": "RequiredDomainDistribution",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementRequireDomainDistributionPolicyDescription, indicating that the system will disallow placement of any two replicas from the same partition in the same domain at any time. The value is 3."
+          },
+          {
+            "value": "NonPartiallyPlaceService",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementNonPartiallyPlaceServicePolicyDescription, which indicates that if possible all replicas of a particular partition of the service should be placed atomically. The value is 4."
+          }
+        ]
+      }
+    },
+    "ServicePlacementPreferPrimaryDomainPolicy": {
+      "type": "object",
+      "description": "Describes the policy to be used for placement of a Service Fabric service where the service's \nPrimary replicas should optimally be placed in a particular domain.\n\nThis placement policy is usually used with fault domains in scenarios where the Service Fabric\ncluster is geographically distributed in order to indicate that a service's primary replica should\nbe located in a particular fault domain, which in geo-distributed scenarios usually aligns with regional\nor datacenter boundaries. Note that since this is an optimization it is possible that the Primary replica\nmay not end up located in this domain due to failures, capacity limits, or other constraints.\n",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServicePlacementPolicy"
+        },
+        {
+          "type": "object",
+          "description": "ServicePlacementPreferPrimaryDomainPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "PreferredPrimaryDomain",
+      "required": [
+        "domainName"
+      ],
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "The name of the domain that should used for placement as per this policy."
+        }
+      }
+    },
+    "ServicePlacementRequiredDomainPolicy": {
+      "type": "object",
+      "description": "Describes the policy to be used for placement of a Service Fabric service where the instances or replicas of that service must be placed in a particular domain.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServicePlacementPolicy"
+        },
+        {
+          "type": "object",
+          "description": "ServicePlacementRequiredDomainPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "RequiredDomain",
+      "required": [
+        "domainName"
+      ],
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "The name of the domain that should used for placement as per this policy."
+        }
+      }
+    },
+    "ServicePlacementRequireDomainDistributionPolicy": {
+      "type": "object",
+      "description": "Describes the policy to be used for placement of a Service Fabric service where two replicas\nfrom the same partition should never be placed in the same fault or upgrade domain.\n\nWhile this is not common it can expose the service to an increased risk of concurrent failures\ndue to unplanned outages or other cases of subsequent/concurrent failures. As an example, consider\na case where replicas are deployed across different data center, with one replica per location.\nIn the event that one of the datacenters goes offline, normally the replica that was placed in that\ndatacenter will be packed into one of the remaining datacenters. If this is not desirable then this\npolicy should be set.\n",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServicePlacementPolicy"
+        },
+        {
+          "type": "object",
+          "description": "ServicePlacementRequireDomainDistributionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "RequiredDomainDistribution",
+      "required": [
+        "domainName"
+      ],
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "The name of the domain that should used for placement as per this policy."
+        }
+      }
+    },
+    "ServiceResource": {
+      "type": "object",
+      "description": "The service resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServiceResourceList": {
+      "type": "object",
+      "description": "The list of service resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of service list results if there are any.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceResourceProperties": {
+      "type": "object",
+      "description": "The service resource properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourcePropertiesBase"
+        }
+      ],
+      "required": [
+        "serviceKind",
+        "serviceTypeName",
+        "partitionDescription"
+      ],
+      "discriminator": "serviceKind",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response"
+        },
+        "serviceKind": {
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "serviceTypeName": {
+          "type": "string",
+          "description": "The name of the service type"
+        },
+        "partitionDescription": {
+          "$ref": "#/definitions/Partition"
+        },
+        "servicePackageActivationMode": {
+          "type": "string",
+          "description": "The activation Mode of the service package",
+          "enum": [
+            "SharedProcess",
+            "ExclusiveProcess"
+          ],
+          "x-ms-enum": {
+            "name": "ServicePackageActivationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SharedProcess",
+                "description": "Indicates the application package activation mode will use shared process."
+              },
+              {
+                "value": "ExclusiveProcess",
+                "description": "Indicates the application package activation mode will use exclusive process."
+              }
+            ]
+          }
+        },
+        "serviceDnsName": {
+          "type": "string",
+          "description": "Dns name used for the service. If this is specified, then the DNS name can be used to return the IP addresses of service endpoints for application layer protocols (e.g., HTTP).\nWhen updating serviceDnsName, old name may be temporarily resolvable. However, rely on new name.\nWhen removing serviceDnsName, removed name may temporarily be resolvable. Do not rely on the name being unresolvable.\n"
+        }
+      }
+    },
+    "ServiceResourcePropertiesBase": {
+      "type": "object",
+      "description": "The common service resource properties.",
+      "properties": {
+        "placementConstraints": {
+          "type": "string",
+          "description": "The placement constraints as a string. Placement constraints are boolean expressions on node properties and allow for restricting a service to particular nodes based on the service requirements. For example, to place a service on nodes where NodeType is blue specify the following: \"NodeColor == blue)\"."
+        },
+        "correlationScheme": {
+          "$ref": "#/definitions/CorrelationSchemeList"
+        },
+        "serviceLoadMetrics": {
+          "$ref": "#/definitions/ServiceLoadMetricsList"
+        },
+        "servicePlacementPolicies": {
+          "$ref": "#/definitions/ServicePlacementPoliciesList"
+        },
+        "defaultMoveCost": {
+          "$ref": "#/definitions/MoveCost"
+        },
+        "scalingPolicies": {
+          "$ref": "#/definitions/ScalingPolicyList"
+        }
+      }
+    },
+    "ServiceScalingMechanismKind": {
+      "type": "string",
+      "description": "Enumerates the ways that a service can be partitioned.",
+      "enum": [
+        "ScalePartitionInstanceCount",
+        "AddRemoveIncrementalNamedPartition"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceScalingMechanismKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ScalePartitionInstanceCount",
+            "description": "Represents a scaling mechanism for adding or removing instances of stateless service partition. The value is 0."
+          },
+          {
+            "value": "AddRemoveIncrementalNamedPartition",
+            "description": "Represents a scaling mechanism for adding or removing named partitions of a stateless service. The value is 1."
+          }
+        ]
+      }
+    },
+    "ServiceScalingTriggerKind": {
+      "type": "string",
+      "description": "Enumerates the ways that a service can be partitioned.",
+      "enum": [
+        "AveragePartitionLoadTrigger",
+        "AverageServiceLoadTrigger"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceScalingTriggerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AveragePartitionLoadTrigger",
+            "description": "Represents a scaling trigger related to an average load of a metric/resource of a partition. The value is 0."
+          },
+          {
+            "value": "AverageServiceLoadTrigger",
+            "description": "Represents a scaling policy related to an average load of a metric/resource of a service. The value is 1."
+          }
+        ]
+      }
+    },
+    "ServiceTypeHealthPolicy": {
+      "type": "object",
+      "description": "Represents the health policy used to evaluate the health of services belonging to a service type.\n",
+      "required": [
+        "maxPercentUnhealthyServices",
+        "maxPercentUnhealthyPartitionsPerService",
+        "maxPercentUnhealthyReplicasPerPartition"
+      ],
+      "properties": {
+        "maxPercentUnhealthyServices": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy services.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services.\n",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyPartitionsPerService": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy partitions per service.\n\nThe percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.\nIf the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.\nThe computation rounds up to tolerate one failure on small numbers of partitions.\n",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyReplicasPerPartition": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy replicas per partition.\n\nThe percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.\nIf the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.\nThe computation rounds up to tolerate one failure on small numbers of replicas.\n",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "ServiceTypeHealthPolicyMap": {
+      "type": "object",
+      "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n",
+      "additionalProperties": {
+        "$ref": "#/definitions/ServiceTypeHealthPolicy"
+      }
+    },
+    "ServiceUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Service update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Service update request"
+    },
+    "SingletonPartitionScheme": {
+      "type": "object",
+      "description": "Describes the partition scheme of a singleton-partitioned, or non-partitioned service.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Partition"
+        },
+        {
+          "type": "object",
+          "description": "SingletonPartitionScheme"
+        }
+      ],
+      "x-ms-discriminator-value": "Singleton"
+    },
+    "StatefulServiceProperties": {
+      "type": "object",
+      "description": "The properties of a stateful service resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful",
+      "properties": {
+        "hasPersistedState": {
+          "type": "boolean",
+          "description": "A flag indicating whether this is a persistent service which stores states on the local disk. If it is then the value of this property is true, if not it is false."
+        },
+        "targetReplicaSetSize": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The target replica set size as a number."
+        },
+        "minReplicaSetSize": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "The minimum replica set size as a number."
+        },
+        "replicaRestartWaitDuration": {
+          "type": "string",
+          "description": "The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format \"hh:mm:ss\"."
+        },
+        "quorumLossWaitDuration": {
+          "type": "string",
+          "description": "The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format \"hh:mm:ss\"."
+        },
+        "standByReplicaKeepDuration": {
+          "type": "string",
+          "description": "The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format \"hh:mm:ss\"."
+        },
+        "servicePlacementTimeLimit": {
+          "type": "string",
+          "description": "The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format \"hh:mm:ss\"."
+        }
+      }
+    },
+    "StatelessServiceProperties": {
+      "type": "object",
+      "description": "The properties of a stateless service resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless",
+      "required": [
+        "instanceCount"
+      ],
+      "properties": {
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": -1,
+          "description": "The instance count."
+        },
+        "minInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "MinInstanceCount is the minimum number of instances that must be up to meet the EnsureAvailability safety check during operations like upgrade or deactivate node. The actual number that is used is max( MinInstanceCount, ceil( MinInstancePercentage/100.0 * InstanceCount) ). Note, if InstanceCount is set to -1, during MinInstanceCount computation -1 is first converted into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service."
+        },
+        "minInstancePercentage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "MinInstancePercentage is the minimum percentage of InstanceCount that must be up to meet the EnsureAvailability safety check during operations like upgrade or deactivate node. The actual number that is used is max( MinInstanceCount, ceil( MinInstancePercentage/100.0 * InstanceCount) ). Note, if InstanceCount is set to -1, during MinInstancePercentage computation, -1 is first converted into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service."
+        }
+      }
+    },
+    "UniformInt64RangePartitionScheme": {
+      "type": "object",
+      "description": "Describes a partitioning scheme where an integer range is allocated evenly across a number of partitions.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Partition"
+        },
+        {
+          "type": "object",
+          "description": "UniformInt64RangePartitionScheme"
+        }
+      ],
+      "x-ms-discriminator-value": "UniformInt64Range",
+      "required": [
+        "count",
+        "lowKey",
+        "highKey"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of partitions."
+        },
+        "lowKey": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The lower bound of the partition key range that\nshould be split between the partition ‘Count’\n"
+        },
+        "highKey": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The upper bound of the partition key range that\nshould be split between the partition ‘Count’\n"
+        }
+      }
+    },
+    "UpgradeDomainTimeout": {
+      "type": "string",
+      "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
+    },
+    "UpgradeTimeout": {
+      "type": "string",
+      "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal id of user assigned identity."
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The client id of user assigned identity."
+        }
+      }
+    },
+    "UserAssignedIdentityMap": {
+      "type": "object",
+      "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\n",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentity"
+      }
+    },
+    "AvailableOperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource on which the operation is performed"
+        },
+        "operation": {
+          "type": "string",
+          "description": "The operation that can be performed."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description"
+        }
+      },
+      "description": "Operation supported by the Service Fabric resource provider"
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModelError",
+          "description": "The error details."
+        }
+      },
+      "description": "The structure of the error."
+    },
+    "ErrorModelError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "description": "The error details."
+    },
+    "OperationResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableOperationDisplay",
+          "description": "The object that represents the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin result"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "Available operation list result"
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-06-01-preview\" for this specification.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "applicationName": {
+      "name": "applicationName",
+      "in": "path",
+      "description": "The name of the application resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "applicationTypeName": {
+      "name": "applicationTypeName",
+      "in": "path",
+      "description": "The name of the application type name resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "clusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "description": "The name of the cluster resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "serviceName": {
+      "name": "serviceName",
+      "in": "path",
+      "description": "The name of the service resource in the format of {applicationName}~{serviceName}.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The customer subscription identifier.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "version": {
+      "name": "version",
+      "in": "path",
+      "description": "The application type version.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
