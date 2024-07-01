@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Resource Graph Query",
     "description": "Azure Resource Graph Query API Reference",
-    "version": "2022-10-01"
+    "version": "2024-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -59,7 +59,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -101,7 +101,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -146,7 +146,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -186,7 +186,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -241,7 +241,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -287,7 +287,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/GraphQueryError"
+              "$ref": "../../../types/common-types.json#/definitions/GraphQueryError"
             }
           }
         },
@@ -442,51 +442,6 @@
           "description": "KQL query that will be graph."
         }
       }
-    },
-    "ErrorFieldContract": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Property level error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Human-readable representation of property-level error."
-        },
-        "target": {
-          "type": "string",
-          "description": "Property name."
-        }
-      },
-      "description": "Error Field contract."
-    },
-    "GraphQueryError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
-            },
-            "message": {
-              "type": "string",
-              "description": "Human-readable representation of the error."
-            },
-            "details": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ErrorFieldContract"
-              },
-              "description": "The list of invalid fields send in request, in case of validation error."
-            }
-          }
-        }
-      },
-      "description": "Error message body that will indicate why the operation failed."
     }
   },
   "parameters": {
