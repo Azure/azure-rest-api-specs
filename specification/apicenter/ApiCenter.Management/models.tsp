@@ -5,6 +5,7 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApiCenter;
 
@@ -159,9 +160,9 @@ union ApiSpecImportSourceFormat {
   @doc("The inlined content of a specification document.") "inline",
 
   @doc("""
-The link to a specification document hosted on a publicly accessible internet
-address.
-""")
+    The link to a specification document hosted on a publicly accessible internet
+    address.
+    """)
   "link",
 }
 
@@ -233,6 +234,10 @@ model ServiceProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2024_03_15_preview)
+  @doc("Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.")
+  restore?: boolean = false;
 }
 
 @doc("The metadata schema export request.")
@@ -372,16 +377,16 @@ model License {
   name?: string;
 
   @doc("""
-URL pointing to the license details. The URL field is mutually exclusive of the
-identifier field.
-""")
+    URL pointing to the license details. The URL field is mutually exclusive of the
+    identifier field.
+    """)
   @maxLength(200)
   url?: url;
 
   @doc("""
-SPDX license information for the API. The identifier field is mutually
-exclusive of the URL field.
-""")
+    SPDX license information for the API. The identifier field is mutually
+    exclusive of the URL field.
+    """)
   @maxLength(50)
   identifier?: url;
 }
@@ -539,4 +544,15 @@ model Onboarding {
   @maxItems(1)
   @doc("The location of the development portal")
   developerPortalUri?: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@added(Versions.v2024_03_15_preview)
+@doc("Deleted service properties.")
+model DeletedServiceProperties {
+  @doc("UTC date and time when the service will be automatically purged. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
+  scheduledPurgeDate?: utcDateTime;
+
+  @doc("UTC date and time when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
+  softDeletionDate?: utcDateTime;
 }

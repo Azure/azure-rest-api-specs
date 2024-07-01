@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
@@ -67,7 +66,12 @@ model DatasetPropertyKey {
 @armResourceOperations
 interface Datasets {
   get is ArmResourceRead<Dataset>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Dataset>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Dataset,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmCustomPatchSync<Dataset>;
   delete is ArmResourceDeleteWithoutOkAsync<Dataset>;
   listByInstance is ArmResourceListByParent<Dataset>;

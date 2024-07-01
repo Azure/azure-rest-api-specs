@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-providerhub";
 import "./baseTarget.tsp";
 
 namespace Microsoft.DatabaseWatcher;
@@ -17,7 +16,7 @@ model SqlVmTargetProperties extends TargetProperties {
   targetType: "SqlVm";
 
   @doc("The Azure ResourceId of an Azure SQL VM target.")
-  sqlVmResourceId: ResourceIdentifier<[
+  sqlVmResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SqlVirtualMachine/sqlVirtualMachines";
     }

@@ -361,14 +361,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -385,7 +385,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -431,14 +431,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -785,14 +785,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -809,7 +809,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -865,14 +865,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1156,16 +1156,16 @@
             "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1244,16 +1244,16 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1329,16 +1329,16 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1425,11 +1425,7 @@
         "properties": {
           "$ref": "#/definitions/FleetProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -1538,8 +1534,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1553,11 +1548,7 @@
         "properties": {
           "$ref": "#/definitions/FleetMemberProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -1585,8 +1576,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1668,7 +1658,8 @@
             "description": "The provisioning state of a member being updated."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "FleetMemberUpdate": {
       "type": "object",
@@ -1771,7 +1762,8 @@
             "description": "The provisioning state of a fleet being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "KubernetesVersion": {
       "type": "string"
@@ -1803,7 +1795,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/ManagedClusterUpgradeType",
-          "description": "The upgrade type.\nFull requires the KubernetesVersion property to be set.\nNodeImageOnly requires the KubernetesVersion property not to be set."
+          "description": "ManagedClusterUpgradeType is the type of upgrade to be applied."
         },
         "kubernetesVersion": {
           "$ref": "#/definitions/KubernetesVersion",
@@ -1828,12 +1820,12 @@
           {
             "name": "Full",
             "value": "Full",
-            "description": "Full upgrades the control plane and all agent pools of the target ManagedClusters."
+            "description": "Full upgrades the control plane and all agent pools of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set."
           },
           {
             "name": "NodeImageOnly",
             "value": "NodeImageOnly",
-            "description": "NodeImageOnly upgrades only the node images of the target ManagedClusters."
+            "description": "NodeImageOnly upgrades only the node images of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to NOT be set."
           }
         ]
       }
@@ -2000,11 +1992,7 @@
         "properties": {
           "$ref": "#/definitions/UpdateRunProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "eTag": {
           "type": "string",
@@ -2032,8 +2020,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -2095,7 +2082,8 @@
             "description": "Resource creation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "UpdateRunStatus": {
       "type": "object",

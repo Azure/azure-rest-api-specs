@@ -48,15 +48,17 @@ enum Versions {
  */
 
 @doc("The provisioning states of an object on any relevant backend service.")
-enum ServiceProvisioningStatus {
+union ServiceProvisioningStatus {
+  string,
+
   @doc("The object is pending provisioning.")
-  pending,
+  pending: "pending",
 
   @doc("The object has been synced with the relevant backend service.")
-  synced,
+  synced: "synced",
 
   @doc("The object provisioning operation failed with the relevant backend service.")
-  failed,
+  failed: "failed",
 }
 
 alias ProvisioningStatus = {
@@ -134,15 +136,17 @@ model TeamsDirectRoutingSubdomainTokens {
 }
 
 @doc("Possible values for DNS provisioning state of Teams Direct Routing domains")
-enum TeamsDirectRoutingSubdomainProvisioningStatus {
+union TeamsDirectRoutingSubdomainProvisioningStatus {
+  string,
+
   @doc("The DNS provisioning state Provisioned.")
-  provisioned,
+  provisioned: "provisioned",
 
   @doc("The DNS provisioning state Not Provisioned.")
-  notProvisioned,
+  notProvisioned: "notProvisioned",
 
   @doc("The DNS provisioning state Inconsistent.")
-  inconsistent,
+  inconsistent: "inconsistent",
 }
 
 @doc("Configuration specific to Teams Direct Routing.")
@@ -299,12 +303,14 @@ model TeamsCapabilityPlans {
  */
 
 @doc("The possible validation status of Teams Civic Addresses.")
-enum ValidationStatus {
+union ValidationStatus {
+  string,
+
   @doc("The civic address is not validated.")
-  notValidated,
+  notValidated: "notValidated",
 
   @doc("The civic address is validated.")
-  validated,
+  validated: "validated",
 }
 
 @doc("A location used by Team Operator Connect or Teams Phone Mobile telephone numbers.")
@@ -442,12 +448,14 @@ model TeamsCivicAddressResource {
  */
 
 @doc("Indicates whether a number is assigned to a user.")
-enum TelephoneNumberAssignmentStatus {
+union TelephoneNumberAssignmentStatus {
+  string,
+
   @doc("The telephone number is assigned to a user.")
-  assigned,
+  assigned: "assigned",
 
   @doc("The telephone number is not assigned to a user.")
-  unassigned,
+  unassigned: "unassigned",
 }
 
 alias NumberAssignmentStatus = {
@@ -634,15 +642,17 @@ model PagedNumberList is Azure.Core.Page<NumberResource>;
  */
 
 @doc("The possible state for an Operator Consent.")
-enum TeamsConsentStatus {
+union TeamsConsentStatus {
+  string,
+
   @doc("The Operator Consent is active.")
-  active,
+  active: "active",
 
   @doc("The Operator Consent is suspended.")
-  suspended,
+  suspended: "suspended",
 
   @doc("The Operator Consent is removed.")
-  removed,
+  removed: "removed",
 }
 
 @doc("Contact details for an individual.")
@@ -771,6 +781,17 @@ model CountOfRecordsHeader {
   countOfRecords?: int32;
 }
 
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};
+
 alias FilterQueryParameters = QueryParametersTrait<{
   ...FilterQueryParameter;
 }>;
@@ -833,7 +854,11 @@ interface Accounts {
   @doc("Create or update up to 100 Numbers on the specified account.")
   createOrUpdateNumbers is Operations.ResourceAction<
     AccountResource,
-    BatchNumbers,
+    BodyParameter<
+      BatchNumbers,
+      "body",
+      "Batch of numbers to create or replace."
+    >,
     BatchNumbers
   >;
 
@@ -842,8 +867,8 @@ interface Accounts {
   @doc("Delete up to 100 Numbers on the specified account.")
   deleteNumbers is Operations.ResourceAction<
     AccountResource,
-    BatchNumbersDelete,
-    {}
+    BodyParameter<BatchNumbersDelete, "body", "Batch numbers to delete.">,
+    NoContentResponse
   >;
 
   @tag("Number")
@@ -883,7 +908,11 @@ interface Accounts {
   @doc("Get a list of Teams Available Capabilities on the specified account.")
   getTeamsAvailableCapabilities is Operations.ResourceAction<
     AccountResource,
-    NumberIdentifiers,
+    BodyParameter<
+      NumberIdentifiers,
+      "body",
+      "List identifiers for a Number resource"
+    >,
     TeamsAvailableCapabilities
   >;
 
@@ -941,7 +970,7 @@ op listNumbers is RpcOperation<
   {
     @statusCode statusCode: 200;
     @header contentType: "application/json";
-    @body success: PagedNumberList;
+    @bodyRoot success: PagedNumberList;
     ...CountOfRecordsHeader;
   }
 >;

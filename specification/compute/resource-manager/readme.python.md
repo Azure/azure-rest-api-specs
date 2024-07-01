@@ -37,9 +37,10 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2023-09-01"
+default-api-version: "2024-03-01"
 clear-output-folder: true
 batch:
+  - tag: package-2024-03-01-only
   - tag: package-2023-10-02-only
   - tag: package-2023-09-01-only
   - tag: package-2023-07-03-only
@@ -92,6 +93,16 @@ batch:
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/
 perform-load: false
 clear-output-folder: false
+```
+
+### Tag: package-2024-03-01-only
+
+These settings apply only when `--tag=package-2024-03-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-03-01-only'
+namespace: azure.mgmt.compute.v2024_03_01
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2024_03_01
 ```
 
 ### Tag: package-2023-10-02-only

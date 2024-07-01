@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
@@ -81,7 +80,12 @@ model PipelineStage is Record<unknown> {
 @armResourceOperations
 interface Pipelines {
   get is ArmResourceRead<Pipeline>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Pipeline>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Pipeline,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmCustomPatchSync<Pipeline>;
   delete is ArmResourceDeleteWithoutOkAsync<Pipeline>;
   listByInstance is ArmResourceListByParent<Pipeline>;

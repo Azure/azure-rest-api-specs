@@ -8,31 +8,42 @@ emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-core/all"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
     emitter-output-dir: "{project-root}/.."
     examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/Azure.AI.DocumentTranslation/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.Translator.Document"
-    namespace: Azure.AI.Translator.Document
+    flavor: azure
+    package-dir: "Azure.AI.Translation.Document"
+    namespace: Azure.AI.Translation.Document
     clear-output-folder: true
     model-namespace: false
-    flavor: azure
+    generate-sample-project: false
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-translator-document"
-    package-name: "azure-ai-translator-document"
+    flavor: azure
+    package-dir: "azure-ai-translation-document"
+    package-name: "azure-ai-translation-document"
     package-mode: dataplane
-    flavor: azure
+    package-version: "1.1.0b1"
+    generate-sample-project: false
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-translator-document"
-    namespace: com.azure.ai.translator.document
+    package-dir: "azure-ai-translation-document"
+    namespace: com.azure.ai.translation.document
+    partial-update: true
+    generate-tests: false
     flavor: azure
+    stream-style-serialization: false
+    generate-sample-project: false
   "@azure-tools/typespec-ts":
-    package-dir: "azure-ai-translator-document"
+    package-dir: "ai-translation-document-rest"
+    generateMetadata: false
+    generateTest: false
     packageDetails:
-      name: "@azure-rest/azure-ai-translator-document"
-      description: "Azure.AI.Translator.Document"
+      name: "@azure-rest/ai-translation-document"
+      description: "Microsoft Translation Document"
     flavor: azure
+    generate-sample-project: false
