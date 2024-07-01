@@ -22,15 +22,11 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnectionResource,
-    Response =
-      | ArmAcceptedLroResponse<
-          LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnectionResource> & Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmResourceUpdatedResponse<PrivateEndpointConnectionResource>
-      | ArmResourceCreatedResponse<
-          PrivateEndpointConnectionResource,
-          LroHeaders = {}
-        >
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnectionResource> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmResourceUpdatedResponse<PrivateEndpointConnectionResource> | ArmResourceCreatedResponse<
+      PrivateEndpointConnectionResource,
+      LroHeaders = {}
+    >
   >;
   /** Delete the private endpoint connection */
   delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnectionResource>;
