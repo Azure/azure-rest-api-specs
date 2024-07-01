@@ -1458,7 +1458,18 @@
         },
         "autoUpgradeProfile": {
           "$ref": "#/definitions/AutoUpgradeProfile"
-        }
+        },
+        "nginxAppProtect": {
+          "type": "object",
+          "description": "Settings for NGINX App Protect (NAP)",
+          "required": [
+            "webApplicationFirewallSettings"
+          ],
+          "properties": {
+            "webApplicationFirewallSettings": {
+              "$ref": "#/definitions/WebApplicationFirewallSettings"
+            }
+         }
       }
     },
     "NginxDeploymentUpdateParameters": {
