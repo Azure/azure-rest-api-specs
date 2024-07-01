@@ -1051,7 +1051,7 @@ model FileProperties {
   lastModified: utcDateTime;
 
   @doc("The length of the file.")
-  contentLength: int64;
+  contentLength: string;
 
   @doc("The content type of the file.")
   contentType?: string;
