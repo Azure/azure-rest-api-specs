@@ -6,6 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -35,17 +36,17 @@ interface TenantConfigurations {
   /**
    * Create the tenant configuration. If configuration already exists - update it. User has to be a Tenant Admin for this operation.
    */
-  create is ArmResourceCreateOrReplaceSync<TenantConfiguration>;
+  create is ArmResourceCreateOrReplaceSync<TenantConfiguration, TenantBaseParameters>;
 
   /**
    * Delete the tenant configuration. User has to be a Tenant Admin for this operation.
    */
-  delete is ArmResourceDeleteSync<TenantConfiguration>;
+  delete is ArmResourceDeleteSync<TenantConfiguration, TenantBaseParameters>;
 
   /**
    * Gets list of the tenant configurations.
    */
-  list is ArmResourceListByParent<TenantConfiguration>;
+  list is ArmResourceListByParent<TenantConfiguration, TenantBaseParameters>;
 }
 
 @@doc(TenantConfigurations.create::parameters.resource,
