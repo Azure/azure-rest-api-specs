@@ -31,3 +31,86 @@ namespace Language.ConversationsClientCustomizations;
   "csharp"
 );
 @@clientName(ShortAnswerOptions.topAnswersWithSpan, "top", "csharp");
+
+@@clientName(AnalyzeConversationLROTask,
+  "AnalyzeConversationJobTask",
+  "csharp"
+);
+
+@@clientName(BasePrediction, "PredictionBase", "csharp");
+
+@@clientName(LengthUnit.Pt, "Point", "csharp");
+@@clientName(LogicalOperationKind.AND, "And", "csharp");
+@@clientName(LogicalOperationKind.OR, "Or", "csharp");
+
+@@clientName(redactionCharacter.perCent, "Percent", "csharp");
+
+@@clientName(TemporalModifier.AfterApprox, "AfterApproximate", "csharp");
+@@clientName(TemporalModifier.BeforeApprox, "BeforeApproximate", "csharp");
+@@clientName(TemporalModifier.Approx, "Approximate", "csharp");
+
+@@clientName(RedactedTranscriptContent.itn, "InverseTextNormalized", "csharp");
+@@clientName(RedactedTranscriptContent.maskedItn,
+  "MaskedInverseTextNormalized",
+  "csharp"
+);
+@@clientName(Error, "ConversationError", "csharp");
+
+@@clientName(AnalysisParameters, "AnalysisConfig", "csharp");
+@@clientName(LuisParameters, "LuisConfig", "csharp");
+@@clientName(ConversationParameters, "ConversationConfig", "csharp");
+@@clientName(QuestionAnsweringParameters, "QustionAnsweringConfig", "csharp");
+@@clientName(AnswersOptions, "QuestionAnswersConfig", "csharp");
+@@clientName(ShortAnswerOptions, "ShortAnswerConfig", "csharp");
+@@clientName(ConversationCallingOptions, "ConversationCallingConfig", "csharp");
+
+@@clientName(ConversationAnalysisOptions,
+  "ConversationAnalysisInput",
+  "csharp"
+);
+
+@@clientName(Tasks, "ConversationTasks", "csharp");
+@@clientName(State, "ConversationTaskState", "csharp");
+@@clientName(role, "ParticipantRole", "csharp");
+@@clientName(LuisCallingOptions, "LuisCallingConfig", "csharp");
+
+@@clientName(Entity, "NamedEntity", "csharp");
+
+@@clientName(CustomConversationSummarizationTaskParameters,
+  "CustomConversationSummarizationTaskContent",
+  "csharp"
+);
+@@clientName(ConversationTaskParameters, "ConversationTaskContent", "csharp");
+@@clientName(ConversationSummarizationTaskParameters,
+  "ConversationSummarizationTaskContent",
+  "csharp"
+);
+@@clientName(ConversationPiiTaskParameters,
+  "ConversationPiiTaskContent",
+  "csharp"
+);
+
+@@clientName(Conversation, "ConversationInput", "csharp");
+
+@@clientName(ConversationPiiCategoriesExclude,
+  "ConversationPiiCategoryExclusions",
+  "csharp"
+);
+@@clientName(ErrorCode, "ConversationErrorCode", "csharp");
+
+@@clientName(BaseResolution, "ResolutionBase", "csharp");
+@@clientName(BaseExtraInformation,
+  "ConversationEntityExtraInformation",
+  "csharp"
+);
+
+@@clientName(TranscriptConversationItem.itn, "InverseTextNormalized", "csharp");
+@@clientName(TranscriptConversationItem.maskedItn,
+  "MaskedInverseTextNormalized",
+  "csharp"
+);
+
+@@clientName(AnalyzeConversationLROTaskKind,
+  "AnalyzeConversationJobTaskKind",
+  "csharp"
+);

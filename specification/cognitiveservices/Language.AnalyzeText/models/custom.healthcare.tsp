@@ -1,9 +1,10 @@
 import "@typespec/versioning";
 
+using Language.Text;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-namespace Language.AnalyzeText;
+namespace Language.Text;
 /** Supported parameters for a custom Healthcare task. */
 @added(Versions.v2023_11_15_preview)
 model CustomHealthcareTaskParameters is CustomTaskParameters {

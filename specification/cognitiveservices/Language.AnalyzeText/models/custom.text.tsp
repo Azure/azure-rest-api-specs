@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-namespace Language.AnalyzeText;
+namespace Language.Text;
 
 /** Supported parameters for a Custom Entities task. */
 model CustomEntitiesTaskParameters is CustomTaskParameters {
