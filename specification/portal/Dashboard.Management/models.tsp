@@ -188,6 +188,7 @@ model DashboardPartMetadata {
   type: DashboardPartMetadataType;
 }
 
+@doc("The dashboard part metadata type.")
 union DashboardPartMetadataType {
   @doc("The markdown part type.")
   markdown: "Extension/HubsExtension/PartType/MarkdownPart",
