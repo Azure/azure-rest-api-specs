@@ -11753,6 +11753,11 @@
           "$ref": "#/definitions/CloudSuitability",
           "description": "Gets a value indicating whether machine is suitable for the cloud platform\nselected.",
           "readOnly": true
+        },
+        "avsTargetNode": {
+          "type": "string",
+          "description": "Gets the Avs Target Type for Machine.",
+          "readOnly": true
         }
       }
     },
@@ -11977,6 +11982,14 @@
           "items": {
             "$ref": "#/definitions/ExternalStorageType"
           }
+        },
+        "avsAssessmentScenario": {
+          "$ref": "#/definitions/AvsAssessmentScenario",
+          "description": "AVS Assessment Scenario."
+        },
+        "isVcfByolEnabled": {
+          "type": "boolean",
+          "description": "Is VCF license applied"
         },
         "costComponents": {
           "type": "array",
@@ -12221,6 +12234,13 @@
         "targetLocations": {
           "type": "array",
           "description": "List of locations where this storage type is available.",
+          "items": {
+            "$ref": "#/definitions/AzureLocation"
+          }
+        },
+        "reservedInstanceSupportedLocations": {
+          "type": "array",
+          "description": "List of locations where the RI options for storage type is available.",
           "items": {
             "$ref": "#/definitions/AzureLocation"
           }
@@ -12554,7 +12574,8 @@
         "Unknown",
         "AV36",
         "AV36P",
-        "AV52"
+        "AV52",
+        "AV64"
       ],
       "x-ms-enum": {
         "name": "AzureAvsNodeType",
@@ -18657,6 +18678,18 @@
             "description": "ANF external storage with Ultra SKU."
           }
         ]
+      }
+    },
+    "AvsAssessmentScenario": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "NewAvsSddc",
+        "AvsSddcExpansion"
+      ],
+      "x-ms-enum": {
+        "name": "AvsAssessmentScenario",
+        "modelAsString": true
       }
     },
     "FacilitySettings": {
