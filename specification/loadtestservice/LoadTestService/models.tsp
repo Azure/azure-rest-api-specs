@@ -498,7 +498,7 @@ model TestInputArtifacts {
 model FileInfo {
   @doc("Name of the file.")
   @key
-  @visibility
+  @visibility("read")
   fileName: string;
 
   @doc("File URL.")
