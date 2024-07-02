@@ -30,6 +30,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Case-sensitive name"
+#suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
 @doc("A HealthDataAIServicesProviderHub resource")
 model DeidService is TrackedResource<DeidServiceProperties> {
   @doc("The name of the deid service")
@@ -40,6 +41,7 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
+  
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 }
@@ -58,26 +60,29 @@ model DeidUpdate {
 model DeidPropertiesUpdate
   is OptionalProperties<UpdateableProperties<DeidServiceProperties>>;
 
+#suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
 @Azure.Core.lroStatus
 @doc("The status of the current operation.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  ResourceProvisioningState,
 
-  @doc("The resource is provisioning")
-  Provisioning,
+  /** The resource is being provisioned. */
+  Provisioning: "Provisioning",
 
-  @doc("The resource is updating")
-  Updating,
+  /** The resource is being updated. */
+  Updating: "Updating",
 
-  @doc("The resource is deleting")
-  Deleting,
+  /** The resource is being deleted. */
+  Deleting: "Deleting",
 
-  @doc("The resource is accepted")
-  Accepted,
+  /** The resource provisioning request has been accepted. */
+  Accepted: "Accepted",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."

@@ -265,6 +265,10 @@
               "$ref": "#/definitions/DeidService"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -571,6 +575,10 @@
               "$ref": "#/definitions/PrivateEndpointConnectionResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -711,17 +719,17 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType": {
       "type": "string",
-      "description": "The kind of managed identity assigned to this resource.",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
       "enum": [
         "None",
         "SystemAssigned",
         "UserAssigned",
-        "SystemAssigned, UserAssigned"
+        "SystemAssigned,UserAssigned"
       ],
       "x-ms-enum": {
-        "name": "ManagedIdentityType",
+        "name": "ManagedServiceIdentityType",
         "modelAsString": true,
         "values": [
           {
@@ -741,40 +749,11 @@
           },
           {
             "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned, UserAssigned",
+            "value": "SystemAssigned,UserAssigned",
             "description": "System and user assigned managed identity."
           }
         ]
       }
-    },
-    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
-      "type": "object",
-      "description": "A managed identity assigned by the user.",
-      "properties": {
-        "clientId": {
-          "type": "string",
-          "description": "The active directory client identifier for this principal."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The active directory identifier for this principal."
-        }
-      }
-    },
-    "Azure.ResourceManager.PrivateEndpointConnection": {
-      "type": "object",
-      "description": "The private endpoint connection resource",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The private endpoint connection properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "DeidPropertiesUpdate": {
       "type": "object",
@@ -793,11 +772,7 @@
         "properties": {
           "$ref": "#/definitions/DeidServiceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
@@ -849,7 +824,7 @@
           "type": "array",
           "description": "List of private endpoint connections.",
           "items": {
-            "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
         },
@@ -885,14 +860,15 @@
       "description": "The template for adding optional properties.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType",
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
           }
         }
       }
@@ -904,11 +880,7 @@
         "properties": {
           "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -945,11 +917,7 @@
         "properties": {
           "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1013,22 +981,22 @@
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "The resource is provisioning"
+            "description": "The resource is being provisioned."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The resource is updating"
+            "description": "The resource is being updated."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The resource is deleting"
+            "description": "The resource is being deleted."
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "The resource is accepted"
+            "description": "The resource provisioning request has been accepted."
           }
         ]
       }
@@ -1042,7 +1010,7 @@
       ],
       "x-ms-enum": {
         "name": "PublicNetworkAccess",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Enabled",
@@ -1053,24 +1021,6 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "The public network access is disabled"
-          }
-        ]
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Supported API versions for the Microsoft.HealthDataAIServices resource provider.",
-      "enum": [
-        "2024-02-28-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_02_28_preview",
-            "value": "2024-02-28-preview",
-            "description": "The 2024-02-28-preview version."
           }
         ]
       }
