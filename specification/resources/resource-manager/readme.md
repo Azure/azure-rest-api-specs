@@ -1011,11 +1011,15 @@ directive:
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyDefinitions.json
-    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policyDefinitionVersions.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policySetDefinitions.json
-    where: $.paths
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: policySetDefinitionVersions.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyExemptions.json
@@ -1107,7 +1111,7 @@ directive:
     reason: OperationsAPI will come from Resources
   - suppress: IntegerTypeMustHaveFormat
     from: deploymentScripts.json
-    reason: Tooling issue, default is int32, explictly mentioning the format as per doc, it still flags breaking change.
+    reason: Tooling issue, default is int32, explicitly mentioning the format as per doc, it still flags breaking change.
   - suppress: ResourceNameRestriction
     from: deploymentScripts.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
@@ -1349,6 +1353,21 @@ directive:
   - suppress: TenantLevelAPIsNotAllowed
     from: resources.json
     reason: Tenant level API's are allowed as an exception in ARM repo. It is a breaking change to modify it.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyDefinitions.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyDefinitionVersions.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policySetDefinitions.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policySetDefinitionVersions.json
+    reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: policyAssignments.json
+    reason: Linter rule limitation. The API has always supported management group scope.
   - suppress: XmsPageableForListCalls
     from: resources.json
     reason: Shared swagger with other teams. We cannot make changes to the API as we don't own it.
@@ -1361,9 +1380,33 @@ directive:
   - suppress: PutResponseCodes
     from: resources.json
     reason: Breaking change in order to change the API response code.
+  - suppress: PutResponseCodes
+    from: policyDefinitions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: PutResponseCodes
+    from: policySetDefinitions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: PutResponseCodes
+    from: policyAssignments.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
   - suppress: AvoidAdditionalProperties
     from: resources.json
     reason: Breaking change in order to change the property names for multiple API's. Will fix in the future.
+  - suppress: AvoidAdditionalProperties
+    from: policyDefinitions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: AvoidAdditionalProperties
+    from: policyDefinitionVersions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: AvoidAdditionalProperties
+    from: policySetDefinitions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: AvoidAdditionalProperties
+    from: policySetDefinitionVersions.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: AvoidAdditionalProperties
+    from: policyAssignments.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
   - suppress: XmsExamplesRequired
     from: resources.json
     reason: Xms Examples required is a pre-existing lint error. Not related to this version release. Will fix in the future.
@@ -1396,8 +1439,8 @@ directive:
     reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
   - suppress: DeleteResponseCodes
     from: deploymentStacks.json
-    reason: Deployment stacks supports synchronous delete with 200 reponse.
-  - supress: OperationsAPIImplementation
+    reason: Deployment stacks supports synchronous delete with 200 response.
+  - suppress: OperationsAPIImplementation
     from: deploymentStacks.json
     reason: This comes from resources.json
   - suppress: PathForPutOperation
