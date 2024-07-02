@@ -43,3 +43,24 @@ interface DynamicConfiguration{
     @doc("List Dynamic Configuration Resources")
     listByParent is ArmResourceListByParent<DynamicConfigurationResource>;
 }
+
+@armResourceOperations
+interface Configurations {
+    @doc("Get a Configuration Resource")
+    get is ArmResourceRead<Configuration>;
+
+    @doc("Create or update a Configuration Resource")
+    createOrUpdate is ArmResourceCreateOrReplaceAsync<Configuration>;
+
+    @doc("update a Configuration Resource")
+    update is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
+
+    @doc("Delete a Configuration Resource")
+    delete is ArmResourceDeleteWithoutOkAsync<Configuration>;
+
+    @doc("List Configuration Resources")
+    listByResourceGroup is ArmResourceListByParent<Configuration>;
+
+    @doc("List Configuration Resources")
+    listBySubscription is ArmListBySubscription<Configuration>;
+}
