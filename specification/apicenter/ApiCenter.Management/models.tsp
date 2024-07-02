@@ -266,6 +266,21 @@ model MetadataSchemaProperties {
   assignedTo?: MetadataAssignment[];
 }
 
+@added(Versions.v2024_05_01)
+@doc("The import from Azure API Management request.")
+model ImportFromApimRequest {
+  @doc("An entity the metadata schema is requested for.")
+  sourceResourceIds?: string[];
+}
+
+@added(Versions.v2024_05_01)
+@doc("The import operation was successfully completed.")
+model ImportFromApimSuccessResult {
+    @doc("The successful response status code.")
+    @statusCode code: 200;
+}
+
+
 @doc("Assignment metadata")
 model MetadataAssignment {
   @doc("The entities this metadata schema component gets applied to.")
