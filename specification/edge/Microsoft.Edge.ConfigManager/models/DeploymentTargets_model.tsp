@@ -20,6 +20,9 @@ namespace Microsoft.Edge;
 
 @doc("Deployment Targets Resource Properties")
 model DeploymentTargetsResourceProperties {
+    @doc("Display Name of the Deployment Targets Resource")
+    displayName: string;
+    
     @doc("Custom location for the deployment target")
     customLocation: string;
 

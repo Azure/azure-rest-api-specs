@@ -17,9 +17,6 @@ namespace Microsoft.Edge;
 @doc("Deployment Targets Resource")
 model DeploymentTargetsResource is TrackedResource<DeploymentTargetsResourceProperties>{
     ...ResourceNameParameter<DeploymentTargetsResource>;
-
-    @doc("Display Name of the Deployment Targets Resource")
-    displayName: string;
 }
 
 @armResourceOperations
