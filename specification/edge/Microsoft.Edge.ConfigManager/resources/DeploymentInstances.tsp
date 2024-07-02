@@ -36,4 +36,7 @@ interface DeploymentInstances{
 
     @doc("Delete a Deployment Instances Resource")
     delete is ArmResourceDeleteSync<DeploymentInstancesResource>;
+
+    @doc("List Deployment Instances Resources")
+    listByParent is ArmResourceListByParent<DeploymentInstancesResource>;
 }

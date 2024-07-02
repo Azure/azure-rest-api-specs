@@ -19,7 +19,7 @@ model UseCaseVersionResource is ExtensionResource<UseCaseVersionResourceProperti
     ...ResourceNameParameter<UseCaseVersionResource>;
 
     @doc("Kind of the resource")
-    kind: string = "UseCase";
+    kind: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
@@ -28,7 +28,7 @@ model ConfigurationVersionResource is ExtensionResource<ConfigurationVersionReso
     ...ResourceNameParameter<ConfigurationVersionResource>;
 
     @doc("Kind of the resource")
-    kind: string = "Configuration";
+    kind: string;
 }
 
 @armResourceOperations

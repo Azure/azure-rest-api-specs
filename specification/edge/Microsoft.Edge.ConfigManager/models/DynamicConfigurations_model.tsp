@@ -19,7 +19,7 @@ namespace Microsoft.Edge;
 
 @doc("Configuration Properties")
 model ConfigurationProperties {
-    @doc("Timezone")
+    @doc("Timezone of the configuration")
     timezone: string;
 
     @doc("The status of the last operation.")

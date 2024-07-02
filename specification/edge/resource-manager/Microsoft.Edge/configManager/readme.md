@@ -1,6 +1,6 @@
 # configmanager
 
-> see https://aka.ms/autorest2024-06-01-preview
+> see https://aka.ms/autorest
 
 This is the AutoRest configuration file for configmanager.
 
@@ -26,6 +26,7 @@ These are the global settings for the configmanager.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: providerHub
 tag: package-2024-06-01-preview
 ```
 
