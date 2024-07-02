@@ -18,7 +18,7 @@ namespace Microsoft.Portal;
 @tenantResource
 model TenantConfiguration
   is Azure.ResourceManager.ProxyResource<TenantConfigurationPropertiesWithProvisioningState> {
-    ...ResourceNameParameter<
+  ...ResourceNameParameter<
     Resource = TenantConfiguration,
     KeyName = "configurationName",
     SegmentName = "tenantConfigurations",
@@ -36,7 +36,10 @@ interface TenantConfigurations {
   /**
    * Create the tenant configuration. If configuration already exists - update it. User has to be a Tenant Admin for this operation.
    */
-  create is ArmResourceCreateOrReplaceSync<TenantConfiguration, TenantBaseParameters>;
+  create is ArmResourceCreateOrReplaceSync<
+    TenantConfiguration,
+    TenantBaseParameters
+  >;
 
   /**
    * Delete the tenant configuration. User has to be a Tenant Admin for this operation.
