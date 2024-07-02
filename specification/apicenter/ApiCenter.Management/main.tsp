@@ -181,9 +181,10 @@ op ArmResourceRead<
 @put
 op ArmResourceCreateOrReplaceSync<
   TResource extends Foundations.Resource,
-  TBaseParameters = BaseParameters<TResource> & IfMatchParameters<TResource>
+  TBaseParameters = BaseParameters<TResource> 
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
+  ...IfMatchParameters<TResource>,
 
   @doc("Resource create parameters.")
   @bodyRoot
