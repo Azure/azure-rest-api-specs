@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
+    "api-version": "2024-09-01-preview",
+    "GenerateSasTokenParameters": {
+      "resourceType": "kv",
+      "signedParameters": {
+        "key": "test*",
+        "label": "prod",
+        "tags": [
+          "group=test-group",
+          "region=eastus"
+        ]
+      },
+      "exp": "2024-09-01T00:00:00",
+      "cch": 3600,
+      "sasKind": "Primary"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tokenValue": "000000000000000000000000000000000000000000000000000000",
+        "resourceType": "kv",
+        "signedParameters": {
+          "key": "test*",
+          "label": "prod",
+          "tags": [
+            "group=test-group",
+            "region=eastus"
+          ]
+        },
+        "exp": "2024-09-01T00:00:00",
+        "cch": 3600,
+        "sasKind": "Primary"
+      }
+    }
+  }
+}
