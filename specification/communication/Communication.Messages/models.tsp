@@ -374,3 +374,14 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
 }
+
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};
