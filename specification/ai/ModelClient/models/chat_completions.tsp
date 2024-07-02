@@ -351,7 +351,7 @@ model ChatResponseMessage {
   toolCalls?: ChatCompletionsToolCall[];
 }
 
-// tool_choice: "auto" | "none" | "required" | { "type": "function", "name": string }
+// tool_choice: "auto" | "none" | "required" | {"type": "function", "function": {"name": string}}
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
 alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCompletionsNamedToolSelection;

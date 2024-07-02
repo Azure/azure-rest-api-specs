@@ -132,15 +132,16 @@ union ModelType {
 
 alias AdditionalRequestHeaders = {
   @doc("""
-    Controls what happens if unknown parameters are passed in the JSON request payload.
-    This sets the HTTP request header `unknown-parameters`.
+    Controls what happens if extra parameters, undefined by the REST API,
+    are passed in the JSON request payload.
+    This sets the HTTP request header `extra-parameters`.
     """)
-  @header("unknown-parameters")
-  unknown_params?: UnknownParams;
+  @header("extra-parameters")
+  extra_params?: ExtraParameters;
 };
 
-@doc("Controls what happens if unknown parameters are passed in the JSON request payload.")
-union UnknownParams {
+@doc("Controls what happens if extra parameters, undefined byt he REST ApI are passed in the JSON request payload.")
+union ExtraParameters {
   string,
 
   @doc("The service will error if it detected unknown parameters in the request payload. This is the service default.")
