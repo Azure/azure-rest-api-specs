@@ -132,23 +132,23 @@ union ModelType {
 
 alias AdditionalRequestHeaders = {
   @doc("""
-    Controls what happens if unknown parameters are passed in the JSON request payload.
-    This sets the HTTP request header `unknown-parameters`.
+    Controls what happens if extra parameters are passed in the JSON request payload.
+    This sets the HTTP request header `extra-parameters`.
     """)
-  @header("unknown-parameters")
-  unknown_params?: UnknownParams;
+  @header("extra-parameters")
+  extra_params?: ExtraParams;
 };
 
-@doc("Controls what happens if unknown parameters are passed in the JSON request payload.")
-union UnknownParams {
+@doc("Controls what happens if extra parameters are passed in the JSON request payload.")
+union ExtraParams {
   string,
 
-  @doc("The service will error if it detected unknown parameters in the request payload. This is the service default.")
+  @doc("The service will error if it detected extra parameters in the request payload. This is the service default.")
   error: "error",
 
-  @doc("The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
+  @doc("The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
   drop: "drop",
 
-  @doc("The service will pass unknown parameters to the back-end AI model.")
+  @doc("The service will pass extra parameters to the back-end AI model.")
   pass_through: "pass_through",
 }
