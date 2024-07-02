@@ -6371,6 +6371,21 @@
         }
       }
     },
+    "VirtualHardDiskDownloadStatus": {
+      "type": "object",
+      "description": "The download status of the virtual hard disk",
+      "properties": {
+        "downloadedSizeInMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The downloaded sized of the virtual hard disk in MB"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of downloading virtual hard disk [Succeeded, Failed, InProgress]"
+        }
+      }
+    },
     "VirtualHardDiskListResult": {
       "type": "object",
       "description": "The response of a VirtualHardDisk list operation.",
@@ -6473,26 +6488,15 @@
           "description": "Provisioning status of the vhd"
         },
         "downloadStatus": {
-          "$ref": "#/definitions/VirtualHardDiskStatusDownloadStatus",
+          "$ref": "#/definitions/VirtualHardDiskDownloadStatus",
           "description": "The download status of the virtual hard disk"
         },
         "uploadStatus": {
-          "$ref": "#/definitions/VirtualHardDiskStatusUploadStatus",
+          "$ref": "#/definitions/VirtualHardDiskUploadStatus",
           "description": "The upload status of the virtual hard disk"
         }
       },
       "x-ms-client-flatten": true
-    },
-    "VirtualHardDiskStatusDownloadStatus": {
-      "type": "object",
-      "description": "The download status of the virtual hard disk",
-      "properties": {
-        "downloadedSizeInMB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The downloaded sized of the virtual hard disk in MB"
-        }
-      }
     },
     "VirtualHardDiskStatusProvisioningStatus": {
       "type": "object",
@@ -6508,17 +6512,6 @@
         }
       }
     },
-    "VirtualHardDiskStatusUploadStatus": {
-      "type": "object",
-      "description": "The upload status of the virtual hard disk",
-      "properties": {
-        "uploadedSizeInMB": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The uploaded sized of the virtual hard disk in MB"
-        }
-      }
-    },
     "VirtualHardDiskTagsUpdate": {
       "type": "object",
       "description": "The type used for updating tags in VirtualHardDisk resources.",
@@ -6529,6 +6522,21 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "VirtualHardDiskUploadStatus": {
+      "type": "object",
+      "description": "The upload status of the virtual hard disk",
+      "properties": {
+        "uploadedSizeInMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The uploaded sized of the virtual hard disk in MB"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]"
         }
       }
     },
