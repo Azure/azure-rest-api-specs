@@ -1,14 +1,12 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Autorest;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -114,10 +112,6 @@ model ComputeProfile {
   platformFaultDomainCount?: int32;
 }
 
-@doc("BaseVirtualMachineProfile")
-@useRef("../../../../../compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2023-09-01/virtualMachineScaleSet.json#/definitions/VirtualMachineScaleSetVMProfile")
-model BaseVirtualMachineProfile {}
-
 @doc("Specifications about a VM Size. This will also contain the corresponding rank and weight in future.")
 model VmSizeProfile {
   @doc("The Sku name (e.g. 'Standard_DS1_v2')")
@@ -218,6 +212,7 @@ interface Fleets {
     Fleet,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @parameterVisibility
   update is ArmCustomPatchAsync<Fleet, FleetUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Fleet>;
   listByResourceGroup is ArmResourceListByParent<Fleet>;

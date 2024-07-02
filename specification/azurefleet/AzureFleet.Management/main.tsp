@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
 import "./fleet.tsp";
+import "./baseVirtualMachineProfile.tsp";
 import "./virtualMachineScaleSet.tsp";
 
 using TypeSpec.Http;
