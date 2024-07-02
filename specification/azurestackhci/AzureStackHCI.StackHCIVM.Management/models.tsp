@@ -1187,9 +1187,6 @@ model VirtualHardDiskDownloadStatus {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
   @doc("The downloaded sized of the virtual hard disk in MB")
   downloadedSizeInMB?: int64;
-
-  @doc("The status of downloading virtual hard disk [Succeeded, Failed, InProgress]")
-  status?: Status;
 }
 
 @added(Versions.v2024_05_01_alpha)
