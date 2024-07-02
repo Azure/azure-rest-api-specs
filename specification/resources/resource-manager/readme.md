@@ -97,6 +97,10 @@ input-file:
 - Microsoft.Authorization/stable/2024-04-01/policySetDefinitions.json
 - Microsoft.Authorization/stable/2024-04-01/policySetDefinitionVersions.json
 - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-bicep-2023-11
