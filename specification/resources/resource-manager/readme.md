@@ -258,6 +258,15 @@ input-file:
 - Microsoft.Resources/preview/2023-07-01-preview/changes.json
 ```
 
+### Tag: package-changes-2024-06-01-preview
+
+These settings apply only when `--tag=package-changes-2024-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2024-06-01-preview'
+input-file:
+- Microsoft.Resources/preview/2024-06-01-preview/changes.json
+```
+
 ### Tag: package-snapshots-2022-11
 
 These settings apply only when `--tag=package-snapshots-2022-11` is specified on the command line.
@@ -1355,6 +1364,9 @@ directive:
   - suppress: AvoidAdditionalProperties
     from: resources.json
     reason: Breaking change in order to change the property names for multiple API's. Will fix in the future.
+  - suppress: AvoidAdditionalProperties
+    from: changes.json
+    reason: "Change properties including the dictionary of individual property changes are dynamic types. where clause is not working on all parent fields using this property bag, hence we're suppressing the entire file for now."
   - suppress: XmsExamplesRequired
     from: resources.json
     reason: Xms Examples required is a pre-existing lint error. Not related to this version release. Will fix in the future.
