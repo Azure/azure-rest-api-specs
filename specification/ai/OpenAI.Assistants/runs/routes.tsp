@@ -28,10 +28,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @route("/threads/{threadId}/runs")
 @doc("Creates a new run for an assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op createRun(
-  @path threadId: string,
-  @bodyRoot createRunOptions: CreateRunOptions,
-): ThreadRun;
+op createRun(@path threadId: string, ...CreateRunOptions): ThreadRun;
 
 /**
  * Gets a list of runs for a specified thread.
