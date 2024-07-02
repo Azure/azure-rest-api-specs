@@ -11,8 +11,6 @@ async function checkAllUnder(path: string, responseCache?: string) {
     command += ` -_ResponseCache ${responseCache}`;
   }
 
-  console.log(command);
-
   return await execa("pwsh", ["-Command", command], { cwd: repoRoot, reject: false });
 }
 
