@@ -57,7 +57,8 @@ interface TestRunOperations {
   listMetrics is LoadTestRun.listMetrics;
   listTestRuns is LoadTestRun.listTestRuns;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
-  stopTestRun is LoadTestRun.stop;
+  @clientName("stopTestRun", "javascript,python,java,csharp,go")
+  stop is LoadTestRun.stop;
 }
 
 @client({
@@ -81,5 +82,6 @@ interface TestProfileRunOperations {
   getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
   listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
-  stopTestProfileRun is TestProfileRunAdministration.stop;
+  @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
+  stop is TestProfileRunAdministration.stop;
 }

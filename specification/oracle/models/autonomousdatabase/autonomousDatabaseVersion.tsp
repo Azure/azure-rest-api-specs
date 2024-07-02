@@ -26,7 +26,7 @@ model AutonomousDbVersionProperties {
   @visibility("read")
   @minLength(1)
   @maxLength(255)
-  version: string;
+  version?: string;
 
   @doc("The Autonomous Database workload type")
   @visibility("read")
