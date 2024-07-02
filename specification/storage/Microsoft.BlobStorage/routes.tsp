@@ -161,8 +161,6 @@ interface BlobServiceBatch {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-
-    
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
   } | StorageError;
@@ -176,8 +174,8 @@ interface FilterBlobsService {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   getBlobs(
-    ...FilterBlobsWhere;
-    ...FilterBlobsInclude;
+    ...FilterBlobsWhereParameter;
+    ...FilterBlobsIncludeParameter;
     ...TimeoutParameter;
     ...MarkerParameter;
     ...MaxResultsParameter;
@@ -203,7 +201,7 @@ interface BlobServiceContainer {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   createContainer(
     ...ContainerNameParameter;
-    // TODO: ...MetadataParameter;
+    // TODO: x-ms-meta headers
     ...BlobPublicAccessParameter;
     ...DefaultEncryptionScopeParameter;
     ...DenyEncryptionScopeOverrideParameter;
@@ -447,8 +445,8 @@ interface BlobListService {
     ...ContainerNameParameter;
     ...MarkerParameter;
     ...MaxResultsParameter;
-    ...FilterBlobsWhere;
-    ...FilterBlobsInclude;
+    ...FilterBlobsWhereParameter;
+    ...FilterBlobsIncludeParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
@@ -478,7 +476,7 @@ interface ContainerLeaseService {
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...ProposedLeaseIdOptional;
+    ...ProposedLeaseIdOptionalParameter;
     ...IfModifiedSinceParameter;
     ...IfUnmodifiedSinceParameter;
   ): {
@@ -505,7 +503,7 @@ interface ContainerReleaseLeaseService {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   releaseLease(
     ...ContainerNameParameter;
-    ...LeaseIdRequired;
+    ...LeaseIdRequiredParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
@@ -534,7 +532,7 @@ interface ContainerRenewLeaseService {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   renewLease(
     ...ContainerNameParameter;
-    ...LeaseIdRequired;
+    ...LeaseIdRequiredParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
@@ -590,8 +588,8 @@ interface ContainerChangeLeaseService {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   changeLease(
     ...ContainerNameParameter;
-    ...LeaseIdRequired;
-    ...ProposedLeaseIdRequired;
+    ...LeaseIdRequiredParameter;
+    ...ProposedLeaseIdRequiredParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
@@ -621,13 +619,13 @@ interface ContainerListBlobsService {
     ...PrefixParameter;
     ...MarkerParameter;
     ...MaxResultsParameter;
-    ...ListBlobsInclude;
+    ...ListBlobsIncludeParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: ListBlobsFlatSegmentResponse; // TODO: XML
+    @body body: ListBlobsFlatSegmentResponse;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
@@ -648,7 +646,7 @@ interface ContainerListBlobsHierarchyService {
     ...PrefixParameter;
     ...MarkerParameter;
     ...MaxResultsParameter;
-    ...ListBlobsInclude;
+    ...ListBlobsIncludeParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
@@ -1311,7 +1309,7 @@ interface BlobLeaseAcquireService {
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     ...LeaseDurationParameter;
-    ...ProposedLeaseIdOptional;
+    ...ProposedLeaseIdOptionalParameter;
     ...IfModifiedSinceParameter;
     ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
@@ -1410,7 +1408,7 @@ interface BlobLeaseChangeService {
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     ...LeaseIdRequiredParameter;
-    ...ProposedLeaseIdOptional;
+    ...ProposedLeaseIdOptionalParameter;
     ...IfModifiedSinceParameter;
     ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
