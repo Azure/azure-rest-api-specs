@@ -1,4 +1,5 @@
 import path from "path";
+import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
@@ -63,6 +64,7 @@ export class FolderStructureRule implements Rule {
     // Verify tspconfig, main.tsp, examples/
     let mainExists = await host.checkFileExists(path.join(folder, "main.tsp"));
     let clientExists = await host.checkFileExists(path.join(folder, "client.tsp"));
+    let tspConfigExists = await host.checkFileExists(path.join(folder, "tspconfig.yaml"));
 
     if (!mainExists && !clientExists) {
       errorOutput += `Invalid folder structure: Spec folder must contain main.tsp or client.tsp.`;
@@ -74,12 +76,25 @@ export class FolderStructureRule implements Rule {
       success = false;
     }
 
-    if (
-      !packageFolder.includes("Shared") &&
-      !(await host.checkFileExists(path.join(folder, "tspconfig.yaml")))
-    ) {
+    if (!packageFolder.includes("Shared") && !tspConfigExists) {
       errorOutput += `Invalid folder structure: Spec folder must contain tspconfig.yaml.`;
       success = false;
+    }
+
+    if (tspConfigExists) {
+      const configText = await host.readTspConfig(folder);
+      const config = yamlParse(configText);
+      const rpFolder = config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
+      stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
+
+      if (rpFolder?.trim()?.endsWith("resource-manager") && !packageFolder.endsWith(".Management")) {
+        errorOutput += `Invalid folder structure: TypeSpec for resource-manager specs must be in a folder ending with '.Management'`;
+        success = false;
+      }
+      else if (!rpFolder?.trim()?.endsWith("resource-manager") && packageFolder.endsWith(".Management")) {
+        errorOutput += `Invalid folder structure: TypeSpec for data-plane specs or shared code must be in a folder NOT ending with '.Management'`;
+        success = false;
+      }
     }
 
     return {
