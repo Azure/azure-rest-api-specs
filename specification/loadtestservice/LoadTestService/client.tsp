@@ -21,6 +21,12 @@ namespace Customizations;
   service: Microsoft.LoadTestService,
 })
 interface AdministrationOperations {
+   // operations from test_profile_administration interface
+   createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
+   deleteTestProfile is TestProfileAdministration.deleteTestProfile;
+   getTestProfile is TestProfileAdministration.getTestProfile;
+   listTestProfiles is TestProfileAdministration.listTestProfiles;
+
   createOrUpdateTest is LoadTestAdministration.createOrUpdateTest;
   createOrUpdateAppComponents is LoadTestAdministration.createOrUpdateAppComponents;
   createOrUpdateServerMetricsConfig is LoadTestAdministration.createOrUpdateServerMetricsConfig;
@@ -35,12 +41,6 @@ interface AdministrationOperations {
   uploadTestFile is LoadTestAdministration.uploadTestFile;
   deleteTestFile is LoadTestAdministration.deleteTestFile;
   deleteTest is LoadTestAdministration.deleteTest;
-  // operations from test_profile_administration interface
-  createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
-  deleteTestProfile is TestProfileAdministration.deleteTestProfile;
-  getTestProfile is TestProfileAdministration.getTestProfile;
-  listTestProfiles is TestProfileAdministration.listTestProfiles;
-
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -49,6 +49,16 @@ interface AdministrationOperations {
   service: Microsoft.LoadTestService,
 })
 interface TestRunOperations {
+  // operations from test_profile_run_ops interface
+  @clientName("BeginTestProfileRun", "python");
+  createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
+  deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
+  getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
+  listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
+  @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
+  stop is TestProfileRunAdministration.stop;
+
   @clientName("BeginTestRun", "python")
   createOrUpdateTestRun is LoadTestRun.createOrUpdateTestRun;
   createOrUpdateAppComponents is LoadTestRun.createOrUpdateAppComponents;
@@ -70,13 +80,5 @@ interface TestRunOperations {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
   stop is LoadTestRun.stop;
-  // operations from test_profile_run_ops interface
-  @clientName("BeginTestProfileRun", "python");
-  createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
-  deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
-  getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
-  listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id"
-  @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
-  stop is TestProfileRunAdministration.stop;
+  
 }
