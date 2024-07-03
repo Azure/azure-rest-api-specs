@@ -37,8 +37,8 @@ These settings apply only when `--tag=package-2024-07-01-preview` is specified o
 ``` yaml $(tag) == 'package-2024-07-01-preview'
 input-file:
   - Microsoft.PortalServices/azurecoreexperiencesassistant/preview/2024-07-01-preview/azurecoreexperiencesassistant.json
-  - Microsoft.PortalServices/copilotSettings/preview/2024-04-01-preview/copilotSettings.json
-  - Microsoft.PortalServices/dashboards/preview/2024-04-01-preview/dashboards.json
+  - Microsoft.PortalServices/copilotSettings/preview/2024-07-01-preview/copilotSettings.json
+  - Microsoft.PortalServices/dashboards/preview/2024-07-01-preview/dashboards.json
   - Microsoft.PortalServices/extensions/preview/2024-07-01-preview/extensions.json
 suppressions:
   - code: EvenSegmentedPathForPutOperation
@@ -82,21 +82,33 @@ input-file:
   - Microsoft.PortalServices/extensions/preview/2024-04-01-preview/extensions.json
 suppressions:
   - code: EvenSegmentedPathForPutOperation
-    reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @singleton (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
+    reason: >
+     The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @singleton
+     (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646.
     from:
       - copilotSettings.json
+    where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
   - code: XmsPageableForListCalls
-    reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider @singleton (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
+    reason: >
+     The resource type CopilotSettings in the Microsoft.PortalServices resource provider @singleton
+     (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646.
     from:
       - copilotSettings.json
+    where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
   - code: TopLevelResourcesListBySubscription
-    reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource, so subscription list operation is not valid. This is a false positive.
+    reason: >
+     The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource,
+     so subscription list operation is not valid. This is a false positive.
     from: 
       - copilotSettings.json
+    where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
   - code: TenantLevelAPIsNotAllowed
-    reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource, and has received exception sign-off approval by PAS team and ARM team.
+    reason: >
+     The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource,
+     and has received exception sign-off approval by PAS team and ARM team.
     from: 
       - copilotSettings.json
+    where: $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
 ```
 
 ### Tag: package-2024-03-01-preview
