@@ -149,6 +149,26 @@ suppressions:
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
 ```
 
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05-01-preview'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2024-05-01-preview/stackhcivm.json
+  - Microsoft.AzureStackHCI/operations/preview/2024-05-01-preview/operations.json
+```
+
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02-01'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2024-02-01-preview/stackhcivm.json
+  - Microsoft.AzureStackHCI/operations/preview/2024-02-01-preview/operations.json
+```
+
 ### Tag: package-preview-2024-03
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
