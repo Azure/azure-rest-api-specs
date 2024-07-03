@@ -134,15 +134,27 @@ suppressions:
     reason: Keep compatibility with old API version.
   - code: PutGetPatchResponseSchema
     reason: Keep compatibility with old API version.
-  - code:  ResourceNameRestriction
+  - code: ResourceNameRestriction
     reason: Keep compatibility with old API version.
-  - code: EvenSegmentedPathForPutOperation
+  - code: ProvisioningStateSpecifiedForLROPut
     reason: Keep compatibility with old API version.
-  - code: PathForNestedResource
+  - code: PutRequestResponseSchemeArm
     reason: Keep compatibility with old API version.
-  - code: PutGetPatchResponseSchema
+  - code: PutResponseCodes
     reason: Keep compatibility with old API version.
-  - code:  ResourceNameRestriction
+  - code:  ResponseSchemaSpecifiedForSuccessStatusCode
+    reason: Keep compatibility with old API version.
+  - code: DefaultErrorResponseSchema
+    reason: Keep compatibility with old API version.
+  - code: LroErrorContent
+    reason: Keep compatibility with old API version.
+  - code: LroStatusCodesReturnTypeSchema
+    reason: Keep compatibility with old API version.
+  - code: LroLocationHeader
+    reason: Keep compatibility with old API version.
+  - code: XmsPageableForListCalls
+    reason: Keep compatibility with old API version.
+  - code: DeleteResponseCodes
     reason: Keep compatibility with old API version.
 ```
 
