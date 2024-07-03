@@ -29,7 +29,7 @@ title: HDInsightManagementClient
 description: HDInsight Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2023-08-preview
+tag: package-2024-08-preview
 ```
 
 ### Suppression
