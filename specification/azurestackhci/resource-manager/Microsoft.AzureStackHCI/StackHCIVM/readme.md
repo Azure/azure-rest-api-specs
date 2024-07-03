@@ -50,6 +50,7 @@ suppressions:
     reason: There is a false positive reporting the two letter acronym ID should be lower camel case. The property is correctly capitalized according to guidance.
     from: 
       - stackhcivm.json
+      - operations.json
   - code:  XmsPageableForListCalls
     reason: XmsPageable not needed for GET calls
     from:
