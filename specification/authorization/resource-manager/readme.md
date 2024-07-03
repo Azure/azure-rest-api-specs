@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-05-01-preview
+tag: package-preview-2024-02
 ```
 
 ### Suppression
@@ -93,6 +93,14 @@ directive:
     reason: common-types doesn't need to reference api version.
 ```
 
+
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+```
 
 ### Tag: package-2022-05-01-preview-only
 
