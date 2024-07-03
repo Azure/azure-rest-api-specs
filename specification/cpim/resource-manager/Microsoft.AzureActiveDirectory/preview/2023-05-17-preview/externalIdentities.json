@@ -3,7 +3,7 @@
   "info": {
     "title": "ExternalIdentities",
     "version": "2023-05-17-preview",
-    "description": "Manage the Azure resource for an Azure Active Directory B2C tenant, Guest Usages, and Azure AD for customers resource for External Identities in Azure AD"
+    "description": "Manage the Azure resource for an Azure Active Directory B2C tenant, Guest Usages, and External tenant resource for External Identities in Azure AD"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -38,7 +38,7 @@
       "post": {
         "tags": [
           "B2CTenants",
-          "CIAMTenants"
+          "ExternalTenants"
         ],
         "operationId": "CheckNameAvailability",
         "description": "Checks the availability and validity of a domain name for the tenant.",
@@ -675,14 +675,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/ciamDirectories": {
       "get": {
-        "description": "Get all the Azure AD for customers tenants resources in a resource group.",
-        "operationId": "CIAMTenants_ListByResourceGroup",
+        "description": "Get all the External tenants resources in a resource group.",
+        "operationId": "ExternalTenants_ListByResourceGroup",
         "tags": [
-          "CIAMTenants"
+          "ExternalTenants"
         ],
         "x-ms-examples": {
-          "CIAMTenants_ListByResourceGroup": {
-            "$ref": "./examples/CIAM/listCIAMTenantsByResourceGroup.json"
+          "ExternalTenants_ListByResourceGroup": {
+            "$ref": "./examples/External/listExternalTenantsByResourceGroup.json"
           }
         },
         "parameters": [
@@ -698,9 +698,9 @@
         ],
         "responses": {
           "200": {
-            "description": "List of Azure AD for customers tenants in resource group successfully retrieved.",
+            "description": "List of External tenants in resource group successfully retrieved.",
             "schema": {
-              "$ref": "#/definitions/CIAMTenantResourceList"
+              "$ref": "#/definitions/ExternalTenantResourceList"
             }
           },
           "default": {
@@ -717,14 +717,14 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureActiveDirectory/ciamDirectories": {
       "get": {
-        "description": "Get all the Azure AD for customers tenant resources in a subscription.",
-        "operationId": "CIAMTenants_ListBySubscription",
+        "description": "Get all the External tenant resources in a subscription.",
+        "operationId": "ExternalTenants_ListBySubscription",
         "tags": [
-          "CIAMTenants"
+          "ExternalTenants"
         ],
         "x-ms-examples": {
-          "CIAMTenants_ListBySubscription": {
-            "$ref": "./examples/CIAM/listCIAMTenantsBySubscription.json"
+          "ExternalTenants_ListBySubscription": {
+            "$ref": "./examples/External/listExternalTenantsBySubscription.json"
           }
         },
         "parameters": [
@@ -737,9 +737,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure AD for customers tenant resources in subscription successfully retrieved.",
+            "description": "External tenant resources in subscription successfully retrieved.",
             "schema": {
-              "$ref": "#/definitions/CIAMTenantResourceList"
+              "$ref": "#/definitions/ExternalTenantResourceList"
             }
           },
           "default": {
@@ -756,14 +756,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/ciamDirectories/{resourceName}": {
       "get": {
-        "description": "Get the Azure AD for customers tenant resource.",
-        "operationId": "CIAMTenants_Get",
+        "description": "Get the External tenant resource.",
+        "operationId": "ExternalTenants_Get",
         "tags": [
-          "CIAMTenants"
+          "ExternalTenants"
         ],
         "x-ms-examples": {
-          "Get_CIAM_tenant": {
-            "$ref": "./examples/CIAM/getCIAMTenant.json"
+          "Get_External_tenant": {
+            "$ref": "./examples/External/getExternalTenant.json"
           }
         },
         "parameters": [
@@ -777,14 +777,14 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CIAMResourceNameParameter"
+            "$ref": "#/parameters/ExternalTenantResourceNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure AD for customers tenant resource successfully retrieved.",
+            "description": "External tenant resource successfully retrieved.",
             "schema": {
-              "$ref": "#/definitions/CIAMTenantResource"
+              "$ref": "#/definitions/ExternalTenantResource"
             }
           },
           "default": {
@@ -796,15 +796,15 @@
         }
       },
       "put": {
-        "operationId": "CIAMTenants_Create",
-        "description": "Initiates an async request to create both the Azure AD for customers tenant and the corresponding Azure resource linked to a subscription. Note: Please check name availability before creating a new tenant",
+        "operationId": "ExternalTenants_Create",
+        "description": "Initiates an async request to create both the External tenant and the corresponding Azure resource linked to a subscription. Note: Please check name availability before creating a new tenant",
         "x-ms-examples": {
-          "Create_CIAM_tenant": {
-            "$ref": "./examples/CIAM/createCIAMTenant.json"
+          "Create_External_tenant": {
+            "$ref": "./examples/External/createExternalTenant.json"
           }
         },
         "tags": [
-          "CIAMTenants"
+          "ExternalTenants"
         ],
         "parameters": [
           {
@@ -817,27 +817,27 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CIAMResourceNameParameter"
+            "$ref": "#/parameters/ExternalTenantResourceNameParameter"
           },
           {
-            "name": "createCIAMTenantRequestBody",
-            "description": "Request body to create an Azure AD for customers tenant",
+            "name": "createExternalTenantRequestBody",
+            "description": "Request body to create an External tenant",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CIAMTenantResource"
+              "$ref": "#/definitions/ExternalTenantResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Successfully updated an existing Azure AD for customers tenant resource.",
+            "description": "OK - Successfully updated an existing External tenant resource.",
             "schema": {
-              "$ref": "#/definitions/CIAMTenantResource"
+              "$ref": "#/definitions/ExternalTenantResource"
             }
           },
           "201": {
-            "description": "Azure AD for customers tenant create request was successfully started and will complete asynchronously.",
+            "description": "External tenant create request was successfully started and will complete asynchronously.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -849,7 +849,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/CIAMTenantResource"
+              "$ref": "#/definitions/ExternalTenantResource"
             }
           },
           "default": {
@@ -865,14 +865,14 @@
         }
       },
       "patch": {
-        "description": "Update the Azure AD for customers tenant resource.",
-        "operationId": "CIAMTenants_Update",
+        "description": "Update the External tenant resource.",
+        "operationId": "ExternalTenants_Update",
         "tags": [
-          "CIAMTenants"
+          "ExternalTenants"
         ],
         "x-ms-examples": {
-          "Update_CIAM_tenant": {
-            "$ref": "./examples/CIAM/updateCIAMTenant.json"
+          "Update_External_tenant": {
+            "$ref": "./examples/External/updateExternalTenant.json"
           }
         },
         "parameters": [
@@ -886,22 +886,22 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CIAMResourceNameParameter"
+            "$ref": "#/parameters/ExternalTenantResourceNameParameter"
           },
           {
-            "name": "updateCIAMTenantRequestBody",
-            "description": "Request body to update Azure AD for customers tenant resource.",
+            "name": "updateExternalTenantRequestBody",
+            "description": "Request body to update External tenant resource.",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/CIAMTenantUpdateRequest"
+              "$ref": "#/definitions/ExternalTenantUpdateRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated the Azure AD for customers tenant resource.",
+            "description": "Updated the External tenant resource.",
             "schema": {
-              "$ref": "#/definitions/CIAMTenantResource"
+              "$ref": "#/definitions/ExternalTenantResource"
             }
           },
           "default": {
@@ -913,15 +913,15 @@
         }
       },
       "delete": {
-        "operationId": "CIAMTenants_Delete",
-        "description": "Initiates an async operation to delete the Azure AD for customers tenant and Azure resource. The resource deletion can only happen as the last step in [the tenant deletion process](https://aka.ms/delete-ciam-tenant). ",
+        "operationId": "ExternalTenants_Delete",
+        "description": "Initiates an async operation to delete the External tenant and Azure resource. The resource deletion can only happen as the last step in [the tenant deletion process](https://aka.ms/delete-ciam-tenant). ",
         "x-ms-examples": {
-          "Delete_CIAM_tenant": {
-            "$ref": "./examples/CIAM/deleteCIAMTenant.json"
+          "Delete_External_tenant": {
+            "$ref": "./examples/External/deleteExternalTenant.json"
           }
         },
         "tags": [
-          "CIAMTenants"
+          "ExternalTenants"
         ],
         "parameters": [
           {
@@ -934,7 +934,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CIAMResourceNameParameter"
+            "$ref": "#/parameters/ExternalTenantResourceNameParameter"
           }
         ],
         "responses": {
@@ -956,7 +956,7 @@
             }
           },
           "204": {
-            "description": "NoContent - Azure AD for customers tenant resource successfully deleted or didn't exist."
+            "description": "NoContent - External tenant resource successfully deleted or didn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1452,29 +1452,29 @@
       },
       "description": "An error response for a resource management request."
     },
-    "CIAMTenantResourceList": {
-      "description": "The collection of Azure AD for customers tenant resources",
+    "ExternalTenantResourceList": {
+      "description": "The collection of External tenant resources",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of Azure AD for customers tenant resources",
+          "description": "List of External tenant resources",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/CIAMTenantResource"
+            "$ref": "#/definitions/ExternalTenantResource"
           }
         },
         "nextLink": {
-          "description": "The URL to get the next set of Azure AD for customers tenant resources.",
+          "description": "The URL to get the next set of External tenant resources.",
           "type": "string",
           "readOnly": true,
           "x-nullable": true
         }
       }
     },
-    "CreateCIAMTenantProperties": {
+    "CreateExternalTenantProperties": {
       "type": "object",
-      "description": "These properties are used to create the Azure AD for customers tenant. These properties are not part of the Azure resource.",
+      "description": "These properties are used to create the External tenant. These properties are not part of the Azure resource.",
       "required": [
         "displayName",
         "countryCode"
@@ -1486,7 +1486,7 @@
       "x-ms-client-flatten": true,
       "properties": {
         "displayName": {
-          "description": "The display name of the Azure AD for customers tenant.",
+          "description": "The display name of the External tenant.",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -1503,8 +1503,8 @@
         }
       }
     },
-    "CIAMResourceSKU": {
-      "description": "SKU properties of the Azure AD for customers tenant. Learn more about Azure AD for customers billing at [https://aka.ms/ciambilling](https://aka.ms/ciambilling).",
+    "ExternalTenantResourceSKU": {
+      "description": "SKU properties of the External tenant. Learn more about External tenant billing at [https://aka.ms/ciambilling](https://aka.ms/ciambilling).",
       "type": "object",
       "required": [
         "name",
@@ -1520,7 +1520,7 @@
             "PremiumP2"
           ],
           "x-ms-enum": {
-            "name": "CIAMResourceSKUName",
+            "name": "ExternalTenantResourceSKUName",
             "modelAsString": true
           }
         },
@@ -1536,20 +1536,20 @@
           ],
           "x-ms-client-flatten": true,
           "x-ms-enum": {
-            "name": "CIAMResourceSKUTier",
+            "name": "ExternalTenantResourceSKUTier",
             "modelAsString": true,
             "values": [
               {
                 "value": "A0",
-                "description": "The SKU tier used for all Azure AD for customers tenants."
+                "description": "The SKU tier used for all External tenants."
               }
             ]
           }
         }
       }
     },
-    "CIAMTenantResourceProperties": {
-      "description": "Properties of the Azure AD for customers tenant Azure resource.",
+    "ExternalTenantResourceProperties": {
+      "description": "Properties of the External tenant Azure resource.",
       "type": "object",
       "required": [
         "createTenantProperties"
@@ -1559,7 +1559,7 @@
           "$ref": "#/definitions/ProvisioningState"
         },
         "createTenantProperties": {
-          "$ref": "#/definitions/CreateCIAMTenantProperties"
+          "$ref": "#/definitions/CreateExternalTenantProperties"
         },
         "domainName": {
           "type": "string",
@@ -1575,17 +1575,17 @@
             "billingType": {
               "type": "string",
               "readOnly": true,
-              "description": "The type of billing. Will be MAU for all new customers. Cannot be changed if value is 'MAU'. Learn more about Azure AD for customers billing at [aka.ms/b2cBilling](https://aka.ms/b2cbilling).",
+              "description": "The type of billing. Will be MAU for all new customers. Cannot be changed if value is 'MAU'. Learn more about External tenant billing at [aka.ms/ciambilling](https://aka.ms/ciambilling).",
               "enum": [
                 "MAU"
               ],
               "x-ms-enum": {
-                "name": "ciamBillingType",
+                "name": "externalTenantBillingType",
                 "modelAsString": true,
                 "values": [
                   {
                     "value": "MAU",
-                    "description": "Azure AD for customers usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
+                    "description": "External tenant usage is billed to a linked Azure subscription and uses a monthly active users (MAU) billing model."
                   }
                 ]
               }
@@ -1599,7 +1599,7 @@
         },
         "tenantId": {
           "type": "string",
-          "description": "An identifier of the Azure AD for customers tenant.",
+          "description": "An identifier of the External tenant.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1607,12 +1607,12 @@
         }
       }
     },
-    "CIAMTenantUpdateRequest": {
+    "ExternalTenantUpdateRequest": {
       "type": "object",
-      "description": "The request body to update the Azure AD for customers tenant resource.",
+      "description": "The request body to update the External tenant resource.",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/CIAMResourceSKU"
+          "$ref": "#/definitions/ExternalTenantResourceSKU"
         },
         "tags": {
           "type": "object",
@@ -1673,9 +1673,9 @@
         "modelAsString": true
       }
     },
-    "CIAMTenantResource": {
+    "ExternalTenantResource": {
       "type": "object",
-      "description": "The Azure AD for customers resource.",
+      "description": "The External tenant resource.",
       "required": [
         "location",
         "sku",
@@ -1686,27 +1686,27 @@
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "An identifier that represents the Azure AD for customers tenant resource."
+          "description": "An identifier that represents the External tenant resource."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The name of the Azure AD for customers tenant resource."
+          "description": "The name of the External tenant resource."
         },
         "type": {
           "type": "string",
-          "description": "The type of the Azure AD for customers tenant resource.",
+          "description": "The type of the External tenant resource.",
           "readOnly": true,
           "enum": [
             "Microsoft.AzureActiveDirectory/ciamDirectories"
           ],
           "x-ms-enum": {
-            "name": "ciamTypeValue",
+            "name": "externalTenantTypeValue",
             "modelAsString": true,
             "values": [
               {
                 "value": "Microsoft.AzureActiveDirectory/ciamDirectories",
-                "description": "The resource type for Azure AD for customers tenant resource."
+                "description": "The resource type for External tenant resource."
               }
             ]
           }
@@ -1719,7 +1719,7 @@
             "read"
           ],
           "x-ms-enum": {
-            "name": "ciamLocationValue",
+            "name": "externalTenantLocationValue",
             "modelAsString": true,
             "values": [
               {
@@ -1742,12 +1742,12 @@
           }
         },
         "sku": {
-          "$ref": "#/definitions/CIAMResourceSKU"
+          "$ref": "#/definitions/ExternalTenantResourceSKU"
         },
         "properties": {
-          "$ref": "#/definitions/CIAMTenantResourceProperties",
+          "$ref": "#/definitions/ExternalTenantResourceProperties",
           "x-ms-client-flatten": true,
-          "description": "The Azure AD for customers tenant resource properties"
+          "description": "The External tenant resource properties"
         },
         "tags": {
           "type": "object",
@@ -1794,7 +1794,7 @@
       "type": "string",
       "description": "Version of the API to be used with the client request."
     },
-    "CIAMResourceNameParameter": {
+    "ExternalTenantResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
       "required": true,
