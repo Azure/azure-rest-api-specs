@@ -724,7 +724,7 @@ model ImageProperties {}
 
 @parentResource(Image)
 @doc("An image version object")
-model ImageVersion is ProxyResource<ImageVersionProperties> {
+model ImageVersion is ProxyResource<VersionProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The name of the image version.")
   @key("imageVersionName")
@@ -736,7 +736,7 @@ model ImageVersion is ProxyResource<ImageVersionProperties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
 @doc("Details of the ImageVersionProperties.")
-model ImageVersionProperties {
+model VersionProperties {
   @doc("Version of the image.")
   version: string;
 }

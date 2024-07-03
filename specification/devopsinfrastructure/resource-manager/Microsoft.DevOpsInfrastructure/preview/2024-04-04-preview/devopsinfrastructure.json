@@ -866,7 +866,7 @@
       "description": "An image version object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ImageVersionProperties",
+          "$ref": "#/definitions/VersionProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
@@ -896,19 +896,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "ImageVersionProperties": {
-      "type": "object",
-      "description": "Details of the ImageVersionProperties.",
-      "properties": {
-        "version": {
-          "type": "string",
-          "description": "Version of the image."
-        }
-      },
-      "required": [
-        "version"
       ]
     },
     "LogonType": {
@@ -1880,6 +1867,19 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "VersionProperties": {
+      "type": "object",
+      "description": "Details of the ImageVersionProperties.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the image."
+        }
+      },
+      "required": [
+        "version"
+      ]
     },
     "VmssFabricProfile": {
       "type": "object",
