@@ -25,12 +25,11 @@ using TypeSpec.Versioning;
  * Azure Stack HCI management service
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 @armProviderNamespace
 @service({
   title: "Microsoft.AzureStackHCI",
 })
-
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AzureStackHCI;
