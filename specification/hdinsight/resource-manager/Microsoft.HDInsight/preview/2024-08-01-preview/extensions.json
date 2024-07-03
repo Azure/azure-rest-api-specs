@@ -318,6 +318,148 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/azureMonitorAgent": {
+      "put": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Enables the Azure Monitor Agent on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable azure monitoring agent": {
+            "$ref": "./examples/EnableLinuxClusterAzureMonitorAgent.json"
+          }
+        },
+        "operationId": "Extensions_EnableAzureMonitorAgent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorRequest"
+            },
+            "description": "The Log Analytics workspace parameters."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok response definition."
+          },
+          "202": {
+            "description": "Accepted response definition."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Gets the status of Azure Monitor Agent on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable cluster monitoring": {
+            "$ref": "./examples/GetLinuxClusterAzureMonitorAgentStatus.json"
+          }
+        },
+        "operationId": "Extensions_GetAzureMonitorAgentStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Disables the Azure Monitor Agent on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable cluster monitoring": {
+            "$ref": "./examples/DisableLinuxClusterAzureMonitorAgent.json"
+          }
+        },
+        "operationId": "Extensions_DisableAzureMonitorAgent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok response definition."
+          },
+          "202": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "No Content response definition."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/{extensionName}": {
       "put": {
         "tags": [
