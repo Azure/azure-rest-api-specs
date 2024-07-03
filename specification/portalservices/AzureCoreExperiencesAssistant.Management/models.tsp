@@ -19,8 +19,8 @@ model AssistantRequest {
   @doc("User question to the assistant")
   userInput: string;
 
-  @doc("Scenario type identifier that is relevant to the user question")
-  scenarioType: string;
+  @doc("Name of the scenario that can assist in determining the focus of the user's question.")
+  scenarioName: string;
 
   @doc("Start window for assistant to run analysis on. Formatted as an ISO 8601 UTC timestamp, e.g. YYYY-MM-DDTHH:mm:ss.sssZ")
   windowStartTimestamp?: utcDateTime;
