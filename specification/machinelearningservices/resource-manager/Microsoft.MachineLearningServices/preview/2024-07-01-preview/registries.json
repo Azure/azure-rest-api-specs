@@ -715,6 +715,22 @@
       },
       "additionalProperties": false
     },
+    "ManagedResourceGroupSettings": {
+      "description": "Managed resource group settings",
+      "type": "object",
+      "properties": {
+        "assignedIdentities": {
+          "description": "List of assigned identities for the managed resource group",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedResourceGroupAssignedIdentities"
+          },
+          "x-nullable": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
     "RegistryTrackedResource": {
       "required": [
         "location",
