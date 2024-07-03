@@ -2065,6 +2065,17 @@
             "name": "sasKind",
             "modelAsString": true
           }
+        },
+        "permission":{
+          "description": "The level of access allowed by the SAS token.",
+          "type": "string",
+          "enum": [
+            "r"
+          ],
+          "x-ms-enum": {
+            "name": "permission",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2074,12 +2085,10 @@
       "properties": {
         "key": {
           "description": "A filter used to match keys. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
-          "required": false,
           "type": "string"
         },
         "label": {
           "description": "A filter used to match labels. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering",
-          "required": false,
           "type": "string"
         },
         "tags":{
@@ -2129,6 +2138,11 @@
         },
         "sasKind":{
           "description": "The kind of the SAS token.",
+          "type": "string",
+          "readOnly": true
+        },
+        "permission":{
+          "description": "The level of access allowed by the SAS token.",
           "type": "string",
           "readOnly": true
         }
