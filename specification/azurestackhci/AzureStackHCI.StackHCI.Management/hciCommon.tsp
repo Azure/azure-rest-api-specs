@@ -248,19 +248,20 @@ model DeploymentQosPolicyOverrides {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
-  priorityValue8021ActionCluster?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  priorityValue8021Action_Cluster?: string;
 
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-  priorityValue8021ActionSMB?: string;
+  priorityValue8021Action_SMB?: string;
 
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-  bandwidthPercentageSMB?: string;
+  bandwidthPercentage_SMB?: string;
 }
 
 /**
