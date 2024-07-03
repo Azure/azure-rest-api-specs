@@ -141,12 +141,12 @@ union AzureLinuxJobType {
   string,
 
   /**
-   * AddServer
+   * Job to add a server to the cluster.
    */
   AddServer: "AddServer",
 
   /**
-   * RepairServer
+   * Job to repair a server in the cluster.
    */
   RepairServer: "RepairServer"
 }
@@ -158,51 +158,34 @@ union HciJobType {
   string,
 
   /**
-   * AddServer
+   * Job to add a server to the cluster.
    */
   AddServer: "AddServer",
 
   /**
-   * RepairServer
+   * Job to repair a server in the cluster.
    */
   RepairServer: "RepairServer",
 
   /**
-   * ResumeServer
+   * Job to resume a paused server in the cluster.
    */
   ResumeServer: "ResumeServer",
 
   /**
-   * PauseServer
+   * Job to pause an active server in the cluster.
    */
   PauseServer: "PauseServer",
 
   /**
-   * AddNetworkIntent
+   * Job to add a network intent to the cluster.
    */
   AddNetworkIntent: "AddNetworkIntent",
 
   /**
-   * SetInformation
+   * Job to set or update information in the cluster.
    */
   SetInformation: "SetInformation",
-}
-
-/**
- * Common ClusterJob Types supported.
- */
-union JobType {
-  string,
-
-  /**
-   * AddServer
-   */
-  AddServer: "AddServer",
-
-  /**
-   * RepairServer
-   */
-  RepairServer: "RepairServer",
 }
 
 /**
@@ -544,64 +527,54 @@ model HciSetInformationJobProperties extends HciClusterJobProperties {
   /**
    * Set to represent if the system is configured in a switchless or switched configuration.
    */
-  @encodedName("application/json", "Switchless")
   switchless?: boolean;
 
   /**
    * A string with a list of comma-separated name of the network adapters to use for the storage intent.
    */
-  @encodedName("application/json", "StorageIntentAdapters")
   storageIntentAdapters?: string;
 
   /**
    * A string with the name of the storage intent. If not provided a default one storage is used.
    */
-  @encodedName("application/json", "Name")
   name?: string;
 
   /**
    * A string with a list of comma-separated vlan ids to use which should map exactly and in order to the adapters provided in StorageIntentAdapters. If not provided the system uses the defaults set by Network ATC.
    */
-  @encodedName("application/json", "VlanId")
   vlanId?: string;
 
   /**
    * A string with the size to be set for jumbo packet frame size for the storage adapters.
    */
-  @encodedName("application/json", "JumboPacket")
-  jumboPacket?: string;
+   jumboPacket?: string;
 
   /**
    * A string to be set to enabled or disabled to specify if network direct mode should be enabled/disabled.
    */
-  @encodedName("application/json", "NetworkDirect")
   networkDirect?: string;
 
   /**
    * A string that specifies the network direct technology to be used. Possible values are iWARP, RoCE and RoCEv2.
    */
-  @encodedName("application/json", "NetworkDirectTechnology")
-  networkDirectTechnology?: string;
+   networkDirectTechnology?: string;
 
   /**
    * A string to specify the 802.1Q priority for the cluster.
    */
-  @encodedName("application/json", "PriorityValue8021Action_Cluster")
-  priorityValue8021ActionCluster?: string;
+   priorityValue8021ActionCluster?: string;
 
   /**
    * A string to specify the 802.1Q priority for SMB.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-  @encodedName("application/json", "PriorityValue8021Action_SMB")
   priorityValue8021ActionSMB?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   /**
    * A string to specify the bandwidth percentage to be used for SMB.
    */
-  @encodedName("application/json", "BandwidthPercentage_SMB")
-  bandwidthPercentageSMB?: string;
+   bandwidthPercentageSMB?: string;
 
   /**
    * ClusterJob Type to support polymorphic resource.

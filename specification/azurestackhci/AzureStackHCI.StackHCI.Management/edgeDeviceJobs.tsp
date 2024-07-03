@@ -144,23 +144,23 @@ union LogCollectionStatus {
 }
 
 /**
- * Job Type supported.
+ * Job Type supported by Azure Linux Edge Devices.
  */
 union AzureLinuxEdgeDeviceJobType {
   string,
 
   /**
-   * CollectLog
+   * Job to collect logs from the device.
    */
   CollectLog: "CollectLog",
 
   /**
-   * RemoteSupport
+   * Job to provide remote support to the device.
    */
   RemoteSupport: "RemoteSupport",
 
   /**
-   * RemoteConnect
+   * Job to establish a remote connection to the device.
    */
   RemoteConnect: "RemoteConnect"
 }
@@ -217,24 +217,19 @@ union HciEdgeDeviceJobType {
   string,
 
   /**
-   * CollectLog
+   * Job to collect logs from the device.
    */
   CollectLog: "CollectLog",
 
   /**
-   * RemoteSupport
+   * Job to provide remote support to the device.
    */
   RemoteSupport: "RemoteSupport",
 
   /**
-   * RemoteConnect
+   * Job to establish a remote connection to the device.
    */
-  RemoteConnect: "RemoteConnect",
-
-  /**
-   * RenameHostname
-   */
-  RenameHostname: "RenameHostname",
+  RemoteConnect: "RemoteConnect"
 }
 
 /**
@@ -244,17 +239,17 @@ union EdgeDeviceJobType {
   string,
 
   /**
-   * CollectLog
+   * Job to collect logs from the device.
    */
   CollectLog: "CollectLog",
 
   /**
-   * RemoteSupport
+   * Job to provide remote support to the device.
    */
   RemoteSupport: "RemoteSupport",
 
   /**
-   * RemoteConnect
+   * Job to establish a remote connection to the device.
    */
   RemoteConnect: "RemoteConnect",
 }

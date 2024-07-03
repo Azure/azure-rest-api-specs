@@ -472,9 +472,6 @@
           }
         },
         "x-ms-examples": {
-          "ClusterJobs_CreateOrUpdate_AddNetworkIntentJob": {
-            "$ref": "./examples/ClusterJobs_CreateOrUpdate_AddNetworkIntentJob.json"
-          },
           "ClusterJobs_CreateOrUpdate_AddServerJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_AddServerJob.json"
           },
@@ -486,6 +483,9 @@
           },
           "ClusterJobs_CreateOrUpdate_ResumeServerJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ResumeServerJob.json"
+          },
+          "ClusterJobs_CreateOrUpdate_Windows_AddNetworkIntentJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_AddNetworkIntentJob.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -958,7 +958,7 @@
     },
     "AzureLinuxEdgeDeviceJobType": {
       "type": "string",
-      "description": "Job Type supported.",
+      "description": "Job Type supported by Azure Linux Edge Devices.",
       "enum": [
         "CollectLog",
         "RemoteSupport",
@@ -971,17 +971,17 @@
           {
             "name": "CollectLog",
             "value": "CollectLog",
-            "description": "CollectLog"
+            "description": "Job to collect logs from the device."
           },
           {
             "name": "RemoteSupport",
             "value": "RemoteSupport",
-            "description": "RemoteSupport"
+            "description": "Job to provide remote support to the device."
           },
           {
             "name": "RemoteConnect",
             "value": "RemoteConnect",
-            "description": "RemoteConnect"
+            "description": "Job to establish a remote connection to the device."
           }
         ]
       }
@@ -1019,12 +1019,12 @@
           {
             "name": "AddServer",
             "value": "AddServer",
-            "description": "AddServer"
+            "description": "Job to add a server to the cluster."
           },
           {
             "name": "RepairServer",
             "value": "RepairServer",
-            "description": "RepairServer"
+            "description": "Job to repair a server in the cluster."
           }
         ]
       }
@@ -1349,7 +1349,7 @@
         },
         "enableStorageAutoIp": {
           "type": "boolean",
-          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically."
+          "description": "Optional parameter required only for 3 Nodes switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically."
         }
       }
     },
@@ -1429,20 +1429,17 @@
       "type": "object",
       "description": "The QoSPolicyOverrides of a cluster.",
       "properties": {
-        "priorityValue8021Action_Cluster": {
+        "priorityValue8021ActionCluster": {
           "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "x-ms-client-name": "priorityValue8021ActionCluster"
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         },
-        "priorityValue8021Action_SMB": {
+        "priorityValue8021ActionSMB": {
           "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "x-ms-client-name": "priorityValue8021ActionSMB"
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         },
-        "bandwidthPercentage_SMB": {
+        "bandwidthPercentageSMB": {
           "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
-          "x-ms-client-name": "bandwidthPercentageSMB"
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         }
       }
     },
@@ -1769,17 +1766,17 @@
           {
             "name": "CollectLog",
             "value": "CollectLog",
-            "description": "CollectLog"
+            "description": "Job to collect logs from the device."
           },
           {
             "name": "RemoteSupport",
             "value": "RemoteSupport",
-            "description": "RemoteSupport"
+            "description": "Job to provide remote support to the device."
           },
           {
             "name": "RemoteConnect",
             "value": "RemoteConnect",
-            "description": "RemoteConnect"
+            "description": "Job to establish a remote connection to the device."
           }
         ]
       }
@@ -2080,8 +2077,7 @@
       "enum": [
         "CollectLog",
         "RemoteSupport",
-        "RemoteConnect",
-        "RenameHostname"
+        "RemoteConnect"
       ],
       "x-ms-enum": {
         "name": "HciEdgeDeviceJobType",
@@ -2090,22 +2086,17 @@
           {
             "name": "CollectLog",
             "value": "CollectLog",
-            "description": "CollectLog"
+            "description": "Job to collect logs from the device."
           },
           {
             "name": "RemoteSupport",
             "value": "RemoteSupport",
-            "description": "RemoteSupport"
+            "description": "Job to provide remote support to the device."
           },
           {
             "name": "RemoteConnect",
             "value": "RemoteConnect",
-            "description": "RemoteConnect"
-          },
-          {
-            "name": "RenameHostname",
-            "value": "RenameHostname",
-            "description": "RenameHostname"
+            "description": "Job to establish a remote connection to the device."
           }
         ]
       }
@@ -2128,32 +2119,32 @@
           {
             "name": "AddServer",
             "value": "AddServer",
-            "description": "AddServer"
+            "description": "Job to add a server to the cluster."
           },
           {
             "name": "RepairServer",
             "value": "RepairServer",
-            "description": "RepairServer"
+            "description": "Job to repair a server in the cluster."
           },
           {
             "name": "ResumeServer",
             "value": "ResumeServer",
-            "description": "ResumeServer"
+            "description": "Job to resume a paused server in the cluster."
           },
           {
             "name": "PauseServer",
             "value": "PauseServer",
-            "description": "PauseServer"
+            "description": "Job to pause an active server in the cluster."
           },
           {
             "name": "AddNetworkIntent",
             "value": "AddNetworkIntent",
-            "description": "AddNetworkIntent"
+            "description": "Job to add a network intent to the cluster."
           },
           {
             "name": "SetInformation",
             "value": "SetInformation",
-            "description": "SetInformation"
+            "description": "Job to set or update information in the cluster."
           }
         ]
       }
@@ -2322,55 +2313,45 @@
       "type": "object",
       "description": "Properties for setting information in the HCI cluster.",
       "properties": {
-        "Switchless": {
+        "switchless": {
           "type": "boolean",
-          "description": "Set to represent if the system is configured in a switchless or switched configuration.",
-          "x-ms-client-name": "switchless"
+          "description": "Set to represent if the system is configured in a switchless or switched configuration."
         },
-        "StorageIntentAdapters": {
+        "storageIntentAdapters": {
           "type": "string",
-          "description": "A string with a list of comma-separated name of the network adapters to use for the storage intent.",
-          "x-ms-client-name": "storageIntentAdapters"
+          "description": "A string with a list of comma-separated name of the network adapters to use for the storage intent."
         },
-        "Name": {
+        "name": {
           "type": "string",
-          "description": "A string with the name of the storage intent. If not provided a default one storage is used.",
-          "x-ms-client-name": "name"
+          "description": "A string with the name of the storage intent. If not provided a default one storage is used."
         },
-        "VlanId": {
+        "vlanId": {
           "type": "string",
-          "description": "A string with a list of comma-separated vlan ids to use which should map exactly and in order to the adapters provided in StorageIntentAdapters. If not provided the system uses the defaults set by Network ATC.",
-          "x-ms-client-name": "vlanId"
+          "description": "A string with a list of comma-separated vlan ids to use which should map exactly and in order to the adapters provided in StorageIntentAdapters. If not provided the system uses the defaults set by Network ATC."
         },
-        "JumboPacket": {
+        "jumboPacket": {
           "type": "string",
-          "description": "A string with the size to be set for jumbo packet frame size for the storage adapters.",
-          "x-ms-client-name": "jumboPacket"
+          "description": "A string with the size to be set for jumbo packet frame size for the storage adapters."
         },
-        "NetworkDirect": {
+        "networkDirect": {
           "type": "string",
-          "description": "A string to be set to enabled or disabled to specify if network direct mode should be enabled/disabled.",
-          "x-ms-client-name": "networkDirect"
+          "description": "A string to be set to enabled or disabled to specify if network direct mode should be enabled/disabled."
         },
-        "NetworkDirectTechnology": {
+        "networkDirectTechnology": {
           "type": "string",
-          "description": "A string that specifies the network direct technology to be used. Possible values are iWARP, RoCE and RoCEv2.",
-          "x-ms-client-name": "networkDirectTechnology"
+          "description": "A string that specifies the network direct technology to be used. Possible values are iWARP, RoCE and RoCEv2."
         },
-        "PriorityValue8021Action_Cluster": {
+        "priorityValue8021ActionCluster": {
           "type": "string",
-          "description": "A string to specify the 802.1Q priority for the cluster.",
-          "x-ms-client-name": "priorityValue8021ActionCluster"
+          "description": "A string to specify the 802.1Q priority for the cluster."
         },
-        "PriorityValue8021Action_SMB": {
+        "priorityValue8021ActionSMB": {
           "type": "string",
-          "description": "A string to specify the 802.1Q priority for SMB.",
-          "x-ms-client-name": "priorityValue8021ActionSMB"
+          "description": "A string to specify the 802.1Q priority for SMB."
         },
-        "BandwidthPercentage_SMB": {
+        "bandwidthPercentageSMB": {
           "type": "string",
-          "description": "A string to specify the bandwidth percentage to be used for SMB.",
-          "x-ms-client-name": "bandwidthPercentageSMB"
+          "description": "A string to specify the bandwidth percentage to be used for SMB."
         }
       },
       "allOf": [
@@ -2400,30 +2381,6 @@
           "description": "Deployment status of job.",
           "readOnly": true
         }
-      }
-    },
-    "JobType": {
-      "type": "string",
-      "description": "Common ClusterJob Types supported.",
-      "enum": [
-        "AddServer",
-        "RepairServer"
-      ],
-      "x-ms-enum": {
-        "name": "JobType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AddServer",
-            "value": "AddServer",
-            "description": "AddServer"
-          },
-          {
-            "name": "RepairServer",
-            "value": "RepairServer",
-            "description": "RepairServer"
-          }
-        ]
       }
     },
     "LogCollectionReportedProperties": {

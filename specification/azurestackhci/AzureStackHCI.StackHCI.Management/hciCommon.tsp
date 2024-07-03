@@ -172,7 +172,7 @@ model DeploymentHostNetwork {
   storageConnectivitySwitchless?: boolean;
 
   /**
-   * Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
+   * Optional parameter required only for 3 Nodes switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
    */
   enableStorageAutoIp?: boolean;
 }
@@ -249,21 +249,18 @@ model DeploymentQosPolicyOverrides {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
-  @encodedName("application/json", "priorityValue8021Action_Cluster")
-  priorityValue8021ActionCluster?: string;
+   priorityValue8021ActionCluster?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
-  @encodedName("application/json", "priorityValue8021Action_SMB")
   priorityValue8021ActionSMB?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
-  @encodedName("application/json", "bandwidthPercentage_SMB")
   bandwidthPercentageSMB?: string;
 }
 
