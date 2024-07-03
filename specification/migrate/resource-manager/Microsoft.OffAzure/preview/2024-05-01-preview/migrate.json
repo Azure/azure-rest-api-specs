@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Migrate Discovery Service",
-    "version": "2023-06-06",
+    "version": "2024-05-01-preview",
     "description": "Azure OffAzure Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -4643,6 +4643,73 @@
           },
           "PrivateLinkResourcesController_Get_MinimumSet_Gen": {
             "$ref": "./examples/PrivateLinkResourcesController_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/refreshArcStatus": {
+      "post": {
+        "operationId": "MasterSitesController_RefreshArcStatus",
+        "tags": [
+          "MasterSitesController"
+        ],
+        "description": "Method to refresh arc status from master site for an appliance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "MasterSitesController_RefreshArcStatus_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSitesController_RefreshArcStatus_MaximumSet_Gen.json"
+          },
+          "MasterSitesController_RefreshArcStatus_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSitesController_RefreshArcStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -13443,9 +13510,59 @@
         }
       }
     },
+    "ArcDiscovery": {
+      "type": "object",
+      "description": "Contains data related to Azure arc discovery.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AzureArcStatus",
+          "description": "AzureArc status indicates whether arc discovery has successfully completed or not.",
+          "readOnly": true
+        },
+        "machineResourceId": {
+          "$ref": "#/definitions/MachineResourceId",
+          "description": "Machine Resource Id.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "machineResourceId"
+      ]
+    },
     "Azure.ResourceManager.Object": {
       "type": "object",
       "description": "object model"
+    },
+    "AzureArcStatus": {
+      "type": "string",
+      "description": "azure arc discovery status",
+      "enum": [
+        "Unknown",
+        "NotEnabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "AzureArcStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown value."
+          },
+          {
+            "name": "NotEnabled",
+            "value": "NotEnabled",
+            "description": "Not enabled value."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled value."
+          }
+        ]
+      }
     },
     "BizTalkServer": {
       "type": "object",
@@ -16761,6 +16878,18 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "MachineResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an ARM resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.HybridCompute/machines"
+          }
+        ]
+      }
     },
     "MachineResourceListResult": {
       "type": "object",
@@ -21061,7 +21190,8 @@
         "2020-08-01-preview",
         "2020-11-11-preview",
         "2022-10-27",
-        "2023-06-06"
+        "2023-06-06",
+        "2024-05-01-preview"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -21121,6 +21251,11 @@
             "name": "v2023_06_06",
             "value": "2023-06-06",
             "description": "Api version 2023-06-06."
+          },
+          {
+            "name": "v2024_05_01_preview",
+            "value": "2024-05-01-preview",
+            "description": "Api version 2024-05-01-preview."
           }
         ]
       }
@@ -21638,6 +21773,11 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "arcDiscovery": {
+          "$ref": "#/definitions/ArcDiscovery",
+          "description": "Gets the data related to Azure arc discovery.",
           "readOnly": true
         }
       }
