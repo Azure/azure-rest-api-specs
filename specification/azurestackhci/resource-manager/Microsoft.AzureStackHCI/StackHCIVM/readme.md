@@ -46,6 +46,7 @@ suppressions:
     reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
     from: 
       - stackhcivm.json
+      - operations
   - code: DefinitionsPropertiesNamesCamelCase
     reason: There is a false positive reporting the two letter acronym ID should be lower camel case. The property is correctly capitalized according to guidance.
     from: 
