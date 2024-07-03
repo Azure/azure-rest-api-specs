@@ -126,6 +126,24 @@ input-file:
   - Microsoft.HDInsight/preview/2024-08-01-preview/privateLinkResources.json
   - Microsoft.HDInsight/preview/2024-08-01-preview/scriptActions.json
   - Microsoft.HDInsight/preview/2024-08-01-preview/virtualMachines.json
+
+suppressions:
+  - code: EvenSegmentedPathForPutOperation
+    reason: Keep compatibility with old API version.
+  - code: PathForNestedResource
+    reason: Keep compatibility with old API version.
+  - code: PutGetPatchResponseSchema
+    reason: Keep compatibility with old API version.
+  - code:  ResourceNameRestriction
+    reason: Keep compatibility with old API version.
+  - code: EvenSegmentedPathForPutOperation
+    reason: Keep compatibility with old API version.
+  - code: PathForNestedResource
+    reason: Keep compatibility with old API version.
+  - code: PutGetPatchResponseSchema
+    reason: Keep compatibility with old API version.
+  - code:  ResourceNameRestriction
+    reason: Keep compatibility with old API version.
 ```
 
 ### Tag: package-2023-08-preview
