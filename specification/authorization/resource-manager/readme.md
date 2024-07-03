@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-05-01-preview
+tag: package-preview-2024-02
 ```
 
 ### Suppression
@@ -93,6 +93,25 @@ directive:
     reason: common-types doesn't need to reference api version.
 ```
 
+
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - Microsoft.Authorization/preview/2024-02-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/common-types.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicyAssignment.json
+```
 
 ### Tag: package-2022-05-01-preview-only
 
