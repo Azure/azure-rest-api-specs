@@ -10,7 +10,7 @@ if ($typespecFolders) {
     $typespecFolders = $typespecFolders.Split('',[System.StringSplitOptions]::RemoveEmptyEntries)
     foreach ($typespecFolder in $typespecFolders) {
         Push-Location $typespecFolder
-        tsp compile .
+        npx tsp compile .
         Pop-Location
     }
   } else {
