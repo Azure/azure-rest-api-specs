@@ -461,7 +461,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PoolUpdate"
+              "$ref": "#/definitions/Pool"
             }
           }
         ],
@@ -638,28 +638,6 @@
         "kind"
       ]
     },
-    "AgentProfileUpdate": {
-      "type": "object",
-      "description": "The agent profile of the machines in the pool.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for AgentProfile."
-        },
-        "resourcePredictions": {
-          "$ref": "#/definitions/ResourcePredictions",
-          "description": "Defines pool buffer/stand-by agents."
-        },
-        "resourcePredictionsProfile": {
-          "$ref": "#/definitions/ResourcePredictionsProfileUpdate",
-          "description": "Defines how the pool buffer/stand-by agents is provided."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
-    },
     "AutomaticResourcePredictionsProfile": {
       "type": "object",
       "description": "The stand-by agent scheme is determined based on historical demand.",
@@ -672,22 +650,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResourcePredictionsProfile"
-        }
-      ],
-      "x-ms-discriminator-value": "Automatic"
-    },
-    "AutomaticResourcePredictionsProfileUpdate": {
-      "type": "object",
-      "description": "The stand-by agent scheme is determined based on historical demand.",
-      "properties": {
-        "predictionPreference": {
-          "$ref": "#/definitions/PredictionPreference",
-          "description": "Determines the balance between cost and performance."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourcePredictionsProfileUpdate"
         }
       ],
       "x-ms-discriminator-value": "Automatic"
@@ -983,16 +945,6 @@
       ],
       "x-ms-discriminator-value": "Manual"
     },
-    "ManualResourcePredictionsProfileUpdate": {
-      "type": "object",
-      "description": "Customer provides the stand-by agent scheme.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourcePredictionsProfileUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "Manual"
-    },
     "NetworkProfile": {
       "type": "object",
       "description": "The network profile of the machines in the pool.",
@@ -1216,60 +1168,6 @@
         "fabricProfile",
         "devCenterProjectResourceId"
       ]
-    },
-    "PoolUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Pool.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/PoolUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PoolUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Pool.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the current operation."
-        },
-        "maximumConcurrency": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Defines how many resources can there be created at any given time.",
-          "minimum": 1,
-          "maximum": 10000
-        },
-        "organizationProfile": {
-          "$ref": "#/definitions/OrganizationProfile",
-          "description": "Defines the organization in which the pool will be used."
-        },
-        "agentProfile": {
-          "$ref": "#/definitions/AgentProfileUpdate",
-          "description": "Defines how the machine will be handled once it executed a job."
-        },
-        "fabricProfile": {
-          "$ref": "#/definitions/FabricProfile",
-          "description": "Defines the type of fabric the agent will run on."
-        },
-        "devCenterProjectResourceId": {
-          "type": "string",
-          "description": "The resource id of the DevCenter Project the pool belongs to."
-        }
-      }
     },
     "PredictionPreference": {
       "type": "string",
@@ -1518,20 +1416,6 @@
           }
         ]
       }
-    },
-    "ResourcePredictionsProfileUpdate": {
-      "type": "object",
-      "description": "Determines how the stand-by scheme should be provided.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ResourcePredictionsProfileType",
-          "description": "Determines how the stand-by scheme should be provided."
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
     },
     "ResourceSku": {
       "type": "object",
@@ -1927,42 +1811,12 @@
       ],
       "x-ms-discriminator-value": "Stateful"
     },
-    "StatefulUpdate": {
-      "type": "object",
-      "description": "Stateful profile meaning that the machines will be returned to the pool after running a job.",
-      "properties": {
-        "maxAgentLifetime": {
-          "type": "string",
-          "description": "How long should stateful machines be kept around. The maximum is one week."
-        },
-        "gracePeriodTimeSpan": {
-          "type": "string",
-          "description": "How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maximum is one week."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AgentProfileUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "Stateful"
-    },
     "StatelessAgentProfile": {
       "type": "object",
       "description": "Stateless profile meaning that the machines will be cleaned up after running a job.",
       "allOf": [
         {
           "$ref": "#/definitions/AgentProfile"
-        }
-      ],
-      "x-ms-discriminator-value": "Stateless"
-    },
-    "StatelessAgentProfileUpdate": {
-      "type": "object",
-      "description": "Stateless profile meaning that the machines will be cleaned up after running a job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AgentProfileUpdate"
         }
       ],
       "x-ms-discriminator-value": "Stateless"
