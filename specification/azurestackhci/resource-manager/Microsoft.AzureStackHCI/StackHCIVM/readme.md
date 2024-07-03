@@ -39,6 +39,7 @@ directive:
   - suppress: R3020
     from:
       - stackhcivm.json
+      - operations.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase

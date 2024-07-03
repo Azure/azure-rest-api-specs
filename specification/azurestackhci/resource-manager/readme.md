@@ -137,6 +137,7 @@ suppressions:
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
     from:
+      - stackhcivm.json
       - deploymentSettings.json
       - jobs.json
     where:
@@ -159,20 +160,20 @@ These settings apply only when `--tag=package-preview-2024-05-01-preview` is spe
 input-file:
   - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-05-01-preview/stackhcivm.json
   - Microsoft.AzureStackHCI/operations/preview/2024-05-01-preview/operations.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/deploymentSettings.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/edgeDevices.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/edgeNodePool.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/extensions.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/offers.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/operations.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/publishers.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/securitySettings.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/skus.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateRuns.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateSummaries.json
-  - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updates.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/clusters.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/edgeNodePool.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/extensions.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/offers.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/operations.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/publishers.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/skus.json
+  - Microsoft.AzureStackHCIStackHCI/preview/2024-03-01-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/StackHCI/preview/2024-03-01-preview/updates.json
 ```
 
 ### Tag: package-preview-2024-02
