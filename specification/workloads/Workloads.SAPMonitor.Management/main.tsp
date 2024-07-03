@@ -7,9 +7,6 @@ import "./Monitor.tsp";
 import "./ProviderInstance.tsp";
 import "./SapLandscapeMonitor.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 

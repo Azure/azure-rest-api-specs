@@ -1,15 +1,6 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-import "./SAPInstance.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Workloads;
 /**
@@ -38,7 +29,12 @@ interface ServerInstances {
   /**
    * Creates the Server Instance resource. <br><br>;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.
    */
-  create is ArmResourceCreateOrReplaceAsync<ServerInstance>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    ServerInstance,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Updates the Server Instance resource. This operation on a resource by end user will return a Bad Request error.

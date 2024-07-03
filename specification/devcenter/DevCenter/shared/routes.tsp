@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "./models.tsp";
+import "./templates.tsp";
 import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;

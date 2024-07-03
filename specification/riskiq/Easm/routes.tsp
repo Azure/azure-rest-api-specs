@@ -35,6 +35,46 @@ interface Assets {
   >;
   @doc("Retrieve an asset by assetId.")
   getAssetResource is Operations.ResourceRead<AssetResource>;
+
+  @doc("Export a list of assets for the provided search parameters.")
+  @action("export")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getAssetsExport is Operations.ResourceCollectionAction<
+    AssetResource,
+    BodyParameter<AssetsExportRequest>,
+    Task,
+    AssetsExportTrait
+  >;
+
+  @doc("Retrieve observations on an asset")
+  @action("getObservations")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getObservations is Operations.ResourceAction<
+    AssetResource,
+    {},
+    ObservationPageResult,
+    ObservationsParameters
+  >;
+
+  @doc("Retrieve a list of deltas for the provided time range.")
+  @action("getDeltaDetails")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getDeltaDetails is Operations.ResourceCollectionAction<
+    AssetResource,
+    BodyParameter<DeltaDetailsRequest>,
+    DeltaPageResult,
+    DeltaDetailsTrait
+  >;
+
+  @doc("Retrieve a list of deltas with overall summary changes for the provided time range.")
+  @action("getDeltaSummary")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getDeltaSummary is Operations.ResourceCollectionAction<
+    AssetResource,
+    BodyParameter<DeltaSummaryRequest>,
+    DeltaSummaryResult,
+    {}
+  >;
 }
 
 @tag("Data Connections")
@@ -50,7 +90,7 @@ interface DataConnections {
   @action("validate")
   validateDataConnection is Operations.ResourceCollectionAction<
     DataConnection,
-    DataConnectionData,
+    BodyParameter<DataConnectionData>,
     ValidateResult
   >;
   @doc("Retrieve a data connection with a given dataConnectionName.")
@@ -62,7 +102,7 @@ interface DataConnections {
   @put
   createOrReplaceDataConnection is Foundations.ResourceOperation<
     DataConnection,
-    DataConnectionData,
+    BodyParameter<DataConnectionData>,
     DataConnection
   >;
 
@@ -82,7 +122,7 @@ interface DiscoveryGroups {
   @clientName("ValidateDiscoveryGroup", "csharp")
   validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
-    DiscoGroupData,
+    BodyParameter<DiscoGroupData>,
     ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
@@ -111,6 +151,28 @@ interface DiscoveryGroups {
   listRuns is Foundations.Operation<
     DiscoGroupsListRunsParameter,
     DiscoRunPageResult
+  >;
+
+  @Versioning.added(Versions.v2024_03_01_preview)
+  @doc("Delete a discovery group with a given discovery group name.")
+  deleteDiscoGroup is Operations.ResourceDelete<DiscoGroup>;
+
+  @doc("Retrieve an asset chain summary.")
+  @action("getAssetChainSummary")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getAssetChainSummary is Operations.ResourceCollectionAction<
+    DiscoGroup,
+    BodyParameter<AssetChainRequest>,
+    AssetChainSummaryResult
+  >;
+
+  @doc("Dismiss discovery chain for a given asset chain source")
+  @action("dismissAssetChain")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  dismissAssetChain is Operations.ResourceCollectionAction<
+    DiscoGroup,
+    BodyParameter<AssetChainRequest>,
+    Task
   >;
 }
 
@@ -141,7 +203,7 @@ interface Reports {
   @route("/reports/assets:getSnapshot")
   @post
   getSnapshot is Foundations.Operation<
-    ReportAssetSnapshotRequest,
+    BodyParameter<ReportAssetSnapshotRequest>,
     ReportAssetSnapshotResult
   >;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -149,8 +211,18 @@ interface Reports {
   @route("/reports/assets:getSummary")
   @post
   getSummary is Foundations.Operation<
-    ReportAssetSummaryRequest,
+    BodyParameter<ReportAssetSummaryRequest>,
     ReportAssetSummaryResult
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get the most recent snapshot of asset summary values for the snapshot request exported to a file.")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  @route("/reports/assets:getSnapshotExport")
+  @post
+  getSnapshotExport is Foundations.Operation<
+    BodyParameter<ReportAssetSnapshotExportRequest>,
+    Task
   >;
 }
 
@@ -187,4 +259,26 @@ interface Tasks {
   @doc("Cancel a task by taskId.")
   @action("cancel")
   cancelTask is Operations.ResourceAction<Task, {}, Task>;
+
+  @doc("Run a task by taskId.")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  @action("run")
+  runTask is Operations.ResourceAction<Task, {}, Task>;
+
+  @doc("Download a task.")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  @action("download")
+  downloadTask is Operations.ResourceAction<Task, {}, Task>;
+}
+
+@tag("CisaCves")
+@doc("Provides access to cisa cves.")
+interface CisaCves {
+  @doc("Retrieve a list of CisaCves for the provided search parameters.")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getCisaCves is Operations.ResourceList<CisaCveResult, CisaCveListTrait>;
+
+  @doc("Retrieve details of CisaCve by cveId")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getCisaCve is Operations.ResourceRead<CisaCveResult>;
 }

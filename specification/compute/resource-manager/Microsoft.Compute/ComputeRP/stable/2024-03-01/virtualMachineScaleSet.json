@@ -5181,7 +5181,7 @@
         },
         "securityPostureReference": {
           "$ref": "#/definitions/SecurityPostureReference",
-          "description": "Specifies the security posture to be used for all virtual machines in the scale set. Minimum api-version: 2023-03-01"
+          "description": "Specifies the security posture to be used in the scale set. Minimum api-version: 2023-03-01"
         },
         "timeCreated": {
           "readOnly": true,
@@ -5205,6 +5205,10 @@
         "networkProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateNetworkProfile",
           "description": "The virtual machine scale set network profile."
+        },
+        "securityPostureReference": {
+          "$ref": "#/definitions/SecurityPostureReferenceUpdate",
+          "description": "The virtual machine scale set security posture reference."
         },
         "securityProfile": {
           "$ref": "./computeRPCommon.json#/definitions/SecurityProfile",
@@ -6336,17 +6340,45 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The security posture reference id in the form of /CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|{major.*}|latest"
+          "description": "The security posture reference id in the form of /CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|latest"
         },
         "excludeExtensions": {
           "type": "array",
           "items": {
-            "$ref": "./virtualMachine.json#/definitions/VirtualMachineExtension"
+            "type": "string"
           },
-          "description": "List of virtual machine extensions to exclude when applying the Security Posture."
+          "description": "The list of virtual machine extension names to exclude when applying the security posture."
+        },
+        "isOverridable": {
+          "type": "boolean",
+          "description": "Whether the security posture can be overridden by the user."
         }
       },
-      "description": "Specifies the security posture to be used for all virtual machines in the scale set. Minimum api-version: 2023-03-01"
+      "description": "Specifies the security posture to be used in the scale set. Minimum api-version: 2023-03-01",
+      "required": [
+        "id"
+      ]
+    },
+    "SecurityPostureReferenceUpdate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The security posture reference id in the form of /CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|latest"
+        },
+        "excludeExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of virtual machine extension names to exclude when applying the security posture."
+        },
+        "isOverridable": {
+          "type": "boolean",
+          "description": "Whether the security posture can be overridden by the user."
+        }
+      },
+      "description": "Specifies the security posture to be used in the scale set. Minimum api-version: 2023-03-01"
     }
   }
 }
