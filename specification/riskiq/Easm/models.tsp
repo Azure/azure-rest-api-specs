@@ -2155,3 +2155,14 @@ model DiscoGroupSummaryResult {
   @doc("The name that can be used for display purposes.")
   displayName: string;
 }
+
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};
