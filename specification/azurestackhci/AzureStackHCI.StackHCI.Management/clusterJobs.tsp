@@ -95,9 +95,9 @@ union EdgeSolutionType {
   string,
 
   /**
-   * Edge solution for Azure stack HCI edge devices.
+   * Edge solution for Windows based edge devices.
    */
-  AzureStackHCI: "AzureStackHCI",
+  Windows: "Windows",
 
   /**
    * Edge solution for Azure linux edge devices.
@@ -358,7 +358,7 @@ model AzureLinuxJob extends ClusterJob {
   /**
    * Edge Solution type to support polymorphic resource.
    */
-  kind: "AzureLinux";
+  kind: EdgeSolutionType.AzureLinux;
 }
 
 /**
@@ -385,7 +385,7 @@ model AzureLinuxRepairServerJobProperties extends AzureLinuxClusterJobProperties
   /**
    * ClusterJob Type to support polymorphic resource.
    */
-  jobType: "RepairServer";
+  jobType: AzureLinuxJobType.RepairServer;
 }
 
 /**
@@ -400,7 +400,7 @@ model AzureStackHciJob extends ClusterJob {
   /**
    * Edge Solution type to support polymorphic resource.
    */
-  kind: "AzureStackHCI";
+  kind: EdgeSolutionType.Windows;
 }
 
 /**
@@ -433,7 +433,7 @@ model HciAddNetworkIntentJobProperties extends HciClusterJobProperties {
   /**
    * ClusterJob Type to support polymorphic resource.
    */
-  jobType: "AddNetworkIntent";
+  jobType: HciJobType.AddNetworkIntent;
 }
 
 /**
@@ -465,7 +465,7 @@ model HciAddServerJobProperties extends HciClusterJobProperties {
   /**
    * Job Type to support polymorphic resource.
    */
-  jobType: "AddServer";
+  jobType: HciJobType.AddServer;
 }
 
 /**
@@ -486,7 +486,7 @@ model HciPauseServerJobProperties extends HciClusterJobProperties {
   /**
    * ClusterJob Type to support polymorphic resource.
    */
-  jobType: "PauseServer";
+  jobType: HciJobType.PauseServer;
 }
 
 /**
@@ -513,7 +513,7 @@ model HciRepairServerJobProperties extends HciClusterJobProperties {
   /**
    * ClusterJob Type to support polymorphic resource.
    */
-  jobType: "RepairServer";
+  jobType: HciJobType.RepairServer;
 }
 
 /**
@@ -534,7 +534,7 @@ model HciResumeServerJobProperties extends HciClusterJobProperties {
   /**
    * ClusterJob Type to support polymorphic resource.
    */
-  jobType: "ResumeServer";
+  jobType: HciJobType.ResumeServer;
 }
 
 /**

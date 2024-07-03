@@ -86,7 +86,7 @@
         },
         "x-ms-examples": {
           "EdgeDeviceJobs_ListByEdgeDevice": {
-            "$ref": "./examples/EdgeDeviceJobs_ListByEdgeDevice_MaximumSet_Gen.json"
+            "$ref": "./examples/EdgeDeviceJobs_ListByEdgeDevice.json"
           }
         },
         "x-ms-pageable": {
@@ -140,8 +140,8 @@
           }
         },
         "x-ms-examples": {
-          "EdgeDeviceJobs_Get": {
-            "$ref": "./examples/EdgeDeviceJobs_Get_MaximumSet_Gen.json"
+          "EdgeDeviceJobs_Get_RemoteSupport": {
+            "$ref": "./examples/EdgeDeviceJobs_Get_RemoteSupport.json"
           }
         }
       },
@@ -215,6 +215,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_CreateOrUpdate_CollectLog": {
+            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_CollectLog.json"
+          },
+          "EdgeDeviceJobs_CreateOrUpdate_RemoteSupport": {
+            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_RemoteSupport.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -277,7 +285,7 @@
         },
         "x-ms-examples": {
           "EdgeDeviceJobs_Delete": {
-            "$ref": "./examples/EdgeDeviceJobs_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/EdgeDeviceJobs_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -324,6 +332,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_ListByClusters": {
+            "$ref": "./examples/ClusterJobs_ListByClusters.json"
           }
         },
         "x-ms-pageable": {
@@ -377,6 +390,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_Get_AddServerJob": {
+            "$ref": "./examples/ClusterJobs_Get_AddServerJob.json"
           }
         }
       },
@@ -454,8 +472,20 @@
           }
         },
         "x-ms-examples": {
-          "ClusterJobs_CreateOrUpdate": {
-            "$ref": "./examples/ClusterJobs_CreateOrUpdate_MaximumSet_Gen.json"
+          "ClusterJobs_CreateOrUpdate_AddNetworkIntentJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_AddNetworkIntentJob.json"
+          },
+          "ClusterJobs_CreateOrUpdate_AddServerJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_AddServerJob.json"
+          },
+          "ClusterJobs_CreateOrUpdate_PauseServerJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_PauseServerJob.json"
+          },
+          "ClusterJobs_CreateOrUpdate_RepairServerJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_RepairServerJob.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ResumeServerJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ResumeServerJob.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -523,7 +553,7 @@
         },
         "x-ms-examples": {
           "ClusterJobs_Delete": {
-            "$ref": "./examples/ClusterJobs_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/ClusterJobs_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1090,7 +1120,7 @@
           "$ref": "#/definitions/ClusterJob"
         }
       ],
-      "x-ms-discriminator-value": "AzureStackHCI"
+      "x-ms-discriminator-value": "Windows"
     },
     "ClusterJob": {
       "type": "object",
@@ -1758,7 +1788,7 @@
       "type": "string",
       "description": "Edge solution type.",
       "enum": [
-        "AzureStackHCI",
+        "Windows",
         "AzureLinux"
       ],
       "x-ms-enum": {
@@ -1766,9 +1796,9 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "AzureStackHCI",
-            "value": "AzureStackHCI",
-            "description": "Edge solution for Azure stack HCI edge devices."
+            "name": "Windows",
+            "value": "Windows",
+            "description": "Edge solution for Windows based edge devices."
           },
           {
             "name": "AzureLinux",
