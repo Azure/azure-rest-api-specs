@@ -1969,6 +1969,68 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/listQuotaReport": {
+      "post": {
+        "tags": [
+          "Quota Report for Volume"
+        ],
+        "summary": "Lists Quota Report for the volume",
+        "description": "Returns report of quotas for the volume",
+        "operationId": "Volumes_ListQuotaReport",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/listQuotaReportResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/listQuotaReportResponse"
+        },
+        "x-ms-examples": {
+          "ListQuotaReport": {
+            "$ref": "examples/Volumes_ListQuotaReport.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/breakReplication": {
       "post": {
         "tags": [
@@ -2412,14 +2474,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/peerClusterForOnPremMigration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/peerExternalCluster": {
       "post": {
         "summary": "Start Cluster peering",
         "description": "Starts peering the cluster for this migration volume",
         "tags": [
           "Volumes OnPrem Migration"
         ],
-        "operationId": "Volumes_PeerClusterForOnPremMigration",
+        "operationId": "Volumes_PeerExternalCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -2455,8 +2517,8 @@
           "final-state-schema": "#/definitions/clusterPeerCommandResponse"
         },
         "x-ms-examples": {
-          "Volumes_PeerClusterForOnPremMigration": {
-            "$ref": "examples/Volumes_PeerClusterForOnPremMigration.json"
+          "Volumes_PeerExternalCluster": {
+            "$ref": "examples/Volumes_PeerExternalCluster.json"
           }
         },
         "responses": {
@@ -2483,14 +2545,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/createOnPremMigrationReplication": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/authorizeExternalReplication": {
       "post": {
         "summary": "Start migration process",
-        "description": "Starts SVM peering and returns a command to be run on the external ONTAP to accept it.  Once the SVMs have been peered a SnapMirror will be created",
+        "description": "Starts SVM peering and returns a command to be run on the external ONTAP to accept it.  Once the SVM have been peered a SnapMirror will be created",
         "tags": [
           "Volumes OnPrem Migration"
         ],
-        "operationId": "Volumes_CreateOnPremMigrationReplication",
+        "operationId": "Volumes_AuthorizeExternalReplication",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -2517,8 +2579,8 @@
           "final-state-schema": "#/definitions/svmPeerCommandResponse"
         },
         "x-ms-examples": {
-          "Volumes_CreateOnPremMigrationReplication": {
-            "$ref": "examples/Volumes_CreateOnPremMigrationReplication.json"
+          "Volumes_AuthorizeExternalReplication": {
+            "$ref": "examples/Volumes_AuthorizeExternalReplication.json"
           }
         },
         "responses": {
@@ -2545,14 +2607,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/finalizeOnPremMigration": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/finalizeExternalReplication": {
       "post": {
         "summary": "Finalize migration process",
         "description": "Finalizes the migration of a volume by performing a final sync on the replication, breaking and releasing the replication, and breaking the cluster peering if no other migration is active.",
         "tags": [
           "Volumes OnPrem Migration Finalize"
         ],
-        "operationId": "Volumes_FinalizeOnPremMigration",
+        "operationId": "Volumes_FinalizeExternalReplication",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -2594,8 +2656,8 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Volumes_FinalizeOnPremMigration": {
-            "$ref": "examples/Volumes_FinalizeOnPremMigration.json"
+          "Volumes_FinalizeExternalReplication": {
+            "$ref": "examples/Volumes_FinalizeExternalReplication.json"
           }
         }
       }
@@ -6464,6 +6526,11 @@
         "userAssignedIdentity": {
           "type": "string",
           "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault. Applicable if identity.type has 'UserAssigned'. It should match key of identity.userAssignedIdentities."
+        },
+        "federatedClientId": {
+          "type": "string",
+          "description": "ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults.",
+          "example": "87654321-1234-1234-1234-876543214321"
         }
       }
     },
@@ -6661,7 +6728,7 @@
           "title": "size",
           "type": "integer",
           "format": "int64",
-          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiply of 4398046511104).",
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiply of 1099511627776).",
           "default": 4398046511104
         },
         "qosType": {
@@ -6815,8 +6882,8 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume or 2400Tib for LargeVolume on exceptional basis. Specified in bytes.",
-          "minimum": 107374182400,
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
+          "minimum": 53687091200,
           "maximum": 2638827906662400,
           "default": 107374182400,
           "example": 107374182400
@@ -7127,7 +7194,7 @@
         },
         "unixPermissions": {
           "type": "string",
-          "description": "UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.",
+          "description": "UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.  Avoid passing null value for unixPermisisons in volume update operation, As per the behavior, If Null value is passed then user-visible unixPermissions's value will became null, and user will not be able to get unixPermissions's value. On safer side, actual unixPermissions value on volume will remain as its last saved value only.",
           "minLength": 4,
           "maxLength": 4,
           "x-nullable": true,
@@ -7476,6 +7543,17 @@
         "remoteVolumeRegion": {
           "type": "string",
           "description": "The remote region for the other end of the Volume Replication."
+        },
+        "destinationReplications": {
+          "description": "A list of destination replications",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/destinationReplication"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         }
       }
     },
@@ -7635,6 +7713,54 @@
         }
       }
     },
+    "destinationReplication": {
+      "description": "Destination replication properties",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes"
+              }
+            ]
+          },
+          "description": "The resource ID of the remote volume"
+        },
+        "replicationType": {
+          "type": "string",
+          "description": "Indicates whether the replication is cross zone or cross region.",
+          "enum": [
+            "CrossRegionReplication",
+            "CrossZoneReplication"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CrossRegionReplication",
+                "description": "Cross region replication"
+              },
+              {
+                "value": "CrossZoneReplication",
+                "description": "Cross zone replication"
+              }
+            ]
+          }
+        },
+        "region": {
+          "type": "string",
+          "description": "The remote region for the destination volume."
+        },
+        "zone": {
+          "type": "string",
+          "description": "The remote zone for the destination volume."
+        }
+      }
+    },
     "volumePatch": {
       "description": "Volume patch resource",
       "type": "object",
@@ -7682,8 +7808,8 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume or 2400Tib for LargeVolume on exceptional basis. Specified in bytes.",
-          "minimum": 107374182400,
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
+          "minimum": 53687091200,
           "maximum": 2638827906662400,
           "default": 107374182400,
           "example": 107374182400
@@ -8555,6 +8681,62 @@
         }
       }
     },
+    "listQuotaReportResponse": {
+      "description": "Quota Report for volume",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of volume quota report records",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/quotaReport"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      }
+    },
+    "quotaReport": {
+      "description": "Quota report record properties",
+      "type": "object",
+      "properties": {
+        "quotaType": {
+          "description": "Type of quota",
+          "$ref": "#/definitions/quotaType"
+        },
+        "quotaTarget": {
+          "type": "string",
+          "description": "UserID/GroupID/SID based on the quota target type. UserID and groupID can be found by running ‘id’ or ‘getent’ command for the user or group and SID can be found by running <wmic useraccount where name='user-name' get sid>",
+          "example": "1001"
+        },
+        "quotaLimitUsedInKiBs": {
+          "type": "integer",
+          "description": "Specifies the current usage in kibibytes for the user/group quota.",
+          "format": "int64",
+          "example": 1024
+        },
+        "quotaLimitTotalInKiBs": {
+          "type": "integer",
+          "description": "Specifies the total size limit in kibibytes for the user/group quota.",
+          "format": "int64",
+          "example": 1024
+        },
+        "percentageUsed": {
+          "type": "number",
+          "description": "Percentage of used size compared to total size.",
+          "example": 10.0
+        },
+        "isDerivedQuota": {
+          "title": "IsDerivedQuota",
+          "type": "boolean",
+          "description": "Flag to indicate whether the quota is derived from default quota.",
+          "example": true
+        }
+      }
+    },
     "cloudError": {
       "x-ms-external": true,
       "properties": {
@@ -9030,42 +9212,12 @@
           "example": "100006"
         },
         "quotaType": {
-          "title": "quotaType",
-          "type": "string",
           "description": "Type of quota",
+          "$ref": "#/definitions/quotaType",
           "x-ms-mutability": [
             "read",
             "create"
-          ],
-          "enum": [
-            "DefaultUserQuota",
-            "DefaultGroupQuota",
-            "IndividualUserQuota",
-            "IndividualGroupQuota"
-          ],
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "DefaultUserQuota",
-                "description": "Default user quota"
-              },
-              {
-                "value": "DefaultGroupQuota",
-                "description": "Default group quota"
-              },
-              {
-                "value": "IndividualUserQuota",
-                "description": "Individual user quota"
-              },
-              {
-                "value": "IndividualGroupQuota",
-                "description": "Individual group quota"
-              }
-            ]
-          },
-          "example": "DefaultUserQuota"
+          ]
         },
         "quotaTarget": {
           "type": "string",
@@ -9076,6 +9228,40 @@
           ]
         }
       }
+    },
+    "quotaType": {
+      "title": "quotaType",
+      "type": "string",
+      "description": "Type of quota rule",
+      "enum": [
+        "DefaultUserQuota",
+        "DefaultGroupQuota",
+        "IndividualUserQuota",
+        "IndividualGroupQuota"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DefaultUserQuota",
+            "description": "Default user quota"
+          },
+          {
+            "value": "DefaultGroupQuota",
+            "description": "Default group quota"
+          },
+          {
+            "value": "IndividualUserQuota",
+            "description": "Individual user quota"
+          },
+          {
+            "value": "IndividualGroupQuota",
+            "description": "Individual group quota"
+          }
+        ]
+      },
+      "example": "IndividualUserQuota"
     },
     "volumeGroupList": {
       "description": "List of volume group resources",
@@ -10291,26 +10477,26 @@
       }
     },
     "svmPeerCommandResponse": {
-      "description": "Information about SVM peering process",
+      "description": "Information about svm peering process",
       "type": "object",
       "properties": {
         "svmPeeringCommand": {
-          "description": "A command that needs to be run on the external ONTAP to accept SVM peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>",
+          "description": "A command that needs to be run on the external ONTAP to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>",
           "type": "string"
         }
       }
     },
     "peerClusterForVolumeMigrationRequest": {
-      "description": "Source cluster properties for a cluster peer request",
+      "description": "Source Cluster properties for a cluster peer request",
       "type": "object",
       "required": [
-        "peerAddresses"
+        "peerIpAddresses"
       ],
       "properties": {
-        "peerAddresses": {
+        "peerIpAddresses": {
           "type": "array",
           "minItems": 1,
-          "description": "A list of IC-LIF IPs that can be used to connect to the on-prem cluster",
+          "description": "A list of IC-LIF IPs that can be used to connect to the On-prem cluster",
           "example": [
             "0.0.0.1",
             "0.0.0.2",
@@ -10322,15 +10508,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "remotePath": {
-          "description": "The full path to a volume that is to be migrated into ANF. Required for Migration volumes",
-          "type": "object",
-          "$ref": "#/definitions/remotePath",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       }
     }
@@ -10457,4 +10634,3 @@
     }
   }
 }
-
