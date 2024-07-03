@@ -110,6 +110,23 @@ directive:
     reason: Update the default error response to a new format would be a braking change for service.
 ```
 
+### Tag: package-2024-08-preview
+
+These settings apply only when `--tag=package-2024-08-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-preview'
+input-file:
+  - Microsoft.HDInsight/preview/2024-08-01-preview/applications.json
+  - Microsoft.HDInsight/preview/2024-08-01-preview/cluster.json
+  - Microsoft.HDInsight/preview/2024-08-01-preview/configurations.json
+  - Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+  - Microsoft.HDInsight/preview/2024-08-01-preview/locations.json
+  - Microsoft.HDInsight/preview/2024-08-01-preview/operations.json
+  - Microsoft.HDInsight/preview/2024-08-01-preview/privateEndpointConnections.json
+  - Microsoft.HDInsight/preview/2024-08-01-preview/privateLinkResources.json
+  - Microsoft.HDInsight/preview/2024-08-01-preview/scriptActions.json
+  - Microsoft.HDInsight/preview/2024-08-01-preview/virtualMachines.json
+```
 
 ### Tag: package-2023-08-preview
 
