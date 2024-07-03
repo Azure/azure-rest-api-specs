@@ -157,12 +157,7 @@ union AzureLinuxEdgeDeviceJobType {
   /**
    * Job to provide remote support to the device.
    */
-  RemoteSupport: "RemoteSupport",
-
-  /**
-   * Job to establish a remote connection to the device.
-   */
-  RemoteConnect: "RemoteConnect",
+  RemoteSupport: "RemoteSupport"
 }
 
 /**
@@ -224,12 +219,7 @@ union HciEdgeDeviceJobType {
   /**
    * Job to provide remote support to the device.
    */
-  RemoteSupport: "RemoteSupport",
-
-  /**
-   * Job to establish a remote connection to the device.
-   */
-  RemoteConnect: "RemoteConnect",
+  RemoteSupport: "RemoteSupport"
 }
 
 /**
@@ -604,27 +594,6 @@ model HciEdgeDeviceJob extends EdgeDeviceJob {
    * Edge Solution type to support polymorphic resource.
    */
   kind: "HCI";
-}
-
-/**
- * Represents the properties of a remote connect job for HCI.
- */
-model HciRemoteConnectJobProperties extends HciEdgeDeviceJobProperties {
-  /**
-   * user name.
-   */
-  userName: string;
-
-  /**
-   * password.
-   */
-  @secret
-  password: string;
-
-  /**
-   * Job Type to support polymorphic resource.
-   */
-  jobType: HciEdgeDeviceJobType.RemoteConnect;
 }
 
 /**

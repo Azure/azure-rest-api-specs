@@ -408,7 +408,7 @@ model HciAddNetworkIntentJobProperties extends HciClusterJobProperties {
   /**
    * HostNetwork properties to set network intent.
    */
-  hostNetwork?: Record<unknown>;
+  hostNetwork?: DeploymentHostNetwork;
 
   /**
    * ClusterJob Type to support polymorphic resource.

@@ -961,8 +961,7 @@
       "description": "Job Type supported by Azure Linux Edge Devices.",
       "enum": [
         "CollectLog",
-        "RemoteSupport",
-        "RemoteConnect"
+        "RemoteSupport"
       ],
       "x-ms-enum": {
         "name": "AzureLinuxEdgeDeviceJobType",
@@ -977,11 +976,6 @@
             "name": "RemoteSupport",
             "value": "RemoteSupport",
             "description": "Job to provide remote support to the device."
-          },
-          {
-            "name": "RemoteConnect",
-            "value": "RemoteConnect",
-            "description": "Job to establish a remote connection to the device."
           }
         ]
       }
@@ -1820,9 +1814,8 @@
           ]
         },
         "hostNetwork": {
-          "type": "object",
-          "description": "HostNetwork properties to set network intent.",
-          "additionalProperties": {}
+          "$ref": "#/definitions/DeploymentHostNetwork",
+          "description": "HostNetwork properties to set network intent."
         }
       },
       "allOf": [
@@ -2076,8 +2069,7 @@
       "description": "Job Type supported.",
       "enum": [
         "CollectLog",
-        "RemoteSupport",
-        "RemoteConnect"
+        "RemoteSupport"
       ],
       "x-ms-enum": {
         "name": "HciEdgeDeviceJobType",
@@ -2092,11 +2084,6 @@
             "name": "RemoteSupport",
             "value": "RemoteSupport",
             "description": "Job to provide remote support to the device."
-          },
-          {
-            "name": "RemoteConnect",
-            "value": "RemoteConnect",
-            "description": "Job to establish a remote connection to the device."
           }
         ]
       }
@@ -2178,32 +2165,6 @@
         }
       ],
       "x-ms-discriminator-value": "PauseServer"
-    },
-    "HciRemoteConnectJobProperties": {
-      "type": "object",
-      "description": "Represents the properties of a remote connect job for HCI.",
-      "properties": {
-        "userName": {
-          "type": "string",
-          "description": "user name."
-        },
-        "password": {
-          "type": "string",
-          "format": "password",
-          "description": "password.",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "userName",
-        "password"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/HciEdgeDeviceJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "RemoteConnect"
     },
     "HciRemoteSupportJobProperties": {
       "type": "object",
