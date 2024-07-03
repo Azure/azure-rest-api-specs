@@ -69,6 +69,8 @@ suppressions:
   - code: PathResourceProviderNamePascalCase
     reason: Microsoft.AzureStackHCI was chosen over Microsoft.AzureStackHci or Microsoft.AzureStackHyperConvergedInfrastructure
     from:
+      - stackhcivm.json
+      - operations.json
       - arcSettings.json
       - clusters.json
       - extensions.json
@@ -156,6 +158,7 @@ These settings apply only when `--tag=package-preview-2024-05-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2024-05-01-preview'
 input-file:
   - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-05-01-preview/stackhcivm.json
+  - Microsoft.AzureStackHCI/operations/preview/2024-05-01-preview/operations.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/clusters.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/deploymentSettings.json
