@@ -84,13 +84,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "EdgeDeviceJobs_ListByEdgeDevice_MaximumSet_Gen": {
+          "EdgeDeviceJobs_ListByEdgeDevice": {
             "$ref": "./examples/EdgeDeviceJobs_ListByEdgeDevice_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -140,7 +140,7 @@
           }
         },
         "x-ms-examples": {
-          "EdgeDeviceJobs_Get_MaximumSet_Gen": {
+          "EdgeDeviceJobs_Get": {
             "$ref": "./examples/EdgeDeviceJobs_Get_MaximumSet_Gen.json"
           }
         }
@@ -218,12 +218,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "EdgeDeviceJobs_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/EdgeDeviceJobs_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "EdgeDeviceJobs_Delete",
@@ -280,18 +275,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "EdgeDeviceJobs_Delete": {
+            "$ref": "./examples/EdgeDeviceJobs_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "EdgeDeviceJobs_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/EdgeDeviceJobs_Delete_MaximumSet_Gen.json"
-          },
-          "EdgeDeviceJobs_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/EdgeDeviceJobs_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs": {
@@ -336,11 +328,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ClusterJobs_ListByClusters_MaximumSet_Gen": {
-            "$ref": "./examples/ClusterJobs_ListByClusters_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -390,11 +377,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ClusterJobs_Get_MaximumSet_Gen": {
-            "$ref": "./examples/ClusterJobs_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -471,15 +453,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ClusterJobs_CreateOrUpdate": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ClusterJobs_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/ClusterJobs_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ClusterJobs_Delete",
@@ -539,18 +521,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ClusterJobs_Delete": {
+            "$ref": "./examples/ClusterJobs_Delete_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ClusterJobs_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ClusterJobs_Delete_MaximumSet_Gen.json"
-          },
-          "ClusterJobs_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/ClusterJobs_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -925,7 +904,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Status of edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "description": "Status of Edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
           "readOnly": true
         },
         "reportedProperties": {
@@ -1236,6 +1215,33 @@
         }
       }
     },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "A ClusterProperties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the cluster.",
+          "readOnly": true
+        }
+      }
+    },
+    "Clusters": {
+      "type": "object",
+      "description": "A Cluster",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "CollectLogJobProperties": {
       "type": "object",
       "description": "Represents the properties of a log collection job.",
@@ -1523,7 +1529,7 @@
         },
         "steps": {
           "type": "array",
-          "description": "List of steps of edge device job.",
+          "description": "List of steps of Edge device job.",
           "items": {
             "$ref": "#/definitions/Step"
           },
@@ -1588,6 +1594,22 @@
           }
         ]
       }
+    },
+    "EdgeDevice": {
+      "type": "object",
+      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "EdgeDeviceJob": {
       "type": "object",
@@ -1670,7 +1692,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Status of edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "description": "Status of Edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
           "readOnly": true
         },
         "reportedProperties": {
@@ -1955,7 +1977,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/HciEdgeDeviceJobProperties",
-          "description": "HCI edge device job properties"
+          "description": "HCI Edge device job properties"
         }
       },
       "required": [
@@ -1970,7 +1992,7 @@
     },
     "HciEdgeDeviceJobProperties": {
       "type": "object",
-      "description": "HCI edge device job properties",
+      "description": "HCI Edge device job properties",
       "properties": {
         "deploymentMode": {
           "$ref": "#/definitions/DeploymentMode",
@@ -2000,7 +2022,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Status of edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "description": "Status of Edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
           "readOnly": true
         },
         "reportedProperties": {
@@ -2292,7 +2314,7 @@
         },
         "JumboPacket": {
           "type": "string",
-          "description": "A string with the size to be set for Jumb packet frame size for the storage adapters.",
+          "description": "A string with the size to be set for jumbo packet frame size for the storage adapters.",
           "x-ms-client-name": "jumboPacket"
         },
         "NetworkDirect": {
