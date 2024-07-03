@@ -16,8 +16,6 @@ import "./VirtualMachineInstance.tsp";
 import "./HybridIdentityMetadata.tsp";
 import "./AttestationStatus.tsp";
 import "./GuestAgent.tsp";
-import "../Operations.Management/models.tsp";
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
@@ -31,6 +29,8 @@ using TypeSpec.Versioning;
 @service({
   title: "Microsoft.AzureStackHCI",
 })
+
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint"
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AzureStackHCI;
