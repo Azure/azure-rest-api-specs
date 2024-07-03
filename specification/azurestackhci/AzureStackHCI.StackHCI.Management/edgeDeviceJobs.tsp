@@ -31,10 +31,10 @@ model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
 /**
  * Jobs resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("EdgeDevice Jobs resource")
 @parentResource(EdgeDevice)
 @discriminator("kind")
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 model EdgeDeviceJob is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = EdgeDeviceJob,
@@ -162,7 +162,7 @@ union AzureLinuxEdgeDeviceJobType {
   /**
    * Job to establish a remote connection to the device.
    */
-  RemoteConnect: "RemoteConnect"
+  RemoteConnect: "RemoteConnect",
 }
 
 /**
@@ -229,7 +229,7 @@ union HciEdgeDeviceJobType {
   /**
    * Job to establish a remote connection to the device.
    */
-  RemoteConnect: "RemoteConnect"
+  RemoteConnect: "RemoteConnect",
 }
 
 /**
@@ -259,9 +259,9 @@ union EdgeDeviceJobType {
  */
 model AzureLinuxCollectLogJobProperties
   extends AzureLinuxEdgeDeviceJobProperties {
-  ...CollectLogJobProperties,
+  ...CollectLogJobProperties;
 
-   /**
+  /**
    * Job Type to support polymorphic resource.
    */
   jobType: AzureLinuxEdgeDeviceJobType.CollectLog;
@@ -336,7 +336,6 @@ model LogCollectionSession {
 model AzureLinuxEdgeDeviceJobProperties {
   ...EdgeDeviceJobProperties;
 
- 
   @doc("Job Type to support polymorphic resource.")
   @extension("x-ms-mutability", ["create", "read"])
   jobType: AzureLinuxEdgeDeviceJobType;
@@ -350,7 +349,6 @@ model EdgeDeviceJobProperties {
    * Deployment mode to trigger job.
    */
   deploymentMode?: DeploymentMode;
-
 
   /**
    * Job provisioning state
@@ -432,7 +430,7 @@ model AzureLinuxEdgeDeviceJob extends EdgeDeviceJob {
  */
 model AzureLinuxRemoteSupportJobProperties
   extends AzureLinuxEdgeDeviceJobProperties {
-  ...RemoteSupportJobProperties,
+  ...RemoteSupportJobProperties;
 
   /**
    * Job Type to support polymorphic resource.
@@ -572,9 +570,9 @@ model CollectLogJobProperties {
  * Represents the properties of an HCI Collect Log job.
  */
 model HciCollectLogJobProperties extends HciEdgeDeviceJobProperties {
-  ...CollectLogJobProperties,
+  ...CollectLogJobProperties;
 
-   /**
+  /**
    * Job Type to support polymorphic resource.
    */
   jobType: HciEdgeDeviceJobType.CollectLog;
@@ -583,13 +581,14 @@ model HciCollectLogJobProperties extends HciEdgeDeviceJobProperties {
 /**
  * HCI Edge device job properties
  */
-@discriminator("jobType") 
+@discriminator("jobType")
 @doc("HCI Edge device job properties")
 model HciEdgeDeviceJobProperties {
-  ...EdgeDeviceJobProperties,
+  ...EdgeDeviceJobProperties;
+
   @doc("Job Type to support polymorphic resource.")
   @extension("x-ms-mutability", ["create", "read"])
-  jobType: HciEdgeDeviceJobType
+  jobType: HciEdgeDeviceJobType;
 }
 
 /**
@@ -632,7 +631,7 @@ model HciRemoteConnectJobProperties extends HciEdgeDeviceJobProperties {
  * Represents the properties of a remote support job for HCI.
  */
 model HciRemoteSupportJobProperties extends HciEdgeDeviceJobProperties {
-  ...RemoteSupportJobProperties,
+  ...RemoteSupportJobProperties;
 
   /**
    * Job Type to support polymorphic resource.

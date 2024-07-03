@@ -73,8 +73,6 @@ union StatusEnum {
   string,
 }
 
-
-
 @doc("Allowed Node Categories for this Pool, based on the pool type")
 model NodeModelDetails {
   @doc("The manufacturer of the node")

@@ -14,8 +14,6 @@ using Azure.Core;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-
-
 @doc("A Cluster")
 model Clusters is TrackedResource<ClusterProperties> {
   @pattern("^[a-zA-Z0-9-]{3,24}$")
@@ -24,7 +22,7 @@ model Clusters is TrackedResource<ClusterProperties> {
   @segment("clusters")
   @visibility("read")
   @path("/clusters/{clusterName}")
-  name: string
+  name: string;
 }
 @doc("A ClusterProperties")
 model ClusterProperties {
@@ -35,16 +33,14 @@ model ClusterProperties {
   provisioningState?: ProvisioningState;
 }
 
-
-
 // FIXME: ClusterJob has no properties property
 /**
  * Jobs resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("Cluster Jobs resource")
 @parentResource(Clusters)
 @discriminator("kind")
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 model ClusterJob is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = ClusterJob,
@@ -53,10 +49,10 @@ model ClusterJob is Azure.ResourceManager.ProxyResource<{}> {
     NamePattern = "^[a-zA-Z0-9-]{3,24}$"
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   /**
    * Edge Solution type to support polymorphic resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   @visibility("read", "create")
   kind: EdgeSolutionType;
 }
@@ -132,8 +128,6 @@ union EceSecrets {
   WitnessStorageKey: "WitnessStorageKey",
 }
 
-
-
 /**
  * ClusterJob Type supported.
  */
@@ -148,7 +142,7 @@ union AzureLinuxJobType {
   /**
    * Job to repair a server in the cluster.
    */
-  RepairServer: "RepairServer"
+  RepairServer: "RepairServer",
 }
 
 /**
@@ -192,7 +186,8 @@ union HciJobType {
  * Properties for adding a server to the cluster.
  */
 model AddServerJobProperties {
-  ...ClusterJobProperties,
+  ...ClusterJobProperties;
+
   /**
    * Name of server to be added to the cluster.
    */
@@ -309,7 +304,7 @@ model JobReportedProperties {
  * Properties for adding a server in Azure Linux cluster job.
  */
 model AzureLinuxAddServerJobProperties extends AzureLinuxClusterJobProperties {
-  ...AddServerJobProperties,
+  ...AddServerJobProperties;
 
   /**
    * Job Type to support polymorphic resource.
@@ -320,13 +315,14 @@ model AzureLinuxAddServerJobProperties extends AzureLinuxClusterJobProperties {
 /**
  * Cluster Job properties
  */
-@discriminator("jobType") 
+@discriminator("jobType")
 @doc("Cluster Job properties")
-model AzureLinuxClusterJobProperties  {
-  ...ClusterJobProperties,
+model AzureLinuxClusterJobProperties {
+  ...ClusterJobProperties;
+
   @doc("Job Type to support polymorphic resource.")
   @extension("x-ms-mutability", ["create", "read"])
-  jobType: AzureLinuxJobType
+  jobType: AzureLinuxJobType;
 }
 
 /**
@@ -347,7 +343,8 @@ model AzureLinuxJob extends ClusterJob {
 /**
  * Properties for repairing a server in the cluster.
  */
-model AzureLinuxRepairServerJobProperties extends AzureLinuxClusterJobProperties {
+model AzureLinuxRepairServerJobProperties
+  extends AzureLinuxClusterJobProperties {
   /**
    * Name of server to be repaired in cluster.
    */
@@ -391,12 +388,12 @@ model AzureStackHciJob extends ClusterJob {
  */
 @discriminator("jobType")
 model HciClusterJobProperties {
-  ...ClusterJobProperties,
+  ...ClusterJobProperties;
+
   @doc("Job Type to support polymorphic resource.")
   @extension("x-ms-mutability", ["create", "read"])
-  jobType: HciJobType
+  jobType: HciJobType;
 }
-
 
 /**
  * Properties for adding network intent to a cluster.
@@ -547,7 +544,7 @@ model HciSetInformationJobProperties extends HciClusterJobProperties {
   /**
    * A string with the size to be set for jumbo packet frame size for the storage adapters.
    */
-   jumboPacket?: string;
+  jumboPacket?: string;
 
   /**
    * A string to be set to enabled or disabled to specify if network direct mode should be enabled/disabled.
@@ -557,12 +554,12 @@ model HciSetInformationJobProperties extends HciClusterJobProperties {
   /**
    * A string that specifies the network direct technology to be used. Possible values are iWARP, RoCE and RoCEv2.
    */
-   networkDirectTechnology?: string;
+  networkDirectTechnology?: string;
 
   /**
    * A string to specify the 802.1Q priority for the cluster.
    */
-   priorityValue8021ActionCluster?: string;
+  priorityValue8021ActionCluster?: string;
 
   /**
    * A string to specify the 802.1Q priority for SMB.
@@ -570,11 +567,11 @@ model HciSetInformationJobProperties extends HciClusterJobProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   priorityValue8021ActionSMB?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   /**
    * A string to specify the bandwidth percentage to be used for SMB.
    */
-   bandwidthPercentageSMB?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  bandwidthPercentageSMB?: string;
 
   /**
    * ClusterJob Type to support polymorphic resource.
@@ -586,7 +583,8 @@ model HciSetInformationJobProperties extends HciClusterJobProperties {
  * Properties for pausing a server in the cluster.
  */
 model PauseServerJobProperties {
-  ...ClusterJobProperties,
+  ...ClusterJobProperties;
+
   /**
    * Trigger pause job for given server name in cluster.
    */
@@ -597,7 +595,8 @@ model PauseServerJobProperties {
  * Properties for repairing a server in the cluster.
  */
 model RepairServerJobProperties {
-  ...ClusterJobProperties,
+  ...ClusterJobProperties;
+
   /**
    * Name of server to be repaired in cluster.
    */
@@ -613,8 +612,9 @@ model RepairServerJobProperties {
 /**
  * Properties for resuming a server in the cluster.
  */
-model ResumeServerJobProperties  {
-  ...ClusterJobProperties,
+model ResumeServerJobProperties {
+  ...ClusterJobProperties;
+
   /**
    * Trigger resume job for given server name in cluster.
    */

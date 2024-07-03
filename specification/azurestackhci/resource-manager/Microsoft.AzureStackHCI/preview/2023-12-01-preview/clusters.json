@@ -284,18 +284,7 @@
             "description": "OK"
           },
           "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
+            "description": "Accepted"
           },
           "204": {
             "description": "No content"
@@ -347,18 +336,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -407,18 +385,7 @@
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -954,6 +921,49 @@
             "modelAsString": true
           },
           "readOnly": true
+        },
+        "correlationId": {
+          "description": "CorrelationId of the log collection",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTimeCollected": {
+          "description": "End Time of the logs when it was collected",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "logCollectionError": {
+          "$ref": "#/definitions/LogCollectionError",
+          "readOnly": true
+        }
+      }
+    },
+    "AccessLevel": {
+      "description": "Remote Support Access Level",
+      "type": "string",
+      "enum": [
+        "Diagnostics",
+        "DiagnosticsAndRepair"
+      ],
+      "x-ms-enum": {
+        "name": "AccessLevel",
+        "modelAsString": true
+      }
+    },
+    "LogCollectionError": {
+      "description": "Log Collection Error details of the cluster.",
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "description": "Error Code of the log collection",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error Message of the log collection",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -962,17 +972,7 @@
       "type": "object",
       "properties": {
         "accessLevel": {
-          "description": "Remote Support Access Level",
-          "type": "string",
-          "enum": [
-            "None",
-            "Diagnostics",
-            "DiagnosticsAndRepair"
-          ],
-          "x-ms-enum": {
-            "name": "AccessLevel",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/AccessLevel",
           "readOnly": true
         },
         "expirationTimeStamp": {
@@ -1081,17 +1081,7 @@
           "readOnly": true
         },
         "accessLevel": {
-          "description": "Remote Support Access Level",
-          "type": "string",
-          "enum": [
-            "None",
-            "Diagnostics",
-            "DiagnosticsAndRepair"
-          ],
-          "x-ms-enum": {
-            "name": "AccessLevel",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/AccessLevel",
           "readOnly": true
         }
       }
@@ -1424,6 +1414,7 @@
       "additionalProperties": false
     },
     "LogCollectionRequestProperties": {
+      "description": "Properties for Log Collection Request",
       "type": "object",
       "properties": {
         "fromDate": {
@@ -1437,23 +1428,19 @@
           "format": "date-time"
         }
       },
+      "required": [
+        "fromDate",
+        "toDate"
+      ],
       "additionalProperties": false
     },
     "RemoteSupportRequestProperties": {
+      "description": "Properties for Remote Support Request",
       "type": "object",
       "properties": {
         "accessLevel": {
-          "description": "Remote Support Access Level",
-          "type": "string",
-          "enum": [
-            "None",
-            "Diagnostics",
-            "DiagnosticsAndRepair"
-          ],
-          "x-ms-enum": {
-            "name": "AccessLevel",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/AccessLevel",
+          "readOnly": true
         },
         "expirationTimeStamp": {
           "description": "Expiration DateTimeStamp when Remote Support Access will be expired",
@@ -1502,6 +1489,7 @@
       "additionalProperties": false
     },
     "LogCollectionRequest": {
+      "description": "Log Collection Request",
       "type": "object",
       "properties": {
         "properties": {
@@ -1511,6 +1499,7 @@
       "additionalProperties": false
     },
     "RemoteSupportRequest": {
+      "description": "Remote Support Request",
       "type": "object",
       "properties": {
         "properties": {

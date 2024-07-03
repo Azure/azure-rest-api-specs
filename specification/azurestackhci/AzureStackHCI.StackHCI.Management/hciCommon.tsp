@@ -64,93 +64,92 @@ union ProvisioningState {
  * Deployment mode to trigger job.
  */
 union DeploymentMode {
-    string,
-  
-    /**
-     * Validate ECE action deployment for a cluster.
-     */
-    Validate: "Validate",
-  
-    /**
-     * Deploy ECE action deployment for a cluster.
-     */
-    Deploy: "Deploy",
-  }
+  string,
 
-  
+  /**
+   * Validate ECE action deployment for a cluster.
+   */
+  Validate: "Validate",
+
+  /**
+   * Deploy ECE action deployment for a cluster.
+   */
+  Deploy: "Deploy",
+}
+
 /**
  * Validation / deployment status details for Job.
  */
 model EceActionStatus {
-    /**
-     * Job status.
-     */
-    @visibility("read")
-    status?: string;
-  
-    /**
-     * List of steps of Edge device job.
-     */
-    @visibility("read")
-    @extension("x-ms-identifiers", ["name"])
-    steps?: Step[];
-  }
+  /**
+   * Job status.
+   */
+  @visibility("read")
+  status?: string;
+
+  /**
+   * List of steps of Edge device job.
+   */
+  @visibility("read")
+  @extension("x-ms-identifiers", ["name"])
+  steps?: Step[];
+}
 
 /**
  * Step details during job execution.
  */
 model Step {
-    /**
-     * Name of step.
-     */
-    @visibility("read")
-    name?: string;
-  
-    /**
-     * Description of step.
-     */
-    @visibility("read")
-    description?: string;
-  
-    /**
-     * FullStepIndex of step.
-     */
-    @visibility("read")
-    fullStepIndex?: string;
-  
-    /**
-     * Start time of step.
-     */
-    @visibility("read")
-    startTimeUtc?: string;
-  
-    /**
-     * End time of step.
-     */
-    @visibility("read")
-    endTimeUtc?: string;
-  
-    /**
-     * Status of step. Allowed values are 'Error', 'Success', 'InProgress'
-     */
-    @visibility("read")
-    status?: string;
-  
-    /**
-     * List of nested steps during job execution..
-     */
-    @visibility("read")
-    @extension("x-ms-identifiers", ["name"])
-    steps?: Step[];
-  
-    /**
-     * List of exceptions in job execution.
-     */
-    @visibility("read")
-    exception?: string[];
-  }
-  
   /**
+   * Name of step.
+   */
+  @visibility("read")
+  name?: string;
+
+  /**
+   * Description of step.
+   */
+  @visibility("read")
+  description?: string;
+
+  /**
+   * FullStepIndex of step.
+   */
+  @visibility("read")
+  fullStepIndex?: string;
+
+  /**
+   * Start time of step.
+   */
+  @visibility("read")
+  startTimeUtc?: string;
+
+  /**
+   * End time of step.
+   */
+  @visibility("read")
+  endTimeUtc?: string;
+
+  /**
+   * Status of step. Allowed values are 'Error', 'Success', 'InProgress'
+   */
+  @visibility("read")
+  status?: string;
+
+  /**
+   * List of nested steps during job execution..
+   */
+  @visibility("read")
+  @extension("x-ms-identifiers", ["name"])
+  steps?: Step[];
+
+  /**
+   * List of exceptions in job execution.
+   */
+  @visibility("read")
+  exception?: string[];
+}
+
+/**
  * The HostNetwork of a cluster.
  */
 model DeploymentHostNetwork {
@@ -249,18 +248,18 @@ model DeploymentQosPolicyOverrides {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
-   priorityValue8021ActionCluster?: string;
+  priorityValue8021ActionCluster?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   priorityValue8021ActionSMB?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   bandwidthPercentageSMB?: string;
 }
 
@@ -306,11 +305,10 @@ model DeploymentStorageNetworks {
   /**
    * List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", ["physicalNode"])
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @OpenAPI.extension("x-ms-identifiers", ["physicalNode"])
   storageAdapterIPInfo?: DeploymentStorageAdapterIPInfo[];
 }
-
 
 /**
  * The StorageAdapter physical nodes of a cluster.
