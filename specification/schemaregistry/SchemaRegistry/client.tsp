@@ -6,7 +6,7 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using SchemaRegistry;
 
-@TypeSpec.Versioning.useDependency(ServiceVersion.V2023_07_01)
+@TypeSpec.Versioning.useDependency(ServiceVersion.V2021_10)
 namespace ClientCustomizations;
 
 // operations
