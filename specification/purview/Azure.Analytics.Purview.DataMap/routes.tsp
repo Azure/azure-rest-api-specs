@@ -116,7 +116,7 @@ interface Entity {
         """)
       @query
       collectionId?: string;
-    } & AtlasEntityWithExtInfo,
+    } & BodyParameter<AtlasEntityWithExtInfo>,
     EntityMutationResult,
     AtlasApiVersionParameterTraits
   >;
@@ -174,7 +174,7 @@ interface Entity {
         """)
       @query
       businessAttributeUpdateBehavior?: BusinessAttributeUpdateBehavior;
-    } & AtlasEntitiesWithExtInfo,
+    } & BodyParameter<AtlasEntitiesWithExtInfo>,
     EntityMutationResult,
     AtlasApiVersionParameterTraits
   >;
@@ -447,7 +447,7 @@ interface Entity {
         """)
       @query("attr:qualifiedName")
       attribute?: string;
-    } & AtlasEntityWithExtInfo,
+    } & BodyParameter<AtlasEntityWithExtInfo>,
     EntityMutationResult,
     {}
   >;
@@ -576,7 +576,7 @@ interface Entity {
   @route("/atlas/v2/entity/bulk/setClassifications")
   @post
   bulkSetClassifications is AtlasOperation<
-    AtlasEntityHeaders,
+    BodyParameter<AtlasEntityHeaders>,
     OkResponse<string[]>,
     {}
   >;
@@ -765,7 +765,7 @@ interface Entity {
   @route("/atlas/v2/entity/businessmetadata/import")
   @post
   importBusinessMetadata is AtlasImportOperation<
-    BusinessMetadataOptions,
+    BodyParameter<BusinessMetadataOptions>,
     BulkImportResult,
     MultipartFormDataRequestHeadersTraits
   >;
@@ -966,7 +966,7 @@ interface Entity {
       @doc("The collection where entities will be moved to.")
       @query
       collectionId: string;
-    } & MoveEntitiesOptions,
+    } & BodyParameter<MoveEntitiesOptions>,
     EntityMutationResult,
     {},
     AtlasErrorResponse
