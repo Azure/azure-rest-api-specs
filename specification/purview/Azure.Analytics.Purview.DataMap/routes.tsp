@@ -205,7 +205,7 @@ interface Entity {
   @doc("Associate a classification to multiple entities in bulk.")
   @route("/atlas/v2/entity/bulk/classification")
   @post
-  addClassification is AtlasOperation<ClassificationAssociateOptions, void, {}>;
+  addClassification is AtlasOperation<BodyParameter<ClassificationAssociateOptions>, void, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
