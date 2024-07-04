@@ -865,11 +865,13 @@
         "lastLogGenerated": {
           "type": "string",
           "format": "date-time",
-          "description": "To date for log collection."
+          "description": "To date for log collection.",
+          "readOnly": true
         },
         "reportedProperties": {
           "$ref": "#/definitions/LogCollectionReportedProperties",
-          "description": "log collection job reported properties."
+          "description": "log collection job reported properties.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1042,7 +1044,8 @@
         },
         "reportedProperties": {
           "$ref": "#/definitions/RemoteSupportReportedProperties",
-          "description": "log collection job reported properties."
+          "description": "log collection job reported properties.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1283,11 +1286,13 @@
         "lastLogGenerated": {
           "type": "string",
           "format": "date-time",
-          "description": "To date for log collection."
+          "description": "To date for log collection.",
+          "readOnly": true
         },
         "reportedProperties": {
           "$ref": "#/definitions/LogCollectionReportedProperties",
-          "description": "log collection job reported properties."
+          "description": "log collection job reported properties.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1973,11 +1978,13 @@
         "lastLogGenerated": {
           "type": "string",
           "format": "date-time",
-          "description": "To date for log collection."
+          "description": "To date for log collection.",
+          "readOnly": true
         },
         "reportedProperties": {
           "$ref": "#/definitions/LogCollectionReportedProperties",
-          "description": "log collection job reported properties."
+          "description": "log collection job reported properties.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2185,7 +2192,8 @@
         },
         "reportedProperties": {
           "$ref": "#/definitions/RemoteSupportReportedProperties",
-          "description": "log collection job reported properties."
+          "description": "log collection job reported properties.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2365,8 +2373,15 @@
           "readOnly": true
         },
         "logCollectionSessionDetails": {
-          "$ref": "#/definitions/LogCollectionSession",
-          "description": "Details of the log collection session."
+          "type": "array",
+          "description": "Details of the log collection session.",
+          "items": {
+            "$ref": "#/definitions/LogCollectionSession"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "correlationId"
+          ]
         }
       }
     },
@@ -2376,28 +2391,34 @@
       "properties": {
         "startTime": {
           "type": "string",
-          "description": "The timestamp when log collection started, in ISO 8601 format."
+          "description": "The timestamp when log collection started, in ISO 8601 format.",
+          "readOnly": true
         },
         "endTime": {
           "type": "string",
-          "description": "The timestamp when log collection ended, in ISO 8601 format."
+          "description": "The timestamp when log collection ended, in ISO 8601 format.",
+          "readOnly": true
         },
         "timeCollected": {
           "type": "string",
-          "description": "The total time logs were collected for, in ISO 8601 duration format."
+          "description": "The total time logs were collected for, in ISO 8601 duration format.",
+          "readOnly": true
         },
         "logSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The size of the collected logs in bytes."
+          "description": "The size of the collected logs in bytes.",
+          "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/LogCollectionStatus",
-          "description": "The status of the log collection session."
+          "description": "The status of the log collection session.",
+          "readOnly": true
         },
         "correlationId": {
           "type": "string",
-          "description": "A unique identifier for correlating this log collection session with other operations or sessions."
+          "description": "A unique identifier for correlating this log collection session with other operations or sessions.",
+          "readOnly": true
         }
       }
     },
@@ -2629,7 +2650,8 @@
         },
         "reportedProperties": {
           "$ref": "#/definitions/RemoteSupportReportedProperties",
-          "description": "log collection job reported properties."
+          "description": "log collection job reported properties.",
+          "readOnly": true
         }
       },
       "required": [
@@ -2644,33 +2666,40 @@
       "properties": {
         "arcResourceId": {
           "type": "string",
-          "description": "The resource ID of the Azure Arc enabled server."
+          "description": "The resource ID of the Azure Arc enabled server.",
+          "readOnly": true
         },
         "state": {
           "type": "string",
-          "description": "The state of the remote support node."
+          "description": "The state of the remote support node.",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the node settings were created, in UTC."
+          "description": "The timestamp when the node settings were created, in UTC.",
+          "readOnly": true
         },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The timestamp when the node settings were last updated, in UTC."
+          "description": "The timestamp when the node settings were last updated, in UTC.",
+          "readOnly": true
         },
         "connectionStatus": {
           "type": "string",
-          "description": "The current connection status of the remote support session."
+          "description": "The current connection status of the remote support session.",
+          "readOnly": true
         },
         "connectionErrorMessage": {
           "type": "string",
-          "description": "The error message, if any, from the last connection attempt."
+          "description": "The error message, if any, from the last connection attempt.",
+          "readOnly": true
         },
         "transcriptLocation": {
           "type": "string",
-          "description": "The location where the session transcript is stored."
+          "description": "The location where the session transcript is stored.",
+          "readOnly": true
         }
       }
     },
@@ -2695,12 +2724,20 @@
           "readOnly": true
         },
         "nodeSettings": {
-          "$ref": "#/definitions/RemoteSupportNodeSettings",
-          "description": "Optional settings for configuring the node for remote support."
+          "type": "array",
+          "description": "Optional settings for configuring the node for remote support.",
+          "items": {
+            "$ref": "#/definitions/RemoteSupportNodeSettings"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "arcResourceId"
+          ]
         },
         "sessionDetails": {
           "$ref": "#/definitions/RemoteSupportSession",
-          "description": "Details of the remote support session."
+          "description": "Details of the remote support session.",
+          "readOnly": true
         }
       }
     },
@@ -2711,25 +2748,30 @@
         "sessionStartTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the remote support session, in UTC."
+          "description": "The start time of the remote support session, in UTC.",
+          "readOnly": true
         },
         "sessionEndTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the remote support session, in UTC."
+          "description": "The end time of the remote support session, in UTC.",
+          "readOnly": true
         },
         "nodeName": {
           "type": "string",
-          "description": "The name of the node for which the session was initiated."
+          "description": "The name of the node for which the session was initiated.",
+          "readOnly": true
         },
         "duration": {
           "type": "integer",
           "format": "int32",
-          "description": "The duration of the session in minutes."
+          "description": "The duration of the session in minutes.",
+          "readOnly": true
         },
         "accessLevel": {
           "$ref": "#/definitions/RemoteSupportAccessLevel",
-          "description": "The level of access granted during the remote support session."
+          "description": "The level of access granted during the remote support session.",
+          "readOnly": true
         }
       }
     },

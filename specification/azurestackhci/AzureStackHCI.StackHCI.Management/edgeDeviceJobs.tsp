@@ -282,7 +282,9 @@ model LogCollectionReportedProperties {
   /**
    * Details of the log collection session.
    */
-  logCollectionSessionDetails?: LogCollectionSession;
+  @visibility("read")
+  @extension("x-ms-identifiers", ["correlationId"])
+  logCollectionSessionDetails?: LogCollectionSession[];
 }
 
 /**
@@ -292,31 +294,37 @@ model LogCollectionSession {
   /**
    * The timestamp when log collection started, in ISO 8601 format.
    */
+  @visibility("read")
   startTime?: string;
 
   /**
    * The timestamp when log collection ended, in ISO 8601 format.
    */
+  @visibility("read")
   endTime?: string;
 
   /**
    * The total time logs were collected for, in ISO 8601 duration format.
    */
+  @visibility("read")
   timeCollected?: string;
 
   /**
    * The size of the collected logs in bytes.
    */
+  @visibility("read")
   logSize?: int32;
 
   /**
    * The status of the log collection session.
    */
+  @visibility("read")
   status?: LogCollectionStatus;
 
   /**
    * A unique identifier for correlating this log collection session with other operations or sessions.
    */
+  @visibility("read")
   correlationId?: string;
 }
 /**
@@ -412,7 +420,7 @@ model AzureLinuxEdgeDeviceJob extends EdgeDeviceJob {
   /**
    * Edge Solution type to support polymorphic resource.
    */
-  kind: "AzureLinux";
+  kind: DeviceType.AzureLinux;
 }
 
 /**
@@ -453,11 +461,14 @@ model RemoteSupportReportedProperties {
   /**
    * Optional settings for configuring the node for remote support.
    */
-  nodeSettings?: RemoteSupportNodeSettings;
+  @visibility("read")
+  @extension("x-ms-identifiers", ["arcResourceId"])
+  nodeSettings?: RemoteSupportNodeSettings[];
 
   /**
    * Details of the remote support session.
    */
+  @visibility("read")
   sessionDetails?: RemoteSupportSession;
 }
 
@@ -468,36 +479,43 @@ model RemoteSupportNodeSettings {
   /**
    * The resource ID of the Azure Arc enabled server.
    */
+  @visibility("read")
   arcResourceId?: string;
 
   /**
    * The state of the remote support node.
    */
+  @visibility("read")
   state?: string;
 
   /**
    * The timestamp when the node settings were created, in UTC.
    */
+  @visibility("read")
   createdAt?: utcDateTime;
 
   /**
    * The timestamp when the node settings were last updated, in UTC.
    */
+  @visibility("read")
   updatedAt?: utcDateTime;
 
   /**
    * The current connection status of the remote support session.
    */
+  @visibility("read")
   connectionStatus?: string;
 
   /**
    * The error message, if any, from the last connection attempt.
    */
+  @visibility("read")
   connectionErrorMessage?: string;
 
   /**
    * The location where the session transcript is stored.
    */
+  @visibility("read")
   transcriptLocation?: string;
 }
 
@@ -508,26 +526,31 @@ model RemoteSupportSession {
   /**
    * The start time of the remote support session, in UTC.
    */
+  @visibility("read")
   sessionStartTime?: utcDateTime;
 
   /**
    * The end time of the remote support session, in UTC.
    */
+  @visibility("read")
   sessionEndTime?: utcDateTime;
 
   /**
    * The name of the node for which the session was initiated.
    */
+  @visibility("read")
   nodeName?: string;
 
   /**
    * The duration of the session in minutes.
    */
+  @visibility("read")
   duration?: int32;
 
   /**
    * The level of access granted during the remote support session.
    */
+  @visibility("read")
   accessLevel?: RemoteSupportAccessLevel;
 }
 
@@ -548,11 +571,13 @@ model CollectLogJobProperties {
   /**
    * To date for log collection.
    */
+  @visibility("read")
   lastLogGenerated?: utcDateTime;
 
   /**
    * log collection job reported properties.
    */
+  @visibility("read")
   reportedProperties?: LogCollectionReportedProperties;
 }
 
@@ -630,5 +655,6 @@ model RemoteSupportJobProperties {
   /**
    * log collection job reported properties.
    */
+  @visibility("read")
   reportedProperties?: RemoteSupportReportedProperties;
 }

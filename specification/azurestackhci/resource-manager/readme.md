@@ -99,7 +99,7 @@ suppressions:
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
     from:
       - deploymentSettings.json
-      - jobs.json
+      - hci.json
       - clusters.json
       - securitySettings.json
     where:
@@ -136,7 +136,7 @@ suppressions:
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
     from:
       - deploymentSettings.json
-      - jobs.json
+      - hci.json
     where:
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
