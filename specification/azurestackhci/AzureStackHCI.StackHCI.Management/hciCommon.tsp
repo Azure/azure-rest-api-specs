@@ -213,7 +213,7 @@ model DeploymentIntents {
   /**
    * Set QoS PolicyOverrides for cluster.
    */
-  qosPolicyOverrides?: DeploymentQosPolicyOverrides;
+  qosPolicyOverrides?: QosPolicyOverrides;
 
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
@@ -244,7 +244,7 @@ model DeploymentVirtualSwitchConfigurationOverrides {
 /**
  * The QoSPolicyOverrides of a cluster.
  */
-model DeploymentQosPolicyOverrides {
+model QosPolicyOverrides {
   /**
    * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
    */

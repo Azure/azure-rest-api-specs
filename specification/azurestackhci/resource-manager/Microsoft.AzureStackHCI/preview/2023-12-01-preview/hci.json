@@ -1387,7 +1387,7 @@
           "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         },
         "qosPolicyOverrides": {
-          "$ref": "#/definitions/DeploymentQosPolicyOverrides",
+          "$ref": "#/definitions/QosPolicyOverrides",
           "description": "Set QoS PolicyOverrides for cluster."
         },
         "overrideAdapterProperty": {
@@ -1422,24 +1422,6 @@
             "description": "Deploy ECE action deployment for a cluster."
           }
         ]
-      }
-    },
-    "DeploymentQosPolicyOverrides": {
-      "type": "object",
-      "description": "The QoSPolicyOverrides of a cluster.",
-      "properties": {
-        "priorityValue8021Action_Cluster": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "priorityValue8021Action_SMB": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        },
-        "bandwidthPercentage_SMB": {
-          "type": "string",
-          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        }
       }
     },
     "DeploymentStorageAdapterIPInfo": {
@@ -2600,6 +2582,24 @@
         ]
       },
       "readOnly": true
+    },
+    "QosPolicyOverrides": {
+      "type": "object",
+      "description": "The QoSPolicyOverrides of a cluster.",
+      "properties": {
+        "priorityValue8021Action_Cluster": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "priorityValue8021Action_SMB": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "bandwidthPercentage_SMB": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        }
+      }
     },
     "RemoteSupportAccessLevel": {
       "type": "string",
