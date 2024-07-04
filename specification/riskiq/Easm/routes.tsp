@@ -50,7 +50,7 @@ interface DataConnections {
   @action("validate")
   validateDataConnection is Operations.ResourceCollectionAction<
     DataConnection,
-    DataConnectionData,
+    BodyParameter<DataConnectionData>,
     ValidateResult
   >;
   @doc("Retrieve a data connection with a given dataConnectionName.")
@@ -62,7 +62,7 @@ interface DataConnections {
   @put
   createOrReplaceDataConnection is Foundations.ResourceOperation<
     DataConnection,
-    DataConnectionData,
+    BodyParameter<DataConnectionData>,
     DataConnection
   >;
 
@@ -82,7 +82,7 @@ interface DiscoveryGroups {
   @projectedName("csharp", "ValidateDiscoveryGroup")
   validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
-    DiscoGroupData,
+    BodyParameter<DiscoGroupData>,
     ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
@@ -141,7 +141,7 @@ interface Reports {
   @route("/reports/assets:getSnapshot")
   @post
   getSnapshot is Foundations.Operation<
-    ReportAssetSnapshotRequest,
+    BodyParameter<ReportAssetSnapshotRequest>,
     ReportAssetSnapshotResult
   >;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -149,7 +149,7 @@ interface Reports {
   @route("/reports/assets:getSummary")
   @post
   getSummary is Foundations.Operation<
-    ReportAssetSummaryRequest,
+    BodyParameter<ReportAssetSummaryRequest>,
     ReportAssetSummaryResult
   >;
 }
