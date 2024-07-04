@@ -61,6 +61,78 @@ union ProvisioningState {
 }
 
 /**
+ * Represents the various statuses a job can have throughout its lifecycle.
+ */
+union JobStatus {
+  string,
+
+  /**
+   * The job status has not been specified.
+   */
+  NotSpecified: "NotSpecified",
+
+  /**
+   * The job is currently undergoing validation.
+   */
+  ValidationInProgress: "ValidationInProgress",
+
+  /**
+   * The job has successfully passed validation.
+   */
+  ValidationSuccess: "ValidationSuccess",
+
+  /**
+   * The job has failed validation.
+   */
+  ValidationFailed: "ValidationFailed",
+
+  /**
+   * The job's deployment is currently in progress.
+   */
+  DeploymentInProgress: "DeploymentInProgress",
+
+  /**
+   * The job's deployment has failed.
+   */
+  DeploymentFailed: "DeploymentFailed",
+
+  /**
+   * The job has been successfully deployed.
+   */
+  DeploymentSuccess: "DeploymentSuccess",
+
+  /**
+   * The job status is invalid.
+   */
+  Invalid: "Invalid",
+
+  /**
+   * The job has succeeded.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The job has failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * The job has been canceled.
+   */
+  Canceled: "Canceled",
+
+  /**
+   * The job is paused.
+   */
+  Paused: "Paused",
+
+  /**
+   * The job is scheduled to run.
+   */
+  Scheduled: "Scheduled",
+}
+
+/**
  * Deployment mode to trigger job.
  */
 union DeploymentMode {

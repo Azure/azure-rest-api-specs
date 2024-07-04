@@ -373,10 +373,10 @@ model EdgeDeviceJobProperties {
   endTimeUtc?: utcDateTime;
 
   /**
-   * Status of Edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'
+   * Status of Edge device job.
    */
   @visibility("read")
-  status?: string;
+  status?: JobStatus;
 
   /**
    * Reported properties for job

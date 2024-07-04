@@ -235,7 +235,7 @@ model ClusterJobProperties {
   deploymentMode?: DeploymentMode = DeploymentMode.Deploy;
 
   /**
-   * List of ARM resource ids of Arc machines part of cluster for which job will be triggered.
+   * List of Azure resource ids of Arc machines part of cluster for which job will be triggered.
    */
   @extension("x-ms-mutability", ["create", "read"])
   arcNodeResourceIds?: string[];
@@ -250,7 +250,7 @@ model ClusterJobProperties {
    * Unique, immutable job id.
    */
   @visibility("read")
-  jobId?: string;
+  jobId?: uuid;
 
   /**
    * The UTC date and time at which the job started.
@@ -265,10 +265,10 @@ model ClusterJobProperties {
   endTimeUtc?: utcDateTime;
 
   /**
-   * Status of Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'
+   * Status of Cluster job.
    */
   @visibility("read")
-  status?: string;
+  status?: JobStatus;
 
   /**
    * Reported properties for job
@@ -357,7 +357,7 @@ model AzureLinuxRepairServerJobProperties
   secrets?: EceDeploymentSecrets[];
 
   /**
-   * List of ARM resource ids of Arc machines part of cluster for which job will be triggered.
+   * List of Azure resource ids of Arc machines part of cluster for which job will be triggered.
    */
   @visibility("read", "create")
   arcNodeResourceIds?: string[];
@@ -437,7 +437,7 @@ model HciAddServerJobProperties extends HciClusterJobProperties {
   secrets?: EceDeploymentSecrets[];
 
   /**
-   * List of ARM resource ids of Arc machines part of cluster for which job will be triggered.
+   * List of Azure resource ids of Arc machines part of cluster for which job will be triggered.
    */
   @visibility("read", "create")
   arcNodeResourceIds?: string[];
@@ -458,7 +458,7 @@ model HciPauseServerJobProperties extends HciClusterJobProperties {
   serverName: string;
 
   /**
-   * List of ARM resource ids of Arc machines part of cluster for which job will be triggered.
+   * List of Azure resource ids of Arc machines part of cluster for which job will be triggered.
    */
   @visibility("read", "create")
   arcNodeResourceIds?: string[];
@@ -485,7 +485,7 @@ model HciRepairServerJobProperties extends HciClusterJobProperties {
   secrets?: EceDeploymentSecrets[];
 
   /**
-   * List of ARM resource ids of Arc machines part of cluster for which job will be triggered.
+   * List of Azure resource ids of Arc machines part of cluster for which job will be triggered.
    */
   @visibility("read", "create")
   arcNodeResourceIds?: string[];
@@ -506,7 +506,7 @@ model HciResumeServerJobProperties extends HciClusterJobProperties {
   serverName: string;
 
   /**
-   * List of ARM resource ids of Arc machines part of cluster for which job will be triggered.
+   * List of Azure resource ids of Arc machines part of cluster for which job will be triggered.
    */
   @visibility("read", "create")
   arcNodeResourceIds?: string[];

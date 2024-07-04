@@ -595,7 +595,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -610,7 +610,7 @@
           "readOnly": true
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique, immutable job id.",
           "readOnly": true
         },
@@ -627,8 +627,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Cluster job.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -659,6 +659,11 @@
         "serverName",
         "hostIpv4Address"
       ]
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "AzureLinuxAddServerJobProperties": {
       "type": "object",
@@ -691,7 +696,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -706,7 +711,7 @@
           "readOnly": true
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique, immutable job id.",
           "readOnly": true
         },
@@ -723,8 +728,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Cluster job.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -793,7 +798,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -808,7 +813,7 @@
           "readOnly": true
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique, immutable job id.",
           "readOnly": true
         },
@@ -825,8 +830,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Cluster job.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -935,8 +940,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Edge device job.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -1080,7 +1085,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -1199,7 +1204,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -1214,7 +1219,7 @@
           "readOnly": true
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique, immutable job id.",
           "readOnly": true
         },
@@ -1231,8 +1236,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Cluster job.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -1699,8 +1704,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Edge device job.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -1836,7 +1841,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -1888,7 +1893,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -1903,7 +1908,7 @@
           "readOnly": true
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique, immutable job id.",
           "readOnly": true
         },
@@ -1920,8 +1925,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Cluster job.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -2030,8 +2035,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Edge device job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Edge device job.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -2135,7 +2140,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -2210,7 +2215,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -2240,7 +2245,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -2333,6 +2338,97 @@
           "readOnly": true
         }
       }
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "Represents the various statuses a job can have throughout its lifecycle.",
+      "enum": [
+        "NotSpecified",
+        "ValidationInProgress",
+        "ValidationSuccess",
+        "ValidationFailed",
+        "DeploymentInProgress",
+        "DeploymentFailed",
+        "DeploymentSuccess",
+        "Invalid",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Paused",
+        "Scheduled"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The job status has not been specified."
+          },
+          {
+            "name": "ValidationInProgress",
+            "value": "ValidationInProgress",
+            "description": "The job is currently undergoing validation."
+          },
+          {
+            "name": "ValidationSuccess",
+            "value": "ValidationSuccess",
+            "description": "The job has successfully passed validation."
+          },
+          {
+            "name": "ValidationFailed",
+            "value": "ValidationFailed",
+            "description": "The job has failed validation."
+          },
+          {
+            "name": "DeploymentInProgress",
+            "value": "DeploymentInProgress",
+            "description": "The job's deployment is currently in progress."
+          },
+          {
+            "name": "DeploymentFailed",
+            "value": "DeploymentFailed",
+            "description": "The job's deployment has failed."
+          },
+          {
+            "name": "DeploymentSuccess",
+            "value": "DeploymentSuccess",
+            "description": "The job has been successfully deployed."
+          },
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "The job status is invalid."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The job has succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The job has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The job has been canceled."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The job is paused."
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The job is scheduled to run."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "LogCollectionReportedProperties": {
       "type": "object",
@@ -2472,7 +2568,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -2487,7 +2583,7 @@
           "readOnly": true
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique, immutable job id.",
           "readOnly": true
         },
@@ -2504,8 +2600,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Cluster job.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -2830,7 +2926,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -2845,7 +2941,7 @@
           "readOnly": true
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique, immutable job id.",
           "readOnly": true
         },
@@ -2862,8 +2958,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Cluster job.",
           "readOnly": true
         },
         "reportedProperties": {
@@ -2921,7 +3017,7 @@
         },
         "arcNodeResourceIds": {
           "type": "array",
-          "description": "List of ARM resource ids of Arc machines part of cluster for which job will be triggered.",
+          "description": "List of Azure resource ids of Arc machines part of cluster for which job will be triggered.",
           "items": {
             "type": "string"
           },
@@ -2936,7 +3032,7 @@
           "readOnly": true
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique, immutable job id.",
           "readOnly": true
         },
@@ -2953,8 +3049,8 @@
           "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "Status of Cluster job. Allowed values are 'Failed', 'Success', 'Running', 'canceled'",
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Cluster job.",
           "readOnly": true
         },
         "reportedProperties": {
