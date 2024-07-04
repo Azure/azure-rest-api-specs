@@ -21,6 +21,7 @@ namespace Microsoft.AgriculturePlatform;
 enum Versions {
   @doc("The 2024-06-01-preview version.")
   @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_06_01_preview: "2024-06-01-preview",
 }
 
