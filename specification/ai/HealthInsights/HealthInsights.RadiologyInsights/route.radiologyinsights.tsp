@@ -29,7 +29,7 @@ interface RadiologyInsights {
   @pollingOperation(RadiologyInsights.getJob)
   @route("/radiology-insights/jobs")
   createJob is HealthInsightsLongRunningRpcOperation<
-    RadiologyInsightsData,
+    BodyParameter<RadiologyInsightsData>,
     RadiologyInsightsResult,
     RadiologyInsightsInferenceResult
   >;

@@ -1,4 +1,6 @@
+using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.Core;
 
 namespace AzureHealthInsights;
 
@@ -219,3 +221,14 @@ model ClinicalCodedElement {
   @doc("A value associated with the code within the given clinical coding system.")
   value?: string;
 }
+
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};
