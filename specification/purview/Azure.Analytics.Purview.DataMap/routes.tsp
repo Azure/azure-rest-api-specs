@@ -1011,7 +1011,7 @@ interface Glossary {
   @doc("Create a glossary.")
   @route("/atlas/v2/glossary")
   @post
-  create is AtlasOperation<AtlasGlossary, AtlasGlossary, {}>;
+  create is AtlasOperation<BodyParameter<AtlasGlossary>, AtlasGlossary, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1035,7 +1035,7 @@ interface Glossary {
   @route("/atlas/v2/glossary/category")
   @post
   createCategory is AtlasOperation<
-    AtlasGlossaryCategory,
+    BodyParameter<AtlasGlossaryCategory>,
     AtlasGlossaryCategory,
     {}
   >;
@@ -1065,7 +1065,7 @@ interface Glossary {
       @doc("The globally unique identifier of the category.")
       @path
       categoryId: string;
-    } & AtlasGlossaryCategory,
+    } & BodyParameter<AtlasGlossaryCategory>,
     AtlasGlossaryCategory,
     {}
   >;
@@ -1178,7 +1178,7 @@ interface Glossary {
       @doc("Whether include term hierarchy")
       @query
       includeTermHierarchy?: boolean;
-    } & AtlasGlossaryTerm,
+    } & BodyParameter<AtlasGlossaryTerm>,
     AtlasGlossaryTerm,
     {}
   >;
@@ -1210,7 +1210,7 @@ interface Glossary {
       @doc("Whether include term hierarchy")
       @query
       includeTermHierarchy?: boolean;
-    } & AtlasGlossaryTerm,
+    } & BodyParameter<AtlasGlossaryTerm>,
     AtlasGlossaryTerm,
     AtlasApiVersionParameterTraits
   >;
@@ -1412,7 +1412,7 @@ interface Glossary {
       @doc("Whether ignore terms and categories")
       @query
       ignoreTermsAndCategories?: boolean;
-    } & AtlasGlossary,
+    } & BodyParameter<AtlasGlossary>,
     AtlasGlossary,
     AtlasApiVersionParameterTraits
   >;
@@ -1752,14 +1752,14 @@ interface Relationship {
   @doc("Create a new relationship between entities.")
   @route("/atlas/v2/relationship")
   @post
-  create is AtlasOperation<AtlasRelationship, AtlasRelationship, {}>;
+  create is AtlasOperation<BodyParameter<AtlasRelationship>, AtlasRelationship, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Update an existing relationship between entities.")
   @route("/atlas/v2/relationship")
   @put
-  update is AtlasOperation<AtlasRelationship, AtlasRelationship, {}>;
+  update is AtlasOperation<BodyParameter<AtlasRelationship>, AtlasRelationship, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
@@ -2051,7 +2051,7 @@ interface Type {
     """)
   @route("/atlas/v2/types/typedefs")
   @post
-  bulkCreate is AtlasOperation<AtlasTypesDef, AtlasTypesDef, {}>;
+  bulkCreate is AtlasOperation<BodyParameter<AtlasTypesDef>, AtlasTypesDef, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
@@ -2061,14 +2061,14 @@ interface Type {
     """)
   @route("/atlas/v2/types/typedefs")
   @put
-  bulkUpdate is AtlasOperation<AtlasTypesDef, AtlasTypesDef, {}>;
+  bulkUpdate is AtlasOperation<BodyParameter<AtlasTypesDef>, AtlasTypesDef, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete API for all types in bulk.")
   @route("/atlas/v2/types/typedefs")
   @delete
-  bulkDelete is AtlasOperation<AtlasTypesDef, void, {}>;
+  bulkDelete is AtlasOperation<BodyParameter<AtlasTypesDef>, void, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("List all type definitions returned as a list of minimal information header.")
