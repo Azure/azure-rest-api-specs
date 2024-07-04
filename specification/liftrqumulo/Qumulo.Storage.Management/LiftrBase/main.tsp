@@ -91,20 +91,6 @@ model UserDetails {
   email: string;
 }
 
-@doc("Base resource properties that can be extended for arm resources.")
-model BaseResourceProperties {
-  @doc("MarketplaceDetails of Qumulo FileSystem resource")
-  @visibility("create", "read")
-  marketplace: MarketplaceDetails;
-
-  @doc("User Details of Qumulo FileSystem resource")
-  user: UserDetails;
-
-  @doc("Provisioning state of the resource.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-}
-
 /**
  * Provisioning State of the File system resource
  */
