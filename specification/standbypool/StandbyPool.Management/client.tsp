@@ -6,8 +6,21 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.StandbyPool {
     @@access(Operations.list, Access.internal, "csharp");
 
+    @@clientName(StandbyContainerGroupPoolResource,
+        "StandbyContainerGroupPool",
+        "csharp"
+    );
     @@clientName(StandbyVirtualMachinePoolResource,
         "StandbyVirtualMachinePool",
+        "csharp"
+    );
+    @@clientName(StandbyVirtualMachineResource,
+        "StandbyVirtualMachine",
+        "csharp"
+    );
+    @@clientName(VirtualMachineState, "StandbyVirtualMachineState", "csharp");
+    @@clientName(ContainerGroupProfile,
+        "StandbyContainerGroupProfile",
         "csharp"
     );
     @@clientName(ContainerGroupProperties,
@@ -16,25 +29,4 @@ namespace Microsoft.StandbyPool {
     );
     @@clientName(ProvisioningState, "StandbyPoolProvisioningState", "csharp");
     @@clientName(RefillPolicy, "StandbyPoolRefillPolicy", "csharp");
-    @@clientName(StandbyVirtualMachinePoolElasticityProfile,
-        "StandbyVirtualMachinePoolElasticityPatchProfile",
-        "csharp"
-    );
-    @@clientName(StandbyContainerGroupPoolElasticityProfile,
-        "StandbyContainerGroupPoolElasticityPatchProfile",
-        "csharp"
-    );
-    @@clientName(VirtualMachineState, "StandbyVirtualMachineState", "csharp");
-    @@clientName(StandbyContainerGroupPoolResource,
-        "StandbyContainerGroupPool",
-        "csharp"
-    );
-    @@clientName(StandbyVirtualMachineResource,
-        "StandbyVirtualMachine",
-        "csharp"
-    );
-    @@clientName(ContainerGroupProfile,
-        "StandbyContainerGroupProfile",
-        "csharp"
-    );
 }
