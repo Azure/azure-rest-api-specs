@@ -2,17 +2,19 @@
 
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
+title: QumuloMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-qumulostorage
-namespace: azure.mgmt.qumulostorage
+package-name: azure-mgmt-qumulo
+namespace: azure.mgmt.qumulo
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/qumulostorage/azure-mgmt-qumulostorage/azure/mgmt/qumulostorage
+output-folder: $(python-sdks-folder)/qumulo/azure-mgmt-qumulo/azure/mgmt/qumulo
 ```
