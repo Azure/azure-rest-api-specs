@@ -96,7 +96,7 @@ interface DiscoveryGroups {
   @projectedName("csharp", "CreateOrReplaceDiscoveryGroup")
   createOrReplaceDiscoGroup is Foundations.ResourceOperation<
     DiscoGroup,
-    DiscoGroupData,
+    BodyParameter<DiscoGroupData>,
     DiscoGroup
   >;
   @doc("Run a discovery group with a given groupName.")
