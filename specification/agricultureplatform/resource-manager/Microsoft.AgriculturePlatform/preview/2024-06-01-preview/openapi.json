@@ -55,37 +55,37 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AgriculturePlatform/agriService": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgriculturePlatform/agriServices": {
       "get": {
         "operationId": "AgriService_ListBySubscription",
         "tags": [
@@ -94,15 +94,15 @@
         "description": "List AgriServiceResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AgriServiceResourceListResult"
             }
@@ -110,21 +110,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AgriService_ListBySubscription": {
-            "$ref": "./examples/AgriService_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AgriService_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/AgriService_ListBySubscription_MaximumSet_Gen.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgriculturePlatform/agriService": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgriculturePlatform/agriServices": {
       "get": {
         "operationId": "AgriService_ListByResourceGroup",
         "tags": [
@@ -133,18 +133,18 @@
         "description": "List AgriServiceResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AgriServiceResourceListResult"
             }
@@ -152,21 +152,21 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AgriService_ListByResourceGroup": {
-            "$ref": "./examples/AgriService_ListByResourceGroup_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AgriService_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/AgriService_ListByResourceGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgriculturePlatform/agriService/{agriServiceResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgriculturePlatform/agriServices/{agriServiceResourceName}": {
       "get": {
         "operationId": "AgriService_Get",
         "tags": [
@@ -175,13 +175,13 @@
         "description": "Get a AgriServiceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agriServiceResourceName",
@@ -194,7 +194,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AgriServiceResource"
             }
@@ -202,12 +202,12 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "AgriService_Get": {
+          "AgriService_Get_MaximumSet_Gen": {
             "$ref": "./examples/AgriService_Get_MaximumSet_Gen.json"
           }
         }
@@ -220,13 +220,13 @@
         "description": "Create a AgriServiceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agriServiceResourceName",
@@ -259,10 +259,6 @@
               "$ref": "#/definitions/AgriServiceResource"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -273,19 +269,19 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AgriService_CreateOrUpdate": {
-            "$ref": "./examples/AgriService_CreateOrUpdate_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AgriService_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/AgriService_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "operationId": "AgriService_Update",
@@ -295,13 +291,13 @@
         "description": "Update a AgriServiceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agriServiceResourceName",
@@ -323,7 +319,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AgriServiceResource"
             }
@@ -331,33 +327,33 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AgriService_Update": {
-            "$ref": "./examples/AgriService_Update_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AgriService_Update_MaximumSet_Gen": {
+            "$ref": "./examples/AgriService_Update_MaximumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "operationId": "AgriService_Delete",
@@ -367,13 +363,13 @@
         "description": "Delete a AgriServiceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agriServiceResourceName",
@@ -388,75 +384,47 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AgriService_Delete": {
-            "$ref": "./examples/AgriService_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AgriService_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/AgriService_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     }
   },
   "definitions": {
     "AgriServiceConfig": {
       "type": "object",
-      "description": "Config of the AgriService instance.",
+      "description": "Config of the AgriService resource instance.",
       "properties": {
         "instanceUri": {
           "type": "string",
           "description": "Instance URI of the AgriService instance.",
-          "minLength": 2,
-          "maxLength": 256,
-          "readOnly": true
-        },
-        "cosmosDbEndpoint": {
-          "type": "string",
-          "description": "Cosmos DB endpoint of the AgriService instance.",
-          "minLength": 2,
-          "maxLength": 256,
-          "readOnly": true
-        },
-        "storageAccountEndpoint": {
-          "type": "string",
-          "description": "Storage account endpoint of AgriService instance.",
-          "minLength": 2,
-          "maxLength": 256,
-          "readOnly": true
-        },
-        "keyVaultEndpoint": {
-          "type": "string",
-          "description": "Key vault endpoint of AgriService instance.",
-          "minLength": 2,
-          "maxLength": 256,
-          "readOnly": true
-        },
-        "redisEndpoint": {
-          "type": "string",
-          "description": "Redis instance endpoint of AgriService instance.",
           "minLength": 2,
           "maxLength": 256,
           "readOnly": true
@@ -472,25 +440,29 @@
     },
     "AgriServiceResource": {
       "type": "object",
-      "description": "A AgriculturePlatform resource",
+      "description": "Schema of the AgriService resource from Microsoft.AgriculturePlatform resource provider.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AgriServiceResourceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -526,7 +498,7 @@
         },
         "config": {
           "$ref": "#/definitions/AgriServiceConfig",
-          "description": "Config of the AgriService instance.",
+          "description": "Config of the AgriService resource instance.",
           "readOnly": true
         },
         "managedOnBehalfOfConfiguration": {
@@ -541,11 +513,11 @@
       "description": "The type used for update operations of the AgriServiceResource.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         },
         "tags": {
@@ -580,7 +552,6 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource Id of MoboBrokerResource",
           "readOnly": true
         }
       },
@@ -622,22 +593,40 @@
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "The resource is being provisioned"
+            "description": "Initial provisioning in progress"
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The resource is updating"
+            "description": "Update in progress"
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The resource is being deleted"
+            "description": "Deletion in progress"
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "The resource create request has been accepted"
+            "description": "Change accepted for processing"
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Supported API versions for the Microsoft.AgriculturePlatform resource provider.",
+      "enum": [
+        "2024-06-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_06_01_preview",
+            "value": "2024-06-01-preview",
+            "description": "The 2024-06-01-preview version."
           }
         ]
       }

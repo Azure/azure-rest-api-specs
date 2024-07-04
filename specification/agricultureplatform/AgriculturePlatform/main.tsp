@@ -21,7 +21,6 @@ namespace Microsoft.AgriculturePlatform;
 enum Versions {
   @doc("The 2024-06-01-preview version.")
   @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_06_01_preview: "2024-06-01-preview",
 }
 
@@ -29,12 +28,12 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
-@doc("A AgriculturePlatform resource")
+@doc("Schema of the AgriService resource from Microsoft.AgriculturePlatform resource provider.")
 model AgriServiceResource is TrackedResource<AgriServiceResourceProperties> {
   @doc("The name of the AgriService resource.")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("agriServiceResourceName")
-  @segment("agriService")
+  @segment("agriServices")
   @visibility("read")
   @path
   name: string;
@@ -76,7 +75,7 @@ model AgriServiceResourceProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @doc("Config of the AgriService instance.")
+  @doc("Config of the AgriService resource instance.")
   @visibility("read")
   config?: AgriServiceConfig;
 
@@ -85,37 +84,13 @@ model AgriServiceResourceProperties {
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 }
 
-@doc("Config of the AgriService instance.")
-model AgriServiceConfig { // include all resources which will be created here in MOBO, properties, endpoints etc.
+@doc("Config of the AgriService resource instance.")
+model AgriServiceConfig {
   @doc("Instance URI of the AgriService instance.")
   @visibility("read")
   @minLength(2)
   @maxLength(256)
   instanceUri?: string;
-
-  @doc("Cosmos DB endpoint of the AgriService instance.")
-  @visibility("read")
-  @minLength(2)
-  @maxLength(256)
-  cosmosDbEndpoint?: string;
-
-  @doc("Storage account endpoint of AgriService instance.")
-  @visibility("read")
-  @minLength(2)
-  @maxLength(256)
-  storageAccountEndpoint?: string;
-
-  @doc("Key vault endpoint of AgriService instance.")
-  @visibility("read")
-  @minLength(2)
-  @maxLength(256)
-  keyVaultEndpoint?: string;
-
-  @doc("Redis instance endpoint of AgriService instance.")
-  @visibility("read")
-  @minLength(2)
-  @maxLength(256)
-  redisEndpoint?: string;
 
   @doc("Version of AgriService instance.")
   @visibility("read")
