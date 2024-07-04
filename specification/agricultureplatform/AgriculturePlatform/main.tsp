@@ -26,8 +26,6 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
 @doc("Schema of the AgriService resource from Microsoft.AgriculturePlatform resource provider.")
 model AgriServiceResource is TrackedResource<AgriServiceResourceProperties> {
   @doc("The name of the AgriService resource.")
