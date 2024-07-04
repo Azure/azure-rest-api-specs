@@ -204,6 +204,10 @@ model Translation {
   @doc("Latest completed iteration of the translation.")
   @visibility("read")
   latestSucceededIteration?: Iteration;
+
+  @doc("Translation failure reason")
+  @visibility("read")
+  failureReason?: string;
 }
 
 @doc("Do one iteration to translate one video file from source locale to target locale, webvtt for content editing is optional for requesting parameter.")
@@ -224,6 +228,10 @@ model Iteration {
   @doc("Iteration status")
   @visibility("read")
   status?: Status;
+
+  @doc("Iteration failure reason")
+  @visibility("read")
+  failureReason?: string;
 
   @doc("The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
   @visibility("read")
