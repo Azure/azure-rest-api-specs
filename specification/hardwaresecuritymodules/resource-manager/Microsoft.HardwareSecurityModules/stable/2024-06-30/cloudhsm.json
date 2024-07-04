@@ -141,7 +141,8 @@
             "headers": {
               "Location": {
                 "description": "The URI to poll for completion status.",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -228,7 +229,8 @@
             "headers": {
               "Location": {
                 "description": "The URI to poll for completion status.",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -475,7 +477,8 @@
             "headers": {
               "Location": {
                 "description": "The URI to poll for completion status.",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -584,12 +587,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/prebackup": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/validateBackupProperties": {
       "post": {
         "tags": [
-          "Cloud HSM Cluster Pre Backup"
+          "Cloud HSM Cluster Validate Backup Properties"
         ],
-        "operationId": "CloudHsmClusters_PreBackup",
+        "operationId": "CloudHsmClusters_ValidateBackup",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -640,11 +643,13 @@
               },
               "Azure-AsyncOperation": {
                 "description": "The URI to poll for completion status",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "Location": {
                 "description": "The URI to poll for completion status",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "x-ms-request-id": {
                 "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
@@ -660,7 +665,7 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_PreBackup_Validation_MaximumSet_Gen": {
+          "CloudHsmCluster_ValdiateBackup_Validation_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
           }
         }
@@ -722,11 +727,13 @@
               },
               "Azure-AsyncOperation": {
                 "description": "The URI to poll for completion status.",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "Location": {
                 "description": "The URI to poll for completion status",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "x-ms-request-id": {
                 "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
@@ -748,7 +755,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/backup/{jobId}/pending": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/backupOperationStatus/{jobId}": {
       "get": {
         "tags": [
           "Cloud HSM Clusters Backup Operation Status - Get"
@@ -805,12 +812,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/prerestore": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/validateRestoreProperties": {
       "post": {
         "tags": [
-          "Cloud HSM Cluster Pre Restore"
+          "Validate Cloud HSM Cluster Restore Properties"
         ],
-        "operationId": "CloudHsmClusters_PreRestore",
+        "operationId": "CloudHsmClusters_ValidateRestore",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -861,11 +868,13 @@
               },
               "Azure-AsyncOperation": {
                 "description": "The URI to poll for completion status.",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "Location": {
                 "description": "The URI to poll for completion status",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "x-ms-request-id": {
                 "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
@@ -881,7 +890,7 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_PreRestore_MaximumSet_Gen": {
+          "CloudHsmCluster_ValidateRestore_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
           }
         }
@@ -944,11 +953,13 @@
               },
               "Azure-AsyncOperation": {
                 "description": "The URI to poll for completion status.",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "Location": {
                 "description": "The URI to poll for completion status",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               },
               "x-ms-request-id": {
                 "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
@@ -970,7 +981,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restore/{jobId}/pending": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restoreOperationStatus/{jobId}": {
       "get": {
         "tags": [
           "Returns Restore Operation Status"
