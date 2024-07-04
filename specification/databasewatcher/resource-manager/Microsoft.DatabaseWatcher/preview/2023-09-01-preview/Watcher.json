@@ -133,7 +133,7 @@
         "tags": [
           "Watchers"
         ],
-        "description": "List Watcher resources by resource group",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -421,11 +421,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/sharedPrivateLinkResources": {
       "get": {
-        "operationId": "SharedPrivateLinkResources_ListByWatcher",
+        "operationId": "SharedPrivateLinkResources_ListByParent",
         "tags": [
           "SharedPrivateLinkResources"
         ],
-        "description": "List SharedPrivateLinkResource resources by Watcher",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -457,11 +457,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SharedPrivateLinkResources_ListByWatcher": {
-            "$ref": "./examples/SharedPrivateLinkResources_ListByWatcher_200.json"
           }
         },
         "x-ms-pageable": {
@@ -803,11 +798,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DatabaseWatcher/watchers/{watcherName}/targets": {
       "get": {
-        "operationId": "Targets_ListByWatcher",
+        "operationId": "Targets_ListByParent",
         "tags": [
           "Targets"
         ],
-        "description": "List Target resources by Watcher",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -839,11 +834,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Targets_ListByWatcher": {
-            "$ref": "./examples/Targets_ListByWatcher_200.json"
           }
         },
         "x-ms-pageable": {

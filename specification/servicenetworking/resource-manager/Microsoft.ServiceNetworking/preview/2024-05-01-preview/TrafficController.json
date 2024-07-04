@@ -137,7 +137,7 @@
         "tags": [
           "TrafficControllerInterface"
         ],
-        "description": "List TrafficController resources by resource group",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -407,11 +407,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/associations": {
       "get": {
-        "operationId": "AssociationsInterface_ListByTrafficController",
+        "operationId": "AssociationsInterface_ListByResourceGroup",
         "tags": [
           "AssociationsInterface"
         ],
-        "description": "List Association resources by TrafficController",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -443,11 +443,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Associations": {
-            "$ref": "./examples/AssociationsGet.json"
           }
         },
         "x-ms-pageable": {
@@ -721,11 +716,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/frontends": {
       "get": {
-        "operationId": "FrontendsInterface_ListByTrafficController",
+        "operationId": "FrontendsInterface_ListByResourceGroup",
         "tags": [
           "FrontendsInterface"
         ],
-        "description": "List Frontend resources by TrafficController",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -757,11 +752,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get Frontends": {
-            "$ref": "./examples/FrontendsGet.json"
           }
         },
         "x-ms-pageable": {
@@ -1035,11 +1025,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicy": {
       "get": {
-        "operationId": "SecurityPoliciesInterface_ListByTrafficController",
+        "operationId": "SecurityPoliciesInterface_ListByResourceGroup",
         "tags": [
           "SecurityPoliciesInterface"
         ],
-        "description": "List SecurityPolicy resources by TrafficController",
+        "description": "A resource list operation, at the scope of the resource's parent",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1071,11 +1061,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get SecurityPolicies": {
-            "$ref": "./examples/SecurityPoliciesGetList.json"
           }
         },
         "x-ms-pageable": {

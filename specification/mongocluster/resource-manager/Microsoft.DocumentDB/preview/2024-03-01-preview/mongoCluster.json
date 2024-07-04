@@ -493,7 +493,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/firewallRules": {
       "get": {
-        "operationId": "FirewallRules_ListByMongoCluster",
+        "operationId": "FirewallRules_ListByParent",
         "tags": [
           "FirewallRules"
         ],
@@ -531,11 +531,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List the firewall rules on a Mongo Cluster resource.": {
-            "$ref": "./examples/MongoClusters_FirewallRuleList.json"
           }
         },
         "x-ms-pageable": {
@@ -815,7 +810,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/privateEndpointConnections": {
       "get": {
-        "operationId": "PrivateEndpointConnections_ListByMongoCluster",
+        "operationId": "PrivateEndpointConnections_ListConnections",
         "tags": [
           "PrivateEndpointConnections"
         ],
@@ -853,11 +848,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the private endpoint connection resources on a Mongo Cluster resource.": {
-            "$ref": "./examples/MongoClusters_PrivateEndpointConnectionList.json"
           }
         },
         "x-ms-pageable": {
@@ -1067,7 +1057,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/privateLinkResources": {
       "get": {
-        "operationId": "PrivateLinks_ListByMongoCluster",
+        "operationId": "PrivateLinks_List",
         "tags": [
           "PrivateLinks"
         ],
@@ -1105,11 +1095,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Lists the private link resources available on a Mongo Cluster resource.": {
-            "$ref": "./examples/MongoClusters_PrivateLinkResourceList.json"
           }
         },
         "x-ms-pageable": {
