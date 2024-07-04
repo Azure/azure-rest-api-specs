@@ -23,5 +23,5 @@ interface OncoPhenotype {
   @doc("Creates an Onco Phenotype job with the given request body.")
   @pollingOperation(OncoPhenotype.getJob)
   @route("/oncophenotype/jobs")
-  createJob is LongRunningRpcOperation<OncoPhenotypeData, OncoPhenotypeResult>;
+  createJob is LongRunningRpcOperation<BodyParameter<OncoPhenotypeData>, OncoPhenotypeResult>;
 }

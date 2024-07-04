@@ -23,5 +23,5 @@ interface TrialMatcher {
   @doc("Creates a Trial Matcher job with the given request body.")
   @pollingOperation(TrialMatcher.getJob)
   @route("/trialmatcher/jobs")
-  createJob is LongRunningRpcOperation<TrialMatcherData, TrialMatcherResult>;
+  createJob is LongRunningRpcOperation<BodyParameter<TrialMatcherData>, TrialMatcherResult>;
 }
