@@ -1,4 +1,6 @@
+using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.Core;
 
 namespace AzureHealthInsights;
 
