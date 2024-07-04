@@ -157,7 +157,7 @@ union AzureLinuxEdgeDeviceJobType {
   /**
    * Job to provide remote support to the device.
    */
-  RemoteSupport: "RemoteSupport"
+  RemoteSupport: "RemoteSupport",
 }
 
 /**
@@ -219,7 +219,7 @@ union HciEdgeDeviceJobType {
   /**
    * Job to provide remote support to the device.
    */
-  RemoteSupport: "RemoteSupport"
+  RemoteSupport: "RemoteSupport",
 }
 
 /**
