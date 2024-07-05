@@ -4447,7 +4447,8 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -17610,6 +17611,11 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the server resource."
+        },
+        "arcDiscovery": {
+          "$ref": "#/definitions/ArcDiscovery",
+          "description": "Gets the data related to Azure arc discovery.",
+          "readOnly": true
         }
       }
     },
