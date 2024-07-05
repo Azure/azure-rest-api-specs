@@ -1,0 +1,18 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/liftrqumulo/armqumulo
+      breaking-changes:
+        - Enum `StorageSKU` has been removed
+        - Field `FileSystemResource` of struct `FileSystemsClientCreateOrUpdateResponse` has been removed
+        - Field `FileSystemResource` of struct `FileSystemsClientGetResponse` has been removed
+        - Field `FileSystemResource` of struct `FileSystemsClientUpdateResponse` has been removed
+        - Function `*FileSystemsClient.BeginCreateOrUpdate` parameter(s) have been changed from `(context.Context, string, string, FileSystemResource, *FileSystemsClientBeginCreateOrUpdateOptions)` to `(context.Context, string, string, LiftrBaseStorageFileSystemResource, *FileSystemsClientBeginCreateOrUpdateOptions)`
+        - Function `*FileSystemsClient.Update` parameter(s) have been changed from `(context.Context, string, string, FileSystemResourceUpdate, *FileSystemsClientUpdateOptions)` to `(context.Context, string, string, LiftrBaseStorageFileSystemResourceUpdate, *FileSystemsClientUpdateOptions)`
+        - Struct `FileSystemResourceProperties` has been removed
+        - Struct `FileSystemResourceUpdateProperties` has been removed
+        - Struct `FileSystemResourceUpdate` has been removed
+        - Struct `FileSystemResource` has been removed
+        - Struct `MarketplaceDetails` has been removed
+        - Struct `UserDetails` has been removed
+        - Type of `FileSystemResourceListResult.Value` has been changed from `[]*FileSystemResource` to `[]*LiftrBaseStorageFileSystemResource`
+        - "`ProvisioningStateNotSpecified` from enum `ProvisioningState` has been removed"
