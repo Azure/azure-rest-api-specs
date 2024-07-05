@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}": {
       "put": {
         "tags": [
-          ""
+          "Cloud HSM Cluster - Create or Update"
         ],
         "operationId": "CloudHsmClusters_CreateOrUpdate",
         "description": "Create or Update a Cloud HSM Cluster in the specified subscription.",
@@ -85,7 +85,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -97,7 +97,7 @@
       },
       "patch": {
         "tags": [
-          ""
+          "Cloud HSM Cluster - Update"
         ],
         "operationId": "CloudHsmClusters_Update",
         "x-ms-long-running-operation": true,
@@ -141,14 +141,15 @@
             "headers": {
               "Location": {
                 "description": "The URI to poll for completion status.",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -160,7 +161,7 @@
       },
       "get": {
         "tags": [
-          ""
+          "Cloud HSM Cluster - Get"
         ],
         "operationId": "CloudHsmClusters_Get",
         "description": "Gets the specified Cloud HSM Cluster",
@@ -188,7 +189,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -200,7 +201,7 @@
       },
       "delete": {
         "tags": [
-          ""
+          "Cloud HSM Cluster - Delete"
         ],
         "operationId": "CloudHsmClusters_Delete",
         "description": "Deletes the specified Cloud HSM Cluster",
@@ -223,15 +224,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK Response."
-          },
           "202": {
             "description": "Accepted",
             "headers": {
               "Location": {
                 "description": "The URI to poll for completion status.",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -241,7 +240,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -255,7 +254,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters": {
       "get": {
         "tags": [
-          ""
+          "Cloud HSM Cluster - Get by Resource Group"
         ],
         "operationId": "CloudHsmClusters_ListByResourceGroup",
         "description": "The List operation gets information about the Cloud HSM Clusters associated with the subscription and within the specified resource group.",
@@ -287,7 +286,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -304,7 +303,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters": {
       "get": {
         "tags": [
-          ""
+          "Cloud HSM Cluster - Get by Subscription"
         ],
         "operationId": "CloudHsmClusters_ListBySubscription",
         "description": "The List operation gets information about the Cloud HSM Clusters associated with the subscription.",
@@ -333,7 +332,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -350,7 +349,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateLinkResources": {
       "get": {
         "tags": [
-          ""
+          "Cloud HSM Cluster Private Link - Get"
         ],
         "operationId": "CloudHsmClusterPrivateLinkResources_ListByCloudHsmCluster",
         "description": "Gets the private link resources supported for the Cloud Hsm Cluster.",
@@ -372,15 +371,18 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "CloudHsmClusterPrivateLinkResources_ListByResource_MaximumSet_Gen": {
@@ -392,7 +394,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections/{peConnectionName}": {
       "put": {
         "tags": [
-          ""
+          "Cloud HSM Cluster Private Endpoint - Create"
         ],
         "operationId": "CloudHsmClusterPrivateEndpointConnections_Create",
         "description": "Creates or updates the private endpoint connection for the Cloud Hsm Cluster.",
@@ -432,7 +434,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -444,7 +446,7 @@
       },
       "delete": {
         "tags": [
-          ""
+          "Cloud HSM Cluster Private Endpoint - Delete"
         ],
         "operationId": "CloudHsmClusterPrivateEndpointConnections_Delete",
         "description": "Deletes the private endpoint connection for the Cloud Hsm Cluster.",
@@ -470,15 +472,13 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The private endpoint connection was successfully deleted."
-          },
           "202": {
             "description": "The private endpoint connection is being deleted.",
             "headers": {
               "Location": {
                 "description": "The URI to poll for completion status.",
-                "type": "string"
+                "type": "string",
+                "format": "uri"
               }
             }
           },
@@ -488,7 +488,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -500,7 +500,7 @@
       },
       "get": {
         "tags": [
-          ""
+          "Cloud HSM Cluster Private Endpoint - Get"
         ],
         "operationId": "CloudHsmClusterPrivateEndpointConnections_Get",
         "description": "Gets the private endpoint connection for the Cloud Hsm Cluster.",
@@ -531,7 +531,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -545,7 +545,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/privateEndpointConnections": {
       "get": {
         "tags": [
-          ""
+          "Cloud HSM Cluster Private Endpoint Connections - Get"
         ],
         "operationId": "PrivateEndpointConnections_ListByCloudHsmCluster",
         "description": "The List operation gets information about the private endpoint connections associated with the Cloud HSM Cluster",
@@ -573,7 +573,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -583,6 +583,457 @@
         "x-ms-examples": {
           "CloudHsmClusterPrivateEndpointConnection_ListByResource_MaximumSet_Gen": {
             "$ref": "./examples/CloudHsmClusterPrivateEndpointConnection_ListByCloudHsmCluster_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/validateBackupProperties": {
+      "post": {
+        "tags": [
+          "Cloud HSM Cluster Validate Backup Properties"
+        ],
+        "operationId": "CloudHsmClusters_ValidateBackup",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "Pre Backup operation to validate whether the customer can perform a backup on the Cloud HSM Cluster resource in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "backupRequestProperties",
+            "in": "body",
+            "description": "Backup Operation Required properties",
+            "schema": {
+              "$ref": "#/definitions/BackupRequestProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Cloud HSM Cluster Backup operation API finished synchronously with Success",
+            "schema": {
+              "$ref": "#/definitions/BackupResult"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Queued validating pre backup operation",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status",
+                "type": "string",
+                "format": "uri"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status",
+                "type": "string",
+                "format": "uri"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_ValidateBackup_Validation_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/backup": {
+      "post": {
+        "tags": [
+          "Cloud HSM Cluster Backup - Create"
+        ],
+        "operationId": "CloudHsmClusters_Backup",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "Create a backup of the Cloud HSM Cluster in the specified subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "backupRequestProperties",
+            "in": "body",
+            "description": "Azure storage Resource Uri",
+            "schema": {
+              "$ref": "#/definitions/BackupRequestProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Cloud HSM Cluster Backup operation API finished synchronously with Success",
+            "schema": {
+              "$ref": "#/definitions/BackupResult"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Cloud HSM Cluster Backup operation started",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string",
+                "format": "uri"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status",
+                "type": "string",
+                "format": "uri"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_Create_Backup_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/backupOperationStatus/{jobId}": {
+      "get": {
+        "tags": [
+          "Cloud HSM Clusters Backup Operation Status - Get"
+        ],
+        "operationId": "CloudHsmClustersBackupStatus_Get",
+        "description": "Gets the backup operation status of the specified Cloud HSM Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/backupRestoreJobId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cloud HSM Cluster Backup Operation status returned",
+            "schema": {
+              "$ref": "#/definitions/BackupResult"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_Get_Backup_Status_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_Backup_Pending_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/validateRestoreProperties": {
+      "post": {
+        "tags": [
+          "Validate Cloud HSM Cluster Restore Properties"
+        ],
+        "operationId": "CloudHsmClusters_ValidateRestore",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "Queued validating pre restore operation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "restoreRequestProperties",
+            "schema": {
+              "$ref": "#/definitions/RestoreRequestProperties"
+            },
+            "description": "Optional Parameters to validate prior performing a restore operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Cloud HSM Cluster Restore operation API finished synchronously with Success",
+            "schema": {
+              "$ref": "#/definitions/RestoreResult"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Queued pre restore operation validation.",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string",
+                "format": "uri"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status",
+                "type": "string",
+                "format": "uri"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_ValidateRestore_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restore": {
+      "post": {
+        "tags": [
+          "Cloud HSM Clusters Restore Operation - Create"
+        ],
+        "operationId": "CloudHsmClusters_Restore",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "Restores all key materials of a specified Cloud HSM Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "restoreRequestProperties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestoreRequestProperties"
+            },
+            "description": "Restore Operation Required properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Cloud HSM Cluster Restore operation API finished synchronously with Success",
+            "schema": {
+              "$ref": "#/definitions/RestoreResult"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Cloud HSM Cluster Restore operation started",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string",
+                "format": "uri"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status",
+                "type": "string",
+                "format": "uri"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_Restore_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restoreOperationStatus/{jobId}": {
+      "get": {
+        "tags": [
+          "Returns Restore Operation Status"
+        ],
+        "operationId": "CloudHsmClustersRestoreStatus_Get",
+        "description": "Gets the restore operation status of the specified Cloud HSM Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/backupRestoreJobId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cloud HSM Cluster Backup Operation status returned",
+            "schema": {
+              "$ref": "#/definitions/RestoreResult"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_Get_Restore_Status_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_Restore_Pending_MaximumSet_Gen.json"
           }
         }
       }
@@ -599,7 +1050,7 @@
         },
         "state": {
           "type": "string",
-          "description": "The Cloud HSM State"
+          "description": "The Cloud HSM State. Values are: Deploying, ConfiguringSlb, Starting, Starting, Failed, Failed, Deleting, DeletingSlbEntry, InitialProvisioning, Updating"
         },
         "stateMessage": {
           "type": "string",
@@ -625,12 +1076,12 @@
     },
     "CloudHsmClusterResource": {
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
         "sku": {
           "$ref": "#/definitions/CloudHsmClusterSku",
           "description": "SKU details"
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       },
       "allOf": [
@@ -644,9 +1095,57 @@
     },
     "CloudHsmClusterProperties": {
       "properties": {
+        "activationState": {
+          "type": "string",
+          "description": "State of security domain activation",
+          "readOnly": true,
+          "enum": [
+            "NotDefined",
+            "NotActivated",
+            "Active",
+            "Failed",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ActivationState",
+            "modelAsString": true
+          }
+        },
+        "autoGeneratedDomainNameLabelScope": {
+          "type": "string",
+          "description": "The Cloud HSM Cluster's auto-generated Domain Name Label Scope"
+        },
+        "fipsApprovedMode": {
+          "type": "boolean",
+          "default": "false",
+          "description": "False: Non-FIPS Mode with single-factor authentication. True: FIPS Approved Mode with single-factor authentication"
+        },
+        "hsms": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array of Cloud HSM Cluster's HSMs",
+          "x-ms-identifiers": [
+            "fqdn"
+          ],
+          "items": {
+            "$ref": "#/definitions/CloudHsmProperties"
+          }
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of private endpoint connection resources",
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
         "provisioningState": {
           "type": "string",
           "description": "The Cloud HSM Cluster's provisioningState",
+          "readOnly": true,
           "enum": [
             "Provisioning",
             "Succeeded",
@@ -659,47 +1158,14 @@
             "modelAsString": true
           }
         },
-        "autoGeneratedDomainNameLabelScope": {
-          "type": "string",
-          "description": "The Cloud HSM Cluster's auto-generated Domain Name Label Scope"
-        },
-        "securityDomain": {
-          "$ref": "#/definitions/CloudHsmClusterSecurityDomainProperties"
-        },
-        "hsms": {
-          "type": "array",
-          "description": "An array of Cloud HSM Cluster's HSMs",
-          "x-ms-identifiers": [
-            "fqdn"
-          ],
-          "items": {
-            "$ref": "#/definitions/CloudHsmProperties"
-          }
-        },
         "publicNetworkAccess": {
           "type": "string",
           "description": "The Cloud HSM Cluster public network access"
-        },
-        "privateEndpointConnections": {
-          "type": "array",
-          "description": "List of private endpoint connection resources",
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
         },
         "statusMessage": {
           "type": "string",
           "description": "Cloud HSM Cluster status message",
           "readOnly": true
-        },
-        "restoreProperties": {
-          "$ref": "#/definitions/RestoreProperties"
-        },
-        "backupProperties": {
-          "$ref": "#/definitions/BackupProperties"
         }
       },
       "description": "Properties of a Cloud HSM Cluster.",
@@ -715,41 +1181,12 @@
             "description": "The Cloud HSM Cluster's tag's additional properties"
           }
         },
-        "sku": {
-          "$ref": "#/definitions/CloudHsmClusterSku",
-          "description": "SKU details"
-        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "type": "object",
-          "description": "Properties of the Cloud HSM Cluster",
-          "properties": {
-            "backupProperties": {
-              "$ref": "#/definitions/BackupProperties"
-            }
-          }
         }
       },
       "description": "Patchable properties of the Cloud HSM Cluster",
       "type": "object"
-    },
-    "CloudHsmClusterSecurityDomainProperties": {
-      "type": "object",
-      "description": "Security domain properties information for Cloud HSM cluster",
-      "properties": {
-        "fipsState": {
-          "format": "int32",
-          "type": "integer",
-          "description": "FIPS state information for security domain"
-        },
-        "activationStatus": {
-          "type": "string",
-          "description": "status of security domain activation"
-        }
-      }
     },
     "CloudHsmClusterSku": {
       "type": "object",
@@ -789,66 +1226,6 @@
           "description": "Sku capacity"
         }
       }
-    },
-    "BackupProperties": {
-      "type": "object",
-      "description": "Cloud Hsm Cluster backup information",
-      "properties": {
-        "azureStorageResourceUri": {
-          "type": "string",
-          "description": "Azure storage Resource Uri"
-        },
-        "lastBackupDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "Last Date Time that Customer Enabled Backup was taken"
-        },
-        "lastBackupStatus": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Status of last backup"
-        }
-      }
-    },
-    "RestoreProperties": {
-      "type": "object",
-      "description": "Cloud Hsm Cluster restore information",
-      "properties": {
-        "foldername": {
-          "type": "string",
-          "description": "Directory name in Azure Storage Blob where the backup is stored"
-        },
-        "azureStorageResourceUri": {
-          "type": "string",
-          "description": "Azure Blob storage container Uri"
-        }
-      }
-    },
-    "CloudHsmClusterError": {
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CHsmError"
-        }
-      },
-      "description": "The Cloud HSM Cluster error details",
-      "type": "object"
-    },
-    "CHsmError": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The error message."
-        }
-      },
-      "type": "object",
-      "description": "Error details"
     },
     "CloudHsmClusterListResult": {
       "properties": {
@@ -951,6 +1328,123 @@
         }
       },
       "description": "List of private endpoint connections associated with the specified resource."
+    },
+    "BackupRequestProperties": {
+      "type": "object",
+      "description": "Backup properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRestoreRequestBaseProperties"
+        }
+      ]
+    },
+    "RestoreRequestProperties": {
+      "type": "object",
+      "description": "Cloud Hsm Cluster restore information",
+      "properties": {
+        "backupId": {
+          "type": "string",
+          "description": "An autogenerated unique string ID for labeling the backup. It contains both a UUID and a date timestamp."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRestoreRequestBaseProperties"
+        }
+      ]
+    },
+    "BackupRestoreRequestBaseProperties": {
+      "type": "object",
+      "description": "Backup and Restore Common properties",
+      "properties": {
+        "azureStorageBlobContainerUri": {
+          "type": "string",
+          "description": "The Azure blob storage container Uri which contains the backup",
+          "format": "uri"
+        },
+        "token": {
+          "type": "string",
+          "description": "The SAS token pointing to an Azure blob storage container. This property is reserved for Azure Backup Service."
+        }
+      },
+      "required": [
+        "azureStorageBlobContainerUri"
+      ]
+    },
+    "BackupResult": {
+      "type": "object",
+      "properties": {
+        "azureStorageBlobContainerUri": {
+          "type": "string",
+          "description": "The Azure blob storage container Uri which contains the backup",
+          "format": "uri"
+        },
+        "backupId": {
+          "type": "string",
+          "description": "The ID of the backup."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRestoreBaseResult"
+        }
+      ],
+      "description": "Backup operation Result"
+    },
+    "RestoreResult": {
+      "type": "object",
+      "description": "Restore operation properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRestoreBaseResult"
+        }
+      ]
+    },
+    "BackupRestoreBaseResult": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the backup/restore operation",
+          "readOnly": true,
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Cancelled"
+          ],
+          "x-ms-enum": {
+            "name": "BackupRestoreOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of backup/restore operation"
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error encountered, if any, during the backup/restore operation."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The start time of the backup/restore operation in UTC"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The end time of the backup/restore operation in UTC",
+          "x-nullable": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the backup/restore operation."
+        }
+      },
+      "description": "Backup and Restore operation common properties"
     }
   },
   "parameters": {
@@ -959,23 +1453,30 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 24 characters in length.",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "maxLength": 24,
+      "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 23 characters in length.",
+      "pattern": "^[a-zA-Z0-9-]{3,23}$",
+      "maxLength": 23,
       "minLength": 3,
       "x-ms-parameter-location": "method"
     },
     "peConnectionName": {
+      "description": "Name of the private endpoint connection associated with the Cloud HSM Cluster.",
+      "in": "path",
+      "maxLength": 24,
+      "minLength": 3,
       "name": "peConnectionName",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "backupRestoreJobId": {
+      "name": "jobId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the private endpoint connection associated with the Cloud HSM Cluster.",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "maxLength": 24,
-      "minLength": 3,
+      "description": "The id returned as part of the backup request",
       "x-ms-parameter-location": "method"
     }
   }
 }
-
