@@ -1072,6 +1072,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/calculateModelCapacity": {
+      "post": {
+        "tags": [
+          "CognitiveServicesAccounts"
+        ],
+        "operationId": "calculateModelCapacity",
+        "description": "Model capacity calculator.",
+        "x-ms-examples": {
+          "Calculate Model Capacity": {
+            "$ref": "./examples/CalculateModelCapacity.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CalculateModelCapacityParameter"
+            },
+            "description": "Check Domain Availability parameter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CalculateModelCapacityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/privateEndpointConnections": {
       "get": {
         "tags": [
@@ -4475,8 +4521,7 @@
           "description": "The SKU of the resource."
         },
         "kind": {
-          "$ref": "#/definitions/Kind",
-          "description": "The Kind of the resource."
+          "$ref": "#/definitions/Kind"
         },
         "type": {
           "type": "string",
@@ -4488,6 +4533,62 @@
         "kind",
         "type"
       ]
+    },
+    "CalculateModelCapacityParameter": {
+      "type": "object",
+      "description": "Calculate Model Capacity parameter.",
+      "properties": {
+        "model": {
+          "$ref": "#/definitions/DeploymentModel"
+        },
+        "skuName": {
+          "type": "string"
+        },
+        "workloads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelCapacityCalculatorWorkload"
+          },
+          "description": "List of Model Capacity Calculator Workload."
+        }
+      }
+    },
+    "ModelCapacityCalculatorWorkload": {
+      "type": "object",
+      "description": "Model Capacity Calculator Workload.",
+      "properties": {
+        "requestPerMinute": {
+          "type": "integer"
+        },
+        "requestParameters": {
+          "type": "object",
+          "description": "Dictionary Model Capacity Calculator Workload Parameters."
+        }
+      }
+    },
+    "CalculateModelCapacityResult": {
+      "type": "object",
+      "description": "Calculate Model Capacity result.",
+      "properties": {
+        "model": {
+          "$ref": "#/definitions/DeploymentModel"
+        },
+        "skuName": {
+          "type": "string"
+        },
+        "estimatedCapacity": {
+          "type": "object",
+          "description": "Model Estimated Capacity.",
+          "properties": {
+            "value": {
+              "type": "integer"
+            },
+            "deployableValue": {
+              "type": "integer"
+            }
+          }
+        }
+      }
     },
     "SkuAvailabilityListResult": {
       "type": "object",
