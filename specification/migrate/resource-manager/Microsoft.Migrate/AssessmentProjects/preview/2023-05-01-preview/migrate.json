@@ -17809,11 +17809,51 @@
         "MonthlyLinuxAzureHybridCostSavings",
         "MonthlyAvsNodeCost",
         "MonthlyExternalStorageCost",
-        "MonthlyNetworkCost"
+        "MonthlyNetworkCost",
+        "MonthlyVcfByolSavings"
       ],
       "x-ms-enum": {
         "name": "CostComponentName",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown"
+          },
+          {
+            "name": "MonthlyAzureHybridCostSavings",
+            "value": "MonthlyAzureHybridCostSavings"
+          },
+          {
+            "name": "MonthlySecurityCost",
+            "value": "MonthlySecurityCost"
+          },
+          {
+            "name": "MonthlyPremiumV2StorageCost",
+            "value": "MonthlyPremiumV2StorageCost"
+          },
+          {
+            "name": "MonthlyLinuxAzureHybridCostSavings",
+            "value": "MonthlyLinuxAzureHybridCostSavings"
+          },
+          {
+            "name": "MonthlyAvsNodeCost",
+            "value": "MonthlyAvsNodeCost"
+          },
+          {
+            "name": "MonthlyExternalStorageCost",
+            "value": "MonthlyExternalStorageCost"
+          },
+          {
+            "name": "MonthlyNetworkCost",
+            "value": "MonthlyNetworkCost"
+          },
+          {
+            "name": "MonthlyVcfByolSavings",
+            "value": "MonthlyVcfByolSavings",
+            "description": "Monthly savings from using VCF BYOL"
+          }
+        ]
       }
     },
     "CostDetails": {
@@ -18682,6 +18722,7 @@
     },
     "AvsAssessmentScenario": {
       "type": "string",
+      "description": "Scenarios with which Avs Assessments can be created.",
       "enum": [
         "Unknown",
         "NewAvsSddc",
@@ -18689,7 +18730,24 @@
       ],
       "x-ms-enum": {
         "name": "AvsAssessmentScenario",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown assessment scenario"
+          },
+          {
+            "name": "NewAvsSddc",
+            "value": "NewAvsSddc",
+            "description": "Create Assessment for new Avs Sddc"
+          },
+          {
+            "name": "AvsSddcExpansion",
+            "value": "AvsSddcExpansion",
+            "description": "Create Assessment for existing Avs Sddc"
+          }
+        ]
       }
     },
     "FacilitySettings": {
