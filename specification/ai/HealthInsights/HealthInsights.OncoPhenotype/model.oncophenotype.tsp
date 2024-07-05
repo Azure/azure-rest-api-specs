@@ -1,10 +1,9 @@
 import "../HealthInsights.Common/model.common.request.tsp";
 import "../HealthInsights.Common/model.common.response.tsp";
 import "../HealthInsights.Common/model.common.shared.tsp";
-import "@azure-tools/typespec-azure-core";
+import "../HealthInsights.Common/model.common.fhir.elements.tsp";
 
 using TypeSpec.Rest;
-using Azure.Core;
 
 namespace AzureHealthInsights;
 
@@ -16,21 +15,15 @@ model OncoPhenotypeData {
   configuration?: OncoPhenotypeModelConfiguration;
 }
 
-@resource("oncophenotype/jobs")
 @doc("The response for the Onco Phenotype request.")
-model OncoPhenotypeResult {
-  ...Response;
-
-  @doc("The inference results for the Onco Phenotype request.")
-  @visibility("read")
-  @lroResult
-  results?: OncoPhenotypeResults;
-}
+@resource("onco-phenotype/jobs")
+model OncoPhenotypeResult
+  is HealthInsightsOperationStatus<OncoPhenotypeInferenceResult>;
 
 @doc("The inference results for the Onco Phenotype request.")
-model OncoPhenotypeResults {
+model OncoPhenotypeInferenceResult {
   @doc("Results for the patients given in the request.")
-  patients: OncoPhenotypePatientResult[];
+  patientResults: OncoPhenotypePatientResult[];
 
   @doc("The version of the model used for inference, expressed as the model date.")
   modelVersion: ModelVersion;
@@ -39,10 +32,10 @@ model OncoPhenotypeResults {
 @doc("The results of the model's work for a single patient.")
 model OncoPhenotypePatientResult {
   @doc("The identifier given for the patient in the request.")
-  id: string;
+  patientId: string;
 
   @doc("The model's inferences for the given patient.")
-  inferences: OncoPhenotypeInference[];
+  inferences: Array<OncoPhenotypeInference>;
 }
 
 @doc("An inference made by the Onco Phenotype model regarding a patient.")
@@ -56,8 +49,8 @@ model OncoPhenotypeInference {
   evidence?: InferenceEvidence[];
 
   @doc("""
-An identifier for a clinical case, if there are multiple clinical cases regarding the same patient.
-""")
+    An identifier for a clinical case, if there are multiple clinical cases regarding the same patient.
+    """)
   caseId?: string;
 }
 
@@ -66,21 +59,22 @@ model OncoPhenotypeModelConfiguration {
   ...ModelConfiguration;
 
   @doc("""
-A list of inference types to be inferred for the current request.
-This could be used if only part of the Onco Phenotype inferences are required.
-If this list is omitted or empty, the model will return all the inference types.
-""")
+    A list of inference types to be inferred for the current request.
+    This could be used if only part of the Onco Phenotype inferences are required.
+    If this list is omitted or empty, the model will return all the inference types.
+    """)
   inferenceTypes?: OncoPhenotypeInferenceType[];
 
   @doc("""
-An indication whether to perform a preliminary step on the patient's documents to determine whether they relate to a Cancer case.
-""")
+    An indication whether to perform a preliminary step on the patient's documents to determine whether they relate to a Cancer case.
+    """)
   checkForCancerCase?: boolean = false;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the Onco Phenotype inference.")
-enum OncoPhenotypeInferenceType {
+union OncoPhenotypeInferenceType {
+  string,
   TumorSite: "tumorSite",
   Histology: "histology",
   ClinicalStageT: "clinicalStageT",
@@ -89,4 +83,5 @@ enum OncoPhenotypeInferenceType {
   PathologicStageT: "pathologicStageT",
   PathologicStageN: "pathologicStageN",
   PathologicStageM: "pathologicStageM",
+  DiagnosisDate: "diagnosisDate",
 }

@@ -31,6 +31,11 @@ openapi-type: arm
 tag: package-2023-12-preview
 ```
 
+``` yaml !$(typescript)
+modelerfour:
+  flatten-models: false
+```
+
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
@@ -79,7 +84,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-cli-extensions
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
   - repo: azure-sdk-for-go
   - repo: azure-powershell

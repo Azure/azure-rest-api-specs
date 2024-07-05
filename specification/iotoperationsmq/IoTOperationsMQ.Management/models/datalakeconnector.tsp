@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./base.tsp";
@@ -69,12 +68,14 @@ model DataLakeConnectorProperties {
 }
 
 @doc("DataLake possible database formats")
-enum DataLakeDatabaseFormat {
+union DataLakeDatabaseFormat {
+  string,
+
   @doc("Delta format.")
-  delta,
+  "delta",
 
   @doc("Parquet format.")
-  parquet,
+  "parquet",
 }
 
 // GENERATION FIX TEMP - add "minProperties": 1 and "maxProperties": 1 to this property after creation.
@@ -142,12 +143,14 @@ model DataLakeFabricStorageAuthentication {
 
 // Add Fabric path type
 @doc("Fabric path type to use.")
-enum FabricPathType {
+union FabricPathType {
+  string,
+
   @doc("Fabric path type is Files.")
-  files,
+  "files",
 
   @doc("Fabric path type is Tables.")
-  tables,
+  "tables",
 }
 
 // Add Fabric one lake guids
@@ -264,49 +267,51 @@ model DeltaTableSchema {
 }
 
 @doc("Delta table format properties")
-enum DeltaTableFormatEnum {
+union DeltaTableFormatEnum {
+  string,
+
   @doc("Bool format")
-  boolean,
+  "boolean",
 
   @doc("Signed integer 8")
-  int8,
+  "int8",
 
   @doc("Signed integer 16")
-  int16,
+  "int16",
 
   @doc("Signed integer 32")
-  int32,
+  "int32",
 
   @doc("Unsigned integer 8")
-  uInt8,
+  "uInt8",
 
   @doc("Unsigned integer 16")
-  uInt16,
+  "uInt16",
 
   @doc("Unsigned integer 32")
-  uInt32,
+  "uInt32",
 
   @doc("Unsigned integer 64")
-  uInt64,
+  "uInt64",
 
   @doc("Float 16")
-  float16,
+  "float16",
 
   @doc("Float 32")
-  float32,
+  "float32",
 
   @doc("Float 64")
-  float64,
+  "float64",
 
   @doc("Date 32")
-  date32,
+  "date32",
 
   @doc("Date 64")
-  date64,
+  "date64",
 
   @doc("Binary data")
-  binary,
+  "binary",
 
   @doc("UTF8 format")
-  utf8,
+  "utf8",
 }

@@ -77,6 +77,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CompletionsOptions"
@@ -128,6 +129,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/EmbeddingsOptions"
@@ -426,6 +428,10 @@
           "type": "integer",
           "format": "int32",
           "description": "A value that controls the emission of log probabilities for the provided number of most likely\ntokens within a completions response."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "The suffix that comes after a completion of inserted text"
         },
         "echo": {
           "type": "boolean",

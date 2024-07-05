@@ -1955,6 +1955,37 @@
         }
       }
     },
+    "PostgreSqlV2TableDataset": {
+      "x-ms-discriminator-value": "PostgreSqlV2Table",
+      "description": "The PostgreSQLV2 table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "PostgreSQLV2 table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PostgreSqlV2TableDatasetTypeProperties"
+        }
+      }
+    },
+    "PostgreSqlV2TableDatasetTypeProperties": {
+      "description": "PostgreSQLV2 table dataset properties.",
+      "type": "object",
+      "properties": {
+        "table": {
+          "type": "object",
+          "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The PostgreSQL schema name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "MicrosoftAccessTableDataset": {
       "x-ms-discriminator-value": "MicrosoftAccessTable",
       "description": "The Microsoft Access table dataset.",
@@ -2692,6 +2723,36 @@
         }
       }
     },
+    "GoogleBigQueryV2ObjectDataset": {
+      "x-ms-discriminator-value": "GoogleBigQueryV2Object",
+      "description": "Google BigQuery service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleBigQueryV2DatasetTypeProperties"
+        }
+      }
+    },
+    "GoogleBigQueryV2DatasetTypeProperties": {
+      "description": "Google BigQuery Dataset Properties",
+      "properties": {
+        "table": {
+          "type": "object",
+          "description": "The table name of the Google BigQuery. Type: string (or Expression with resultType string)."
+        },
+        "dataset": {
+          "type": "object",
+          "description": "The database name of the Google BigQuery. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "GreenplumTableDataset": {
       "x-ms-discriminator-value": "GreenplumTable",
       "description": "Greenplum Database dataset.",
@@ -3361,6 +3422,26 @@
         "typeProperties"
       ]
     },
+    "SnowflakeV2Dataset": {
+      "x-ms-discriminator-value": "SnowflakeV2Table",
+      "description": "The snowflake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
     "SnowflakeDatasetTypeProperties": {
       "description": "Snowflake dataset properties.",
       "type": "object",
@@ -3454,6 +3535,10 @@
       "description": "Microsoft Fabric LakeHouse Table dataset properties.",
       "type": "object",
       "properties": {
+        "schema": {
+          "type": "object",
+          "description": "The schema name of Microsoft Fabric LakeHouse Table. Type: string (or Expression with resultType string)."
+        },
         "table": {
           "type": "object",
           "description": "The name of Microsoft Fabric LakeHouse Table. Type: string (or Expression with resultType string)."
@@ -3550,6 +3635,23 @@
         "table": {
           "type": "object",
           "description": "The table name of the Microsoft Fabric Warehouse. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ServiceNowV2ObjectDataset": {
+      "x-ms-discriminator-value": "ServiceNowV2Object",
+      "description": "ServiceNowV2 server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GenericDatasetTypeProperties"
         }
       }
     }
