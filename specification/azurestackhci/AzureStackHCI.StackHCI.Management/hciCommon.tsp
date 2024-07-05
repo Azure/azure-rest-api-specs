@@ -13,393 +13,247 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureStackHCI;
 
-/**
- * The provisioning state of a resource.
- */
+@doc("The provisioning state of a resource.")
 union ProvisioningState {
   string,
 
-  /**
-   * Resource has been created.
-   */
+  @doc("Resource has been created.")
   Succeeded: "Succeeded",
 
-  /**
-   * Resource creation failed.
-   */
+  @doc("Resource creation failed.")
   Failed: "Failed",
 
-  /**
-   * Resource creation was canceled.
-   */
+  @doc("Resource creation was canceled.")
   Canceled: "Canceled",
 
-  /**
-   * The resource provision state is not specified
-   */
+  @doc("The resource provision state is not specified")
   NotSpecified: "NotSpecified",
 
-  /**
-   * The resource is being provisioned
-   */
+  @doc("The resource is being provisioned")
   Provisioning: "Provisioning",
 
-  /**
-   * The resource is updating
-   */
+  @doc("The resource is updating")
   Updating: "Updating",
 
-  /**
-   * The resource is being deleted
-   */
+  @doc("The resource is being deleted")
   Deleting: "Deleting",
 
-  /**
-   * The resource create request has been accepted
-   */
+  @doc("The resource create request has been accepted")
   Accepted: "Accepted",
 }
 
-/**
- * Represents the various statuses a job can have throughout its lifecycle.
- */
+@doc("Represents the various statuses a job can have throughout its lifecycle.")
 union JobStatus {
   string,
 
-  /**
-   * The job status has not been specified.
-   */
+  @doc("The job status has not been specified.")
   NotSpecified: "NotSpecified",
 
-  /**
-   * The job is currently undergoing validation.
-   */
+  @doc("The job is currently undergoing validation.")
   ValidationInProgress: "ValidationInProgress",
 
-  /**
-   * The job has successfully passed validation.
-   */
+  @doc("The job has successfully passed validation.")
   ValidationSuccess: "ValidationSuccess",
 
-  /**
-   * The job has failed validation.
-   */
+  @doc("The job has failed validation.")
   ValidationFailed: "ValidationFailed",
 
-  /**
-   * The job's deployment is currently in progress.
-   */
+  @doc("The job's deployment is currently in progress.")
   DeploymentInProgress: "DeploymentInProgress",
 
-  /**
-   * The job's deployment has failed.
-   */
+  @doc("The job's deployment has failed.")
   DeploymentFailed: "DeploymentFailed",
 
-  /**
-   * The job has been successfully deployed.
-   */
+  @doc("The job has been successfully deployed.")
   DeploymentSuccess: "DeploymentSuccess",
 
-  /**
-   * The job status is invalid.
-   */
+  @doc("The job status is invalid.")
   Invalid: "Invalid",
 
-  /**
-   * The job has succeeded.
-   */
+  @doc("The job has succeeded.")
   Succeeded: "Succeeded",
 
-  /**
-   * The job has failed.
-   */
+  @doc("The job has failed.")
   Failed: "Failed",
 
-  /**
-   * The job has been canceled.
-   */
+  @doc("The job has been canceled.")
   Canceled: "Canceled",
 
-  /**
-   * The job is paused.
-   */
+  @doc("The job is paused.")
   Paused: "Paused",
 
-  /**
-   * The job is scheduled to run.
-   */
+  @doc("The job is scheduled to run.")
   Scheduled: "Scheduled",
 }
 
-/**
- * Deployment mode to trigger job.
- */
+@doc("Deployment mode to trigger job.")
 union DeploymentMode {
   string,
 
-  /**
-   * Validate ECE action deployment for a cluster.
-   */
+  @doc("Validate ECE action deployment for a cluster.")
   Validate: "Validate",
 
-  /**
-   * Deploy ECE action deployment for a cluster.
-   */
+  @doc("Deploy ECE action deployment for a cluster.")
   Deploy: "Deploy",
 }
 
-/**
- * Validation / deployment status details for Job.
- */
+@doc("Validation / deployment status details for Job.")
 model EceActionStatus {
-  /**
-   * Job status.
-   */
+  @doc("Job status.")
   @visibility("read")
   status?: string;
 
-  /**
-   * List of steps of Edge device job.
-   */
+  @doc("List of steps of Edge device job.")
   @visibility("read")
   @extension("x-ms-identifiers", ["name"])
   steps?: Step[];
 }
 
-/**
- * Step details during job execution.
- */
+@doc("Step details during job execution.")
 model Step {
-  /**
-   * Name of step.
-   */
+  @doc("Name of step.")
   @visibility("read")
   name?: string;
 
-  /**
-   * Description of step.
-   */
+  @doc("Description of step.")
   @visibility("read")
   description?: string;
 
-  /**
-   * FullStepIndex of step.
-   */
+  @doc("FullStepIndex of step.")
   @visibility("read")
   fullStepIndex?: string;
 
-  /**
-   * Start time of step.
-   */
+  @doc("Start time of step.")
   @visibility("read")
   startTimeUtc?: string;
 
-  /**
-   * End time of step.
-   */
+  @doc("End time of step.")
   @visibility("read")
   endTimeUtc?: string;
 
-  /**
-   * Status of step. Allowed values are 'Error', 'Success', 'InProgress'
-   */
+  @doc("Status of step. Allowed values are 'Error', 'Success', 'InProgress'")
   @visibility("read")
   status?: string;
 
-  /**
-   * List of nested steps during job execution..
-   */
+  @doc("List of nested steps during job execution..")
   @visibility("read")
   @extension("x-ms-identifiers", ["name"])
   steps?: Step[];
 
-  /**
-   * List of exceptions in job execution.
-   */
+  @doc("List of exceptions in job execution.")
   @visibility("read")
   exception?: string[];
 }
 
-/**
- * The HostNetwork of a cluster.
- */
+@doc("The HostNetwork of a cluster.")
 model DeploymentHostNetwork {
-  /**
-   * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
-   */
+  @doc("The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.")
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   intents?: DeploymentIntents[];
 
-  /**
-   * List of StorageNetworks config to deploy AzureStackHCI Cluster.
-   */
+  @doc("List of StorageNetworks config to deploy AzureStackHCI Cluster.")
   @OpenAPI.extension("x-ms-identifiers", ["name"])
   storageNetworks?: DeploymentStorageNetworks[];
 
-  /**
-   * Defines how the storage adapters between nodes are connected either switch or switch less..
-   */
+  @doc("Defines how the storage adapters between nodes are connected either switch or switch less..")
   storageConnectivitySwitchless?: boolean;
 
-  /**
-   * Optional parameter required only for 3 Nodes switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.
-   */
+  @doc("Optional parameter required only for 3 Nodes switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.")
   enableStorageAutoIp?: boolean;
 }
 
-/**
- * The Intents of a cluster.
- */
+@doc("The Intents of a cluster.")
 model DeploymentIntents {
-  /**
-   * Name of the network intent you wish to create.
-   */
+  @doc("Name of the network intent you wish to create.")
   name?: string;
 
-  /**
-   * List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.
-   */
+  @doc("List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.")
   trafficType?: string[];
 
-  /**
-   * Array of network interfaces used for the network intent.
-   */
+  @doc("Array of network interfaces used for the network intent.")
   adapter?: string[];
 
-  /**
-   * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
-   */
+  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
   overrideVirtualSwitchConfiguration?: boolean;
 
-  /**
-   * Set virtualSwitch ConfigurationOverrides for cluster.
-   */
+  @doc("Set virtualSwitch ConfigurationOverrides for cluster.")
   virtualSwitchConfigurationOverrides?: DeploymentVirtualSwitchConfigurationOverrides;
 
-  /**
-   * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
-   */
+  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
   overrideQosPolicy?: boolean;
 
-  /**
-   * Set QoS PolicyOverrides for cluster.
-   */
+  @doc("Set QoS PolicyOverrides for cluster.")
   qosPolicyOverrides?: QosPolicyOverrides;
 
-  /**
-   * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
-   */
+  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
   overrideAdapterProperty?: boolean;
 
-  /**
-   * Set Adapter PropertyOverrides for cluster.
-   */
+  @doc("Set Adapter PropertyOverrides for cluster.")
   adapterPropertyOverrides?: DeploymentAdapterPropertyOverrides;
 }
 
-/**
- * The VirtualSwitchConfigurationOverrides of a cluster.
- */
+@doc("The VirtualSwitchConfigurationOverrides of a cluster.")
 model DeploymentVirtualSwitchConfigurationOverrides {
-  /**
-   * Enable IoV for Virtual Switch
-   */
+  @doc("Enable IoV for Virtual Switch")
   enableIov?: string;
 
-  /**
-   * Load Balancing Algorithm for Virtual Switch
-   */
+  @doc("Load Balancing Algorithm for Virtual Switch")
   loadBalancingAlgorithm?: string;
 }
 
-/**
- * The QoSPolicyOverrides of a cluster.
- */
+@doc("The QoSPolicyOverrides of a cluster.")
 model QosPolicyOverrides {
-  /**
-   * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
   priorityValue8021Action_Cluster?: string;
 
-  /**
-   * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
   priorityValue8021Action_SMB?: string;
 
-  /**
-   * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
   bandwidthPercentage_SMB?: string;
 }
 
-/**
- * The AdapterPropertyOverrides of a cluster.
- */
+@doc("The AdapterPropertyOverrides of a cluster.")
 model DeploymentAdapterPropertyOverrides {
-  /**
-   * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
-   */
+  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
   jumboPacket?: string;
 
-  /**
-   * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.
-   */
+  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
   networkDirect?: string;
 
-  /**
-   * This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'
-   */
+  @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'")
   networkDirectTechnology?: string;
 }
 
-/**
- * The StorageNetworks of a cluster.
- */
+@doc("The StorageNetworks of a cluster.")
 model DeploymentStorageNetworks {
-  /**
-   * Name of the storage network.
-   */
+  @doc("Name of the storage network.")
   name?: string;
 
-  /**
-   * Name of the storage network adapter.
-   */
+  @doc("Name of the storage network adapter.")
   networkAdapterName?: string;
 
-  /**
-   * ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic.
-   */
+  @doc("ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic.")
   vlanId?: string;
 
-  /**
-   * List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.
-   */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @doc("List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.")
   @OpenAPI.extension("x-ms-identifiers", ["physicalNode"])
   storageAdapterIPInfo?: DeploymentStorageAdapterIPInfo[];
 }
 
-/**
- * The StorageAdapter physical nodes of a cluster.
- */
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+@doc("The StorageAdapter physical nodes of a cluster.")
 model DeploymentStorageAdapterIPInfo {
-  /**
-   * storage adapter physical node name.
-   */
+  @doc("storage adapter physical node name.")
   physicalNode?: string;
 
-  /**
-   * The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster.
-   */
+  @doc("The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster.")
   ipv4Address?: string;
 
-  /**
-   * The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster.
-   */
+  @doc("The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster.")
   subnetMask?: string;
 }
