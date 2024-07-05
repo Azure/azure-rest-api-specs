@@ -355,6 +355,10 @@ interface SolutionConfigurations {
   >;
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
   listByWidget is ArmResourceListAtScope<SolutionConfiguration>;
+  syncNow is ArmResourceActionNoContentAsync<
+    SolutionConfiguration, 
+    void
+  >;
 }
 
 @armResourceOperations
