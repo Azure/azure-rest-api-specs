@@ -27,7 +27,6 @@ model EdgeDevice is Azure.ResourceManager.ExtensionResource<{}> {
   >;
 }
 
-// FIXME: EdgeDeviceJob has no properties property
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("EdgeDevice Jobs resource")
 @parentResource(EdgeDevice)

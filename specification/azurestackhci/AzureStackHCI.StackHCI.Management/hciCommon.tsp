@@ -67,9 +67,6 @@ union JobStatus {
   @doc("The job has been successfully deployed.")
   DeploymentSuccess: "DeploymentSuccess",
 
-  @doc("The job status is invalid.")
-  Invalid: "Invalid",
-
   @doc("The job has succeeded.")
   Succeeded: "Succeeded",
 
@@ -123,11 +120,11 @@ model Step {
   @visibility("read")
   fullStepIndex?: string;
 
-  @doc("Start time of step.")
+  @doc("Start time in utc of step.")
   @visibility("read")
   startTimeUtc?: string;
 
-  @doc("End time of step.")
+  @doc("End time in utc of step.")
   @visibility("read")
   endTimeUtc?: string;
 
@@ -216,7 +213,7 @@ model QosPolicyOverrides {
   bandwidthPercentage_SMB?: string;
 }
 
-@doc("The AdapterPropertyOverrides of a cluster.")
+@doc("The network adapter properties to override during deployment of a cluster.")
 model DeploymentAdapterPropertyOverrides {
   @doc("This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.")
   jumboPacket?: string;
@@ -246,14 +243,14 @@ model DeploymentStorageNetworks {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
-@doc("The StorageAdapter physical nodes of a cluster.")
+@doc("The storage network adapter info.")
 model DeploymentStorageAdapterIPInfo {
-  @doc("storage adapter physical node name.")
+  @doc("physical node name.")
   physicalNode?: string;
 
-  @doc("The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster.")
+  @doc("The IPv4 address assigned to network adpater used for storage.")
   ipv4Address?: string;
 
-  @doc("The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster.")
+  @doc("The SubnetMask address assigned to network adpater used for storage.")
   subnetMask?: string;
 }

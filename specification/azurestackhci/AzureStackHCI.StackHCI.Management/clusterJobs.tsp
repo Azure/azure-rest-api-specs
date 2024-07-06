@@ -30,7 +30,6 @@ model ClusterProperties {
   provisioningState?: ProvisioningState;
 }
 
-// FIXME: ClusterJob has no properties property
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("Cluster Jobs resource")
 @parentResource(Clusters)

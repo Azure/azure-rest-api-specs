@@ -1302,7 +1302,7 @@
     },
     "DeploymentAdapterPropertyOverrides": {
       "type": "object",
-      "description": "The AdapterPropertyOverrides of a cluster.",
+      "description": "The network adapter properties to override during deployment of a cluster.",
       "properties": {
         "jumboPacket": {
           "type": "string",
@@ -1426,19 +1426,19 @@
     },
     "DeploymentStorageAdapterIPInfo": {
       "type": "object",
-      "description": "The StorageAdapter physical nodes of a cluster.",
+      "description": "The storage network adapter info.",
       "properties": {
         "physicalNode": {
           "type": "string",
-          "description": "storage adapter physical node name."
+          "description": "physical node name."
         },
         "ipv4Address": {
           "type": "string",
-          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+          "description": "The IPv4 address assigned to network adpater used for storage."
         },
         "subnetMask": {
           "type": "string",
-          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+          "description": "The SubnetMask address assigned to network adpater used for storage."
         }
       }
     },
@@ -2345,7 +2345,6 @@
         "DeploymentInProgress",
         "DeploymentFailed",
         "DeploymentSuccess",
-        "Invalid",
         "Succeeded",
         "Failed",
         "Canceled",
@@ -2390,11 +2389,6 @@
             "name": "DeploymentSuccess",
             "value": "DeploymentSuccess",
             "description": "The job has been successfully deployed."
-          },
-          {
-            "name": "Invalid",
-            "value": "Invalid",
-            "description": "The job status is invalid."
           },
           {
             "name": "Succeeded",
@@ -3083,12 +3077,12 @@
         },
         "startTimeUtc": {
           "type": "string",
-          "description": "Start time of step.",
+          "description": "Start time in utc of step.",
           "readOnly": true
         },
         "endTimeUtc": {
           "type": "string",
-          "description": "End time of step.",
+          "description": "End time in utc of step.",
           "readOnly": true
         },
         "status": {

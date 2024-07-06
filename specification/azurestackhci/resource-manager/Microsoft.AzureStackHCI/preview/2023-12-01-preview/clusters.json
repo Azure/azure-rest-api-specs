@@ -868,7 +868,7 @@
           "readOnly": true
         },
         "secretsLocations": {
-          "description": "List of Secret Locations",
+          "description": "List of locations to load secrets from",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SecretsLocations"
@@ -1602,14 +1602,14 @@
         "description": "Secret location",
         "type": "object",
         "properties": {
-          "secretsLocationName": {
+          "secretsType": {
             "description": "Types of the secret stored",
             "type": "string",
             "enum": [
               "BackupSecrets"
             ],
             "x-ms-enum": {
-              "name": "SecretsLocationName",
+              "name": "secretsType",
               "modelAsString": true
             }
           },
