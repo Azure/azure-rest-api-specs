@@ -30,7 +30,7 @@ description: HDInsight Containers Management Client
 openapi-type: arm
 openapi-subtype: rpaas
 azure-arm: true
-tag: package-2024-05
+tag: package-preview-2024-05
 ```
 
 ``` yaml
@@ -45,9 +45,9 @@ modelerfour:
 
 These settings apply only when `--tag=package-2024-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-05'
+```yaml $(tag) == 'package-preview-2024-05'
 input-file:
-  - stable/2024-05-01/hdinsight.json
+  - preview/2024-05-01-preview/hdinsight.json
 
 suppressions:
   - code: ResourceNameRestriction
