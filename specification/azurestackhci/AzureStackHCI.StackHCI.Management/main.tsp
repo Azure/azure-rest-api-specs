@@ -11,9 +11,9 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-@doc("Azure Stack HCI service")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
+@doc("Azure Stack HCI service")
 @armProviderNamespace
 @service({
   title: "Microsoft.AzureStackHCI",
