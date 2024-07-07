@@ -248,9 +248,9 @@ model DeploymentStorageAdapterIPInfo {
   @doc("physical node name.")
   physicalNode?: string;
 
-  @doc("The IPv4 address assigned to network adpater used for storage.")
+  @doc("The IPv4 address assigned to network adapter used for storage.")
   ipv4Address?: string;
 
-  @doc("The SubnetMask address assigned to network adpater used for storage.")
+  @doc("The SubnetMask address assigned to network adapter used for storage.")
   subnetMask?: string;
 }
