@@ -471,13 +471,16 @@ model FileFormat {
   type?: string;
 }
 
-alias BodyParameter<
-  T,
-  TName extends valueof string = "body",
-  TDoc extends valueof string = "Body parameter."
-> = {
-  @doc(TDoc)
-  @friendlyName(TName)
+@doc("Document Translate Request Body")
+model DocumentTranslateBody {
+  @doc("Document Translate Request Content")
   @bodyRoot
-  body: T;
-};
+  body: DocumentTranslateContent;
+}
+
+@doc("Start Translation Request Body")
+model StartTranslationBody {
+  @doc("Translation job submission batch request")
+  @bodyRoot
+  body: StartTranslationDetails;
+}
