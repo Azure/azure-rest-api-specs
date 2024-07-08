@@ -29,6 +29,14 @@ openapi-type: arm
 tag: package-preview-2023-09
 ```
 
+### Tag: package-2024-05-01
+
+These settings apply only when `--tag=package-2024-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-05-01'
+input-file:
+  - Microsoft.AppConfiguration/stable/2024-05-01/appconfiguration.json
+```
 
 ### Tag: package-preview-2023-09
 
@@ -38,6 +46,7 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 input-file:
   - Microsoft.AppConfiguration/preview/2023-09-01-preview/appconfiguration.json
 ```
+
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
