@@ -393,7 +393,7 @@
         "tags": [
           "SolutionConfigurations"
         ],
-        "description": "A long-running resource action.",
+        "description": "Trigger immediate sync with source cloud",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -424,6 +424,9 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
