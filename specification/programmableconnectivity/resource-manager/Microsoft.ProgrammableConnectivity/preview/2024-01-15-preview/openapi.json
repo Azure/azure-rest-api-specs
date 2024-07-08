@@ -413,6 +413,10 @@
               "$ref": "#/definitions/Gateway"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -687,6 +691,10 @@
               "$ref": "#/definitions/OperatorApiConnection"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -911,11 +919,7 @@
         "properties": {
           "$ref": "#/definitions/GatewayProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1024,11 +1028,7 @@
         "properties": {
           "$ref": "#/definitions/OperatorApiConnectionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1251,11 +1251,7 @@
         "properties": {
           "$ref": "#/definitions/OperatorApiPlanProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
