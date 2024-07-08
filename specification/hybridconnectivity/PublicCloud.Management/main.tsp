@@ -355,6 +355,8 @@ interface SolutionConfigurations {
   >;
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
   listByWidget is ArmResourceListAtScope<SolutionConfiguration>;
+  
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "syncNow API has no response schema"
   syncNow is ArmResourceActionNoContentAsync<
     SolutionConfiguration, 
     void
