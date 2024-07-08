@@ -642,31 +642,10 @@
         ],
         "parameters": [
           {
-            "name": "contentType",
-            "in": "formData",
-            "description": "The content type for the operation. Always multipart/form-data for this operation.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "multipart/form-data"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
+            "$ref": "#/parameters/CreateLivenessWithVerifySessionContent.Parameters"
           },
           {
-            "name": "Parameters",
-            "in": "formData",
-            "description": "The parameters for creating session.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "VerifyImage",
-            "in": "formData",
-            "description": "The image stream for verify. Content-Disposition header field for this part must have filename.",
-            "required": true,
-            "type": "file"
+            "$ref": "#/parameters/CreateLivenessWithVerifySessionContent.VerifyImage"
           }
         ],
         "responses": {
@@ -9426,5 +9405,22 @@
       "pattern": "^[a-z0-9-_]+$"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "CreateLivenessWithVerifySessionContent.Parameters": {
+      "name": "Parameters",
+      "in": "formData",
+      "description": "The parameters for creating session.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CreateLivenessWithVerifySessionContent.VerifyImage": {
+      "name": "VerifyImage",
+      "in": "formData",
+      "description": "The image stream for verify. Content-Disposition header field for this part must have filename.",
+      "required": true,
+      "type": "file",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
