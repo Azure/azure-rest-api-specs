@@ -63,7 +63,7 @@ op getAssistant(@path assistantId: string): Assistant;
 @post
 @route("/assistants/{assistantId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op updateAssistant(....BodyParameter<UpdateAssistantOptions>): Assistant;
+op updateAssistant(...BodyParameter<UpdateAssistantOptions>): Assistant;
 
 /**
  * Deletes an assistant.
