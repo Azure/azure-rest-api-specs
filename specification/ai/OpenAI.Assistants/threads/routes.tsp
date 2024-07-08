@@ -20,7 +20,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/threads")
-op createThread(...AssistantThreadCreationOptions): AssistantThread;
+op createThread(...BodyParameter<AssistantThreadCreationOptions>): AssistantThread;
 
 // list threads?
 
