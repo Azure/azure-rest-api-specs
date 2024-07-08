@@ -189,12 +189,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StartTranslationDetails"
-            }
+            "$ref": "#/parameters/StartTranslationBody"
           }
         ],
         "responses": {
@@ -1463,6 +1458,16 @@
       "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de ",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "StartTranslationBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Translation job submission batch request",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/StartTranslationDetails"
+      },
       "x-ms-parameter-location": "method"
     }
   }

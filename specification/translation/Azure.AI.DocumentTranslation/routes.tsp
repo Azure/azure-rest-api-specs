@@ -21,7 +21,7 @@ interface DocumentTranslationOperations {
   @route("document:translate")
   @post
   documentTranslate is RpcOperation<
-    DocumentTranslateBody,
+    DocumentTranslateContent,
     DocumentTranslateResult,
     ServiceTraits
   >;

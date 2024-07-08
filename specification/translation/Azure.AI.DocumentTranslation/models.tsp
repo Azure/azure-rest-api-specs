@@ -471,13 +471,6 @@ model FileFormat {
   type?: string;
 }
 
-@doc("Document Translate Request Body")
-model DocumentTranslateBody {
-  @doc("Document Translate Request Content")
-  @bodyRoot
-  body: DocumentTranslateContent;
-}
-
 @doc("Start Translation Request Body")
 model StartTranslationBody {
   @doc("Translation job submission batch request")

@@ -78,12 +78,7 @@ interface SingleDocumentTranslationClient {
 @@access(DocumentTranslation.SupportedFileFormats, Access.internal, "python");
 @@access(DocumentTranslation.FileFormat, Access.internal, "python");
 
-@@clientName(DocumentTranslation.DocumentTranslateBody.body,
-  "documentTranslateContent",
-  "csharp,java"
-);
-
 @@clientName(DocumentTranslation.StartTranslationBody.body,
-  "startTranslationDetails",
-  "csharp,java"
+  "StartTranslationDetails",
+  "csharp"
 );
