@@ -10,4 +10,18 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/sdk/liftrqumulo/arm-qumulo"
   payload-flattening-threshold: 1
   generate-metadata: true
+
+directive:
+  - rename-model: 
+      from: 'LiftrBase.Storage.FileSystemResourceUpdate'
+      to: FileSystemResourceUpdate
+  - rename-model: 
+      from: 'LiftrBase.Storage.FileSystemResource'
+      to: FileSystemResource
+  - rename-model: 
+      from: 'LiftrBase.Storage.FileSystemResourceUpdateProperties'
+      to: FileSystemResourceUpdateProperties
+  - rename-model: 
+      from: 'LiftrBase.Storage.FileSystemResourceProperties'
+      to: FileSystemResourceProperties
 ```
