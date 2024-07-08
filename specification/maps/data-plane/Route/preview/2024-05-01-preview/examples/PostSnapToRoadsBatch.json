@@ -31,6 +31,34 @@
           ],
           "includeSpeedLimit": true,
           "travelMode": "driving"
+        },
+        {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  127.579151,
+                  35.920814
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            },
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  127.578218,
+                  35.922274
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            }
+          ],
+          "travelMode": "driving"
         }
       ]
     }
@@ -40,7 +68,7 @@
       "body": {
         "summary": {
           "successfulRequests": 1,
-          "totalRequests": 1
+          "totalRequests": 2
         },
         "batchItems": [
           {
@@ -76,57 +104,11 @@
                 }
               }
             ]
-          }
-        ]
-      }
-    },
-    "207": {
-      "body": {
-        "summary": {
-          "successfulRequests": 1,
-          "totalRequests": 2
-        },
-        "batchItems": [
-          {
-            "type": "FeatureCollection",
-            "features": [
-              {
-                "type": "Feature",
-                "geometry": {
-                  "coordinates": [
-                    -122.125153,
-                    47.671762
-                  ],
-                  "type": "Point"
-                },
-                "properties": {
-                  "inputIndex": 0,
-                  "name": "NE 92nd St",
-                  "speedLimitInKilometersPerHour": 45
-                }
-              },
-              {
-                "type": "Feature",
-                "geometry": {
-                  "coordinates": [
-                    -122.123452,
-                    47.645234
-                  ],
-                  "type": "Point"
-                },
-                "properties": {
-                  "inputIndex": 1,
-                  "name": "NE 140th St",
-                  "speedLimitInKilometersPerHour": 55
-                }
-              }
-            ],
-            "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B"
           },
           {
             "error": {
-              "code": "400 BadRequest",
-              "message": "Invalid request"
+              "code": "BadRequest",
+              "message": "The requested route is in a region not currently supported. Please refer to the Routing Coverage Documentation for more information."
             }
           }
         ]
