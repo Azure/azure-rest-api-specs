@@ -24,4 +24,16 @@ directive:
   - rename-model: 
       from: 'LiftrBase.Storage.FileSystemResourceProperties'
       to: FileSystemResourceProperties
+  - rename-model: 
+      from: 'LiftrBase.MarketplaceDetails'
+      to: MarketplaceDetails
+  - rename-model: 
+      from: 'LiftrBase.MarketplaceSubscriptionStatus'
+      to: MarketplaceSubscriptionStatus
+  - rename-model: 
+      from: 'LiftrBase.UserDetails'
+      to: UserDetails
+  - rename-model: 
+      from: 'LiftrBase.ProvisioningState'
+      to: ProvisioningState
 ```
