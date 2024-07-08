@@ -325,7 +325,7 @@
     },
     "/route/range": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThis service will calculate a set of locations that can be reached from the origin point based on fuel, energy,  time or distance budget that is specified. A polygon boundary (or Isochrone) is returned in a counterclockwise  orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for further processing such as  [Search Inside Geometry](https://docs.microsoft.com/rest/api/maps/search/postsearchinsidegeometry) to  search for POIs within the provided Isochrone.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Route Range API creates a polygon that depicts the area reachable from a given location within a certain threshold based on the specified time or distance budget. A polygon boundary (or Isochrone) is returned in a counterclockwise orientation as well as the precise polygon center which was the result of the origin point.\n\nThe returned polygon can be used for spatial filtering to search for features of interest within the provided Isochrone.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Route_PostRouteRange",
         "consumes": [
           "application/geo+json"
@@ -336,7 +336,7 @@
         ],
         "x-ms-client-name": "Route_PostRouteRange",
         "x-ms-examples": {
-          "Successfully retrieve a snap to roads points with additional parameters in the body": {
+          "Successfully retrieve a set of locations that can be reached from the origin point based on the specified conditions": {
             "$ref": "./examples/PostRouteRange.json"
           }
         },
@@ -492,7 +492,7 @@
           }
         },
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format. If not set, the default value is the current time.\n\nExample:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
@@ -599,7 +599,7 @@
           "maximum": 359
         },
         "vehicleSpec": {
-          "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode",
+          "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode",
           "$ref": "#/definitions/VehicleSpec"
         }
       }
@@ -872,7 +872,7 @@
     },
     "RouteRangeGeometry": {
       "type": "object",
-      "description": "A valid `GeoJSON` Geometry object. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "description": "The origin point passed as a valid `GeoJSON` Geometry object, from which the range polygon should be calculated. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.\n\n`Note`: The API will snap the requested origin point to the nearest road network and will use that for range calculation. It will be returned as a `center` point in the response.",
       "properties": {
         "type": {
           "description": "Specifies the geometry type for the 'GeoJSON` Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
@@ -2070,7 +2070,7 @@
     },
     "RouteRangeVehicleSpec": {
       "type": "object",
-      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n",
+      "description": "Specifies the vehicle attributes such as vehicle height, weight, max speed, type of cargo, etc. to consider when calculating the reachable locations. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications. Vehicle attributes are specified within the vehicleSpec property.",
       "allOf": [
         {
           "$ref": "#/definitions/VehicleSpec"
@@ -2078,7 +2078,7 @@
       ]
     },
     "VehicleSpec": {
-      "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, specify the vehicle attributes.\n\n `Note`: Only supported for truck travelMode.",
+      "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode.",
       "type": "object",
       "properties": {
         "isVehicleCommercial": {
@@ -2226,7 +2226,7 @@
       }
     },
     "AvoidEnum": {
-      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tolls\"]",
+      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tollRoads\"]",
       "type": "array",
       "items": {
         "type": "string",
@@ -2276,7 +2276,7 @@
       }
     },
     "RouteRangeAvoidEnum": {
-      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tolls\"]",
+      "description": "Specifies restrictions that the route calculation should honor when determining the reachable locations. Avoid supports multiple values in a request.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tollRoads\"]",
       "type": "array",
       "items": {
         "type": "string",
@@ -2465,15 +2465,15 @@
     },
     "InputRouteRangeProperties": {
       "type": "object",
-      "description": "Specifies the properties of Route Range",
+      "description": "Specifies the parameters to use for the calculation of isochrone polygon.",
       "properties": {
         "departAt": {
-          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format. If not set, the default value is the current time.\n\nExample:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
           "type": "string",
           "format": "date-time"
         },
         "isSimplifiedPolygon": {
-          "description": "Return simplified polygons for the route range.",
+          "description": "Use this to specify if you need simplified polygons that reduces the number of polygon vertices while preserving the shape. The API returns high definition polygon by default.",
           "type": "boolean",
           "default": "false"
         },
@@ -2515,19 +2515,19 @@
           "$ref": "#/definitions/RouteRangeVehicleSpec"
         },
         "distanceBudgetInMeters ": {
-          "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit. If `isSimplifiedPolygon` is false, then the maximum distance is 360000 meters; otherwise, it is 50000000 meters.",
+          "description": "The distance budget specifies the maximum range in meters which can be travelled from the origin waypoint. It cannot be set when `timeBudgetInSec` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum distance supported is 360,000 meters; otherwise, it is 50,000,000 meters.\n\nExample: \"distanceBudgetInMeters\":5000",
           "type": "number",
           "minimum": 0,
           "maximum": 50000000
         },
         "timeBudgetInSec": {
-          "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint. If `isSimplifiedPolygon` is false, then the maximum time is 14400 seconds; otherwise, it is 10000000 seconds.",
+          "description": "The time budget specifies the maximum time in seconds available for travel, defining how far one can go within this time constraint from the origin waypoint. It cannot be set when `distanceBudgetInMeters` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum time supported is 14,400 seconds; otherwise, it is 10,000,000 seconds.\n\nExample: \"timeBudgetInSec\":3600",
           "type": "number",
           "minimum": 0,
           "maximum": 10000000
         },
         "travelMode": {
-          "description": "Specify the travel mode. If unspecified, the default mode is \"driving\".",
+          "description": "Specifies the travel profile to consider when calculating the range polygon. If not specified, the default value is \"driving\".\n\nExample: \"travelMode\":\"driving\"",
           "type": "string",
           "default": "driving",
           "enum": [
@@ -2540,11 +2540,11 @@
             "values": [
               {
                 "value": "driving",
-                "description": "driving"
+                "description": "Routing profile suitable for cars are used for range polygon calculation."
               },
               {
                 "value": "truck",
-                "description": "truck."
+                "description": "Routing profile suitable for commercial vehicles like trucks are used for range polygon calculation."
               }
             ]
           }
@@ -2601,7 +2601,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The point type",
+          "description": "The feature types for the feature objects returned in the response.",
           "type": "string",
           "enum": [
             "center",
@@ -2613,11 +2613,11 @@
             "values": [
               {
                 "value": "center",
-                "description": "The center point for the range calculation."
+                "description": "The center point feature type represents the point used for the range polygon calculation."
               },
               {
                 "value": "boundary",
-                "description": "The boundary for the range calculation."
+                "description": "The boundary feature type represents the range polygon."
               }
             ]
           }
