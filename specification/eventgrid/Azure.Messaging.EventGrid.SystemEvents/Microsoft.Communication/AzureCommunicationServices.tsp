@@ -1164,19 +1164,19 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsMessageAnalysisCompletedEventData extends AcsMessageEventData {
   /** The original message received. */
-  originalMessage: string;
+  originalMessage?: string;
 
   /** The analysed message channel kind. */
-  channelKind: AcsMessageChannelKind;
+  channelKind?: AcsMessageChannelKind;
 
   /** The intent of the analysed message. */
-  intentAnalysis: string;
+  intentAnalysis?: string;
 
   /** List of key phrases extracted. */
-  extractedKeyPhrases: string[];
+  extractedKeyPhrases?: string[];
 
   /** The analysed message language detection. */
-  languageDetection: AcsMessageLanguageDetection;
+  languageDetection?: AcsMessageLanguageDetection;
 }
 
 
@@ -1273,13 +1273,13 @@ model AcsMessageChannelEventError {
 /** Message Analysis Language Detection */
 model AcsMessageLanguageDetection {
   /** The language of the message. */
-  language: string;
+  language?: string;
 
   /** The confidence score of the language detected. */
-  confidenceScore: float64;
+  confidenceScore?: float64;
 
   /** The translation of the message. */
-  translation: string;
+  translation?: string;
 }
 
 /** Interactive reply kind */
