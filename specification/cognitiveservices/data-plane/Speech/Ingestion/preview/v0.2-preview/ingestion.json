@@ -84,9 +84,6 @@
           "Create a registration with customer owned Event Grid resource as the trigger": {
             "$ref": "./examples/Registrations_CreateRegistration_EventGrid.json"
           },
-          "Create a registration with the service polling on customer owned storage": {
-            "$ref": "./examples/Registrations_CreateRegistration_Polling.json"
-          },
           "Create a registration for transcription only": {
             "$ref": "./examples/Registrations_CreateRegistration_TranscriptionOnly.json"
           }
@@ -374,16 +371,25 @@
   },
   "components": {
     "schemas": {
-      "AnalyticsPropertiesPayload": {
+      "AnalyticsKind": {
+        "enum": [
+          "PromptFlow"
+        ],
+        "type": "string"
+      },
+      "AnalyticsPropertiesPayloadV02Preview": {
         "required": [
-          "endpoint"
+          "kind"
         ],
         "type": "object",
         "properties": {
-          "endpoint": {
-            "minLength": 1,
+          "kind": {
+            "$ref": "#/components/schemas/AnalyticsKind"
+          },
+          "endpointResourceId": {
             "type": "string",
-            "description": "The PromptFlow analytics endpoint. If it is empty, only transcription '<inputfilename>.json' will be saved in output container. If the endpoint is valid, you will see both transcription file and the analytics file '<inputfilename>.analytics.json'."
+            "description": "The PromptFlow analytics endpoint resourceId. If it is empty, only transcription '<filename>.json' will be saved in output container. If the endpoint is valid, you will see both transcription file and the analytics file '<filename>.analytics.json'.",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -397,14 +403,11 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "The unique name of the batch analytics registration.",
+            "description": "The name of the batch analytics registration.",
             "nullable": true
           },
           "batchTranscription": {
             "$ref": "#/components/schemas/BatchTranscriptionPropertiesPayload"
-          },
-          "analytics": {
-            "$ref": "#/components/schemas/AnalyticsPropertiesPayload"
           },
           "customProperties": {
             "type": "object",
@@ -413,8 +416,16 @@
             },
             "nullable": true
           },
+          "id": {
+            "type": "string",
+            "description": "The uniqie id of the batch analytics registration in GUID format. This value is generated if not specified.",
+            "nullable": true
+          },
           "storage": {
             "$ref": "#/components/schemas/StoragePropertiesPayloadV02Preview"
+          },
+          "analytics": {
+            "$ref": "#/components/schemas/AnalyticsPropertiesPayloadV02Preview"
           }
         },
         "additionalProperties": false
@@ -428,9 +439,6 @@
           },
           "batchTranscription": {
             "$ref": "#/components/schemas/BatchTranscriptionPropertiesPayload"
-          },
-          "analytics": {
-            "$ref": "#/components/schemas/AnalyticsPropertiesPayload"
           },
           "customProperties": {
             "type": "object",
@@ -448,6 +456,9 @@
           },
           "storage": {
             "$ref": "#/components/schemas/StoragePropertiesPayloadV02Preview"
+          },
+          "analytics": {
+            "$ref": "#/components/schemas/AnalyticsPropertiesPayloadV02Preview"
           }
         },
         "additionalProperties": false
@@ -599,8 +610,7 @@
       "RegistrationStatus": {
         "enum": [
           "Active",
-          "Error",
-          "Deactivated"
+          "Error"
         ],
         "type": "string"
       },
@@ -709,13 +719,6 @@
         },
         "additionalProperties": false
       },
-      "TriggerKind": {
-        "enum": [
-          "Polling",
-          "EventGrid"
-        ],
-        "type": "string"
-      },
       "TriggerPropertiesPayloadV02Preview": {
         "required": [
           "kind"
@@ -723,7 +726,10 @@
         "type": "object",
         "properties": {
           "kind": {
-            "$ref": "#/components/schemas/TriggerKind"
+            "enum": [
+              "EventGrid"
+            ],
+            "type": "string"
           },
           "filter": {
             "type": "object",
