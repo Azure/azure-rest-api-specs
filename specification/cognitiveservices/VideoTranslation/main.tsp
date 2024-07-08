@@ -15,7 +15,7 @@ using TypeSpec.OpenAPI;
   title: "Video Translation",
 })
 @server(
-  "{endpoint}/video-translation",
+  "{endpoint}/videotranslation",
   "Translate video from source locale to target locale.",
   {
     @doc("Supported Cognitive Services endpoints (protocol and hostname, for example: https://eastus.api.cognitive.microsoft.com).")
