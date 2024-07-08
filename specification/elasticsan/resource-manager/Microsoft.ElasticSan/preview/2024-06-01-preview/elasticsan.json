@@ -1689,6 +1689,10 @@
             "modelAsString": true
           },
           "description": "Allow or disallow public network access to ElasticSan. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
+        },
+        "autoScaleProperties": {
+          "description": "Auto Scale Properties for Elastic San Appliance.",
+          "$ref": "#/definitions/AutoScaleProperties"
         }
       }
     },
@@ -1741,6 +1745,10 @@
             "modelAsString": true
           },
           "description": "Allow or disallow public network access to ElasticSan Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'."
+        },
+        "autoScaleProperties": {
+          "description": "Auto Scale Properties for Elastic San Appliance.",
+          "$ref": "#/definitions/AutoScaleProperties"
         }
       }
     },
@@ -2682,6 +2690,50 @@
           "description": "Fully qualified resource ID of the volume. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}\""
         }
       }
+    },
+    "AutoScaleProperties": {
+      "type": "object",
+      "properties": {
+        "scaleUpProperties": {
+          "$ref": "#/definitions/ScaleUpProperties",
+          "x-ms-client-name": "ScaleUpProperties",
+          "description": "Scale up settings on Elastic San Appliance."
+        }
+      },
+      "description": "The auto scale settings on Elastic San Appliance.."
+    },
+    "ScaleUpProperties": {
+      "type": "object",
+      "properties": {
+        "unusedSizeTiB": {
+          "description": "Unused size on Elastic San appliance in TiB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "increaseCapacityUnitByTiB": {
+          "description": "Unit to increase Capacity Unit on Elastic San appliance in TiB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "capacityUnitScaleUpLimitTiB": {
+          "description": "Maximum scale up size on Elastic San appliance in TiB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "autoScalePolicyEnforcement": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "autoScalePolicyEnforcement",
+            "modelAsString": true
+          },
+          "description": "Enable or Disable scale up setting on Elastic San Appliance."
+        }
+      },
+      "description": "Scale up properties on Elastic San Appliance."
     }
   }
 }
