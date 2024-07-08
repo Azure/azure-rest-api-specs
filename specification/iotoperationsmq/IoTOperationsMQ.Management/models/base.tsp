@@ -118,10 +118,10 @@ model CertManagerIssuerRef {
 @doc("SANs for certificate.")
 model SanForCert {
   @doc("DNS SANs.")
-  dns: string[] = [];
+  dns: string[] = #[];
 
   @doc("IP address SANs.")
-  ip: string[] = [];
+  ip: string[] = #[];
 }
 
 @doc("Mqtt Protocol types")

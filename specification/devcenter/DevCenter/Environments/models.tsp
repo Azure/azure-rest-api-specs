@@ -73,6 +73,54 @@ union EnvironmentTypeEnableStatus {
   string,
 }
 
+@doc("An ability the user has to perform an action on the environment type as an admin.")
+@added(APIVersions.v2024_05_01_preview)
+union EnvironmentTypeAbilityAsAdmin {
+  @doc("User can delete environments.")
+  DeleteEnvironments: "DeleteEnvironments",
+
+  @doc("User can delay and skip actions on environments.")
+  ManageEnvironmentActions: "ManageEnvironmentActions",
+
+  @doc("User can read actions on environments.")
+  ReadEnvironmentActions: "ReadEnvironmentActions",
+
+  @doc("User can read outputs on environments.")
+  ReadEnvironmentOutputs: "ReadEnvironmentOutputs",
+
+  @doc("User can read environments.")
+  ReadEnvironments: "ReadEnvironments",
+
+  @doc("User can create new environments or replace and update existing ones.")
+  WriteEnvironments: "WriteEnvironments",
+
+  string,
+}
+
+@doc("An ability the user has to perform an action on the environment type as a developer.")
+@added(APIVersions.v2024_05_01_preview)
+union EnvironmentTypeAbilityAsDeveloper {
+  @doc("User can delete environments.")
+  DeleteEnvironments: "DeleteEnvironments",
+
+  @doc("User can delay and skip actions on environments.")
+  ManageEnvironmentActions: "ManageEnvironmentActions",
+
+  @doc("User can read actions on environments.")
+  ReadEnvironmentActions: "ReadEnvironmentActions",
+
+  @doc("User can read outputs on environments.")
+  ReadEnvironmentOutputs: "ReadEnvironmentOutputs",
+
+  @doc("User can read environments.")
+  ReadEnvironments: "ReadEnvironments",
+
+  @doc("User can create new environments or replace and update existing ones.")
+  WriteEnvironments: "WriteEnvironments",
+
+  string,
+}
+
 @doc("The provisioning state of the environment.")
 union EnvironmentProvisioningState {
   @doc("The environment was successfully provisioned.")
@@ -177,9 +225,9 @@ alias EnvironmentUpdateProperties = {
 
 alias EnvironmentPatchProperties = {
   @doc("""
-  The time the expiration date will be triggered (UTC), after which the
-  environment and associated resources will be deleted.
-  """)
+    The time the expiration date will be triggered (UTC), after which the
+    environment and associated resources will be deleted.
+    """)
   @added(APIVersions.v2024_02_01)
   expirationDate?: utcDateTime;
 };
@@ -353,15 +401,15 @@ model EnvironmentDefinitionParameter {
   default?: string;
 
   @doc("""
-A string of one of the basic JSON types (number, integer, array, object,
-boolean, string).
-""")
+    A string of one of the basic JSON types (number, integer, array, object,
+    boolean, string).
+    """)
   type: ParameterType;
 
   @doc("""
-Whether or not this parameter is read-only.  If true, default should have a
-value.
-""")
+    Whether or not this parameter is read-only.  If true, default should have a
+    value.
+    """)
   readOnly?: boolean;
 
   @doc("Whether or not this parameter is required.")
@@ -375,19 +423,26 @@ value.
 alias EnvironmentTypeListResult = Azure.Core.Page<EnvironmentType>;
 
 @doc("Properties of an environment type.")
+@resource("environmentTypes")
+@parentResource(Project)
 model EnvironmentType {
   @doc("The unique URI of the environment type.")
   @added(APIVersions.v2024_02_01)
   uri: url;
 
   @doc("Name of the environment type.")
+  @key("environmentTypeName")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility("read")
   name: string;
 
   @doc("""
-Id of a subscription or management group that the environment type will be
-mapped to. The environment's resources will be deployed into this subscription
-or management group.
-""")
+    Id of a subscription or management group that the environment type will be
+    mapped to. The environment's resources will be deployed into this subscription
+    or management group.
+    """)
   deploymentTargetId: string;
 
   @doc("Indicates whether this environment type is enabled for use in this project.")
@@ -396,6 +451,16 @@ or management group.
   @doc("Display name of the environment type.")
   @added(APIVersions.v2024_02_01)
   displayName?: string;
+}
+
+@doc("Abilities a user has on an environment type.")
+@added(APIVersions.v2024_05_01_preview)
+model EnvironmentTypeAbilities {
+  @doc("The abilities the user has to perform actions on the environment type as an admin.")
+  abilitiesAsAdmin: EnvironmentTypeAbilityAsAdmin[];
+
+  @doc("The abilities the user has to perform actions on the environment type as a developer.")
+  abilitiesAsDeveloper: EnvironmentTypeAbilityAsDeveloper[];
 }
 
 @doc("Information about a deploy operation on an environment.")
