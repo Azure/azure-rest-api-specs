@@ -1165,11 +1165,11 @@ model VirtualHardDiskStatus {
 
   @added(Versions.v2024_05_01_test_preview)
   @doc("The download status of the virtual hard disk")
-  downloadStatus?: VirtualHardDiskStatusDownloadStatus;
+  downloadStatus?: VirtualHardDiskDownloadStatus;
 
   @added(Versions.v2024_05_01_test_preview)
   @doc("The upload status of the virtual hard disk")
-  uploadStatus?: VirtualHardDiskStatusUploadStatus;
+  uploadStatus?: VirtualHardDiskUploadStatus;
 }
 
 @doc("VHD Status provisioning status")
@@ -1183,7 +1183,7 @@ model VirtualHardDiskStatusProvisioningStatus {
 
 @added(Versions.v2024_05_01_test_preview)
 @doc("The download status of the virtual hard disk")
-model VirtualHardDiskStatusDownloadStatus {
+model VirtualHardDiskDownloadStatus {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
   @doc("The downloaded sized of the virtual hard disk in MB")
   downloadedSizeInMB?: int64;
@@ -1191,10 +1191,13 @@ model VirtualHardDiskStatusDownloadStatus {
 
 @added(Versions.v2024_05_01_test_preview)
 @doc("The upload status of the virtual hard disk")
-model VirtualHardDiskStatusUploadStatus {
+model VirtualHardDiskUploadStatus {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
   @doc("The uploaded sized of the virtual hard disk in MB")
   uploadedSizeInMB?: int64;
+
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
 }
 
 @doc("The virtual hard disk resource patch definition.")
