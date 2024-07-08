@@ -47,10 +47,10 @@ enum Versions {
   v2024_02_01_preview: "2024-02-01-preview",
 
   /**
-   * The 2024-05-01-alpha API version for internal testing only.
+   * The 2024-05-01-test-preview API version for internal testing only.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-version-format" "Version name approved by reviewers"
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_05_01_alpha: "2024-05-01-alpha",
+  v2024_05_01_test_preview: "2024-05-01-test-preview",
 }

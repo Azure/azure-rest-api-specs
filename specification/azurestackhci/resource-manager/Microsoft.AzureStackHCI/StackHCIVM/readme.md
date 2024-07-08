@@ -58,7 +58,7 @@ suppressions:
     from: 
       - stackhcivm.json
   - code: APIVersionPattern
-    reason: 2024-05-01-alpha is for internal testing only and recommended by API spec review office hours.
+    reason: 2024-05-01-test-preview is for internal testing only and recommended by API spec review office hours.
     from:
       - stackhcivm.json
 ```
@@ -68,7 +68,7 @@ These settings apply only when `--tag=package-preview-2024-05-01-test` is specif
 
 ```yaml $(tag) == 'package-preview-2024-05-01-test'
 input-file:
-  - preview/2024-05-01-alpha/stackhcivm.json
+  - preview/2024-05-01-test-preview/stackhcivm.json
 ```
 
 ### Tag: package-preview-2024-02
