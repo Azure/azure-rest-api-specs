@@ -211,7 +211,7 @@
         ],
         "x-ms-client-name": "Route_PostSnapToRoads",
         "x-ms-examples": {
-          "Successfully retrieve a snap to roads points with additional parameters in the body": {
+          "Successfully retrieve snap to roads points with additional parameters in the body": {
             "$ref": "./examples/PostSnapToRoads.json"
           }
         },
@@ -639,7 +639,7 @@
         },
         "features": {
           "type": "array",
-          "description": "A set of points to snap to roads. You can have a maximum of 100 points. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "description": "A set of points to snap to road network. You can have a maximum of 100 points and the two consecutive points must be within 2.5 kilometer of each other. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
           "minimum": 2,
           "maximum": 100,
           "items": {
@@ -647,17 +647,17 @@
           }
         },
         "interpolate": {
-          "description": "Specify whether to insert additional points between the snapped points to complete the full route path",
+          "description": "Specifies whether to return additional points between the snapped points to complete the full route path that smoothly follows the road geometry. \n\nThe interpolated points will have \"isInterpolate:true\" in the response which can be used to identify the snapped points from interpolated points.",
           "type": "boolean",
           "default": false
         },
         "includeSpeedLimit": {
-          "description": "Specify whether to include speed limit information for the snapped points. The unit is in kilometers per hour. `Note`: Only supported for driving travelMode",
+          "description": "Specifies whether to include speed limit information for the snapped points in the response. The unit is in kilometers per hour. \n\n`Note`: Only supported for driving travelMode.",
           "type": "boolean",
           "default": false
         },
         "travelMode": {
-          "description": "Specify the travel mode for snapping the coordinates. If unspecified, the default mode is \"driving\", which optimizes the snapped coordinates for driving routes.",
+          "description": "Specifies the routing profile for snapping the points. If unspecified, the default mode is \"driving\", which optimizes the snapped points for driving routes.",
           "type": "string",
           "default": "driving",
           "enum": [
@@ -670,11 +670,11 @@
             "values": [
               {
                 "value": "driving",
-                "description": "driving"
+                "description": "The points are snapped to the road suitable for cars."
               },
               {
                 "value": "walking",
-                "description": "walking."
+                "description": "The points are snapped to the pedestrian route including the use of sidewalks."
               }
             ]
           }
@@ -2405,7 +2405,7 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
         },
         "properties": {
-          "description": "Feature properties. For snapToRoads, the properties are empty.",
+          "description": "The properties object is required in a valid GeoJSON but it can be empty since the metadata is not used for snapping to road.",
           "type": "object"
         }
       },
@@ -2444,16 +2444,16 @@
       "type": "object",
       "properties": {
         "inputIndex": {
-          "description": "Identify the corresponding index in the original list of points for each snapped point.",
+          "description": "Identify the corresponding index in the original list of points for each snapped point. Only the snapped points will return indices and can be used to distinguish them from the interpolated points.",
           "format": "int64",
           "type": "integer"
         },
         "isInterpolate": {
-          "description": "Identify whether this is the interpolation point.",
+          "description": "Identify whether this is the interpolated point.",
           "type": "boolean"
         },
         "name": {
-          "description": "Name of the road.",
+          "description": "Name of the road the point is snapped to.",
           "type": "string"
         },
         "speedLimitInKilometersPerHour": {
