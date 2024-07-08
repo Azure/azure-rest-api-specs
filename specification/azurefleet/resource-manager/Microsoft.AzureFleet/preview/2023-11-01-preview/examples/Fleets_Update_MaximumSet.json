@@ -1,0 +1,854 @@
+{
+  "title": "Fleets_Update_MaximumSet",
+  "operationId": "Fleets_Update",
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "subscriptionId": "7B0CD4DB-3381-4013-9B31-FB6E6FD0FF1C",
+    "resourceGroupName": "rgazurefleet",
+    "fleetName": "testFleet",
+    "properties": {
+      "tags": {},
+      "properties": {
+        "spotPriorityProfile": {
+          "maxPricePerVM": 0.00865,
+          "evictionPolicy": "Delete",
+          "allocationStrategy": "PriceCapacityOptimized",
+          "capacity": 20,
+          "minCapacity": 10
+        },
+        "regularPriorityProfile": {
+          "allocationStrategy": "LowestPrice",
+          "capacity": 20,
+          "minCapacity": 10
+        },
+        "vmSizesProfile": [
+          {
+            "name": "Standard_d1_v2"
+          }
+        ],
+        "computeProfile": {
+          "baseVirtualMachineProfile": {
+            "osProfile": {
+              "computerNamePrefix": "svdrokuuojba",
+              "adminUsername": "offgcmltnjkbiakzjhosetqeslifah",
+              "adminPassword": "wntdnosdvucijisma",
+              "customData": "konjpsuyijb",
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true,
+                "timeZone": "kpfs",
+                "additionalUnattendContent": [
+                  {
+                    "passName": "OobeSystem",
+                    "componentName": "Microsoft-Windows-Shell-Setup",
+                    "settingName": "AutoLogon",
+                    "content": "kstwdekvloggaypeiqgzlcfsm"
+                  }
+                ],
+                "patchSettings": {
+                  "patchMode": "Manual",
+                  "enableHotpatching": true,
+                  "assessmentMode": "ImageDefault",
+                  "automaticByPlatformSettings": {
+                    "rebootSetting": "Unknown",
+                    "bypassPlatformSafetyChecksOnUserSchedule": true
+                  }
+                },
+                "winRM": {
+                  "listeners": [
+                    {
+                      "protocol": "Http",
+                      "certificateUrl": "rpbe"
+                    }
+                  ]
+                },
+                "enableVMAgentPlatformUpdates": true
+              },
+              "linuxConfiguration": {
+                "disablePasswordAuthentication": true,
+                "ssh": {
+                  "publicKeys": [
+                    {
+                      "path": "pxxnbbcyekgdq",
+                      "keyData": "lfxabidjysvtlm"
+                    }
+                  ]
+                },
+                "provisionVMAgent": true,
+                "patchSettings": {
+                  "patchMode": "ImageDefault",
+                  "assessmentMode": "ImageDefault",
+                  "automaticByPlatformSettings": {
+                    "rebootSetting": "Unknown",
+                    "bypassPlatformSafetyChecksOnUserSchedule": true
+                  }
+                },
+                "enableVMAgentPlatformUpdates": true
+              },
+              "secrets": [
+                {
+                  "sourceVault": {
+                    "id": "ihxrocoahkxxjrbmbhmaahzi"
+                  },
+                  "vaultCertificates": [
+                    {
+                      "certificateUrl": "niigcnvodpcyiatng",
+                      "certificateStore": "ofo"
+                    }
+                  ]
+                }
+              ],
+              "allowExtensionOperations": true,
+              "requireGuestProvisionSignal": true
+            },
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "skk",
+                "offer": "ruhnsiankpaqh",
+                "sku": "bcwgmoqrsftfxshebubz",
+                "version": "nhzyxfc",
+                "sharedGalleryImageId": "mkfpnxoxmkyrwpab",
+                "communityGalleryImageId": "ujhxcd",
+                "id": "eouuvblwiuykzebjh"
+              },
+              "osDisk": {
+                "name": "qzchzeaaxupl",
+                "caching": "None",
+                "writeAcceleratorEnabled": true,
+                "createOption": "FromImage",
+                "diffDiskSettings": {
+                  "option": "Local",
+                  "placement": "CacheDisk"
+                },
+                "diskSizeGB": 18,
+                "osType": "Windows",
+                "image": {
+                  "uri": "zfpzrbpchhrehnfmh"
+                },
+                "vhdContainers": [
+                  "ibogdijam"
+                ],
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS",
+                  "diskEncryptionSet": {
+                    "id": "hinhonboozgfbrfwyy"
+                  },
+                  "securityProfile": {
+                    "securityEncryptionType": "VMGuestStateOnly",
+                    "diskEncryptionSet": {
+                      "id": "hinhonboozgfbrfwyy"
+                    }
+                  }
+                },
+                "deleteOption": "Delete"
+              },
+              "dataDisks": [
+                {
+                  "name": "lxrutjmjctse",
+                  "lun": 17,
+                  "caching": "None",
+                  "writeAcceleratorEnabled": true,
+                  "createOption": "FromImage",
+                  "diskSizeGB": 24,
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS",
+                    "diskEncryptionSet": {
+                      "id": "hinhonboozgfbrfwyy"
+                    },
+                    "securityProfile": {
+                      "securityEncryptionType": "VMGuestStateOnly",
+                      "diskEncryptionSet": {
+                        "id": "hinhonboozgfbrfwyy"
+                      }
+                    }
+                  },
+                  "diskIOPSReadWrite": 9,
+                  "diskMBpsReadWrite": 17,
+                  "deleteOption": "Delete"
+                }
+              ],
+              "diskControllerType": "yjhloknohphvezhkawonpaeyvkxed"
+            },
+            "networkProfile": {
+              "healthProbe": {
+                "id": "puulsdoecyaooqmhz"
+              },
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "akgykxfyokjdwhjztro",
+                  "properties": {
+                    "primary": true,
+                    "enableAcceleratedNetworking": true,
+                    "disableTcpStateTracking": true,
+                    "enableFpga": true,
+                    "networkSecurityGroup": {
+                      "id": "ihxrocoahkxxjrbmbhmaahzi"
+                    },
+                    "dnsSettings": {
+                      "dnsServers": [
+                        "uptkfxtujkp"
+                      ]
+                    },
+                    "ipConfigurations": [
+                      {
+                        "name": "et",
+                        "properties": {
+                          "subnet": {
+                            "id": "puulsdoecyaooqmhz"
+                          },
+                          "primary": true,
+                          "publicIPAddressConfiguration": {
+                            "name": "vphqhgnqqsbnafztnoq",
+                            "properties": {
+                              "idleTimeoutInMinutes": 8,
+                              "dnsSettings": {
+                                "domainNameLabel": "fdwomemghickvduupceilj",
+                                "domainNameLabelScope": "TenantReuse"
+                              },
+                              "ipTags": [
+                                {
+                                  "ipTagType": "odacxovypuippcmak",
+                                  "tag": "bbwjxnpervnfkaxvblftzfypky"
+                                }
+                              ],
+                              "publicIPPrefix": {
+                                "id": "ihxrocoahkxxjrbmbhmaahzi"
+                              },
+                              "publicIPAddressVersion": "IPv4",
+                              "deleteOption": "Delete"
+                            },
+                            "sku": {
+                              "name": "Basic",
+                              "tier": "Regional"
+                            }
+                          },
+                          "privateIPAddressVersion": "IPv4",
+                          "applicationGatewayBackendAddressPools": [
+                            {
+                              "id": "ihxrocoahkxxjrbmbhmaahzi"
+                            }
+                          ],
+                          "applicationSecurityGroups": [
+                            {
+                              "id": "ihxrocoahkxxjrbmbhmaahzi"
+                            }
+                          ],
+                          "loadBalancerBackendAddressPools": [
+                            {
+                              "id": "ihxrocoahkxxjrbmbhmaahzi"
+                            }
+                          ],
+                          "loadBalancerInboundNatPools": [
+                            {
+                              "id": "ihxrocoahkxxjrbmbhmaahzi"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "enableIPForwarding": true,
+                    "deleteOption": "Delete",
+                    "auxiliaryMode": "None",
+                    "auxiliarySku": "None"
+                  }
+                }
+              ],
+              "networkApiVersion": "2020-11-01"
+            },
+            "securityProfile": {
+              "uefiSettings": {
+                "secureBootEnabled": true,
+                "vTpmEnabled": true
+              },
+              "encryptionAtHost": true,
+              "securityType": "TrustedLaunch",
+              "encryptionIdentity": {
+                "userAssignedIdentityResourceId": "ymhqsov"
+              },
+              "proxyAgentSettings": {
+                "enabled": true,
+                "mode": "Audit",
+                "keyIncarnationId": 8
+              }
+            },
+            "diagnosticsProfile": {
+              "bootDiagnostics": {
+                "enabled": true,
+                "storageUri": "lqthuokqcyyccvfxut"
+              }
+            },
+            "extensionProfile": {
+              "extensions": [
+                {
+                  "name": "gioliweczgjegdfqyaqkdgwrmc",
+                  "properties": {
+                    "forceUpdateTag": "bfapfyqglqyiy",
+                    "publisher": "vmgltumwyjrsvlwcbgexcovgwyex",
+                    "type": "jrewfymdqgrlcudogunfog",
+                    "typeHandlerVersion": "vqrkrrankheuqbcopc",
+                    "autoUpgradeMinorVersion": true,
+                    "enableAutomaticUpgrade": true,
+                    "settings": {},
+                    "protectedSettings": {},
+                    "provisionAfterExtensions": [
+                      "babgtjyllusylxsnfvepitrkmkcx"
+                    ],
+                    "suppressFailures": true,
+                    "protectedSettingsFromKeyVault": {
+                      "secretUrl": "qmjoynsytvnjzutetnkog",
+                      "sourceVault": {
+                        "id": "ihxrocoahkxxjrbmbhmaahzi"
+                      }
+                    }
+                  }
+                }
+              ],
+              "extensionsTimeBudget": "srvemetinivyy"
+            },
+            "licenseType": "pbnasge",
+            "scheduledEventsProfile": {
+              "terminateNotificationProfile": {
+                "notBeforeTimeout": "yczcvhbnxumqmilfufwatqupjrniie",
+                "enable": true
+              },
+              "osImageNotificationProfile": {
+                "notBeforeTimeout": "wletnpoxpngmbtrup",
+                "enable": true
+              }
+            },
+            "userData": "jgdmsclzzknsevdsh",
+            "capacityReservation": {
+              "capacityReservationGroup": {
+                "id": "ihxrocoahkxxjrbmbhmaahzi"
+              }
+            },
+            "applicationProfile": {
+              "galleryApplications": [
+                {
+                  "tags": "bevijlsuchspoihzlfjczuqttaqz",
+                  "order": 4,
+                  "packageReferenceId": "aabkcborasmyowocjceldewmkci",
+                  "configurationReference": "auikpeahpgodbqdih",
+                  "treatFailureAsDeploymentFailure": true,
+                  "enableAutomaticUpgrade": true
+                }
+              ]
+            },
+            "hardwareProfile": {
+              "vmSizeProperties": {
+                "vCPUsAvailable": 14,
+                "vCPUsPerCore": 24
+              }
+            },
+            "serviceArtifactReference": {
+              "id": "qqqxnjehbgcepcfldzifjkwlzusn"
+            },
+            "securityPostureReference": {
+              "id": "zwtxjdjwedxmhpcoii",
+              "excludeExtensions": [
+                {
+                  "properties": {
+                    "forceUpdateTag": "eleagpulycjgvscuulb",
+                    "publisher": "rwaucnzfffywlsaoqltkmsynni",
+                    "type": "rgnq",
+                    "typeHandlerVersion": "hyyj",
+                    "autoUpgradeMinorVersion": true,
+                    "enableAutomaticUpgrade": true,
+                    "settings": {},
+                    "protectedSettings": {},
+                    "instanceView": {
+                      "name": "xxnjefzqotctmujsqpmyleaie",
+                      "type": "cycepellfcdujniys",
+                      "typeHandlerVersion": "jefntwzzgxsbzncchhefqiqbs",
+                      "substatuses": [
+                        {
+                          "code": "cbzjpwcbfodkqjnd",
+                          "level": "Info",
+                          "displayStatus": "oxhrtqv",
+                          "message": "uldcsnhprfe",
+                          "time": "2024-01-28T09:08:15.992Z"
+                        }
+                      ],
+                      "statuses": [
+                        {
+                          "code": "cbzjpwcbfodkqjnd",
+                          "level": "Info",
+                          "displayStatus": "oxhrtqv",
+                          "message": "uldcsnhprfe",
+                          "time": "2024-01-28T09:08:15.992Z"
+                        }
+                      ]
+                    },
+                    "suppressFailures": true,
+                    "protectedSettingsFromKeyVault": {
+                      "secretUrl": "qmjoynsytvnjzutetnkog",
+                      "sourceVault": {
+                        "id": "ihxrocoahkxxjrbmbhmaahzi"
+                      }
+                    },
+                    "provisionAfterExtensions": [
+                      "aysdon"
+                    ]
+                  },
+                  "location": "jzecxhirbtegqxpyk",
+                  "tags": {}
+                }
+              ]
+            }
+          },
+          "computeApiVersion": "2023-07-01"
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {}
+      },
+      "plan": {
+        "name": "jvqpiykxuzusinuzhiuwevgsj",
+        "publisher": "swmztkraswjxylowxoqhhvclvgp",
+        "product": "diraytdbmholvnncoj",
+        "promotionCode": "qyaqvhapdrtwktqw",
+        "version": "hgcldfcpb"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "spotPriorityProfile": {
+            "maxPricePerVM": 0.00865,
+            "evictionPolicy": "Delete",
+            "allocationStrategy": "PriceCapacityOptimized",
+            "capacity": 20,
+            "minCapacity": 10
+          },
+          "regularPriorityProfile": {
+            "allocationStrategy": "LowestPrice",
+            "capacity": 20,
+            "minCapacity": 10
+          },
+          "vmSizesProfile": [
+            {
+              "name": "Standard_d1_v2"
+            }
+          ],
+          "computeProfile": {
+            "baseVirtualMachineProfile": {
+              "osProfile": {
+                "computerNamePrefix": "svdrokuuojba",
+                "adminUsername": "offgcmltnjkbiakzjhosetqeslifah",
+                "windowsConfiguration": {
+                  "provisionVMAgent": true,
+                  "enableAutomaticUpdates": true,
+                  "timeZone": "kpfs",
+                  "additionalUnattendContent": [
+                    {
+                      "passName": "OobeSystem",
+                      "componentName": "Microsoft-Windows-Shell-Setup",
+                      "settingName": "AutoLogon"
+                    }
+                  ],
+                  "patchSettings": {
+                    "patchMode": "Manual",
+                    "enableHotpatching": true,
+                    "assessmentMode": "ImageDefault",
+                    "automaticByPlatformSettings": {
+                      "rebootSetting": "Unknown",
+                      "bypassPlatformSafetyChecksOnUserSchedule": true
+                    }
+                  },
+                  "winRM": {
+                    "listeners": [
+                      {
+                        "protocol": "Http",
+                        "certificateUrl": "rpbe"
+                      }
+                    ]
+                  },
+                  "enableVMAgentPlatformUpdates": true
+                },
+                "linuxConfiguration": {
+                  "disablePasswordAuthentication": true,
+                  "ssh": {
+                    "publicKeys": [
+                      {
+                        "path": "pxxnbbcyekgdq",
+                        "keyData": "lfxabidjysvtlm"
+                      }
+                    ]
+                  },
+                  "provisionVMAgent": true,
+                  "patchSettings": {
+                    "patchMode": "ImageDefault",
+                    "assessmentMode": "ImageDefault",
+                    "automaticByPlatformSettings": {
+                      "rebootSetting": "Unknown",
+                      "bypassPlatformSafetyChecksOnUserSchedule": true
+                    }
+                  },
+                  "enableVMAgentPlatformUpdates": true
+                },
+                "secrets": [
+                  {
+                    "sourceVault": {
+                      "id": "ihxrocoahkxxjrbmbhmaahzi"
+                    },
+                    "vaultCertificates": [
+                      {
+                        "certificateUrl": "niigcnvodpcyiatng",
+                        "certificateStore": "ofo"
+                      }
+                    ]
+                  }
+                ],
+                "allowExtensionOperations": true,
+                "requireGuestProvisionSignal": true
+              },
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "skk",
+                  "offer": "ruhnsiankpaqh",
+                  "sku": "bcwgmoqrsftfxshebubz",
+                  "version": "nhzyxfc",
+                  "sharedGalleryImageId": "mkfpnxoxmkyrwpab",
+                  "communityGalleryImageId": "ujhxcd",
+                  "id": "eouuvblwiuykzebjh",
+                  "exactVersion": "hfph"
+                },
+                "osDisk": {
+                  "name": "qzchzeaaxupl",
+                  "caching": "None",
+                  "writeAcceleratorEnabled": true,
+                  "createOption": "FromImage",
+                  "diffDiskSettings": {
+                    "option": "Local",
+                    "placement": "CacheDisk"
+                  },
+                  "diskSizeGB": 18,
+                  "osType": "Windows",
+                  "image": {
+                    "uri": "zfpzrbpchhrehnfmh"
+                  },
+                  "vhdContainers": [
+                    "ibogdijam"
+                  ],
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS",
+                    "diskEncryptionSet": {
+                      "id": "hinhonboozgfbrfwyy"
+                    },
+                    "securityProfile": {
+                      "securityEncryptionType": "VMGuestStateOnly",
+                      "diskEncryptionSet": {
+                        "id": "hinhonboozgfbrfwyy"
+                      }
+                    }
+                  },
+                  "deleteOption": "Delete"
+                },
+                "dataDisks": [
+                  {
+                    "name": "lxrutjmjctse",
+                    "lun": 17,
+                    "caching": "None",
+                    "writeAcceleratorEnabled": true,
+                    "createOption": "FromImage",
+                    "diskSizeGB": 24,
+                    "managedDisk": {
+                      "storageAccountType": "Standard_LRS",
+                      "diskEncryptionSet": {
+                        "id": "hinhonboozgfbrfwyy"
+                      },
+                      "securityProfile": {
+                        "securityEncryptionType": "VMGuestStateOnly",
+                        "diskEncryptionSet": {
+                          "id": "hinhonboozgfbrfwyy"
+                        }
+                      }
+                    },
+                    "diskIOPSReadWrite": 9,
+                    "diskMBpsReadWrite": 17,
+                    "deleteOption": "Delete"
+                  }
+                ],
+                "diskControllerType": "yjhloknohphvezhkawonpaeyvkxed"
+              },
+              "networkProfile": {
+                "healthProbe": {
+                  "id": "puulsdoecyaooqmhz"
+                },
+                "networkInterfaceConfigurations": [
+                  {
+                    "name": "akgykxfyokjdwhjztro",
+                    "properties": {
+                      "primary": true,
+                      "enableAcceleratedNetworking": true,
+                      "disableTcpStateTracking": true,
+                      "enableFpga": true,
+                      "networkSecurityGroup": {
+                        "id": "ihxrocoahkxxjrbmbhmaahzi"
+                      },
+                      "dnsSettings": {
+                        "dnsServers": [
+                          "uptkfxtujkp"
+                        ]
+                      },
+                      "ipConfigurations": [
+                        {
+                          "name": "et",
+                          "properties": {
+                            "subnet": {
+                              "id": "puulsdoecyaooqmhz"
+                            },
+                            "primary": true,
+                            "publicIPAddressConfiguration": {
+                              "name": "vphqhgnqqsbnafztnoq",
+                              "properties": {
+                                "idleTimeoutInMinutes": 8,
+                                "dnsSettings": {
+                                  "domainNameLabel": "fdwomemghickvduupceilj",
+                                  "domainNameLabelScope": "TenantReuse"
+                                },
+                                "ipTags": [
+                                  {
+                                    "ipTagType": "odacxovypuippcmak",
+                                    "tag": "bbwjxnpervnfkaxvblftzfypky"
+                                  }
+                                ],
+                                "publicIPPrefix": {
+                                  "id": "ihxrocoahkxxjrbmbhmaahzi"
+                                },
+                                "publicIPAddressVersion": "IPv4",
+                                "deleteOption": "Delete"
+                              },
+                              "sku": {
+                                "name": "Basic",
+                                "tier": "Regional"
+                              }
+                            },
+                            "privateIPAddressVersion": "IPv4",
+                            "applicationGatewayBackendAddressPools": [
+                              {
+                                "id": "ihxrocoahkxxjrbmbhmaahzi"
+                              }
+                            ],
+                            "applicationSecurityGroups": [
+                              {
+                                "id": "ihxrocoahkxxjrbmbhmaahzi"
+                              }
+                            ],
+                            "loadBalancerBackendAddressPools": [
+                              {
+                                "id": "ihxrocoahkxxjrbmbhmaahzi"
+                              }
+                            ],
+                            "loadBalancerInboundNatPools": [
+                              {
+                                "id": "ihxrocoahkxxjrbmbhmaahzi"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "enableIPForwarding": true,
+                      "deleteOption": "Delete",
+                      "auxiliaryMode": "None",
+                      "auxiliarySku": "None"
+                    }
+                  }
+                ],
+                "networkApiVersion": "2020-11-01"
+              },
+              "securityProfile": {
+                "uefiSettings": {
+                  "secureBootEnabled": true,
+                  "vTpmEnabled": true
+                },
+                "encryptionAtHost": true,
+                "securityType": "TrustedLaunch",
+                "encryptionIdentity": {
+                  "userAssignedIdentityResourceId": "ymhqsov"
+                },
+                "proxyAgentSettings": {
+                  "enabled": true,
+                  "mode": "Audit",
+                  "keyIncarnationId": 8
+                }
+              },
+              "diagnosticsProfile": {
+                "bootDiagnostics": {
+                  "enabled": true,
+                  "storageUri": "lqthuokqcyyccvfxut"
+                }
+              },
+              "extensionProfile": {
+                "extensions": [
+                  {
+                    "name": "gioliweczgjegdfqyaqkdgwrmc",
+                    "properties": {
+                      "forceUpdateTag": "bfapfyqglqyiy",
+                      "publisher": "vmgltumwyjrsvlwcbgexcovgwyex",
+                      "type": "jrewfymdqgrlcudogunfog",
+                      "typeHandlerVersion": "vqrkrrankheuqbcopc",
+                      "autoUpgradeMinorVersion": true,
+                      "enableAutomaticUpgrade": true,
+                      "settings": {},
+                      "protectedSettings": {},
+                      "provisionAfterExtensions": [
+                        "babgtjyllusylxsnfvepitrkmkcx"
+                      ],
+                      "suppressFailures": true,
+                      "protectedSettingsFromKeyVault": {
+                        "secretUrl": "qmjoynsytvnjzutetnkog",
+                        "sourceVault": {
+                          "id": "ihxrocoahkxxjrbmbhmaahzi"
+                        }
+                      },
+                      "provisioningState": "kauilerjryyvizdqoazz"
+                    },
+                    "type": "rhmnomookzqyld",
+                    "id": "qx"
+                  }
+                ],
+                "extensionsTimeBudget": "srvemetinivyy"
+              },
+              "licenseType": "pbnasge",
+              "scheduledEventsProfile": {
+                "terminateNotificationProfile": {
+                  "notBeforeTimeout": "yczcvhbnxumqmilfufwatqupjrniie",
+                  "enable": true
+                },
+                "osImageNotificationProfile": {
+                  "notBeforeTimeout": "wletnpoxpngmbtrup",
+                  "enable": true
+                }
+              },
+              "userData": "jgdmsclzzknsevdsh",
+              "capacityReservation": {
+                "capacityReservationGroup": {
+                  "id": "ihxrocoahkxxjrbmbhmaahzi"
+                }
+              },
+              "applicationProfile": {
+                "galleryApplications": [
+                  {
+                    "tags": "bevijlsuchspoihzlfjczuqttaqz",
+                    "order": 4,
+                    "packageReferenceId": "aabkcborasmyowocjceldewmkci",
+                    "configurationReference": "auikpeahpgodbqdih",
+                    "treatFailureAsDeploymentFailure": true,
+                    "enableAutomaticUpgrade": true
+                  }
+                ]
+              },
+              "hardwareProfile": {
+                "vmSizeProperties": {
+                  "vCPUsAvailable": 14,
+                  "vCPUsPerCore": 24
+                }
+              },
+              "serviceArtifactReference": {
+                "id": "qqqxnjehbgcepcfldzifjkwlzusn"
+              },
+              "securityPostureReference": {
+                "id": "zwtxjdjwedxmhpcoii",
+                "excludeExtensions": [
+                  {
+                    "properties": {
+                      "forceUpdateTag": "eleagpulycjgvscuulb",
+                      "publisher": "rwaucnzfffywlsaoqltkmsynni",
+                      "type": "rgnq",
+                      "typeHandlerVersion": "hyyj",
+                      "autoUpgradeMinorVersion": true,
+                      "enableAutomaticUpgrade": true,
+                      "settings": {},
+                      "protectedSettings": {},
+                      "instanceView": {
+                        "name": "xxnjefzqotctmujsqpmyleaie",
+                        "type": "cycepellfcdujniys",
+                        "typeHandlerVersion": "jefntwzzgxsbzncchhefqiqbs",
+                        "substatuses": [
+                          {
+                            "code": "cbzjpwcbfodkqjnd",
+                            "level": "Info",
+                            "displayStatus": "oxhrtqv",
+                            "message": "uldcsnhprfe",
+                            "time": "2024-01-28T09:08:15.992Z"
+                          }
+                        ],
+                        "statuses": [
+                          {
+                            "code": "cbzjpwcbfodkqjnd",
+                            "level": "Info",
+                            "displayStatus": "oxhrtqv",
+                            "message": "uldcsnhprfe",
+                            "time": "2024-01-28T09:08:15.992Z"
+                          }
+                        ]
+                      },
+                      "suppressFailures": true,
+                      "protectedSettingsFromKeyVault": {
+                        "secretUrl": "qmjoynsytvnjzutetnkog",
+                        "sourceVault": {
+                          "id": "ihxrocoahkxxjrbmbhmaahzi"
+                        }
+                      },
+                      "provisionAfterExtensions": [
+                        "aysdon"
+                      ],
+                      "provisioningState": "rmhlppcusvaiepeqafd"
+                    },
+                    "location": "jzecxhirbtegqxpyk",
+                    "tags": {},
+                    "id": "vlgmhpmsbktwfzbioynslximoohfc",
+                    "name": "qchtvtoulax",
+                    "type": "shqqxyvbipxzaxjbsesymzgrfybww"
+                  }
+                ]
+              },
+              "timeCreated": "2024-01-28T09:08:15.992Z"
+            },
+            "computeApiVersion": "2023-07-01"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "zones": [
+          "zone1",
+          "zone2"
+        ],
+        "tags": {},
+        "location": "westus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {},
+          "principalId": "4d508e5b-374b-4382-9a1c-01fb8b6cb37c",
+          "tenantId": "5d508e5b-374b-4382-9a1c-01fb8b6cb37c"
+        },
+        "plan": {
+          "name": "dfpbezgb",
+          "publisher": "rbtwbz",
+          "product": "rkqqhuapsyvq",
+          "promotionCode": "zeupbyuqekofuc",
+          "version": "rjpgrieyyxdlvdts"
+        },
+        "id": "/subscriptions/7B0CD4DB-3381-4013-9B31-FB6E6FD0FF1C/resourceGroups/rgazurefleet/providers/Microsoft.AzureFleet/fleets/testFleet",
+        "name": "testFleet",
+        "type": "Microsoft.AzureFleet/fleets",
+        "systemData": {
+          "createdBy": "cifywale",
+          "createdByType": "User",
+          "createdAt": "2023-11-02T17:13:51.863Z",
+          "lastModifiedBy": "llh",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-11-02T17:13:51.863Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

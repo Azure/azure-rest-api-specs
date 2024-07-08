@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Private;
 using OpenAPI;
 
 namespace Microsoft.Monitor;
@@ -88,8 +87,13 @@ union PublicNetworkAccess {
 interface AzureMonitorWorkspaces {
   @doc("Returns the specific Azure Monitor workspace")
   get is ArmResourceRead<AzureMonitorWorkspace>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create or update a workspace")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<AzureMonitorWorkspace>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    AzureMonitorWorkspace,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   @doc("Updates part of a workspace")
   update is ArmResourcePatchSync<
     AzureMonitorWorkspace,

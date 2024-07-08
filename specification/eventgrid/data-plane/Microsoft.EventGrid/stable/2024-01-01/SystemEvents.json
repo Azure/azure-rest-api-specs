@@ -38,7 +38,10 @@
           "type": "string",
           "description": "The chat thread id"
         }
-      }
+      },
+      "required": [
+        "recipientCommunicationIdentifier"
+      ]
     },
     "AcsChatEventInThreadBaseProperties": {
       "type": "object",
@@ -64,6 +67,9 @@
           "description": "The time at which the message was deleted"
         }
       },
+      "required": [
+        "deleteTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
@@ -80,6 +86,9 @@
           "description": "The time at which the message was deleted"
         }
       },
+      "required": [
+        "deleteTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
@@ -107,6 +116,10 @@
           "description": "The time at which the message was edited"
         }
       },
+      "required": [
+        "metadata",
+        "editTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
@@ -134,6 +147,10 @@
           "description": "The time at which the message was edited"
         }
       },
+      "required": [
+        "metadata",
+        "editTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
@@ -171,6 +188,10 @@
           "description": "The version of the message"
         }
       },
+      "required": [
+        "senderCommunicationIdentifier",
+        "composeTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatEventBaseProperties"
@@ -208,6 +229,10 @@
           "description": "The version of the message"
         }
       },
+      "required": [
+        "senderCommunicationIdentifier",
+        "composeTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
@@ -230,6 +255,9 @@
           }
         }
       },
+      "required": [
+        "metadata"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
@@ -252,6 +280,9 @@
           }
         }
       },
+      "required": [
+        "metadata"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
@@ -281,6 +312,11 @@
           "description": "The version of the thread"
         }
       },
+      "required": [
+        "time",
+        "addedByCommunicationIdentifier",
+        "participantAdded"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
@@ -305,6 +341,11 @@
           "description": "The details of the user who was added"
         }
       },
+      "required": [
+        "time",
+        "addedByCommunicationIdentifier",
+        "participantAdded"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
@@ -334,6 +375,11 @@
           "description": "The version of the thread"
         }
       },
+      "required": [
+        "time",
+        "removedByCommunicationIdentifier",
+        "participantRemoved"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
@@ -358,6 +404,11 @@
           "description": "The details of the user who was removed"
         }
       },
+      "required": [
+        "time",
+        "removedByCommunicationIdentifier",
+        "participantRemoved"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
@@ -393,6 +444,12 @@
           "x-ms-identifiers": []
         }
       },
+      "required": [
+        "createdByCommunicationIdentifier",
+        "properties",
+        "metadata",
+        "participants"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
@@ -428,6 +485,12 @@
           "x-ms-identifiers": []
         }
       },
+      "required": [
+        "createdByCommunicationIdentifier",
+        "properties",
+        "metadata",
+        "participants"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
@@ -448,6 +511,10 @@
           "description": "The deletion time of the thread"
         }
       },
+      "required": [
+        "deletedByCommunicationIdentifier",
+        "deleteTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
@@ -469,6 +536,9 @@
           "description": "The version of the thread"
         }
       },
+      "required": [
+        "createTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatEventBaseProperties"
@@ -490,6 +560,9 @@
           "description": "The version of the thread"
         }
       },
+      "required": [
+        "createTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
@@ -515,7 +588,11 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "participantCommunicationIdentifier",
+        "metadata"
+      ]
     },
     "AcsChatThreadPropertiesUpdatedEventData": {
       "type": "object",
@@ -543,6 +620,12 @@
           }
         }
       },
+      "required": [
+        "editedByCommunicationIdentifier",
+        "editTime",
+        "properties",
+        "metadata"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
@@ -575,6 +658,12 @@
           "additionalProperties": {}
         }
       },
+      "required": [
+        "editedByCommunicationIdentifier",
+        "editTime",
+        "metadata",
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
@@ -595,6 +684,10 @@
           "description": "The deletion time of the thread"
         }
       },
+      "required": [
+        "deletedByCommunicationIdentifier",
+        "deleteTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
@@ -631,7 +724,12 @@
           "description": "The time at which the email delivery report received timestamp",
           "x-ms-client-name": "deliveryAttemptTimestamp"
         }
-      }
+      },
+      "required": [
+        "status",
+        "deliveryStatusDetails",
+        "deliveryAttemptTimeStamp"
+      ]
     },
     "AcsEmailDeliveryReportStatus": {
       "type": "string",
@@ -726,7 +824,11 @@
           "description": "The type of engagement user have with email",
           "x-ms-client-name": "engagement"
         }
-      }
+      },
+      "required": [
+        "userActionTimeStamp",
+        "engagementType"
+      ]
     },
     "AcsIncomingCallCustomContext": {
       "type": "object",
@@ -746,7 +848,11 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "sipHeaders",
+        "voipHeaders"
+      ]
     },
     "AcsIncomingCallEventData": {
       "type": "object",
@@ -782,7 +888,332 @@
           "type": "string",
           "description": "CorrelationId (CallId)."
         }
+      },
+      "required": [
+        "to",
+        "from",
+        "customContext"
+      ]
+    },
+    "AcsInteractiveReplyKind": {
+      "type": "string",
+      "description": "Interactive reply kind",
+      "enum": [
+        "buttonReply",
+        "listReply",
+        "unknown"
+      ],
+      "x-ms-enum": {
+        "name": "AcsInteractiveReplyKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "buttonReply",
+            "value": "buttonReply",
+            "description": "Messaged interactive reply type is ButtonReply"
+          },
+          {
+            "name": "listReply",
+            "value": "listReply",
+            "description": "Messaged interactive reply type is ListReply"
+          },
+          {
+            "name": "unknown",
+            "value": "unknown",
+            "description": "Messaged interactive reply type is Unknown"
+          }
+        ]
       }
+    },
+    "AcsMessageButtonContent": {
+      "type": "object",
+      "description": "Message Button Content",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The Text of the button"
+        },
+        "payload": {
+          "type": "string",
+          "description": "The Payload of the button which was clicked by the user, setup by the business"
+        }
+      }
+    },
+    "AcsMessageChannelEventError": {
+      "type": "object",
+      "description": "Message Channel Event Error",
+      "properties": {
+        "channelCode": {
+          "type": "string",
+          "description": "The channel error code"
+        },
+        "channelMessage": {
+          "type": "string",
+          "description": "The channel error message"
+        }
+      }
+    },
+    "AcsMessageChannelKind": {
+      "type": "string",
+      "description": "Message channel kind",
+      "enum": [
+        "whatsapp"
+      ],
+      "x-ms-enum": {
+        "name": "AcsMessageChannelKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "whatsapp",
+            "value": "whatsapp",
+            "description": "Updated message channel type is WhatsApp"
+          }
+        ]
+      }
+    },
+    "AcsMessageContext": {
+      "type": "object",
+      "description": "Message Context",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "The WhatsApp ID for the customer who replied to an inbound message."
+        },
+        "id": {
+          "type": "string",
+          "description": "The message ID for the sent message for an inbound reply",
+          "x-ms-client-name": "messageId"
+        }
+      }
+    },
+    "AcsMessageDeliveryStatus": {
+      "type": "string",
+      "description": "Message delivery status",
+      "enum": [
+        "read",
+        "delivered",
+        "failed",
+        "sent",
+        "warning",
+        "unknown"
+      ],
+      "x-ms-enum": {
+        "name": "AcsMessageDeliveryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "read",
+            "value": "read",
+            "description": "Read"
+          },
+          {
+            "name": "delivered",
+            "value": "delivered",
+            "description": "Delivered"
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "Failed"
+          },
+          {
+            "name": "sent",
+            "value": "sent",
+            "description": "Sent"
+          },
+          {
+            "name": "warning",
+            "value": "warning",
+            "description": "Warning"
+          },
+          {
+            "name": "unknown",
+            "value": "unknown",
+            "description": "Unknown"
+          }
+        ]
+      }
+    },
+    "AcsMessageDeliveryStatusUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated event.",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "The message id"
+        },
+        "status": {
+          "$ref": "#/definitions/AcsMessageDeliveryStatus",
+          "description": "The updated message status"
+        },
+        "channelType": {
+          "$ref": "#/definitions/AcsMessageChannelKind",
+          "description": "The updated message channel type",
+          "x-ms-client-name": "channelKind"
+        }
+      },
+      "required": [
+        "status",
+        "channelType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsMessageEventData"
+        }
+      ]
+    },
+    "AcsMessageEventData": {
+      "type": "object",
+      "description": "Schema of common properties of all chat thread events",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "The message sender"
+        },
+        "to": {
+          "type": "string",
+          "description": "The message recipient"
+        },
+        "receivedTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time message was received"
+        },
+        "error": {
+          "$ref": "#/definitions/AcsMessageChannelEventError",
+          "description": "The channel event error"
+        }
+      },
+      "required": [
+        "receivedTimeStamp",
+        "error"
+      ]
+    },
+    "AcsMessageInteractiveButtonReplyContent": {
+      "type": "object",
+      "description": "Message Interactive button reply content for a user to business message",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the button",
+          "x-ms-client-name": "buttonId"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the button"
+        }
+      }
+    },
+    "AcsMessageInteractiveContent": {
+      "type": "object",
+      "description": "Message Interactive Content",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AcsInteractiveReplyKind",
+          "description": "The Message interactive reply type",
+          "x-ms-client-name": "replyKind"
+        },
+        "buttonReply": {
+          "$ref": "#/definitions/AcsMessageInteractiveButtonReplyContent",
+          "description": "The Message Sent when a customer clicks a button"
+        },
+        "listReply": {
+          "$ref": "#/definitions/AcsMessageInteractiveListReplyContent",
+          "description": "The Message Sent when a customer selects an item from a list"
+        }
+      },
+      "required": [
+        "type",
+        "buttonReply",
+        "listReply"
+      ]
+    },
+    "AcsMessageInteractiveListReplyContent": {
+      "type": "object",
+      "description": "Message Interactive list reply content for a user to business message",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the selected list item",
+          "x-ms-client-name": "listItemId"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the selected list item"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the selected row"
+        }
+      }
+    },
+    "AcsMessageMediaContent": {
+      "type": "object",
+      "description": "Message Media Content",
+      "properties": {
+        "mimeType": {
+          "type": "string",
+          "description": "The MIME type of the file this media represents"
+        },
+        "id": {
+          "type": "string",
+          "description": "The media identifier",
+          "x-ms-client-name": "mediaId"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The filename of the underlying media file as specified when uploaded"
+        },
+        "caption": {
+          "type": "string",
+          "description": "The caption for the media object, if supported and provided"
+        }
+      }
+    },
+    "AcsMessageReceivedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The message content"
+        },
+        "channelType": {
+          "$ref": "#/definitions/AcsMessageChannelKind",
+          "description": "The message channel type",
+          "x-ms-client-name": "channelKind"
+        },
+        "media": {
+          "$ref": "#/definitions/AcsMessageMediaContent",
+          "description": "The received message media content",
+          "x-ms-client-name": "mediaContent"
+        },
+        "context": {
+          "$ref": "#/definitions/AcsMessageContext",
+          "description": "The received message context"
+        },
+        "button": {
+          "$ref": "#/definitions/AcsMessageButtonContent",
+          "description": "The received message button content"
+        },
+        "interactive": {
+          "$ref": "#/definitions/AcsMessageInteractiveContent",
+          "description": "The received message interactive content",
+          "x-ms-client-name": "interactiveContent"
+        }
+      },
+      "required": [
+        "channelType",
+        "media",
+        "context",
+        "button",
+        "interactive"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsMessageEventData"
+        }
+      ]
     },
     "AcsRecordingChunkInfoProperties": {
       "type": "object",
@@ -849,7 +1280,14 @@
           "type": "string",
           "description": "The reason for ending recording session"
         }
-      }
+      },
+      "required": [
+        "recordingStorageInfo",
+        "recordingStartTime",
+        "recordingContentType",
+        "recordingChannelType",
+        "recordingFormatType"
+      ]
     },
     "AcsRecordingStorageInfoProperties": {
       "type": "object",
@@ -863,7 +1301,10 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "recordingChunks"
+      ]
     },
     "AcsRouterChannelConfiguration": {
       "type": "object",
@@ -913,7 +1354,11 @@
           },
           "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "innererror",
+        "details"
+      ]
     },
     "AcsRouterEventData": {
       "type": "object",
@@ -969,6 +1414,9 @@
           "x-ms-identifiers": []
         }
       },
+      "required": [
+        "errors"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1001,6 +1449,10 @@
           "x-ms-identifiers": []
         }
       },
+      "required": [
+        "queueDetails",
+        "attachedWorkerSelectors"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1081,6 +1533,10 @@
           }
         }
       },
+      "required": [
+        "labels",
+        "tags"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterEventData"
@@ -1132,6 +1588,10 @@
           "x-ms-identifiers": []
         }
       },
+      "required": [
+        "attachedWorkerSelectors",
+        "requestedWorkerSelectors"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1174,6 +1634,9 @@
         }
       },
       "required": [
+        "jobStatus",
+        "requestedWorkerSelectors",
+        "scheduledOn",
         "unavailableForMatching"
       ],
       "allOf": [
@@ -1217,6 +1680,11 @@
           "description": "Router Job Scheduling Failed Reason"
         }
       },
+      "required": [
+        "expiredAttachedWorkerSelectors",
+        "expiredRequestedWorkerSelectors",
+        "scheduledOn"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1362,6 +1830,9 @@
         }
       },
       "required": [
+        "expiredAttachedWorkerSelectors",
+        "expiredRequestedWorkerSelectors",
+        "scheduledOn",
         "unavailableForMatching"
       ],
       "allOf": [
@@ -1391,6 +1862,10 @@
           "x-ms-identifiers": []
         }
       },
+      "required": [
+        "expiredRequestedWorkerSelectors",
+        "expiredAttachedWorkerSelectors"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1464,6 +1939,57 @@
             "type": "string"
           }
         }
+      },
+      "required": [
+        "labels"
+      ]
+    },
+    "AcsRouterUpdatedWorkerProperty": {
+      "type": "string",
+      "description": "Worker properties that can be updated",
+      "enum": [
+        "AvailableForOffers",
+        "TotalCapacity",
+        "QueueAssignments",
+        "Labels",
+        "Tags",
+        "ChannelConfigurations"
+      ],
+      "x-ms-enum": {
+        "name": "AcsRouterUpdatedWorkerProperty",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AvailableForOffers",
+            "value": "AvailableForOffers",
+            "description": "AvailableForOffers"
+          },
+          {
+            "name": "TotalCapacity",
+            "value": "TotalCapacity",
+            "description": "TotalCapacity"
+          },
+          {
+            "name": "QueueAssignments",
+            "value": "QueueAssignments",
+            "description": "QueueAssignments"
+          },
+          {
+            "name": "Labels",
+            "value": "Labels",
+            "description": "Labels"
+          },
+          {
+            "name": "Tags",
+            "value": "Tags",
+            "description": "Tags"
+          },
+          {
+            "name": "ChannelConfigurations",
+            "value": "ChannelConfigurations",
+            "description": "ChannelConfigurations"
+          }
+        ]
       }
     },
     "AcsRouterWorkerDeletedEventData": {
@@ -1550,6 +2076,12 @@
           }
         }
       },
+      "required": [
+        "workerLabels",
+        "workerTags",
+        "jobLabels",
+        "jobTags"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -1650,6 +2182,14 @@
           }
         }
       },
+      "required": [
+        "workerLabels",
+        "offeredOn",
+        "expiresOn",
+        "workerTags",
+        "jobLabels",
+        "jobTags"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -1717,7 +2257,13 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "queueAssignments",
+        "channelConfigurations",
+        "labels",
+        "tags"
+      ]
     },
     "AcsRouterWorkerSelector": {
       "type": "object",
@@ -1727,19 +2273,20 @@
           "type": "string",
           "description": "Router Job Worker Selector Key"
         },
-        "operator": {
+        "labelOperator": {
           "$ref": "#/definitions/AcsRouterLabelOperator",
           "description": "Router Job Worker Selector Label Operator"
         },
-        "labelValue": {
-          "description": "Router Job Worker Selector Value"
+        "value": {
+          "description": "Router Job Worker Selector Value",
+          "x-ms-client-name": "labelValue"
         },
         "ttlSeconds": {
-          "type": "string",
-          "format": "duration",
+          "type": "number",
+          "format": "double",
           "description": "Router Job Worker Selector Time to Live in Seconds"
         },
-        "selectorState": {
+        "state": {
           "$ref": "#/definitions/AcsRouterWorkerSelectorState",
           "description": "Router Job Worker Selector State"
         },
@@ -1748,7 +2295,14 @@
           "format": "date-time",
           "description": "Router Job Worker Selector Expiration Time"
         }
-      }
+      },
+      "required": [
+        "labelOperator",
+        "value",
+        "ttlSeconds",
+        "state",
+        "expirationTime"
+      ]
     },
     "AcsRouterWorkerSelectorState": {
       "type": "string",
@@ -1774,6 +2328,64 @@
         ]
       }
     },
+    "AcsRouterWorkerUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerUpdated event.",
+      "properties": {
+        "workerId": {
+          "type": "string",
+          "description": "Router Worker Updated Worker Id"
+        },
+        "queueAssignments": {
+          "type": "array",
+          "description": "Router Worker Updated Queue Info",
+          "items": {
+            "$ref": "#/definitions/AcsRouterQueueDetails"
+          }
+        },
+        "channelConfigurations": {
+          "type": "array",
+          "description": "Router Worker Updated Channel Configuration",
+          "items": {
+            "$ref": "#/definitions/AcsRouterChannelConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "totalCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Router Worker Updated Total Capacity"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Router Worker Updated Labels",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Router Worker Updated Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "updatedWorkerProperties": {
+          "type": "array",
+          "description": "Router Worker Properties Updated",
+          "items": {
+            "$ref": "#/definitions/AcsRouterUpdatedWorkerProperty"
+          }
+        }
+      },
+      "required": [
+        "queueAssignments",
+        "channelConfigurations",
+        "labels",
+        "tags",
+        "updatedWorkerProperties"
+      ]
+    },
     "AcsSmsDeliveryAttemptProperties": {
       "type": "object",
       "description": "Schema for details of a delivery attempt",
@@ -1793,7 +2405,10 @@
           "format": "int32",
           "description": "Number of segments whose delivery failed"
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
     "AcsSmsDeliveryReportReceivedEventData": {
       "type": "object",
@@ -1825,6 +2440,10 @@
           "description": "Customer Content"
         }
       },
+      "required": [
+        "deliveryAttempts",
+        "receivedTimestamp"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsSmsEventBaseProperties"
@@ -1863,6 +2482,9 @@
           "description": "The time at which the SMS was received"
         }
       },
+      "required": [
+        "receivedTimestamp"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsSmsEventBaseProperties"
@@ -1877,7 +2499,10 @@
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier of the user who was disconnected"
         }
-      }
+      },
+      "required": [
+        "userCommunicationIdentifier"
+      ]
     },
     "AcsUserEngagement": {
       "type": "string",
@@ -1901,6 +2526,62 @@
             "description": "Click"
           }
         ]
+      }
+    },
+    "ApiCenterApiDefinitionAddedEventData": {
+      "type": "object",
+      "description": "Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "API definition title."
+        },
+        "description": {
+          "type": "string",
+          "description": "API definition description."
+        },
+        "specification": {
+          "$ref": "#/definitions/ApiCenterApiSpecification",
+          "description": "API definition specification."
+        }
+      },
+      "required": [
+        "specification"
+      ]
+    },
+    "ApiCenterApiDefinitionUpdatedEventData": {
+      "type": "object",
+      "description": "Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "API definition title."
+        },
+        "description": {
+          "type": "string",
+          "description": "API definition description."
+        },
+        "specification": {
+          "$ref": "#/definitions/ApiCenterApiSpecification",
+          "description": "API definition specification."
+        }
+      },
+      "required": [
+        "specification"
+      ]
+    },
+    "ApiCenterApiSpecification": {
+      "type": "object",
+      "description": "API specification details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Specification name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Specification version."
+        }
       }
     },
     "ApiManagementApiCreatedEventData": {
@@ -2299,7 +2980,10 @@
           "$ref": "#/definitions/AppAction",
           "description": "Type of action of the operation."
         }
-      }
+      },
+      "required": [
+        "action"
+      ]
     },
     "AppServicePlanAction": {
       "type": "string",
@@ -2335,7 +3019,12 @@
           "$ref": "#/definitions/AsyncStatus",
           "description": "Asynchronous operation status of the operation on the app service plan."
         }
-      }
+      },
+      "required": [
+        "stampKind",
+        "action",
+        "status"
+      ]
     },
     "AsyncStatus": {
       "type": "string",
@@ -2549,6 +3238,18 @@
           }
         }
       },
+      "required": [
+        "namedOutputs"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AvsScriptExecutionEventData"
+        }
+      ]
+    },
+    "AvsScriptExecutionStartedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionStarted event.",
       "allOf": [
         {
           "$ref": "#/definitions/AvsScriptExecutionEventData"
@@ -2589,6 +3290,10 @@
       "type": "object",
       "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set.",
       "properties": {
+        "kind": {
+          "$ref": "#/definitions/CommunicationIdentifierModelKind",
+          "description": "The identifier kind. Only required in responses."
+        },
         "rawId": {
           "type": "string",
           "description": "Raw Id of the identifier. Optional in requests, required in responses."
@@ -2604,7 +3309,54 @@
         "microsoftTeamsUser": {
           "$ref": "#/definitions/MicrosoftTeamsUserIdentifierModel",
           "description": "The Microsoft Teams user."
+        },
+        "microsoftTeamsApp": {
+          "$ref": "#/definitions/MicrosoftTeamsAppIdentifierModel",
+          "description": "The Microsoft Teams application."
         }
+      },
+      "required": [
+        "kind",
+        "communicationUser",
+        "phoneNumber",
+        "microsoftTeamsUser",
+        "microsoftTeamsApp"
+      ]
+    },
+    "CommunicationIdentifierModelKind": {
+      "type": "string",
+      "description": "Communication model identifier kind",
+      "enum": [
+        "unknown",
+        "communicationUser",
+        "phoneNumber",
+        "microsoftTeamsUser"
+      ],
+      "x-ms-enum": {
+        "name": "CommunicationIdentifierModelKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "unknown",
+            "value": "unknown",
+            "description": "Unknown"
+          },
+          {
+            "name": "communicationUser",
+            "value": "communicationUser",
+            "description": "Communication User"
+          },
+          {
+            "name": "phoneNumber",
+            "value": "phoneNumber",
+            "description": "Phone Number"
+          },
+          {
+            "name": "microsoftTeamsUser",
+            "value": "microsoftTeamsUser",
+            "description": "Microsoft Teams User"
+          }
+        ]
       }
     },
     "CommunicationUserIdentifierModel": {
@@ -2649,7 +3401,12 @@
           "$ref": "#/definitions/ContainerRegistryEventConnectedRegistry",
           "description": "The connected registry information if the event is generated by a connected registry."
         }
-      }
+      },
+      "required": [
+        "timestamp",
+        "target",
+        "connectedRegistry"
+      ]
     },
     "ContainerRegistryArtifactEventTarget": {
       "type": "object",
@@ -2765,7 +3522,15 @@
           "$ref": "#/definitions/ContainerRegistryEventConnectedRegistry",
           "description": "The connected registry information if the event is generated by a connected registry."
         }
-      }
+      },
+      "required": [
+        "timestamp",
+        "target",
+        "request",
+        "actor",
+        "source",
+        "connectedRegistry"
+      ]
     },
     "ContainerRegistryEventRequest": {
       "type": "object",
@@ -2965,7 +3730,11 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      }
+      },
+      "required": [
+        "stageName",
+        "stageTime"
+      ]
     },
     "DataBoxCopyStartedEventData": {
       "type": "object",
@@ -2984,7 +3753,11 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      }
+      },
+      "required": [
+        "stageName",
+        "stageTime"
+      ]
     },
     "DataBoxOrderCompletedEventData": {
       "type": "object",
@@ -3003,7 +3776,11 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      }
+      },
+      "required": [
+        "stageName",
+        "stageTime"
+      ]
     },
     "DataBoxStageName": {
       "type": "string",
@@ -3065,7 +3842,10 @@
           "$ref": "#/definitions/DeviceConnectionStateEventInfo",
           "description": "Information about the device connection state event."
         }
-      }
+      },
+      "required": [
+        "deviceConnectionStateEventInfo"
+      ]
     },
     "DeviceLifeCycleEventProperties": {
       "type": "object",
@@ -3083,7 +3863,10 @@
           "$ref": "#/definitions/DeviceTwinInfo",
           "description": "Information about the device twin, which is the cloud representation of application device metadata."
         }
-      }
+      },
+      "required": [
+        "twin"
+      ]
     },
     "DeviceTelemetryEventProperties": {
       "type": "object",
@@ -3108,7 +3891,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "body",
+        "properties",
+        "systemProperties"
+      ]
     },
     "DeviceTwinInfo": {
       "type": "object",
@@ -3160,7 +3948,11 @@
           "$ref": "#/definitions/DeviceTwinInfoX509Thumbprint",
           "description": "The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate."
         }
-      }
+      },
+      "required": [
+        "properties",
+        "x509Thumbprint"
+      ]
     },
     "DeviceTwinInfoProperties": {
       "type": "object",
@@ -3174,7 +3966,11 @@
           "$ref": "#/definitions/DeviceTwinProperties",
           "description": "A portion of the properties that can be written only by the device, and read by the application back-end."
         }
-      }
+      },
+      "required": [
+        "desired",
+        "reported"
+      ]
     },
     "DeviceTwinInfoX509Thumbprint": {
       "type": "object",
@@ -3216,11 +4012,14 @@
           "description": "Version of device twin properties.",
           "x-ms-client-name": "$version"
         }
-      }
+      },
+      "required": [
+        "metadata"
+      ]
     },
     "EventGridMQTTClientCreatedOrUpdatedEventData": {
       "type": "object",
-      "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientCreatedOrUpdated event.",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event.",
       "properties": {
         "state": {
           "$ref": "#/definitions/EventGridMQTTClientState",
@@ -3244,6 +4043,12 @@
           }
         }
       },
+      "required": [
+        "state",
+        "createdOn",
+        "updatedOn",
+        "attributes"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EventGridMQTTClientEventData"
@@ -3252,7 +4057,7 @@
     },
     "EventGridMQTTClientDeletedEventData": {
       "type": "object",
-      "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientDeleted event.",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientDeleted event.",
       "allOf": [
         {
           "$ref": "#/definitions/EventGridMQTTClientEventData"
@@ -3357,7 +4162,7 @@
     },
     "EventGridMQTTClientSessionConnectedEventData": {
       "type": "object",
-      "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionConnected event.",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientSessionConnected event.",
       "properties": {
         "clientSessionName": {
           "type": "string",
@@ -3377,7 +4182,7 @@
     },
     "EventGridMQTTClientSessionDisconnectedEventData": {
       "type": "object",
-      "description": "Event data for Microsoft.EventGrid.SystemEvents.MQTTClientSessionDisconnected event.",
+      "description": "Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event.",
       "properties": {
         "clientSessionName": {
           "type": "string",
@@ -3393,6 +4198,9 @@
           "description": "Reason for the disconnection of the MQTT client's session. The value could be\none of the values in the disconnection reasons table."
         }
       },
+      "required": [
+        "disconnectionReason"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EventGridMQTTClientEventData"
@@ -3470,7 +4278,11 @@
           "format": "date-time",
           "description": "The last time from the queue."
         }
-      }
+      },
+      "required": [
+        "firstEnqueueTime",
+        "lastEnqueueTime"
+      ]
     },
     "HealthcareDicomImageCreatedEventData": {
       "type": "object",
@@ -3590,7 +4402,10 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
           "x-ms-client-name": "FhirResourceVersionId"
         }
-      }
+      },
+      "required": [
+        "resourceType"
+      ]
     },
     "HealthcareFhirResourceDeletedEventData": {
       "type": "object",
@@ -3617,7 +4432,10 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
           "x-ms-client-name": "FhirResourceVersionId"
         }
-      }
+      },
+      "required": [
+        "resourceType"
+      ]
     },
     "HealthcareFhirResourceType": {
       "type": "string",
@@ -4622,7 +5440,10 @@
           "description": "VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion).",
           "x-ms-client-name": "FhirResourceVersionId"
         }
-      }
+      },
+      "required": [
+        "resourceType"
+      ]
     },
     "IotHubDeviceConnectedEventData": {
       "type": "object",
@@ -4668,6 +5489,42 @@
           "$ref": "#/definitions/DeviceTelemetryEventProperties"
         }
       ]
+    },
+    "KeyVaultAccessPolicyChangedEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.VaultAccessPolicyChanged event.",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "The id of the object that triggered this event."
+        },
+        "VaultName": {
+          "type": "string",
+          "description": "Key vault name of the object that triggered this event."
+        },
+        "ObjectType": {
+          "type": "string",
+          "description": "The type of the object that triggered this event"
+        },
+        "ObjectName": {
+          "type": "string",
+          "description": "The name of the object that triggered this event"
+        },
+        "Version": {
+          "type": "string",
+          "description": "The version of the object that triggered this event"
+        },
+        "NBF": {
+          "type": "number",
+          "format": "float",
+          "description": "Not before date of the object that triggered this event"
+        },
+        "EXP": {
+          "type": "number",
+          "format": "float",
+          "description": "The expiration date of the object that triggered this event"
+        }
+      }
     },
     "KeyVaultCertificateExpiredEventData": {
       "type": "object",
@@ -4993,42 +5850,6 @@
         }
       }
     },
-    "KeyVaultVaultAccessPolicyChangedEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.KeyVault.VaultAccessPolicyChanged event.",
-      "properties": {
-        "Id": {
-          "type": "string",
-          "description": "The id of the object that triggered this event."
-        },
-        "VaultName": {
-          "type": "string",
-          "description": "Key vault name of the object that triggered this event."
-        },
-        "ObjectType": {
-          "type": "string",
-          "description": "The type of the object that triggered this event"
-        },
-        "ObjectName": {
-          "type": "string",
-          "description": "The name of the object that triggered this event"
-        },
-        "Version": {
-          "type": "string",
-          "description": "The version of the object that triggered this event"
-        },
-        "NBF": {
-          "type": "number",
-          "format": "float",
-          "description": "Not before date of the object that triggered this event"
-        },
-        "EXP": {
-          "type": "number",
-          "format": "float",
-          "description": "The expiration date of the object that triggered this event"
-        }
-      }
-    },
     "MachineLearningServicesDatasetDriftDetectedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event.",
@@ -5068,7 +5889,11 @@
           "format": "date-time",
           "description": "The end time of the target dataset time series that resulted in drift detection."
         }
-      }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
     },
     "MachineLearningServicesModelDeployedEventData": {
       "type": "object",
@@ -5096,7 +5921,11 @@
           "description": "The properties of the deployed service.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "serviceTags",
+        "serviceProperties"
+      ]
     },
     "MachineLearningServicesModelRegisteredEventData": {
       "type": "object",
@@ -5120,7 +5949,11 @@
           "description": "The properties of the model that was registered.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "modelTags",
+        "modelProperties"
+      ]
     },
     "MachineLearningServicesRunCompletedEventData": {
       "type": "object",
@@ -5152,7 +5985,11 @@
           "description": "The properties of the completed Run.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "runTags",
+        "runProperties"
+      ]
     },
     "MachineLearningServicesRunStatusChangedEventData": {
       "type": "object",
@@ -5188,7 +6025,11 @@
           "type": "string",
           "description": "The status of the Machine Learning Run."
         }
-      }
+      },
+      "required": [
+        "runTags",
+        "runProperties"
+      ]
     },
     "MapsGeofenceEnteredEventData": {
       "type": "object",
@@ -5229,7 +6070,10 @@
           "type": "boolean",
           "description": "True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber."
         }
-      }
+      },
+      "required": [
+        "geometries"
+      ]
     },
     "MapsGeofenceExitedEventData": {
       "type": "object",
@@ -5295,6 +6139,9 @@
           "x-ms-identifiers": []
         }
       },
+      "required": [
+        "outputs"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -5316,23 +6163,19 @@
       "properties": {
         "code": {
           "$ref": "#/definitions/MediaJobErrorCode",
-          "description": "Error code describing the error.",
-          "readOnly": true
+          "description": "Error code describing the error."
         },
         "message": {
           "type": "string",
-          "description": "A human-readable language-dependent representation of the error.",
-          "readOnly": true
+          "description": "A human-readable language-dependent representation of the error."
         },
         "category": {
           "$ref": "#/definitions/MediaJobErrorCategory",
-          "description": "Helps with categorization of errors.",
-          "readOnly": true
+          "description": "Helps with categorization of errors."
         },
         "retry": {
           "$ref": "#/definitions/MediaJobRetry",
-          "description": "Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal.",
-          "readOnly": true
+          "description": "Indicates that it may be possible to retry the Job. If retry is unsuccessful, please contact Azure support via Azure Portal."
         },
         "details": {
           "type": "array",
@@ -5340,10 +6183,15 @@
           "items": {
             "$ref": "#/definitions/MediaJobErrorDetail"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
-      }
+      },
+      "required": [
+        "code",
+        "category",
+        "retry",
+        "details"
+      ]
     },
     "MediaJobErrorCategory": {
       "type": "string",
@@ -5471,13 +6319,11 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Code describing the error detail.",
-          "readOnly": true
+          "description": "Code describing the error detail."
         },
         "message": {
           "type": "string",
-          "description": "A human-readable representation of the error.",
-          "readOnly": true
+          "description": "A human-readable representation of the error."
         }
       }
     },
@@ -5494,6 +6340,9 @@
           "x-ms-identifiers": []
         }
       },
+      "required": [
+        "outputs"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -5513,6 +6362,9 @@
           "x-ms-identifiers": []
         }
       },
+      "required": [
+        "outputs"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobStateChangeEventData"
@@ -5523,7 +6375,7 @@
       "type": "object",
       "description": "The event data for a Job output.",
       "properties": {
-        "@odataType": {
+        "@odata.type": {
           "type": "string",
           "description": "The discriminator for derived types."
         },
@@ -5545,9 +6397,10 @@
           "description": "Gets the Job output state."
         }
       },
-      "discriminator": "@odataType",
+      "discriminator": "@odata.type",
       "required": [
-        "@odataType",
+        "@odata.type",
+        "error",
         "progress",
         "state"
       ]
@@ -5633,7 +6486,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "jobCorrelationData"
+      ]
     },
     "MediaJobOutputScheduledEventData": {
       "type": "object",
@@ -5650,8 +6506,7 @@
       "properties": {
         "previousState": {
           "$ref": "#/definitions/MediaJobState",
-          "description": "The previous state of the Job.",
-          "readOnly": true
+          "description": "The previous state of the Job."
         },
         "output": {
           "$ref": "#/definitions/MediaJobOutput",
@@ -5664,7 +6519,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "previousState",
+        "output",
+        "jobCorrelationData"
+      ]
     },
     "MediaJobProcessingEventData": {
       "type": "object",
@@ -5768,13 +6628,11 @@
       "properties": {
         "previousState": {
           "$ref": "#/definitions/MediaJobState",
-          "description": "The previous state of the Job.",
-          "readOnly": true
+          "description": "The previous state of the Job."
         },
         "state": {
           "$ref": "#/definitions/MediaJobState",
-          "description": "The new state of the Job.",
-          "readOnly": true
+          "description": "The new state of the Job."
         },
         "correlationData": {
           "type": "object",
@@ -5783,7 +6641,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "previousState",
+        "state",
+        "correlationData"
+      ]
     },
     "MediaLiveEventChannelArchiveHeartbeatEventData": {
       "type": "object",
@@ -5791,13 +6654,11 @@
       "properties": {
         "channelLatencyMs": {
           "type": "string",
-          "description": "Gets the channel latency in ms.",
-          "readOnly": true
+          "description": "Gets the channel latency in ms."
         },
         "latencyResultCode": {
           "type": "string",
-          "description": "Gets the latency result code.",
-          "readOnly": true
+          "description": "Gets the latency result code."
         }
       },
       "required": [
@@ -5811,23 +6672,19 @@
       "properties": {
         "ingestUrl": {
           "type": "string",
-          "description": "Gets the ingest URL provided by the live event.",
-          "readOnly": true
+          "description": "Gets the ingest URL provided by the live event."
         },
         "streamId": {
           "type": "string",
-          "description": "Gets the stream Id.",
-          "readOnly": true
+          "description": "Gets the stream Id."
         },
         "encoderIp": {
           "type": "string",
-          "description": "Gets the remote IP.",
-          "readOnly": true
+          "description": "Gets the remote IP."
         },
         "encoderPort": {
           "type": "string",
-          "description": "Gets the remote port.",
-          "readOnly": true
+          "description": "Gets the remote port."
         },
         "resultCode": {
           "type": "string",
@@ -5841,23 +6698,19 @@
       "properties": {
         "ingestUrl": {
           "type": "string",
-          "description": "Gets the ingest URL provided by the live event.",
-          "readOnly": true
+          "description": "Gets the ingest URL provided by the live event."
         },
         "streamId": {
           "type": "string",
-          "description": "Gets the stream Id.",
-          "readOnly": true
+          "description": "Gets the stream Id."
         },
         "encoderIp": {
           "type": "string",
-          "description": "Gets the remote IP.",
-          "readOnly": true
+          "description": "Gets the remote IP."
         },
         "encoderPort": {
           "type": "string",
-          "description": "Gets the remote port.",
-          "readOnly": true
+          "description": "Gets the remote port."
         }
       }
     },
@@ -5867,23 +6720,19 @@
       "properties": {
         "ingestUrl": {
           "type": "string",
-          "description": "Gets the ingest URL provided by the live event.",
-          "readOnly": true
+          "description": "Gets the ingest URL provided by the live event."
         },
         "streamId": {
           "type": "string",
-          "description": "Gets the stream Id.",
-          "readOnly": true
+          "description": "Gets the stream Id."
         },
         "encoderIp": {
           "type": "string",
-          "description": "Gets the remote IP.",
-          "readOnly": true
+          "description": "Gets the remote IP."
         },
         "encoderPort": {
           "type": "string",
-          "description": "Gets the remote port.",
-          "readOnly": true
+          "description": "Gets the remote port."
         },
         "resultCode": {
           "type": "string",
@@ -5897,19 +6746,16 @@
       "properties": {
         "timestamp": {
           "type": "string",
-          "description": "Gets the timestamp of the data chunk dropped.",
-          "readOnly": true
+          "description": "Gets the timestamp of the data chunk dropped."
         },
         "trackType": {
           "type": "string",
-          "description": "Gets the type of the track (Audio / Video).",
-          "readOnly": true
+          "description": "Gets the type of the track (Audio / Video)."
         },
         "bitrate": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the bitrate of the track.",
-          "readOnly": true
+          "description": "Gets the bitrate of the track."
         },
         "timescale": {
           "type": "string",
@@ -5917,13 +6763,11 @@
         },
         "resultCode": {
           "type": "string",
-          "description": "Gets the result code for fragment drop operation.",
-          "readOnly": true
+          "description": "Gets the result code for fragment drop operation."
         },
         "trackName": {
           "type": "string",
-          "description": "Gets the name of the track for which fragment is dropped.",
-          "readOnly": true
+          "description": "Gets the name of the track for which fragment is dropped."
         }
       }
     },
@@ -5933,49 +6777,40 @@
       "properties": {
         "ingestUrl": {
           "type": "string",
-          "description": "Gets the ingest URL provided by the live event.",
-          "readOnly": true
+          "description": "Gets the ingest URL provided by the live event."
         },
         "trackType": {
           "type": "string",
-          "description": "Gets the type of the track (Audio / Video).",
-          "readOnly": true
+          "description": "Gets the type of the track (Audio / Video)."
         },
         "trackName": {
           "type": "string",
-          "description": "Gets the track name.",
-          "readOnly": true
+          "description": "Gets the track name."
         },
         "bitrate": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the bitrate of the track.",
-          "readOnly": true
+          "description": "Gets the bitrate of the track."
         },
         "encoderIp": {
           "type": "string",
-          "description": "Gets the remote IP.",
-          "readOnly": true
+          "description": "Gets the remote IP."
         },
         "encoderPort": {
           "type": "string",
-          "description": "Gets the remote port.",
-          "readOnly": true
+          "description": "Gets the remote port."
         },
         "timestamp": {
           "type": "string",
-          "description": "Gets the first timestamp of the data chunk received.",
-          "readOnly": true
+          "description": "Gets the first timestamp of the data chunk received."
         },
         "duration": {
           "type": "string",
-          "description": "Gets the duration of the first data chunk.",
-          "readOnly": true
+          "description": "Gets the duration of the first data chunk."
         },
         "timescale": {
           "type": "string",
-          "description": "Gets the timescale in which timestamp is represented.",
-          "readOnly": true
+          "description": "Gets the timescale in which timestamp is represented."
         }
       }
     },
@@ -5985,33 +6820,27 @@
       "properties": {
         "minLastTimestamp": {
           "type": "string",
-          "description": "Gets the minimum last timestamp received.",
-          "readOnly": true
+          "description": "Gets the minimum last timestamp received."
         },
         "typeOfStreamWithMinLastTimestamp": {
           "type": "string",
-          "description": "Gets the type of stream with minimum last timestamp.",
-          "readOnly": true
+          "description": "Gets the type of stream with minimum last timestamp."
         },
         "maxLastTimestamp": {
           "type": "string",
-          "description": "Gets the maximum timestamp among all the tracks (audio or video).",
-          "readOnly": true
+          "description": "Gets the maximum timestamp among all the tracks (audio or video)."
         },
         "typeOfStreamWithMaxLastTimestamp": {
           "type": "string",
-          "description": "Gets the type of stream with maximum last timestamp.",
-          "readOnly": true
+          "description": "Gets the type of stream with maximum last timestamp."
         },
         "timescaleOfMinLastTimestamp": {
           "type": "string",
-          "description": "Gets the timescale in which \\\"MinLastTimestamp\\\" is represented.",
-          "readOnly": true
+          "description": "Gets the timescale in which \\\"MinLastTimestamp\\\" is represented."
         },
         "timescaleOfMaxLastTimestamp": {
           "type": "string",
-          "description": "Gets the timescale in which \\\"MaxLastTimestamp\\\" is represented.",
-          "readOnly": true
+          "description": "Gets the timescale in which \\\"MaxLastTimestamp\\\" is represented."
         }
       }
     },
@@ -6021,28 +6850,23 @@
       "properties": {
         "firstTimestamp": {
           "type": "string",
-          "description": "Gets the first timestamp received for one of the quality levels.",
-          "readOnly": true
+          "description": "Gets the first timestamp received for one of the quality levels."
         },
         "firstDuration": {
           "type": "string",
-          "description": "Gets the duration of the data chunk with first timestamp.",
-          "readOnly": true
+          "description": "Gets the duration of the data chunk with first timestamp."
         },
         "secondTimestamp": {
           "type": "string",
-          "description": "Gets the timestamp received for some other quality levels.",
-          "readOnly": true
+          "description": "Gets the timestamp received for some other quality levels."
         },
         "secondDuration": {
           "type": "string",
-          "description": "Gets the duration of the data chunk with second timestamp.",
-          "readOnly": true
+          "description": "Gets the duration of the data chunk with second timestamp."
         },
         "timescale": {
           "type": "string",
-          "description": "Gets the timescale in which both the timestamps and durations are represented.",
-          "readOnly": true
+          "description": "Gets the timescale in which both the timestamps and durations are represented."
         }
       }
     },
@@ -6052,88 +6876,72 @@
       "properties": {
         "trackType": {
           "type": "string",
-          "description": "Gets the type of the track (Audio / Video).",
-          "readOnly": true
+          "description": "Gets the type of the track (Audio / Video)."
         },
         "trackName": {
           "type": "string",
-          "description": "Gets the track name.",
-          "readOnly": true
+          "description": "Gets the track name."
         },
         "transcriptionLanguage": {
           "type": "string",
-          "description": "Gets the Live Transcription language.",
-          "readOnly": true
+          "description": "Gets the Live Transcription language."
         },
         "transcriptionState": {
           "type": "string",
-          "description": "Gets the Live Transcription state.",
-          "readOnly": true
+          "description": "Gets the Live Transcription state."
         },
         "bitrate": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the bitrate of the track.",
-          "readOnly": true
+          "description": "Gets the bitrate of the track."
         },
         "incomingBitrate": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the incoming bitrate.",
-          "readOnly": true
+          "description": "Gets the incoming bitrate."
         },
         "ingestDriftValue": {
           "type": "string",
-          "description": "Gets the track ingest drift value.",
-          "readOnly": true
+          "description": "Gets the track ingest drift value."
         },
         "lastFragmentArrivalTime": {
           "type": "string",
-          "description": "Gets the arrival UTC time of the last fragment.",
-          "readOnly": true
+          "description": "Gets the arrival UTC time of the last fragment."
         },
         "lastTimestamp": {
           "type": "string",
-          "description": "Gets the last timestamp.",
-          "readOnly": true
+          "description": "Gets the last timestamp."
         },
         "timescale": {
           "type": "string",
-          "description": "Gets the timescale of the last timestamp.",
-          "readOnly": true
+          "description": "Gets the timescale of the last timestamp."
         },
         "overlapCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the fragment Overlap count.",
-          "readOnly": true
+          "description": "Gets the fragment Overlap count."
         },
         "discontinuityCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the fragment Discontinuity count.",
-          "readOnly": true
+          "description": "Gets the fragment Discontinuity count."
         },
         "nonincreasingCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets Non increasing count.",
-          "readOnly": true
+          "description": "Gets Non increasing count."
         },
         "unexpectedBitrate": {
           "type": "boolean",
-          "description": "Gets a value indicating whether unexpected bitrate is present or not.",
-          "readOnly": true
+          "description": "Gets a value indicating whether unexpected bitrate is present or not."
         },
         "state": {
           "type": "string",
-          "description": "Gets the state of the live event.",
-          "readOnly": true
+          "description": "Gets the state of the live event."
         },
         "healthy": {
           "type": "boolean",
-          "description": "Gets a value indicating whether preview is healthy or not.",
-          "readOnly": true
+          "description": "Gets a value indicating whether preview is healthy or not."
         }
       }
     },
@@ -6143,41 +6951,52 @@
       "properties": {
         "trackType": {
           "type": "string",
-          "description": "Gets the type of the track (Audio / Video).",
-          "readOnly": true
+          "description": "Gets the type of the track (Audio / Video)."
         },
         "trackName": {
           "type": "string",
-          "description": "Gets the track name.",
-          "readOnly": true
+          "description": "Gets the track name."
         },
         "bitrate": {
           "type": "integer",
           "format": "int64",
-          "description": "Gets the bitrate.",
-          "readOnly": true
+          "description": "Gets the bitrate."
         },
         "previousTimestamp": {
           "type": "string",
-          "description": "Gets the timestamp of the previous fragment.",
-          "readOnly": true
+          "description": "Gets the timestamp of the previous fragment."
         },
         "newTimestamp": {
           "type": "string",
-          "description": "Gets the timestamp of the current fragment.",
-          "readOnly": true
+          "description": "Gets the timestamp of the current fragment."
         },
         "timescale": {
           "type": "string",
-          "description": "Gets the timescale in which both timestamps and discontinuity gap are represented.",
-          "readOnly": true
+          "description": "Gets the timescale in which both timestamps and discontinuity gap are represented."
         },
         "discontinuityGap": {
           "type": "string",
-          "description": "Gets the discontinuity gap between PreviousTimestamp and NewTimestamp.",
-          "readOnly": true
+          "description": "Gets the discontinuity gap between PreviousTimestamp and NewTimestamp."
         }
       }
+    },
+    "MicrosoftTeamsAppIdentifierModel": {
+      "type": "object",
+      "description": "A Microsoft Teams application.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "The Id of the Microsoft Teams application"
+        },
+        "cloud": {
+          "$ref": "#/definitions/CommunicationCloudEnvironmentModel",
+          "description": "The cloud that the Microsoft Teams application belongs to. By default 'public' if missing."
+        }
+      },
+      "required": [
+        "appId",
+        "cloud"
+      ]
     },
     "MicrosoftTeamsUserIdentifierModel": {
       "type": "object",
@@ -6197,7 +7016,8 @@
         }
       },
       "required": [
-        "userId"
+        "userId",
+        "cloud"
       ]
     },
     "PhoneNumberIdentifierModel": {
@@ -6246,7 +7066,10 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
     "PolicyInsightsPolicyStateCreatedEventData": {
       "type": "object",
@@ -6281,7 +7104,10 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
     "PolicyInsightsPolicyStateDeletedEventData": {
       "type": "object",
@@ -6316,7 +7142,10 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
     "RedisExportRDBCompletedEventData": {
       "type": "object",
@@ -6335,7 +7164,10 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
     "RedisImportRDBCompletedEventData": {
       "type": "object",
@@ -6354,7 +7186,10 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
     "RedisPatchingCompletedEventData": {
       "type": "object",
@@ -6373,7 +7208,10 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
     "RedisScalingCompletedEventData": {
       "type": "object",
@@ -6392,9 +7230,12 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
-    "ResourceActionCancelData": {
+    "ResourceActionCancelEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionCancel event. This is raised when a resource action operation is canceled.",
       "properties": {
@@ -6445,9 +7286,14 @@
           "$ref": "#/definitions/ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      }
+      },
+      "required": [
+        "authorization",
+        "claims",
+        "httpRequest"
+      ]
     },
-    "ResourceActionFailureData": {
+    "ResourceActionFailureEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionFailure event. This is raised when a resource action operation fails.",
       "properties": {
@@ -6498,9 +7344,14 @@
           "$ref": "#/definitions/ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      }
+      },
+      "required": [
+        "authorization",
+        "claims",
+        "httpRequest"
+      ]
     },
-    "ResourceActionSuccessData": {
+    "ResourceActionSuccessEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceActionSuccess event. This is raised when a resource action operation succeeds.",
       "properties": {
@@ -6551,7 +7402,12 @@
           "$ref": "#/definitions/ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      }
+      },
+      "required": [
+        "authorization",
+        "claims",
+        "httpRequest"
+      ]
     },
     "ResourceAuthorization": {
       "type": "object",
@@ -6572,9 +7428,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "evidence"
+      ]
     },
-    "ResourceDeleteCancelData": {
+    "ResourceDeleteCancelEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteCancel event. This is raised when a resource delete operation is canceled.",
       "properties": {
@@ -6625,9 +7484,14 @@
           "$ref": "#/definitions/ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      }
+      },
+      "required": [
+        "authorization",
+        "claims",
+        "httpRequest"
+      ]
     },
-    "ResourceDeleteFailureData": {
+    "ResourceDeleteFailureEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteFailure event. This is raised when a resource delete operation fails.",
       "properties": {
@@ -6678,9 +7542,14 @@
           "$ref": "#/definitions/ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      }
+      },
+      "required": [
+        "authorization",
+        "claims",
+        "httpRequest"
+      ]
     },
-    "ResourceDeleteSuccessData": {
+    "ResourceDeleteSuccessEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceDeleteSuccess event. This is raised when a resource delete operation succeeds.",
       "properties": {
@@ -6731,7 +7600,12 @@
           "$ref": "#/definitions/ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      }
+      },
+      "required": [
+        "authorization",
+        "claims",
+        "httpRequest"
+      ]
     },
     "ResourceHttpRequest": {
       "type": "object",
@@ -6782,7 +7656,10 @@
           "format": "date-time",
           "description": "Date and Time when resource was updated"
         }
-      }
+      },
+      "required": [
+        "resourceEventTime"
+      ]
     },
     "ResourceNotificationsResourceDeletedDetails": {
       "type": "object",
@@ -6816,7 +7693,11 @@
           "description": "details about operational info",
           "x-ms-client-name": "operationalDetails"
         }
-      }
+      },
+      "required": [
+        "resourceInfo",
+        "operationalInfo"
+      ]
     },
     "ResourceNotificationsResourceManagementCreatedOrUpdatedEventData": {
       "type": "object",
@@ -6868,7 +7749,11 @@
           "description": "properties in the payload of the resource for which the event is being emitted",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "tags",
+        "properties"
+      ]
     },
     "ResourceNotificationsResourceUpdatedEventData": {
       "type": "object",
@@ -6888,9 +7773,13 @@
           "type": "string",
           "description": "api version of the resource properties bag"
         }
-      }
+      },
+      "required": [
+        "resourceInfo",
+        "operationalInfo"
+      ]
     },
-    "ResourceWriteCancelData": {
+    "ResourceWriteCancelEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteCancel event. This is raised when a resource create or update operation is canceled.",
       "properties": {
@@ -6941,9 +7830,14 @@
           "$ref": "#/definitions/ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      }
+      },
+      "required": [
+        "authorization",
+        "claims",
+        "httpRequest"
+      ]
     },
-    "ResourceWriteFailureData": {
+    "ResourceWriteFailureEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteFailure event. This is raised when a resource create or update operation fails.",
       "properties": {
@@ -6994,9 +7888,14 @@
           "$ref": "#/definitions/ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      }
+      },
+      "required": [
+        "authorization",
+        "claims",
+        "httpRequest"
+      ]
     },
-    "ResourceWriteSuccessData": {
+    "ResourceWriteSuccessEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteSuccess event. This is raised when a resource create or update operation succeeds.",
       "properties": {
@@ -7047,23 +7946,12 @@
           "$ref": "#/definitions/ResourceHttpRequest",
           "description": "The details of the operation."
         }
-      }
-    },
-    "ServiceApiVersions": {
-      "type": "string",
-      "enum": [
-        "2024-01-01"
-      ],
-      "x-ms-enum": {
-        "name": "ServiceApiVersions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_01_01",
-            "value": "2024-01-01"
-          }
-        ]
-      }
+      },
+      "required": [
+        "authorization",
+        "claims",
+        "httpRequest"
+      ]
     },
     "ServiceBusActiveMessagesAvailablePeriodicNotificationsEventData": {
       "type": "object",
@@ -7206,7 +8094,10 @@
           "type": "string",
           "description": "The user Id of connected client connection."
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
     "SignalRServiceClientConnectionDisconnectedEventData": {
       "type": "object",
@@ -7233,7 +8124,10 @@
           "type": "string",
           "description": "The message of error that cause the client connection disconnected."
         }
-      }
+      },
+      "required": [
+        "timestamp"
+      ]
     },
     "StampKind": {
       "type": "string",
@@ -7311,7 +8205,10 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "storageDiagnostics"
+      ]
     },
     "StorageBlobCreatedEventData": {
       "type": "object",
@@ -7368,7 +8265,10 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "storageDiagnostics"
+      ]
     },
     "StorageBlobDeletedEventData": {
       "type": "object",
@@ -7411,7 +8311,10 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "storageDiagnostics"
+      ]
     },
     "StorageBlobInventoryPolicyCompletedEventData": {
       "type": "object",
@@ -7446,7 +8349,10 @@
           "type": "string",
           "description": "The blob URL for manifest file for inventory run."
         }
-      }
+      },
+      "required": [
+        "scheduleDateTime"
+      ]
     },
     "StorageBlobRenamedEventData": {
       "type": "object",
@@ -7485,7 +8391,10 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "storageDiagnostics"
+      ]
     },
     "StorageBlobTierChangedEventData": {
       "type": "object",
@@ -7533,7 +8442,10 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "storageDiagnostics"
+      ]
     },
     "StorageDirectoryCreatedEventData": {
       "type": "object",
@@ -7572,7 +8484,10 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "storageDiagnostics"
+      ]
     },
     "StorageDirectoryDeletedEventData": {
       "type": "object",
@@ -7611,7 +8526,10 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "storageDiagnostics"
+      ]
     },
     "StorageDirectoryRenamedEventData": {
       "type": "object",
@@ -7650,7 +8568,10 @@
           "description": "For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers.",
           "additionalProperties": {}
         }
-      }
+      },
+      "required": [
+        "storageDiagnostics"
+      ]
     },
     "StorageLifecyclePolicyActionSummaryDetail": {
       "type": "object",
@@ -7692,7 +8613,12 @@
           "$ref": "#/definitions/StorageLifecyclePolicyActionSummaryDetail",
           "description": "Execution statistics of a specific policy action in a Blob Management cycle."
         }
-      }
+      },
+      "required": [
+        "deleteSummary",
+        "tierToCoolSummary",
+        "tierToArchiveSummary"
+      ]
     },
     "StorageTaskAssignmentCompletedEventData": {
       "type": "object",
@@ -7722,7 +8648,12 @@
           "description": "The summary report blob url for a storage task",
           "x-ms-client-name": "summaryReportBlobUri"
         }
-      }
+      },
+      "required": [
+        "status",
+        "completedDateTime",
+        "summaryReportBlobUrl"
+      ]
     },
     "StorageTaskAssignmentCompletedStatus": {
       "type": "string",
@@ -7762,7 +8693,10 @@
           "type": "string",
           "description": "The execution id for a storage task."
         }
-      }
+      },
+      "required": [
+        "queuedDateTime"
+      ]
     },
     "StorageTaskCompletedEventData": {
       "type": "object",
@@ -7790,7 +8724,12 @@
           "format": "uri",
           "description": "The summary report blob url for a storage task"
         }
-      }
+      },
+      "required": [
+        "status",
+        "completedDateTime",
+        "summaryReportBlobUrl"
+      ]
     },
     "StorageTaskCompletedStatus": {
       "type": "string",
@@ -7829,32 +8768,32 @@
           "type": "string",
           "description": "The execution id for a storage task."
         }
-      }
+      },
+      "required": [
+        "queuedDateTime"
+      ]
     },
     "SubscriptionDeletedEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.EventGrid.SystemEvents.SubscriptionDeletedEvent event.",
+      "description": "Schema of the Data property of an EventGridEvent for a\nMicrosoft.EventGrid.SubscriptionDeletedEvent event.",
       "properties": {
         "eventSubscriptionId": {
           "type": "string",
-          "description": "The Azure resource ID of the deleted event subscription.",
-          "readOnly": true
+          "description": "The Azure resource ID of the deleted event subscription."
         }
       }
     },
     "SubscriptionValidationEventData": {
       "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SystemEvents.SubscriptionValidationEvent event.",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.EventGrid.SubscriptionValidationEvent event.",
       "properties": {
         "validationCode": {
           "type": "string",
-          "description": "The validation code sent by Azure Event Grid to validate an event subscription.\nTo complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response,\nor perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
-          "readOnly": true
+          "description": "The validation code sent by Azure Event Grid to validate an event subscription.\nTo complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response,\nor perform a GET request on the validationUrl (available starting version 2018-05-01-preview)."
         },
         "validationUrl": {
           "type": "string",
-          "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).\nTo complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,\nor perform a GET request on the validationUrl (available starting version 2018-05-01-preview).",
-          "readOnly": true
+          "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).\nTo complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,\nor perform a GET request on the validationUrl (available starting version 2018-05-01-preview)."
         }
       }
     },
@@ -7904,7 +8843,11 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appServicePlanEventTypeDetail",
+        "sku"
+      ]
     },
     "WebAppServicePlanUpdatedEventDataSku": {
       "type": "object",
@@ -7964,7 +8907,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebBackupOperationCompletedEventData": {
       "type": "object",
@@ -7998,7 +8944,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebBackupOperationFailedEventData": {
       "type": "object",
@@ -8032,7 +8981,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebBackupOperationStartedEventData": {
       "type": "object",
@@ -8066,7 +9018,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebRestoreOperationCompletedEventData": {
       "type": "object",
@@ -8100,7 +9055,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebRestoreOperationFailedEventData": {
       "type": "object",
@@ -8134,7 +9092,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebRestoreOperationStartedEventData": {
       "type": "object",
@@ -8168,7 +9129,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebSlotSwapCompletedEventData": {
       "type": "object",
@@ -8202,7 +9166,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebSlotSwapFailedEventData": {
       "type": "object",
@@ -8236,7 +9203,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebSlotSwapStartedEventData": {
       "type": "object",
@@ -8270,7 +9240,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebSlotSwapWithPreviewCancelledEventData": {
       "type": "object",
@@ -8304,7 +9277,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "WebSlotSwapWithPreviewStartedEventData": {
       "type": "object",
@@ -8338,7 +9314,10 @@
           "type": "string",
           "description": "HTTP verb of this operation."
         }
-      }
+      },
+      "required": [
+        "appEventTypeDetail"
+      ]
     },
     "recordingChannelType": {
       "type": "string",

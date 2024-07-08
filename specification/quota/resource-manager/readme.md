@@ -29,9 +29,9 @@ openapi-type: arm
 tag: package-2023-06-01-preview
 ```
 
-``` yaml
+``` yaml !$(csharp)
 modelerfour:
-    flatten-models: false
+  flatten-models: false
 ```
 
 ### Tag: package-2023-06-01-preview

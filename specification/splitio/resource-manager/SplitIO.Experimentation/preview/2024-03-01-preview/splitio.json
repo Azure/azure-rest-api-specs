@@ -576,11 +576,7 @@
         "properties": {
           "$ref": "#/definitions/ExperimentationWorkspaceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
@@ -788,24 +784,6 @@
         "allowedResources": [
           {
             "type": "Microsoft.Storage/storageAccounts"
-          }
-        ]
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Supported API versions for the SplitIO.Experimentation resource provider.",
-      "enum": [
-        "2024-03-01-preview"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v1_preview",
-            "value": "2024-03-01-preview",
-            "description": "Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1"
           }
         ]
       }
