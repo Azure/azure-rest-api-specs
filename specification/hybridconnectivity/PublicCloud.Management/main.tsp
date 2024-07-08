@@ -358,7 +358,7 @@ interface SolutionConfigurations {
   
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "syncNow API has no response schema"
   @doc("Trigger immediate sync with source cloud")
-  syncNow is ArmResourceActionNoContentAsync<
+  syncNow is ArmResourceActionNoResponseContentAsync<
     SolutionConfiguration, 
     void
   >;
