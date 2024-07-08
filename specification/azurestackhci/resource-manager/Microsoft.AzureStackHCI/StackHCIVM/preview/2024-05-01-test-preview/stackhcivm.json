@@ -3516,6 +3516,104 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualHardDisks/{virtualHardDiskName}/upload": {
+      "post": {
+        "operationId": "VirtualHardDisks_Upload",
+        "tags": [
+          "VirtualHardDisks"
+        ],
+        "description": "The operation to upload a virtual hard disk.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualHardDiskName",
+            "in": "path",
+            "description": "Name of the virtual hard disk",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualHardDisksUploadRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "type": "object",
+              "description": "Base parameters for a resource.",
+              "properties": {
+                "apiVersion": {
+                  "type": "string",
+                  "description": "The API version to use for this operation.",
+                  "minLength": 1
+                },
+                "subscriptionId": {
+                  "$ref": "#/definitions/Azure.Core.uuid",
+                  "description": "The ID of the target subscription. The value must be an UUID."
+                },
+                "resourceGroupName": {
+                  "type": "string",
+                  "description": "The name of the resource group. The name is case insensitive.",
+                  "minLength": 1,
+                  "maxLength": 90,
+                  "pattern": "^[-\\w\\._\\(\\)]+$"
+                }
+              },
+              "required": [
+                "apiVersion",
+                "subscriptionId",
+                "resourceGroupName"
+              ]
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UploadVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Upload.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -3878,6 +3976,38 @@
           "readOnly": true
         }
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualHardDisk>": {
+      "type": "object",
+      "description": "Base parameters for a resource.",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        },
+        "subscriptionId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The ID of the target subscription. The value must be an UUID."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group. The name is case insensitive.",
+          "minLength": 1,
+          "maxLength": 90,
+          "pattern": "^[-\\w\\._\\(\\)]+$"
+        }
+      },
+      "required": [
+        "apiVersion",
+        "subscriptionId",
+        "resourceGroupName"
+      ]
     },
     "CloudInitDataSource": {
       "type": "string",

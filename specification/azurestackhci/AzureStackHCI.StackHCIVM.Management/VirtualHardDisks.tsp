@@ -54,6 +54,6 @@ interface VirtualHardDisks {
   upload is ArmResourceActionAsync<
     VirtualHardDisk,
     VirtualHardDisksUploadRequest,
-    BaseParameters<VirtualHardDisk>
+    Azure.ResourceManager.Foundations.BaseParameters<VirtualHardDisk>
   >;
 }
