@@ -17,7 +17,11 @@
             "propertyName": "spring.boot.admin.monitor.status-interval",
             "value": "10000ms"
           }
-        ]
+        ],
+        "scale": {
+          "minReplicas": 1,
+          "maxReplicas": 1
+        }
       }
     }
   },
@@ -41,6 +45,10 @@
               "value": "10000ms"
             }
           ],
+          "scale": {
+            "minReplicas": 1,
+            "maxReplicas": 1
+          },
           "ingress": {
             "fqdn": "myjavacomponent.myenvironment.test.net"
           }
@@ -54,4 +62,3 @@
     }
   }
 }
-
