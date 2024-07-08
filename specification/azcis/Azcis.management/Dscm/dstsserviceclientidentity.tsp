@@ -97,8 +97,15 @@ model DstsServiceClientIdentityResource
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
 @armResourceOperations
 interface DstsServiceClientIdentity {
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DstsServiceClientIdentityResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    DstsServiceClientIdentityResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   listBySubscription is ArmListBySubscription<DstsServiceClientIdentityResource>;
   listByResourceGroup is ArmResourceListByParent<DstsServiceClientIdentityResource>;
   get is ArmResourceRead<DstsServiceClientIdentityResource>;
 }
+
+@@visibility(DstsServiceClientIdentityResource.properties, "read", "create");

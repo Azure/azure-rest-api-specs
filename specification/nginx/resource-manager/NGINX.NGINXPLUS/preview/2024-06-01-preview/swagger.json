@@ -1458,6 +1458,15 @@
         },
         "autoUpgradeProfile": {
           "$ref": "#/definitions/AutoUpgradeProfile"
+        },
+        "nginxAppProtect": {
+          "type": "object",
+          "description": "Update settings for NGINX App Protect (NAP)",
+          "properties": {
+            "webApplicationFirewallSettings": {
+              "$ref": "#/definitions/WebApplicationFirewallSettings"
+            }
+          }
         }
       }
     },
@@ -1661,9 +1670,6 @@
     "WebApplicationFirewallSettings": {
       "type": "object",
       "description": "Settings for the NGINX App Protect Web Application Firewall (WAF)",
-      "required": [
-        "activationState"
-      ],
       "properties": {
         "activationState": {
           "type": "string",
@@ -1721,6 +1727,7 @@
         "revisionDatetime": {
           "type": "string",
           "example": "2024-02-21T15:50:53Z",
+          "format": "date-time",
           "description": "The date and time of the package revision."
         }
       }
