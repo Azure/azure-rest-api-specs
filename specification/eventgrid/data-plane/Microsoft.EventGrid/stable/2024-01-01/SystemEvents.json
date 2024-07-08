@@ -953,6 +953,13 @@
           "description": "The analysed message language detection."
         }
       },
+      "required": [
+        "originalMessage",
+        "channelKind",
+        "intentAnalysis",
+        "extractedKeyPhrases",
+        "languageDetection"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsMessageEventData"
@@ -1198,7 +1205,12 @@
           "type": "string",
           "description": "The translation of the message."
         }
-      }
+      },
+      "required": [
+        "language",
+        "confidenceScore",
+        "translation"
+      ]
     },
     "AcsMessageMediaContent": {
       "type": "object",
