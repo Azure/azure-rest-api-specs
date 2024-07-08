@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 import { FolderStructureRule } from "../src/rules/folder-structure.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
@@ -73,6 +74,40 @@ describe("folder-structure", function () {
     const result = await new FolderStructureRule().execute(
       host,
       "/gitroot/specification/foo/Foo.foo",
+    );
+    assert(result.errorOutput);
+    assert(result.errorOutput.includes("must be capitalized"));
+  });
+
+  it("should fail if second level folder is data-plane", async function () {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/bar/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/data-plane",
+    );
+    assert(result.errorOutput);
+    assert(result.errorOutput.includes("must be capitalized"));
+  });
+
+  it("should fail if second level folder is resource-manager", async function () {
+    let host = new TsvTestHost();
+    host.globby = async () => {
+      return ["/foo/bar/tspconfig.yaml"];
+    };
+    host.normalizePath = () => {
+      return "/gitroot";
+    };
+
+    const result = await new FolderStructureRule().execute(
+      host,
+      "/gitroot/specification/foo/resource-manager",
     );
     assert(result.errorOutput);
     assert(result.errorOutput.includes("must be capitalized"));

@@ -37,7 +37,7 @@ azure-validator: false
 
 These settings apply only when `--tag=package-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11'
+``` yaml $(tag) == 'package-2023-11'
 input-file:
   - Microsoft.CostManagement/stable/2023-11-01/common-types.json
   - Microsoft.CostManagement/stable/2023-11-01/costallocation.json
@@ -51,6 +51,26 @@ input-file:
   - Microsoft.CostManagement/stable/2023-11-01/scheduledActions.json
   - Microsoft.CostManagement/stable/2023-11-01/settings.json
 ```
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.CostManagement/stable/2023-09-01/common-types.json
+  - Microsoft.CostManagement/stable/2023-09-01/costallocation.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.benefits.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.budgets.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2023-09-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2023-09-01/settings.json
+```
+
 ### Tag: package-2023-08
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.
@@ -68,6 +88,22 @@ input-file:
   - Microsoft.CostManagement/stable/2023-08-01/scheduledActions.json
   - Microsoft.CostManagement/stable/2023-08-01/costallocation.json
   - Microsoft.CostManagement/stable/2023-08-01/settings.json
+```
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - Microsoft.CostManagement/preview/2023-07-01-preview/common-types.json
+  - Microsoft.CostManagement/preview/2023-07-01-preview/costmanagement.benefits.json
+  - Microsoft.CostManagement/preview/2023-07-01-preview/costmanagement.exports.json
+  - Microsoft.CostManagement/preview/2023-07-01-preview/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/preview/2023-07-01-preview/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/preview/2023-07-01-preview/costmanagement.json
+  - Microsoft.CostManagement/preview/2023-07-01-preview/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/preview/2023-07-01-preview/scheduledActions.json
 ```
 
 ### Tag: package-2023-03
@@ -506,7 +542,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:

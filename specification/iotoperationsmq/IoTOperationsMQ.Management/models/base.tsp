@@ -22,26 +22,29 @@ model ExtendedLocationProperty {
 }
 
 @doc("The enum defining type of ExtendedLocation accepted.")
-enum ExtendedLocationType {
+union ExtendedLocationType {
+  string,
+
   @doc("CustomLocation type")
-  CustomLocation,
+  "CustomLocation",
 }
 
 @doc("The enum defining status of resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Resource is getting provisioned.")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Resource is Updating.")
-  Updating,
+  Updating: "Updating",
 
   @doc("Resource is Deleting.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Resource has been Accepted.")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Defines the Docker image details")
@@ -115,19 +118,21 @@ model CertManagerIssuerRef {
 @doc("SANs for certificate.")
 model SanForCert {
   @doc("DNS SANs.")
-  dns: string[] = [];
+  dns: string[] = #[];
 
   @doc("IP address SANs.")
-  ip: string[] = [];
+  ip: string[] = #[];
 }
 
 @doc("Mqtt Protocol types")
-enum MqttProtocol {
+union MqttProtocol {
+  string,
+
   @doc("Mqttv3")
-  v3,
+  "v3",
 
   @doc("Mqttv5")
-  v5,
+  "v5",
 }
 
 @doc("Mqtt Local Broker ConnectionSpec details")

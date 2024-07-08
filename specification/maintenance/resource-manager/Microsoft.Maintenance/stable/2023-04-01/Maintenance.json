@@ -1468,105 +1468,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/applyUpdates": {
-      "get": {
-        "tags": [
-          "ApplyUpdate"
-        ],
-        "summary": "Get Configuration records within a subscription",
-        "operationId": "ApplyUpdates_List",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ListApplyUpdate"
-            }
-          },
-          "default": {
-            "description": "BadRequest",
-            "schema": {
-              "$ref": "#/definitions/MaintenanceError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "ApplyUpdates_List": {
-            "$ref": "./examples/ApplyUpdates_List.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/applyUpdates": {
-      "get": {
-        "tags": [
-          "ApplyUpdate"
-        ],
-        "summary": "Get Configuration records within a subscription and resource group",
-        "operationId": "ApplyUpdateForResourceGroup_List",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Resource Group Name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ListApplyUpdate"
-            }
-          },
-          "default": {
-            "description": "BadRequest",
-            "schema": {
-              "$ref": "#/definitions/MaintenanceError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "ApplyUpdatesResourceGroup_List": {
-            "$ref": "./examples/ApplyUpdatesResourceGroup_List.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignments": {
       "get": {
         "tags": [
           "ConfigurationAssignments"
         ],
-        "summary": "Get configuration assignment within a subscription",
+        "summary": "Get configuration assignment within a subscription. This API is not implemented yet.",
         "operationId": "ConfigurationAssignmentsWithinSubscription_List",
         "consumes": [],
         "produces": [
