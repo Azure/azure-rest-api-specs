@@ -379,6 +379,14 @@
             "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "A collection of references to application gateway path rules."
+        },
+        "applicationGatewayForContainers": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayForContainersReferenceDefinition"
+          },
+          "description": "A collection of references to application gateway for containers."
         }
       }
     },
@@ -1116,6 +1124,19 @@
             "name": " scrubbingRuleEntryState",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "ApplicationGatewayForContainersReferenceDefinition": {
+      "type": "object",
+      "description": "Defines an application gateway for containers reference.",
+      "required": [
+        "Id"
+      ],
+      "properties": {
+        "Id": {
+          "description": "Resource Id of the application gateway for containers.",
+          "type": "string"
         }
       }
     }
