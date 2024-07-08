@@ -1173,7 +1173,7 @@ model AcsMessageAnalysisCompletedEventData extends AcsMessageEventData {
   intentAnalysis: string;
 
   /** List of key phrases extracted. */
-  keyPhraseExtraction: string[];
+  extractedKeyPhrases: string[];
 
   /** The analysed message language detection. */
   languageDetection: AcsMessageLanguageDetection;
