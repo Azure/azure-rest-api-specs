@@ -621,7 +621,7 @@
         },
         "features": {
           "type": "array",
-          "description": "A set of points to snap to road network. You can have a maximum of 100 points and the two consecutive points must be within 2.5 kilometer of each other. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "description": "A set of points to snap to road network. You can have a maximum of 100 points and the two consecutive points must be within 2.5 kilometer of each other. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.\n\n`Note`: The API will not return a point object in the response for the GPS point that cannot be snapped to a road network.",
           "minimum": 2,
           "maximum": 100,
           "items": {
