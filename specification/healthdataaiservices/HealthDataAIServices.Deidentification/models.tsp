@@ -146,7 +146,6 @@ union JobStatus {
 @doc("Storage location.")
 model SourceStorageLocation {
   @doc("URL to storage location. Must be a valid Azure Storage SAS URI.")
-  @secret
   location: url;
 
   @doc("Prefix to filter blobs by.")

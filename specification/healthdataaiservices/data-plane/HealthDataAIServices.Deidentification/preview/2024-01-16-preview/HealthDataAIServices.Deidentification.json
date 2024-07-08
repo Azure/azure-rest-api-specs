@@ -626,17 +626,17 @@
         "dataType": {
           "type": "string",
           "description": "Data type of the input.",
-          "default": "PlainText",
+          "default": "Plaintext",
           "enum": [
-            "PlainText"
+            "Plaintext"
           ],
           "x-ms-enum": {
             "name": "DocumentDataType",
             "modelAsString": true,
             "values": [
               {
-                "name": "PlainText",
-                "value": "PlainText",
+                "name": "Plaintext",
+                "value": "Plaintext",
                 "description": "Plain text data type."
               }
             ]
@@ -712,17 +712,17 @@
         "dataType": {
           "type": "string",
           "description": "Data type of the input documents.",
-          "default": "PlainText",
+          "default": "Plaintext",
           "enum": [
-            "PlainText"
+            "Plaintext"
           ],
           "x-ms-enum": {
             "name": "DocumentDataType",
             "modelAsString": true,
             "values": [
               {
-                "name": "PlainText",
-                "value": "PlainText",
+                "name": "Plaintext",
+                "value": "Plaintext",
                 "description": "Plain text data type."
               }
             ]
@@ -1254,9 +1254,8 @@
       "properties": {
         "location": {
           "type": "string",
-          "format": "password",
-          "description": "URL to storage location. Must be a valid Azure Storage SAS URI.",
-          "x-ms-secret": true
+          "format": "uri",
+          "description": "URL to storage location. Must be a valid Azure Storage SAS URI."
         },
         "prefix": {
           "type": "string",
