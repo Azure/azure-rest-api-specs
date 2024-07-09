@@ -170,7 +170,7 @@ interface SavedFilters {
   @put
   createOrReplaceSavedFilter is Foundations.ResourceOperation<
     SavedFilter,
-    SavedFilterData,
+    BodyParameter<SavedFilterData>,
     SavedFilter
   >;
   @doc("Delete a saved filter with a given filterName.")
