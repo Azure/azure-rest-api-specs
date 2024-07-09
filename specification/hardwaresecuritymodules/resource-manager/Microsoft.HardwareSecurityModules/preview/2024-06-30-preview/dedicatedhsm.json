@@ -572,16 +572,8 @@
     },
     "DedicatedHsm": {
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU details"
-        },
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The Dedicated Hsm zones."
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -591,7 +583,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/DedicatedHsmResource"
         }
       ],
       "required": [
@@ -664,6 +656,57 @@
       },
       "description": "The key vault server error.",
       "type": "object"
+    },
+    "DedicatedHsmResource": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Azure Resource Manager resource ID for the dedicated HSM."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the dedicated HSM."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type of the dedicated HSM."
+        },
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the dedicated HSM should be created.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU details"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Dedicated Hsm zones."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "Dedicated HSM resource",
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
     },
     "IdentityType": {
       "type": "string",
