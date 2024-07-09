@@ -122,12 +122,14 @@ model JobSummary {
 @lroStatus
 union JobStatus {
   // Cannot use Azure.Core.Foundations.OperationState. because it is not a union type.
-
+  @doc("Job has been submitted and is waiting to be processed.")
   NotStarted: "NotStarted",
 
+  @doc("Job has been started.")
   Running: "Running",
 
   @lroSucceeded
+  @doc("Job has completed successfully. All files have succeeded.")
   Succeeded: "Succeeded",
 
   @lroFailed
@@ -135,9 +137,11 @@ union JobStatus {
   PartialFailed: "PartialFailed",
 
   @lroFailed
+  @doc("Job has completed with all files failing, or a validation failure.")
   Failed: "Failed",
 
   @lroCanceled
+  @doc("Job has been canceled after user request.")
   Canceled: "Canceled",
 
   string,
@@ -155,7 +159,7 @@ model SourceStorageLocation {
 
   @doc("List of extensions to filter blobs by.")
   @minItems(1)
-  extensions: Array<string> = ["*"];
+  extensions: Array<string> = #["*"];
 }
 
 @doc("Storage location.")
