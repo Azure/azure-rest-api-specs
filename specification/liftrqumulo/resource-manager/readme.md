@@ -27,7 +27,7 @@ These are the global settings for the Qumulo.Storage.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-10
+tag: package-2024-06-19
 ```
 
 
@@ -55,6 +55,15 @@ These settings apply only when `--tag=package-2022-10-12-preview` is specified o
 ``` yaml $(tag) == 'package-2022-10-12-preview'
 input-file:
   - Qumulo.Storage/preview/2022-10-12-preview/Qumulo.Storage.json
+```
+
+### Tag: package-2024-06-19
+
+These settings apply only when `--tag=package-2024-06-19` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-06-19'
+input-file:
+  - Qumulo.Storage/stable/2024-06-19/Qumulo.Storage.json
 ```
 
 ---
