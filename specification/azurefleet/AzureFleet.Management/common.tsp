@@ -15,14 +15,14 @@ namespace Microsoft.AzureFleet;
 @doc("ApiError for Fleet")
 model ApiError is ApiErrorBase {
   @extension("x-ms-identifiers", ["message", "target"])
-  @doc("The Api error details")
+  @doc("The API error details")
   details?: Array<ApiErrorBase>;
 
-  @doc("The Api inner error")
+  @doc("The API inner error")
   innererror?: InnerError;
 }
 
-@doc("Api error base.")
+@doc("API error base.")
 model ApiErrorBase {
   @doc("The error code.")
   code?: string;

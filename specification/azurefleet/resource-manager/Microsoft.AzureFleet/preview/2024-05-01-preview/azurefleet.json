@@ -495,11 +495,13 @@
         },
         "content": {
           "type": "string",
+          "format": "password",
           "description": "Specifies the XML formatted content that is added to the unattend.xml file for\nthe specified path and component. The XML must be less than 4KB and must\ninclude the root element for the setting or feature that is being inserted.",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -531,7 +533,7 @@
         },
         "details": {
           "type": "array",
-          "description": "The Api error details",
+          "description": "The API error details",
           "items": {
             "$ref": "#/definitions/ApiErrorBase"
           },
@@ -542,13 +544,13 @@
         },
         "innererror": {
           "$ref": "#/definitions/InnerError",
-          "description": "The Api inner error"
+          "description": "The API inner error"
         }
       }
     },
     "ApiErrorBase": {
       "type": "object",
-      "description": "Api error base.",
+      "description": "API error base.",
       "properties": {
         "code": {
           "type": "string",
@@ -2282,7 +2284,13 @@
         },
         "configurationReference": {
           "type": "string",
-          "description": "Optional, Specifies the uri to an azure blob that will replace the default\nconfiguration for the package if provided"
+          "format": "password",
+          "description": "Optional, Specifies the uri to an azure blob that will replace the default\nconfiguration for the package if provided",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "treatFailureAsDeploymentFailure": {
           "type": "boolean",
@@ -2458,12 +2466,20 @@
         "settings": {
           "type": "object",
           "description": "Json formatted public settings for the extension.",
-          "additionalProperties": {}
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         },
         "protectedSettings": {
           "type": "object",
           "description": "The extension can contain either protectedSettings or\nprotectedSettingsFromKeyVault or no protected settings at all.",
-          "additionalProperties": {}
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         },
         "provisioningState": {
           "type": "string",
@@ -2653,12 +2669,20 @@
         "settings": {
           "type": "object",
           "description": "Json formatted public settings for the extension.",
-          "additionalProperties": {}
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         },
         "protectedSettings": {
           "type": "object",
           "description": "The extension can contain either protectedSettings or\nprotectedSettingsFromKeyVault or no protected settings at all.",
-          "additionalProperties": {}
+          "additionalProperties": {},
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         },
         "provisioningState": {
           "type": "string",
@@ -2994,19 +3018,23 @@
         },
         "adminPassword": {
           "type": "string",
+          "format": "password",
           "description": "Specifies the password of the administrator account. <br><br> **Minimum-length\n(Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters\n<br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length\n(Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4\nconditions below need to be fulfilled <br> Has lower characters <br>Has upper\ncharacters <br> Has a digit <br> Has a special character (Regex match [\\W_])\n<br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\",\n\"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\",\n\"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to\nreset the Remote Desktop service or its login password in a Windows\nVM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp)\n<br><br> For resetting root password, see [Manage users, SSH, and check or\nrepair disks on Azure Linux VMs using the VMAccess\nExtension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "customData": {
           "type": "string",
+          "format": "password",
           "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string\nis decoded to a binary array that is saved as a file on the Virtual Machine.\nThe maximum length of the binary array is 65535 bytes. For using cloud-init for\nyour VM, see [Using cloud-init to customize a Linux VM during\ncreation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)",
           "x-ms-mutability": [
             "update",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "windowsConfiguration": {
           "$ref": "#/definitions/WindowsConfiguration",
