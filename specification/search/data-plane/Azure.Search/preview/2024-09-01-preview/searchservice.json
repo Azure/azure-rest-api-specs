@@ -9531,6 +9531,11 @@
           "x-nullable": false,
           "description": "A value indicating which split mode to perform."
         },
+        "unit": {
+          "$ref": "#/definitions/SplitSkillUnit",
+          "x-nullable": true,
+          "description": "Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character."
+        },
         "maximumPageLength": {
           "type": "integer",
           "format": "int32",
@@ -9548,6 +9553,18 @@
           "format": "int32",
           "x-nullable": true,
           "description": "Only applicable when textSplitMode is set to 'pages'. If specified, the SplitSkill will discontinue splitting after processing the first 'maximumPagesToTake' pages, in order to improve performance when only a few initial pages are needed from each document."
+        },
+        "tokenizerName": {
+          "$ref": "#/definitions/SplitSkillTokenizerName",
+          "x-nullable": true,
+          "description": "Only applies if the unit is set to tokens. Options include 'r50k_base', 'p50k_base', 'p50k_edit' and 'cl100k_base'. The default value is 'cl100k_base'."
+        },
+        "allowedSpecialTokens": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "(Optional) Only applies if the unit is set to tokens. This parameter defines a collection of special tokens that are permitted within the tokenization process."
         }
       },
       "externalDocs": {
@@ -9860,6 +9877,66 @@
         ]
       },
       "description": "A value indicating which split mode to perform."
+    },
+    "SplitSkillUnit": {
+      "type": "string",
+      "enum": [
+        "characters",
+        "tokens"
+      ],
+      "x-ms-enum": {
+        "name": "SplitSkillUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "characters",
+            "name": "Characters",
+            "description": "The length will be measured by character."
+          },
+          {
+            "value": "tokens",
+            "name": "Tokens",
+            "description": "The length will be measured by token."
+          }
+        ]
+      },
+      "description": "A value indicating which unit to use."
+    },
+    "SplitSkillTokenizerName": {
+      "type": "string",
+      "enum": [
+        "r50k_base",
+        "p50k_base",
+        "p50k_edit",
+        "cl100k_base"
+      ],
+      "x-ms-enum": {
+        "name": "SplitSkillTokenizerName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "r50k_base",
+            "name": "R50k_Base",
+            "description": "Refers to a base model trained with a 50,000 token vocabulary, often used in general natural language processing tasks."
+          },
+          {
+            "value": "p50k_base",
+            "name": "P50k_Base",
+            "description": "A base model with a 50,000 token vocabulary, optimized for prompt-based tasks."
+          },
+          {
+            "value": "p50k_edit",
+            "name": "P50k_Edit",
+            "description": "Similar to p50k_base but fine-tuned for editing or rephrasing tasks with a 50,000 token vocabulary."
+          },
+          {
+            "value": "cl100k_base",
+            "name": "Cl100k_Base",
+            "description": "A base model with a 100,000 token vocabulary."
+          }
+        ]
+      },
+      "description": "A value indicating which tokenizer to use."
     },
     "VisualFeature": {
       "type": "string",
