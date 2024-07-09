@@ -9,7 +9,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 @useAuth(AadToken)
 @service({
   title: "HealthDataAIServices.Deidentification Service",
@@ -23,6 +22,7 @@ using Azure.Core.Traits;
   }
 )
 @versioned(HealthDataAIServices.Deidentification.Versions)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.Deidentification;
 
 @doc("The Azure Active Directory OAuth2 Flow")
