@@ -28,7 +28,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     stageName: DataBoxStageName;
 
     /** The time at which the stage happened. */
-    stageTime: utcDateTime;
+    stageTime?: utcDateTime;
   };
 
   /** Schema of DataBox Stage Name enumeration. */

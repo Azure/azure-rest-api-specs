@@ -82,10 +82,10 @@ model MachineLearningServicesDatasetDriftDetectedEventData {
   driftCoefficient?: float64;
 
   /** The start time of the target dataset time series that resulted in drift detection. */
-  startTime: utcDateTime;
+  startTime?: utcDateTime;
 
   /** The end time of the target dataset time series that resulted in drift detection. */
-  endTime: utcDateTime;
+  endTime?: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event. */

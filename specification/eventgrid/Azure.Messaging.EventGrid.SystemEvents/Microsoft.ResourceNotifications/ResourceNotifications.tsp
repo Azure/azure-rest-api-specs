@@ -54,7 +54,7 @@ model ResourceNotificationsResourceUpdatedDetails {
 model ResourceNotificationsOperationalDetails {
   /** Date and Time when resource was updated */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  resourceEventTime: utcDateTime;
+  resourceEventTime?: utcDateTime;
 }
 
 /**

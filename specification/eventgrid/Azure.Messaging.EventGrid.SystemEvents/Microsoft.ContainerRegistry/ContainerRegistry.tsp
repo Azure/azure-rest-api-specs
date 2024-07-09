@@ -26,7 +26,7 @@ alias ContainerRegistryBaseEventData = {
   id?: string;
 
   /** The time at which the event occurred. */
-  timestamp: utcDateTime;
+  timestamp?: utcDateTime;
 
   /** The action that encompasses the provided event. */
   action?: string;

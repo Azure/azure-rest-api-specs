@@ -245,7 +245,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.BlobInventoryPolicyCompleted event. */
   model StorageBlobInventoryPolicyCompletedEventData {
     /** The time at which inventory policy was scheduled. */
-    scheduleDateTime: utcDateTime;
+    scheduleDateTime?: utcDateTime;
 
     /** The account name for which inventory policy is registered. */
     accountName?: string;
@@ -273,7 +273,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     status: StorageTaskCompletedStatus;
 
     /** The time at which a storage task was completed. */
-    completedDateTime: utcDateTime;
+    completedDateTime?: utcDateTime;
 
     /** The execution id for a storage task. */
     taskExecutionId?: string;
@@ -288,7 +288,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskQueued event. */
   model StorageTaskQueuedEventData {
     /** The time at which a storage task was queued. */
-    queuedDateTime: utcDateTime;
+    queuedDateTime?: utcDateTime;
 
     /** The execution id for a storage task. */
     taskExecutionId?: string;
@@ -298,7 +298,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   model StorageTaskAssignmentQueuedEventData {
     /** The time at which a storage task was queued. */
     // @encode("ISO8601")
-    queuedDateTime: utcDateTime;
+    queuedDateTime?: utcDateTime;
 
     /** The execution id for a storage task. */
     taskExecutionId?: string;
@@ -312,7 +312,7 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** The time at which a storage task was completed. */
     // @encode("ISO8601")
-    completedDateTime: utcDateTime;
+    completedDateTime?: utcDateTime;
 
     /** The execution id for a storage task. */
     taskExecutionId?: string;

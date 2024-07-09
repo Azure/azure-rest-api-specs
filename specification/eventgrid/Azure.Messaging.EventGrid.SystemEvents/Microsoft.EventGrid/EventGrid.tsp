@@ -98,14 +98,14 @@ model EventGridMQTTClientCreatedOrUpdatedEventData
 
   /** Time the client resource is created based on the provider's UTC time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdOn: utcDateTime;
+  createdOn?: utcDateTime;
 
   /** 
 Time the client resource is last updated based on the provider's UTC time. If
 the client resource was never updated, this value is identical to the value of
 the 'createdOn' property.
 */
-  updatedOn: utcDateTime;
+  updatedOn?: utcDateTime;
 
   /** The key-value attributes that are assigned to the client resource. */
   attributes: Record<string>;
