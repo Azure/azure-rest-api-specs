@@ -1,9 +1,12 @@
 {
+  "operationId": "SynonymMaps_Create",
+  "title": "SearchServiceCreateSynonymMap",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
+    "endpoint": "https://previewexampleservice.search.windows.net",
     "api-version": "2024-09-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "synonymMap": {
-      "name": "mysynonymmap",
+      "name": "tempsynonymmap",
       "format": "solr",
       "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
       "encryptionKey": {
@@ -12,7 +15,7 @@
         "keyVaultUri": "https://myKeyVault.vault.azure.net",
         "accessCredentials": {
           "applicationId": "00000000-0000-0000-0000-000000000000",
-          "applicationSecret": "myApplicationSecret"
+          "applicationSecret": "<applicationSecret>"
         }
       }
     }
@@ -20,7 +23,9 @@
   "responses": {
     "201": {
       "body": {
-        "name": "mysynonymmap",
+        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#synonymmaps/$entity",
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "tempsynonymmap",
         "format": "solr",
         "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
         "encryptionKey": {
@@ -29,8 +34,9 @@
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
-            "applicationSecret": null
-          }
+            "applicationSecret": "<applicationSecret>"
+          },
+          "identity": null
         }
       }
     }

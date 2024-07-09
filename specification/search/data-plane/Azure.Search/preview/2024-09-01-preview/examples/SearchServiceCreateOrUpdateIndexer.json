@@ -1,76 +1,78 @@
 {
+  "operationId": "Indexers_CreateOrUpdate",
+  "title": "SearchServiceCreateOrUpdateIndexer",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
+    "endpoint": "https://previewexampleservice.search.windows.net",
     "indexerName": "myindexer",
     "api-version": "2024-09-01-preview",
+    "ignoreResetRequirements": null,
+    "disableCacheReprocessingChangeDetection": null,
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "If-Match": null,
+    "If-None-Match": null,
     "Prefer": "return=representation",
     "indexer": {
       "name": "myindexer",
-      "description": "a cool indexer",
-      "dataSourceName": "mydatasource",
-      "targetIndexName": "orders",
+      "description": "Description of the indexer",
+      "dataSourceName": "mydocdbdatasource",
+      "skillsetName": "myskillset",
+      "targetIndexName": "preview-test",
       "schedule": {
-        "interval": "PT1H",
-        "startTime": "2015-01-01T00:00:00Z"
+        "interval": "P1D"
       },
       "parameters": {
         "maxFailedItems": 10,
         "maxFailedItemsPerBatch": 5
       },
+      "fieldMappings": [],
+      "outputFieldMappings": [],
+      "disabled": false,
       "encryptionKey": {
         "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
         "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
         "keyVaultUri": "https://myKeyVault.vault.azure.net",
-        "accessCredentials": null
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
       }
     }
   },
   "responses": {
+    "201": {},
     "200": {
       "body": {
+        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#indexers/$entity",
+        "@odata.etag": "0x1234568AE7E58A1",
         "name": "myindexer",
-        "description": "a cool indexer",
-        "dataSourceName": "mydatasource",
-        "targetIndexName": "orders",
+        "description": "Description of the indexer",
+        "dataSourceName": "mydocdbdatasource",
+        "skillsetName": "myskillset",
+        "targetIndexName": "preview-test",
+        "disabled": false,
         "schedule": {
-          "interval": "PT1H",
-          "startTime": "2015-01-01T00:00:00Z"
+          "interval": "P1D",
+          "startTime": "2024-06-06T00:01:50.265Z"
         },
         "parameters": {
+          "batchSize": null,
           "maxFailedItems": 10,
-          "maxFailedItemsPerBatch": 5
+          "maxFailedItemsPerBatch": 5,
+          "base64EncodeKeys": null,
+          "configuration": {}
         },
         "fieldMappings": [],
-        "disabled": false,
+        "outputFieldMappings": [],
+        "cache": null,
         "encryptionKey": {
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
-          "accessCredentials": null
-        }
-      }
-    },
-    "201": {
-      "body": {
-        "name": "myindexer",
-        "description": "a cool indexer",
-        "dataSourceName": "mydatasource",
-        "targetIndexName": "orders",
-        "schedule": {
-          "interval": "PT1H",
-          "startTime": "2015-01-01T00:00:00Z"
-        },
-        "parameters": {
-          "maxFailedItems": 10,
-          "maxFailedItemsPerBatch": 5
-        },
-        "fieldMappings": [],
-        "disabled": false,
-        "encryptionKey": {
-          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
-          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
-          "keyVaultUri": "https://myKeyVault.vault.azure.net",
-          "accessCredentials": null
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          },
+          "identity": null
         }
       }
     }

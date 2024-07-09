@@ -1,8 +1,13 @@
 {
+  "operationId": "SynonymMaps_CreateOrUpdate",
+  "title": "SearchServiceCreateOrUpdateSynonymMap",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
+    "endpoint": "https://previewexampleservice.search.windows.net",
     "synonymMapName": "mysynonymmap",
     "api-version": "2024-09-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "If-Match": null,
+    "If-None-Match": null,
     "Prefer": "return=representation",
     "synonymMap": {
       "name": "mysynonymmap",
@@ -12,13 +17,18 @@
         "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
         "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
         "keyVaultUri": "https://myKeyVault.vault.azure.net",
-        "accessCredentials": null
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
       }
     }
   },
   "responses": {
     "200": {
       "body": {
+        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#synonymmaps/$entity",
+        "@odata.etag": "0x1234568AE7E58A1",
         "name": "mysynonymmap",
         "format": "solr",
         "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
@@ -26,22 +36,14 @@
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
-          "accessCredentials": null
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          },
+          "identity": null
         }
       }
     },
-    "201": {
-      "body": {
-        "name": "mysynonymmap",
-        "format": "solr",
-        "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
-        "encryptionKey": {
-          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
-          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
-          "keyVaultUri": "https://myKeyVault.vault.azure.net",
-          "accessCredentials": null
-        }
-      }
-    }
+    "201": {}
   }
 }

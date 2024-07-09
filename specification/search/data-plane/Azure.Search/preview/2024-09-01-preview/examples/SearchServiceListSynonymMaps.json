@@ -1,28 +1,32 @@
 {
+  "operationId": "SynonymMaps_List",
+  "title": "SearchServiceListSynonymMaps",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
-    "api-version": "2024-09-01-preview"
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "$select": null,
+    "api-version": "2024-09-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#synonymmaps",
         "value": [
           {
+            "@odata.etag": "0x1234568AE7E58A1",
             "name": "mysynonymmap",
             "format": "solr",
             "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
             "encryptionKey": {
-              "keyVaultKeyName": "myKeyName",
-              "keyVaultKeyVersion": "myKeyVersion",
+              "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+              "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
               "keyVaultUri": "https://myKeyVault.vault.azure.net",
-              "accessCredentials": null
+              "accessCredentials": {
+                "applicationId": "00000000-0000-0000-0000-000000000000",
+                "applicationSecret": "<applicationSecret>"
+              },
+              "identity": null
             }
-          },
-          {
-            "name": "myothersynonymmap",
-            "format": "solr",
-            "synonyms": "couch, sofa, chesterfield\npop, soda\ntoque, hat",
-            "encryptionKey": null
           }
         ]
       }

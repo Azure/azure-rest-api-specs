@@ -6090,94 +6090,6 @@
       },
       "description": "Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter)."
     },
-    "SemanticSettings": {
-      "x-ms-client-name": "SemanticSearch",
-      "properties": {
-        "defaultConfiguration": {
-          "x-ms-client-name": "defaultConfigurationName",
-          "type": "string",
-          "description": "Allows you to set the name of a default semantic configuration in your index, making it optional to pass it on as a query parameter every time."
-        },
-        "configurations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SemanticConfiguration"
-          },
-          "description": "The semantic configurations for the index."
-        }
-      },
-      "externalDocs": {
-        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
-      },
-      "description": "Defines parameters for a search index that influence semantic capabilities."
-    },
-    "SemanticConfiguration": {
-      "properties": {
-        "name": {
-          "externalDocs": {
-            "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
-          },
-          "type": "string",
-          "description": "The name of the semantic configuration.",
-          "x-nullable": false
-        },
-        "prioritizedFields": {
-          "$ref": "#/definitions/PrioritizedFields",
-          "x-nullable": false,
-          "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
-        }
-      },
-      "required": [
-        "name",
-        "prioritizedFields"
-      ],
-      "externalDocs": {
-        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
-      },
-      "description": "Defines a specific configuration to be used in the context of semantic capabilities."
-    },
-    "PrioritizedFields": {
-      "x-ms-client-name": "SemanticPrioritizedFields",
-      "properties": {
-        "titleField": {
-          "$ref": "#/definitions/SemanticField",
-          "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
-        },
-        "prioritizedContentFields": {
-          "x-ms-client-name": "contentFields",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SemanticField"
-          },
-          "description": "Defines the content fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
-        },
-        "prioritizedKeywordsFields": {
-          "x-ms-client-name": "keywordsFields",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SemanticField"
-          },
-          "description": "Defines the keyword fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain a list of keywords. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
-        }
-      },
-      "externalDocs": {
-        "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
-      },
-      "description": "Describes the title, content, and keywords fields to be used for semantic ranking, captions, highlights, and answers."
-    },
-    "SemanticField": {
-      "properties": {
-        "fieldName": {
-          "type": "string",
-          "description": "",
-          "x-nullable": false
-        }
-      },
-      "required": [
-        "fieldName"
-      ],
-      "description": "A field that is used as part of the semantic configuration."
-    },
     "VectorSearch": {
       "type": "object",
       "properties": {
@@ -6480,6 +6392,17 @@
       },
       "description": "Contains the parameters specific to Scalar Quantization."
     },
+    "BinaryQuantizationVectorSearchCompressionConfiguration": {
+      "x-ms-client-name": "BinaryQuantizationCompressionConfiguration",
+      "type": "object",
+      "x-ms-discriminator-value": "binaryQuantization",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorSearchCompressionConfiguration"
+        }
+      ],
+      "description": "Contains configuration options specific to the binary quantization compression method used during indexing and querying."
+    },
     "VectorSearchCompressionTargetDataType": {
       "type": "string",
       "enum": [
@@ -6500,7 +6423,8 @@
     "VectorSearchCompressionKind": {
       "type": "string",
       "enum": [
-        "scalarQuantization"
+        "scalarQuantization",
+        "binaryQuantization"
       ],
       "x-ms-enum": {
         "name": "VectorSearchCompressionKind",
@@ -6510,6 +6434,11 @@
             "value": "scalarQuantization",
             "name": "ScalarQuantization",
             "description": "Scalar Quantization, a type of compression method. In scalar quantization, the original vectors values are compressed to a narrower type by discretizing and representing each component of a vector using a reduced set of quantized values, thereby reducing the overall data size."
+          },
+          {
+            "value": "binaryQuantization",
+            "name": "BinaryQuantization",
+            "description": "Binary Quantization, a type of compression method. In binary quantization, the original vectors values are compressed to the narrower binary type by discretizing and representing each component of a vector using binary values, thereby reducing the overall data size."
           }
         ]
       },
@@ -6565,6 +6494,7 @@
           "description": "The resource URI of the Azure OpenAI resource."
         },
         "deploymentId": {
+          "x-ms-client-name": "deploymentName",
           "type": "string",
           "description": "ID of the Azure OpenAI model deployment on the designated resource."
         },
@@ -6589,8 +6519,7 @@
       "enum": [
         "text-embedding-ada-002",
         "text-embedding-3-large",
-        "text-embedding-3-small",
-        "experimental"
+        "text-embedding-3-small"
       ],
       "x-ms-enum": {
         "name": "AzureOpenAIModelName",
@@ -6607,16 +6536,12 @@
           {
             "value": "text-embedding-3-small",
             "name": "TextEmbedding3Small"
-          },
-          {
-            "value": "experimental",
-            "name": "Experimental"
           }
         ]
       },
       "description": "The Azure Open AI model name that will be called."
     },
-    "CustomVectorizer": {
+    "WebApiVectorizer": {
       "type": "object",
       "x-ms-discriminator-value": "customWebApi",
       "allOf": [
@@ -6626,14 +6551,14 @@
       ],
       "properties": {
         "customWebApiParameters": {
-          "x-ms-client-name": "CustomWebApiParameters",
-          "$ref": "#/definitions/CustomWebApiParameters",
+          "x-ms-client-name": "WebApiParameters",
+          "$ref": "#/definitions/WebApiParameters",
           "description": "Specifies the properties of the user-defined vectorizer."
         }
       },
       "description": "Specifies a user-defined vectorizer for generating the vector embedding of a query string. Integration of an external vectorizer is achieved using the custom Web API interface of a skillset."
     },
-    "CustomWebApiParameters": {
+    "WebApiParameters": {
       "type": "object",
       "properties": {
         "uri": {
@@ -6657,6 +6582,7 @@
         "authResourceId": {
           "type": "string",
           "x-nullable": true,
+          "x-ms-format": "arm-id",
           "description": "Applies to custom endpoints that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the vectorization connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token."
         },
         "authIdentity": {
@@ -12410,6 +12336,7 @@
           "description": "The maximum number of objects in complex collections allowed per document."
         },
         "maxStoragePerIndex": {
+          "x-ms-client-name": "maxStoragePerIndexInBytes",
           "type": "integer",
           "format": "int64",
           "x-nullable": true,
@@ -12437,6 +12364,94 @@
         "usage"
       ],
       "description": "Represents a resource's usage and quota."
+    },
+    "SemanticSettings": {
+      "x-ms-client-name": "SemanticSearch",
+      "properties": {
+        "defaultConfiguration": {
+          "x-ms-client-name": "defaultConfigurationName",
+          "type": "string",
+          "description": "Allows you to set the name of a default semantic configuration in your index, making it optional to pass it on as a query parameter every time."
+        },
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticConfiguration"
+          },
+          "description": "The semantic configurations for the index."
+        }
+      },
+      "externalDocs": {
+        "url": "https://learn.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Defines parameters for a search index that influence semantic capabilities."
+    },
+    "SemanticConfiguration": {
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://learn.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name of the semantic configuration.",
+          "x-nullable": false
+        },
+        "prioritizedFields": {
+          "$ref": "#/definitions/PrioritizedFields",
+          "x-nullable": false,
+          "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
+        }
+      },
+      "required": [
+        "name",
+        "prioritizedFields"
+      ],
+      "externalDocs": {
+        "url": "https://learn.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Defines a specific configuration to be used in the context of semantic capabilities."
+    },
+    "PrioritizedFields": {
+      "x-ms-client-name": "SemanticPrioritizedFields",
+      "properties": {
+        "titleField": {
+          "$ref": "#/definitions/SemanticField",
+          "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
+        },
+        "prioritizedContentFields": {
+          "x-ms-client-name": "contentFields",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField"
+          },
+          "description": "Defines the content fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
+        },
+        "prioritizedKeywordsFields": {
+          "x-ms-client-name": "keywordsFields",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SemanticField"
+          },
+          "description": "Defines the keyword fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain a list of keywords. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
+        }
+      },
+      "externalDocs": {
+        "url": "https://learn.microsoft.com/azure/search/semantic-search-overview"
+      },
+      "description": "Describes the title, content, and keywords fields to be used for semantic ranking, captions, highlights, and answers."
+    },
+    "SemanticField": {
+      "properties": {
+        "fieldName": {
+          "type": "string",
+          "description": "",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "fieldName"
+      ],
+      "description": "A field that is used as part of the semantic configuration."
     }
   },
   "parameters": {

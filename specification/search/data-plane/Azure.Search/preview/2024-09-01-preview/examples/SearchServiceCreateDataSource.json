@@ -1,26 +1,29 @@
 {
+  "operationId": "DataSources_Create",
+  "title": "SearchServiceCreateDataSource",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
+    "endpoint": "https://previewexampleservice.search.windows.net",
     "api-version": "2024-09-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "dataSource": {
-      "name": "mydocdbdatasource",
-      "description": "My Cosmos DB data source.",
-      "type": "cosmosdb",
+      "name": "tempdatasource",
+      "description": "My Azure Blob data source.",
+      "type": "azureblob",
       "credentials": {
-        "connectionString": "AccountEndpoint=https://myDocDbEndpoint.documents.azure.com;AccountKey=myDocDbAuthKey;Database=myDocDbDatabaseId"
+        "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
       },
       "container": {
-        "name": "myDocDbCollectionId",
-        "query": "SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts"
+        "name": "doc-extraction-skillset",
+        "query": "E2E_Dsat"
       },
       "dataChangeDetectionPolicy": {
-        "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
-        "highWaterMarkColumnName": "_ts"
+        "highWaterMarkColumnName": "metadata_storage_last_modified",
+        "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy"
       },
       "dataDeletionDetectionPolicy": {
-        "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
         "softDeleteColumnName": "isDeleted",
-        "softDeleteMarkerValue": "true"
+        "softDeleteMarkerValue": "true",
+        "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy"
       },
       "encryptionKey": {
         "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
@@ -36,19 +39,21 @@
   "responses": {
     "201": {
       "body": {
-        "name": "mydocdbdatasource",
-        "description": "My Cosmos DB data source.",
-        "type": "cosmosdb",
+        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#datasources/$entity",
+        "name": "tempdatasource",
+        "description": "My Azure Blob data source.",
+        "type": "azureblob",
+        "subtype": null,
         "credentials": {
-          "connectionString": null
+          "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
         },
         "container": {
-          "name": "myDocDbCollectionId",
-          "query": "SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts"
+          "name": "doc-extraction-skillset",
+          "query": "E2E_Dsat"
         },
         "dataChangeDetectionPolicy": {
           "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
-          "highWaterMarkColumnName": "_ts"
+          "highWaterMarkColumnName": "metadata_storage_last_modified"
         },
         "dataDeletionDetectionPolicy": {
           "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
@@ -61,9 +66,11 @@
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
-            "applicationSecret": null
-          }
-        }
+            "applicationSecret": "<applicationSecret>"
+          },
+          "identity": null
+        },
+        "identity": null
       }
     }
   }

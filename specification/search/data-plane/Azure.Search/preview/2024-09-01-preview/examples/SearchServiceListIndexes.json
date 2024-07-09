@@ -1,84 +1,172 @@
 {
+  "operationId": "Indexes_List",
+  "title": "SearchServiceListIndexes",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
-    "$select": "*",
-    "api-version": "2024-09-01-preview"
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "$select": null,
+    "api-version": "2024-09-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#indexes",
         "value": [
           {
-            "name": "hotels",
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "preview-test",
+            "defaultScoringProfile": null,
             "fields": [
               {
-                "name": "hotelId",
+                "name": "id",
                 "type": "Edm.String",
-                "searchable": false,
+                "searchable": true,
                 "filterable": true,
                 "retrievable": true,
+                "stored": true,
                 "sortable": true,
                 "facetable": true,
                 "key": true,
                 "indexAnalyzer": null,
                 "searchAnalyzer": null,
                 "analyzer": null,
+                "normalizer": null,
+                "dimensions": null,
+                "vectorSearchProfile": null,
+                "vectorEncoding": null,
                 "synonymMaps": []
               },
               {
-                "name": "baseRate",
-                "type": "Edm.Double",
-                "searchable": false,
+                "name": "vector1",
+                "type": "Collection(Edm.Single)",
+                "searchable": true,
+                "filterable": false,
+                "retrievable": true,
+                "stored": true,
+                "sortable": false,
+                "facetable": false,
+                "key": false,
+                "indexAnalyzer": null,
+                "searchAnalyzer": null,
+                "analyzer": null,
+                "normalizer": null,
+                "dimensions": 20,
+                "vectorSearchProfile": "config1",
+                "vectorEncoding": null,
+                "synonymMaps": []
+              },
+              {
+                "name": "vector1b",
+                "type": "Collection(Edm.Single)",
+                "searchable": true,
+                "filterable": false,
+                "retrievable": true,
+                "stored": true,
+                "sortable": false,
+                "facetable": false,
+                "key": false,
+                "indexAnalyzer": null,
+                "searchAnalyzer": null,
+                "analyzer": null,
+                "normalizer": null,
+                "dimensions": 10,
+                "vectorSearchProfile": "config2",
+                "vectorEncoding": null,
+                "synonymMaps": []
+              },
+              {
+                "name": "vector2",
+                "type": "Collection(Edm.Single)",
+                "searchable": true,
+                "filterable": false,
+                "retrievable": true,
+                "stored": true,
+                "sortable": false,
+                "facetable": false,
+                "key": false,
+                "indexAnalyzer": null,
+                "searchAnalyzer": null,
+                "analyzer": null,
+                "normalizer": null,
+                "dimensions": 2,
+                "vectorSearchProfile": "config3",
+                "vectorEncoding": null,
+                "synonymMaps": []
+              },
+              {
+                "name": "vector3",
+                "type": "Collection(Edm.Single)",
+                "searchable": true,
+                "filterable": false,
+                "retrievable": true,
+                "stored": true,
+                "sortable": false,
+                "facetable": false,
+                "key": false,
+                "indexAnalyzer": null,
+                "searchAnalyzer": null,
+                "analyzer": null,
+                "normalizer": null,
+                "dimensions": 2,
+                "vectorSearchProfile": "config3",
+                "vectorEncoding": null,
+                "synonymMaps": []
+              },
+              {
+                "name": "vector22",
+                "type": "Collection(Edm.Single)",
+                "searchable": true,
+                "filterable": false,
+                "retrievable": true,
+                "stored": true,
+                "sortable": false,
+                "facetable": false,
+                "key": false,
+                "indexAnalyzer": null,
+                "searchAnalyzer": null,
+                "analyzer": null,
+                "normalizer": null,
+                "dimensions": 10,
+                "vectorSearchProfile": "config2",
+                "vectorEncoding": null,
+                "synonymMaps": []
+              },
+              {
+                "name": "name",
+                "type": "Edm.String",
+                "searchable": true,
                 "filterable": true,
                 "retrievable": true,
+                "stored": true,
                 "sortable": true,
                 "facetable": true,
                 "key": false,
                 "indexAnalyzer": null,
                 "searchAnalyzer": null,
-                "analyzer": null,
+                "analyzer": "en.lucene",
+                "normalizer": null,
+                "dimensions": null,
+                "vectorSearchProfile": null,
+                "vectorEncoding": null,
                 "synonymMaps": []
               },
               {
                 "name": "description",
                 "type": "Edm.String",
                 "searchable": true,
-                "filterable": false,
-                "retrievable": true,
-                "sortable": false,
-                "facetable": false,
-                "key": false,
-                "indexAnalyzer": null,
-                "searchAnalyzer": null,
-                "analyzer": null,
-                "synonymMaps": []
-              },
-              {
-                "name": "description_fr",
-                "type": "Edm.String",
-                "searchable": true,
-                "filterable": false,
-                "retrievable": true,
-                "sortable": false,
-                "facetable": false,
-                "key": false,
-                "indexAnalyzer": null,
-                "searchAnalyzer": null,
-                "analyzer": "fr.lucene",
-                "synonymMaps": []
-              },
-              {
-                "name": "hotelName",
-                "type": "Edm.String",
-                "searchable": true,
                 "filterable": true,
                 "retrievable": true,
+                "stored": true,
                 "sortable": true,
                 "facetable": true,
                 "key": false,
                 "indexAnalyzer": null,
                 "searchAnalyzer": null,
-                "analyzer": null,
+                "analyzer": "standard.lucene",
+                "normalizer": null,
+                "dimensions": null,
+                "vectorSearchProfile": null,
+                "vectorEncoding": null,
                 "synonymMaps": []
               },
               {
@@ -87,198 +175,232 @@
                 "searchable": true,
                 "filterable": true,
                 "retrievable": true,
+                "stored": true,
                 "sortable": true,
                 "facetable": true,
                 "key": false,
                 "indexAnalyzer": null,
                 "searchAnalyzer": null,
-                "analyzer": null,
+                "analyzer": "en.lucene",
+                "normalizer": null,
+                "dimensions": null,
+                "vectorSearchProfile": null,
+                "vectorEncoding": null,
                 "synonymMaps": []
               },
               {
-                "name": "tags",
-                "type": "Collection(Edm.String)",
+                "name": "ownerId",
+                "type": "Edm.String",
                 "searchable": true,
                 "filterable": true,
                 "retrievable": true,
-                "sortable": false,
-                "facetable": true,
-                "key": false,
-                "indexAnalyzer": null,
-                "searchAnalyzer": null,
-                "analyzer": "tagsAnalyzer",
-                "synonymMaps": []
-              },
-              {
-                "name": "parkingIncluded",
-                "type": "Edm.Boolean",
-                "searchable": false,
-                "filterable": true,
-                "retrievable": true,
+                "stored": true,
                 "sortable": true,
                 "facetable": true,
                 "key": false,
                 "indexAnalyzer": null,
                 "searchAnalyzer": null,
-                "analyzer": null,
-                "synonymMaps": []
-              },
-              {
-                "name": "smokingAllowed",
-                "type": "Edm.Boolean",
-                "searchable": false,
-                "filterable": true,
-                "retrievable": true,
-                "sortable": true,
-                "facetable": true,
-                "key": false,
-                "indexAnalyzer": null,
-                "searchAnalyzer": null,
-                "analyzer": null,
-                "synonymMaps": []
-              },
-              {
-                "name": "lastRenovationDate",
-                "type": "Edm.DateTimeOffset",
-                "searchable": false,
-                "filterable": true,
-                "retrievable": true,
-                "sortable": true,
-                "facetable": true,
-                "key": false,
-                "indexAnalyzer": null,
-                "searchAnalyzer": null,
-                "analyzer": null,
-                "synonymMaps": []
-              },
-              {
-                "name": "rating",
-                "type": "Edm.Int32",
-                "searchable": false,
-                "filterable": true,
-                "retrievable": true,
-                "sortable": true,
-                "facetable": true,
-                "key": false,
-                "indexAnalyzer": null,
-                "searchAnalyzer": null,
-                "analyzer": null,
-                "synonymMaps": []
-              },
-              {
-                "name": "location",
-                "type": "Edm.GeographyPoint",
-                "searchable": false,
-                "filterable": true,
-                "retrievable": true,
-                "sortable": true,
-                "facetable": false,
-                "key": false,
-                "indexAnalyzer": null,
-                "searchAnalyzer": null,
-                "analyzer": null,
+                "analyzer": "en.lucene",
+                "normalizer": null,
+                "dimensions": null,
+                "vectorSearchProfile": null,
+                "vectorEncoding": null,
                 "synonymMaps": []
               }
             ],
             "scoringProfiles": [
               {
-                "name": "geo",
+                "name": "stringFieldBoost",
+                "functionAggregation": "sum",
                 "text": {
                   "weights": {
-                    "hotelName": 5
+                    "name": 3.0,
+                    "description": 1.0,
+                    "category": 2.0,
+                    "ownerId": 1.0
                   }
                 },
                 "functions": [
                   {
-                    "type": "distance",
-                    "boost": 5,
-                    "fieldName": "location",
-                    "interpolation": "logarithmic",
-                    "distance": {
-                      "referencePointParameter": "currentLocation",
-                      "boostingDistance": 10
+                    "fieldName": "category",
+                    "interpolation": "linear",
+                    "type": "tag",
+                    "boost": 2.0,
+                    "freshness": null,
+                    "magnitude": null,
+                    "distance": null,
+                    "tag": {
+                      "tagsParameter": "categoryTag"
                     }
                   }
                 ]
               }
             ],
-            "defaultScoringProfile": "geo",
+            "corsOptions": null,
             "suggesters": [
               {
                 "name": "sg",
                 "searchMode": "analyzingInfixMatching",
                 "sourceFields": [
-                  "hotelName"
+                  "category",
+                  "ownerId"
                 ]
               }
             ],
             "analyzers": [
               {
-                "name": "tagsAnalyzer",
                 "@odata.type": "#Microsoft.Azure.Search.CustomAnalyzer",
+                "name": "tagsAnalyzer",
+                "tokenizer": "standard_v2",
+                "tokenFilters": [
+                  "common_grams"
+                ],
                 "charFilters": [
                   "html_strip"
-                ],
-                "tokenizer": "standard_v2"
+                ]
               }
             ],
+            "normalizers": [],
             "tokenizers": [],
             "tokenFilters": [],
             "charFilters": [],
-            "corsOptions": {
-              "allowedOrigins": [
-                "tempuri.org"
-              ],
-              "maxAgeInSeconds": 60
+            "encryptionKey": null,
+            "similarity": {
+              "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
+              "k1": null,
+              "b": null
             },
-            "encryptionKey": {
-              "keyVaultKeyName": "myKeyName",
-              "keyVaultKeyVersion": "myKeyVersion",
-              "keyVaultUri": "https://myKeyVault.vault.azure.net",
-              "accessCredentials": null
+            "semantic": {
+              "defaultConfiguration": null,
+              "configurations": []
+            },
+            "vectorSearch": {
+              "algorithms": [
+                {
+                  "name": "cosine",
+                  "kind": "hnsw",
+                  "hnswParameters": {
+                    "metric": "cosine",
+                    "m": 4,
+                    "efConstruction": 400,
+                    "efSearch": 500
+                  },
+                  "exhaustiveKnnParameters": null
+                },
+                {
+                  "name": "euclidean",
+                  "kind": "hnsw",
+                  "hnswParameters": {
+                    "metric": "euclidean",
+                    "m": 4,
+                    "efConstruction": 400,
+                    "efSearch": 500
+                  },
+                  "exhaustiveKnnParameters": null
+                },
+                {
+                  "name": "dotProduct",
+                  "kind": "hnsw",
+                  "hnswParameters": {
+                    "metric": "dotProduct",
+                    "m": 4,
+                    "efConstruction": 400,
+                    "efSearch": 500
+                  },
+                  "exhaustiveKnnParameters": null
+                }
+              ],
+              "profiles": [
+                {
+                  "name": "config1",
+                  "algorithm": "cosine",
+                  "vectorizer": "openai",
+                  "compression": "mySQ8"
+                },
+                {
+                  "name": "config2",
+                  "algorithm": "euclidean",
+                  "vectorizer": "custom-web-api",
+                  "compression": "mySQ8"
+                },
+                {
+                  "name": "config3",
+                  "algorithm": "dotProduct",
+                  "vectorizer": "custom-web-api",
+                  "compression": "myBQC"
+                }
+              ],
+              "vectorizers": [
+                {
+                  "name": "openai",
+                  "kind": "azureOpenAI",
+                  "azureOpenAIParameters": {
+                    "resourceUri": "https://test-sample.openai.azure.com",
+                    "deploymentId": "model",
+                    "apiKey": "<redacted>",
+                    "modelName": "text-embedding-3-large",
+                    "authIdentity": null
+                  },
+                  "customWebApiParameters": null,
+                  "aiServicesVisionParameters": null,
+                  "amlParameters": null
+                },
+                {
+                  "name": "custom-web-api",
+                  "kind": "customWebApi",
+                  "azureOpenAIParameters": null,
+                  "customWebApiParameters": {
+                    "httpMethod": "POST",
+                    "uri": "https://my-custom-endpoint.org/",
+                    "timeout": "PT1M",
+                    "authResourceId": "resource id for managed identity auth to function",
+                    "httpHeaders": {
+                      "header1": "value1",
+                      "header2": "value2"
+                    },
+                    "authIdentity": {
+                      "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+                      "userAssignedIdentity": null
+                    }
+                  },
+                  "aiServicesVisionParameters": null,
+                  "amlParameters": null
+                },
+                {
+                  "name": "aml",
+                  "kind": "aml",
+                  "azureOpenAIParameters": null,
+                  "customWebApiParameters": null,
+                  "aiServicesVisionParameters": null,
+                  "amlParameters": {
+                    "key": null,
+                    "resourceId": "aml resource id",
+                    "region": "aml region",
+                    "uri": "https://my-custom-endpoint.org/",
+                    "timeout": "PT1M",
+                    "modelName": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32"
+                  }
+                }
+              ],
+              "compressions": [
+                {
+                  "name": "mySQ8",
+                  "kind": "scalarQuantization",
+                  "rerankWithOriginalVectors": true,
+                  "defaultOversampling": 10.0,
+                  "scalarQuantizationParameters": {
+                    "quantizedDataType": "int8"
+                  }
+                },
+                {
+                  "name": "myBQC",
+                  "kind": "binaryQuantization",
+                  "rerankWithOriginalVectors": true,
+                  "defaultOversampling": 10.0,
+                  "scalarQuantizationParameters": null
+                }
+              ]
             }
-          },
-          {
-            "name": "testindex",
-            "fields": [
-              {
-                "name": "id",
-                "type": "Edm.String",
-                "searchable": false,
-                "filterable": false,
-                "retrievable": true,
-                "sortable": false,
-                "facetable": false,
-                "key": true,
-                "indexAnalyzer": null,
-                "searchAnalyzer": null,
-                "analyzer": null,
-                "synonymMaps": []
-              },
-              {
-                "name": "hidden",
-                "type": "Edm.Double",
-                "searchable": false,
-                "filterable": true,
-                "retrievable": false,
-                "sortable": true,
-                "facetable": false,
-                "key": false,
-                "indexAnalyzer": null,
-                "searchAnalyzer": null,
-                "analyzer": null,
-                "synonymMaps": []
-              }
-            ],
-            "scoringProfiles": [],
-            "defaultScoringProfile": null,
-            "suggesters": [],
-            "analyzers": [],
-            "tokenizers": [],
-            "tokenFilters": [],
-            "charFilters": [],
-            "corsOptions": null,
-            "encryptionKey": null
           }
         ]
       }

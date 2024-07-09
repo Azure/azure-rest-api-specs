@@ -1,34 +1,46 @@
 {
+  "operationId": "Indexers_Get",
+  "title": "SearchServiceGetIndexer",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
+    "endpoint": "https://previewexampleservice.search.windows.net",
     "indexerName": "myindexer",
-    "api-version": "2024-09-01-preview"
+    "api-version": "2024-09-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#indexers/$entity",
+        "@odata.etag": "0x1234568AE7E58A1",
         "name": "myindexer",
-        "description": "a cool indexer",
-        "dataSourceName": "mydatasource",
-        "targetIndexName": "orders",
+        "description": "Description of the indexer",
+        "dataSourceName": "mydocdbdatasource",
+        "skillsetName": "myskillset",
+        "targetIndexName": "preview-test",
+        "disabled": false,
         "schedule": {
-          "interval": "PT1H",
-          "startTime": "2015-01-01T00:00:00Z"
+          "interval": "P1D",
+          "startTime": "2024-06-06T00:01:50.265Z"
         },
         "parameters": {
+          "batchSize": null,
           "maxFailedItems": 10,
-          "maxFailedItemsPerBatch": 5
+          "maxFailedItemsPerBatch": 5,
+          "base64EncodeKeys": null,
+          "configuration": {}
         },
         "fieldMappings": [],
-        "disabled": false,
+        "outputFieldMappings": [],
+        "cache": null,
         "encryptionKey": {
-          "keyVaultKeyName": "myKeyName",
-          "keyVaultKeyVersion": "myKeyVersion",
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
-            "applicationSecret": null
-          }
+            "applicationSecret": "<applicationSecret>"
+          },
+          "identity": null
         }
       }
     }

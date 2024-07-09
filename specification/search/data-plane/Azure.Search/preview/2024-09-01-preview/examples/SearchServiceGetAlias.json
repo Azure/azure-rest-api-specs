@@ -1,15 +1,19 @@
 {
+  "operationId": "Aliases_Get",
+  "title": "SearchServiceGetAlias",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
-    "aliasName": "production",
-    "api-version": "2024-09-01-preview"
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "aliasName": "myalias",
+    "api-version": "2024-09-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "production",
+        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#aliases/$entity",
+        "name": "myalias",
         "indexes": [
-          "hotels"
+          "preview-test"
         ]
       }
     }

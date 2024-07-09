@@ -1,53 +1,58 @@
 {
+  "operationId": "GetServiceStatistics",
+  "title": "SearchServiceGetServiceStatistics",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
-    "api-version": "2024-09-01-preview"
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2024-09-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#Microsoft.Azure.Search.V2024_09_01_Preview.ServiceStatistics",
         "counters": {
-          "aliasesCount": {
-            "usage": 2,
-            "quota": 3
-          },
           "documentCount": {
-            "usage": 7093,
-            "quota": 10000
+            "usage": null,
+            "quota": null
           },
           "indexesCount": {
-            "usage": 3,
-            "quota": 3
+            "usage": 2,
+            "quota": 2
           },
           "indexersCount": {
-            "usage": 3,
-            "quota": 3
+            "usage": 2,
+            "quota": 2
           },
           "dataSourcesCount": {
-            "usage": 1,
-            "quota": 3
+            "usage": 2,
+            "quota": 2
           },
           "storageSize": {
-            "usage": 914529,
-            "quota": 52428800
+            "usage": 10485760,
+            "quota": 10485760
           },
           "synonymMaps": {
-            "usage": 2,
+            "usage": 3,
             "quota": 3
           },
           "skillsetCount": {
-            "usage": 0,
-            "quota": 3
+            "usage": 2,
+            "quota": 2
+          },
+          "aliasesCount": {
+            "usage": 4,
+            "quota": 4
           },
           "vectorIndexSize": {
-            "usage": 123456,
-            "quota": 26214400
+            "usage": null,
+            "quota": null
           }
         },
         "limits": {
+          "maxStoragePerIndex": 10485760,
           "maxFieldsPerIndex": 1000,
           "maxFieldNestingDepthPerIndex": 10,
-          "maxComplexCollectionFieldsPerIndex": 100,
+          "maxComplexCollectionFieldsPerIndex": 40,
           "maxComplexObjectsInCollectionsPerDocument": 3000
         }
       }

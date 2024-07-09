@@ -1,21 +1,28 @@
 {
+  "operationId": "Documents_Get",
+  "title": "SearchIndexGetDocument",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
-    "indexName": "myindex",
-    "api-version": "2024-09-01-preview",
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexName": "preview-test",
     "key": "1",
     "$select": [
-      "docId",
-      "title",
-      "description"
-    ]
+      "id",
+      "description",
+      "name",
+      "category",
+      "ownerId"
+    ],
+    "api-version": "2024-09-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "description": "Cheapest hotel in town",
-        "docId": "1",
-        "title": "Nice Hotel"
+        "id": "1",
+        "name": "test",
+        "description": "test1 hello",
+        "category": "purple",
+        "ownerId": "sam"
       }
     }
   }

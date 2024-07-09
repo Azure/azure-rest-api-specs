@@ -1,16 +1,20 @@
 {
+  "operationId": "Indexes_Analyze",
+  "title": "SearchServiceIndexAnalyze",
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
-    "indexName": "hotels",
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexName": "preview-test",
     "api-version": "2024-09-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "request": {
       "text": "Text to analyze",
-      "analyzer": "standard.lucene"
+      "analyzer": "ar.lucene"
     }
   },
   "responses": {
     "200": {
       "body": {
+        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#Microsoft.Azure.Search.V2024_09_01_Preview.AnalyzeResult",
         "tokens": [
           {
             "token": "text",
