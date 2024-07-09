@@ -1,6 +1,8 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/rest";
 
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
@@ -21,11 +23,11 @@ namespace Customizations;
   service: Microsoft.LoadTestService,
 })
 interface AdministrationOperations {
-   // operations from test_profile_administration interface
-   createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
-   deleteTestProfile is TestProfileAdministration.deleteTestProfile;
-   getTestProfile is TestProfileAdministration.getTestProfile;
-   listTestProfiles is TestProfileAdministration.listTestProfiles;
+  // operations from test_profile_administration interface
+  createOrUpdateTestProfile is TestProfileAdministration.createOrUpdateTestProfile;
+  deleteTestProfile is TestProfileAdministration.deleteTestProfile;
+  getTestProfile is TestProfileAdministration.getTestProfile;
+  listTestProfiles is TestProfileAdministration.listTestProfiles;
 
   createOrUpdateTest is LoadTestAdministration.createOrUpdateTest;
   createOrUpdateAppComponents is LoadTestAdministration.createOrUpdateAppComponents;
@@ -57,6 +59,7 @@ interface TestRunOperations {
   listTestProfileRuns is TestProfileRunAdministration.listTestProfileRuns;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   @clientName("stopTestProfileRun", "javascript,python,java,csharp,go")
+  @action("stop") // NOTE(mitsha): This is needed since `stopTestProfileRun` otherwise changes the path of the operation
   stopTestProfileRun is TestProfileRunAdministration.stop;
 
   @clientName("BeginTestRun", "python")
@@ -80,5 +83,4 @@ interface TestRunOperations {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   @clientName("stopTestRun", "javascript,python,java,csharp,go")
   stop is LoadTestRun.stop;
-  
 }
