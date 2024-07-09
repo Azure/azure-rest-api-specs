@@ -279,3 +279,14 @@ model CreateLivenessWithVerifySessionContent {
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
   VerifyImage: bytes;
 }
+
+@doc("Request wrapper of liveness with verify session creation.")
+model CreateLivenessWithVerifySessionRequest {
+  @doc("The content type for the operation. Always multipart/form-data for this operation.")
+  @header("content-type")
+  contentType: "multipart/form-data";
+
+  @doc("Request content of liveness with verify session creation.")
+  @body
+  body: CreateLivenessWithVerifySessionContent;
+}
