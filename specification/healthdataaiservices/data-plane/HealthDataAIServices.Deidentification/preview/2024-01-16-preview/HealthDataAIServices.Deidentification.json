@@ -296,6 +296,9 @@
             "$ref": "./examples/CreateJob.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -861,15 +864,18 @@
         "values": [
           {
             "name": "NotStarted",
-            "value": "NotStarted"
+            "value": "NotStarted",
+            "description": "Job has been submitted and is waiting to be processed."
           },
           {
             "name": "Running",
-            "value": "Running"
+            "value": "Running",
+            "description": "Job has been started."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Job has completed successfully. All files have succeeded."
           },
           {
             "name": "PartialFailed",
@@ -878,11 +884,13 @@
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Job has completed with all files failing, or a validation failure."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Job has been canceled after user request."
           }
         ]
       }
