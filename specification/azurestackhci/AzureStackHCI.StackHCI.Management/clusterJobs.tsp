@@ -14,7 +14,7 @@ using Azure.Core;
 namespace Microsoft.AzureStackHCI;
 
 @doc("A Cluster")
-model Clusters is TrackedResource<ClusterProperties> {
+model Cluster is TrackedResource<ClusterProperties> {
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("clusterName")
   @doc("Name of Cluster")
@@ -29,10 +29,9 @@ model ClusterProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @doc("Cluster Jobs resource")
-@parentResource(Clusters)
+@parentResource(Cluster)
 @discriminator("kind")
 model ClusterJob is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<

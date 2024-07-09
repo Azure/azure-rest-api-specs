@@ -296,7 +296,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs": {
       "get": {
-        "operationId": "ClusterJobs_ListByClusters",
+        "operationId": "ClusterJobs_ListByCluster",
         "tags": [
           "ClusterJobs"
         ],
@@ -332,11 +332,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ClusterJobs_ListByClusters": {
-            "$ref": "./examples/ClusterJobs_ListByClusters.json"
           }
         },
         "x-ms-pageable": {
@@ -1242,33 +1237,6 @@
         }
       }
     },
-    "ClusterProperties": {
-      "type": "object",
-      "description": "A ClusterProperties",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the cluster.",
-          "readOnly": true
-        }
-      }
-    },
-    "Clusters": {
-      "type": "object",
-      "description": "A Cluster",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ClusterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
     "CollectLogJobProperties": {
       "type": "object",
       "description": "Represents the properties of a log collection job.",
@@ -1602,22 +1570,6 @@
           }
         ]
       }
-    },
-    "EdgeDevice": {
-      "type": "object",
-      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "EdgeDeviceJob": {
       "type": "object",
