@@ -15,18 +15,14 @@
             "name": "version",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "Ocp-Apim-Subscription-Key",
             "in": "header",
             "description": "Speech/AI Subscription Key",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "in": "body",
@@ -45,14 +41,8 @@
               "$ref": "#/definitions/BatchRegistrationResponsePayloadV02Preview"
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/ProblemDetails"
             }
@@ -76,18 +66,14 @@
             "name": "version",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "Ocp-Apim-Subscription-Key",
             "in": "header",
             "description": "Speech/AI Subscription Key",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -100,8 +86,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/ProblemDetails"
             }
@@ -124,26 +110,20 @@
             "name": "registrationId",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "version",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "Ocp-Apim-Subscription-Key",
             "in": "header",
             "description": "Speech/AI Subscription Key",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "in": "body",
@@ -165,14 +145,8 @@
           "204": {
             "description": "No Content"
           },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/ProblemDetails"
             }
@@ -193,26 +167,20 @@
             "name": "registrationId",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "version",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "Ocp-Apim-Subscription-Key",
             "in": "header",
             "description": "Speech/AI Subscription Key",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -222,14 +190,8 @@
               "$ref": "#/definitions/BatchRegistrationResponsePayloadV02Preview"
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            }
-          },
-          "404": {
-            "description": "Not Found",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/ProblemDetails"
             }
@@ -250,40 +212,28 @@
             "name": "registrationId",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "version",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "name": "Ocp-Apim-Subscription-Key",
             "in": "header",
             "description": "Speech/AI Subscription Key",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "204": {
             "description": "No Content"
           },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/ProblemDetails"
-            }
-          },
-          "404": {
-            "description": "Not Found",
+          "default": {
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/ProblemDetails"
             }
@@ -315,8 +265,7 @@
         },
         "endpointResourceId": {
           "type": "string",
-          "description": "The PromptFlow analytics endpoint resourceId. If it is empty, only transcription '<filename>.json' will be saved in output container. If the endpoint is valid, you will see both transcription file and the analytics file '<filename>.analytics.json'.",
-          "nullable": true
+          "description": "The PromptFlow analytics endpoint resourceId. If it is empty, only transcription '<filename>.json' will be saved in output container. If the endpoint is valid, you will see both transcription file and the analytics file '<filename>.analytics.json'."
         }
       },
       "additionalProperties": false
@@ -330,8 +279,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the batch analytics registration.",
-          "nullable": true
+          "description": "The name of the batch analytics registration."
         },
         "batchTranscription": {
           "$ref": "#/definitions/BatchTranscriptionPropertiesPayload"
@@ -340,13 +288,11 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "nullable": true
+          }
         },
         "id": {
           "type": "string",
-          "description": "The unique id of the batch analytics registration in GUID format. This value is generated if not specified.",
-          "nullable": true
+          "description": "The unique id of the batch analytics registration in GUID format. This value is generated if not specified."
         },
         "storage": {
           "$ref": "#/definitions/StoragePropertiesPayloadV02Preview"
@@ -361,8 +307,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string",
-          "nullable": true
+          "type": "string"
         },
         "batchTranscription": {
           "$ref": "#/definitions/BatchTranscriptionPropertiesPayload"
@@ -371,15 +316,13 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "nullable": true
+          }
         },
         "status": {
           "$ref": "#/definitions/StatusPayload"
         },
         "id": {
-          "type": "string",
-          "nullable": true
+          "type": "string"
         },
         "storage": {
           "$ref": "#/definitions/StoragePropertiesPayloadV02Preview"
@@ -434,13 +377,11 @@
       "properties": {
         "minCount": {
           "type": "integer",
-          "format": "int32",
-          "nullable": true
+          "format": "int32"
         },
         "maxCount": {
           "type": "integer",
-          "format": "int32",
-          "nullable": true
+          "format": "int32"
         }
       },
       "additionalProperties": false
@@ -450,8 +391,7 @@
       "properties": {
         "self": {
           "type": "string",
-          "format": "uri",
-          "nullable": true
+          "format": "uri"
         }
       },
       "additionalProperties": false
@@ -483,8 +423,7 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/EntityReference"
-          },
-          "nullable": true
+          }
         }
       },
       "additionalProperties": false
@@ -493,25 +432,20 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string",
-          "nullable": true
+          "type": "string"
         },
         "title": {
-          "type": "string",
-          "nullable": true
+          "type": "string"
         },
         "status": {
           "type": "integer",
-          "format": "int32",
-          "nullable": true
+          "format": "int32"
         },
         "detail": {
-          "type": "string",
-          "nullable": true
+          "type": "string"
         },
         "instance": {
-          "type": "string",
-          "nullable": true
+          "type": "string"
         }
       },
       "additionalProperties": {}
@@ -548,8 +482,7 @@
           "$ref": "#/definitions/RegistrationStatus"
         },
         "message": {
-          "type": "string",
-          "nullable": true
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -585,8 +518,7 @@
         },
         "analyticsContainerName": {
           "type": "string",
-          "description": "The name of the container that stores the analytics results.",
-          "nullable": true
+          "description": "The name of the container that stores the analytics results."
         },
         "processedContainerName": {
           "minLength": 1,
@@ -610,12 +542,10 @@
       "properties": {
         "wordLevelTimestampsEnabled": {
           "type": "boolean",
-          "description": "Please enable this setting to generate audioTimings for each word if PII reduction is required in your flow.",
-          "nullable": true
+          "description": "Please enable this setting to generate audioTimings for each word if PII reduction is required in your flow."
         },
         "displayFormWordLevelTimestampsEnabled": {
-          "type": "boolean",
-          "nullable": true
+          "type": "boolean"
         },
         "channels": {
           "type": "array",
@@ -623,8 +553,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "description": "Channel 0 and 1 are set by default.",
-          "nullable": true
+          "description": "Channel 0 and 1 are set by default."
         },
         "punctuationMode": {
           "$ref": "#/definitions/PunctuationMode"
@@ -634,8 +563,7 @@
         },
         "diarizationEnabled": {
           "type": "boolean",
-          "description": "For mono channels, please enable this setting to enable speaker ID recognition. However, for stereo channels, diarization is currently not supported by the batch Speech Recognition API.",
-          "nullable": true
+          "description": "For mono channels, please enable this setting to enable speaker ID recognition. However, for stereo channels, diarization is currently not supported by the batch Speech Recognition API."
         },
         "diarization": {
           "$ref": "#/definitions/DiarizationProperties"
@@ -662,15 +590,26 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "nullable": true
+          }
         },
         "systemTopicResourceId": {
-          "type": "string",
-          "nullable": true
+          "type": "string"
         }
       },
       "additionalProperties": false
     }
-  }
+  },
+  "securityDefinitions": {
+    "subscription_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "description": "Provide your cognitive services subscription key here."
+    }
+  },
+  "security": [
+    {
+      "subscription_key": []
+    }
+  ]
 }
