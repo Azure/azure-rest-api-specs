@@ -599,7 +599,7 @@
           "BastionHosts"
         ],
         "operationId": "DisconnectActiveSessions",
-        "description": "Returns the list of currently active sessions on the Bastion.",
+        "description": "Returns the list of session state after disconnecting the specified active sessions.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupName"
@@ -624,12 +624,19 @@
               "$ref": "#/definitions/BastionSessionDeleteResult"
             }
           },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1112,4 +1119,3 @@
     }
   }
 }
-
