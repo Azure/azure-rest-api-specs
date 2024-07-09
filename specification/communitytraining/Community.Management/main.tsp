@@ -36,7 +36,7 @@ model CommunityTraining is TrackedResource<CommunityTrainingProperties> {
   @path
   name: string;
 
-  ...ResourceSku;
+  ...ResourceSkuProperty;
 }
 
 @doc("The status of the current operation.")
@@ -138,7 +138,12 @@ model CommunityTrainingProperties {
 @armResourceOperations
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;
-  create is ArmResourceCreateOrUpdateAsync<CommunityTraining>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    CommunityTraining,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchAsync<
     CommunityTraining,
     CommunityTrainingProperties

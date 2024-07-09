@@ -1,0 +1,36 @@
+parameters:
+  "service-dir":
+    default: "sdk/computefleet"
+  "service-directory-name":
+    default: "azurefleet"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azurefleet.json"
+    examples-directory: "examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.ComputeFleet"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    # Added to support generic model conversion from compute VM types
+    use-model-reader-writer: true
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-computefleet"
+    package-name: "{package-dir}"
+    generate-test: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-computefleet"
+    namespace: com.azure.resourcemanager.computefleet
+    service-name: Compute Fleet
+    examples-directory: "examples"
+    flavor: azure

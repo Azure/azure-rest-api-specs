@@ -13,29 +13,29 @@ using Foundations;
 namespace Face;
 
 alias IdentifyDocumentNote = """
-> [!NOTE]
->
-> *
->   * The algorithm allows more than one face to be identified independently at the same request, but no more than 10 faces.
->   * Each person could have more than one face, but no more than 248 faces.
->   * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
->   * Number of candidates returned is restricted by maxNumOfCandidatesReturned and confidenceThreshold. If no person is identified, the returned candidates will be an empty array.
-""";
+  > [!NOTE]
+  >
+  > *
+  >   * The algorithm allows more than one face to be identified independently at the same request, but no more than 10 faces.
+  >   * Each person could have more than one face, but no more than 248 faces.
+  >   * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+  >   * Number of candidates returned is restricted by maxNumOfCandidatesReturned and confidenceThreshold. If no person is identified, the returned candidates will be an empty array.
+  """;
 
 alias VerifyDocumentNote = """
-> [!NOTE]
->
-> *
->   * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
->   * For the scenarios that are sensitive to accuracy please make your own judgment.
-""";
+  > [!NOTE]
+  >
+  > *
+  >   * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+  >   * For the scenarios that are sensitive to accuracy please make your own judgment.
+  """;
 
 alias FindSimilarDocument = """
-Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.
-
-Find similar has two working modes, "matchPerson" and "matchFace". "matchPerson" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. "matchFace" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.
-
-""";
+  Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.
+  
+  Find similar has two working modes, "matchPerson" and "matchFace". "matchPerson" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. "matchFace" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.
+  
+  """;
 
 @returnsDoc("A successful call returns the identified candidate person(s) for each query face.")
 @sharedRoute
@@ -102,77 +102,66 @@ op FindSimilarOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOp
 
 interface FaceRecognitionOperations {
   @summary("Given query face's faceId, to search the similar-looking faces from a faceId array. A faceId array contains the faces created by Detect.")
-  @doc(
-    """
+  @doc("""
     ${FindSimilarDocument}
     The 'recognitionModel' associated with the query faceId should be the same as the 'recognitionModel' used by the target faceId array.
-    """
-  )
+    """)
   findSimilar is FindSimilarOperation<{
     @doc("An array of candidate faceIds. All of them are created by \"Detect\" and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000.")
     faceIds: uuid[];
   }>;
 
   @summary("Given query face's faceId, to search the similar-looking faces from a Face List. A 'faceListId' is created by Create Face List.")
-  @doc(
-    """
+  @doc("""
     ${FindSimilarDocument}
     The 'recognitionModel' associated with the query faceId should be the same as the 'recognitionModel' used by the target Face List.
-    """
-  )
+    """)
   findSimilarFromFaceList is FindSimilarOperation<{
     @doc("An existing user-specified unique candidate Face List, created in \"Create Face List\". Face List contains a set of persistedFaceIds which are persisted and will never expire.")
     faceListId: string;
   }>;
 
   @summary("Given query face's faceId, to search the similar-looking faces from a Large Face List. A 'largeFaceListId' is created by Create Large Face List.")
-  @doc(
-    """
+  @doc("""
     ${FindSimilarDocument}
     The 'recognitionModel' associated with the query faceId should be the same as the 'recognitionModel' used by the target Large Face List.
-    """
-  )
+    """)
   findSimilarFromLargeFaceList is FindSimilarOperation<{
     @doc("An existing user-specified unique candidate Large Face List, created in \"Create Large Face List\". Large Face List contains a set of persistedFaceIds which are persisted and will never expire.")
     largeFaceListId: string;
   }>;
 
   @summary("1-to-many identification to find the closest matches of the specific query person face from a Person Group.")
-  @doc(
-    """
+  @doc("""
     For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the Person Group (given by personGroupId), and return candidate person(s) for that face ranked by similarity confidence. The Person Group should be trained to make it ready for identification. See more in \"Train Person Group\".
     ${IdentifyDocumentNote}
     >   * Try \"Find Similar\" when you need to find similar faces from a Face List/Large Face List instead of a Person Group.
     >   * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target Person Group.
-    """
-  )
+    """)
   identifyFromPersonGroup is IdentifyOperation<{
     @doc("personGroupId of the target Person Group, created by \"Create Person Group\". Parameter personGroupId and largePersonGroupId should not be provided at the same time.")
     personGroupId: string;
   }>;
 
   @summary("1-to-many identification to find the closest matches of the specific query person face from a Large Person Group.")
-  @doc(
-    """
+  @doc("""
     For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the Large Person Group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The Large Person Group should be trained to make it ready for identification. See more in \"Train Large Person Group\".
     ${IdentifyDocumentNote}
     >   * Try \"Find Similar\" when you need to find similar faces from a Face List/Large Face List instead of a Person Group/Large Person Group.
     >   * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target Person Group or Large Person Group.
-    """
-  )
+    """)
   identifyFromLargePersonGroup is IdentifyOperation<{
     @doc("largePersonGroupId of the target Large Person Group, created by \"Create Large Person Group\". Parameter personGroupId and largePersonGroupId should not be provided at the same time.")
     largePersonGroupId: string;
   }>;
 
   @summary("1-to-many identification to find the closest matches of the specific query person face from a person directory personIds array.")
-  @doc(
-    """
+  @doc("""
     For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the Person Directory Persons (given by personIds), and return candidate person(s) for that face ranked by similarity confidence.
+    Passing personIds with an array with one element "*" can perform the operation over entire person directory.
     ${IdentifyDocumentNote}
     >   * The Identify operation can only match faces obtained with the same recognition model, that is associated with the query faces.
-    """
-  )
+    """)
   identifyFromPersonDirectory is IdentifyOperation<{
     @doc("Array of personIds created in Person Directory \"Create Person\". The valid number of personIds is between [1,30].")
     @minItems(1)
@@ -181,25 +170,21 @@ interface FaceRecognitionOperations {
   }>;
 
   @summary("1-to-many identification to find the closest matches of the specific query person face from a Dynamic Person Group.")
-  @doc(
-    """
+  @doc("""
     For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the Dynamic Person Group (given by dynamicPersonGroupId), and return candidate person(s) for that face ranked by similarity confidence.
     ${IdentifyDocumentNote}
     >   * The Identify operation can only match faces obtained with the same recognition model, that is associated with the query faces.
-    """
-  )
+    """)
   identifyFromDynamicPersonGroup is IdentifyOperation<{
     @doc("DynamicPersonGroupId of the target PersonDirectory DynamicPersonGroup to match against.")
     dynamicPersonGroupId: string;
   }>;
 
   @summary("Verify whether two faces belong to a same person.")
-  @doc(
-    """
+  @doc("""
     ${VerifyDocumentNote}
     >   * The 'recognitionModel' associated with the both faces should be the same.
-    """
-  )
+    """)
   verifyFaceToFace is VerifyOperation<{
     @doc("The faceId of one face, come from \"Detect\".")
     faceId1: uuid;
@@ -209,12 +194,10 @@ interface FaceRecognitionOperations {
   }>;
 
   @summary("Verify whether a face belongs to a person in a Person Group.")
-  @doc(
-    """
+  @doc("""
     ${VerifyDocumentNote}
     >   * The 'recognitionModel' associated with the query face should be the same as the 'recognitionModel' used by the Person Group.
-    """
-  )
+    """)
   verifyFromPersonGroup is VerifyOperation<{
     @doc("The faceId of the face, come from \"Detect\".")
     faceId: uuid;
@@ -227,12 +210,10 @@ interface FaceRecognitionOperations {
   }>;
 
   @summary("Verify whether a face belongs to a person in a Large Person Group.")
-  @doc(
-    """
+  @doc("""
     ${VerifyDocumentNote}
     >   * The 'recognitionModel' associated with the query face should be the same as the 'recognitionModel' used by the Large Person Group.
-    """
-  )
+    """)
   verifyFromLargePersonGroup is VerifyOperation<{
     @doc("The faceId of the face, come from \"Detect\".")
     faceId: uuid;
@@ -244,12 +225,10 @@ interface FaceRecognitionOperations {
     personId: uuid;
   }>;
 
-  @doc(
-    """
+  @doc("""
     ${VerifyDocumentNote}
     >   * The Verify operation can only match faces obtained with the same recognition model, that is associated with the query face.
-    """
-  )
+    """)
   @summary("Verify whether a face belongs to a person in Person Directory.")
   verifyFromPersonDirectory is VerifyOperation<{
     @doc("The faceId of the face, come from \"Detect\".")

@@ -1,9 +1,3 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -24,11 +18,7 @@ model Monitor is TrackedResource<MonitorProperties> {
   @visibility("read")
   name: string;
 
-  /**
-   * The managed service identities assigned to this resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "'identity' is a valid property for a tracked resource."
-  identity?: ManagedServiceIdentity;
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
@@ -41,12 +31,17 @@ interface Monitors {
   /**
    * Creates a SAP monitor for the specified subscription, resource group, and resource name.
    */
-  create is ArmResourceCreateOrReplaceAsync<Monitor>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    Monitor,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Patches the Tags field of a SAP monitor for the specified subscription, resource group, and SAP monitor name.
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<Monitor, UpdateMonitorRequest>;
 
   /**

@@ -1,14 +1,5 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
-
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.PortalServices;
@@ -32,16 +23,10 @@ model CopilotSettingsResource is ProxyResource<CopilotSettingsProperties> {
 @armResourceOperations
 interface CopilotSettings {
   get is ArmResourceRead<CopilotSettingsResource>;
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
-    CopilotSettingsResource,
-    TenantBaseParameters
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<CopilotSettingsResource>;
   update is ArmResourcePatchSync<
     CopilotSettingsResource,
     CopilotSettingsProperties
   >;
-  delete is ArmResourceDeleteSync<
-    CopilotSettingsResource,
-    TenantBaseParameters
-  >;
+  delete is ArmResourceDeleteSync<CopilotSettingsResource>;
 }

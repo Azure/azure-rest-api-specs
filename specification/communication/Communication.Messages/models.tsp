@@ -328,7 +328,7 @@ model CommunicationChannel {
 @doc("A data stream.")
 model MessageDataStream {
   @key
-  @visibility("read")
+  @visibility("none") // this model is only used as a parameter
   @doc("The stream ID.")
   @clientName("mediaId", "java")
   id: string;
@@ -373,4 +373,11 @@ enum Versions {
   @doc("Azure Communication Messages 2024-02-01 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
+}
+
+@doc("Notification messages send request body.")
+model NotificationMessagesSendRequestBody {
+  @doc("Details of the message to send.")
+  @bodyRoot
+  body: NotificationContent;
 }

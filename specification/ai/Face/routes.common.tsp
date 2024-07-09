@@ -1,11 +1,13 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.common.tsp";
 import "./models.detect.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Traits;
 using Foundations;
@@ -66,6 +68,7 @@ op AddFace<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
 op AddFaceFromUrl<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
   TFace,
   AddFaceOptions & {
+    @clientName("uri", "csharp")
     @doc("URL of input image.")
     url: url;
   },

@@ -18,7 +18,6 @@ import "./Environment.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
@@ -130,7 +129,7 @@ enum Versions {
 @segmentOf(TResource)
 @armResourceList(TResource)
 op ArmResourceListByParent<
-  TResource extends ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>,
   TParentName extends valueof string = "",
   TParentFriendlyName extends valueof string = ""
@@ -151,7 +150,7 @@ op ArmResourceListByParent<
 @get
 @armResourceRead(TResource)
 op ArmResourceRead<
-  TResource extends ArmResource,
+  TResource extends Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
@@ -169,25 +168,25 @@ op ArmResourceRead<
 @armResourceCreateOrUpdate(TResource)
 @put
 op ArmResourceCreateOrReplaceSync<
-  TResource extends ArmResource,
+  TResource extends Foundations.Resource,
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   resource: TResource,
 ): ArmResourceUpdatedResponseWithEtag<TResource> | ArmResourceCreatedSyncResponseWithEtag<TResource> | ErrorResponse;
 
 @doc("Resource '{name}' create operation succeeded", TResource)
-model ArmResourceCreatedSyncResponseWithEtag<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+model ArmResourceCreatedSyncResponseWithEtag<TResource extends Foundations.Resource>
   is Body<TResource> {
   ...CreatedResponse;
   ...Azure.Core.EtagResponseEnvelope;
 }
 
 @doc("Resource '{name}' update operation succeeded", TResource)
-model ArmResourceUpdatedResponseWithEtag<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+model ArmResourceUpdatedResponseWithEtag<TResource extends Foundations.Resource>
   is ArmResponseWithEtag<TResource>;
 
 @doc("Azure operation completed successfully.")

@@ -26,6 +26,12 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Data.Versions.v1_preview)
   v1_preview: "2023-08-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  @useDependency(LiftrBase.Data.Versions.v1_preview)
+  v1: "2023-08-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -41,13 +47,18 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
   @path
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...Legacy.ManagedServiceIdentityV4Property;
 }
 
 @armResourceOperations
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<OrganizationResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    OrganizationResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmResourcePatchAsync<OrganizationResource, OrganizationProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
