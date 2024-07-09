@@ -1122,6 +1122,25 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "A list of private link resources",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "TagsResource": {
       "type": "object",
       "properties": {
