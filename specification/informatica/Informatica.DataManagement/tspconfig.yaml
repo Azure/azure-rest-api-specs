@@ -13,12 +13,16 @@ options:
     package-dir: "azure-mgmt-informaticadatamanagement"
     package-name: "{package-dir}"
     flavor: "azure"
-  "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-informaticadatamanagement"
-    flavor: "azure"
-    namespace: "com.azure.resourcemanager.informaticadatamanagement"
-    service-name: "Informatica DataManagement"
-    examples-directory: "examples"
+  # "@azure-tools/typespec-java":
+  #   package-dir: "azure-resourcemanager-informaticadatamanagement"
+  #   flavor: "azure"
+  #   namespace: "com.azure.resourcemanager.informaticadatamanagement"
+  #   service-name: "Informatica DataManagement"
+  #   examples-directory: "examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    clear-output-folder: true
+    namespace: "Azure.ResourceManager.InformaticaDataManagement"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

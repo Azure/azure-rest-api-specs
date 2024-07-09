@@ -42,10 +42,11 @@ interface FirewallRules {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
-    Response = ArmAcceptedLroResponse<"Resource operation accepted."> | ArmResourceUpdatedResponse<FirewallRule> | ArmResourceCreatedResponse<
+    Response = ArmResourceUpdatedResponse<FirewallRule> | ArmResourceCreatedResponse<
       FirewallRule,
       LroHeaders = {}
-    >
+    > | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FirewallRule> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
   /** Deletes a mongo cluster firewall rule. */
   delete is ArmResourceDeleteWithoutOkAsync<FirewallRule>;
