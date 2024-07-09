@@ -11,6 +11,7 @@ using TypeSpec.Http;
 
 namespace AzureHealthInsights;
 
+@TypeSpec.Versioning.removed(AzureHealthInsights.ApiVersion.v2024_04_01)
 interface PatientTimeline {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Service uses a jobId in the path"
   @summary("Get Patient Timeline job details")
@@ -18,7 +19,7 @@ interface PatientTimeline {
   @doc("Gets the status and details of the Patient Timeline job.")
   @get
   @route("/patient-timeline/jobs/{id}")
-  getJob is HealthInsightsLongRunningPollOperation<PatientTimelineResult>;
+  getJob is HealthInsightsLongRunningPollOperation<BodyParameter<PatientTimelineResult>>;
 
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"

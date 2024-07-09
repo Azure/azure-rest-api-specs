@@ -281,6 +281,9 @@
         ],
         "description": "Deletes the consent identified by the given ID.",
         "operationId": "Consents_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/PathId"
@@ -854,6 +857,9 @@
         ],
         "description": "Deletes the model identified by the given ID.",
         "operationId": "Models_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/PathId"
@@ -1040,6 +1046,9 @@
         ],
         "description": "Deletes the endpoint identified by the given ID.",
         "operationId": "Endpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/PathUuid"
@@ -1376,6 +1385,9 @@
         ],
         "description": "Deletes the personal voice identified by the given ID.",
         "operationId": "PersonalVoices_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/PathId"
@@ -2017,11 +2029,11 @@
     "ModelCapability": {
       "description": "Model capability",
       "enum": [
-        "InstanceVoice"
+        "PersonalVoice"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ModelKind",
+        "name": "ModelCapability",
         "modelAsString": true
       }
     },

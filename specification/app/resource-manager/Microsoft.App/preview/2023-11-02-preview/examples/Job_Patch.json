@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "jobName": "testcontainerAppsJob0",
+    "api-version": "2023-11-02-preview",
+    "JobEnvelope": {
+      "properties": {
+        "configuration": {
+          "replicaTimeout": 10,
+          "replicaRetryLimit": 10,
+          "manualTriggerConfig": {
+            "replicaCompletionCount": 1,
+            "parallelism": 4
+          },
+          "triggerType": "Manual"
+        },
+        "template": {
+          "containers": [
+            {
+              "image": "repo/testcontainerAppsJob0:v1",
+              "name": "testcontainerAppsJob0",
+              "probes": [
+                {
+                  "type": "Liveness",
+                  "httpGet": {
+                    "path": "/health",
+                    "port": 8080,
+                    "httpHeaders": [
+                      {
+                        "name": "Custom-Header",
+                        "value": "Awesome"
+                      }
+                    ]
+                  },
+                  "initialDelaySeconds": 3,
+                  "periodSeconds": 3
+                }
+              ]
+            }
+          ],
+          "initContainers": [
+            {
+              "image": "repo/testcontainerAppsJob0:v4",
+              "name": "testinitcontainerAppsJob0",
+              "resources": {
+                "cpu": 0.2,
+                "memory": "100Mi"
+              },
+              "command": [
+                "/bin/sh"
+              ],
+              "args": [
+                "-c",
+                "while true; do echo hello; sleep 10;done"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/locations/eastus/containerappsjobOperationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2023-11-02-preview"
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0",
+        "name": "testcontainerAppsJob0",
+        "type": "Microsoft.App/jobs",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "configuration": {
+            "replicaTimeout": 10,
+            "replicaRetryLimit": 10,
+            "manualTriggerConfig": {
+              "replicaCompletionCount": 1,
+              "parallelism": 4
+            },
+            "triggerType": "Manual"
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerAppsJob0:v4",
+                "name": "testcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerAppsJob0:v4",
+                "name": "testinitcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

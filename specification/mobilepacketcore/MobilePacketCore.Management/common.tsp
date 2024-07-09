@@ -1,17 +1,6 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/openapi";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
-using OpenAPI;
 
 namespace Microsoft.MobilePacketCore;
 
@@ -34,41 +23,42 @@ namespace Microsoft.MobilePacketCore;
 @armResourceCreateOrUpdate(TResource)
 @put
 op ArmResourceCreateOrUpdate2Async<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
   @doc("Resource create parameters.")
-  @body
+  @bodyRoot
   resource: TResource,
 ): ArmUpdatedResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
 
 @doc("ARM resource update successful")
-model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.ArmResource>
+model ArmUpdatedResponse<TResource extends Azure.ResourceManager.Foundations.Resource>
   is ArmResponse<TResource>;
 
 @doc("Provisioning state of the resource")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Resource is getting provisioned")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Resource is updating")
-  Updating,
+  Updating: "Updating",
 
   @doc("Resource is getting deleted")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Resource has been accepted")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("ARM resource ID of a cluster.")
 scalar ClusterServiceIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.MobilePacketCore/clusterServices",
     }
@@ -76,7 +66,7 @@ scalar ClusterServiceIdProperty
 
 @doc("ARM resource ID of a VNF Agent deployment.")
 scalar VnfAgentDeploymentIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.MobilePacketCore/vnfAgentDeployments",
     }
@@ -84,7 +74,7 @@ scalar VnfAgentDeploymentIdProperty
 
 @doc("ARM resource ID of a custom location.")
 scalar CustomLocationIdProperty
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ExtendedLocation/customLocations",
     }
@@ -102,30 +92,36 @@ model OperationalStatus {
 }
 
 @doc("Infrastructure Type Definitions")
-enum InfrastructureType {
+union InfrastructureType {
+  string,
+
   @doc("Azure Core")
-  AzureCore,
+  "AzureCore",
 
   @doc("Azure Operator Nexus")
-  AzureOperatorNexus,
+  "AzureOperatorNexus",
 }
 
 @doc("Deployment Type Definitions")
-enum SkuDeploymentType {
+union SkuDeploymentType {
+  string,
+
   @doc("Production Deployment")
-  Production,
+  "Production",
 
   @doc("Lab Deployment")
-  Lab,
+  "Lab",
 }
 
 @doc("Cluster Type Definitions")
-enum ClusterType {
+union ClusterType {
+  string,
+
   @doc("Azure Kubernetes Service")
-  Aks,
+  Aks: "Aks",
 
   @doc("Azure Operator Nexus Kubernetes Service")
-  NexusAks,
+  NexusAks: "NexusAks",
 }
 
 @doc("Usage SKU Definition")

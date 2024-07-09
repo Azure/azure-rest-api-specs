@@ -1,0 +1,101 @@
+{
+  "operationId": "Builders_ListBySubscription",
+  "title": "Builders_ListBySubscription_0",
+  "parameters": {
+    "api-version": "2023-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.App/builders/testBuilder1",
+            "name": "testBuilder1",
+            "type": "Microsoft.App/builders",
+            "location": "eastus",
+            "identity": {
+              "type": "SystemAssigned,UserAssigned",
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {
+                  "clientId": "00000000-0000-0000-0000-000000000000",
+                  "principalId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/managedEnvironments/testEnv",
+              "containerRegistries": [
+                {
+                  "containerRegistryServer": "test.azurecr.io",
+                  "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+                },
+                {
+                  "containerRegistryServer": "test2.azurecr.io",
+                  "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "sample@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "2022-10-11T11:05:51.4940669Z",
+              "lastModifiedBy": "sample@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
+            },
+            "tags": {
+              "key": "value"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg2/providers/Microsoft.App/builders/testBuilder2",
+            "name": "testBuilder2",
+            "type": "Microsoft.App/builders",
+            "location": "eastus",
+            "identity": {
+              "type": "SystemAssigned,UserAssigned",
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {
+                  "clientId": "00000000-0000-0000-0000-000000000000",
+                  "principalId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/managedEnvironments/testEnv",
+              "containerRegistries": [
+                {
+                  "containerRegistryServer": "test.azurecr.io",
+                  "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+                },
+                {
+                  "containerRegistryServer": "test2.azurecr.io",
+                  "identityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "sample@microsoft.com",
+              "createdByType": "User",
+              "createdAt": "2022-10-11T11:05:51.4940669Z",
+              "lastModifiedBy": "sample@microsoft.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-10-11T11:05:51.4940669Z"
+            },
+            "tags": {
+              "key": "value"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
