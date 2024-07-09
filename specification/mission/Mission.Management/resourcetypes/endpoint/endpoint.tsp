@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -15,25 +14,30 @@ using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
+@doc("Microsoft Mission Resource Provider management API.")
+namespace Microsoft.Mission;
+
 @doc("Endpoint Protocol Enum")
-enum EndpointProtocol {
+union EndpointProtocol {
   @doc("EndpointProtocol Type ANY")
-  ANY,
+  ANY: "ANY",
 
   @doc("EndpointProtocol Type TCP")
-  TCP,
+  TCP: "TCP",
 
   @doc("EndpointProtocol Type UDP")
-  UDP,
+  UDP: "UDP",
 
   @doc("EndpointProtocol Type ICMP")
-  ICMP,
+  ICMP: "ICMP",
 
   @doc("EndpointProtocol Type ESP")
-  ESP,
+  ESP: "ESP",
 
   @doc("EndpointProtocol Type AH")
-  AH,
+  AH: "AH",
+
+  string,
 }
 
 @doc("EndpointRule Properties")

@@ -2,7 +2,7 @@
   "title": "VirtualEnclave_CreateOrUpdate",
   "operationId": "VirtualEnclave_CreateOrUpdate",
   "parameters": {
-    "api-version": "2024-01-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c",
     "resourceGroupName": "rgopenapi",
     "virtualEnclaveName": "TestMyEnclave",
@@ -11,7 +11,15 @@
         "provisioningState": "Succeeded",
         "enclaveVirtualNetwork": {
           "networkSize": "small",
-          "customCidrRange": "10.0.0.0/24"
+          "customCidrRange": "10.0.0.0/24",
+          "subnetConfigurations": [
+            {
+              "name": "test",
+              "networkPrefixSize": 26
+            }
+          ],
+          "allowSubnetCommunication": true,
+          "connectToAzureServices": true
         },
         "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/communities/TestMyCommunity",
         "enclaveDefaultSettings": {
@@ -23,7 +31,12 @@
           ],
           "diagnosticDestination": "Both"
         },
-        "resourceCollection": []
+        "resourceCollection": [],
+        "maintenanceModeConfiguration": {
+          "mode": "Off",
+          "principalObjectIds": [],
+          "justification": "Off"
+        }
       },
       "tags": {
         "Tag1": "Value1"
@@ -38,7 +51,15 @@
           "provisioningState": "Succeeded",
           "enclaveVirtualNetwork": {
             "networkSize": "small",
-            "customCidrRange": "10.0.0.0/24"
+            "customCidrRange": "10.0.0.0/24",
+            "subnetConfigurations": [
+              {
+                "name": "test",
+                "networkPrefixSize": 26
+              }
+            ],
+            "allowSubnetCommunication": true,
+            "connectToAzureServices": true
           },
           "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/communities/TestMyCommunity",
           "enclaveDefaultSettings": {
@@ -50,7 +71,12 @@
             ],
             "diagnosticDestination": "Both"
           },
-          "resourceCollection": []
+          "resourceCollection": [],
+          "maintenanceModeConfiguration": {
+            "mode": "Off",
+            "principalObjectIds": [],
+            "justification": "Off"
+          }
         },
         "tags": {
           "Tag1": "Value1"
@@ -78,7 +104,15 @@
           "provisioningState": "Succeeded",
           "enclaveVirtualNetwork": {
             "networkSize": "small",
-            "customCidrRange": "10.0.0.0/24"
+            "customCidrRange": "10.0.0.0/24",
+            "subnetConfigurations": [
+              {
+                "name": "test",
+                "networkPrefixSize": 26
+              }
+            ],
+            "allowSubnetCommunication": true,
+            "connectToAzureServices": true
           },
           "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/communities/TestMyCommunity",
           "enclaveDefaultSettings": {
@@ -90,7 +124,12 @@
             ],
             "diagnosticDestination": "Both"
           },
-          "resourceCollection": []
+          "resourceCollection": [],
+          "maintenanceModeConfiguration": {
+            "mode": "Off",
+            "principalObjectIds": [],
+            "justification": "Off"
+          }
         },
         "tags": {
           "Tag1": "Value1"

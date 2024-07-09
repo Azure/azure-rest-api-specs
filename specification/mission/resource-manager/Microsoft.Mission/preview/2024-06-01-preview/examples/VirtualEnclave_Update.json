@@ -2,7 +2,7 @@
   "title": "VirtualEnclave_Update",
   "operationId": "VirtualEnclave_Update",
   "parameters": {
-    "api-version": "2024-01-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "CA1CB369-DD26-4DB2-9D43-9AFEF0F22093",
     "resourceGroupName": "rgopenapi",
     "virtualEnclaveName": "TestMyEnclave",
@@ -13,7 +13,15 @@
       "properties": {
         "enclaveVirtualNetwork": {
           "networkSize": "small",
-          "customCidrRange": "10.0.0.0/24"
+          "customCidrRange": "10.0.0.0/24",
+          "subnetConfigurations": [
+            {
+              "name": "test",
+              "networkPrefixSize": 26
+            }
+          ],
+          "allowSubnetCommunication": true,
+          "connectToAzureServices": true
         },
         "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/communities/TestMyCommunity",
         "enclaveDefaultSettings": {
@@ -27,7 +35,12 @@
         },
         "resourceCollection": [
           "g"
-        ]
+        ],
+        "maintenanceModeConfiguration": {
+          "mode": "Off",
+          "principalObjectIds": [],
+          "justification": "Off"
+        }
       }
     }
   },
@@ -38,7 +51,15 @@
           "provisioningState": "Succeeded",
           "enclaveVirtualNetwork": {
             "networkSize": "small",
-            "customCidrRange": "10.0.0.0/24"
+            "customCidrRange": "10.0.0.0/24",
+            "subnetConfigurations": [
+              {
+                "name": "test",
+                "networkPrefixSize": 26
+              }
+            ],
+            "allowSubnetCommunication": true,
+            "connectToAzureServices": true
           },
           "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/communities/TestMyCommunity",
           "enclaveDefaultSettings": {
@@ -52,7 +73,12 @@
           },
           "resourceCollection": [
             "g"
-          ]
+          ],
+          "maintenanceModeConfiguration": {
+            "mode": "Off",
+            "principalObjectIds": [],
+            "justification": "Off"
+          }
         },
         "tags": {
           "Tag1": "Value1"

@@ -2,7 +2,7 @@
   "title": "VirtualEnclave_ListBySubscription",
   "operationId": "VirtualEnclave_ListBySubscription",
   "parameters": {
-    "api-version": "2024-01-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "CA1CB369-DD26-4DB2-9D43-9AFEF0F22093"
   },
   "responses": {
@@ -14,7 +14,19 @@
               "provisioningState": "Succeeded",
               "enclaveVirtualNetwork": {
                 "networkSize": "small",
-                "customCidrRange": "10.0.0.0/24"
+                "customCidrRange": "10.0.0.0/24",
+                "subnetConfigurations": [
+                  {
+                    "name": "test",
+                    "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.KeyVault/vaults/TestMyKeyVault1",
+                    "networkPrefixSize": 26,
+                    "addressPrefix": "10.0.0.0/26",
+                    "networkSecurityGroupId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.KeyVault/vaults/TestMyKeyVault1",
+                    "subnetDelegation": null
+                  }
+                ],
+                "allowSubnetCommunication": true,
+                "connectToAzureServices": true
               },
               "communityResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/communities/TestMyCommunity",
               "enclaveDefaultSettings": {
@@ -28,7 +40,12 @@
               },
               "resourceCollection": [
                 "g"
-              ]
+              ],
+              "maintenanceModeConfiguration": {
+                "mode": "Off",
+                "principalObjectIds": [],
+                "justification": "Off"
+              }
             },
             "tags": {
               "Tag1": "Value1"
