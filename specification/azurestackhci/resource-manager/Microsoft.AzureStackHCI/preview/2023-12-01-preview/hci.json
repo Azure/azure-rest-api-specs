@@ -334,13 +334,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "ClusterJobs_Get_AddServerJob": {
+          "ClusterJobs_ListByCluster": {
             "$ref": "./examples/ClusterJobs_ListByCluster.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1575,6 +1575,22 @@
           }
         ]
       }
+    },
+    "EdgeDevice": {
+      "type": "object",
+      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "EdgeDeviceJob": {
       "type": "object",
