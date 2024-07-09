@@ -23,6 +23,11 @@ model AzureMonitorWorkspace
   @path
   @segment("accounts")
   name: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "ETag is not included in TrackedResource."
+  @doc("Resource entity tag (ETag)")
+  @visibility("read")
+  etag?: string;
 }
 
 @doc("Properties that need to be specified to create a new workspace.")

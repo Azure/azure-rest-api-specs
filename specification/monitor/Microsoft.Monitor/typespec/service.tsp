@@ -23,11 +23,13 @@ namespace Microsoft.Monitor;
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
   @doc("API Version 2023-10-01-preview")
   v2023_10_01_preview: "2023-10-01-preview",
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
   @doc("Version 2024-01-01-preview of Microsoft.Monitor")
   v2024_01_01_preview: "2024-01-01-preview",
 
