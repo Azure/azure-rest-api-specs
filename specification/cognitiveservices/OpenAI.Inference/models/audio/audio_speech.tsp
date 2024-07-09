@@ -98,3 +98,15 @@ model SpeechGenerationResponse {
   @bodyRoot
   audio: bytes;
 }
+
+/**
+ * Get generate speech from text body.
+ */
+@added(ServiceApiVersions.v2024_02_15_Preview)
+model GenerateSpeechFromTextBody {
+  /**
+   * A representation of the request options that control the behavior of a text-to-speech operation.
+   */
+  @bodyRoot
+  body: SpeechGenerationOptions;
+}

@@ -42,3 +42,32 @@ interface OpenAIClient {
 
   getEmbeddings is Azure.OpenAI.getEmbeddings;
 }
+
+@@clientName(Azure.OpenAI.GenerateSpeechFromTextBody.body,
+  "SpeechGenerationOptions",
+  "csharp,java"
+);
+@@clientName(Azure.OpenAI.GetAudioTranscriptionBody.body,
+  "AudioTranscriptionOptions",
+  "csharp,java"
+);
+@@clientName(Azure.OpenAI.GetAudioTranslationBody.body,
+  "AudioTranslationOptions",
+  "csharp,java"
+);
+@@clientName(Azure.OpenAI.GetChatCompletionsBody.body,
+  "ChatCompletionsOptions",
+  "csharp,java"
+);
+@@clientName(Azure.OpenAI.GetCompletionsBody.body,
+  "CompletionsOptions",
+  "csharp,java"
+);
+@@clientName(Azure.OpenAI.GetEmbeddingsBody.body,
+  "EmbeddingsOptions",
+  "csharp,java"
+);
+@@clientName(Azure.OpenAI.GetImageGenerationsBody.body,
+  "ImageGenerationOptions",
+  "csharp,java"
+);
