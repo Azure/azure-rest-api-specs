@@ -1195,6 +1195,9 @@ model VirtualHardDiskUploadStatus {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
   @doc("The uploaded sized of the virtual hard disk in MB")
   uploadedSizeInMB?: int64;
+
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
 }
 
 @doc("The virtual hard disk resource patch definition.")
