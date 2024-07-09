@@ -194,7 +194,7 @@
     },
     "/route/snapToRoads": {
       "post": {
-        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n>[!Important]\n> The GPS points must be within 2.5 kilometer of each other.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates points that aligns with existing roadways on a map. This process, known as \"snapping to roads\", produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n>[!Important]\n> The GPS points must be within 2.5 kilometer of each other.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Route_PostSnapToRoads",
         "consumes": [
           "application/geo+json"
@@ -629,7 +629,7 @@
           }
         },
         "interpolate": {
-          "description": "Specifies whether to return additional points between the snapped points to complete the full route path that smoothly follows the road geometry. \n\nThe interpolated points will have \"isInterpolate:true\" in the response which can be used to identify the snapped points from interpolated points.",
+          "description": "Specifies whether to return additional points between the snapped points to complete the full route path that smoothly follows the road geometry. \n\nThe interpolated points will have `isInterpolate:true` in the response which can be used to identify the snapped points from interpolated points.",
           "type": "boolean",
           "default": false
         },
@@ -843,7 +843,7 @@
       "description": "A valid `GeoJSON` Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "properties": {
         "type": {
-          "description": "Specifies the geometry type for the 'GeoJSON` Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
+          "description": "Specifies the geometry type for the `GeoJSON` Geometry object. For more information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
           "type": "string"
         }
       },
@@ -857,7 +857,7 @@
       "description": "A valid `GeoJSON` Geometry object. Please refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "properties": {
         "type": {
-          "description": "Specifies the geometry type for the 'GeoJSON` Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+          "description": "Specifies the geometry type for the `GeoJSON` Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
           "type": "string"
         }
       },
