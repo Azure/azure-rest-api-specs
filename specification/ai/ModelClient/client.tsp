@@ -118,7 +118,3 @@ interface Client3 {
   embed is AI.Model.getImageEmbeddings;
   getModelInfo is AI.Model.getModelInfo;
 }
-
-// The following is to update names as necessary for specific programming languages.
-// Done in this file to provide a single point of reference for any renames.
-@@clientName(ModelClient.StreamingChatChoiceUpdate.delta, "InternalStreamingDeltaMessage", "csharp");
