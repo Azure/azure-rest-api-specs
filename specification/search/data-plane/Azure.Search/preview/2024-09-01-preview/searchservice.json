@@ -6346,6 +6346,12 @@
           "description": "The name of the kind of compression method being configured for use with vector search.",
           "x-nullable": false
         },
+        "storeOriginalVectors": {
+          "type": "boolean",
+          "default": true,
+          "description": "If set to false, the original full-precision vectors are not stored. This will save much storage, but rerankWithOriginalVectors can't be set as true (please refer to the documents about requirements of the vectors to ensure quality of search). This setting can't be changed.",
+          "x-nullable": true
+        },
         "rerankWithOriginalVectors": {
           "type": "boolean",
           "default": true,
