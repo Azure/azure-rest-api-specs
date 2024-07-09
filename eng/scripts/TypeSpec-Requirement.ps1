@@ -6,7 +6,11 @@ param (
   [string] $TargetCommitish = "HEAD",
   [Parameter(Position = 2)]
   [string] $SpecType = "data-plane|resource-manager",
-  [string] $CheckAllUnder
+  [string] $CheckAllUnder,
+  # Reserved for testing.  Call using:
+  # $ pwsh -Command '... -_ResponseCache @{"url"=200}'
+  [Parameter(DontShow)]
+  [hashtable] $_ResponseCache = @{}
 )
 Set-StrictMode -Version 3
 
@@ -59,7 +63,7 @@ $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
 $filesToCheck = $CheckAllUnder ?
-  (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative | ForEach-Object { $_ -replace '\\', '/' }) :
+  (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative -RelativeBasePath $repoPath | ForEach-Object { $_ -replace '\\', '/' }) :
   (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish))
 
 $filesToCheck = $filesToCheck.Where({
@@ -72,7 +76,7 @@ if (!$filesToCheck) {
 }
 else {
   # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
-  $responseCache = @{}
+  $responseCache = $_ResponseCache
 
   # - Forward slashes on both Linux and Windows
   # - May be nested 4 or 5 levels deep, perhaps even deeper
@@ -107,16 +111,15 @@ else {
       if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
         LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
 
-        if ($file -match "specification/(?<rpFolder>[^/]+)/") {
-          $rpFolder = $Matches["rpFolder"];
-          $tspConfigs = @(Get-ChildItem -Path (Join-Path $repoPath "specification" $rpFolder) -Recurse -File
-            | Where-Object { $_.Name -eq "tspconfig.yaml" })
+        if ($file -match "^.*specification/[^/]+/") {
+          $rpFolder = $Matches[0];
+          $tspConfigs = @(Get-ChildItem -Path $rpFolder -Recurse -File | Where-Object { $_.Name -eq "tspconfig.yaml" })
 
           if ($tspConfigs) {
-            LogInfo "  Folder 'specification/$rpFolder' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
+            LogInfo "  Folder '$rpFolder' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
           }
           else {
-            LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$rpFolder' contains no files named 'tspconfig.yaml'." `
+            LogError ("OpenAPI was generated from TypeSpec, but folder '$rpFolder' contains no files named 'tspconfig.yaml'." `
                 + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
             LogJobFailure
             exit 1
@@ -176,12 +179,12 @@ else {
     if ($responseStatus -eq 200) {
       LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
     }
-    elseif ($response.StatusCode -eq 404) {
+    elseif ($responseStatus -eq 404) {
       LogInfo "  Branch 'main' does not contain path '$servicePath/stable', so spec is new and must use TypeSpec"
       $pathsWithErrors += $file
     }
     else {
-      LogError "Unexpected response from ${logUrlToStableFolder}: ${response.StatusCode}"
+      LogError "Unexpected response from ${logUrlToStableFolder}: ${responseStatus}"
       LogJobFailure
       exit 1
     }
