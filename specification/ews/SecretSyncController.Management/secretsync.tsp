@@ -19,10 +19,6 @@ model SecretSync is TrackedResource<SecretSyncProperties> {
 
 @doc("The properties of the SecretSync instance.")
 model SecretSyncProperties {
-  @doc("Provisioning state of the SecretSync instance.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-
   // Add patterns TODO 28520548 https://msazure.visualstudio.com/One/_workitems/edit/28520548
   @doc("The name of the matching secret provider class instance.")
   @minLength(1)
@@ -37,18 +33,22 @@ model SecretSyncProperties {
   @doc("The type of Kubernetes secret to store the cloud secret store data as.")
   kubernetesSecretType: KubernetesSecretType;
 
-  @doc("List of mappings between objects in the cloud secret store and corresponding Kubernetes secrets.")
-  @OpenAPI.extension("x-ms-identifiers", [])
-  objectSecretMapping: KubernetesSecretObjectMapping[];
-
   @doc("The ForceSynchronization field can be used to force a secret to synchronize. By changing the value in this field, a synchronization operation is triggered for this SecretSync instance.")
   @pattern("^[A-Za-z0-9]([-A-Za-z0-9]+([-._a-zA-Z0-9]?[A-Za-z0-9])*)?")
   @maxLength(253)
   forceSynchronization?: string;
 
+  @doc("List of mappings between objects in the cloud secret store and corresponding Kubernetes secrets.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  objectSecretMapping: KubernetesSecretObjectMapping[];
+
   @visibility("read")
   @doc("The status object contains the state of the secret synchronization process for this SecretSync instance.")
   status?: SecretSyncStatus;
+
+  @doc("Provisioning state of the SecretSync instance.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Properties defining the mapping between a cloud secret store object and a Kubernetes Secret.")
@@ -83,14 +83,13 @@ union KubernetesSecretType {
 
 @doc("SecretSyncStatus defines the observed state of the secret synchronization process.")
 model SecretSyncStatus {
-  @OpenAPI.extension("x-ms-identifiers", [])
-
   // Needs better doc TODO #28507605 https://msazure.visualstudio.com/One/_workitems/edit/28507605
-  @doc("Condition contains details for one aspect of the current state of this API Resource")
-  conditions?: SecretSyncCondition[];
-
   @doc("LastSuccessfulSyncTime represents the last time the secret was retrieved from the Provider and updated.")
   lastSuccessfulSyncTime?: utcDateTime;
+
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @doc("Condition contains details for one aspect of the current state of this API Resource")
+  conditions?: SecretSyncCondition[];
 
   // Not including syncHash at the moment for security concerns TODO #28507544 https://msazure.visualstudio.com/One/_workitems/edit/28507544
 }

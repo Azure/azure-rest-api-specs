@@ -20,10 +20,6 @@ model AzureKeyVaultSecretProviderClass
 
 @doc("The properties of the AzureKeyVaultSecretProviderClass.")
 model AzureKeyVaultSecretProviderClassProperties {
-  @doc("Provisioning state of the AzureKeyVaultSecretProviderClass instance.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-
   // Azure Key Vault Provider properties
   // https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/getting-started/usage/
   @doc("The name of the Azure Key Vault to sync secrets from.")
@@ -40,6 +36,10 @@ model AzureKeyVaultSecretProviderClassProperties {
   @doc("List of objects to synchronize from the specified Azure Key Vault.")
   @OpenAPI.extension("x-ms-identifiers", [])
   objects?: AzureKeyVaultObjectProperties[];
+
+  @doc("Provisioning state of the AzureKeyVaultSecretProviderClass instance.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 @doc("The properties of an object to synchronize from an Azure Key Vault.")
@@ -62,13 +62,13 @@ union AzureKeyVaultObjectType {
   // https://learn.microsoft.com/en-us/azure/key-vault/general/about-keys-secrets-certificates
   // https://azure.github.io/secrets-store-csi-driver-provider-azure/docs/configurations/getting-certs-and-keys/
   @doc("Azure Key Vault secret")
-  Secret: "secret",
+  Secret: "Secret",
 
   @doc("Azure Key Vault key")
-  Key: "key",
+  Key: "Key",
 
   @doc("Azure Key Vault certificate")
-  Cert: "cert",
+  Cert: "Cert",
 
   string,
 }
