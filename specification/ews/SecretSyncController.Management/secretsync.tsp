@@ -111,7 +111,6 @@ model SecretSyncCondition {
   reason: string;
 
   @doc("status of the condition, one of True, False, Unknown.")
-  @visibility("read")
   status: string;
 
   @doc("type of condition in CamelCase or in foo.example.com/CamelCase. --- Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to de-conflict is important. The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)")
