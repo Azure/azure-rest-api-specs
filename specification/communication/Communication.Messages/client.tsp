@@ -38,6 +38,6 @@ interface MessageTemplateClient
 );
 
 @@clientName(Azure.Communication.MessagesService.NotificationMessagesSendRequestBody.body,
-  "NotificationContent",
-  "csharp"
+  "notificationContent",
+  "csharp,java"
 );
