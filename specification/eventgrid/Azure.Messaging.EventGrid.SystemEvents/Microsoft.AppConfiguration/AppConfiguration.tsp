@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure App Configuration events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents;
+namespace Microsoft.EventGrid.SystemEvents.AppConfiguration;
 // need to figure out an alternative to this method --- should we pass in docstring here or should we just copy/paste and see what happens
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event. */
 model AppConfigurationKeyValueModifiedEventData {

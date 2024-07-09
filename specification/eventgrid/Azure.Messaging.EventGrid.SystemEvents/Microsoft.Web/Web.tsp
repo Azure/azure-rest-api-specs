@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure App Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents {
+namespace Microsoft.EventGrid.SystemEvents.Web {
   // /** sku of app service plan. */
   /** Detail of action on the app. */
   model AppEventTypeDetail {

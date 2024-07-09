@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure ServiceBus Messaging events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents {
+namespace Microsoft.EventGrid.SystemEvents.ServiceBus {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.ActiveMessagesAvailableWithNoListeners event. */
   model ServiceBusActiveMessagesAvailableWithNoListenersEventData {
     ...ServiceBusBaseEventData;

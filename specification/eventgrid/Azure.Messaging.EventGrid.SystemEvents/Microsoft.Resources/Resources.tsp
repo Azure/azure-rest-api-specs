@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure resource events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents {
+namespace Microsoft.EventGrid.SystemEvents.Resources {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Resources.ResourceWriteSuccess event. This is raised when a resource create or update operation succeeds. */
   model ResourceWriteSuccessEventData {
     ...ResourceBaseEventData;

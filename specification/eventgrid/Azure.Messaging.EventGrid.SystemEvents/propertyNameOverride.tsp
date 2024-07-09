@@ -13,6 +13,14 @@ import "./propertyNameOverrideJs.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Microsoft.EventGrid.SystemEvents;
+using Microsoft.EventGrid.SystemEvents.AzureCommunicationServices;
+using Microsoft.EventGrid.SystemEvents.EventHub;
+using Microsoft.EventGrid.SystemEvents.HealthcareApis;
+using Microsoft.EventGrid.SystemEvents.IotHub;
+using Microsoft.EventGrid.SystemEvents.ResourceNotifications;
+using Microsoft.EventGrid.SystemEvents.Storage;
+using Microsoft.EventGrid.SystemEvents.DataBox;
+using Microsoft.EventGrid.SystemEvents.EventGrid;
 using Azure.ClientGenerator.Core;
 
 @@clientName(AcsIncomingCallEventData.to,

@@ -1,5 +1,5 @@
 /** Describes the schema of the Azure EventGrid events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
-namespace Microsoft.EventGrid.SystemEvents;
+namespace Microsoft.EventGrid.SystemEvents.EventGrid;
 
 /** EventGrid MQTT Client State */
 union EventGridMQTTClientState {

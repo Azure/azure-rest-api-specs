@@ -2,28 +2,28 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.RedisPatchingCompletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.RedisCache.RedisPatchingCompletedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.RedisPatchingCompletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.RedisCache.RedisPatchingCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.RedisScalingCompletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.RedisCache.RedisScalingCompletedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.RedisScalingCompletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.RedisCache.RedisScalingCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.RedisExportRDBCompletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.RedisCache.RedisExportRDBCompletedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.RedisExportRDBCompletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.RedisCache.RedisExportRDBCompletedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.RedisImportRDBCompletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.RedisCache.RedisImportRDBCompletedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.RedisImportRDBCompletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.RedisCache.RedisImportRDBCompletedEventData,
   Access.public
 );
 //Enums
