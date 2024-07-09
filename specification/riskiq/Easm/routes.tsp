@@ -30,7 +30,7 @@ interface Assets {
   @updatesResource(AssetResource)
   @post
   updateAssets is Foundations.Operation<
-    AssetsUpdateParameter & AssetUpdateData,
+    AssetsUpdateParameter & BodyParameter<AssetUpdateData>,
     Task
   >;
   @doc("Retrieve an asset by assetId.")
