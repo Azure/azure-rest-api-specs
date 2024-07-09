@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 @useAuth(AadToken)
 @service({
   title: "HealthDataAIServices.Deidentification Service",
@@ -36,7 +36,6 @@ model AadToken
     }
   ]>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @doc("The HealthDataAIServices.Deidentification service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
