@@ -16,3 +16,7 @@ namespace Microsoft.DocumentDB;
     "MongoClusterRestoreContent",
     "csharp"
 );
+@@clientName(PrivateLinkResource,
+    "MongoClusterPrviateLinkResourceData",
+    "csharp"
+);
