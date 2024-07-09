@@ -1,0 +1,56 @@
+{
+  "title": "ExperimentationWorkspacesListByResourceGroup",
+  "operationId": "ExperimentationWorkspaces_ListByResourceGroup",
+  "parameters": {
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2024-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "accessPolicy": {
+                "applicationId": "0c05ca1a-879a-4848-8a39-abfe7238af0a",
+                "defaultRole": "ExperimentationDataReader",
+                "dataPlaneEndpoint": "https://asi.us.az.split.io"
+              },
+              "dataSource": {
+                "logAnalytics": {
+                  "resourceId": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/contosoworkspace",
+                  "storageAccountResourceId": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/contosostorage",
+                  "enabled": true
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "sku": {
+              "name": "split_experimentation_azure_monthly_payg%%Monthly"
+            },
+            "identity": {
+              "principalId": "b5684bd7-7958-4c0e-9795-d686c31746d2",
+              "tenantId": "b5684bd7-7958-4c0e-9795-d686c31746d2",
+              "type": "None",
+              "userAssignedIdentities": {}
+            },
+            "tags": {},
+            "location": "eastus",
+            "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/SplitIO.Experimentation/experimentationWorkspaces/contoso",
+            "name": "contoso",
+            "type": "SplitIO.Experimentation/experimentationWorkspaces",
+            "systemData": {
+              "createdBy": "zw",
+              "createdByType": "User",
+              "createdAt": "2023-07-25T11:16:12.868Z",
+              "lastModifiedBy": "isirkhwcppaqoqzoebybzikzbzkjzf",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-07-25T11:16:12.868Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
