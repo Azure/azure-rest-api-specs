@@ -1119,6 +1119,22 @@
       ],
       "x-ms-discriminator-value": "Windows"
     },
+    "Cluster": {
+      "type": "object",
+      "description": "A Cluster",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "ClusterJob": {
       "type": "object",
       "description": "Cluster Jobs resource",
@@ -1238,6 +1254,17 @@
         "reportedProperties": {
           "$ref": "#/definitions/JobReportedProperties",
           "description": "Reported properties for job",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "A ClusterProperties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the cluster.",
           "readOnly": true
         }
       }
