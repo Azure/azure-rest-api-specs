@@ -48,7 +48,7 @@ op listJobFiles is DeidentifyOperations.ResourceList<
   Cancels a job that is in progress. 
   
   The job will be marked as canceled and the service will stop processing the job. The service will not delete any files that have already been processed.
-
+  
   If the job is already complete, this will have no effect. 
   """)
 @action("cancel")
