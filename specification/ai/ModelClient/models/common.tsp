@@ -4,7 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace ModelClient;
+namespace AI.Model;
 
 @doc("Represents the input types used for embedding search.")
 union EmbeddingInputType {
@@ -132,15 +132,16 @@ union ModelType {
 
 alias AdditionalRequestHeaders = {
   @doc("""
-    Controls what happens if extra parameters are passed in the JSON request payload.
+    Controls what happens if extra parameters, undefined by the REST API,
+    are passed in the JSON request payload.
     This sets the HTTP request header `extra-parameters`.
     """)
   @header("extra-parameters")
-  extra_params?: ExtraParams;
+  extra_params?: ExtraParameters;
 };
 
-@doc("Controls what happens if extra parameters are passed in the JSON request payload.")
-union ExtraParams {
+@doc("Controls what happens if extra parameters, undefined by the REST ApI are passed in the JSON request payload.")
+union ExtraParameters {
   string,
 
   @doc("The service will error if it detected extra parameters in the request payload. This is the service default.")

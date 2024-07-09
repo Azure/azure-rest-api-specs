@@ -26,5 +26,5 @@ model AutonomousDatabaseNationalCharacterSetProperties {
   @visibility("read")
   @minLength(1)
   @maxLength(255)
-  characterSet: string;
+  characterSet?: string;
 }
