@@ -205,7 +205,11 @@ interface Entity {
   @doc("Associate a classification to multiple entities in bulk.")
   @route("/atlas/v2/entity/bulk/classification")
   @post
-  addClassification is AtlasOperation<BodyParameter<ClassificationAssociateOptions>, void, {}>;
+  addClassification is AtlasOperation<
+    BodyParameter<ClassificationAssociateOptions>,
+    void,
+    {}
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
@@ -1752,14 +1756,22 @@ interface Relationship {
   @doc("Create a new relationship between entities.")
   @route("/atlas/v2/relationship")
   @post
-  create is AtlasOperation<BodyParameter<AtlasRelationship>, AtlasRelationship, {}>;
+  create is AtlasOperation<
+    BodyParameter<AtlasRelationship>,
+    AtlasRelationship,
+    {}
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Update an existing relationship between entities.")
   @route("/atlas/v2/relationship")
   @put
-  update is AtlasOperation<BodyParameter<AtlasRelationship>, AtlasRelationship, {}>;
+  update is AtlasOperation<
+    BodyParameter<AtlasRelationship>,
+    AtlasRelationship,
+    {}
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
