@@ -1,3 +1,4 @@
+import { describe, it } from "vitest";
 import { FolderStructureRule } from "../src/rules/folder-structure.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";

@@ -36,9 +36,24 @@
   "security": [
     {
       "ApiKeyAuth": []
+    },
+    {
+      "AadOauth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    },
     "ApiKeyAuth": {
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
@@ -165,7 +180,7 @@
             "x-ms-client-name": "modelVersion"
           },
           {
-            "name": "imageContent",
+            "name": "imageData",
             "in": "body",
             "description": "The image to be analyzed",
             "required": true,
@@ -319,7 +334,7 @@
             "x-ms-client-name": "modelVersion"
           },
           {
-            "name": "imageContent",
+            "name": "imageUrl",
             "in": "body",
             "description": "The image to be analyzed",
             "required": true,

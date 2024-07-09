@@ -2296,6 +2296,22 @@
         }
       }
     },
+    "PostgreSqlV2Source": {
+      "description": "A copy activity source for PostgreSQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SybaseSource": {
       "description": "A copy activity source for Sybase databases.",
       "type": "object",
@@ -3739,6 +3755,22 @@
         }
       }
     },
+    "GoogleBigQueryV2Source": {
+      "description": "A copy activity Google BigQuery service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "GreenplumSource": {
       "description": "A copy activity Greenplum Database source.",
       "type": "object",
@@ -4357,6 +4389,11 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "storageIntegration": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -5317,6 +5354,11 @@
           "additionalProperties": {
             "type": "object"
           }
+        },
+        "storageIntegration": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -7135,7 +7177,7 @@
           "type": "object",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
           "additionalProperties": {
-            "type": "string",
+            "type": "object",
             "x-ms-format": "dfe-string"
           }
         },
@@ -8176,7 +8218,7 @@
           "type": "object",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
           "additionalProperties": {
-            "type": "string",
+            "type": "object",
             "x-ms-format": "dfe-string"
           }
         },
@@ -8245,7 +8287,7 @@
           "type": "object",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
           "additionalProperties": {
-            "type": "string",
+            "type": "object",
             "x-ms-format": "dfe-string"
           }
         },
@@ -8327,6 +8369,10 @@
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         },
+        "continuationSettings": {
+          "description": "Continuation settings for execute data flow activity.",
+          "$ref": "#/definitions/ContinuationSettingsReference"
+        },
         "compute": {
           "description": "Compute properties for data flow activity.",
           "type": "object",
@@ -8367,6 +8413,27 @@
       "required": [
         "dataFlow"
       ]
+    },
+    "ContinuationSettingsReference": {
+      "description": "Continuation settings for execute data flow activity.",
+      "type": "object",
+      "properties": {
+        "continuationTtlInMinutes": {
+          "description": "Continuation TTL in minutes.",
+          "x-ms-format": "dfe-int",
+          "type": "object"
+        },
+        "idleCondition": {
+          "description": "Idle condition.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "customizedCheckpointKey": {
+          "description": "Customized checkpoint key.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        }
+      }
     },
     "ExecutePowerQueryActivityTypeProperties": {
       "description": "Execute power query data flow activity properties.",
@@ -8491,16 +8558,9 @@
           "description": "The query text. Type: string (or Expression with resultType string)."
         },
         "type": {
-          "x-ms-enum": {
-            "name": "ScriptType",
-            "modelAsString": true
-          },
-          "enum": [
-            "Query",
-            "NonQuery"
-          ],
-          "type": "string",
-          "description": "The type of the query. Type: string."
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The type of the query. Please refer to the ScriptType for valid options. Type: string (or Expression with resultType string)."
         },
         "parameters": {
           "type": "array",
@@ -8593,6 +8653,18 @@
           "x-ms-format": "dfe-string",
           "description": "The wait time to get a response from SharePoint Online. Default value is 5 minutes (00:05:00). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
+      }
+    },
+    "ScriptType": {
+      "description": "The type of the ScriptActivityScriptBlock.",
+      "type": "string",
+      "enum": [
+        "Query",
+        "NonQuery"
+      ],
+      "x-ms-enum": {
+        "name": "ScriptType",
+        "modelAsString": true
       }
     },
     "SqlPartitionOption": {
@@ -9063,7 +9135,12 @@
         "SOQLQuery": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Database query. Type: string (or Expression with resultType string)."
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
         },
         "includeDeletedObjects": {
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
@@ -9084,7 +9161,12 @@
         "SOQLQuery": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "Database query. Type: string (or Expression with resultType string)."
+          "description": "Deprecating, please use 'query' property instead. Type: string (or Expression with resultType string)."
+        },
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "You can only use Salesforce Object Query Language (SOQL) query with limitations. For SOQL limitations, see this article: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/queries.htm#SOQL%20Considerations. If query is not specified, all the data of the Salesforce object specified in ObjectApiName/reportId in dataset will be retrieved. Type: string (or Expression with resultType string)."
         },
         "includeDeletedObjects": {
           "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
@@ -9160,6 +9242,64 @@
           "type": "object",
           "x-ms-format": "dfe-bool",
           "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "ServiceNowV2Source": {
+      "description": "A copy activity ServiceNowV2 server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "expression": {
+          "type": "object",
+          "description": "Expression to filter data from source.",
+          "$ref": "#/definitions/ExpressionV2"
+        }
+      }
+    },
+    "ExpressionV2": {
+      "description": "Nested representation of a complex expression.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "x-ms-enum": {
+            "name": "ExpressionV2Type",
+            "modelAsString": true
+          },
+          "enum": [
+            "Constant",
+            "Field",
+            "Unary",
+            "Binary",
+            "NAry"
+          ],
+          "type": "string",
+          "description": "Type of expressions supported by the system. Type: string."
+        },
+        "value": {
+          "description": "Value for Constant/Field Type: string.",
+          "type": "string"
+        },
+        "operators": {
+          "description": "Expression operator value Type: list of strings.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string."
+          }
+        },
+        "operands": {
+          "description": "List of nested expressions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressionV2",
+            "description": "Type: ExpressionV2."
+          }
         }
       }
     }

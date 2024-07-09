@@ -61,27 +61,30 @@ model AccountProperties {
 }
 
 @doc("The enablement status of a feature.")
-enum EnablementStatus {
+union EnablementStatus {
+  string,
+
   @doc("The feature is Enabled.")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The feature is Disabled.")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 @doc("The status of the current operation.")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Creation in progress..")
-  Creating,
+  Creating: "Creating",
 
   @doc("Deletion in progress..")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Change accepted for processing..")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @armResourceOperations
@@ -89,6 +92,12 @@ interface Accounts
   extends TrackedResourceOperations<Account, AccountProperties> {
   @doc("Adds check global name availability operation, normally used if a resource name must be globally unique.")
   checkNameAvailability is checkGlobalNameAvailability;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST REMOVE AT NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Account,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @doc("The location of subscription quota resource.")
@@ -105,6 +114,7 @@ model Location {
 @doc("A subscription quota resource.")
 @parentResource(Location)
 model Quota is ProxyResource<QuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The quota name.")
   @key("quotaName")
   @path
@@ -113,9 +123,11 @@ model Quota is ProxyResource<QuotaProperties> {
 }
 
 @doc("The enum for quota name.")
-enum QuotaNames {
+union QuotaNames {
+  string,
+
   @doc("The quota details for scalable execution feature. When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
-  ScalableExecution,
+  "ScalableExecution",
 }
 
 @doc("The subscription quota resource properties.")
@@ -142,6 +154,7 @@ model FreeTrialProperties {
 @doc("A quota resource for a Playwright service account.")
 @parentResource(Account)
 model AccountQuota is ProxyResource<AccountQuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The Playwright service account quota name.")
   @key("quotaName")
   @path
@@ -185,18 +198,20 @@ model AccountFreeTrialProperties {
 }
 
 @doc("The free-trial state.")
-enum FreeTrialState {
+union FreeTrialState {
+  string,
+
   @doc("The free-trial is Active.")
-  Active,
+  "Active",
 
   @doc("The free-trial is Expired.")
-  Expired,
+  "Expired",
 
   @doc("The free-trial is Not Eligible.")
-  NotEligible,
+  "NotEligible",
 
   @doc("The free-trial is Not Registered.")
-  NotRegistered,
+  "NotRegistered",
 }
 
 @armResourceOperations

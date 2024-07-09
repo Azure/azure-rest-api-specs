@@ -6,12 +6,12 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 ## Releases
 
-The current preview release of Language is 2023-11-15-preview.
+The current preview release of Language is 2024-05-15-preview.
 
-The current stable release of Language is 2023-04-01.
+The current stable release of Language is 2024-05-01.
 
 ```yaml
-tag: release_2023-11-15-preview
+tag: release_2024-05-15-preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -22,6 +22,32 @@ directive:
     where: $.definitions.CurrencyResolution.properties.ISO4217
     reason: ISO should be upper case.
 ```
+### Release 2024-05-15-preview
+
+These settings apply only when `--tag=release_2024_05_15_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024-05-15-preview'
+input-file:
+  - preview/2024-05-15-preview/analyzeconversations.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Release 2024-05-01
+
+These settings apply only when `--tag=release_2024_05_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024-05-01'
+input-file:
+  - stable/2024-05-01/analyzeconversations.json
+title:
+  Microsoft Cognitive Language Service
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 
 ### Release 2023-11-15-preview
 
