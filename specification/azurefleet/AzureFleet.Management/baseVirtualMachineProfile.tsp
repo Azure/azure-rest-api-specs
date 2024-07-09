@@ -1600,8 +1600,6 @@ model VMGalleryApplication {
    * Optional, Specifies the uri to an azure blob that will replace the default
    * configuration for the package if provided
    */
-  @visibility("create", "update")
-  @secret
   configurationReference?: string;
 
   /**
