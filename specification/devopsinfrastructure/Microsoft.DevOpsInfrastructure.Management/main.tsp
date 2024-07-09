@@ -412,6 +412,10 @@ interface Pools {
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
+
+  @doc("Get the usage for a pool for the previous week")
+  @action("usage")
+  getUsage is ArmResourceActionSync<Pool, void, Record<int32>[]>;
 }
 
 @parentResource(Pool)
@@ -480,21 +484,6 @@ union ResourceStatus {
 @armResourceOperations
 interface ResourceDetails {
   listByPool is ArmResourceListByParent<ResourceDetailsObject>;
-}
-
-@parentResource(Pool)
-@doc("The pool usage for the previous week")
-model PoolUsageObject is ProxyResource<PoolUsageProperties> {
-  ...ResourceNameParameter<PoolUsageObject, SegmentName = "usage">;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
-@doc("Details of the PoolUsageObject.")
-model PoolUsageProperties {}
-
-@armResourceOperations
-interface PoolUsage {
-  listByPool is ArmResourceListByParent<PoolUsageObject>;
 }
 
 /** Represents how SKU capacity scales. */

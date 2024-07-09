@@ -48,9 +48,6 @@
       "name": "ResourceDetails"
     },
     {
-      "name": "PoolUsage"
-    },
-    {
       "name": "Sku"
     },
     {
@@ -618,12 +615,12 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}/usage": {
-      "get": {
-        "operationId": "PoolUsage_ListByPool",
+      "post": {
+        "operationId": "Pools_GetUsage",
         "tags": [
-          "PoolUsage"
+          "Pools"
         ],
-        "description": "List PoolUsageObject resources by Pool",
+        "description": "Get the usage for a pool for the previous week",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -647,7 +644,15 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PoolUsageObjectListResult"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
@@ -659,11 +664,8 @@
         },
         "x-ms-examples": {
           "GetPoolUsage": {
-            "$ref": "./examples/PoolUsage_ListByPool.json"
+            "$ref": "./examples/Pools_GetUsage.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1323,47 +1325,6 @@
           "description": "The resource id of the DevCenter Project the pool belongs to."
         }
       }
-    },
-    "PoolUsageObject": {
-      "type": "object",
-      "description": "The pool usage for the previous week",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PoolUsageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PoolUsageObjectListResult": {
-      "type": "object",
-      "description": "The response of a PoolUsageObject list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PoolUsageObject items on this page",
-          "items": {
-            "$ref": "#/definitions/PoolUsageObject"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PoolUsageProperties": {
-      "type": "object",
-      "description": "Details of the PoolUsageObject."
     },
     "PredictionPreference": {
       "type": "string",
