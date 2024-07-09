@@ -10,6 +10,9 @@
         "tags": [
           "ApplicationControllerV02Preview"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "version",
@@ -61,6 +64,9 @@
         "tags": [
           "ApplicationControllerV02Preview"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "version",
@@ -104,6 +110,9 @@
       "patch": {
         "tags": [
           "ApplicationControllerV02Preview"
+        ],
+        "produces": [
+          "application/json"
         ],
         "parameters": [
           {
@@ -162,6 +171,9 @@
         "tags": [
           "ApplicationControllerV02Preview"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "registrationId",
@@ -206,6 +218,9 @@
       "delete": {
         "tags": [
           "ApplicationControllerV02Preview"
+        ],
+        "produces": [
+          "application/json"
         ],
         "parameters": [
           {
@@ -252,7 +267,11 @@
       "enum": [
         "PromptFlow"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AnalyticsKind",
+        "modelAsString": true
+      }
     },
     "AnalyticsPropertiesPayloadV02Preview": {
       "required": [
@@ -401,7 +420,11 @@
         "Continuous",
         "Single"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "LanguageIdentificationMode",
+        "modelAsString": true
+      }
     },
     "LanguageIdentificationProperties": {
       "required": [
@@ -457,7 +480,11 @@
         "Tags",
         "Masked"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProfanityFilterMode",
+        "modelAsString": true
+      }
     },
     "PunctuationMode": {
       "enum": [
@@ -466,14 +493,22 @@
         "Automatic",
         "DictatedAndAutomatic"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PunctuationMode",
+        "modelAsString": true
+      }
     },
     "RegistrationStatus": {
       "enum": [
         "Active",
         "Error"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RegistrationStatus",
+        "modelAsString": true
+      }
     },
     "StatusPayload": {
       "type": "object",
@@ -584,7 +619,11 @@
           "enum": [
             "EventGrid"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerKind",
+            "modelAsString": true
+          }
         },
         "filter": {
           "type": "object",
