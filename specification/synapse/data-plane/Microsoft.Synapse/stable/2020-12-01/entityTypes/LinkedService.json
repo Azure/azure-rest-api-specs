@@ -7359,6 +7359,14 @@
           "description": "The client secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -7367,8 +7375,7 @@
       "required": [
         "siteUrl",
         "tenantId",
-        "servicePrincipalId",
-        "servicePrincipalKey"
+        "servicePrincipalId"
       ]
     },
     "AzureSynapseArtifactsLinkedService": {
