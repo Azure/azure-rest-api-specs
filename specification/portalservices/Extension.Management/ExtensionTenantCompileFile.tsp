@@ -18,7 +18,7 @@ namespace Microsoft.PortalServices;
  * The portal tenant provider action.
  */
 model PortalTenantCompileFile
-  is TrackedResource<PortalTenantCompileFileProperties> {
+  is Azure.ResourceManager.TrackedResource<PortalTenantCompileFileProperties> {
   /**
    * The name of the portal tenant compile file.
    */
