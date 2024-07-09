@@ -59,14 +59,14 @@ model KubernetesSecretObjectMapping {
   @maxLength(253)
   sourcePath: string;
 
-  @doc("targetKey is the key in the Kubernetes secret's data field as described in the Kubernetes API reference: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/secret-v1/")
+  @doc("targetPath is the key in the Kubernetes secret's data field as described in the Kubernetes API reference: https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/secret-v1/")
   @minLength(1)
   @maxLength(253)
   targetPath: string;
 }
 
 // https://kubernetes.io/docs/concepts/configuration/secret/#secret-types
-// Defined as an extensable union rather than an enum for compliance with rule https://azure.github.io/typespec-azure/docs/next/libraries/azure-core/rules/no-enum
+// Defined as an extensible union rather than an enum for compliance with rule https://azure.github.io/typespec-azure/docs/next/libraries/azure-core/rules/no-enum
 @doc("Supported Kubernetes secret types.")
 union KubernetesSecretType {
   // https://kubernetes.io/docs/concepts/configuration/secret/#opaque-secrets
@@ -90,7 +90,7 @@ model SecretSyncStatus {
   conditions?: SecretSyncCondition[];
 
   @doc("LastSuccessfulSyncTime represents the last time the secret was retrieved from the Provider and updated.")
-  lastSuccessfulSyncTime?: string;
+  lastSuccessfulSyncTime?: utcDateTime;
 
   // Not including syncHash at the moment for security concerns TODO #28507544 https://msazure.visualstudio.com/One/_workitems/edit/28507544
 }
@@ -111,6 +111,7 @@ model SecretSyncCondition {
   reason: string;
 
   @doc("status of the condition, one of True, False, Unknown.")
+  @visibility("read")
   status: string;
 
   @doc("type of condition in CamelCase or in foo.example.com/CamelCase. --- Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be useful (see .node.status.conditions), the ability to de-conflict is important. The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)")
