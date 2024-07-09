@@ -21,7 +21,7 @@ interface DocumentTranslationOperations {
   @route("document:translate")
   @post
   documentTranslate is RpcOperation<
-    DocumentTranslateContent,
+    DocumentTranslateBody,
     DocumentTranslateResult,
     ServiceTraits
   >;
@@ -54,7 +54,7 @@ interface DocumentTranslationOperations {
   @route("/document/batches")
   @post
   startTranslation is Azure.Core.Foundations.Operation<
-    StartTranslationDetails,
+    StartTranslationBody,
     {
       @doc("Request has been accepted successfully.")
       @statusCode
