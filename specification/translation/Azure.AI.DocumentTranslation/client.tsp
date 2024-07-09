@@ -79,11 +79,11 @@ interface SingleDocumentTranslationClient {
 @@access(DocumentTranslation.FileFormat, Access.internal, "python");
 
 @@clientName(DocumentTranslation.DocumentTranslateBody.body,
-  "DocumentTranslateContent",
-  "csharp"
+  "documentTranslateContent",
+  "csharp,java"
 );
 
 @@clientName(DocumentTranslation.StartTranslationBody.body,
-  "StartTranslationDetails",
-  "csharp"
+  "startTranslationDetails",
+  "csharp,java"
 );
