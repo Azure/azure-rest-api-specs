@@ -230,4 +230,29 @@ namespace Azure.AI.OpenAI.Assistants {
   // From https://platform.openai.com/docs/assistants/how-it-works
   // "Note that deleting an AssistantFile doesn’t delete the original File object, it simply deletes the association
   // between that File and the Assistant."
+
+  @@clientName(createAssistant::parameters.body,
+    "AssistantCreationOptions",
+    "csharp,java,javascript"
+  );
+  @@clientName(updateAssistant::parameters.body,
+    "UpdateAssistantOptions",
+    "csharp,java,javascript"
+  );
+  @@clientName(createThreadAndRun::parameters.body,
+    "CreateAndRunThreadOptions",
+    "csharp,java,javascript"
+  );
+  @@clientName(createThread::parameters.body,
+    "AssistantThreadCreationOptions",
+    "csharp,java,javascript"
+  );
+  @@clientName(updateThread::parameters.body,
+    "UpdateAssistantThreadOptions",
+    "csharp,java,javascript"
+  );
+  @@clientName(createVectorStore::parameters.body,
+    "VectorStoreOptions",
+    "csharp,java,javascript"
+  );
 }
