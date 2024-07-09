@@ -1434,7 +1434,6 @@ model VirtualMachineScaleSetExtensionProperties {
    * Json formatted public settings for the extension.
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachineScaleSet.json#L5002C1-L5009C11"
-  @visibility("create", "update")
   settings?: Record<unknown>;
 
   /**
@@ -1737,7 +1736,6 @@ model VirtualMachineExtensionProperties {
    * Json formatted public settings for the extension.
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Converted legacy object to typespec https://github.com/Azure/azure-rest-api-specs/blob/d715112415eb08572ee96cc4bd77217aa44dedf1/specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/2024-03-01/virtualMachine.json#L2095C1-L2102C11"
-  @visibility("create", "update")
   settings?: Record<unknown>;
 
   /**
