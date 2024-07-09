@@ -5,6 +5,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.Deidentification;
 
 @doc("A job containing a batch of documents to deidentify.")

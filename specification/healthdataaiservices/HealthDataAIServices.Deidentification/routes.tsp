@@ -9,6 +9,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
 namespace HealthDataAIServices.Deidentification;
 
 alias ServiceTraits = NoRepeatableRequests &
