@@ -572,78 +572,19 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/DocumentTranslateBody.sourceLanguage"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateBody.targetLanguage"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateBody.category"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateBody.allowFallback"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "sourceLanguage",
-            "in": "query",
-            "description": "Specifies source language of the input document.\nIf this parameter isn't specified, automatic language detection is applied to determine the source language.\nFor example if the source document is written in English, then use sourceLanguage=en",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "targetLanguage",
-            "in": "query",
-            "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de ",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "category",
-            "in": "query",
-            "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \nfrom a customized system built with Custom Translator. Add the Category ID from your Custom Translator \nproject details to this parameter to use your deployed customized system. Default value is: general.",
-            "required": false,
-            "type": "string",
-            "default": "general"
-          },
-          {
-            "name": "allowFallback",
-            "in": "query",
-            "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \nPossible values are: true (default) or false.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "sourceLanguage",
-            "in": "formData",
-            "description": "Specifies source language of the input document.\nIf this parameter isn't specified, automatic language detection is applied to determine the source language.\nFor example if the source document is written in English, then use sourceLanguage=en",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "targetLanguage",
-            "in": "formData",
-            "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de ",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "category",
-            "in": "formData",
-            "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \nfrom a customized system built with Custom Translator. Add the Category ID from your Custom Translator \nproject details to this parameter to use your deployed customized system. Default value is: general.",
-            "required": false,
-            "type": "string",
-            "default": "general"
-          },
-          {
-            "name": "allowFallback",
-            "in": "formData",
-            "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \nPossible values are: true (default) or false.",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "contentType",
-            "in": "formData",
-            "description": "Content Type as multipart/form-data",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "multipart/form-data"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
           },
           {
             "name": "document",
@@ -890,60 +831,7 @@
         "id"
       ]
     },
-    "DocumentTranslateBody": {
-      "type": "object",
-      "description": "Document Translate Request Body",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/DocumentTranslateContent",
-          "description": "Document Translate Request Content"
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "DocumentTranslateContent": {
-      "type": "object",
-      "description": "Document Translate Request Content",
-      "properties": {
-        "sourceLanguage": {
-          "type": "string",
-          "description": "Specifies source language of the input document.\nIf this parameter isn't specified, automatic language detection is applied to determine the source language.\nFor example if the source document is written in English, then use sourceLanguage=en"
-        },
-        "targetLanguage": {
-          "type": "string",
-          "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de "
-        },
-        "category": {
-          "type": "string",
-          "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \nfrom a customized system built with Custom Translator. Add the Category ID from your Custom Translator \nproject details to this parameter to use your deployed customized system. Default value is: general.",
-          "default": "general"
-        },
-        "allowFallback": {
-          "type": "boolean",
-          "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \nPossible values are: true (default) or false."
-        },
-        "document": {
-          "type": "string",
-          "format": "byte",
-          "description": "Document to be translated in the form"
-        },
-        "glossary": {
-          "type": "array",
-          "description": "Glossary-translation memory will be used during translation in the form. ",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        }
-      },
-      "required": [
-        "targetLanguage",
-        "document"
-      ]
-    },
-    "DocumentTranslateContentCreate": {
       "type": "object",
       "description": "Document Translate Request Content",
       "properties": {
@@ -1530,6 +1418,39 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "DocumentTranslateBody.allowFallback": {
+      "name": "allowFallback",
+      "in": "query",
+      "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \nPossible values are: true (default) or false.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentTranslateBody.category": {
+      "name": "category",
+      "in": "query",
+      "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \nfrom a customized system built with Custom Translator. Add the Category ID from your Custom Translator \nproject details to this parameter to use your deployed customized system. Default value is: general.",
+      "required": false,
+      "type": "string",
+      "default": "general",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentTranslateBody.sourceLanguage": {
+      "name": "sourceLanguage",
+      "in": "query",
+      "description": "Specifies source language of the input document.\nIf this parameter isn't specified, automatic language detection is applied to determine the source language.\nFor example if the source document is written in English, then use sourceLanguage=en",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentTranslateBody.targetLanguage": {
+      "name": "targetLanguage",
+      "in": "query",
+      "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de ",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "StartTranslationBody": {
       "name": "body",
