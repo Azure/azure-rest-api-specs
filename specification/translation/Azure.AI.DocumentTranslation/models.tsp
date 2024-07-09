@@ -474,13 +474,13 @@ model DocumentTranslateBody {
   contentType: "multipart/form-data";
   
   @doc("Document Translate Request Content")
-  @bodyRoot
+  @body
   body: DocumentTranslateContent;
 }
 
 @doc("Start Translation Request Body")
 model StartTranslationBody {
   @doc("Translation job submission batch request")
-  @bodyRoot
+  @body
   body: StartTranslationDetails;
 }
