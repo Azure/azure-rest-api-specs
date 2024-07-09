@@ -271,6 +271,10 @@
               "$ref": "#/definitions/HealthModel"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1592,6 +1596,86 @@
     }
   },
   "definitions": {
+    "AlertConfiguration": {
+      "type": "object",
+      "description": "Alert configuration details",
+      "properties": {
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity of triggered alert."
+        },
+        "description": {
+          "type": "string",
+          "description": "The alert rule description.",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "actionGroupIds": {
+          "type": "array",
+          "description": "List of action group resource IDs to be notified when the alert is triggered.",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Insights/actionGroups"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "severity",
+        "actionGroupIds"
+      ]
+    },
+    "AlertSeverity": {
+      "type": "string",
+      "description": "Severity of an alert",
+      "enum": [
+        "Sev0",
+        "Sev1",
+        "Sev2",
+        "Sev3",
+        "Sev4"
+      ],
+      "x-ms-enum": {
+        "name": "AlertSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sev0",
+            "value": "Sev0",
+            "description": "Critical"
+          },
+          {
+            "name": "Sev1",
+            "value": "Sev1",
+            "description": "Error"
+          },
+          {
+            "name": "Sev2",
+            "value": "Sev2",
+            "description": "Warning"
+          },
+          {
+            "name": "Sev3",
+            "value": "Sev3",
+            "description": "Informational"
+          },
+          {
+            "name": "Sev4",
+            "value": "Sev4",
+            "description": "Verbose"
+          }
+        ]
+      }
+    },
     "AuthenticationKind": {
       "type": "string",
       "description": "Supported kinds of authentication settings as discriminator",
@@ -1616,11 +1700,7 @@
         "properties": {
           "$ref": "#/definitions/AuthenticationSettingProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1764,11 +1844,7 @@
         "properties": {
           "$ref": "#/definitions/DiscoveryRuleProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1990,11 +2066,7 @@
         "properties": {
           "$ref": "#/definitions/EntityProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2002,6 +2074,20 @@
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "EntityAlerts": {
+      "type": "object",
+      "description": "Alert configuration for an entity",
+      "properties": {
+        "unhealthy": {
+          "$ref": "#/definitions/AlertConfiguration",
+          "description": "Alert to be triggered on state change to unhealthy"
+        },
+        "degraded": {
+          "$ref": "#/definitions/AlertConfiguration",
+          "description": "Alert to be triggered on state change to degraded"
+        }
+      }
     },
     "EntityCoordinates": {
       "type": "object",
@@ -2131,6 +2217,10 @@
           "$ref": "#/definitions/HealthState",
           "description": "Health state of this entity",
           "readOnly": true
+        },
+        "alerts": {
+          "$ref": "#/definitions/EntityAlerts",
+          "description": "Alert configuration for this entity"
         }
       }
     },
@@ -2159,19 +2249,11 @@
         "properties": {
           "$ref": "#/definitions/HealthModelProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
@@ -2265,10 +2347,6 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         },
         "tags": {
           "type": "object",
@@ -2511,11 +2589,7 @@
         "properties": {
           "$ref": "#/definitions/RelationshipProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2677,11 +2751,7 @@
         "properties": {
           "$ref": "#/definitions/SignalDefinitionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
