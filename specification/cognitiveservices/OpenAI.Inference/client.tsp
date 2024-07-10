@@ -44,30 +44,30 @@ interface OpenAIClient {
 }
 
 @@clientName(Azure.OpenAI.GenerateSpeechFromTextBody.body,
-  "SpeechGenerationOptions",
+  "speechGenerationOptions",
   "csharp,java"
 );
 @@clientName(Azure.OpenAI.GetAudioTranscriptionBody.body,
-  "AudioTranscriptionOptions",
+  "audioTranscriptionOptions",
   "csharp,java"
 );
 @@clientName(Azure.OpenAI.GetAudioTranslationBody.body,
-  "AudioTranslationOptions",
+  "audioTranslationOptions",
   "csharp,java"
 );
 @@clientName(Azure.OpenAI.GetChatCompletionsBody.body,
-  "ChatCompletionsOptions",
+  "chatCompletionsOptions",
   "csharp,java"
 );
 @@clientName(Azure.OpenAI.GetCompletionsBody.body,
-  "CompletionsOptions",
+  "completionsOptions",
   "csharp,java"
 );
 @@clientName(Azure.OpenAI.GetEmbeddingsBody.body,
-  "EmbeddingsOptions",
+  "embeddingsOptions",
   "csharp,java"
 );
 @@clientName(Azure.OpenAI.GetImageGenerationsBody.body,
-  "ImageGenerationOptions",
+  "imageGenerationOptions",
   "csharp,java"
 );
