@@ -176,6 +176,13 @@ directive:
     reason: Parameter is read only
 ```
 
+## AzureOpenAI 2024-02-01
+These settings apply only when `--tag=release_2024_02_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_02_01'
+input-file: stable/2024-02-01/inference.json
+```
+
 ## AzureOpenAI 2024-02-15-preview (generated)
 These settings apply only when `--tag=release_2024_02_15_preview_autogen` is specified on the command line.
 
@@ -202,4 +209,11 @@ These settings apply only when `--tag=release_2024_05_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2024_05_01_preview'
 input-file: preview/2024-05-01-preview/inference.json
+```
+
+## AzureOpenAI 2024-06-01
+These settings apply only when `--tag=release_2024_06_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_06_01'
+input-file: stable/2024-06-01/inference.json
 ```
