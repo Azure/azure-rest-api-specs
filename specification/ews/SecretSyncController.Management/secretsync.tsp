@@ -98,7 +98,7 @@ model SecretSyncStatus {
 @doc("Condition contains details for one aspect of the current state of this SecretSync object.")
 model SecretSyncCondition {
   @doc("lastTransitionTime is the last time the condition transitioned from one status to another. This should be when the underlying condition changed. If that is not known, then using the time when the API field changed is acceptable.")
-  lastTransitionTime: utcDateTime;
+  lastTransitionTime?: utcDateTime;
 
   @doc("message is a human readable message indicating details about the transition. This may be an empty string.")
   message: string;
