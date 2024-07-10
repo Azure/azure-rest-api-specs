@@ -45,7 +45,6 @@ op createVectorStoreFile(
 
   /** A File ID that the vector store should use. Useful for tools like `file_search` that can access files. */
   @encodedName("application/json", "file_id")
-  @body
   fileId: string,
 ): VectorStoreFile;
 

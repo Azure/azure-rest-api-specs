@@ -412,7 +412,8 @@
           },
           "enum": [
             "SQL",
-            "Windows"
+            "Windows",
+            "UserAssignedManagedIdentity"
           ],
           "type": "string",
           "description": "The type used for authentication. Type: string."
@@ -432,6 +433,10 @@
         "alwaysEncryptedSettings": {
           "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
           "description": "Sql always encrypted properties."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },

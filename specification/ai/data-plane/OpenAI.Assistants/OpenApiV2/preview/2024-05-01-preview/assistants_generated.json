@@ -174,6 +174,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssistantCreationOptions"
@@ -217,11 +218,16 @@
         "description": "Modifies an existing assistant.",
         "parameters": [
           {
-            "$ref": "#/parameters/UpdateAssistantOptions.assistantId"
+            "name": "assistantId",
+            "in": "path",
+            "description": "The ID of the assistant to modify.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateAssistantOptions"
@@ -496,6 +502,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssistantThreadCreationOptions"
@@ -539,11 +546,16 @@
         "description": "Modifies an existing thread.",
         "parameters": [
           {
-            "$ref": "#/parameters/UpdateAssistantThreadOptions.threadId"
+            "name": "threadId",
+            "in": "path",
+            "description": "The ID of the thread to modify.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateAssistantThreadOptions"
@@ -1287,6 +1299,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateAndRunThreadOptions"
@@ -1418,6 +1431,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VectorStoreOptions"
@@ -1470,6 +1484,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VectorStoreUpdateOptions"
@@ -1941,14 +1956,22 @@
             "type": "string"
           },
           {
-            "name": "file_id",
+            "name": "body",
             "in": "body",
-            "description": "A File ID that the vector store should use. Useful for tools like `file_search` that can access files.",
             "required": true,
             "schema": {
-              "type": "string"
-            },
-            "x-ms-client-name": "fileId"
+              "type": "object",
+              "properties": {
+                "file_id": {
+                  "type": "string",
+                  "description": "A File ID that the vector store should use. Useful for tools like `file_search` that can access files.",
+                  "x-ms-client-name": "fileId"
+                }
+              },
+              "required": [
+                "file_id"
+              ]
+            }
           }
         ],
         "responses": {
@@ -4590,13 +4613,14 @@
       "type": "object",
       "description": "Request object to update `file_search` tool resources.",
       "properties": {
-        "vectorStoreIds": {
+        "vector_store_ids": {
           "type": "array",
           "description": "A list of vector store IDs to override the current list of the assistant.",
           "maxItems": 1,
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-name": "vectorStoreIds"
         }
       }
     },
@@ -5163,22 +5187,5 @@
       }
     }
   },
-  "parameters": {
-    "UpdateAssistantOptions.assistantId": {
-      "name": "assistantId",
-      "in": "path",
-      "description": "The ID of the assistant to modify.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "UpdateAssistantThreadOptions.threadId": {
-      "name": "threadId",
-      "in": "path",
-      "description": "The ID of the thread to modify.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
