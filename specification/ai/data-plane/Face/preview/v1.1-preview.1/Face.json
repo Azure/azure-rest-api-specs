@@ -411,7 +411,7 @@
             "description": "Body parameter.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateLivenessSessionContent"
+              "$ref": "#/definitions/CreateLivenessSessionParameters"
             }
           }
         ],
@@ -5858,7 +5858,7 @@
             "description": "Body parameter.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateLivenessWithVerifySessionContent"
+              "$ref": "#/definitions/CreateLivenessWithVerifySessionParameters"
             }
           }
         ],
@@ -7440,7 +7440,7 @@
         "value"
       ]
     },
-    "CreateLivenessSessionContent": {
+    "CreateLivenessSessionParameters": {
       "type": "object",
       "description": "Request for creating liveness session.",
       "properties": {
@@ -7491,7 +7491,26 @@
         "authToken"
       ]
     },
-    "CreateLivenessWithVerifySessionContent": {
+    "CreateLivenessWithVerifySessionMultipartBody": {
+      "type": "object",
+      "description": "Request of liveness with verify session creation.",
+      "properties": {
+        "Parameters": {
+          "$ref": "#/definitions/CreateLivenessWithVerifySessionParameters",
+          "description": "The parameters for creating session."
+        },
+        "VerifyImage": {
+          "type": "string",
+          "format": "byte",
+          "description": "The image stream for verify. Content-Disposition header field for this part must have filename."
+        }
+      },
+      "required": [
+        "Parameters",
+        "VerifyImage"
+      ]
+    },
+    "CreateLivenessWithVerifySessionParameters": {
       "type": "object",
       "description": "Request for creating liveness with verify session.",
       "properties": {
@@ -7522,25 +7541,6 @@
       },
       "required": [
         "livenessOperationMode"
-      ]
-    },
-    "CreateLivenessWithVerifySessionMultipartBody": {
-      "type": "object",
-      "description": "Request of liveness with verify session creation.",
-      "properties": {
-        "Parameters": {
-          "$ref": "#/definitions/CreateLivenessWithVerifySessionContent",
-          "description": "The parameters for creating session."
-        },
-        "VerifyImage": {
-          "type": "string",
-          "format": "byte",
-          "description": "The image stream for verify. Content-Disposition header field for this part must have filename."
-        }
-      },
-      "required": [
-        "Parameters",
-        "VerifyImage"
       ]
     },
     "CreateLivenessWithVerifySessionResult": {

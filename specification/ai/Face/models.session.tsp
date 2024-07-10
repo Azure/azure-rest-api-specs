@@ -22,7 +22,7 @@ union LivenessOperationMode {
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
 @doc("Base model for creating liveness session.")
-model BaseCreateLivenessSessionContent {
+model BaseLivenessSessionParameters {
   @doc("Type of liveness mode the client should follow.")
   livenessOperationMode: LivenessOperationMode;
 
@@ -40,15 +40,15 @@ model BaseCreateLivenessSessionContent {
 }
 
 @doc("Request for creating liveness session.")
-model CreateLivenessSessionContent is BaseCreateLivenessSessionContent {
+model CreateLivenessSessionParameters is BaseLivenessSessionParameters {
   @doc("The model version of liveness single modal.")
   @added(Versions.v1_2_preview_1)
   livenessSingleModalModel: LivenessModel;
 }
 
 @doc("Request for creating liveness with verify session.")
-model CreateLivenessWithVerifySessionContent
-  is BaseCreateLivenessSessionContent {
+model CreateLivenessWithVerifySessionParameters
+  is BaseLivenessSessionParameters {
   @doc("Whether or not return the verify image hash.")
   @added(Versions.v1_2_preview_1)
   returnVerifyImageHash?: boolean;
@@ -289,13 +289,21 @@ model LivenessSessionAuditEntry {
 
   @doc("The server calculated digest for this request. If the client reported digest differs from the server calculated digest, then the message integrity between the client and service has been compromised and the result should not be trusted. For more information, see how to guides on how to leverage this value to secure your end-to-end solution.")
   digest: string;
+
+  @doc("The image ID of the session reuqest.")
+  @added(Versions.v1_2_preview_1)
+  sessionImageId?: string;
+
+  @doc("The sha256 hash of the verify-image in the request.")
+  @added(Versions.v1_2_preview_1)
+  verifyImageHash?: string;
 }
 
 @doc("Request of liveness with verify session creation.")
 model CreateLivenessWithVerifySessionMultipartBody {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
-  Parameters: CreateLivenessWithVerifySessionContent;
+  Parameters: CreateLivenessWithVerifySessionParameters;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
@@ -314,7 +322,7 @@ model CreateLivenessWithVerifySessionRequest {
 }
 
 @doc("Response model of get session image.")
-model SessionImage {
+model SessionImageStream {
   @doc("The format of the HTTP payload.")
   @header
   contentType: "application/octet-stream";
