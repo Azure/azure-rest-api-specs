@@ -254,3 +254,23 @@ model DeploymentStorageAdapterIPInfo {
   @doc("The SubnetMask address assigned to network adapter used for storage.")
   subnetMask?: string;
 }
+
+@doc("Edge device type based on host OS installed.")
+union EdgeDeviceKind {
+  string,
+
+  @doc("Arc-enabled edge device with HCI OS.")
+  HCI: "HCI",
+
+  @doc("Arc-enabled edge device with WindowsServer OS.")
+  WindowsServer: "WindowsServer",
+
+  @doc("Arc-enabled edge device with WindowsIoT OS.")
+  WindowsIoT: "WindowsIoT",
+
+  @doc("Arc-enabled edge device with AzureLinux OS.")
+  AzureLinux: "AzureLinux",
+
+  @doc("Arc-enabled edge device with UbuntuLinux OS.")
+  UbuntuLinux: "UbuntuLinux",
+}

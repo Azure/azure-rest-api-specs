@@ -42,7 +42,7 @@ model EdgeDeviceJob is Azure.ResourceManager.ExtensionResource<{}> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
   @doc("Edge Solution type to support polymorphic resource.")
   @visibility("read", "create")
-  kind: DeviceType;
+  kind: EdgeDeviceKind;
 }
 
 @armResourceOperations
@@ -63,26 +63,6 @@ interface EdgeDeviceJobs {
 @@doc(EdgeDeviceJob.name, "Name of EdgeDevice Job");
 
 ///////////////////models///////////
-
-@doc("Edge device type based on host OS installed.")
-union DeviceType {
-  string,
-
-  @doc("Arc-enabled edge device with HCI OS.")
-  HCI: "HCI",
-
-  @doc("Arc-enabled edge device with WindowsServer OS.")
-  WindowsServer: "WindowsServer",
-
-  @doc("Arc-enabled edge device with WindowsIoT OS.")
-  WindowsIoT: "WindowsIoT",
-
-  @doc("Arc-enabled edge device with AzureLinux OS.")
-  AzureLinux: "AzureLinux",
-
-  @doc("Arc-enabled edge device with UbuntuLinux OS.")
-  UbuntuLinux: "UbuntuLinux",
-}
 
 @doc("Represents the status of a log collection operation.")
 union LogCollectionStatus {
@@ -281,7 +261,7 @@ model AzureLinuxEdgeDeviceJob extends EdgeDeviceJob {
   properties: AzureLinuxEdgeDeviceJobProperties;
 
   @doc("Edge Solution type to support polymorphic resource.")
-  kind: DeviceType.AzureLinux;
+  kind: EdgeDeviceKind.AzureLinux;
 }
 
 @doc("Represents the properties of an Azure Linux Remote Support job.")
@@ -412,7 +392,7 @@ model HciEdgeDeviceJob extends EdgeDeviceJob {
   properties: HciEdgeDeviceJobProperties;
 
   @doc("Edge Solution type to support polymorphic resource.")
-  kind: "HCI";
+  kind: EdgeDeviceKind.HCI;
 }
 
 @doc("Represents the properties of a remote support job for HCI.")
