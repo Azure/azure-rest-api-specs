@@ -290,7 +290,7 @@ model LivenessSessionAuditEntry {
   @doc("The server calculated digest for this request. If the client reported digest differs from the server calculated digest, then the message integrity between the client and service has been compromised and the result should not be trusted. For more information, see how to guides on how to leverage this value to secure your end-to-end solution.")
   digest: string;
 
-  @doc("The image ID of the session reuqest.")
+  @doc("The image ID of the session request.")
   @added(Versions.v1_2_preview_1)
   sessionImageId?: string;
 
