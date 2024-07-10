@@ -11,10 +11,10 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(Error, "AnalyzeTextError", "csharp");
 @@clientName(TaskParameters, "ActionContent", "csharp");
 @@clientName(PreBuiltTaskParameters, "PreBuiltActionContent", "csharp");
-@@clientName(AbstractiveSummarizationTaskParametersBase,
-  "AbstractiveSummarizationActionContentBase",
-  "csharp"
-);
+// @@clientName(AbstractiveSummarizationTaskParametersBase,
+//   "AbstractiveSummarizationActionContentBase",
+//   "csharp"
+// );
 @@clientName(CustomTaskParameters, "CustomTaskContent", "csharp");
 @@clientName(Match, "EntityLinkingMatch", "csharp");
 @@clientName(Entity, "NamedEntity", "csharp");
