@@ -221,9 +221,9 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(LanguageDetectionAnalysisInput, "LanguageDetectionTextInput", "csharp");
 
 @@clientName(AnalyzeTextSentimentAnalysisInput, "TextSentimentAnalysisInput", "csharp");
-@@clientName(AnalyzeTextSentimentAnalysisInput.parameters, "ActionContent", "csharp");
+@@clientName(AnalyzeTextSentimentAnalysisInput.parameters, "SentimentAnalysisActionContent", "csharp");
 @@clientName(AnalyzeTextSentimentAnalysisInput.analysisInput, "TextInput", "csharp");
-@@clientName(SentimentAnalysisTaskParameters, "SentimentAnalysisAction", "csharp");
+@@clientName(SentimentAnalysisTaskParameters, "SentimentAnalysisActionContent", "csharp");
 
 @@clientName(AnalyzeTextPiiEntitiesRecognitionInput, "TextPiiEntitiesRecognitionInput", "csharp");
 @@clientName(AnalyzeTextPiiEntitiesRecognitionInput.parameters, "ActionContent", "csharp");
