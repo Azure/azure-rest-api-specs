@@ -15,43 +15,60 @@
             "id": "test-subnet-resource-id"
           },
           "applicationSharingPolicy": "Personal",
-          "customServices": [
-            {
-              "docker": {
-                "privileged": true
-              },
-              "environmentVariables": {
-                "test_variable": {
-                  "type": "local",
-                  "value": "test_value"
-                }
-              },
-              "volumes": [
-                {
-                  "type": "bind",
-                  "readOnly": false,
-                  "source": "/home/azureuser/cloudfiles",
-                  "target": "/home/azureuser/cloudfiles"
-                }
-              ],
-              "endpoints": [
-                {
-                  "name": "connect",
-                  "target": 8787,
-                  "published": 8787,
-                  "protocol": "http"
-                }
-              ],
-              "image": {
-                "type": "docker",
-                "reference": "ghcr.io/azure/rocker-rstudio-ml-verse:latest"
-              },
-              "name": "rstudio"
-            }
-          ],
+          "autologgerSettings": {
+            "mlflowAutologger": "Enabled"
+          },
           "sshSettings": {
             "sshPublicAccess": "Disabled"
           },
+          "enableOSPatching": true,
+          "releaseQuotaOnStop": true,
+          "enableSSO": true,
+          "enableRootAccess": true,
+          "customServices": [
+            {
+              "name": "rstudio-workbench",
+              "image": {
+                "type": "docker",
+                "reference": "ghcr.io/azure/rstudio-workbench:latest"
+              },
+              "environmentVariables": {
+                "RSP_LICENSE": {
+                  "type": "local",
+                  "value": "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
+                }
+              },
+              "docker": {
+                "privileged": true
+              },
+              "endpoints": [
+                {
+                  "protocol": "http",
+                  "name": "connect",
+                  "target": 8787,
+                  "published": 4444,
+                  "hostIp": null
+                }
+              ],
+              "volumes": [
+                {
+                  "type": "bind",
+                  "source": "/mnt/azureuser/",
+                  "target": "/home/testuser/",
+                  "readOnly": true
+                }
+              ],
+              "kernel": {
+                "displayName": "TestKernel",
+                "language": "python",
+                "argv": [
+                  "option1",
+                  "option2",
+                  "option3"
+                ]
+              }
+            }
+          ],
           "computeInstanceAuthorizationType": "personal",
           "personalComputeInstanceSettings": {
             "assignedUser": {
@@ -93,4 +110,3 @@
     }
   }
 }
-

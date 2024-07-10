@@ -35,38 +35,55 @@
               "latestImageVersion": "22.07.22",
               "isLatestOsImageVersion": false
             },
+            "enableOSPatching": true,
+            "releaseQuotaOnStop": true,
+            "enableSSO": true,
+            "enableRootAccess": true,
             "customServices": [
               {
+                "name": "rstudio-workbench",
+                "image": {
+                  "type": "docker",
+                  "reference": "ghcr.io/azure/rstudio-workbench:latest"
+                },
+                "environmentVariables": {
+                  "RSP_LICENSE": {
+                    "type": "local",
+                    "value": "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
+                  }
+                },
                 "docker": {
                   "privileged": true
                 },
-                "environmentVariables": {
-                  "test_var": {
-                    "type": "local",
-                    "value": "test_val"
+                "endpoints": [
+                  {
+                    "protocol": "http",
+                    "name": "connect",
+                    "target": 8787,
+                    "published": 4444,
+                    "hostIp": null
                   }
-                },
+                ],
                 "volumes": [
                   {
                     "type": "bind",
-                    "readOnly": false,
-                    "source": "/home/azureuser/cloudfiles",
-                    "target": "/home/azureuser/cloudfiles"
+                    "source": "/mnt/azureuser/",
+                    "target": "/home/testuser/",
+                    "readOnly": true,
+                    "consistency": "test",
+                    "bind": {
+                      "propagation": "test",
+                      "createHostPath": true,
+                      "selinux": "test"
+                    },
+                    "volume": {
+                      "nocopy": true
+                    },
+                    "tmpfs": {
+                      "size": 10
+                    }
                   }
-                ],
-                "endpoints": [
-                  {
-                    "name": "connect",
-                    "target": 8787,
-                    "published": 8787,
-                    "protocol": "http"
-                  }
-                ],
-                "image": {
-                  "type": "docker",
-                  "reference": "ghcr.io/azure/rocker-rstudio-ml-verse:latest"
-                },
-                "name": "rstudio"
+                ]
               }
             ],
             "computeInstanceAuthorizationType": "personal",
@@ -99,4 +116,3 @@
     }
   }
 }
-
