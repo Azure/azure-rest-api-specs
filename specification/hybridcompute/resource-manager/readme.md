@@ -89,47 +89,8 @@ directive:
             "description": "The expand expression to apply on the operation.",
           }
         ]
-  - from: HybridCompute.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/runCommands/{runCommandName}"].delete.responses'
-    transform: |-
-      return {
-        "200": {
-          "description": "OK"
-        },
-        "202": {
-          "description": "Accepted",
-          "headers": {
-            "Location": {
-              "description": "The URL of the resource used to check the status of the asynchronous operation.",
-              "type": "string"
-            },
-            "Retry-After": {
-              "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-              "type": "integer",
-              "format": "int32"
-            },
-            "Azure-AsyncOperation": {
-              "description": "The URI to poll for completion status.",
-              "type": "string"
-            }
-          }
-        },
-        "204": {
-          "description": "No Content"
-        },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
-        }
-      }
   - where:
       subject: NetworkProfile
-    remove: true
-  - where:
-      subject: MachineRunCommand
-      verb: Set
     remove: true
 
   # we don't want user to interact with them / we don't support some operations
@@ -146,7 +107,6 @@ directive:
   - remove-operation: NetworkConfigurations_Get
   - remove-operation: NetworkConfigurations_Update
   - remove-operation: NetworkConfigurations_CreateOrUpdate
-  - remove-operation: MachineRunCommands_Update #PATCH
 
 ```
 
