@@ -1179,7 +1179,6 @@ model AcsMessageAnalysisCompletedEventData extends AcsMessageEventData {
   languageDetection: AcsMessageLanguageDetection;
 }
 
-
 /** Message Media Content */
 model AcsMessageMediaContent {
   /** The MIME type of the file this media represents */
