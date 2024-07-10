@@ -1072,6 +1072,34 @@
         }
       }
     },
+    "JsonArrayMapperOperator": {
+      "type": "object",
+      "description": "an operator to be used by a receiver for json array parsing.",
+      "properties": {
+        "sourceField": {
+          "type": "string",
+          "description": "Json array mapper source.",
+          "default": "body",
+          "pattern": "^(body(?:\\.[^.]{1,14})?|attributes\\.[^.]{1,14})$"
+        },
+        "destinationField": {
+          "type": "string",
+          "description": "Json array mapper destination.",
+          "default": "attributes",
+          "pattern": "^(body(?:\\.[^.]{1,14})?|attributes\\.[^.]{1,14}|attributes)$"
+        },
+        "keys": {
+          "type": "array",
+          "description": "Json array mapper keys. the output will be a map containing keys and its keys and the parsed input json array fields as matching values",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "keys"
+      ]
+    },
     "Metrics": {
       "type": "object",
       "description": "Information about metrics for the workspace",
@@ -1926,6 +1954,10 @@
           "default": 1000,
           "minimum": 100,
           "maximum": 100000
+        },
+        "jsonArrayMapper": {
+          "$ref": "#/definitions/JsonArrayMapperOperator",
+          "description": "Jarray mapping operator."
         }
       },
       "required": [

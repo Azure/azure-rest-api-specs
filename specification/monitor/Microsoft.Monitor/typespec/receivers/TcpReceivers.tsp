@@ -1,7 +1,7 @@
 /*
   Definitions of elements defined for different TCP receivers.
 */
-
+import "../operators/JsonArrayOperator.tsp";
 using OpenAPI;
 
 namespace Microsoft.Monitor;
@@ -22,6 +22,9 @@ model UdpReceiver is TcpReceiver {
   @minValue(100)
   @maxValue(100000)
   readQueueLength?: int32 = 1000;
+
+  @doc("Jarray mapping operator.")
+  jsonArrayMapper?: JsonArrayMapperOperator;
 }
 
 @doc("Encoding types for streams.")
