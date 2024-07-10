@@ -9,8 +9,8 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(Tasks, "TasksStatus", "csharp");
 @@clientName(State, "CurrentState", "csharp");
 @@clientName(Error, "AnalyzeTextError", "csharp");
-@@clientName(TaskParameters, "ActionContent", "csharp");
-@@clientName(PreBuiltTaskParameters, "PreBuiltActionContent", "csharp");
+// @@clientName(TaskParameters, "ActionContent", "csharp");
+// @@clientName(PreBuiltTaskParameters, "PreBuiltActionContent", "csharp");
 // @@clientName(AbstractiveSummarizationTaskParametersBase,
 //   "AbstractiveSummarizationActionContentBase",
 //   "csharp"
@@ -221,7 +221,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(LanguageDetectionAnalysisInput, "LanguageDetectionTextInput", "csharp");
 
 @@clientName(AnalyzeTextSentimentAnalysisInput, "TextSentimentAnalysisInput", "csharp");
-@@clientName(AnalyzeTextSentimentAnalysisInput.parameters, "SentimentAnalysisActionContent", "csharp");
+@@clientName(AnalyzeTextSentimentAnalysisInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextSentimentAnalysisInput.analysisInput, "TextInput", "csharp");
 
 @@clientName(AnalyzeTextPiiEntitiesRecognitionInput, "TextPiiEntitiesRecognitionInput", "csharp");
@@ -234,22 +234,22 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextLanguageDetectionInput.analysisInput, "TextInput", "csharp");
 @@clientName(LanguageDetectionTaskParameters, "LanguageDetectionAction", "csharp");
 
-@@clientName(AnalyzeTextKeyPhraseExtractionInput, "TextSentimentAnalysisInput", "csharp");
+@@clientName(AnalyzeTextKeyPhraseExtractionInput, "TextKeyPhraseExtractionInput", "csharp");
 @@clientName(AnalyzeTextKeyPhraseExtractionInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextKeyPhraseExtractionInput.analysisInput, "TextInput", "csharp");
 @@clientName(KeyPhraseTaskParameters, "KeyPhraseTaskAction", "csharp");
 
-@@clientName(AnalyzeTextEntityRecognitionInput, "TextSentimentAnalysisInput", "csharp");
+@@clientName(AnalyzeTextEntityRecognitionInput, "TextEntityRecognitionInput", "csharp");
 @@clientName(AnalyzeTextEntityRecognitionInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextEntityRecognitionInput.analysisInput, "TextInput", "csharp");
 @@clientName(EntitiesTaskParameters, "EntitiesAction", "csharp");
 
-@@clientName(AnalyzeTextEntityLinkingInput, "TextSentimentAnalysisInput", "csharp");
+@@clientName(AnalyzeTextEntityLinkingInput, "TextEntityLinkingInput", "csharp");
 @@clientName(AnalyzeTextEntityLinkingInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextEntityLinkingInput.analysisInput, "TextInput", "csharp");
 @@clientName(EntityLinkingTaskParameters, "EntityLinkingAction", "csharp");
 
-@@clientName(AnalyzeTextDynamicClassificationInput, "TextSentimentAnalysisInput", "csharp");
+@@clientName(AnalyzeTextDynamicClassificationInput, "TextDynamicClassificationInput", "csharp");
 @@clientName(AnalyzeTextDynamicClassificationInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextDynamicClassificationInput.analysisInput, "TextInput", "csharp");
 @@clientName(DynamicClassificationTaskParameters, "DynamicClassificationAction", "csharp");
