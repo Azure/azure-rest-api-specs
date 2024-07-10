@@ -1080,13 +1080,51 @@
           "type": "string",
           "description": "Json array mapper source.",
           "default": "body",
-          "pattern": "^(body(?:\\.[^.]{1,14})?|attributes\\.[^.]{1,14})$"
+          "enum": [
+            "body",
+            "attributes"
+          ],
+          "x-ms-enum": {
+            "name": "MessageFieldType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "body",
+                "value": "body",
+                "description": "The message's body field"
+              },
+              {
+                "name": "attributes",
+                "value": "attributes",
+                "description": "The message's attributes field"
+              }
+            ]
+          }
         },
         "destinationField": {
           "type": "string",
           "description": "Json array mapper destination.",
           "default": "attributes",
-          "pattern": "^(body(?:\\.[^.]{1,14})?|attributes\\.[^.]{1,14}|attributes)$"
+          "enum": [
+            "body",
+            "attributes"
+          ],
+          "x-ms-enum": {
+            "name": "MessageFieldType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "body",
+                "value": "body",
+                "description": "The message's body field"
+              },
+              {
+                "name": "attributes",
+                "value": "attributes",
+                "description": "The message's attributes field"
+              }
+            ]
+          }
         },
         "keys": {
           "type": "array",
@@ -1099,6 +1137,30 @@
       "required": [
         "keys"
       ]
+    },
+    "MessageFieldType": {
+      "type": "string",
+      "description": "json array source and destination types. This are the options to read the json array from and write the parsed output to.",
+      "enum": [
+        "body",
+        "attributes"
+      ],
+      "x-ms-enum": {
+        "name": "MessageFieldType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "body",
+            "value": "body",
+            "description": "The message's body field"
+          },
+          {
+            "name": "attributes",
+            "value": "attributes",
+            "description": "The message's attributes field"
+          }
+        ]
+      }
     },
     "Metrics": {
       "type": "object",
@@ -1957,7 +2019,7 @@
         },
         "jsonArrayMapper": {
           "$ref": "#/definitions/JsonArrayMapperOperator",
-          "description": "Json array mapping operator."
+          "description": "Jarray mapping operator."
         }
       },
       "required": [
