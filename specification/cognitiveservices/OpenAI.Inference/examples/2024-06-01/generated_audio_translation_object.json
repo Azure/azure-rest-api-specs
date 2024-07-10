@@ -1,4 +1,5 @@
 {
+  "operationId": "GetAudioTranslationAsResponseObject",
   "title": "Gets English language transcribed text and associated metadata from provided spoken audio data.",
   "parameters": {
     "endpoint": "{endpoint}",
@@ -8,8 +9,9 @@
   },
   "responses": {
     "200": {
-      "type": "string",
-      "example": "plain text when requesting text, srt, or vtt"
+      "body": {
+        "text": "A structured object when requesting json or verbose_json"
+      }
     }
   }
 }
