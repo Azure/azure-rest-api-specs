@@ -87,12 +87,17 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gpus_ListByEdgeDevice": {
+            "$ref": "./examples/Gpus_ListByEdgeDevice_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/{resourceUri}/providers/Private.AzureStackHCI/edgeDevices/{edgeDeviceName}/gpus/{default}": {
+    "/{resourceUri}/providers/Private.AzureStackHCI/edgeDevices/{edgeDeviceName}/gpus/{gpuName}": {
       "get": {
         "operationId": "Gpus_Get",
         "tags": [
@@ -115,7 +120,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "default",
+            "name": "gpuName",
             "in": "path",
             "description": "The name of the Gpu",
             "required": true,
@@ -135,6 +140,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gpus_Get": {
+            "$ref": "./examples/Gpus_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -160,7 +170,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "default",
+            "name": "gpuName",
             "in": "path",
             "description": "The name of the Gpu",
             "required": true,
@@ -208,6 +218,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gpus_CreateOrUpdate": {
+            "$ref": "./examples/Gpus_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -235,7 +250,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "default",
+            "name": "gpuName",
             "in": "path",
             "description": "The name of the Gpu",
             "required": true,
@@ -266,6 +281,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gpus_Delete": {
+            "$ref": "./examples/Gpus_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {

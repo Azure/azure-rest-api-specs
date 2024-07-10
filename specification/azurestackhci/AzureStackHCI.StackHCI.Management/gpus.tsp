@@ -25,7 +25,6 @@ namespace Microsoft.AzureStackHCI;
 model Gpu is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = Gpu,
-    KeyName = "default",
     SegmentName = "gpus",
     NamePattern = "^[a-zA-Z0-9-]{3,24}$"
   >;
