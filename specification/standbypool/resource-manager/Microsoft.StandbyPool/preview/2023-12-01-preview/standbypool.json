@@ -355,7 +355,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StandbyContainerGroupPoolResourceUpdate"
+              "$ref": "#/definitions/StandbyContainerGroupPoolResource"
             }
           }
         ],
@@ -629,7 +629,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StandbyVirtualMachinePoolResourceUpdate"
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
             }
           }
         ],
@@ -847,29 +847,6 @@
         "id"
       ]
     },
-    "ContainerGroupProfileUpdate": {
-      "type": "object",
-      "description": "Details of the ContainerGroupProfile.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Specifies container group profile id of standby container groups.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ContainerInstance/containerGroupProfiles"
-              }
-            ]
-          }
-        },
-        "revision": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies revision of container group profile."
-        }
-      }
-    },
     "ContainerGroupProperties": {
       "type": "object",
       "description": "Details of the ContainerGroupProperties.",
@@ -889,23 +866,6 @@
       "required": [
         "containerGroupProfile"
       ]
-    },
-    "ContainerGroupPropertiesUpdate": {
-      "type": "object",
-      "description": "Details of the ContainerGroupProperties.",
-      "properties": {
-        "containerGroupProfile": {
-          "$ref": "#/definitions/ContainerGroupProfileUpdate",
-          "description": "Specifies container group profile of standby container groups."
-        },
-        "subnetIds": {
-          "type": "array",
-          "description": "Specifies subnet Ids for container group.",
-          "items": {
-            "$ref": "#/definitions/Subnet"
-          }
-        }
-      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -982,23 +942,6 @@
         "maxReadyCapacity"
       ]
     },
-    "StandbyContainerGroupPoolElasticityProfileUpdate": {
-      "type": "object",
-      "description": "Specifies the elasticity profile of the standby container group pools.",
-      "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies maximum number of standby container groups in the standby pool.",
-          "minimum": 0,
-          "maximum": 2000
-        },
-        "refillPolicy": {
-          "$ref": "#/definitions/RefillPolicy",
-          "description": "Specifies refill policy of the pool."
-        }
-      }
-    },
     "StandbyContainerGroupPoolResource": {
       "type": "object",
       "description": "A StandbyContainerGroupPoolResource.",
@@ -1059,37 +1002,6 @@
         "containerGroupProperties"
       ]
     },
-    "StandbyContainerGroupPoolResourceUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the StandbyContainerGroupPoolResource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/StandbyContainerGroupPoolResourceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "StandbyContainerGroupPoolResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the StandbyContainerGroupPoolResource.",
-      "properties": {
-        "elasticityProfile": {
-          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfileUpdate",
-          "description": "Specifies elasticity profile of standby container group pools."
-        },
-        "containerGroupProperties": {
-          "$ref": "#/definitions/ContainerGroupPropertiesUpdate",
-          "description": "Specifies container group properties of standby container group pools."
-        }
-      }
-    },
     "StandbyVirtualMachinePoolElasticityProfile": {
       "type": "object",
       "description": "Details of the elasticity profile.",
@@ -1105,19 +1017,6 @@
       "required": [
         "maxReadyCapacity"
       ]
-    },
-    "StandbyVirtualMachinePoolElasticityProfileUpdate": {
-      "type": "object",
-      "description": "Details of the elasticity profile.",
-      "properties": {
-        "maxReadyCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Specifies the maximum number of virtual machines in the standby virtual machine pool.",
-          "minimum": 0,
-          "maximum": 2000
-        }
-      }
     },
     "StandbyVirtualMachinePoolResource": {
       "type": "object",
@@ -1192,52 +1091,6 @@
       "required": [
         "virtualMachineState"
       ]
-    },
-    "StandbyVirtualMachinePoolResourceUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the StandbyVirtualMachinePoolResource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/StandbyVirtualMachinePoolResourceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "StandbyVirtualMachinePoolResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the StandbyVirtualMachinePoolResource.",
-      "properties": {
-        "elasticityProfile": {
-          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfileUpdate",
-          "description": "Specifies the elasticity profile of the standby virtual machine pools."
-        },
-        "virtualMachineState": {
-          "$ref": "#/definitions/VirtualMachineState",
-          "description": "Specifies the desired state of virtual machines in the pool.",
-          "x-ms-identifiers": [
-            "vmState"
-          ]
-        },
-        "attachedVirtualMachineScaleSetId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Compute/virtualMachineScaleSet"
-              }
-            ]
-          }
-        }
-      }
     },
     "StandbyVirtualMachineResource": {
       "type": "object",
