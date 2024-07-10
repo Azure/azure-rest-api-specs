@@ -498,12 +498,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "generateSasTokenParameters",
+            "name": "sasTokenGenerationParameters",
             "in": "body",
             "description": "The object containing information for the SAS token generation request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GenerateSasTokenParameters"
+              "$ref": "#/definitions/SasTokenGenerationParameters"
             }
           }
         ],
@@ -511,7 +511,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/SasTokenGenerateResult"
+              "$ref": "#/definitions/SasTokenGenerationResult"
             }
           },
           "default": {
@@ -528,13 +528,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/resetSas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/resetSasTokens": {
       "post": {
         "tags": [
           "ConfigurationStores"
         ],
-        "description": "Reset the SAS token of a given type.",
-        "operationId": "ConfigurationStores_ResetSas",
+        "description": "Reset all SAS tokens of a given kind (primary/secondary).",
+        "operationId": "ConfigurationStores_ResetSasTokens",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -549,12 +549,12 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "resetSasParameters",
+            "name": "resetSasTokensParameters",
             "in": "body",
             "description": "The object containing information for the SAS token reset request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResetSasParameters"
+              "$ref": "#/definitions/ResetSasTokensParameters"
             }
           }
         ],
@@ -571,7 +571,7 @@
         },
         "x-ms-examples": {
           "ConfigurationStores_ListKeys": {
-            "$ref": "./examples/ConfigurationStoresResetSas.json"
+            "$ref": "./examples/ConfigurationStoresResetSasTokens.json"
           }
         }
       }
@@ -2020,12 +2020,12 @@
         }
       }
     },
-    "GenerateSasTokenParameters": {
+    "SasTokenGenerationParameters": {
       "description": "Parameters used for generating SAS token.",
       "required": [
         "resourceType",
-        "exp",
-        "sasKind"
+        "expires",
+        "kind"
       ],
       "type": "object",
       "properties": {
@@ -2045,7 +2045,7 @@
           "description": "The parameters to define the data plane resource scope.",
           "$ref": "#/definitions/SignedParameters"
         },
-        "exp":{
+        "expires":{
           "description": "The time that the SAS token expires in the Universal ISO 8601 DateTime format. Max allowed expiration is 1 year from the time of token creation.",
           "type": "string",
           "format": "date-time"
@@ -2054,7 +2054,7 @@
           "description": "Time (in seconds) for which the data plane response may be cached by clients. App Config service sets the Cache-Control response header `max-age` to the value that's specified on the SAS token. See [rfc9111](https://www.rfc-editor.org/rfc/rfc9111#name-max-age-2) for more details.",
           "type": "number"
         },
-        "sasKind":{
+        "kind":{
           "description": "The kind of the SAS token.",
           "type": "string",
           "enum": [
@@ -2062,7 +2062,7 @@
             "Secondary"
           ],
           "x-ms-enum": {
-            "name": "sasKind",
+            "name": "kind",
             "modelAsString": true
           }
         }
@@ -2094,7 +2094,7 @@
         }
       }
     },
-    "SasTokenGenerateResult": {
+    "SasTokenGenerationResult": {
       "description": "The result of a request to generate a SAS token.",
       "type": "object",
       "properties": {
@@ -2108,22 +2108,22 @@
           "$ref": "#/definitions/SignedParameters",
           "readOnly": true
         },
-        "exp":{
+        "expires":{
           "description": "The time that the SAS token expires in the Universal ISO 8601 DateTime format. Max allowed expiration is 1 year from the time of token creation.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "cch":{
-          "description": "Time (in seconds) for which the data plane response may be cached by clients. App Config service sets the Cache-Control response header `max-age` to the value that's specified on the SAS token. See [rfc9111](https://www.rfc-editor.org/rfc/rfc9111#name-max-age-2) for more details.",
+          "description": "Time (in seconds) for which the data plane response may be cached by clients. App Configuration sets the Cache-Control response header `max-age` to the value that's specified on the SAS token. See [rfc9111](https://www.rfc-editor.org/rfc/rfc9111#name-max-age-2) for more details.",
           "type": "number"
         },
-        "sasKind":{
+        "kind":{
           "description": "The kind of the SAS token.",
           "type": "string",
           "readOnly": true
         },
-        "tokenValue":{
+        "value":{
           "description": "The value of the SAS token.",
           "type": "string",
           "format": "password",
@@ -2132,14 +2132,14 @@
         }
       }
     },
-    "ResetSasParameters": {
+    "ResetSasTokensParameters": {
       "description": "Parameters used for resetting SAS token.",
       "required": [
-        "sasKind"
+        "kind"
       ],
       "type": "object",
       "properties": {
-        "sasKind":{
+        "kind":{
           "description": "The kind of the SAS token.",
           "type": "string",
           "enum": [
@@ -2147,7 +2147,7 @@
             "Secondary"
           ],
           "x-ms-enum": {
-            "name": "sasKind",
+            "name": "kind",
             "modelAsString": true
           }
         }
