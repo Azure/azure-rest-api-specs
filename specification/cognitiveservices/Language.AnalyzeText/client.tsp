@@ -9,13 +9,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(Tasks, "TasksStatus", "csharp");
 @@clientName(State, "CurrentState", "csharp");
 @@clientName(Error, "AnalyzeTextError", "csharp");
-// @@clientName(TaskParameters, "ActionContent", "csharp");
-// @@clientName(PreBuiltTaskParameters, "PreBuiltActionContent", "csharp");
-// @@clientName(AbstractiveSummarizationTaskParametersBase,
-//   "AbstractiveSummarizationActionContentBase",
-//   "csharp"
-// );
-@@clientName(CustomTaskParameters, "CustomTaskContent", "csharp");
+
 @@clientName(Match, "EntityLinkingMatch", "csharp");
 @@clientName(Entity, "NamedEntity", "csharp");
 @@clientName(EntityInferenceOptions, "EntityInferenceConfig", "csharp");
@@ -36,10 +30,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(BaseTemporalMetadata, "TemporalMetadata", "csharp");
 
 @@clientName(BaseTemporalMetadata.dateValues, "Dates", "csharp");
-
-@@clientName(EntitiesTaskParameters.exclusionList, "Exclusions", "csharp");
-
-@@clientName(EntitiesTaskParameters.inclusionList, "Inclusions", "csharp");
 
 @@clientName(EntityCategory.GPE, "GeoPoliticalEntity", "csharp");
 
@@ -227,32 +217,34 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextPiiEntitiesRecognitionInput, "TextPiiEntitiesRecognitionInput", "csharp");
 @@clientName(AnalyzeTextPiiEntitiesRecognitionInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextPiiEntitiesRecognitionInput.analysisInput, "TextInput", "csharp");
-@@clientName(PiiTaskParameters, "PiiAction", "csharp");
+@@clientName(PiiTaskParameters, "PiiActionContent", "csharp");
 
 @@clientName(AnalyzeTextLanguageDetectionInput, "TextLanguageDetectionInput", "csharp");
 @@clientName(AnalyzeTextLanguageDetectionInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextLanguageDetectionInput.analysisInput, "TextInput", "csharp");
-@@clientName(LanguageDetectionTaskParameters, "LanguageDetectionAction", "csharp");
+@@clientName(LanguageDetectionTaskParameters, "LanguageDetectionActionContent", "csharp");
 
 @@clientName(AnalyzeTextKeyPhraseExtractionInput, "TextKeyPhraseExtractionInput", "csharp");
 @@clientName(AnalyzeTextKeyPhraseExtractionInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextKeyPhraseExtractionInput.analysisInput, "TextInput", "csharp");
-@@clientName(KeyPhraseTaskParameters, "KeyPhraseTaskAction", "csharp");
+@@clientName(KeyPhraseTaskParameters, "KeyPhraseTaskActionContent", "csharp");
 
 @@clientName(AnalyzeTextEntityRecognitionInput, "TextEntityRecognitionInput", "csharp");
 @@clientName(AnalyzeTextEntityRecognitionInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextEntityRecognitionInput.analysisInput, "TextInput", "csharp");
-@@clientName(EntitiesTaskParameters, "EntitiesAction", "csharp");
+@@clientName(EntitiesTaskParameters, "EntitiesActionContent", "csharp");
+@@clientName(EntitiesTaskParameters.exclusionList, "Exclusions", "csharp");
+@@clientName(EntitiesTaskParameters.inclusionList, "Inclusions", "csharp");
 
 @@clientName(AnalyzeTextEntityLinkingInput, "TextEntityLinkingInput", "csharp");
 @@clientName(AnalyzeTextEntityLinkingInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextEntityLinkingInput.analysisInput, "TextInput", "csharp");
-@@clientName(EntityLinkingTaskParameters, "EntityLinkingAction", "csharp");
+@@clientName(EntityLinkingTaskParameters, "EntityLinkingActionContent", "csharp");
 
 @@clientName(AnalyzeTextDynamicClassificationInput, "TextDynamicClassificationInput", "csharp");
 @@clientName(AnalyzeTextDynamicClassificationInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextDynamicClassificationInput.analysisInput, "TextInput", "csharp");
-@@clientName(DynamicClassificationTaskParameters, "DynamicClassificationAction", "csharp");
+@@clientName(DynamicClassificationTaskParameters, "DynamicClassificationActionContent", "csharp");
 
 
 
@@ -278,59 +270,55 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(SentimentAnalysisLROTask, "SentimentAnalysisOperationAction", "csharp");
 @@clientName(SentimentAnalysisLROTask.parameters, "ActionContent", "csharp");
-@@clientName(SentimentAnalysisTaskParameters, "SentimentAnalysisAction", "csharp");
+@@clientName(SentimentAnalysisTaskParameters, "SentimentAnalysisActionContent", "csharp");
 
 @@clientName(CustomSentimentAnalysisLROTask, "CustomSentimentAnalysisOperationAction", "csharp");
 @@clientName(CustomSentimentAnalysisLROTask.parameters, "ActionContent", "csharp");
-@@clientName(CustomSentimentAnalysisTaskParameters, "CustomSentimentAnalysisAction", "csharp");
+@@clientName(CustomSentimentAnalysisTaskParameters, "CustomSentimentAnalysisActionContent", "csharp");
 
 @@clientName(ExtractiveSummarizationLROTask, "ExtractiveSummarizationOperationAction", "csharp");
 @@clientName(ExtractiveSummarizationLROTask.parameters, "ActionContent", "csharp");
-@@clientName(ExtractiveSummarizationTaskParameters, "ExtractiveSummarizationAction", "csharp");
+@@clientName(ExtractiveSummarizationTaskParameters, "ExtractiveSummarizationActionContent", "csharp");
 
 @@clientName(AbstractiveSummarizationLROTask, "AbstractiveSummarizationOperationAction", "csharp");
 @@clientName(AbstractiveSummarizationLROTask.parameters, "ActionContent", "csharp");
-@@clientName(AbstractiveSummarizationTaskParameters, "AbstractiveSummarizationAction", "csharp");
+@@clientName(AbstractiveSummarizationTaskParameters, "AbstractiveSummarizationActionContent", "csharp");
 
 @@clientName(CustomAbstractiveSummarizationLROTask, "CustomAbstractiveSummarizationOperationAction", "csharp");
 @@clientName(CustomAbstractiveSummarizationLROTask.parameters, "ActionContent", "csharp");
-@@clientName(CustomAbstractiveSummarizationTaskParameters, "CustomAbstractiveSummarizationAction", "csharp");
+@@clientName(CustomAbstractiveSummarizationTaskParameters, "CustomAbstractiveSummarizationActionContent", "csharp");
 
 @@clientName(PiiLROTask, "PiiOperationAction", "csharp");
 @@clientName(PiiLROTask.parameters, "ActionContent", "csharp");
-@@clientName(PiiTaskParameters, "PiiAction", "csharp");
 
 @@clientName(KeyPhraseLROTask, "KeyPhraseOperationAction", "csharp");
 @@clientName(KeyPhraseLROTask.parameters, "ActionContent", "csharp");
-@@clientName(KeyPhraseTaskParameters, "KeyPhraseAction", "csharp");
 
 @@clientName(HealthcareLROTask, "HealthcareOperationAction", "csharp");
 @@clientName(HealthcareLROTask.parameters, "ActionContent", "csharp");
-@@clientName(HealthcareTaskParameters, "HealthcareAction", "csharp");
+@@clientName(HealthcareTaskParameters, "HealthcareActionContent", "csharp");
 
 @@clientName(EntitiesLROTask, "EntitiesOperationAction", "csharp");
 @@clientName(EntitiesLROTask.parameters, "ActionContent", "csharp");
-@@clientName(EntitiesTaskParameters, "EntitiesAction", "csharp");
 
 @@clientName(EntityLinkingLROTask, "EntityLinkingOperationAction", "csharp");
 @@clientName(EntityLinkingLROTask.parameters, "ActionContent", "csharp");
-@@clientName(EntityLinkingTaskParameters, "EntityLinkingAction", "csharp");
 
 @@clientName(CustomMultiLabelClassificationLROTask, "CustomMultiLabelClassificationOperationAction", "csharp");
 @@clientName(CustomMultiLabelClassificationLROTask.parameters, "ActionContent", "csharp");
-@@clientName(CustomMultiLabelClassificationTaskParameters, "CustomMultiLabelClassificationAction", "csharp");
+@@clientName(CustomMultiLabelClassificationTaskParameters, "CustomMultiLabelClassificationActionContent", "csharp");
 
 @@clientName(CustomSingleLabelClassificationLROTask, "CustomSingleLabelClassificationOperationAction", "csharp");
 @@clientName(CustomSingleLabelClassificationLROTask.parameters, "ActionContent", "csharp");
-@@clientName(CustomSingleLabelClassificationTaskParameters, "CustomSingleLabelClassificationAction", "csharp");
+@@clientName(CustomSingleLabelClassificationTaskParameters, "CustomSingleLabelClassificationActionContent", "csharp");
 
 @@clientName(CustomEntitiesLROTask, "CustomEntitiesOperationAction", "csharp");
 @@clientName(CustomEntitiesLROTask.parameters, "ActionContent", "csharp");
-@@clientName(CustomEntitiesTaskParameters, "CustomEntitiesAction", "csharp");
+@@clientName(CustomEntitiesTaskParameters, "CustomEntitiesActionContent", "csharp");
 
 @@clientName(CustomHealthcareLROTask, "CustomHealthcareOperationAction", "csharp");
 @@clientName(CustomHealthcareLROTask.parameters, "ActionContent", "csharp");
-@@clientName(CustomHealthcareTaskParameters, "CustomHealthcareAction", "csharp");
+@@clientName(CustomHealthcareTaskParameters, "CustomHealthcareActionContent", "csharp");
 
 
 @@clientName(AnalyzeTextJobState, "AnalyzeTextOperationState", "csharp");
