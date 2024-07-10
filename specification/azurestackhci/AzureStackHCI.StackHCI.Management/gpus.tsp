@@ -12,7 +12,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 @doc("A EdgeDevice")
-@armProviderNamespace("Private.AzureStackHCI")
+@armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
 /**
@@ -25,6 +25,7 @@ namespace Microsoft.AzureStackHCI;
 model Gpu is Azure.ResourceManager.ExtensionResource<{}> {
   ...ResourceNameParameter<
     Resource = Gpu,
+    KeyName = "gpuName",
     SegmentName = "gpus",
     NamePattern = "^[a-zA-Z0-9-]{3,24}$"
   >;
@@ -188,7 +189,7 @@ model GpuDetails {
   @visibility("read")
   validPartitionCount?: string[];
 
-  @doc("This is the assignment status of the GPU. Assignable, Assigned, Unassignable")
+  @doc("This is the assignment status of the GPU.")
   @visibility("read")
   assignmentStatus?: string;
 
