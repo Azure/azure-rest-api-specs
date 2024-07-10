@@ -41,7 +41,7 @@ model BaseCreateLivenessSessionContent {
 
 @doc("Request for creating liveness session.")
 model CreateLivenessSessionContent is BaseCreateLivenessSessionContent {
-  @doc("The model version of liveness singel modal.")
+  @doc("The model version of liveness single modal.")
   @added(Versions.v1_2_preview_1)
   livenessSingleModalModel: LivenessModel;
 }
