@@ -642,10 +642,18 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/CreateLivenessWithVerifySessionContent.Parameters"
+            "name": "Parameters",
+            "in": "formData",
+            "description": "The parameters for creating session.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/CreateLivenessWithVerifySessionContent.VerifyImage"
+            "name": "VerifyImage",
+            "in": "formData",
+            "description": "The image stream for verify. Content-Disposition header field for this part must have filename.",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
@@ -9405,22 +9413,5 @@
       "pattern": "^[a-z0-9-_]+$"
     }
   },
-  "parameters": {
-    "CreateLivenessWithVerifySessionContent.Parameters": {
-      "name": "Parameters",
-      "in": "formData",
-      "description": "The parameters for creating session.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "CreateLivenessWithVerifySessionContent.VerifyImage": {
-      "name": "VerifyImage",
-      "in": "formData",
-      "description": "The image stream for verify. Content-Disposition header field for this part must have filename.",
-      "required": true,
-      "type": "file",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
