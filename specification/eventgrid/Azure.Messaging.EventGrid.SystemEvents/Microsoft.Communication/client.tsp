@@ -511,9 +511,3 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsMessageAnalysisCompletedEventData,
-  Usage.output
-);
-@@access(Microsoft.EventGrid.SystemEvents.AcsMessageAnalysisCompletedEventData,
-  Access.public
-);
