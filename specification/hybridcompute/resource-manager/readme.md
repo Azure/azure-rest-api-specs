@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-2024-07
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -150,6 +150,16 @@ directive:
 
 ```
 
+
+### Tag: package-2024-07
+
+These settings apply only when `--tag=package-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07'
+input-file:
+  - Microsoft.HybridCompute/stable/2024-07-10/HybridCompute.json
+  - Microsoft.HybridCompute/stable/2024-07-10/privateLinkScopes.json
+```
 
 ### Tag: package-preview-2024-05
 
