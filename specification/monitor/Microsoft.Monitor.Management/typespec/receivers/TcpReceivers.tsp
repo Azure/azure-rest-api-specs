@@ -1,7 +1,7 @@
 /*
   Definitions of elements defined for different TCP receivers.
 */
-import "../operators/JsonArrayOperator.tsp";
+import "../operators/JsonArrayMapperOperator.tsp";
 using OpenAPI;
 
 namespace Microsoft.Monitor;
