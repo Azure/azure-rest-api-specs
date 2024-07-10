@@ -1480,11 +1480,10 @@
           "description": "Detailed information about the status if any",
           "$ref": "#/definitions/AcsEmailDeliveryReportStatusDetails"
         },
-        "deliveryAttemptTimeStamp": {
+        "deliveryAttemptTimestamp": {
           "description": "The time at which the email delivery report received timestamp",
           "format": "date-time",
-          "type": "string",
-          "x-ms-client-name": "deliveryAttemptTimestamp"
+          "type": "string"
         }
       }
     },
@@ -1504,11 +1503,10 @@
           "description": "The Id of the email that has been sent",
           "type": "string"
         },
-        "userActionTimeStamp": {
+        "userActionTimestamp": {
           "description": "The time at which the user interacted with the email",
           "format": "date-time",
-          "type": "string",
-          "x-ms-client-name": "userActionTimestamp"
+          "type": "string"
         },
         "engagementContext": {
           "description": "The context of the type of engagement user had with email",
@@ -1670,6 +1668,70 @@
         },
         "snapshotCreatedEventGridSchema": {
           "$ref": "./examples/event-grid-schema/advanced_message_delivery_status_updated.json"
+        }
+      }
+    },
+    "AcsMessageAnalysisCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageAnalysisCompleted event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsMessageEventData"
+        }
+      ],
+      "properties": {
+        "originalMessage": {
+          "description": "The original message received",
+          "type": "string"
+        },
+        "channelType": {
+          "description": "The Analysed message channel Kind",
+          "type": "string",
+          "x-ms-client-name": "channelKind",
+          "enum": [
+            "whatsapp"
+          ],
+          "x-ms-enum": {
+            "name": "AcsMessageChannelKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "whatsapp",
+                "description": "Updated message channel type is Whatsapp"
+              }
+            ]
+          }
+        },
+        "intentAnalysis": {
+          "description": "The intent of the analysed message",
+          "type": "string"
+        },
+        "extractedKeyPhrases": {
+          "description": "List of key phrases extracted",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "languageDetection": {
+          "description": "The analysed message language detection",
+          "$ref": "#/definitions/AcsMessageLanguageDetection",
+          "type": "object"
+        }
+      },
+      "required": [
+        "originalMessage",
+        "channelType",
+        "intentAnalysis",
+        "extractedKeyPhrases",
+        "languageDetection"
+      ],
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/advanced_message_analysis_completed.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/advanced_message_analysis_completed.json"
         }
       }
     },
@@ -2340,6 +2402,30 @@
           "type": "string"
         }
       }
+    },
+    "AcsMessageLanguageDetection": {
+      "description": "Message Analysis Language Detection",
+      "type": "object",
+      "properties": {
+        "language": {
+          "description": "The language of the message",
+          "type": "string"
+        },
+        "confidenceScore": {
+          "description": "The confidence score of the language detected",
+          "type": "number",
+          "format": "double"
+        },
+        "translation": {
+          "description": "The translation of the message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "language",
+        "confidenceScore",
+        "translation"
+      ]
     }
   }
 }

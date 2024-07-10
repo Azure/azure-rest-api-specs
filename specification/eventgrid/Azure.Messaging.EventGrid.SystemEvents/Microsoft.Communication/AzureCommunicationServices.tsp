@@ -252,7 +252,7 @@ model AcsEmailDeliveryReportReceivedEventData {
   deliveryStatusDetails: AcsEmailDeliveryReportStatusDetails;
 
   /** The time at which the email delivery report received timestamp */
-  deliveryAttemptTimeStamp: utcDateTime;
+  deliveryAttemptTimestamp: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event. */
@@ -267,7 +267,7 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   messageId?: string;
 
   /** The time at which the user interacted with the email */
-  userActionTimeStamp: utcDateTime;
+  userActionTimestamp: utcDateTime;
 
   /** The context of the type of engagement user had with email */
   engagementContext?: string;
@@ -1160,6 +1160,25 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
   interactive: AcsMessageInteractiveContent;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageAnalysisCompleted event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsMessageAnalysisCompletedEventData extends AcsMessageEventData {
+  /** The original message received. */
+  originalMessage: string;
+
+  /** The analysed message channel kind. */
+  channelKind: AcsMessageChannelKind;
+
+  /** The intent of the analysed message. */
+  intentAnalysis: string;
+
+  /** List of key phrases extracted. */
+  extractedKeyPhrases: string[];
+
+  /** The analysed message language detection. */
+  languageDetection: AcsMessageLanguageDetection;
+}
+
 /** Message Media Content */
 model AcsMessageMediaContent {
   /** The MIME type of the file this media represents */
@@ -1248,6 +1267,18 @@ model AcsMessageChannelEventError {
 
   /** The channel error message */
   channelMessage?: string;
+}
+
+/** Message Analysis Language Detection */
+model AcsMessageLanguageDetection {
+  /** The language of the message. */
+  language: string;
+
+  /** The confidence score of the language detected. */
+  confidenceScore: float64;
+
+  /** The translation of the message. */
+  translation: string;
 }
 
 /** Interactive reply kind */
