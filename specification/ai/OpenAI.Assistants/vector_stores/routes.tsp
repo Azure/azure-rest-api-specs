@@ -69,7 +69,11 @@ op modifyVectorStore(
   /** The ID of the vector store to modify. */
   @path vectorStoreId: string,
 
-  ...BodyParameter<VectorStoreUpdateOptions>,
+  /**
+   * Request object for updating a vector store.
+   */
+  @bodyRoot
+  body: VectorStoreUpdateOptions,
 ): VectorStore;
 
 /**
