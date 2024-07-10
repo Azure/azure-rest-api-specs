@@ -128,7 +128,6 @@ model HciGpuReportedProperties {
 
 @doc("Represents the details of a GPU.")
 model GpuDetails {
-  
   @doc("Represents the details of a GPU.")
   @visibility("read")
   gpuId?: string;
