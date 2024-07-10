@@ -23,7 +23,7 @@ model UdpReceiver is TcpReceiver {
   @maxValue(100000)
   readQueueLength?: int32 = 1000;
 
-  @doc("Jarray mapping operator.")
+  @doc("Json array mapping operator.")
   jsonArrayMapper?: JsonArrayMapperOperator;
 }
 
