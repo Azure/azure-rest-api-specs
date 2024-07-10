@@ -272,6 +272,15 @@
             "$ref": "#/parameters/EnableSnapshotVirtualDirectoryAccess"
           },
           {
+            "$ref": "#/parameters/PaidBurstingEnabled"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingMaxBandwidthMibps"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingMaxIops"
+          },
+          {
             "$ref": "#/parameters/FileRequestIntent"
           }
         ],
@@ -488,6 +497,23 @@
                 "x-ms-client-name": "EnableSnapshotVirtualDirectoryAccess",
                 "description": "Version 2023-08-03 and newer. Specifies whether the snapshot virtual directory should be accessible at the root of share mount point when NFS is enabled. This header is only returned for shares, not for snapshots.",
                 "type": "boolean"
+              },
+              "x-ms-share-paid-bursting-enabled": {
+                "x-ms-client-name": "PaidBurstingEnabled",
+                "description": "Optional. Boolean. Default if not specified is false. This property enables paid bursting.",
+                "type": "boolean"
+              },
+              "x-ms-share-paid-bursting-max-iops": {
+                "x-ms-client-name": "PaidBurstingMaxIops",
+                "description": "Optional. Integer. Default if not specified is the maximum IOPS the file share can support. Current maximum for a file share is 102,400 IOPS.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "x-ms-share-paid-bursting-max-bandwidth-mibps": {
+                "x-ms-client-name": "PaidBurstingMaxBandwidthMibps",
+                "description": "Optional. Integer. Default if not specified is the maximum throughput the file share can support. Current maximum for a file share is 10,340 MiB/sec.",
+                "type": "integer",
+                "format": "int64"
               }
             }
           },
@@ -1481,6 +1507,15 @@
           },
           {
             "$ref": "#/parameters/EnableSnapshotVirtualDirectoryAccess"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingEnabled"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingMaxBandwidthMibps"
+          },
+          {
+            "$ref": "#/parameters/PaidBurstingMaxIops"
           },
           {
             "$ref": "#/parameters/FileRequestIntent"
@@ -6499,6 +6534,17 @@
         },
         "EnableSnapshotVirtualDirectoryAccess": {
           "type": "boolean"
+        },
+        "PaidBurstingEnabled": {
+          "type": "boolean"
+        },
+        "PaidBurstingMaxIops": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "PaidBurstingMaxBandwidthMibps": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -7243,6 +7289,35 @@
         "format": "file"
       },
       "x-ms-parameter-location": "method"
+    },
+    "PaidBurstingEnabled": {
+      "name": "x-ms-share-paid-bursting-enabled",
+      "x-ms-client-name": "paidBurstingEnabled",
+      "description": "Optional. Boolean. Default if not specified is false. This property enables paid bursting.",
+      "in": "header",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "type": "boolean"
+    },
+    "PaidBurstingMaxBandwidthMibps": {
+      "name": "x-ms-share-paid-bursting-max-bandwidth-mibps",
+      "x-ms-client-name": "PaidBurstingMaxBandwidthMibps",
+      "description": "Optional. Integer. Default if not specified is the maximum throughput the file share can support. Current maximum for a file share is 10,340  MiB/sec.",
+      "in": "header",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "type": "integer",
+      "format": "int64"
+    },
+    "PaidBurstingMaxIops": {
+      "name": "x-ms-share-paid-bursting-max-iops",
+      "x-ms-client-name": "paidBurstingMaxIops",
+      "description": "Optional. Integer. Default if not specified is the maximum IOPS the file share can support. Current maximum for a file share is 102,400 IOPS.",
+      "in": "header",
+      "x-ms-parameter-location": "method",
+      "required": false,
+      "type": "integer",
+      "format": "int64"
     },
     "Prefix": {
       "name": "prefix",
