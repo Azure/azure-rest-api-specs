@@ -223,7 +223,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextSentimentAnalysisInput, "TextSentimentAnalysisInput", "csharp");
 @@clientName(AnalyzeTextSentimentAnalysisInput.parameters, "SentimentAnalysisActionContent", "csharp");
 @@clientName(AnalyzeTextSentimentAnalysisInput.analysisInput, "TextInput", "csharp");
-@@clientName(SentimentAnalysisTaskParameters, "SentimentAnalysisActionContent", "csharp");
 
 @@clientName(AnalyzeTextPiiEntitiesRecognitionInput, "TextPiiEntitiesRecognitionInput", "csharp");
 @@clientName(AnalyzeTextPiiEntitiesRecognitionInput.parameters, "ActionContent", "csharp");
