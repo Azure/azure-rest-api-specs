@@ -5,10 +5,11 @@ import "@azure-tools/typespec-azure-core";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Face;
 
-@doc("The liveness operation mode to drive the client’s end-user experience.")
+@doc("The liveness operation mode to drive the client's end-user experience.")
 union LivenessOperationMode {
   string,
 
@@ -20,8 +21,8 @@ union LivenessOperationMode {
 }
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
-@doc("Request for creating liveness session.")
-model CreateLivenessSessionContent {
+@doc("Base model for creating liveness session.")
+model BaseCreateLivenessSessionContent {
   @doc("Type of liveness mode the client should follow.")
   livenessOperationMode: LivenessOperationMode;
 
@@ -31,7 +32,32 @@ model CreateLivenessSessionContent {
   @doc("Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body.")
   deviceCorrelationIdSetInClient?: boolean;
 
+  @doc("Whether or not store the session image.")
+  @added(Versions.v1_2_preview_1)
+  enableSessionImage?: boolean;
+
   ...LivenessSessionData;
+}
+
+@doc("Request for creating liveness session.")
+model CreateLivenessSessionContent is BaseCreateLivenessSessionContent {
+  @doc("The model version of liveness singel modal.")
+  @added(Versions.v1_2_preview_1)
+  livenessSingleModalModel: LivenessModel;
+}
+
+@doc("Request for creating liveness with verify session.")
+model CreateLivenessWithVerifySessionContent
+  is BaseCreateLivenessSessionContent {
+  @doc("Whether or not return the verify image hash.")
+  @added(Versions.v1_2_preview_1)
+  returnVerifyImageHash?: boolean;
+
+  @doc("Threshold for confidence of the face verification.")
+  @added(Versions.v1_2_preview_1)
+  @minValue(0)
+  @maxValue(1)
+  verifyConfidenceThreshold?: float32;
 }
 
 @doc("Data for liveness session.")
@@ -266,10 +292,10 @@ model LivenessSessionAuditEntry {
 }
 
 @doc("Request of liveness with verify session creation.")
-model CreateLivenessWithVerifySessionContent {
+model CreateLivenessWithVerifySessionMultipartBody {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
-  Parameters: CreateLivenessSessionContent;
+  Parameters: CreateLivenessWithVerifySessionContent;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
@@ -284,5 +310,16 @@ model CreateLivenessWithVerifySessionRequest {
 
   @doc("Request content of liveness with verify session creation.")
   @body
-  body: CreateLivenessWithVerifySessionContent;
+  body: CreateLivenessWithVerifySessionMultipartBody;
+}
+
+@doc("Response model of get session image.")
+model SessionImage {
+  @doc("The format of the HTTP payload.")
+  @header
+  contentType: "application/octet-stream";
+
+  @doc("The image to be analyzed")
+  @body
+  imageContent: bytes;
 }
