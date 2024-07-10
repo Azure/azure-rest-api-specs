@@ -923,47 +923,6 @@
         ]
       }
     },
-    "AcsMessageAnalysisCompletedEventData": {
-      "type": "object",
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageAnalysisCompleted event.",
-      "properties": {
-        "originalMessage": {
-          "type": "string",
-          "description": "The original message received."
-        },
-        "channelKind": {
-          "$ref": "#/definitions/AcsMessageChannelKind",
-          "description": "The analysed message channel kind."
-        },
-        "intentAnalysis": {
-          "type": "string",
-          "description": "The intent of the analysed message."
-        },
-        "extractedKeyPhrases": {
-          "type": "array",
-          "description": "List of key phrases extracted.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "languageDetection": {
-          "$ref": "#/definitions/AcsMessageLanguageDetection",
-          "description": "The analysed message language detection."
-        }
-      },
-      "required": [
-        "originalMessage",
-        "channelKind",
-        "intentAnalysis",
-        "extractedKeyPhrases",
-        "languageDetection"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AcsMessageEventData"
-        }
-      ]
-    },
     "AcsMessageButtonContent": {
       "type": "object",
       "description": "Message Button Content",
@@ -1185,30 +1144,6 @@
           "description": "The description of the selected row"
         }
       }
-    },
-    "AcsMessageLanguageDetection": {
-      "type": "object",
-      "description": "Message Analysis Language Detection",
-      "properties": {
-        "language": {
-          "type": "string",
-          "description": "The language of the message."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "The confidence score of the language detected."
-        },
-        "translation": {
-          "type": "string",
-          "description": "The translation of the message."
-        }
-      },
-      "required": [
-        "language",
-        "confidenceScore",
-        "translation"
-      ]
     },
     "AcsMessageMediaContent": {
       "type": "object",
