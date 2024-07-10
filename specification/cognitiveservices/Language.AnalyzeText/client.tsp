@@ -12,7 +12,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(TaskParameters, "ActionContent", "csharp");
 @@clientName(PreBuiltTaskParameters, "PreBuiltActionContent", "csharp");
 @@clientName(AbstractiveSummarizationTaskParametersBase,
-  "AbstractiveSummarizationActionContent",
+  "AbstractiveSummarizationActionContentBase",
   "csharp"
 );
 @@clientName(CustomTaskParameters, "CustomTaskContent", "csharp");
