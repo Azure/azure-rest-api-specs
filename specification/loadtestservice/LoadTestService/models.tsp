@@ -498,7 +498,7 @@ model TestInputArtifacts {
 model FileInfo {
   @doc("Name of the file.")
   @key
-  @visibility("read")
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "model is output only"
   fileName: string;
 
   @doc("File URL.")
