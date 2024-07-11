@@ -35,8 +35,9 @@ model FileSearchToolDefinition extends ToolDefinition {
   /**
    * Options overrides for the file search tool.
    */
+  @encodedName("application/json", "file_search")
   @added(ServiceApiVersions.v2024_07_01_preview)
-  file_search?: FileSearchToolDefinitionDetails;
+  fileSearch?: FileSearchToolDefinitionDetails;
 }
 
 @doc("The input definition information for a function tool as used to configure an assistant.")
@@ -61,9 +62,10 @@ model FileSearchToolDefinitionDetails {
    *
    * Note that the file search tool may output fewer than `max_num_results` results. See the file search tool documentation for more information.
    */
+  @encodedName("application/json", "max_num_results")
   @minValue(1)
   @maxValue(50)
-  max_num_results?: int32;
+  maxNumResults?: int32;
 }
 
 // Definition details: Functions
