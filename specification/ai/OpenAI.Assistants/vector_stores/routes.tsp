@@ -34,7 +34,7 @@ op listVectorStores(
 @post
 @route("/vector_stores")
 @added(ServiceApiVersions.v2024_05_01_preview)
-op createVectorStore(...VectorStoreOptions): VectorStore;
+op createVectorStore(...BodyParameter<VectorStoreOptions>): VectorStore;
 
 /**
  * Returns the vector store object matching the specified ID.
@@ -63,7 +63,7 @@ op modifyVectorStore(
   /** The ID of the vector store to modify. */
   @path vectorStoreId: string,
 
-  ...VectorStoreUpdateOptions,
+  ...BodyParameter<VectorStoreUpdateOptions>,
 ): VectorStore;
 
 /**
