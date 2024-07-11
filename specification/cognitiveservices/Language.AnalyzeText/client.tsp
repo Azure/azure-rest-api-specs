@@ -330,7 +330,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextLROResultsKind, "AnalyzeTextOperationResultsKind", "csharp");
 @@clientName(AnalyzeTextLROResultsKind.SentimentAnalysisLROResults, "SentimentAnalysisOperationResults", "csharp");
 @@clientName(AnalyzeTextLROResultsKind.EntityRecognitionLROResults, "EntityRecognitionOperationResults", "csharp");
-@@clientName(AnalyzeTextLROResultsKind.PiiEntityRecognitionLROResults, "EntityRecognitionOperationResults", "csharp");
+@@clientName(AnalyzeTextLROResultsKind.PiiEntityRecognitionLROResults, "PiiEntityRecognitionOperationResults", "csharp");
 @@clientName(AnalyzeTextLROResultsKind.KeyPhraseExtractionLROResults, "KeyPhraseExtractionOperationResults", "csharp");
 @@clientName(AnalyzeTextLROResultsKind.EntityLinkingLROResults, "EntityLinkingOperationResults", "csharp");
 @@clientName(AnalyzeTextLROResultsKind.HealthcareLROResults, "HealthcareOperationResults", "csharp");
