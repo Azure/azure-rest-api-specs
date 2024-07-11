@@ -164,7 +164,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "The resource instance.",
+            "description": "The Radiology Insights request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RadiologyInsightsJob"
@@ -175,7 +175,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RadiologyInsightsJob"
+              "$ref": "#/definitions/RadiologyInsightsInferenceResult"
             },
             "headers": {
               "Operation-Location": {
@@ -193,7 +193,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/RadiologyInsightsJob"
+              "$ref": "#/definitions/RadiologyInsightsInferenceResult"
             },
             "headers": {
               "Operation-Location": {
