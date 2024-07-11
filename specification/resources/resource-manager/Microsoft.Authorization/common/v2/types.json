@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "v1"
+    "version": "v2"
   },
   "paths": {},
   "definitions": {
@@ -84,7 +84,8 @@
           "type": "string",
           "description": "The override kind.",
           "enum": [
-            "policyEffect"
+            "policyEffect",
+            "definitionVersion"
           ],
           "x-ms-enum": {
             "name": "OverrideKind",
@@ -93,6 +94,10 @@
               {
                 "value": "policyEffect",
                 "description": "It will override the policy effect type."
+              },
+              {
+                "value": "definitionVersion",
+                "description": "It will override the definition version property value of the policy assignment."
               }
             ]
           }

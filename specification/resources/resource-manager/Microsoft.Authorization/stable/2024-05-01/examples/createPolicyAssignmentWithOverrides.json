@@ -2,7 +2,7 @@
   "parameters": {
     "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
     "policyAssignmentName": "CostManagement",
-    "api-version": "2024-04-01",
+    "api-version": "2024-05-01",
     "parameters": {
       "properties": {
         "displayName": "Limit the resource location and resource SKU",
@@ -11,6 +11,7 @@
           "assignedBy": "Special Someone"
         },
         "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/CostManagement",
+        "definitionVersion": "1.*.*",
         "overrides": [
           {
             "kind": "policyEffect",
@@ -21,6 +22,19 @@
                 "in": [
                   "Limit_Skus",
                   "Limit_Locations"
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "definitionVersion",
+            "value": "2.*.*",
+            "selectors": [
+              {
+                "kind": "resourceLocation",
+                "in": [
+                  "eastUSEuap",
+                  "centralUSEuap"
                 ]
               }
             ]
