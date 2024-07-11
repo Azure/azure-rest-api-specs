@@ -87,11 +87,14 @@ suppressions:
     from: Microsoft.SecurityInsights/preview/2024-04-01-preview/EntityQueryTemplates.json
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/22024-04-01-preview/AlertRules.json
+    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/AlertRules.json
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: Microsoft.SecurityInsights/preview/22024-04-01-preview/Recommendations.json
+    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/Recommendations.json
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: Microsoft.SecurityInsights/preview/2024-04-01-preview/TriggeredAnalyticsRuleRuns.json
+    reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
 ```
 ### Tag: package-2024-03
 
