@@ -45,29 +45,26 @@ interface OpenAIClient {
 
 @@clientName(Azure.OpenAI.GenerateSpeechFromTextBody.body,
   "speechGenerationOptions",
-  "csharp,java"
+  "java"
 );
 @@clientName(Azure.OpenAI.GetAudioTranscriptionBody.body,
   "audioTranscriptionOptions",
-  "csharp,java"
+  "java"
 );
 @@clientName(Azure.OpenAI.GetAudioTranslationBody.body,
   "audioTranslationOptions",
-  "csharp,java"
+  "java"
 );
 @@clientName(Azure.OpenAI.GetChatCompletionsBody.body,
   "chatCompletionsOptions",
-  "csharp,java"
+  "java"
 );
 @@clientName(Azure.OpenAI.GetCompletionsBody.body,
   "completionsOptions",
-  "csharp,java"
+  "java"
 );
-@@clientName(Azure.OpenAI.GetEmbeddingsBody.body,
-  "embeddingsOptions",
-  "csharp,java"
-);
+@@clientName(Azure.OpenAI.GetEmbeddingsBody.body, "embeddingsOptions", "java");
 @@clientName(Azure.OpenAI.GetImageGenerationsBody.body,
   "imageGenerationOptions",
-  "csharp,java"
+  "java"
 );
