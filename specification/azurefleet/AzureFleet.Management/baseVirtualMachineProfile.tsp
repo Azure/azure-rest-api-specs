@@ -36,7 +36,7 @@ model BaseVirtualMachineProfile {
   securityProfile?: SecurityProfile;
 
   /**
-   * Specifies the boot diagnostic settings state. Minimum api-version: 2015-06-15.
+   * Specifies the boot diagnostic settings state.
    */
   diagnosticsProfile?: DiagnosticsProfile;
 
@@ -106,7 +106,7 @@ model BaseVirtualMachineProfile {
    * Specifies the time in which this VM profile for the Virtual Machine Scale Set
    * was created. Minimum API version for this property is 2023-09-01. This value
    * will be added to VMSS Flex VM tags when creating/updating the VMSS VM Profile
-   * with minimum api-version 2023-09-01.
+   * with minimum api-version 2023-09-01. Examples: "2024-07-01T00:00:01.1234567+00:00"
    */
   @visibility("read")
   timeCreated?: utcDateTime;
