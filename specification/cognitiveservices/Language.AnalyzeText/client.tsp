@@ -204,7 +204,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 
 
-@@clientName(AnalyzeTextTask, "AnalyzeTextInput", "csharp");
+// @@clientName(AnalyzeTextTask, "AnalyzeTextInput", "csharp");
 @@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind", "csharp");
 
 @@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput", "csharp");
