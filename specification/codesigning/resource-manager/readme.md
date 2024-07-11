@@ -38,6 +38,15 @@ input-file:
 - Microsoft.CodeSigning/preview/2024-08-15-preview/codeSigningAccount.json
 ```
 
+### Tag: package-2024-02-05-preview
+
+These settings apply only when `--tag=package-2024-02-05-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02-05-preview'
+input-file:
+- Microsoft.CodeSigning/preview/2024-02-05-preview/codeSigningAccount.json
+```
+
 ---
 
 # Code Generation
