@@ -54,10 +54,13 @@ interface Report {
    * Create a new AppComplianceAutomation report or update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("Report_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReportResource,
-    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>
+    Azure.ResourceManager.Foundations.BaseParameters<ReportResource>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

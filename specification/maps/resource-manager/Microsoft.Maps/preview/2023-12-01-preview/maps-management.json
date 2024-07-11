@@ -884,7 +884,7 @@
         "description": "Create or update the state of specified private endpoint connection associated with the Maps account.",
         "x-ms-examples": {
           "PrivateEndpointConnections_Create": {
-            "$ref": "./examples/PrivateEndpointConnections_Create.json"
+            "$ref": "./examples/PrivateEndpointConnections_Update.json"
           }
         },
         "parameters": [
@@ -914,12 +914,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Updated the private endpoint connection properties successfully.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
           "201": {
             "description": "Created the private endpoint connection properties successfully.",
             "schema": {
@@ -930,6 +924,12 @@
                 "description": "Operation Status Location URI",
                 "type": "string"
               }
+            }
+          },
+          "200": {
+            "description": "Updated the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -978,7 +978,7 @@
                 "type": "string"
               },
               "Location": {
-                "description": "Operation Status Location URI",
+                "description": "Operation Results Location URI",
                 "type": "string"
               },
               "Retry-After": {
@@ -1045,6 +1045,98 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "AsyncOperations"
+        ],
+        "operationId": "OperationResult_Get",
+        "description": "Get the result of a long running azure asynchronous operation.",
+        "x-ms-examples": {
+          "OperationResult_Get": {
+            "$ref": "./examples/GetOperationResult.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "202": {
+            "description": "",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": ""
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/operationStatuses/{operationId}": {
+      "get": {
+        "tags": [
+          "AsyncOperations"
+        ],
+        "operationId": "OperationStatus_Get",
+        "description": "Get the status of a long running azure asynchronous operation.",
+        "x-ms-examples": {
+          "OperationStatus_Get": {
+            "$ref": "./examples/GetOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Operation ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
         }
       }
     }
