@@ -268,6 +268,8 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextLROTask, "AnalyzeTextOperationAction", "csharp");
 @@clientName(AnalyzeTextLROTask.taskName, "Name", "csharp");
 
+@@clientName(AnalyzeTextLROTaskKind, "AnalyzeTextOperationActionKind", "csharp");
+
 @@clientName(SentimentAnalysisLROTask, "SentimentAnalysisOperationAction", "csharp");
 @@clientName(SentimentAnalysisLROTask.parameters, "ActionContent", "csharp");
 @@clientName(SentimentAnalysisTaskParameters, "SentimentAnalysisActionContent", "csharp");
