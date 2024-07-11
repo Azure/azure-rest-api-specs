@@ -4559,11 +4559,27 @@
       "properties": {
         "requestPerMinute": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "Request per minute."
         },
         "requestParameters": {
-          "type": "object",
-          "description": "Dictionary, Model Capacity Calculator Workload Parameters."
+          "$ref": "#/definitions/ModelCapacityCalculatorWorkloadRequestParam"
+        }
+      }
+    },
+    "ModelCapacityCalculatorWorkloadRequestParam": {
+      "type": "object",
+      "description": "Dictionary, Model Capacity Calculator Workload Parameters.",
+      "properties": {
+        "avgPromptTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Average prompt tokens."
+        },
+        "avgGeneratedTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Average generated tokens."
         }
       }
     },
