@@ -23,14 +23,6 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "deliveryAttemptTimestamp",
-  "csharp"
-);
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
-  "userActionTimestamp",
-  "csharp"
-);
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
   "csharp"
