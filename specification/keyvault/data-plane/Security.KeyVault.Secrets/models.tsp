@@ -376,6 +376,7 @@ model BackupSecretResult {
    * The backup blob containing the backed up secret.
    */
   @visibility("read")
+  @encode("base64url")
   value?: bytes;
 }
 
@@ -387,6 +388,7 @@ model SecretRestoreParameters {
    * The backup blob associated with a secret bundle.
    */
   @encodedName("application/json", "value")
+  @encode("base64url")
   secretBundleBackup: bytes;
 }
 
