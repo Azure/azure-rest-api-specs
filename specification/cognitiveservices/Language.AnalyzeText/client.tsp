@@ -204,11 +204,11 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 
 
-// @@clientName(AnalyzeTextTask, "AnalyzeTextInput", "csharp");
-// @@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind", "csharp");
+@@clientName(AnalyzeTextTask, "AnalyzeTextInput", "csharp");
+@@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind", "csharp");
 
-@@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput", "csharp");
-@@clientName(LanguageDetectionAnalysisInput, "LanguageDetectionTextInput", "csharp");
+// @@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput", "csharp");
+// @@clientName(LanguageDetectionAnalysisInput, "LanguageDetectionTextInput", "csharp");
 
 @@clientName(AnalyzeTextSentimentAnalysisInput, "TextSentimentAnalysisInput", "csharp");
 @@clientName(AnalyzeTextSentimentAnalysisInput.parameters, "ActionContent", "csharp");
