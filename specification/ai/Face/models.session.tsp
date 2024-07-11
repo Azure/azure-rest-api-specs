@@ -21,8 +21,8 @@ union LivenessOperationMode {
 }
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
-@doc("Base model for creating liveness session.")
-model BaseLivenessSessionParameters {
+@doc("Request model for creating liveness session.")
+model CreateLivenessSessionParameters {
   @doc("Type of liveness mode the client should follow.")
   livenessOperationMode: LivenessOperationMode;
 
@@ -36,19 +36,16 @@ model BaseLivenessSessionParameters {
   @added(Versions.v1_2_preview_1)
   enableSessionImage?: boolean;
 
-  ...LivenessSessionData;
-}
-
-@doc("Request for creating liveness session.")
-model CreateLivenessSessionParameters is BaseLivenessSessionParameters {
   @doc("The model version of liveness single modal.")
   @added(Versions.v1_2_preview_1)
-  livenessSingleModalModel: LivenessModel;
+  livenessSingleModalModel?: LivenessModel;
+
+  ...LivenessSessionData;
 }
 
 @doc("Request for creating liveness with verify session.")
 model CreateLivenessWithVerifySessionParameters
-  is BaseLivenessSessionParameters {
+  is CreateLivenessSessionParameters {
   @doc("Whether or not return the verify image hash.")
   @added(Versions.v1_2_preview_1)
   returnVerifyImageHash?: boolean;
@@ -183,8 +180,7 @@ model LivenessOutputsTarget {
   imageType: ImageType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Values are self-documetning."
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Values are self-documetning."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Values are self-documenting."
 @doc("The model version used for liveness classification.")
 union LivenessModel {
   string,
@@ -192,6 +188,9 @@ union LivenessModel {
   v2021_11_12_preview_03: "2021-11-12-preview.03",
   v2022_10_15_preview_04: "2022-10-15-preview.04",
   v2023_03_02_preview_05: "2023-03-02-preview.05",
+  v2023_12_20_preview_06: "2023-12-20-preview.06",
+  v2023_12_20_preview_07: "2023-12-20-preview.07",
+  v2023_12_20_preview_08: "2023-12-20-preview.08",
 }
 
 @doc("The detail of face for verification.")
