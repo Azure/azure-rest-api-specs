@@ -226,10 +226,7 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
-@@clientName(EventGridMQTTClientState,
-  "EventGridMqttClientState",
-  "csharp"
-);
+@@clientName(EventGridMQTTClientState, "EventGridMqttClientState", "csharp");
 
 @@clientName(EventGridMQTTClientDisconnectionReason,
   "EventGridMqttClientDisconnectionReason",
