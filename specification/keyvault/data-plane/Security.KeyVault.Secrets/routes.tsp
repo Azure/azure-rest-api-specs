@@ -164,9 +164,17 @@ op getSecretVersions is Azure.Core.Foundations.Operation<
      */
     @path
     secretName: string;
+
+    /**
+     * Maximum number of results to return in a page. If not specified the service
+     * will return up to 25 results.
+     */
+    @maxValue(25)
+    @minValue(1)
+    @query("maxresults")
+    maxresults?: int32;
   },
-  SecretListResult,
-  KeyVaultListParameters
+  SecretListResult
 >;
 
 /**
@@ -269,6 +277,9 @@ op backupSecret is Azure.Core.Foundations.Operation<
 @post
 op restoreSecret is Azure.Core.Foundations.Operation<
   {
+    /**
+     * The parameters to restore the secret.
+     */
     #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
     @flattenProperty
