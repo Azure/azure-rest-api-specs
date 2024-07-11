@@ -20,3 +20,4 @@ namespace Microsoft.DocumentDB;
     "MongoClusterPrviateLinkResourceData",
     "csharp"
 );
+@@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
