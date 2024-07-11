@@ -6,7 +6,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Language.AnalyzeTextClientCustomizations;
 
-@@clientName(Tasks, "TasksStatus", "csharp");
+@@clientName(Tasks, "ActionStatus", "csharp");
 @@clientName(State, "CurrentState", "csharp");
 @@clientName(Error, "AnalyzeTextError", "csharp");
 
@@ -203,12 +203,12 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(WeightUnit.ShortHundredWeightUS, "ShortHundredWeightUs", "csharp");
 
 
-
+@@access(AnalyzeTextTask, Access.public, "csharp");
 @@clientName(AnalyzeTextTask, "AnalyzeTextInput", "csharp");
 @@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind", "csharp");
 
-// @@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput", "csharp");
-// @@clientName(LanguageDetectionAnalysisInput, "LanguageDetectionTextInput", "csharp");
+@@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput", "csharp");
+@@clientName(LanguageDetectionAnalysisInput, "LanguageDetectionTextInput", "csharp");
 
 @@clientName(AnalyzeTextSentimentAnalysisInput, "TextSentimentAnalysisInput", "csharp");
 @@clientName(AnalyzeTextSentimentAnalysisInput.parameters, "ActionContent", "csharp");
