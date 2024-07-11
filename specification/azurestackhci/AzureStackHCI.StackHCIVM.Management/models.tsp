@@ -4,7 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../Operations.Management/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
@@ -216,7 +215,7 @@ union VmSizeEnum {
   string,
 }
 
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_05_01_preview)
 @doc("Gpu Assignment types")
 union GpuAssignmentTypeEnum {
   @doc("Attach Graphics Processing Unit (GPU) using Discrete Device Assignment (DDA)")
@@ -358,7 +357,7 @@ union AttestHealthStatusEnum {
   string,
 }
 
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_05_01_preview)
 @doc("Defines type of hardware platform from attestation token.")
 union AttestHWPlatformEnum {
   @doc("AttestHWPlatform is Secure Encrypted Virtualization Secure Nested Paging (SEVSNP)")
@@ -370,7 +369,7 @@ union AttestHWPlatformEnum {
   string,
 }
 
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_05_01_preview)
 @doc("Defines type of managed disk security encryption type from attestation token.")
 union AttestDiskSecurityEncryptionTypeEnum {
   @doc("Disk security encryption type is non-persisted Trusted Platform Module (TPM)")
@@ -407,7 +406,7 @@ union OperatingSystemTypes {
   string,
 }
 
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_05_01_preview)
 @doc("Encryption type of the managed disk enum.")
 union SecurityEncryptionType {
   @doc("Non-persisted TPM encryption type")
@@ -1226,7 +1225,7 @@ model VirtualMachineInstancePropertiesHardwareProfile {
   dynamicMemoryConfig?: VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
   @extension("x-ms-identifiers", [])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
@@ -1247,7 +1246,7 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_05_01_preview)
 @doc("GPU properties - describes the GPU configuration.")
 model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
   @doc("GPU assignment type")
@@ -1386,12 +1385,12 @@ model VirtualMachineInstancePropertiesStorageProfileOsDisk
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_05_01_preview)
   @doc("The managed disk parameters.")
   managedDisk?: VirtualMachineInstanceManagedDiskParameters;
 }
 
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_05_01_preview)
 @doc("The parameters of a managed disk.")
 model VirtualMachineInstanceManagedDiskParameters {
   @doc("Specifies the security profile for the managed disk.")
@@ -1399,7 +1398,7 @@ model VirtualMachineInstanceManagedDiskParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case."
-@added(Versions.v2024_05_01_test_preview)
+@added(Versions.v2024_05_01_preview)
 @doc("Specifies the security profile settings for the managed disk. NOTE: It can only be set for Confidential VMs")
 model VMDiskSecurityProfile {
   @doc("Specifies the EncryptionType of the managed disk. It is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob. NOTE: It can be set for only Confidential VMs.")
@@ -1558,7 +1557,7 @@ model HardwareProfileUpdate {
   memoryMB?: int64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
   @extension("x-ms-identifiers", [])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
@@ -1662,13 +1661,13 @@ model AttestationStatusProperties {
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
 
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_05_01_preview)
   @doc("The hardware platform information from attestation token. This only applies to Confidential VM.")
   @visibility("read")
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_05_01_preview)
   attestHardwarePlatform?: AttestHWPlatformEnum;
 
-  @added(Versions.v2024_05_01_test_preview)
+  @added(Versions.v2024_05_01_preview)
   @doc("The managed disk security encryption type from attestation token. This only applies to Confidential VM.")
   @visibility("read")
   attestDiskSecurityEncryptionType?: AttestDiskSecurityEncryptionTypeEnum;
