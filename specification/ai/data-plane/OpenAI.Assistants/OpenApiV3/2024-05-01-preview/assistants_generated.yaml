@@ -367,7 +367,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadMessage'
       requestBody:
-        description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
+        description: Body parameter.
         required: true
         content:
           application/json:
@@ -529,7 +529,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadRun'
       requestBody:
-        description: The details for the run to create.
         required: true
         content:
           application/json:
@@ -960,6 +959,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/VectorStore'
       requestBody:
+        description: Body parameter.
         required: true
         content:
           application/json:
