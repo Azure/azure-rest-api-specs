@@ -103,7 +103,7 @@ model VectorStoreFile {
   /** The strategy used to chunk the file. */
   @encodedName("application/json", "chunking_strategy")
   @added(ServiceApiVersions.v2024_07_01_preview)
-  chunkingStrategy: VectorStoreChunkingStrategy;
+  chunkingStrategy: VectorStoreChunkingStrategyResponse;
 }
 
 /** Response object for deleting a vector store file relationship. */

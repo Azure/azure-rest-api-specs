@@ -1711,7 +1711,7 @@
                   "x-ms-client-name": "fileIds"
                 },
                 "chunking_strategy": {
-                  "$ref": "#/definitions/VectorStoreChunkingStrategy",
+                  "$ref": "#/definitions/VectorStoreChunkingStrategyRequest",
                   "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.",
                   "x-ms-client-name": "chunkingStrategy"
                 }
@@ -2157,7 +2157,7 @@
                   "x-ms-client-name": "fileId"
                 },
                 "chunking_strategy": {
-                  "$ref": "#/definitions/VectorStoreChunkingStrategy",
+                  "$ref": "#/definitions/VectorStoreChunkingStrategyRequest",
                   "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.",
                   "x-ms-client-name": "chunkingStrategy"
                 }
@@ -4953,12 +4953,32 @@
         "metadata"
       ]
     },
-    "VectorStoreChunkingStrategy": {
+    "VectorStoreAutoChunkingStrategyRequest": {
+      "type": "object",
+      "description": "The default strategy. This strategy currently uses a max_chunk_size_tokens of 800 and chunk_overlap_tokens of 400.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorStoreChunkingStrategyRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "auto"
+    },
+    "VectorStoreAutoChunkingStrategyResponse": {
+      "type": "object",
+      "description": "This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the chunking_strategy concept was introduced in the API.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorStoreChunkingStrategyResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "other"
+    },
+    "VectorStoreChunkingStrategyRequest": {
       "type": "object",
       "description": "An abstract representation of a vector store chunking strategy configuration.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/VectorStoreChunkingStrategyType",
+          "$ref": "#/definitions/VectorStoreChunkingStrategyRequestType",
           "description": "The object type."
         }
       },
@@ -4967,7 +4987,7 @@
         "type"
       ]
     },
-    "VectorStoreChunkingStrategyType": {
+    "VectorStoreChunkingStrategyRequestType": {
       "type": "string",
       "description": "Type of chunking strategy",
       "enum": [
@@ -4975,12 +4995,48 @@
         "static"
       ],
       "x-ms-enum": {
-        "name": "VectorStoreChunkingStrategyType",
+        "name": "VectorStoreChunkingStrategyRequestType",
         "modelAsString": true,
         "values": [
           {
             "name": "auto",
             "value": "auto"
+          },
+          {
+            "name": "static",
+            "value": "static"
+          }
+        ]
+      }
+    },
+    "VectorStoreChunkingStrategyResponse": {
+      "type": "object",
+      "description": "An abstract representation of a vector store chunking strategy configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VectorStoreChunkingStrategyResponseType",
+          "description": "The object type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "VectorStoreChunkingStrategyResponseType": {
+      "type": "string",
+      "description": "Type of chunking strategy",
+      "enum": [
+        "other",
+        "static"
+      ],
+      "x-ms-enum": {
+        "name": "VectorStoreChunkingStrategyResponseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "other",
+            "value": "other"
           },
           {
             "name": "static",
@@ -5108,7 +5164,7 @@
           "x-ms-client-name": "lastError"
         },
         "chunking_strategy": {
-          "$ref": "#/definitions/VectorStoreChunkingStrategy",
+          "$ref": "#/definitions/VectorStoreChunkingStrategyResponse",
           "description": "The strategy used to chunk the file.",
           "x-ms-client-name": "chunkingStrategy"
         }
@@ -5389,7 +5445,7 @@
           "x-ms-client-name": "expiresAfter"
         },
         "chunking_strategy": {
-          "$ref": "#/definitions/VectorStoreChunkingStrategy",
+          "$ref": "#/definitions/VectorStoreChunkingStrategyRequest",
           "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. Only applicable if file_ids is non-empty.",
           "x-ms-client-name": "chunkingStrategy"
         },
@@ -5402,6 +5458,68 @@
           }
         }
       }
+    },
+    "VectorStoreStaticChunkingStrategyOptions": {
+      "type": "object",
+      "description": "Options to configure a vector store static chunking strategy.",
+      "properties": {
+        "max_chunk_size_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of tokens in each chunk. The default value is 800. The minimum value is 100 and the maximum value is 4096.",
+          "minimum": 100,
+          "maximum": 4096,
+          "x-ms-client-name": "maxChunkSizeTokens"
+        },
+        "chunk_overlap_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens that overlap between chunks. The default value is 400.\nNote that the overlap must not exceed half of max_chunk_size_tokens.     *",
+          "x-ms-client-name": "chunkOverlapTokens"
+        }
+      },
+      "required": [
+        "max_chunk_size_tokens",
+        "chunk_overlap_tokens"
+      ]
+    },
+    "VectorStoreStaticChunkingStrategyRequest": {
+      "type": "object",
+      "description": "A statically configured chunking strategy.",
+      "properties": {
+        "static": {
+          "$ref": "#/definitions/VectorStoreStaticChunkingStrategyOptions",
+          "description": "The options for the static chunking strategy."
+        }
+      },
+      "required": [
+        "static"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorStoreChunkingStrategyRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "static"
+    },
+    "VectorStoreStaticChunkingStrategyResponse": {
+      "type": "object",
+      "description": "A statically configured chunking strategy.",
+      "properties": {
+        "static": {
+          "$ref": "#/definitions/VectorStoreStaticChunkingStrategyOptions",
+          "description": "The options for the static chunking strategy."
+        }
+      },
+      "required": [
+        "static"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VectorStoreChunkingStrategyResponse"
+        }
+      ],
+      "x-ms-discriminator-value": "static"
     },
     "VectorStoreStatus": {
       "type": "string",

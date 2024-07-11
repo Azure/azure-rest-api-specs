@@ -1016,7 +1016,7 @@ paths:
                   description: A list of File IDs that the vector store should use. Useful for tools like `file_search` that can access files.
                 chunking_strategy:
                   allOf:
-                    - $ref: '#/components/schemas/VectorStoreChunkingStrategy'
+                    - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
                   description: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.
               required:
                 - file_ids
@@ -1259,7 +1259,7 @@ paths:
                   description: A File ID that the vector store should use. Useful for tools like `file_search` that can access files.
                 chunking_strategy:
                   allOf:
-                    - $ref: '#/components/schemas/VectorStoreChunkingStrategy'
+                    - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
                   description: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.
               required:
                 - file_id
@@ -3961,7 +3961,7 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: A vector store is a collection of processed files can be used by the `file_search` tool.
-    VectorStoreAutoChunkingStrategy:
+    VectorStoreAutoChunkingStrategyRequest:
       type: object
       required:
         - type
@@ -3971,24 +3971,65 @@ components:
           enum:
             - auto
           description: The object type, which is always 'auto'.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
       description: The default strategy. This strategy currently uses a max_chunk_size_tokens of 800 and chunk_overlap_tokens of 400.
-    VectorStoreChunkingStrategy:
+    VectorStoreAutoChunkingStrategyResponse:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - other
+          description: The object type, which is always 'other'.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponse'
+      description: This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the chunking_strategy concept was introduced in the API.
+    VectorStoreChunkingStrategyRequest:
       type: object
       required:
         - type
       properties:
         type:
           allOf:
-            - $ref: '#/components/schemas/VectorStoreChunkingStrategyType'
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequestType'
           description: The object type.
       discriminator:
         propertyName: type
+        mapping:
+          auto: '#/components/schemas/VectorStoreAutoChunkingStrategyRequest'
+          static: '#/components/schemas/VectorStoreStaticChunkingStrategyRequest'
       description: An abstract representation of a vector store chunking strategy configuration.
-    VectorStoreChunkingStrategyType:
+    VectorStoreChunkingStrategyRequestType:
       anyOf:
         - type: string
           enum:
             - auto
+            - static
+        - type: string
+      description: Type of chunking strategy
+    VectorStoreChunkingStrategyResponse:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponseType'
+          description: The object type.
+      discriminator:
+        propertyName: type
+        mapping:
+          other: '#/components/schemas/VectorStoreAutoChunkingStrategyResponse'
+          static: '#/components/schemas/VectorStoreStaticChunkingStrategyResponse'
+      description: An abstract representation of a vector store chunking strategy configuration.
+    VectorStoreChunkingStrategyResponseType:
+      anyOf:
+        - type: string
+          enum:
+            - other
             - static
         - type: string
       description: Type of chunking strategy
@@ -4080,7 +4121,7 @@ components:
           description: The last error associated with this vector store file. Will be `null` if there are no errors.
         chunking_strategy:
           allOf:
-            - $ref: '#/components/schemas/VectorStoreChunkingStrategy'
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponse'
           description: The strategy used to chunk the file.
       description: Description of a file attached to a vector store.
     VectorStoreFileBatch:
@@ -4238,7 +4279,7 @@ components:
           description: Details on when this vector store expires
         chunking_strategy:
           allOf:
-            - $ref: '#/components/schemas/VectorStoreChunkingStrategy'
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
           description: The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. Only applicable if file_ids is non-empty.
         metadata:
           type: object
@@ -4247,22 +4288,6 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: Request object for creating a vector store.
-    VectorStoreStaticChunkingStrategy:
-      type: object
-      required:
-        - type
-        - static
-      properties:
-        type:
-          type: string
-          enum:
-            - static
-          description: The object type, which is always 'static'.
-        static:
-          allOf:
-            - $ref: '#/components/schemas/VectorStoreStaticChunkingStrategyOptions'
-          description: The options for the static chunking strategy.
-      description: A statically configured chunking strategy.
     VectorStoreStaticChunkingStrategyOptions:
       type: object
       required:
@@ -4282,6 +4307,42 @@ components:
             The number of tokens that overlap between chunks. The default value is 400.
             Note that the overlap must not exceed half of max_chunk_size_tokens.     *
       description: Options to configure a vector store static chunking strategy.
+    VectorStoreStaticChunkingStrategyRequest:
+      type: object
+      required:
+        - type
+        - static
+      properties:
+        type:
+          type: string
+          enum:
+            - static
+          description: The object type, which is always 'static'.
+        static:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreStaticChunkingStrategyOptions'
+          description: The options for the static chunking strategy.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+      description: A statically configured chunking strategy.
+    VectorStoreStaticChunkingStrategyResponse:
+      type: object
+      required:
+        - type
+        - static
+      properties:
+        type:
+          type: string
+          enum:
+            - static
+          description: The object type, which is always 'static'.
+        static:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreStaticChunkingStrategyOptions'
+          description: The options for the static chunking strategy.
+      allOf:
+        - $ref: '#/components/schemas/VectorStoreChunkingStrategyResponse'
+      description: A statically configured chunking strategy.
     VectorStoreStatus:
       anyOf:
         - type: string

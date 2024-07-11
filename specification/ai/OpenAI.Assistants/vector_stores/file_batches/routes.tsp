@@ -33,7 +33,7 @@ op createVectorStoreFileBatch(
   /** The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. */
   @encodedName("application/json", "chunking_strategy")
   @added(ServiceApiVersions.v2024_07_01_preview)
-  chunkingStrategy?: VectorStoreChunkingStrategy,
+  chunkingStrategy?: VectorStoreChunkingStrategyRequest,
 ): VectorStoreFileBatch;
 
 /**
