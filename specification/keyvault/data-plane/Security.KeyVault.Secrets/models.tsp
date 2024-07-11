@@ -109,7 +109,9 @@ model SecretSetParameters {
 /**
  * The secret management attributes.
  */
-model SecretAttributes extends Attributes {
+model SecretAttributes {
+  ...Attributes;
+
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
    * enabled, otherwise 0.
@@ -245,7 +247,9 @@ model Error {
  * A Deleted Secret consisting of its previous id, attributes and its tags, as
  * well as information on when it will be purged.
  */
-model DeletedSecretBundle extends SecretBundle {
+model DeletedSecretBundle {
+  ...SecretBundle;
+
   /**
    * The url of the recovery object, used to identify and recover the deleted secret.
    */
