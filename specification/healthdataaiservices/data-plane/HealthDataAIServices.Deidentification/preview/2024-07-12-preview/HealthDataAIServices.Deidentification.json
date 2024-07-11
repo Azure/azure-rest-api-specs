@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "HealthDataAIServices.Deidentification Service",
-    "version": "2024-01-16-preview",
+    "version": "2024-07-12-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -645,10 +645,6 @@
             ]
           }
         },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "Requested Encoding of the tag response indices."
-        },
         "redactionFormat": {
           "type": "string",
           "description": "Format of the redacted output. Only valid when OperationType is Redact.",
@@ -1171,13 +1167,11 @@
           "description": "Phi Category of the entity."
         },
         "offset": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/StringIndex",
           "description": "Starting index of the location from within the input text."
         },
         "length": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/StringIndex",
           "description": "Length of the input text."
         },
         "text": {
@@ -1208,37 +1202,6 @@
           },
           "x-ms-identifiers": []
         },
-        "stringIndexType": {
-          "type": "string",
-          "description": "Requested Encoding of the tag response indices.",
-          "default": "TextElement_v8",
-          "enum": [
-            "TextElement_v8",
-            "UnicodeCodePoint",
-            "Utf16CodeUnit"
-          ],
-          "x-ms-enum": {
-            "name": "StringIndexType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "TextElement_v8",
-                "value": "TextElement_v8",
-                "description": "Iterates over graphemes as defined by the Unicode 8.0.0 standard."
-              },
-              {
-                "name": "UnicodeCodePoint",
-                "value": "UnicodeCodePoint",
-                "description": "Iterates over Unicode Code Points, the default scheme for Python 3."
-              },
-              {
-                "name": "Utf16CodeUnit",
-                "value": "Utf16CodeUnit",
-                "description": "Iterates over UTF-16 Code Units, the default scheme for JavaScript, Java, and .NET."
-              }
-            ]
-          }
-        },
         "path": {
           "type": "string",
           "description": "Path to the file in the storage container.",
@@ -1252,7 +1215,6 @@
       },
       "required": [
         "entities",
-        "stringIndexType",
         "etag"
       ]
     },
@@ -1289,35 +1251,31 @@
         "extensions"
       ]
     },
-    "StringIndexType": {
-      "type": "string",
-      "description": "List of supported index encodings.",
-      "enum": [
-        "TextElement_v8",
-        "UnicodeCodePoint",
-        "Utf16CodeUnit"
-      ],
-      "x-ms-enum": {
-        "name": "StringIndexType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "TextElement_v8",
-            "value": "TextElement_v8",
-            "description": "Iterates over graphemes as defined by the Unicode 8.0.0 standard."
-          },
-          {
-            "name": "UnicodeCodePoint",
-            "value": "UnicodeCodePoint",
-            "description": "Iterates over Unicode Code Points, the default scheme for Python 3."
-          },
-          {
-            "name": "Utf16CodeUnit",
-            "value": "Utf16CodeUnit",
-            "description": "Iterates over UTF-16 Code Units, the default scheme for JavaScript, Java, and .NET."
-          }
-        ]
-      }
+    "StringIndex": {
+      "type": "object",
+      "description": "String Index encoding model.",
+      "properties": {
+        "utf8": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The offset or length of the substring in UTF-8 encoding"
+        },
+        "utf16": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The offset or length of the substring in UTF-16 encoding"
+        },
+        "codePoint": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The offset or length of the substring in CodePoint encoding"
+        }
+      },
+      "required": [
+        "utf8",
+        "utf16",
+        "codePoint"
+      ]
     },
     "TargetStorageLocation": {
       "type": "object",

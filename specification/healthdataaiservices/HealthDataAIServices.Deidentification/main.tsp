@@ -37,6 +37,7 @@ model AadToken
 
 @doc("The HealthDataAIServices.Deidentification service versions.")
 enum Versions {
+  @doc("Public preview release version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2024_01_16_preview: "2024-01-16-preview",
+  v2024_07_12_preview: "2024-07-12-preview",
 }

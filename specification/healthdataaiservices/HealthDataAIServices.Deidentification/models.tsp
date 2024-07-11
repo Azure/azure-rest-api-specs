@@ -197,21 +197,6 @@ union OperationType {
   string,
 }
 
-// Source: Text Analytics
-@doc("List of supported index encodings.")
-union StringIndexType {
-  @doc("Iterates over graphemes as defined by the Unicode 8.0.0 standard.")
-  TextElement_v8: "TextElement_v8",
-
-  @doc("Iterates over Unicode Code Points, the default scheme for Python 3.")
-  UnicodeCodePoint: "UnicodeCodePoint",
-
-  @doc("Iterates over UTF-16 Code Units, the default scheme for JavaScript, Java, and .NET.")
-  Utf16CodeUnit: "Utf16CodeUnit",
-
-  string,
-}
-
 @doc("Request for synchronous De-Identify operation.")
 model DeidentificationContent {
   @doc("Input text to deidentify.")
@@ -223,11 +208,6 @@ model DeidentificationContent {
 
   @doc("Data type of the input.")
   dataType: DocumentDataType = DocumentDataType.Plaintext;
-
-  // This must be set as optional so it isn't included in sdk constructors.
-  // SDKs then overwrite it as internal with appropriate default value for that SDK.
-  @doc("Requested Encoding of the tag response indices.")
-  stringIndexType?: StringIndexType;
 
   @maxLength(16)
   @doc("Format of the redacted output. Only valid when OperationType is Redact.")
@@ -248,8 +228,6 @@ model PhiTaggerResult {
   @doc("List of entities detected in the input.")
   entities: Array<PhiEntity>;
 
-  @doc("Requested Encoding of the tag response indices.")
-  stringIndexType: StringIndexType = StringIndexType.TextElement_v8;
 
   @doc("Path to the file in the storage container.")
   @maxLength(1024) // Max length for Blob Name
@@ -356,10 +334,10 @@ model PhiEntity {
   category: PhiCategory;
 
   @doc("Starting index of the location from within the input text.")
-  offset: int32;
+  offset: StringIndex;
 
   @doc("Length of the input text.")
-  length: int32;
+  length: StringIndex;
 
   @doc("Text of the entity.")
   text?: string;
@@ -375,4 +353,16 @@ model PaginationByTokenQueryParameters {
   @query
   @doc("Token to continue a previous query.")
   continuationToken?: string;
+}
+
+@doc("String Index encoding model.")
+model StringIndex{
+  @doc("The offset or length of the substring in UTF-8 encoding")
+  utf8: int32;
+
+  @doc("The offset or length of the substring in UTF-16 encoding")
+  utf16: int32;
+
+  @doc("The offset or length of the substring in CodePoint encoding")
+  codePoint: int32;
 }
