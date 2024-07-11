@@ -15,7 +15,7 @@ namespace Microsoft.ProgrammableConnectivity;
  * A Programmable Connectivity Operator API Connection resource
  */
 model OperatorApiConnection
-  is TrackedResource<OperatorApiConnectionProperties> {
+  is Azure.ResourceManager.TrackedResource<OperatorApiConnectionProperties> {
   /**
    * Azure Programmable Connectivity (APC) Operator API Connection Name.
    */
@@ -35,7 +35,7 @@ model OperatorApiConnectionProperties {
    * Reference to the Operator API Plan Resource ID.
    */
   @visibility("read", "create", "update")
-  operatorApiPlanId: ResourceIdentifier<[
+  operatorApiPlanId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ProgrammableConnectivity/operatorApiPlans";
     }
@@ -63,7 +63,7 @@ model OperatorApiConnectionProperties {
    * Reference to the APC Gateway resource ID.
    */
   @visibility("read", "create")
-  gatewayId: ResourceIdentifier<[
+  gatewayId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ProgrammableConnectivity/gateways";
     }
@@ -110,16 +110,18 @@ model OperatorApiConnectionProperties {
 /**
  * The Account Type of the Operator API Connections.
  */
-enum AccountType {
+union AccountType {
   /**
    * Managed by Azure on-behalf-of the user.
    */
-  AzureManaged,
+  AzureManaged: "AzureManaged",
 
   /**
    * Managed by the User themselves on the Operator end.
    */
-  UserManaged,
+  UserManaged: "UserManaged",
+
+  string,
 }
 
 /**

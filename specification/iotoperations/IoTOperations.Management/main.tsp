@@ -5,15 +5,20 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./models/base.tsp";
+import "./models/auth.tsp";
 import "./models/instance.tsp";
-import "./models/mq/brokers.tsp";
-import "./models/mq/authentications.tsp";
-import "./models/mq/authorizations.tsp";
-import "./models/mq/listeners.tsp";
+import "./models/broker/brokers.tsp";
+import "./models/broker/authentications.tsp";
+import "./models/broker/authorizations.tsp";
+import "./models/broker/listeners.tsp";
+import "./models/dataflows/dataflowEndpoints.tsp";
+import "./models/dataflows/dataflowProfiles.tsp";
+import "./models/dataflows/dataflows.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -28,10 +33,10 @@ namespace Microsoft.IoTOperations;
 
 /** Api versions */
 enum Versions {
-  /** 2024-06-01-preview version */
+  /** 2024-07-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-06-01-preview`,
+  `2024-07-01-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -52,7 +57,6 @@ interface Instance {
 interface Broker {
   get is ArmResourceRead<BrokerResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerResource>;
-  update is ArmTagsPatchSync<BrokerResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerResource>;
 }
@@ -62,7 +66,6 @@ interface Broker {
 interface BrokerListener {
   get is ArmResourceRead<BrokerListenerResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerListenerResource>;
-  update is ArmTagsPatchSync<BrokerListenerResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerListenerResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerListenerResource>;
 }
@@ -72,7 +75,6 @@ interface BrokerListener {
 interface BrokerAuthentication {
   get is ArmResourceRead<BrokerAuthenticationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthenticationResource>;
-  update is ArmTagsPatchSync<BrokerAuthenticationResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthenticationResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerAuthenticationResource>;
 }
@@ -82,7 +84,34 @@ interface BrokerAuthentication {
 interface BrokerAuthorization {
   get is ArmResourceRead<BrokerAuthorizationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BrokerAuthorizationResource>;
-  update is ArmTagsPatchSync<BrokerAuthorizationResource>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthorizationResource>;
   listByResourceGroup is ArmResourceListByParent<BrokerAuthorizationResource>;
+}
+// /instances/dataflowProfiles resource Operations
+@armResourceOperations
+interface DataFlowProfile {
+  get is ArmResourceRead<DataFlowProfileResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowProfileResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataFlowProfileResource>;
+  listByResourceGroup is ArmResourceListByParent<DataFlowProfileResource>;
+}
+
+// /instance/dataflowProfiles/dataflows resource Operations
+@armResourceOperations
+interface DataFlow {
+  get is ArmResourceRead<DataFlowResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataFlowResource>;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("DataFlow_ListByProfileResource")
+  listByResourceGroup is ArmResourceListByParent<DataFlowResource>;
+}
+
+// /instance/dataflowEndpoints resource Operations
+@armResourceOperations
+interface DataFlowEndpoint {
+  get is ArmResourceRead<DataFlowEndpointResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowEndpointResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataFlowEndpointResource>;
+  listByResourceGroup is ArmResourceListByParent<DataFlowEndpointResource>;
 }

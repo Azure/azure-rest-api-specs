@@ -4,54 +4,54 @@
     "resourceGroupName": "examplerg",
     "api-version": "2024-02-01-preview",
     "resourceId": "id",
-    "properties": {
-      "stageByProperty": "testStageByProperty",
-      "stageOrderType": "CustomDefined",
-      "stageMapDefinition": {
-        "orderMap": {
-          "0": {
-            "propertyValues": [
-              "resourceId1"
-            ],
-            "batchSize": 0,
-            "delayStartInMin": 5,
-            "passPercentage": 100,
-            "resourceStatusConsideredAsPassed": [
-              "None"
-            ],
-            "onCompletion": {
-              "actionToTake": "Proceed",
-              "postNotify": true
+    "orchestrationPreference": {
+      "properties": {
+        "stageByProperty": "testStageByProperty",
+        "stageOrderType": "CustomDefined",
+        "stageMapDefinition": {
+          "orderMap": {
+            "0": {
+              "propertyValues": [
+                "resourceId1"
+              ],
+              "batchSize": 0,
+              "delayStartInMin": 5,
+              "passPercentage": 100,
+              "resourceStatusConsideredAsPassed": [
+                "None"
+              ],
+              "onCompletion": {
+                "actionToTake": "Proceed",
+                "postNotify": true
+              },
+              "onFailure": {
+                "actionToTake": "Terminate",
+                "postNotify": true
+              }
             },
-            "onFailure": {
-              "actionToTake": "Terminate",
-              "postNotify": true
-            }
-          },
-          "1": {
-            "propertyValues": [
-              "resourceId1"
-            ],
-            "batchSize": 0,
-            "delayStartInMin": 5,
-            "passPercentage": 100,
-            "resourceStatusConsideredAsPassed": [
-              "None"
-            ],
-            "onCompletion": {
-              "actionToTake": "Proceed",
-              "postNotify": true
-            },
-            "onFailure": {
-              "actionToTake": "Terminate",
-              "postNotify": true
+            "1": {
+              "propertyValues": [
+                "resourceId1"
+              ],
+              "batchSize": 0,
+              "delayStartInMin": 5,
+              "passPercentage": 100,
+              "resourceStatusConsideredAsPassed": [
+                "None"
+              ],
+              "onCompletion": {
+                "actionToTake": "Proceed",
+                "postNotify": true
+              },
+              "onFailure": {
+                "actionToTake": "Terminate",
+                "postNotify": true
+              }
             }
           }
         }
       }
-    },
-    "name": null,
-    "type": null
+    }
   },
   "responses": {
     "200": {
