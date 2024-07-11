@@ -1217,7 +1217,7 @@ model VirtualHardDiskUploadRequest {
 @doc("Response for uploading virtual hard disk.")
 model VirtualHardDiskUploadResponse {
   @doc("The ARM ID for a Virtual Hard Disk.")
-  resourceId?: Azure.Core.armResourceIdentifier<[
+  virtualHardDiskId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualHardDisks";
     }
