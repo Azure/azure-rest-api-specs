@@ -62,7 +62,7 @@ interface Broker {
   >;
   update is ArmResourcePatchSync<BrokerResource, BrokerProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerResource>;
+  listByMqResource is ArmResourceListByParent<BrokerResource>;
 }
 
 // /mq/broker/listener resource Operations
@@ -80,7 +80,7 @@ interface BrokerListener {
     BrokerListenerProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerListenerResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerListenerResource>;
+  listByBrokerResource is ArmResourceListByParent<BrokerListenerResource>;
 }
 
 // /mq/broker/authentication resource Operations
@@ -98,7 +98,7 @@ interface BrokerAuthentication {
     BrokerAuthenticationProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthenticationResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerAuthenticationResource>;
+  listByBrokerResource is ArmResourceListByParent<BrokerAuthenticationResource>;
 }
 
 // /mq/broker/authorization resource Operations
@@ -116,7 +116,7 @@ interface BrokerAuthorization {
     BrokerAuthorizationProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthorizationResource>;
-  listByResourceGroup is ArmResourceListByParent<BrokerAuthorizationResource>;
+  listByBrokerResource is ArmResourceListByParent<BrokerAuthorizationResource>;
 }
 
 // /mq/mqttbridgeConnector resource Operations
@@ -134,7 +134,7 @@ interface MqttBridgeConnector {
     MqttBridgeConnectorProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<MqttBridgeConnectorResource>;
-  listByResourceGroup is ArmResourceListByParent<MqttBridgeConnectorResource>;
+  listByMqResource is ArmResourceListByParent<MqttBridgeConnectorResource>;
 }
 
 // /mq/mqttbridgeConnector/topicMap resource Operations
@@ -152,7 +152,7 @@ interface MqttBridgeTopicMap {
     MqttBridgeTopicMapProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<MqttBridgeTopicMapResource>;
-  listByResourceGroup is ArmResourceListByParent<MqttBridgeTopicMapResource>;
+  listByMqttBridgeConnectorResource is ArmResourceListByParent<MqttBridgeTopicMapResource>;
 }
 
 // /mq/diagnosticService resource Operations
@@ -170,7 +170,7 @@ interface DiagnosticService {
     DiagnosticServiceProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DiagnosticServiceResource>;
-  listByResourceGroup is ArmResourceListByParent<DiagnosticServiceResource>;
+  listByMqResource is ArmResourceListByParent<DiagnosticServiceResource>;
 }
 
 // /mq/datalakeConnector resource Operations
@@ -188,7 +188,7 @@ interface DataLakeConnector {
     DataLakeConnectorProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DataLakeConnectorResource>;
-  listByResourceGroup is ArmResourceListByParent<DataLakeConnectorResource>;
+  listByMqResource is ArmResourceListByParent<DataLakeConnectorResource>;
 }
 
 // /mq/dataLakeconnector/topicMap resource Operations
@@ -206,7 +206,7 @@ interface DataLakeConnectorTopicMap {
     DataLakeConnectorTopicMapProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DataLakeTopicMapResource>;
-  listByResourceGroup is ArmResourceListByParent<DataLakeTopicMapResource>;
+  listByDataLakeConnectorResource is ArmResourceListByParent<DataLakeTopicMapResource>;
 }
 
 // /mq/kafkaConnector resource Operations
@@ -224,7 +224,7 @@ interface KafkaConnector {
     KafkaConnectorProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<KafkaConnectorResource>;
-  listByResourceGroup is ArmResourceListByParent<KafkaConnectorResource>;
+  listByMqResource is ArmResourceListByParent<KafkaConnectorResource>;
 }
 
 // /mq/kafkaConnector/topicMap resource Operations
@@ -242,5 +242,5 @@ interface KafkaConnectorTopicMap {
     KafkaTopicMapProperties
   >;
   delete is ArmResourceDeleteWithoutOkAsync<KafkaTopicMapResource>;
-  listByResourceGroup is ArmResourceListByParent<KafkaTopicMapResource>;
+  listByKafkaConnectorResource is ArmResourceListByParent<KafkaTopicMapResource>;
 }

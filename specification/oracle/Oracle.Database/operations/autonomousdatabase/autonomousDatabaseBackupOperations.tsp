@@ -26,7 +26,7 @@ interface AutonomousDatabaseBackups
     "./examples/autonomousDatabaseBackup_listByParent.json",
     "List Autonomous Database Backups by Autonomous Database."
   )
-  listByParent is ArmResourceListByParent<AutonomousDatabaseBackup>;
+  listByAutonomousDatabase is ArmResourceListByParent<AutonomousDatabaseBackup>;
 }
 
 @@example(AutonomousDatabaseBackups.createOrUpdate,

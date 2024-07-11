@@ -13,7 +13,7 @@ interface DbServers extends OracleReadOnlyResource<DbServer> {
     "./examples/dbServers_listByParent.json",
     "List DbServers by Exadata Infrastructure"
   )
-  listByParent is ArmResourceListByParent<DbServer>;
+  listByCloudExadataInfrastructure is ArmResourceListByParent<DbServer>;
 }
 
 @@example(DbServers.get,

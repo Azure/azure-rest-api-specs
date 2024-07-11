@@ -18,7 +18,7 @@ interface VirtualNetworkAddresses
     "./examples/virtualNetworkAddresses_listByParent.json",
     "List Virtual Network Addresses by VM Cluster"
   )
-  listByParent is ArmResourceListByParent<VirtualNetworkAddress>;
+  listByCloudVmCluster is ArmResourceListByParent<VirtualNetworkAddress>;
 }
 
 @@example(VirtualNetworkAddresses.createOrUpdate,

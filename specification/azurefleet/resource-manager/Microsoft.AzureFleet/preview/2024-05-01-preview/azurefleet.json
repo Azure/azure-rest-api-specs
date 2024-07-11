@@ -733,9 +733,14 @@
         "userAssignedIdentities": {
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
-          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
           }
         }
       }

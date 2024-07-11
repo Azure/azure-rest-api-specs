@@ -11,7 +11,7 @@ namespace Oracle.Database;
 interface DbNodes extends OracleReadOnlyResource<DbNode> {
   // TODO: Swagger generator bug, cannot be extracted to interface
   @example("./examples/dbNodes_listByParent.json", "List DbNodes by VM Cluster")
-  listByParent is ArmResourceListByParent<DbNode>;
+  listByCloudVmCluster is ArmResourceListByParent<DbNode>;
 
   @doc("VM actions on DbNode of VM Cluster by the provided filter")
   @example(

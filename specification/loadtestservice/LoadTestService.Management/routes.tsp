@@ -95,7 +95,7 @@ interface LoadTestMappings {
   >;
 
   @added(APIVersions.v2023_12_01_preview)
-  listByScope is ArmResourceListByParent<LoadTestMappingResource>;
+  list is ArmResourceListByParent<LoadTestMappingResource>;
 }
 
 @armResourceOperations
@@ -117,5 +117,5 @@ interface LoadTestProfileMappings {
   >;
 
   @added(APIVersions.v2023_12_01_preview)
-  listByScope is ArmResourceListByParent<LoadTestProfileMappingResource>;
+  list is ArmResourceListByParent<LoadTestProfileMappingResource>;
 }

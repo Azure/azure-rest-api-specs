@@ -231,7 +231,7 @@ interface AssociationsInterface {
   >;
   update is ArmResourcePatchSync<Association, AssociationProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
-  listByResourceGroup is ArmResourceListByParent<Association>;
+  listByTrafficController is ArmResourceListByParent<Association>;
 }
 
 @armResourceOperations
@@ -245,7 +245,7 @@ interface FrontendsInterface {
   >;
   update is ArmResourcePatchSync<Frontend, FrontendProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<Frontend>;
-  listByResourceGroup is ArmResourceListByParent<Frontend>;
+  listByTrafficController is ArmResourceListByParent<Frontend>;
 }
 
 @added(Versions.v2024_05_01_preview)
@@ -260,7 +260,7 @@ interface SecurityPoliciesInterface {
   >;
   update is ArmResourcePatchSync<SecurityPolicy, SecurityPolicyProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<SecurityPolicy>;
-  listByResourceGroup is ArmResourceListByParent<SecurityPolicy>;
+  listByTrafficController is ArmResourceListByParent<SecurityPolicy>;
 }
 
 @armResourceOperations
