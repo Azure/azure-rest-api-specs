@@ -259,4 +259,9 @@ namespace Azure.AI.OpenAI.Assistants {
     "vectorStoreUpdateOptions",
     "csharp,java"
   );
+  @@clientName(createRun::parameters.body, "createRunOptions", "csharp,java");
+  @@clientName(createMessage::parameters.body,
+    "threadMessageOptions",
+    "csharp,java"
+  );
 }
