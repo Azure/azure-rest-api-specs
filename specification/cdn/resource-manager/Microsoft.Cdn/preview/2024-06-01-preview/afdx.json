@@ -4904,10 +4904,10 @@
           "AFDTargetGroups"
         ],
         "description": "Updates an existing target group within a profile.",
-        "operationId": "AFDTargetGroups_Patch",
+        "operationId": "AFDTargetGroups_Update",
         "x-ms-examples": {
-          "AfdTargetGroups_Patch": {
-            "$ref": "./examples/AFDTargetGroups_Patch.json"
+          "AfdTargetGroups_Update": {
+            "$ref": "./examples/AFDTargetGroups_Update.json"
           }
         },
         "parameters": [
@@ -5225,10 +5225,10 @@
           "TunnelPolicies"
         ],
         "description": "Updates an existing tunnel policy within a profile.",
-        "operationId": "TunnelPolicies_Patch",
+        "operationId": "TunnelPolicies_Update",
         "x-ms-examples": {
-          "TunnelPolicies_Patch": {
-            "$ref": "./examples/TunnelPolicies_Patch.json"
+          "TunnelPolicies_Update": {
+            "$ref": "./examples/TunnelPolicies_Update.json"
           }
         },
         "parameters": [
@@ -8205,11 +8205,11 @@
       "description": "TargetEndpoint object that forms a traffic endpoint.",
       "type": "object",
       "properties": {
-        "TargetFQDN": {
+        "targetFQDN": {
           "description": "The FQDN for traffic endpoint.",
           "type": "string"          
         },
-        "Ports": {
+        "ports": {
           "description": "The Ports to be allowed for the FQDN.",
           "type": "array",
           "items": {            
@@ -8223,7 +8223,7 @@
       }
     },
     "TunnelPolicyListResult": {
-      "description": "Result of the request to list tunnel policies. It contains a list of tunnelpolicy objects.",
+      "description": "Result of the request to list tunnel policies. It contains a list of tunnel policy objects.",
       "type": "object",
       "properties": {
         "value": {
@@ -8241,7 +8241,7 @@
       }
     },
     "TunnelPolicy": {
-      "description": "Tunnelpolicy maps domains to target endpoints to process traffic over the tunnelling protocol.",
+      "description": "Tunnel Policy maps domains to target endpoints to process traffic over the tunnelling protocol.",
       "type": "object",
       "allOf": [
         {
@@ -8251,15 +8251,15 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TunnelpolicyProperties"
+          "$ref": "#/definitions/TunnelPolicyProperties"
         }
       }
     },
-    "TunnelpolicyProperties": {
-      "description": "The JSON object that contains the properties of the tunnelpolicy to create.",
+    "TunnelPolicyProperties": {
+      "description": "The JSON object that contains the properties of the tunnel policy to create.",
       "allOf": [
         {
-          "$ref": "#/definitions/TunnelpolicyUpdatePropertiesParameters"
+          "$ref": "#/definitions/TunnelPolicyUpdatePropertiesParameters"
         },
         {
           "$ref": "#/definitions/AFDStateProperties"
@@ -8296,14 +8296,14 @@
           "default": "HttpConnect"
         },
         "domains": {
-          "description": "Domains referenced by this tunnelpolicy.",
+          "description": "Domains referenced by this tunnel policy.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActivatedResourceReference"
           }
         },
         "targetGroups": {
-          "description": "Target Groups referenced by this tunnelpolicy.",
+          "description": "Target Groups referenced by this tunnel policy.",
           "type": "array",
           "items": {
             "$ref": "./cdn.json#/definitions/ResourceReference"
