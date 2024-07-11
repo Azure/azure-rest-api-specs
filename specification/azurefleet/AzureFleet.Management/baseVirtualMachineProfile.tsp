@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 
 namespace Microsoft.AzureFleet;
 
@@ -534,7 +535,7 @@ model SubResource {
   /**
    * Resource Id
    */
-  id?: string;
+  id?: armResourceIdentifier;
 }
 
 /**
@@ -939,7 +940,7 @@ model ApiEntityReference {
    * The ARM resource id in the form of
    * /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...
    */
-  id?: string;
+  id?: armResourceIdentifier;
 }
 
 /**
@@ -1289,7 +1290,7 @@ model EncryptionIdentity {
   /**
    * Specifies ARM Resource ID of one of the user identities associated with the VM.
    */
-  userAssignedIdentityResourceId?: string;
+  userAssignedIdentityResourceId?: armResourceIdentifier;
 }
 
 /**
@@ -1494,7 +1495,7 @@ model SubResourceReadOnly {
    * Resource Id
    */
   @visibility("read")
-  id?: string;
+  id?: armResourceIdentifier;
 }
 
 /**
@@ -1594,7 +1595,7 @@ model VMGalleryApplication {
    * Specifies the GalleryApplicationVersion resource id on the form of
    * /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}
    */
-  packageReferenceId: string;
+  packageReferenceId: armResourceIdentifier;
 
   /**
    * Optional, Specifies the uri to an azure blob that will replace the default
@@ -1662,7 +1663,7 @@ model ServiceArtifactReference {
    * The service artifact reference id in the form of
    * /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}
    */
-  id?: string;
+  id?: armResourceIdentifier;
 }
 
 /**
@@ -1852,7 +1853,7 @@ model ResourceWithOptionalLocation {
    * Resource Id
    */
   @visibility("read")
-  id?: string;
+  id?: armResourceIdentifier;
 
   /**
    * Resource name
