@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-10-01",
+    "version": "2024-02-01-preview",
     "title": "AuthorizationManagementClient"
   },
   "securityDefinitions": {
@@ -219,6 +219,33 @@
         }
       }
     },
+    "UsersOrServicePrincipalSet": {
+      "description": "The detail of a subject.",
+      "type": "object",
+      "properties": {
+        "userType": {
+          "type": "string",
+          "description": "The type of user.",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "name": "UserType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The object id of the entity."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display Name of the entity."
+        }
+      }
+    },
     "RoleManagementPolicyAuthenticationContextRule": {
       "description": "The role management policy authentication context rule.",
       "allOf": [
@@ -394,11 +421,61 @@
         "RoleManagementPolicyAuthenticationContextRule",
         "RoleManagementPolicyEnablementRule",
         "RoleManagementPolicyExpirationRule",
-        "RoleManagementPolicyNotificationRule"
+        "RoleManagementPolicyNotificationRule",
+        "RoleManagementPolicyPimOnlyModeRule"
       ],
       "x-ms-enum": {
         "name": "RoleManagementPolicyRuleType",
         "modelAsString": true
+      }
+    },
+    "RoleManagementPolicyPimOnlyModeRule": {
+      "description": "The role management policy PIM only mode rule.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RoleManagementPolicyRule"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "pimOnlyModeSettings": {
+          "$ref": "#/definitions/PIMOnlyModeSettings",
+          "description": "The PIM Only Mode settings"
+        }
+      }
+    },
+    "PIMOnlyModeSettings": {
+      "description": "The PIM Only Mode settings.",
+      "type": "object",
+      "properties": {
+        "mode" : {
+          "type": "string",
+          "description": "Determines whether the setting is enabled, disabled or report only.",
+          "enum": [
+            "Disabled",
+            "Enabled",
+            "ReportOnly"
+          ],
+          "x-ms-enum": {
+            "name": "PIMOnlyMode",
+            "modelAsString": true
+          }
+        },
+        "excludes": {
+          "type": "array",
+          "description": "The list of excluded entities that the rule does not apply to.",
+          "items": {
+            "$ref": "#/definitions/UsersOrServicePrincipalSet"
+          }
+        },
+        "excludeServicePrincipalAsRequestor": {
+          "type": "boolean",
+          "description": "Exclude all service principals as caller from this rule."
+        },
+        "exludeServicePrincipalsAsTarget": {
+          "type": "boolean",
+          "description": "Exclude when the target of the role assignment is a service principal."
+        }
       }
     }
   },
