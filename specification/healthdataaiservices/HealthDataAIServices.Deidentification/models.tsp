@@ -360,9 +360,17 @@ model StringIndex{
   @doc("The offset or length of the substring in UTF-8 encoding")
   utf8: int32;
 
-  @doc("The offset or length of the substring in UTF-16 encoding")
+  @doc("""
+  The offset or length of the substring in UTF-16 encoding.
+
+  Used in .NET, Java, and JavaScript.
+  """)
   utf16: int32;
 
-  @doc("The offset or length of the substring in CodePoint encoding")
+  @doc("""
+  The offset or length of the substring in UTF-16 encoding.
+
+  Used in Python.
+  """)
   codePoint: int32;
 }
