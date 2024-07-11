@@ -205,7 +205,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 
 // @@clientName(AnalyzeTextTask, "AnalyzeTextInput", "csharp");
-@@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind", "csharp");
+// @@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind", "csharp");
 
 @@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput", "csharp");
 @@clientName(LanguageDetectionAnalysisInput, "LanguageDetectionTextInput", "csharp");
@@ -213,6 +213,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextSentimentAnalysisInput, "TextSentimentAnalysisInput", "csharp");
 @@clientName(AnalyzeTextSentimentAnalysisInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextSentimentAnalysisInput.analysisInput, "TextInput", "csharp");
+@@clientName(SentimentAnalysisTaskParameters, "SentimentAnalysisActionContent", "csharp");
 
 @@clientName(AnalyzeTextPiiEntitiesRecognitionInput, "TextPiiEntitiesRecognitionInput", "csharp");
 @@clientName(AnalyzeTextPiiEntitiesRecognitionInput.parameters, "ActionContent", "csharp");
@@ -272,7 +273,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(SentimentAnalysisLROTask, "SentimentAnalysisOperationAction", "csharp");
 @@clientName(SentimentAnalysisLROTask.parameters, "ActionContent", "csharp");
-@@clientName(SentimentAnalysisTaskParameters, "SentimentAnalysisActionContent", "csharp");
 
 @@clientName(CustomSentimentAnalysisLROTask, "CustomSentimentAnalysisOperationAction", "csharp");
 @@clientName(CustomSentimentAnalysisLROTask.parameters, "ActionContent", "csharp");
