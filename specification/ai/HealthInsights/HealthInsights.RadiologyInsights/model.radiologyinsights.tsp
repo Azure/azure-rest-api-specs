@@ -428,13 +428,9 @@ model PresentGuidanceInformation {
   @doc("The item of the structured information ")
   presentGuidanceItem: string;
 
-  @doc("Represents the tokens of the item and details.")
-  @minItems(1)
-  extension: Array<Fhir.R4.Extension>;
-
   @doc("A list of size values, if the item is about size.")
   @minItems(1)
-  sizes?: Array<Array<Fhir.R4.ObservationComponent>>;
+  sizes?: Array<Fhir.R4.Observation>;
 
   @doc("The maximum diameter value, if the item is about the maximum diameter.")
   maximumDiameterAsInText?: Fhir.R4.Quantity;
@@ -442,6 +438,8 @@ model PresentGuidanceInformation {
   @doc("The list of item values that are mentioned in the report.")
   @minItems(1)
   presentGuidanceValues?: Array<string>;
+
+  ...Fhir.R4.Extendible;
 }
 
 // For quality measure:

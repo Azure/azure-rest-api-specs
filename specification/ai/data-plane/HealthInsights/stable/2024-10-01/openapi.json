@@ -2656,25 +2656,13 @@
           "type": "string",
           "description": "The item of the structured information "
         },
-        "extension": {
-          "type": "array",
-          "description": "Represents the tokens of the item and details.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/Fhir.R4.Extension"
-          }
-        },
         "sizes": {
           "type": "array",
           "description": "A list of size values, if the item is about size.",
           "minItems": 1,
           "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Fhir.R4.ObservationComponent"
-            }
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/Fhir.R4.Observation"
+          }
         },
         "maximumDiameterAsInText": {
           "$ref": "#/definitions/Fhir.R4.Quantity",
@@ -2687,11 +2675,17 @@
           "items": {
             "type": "string"
           }
+        },
+        "extension": {
+          "type": "array",
+          "description": "Additional Content defined by implementations",
+          "items": {
+            "$ref": "#/definitions/Fhir.R4.Extension"
+          }
         }
       },
       "required": [
-        "presentGuidanceItem",
-        "extension"
+        "presentGuidanceItem"
       ]
     },
     "ProcedureRecommendation": {
