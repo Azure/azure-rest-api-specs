@@ -53,7 +53,7 @@ interface VirtualHardDisks {
   @doc("The operation to upload a virtual hard disk.")
   upload is ArmResourceActionAsync<
     VirtualHardDisk,
-    VirtualHardDisksUploadRequest,
-    Azure.ResourceManager.Foundations.BaseParameters<VirtualHardDisk>
+    VirtualHardDiskUploadRequest,
+    VirtualHardDiskUploadResponse
   >;
 }

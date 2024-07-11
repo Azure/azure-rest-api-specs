@@ -1208,9 +1208,23 @@ model VirtualHardDisksUpdateRequest {
 
 @added(Versions.v2024_05_01_test_preview)
 @doc("Request for uploading virtual hard disk.")
-model VirtualHardDisksUploadRequest {
+model VirtualHardDiskUploadRequest {
   @doc("The Azure managed disk SAS URL to upload the virtual hard disk to.")
   azureManagedDiskUploadUrl: string;
+}
+
+@added(Versions.v2024_05_01_test_preview)
+@doc("Response for uploading virtual hard disk.")
+model VirtualHardDiskUploadResponse {
+  @doc("The ARM ID for a Virtual Hard Disk.")
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualHardDisks";
+    }
+  ]>;
+
+  @doc("The upload status of the virtual hard disk")
+  uploadStatus?: VirtualHardDiskUploadStatus;
 }
 
 @doc("Properties under the virtual machine instance resource")
