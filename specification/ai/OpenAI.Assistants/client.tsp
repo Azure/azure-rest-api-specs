@@ -233,35 +233,32 @@ namespace Azure.AI.OpenAI.Assistants {
 
   @@clientName(createAssistant::parameters.body,
     "assistantCreationOptions",
-    "csharp,java"
+    "java"
   );
   @@clientName(updateAssistant::parameters.body,
     "updateAssistantOptions",
-    "csharp,java"
+    "java"
   );
   @@clientName(createThreadAndRun::parameters.body,
     "createAndRunThreadOptions",
-    "csharp,java"
+    "java"
   );
   @@clientName(createThread::parameters.body,
     "assistantThreadCreationOptions",
-    "csharp,java"
+    "java"
   );
   @@clientName(updateThread::parameters.body,
     "updateAssistantThreadOptions",
-    "csharp,java"
+    "java"
   );
   @@clientName(createVectorStore::parameters.body,
     "vectorStoreOptions",
-    "csharp,java"
+    "java"
   );
   @@clientName(modifyVectorStore::parameters.body,
     "vectorStoreUpdateOptions",
-    "csharp,java"
+    "java"
   );
-  @@clientName(createRun::parameters.body, "createRunOptions", "csharp,java");
-  @@clientName(createMessage::parameters.body,
-    "threadMessageOptions",
-    "csharp,java"
-  );
+  @@clientName(createRun::parameters.body, "createRunOptions", "java");
+  @@clientName(createMessage::parameters.body, "threadMessageOptions", "java");
 }
