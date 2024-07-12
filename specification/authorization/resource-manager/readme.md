@@ -100,6 +100,12 @@ These settings apply only when `--tag=package-preview-2024-02` is specified on t
 
 ```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
   - Microsoft.Authorization/preview/2024-02-01-preview/common-types.json
   - Microsoft.Authorization/preview/2024-02-01-preview/EligibleChildResources.json
   - Microsoft.Authorization/preview/2024-02-01-preview/RoleAssignmentSchedule.json
