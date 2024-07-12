@@ -64,3 +64,7 @@ test.concurrent("Usage", async ({ expect }) => {
 test.concurrent("Convert keyvault/data-plane", async ({ expect }) => {
   await convert(expect, "specification/keyvault/data-plane/readme.md");
 });
+
+test.concurrent("Convert sphere/resource-manager", async ({ expect }) => {
+  await convert(expect, "specification/sphere/resource-manager/readme.md");
+});
