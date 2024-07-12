@@ -4716,6 +4716,648 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/targetGroups": {
+      "get": {
+        "tags": [
+          "AFDTargetGroups"
+        ],
+        "description": "Lists Target Groups associated with the profile",
+        "operationId": "AFDTargetGroups_ListByProfile",
+        "x-ms-examples": {
+          "AfdTargetGroups_ListByProfile": {
+            "$ref": "./examples/AFDTargetGroups_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/targetGroups/{targetGroupName}": {
+      "get": {
+        "tags": [
+          "AFDTargetGroups"
+        ],
+        "description": "Gets an existing target group within a profile.",
+        "operationId": "AFDTargetGroups_Get",
+        "x-ms-examples": {
+          "AfdTargetGroups_Get": {
+            "$ref": "./examples/AFDTargetGroups_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupName",
+            "in": "path",
+            "description": "Name of the target group under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AFDTargetGroups"
+        ],
+        "description": "Creates a new target group within the specified profile.",
+        "operationId": "AFDTargetGroups_Create",
+        "x-ms-examples": {
+          "AfdTargetGroups_Create": {
+            "$ref": "./examples/AFDTargetGroups_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupName",
+            "in": "path",
+            "description": "Name of the target group under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroup",
+            "in": "body",
+            "description": "The target group properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new delivery rule has been created.",
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "AFDTargetGroups"
+        ],
+        "description": "Updates an existing target group within a profile.",
+        "operationId": "AFDTargetGroups_Update",
+        "x-ms-examples": {
+          "AfdTargetGroups_Update": {
+            "$ref": "./examples/AFDTargetGroups_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupName",
+            "in": "path",
+            "description": "Name of the target group under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupUpdateProperties",
+            "in": "body",
+            "description": "Target group update properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroupUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AFDTargetGroup"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "AFDTargetGroups"
+        ],
+        "description": "Deletes an existing target group within profile.",
+        "operationId": "AFDTargetGroups_Delete",
+        "x-ms-examples": {
+          "AfdTargetGroups_Delete": {
+            "$ref": "./examples/AFDTargetGroups_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetGroupName",
+            "in": "path",
+            "description": "Name of the target group under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/tunnelPolicies": {
+      "get": {
+        "tags": [
+          "TunnelPolicies"
+        ],
+        "description": "Lists tunnel policies associated with the profile",
+        "operationId": "TunnelPolicies_ListByProfile",
+        "x-ms-examples": {
+          "TunnelPolicies_ListByProfile": {
+            "$ref": "./examples/TunnelPolicies_ListByProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/tunnelPolicies/{tunnelPolicyName}": {
+      "get": {
+        "tags": [
+          "TunnelPolicies"
+        ],
+        "description": "Gets an existing tunnel policy within a profile.",
+        "operationId": "TunnelPolicies_Get",
+        "x-ms-examples": {
+          "TunnelPolicies_Get": {
+            "$ref": "./examples/TunnelPolicies_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tunnelPolicyName",
+            "in": "path",
+            "description": "Name of the tunnel policy under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TunnelPolicies"
+        ],
+        "description": "Creates a new tunnel policy within the specified profile.",
+        "operationId": "TunnelPolicies_Create",
+        "x-ms-examples": {
+          "TunnelPolicies_Create": {
+            "$ref": "./examples/TunnelPolicies_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tunnelPolicyName",
+            "in": "path",
+            "description": "Name of the tunnel policy under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tunnelPolicy",
+            "in": "body",
+            "description": "The tunnel policy properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new delivery rule has been created.",
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "TunnelPolicies"
+        ],
+        "description": "Updates an existing tunnel policy within a profile.",
+        "operationId": "TunnelPolicies_Update",
+        "x-ms-examples": {
+          "TunnelPolicies_Update": {
+            "$ref": "./examples/TunnelPolicies_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tunnelPolicyName",
+            "in": "path",
+            "description": "Name of the tunnel policy under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tunnelPolicyUpdateProperties",
+            "in": "body",
+            "description": "Tunnel policy update properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicyUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TunnelPolicy"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "TunnelPolicies"
+        ],
+        "description": "Deletes an existing tunnel policy within profile.",
+        "operationId": "TunnelPolicies_Delete",
+        "x-ms-examples": {
+          "TunnelPolicies_Delete": {
+            "$ref": "./examples/TunnelPolicies_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tunnelPolicyName",
+            "in": "path",
+            "description": "Name of the tunnel policy under the profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
@@ -7488,6 +8130,185 @@
       "description": "Reference to another resource along with its state.",
       "type": "object",
       "x-ms-azure-resource": true
+    },
+    "AFDTargetGroupListResult": {
+      "description": "Result of the request to list target groups. It contains a list of target group objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AFDTargetGroup"
+          },
+          "description": "List of AzureFrontDoor target groups within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of route objects if there are any."
+        }
+      }
+    },
+    "AFDTargetGroup": {
+      "description": "AFDTargetGroup comprises a list of Endpoints that is used for tunnelling protocols to allow certain traffic.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDTargetGroupProperties"
+        }
+      }
+    },
+    "AFDTargetGroupProperties": {
+      "description": "The JSON object that contains the properties of the TargetGroups to create.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDTargetGroupUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "required": [
+        "targetEndpoints"
+      ]
+    },
+    "AFDTargetGroupUpdateParameters": {
+      "description": "The domain JSON object required for TargetGroup creation or update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AFDTargetGroupUpdatePropertiesParameters"
+        }
+      }
+    },
+    "AFDTargetGroupUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the TargetGroup to create.",
+      "type": "object",
+      "properties": {        
+        "targetEndpoints": {
+          "description": "TargetEndpoint list referenced by this target group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetEndpoint"
+          }
+        }        
+      }
+    },
+    "TargetEndpoint": {
+      "description": "TargetEndpoint object that forms a traffic endpoint.",
+      "type": "object",
+      "properties": {
+        "targetFqdn": {
+          "description": "The FQDN for traffic endpoint.",
+          "type": "string"          
+        },
+        "ports": {
+          "description": "The Ports to be allowed for the FQDN.",
+          "type": "array",
+          "items": {            
+            "description": "The value of the port. Must be between 1 and 65535.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 65535,
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "TunnelPolicyListResult": {
+      "description": "Result of the request to list tunnel policies. It contains a list of tunnel policy objects.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TunnelPolicy"
+          },
+          "description": "List of AzureFrontDoor tunnel policies within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of route objects if there are any."
+        }
+      }
+    },
+    "TunnelPolicy": {
+      "description": "Tunnel Policy maps domains to target endpoints to process traffic over the tunnelling protocol.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TunnelPolicyProperties"
+        }
+      }
+    },
+    "TunnelPolicyProperties": {
+      "description": "The JSON object that contains the properties of the tunnel policy to create.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TunnelPolicyUpdatePropertiesParameters"
+        },
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "required": [
+        "domains"        
+      ]
+    },
+    "TunnelPolicyUpdateParameters": {
+      "description": "The domain JSON object required for tunnel policy creation or update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TunnelPolicyUpdatePropertiesParameters"
+        }
+      }
+    },
+    "TunnelPolicyUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the tunnel policy to create.",
+      "type": "object",
+      "properties": {
+        "tunnelType": {
+          "description": "Protocol this tunnel will use for allowing traffic to backends.",
+          "type": "string",
+          "enum": [
+            "HttpConnect"
+          ],
+          "x-ms-enum": {
+            "name": "TunnelType",
+            "modelAsString": true
+          }          
+        },
+        "domains": {
+          "description": "Domains referenced by this tunnel policy.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActivatedResourceReference"
+          }
+        },
+        "targetGroups": {
+          "description": "Target Groups referenced by this tunnel policy.",
+          "type": "array",
+          "items": {
+            "$ref": "./cdn.json#/definitions/ResourceReference"
+          }
+        }        
+      }
     }
   },
   "parameters": {
