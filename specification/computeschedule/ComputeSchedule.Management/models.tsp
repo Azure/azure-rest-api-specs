@@ -157,7 +157,7 @@ model ResourceOperationDetails {
   operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
   @extension("x-ms-enum.modelAsString", true)
@@ -195,7 +195,7 @@ model ResourceOperationDetails {
 @doc("High level response from an operation on a resource")
 model ResourceOperation {
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
-  resourceId: string;
+  resourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Resource level error code if it exists")
   errorCode?: string;
