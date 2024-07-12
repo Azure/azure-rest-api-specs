@@ -239,17 +239,17 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "csharp");
 @@clientName(AcsRouterWorkerSelector.value, "labelValue", "csharp");
 
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingContentType,
+@@clientName(recordingContentType,
   "AcsRecordingContentType",
   "csharp"
 );
 
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
+@@clientName(recordingChannelType,
   "AcsRecordingChannelType",
   "csharp"
 );
 
-@@clientName(AcsRecordingFileStatusUpdatedEventData.recordingFormatType,
+@@clientName(recordingFormatType,
   "AcsRecordingFormatType",
   "csharp"
 );
