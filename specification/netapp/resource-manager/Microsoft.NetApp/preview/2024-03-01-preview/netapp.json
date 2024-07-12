@@ -6449,8 +6449,7 @@
       "type": "object",
       "required": [
         "keyVaultUri",
-        "keyName",
-        "keyVaultResourceId"
+        "keyName"
       ],
       "properties": {
         "keyVaultId": {
@@ -6472,7 +6471,15 @@
         },
         "keyVaultResourceId": {
           "type": "string",
-          "description": "The resource ID of KeyVault."
+          "description": "The resource ID of KeyVault.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
         },
         "status": {
           "type": "string",
@@ -10413,7 +10420,6 @@
       "required": [
         "keyVaultUri",
         "keyName",
-        "keyVaultResourceId",
         "keyVaultPrivateEndpoints"
       ],
       "properties": {
@@ -10433,7 +10439,15 @@
           "title": "keyVaultResourceId",
           "description": "Azure resource ID of the key vault/managed HSM that should be used for encryption.",
           "type": "string",
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.KeyVault/managedHSMs/my-hsm"
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.KeyVault/managedHSMs/my-hsm",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
         },
         "keyVaultPrivateEndpoints": {
           "title": "keyVaultPrivateEndpoints",
