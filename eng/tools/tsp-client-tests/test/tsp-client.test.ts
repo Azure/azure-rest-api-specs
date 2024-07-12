@@ -6,8 +6,11 @@ import { ExpectStatic, test } from "vitest";
 const repoRoot = join(__dirname, "..", "..", "..", "..");
 
 async function tspClient(...args: string[]) {
-  const execArgs = ["exec", "--no", "--", "tsp-client"];
-  return await execa("npm", execArgs.concat(args), { cwd: repoRoot, reject: false });
+  const allArgs = ["exec", "--no", "--", "tsp-client"].concat(args);
+
+  console.log(`${repoRoot}$ npm ${allArgs.join(" ")}`);
+
+  return await execa("npm", allArgs, { cwd: repoRoot, reject: false });
 }
 
 async function convert(expect: ExpectStatic, readme: string) {
@@ -30,17 +33,25 @@ async function convert(expect: ExpectStatic, readme: string) {
       readme,
       "-o",
       outputFolder,
+      readme.includes("resource-manager") ? "--arm" : "",
     );
 
     expect(stdout).toContain("Converting");
     expect(exitCode).toBe(0);
 
-    // Ensure generated files tspconfig.yaml and main.tsp exist
-    await access(join(outputFolder, "tspconfig.yaml"), constants.R_OK);
-    await access(join(outputFolder, "main.tsp"), constants.R_OK);
+    const tspConfigYaml = join(outputFolder, "tspconfig.yaml");
+    await access(tspConfigYaml, constants.R_OK);
+    console.log(`File exists: ${tspConfigYaml}`);
+
+    const mainTsp = join(outputFolder, "main.tsp");
+    await access(mainTsp, constants.R_OK);
+    console.log(`File exists: ${mainTsp}`);
   } finally {
     await rm(outputFolder, { recursive: true, force: true });
   }
+
+  // Ensure outputFolder is deleted
+  expect(() => access(outputFolder)).rejects.toThrowError();
 }
 
 test.concurrent("Usage", async ({ expect }) => {
