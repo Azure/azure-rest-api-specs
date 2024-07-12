@@ -14,6 +14,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-rdbms
 no-namespace-folders: true
 package-version: 1.0.0b1
+generate-test: false
 ```
 
 ### Python multi-api
