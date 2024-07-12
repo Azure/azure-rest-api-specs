@@ -440,7 +440,7 @@ using Microsoft.EventGrid.SystemEvents;
   "go"
 );
 
-@@clientName(recordingChannelType, "recordingChannelKind", "go");
+@@clientName(AcsRecordingChannelType, "AcsRecordingChannelKind", "go");
 
 @@clientName(AcsRecordingFileStatusUpdatedEventData.recordingChannelType,
   "recordingChannelKind",
