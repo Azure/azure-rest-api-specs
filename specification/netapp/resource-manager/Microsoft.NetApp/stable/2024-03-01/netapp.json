@@ -5903,8 +5903,7 @@
       "type": "object",
       "required": [
         "keyVaultUri",
-        "keyName",
-        "keyVaultResourceId"
+        "keyName"
       ],
       "properties": {
         "keyVaultId": {
@@ -5926,7 +5925,15 @@
         },
         "keyVaultResourceId": {
           "type": "string",
-          "description": "The resource ID of KeyVault."
+          "description": "The resource ID of KeyVault.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
         },
         "status": {
           "type": "string",
