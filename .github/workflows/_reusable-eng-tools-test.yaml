@@ -28,6 +28,9 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - run: git config --global core.longpaths true
+        shell: pwsh
+
       - uses: actions/checkout@v4
         with:
           sparse-checkout: ${{ inputs.use-sparse-checkout && 'eng' || ''}}
