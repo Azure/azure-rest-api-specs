@@ -8,9 +8,10 @@ on:
         description: Name of package under eng/tools
         required: true
         type: string
-      sparse-checkout-paths:
-        description: Paths for sparse checkout
-        type: string
+      use-sparse-checkout:
+        description: Whether to use sparse-checkout
+        type: boolean
+        default: true
 
 jobs:
   test:
@@ -29,9 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          sparse-checkout: |
-            eng
-            ${{ inputs.sparse-checkout-paths }}
+          sparse-checkout: ${{ inputs.use-sparse-checkout && 'eng' || ''}}
 
       - name: Use Node ${{ matrix.node-version }}.x
         uses: actions/setup-node@v4
