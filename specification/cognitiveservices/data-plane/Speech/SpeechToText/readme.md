@@ -4,10 +4,10 @@
 
 Configuration for generating SpeechToText SDK.
 
-The current release for the SpeechToText is `release_2024_05_15_preview`.
+The current release for the SpeechToText is `release_3_2`.
 
 ``` yaml
-tag: release_2024_05_15_preview
+tag: release_3_2
 add-credentials: true
 openapi-type: data-plane
 ```
