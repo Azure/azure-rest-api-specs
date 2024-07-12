@@ -485,6 +485,11 @@
     }
   },
   "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "CancelOperationsRequest": {
       "type": "object",
       "description": "This is the request to cancel running operations in scheduled actions using the operation ids",
@@ -493,11 +498,11 @@
           "type": "array",
           "description": "The list of operation ids to cancel operations on",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         },
         "correlationid": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Correlationid item"
         }
       },
@@ -605,7 +610,7 @@
           "description": "The resources for the request"
         },
         "correlationid": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Correlationid item"
         }
       },
@@ -628,7 +633,7 @@
           "description": "The resources for the request"
         },
         "correlationid": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Correlationid item"
         }
       },
@@ -651,7 +656,7 @@
           "description": "The resources for the request"
         },
         "correlationid": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Correlationid item"
         }
       },
@@ -683,11 +688,11 @@
           "type": "array",
           "description": "The list of operation ids to get the status of",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.uuid"
           }
         },
         "correlationid": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Correlationid item"
         }
       },
@@ -876,7 +881,7 @@
       "description": "The details of a response from an operation on a resource",
       "properties": {
         "operationId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Operation identifier for the unique operation"
         },
         "resourceId": {
@@ -923,7 +928,7 @@
           "x-ms-enum.modelAsString": true
         },
         "subscriptionId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Subscription id attached to the request"
         },
         "deadline": {
@@ -1251,7 +1256,7 @@
           "description": "The resources for the request"
         },
         "correlationid": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Correlationid item"
         }
       },
@@ -1279,7 +1284,7 @@
           "description": "The resources for the request"
         },
         "correlationid": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Correlationid item"
         }
       },
@@ -1307,7 +1312,7 @@
           "description": "The resources for the request"
         },
         "correlationid": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Correlationid item"
         }
       },
