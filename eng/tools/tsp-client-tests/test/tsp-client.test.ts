@@ -1,5 +1,5 @@
 import { execa } from "execa";
-import { mkdir, rm } from "fs/promises";
+import { access, constants, mkdir, rm } from "fs/promises";
 import { dirname, join } from "path";
 import { ExpectStatic, test } from "vitest";
 
@@ -34,6 +34,10 @@ async function convert(expect: ExpectStatic, readme: string) {
 
     expect(stdout).toContain("Converting");
     expect(exitCode).toBe(0);
+
+    // Ensure generated files tspconfig.yaml and main.tsp exist
+    await access(join(outputFolder, "tspconfig.yaml"), constants.R_OK);
+    await access(join(outputFolder, "main.tsp"), constants.R_OK);
   } finally {
     await rm(outputFolder, { recursive: true, force: true });
   }
