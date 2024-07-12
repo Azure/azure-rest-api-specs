@@ -117,6 +117,7 @@ input-file:
   - Microsoft.Authorization/preview/2024-02-01-preview/RoleEligibilityScheduleRequest.json
   - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicy.json
   - Microsoft.Authorization/preview/2024-02-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
 ### Tag: package-2022-05-01-preview-only
