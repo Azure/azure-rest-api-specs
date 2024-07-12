@@ -222,13 +222,13 @@ model AcsRecordingFileStatusUpdatedEventData {
   recordingDurationMs?: int64;
 
   /** The recording content type- AudioVideo, or Audio */
-  recordingContentType: recordingContentType;
+  recordingContentType: AcsRecordingContentType;
 
   /** The recording  channel type - Mixed, Unmixed */
-  recordingChannelType: recordingChannelType;
+  recordingChannelType: AcsRecordingChannelType;
 
   /** The recording format type - Mp4, Mp3, Wav */
-  recordingFormatType: recordingFormatType;
+  recordingFormatType: AcsRecordingFormatType;
 
   /** The reason for ending recording session */
   sessionEndReason?: string;
@@ -766,7 +766,7 @@ alias AcsChatParticipantBaseEventData = {
 };
 
 /** Recording content type */
-union recordingContentType {
+union AcsRecordingContentType {
   /** AudioVideo content type */
   "AudioVideo",
 
@@ -777,7 +777,7 @@ union recordingContentType {
 }
 
 /** Recording channel type */
-union recordingChannelType {
+union AcsRecordingChannelType {
   /** Mixed channel type */
   "Mixed",
 
@@ -788,7 +788,7 @@ union recordingChannelType {
 }
 
 /** Recording format type */
-union recordingFormatType {
+union AcsRecordingFormatType {
   /** WAV format */
   "Wav",
 
