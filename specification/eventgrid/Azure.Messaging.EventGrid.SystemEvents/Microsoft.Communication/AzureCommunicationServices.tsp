@@ -252,7 +252,7 @@ model AcsEmailDeliveryReportReceivedEventData {
   deliveryStatusDetails: AcsEmailDeliveryReportStatusDetails;
 
   /** The time at which the email delivery report received timestamp */
-  deliveryAttemptTimeStamp: utcDateTime;
+  deliveryAttemptTimestamp: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event. */
@@ -267,7 +267,7 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   messageId?: string;
 
   /** The time at which the user interacted with the email */
-  userActionTimeStamp: utcDateTime;
+  userActionTimestamp: utcDateTime;
 
   /** The context of the type of engagement user had with email */
   engagementContext?: string;
