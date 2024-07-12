@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Speech Services API version 3.2",
-    "description": "Speech Services API version 3.2.",
+    "title": "Speech Services API version 2024-05-15-preview",
+    "description": "Speech Services API version 2024-05-15-preview.",
     "contact": {
       "name": "Cognitive Services - Speech Services",
       "url": "https://learn.microsoft.com/azure/cognitive-services/speech-service/support"
     },
-    "version": "3.2"
+    "version": "2024-05-15-preview"
   },
   "paths": {
     "/datasets/locales": {
@@ -19,6 +19,11 @@
         "operationId": "Datasets_ListSupportedLocales",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -63,6 +68,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available datasets.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            -Example:\r\n             filter=createdDateTime gt 2022-02-01T11:00:00Z and displayName eq 'My dataset'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -112,6 +120,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
           {
             "in": "body",
             "name": "dataset",
@@ -171,6 +182,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -221,6 +235,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           },
           {
             "in": "body",
@@ -276,6 +293,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -314,6 +334,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -372,6 +395,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -399,101 +425,6 @@
         }
       }
     },
-    "/datasets/upload": {
-      "post": {
-        "tags": [
-          "Custom Speech datasets for model adaptation:"
-        ],
-        "summary": "Uploads data and creates a new dataset.",
-        "operationId": "Datasets_Upload",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "formData",
-            "name": "project",
-            "description": "The optional string representation of the url of a project. If set, the dataset will be associated with that project.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "displayName",
-            "description": "The name of this dataset.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "description",
-            "description": "Optional description of this dataset.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "locale",
-            "description": "The locale of this dataset.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "kind",
-            "description": "The kind of the dataset. Possible values are \"Language\", \"Acoustic\", \"Pronunciation\", \"AudioFiles\", \"LanguageMarkdown\", \"OutputFormatting\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "customProperties",
-            "description": "The optional custom properties of this entity. The maximum allowed key length is 64 characters, the maximum allowed value length is 256 characters and the count of allowed entries is 10.",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "data",
-            "description": "For acoustic datasets, a zip file containing the audio data and a text file containing the transcriptions for the audio data. For language datasets, a text file containing the language or pronunciation data. Required in both cases.",
-            "type": "file"
-          },
-          {
-            "in": "formData",
-            "name": "email",
-            "description": "An optional string containing the email address to send email notifications to in case the operation completes. The value will be removed after successfully sending the email.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The response contains information about the entity as payload and its location as header.",
-            "schema": {
-              "$ref": "#/definitions/Dataset"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the created resource.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "deprecated": true,
-        "x-ms-examples": {
-          "Upload a dataset": {
-            "$ref": "./examples/upload_dataset.json"
-          }
-        }
-      }
-    },
     "/datasets/{id}/blocks:commit": {
       "post": {
         "tags": [
@@ -515,6 +446,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           },
           {
             "in": "body",
@@ -580,6 +514,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available files.\r\n            - Supported properties: name, createdDateTime, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=name eq 'myaudio.wav' and kind eq 'Audio'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -646,6 +583,9 @@
           },
           {
             "$ref": "#/parameters/sasValidityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -678,6 +618,11 @@
         "operationId": "Endpoints_ListSupportedLocales",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -725,6 +670,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=locale eq 'en-US'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -774,6 +722,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
           {
             "in": "body",
             "name": "endpoint",
@@ -830,6 +781,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -876,6 +830,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -916,6 +873,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           },
           {
             "in": "body",
@@ -985,6 +945,9 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1042,6 +1005,9 @@
             "name": "endDate",
             "description": "The end date of the audio logs deletion (specific day, UTC).\r\n            Expected format: \"yyyy-mm-dd\". For instance, \"2023-03-15\" results in deleting all logs on March 15th, 2023 and before.\r\n            Deletes all existing logs when date is not specified.",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1090,6 +1056,9 @@
           },
           {
             "$ref": "#/parameters/sasValidityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1136,6 +1105,9 @@
             "description": "The identifier of the log.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1185,6 +1157,9 @@
           },
           {
             "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1234,6 +1209,9 @@
             "name": "endDate",
             "description": "The end date of the audio logs deletion (specific day, UTC).\r\n            Expected format: \"yyyy-mm-dd\". For instance, \"2023-03-15\" results in deleting all logs on March 15th, 2023 and before.\r\n            Deletes all existing logs when date is not specified.",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1281,6 +1259,9 @@
           },
           {
             "$ref": "#/parameters/sasValidityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1326,6 +1307,9 @@
             "description": "The identifier of the log.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1355,6 +1339,11 @@
         "operationId": "Evaluations_ListSupportedLocales",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -1402,6 +1391,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status and locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=displayName eq 'My evaluation'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1451,6 +1443,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
           {
             "in": "body",
             "name": "evaluation",
@@ -1522,6 +1517,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available files.\r\n            - Supported properties: name, createdDateTime, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=name eq 'myaudio.wav' and kind eq 'Audio'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1585,6 +1583,9 @@
           },
           {
             "$ref": "#/parameters/sasValidityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1626,6 +1627,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1676,6 +1680,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           },
           {
             "in": "body",
@@ -1731,6 +1738,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1760,6 +1770,11 @@
         "operationId": "Models_ListSupportedLocales",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -1807,6 +1822,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available models.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=status eq 'NotStarted' or status eq 'Running'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1853,6 +1871,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
           {
             "in": "body",
             "name": "model",
@@ -1916,6 +1937,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available base models.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=status eq 'NotStarted' or status eq 'Running'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -1961,6 +1985,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2016,6 +2043,9 @@
             "format": "uuid"
           },
           {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
             "in": "body",
             "name": "modelUpdate",
             "description": "The updated values for the model.",
@@ -2069,6 +2099,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2107,6 +2140,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2152,6 +2188,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           },
           {
             "in": "body",
@@ -2213,6 +2252,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
             "in": "body",
             "name": "modelCopyAuthorizationDefinition",
             "description": "The body contains the Azure Resource ID of the source speech resource.",
@@ -2264,6 +2306,9 @@
           },
           {
             "$ref": "#/parameters/sasValidityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2308,6 +2353,9 @@
           },
           {
             "$ref": "#/parameters/sasValidityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2364,6 +2412,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available files.\r\n            - Supported properties: name, createdDateTime, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=name eq 'myaudio.wav' and kind eq 'Audio'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2427,6 +2478,9 @@
           },
           {
             "$ref": "#/parameters/sasValidityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2468,6 +2522,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2510,6 +2567,11 @@
         "operationId": "Projects_ListSupportedLocales",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -2557,6 +2619,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available projects.\r\n            - Supported properties: displayName, description, createdDateTime, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=displayName eq 'My test'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2599,6 +2664,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
           {
             "in": "body",
             "name": "project",
@@ -2655,6 +2723,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2698,6 +2769,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           },
           {
             "in": "body",
@@ -2746,6 +2820,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2796,6 +2873,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available evaluations.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status and locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example\r\n              filter=displayName eq 'My evaluation'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2860,6 +2940,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available datasets.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=createdDateTime gt 2022-02-01T11:00:00Z",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2924,6 +3007,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available endpoints.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=locale eq 'en-US'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -2988,6 +3074,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available models.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n              - Operators:\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n                - and, or, not are supported.\r\n            - Example:\r\n              filter=status eq 'NotStarted' or status eq 'Running'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3052,6 +3141,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=createdDateTime gt 2022-02-01T11:00:00Z",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3096,14 +3188,16 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/TranscriptionLocales"
             }
           },
           "default": {
@@ -3142,6 +3236,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available transcriptions.\r\n            - Supported properties: displayName, description, createdDateTime, lastActionDateTime, status, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=createdDateTime gt 2022-02-01T11:00:00Z",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3177,68 +3274,6 @@
             "$ref": "./examples/get_failed_transcriptions.json"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Custom Speech transcriptions:"
-        ],
-        "summary": "Creates a new transcription.",
-        "operationId": "Transcriptions_Create",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "transcription",
-            "description": "The details of the new transcription.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Transcription"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The response contains information about the entity as payload and its location as header.",
-            "schema": {
-              "$ref": "#/definitions/Transcription"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the created resource.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a transcription for URIs": {
-            "$ref": "./examples/create_uri_transcription.json"
-          },
-          "Create a transcription with basic two-speaker diarization": {
-            "$ref": "./examples/create_simple_diarization_transcription.json"
-          },
-          "Create a transcription with multispeaker diarization": {
-            "$ref": "./examples/create_multispeaker_diarization_transcription.json"
-          },
-          "Create a transcription with language identification": {
-            "$ref": "./examples/create_lid_transcription.json"
-          },
-          "Create a transcription from blob container": {
-            "$ref": "./examples/create_container_transcription.json"
-          }
-        }
       }
     },
     "/transcriptions/{id}": {
@@ -3259,6 +3294,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3309,6 +3347,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           },
           {
             "in": "body",
@@ -3364,6 +3405,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3380,6 +3424,73 @@
         "x-ms-examples": {
           "Delete a transcription": {
             "$ref": "./examples/delete_transcription.json"
+          }
+        }
+      }
+    },
+    "/transcriptions:submit": {
+      "post": {
+        "tags": [
+          "Custom Speech transcriptions:"
+        ],
+        "summary": "Submits a new transcription job.",
+        "operationId": "Transcriptions_Submit",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "body",
+            "name": "transcription",
+            "description": "The details of the new transcription.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Transcription"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The response contains information about the entity as payload and its location as header.",
+            "schema": {
+              "$ref": "#/definitions/Transcription"
+            },
+            "headers": {
+              "Location": {
+                "description": "The location of the created resource.",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a transcription for URIs": {
+            "$ref": "./examples/create_uri_transcription.json"
+          },
+          "Create a transcription with basic two-speaker diarization": {
+            "$ref": "./examples/create_simple_diarization_transcription.json"
+          },
+          "Create a transcription with multispeaker diarization": {
+            "$ref": "./examples/create_multispeaker_diarization_transcription.json"
+          },
+          "Create a transcription with language identification": {
+            "$ref": "./examples/create_lid_transcription.json"
+          },
+          "Create a transcription from blob container": {
+            "$ref": "./examples/create_container_transcription.json"
           }
         }
       }
@@ -3417,6 +3528,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available files.\r\n            - Supported properties: name, createdDateTime, kind.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=name eq 'myaudio.wav.json' and kind eq 'Transcription'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3483,6 +3597,9 @@
           },
           {
             "$ref": "#/parameters/sasValidityQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3528,6 +3645,9 @@
             "name": "filter",
             "description": "A filtering expression for selecting a subset of the available hooks.\r\n            Supported properties: displayName, description, createdDateTime, lastActionDateTime, status and webUrl.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime and lastActionDateTime.\r\n              - and, or, not are supported.\r\n            - Example:\r\n              filter=displayName eq 'test'",
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3578,6 +3698,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
           {
             "in": "body",
             "name": "webHook",
@@ -3634,6 +3757,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3685,6 +3811,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           },
           {
             "in": "body",
@@ -3740,6 +3869,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3779,6 +3911,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3825,6 +3960,9 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
         "responses": {
@@ -3851,6 +3989,50 @@
         "x-ms-examples": {
           "Test a web hook": {
             "$ref": "./examples/test_web_hook.json"
+          }
+        }
+      }
+    },
+    "/transcriptions:transcribe": {
+      "post": {
+        "tags": [
+          "Transcribe"
+        ],
+        "summary": "Transcribes the provided audio stream.",
+        "operationId": "Transcribe",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "formData",
+            "name": "definition",
+            "description": "Metadata for a fast transcription request. This field contains a JSON-serialized object of type `TranscribeDefinition`.",
+            "required": true,
+            "type": "string",
+            "format": "application/json"
+          },
+          {
+            "in": "formData",
+            "name": "audio",
+            "description": "The audio as a stream of bytes.",
+            "required": true,
+            "type": "file",
+            "format": "binary"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TranscribeResult"
+            }
           }
         }
       }
@@ -4253,10 +4435,42 @@
     "DatasetLocales": {
       "title": "DatasetLocales",
       "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/DatasetKind"
+      "properties": {
+        "Language": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Acoustic": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Pronunciation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "AudioFiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LanguageMarkdown": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "OutputFormatting": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5206,7 +5420,7 @@
         },
         "tokenCount1": {
           "format": "int32",
-          "description": "Optional the number of processed tokens by model1.",
+          "description": "The optional number of processed tokens by model1.",
           "type": "integer",
           "readOnly": true
         },
@@ -5535,7 +5749,7 @@
           },
           {
             "value": "Single",
-            "description": "Single language identification."
+            "description": "Single language identification. If no language can be identified, the error code NoLanguageIdentified is returned to the user. If there is ambiguity between multiple languages, the error code MultipleLanguagesIdentified is returned to the user."
           }
         ]
       }
@@ -5991,9 +6205,6 @@
         "links": {
           "$ref": "#/definitions/ProjectLinks"
         },
-        "properties": {
-          "$ref": "#/definitions/ProjectProperties"
-        },
         "self": {
           "format": "uri",
           "description": "The location of this entity.",
@@ -6061,43 +6272,6 @@
           "format": "uri",
           "description": "The location to get a list of all transcriptions of this project. See operation \"Projects_ListTranscriptions\" for more details.",
           "type": "string",
-          "readOnly": true
-        }
-      },
-      "readOnly": true
-    },
-    "ProjectProperties": {
-      "title": "ProjectProperties",
-      "type": "object",
-      "properties": {
-        "datasetCount": {
-          "format": "int32",
-          "description": "The number of datasets associated to this project.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "evaluationCount": {
-          "format": "int32",
-          "description": "The number of evaluations associated to this project.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "modelCount": {
-          "format": "int32",
-          "description": "The number of models associated to this project.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "transcriptionCount": {
-          "format": "int32",
-          "description": "The number of transcriptions associated to this project.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "endpointCount": {
-          "format": "int32",
-          "description": "The number of endpoints associated to this project.",
-          "type": "integer",
           "readOnly": true
         }
       },
@@ -6223,8 +6397,13 @@
       "description": "Features supported by the model.",
       "type": "object",
       "properties": {
-        "supportsTranscriptions": {
-          "description": "A value indicating whether batch transcription is supported.",
+        "supportsTranscriptionsSubmit": {
+          "description": "A value indicating whether submission of transcription jobs is supported (POST /transcriptions:submit).",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "supportsTranscriptionsTranscribe": {
+          "description": "A value indicating whether the transcribe action is supported (POST /transcriptions:transcribe).",
           "type": "boolean",
           "readOnly": true
         },
@@ -6331,7 +6510,8 @@
       "title": "Transcription",
       "required": [
         "displayName",
-        "locale"
+        "locale",
+        "properties"
       ],
       "type": "object",
       "properties": {
@@ -6420,8 +6600,29 @@
       },
       "readOnly": true
     },
+    "TranscriptionLocales": {
+      "title": "TranscriptionLocales",
+      "type": "object",
+      "properties": {
+        "Transcribe": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Submit": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "TranscriptionProperties": {
       "title": "TranscriptionProperties",
+      "required": [
+        "timeToLive"
+      ],
       "type": "object",
       "properties": {
         "wordLevelTimestampsEnabled": {
@@ -6447,7 +6648,7 @@
         },
         "destinationContainerUrl": {
           "format": "uri",
-          "description": "The requested destination container.\r\n### Remarks ###\r\nWhen a destination container is used in combination with a `timeToLive`, the metadata of a\r\ntranscription will be deleted normally, but the data stored in the destination container, including\r\ntranscription results, will remain untouched, because no delete permissions are required for this\r\ncontainer.<br />\r\nTo support automatic cleanup, either configure blob lifetimes on the container, or use \"Bring your own Storage (BYOS)\"\r\ninstead of `destinationContainerUrl`, where blobs can be cleaned up.",
+          "description": "The requested destination container.\r\n### Remarks ###\r\nWhen a destination container is used in combination with a `timeToLive`, the metadata of a\r\ntranscription will be deleted normally, but the data stored in the destination container, including\r\ntranscription results, will remain untouched, because no delete permissions are required for this\r\ncontainer.\n\r\nTo support automatic cleanup, either configure blob lifetimes on the container, or use \"Bring your own Storage (BYOS)\"\r\ninstead of `destinationContainerUrl`, where blobs can be cleaned up.",
           "type": "string"
         },
         "punctuationMode": {
@@ -6457,7 +6658,7 @@
           "$ref": "#/definitions/ProfanityFilterMode"
         },
         "timeToLive": {
-          "description": "How long the transcription will be kept in the system after it has completed. Once the\r\ntranscription reaches the time to live after completion (successful or failed) it will be automatically\r\ndeleted. Not setting this value or setting it to 0 will disable automatic deletion. The longest supported\r\nduration is 31 days.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
+          "description": "How long the transcription will be kept in the system after it has completed. Once the\r\ntranscription reaches the time to live after completion (successful or failed) it will be automatically\r\ndeleted.\r\n            \r\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account\r\nwill also be deleted. Use either destinationContainerUrl to specify a separate container for result files\r\nwhich will not be deleted when the timeToLive expires, or retrieve the result files through the API and\r\nstore them as needed.\r\n            \r\nThe shortest supported duration is 6h, the longest supported duration is 31 days. 2 days (\"P2D\") is the recommended default value\r\nwhen data is consumed directly.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
           "type": "string"
         },
         "email": {
@@ -6736,6 +6937,162 @@
           }
         }
       }
+    },
+    "CombinedPhrases": {
+      "required": [
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "channel": {
+          "format": "int32",
+          "description": "The 0-based channel index. Only present if channel separation is enabled.",
+          "type": "integer"
+        },
+        "text": {
+          "description": "The complete transcribed text for the channel.",
+          "type": "string"
+        }
+      }
+    },
+    "Phrase": {
+      "description": "A transcribed phrase.",
+      "required": [
+        "confidence",
+        "duration",
+        "offset",
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "channel": {
+          "format": "int32",
+          "description": "The 0-based channel index. Only present if channel separation is enabled.",
+          "type": "integer"
+        },
+        "speaker": {
+          "format": "int32",
+          "description": "The speaker number. Only present if speaker diarization is enabled.",
+          "type": "integer"
+        },
+        "offset": {
+          "format": "int64",
+          "description": "The start offset of the phrase in milliseconds.",
+          "type": "integer"
+        },
+        "duration": {
+          "format": "int64",
+          "description": "The duration of the phrase in milliseconds.",
+          "type": "integer"
+        },
+        "text": {
+          "description": "The transcribed text of the phrase.",
+          "type": "string"
+        },
+        "words": {
+          "description": "The words that make up the phrase. Only present if word-level timestamps are enabled.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Word"
+          }
+        },
+        "locale": {
+          "description": "The locale of the phrase.",
+          "type": "string"
+        },
+        "confidence": {
+          "format": "float",
+          "description": "The confidence value for the phrase.",
+          "type": "number"
+        }
+      }
+    },
+    "TranscribeDefinition": {
+      "description": "Metadata for a fast transcription request.",
+      "type": "object",
+      "properties": {
+        "locales": {
+          "description": "The input locales. Currently, only one locale is supported.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "models": {
+          "description": "Maps some or all candidate locales to a model URI to be used for transcription. If no mapping is given, the default model for the locale is used.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "profanityFilterMode": {
+          "$ref": "#/definitions/ProfanityFilterMode"
+        },
+        "channels": {
+          "description": "The 0-based indices of the channels to be transcribed separately. If not specified, multiple channels are merged and transcribed jointly. Only up to two channels are supported.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "TranscribeResult": {
+      "description": "The result of the transcribe operation.",
+      "required": [
+        "combinedPhrases",
+        "duration",
+        "phrases"
+      ],
+      "type": "object",
+      "properties": {
+        "duration": {
+          "format": "int64",
+          "description": "The duration of the audio in milliseconds.",
+          "type": "integer"
+        },
+        "combinedPhrases": {
+          "description": "The combined transcription results for each channel.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CombinedPhrases"
+          }
+        },
+        "phrases": {
+          "description": "The transcription results segmented into phrases.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Phrase"
+          }
+        }
+      }
+    },
+    "Word": {
+      "description": "Time-stamped word in the display form.",
+      "required": [
+        "duration",
+        "offset",
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "The recognized word, including punctuation.",
+          "type": "string"
+        },
+        "offset": {
+          "format": "int64",
+          "description": "The start offset of the word in milliseconds.",
+          "type": "integer"
+        },
+        "duration": {
+          "format": "int64",
+          "description": "The duration of the word in milliseconds.",
+          "type": "integer"
+        }
+      }
     }
   },
   "parameters": {
@@ -6746,6 +7103,13 @@
       "required": true,
       "type": "string",
       "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "apiVersionQueryParameter": {
+      "in": "query",
+      "name": "api-version",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "client"
     },
     "skipQueryParameter": {
@@ -6799,7 +7163,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/speechtotext/v3.2",
+    "hostTemplate": "{endpoint}/speechtotext/",
     "useSchemePrefix": false,
     "parameters": [
       {
