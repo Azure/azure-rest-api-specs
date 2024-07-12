@@ -37,6 +37,6 @@ op getCompletions is Azure.Core.ResourceAction<
 @action("chat/completions") //@convenientAPI(true)
 op getChatCompletions is ResourceAction<
   Deployment,
-  BodyParameter<ChatCompletionsOptions>,
+  ChatCompletionsOptions,
   ChatCompletions
 >;
