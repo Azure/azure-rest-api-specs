@@ -1282,7 +1282,7 @@
             "name": "body",
             "description": "Confluent Environment resource model",
             "schema": {
-              "$ref": "#/definitions/EnvironmentResource"
+              "$ref": "#/definitions/SCEnvironmentRecord"
             }
           }
         ],
@@ -1290,13 +1290,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/EnvironmentResource"
+              "$ref": "#/definitions/SCEnvironmentRecord"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/EnvironmentResource"
+              "$ref": "#/definitions/SCEnvironmentRecord"
             }
           },
           "default": {
@@ -1861,7 +1861,7 @@
             "name": "body",
             "description": "Confluent Cluster resource model",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/SCClusterRecord"
             }
           }
         ],
@@ -1869,13 +1869,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/SCClusterRecord"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ClusterResource"
+              "$ref": "#/definitions/SCClusterRecord"
             }
           },
           "default": {
@@ -3465,52 +3465,6 @@
         }
       }
     },
-    "EnvironmentResource": {
-      "description": "Confluent environment resource details",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
-          "description": "The resource model definition for an Azure Resource Manager proxy resource."
-        }
-      ],
-      "required": [
-        "properties"
-      ],
-      "properties": {
-        "properties": {
-          "description": "Environment properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EnvironmentProperties"
-        }
-      }
-    },
-    "EnvironmentProperties": {
-      "description": "Environment resource property",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Display name of the environment",
-          "type": "string"
-        },
-        "id": {
-          "description": "Id of the environment",
-          "type": "string"
-        },
-        "kind": {
-          "description": "Type of environment",
-          "type": "string"
-        },
-        "streamGovernanceConfig": {
-          "description": "Stream governance configuration",
-          "$ref": "#/definitions/StreamGovernanceConfig"
-        },
-        "metadata": {
-          "description": "Metadata of the record",
-          "$ref": "#/definitions/SCMetadataEntity"
-        }
-      }
-    },
     "StreamGovernanceConfig": {
       "description": "Stream governance configuration",
       "type": "object",
@@ -3548,7 +3502,7 @@
         "properties": {
           "description": "Environment properties",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SCEnvironmentProperties"
+          "$ref": "#/definitions/EnvironmentProperties"
         },
         "name": {
           "description": "Display name of the environment",
@@ -3556,63 +3510,17 @@
         }
       }
     },
-    "SCEnvironmentProperties": {
+    "EnvironmentProperties": {
       "description": "Environment resource property",
       "type": "object",
       "properties": {
-        "metadata": {
-          "description": "Metadata of the record",
-          "$ref": "#/definitions/SCMetadataEntity"
-        }
-      }
-    },
-    "ClusterResource": {
-      "description": "Confluent cluster resource details",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource",
-          "description": "The resource model definition for an Azure Resource Manager proxy resource."
-        }
-      ],
-      "required": [
-        "properties"
-      ],
-      "properties": {
-        "properties": {
-          "description": "Cluster properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClusterProperties"
-        }
-      }
-    },
-    "ClusterProperties": {
-      "description": "Cluster Properties",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Display name of the cluster",
-          "type": "string"
-        },
-        "id": {
-          "description": "Id of the cluster",
-          "type": "string"
-        },
-        "kind": {
-          "description": "Type of cluster",
-          "type": "string"
+        "streamGovernanceConfig": {
+          "description": "Stream governance configuration",
+          "$ref": "#/definitions/StreamGovernanceConfig"
         },
         "metadata": {
           "description": "Metadata of the record",
           "$ref": "#/definitions/SCMetadataEntity"
-        },
-        "spec": {
-          "description": "Specification of the cluster",
-          "$ref": "#/definitions/SCClusterSpecEntity"
-        },
-        "status": {
-          "description": "Specification of the cluster status",
-          "$ref": "#/definitions/ClusterStatusEntity"
         }
       }
     },
@@ -3729,7 +3637,7 @@
         "properties": {
           "description": "Cluster Properties",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SCClusterProperties"
+          "$ref": "#/definitions/ClusterProperties"
         },
         "name": {
           "description": "Display name of the cluster",
@@ -3737,7 +3645,7 @@
         }
       }
     },
-    "SCClusterProperties": {
+    "ClusterProperties": {
       "description": "Service Connector Cluster Properties",
       "type": "object",
       "properties": {
