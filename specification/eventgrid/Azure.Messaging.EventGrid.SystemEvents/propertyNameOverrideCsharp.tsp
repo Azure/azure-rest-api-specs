@@ -193,6 +193,48 @@ using Microsoft.EventGrid.SystemEvents;
   "csharp"
 );
 
+@@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
+  "EventGridMqttClientCreatedOrUpdatedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientDeletedEventData,
+  "EventGridMqttClientDeletedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientSessionConnectedEventData,
+  "EventGridMqttClientSessionConnectedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientSessionDisconnectedEventData,
+  "EventGridMqttClientSessionDisconnectedEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientEventData,
+  "EventGridMqttClientEventData",
+  "csharp"
+);
+
+@@clientName(EventGridMQTTClientState, "EventGridMqttClientState", "csharp");
+
+@@clientName(EventGridMQTTClientDisconnectionReason,
+  "EventGridMqttClientDisconnectionReason",
+  "csharp"
+);
+
+@@clientName(RedisImportRDBCompletedEventData,
+  "RedisImportRdbCompletedEventData",
+  "csharp"
+);
+
+@@clientName(RedisExportRDBCompletedEventData,
+  "RedisExportRdbCompletedEventData",
+  "csharp"
+);
+
 @@clientName(AcsRouterWorkerSelector.state, "SelectorState", "csharp");
 @@clientName(AcsRouterWorkerSelector.ttlSeconds, "TimeToLive", "csharp");
 @@clientName(AcsRouterWorkerSelector.value, "labelValue", "csharp");
