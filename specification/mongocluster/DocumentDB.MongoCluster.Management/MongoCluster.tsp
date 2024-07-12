@@ -232,9 +232,6 @@ union HighAvailabilityMode {
   /** High availability mode is enabled, where each server in a shard is placed in the same availability zone. */
   "SameZone",
 
-  /** High availability mode is enabled, where each server in a shard is distributed across availability zones. */
-  "ZoneRedundant",
-
   /** High availability mode is enabled and preferences ZoneRedundant if availability zones capacity is available in the region, otherwise falls-back to provisioning with SameZone. */
   "ZoneRedundantPreferred",
 }
@@ -266,6 +263,11 @@ model ConnectionString {
   /** Description of the connection string */
   @visibility("read")
   description?: string;
+
+  /** Name of the connection string. */
+  @visibility("read")
+  @added(Versions.v2024_07_01)
+  name?: string;
 }
 
 /** The status of the Mongo cluster resource. */
@@ -437,14 +439,6 @@ model NodeGroupProperties {
 model HighAvailabilityProperties {
   /** The target high availability mode requested for the cluster. */
   targetMode?: HighAvailabilityMode;
-
-  /** The current high availability mode the cluster is deployed with. */
-  @visibility("read")
-  mode?: HighAvailabilityMode;
-
-  /** The state of the high availability configuration for the cluster. */
-  @visibility("read")
-  state?: string;
 }
 
 /** The kind of the node on the cluster. */

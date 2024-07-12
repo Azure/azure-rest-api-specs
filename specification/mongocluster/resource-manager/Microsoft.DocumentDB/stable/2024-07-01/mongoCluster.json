@@ -1313,6 +1313,11 @@
           "type": "string",
           "description": "Description of the connection string",
           "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the connection string.",
+          "readOnly": true
         }
       }
     },
@@ -1420,7 +1425,6 @@
       "enum": [
         "Disabled",
         "SameZone",
-        "ZoneRedundant",
         "ZoneRedundantPreferred"
       ],
       "x-ms-enum": {
@@ -1438,11 +1442,6 @@
             "description": "High availability mode is enabled, where each server in a shard is placed in the same availability zone."
           },
           {
-            "name": "ZoneRedundant",
-            "value": "ZoneRedundant",
-            "description": "High availability mode is enabled, where each server in a shard is distributed across availability zones."
-          },
-          {
             "name": "ZoneRedundantPreferred",
             "value": "ZoneRedundantPreferred",
             "description": "High availability mode is enabled and preferences ZoneRedundant if availability zones capacity is available in the region, otherwise falls-back to provisioning with SameZone."
@@ -1457,16 +1456,6 @@
         "targetMode": {
           "$ref": "#/definitions/HighAvailabilityMode",
           "description": "The target high availability mode requested for the cluster."
-        },
-        "mode": {
-          "$ref": "#/definitions/HighAvailabilityMode",
-          "description": "The current high availability mode the cluster is deployed with.",
-          "readOnly": true
-        },
-        "state": {
-          "type": "string",
-          "description": "The state of the high availability configuration for the cluster.",
-          "readOnly": true
         }
       }
     },
