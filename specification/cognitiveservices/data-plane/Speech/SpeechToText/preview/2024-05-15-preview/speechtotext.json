@@ -4015,8 +4015,7 @@
             "name": "definition",
             "description": "Metadata for a fast transcription request. This field contains a JSON-serialized object of type `TranscribeDefinition`.",
             "required": true,
-            "type": "string",
-            "format": "application/json"
+            "type": "string"
           },
           {
             "in": "formData",
@@ -4033,6 +4032,11 @@
             "schema": {
               "$ref": "#/definitions/TranscribeResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Transcribe an audio file": {
+            "$ref": "./examples/transcribe_file.json"
           }
         }
       }
