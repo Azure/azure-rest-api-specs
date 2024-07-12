@@ -1667,6 +1667,33 @@ components:
             - code_interpreter
             - file_search
       description: Available tool types for assistants named tools.
+    BingSearchToolDefinition:
+      type: object
+      required:
+        - type
+        - browser
+      properties:
+        type:
+          type: string
+          enum:
+            - browser
+          description: '"The object type, which is always ''browser''.'
+        browser:
+          allOf:
+            - $ref: '#/components/schemas/BingSearchToolDetails'
+          description: The Bing search configuration details
+      allOf:
+        - $ref: '#/components/schemas/ToolDefinition'
+      description: The input definition for the Bing search tool
+    BingSearchToolDetails:
+      type: object
+      required:
+        - bing_resource_id
+      properties:
+        bing_resource_id:
+          type: string
+          description: The Bing resource ID to use for the search.
+      description: Tool params for the browser tool.
     CodeInterpreterToolDefinition:
       type: object
       required:
@@ -3724,6 +3751,7 @@ components:
           code_interpreter: '#/components/schemas/CodeInterpreterToolDefinition'
           file_search: '#/components/schemas/FileSearchToolDefinition'
           function: '#/components/schemas/FunctionToolDefinition'
+          browser: '#/components/schemas/BingSearchToolDefinition'
       description: An abstract representation of an input tool definition that an assistant can use.
     ToolOutput:
       type: object

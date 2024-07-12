@@ -2554,6 +2554,39 @@
     },
     "AssistantsApiResponseFormatOption": {},
     "AssistantsApiToolChoiceOption": {},
+    "BingSearchToolDefinition": {
+      "type": "object",
+      "description": "The input definition for the Bing search tool",
+      "properties": {
+        "browser": {
+          "$ref": "#/definitions/BingSearchToolDetails",
+          "description": "The Bing search configuration details"
+        }
+      },
+      "required": [
+        "browser"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "browser"
+    },
+    "BingSearchToolDetails": {
+      "type": "object",
+      "description": "Tool params for the browser tool.",
+      "properties": {
+        "bing_resource_id": {
+          "type": "string",
+          "description": "The Bing resource ID to use for the search.",
+          "x-ms-client-name": "bingResourceId"
+        }
+      },
+      "required": [
+        "bing_resource_id"
+      ]
+    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an assistant.",

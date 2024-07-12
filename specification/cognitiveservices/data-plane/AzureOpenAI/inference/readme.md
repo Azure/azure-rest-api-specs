@@ -217,3 +217,10 @@ These settings apply only when `--tag=release_2024_06_01` is specified on the co
 ``` yaml $(tag) == 'release_2024_06_01'
 input-file: stable/2024-06-01/inference.json
 ```
+
+## AzureOpenAI 2024-07-01-preview (generated)
+These settings apply only when `--tag=release_2024_07_01_preview_autogen` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_07_01_preview_autogen'
+input-file: preview/2024-07-01-preview/generated.json
+```

@@ -50,6 +50,26 @@ model FunctionToolDefinition extends ToolDefinition {
   function: FunctionDefinition;
 }
 
+/** The input definition for the Bing search tool */
+@added(ServiceApiVersions.v2024_07_01_preview)
+model BingSearchToolDefinition extends ToolDefinition {
+  /** "The object type, which is always 'browser'. */
+  type: "browser";
+
+  /** The Bing search configuration details */
+  browser: BingSearchToolDetails;
+}
+
+// Definition details: Bing Search
+
+/** Tool params for the browser tool. */
+@added(ServiceApiVersions.v2024_07_01_preview)
+model BingSearchToolDetails {
+  /** The Bing resource ID to use for the search. */
+  @encodedName("application/json", "bing_resource_id")
+  bingResourceId: string;
+}
+
 // Definition details: File Search
 
 /**
