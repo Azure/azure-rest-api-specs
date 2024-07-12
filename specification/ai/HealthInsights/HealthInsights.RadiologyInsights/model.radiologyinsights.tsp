@@ -4,6 +4,7 @@ import "../HealthInsights.Common/model.common.shared.tsp";
 import "../HealthInsights.Common/model.common.fhir.elements.tsp";
 import "./model.radiologyinsights.valuesets.tsp";
 
+using Azure.Core;
 using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
@@ -67,6 +68,7 @@ model RadiologyInsightsJob {
 
   @doc("The result of the operation.")
   @visibility("read")
+  @lroResult
   result?: RadiologyInsightsInferenceResult;
 
   ...HealthInsightsJobBase;
