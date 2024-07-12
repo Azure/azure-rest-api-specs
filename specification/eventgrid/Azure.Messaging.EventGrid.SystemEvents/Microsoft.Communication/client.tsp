@@ -458,11 +458,17 @@ using Azure.ClientGenerator.Core;
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterJobStatus, Access.public);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRecordingContentType, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingContentType, Access.public);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingContentType,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRecordingChannelType, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingChannelType, Access.public);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingChannelType,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRecordingFormatType, Usage.output);
-@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingFormatType, Access.public);
+@@access(Microsoft.EventGrid.SystemEvents.AcsRecordingFormatType,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsRouterLabelOperator, Usage.output);
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterLabelOperator,
   Access.public
