@@ -233,7 +233,11 @@ model PhiTaggerResult {
   @maxLength(1024) // Max length for Blob Name
   path?: string;
 
-  ...EtagProperty;
+  // Source: ...EtagProperty;
+  // Needs to be optional
+  @visibility("read")
+  @doc("The entity tag for this resource.")
+  etag?: eTag;
 }
 
 @doc("List of PHI Entities.")
