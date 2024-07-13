@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-05-01",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "ConversationSummarization",
+      "summaryAspects": [
+        "chapterTitle",
+        "narrative"
+      ],
+      "id": "1",
+      "language": "en",
+      "modality": "transcript",
+      "conversationItems": [
+        {
+          "participantId": "speaker 1",
+          "id": "1",
+          "text": "Let's get started.",
+          "lexical": "",
+          "itn": "",
+          "maskedItn": "",
+          "conversationItemLevelTiming": {
+            "offset": 0,
+            "duration": 20000000
+          }
+        },
+        {
+          "participantId": "speaker 2",
+          "id": "2",
+          "text": "OK. How many remaining bugs do we have now?",
+          "lexical": "",
+          "itn": "",
+          "maskedItn": "",
+          "conversationItemLevelTiming": {
+            "offset": 20000000,
+            "duration": 50000000
+          }
+        },
+        {
+          "participantId": "speaker 3",
+          "id": "3",
+          "text": "Only 3.",
+          "lexical": "",
+          "itn": "",
+          "maskedItn": "",
+          "conversationItemLevelTiming": {
+            "offset": 50000000,
+            "duration": 60000000
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "ConversationSummarization",
+        "summaries": [
+          {
+            "aspect": "chapterTitle",
+            "text": "Bug Triage",
+            "contexts": [
+              {
+                "conversationItemId": "2",
+                "offset": 4,
+                "length": 39
+              }
+            ]
+          },
+          {
+            "aspect": "narrative",
+            "text": "Speaker 3 believes there are 3 remaining bugs.",
+            "contexts": [
+              {
+                "conversationItemId": "2",
+                "offset": 4,
+                "length": 39
+              },
+              {
+                "conversationItemId": "3",
+                "offset": 0,
+                "length": 7
+              }
+            ]
+          }
+        ],
+        "id": "1",
+        "warnings": []
+      }
+    }
+  }
+}

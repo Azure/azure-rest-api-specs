@@ -1,0 +1,230 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Cognitive Language Generation Service",
+    "description": "The language generation service API is a suite of natural language generation (NLG) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to generate summaries, marketing emails, conversation responses, questions and answers. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.",
+    "version": "2023-04-01"
+  },
+  "security": [
+    {
+      "AADToken": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
+    },
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "common.json#/parameters/Endpoint"
+      }
+    ]
+  },
+  "paths": {
+    "/:generate": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/event-stream"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SummarizationTaskResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "summary": "Summarize text or conversation.",
+        "description": "Specify a single task and a single text or conversation to be executed immediately. The result is returned in a streaming way.",
+        "operationId": "Summarize",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ShowStats"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SummarizationTask"
+            },
+            "required": true
+          }
+        ],
+        "x-ms-examples": {
+          "Successful Extractive Summarization Request": {
+            "$ref": "./examples/generate/SuccessfulExtractiveSummarizationRequest.json"
+          },
+          "Successful Abstractive Summarization Request": {
+            "$ref": "./examples/generate/SuccessfulAbstractiveSummarizationRequest.json"
+          },
+          "Successful Conversation Summarization Request": {
+            "$ref": "./examples/generate/SuccessfulConversationSummarizationRequest.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StreamSupportedTask": {
+      "type": "object",
+      "description": "The task can be streamed.",
+      "properties": {
+        "stream": {
+          "description": "Whether to stream back partial progress. If set, results will be sent as data-only server-sent events as they become available.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "SummarizationTask": {
+      "type": "object",
+      "description": "The summarization task.",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SummarizationTaskKind"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamSupportedTask"
+        }
+      ]
+    },
+    "SummarizationTaskKind": {
+      "type": "string",
+      "description": "Enumeration of supported summarization tasks.",
+      "enum": [
+        "ExtractiveSummarization",
+        "AbstractiveSummarization",
+        "ConversationSummarization"
+      ],
+      "x-ms-enum": {
+        "name": "SummarizationTaskKind",
+        "modelAsString": true
+      }
+    },
+    "ExtractiveSummarizationTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Extractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummarizationTask"
+        },
+        {
+          "$ref": "analyzetext.json#/definitions/ExtractiveSummarizationTaskParameters"
+        },
+        {
+          "$ref": "analyzetext.json#/definitions/MultiLanguageInput"
+        }
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarization"
+    },
+    "AbstractiveSummarizationTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Abstractive Summarization task.",
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummarizationTask"
+        },
+        {
+          "$ref": "analyzetext.json#/definitions/AbstractiveSummarizationTaskParameters"
+        },
+        {
+          "$ref": "analyzetext.json#/definitions/MultiLanguageInput"
+        }
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarization"
+    },
+    "ConversationSummarizationTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Conversation Summarization task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummarizationTask"
+        },
+        {
+          "$ref": "analyzeconversations.json#/definitions/ConversationSummarizationTaskParameters"
+        },
+        {
+          "$ref": "analyzeconversations.json#/definitions/Conversation"
+        }
+      ],
+      "x-ms-discriminator-value": "ConversationSummarization"
+    },
+    "SummarizationTaskResult": {
+      "type": "object",
+      "description": "An object representing the summarization task result.",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SummarizationTaskKind"
+        }
+      }
+    },
+    "ExtractiveSummarizationTaskResult": {
+      "description": "An object representing the extractive summarization task result.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummarizationTaskResult"
+        },
+        {
+          "$ref": "analyzetext.json#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
+        }
+      ],
+      "x-ms-discriminator-value": "ExtractiveSummarization"
+    },
+    "AbstractiveSummarizationTaskResult": {
+      "description": "An object representing the abstractive summarization task result.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummarizationTaskResult"
+        },
+        {
+          "$ref": "analyzetext.json#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
+        }
+      ],
+      "x-ms-discriminator-value": "AbstractiveSummarization"
+    },
+    "ConversationSummarizationTaskResult": {
+      "description": "An object representing the conversation summarization task result.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummarizationTaskResult"
+        },
+        {
+          "$ref": "analyzeconversations.json#/definitions/ConversationsSummaryResult"
+        }
+      ],
+      "x-ms-discriminator-value": "ConversationSummarization"
+    }
+  }
+}
