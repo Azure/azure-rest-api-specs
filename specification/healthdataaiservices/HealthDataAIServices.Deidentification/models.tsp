@@ -235,7 +235,6 @@ model PhiTaggerResult {
 
   // Source: ...EtagProperty;
   // Needs to be optional
-  @visibility("read")
   @doc("The entity tag for this resource.")
   etag?: eTag;
 }
