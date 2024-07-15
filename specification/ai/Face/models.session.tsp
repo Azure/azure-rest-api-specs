@@ -20,7 +20,6 @@ union LivenessOperationMode {
   "PassiveActive",
 }
 
-#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
 @doc("Request model for creating liveness session.")
 model CreateLivenessSessionParameters {
   @doc("Type of liveness mode the client should follow.")
@@ -43,6 +42,7 @@ model CreateLivenessSessionParameters {
   ...LivenessSessionData;
 }
 
+#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
 @doc("Request for creating liveness with verify session.")
 model CreateLivenessWithVerifySessionParameters
   is CreateLivenessSessionParameters {
