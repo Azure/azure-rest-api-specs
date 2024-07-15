@@ -6394,7 +6394,9 @@
         },
         "downloadUrl": {
           "type": "string",
-          "description": "URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly."
+          "format": "password",
+          "description": "URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.",
+          "x-ms-secret": true
         },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
@@ -6488,7 +6490,9 @@
       "properties": {
         "azureManagedDiskUploadUrl": {
           "type": "string",
-          "description": "The Azure managed disk SAS URL to upload the virtual hard disk to."
+          "format": "password",
+          "description": "The Azure managed disk SAS URL to upload the virtual hard disk to.",
+          "x-ms-secret": true
         }
       },
       "required": [

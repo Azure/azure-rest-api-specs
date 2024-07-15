@@ -1125,6 +1125,7 @@ model VirtualHardDiskProperties {
 
   @added(Versions.v2024_05_01_preview)
   @doc("URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.")
+  @secret
   downloadUrl?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
@@ -1209,6 +1210,7 @@ model VirtualHardDisksUpdateRequest {
 @doc("Request for uploading virtual hard disk.")
 model VirtualHardDiskUploadRequest {
   @doc("The Azure managed disk SAS URL to upload the virtual hard disk to.")
+  @secret
   azureManagedDiskUploadUrl: string;
 }
 
