@@ -36,11 +36,11 @@ interface MongoClusters {
   /** Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition. */
   @sharedRoute
   @renamedFrom(Versions.v2024_03_01_preview, "update")
-  @removed(Versions.v2024_03_01_preview)
+  @removed(Versions.v2024_07_01_preview)
   updateOld is ArmResourcePatchAsync<MongoCluster, MongoClusterProperties>;
 
   @sharedRoute
-  @added(Versions.v2024_03_01_preview)
+  @added(Versions.v2024_07_01_preview)
   @parameterVisibility
   update is ArmCustomPatchAsync<MongoCluster, MongoCluster>;
 
