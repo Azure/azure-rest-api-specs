@@ -68,55 +68,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/agreements/default": {
-      "put": {
-        "tags": [
-          "Agreements"
-        ],
-        "summary": "Create Datadog marketplace agreement in the subscription.",
-        "operationId": "MarketplaceAgreements_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/DatadogAgreementResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/DatadogAgreementResource"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MarketplaceAgreements_CreateOrUpdate": {
-            "$ref": "./examples/MarketplaceAgreements_Create.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/subscriptionStatuses": {
       "get": {
         "tags": [
