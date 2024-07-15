@@ -1,17 +1,12 @@
 {
-  "title": "Update_AssetEndpointProfile",
-  "operationId": "AssetEndpointProfiles_UpdateOld",
-  "description": "Patch an Asset Endpoint Profile",
+  "title": "Get_AssetEndpointProfile",
+  "operationId": "AssetEndpointProfiles_Get",
+  "description": "Get an Asset Endpoint Profile",
   "parameters": {
-    "api-version": "2023-11-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "assetEndpointProfileName": "my-assetendpointprofile",
-    "properties": {
-      "properties": {
-        "targetAddress": "https://www.example.com/myTargetAddress"
-      }
-    }
+    "assetEndpointProfileName": "my-assetendpointprofile"
   },
   "responses": {
     "200": {
@@ -36,18 +31,26 @@
           "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
         },
         "properties": {
-          "uuid": "0796f7c1-f2c8-44d7-9f5b-9a6f9522a85d",
+          "uuid": "1824a74f-21e1-4458-ae07-604d3a241d2e",
           "targetAddress": "https://www.example.com/myTargetAddress",
           "userAuthentication": {
-            "mode": "Anonymous"
+            "mode": "UsernamePassword",
+            "usernamePasswordCredentials": {
+              "usernameReference": "usernameRef",
+              "passwordReference": "passwordRef"
+            }
+          },
+          "transportAuthentication": {
+            "ownCertificates": [
+              {
+                "certThumbprint": "myThumbprint",
+                "certSecretReference": "secretRef",
+                "certPasswordReference": "passwordRef"
+              }
+            ]
           },
           "provisioningState": "Succeeded"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Location": "https://contoso.com/operationstatus"
       }
     }
   }

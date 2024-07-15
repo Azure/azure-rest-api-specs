@@ -127,10 +127,18 @@ interface AssetEndpointProfiles {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  update is ArmResourcePatchAsync<
+  @sharedRoute
+  @renamedFrom(Versions.v2023_11_01_preview, "update")
+  @removed(Versions.v2024_06_01_preview)
+  updateOld is ArmResourcePatchAsync<
     AssetEndpointProfile,
     AssetEndpointProfileProperties
   >;
+
+  @sharedRoute
+  @added(Versions.v2024_06_01_preview)
+  @parameterVisibility
+  update is ArmCustomPatchAsync<AssetEndpointProfile, AssetEndpointProfile>;
 
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;
 

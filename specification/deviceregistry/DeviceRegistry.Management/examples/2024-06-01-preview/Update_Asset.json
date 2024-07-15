@@ -1,16 +1,22 @@
 {
   "title": "Update_Asset",
-  "operationId": "Assets_UpdateOld",
+  "operationId": "Assets_Update",
   "description": "Patch an Asset",
   "parameters": {
-    "api-version": "2023-11-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "assetName": "my-asset",
     "properties": {
+      "location": "West Europe",
       "properties": {
         "enabled": false,
-        "displayName": "NewAssetDisplayName"
+        "displayName": "NewAssetDisplayName",
+        "assetEndpointProfileUri": "https://www.example.com/myAssetEndpointProfile"
+      },
+      "extendedLocation": {
+        "type": "CustomLocation",
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
       }
     }
   },
