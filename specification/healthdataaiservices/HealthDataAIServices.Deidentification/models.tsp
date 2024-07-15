@@ -228,7 +228,6 @@ model PhiTaggerResult {
   @doc("List of entities detected in the input.")
   entities: Array<PhiEntity>;
 
-
   @doc("Path to the file in the storage container.")
   @maxLength(1024) // Max length for Blob Name
   path?: string;
@@ -359,21 +358,21 @@ model PaginationByTokenQueryParameters {
 }
 
 @doc("String Index encoding model.")
-model StringIndex{
+model StringIndex {
   @doc("The offset or length of the substring in UTF-8 encoding")
   utf8: int32;
 
   @doc("""
-  The offset or length of the substring in UTF-16 encoding.
-
-  Used in .NET, Java, and JavaScript.
-  """)
+    The offset or length of the substring in UTF-16 encoding.
+    
+    Used in .NET, Java, and JavaScript.
+    """)
   utf16: int32;
 
   @doc("""
-  The offset or length of the substring in UTF-16 encoding.
-
-  Used in Python.
-  """)
+    The offset or length of the substring in UTF-16 encoding.
+    
+    Used in Python.
+    """)
   codePoint: int32;
 }
