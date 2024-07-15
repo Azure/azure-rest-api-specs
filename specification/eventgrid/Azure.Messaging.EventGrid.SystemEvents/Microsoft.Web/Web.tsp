@@ -1,9 +1,15 @@
+import "@typespec/versioning";
+import "./../main.tsp";
+
+using TypeSpec.Versioning;
+
 /** Describes the schema of the Azure App Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   // /** sku of app service plan. */
   /** Detail of action on the app. */
   model AppEventTypeDetail {
     /** Type of action of the operation. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     action: AppAction;
   }
 
@@ -142,12 +148,15 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Detail of action on the app service plan. */
   model AppServicePlanEventTypeDetail {
     /** Kind of environment where app service plan is. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     stampKind: StampKind;
 
     /** Type of action on the app service plan. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     action: AppServicePlanAction;
 
     /** Asynchronous operation status of the operation on the app service plan. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     status: AsyncStatus;
   }
 
