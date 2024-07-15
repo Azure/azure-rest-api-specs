@@ -10,7 +10,7 @@ async function tspClient(...args: string[]) {
 
   console.log(`${repoRoot}$ npm ${allArgs.join(" ")}`);
 
-  return await execa("npm", allArgs, { cwd: repoRoot, reject: false });
+  return await execa("npm", allArgs, { all: true, cwd: repoRoot, reject: false });
 }
 
 async function convert(expect: ExpectStatic, readme: string) {
@@ -26,7 +26,7 @@ async function convert(expect: ExpectStatic, readme: string) {
   }
 
   try {
-    const { stdout, exitCode } = await tspClient(
+    const { stdout, all, exitCode } = await tspClient(
       "convert",
       "--no-prompt",
       "--swagger-readme",
@@ -37,7 +37,7 @@ async function convert(expect: ExpectStatic, readme: string) {
     );
 
     expect(stdout).toContain("Converting");
-    expect(exitCode).toBe(0);
+    expect(exitCode, all).toBe(0);
 
     const tspConfigYaml = join(outputFolder, "tspconfig.yaml");
     await access(tspConfigYaml, constants.R_OK);
