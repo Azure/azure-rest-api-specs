@@ -61,11 +61,6 @@ directive:
   - where:
       subject: NetworkProfile
     remove: true
-  
-  # blocking networkconfigurations opertaions, we want to deprecrate it in favor of using "settings" as the new extension resource name
-  - remove-operation: NetworkConfigurations_Get
-  - remove-operation: NetworkConfigurations_Update
-  - remove-operation: NetworkConfigurations_CreateOrUpdate
 
 ```
 
