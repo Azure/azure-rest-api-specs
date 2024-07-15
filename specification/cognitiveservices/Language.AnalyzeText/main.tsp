@@ -72,26 +72,13 @@ op analyzeText is RpcOperation<
   ErrorResponse
 >;
 
-// /** Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task. */
-// #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-// @summary("Get analysis status and results")
-// op analyzeTextJobStatus is languageOperations.ResourceRead<
-//   AnalyzeTextJobState,
-//   AnalyzeTextJobQueryParameters
-// >;
-
-
 /** Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @summary("Get analysis status and results")
-@route("/analyze-text/jobs/{jobId}")
-op analyzeTextJobStatus is  Foundations.Operation<
-  AnalyzeTextJobQueryParameters1,
+op analyzeTextJobStatus is languageOperations.ResourceRead<
   AnalyzeTextJobState,
-  {},
-  ErrorResponse
+  AnalyzeTextJobQueryParameters
 >;
-
 
 /** Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

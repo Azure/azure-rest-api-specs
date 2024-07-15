@@ -359,3 +359,8 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(CustomSingleLabelClassificationLROResult, "CustomSingleLabelClassificationOperationResult", "csharp");
 @@clientName(CustomEntityRecognitionLROResult, "CustomEntityRecognitionOperationResult", "csharp");
 @@clientName(CustomHealthcareLROResult, "CustomHealthcareOperationResult", "csharp");
+
+
+@@clientName(analyzeTextSubmitJob, "AnalyzeTextSubmitOperation", "csharp");
+@@clientName(analyzeTextJobStatus, "AnalyzeTextOperationStatus", "csharp");
+@@clientName(analyzeTextCancelJob, "AnalyzeTextCancelOperation", "csharp");
