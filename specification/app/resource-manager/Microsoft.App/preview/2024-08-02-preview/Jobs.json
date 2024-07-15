@@ -659,6 +659,9 @@
           "202": {
             "description": "Resume operation is in progress.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
               "Location": {
                 "type": "string"
               }
@@ -715,6 +718,9 @@
           "202": {
             "description": "Suspend operation is in progress.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
               "Location": {
                 "type": "string"
               }
@@ -909,7 +915,7 @@
             "runningState": {
               "description": "Current running state of the job",
               "enum": [
-                "Running",
+                "Active",
                 "InProgress",
                 "Suspended"
               ],
