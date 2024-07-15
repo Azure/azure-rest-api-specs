@@ -271,6 +271,9 @@ model MetadataSchemaProperties {
 model ImportFromApimRequest {
   @doc("An entity the metadata schema is requested for.")
   sourceResourceIds?: string[];
+
+  @doc("Indicates if syncing of the future changes should be enabled for the selected APIs.")
+  autoSync?: boolean = false;
 }
 
 @added(Versions.v2024_05_01)
@@ -279,7 +282,6 @@ model ImportFromApimSuccessResult {
     @doc("The successful response status code.")
     @statusCode code: 200;
 }
-
 
 @doc("Assignment metadata")
 model MetadataAssignment {
