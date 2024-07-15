@@ -8191,14 +8191,14 @@
     "AFDTargetGroupUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the TargetGroup to create.",
       "type": "object",
-      "properties": {        
+      "properties": {
         "targetEndpoints": {
           "description": "TargetEndpoint list referenced by this target group.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TargetEndpoint"
           }
-        }        
+        }
       }
     },
     "TargetEndpoint": {
@@ -8207,12 +8207,12 @@
       "properties": {
         "targetFqdn": {
           "description": "The FQDN for traffic endpoint.",
-          "type": "string"          
+          "type": "string"
         },
         "ports": {
           "description": "The Ports to be allowed for the FQDN.",
           "type": "array",
-          "items": {            
+          "items": {
             "description": "The value of the port. Must be between 1 and 65535.",
             "type": "integer",
             "format": "int32",
@@ -8266,7 +8266,7 @@
         }
       ],
       "required": [
-        "domains"        
+        "domains"
       ]
     },
     "TunnelPolicyUpdateParameters": {
@@ -8292,7 +8292,7 @@
           "x-ms-enum": {
             "name": "TunnelType",
             "modelAsString": true
-          }          
+          }
         },
         "domains": {
           "description": "Domains referenced by this tunnel policy.",
@@ -8307,7 +8307,7 @@
           "items": {
             "$ref": "./cdn.json#/definitions/ResourceReference"
           }
-        }        
+        }
       }
     }
   },
