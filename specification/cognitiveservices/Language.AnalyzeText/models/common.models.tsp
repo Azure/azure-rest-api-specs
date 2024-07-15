@@ -506,6 +506,13 @@ alias AnalyzeTextJobQueryParameters = QueryParametersTrait<{
   skip?: int32;
 }>;
 
+alias AnalyzeTextBody = {
+  /** The input documents to analyze. */
+  @body
+  @clientName("analyzeTextInput", "csharp")
+  body: AnalyzeTextTask;
+};
+
 alias AnalyzeTextQueryParameters = {
   /** (Optional) if set to true, response will contain request and document level statistics. */
   @query

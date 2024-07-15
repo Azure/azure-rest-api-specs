@@ -77,15 +77,7 @@ alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 @post
 @route("/:analyze-text")
 op analyzeText is RpcOperation<
-  {
-    /** The input documents to analyze. */
-  @body body: AnalyzeTextTask;
-
-  /** (Optional) if set to true, response will contain request and document level statistics. */
-  @query
-  // @clientName("showStatistics", "csharp")
-  showStats?: boolean;
-  },
+  AnalyzeTextBody & AnalyzeTextQueryParameters,
   AnalyzeTextTaskResult,
   {},
   ErrorResponse
