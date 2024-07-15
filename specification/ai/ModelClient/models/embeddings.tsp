@@ -31,4 +31,9 @@ alias EmbeddingsOptions = {
     Returns a 422 error if the model doesn't support the value or parameter.
     """)
   input_type?: EmbeddingInputType;
+
+  @doc("""
+    ID of the specific AI model to use, if more than one model is available on the endpoint.
+    """)
+  `model`?: string;
 };

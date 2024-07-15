@@ -46,9 +46,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "unknown-parameters",
+            "name": "extra-parameters",
             "in": "header",
-            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.\nThis sets the HTTP request header `unknown-parameters`.",
+            "description": "Controls what happens if extra parameters, undefined by the REST API,\nare passed in the JSON request payload.\nThis sets the HTTP request header `extra-parameters`.",
             "required": false,
             "type": "string",
             "enum": [
@@ -57,7 +57,7 @@
               "pass_through"
             ],
             "x-ms-enum": {
-              "name": "UnknownParams",
+              "name": "ExtraParameters",
               "modelAsString": true,
               "values": [
                 {
@@ -77,7 +77,7 @@
                 }
               ]
             },
-            "x-ms-client-name": "unknown_params"
+            "x-ms-client-name": "extra_params"
           },
           {
             "name": "body",
@@ -217,9 +217,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "unknown-parameters",
+            "name": "extra-parameters",
             "in": "header",
-            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.\nThis sets the HTTP request header `unknown-parameters`.",
+            "description": "Controls what happens if extra parameters, undefined by the REST API,\nare passed in the JSON request payload.\nThis sets the HTTP request header `extra-parameters`.",
             "required": false,
             "type": "string",
             "enum": [
@@ -228,7 +228,7 @@
               "pass_through"
             ],
             "x-ms-enum": {
-              "name": "UnknownParams",
+              "name": "ExtraParameters",
               "modelAsString": true,
               "values": [
                 {
@@ -248,7 +248,7 @@
                 }
               ]
             },
-            "x-ms-client-name": "unknown_params"
+            "x-ms-client-name": "extra_params"
           },
           {
             "name": "body",
@@ -276,6 +276,10 @@
                 "input_type": {
                   "$ref": "#/definitions/EmbeddingInputType",
                   "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
+                },
+                "model": {
+                  "type": "string",
+                  "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
                 }
               },
               "required": [
@@ -323,9 +327,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "unknown-parameters",
+            "name": "extra-parameters",
             "in": "header",
-            "description": "Controls what happens if unknown parameters are passed in the JSON request payload.\nThis sets the HTTP request header `unknown-parameters`.",
+            "description": "Controls what happens if extra parameters, undefined by the REST API,\nare passed in the JSON request payload.\nThis sets the HTTP request header `extra-parameters`.",
             "required": false,
             "type": "string",
             "enum": [
@@ -334,7 +338,7 @@
               "pass_through"
             ],
             "x-ms-enum": {
-              "name": "UnknownParams",
+              "name": "ExtraParameters",
               "modelAsString": true,
               "values": [
                 {
@@ -354,7 +358,7 @@
                 }
               ]
             },
-            "x-ms-client-name": "unknown_params"
+            "x-ms-client-name": "extra_params"
           },
           {
             "name": "body",
@@ -383,6 +387,10 @@
                 "input_type": {
                   "$ref": "#/definitions/EmbeddingInputType",
                   "description": "Optional. The type of the input.\nReturns a 422 error if the model doesn't support the value or parameter."
+                },
+                "model": {
+                  "type": "string",
+                  "description": "ID of the specific AI model to use, if more than one model is available on the endpoint."
                 }
               },
               "required": [
@@ -1256,6 +1264,36 @@
         "total_tokens"
       ]
     },
+    "ExtraParameters": {
+      "type": "string",
+      "description": "Controls what happens if extra parameters, undefined byt he REST ApI are passed in the JSON request payload.",
+      "enum": [
+        "error",
+        "drop",
+        "pass_through"
+      ],
+      "x-ms-enum": {
+        "name": "ExtraParameters",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "error",
+            "value": "error",
+            "description": "The service will error if it detected unknown parameters in the request payload. This is the service default."
+          },
+          {
+            "name": "drop",
+            "value": "drop",
+            "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+          },
+          {
+            "name": "pass_through",
+            "value": "pass_through",
+            "description": "The service will pass unknown parameters to the back-end AI model."
+          }
+        ]
+      }
+    },
     "FunctionCall": {
       "type": "object",
       "description": "The name and arguments of a function that should be called, as generated by the model.",
@@ -1428,36 +1466,6 @@
         "usage",
         "choices"
       ]
-    },
-    "UnknownParams": {
-      "type": "string",
-      "description": "Controls what happens if unknown parameters are passed in the JSON request payload.",
-      "enum": [
-        "error",
-        "drop",
-        "pass_through"
-      ],
-      "x-ms-enum": {
-        "name": "UnknownParams",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "error",
-            "value": "error",
-            "description": "The service will error if it detected unknown parameters in the request payload. This is the service default."
-          },
-          {
-            "name": "drop",
-            "value": "drop",
-            "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
-          },
-          {
-            "name": "pass_through",
-            "value": "pass_through",
-            "description": "The service will pass unknown parameters to the back-end AI model."
-          }
-        ]
-      }
     }
   },
   "parameters": {
