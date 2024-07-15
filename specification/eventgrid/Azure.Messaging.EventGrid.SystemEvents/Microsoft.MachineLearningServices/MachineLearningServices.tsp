@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure Machine Learning Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -82,10 +84,12 @@ model MachineLearningServicesDatasetDriftDetectedEventData {
   driftCoefficient?: float64;
 
   /** The start time of the target dataset time series that resulted in drift detection. */
-  startTime?: utcDateTime;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  startTime: utcDateTime;
 
   /** The end time of the target dataset time series that resulted in drift detection. */
-  endTime?: utcDateTime;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  endTime: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event. */

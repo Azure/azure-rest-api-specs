@@ -1,7 +1,5 @@
 import "@typespec/versioning";
-
 using TypeSpec.Versioning;
-
 /** Describes the schema of the Azure EventGrid events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -98,14 +96,16 @@ model EventGridMQTTClientCreatedOrUpdatedEventData
 
   /** Time the client resource is created based on the provider's UTC time. */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdOn?: utcDateTime;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  createdOn: utcDateTime;
 
   /** 
 Time the client resource is last updated based on the provider's UTC time. If
 the client resource was never updated, this value is identical to the value of
 the 'createdOn' property.
 */
-  updatedOn?: utcDateTime;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  updatedOn: utcDateTime;
 
   /** The key-value attributes that are assigned to the client resource. */
   attributes: Record<string>;
