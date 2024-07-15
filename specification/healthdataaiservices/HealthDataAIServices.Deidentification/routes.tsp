@@ -10,7 +10,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
-namespace HealthDataAIServices.Deidentification;
+namespace HealthDataAIServices.DeidServices;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
@@ -23,31 +23,31 @@ alias DeidentifyOperations = ResourceOperations<
 
 // Text-Deidentification Operations
 
-@summary("Create a De-Identify Job")
+@summary("Create a de-identification job.")
 @pollingOperation(getJob)
 op createJob is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentificationJob>;
 
-@summary("Get a De-Identify Job")
+@summary("Get a de-identification job.")
 op getJob is DeidentifyOperations.ResourceRead<DeidentificationJob>;
 
-@summary("List De-Identify Jobs")
+@summary("List de-identification jobs.")
 op listJobs is DeidentifyOperations.ResourceList<
   DeidentificationJob,
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
 
-@summary("List processed files within a Job")
-op listJobFiles is DeidentifyOperations.ResourceList<
-  HealthFileDetails,
+@summary("List processed documents within a job.")
+op listJobDocuments is DeidentifyOperations.ResourceList<
+  DocumentDetails,
   ListQueryParametersTrait<PaginationByTokenQueryParameters>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" ""
-@summary("Cancel a De-Identify Job")
+@summary("Cancel a de-identification job.")
 @doc("""
   Cancels a job that is in progress. 
   
-  The job will be marked as canceled and the service will stop processing the job. The service will not delete any files that have already been processed.
+  The job will be marked as canceled and the service will stop processing the job. The service will not delete any documents that have already been processed.
   
   If the job is already complete, this will have no effect. 
   """)
@@ -58,16 +58,16 @@ op cancelJob is DeidentifyOperations.ResourceAction<
   DeidentificationJob
 >;
 
-@summary("Delete a De-Identify Job")
-@doc("Removes the record of the job from the service. Does not delete any files.")
+@summary("Delete a de-identification job.")
+@doc("Removes the record of the job from the service. Does not delete any documents.")
 op deleteJob is DeidentifyOperations.ResourceDelete<DeidentificationJob>;
 
-@summary("Realtime Synchronous Deidentification.")
+@summary("De-identify text.")
 @route("/deid")
 @post
 op deidentify is Azure.Core.RpcOperation<
   {
-    @doc("The request body for realtime deidentification.")
+    @doc("Request body for de-identification operation.")
     @body
     body: DeidentificationContent;
   },

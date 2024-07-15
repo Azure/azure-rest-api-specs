@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HealthDataAIServices.Deidentification Service",
+    "title": "Azure Health Data Services de-identification service",
     "version": "2024-07-12-preview",
     "x-typespec-generated": [
       {
@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Url of your Deid Service.",
+        "description": "Url of your De-identification Service.",
         "required": true,
         "type": "string"
       }
@@ -55,7 +55,7 @@
     "/deid": {
       "post": {
         "operationId": "Deidentify",
-        "summary": "Realtime Synchronous Deidentification.",
+        "summary": "De-identify text.",
         "description": "A remote procedure call (RPC) operation.",
         "parameters": [
           {
@@ -64,7 +64,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The request body for realtime deidentification.",
+            "description": "Request body for de-identification operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DeidentificationContent"
@@ -92,7 +92,7 @@
           }
         },
         "x-ms-examples": {
-          "Realtime Synchronous Deidentification.": {
+          "De-identify text.": {
             "$ref": "./examples/Deidentify.json"
           }
         }
@@ -101,7 +101,7 @@
     "/jobs": {
       "get": {
         "operationId": "ListJobs",
-        "summary": "List De-Identify Jobs",
+        "summary": "List de-identification jobs.",
         "description": "Resource list operation template.",
         "parameters": [
           {
@@ -145,7 +145,7 @@
           }
         },
         "x-ms-examples": {
-          "List De-Identify Jobs": {
+          "List de-identification jobs.": {
             "$ref": "./examples/ListJobs.json"
           }
         },
@@ -157,7 +157,7 @@
     "/jobs/{name}": {
       "get": {
         "operationId": "GetJob",
-        "summary": "Get a De-Identify Job",
+        "summary": "Get a de-identification job.",
         "description": "Resource read operation template.",
         "parameters": [
           {
@@ -205,14 +205,14 @@
           }
         },
         "x-ms-examples": {
-          "Get a De-Identify Job": {
+          "Get a de-identification job.": {
             "$ref": "./examples/GetJob.json"
           }
         }
       },
       "put": {
         "operationId": "CreateJob",
-        "summary": "Create a De-Identify Job",
+        "summary": "Create a de-identification job.",
         "description": "Long-running resource create or replace operation template.",
         "parameters": [
           {
@@ -292,7 +292,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a De-Identify Job": {
+          "Create a de-identification job.": {
             "$ref": "./examples/CreateJob.json"
           }
         },
@@ -303,8 +303,8 @@
       },
       "delete": {
         "operationId": "DeleteJob",
-        "summary": "Delete a De-Identify Job",
-        "description": "Removes the record of the job from the service. Does not delete any files.",
+        "summary": "Delete a de-identification job.",
+        "description": "Removes the record of the job from the service. Does not delete any documents.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -348,7 +348,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete a De-Identify Job": {
+          "Delete a de-identification job.": {
             "$ref": "./examples/DeleteJob.json"
           }
         }
@@ -357,8 +357,8 @@
     "/jobs/{name}:cancel": {
       "post": {
         "operationId": "CancelJob",
-        "summary": "Cancel a De-Identify Job",
-        "description": "Cancels a job that is in progress. \n\nThe job will be marked as canceled and the service will stop processing the job. The service will not delete any files that have already been processed.\n\nIf the job is already complete, this will have no effect. ",
+        "summary": "Cancel a de-identification job.",
+        "description": "Cancels a job that is in progress. \n\nThe job will be marked as canceled and the service will stop processing the job. The service will not delete any documents that have already been processed.\n\nIf the job is already complete, this will have no effect. ",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -405,16 +405,16 @@
           }
         },
         "x-ms-examples": {
-          "Cancel a De-Identify Job": {
+          "Cancel a de-identification job.": {
             "$ref": "./examples/CancelJob.json"
           }
         }
       }
     },
-    "/jobs/{name}/files": {
+    "/jobs/{name}/documents": {
       "get": {
-        "operationId": "ListJobFiles",
-        "summary": "List processed files within a Job",
+        "operationId": "ListJobDocuments",
+        "summary": "List processed documents within a job.",
         "description": "Resource list operation template.",
         "parameters": [
           {
@@ -444,7 +444,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedHealthFileDetails"
+              "$ref": "#/definitions/PagedDocumentDetails"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -468,8 +468,8 @@
           }
         },
         "x-ms-examples": {
-          "List processed files within a Job": {
-            "$ref": "./examples/ListJobFiles.json"
+          "List processed documents within a job.": {
+            "$ref": "./examples/ListJobDocuments.json"
           }
         },
         "x-ms-pageable": {
@@ -588,11 +588,11 @@
     },
     "DeidentificationContent": {
       "type": "object",
-      "description": "Request for synchronous De-Identify operation.",
+      "description": "Request body for de-identification operation.",
       "properties": {
         "inputText": {
           "type": "string",
-          "description": "Input text to deidentify.",
+          "description": "Input text to de-identify.",
           "maxLength": 100000
         },
         "operation": {
@@ -647,7 +647,7 @@
         },
         "redactionFormat": {
           "type": "string",
-          "description": "Format of the redacted output. Only valid when OperationType is Redact.",
+          "description": "Format of the redacted output. Only valid when OperationType is \"Redact\".",
           "maxLength": 16
         }
       },
@@ -659,7 +659,7 @@
     },
     "DeidentificationJob": {
       "type": "object",
-      "description": "A job containing a batch of documents to deidentify.",
+      "description": "A job containing a batch of documents to de-identify.",
       "properties": {
         "name": {
           "type": "string",
@@ -743,6 +743,12 @@
           "description": "Error when job fails in it's entirety.",
           "readOnly": true
         },
+        "lastUpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the job was completed.\n\nIf the job is canceled, this is the time when the job was canceled.\n\nIf the job failed, this is the time when the job failed.",
+          "readOnly": true
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -753,12 +759,6 @@
           "type": "string",
           "format": "date-time",
           "description": "Date and time when the job was started.",
-          "readOnly": true
-        },
-        "lastUpdatedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time when the job was completed.\n\nIf the job is canceled, this is the time when the job was canceled.\n\nIf the job failed, this is the time when the job failed.",
           "readOnly": true
         },
         "summary": {
@@ -774,30 +774,63 @@
         "operation",
         "dataType",
         "status",
+        "lastUpdatedAt",
         "createdAt"
       ]
     },
     "DeidentificationResult": {
       "type": "object",
-      "description": "Response for synchronous De-Identify operation.",
+      "description": "Response body for de-identification operation.",
       "properties": {
         "outputText": {
           "type": "string",
-          "description": "Output text after de-identifying. Not available for Tag Operation."
+          "description": "Output text after de-identification. Not available for \"Tag\" operation."
         },
         "taggerResult": {
           "$ref": "#/definitions/PhiTaggerResult",
-          "description": "Result of the tag operation. Only available for Tag Operation."
+          "description": "Result of the \"Tag\" operation. Only available for \"Tag\" Operation."
         }
       }
     },
-    "FileLocation": {
+    "DocumentDetails": {
       "type": "object",
-      "description": "Location of a file.",
+      "description": "Details of a single document in a job.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the document details.",
+          "readOnly": true
+        },
+        "input": {
+          "$ref": "#/definitions/DocumentLocation",
+          "description": "Location for the input."
+        },
+        "output": {
+          "$ref": "#/definitions/DocumentLocation",
+          "description": "Location for the output."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Status of the document."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error when document fails."
+        }
+      },
+      "required": [
+        "id",
+        "input",
+        "status"
+      ]
+    },
+    "DocumentLocation": {
+      "type": "object",
+      "description": "Location of a document.",
       "properties": {
         "path": {
           "type": "string",
-          "description": "Absolute path to the file in storage.",
+          "description": "Path of document in storage.",
           "maxLength": 1024
         },
         "etag": {
@@ -809,38 +842,6 @@
       "required": [
         "path",
         "etag"
-      ]
-    },
-    "HealthFileDetails": {
-      "type": "object",
-      "description": "File report once job has completed.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id of the file report.",
-          "readOnly": true
-        },
-        "input": {
-          "$ref": "#/definitions/FileLocation",
-          "description": "File Location for the input."
-        },
-        "output": {
-          "$ref": "#/definitions/FileLocation",
-          "description": "File Location for the output."
-        },
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "Status of the file."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error when file fails."
-        }
-      },
-      "required": [
-        "id",
-        "input",
-        "status"
       ]
     },
     "JobStatus": {
@@ -871,17 +872,17 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Job has completed successfully. All files have succeeded."
+            "description": "Job has completed successfully. All documents have succeeded."
           },
           {
             "name": "PartialFailed",
             "value": "PartialFailed",
-            "description": "Job has completed with at least 1 file failing."
+            "description": "Job has completed with at least a single document failing."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Job has completed with all files failing, or a validation failure."
+            "description": "Job has completed with all documents failing, or a validation failure."
           },
           {
             "name": "Canceled",
@@ -893,27 +894,27 @@
     },
     "JobSummary": {
       "type": "object",
-      "description": "Summary metrics the documents pertaining to a job.",
+      "description": "Summary metrics of a job.",
       "properties": {
         "successful": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of blobs that have completed."
+          "description": "Number of documents that have completed."
         },
         "failed": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of blobs that have failed."
+          "description": "Number of documents that have failed."
         },
         "canceled": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of blobs that have been canceled."
+          "description": "Number of documents that have been canceled."
         },
         "total": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of blobs total."
+          "description": "Number of documents total."
         },
         "bytesProcessed": {
           "type": "integer",
@@ -951,15 +952,15 @@
         "value"
       ]
     },
-    "PagedHealthFileDetails": {
+    "PagedDocumentDetails": {
       "type": "object",
-      "description": "Paged collection of HealthFileDetails items",
+      "description": "Paged collection of DocumentDetails items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The HealthFileDetails items on this page",
+          "description": "The DocumentDetails items on this page",
           "items": {
-            "$ref": "#/definitions/HealthFileDetails"
+            "$ref": "#/definitions/DocumentDetails"
           }
         },
         "nextLink": {
@@ -1028,7 +1029,7 @@
           {
             "name": "BioID",
             "value": "BioID",
-            "description": "Biological Identifier, such as a fingerprint or retinal scan"
+            "description": "Biological Identifier, such as a fingerprint or retinal scan."
           },
           {
             "name": "City",
@@ -1078,7 +1079,7 @@
           {
             "name": "IDNum",
             "value": "IDNum",
-            "description": "Id Numbers. Such as a passport number."
+            "description": "Id Number, eg. passport number."
           },
           {
             "name": "IPAddress",
@@ -1088,12 +1089,12 @@
           {
             "name": "License",
             "value": "License",
-            "description": "License. Such as a driver's license or medical license"
+            "description": "License, eg. Driver's license or medical license."
           },
           {
             "name": "LocationOther",
             "value": "LocationOther",
-            "description": "Location Other. Such as Golden Gate Park."
+            "description": "Location Other, eg. Golden Gate Park."
           },
           {
             "name": "MedicalRecord",
@@ -1103,7 +1104,7 @@
           {
             "name": "Organization",
             "value": "Organization",
-            "description": "Organization. Such as a company name"
+            "description": "Organization, eg. Microsoft."
           },
           {
             "name": "Patient",
@@ -1123,12 +1124,12 @@
           {
             "name": "SocialSecurity",
             "value": "SocialSecurity",
-            "description": "Social Security Numbers in the US."
+            "description": "Social Security Number."
           },
           {
             "name": "State",
             "value": "State",
-            "description": "State"
+            "description": "State."
           },
           {
             "name": "Street",
@@ -1143,12 +1144,12 @@
           {
             "name": "Username",
             "value": "Username",
-            "description": "Usernames, such as a social media handle"
+            "description": "Usernames, eg. a social media handle."
           },
           {
             "name": "Vehicle",
             "value": "Vehicle",
-            "description": "Vehicle IDs, such as license plates or VIN numbers"
+            "description": "Vehicle IDs, eg. license plate or VIN number."
           },
           {
             "name": "Zip",
@@ -1160,11 +1161,11 @@
     },
     "PhiEntity": {
       "type": "object",
-      "description": "Phi Entity tag in the input.",
+      "description": "PHI Entity tag in the input.",
       "properties": {
         "category": {
           "$ref": "#/definitions/PhiCategory",
-          "description": "Phi Category of the entity."
+          "description": "PHI Category of the entity."
         },
         "offset": {
           "$ref": "#/definitions/StringIndex",
@@ -1181,7 +1182,7 @@
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "Confidence score of the text/type pairing."
+          "description": "Confidence score of the category match."
         }
       },
       "required": [
@@ -1192,7 +1193,7 @@
     },
     "PhiTaggerResult": {
       "type": "object",
-      "description": "Result of the tag operation.",
+      "description": "Result of the \"Tag\" operation.",
       "properties": {
         "entities": {
           "type": "array",
@@ -1204,7 +1205,7 @@
         },
         "path": {
           "type": "string",
-          "description": "Path to the file in the storage container.",
+          "description": "Path to the document in storage.",
           "maxLength": 1024
         },
         "etag": {
@@ -1223,17 +1224,17 @@
         "location": {
           "type": "string",
           "format": "uri",
-          "description": "URL to storage location. Must be a valid Azure Storage SAS URI."
+          "description": "URL to storage location."
         },
         "prefix": {
           "type": "string",
-          "description": "Prefix to filter blobs by.",
+          "description": "Prefix to filter path by.",
           "minLength": 1,
           "maxLength": 1024
         },
         "extensions": {
           "type": "array",
-          "description": "List of extensions to filter blobs by.",
+          "description": "List of extensions to filter path by.",
           "default": [
             "*"
           ],
@@ -1251,7 +1252,7 @@
     },
     "StringIndex": {
       "type": "object",
-      "description": "String Index encoding model.",
+      "description": "String index encoding model.",
       "properties": {
         "utf8": {
           "type": "integer",
@@ -1261,12 +1262,12 @@
         "utf16": {
           "type": "integer",
           "format": "int32",
-          "description": "The offset or length of the substring in UTF-16 encoding.\n\nUsed in .NET, Java, and JavaScript."
+          "description": "The offset or length of the substring in UTF-16 encoding.\n\nPrimary encoding used by .NET, Java, and JavaScript."
         },
         "codePoint": {
           "type": "integer",
           "format": "int32",
-          "description": "The offset or length of the substring in UTF-16 encoding.\n\nUsed in Python."
+          "description": "The offset or length of the substring in CodePoint encoding.\n\nPrimary encoding used by Python."
         }
       },
       "required": [
@@ -1282,11 +1283,11 @@
         "location": {
           "type": "string",
           "format": "uri",
-          "description": "URL to storage location. Must be a valid Azure Storage SAS URI."
+          "description": "URL to storage location."
         },
         "prefix": {
           "type": "string",
-          "description": "Prefix to filter blobs by.",
+          "description": "Prefix to filter path by.",
           "minLength": 1,
           "maxLength": 1024
         }

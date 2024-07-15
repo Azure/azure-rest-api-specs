@@ -9,20 +9,21 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
+// Official Name: Azure Health Data Services de-identification service
 @useAuth(AadToken)
 @service({
-  title: "HealthDataAIServices.Deidentification Service",
+  title: "Azure Health Data Services de-identification service",
 })
 @server(
   "https://{endpoint}",
-  "Azure Health Deidentification Service",
+  "De-identification Service service endpoint",
   {
-    @doc("Url of your Deid Service.")
+    @doc("Url of your De-identification Service.")
     endpoint: string,
   }
 )
-@versioned(HealthDataAIServices.Deidentification.Versions)
-namespace HealthDataAIServices.Deidentification;
+@versioned(HealthDataAIServices.DeidServices.Versions)
+namespace HealthDataAIServices.DeidServices;
 
 @doc("The Azure Active Directory OAuth2 Flow")
 model AadToken
@@ -35,7 +36,7 @@ model AadToken
     }
   ]>;
 
-@doc("The HealthDataAIServices.Deidentification service versions.")
+@doc("Azure Health Data Services de-identification service versions.")
 enum Versions {
   @doc("Public preview release version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
