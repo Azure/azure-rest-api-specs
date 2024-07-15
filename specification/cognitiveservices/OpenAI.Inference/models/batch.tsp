@@ -32,6 +32,29 @@ model BatchErrorDatum {
 }
 
 @added(ServiceApiVersions.v2024_07_01_Preview)
+/** Defines the request to create a batch. */
+model BatchCreateRequest {
+
+  @doc("""
+  The object type, which is always `batch`.
+  """)
+  object: "batch";
+
+  /** The API endpoint used by the batch. */
+  endpoint: string;
+
+  /** The ID of the input file for the batch. */
+  @minLength(1)
+  input_file_id: string;
+
+  /** The time frame within which the batch should be processed. */
+  completion_window: string;
+
+  /**A set of key-value pairs that can be attached to the batch. This can be useful for storing additional infomration about the batch in a structured format.*/
+  metadata?: Record<string> | null;
+}
+
+@added(ServiceApiVersions.v2024_07_01_Preview)
 model Batch {
   id: string;
 
@@ -46,6 +69,7 @@ model Batch {
   errors?: BatchErrorList;
 
   /** The ID of the input file for the batch. */
+  @minLength(1)
   input_file_id: string;
 
   /** The time frame within which the batch should be processed. */
@@ -116,7 +140,7 @@ model Batch {
     failed: int32;
   };
 
-  /** Set of 16 key-value pairs that can be attached to an object. This can be useful for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maxium of 512 characters long. */
+  /** A set of key-value pairs that can be attached to the batch. This can be useful for storing additional infomration about the batch in a structured format.*/
   metadata?: Record<string> | null;
 }
 
