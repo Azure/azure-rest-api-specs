@@ -1,8 +1,8 @@
-# HealthDataAIServices.Deidentification
+# HealthDataAIServices.DeidServices
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for HealthDataAIServices.Deidentification.
+This is the AutoRest configuration file for HealthDataAIServices.DeidServices.
 
 ## Getting Started
 
@@ -22,12 +22,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the HealthDataAIServices.Deidentification.
+These are the global settings for the HealthDataAIServices.DeidServices.
 
 ```yaml
 openapi-type: data-plane
 tag: package-2024-07-12-preview
-title: Health Deidentification Service
+title: Azure Health Data Services de-identification service
 security: AADToken
 security-scopes:
   - "https://deid.azure.com/.default"
@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2024-07-12-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-07-12-preview'
 input-file:
-  - preview/2024-07-12-preview/HealthDataAIServices.Deidentification.json
+  - preview/2024-07-12-preview/HealthDataAIServices.DeidServices.json
 ```
 
 ---
