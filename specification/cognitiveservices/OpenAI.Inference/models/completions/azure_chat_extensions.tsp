@@ -13,10 +13,10 @@ using TypeSpec.Versioning;
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
-  completions request that should use Azure OpenAI chat extensions to augment the response behavior.
-  The use of this configuration is compatible only with Azure OpenAI.
-""")
+    A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
+    completions request that should use Azure OpenAI chat extensions to augment the response behavior.
+    The use of this configuration is compatible only with Azure OpenAI.
+  """)
 union AzureChatExtensionType {
   string,
 
@@ -39,43 +39,48 @@ union AzureChatExtensionType {
 @discriminator("type")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
-  completions request that should use Azure OpenAI chat extensions to augment the response behavior.
-  The use of this configuration is compatible only with Azure OpenAI.
-""")
+    A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
+    completions request that should use Azure OpenAI chat extensions to augment the response behavior.
+    The use of this configuration is compatible only with Azure OpenAI.
+  """)
 model AzureChatExtensionConfiguration {
   @doc("""
-    The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.
-    Azure chat extensions are only compatible with Azure OpenAI.
-  """)
+      The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.
+      Azure chat extensions are only compatible with Azure OpenAI.
+    """)
   type: AzureChatExtensionType;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-  A representation of the additional context information available when Azure OpenAI chat extensions are involved
-  in the generation of a corresponding chat completions response. This context information is only populated when
-  using an Azure OpenAI request configured to use a matching extension.
-""")
+    A representation of the additional context information available when Azure OpenAI chat extensions are involved
+    in the generation of a corresponding chat completions response. This context information is only populated when
+    using an Azure OpenAI request configured to use a matching extension.
+  """)
 model AzureChatExtensionsMessageContext {
   @doc("""
-    The contextual information associated with the Azure chat extensions used for a chat completions request.
-    These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the
-    course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat
-    extensions.
-  """)
+      The contextual information associated with the Azure chat extensions used for a chat completions request.
+      These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the
+      course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat
+      extensions.
+    """)
   citations?: AzureChatExtensionDataSourceResponseCitation[];
 
   @doc("The detected intent from the chat history, used to pass to the next turn to carry over the context.")
   intent?: string;
+
+  /** All the retrieved documents. */
+  @added(ServiceApiVersions.v2024_05_01_Preview)
+  @encodedName("application/json", "all_retrieved_documents")
+  allRetrievedDocuments?: AzureChatExtensionRetrievedDocument[];
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-A single instance of additional context information available when Azure OpenAI chat extensions are involved
-in the generation of a corresponding chat completions response. This context information is only populated when
-using an Azure OpenAI request configured to use a matching extension.
-""")
+  A single instance of additional context information available when Azure OpenAI chat extensions are involved
+  in the generation of a corresponding chat completions response. This context information is only populated when
+  using an Azure OpenAI request configured to use a matching extension.
+  """)
 model AzureChatExtensionDataSourceResponseCitation {
   @doc("The content of the citation.")
   content: string;
@@ -92,6 +97,50 @@ model AzureChatExtensionDataSourceResponseCitation {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
   @doc("The chunk ID of the citation.")
   chunk_id?: string;
+}
+
+/** The retrieved document. */
+@added(ServiceApiVersions.v2024_05_01_Preview)
+model AzureChatExtensionRetrievedDocument {
+  ...AzureChatExtensionDataSourceResponseCitation;
+
+  /** The search queries used to retrieve the document. */
+  @encodedName("application/json", "search_queries")
+  searchQueries: string[];
+
+  /** The index of the data source. */
+  @encodedName("application/json", "data_source_index")
+  dataSourceIndex: int32;
+
+  /** The original search score of the retrieved document. */
+  @encodedName("application/json", "original_search_score")
+  originalSearchScore?: float64;
+
+  /** The rerank score of the retrieved document. */
+  @encodedName("application/json", "rerank_score")
+  rerankScore?: float64;
+
+  /**
+   * Represents the rationale for filtering the document. If the document does not undergo filtering,
+   * this field will remain unset.
+   */
+  @encodedName("application/json", "filter_reason")
+  filterReason?: AzureChatExtensionRetrieveDocumentFilterReason;
+}
+
+/** The reason for filtering the retrieved document. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Enforcing closed set of values per service release"
+@added(ServiceApiVersions.v2024_05_01_Preview)
+union AzureChatExtensionRetrieveDocumentFilterReason {
+  /**
+   * The document is filtered by original search score threshold defined by `strictness` configure.
+   */
+  score: "score",
+
+  /**
+   * The document is not filtered by original search score threshold, but is filtered by rerank score and `top_n_documents` configure.
+   */
+  rerank: "rerank",
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
@@ -121,9 +170,9 @@ model AzureChatEnhancementConfiguration {
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-Represents the output results of Azure enhancements to chat completions, as configured via the matching input provided
-in the request.
-""")
+  Represents the output results of Azure enhancements to chat completions, as configured via the matching input provided
+  in the request.
+  """)
 model AzureChatEnhancements {
   @doc("The grounding enhancement that returns the bounding box of the objects detected in the image.")
   grounding?: AzureGroundingEnhancement;
@@ -153,9 +202,9 @@ model AzureGroundingEnhancementLineSpan {
   text: string;
 
   @doc("""
-  The character offset within the text where the span begins. This offset is defined as the position of the first
-  character of the span, counting from the start of the text as Unicode codepoints.
-  """)
+    The character offset within the text where the span begins. This offset is defined as the position of the first
+    character of the span, counting from the start of the text as Unicode codepoints.
+    """)
   offset: int32;
 
   @doc("The length of the span in characters, measured in Unicode codepoints.")

@@ -8,12 +8,15 @@ using TypeSpec.Rest;
 
 namespace Face;
 
-@doc("The operation mode for the liveness modal.")
+@doc("The liveness operation mode to drive the client’s end-user experience.")
 union LivenessOperationMode {
   string,
 
-  @doc("The operation mode for the liveness modal.")
+  @doc("Utilizes a passive liveness technique that requires no additional actions from the user. Requires normal indoor lighting and high screen brightness for optimal performance. And thus, this mode has a narrow operational envelope and will not be suitable for scenarios that requires the end-user’s to be in bright lighting conditions. Note: this is the only supported mode for the Mobile (iOS and Android) solution.")
   "Passive",
+
+  @doc("This mode utilizes a hybrid passive or active liveness technique that necessitates user cooperation. It is optimized to require active motion only under suboptimal lighting conditions. Unlike the passive mode, this mode has no lighting restrictions, and thus offering a broader operational envelope. This mode is preferable on Web based solutions due to the lack of automatic screen brightness control available on browsers which hinders the Passive mode’s operational envelope on Web based solutions.")
+  "PassiveActive",
 }
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
@@ -264,10 +267,6 @@ model LivenessSessionAuditEntry {
 
 @doc("Request of liveness with verify session creation.")
 model CreateLivenessWithVerifySessionContent {
-  @doc("The content type for the operation. Always multipart/form-data for this operation.")
-  @header("content-type")
-  contentType: "multipart/form-data";
-
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
   Parameters: CreateLivenessSessionContent;
@@ -275,4 +274,15 @@ model CreateLivenessWithVerifySessionContent {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
   VerifyImage: bytes;
+}
+
+@doc("Request wrapper of liveness with verify session creation.")
+model CreateLivenessWithVerifySessionRequest {
+  @doc("The content type for the operation. Always multipart/form-data for this operation.")
+  @header("content-type")
+  contentType: "multipart/form-data";
+
+  @doc("Request content of liveness with verify session creation.")
+  @body
+  body: CreateLivenessWithVerifySessionContent;
 }

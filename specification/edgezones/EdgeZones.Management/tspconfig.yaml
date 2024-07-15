@@ -5,7 +5,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
-    - "@azure-tools/typespec-azure-resource-manager/all"
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
@@ -16,6 +16,7 @@ options:
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-edgezones"
     package-name: "{package-dir}"
+    generate-test: true
     flavor: "azure"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-edgezones"

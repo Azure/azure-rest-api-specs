@@ -225,19 +225,19 @@ alias BatchMatchHeaders = {
   ...BatchModifiedSinceHeaders;
 
   @doc("""
-  An ETag value associated with the version of the resource known to the client.
-  The operation will be performed only if the resource's current ETag on the
-  service exactly matches the value specified by the client.
-  """)
+    An ETag value associated with the version of the resource known to the client.
+    The operation will be performed only if the resource's current ETag on the
+    service exactly matches the value specified by the client.
+    """)
   @header("If-Match")
   @clientName("if__match", "python")
   ifMatch?: string;
 
   @doc("""
-  An ETag value associated with the version of the resource known to the client.
-  The operation will be performed only if the resource's current ETag on the
-  service does not match the value specified by the client.
-  """)
+    An ETag value associated with the version of the resource known to the client.
+    The operation will be performed only if the resource's current ETag on the
+    service does not match the value specified by the client.
+    """)
   @header("If-None-Match")
   @clientName("if_none_match", "python")
   ifNoneMatch?: string;
@@ -245,20 +245,20 @@ alias BatchMatchHeaders = {
 
 alias BatchModifiedSinceHeaders = {
   @doc("""
-  A timestamp indicating the last modified time of the resource known to the
-  client. The operation will be performed only if the resource on the service has
-  been modified since the specified time.
-  """)
+    A timestamp indicating the last modified time of the resource known to the
+    client. The operation will be performed only if the resource on the service has
+    been modified since the specified time.
+    """)
   @header("If-Modified-Since")
   @encode(DateTimeKnownEncoding.rfc7231)
   @clientName("if_modified_since", "python")
   ifModifiedSince?: utcDateTime;
 
   @doc("""
-  A timestamp indicating the last modified time of the resource known to the
-  client. The operation will be performed only if the resource on the service has
-  not been modified since the specified time.
-  """)
+    A timestamp indicating the last modified time of the resource known to the
+    client. The operation will be performed only if the resource on the service has
+    not been modified since the specified time.
+    """)
   @header("If-Unmodified-Since")
   @encode(DateTimeKnownEncoding.rfc7231)
   @clientName("if_unmodified_since", "python")
@@ -337,9 +337,9 @@ alias BatchCommonListHeaders = {
   ...BatchClientRequestHeaders;
 
   @doc("""
-  The maximum number of items to return in the response. A maximum of 1000
-  applications can be returned.
-  """)
+    The maximum number of items to return in the response. A maximum of 1000
+    applications can be returned.
+    """)
   @query
   @minValue(1)
   @maxValue(1000)
@@ -377,16 +377,16 @@ alias BatchTaskFileClientPathContent = {
 
 alias BatchClientRequestHeaders = {
   @doc("""
-  The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
-  """)
+    The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
+    """)
   @query
   @clientName("timeOutInSeconds")
   timeOut?: int32 = 30;
 
   @doc("""
-  The caller-generated request identity, in the form of a GUID with no decoration
-  such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-  """)
+    The caller-generated request identity, in the form of a GUID with no decoration
+    such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+    """)
   @header("client-request-id")
   clientRequestId?: string;
 
@@ -395,10 +395,10 @@ alias BatchClientRequestHeaders = {
   returnClientRequestId?: boolean = false;
 
   @doc("""
-  The time the request was issued. Client libraries typically set this to the
-  current system clock time; set it explicitly if you are calling the REST API
-  directly.
-  """)
+    The time the request was issued. Client libraries typically set this to the
+    current system clock time; set it explicitly if you are calling the REST API
+    directly.
+    """)
   @header("ocp-date")
   @encode(DateTimeKnownEncoding.rfc7231)
   ocpdate?: utcDateTime;
