@@ -506,6 +506,24 @@ alias AnalyzeTextJobQueryParameters = QueryParametersTrait<{
   skip?: int32;
 }>;
 
+alias AnalyzeTextJobQueryParameters1 = {
+  /** (Optional) if set to true, response will contain request and document level statistics. */
+  @query
+  showStats?: boolean;
+
+  /** The maximum number of resources to return from the collection. */
+  @query
+  top?: int32;
+
+  /** An offset into the collection of the first resource to be returned. */
+  @query
+  skip?: int32;
+
+  /** The job ID to get status for. */
+  @path
+  jobId: uuid;
+};
+
 alias AnalyzeTextQueryParameters = {
   /** (Optional) if set to true, response will contain request and document level statistics. */
   @query

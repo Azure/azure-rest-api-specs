@@ -171,14 +171,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "description": "job ID",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
             "name": "showStats",
             "in": "query",
             "description": "(Optional) if set to true, response will contain request and document level statistics.",
@@ -200,6 +192,14 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job ID to get status for.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
