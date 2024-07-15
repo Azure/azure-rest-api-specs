@@ -61,18 +61,6 @@ directive:
   - where:
       subject: NetworkProfile
     remove: true
-
-  # internal operations
-  
-  - remove-operation: HybridIdentityMetadata_Get
-  - remove-operation: HybridIdentityMetadata_ListByMachines
-  
-  - remove-operation: Licenses_ValidateLicense
-  - remove-operation: LicenseProfiles_Get
-  - remove-operation: LicenseProfiles_Delete
-  - remove-operation: LicenseProfiles_Update
-  - remove-operation: LicenseProfiles_List
-  - remove-operation: LicenseProfiles_CreateOrUpdate
   
   # blocking networkconfigurations opertaions, we want to deprecrate it in favor of using "settings" as the new extension resource name
   - remove-operation: NetworkConfigurations_Get
