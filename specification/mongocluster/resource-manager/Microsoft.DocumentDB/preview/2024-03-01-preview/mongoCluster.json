@@ -3,7 +3,6 @@
   "info": {
     "title": "MongoClusterManagementClient",
     "version": "2024-03-01-preview",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure Cosmos DB for MongoDB vCore resources including clusters and firewall rules.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -349,7 +348,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "MongoClusters_Update",
+        "operationId": "MongoClusters_UpdateOld",
         "tags": [
           "MongoClusters"
         ],
@@ -410,17 +409,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Disables public network access on a Mongo Cluster resource with a private endpoint connection.": {
-            "$ref": "./examples/MongoClusters_PatchPrivateNetworkAccess.json"
-          },
-          "Updates a Mongo Cluster resource": {
-            "$ref": "./examples/MongoClusters_Update.json"
-          },
-          "Updates the disk size on a Mongo Cluster resource.": {
-            "$ref": "./examples/MongoClusters_PatchDiskSize.json"
           }
         },
         "x-ms-long-running-operation-options": {
