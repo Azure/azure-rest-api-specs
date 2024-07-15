@@ -11,9 +11,8 @@
   "scripts": {
     "build": "tsc",
     "postinstall": "npm run build",
-    "_test": "Disable parallelism to workaround race condition bug in tsp-client calling 'npx autorest'",
-    "test": "vitest --minWorkers 1 --maxWorkers 1",
-    "test:ci": "vitest run --minWorkers 1 --maxWorkers 1 --reporter=verbose"
+    "test": "vitest",
+    "test:ci": "vitest run --reporter=verbose"
   },
   "engines": {
     "node": ">= 18.0.0"
