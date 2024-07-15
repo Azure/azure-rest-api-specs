@@ -225,9 +225,9 @@ alias EnvironmentUpdateProperties = {
 
 alias EnvironmentPatchProperties = {
   @doc("""
-  The time the expiration date will be triggered (UTC), after which the
-  environment and associated resources will be deleted.
-  """)
+    The time the expiration date will be triggered (UTC), after which the
+    environment and associated resources will be deleted.
+    """)
   @added(APIVersions.v2024_02_01)
   expirationDate?: utcDateTime;
 };
@@ -401,15 +401,15 @@ model EnvironmentDefinitionParameter {
   default?: string;
 
   @doc("""
-A string of one of the basic JSON types (number, integer, array, object,
-boolean, string).
-""")
+    A string of one of the basic JSON types (number, integer, array, object,
+    boolean, string).
+    """)
   type: ParameterType;
 
   @doc("""
-Whether or not this parameter is read-only.  If true, default should have a
-value.
-""")
+    Whether or not this parameter is read-only.  If true, default should have a
+    value.
+    """)
   readOnly?: boolean;
 
   @doc("Whether or not this parameter is required.")
@@ -439,10 +439,10 @@ model EnvironmentType {
   name: string;
 
   @doc("""
-Id of a subscription or management group that the environment type will be
-mapped to. The environment's resources will be deployed into this subscription
-or management group.
-""")
+    Id of a subscription or management group that the environment type will be
+    mapped to. The environment's resources will be deployed into this subscription
+    or management group.
+    """)
   deploymentTargetId: string;
 
   @doc("Indicates whether this environment type is enabled for use in this project.")

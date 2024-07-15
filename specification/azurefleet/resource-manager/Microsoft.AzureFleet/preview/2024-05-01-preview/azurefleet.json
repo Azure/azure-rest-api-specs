@@ -43,9 +43,6 @@
     },
     {
       "name": "Fleets"
-    },
-    {
-      "name": "VirtualMachineScaleSets"
     }
   ],
   "paths": {
@@ -418,9 +415,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/fleets/{name}/virtualMachineScaleSets": {
       "get": {
-        "operationId": "VirtualMachineScaleSets_ListByFleet",
+        "operationId": "Fleets_ListVirtualMachineScaleSets",
         "tags": [
-          "VirtualMachineScaleSets"
+          "Fleets"
         ],
         "description": "List VirtualMachineScaleSet resources by Fleet",
         "parameters": [
@@ -457,8 +454,8 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachineScaleSets_ListByFleet": {
-            "$ref": "./examples/VirtualMachineScaleSets_ListByFleet.json"
+          "Fleets_ListVirtualMachineScaleSets": {
+            "$ref": "./examples/Fleets_ListVirtualMachineScaleSets.json"
           }
         },
         "x-ms-pageable": {
@@ -468,14 +465,14 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.Foundations.ManagedServiceIdentityType": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType": {
       "type": "string",
-      "description": "The kind of managed identity assigned to this resource.",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
       "enum": [
         "None",
         "SystemAssigned",
         "UserAssigned",
-        "SystemAssigned, UserAssigned"
+        "SystemAssigned,UserAssigned"
       ],
       "x-ms-enum": {
         "name": "ManagedServiceIdentityType",
@@ -498,7 +495,7 @@
           },
           {
             "name": "SystemAndUserAssigned",
-            "value": "SystemAssigned, UserAssigned",
+            "value": "SystemAssigned,UserAssigned",
             "description": "System and user assigned managed identity."
           }
         ]
@@ -594,11 +591,7 @@
         "properties": {
           "$ref": "#/definitions/FleetProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "zones": {
           "type": "array",
@@ -734,12 +727,13 @@
       "description": "The template for adding optional properties.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedServiceIdentityType",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType",
           "description": "The type of managed identity assigned to this resource."
         },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The identities assigned to this resource by the user.",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
           }
@@ -861,7 +855,7 @@
         },
         "product": {
           "type": "string",
-          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding. "
+          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding."
         },
         "promotionCode": {
           "type": "string",
