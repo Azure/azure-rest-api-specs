@@ -30,7 +30,7 @@ interface Assets {
   @updatesResource(AssetResource)
   @post
   updateAssets is Foundations.Operation<
-    AssetsUpdateParameter & AssetUpdateData,
+    AssetsUpdateParameter & BodyParameter<AssetUpdateData>,
     Task
   >;
   @doc("Retrieve an asset by assetId.")
@@ -242,7 +242,7 @@ interface SavedFilters {
   @put
   createOrReplaceSavedFilter is Foundations.ResourceOperation<
     SavedFilter,
-    SavedFilterData,
+    BodyParameter<SavedFilterData>,
     SavedFilter
   >;
   @doc("Delete a saved filter with a given filterName.")

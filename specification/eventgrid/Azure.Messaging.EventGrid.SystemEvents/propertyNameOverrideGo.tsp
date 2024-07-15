@@ -333,10 +333,6 @@ using Microsoft.EventGrid.SystemEvents;
   "ACSEmailDeliveryReportReceivedEventData",
   "go"
 );
-@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "DeliveryAttemptTimestamp",
-  "go"
-);
 
 @@clientName(AcsEmailDeliveryReportStatus,
   "ACSEmailDeliveryReportStatus",
@@ -353,10 +349,6 @@ using Microsoft.EventGrid.SystemEvents;
 );
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "Engagement",
-  "go"
-);
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
-  "UserActionTimestamp",
   "go"
 );
 
