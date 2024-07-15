@@ -61,12 +61,31 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
+// /** Request text analysis over a collection of documents. */
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+// @post
+// @route("/:analyze-text")
+// op analyzeText is RpcOperation<
+//   AnalyzeTextTask & AnalyzeTextQueryParameters,
+//   AnalyzeTextTaskResult,
+//   {},
+//   ErrorResponse
+// >;
+
 /** Request text analysis over a collection of documents. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @post
 @route("/:analyze-text")
 op analyzeText is RpcOperation<
-  AnalyzeTextTask & AnalyzeTextQueryParameters,
+  {
+    /** The input documents to analyze. */
+  @body body: AnalyzeTextTask;
+
+  /** (Optional) if set to true, response will contain request and document level statistics. */
+  @query
+  // @clientName("showStatistics", "csharp")
+  showStats?: boolean;
+  },
   AnalyzeTextTaskResult,
   {},
   ErrorResponse
