@@ -6,6 +6,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Private;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /** Represents a mongo cluster resource. */
@@ -33,6 +34,8 @@ interface MongoClusters {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition. */
+  @sharedRoute
+  @added(Versions.v2024_03_01_preview)
   @parameterVisibility
   update is ArmCustomPatchAsync<MongoCluster, MongoCluster>;
   /** Deletes a mongo cluster. */
