@@ -1677,7 +1677,7 @@ interface Lineage {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Return immediate next page lineage info about entity with pagination")
-  @route("/lineage/{guid}/next/")
+  @route("/lineage/{guid}/next")
   @get
   getNextPage is Azure.Core.Foundations.Operation<
     {
