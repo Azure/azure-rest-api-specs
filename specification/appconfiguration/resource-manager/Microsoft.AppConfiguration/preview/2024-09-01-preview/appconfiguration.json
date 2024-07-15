@@ -2045,16 +2045,16 @@
           "description": "The parameters to define the data plane resource scope.",
           "$ref": "#/definitions/SignedParameters"
         },
-        "expires":{
+        "expires": {
           "description": "The time that the SAS token expires in the Universal ISO 8601 DateTime format. Max allowed expiration is 1 year from the time of token creation.",
           "type": "string",
           "format": "date-time"
         },
-        "cacheControlMaxAge":{
+        "cacheControlMaxAge": {
           "description": "Time (in seconds) for which the data plane response may be cached by clients. App Configuration sets the Cache-Control response header `max-age` to the value that's specified on the SAS token. See [rfc9111](https://www.rfc-editor.org/rfc/rfc9111#name-max-age-2) for more details.",
           "type": "number"
         },
-        "kind":{
+        "kind": {
           "description": "The kind of the SAS token.",
           "type": "string",
           "enum": [
@@ -2080,7 +2080,7 @@
           "description": "A filter used to match labels. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering. This is only applicable when the resourceType is Kv.",
           "type": "string"
         },
-        "tags":{
+        "tags": {
           "description": "Am array of tag filters used to match tags.",
           "type": "array",
           "items": {
@@ -2088,7 +2088,7 @@
             "type": "string"
           }
         },
-        "name":{
+        "name": {
           "description": "The name of the snapshot. This is only applicable when the resourceType is Snapshot.",
           "type": "string"
         }
@@ -2108,22 +2108,22 @@
           "$ref": "#/definitions/SignedParameters",
           "readOnly": true
         },
-        "expires":{
+        "expires": {
           "description": "The time that the SAS token expires in the Universal ISO 8601 DateTime format. Max allowed expiration is 1 year from the time of token creation.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
-        "cacheControlMaxAge":{
+        "cacheControlMaxAge": {
           "description": "Time (in seconds) for which the data plane response may be cached by clients. App Configuration sets the Cache-Control response header `max-age` to the value that's specified on the SAS token. See [rfc9111](https://www.rfc-editor.org/rfc/rfc9111#name-max-age-2) for more details.",
           "type": "number"
         },
-        "kind":{
+        "kind": {
           "description": "The kind of the SAS token.",
           "type": "string",
           "readOnly": true
         },
-        "value":{
+        "value": {
           "description": "The value of the SAS token.",
           "type": "string",
           "format": "password",
@@ -2139,7 +2139,7 @@
       ],
       "type": "object",
       "properties": {
-        "kind":{
+        "kind": {
           "description": "The kind of the SAS token.",
           "type": "string",
           "enum": [
