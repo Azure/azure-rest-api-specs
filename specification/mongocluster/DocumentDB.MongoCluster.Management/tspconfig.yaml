@@ -21,9 +21,11 @@ options:
     service-name: "Mongo Cluster"
     examples-directory: "examples"
   "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.MongoCluster"
     flavor: azure
     clear-output-folder: true
-    namespace: "Azure.ResourceManager.MongoCluster"
+    model-namespace: false
+    namespace: "{package-dir}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
