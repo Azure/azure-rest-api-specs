@@ -19,7 +19,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-
 /** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<
@@ -39,7 +38,7 @@ using Azure.Core.Traits;
   }
 )
 @versioned(Versions)
-namespace Language.AnalyzeText;
+namespace Language.Text;
 
 /** Analyze Conversations Service Versions */
 enum Versions {
@@ -62,12 +61,23 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
+// /** Request text analysis over a collection of documents. */
+// #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+// @post
+// @route("/:analyze-text")
+// op analyzeText is RpcOperation<
+//   AnalyzeTextTask & AnalyzeTextQueryParameters,
+//   AnalyzeTextTaskResult,
+//   {},
+//   ErrorResponse
+// >;
+
 /** Request text analysis over a collection of documents. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @post
 @route("/:analyze-text")
 op analyzeText is RpcOperation<
-  AnalyzeTextTask & AnalyzeTextQueryParameters,
+  AnalyzeTextBody & AnalyzeTextQueryParameters,
   AnalyzeTextTaskResult,
   {},
   ErrorResponse
