@@ -127,9 +127,9 @@ interface AssetEndpointProfiles {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     AssetEndpointProfile,
-    AssetEndpointProfileProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<AssetEndpointProfile, AssetEndpointProfileProperties>
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<AssetEndpointProfile>;
