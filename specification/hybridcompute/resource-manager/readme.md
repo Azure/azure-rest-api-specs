@@ -58,52 +58,23 @@ directive:
   - from: HybridCompute.json
     where: $.definitions.MachineAssessPatchesResult.properties.assessmentActivityId
     transform: '$[''format''] = ''uuid'''
-  - from: HybridCompute.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}"].get.parameters'
-    transform: |-
-      return [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_\\.]{1,54}$",
-            "minLength": 1,
-            "maxLength": 54,
-            "description": "The name of the hybrid machine."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation.",
-          }
-        ]
   - where:
       subject: NetworkProfile
     remove: true
 
-  # we don't want user to interact with them / we don't support some operations
-  - remove-operation: AgentVersion_List
-  - remove-operation: AgentVersion_Get
+  # internal operations
+  
   - remove-operation: HybridIdentityMetadata_Get
   - remove-operation: HybridIdentityMetadata_ListByMachines
+  
   - remove-operation: Licenses_ValidateLicense
   - remove-operation: LicenseProfiles_Get
   - remove-operation: LicenseProfiles_Delete
   - remove-operation: LicenseProfiles_Update
   - remove-operation: LicenseProfiles_List
   - remove-operation: LicenseProfiles_CreateOrUpdate
+  
+  # blocking networkconfigurations opertaions, we want to deprecrate it in favor of using "settings" as the new extension resource name
   - remove-operation: NetworkConfigurations_Get
   - remove-operation: NetworkConfigurations_Update
   - remove-operation: NetworkConfigurations_CreateOrUpdate
