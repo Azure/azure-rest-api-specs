@@ -4,12 +4,16 @@
     "resourceGroupName": "myResourceGroup",
     "configStoreName": "contoso",
     "api-version": "2024-05-01",
-    "configStoreUpdateParameters": {
-      "tags": {
-        "Category": "Marketing"
-      },
+    "configStoreCreationParameters": {
+      "location": "westus",
       "sku": {
         "name": "Standard"
+      },
+      "properties": {
+        "dataPlaneProxy": {
+          "authenticationMode": "Pass-through",
+          "privateLinkDelegation": "Enabled"
+        }
       }
     }
   },
@@ -29,7 +33,10 @@
           },
           "disableLocalAuth": false,
           "privateEndpointConnections": [],
-          "publicNetworkAccess": "Disabled"
+          "dataPlaneProxy": {
+            "authenticationMode": "Pass-through",
+            "privateLinkDelegation": "Enabled"
+          }
         },
         "systemData": {
           "createdBy": "foo@contoso.com",
@@ -45,16 +52,14 @@
         "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
         "name": "contoso",
         "location": "westus",
-        "tags": {
-          "Category": "Marketing"
-        }
+        "tags": {}
       }
     },
     "201": {
       "body": {
         "type": "Microsoft.AppConfiguration/configurationStores",
         "properties": {
-          "provisioningState": "Updating",
+          "provisioningState": "Creating",
           "creationDate": "2018-04-24T16:30:55+00:00",
           "endpoint": "https://contoso.azconfig.io",
           "encryption": {
@@ -65,7 +70,10 @@
           },
           "disableLocalAuth": false,
           "privateEndpointConnections": [],
-          "publicNetworkAccess": "Disabled"
+          "dataPlaneProxy": {
+            "authenticationMode": "Pass-through",
+            "privateLinkDelegation": "Enabled"
+          }
         },
         "systemData": {
           "createdBy": "foo@contoso.com",
@@ -81,9 +89,7 @@
         "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso",
         "name": "contoso",
         "location": "westus",
-        "tags": {
-          "Category": "Marketing"
-        }
+        "tags": {}
       }
     }
   }

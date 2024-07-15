@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-03-01",
+    "version": "2024-05-01",
     "title": "AppConfigurationManagementClient"
   },
   "host": "management.azure.com",
@@ -182,13 +182,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "The update request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/ConfigurationStore"
             }
           },
           "201": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "description": "The create request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
             "schema": {
               "$ref": "#/definitions/ConfigurationStore"
             }
@@ -209,6 +209,9 @@
           },
           "ConfigurationStores_Create_With_Local_Auth_Disabled": {
             "$ref": "./examples/ConfigurationStoresCreateWithLocalAuthDisabled.json"
+          },
+          "ConfigurationStores_Create_With_Data_Plane_Proxy": {
+            "$ref": "./examples/ConfigurationStoresCreateWithDataPlaneProxy.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -645,13 +648,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "The update request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "description": "The create request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -1289,13 +1292,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "The update request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/Replica"
             }
           },
           "201": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "description": "The create request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
             "schema": {
               "$ref": "#/definitions/Replica"
             }
@@ -1370,6 +1373,113 @@
         "x-ms-examples": {
           "Replicas_Delete": {
             "$ref": "./examples/ConfigurationStoresDeleteReplica.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/snapshots/{snapshotName}": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Gets the properties of the specified snapshot. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
+        "operationId": "Snapshots_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_Get": {
+            "$ref": "./examples/ConfigurationStoresGetSnapshot.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Snapshots"
+        ],
+        "description": "Creates a snapshot. NOTE: This operation is intended for use in ARM Template deployments. For all other scenarios involving App Configuration snapshots the data plane API should be used instead.",
+        "operationId": "Snapshots_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SnapshotNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The parameters for creating a snapshot.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "201": {
+            "description": "The create request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_Create": {
+            "$ref": "./examples/ConfigurationStoresCreateSnapshot.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1501,6 +1611,10 @@
           "default": false,
           "description": "Property specifying whether protection against purge is enabled for this configuration store."
         },
+        "dataPlaneProxy": {
+          "$ref": "#/definitions/DataPlaneProxyProperties",
+          "description": "Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM)."
+        },
         "createMode": {
           "type": "string",
           "description": "Indicates whether the configuration store need to be recovered.",
@@ -1551,6 +1665,56 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "The properties of a private endpoint connection.",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DataPlaneProxyProperties": {
+      "type": "object",
+      "description": "The data plane proxy settings for a configuration store.",
+      "properties": {
+        "authenticationMode": {
+          "description": "The data plane proxy authentication mode. This property manages the authentication mode of request to the data plane resources.",
+          "enum": [
+            "Local",
+            "Pass-through"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Local",
+                "description": "The local authentication mode. Users are not required to have data plane permissions if local authentication is not disabled."
+              },
+              {
+                "value": "Pass-through",
+                "description": "The pass-through authentication mode. User identity will be passed through from ARM, requiring user to have data plane action permissions (Available via App Configuration Data Owner/ App Configuration Data Reader)."
+              }
+            ]
+          }
+        },
+        "privateLinkDelegation": {
+          "description": "The data plane proxy private link delegation. This property manages if a request from delegated ARM private link is allowed when the data plane resource requires private link.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkDelegation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "ARM private endpoint is required if the resource requires private link."
+              },
+              {
+                "value": "Disabled",
+                "description": "Request is denied if the resource requires private link."
+              }
+            ]
+          }
         }
       }
     },
@@ -1621,6 +1785,10 @@
         "enablePurgeProtection": {
           "type": "boolean",
           "description": "Property specifying whether protection against purge is enabled for this configuration store."
+        },
+        "dataPlaneProxy": {
+          "$ref": "#/definitions/DataPlaneProxyProperties",
+          "description": "Property specifying the configuration of data plane proxy for Azure Resource Manager (ARM)."
         }
       }
     },
@@ -2493,6 +2661,160 @@
           }
         }
       }
+    },
+    "Snapshot": {
+      "description": "The snapshot resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the snapshot.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SnapshotProperties",
+          "description": "All snapshot properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SnapshotProperties": {
+      "description": "All snapshot properties.",
+      "type": "object",
+      "required": [
+        "filters"
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the snapshot.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "The current status of the snapshot.",
+          "enum": [
+            "Provisioning",
+            "Ready",
+            "Archived",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SnapshotStatus",
+            "modelAsString": true
+          }
+        },
+        "filters": {
+          "description": "A list of filters used to filter the key-values included in the snapshot.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/definitions/KeyValueFilter"
+          },
+          "x-ms-identifiers": []
+        },
+        "compositionType": {
+          "description": "The composition type describes how the key-values within the snapshot are composed. The 'key' composition type ensures there are no two key-values containing the same key. The 'key_label' composition type ensures there are no two key-values containing the same key and label.",
+          "type": "string",
+          "enum": [
+            "Key",
+            "Key_Label"
+          ],
+          "x-ms-enum": {
+            "name": "CompositionType",
+            "modelAsString": true
+          }
+        },
+        "created": {
+          "description": "The time that the snapshot was created.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "expires": {
+          "description": "The time that the snapshot will expire.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "retentionPeriod": {
+          "description": "The amount of time, in seconds, that a snapshot will remain in the archived state before expiring. This property is only writable during the creation of a snapshot. If not specified, the default lifetime of key-value revisions will be used.",
+          "type": "integer",
+          "minimum": 3600,
+          "maximum": 7776000,
+          "format": "int64",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "size": {
+          "description": "The size in bytes of the snapshot.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "itemsCount": {
+          "description": "The amount of key-values in the snapshot.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "The tags of the snapshot. NOTE: These are data plane tags, not ARM tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "etag": {
+          "description": "A value representing the current state of the snapshot.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "KeyValueFilter": {
+      "description": "Enables filtering of key-values.",
+      "type": "object",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "key": {
+          "description": "Filters key-values by their key field.",
+          "type": "string"
+        },
+        "label": {
+          "description": "Filters key-values by their label field.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -2535,6 +2857,15 @@
       "description": "The location in which uniqueness will be verified.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SnapshotNameParameter": {
+      "name": "snapshotName",
+      "in": "path",
+      "description": "The name of the snapshot.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^\\x00-\\x1F\\x7F]+$",
       "x-ms-parameter-location": "method"
     }
   },
