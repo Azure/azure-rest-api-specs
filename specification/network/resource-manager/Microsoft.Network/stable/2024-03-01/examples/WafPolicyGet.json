@@ -240,6 +240,23 @@
                     ]
                   }
                 ]
+              },
+              {
+                "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                "ruleSetVersion": "1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "ExcessiveRequests",
+                    "rules": [
+                      {
+                        "ruleId": "500100",
+                        "state": "Enabled",
+                        "action": "Block",
+                        "sensitivity": "High"
+                      }
+                    ]
+                  }
+                ]
               }
             ],
             "exclusions": [

@@ -64,6 +64,23 @@
                   ]
                 }
               ]
+            },
+            {
+              "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+              "ruleSetVersion": "1.0",
+              "ruleGroupOverrides": [
+                {
+                  "ruleGroupName": "ExcessiveRequests",
+                  "rules": [
+                    {
+                      "ruleId": "500100",
+                      "state": "Enabled",
+                      "action": "Block",
+                      "sensitivity": "High"
+                    }
+                  ]
+                }
+              ]
             }
           ],
           "exclusions": [
@@ -381,6 +398,23 @@
                     ]
                   }
                 ]
+              },
+              {
+                "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                "ruleSetVersion": "1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "ExcessiveRequests",
+                    "rules": [
+                      {
+                        "ruleId": "500100",
+                        "state": "Enabled",
+                        "action": "Block",
+                        "sensitivity": "High"
+                      }
+                    ]
+                  }
+                ]
               }
             ],
             "exclusions": [
@@ -686,6 +720,23 @@
                         "ruleId": "300700",
                         "state": "Enabled",
                         "action": "JSChallenge"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                "ruleSetVersion": "1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "ExcessiveRequests",
+                    "rules": [
+                      {
+                        "ruleId": "500100",
+                        "state": "Enabled",
+                        "action": "Block",
+                        "sensitivity": "High"
                       }
                     ]
                   }
