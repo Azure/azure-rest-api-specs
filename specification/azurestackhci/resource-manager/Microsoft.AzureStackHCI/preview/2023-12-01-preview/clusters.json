@@ -578,16 +578,16 @@
         }
       }
     },
-   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateBackupSecretsLocation": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport": {
       "post": {
         "tags": [
           "Cluster"
         ],
-        "operationId": "Clusters_updateBackupSecretsLocation",
-        "description": "Update Secrets Locations.",
+        "operationId": "Clusters_ConfigureRemoteSupport",
+        "description": "Configure RemoteSupport on a cluster",
         "x-ms-examples": {
-          "Update Secrets Locations": {
-            "$ref": "./examples/updateBackupSecretsLocation.json"
+          "Configure Remote Support": {
+            "$ref": "./examples/ConfigureRemoteSupport.json"
           }
         },
         "parameters": [
@@ -604,24 +604,25 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "backupSecretsLocationChangeRequest",
+            "name": "remoteSupportRequest",
             "in": "body",
-            "description": "Backup Secrets Location change request payload",
+            "description": "Configure Remote Support Request Payload",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BackupSecretsLocationChangeRequest"
+              "$ref": "#/definitions/RemoteSupportRequest"
             }
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted",
             "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -637,7 +638,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -1596,36 +1597,6 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SoftwareAssuranceChangeRequestProperties"
-        }
-      },
-      "additionalProperties": false
-    },
-    "BackupSecretsLocationChangeRequestProperties": {
-      "type": "object",
-      "properties": {
-        "secretsType": {
-            "description": "Types of the secret stored",
-            "type": "string",
-            "enum": [
-              "BackupSecrets"
-            ],
-            "x-ms-enum": {
-              "name": "secretsType",
-              "modelAsString": true
-            }
-          },
-          "secretsLocation": {
-            "description": "URI of secret Location",
-            "type": "string"
-          }
-      },
-      "additionalProperties": false
-    },
-    "BackupSecretsLocationChangeRequest": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BackupSecretsLocationChangeRequestProperties"
         }
       },
       "additionalProperties": false
