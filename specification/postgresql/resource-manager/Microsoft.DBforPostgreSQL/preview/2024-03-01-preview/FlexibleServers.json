@@ -667,6 +667,14 @@
     "ServerPropertiesForUpdate": {
       "type": "object",
       "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of a server. Can only be specified when the server is trying to switch to password authentication and does not have default administrator login.",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
         "administratorLoginPassword": {
           "type": "string",
           "x-ms-secret": true,
