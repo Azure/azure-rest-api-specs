@@ -32,7 +32,7 @@ Below are code convention we strive to follow in `eng` directory:
 - We do `npm update` only in stand-alone PRs.
 - To avoid inconsistent content of `package-lock.json` due to bugs like [npm/cli #7384],
   we ensure to use the same node and npm version to update `package-lock.json`.  
-  As of 7/15/2024 this is `node 20.15.1` and `npm 0.7.0`.
+  As of 7/15/2024 this is `node 20.15.1` and `npm 10.7.0`.
 
 ## Linting and prettier
 
