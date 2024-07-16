@@ -27,6 +27,7 @@ These are the global settings for the Azure Update Manager.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2024-10-01-preview
 ```
 
