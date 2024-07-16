@@ -38,6 +38,16 @@ These settings apply only when `--tag=package-2024-03` is specified on the comma
 ```yaml $(tag) == 'package-2024-03'
 input-file:
   - Microsoft.NetApp/stable/2024-03-01/netapp.json
+tag: package-preview-2024-03
+```
+
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.NetApp/preview/2024-03-01-preview/netapp.json
 ```
 
 ### Tag: package-preview-2023-11
@@ -83,7 +93,11 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 ``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
   - Microsoft.NetApp/preview/2023-05-01-preview/netapp.json
+<<<<<<< HEAD
 tag: package-2024-03
+=======
+tag: package-preview-2024-03
+>>>>>>> b57df44178d5249021b520845425671bb7507dd7
 ```
 
 ### Tag: package-netapp-2023-05-01
