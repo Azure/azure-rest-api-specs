@@ -12,13 +12,18 @@ namespace Microsoft.ContainerStorage;
 @armResourceOperations
 interface Volumes {
   get is ArmResourceRead<Volume>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @extension(
     "x-ms-long-running-operation-options",
     {
       `final-state-via`: "location",
     }
   )
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Volume>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Volume,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Volume>;
   update is ArmResourcePatchAsync<Volume, VolumeProperties>;
   listByPool is ArmResourceListByParent<Volume>;

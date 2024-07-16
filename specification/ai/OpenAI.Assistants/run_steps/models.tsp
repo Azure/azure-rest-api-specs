@@ -219,6 +219,7 @@ model RunStepDelta {
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepDeltaDetail {
   /** The object type for the run step detail object. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   type: string;
 }
 
@@ -263,6 +264,7 @@ model RunStepDeltaToolCall {
   id: string;
 
   /** The type of the tool call detail item in a streaming run step's details. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   type: string;
 }
 
@@ -334,6 +336,7 @@ model RunStepDeltaCodeInterpreterOutput {
   index: int32;
 
   /** The type of the streaming run step tool call's Code Interpreter output. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   type: string;
 }
 
