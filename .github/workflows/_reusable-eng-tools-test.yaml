@@ -8,6 +8,9 @@ on:
         description: Name of package under eng/tools
         required: true
         type: string
+      sparse-checkout-paths:
+        description: Paths for sparse checkout
+        type: string
 
 jobs:
   test:
@@ -24,9 +27,15 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+        shell: pwsh
+
       - uses: actions/checkout@v4
         with:
-          sparse-checkout: eng
+          sparse-checkout: |
+            eng
+            ${{ inputs.sparse-checkout-paths }}
 
       - name: Use Node ${{ matrix.node-version }}.x
         uses: actions/setup-node@v4
