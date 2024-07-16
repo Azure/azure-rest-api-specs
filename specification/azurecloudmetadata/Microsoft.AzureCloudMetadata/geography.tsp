@@ -14,13 +14,14 @@ using Azure.ResourceManager;
 namespace Microsoft.AzureCloudMetadata;
 
 /** Geography resource. */
+@tenantResource
 @parentResource(Cloud)
 model Geography is ProxyResource<GeographyProperties> {
-  @doc("The geography name")
+  @doc("The geography short id")
   @segment("geographies")
-  @key("geographyName")
+  @key("geographyShortId")
   @visibility("read")
-  @pattern("^[a-zA-Z-]{3,24}$")
+  @pattern("^[a-zA-Z-]{2,5}$")
   @path
   name: string;
 }
@@ -28,6 +29,9 @@ model Geography is ProxyResource<GeographyProperties> {
 /** Geography details. */
 model GeographyProperties {
   ...MetadataProperties;
+
+  /** Name of geography. */
+  fullName: string;
 
   /** State of geography. */
   state: State;

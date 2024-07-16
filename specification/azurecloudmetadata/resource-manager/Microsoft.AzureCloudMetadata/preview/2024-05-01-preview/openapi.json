@@ -53,55 +53,16 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.AzureCloudMetadata/operations": {
+    "/providers/Microsoft.AzureCloudMetadata/clouds": {
       "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List the operations for the provider",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCloudMetadata/clouds": {
-      "get": {
-        "operationId": "Clouds_ListBySubscription",
+        "operationId": "Clouds_ListByTenant",
         "tags": [
           "Clouds"
         ],
-        "description": "List Cloud resources by subscription ID",
+        "description": "List Cloud resources by tenant",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -119,8 +80,8 @@
           }
         },
         "x-ms-examples": {
-          "Clouds_ListBySubscription": {
-            "$ref": "./examples/Clouds_ListBySubscription.json"
+          "Clouds_ListByTenant": {
+            "$ref": "./examples/Clouds_List.json"
           }
         },
         "x-ms-pageable": {
@@ -128,49 +89,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCloudMetadata/clouds": {
-      "get": {
-        "operationId": "Clouds_ListByResourceGroup",
-        "tags": [
-          "Clouds"
-        ],
-        "description": "List Cloud resources by resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CloudListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Clouds_ListByResourceGroup": {
-            "$ref": "./examples/Clouds_ListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}": {
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}": {
       "get": {
         "operationId": "Clouds_Get",
         "tags": [
@@ -180,12 +99,6 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "cloudName",
@@ -217,7 +130,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies": {
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies": {
       "get": {
         "operationId": "Geographies_ListByCloud",
         "tags": [
@@ -227,12 +140,6 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "cloudName",
@@ -267,7 +174,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyName}": {
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyShortId}": {
       "get": {
         "operationId": "Geographies_Get",
         "tags": [
@@ -279,12 +186,6 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "cloudName",
             "in": "path",
             "description": "The cloud name",
@@ -293,12 +194,12 @@
             "pattern": "^[a-zA-Z-]{3,24}$"
           },
           {
-            "name": "geographyName",
+            "name": "geographyShortId",
             "in": "path",
-            "description": "The geography name",
+            "description": "The geography short id",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z-]{3,24}$"
+            "pattern": "^[a-zA-Z-]{2,5}$"
           }
         ],
         "responses": {
@@ -322,7 +223,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyName}/regions": {
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyShortId}/regions": {
       "get": {
         "operationId": "Regions_ListByGeography",
         "tags": [
@@ -334,12 +235,6 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "cloudName",
             "in": "path",
             "description": "The cloud name",
@@ -348,12 +243,12 @@
             "pattern": "^[a-zA-Z-]{3,24}$"
           },
           {
-            "name": "geographyName",
+            "name": "geographyShortId",
             "in": "path",
-            "description": "The geography name",
+            "description": "The geography short id",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z-]{3,24}$"
+            "pattern": "^[a-zA-Z-]{2,5}$"
           }
         ],
         "responses": {
@@ -380,7 +275,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyName}/regions/{regionName}": {
+    "/providers/Microsoft.AzureCloudMetadata/clouds/{cloudName}/geographies/{geographyShortId}/regions/{regionName}": {
       "get": {
         "operationId": "Regions_Get",
         "tags": [
@@ -392,12 +287,6 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "cloudName",
             "in": "path",
             "description": "The cloud name",
@@ -406,12 +295,12 @@
             "pattern": "^[a-zA-Z-]{3,24}$"
           },
           {
-            "name": "geographyName",
+            "name": "geographyShortId",
             "in": "path",
-            "description": "The geography name",
+            "description": "The geography short id",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z-]{3,24}$"
+            "pattern": "^[a-zA-Z-]{2,5}$"
           },
           {
             "name": "regionName",
@@ -440,6 +329,42 @@
           "Regions_Get": {
             "$ref": "./examples/Regions_Get.json"
           }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureCloudMetadata/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -483,11 +408,7 @@
         "properties": {
           "$ref": "#/definitions/CloudProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -596,11 +517,7 @@
         "properties": {
           "$ref": "#/definitions/GeographyProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -650,6 +567,10 @@
           "minimum": 1,
           "maximum": 9999
         },
+        "fullName": {
+          "type": "string",
+          "description": "Name of geography."
+        },
         "state": {
           "$ref": "#/definitions/State",
           "description": "State of geography."
@@ -668,6 +589,7 @@
         "guid",
         "shortId",
         "index",
+        "fullName",
         "state",
         "cloudResourceId"
       ]
@@ -691,11 +613,7 @@
         "properties": {
           "$ref": "#/definitions/RegionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
