@@ -485,6 +485,13 @@ model PreBuiltTaskParameters is TaskParameters {
   modelVersion?: string = "latest";
 }
 
+alias AnalyzeTextBody = {
+  /** The input documents to analyze. */
+  @body
+  @clientName("analyzeTextInput", "csharp")
+  body: AnalyzeTextTask;
+};
+
 alias ShowStatsQueryParameter = QueryParametersTrait<{
   /** (Optional) if set to true, response will contain request and document level statistics. */
   @query
