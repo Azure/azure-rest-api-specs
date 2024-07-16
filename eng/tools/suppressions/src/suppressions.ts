@@ -1,4 +1,3 @@
-import { Stats } from "fs";
 import { access, constants, lstat, readFile } from "fs/promises";
 import { minimatch } from "minimatch";
 import { dirname, join, resolve, sep } from "path";
@@ -38,13 +37,12 @@ const suppressionSchema = z.array(
         paths: paths,
         reason: s.reason,
       } as Suppression;
-    }),
+    })
 );
 
 /**
- * Returns the suppressions for a tool applicable to a path.  Walks up the directory tree to find all files named
+ * Returns the suppressions for a tool applicable to a path.  Walks up the directory tree to the first file named
  * "suppressions.yaml", parses and validates the contents, and returns the suppressions matching the tool and path.
- * Suppressions are ordered by file (closest to path is first), then within the file (closest to top is first).
  *
  * @param tool Name of tool. Matched against property "tool" in suppressions.yaml.
  * @param path Path to file or directory under analysis.
@@ -70,21 +68,17 @@ export async function getSuppressions(tool: string, path: string): Promise<Suppr
   // If path doesn't exist, throw instead of returning "[]" to prevent confusion
   await access(path, constants.R_OK);
 
-  let suppressionsFiles: string[] = await findSuppressionsFiles(path);
-  let suppressions: Suppression[] = [];
-
-  for (let suppressionsFile of suppressionsFiles) {
-    suppressions = suppressions.concat(
-      getSuppressionsFromYaml(
-        tool,
-        path,
-        suppressionsFile,
-        await readFile(suppressionsFile, { encoding: "utf8" }),
-      ),
+  let suppressionsFile: string | undefined = await findSuppressionsYaml(path);
+  if (suppressionsFile) {
+    return getSuppressionsFromYaml(
+      tool,
+      path,
+      suppressionsFile,
+      await readFile(suppressionsFile, { encoding: "utf8" })
     );
+  } else {
+    return [];
   }
-
-  return suppressions;
 }
 
 /**
@@ -118,7 +112,7 @@ export function getSuppressionsFromYaml(
   tool: string,
   path: string,
   suppressionsFile: string,
-  suppressionsYaml: string,
+  suppressionsYaml: string
 ): Suppression[] {
   path = resolve(path);
   suppressionsFile = resolve(suppressionsFile);
@@ -150,27 +144,23 @@ export function getSuppressionsFromYaml(
 }
 
 /**
- * Returns absolute paths to all suppressions.yaml files applying to input (or "undefined" if none found).
- * Walks up directory tree, returning all files matching "suppressions.yaml", in order (may be empty);
+ * Returns absolute path to suppressions.yaml applying to input (or "undefined" if none found).
+ * Walks up directory tree until first file matching "suppressions.yaml".
  *
  * @param path Path to file under analysis.
  *
  * @example
  * ```
- * // Prints
- * //   '/home/user/specs/specification/foo/suppressions.yaml'
- * //   '/home/user/specs/specification/suppressions.yaml
+ * // Prints '/home/user/specs/specification/foo/suppressions.yaml':
  * console.log(findSuppressionsYaml(
  *   "specification/foo/data-plane/Foo/stable/2024-01-01/foo.json"
  * ));
  * ```
  */
-async function findSuppressionsFiles(path: string): Promise<string[]> {
-  const suppressionsFiles: string[] = [];
-
+async function findSuppressionsYaml(path: string): Promise<string | undefined> {
   path = resolve(path);
 
-  const stats: Stats = await lstat(path);
+  const stats = await lstat(path);
   let currentDirectory: string = stats.isDirectory() ? path : dirname(path);
 
   while (true) {
@@ -178,17 +168,15 @@ async function findSuppressionsFiles(path: string): Promise<string[]> {
     try {
       // Throws if file cannot be read
       await access(suppressionsFile, constants.R_OK);
-      suppressionsFiles.push(suppressionsFile);
-    } catch {}
-
-    const parentDirectory: string = dirname(currentDirectory);
-    if (parentDirectory !== currentDirectory) {
-      currentDirectory = parentDirectory;
-    } else {
-      // Reached fs root
-      break;
+      return suppressionsFile;
+    } catch {
+      const parentDirectory: string = dirname(currentDirectory);
+      if (parentDirectory !== currentDirectory) {
+        currentDirectory = parentDirectory;
+      } else {
+        // Reached fs root but no "suppressions.yaml" found
+        return;
+      }
     }
   }
-
-  return suppressionsFiles;
 }
