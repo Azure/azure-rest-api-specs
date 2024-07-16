@@ -184,6 +184,14 @@ model GpuDetails {
   @visibility("read")
   availableVram?: string;
 
+  @doc("VRAM (Video Random-Access Memory) is the total RAM that is plugged into your GPU and acts as temporary storage for data related to graphics rendering.")
+  @visibility("read")
+  totalVram?: string;
+
+  @doc("It is a resource pool on each server containing the clustered GPU resources.")
+  @visibility("read")
+  ddaPool?: string;
+
   @doc("IA set of valid partition counts that's predefined to configure. ")
   @visibility("read")
   validPartitionCount?: string[];
