@@ -12,7 +12,10 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Connection String"> | OAuth2Auth<[
+  SasTokenAuth<"SAS", "authorization header"> | ApiKeyAuth<
+    ApiKeyLocation.header,
+    "Connection String"
+  > | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
@@ -33,6 +36,12 @@ namespace AzureAppConfiguration;
 @doc("Service API versions")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2023-11-01 API version")
-  v2023_11_01: "2023-11-01",
+  @doc("The 2024-09-01-preview API version")
+  v2024_09_01_preview: "2024-09-01-preview",
+}
+
+model SasTokenAuth<TScheme extends string, TLocation extends string> {
+  type: AuthType.apiKey;
+  name: TScheme;
+  in: TLocation;
 }
