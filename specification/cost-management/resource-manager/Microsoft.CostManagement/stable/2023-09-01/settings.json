@@ -1,0 +1,316 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CostManagementClient",
+    "version": "2023-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.CostManagement/settings": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_List",
+        "description": "List all cost management settings in the requested scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SettingsList": {
+            "$ref": "./examples/settingsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeSettingParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SettingsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/settings/{type}": {
+      "put": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_CreateOrUpdateByScope",
+        "description": "Create or update a setting within the given scope.",
+        "x-ms-examples": {
+          "CreateOrUpdateSettingByScope": {
+            "$ref": "./examples/settings-createOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeSettingParameter"
+          },
+          {
+            "$ref": "#/parameters/settingTypeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "setting",
+            "description": "Setting to be created or updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Setting Created.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "200": {
+            "description": "Setting Updated.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_GetByScope",
+        "description": "Get the setting from the given scope by name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SettingByScope": {
+            "$ref": "./examples/setting-get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeSettingParameter"
+          },
+          {
+            "$ref": "#/parameters/settingTypeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Settings"
+        ],
+        "operationId": "Settings_DeleteByScope",
+        "description": "Delete a setting within the given scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "SettingDeleteByScope": {
+            "$ref": "./examples/setting-delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeSettingParameter"
+          },
+          {
+            "$ref": "#/parameters/settingTypeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Setting deleted successfully."
+          },
+          "204": {
+            "description": "Setting is already deleted or not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Setting": {
+      "description": "Setting definition.",
+      "discriminator": "kind",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Specifies the kind of settings.",
+          "enum": [
+            "taginheritance"
+          ],
+          "x-ms-enum": {
+            "name": "SettingsKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "TagInheritanceSetting": {
+      "description": "Tag Inheritance Setting definition.",
+      "type": "object",
+      "x-ms-discriminator-value": "taginheritance",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Setting"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TagInheritanceProperties"
+        }
+      }
+    },
+    "SettingsListResult": {
+      "description": "Setting list result. It contains a list of settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of settings.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Setting"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "TagInheritanceProperties": {
+      "type": "object",
+      "description": "The properties of the tag inheritance setting.",
+      "required": [
+        "preferContainerTags"
+      ],
+      "properties": {
+        "preferContainerTags": {
+          "description": "When resource has the same tag as subscription or resource group and this property is set to true - the subscription or resource group tag will be applied. If subscription and resource group tags are also the same, subscription tag will be applied.",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "scopeSettingParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with this setting. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billing profile scope.",
+      "x-ms-parameter-location": "method"
+    },
+    "settingTypeParameter": {
+      "name": "type",
+      "in": "path",
+      "description": "Setting type.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "taginheritance"
+      ],
+      "x-ms-enum": {
+        "name": "SettingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "taginheritance",
+            "description": "This setting applies, all the resource group and subscription tags to usage data of child resources. Inherited tags will be seen within 24 hours for the current month's usage data.",
+            "name": "taginheritance"
+          }
+        ]
+      }
+    }
+  }
+}

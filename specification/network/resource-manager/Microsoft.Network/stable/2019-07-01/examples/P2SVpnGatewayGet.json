@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "gatewayName": "p2sVpnGateway1",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-07-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "p2sVpnGateway1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/P2SvpnGateways/p2sVpnGateway1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "location": "West US",
+        "type": "Microsoft.Network/p2sVpnGateways",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1"
+          },
+          "p2SVpnServerConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWans/virtualWan1/p2sVpnServerConfigurations/p2sVpnServerConfiguration1"
+          },
+          "vpnClientAddressPool": {
+            "addressPrefixes": [
+              "101.3.0.0/16"
+            ]
+          },
+          "customRoutes": {
+            "addressPrefixes": [
+              "101.168.0.6/32"
+            ]
+          },
+          "vpnGatewayScaleUnit": 1,
+          "vpnClientConnectionHealth": {
+            "vpnClientConnectionsCount": 2,
+            "allocatedIpAddresses": [
+              "1.1.1.1",
+              "2.2.2.2"
+            ],
+            "totalIngressBytesTransferred": 2000,
+            "totalEgressBytesTransferred": 3000
+          }
+        }
+      }
+    }
+  }
+}

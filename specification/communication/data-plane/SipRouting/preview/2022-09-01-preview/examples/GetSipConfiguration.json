@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01-preview",
+    "endpoint": "https://resourcename.communication.azure.com/"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "domains": {
+          "xyz.biz": {
+            "enabled": true
+          },
+          "abc.biz": {
+            "enabled": true
+          }
+        },
+        "trunks": {
+          "vendor.xyz.biz": {
+            "sipSignalingPort": 5061,
+            "enabled": true
+          },
+          "vendor.abc.biz": {
+            "sipSignalingPort": 5061,
+            "enabled": true
+          }
+        },
+        "routes": [
+          {
+            "name": "LocalRoute",
+            "numberPattern": "^\\+1[0-9]{10}$"
+          },
+          {
+            "name": "VendorXYZ",
+            "description": "External route XYZ",
+            "numberPattern": "^\\+?\\d+$",
+            "trunks": [
+              "vendor.xyz.biz"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

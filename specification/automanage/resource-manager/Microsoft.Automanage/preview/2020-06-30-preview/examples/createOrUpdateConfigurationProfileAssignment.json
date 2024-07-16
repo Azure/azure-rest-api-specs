@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName",
+    "configurationProfileAssignmentName": "default",
+    "api-version": "2020-06-30-preview",
+    "parameters": {
+      "properties": {
+        "configurationProfile": "Azure virtual machine best practices – Production",
+        "accountId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automanage/accounts/AutomanageAccount",
+        "configurationProfilePreferenceId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfilePreferences/defaultProfilePreference"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.Automanage/AutomanageAssignments/default",
+        "name": "default",
+        "properties": {
+          "targetId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines",
+          "configurationProfile": "Azure virtual machine best practices – Production",
+          "accountId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automanage/AutomanageAccounts/AutomanageAccount",
+          "configurationProfilePreferenceId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfilePreferences/defaultProfilePreference",
+          "compliance": {
+            "updateStatus": "Created"
+          },
+          "provisioningState": "Created"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.Automanage/AutomanageAssignments/default",
+        "name": "default",
+        "properties": {
+          "targetId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines",
+          "configurationProfile": "Azure virtual machine best practices – Production",
+          "accountId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automanage/AutomanageAccounts/AutomanageAccount",
+          "configurationProfilePreferenceId": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfilePreferences/defaultProfilePreference",
+          "compliance": {
+            "updateStatus": "Succeeded"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

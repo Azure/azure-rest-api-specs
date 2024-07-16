@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "MyResourceGroup",
+    "scopeName": "MyPrivateLinkScope",
+    "api-version": "2021-07-01-preview",
+    "groupName": "azuremonitor"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.Insights/privateLinkScopes/MyPrivateLinkScope/privateLinkResources/azuremonitor",
+        "name": "azuremonitor",
+        "type": "Microsoft.Insights/privateLinkScopes/privateLinkResources",
+        "properties": {
+          "groupId": "azuremonitor",
+          "requiredMembers": [
+            "api",
+            "global.in.ai",
+            "profiler",
+            "live",
+            "snapshot",
+            "agentsolutionpackstore",
+            "dce-global"
+          ],
+          "requiredZoneNames": [
+            "privatelink.monitor.azure.com",
+            "privatelink.oms.opinsights.azure.com",
+            "privatelink.ods.opinsights.azure.com",
+            "privatelink.agentsvc.azure-automation.net",
+            "privatelink.blob.core.windows.net"
+          ]
+        }
+      }
+    }
+  }
+}

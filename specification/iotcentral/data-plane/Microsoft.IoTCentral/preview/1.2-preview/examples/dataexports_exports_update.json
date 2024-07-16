@@ -1,0 +1,42 @@
+{
+  "title": "Update a data export",
+  "description": "Update a data export with Id.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "exportId": "export1",
+    "api-version": "1.2-preview",
+    "body": {
+      "displayName": "Test Export Update",
+      "enabled": true,
+      "enrichments": {
+        "abc": {
+          "path": "$provisioned"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "export1",
+        "displayName": "Test Export Update",
+        "enabled": true,
+        "source": "telemetry",
+        "filter": "SELECT * FROM devices WHERE $displayName != \"abc\" AND $id = \"a\"",
+        "enrichments": {
+          "abc": {
+            "path": "$provisioned"
+          }
+        },
+        "destinations": [
+          {
+            "id": "fa5792a4-ead3-41dc-a972-fbeed33d46ae",
+            "transform": "{ ApplicationId: .applicationId, Component: .component, DeviceName: .device.name }"
+          }
+        ],
+        "status": "starting"
+      }
+    }
+  }
+}

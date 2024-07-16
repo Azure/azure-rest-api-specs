@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "api-version": "2021-11-01",
+    "workspacePatchResource": {
+      "tags": {
+        "tagKey": "tagValue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "workspace1",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1",
+        "type": "Microsoft.HealthcareApis/workspaces",
+        "location": "westus",
+        "tags": {
+          "tagKey": "tagValue"
+        },
+        "properties": {
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.HealthcareApis/locations/westus/operationresults/f7eb8g4f1ncj3jgk6bg8jlqf8?api-version=2021-11-01"
+      },
+      "body": {
+        "name": "workspace1",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1",
+        "type": "Microsoft.HealthcareApis/workspaces",
+        "location": "westus",
+        "tags": {
+          "tagKey": "tagValue"
+        },
+        "properties": {
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

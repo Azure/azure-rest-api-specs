@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "subId",
+    "api-version": "2019-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "sku": {
+              "name": "Basic_Exchange_Free",
+              "tier": "Basic",
+              "family": "Exchange",
+              "size": "Free"
+            },
+            "kind": "Exchange",
+            "properties": {
+              "exchange": {
+                "connections": [
+                  {
+                    "peeringDBFacilityId": 99999,
+                    "connectionState": "Active",
+                    "bgpSession": {
+                      "microsoftSessionIPv4Address": "192.168.3.1",
+                      "microsoftSessionIPv6Address": "fd00::1:1",
+                      "peerSessionIPv4Address": "192.168.2.1",
+                      "peerSessionIPv6Address": "fd00::1",
+                      "sessionStateV4": "Established",
+                      "sessionStateV6": "Established",
+                      "maxPrefixesAdvertisedV4": 1000,
+                      "maxPrefixesAdvertisedV6": 100,
+                      "md5AuthenticationKey": "test-md5-auth-key"
+                    },
+                    "connectionIdentifier": "CE495334-0E94-4E51-8164-8116D6CD284D"
+                  },
+                  {
+                    "peeringDBFacilityId": 99999,
+                    "connectionState": "Active",
+                    "bgpSession": {
+                      "microsoftSessionIPv4Address": "192.168.3.2",
+                      "microsoftSessionIPv6Address": "fd00::1:2",
+                      "peerSessionIPv4Address": "192.168.2.2",
+                      "peerSessionIPv6Address": "fd00::2",
+                      "sessionStateV4": "Established",
+                      "sessionStateV6": "Established",
+                      "maxPrefixesAdvertisedV4": 1000,
+                      "maxPrefixesAdvertisedV6": 100,
+                      "md5AuthenticationKey": "test-md5-auth-key"
+                    },
+                    "connectionIdentifier": "CDD8E673-CB07-47E6-84DE-3739F778762B"
+                  }
+                ],
+                "peerAsn": {
+                  "id": "/subscriptions/subId/providers/Microsoft.Peering/peerAsns/myAsn1"
+                }
+              },
+              "peeringLocation": "peeringLocation0",
+              "provisioningState": "Succeeded"
+            },
+            "location": "eastus",
+            "name": "MyPeering",
+            "id": "/subscriptions/subId/resourceGroups/MyResourceGroup/providers/Microsoft.Peering/peerings/MyPeering",
+            "type": "Microsoft.Peering/peerings"
+          }
+        ]
+      }
+    }
+  }
+}

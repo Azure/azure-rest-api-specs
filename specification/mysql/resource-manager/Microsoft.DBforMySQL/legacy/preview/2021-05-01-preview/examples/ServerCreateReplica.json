@@ -1,0 +1,116 @@
+{
+  "parameters": {
+    "serverName": "replica-server",
+    "resourceGroupName": "testgr",
+    "api-version": "2021-05-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "SoutheastAsia",
+      "properties": {
+        "createMode": "Replica",
+        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/source-server"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storage": {
+            "storageSizeGB": 20,
+            "iops": 360,
+            "autoGrow": "Enabled",
+            "storageSku": "Premium_LRS"
+          },
+          "version": "5.7",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "replica-server.database.mysql.azure.com",
+          "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/source-server",
+          "availabilityZone": "3",
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "Replica",
+          "replicaCapacity": 0,
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2021-06-24T08:19:18.5729164+00:00"
+          },
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          }
+        },
+        "location": "Southeast Asia",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/replica-server",
+        "name": "replica-server",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    },
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storage": {
+            "storageSizeGB": 20,
+            "iops": 360,
+            "autoGrow": "Enabled",
+            "storageSku": "Premium_LRS"
+          },
+          "version": "5.7",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "replica-server.database.mysql.azure.com",
+          "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/source-server",
+          "availabilityZone": "3",
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "replicationRole": "Replica",
+          "replicaCapacity": 0,
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Disabled",
+            "earliestRestoreDate": "2021-06-24T08:19:18.5729164+00:00"
+          },
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          }
+        },
+        "location": "Southeast Asia",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/replica-server",
+        "name": "replica-server",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    },
+    "202": {}
+  }
+}

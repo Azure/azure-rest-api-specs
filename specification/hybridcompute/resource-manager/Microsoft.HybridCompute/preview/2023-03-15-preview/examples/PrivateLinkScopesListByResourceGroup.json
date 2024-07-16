@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2023-03-15-preview",
+    "subscriptionId": "86dc51d3-92ed-4d7e-947a-775ea79b4919",
+    "resourceGroupName": "my-resource-group"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/86dc51d3-92ed-4d7e-947a-775ea79b4919/resourceGroups/my-resource-group/providers/microsoft.hybridcompute/privateLinkScopes/my-privatelinkscope",
+            "name": "my-privatelinkscope",
+            "type": "Microsoft.HybridCompute/privateLinkScopes",
+            "location": "westus",
+            "tags": {},
+            "properties": {
+              "privateLinkScopeId": "f5dc51d3-92ed-4d7e-947a-775ea79b4919",
+              "provisioningState": "Succeeded",
+              "publicNetworkAccess": "Disabled",
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/myPrivateLinkScope/privateEndpointConnections/private-endpoint-connection-name",
+                  "name": "private-endpoint-connection-name",
+                  "type": "Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnections",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "Auto-approved",
+                      "actionsRequired": "None"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/86dc51d3-92ed-4d7e-947a-775ea79b4919/resourceGroups/my-resource-group/providers/microsoft.hybridcompute/privateLinkScopes/my-other-privatelinkscope",
+            "name": "my-other-privatelinkscope",
+            "type": "Microsoft.HybridCompute/privateLinkScopes",
+            "location": "westus",
+            "tags": {},
+            "properties": {
+              "privateLinkScopeId": "a5dc51d3-92ed-4d7e-947a-775ea79b4919",
+              "provisioningState": "Succeeded",
+              "publicNetworkAccess": "Disabled",
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/myPrivateLinkScope/privateEndpointConnections/private-endpoint-connection-name",
+                  "name": "private-endpoint-connection-name",
+                  "type": "Microsoft.HybridCompute/privateLinkScopes/privateEndpointConnections",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "Auto-approved",
+                      "actionsRequired": "None"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

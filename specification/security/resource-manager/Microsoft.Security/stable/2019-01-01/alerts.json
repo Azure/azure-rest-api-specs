@@ -39,6 +39,9 @@
         "x-ms-examples": {
           "Get security alerts on a subscription": {
             "$ref": "./examples/Alerts/GetAlertsSubscription_example.json"
+          },
+          "Get security alerts, that were affected by auto dismiss rule, on a subscription": {
+            "$ref": "./examples/Alerts/GetAlertsSubscriptionWithAutoDismissRule_example.json"
           }
         },
         "tags": [
@@ -61,6 +64,9 @@
           },
           {
             "$ref": "#/parameters/ODataExpand"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissRuleName"
           }
         ],
         "responses": {
@@ -87,6 +93,9 @@
         "x-ms-examples": {
           "Get security alerts on a resource group": {
             "$ref": "./examples/Alerts/GetAlertsResourceGroup_example.json"
+          },
+          "Get security alerts, that should be dismissed by auto dismiss rule, on a resource group": {
+            "$ref": "./examples/Alerts/GetAlertsResourceGroupWithAutoDismissRule_example.json"
           }
         },
         "tags": [
@@ -112,6 +121,9 @@
           },
           {
             "$ref": "#/parameters/ODataExpand"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissRuleName"
           }
         ],
         "responses": {
@@ -138,6 +150,9 @@
         "x-ms-examples": {
           "Get security alerts on a subscription from a security data location": {
             "$ref": "./examples/Alerts/GetAlertsSubscriptionsLocation_example.json"
+          },
+          "Get security alerts, that should be dismissed by auto dismiss rule, on a subscription from a security data location": {
+            "$ref": "./examples/Alerts/GetAlertsSubscriptionsLocationWithAutoDismissRule_example.json"
           }
         },
         "tags": [
@@ -163,6 +178,9 @@
           },
           {
             "$ref": "#/parameters/ODataExpand"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissRuleName"
           }
         ],
         "responses": {
@@ -189,6 +207,9 @@
         "x-ms-examples": {
           "Get security alerts on a resource group from a security data location": {
             "$ref": "./examples/Alerts/GetAlertsResourceGroupLocation_example.json"
+          },
+          "Get security alerts, that should be dismissed by auto dismiss rule, on a resource group from a security data location": {
+            "$ref": "./examples/Alerts/GetAlertsResourceGroupLocationWithAutoDismissRule_example.json"
           }
         },
         "tags": [
@@ -217,6 +238,9 @@
           },
           {
             "$ref": "#/parameters/ODataExpand"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissRuleName"
           }
         ],
         "responses": {
@@ -325,7 +349,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/{alertUpdateActionType}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/dismiss": {
       "post": {
         "x-ms-examples": {
           "Update security alert state on a subscription from a security data location": {
@@ -336,7 +360,7 @@
           "Alerts"
         ],
         "description": "Update the alert's state",
-        "operationId": "Alerts_UpdateSubscriptionLevelAlertState",
+        "operationId": "Alerts_UpdateSubscriptionLevelAlertStateToDismiss",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -349,9 +373,6 @@
           },
           {
             "$ref": "#/parameters/AlertName"
-          },
-          {
-            "$ref": "#/parameters/AlertUpdateActionType"
           }
         ],
         "responses": {
@@ -367,7 +388,46 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/{alertUpdateActionType}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/reactivate": {
+      "post": {
+        "x-ms-examples": {
+          "Update security alert state on a subscription from a security data location": {
+            "$ref": "./examples/Alerts/UpdateAlertSubscriptionLocation_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Update the alert's state",
+        "operationId": "Alerts_UpdateSubscriptionLevelAlertStateToReactivate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/dismiss": {
       "post": {
         "x-ms-examples": {
           "Update security alert state on a resource group from a security data location": {
@@ -378,7 +438,7 @@
           "Alerts"
         ],
         "description": "Update the alert's state",
-        "operationId": "Alerts_UpdateResourceGroupLevelAlertState",
+        "operationId": "Alerts_UpdateResourceGroupLevelAlertStateToDismiss",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -393,7 +453,46 @@
             "$ref": "#/parameters/AlertName"
           },
           {
-            "$ref": "#/parameters/AlertUpdateActionType"
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/alerts/{alertName}/reactivate": {
+      "post": {
+        "x-ms-examples": {
+          "Update security alert state on a resource group from a security data location": {
+            "$ref": "./examples/Alerts/UpdateAlertResourceGroupLocation_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Update the alert's state",
+        "operationId": "Alerts_UpdateResourceGroupLevelAlertStateToReactivate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertName"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
@@ -665,16 +764,11 @@
       "description": "Name of the alert object",
       "x-ms-parameter-location": "method"
     },
-    "AlertUpdateActionType": {
-      "name": "alertUpdateActionType",
-      "in": "path",
-      "required": true,
+    "AutoDismissRuleName": {
+      "name": "autoDismissRuleName",
+      "in": "query",
       "type": "string",
-      "enum": [
-        "Dismiss",
-        "Reactivate"
-      ],
-      "description": "Type of the action to do on the alert",
+      "description": "The name of an existing auto dismiss rule. Use it to simulate the rule on existing alerts and get the alerts that would have been dismissed if the rule was enabled when the alert was created",
       "x-ms-parameter-location": "method"
     }
   }

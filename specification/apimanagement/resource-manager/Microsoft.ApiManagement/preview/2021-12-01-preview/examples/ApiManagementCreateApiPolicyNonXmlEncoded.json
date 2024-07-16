@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2021-12-01-preview",
+    "subscriptionId": "subid",
+    "apiId": "5600b57e7e8880006a040001",
+    "policyId": "policy",
+    "If-Match": "*",
+    "parameters": {
+      "properties": {
+        "value": "<policies>\r\n     <inbound>\r\n     <base />\r\n  <set-header name=\"newvalue\" exists-action=\"override\">\r\n   <value>\"@(context.Request.Headers.FirstOrDefault(h => h.Ke==\"Via\"))\" </value>\r\n    </set-header>\r\n  </inbound>\r\n      </policies>",
+        "format": "rawxml"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/4c1a3bc6-89f9-46fe-a175-5d8984b25095/resourcegroups/Api-DF-West-US/providers/Microsoft.ApiManagement/service/samirmsiservice2/apis/echo-api/operations/create-resource/policies/policy",
+        "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+        "name": "policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <set-header name=\"newvalue\" exists-action=\"override\">\r\n      <value>\"@(context.Request.Headers.FirstOrDefault(h =&gt; h.Ke==\"Via\"))\" </value>\r\n    </set-header>\r\n  </inbound>\r\n</policies>"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/4c1a3bc6-89f9-46fe-a175-5d8984b25095/resourcegroups/Api-DF-West-US/providers/Microsoft.ApiManagement/service/samirmsiservice2/apis/echo-api/operations/create-resource/policies/policy",
+        "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+        "name": "policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <set-header name=\"newvalue\" exists-action=\"override\">\r\n      <value>\"@(context.Request.Headers.FirstOrDefault(h =&gt; h.Ke==\"Via\"))\" </value>\r\n    </set-header>\r\n  </inbound>\r\n</policies>"
+        }
+      }
+    }
+  }
+}

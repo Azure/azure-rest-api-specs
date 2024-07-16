@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2021-07-15-preview",
+    "projectName": "proj1"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": 1,
+            "answer": "ans1",
+            "source": "source1",
+            "questions": [
+              "question 1.1",
+              "question 1.2"
+            ],
+            "metadata": {
+              "k1": "v1",
+              "k2": "v2"
+            },
+            "dialog": {
+              "isContextOnly": false,
+              "prompts": [
+                {
+                  "displayOrder": 1,
+                  "qnaId": 11,
+                  "displayText": "prompt 1.1"
+                },
+                {
+                  "displayOrder": 2,
+                  "qnaId": 21,
+                  "displayText": "prompt 1.2"
+                }
+              ]
+            },
+            "lastUpdatedDateTime": "2021-05-01T17:21:14Z"
+          },
+          {
+            "id": 2,
+            "answer": "ans2",
+            "source": "source2",
+            "questions": [
+              "question 2.1",
+              "question 2.2"
+            ],
+            "lastUpdatedDateTime": "2021-05-01T17:21:14Z"
+          }
+        ]
+      }
+    }
+  }
+}

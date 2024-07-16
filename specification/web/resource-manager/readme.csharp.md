@@ -31,6 +31,8 @@ batch:
 #For WebSite 2016-08-01, you use the below tag
   - tag: package-2016-09
     ApiVersionName: Api2016_08_01
+  - tag: package-2019-08
+    ApiVersionName: Api2019_08_01
 ```
 
 ### Profile: hybrid_2018_03_01
@@ -53,4 +55,15 @@ namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).WebSites
 output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Websites/Management.Websites/Generated
 batch:
   - tag: profile-hybrid-2019-03-01
+```
+
+### Profile: hybrid_2020_09_01
+
+These settings apply only when `--csharp-profile=hybrid_2020_09_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).WebSites
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Websites/Management.Websites/Generated
+batch:
+  - tag: profile-hybrid-2020-09-01
 ```

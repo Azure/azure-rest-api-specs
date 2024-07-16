@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "moveCollectionName": "movecollection1",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "moveResourceName": "moveresourcename1",
+    "api-version": "2019-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "moveresourcename1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource1",
+            "type": "Microsoft.Migrate/MoveCollections/MoveResources",
+            "properties": {
+              "sourceId": "/subscriptions/subid/resourceGroups/eastus/providers/Microsoft.Compute/virtualMachines/eastusvm1",
+              "dependsOn": [
+                {
+                  "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastus/providers/Microsoft.Network/networkInterfaces/eastusvm140",
+                  "resolutionType": "Automatic",
+                  "resolutionStatus": "Resolved",
+                  "automaticResolution": {
+                    "moveResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource2"
+                  }
+                },
+                {
+                  "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/EASTUS/providers/Microsoft.Compute/disks/eastusvm1_OsDisk_1_a88a2f0e8cf44fb3af24aa0f27101f83",
+                  "resolutionType": "Automatic",
+                  "resolutionStatus": "Resolved",
+                  "automaticResolution": {
+                    "moveResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource3"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "moveresourcename2",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource2",
+            "type": "Microsoft.Migrate/MoveCollections/MoveResources",
+            "properties": {
+              "sourceId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastus/providers/Microsoft.Network/networkInterfaces/eastusvm140",
+              "dependsOn": [
+                {
+                  "id": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/eastus/providers/Microsoft.Network/virtualNetworks/eastus-vnet",
+                  "resolutionType": "Manual",
+                  "resolutionStatus": "Resolved",
+                  "manualResolution": {
+                    "targetId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/westus/providers/Microsoft.Network/virtualNetworks/westus-vnet"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "moveresourcename3",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Migrate/MoveCollections/movecollection1/MoveResources/moveresource3",
+            "type": "Microsoft.Migrate/MoveCollections/MoveResources",
+            "properties": {
+              "sourceId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/EASTUS/providers/Microsoft.Compute/disks/eastusvm1_OsDisk_1_a88a2f0e8cf44fb3af24aa0f27101f83"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

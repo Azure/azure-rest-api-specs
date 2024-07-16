@@ -1,0 +1,113 @@
+{
+  "parameters": {
+    "resourceGroupName": "testrg",
+    "api-version": "2020-02-14-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff//resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers?api-version=2020-02-14-privatepreview&$top=3&$skiptoken=skiptoken",
+        "value": [
+          {
+            "sku": {
+              "tier": "GeneralPurpose",
+              "name": "Standard_D4s_v3"
+            },
+            "properties": {
+              "administratorLogin": "testuser",
+              "version": "12",
+              "state": "Ready",
+              "haState": "NotEnabled",
+              "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+              "displayName": "demosingleserver",
+              "publicNetworkAccess": "Enabled",
+              "storageProfile": {
+                "storageMB": 524288,
+                "backupRetentionDays": 7
+              },
+              "haEnabled": "Enabled",
+              "availabilityZone": "1",
+              "standbyAvailabilityZone": "2",
+              "maintenanceWindow": {
+                "dayOfWeek": 0,
+                "startHour": 10,
+                "startMinute": 30,
+                "customWindow": "Enabled"
+              }
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/pgtestsvc1",
+            "name": "pgtestsvc1",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+          },
+          {
+            "sku": {
+              "tier": "GeneralPurpose",
+              "name": "Standard_D4s_v3"
+            },
+            "properties": {
+              "administratorLogin": "testuser",
+              "version": "12",
+              "state": "Ready",
+              "haState": "Healthy",
+              "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+              "displayName": "demosingleserver",
+              "publicNetworkAccess": "Enabled",
+              "storageProfile": {
+                "storageMB": 524288,
+                "backupRetentionDays": 7
+              },
+              "haEnabled": "Disabled",
+              "availabilityZone": "2",
+              "maintenanceWindow": {
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0,
+                "customWindow": "Disabled"
+              }
+            },
+            "location": "westus",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc2",
+            "name": "pgtestsvc2",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+          },
+          {
+            "sku": {
+              "tier": "GeneralPurpose",
+              "name": "Standard_D4s_v3"
+            },
+            "properties": {
+              "administratorLogin": "testuser",
+              "version": "12",
+              "state": "Ready",
+              "haState": "Healthy",
+              "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+              "displayName": "demosingleserver",
+              "publicNetworkAccess": "Enabled",
+              "storageProfile": {
+                "storageMB": 524288,
+                "backupRetentionDays": 7
+              },
+              "haEnabled": "Disabled",
+              "availabilityZone": "3",
+              "maintenanceWindow": {
+                "dayOfWeek": 0,
+                "startHour": 10,
+                "startMinute": 30,
+                "customWindow": "Enabled"
+              }
+            },
+            "location": "westus",
+            "tags": {
+              "ElasticServer": "1"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
+            "name": "pgtestsvc4",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+          }
+        ]
+      }
+    }
+  }
+}

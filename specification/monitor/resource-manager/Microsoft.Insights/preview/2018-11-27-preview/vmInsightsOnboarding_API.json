@@ -63,7 +63,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "resourceUri",
@@ -236,6 +236,9 @@
               "items": {
                 "$ref": "#/definitions/DataContainer"
               },
+              "x-ms-identifiers": [
+                "/workspace/id"
+              ],
               "description": "Containers that currently store VM Insights data for the specified resource."
             }
           },
@@ -246,15 +249,6 @@
           ]
         }
       }
-    }
-  },
-  "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "API version."
     }
   }
 }

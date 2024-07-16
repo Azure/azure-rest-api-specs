@@ -321,7 +321,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -367,7 +367,7 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_ListKeys",
-        "description": "Lists the access keys for the specified storage account.",
+        "description": "Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.",
         "x-ms-examples": {
           "StorageAccountListKeys": {
             "$ref": "./examples/StorageAccountListKeys.json"
@@ -385,6 +385,19 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "kerb"
+            ],
+            "x-ms-enum": {
+              "name": "ListKeyExpand"
+            },
+            "description": "Specifies type of the key to be listed. Possible value is kerb."
           }
         ],
         "responses": {
@@ -403,10 +416,13 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_RegenerateKey",
-        "description": "Regenerates one of the access keys for the specified storage account.",
+        "description": "Regenerates one of the access keys or Kerberos keys for the specified storage account.",
         "x-ms-examples": {
           "StorageAccountRegenerateKey": {
             "$ref": "./examples/StorageAccountRegenerateKey.json"
+          },
+          "StorageAccountRegenerateKerbKey": {
+            "$ref": "./examples/StorageAccountRegenerateKerbKey.json"
           }
         },
         "parameters": [
@@ -423,7 +439,7 @@
             "schema": {
               "$ref": "#/definitions/StorageAccountRegenerateKeyParameters"
             },
-            "description": "Specifies name of the key which should be regenerated -- key1 or key2."
+            "description": "Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -689,7 +705,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Get managementpolicy successfully.",
+            "description": "OK -- Put managementpolicy successfully.",
             "schema": {
               "$ref": "#/definitions/ManagementPolicy"
             }
@@ -1328,18 +1344,60 @@
           "description": "Indicates the directory service used.",
           "enum": [
             "None",
-            "AADDS"
+            "AADDS",
+            "AD"
           ],
           "x-ms-enum": {
             "name": "DirectoryServiceOptions",
             "modelAsString": true
           }
+        },
+        "activeDirectoryProperties": {
+          "$ref": "#/definitions/ActiveDirectoryProperties",
+          "description": "Required if choose AD."
         }
       },
       "required": [
         "directoryServiceOptions"
       ],
       "description": "Settings for Azure Files identity based authentication."
+    },
+    "ActiveDirectoryProperties": {
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "Specifies the primary domain that the AD DNS server is authoritative for."
+        },
+        "netBiosDomainName": {
+          "type": "string",
+          "description": "Specifies the NetBIOS domain name."
+        },
+        "forestName": {
+          "type": "string",
+          "description": "Specifies the Active Directory forest to get."
+        },
+        "domainGuid": {
+          "type": "string",
+          "description": "Specifies the domain GUID."
+        },
+        "domainSid": {
+          "type": "string",
+          "description": "Specifies the security identifier (SID)."
+        },
+        "azureStorageSid": {
+          "type": "string",
+          "description": "Specifies the security identifier (SID) for Azure Storage."
+        }
+      },
+      "required": [
+        "domainName",
+        "netBiosDomainName",
+        "forestName",
+        "domainGuid",
+        "domainSid",
+        "azureStorageSid"
+      ],
+      "description": "Settings properties for Active Directory (AD)."
     },
     "StorageAccountPropertiesCreateParameters": {
       "properties": {
@@ -1381,6 +1439,40 @@
           "type": "boolean",
           "x-ms-client-name": "IsHnsEnabled",
           "description": "Account HierarchicalNamespace enabled if sets to true."
+        },
+        "largeFileSharesState": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "LargeFileSharesState",
+            "modelAsString": true
+          },
+          "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
+        },
+        "allowSharedKeyAccess": {
+          "type": "boolean",
+          "description": "Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1656,6 +1748,40 @@
           "x-ms-client-name": "FailoverInProgress",
           "description": "If the failover is in progress, the value will be true, otherwise, it will be null.",
           "readOnly": true
+        },
+        "largeFileSharesState": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "LargeFileSharesState",
+            "modelAsString": true
+          },
+          "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
+        },
+        "allowSharedKeyAccess": {
+          "type": "boolean",
+          "description": "Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true."
         }
       },
       "description": "Properties of the storage account."
@@ -1737,6 +1863,11 @@
             "$ref": "#/definitions/StorageAccount"
           },
           "description": "Gets the list of storage accounts and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.",
+          "readOnly": true
         }
       },
       "description": "The response from the List Storage Accounts operation."
@@ -1758,7 +1889,7 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "The name of storage keys that want to be regenerated, possible values are key1, key2."
+          "description": "The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2."
         }
       },
       "required": [
@@ -1801,6 +1932,40 @@
           "description": "Network rule set",
           "x-ms-client-name": "NetworkRuleSet",
           "$ref": "#/definitions/NetworkRuleSet"
+        },
+        "largeFileSharesState": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "LargeFileSharesState",
+            "modelAsString": true
+          },
+          "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
+        },
+        "allowBlobPublicAccess": {
+          "type": "boolean",
+          "x-ms-client-name": "AllowBlobPublicAccess",
+          "description": "Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property."
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property."
+        },
+        "allowSharedKeyAccess": {
+          "type": "boolean",
+          "description": "Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true."
         }
       },
       "description": "The parameters used when updating a storage account."
@@ -2220,7 +2385,7 @@
             "Lifecycle"
           ],
           "x-ms-enum": {
-            "name": "type",
+            "name": "RuleType",
             "modelAsString": true
           }
         },

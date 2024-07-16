@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2020-03-30",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgname",
+    "resourceName": "service1",
+    "groupName": "fhir"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/service1/privateLinkResources/fhir",
+        "name": "fhir",
+        "type": "Microsoft.HealthcareApis/services/privateLinkResources",
+        "properties": {
+          "groupId": "fhir",
+          "requiredMembers": [
+            "fhir"
+          ],
+          "requiredZoneNames": [
+            "privatelink.azurehealthcareapis.com"
+          ]
+        }
+      }
+    }
+  }
+}

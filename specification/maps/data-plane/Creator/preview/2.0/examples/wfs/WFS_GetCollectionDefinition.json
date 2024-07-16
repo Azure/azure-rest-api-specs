@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "geography": "us",
+    "api-version": "2.0",
+    "datasetId": "218fda98-e638-0edf-5ef7-28491ff3bed4",
+    "collectionId": "unit"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "idPrefix": "UNIT",
+        "name": "unit",
+        "description": "A physical and non-overlapping area which might be occupied and traversed by a navigating agent. Can be a hallway, a room, a courtyard, etc. It is surrounded by physical obstruction (wall), unless the isOpenArea attribute is equal to true, and one must add openings where the obstruction shouldn't be there. If isOpenArea attribute is equal to true, all the sides are assumed open to the surroundings and walls are to be added where needed. Walls for open areas are represented as a lineElement or areaElement with isObstruction equal to true.",
+        "ontology": "Facility-2.0",
+        "geometryType": "Polygon",
+        "featureTypes": [],
+        "properties": [
+          {
+            "name": "externalId",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "originalId",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "categoryId",
+            "required": true,
+            "type": {
+              "featureId": "category"
+            }
+          },
+          {
+            "name": "isOpenArea",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "navigableBy",
+            "required": false,
+            "type": {
+              "array": {
+                "enum": [
+                  "pedestrian",
+                  "wheelchair",
+                  "machine",
+                  "bicycle",
+                  "automobile",
+                  "hiredAuto",
+                  "bus",
+                  "railcar",
+                  "emergency",
+                  "ferry",
+                  "boat"
+                ]
+              }
+            }
+          },
+          {
+            "name": "isRoutable",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "routeThroughBehavior",
+            "required": false,
+            "type": {
+              "enum": [
+                "disallowed",
+                "allowed",
+                "preferred"
+              ]
+            }
+          },
+          {
+            "name": "nonPublic",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "levelId",
+            "required": true,
+            "type": {
+              "featureId": "level"
+            }
+          },
+          {
+            "name": "occupants",
+            "required": false,
+            "type": {
+              "array": {
+                "featureId": "directoryInfo"
+              }
+            }
+          },
+          {
+            "name": "addressId",
+            "required": false,
+            "type": {
+              "featureId": "directoryInfo"
+            }
+          },
+          {
+            "name": "addressRoomNumber",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "name",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "nameSubtitle",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "nameAlt",
+            "required": false,
+            "type": "text"
+          },
+          {
+            "name": "anchorPoint",
+            "required": false,
+            "type": {
+              "geometry": [
+                "Point"
+              ],
+              "isFragmented": false,
+              "srid": 4326
+            }
+          }
+        ],
+        "links": [
+          {
+            "href": "https://us.atlas.microsoft.com/wfs/dataset/218fda98-e638-0edf-5ef7-28491ff3bed4/collections/unit/definition?api-version=2.0",
+            "rel": "self",
+            "title": "Metadata catalogue for unit"
+          },
+          {
+            "href": "https://us.atlas.microsoft.com/wfs/dataset/218fda98-e638-0edf-5ef7-28491ff3bed4/collections/unit/items?api-version=2.0",
+            "rel": "data",
+            "title": "unit"
+          }
+        ]
+      }
+    }
+  }
+}

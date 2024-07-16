@@ -25,3 +25,9 @@ namespace: "Azure::CognitiveServices::Face::V1_0"
 output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_face/lib
 title: "FaceClient"
 ```
+
+``` yaml $(tag) == 'release_1_0_preview' && $(ruby)
+namespace: "Azure::CognitiveServices::Face::V1_0_preview"
+output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_face/lib
+title: "FaceClient"
+```

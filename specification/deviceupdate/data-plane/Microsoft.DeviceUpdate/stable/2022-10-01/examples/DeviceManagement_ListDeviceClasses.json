@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "api-version": "2022-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "deviceClassId": "deviceClassId",
+            "friendlyName": "DeviceClass2020-04-22T12:12:12.0000000+00:00",
+            "deviceClassProperties": {
+              "contractModel": {
+                "id": "dtmi:azure:iot:deviceUpdateContractModel;2",
+                "name": "Device Update Model V2"
+              },
+              "compatProperties": {
+                "manufacturer": "manufacturer1",
+                "model": "model1"
+              }
+            },
+            "bestCompatibleUpdate": {
+              "updateId": {
+                "provider": "provider",
+                "name": "name",
+                "version": "1.0.0.0"
+              },
+              "friendlyName": "July 2022 Update"
+            }
+          },
+          {
+            "deviceClassId": "deviceClassId2",
+            "friendlyName": "DeviceClass2020-04-23T12:12:12.0000000+00:00",
+            "deviceClassProperties": {
+              "contractModel": {
+                "id": "dtmi:azure:iot:deviceUpdateContractModel;2",
+                "name": "Device Update Model V2"
+              },
+              "compatProperties": {
+                "osArch": "osArch2"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

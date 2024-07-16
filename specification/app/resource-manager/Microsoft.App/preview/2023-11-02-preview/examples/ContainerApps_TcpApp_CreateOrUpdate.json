@@ -1,0 +1,201 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "containerAppName": "testcontainerAppTcp",
+    "api-version": "2023-11-02-preview",
+    "containerAppEnvelope": {
+      "location": "East US",
+      "properties": {
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+        "configuration": {
+          "ingress": {
+            "external": true,
+            "targetPort": 3000,
+            "exposedPort": 4000,
+            "transport": "tcp",
+            "traffic": [
+              {
+                "weight": 100,
+                "revisionName": "testcontainerAppTcp-ab1234"
+              }
+            ]
+          }
+        },
+        "template": {
+          "containers": [
+            {
+              "image": "repo/testcontainerAppTcp:v1",
+              "name": "testcontainerAppTcp",
+              "probes": [
+                {
+                  "type": "Liveness",
+                  "tcpSocket": {
+                    "port": 8080
+                  },
+                  "initialDelaySeconds": 3,
+                  "periodSeconds": 3
+                }
+              ]
+            }
+          ],
+          "scale": {
+            "minReplicas": 1,
+            "maxReplicas": 5,
+            "rules": [
+              {
+                "name": "tcpscalingrule",
+                "tcp": {
+                  "metadata": {
+                    "concurrentConnections": "50"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppTcp",
+        "name": "testcontainerAppTcp",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "latestRevisionFqdn": "testcontainerAppTcp-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestReadyRevisionName": "testcontainerAppTcp-pjxhsye",
+          "configuration": {
+            "ingress": {
+              "fqdn": "testcontainerAppTcp.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "external": true,
+              "targetPort": 3000,
+              "exposedPort": 4000,
+              "transport": "tcp",
+              "traffic": [
+                {
+                  "weight": 80,
+                  "revisionName": "testcontainerAppTcp-ab1234"
+                },
+                {
+                  "weight": 20,
+                  "revisionName": "testcontainerAppTcp-ab4321"
+                }
+              ]
+            }
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerAppTcp:v4",
+                "name": "testcontainerAppTcp",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "probes": [
+                  {
+                    "type": "Liveness",
+                    "tcpSocket": {
+                      "port": 8080
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ]
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "rules": [
+                {
+                  "name": "tcpscalingrule",
+                  "tcp": {
+                    "metadata": {
+                      "concurrentConnections": "50"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppTcp",
+        "name": "testcontainerAppTcp",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "InProgress",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "latestRevisionFqdn": "testcontainerAppTcp-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "configuration": {
+            "ingress": {
+              "fqdn": "testcontainerAppTcp.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "external": true,
+              "targetPort": 3000,
+              "exposedPort": 4000,
+              "transport": "tcp",
+              "traffic": [
+                {
+                  "weight": 80,
+                  "revisionName": "testcontainerAppTcp-ab1234"
+                },
+                {
+                  "weight": 20,
+                  "revisionName": "testcontainerAppTcp-ab4321"
+                }
+              ]
+            }
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerAppTcp:v4",
+                "name": "testcontainerAppTcp",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "probes": [
+                  {
+                    "type": "Liveness",
+                    "tcpSocket": {
+                      "port": 8080
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ]
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "rules": [
+                {
+                  "name": "tcpscalingrule",
+                  "tcp": {
+                    "metadata": {
+                      "concurrentConnections": "50"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

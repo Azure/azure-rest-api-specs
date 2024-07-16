@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoresources",
+    "accountName": "contosomedia",
+    "transformName": "exampleTransform",
+    "jobName": "job1",
+    "parameters": {
+      "properties": {
+        "input": {
+          "@odata.type": "#Microsoft.Media.JobInputAsset",
+          "assetName": "job1-InputAsset"
+        },
+        "outputs": [
+          {
+            "@odata.type": "#Microsoft.Media.JobOutputAsset",
+            "assetName": "job1-OutputAsset"
+          }
+        ],
+        "correlationData": {
+          "key1": "value1",
+          "Key 2": "Value 2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "job1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job1",
+        "type": "Microsoft.Media/mediaservices/transforms/jobs",
+        "properties": {
+          "created": "2021-07-12T10:44:30.6393998Z",
+          "state": "Queued",
+          "input": {
+            "@odata.type": "#Microsoft.Media.JobInputAsset",
+            "files": [],
+            "inputDefinitions": [],
+            "assetName": "job1-InputAsset"
+          },
+          "lastModified": "2021-07-12T10:44:30.6393998Z",
+          "outputs": [
+            {
+              "@odata.type": "#Microsoft.Media.JobOutputAsset",
+              "state": "Queued",
+              "progress": 0,
+              "label": "BuiltInStandardEncoderPreset_0",
+              "assetName": "job1-OutputAsset"
+            }
+          ],
+          "priority": "Normal",
+          "correlationData": {
+            "key1": "value1",
+            "Key 2": "Value 2"
+          }
+        },
+        "systemData": {
+          "createdBy": "contoso@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2021-07-12T10:44:30.6393998Z",
+          "lastModifiedBy": "contoso@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-07-12T10:44:30.6393998Z"
+        }
+      }
+    }
+  }
+}

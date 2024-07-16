@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2",
+    "resourceGroupName": "myResourceGroup",
+    "azureMonitorWorkspaceName": "myAzureMonitorWorkspace",
+    "api-version": "2021-06-03-preview",
+    "azureMonitorWorkspaceProperties": {
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
+        "name": "myAzureMonitorWorkspace",
+        "type": "Microsoft.Monitor/accounts",
+        "location": "eastus",
+        "tags": {
+          "tag1": "A",
+          "tag2": "B"
+        },
+        "properties": {
+          "accountId": "2df515bf-c3ce-4920-84d4-1d9d16542d9f",
+          "metrics": {
+            "prometheusQueryEndpoint": "https://myAzureMonitorWorkspace-v8hx.eastus.prometheus.monitor.azure.com",
+            "internalId": "mac_2df515bf-c3ce-4920-84d4-1d9d16542d9f"
+          },
+          "provisioningState": "Succeeded",
+          "defaultIngestionSettings": {
+            "dataCollectionRuleResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/MA_myAzureMonitorWorkspace_eastus_managed/providers/Microsoft.Insights/dataCollectionRules/myAzureMonitorWorkspace",
+            "dataCollectionEndpointResourceId": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/MA_myAzureMonitorWorkspace_eastus_managed/providers/Microsoft.Insights/dataCollectionEndpoints/myAzureMonitorWorkspace"
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-04-01T12:34:56.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-04-02T12:34:56.1234567Z"
+        },
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
+        "name": "myAzureMonitorWorkspace",
+        "type": "Microsoft.Monitor/accounts",
+        "location": "eastus",
+        "tags": {
+          "tag1": "A",
+          "tag2": "B"
+        },
+        "properties": {},
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-04-01T12:34:56.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-04-02T12:34:56.1234567Z"
+        },
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000"
+      }
+    }
+  }
+}

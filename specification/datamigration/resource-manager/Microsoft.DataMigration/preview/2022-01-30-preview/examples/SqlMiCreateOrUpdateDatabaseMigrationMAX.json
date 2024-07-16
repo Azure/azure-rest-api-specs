@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "managedInstanceName": "managedInstance1",
+    "targetDbName": "db1",
+    "api-version": "2022-01-30-preview",
+    "parameters": {
+      "properties": {
+        "kind": "SqlMi",
+        "sourceDatabaseName": "aaa",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/instance",
+        "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+        "offlineConfiguration": {
+          "offline": true,
+          "lastBackupName": "last_backup_file_name"
+        },
+        "backupConfiguration": {
+          "targetLocation": {
+            "storageAccountResourceId": "account.database.windows.net",
+            "accountKey": "abcd"
+          },
+          "sourceLocation": {
+            "fileShare": {
+              "path": "C:\\aaa\\bbb\\ccc",
+              "username": "name",
+              "password": "placeholder"
+            }
+          }
+        },
+        "sourceSqlConnection": {
+          "dataSource": "aaa",
+          "userName": "bbb",
+          "password": "placeholder",
+          "encryptConnection": true,
+          "trustServerCertificate": true,
+          "authentication": "WindowsAuthentication"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "kind": "SqlMi",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/instance",
+          "migrationStatus": "InProgress",
+          "migrationStatusDetails": {
+            "migrationState": "WaitForFullBackupUploadOperation",
+            "activeBackupSets": [],
+            "isFullBackupRestored": false
+          },
+          "startedOn": "0001-01-01T08:00:00Z",
+          "endedOn": "0001-01-01T08:00:00Z",
+          "sourceDatabaseName": "sourcename",
+          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+        "name": "testagent",
+        "type": "Microsoft.DataMigration/sqlMigrationServices"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "kind": "SqlMi",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/instance",
+          "migrationStatus": "InProgress",
+          "migrationStatusDetails": {
+            "migrationState": "WaitForFullBackupUploadOperation",
+            "activeBackupSets": [],
+            "isFullBackupRestored": false
+          },
+          "startedOn": "0001-01-01T08:00:00Z",
+          "endedOn": "0001-01-01T08:00:00Z",
+          "sourceDatabaseName": "sourcename",
+          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+        "name": "testagent",
+        "type": "Microsoft.DataMigration/sqlMigrationServices"
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2.1",
+    "tilesetId": "microsoft.base",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "tilejson": "2.2.0",
+        "version": "1.0.0",
+        "attribution": "<a>&copy; 2021 TomTom</a>",
+        "scheme": "xyz",
+        "tiles": [
+          "https://atlas.microsoft.com/map/tile?api-version=2.0&tilesetId={tilesetId}&zoom={zoom}&x={x}&y={y}"
+        ],
+        "minzoom": 0,
+        "maxzoom": 22,
+        "bounds": [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

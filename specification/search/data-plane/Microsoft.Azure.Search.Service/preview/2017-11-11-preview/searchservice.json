@@ -4611,6 +4611,11 @@
           "format": "int32",
           "x-nullable": true,
           "description": "A number indicating how many key phrases to return. If absent, all identified key phrases will be returned."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
         }
       },
       "externalDocs": {
@@ -4687,6 +4692,18 @@
           "$ref": "#/definitions/Skill"
         }
       ],
+      "properties": {
+        "defaultCountryHint": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "A country code to use as a hint to the language detection model if it cannot disambiguate the language."
+        },
+        "modelVersion": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+        }
+      },
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-language-detection"
       },

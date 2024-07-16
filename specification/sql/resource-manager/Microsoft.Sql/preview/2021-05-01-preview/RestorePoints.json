@@ -1,0 +1,343 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints": {
+      "get": {
+        "tags": [
+          "RestorePoints"
+        ],
+        "description": "Gets a list of database restore points.",
+        "operationId": "RestorePoints_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returned restore points.",
+            "schema": {
+              "$ref": "#/definitions/RestorePointListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List database restore points.": {
+            "$ref": "./examples/DatabaseRestorePointsListByDatabase.json"
+          },
+          "List datawarehouse database restore points.": {
+            "$ref": "./examples/DataWarehouseRestorePointsListByDatabase.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RestorePoints"
+        ],
+        "description": "Creates a restore point for a data warehouse.",
+        "operationId": "RestorePoints_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The definition for creating the restore point of this database.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDatabaseRestorePointDefinition"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created the restore point request.",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created the restore point request.",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates datawarehouse database restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints/{restorePointName}": {
+      "get": {
+        "tags": [
+          "RestorePoints"
+        ],
+        "description": "Gets a restore point.",
+        "operationId": "RestorePoints_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "description": "The name of the restore point.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returned the restore point.",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a database restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsGet.json"
+          },
+          "Gets a datawarehouse database restore point.": {
+            "$ref": "./examples/DataWarehouseRestorePointsGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RestorePoints"
+        ],
+        "description": "Deletes a restore point.",
+        "operationId": "RestorePoints_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "description": "The name of the restore point.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the restore point."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RestorePointListResult": {
+      "description": "A list of long term retention backups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestorePoint"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RestorePointProperties": {
+      "description": "Properties of a database restore point",
+      "type": "object",
+      "properties": {
+        "restorePointType": {
+          "description": "The type of restore point",
+          "enum": [
+            "CONTINUOUS",
+            "DISCRETE"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "RestorePointType",
+            "modelAsString": false
+          }
+        },
+        "earliestRestoreDate": {
+          "format": "date-time",
+          "description": "The earliest time to which this database can be restored",
+          "type": "string",
+          "readOnly": true
+        },
+        "restorePointCreationDate": {
+          "format": "date-time",
+          "description": "The time the backup was taken",
+          "type": "string",
+          "readOnly": true
+        },
+        "restorePointLabel": {
+          "description": "The label of restore point for backup request by user",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RestorePoint": {
+      "description": "Database restore points.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RestorePointProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CreateDatabaseRestorePointDefinition": {
+      "description": "Contains the information necessary to perform a create database restore point operation.",
+      "required": [
+        "restorePointLabel"
+      ],
+      "type": "object",
+      "properties": {
+        "restorePointLabel": {
+          "description": "The restore point label to apply",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
