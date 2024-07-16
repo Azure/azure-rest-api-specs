@@ -1625,7 +1625,11 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SecretsLocationDetails"
+          "type": "array",
+          "description": "List of secret locations",
+          "items": {
+            "$ref": "#/definitions/SecretsLocationDetails"
+          }
         }
       },
       "additionalProperties": false
