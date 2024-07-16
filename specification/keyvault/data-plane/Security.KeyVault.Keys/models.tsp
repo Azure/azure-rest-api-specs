@@ -426,25 +426,29 @@ model Attributes {
    * Not before date in UTC.
    */
   @encodedName("application/json", "nbf")
-  notBefore?: plainTime;
+  @encode("unixTimestamp", int32)
+  notBefore?: utcDateTime;
 
   /**
    * Expiry date in UTC.
    */
   @encodedName("application/json", "exp")
-  expires?: plainTime;
+  @encode("unixTimestamp", int32)
+  expires?: utcDateTime;
 
   /**
    * Creation time in UTC.
    */
   @visibility("read")
-  created?: plainTime;
+  @encode("unixTimestamp", int32)
+  created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
   @visibility("read")
-  updated?: plainTime;
+  @encode("unixTimestamp", int32)
+  updated?: utcDateTime;
 }
 
 /**
@@ -673,13 +677,15 @@ model DeletedKeyBundle extends KeyBundle {
    * The time when the key is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the key was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -929,13 +935,15 @@ model DeletedKeyItem {
    * The time when the key is scheduled to be purged, in UTC
    */
   @visibility("read")
-  scheduledPurgeDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the key was deleted, in UTC
    */
   @visibility("read")
-  deletedDate?: plainTime;
+  @encode("unixTimestamp", int32)
+  deletedDate?: utcDateTime;
 }
 
 /**
@@ -1020,13 +1028,15 @@ model KeyRotationPolicyAttributes {
    * The key rotation policy created time in UTC.
    */
   @visibility("read")
-  created?: plainTime;
+  @encode("unixTimestamp", int32)
+  created?: utcDateTime;
 
   /**
    * The key rotation policy's last updated time in UTC.
    */
   @visibility("read")
-  updated?: plainTime;
+  @encode("unixTimestamp", int32)
+  updated?: utcDateTime;
 }
 
 /**
