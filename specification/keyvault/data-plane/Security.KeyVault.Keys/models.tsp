@@ -383,7 +383,9 @@ model KeyCreateParameters {
 /**
  * The attributes of a key managed by the key vault service.
  */
-model KeyAttributes extends Attributes {
+model KeyAttributes {
+  ...Attributes;
+
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete
    * enabled, otherwise 0.
@@ -667,7 +669,9 @@ model KeyImportParameters {
 /**
  * A DeletedKeyBundle consisting of a WebKey plus its Attributes and deletion info
  */
-model DeletedKeyBundle extends KeyBundle {
+model DeletedKeyBundle {
+  ...KeyBundle;
+
   /**
    * The url of the recovery object, used to identify and recover the deleted key.
    */
