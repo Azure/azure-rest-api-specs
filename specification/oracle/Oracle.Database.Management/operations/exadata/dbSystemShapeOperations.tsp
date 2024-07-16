@@ -8,6 +8,10 @@ namespace Oracle.Database;
 @armResourceOperations
 interface DbSystemShapes extends OracleLocationBasedResource<DbSystemShape> {}
 
+@@doc(DbSystemShapes.listByLocation,
+  "List DbSystemShape resources by Location"
+);
+
 @@Autorest.example(DbSystemShapes.listByLocation,
   "./examples/dbSystemShapes_listByLocation.json",
   "List DbSystemShapes by location"

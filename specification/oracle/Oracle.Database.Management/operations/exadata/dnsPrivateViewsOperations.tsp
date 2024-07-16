@@ -8,6 +8,10 @@ namespace Oracle.Database;
 @armResourceOperations
 interface DnsPrivateViews extends OracleLocationBasedResource<DnsPrivateView> {}
 
+@@doc(DnsPrivateViews.listByLocation,
+  "List DnsPrivateView resources by Location"
+);
+
 @@Autorest.example(DnsPrivateViews.listByLocation,
   "./examples/dnsPrivateViews_listByLocation.json",
   "List DnsPrivateViews by location"

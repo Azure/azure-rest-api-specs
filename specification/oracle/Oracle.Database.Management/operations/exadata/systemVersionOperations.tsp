@@ -8,6 +8,10 @@ namespace Oracle.Database;
 @armResourceOperations
 interface SystemVersions extends OracleLocationBasedResource<SystemVersion> {}
 
+@@doc(SystemVersions.listByLocation,
+  "List SystemVersion resources by Location"
+);
+
 @@Autorest.example(SystemVersions.listByLocation,
   "./examples/systemVersions_listByLocation.json",
   "List Exadata System Versions by the provided filter"
