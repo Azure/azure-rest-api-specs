@@ -11,8 +11,8 @@ export class FolderStructureRule implements Rule {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
-    let gitRoot = host.normalizePath(await host.gitOperation(folder).revparse("--show-toplevel"));
-    let relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
+    const gitRoot = host.normalizePath(await host.gitOperation(folder).revparse("--show-toplevel"));
+    const relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
 
     stdOutput += `folder: ${folder}\n`;
     if (!(await host.checkFileExists(folder))) {
@@ -33,13 +33,13 @@ export class FolderStructureRule implements Rule {
     });
 
     // Verify top level folder is lower case and remove empty entries when splitting by slash
-    let folderStruct = relativePath.split("/").filter(Boolean);
+    const folderStruct = relativePath.split("/").filter(Boolean);
     if (folderStruct[1].match(/[A-Z]/g)) {
       success = false;
       errorOutput += `Invalid folder name. Folders under specification/ must be lower case.\n`;
     }
 
-    let packageFolder = folderStruct[folderStruct.length - 1];
+    const packageFolder = folderStruct[folderStruct.length - 1];
 
     // Verify package folder is at most 3 levels deep
     if (folderStruct.length > 4) {
@@ -62,9 +62,9 @@ export class FolderStructureRule implements Rule {
     }
 
     // Verify tspconfig, main.tsp, examples/
-    let mainExists = await host.checkFileExists(path.join(folder, "main.tsp"));
-    let clientExists = await host.checkFileExists(path.join(folder, "client.tsp"));
-    let tspConfigExists = await host.checkFileExists(path.join(folder, "tspconfig.yaml"));
+    const mainExists = await host.checkFileExists(path.join(folder, "main.tsp"));
+    const clientExists = await host.checkFileExists(path.join(folder, "client.tsp"));
+    const tspConfigExists = await host.checkFileExists(path.join(folder, "tspconfig.yaml"));
 
     if (!mainExists && !clientExists) {
       errorOutput += `Invalid folder structure: Spec folder must contain main.tsp or client.tsp.`;
@@ -84,14 +84,20 @@ export class FolderStructureRule implements Rule {
     if (tspConfigExists) {
       const configText = await host.readTspConfig(folder);
       const config = yamlParse(configText);
-      const rpFolder = config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
+      const rpFolder =
+        config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
       stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
 
-      if (rpFolder?.trim()?.endsWith("resource-manager") && !packageFolder.endsWith(".Management")) {
+      if (
+        rpFolder?.trim()?.endsWith("resource-manager") &&
+        !packageFolder.endsWith(".Management")
+      ) {
         errorOutput += `Invalid folder structure: TypeSpec for resource-manager specs must be in a folder ending with '.Management'`;
         success = false;
-      }
-      else if (!rpFolder?.trim()?.endsWith("resource-manager") && packageFolder.endsWith(".Management")) {
+      } else if (
+        !rpFolder?.trim()?.endsWith("resource-manager") &&
+        packageFolder.endsWith(".Management")
+      ) {
         errorOutput += `Invalid folder structure: TypeSpec for data-plane specs or shared code must be in a folder NOT ending with '.Management'`;
         success = false;
       }
