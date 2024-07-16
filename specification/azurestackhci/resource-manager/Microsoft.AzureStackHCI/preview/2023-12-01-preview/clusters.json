@@ -937,11 +937,14 @@
           "readOnly": true
         },
         "secretsLocations": {
-          "description": "List of locations to load secrets from",
           "type": "array",
+          "description": "List of secret locations",
           "items": {
-            "$ref": "#/definitions/SecretsLocations"
-          }
+            "$ref": "#/definitions/SecretsLocationDetails"
+          },
+          "x-ms-identifiers": [
+            "secretsType"
+          ]
         }
       }
     },
@@ -1622,7 +1625,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SecretsLocations"
+          "$ref": "#/definitions/SecretsLocationDetails"
         }
       },
       "additionalProperties": false
@@ -1667,9 +1670,9 @@
       "additionalProperties": false,
       "readOnly": true
     },
-    "SecretLocation": {
+    "SecretsLocationDetails": {
       "type": "object",
-      "description": "Secret location",
+      "description": "Secrets location details",
       "properties": {
         "secretsType": {
           "$ref": "#/definitions/SecretsType",
@@ -1683,25 +1686,6 @@
       "required": [
         "secretsType",
         "secretsLocation"
-      ]
-    },
-    "SecretsLocations": {
-      "type": "object",
-      "description": "Secret locations",
-      "properties": {
-        "secretLocations": {
-          "type": "array",
-          "description": "List of secret locations",
-          "items": {
-            "$ref": "#/definitions/SecretLocation"
-          },
-          "x-ms-identifiers": [
-            "secretsType"
-          ]
-        }
-      },
-      "required": [
-        "secretLocations"
       ]
     },
     "SecretsType": {
