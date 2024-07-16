@@ -1,3 +1,4 @@
+import { Stats } from "fs";
 import { access, constants, lstat, readFile } from "fs/promises";
 import { minimatch } from "minimatch";
 import { dirname, join, resolve, sep } from "path";
@@ -169,7 +170,7 @@ async function findSuppressionsFiles(path: string): Promise<string[]> {
 
   path = resolve(path);
 
-  const stats = await lstat(path);
+  const stats: Stats = await lstat(path);
   let currentDirectory: string = stats.isDirectory() ? path : dirname(path);
 
   while (true) {

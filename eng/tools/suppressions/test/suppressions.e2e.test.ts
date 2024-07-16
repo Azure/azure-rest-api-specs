@@ -1,23 +1,28 @@
 import { expect, test } from "vitest";
-import { getSuppressions } from "../src/suppressions.js";
+import { Suppression, getSuppressions } from "../src/suppressions.js";
 import { join } from "path";
 
-async function getTestSuppressions(path: string, tool: string = "TestTool") {
+async function getTestSuppressions(
+  path: string,
+  tool: string = "TestTool",
+): Promise<Suppression[]> {
   return await getSuppressions(tool, join(__dirname, "e2e", path));
 }
 
 test.concurrent("no suppressions.yaml", async () => {
-  const suppressions = await getTestSuppressions("noSuppressionsYaml");
+  const suppressions: Suppression[] = await getTestSuppressions("noSuppressionsYaml");
   expect(suppressions).toEqual([]);
 });
 
 test.concurrent("empty suppressions.yaml", async () => {
-  const suppressions = await getTestSuppressions("emptySuppressionsYaml");
+  const suppressions: Suppression[] = await getTestSuppressions("emptySuppressionsYaml");
   expect(suppressions).toEqual([]);
 });
 
 test.concurrent("suppress foo.json, get foo.json", async () => {
-  const suppressions = await getTestSuppressions(join("suppressFooJson", "foo.json"));
+  const suppressions: Suppression[] = await getTestSuppressions(
+    join("suppressFooJson", "foo.json"),
+  );
   expect(suppressions).toEqual([
     {
       tool: "TestTool",
@@ -28,17 +33,24 @@ test.concurrent("suppress foo.json, get foo.json", async () => {
 });
 
 test.concurrent("suppress foo.json, get bar.json", async () => {
-  const suppressions = await getTestSuppressions(join("suppressFooJson", "bar.json"));
+  const suppressions: Suppression[] = await getTestSuppressions(
+    join("suppressFooJson", "bar.json"),
+  );
   expect(suppressions).toEqual([]);
 });
 
 test.concurrent("suppress foo.json, get foo.json w/ different tool", async () => {
-  const suppressions = await getTestSuppressions(join("suppressFooJson", "foo.json"), "TestTool2");
+  const suppressions: Suppression[] = await getTestSuppressions(
+    join("suppressFooJson", "foo.json"),
+    "TestTool2",
+  );
   expect(suppressions).toEqual([]);
 });
 
 test.concurrent("merge, get bar.json", async () => {
-  const suppressions = await getTestSuppressions(join("merge", "foo", "bar", "bar.json"));
+  const suppressions: Suppression[] = await getTestSuppressions(
+    join("merge", "foo", "bar", "bar.json"),
+  );
   expect(suppressions).toEqual([
     {
       tool: "TestTool",
@@ -99,7 +111,7 @@ test.concurrent("merge, get bar.json", async () => {
 });
 
 test.concurrent("merge, get foo.json", async () => {
-  const suppressions = await getTestSuppressions(join("merge", "foo", "foo.json"));
+  const suppressions: Suppression[] = await getTestSuppressions(join("merge", "foo", "foo.json"));
   expect(suppressions).toEqual([
     {
       tool: "TestTool",
