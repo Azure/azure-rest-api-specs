@@ -1255,33 +1255,6 @@
         }
       }
     },
-    "InstanceViewStatus": {
-      "type": "object",
-      "description": "Instance view status.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The status code."
-        },
-        "level": {
-          "$ref": "#/definitions/StatusLevelTypes",
-          "description": "The level code."
-        },
-        "displayStatus": {
-          "type": "string",
-          "description": "The short localizable label for the status."
-        },
-        "message": {
-          "type": "string",
-          "description": "The detailed status message, including for alerts and error messages."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time of the status."
-        }
-      }
-    },
     "KeyVaultSecretReference": {
       "type": "object",
       "description": "Describes a reference to Key Vault Secret",
@@ -1860,39 +1833,6 @@
         }
       }
     },
-    "ResourceWithOptionalLocation": {
-      "type": "object",
-      "description": "The Resource model definition with location property as optional.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Resource Id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ScheduledEventsProfile": {
       "type": "object",
       "description": "Specifies Scheduled Event related configurations.",
@@ -1947,10 +1887,14 @@
         },
         "excludeExtensions": {
           "type": "array",
-          "description": "List of virtual machine extensions to exclude when applying the Security\nPosture.",
+          "description": "List of virtual machine extension names to exclude when applying the security\nposture.",
           "items": {
-            "$ref": "#/definitions/VirtualMachineExtension"
+            "type": "string"
           }
+        },
+        "isOverridable": {
+          "type": "boolean",
+          "description": "Whether the security posture can be overridden by the user."
         }
       }
     },
@@ -2371,146 +2315,6 @@
         "uri": {
           "type": "string",
           "description": "Specifies the virtual hard disk's uri."
-        }
-      }
-    },
-    "VirtualMachineExtension": {
-      "type": "object",
-      "description": "Describes a Virtual Machine Extension.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Resource Id",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/VirtualMachineExtensionProperties",
-          "description": "Describes the properties of a Virtual Machine Extension."
-        }
-      }
-    },
-    "VirtualMachineExtensionInstanceView": {
-      "type": "object",
-      "description": "The instance view of a virtual machine extension.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The virtual machine extension name."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler."
-        },
-        "substatuses": {
-          "type": "array",
-          "description": "The resource status information.",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          },
-          "x-ms-identifiers": []
-        },
-        "statuses": {
-          "type": "array",
-          "description": "The resource status information.",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "VirtualMachineExtensionProperties": {
-      "type": "object",
-      "description": "Describes the properties of a Virtual Machine Extension.",
-      "properties": {
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "How the extension handler should be forced to update even if the extension\nconfiguration has not changed."
-        },
-        "publisher": {
-          "type": "string",
-          "description": "The name of the extension handler publisher."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler."
-        },
-        "autoUpgradeMinorVersion": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should use a newer minor version if one is\navailable at deployment time. Once deployed, however, the extension will not\nupgrade minor versions unless redeployed, even with this property set to true."
-        },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should be automatically upgraded by the\nplatform if there is a newer version of the extension available."
-        },
-        "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension.",
-          "additionalProperties": {}
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "The extension can contain either protectedSettings or\nprotectedSettingsFromKeyVault or no protected settings at all.",
-          "additionalProperties": {},
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response.",
-          "readOnly": true
-        },
-        "instanceView": {
-          "$ref": "#/definitions/VirtualMachineExtensionInstanceView",
-          "description": "The virtual machine extension instance view."
-        },
-        "suppressFailures": {
-          "type": "boolean",
-          "description": "Indicates whether failures stemming from the extension will be suppressed\n(Operational failures such as not connecting to the VM will not be suppressed\nregardless of this value). The default is false."
-        },
-        "protectedSettingsFromKeyVault": {
-          "$ref": "#/definitions/KeyVaultSecretReference",
-          "description": "The extensions protected settings that are passed by reference, and consumed\nfrom key vault"
-        },
-        "provisionAfterExtensions": {
-          "type": "array",
-          "description": "Collection of extension names after which this extension needs to be\nprovisioned.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
