@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "@azure-tools/typespec-client-generator-core";
 import "../models/batch.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
@@ -25,7 +23,10 @@ namespace Azure.OpenAI;
 @get
 @added(ServiceApiVersions.v2024_07_01_Preview)
 @route("/batches")
-op batchList(@query after?: string, @query @default(20) limit?: integer): ListBatchesResponse;
+op batchList(
+  @query after?: string,
+  @query limit?: int32,
+): ListBatchesResponse;
 
 /**
  * Creates and executes a batch from an uploaded file of requests.
@@ -42,7 +43,7 @@ op batchList(@query after?: string, @query @default(20) limit?: integer): ListBa
 @post
 @added(ServiceApiVersions.v2024_07_01_Preview)
 @route("/batches")
-op batchCreate(@query batchCreateRequest: BatchCreateRequest): Batch;
+op batchCreate(...BatchCreateRequest): Batch;
 
 /**
  * Creates and executes a batch from an uploaded file of requests.
@@ -56,14 +57,13 @@ op batchCreate(@query batchCreateRequest: BatchCreateRequest): Batch;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/batches/{batchID}")
+@route("/batches/{batchId}")
 @doc("Gets details for a single batch specified by the given batchID.")
 @added(ServiceApiVersions.v2024_07_01_Preview)
 op batchGet(
   @doc("The identifier of the batch.")
   @path
-  @encodedName("application/json", "batchID")
-  batchID: string,
+  batchId: string,
 ): Batch;
 
 /**
@@ -76,12 +76,11 @@ op batchGet(
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
-@route("/batches/{batchID}/cancel")
+@route("/batches/{batchId}/cancel")
 @doc("Gets details for a single batch specified by the given batchID.")
 @added(ServiceApiVersions.v2024_07_01_Preview)
 op batchCancel(
   @doc("The identifier of the batch.")
   @path
-  @encodedName("application/json", "batchID")
-  batchID: string,
+  batchId: string,
 ): Batch;
