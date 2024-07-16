@@ -30,9 +30,7 @@ Below are code convention we strive to follow in `eng` directory:
 - In case any dependencies have been removed from any `package.json`, we do `rm package-lock.json` and `npm install`.  
   This way we ensure the lock file remains free of unused dependencies.
 - We do `npm update` only in stand-alone PRs.
-- To avoid inconsistent content of `package-lock.json` due to bugs like [npm/cli #7384],
-  we ensure to use the same node and npm version to update `package-lock.json`.  
-  As of 7/15/2024 this is `node 20.15.1` and `npm 10.7.0`.
+- To avoid conflicting changes when updating `package-lock.json`, only use the latest LTS version of Node, and the bundled version of npm (but no newer).  You can use `nvm install --lts` (Linux) or `nvm install lts` (Windows).
 
 ## Linting and prettier
 
