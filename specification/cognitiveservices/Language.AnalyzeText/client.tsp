@@ -6,11 +6,11 @@ using Azure.ClientGenerator.Core;
 
 namespace Language.AnalyzeTextClientCustomizations;
 
-@@clientName(Tasks, "TasksStatus", "csharp");
-@@clientName(State, "CurrentState", "csharp");
+@@clientName(Tasks, "TextActions", "csharp");
+@@clientName(State, "TextActionState", "csharp");
 @@clientName(Error, "AnalyzeTextError", "csharp");
-@@clientName(TaskParameters, "TaskContent", "csharp");
-@@clientName(PreBuiltTaskParameters, "PreBuiltTaskContent", "csharp");
+@@clientName(TaskParameters, "ActionContent", "csharp");
+@@clientName(PreBuiltTaskParameters, "PreBuiltActionContent", "csharp");
 @@clientName(AbstractiveSummarizationTaskParametersBase,
   "AbstractiveSummarizationTaskContentBase",
   "csharp"
