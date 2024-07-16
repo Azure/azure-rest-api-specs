@@ -12,7 +12,9 @@ namespace KeyVault;
  * JsonWebKey Key Type (kty), as defined in
  * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40.
  */
-enum JsonWebKeyType {
+union JsonWebKeyType {
+  string,
+
   /**
    * Elliptic Curve.
    */
@@ -473,6 +475,7 @@ model KeyReleasePolicy {
    * be base64 URL encoded.
    */
   @encodedName("application/json", "data")
+  @encode("base64url")
   encodedPolicy?: bytes;
 }
 
@@ -530,55 +533,65 @@ model JsonWebKey {
   /**
    * RSA modulus.
    */
+  @encode("base64url")
   n?: bytes;
 
   /**
    * RSA public exponent.
    */
+  @encode("base64url")
   e?: bytes;
 
   /**
    * RSA private exponent, or the D component of an EC private key.
    */
+  @encode("base64url")
   d?: bytes;
 
   /**
    * RSA private key parameter.
    */
   @encodedName("application/json", "dp")
+  @encode("base64url")
   DP?: bytes;
 
   /**
    * RSA private key parameter.
    */
   @encodedName("application/json", "dq")
+  @encode("base64url")
   DQ?: bytes;
 
   /**
    * RSA private key parameter.
    */
   @encodedName("application/json", "qi")
+  @encode("base64url")
   QI?: bytes;
 
   /**
    * RSA secret prime.
    */
+  @encode("base64url")
   p?: bytes;
 
   /**
    * RSA secret prime, with p < q.
    */
+  @encode("base64url")
   q?: bytes;
 
   /**
    * Symmetric key.
    */
+  @encode("base64url")
   k?: bytes;
 
   /**
    * Protected Key, used with 'Bring Your Own Key'.
    */
   @encodedName("application/json", "key_hsm")
+  @encode("base64url")
   t?: bytes;
 
   /**
@@ -589,11 +602,13 @@ model JsonWebKey {
   /**
    * X component of an EC public key.
    */
+  @encode("base64url")
   x?: bytes;
 
   /**
    * Y component of an EC public key.
    */
+  @encode("base64url")
   y?: bytes;
 }
 
@@ -764,6 +779,7 @@ model BackupKeyResult {
    * The backup blob containing the backed up key.
    */
   @visibility("read")
+  @encode("base64url")
   value?: bytes;
 }
 
@@ -775,6 +791,7 @@ model KeyRestoreParameters {
    * The backup blob associated with a key bundle.
    */
   @encodedName("application/json", "value")
+  @encode("base64url")
   keyBundleBackup: bytes;
 }
 
@@ -788,24 +805,28 @@ model KeyOperationsParameters {
   @encodedName("application/json", "alg")
   algorithm: JsonWebKeyEncryptionAlgorithm;
 
+  @encode("base64url")
   value: bytes;
 
   /**
    * Cryptographically random, non-repeating initialization vector for symmetric
    * algorithms.
    */
+  @encode("base64url")
   iv?: bytes;
 
   /**
    * Additional data to authenticate but not encrypt/decrypt when using
    * authenticated crypto algorithms.
    */
+  @encode("base64url")
   aad?: bytes;
 
   /**
    * The tag to authenticate when performing decryption with an authenticated
    * algorithm.
    */
+  @encode("base64url")
   tag?: bytes;
 }
 
@@ -821,17 +842,21 @@ model KeyOperationResult {
 
   @visibility("read")
   @encodedName("application/json", "value")
+  @encode("base64url")
   result?: bytes;
 
   @visibility("read")
+  @encode("base64url")
   iv?: bytes;
 
   @visibility("read")
   @encodedName("application/json", "tag")
+  @encode("base64url")
   authenticationTag?: bytes;
 
   @visibility("read")
   @encodedName("application/json", "aad")
+  @encode("base64url")
   additionalAuthenticatedData?: bytes;
 }
 
@@ -846,6 +871,7 @@ model KeySignParameters {
   @encodedName("application/json", "alg")
   algorithm: JsonWebKeySignatureAlgorithm;
 
+  @encode("base64url")
   value: bytes;
 }
 
@@ -863,12 +889,14 @@ model KeyVerifyParameters {
   /**
    * The digest used for signing.
    */
+  @encode("base64url")
   digest: bytes;
 
   /**
    * The signature to be verified.
    */
   @encodedName("application/json", "value")
+  @encode("base64url")
   signature: bytes;
 }
 
@@ -1062,6 +1090,7 @@ model RandomBytes {
   /**
    * The bytes encoded as a base64url string.
    */
+  @encode("base64url")
   value: bytes;
 }
 
@@ -1078,6 +1107,7 @@ model KeyProperties {
   /**
    * The type of key pair to be used for the certificate.
    */
+  @minLength(1)
   @encodedName("application/json", "kty")
   keyType?: JsonWebKeyType;
 
