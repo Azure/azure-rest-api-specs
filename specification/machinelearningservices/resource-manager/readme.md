@@ -40,6 +40,7 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2024-07-01-preview/mfe.json
   - Microsoft.MachineLearningServices/preview/2024-07-01-preview/registries.json
   - Microsoft.MachineLearningServices/preview/2024-07-01-preview/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/preview/2024-07-01-preview/workspaceRP.json
 suppressions:
   - code: AvoidAdditionalProperties
     reason: As discussed In office hour this conf property is string dictionary 
@@ -75,6 +76,31 @@ suppressions:
       in their inferencing API request. For that reason, this needs to be represented as an additionalProperties.
     where:
       - $.definitions["ServerlessInferenceEndpoint"].properties["headers"]
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Below APIs are created for migration, the existing API contract is like this and won't able to change, 
+      got exceptions from ARM reviewer.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"].put
+  - code: AvoidAdditionalProperties
+    reason: As discussed these are hyperparameters which can vary by model and fine tuning task types so cannot have strictly typed properties.
+    where:
+      - $.definitions["CustomModelFineTuning"].properties["hyperParameters"]
+  - code: AvoidAdditionalProperties
+    reason: This is coming for wrong reason, just inheriting from JobBase.
+    where:
+      - $.definitions["FineTuningJob"].allOf[0]["allOf"][0].properties["properties"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["notificationSetting"].properties["webhooks"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["secretsConfiguration"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["services"]
+      - $.definitions["FineTuningJob"].allOf[0].properties["services"].additionalProperties["properties"].properties
+  - code: AvoidAdditionalProperties
+    reason: There is a similar usage in existing jobs.
+    where:
+      - $.definitions["FineTuningJob"].properties["outputs"]
   ```
 
 ### Tag: package-2024-04
