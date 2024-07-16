@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
@@ -8,8 +9,12 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AI Casing style to match OpenAI"
+@client({
+  name: "DeidentificationClient",
+})
 namespace HealthDataAIServices.DeidServices;
 
 alias ServiceTraits = NoRepeatableRequests &
