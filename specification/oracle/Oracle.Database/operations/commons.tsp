@@ -43,7 +43,7 @@ interface OracleReadOnlyResource<T extends Foundations.Resource> {
 @armResourceOperations(T)
 interface OracleLocationBasedResource<T extends Foundations.Resource>
   extends OracleReadOnlyResource<T> {
-  listByLocation is ArmResourceListByParent<T>;
+  listByLocation is ArmResourceListByParent<T, ParentFriendlyName = "Location">;
 }
 
 @armResourceOperations(T)

@@ -56,7 +56,7 @@ interface LoadTests {
   outboundNetworkDependenciesEndpoints is CustomOperations.ArmResourceActionSyncCustomGet<
     LoadTestResource,
     void,
-    OutboundEnvironmentEndpointCollection
+    PagedOutboundEnvironmentEndpoint
   >;
 }
 
