@@ -154,7 +154,7 @@ model ResourceOperationError {
 @doc("The details of a response from an operation on a resource")
 model ResourceOperationDetails {
   @doc("Operation identifier for the unique operation")
-  operationId: Azure.Core.uuid;
+  operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
   resourceId: Azure.Core.armResourceIdentifier;
@@ -164,7 +164,7 @@ model ResourceOperationDetails {
   opType: ResourceOperationType = ResourceOperationType.Unknown;
 
   @doc("Subscription id attached to the request")
-  subscriptionId: Azure.Core.uuid;
+  subscriptionId: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("Deadline for the operation")
@@ -220,7 +220,7 @@ model SubmitDeallocateRequest {
   resources: Resources;
 
   @doc("Correlationid item")
-  correlationid: Azure.Core.uuid;
+  correlationid: string;
 }
 
 @doc("The response from a deallocate request")
@@ -253,7 +253,7 @@ model SubmitStartRequest {
   resources: Resources;
 
   @doc("Correlationid item")
-  correlationid: Azure.Core.uuid;
+  correlationid: string;
 }
 
 @doc("The response from a start request")
@@ -286,7 +286,7 @@ model SubmitHibernateRequest {
   resources: Resources;
 
   @doc("Correlationid item")
-  correlationid: Azure.Core.uuid;
+  correlationid: string;
 }
 
 @doc("The response from a Hibernate request")
@@ -316,7 +316,7 @@ model ExecuteDeallocateRequest {
   resources: Resources;
 
   @doc("Correlationid item")
-  correlationid: Azure.Core.uuid;
+  correlationid: string;
 }
 
 @doc("The ExecuteHibernateRequest request for executeHibernate operations")
@@ -328,7 +328,7 @@ model ExecuteHibernateRequest {
   resources: Resources;
 
   @doc("Correlationid item")
-  correlationid: Azure.Core.uuid;
+  correlationid: string;
 }
 
 @doc("The ExecuteStartRequest request for executeStart operations")
@@ -340,17 +340,17 @@ model ExecuteStartRequest {
   resources: Resources;
 
   @doc("Correlationid item")
-  correlationid: Azure.Core.uuid;
+  correlationid: string;
 }
 
 // ----------- GetOperationStatus ---------
 @doc("This is the request to get operation status using operationids")
 model GetOperationStatusRequest {
   @doc("The list of operation ids to get the status of")
-  operationIds: Array<Azure.Core.uuid>;
+  operationIds: Array<string>;
 
   @doc("Correlationid item")
-  correlationid: Azure.Core.uuid;
+  correlationid: string;
 }
 
 @doc("This is the response from a get operations status request")
@@ -364,10 +364,10 @@ model GetOperationStatusResponse {
 @doc("This is the request to cancel running operations in scheduled actions using the operation ids")
 model CancelOperationsRequest {
   @doc("The list of operation ids to cancel operations on")
-  operationIds: Array<Azure.Core.uuid>;
+  operationIds: Array<string>;
 
   @doc("Correlationid item")
-  correlationid: Azure.Core.uuid;
+  correlationid: string;
 }
 
 @doc("This is the response from a cancel operations request")
