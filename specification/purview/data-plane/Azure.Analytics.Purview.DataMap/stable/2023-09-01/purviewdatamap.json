@@ -101,6 +101,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
@@ -241,6 +242,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
@@ -312,6 +314,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClassificationAssociateOptions"
@@ -344,6 +347,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntityHeaders"
@@ -438,7 +442,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/BusinessMetadataOptions"
+            "name": "file",
+            "in": "formData",
+            "description": "InputStream of file",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
@@ -1237,6 +1245,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
@@ -1671,6 +1680,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
@@ -1755,6 +1765,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
@@ -2203,6 +2214,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
@@ -2277,6 +2289,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
@@ -2519,6 +2532,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
@@ -2612,6 +2626,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
@@ -3156,6 +3171,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasRelationship"
@@ -3189,6 +3205,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasRelationship"
@@ -3915,6 +3932,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
@@ -3948,6 +3966,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
@@ -3984,6 +4003,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
@@ -4142,6 +4162,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MoveEntitiesOptions"
@@ -8241,14 +8262,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "BusinessMetadataOptions": {
-      "name": "file",
-      "in": "formData",
-      "description": "InputStream of file",
-      "required": true,
-      "type": "file",
-      "x-ms-parameter-location": "method"
     }
   }
 }
