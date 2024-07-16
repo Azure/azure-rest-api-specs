@@ -33,9 +33,11 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(ShortAnswerOptions.topAnswersWithSpan, "top", "csharp");
 
 @@clientName(AnalyzeConversationLROTask,
-  "AnalyzeConversationJobTask",
+  "AnalyzeConversationOperationAction",
   "csharp"
 );
+
+@@clientName(AnalyzeConversationLROTask.taskName, "Name", "csharp");
 
 @@clientName(BasePrediction, "PredictionBase", "csharp");
 
@@ -63,30 +65,30 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(AnswersOptions, "QuestionAnswersConfig", "csharp");
 @@clientName(ShortAnswerOptions, "ShortAnswerConfig", "csharp");
 @@clientName(ConversationCallingOptions, "ConversationCallingConfig", "csharp");
+@@clientName(LuisCallingOptions, "LuisCallingConfig", "csharp");
 
 @@clientName(ConversationAnalysisOptions,
   "ConversationAnalysisInput",
   "csharp"
 );
 
-@@clientName(Tasks, "ConversationTasks", "csharp");
-@@clientName(State, "ConversationTaskState", "csharp");
+@@clientName(Tasks, "ConversationActions", "csharp");
+@@clientName(State, "ConversationActionState", "csharp");
 @@clientName(role, "ParticipantRole", "csharp");
-@@clientName(LuisCallingOptions, "LuisCallingConfig", "csharp");
 
 @@clientName(Entity, "NamedEntity", "csharp");
 
 @@clientName(CustomConversationSummarizationTaskParameters,
-  "CustomConversationSummarizationTaskContent",
+  "CustomConversationSummarizationActionContent",
   "csharp"
 );
-@@clientName(ConversationTaskParameters, "ConversationTaskContent", "csharp");
+@@clientName(ConversationTaskParameters, "ConversationActionContent", "csharp");
 @@clientName(ConversationSummarizationTaskParameters,
-  "ConversationSummarizationTaskContent",
+  "ConversationSummarizationActionContent",
   "csharp"
 );
 @@clientName(ConversationPiiTaskParameters,
-  "ConversationPiiTaskContent",
+  "ConversationPiiActionContent",
   "csharp"
 );
 
@@ -111,6 +113,18 @@ namespace Language.ConversationsClientCustomizations;
 );
 
 @@clientName(AnalyzeConversationLROTaskKind,
-  "AnalyzeConversationJobTaskKind",
+  "AnalyzeConversationOperationActionKind",
   "csharp"
 );
+
+@@clientName(AnalyzeConversationTask, "AnalyzeConversationInput", "csharp");
+@@clientName(ConversationalTask, "ConversationInput", "csharp");
+@@clientName(AnalyzeConversationJobsInput,
+  "AnalyzeConversationOperationInput",
+  "csharp"
+);
+@@clientName(AnalyzeConversationJobsInput.analysisInput,
+  "ConversationInput",
+  "csharp"
+);
+@@clientName(AnalyzeConversationJobsInput.tasks, "Actions", "csharp");
