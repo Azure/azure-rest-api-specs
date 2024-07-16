@@ -522,7 +522,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigurationStores_ListKeys": {
+          "ConfigurationStores_SasTokenGeneration": {
             "$ref": "./examples/ConfigurationStoresSasTokenGeneration.json"
           }
         }
@@ -570,7 +570,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfigurationStores_ListKeys": {
+          "ConfigurationStores_ResetSasTokens": {
             "$ref": "./examples/ConfigurationStoresResetSasTokens.json"
           }
         }
@@ -2116,7 +2116,8 @@
         },
         "cacheControlMaxAge": {
           "description": "Time (in seconds) for which the data plane response may be cached by clients. App Configuration sets the Cache-Control response header `max-age` to the value that's specified on the SAS token. See [rfc9111](https://www.rfc-editor.org/rfc/rfc9111#name-max-age-2) for more details.",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "kind": {
           "description": "The kind of the SAS token.",
