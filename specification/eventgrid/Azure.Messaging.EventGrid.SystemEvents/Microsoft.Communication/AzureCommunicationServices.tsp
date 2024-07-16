@@ -1,3 +1,7 @@
+import "@typespec/versioning";
+
+using TypeSpec.Versioning;
+
 /** Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -222,12 +226,15 @@ model AcsRecordingFileStatusUpdatedEventData {
   recordingDurationMs?: int64;
 
   /** The recording content type- AudioVideo, or Audio */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   recordingContentType: recordingContentType;
 
   /** The recording  channel type - Mixed, Unmixed */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   recordingChannelType: recordingChannelType;
 
   /** The recording format type - Mp4, Mp3, Wav */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   recordingFormatType: recordingFormatType;
 
   /** The reason for ending recording session */
@@ -246,13 +253,14 @@ model AcsEmailDeliveryReportReceivedEventData {
   messageId?: string;
 
   /** The status of the email. Any value other than Delivered is considered failed. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   status: AcsEmailDeliveryReportStatus;
 
   /** Detailed information about the status if any */
   deliveryStatusDetails: AcsEmailDeliveryReportStatusDetails;
 
   /** The time at which the email delivery report received timestamp */
-  deliveryAttemptTimeStamp: utcDateTime;
+  deliveryAttemptTimestamp: utcDateTime;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event. */
@@ -267,7 +275,7 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   messageId?: string;
 
   /** The time at which the user interacted with the email */
-  userActionTimeStamp: utcDateTime;
+  userActionTimestamp: utcDateTime;
 
   /** The context of the type of engagement user had with email */
   engagementContext?: string;
@@ -276,6 +284,7 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
   userAgent?: string;
 
   /** The type of engagement user have with email */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   engagementType: AcsUserEngagement;
 }
 
@@ -369,6 +378,7 @@ model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   /** Router Job Received Job Status */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   jobStatus: AcsRouterJobStatus;
 
   /** Router Job Classification Policy Id */
@@ -692,6 +702,7 @@ model AcsRouterWorkerSelector {
   key?: string;
 
   /** Router Job Worker Selector Label Operator */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   labelOperator: AcsRouterLabelOperator;
 
   /** Router Job Worker Selector Value */
@@ -702,6 +713,7 @@ model AcsRouterWorkerSelector {
   ttlSeconds: float64;
 
   /** Router Job Worker Selector State */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   state: AcsRouterWorkerSelectorState;
 
   /** Router Job Worker Selector Expiration Time */
@@ -1033,6 +1045,7 @@ union AcsUserEngagement {
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
 model CommunicationIdentifierModel {
   /** The identifier kind. Only required in responses. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   kind: CommunicationIdentifierModelKind;
 
   /** Raw Id of the identifier. Optional in requests, required in responses. */
@@ -1074,6 +1087,7 @@ model MicrosoftTeamsAppIdentifierModel {
   appId: string;
 
   /** The cloud that the Microsoft Teams application belongs to. By default 'public' if missing. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   cloud: CommunicationCloudEnvironmentModel;
 }
 
@@ -1086,6 +1100,7 @@ model MicrosoftTeamsUserIdentifierModel {
   isAnonymous?: boolean;
 
   /** The cloud that the Microsoft Teams user belongs to. By default 'public' if missing. */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   cloud: CommunicationCloudEnvironmentModel;
 }
 
@@ -1132,9 +1147,11 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
   messageId?: string;
 
   /** The updated message status */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   status: AcsMessageDeliveryStatus;
 
   /** The updated message channel type */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   channelType: AcsMessageChannelKind;
 }
 
@@ -1196,6 +1213,7 @@ model AcsMessageButtonContent {
 /** Message Interactive Content */
 model AcsMessageInteractiveContent {
   /** The Message interactive reply type */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   type: AcsInteractiveReplyKind;
 
   /** The Message Sent when a customer clicks a button */

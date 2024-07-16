@@ -25,14 +25,6 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(AcsRouterWorkerSelector.value, "labelValue", "autorest");
 
-@@clientName(AcsEmailDeliveryReportReceivedEventData.deliveryAttemptTimeStamp,
-  "deliveryAttemptTimestamp",
-  "autorest"
-);
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.userActionTimeStamp,
-  "userActionTimestamp",
-  "autorest"
-);
 @@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
   "autorest"
