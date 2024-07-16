@@ -278,6 +278,6 @@ suppressions:
   - code: DefinitionsPropertiesNamesCamelCase
     reason: The property fields are in camel case to match the request and response payload of the confluent APIs.
   - code: RequiredPropertiesMissingInResourceModel
-    reason: Adding the suppression as recommended by the breaking change team, as the values were marked as optional in earlier PRs.
+    reason: Our service is RPaaS service and this is coming because of new validation rule. Adding the suppression as recommended by the breaking change team, as the values were marked as optional in earlier PRs.
 
 ```
