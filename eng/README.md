@@ -27,7 +27,7 @@ Below are code convention we strive to follow in `eng` directory:
   - `git clean -xdf` to remove all untracked files.
   - Copy-over [`package-lock.json` from `main`] to local clone.
   - `npm install` to reflect the upserted dependencies.
-- In case any dependencies have been removed, we do `rm package-lock.json` and `npm install`
+- In case any dependencies have been removed, we do `rm package-lock.json` and `npm install`.  
   This way we ensure the lock file remains free of unused dependencies.
 - We do `npm update` only in stand-alone PRs.
 - To avoid inconsistent content of `package-lock.json` due to bugs like [npm/cli #7384],
