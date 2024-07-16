@@ -11,7 +11,10 @@ namespace Oracle.Database;
 interface CloudVmClusters
   extends OracleTrackedResource<CloudVmCluster, CloudVmClusterProperties> {
   @doc("Add VMs to the VM Cluster")
-  @Autorest.example("./examples/vmClusters_addVms.json", "Add VMs to VM Cluster")
+  @Autorest.example(
+    "./examples/vmClusters_addVms.json",
+    "Add VMs to VM Cluster"
+  )
   addVms is ArmResourceActionAsync<
     CloudVmCluster,
     AddRemoveDbNode,
@@ -19,7 +22,10 @@ interface CloudVmClusters
   >;
 
   @doc("Remove VMs from the VM Cluster")
-  @Autorest.example("./examples/vmClusters_removeVms.json", "Remove VMs from VM Cluster")
+  @Autorest.example(
+    "./examples/vmClusters_removeVms.json",
+    "Remove VMs from VM Cluster"
+  )
   removeVms is ArmResourceActionAsync<
     CloudVmCluster,
     AddRemoveDbNode,
