@@ -44,7 +44,13 @@ interface Mq {
     MqResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<MqResource, MqProperties>;
+  update is ArmCustomPatchSync<
+    MqResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      MqResource,
+      MqProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<MqResource>;
   listByResourceGroup is ArmResourceListByParent<MqResource>;
   listBySubscription is ArmListBySubscription<MqResource>;
@@ -60,7 +66,13 @@ interface Broker {
     BrokerResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<BrokerResource, BrokerProperties>;
+  update is ArmCustomPatchSync<
+    BrokerResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      BrokerResource,
+      BrokerProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerResource>;
   listByMqResource is ArmResourceListByParent<BrokerResource>;
 }
@@ -75,9 +87,12 @@ interface BrokerListener {
     BrokerListenerResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     BrokerListenerResource,
-    BrokerListenerProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      BrokerListenerResource,
+      BrokerListenerProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerListenerResource>;
   listByBrokerResource is ArmResourceListByParent<BrokerListenerResource>;
@@ -93,9 +108,12 @@ interface BrokerAuthentication {
     BrokerAuthenticationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     BrokerAuthenticationResource,
-    BrokerAuthenticationProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      BrokerAuthenticationResource,
+      BrokerAuthenticationProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthenticationResource>;
   listByBrokerResource is ArmResourceListByParent<BrokerAuthenticationResource>;
@@ -111,9 +129,12 @@ interface BrokerAuthorization {
     BrokerAuthorizationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     BrokerAuthorizationResource,
-    BrokerAuthorizationProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      BrokerAuthorizationResource,
+      BrokerAuthorizationProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthorizationResource>;
   listByBrokerResource is ArmResourceListByParent<BrokerAuthorizationResource>;
@@ -129,9 +150,12 @@ interface MqttBridgeConnector {
     MqttBridgeConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     MqttBridgeConnectorResource,
-    MqttBridgeConnectorProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      MqttBridgeConnectorResource,
+      MqttBridgeConnectorProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<MqttBridgeConnectorResource>;
   listByMqResource is ArmResourceListByParent<MqttBridgeConnectorResource>;
@@ -147,9 +171,12 @@ interface MqttBridgeTopicMap {
     MqttBridgeTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     MqttBridgeTopicMapResource,
-    MqttBridgeTopicMapProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      MqttBridgeTopicMapResource,
+      MqttBridgeTopicMapProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<MqttBridgeTopicMapResource>;
   listByMqttBridgeConnectorResource is ArmResourceListByParent<MqttBridgeTopicMapResource>;
@@ -165,9 +192,12 @@ interface DiagnosticService {
     DiagnosticServiceResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     DiagnosticServiceResource,
-    DiagnosticServiceProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DiagnosticServiceResource,
+      DiagnosticServiceProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DiagnosticServiceResource>;
   listByMqResource is ArmResourceListByParent<DiagnosticServiceResource>;
@@ -183,9 +213,12 @@ interface DataLakeConnector {
     DataLakeConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     DataLakeConnectorResource,
-    DataLakeConnectorProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataLakeConnectorResource,
+      DataLakeConnectorProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DataLakeConnectorResource>;
   listByMqResource is ArmResourceListByParent<DataLakeConnectorResource>;
@@ -201,9 +234,12 @@ interface DataLakeConnectorTopicMap {
     DataLakeTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     DataLakeTopicMapResource,
-    DataLakeConnectorTopicMapProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataLakeTopicMapResource,
+      DataLakeConnectorTopicMapProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DataLakeTopicMapResource>;
   listByDataLakeConnectorResource is ArmResourceListByParent<DataLakeTopicMapResource>;
@@ -219,9 +255,12 @@ interface KafkaConnector {
     KafkaConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     KafkaConnectorResource,
-    KafkaConnectorProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      KafkaConnectorResource,
+      KafkaConnectorProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<KafkaConnectorResource>;
   listByMqResource is ArmResourceListByParent<KafkaConnectorResource>;
@@ -237,9 +276,12 @@ interface KafkaConnectorTopicMap {
     KafkaTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     KafkaTopicMapResource,
-    KafkaTopicMapProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      KafkaTopicMapResource,
+      KafkaTopicMapProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<KafkaTopicMapResource>;
   listByKafkaConnectorResource is ArmResourceListByParent<KafkaTopicMapResource>;
