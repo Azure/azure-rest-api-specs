@@ -198,7 +198,10 @@ interface AccessTokens {
   createAccessToken is Operations.ResourceCreateOrReplace<AccessToken>;
 
   @doc("Get an access-token for given access-token id in guid format.")
-  @Autorest.example("./AccessTokens_GetAccessToken.json", "AccessTokens_GetAccessToken")
+  @Autorest.example(
+    "./AccessTokens_GetAccessToken.json",
+    "AccessTokens_GetAccessToken"
+  )
   getAccessToken is Operations.ResourceRead<AccessToken>;
 
   @doc("Revoke an access-token with given access-token id in guid format.")
