@@ -86,7 +86,10 @@ interface StandbyVirtualMachinePools {
   delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
   update is ArmCustomPatchSync<
     StandbyVirtualMachinePoolResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<StandbyVirtualMachinePoolResource, StandbyVirtualMachinePoolResourceProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StandbyVirtualMachinePoolResource,
+      StandbyVirtualMachinePoolResourceProperties
+    >
   >;
   listByResourceGroup is ArmResourceListByParent<StandbyVirtualMachinePoolResource>;
   listBySubscription is ArmListBySubscription<StandbyVirtualMachinePoolResource>;

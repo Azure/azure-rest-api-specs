@@ -26,7 +26,10 @@ interface CopilotSettings {
   createOrUpdate is ArmResourceCreateOrReplaceSync<CopilotSettingsResource>;
   update is ArmCustomPatchSync<
     CopilotSettingsResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<CopilotSettingsResource, CopilotSettingsProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CopilotSettingsResource,
+      CopilotSettingsProperties
+    >
   >;
   delete is ArmResourceDeleteSync<CopilotSettingsResource>;
 }

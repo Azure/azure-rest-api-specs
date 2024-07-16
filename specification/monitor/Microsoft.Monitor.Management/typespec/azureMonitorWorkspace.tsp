@@ -97,7 +97,10 @@ interface AzureMonitorWorkspaces {
   @doc("Updates part of a workspace")
   update is ArmCustomPatchSync<
     AzureMonitorWorkspace,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<AzureMonitorWorkspace, AzureMonitorWorkspaceProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AzureMonitorWorkspace,
+      AzureMonitorWorkspaceProperties
+    >
   >;
   @doc("Delete a workspace")
   delete is ArmResourceDeleteWithoutOkAsync<AzureMonitorWorkspace>;
