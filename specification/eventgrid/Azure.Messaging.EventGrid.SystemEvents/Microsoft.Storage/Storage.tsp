@@ -1,3 +1,7 @@
+import "@typespec/versioning";
+
+using TypeSpec.Versioning;
+
 /** Describes the schema of the Azure Storage events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobCreated event. */
@@ -265,6 +269,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskCompleted event. */
   model StorageTaskCompletedEventData {
     /** The status for a storage task. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     status: StorageTaskCompletedStatus;
 
     /** The time at which a storage task was completed. */
@@ -302,6 +307,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for an Microsoft.Storage.StorageTaskAssignmentCompleted event. */
   model StorageTaskAssignmentCompletedEventData {
     /** The status for a storage task. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     status: StorageTaskAssignmentCompletedStatus;
 
     /** The time at which a storage task was completed. */
