@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2024-03-02",
+    "diskName": "myPremiumV2Disk",
+    "disk": {
+      "location": "West US",
+      "sku": {
+        "name": "PremiumV2_LRS"
+      },
+      "properties": {
+        "creationData": {
+          "createOption": "Empty"
+        },
+        "diskSizeGB": 200,
+        "diskIOPSReadWrite": 125,
+        "diskMBpsReadWrite": 3000
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myPremiumV2Disk",
+        "sku": {
+          "name": "PremiumV2_LRS",
+          "tier": "Premium"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myPremiumV2Disk",
+        "sku": {
+          "name": "PremiumV2_LRS",
+          "tier": "Premium"
+        }
+      }
+    }
+  }
+}
