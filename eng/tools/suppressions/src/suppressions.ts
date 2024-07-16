@@ -37,7 +37,7 @@ const suppressionSchema = z.array(
         paths: paths,
         reason: s.reason,
       } as Suppression;
-    }),
+    })
 );
 
 /**
@@ -74,7 +74,7 @@ export async function getSuppressions(tool: string, path: string): Promise<Suppr
       tool,
       path,
       suppressionsFile,
-      await readFile(suppressionsFile, { encoding: "utf8" }),
+      await readFile(suppressionsFile, { encoding: "utf8" })
     );
   } else {
     return [];
@@ -112,7 +112,7 @@ export function getSuppressionsFromYaml(
   tool: string,
   path: string,
   suppressionsFile: string,
-  suppressionsYaml: string,
+  suppressionsYaml: string
 ): Suppression[] {
   path = resolve(path);
   suppressionsFile = resolve(suppressionsFile);
