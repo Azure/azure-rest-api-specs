@@ -1136,7 +1136,15 @@
       "properties": {
         "id": {
           "description": "Resource Id of the application gateway for containers.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ServiceNetworking/trafficControllers"
+              }
+            ]
+          }
         }
       }
     }
