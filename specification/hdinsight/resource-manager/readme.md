@@ -29,7 +29,7 @@ title: HDInsightManagementClient
 description: HDInsight Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2023-04-preview
+tag: package-2023-08-preview
 ```
 
 ### Suppression
@@ -111,6 +111,24 @@ directive:
 ```
 
 
+### Tag: package-2023-08-preview
+
+These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-08-preview'
+input-file:
+  - Microsoft.HDInsight/preview/2023-08-15-preview/applications.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/cluster.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/configurations.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/extensions.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/locations.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/operations.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/privateEndpointConnections.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/privateLinkResources.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/scriptActions.json
+  - Microsoft.HDInsight/preview/2023-08-15-preview/virtualMachines.json
+```
+
 ### Tag: package-2023-04-preview
 
 These settings apply only when `--tag=package-2023-04-preview` is specified on the command line.
@@ -128,6 +146,7 @@ input-file:
   - Microsoft.HDInsight/preview/2023-04-15-preview/scriptActions.json
   - Microsoft.HDInsight/preview/2023-04-15-preview/virtualMachines.json
 ```
+
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
@@ -192,7 +211,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas

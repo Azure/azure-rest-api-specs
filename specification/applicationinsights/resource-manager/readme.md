@@ -40,7 +40,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2022-12-09-only
+tag: package-2023-10-01-only
 ```
 
 ### Suppression
@@ -247,6 +247,78 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/linkedStorageAccounts/{storageType}"]'
     from: componentLinkedStorageAccounts_API.json
     reason: Pre-existing error in another API (i.e. this PR did not introduce this issue).
+```
+
+### Tag: package-2024-04-25-only
+
+These settings apply only when `--tag=package-2024-04-25-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-04-25-only'
+input-file:
+  - Microsoft.Insights/stable/2020-02-02/components_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+  - Microsoft.Insights/stable/2022-06-15/webTests_API.json
+  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+  - Microsoft.Insights/stable/2021-03-08/workbookOperations_API.json
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
+  - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
+  - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
+```
+
+### Tag: package-2023-10-01-only
+
+These settings apply only when `--tag=package-2023-10-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-10-01-only'
+input-file:
+  - Microsoft.Insights/stable/2020-02-02/components_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+  - Microsoft.Insights/stable/2022-06-15/webTests_API.json
+  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+  - Microsoft.Insights/stable/2021-03-08/workbookOperations_API.json
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
+  - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
+  - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
+  - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+```
+
+### Tag: package-2023-06-01-only
+
+These settings apply only when `--tag=package-2023-06-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-01-only'
+input-file:
+  - Microsoft.Insights/stable/2020-02-02/components_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+  - Microsoft.Insights/stable/2022-06-15/webTests_API.json
+  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+  - Microsoft.Insights/stable/2021-03-08/workbookOperations_API.json
+  - Microsoft.Insights/stable/2020-11-20/workbookTemplates_API.json
+  - Microsoft.Insights/stable/2021-03-08/myworkbooks_API.json
+  - Microsoft.Insights/stable/2023-06-01/workbooks_API.json
+  - Microsoft.Insights/stable/2021-10-14/livetoken_API.json
+  - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
 
 ### Tag: package-2022-12-09-only
@@ -706,7 +778,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -740,44 +812,4 @@ csharp:
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.applicationinsights
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-applicationinsights
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2015-05
-```
-
-### Tag: package-2015-05 and java
-
-These settings apply only when `--tag=package-2015-05 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2015-05' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.applicationinsights.v2015_05_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/applicationinsights/mgmt-v2015_05_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: schema-2018-06-17-preview
-
-These settings apply only when `--tag=schema-2018-06-17-preview` is specified on the command line.
-
-``` yaml $(tag) == 'schema-2018-06-17-preview'
-input-file:
-- Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
-- Microsoft.Insights/preview/2018-06-17-preview/workbookOperations_API.json
-```
+See configuration in [readme.java.md](./readme.java.md)

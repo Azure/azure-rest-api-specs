@@ -24,18 +24,280 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the chaos.
 
-```yaml
+``` yaml
 title: ChaosManagementClient
 description: Chaos Management Client
 openapi-type: arm
-tag: package-2023-04-15-preview
+tag: package-preview-2024-03
+```
+
+
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.Chaos/preview/2024-03-22-preview/capabilities.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/capabilityTypes.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/experiments.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/operationStatuses.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/operations.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/privateAccesses.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/targetTypes.json
+  - Microsoft.Chaos/preview/2024-03-22-preview/targets.json
+directive:
+  - from: swagger-document
+    where: "$.definitions.action"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentAction";
+  - from: swagger-document
+    where: "$.definitions.branch"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentBranch";
+  - from: swagger-document
+    where: "$.definitions.step"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentStep";
+  - from: swagger-document
+    where: "$.definitions.filter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilterParameters"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilterParameters";
+  - from: swagger-document
+    where: "$.definitions.selector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSelector";
+  - from: swagger-document
+    where: "$.definitions.listSelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetListSelector";
+  - from: swagger-document
+    where: "$.definitions.querySelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetQuerySelector";
+```
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01'
+input-file:
+  - Microsoft.Chaos/stable/2024-01-01/capabilities.json
+  - Microsoft.Chaos/stable/2024-01-01/capabilityTypes.json
+  - Microsoft.Chaos/stable/2024-01-01/experiments.json
+  - Microsoft.Chaos/stable/2024-01-01/operationStatuses.json
+  - Microsoft.Chaos/stable/2024-01-01/operations.json
+  - Microsoft.Chaos/stable/2024-01-01/targetTypes.json
+  - Microsoft.Chaos/stable/2024-01-01/targets.json
+directive:
+  - from: swagger-document
+    where: "$.definitions.action"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentAction";
+  - from: swagger-document
+    where: "$.definitions.branch"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentBranch";
+  - from: swagger-document
+    where: "$.definitions.step"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentStep";
+  - from: swagger-document
+    where: "$.definitions.filter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilterParameters"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilterParameters";
+  - from: swagger-document
+    where: "$.definitions.selector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSelector";
+  - from: swagger-document
+    where: "$.definitions.listSelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetListSelector";
+  - from: swagger-document
+    where: "$.definitions.querySelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetQuerySelector";
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.Chaos/stable/2023-11-01/capabilities.json
+  - Microsoft.Chaos/stable/2023-11-01/capabilityTypes.json
+  - Microsoft.Chaos/stable/2023-11-01/experiments.json
+  - Microsoft.Chaos/stable/2023-11-01/operationStatuses.json
+  - Microsoft.Chaos/stable/2023-11-01/operations.json
+  - Microsoft.Chaos/stable/2023-11-01/targetTypes.json
+  - Microsoft.Chaos/stable/2023-11-01/targets.json
+directive:
+  - from: swagger-document
+    where: "$.definitions.action"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentAction";
+  - from: swagger-document
+    where: "$.definitions.branch"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentBranch";
+  - from: swagger-document
+    where: "$.definitions.step"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentStep";
+  - from: swagger-document
+    where: "$.definitions.filter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilterParameters"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilterParameters";
+  - from: swagger-document
+    where: "$.definitions.selector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSelector";
+  - from: swagger-document
+    where: "$.definitions.listSelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetListSelector";
+  - from: swagger-document
+    where: "$.definitions.querySelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetQuerySelector";
+```
+
+### Tag: package-preview-2023-10
+
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-10'
+input-file:
+  - Microsoft.Chaos/preview/2023-10-27-preview/capabilities.json
+  - Microsoft.Chaos/preview/2023-10-27-preview/capabilityTypes.json
+  - Microsoft.Chaos/preview/2023-10-27-preview/experiments.json
+  - Microsoft.Chaos/preview/2023-10-27-preview/operationStatuses.json
+  - Microsoft.Chaos/preview/2023-10-27-preview/operations.json
+  - Microsoft.Chaos/preview/2023-10-27-preview/privateAccesses.json
+  - Microsoft.Chaos/preview/2023-10-27-preview/targetTypes.json
+  - Microsoft.Chaos/preview/2023-10-27-preview/targets.json
+directive:
+  - from: swagger-document
+    where: "$.definitions.action"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentAction";
+  - from: swagger-document
+    where: "$.definitions.branch"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentBranch";
+  - from: swagger-document
+    where: "$.definitions.step"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentStep";
+  - from: swagger-document
+    where: "$.definitions.filter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilterParameters"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilterParameters";
+  - from: swagger-document
+    where: "$.definitions.selector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSelector";
+  - from: swagger-document
+    where: "$.definitions.listSelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetListSelector";
+  - from: swagger-document
+    where: "$.definitions.querySelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetQuerySelector";
+```
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.Chaos/preview/2023-09-01-preview/capabilities.json
+  - Microsoft.Chaos/preview/2023-09-01-preview/capabilityTypes.json
+  - Microsoft.Chaos/preview/2023-09-01-preview/experiments.json
+  - Microsoft.Chaos/preview/2023-09-01-preview/operations.json
+  - Microsoft.Chaos/preview/2023-09-01-preview/targetTypes.json
+  - Microsoft.Chaos/preview/2023-09-01-preview/targets.json
+  - Microsoft.Chaos/preview/2023-09-01-preview/operationStatuses.json
+directive:
+  - from: swagger-document
+    where: "$.definitions.action"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentAction";
+  - from: swagger-document
+    where: "$.definitions.branch"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentBranch";
+  - from: swagger-document
+    where: "$.definitions.step"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentStep";
+  - from: swagger-document
+    where: "$.definitions.filter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilterParameters"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilterParameters";
+  - from: swagger-document
+    where: "$.definitions.selector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSelector";
+  - from: swagger-document
+    where: "$.definitions.listSelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetListSelector";
+  - from: swagger-document
+    where: "$.definitions.querySelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetQuerySelector";
 ```
 
 ### Tag: package-2023-04-15-preview
 
 These settings apply only when `--tag=package-2023-04-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-04-15-preview'
+``` yaml $(tag) == 'package-2023-04-15-preview'
 input-file:
   - Microsoft.Chaos/preview/2023-04-15-preview/capabilities.json
   - Microsoft.Chaos/preview/2023-04-15-preview/capabilityTypes.json
@@ -49,7 +311,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-04-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-04-01-preview'
+``` yaml $(tag) == 'package-2023-04-01-preview'
 input-file:
   - Microsoft.Chaos/preview/2023-04-01-preview/capabilities.json
   - Microsoft.Chaos/preview/2023-04-01-preview/capabilityTypes.json
@@ -63,7 +325,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-10-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10-01-preview'
+``` yaml $(tag) == 'package-2022-10-01-preview'
 directive:
   - suppress: R3026
     reason: Patch is not implemented in this version.
@@ -83,7 +345,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-07-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-07-01-preview'
+``` yaml $(tag) == 'package-2022-07-01-preview'
 directive:
   - suppress: R3026
     reason: Patch is not implemented in this version.
@@ -103,7 +365,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-09-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-09-15-preview'
+``` yaml $(tag) == 'package-2021-09-15-preview'
 directive:
   - suppress: R3026
     reason: Patch is not implemented in this version.
@@ -128,9 +390,9 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-```yaml $(swagger-to-sdk)
+``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -161,7 +423,7 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: TopLevelResourcesListBySubscription
     where: $.definitions.target
