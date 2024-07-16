@@ -2021,6 +2021,11 @@
             "$ref": "./networkWatcher.json#/definitions/FlowLog"
           },
           "description": "A collection of references to flow log resources."
+        },
+        "privateEndpointVNetPolicies": {
+          "readOnly": false,
+          "$ref": "#/definitions/PrivateEndpointVNetPolicies",
+          "description": "Private Endpoint VNet Policies."
         }
       },
       "description": "Properties of the virtual network."
@@ -2088,6 +2093,18 @@
         }
       },
       "description": "DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options."
+    },
+    "PrivateEndpointVNetPolicies": {
+      "type": "string",
+      "description": "Private Endpoint VNet Policies.",
+      "enum": [
+        "Disabled",
+        "Basic"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointVNetPolicies",
+        "modelAsString": true
+      }
     },
     "VirtualNetworkBgpCommunities": {
       "properties": {
@@ -2288,4 +2305,3 @@
     }
   }
 }
-
