@@ -634,13 +634,13 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextTaskResult, "AnalyzeTextResult", "csharp");
 @@clientName(AnalyzeTextTaskResultsKind, "AnalyzeTextResultsKind", "csharp");
 
-@@clientName(SentimentTaskResult, "SentimentResult", "csharp");
-@@clientName(PiiTaskResult, "PiiResult", "csharp");
-@@clientName(LanguageDetectionTaskResult, "LanguageDetectionResult", "csharp");
-@@clientName(EntitiesTaskResult, "EntitiesResult", "csharp");
-@@clientName(EntityLinkingTaskResult, "EntityLinkingResult", "csharp");
-@@clientName(DynamicClassificationTaskResult, "DynamicClassificationResult", "csharp");
-@@clientName(KeyPhraseTaskResult, "KeyPhraseResult", "csharp");
+@@clientName(SentimentTaskResult, "AnalyzeTextSentimentResult", "csharp");
+@@clientName(PiiTaskResult, "AnalyzeTextPiiResult", "csharp");
+@@clientName(LanguageDetectionTaskResult, "AnalyzeTextLanguageDetectionResult", "csharp");
+@@clientName(EntitiesTaskResult, "AnalyzeTextEntitiesResult", "csharp");
+@@clientName(EntityLinkingTaskResult, "AnalyzeTextEntityLinkingResult", "csharp");
+@@clientName(DynamicClassificationTaskResult, "AnalyzeTextDynamicClassificationResult", "csharp");
+@@clientName(KeyPhraseTaskResult, "AnalyzeTextKeyPhraseResult", "csharp");
 
 
 

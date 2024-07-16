@@ -136,7 +136,7 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(AnalyzeConversationTaskResult, "AnalyzeConversationResult", "csharp");
 @@clientName(AnalyzeConversationTaskResultsKind, "AnalyzeConversationResultKind", "csharp");
 
-@@clientName(ConversationalTaskResult, "ConversationalResult", "csharp");
+@@clientName(ConversationalTaskResult, "AnalyzeConversationConversationalResult", "csharp");
 
 
 @@clientName(MultiLanguageConversationAnalysisInput, "MultiLanguageConversationInput");
