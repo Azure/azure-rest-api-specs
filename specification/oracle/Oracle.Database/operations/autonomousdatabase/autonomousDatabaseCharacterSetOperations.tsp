@@ -10,11 +10,11 @@ namespace Oracle.Database;
 interface AutonomousDatabaseCharacterSets
   extends OracleLocationBasedResource<AutonomousDatabaseCharacterSet> {}
 
-@@example(AutonomousDatabaseCharacterSets.listByLocation,
+@@Autorest.example(AutonomousDatabaseCharacterSets.listByLocation,
   "./examples/autonomousDatabaseCharacterSet_listByLocation.json",
   "List autonomous db character sets by location"
 );
-@@example(AutonomousDatabaseCharacterSets.get,
+@@Autorest.example(AutonomousDatabaseCharacterSets.get,
   "./examples/autonomousDatabaseCharacterSet_get.json",
   "Get autonomous db character set"
 );

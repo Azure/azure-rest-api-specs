@@ -8,11 +8,11 @@ namespace Oracle.Database;
 @armResourceOperations
 interface DnsPrivateZones extends OracleLocationBasedResource<DnsPrivateZone> {}
 
-@@example(DnsPrivateZones.listByLocation,
+@@Autorest.example(DnsPrivateZones.listByLocation,
   "./examples/dnsPrivateZones_listByLocation.json",
   "List DnsPrivateZones by location"
 );
-@@example(DnsPrivateZones.get,
+@@Autorest.example(DnsPrivateZones.get,
   "./examples/dnsPrivateZones_get.json",
   "Get a DnsPrivateZone by name"
 );

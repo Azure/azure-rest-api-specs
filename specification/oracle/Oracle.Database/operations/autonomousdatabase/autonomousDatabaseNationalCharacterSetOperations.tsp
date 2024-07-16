@@ -10,11 +10,11 @@ namespace Oracle.Database;
 interface AutonomousDatabaseNationalCharacterSets
   extends OracleLocationBasedResource<AutonomousDatabaseNationalCharacterSet> {}
 
-@@example(AutonomousDatabaseNationalCharacterSets.listByLocation,
+@@Autorest.example(AutonomousDatabaseNationalCharacterSets.listByLocation,
   "./examples/autonomousDatabaseNationalCharacterSet_listByLocation.json",
   "List autonomous db national character sets by location"
 );
-@@example(AutonomousDatabaseNationalCharacterSets.get,
+@@Autorest.example(AutonomousDatabaseNationalCharacterSets.get,
   "./examples/autonomousDatabaseNationalCharacterSet_get.json",
   "Get autonomous db national character set"
 );

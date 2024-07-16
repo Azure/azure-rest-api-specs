@@ -9,14 +9,14 @@ namespace Oracle.Database;
 
 @armResourceOperations
 interface DbServers extends OracleReadOnlyResource<DbServer> {
-  @example(
+  @Autorest.example(
     "./examples/dbServers_listByParent.json",
     "List DbServers by Exadata Infrastructure"
   )
   listByCloudExadataInfrastructure is ArmResourceListByParent<DbServer>;
 }
 
-@@example(DbServers.get,
+@@Autorest.example(DbServers.get,
   "./examples/dbServers_get.json",
   "Get DbServer by parent"
 );
