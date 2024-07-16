@@ -37,7 +37,7 @@ test.concurrent("suppress foo.json, get foo.json w/ different tool", async () =>
   expect(suppressions).toEqual([]);
 });
 
-test.concurrent("merge", async () => {
+test.concurrent("merge, get bar.json", async () => {
   const suppressions = await getTestSuppressions(join("merge", "foo", "bar", "bar.json"));
   expect(suppressions).toEqual([
     {
@@ -94,6 +94,42 @@ test.concurrent("merge", async () => {
       tool: "TestTool",
       paths: ["foo/bar/bar.json"],
       reason: "root-foo-bar-exact",
+    },
+  ]);
+});
+
+test.concurrent("merge, get foo.json", async () => {
+  const suppressions = await getTestSuppressions(join("merge", "foo", "foo.json"));
+  expect(suppressions).toEqual([
+    {
+      tool: "TestTool",
+      paths: ["**"],
+      reason: "foo-globstar",
+    },
+    {
+      tool: "TestTool",
+      paths: ["*"],
+      reason: "foo-star",
+    },
+    {
+      tool: "TestTool",
+      paths: ["foo.json"],
+      reason: "foo-exact",
+    },
+    {
+      tool: "TestTool",
+      paths: ["foo/**"],
+      reason: "root-foo-globstar",
+    },
+    {
+      tool: "TestTool",
+      paths: ["foo/*"],
+      reason: "root-foo-star",
+    },
+    {
+      tool: "TestTool",
+      paths: ["foo/foo.json"],
+      reason: "root-foo-exact",
     },
   ]);
 });
