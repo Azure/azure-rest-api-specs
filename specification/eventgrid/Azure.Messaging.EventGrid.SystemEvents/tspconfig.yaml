@@ -13,8 +13,9 @@ options:
     emitter-output-dir: "{project-root}/.."
     examples-directory: examples
     omit-unreachable-types: false
-    output-file: "{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/SystemEvents.json"
+    output-file: "{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/GeneratedSystemEvents.json"
     azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
   "@azure-tools/typespec-python":
     package-pprint-name: '"Azure Event Grid System Events"'
     package-version: 4.12.0b1
@@ -28,3 +29,4 @@ options:
     model-namespace: false
     namespace: Azure.Messaging.EventGrid.SystemEvents
     flavor: azure
+    api-version: "2018-01-01"
