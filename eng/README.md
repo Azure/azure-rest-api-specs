@@ -21,6 +21,18 @@ Below are code convention we strive to follow in `eng` directory:
 
 - We maintain only top-level `package-lock.json` file. Running `npm install` from top-level dir removes the need
   to ever have other files.
+- We ensure the lock file remains clean by ensuring that a PR that adds or modifies dependencies,
+  makes changes equivalent to following protocol:
+  - `cd <local-specs-clone-root>`
+  - `git clean -xdf` to remove all untracked files.
+  - Copy-over [`package-lock.json` from `main`] to local clone.
+  - `npm install` to reflect the upserted dependencies.
+- In case any dependencies have been removed, we do `rm package-lock.json` and `npm install`
+  This way we ensure the lock file remains free of unused dependencies.
+- We do `npm update` only in stand-alone PRs.
+- To avoid inconsistent content of `package-lock.json` due to bugs like [npm/cli #7384],
+  we ensure to use the same node and npm version to update `package-lock.json`.  
+  As of 7/15/2024 this is `node 20.15.1` and `npm 0.7.0`.
 
 ## Linting and prettier
 
@@ -34,3 +46,5 @@ Below are code convention we strive to follow in `eng` directory:
 [microsoft/typespec package.json]: https://github.com/microsoft/typespec/blob/main/package.json
 [microsoft/typespec .prettierrc.json]: https://github.com/microsoft/typespec/blob/main/.prettierrc.json
 [eslint override]: https://github.com/Azure/azure-rest-api-specs/pull/29820#pullrequestreview-2177045580
+[npm/cli #7384]: https://github.com/npm/cli/issues/7384
+[`package-lock.json` from `main`]: https://github.com/Azure/azure-rest-api-specs/blob/main/package-lock.json
