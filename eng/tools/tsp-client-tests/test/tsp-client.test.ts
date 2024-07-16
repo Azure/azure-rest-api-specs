@@ -54,6 +54,8 @@ async function convert(expect: ExpectStatic, readme: string) {
   expect(() => access(outputFolder)).rejects.toThrowError();
 }
 
+// TODO: Convert to `test.concurrent()` once Azure/azure-sdk-tools#8610 is merged,
+// which should fix race condition bug calling `npx autorest`.
 test("Usage", async ({ expect }) => {
   const { stdout, exitCode } = await tspClient();
 
