@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure App Configuration",
-    "version": "2023-11-01",
+    "version": "2024-09-01-preview",
     "description": "Azure App Configuration REST API",
     "x-typespec-generated": [
       {
@@ -35,6 +35,9 @@
   ],
   "security": [
     {
+      "SasTokenAuth": []
+    },
+    {
       "ApiKeyAuth": []
     },
     {
@@ -56,6 +59,10 @@
       "scopes": {
         "https://azconfig.io/.default": ""
       }
+    },
+    "SasTokenAuth": {
+      "type": "http",
+      "scheme": "sas"
     }
   },
   "tags": [],
