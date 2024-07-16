@@ -59,6 +59,105 @@
   },
   "tags": [],
   "paths": {
+    "/batches": {
+      "get": {
+        "operationId": "BatchList",
+        "description": "Gets a list of all batches owned by the Azure OpenAI resource.",
+        "parameters": [
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last event from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of batches to retrieve. The default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested list of batches.",
+            "schema": {
+              "$ref": "#/definitions/ListBatchesResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "BatchCreate",
+        "description": "Creates and executes a batch from an uploaded file of requests.\nResponse includes details of the enqueued job including job status.\nThe ID of the result file is added to the response once complete.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested list of files.",
+            "schema": {
+              "$ref": "#/definitions/Batch"
+            }
+          }
+        }
+      }
+    },
+    "/batches/{batchId}": {
+      "get": {
+        "operationId": "BatchGet",
+        "description": "Gets details for a single batch specified by the given batchID.",
+        "parameters": [
+          {
+            "name": "batchId",
+            "in": "path",
+            "description": "The identifier of the batch.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested batch.",
+            "schema": {
+              "$ref": "#/definitions/Batch"
+            }
+          }
+        }
+      }
+    },
+    "/batches/{batchId}/cancel": {
+      "get": {
+        "operationId": "BatchCancel",
+        "description": "Gets details for a single batch specified by the given batchID.",
+        "parameters": [
+          {
+            "name": "batchId",
+            "in": "path",
+            "description": "The identifier of the batch.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Batch that was canceled.",
+            "schema": {
+              "$ref": "#/definitions/Batch"
+            }
+          }
+        }
+      }
+    },
     "/deployments/{deploymentId}/audio/speech": {
       "post": {
         "operationId": "GenerateSpeechFromText",
@@ -2516,6 +2615,307 @@
         ]
       }
     },
+    "Batch": {
+      "type": "object",
+      "description": "The Batch object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id assigned to the Batch."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always `batch`.",
+          "enum": [
+            "batch"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The OpenAI API endpoint used by the batch."
+        },
+        "errors": {
+          "$ref": "#/definitions/BatchErrorList",
+          "description": "The list of Batch errors."
+        },
+        "input_file_id": {
+          "type": "string",
+          "description": "The ID of the input file for the batch.",
+          "minLength": 1,
+          "x-ms-client-name": "inputFileId"
+        },
+        "completion_window": {
+          "type": "string",
+          "description": "The time frame within which the batch should be processed.",
+          "x-ms-client-name": "completionWindow"
+        },
+        "status": {
+          "$ref": "#/definitions/BatchStatus",
+          "description": "The current status of the batch."
+        },
+        "output_file_id": {
+          "type": "string",
+          "description": "The ID of the file containing the outputs of successfully executed requests.",
+          "x-ms-client-name": "outputFileId"
+        },
+        "error_file_id": {
+          "type": "string",
+          "description": "The ID of the file containing the outputs of requests with errors.",
+          "x-ms-client-name": "errorFileId"
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch was created.",
+          "x-ms-client-name": "createdAt"
+        },
+        "in_progress_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch started processing.",
+          "x-ms-client-name": "inProgressAt"
+        },
+        "expires_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch will expire.",
+          "x-ms-client-name": "expiresAt"
+        },
+        "finalizing_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch started finalizing.",
+          "x-ms-client-name": "finalizingAt"
+        },
+        "completed_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch was completed.",
+          "x-ms-client-name": "completedAt"
+        },
+        "failed_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch failed.",
+          "x-ms-client-name": "failedAt"
+        },
+        "expired_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch expired.",
+          "x-ms-client-name": "expiredAt"
+        },
+        "cancelling_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch started cancelling.",
+          "x-ms-client-name": "cancellingAt"
+        },
+        "cancelled_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the batch was cancelled.",
+          "x-ms-client-name": "cancelledAt"
+        },
+        "request_counts": {
+          "type": "object",
+          "description": "The request counts for different statuses within the batch.",
+          "properties": {
+            "total": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Total number of requests in the batch."
+            },
+            "completed": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Number of requests that have been completed successfully."
+            },
+            "failed": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Number of requests that have failed."
+            }
+          },
+          "required": [
+            "total",
+            "completed",
+            "failed"
+          ],
+          "x-ms-client-name": "requestCounts"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of key-value pairs that can be attached to the batch. This can be useful for storing additional infomration about the batch in a structured format.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "endpoint",
+        "input_file_id",
+        "completion_window",
+        "status",
+        "created_at"
+      ]
+    },
+    "BatchCreateRequest": {
+      "type": "object",
+      "description": "Defines the request to create a batch.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always `batch`.",
+          "enum": [
+            "batch"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The API endpoint used by the batch."
+        },
+        "input_file_id": {
+          "type": "string",
+          "description": "The ID of the input file for the batch.",
+          "minLength": 1,
+          "x-ms-client-name": "inputFileId"
+        },
+        "completion_window": {
+          "type": "string",
+          "description": "The time frame within which the batch should be processed.",
+          "x-ms-client-name": "completionWindow"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of key-value pairs that can be attached to the batch. This can be useful for storing additional infomration about the batch in a structured format.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "object",
+        "endpoint",
+        "input_file_id",
+        "completion_window"
+      ]
+    },
+    "BatchErrorDatum": {
+      "type": "object",
+      "description": "A Datum containing information about a Batch Error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An error code identifying the error type."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable message providing more details about the error."
+        },
+        "param": {
+          "type": "string",
+          "description": "The name of the parameter that caused the error, if applicable."
+        },
+        "line": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The line number of the input file where the error occurred, if applicable."
+        }
+      }
+    },
+    "BatchErrorList": {
+      "type": "object",
+      "description": "A list of Batch errors.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always `list`.",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "data": {
+          "type": "array",
+          "description": "The list of Batch error data.",
+          "items": {
+            "$ref": "#/definitions/BatchErrorDatum"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "BatchStatus": {
+      "type": "string",
+      "description": "The status of a batch.",
+      "enum": [
+        "validating",
+        "failed",
+        "in_progress",
+        "finalizing",
+        "completed",
+        "expired",
+        "cancelling",
+        "cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "BatchStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "validating",
+            "value": "validating",
+            "description": "The input file is being validated before the batch can begin."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The input file has failed the validation process."
+          },
+          {
+            "name": "in_progress",
+            "value": "in_progress",
+            "description": "The input file was successfully validated and the batch is currently being executed."
+          },
+          {
+            "name": "finalizing",
+            "value": "finalizing",
+            "description": "The batch has completed and the results are being prepared."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "The batch has been completed and the results are ready."
+          },
+          {
+            "name": "expired",
+            "value": "expired",
+            "description": "The batch was not able to complete within the 24-hour time window."
+          },
+          {
+            "name": "cancelling",
+            "value": "cancelling",
+            "description": "Cancellation of the batch has been initiated."
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled",
+            "description": "The batch was cancelled."
+          }
+        ]
+      }
+    },
     "ChatChoice": {
       "type": "object",
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -4504,6 +4904,49 @@
       "required": [
         "created",
         "data"
+      ]
+    },
+    "ListBatchesResponse": {
+      "type": "object",
+      "description": "A list of paginated Batch objects.",
+      "properties": {
+        "data": {
+          "type": "array",
+          "description": "A human-readable error message.",
+          "items": {
+            "$ref": "#/definitions/Batch"
+          }
+        },
+        "first_id": {
+          "type": "string",
+          "description": "A human-readable error message.",
+          "x-ms-client-name": "firstId"
+        },
+        "last_id": {
+          "type": "string",
+          "description": "A human-readable error message.",
+          "x-ms-client-name": "lastId"
+        },
+        "has_more": {
+          "type": "boolean",
+          "description": "A human-readable error message.",
+          "x-ms-client-name": "hasMore"
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type.",
+          "enum": [
+            "list"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "data",
+        "has_more",
+        "object"
       ]
     },
     "OnYourDataAccessTokenAuthenticationOptions": {
