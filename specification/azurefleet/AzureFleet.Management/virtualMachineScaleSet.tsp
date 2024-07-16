@@ -22,9 +22,9 @@ model VirtualMachineScaleSet {
   name: string;
 
   @doc("""
-  The compute RP resource id of the virtualMachineScaleSet 
-  "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}"
-  """)
+    The compute RP resource id of the virtualMachineScaleSet 
+    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}"
+    """)
   @visibility("read")
   id: string;
 
