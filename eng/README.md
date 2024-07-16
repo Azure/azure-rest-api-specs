@@ -1,6 +1,6 @@
-# `Eng` directory
+# `eng` directory
 
-The `Eng` directory contains source code for automated tooling running on this repository pull requests.
+The `eng` directory contains source code for automated tooling running on this repository pull requests.
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
