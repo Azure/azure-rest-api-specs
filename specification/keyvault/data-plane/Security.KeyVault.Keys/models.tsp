@@ -181,12 +181,12 @@ union JsonWebKeyEncryptionAlgorithm {
    * RFC 3447 in Section A.2.1. Those default parameters are using a hash function
    * of SHA-1 and a mask generation function of MGF1 with SHA-1.
    */
-  `RSA-OAEP`: "RSA-OAEP",
+  RSA_OAEP: "RSA-OAEP",
 
   /** RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256
    * and a mask generation function of MGF1 with SHA-256.
    */
-  `RSA-OAEP-256`: "RSA-OAEP-256",
+  RSA_OAEP_256: "RSA-OAEP-256",
 
   /** RSAES-PKCS1-V1_5 key encryption, as described in https://tools.ietf.org/html/rfc3447. */
   RSA1_5: "RSA1_5",
