@@ -78,10 +78,6 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
-## Java
-
-See configuration in [readme.java.md](./readme.java.md)
-
 ### Suppress Operations API Implemented exception
 
  For operations API, we have defined it in a common folder "edge" under the RP. We don't have it in individual specs file for resources since we need partial manifest rollout. Hence the swagger has been split for each resource but operations API is at a common place here -- azure-rest-api-specs-pr\specification\edge\resource-manager\Microsoft.Edge\edge\preview\2023-07-01-preview\operations.json
