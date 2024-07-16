@@ -54,19 +54,17 @@ async function convert(expect: ExpectStatic, readme: string) {
   expect(() => access(outputFolder)).rejects.toThrowError();
 }
 
-// TODO: Convert to `test.concurrent()` once Azure/azure-sdk-tools#8610 is merged,
-// which should fix race condition bug calling `npx autorest`.
-test("Usage", async ({ expect }) => {
+test.concurrent("Usage", async ({ expect }) => {
   const { stdout, exitCode } = await tspClient();
 
   expect(stdout).toContain("Usage");
   expect(exitCode).not.toBe(0);
 });
 
-test("Convert keyvault/data-plane", async ({ expect }) => {
+test.concurrent("Convert keyvault/data-plane", async ({ expect }) => {
   await convert(expect, "specification/keyvault/data-plane/readme.md");
 });
 
-test("Convert sphere/resource-manager", async ({ expect }) => {
+test.concurrent("Convert sphere/resource-manager", async ({ expect }) => {
   await convert(expect, "specification/sphere/resource-manager/readme.md");
 });
