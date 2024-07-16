@@ -115,7 +115,10 @@ interface StandbyContainerGroupPools {
   delete is ArmResourceDeleteWithoutOkAsync<StandbyContainerGroupPoolResource>;
   update is ArmCustomPatchSync<
     StandbyContainerGroupPoolResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<StandbyContainerGroupPoolResource, StandbyContainerGroupPoolResourceProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StandbyContainerGroupPoolResource,
+      StandbyContainerGroupPoolResourceProperties
+    >
   >;
   listByResourceGroup is ArmResourceListByParent<StandbyContainerGroupPoolResource>;
   listBySubscription is ArmListBySubscription<StandbyContainerGroupPoolResource>;

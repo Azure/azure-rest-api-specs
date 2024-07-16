@@ -44,7 +44,13 @@ interface Mq {
     MqResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmCustomPatchSync<MqResource, Azure.ResourceManager.Foundations.ResourceUpdateModel<MqResource, MqProperties>>;
+  update is ArmCustomPatchSync<
+    MqResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      MqResource,
+      MqProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<MqResource>;
   listByResourceGroup is ArmResourceListByParent<MqResource>;
   listBySubscription is ArmListBySubscription<MqResource>;
@@ -60,7 +66,13 @@ interface Broker {
     BrokerResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmCustomPatchSync<BrokerResource, Azure.ResourceManager.Foundations.ResourceUpdateModel<BrokerResource, BrokerProperties>>;
+  update is ArmCustomPatchSync<
+    BrokerResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      BrokerResource,
+      BrokerProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerResource>;
   listByMqResource is ArmResourceListByParent<BrokerResource>;
 }
@@ -77,7 +89,10 @@ interface BrokerListener {
   >;
   update is ArmCustomPatchSync<
     BrokerListenerResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<BrokerListenerResource, BrokerListenerProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      BrokerListenerResource,
+      BrokerListenerProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerListenerResource>;
   listByBrokerResource is ArmResourceListByParent<BrokerListenerResource>;
@@ -95,7 +110,10 @@ interface BrokerAuthentication {
   >;
   update is ArmCustomPatchSync<
     BrokerAuthenticationResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<BrokerAuthenticationResource, BrokerAuthenticationProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      BrokerAuthenticationResource,
+      BrokerAuthenticationProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthenticationResource>;
   listByBrokerResource is ArmResourceListByParent<BrokerAuthenticationResource>;
@@ -113,7 +131,10 @@ interface BrokerAuthorization {
   >;
   update is ArmCustomPatchSync<
     BrokerAuthorizationResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<BrokerAuthorizationResource, BrokerAuthorizationProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      BrokerAuthorizationResource,
+      BrokerAuthorizationProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<BrokerAuthorizationResource>;
   listByBrokerResource is ArmResourceListByParent<BrokerAuthorizationResource>;
@@ -131,7 +152,10 @@ interface MqttBridgeConnector {
   >;
   update is ArmCustomPatchSync<
     MqttBridgeConnectorResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<MqttBridgeConnectorResource, MqttBridgeConnectorProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      MqttBridgeConnectorResource,
+      MqttBridgeConnectorProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<MqttBridgeConnectorResource>;
   listByMqResource is ArmResourceListByParent<MqttBridgeConnectorResource>;
@@ -149,7 +173,10 @@ interface MqttBridgeTopicMap {
   >;
   update is ArmCustomPatchSync<
     MqttBridgeTopicMapResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<MqttBridgeTopicMapResource, MqttBridgeTopicMapProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      MqttBridgeTopicMapResource,
+      MqttBridgeTopicMapProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<MqttBridgeTopicMapResource>;
   listByMqttBridgeConnectorResource is ArmResourceListByParent<MqttBridgeTopicMapResource>;
@@ -167,7 +194,10 @@ interface DiagnosticService {
   >;
   update is ArmCustomPatchSync<
     DiagnosticServiceResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<DiagnosticServiceResource, DiagnosticServiceProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DiagnosticServiceResource,
+      DiagnosticServiceProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DiagnosticServiceResource>;
   listByMqResource is ArmResourceListByParent<DiagnosticServiceResource>;
@@ -185,7 +215,10 @@ interface DataLakeConnector {
   >;
   update is ArmCustomPatchSync<
     DataLakeConnectorResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<DataLakeConnectorResource, DataLakeConnectorProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataLakeConnectorResource,
+      DataLakeConnectorProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DataLakeConnectorResource>;
   listByMqResource is ArmResourceListByParent<DataLakeConnectorResource>;
@@ -203,7 +236,10 @@ interface DataLakeConnectorTopicMap {
   >;
   update is ArmCustomPatchSync<
     DataLakeTopicMapResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<DataLakeTopicMapResource, DataLakeConnectorTopicMapProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataLakeTopicMapResource,
+      DataLakeConnectorTopicMapProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<DataLakeTopicMapResource>;
   listByDataLakeConnectorResource is ArmResourceListByParent<DataLakeTopicMapResource>;
@@ -221,7 +257,10 @@ interface KafkaConnector {
   >;
   update is ArmCustomPatchSync<
     KafkaConnectorResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<KafkaConnectorResource, KafkaConnectorProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      KafkaConnectorResource,
+      KafkaConnectorProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<KafkaConnectorResource>;
   listByMqResource is ArmResourceListByParent<KafkaConnectorResource>;
@@ -239,7 +278,10 @@ interface KafkaConnectorTopicMap {
   >;
   update is ArmCustomPatchSync<
     KafkaTopicMapResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<KafkaTopicMapResource, KafkaTopicMapProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      KafkaTopicMapResource,
+      KafkaTopicMapProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<KafkaTopicMapResource>;
   listByKafkaConnectorResource is ArmResourceListByParent<KafkaTopicMapResource>;

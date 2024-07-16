@@ -42,7 +42,10 @@ interface LoadTests {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
   update is ArmCustomPatchAsync<
     LoadTestResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<LoadTestResource, LoadTestProperties>,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      LoadTestResource,
+      LoadTestProperties
+    >,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
@@ -91,7 +94,10 @@ interface LoadTestMappings {
   @added(APIVersions.v2023_12_01_preview)
   update is ArmCustomPatchSync<
     LoadTestMappingResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<LoadTestMappingResource, LoadTestMappingProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      LoadTestMappingResource,
+      LoadTestMappingProperties
+    >
   >;
 
   @added(APIVersions.v2023_12_01_preview)
@@ -113,7 +119,10 @@ interface LoadTestProfileMappings {
   @added(APIVersions.v2023_12_01_preview)
   update is ArmCustomPatchSync<
     LoadTestProfileMappingResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<LoadTestProfileMappingResource, LoadTestProfileMappingProperties>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      LoadTestProfileMappingResource,
+      LoadTestProfileMappingProperties
+    >
   >;
 
   @added(APIVersions.v2023_12_01_preview)
