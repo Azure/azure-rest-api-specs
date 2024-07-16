@@ -1,4 +1,6 @@
 {
+  "title": "ClusterJobs_CreateOrUpdate_Windows_AddNetworkIntentJob",
+  "operationId": "ClusterJobs_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "test-rg",
@@ -6,14 +8,52 @@
     "jobsName": "addnode",
     "api-version": "2023-12-01-preview",
     "resource": {
-      "kind": "AddServer",
+      "kind": "Windows",
       "properties": {
+        "jobType": "AddNetworkIntent",
         "arcNodeResourceIds": [
           "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
         ],
-        "serverName": "Node-2",
         "deploymentMode": "Deploy",
-        "hostIpv4Address": "192.168.10.10",
+        "hostNetwork": {
+          "intents": [
+            {
+              "name": "Compute_Management",
+              "trafficType": [
+                "Compute",
+                "Management"
+              ],
+              "adapter": [
+                "Port2"
+              ],
+              "overrideVirtualSwitchConfiguration": false,
+              "virtualSwitchConfigurationOverrides": {
+                "enableIov": "True",
+                "loadBalancingAlgorithm": "HyperVPort"
+              },
+              "overrideQosPolicy": false,
+              "qosPolicyOverrides": {
+                "priorityValue8021Action_Cluster": "7",
+                "priorityValue8021Action_SMB": "3",
+                "bandwidthPercentage_SMB": "50"
+              },
+              "overrideAdapterProperty": false,
+              "adapterPropertyOverrides": {
+                "jumboPacket": "1514",
+                "networkDirect": "Enabled",
+                "networkDirectTechnology": "iWARP"
+              }
+            }
+          ],
+          "storageNetworks": [
+            {
+              "name": "Storage1Network",
+              "networkAdapterName": "Port3",
+              "vlanId": "5"
+            }
+          ],
+          "storageConnectivitySwitchless": true
+        },
         "secrets": [
           {
             "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
@@ -32,22 +72,63 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/3ebebf5a-a1ad-46e4-a920-77f05b858001/resourceGroups/bhukumar-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/addnode",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/user-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/addnode",
         "name": "addnode",
-        "kind": "AddServer",
         "type": "Microsoft.azurestackhci/clusters/jobs",
+        "kind": "Windows",
         "systemData": {
-          "createdBy": "bhukumar@microsoft.com",
+          "createdBy": "user@microsoft.com",
           "createdByType": "User",
           "createdAt": "2024-01-29T10:43:27.9471574Z",
-          "lastModifiedBy": "bhukumar@microsoft.com",
+          "lastModifiedBy": "user@microsoft.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
         },
         "properties": {
-          "serverName": "Node-2",
+          "jobType": "AddNetworkIntent",
+          "arcNodeResourceIds": [
+            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+          ],
           "deploymentMode": "Deploy",
-          "hostIpv4Address": "192.168.10.10",
+          "hostNetwork": {
+            "intents": [
+              {
+                "name": "Compute_Management",
+                "trafficType": [
+                  "Compute",
+                  "Management"
+                ],
+                "adapter": [
+                  "Port2"
+                ],
+                "overrideVirtualSwitchConfiguration": false,
+                "virtualSwitchConfigurationOverrides": {
+                  "enableIov": "True",
+                  "loadBalancingAlgorithm": "HyperVPort"
+                },
+                "overrideQosPolicy": false,
+                "qosPolicyOverrides": {
+                  "priorityValue8021Action_Cluster": "7",
+                  "priorityValue8021Action_SMB": "3",
+                  "bandwidthPercentage_SMB": "50"
+                },
+                "overrideAdapterProperty": false,
+                "adapterPropertyOverrides": {
+                  "jumboPacket": "1514",
+                  "networkDirect": "Enabled",
+                  "networkDirectTechnology": "iWARP"
+                }
+              }
+            ],
+            "storageNetworks": [
+              {
+                "name": "Storage1Network",
+                "networkAdapterName": "Port3",
+                "vlanId": "5"
+              }
+            ],
+            "storageConnectivitySwitchless": true
+          },
           "secrets": [
             {
               "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
@@ -125,32 +206,69 @@
             }
           },
           "provisioningState": "Succeeded",
-          "percentComplete": 0,
-          "arcNodeResourceIds": [
-            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
-          ],
           "status": "NotSpecified"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/3ebebf5a-a1ad-46e4-a920-77f05b858001/resourceGroups/bhukumar-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/addnode",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/user-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/addnode",
         "name": "addnode",
-        "type": "Microsoft.AzureStackHCI/clusters/jobs",
-        "kind": "AddServer",
+        "type": "Microsoft.azurestackhci/clusters/jobs",
+        "kind": "Windows",
         "systemData": {
-          "createdBy": "bhukumar@microsoft.com",
+          "createdBy": "user@microsoft.com",
           "createdByType": "User",
           "createdAt": "2024-01-29T10:43:27.9471574Z",
-          "lastModifiedBy": "bhukumar@microsoft.com",
+          "lastModifiedBy": "user@microsoft.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
         },
         "properties": {
-          "serverName": "Node-2",
+          "jobType": "AddNetworkIntent",
+          "arcNodeResourceIds": [
+            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+          ],
           "deploymentMode": "Deploy",
-          "hostIpv4Address": "192.168.10.10",
+          "hostNetwork": {
+            "intents": [
+              {
+                "name": "Compute_Management",
+                "trafficType": [
+                  "Compute",
+                  "Management"
+                ],
+                "adapter": [
+                  "Port2"
+                ],
+                "overrideVirtualSwitchConfiguration": false,
+                "virtualSwitchConfigurationOverrides": {
+                  "enableIov": "True",
+                  "loadBalancingAlgorithm": "HyperVPort"
+                },
+                "overrideQosPolicy": false,
+                "qosPolicyOverrides": {
+                  "priorityValue8021Action_Cluster": "7",
+                  "priorityValue8021Action_SMB": "3",
+                  "bandwidthPercentage_SMB": "50"
+                },
+                "overrideAdapterProperty": false,
+                "adapterPropertyOverrides": {
+                  "jumboPacket": "1514",
+                  "networkDirect": "Enabled",
+                  "networkDirectTechnology": "iWARP"
+                }
+              }
+            ],
+            "storageNetworks": [
+              {
+                "name": "Storage1Network",
+                "networkAdapterName": "Port3",
+                "vlanId": "5"
+              }
+            ],
+            "storageConnectivitySwitchless": true
+          },
           "secrets": [
             {
               "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
@@ -228,10 +346,6 @@
             }
           },
           "provisioningState": "Succeeded",
-          "percentComplete": 0,
-          "arcNodeResourceIds": [
-            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
-          ],
           "status": "NotSpecified"
         }
       }

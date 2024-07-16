@@ -279,6 +279,101 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "PrecheckResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the individual test/rule/alert that was executed. Unique, not exposed to the customer.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The health check DisplayName localized of the individual test executed.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Key-value pairs that allow grouping/filtering individual tests.",
+          "type": "object",
+          "properties": {
+            "key": {
+              "description": "Key that allow grouping/filtering individual tests.",
+              "type": "string"
+            },
+            "value": {
+              "description": "Value of the key that allow grouping/filtering individual tests.",
+              "type": "string"
+            }
+          }
+        },
+        "healthCheckTags": {
+          "description": "Key-value pairs that allow grouping/filtering individual tests.",
+          "type": "object"
+        },
+        "title": {
+          "description": "User-facing name; one or more sentences indicating the direct issue.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the check running (i.e. Failed, Succeeded, In Progress). This answers whether the check ran, and passed or failed.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "severity": {
+          "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity.",
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Warning",
+            "Informational",
+            "Hidden"
+          ],
+          "x-ms-enum": {
+            "name": "severity",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Detailed overview of the issue and what impact the issue has on the stamp.",
+          "type": "string"
+        },
+        "remediation": {
+          "description": "Set of steps that can be taken to resolve the issue found.",
+          "type": "string"
+        },
+        "targetResourceID": {
+          "description": "The unique identifier for the affected resource (such as a node or drive).",
+          "type": "string"
+        },
+        "targetResourceName": {
+          "description": "The name of the affected resource.",
+          "type": "string"
+        },
+        "targetResourceType": {
+          "description": "The type of resource being referred to (well-known set of nouns in infrastructure, aligning with Monitoring).",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "The time in which the HealthCheck was called.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "additionalData": {
+          "description": "Property bag of key value pairs for additional information.",
+          "type": "string"
+        },
+        "healthCheckSource": {
+          "description": "The name of the services called for the HealthCheck (I.E. Test-AzureStack, Test-Cluster).",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {}
