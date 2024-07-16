@@ -13,7 +13,7 @@ interface AutonomousDatabaseNationalCharacterSets
 @@doc(AutonomousDatabaseNationalCharacterSets.listByLocation,
   "List AutonomousDatabaseNationalCharacterSet resources by Location"
 );
-  
+
 @@Autorest.example(AutonomousDatabaseNationalCharacterSets.listByLocation,
   "./examples/autonomousDatabaseNationalCharacterSet_listByLocation.json",
   "List autonomous db national character sets by location"
