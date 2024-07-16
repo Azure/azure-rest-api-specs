@@ -1,0 +1,3681 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Edge",
+    "version": "2024-06-01-preview",
+    "description": "Microsoft.Edge Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "CapabilityLists"
+    },
+    {
+      "name": "Configurations"
+    },
+    {
+      "name": "DeploymentInstances"
+    },
+    {
+      "name": "TargetBindings"
+    },
+    {
+      "name": "UseCases"
+    },
+    {
+      "name": "DeploymentTargets"
+    },
+    {
+      "name": "DynamicConfigurations"
+    },
+    {
+      "name": "DynamicConfigurationVersions"
+    },
+    {
+      "name": "HelmUseCases"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/capabilityLists": {
+      "get": {
+        "operationId": "CapabilityLists_ListBySubscription",
+        "tags": [
+          "CapabilityLists"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityListListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapabilityLists_ListBySubscription": {
+            "$ref": "./examples/CapabilityLists_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/configurations": {
+      "get": {
+        "operationId": "Configurations_ListBySubscription",
+        "tags": [
+          "Configurations"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configurations_ListBySubscription": {
+            "$ref": "./examples/Configurations_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/deploymentTargets": {
+      "get": {
+        "operationId": "DeploymentTargets_ListBySubscription",
+        "tags": [
+          "DeploymentTargets"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentTargetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentTargets_ListBySubscription": {
+            "$ref": "./examples/DeploymentTargets_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/targetBindings": {
+      "get": {
+        "operationId": "TargetBindings_ListBySubscription",
+        "tags": [
+          "TargetBindings"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TargetBindingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TargetBindings_ListBySubscription": {
+            "$ref": "./examples/TargetBindings_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/useCases": {
+      "get": {
+        "operationId": "UseCases_ListBySubscription",
+        "tags": [
+          "UseCases"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UseCaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UseCases_ListBySubscription": {
+            "$ref": "./examples/UseCases_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/useCases/{useCaseName}/helmUseCases": {
+      "get": {
+        "operationId": "HelmUseCases_ListBySubscription",
+        "tags": [
+          "HelmUseCases"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "useCaseName",
+            "in": "path",
+            "description": "The name of the UseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HelmUseCaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HelmUseCases_ListBySubscription": {
+            "$ref": "./examples/HelmUseCases_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/capabilityLists": {
+      "get": {
+        "operationId": "CapabilityLists_ListByResourceGroup",
+        "tags": [
+          "CapabilityLists"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityListListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapabilityLists_ListByResourceGroup": {
+            "$ref": "./examples/CapabilityLists_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/capabilityLists/{capabilityListName}": {
+      "get": {
+        "operationId": "CapabilityLists_Get",
+        "tags": [
+          "CapabilityLists"
+        ],
+        "description": "Get a Capability List Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capabilityListName",
+            "in": "path",
+            "description": "The name of the CapabilityList",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapabilityLists_Get": {
+            "$ref": "./examples/CapabilityLists_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CapabilityLists_CreateOrUpdate",
+        "tags": [
+          "CapabilityLists"
+        ],
+        "description": "Create or update a Capability List Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capabilityListName",
+            "in": "path",
+            "description": "The name of the CapabilityList",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapabilityList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CapabilityList' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CapabilityList"
+            }
+          },
+          "201": {
+            "description": "Resource 'CapabilityList' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CapabilityList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapabilityLists_CreateOrUpdate": {
+            "$ref": "./examples/CapabilityLists_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CapabilityLists_Update",
+        "tags": [
+          "CapabilityLists"
+        ],
+        "description": "update a Capability List Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capabilityListName",
+            "in": "path",
+            "description": "The name of the CapabilityList",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapabilityListUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapabilityList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapabilityLists_Update": {
+            "$ref": "./examples/CapabilityLists_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CapabilityLists_Delete",
+        "tags": [
+          "CapabilityLists"
+        ],
+        "description": "Delete a Capability List Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capabilityListName",
+            "in": "path",
+            "description": "The name of the CapabilityList",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapabilityLists_Delete": {
+            "$ref": "./examples/CapabilityLists_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations": {
+      "get": {
+        "operationId": "Configurations_ListByResourceGroup",
+        "tags": [
+          "Configurations"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configurations_ListByResourceGroup": {
+            "$ref": "./examples/Configurations_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}": {
+      "get": {
+        "operationId": "Configurations_Get",
+        "tags": [
+          "Configurations"
+        ],
+        "description": "Get a Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configurations_Get": {
+            "$ref": "./examples/Configurations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Configurations_CreateOrUpdate",
+        "tags": [
+          "Configurations"
+        ],
+        "description": "Create or update a Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Configuration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "201": {
+            "description": "Resource 'Configuration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configurations_CreateOrUpdate": {
+            "$ref": "./examples/Configurations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Configurations_Update",
+        "tags": [
+          "Configurations"
+        ],
+        "description": "Update a Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configurations_Update": {
+            "$ref": "./examples/Configurations_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Configurations_Delete",
+        "tags": [
+          "Configurations"
+        ],
+        "description": "Delete a Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configurations_Delete": {
+            "$ref": "./examples/Configurations_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations": {
+      "get": {
+        "operationId": "DynamicConfigurations_ListByConfiguration",
+        "tags": [
+          "DynamicConfigurations"
+        ],
+        "description": "List Dynamic Configuration Resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamicConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurations_ListByConfiguration": {
+            "$ref": "./examples/DynamicConfigurations_ListByConfiguration_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations/{dynamicConfigurationName}": {
+      "get": {
+        "operationId": "DynamicConfigurations_Get",
+        "tags": [
+          "DynamicConfigurations"
+        ],
+        "description": "Get a Dynamic Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationName",
+            "in": "path",
+            "description": "The name of the DynamicConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamicConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurations_Get": {
+            "$ref": "./examples/DynamicConfigurations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DynamicConfigurations_CreateOrUpdate",
+        "tags": [
+          "DynamicConfigurations"
+        ],
+        "description": "Create or update a Dynamic Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationName",
+            "in": "path",
+            "description": "The name of the DynamicConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DynamicConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DynamicConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'DynamicConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DynamicConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/DynamicConfigurations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DynamicConfigurations_Delete",
+        "tags": [
+          "DynamicConfigurations"
+        ],
+        "description": "Delete a Dynamic Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationName",
+            "in": "path",
+            "description": "The name of the DynamicConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurations_Delete": {
+            "$ref": "./examples/DynamicConfigurations_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations/{dynamicConfigurationName}/dynamicConfigurationVersions": {
+      "get": {
+        "operationId": "DynamicConfigurationVersions_ListByDynamicConfiguration",
+        "tags": [
+          "DynamicConfigurationVersions"
+        ],
+        "description": "List Dynamic Configuration Version Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationName",
+            "in": "path",
+            "description": "The name of the DynamicConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamicConfigurationVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurationVersions_ListByDynamicConfiguration": {
+            "$ref": "./examples/DynamicConfigurationVersions_ListByDynamicConfiguration_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations/{dynamicConfigurationName}/dynamicConfigurationVersions/{dynamicConfigurationVersionName}": {
+      "get": {
+        "operationId": "DynamicConfigurationVersions_Get",
+        "tags": [
+          "DynamicConfigurationVersions"
+        ],
+        "description": "Get a Dynamic Configuration Version Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationName",
+            "in": "path",
+            "description": "The name of the DynamicConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationVersionName",
+            "in": "path",
+            "description": "The name of the DynamicConfigurationVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamicConfigurationVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurationVersions_Get": {
+            "$ref": "./examples/DynamicConfigurationVersions_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DynamicConfigurationVersions_CreateOrUpdate",
+        "tags": [
+          "DynamicConfigurationVersions"
+        ],
+        "description": "Create or update a Dynamic Configuration Version Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationName",
+            "in": "path",
+            "description": "The name of the DynamicConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationVersionName",
+            "in": "path",
+            "description": "The name of the DynamicConfigurationVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicConfigurationVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DynamicConfigurationVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DynamicConfigurationVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'DynamicConfigurationVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DynamicConfigurationVersion"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurationVersions_CreateOrUpdate": {
+            "$ref": "./examples/DynamicConfigurationVersions_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DynamicConfigurationVersions_Update",
+        "tags": [
+          "DynamicConfigurationVersions"
+        ],
+        "description": "update a Dynamic Configuration Version Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationName",
+            "in": "path",
+            "description": "The name of the DynamicConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationVersionName",
+            "in": "path",
+            "description": "The name of the DynamicConfigurationVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicConfigurationVersionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamicConfigurationVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurationVersions_Update": {
+            "$ref": "./examples/DynamicConfigurationVersions_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DynamicConfigurationVersions_Delete",
+        "tags": [
+          "DynamicConfigurationVersions"
+        ],
+        "description": "Delete a Dynamic Configuration Version Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationName",
+            "in": "path",
+            "description": "The name of the DynamicConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationVersionName",
+            "in": "path",
+            "description": "The name of the DynamicConfigurationVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurationVersions_Delete": {
+            "$ref": "./examples/DynamicConfigurationVersions_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations/{dynamicConfigurationName}/resolveConfiguration": {
+      "post": {
+        "operationId": "DynamicConfigurations_ResolveConfiguration",
+        "tags": [
+          "DynamicConfigurations"
+        ],
+        "description": "Post request to resolve configuration for Dynamic Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationName",
+            "in": "path",
+            "description": "The name of the DynamicConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicConfigurationProperties"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurations_ResolveConfiguration": {
+            "$ref": "./examples/DynamicConfigurations_ResolveConfiguration_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/deploymentTargets": {
+      "get": {
+        "operationId": "DeploymentTargets_ListByResourceGroup",
+        "tags": [
+          "DeploymentTargets"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentTargetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentTargets_ListByResourceGroup": {
+            "$ref": "./examples/DeploymentTargets_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/deploymentTargets/{deploymentTargetName}": {
+      "get": {
+        "operationId": "DeploymentTargets_Get",
+        "tags": [
+          "DeploymentTargets"
+        ],
+        "description": "Get a Deployment Target Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deploymentTargetName",
+            "in": "path",
+            "description": "The name of the DeploymentTarget",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentTarget"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentTargets_Get": {
+            "$ref": "./examples/DeploymentTargets_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeploymentTargets_CreateOrUpdate",
+        "tags": [
+          "DeploymentTargets"
+        ],
+        "description": "Create or update a Deployment Target Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deploymentTargetName",
+            "in": "path",
+            "description": "The name of the DeploymentTarget",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentTarget"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DeploymentTarget' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeploymentTarget"
+            }
+          },
+          "201": {
+            "description": "Resource 'DeploymentTarget' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeploymentTarget"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentTargets_CreateOrUpdate": {
+            "$ref": "./examples/DeploymentTargets_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DeploymentTargets_Update",
+        "tags": [
+          "DeploymentTargets"
+        ],
+        "description": "update a Deployment Target Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deploymentTargetName",
+            "in": "path",
+            "description": "The name of the DeploymentTarget",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentTargetUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentTarget"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentTargets_Update": {
+            "$ref": "./examples/DeploymentTargets_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeploymentTargets_Delete",
+        "tags": [
+          "DeploymentTargets"
+        ],
+        "description": "Delete a Deployment Target Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deploymentTargetName",
+            "in": "path",
+            "description": "The name of the DeploymentTarget",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentTargets_Delete": {
+            "$ref": "./examples/DeploymentTargets_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/deploymentTargets/{deploymentTargetName}/deploy": {
+      "post": {
+        "operationId": "DeploymentTargets_Deploy",
+        "tags": [
+          "DeploymentTargets"
+        ],
+        "description": "Post request to deploy for Deployment Target Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deploymentTargetName",
+            "in": "path",
+            "description": "The name of the DeploymentTarget",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentTargetProperties"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentTargets_Deploy": {
+            "$ref": "./examples/DeploymentTargets_Deploy_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings": {
+      "get": {
+        "operationId": "TargetBindings_ListByResourceGroup",
+        "tags": [
+          "TargetBindings"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TargetBindingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TargetBindings_ListByResourceGroup": {
+            "$ref": "./examples/TargetBindings_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings/{targetBindingName}": {
+      "get": {
+        "operationId": "TargetBindings_Get",
+        "tags": [
+          "TargetBindings"
+        ],
+        "description": "Get a Target Binding Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "targetBindingName",
+            "in": "path",
+            "description": "The name of the TargetBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TargetBinding"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TargetBindings_Get": {
+            "$ref": "./examples/TargetBindings_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TargetBindings_CreateOrUpdate",
+        "tags": [
+          "TargetBindings"
+        ],
+        "description": "Create or update a Target Binding Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "targetBindingName",
+            "in": "path",
+            "description": "The name of the TargetBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TargetBinding"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TargetBinding' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TargetBinding"
+            }
+          },
+          "201": {
+            "description": "Resource 'TargetBinding' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TargetBinding"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TargetBindings_CreateOrUpdate": {
+            "$ref": "./examples/TargetBindings_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "TargetBindings_Update",
+        "tags": [
+          "TargetBindings"
+        ],
+        "description": "update a Target Binding Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "targetBindingName",
+            "in": "path",
+            "description": "The name of the TargetBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TargetBindingUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TargetBinding"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TargetBindings_Update": {
+            "$ref": "./examples/TargetBindings_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TargetBindings_Delete",
+        "tags": [
+          "TargetBindings"
+        ],
+        "description": "Delete a Target Binding Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "targetBindingName",
+            "in": "path",
+            "description": "The name of the TargetBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TargetBindings_Delete": {
+            "$ref": "./examples/TargetBindings_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings/{targetBindingName}/deploymentInstances": {
+      "get": {
+        "operationId": "DeploymentInstances_ListByTargetBinding",
+        "tags": [
+          "DeploymentInstances"
+        ],
+        "description": "List Deployment Instance Resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "targetBindingName",
+            "in": "path",
+            "description": "The name of the TargetBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInstances_ListByTargetBinding": {
+            "$ref": "./examples/DeploymentInstances_ListByTargetBinding_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings/{targetBindingName}/deploymentInstances/{deploymentInstanceName}": {
+      "get": {
+        "operationId": "DeploymentInstances_Get",
+        "tags": [
+          "DeploymentInstances"
+        ],
+        "description": "Get a Deployment Instance Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "targetBindingName",
+            "in": "path",
+            "description": "The name of the TargetBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "deploymentInstanceName",
+            "in": "path",
+            "description": "The name of the DeploymentInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInstances_Get": {
+            "$ref": "./examples/DeploymentInstances_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeploymentInstances_Delete",
+        "tags": [
+          "DeploymentInstances"
+        ],
+        "description": "Delete a Deployment Instance Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "targetBindingName",
+            "in": "path",
+            "description": "The name of the TargetBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "deploymentInstanceName",
+            "in": "path",
+            "description": "The name of the DeploymentInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInstances_Delete": {
+            "$ref": "./examples/DeploymentInstances_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/useCases": {
+      "get": {
+        "operationId": "UseCases_ListByResourceGroup",
+        "tags": [
+          "UseCases"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UseCaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UseCases_ListByResourceGroup": {
+            "$ref": "./examples/UseCases_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/useCases/{useCaseName}": {
+      "get": {
+        "operationId": "UseCases_Get",
+        "tags": [
+          "UseCases"
+        ],
+        "description": "Get a Use Case resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "useCaseName",
+            "in": "path",
+            "description": "The name of the UseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UseCase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UseCases_Get": {
+            "$ref": "./examples/UseCases_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UseCases_CreateOrUpdate",
+        "tags": [
+          "UseCases"
+        ],
+        "description": "Create or update a Use Case resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "useCaseName",
+            "in": "path",
+            "description": "The name of the UseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UseCase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'UseCase' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UseCase"
+            }
+          },
+          "201": {
+            "description": "Resource 'UseCase' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UseCase"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UseCases_CreateOrUpdate": {
+            "$ref": "./examples/UseCases_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "UseCases_Update",
+        "tags": [
+          "UseCases"
+        ],
+        "description": "update a Use Case resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "useCaseName",
+            "in": "path",
+            "description": "The name of the UseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UseCaseUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UseCase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UseCases_Update": {
+            "$ref": "./examples/UseCases_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "UseCases_Delete",
+        "tags": [
+          "UseCases"
+        ],
+        "description": "Delete a Use Case resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "useCaseName",
+            "in": "path",
+            "description": "The name of the UseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UseCases_Delete": {
+            "$ref": "./examples/UseCases_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/useCases/{useCaseName}/helmUseCases": {
+      "get": {
+        "operationId": "HelmUseCases_ListByUseCase",
+        "tags": [
+          "HelmUseCases"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "useCaseName",
+            "in": "path",
+            "description": "The name of the UseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HelmUseCaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HelmUseCases_ListByUseCase": {
+            "$ref": "./examples/HelmUseCases_ListByUseCase_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/useCases/{useCaseName}/helmUseCases/{helmUseCaseName}": {
+      "get": {
+        "operationId": "HelmUseCases_Get",
+        "tags": [
+          "HelmUseCases"
+        ],
+        "description": "Get a Use Case resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "useCaseName",
+            "in": "path",
+            "description": "The name of the UseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "helmUseCaseName",
+            "in": "path",
+            "description": "The name of the HelmUseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HelmUseCase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HelmUseCases_Get": {
+            "$ref": "./examples/HelmUseCases_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HelmUseCases_CreateOrUpdate",
+        "tags": [
+          "HelmUseCases"
+        ],
+        "description": "Create or update a Use Case resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "useCaseName",
+            "in": "path",
+            "description": "The name of the UseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "helmUseCaseName",
+            "in": "path",
+            "description": "The name of the HelmUseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HelmUseCase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HelmUseCase' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HelmUseCase"
+            }
+          },
+          "201": {
+            "description": "Resource 'HelmUseCase' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HelmUseCase"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HelmUseCases_CreateOrUpdate": {
+            "$ref": "./examples/HelmUseCases_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "HelmUseCases_Update",
+        "tags": [
+          "HelmUseCases"
+        ],
+        "description": "update a Use Case resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "useCaseName",
+            "in": "path",
+            "description": "The name of the UseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "helmUseCaseName",
+            "in": "path",
+            "description": "The name of the HelmUseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HelmUseCaseUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HelmUseCase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HelmUseCases_Update": {
+            "$ref": "./examples/HelmUseCases_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "HelmUseCases_Delete",
+        "tags": [
+          "HelmUseCases"
+        ],
+        "description": "Delete a Use Case resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "useCaseName",
+            "in": "path",
+            "description": "The name of the UseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "helmUseCaseName",
+            "in": "path",
+            "description": "The name of the HelmUseCase",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HelmUseCases_Delete": {
+            "$ref": "./examples/HelmUseCases_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Capability": {
+      "type": "object",
+      "description": "Capability Properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of capability"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of capability"
+        }
+      },
+      "required": [
+        "name",
+        "description"
+      ]
+    },
+    "CapabilityList": {
+      "type": "object",
+      "description": "Capability List Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilityListProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CapabilityListListResult": {
+      "type": "object",
+      "description": "The response of a CapabilityList list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CapabilityList items on this page",
+          "items": {
+            "$ref": "#/definitions/CapabilityList"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CapabilityListProperties": {
+      "type": "object",
+      "description": "Capability List Properties",
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "description": "List of capabilities",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "capabilities"
+      ]
+    },
+    "CapabilityListUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the CapabilityList.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CapabilityListUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CapabilityListUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the CapabilityList.",
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "description": "List of capabilities",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Configuration": {
+      "type": "object",
+      "description": "Configuration Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a Configuration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Configuration items on this page",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConfigurationProperties": {
+      "type": "object",
+      "description": "Configuration Properties",
+      "properties": {
+        "timezone": {
+          "type": "string",
+          "description": "Timezone of configuration"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "timezone"
+      ]
+    },
+    "ConfigurationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Configuration.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ConfigurationUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConfigurationUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Configuration.",
+      "properties": {
+        "timezone": {
+          "type": "string",
+          "description": "Timezone of configuration"
+        }
+      }
+    },
+    "DeploymentInstance": {
+      "type": "object",
+      "description": "Deployment Instance Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentInstanceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeploymentInstanceListResult": {
+      "type": "object",
+      "description": "The response of a DeploymentInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeploymentInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/DeploymentInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentInstanceProperties": {
+      "type": "object",
+      "description": "Deployment Instance Properties",
+      "properties": {
+        "useCaseVersion": {
+          "type": "string",
+          "description": "Use case version of deployment instance"
+        },
+        "configVersion": {
+          "type": "string",
+          "description": "Config Version of deployment instance"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "useCaseVersion",
+        "configVersion"
+      ]
+    },
+    "DeploymentTarget": {
+      "type": "object",
+      "description": "Deployment Target Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentTargetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DeploymentTargetListResult": {
+      "type": "object",
+      "description": "The response of a DeploymentTarget list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeploymentTarget items on this page",
+          "items": {
+            "$ref": "#/definitions/DeploymentTarget"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentTargetProperties": {
+      "type": "object",
+      "description": "Deployment Target Properties",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display Name of deployment target"
+        },
+        "customLocation": {
+          "type": "string",
+          "description": "Custom location of deployment target"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of capabilities",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "displayName",
+        "customLocation",
+        "capabilities"
+      ]
+    },
+    "DeploymentTargetUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the DeploymentTarget.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentTargetUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeploymentTargetUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the DeploymentTarget.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display Name of deployment target"
+        },
+        "customLocation": {
+          "type": "string",
+          "description": "Custom location of deployment target"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of capabilities",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DynamicConfiguration": {
+      "type": "object",
+      "description": "Dynamic Configuration Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DynamicConfigurationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DynamicConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a DynamicConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DynamicConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/DynamicConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DynamicConfigurationProperties": {
+      "type": "object",
+      "description": "Dynamic Configuration Properties",
+      "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "Current Version of dynamic configuration"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "currentVersion"
+      ]
+    },
+    "DynamicConfigurationVersion": {
+      "type": "object",
+      "description": "Dynamic Configuration Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DynamicConfigurationVersionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DynamicConfigurationVersionListResult": {
+      "type": "object",
+      "description": "The response of a DynamicConfigurationVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DynamicConfigurationVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/DynamicConfigurationVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DynamicConfigurationVersionProperties": {
+      "type": "object",
+      "description": "Dynamic Configuration Properties",
+      "properties": {
+        "values": {
+          "type": "string",
+          "description": "Values of configuration version"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "DynamicConfigurationVersionUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the DynamicConfigurationVersion.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DynamicConfigurationVersionUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DynamicConfigurationVersionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the DynamicConfigurationVersion.",
+      "properties": {
+        "values": {
+          "type": "string",
+          "description": "Values of configuration version"
+        }
+      }
+    },
+    "HelmUseCase": {
+      "type": "object",
+      "description": "Use Case Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HelmUseCaseProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HelmUseCaseListResult": {
+      "type": "object",
+      "description": "The response of a HelmUseCase list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HelmUseCase items on this page",
+          "items": {
+            "$ref": "#/definitions/HelmUseCase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HelmUseCaseProperties": {
+      "type": "object",
+      "description": "Use Cases Resource Properties",
+      "properties": {
+        "helmChartUri": {
+          "type": "string",
+          "description": "Helm Chart URI of use case version"
+        },
+        "configurationSchema": {
+          "type": "string",
+          "description": "Configuration schema of use case version"
+        },
+        "configurationTemplate": {
+          "type": "string",
+          "description": "Configuration template of use case version"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "helmChartUri",
+        "configurationSchema",
+        "configurationTemplate"
+      ]
+    },
+    "HelmUseCaseUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the HelmUseCase.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/HelmUseCaseUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HelmUseCaseUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the HelmUseCase.",
+      "properties": {
+        "helmChartUri": {
+          "type": "string",
+          "description": "Helm Chart URI of use case version"
+        },
+        "configurationSchema": {
+          "type": "string",
+          "description": "Configuration schema of use case version"
+        },
+        "configurationTemplate": {
+          "type": "string",
+          "description": "Configuration template of use case version"
+        }
+      }
+    },
+    "TargetBinding": {
+      "type": "object",
+      "description": "Target Binding Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TargetBindingProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TargetBindingListResult": {
+      "type": "object",
+      "description": "The response of a TargetBinding list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TargetBinding items on this page",
+          "items": {
+            "$ref": "#/definitions/TargetBinding"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TargetBindingProperties": {
+      "type": "object",
+      "description": "Target Binding Properties",
+      "properties": {
+        "useCase": {
+          "type": "string",
+          "description": "Use Case of target binding"
+        },
+        "deploymentTarget": {
+          "type": "string",
+          "description": "Deployment Target of target binding"
+        },
+        "activeDeploymentInstance": {
+          "type": "string",
+          "description": "Active Deployment Instance of target binding"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of target binding"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "useCase",
+        "deploymentTarget",
+        "activeDeploymentInstance",
+        "scope"
+      ]
+    },
+    "TargetBindingUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the TargetBinding.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/TargetBindingUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TargetBindingUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the TargetBinding.",
+      "properties": {
+        "useCase": {
+          "type": "string",
+          "description": "Use Case of target binding"
+        },
+        "deploymentTarget": {
+          "type": "string",
+          "description": "Deployment Target of target binding"
+        },
+        "activeDeploymentInstance": {
+          "type": "string",
+          "description": "Active Deployment Instance of target binding"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of target binding"
+        }
+      }
+    },
+    "UseCase": {
+      "type": "object",
+      "description": "Use Case Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UseCaseProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "UseCaseListResult": {
+      "type": "object",
+      "description": "The response of a UseCase list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UseCase items on this page",
+          "items": {
+            "$ref": "#/definitions/UseCase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UseCaseProperties": {
+      "type": "object",
+      "description": "Use Case Properties",
+      "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "Current Version of use case"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of capabilities",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "x-ms-identifiers": []
+        },
+        "deploymentModel": {
+          "type": "string",
+          "description": "Deployment Model of use case",
+          "enum": [
+            "Helm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of use case"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "currentVersion",
+        "capabilities",
+        "deploymentModel",
+        "description"
+      ]
+    },
+    "UseCaseUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the UseCase.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/UseCaseUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UseCaseUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the UseCase.",
+      "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "Current Version of use case"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of capabilities",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "x-ms-identifiers": []
+        },
+        "deploymentModel": {
+          "type": "string",
+          "description": "Deployment Model of use case",
+          "enum": [
+            "Helm"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of use case"
+        }
+      }
+    },
+    "deploymentModelTypes": {
+      "type": "string",
+      "description": "Types of deployment models",
+      "enum": [
+        "Helm"
+      ],
+      "x-ms-enum": {
+        "name": "deploymentModelTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Helm",
+            "value": "Helm",
+            "description": "Deployment model Helm"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
