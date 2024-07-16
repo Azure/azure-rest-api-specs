@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "PatchConfigurations"
+      "name": "UpdateRuleSets"
     }
   ],
   "paths": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.UpdateManager/patchConfigurations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.UpdateManager/updateRuleSets": {
       "get": {
-        "operationId": "PatchConfigurations_ListBySubscription",
+        "operationId": "UpdateRuleSets_ListBySubscription",
         "tags": [
-          "PatchConfigurations"
+          "UpdateRuleSets"
         ],
-        "description": "List PatchConfiguration resources by subscription ID",
+        "description": "List UpdateRuleSet resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -102,7 +102,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PatchConfigurationListResult"
+              "$ref": "#/definitions/UpdateRuleSetListResult"
             }
           },
           "default": {
@@ -112,23 +112,18 @@
             }
           }
         },
-        "x-ms-examples": {
-          "PatchConfigurations_ListBySubscription": {
-            "$ref": "./examples/PatchConfigurations_ListBySubscription.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/patchConfigurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/updateRuleSets": {
       "get": {
-        "operationId": "PatchConfigurations_ListByResourceGroup",
+        "operationId": "UpdateRuleSets_ListByResourceGroup",
         "tags": [
-          "PatchConfigurations"
+          "UpdateRuleSets"
         ],
-        "description": "List PatchConfiguration resources by resource group",
+        "description": "List UpdateRuleSet resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +139,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PatchConfigurationListResult"
+              "$ref": "#/definitions/UpdateRuleSetListResult"
             }
           },
           "default": {
@@ -154,23 +149,18 @@
             }
           }
         },
-        "x-ms-examples": {
-          "PatchConfigurations_ListByResourceGroup": {
-            "$ref": "./examples/PatchConfigurations_ListByResourceGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/patchConfigurations/{patchConfigurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/updateRuleSets/{updateRuleSetName}": {
       "get": {
-        "operationId": "PatchConfigurations_Get",
+        "operationId": "UpdateRuleSets_Get",
         "tags": [
-          "PatchConfigurations"
+          "UpdateRuleSets"
         ],
-        "description": "Get a PatchConfiguration",
+        "description": "Get a UpdateRuleSet",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -182,9 +172,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "patchConfigurationName",
+            "name": "updateRuleSetName",
             "in": "path",
-            "description": "The name of the PatchConfiguration",
+            "description": "The name of the UpdateRuleSet",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -194,7 +184,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PatchConfiguration"
+              "$ref": "#/definitions/UpdateRuleSet"
             }
           },
           "default": {
@@ -203,19 +193,14 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "PatchConfigurations_Get": {
-            "$ref": "./examples/PatchConfigurations_Get.json"
-          }
         }
       },
       "put": {
-        "operationId": "PatchConfigurations_CreateOrUpdate",
+        "operationId": "UpdateRuleSets_CreateOrUpdate",
         "tags": [
-          "PatchConfigurations"
+          "UpdateRuleSets"
         ],
-        "description": "Create a PatchConfiguration",
+        "description": "Create a UpdateRuleSet",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -227,9 +212,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "patchConfigurationName",
+            "name": "updateRuleSetName",
             "in": "path",
-            "description": "The name of the PatchConfiguration",
+            "description": "The name of the UpdateRuleSet",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -240,21 +225,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PatchConfiguration"
+              "$ref": "#/definitions/UpdateRuleSet"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PatchConfiguration' update operation succeeded",
+            "description": "Resource 'UpdateRuleSet' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PatchConfiguration"
+              "$ref": "#/definitions/UpdateRuleSet"
             }
           },
           "201": {
-            "description": "Resource 'PatchConfiguration' create operation succeeded",
+            "description": "Resource 'UpdateRuleSet' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PatchConfiguration"
+              "$ref": "#/definitions/UpdateRuleSet"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -275,22 +260,17 @@
             }
           }
         },
-        "x-ms-examples": {
-          "PatchConfigurations_CreateOrUpdate": {
-            "$ref": "./examples/PatchConfigurations_CreateOrUpdate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "PatchConfigurations_Update",
+        "operationId": "UpdateRuleSets_Update",
         "tags": [
-          "PatchConfigurations"
+          "UpdateRuleSets"
         ],
-        "description": "Update a PatchConfiguration",
+        "description": "Update a UpdateRuleSet",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -302,9 +282,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "patchConfigurationName",
+            "name": "updateRuleSetName",
             "in": "path",
-            "description": "The name of the PatchConfiguration",
+            "description": "The name of the UpdateRuleSet",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -315,7 +295,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PatchConfigurationUpdate"
+              "$ref": "#/definitions/UpdateRuleSetUpdate"
             }
           }
         ],
@@ -323,7 +303,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PatchConfiguration"
+              "$ref": "#/definitions/UpdateRuleSet"
             }
           },
           "default": {
@@ -332,19 +312,14 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "PatchConfigurations_Update": {
-            "$ref": "./examples/PatchConfigurations_Update.json"
-          }
         }
       },
       "delete": {
-        "operationId": "PatchConfigurations_Delete",
+        "operationId": "UpdateRuleSets_Delete",
         "tags": [
-          "PatchConfigurations"
+          "UpdateRuleSets"
         ],
-        "description": "Delete a PatchConfiguration",
+        "description": "Delete a UpdateRuleSet",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -356,9 +331,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "patchConfigurationName",
+            "name": "updateRuleSetName",
             "in": "path",
-            "description": "The name of the PatchConfiguration",
+            "description": "The name of the UpdateRuleSet",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -387,11 +362,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "PatchConfigurations_Delete": {
-            "$ref": "./examples/PatchConfigurations_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -426,113 +396,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "PatchConfiguration": {
-      "type": "object",
-      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PatchConfigurationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "PatchConfigurationListResult": {
-      "type": "object",
-      "description": "The response of a PatchConfiguration list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PatchConfiguration items on this page",
-          "items": {
-            "$ref": "#/definitions/PatchConfiguration"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PatchConfigurationProperties": {
-      "type": "object",
-      "description": "Patch configuration properties.",
-      "properties": {
-        "rebootSettings": {
-          "$ref": "#/definitions/rebootSettings",
-          "description": "reboot settings."
-        },
-        "windowsParameters": {
-          "$ref": "#/definitions/WindowsParameters",
-          "description": "windows parameter."
-        },
-        "linuxParameters": {
-          "$ref": "#/definitions/LinuxParameters",
-          "description": "linux parameter."
-        },
-        "approvePatchesAfterDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Approve patches after days.",
-          "minimum": 0
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "PatchConfigurationUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the PatchConfiguration.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/PatchConfigurationUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PatchConfigurationUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the PatchConfiguration.",
-      "properties": {
-        "rebootSettings": {
-          "$ref": "#/definitions/rebootSettings",
-          "description": "reboot settings."
-        },
-        "windowsParameters": {
-          "$ref": "#/definitions/WindowsParameters",
-          "description": "windows parameter."
-        },
-        "linuxParameters": {
-          "$ref": "#/definitions/LinuxParameters",
-          "description": "linux parameter."
-        },
-        "approvePatchesAfterDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Approve patches after days.",
-          "minimum": 0
         }
       }
     },
@@ -590,6 +453,113 @@
         ]
       },
       "readOnly": true
+    },
+    "UpdateRuleSet": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateRuleSetProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "UpdateRuleSetListResult": {
+      "type": "object",
+      "description": "The response of a UpdateRuleSet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateRuleSet items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateRuleSet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateRuleSetProperties": {
+      "type": "object",
+      "description": "Update rule set properties.",
+      "properties": {
+        "rebootSettings": {
+          "$ref": "#/definitions/rebootSettings",
+          "description": "reboot settings."
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/WindowsParameters",
+          "description": "windows parameter."
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "linux parameter."
+        },
+        "approvePatchesAfterDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Approve patches after days.",
+          "minimum": 0
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "UpdateRuleSetUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the UpdateRuleSet.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/UpdateRuleSetUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "UpdateRuleSetUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the UpdateRuleSet.",
+      "properties": {
+        "rebootSettings": {
+          "$ref": "#/definitions/rebootSettings",
+          "description": "reboot settings."
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/WindowsParameters",
+          "description": "windows parameter."
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "linux parameter."
+        },
+        "approvePatchesAfterDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Approve patches after days.",
+          "minimum": 0
+        }
+      }
     },
     "WindowsParameters": {
       "type": "object",
