@@ -70,7 +70,7 @@ alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 @post
 @route("/:analyze-text")
 op analyzeText is RpcOperation<
-  AnalyzeTextTask & AnalyzeTextQueryParameters,
+  AnalyzeTextBody & AnalyzeTextQueryParameters,
   AnalyzeTextTaskResult,
   {},
   ErrorResponse
