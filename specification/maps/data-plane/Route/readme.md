@@ -64,14 +64,6 @@ suppressions:
     reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
 
 ```
-### Tag: package-preview-2024-04
-
-These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-04'
-input-file:
-  - preview/2024-04-01-preview/route.json
-```
 
 ### Tag: package-preview-2023-10
 

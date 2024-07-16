@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Search Service",
-    "version": "2024-04-01-preview",
+    "version": "2024-10-01-preview",
     "description": "Azure Maps Search REST APIs"
   },
   "host": "atlas.microsoft.com",
@@ -939,15 +939,20 @@
       "type": "object",
       "description": "Universal asynchronous batch request body.",
       "properties": {
-        "inputBlobUrl": {
-          "description": "The URL to the input blob containing the batch of queries. This should be a valid URL pointing to a blob of an Azure Storage Account",
+        "inputFolderPath": {
+          "description": "The URL that points to a Azure blob storage folder where the batch input blobs will be stored.",
           "type": "string",
           "format": "uri"
         },
-        "outputStorageUrl": {
-          "description": "The URL that points to a blob storage where the batch results will be stored.",
+        "outputFolderPath": {
+          "description": "The URL that points to a Azure blob storage folder where the batch results will be stored.",
           "type": "string",
           "format": "uri"
+        },
+        "allowBlobOverwrite": {
+          "description": "If a blob with the same name as the batch result already exists in the output folder, the transformation will terminate to avoid overwriting the existing blob. If the allowBlobOverwrite option is set to true, the existing blob will be overwritten.",
+          "type": "boolean",
+          "default": false
         },
         "msiClientId": {
           "description": "Client ID of a user-assigned managed identity. This is used for authentication and authorization purposes. If the managed identity is system-assigned, this field can be null.",
@@ -955,8 +960,8 @@
         }
       },
       "required": [
-        "inputBlobUrl",
-        "outputStorageUrl"
+        "inputFolderPath",
+        "outputFolderPath"
       ]
     },
     "ReverseGeocodingBatchRequestItem": {
@@ -1385,7 +1390,7 @@
       }
     },
     "AsyncBatchOperation": {
-      "$ref": "../../../AsyncBatchManagement/preview/2024-04-01-preview/asyncBatchManagement.json#/definitions/AsyncBatchOperation"
+      "$ref": "../../../AsyncBatchManagement/preview/2024-10-01-preview/asyncBatchManagement.json#/definitions/AsyncBatchOperation"
     }
   }
 }

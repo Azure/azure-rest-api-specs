@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Asynchronous Batch Management Service",
-    "version": "2024-04-01-preview",
+    "version": "2024-10-01-preview",
     "description": "Azure Maps Asynchronous Batch Management REST APIs"
   },
   "x-ms-parameterized-host": {
@@ -93,8 +93,8 @@
           "Get a running operation status": {
             "$ref": "./examples/GetOperationStatusRunning.json"
           },
-          "Get a succeeded operation status": {
-            "$ref": "./examples/GetOperationStatusSucceeded.json"
+          "Get a completed operation status": {
+            "$ref": "./examples/GetOperationStatusCompleted.json"
           },
           "Get a failed operation status": {
             "$ref": "./examples/GetOperationStatusFailed.json"
@@ -176,20 +176,6 @@
     }
   },
   "definitions": {
-    "AsyncBatchOperationResult": {
-      "type": "object",
-      "description": "The result of the asynchronous batch operation.",
-      "properties": {
-        "outputBlobUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "URL to the output blob containing the batch results."
-        }
-      },
-      "required": [
-        "outputBlobUrl"
-      ]
-    },
     "AsyncBatchOperation": {
       "type": "object",
       "description": "This object is returned from a successful Get Operation request.",
@@ -225,15 +211,20 @@
             ]
           }
         },
-        "inputBlobUrl": {
-          "description": "The URL to the input blob containing the batch of queries. This should be a valid URL pointing to a blob of an Azure Storage Account",
+        "inputFolderPath": {
+          "description": "The URL that points to a Azure blob storage folder where the batch input blobs will be stored.",
           "type": "string",
           "format": "uri"
         },
-        "outputStorageUrl": {
-          "description": "The URL that points to a blob storage where the batch results will be stored.",
+        "outputFolderPath": {
+          "description": "The URL that points to a Azure blob storage folder where the batch results will be stored.",
           "type": "string",
           "format": "uri"
+        },
+        "allowBlobOverwrite": {
+          "description": "If a blob with the same name as the batch result already exists in the output folder, the transformation will terminate to avoid overwriting the existing blob. If the allowBlobOverwrite option is set to true, the existing blob will be overwritten.",
+          "type": "boolean",
+          "default": false
         },
         "msiClientId": {
           "type": "string",
@@ -249,15 +240,9 @@
           "format": "date-time",
           "description": "Timestamp when the operation status was updated."
         },
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Percentage indicating the completion status of the operation."
-        },
-        "totalItemCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of items in the batch operation."
+        "progress": {
+          "type": "string",
+          "description": "X out of Y indicating how many input blobs have been transformed."
         },
         "status": {
           "type": "string",
@@ -265,7 +250,7 @@
           "enum": [
             "NotStarted",
             "Running",
-            "Succeeded",
+            "Completed",
             "Failed",
             "Canceled"
           ],
@@ -282,8 +267,8 @@
                 "description": "The operation is running."
               },
               {
-                "value": "Succeeded",
-                "description": "The operation has completed successfully."
+                "value": "Completed",
+                "description": "The operation has completed."
               },
               {
                 "value": "Failed",
@@ -295,9 +280,6 @@
               }
             ]
           }
-        },
-        "result": {
-          "$ref": "#/definitions/AsyncBatchOperationResult"
         },
         "error": {
           "type": "object",
@@ -319,12 +301,11 @@
       "required": [
         "id",
         "kind",
-        "inputBlobUrl",
-        "outputStorageUrl",
+        "inputFolderPath",
+        "outputFolderPath",
         "createdDateTime",
         "lastActionDateTime",
-        "percentComplete",
-        "totalItemCount",
+        "progress",
         "status"
       ]
     },
