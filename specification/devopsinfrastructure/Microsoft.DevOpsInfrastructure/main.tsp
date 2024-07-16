@@ -25,6 +25,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   `2024-04-04-preview`,
+
+  /** 2024-07-01-preview preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `2024-07-01-preview`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -408,7 +413,13 @@ interface Pools {
     Pool,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @sharedRoute
+  @renamedFrom(Versions.`2024-04-04-preview`, "update")
+  @removed(Versions.`2024-07-01-preview`)
+  updateOld is ArmResourcePatchAsync<Pool, PoolProperties>;
 
+  @sharedRoute
+  @added(Versions.`2024-07-01-preview`)
   @parameterVisibility
   update is ArmCustomPatchAsync<Pool, Pool>;
 
