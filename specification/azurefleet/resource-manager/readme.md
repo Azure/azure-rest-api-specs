@@ -26,12 +26,22 @@ These are the global settings for the computefleet.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-preview-2024-07
 suppressions:
   - code: PatchBodyParametersSchema
     from: azurefleet.json
     reason: Suppress Patch rule as properties are defined by Compute RP and cannot be changed in AzureFleet.
 ```
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.AzureFleet/preview/2024-07-01-preview/azurefleet.json
+```
+
 
 ### Tag: package-preview-2023-11
 
