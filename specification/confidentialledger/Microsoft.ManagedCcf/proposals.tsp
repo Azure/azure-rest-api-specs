@@ -14,29 +14,32 @@ model Action {
   @doc("The name of the action to perform. This should match an action defined in the service's constitution, so that it can be invoked by the `apply` function of the constitution if the proposal is accepted.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type can be anything."
   @doc("Arguments to modify the behavior of this action. The schema is determined by the action implementation, and should be validated by a `validate` call in the constitution.")
   args?: unknown;
 }
 
 @doc("Possible states for a proposal.")
-enum ProposalState {
+union ProposalState {
+  string,
+
   @doc("Proposal is active and can be voted on.")
-  Open,
+  "Open",
 
   @doc("Proposal passed a successful vote and was enacted.")
-  Accepted,
+  "Accepted",
 
   @doc("Proposal was removed by proposing member. Will never be enacted.")
-  Withdrawn,
+  "Withdrawn",
 
   @doc("Proposal was rejected by vote. Will never be enacted.")
-  Rejected,
+  "Rejected",
 
   @doc("Proposal passed a successful vote, but its proposed actions failed. Will never be enacted.")
-  Failed,
+  "Failed",
 
   @doc("Proposal was open when its semantics were potentially changed (code or constitution were modified), so it was automatically invalidated.")
-  Dropped,
+  "Dropped",
 }
 
 @doc("Description of why governance execution failed.")
@@ -132,6 +135,7 @@ interface Proposals {
     TxIdReadHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "MUST fix in next update"
   @doc("Returns actions contained in a proposal.")
   @TypeSpec.Rest.action("actions")
   @TypeSpec.Rest.actionSeparator("/")

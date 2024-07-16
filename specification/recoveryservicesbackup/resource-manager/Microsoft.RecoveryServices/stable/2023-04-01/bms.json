@@ -3139,6 +3139,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "RegisterAzure Storage ProtectionContainers": {
             "$ref": "./examples/AzureStorage/ProtectionContainers_Register.json"
@@ -7448,6 +7449,10 @@
         "isPrivateAccessEnabledOnAnyDisk": {
           "description": "This flag denotes if any of the disks in the VM are using Private access network setting",
           "type": "boolean"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Extended location of the VM recovery point,\r\nshould be null if VM is in public cloud"
         }
       },
       "x-ms-discriminator-value": "IaasVMRecoveryPoint"
@@ -8600,10 +8605,15 @@
           "description": "Name of the policy used for protection",
           "type": "string"
         },
-        "softDeleteRetentionPeriod": {
+        "softDeleteRetentionPeriodInDays": {
           "format": "int32",
           "description": "Soft delete retention period in days",
           "type": "integer"
+        },
+        "vaultId": {
+          "description": "ID of the vault which protects this item",
+          "type": "string",
+          "readOnly": true
         }
       },
       "discriminator": "protectedItemType"
@@ -9652,13 +9662,19 @@
           "enum": [
             "Invalid",
             "Enabled",
-            "Disabled"
+            "Disabled",
+            "AlwaysON"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "SoftDeleteFeatureState",
             "modelAsString": true
           }
+        },
+        "softDeleteRetentionPeriodInDays": {
+          "format": "int32",
+          "description": "Soft delete retention period in days",
+          "type": "integer"
         },
         "resourceGuardOperationRequests": {
           "description": "ResourceGuard Operation Requests",
@@ -9668,7 +9684,7 @@
           }
         },
         "isSoftDeleteFeatureStateEditable": {
-          "description": "Is soft delete feature state editable",
+          "description": "This flag is no longer in use. Please use 'softDeleteFeatureState' to set the soft delete state for the vault",
           "type": "boolean"
         }
       }
@@ -10608,6 +10624,23 @@
         "registrationStatus": {
           "description": "Container registration status",
           "type": "string"
+        },
+        "protectedItemsCount": {
+          "format": "int32",
+          "description": "Number of protected items",
+          "type": "integer"
+        },
+        "acquireStorageAccountLock": {
+          "description": "Specifies whether the storage account lock has been acquired or not",
+          "enum": [
+            "Acquire",
+            "NotAcquire"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AcquireStorageAccountLock",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -11842,6 +11875,11 @@
         "additionalDetail": {
           "description": "Error Additional Detail in case the status is non-success.",
           "type": "string",
+          "readOnly": true
+        },
+        "protectableItemCount": {
+          "description": "Dictionary to store the count of ProtectableItems with key POType.",
+          "type": "object",
           "readOnly": true
         }
       }

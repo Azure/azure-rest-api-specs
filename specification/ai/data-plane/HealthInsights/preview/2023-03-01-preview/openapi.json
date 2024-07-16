@@ -1,0 +1,1982 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Health Insights",
+    "version": "2023-03-01-preview",
+    "description": "Azure Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/healthinsights",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "TrialMatcher"
+    },
+    {
+      "name": "OncoPhenotype"
+    }
+  ],
+  "paths": {
+    "/oncophenotype/jobs": {
+      "post": {
+        "operationId": "OncoPhenotype_CreateJob",
+        "tags": [
+          "OncoPhenotype"
+        ],
+        "summary": "Create Onco Phenotype job",
+        "description": "Creates an Onco Phenotype job with the given request body.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OncoPhenotypeData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OncoPhenotypeResult"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates an Onco Phenotype job with the given request body.": {
+            "$ref": "./examples/SuccessfulOncoPhenotypeRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/oncophenotype/jobs/{jobId}": {
+      "get": {
+        "operationId": "OncoPhenotype_GetJob",
+        "tags": [
+          "OncoPhenotype"
+        ],
+        "summary": "Get Onco Phenotype job details",
+        "description": "Gets the status and details of the Onco Phenotype job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "A processing job identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OncoPhenotypeResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status and details of the Onco Phenotype job.": {
+            "$ref": "./examples/SuccessfulOncoPhenotypeResponse.json"
+          }
+        }
+      }
+    },
+    "/trialmatcher/jobs": {
+      "post": {
+        "operationId": "TrialMatcher_CreateJob",
+        "tags": [
+          "TrialMatcher"
+        ],
+        "summary": "Create Trial Matcher job",
+        "description": "Creates a Trial Matcher job with the given request body.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrialMatcherData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TrialMatcherResult"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Repeatability-Result": {
+                "type": "string",
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "enum": [
+                  "accepted",
+                  "rejected"
+                ],
+                "x-ms-enum": {
+                  "name": "RepeatabilityResult",
+                  "modelAsString": false,
+                  "values": [
+                    {
+                      "name": "accepted",
+                      "value": "accepted",
+                      "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+                    },
+                    {
+                      "name": "rejected",
+                      "value": "rejected",
+                      "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a Trial Matcher job with the given request body.": {
+            "$ref": "./examples/SuccessfulTrialMatcherRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/trialmatcher/jobs/{jobId}": {
+      "get": {
+        "operationId": "TrialMatcher_GetJob",
+        "tags": [
+          "TrialMatcher"
+        ],
+        "summary": "Get Trial Matcher job details",
+        "description": "Gets the status and details of the Trial Matcher job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "A processing job identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TrialMatcherResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status and details of the Trial Matcher job.": {
+            "$ref": "./examples/SuccessfulTrialMatcherResponse.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AcceptedAge": {
+      "type": "object",
+      "description": "A person's age, given as a number (value) and a unit (e.g. years, months)",
+      "properties": {
+        "unit": {
+          "$ref": "#/definitions/AgeUnit",
+          "description": "Possible units for a person's age."
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The number of years/months/days that represents the person's age."
+        }
+      },
+      "required": [
+        "unit",
+        "value"
+      ]
+    },
+    "AcceptedAgeRange": {
+      "type": "object",
+      "description": "A definition of the range of ages accepted by a clinical trial. Contains a minimum age and/or a maximum age.",
+      "properties": {
+        "minimumAge": {
+          "$ref": "#/definitions/AcceptedAge",
+          "description": "A person's age, given as a number (value) and a unit (e.g. years, months)"
+        },
+        "maximumAge": {
+          "$ref": "#/definitions/AcceptedAge",
+          "description": "A person's age, given as a number (value) and a unit (e.g. years, months)"
+        }
+      }
+    },
+    "AgeUnit": {
+      "type": "string",
+      "description": "Possible units for a person's age.",
+      "enum": [
+        "years",
+        "months",
+        "days"
+      ],
+      "x-ms-enum": {
+        "name": "AgeUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Years",
+            "value": "years"
+          },
+          {
+            "name": "Months",
+            "value": "months"
+          },
+          {
+            "name": "Days",
+            "value": "days"
+          }
+        ]
+      }
+    },
+    "AreaGeometry": {
+      "type": "object",
+      "description": "`GeoJSON` geometry, representing the area circle's center.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJsonGeometryType",
+          "description": "`GeoJSON` geometry type."
+        },
+        "coordinates": {
+          "type": "array",
+          "description": "Coordinates of the area circle's center, represented according to the `GeoJSON` standard.\nThis is an array of 2 decimal numbers, longitude and latitude (precisely in this order).",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ]
+    },
+    "AreaProperties": {
+      "type": "object",
+      "description": "`GeoJSON` object properties.",
+      "properties": {
+        "subType": {
+          "$ref": "#/definitions/GeoJsonPropertiesSubType",
+          "description": "`GeoJSON` object sub-type."
+        },
+        "radius": {
+          "type": "number",
+          "format": "double",
+          "description": "The radius of the area's circle, in meters."
+        }
+      },
+      "required": [
+        "subType",
+        "radius"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "ClinicalCodedElement": {
+      "type": "object",
+      "description": "A piece of clinical information, expressed as a code in a clinical coding system.",
+      "properties": {
+        "system": {
+          "type": "string",
+          "description": "The clinical coding system, e.g. ICD-10, SNOMED-CT, UMLS."
+        },
+        "code": {
+          "type": "string",
+          "description": "The code within the given clinical coding system."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this coded concept in the coding system."
+        },
+        "value": {
+          "type": "string",
+          "description": "A value associated with the code within the given clinical coding system."
+        }
+      },
+      "required": [
+        "system",
+        "code"
+      ]
+    },
+    "ClinicalDocumentType": {
+      "type": "string",
+      "description": "The type of the clinical document.",
+      "enum": [
+        "consultation",
+        "dischargeSummary",
+        "historyAndPhysical",
+        "procedure",
+        "progress",
+        "imaging",
+        "laboratory",
+        "pathology"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalDocumentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Consultation",
+            "value": "consultation"
+          },
+          {
+            "name": "DischargeSummary",
+            "value": "dischargeSummary"
+          },
+          {
+            "name": "HistoryAndPhysical",
+            "value": "historyAndPhysical"
+          },
+          {
+            "name": "Procedure",
+            "value": "procedure"
+          },
+          {
+            "name": "Progress",
+            "value": "progress"
+          },
+          {
+            "name": "Imaging",
+            "value": "imaging"
+          },
+          {
+            "name": "Laboratory",
+            "value": "laboratory"
+          },
+          {
+            "name": "Pathology",
+            "value": "pathology"
+          }
+        ]
+      }
+    },
+    "ClinicalNoteEvidence": {
+      "type": "object",
+      "description": "A piece of evidence from a clinical note (text document).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the document containing the evidence."
+        },
+        "text": {
+          "type": "string",
+          "description": "The actual text span which is evidence for the inference."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The start index of the evidence text span in the document (0 based).",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the evidence text span.",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "id",
+        "offset",
+        "length"
+      ]
+    },
+    "ClinicalTrialAcceptedSex": {
+      "type": "string",
+      "description": "Possible values for the Sex eligibility criterion as accepted by clinical trials, which indicates the sex of people who may participate in a clinical study.",
+      "enum": [
+        "all",
+        "female",
+        "male"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialAcceptedSex",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "All",
+            "value": "all"
+          },
+          {
+            "name": "Female",
+            "value": "female"
+          },
+          {
+            "name": "Male",
+            "value": "male"
+          }
+        ]
+      }
+    },
+    "ClinicalTrialDemographics": {
+      "type": "object",
+      "description": "Demographic criteria for a clinical trial.",
+      "properties": {
+        "acceptedSex": {
+          "$ref": "#/definitions/ClinicalTrialAcceptedSex",
+          "description": "Indication of the sex of people who may participate in the clinical trial."
+        },
+        "acceptedAgeRange": {
+          "$ref": "#/definitions/AcceptedAgeRange",
+          "description": "A definition of the range of ages accepted by a clinical trial. Contains a minimum age and/or a maximum age."
+        }
+      }
+    },
+    "ClinicalTrialDetails": {
+      "type": "object",
+      "description": "A description of a clinical trial.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A given identifier for the clinical trial. Has to be unique within a list of clinical trials.",
+          "minLength": 1
+        },
+        "eligibilityCriteriaText": {
+          "type": "string",
+          "description": "The eligibility criteria of the clinical trial (inclusion and exclusion), given as text."
+        },
+        "demographics": {
+          "$ref": "#/definitions/ClinicalTrialDemographics",
+          "description": "Demographic criteria for a clinical trial."
+        },
+        "metadata": {
+          "$ref": "#/definitions/ClinicalTrialMetadata",
+          "description": "Trial data which is of interest to the potential participant."
+        }
+      },
+      "required": [
+        "id",
+        "metadata"
+      ]
+    },
+    "ClinicalTrialMetadata": {
+      "type": "object",
+      "description": "Trial data which is of interest to the potential participant.",
+      "properties": {
+        "phases": {
+          "type": "array",
+          "description": "Phases which are relevant for the clinical trial.\nEach clinical trial can be in a certain phase or in multiple phases.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialPhase"
+          }
+        },
+        "studyType": {
+          "$ref": "#/definitions/ClinicalTrialStudyType",
+          "description": "Possible study types of a clinical trial."
+        },
+        "recruitmentStatus": {
+          "$ref": "#/definitions/ClinicalTrialRecruitmentStatus",
+          "description": "Possible recruitment status of a clinical trial."
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Medical conditions and their synonyms which are relevant for the clinical trial, given as strings.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "sponsors": {
+          "type": "array",
+          "description": "Sponsors/collaborators involved with the trial.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contacts": {
+          "type": "array",
+          "description": "Contact details of the trial administrators, for patients that want to participate in the trial.",
+          "items": {
+            "$ref": "#/definitions/ContactDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "facilities": {
+          "type": "array",
+          "description": "Research facilities where the clinical trial is conducted.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialResearchFacility"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "conditions"
+      ]
+    },
+    "ClinicalTrialPhase": {
+      "type": "string",
+      "description": "Possible phases of a clinical trial.",
+      "enum": [
+        "notApplicable",
+        "earlyPhase1",
+        "phase1",
+        "phase2",
+        "phase3",
+        "phase4"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialPhase",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "notApplicable"
+          },
+          {
+            "name": "EarlyPhase1",
+            "value": "earlyPhase1"
+          },
+          {
+            "name": "Phase1",
+            "value": "phase1"
+          },
+          {
+            "name": "Phase2",
+            "value": "phase2"
+          },
+          {
+            "name": "Phase3",
+            "value": "phase3"
+          },
+          {
+            "name": "Phase4",
+            "value": "phase4"
+          }
+        ]
+      }
+    },
+    "ClinicalTrialPurpose": {
+      "type": "string",
+      "description": "Possible purposes of a clinical trial.",
+      "enum": [
+        "notApplicable",
+        "screening",
+        "diagnostic",
+        "prevention",
+        "healthServicesResearch",
+        "treatment",
+        "deviceFeasibility",
+        "supportiveCare",
+        "basicScience",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialPurpose",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotApplicable",
+            "value": "notApplicable"
+          },
+          {
+            "name": "Screening",
+            "value": "screening"
+          },
+          {
+            "name": "Diagnostic",
+            "value": "diagnostic"
+          },
+          {
+            "name": "Prevention",
+            "value": "prevention"
+          },
+          {
+            "name": "HealthServicesResearch",
+            "value": "healthServicesResearch"
+          },
+          {
+            "name": "Treatment",
+            "value": "treatment"
+          },
+          {
+            "name": "DeviceFeasibility",
+            "value": "deviceFeasibility"
+          },
+          {
+            "name": "SupportiveCare",
+            "value": "supportiveCare"
+          },
+          {
+            "name": "BasicScience",
+            "value": "basicScience"
+          },
+          {
+            "name": "Other",
+            "value": "other"
+          }
+        ]
+      }
+    },
+    "ClinicalTrialRecruitmentStatus": {
+      "type": "string",
+      "description": "Possible recruitment status of a clinical trial.",
+      "enum": [
+        "unknownStatus",
+        "notYetRecruiting",
+        "recruiting",
+        "enrollingByInvitation"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialRecruitmentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UnknownStatus",
+            "value": "unknownStatus"
+          },
+          {
+            "name": "NotYetRecruiting",
+            "value": "notYetRecruiting"
+          },
+          {
+            "name": "Recruiting",
+            "value": "recruiting"
+          },
+          {
+            "name": "EnrollingByInvitation",
+            "value": "enrollingByInvitation"
+          }
+        ]
+      }
+    },
+    "ClinicalTrialRegistryFilter": {
+      "type": "object",
+      "description": "A filter defining a subset of clinical trials from a given clinical trial registry (e.g. clinicaltrials.gov).",
+      "properties": {
+        "conditions": {
+          "type": "array",
+          "description": "Trials with any of the given medical conditions will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the medical conditions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "studyTypes": {
+          "type": "array",
+          "description": "Trials with any of the given study types will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the study types.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialStudyType"
+          }
+        },
+        "recruitmentStatuses": {
+          "type": "array",
+          "description": "Trials with any of the given recruitment statuses will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the recruitment statuses.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialRecruitmentStatus"
+          }
+        },
+        "sponsors": {
+          "type": "array",
+          "description": "Trials with any of the given sponsors will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the sponsors.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phases": {
+          "type": "array",
+          "description": "Trials with any of the given phases will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the phases.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialPhase"
+          }
+        },
+        "purposes": {
+          "type": "array",
+          "description": "Trials with any of the given purposes will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the purposes.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialPurpose"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "description": "Trials with any of the given identifiers will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "description": "Trials with any of the given sources will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the sources.",
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialSource"
+          }
+        },
+        "facilityNames": {
+          "type": "array",
+          "description": "Trials with any of the given facility names will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility names.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facilityLocations": {
+          "type": "array",
+          "description": "Trials with any of the given facility locations will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility locations.",
+          "items": {
+            "$ref": "#/definitions/GeographicLocation"
+          },
+          "x-ms-identifiers": []
+        },
+        "facilityAreas": {
+          "type": "array",
+          "description": "Trials with any of the given facility area boundaries will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility area boundaries.",
+          "items": {
+            "$ref": "#/definitions/GeographicArea"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClinicalTrialResearchFacility": {
+      "type": "object",
+      "description": "Details of a research facility where a clinical trial is conducted.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The facility's name."
+        },
+        "city": {
+          "type": "string",
+          "description": "City name."
+        },
+        "state": {
+          "type": "string",
+          "description": "State name."
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "Country/region name."
+        }
+      },
+      "required": [
+        "name",
+        "countryOrRegion"
+      ]
+    },
+    "ClinicalTrialSource": {
+      "type": "string",
+      "description": "Possible sources of a clinical trial.",
+      "enum": [
+        "custom",
+        "clinicaltrials.gov"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Custom",
+            "value": "custom"
+          },
+          {
+            "name": "ClinicaltrialsGov",
+            "value": "clinicaltrials.gov"
+          }
+        ]
+      }
+    },
+    "ClinicalTrialStudyType": {
+      "type": "string",
+      "description": "Possible study types of a clinical trial.",
+      "enum": [
+        "interventional",
+        "observational",
+        "expandedAccess",
+        "patientRegistries"
+      ],
+      "x-ms-enum": {
+        "name": "ClinicalTrialStudyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Interventional",
+            "value": "interventional"
+          },
+          {
+            "name": "Observational",
+            "value": "observational"
+          },
+          {
+            "name": "ExpandedAccess",
+            "value": "expandedAccess"
+          },
+          {
+            "name": "PatientRegistries",
+            "value": "patientRegistries"
+          }
+        ]
+      }
+    },
+    "ClinicalTrials": {
+      "type": "object",
+      "description": "The clinical trials that the patient(s) should be matched to. \nThe trial selection can be given as a list of custom clinical trials and/or a list of filters to known clinical trial registries.\nIn case both are given, the resulting trial set is a union of the two sets.",
+      "properties": {
+        "customTrials": {
+          "type": "array",
+          "description": "A list of clinical trials.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialDetails"
+          }
+        },
+        "registryFilters": {
+          "type": "array",
+          "description": "A list of filters, each one creating a selection of trials from a given\nclinical trial registry.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ClinicalTrialRegistryFilter"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ContactDetails": {
+      "type": "object",
+      "description": "A person's contact details.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The person's name."
+        },
+        "email": {
+          "type": "string",
+          "description": "The person's email."
+        },
+        "phone": {
+          "type": "string",
+          "description": "A person's phone number."
+        }
+      }
+    },
+    "DocumentContent": {
+      "type": "object",
+      "description": "The content of the patient document.",
+      "properties": {
+        "sourceType": {
+          "$ref": "#/definitions/DocumentContentSourceType",
+          "description": "The type of the content's source.\nIn case the source type is 'inline', the content is given as a string (for instance, text).\nIn case the source type is 'reference', the content is given as a URI."
+        },
+        "value": {
+          "type": "string",
+          "description": "The content of the document, given either inline (as a string) or as a reference (URI)."
+        }
+      },
+      "required": [
+        "sourceType",
+        "value"
+      ]
+    },
+    "DocumentContentSourceType": {
+      "type": "string",
+      "description": "The type of the content's source. \nIn case the source type is 'inline', the content is given as a string (for instance, text). \nIn case the source type is 'reference', the content is given as a URI.",
+      "enum": [
+        "inline",
+        "reference"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentContentSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Inline",
+            "value": "inline"
+          },
+          {
+            "name": "Reference",
+            "value": "reference"
+          }
+        ]
+      }
+    },
+    "DocumentType": {
+      "type": "string",
+      "description": "The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).",
+      "enum": [
+        "note",
+        "fhirBundle",
+        "dicom",
+        "genomicSequencing"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Note",
+            "value": "note"
+          },
+          {
+            "name": "FhirBundle",
+            "value": "fhirBundle"
+          },
+          {
+            "name": "Dicom",
+            "value": "dicom"
+          },
+          {
+            "name": "GenomicSequencing",
+            "value": "genomicSequencing"
+          }
+        ]
+      }
+    },
+    "ExtendedClinicalCodedElement": {
+      "type": "object",
+      "description": "A piece of clinical information, expressed as a code in a clinical coding system, extended by semantic information.",
+      "properties": {
+        "system": {
+          "type": "string",
+          "description": "The clinical coding system, e.g. ICD-10, SNOMED-CT, UMLS."
+        },
+        "code": {
+          "type": "string",
+          "description": "The code within the given clinical coding system."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this coded concept in the coding system."
+        },
+        "value": {
+          "type": "string",
+          "description": "A value associated with the code within the given clinical coding system."
+        },
+        "semanticType": {
+          "type": "string",
+          "description": "The [UMLS semantic type](https://www.nlm.nih.gov/research/umls/META3_current_semantic_types.html) associated with the coded concept."
+        },
+        "category": {
+          "type": "string",
+          "description": "The bio-medical category related to the coded concept, e.g. Diagnosis, Symptom, Medication, Examination."
+        }
+      },
+      "required": [
+        "system",
+        "code"
+      ]
+    },
+    "GeoJsonGeometryType": {
+      "type": "string",
+      "description": "`GeoJSON` geometry type.",
+      "enum": [
+        "Point"
+      ],
+      "x-ms-enum": {
+        "name": "GeoJsonGeometryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Point",
+            "value": "Point"
+          }
+        ]
+      }
+    },
+    "GeoJsonPropertiesSubType": {
+      "type": "string",
+      "description": "`GeoJSON` object sub-type.",
+      "enum": [
+        "Circle"
+      ],
+      "x-ms-enum": {
+        "name": "GeoJsonPropertiesSubType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Circle",
+            "value": "Circle"
+          }
+        ]
+      }
+    },
+    "GeoJsonType": {
+      "type": "string",
+      "description": "`GeoJSON` type.",
+      "enum": [
+        "Feature"
+      ],
+      "x-ms-enum": {
+        "name": "GeoJsonType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Feature",
+            "value": "Feature"
+          }
+        ]
+      }
+    },
+    "GeographicArea": {
+      "type": "object",
+      "description": "A geographic area, expressed as a `Circle` geometry represented using a `GeoJSON Feature` (see [GeoJSON spec](https://tools.ietf.org/html/rfc7946)).",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJsonType",
+          "description": "`GeoJSON` type."
+        },
+        "geometry": {
+          "$ref": "#/definitions/AreaGeometry",
+          "description": "`GeoJSON` geometry, representing the area circle's center."
+        },
+        "properties": {
+          "$ref": "#/definitions/AreaProperties",
+          "description": "`GeoJSON` object properties."
+        }
+      },
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ]
+    },
+    "GeographicLocation": {
+      "type": "object",
+      "description": "A location given as a combination of city, state and country/region. It could specify a city, a state or a country/region.\nIn case a city is specified, either state +country/region or country/region (for countries/regions where there are no states) should be added.\nIn case a state is specified (without a city), country/region should be added.",
+      "properties": {
+        "city": {
+          "type": "string",
+          "description": "City name."
+        },
+        "state": {
+          "type": "string",
+          "description": "State name."
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "Country/region name."
+        }
+      },
+      "required": [
+        "countryOrRegion"
+      ]
+    },
+    "InferenceEvidence": {
+      "type": "object",
+      "description": "A piece of evidence corresponding to an inference.",
+      "properties": {
+        "patientDataEvidence": {
+          "$ref": "#/definitions/ClinicalNoteEvidence",
+          "description": "A piece of evidence from a clinical note (text document)."
+        },
+        "patientInfoEvidence": {
+          "$ref": "#/definitions/ClinicalCodedElement",
+          "description": "A piece of clinical information, expressed as a code in a clinical coding\nsystem."
+        },
+        "importance": {
+          "type": "number",
+          "format": "float",
+          "description": "A value indicating how important this piece of evidence is for the inference.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "The status of the processing job.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed",
+        "partiallyCompleted"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "notStarted"
+          },
+          {
+            "name": "Running",
+            "value": "running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "failed"
+          },
+          {
+            "name": "PartiallyCompleted",
+            "value": "partiallyCompleted"
+          }
+        ]
+      }
+    },
+    "ModelVersion": {
+      "type": "string",
+      "description": "The version of the model used for inference, expressed as the model date."
+    },
+    "NeededClinicalInfo": {
+      "type": "array",
+      "description": "Clinical information which is needed to provide better trial matching results for the patient.",
+      "items": {
+        "$ref": "#/definitions/ExtendedClinicalCodedElement"
+      },
+      "x-ms-identifiers": []
+    },
+    "OncoPhenotypeData": {
+      "type": "object",
+      "description": "The body of the Onco Phenotype request.",
+      "properties": {
+        "patients": {
+          "type": "array",
+          "description": "The list of patients, including their clinical information and data.",
+          "items": {
+            "$ref": "#/definitions/PatientRecord"
+          }
+        },
+        "configuration": {
+          "$ref": "#/definitions/OncoPhenotypeModelConfiguration",
+          "description": "Configuration affecting the Onco Phenotype model's inference."
+        }
+      },
+      "required": [
+        "patients"
+      ]
+    },
+    "OncoPhenotypeInference": {
+      "type": "object",
+      "description": "An inference made by the Onco Phenotype model regarding a patient.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/OncoPhenotypeInferenceType",
+          "description": "The type of the Onco Phenotype inference"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the inference, as relevant for the given inference type."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description corresponding to the inference value."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence score for this inference.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "evidence": {
+          "type": "array",
+          "description": "The evidence corresponding to the inference value.",
+          "items": {
+            "$ref": "#/definitions/InferenceEvidence"
+          },
+          "x-ms-identifiers": []
+        },
+        "caseId": {
+          "type": "string",
+          "description": "An identifier for a clinical case, if there are multiple clinical cases regarding the same patient."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "OncoPhenotypeInferenceType": {
+      "type": "string",
+      "description": "The type of the Onco Phenotype inference.",
+      "enum": [
+        "tumorSite",
+        "histology",
+        "clinicalStageT",
+        "clinicalStageN",
+        "clinicalStageM",
+        "pathologicStageT",
+        "pathologicStageN",
+        "pathologicStageM"
+      ],
+      "x-ms-enum": {
+        "name": "OncoPhenotypeInferenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TumorSite",
+            "value": "tumorSite"
+          },
+          {
+            "name": "Histology",
+            "value": "histology"
+          },
+          {
+            "name": "ClinicalStageT",
+            "value": "clinicalStageT"
+          },
+          {
+            "name": "ClinicalStageN",
+            "value": "clinicalStageN"
+          },
+          {
+            "name": "ClinicalStageM",
+            "value": "clinicalStageM"
+          },
+          {
+            "name": "PathologicStageT",
+            "value": "pathologicStageT"
+          },
+          {
+            "name": "PathologicStageN",
+            "value": "pathologicStageN"
+          },
+          {
+            "name": "PathologicStageM",
+            "value": "pathologicStageM"
+          }
+        ]
+      }
+    },
+    "OncoPhenotypeModelConfiguration": {
+      "type": "object",
+      "description": "Configuration affecting the Onco Phenotype model's inference.",
+      "properties": {
+        "verbose": {
+          "type": "boolean",
+          "description": "An indication whether the model should produce verbose output.",
+          "default": false
+        },
+        "includeEvidence": {
+          "type": "boolean",
+          "description": "An indication whether the model's output should include evidence for the inferences.",
+          "default": true
+        },
+        "inferenceTypes": {
+          "type": "array",
+          "description": "A list of inference types to be inferred for the current request.\nThis could be used if only part of the Onco Phenotype inferences are required.\nIf this list is omitted or empty, the model will return all the inference types.",
+          "items": {
+            "$ref": "#/definitions/OncoPhenotypeInferenceType"
+          }
+        },
+        "checkForCancerCase": {
+          "type": "boolean",
+          "description": "An indication whether to perform a preliminary step on the patient's documents to determine whether they relate to a Cancer case.",
+          "default": false
+        }
+      }
+    },
+    "OncoPhenotypePatientResult": {
+      "type": "object",
+      "description": "The results of the model's work for a single patient.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier given for the patient in the request."
+        },
+        "inferences": {
+          "type": "array",
+          "description": "The model's inferences for the given patient.",
+          "items": {
+            "$ref": "#/definitions/OncoPhenotypeInference"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "inferences"
+      ]
+    },
+    "OncoPhenotypeResult": {
+      "type": "object",
+      "description": "The response for the Onco Phenotype request.",
+      "properties": {
+        "jobId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "A processing job identifier.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job was created.",
+          "readOnly": true
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job is set to expire.",
+          "readOnly": true
+        },
+        "lastUpdateDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job was last updated.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The status of the processing job.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "An array of errors, if any errors occurred during the processing job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "results": {
+          "$ref": "#/definitions/OncoPhenotypeResults",
+          "description": "The inference results for the Onco Phenotype request.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "expirationDateTime",
+        "lastUpdateDateTime",
+        "status"
+      ]
+    },
+    "OncoPhenotypeResults": {
+      "type": "object",
+      "description": "The inference results for the Onco Phenotype request.",
+      "properties": {
+        "patients": {
+          "type": "array",
+          "description": "Results for the patients given in the request.",
+          "items": {
+            "$ref": "#/definitions/OncoPhenotypePatientResult"
+          }
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion",
+          "description": "The version of the model used for inference, expressed as the model date."
+        }
+      },
+      "required": [
+        "patients",
+        "modelVersion"
+      ]
+    },
+    "PatientDocument": {
+      "type": "object",
+      "description": "A clinical document related to a patient. Document here is in the wide sense - not just a text document (note).",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DocumentType",
+          "description": "The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document)."
+        },
+        "clinicalType": {
+          "$ref": "#/definitions/ClinicalDocumentType",
+          "description": "The type of the clinical document."
+        },
+        "id": {
+          "type": "string",
+          "description": "A given identifier for the document. Has to be unique across all documents for a single patient.",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "description": "A 2 letter ISO 639-1 representation of the language of the document."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the document was created."
+        },
+        "content": {
+          "$ref": "#/definitions/DocumentContent",
+          "description": "The content of the patient document."
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "content"
+      ]
+    },
+    "PatientInfo": {
+      "type": "object",
+      "description": "Patient structured information, including demographics and known structured clinical information.",
+      "properties": {
+        "sex": {
+          "$ref": "#/definitions/PatientInfoSex",
+          "description": "The patient's sex."
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The patient's date of birth."
+        },
+        "clinicalInfo": {
+          "type": "array",
+          "description": "Known clinical information for the patient, structured.",
+          "items": {
+            "$ref": "#/definitions/ClinicalCodedElement"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PatientInfoSex": {
+      "type": "string",
+      "description": "The patient's sex.",
+      "enum": [
+        "female",
+        "male",
+        "unspecified"
+      ],
+      "x-ms-enum": {
+        "name": "PatientInfoSex",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Female",
+            "value": "female"
+          },
+          {
+            "name": "Male",
+            "value": "male"
+          },
+          {
+            "name": "Unspecified",
+            "value": "unspecified"
+          }
+        ]
+      }
+    },
+    "PatientRecord": {
+      "type": "object",
+      "description": "A patient record, including their clinical information and data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A given identifier for the patient. Has to be unique across all patients in a single request.",
+          "minLength": 1
+        },
+        "info": {
+          "$ref": "#/definitions/PatientInfo",
+          "description": "Patient structured information, including demographics and known structured clinical information."
+        },
+        "data": {
+          "type": "array",
+          "description": "Patient unstructured clinical data, given as documents.",
+          "items": {
+            "$ref": "#/definitions/PatientDocument"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "TrialMatcherData": {
+      "type": "object",
+      "description": "The body of the Trial Matcher request.",
+      "properties": {
+        "patients": {
+          "type": "array",
+          "description": "The list of patients, including their clinical information and data.",
+          "items": {
+            "$ref": "#/definitions/PatientRecord"
+          }
+        },
+        "configuration": {
+          "$ref": "#/definitions/TrialMatcherModelConfiguration",
+          "description": "Configuration affecting the Trial Matcher model's inference."
+        }
+      },
+      "required": [
+        "patients"
+      ]
+    },
+    "TrialMatcherInference": {
+      "type": "object",
+      "description": "An inference made by the Trial Matcher model regarding a patient.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TrialMatcherInferenceType",
+          "description": "The type of the Trial Matcher inference."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the inference, as relevant for the given inference type."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description corresponding to the inference value."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence score for this inference.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "evidence": {
+          "type": "array",
+          "description": "The evidence corresponding to the inference value.",
+          "items": {
+            "$ref": "#/definitions/TrialMatcherInferenceEvidence"
+          },
+          "x-ms-identifiers": []
+        },
+        "id": {
+          "type": "string",
+          "description": "The identifier of the clinical trial.",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "#/definitions/ClinicalTrialSource",
+          "description": "Possible sources of a clinical trial."
+        },
+        "metadata": {
+          "$ref": "#/definitions/ClinicalTrialMetadata",
+          "description": "Trial data which is of interest to the potential participant."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "TrialMatcherInferenceEvidence": {
+      "type": "object",
+      "description": "A piece of evidence corresponding to a Trial Matcher inference.",
+      "properties": {
+        "eligibilityCriteriaEvidence": {
+          "type": "string",
+          "description": "A piece of evidence from the eligibility criteria text of a clinical trial."
+        },
+        "patientDataEvidence": {
+          "$ref": "#/definitions/ClinicalNoteEvidence",
+          "description": "A piece of evidence from a clinical note (text document)."
+        },
+        "patientInfoEvidence": {
+          "$ref": "#/definitions/ClinicalCodedElement",
+          "description": "A piece of clinical information, expressed as a code in a clinical coding\nsystem."
+        },
+        "importance": {
+          "type": "number",
+          "format": "float",
+          "description": "A value indicating how important this piece of evidence is for the inference.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "TrialMatcherInferenceType": {
+      "type": "string",
+      "description": "The type of the Trial Matcher inference.",
+      "enum": [
+        "trialEligibility"
+      ],
+      "x-ms-enum": {
+        "name": "TrialMatcherInferenceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TrialEligibility",
+            "value": "trialEligibility"
+          }
+        ]
+      }
+    },
+    "TrialMatcherModelConfiguration": {
+      "type": "object",
+      "description": "Configuration affecting the Trial Matcher model's inference.",
+      "properties": {
+        "verbose": {
+          "type": "boolean",
+          "description": "An indication whether the model should produce verbose output.",
+          "default": false
+        },
+        "includeEvidence": {
+          "type": "boolean",
+          "description": "An indication whether the model's output should include evidence for the inferences.",
+          "default": true
+        },
+        "clinicalTrials": {
+          "$ref": "#/definitions/ClinicalTrials",
+          "description": "The clinical trials that the patient(s) should be matched to. <br />The trial\nselection can be given as a list of custom clinical trials and/or a list of\nfilters to known clinical trial registries. In case both are given, the\nresulting trial set is a union of the two sets."
+        }
+      },
+      "required": [
+        "clinicalTrials"
+      ]
+    },
+    "TrialMatcherPatientResult": {
+      "type": "object",
+      "description": "The results of the model's work for a single patient.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier given for the patient in the request."
+        },
+        "inferences": {
+          "type": "array",
+          "description": "The model's inferences for the given patient.",
+          "items": {
+            "$ref": "#/definitions/TrialMatcherInference"
+          }
+        },
+        "neededClinicalInfo": {
+          "$ref": "#/definitions/NeededClinicalInfo",
+          "description": "Clinical information which is needed to provide better trial matching results for the patient."
+        }
+      },
+      "required": [
+        "id",
+        "inferences"
+      ]
+    },
+    "TrialMatcherResult": {
+      "type": "object",
+      "description": "The response for the Trial Matcher request.",
+      "properties": {
+        "jobId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "A processing job identifier.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job was created.",
+          "readOnly": true
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job is set to expire.",
+          "readOnly": true
+        },
+        "lastUpdateDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the processing job was last updated.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The status of the processing job.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "An array of errors, if any errors occurred during the processing job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "results": {
+          "$ref": "#/definitions/TrialMatcherResults",
+          "description": "The inference results for the Trial Matcher request.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "expirationDateTime",
+        "lastUpdateDateTime",
+        "status"
+      ]
+    },
+    "TrialMatcherResults": {
+      "type": "object",
+      "description": "The inference results for the Trial Matcher request.",
+      "properties": {
+        "patients": {
+          "type": "array",
+          "description": "Results for the patients given in the request.",
+          "items": {
+            "$ref": "#/definitions/TrialMatcherPatientResult"
+          }
+        },
+        "modelVersion": {
+          "$ref": "#/definitions/ModelVersion",
+          "description": "The version of the model used for inference, expressed as the model date."
+        },
+        "knowledgeGraphLastUpdateDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date when the clinical trials knowledge graph was last updated."
+        }
+      },
+      "required": [
+        "patients",
+        "modelVersion"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent": {
+      "name": "Repeatability-First-Sent",
+      "in": "header",
+      "description": "Specifies the date and time at which the request was first created.",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityFirstSent"
+    },
+    "Azure.Core.RepeatabilityRequestHeaders.repeatabilityRequestId": {
+      "name": "Repeatability-Request-ID",
+      "in": "header",
+      "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "repeatabilityRequestId"
+    }
+  }
+}

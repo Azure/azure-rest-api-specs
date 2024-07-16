@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01",
+    "billingScope": "providers/Microsoft.Billing/billingAccounts/123456",
+    "$expand": "properties/usage,properties/allRecommendationDetails",
+    "$filter": "properties/lookBackPeriod eq 'Last7Days' AND properties/term eq 'P1Y'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/benefitRecommendations/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.CostManagement/benefitRecommendations",
+            "kind": "SavingsPlan",
+            "properties": {
+              "firstConsumptionDate": "2022-10-18T00:00:00Z",
+              "lastConsumptionDate": "2022-10-25T00:00:00Z",
+              "lookBackPeriod": "Last7Days",
+              "totalHours": 168,
+              "usage": {
+                "usageGrain": "Hourly",
+                "charges": [
+                  1.0,
+                  1.0,
+                  0.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  2.0,
+                  2.0,
+                  2.0,
+                  2.0
+                ]
+              },
+              "armSkuName": "Compute_Savings_Plan",
+              "term": "P1Y",
+              "commitmentGranularity": "Hourly",
+              "currencyCode": "USD",
+              "costWithoutBenefit": 218.267,
+              "scope": "Shared",
+              "recommendationDetails": {
+                "averageUtilizationPercentage": 99.330,
+                "coveragePercentage": 54.609,
+                "commitmentAmount": 0.164,
+                "overageCost": 144.841,
+                "benefitCost": 52.002,
+                "savingsAmount": 21.424,
+                "savingsPercentage": 9.815,
+                "totalCost": 196.843,
+                "wastageCost": 0.035
+              },
+              "allRecommendationDetails": {
+                "value": [
+                  {
+                    "averageUtilizationPercentage": 99.330,
+                    "coveragePercentage": 54.609,
+                    "commitmentAmount": 0.164,
+                    "overageCost": 144.841,
+                    "benefitCost": 52.002,
+                    "savingsAmount": 21.424,
+                    "savingsPercentage": 9.815,
+                    "totalCost": 196.843,
+                    "wastageCost": 0.035
+                  },
+                  {
+                    "averageUtilizationPercentage": 81.474,
+                    "coveragePercentage": 56.748,
+                    "commitmentAmount": 0.161,
+                    "overageCost": 120.389,
+                    "benefitCost": 83.754,
+                    "savingsAmount": 14.124,
+                    "savingsPercentage": 6.470,
+                    "totalCost": 204.143,
+                    "wastageCost": 0.100
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
