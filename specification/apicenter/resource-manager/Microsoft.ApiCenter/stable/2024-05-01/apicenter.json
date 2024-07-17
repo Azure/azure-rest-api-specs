@@ -4553,11 +4553,15 @@
         "sourceResourceIds": {
           "type": "array",
           "description": "An entity the metadata schema is requested for.",
+          "minItems": 1,
           "items": {
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "sourceResourceIds"
+      ]
     },
     "ImportFromApimSuccessResult": {
       "type": "object",
@@ -4979,6 +4983,11 @@
           "type": "boolean",
           "description": "Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.",
           "default": false
+        },
+        "dataApiHostname": {
+          "type": "string",
+          "description": "The hostname of the Data API.",
+          "readOnly": true
         }
       }
     },
