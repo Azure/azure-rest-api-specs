@@ -6,6 +6,9 @@ using Language.Conversations;
 
 namespace Language.ConversationsClientCustomizations;
 
+@@clientName(Conversations, "ConversationAnalysis", "csharp");
+@@clientName(analyzeConversations, "AnalyzeConversation", "csharp");
+
 @@clientName(ConversationEntity.confidenceScore, "confidence", "csharp");
 @@clientName(ConversationIntent.confidenceScore, "confidence", "csharp");
 @@clientName(TargetIntentResult.confidenceScore, "confidence", "csharp");
@@ -94,7 +97,6 @@ namespace Language.ConversationsClientCustomizations;
 
 @@clientName(Conversation, "ConversationInput", "csharp");
 
-
 @@clientName(ConversationPiiCategories.USSocialSecurityNumber,
   "UsSocialSecurityNumber",
   "csharp"
@@ -121,66 +123,134 @@ namespace Language.ConversationsClientCustomizations;
   "csharp"
 );
 
-
-
 @@clientName(AnalyzeConversationTask, "AnalyzeConversationInput", "csharp");
-@@clientName(AnalyzeConversationTaskKind, "AnalyzeConversationInputKind", "csharp");
+@@clientName(AnalyzeConversationTaskKind,
+  "AnalyzeConversationInputKind",
+  "csharp"
+);
 
 @@clientName(ConversationalTask, "ConversationalInput", "csharp");
 @@clientName(ConversationalTask.analysisInput, "ConversationInput", "csharp");
 @@clientName(ConversationalTask.parameters, "ActionContent", "csharp");
 @@clientName(ConversationTaskParameters, "ConversationActionContent", "csharp");
 
+@@clientName(AnalyzeConversationTaskResult,
+  "AnalyzeConversationResult",
+  "csharp"
+);
+@@clientName(AnalyzeConversationTaskResultsKind,
+  "AnalyzeConversationResultKind",
+  "csharp"
+);
 
+@@clientName(ConversationalTaskResult,
+  "AnalyzeConversationConversationalResult",
+  "csharp"
+);
 
-@@clientName(AnalyzeConversationTaskResult, "AnalyzeConversationResult", "csharp");
-@@clientName(AnalyzeConversationTaskResultsKind, "AnalyzeConversationResultKind", "csharp");
+@@clientName(MultiLanguageConversationAnalysisInput,
+  "MultiLanguageConversationInput"
+);
 
-@@clientName(ConversationalTaskResult, "AnalyzeConversationConversationalResult", "csharp");
-
-
-@@clientName(MultiLanguageConversationAnalysisInput, "MultiLanguageConversationInput");
-
-
-@@clientName(AnalyzeConversationJobsInput, "AnalyzeConversationOperationInput", "csharp");
-@@clientName(AnalyzeConversationJobsInput.analysisInput, "ConversationInput", "csharp");
+@@clientName(AnalyzeConversationJobsInput,
+  "AnalyzeConversationOperationInput",
+  "csharp"
+);
+@@clientName(AnalyzeConversationJobsInput.analysisInput,
+  "ConversationInput",
+  "csharp"
+);
 @@clientName(AnalyzeConversationJobsInput.tasks, "Actions", "csharp");
-
 
 @@clientName(AnalyzeConversationLROTask, "AnalyzeConversationOperationAction");
 @@clientName(AnalyzeConversationLROTask.taskName, "Name", "csharp");
 
-@@clientName(AnalyzeConversationLROTaskKind, "AnalyzeConversationOperationActionKind", "csharp");
+@@clientName(AnalyzeConversationLROTaskKind,
+  "AnalyzeConversationOperationActionKind",
+  "csharp"
+);
 
 @@clientName(AnalyzeConversationPiiTask, "PiiOperationAction", "csharp");
 @@clientName(AnalyzeConversationPiiTask.parameters, "ActionContent", "csharp");
 @@clientName(ConversationPiiTaskParameters, "PiiActionContent", "csharp");
 
-@@clientName(AnalyzeCustomConversationSummarizationTask, "CustomSummarizationOperationAction", "csharp");
-@@clientName(AnalyzeCustomConversationSummarizationTask.parameters, "ActionContent", "csharp");
-@@clientName(CustomConversationSummarizationTaskParameters, "CustomConversationSummarizationActionContent", "csharp");
+@@clientName(AnalyzeCustomConversationSummarizationTask,
+  "CustomSummarizationOperationAction",
+  "csharp"
+);
+@@clientName(AnalyzeCustomConversationSummarizationTask.parameters,
+  "ActionContent",
+  "csharp"
+);
+@@clientName(CustomConversationSummarizationTaskParameters,
+  "CustomConversationSummarizationActionContent",
+  "csharp"
+);
 
-@@clientName(AnalyzeConversationSummarizationTask, "SummarizationOperationAction", "csharp");
-@@clientName(AnalyzeConversationSummarizationTask.parameters, "ActionContent", "csharp");
-@@clientName(ConversationSummarizationTaskParameters, "ConversationSummarizationActionContent", "csharp");
+@@clientName(AnalyzeConversationSummarizationTask,
+  "SummarizationOperationAction",
+  "csharp"
+);
+@@clientName(AnalyzeConversationSummarizationTask.parameters,
+  "ActionContent",
+  "csharp"
+);
+@@clientName(ConversationSummarizationTaskParameters,
+  "ConversationSummarizationActionContent",
+  "csharp"
+);
 
-
-
-@@clientName(AnalyzeConversationJobState, "AnalyzeConversationOperationState", "csharp");
+@@clientName(AnalyzeConversationJobState,
+  "AnalyzeConversationOperationState",
+  "csharp"
+);
 @@clientName(AnalyzeConversationJobState.tasks, "Actions", "csharp");
 
-@@clientName(AnalyzeConversationJobResult, "AnalyzeConversationOperationResult", "csharp");
+@@clientName(AnalyzeConversationJobResult,
+  "AnalyzeConversationOperationResult",
+  "csharp"
+);
 @@clientName(AnalyzeConversationJobResult.taskName, "Name", "csharp");
 
-@@clientName(AnalyzeConversationResultsKind, "AnalyzeConversationOperationResultsKind", "csharp");
-@@clientName(AnalyzeConversationResultsKind.ConversationalSummarizationResults, "SummarizationOperationResults", "csharp");
-@@clientName(AnalyzeConversationResultsKind.ConversationalPIIResults, "PiiOperationResults", "csharp");
-@@clientName(AnalyzeConversationResultsKind.CustomConversationalSummarizationResults, "CustomSummarizationOperationResults", "csharp");
+@@clientName(AnalyzeConversationResultsKind,
+  "AnalyzeConversationOperationResultsKind",
+  "csharp"
+);
+@@clientName(AnalyzeConversationResultsKind.ConversationalSummarizationResults,
+  "SummarizationOperationResults",
+  "csharp"
+);
+@@clientName(AnalyzeConversationResultsKind.ConversationalPIIResults,
+  "PiiOperationResults",
+  "csharp"
+);
+@@clientName(AnalyzeConversationResultsKind.CustomConversationalSummarizationResults,
+  "CustomSummarizationOperationResults",
+  "csharp"
+);
 
-@@clientName(AnalyzeConversationConversationPiiResult, "ConversationPiiOperationResult", "csharp");
-@@clientName(AnalyzeConversationSummarizationResult, "SummarizationOperationResult", "csharp");
-@@clientName(AnalyzeCustomConversationSummarizationResult, "CustomSummarizationOperationResult", "csharp");
+@@clientName(AnalyzeConversationConversationPiiResult,
+  "ConversationPiiOperationResult",
+  "csharp"
+);
+@@clientName(AnalyzeConversationSummarizationResult,
+  "SummarizationOperationResult",
+  "csharp"
+);
+@@clientName(AnalyzeCustomConversationSummarizationResult,
+  "CustomSummarizationOperationResult",
+  "csharp"
+);
 
-@@clientName(analyzeConversationsSubmitJob, "AnalyzeConversationSubmitOperation", "csharp");
-@@clientName(analyzeConversationsJobStatus, "AnalyzeConversationOperationStatus", "csharp");
-@@clientName(analyzeConversationsCancelJob, "AnalyzeConversationCancelOperation", "csharp");
+@@clientName(analyzeConversationsSubmitJob,
+  "AnalyzeConversationSubmitOperation",
+  "csharp"
+);
+@@clientName(analyzeConversationsJobStatus,
+  "AnalyzeConversationOperationStatus",
+  "csharp"
+);
+@@clientName(analyzeConversationsCancelJob,
+  "AnalyzeConversationCancelOperation",
+  "csharp"
+);

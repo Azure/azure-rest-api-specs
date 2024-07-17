@@ -395,7 +395,7 @@
           "$ref": "#/definitions/AnalyzeConversationJobResult"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalPIIResults"
+      "x-ms-discriminator-value": "conversationalPIIResults"
     },
     "AnalyzeConversationJobResult": {
       "type": "object",
@@ -607,9 +607,9 @@
       "type": "string",
       "description": "Enumeration of results for supported conversation analysis Results.",
       "enum": [
-        "ConversationalSummarizationResults",
-        "ConversationalPIIResults",
-        "CustomConversationalSummarizationResults"
+        "conversationalSummarizationResults",
+        "conversationalPIIResults",
+        "customConversationalSummarizationResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeConversationResultsKind",
@@ -617,17 +617,17 @@
         "values": [
           {
             "name": "ConversationalSummarizationResults",
-            "value": "ConversationalSummarizationResults",
+            "value": "conversationalSummarizationResults",
             "description": "Conversational Summarization Results"
           },
           {
             "name": "ConversationalPIIResults",
-            "value": "ConversationalPIIResults",
+            "value": "conversationalPIIResults",
             "description": "Conversational PII Results"
           },
           {
             "name": "CustomConversationalSummarizationResults",
-            "value": "CustomConversationalSummarizationResults",
+            "value": "customConversationalSummarizationResults",
             "description": "Custom Conversational Summarization Results"
           }
         ]
@@ -650,7 +650,7 @@
           "$ref": "#/definitions/AnalyzeConversationJobResult"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalSummarizationResults"
+      "x-ms-discriminator-value": "conversationalSummarizationResults"
     },
     "AnalyzeConversationSummarizationTask": {
       "type": "object",
@@ -753,7 +753,7 @@
           "$ref": "#/definitions/AnalyzeConversationJobResult"
         }
       ],
-      "x-ms-discriminator-value": "CustomConversationalSummarizationResults"
+      "x-ms-discriminator-value": "customConversationalSummarizationResults"
     },
     "AnalyzeCustomConversationSummarizationTask": {
       "type": "object",
