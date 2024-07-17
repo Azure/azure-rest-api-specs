@@ -17,17 +17,9 @@ namespace Azure.Batch;
 
 // Interfaces ////////////////////
 
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "The body of non-204 responses should not be empty."
-#suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using BatchOperation should not have path parameters."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'Exists' should be defined using a signature from the Azure.Core namespace."
-#suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "BatchOperation with '@get' cannot have a body."
-@client({
-  name: "BatchClient",
-  service: Azure.Batch,
-})
-interface Batch {
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@tag("Applications")
+interface Applications {
   @summary("Lists all of the applications available in the specified Account.")
   @doc("""
     This operation returns only Applications and versions that are available for
@@ -58,7 +50,14 @@ interface Batch {
     },
     BatchApplication
   >;
+}
 
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+#suppress "@azure-tools/typespec-azure-core/no-error-status-codes" ""
+@tag("Pools")
+interface Pools {
   @summary("""
     Lists the usage metrics, aggregated by Pool across individual time intervals,
     for the specified Account.
@@ -387,7 +386,12 @@ interface Batch {
     },
     BatchPoolNodeCountsListResult
   >;
+}
 
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+@tag("Jobs")
+interface Jobs {
   @summary("Deletes a Job.")
   @doc("""
     Deleting a Job also deletes all Tasks that are part of that Job, and all Job
@@ -695,7 +699,14 @@ interface Batch {
     },
     BatchTaskCountsResult
   >;
+}
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+#suppress "@azure-tools/typespec-azure-core/no-error-status-codes" ""
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@tag("Job Schedules")
+interface JobSchedules {
   @summary("Checks the specified Job Schedule exists.")
   @doc("Checks the specified Job Schedule exists.")
   @route("/jobschedules/{jobScheduleId}")
@@ -884,7 +895,13 @@ interface Batch {
     },
     BatchJobScheduleListResult
   >;
+}
 
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+@tag("Tasks")
+interface Tasks {
   @summary("Creates a Task to the specified Job.")
   @doc("""
     The maximum lifetime of a Task from addition to completion is 180 days. If a
@@ -1222,7 +1239,13 @@ interface Batch {
     },
     BatchNodeFileListResult
   >;
+}
 
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+@tag("Nodes")
+interface Nodes {
   @summary("Adds a user Account to the specified Compute Node.")
   @doc("""
     You can add a user Account to a Compute Node only when it is in the idle or
