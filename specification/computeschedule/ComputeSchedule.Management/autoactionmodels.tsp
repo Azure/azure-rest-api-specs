@@ -14,6 +14,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.ComputeSchedule;
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The type of resource the auto action is targeting.")
 union ResourceType {
   @doc("Resources defined in the auto action are Virtual Machines")
@@ -25,6 +26,7 @@ union ResourceType {
   string,
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Specify which action user wants to the auto action to perform on the resources")
 union ActionType {
   @doc("Auto action should perform a start action on the specified resources")
@@ -39,12 +41,13 @@ union ActionType {
   string,
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Representation of the days in a week in a gregorian calendar")
 union WeekDay {
   @doc("Monday weekday.")
   Monday: "Monday",
 
-  @doc("Tuesda weekday.")
+  @doc("Tuesday weekday.")
   Tuesday: "Tuesday",
 
   @doc("Wednesday weekday.")
@@ -65,6 +68,7 @@ union WeekDay {
   string,
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Representation of the months in a gregorian calendar")
 union Month {
   @doc("The January month.")
@@ -108,9 +112,11 @@ union Month {
 
 @minValue(1)
 @maxValue(31)
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Represents the possible days in a month")
 scalar DayOfTheMonth extends int32;
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Specify the schedule in which the auto action is supposed to follow")
 model AutoActionSchedule {
   @doc("The time the auto action is supposed to run on")
@@ -135,6 +141,7 @@ model AutoActionSchedule {
   deadlineType: DeadlineType;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The state the occurrence is at a given time")
 union OccurrenceState {
   @doc("The occurrence was created")
@@ -161,6 +168,7 @@ union OccurrenceState {
   string,
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The state of a occurrence")
 model OccurrenceView {
   @doc("The identifier of the occurrence")
@@ -180,6 +188,7 @@ model OccurrenceView {
   errorDetails?: Azure.Core.Foundations.Error[];
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Auto action properties")
 model AutoActionProperties {
   @doc("The type of resource the auto action is targeting")
@@ -202,16 +211,12 @@ model AutoActionProperties {
   @doc("The schedule the auto action is supposed to follow")
   schedule: AutoActionSchedule;
 
-  @doc("The status of the last provisioning operation performed on the resource.")
-  @visibility("read")
-  provisioningState?: ResourceProvisioningState;
-
   @doc("The list of upcoming occurrences for the auto action")
   @visibility("read")
   @OpenAPI.extension("x-ms-identifiers", ["occurrenceId"])
   upcomingOccurrences: OccurrenceView[];
 
-  @doc("The list of upcoming occurrnces for the auto action")
+  @doc("The list of upcoming occurrences for the auto action")
   @visibility("read")
   @OpenAPI.extension("x-ms-identifiers", ["occurrenceId"])
   lastOccurrences: OccurrenceView[];
@@ -219,6 +224,10 @@ model AutoActionProperties {
   @doc("Tell if the auto action is disabled or not")
   @visibility("read")
   isDisabled: boolean;
+
+  @doc("The status of the last provisioning operation performed on the resource.")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
 }
 
 alias AutoActionParams = {
@@ -235,6 +244,7 @@ alias AutoActionParams = {
   vmName: string;
 };
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The auto action resource")
 model AutoAction is TrackedResource<AutoActionProperties> {
   ...ResourceNameParameter<AutoAction>;

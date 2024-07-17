@@ -1048,10 +1048,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AutoAction"
-              }
+              "$ref": "#/definitions/AutoActionListResult"
             }
           },
           "default": {
@@ -1170,11 +1167,6 @@
           "$ref": "#/definitions/AutoActionSchedule",
           "description": "The schedule the auto action is supposed to follow"
         },
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "The status of the last provisioning operation performed on the resource.",
-          "readOnly": true
-        },
         "upcomingOccurrences": {
           "type": "array",
           "description": "The list of upcoming occurrences for the auto action",
@@ -1188,7 +1180,7 @@
         },
         "lastOccurrences": {
           "type": "array",
-          "description": "The list of upcoming occurrnces for the auto action",
+          "description": "The list of upcoming occurrences for the auto action",
           "items": {
             "$ref": "#/definitions/OccurrenceView"
           },
@@ -1200,6 +1192,11 @@
         "isDisabled": {
           "type": "boolean",
           "description": "Tell if the auto action is disabled or not",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
           "readOnly": true
         }
       },
@@ -2511,7 +2508,7 @@
           {
             "name": "Tuesday",
             "value": "Tuesday",
-            "description": "Tuesda weekday."
+            "description": "Tuesday weekday."
           },
           {
             "name": "Wednesday",

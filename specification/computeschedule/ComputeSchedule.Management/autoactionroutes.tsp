@@ -26,17 +26,12 @@ interface AutoActions {
 
   @doc("Lists Auto actions per VM.")
   @segment("autoActions")
-  @OpenAPI.extension(
-  "x-ms-pageable",
-  {
-    nextLinkName: "nextLink",
-  }
-)
+  @listsResource(AutoAction)
   @armResourceList(AutoAction)
   @get
   listByVm(
     ...AutoActionParams
-  ): ArmResponse<AutoAction[]> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<AutoAction>> | ErrorResponse;
 
   attachResources is ArmResourceActionNoContentSync<
     AutoAction,
