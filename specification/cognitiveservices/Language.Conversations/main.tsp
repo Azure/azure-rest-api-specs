@@ -675,15 +675,15 @@ union AnalyzeConversationResultsKind {
 
   /** Conversational Summarization Results */
   @added(Versions.v2023_04_01)
-  ConversationalSummarizationResults: "ConversationalSummarizationResults",
+  ConversationalSummarizationResults: "conversationalSummarizationResults",
 
   /** Conversational PII Results */
   @added(Versions.v2024_05_01)
-  ConversationalPIIResults: "ConversationalPIIResults",
+  ConversationalPIIResults: "conversationalPIIResults",
 
   /** Custom Conversational Summarization Results */
   @added(Versions.v2024_05_15_preview)
-  CustomConversationalSummarizationResults: "CustomConversationalSummarizationResults",
+  CustomConversationalSummarizationResults: "customConversationalSummarizationResults",
 }
 
 /** Contains the status of the submitted job for analyzing a conversation, along with related statistics. */
