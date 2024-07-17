@@ -6,6 +6,15 @@
   "bin": {
     "get-suppressions": "cmd/get-suppressions.js"
   },
+  "scripts": {
+    "build": "tsc",
+    "postinstall": "npm run build",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  },
+  "engines": {
+    "node": ">= 18.0.0"
+  },
   "dependencies": {
     "minimatch": "^9.0.4",
     "yaml": "^2.4.2",
@@ -17,14 +26,5 @@
     "@vitest/coverage-v8": "^1.6.0",
     "typescript": "~5.4.5",
     "vitest": "^1.6.0"
-  },
-  "scripts": {
-    "build": "tsc",
-    "postinstall": "npm run build",
-    "test": "vitest",
-    "test:ci": "vitest run --coverage --reporter=verbose"
-  },
-  "engines": {
-    "node": ">= 18.0.0"
   }
 }

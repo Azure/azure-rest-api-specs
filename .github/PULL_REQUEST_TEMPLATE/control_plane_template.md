@@ -17,6 +17,7 @@ What's the purpose of this PR? Check the specific option that applies. This is *
   - [ ] New API version for an existing resource provider. (If API spec is not defined in TypeSpec, the PR should have been created in adherence to [OpenAPI specs PR creation guidance](https://aka.ms/azsdkdocs/createopenapispec)).
   - [ ] Update existing version for a new feature. (This is applicable only when you are revising a private preview API version.)
   - [ ] Update existing version to fix OpenAPI spec quality issues in S360.
+  - [ ] Convert existing [OpenAPI spec to TypeSpec spec](https://aka.ms/typespec/conversion) (do not combine this with implementing changes for a new API version).
   - [ ] Other, please clarify:
     - _edit this with your clarification_
 
