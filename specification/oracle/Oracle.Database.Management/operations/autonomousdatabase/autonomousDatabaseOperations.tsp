@@ -13,7 +13,7 @@ interface AutonomousDatabases
     > {
   //OCI switchover API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/SwitchoverAutonomousDatabase
   @doc("Perform switchover action on Autonomous Database")
-  @example(
+  @Autorest.example(
     "./examples/autonomousDatabase_switchover.json",
     "Perform switchover action on Autonomous Database"
   )
@@ -25,7 +25,7 @@ interface AutonomousDatabases
 
   //OCI failover API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/FailOverAutonomousDatabase
   @doc("Perform failover action on Autonomous Database")
-  @example(
+  @Autorest.example(
     "./examples/autonomousDatabase_failover.json",
     "Perform failover action on Autonomous Database"
   )
@@ -37,7 +37,7 @@ interface AutonomousDatabases
 
   //OCI generate wallet API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/GenerateAutonomousDatabaseWallet
   @doc("Generate wallet action on Autonomous Database")
-  @example(
+  @Autorest.example(
     "./examples/autonomousDatabase_generateWallet.json",
     "Generate wallet action on Autonomous Database"
   )
@@ -49,7 +49,7 @@ interface AutonomousDatabases
 
   //OCI RestoreAutonomousDatabase API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/RestoreAutonomousDatabase
   @doc("Restores an Autonomous Database based on the provided request parameters.")
-  @example(
+  @Autorest.example(
     "./examples/autonomousDatabase_restore.json",
     "Perform restore action on Autonomous Database"
   )
@@ -61,7 +61,7 @@ interface AutonomousDatabases
 
   //OCI ShrinkAutonomousDatabase API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/ShrinkAutonomousDatabase
   @doc("This operation shrinks the current allocated storage down to the current actual used data storage.")
-  @example(
+  @Autorest.example(
     "./examples/autonomousDatabase_shrink.json",
     "Perform shrink action on Autonomous Database"
   )
@@ -72,31 +72,31 @@ interface AutonomousDatabases
   >;
 }
 
-@@example(AutonomousDatabases.listBySubscription,
+@@Autorest.example(AutonomousDatabases.listBySubscription,
   "./examples/autonomousDatabase_listBySubscription.json",
   "List Autonomous Database by subscription"
 );
-@@example(AutonomousDatabases.listByResourceGroup,
+@@Autorest.example(AutonomousDatabases.listByResourceGroup,
   "./examples/autonomousDatabase_listByResourceGroup.json",
   "List Autonomous Database by resource group"
 );
-@@example(AutonomousDatabases.createOrUpdate,
+@@Autorest.example(AutonomousDatabases.createOrUpdate,
   "./examples/autonomousDatabase_create.json",
   "Create Autonomous Database"
 );
-@@example(AutonomousDatabases.createOrUpdate,
+@@Autorest.example(AutonomousDatabases.createOrUpdate,
   "./examples/autonomousDatabaseClone_create.json",
   "Create clone Autonomous Database"
 );
-@@example(AutonomousDatabases.get,
+@@Autorest.example(AutonomousDatabases.get,
   "./examples/autonomousDatabase_get.json",
   "Get Autonomous Database"
 );
-@@example(AutonomousDatabases.update,
+@@Autorest.example(AutonomousDatabases.update,
   "./examples/autonomousDatabase_patch.json",
   "Patch Autonomous Database"
 );
-@@example(AutonomousDatabases.delete,
+@@Autorest.example(AutonomousDatabases.delete,
   "./examples/autonomousDatabase_delete.json",
   "Delete Autonomous Database"
 );
