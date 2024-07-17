@@ -857,6 +857,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextJobState, "AnalyzeTextOperationState", "csharp");
 @@clientName(AnalyzeTextJobState.tasks, "Actions", "csharp");
 
+@@access(AnalyzeTextLROResult, Access.public, "csharp");
 @@clientName(AnalyzeTextLROResult, "AnalyzeTextOperationResult", "csharp");
 @@clientName(AnalyzeTextLROResult.taskName, "Name", "csharp");
 
