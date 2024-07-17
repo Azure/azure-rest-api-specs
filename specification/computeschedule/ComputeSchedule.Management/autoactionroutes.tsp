@@ -14,6 +14,7 @@ using OpenAPI;
 
 namespace Microsoft.ComputeSchedule;
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @armResourceOperations
 interface AutoActions {
   get is ArmResourceRead<AutoAction>;
