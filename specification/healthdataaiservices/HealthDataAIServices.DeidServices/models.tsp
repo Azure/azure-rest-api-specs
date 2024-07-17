@@ -26,10 +26,10 @@ model DeidentificationJob {
   targetLocation: TargetStorageLocation;
 
   @doc("Operation to perform on the input documents.")
-  operation: OperationType = OperationType.Surrogate;
+  operation?: OperationType = OperationType.Surrogate;
 
   @doc("Data type of the input documents.")
-  dataType: DocumentDataType = DocumentDataType.Plaintext;
+  dataType?: DocumentDataType = DocumentDataType.Plaintext;
 
   @maxLength(16)
   @minLength(1)
@@ -129,7 +129,7 @@ model SourceStorageLocation {
 
   @doc("List of extensions to filter path by.")
   @minItems(1)
-  extensions: Array<string> = #["*"];
+  extensions?: Array<string> = #["*"];
 }
 
 @doc("Storage location.")
@@ -203,10 +203,10 @@ model DeidentificationContent {
   inputText: string;
 
   @doc("Operation to perform on the input.")
-  operation: OperationType = OperationType.Surrogate;
+  operation?: OperationType = OperationType.Surrogate;
 
   @doc("Data type of the input.")
-  dataType: DocumentDataType = DocumentDataType.Plaintext;
+  dataType?: DocumentDataType = DocumentDataType.Plaintext;
 
   @maxLength(16)
   @doc("Format of the redacted output. Only valid when OperationType is \"Redact\".")
