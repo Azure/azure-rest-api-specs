@@ -6814,6 +6814,38 @@
           "description": "The additional latency in milliseconds for probes to fall into the lowest latency bucket",
           "type": "integer",
           "format": "int32"
+        },
+        "capacityDistributionSettings": {
+          "description": "Capacity based round-robin load balancing settings",
+          "type": "object",
+          "$ref": "#/definitions/CapacityDistributionSettingsParameters"
+        }
+      }
+    },
+    "CapacityDistributionSettingsParameters": {
+      "description": "Capacity based round-robin load balancing settings for a backend pool",
+      "type": "object",
+      "properties": {
+        "capacityConsciousThreshold": {
+          "description": "Threshold at which additional backends are added for capacity based load balancing. Default is 80.",
+          "type": "integer",
+          "format": "int32",
+          "default": 80,
+          "maximum": 100,
+          "minimum": 20
+        },
+        "distributionType": {
+          "description": "Type of distribution used in capacity based load balancing.",
+          "enum": [
+            "StaticWeights",
+            "DynamicWeights"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DistributionType",
+            "modelAsString": false
+          },
+          "default": "DynamicWeights"
         }
       }
     },
