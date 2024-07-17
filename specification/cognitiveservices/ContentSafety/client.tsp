@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2023_10_01)
+@TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2024_09_01)
 namespace Customizations;
 
 @client({
@@ -14,8 +15,7 @@ namespace Customizations;
 interface ContentSafetyClient {
   analyzeText is ContentSafety.TextOperations.analyzeText;
   analyzeImage is ContentSafety.ImageOperations.analyzeImage;
-  detectTextJailbreak is ContentSafety.TextOperations.detectTextJailbreak;
-  detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
+  shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
 }
 
 @client({
