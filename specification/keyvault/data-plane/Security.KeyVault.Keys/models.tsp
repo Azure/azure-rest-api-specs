@@ -38,12 +38,12 @@ union JsonWebKeyType {
   /**
    * Octet sequence (used to represent symmetric keys)
    */
-  oct: "oct",
+  OCT: "oct",
 
   /**
    * Octet sequence (used to represent symmetric keys) which is stored the HSM.
    */
-  oct_HSM: "oct-HSM",
+  OCT_HSM: "oct-HSM",
 }
 
 /**
@@ -157,16 +157,16 @@ union JsonWebKeyCurveName {
   string,
 
   /** The NIST P-256 elliptic curve, AKA SECG curve SECP256R1. */
-  P_256: "P-256",
+  P256: "P-256",
 
   /** The NIST P-384 elliptic curve, AKA SECG curve SECP384R1. */
-  P_384: "P-384",
+  P384: "P-384",
 
   /** The NIST P-521 elliptic curve, AKA SECG curve SECP521R1. */
-  P_521: "P-521",
+  P521: "P-521",
 
   /** The SECG SECP256K1 elliptic curve. */
-  P_256K: "P-256K",
+  P256_K: "P-256K",
 }
 
 /**
@@ -186,46 +186,46 @@ union JsonWebKeyEncryptionAlgorithm {
   /** RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256
    * and a mask generation function of MGF1 with SHA-256.
    */
-  RSA_OAEP_256: "RSA-OAEP-256",
+  RSA_OAEP256: "RSA-OAEP-256",
 
   /** RSAES-PKCS1-V1_5 key encryption, as described in https://tools.ietf.org/html/rfc3447. */
   RSA1_5: "RSA1_5",
 
   /** 128-bit AES-GCM. */
-  A128GCM: "A128GCM",
+  A128_GCM: "A128GCM",
 
   /** 192-bit AES-GCM. */
-  A192GCM: "A192GCM",
+  A192_GCM: "A192GCM",
 
   /** 256-bit AES-GCM. */
-  A256GCM: "A256GCM",
+  A256_GCM: "A256GCM",
 
   /** 128-bit AES key wrap. */
-  A128KW: "A128KW",
+  A128_KW: "A128KW",
 
   /** 192-bit AES key wrap. */
-  A192KW: "A192KW",
+  A192_KW: "A192KW",
 
   /** 256-bit AES key wrap. */
-  A256KW: "A256KW",
+  A256_KW: "A256KW",
 
   /** 128-bit AES-CBC. */
-  A128CBC: "A128CBC",
+  A128_CBC: "A128CBC",
 
   /** 192-bit AES-CBC. */
-  A192CBC: "A192CBC",
+  A192_CBC: "A192CBC",
 
   /** 256-bit AES-CBC. */
-  A256CBC: "A256CBC",
+  A256_CBC: "A256CBC",
 
   /** 128-bit AES-CBC with PKCS padding. */
-  A128CBCPAD: "A128CBCPAD",
+  A128_CBCPAD: "A128CBCPAD",
 
   /** 192-bit AES-CBC with PKCS padding. */
-  A192CBCPAD: "A192CBCPAD",
+  A192_CBCPAD: "A192CBCPAD",
 
   /** 256-bit AES-CBC with PKCS padding. */
-  A256CBCPAD: "A256CBCPAD",
+  A256_CBCPAD: "A256CBCPAD",
 }
 
 /**
@@ -298,7 +298,7 @@ union JsonWebKeySignatureAlgorithm {
    * ECDSA using P-256K and SHA-256, as described in
    * https://tools.ietf.org/html/rfc7518
    */
-  ES256K: "ES256K",
+  ES256_K: "ES256K",
 }
 
 /**
@@ -551,23 +551,20 @@ model JsonWebKey {
   /**
    * RSA private key parameter.
    */
-  @encodedName("application/json", "dp")
   @encode("base64url")
-  DP?: bytes;
+  dp?: bytes;
 
   /**
    * RSA private key parameter.
    */
-  @encodedName("application/json", "dq")
   @encode("base64url")
-  DQ?: bytes;
+  dq?: bytes;
 
   /**
    * RSA private key parameter.
    */
-  @encodedName("application/json", "qi")
   @encode("base64url")
-  QI?: bytes;
+  qi?: bytes;
 
   /**
    * RSA secret prime.
