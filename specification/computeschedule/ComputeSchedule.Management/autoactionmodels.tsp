@@ -41,25 +41,25 @@ union ActionType {
 
 @doc("Representation of the days in a week in a gregorian calendar")
 union WeekDay {
-  @doc("Monday")
+  @doc("Monday weekday.")
   Monday: "Monday",
 
-  @doc("Tuesday")
+  @doc("Tuesda weekday.")
   Tuesday: "Tuesday",
 
-  @doc("Wednesday")
+  @doc("Wednesday weekday.")
   Wednesday: "Wednesday",
 
-  @doc("Thrusday")
+  @doc("Thursday weekday.")
   Thursday: "Thursday",
 
-  @doc("Friday")
+  @doc("Friday weekday.")
   Friday: "Friday",
 
-  @doc("Saturday")
+  @doc("Saturday weekday.")
   Saturday: "Saturday",
 
-  @doc("Sunday")
+  @doc("Sunday weekday.")
   Sunday: "Sunday",
 
   string,
@@ -67,40 +67,40 @@ union WeekDay {
 
 @doc("Representation of the months in a gregorian calendar")
 union Month {
-  @doc("January")
+  @doc("The January month.")
   January: "January",
 
-  @doc("February")
+  @doc("The February month.")
   February: "February",
 
-  @doc("March")
+  @doc("The March month.")
   March: "March",
 
-  @doc("April")
+  @doc("The April month.")
   April: "April",
 
-  @doc("May")
+  @doc("The May month.")
   May: "May",
 
-  @doc("June")
+  @doc("The June month.")
   June: "June",
 
-  @doc("July")
+  @doc("The July month.")
   July: "July",
 
-  @doc("August")
+  @doc("The August month.")
   August: "August",
 
-  @doc("September")
+  @doc("The September month.")
   September: "September",
 
-  @doc("October")
+  @doc("The October month.")
   October: "October",
 
-  @doc("November")
+  @doc("The November month.")
   November: "November",
 
-  @doc("December")
+  @doc("The December month.")
   December: "December",
 
   string,
@@ -109,7 +109,7 @@ union Month {
 @minValue(1)
 @maxValue(31)
 @doc("Represents the possible days in a month")
-scalar DayOfTheMonth extends uint8;
+scalar DayOfTheMonth extends int32;
 
 @doc("Specify the schedule in which the auto action is supposed to follow")
 model AutoActionSchedule {
@@ -137,16 +137,16 @@ model AutoActionSchedule {
 
 @doc("The state the occurrence is at a given time")
 union OccurrenceState {
-  @doc("The occurence was created")
+  @doc("The occurrence was created")
   Created: "Created",
 
-  @doc("The occurence is being rescheduled")
+  @doc("The occurrence is being rescheduled")
   Rescheduling: "Rescheduling",
 
-  @doc("The occurence has been scheduled")
+  @doc("The occurrence has been scheduled")
   Scheduled: "Scheduled",
 
-  @doc("The occurrence has successfuly ran")
+  @doc("The occurrence has successfully ran")
   Succeeded: "Succeeded",
 
   @doc("The occurrence has failed during its scheduling")
@@ -169,7 +169,7 @@ model OccurrenceView {
   @doc("The time the occurrence was scheduled for")
   scheduledTime: utcDateTime;
 
-  @doc("The list of resources the occurrence is targetting")
+  @doc("The list of resources the occurrence is targeting")
   resources: armResourceIdentifier[];
 
   @doc("The current state of the occurrence")
@@ -206,7 +206,7 @@ model AutoActionProperties {
   @visibility("read")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("The list of upcoming occurrnces for the auto action")
+  @doc("The list of upcoming occurrences for the auto action")
   @visibility("read")
   @OpenAPI.extension("x-ms-identifiers", ["occurrenceId"])
   upcomingOccurrences: OccurrenceView[];
@@ -229,6 +229,7 @@ alias AutoActionParams = {
 
   @path
   @minLength(1)
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @segment("virtualMachines")
   @doc("The virtualMachine name.")
   vmName: string;

@@ -26,6 +26,12 @@ interface AutoActions {
 
   @doc("Lists Auto actions per VM.")
   @segment("autoActions")
+  @OpenAPI.extension(
+  "x-ms-pageable",
+  {
+    nextLinkName: "nextLink",
+  }
+)
   @armResourceList(AutoAction)
   @get
   listByVm(

@@ -1040,7 +1040,8 @@
             "description": "The virtualMachine name.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
@@ -1059,6 +1060,9 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1173,7 +1177,7 @@
         },
         "upcomingOccurrences": {
           "type": "array",
-          "description": "The list of upcoming occurrnces for the auto action",
+          "description": "The list of upcoming occurrences for the auto action",
           "items": {
             "$ref": "#/definitions/OccurrenceView"
           },
@@ -1481,7 +1485,7 @@
     },
     "DayOfTheMonth": {
       "type": "integer",
-      "format": "uint8",
+      "format": "int32",
       "description": "Represents the possible days in a month",
       "minimum": 1,
       "maximum": 31
@@ -1737,62 +1741,62 @@
           {
             "name": "January",
             "value": "January",
-            "description": "January"
+            "description": "The January month."
           },
           {
             "name": "February",
             "value": "February",
-            "description": "February"
+            "description": "The February month."
           },
           {
             "name": "March",
             "value": "March",
-            "description": "March"
+            "description": "The March month."
           },
           {
             "name": "April",
             "value": "April",
-            "description": "April"
+            "description": "The April month."
           },
           {
             "name": "May",
             "value": "May",
-            "description": "May"
+            "description": "The May month."
           },
           {
             "name": "June",
             "value": "June",
-            "description": "June"
+            "description": "The June month."
           },
           {
             "name": "July",
             "value": "July",
-            "description": "July"
+            "description": "The July month."
           },
           {
             "name": "August",
             "value": "August",
-            "description": "August"
+            "description": "The August month."
           },
           {
             "name": "September",
             "value": "September",
-            "description": "September"
+            "description": "The September month."
           },
           {
             "name": "October",
             "value": "October",
-            "description": "October"
+            "description": "The October month."
           },
           {
             "name": "November",
             "value": "November",
-            "description": "November"
+            "description": "The November month."
           },
           {
             "name": "December",
             "value": "December",
-            "description": "December"
+            "description": "The December month."
           }
         ]
       }
@@ -1816,22 +1820,22 @@
           {
             "name": "Created",
             "value": "Created",
-            "description": "The occurence was created"
+            "description": "The occurrence was created"
           },
           {
             "name": "Rescheduling",
             "value": "Rescheduling",
-            "description": "The occurence is being rescheduled"
+            "description": "The occurrence is being rescheduled"
           },
           {
             "name": "Scheduled",
             "value": "Scheduled",
-            "description": "The occurence has been scheduled"
+            "description": "The occurrence has been scheduled"
           },
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "The occurrence has successfuly ran"
+            "description": "The occurrence has successfully ran"
           },
           {
             "name": "Failed",
@@ -1866,7 +1870,7 @@
         },
         "resources": {
           "type": "array",
-          "description": "The list of resources the occurrence is targetting",
+          "description": "The list of resources the occurrence is targeting",
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -2502,37 +2506,37 @@
           {
             "name": "Monday",
             "value": "Monday",
-            "description": "Monday"
+            "description": "Monday weekday."
           },
           {
             "name": "Tuesday",
             "value": "Tuesday",
-            "description": "Tuesday"
+            "description": "Tuesda weekday."
           },
           {
             "name": "Wednesday",
             "value": "Wednesday",
-            "description": "Wednesday"
+            "description": "Wednesday weekday."
           },
           {
             "name": "Thursday",
             "value": "Thursday",
-            "description": "Thrusday"
+            "description": "Thursday weekday."
           },
           {
             "name": "Friday",
             "value": "Friday",
-            "description": "Friday"
+            "description": "Friday weekday."
           },
           {
             "name": "Saturday",
             "value": "Saturday",
-            "description": "Saturday"
+            "description": "Saturday weekday."
           },
           {
             "name": "Sunday",
             "value": "Sunday",
-            "description": "Sunday"
+            "description": "Sunday weekday."
           }
         ]
       }
