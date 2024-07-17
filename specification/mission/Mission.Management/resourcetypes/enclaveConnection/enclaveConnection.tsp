@@ -11,7 +11,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;

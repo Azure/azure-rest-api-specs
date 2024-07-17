@@ -7,7 +7,6 @@ import "../shared/provisioningstate.tsp";
 import "../shared/resourceid.tsp";
 import "../virtualEnclave/virtualenclave.tsp";
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
