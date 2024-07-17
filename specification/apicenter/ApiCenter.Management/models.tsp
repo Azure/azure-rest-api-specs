@@ -279,14 +279,6 @@ model ImportFromApimRequest {
   sourceResourceIds: string[];
 }
 
-@added(Versions.v2024_05_01)
-@doc("The import operation was successfully completed.")
-model ImportFromApimSuccessResult {
-    @doc("The successful response status code.")
-    @statusCode code: 200;
-}
-
-
 @doc("Assignment metadata")
 model MetadataAssignment {
   @doc("The entities this metadata schema component gets applied to.")
@@ -459,6 +451,12 @@ model ApiSpecImportRequest {
 
   @doc("API specification details.")
   specification?: ApiSpecImportRequestSpecification;
+}
+
+@doc("The API specification was successfully imported.")
+model ApiSpecImportResult {
+  @doc("The response status code")
+  @statusCode code: 200;
 }
 
 @doc("API specification details.")

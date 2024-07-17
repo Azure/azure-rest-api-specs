@@ -706,7 +706,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The import operation was successfully completed."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -3706,11 +3709,7 @@
         "properties": {
           "$ref": "#/definitions/ApiProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3726,11 +3725,7 @@
         "properties": {
           "$ref": "#/definitions/ApiDefinitionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -3799,10 +3794,6 @@
           "description": "Specification version."
         }
       }
-    },
-    "ApiImportSuccess": {
-      "type": "object",
-      "description": "The API specification was successfully imported."
     },
     "ApiKind": {
       "type": "string",
@@ -4009,6 +4000,10 @@
         }
       }
     },
+    "ApiSpecImportResult": {
+      "type": "object",
+      "description": "The API specification was successfully imported."
+    },
     "ApiSpecImportSourceFormat": {
       "type": "string",
       "description": "Source format for imported Api spec",
@@ -4040,11 +4035,7 @@
         "properties": {
           "$ref": "#/definitions/ApiVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4156,6 +4147,7 @@
     },
     "CustomProperties": {
       "type": "object",
+      "title": "Custom Properties",
       "description": "The custom metadata defined for API catalog entities."
     },
     "DeletedService": {
@@ -4165,11 +4157,7 @@
         "properties": {
           "$ref": "#/definitions/DeletedServiceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4224,11 +4212,7 @@
         "properties": {
           "$ref": "#/definitions/DeploymentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4341,11 +4325,7 @@
         "properties": {
           "$ref": "#/definitions/EnvironmentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4563,10 +4543,6 @@
         "sourceResourceIds"
       ]
     },
-    "ImportFromApimSuccessResult": {
-      "type": "object",
-      "description": "The import operation was successfully completed."
-    },
     "License": {
       "type": "object",
       "description": "The license information for the API.",
@@ -4735,11 +4711,7 @@
         "properties": {
           "$ref": "#/definitions/MetadataSchemaProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4926,11 +4898,7 @@
         "properties": {
           "$ref": "#/definitions/ServiceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
@@ -4974,6 +4942,11 @@
       "type": "object",
       "description": "The template for adding optional properties.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
@@ -5040,11 +5013,7 @@
         "properties": {
           "$ref": "#/definitions/WorkspaceProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

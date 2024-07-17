@@ -59,6 +59,6 @@ interface Services {
   importFromApim is ArmResourceActionAsync<
     Service,
     ImportFromApimRequest,
-    ImportFromApimSuccessResult
+    Foundations.OperationStatusResult
   >;
 }
