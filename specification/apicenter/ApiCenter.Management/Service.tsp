@@ -27,11 +27,12 @@ model Service is TrackedResource<ServiceProperties> {
 
 @@added(Service.sku, Versions.v2024_05_01);
 
-model SeviceUpdate
+model ServicePatch
   is OptionalProperties<UpdateableProperties<OmitProperties<
     Service,
     "name"
-  >>>;
+  >>> {
+}
 
 @armResourceOperations
 interface Services {
@@ -40,7 +41,7 @@ interface Services {
   @doc("Creates new or updates existing API.")
   createOrUpdate is Azure.ResourceManager.ArmResourceCreateOrReplaceSync<Service>;
   @doc("Updates existing service.")
-  update is ArmResourcePatchSync<Service, SeviceUpdate>;
+  update is ArmCustomPatchSync<Service, ServicePatch>;
   @doc("Deletes specified service.")
   delete is ArmResourceDeleteSync<Service>;
   @doc("Returns a collection of services within the resource group.")

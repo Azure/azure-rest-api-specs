@@ -516,7 +516,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceUpdate"
+              "$ref": "#/definitions/ServicePatch"
             },
             "x-ms-client-name": "properties"
           }
@@ -4970,6 +4970,27 @@
         "value"
       ]
     },
+    "ServicePatch": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ServiceProperties": {
       "type": "object",
       "description": "The properties of the service.",
@@ -4988,73 +5009,6 @@
           "type": "string",
           "description": "The hostname of the Data API.",
           "readOnly": true
-        }
-      }
-    },
-    "ServiceUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Service.",
-      "properties": {
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ServiceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ServiceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Service.",
-      "properties": {
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SeviceUpdate": {
-      "type": "object",
-      "description": "The template for adding optional properties.",
-      "properties": {
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },

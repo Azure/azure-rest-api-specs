@@ -327,7 +327,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceUpdate"
+              "$ref": "#/definitions/ServicePatch"
             },
             "x-ms-client-name": "properties"
           }
@@ -4567,56 +4567,7 @@
         "value"
       ]
     },
-    "ServiceProperties": {
-      "type": "object",
-      "description": "The properties of the service.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the service.",
-          "readOnly": true
-        }
-      }
-    },
-    "ServiceUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Service.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ServiceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ServiceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Service.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SeviceUpdate": {
+    "ServicePatch": {
       "type": "object",
       "description": "The template for adding optional properties.",
       "properties": {
@@ -4630,6 +4581,17 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "ServiceProperties": {
+      "type": "object",
+      "description": "The properties of the service.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the service.",
+          "readOnly": true
         }
       }
     },
