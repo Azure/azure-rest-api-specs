@@ -374,3 +374,10 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
 }
+
+@doc("Notification messages send request body.")
+model NotificationMessagesSendRequestBody {
+  @doc("Details of the message to send.")
+  @bodyRoot
+  body: NotificationContent;
+}
