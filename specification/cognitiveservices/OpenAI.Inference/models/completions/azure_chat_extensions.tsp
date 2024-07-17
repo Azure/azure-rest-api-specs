@@ -13,10 +13,10 @@ using TypeSpec.Versioning;
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
-  completions request that should use Azure OpenAI chat extensions to augment the response behavior.
-  The use of this configuration is compatible only with Azure OpenAI.
-""")
+    A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
+    completions request that should use Azure OpenAI chat extensions to augment the response behavior.
+    The use of this configuration is compatible only with Azure OpenAI.
+  """)
 union AzureChatExtensionType {
   string,
 
@@ -39,31 +39,31 @@ union AzureChatExtensionType {
 @discriminator("type")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-  A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
-  completions request that should use Azure OpenAI chat extensions to augment the response behavior.
-  The use of this configuration is compatible only with Azure OpenAI.
-""")
+    A representation of configuration data for a single Azure OpenAI chat extension. This will be used by a chat
+    completions request that should use Azure OpenAI chat extensions to augment the response behavior.
+    The use of this configuration is compatible only with Azure OpenAI.
+  """)
 model AzureChatExtensionConfiguration {
   @doc("""
-    The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.
-    Azure chat extensions are only compatible with Azure OpenAI.
-  """)
+      The label for the type of an Azure chat extension. This typically corresponds to a matching Azure resource.
+      Azure chat extensions are only compatible with Azure OpenAI.
+    """)
   type: AzureChatExtensionType;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-  A representation of the additional context information available when Azure OpenAI chat extensions are involved
-  in the generation of a corresponding chat completions response. This context information is only populated when
-  using an Azure OpenAI request configured to use a matching extension.
-""")
+    A representation of the additional context information available when Azure OpenAI chat extensions are involved
+    in the generation of a corresponding chat completions response. This context information is only populated when
+    using an Azure OpenAI request configured to use a matching extension.
+  """)
 model AzureChatExtensionsMessageContext {
   @doc("""
-    The contextual information associated with the Azure chat extensions used for a chat completions request.
-    These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the
-    course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat
-    extensions.
-  """)
+      The contextual information associated with the Azure chat extensions used for a chat completions request.
+      These messages describe the data source retrievals, plugin invocations, and other intermediate steps taken in the
+      course of generating a chat completions response that was augmented by capabilities from Azure OpenAI chat
+      extensions.
+    """)
   citations?: AzureChatExtensionDataSourceResponseCitation[];
 
   @doc("The detected intent from the chat history, used to pass to the next turn to carry over the context.")
@@ -77,10 +77,10 @@ model AzureChatExtensionsMessageContext {
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-A single instance of additional context information available when Azure OpenAI chat extensions are involved
-in the generation of a corresponding chat completions response. This context information is only populated when
-using an Azure OpenAI request configured to use a matching extension.
-""")
+  A single instance of additional context information available when Azure OpenAI chat extensions are involved
+  in the generation of a corresponding chat completions response. This context information is only populated when
+  using an Azure OpenAI request configured to use a matching extension.
+  """)
 model AzureChatExtensionDataSourceResponseCitation {
   @doc("The content of the citation.")
   content: string;
@@ -170,9 +170,9 @@ model AzureChatEnhancementConfiguration {
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-Represents the output results of Azure enhancements to chat completions, as configured via the matching input provided
-in the request.
-""")
+  Represents the output results of Azure enhancements to chat completions, as configured via the matching input provided
+  in the request.
+  """)
 model AzureChatEnhancements {
   @doc("The grounding enhancement that returns the bounding box of the objects detected in the image.")
   grounding?: AzureGroundingEnhancement;
@@ -202,9 +202,9 @@ model AzureGroundingEnhancementLineSpan {
   text: string;
 
   @doc("""
-  The character offset within the text where the span begins. This offset is defined as the position of the first
-  character of the span, counting from the start of the text as Unicode codepoints.
-  """)
+    The character offset within the text where the span begins. This offset is defined as the position of the first
+    character of the span, counting from the start of the text as Unicode codepoints.
+    """)
   offset: int32;
 
   @doc("The length of the span in characters, measured in Unicode codepoints.")

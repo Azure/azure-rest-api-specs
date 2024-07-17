@@ -408,18 +408,18 @@ model Pool {
   imageReference?: ImageReference;
 
   @doc("""
-Indicates whether owners of Dev Boxes in this pool are local administrators on
-the Dev Boxes.
-""")
+    Indicates whether owners of Dev Boxes in this pool are local administrators on
+    the Dev Boxes.
+    """)
   localAdministrator?: LocalAdminStatus;
 
   @doc("Stop on disconnect configuration settings for Dev Boxes created in this pool.")
   stopOnDisconnect?: StopOnDisconnectConfiguration;
 
   @doc("""
-Overall health status of the Pool. Indicates whether or not the Pool is
-available to create Dev Boxes.
-""")
+    Overall health status of the Pool. Indicates whether or not the Pool is
+    available to create Dev Boxes.
+    """)
   healthStatus: PoolHealthStatus;
 
   @doc("Display name of the pool.")
@@ -484,15 +484,15 @@ model ImageReference {
 @doc("Stop on disconnect configuration settings for Dev Boxes created in this pool.")
 model StopOnDisconnectConfiguration {
   @doc("""
-Indicates whether the feature to stop the devbox on disconnect once the grace
-period has lapsed is enabled.
-""")
+    Indicates whether the feature to stop the devbox on disconnect once the grace
+    period has lapsed is enabled.
+    """)
   status: StopOnDisconnectEnableStatus;
 
   @doc("""
-The specified time in minutes to wait before stopping a Dev Box once disconnect
-is detected.
-""")
+    The specified time in minutes to wait before stopping a Dev Box once disconnect
+    is detected.
+    """)
   gracePeriodMinutes?: int32;
 }
 
@@ -575,9 +575,9 @@ model DevBox {
   provisioningState?: DevBoxProvisioningState;
 
   @doc("""
-The current action state of the Dev Box. This is state is based on previous
-action performed by user.
-""")
+    The current action state of the Dev Box. This is state is based on previous
+    action performed by user.
+    """)
   @visibility("read")
   actionState?: string;
 
@@ -586,9 +586,9 @@ action performed by user.
   powerState?: PowerState;
 
   @doc("""
-A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
-00000000-0000-0000-0000-000000000000).
-""")
+    A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
+    00000000-0000-0000-0000-000000000000).
+    """)
   @visibility("read")
   uniqueId?: Azure.Core.uuid;
 
@@ -597,9 +597,9 @@ A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
   error?: Azure.Core.Foundations.Error;
 
   @doc("""
-Azure region where this Dev Box is located. This will be the same region as the
-Virtual Network it is attached to.
-""")
+    Azure region where this Dev Box is located. This will be the same region as the
+    Virtual Network it is attached to.
+    """)
   @visibility("read")
   location?: Azure.Core.azureLocation;
 
@@ -923,10 +923,10 @@ model CustomizationTaskListValidationError {
 @added(APIVersions.v2024_05_01_preview)
 model CustomizationGroup {
   @doc("""
-  Tasks to apply. Note by default tasks are excluded from the response when
-  listing customization groups. To include them, use the `include=tasks` query
-  parameter.
-  """)
+    Tasks to apply. Note by default tasks are excluded from the response when
+    listing customization groups. To include them, use the `include=tasks` query
+    parameter.
+    """)
   tasks?: CustomizationTask[];
 
   @doc("The unique URI of the customization group.")

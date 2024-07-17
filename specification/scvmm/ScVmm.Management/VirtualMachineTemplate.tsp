@@ -32,8 +32,13 @@ interface VirtualMachineTemplates {
   @summary("Gets a VirtualMachineTemplate.")
   get is ArmResourceRead<VirtualMachineTemplate>;
   /** Onboards the ScVmm VM Template as an Azure VM Template resource. */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @summary("Implements VirtualMachineTemplates PUT method.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineTemplate>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    VirtualMachineTemplate,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   /** Updates the VirtualMachineTemplate resource. */
   @summary("Implements the VirtualMachineTemplate PATCH method.")
   @extension(
