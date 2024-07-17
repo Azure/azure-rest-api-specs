@@ -61,8 +61,10 @@
       }
     },
     "SasTokenAuth": {
-      "type": "http",
-      "scheme": "sas"
+      "type": "apiKey",
+      "description": "Azure App Configuration Shared Access Signature token auth",
+      "name": "Shared Access Signature Token",
+      "in": "header"
     }
   },
   "tags": [],
@@ -2945,6 +2947,41 @@
       "required": [
         "id",
         "status"
+      ]
+    },
+    "SasTokenAuth": {
+      "type": "object",
+      "description": "Azure App Configuration Shared Access Signature token auth",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "API key authentication",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "in": {
+          "type": "string",
+          "description": "location of the API key",
+          "enum": [
+            "header"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the API key",
+          "enum": [
+            "Shared Access Signature Token"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type",
+        "in",
+        "name"
       ]
     },
     "Snapshot": {
