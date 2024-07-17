@@ -15,7 +15,7 @@ namespace Customizations;
 interface ContentSafetyClient {
   analyzeText is ContentSafety.TextOperations.analyzeText;
   analyzeImage is ContentSafety.ImageOperations.analyzeImage;
-  shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
+  analyzeTextShieldPrompt is ContentSafety.TextOperations.analyzeTextShieldPrompt;
 }
 
 @client({
