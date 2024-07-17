@@ -176,6 +176,7 @@ model OccurrenceView {
   state: OccurrenceState;
 
   @doc("Error details for the occurrence")
+  @OpenAPI.extension("x-ms-identifiers", ["code"])
   errorDetails?: Azure.Core.Foundations.Error[];
 }
 
