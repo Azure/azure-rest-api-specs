@@ -3789,26 +3789,6 @@
         }
       ]
     },
-    "Azure.ResourceManager.ManagedServiceIdentityProperty": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
-    "Azure.ResourceManager.ManagedServiceIdentityPropertyUpdate": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
     "CheckAddressSpaceAvailabilityRequest": {
       "type": "object",
       "description": "Request to the action call to check address space availability.",
@@ -4086,7 +4066,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identity for this resource"
         }
       },
@@ -4142,7 +4122,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityPropertyUpdate",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identity for this resource"
         }
       },
@@ -4664,7 +4644,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityProperty",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identity for this resource"
         }
       },
@@ -4708,7 +4688,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityPropertyUpdate",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identity for this resource"
         }
       },

@@ -76,10 +76,11 @@ model CommunityResource is TrackedResource<CommunityProperties> {
   name: string;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Should be top-level"
+  #suppress "deprecated" "Workaround to use the added decorator"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "top-level property"
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("The managed service identity for this resource")
-  identity: ManagedServiceIdentityProperty;
+  identity: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 }
 
 @doc("Virtual Enclave Model Resource")
@@ -91,11 +92,11 @@ model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   @path
   name: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Should be top-level"
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  #suppress "deprecated" "Workaround to use the added decorator"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "top-level property"
   @doc("The managed service identity for this resource")
-  identity: ManagedServiceIdentityProperty;
+  identity: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 }
 
 @doc("Workload Model Resource")
@@ -284,26 +285,15 @@ interface Community {
 @removed(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("Catalog Interface")
 @armResourceOperations
+@renamedFrom(Microsoft.Mission.Versions.v2024_06_01_preview, "Catalog")
 interface CatalogInterface {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Catalog_Get")
   get is ArmResourceRead<CatalogResource>;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Catalog_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CatalogResource>;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Catalog_Update")
   update is ArmResourcePatchAsync<CatalogResource, CatalogProperties>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   #suppress "deprecated" "Backwards compatibility"
-  @operationId("Catalog_Delete")
   delete is ArmResourceDeleteAsync<CatalogResource>;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Catalog_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<CatalogResource>;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Catalog_ListBySubscription")
   listBySubscription is ArmListBySubscription<CatalogResource>;
 }
 
