@@ -22,6 +22,42 @@
   "tags": [],
   "paths": {},
   "definitions": {
+    "AccessTier": {
+      "type": "string",
+      "description": "The access tier of the blob.",
+      "enum": [
+        "Hot",
+        "Cool",
+        "Cold",
+        "Archive"
+      ],
+      "x-ms-enum": {
+        "name": "AccessTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hot",
+            "value": "Hot",
+            "description": "The blob is in access tier Hot"
+          },
+          {
+            "name": "Cool",
+            "value": "Cool",
+            "description": "The blob is in access tier Cool"
+          },
+          {
+            "name": "Cold",
+            "value": "Cold",
+            "description": "The blob is in access tier Cold"
+          },
+          {
+            "name": "Archive",
+            "value": "Archive",
+            "description": "The blob is in access tier Archive"
+          }
+        ]
+      }
+    },
     "AcsChatEventBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all chat events",
@@ -8426,11 +8462,11 @@
           "description": "The type of blob."
         },
         "accessTier": {
-          "type": "string",
+          "$ref": "#/definitions/AccessTier",
           "description": "The current tier of the blob."
         },
         "previousTier": {
-          "type": "string",
+          "$ref": "#/definitions/AccessTier",
           "description": "The previous tier of the blob."
         },
         "url": {
@@ -8452,6 +8488,8 @@
         }
       },
       "required": [
+        "accessTier",
+        "previousTier",
         "storageDiagnostics"
       ]
     },

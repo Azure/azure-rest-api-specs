@@ -180,6 +180,23 @@ namespace Microsoft.EventGrid.SystemEvents {
     errorList?: string;
   }
 
+  /** The access tier of the blob. */
+  union AccessTier {
+    /** The blob is in access tier Hot */
+    "Hot",
+
+    /** The blob is in access tier Cool */
+    "Cool",
+
+    /** The blob is in access tier Cold */
+    "Cold",
+
+    /** The blob is in access tier Archive */
+    "Archive",
+
+    string,
+  }
+
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.BlobTierChanged event. */
   model StorageBlobTierChangedEventData {
     /** The name of the API/operation that triggered this event. */
@@ -201,10 +218,10 @@ namespace Microsoft.EventGrid.SystemEvents {
     blobType?: string;
 
     /** The current tier of the blob. */
-    accessTier?: string;
+    accessTier: AccessTier;
 
     /** The previous tier of the blob. */
-    previousTier?: string;
+    previousTier: AccessTier;
 
     /** The path to the blob. */
     url?: string;
