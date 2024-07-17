@@ -12,6 +12,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(Match, "EntityLinkingMatch", "csharp");
 @@clientName(Entity, "NamedEntity", "csharp");
+@@clientName(EntityWithMetadata, "NamedEntityWithMetadata", "csharp");
 @@clientName(EntityInferenceOptions, "EntityInferenceConfig", "csharp");
 @@clientName(Temporality, "HealthcareAssertionTemporality", "csharp");
 @@clientName(Conditionality, "HealthcareAssertionConditionality", "csharp");
@@ -610,7 +611,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextKeyPhraseExtractionInput, "TextKeyPhraseExtractionInput", "csharp");
 @@clientName(AnalyzeTextKeyPhraseExtractionInput.parameters, "ActionContent", "csharp");
 @@clientName(AnalyzeTextKeyPhraseExtractionInput.analysisInput, "TextInput", "csharp");
-@@clientName(KeyPhraseTaskParameters, "KeyPhraseTaskActionContent", "csharp");
+@@clientName(KeyPhraseTaskParameters, "KeyPhraseActionContent", "csharp");
 
 @@clientName(AnalyzeTextEntityRecognitionInput, "TextEntityRecognitionInput", "csharp");
 @@clientName(AnalyzeTextEntityRecognitionInput.parameters, "ActionContent", "csharp");
@@ -711,6 +712,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextLROResult, "AnalyzeTextOperationResult", "csharp");
 @@clientName(AnalyzeTextLROResult.taskName, "Name", "csharp");
 
+@@access(AnalyzeTextLROResultsKind, Access.public, "csharp");
 @@clientName(AnalyzeTextLROResultsKind, "AnalyzeTextOperationResultsKind", "csharp");
 @@clientName(AnalyzeTextLROResultsKind.SentimentAnalysisLROResults, "SentimentAnalysisOperationResults", "csharp");
 @@clientName(AnalyzeTextLROResultsKind.EntityRecognitionLROResults, "EntityRecognitionOperationResults", "csharp");
