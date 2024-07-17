@@ -35,7 +35,7 @@ interface TextOperations {
   @doc("A synchronous API for the analysis of text prompt injection attacks.")
   @route("/text:shieldPrompt")
   @post
-  analyzeTextShieldPrompt is Azure.Core.RpcOperation<
+  shieldPrompt is Azure.Core.RpcOperation<
     {
       @bodyRoot
       @doc("The text prompt injection attacks analysis request.")
