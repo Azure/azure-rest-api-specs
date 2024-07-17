@@ -129,33 +129,46 @@ input-file:
 
 suppressions:
   - code: EvenSegmentedPathForPutOperation
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: PathForNestedResource
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: PutGetPatchResponseSchema
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: ResourceNameRestriction
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: PutRequestResponseSchemeArm
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: PutResponseCodes
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code:  ResponseSchemaSpecifiedForSuccessStatusCode
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: DefaultErrorResponseSchema
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: LroErrorContent
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: LroStatusCodesReturnTypeSchema
-    reason: Keep compatibility with old API version.
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: LroLocationHeader
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: XmsPageableForListCalls
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
   - code: DeleteResponseCodes
-    reason: Keep compatibility with old API version.
+    from: Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
+    reason: Keep compatibility with old API version 2023-08-15-preview.
 ```
 
 ### Tag: package-2023-08-preview
