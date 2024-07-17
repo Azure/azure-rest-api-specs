@@ -2204,6 +2204,42 @@
               ]
             }
           }
+        },
+        "adrTunnelRestrictionCode": {
+          "description": "The ADR tunnel restriction code. ADR is a European agreement concerning the international carriage of dangerous goods by road. The ADR tunnel restriction code is used to determine whether a vehicle is allowed to pass through a tunnel with restrictions on the carriage of dangerous goods.",
+          "type": "string",
+          "enum": [
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "x-ms-enum": {
+            "name": "AdrTunnelRestrictionCodeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "B",
+                "name": "B",
+                "description": "Vehicles with code B are restricted from roads with ADR tunnel categories B, C, D, and E."
+              },
+              {
+                "value": "C",
+                "name": "C",
+                "description": "Vehicles with code C are restricted from roads with ADR tunnel categories C, D, and E"
+              },
+              {
+                "value": "D",
+                "name": "D",
+                "description": "Vehicles with code D are restricted from roads with ADR tunnel categories D and E."
+              },
+              {
+                "value": "E",
+                "name": "E",
+                "description": "Vehicles with code E are restricted from roads with ADR tunnel category E."
+              }
+            ]
+          }
         }
       }
     },
