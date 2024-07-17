@@ -861,7 +861,6 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextLROResult, "AnalyzeTextOperationResult", "csharp");
 @@clientName(AnalyzeTextLROResult.taskName, "Name", "csharp");
 
-@@access(AnalyzeTextLROResultsKind, Access.public, "csharp");
 @@clientName(AnalyzeTextLROResultsKind,
   "AnalyzeTextOperationResultsKind",
   "csharp"
