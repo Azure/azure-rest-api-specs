@@ -4734,11 +4734,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -4783,18 +4779,10 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
-            "name": "targetGroupName",
-            "in": "path",
-            "description": "Name of the target group under the profile.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/targetGroupNameParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -4834,18 +4822,10 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
-            "name": "targetGroupName",
-            "in": "path",
-            "description": "Name of the target group under the profile.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/targetGroupNameParameter"
           },
           {
             "name": "targetGroup",
@@ -4915,18 +4895,10 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
-            "name": "targetGroupName",
-            "in": "path",
-            "description": "Name of the target group under the profile.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/targetGroupNameParameter"
           },
           {
             "name": "targetGroupUpdateProperties",
@@ -4990,18 +4962,10 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
-            "name": "targetGroupName",
-            "in": "path",
-            "description": "Name of the target group under the profile.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/targetGroupNameParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -5055,11 +5019,7 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -5104,18 +5064,10 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
-            "name": "tunnelPolicyName",
-            "in": "path",
-            "description": "Name of the tunnel policy under the profile.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/tunnelPolicyNameParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -5155,18 +5107,10 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
-            "name": "tunnelPolicyName",
-            "in": "path",
-            "description": "Name of the tunnel policy under the profile.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/tunnelPolicyNameParameter"
           },
           {
             "name": "tunnelPolicy",
@@ -5236,18 +5180,10 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
-            "name": "tunnelPolicyName",
-            "in": "path",
-            "description": "Name of the tunnel policy under the profile.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/tunnelPolicyNameParameter"
           },
           {
             "name": "tunnelPolicyUpdateProperties",
@@ -5311,18 +5247,10 @@
             "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the Azure Front Door Premium profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/profileNameParameter"
           },
           {
-            "name": "tunnelPolicyName",
-            "in": "path",
-            "description": "Name of the tunnel policy under the profile.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/tunnelPolicyNameParameter"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -8369,6 +8297,28 @@
       "maxLength": 260,
       "x-ms-parameter-location": "method",
       "description": "Name of the DeploymentVersion under the profile."
+    },
+    "targetGroupNameParameter": {
+      "name": "targetGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Target Group under the profile."
+    },
+    "tunnelPolicyNameParameter": {
+      "name": "tunnelPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "minLength": 1,
+      "maxLength": 260,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Tunnel Policy under the profile."
     }
   }
 }
