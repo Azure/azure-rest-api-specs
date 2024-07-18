@@ -1,0 +1,316 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-03-01-preview",
+    "title": "SubscriptionClient",
+    "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest/default": {
+      "put": {
+        "operationId": "Subscriptions_PutTargetDirectory",
+        "x-ms-examples": {
+          "cancelSubscription": {
+            "$ref": "./examples/putTargetDirectory.json"
+          }
+        },
+        "description": "The operation to initiate Subscription Changed Request",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/targetDirectoryRequestParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TargetDirectoryResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "Subscriptions_GetTargetDirectory",
+        "x-ms-examples": {
+          "renameSubscription": {
+            "$ref": "./examples/getTargetDirectory.json"
+          }
+        },
+        "description": "The operation to view Initiator Subscription Changed Request",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TargetDirectoryResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptChangeTenant": {
+      "post": {
+        "operationId": "Subscriptions_AcceptTargetDirectory",
+        "x-ms-examples": {
+          "enableSubscription": {
+            "$ref": "./examples/acceptTargetDirectory.json"
+          }
+        },
+        "description": "The operation to accept Subscription Changed Request",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Subscription Accepted properly with No Content."
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/changeTenantStatus": {
+      "post": {
+        "operationId": "Subscriptions_TargetDirectoryStatus",
+        "x-ms-examples": {
+          "enableSubscription": {
+            "$ref": "./examples/targetDirectoryStatus.json"
+          }
+        },
+        "description": "The operation for Acceptor to view the accepted request",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TargetDirectoryStatusResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
+        },
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "TargetDirectoryRequest": {
+      "type": "object",
+      "description": "Subscription Request for Changed Target Directory.",
+      "properties": {
+          "$ref": "#/definitions/TargetDirectoryRequestProperties",
+          "description": "Target Directory request properties."
+        }
+    },
+    "TargetDirectoryRequestProperties": {
+      "type":"object",
+      "description": "Properties of subscription Request for Changed Target Directory.",
+      "properties":{
+        "destinationEmail": {
+          "description": "The destination Email id where subscription needs to be accepted",
+          "type": "string",
+          "readOnly": true
+        },
+        "destinationTenantId": {
+          "description": "The destination Tenant id where subscription needs to be accepted",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TargetDirectoryStatusResult":{
+      "type":"object",
+      "description":"Subscription Status for accepted request.",
+      "properties":{
+        "status":{
+          "description":"Subscription Status",
+          "type":"string",
+          "readonly": true
+        }
+      }
+    },
+    "TargetDirectoryResult":{
+      "type":"object",
+      "description":"Subscription Response for Changed Target Directory.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the Subscription Changed Directory resource.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Subscription Name.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type, Microsoft.Subscription/changeTenantRequest.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/TargetDirectoryResultProperties",
+          "description": "Subscription Changed Target Directory response properties."
+        }
+      }
+    },
+    "TargetDirectoryResultProperties":{
+      "type":"object",
+      "description":"Properties of subscription Response for Changed Target Directory.",
+      "properties":{
+        "destinationTenantId": {
+          "description": "Destination Tenant Id where Subscription will be accepted.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "destinationEmailId": {
+          "description": "Destination Email Id where Subscription will be accepted.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "Subscription Status.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "expiresOn": {
+          "description": "Subscription Initiate Request Expiry time",
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2020-03-01-preview"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription Id."
+    },
+    "targetDirectoryRequestParameters": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Target Directory Request",
+      "schema": {
+        "$ref": "#/definitions/TargetDirectoryRequest"
+      }
+    }
+    },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
