@@ -37,6 +37,7 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/
 perform-load: false
+clear-output-folder: false
 ```
 
 ### Tag: package-2024-01 and python
@@ -47,9 +48,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2024-01'
 namespace: azure.mgmt.eventhub.v2024_01_01
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2024_01_01
-python:
-  namespace: azure.mgmt.eventhub.v2024_01_01
-  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2024_01_01
 ```
 
 ### Tag: package-2021-11 and python
@@ -60,9 +58,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2021-11'
 namespace: azure.mgmt.eventhub.v2021_11_01
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2021_11_01
-python:
-  namespace: azure.mgmt.eventhub.v2021_11_01
-  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2021_11_01
 ```
 
 ### Tag: package-2022-01-preview and python
@@ -73,9 +68,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2022-01-preview'
 namespace: azure.mgmt.eventhub.v2022_01_01_preview
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2022_01_01_preview
-python:
-  namespace: azure.mgmt.eventhub.v2022_01_01_preview
-  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2022_01_01_preview
 ```
 
 ### Tag: package-2022-10-preview and python
@@ -86,9 +78,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2022-10-preview'
 namespace: azure.mgmt.eventhub.v2022_10_01_preview
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2022_10_01_preview
-python:
-  namespace: azure.mgmt.eventhub.v2022_10_01_preview
-  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2022_10_01_preview
 ```
 
 ### Tag: package-2021-06-preview and python
@@ -99,9 +88,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2021-06-preview'
 namespace: azure.mgmt.eventhub.v2021_06_01_preview
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2021_06_01_preview
-python:
-  namespace: azure.mgmt.eventhub.v2021_06_01_preview
-  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2021_06_01_preview
 ```
 
 ### Tag: package-2021-01-preview and python
@@ -112,9 +98,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2021-01-preview'
 namespace: azure.mgmt.eventhub.v2021_01_01_preview
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2021_01_01_preview
-python:
-  namespace: azure.mgmt.eventhub.v2021_01_01_preview
-  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2021_01_01_preview
 ```
 
 ### Tag: package-2018-01-preview and python
@@ -125,9 +108,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-01-preview'
 namespace: azure.mgmt.eventhub.v2018_01_01_preview
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2018_01_01_preview
-python:
-  namespace: azure.mgmt.eventhub.v2018_01_01_preview
-  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2018_01_01_preview
 ```
 
 ### Tag: package-2017-04 and python
@@ -138,9 +118,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2017-04'
 namespace: azure.mgmt.eventhub.v2017_04_01
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2017_04_01
-python:
-  namespace: azure.mgmt.eventhub.v2017_04_01
-  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2017_04_01
 ```
 
 ### Tag: package-2015-08 and python
@@ -151,7 +128,4 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2015-08'
 namespace: azure.mgmt.eventhub.v2015_08_01
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2015_08_01
-python:
-  namespace: azure.mgmt.eventhub.v2015_08_01
-  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2015_08_01
 ```
