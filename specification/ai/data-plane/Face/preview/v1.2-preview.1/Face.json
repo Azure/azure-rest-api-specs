@@ -7767,7 +7767,7 @@
         },
         "livenessSingleModalModel": {
           "$ref": "#/definitions/LivenessModel",
-          "description": "The model version of liveness single modal."
+          "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
         },
         "deviceCorrelationId": {
           "type": "string",
@@ -7845,7 +7845,7 @@
         },
         "livenessSingleModalModel": {
           "$ref": "#/definitions/LivenessModel",
-          "description": "The model version of liveness single modal."
+          "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
         },
         "deviceCorrelationId": {
           "type": "string",
@@ -8972,45 +8972,20 @@
       "type": "string",
       "description": "The model version used for liveness classification.",
       "enum": [
-        "2020-02-15-preview.01",
-        "2021-11-12-preview.03",
         "2022-10-15-preview.04",
-        "2023-03-02-preview.05",
-        "2023-12-20-preview.06",
-        "2023-12-20-preview.07",
-        "2023-12-20-preview.08"
+        "2023-12-20-preview.06"
       ],
       "x-ms-enum": {
         "name": "LivenessModel",
         "modelAsString": true,
         "values": [
           {
-            "name": "v2020_02_15_preview_01",
-            "value": "2020-02-15-preview.01"
-          },
-          {
-            "name": "v2021_11_12_preview_03",
-            "value": "2021-11-12-preview.03"
-          },
-          {
             "name": "v2022_10_15_preview_04",
             "value": "2022-10-15-preview.04"
           },
           {
-            "name": "v2023_03_02_preview_05",
-            "value": "2023-03-02-preview.05"
-          },
-          {
             "name": "v2023_12_20_preview_06",
             "value": "2023-12-20-preview.06"
-          },
-          {
-            "name": "v2023_12_20_preview_07",
-            "value": "2023-12-20-preview.07"
-          },
-          {
-            "name": "v2023_12_20_preview_08",
-            "value": "2023-12-20-preview.08"
           }
         ]
       }

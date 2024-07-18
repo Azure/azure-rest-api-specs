@@ -35,7 +35,7 @@ model CreateLivenessSessionParameters {
   @added(Versions.v1_2_preview_1)
   enableSessionImage?: boolean;
 
-  @doc("The model version of liveness single modal.")
+  @doc("The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen")
   @added(Versions.v1_2_preview_1)
   livenessSingleModalModel?: LivenessModel;
 
@@ -184,13 +184,8 @@ model LivenessOutputsTarget {
 @doc("The model version used for liveness classification.")
 union LivenessModel {
   string,
-  v2020_02_15_preview_01: "2020-02-15-preview.01",
-  v2021_11_12_preview_03: "2021-11-12-preview.03",
   v2022_10_15_preview_04: "2022-10-15-preview.04",
-  v2023_03_02_preview_05: "2023-03-02-preview.05",
   v2023_12_20_preview_06: "2023-12-20-preview.06",
-  v2023_12_20_preview_07: "2023-12-20-preview.07",
-  v2023_12_20_preview_08: "2023-12-20-preview.08",
 }
 
 @doc("The detail of face for verification.")
