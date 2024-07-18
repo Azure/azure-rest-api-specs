@@ -327,11 +327,31 @@
         },
         "accessTier": {
           "description": "The current tier of the blob.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Hot",
+            "Cool",
+            "Cold",
+            "Archive"
+          ],
+          "x-ms-enum": {
+            "name": "AccessTier",
+            "modelAsString": true
+          }
         },
         "previousTier": {
           "description": "The previous tier of the blob.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Hot",
+            "Cool",
+            "Cold",
+            "Archive"
+          ],
+          "x-ms-enum": {
+            "name": "PreviousTier",
+            "modelAsString": true
+          }
         },
         "url": {
           "description": "The path to the blob.",
