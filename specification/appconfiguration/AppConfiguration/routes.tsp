@@ -36,6 +36,7 @@ alias syncTokenHeader = {
 alias contentTypeHeader<T extends string> = {
   @doc("Content-Type header")
   @header("Content-Type")
+  @friendlyName("contentType")
   contentTypeHeader?: T | "application/problem+json";
 };
 
@@ -325,6 +326,7 @@ op putKeyValue is appConfigOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
+    @friendlyName("contentType")
     contentTypeHeader:
       | "application/vnd.microsoft.appconfig.kv+json"
       | "application/vnd.microsoft.appconfig.kvset+json"
@@ -559,6 +561,7 @@ op createSnapshot is Foundations.LongRunningOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
+    @friendlyName("contentType")
     contentTypeHeader: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
 
     @doc("The name of the key-value snapshot to create.")
@@ -596,6 +599,7 @@ op updateSnapshot is appConfigOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
+    @friendlyName("contentType")
     contentTypeHeader: "application/merge-patch+json" | "application/json";
 
     @doc("The name of the key-value snapshot to update.")
