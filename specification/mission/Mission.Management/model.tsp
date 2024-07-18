@@ -91,8 +91,8 @@ model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   @path
   name: string;
 
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "top-level property"
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("The managed service identity for this resource")
   identity: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }

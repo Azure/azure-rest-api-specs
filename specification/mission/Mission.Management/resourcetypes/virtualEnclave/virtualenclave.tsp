@@ -177,4 +177,8 @@ model VirtualEnclaveProperties {
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfiguration;
+
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  @doc("Deploy Bastion service (True or False).")
+  bastionEnabled?: boolean;
 }
