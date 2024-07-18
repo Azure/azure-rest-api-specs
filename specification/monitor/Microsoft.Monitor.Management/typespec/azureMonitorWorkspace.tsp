@@ -95,9 +95,12 @@ interface AzureMonitorWorkspaces {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   @doc("Updates part of a workspace")
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     AzureMonitorWorkspace,
-    AzureMonitorWorkspaceProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AzureMonitorWorkspace,
+      AzureMonitorWorkspaceProperties
+    >
   >;
   @doc("Delete a workspace")
   delete is ArmResourceDeleteWithoutOkAsync<AzureMonitorWorkspace>;
