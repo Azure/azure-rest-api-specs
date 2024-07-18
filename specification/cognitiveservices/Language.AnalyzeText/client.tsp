@@ -654,10 +654,7 @@ namespace Language.AnalyzeTextClientCustomizations;
   "TextInput",
   "csharp"
 );
-@@clientName(KeyPhraseTaskParameters,
-  "KeyPhraseActionContent",
-  "csharp"
-);
+@@clientName(KeyPhraseTaskParameters, "KeyPhraseActionContent", "csharp");
 @@clientName(AnalyzeTextEntityRecognitionInput,
   "TextEntityRecognitionInput",
   "csharp"
