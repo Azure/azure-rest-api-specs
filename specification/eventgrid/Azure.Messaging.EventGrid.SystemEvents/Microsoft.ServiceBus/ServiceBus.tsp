@@ -36,7 +36,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     entityType: string;
 
     /** The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null. */
-    queueName?: string ;
+    queueName?: string;
 
     /** The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null. */
     topicName?: string;
