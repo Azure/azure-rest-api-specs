@@ -327,7 +327,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServicePatch"
+              "$ref": "#/definitions/ServiceUpdate"
             },
             "x-ms-client-name": "properties"
           }
@@ -4540,7 +4540,18 @@
         "value"
       ]
     },
-    "ServicePatch": {
+    "ServiceProperties": {
+      "type": "object",
+      "description": "The properties of the service.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the service.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceUpdate": {
       "type": "object",
       "description": "The template for adding optional properties.",
       "properties": {
@@ -4559,17 +4570,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "ServiceProperties": {
-      "type": "object",
-      "description": "The properties of the service.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the service.",
-          "readOnly": true
         }
       }
     },
