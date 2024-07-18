@@ -19,7 +19,7 @@ interface SharedPrivateLinkResources {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<SharedPrivateLinkResource>;
-  listByParent is ArmResourceListByParent<SharedPrivateLinkResource>;
+  listByWatcher is ArmResourceListByParent<SharedPrivateLinkResource>;
 }
 
 @parentResource(Watcher)
