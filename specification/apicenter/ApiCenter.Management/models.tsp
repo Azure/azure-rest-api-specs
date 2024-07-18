@@ -542,7 +542,7 @@ model Onboarding {
   instructions?: string;
 
   @maxItems(1)
-  @doc("The location of the development portal")
+  @doc("The location of the developer portal")
   developerPortalUri?: string[];
 }
 
