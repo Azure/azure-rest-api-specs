@@ -2181,7 +2181,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResubscribeResponse"
+            }
           },
           "202": {
             "headers": {
@@ -2190,9 +2193,6 @@
               }
             },
             "description": "Accepted"
-          },
-          "204": {
-            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
@@ -3619,6 +3619,24 @@
         },
         "organizationId": {
           "description": "Organization Id of the Elastic Organization that needs to be resubscribed",
+          "type": "string"
+        }
+      }
+    },
+    "ResubscribeResponse": {
+      "description": "The properties of Resubscribe response object.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResubscribeResponseProperties"
+        }
+      }
+    },
+    "ResubscribeResponseProperties": {
+      "type": "object",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "description": "The new Marketplace Subscription Id that is generated as the result of Resubscribe",
           "type": "string"
         }
       }
