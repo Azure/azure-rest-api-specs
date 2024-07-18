@@ -35,7 +35,7 @@ namespace Oracle.Database;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@example(Operations.list,
+@@Autorest.example(Operations.list,
   "./examples/operations_list.json",
   "List Operations"
 );
