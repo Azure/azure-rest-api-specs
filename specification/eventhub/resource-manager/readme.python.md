@@ -19,9 +19,12 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2021-11-01"
+default-api-version: "2024-01-01"
 clear-output-folder: true
 batch:
+  - tag: package-2024-05-preview
+  - tag: package-2024-01
+  - tag: package-2023-01-preview
   - tag: package-2021-11
   - tag: package-2022-01-preview
   - tag: package-2022-10-preview
@@ -36,6 +39,45 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/
 perform-load: false
+```
+
+### Tag: package-2024-05-preview and python
+
+These settings apply only when `--tag=package-2024-05-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-05-preview'
+namespace: azure.mgmt.eventhub.v2024_05_01_preview
+output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2024_05_01_preview
+python:
+  namespace: azure.mgmt.eventhub.v2024_05_01_preview
+  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2024_05_01_preview
+```
+
+### Tag: package-2024-01 and python
+
+These settings apply only when `--tag=package-2024-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-01'
+namespace: azure.mgmt.eventhub.v2024_01_01
+output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2024_01_01
+python:
+  namespace: azure.mgmt.eventhub.v2024_01_01
+  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2024_01_01
+```
+
+### Tag: package-2023-01-preview and python
+
+These settings apply only when `--tag=package-2023-01-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-01-preview'
+namespace: azure.mgmt.eventhub.v2023_01_01_preview
+output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2023_01_01_preview
+python:
+  namespace: azure.mgmt.eventhub.v2023_01_01_preview
+  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2023_01_01_preview
 ```
 
 ### Tag: package-2021-11 and python
