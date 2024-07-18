@@ -1406,7 +1406,7 @@
             "$ref": "#/parameters/FilePermissionKeyRequired"
           },
           {
-            "$ref": "#/parameters/FilePermissionKeyFormat"
+            "$ref": "#/parameters/FilePermissionFormat"
           },
           {
             "$ref": "#/parameters/Timeout"
@@ -2376,6 +2376,9 @@
             "$ref": "#/parameters/FilePermission"
           },
           {
+            "$ref": "#/parameters/FilePermissionFormat"
+          },
+          {
             "$ref": "#/parameters/FilePermissionKey"
           },
           {
@@ -2964,6 +2967,9 @@
             "$ref": "#/parameters/FilePermission"
           },
           {
+            "$ref": "#/parameters/FilePermissionFormat"
+          },
+          {
             "$ref": "#/parameters/FilePermissionKey"
           },
           {
@@ -3144,6 +3150,9 @@
           },
           {
             "$ref": "#/parameters/FilePermission"
+          },
+          {
+            "$ref": "#/parameters/FilePermissionFormat"
           },
           {
             "$ref": "#/parameters/FilePermissionKey"
@@ -4063,6 +4072,9 @@
           },
           {
             "$ref": "#/parameters/FilePermission"
+          },
+          {
+            "$ref": "#/parameters/FilePermissionFormat"
           },
           {
             "$ref": "#/parameters/FilePermissionKey"
@@ -5193,6 +5205,9 @@
             "$ref": "#/parameters/FilePermission"
           },
           {
+            "$ref": "#/parameters/FilePermissionFormat"
+          },
+          {
             "$ref": "#/parameters/FilePermissionKey"
           },
           {
@@ -5631,6 +5646,9 @@
           },
           {
             "$ref": "#/parameters/FilePermission"
+          },
+          {
+            "$ref": "#/parameters/FilePermissionFormat"
           },
           {
             "$ref": "#/parameters/FilePermissionKey"
@@ -6654,7 +6672,7 @@
             "binary"
           ],
           "x-ms-enum": {
-            "name": "FilePermissionKeyFormat",
+            "name": "FilePermissionFormat",
             "modelAsString": false
           }
         }
@@ -7095,9 +7113,9 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "FilePermissionKeyFormat": {
+    "FilePermissionFormat": {
       "name": "x-ms-file-permission-format",
-      "x-ms-client-name": "FilePermissionKeyFormat",
+      "x-ms-client-name": "FilePermissionFormat",
       "description": "Optional. Available for version 2023-06-01 and later. Specifies the format in which the permission is returned. Acceptable values are SDDL or binary. If x-ms-file-permission-format is unspecified or explicitly set to SDDL, the permission is returned in SDDL format. If x-ms-file-permission-format is explicitly set to binary, the permission is returned as a base64 string representing the binary encoding of the permission",
       "in": "header",
       "x-ms-parameter-location": "method",
@@ -7108,7 +7126,7 @@
         "binary"
       ],
       "x-ms-enum": {
-        "name": "FilePermissionKeyFormat",
+        "name": "FilePermissionFormat",
         "modelAsString": false
       }
     },
