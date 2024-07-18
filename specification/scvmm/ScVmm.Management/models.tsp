@@ -663,6 +663,8 @@ model OsProfileForVmInstance {
   workgroup?: string;
 
   /** Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx */
+  @visibility("create")
+  @secret
   @added(Versions.v2024_06_01)
   productKey?: string;
 

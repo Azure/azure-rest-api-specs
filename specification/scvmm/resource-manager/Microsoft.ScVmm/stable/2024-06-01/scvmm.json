@@ -4211,7 +4211,12 @@
         },
         "productKey": {
           "type": "string",
-          "description": "Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
+          "format": "password",
+          "description": "Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "timezone": {
           "type": "integer",
