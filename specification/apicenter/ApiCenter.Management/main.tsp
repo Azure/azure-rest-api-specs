@@ -41,6 +41,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_15_preview: "2024-03-15-preview",
+
+  @doc("Azure API Center 2024-05-01")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_05_01: "2024-05-01",
 }
 
 @@encodedName(Apis.createOrUpdate::parameters.resource,
