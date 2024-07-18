@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 ``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
   - Microsoft.NetApp/preview/2023-05-01-preview/netapp.json
-tag: package-preview-2023-05
+tag: package-preview-2024-03
 ```
 
 ### Tag: package-netapp-2023-05-01
