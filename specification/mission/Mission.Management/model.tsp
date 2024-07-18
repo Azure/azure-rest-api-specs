@@ -76,11 +76,10 @@ model CommunityResource is TrackedResource<CommunityProperties> {
   name: string;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  #suppress "deprecated" "Workaround to use the added decorator"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "top-level property"
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
   @doc("The managed service identity for this resource")
-  identity: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+  identity: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @doc("Virtual Enclave Model Resource")
@@ -93,10 +92,9 @@ model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   name: string;
 
   @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-  #suppress "deprecated" "Workaround to use the added decorator"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "top-level property"
   @doc("The managed service identity for this resource")
-  identity: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+  identity: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @doc("Workload Model Resource")
