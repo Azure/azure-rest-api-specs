@@ -423,8 +423,8 @@ namespace Microsoft.EventGrid.SystemEvents {
   }
 
   alias StorageBaseEventData = {
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     /** The identity of the requester that triggered this event. */
+    @madeRequired(ServiceApiVersions.v2024_01_01)
     identity: string;
 
     /** For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers. */
