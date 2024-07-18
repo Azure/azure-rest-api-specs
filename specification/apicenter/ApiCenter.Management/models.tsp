@@ -456,7 +456,8 @@ model ApiSpecImportRequest {
 @doc("The API specification was successfully imported.")
 model ApiSpecImportResult {
   @doc("The response status code")
-  @statusCode code: 200;
+  @statusCode
+  code: 200;
 }
 
 @doc("API specification details.")

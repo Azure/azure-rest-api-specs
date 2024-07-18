@@ -28,11 +28,7 @@ model Service is TrackedResource<ServiceProperties> {
 @@added(Service.sku, Versions.v2024_05_01);
 
 model ServicePatch
-  is OptionalProperties<UpdateableProperties<OmitProperties<
-    Service,
-    "name"
-  >>> {
-}
+  is OptionalProperties<UpdateableProperties<OmitProperties<Service, "name">>>;
 
 @armResourceOperations
 interface Services {
