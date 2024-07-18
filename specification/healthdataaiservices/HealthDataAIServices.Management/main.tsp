@@ -139,7 +139,7 @@ interface PrivateEndpointConnections {
   /** Delete the private endpoint connection */
   delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnectionResource>;
   /** List private endpoint connections on the given resource */
-  list is ArmResourceListByParent<PrivateEndpointConnectionResource>;
+  listByDeidService is ArmResourceListByParent<PrivateEndpointConnectionResource>;
 }
 
 /** Private Links for DeidService resource */
@@ -153,5 +153,5 @@ model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
 @armResourceOperations(PrivateLinkResource)
 interface PrivateLinks {
   /** List private links on the given resource */
-  list is ArmResourceListByParent<PrivateLinkResource>;
+  listByDeidService is ArmResourceListByParent<PrivateLinkResource>;
 }
