@@ -24,7 +24,8 @@ model ResourceNotificationsResourceUpdatedEventData {
   operationalInfo: ResourceNotificationsOperationalDetails;
 
   /** api version of the resource properties bag */
-  apiVersion?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  apiVersion: string;
 }
 
 /**
@@ -33,16 +34,20 @@ across all ARN system topic events
 */
 model ResourceNotificationsResourceUpdatedDetails {
   /** id of the resource for which the event is being emitted */
-  id?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  id: string;
 
   /** name of the resource for which the event is being emitted */
-  name?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  name: string;
 
   /** the type of the resource for which the event is being emitted */
-  type?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  type: string;
 
   /** the location of the resource for which the event is being emitted */
-  location?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  location: string;
 
   /** the tags on the resource for which the event is being emitted */
   tags: Record<string>;
@@ -104,11 +109,14 @@ across all ARN system topic delete events
 */
 model ResourceNotificationsResourceDeletedDetails {
   /** id of the resource for which the event is being emitted */
-  id?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  id: string;
 
   /** name of the resource for which the event is being emitted */
-  name?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  name: string;
 
   /** the type of the resource for which the event is being emitted */
-  type?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  type: string;
 }

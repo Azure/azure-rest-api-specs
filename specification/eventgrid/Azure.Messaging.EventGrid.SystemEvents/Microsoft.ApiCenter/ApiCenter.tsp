@@ -1,13 +1,17 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure API Center events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionAdded event. */
 model ApiCenterApiDefinitionAddedEventData {
   /** API definition title. */
-  title?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  title: string;
 
   /** API definition description. */
-  description?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  description: string;
 
   /** API definition specification. */
   specification: ApiCenterApiSpecification;
@@ -16,10 +20,12 @@ model ApiCenterApiDefinitionAddedEventData {
 /** Schema of the data property of an EventGridEvent for a Microsoft.ApiCenter.ApiDefinitionUpdated event. */
 model ApiCenterApiDefinitionUpdatedEventData {
   /** API definition title. */
-  title?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  title: string;
 
   /** API definition description. */
-  description?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  description: string;
 
   /** API definition specification. */
   specification: ApiCenterApiSpecification;
@@ -28,8 +34,10 @@ model ApiCenterApiDefinitionUpdatedEventData {
 /** API specification details. */
 model ApiCenterApiSpecification {
   /** Specification name. */
-  name?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  name: string;
 
   /** Specification version. */
-  version?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  version: string;
 }

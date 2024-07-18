@@ -6,10 +6,12 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelRegistered event. */
 model MachineLearningServicesModelRegisteredEventData {
   /** The name of the model that was registered. */
-  modelName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  modelName: string;
 
   /** The version of the model that was registered. */
-  modelVersion?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  modelVersion: string;
 
   /** The tags of the model that was registered. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Model tags is type object"
@@ -23,13 +25,16 @@ model MachineLearningServicesModelRegisteredEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event. */
 model MachineLearningServicesModelDeployedEventData {
   /** The name of the deployed service. */
-  serviceName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  serviceName: string;
 
   /** The compute type (e.g. ACI, AKS) of the deployed service. */
-  serviceComputeType?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  serviceComputeType: string;
 
   /** A common separated list of model IDs. The IDs of the models deployed in the service. */
-  modelIds?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  modelIds: string;
 
   /** The tags of the deployed service. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Service tags is type any"
@@ -43,16 +48,20 @@ model MachineLearningServicesModelDeployedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event. */
 model MachineLearningServicesRunCompletedEventData {
   /** The ID of the experiment that the run belongs to. */
-  experimentId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  experimentId: string;
 
   /** The name of the experiment that the run belongs to. */
-  experimentName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  experimentName: string;
 
   /** The ID of the Run that was completed. */
-  runId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  runId: string;
 
   /** The Run Type of the completed Run. */
-  runType?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  runType: string;
 
   /** The tags of the completed Run. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Run tags is type any"
@@ -66,22 +75,28 @@ model MachineLearningServicesRunCompletedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event. */
 model MachineLearningServicesDatasetDriftDetectedEventData {
   /** The ID of the data drift monitor that triggered the event. */
-  dataDriftId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  dataDriftId: string;
 
   /** The name of the data drift monitor that triggered the event. */
-  dataDriftName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  dataDriftName: string;
 
   /** The ID of the Run that detected data drift. */
-  runId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  runId: string;
 
   /** The ID of the base Dataset used to detect drift. */
-  baseDatasetId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  baseDatasetId: string;
 
   /** The ID of the target Dataset used to detect drift. */
-  targetDatasetId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  targetDatasetId: string;
 
   /** The coefficient result that triggered the event. */
-  driftCoefficient?: float64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  driftCoefficient: float64;
 
   /** The start time of the target dataset time series that resulted in drift detection. */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -95,16 +110,20 @@ model MachineLearningServicesDatasetDriftDetectedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event. */
 model MachineLearningServicesRunStatusChangedEventData {
   /** The ID of the experiment that the Machine Learning Run belongs to. */
-  experimentId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  experimentId: string;
 
   /** The name of the experiment that the Machine Learning Run belongs to. */
-  experimentName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  experimentName: string;
 
   /** The ID of the Machine Learning Run. */
-  runId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  runId: string;
 
   /** The Run Type of the Machine Learning Run. */
-  runType?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  runType: string;
 
   /** The tags of the Machine Learning Run. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Run tags is type object"
@@ -115,5 +134,6 @@ model MachineLearningServicesRunStatusChangedEventData {
   runProperties: Record<unknown>;
 
   /** The status of the Machine Learning Run. */
-  runStatus?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  runStatus: string;
 }

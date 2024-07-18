@@ -1,19 +1,25 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure Kubernetes Service events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent */
 namespace Microsoft.EventGrid.SystemEvents;
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NewKubernetesVersionAvailable event */
 model ContainerServiceNewKubernetesVersionAvailableEventData {
   /** The highest PATCH Kubernetes version for the highest MINOR version supported by ManagedCluster resource */
-  latestSupportedKubernetesVersion?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  latestSupportedKubernetesVersion: string;
 
   /** The highest PATCH Kubernetes version for the MINOR version considered stable for the ManagedCluster resource */
-  latestStableKubernetesVersion?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  latestStableKubernetesVersion: string;
 
   /** The highest PATCH Kubernetes version for the lowest applicable MINOR version available for the ManagedCluster resource */
-  lowestMinorKubernetesVersion?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  lowestMinorKubernetesVersion: string;
 
   /** The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event */
-  latestPreviewKubernetesVersion?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  latestPreviewKubernetesVersion: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterSupportEnded event */
@@ -44,11 +50,13 @@ model ContainerServiceNodePoolRollingFailedEventData
 /** Schema of common properties of cluster support events */
 model ContainerServiceClusterSupportEventData {
   /** The Kubernetes version of the ManagedCluster resource */
-  kubernetesVersion?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  kubernetesVersion: string;
 }
 
 /** Schema of common properties of node pool rolling events */
 model ContainerServiceNodePoolRollingEventData {
   /** The name of the node pool in the ManagedCluster resource */
-  nodePoolName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  nodePoolName: string;
 }

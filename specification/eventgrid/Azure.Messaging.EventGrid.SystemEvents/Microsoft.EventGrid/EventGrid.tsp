@@ -57,12 +57,14 @@ model SubscriptionValidationEventData {
   /** The validation code sent by Azure Event Grid to validate an event subscription.
    * To complete the validation handshake, the subscriber must either respond with this validation code as part of the validation response,
    * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
-  validationCode?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  validationCode: string;
 
   /** The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).
    * To complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,
    * or perform a GET request on the validationUrl (available starting version 2018-05-01-preview). */
-  validationUrl?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  validationUrl: string;
 }
 
 /**
@@ -73,7 +75,8 @@ SubscriptionValidationResponse can be used to build the response.
 */
 model SubscriptionValidationResponse {
   /** The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription. */
-  validationResponse?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  validationResponse: string;
 }
 
 /** 
@@ -82,7 +85,8 @@ Microsoft.EventGrid.SubscriptionDeletedEvent event.
 */
 model SubscriptionDeletedEventData {
   /** The Azure resource ID of the deleted event subscription. */
-  eventSubscriptionId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  eventSubscriptionId: string;
 }
 
 /** Event data for Microsoft.EventGrid.MQTTClientCreatedOrUpdated event. */
@@ -119,13 +123,16 @@ Unique identifier for the MQTT client that the client presents to the service
 for authentication. This case-sensitive string can be up to 128 characters
 long, and supports UTF-8 characters.
 */
-  clientAuthenticationName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  clientAuthenticationName: string;
 
   /** Name of the client resource in the Event Grid namespace. */
-  clientName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  clientName: string;
 
   /** Name of the Event Grid namespace where the MQTT client was created or updated. */
-  namespaceName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  namespaceName: string;
 }
 
 /** Event data for Microsoft.EventGrid.MQTTClientDeleted event. */
@@ -143,14 +150,16 @@ model EventGridMQTTClientSessionConnectedEventData
 Unique identifier for the MQTT client's session. This case-sensitive string can
 be up to 128 characters long, and supports UTF-8 characters.
 */
-  clientSessionName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  clientSessionName: string;
 
   /**
 A number that helps indicate order of MQTT client session connected or
 disconnected events. Latest event will have a sequence number that is higher
 than the previous event.
 */
-  sequenceNumber?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  sequenceNumber: int64;
 }
 
 /** Event data for Microsoft.EventGrid.MQTTClientSessionDisconnected event. */
@@ -162,14 +171,16 @@ model EventGridMQTTClientSessionDisconnectedEventData
 Unique identifier for the MQTT client's session. This case-sensitive string can
 be up to 128 characters long, and supports UTF-8 characters.
 */
-  clientSessionName?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  clientSessionName: string;
 
   /**
 A number that helps indicate order of MQTT client session connected or
 disconnected events. Latest event will have a sequence number that is higher
 than the previous event.
 */
-  sequenceNumber?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  sequenceNumber: int64;
 
   /**
 Reason for the disconnection of the MQTT client's session. The value could be

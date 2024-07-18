@@ -123,7 +123,8 @@ namespace Microsoft.EventGrid.SystemEvents {
     code: MediaJobErrorCode;
 
     /** A human-readable language-dependent representation of the error. */
-    message?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    message: string;
 
     /** Helps with categorization of errors. */
     @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -140,10 +141,12 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Details of JobOutput errors. */
   model MediaJobErrorDetail {
     /** Code describing the error detail. */
-    code?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    code: string;
 
     /** A human-readable representation of the error. */
-    message?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    message: string;
   }
 
   /** The event data for a Job output. */
@@ -158,7 +161,8 @@ namespace Microsoft.EventGrid.SystemEvents {
     error: MediaJobError;
 
     /** Gets the Job output label. */
-    label?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    label: string;
 
     /** Gets the Job output progress. */
     progress: int64;
@@ -171,7 +175,8 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** The event data for a Job output asset. */
   model MediaJobOutputAsset extends MediaJobOutput {
     /** Gets the Job output asset name. */
-    assetName?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    assetName: string;
 
     /** The discriminator for derived types. */
     #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
@@ -184,10 +189,12 @@ namespace Microsoft.EventGrid.SystemEvents {
   */
   model MediaJobOutputProgressEventData {
     /** Gets the Job output label. */
-    label?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    label: string;
 
     /** Gets the Job output progress. */
-    progress?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    progress: int64;
 
     /** Gets the Job correlation data. */
     jobCorrelationData: Record<string>;
@@ -318,7 +325,8 @@ EventGridEvent for a Microsoft.Media.JobOutputScheduled event.
     ...MediaLiveEventConnectionBaseData;
 
     /** Gets the result code. */
-    resultCode?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    resultCode: string;
   }
 
   /** Encoder disconnected event data. Schema of the Data property of an EventGridEvent for a Microsoft.Media.LiveEventEncoderDisconnected event. */
@@ -326,173 +334,222 @@ EventGridEvent for a Microsoft.Media.JobOutputScheduled event.
     ...MediaLiveEventConnectionBaseData;
 
     /** Gets the result code. */
-    resultCode?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    resultCode: string;
   }
 
   /** Encoder connect event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamReceived event. */
   model MediaLiveEventIncomingStreamReceivedEventData {
     /** Gets the ingest URL provided by the live event. */
-    ingestUrl?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    ingestUrl: string;
 
     /** Gets the type of the track (Audio / Video). */
-    trackType?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    trackType: string;
 
     /** Gets the track name. */
-    trackName?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    trackName: string;
 
     /** Gets the bitrate of the track. */
-    bitrate?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    bitrate: int64;
 
     /** Gets the remote IP. */
-    encoderIp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    encoderIp: string;
 
     /** Gets the remote port. */
-    encoderPort?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    encoderPort: string;
 
     /** Gets the first timestamp of the data chunk received. */
-    timestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    timestamp: string;
 
     /** Gets the duration of the first data chunk. */
-    duration?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    duration: string;
 
     /** Gets the timescale in which timestamp is represented. */
-    timescale?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    timescale: string;
   }
 
   /** Incoming streams out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingStreamsOutOfSync event. */
   model MediaLiveEventIncomingStreamsOutOfSyncEventData {
     /** Gets the minimum last timestamp received. */
-    minLastTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    minLastTimestamp: string;
 
     /** Gets the type of stream with minimum last timestamp. */
-    typeOfStreamWithMinLastTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    typeOfStreamWithMinLastTimestamp: string;
 
     /** Gets the maximum timestamp among all the tracks (audio or video). */
-    maxLastTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    maxLastTimestamp: string;
 
     /** Gets the type of stream with maximum last timestamp. */
-    typeOfStreamWithMaxLastTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    typeOfStreamWithMaxLastTimestamp: string;
 
     /** Gets the timescale in which \"MinLastTimestamp\" is represented. */
-    timescaleOfMinLastTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    timescaleOfMinLastTimestamp: string;
 
     /** Gets the timescale in which \"MaxLastTimestamp\" is represented. */
-    timescaleOfMaxLastTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    timescaleOfMaxLastTimestamp: string;
   }
 
   /** Incoming video stream out of sync event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingVideoStreamsOutOfSync event. */
   model MediaLiveEventIncomingVideoStreamsOutOfSyncEventData {
     /** Gets the first timestamp received for one of the quality levels. */
-    firstTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    firstTimestamp: string;
 
     /** Gets the duration of the data chunk with first timestamp. */
-    firstDuration?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    firstDuration: string;
 
     /** Gets the timestamp received for some other quality levels. */
-    secondTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    secondTimestamp: string;
 
     /** Gets the duration of the data chunk with second timestamp. */
-    secondDuration?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    secondDuration: string;
 
     /** Gets the timescale in which both the timestamps and durations are represented. */
-    timescale?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    timescale: string;
   }
 
   /** Ingest fragment dropped event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIncomingDataChunkDropped event. */
   model MediaLiveEventIncomingDataChunkDroppedEventData {
     /** Gets the timestamp of the data chunk dropped. */
-    timestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    timestamp: string;
 
     /** Gets the type of the track (Audio / Video). */
-    trackType?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    trackType: string;
 
     /** Gets the bitrate of the track. */
-    bitrate?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    bitrate: int64;
 
     /** Gets the timescale of the Timestamp. */
-    @visibility
-    timescale?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    timescale: string;
 
     /** Gets the result code for fragment drop operation. */
-    resultCode?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    resultCode: string;
 
     /** Gets the name of the track for which fragment is dropped. */
-    trackName?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    trackName: string;
   }
 
   /** Ingest heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventIngestHeartbeat event. */
   model MediaLiveEventIngestHeartbeatEventData {
     /** Gets the type of the track (Audio / Video). */
-    trackType?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    trackType: string;
 
     /** Gets the track name. */
-    trackName?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    trackName: string;
 
     /** Gets the Live Transcription language. */
-    transcriptionLanguage?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    transcriptionLanguage: string;
 
     /** Gets the Live Transcription state. */
-    transcriptionState?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    transcriptionState: string;
 
     /** Gets the bitrate of the track. */
-    bitrate?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    bitrate: int64;
 
     /** Gets the incoming bitrate. */
-    incomingBitrate?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    incomingBitrate: int64;
 
     /** Gets the track ingest drift value. */
-    ingestDriftValue?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    ingestDriftValue: string;
 
     /** Gets the arrival UTC time of the last fragment. */
-    lastFragmentArrivalTime?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    lastFragmentArrivalTime: string;
 
     /** Gets the last timestamp. */
-    lastTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    lastTimestamp: string;
 
     /** Gets the timescale of the last timestamp. */
-    timescale?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    timescale: string;
 
     /** Gets the fragment Overlap count. */
-    overlapCount?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    overlapCount: int64;
 
     /** Gets the fragment Discontinuity count. */
-    discontinuityCount?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    discontinuityCount: int64;
 
     /** Gets Non increasing count. */
-    nonincreasingCount?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    nonincreasingCount: int64;
 
     /** Gets a value indicating whether unexpected bitrate is present or not. */
-    unexpectedBitrate?: boolean;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    unexpectedBitrate: boolean;
 
     /** Gets the state of the live event. */
-    state?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    state: string;
 
     /** Gets a value indicating whether preview is healthy or not. */
-    healthy?: boolean;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    healthy: boolean;
   }
 
   /** Ingest track discontinuity detected event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventTrackDiscontinuityDetected event. */
   model MediaLiveEventTrackDiscontinuityDetectedEventData {
     /** Gets the type of the track (Audio / Video). */
-    trackType?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    trackType: string;
 
     /** Gets the track name. */
-    trackName?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    trackName: string;
 
     /** Gets the bitrate. */
-    bitrate?: int64;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    bitrate: int64;
 
     /** Gets the timestamp of the previous fragment. */
-    previousTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    previousTimestamp: string;
 
     /** Gets the timestamp of the current fragment. */
-    newTimestamp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    newTimestamp: string;
 
     /** Gets the timescale in which both timestamps and discontinuity gap are represented. */
-    timescale?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    timescale: string;
 
     /** Gets the discontinuity gap between PreviousTimestamp and NewTimestamp. */
-    discontinuityGap?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    discontinuityGap: string;
   }
 
   /** Channel Archive heartbeat event data. Schema of the data property of an EventGridEvent for a Microsoft.Media.LiveEventChannelArchiveHeartbeat event. */
@@ -506,15 +563,19 @@ EventGridEvent for a Microsoft.Media.JobOutputScheduled event.
 
   alias MediaLiveEventConnectionBaseData = {
     /** Gets the ingest URL provided by the live event. */
-    ingestUrl?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    ingestUrl: string;
 
     /** Gets the stream Id. */
-    streamId?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    streamId: string;
 
     /** Gets the remote IP. */
-    encoderIp?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    encoderIp: string;
 
     /** Gets the remote port. */
-    encoderPort?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    encoderPort: string;
   };
 }

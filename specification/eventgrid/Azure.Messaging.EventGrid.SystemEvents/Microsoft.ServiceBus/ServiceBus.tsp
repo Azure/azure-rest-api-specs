@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure ServiceBus Messaging events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.ServiceBus.ActiveMessagesAvailableWithNoListeners event. */
@@ -22,21 +24,27 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   alias ServiceBusBaseEventData = {
     /** The namespace name of the Microsoft.ServiceBus resource. */
-    namespaceName?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    namespaceName: string;
 
     /** The endpoint of the Microsoft.ServiceBus resource. */
-    requestUri?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    requestUri: string;
 
     /** The entity type of the Microsoft.ServiceBus resource. Could be one of 'queue' or 'subscriber'. */
-    entityType?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    entityType: string;
 
     /** The name of the Microsoft.ServiceBus queue. If the entity type is of type 'subscriber', then this value will be null. */
-    queueName?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    queueName: string;
 
     /** The name of the Microsoft.ServiceBus topic. If the entity type is of type 'queue', then this value will be null. */
-    topicName?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    topicName: string;
 
     /** The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null. */
-    subscriptionName?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    subscriptionName: string;
   };
 }

@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure API Management events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.UserCreated event. */
@@ -132,25 +134,30 @@ model ApiManagementGatewayApiRemovedEventData {
 
 alias ApiManagementBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>` */
-  resourceUri?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  resourceUri: string;
 };
 
 alias ApiGatewayBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>` */
-  resourceUri?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  resourceUri: string;
 };
 
 alias ApiGatewayHostnameBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>` */
-  resourceUri?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  resourceUri: string;
 };
 
 alias ApiGatewayCertificateBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>` */
-  resourceUri?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  resourceUri: string;
 };
 
 alias ApiGatewayApiBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>` */
-  resourceUri?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  resourceUri: string;
 };

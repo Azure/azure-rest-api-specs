@@ -1,3 +1,5 @@
+import "@typespec/versioning";
+using TypeSpec.Versioning;
 /** Describes the schema of the Azure VMware Solution events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
@@ -13,7 +15,8 @@ model AvsPrivateCloudUpdatedEventData extends AvsPrivateCloudEventData {}
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsPrivateCloudFailedEventData extends AvsPrivateCloudEventData {
   /** Failure reason of an event. */
-  failureMessage?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  failureMessage: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ClusterCreated event. */
@@ -36,7 +39,8 @@ model AvsClusterUpdatedEventData extends AvsClusterEventData {}
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsClusterFailedEventData extends AvsClusterEventData {
   /** Failure reason of an event. */
-  failureMessage?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  failureMessage: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.AVS.ScriptExecutionStarted event. */
@@ -59,38 +63,47 @@ model AvsScriptExecutionCancelledEventData
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsScriptExecutionFailedEventData extends AvsScriptExecutionEventData {
   /** Failure reason of an event. */
-  failureMessage?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  failureMessage: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for Microsoft.AVS/privateClouds events. */
 model AvsPrivateCloudEventData {
   /** Id of the operation that caused this event. */
-  operationId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  operationId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for Microsoft.AVS/clusters events. */
 model AvsClusterEventData {
   /** Id of the operation that caused this event. */
-  operationId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  operationId: string;
 
   /** Hosts added to the cluster in this event, if any. */
-  addedHostNames?: string[];
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  addedHostNames: string[];
 
   /** Hosts removed from the cluster in this event, if any. */
-  removedHostNames?: string[];
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  removedHostNames: string[];
 
   /** Hosts in Maintenance mode in the cluster, if any. */
-  inMaintenanceHostNames?: string[];
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  inMaintenanceHostNames: string[];
 }
 
 /** Schema of the Data property of an EventGridEvent for Microsoft.AVS/scriptExecutions events. */
 model AvsScriptExecutionEventData {
   /** Id of the operation that caused this event. */
-  operationId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  operationId: string;
 
   /** Cmdlet referenced in the execution that caused this event. */
-  cmdletId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  cmdletId: string;
 
   /** Stdout outputs from the execution, if any. */
-  output?: string[];
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  output: string[];
 }

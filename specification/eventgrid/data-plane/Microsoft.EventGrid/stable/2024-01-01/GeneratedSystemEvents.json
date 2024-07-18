@@ -40,7 +40,9 @@
         }
       },
       "required": [
-        "recipientCommunicationIdentifier"
+        "recipientCommunicationIdentifier",
+        "transactionId",
+        "threadId"
       ]
     },
     "AcsChatEventInThreadBaseProperties": {
@@ -55,7 +57,11 @@
           "type": "string",
           "description": "The chat thread id"
         }
-      }
+      },
+      "required": [
+        "transactionId",
+        "threadId"
+      ]
     },
     "AcsChatMessageDeletedEventData": {
       "type": "object",
@@ -117,6 +123,7 @@
         }
       },
       "required": [
+        "messageBody",
         "metadata",
         "editTime"
       ],
@@ -148,6 +155,7 @@
         }
       },
       "required": [
+        "messageBody",
         "metadata",
         "editTime"
       ],
@@ -189,8 +197,12 @@
         }
       },
       "required": [
+        "messageId",
         "senderCommunicationIdentifier",
-        "composeTime"
+        "senderDisplayName",
+        "composeTime",
+        "type",
+        "version"
       ],
       "allOf": [
         {
@@ -230,8 +242,12 @@
         }
       },
       "required": [
+        "messageId",
         "senderCommunicationIdentifier",
-        "composeTime"
+        "senderDisplayName",
+        "composeTime",
+        "type",
+        "version"
       ],
       "allOf": [
         {
@@ -256,6 +272,7 @@
         }
       },
       "required": [
+        "messageBody",
         "metadata"
       ],
       "allOf": [
@@ -281,6 +298,7 @@
         }
       },
       "required": [
+        "messageBody",
         "metadata"
       ],
       "allOf": [
@@ -315,7 +333,8 @@
       "required": [
         "time",
         "addedByCommunicationIdentifier",
-        "participantAdded"
+        "participantAdded",
+        "version"
       ],
       "allOf": [
         {
@@ -378,7 +397,8 @@
       "required": [
         "time",
         "removedByCommunicationIdentifier",
-        "participantRemoved"
+        "participantRemoved",
+        "version"
       ],
       "allOf": [
         {
@@ -537,7 +557,8 @@
         }
       },
       "required": [
-        "createTime"
+        "createTime",
+        "version"
       ],
       "allOf": [
         {
@@ -561,7 +582,8 @@
         }
       },
       "required": [
-        "createTime"
+        "createTime",
+        "version"
       ],
       "allOf": [
         {
@@ -590,6 +612,7 @@
         }
       },
       "required": [
+        "displayName",
         "participantCommunicationIdentifier",
         "metadata"
       ]
@@ -725,6 +748,9 @@
         }
       },
       "required": [
+        "sender",
+        "recipient",
+        "messageId",
         "status",
         "deliveryStatusDetails",
         "deliveryAttemptTimestamp"
@@ -786,7 +812,10 @@
           "type": "string",
           "description": "Detailed status message"
         }
-      }
+      },
+      "required": [
+        "statusMessage"
+      ]
     },
     "AcsEmailEngagementTrackingReportReceivedEventData": {
       "type": "object",
@@ -824,7 +853,12 @@
         }
       },
       "required": [
+        "sender",
+        "recipient",
+        "messageId",
         "userActionTimestamp",
+        "engagementContext",
+        "userAgent",
         "engagementType"
       ]
     },
@@ -890,7 +924,11 @@
       "required": [
         "to",
         "from",
-        "customContext"
+        "serverCallId",
+        "callerDisplayName",
+        "customContext",
+        "incomingCallContext",
+        "correlationId"
       ]
     },
     "AcsInteractiveReplyKind": {
@@ -935,7 +973,11 @@
           "type": "string",
           "description": "The Payload of the button which was clicked by the user, setup by the business"
         }
-      }
+      },
+      "required": [
+        "text",
+        "payload"
+      ]
     },
     "AcsMessageChannelEventError": {
       "type": "object",
@@ -949,7 +991,11 @@
           "type": "string",
           "description": "The channel error message"
         }
-      }
+      },
+      "required": [
+        "channelCode",
+        "channelMessage"
+      ]
     },
     "AcsMessageChannelKind": {
       "type": "string",
@@ -982,7 +1028,11 @@
           "description": "The message ID for the sent message for an inbound reply",
           "x-ms-client-name": "messageId"
         }
-      }
+      },
+      "required": [
+        "from",
+        "id"
+      ]
     },
     "AcsMessageDeliveryStatus": {
       "type": "string",
@@ -1051,6 +1101,7 @@
         }
       },
       "required": [
+        "messageId",
         "status",
         "channelType"
       ],
@@ -1083,6 +1134,8 @@
         }
       },
       "required": [
+        "from",
+        "to",
         "receivedTimeStamp",
         "error"
       ]
@@ -1100,7 +1153,11 @@
           "type": "string",
           "description": "The title of the button"
         }
-      }
+      },
+      "required": [
+        "id",
+        "title"
+      ]
     },
     "AcsMessageInteractiveContent": {
       "type": "object",
@@ -1143,7 +1200,12 @@
           "type": "string",
           "description": "The description of the selected row"
         }
-      }
+      },
+      "required": [
+        "id",
+        "title",
+        "description"
+      ]
     },
     "AcsMessageMediaContent": {
       "type": "object",
@@ -1166,7 +1228,13 @@
           "type": "string",
           "description": "The caption for the media object, if supported and provided"
         }
-      }
+      },
+      "required": [
+        "mimeType",
+        "id",
+        "fileName",
+        "caption"
+      ]
     },
     "AcsMessageReceivedEventData": {
       "type": "object",
@@ -1201,6 +1269,7 @@
         }
       },
       "required": [
+        "content",
         "channelType",
         "media",
         "context",
@@ -1242,7 +1311,15 @@
           "type": "string",
           "description": "The location to delete all chunk storage"
         }
-      }
+      },
+      "required": [
+        "documentId",
+        "index",
+        "endReason",
+        "metadataLocation",
+        "contentLocation",
+        "deleteLocation"
+      ]
     },
     "AcsRecordingFileStatusUpdatedEventData": {
       "type": "object",
@@ -1282,9 +1359,11 @@
       "required": [
         "recordingStorageInfo",
         "recordingStartTime",
+        "recordingDurationMs",
         "recordingContentType",
         "recordingChannelType",
-        "recordingFormatType"
+        "recordingFormatType",
+        "sessionEndReason"
       ]
     },
     "AcsRecordingStorageInfoProperties": {
@@ -1322,7 +1401,12 @@
           "format": "int32",
           "description": "Max Number of Jobs for Router Job"
         }
-      }
+      },
+      "required": [
+        "channelId",
+        "capacityCostPerJob",
+        "maxNumberOfJobs"
+      ]
     },
     "AcsRouterCommunicationError": {
       "type": "object",
@@ -1354,6 +1438,9 @@
         }
       },
       "required": [
+        "code",
+        "message",
+        "target",
         "innererror",
         "details"
       ]
@@ -1374,7 +1461,12 @@
           "type": "string",
           "description": "Router Event Channel ID"
         }
-      }
+      },
+      "required": [
+        "jobId",
+        "channelReference",
+        "channelId"
+      ]
     },
     "AcsRouterJobCancelledEventData": {
       "type": "object",
@@ -1389,6 +1481,10 @@
           "description": "Router Job Disposition Code"
         }
       },
+      "required": [
+        "note",
+        "dispositionCode"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1413,6 +1509,7 @@
         }
       },
       "required": [
+        "classificationPolicyId",
         "errors"
       ],
       "allOf": [
@@ -1449,6 +1546,8 @@
       },
       "required": [
         "queueDetails",
+        "classificationPolicyId",
+        "priority",
         "attachedWorkerSelectors"
       ],
       "allOf": [
@@ -1474,6 +1573,11 @@
           "description": "Router Job Closed Disposition Code"
         }
       },
+      "required": [
+        "assignmentId",
+        "workerId",
+        "dispositionCode"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1493,6 +1597,10 @@
           "description": "Router Job Completed Worker Id"
         }
       },
+      "required": [
+        "assignmentId",
+        "workerId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1532,6 +1640,7 @@
         }
       },
       "required": [
+        "queueId",
         "labels",
         "tags"
       ],
@@ -1554,6 +1663,10 @@
           "description": "Router Job Exception Triggered Rule Id"
         }
       },
+      "required": [
+        "ruleKey",
+        "exceptionRuleId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1587,6 +1700,7 @@
         }
       },
       "required": [
+        "priority",
         "attachedWorkerSelectors",
         "requestedWorkerSelectors"
       ],
@@ -1633,6 +1747,8 @@
       },
       "required": [
         "jobStatus",
+        "classificationPolicyId",
+        "priority",
         "requestedWorkerSelectors",
         "scheduledOn",
         "unavailableForMatching"
@@ -1679,9 +1795,11 @@
         }
       },
       "required": [
+        "priority",
         "expiredAttachedWorkerSelectors",
         "expiredRequestedWorkerSelectors",
-        "scheduledOn"
+        "scheduledOn",
+        "failureReason"
       ],
       "allOf": [
         {
@@ -1786,6 +1904,10 @@
           "description": "Router Job Unassigned Worker Id"
         }
       },
+      "required": [
+        "assignmentId",
+        "workerId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterJobEventData"
@@ -1828,6 +1950,7 @@
         }
       },
       "required": [
+        "priority",
         "expiredAttachedWorkerSelectors",
         "expiredRequestedWorkerSelectors",
         "scheduledOn",
@@ -1939,6 +2062,8 @@
         }
       },
       "required": [
+        "id",
+        "name",
         "labels"
       ]
     },
@@ -2007,7 +2132,10 @@
           "type": "string",
           "description": "Router Worker Deregistered Worker Id"
         }
-      }
+      },
+      "required": [
+        "workerId"
+      ]
     },
     "AcsRouterWorkerEventData": {
       "type": "object",
@@ -2018,6 +2146,9 @@
           "description": "Router Worker events Worker Id"
         }
       },
+      "required": [
+        "workerId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterEventData"
@@ -2075,6 +2206,10 @@
         }
       },
       "required": [
+        "queueId",
+        "offerId",
+        "assignmentId",
+        "jobPriority",
         "workerLabels",
         "workerTags",
         "jobLabels",
@@ -2099,6 +2234,10 @@
           "description": "Router Worker Offer Declined Offer Id"
         }
       },
+      "required": [
+        "queueId",
+        "offerId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -2118,6 +2257,10 @@
           "description": "Router Worker Offer Expired Offer Id"
         }
       },
+      "required": [
+        "queueId",
+        "offerId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -2181,6 +2324,9 @@
         }
       },
       "required": [
+        "queueId",
+        "offerId",
+        "jobPriority",
         "workerLabels",
         "offeredOn",
         "expiresOn",
@@ -2207,6 +2353,10 @@
           "description": "Router Worker Offer Revoked Offer Id"
         }
       },
+      "required": [
+        "queueId",
+        "offerId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsRouterWorkerEventData"
@@ -2257,8 +2407,10 @@
         }
       },
       "required": [
+        "workerId",
         "queueAssignments",
         "channelConfigurations",
+        "totalCapacity",
         "labels",
         "tags"
       ]
@@ -2295,6 +2447,7 @@
         }
       },
       "required": [
+        "key",
         "labelOperator",
         "value",
         "ttlSeconds",
@@ -2377,8 +2530,10 @@
         }
       },
       "required": [
+        "workerId",
         "queueAssignments",
         "channelConfigurations",
+        "totalCapacity",
         "labels",
         "tags",
         "updatedWorkerProperties"
@@ -2405,7 +2560,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "segmentsSucceeded",
+        "segmentsFailed"
       ]
     },
     "AcsSmsDeliveryReportReceivedEventData": {
@@ -2439,8 +2596,11 @@
         }
       },
       "required": [
+        "deliveryStatus",
+        "deliveryStatusDetails",
         "deliveryAttempts",
-        "receivedTimestamp"
+        "receivedTimestamp",
+        "tag"
       ],
       "allOf": [
         {
@@ -2464,7 +2624,12 @@
           "type": "string",
           "description": "The identity of SMS message receiver"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "from",
+        "to"
+      ]
     },
     "AcsSmsReceivedEventData": {
       "type": "object",
@@ -2481,6 +2646,7 @@
         }
       },
       "required": [
+        "message",
         "receivedTimestamp"
       ],
       "allOf": [
@@ -2544,6 +2710,8 @@
         }
       },
       "required": [
+        "title",
+        "description",
         "specification"
       ]
     },
@@ -2565,6 +2733,8 @@
         }
       },
       "required": [
+        "title",
+        "description",
         "specification"
       ]
     },
@@ -2580,7 +2750,11 @@
           "type": "string",
           "description": "Specification version."
         }
-      }
+      },
+      "required": [
+        "name",
+        "version"
+      ]
     },
     "ApiManagementApiCreatedEventData": {
       "type": "object",
@@ -2590,7 +2764,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementApiDeletedEventData": {
       "type": "object",
@@ -2600,7 +2777,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementApiReleaseCreatedEventData": {
       "type": "object",
@@ -2610,7 +2790,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementApiReleaseDeletedEventData": {
       "type": "object",
@@ -2620,7 +2803,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementApiReleaseUpdatedEventData": {
       "type": "object",
@@ -2630,7 +2816,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementApiUpdatedEventData": {
       "type": "object",
@@ -2640,7 +2829,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayApiAddedEventData": {
       "type": "object",
@@ -2650,7 +2842,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayApiRemovedEventData": {
       "type": "object",
@@ -2660,7 +2855,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayCertificateAuthorityCreatedEventData": {
       "type": "object",
@@ -2670,7 +2868,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayCertificateAuthorityDeletedEventData": {
       "type": "object",
@@ -2680,7 +2881,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayCertificateAuthorityUpdatedEventData": {
       "type": "object",
@@ -2690,7 +2894,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayCreatedEventData": {
       "type": "object",
@@ -2700,7 +2907,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayDeletedEventData": {
       "type": "object",
@@ -2710,7 +2920,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayHostnameConfigurationCreatedEventData": {
       "type": "object",
@@ -2720,7 +2933,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayHostnameConfigurationDeletedEventData": {
       "type": "object",
@@ -2730,7 +2946,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayHostnameConfigurationUpdatedEventData": {
       "type": "object",
@@ -2740,7 +2959,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementGatewayUpdatedEventData": {
       "type": "object",
@@ -2750,7 +2972,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementProductCreatedEventData": {
       "type": "object",
@@ -2760,7 +2985,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementProductDeletedEventData": {
       "type": "object",
@@ -2770,7 +2998,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementProductUpdatedEventData": {
       "type": "object",
@@ -2780,7 +3011,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementSubscriptionCreatedEventData": {
       "type": "object",
@@ -2790,7 +3024,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementSubscriptionDeletedEventData": {
       "type": "object",
@@ -2800,7 +3037,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementSubscriptionUpdatedEventData": {
       "type": "object",
@@ -2810,7 +3050,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementUserCreatedEventData": {
       "type": "object",
@@ -2820,7 +3063,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementUserDeletedEventData": {
       "type": "object",
@@ -2830,7 +3076,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "ApiManagementUserUpdatedEventData": {
       "type": "object",
@@ -2840,7 +3089,10 @@
           "type": "string",
           "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`"
         }
-      }
+      },
+      "required": [
+        "resourceUri"
+      ]
     },
     "AppAction": {
       "type": "string",
@@ -2910,7 +3162,13 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      }
+      },
+      "required": [
+        "key",
+        "label",
+        "etag",
+        "syncToken"
+      ]
     },
     "AppConfigurationKeyValueModifiedEventData": {
       "type": "object",
@@ -2932,7 +3190,13 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      }
+      },
+      "required": [
+        "key",
+        "label",
+        "etag",
+        "syncToken"
+      ]
     },
     "AppConfigurationSnapshotCreatedEventData": {
       "type": "object",
@@ -2959,7 +3223,12 @@
           "type": "string",
           "description": "The sync token representing the server state after the event."
         }
-      }
+      },
+      "required": [
+        "name",
+        "etag",
+        "syncToken"
+      ]
     },
     "AppConfigurationSnapshotModifiedEventData": {
       "type": "object",
@@ -3101,7 +3370,13 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "operationId",
+        "addedHostNames",
+        "removedHostNames",
+        "inMaintenanceHostNames"
+      ]
     },
     "AvsClusterFailedEventData": {
       "type": "object",
@@ -3112,6 +3387,9 @@
           "description": "Failure reason of an event."
         }
       },
+      "required": [
+        "failureMessage"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AvsClusterEventData"
@@ -3144,7 +3422,10 @@
           "type": "string",
           "description": "Id of the operation that caused this event."
         }
-      }
+      },
+      "required": [
+        "operationId"
+      ]
     },
     "AvsPrivateCloudFailedEventData": {
       "type": "object",
@@ -3155,6 +3436,9 @@
           "description": "Failure reason of an event."
         }
       },
+      "required": [
+        "failureMessage"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AvsPrivateCloudEventData"
@@ -3207,7 +3491,12 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "operationId",
+        "cmdletId",
+        "output"
+      ]
     },
     "AvsScriptExecutionFailedEventData": {
       "type": "object",
@@ -3218,6 +3507,9 @@
           "description": "Failure reason of an event."
         }
       },
+      "required": [
+        "failureMessage"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AvsScriptExecutionEventData"
@@ -3315,6 +3607,7 @@
       },
       "required": [
         "kind",
+        "rawId",
         "communicationUser",
         "phoneNumber",
         "microsoftTeamsUser",
@@ -3401,7 +3694,10 @@
         }
       },
       "required": [
+        "id",
         "timestamp",
+        "action",
+        "location",
         "target",
         "connectedRegistry"
       ]
@@ -3439,7 +3735,16 @@
           "type": "string",
           "description": "The version of the artifact."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "size",
+        "digest",
+        "repository",
+        "tag",
+        "name",
+        "version"
+      ]
     },
     "ContainerRegistryChartDeletedEventData": {
       "type": "object",
@@ -3467,7 +3772,10 @@
           "type": "string",
           "description": "The subject or username associated with the request context that generated the event."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ContainerRegistryEventConnectedRegistry": {
       "type": "object",
@@ -3477,7 +3785,10 @@
           "type": "string",
           "description": "The name of the connected registry that generated this event."
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "ContainerRegistryEventData": {
       "type": "object",
@@ -3522,7 +3833,10 @@
         }
       },
       "required": [
+        "id",
         "timestamp",
+        "action",
+        "location",
         "target",
         "request",
         "actor",
@@ -3554,7 +3868,14 @@
           "type": "string",
           "description": "The user agent header of the request."
         }
-      }
+      },
+      "required": [
+        "id",
+        "addr",
+        "host",
+        "method",
+        "useragent"
+      ]
     },
     "ContainerRegistryEventSource": {
       "type": "object",
@@ -3568,7 +3889,11 @@
           "type": "string",
           "description": "The running instance of an application. Changes after each restart."
         }
-      }
+      },
+      "required": [
+        "addr",
+        "instanceID"
+      ]
     },
     "ContainerRegistryEventTarget": {
       "type": "object",
@@ -3604,7 +3929,16 @@
           "type": "string",
           "description": "The tag name."
         }
-      }
+      },
+      "required": [
+        "mediaType",
+        "size",
+        "digest",
+        "length",
+        "repository",
+        "url",
+        "tag"
+      ]
     },
     "ContainerRegistryImageDeletedEventData": {
       "type": "object",
@@ -3650,7 +3984,10 @@
           "type": "string",
           "description": "The Kubernetes version of the ManagedCluster resource"
         }
-      }
+      },
+      "required": [
+        "kubernetesVersion"
+      ]
     },
     "ContainerServiceNewKubernetesVersionAvailableEventData": {
       "type": "object",
@@ -3672,7 +4009,13 @@
           "type": "string",
           "description": "The highest PATCH Kubernetes version considered preview for the ManagedCluster resource. There might not be any version in preview at the time of publishing the event"
         }
-      }
+      },
+      "required": [
+        "latestSupportedKubernetesVersion",
+        "latestStableKubernetesVersion",
+        "lowestMinorKubernetesVersion",
+        "latestPreviewKubernetesVersion"
+      ]
     },
     "ContainerServiceNodePoolRollingEventData": {
       "type": "object",
@@ -3682,7 +4025,10 @@
           "type": "string",
           "description": "The name of the node pool in the ManagedCluster resource"
         }
-      }
+      },
+      "required": [
+        "nodePoolName"
+      ]
     },
     "ContainerServiceNodePoolRollingFailedEventData": {
       "type": "object",
@@ -3730,6 +4076,7 @@
         }
       },
       "required": [
+        "serialNumber",
         "stageName",
         "stageTime"
       ]
@@ -3753,6 +4100,7 @@
         }
       },
       "required": [
+        "serialNumber",
         "stageName",
         "stageTime"
       ]
@@ -3776,6 +4124,7 @@
         }
       },
       "required": [
+        "serialNumber",
         "stageName",
         "stageTime"
       ]
@@ -3818,7 +4167,10 @@
           "type": "string",
           "description": "Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number."
         }
-      }
+      },
+      "required": [
+        "sequenceNumber"
+      ]
     },
     "DeviceConnectionStateEventProperties": {
       "type": "object",
@@ -3842,6 +4194,9 @@
         }
       },
       "required": [
+        "deviceId",
+        "moduleId",
+        "hubName",
         "deviceConnectionStateEventInfo"
       ]
     },
@@ -3863,6 +4218,8 @@
         }
       },
       "required": [
+        "deviceId",
+        "hubName",
         "twin"
       ]
     },
@@ -3948,7 +4305,16 @@
         }
       },
       "required": [
+        "authenticationType",
+        "cloudToDeviceMessageCount",
+        "connectionState",
+        "deviceId",
+        "etag",
+        "lastActivityTime",
         "properties",
+        "status",
+        "statusUpdateTime",
+        "version",
         "x509Thumbprint"
       ]
     },
@@ -3982,7 +4348,11 @@
           "type": "string",
           "description": "Secondary thumbprint for the x509 certificate."
         }
-      }
+      },
+      "required": [
+        "primaryThumbprint",
+        "secondaryThumbprint"
+      ]
     },
     "DeviceTwinMetadata": {
       "type": "object",
@@ -3993,7 +4363,10 @@
           "description": "The ISO8601 timestamp of the last time the properties were updated.",
           "x-ms-client-name": "$lastUpdated"
         }
-      }
+      },
+      "required": [
+        "lastUpdated"
+      ]
     },
     "DeviceTwinProperties": {
       "type": "object",
@@ -4012,7 +4385,8 @@
         }
       },
       "required": [
-        "metadata"
+        "metadata",
+        "version"
       ]
     },
     "EventGridMQTTClientCreatedOrUpdatedEventData": {
@@ -4156,7 +4530,12 @@
           "type": "string",
           "description": "Name of the Event Grid namespace where the MQTT client was created or updated."
         }
-      }
+      },
+      "required": [
+        "clientAuthenticationName",
+        "clientName",
+        "namespaceName"
+      ]
     },
     "EventGridMQTTClientSessionConnectedEventData": {
       "type": "object",
@@ -4172,6 +4551,10 @@
           "description": "A number that helps indicate order of MQTT client session connected or\ndisconnected events. Latest event will have a sequence number that is higher\nthan the previous event."
         }
       },
+      "required": [
+        "clientSessionName",
+        "sequenceNumber"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EventGridMQTTClientEventData"
@@ -4197,6 +4580,8 @@
         }
       },
       "required": [
+        "clientSessionName",
+        "sequenceNumber",
         "disconnectionReason"
       ],
       "allOf": [
@@ -4278,6 +4663,13 @@
         }
       },
       "required": [
+        "fileUrl",
+        "fileType",
+        "partitionId",
+        "sizeInBytes",
+        "eventCount",
+        "firstSequenceNumber",
+        "lastSequenceNumber",
         "firstEnqueueTime",
         "lastEnqueueTime"
       ]
@@ -4311,7 +4703,15 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName",
+        "sequenceNumber"
+      ]
     },
     "HealthcareDicomImageDeletedEventData": {
       "type": "object",
@@ -4342,7 +4742,15 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName",
+        "sequenceNumber"
+      ]
     },
     "HealthcareDicomImageUpdatedEventData": {
       "type": "object",
@@ -4373,7 +4781,15 @@
           "format": "int64",
           "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service."
         }
-      }
+      },
+      "required": [
+        "partitionName",
+        "imageStudyInstanceUid",
+        "imageSeriesInstanceUid",
+        "imageSopInstanceUid",
+        "serviceHostName",
+        "sequenceNumber"
+      ]
     },
     "HealthcareFhirResourceCreatedEventData": {
       "type": "object",
@@ -4402,7 +4818,10 @@
         }
       },
       "required": [
-        "resourceType"
+        "resourceType",
+        "resourceFhirAccount",
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "HealthcareFhirResourceDeletedEventData": {
@@ -4432,7 +4851,10 @@
         }
       },
       "required": [
-        "resourceType"
+        "resourceType",
+        "resourceFhirAccount",
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "HealthcareFhirResourceType": {
@@ -5440,7 +5862,10 @@
         }
       },
       "required": [
-        "resourceType"
+        "resourceType",
+        "resourceFhirAccount",
+        "resourceFhirId",
+        "resourceVersionId"
       ]
     },
     "IotHubDeviceConnectedEventData": {
@@ -5522,7 +5947,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultCertificateExpiredEventData": {
       "type": "object",
@@ -5558,7 +5992,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultCertificateNearExpiryEventData": {
       "type": "object",
@@ -5594,7 +6037,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultCertificateNewVersionCreatedEventData": {
       "type": "object",
@@ -5630,7 +6082,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultKeyExpiredEventData": {
       "type": "object",
@@ -5666,7 +6127,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultKeyNearExpiryEventData": {
       "type": "object",
@@ -5702,7 +6172,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultKeyNewVersionCreatedEventData": {
       "type": "object",
@@ -5738,7 +6217,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultSecretExpiredEventData": {
       "type": "object",
@@ -5774,7 +6262,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultSecretNearExpiryEventData": {
       "type": "object",
@@ -5810,7 +6307,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "KeyVaultSecretNewVersionCreatedEventData": {
       "type": "object",
@@ -5846,7 +6352,16 @@
           "format": "float",
           "description": "The expiration date of the object that triggered this event"
         }
-      }
+      },
+      "required": [
+        "Id",
+        "VaultName",
+        "ObjectType",
+        "ObjectName",
+        "Version",
+        "NBF",
+        "EXP"
+      ]
     },
     "MachineLearningServicesDatasetDriftDetectedEventData": {
       "type": "object",
@@ -5889,6 +6404,12 @@
         }
       },
       "required": [
+        "dataDriftId",
+        "dataDriftName",
+        "runId",
+        "baseDatasetId",
+        "targetDatasetId",
+        "driftCoefficient",
         "startTime",
         "endTime"
       ]
@@ -5921,6 +6442,9 @@
         }
       },
       "required": [
+        "serviceName",
+        "serviceComputeType",
+        "modelIds",
         "serviceTags",
         "serviceProperties"
       ]
@@ -5949,6 +6473,8 @@
         }
       },
       "required": [
+        "modelName",
+        "modelVersion",
         "modelTags",
         "modelProperties"
       ]
@@ -5985,6 +6511,10 @@
         }
       },
       "required": [
+        "experimentId",
+        "experimentName",
+        "runId",
+        "runType",
         "runTags",
         "runProperties"
       ]
@@ -6025,8 +6555,13 @@
         }
       },
       "required": [
+        "experimentId",
+        "experimentName",
+        "runId",
+        "runType",
         "runTags",
-        "runProperties"
+        "runProperties",
+        "runStatus"
       ]
     },
     "MapsGeofenceEnteredEventData": {
@@ -6070,7 +6605,10 @@
         }
       },
       "required": [
-        "geometries"
+        "expiredGeofenceGeometryId",
+        "geometries",
+        "invalidPeriodGeofenceGeometryId",
+        "isEventPublished"
       ]
     },
     "MapsGeofenceExitedEventData": {
@@ -6113,7 +6651,15 @@
           "type": "string",
           "description": "The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API."
         }
-      }
+      },
+      "required": [
+        "deviceId",
+        "distance",
+        "geometryId",
+        "nearestLat",
+        "nearestLon",
+        "udId"
+      ]
     },
     "MapsGeofenceResultEventData": {
       "type": "object",
@@ -6186,6 +6732,7 @@
       },
       "required": [
         "code",
+        "message",
         "category",
         "retry",
         "details"
@@ -6323,7 +6870,11 @@
           "type": "string",
           "description": "A human-readable representation of the error."
         }
-      }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "MediaJobErroredEventData": {
       "type": "object",
@@ -6399,6 +6950,7 @@
       "required": [
         "@odata.type",
         "error",
+        "label",
         "progress",
         "state"
       ]
@@ -6412,6 +6964,9 @@
           "description": "Gets the Job output asset name."
         }
       },
+      "required": [
+        "assetName"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/MediaJobOutput"
@@ -6486,6 +7041,8 @@
         }
       },
       "required": [
+        "label",
+        "progress",
         "jobCorrelationData"
       ]
     },
@@ -6688,7 +7245,14 @@
           "type": "string",
           "description": "Gets the result code."
         }
-      }
+      },
+      "required": [
+        "ingestUrl",
+        "streamId",
+        "encoderIp",
+        "encoderPort",
+        "resultCode"
+      ]
     },
     "MediaLiveEventEncoderConnectedEventData": {
       "type": "object",
@@ -6710,7 +7274,13 @@
           "type": "string",
           "description": "Gets the remote port."
         }
-      }
+      },
+      "required": [
+        "ingestUrl",
+        "streamId",
+        "encoderIp",
+        "encoderPort"
+      ]
     },
     "MediaLiveEventEncoderDisconnectedEventData": {
       "type": "object",
@@ -6736,7 +7306,14 @@
           "type": "string",
           "description": "Gets the result code."
         }
-      }
+      },
+      "required": [
+        "ingestUrl",
+        "streamId",
+        "encoderIp",
+        "encoderPort",
+        "resultCode"
+      ]
     },
     "MediaLiveEventIncomingDataChunkDroppedEventData": {
       "type": "object",
@@ -6767,7 +7344,15 @@
           "type": "string",
           "description": "Gets the name of the track for which fragment is dropped."
         }
-      }
+      },
+      "required": [
+        "timestamp",
+        "trackType",
+        "bitrate",
+        "timescale",
+        "resultCode",
+        "trackName"
+      ]
     },
     "MediaLiveEventIncomingStreamReceivedEventData": {
       "type": "object",
@@ -6810,7 +7395,18 @@
           "type": "string",
           "description": "Gets the timescale in which timestamp is represented."
         }
-      }
+      },
+      "required": [
+        "ingestUrl",
+        "trackType",
+        "trackName",
+        "bitrate",
+        "encoderIp",
+        "encoderPort",
+        "timestamp",
+        "duration",
+        "timescale"
+      ]
     },
     "MediaLiveEventIncomingStreamsOutOfSyncEventData": {
       "type": "object",
@@ -6840,7 +7436,15 @@
           "type": "string",
           "description": "Gets the timescale in which \\\"MaxLastTimestamp\\\" is represented."
         }
-      }
+      },
+      "required": [
+        "minLastTimestamp",
+        "typeOfStreamWithMinLastTimestamp",
+        "maxLastTimestamp",
+        "typeOfStreamWithMaxLastTimestamp",
+        "timescaleOfMinLastTimestamp",
+        "timescaleOfMaxLastTimestamp"
+      ]
     },
     "MediaLiveEventIncomingVideoStreamsOutOfSyncEventData": {
       "type": "object",
@@ -6866,7 +7470,14 @@
           "type": "string",
           "description": "Gets the timescale in which both the timestamps and durations are represented."
         }
-      }
+      },
+      "required": [
+        "firstTimestamp",
+        "firstDuration",
+        "secondTimestamp",
+        "secondDuration",
+        "timescale"
+      ]
     },
     "MediaLiveEventIngestHeartbeatEventData": {
       "type": "object",
@@ -6941,7 +7552,25 @@
           "type": "boolean",
           "description": "Gets a value indicating whether preview is healthy or not."
         }
-      }
+      },
+      "required": [
+        "trackType",
+        "trackName",
+        "transcriptionLanguage",
+        "transcriptionState",
+        "bitrate",
+        "incomingBitrate",
+        "ingestDriftValue",
+        "lastFragmentArrivalTime",
+        "lastTimestamp",
+        "timescale",
+        "overlapCount",
+        "discontinuityCount",
+        "nonincreasingCount",
+        "unexpectedBitrate",
+        "state",
+        "healthy"
+      ]
     },
     "MediaLiveEventTrackDiscontinuityDetectedEventData": {
       "type": "object",
@@ -6976,7 +7605,16 @@
           "type": "string",
           "description": "Gets the discontinuity gap between PreviousTimestamp and NewTimestamp."
         }
-      }
+      },
+      "required": [
+        "trackType",
+        "trackName",
+        "bitrate",
+        "previousTimestamp",
+        "newTimestamp",
+        "timescale",
+        "discontinuityGap"
+      ]
     },
     "MicrosoftTeamsAppIdentifierModel": {
       "type": "object",
@@ -7015,6 +7653,7 @@
       },
       "required": [
         "userId",
+        "isAnonymous",
         "cloud"
       ]
     },
@@ -7066,7 +7705,13 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "policyAssignmentId",
+        "policyDefinitionId",
+        "policyDefinitionReferenceId",
+        "complianceState",
+        "subscriptionId",
+        "complianceReasonCode"
       ]
     },
     "PolicyInsightsPolicyStateCreatedEventData": {
@@ -7104,7 +7749,13 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "policyAssignmentId",
+        "policyDefinitionId",
+        "policyDefinitionReferenceId",
+        "complianceState",
+        "subscriptionId",
+        "complianceReasonCode"
       ]
     },
     "PolicyInsightsPolicyStateDeletedEventData": {
@@ -7142,7 +7793,13 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "policyAssignmentId",
+        "policyDefinitionId",
+        "policyDefinitionReferenceId",
+        "complianceState",
+        "subscriptionId",
+        "complianceReasonCode"
       ]
     },
     "RedisExportRDBCompletedEventData": {
@@ -7164,7 +7821,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "name",
+        "status"
       ]
     },
     "RedisImportRDBCompletedEventData": {
@@ -7186,7 +7845,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "name",
+        "status"
       ]
     },
     "RedisPatchingCompletedEventData": {
@@ -7208,7 +7869,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "name",
+        "status"
       ]
     },
     "RedisScalingCompletedEventData": {
@@ -7230,7 +7893,9 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "name",
+        "status"
       ]
     },
     "ResourceActionCancelEventData": {
@@ -7286,8 +7951,16 @@
         }
       },
       "required": [
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup",
+        "resourceProvider",
+        "resourceUri",
+        "operationName",
+        "status",
         "authorization",
         "claims",
+        "correlationId",
         "httpRequest"
       ]
     },
@@ -7344,8 +8017,16 @@
         }
       },
       "required": [
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup",
+        "resourceProvider",
+        "resourceUri",
+        "operationName",
+        "status",
         "authorization",
         "claims",
+        "correlationId",
         "httpRequest"
       ]
     },
@@ -7402,8 +8083,16 @@
         }
       },
       "required": [
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup",
+        "resourceProvider",
+        "resourceUri",
+        "operationName",
+        "status",
         "authorization",
         "claims",
+        "correlationId",
         "httpRequest"
       ]
     },
@@ -7428,6 +8117,8 @@
         }
       },
       "required": [
+        "scope",
+        "action",
         "evidence"
       ]
     },
@@ -7484,8 +8175,16 @@
         }
       },
       "required": [
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup",
+        "resourceProvider",
+        "resourceUri",
+        "operationName",
+        "status",
         "authorization",
         "claims",
+        "correlationId",
         "httpRequest"
       ]
     },
@@ -7542,8 +8241,16 @@
         }
       },
       "required": [
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup",
+        "resourceProvider",
+        "resourceUri",
+        "operationName",
+        "status",
         "authorization",
         "claims",
+        "correlationId",
         "httpRequest"
       ]
     },
@@ -7600,8 +8307,16 @@
         }
       },
       "required": [
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup",
+        "resourceProvider",
+        "resourceUri",
+        "operationName",
+        "status",
         "authorization",
         "claims",
+        "correlationId",
         "httpRequest"
       ]
     },
@@ -7625,7 +8340,13 @@
           "type": "string",
           "description": "The url used in the request."
         }
-      }
+      },
+      "required": [
+        "clientRequestId",
+        "clientIpAddress",
+        "method",
+        "url"
+      ]
     },
     "ResourceNotificationsHealthResourcesAnnotatedEventData": {
       "type": "object",
@@ -7675,7 +8396,12 @@
           "type": "string",
           "description": "the type of the resource for which the event is being emitted"
         }
-      }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
     },
     "ResourceNotificationsResourceDeletedEventData": {
       "type": "object",
@@ -7749,6 +8475,10 @@
         }
       },
       "required": [
+        "id",
+        "name",
+        "type",
+        "location",
         "tags",
         "properties"
       ]
@@ -7774,7 +8504,8 @@
       },
       "required": [
         "resourceInfo",
-        "operationalInfo"
+        "operationalInfo",
+        "apiVersion"
       ]
     },
     "ResourceWriteCancelEventData": {
@@ -7830,8 +8561,16 @@
         }
       },
       "required": [
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup",
+        "resourceProvider",
+        "resourceUri",
+        "operationName",
+        "status",
         "authorization",
         "claims",
+        "correlationId",
         "httpRequest"
       ]
     },
@@ -7888,8 +8627,16 @@
         }
       },
       "required": [
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup",
+        "resourceProvider",
+        "resourceUri",
+        "operationName",
+        "status",
         "authorization",
         "claims",
+        "correlationId",
         "httpRequest"
       ]
     },
@@ -7946,8 +8693,16 @@
         }
       },
       "required": [
+        "tenantId",
+        "subscriptionId",
+        "resourceGroup",
+        "resourceProvider",
+        "resourceUri",
+        "operationName",
+        "status",
         "authorization",
         "claims",
+        "correlationId",
         "httpRequest"
       ]
     },
@@ -7979,7 +8734,15 @@
           "type": "string",
           "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "ServiceBusActiveMessagesAvailableWithNoListenersEventData": {
       "type": "object",
@@ -8009,7 +8772,15 @@
           "type": "string",
           "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "ServiceBusDeadletterMessagesAvailablePeriodicNotificationsEventData": {
       "type": "object",
@@ -8039,7 +8810,15 @@
           "type": "string",
           "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "ServiceBusDeadletterMessagesAvailableWithNoListenersEventData": {
       "type": "object",
@@ -8069,7 +8848,15 @@
           "type": "string",
           "description": "The name of the Microsoft.ServiceBus topic's subscription. If the entity type is of type 'queue', then this value will be null."
         }
-      }
+      },
+      "required": [
+        "namespaceName",
+        "requestUri",
+        "entityType",
+        "queueName",
+        "topicName",
+        "subscriptionName"
+      ]
     },
     "SignalRServiceClientConnectionConnectedEventData": {
       "type": "object",
@@ -8094,7 +8881,10 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "hubName",
+        "connectionId",
+        "userId"
       ]
     },
     "SignalRServiceClientConnectionDisconnectedEventData": {
@@ -8124,7 +8914,11 @@
         }
       },
       "required": [
-        "timestamp"
+        "timestamp",
+        "hubName",
+        "connectionId",
+        "userId",
+        "errorMessage"
       ]
     },
     "StampKind": {
@@ -8205,6 +8999,15 @@
         }
       },
       "required": [
+        "api",
+        "clientRequestId",
+        "requestId",
+        "contentType",
+        "contentLength",
+        "blobType",
+        "url",
+        "sequencer",
+        "identity",
         "storageDiagnostics"
       ]
     },
@@ -8265,6 +9068,17 @@
         }
       },
       "required": [
+        "api",
+        "clientRequestId",
+        "requestId",
+        "eTag",
+        "contentType",
+        "contentLength",
+        "contentOffset",
+        "blobType",
+        "url",
+        "sequencer",
+        "identity",
         "storageDiagnostics"
       ]
     },
@@ -8311,6 +9125,14 @@
         }
       },
       "required": [
+        "api",
+        "clientRequestId",
+        "requestId",
+        "contentType",
+        "blobType",
+        "url",
+        "sequencer",
+        "identity",
         "storageDiagnostics"
       ]
     },
@@ -8349,7 +9171,13 @@
         }
       },
       "required": [
-        "scheduleDateTime"
+        "scheduleDateTime",
+        "accountName",
+        "ruleName",
+        "policyRunStatus",
+        "policyRunStatusMessage",
+        "policyRunId",
+        "manifestBlobUrl"
       ]
     },
     "StorageBlobRenamedEventData": {
@@ -8391,6 +9219,13 @@
         }
       },
       "required": [
+        "api",
+        "clientRequestId",
+        "requestId",
+        "sourceUrl",
+        "destinationUrl",
+        "sequencer",
+        "identity",
         "storageDiagnostics"
       ]
     },
@@ -8442,6 +9277,15 @@
         }
       },
       "required": [
+        "api",
+        "clientRequestId",
+        "requestId",
+        "contentType",
+        "contentLength",
+        "blobType",
+        "url",
+        "sequencer",
+        "identity",
         "storageDiagnostics"
       ]
     },
@@ -8484,6 +9328,13 @@
         }
       },
       "required": [
+        "api",
+        "clientRequestId",
+        "requestId",
+        "eTag",
+        "url",
+        "sequencer",
+        "identity",
         "storageDiagnostics"
       ]
     },
@@ -8526,6 +9377,13 @@
         }
       },
       "required": [
+        "api",
+        "clientRequestId",
+        "requestId",
+        "url",
+        "recursive",
+        "sequencer",
+        "identity",
         "storageDiagnostics"
       ]
     },
@@ -8568,6 +9426,13 @@
         }
       },
       "required": [
+        "api",
+        "clientRequestId",
+        "requestId",
+        "sourceUrl",
+        "destinationUrl",
+        "sequencer",
+        "identity",
         "storageDiagnostics"
       ]
     },
@@ -8589,7 +9454,12 @@
           "type": "string",
           "description": "Error messages of this action if any."
         }
-      }
+      },
+      "required": [
+        "totalObjectsCount",
+        "successCount",
+        "errorList"
+      ]
     },
     "StorageLifecyclePolicyCompletedEventData": {
       "type": "object",
@@ -8613,6 +9483,7 @@
         }
       },
       "required": [
+        "scheduleTime",
         "deleteSummary",
         "tierToCoolSummary",
         "tierToArchiveSummary"
@@ -8650,6 +9521,8 @@
       "required": [
         "status",
         "completedDateTime",
+        "taskExecutionId",
+        "taskName",
         "summaryReportBlobUrl"
       ]
     },
@@ -8693,7 +9566,8 @@
         }
       },
       "required": [
-        "queuedDateTime"
+        "queuedDateTime",
+        "taskExecutionId"
       ]
     },
     "StorageTaskCompletedEventData": {
@@ -8726,6 +9600,8 @@
       "required": [
         "status",
         "completedDateTime",
+        "taskExecutionId",
+        "taskName",
         "summaryReportBlobUrl"
       ]
     },
@@ -8768,7 +9644,8 @@
         }
       },
       "required": [
-        "queuedDateTime"
+        "queuedDateTime",
+        "taskExecutionId"
       ]
     },
     "SubscriptionDeletedEventData": {
@@ -8779,7 +9656,10 @@
           "type": "string",
           "description": "The Azure resource ID of the deleted event subscription."
         }
-      }
+      },
+      "required": [
+        "eventSubscriptionId"
+      ]
     },
     "SubscriptionValidationEventData": {
       "type": "object",
@@ -8793,7 +9673,11 @@
           "type": "string",
           "description": "The validation URL sent by Azure Event Grid (available starting version 2018-05-01-preview).\nTo complete the validation handshake, the subscriber must either respond with the validationCode as part of the validation response,\nor perform a GET request on the validationUrl (available starting version 2018-05-01-preview)."
         }
-      }
+      },
+      "required": [
+        "validationCode",
+        "validationUrl"
+      ]
     },
     "SubscriptionValidationResponse": {
       "type": "object",
@@ -8803,7 +9687,10 @@
           "type": "string",
           "description": "The validation response sent by the subscriber to Azure Event Grid to complete the validation of an event subscription."
         }
-      }
+      },
+      "required": [
+        "validationResponse"
+      ]
     },
     "WebAppServicePlanUpdatedEventData": {
       "type": "object",
@@ -8844,7 +9731,13 @@
       },
       "required": [
         "appServicePlanEventTypeDetail",
-        "sku"
+        "sku",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebAppServicePlanUpdatedEventDataSku": {
@@ -8871,7 +9764,14 @@
           "type": "string",
           "description": "capacity of app service plan sku."
         }
-      }
+      },
+      "required": [
+        "name",
+        "Tier",
+        "Size",
+        "Family",
+        "Capacity"
+      ]
     },
     "WebAppUpdatedEventData": {
       "type": "object",
@@ -8907,7 +9807,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebBackupOperationCompletedEventData": {
@@ -8944,7 +9850,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebBackupOperationFailedEventData": {
@@ -8981,7 +9893,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebBackupOperationStartedEventData": {
@@ -9018,7 +9936,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebRestoreOperationCompletedEventData": {
@@ -9055,7 +9979,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebRestoreOperationFailedEventData": {
@@ -9092,7 +10022,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebRestoreOperationStartedEventData": {
@@ -9129,7 +10065,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebSlotSwapCompletedEventData": {
@@ -9166,7 +10108,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebSlotSwapFailedEventData": {
@@ -9203,7 +10151,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebSlotSwapStartedEventData": {
@@ -9240,7 +10194,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebSlotSwapWithPreviewCancelledEventData": {
@@ -9277,7 +10237,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "WebSlotSwapWithPreviewStartedEventData": {
@@ -9314,7 +10280,13 @@
         }
       },
       "required": [
-        "appEventTypeDetail"
+        "appEventTypeDetail",
+        "name",
+        "clientRequestId",
+        "correlationRequestId",
+        "requestId",
+        "address",
+        "verb"
       ]
     },
     "recordingChannelType": {

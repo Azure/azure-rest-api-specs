@@ -19,7 +19,8 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   alias DataBoxBase = {
     /** Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated. */
-    serialNumber?: string;
+    @madeRequired(ServiceApiVersions.v2024_01_01)
+    serialNumber: string;
 
     /** Name of the current Stage */
     @madeRequired(ServiceApiVersions.v2024_01_01)
