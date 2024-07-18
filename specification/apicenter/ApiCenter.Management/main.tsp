@@ -41,6 +41,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_15_preview: "2024-03-15-preview",
+
+  @doc("Azure API Center 2024-05-01")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_05_01: "2024-05-01",
 }
 
 @@encodedName(Apis.createOrUpdate::parameters.resource,
@@ -112,6 +117,13 @@ enum Versions {
 
 @@clientName(Services.exportMetadataSchema::parameters.body, "payload");
 
+@@encodedName(Services.importFromApim::parameters.body,
+  "application/json",
+  "payload"
+);
+
+@@clientName(Services.importFromApim::parameters.body, "payload");
+
 @@visibility(Azure.Core.Page.nextLink, "read");
 @@visibility(Azure.Core.Page.value, "read");
 /**
@@ -172,6 +184,7 @@ op ArmResourceCreateOrReplaceSync<
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
+  ...IfMatchParameters<TResource>,
 
   @doc("Resource create parameters.")
   @bodyRoot
@@ -194,4 +207,18 @@ model ArmResponseWithEtag<T> {
   ...OkResponse;
   ...Azure.Core.EtagResponseEnvelope;
   ...Body<T>;
+}
+
+model IfMatchParameters<T> {
+  @added(Versions.v2024_05_01)
+  @doc("The request should only proceed if an entity matches this string.")
+  @header("If-Match")
+  ifMatch?: string;
+}
+
+model IfNoneMatchParameters<T> {
+  @added(Versions.v2024_05_01)
+  @header("If-None-Match")
+  @doc("The request should only proceed if no entity matches this string.")
+  ifNoneMatch?: string;
 }

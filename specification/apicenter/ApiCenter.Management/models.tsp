@@ -238,6 +238,11 @@ model ServiceProperties {
   @added(Versions.v2024_03_15_preview)
   @doc("Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.")
   restore?: boolean = false;
+
+  @visibility("read")
+  @added(Versions.v2024_05_01)
+  @doc("The hostname of the Data API.")
+  dataApiHostname?: string;
 }
 
 @doc("The metadata schema export request.")
@@ -264,6 +269,14 @@ model MetadataSchemaProperties {
   @doc("The assignees")
   @extension("x-ms-identifiers", [])
   assignedTo?: MetadataAssignment[];
+}
+
+@added(Versions.v2024_05_01)
+@doc("The import from Azure API Management request.")
+model ImportFromApimRequest {
+  @doc("An entity the metadata schema is requested for.")
+  @minItems(1)
+  sourceResourceIds: string[];
 }
 
 @doc("Assignment metadata")
@@ -542,7 +555,7 @@ model Onboarding {
   instructions?: string;
 
   @maxItems(1)
-  @doc("The location of the developer portal")
+  @doc("The location of the development portal")
   developerPortalUri?: string[];
 }
 
