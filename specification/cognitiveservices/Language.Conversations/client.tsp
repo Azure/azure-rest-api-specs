@@ -64,7 +64,7 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(AnalysisParameters, "AnalysisConfig", "csharp");
 @@clientName(LuisParameters, "LuisConfig", "csharp");
 @@clientName(ConversationParameters, "ConversationConfig", "csharp");
-@@clientName(QuestionAnsweringParameters, "QustionAnsweringConfig", "csharp");
+@@clientName(QuestionAnsweringParameters, "QuestionAnsweringConfig", "csharp");
 @@clientName(AnswersOptions, "QuestionAnswersConfig", "csharp");
 @@clientName(ShortAnswerOptions, "ShortAnswerConfig", "csharp");
 @@clientName(ConversationCallingOptions, "ConversationCallingConfig", "csharp");
