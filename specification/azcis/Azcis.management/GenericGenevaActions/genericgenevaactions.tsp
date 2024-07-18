@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -31,6 +32,10 @@ model GenericGenevaActionsResourceProperties {
 
   @doc("The input mode for geneva action (single/batch)")
   inputMode?: string;
+
+  @doc("The ARM location")
+  @added(Versions.v2024_06_24_preview)
+  armLocation?: string;
 
   @doc("The parameter list for geneva action")
   @extension("x-ms-identifiers", [])

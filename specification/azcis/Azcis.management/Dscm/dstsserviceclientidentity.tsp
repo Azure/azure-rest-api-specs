@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -42,6 +43,10 @@ model DstsServiceClientIdentityResourceProperties {
 
   @doc("Subject names.")
   subjectNames: Array<string>;
+
+  @doc("The ARM location")
+  @added(Versions.v2024_06_24_preview)
+  armLocation?: string;
 
   @doc("Provisioning state")
   @visibility("read")

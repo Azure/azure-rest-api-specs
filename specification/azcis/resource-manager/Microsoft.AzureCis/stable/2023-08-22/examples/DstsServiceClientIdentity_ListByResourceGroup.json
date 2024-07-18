@@ -1,0 +1,43 @@
+{
+  "title": "ListByResourceGroup DstsServiceClientIdentity",
+  "operationId": "DstsServiceClientIdentity_ListByResourceGroup",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2023-08-22"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/dstsServiceClientIdentities/prodUSEastAzcis",
+            "name": "prodUSEastAzcis",
+            "type": "Microsoft.AzureCis/dstsServiceClientIdentities",
+            "properties": {
+              "accountName": "accountName20231019",
+              "dstsInstance": "uswest-dsts.dsts.core.windows.net",
+              "subjectNames": [
+                "cisresourceprovisioning.cistenant.azcis.core.windows.net"
+              ],
+              "groupId": "7fdb1dae-dea3-4cfc-a195-7dd7096ee9a2",
+              "groupName": "",
+              "claimProvisionings": [
+                {
+                  "claimType": "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                  "claimValue": "PlatformServiceViewer",
+                  "scopedToServiceAccount": "DscmDstsTestOnly202310191-uswest.azcis.trafficmanager.net",
+                  "dstsInstance": "uswest-dsts.dsts.core.windows.net",
+                  "scopedServiceTreeId": "",
+                  "scopedServiceAccountGroupName": "",
+                  "scopedServiceAccountGroupId": ""
+                }
+              ],
+              "requiredIpRanges": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

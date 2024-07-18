@@ -1,4 +1,4 @@
-import "../versions.tsp";
+import "./versions.tsp";
 import "./dstsapplication.tsp";
 import "./dsmsallowlist.tsp";
 import "./dstsserviceclientidentity.tsp";

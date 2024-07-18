@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Autorest;
 
@@ -27,6 +28,10 @@ model DsmsAllowlistResourceProperties {
 
   @doc("Guids of Azure storage subscriptions in allowlist.")
   storageSubscriptions?: Array<string>;
+
+  @doc("The ARM location")
+  @added(Versions.v2024_06_24_preview)
+  armLocation?: string;
 
   @doc("Provisioning state")
   @visibility("read")

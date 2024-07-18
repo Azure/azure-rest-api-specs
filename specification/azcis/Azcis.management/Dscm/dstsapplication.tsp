@@ -7,11 +7,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Autorest;
 
 namespace Microsoft.AzureCis;
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("dstsApplication properties")
 model DstsApplicationResourceProperties {
   @doc("Application.")
@@ -26,6 +28,7 @@ model DstsApplicationResourceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-invalid-chars" "Arm resource name must contain only alphanumeric characters"
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("dstsApplication Resource")
 model DstsApplicationResource
   is ProxyResource<DstsApplicationResourceProperties> {
@@ -38,6 +41,7 @@ model DstsApplicationResource
   name: string;
 }
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Application. Optional.")
 model ApplicationAccount {
   @doc("The dSTS instance where the Application resides. Required.")
@@ -81,6 +85,7 @@ model ApplicationAccount {
   applicationClientIdentity?: ApplicationClientIdentity;
 }
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("The application group. Optional.")
 model ApplicationGroup {
   @doc("Group id. Optional.")
@@ -89,8 +94,8 @@ model ApplicationGroup {
   @doc("Name of the Application Group. Required.")
   applicationGroupName: string;
 
-  @doc("Common Name for all Applications inside the group. Required.")
-  applicationName: string;
+  @doc("Common Name for all Applications inside the group. Optional.")
+  applicationName?: string;
 
   @doc("The Service Principal Names of the application. Optional.")
   servicePrincipalNames?: Array<string>;
@@ -131,6 +136,7 @@ model ApplicationGroup {
   applicationClientIdentity?: ApplicationClientIdentity;
 }
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("The claim rule which apply to Application.")
 model ApplicationClaimRule {
   @doc("A claim used to identify client. e.g., group claim, application name claim, object id claim.")
@@ -146,6 +152,7 @@ model ApplicationClaimRule {
   isRegionalEnforced?: boolean = true;
 }
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("A claim used to identify client. e.g., group claim, application name claim, object id claim.")
 model Claim {
   @doc("Type of the claim")
@@ -155,6 +162,7 @@ model Claim {
   value: string;
 }
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Represents application client identity.")
 model ApplicationClientIdentity {
   @doc("Dmsi client.")
@@ -174,6 +182,7 @@ model ApplicationClientIdentity {
   clientTokenIpRangeRestrictions?: Array<IpRange>;
 }
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Dmsi information")
 model DmsiInfo {
   @doc("Dmsi path")
@@ -186,6 +195,7 @@ model DmsiInfo {
   subscriptions: Array<string>;
 }
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Represents certificate based authentication.")
 model CertificateBasedIdentity {
   @doc("Certificate")
@@ -193,6 +203,7 @@ model CertificateBasedIdentity {
   certificates: Array<CertificateInfo>;
 }
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Certification based application client identity.")
 model CertificateInfo {
   @doc("Certificate thumbprint information")
@@ -202,12 +213,14 @@ model CertificateInfo {
   expiryDate: string;
 }
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Represents application subject name base identity.")
 model SubjectNameBasedIdentity {
   @doc("List of subject names for sni based auth")
   subjectNames: Array<string>;
 }
 
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Class for a contiguous range of IP Addresses.")
 model IpRange {
   @doc("From IP address.")
@@ -218,6 +231,7 @@ model IpRange {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
+@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @armResourceOperations
 interface DstsApplications {
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"

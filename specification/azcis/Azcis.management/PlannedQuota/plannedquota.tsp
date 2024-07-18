@@ -30,7 +30,12 @@ model PlannedQuotaResourceProperties {
 
   @doc("Region name")
   @added(Versions.v2023_08_22)
+  @removed(Versions.v2024_06_24_preview)
   region: string;
+
+  @doc("The ARM location")
+  @added(Versions.v2024_06_24_preview)
+  armLocation: string;
 
   @doc("Plan version")
   planVersion?: string;

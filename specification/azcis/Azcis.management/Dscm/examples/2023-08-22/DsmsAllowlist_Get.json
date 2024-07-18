@@ -1,0 +1,34 @@
+{
+  "title": "Get DsmsAllowlist",
+  "operationId": "DsmsAllowlist_Get",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2023-08-22"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/dsmsAllowlists/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/dsmsAllowlists",
+        "properties": {
+          "folderName": "$azcis-frp-regressiontest-test",
+          "targetDsmsEndpoints": [
+            "asiaeast-dsms.dsms.core.windows.net"
+          ],
+          "dnsPatterns": [
+            "*.testdns.foo.com"
+          ],
+          "deploymentSubscriptions": [
+            "ea10c081-aadf-4f87-92dc-39832d2981de"
+          ],
+          "storageSubscriptions": [
+            "ea10c081-aadf-4f87-92dc-39832d2981de"
+          ]
+        }
+      }
+    }
+  }
+}
