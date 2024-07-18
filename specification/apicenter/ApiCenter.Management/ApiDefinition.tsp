@@ -44,7 +44,7 @@ interface ApiDefinitions {
   importSpecification is ArmResourceActionAsync<
     ApiDefinition,
     ApiSpecImportRequest,
-    ApiSpecImportResult
+    Foundations.OperationStatusResult
   >;
   @doc("Exports the API specification.")
   exportSpecification is ArmResourceActionAsync<
