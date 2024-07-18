@@ -34,14 +34,103 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-10
+tag: package-2024-05
+```
+
+### Tag: package-2024-05
+
+These settings apply only when `--tag=package-2024-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-05'
+input-file:
+  - stable/2024-05-01/managedClusters.json
+```
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - preview/2024-05-02-preview/managedClusters.json
+```
+
+### Tag: package-preview-2024-04
+
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - preview/2024-04-02-preview/managedClusters.json
+```
+
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - preview/2024-03-02-preview/managedClusters.json
+```
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-02'
+input-file:
+  - stable/2024-02-01/managedClusters.json
+```
+
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - preview/2024-02-02-preview/managedClusters.json
+```
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-01'
+input-file:
+  - stable/2024-01-01/managedClusters.json
+```
+
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - preview/2024-01-02-preview/managedClusters.json
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11'
+input-file:
+  - stable/2023-11-01/managedClusters.json
+```
+
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - preview/2023-11-02-preview/managedClusters.json
 ```
 
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-10'
+``` yaml $(tag) == 'package-2023-10'
 input-file:
   - stable/2023-10-01/managedClusters.json
 ```
@@ -50,7 +139,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - preview/2023-10-02-preview/managedClusters.json
 ```
@@ -1042,7 +1131,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

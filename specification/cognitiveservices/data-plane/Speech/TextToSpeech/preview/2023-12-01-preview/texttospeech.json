@@ -101,7 +101,7 @@
         "tags": [
           "Project"
         ],
-        "description": "Deletes the project identified by the given ID.",
+        "description": "Deletes the project identified by the given ID. All data (like consent, training set) in this project will be deleted automatically.",
         "operationId": "Projects_Delete",
         "produces": [
           "application/json"
@@ -114,7 +114,7 @@
             "in": "query",
             "name": "forceDelete",
             "type": "boolean",
-            "description": "Set this to true if you want to delete a project with model and endpoint",
+            "description": "Set this to true if you want to delete a project with model and endpoint. Otherwise, the delete operation will fail.",
             "default": false
           },
           {
@@ -281,6 +281,9 @@
         ],
         "description": "Deletes the consent identified by the given ID.",
         "operationId": "Consents_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/PathId"
@@ -854,6 +857,9 @@
         ],
         "description": "Deletes the model identified by the given ID.",
         "operationId": "Models_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/PathId"
@@ -1040,6 +1046,9 @@
         ],
         "description": "Deletes the endpoint identified by the given ID.",
         "operationId": "Endpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/PathUuid"
@@ -1376,6 +1385,9 @@
         ],
         "description": "Deletes the personal voice identified by the given ID.",
         "operationId": "PersonalVoices_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/PathId"
@@ -1405,7 +1417,7 @@
         "tags": [
           "PersonalVoice"
         ],
-        "description": "Creates a new personal voice.",
+        "description": "Creates a new personal voice with audio files in Azure Blob Storage.",
         "operationId": "PersonalVoices_Create",
         "consumes": [
           "application/json"
@@ -1469,7 +1481,7 @@
         "tags": [
           "PersonalVoice"
         ],
-        "description": "Creates a new personal voice.",
+        "description": "Creates a new personal voice with audio files in the client.",
         "operationId": "PersonalVoices_Post",
         "consumes": [
           "multipart/form-data"
@@ -1607,7 +1619,7 @@
   },
   "definitions": {
     "AzureBlobContentSource": {
-      "description": "Azure Blob Storage content.",
+      "description": "Azure Blob Storage content. With the examples below, it represents files https://contoso.blob.core.windows.net/voicecontainer/jessica/*.wav",
       "type": "object",
       "required": [
         "containerUrl",
@@ -1615,19 +1627,22 @@
       ],
       "properties": {
         "containerUrl": {
-          "description": "Azure Blob Storage container URL.",
+          "description": "Azure Blob Storage container URL with [SAS](https://learn.microsoft.com/azure/storage/common/storage-sas-overview). Need both read and list permissions.",
           "type": "string",
-          "format": "url"
+          "format": "url",
+          "example": "https://contoso.blob.core.windows.net/voicecontainer?mySasToken"
         },
         "prefix": {
           "description": "Blob name prefix.",
-          "type": "string"
+          "type": "string",
+          "example": "jessica"
         },
         "extensions": {
           "description": "File name extensions.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "example": ".wav"
           }
         }
       }
@@ -1699,7 +1714,7 @@
           "type": "string"
         },
         "audioUrl": {
-          "description": "The public accessible URL of the consent audio file.",
+          "description": "The public accessible URL of the consent audio file. It's recommended to be an Azure blob URL with [SAS](https://learn.microsoft.com/azure/storage/common/storage-sas-overview). This property is only available in request.",
           "type": "string",
           "format": "uri"
         },
@@ -2014,11 +2029,11 @@
     "ModelCapability": {
       "description": "Model capability",
       "enum": [
-        "InstanceVoice"
+        "PersonalVoice"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ModelKind",
+        "name": "ModelCapability",
         "modelAsString": true
       }
     },
@@ -2562,7 +2577,7 @@
     "QueryFilter": {
       "name": "filter",
       "in": "query",
-      "description": "Filter condition.\r\n            <ul><li><b>Supported properties:</b>projectId, createdDateTime, locale, kind\r\n              </li><li><b>Operators:</b>\r\n                - eq, ne are supported for all properties.\r\n                - gt, ge, lt, le are supported for created.\r\n              </li><li><b>Example:</b>\r\n                - ```filter=projectId eq 'Jessica'``` (filter by project ID)\r\n                - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\r\n                - ```filter=locale eq 'en-US'``` (filter training set and model by locale)\r\n                - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)</li></ul>",
+      "description": "Filter condition.\r\n  - **Supported properties:** projectId, createdDateTime, locale, kind\r\n  - **Operators:**\r\n    - eq, ne are supported for all properties.\r\n    - gt, ge, lt, le are supported for createdDateTime.\r\n  - **Example:**\r\n    - ```filter=projectId eq 'Jessica'``` (filter by project ID)\r\n    - ```filter=kind eq 'ProfessionalVoice'``` (filter project by kind)\r\n    - ```filter=locale eq 'en-US'``` (filter training set and model by locale)\r\n    - ```filter=createdDateTime gt 2022-12-30T23:59:59.99Z``` (filter resource created time after 2023-11-01)",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"

@@ -7,7 +7,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@useDependency(AzureCommunicationRoutingService.Versions.c2023_11_01)
+@useDependency(AzureCommunicationRoutingService.Versions.c2024_01_18_Preview)
 namespace ClientForAcsJobRouter;
 
 // Your customizations here
@@ -42,7 +42,6 @@ interface JobRouterAdministrationRestClient {
   @access(Access.internal, "java")
   upsertExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.upsertExceptionPolicy;
 
-  @access(Access.internal, "java")
   getExceptionPolicy is AzureCommunicationRoutingService.JobRouterAdministrationOperations.getExceptionPolicy;
 
   @access(Access.internal, "java")
@@ -79,21 +78,25 @@ interface JobRouterRestClient {
   @access(Access.internal, "csharp")
   @access(Access.internal, "python")
   @access(Access.internal, "java")
+  @clientName("reclassifyJob")
   reclassify is AzureCommunicationRoutingService.JobRouterOperations.reclassify;
 
   @access(Access.internal, "csharp")
   @access(Access.internal, "python")
   @access(Access.internal, "java")
+  @clientName("cancelJob")
   cancel is AzureCommunicationRoutingService.JobRouterOperations.cancel;
 
   @access(Access.internal, "csharp")
   @access(Access.internal, "python")
   @access(Access.internal, "java")
+  @clientName("completeJob")
   complete is AzureCommunicationRoutingService.JobRouterOperations.complete;
 
   @access(Access.internal, "csharp")
   @access(Access.internal, "python")
   @access(Access.internal, "java")
+  @clientName("closeJob")
   close is AzureCommunicationRoutingService.JobRouterOperations.close;
 
   @access(Access.internal, "csharp")
@@ -104,13 +107,16 @@ interface JobRouterRestClient {
   getQueuePosition is AzureCommunicationRoutingService.JobRouterOperations.getInQueuePosition;
 
   @access(Access.internal, "csharp")
+  @clientName("unassignJob")
   unassign is AzureCommunicationRoutingService.JobRouterOperations.unassign;
 
+  @clientName("acceptJobOffer")
   accept is AzureCommunicationRoutingService.JobRouterOperations.accept;
 
   @access(Access.internal, "csharp")
   @access(Access.internal, "python")
   @access(Access.internal, "java")
+  @clientName("declineJobOffer")
   decline is AzureCommunicationRoutingService.JobRouterOperations.decline;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"

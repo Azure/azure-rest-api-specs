@@ -67,7 +67,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -106,7 +106,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficControllerListResult"
             }
@@ -148,7 +148,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficControllerListResult"
             }
@@ -198,7 +198,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficController"
             }
@@ -323,7 +323,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TrafficController"
             }
@@ -367,25 +367,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -433,7 +430,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AssociationListResult"
             }
@@ -491,7 +488,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Association"
             }
@@ -632,7 +629,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Association"
             }
@@ -684,25 +681,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -750,7 +744,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/FrontendListResult"
             }
@@ -808,7 +802,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Frontend"
             }
@@ -949,7 +943,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Frontend"
             }
@@ -1001,25 +995,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1048,11 +1039,7 @@
         "properties": {
           "$ref": "#/definitions/AssociationProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1129,12 +1116,20 @@
     },
     "AssociationType": {
       "type": "string",
+      "description": "Association Type Enum",
       "enum": [
         "subnets"
       ],
       "x-ms-enum": {
         "name": "AssociationType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "subnets",
+            "value": "subnets",
+            "description": "Association of Type Subnet"
+          }
+        ]
       }
     },
     "AssociationUpdate": {
@@ -1150,6 +1145,7 @@
         },
         "properties": {
           "$ref": "#/definitions/AssociationUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -1170,16 +1166,12 @@
     },
     "Frontend": {
       "type": "object",
-      "description": "Frontend Subresource of Traffic Controller.",
+      "description": "Frontend Sub Resource of Traffic Controller.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/FrontendProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1240,6 +1232,7 @@
     },
     "ProvisioningState": {
       "type": "string",
+      "description": "Resource Provisioning State Enum",
       "enum": [
         "Provisioning",
         "Updating",
@@ -1251,7 +1244,44 @@
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource in Provisioning State"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource in Updating State"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource in Deleting State"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource in Accepted State"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource in Succeeded State"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource in Failed State"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource in Canceled State"
+          }
+        ]
       }
     },
     "ResourceId": {
@@ -1274,11 +1304,7 @@
         "properties": {
           "$ref": "#/definitions/TrafficControllerProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [

@@ -19,7 +19,7 @@ function Get-ChangedFiles($baseCommitish = "HEAD^", $targetCommitish = "HEAD", $
 }
 
 function Get-ChangedSwaggerFiles($changedFiles = (Get-ChangedFiles)) {
-  $changedFiles = Get-ChangedFilesUnderSpecification($changedFiles)
+  $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
 
   $changedSwaggerFiles = $changedFiles.Where({ 
     $_.EndsWith(".json")

@@ -95,6 +95,9 @@ This document lists the set of automated rules that can be validated against swa
 | [INTERNAL_ERROR](#INTERNAL_ERROR) | [OAV100](#INTERNAL_ERROR) |
 | [REQUEST_VALIDATION_ERROR](#REQUEST_VALIDATION_ERROR) | [OAV109](#REQUEST_VALIDATION_ERROR) |
 | [RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE](#RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE) | [OAV111](#RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE) |
+| [ROUNDTRIP_INCONSISTENT_PROPERTY](#ROUNDTRIP_INCONSISTENT_PROPERTY) | |
+| [ROUNDTRIP_MISSING_PROPERTY](#ROUNDTRIP_MISSING_PROPERTY) | |
+| [ROUNDTRIP_ADDITIONAL_PROPERTY](#ROUNDTRIP_ADDITIONAL_PROPERTY) | |
 | [LRO_RESPONSE_CODE](#LRO_RESPONSE_CODE) | |
 | [LRO_RESPONSE_HEADER](#LRO_RESPONSE_HEADER) | |
 | [MISSING_RESOURCE_ID](#MISSING_RESOURCE_ID) | |
@@ -837,6 +840,42 @@ This document lists the set of automated rules that can be validated against swa
 **Description**: Write only property is not allowed to return in response when it's annotated with "x-ms-mutability": ["create", "update"].
 
 **How to fix the violation**: Remove this property from the response in example or in traffic payload.
+
+### <a name="ROUNDTRIP_INCONSISTENT_PROPERTY" />ROUNDTRIP_INCONSISTENT_PROPERTY
+
+**Output Message**: The property’s value in the GET response is different from what was set in the preceding PUT request. If it is a read-only property, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema. If it is immutable (its value cannot be changed after creation), update the swagger definition for this property to mark it with the "x-ms-mutability": ["create", "read"] annotation. If the property has a default value, update the Swagger definition for this property to mark it with "default": <default value> annotation.
+
+**Description**: The property’s value in the GET response is different from what was set in the preceding PUT request. This usually happens when the property is read-only so its value cannot be set by users, or its value can be set in the initial PUT request but cannot be updated afterwards. It is also possible that the property has a default value, and it is set to that value when a null value is included in the PUT request. There are some other cases where ROUNDTRIP_INCONSISTENT_PROPERTY is raised but cannot be fixed in swagger, for which you might need to send exception requests (please refer to the **How to fix the violation section** section below for more details).
+
+**How to fix the violation**:
+- Check if the property is read-only. If yes, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema.
+- Check if the property's value cannot be updated after creation. If yes, update the swagger definition for this property to mark it with the "x-ms-mutability": ["create", "read"] annotation.
+- Check if the property has a static default value that doesn't depend on other properties. If yes, update the Swagger definition for this property to mark it with "default": <default value> annotation.
+- If none of the above applies, check if one of the following behaviors is true for the property, send an exception request, but consider updating your service implementation to fix the behavior:
+  - The property has a dynamic default value that depends on other properties / some other resources (violates [Property Design Best Practices](https://armwiki.azurewebsites.net/rp_onboarding/process/property_design_best_practices.html#readwrite-properties-with-static-default-values)).
+  - The property's value always gets normalized (violates [ARM PRC](https://github.com/Azure/azure-resource-manager-rpc/blob/eec9f32c0357d0421be13c82ced767943013901a/v1.0/resource-api-reference.md#put-resource)).
+
+
+### <a name="ROUNDTRIP_MISSING_PROPERTY" />ROUNDTRIP_MISSING_PROPERTY
+
+**Output Message**: The property is present in the PUT request but is either never returned in the GET response or is returned with a null value. If this is a property that carries a secret such as a password, update the Swagger definition to mark it with the "x-ms-secret": true annotation. If it is write-only but does not carries a secret, update the swagger definition for this property to mark it with the "x-ms-mutability": ["create", "update"] annotation.
+
+**Description**: The property is present in the PUT request, but in the subsequent GET response, it is either never returned or is returned with a null value, which means the property is write-only and is likely to carry a secret.
+
+**How to fix the violation**:
+- Check if the property carries a secret. If yes, mark the property definition with the "x-ms-secret": true annotation.
+- Check if the property does not carry a secret but is still write-only. If yes, mark the property definition with the "x-ms-mutability": ["create", "update"] annotation.
+
+
+### <a name="ROUNDTRIP_ADDITIONAL_PROPERTY" />ROUNDTRIP_ADDITIONAL_PROPERTY
+
+**Output Message**: The property is returned in the GET response, but it is not declared in the PUT request. If it is a read-only property, update the swagger definition for this property to mark it as \"readOnly\": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema. If the property has a default value, update the Swagger definition for this property to mark it with \"default\": <default value> annotation.
+
+**Description**: The property was not in the PUT request, but it is returned in the subsequent GET response. This implies that the property is read-only or has a default value.
+
+**How to fix the violation**:
+- Check if the property is read-only. If yes, update the swagger definition for this property to mark it as "readOnly": true. Alternatively, keep the property in the GET schema but remove it from the PUT schema.
+- Check if the property has a default value. If yes, update the Swagger definition for this property to mark it with "default": <default value> annotation.
 
 ### <a name="LRO_RESPONSE_CODE" />LRO_RESPONSE_CODE
 

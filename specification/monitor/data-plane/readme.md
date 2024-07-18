@@ -28,15 +28,23 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: data-plane
-tag: package-2023-10
+tag: package-2024-02
 ```
 
 
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.Insights/stable/2024-02-01/metricBatch.json
+```
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-10'
+``` yaml $(tag) == 'package-2023-10'
 input-file:
   - Microsoft.Insights/stable/2023-10-01/metricBatch.json
 ```
