@@ -2143,74 +2143,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/resubscribe": {
-      "post": {
-        "tags": [
-          "Resubscribe"
-        ],
-        "summary": "Resubscribe the Elasticsearch Organization.",
-        "operationId": "Organizations_Resubscribe",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Resubscribe Properties",
-            "schema": {
-              "$ref": "#/definitions/ResubscribeProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ResubscribeResponse"
-            }
-          },
-          "202": {
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            },
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Organizations_Resubscribe": {
-            "$ref": "./examples/Organizations_Resubscribe.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -2714,6 +2646,11 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "resubscribeProperties": {
+          "description": "elastic monitor resubscribe properties.",
+          "type": "object",
+          "$ref": "#/definitions/ResubscribeProperties"
         }
       }
     },
@@ -3619,24 +3556,6 @@
         },
         "organizationId": {
           "description": "Organization Id of the Elastic Organization that needs to be resubscribed",
-          "type": "string"
-        }
-      }
-    },
-    "ResubscribeResponse": {
-      "description": "The properties of Resubscribe response object.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ResubscribeResponseProperties"
-        }
-      }
-    },
-    "ResubscribeResponseProperties": {
-      "type": "object",
-      "properties": {
-        "marketplaceSubscriptionId": {
-          "description": "The new Marketplace Subscription Id that is generated as the result of Resubscribe",
           "type": "string"
         }
       }
