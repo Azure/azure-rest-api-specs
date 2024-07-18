@@ -27,8 +27,6 @@ model Service is TrackedResource<ServiceProperties> {
 
 @@added(Service.sku, Versions.v2024_05_01);
 
-
-
 @armResourceOperations
 interface Services {
   @doc("Returns details of the service.")
