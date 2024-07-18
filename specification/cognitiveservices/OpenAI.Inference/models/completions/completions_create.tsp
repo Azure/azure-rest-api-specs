@@ -239,3 +239,16 @@ model CompletionsLogProbabilityModel {
   @clientName("textOffsets", "java")
   textOffset: int32[];
 }
+
+/**
+ * Get completions request body.
+ */
+model GetCompletionsBody {
+  /**
+   * The configuration information for a completions request.
+   * Completions support a wide variety of tasks and generate text that continues from or "completes"
+   * provided prompt data.
+   */
+  @bodyRoot
+  body: CompletionsOptions;
+}
