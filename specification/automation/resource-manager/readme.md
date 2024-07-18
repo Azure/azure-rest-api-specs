@@ -416,6 +416,7 @@ input-file:
 - Microsoft.Automation/preview/2023-05-15-preview/job.json
 - Microsoft.Automation/preview/2023-05-15-preview/jobSchedule.json
 - Microsoft.Automation/preview/2023-05-15-preview/linkedWorkspace.json
+- Microsoft.Automation/preview/2023-05-15-preview/locations.json
 - Microsoft.Automation/preview/2023-05-15-preview/module.json
 - Microsoft.Automation/preview/2023-05-15-preview/operations.json
 - Microsoft.Automation/preview/2023-05-15-preview/package.json
