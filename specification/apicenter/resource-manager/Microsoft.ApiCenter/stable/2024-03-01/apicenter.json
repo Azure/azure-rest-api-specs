@@ -2960,7 +2960,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The API specification was successfully imported."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -3473,10 +3476,6 @@
         }
       }
     },
-    "ApiImportSuccess": {
-      "type": "object",
-      "description": "The API specification was successfully imported."
-    },
     "ApiKind": {
       "type": "string",
       "description": "The kind of the API",
@@ -3681,6 +3680,10 @@
           "description": "Specification version."
         }
       }
+    },
+    "ApiSpecImportResult": {
+      "type": "object",
+      "description": "The API specification was successfully imported."
     },
     "ApiSpecImportSourceFormat": {
       "type": "string",
@@ -4553,20 +4556,23 @@
     },
     "ServiceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Service.",
+      "description": "The service entity.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "SmallString": {
       "type": "string",
