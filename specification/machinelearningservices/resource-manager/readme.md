@@ -115,6 +115,10 @@ suppressions:
     reason: CMK is a short term and not violate the camel case rule.
     where:
       - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
+  - code: PostResponseCodes
+    reason: This API is intend to align with Cognitive service API which has the same behavior https://github.com/Azure/azure-rest-api-specs/blob/efa7e41b82e82359fc76c0cda1856eb6e44448ec/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/preview/2024-04-01-preview/cognitiveservices.json#L2717.
+    where:
+      - $.paths["//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post
   ```
 
 ### Tag: package-2024-04
