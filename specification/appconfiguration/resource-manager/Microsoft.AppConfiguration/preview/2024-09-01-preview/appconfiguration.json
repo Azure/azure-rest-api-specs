@@ -2056,15 +2056,7 @@
         },
         "kind": {
           "description": "The kind of the SAS token.",
-          "type": "string",
-          "enum": [
-            "Primary",
-            "Secondary"
-          ],
-          "x-ms-enum": {
-            "name": "kind",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SasTokenKind"
         }
       }
     },
@@ -2121,7 +2113,7 @@
         },
         "kind": {
           "description": "The kind of the SAS token.",
-          "type": "string",
+          "$ref": "#/definitions/SasTokenKind",
           "readOnly": true
         },
         "value": {
@@ -2142,16 +2134,20 @@
       "properties": {
         "kind": {
           "description": "The kind of the SAS token.",
-          "type": "string",
-          "enum": [
-            "Primary",
-            "Secondary"
-          ],
-          "x-ms-enum": {
-            "name": "kind",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SasTokenKind"
         }
+      }
+    },
+    "SasTokenKind": {
+      "description": "The kind of the SAS token.",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SasTokenKind",
+        "modelAsString": true
       }
     },
     "KeyValueListResult": {
