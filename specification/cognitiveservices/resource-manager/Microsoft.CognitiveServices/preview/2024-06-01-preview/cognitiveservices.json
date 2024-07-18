@@ -6465,16 +6465,26 @@
         }
       ],
       "properties": {
-        "name": {
+        "location": {
           "type": "string",
-          "description": "Name of Content Filter."
+          "description": "The location of the Azure OpenAI Content Filter."
         },
-        "isMultiLevelFilter": {
-          "type": "boolean",
-          "description": "If the Content Filter has multi severity levels(Low, Medium, or High)."
-        },
-        "source": {
-          "$ref": "#/definitions/RaiPolicyContentSource"
+        "properties": {
+          "description": "Azure OpenAI Content Filter Properties.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of Content Filter."
+            },
+            "isMultiLevelFilter": {
+              "type": "boolean",
+              "description": "If the Content Filter has multi severity levels(Low, Medium, or High)."
+            },
+            "source": {
+              "$ref": "#/definitions/RaiPolicyContentSource"
+            }
+          }
         }
       }
     },
