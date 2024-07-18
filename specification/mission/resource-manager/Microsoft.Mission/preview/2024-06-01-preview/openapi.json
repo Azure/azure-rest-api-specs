@@ -5409,11 +5409,11 @@
             "modelAsString": true
           }
         },
-        "principalObjectIds": {
+        "principals": {
           "type": "array",
           "description": "The user, group or service principal object affected by Maintenance Mode",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Principal"
           }
         },
         "justification": {
@@ -5449,11 +5449,11 @@
             "modelAsString": true
           }
         },
-        "principalObjectIds": {
+        "principals": {
           "type": "array",
           "description": "The user, group or service principal object affected by Maintenance Mode",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Principal"
           }
         },
         "justification": {
@@ -5483,6 +5483,32 @@
           "description": "Managed Resource Group location"
         }
       }
+    },
+    "Principal": {
+      "type": "object",
+      "description": "Principal for Maintenance Mode",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The object id associated with the principal"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the object id. We currently allow users, groups, and service principals",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
     },
     "ProvisioningState": {
       "type": "string",
