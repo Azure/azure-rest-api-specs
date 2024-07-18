@@ -101,6 +101,20 @@ suppressions:
     reason: There is a similar usage in existing jobs.
     where:
       - $.definitions["FineTuningJob"].properties["outputs"]
+  - code: AvoidAdditionalProperties
+    reason: This is cause by renaming some definition and already in prod use.
+    where:
+      - $.definitions.EndpointModelProperties.properties.capabilities
+      - $.definitions.EndpointModelProperties.properties.finetuneCapabilities
+  - code: AvoidAdditionalProperties
+    reason: Already in prod use.
+    where:
+      - $.definitions.ManagedOnlineEndpointResourceProperties.properties.mirrorTraffic
+      - $.definitions.ManagedOnlineEndpointResourceProperties.properties.traffic
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: CMK is a short term and not violate the camel case rule.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
   ```
 
 ### Tag: package-2024-04

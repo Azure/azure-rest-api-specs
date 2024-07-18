@@ -597,23 +597,6 @@
               "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
             }
           },
-          "202": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
-            },
-            "headers": {
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
@@ -625,10 +608,6 @@
           "UpdateWorkspaceConnection": {
             "$ref": "./examples/WorkspaceConnection/update.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "put": {
@@ -675,23 +654,6 @@
               "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
             }
           },
-          "202": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
-            },
-            "headers": {
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
@@ -703,10 +665,6 @@
           "CreateWorkspaceConnection": {
             "$ref": "./examples/WorkspaceConnection/create.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -1326,15 +1284,6 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RaiBlocklistItemPropertiesBasicResource"
-              }
-            }
-          },
-          "201": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
               "type": "array",
@@ -2944,7 +2893,7 @@
           "V2WorkspaceConnectionResource"
         ],
         "summary": "Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.",
-        "operationId": "Connection_ListConnectionModels",
+        "operationId": "Connection_ListModels",
         "produces": [
           "application/json"
         ],
@@ -4686,10 +4635,7 @@
       "properties": {
         "keys": {
           "description": "Dictionary of Keys for the endpoint.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
+          "$ref": "#/definitions/AccountApiKeys",
           "x-ms-secret": true
         }
       }
@@ -4756,42 +4702,9 @@
           }
         },
         "systemData": {
-          "$ref": "#/definitions/EndpointModelPropertiesSystemData"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         },
         "version": {
-          "type": "string"
-        }
-      }
-    },
-    "EndpointModelPropertiesSystemData": {
-      "type": "object",
-      "properties": {
-        "createdAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "createdBy": {
-          "type": "string"
-        },
-        "createdByType": {
-          "$ref": "#/definitions/UserType"
-        },
-        "createdOn": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastModifiedBy": {
-          "type": "string"
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/UserType"
-        },
-        "lastModifiedOn": {
-          "format": "date-time",
           "type": "string"
         }
       }
@@ -6519,19 +6432,6 @@
       ],
       "x-ms-discriminator-value": "Azure.Speech"
     },
-    "UserType": {
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "UserType",
-        "modelAsString": true
-      }
-    },
     "UsernamePasswordAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
       "allOf": [
@@ -6914,8 +6814,12 @@
         "enableServiceSideCMKEncryption": {
           "type": "boolean"
         },
+        "enableSimplifiedCmk": {
+          "description": "Flag to tell if simplified CMK should be enabled for this workspace.",
+          "type": "boolean"
+        },
         "enableSoftwareBillOfMaterials": {
-          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace",
+          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace.",
           "type": "boolean"
         },
         "encryption": {
@@ -7120,9 +7024,6 @@
           "type": "string"
         },
         "enableDataIsolation": {
-          "type": "boolean"
-        },
-        "enableSimplifiedCmk": {
           "type": "boolean"
         },
         "enableSoftwareBillOfMaterials": {
