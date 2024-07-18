@@ -1,13 +1,5 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
-import "./catalog.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -20,6 +12,7 @@ model Certificate is ProxyResource<CertificateProperties> {
   /**
    * Serial number of the certificate. Use '.default' to get current active certificate.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @path
   @key("serialNumber")
   @segment("certificates")
@@ -40,7 +33,7 @@ interface Certificates {
   listByCatalog is ArmResourceListByParent<
     Certificate,
     {
-      ...BaseParameters<Certificate>;
+      ...Azure.ResourceManager.Foundations.BaseParameters<Certificate>;
       ...CustomFilterQueryParameter;
       ...CustomTopQueryParameter;
       ...CustomSkipQueryParameter;

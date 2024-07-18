@@ -92,6 +92,12 @@ interface Accounts
   extends TrackedResourceOperations<Account, AccountProperties> {
   @doc("Adds check global name availability operation, normally used if a resource name must be globally unique.")
   checkNameAvailability is checkGlobalNameAvailability;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST REMOVE AT NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Account,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @doc("The location of subscription quota resource.")
@@ -108,6 +114,7 @@ model Location {
 @doc("A subscription quota resource.")
 @parentResource(Location)
 model Quota is ProxyResource<QuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The quota name.")
   @key("quotaName")
   @path
@@ -147,6 +154,7 @@ model FreeTrialProperties {
 @doc("A quota resource for a Playwright service account.")
 @parentResource(Account)
 model AccountQuota is ProxyResource<AccountQuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The Playwright service account quota name.")
   @key("quotaName")
   @path

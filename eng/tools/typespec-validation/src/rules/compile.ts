@@ -50,7 +50,7 @@ export class CompileRule implements Rule {
       if (!gitDiffResult.success) {
         success = false;
         errorOutput += gitDiffResult.errorOutput;
-        errorOutput += `\nFiles has been gerenate/changed after tsp compile, please run \`tsp compile\` and ensure all files are included in the branch.`;
+        errorOutput += `\nFiles have been changed after \`tsp compile\`. Run \`tsp compile\` and ensure all files are included in your change.`;
       }
     }
     return {

@@ -27,15 +27,23 @@ These are the global settings for the vmware.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-10
+tag: package-2023-12
 ```
 
 
+### Tag: package-2023-12
+
+These settings apply only when `--tag=package-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-12'
+input-file:
+  - Microsoft.ConnectedVMwarevSphere/stable/2023-12-01/connectedvmware.json
+```
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-10'
+``` yaml $(tag) == 'package-2023-10'
 input-file:
   - Microsoft.ConnectedVMwarevSphere/stable/2023-10-01/connectedvmware.json
 suppressions:    
@@ -44,6 +52,7 @@ suppressions:
     where:
       - $.definitions.VirtualMachineInstance
 ```
+
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.

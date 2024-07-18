@@ -162,12 +162,7 @@
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NotificationContent"
-            }
+            "$ref": "#/parameters/NotificationMessagesSendRequestBody"
           }
         ],
         "responses": {
@@ -846,8 +841,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1063,6 +1057,16 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "repeatabilityRequestId"
+    },
+    "NotificationMessagesSendRequestBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Details of the message to send.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/NotificationContent"
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

@@ -33,10 +33,10 @@ union WhatsAppMessageButtonSubType {
   string,
 
   @doc("The WhatsApp button sub type is quick reply.")
-  "quickReply",
+  quickReply: "quickReply",
 
   @doc("The WhatsApp button sub type is url.")
-  "url",
+  url: "url",
 }
 
 @doc("The aggregated template status.")
@@ -44,16 +44,16 @@ union MessageTemplateStatus {
   string,
 
   @doc("Message template is approved.")
-  "approved",
+  approved: "approved",
 
   @doc("Message template is rejected.")
-  "rejected",
+  rejected: "rejected",
 
   @doc("Message template is pending.")
-  "pending",
+  pending: "pending",
 
   @doc("Message template is paused.")
-  "paused",
+  paused: "paused",
 }
 
 @doc("The type of the template parameter.")
@@ -328,7 +328,7 @@ model CommunicationChannel {
 @doc("A data stream.")
 model MessageDataStream {
   @key
-  @visibility("read")
+  @visibility("none") // this model is only used as a parameter
   @doc("The stream ID.")
   @clientName("mediaId", "java")
   id: string;
@@ -373,4 +373,11 @@ enum Versions {
   @doc("Azure Communication Messages 2024-02-01 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2024_02_01: "2024-02-01",
+}
+
+@doc("Notification messages send request body.")
+model NotificationMessagesSendRequestBody {
+  @doc("Details of the message to send.")
+  @bodyRoot
+  body: NotificationContent;
 }
