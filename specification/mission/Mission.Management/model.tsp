@@ -75,12 +75,13 @@ model CommunityResource is TrackedResource<CommunityProperties> {
   @doc("The name of the communityResource Resource")
   name: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "New version does not have any breaking change."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "top-level property"
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @doc("The managed service identity for this resource")
-  identity: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  /** The managed service identity for this resource */
+  ...ManagedServiceIdentityProperty;
 }
+
+@@added(CommunityResource.identity,
+  Microsoft.Mission.Versions.v2024_06_01_preview
+);
 
 @doc("Virtual Enclave Model Resource")
 model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
@@ -91,11 +92,13 @@ model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   @path
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "top-level property"
-  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
-  @doc("The managed service identity for this resource")
-  identity: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
+  /** The managed service identity for this resource */
+  ...ManagedServiceIdentityProperty;
 }
+
+@@added(EnclaveResource.identity,
+  Microsoft.Mission.Versions.v2024_06_01_preview
+);
 
 @doc("Workload Model Resource")
 @parentResource(EnclaveResource)
