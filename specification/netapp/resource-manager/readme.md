@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-2024-03` is specified on the comma
 ```yaml $(tag) == 'package-2024-03'
 input-file:
   - Microsoft.NetApp/stable/2024-03-01/netapp.json
-tag: package-preview-2024-03
 ```
 
 ### Tag: package-preview-2024-03
