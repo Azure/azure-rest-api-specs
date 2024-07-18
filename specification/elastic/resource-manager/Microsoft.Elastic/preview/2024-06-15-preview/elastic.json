@@ -2143,68 +2143,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/resubscribe": {
-      "post": {
-        "tags": [
-          "Resubscribe"
-        ],
-        "summary": "Resubscribe the Elasticsearch Organization.",
-        "operationId": "Organizations_Resubscribe",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Resubscribe Properties",
-            "schema": {
-              "$ref": "#/definitions/ResubscribeProperties"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            },
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Organizations_Resubscribe": {
-            "$ref": "./examples/Organizations_Resubscribe.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -2708,6 +2646,9 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "resubscribeProperties": {
+          "$ref": "#/definitions/ResubscribeProperties"
         }
       }
     },
