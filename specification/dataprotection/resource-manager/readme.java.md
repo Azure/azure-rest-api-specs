@@ -10,8 +10,56 @@ namespace: com.microsoft.azure.management.dataprotection
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-dataprotection
+directive:
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}"].put.parameters
+    transform: >
+      $.splice(5, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}"].patch.parameters
+    transform: >
+      $.splice(5, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}"].put.parameters
+    transform: >
+      $.splice(6, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}"].delete.parameters
+    transform: >
+      $.splice(5, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/restore"].post.parameters
+    transform: >
+      $.splice(6, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/stopProtection"].post.parameters
+    transform: >
+      $.splice(6, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/suspendBackups"].post.parameters
+    transform: >
+      $.splice(6, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}/unlockDelete"].post.parameters
+    transform: >
+      $.splice(6, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header  
 ```
-
 
 ### Java multi-api
 

@@ -112,7 +112,13 @@ interface Watchers {
     Watcher,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  update is ArmResourcePatchAsync<Watcher, WatcherProperties>;
+  update is ArmCustomPatchAsync<
+    Watcher,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Watcher,
+      WatcherProperties
+    >
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<Watcher>;
   listByResourceGroup is ArmResourceListByParent<Watcher>;
   listBySubscription is ArmListBySubscription<Watcher>;
