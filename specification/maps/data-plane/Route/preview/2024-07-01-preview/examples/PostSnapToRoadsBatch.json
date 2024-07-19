@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "snapToRoadsBatchRequest": {
+      "batchItems": [
+        {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -122.336729,
+                  47.590868
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            },
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -122.336042,
+                  47.601604
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            }
+          ],
+          "includeSpeedLimit": true,
+          "travelMode": "driving"
+        },
+        {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -122.133269,
+                  47.6470965
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            },
+            {
+              "type": "Feature",
+              "geometry": {
+                "coordinates": [
+                  -74.00487,
+                  40.71396
+                ],
+                "type": "Point"
+              },
+              "properties": {}
+            }
+          ],
+          "travelMode": "driving"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "summary": {
+          "successfulRequests": 1,
+          "totalRequests": 2
+        },
+        "batchItems": [
+          {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "geometry": {
+                  "coordinates": [
+                    -122.336769,
+                    47.590885
+                  ],
+                  "type": "Point"
+                },
+                "properties": {
+                  "inputIndex": 0,
+                  "name": "WA-99 N",
+                  "speedLimitInKilometersPerHour": 80
+                }
+              },
+              {
+                "type": "Feature",
+                "geometry": {
+                  "coordinates": [
+                    -122.336008,
+                    47.601609
+                  ],
+                  "type": "Point"
+                },
+                "properties": {
+                  "inputIndex": 1,
+                  "name": "WA-99 N",
+                  "speedLimitInKilometersPerHour": 80
+                }
+              }
+            ]
+          },
+          {
+            "error": {
+              "code": "BadRequest",
+              "message": "The distance between two consecutive points (-122.133269,47.6470965) (-74.00487,40.71396) must be within 2.5 kilometers of each other."
+            }
+          }
+        ]
+      }
+    }
+  }
+}
