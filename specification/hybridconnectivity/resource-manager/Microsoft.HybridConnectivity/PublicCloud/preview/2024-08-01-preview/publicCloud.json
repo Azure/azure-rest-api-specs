@@ -291,7 +291,7 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/inventory": {
       "get": {
-        "operationId": "Inventory_ListBySolutionConfiguration",
+        "operationId": "Inventory_ListByWidget",
         "tags": [
           "Inventory"
         ],
@@ -324,11 +324,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Inventory_ListBySolutionConfiguration": {
-            "$ref": "./examples/Inventory_ListBySolutionConfiguration.json"
           }
         },
         "x-ms-pageable": {
@@ -1028,6 +1023,24 @@
         }
       }
     },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -1153,8 +1166,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InventoryProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1190,8 +1202,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PublicCloudConnectorProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1252,26 +1263,9 @@
         "hostType"
       ]
     },
-    "PublicCloudConnectorUpdate": {
+    "PublicCloudConnectorPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the PublicCloudConnector.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/PublicCloudConnectorUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PublicCloudConnectorUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the PublicCloudConnector.",
+      "description": "Properties of public cloud connectors.",
       "properties": {
         "awsCloudProfile": {
           "$ref": "#/definitions/AwsCloudProfileUpdate",
@@ -1279,14 +1273,28 @@
         }
       }
     },
+    "PublicCloudConnectorUpdate": {
+      "type": "object",
+      "description": "Public Cloud Connector",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicCloudConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "SolutionConfiguration": {
       "type": "object",
       "description": "Solution Configuration",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SolutionConfigurationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1354,6 +1362,20 @@
         "solutionType"
       ]
     },
+    "SolutionConfigurationPropertiesUpdate": {
+      "type": "object",
+      "description": "Solution configuration resource.",
+      "properties": {
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution"
+        },
+        "solutionSettings": {
+          "$ref": "#/definitions/SolutionSettings",
+          "description": "Solution settings"
+        }
+      }
+    },
     "SolutionConfigurationStatus": {
       "type": "string",
       "description": "Solution Configuration Status.",
@@ -1392,27 +1414,18 @@
     },
     "SolutionConfigurationUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the SolutionConfiguration.",
+      "description": "Solution Configuration",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SolutionConfigurationUpdateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/SolutionConfigurationPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "SolutionConfigurationUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the SolutionConfiguration.",
-      "properties": {
-        "solutionType": {
-          "type": "string",
-          "description": "The type of the solution"
-        },
-        "solutionSettings": {
-          "$ref": "#/definitions/SolutionSettings",
-          "description": "Solution settings"
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      }
+      ]
     },
     "SolutionSettings": {
       "type": "object",
@@ -1509,8 +1522,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SolutionTypeProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
