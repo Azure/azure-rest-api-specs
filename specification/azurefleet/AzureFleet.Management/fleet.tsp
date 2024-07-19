@@ -86,6 +86,14 @@ model FleetProperties {
 
   @doc("Compute Profile to use for running user's workloads.")
   computeProfile: ComputeProfile;
+
+  @doc("Specifies the time at which the Compute Fleet is created.")
+  @visibility("read")
+  timeCreated?: utcDateTime;
+
+  @doc("Specifies the ID which uniquely identifies a Compute Fleet.")
+  @visibility("read")
+  uniqueId?: string;
 }
 
 @doc("Compute Profile to use for running user's workloads.")
