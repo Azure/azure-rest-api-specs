@@ -358,7 +358,7 @@ interface SolutionConfigurations {
 
   @doc("Trigger immediate sync with source cloud")
   syncNow is ArmResourceActionNoResponseContentAsync<
-    SolutionConfiguration, 
+    SolutionConfiguration,
     void
   >;
 }
