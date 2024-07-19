@@ -69,6 +69,17 @@ title: SubscriptionClient
 description: The subscription client
 ```
 
+### Tag: package-2020-03-preview
+
+These settings apply only when `--tag=package-2020-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-preview'
+input-file:
+- Microsoft.Subscription/preview/2020-03-01-preview/subscriptions.json
+title: Initiate, Get and Accept Subscription Changed Directory
+description: Initiate, Get and Accept Subscription Changed Directory
+```
+
 ### Tag: package-2019-10-preview
 
 These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
