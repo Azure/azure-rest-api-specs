@@ -135,7 +135,7 @@ namespace Language.ConversationsClientCustomizations;
 @@clientName(ConversationTaskParameters, "ConversationActionContent", "csharp");
 
 @@clientName(AnalyzeConversationTaskResult,
-  "AnalyzeConversationResult",
+  "AnalyzeConversationActionResult",
   "csharp"
 );
 @@clientName(AnalyzeConversationTaskResultsKind,
@@ -143,10 +143,7 @@ namespace Language.ConversationsClientCustomizations;
   "csharp"
 );
 
-@@clientName(ConversationalTaskResult,
-  "AnalyzeConversationConversationalResult",
-  "csharp"
-);
+@@clientName(ConversationalTaskResult, "ConversationActionResult", "csharp");
 
 @@clientName(MultiLanguageConversationAnalysisInput,
   "MultiLanguageConversationInput"
