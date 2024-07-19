@@ -462,14 +462,7 @@
             "$ref": "#/parameters/resourceNameParameter"
           },
           {
-            "name": "channelName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of the Bot resource."
+            "$ref": "#/parameters/channelNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -521,14 +514,7 @@
             "$ref": "#/parameters/resourceNameParameter"
           },
           {
-            "name": "channelName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 64,
-            "minLength": 2,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-            "description": "The name of the Bot resource."
+            "$ref": "#/parameters/channelNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2071,7 +2057,7 @@
       ]
     },
     "EmailChannelAuthMethod": {
-      "type": "number",
+      "type": "integer",
       "description": "Email channel auth method. 0 Password (Default); 1 Graph.",
       "enum": [
         0,
