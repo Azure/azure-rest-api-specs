@@ -6,6 +6,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApiCenter;
 @doc("The service entity.")
@@ -19,8 +20,11 @@ model Service is TrackedResource<ServiceProperties> {
   @segment("services")
   name: string;
 
+  ...ResourceSkuProperty;
   ...ManagedServiceIdentityProperty;
 }
+
+@@added(Service.sku, Versions.v2024_05_01);
 
 @armResourceOperations
 interface Services {
