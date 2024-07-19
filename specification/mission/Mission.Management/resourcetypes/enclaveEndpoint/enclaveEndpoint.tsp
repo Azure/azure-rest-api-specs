@@ -84,4 +84,8 @@ model EnclaveEndpointProperties {
   @doc("Provisioning State.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  @doc("Whether approval is needed for the connection (True or False).")
+  approvalRequired?: boolean;
 }

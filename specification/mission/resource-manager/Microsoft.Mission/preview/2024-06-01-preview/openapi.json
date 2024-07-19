@@ -1856,6 +1856,80 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/enclaveConnections/{enclaveConnectionName}/approvalCallback": {
+      "post": {
+        "operationId": "EnclaveConnection_ApprovalCallback",
+        "tags": [
+          "EnclaveConnection"
+        ],
+        "description": "Callback that triggers on approval state change.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enclaveConnectionName",
+            "in": "path",
+            "description": "The name of the Enclave Connection Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApprovalCallbackRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApprovalCallbackResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnclaveConnection_ApprovalCallback": {
+            "$ref": "./examples/EnclaveConnection_PostApprovalCallback.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mission/externalConnections": {
       "get": {
         "operationId": "ExternalConnections_ListByResourceGroup",
@@ -3748,6 +3822,58 @@
     }
   },
   "definitions": {
+    "ApprovalCallbackRequest": {
+      "type": "object",
+      "description": "Request body for calling post-action",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id of the item being approved or declined"
+        },
+        "resourceRequestAction": {
+          "type": "string",
+          "description": "Resource request action indicating action which needed to be performed upon calling approval-callback post action",
+          "enum": [
+            "Create",
+            "Delete",
+            "Update",
+            "Reset"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "approvalStatus": {
+          "type": "string",
+          "description": "Approval status indicating 'Approved' or 'Rejected'",
+          "enum": [
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "resourceId",
+        "resourceRequestAction",
+        "approvalStatus"
+      ]
+    },
+    "ApprovalCallbackResponse": {
+      "type": "object",
+      "description": "Response body after handling of approvalCallbackRequest",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Confirmation message indicating the result of the operation."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
       "description": "Managed service identity (system assigned and/or user assigned identities)",
@@ -3876,6 +4002,10 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
           "readOnly": true
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Whether approval is needed for the connection (True or False)."
         }
       },
       "required": [
@@ -3900,6 +4030,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Whether approval is needed for the connection (True or False)."
         }
       }
     },
@@ -4503,6 +4637,10 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
           "readOnly": true
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Whether approval is needed for the connection (True or False)."
         }
       },
       "required": [
@@ -4527,6 +4665,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Whether approval is needed for the connection (True or False)."
         }
       }
     },

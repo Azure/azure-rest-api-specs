@@ -19,6 +19,7 @@ import "./resourcetypes/transitHub/transitHub.tsp";
 import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
 import "./resourcetypes/communityEndpoint/communityEndpoint.tsp";
 import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
+import "./resourcetypes/postActions/approvalcallback.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
@@ -343,6 +344,15 @@ interface EnclaveConnection {
   delete is ArmResourceDeleteAsync<EnclaveConnectionResource>;
   listByResourceGroup is ArmResourceListByParent<EnclaveConnectionResource>;
   listBySubscription is ArmListBySubscription<EnclaveConnectionResource>;
+
+  @doc("Callback that triggers on approval state change.")
+  @armResourceAction(EnclaveConnectionResource)
+  @added(Microsoft.Mission.Versions.v2024_06_01_preview)
+  approvalCallback is ArmResourceActionAsync<
+    EnclaveConnectionResource,
+    ApprovalCallbackRequest,
+    ApprovalCallbackResponse
+  >;
 }
 
 @added(Microsoft.Mission.Versions.v2023_08_01_preview)
