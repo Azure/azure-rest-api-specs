@@ -75,7 +75,7 @@ suppressions:
     reason: The headers property here is meant to describe a set of request headers that the user must pass along 
       in their inferencing API request. For that reason, this needs to be represented as an additionalProperties.
     where:
-      - $.definitions["ServerlessInferenceEndpoint"].properties["headers"]
+      - $.definitions["ServerlessEndpointInferenceEndpoint"].properties["headers"]
   - code: ProvisioningStateSpecifiedForLROPut
     reason: Below APIs are created for migration, the existing API contract is like this and won't able to change, 
       got exceptions from ARM reviewer.
