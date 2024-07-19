@@ -2028,6 +2028,7 @@
         "kind"
       ],
       "type": "object",
+      "discriminator": "kind",
       "properties": {
         "resourceType": {
           "description": "The data plane resource type that the SAS token is authorized to access.",
@@ -2062,28 +2063,47 @@
     },
     "SignedParameters": {
       "description": "The parameters to define the data plane resource scope that the SAS token is authorized to access.",
-      "type": "object",
-      "properties": {
-        "key": {
-          "description": "A filter used to match keys. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering. This is only applicable when the resourceType is Kv.",
-          "type": "string"
-        },
-        "label": {
-          "description": "A filter used to match labels. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering. This is only applicable when the resourceType is Kv.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Am array of tag filters used to match tags.",
-          "type": "array",
-          "items": {
-            "description": "A filter used to match key-values by their tags, specified in `tagName=tagValue` format. This is only applicable when the resourceType is Kv.",
+      "type": "object"
+    },
+    "KvSignedParameters": {
+      "description": "The parameters to define the key value resource scope that the SAS token is authorized to access.",
+      "x-ms-discriminator-value": "Kv",
+      "allOf":{
+        "$ref": "#/definitions/SignedParameters",
+        "properties": {
+          "key": {
+            "description": "A filter used to match keys. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering.",
+            "type": "string"
+          },
+          "label": {
+            "description": "A filter used to match labels. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering.",
+            "type": "string"
+          },
+          "tags": {
+            "description": "Am array of tag filters used to match tags.",
+            "type": "array",
+            "items": {
+              "description": "A filter used to match key-values by their tags, specified in `tagName=tagValue` format.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "SnapshotSignedParameters": {
+      "description": "The parameters to define the snapshot resource scope that the SAS token is authorized to access.",
+      "x-ms-discriminator-value": "Snapshot",
+      "allOf":{
+        "$ref": "#/definitions/SignedParameters",
+        "properties": {
+          "name": {
+            "description": "The name of the snapshot.",
             "type": "string"
           }
         },
-        "name": {
-          "description": "The name of the snapshot. This is only applicable when the resourceType is Snapshot.",
-          "type": "string"
-        }
+        "required":[
+          "name"
+        ]
       }
     },
     "SasTokenGenerationResult": {
