@@ -15,7 +15,6 @@ model AvsPrivateCloudUpdatedEventData extends AvsPrivateCloudEventData {}
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsPrivateCloudFailedEventData extends AvsPrivateCloudEventData {
   /** Failure reason of an event. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   failureMessage: string;
 }
 
@@ -39,7 +38,6 @@ model AvsClusterUpdatedEventData extends AvsClusterEventData {}
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsClusterFailedEventData extends AvsClusterEventData {
   /** Failure reason of an event. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   failureMessage: string;
 }
 
@@ -63,21 +61,18 @@ model AvsScriptExecutionCancelledEventData
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AvsScriptExecutionFailedEventData extends AvsScriptExecutionEventData {
   /** Failure reason of an event. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   failureMessage: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for Microsoft.AVS/privateClouds events. */
 model AvsPrivateCloudEventData {
   /** Id of the operation that caused this event. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   operationId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for Microsoft.AVS/clusters events. */
 model AvsClusterEventData {
   /** Id of the operation that caused this event. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   operationId: string;
 
   /** Hosts added to the cluster in this event, if any. */
@@ -96,11 +91,9 @@ model AvsClusterEventData {
 /** Schema of the Data property of an EventGridEvent for Microsoft.AVS/scriptExecutions events. */
 model AvsScriptExecutionEventData {
   /** Id of the operation that caused this event. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   operationId: string;
 
   /** Cmdlet referenced in the execution that caused this event. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   cmdletId: string;
 
   /** Stdout outputs from the execution, if any. */

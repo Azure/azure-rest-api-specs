@@ -7,11 +7,9 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted). */
 model DeviceLifeCycleEventProperties {
   /** The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   deviceId: string;
 
   /** Name of the IoT Hub where the device was created or deleted. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   hubName: string;
 
   /** Information about the device twin, which is the cloud representation of application device metadata. */
@@ -21,7 +19,6 @@ model DeviceLifeCycleEventProperties {
 /** Metadata information for the properties JSON document. */
 model DeviceTwinMetadata {
   /** The ISO8601 timestamp of the last time the properties were updated. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   lastUpdated: string;
 }
 
@@ -39,7 +36,6 @@ model DeviceTwinProperties {
 /** Information about the device twin, which is the cloud representation of application device metadata. */
 model DeviceTwinInfo {
   /** Authentication type used for this device: either SAS, SelfSigned, or CertificateAuthority. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   authenticationType: string;
 
   /** Count of cloud to device messages sent to this device. */
@@ -47,19 +43,15 @@ model DeviceTwinInfo {
   cloudToDeviceMessageCount: float32;
 
   /** Whether the device is connected or disconnected. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   connectionState: string;
 
   /** The unique identifier of the device twin. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   deviceId: string;
 
   /** A piece of information that describes the content of the device twin. Each etag is guaranteed to be unique per device twin. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   etag: string;
 
   /** The ISO8601 timestamp of the last activity. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   lastActivityTime: string;
 
   //TODO: something here needs to change
@@ -68,11 +60,9 @@ model DeviceTwinInfo {
   properties: DeviceTwinInfoProperties;
 
   /** Whether the device twin is enabled or disabled. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   status: string;
 
   /** The ISO8601 timestamp of the last device twin status update. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   statusUpdateTime: string;
 
   /** An integer that is incremented by one each time the device twin is updated. */
@@ -88,15 +78,12 @@ model DeviceTwinInfo {
 /** Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected). */
 model DeviceConnectionStateEventProperties {
   /** The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   deviceId: string;
 
   /** The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = `@` ; $ '. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   moduleId: string;
 
   /** Name of the IoT Hub where the device was created or deleted. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   hubName: string;
 
   /** Information about the device connection state event. */
@@ -119,7 +106,6 @@ model DeviceTelemetryEventProperties {
 /** Information about the device connection state event. */
 model DeviceConnectionStateEventInfo {
   /** Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   sequenceNumber: string;
 }
 
@@ -148,11 +134,9 @@ model IotHubDeviceTelemetryEventData extends DeviceTelemetryEventProperties {}
 /** The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate. */
 model DeviceTwinInfoX509Thumbprint {
   /** Primary thumbprint for the x509 certificate. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   primaryThumbprint: string;
 
   /** Secondary thumbprint for the x509 certificate. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   secondaryThumbprint: string;
 }
 

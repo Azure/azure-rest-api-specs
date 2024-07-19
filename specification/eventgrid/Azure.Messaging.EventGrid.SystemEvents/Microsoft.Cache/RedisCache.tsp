@@ -8,11 +8,9 @@ namespace Microsoft.EventGrid.SystemEvents {
     timestamp: utcDateTime;
 
     /** The name of this event. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     name: string;
 
     /** The status of this event. Failed or  succeeded */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     status: string;
   };
 

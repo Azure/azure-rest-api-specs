@@ -12,11 +12,9 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceFhirAccount: string;
 
     /** Id of HL7 FHIR resource. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceFhirId: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
@@ -31,11 +29,9 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceFhirAccount: string;
 
     /** Id of HL7 FHIR resource. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceFhirId: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
@@ -50,11 +46,9 @@ namespace Microsoft.EventGrid.SystemEvents {
     resourceType: HealthcareFhirResourceType;
 
     /** Domain name of FHIR account for this resource. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceFhirAccount: string;
 
     /** Id of HL7 FHIR resource. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     resourceFhirId: string;
 
     /** VersionId of HL7 FHIR resource. It changes when the resource is created, updated, or deleted(soft-deletion). */
@@ -65,23 +59,18 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event. */
   model HealthcareDicomImageCreatedEventData {
     /** Data partition name */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     partitionName: string;
 
     /** Unique identifier for the Study */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     imageStudyInstanceUid: string;
 
     /** Unique identifier for the Series */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     imageSeriesInstanceUid: string;
 
     /** Unique identifier for the DICOM Image */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     imageSopInstanceUid: string;
 
     /** Domain name of the DICOM account for this image. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     serviceHostName: string;
 
     /** Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service. */
@@ -92,23 +81,18 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event. */
   model HealthcareDicomImageDeletedEventData {
     /** Data partition name */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     partitionName: string;
 
     /** Unique identifier for the Study */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     imageStudyInstanceUid: string;
 
     /** Unique identifier for the Series */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     imageSeriesInstanceUid: string;
 
     /** Unique identifier for the DICOM Image */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     imageSopInstanceUid: string;
 
     /** Host name of the DICOM account for this image. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     serviceHostName: string;
 
     /** Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service. */
@@ -119,23 +103,18 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageUpdated event. */
   model HealthcareDicomImageUpdatedEventData {
     /** Data partition name */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     partitionName: string;
 
     /** Unique identifier for the Study */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     imageStudyInstanceUid: string;
 
     /** Unique identifier for the Series */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     imageSeriesInstanceUid: string;
 
     /** Unique identifier for the DICOM Image */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     imageSopInstanceUid: string;
 
     /** Domain name of the DICOM account for this image. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     serviceHostName: string;
 
     /** Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation, updation and deletion within the service. */

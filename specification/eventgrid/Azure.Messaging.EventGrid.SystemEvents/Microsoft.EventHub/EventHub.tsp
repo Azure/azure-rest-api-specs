@@ -6,15 +6,12 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for a Microsoft.EventHub.CaptureFileCreated event. */
 model EventHubCaptureFileCreatedEventData {
   /** The path to the capture file. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   fileUrl: string;
 
   /** The file type of the capture file. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   fileType: string;
 
   /** The shard ID. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   partitionId: string;
 
   /** The file size. */

@@ -134,30 +134,25 @@ model ApiManagementGatewayApiRemovedEventData {
 
 alias ApiManagementBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>` */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   resourceUri: string;
 };
 
 alias ApiGatewayBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>` */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   resourceUri: string;
 };
 
 alias ApiGatewayHostnameBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>` */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   resourceUri: string;
 };
 
 alias ApiGatewayCertificateBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>` */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   resourceUri: string;
 };
 
 alias ApiGatewayApiBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>` */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   resourceUri: string;
 };

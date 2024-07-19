@@ -15,7 +15,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     ...SignalRServiceBaseEventdata;
 
     /** The message of error that cause the client connection disconnected. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     errorMessage: string;
   }
 
@@ -25,15 +24,12 @@ namespace Microsoft.EventGrid.SystemEvents {
     timestamp: utcDateTime;
 
     /** The hub of connected client connection. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     hubName: string;
 
     /** The connection Id of connected client connection. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     connectionId: string;
 
     /** The user Id of connected client connection. */
-    @madeRequired(ServiceApiVersions.v2024_01_01)
     userId: string;
   };
 }

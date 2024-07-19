@@ -6,11 +6,9 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelRegistered event. */
 model MachineLearningServicesModelRegisteredEventData {
   /** The name of the model that was registered. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   modelName: string;
 
   /** The version of the model that was registered. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   modelVersion: string;
 
   /** The tags of the model that was registered. */
@@ -25,15 +23,12 @@ model MachineLearningServicesModelRegisteredEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.ModelDeployed event. */
 model MachineLearningServicesModelDeployedEventData {
   /** The name of the deployed service. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   serviceName: string;
 
   /** The compute type (e.g. ACI, AKS) of the deployed service. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   serviceComputeType: string;
 
   /** A common separated list of model IDs. The IDs of the models deployed in the service. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   modelIds: string;
 
   /** The tags of the deployed service. */
@@ -48,19 +43,15 @@ model MachineLearningServicesModelDeployedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunCompleted event. */
 model MachineLearningServicesRunCompletedEventData {
   /** The ID of the experiment that the run belongs to. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   experimentId: string;
 
   /** The name of the experiment that the run belongs to. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   experimentName: string;
 
   /** The ID of the Run that was completed. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   runId: string;
 
   /** The Run Type of the completed Run. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   runType: string;
 
   /** The tags of the completed Run. */
@@ -75,23 +66,18 @@ model MachineLearningServicesRunCompletedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event. */
 model MachineLearningServicesDatasetDriftDetectedEventData {
   /** The ID of the data drift monitor that triggered the event. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   dataDriftId: string;
 
   /** The name of the data drift monitor that triggered the event. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   dataDriftName: string;
 
   /** The ID of the Run that detected data drift. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   runId: string;
 
   /** The ID of the base Dataset used to detect drift. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   baseDatasetId: string;
 
   /** The ID of the target Dataset used to detect drift. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   targetDatasetId: string;
 
   /** The coefficient result that triggered the event. */
@@ -110,19 +96,15 @@ model MachineLearningServicesDatasetDriftDetectedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.RunStatusChanged event. */
 model MachineLearningServicesRunStatusChangedEventData {
   /** The ID of the experiment that the Machine Learning Run belongs to. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   experimentId: string;
 
   /** The name of the experiment that the Machine Learning Run belongs to. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   experimentName: string;
 
   /** The ID of the Machine Learning Run. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   runId: string;
 
   /** The Run Type of the Machine Learning Run. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   runType: string;
 
   /** The tags of the Machine Learning Run. */
@@ -134,6 +116,5 @@ model MachineLearningServicesRunStatusChangedEventData {
   runProperties: Record<unknown>;
 
   /** The status of the Machine Learning Run. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   runStatus: string;
 }
