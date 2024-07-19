@@ -117,51 +117,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/subscriptionStatuses": {
-      "get": {
-        "tags": [
-          "CreateResource"
-        ],
-        "summary": "Informs if the current subscription is being already monitored for selected Datadog organization.",
-        "operationId": "CreationSupported_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/DatadogOrganizationId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CreateResourceSupportedResponseList"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "CreationSupported_List": {
-            "$ref": "./examples/CreationSupported_List.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Datadog/subscriptionStatuses/default": {
       "get": {
         "tags": [
