@@ -547,6 +547,14 @@ model GalleryImageProperties {
   @doc("The observed state of gallery images")
   @visibility("read")
   status?: GalleryImageStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("Resource ID of the source virtual machine from whose OS disk the gallery image is created.")
+  sourceVirtualMachineId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualMachineInstance";
+    }
+  ]>;
 }
 
 @doc("This is the gallery image definition identifier.")
@@ -1115,6 +1123,11 @@ model VirtualHardDiskProperties {
   @doc("Physical sector in bytes")
   physicalSectorBytes?: int32;
 
+  @added(Versions.v2024_05_01_preview)
+  @doc("URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.")
+  @secret
+  downloadUrl?: string;
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
@@ -1149,6 +1162,14 @@ model VirtualHardDiskStatus {
 
   @doc("Provisioning status of the vhd")
   provisioningStatus?: VirtualHardDiskStatusProvisioningStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("The download status of the virtual hard disk")
+  downloadStatus?: VirtualHardDiskDownloadStatus;
+
+  @added(Versions.v2024_05_01_preview)
+  @doc("The upload status of the virtual hard disk")
+  uploadStatus?: VirtualHardDiskUploadStatus;
 }
 
 @doc("VHD Status provisioning status")
@@ -1160,10 +1181,51 @@ model VirtualHardDiskStatusProvisioningStatus {
   status?: Status;
 }
 
+@added(Versions.v2024_05_01_preview)
+@doc("The download status of the virtual hard disk")
+model VirtualHardDiskDownloadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
+  @doc("The downloaded sized of the virtual hard disk in MB")
+  downloadedSizeInMB?: int64;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("The upload status of the virtual hard disk")
+model VirtualHardDiskUploadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
+  @doc("The uploaded sized of the virtual hard disk in MB")
+  uploadedSizeInMB?: int64;
+
+  @doc("The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
   @doc("Resource tags")
   tags?: Record<string>;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("Request for uploading virtual hard disk.")
+model VirtualHardDiskUploadRequest {
+  @doc("The Azure managed disk SAS URL to upload the virtual hard disk to.")
+  @secret
+  azureManagedDiskUploadUrl: string;
+}
+
+@added(Versions.v2024_05_01_preview)
+@doc("Response for uploading virtual hard disk.")
+model VirtualHardDiskUploadResponse {
+  @doc("The ARM ID for a Virtual Hard Disk.")
+  virtualHardDiskId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualHardDisks";
+    }
+  ]>;
+
+  @doc("The upload status of the virtual hard disk")
+  uploadStatus?: VirtualHardDiskUploadStatus;
 }
 
 @doc("Properties under the virtual machine instance resource")

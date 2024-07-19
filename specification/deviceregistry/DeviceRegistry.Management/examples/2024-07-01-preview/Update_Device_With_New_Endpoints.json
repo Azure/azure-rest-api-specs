@@ -1,0 +1,87 @@
+{
+  "title": "Update_Device_With_New_Endpoints",
+  "operationId": "Devices_Update",
+  "description": "Update a device with new endpoints",
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "deviceName": "updateDeviceEndpoints",
+    "properties": {
+      "tags": {
+        "site": "building-1"
+      },
+      "properties": {
+        "enabled": true,
+        "endpoints": {
+          "assigned": [
+            {
+              "type": "Microsoft.EventGrid",
+              "address": "https://myneweventgridtopic.westeurope-1.eventgrid.azure.net/api/events"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/devices/my-device",
+        "name": "my-device",
+        "type": "Microsoft.DeviceRegistry/devices",
+        "location": "West Europe",
+        "etag": "\"0100f181-0000-0700-0000-63743ecc0000\"",
+        "tags": {
+          "site": "building-1"
+        },
+        "systemData": {
+          "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "createdByType": "Application",
+          "createdAt": "2022-11-16T00:36:43.2516899Z",
+          "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+        },
+        "properties": {
+          "uuid": "cd2cc3a6-ce05-4fa9-85a8-c7109ed7cb22",
+          "enabled": true,
+          "externalDeviceId": "cd2cc3a6-ce05-4fa9-85a8-c7109ed7cb22",
+          "deviceTemplateId": "f293g0a7-772c-1933-b086-19a16381e5t4",
+          "manufacturer": "Unfounded Manufacturer",
+          "model": "UnfoundedDeviceModel01",
+          "operatingSystem": "WindowsIoT",
+          "identity": {
+            "principalId": "addf0ar6-80d4-4cab-ge25-12375e40e99k",
+            "tenantId": "eg77b67n-0971-5d91-e8w1-11sh92dch293"
+          },
+          "attributes": {
+            "deviceType": "sensor",
+            "deviceOwner": "IT",
+            "deviceCategory": 4
+          },
+          "endpoints": {
+            "assigned": [
+              {
+                "type": "Microsoft.EventGrid",
+                "address": "https://myneweventgridtopic.westeurope-1.eventgrid.azure.net/api/events"
+              }
+            ],
+            "unassigned": [
+              {
+                "type": "Microsoft.EventGrid",
+                "address": "https://myoldeventgridtopic.westeurope-1.eventgrid.azure.net/api/events"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
