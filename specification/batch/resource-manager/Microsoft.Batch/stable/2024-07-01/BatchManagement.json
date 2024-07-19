@@ -1098,67 +1098,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Batch/locations/{locationName}/cloudServiceSkus": {
-      "get": {
-        "tags": [
-          "Location"
-        ],
-        "operationId": "Location_ListSupportedCloudServiceSkus",
-        "x-ms-examples": {
-          "LocationListCloudServiceSkus": {
-            "$ref": "./examples/LocationListCloudServiceSkus.json"
-          }
-        },
-        "description": "Gets the list of Batch supported Cloud Service VM sizes available at the given location.",
-        "parameters": [
-          {
-            "name": "locationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The region for which to retrieve Batch service supported SKUs."
-          },
-          {
-            "name": "maxresults",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "The maximum number of items to return in the response."
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData filter expression. Valid properties for filtering are \"familyName\"."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation was successful. The response contains the Batch service supported Cloud Service VM sizes for the subscription in the specified location.",
-            "schema": {
-              "$ref": "#/definitions/SupportedSkusResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Batch/operations": {
       "get": {
         "tags": [
@@ -2131,14 +2070,8 @@
         "operationId": "Pool_Create",
         "description": "Creates a new pool inside the specified account.",
         "x-ms-examples": {
-          "CreatePool - Minimal CloudServiceConfiguration": {
-            "$ref": "./examples/PoolCreate_MinimalCloudServiceConfiguration.json"
-          },
           "CreatePool - Minimal VirtualMachineConfiguration": {
             "$ref": "./examples/PoolCreate_MinimalVirtualMachineConfiguration.json"
-          },
-          "CreatePool - Full CloudServiceConfiguration": {
-            "$ref": "./examples/PoolCreate_CloudServiceConfiguration.json"
           },
           "CreatePool - ResourceTags": {
             "$ref": "./examples/PoolCreate_ResourceTags.json"
@@ -2175,6 +2108,9 @@
           },
           "CreatePool - VirtualMachineConfiguration OSDisk": {
             "$ref": "./examples/PoolCreate_VirtualMachineConfiguration_ManagedOSDisk.json"
+          },
+          "CreatePool - Tags": {
+            "$ref": "./examples/PoolCreate_Tags.json"
           }
         },
         "parameters": [
@@ -3064,7 +3000,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/AzureResource"
         }
       ],
       "description": "Contains information about an Azure Batch account."
@@ -3229,7 +3165,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/AzureProxyResource"
         }
       ],
       "description": "Contains information about an application in a Batch account."
@@ -3263,7 +3199,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/AzureProxyResource"
         }
       ],
       "description": "An application package which represents a particular version of an application."
@@ -3365,7 +3301,7 @@
       },
       "description": "Quotas associated with a Batch region for a particular subscription."
     },
-    "Resource": {
+    "AzureResource": {
       "type": "object",
       "properties": {
         "id": {
@@ -3400,7 +3336,7 @@
       "description": "A definition of an Azure resource.",
       "x-ms-azure-resource": true
     },
-    "ProxyResource": {
+    "AzureProxyResource": {
       "type": "object",
       "properties": {
         "id": {
@@ -3422,6 +3358,13 @@
           "readOnly": true,
           "type": "string",
           "description": "The ETag of the resource, used for concurrency statements."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The tags of the resource."
         }
       },
       "description": "A definition of an Azure resource.",
@@ -3433,7 +3376,8 @@
       "default": "Enabled",
       "enum": [
         "Enabled",
-        "Disabled"
+        "Disabled",
+        "SecuredByPerimeter"
       ],
       "x-ms-enum": {
         "name": "PublicNetworkAccessType",
@@ -3446,6 +3390,10 @@
           {
             "value": "Disabled",
             "description": "Disables public connectivity and enables private connectivity to Azure Batch Service through private endpoint resource."
+          },
+          {
+            "value": "SecuredByPerimeter",
+            "description": "Secures connectivity to Azure Batch through NSP configuration."
           }
         ]
       }
@@ -3731,7 +3679,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/AzureProxyResource"
         }
       ],
       "description": "Contains information about a certificate."
@@ -3747,7 +3695,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/AzureProxyResource"
         }
       ],
       "description": "Contains information about a certificate."
@@ -3829,7 +3777,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/AzureProxyResource"
         }
       ],
       "description": "Contains the information for a detector."
@@ -3855,7 +3803,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/AzureProxyResource"
         }
       ],
       "description": "Contains information about a private link resource."
@@ -3899,7 +3847,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/AzureProxyResource"
         }
       ],
       "description": "Contains information about a private link resource."
@@ -4053,7 +4001,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/AzureProxyResource"
         }
       ],
       "description": "Contains information about a pool."
@@ -4145,12 +4093,11 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the pool. All VMs in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available VM sizes, see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfiguration",
-          "title": "This property describes how the pool nodes will be deployed - using Cloud Services or Virtual Machines.",
-          "description": "Using CloudServiceConfiguration specifies that the nodes should be creating using Azure Cloud Services (PaaS), while VirtualMachineConfiguration uses Azure Virtual Machines (IaaS)."
+          "title": "This property describes the virtual machines that the pool nodes will be deployed on."
         },
         "currentDedicatedNodes": {
           "type": "integer",
@@ -4344,15 +4291,9 @@
     "DeploymentConfiguration": {
       "type": "object",
       "properties": {
-        "cloudServiceConfiguration": {
-          "$ref": "#/definitions/CloudServiceConfiguration",
-          "title": "The cloud service configuration for the pool.",
-          "description": "This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. This property cannot be specified if the Batch account was created with its poolAllocationMode property set to 'UserSubscription'."
-        },
         "virtualMachineConfiguration": {
           "$ref": "#/definitions/VirtualMachineConfiguration",
-          "title": "The virtual machine configuration for the pool.",
-          "description": "This property and cloudServiceConfiguration are mutually exclusive and one of the properties must be specified."
+          "title": "The virtual machine configuration for the pool."
         }
       },
       "title": "Deployment configuration properties."
@@ -4473,7 +4414,7 @@
         "storeLocation": {
           "type": "string",
           "title": "The location of the certificate store on the compute node into which to install the certificate.",
-          "description": "The default value is currentUser. This property is applicable only for pools configured with Windows nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows image reference). For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory.",
+          "description": "The default value is currentUser. This property is applicable only for pools configured with Windows compute nodes. For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory.",
           "enum": [
             "CurrentUser",
             "LocalMachine"
@@ -4496,7 +4437,7 @@
         "storeName": {
           "type": "string",
           "title": "The name of the certificate store on the compute node into which to install the certificate.",
-          "description": "This property is applicable only for pools configured with Windows nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows image reference). Common store names include: My, Root, CA, Trust, Disallowed, TrustedPeople, TrustedPublisher, AuthRoot, AddressBook, but any custom store name can also be used. The default value is My."
+          "description": "This property is applicable only for pools configured with Windows compute nodes. Common store names include: My, Root, CA, Trust, Disallowed, TrustedPeople, TrustedPublisher, AuthRoot, AddressBook, but any custom store name can also be used. The default value is My."
         },
         "visibility": {
           "type": "array",
@@ -4993,6 +4934,16 @@
           "type": "string",
           "title": "The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionId}.",
           "description": "This property is mutually exclusive with other properties. The Azure Compute Gallery Image must have replicas in the same region as the Azure Batch account. For information about the firewall settings for the Batch node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
+        },
+        "sharedGalleryImageId": {
+          "type": "string",
+          "title": "The shared gallery image unique identifier",
+          "description": "This property is mutually exclusive with other properties and can be fetched from shared gallery image GET call."
+        },
+        "communityGalleryImageId": {
+          "type": "string",
+          "title": "The community gallery image unique identifier",
+          "description": "This property is mutually exclusive with other properties and can be fetched from community gallery image GET call."
         }
       },
       "title": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation."
@@ -5090,7 +5041,7 @@
         "loginMode": {
           "type": "string",
           "title": "Login mode for user",
-          "description": "Specifies login mode for the user. The default value for VirtualMachineConfiguration pools is interactive mode and for CloudServiceConfiguration pools is batch mode.",
+          "description": "Specifies login mode for the user. The default value is Interactive.",
           "enum": [
             "Batch",
             "Interactive"
@@ -5240,6 +5191,14 @@
               }
             ]
           }
+        },
+        "containerHostBatchBindMounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerHostBatchBindMountEntry"
+          },
+          "title": "The paths you want to mounted to container task.",
+          "description": "If this array is null or be not present, container task will mount entire temporary disk drive in windows (or AZ_BATCH_NODE_ROOT_DIR in Linux). It won't' mount any data paths into container if this array is set as empty."
         }
       },
       "required": [
@@ -5457,6 +5416,63 @@
         ]
       }
     },
+    "ContainerHostDataPath": {
+      "type": "string",
+      "title": "The paths which will be mounted to container task's container.",
+      "enum": [
+        "Shared",
+        "Startup",
+        "VfsMounts",
+        "Task",
+        "JobPrep",
+        "Applications"
+      ],
+      "x-ms-enum": {
+        "name": "ContainerHostDataPath",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Shared",
+            "description": "The path for multi-instances task to shared their files."
+          },
+          {
+            "value": "Startup",
+            "description": "The path for start task."
+          },
+          {
+            "value": "VfsMounts",
+            "description": "The path contains all virtual file systems are mounted on this node."
+          },
+          {
+            "value": "Task",
+            "description": "The task path."
+          },
+          {
+            "value": "JobPrep",
+            "description": "The job-prep task path."
+          },
+          {
+            "value": "Applications",
+            "description": "The applications path."
+          }
+        ]
+      }
+    },
+    "ContainerHostBatchBindMountEntry": {
+      "type": "object",
+      "title": "The entry of path and mount mode you want to mount into task container.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ContainerHostDataPath",
+          "title": "The path which be mounted to container customer can select."
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "title": "Mount this source path as read-only mode or not. Default value is false (read/write mode).",
+          "description": "For Linux, if you mount this path as a read/write mode, this does not mean that all users in container have the read/write access for the path, it depends on the access in host VM. If this path is mounted read-only, all users within the container will not be able to modify the path."
+        }
+      }
+    },
     "DiffDiskPlacement": {
       "type": "string",
       "title": "Specifies the ephemeral disk placement for operating system disk for all VMs in the pool.",
@@ -5566,7 +5582,7 @@
         "subnetId": {
           "type": "string",
           "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
-          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For cloudServiceConfiguration pools, only 'classic' VNETs are supported. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. Enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
           "externalDocs": {
             "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
             "description": "Setting up RBAC for Azure Batch VNets"
@@ -5598,12 +5614,10 @@
         "endpointConfiguration": {
           "$ref": "#/definitions/PoolEndpointConfiguration",
           "title": "The configuration for endpoints on compute nodes in the Batch pool.",
-          "description": "Pool endpoint configuration is only supported on pools with the virtualMachineConfiguration property."
         },
         "publicIPAddressConfiguration": {
           "$ref": "#/definitions/PublicIPAddressConfiguration",
           "title": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
-          "description": "This property is only supported on Pools with the virtualMachineConfiguration property."
         },
         "enableAcceleratedNetworking": {
           "type": "boolean",
@@ -5616,25 +5630,6 @@
         }
       },
       "description": "The network configuration for a pool."
-    },
-    "CloudServiceConfiguration": {
-      "type": "object",
-      "properties": {
-        "osFamily": {
-          "type": "string",
-          "title": "The Azure Guest OS family to be installed on the virtual machines in the pool.",
-          "description": "Possible values are: 2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1. 3 - OS Family 3, equivalent to Windows Server 2012. 4 - OS Family 4, equivalent to Windows Server 2012 R2. 5 - OS Family 5, equivalent to Windows Server 2016. 6 - OS Family 6, equivalent to Windows Server 2019. For more information, see Azure Guest OS Releases (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases)."
-        },
-        "osVersion": {
-          "type": "string",
-          "title": "The Azure Guest OS version to be installed on the virtual machines in the pool.",
-          "description": "The default value is * which specifies the latest operating system version for the specified OS family."
-        }
-      },
-      "required": [
-        "osFamily"
-      ],
-      "title": "The configuration for nodes in a pool based on the Azure Cloud Services platform."
     },
     "MetadataItem": {
       "type": "object",
@@ -6393,6 +6388,10 @@
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
           "title": "The storage account type for managed disk."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/VMDiskSecurityProfile",
+          "title": "Specifies the security profile for the managed disk."
         }
       }
     },
@@ -6403,7 +6402,8 @@
           "type": "string",
           "title": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.",
           "enum": [
-            "trustedLaunch"
+            "trustedLaunch",
+            "confidentialVM"
           ],
           "x-ms-enum": {
             "name": "SecurityTypes",
@@ -6412,6 +6412,10 @@
               {
                 "value": "trustedLaunch",
                 "description": "Trusted launch protects against advanced and persistent attack techniques."
+              },
+              {
+                "value": "confidentialVM",
+                "description": "Azure confidential computing offers confidential VMs are for tenants with high security and confidentiality requirements. These VMs provide a strong, hardware-enforced boundary to help meet your security needs. You can use confidential VMs for migrations without making changes to your code, with the platform protecting your VM's state from being read or modified."
               }
             ]
           }
@@ -6479,8 +6483,7 @@
         },
         "rollingUpgradePolicy": {
           "$ref": "#/definitions/RollingUpgradePolicy",
-          "title": "The configuration parameters used while performing a rolling upgrade.",
-          "description": "This property is only supported on Pools with the virtualMachineConfiguration property."
+          "title": "The configuration parameters used while performing a rolling upgrade."
         }
       },
       "required": [
@@ -6552,6 +6555,32 @@
         }
       },
       "description": "The configuration parameters used while performing a rolling upgrade."
+    },
+    "VMDiskSecurityProfile": {
+      "type": "object",
+      "properties": {
+        "securityEncryptionType": {
+          "type": "string",
+          "title": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
+          "enum": [
+            "NonPersistedTPM",
+            "VMGuestStateOnly"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityEncryptionTypes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NonPersistedTPM"
+              },
+              {
+                "value": "VMGuestStateOnly"
+              }
+            ]
+          }
+        }
+      },
+      "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs."
     }
   },
   "parameters": {
