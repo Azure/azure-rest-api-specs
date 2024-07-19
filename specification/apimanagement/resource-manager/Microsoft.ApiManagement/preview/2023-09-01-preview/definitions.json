@@ -3558,6 +3558,15 @@
           "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
           "minLength": 1
         },
+        "secretType": {
+          "type": "string",
+          "enum": [
+            "client-secret",
+            "client-certificate"
+          ],
+          "description": "Type of the secret used for the Identity Provider. Possible values are 'client-secret' and 'client-certificate'.",
+          "minLength": 1
+        },
         "clientSecret": {
           "x-ms-secret": true,
           "type": "string",
@@ -3572,6 +3581,7 @@
       ],
       "required": [
         "clientId",
+        "secretType",
         "clientSecret"
       ],
       "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
@@ -3598,6 +3608,15 @@
         "clientId": {
           "type": "string",
           "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+          "minLength": 1
+        },
+        "secretType": {
+          "type": "string",
+          "enum": [
+            "client-secret",
+            "client-certificate"
+          ],
+          "description": "Type of the secret used for the Identity Provider. Possible values are 'client-secret' and 'client-certificate'.",
           "minLength": 1
         },
         "clientSecret": {
@@ -3656,6 +3675,15 @@
         "clientId": {
           "type": "string",
           "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+          "minLength": 1
+        },
+        "secretType": {
+          "type": "string",
+          "enum": [
+            "client-secret",
+            "client-certificate"
+          ],
+          "description": "Type of the secret used for the Identity Provider. Possible values are 'client-secret' and 'client-certificate'.",
           "minLength": 1
         },
         "clientSecret": {
