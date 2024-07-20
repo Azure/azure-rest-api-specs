@@ -50,7 +50,7 @@ scenarios:
       - step: MongoClusters_ResetPassword
         exampleFile: ../examples/MongoClusters_ResetPassword.json
         requestUpdate:
-          - replace: /resource/properties/administratorLoginPassword
+          - replace: /properties/properties/administratorLoginPassword
             value: $(administratorLoginPassword2)
       - step: MongoClusters_Delete
         exampleFile: ../examples/MongoClusters_Delete.json
@@ -82,7 +82,7 @@ scenarios:
           - replace: /resource/properties/replicaParameters/sourceLocation
             value: $(primaryRegion)
       - step: MongoClusters_ReplicaList
-        exampleFile: ../examples/MongoClusters_RepliaList.json
+        exampleFile: ../examples/MongoClusters_ReplicaList.json
         requestUpdate:
           - replace: /mongoClusterName
             value: $(mongoClusterName)
@@ -91,18 +91,18 @@ scenarios:
         requestUpdate:
           - replace: /mongoClusterName
             value: $(replicaClusterName)
-      - step: MongoClusters_ReplicaList
-        exampleFile: ../examples/MongoClusters_RepliaList.json
+      - step: MongoClusters_ReplicaList_PostPromote
+        exampleFile: ../examples/MongoClusters_ReplicaList.json
         requestUpdate:
           - replace: /mongoClusterName
             value: $(replicaClusterName)
-      - step: MongoClusters_ForcePromoteReplica
+      - step: MongoClusters_ForcePromoteReplica_2
         exampleFile: ../examples/MongoClusters_ForcePromoteReplica.json
         requestUpdate:
           - replace: /mongoClusterName
             value: $(mongoClusterName)
-      - step: MongoClusters_ReplicaList
-        exampleFile: ../examples/MongoClusters_RepliaList.json
+      - step: MongoClusters_ReplicaList_PostPromote_2
+        exampleFile: ../examples/MongoClusters_ReplicaList.json
         requestUpdate:
           - replace: /mongoClusterName
             value: $(mongoClusterName)
