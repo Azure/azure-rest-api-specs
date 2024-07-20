@@ -211,24 +211,6 @@ model PatchableDashboard {
 }
 
 /**
- * Tenant configuration properties.
- */
-model TenantConfigurationProperties {
-  /**
-   * When flag is set to true Markdown tile will require external storage configuration (URI). The inline content configuration will be prohibited.
-   */
-  enforcePrivateMarkdownStorage?: boolean;
-}
-
-@doc("Dashboard Properties with Provisioning state")
-model TenantConfigurationPropertiesWithProvisioningState {
-  ...TenantConfigurationProperties;
-
-  @doc("The status of the last operation.")
-  @visibility("read")
-  provisioningState?: ResourceProvisioningState;
-}
-/**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
 model Resource {
@@ -251,33 +233,7 @@ model Resource {
   type?: string;
 }
 
-/**
- * List of list of items that violate tenant's configuration.
- */
-model ViolationsList is Azure.Core.Page<Violation>;
 
-/**
- * Violation information.
- */
-model Violation {
-  /**
-   * Id of the item that violates tenant configuration.
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * Id of the user who owns violated item.
-   */
-  @visibility("read")
-  userId?: string;
-
-  /**
-   * Error message.
-   */
-  @visibility("read")
-  errorMessage?: string;
-}
 
 /**
  * Markdown part metadata.
