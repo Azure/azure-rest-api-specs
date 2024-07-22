@@ -64,6 +64,23 @@
                   ]
                 }
               ]
+            },
+            {
+              "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+              "ruleSetVersion": "1.0",
+              "ruleGroupOverrides": [
+                {
+                  "ruleGroupName": "ExcessiveRequests",
+                  "rules": [
+                    {
+                      "ruleId": "500100",
+                      "state": "Enabled",
+                      "action": "Block",
+                      "sensitivity": "High"
+                    }
+                  ]
+                }
+              ]
             }
           ],
           "exclusions": [
@@ -112,6 +129,68 @@
               "matchVariable": "RequestArgValues",
               "selectorMatchOperator": "StartsWith",
               "selector": "test"
+            }
+          ],
+          "exceptions": [
+            {
+              "matchVariable": "RequestURI",
+              "valueMatchOperator": "Contains",
+              "values": [
+                "health",
+                "account/images",
+                "default.aspx"
+              ],
+              "exceptionManagedRuleSets": [
+                {
+                  "ruleSetType": "OWASP",
+                  "ruleSetVersion": "3.2"
+                }
+              ]
+            },
+            {
+              "matchVariable": "RequestHeader",
+              "selectorMatchOperator": "StartsWith",
+              "selector": "User-Agent",
+              "valueMatchOperator": "Contains",
+              "values": [
+                "Mozilla/5.0",
+                "Chrome/122.0.0.0"
+              ],
+              "exceptionManagedRuleSets": [
+                {
+                  "ruleSetType": "OWASP",
+                  "ruleSetVersion": "3.2",
+                  "ruleGroups": [
+                    {
+                      "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "matchVariable": "RemoteAddr",
+              "values": [
+                "1.2.3.4",
+                "10.0.0.1/6"
+              ],
+              "valueMatchOperator": "IPMatch",
+              "exceptionManagedRuleSets": [
+                {
+                  "ruleSetType": "Microsoft_BotManagerRuleSet",
+                  "ruleSetVersion": "1.0",
+                  "ruleGroups": [
+                    {
+                      "ruleGroupName": "BadBots",
+                      "rules": [
+                        {
+                          "ruleId": "100100"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -319,6 +398,23 @@
                     ]
                   }
                 ]
+              },
+              {
+                "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                "ruleSetVersion": "1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "ExcessiveRequests",
+                    "rules": [
+                      {
+                        "ruleId": "500100",
+                        "state": "Enabled",
+                        "action": "Block",
+                        "sensitivity": "High"
+                      }
+                    ]
+                  }
+                ]
               }
             ],
             "exclusions": [
@@ -367,6 +463,68 @@
                 "matchVariable": "RequestArgValues",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
+              }
+            ],
+            "exceptions": [
+              {
+                "matchVariable": "RequestURI",
+                "valueMatchOperator": "Contains",
+                "values": [
+                  "health",
+                  "account/images",
+                  "default.aspx"
+                ],
+                "exceptionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2"
+                  }
+                ]
+              },
+              {
+                "matchVariable": "RequestHeader",
+                "selectorMatchOperator": "StartsWith",
+                "selector": "User-Agent",
+                "valueMatchOperator": "Contains",
+                "values": [
+                  "Mozilla/5.0",
+                  "Chrome/122.0.0.0"
+                ],
+                "exceptionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matchVariable": "RemoteAddr",
+                "values": [
+                  "1.2.3.4",
+                  "10.0.0.1/6"
+                ],
+                "valueMatchOperator": "IPMatch",
+                "exceptionManagedRuleSets": [
+                  {
+                    "ruleSetType": "Microsoft_BotManagerRuleSet",
+                    "ruleSetVersion": "1.0",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "BadBots",
+                        "rules": [
+                          {
+                            "ruleId": "100100"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -566,6 +724,23 @@
                     ]
                   }
                 ]
+              },
+              {
+                "ruleSetType": "Microsoft_HTTPDDoSRuleSet",
+                "ruleSetVersion": "1.0",
+                "ruleGroupOverrides": [
+                  {
+                    "ruleGroupName": "ExcessiveRequests",
+                    "rules": [
+                      {
+                        "ruleId": "500100",
+                        "state": "Enabled",
+                        "action": "Block",
+                        "sensitivity": "High"
+                      }
+                    ]
+                  }
+                ]
               }
             ],
             "exclusions": [
@@ -614,6 +789,68 @@
                 "matchVariable": "RequestArgValues",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
+              }
+            ],
+            "exceptions": [
+              {
+                "matchVariable": "RequestURI",
+                "valueMatchOperator": "Contains",
+                "values": [
+                  "health",
+                  "account/images",
+                  "default.aspx"
+                ],
+                "exceptionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2"
+                  }
+                ]
+              },
+              {
+                "matchVariable": "RequestHeader",
+                "selectorMatchOperator": "StartsWith",
+                "selector": "User-Agent",
+                "valueMatchOperator": "Contains",
+                "values": [
+                  "Mozilla/5.0",
+                  "Chrome/122.0.0.0"
+                ],
+                "exceptionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matchVariable": "RemoteAddr",
+                "values": [
+                  "1.2.3.4",
+                  "10.0.0.1/6"
+                ],
+                "valueMatchOperator": "IPMatch",
+                "exceptionManagedRuleSets": [
+                  {
+                    "ruleSetType": "Microsoft_BotManagerRuleSet",
+                    "ruleSetVersion": "1.0",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "BadBots",
+                        "rules": [
+                          {
+                            "ruleId": "100100"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -751,4 +988,3 @@
     }
   }
 }
-
