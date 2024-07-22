@@ -95,12 +95,31 @@
         "typeProperties": {
           "description": "Azure Table Storage linked service properties.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AzureStorageLinkedServiceTypeProperties"
+          "$ref": "#/definitions/AzureTableStorageLinkedServiceTypeProperties"
         }
       },
       "required": [
         "typeProperties"
       ]
+    },
+    "AzureTableStorageLinkedServiceTypeProperties": {
+      "description": "Azure Table Storage linked service properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureStorageLinkedServiceTypeProperties"
+        }
+      ],
+      "properties": {
+        "serviceEndpoint": {
+          "type": "object",
+          "description": "Table service endpoint of the Azure Table Storage resource. It is mutually exclusive with connectionString, sasUri property."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
+        }
+      }
     },
     "AzureStorageLinkedServiceTypeProperties": {
       "description": "Azure Storage linked service properties.",
