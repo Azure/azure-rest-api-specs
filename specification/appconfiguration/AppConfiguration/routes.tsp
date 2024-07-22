@@ -9,6 +9,13 @@ using Azure.Core.Traits;
 
 namespace AzureAppConfiguration;
 
+alias Body<T, TName extends valueof string = "body", TDoc extends valueof string = "The body parameter."> = {
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};
+
 alias appConfigOperation<
   TParams extends Reflection.Model,
   TResponse,
@@ -363,7 +370,7 @@ op putKeyValue is appConfigOperation<
     @body
     entity?: KeyValue;
   },
-  KeyValue &
+  Body<keyvalue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
@@ -392,7 +399,7 @@ op deleteKeyValue is appConfigOperation<
     @header("If-Match")
     ifMatch?: string;
   },
-  (KeyValue &
+  (Body<keyvalue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
     @statusCode
@@ -782,7 +789,7 @@ op putLock is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
-  KeyValue &
+  Body<keyvalue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
@@ -818,7 +825,7 @@ op deleteLock is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
-  KeyValue &
+  Body<keyvalue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
