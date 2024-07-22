@@ -90,9 +90,12 @@ interface FleetMembers {
   @sharedRoute
   @added(Versions.v2023_03_15_preview)
   @removed(Versions.v2023_06_15_preview)
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     FleetMember,
-    FleetMemberProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      FleetMember,
+      FleetMemberProperties
+    >,
     Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
       IfMatchParameters<FleetMember>
   >;
@@ -107,9 +110,12 @@ interface FleetMembers {
       `final-state-via`: "original-uri",
     }
   )
-  updateAsync is ArmResourcePatchAsync<
+  updateAsync is ArmCustomPatchAsync<
     FleetMember,
-    FleetMemberProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      FleetMember,
+      FleetMemberProperties
+    >,
     Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
       IfMatchParameters<FleetMember>
   >;
@@ -124,5 +130,6 @@ interface FleetMembers {
       IfMatchParameters<FleetMember>
   >;
 
-  listByParent is ArmResourceListByParent<FleetMember>;
+  /** List FleetMember resources by Fleet */
+  listByFleet is ArmResourceListByParent<FleetMember>;
 }
