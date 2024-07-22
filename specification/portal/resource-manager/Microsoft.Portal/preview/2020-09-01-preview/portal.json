@@ -239,13 +239,14 @@
             "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "resource",
+            "name": "dashboard",
             "in": "body",
             "description": "The parameters required to create or update a dashboard.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Dashboard"
-            }
+            },
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
@@ -301,13 +302,14 @@
             "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "properties",
+            "name": "dashboard",
             "in": "body",
             "description": "The updatable fields of a Dashboard.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchableDashboard"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -417,8 +419,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DashboardPropertiesWithProvisioningState",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

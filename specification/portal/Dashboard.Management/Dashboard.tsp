@@ -1,13 +1,15 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
 
 namespace Microsoft.Portal;
 /**
@@ -66,4 +68,12 @@ interface Dashboards {
 );
 @@doc(Dashboards.update::parameters.properties,
   "The updatable fields of a Dashboard."
+);
+@@encodedName(Dashboards.createOrUpdate::parameters.resource,
+  "application/json",
+  "dashboard"
+);
+@@encodedName(Dashboards.update::parameters.properties,
+  "application/json",
+  "dashboard"
 );

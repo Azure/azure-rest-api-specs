@@ -1,14 +1,16 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
 
 namespace Microsoft.Portal;
 /**
@@ -69,4 +71,8 @@ interface ListTenantConfigurationViolationsOperations {
 
 @@doc(TenantConfigurations.create::parameters.resource,
   "The parameters required to create or update tenant configuration."
+);
+@@encodedName(TenantConfigurations.create::parameters.resource,
+  "application/json",
+  "tenantConfiguration"
 );

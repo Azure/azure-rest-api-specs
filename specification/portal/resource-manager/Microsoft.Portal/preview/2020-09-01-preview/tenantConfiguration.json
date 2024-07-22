@@ -212,13 +212,14 @@
             "pattern": "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "resource",
+            "name": "tenantConfiguration",
             "in": "body",
             "description": "The parameters required to create or update tenant configuration.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Configuration"
-            }
+            },
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
