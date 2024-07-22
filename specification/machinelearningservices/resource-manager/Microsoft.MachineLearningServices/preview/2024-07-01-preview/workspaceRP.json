@@ -4658,27 +4658,23 @@
       "type": "object",
       "properties": {
         "fineTune": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "fineTuneOn": {
+          "description": "The datetime of deprecation of the fineTune Model.",
           "format": "date-time",
           "type": "string"
         },
         "inference": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "inferenceOn": {
+          "description": "The datetime of deprecation of the inference Model.",
           "format": "date-time",
           "type": "string"
         }
       }
     },
     "EndpointModelProperties": {
+      "description": "Endpoint Model properties.",
       "type": "object",
       "properties": {
         "capabilities": {
+          "description": "The capabilities.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -4688,28 +4684,43 @@
           "$ref": "#/definitions/EndpointModelDeprecationProperties"
         },
         "finetuneCapabilities": {
+          "description": "The capabilities for finetune models.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "format": {
+          "description": "Deployment model format.",
           "type": "string"
         },
         "isDefaultVersion": {
+          "description": "If the model is default version.",
           "type": "boolean"
         },
         "lifecycleStatus": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "GenerallyAvailable",
+            "Preview"
+          ],
+          "x-ms-enum": {
+            "name": "ModelLifecycleStatus",
+            "modelAsString": true
+          },
+          "description": "Model lifecycle status."
         },
         "maxCapacity": {
+          "description": "The max capacity.",
           "format": "int32",
           "type": "integer"
         },
         "name": {
+          "description": "Deployment model name.",
           "type": "string"
         },
         "skus": {
+          "description": "The list of Model Sku.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointModelSkuProperties"
@@ -4719,6 +4730,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         },
         "version": {
+          "description": "Optional. Deployment model version. If version is not specified, a default version will be assigned. The default version is different for different models and might change when there is new version available for a model. Default version for a model could be found from list models API.",
           "type": "string"
         }
       }
@@ -4727,10 +4739,12 @@
       "type": "object",
       "properties": {
         "default": {
+          "description": "The default capacity.",
           "format": "int32",
           "type": "integer"
         },
         "maximum": {
+          "description": "The maximum capacity.",
           "format": "int32",
           "type": "integer"
         }
@@ -4743,20 +4757,20 @@
           "$ref": "#/definitions/EndpointModelSkuCapacityProperties"
         },
         "connectionIds": {
+          "description": "The list of ARM id for the connection support this SKU.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format":"arm-id"
           }
         },
         "deprecationDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "deprecationOn": {
+          "description": "The datetime of deprecation of the model SKU.",
           "format": "date-time",
           "type": "string"
         },
         "name": {
+          "description": "The name of the model SKU.",
           "type": "string"
         },
         "rateLimits": {
@@ -4766,6 +4780,7 @@
           }
         },
         "usageName": {
+          "description": "The usage name of the model SKU.",
           "type": "string"
         }
       }
@@ -4774,14 +4789,17 @@
       "type": "object",
       "properties": {
         "count": {
+          "description": "The count value of Call Rate Limit.",
           "format": "float",
           "type": "number"
         },
         "renewalPeriod": {
+          "description": "The renewal period in seconds of Call Rate Limit.",
           "format": "float",
           "type": "number"
         },
         "rules": {
+          "description": "The call rate limit for the model.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointModelSkuRateLimitRuleProperties"
@@ -4808,6 +4826,7 @@
           "type": "number"
         },
         "dynamicThrottlingEnabled": {
+          "description": "If the dynamic throttling is enabled.",
           "type": "boolean"
         },
         "key": {
@@ -6792,6 +6811,7 @@
           "type": "boolean"
         },
         "allowRoleAssignmentOnRG": {
+          "description": "The flag to indicate whether we will do role assignment for the workspace MSI on resource group level.",
           "type": "boolean"
         },
         "applicationInsights": {

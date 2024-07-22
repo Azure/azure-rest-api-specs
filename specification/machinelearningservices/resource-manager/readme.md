@@ -111,7 +111,7 @@ suppressions:
       - $.definitions.EndpointModelProperties.properties.capabilities
       - $.definitions.EndpointModelProperties.properties.finetuneCapabilities
   - code: AvoidAdditionalProperties
-    reason: Already in prod use.
+    reason: trying to align with schema here for caller to consume https://github.com/Azure/azure-rest-api-specs/blob/2e5be0e72597c6fc8d438f20e38087d900c16427/specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/preview/2024-04-01-preview/mfe.json#L26070
     where:
       - $.definitions.ManagedOnlineEndpointResourceProperties.properties.mirrorTraffic
       - $.definitions.ManagedOnlineEndpointResourceProperties.properties.traffic
