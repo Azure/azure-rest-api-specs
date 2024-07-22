@@ -92,6 +92,12 @@ interface Accounts
   extends TrackedResourceOperations<Account, AccountProperties> {
   @doc("Adds check global name availability operation, normally used if a resource name must be globally unique.")
   checkNameAvailability is checkGlobalNameAvailability;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST REMOVE AT NEXT API VERSION UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Account,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @doc("The location of subscription quota resource.")

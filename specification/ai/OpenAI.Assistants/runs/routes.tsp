@@ -28,10 +28,7 @@ namespace Azure.AI.OpenAI.Assistants;
 @route("/threads/{threadId}/runs")
 @doc("Creates a new run for an assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op createRun(
-  @path threadId: string,
-  @bodyRoot createRunOptions: CreateRunOptions,
-): ThreadRun;
+op createRun(@path threadId: string, ...CreateRunOptions): ThreadRun;
 
 /**
  * Gets a list of runs for a specified thread.
@@ -139,4 +136,4 @@ op cancelRun(@path threadId: string, @path runId: string): ThreadRun;
 @route("/threads/runs")
 @doc("Creates a new assistant thread and immediately starts a run using that new thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-op createThreadAndRun(...CreateAndRunThreadOptions): ThreadRun;
+op createThreadAndRun(...BodyParameter<CreateAndRunThreadOptions>): ThreadRun;

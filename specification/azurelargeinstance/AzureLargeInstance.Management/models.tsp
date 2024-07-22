@@ -309,9 +309,9 @@ model AzureLargeInstanceProperties {
   hwRevision?: string;
 
   @doc("""
-ARM ID of another AzureLargeInstance that will share a network with this
-AzureLargeInstance
-""")
+    ARM ID of another AzureLargeInstance that will share a network with this
+    AzureLargeInstance
+    """)
   @removed(Versions.v2024_04_10)
   partnerNodeId?: string;
 
@@ -338,9 +338,9 @@ model StorageProfile {
   nfsIpAddress?: string;
 
   @doc("""
-Specifies information about the operating system disk used by Azure Large
-Instance.
-""")
+    Specifies information about the operating system disk used by Azure Large
+    Instance.
+    """)
   @extension("x-ms-identifiers", [])
   osDisks?: Disk[];
 }
@@ -355,10 +355,10 @@ model Disk {
   diskSizeGB?: int32;
 
   @doc("""
-Specifies the logical unit number of the data disk. This value is used to
-identify data disks within the VM and therefore must be unique for each data
-disk attached to a VM.
-""")
+    Specifies the logical unit number of the data disk. This value is used to
+    identify data disks within the VM and therefore must be unique for each data
+    disk attached to a VM.
+    """)
   @visibility("read")
   lun?: int32;
 }
@@ -400,9 +400,9 @@ model IpAddress {
 }
 
 @doc("""
-The active state empowers the server with the ability to forcefully terminate
-and halt any existing processes that may be running on the server
-""")
+  The active state empowers the server with the ability to forcefully terminate
+  and halt any existing processes that may be running on the server
+  """)
 model ForceState {
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Whether to force restart by shutting all processes.")
