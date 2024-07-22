@@ -92,11 +92,11 @@ input-file:
   - stable/2023-09-04/redhatopenshift.json
 ```
 
-### Tag: package-2023-11-22
+### Tag: package-2023-11
 
-These settings apply only when `--tag=package-2023-11-22` is specified on the command line.
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-11-22'
+``` yaml $(tag) == 'package-2023-11'
 input-file:
   - stable/2023-11-22/redhatopenshift.json
 ```
