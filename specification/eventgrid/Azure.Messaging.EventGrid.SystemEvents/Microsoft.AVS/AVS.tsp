@@ -76,15 +76,12 @@ model AvsClusterEventData {
   operationId: string;
 
   /** Hosts added to the cluster in this event, if any. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   addedHostNames: string[];
 
   /** Hosts removed from the cluster in this event, if any. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   removedHostNames: string[];
 
   /** Hosts in Maintenance mode in the cluster, if any. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   inMaintenanceHostNames: string[];
 }
 
@@ -97,6 +94,5 @@ model AvsScriptExecutionEventData {
   cmdletId: string;
 
   /** Stdout outputs from the execution, if any. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   output: string[];
 }
