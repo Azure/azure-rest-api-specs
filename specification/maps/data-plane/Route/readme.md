@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-preview-2024-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-07'
 input-file:
-  - preview/2024-06-01-preview/route.json
+  - preview/2024-07-01-preview/route.json
   
 suppressions:
   - code: OperationIdNounVerb
