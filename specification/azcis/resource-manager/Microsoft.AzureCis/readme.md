@@ -31,7 +31,6 @@ These settings apply only when `--tag=2023-08-22` is specified on the command li
 ```yaml $(tag) == '2023-08-22'
 input-file:
   - stable/2023-08-22/plannedQuota.json
-  - stable/2023-08-22/dscm.json
 ```
 
 ### Tag: 2024-06-11-preview
