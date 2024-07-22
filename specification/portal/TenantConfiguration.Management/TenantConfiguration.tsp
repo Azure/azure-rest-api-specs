@@ -17,7 +17,7 @@ namespace Microsoft.Portal;
 @doc("The tenant configuration resource definition.")
 @tenantResource
 model Configuration
-  is Azure.ResourceManager.ProxyResource<ConfigurationPropertiesWithProvisioningState> {
+  is Azure.ResourceManager.ProxyResource<ConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = Configuration,
     KeyName = "configurationName",
