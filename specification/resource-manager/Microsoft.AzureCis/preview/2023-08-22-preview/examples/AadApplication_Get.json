@@ -1,0 +1,43 @@
+{
+  "title": "Get AadApplication",
+  "operationId": "AadApplication_Get",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2023-08-22-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/aadApplications/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/aadApplications",
+        "properties": {
+          "provisioningState": "Accepted",
+          "applicationName": "TestAadApplication1",
+          "tenantId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d",
+          "availableToOtherTenants": "True",
+          "appIdUri": "https://www.contoso.com/myapp",
+          "snIssuerConfig": [
+            "frprpaasgateway.azcistest.windows.net",
+            "eastus.arm2rp.management.azure.com"
+          ],
+          "owners": [
+            "f2bcef32-cb88-4805-88b0-356d44739ba1",
+            "626b7757-a832-49ab-9583-efc31cf727d8"
+          ],
+          "adGroupsToJoin": [
+            "Testing",
+            "S-1-1-0",
+            "3f2504e0-4f89-11d3-9a0c-0305e82c3301"
+          ],
+          "certificates": [
+            "/Configuration/Templates/ModelFiles/Gtos/Certificates/AadApplicationCertTest.cer",
+            "https://global-dsms.dsms.core.windows.net/dsms/sample/certificates/chained/samplecert"
+          ]
+        }
+      }
+    }
+  }
+}
