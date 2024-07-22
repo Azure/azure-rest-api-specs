@@ -1911,7 +1911,11 @@ alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 @post
 @route("/:analyze-conversations")
 op analyzeConversations is RpcOperation<
-  AnalyzeConversationTask,
+  {
+    /** The input for the analyze conversations operation. */
+    @bodyRoot
+    body: AnalyzeConversationTask;
+  },
   AnalyzeConversationTaskResult,
   {},
   ErrorResponse
