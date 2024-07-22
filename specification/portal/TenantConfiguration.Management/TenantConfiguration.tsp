@@ -49,7 +49,22 @@ interface TenantConfigurations {
   /**
    * Gets list of the tenant configurations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @operationId("TenantConfigurations_List")
   list is ArmResourceListByParent<Configuration, TenantBaseParameters>;
+}
+
+@armResourceOperations
+interface ListTenantConfigurationViolationsOperations {
+  /**
+   * Gets list of items that violate tenant's configuration.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @route("/providers/Microsoft.Portal/listTenantConfigurationViolations")
+  @armResourceCollectionAction
+  @post
+  @operationId("ListTenantConfigurationViolations_List")
+  list(...ApiVersionParameter): ArmResponse<ViolationsList> | ErrorResponse;
 }
 
 @@doc(TenantConfigurations.create::parameters.resource,
