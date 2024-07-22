@@ -121,7 +121,7 @@ model Schedule {
 @doc("The resources needed for the user request")
 model Resources {
   @doc("The resource ids used for the request")
-  ids: Array<string>;
+  ids: Array<Azure.Core.armResourceIdentifier>;
 }
 
 @doc("The retry policy for the user request")
