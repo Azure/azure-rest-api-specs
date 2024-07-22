@@ -13,8 +13,8 @@ using Autorest;
 
 namespace Microsoft.AzureCis;
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("dstsApplication properties")
+@removed(Versions.v2024_06_24_preview)
 model DstsApplicationResourceProperties {
   @doc("Application.")
   applicationAccount?: ApplicationAccount;
@@ -28,7 +28,7 @@ model DstsApplicationResourceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-invalid-chars" "Arm resource name must contain only alphanumeric characters"
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
+@removed(Versions.v2024_06_24_preview)
 @doc("dstsApplication Resource")
 model DstsApplicationResource
   is ProxyResource<DstsApplicationResourceProperties> {
@@ -41,8 +41,8 @@ model DstsApplicationResource
   name: string;
 }
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Application. Optional.")
+@removed(Versions.v2024_06_24_preview)
 model ApplicationAccount {
   @doc("The dSTS instance where the Application resides. Required.")
   dstsInstance: string;
@@ -85,8 +85,8 @@ model ApplicationAccount {
   applicationClientIdentity?: ApplicationClientIdentity;
 }
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("The application group. Optional.")
+@removed(Versions.v2024_06_24_preview)
 model ApplicationGroup {
   @doc("Group id. Optional.")
   id?: string;
@@ -136,8 +136,8 @@ model ApplicationGroup {
   applicationClientIdentity?: ApplicationClientIdentity;
 }
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("The claim rule which apply to Application.")
+@removed(Versions.v2024_06_24_preview)
 model ApplicationClaimRule {
   @doc("A claim used to identify client. e.g., group claim, application name claim, object id claim.")
   clientIdentifier: Claim;
@@ -152,8 +152,8 @@ model ApplicationClaimRule {
   isRegionalEnforced?: boolean = true;
 }
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("A claim used to identify client. e.g., group claim, application name claim, object id claim.")
+@removed(Versions.v2024_06_24_preview)
 model Claim {
   @doc("Type of the claim")
   type: string;
@@ -162,8 +162,8 @@ model Claim {
   value: string;
 }
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Represents application client identity.")
+@removed(Versions.v2024_06_24_preview)
 model ApplicationClientIdentity {
   @doc("Dmsi client.")
   dmsiInfo?: DmsiInfo;
@@ -182,8 +182,8 @@ model ApplicationClientIdentity {
   clientTokenIpRangeRestrictions?: Array<IpRange>;
 }
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Dmsi information")
+@removed(Versions.v2024_06_24_preview)
 model DmsiInfo {
   @doc("Dmsi path")
   path: string;
@@ -195,16 +195,16 @@ model DmsiInfo {
   subscriptions: Array<string>;
 }
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Represents certificate based authentication.")
+@removed(Versions.v2024_06_24_preview)
 model CertificateBasedIdentity {
   @doc("Certificate")
   @extension("x-ms-identifiers", [])
   certificates: Array<CertificateInfo>;
 }
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Certification based application client identity.")
+@removed(Versions.v2024_06_24_preview)
 model CertificateInfo {
   @doc("Certificate thumbprint information")
   thumbprint: string;
@@ -213,15 +213,15 @@ model CertificateInfo {
   expiryDate: string;
 }
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Represents application subject name base identity.")
+@removed(Versions.v2024_06_24_preview)
 model SubjectNameBasedIdentity {
   @doc("List of subject names for sni based auth")
   subjectNames: Array<string>;
 }
 
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @doc("Class for a contiguous range of IP Addresses.")
+@removed(Versions.v2024_06_24_preview)
 model IpRange {
   @doc("From IP address.")
   fromIpAddress: string;
@@ -231,8 +231,8 @@ model IpRange {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The resource must have a delete operation.TypeSpec"
-@removed(Microsoft.AzureCis.Versions.v2023_08_22)
 @armResourceOperations
+@removed(Versions.v2024_06_24_preview)
 interface DstsApplications {
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Fix on next update"
   @Azure.Core.useFinalStateVia("azure-async-operation")
