@@ -15,16 +15,16 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * Tenant configuration properties.
  */
-model TenantConfigurationProperties {
+model ConfigurationProperties {
   /**
    * When flag is set to true Markdown tile will require external storage configuration (URI). The inline content configuration will be prohibited.
    */
   enforcePrivateMarkdownStorage?: boolean;
 }
 
-@doc("Dashboard Properties with Provisioning state")
-model TenantConfigurationPropertiesWithProvisioningState {
-  ...TenantConfigurationProperties;
+@doc("Tenant Configuration Properties with Provisioning state")
+model ConfigurationPropertiesWithProvisioningState {
+  ...ConfigurationProperties;
 
   @doc("The status of the last operation.")
   @visibility("read")

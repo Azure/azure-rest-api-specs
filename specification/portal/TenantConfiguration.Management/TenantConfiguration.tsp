@@ -16,10 +16,10 @@ namespace Microsoft.Portal;
  */
 @doc("The tenant configuration resource definition.")
 @tenantResource
-model TenantConfiguration
-  is Azure.ResourceManager.ProxyResource<TenantConfigurationPropertiesWithProvisioningState> {
+model Configuration
+  is Azure.ResourceManager.ProxyResource<ConfigurationPropertiesWithProvisioningState> {
   ...ResourceNameParameter<
-    Resource = TenantConfiguration,
+    Resource = Configuration,
     KeyName = "configurationName",
     SegmentName = "tenantConfigurations",
     NamePattern = "^(?!con$|prn$|aux$|nul$|com[1-9]$)(?!.*[._-]{2,})[a-zA-Z0-9]([a-zA-Z0-9-._]*[a-zA-Z0-9])?$"
@@ -31,25 +31,25 @@ interface TenantConfigurations {
   /**
    * Gets the tenant configuration.
    */
-  get is ArmResourceRead<TenantConfiguration>;
+  get is ArmResourceRead<Configuration>;
 
   /**
    * Create the tenant configuration. If configuration already exists - update it. User has to be a Tenant Admin for this operation.
    */
   create is ArmResourceCreateOrReplaceSync<
-    TenantConfiguration,
+    Configuration,
     TenantBaseParameters
   >;
 
   /**
    * Delete the tenant configuration. User has to be a Tenant Admin for this operation.
    */
-  delete is ArmResourceDeleteSync<TenantConfiguration, TenantBaseParameters>;
+  delete is ArmResourceDeleteSync<Configuration, TenantBaseParameters>;
 
   /**
    * Gets list of the tenant configurations.
    */
-  list is ArmResourceListByParent<TenantConfiguration, TenantBaseParameters>;
+  list is ArmResourceListByParent<Configuration, TenantBaseParameters>;
 }
 
 @@doc(TenantConfigurations.create::parameters.resource,
