@@ -81,7 +81,7 @@ interface PrivateClouds {
     ...CreatedResponse;
 
     ...Azure.Core.Foundations.RetryAfterHeader;
-    ...LocationHeader;
+    ...ArmLroLocationHeader;
 
     @bodyRoot
     @doc("The updated private cloud.")
@@ -158,7 +158,7 @@ interface Clusters {
     ...CreatedResponse;
 
     ...Azure.Core.Foundations.RetryAfterHeader;
-    ...LocationHeader;
+    ...ArmLroLocationHeader;
 
     @bodyRoot
     @doc("The updated cluster.")
@@ -1020,7 +1020,7 @@ interface PlacementPolicies {
   ): ArmResponse<PlacementPolicy> | {
     ...AcceptedResponse;
     ...Azure.Core.Foundations.RetryAfterHeader;
-    ...LocationHeader;
+    ...ArmLroLocationHeader;
 
     @bodyRoot
     @doc("The updatd placement policy.")
@@ -1115,13 +1115,6 @@ interface ScriptExecutions {
   "x-ms-client-name",
   "scriptExecution"
 );
-
-@doc("The location envelope.")
-model LocationHeader {
-  @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-  @header("Location")
-  location?: string;
-}
 
 @armResourceOperations
 interface IscsiPaths {
