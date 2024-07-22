@@ -48,7 +48,7 @@ interface TextOperations {
   >;
 
   @added(ContentSafety.Versions.v2024_09_01)
-  @summary("Detect Protected Material for NL")
+  @summary("Detect Protected Material for Text")
   @doc("A synchronous API for detecting protected material in the given text.")
   @route("/text:detectProtectedMaterial")
   @post
