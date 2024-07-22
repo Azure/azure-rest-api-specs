@@ -786,9 +786,11 @@
           "x-ms-identifiers": []
         },
         "customizationData": {
-          "type": "object",
+          "type": "array",
           "description": "Additional ACC Ledger deployment-time customizations.",
-          "$ref": "#/definitions/CustomizationData"
+          "items": {
+            "$ref": "#/definitions/CustomizationData"
+          }
         }
       }
     },
