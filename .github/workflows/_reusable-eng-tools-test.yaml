@@ -8,6 +8,17 @@ on:
         description: Name of package under eng/tools
         required: true
         type: string
+      sparse-checkout-paths:
+        description: Paths for sparse checkout
+        type: string
+      lint:
+        description: Run 'npm run lint' if true
+        required: false
+        type: boolean
+      prettier:
+        description: Run 'npm run prettier' if true
+        required: false
+        type: boolean
 
 jobs:
   test:
@@ -24,9 +35,15 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+        shell: pwsh
+
       - uses: actions/checkout@v4
         with:
-          sparse-checkout: eng
+          sparse-checkout: |
+            eng
+            ${{ inputs.sparse-checkout-paths }}
 
       - name: Use Node ${{ matrix.node-version }}.x
         uses: actions/setup-node@v4
@@ -43,6 +60,16 @@ jobs:
       - run: npm run build
         shell: pwsh
         working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm run lint
+        if: inputs.lint == true
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}
+
+      - run: npm run prettier
+        if: inputs.prettier == true
+        shell: pwsh
+        working-directory: ./eng/tools/${{ inputs.package }}        
 
       - run: npm run test:ci
         shell: pwsh
