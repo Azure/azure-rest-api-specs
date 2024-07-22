@@ -15,7 +15,7 @@ namespace Microsoft.AzureCis;
 @doc("environment properties")
 model EnvironmentResourceProperties {
   @doc("The source environment and the source cluster from which you want to clone the environment.")
-  @added(Versions.v2024_06_24_preview)
+  @madeRequired(Versions.v2024_06_24_preview)
   modelEnvironment: string;
 
   @doc("The name of the target environment to be created.")
@@ -25,7 +25,7 @@ model EnvironmentResourceProperties {
   clusterName?: string;
 
   @doc("The mode property indicates which files will be cloned to the new environment. There are two options. All: Will clone all the files including customer files to the new environment. Basic: Will clone only the environment basic files which is deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt.")
-  @added(Versions.v2024_06_24_preview)
+  @madeRequired(Versions.v2024_06_24_preview)
   @visibility("read")
   mode: EnvironmentMode;
 

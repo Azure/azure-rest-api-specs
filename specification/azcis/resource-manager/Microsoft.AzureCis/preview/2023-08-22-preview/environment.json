@@ -390,6 +390,10 @@
       "type": "object",
       "description": "environment properties",
       "properties": {
+        "modelEnvironment": {
+          "type": "string",
+          "description": "The source environment and the source cluster from which you want to clone the environment."
+        },
         "environmentName": {
           "type": "string",
           "description": "The name of the target environment to be created."
@@ -397,6 +401,11 @@
         "clusterName": {
           "type": "string",
           "description": "The name of the target cluster where the new environment is supposed to be created."
+        },
+        "mode": {
+          "$ref": "#/definitions/EnvironmentMode",
+          "description": "The mode property indicates which files will be cloned to the new environment. There are two options. All: Will clone all the files including customer files to the new environment. Basic: Will clone only the environment basic files which is deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/EnvironmentProvisioningState",

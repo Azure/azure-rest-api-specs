@@ -94,8 +94,8 @@ model ApplicationGroup {
   @doc("Name of the Application Group. Required.")
   applicationGroupName: string;
 
-  @doc("Common Name for all Applications inside the group. Optional.")
-  applicationName?: string;
+  @doc("Common Name for all Applications inside the group. Required.")
+  applicationName: string;
 
   @doc("The Service Principal Names of the application. Optional.")
   servicePrincipalNames?: Array<string>;
