@@ -194,28 +194,51 @@ model RemoveTextBlocklistItemsOptions {
 }
 
 @added(ContentSafety.Versions.v2024_09_01)
-@doc("The text prompt injection attacks analysis request.")
-model AnalyzeTextPromptInjectionOptions {
-  @doc("The user prompt needs to be analyzed if it attempts to do direct injection attacks.")
+@doc("The request of analyzing potential direct or indirect injection attacks.")
+model ShieldPromptOptions {
+  @doc("The user prompt needs to be analyzed, which may contain direct injection attacks.")
+  @maxLength(10000)
   userPrompt?: string;
 
-  @doc("The documents needs to be analyzed if they attempt to do direct or indirect injection attacks.")
+  @doc("The documents needs to be analyzed, which may contain direct or indirect injection attacks.")
   documents?: string[];
 }
 
 @added(ContentSafety.Versions.v2024_09_01)
-@doc("The text injection attacks analysis response.")
-model AnalyzeTextPromptInjectionResult {
-  @doc("Direct injection analysis result for user prompt input.")
-  userPromptAnalysis?: TextPromptInjectionResult;
+@doc("The combined analysis results of potential direct or indirect injection attacks.")
+model ShieldPromptResult {
+  @doc("Direct injection attacks analysis result for the given user prompt.")
+  userPromptAnalysis?: PromptInjectionAnalysisResult;
 
-  @doc("Direct and indirect injection attacks analysis result for documents input.")
-  documentsAnalysis?: TextPromptInjectionResult[];
+  @doc("Direct and indirect injection attacks analysis result for the given documents.")
+  documentsAnalysis?: PromptInjectionAnalysisResult[];
 }
 
 @added(ContentSafety.Versions.v2024_09_01)
-@doc("The text injection attacks analysis response.")
-model TextPromptInjectionResult {
-  @doc("Analysis result for whether the prompt is classified as an injection attack.")
+@doc("The individual analysis result of potential direct or indirect injection attacks.")
+model PromptInjectionAnalysisResult {
+  @doc("Whether a potential injection attack is detected or not.")
   attackDetected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The request of detecting potential protected material present in the given text.")
+model DetectTextProtectedMaterialOptions {
+  @doc("The text needs to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
+  @maxLength(10000)
+  text: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The combined detection results of potential protected material.")
+model DetectTextProtectedMaterialResult {
+  @doc("Analysis result for the given text.")
+  protectedMaterialAnalysis: TextProtectedMaterialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The individual detection result of potential protected material.")
+model TextProtectedMaterialAnalysisResult {
+  @doc("Whether potential protected material is detected or not.")
+  detected: boolean;
 }

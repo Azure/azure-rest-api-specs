@@ -31,20 +31,37 @@ interface TextOperations {
   >;
 
   @added(ContentSafety.Versions.v2024_09_01)
-  @summary("Analyze text prompt injection attacks")
-  @doc("A synchronous API for the analysis of text prompt injection attacks.")
+  @summary("Shield Prompt")
+  @doc("A synchronous API for shielding prompt from direct and indirect injection attacks.")
   @route("/text:shieldPrompt")
   @post
   shieldPrompt is Azure.Core.RpcOperation<
     {
       @bodyRoot
-      @doc("The text prompt injection attacks analysis request.")
+      @doc("The request body to be detected, which may contain direct or indirect injection attacks.")
       @clientName("options", "csharp")
       @clientName("options", "python")
       @clientName("options", "java")
-      body: AnalyzeTextPromptInjectionOptions;
+      body: ShieldPromptOptions;
     },
-    AnalyzeTextPromptInjectionResult
+    ShieldPromptResult
+  >;
+
+  @added(ContentSafety.Versions.v2024_09_01)
+  @summary("Detect Protected Material for NL")
+  @doc("A synchronous API for detecting protected material in the given text.")
+  @route("/text:detectProtectedMaterial")
+  @post
+  detectTextProtectedMaterial is Azure.Core.RpcOperation<
+    {
+      @bodyRoot
+      @doc("The request body to be detected, which may contain protected material.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: DetectTextProtectedMaterialOptions;
+    },
+    DetectTextProtectedMaterialResult
   >;
 }
 
