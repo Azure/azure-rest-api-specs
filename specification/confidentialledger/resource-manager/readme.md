@@ -32,13 +32,12 @@ tag: package-preview-2024-07
 
 ### Tag: package-preview-2024-07
 
-These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2024-07'
 input-file:
   - Microsoft.ConfidentialLedger/preview/2024-07-09-preview/confidentialledger.json
   - Microsoft.ConfidentialLedger/preview/2024-07-09-preview/managedccf.json
-
 
 ### Tag: package-preview-2023-06
 
