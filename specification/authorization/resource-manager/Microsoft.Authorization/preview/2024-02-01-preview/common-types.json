@@ -219,18 +219,6 @@
         }
       }
     },
-    "ExcludedPrincipalTypes": {
-      "type": "string",
-      "description": "The type of a assignment objects to be excluded.",
-      "enum": [
-        "ServicePrincipalsAsTarget",
-        "ServicePrincipalsAsRequestor"
-      ],
-      "x-ms-enum": {
-        "name": "ExcludedPrincipalTypes",
-        "modelAsString": true
-      }      
-    },
     "UsersOrServicePrincipalSet": {
       "description": "The detail of a subject.",
       "type": "object",
@@ -483,7 +471,15 @@
         "excludedAssignmentTypes": {
           "type": "array",
           "items": {
-            "type": "#/definitions/ExcludedPrincipalTypes"
+            "type": "string",
+            "enum":[
+              "ServicePrincipalsAsTarget",
+              "ServicePrincipalsAsRequestor"
+            ],
+            "x-ms-enum": {
+            "name": "ExcludedPrincipalTypes",
+            "modelAsString": true
+            } 
           },
           "description": "The list of excluded assignment types allowed."
         },
