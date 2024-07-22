@@ -316,6 +316,12 @@ directive:
       - $.paths["/jobs/{jobId}/tasks/{taskId}"].delete.responses
       - $.paths["/pools/{poolId}/nodes/{nodeId}/users/{userName}"].delete.responses
     reason: These delete operations have the required responses. Looks like a bug with the validator.
+
+suppressions:
+ - code: OperationIdNounVerb
+   from: BatchService.json
+   reason: This rule is an ARM specific API validation rule and does not apply to data plane API validation.
+
 ```
 
 ### Tag: package-2017-05.5.0

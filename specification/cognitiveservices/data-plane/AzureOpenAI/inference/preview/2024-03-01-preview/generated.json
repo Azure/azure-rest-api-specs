@@ -79,12 +79,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SpeechGenerationOptions"
-            }
+            "$ref": "#/parameters/GenerateSpeechFromTextBody"
           }
         ],
         "responses": {
@@ -137,25 +132,93 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+            "name": "file",
+            "in": "formData",
+            "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+            "required": true,
+            "type": "file"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.filename"
+            "name": "filename",
+            "in": "formData",
+            "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+            "name": "response_format",
+            "in": "formData",
+            "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json",
+              "verbose_json",
+              "text",
+              "srt",
+              "vtt"
+            ],
+            "x-ms-enum": {
+              "name": "AudioTranscriptionFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+                },
+                {
+                  "name": "verbose_json",
+                  "value": "verbose_json",
+                  "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+                },
+                {
+                  "name": "text",
+                  "value": "text",
+                  "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+                },
+                {
+                  "name": "srt",
+                  "value": "srt",
+                  "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+                },
+                {
+                  "name": "vtt",
+                  "value": "vtt",
+                  "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+                }
+              ]
+            },
+            "x-ms-client-name": "responseFormat"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.language"
+            "name": "language",
+            "in": "formData",
+            "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+            "name": "prompt",
+            "in": "formData",
+            "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+            "name": "temperature",
+            "in": "formData",
+            "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+            "required": false,
+            "type": "number",
+            "format": "float"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.model"
+            "name": "model",
+            "in": "formData",
+            "description": "The model to use for this transcription request.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -208,22 +271,86 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.file"
+            "name": "file",
+            "in": "formData",
+            "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+            "required": true,
+            "type": "file"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.filename"
+            "name": "filename",
+            "in": "formData",
+            "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
+            "name": "response_format",
+            "in": "formData",
+            "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json",
+              "verbose_json",
+              "text",
+              "srt",
+              "vtt"
+            ],
+            "x-ms-enum": {
+              "name": "AudioTranslationFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
+                },
+                {
+                  "name": "verbose_json",
+                  "value": "verbose_json",
+                  "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
+                },
+                {
+                  "name": "text",
+                  "value": "text",
+                  "description": "Use a response body that is plain text containing the raw, unannotated translation."
+                },
+                {
+                  "name": "srt",
+                  "value": "srt",
+                  "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+                },
+                {
+                  "name": "vtt",
+                  "value": "vtt",
+                  "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+                }
+              ]
+            },
+            "x-ms-client-name": "responseFormat"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+            "name": "prompt",
+            "in": "formData",
+            "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+            "name": "temperature",
+            "in": "formData",
+            "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+            "required": false,
+            "type": "number",
+            "format": "float"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.model"
+            "name": "model",
+            "in": "formData",
+            "description": "The model to use for this translation request.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -269,12 +396,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatCompletionsOptions"
-            }
+            "$ref": "#/parameters/GetChatCompletionsBody"
           }
         ],
         "responses": {
@@ -341,12 +463,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CompletionsOptions"
-            }
+            "$ref": "#/parameters/GetCompletionsBody"
           }
         ],
         "responses": {
@@ -392,12 +509,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EmbeddingsOptions"
-            }
+            "$ref": "#/parameters/GetEmbeddingsBody"
           }
         ],
         "responses": {
@@ -443,12 +555,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImageGenerationOptions"
-            }
+            "$ref": "#/parameters/GetImageGenerationsBody"
           }
         ],
         "responses": {
@@ -499,25 +606,93 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.file"
+            "name": "file",
+            "in": "formData",
+            "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+            "required": true,
+            "type": "file"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.filename"
+            "name": "filename",
+            "in": "formData",
+            "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
+            "name": "response_format",
+            "in": "formData",
+            "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json",
+              "verbose_json",
+              "text",
+              "srt",
+              "vtt"
+            ],
+            "x-ms-enum": {
+              "name": "AudioTranscriptionFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
+                },
+                {
+                  "name": "verbose_json",
+                  "value": "verbose_json",
+                  "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
+                },
+                {
+                  "name": "text",
+                  "value": "text",
+                  "description": "Use a response body that is plain text containing the raw, unannotated transcription."
+                },
+                {
+                  "name": "srt",
+                  "value": "srt",
+                  "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+                },
+                {
+                  "name": "vtt",
+                  "value": "vtt",
+                  "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+                }
+              ]
+            },
+            "x-ms-client-name": "responseFormat"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.language"
+            "name": "language",
+            "in": "formData",
+            "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
+            "name": "prompt",
+            "in": "formData",
+            "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
+            "name": "temperature",
+            "in": "formData",
+            "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+            "required": false,
+            "type": "number",
+            "format": "float"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.model"
+            "name": "model",
+            "in": "formData",
+            "description": "The model to use for this transcription request.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -566,22 +741,86 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.file"
+            "name": "file",
+            "in": "formData",
+            "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
+            "required": true,
+            "type": "file"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.filename"
+            "name": "filename",
+            "in": "formData",
+            "description": "The optional filename or descriptive identifier to associate with with the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
+            "name": "response_format",
+            "in": "formData",
+            "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json",
+              "verbose_json",
+              "text",
+              "srt",
+              "vtt"
+            ],
+            "x-ms-enum": {
+              "name": "AudioTranslationFormat",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "json",
+                  "value": "json",
+                  "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
+                },
+                {
+                  "name": "verbose_json",
+                  "value": "verbose_json",
+                  "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
+                },
+                {
+                  "name": "text",
+                  "value": "text",
+                  "description": "Use a response body that is plain text containing the raw, unannotated translation."
+                },
+                {
+                  "name": "srt",
+                  "value": "srt",
+                  "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
+                },
+                {
+                  "name": "vtt",
+                  "value": "vtt",
+                  "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
+                }
+              ]
+            },
+            "x-ms-client-name": "responseFormat"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.prompt"
+            "name": "prompt",
+            "in": "formData",
+            "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.temperature"
+            "name": "temperature",
+            "in": "formData",
+            "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+            "required": false,
+            "type": "number",
+            "format": "float"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.model"
+            "name": "model",
+            "in": "formData",
+            "description": "The model to use for this translation request.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -4045,190 +4284,6 @@
     }
   },
   "parameters": {
-    "AudioTranscriptionOptions.file": {
-      "name": "file",
-      "in": "formData",
-      "description": "The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
-      "required": true,
-      "type": "file",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.filename": {
-      "name": "filename",
-      "in": "formData",
-      "description": "The optional filename or descriptive identifier to associate with with the audio data.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.language": {
-      "name": "language",
-      "in": "formData",
-      "description": "The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code\nsuch as 'en' or 'fr'.\nProviding this known input language is optional but may improve the accuracy and/or latency of transcription.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.model": {
-      "name": "model",
-      "in": "formData",
-      "description": "The model to use for this transcription request.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.prompt": {
-      "name": "prompt",
-      "in": "formData",
-      "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranscriptionOptions.responseFormat": {
-      "name": "response_format",
-      "in": "formData",
-      "description": "The requested format of the transcription response data, which will influence the content and detail of the result.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "json",
-        "verbose_json",
-        "text",
-        "srt",
-        "vtt"
-      ],
-      "x-ms-enum": {
-        "name": "AudioTranscriptionFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "Use a response body that is a JSON object containing a single 'text' field for the transcription."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Use a response body that is a JSON object containing transcription text along with timing, segments, and other\nmetadata."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Use a response body that is plain text containing the raw, unannotated transcription."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "responseFormat"
-    },
-    "AudioTranscriptionOptions.temperature": {
-      "name": "temperature",
-      "in": "formData",
-      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-      "required": false,
-      "type": "number",
-      "format": "float",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.file": {
-      "name": "file",
-      "in": "formData",
-      "description": "The audio data to translate. This must be the binary content of a file in one of the supported media formats:\n flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.",
-      "required": true,
-      "type": "file",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.filename": {
-      "name": "filename",
-      "in": "formData",
-      "description": "The optional filename or descriptive identifier to associate with with the audio data.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.model": {
-      "name": "model",
-      "in": "formData",
-      "description": "The model to use for this translation request.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.prompt": {
-      "name": "prompt",
-      "in": "formData",
-      "description": "An optional hint to guide the model's style or continue from a prior audio segment. The written language of the\nprompt should match the primary spoken language of the audio data.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AudioTranslationOptions.responseFormat": {
-      "name": "response_format",
-      "in": "formData",
-      "description": "The requested format of the translation response data, which will influence the content and detail of the result.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "json",
-        "verbose_json",
-        "text",
-        "srt",
-        "vtt"
-      ],
-      "x-ms-enum": {
-        "name": "AudioTranslationFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "Use a response body that is a JSON object containing a single 'text' field for the translation."
-          },
-          {
-            "name": "verbose_json",
-            "value": "verbose_json",
-            "description": "Use a response body that is a JSON object containing translation text along with timing, segments, and other\nmetadata."
-          },
-          {
-            "name": "text",
-            "value": "text",
-            "description": "Use a response body that is plain text containing the raw, unannotated translation."
-          },
-          {
-            "name": "srt",
-            "value": "srt",
-            "description": "Use a response body that is plain text in SubRip (SRT) format that also includes timing information."
-          },
-          {
-            "name": "vtt",
-            "value": "vtt",
-            "description": "Use a response body that is plain text in Web Video Text Tracks (VTT) format that also includes timing information."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "responseFormat"
-    },
-    "AudioTranslationOptions.temperature": {
-      "name": "temperature",
-      "in": "formData",
-      "description": "The sampling temperature, between 0 and 1.\nHigher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\nIf set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
-      "required": false,
-      "type": "number",
-      "format": "float",
-      "x-ms-parameter-location": "method"
-    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -4238,6 +4293,56 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "GenerateSpeechFromTextBody": {
+      "name": "body",
+      "in": "body",
+      "description": "A representation of the request options that control the behavior of a text-to-speech operation.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SpeechGenerationOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetChatCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ChatCompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetEmbeddingsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EmbeddingsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetImageGenerationsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Represents the request data used to generate images.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ImageGenerationOptions"
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }
