@@ -12,14 +12,6 @@ namespace Microsoft.Portal;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The configuration name")
-union ConfigurationName {
-  string,
-
-  @doc("The default configuration name")
-  default: "default",
-}
-
 /**
  * Supported operations of this resource provider.
  */

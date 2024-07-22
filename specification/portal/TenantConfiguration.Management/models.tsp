@@ -12,6 +12,14 @@ namespace Microsoft.Portal;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+@doc("The configuration name")
+union ConfigurationName {
+  string,
+
+  @doc("The default configuration name")
+  default: "default",
+}
+
 @doc("Tenant Configuration Properties with Provisioning state")
 model ConfigurationProperties {
   /**
