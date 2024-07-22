@@ -67,9 +67,6 @@
           "description": "The time at which the message was deleted"
         }
       },
-      "required": [
-        "deleteTime"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
@@ -86,9 +83,6 @@
           "description": "The time at which the message was deleted"
         }
       },
-      "required": [
-        "deleteTime"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
@@ -117,8 +111,7 @@
         }
       },
       "required": [
-        "metadata",
-        "editTime"
+        "metadata"
       ],
       "allOf": [
         {
@@ -148,8 +141,7 @@
         }
       },
       "required": [
-        "metadata",
-        "editTime"
+        "metadata"
       ],
       "allOf": [
         {
@@ -189,8 +181,7 @@
         }
       },
       "required": [
-        "senderCommunicationIdentifier",
-        "composeTime"
+        "senderCommunicationIdentifier"
       ],
       "allOf": [
         {
@@ -230,8 +221,7 @@
         }
       },
       "required": [
-        "senderCommunicationIdentifier",
-        "composeTime"
+        "senderCommunicationIdentifier"
       ],
       "allOf": [
         {
@@ -313,7 +303,6 @@
         }
       },
       "required": [
-        "time",
         "addedByCommunicationIdentifier",
         "participantAdded"
       ],
@@ -342,7 +331,6 @@
         }
       },
       "required": [
-        "time",
         "addedByCommunicationIdentifier",
         "participantAdded"
       ],
@@ -376,7 +364,6 @@
         }
       },
       "required": [
-        "time",
         "removedByCommunicationIdentifier",
         "participantRemoved"
       ],
@@ -405,7 +392,6 @@
         }
       },
       "required": [
-        "time",
         "removedByCommunicationIdentifier",
         "participantRemoved"
       ],
@@ -512,8 +498,7 @@
         }
       },
       "required": [
-        "deletedByCommunicationIdentifier",
-        "deleteTime"
+        "deletedByCommunicationIdentifier"
       ],
       "allOf": [
         {
@@ -536,9 +521,6 @@
           "description": "The version of the thread"
         }
       },
-      "required": [
-        "createTime"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatEventBaseProperties"
@@ -560,9 +542,6 @@
           "description": "The version of the thread"
         }
       },
-      "required": [
-        "createTime"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
@@ -622,7 +601,6 @@
       },
       "required": [
         "editedByCommunicationIdentifier",
-        "editTime",
         "properties",
         "metadata"
       ],
@@ -660,7 +638,6 @@
       },
       "required": [
         "editedByCommunicationIdentifier",
-        "editTime",
         "metadata",
         "properties"
       ],
@@ -685,8 +662,7 @@
         }
       },
       "required": [
-        "deletedByCommunicationIdentifier",
-        "deleteTime"
+        "deletedByCommunicationIdentifier"
       ],
       "allOf": [
         {
@@ -725,8 +701,7 @@
         }
       },
       "required": [
-        "deliveryStatusDetails",
-        "deliveryAttemptTimestamp"
+        "deliveryStatusDetails"
       ]
     },
     "AcsEmailDeliveryReportStatus": {
@@ -821,10 +796,7 @@
           "description": "The type of engagement user have with email",
           "x-ms-client-name": "engagement"
         }
-      },
-      "required": [
-        "userActionTimestamp"
-      ]
+      }
     },
     "AcsIncomingCallCustomContext": {
       "type": "object",
@@ -1077,7 +1049,6 @@
         }
       },
       "required": [
-        "receivedTimeStamp",
         "error"
       ]
     },
@@ -1273,8 +1244,7 @@
         }
       },
       "required": [
-        "recordingStorageInfo",
-        "recordingStartTime"
+        "recordingStorageInfo"
       ]
     },
     "AcsRecordingStorageInfoProperties": {
@@ -1623,7 +1593,6 @@
       },
       "required": [
         "requestedWorkerSelectors",
-        "scheduledOn",
         "unavailableForMatching"
       ],
       "allOf": [
@@ -1669,8 +1638,7 @@
       },
       "required": [
         "expiredAttachedWorkerSelectors",
-        "expiredRequestedWorkerSelectors",
-        "scheduledOn"
+        "expiredRequestedWorkerSelectors"
       ],
       "allOf": [
         {
@@ -1819,7 +1787,6 @@
       "required": [
         "expiredAttachedWorkerSelectors",
         "expiredRequestedWorkerSelectors",
-        "scheduledOn",
         "unavailableForMatching"
       ],
       "allOf": [
@@ -2171,8 +2138,6 @@
       },
       "required": [
         "workerLabels",
-        "offeredOn",
-        "expiresOn",
         "workerTags",
         "jobLabels",
         "jobTags"
@@ -2285,8 +2250,7 @@
       },
       "required": [
         "value",
-        "ttlSeconds",
-        "expirationTime"
+        "ttlSeconds"
       ]
     },
     "AcsRouterWorkerSelectorState": {
@@ -2390,10 +2354,7 @@
           "format": "int32",
           "description": "Number of segments whose delivery failed"
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "AcsSmsDeliveryReportReceivedEventData": {
       "type": "object",
@@ -2426,8 +2387,7 @@
         }
       },
       "required": [
-        "deliveryAttempts",
-        "receivedTimestamp"
+        "deliveryAttempts"
       ],
       "allOf": [
         {
@@ -2467,9 +2427,6 @@
           "description": "The time at which the SMS was received"
         }
       },
-      "required": [
-        "receivedTimestamp"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsSmsEventBaseProperties"
@@ -3379,7 +3336,6 @@
         }
       },
       "required": [
-        "timestamp",
         "target",
         "connectedRegistry"
       ]
@@ -3500,7 +3456,6 @@
         }
       },
       "required": [
-        "timestamp",
         "target",
         "request",
         "actor",
@@ -3706,10 +3661,7 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      },
-      "required": [
-        "stageTime"
-      ]
+      }
     },
     "DataBoxCopyStartedEventData": {
       "type": "object",
@@ -3728,10 +3680,7 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      },
-      "required": [
-        "stageTime"
-      ]
+      }
     },
     "DataBoxOrderCompletedEventData": {
       "type": "object",
@@ -3750,10 +3699,7 @@
           "format": "date-time",
           "description": "The time at which the stage happened."
         }
-      },
-      "required": [
-        "stageTime"
-      ]
+      }
     },
     "DataBoxStageName": {
       "type": "string",
@@ -4017,8 +3963,6 @@
         }
       },
       "required": [
-        "createdOn",
-        "updatedOn",
         "attributes"
       ],
       "allOf": [
@@ -4247,11 +4191,7 @@
           "format": "date-time",
           "description": "The last time from the queue."
         }
-      },
-      "required": [
-        "firstEnqueueTime",
-        "lastEnqueueTime"
-      ]
+      }
     },
     "HealthcareDicomImageCreatedEventData": {
       "type": "object",
@@ -5849,11 +5789,7 @@
           "format": "date-time",
           "description": "The end time of the target dataset time series that resulted in drift detection."
         }
-      },
-      "required": [
-        "startTime",
-        "endTime"
-      ]
+      }
     },
     "MachineLearningServicesModelDeployedEventData": {
       "type": "object",
@@ -7017,10 +6953,7 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "PolicyInsightsPolicyStateCreatedEventData": {
       "type": "object",
@@ -7055,10 +6988,7 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "PolicyInsightsPolicyStateDeletedEventData": {
       "type": "object",
@@ -7093,10 +7023,7 @@
           "type": "string",
           "description": "The compliance reason code. May be empty."
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "RedisExportRDBCompletedEventData": {
       "type": "object",
@@ -7115,10 +7042,7 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "RedisImportRDBCompletedEventData": {
       "type": "object",
@@ -7137,10 +7061,7 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "RedisPatchingCompletedEventData": {
       "type": "object",
@@ -7159,10 +7080,7 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "RedisScalingCompletedEventData": {
       "type": "object",
@@ -7181,10 +7099,7 @@
           "type": "string",
           "description": "The status of this event. Failed or  succeeded"
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "ResourceActionCancelEventData": {
       "type": "object",
@@ -7607,10 +7522,7 @@
           "format": "date-time",
           "description": "Date and Time when resource was updated"
         }
-      },
-      "required": [
-        "resourceEventTime"
-      ]
+      }
     },
     "ResourceNotificationsResourceDeletedDetails": {
       "type": "object",
@@ -8045,10 +7957,7 @@
           "type": "string",
           "description": "The user Id of connected client connection."
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "SignalRServiceClientConnectionDisconnectedEventData": {
       "type": "object",
@@ -8075,10 +7984,7 @@
           "type": "string",
           "description": "The message of error that cause the client connection disconnected."
         }
-      },
-      "required": [
-        "timestamp"
-      ]
+      }
     },
     "StampKind": {
       "type": "string",
@@ -8300,10 +8206,7 @@
           "type": "string",
           "description": "The blob URL for manifest file for inventory run."
         }
-      },
-      "required": [
-        "scheduleDateTime"
-      ]
+      }
     },
     "StorageBlobRenamedEventData": {
       "type": "object",
@@ -8601,7 +8504,6 @@
         }
       },
       "required": [
-        "completedDateTime",
         "summaryReportBlobUrl"
       ]
     },
@@ -8643,10 +8545,7 @@
           "type": "string",
           "description": "The execution id for a storage task."
         }
-      },
-      "required": [
-        "queuedDateTime"
-      ]
+      }
     },
     "StorageTaskCompletedEventData": {
       "type": "object",
@@ -8676,7 +8575,6 @@
         }
       },
       "required": [
-        "completedDateTime",
         "summaryReportBlobUrl"
       ]
     },
@@ -8717,10 +8615,7 @@
           "type": "string",
           "description": "The execution id for a storage task."
         }
-      },
-      "required": [
-        "queuedDateTime"
-      ]
+      }
     },
     "SubscriptionDeletedEventData": {
       "type": "object",

@@ -11,7 +11,10 @@ namespace Oracle.Database;
 interface CloudVmClusters
   extends OracleTrackedResource<CloudVmCluster, CloudVmClusterProperties> {
   @doc("Add VMs to the VM Cluster")
-  @example("./examples/vmClusters_addVms.json", "Add VMs to VM Cluster")
+  @Autorest.example(
+    "./examples/vmClusters_addVms.json",
+    "Add VMs to VM Cluster"
+  )
   addVms is ArmResourceActionAsync<
     CloudVmCluster,
     AddRemoveDbNode,
@@ -19,7 +22,10 @@ interface CloudVmClusters
   >;
 
   @doc("Remove VMs from the VM Cluster")
-  @example("./examples/vmClusters_removeVms.json", "Remove VMs from VM Cluster")
+  @Autorest.example(
+    "./examples/vmClusters_removeVms.json",
+    "Remove VMs from VM Cluster"
+  )
   removeVms is ArmResourceActionAsync<
     CloudVmCluster,
     AddRemoveDbNode,
@@ -27,7 +33,7 @@ interface CloudVmClusters
   >;
 
   @doc("List Private IP Addresses by the provided filter")
-  @example(
+  @Autorest.example(
     "./examples/vmClusters_listPrivateIpAddresses.json",
     "List Private IP Addresses for VM Cluster"
   )
@@ -38,27 +44,27 @@ interface CloudVmClusters
   >;
 }
 
-@@example(CloudVmClusters.listBySubscription,
+@@Autorest.example(CloudVmClusters.listBySubscription,
   "./examples/vmClusters_listBySubscription.json",
   "List VM Clusters by subscription"
 );
-@@example(CloudVmClusters.createOrUpdate,
+@@Autorest.example(CloudVmClusters.createOrUpdate,
   "./examples/vmClusters_create.json",
   "Create VM Cluster"
 );
-@@example(CloudVmClusters.get,
+@@Autorest.example(CloudVmClusters.get,
   "./examples/vmClusters_get.json",
   "Get VM Cluster"
 );
-@@example(CloudVmClusters.update,
+@@Autorest.example(CloudVmClusters.update,
   "./examples/vmClusters_patch.json",
   "Patch VM Cluster"
 );
-@@example(CloudVmClusters.delete,
+@@Autorest.example(CloudVmClusters.delete,
   "./examples/vmClusters_delete.json",
   "Delete VM Cluster"
 );
-@@example(CloudVmClusters.listByResourceGroup,
+@@Autorest.example(CloudVmClusters.listByResourceGroup,
   "./examples/vmClusters_listByResourceGroup.json",
   "List VM Clusters by resource group"
 );
