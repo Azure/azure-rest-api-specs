@@ -11755,7 +11755,7 @@
           "readOnly": true
         },
         "avsTargetNode": {
-          "type": "string",
+          "$ref": "#/definitions/AzureAvsNodeType",
           "description": "Gets the Avs Target Type for Machine.",
           "readOnly": true
         }
@@ -11978,7 +11978,7 @@
         },
         "externalStorageTypes": {
           "type": "array",
-          "description": "AVS external storage types.",
+          "description": "List of AVS external storage types.",
           "items": {
             "$ref": "#/definitions/ExternalStorageType"
           }
@@ -12419,7 +12419,7 @@
           "description": "Predicted total Storage used in GB."
         },
         "pricingModel": {
-          "type": "string",
+          "$ref": "#/definitions/AzureReservedInstance",
           "description": "Pricing model indicates what hour multiplier to use while estimating the Nodes cost."
         },
         "fttRaidLevel": {
@@ -12587,7 +12587,9 @@
       "enum": [
         "Unknown",
         "NotApplicable",
-        "UnsupportedLocationForSelectedNode"
+        "UnsupportedLocationForSelectedNode",
+        "InternalErrorInRecommendation",
+        "UnsupportedLocationForSelectedExternalStorageTypes"
       ],
       "x-ms-enum": {
         "name": "AzureAvsSuitabilityExplanation",
@@ -17818,35 +17820,43 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "Default Cost Component name represented by Unknown."
           },
           {
             "name": "MonthlyAzureHybridCostSavings",
-            "value": "MonthlyAzureHybridCostSavings"
+            "value": "MonthlyAzureHybridCostSavings",
+            "description": "Cost Savings due to Windows Azure Hybrid on monthly basis."
           },
           {
             "name": "MonthlySecurityCost",
-            "value": "MonthlySecurityCost"
+            "value": "MonthlySecurityCost",
+            "description": "Monthly security cost."
           },
           {
             "name": "MonthlyPremiumV2StorageCost",
-            "value": "MonthlyPremiumV2StorageCost"
+            "value": "MonthlyPremiumV2StorageCost",
+            "description": "Monthly PremiumV2 Storage Cost."
           },
           {
             "name": "MonthlyLinuxAzureHybridCostSavings",
-            "value": "MonthlyLinuxAzureHybridCostSavings"
+            "value": "MonthlyLinuxAzureHybridCostSavings",
+            "description": "Cost Savings due to Linux Azure Hybrid on monthly basis."
           },
           {
             "name": "MonthlyAvsNodeCost",
-            "value": "MonthlyAvsNodeCost"
+            "value": "MonthlyAvsNodeCost",
+            "description": "Monthly AVS Node cost"
           },
           {
             "name": "MonthlyExternalStorageCost",
-            "value": "MonthlyExternalStorageCost"
+            "value": "MonthlyExternalStorageCost",
+            "description": "Monthly External Storage cost"
           },
           {
             "name": "MonthlyNetworkCost",
-            "value": "MonthlyNetworkCost"
+            "value": "MonthlyNetworkCost",
+            "description": "Monthly Network cost"
           },
           {
             "name": "MonthlyVcfByolSavings",
