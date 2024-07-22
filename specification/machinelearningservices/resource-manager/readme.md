@@ -101,6 +101,10 @@ suppressions:
     reason: There is a similar usage in existing jobs.
     where:
       - $.definitions["FineTuningJob"].properties["outputs"]
+  - code: GuidUsage
+    reason: valid usage of UUID format since it is in the AAD objectId
+    where:
+      - $.definitions.ManagedResourceGroupAssignedIdentities
   - code: AvoidAdditionalProperties
     reason: This is cause by renaming some definition and already in prod use.
     where:
