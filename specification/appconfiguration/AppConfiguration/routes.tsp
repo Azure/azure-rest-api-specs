@@ -43,8 +43,7 @@ alias syncTokenHeader = {
 alias contentTypeHeader<T extends string> = {
   @doc("Content-Type header")
   @header("Content-Type")
-  @friendlyName("contentType")
-  contentTypeHeader?: T | "application/problem+json";
+  contentType?: T | "application/problem+json";
 };
 
 alias AppConfigResponseHeaders = {
@@ -333,8 +332,7 @@ op putKeyValue is appConfigOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    @friendlyName("contentType")
-    contentTypeHeader:
+    contentType:
       | "application/vnd.microsoft.appconfig.kv+json"
       | "application/vnd.microsoft.appconfig.kvset+json"
       | "application/json"
@@ -370,7 +368,7 @@ op putKeyValue is appConfigOperation<
     @body
     entity?: KeyValue;
   },
-  Body<keyvalue> &
+  Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
@@ -399,7 +397,7 @@ op deleteKeyValue is appConfigOperation<
     @header("If-Match")
     ifMatch?: string;
   },
-  (Body<keyvalue> &
+  (Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
     @statusCode
@@ -568,8 +566,7 @@ op createSnapshot is Foundations.LongRunningOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    @friendlyName("contentType")
-    contentTypeHeader: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
+    contentType: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
 
     @doc("The name of the key-value snapshot to create.")
     @maxLength(256)
@@ -606,8 +603,7 @@ op updateSnapshot is appConfigOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    @friendlyName("contentType")
-    contentTypeHeader: "application/merge-patch+json" | "application/json";
+    contentType: "application/merge-patch+json" | "application/json";
 
     @doc("The name of the key-value snapshot to update.")
     @path
@@ -789,7 +785,7 @@ op putLock is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
-  Body<keyvalue> &
+  Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
@@ -825,7 +821,7 @@ op deleteLock is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
-  Body<keyvalue> &
+  Body<KeyValue> &
     AppConfigResponseHeaders &
     contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
