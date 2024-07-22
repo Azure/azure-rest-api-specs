@@ -293,5 +293,5 @@ interface StorageClass {
     StorageClassResourceUpdate
   >;
   delete is ArmResourceDeleteWithoutOkAsync<StorageClassResource>;
-  listByParent is ArmResourceListByParent<StorageClassResource>;
+  list is ArmResourceListByParent<StorageClassResource>;
 }
