@@ -39,6 +39,10 @@ model AzureMonitorWorkspaceProperties {
   @doc("Information about metrics for the Azure Monitor workspace")
   metrics?: Metrics;
 
+  @doc("The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+
   @doc("The Data Collection Rule and Endpoint used for ingestion by default.")
   @visibility("read")
   defaultIngestionSettings?: IngestionSettings;
@@ -50,13 +54,9 @@ model AzureMonitorWorkspaceProperties {
   @doc("Gets or sets allow or disallow public network access to workspace")
   @visibility("read")
   publicNetworkAccess?: PublicNetworkAccess;
-
-  @doc("The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
 }
 
-@doc("Information about metrics for the workspace")
+@doc("Information about metrics for the Azure Monitor workspace.")
 model Metrics {
   @doc("The Prometheus query endpoint for the workspace")
   @visibility("read")
@@ -67,7 +67,7 @@ model Metrics {
   internalId?: string;
 }
 
-@doc("Settings for data ingestion")
+@doc("The Data Collection Rule and Endpoint used for ingestion by default.")
 model IngestionSettings {
   @doc("The Azure resource Id of the default data collection rule for this workspace.")
   @visibility("read")
