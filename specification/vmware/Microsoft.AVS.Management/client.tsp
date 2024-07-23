@@ -188,9 +188,10 @@ interface WorkloadNetworks {
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
-  "ResourceIdentityType"
-);
+// name conflict with Azure.ResourceManager.CommonTypes.ResourceIdentityType
+// @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
+//   "ResourceIdentityType"
+// );
 
 @@clientName(VmVmPlacementPolicyProperties, "VmPlacementPolicyProperties");
 @@clientName(WorkloadNetworkPublicIP, "WorkloadNetworkPublicIp", "java");
