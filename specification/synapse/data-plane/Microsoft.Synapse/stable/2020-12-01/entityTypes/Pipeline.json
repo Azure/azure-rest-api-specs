@@ -7411,6 +7411,10 @@
           "description": "The integration runtime reference.",
           "$ref": "../artifacts.json#/definitions/IntegrationRuntimeReference"
         },
+        "continuationSettings": {
+          "description": "Continuation settings for execute data flow activity.",
+          "$ref": "#/definitions/ContinuationSettingsReference"
+        },
         "compute": {
           "description": "Compute properties for data flow activity.",
           "type": "object",
@@ -7445,6 +7449,24 @@
       "required": [
         "dataflow"
       ]
+    },
+    "ContinuationSettingsReference": {
+      "description": "Continuation settings for execute data flow activity.",
+      "type": "object",
+      "properties": {
+        "continuationTtlInMinutes": {
+          "description": "Continuation TTL in minutes.",
+          "type": "object"
+        },
+        "idleCondition": {
+          "description": "Idle condition.",
+          "type": "object"
+        },
+        "customizedCheckpointKey": {
+          "description": "Customized checkpoint key.",
+          "type": "object"
+        }
+      }
     },
     "DataFlowComputeType": {
       "description": "All available DataFlowComputeType values.",

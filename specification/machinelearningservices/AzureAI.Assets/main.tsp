@@ -27,8 +27,8 @@ using Azure.Core.Traits;
   "Machinelearning Services Asset APIs",
   {
     @doc("""
-Supported Azure-AI asset endpoints.
-""")
+      Supported Azure-AI asset endpoints.
+      """)
     endpoint: url,
 
     @doc("The ID of the target subscription.")

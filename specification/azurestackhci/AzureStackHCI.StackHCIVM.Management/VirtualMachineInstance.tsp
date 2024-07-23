@@ -36,8 +36,13 @@ interface VirtualMachineInstances {
   @doc("Gets a virtual machine instance")
   get is ArmResourceRead<VirtualMachineInstance>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineInstance>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualMachineInstance,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("The operation to update a virtual machine instance.")
   @parameterVisibility
