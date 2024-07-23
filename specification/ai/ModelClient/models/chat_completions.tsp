@@ -228,29 +228,28 @@ union ChatRole {
   Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
   via a system or user message.
   """)
+@discriminator("type")
 model ChatCompletionsResponseFormat {
-  @doc("The response format type to use for the chat completions response.")
-  type: ChatCompletionsResponseFormatType;
+  @doc("The response format type to use for chat completions.")
+  type: string;
 }
 
 @doc("""
-  A representation of a response format type usable by Chat Completions. Can be used to enable JSON
-  mode.
+  A response format for Chat Completions that emits text responses. This is the default response format.
   """)
-union ChatCompletionsResponseFormatType {
-  string,
+model ChatCompletionsResponseFormatText extends ChatCompletionsResponseFormat {
+  @doc("Response format type: always 'text' for this object.")
+  type: "text";
+}
 
-  @doc("""
-    A response format for Chat Compltions that emits text responses. This is the default response format.
-    """)
-  text: "text",
-
-  @doc("""
-    A response format for Chat Completions that restricts responses to emitting valid JSON objects.
-    Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
-    via a system or user message.
-    """)
-  json_object: "json_object",
+@doc("""
+  A response format for Chat Completions that restricts responses to emitting valid JSON objects.
+  Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
+  via a system or user message.
+  """)
+model ChatCompletionsResponseFormatJSON extends ChatCompletionsResponseFormat {
+  @doc("Response format type: always 'json_object' for this object.")
+  type: "json_object";
 }
 
 alias ChatChoiceCommon = {
