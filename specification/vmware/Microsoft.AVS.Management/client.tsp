@@ -7,6 +7,10 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Microsoft.AVS;
 
+@client({
+  name: "AvsClient",
+  service: Microsoft.AVS,
+})
 @useDependency(Microsoft.AVS.Versions.v2023_09_01)
 namespace Customization;
 
@@ -15,36 +19,65 @@ namespace Customization;
 @@clientName(Microsoft.AVS, "AVS", "python");
 
 // operation group per interface
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.Operations);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.Locations);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.PrivateClouds);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.Clusters);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.Datastores);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.HcxEnterpriseSites);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.Authorizations);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.GlobalReachConnections);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.CloudLinks);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.Addons);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.VirtualMachines);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.PlacementPolicies);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.ScriptPackages);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.ScriptCmdlets);
-#suppress "@azure-tools/typespec-client-generator-core/wrong-client-decorator" "operationGroup"
-@@operationGroup(Microsoft.AVS.IscsiPaths);
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface Operations extends Microsoft.AVS.Operations {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface Locations extends Microsoft.AVS.Locations {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface PrivateClouds extends Microsoft.AVS.PrivateClouds {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface Clusters extends Microsoft.AVS.Clusters {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface Datastores extends Microsoft.AVS.Datastores {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface HcxEnterpriseSites extends Microsoft.AVS.HcxEnterpriseSites {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface Authorizations extends Microsoft.AVS.Authorizations {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface GlobalReachConnections extends Microsoft.AVS.GlobalReachConnections {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface CloudLinks extends Microsoft.AVS.CloudLinks {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface Addons extends Microsoft.AVS.Addons {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface VirtualMachines extends Microsoft.AVS.VirtualMachines {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface PlacementPolicies extends Microsoft.AVS.PlacementPolicies {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface ScriptPackages extends Microsoft.AVS.ScriptPackages {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface ScriptCmdlets extends Microsoft.AVS.ScriptCmdlets {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
+interface IscsiPaths extends Microsoft.AVS.IscsiPaths {}
 
 // group multiple interfaces into single operation group
 #suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
@@ -58,14 +91,21 @@ interface WorkloadNetworks {
   get is Microsoft.AVS.WorkloadNetworks.get;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  @clientName("listSegments")
   listSegments is Microsoft.AVS.WorkloadNetworkSegments.list;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  @clientName("getSegment")
   getSegment is Microsoft.AVS.WorkloadNetworkSegments.get;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @clientName("createSegment")
   createSegment is Microsoft.AVS.WorkloadNetworkSegments.create;
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
+  @clientName("updateSegment")
+  updateSegment is Microsoft.AVS.WorkloadNetworkSegments.update;
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
+  @clientName("deleteSegment")
   deleteSegment is Microsoft.AVS.WorkloadNetworkSegments.deleteSegment;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
