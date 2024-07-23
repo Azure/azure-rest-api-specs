@@ -75,7 +75,10 @@ alias ChatCompletionsOptions = {
   @minValue(0.0)
   max_tokens?: int32;
 
-  @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
+  @doc("""
+  The format that the model must output. Use this to enable JSON mode instead of the default text mode.
+  Note that to enable JSON mode, you must also instruct the model to produce JSON via a system or user message.
+  """)
   response_format?: ChatCompletionsResponseFormat;
 
   @doc("""
@@ -220,20 +223,29 @@ union ChatRole {
 }
 
 @doc("""
-  An representation of a response format configuration usable by Chat Completions. Can be used to enable JSON
+  Represents the format that the model must output. Use this to enable JSON mode instead of the default text mode.
+  Note that to enable JSON mode, you must also instruct the model to produce JSON via a system or user message.
+  """)
+model ChatCompletionsResponseFormat {
+  @doc("The response format type to use for the chat completions response.")
+  type: ChatCompletionsResponseFormatType,
+}
+
+@doc("""
+  A representation of a response format type usable by Chat Completions. Can be used to enable JSON
   mode.
   """)
-union ChatCompletionsResponseFormat {
+union ChatCompletionsResponseFormatType {
   string,
 
   @doc("""
-    The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response
-    content that adheres to a specific schema.
+    A response format for Chat Compltions that emits text responses. This is the default response format.
     """)
   text: "text",
 
   @doc("""
     A response format for Chat Completions that restricts responses to emitting valid JSON objects.
+    Note that to enable JSON mode, you must also instruct the model to produce JSON via a system or user message.
     """)
   json_object: "json_object",
 }
