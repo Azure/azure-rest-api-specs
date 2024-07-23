@@ -1,8 +1,8 @@
-# configurations
+# configurationmanager
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for configurations.
+This is the AutoRest configuration file for configurationmanager.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the configurations.
+These are the global settings for the configurationmanager.
 
 ```yaml
 openapi-type: arm
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-06-01-preview'
 input-file:
-  - preview/2024-06-01-preview/configurations.json
+  - preview/2024-06-01-preview/configurationmanager.json
 ```
 
 ---
@@ -78,11 +78,11 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
-<!-- ### Suppress Operations API Implemented exception
+### Suppress Operations API Implemented exception
 
  For operations API, we have defined it in a common folder "edge" under the RP. We don't have it in individual specs file for resources since we need partial manifest rollout. Hence the swagger has been split for each resource but operations API is at a common place here -- azure-rest-api-specs-pr\specification\edge\resource-manager\Microsoft.Edge\edge\preview\2023-07-01-preview\operations.json
 
 ``` yaml
 suppressions:
   - code: OperationsAPIImplementation
-    reason: Operations API for edge RP is already implemented in a common folder "edge" under the RP -->
+    reason: Operations API for edge RP is already implemented in a common folder "edge" under the RP

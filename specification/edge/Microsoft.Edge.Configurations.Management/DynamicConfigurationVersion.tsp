@@ -27,7 +27,8 @@ model DynamicConfigurationVersionProperties {
 
 @doc("Dynamic Configuration Resource")
 @parentResource(DynamicConfiguration)
-model DynamicConfigurationVersion is ProxyResource<DynamicConfigurationVersionProperties> {
+model DynamicConfigurationVersion
+    is ProxyResource<DynamicConfigurationVersionProperties> {
     ...ResourceNameParameter<DynamicConfigurationVersion>;
 }
 
