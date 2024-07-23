@@ -315,38 +315,46 @@ interface GlobalReachConnections {
   "globalReachConnection"
 );
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
 interface WorkloadNetworks {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_Get")
+  @tag("WorkloadNetworks")
+  @autoRoute
   get is ArmResourceRead<WorkloadNetwork>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_List")
+  @tag("WorkloadNetworks")
+  @autoRoute
   list is ArmResourceListByParent<
     WorkloadNetwork,
     Response = ArmResponse<ResourceList<WorkloadNetwork>>
   >;
-}
 
-@armResourceOperations
-interface WorkloadNetworkSegments {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListSegments")
-  list is ArmResourceListByParent<
+  @tag("WorkloadNetworkSegments")
+  @autoRoute
+  listSegments is ArmResourceListByParent<
     WorkloadNetworkSegment,
     Response = ArmResponse<ResourceList<WorkloadNetworkSegment, "{name}sList">>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetSegment")
-  get is ArmResourceRead<WorkloadNetworkSegment>;
+  @tag("WorkloadNetworkSegments")
+  @autoRoute
+  getSegment is ArmResourceRead<WorkloadNetworkSegment>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateSegments")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrUpdateAsync<
+  @tag("WorkloadNetworkSegments")
+  @autoRoute
+  createSegment is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkSegment,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -354,46 +362,25 @@ interface WorkloadNetworkSegments {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateSegments")
   @parameterVisibility
-  update is ArmCustomPatchAsync<WorkloadNetworkSegment, WorkloadNetworkSegment>;
+  @tag("WorkloadNetworkSegments")
+  @autoRoute
+  updateSegment is ArmCustomPatchAsync<
+    WorkloadNetworkSegment,
+    WorkloadNetworkSegment
+  >;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteSegment")
+  @tag("WorkloadNetworkSegments")
+  @autoRoute
   deleteSegment is ArmResourceDeleteAsync<WorkloadNetworkSegment>;
-}
 
-@@encodedName(WorkloadNetworkSegments.create::parameters.resource,
-  "application/json",
-  "workloadNetworkSegment"
-);
-@@clientName(WorkloadNetworkSegments.create::parameters.resource,
-  "workloadNetworkSegment"
-);
-@@OpenAPI.extension(WorkloadNetworkSegments.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkSegment"
-);
-
-@@encodedName(WorkloadNetworkSegments.update::parameters.properties,
-  "application/json",
-  "workloadNetworkSegment"
-);
-@@clientName(WorkloadNetworkSegments.update::parameters.properties,
-  "application/json",
-  "workloadNetworkSegment"
-);
-@@OpenAPI.extension(WorkloadNetworkSegments.update::parameters.properties,
-  "x-ms-client-name",
-  "workloadNetworkSegment"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-// @armResourceOperations
-interface WorkloadNetworkDhcpConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListDhcp")
-  list is ArmResourceListByParent<
+  @autoRoute
+  listDhcp is ArmResourceListByParent<
     WorkloadNetworkDhcp,
     Response = ArmResponse<ResourceList<WorkloadNetworkDhcp>>
   >;
@@ -405,7 +392,7 @@ interface WorkloadNetworkDhcpConfigurations {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}")
   @doc("Get a {name}", WorkloadNetworkDhcp)
   @get
-  get(
+  getDhcp(
     ...BaseParameters<WorkloadNetworkDhcp>,
     ...DhcpIdParameter,
     ...PrivateCloudNameParameter,
@@ -415,7 +402,8 @@ interface WorkloadNetworkDhcpConfigurations {
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateDhcp")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrUpdateAsync<
+  @autoRoute
+  createDhcp is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkDhcp,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -423,86 +411,50 @@ interface WorkloadNetworkDhcpConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDhcp")
   @parameterVisibility
-  update is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcp>;
+  @autoRoute
+  updateDhcp is ArmCustomPatchAsync<WorkloadNetworkDhcp, WorkloadNetworkDhcp>;
 
   #suppress "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteDhcp")
-  delete is ArmResourceDeleteAsync<WorkloadNetworkDhcp>;
-}
+  @autoRoute
+  deleteDhcp is ArmResourceDeleteAsync<WorkloadNetworkDhcp>;
 
-@@encodedName(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
-  "application/json",
-  "workloadNetworkDhcp"
-);
-@@clientName(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
-  "workloadNetworkDhcp"
-);
-@@OpenAPI.extension(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkDhcp"
-);
-
-@@encodedName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "application/json",
-  "workloadNetworkDhcp"
-);
-@@clientName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "workloadNetworkDhcp"
-);
-@@OpenAPI.extension(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "x-ms-client-name",
-  "workloadNetworkDhcp"
-);
-
-@@encodedName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "application/json",
-  "workloadNetworkDhcp"
-);
-@@clientName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "workloadNetworkDhcp"
-);
-@@OpenAPI.extension(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "x-ms-client-name",
-  "workloadNetworkDhcp"
-);
-
-@armResourceOperations
-interface WorkloadNetworkGateways {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListGateways")
-  list is ArmResourceListByParent<
+  @tag("WorkloadNetworkGateways")
+  @autoRoute
+  listGateways is ArmResourceListByParent<
     WorkloadNetworkGateway,
     Response = ArmResponse<ResourceList<WorkloadNetworkGateway>>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetGateway")
-  get is ArmResourceRead<WorkloadNetworkGateway>;
-}
+  @tag("WorkloadNetworkGateways")
+  @autoRoute
+  getGateway is ArmResourceRead<WorkloadNetworkGateway>;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
-// @armResourceOperations
-@doc("Workload Network Port Mirroring Profiles")
-interface WorkloadNetworkPortMirroringProfiles {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListPortMirroring")
-  list is ArmResourceListByParent<
+  @autoRoute
+  listPortMirroring is ArmResourceListByParent<
     WorkloadNetworkPortMirroring,
     Response = ArmResponse<ResourceList<WorkloadNetworkPortMirroring>>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetPortMirroring")
-  get is ArmResourceRead<WorkloadNetworkPortMirroring>;
+  @autoRoute
+  getPortMirroring is ArmResourceRead<WorkloadNetworkPortMirroring>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreatePortMirroring")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrUpdateAsync<
+  @autoRoute
+  createPortMirroring is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkPortMirroring,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -510,7 +462,8 @@ interface WorkloadNetworkPortMirroringProfiles {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdatePortMirroring")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  @autoRoute
+  updatePortMirroring is ArmCustomPatchAsync<
     WorkloadNetworkPortMirroring,
     WorkloadNetworkPortMirroring
   >;
@@ -529,7 +482,7 @@ interface WorkloadNetworkPortMirroringProfiles {
       `final-state-via`: "location",
     }
   )
-  delete(
+  deletePortMirroring(
     ...BaseParameters<WorkloadNetworkPortMirroring>,
     ...PortMirroringProfileParameter,
     ...PrivateCloudNameParameter,
@@ -538,62 +491,44 @@ interface WorkloadNetworkPortMirroringProfiles {
     | ArmDeleteAcceptedLroResponse
     | ArmDeletedNoContentResponse
     | ErrorResponse;
-}
 
-@@encodedName(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
-  "application/json",
-  "workloadNetworkPortMirroring"
-);
-@@clientName(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
-  "workloadNetworkPortMirroring"
-);
-@@OpenAPI.extension(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkPortMirroring"
-);
-
-@@encodedName(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
-  "application/json",
-  "workloadNetworkPortMirroring"
-);
-@@clientName(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
-  "workloadNetworkPortMirroring"
-);
-@@OpenAPI.extension(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
-  "x-ms-client-name",
-  "workloadNetworkPortMirroring"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
-// @armResourceOperations
-@doc("Workload Network VM Groups")
-interface WorkloadNetworkVmGroups {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListVMGroups")
-  list is ArmResourceListByParent<
+  @autoRoute
+  listVMGroups is ArmResourceListByParent<
     WorkloadNetworkVMGroup,
     Response = ArmResponse<ResourceList<WorkloadNetworkVMGroup, "{name}sList">>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetVMGroup")
-  get is ArmResourceRead<WorkloadNetworkVMGroup>;
+  @autoRoute
+  getVMGroup is ArmResourceRead<WorkloadNetworkVMGroup>;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateVMGroup")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrUpdateAsync<
+  @autoRoute
+  createVMGroup is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkVMGroup,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateVMGroup")
   @parameterVisibility
-  update is ArmCustomPatchAsync<WorkloadNetworkVMGroup, WorkloadNetworkVMGroup>;
+  @autoRoute
+  updateVMGroup is ArmCustomPatchAsync<
+    WorkloadNetworkVMGroup,
+    WorkloadNetworkVMGroup
+  >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "VmGroupIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeleteVMGroup")
@@ -608,7 +543,7 @@ interface WorkloadNetworkVmGroups {
       `final-state-via`: "location",
     }
   )
-  delete(
+  deleteVMGroup(
     ...BaseParameters<WorkloadNetworkVMGroup>,
     ...VmGroupIdParameter,
     ...PrivateCloudNameParameter,
@@ -617,38 +552,12 @@ interface WorkloadNetworkVmGroups {
     | ArmDeleteAcceptedLroResponse
     | ArmDeletedNoContentResponse
     | ErrorResponse;
-}
 
-@@encodedName(WorkloadNetworkVmGroups.create::parameters.resource,
-  "application/json",
-  "workloadNetworkVMGroup"
-);
-@@clientName(WorkloadNetworkVmGroups.create::parameters.resource,
-  "application/json",
-  "workloadNetworkVMGroup"
-);
-@@OpenAPI.extension(WorkloadNetworkVmGroups.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkVMGroup"
-);
-
-@@encodedName(WorkloadNetworkVmGroups.update::parameters.properties,
-  "application/json",
-  "workloadNetworkVMGroup"
-);
-@@clientName(WorkloadNetworkVmGroups.update::parameters.properties,
-  "workloadNetworkVMGroup"
-);
-@@OpenAPI.extension(WorkloadNetworkVmGroups.update::parameters.properties,
-  "x-ms-client-name",
-  "workloadNetworkVMGroup"
-);
-
-@armResourceOperations
-interface WorkloadNetworkVirtualMachines {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListVirtualMachines")
-  list is ArmResourceListByParent<
+  @tag("WorkloadNetworkVirtualMachines")
+  @autoRoute
+  listVirtualMachines is ArmResourceListByParent<
     WorkloadNetworkVirtualMachine,
     Response = ArmResponse<ResourceList<
       WorkloadNetworkVirtualMachine,
@@ -658,17 +567,14 @@ interface WorkloadNetworkVirtualMachines {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetVirtualMachine")
-  get is ArmResourceRead<WorkloadNetworkVirtualMachine>;
-}
+  @tag("WorkloadNetworkVirtualMachines")
+  @autoRoute
+  getVirtualMachine is ArmResourceRead<WorkloadNetworkVirtualMachine>;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
-// @armResourceOperations
-@doc("Workload Network Dns Services")
-interface WorkloadNetworkDnsServices {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListDnsServices")
-  list is ArmResourceListByParent<
+  @autoRoute
+  listDnsServices is ArmResourceListByParent<
     WorkloadNetworkDnsService,
     Response = ArmResponse<ResourceList<
       WorkloadNetworkDnsService,
@@ -678,13 +584,15 @@ interface WorkloadNetworkDnsServices {
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetDnsService")
-  get is ArmResourceRead<WorkloadNetworkDnsService>;
+  @autoRoute
+  getDnsService is ArmResourceRead<WorkloadNetworkDnsService>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateDnsService")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrUpdateAsync<
+  @autoRoute
+  createDnsService is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkDnsService,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -692,7 +600,8 @@ interface WorkloadNetworkDnsServices {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsService")
   @parameterVisibility
-  update is ArmCustomPatchAsync<
+  @autoRoute
+  updateDnsService is ArmCustomPatchAsync<
     WorkloadNetworkDnsService,
     WorkloadNetworkDnsService
   >;
@@ -711,7 +620,7 @@ interface WorkloadNetworkDnsServices {
       `final-state-via`: "location",
     }
   )
-  delete(
+  deleteDnsService(
     ...BaseParameters<WorkloadNetworkDnsService>,
     ...DnsServiceIdParameter,
     ...PrivateCloudNameParameter,
@@ -720,53 +629,26 @@ interface WorkloadNetworkDnsServices {
     | ArmDeleteAcceptedLroResponse
     | ArmDeletedNoContentResponse
     | ErrorResponse;
-}
 
-@@encodedName(WorkloadNetworkDnsServices.create::parameters.resource,
-  "application/json",
-  "workloadNetworkDnsService"
-);
-@@clientName(WorkloadNetworkDnsServices.create::parameters.resource,
-  "workloadNetworkDnsService"
-);
-@@OpenAPI.extension(WorkloadNetworkDnsServices.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkDnsService"
-);
-
-@@encodedName(WorkloadNetworkDnsServices.update::parameters.properties,
-  "application/json",
-  "workloadNetworkDnsService"
-);
-@@clientName(WorkloadNetworkDnsServices.update::parameters.properties,
-  "workloadNetworkDnsService"
-);
-@@OpenAPI.extension(WorkloadNetworkDnsServices.update::parameters.properties,
-  "x-ms-client-name",
-  "workloadNetworkDnsService"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
-// @armResourceOperations
-@doc("Workload Network DNS Zones")
-interface WorkloadNetworkDnsZones {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListDnsZones")
-  list is ArmResourceListByParent<
+  @autoRoute
+  listDnsZones is ArmResourceListByParent<
     WorkloadNetworkDnsZone,
     Response = ArmResponse<ResourceList<WorkloadNetworkDnsZone, "{name}sList">>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetDnsZone")
-  get is ArmResourceRead<WorkloadNetworkDnsZone>;
+  @autoRoute
+  getDnsZone is ArmResourceRead<WorkloadNetworkDnsZone>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreateDnsZone")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrUpdateAsync<
+  @autoRoute
+  createDnsZone is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkDnsZone,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -774,7 +656,11 @@ interface WorkloadNetworkDnsZones {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_UpdateDnsZone")
   @parameterVisibility
-  update is ArmCustomPatchAsync<WorkloadNetworkDnsZone, WorkloadNetworkDnsZone>;
+  @autoRoute
+  updateDnsZone is ArmCustomPatchAsync<
+    WorkloadNetworkDnsZone,
+    WorkloadNetworkDnsZone
+  >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "DnsZoneIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
@@ -790,7 +676,7 @@ interface WorkloadNetworkDnsZones {
       `final-state-via`: "location",
     }
   )
-  delete(
+  deleteDnsZone(
     ...BaseParameters<WorkloadNetworkDnsZone>,
     ...DnsZoneIdParameter,
     ...PrivateCloudNameParameter,
@@ -799,56 +685,34 @@ interface WorkloadNetworkDnsZones {
     | ArmDeleteAcceptedLroResponse
     | ArmDeletedNoContentResponse
     | ErrorResponse;
-}
 
-@@encodedName(WorkloadNetworkDnsZones.create::parameters.resource,
-  "application/json",
-  "workloadNetworkDnsZone"
-);
-@@clientName(WorkloadNetworkDnsZones.create::parameters.resource,
-  "workloadNetworkDnsZone"
-);
-@@OpenAPI.extension(WorkloadNetworkDnsZones.create::parameters.resource,
-  "x-ms-client-name",
-  "workloadNetworkDnsZone"
-);
-
-@@encodedName(WorkloadNetworkDnsZones.update::parameters.properties,
-  "application/json",
-  "workloadNetworkDnsZone"
-);
-@@clientName(WorkloadNetworkDnsZones.update::parameters.properties,
-  "workloadNetworkDnsZone"
-);
-@@OpenAPI.extension(WorkloadNetworkDnsZones.update::parameters.properties,
-  "x-ms-client-name",
-  "workloadNetworkDnsZone"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation"
-// @armResourceOperations
-interface WorkloadNetworkPublicIps {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_ListPublicIPs")
-  list is ArmResourceListByParent<
+  @autoRoute
+  listPublicIPs is ArmResourceListByParent<
     WorkloadNetworkPublicIP,
     Response = ArmResponse<ResourceList<WorkloadNetworkPublicIP, "{name}sList">>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_GetPublicIP")
-  get is ArmResourceRead<WorkloadNetworkPublicIP>;
+  @autoRoute
+  getPublicIP is ArmResourceRead<WorkloadNetworkPublicIP>;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @operationId("WorkloadNetworks_CreatePublicIP")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrUpdateAsync<
+  @autoRoute
+  createPublicIP is ArmResourceCreateOrUpdateAsync<
     WorkloadNetworkPublicIP,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing operationId."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "PublicIPIdParameter should be last, but it is breaking to correct it."
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Can not change existing operationId."
   @operationId("WorkloadNetworks_DeletePublicIP")
@@ -863,7 +727,7 @@ interface WorkloadNetworkPublicIps {
       `final-state-via`: "location",
     }
   )
-  delete(
+  deletePublicIP(
     ...BaseParameters<WorkloadNetworkPublicIP>,
     ...PublicIPIdParameter,
     ...PrivateCloudNameParameter,
@@ -874,14 +738,160 @@ interface WorkloadNetworkPublicIps {
     | ErrorResponse;
 }
 
-@@encodedName(WorkloadNetworkPublicIps.create::parameters.resource,
+@@encodedName(WorkloadNetworks.createSegment::parameters.resource,
+  "application/json",
+  "workloadNetworkSegment"
+);
+@@clientName(WorkloadNetworks.createSegment::parameters.resource,
+  "workloadNetworkSegment"
+);
+@@OpenAPI.extension(WorkloadNetworks.createSegment::parameters.resource,
+  "x-ms-client-name",
+  "workloadNetworkSegment"
+);
+
+@@encodedName(WorkloadNetworks.updateSegment::parameters.properties,
+  "application/json",
+  "workloadNetworkSegment"
+);
+@@clientName(WorkloadNetworks.updateSegment::parameters.properties,
+  "application/json",
+  "workloadNetworkSegment"
+);
+@@OpenAPI.extension(WorkloadNetworks.updateSegment::parameters.properties,
+  "x-ms-client-name",
+  "workloadNetworkSegment"
+);
+
+@@encodedName(WorkloadNetworks.createDhcp::parameters.resource,
+  "application/json",
+  "workloadNetworkDhcp"
+);
+@@clientName(WorkloadNetworks.createDhcp::parameters.resource,
+  "workloadNetworkDhcp"
+);
+@@OpenAPI.extension(WorkloadNetworks.createDhcp::parameters.resource,
+  "x-ms-client-name",
+  "workloadNetworkDhcp"
+);
+
+@@encodedName(WorkloadNetworks.updateDhcp::parameters.properties,
+  "application/json",
+  "workloadNetworkDhcp"
+);
+@@clientName(WorkloadNetworks.updateDhcp::parameters.properties,
+  "workloadNetworkDhcp"
+);
+@@OpenAPI.extension(WorkloadNetworks.updateDhcp::parameters.properties,
+  "x-ms-client-name",
+  "workloadNetworkDhcp"
+);
+
+@@encodedName(WorkloadNetworks.createPortMirroring::parameters.resource,
+  "application/json",
+  "workloadNetworkPortMirroring"
+);
+@@clientName(WorkloadNetworks.createPortMirroring::parameters.resource,
+  "workloadNetworkPortMirroring"
+);
+@@OpenAPI.extension(WorkloadNetworks.createPortMirroring::parameters.resource,
+  "x-ms-client-name",
+  "workloadNetworkPortMirroring"
+);
+
+@@encodedName(WorkloadNetworks.updatePortMirroring::parameters.properties,
+  "application/json",
+  "workloadNetworkPortMirroring"
+);
+@@clientName(WorkloadNetworks.updatePortMirroring::parameters.properties,
+  "workloadNetworkPortMirroring"
+);
+@@OpenAPI.extension(WorkloadNetworks.updatePortMirroring::parameters.properties,
+  "x-ms-client-name",
+  "workloadNetworkPortMirroring"
+);
+
+@@encodedName(WorkloadNetworks.createVMGroup::parameters.resource,
+  "application/json",
+  "workloadNetworkVMGroup"
+);
+@@clientName(WorkloadNetworks.createVMGroup::parameters.resource,
+  "application/json",
+  "workloadNetworkVMGroup"
+);
+@@OpenAPI.extension(WorkloadNetworks.createVMGroup::parameters.resource,
+  "x-ms-client-name",
+  "workloadNetworkVMGroup"
+);
+
+@@encodedName(WorkloadNetworks.updateVMGroup::parameters.properties,
+  "application/json",
+  "workloadNetworkVMGroup"
+);
+@@clientName(WorkloadNetworks.updateVMGroup::parameters.properties,
+  "workloadNetworkVMGroup"
+);
+@@OpenAPI.extension(WorkloadNetworks.updateVMGroup::parameters.properties,
+  "x-ms-client-name",
+  "workloadNetworkVMGroup"
+);
+
+@@encodedName(WorkloadNetworks.createDnsService::parameters.resource,
+  "application/json",
+  "workloadNetworkDnsService"
+);
+@@clientName(WorkloadNetworks.createDnsService::parameters.resource,
+  "workloadNetworkDnsService"
+);
+@@OpenAPI.extension(WorkloadNetworks.createDnsService::parameters.resource,
+  "x-ms-client-name",
+  "workloadNetworkDnsService"
+);
+
+@@encodedName(WorkloadNetworks.updateDnsService::parameters.properties,
+  "application/json",
+  "workloadNetworkDnsService"
+);
+@@clientName(WorkloadNetworks.updateDnsService::parameters.properties,
+  "workloadNetworkDnsService"
+);
+@@OpenAPI.extension(WorkloadNetworks.updateDnsService::parameters.properties,
+  "x-ms-client-name",
+  "workloadNetworkDnsService"
+);
+
+@@encodedName(WorkloadNetworks.createDnsZone::parameters.resource,
+  "application/json",
+  "workloadNetworkDnsZone"
+);
+@@clientName(WorkloadNetworks.createDnsZone::parameters.resource,
+  "workloadNetworkDnsZone"
+);
+@@OpenAPI.extension(WorkloadNetworks.createDnsZone::parameters.resource,
+  "x-ms-client-name",
+  "workloadNetworkDnsZone"
+);
+
+@@encodedName(WorkloadNetworks.updateDnsZone::parameters.properties,
+  "application/json",
+  "workloadNetworkDnsZone"
+);
+@@clientName(WorkloadNetworks.updateDnsZone::parameters.properties,
+  "workloadNetworkDnsZone"
+);
+@@OpenAPI.extension(WorkloadNetworks.updateDnsZone::parameters.properties,
+  "x-ms-client-name",
+  "workloadNetworkDnsZone"
+);
+
+@@encodedName(WorkloadNetworks.createPublicIP::parameters.resource,
   "application/json",
   "workloadNetworkPublicIP"
 );
-@@clientName(WorkloadNetworkPublicIps.create::parameters.resource,
+@@clientName(WorkloadNetworks.createPublicIP::parameters.resource,
   "workloadNetworkPublicIP"
 );
-@@OpenAPI.extension(WorkloadNetworkPublicIps.create::parameters.resource,
+@@OpenAPI.extension(WorkloadNetworks.createPublicIP::parameters.resource,
   "x-ms-client-name",
   "workloadNetworkPublicIP"
 );
