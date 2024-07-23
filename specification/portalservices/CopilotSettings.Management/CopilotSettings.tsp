@@ -24,9 +24,12 @@ model CopilotSettingsResource is ProxyResource<CopilotSettingsProperties> {
 interface CopilotSettings {
   get is ArmResourceRead<CopilotSettingsResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<CopilotSettingsResource>;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     CopilotSettingsResource,
-    CopilotSettingsProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      CopilotSettingsResource,
+      CopilotSettingsProperties
+    >
   >;
   delete is ArmResourceDeleteSync<CopilotSettingsResource>;
 }

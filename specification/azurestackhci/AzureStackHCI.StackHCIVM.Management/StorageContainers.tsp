@@ -47,7 +47,7 @@ interface StorageContainers {
   delete is ArmResourceDeleteWithoutOkAsync<StorageContainer>;
 
   @doc("Lists all of the storage containers in the specified resource group. Use the nextLink property in the response to get the next page of storage containers.")
-  list is ArmResourceListByParent<StorageContainer>;
+  listByResourceGroup is ArmResourceListByParent<StorageContainer>;
 
   @doc("Lists all of the storage containers in the specified subscription. Use the nextLink property in the response to get the next page of storage containers.")
   listAll is ArmListBySubscription<StorageContainer>;

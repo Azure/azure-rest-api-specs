@@ -18,7 +18,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assistant'
       requestBody:
-        description: Body parameter.
+        description: The request details to use when creating a new assistant.
         required: true
         content:
           application/json:
@@ -125,7 +125,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assistant'
       requestBody:
-        description: Body parameter.
+        description: The request details to use when modifying an existing assistant.
         required: true
         content:
           application/json:
@@ -264,7 +264,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssistantThread'
       requestBody:
-        description: Body parameter.
+        description: The details used to create a new assistant thread.
         required: true
         content:
           application/json:
@@ -283,7 +283,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadRun'
       requestBody:
-        description: Body parameter.
+        description: The details used when creating and immediately running a new assistant thread.
         required: true
         content:
           application/json:
@@ -325,7 +325,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssistantThread'
       requestBody:
-        description: Body parameter.
+        description: The details used to update an existing assistant thread.
         required: true
         content:
           application/json:
@@ -529,7 +529,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadRun'
       requestBody:
-        description: The details for the run to create.
+        description: The details used when creating a new run of an assistant thread.
         required: true
         content:
           application/json:
@@ -918,7 +918,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/VectorStore'
       requestBody:
-        description: Body parameter.
+        description: Request object for creating a vector store.
         required: true
         content:
           application/json:
@@ -960,6 +960,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/VectorStore'
       requestBody:
+        description: Request object for updating a vector store.
         required: true
         content:
           application/json:
