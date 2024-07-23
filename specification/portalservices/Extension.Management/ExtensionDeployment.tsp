@@ -17,7 +17,8 @@ namespace Microsoft.PortalServices;
  * Extension Deployment
  */
 @parentResource(PortalExtension)
-model ExtensionDeployment is TrackedResource<ExtensionDeploymentProperties> {
+model ExtensionDeployment
+  is Azure.ResourceManager.TrackedResource<ExtensionDeploymentProperties> {
   /**
    * The name of the deployment
    */
@@ -46,7 +47,6 @@ interface PortalExtensionDeployments {
   /**
    * Updates an existing portal extension deployment.
    */
-  @parameterVisibility("read")
   update is ArmCustomPatchSync<
     ExtensionDeployment,
     PatchableExtensionDeployment

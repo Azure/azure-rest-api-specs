@@ -17,7 +17,8 @@ namespace Microsoft.PortalServices;
  * A Portal Extension Slot
  */
 @parentResource(PortalExtension)
-model ExtensionSlot is TrackedResource<ExtensionSlotProperties> {
+model ExtensionSlot
+  is Azure.ResourceManager.TrackedResource<ExtensionSlotProperties> {
   /**
    * The name of the slot
    */
@@ -46,7 +47,6 @@ interface PortalExtensionSlots {
   /**
    * Updates an existing portal extension slot.
    */
-  @parameterVisibility("read")
   update is ArmCustomPatchSync<ExtensionSlot, PatchableExtensionSlot>;
 
   /**

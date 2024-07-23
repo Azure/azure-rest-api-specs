@@ -356,13 +356,78 @@
         "Accepted",
         "Creating",
         "Updating",
-        "Deleting",
         "Moving",
+        "Deleting",
         "Deleted"
       ],
       "x-ms-enum": {
         "name": "ArcExtensionState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "Arc extension state is not specified."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Arc extension state is Succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Arc extension state is Failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Arc extension state is Canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Arc extension state is Accepted when extension installation triggered."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Arc extension is in Creating State."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Arc extension is in Updating State."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "Arc extension is in Moving State."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Arc extension is in Deleting State."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Arc extension is in Deleted State."
+          }
+        ]
+      }
+    },
+    "ConfidentialVmProfile": {
+      "type": "object",
+      "properties": {
+        "igvmStatus": {
+          "$ref": "#/definitions/IgvmStatus",
+          "description": "IGVM status will be enabled if machine is CVM supported.",
+          "readOnly": true
+        },
+        "statusDetails": {
+          "$ref": "#/definitions/StatusDetail"
+        }
       }
     },
     "DeviceConfiguration": {
@@ -389,8 +454,13 @@
       "type": "string",
       "description": "Edge device kind.",
       "enum": [
-        "HCI"
+        "HCI",
+        "WindowsServer",
+        "WindowsIoT",
+        "AzureLinux",
+        "UbuntuLinux"
       ],
+      "default": "HCI",
       "x-ms-enum": {
         "name": "DeviceKind",
         "modelAsString": true,
@@ -399,6 +469,26 @@
             "name": "HCI",
             "value": "HCI",
             "description": "Arc-enabled edge device with HCI OS."
+          },
+          {
+            "name": "WindowsServer",
+            "value": "WindowsServer",
+            "description": "Arc-enabled edge device with WindowsServer OS."
+          },
+          {
+            "name": "WindowsIoT",
+            "value": "WindowsIoT",
+            "description": "Arc-enabled edge device with WindowsIoT OS."
+          },
+          {
+            "name": "AzureLinux",
+            "value": "AzureLinux",
+            "description": "Arc-enabled edge device with AzureLinux OS."
+          },
+          {
+            "name": "UbuntuLinux",
+            "value": "UbuntuLinux",
+            "description": "Arc-enabled edge device with UbuntuLinux OS."
           }
         ]
       }
@@ -469,7 +559,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/DeviceKind",
-          "description": "Job kind to support polymorphic resource.",
+          "description": "Device kind to support polymorphic resource.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -764,6 +854,7 @@
     },
     "HciOsProfile": {
       "type": "object",
+      "description": "OS configurations for HCI device.",
       "properties": {
         "bootType": {
           "type": "string",
@@ -834,6 +925,36 @@
           "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
           "readOnly": true
         }
+      }
+    },
+    "IgvmStatus": {
+      "type": "string",
+      "description": "IGVM status that refer if Confidential VM  is supported on device.",
+      "enum": [
+        "Unknown",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "IgvmStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "IGVM status is unknown."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "IGVM status is enabled that  refers Confidential VM is supported on this device."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "IGVM status is disable that refers Confidential VM is not supported on this device."
+          }
+        ]
       }
     },
     "Intents": {
@@ -991,6 +1112,11 @@
           "$ref": "#/definitions/ExtensionProfile",
           "description": "Extensions details for edge device.",
           "readOnly": true
+        },
+        "confidentialVmProfile": {
+          "$ref": "#/definitions/ConfidentialVmProfile",
+          "description": "Confidential VM support details for edge device.",
+          "readOnly": true
         }
       }
     },
@@ -1011,6 +1137,21 @@
         "sbeManifest": {
           "type": "string",
           "description": "This represents discovered update results for matching updates and store it as SBE manifest.",
+          "readOnly": true
+        }
+      }
+    },
+    "StatusDetail": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "status code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A detailed message that explains status.",
           "readOnly": true
         }
       }

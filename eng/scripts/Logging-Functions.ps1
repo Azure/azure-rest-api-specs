@@ -15,7 +15,7 @@ function LogWarning {
     Write-Host ("##vso[task.LogIssue type=warning;]$args" -replace "`n", "%0D%0A")
   }
   elseif (Test-SupportsGitHubLogging) {
-    Write-Host ("::warning::$args" -replace "`n", "%0D%0A")
+    Write-Warning ("::warning::$args" -replace "`n", "%0D%0A")
   }
   else {
     Write-Warning "$args"
@@ -28,7 +28,7 @@ function LogErrorForFile($file, $errorString)
     Write-Host ("##vso[task.logissue type=error;sourcepath=$file;linenumber=1;columnnumber=1;]$errorString" -replace "`n", "%0D%0A")
   }
   elseif (Test-SupportsGitHubLogging) {
-    Write-Host ("::error file=$file,line=1,col=1::$errorString" -replace "`n", "%0D%0A")
+    Write-Error ("::error file=$file,line=1,col=1::$errorString" -replace "`n", "%0D%0A")
   }
   else {
     Write-Error "[Error in file $file]$errorString"
@@ -39,7 +39,7 @@ function LogError {
     Write-Host ("##vso[task.LogIssue type=error;]$args" -replace "`n", "%0D%0A")
   }
   elseif (Test-SupportsGitHubLogging) {
-    Write-Host ("::error::$args" -replace "`n", "%0D%0A")
+    Write-Error ("::error::$args" -replace "`n", "%0D%0A")
   }
   else {
     Write-Error "$args"
@@ -51,7 +51,7 @@ function LogDebug {
     Write-Host "[debug]$args"
   }
   elseif (Test-SupportsGitHubLogging) {
-    Write-Host "::debug::$args"
+    Write-Debug "::debug::$args"
   }
   else {
     Write-Debug "$args"

@@ -15,7 +15,8 @@ namespace Microsoft.ProgrammableConnectivity;
  * A Programmable Connectivity Operator API Plans resource. This is a readonly resource that indicates which Operator Network APIs are available in the user's subscription.
  */
 @subscriptionResource
-model OperatorApiPlan is ProxyResource<OperatorApiPlanProperties> {
+model OperatorApiPlan
+  is Azure.ResourceManager.ProxyResource<OperatorApiPlanProperties> {
   /**
    * APC Gateway Plan Name.
    */

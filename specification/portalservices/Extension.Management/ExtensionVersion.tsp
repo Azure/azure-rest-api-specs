@@ -17,7 +17,8 @@ namespace Microsoft.PortalServices;
  * Extension Version
  */
 @parentResource(PortalExtension)
-model ExtensionVersion is TrackedResource<ExtensionVersionProperties> {
+model ExtensionVersion
+  is Azure.ResourceManager.TrackedResource<ExtensionVersionProperties> {
   /**
    * The name of the version
    */
@@ -46,7 +47,6 @@ interface PortalExtensionVersions {
   /**
    * Updates an existing portal extension version.
    */
-  @parameterVisibility("read")
   update is ArmCustomPatchSync<ExtensionVersion, PatchableExtensionVersion>;
 
   /**

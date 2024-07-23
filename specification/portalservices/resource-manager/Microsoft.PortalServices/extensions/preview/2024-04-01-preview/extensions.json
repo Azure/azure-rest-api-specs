@@ -320,6 +320,10 @@
               "$ref": "#/definitions/PortalExtension"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -763,6 +767,10 @@
               "$ref": "#/definitions/ExtensionDeployment"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1269,6 +1277,10 @@
               "$ref": "#/definitions/ExtensionSlot"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1587,6 +1599,10 @@
               "$ref": "#/definitions/ExtensionVersion"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1866,11 +1882,7 @@
         "properties": {
           "$ref": "#/definitions/ExtensionDeploymentProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1971,11 +1983,7 @@
         "properties": {
           "$ref": "#/definitions/ExtensionSlotProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2046,11 +2054,7 @@
         "properties": {
           "$ref": "#/definitions/ExtensionVersionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2225,11 +2229,7 @@
         "properties": {
           "$ref": "#/definitions/PortalExtensionProperties",
           "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -2372,19 +2372,19 @@
       "type": "object",
       "description": "The content metadata of a file",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for PortalExtensionListSourcesFile."
-        },
         "lastModifiedAt": {
           "type": "string",
           "description": "The last time stamp the file was modified."
+        },
+        "kind": {
+          "$ref": "#/definitions/SourceFileKind",
+          "description": "The kind of source file."
         }
       },
       "discriminator": "kind",
       "required": [
-        "kind",
-        "lastModifiedAt"
+        "lastModifiedAt",
+        "kind"
       ]
     },
     "PortalExtensionListSourcesFolder": {
@@ -2745,6 +2745,41 @@
             "name": "GA",
             "value": "GA",
             "description": "The extension is in GA."
+          }
+        ]
+      }
+    },
+    "SourceFileKind": {
+      "type": "string",
+      "enum": [
+        "Svg",
+        "AssetType",
+        "View",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "SourceFileKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Svg",
+            "value": "Svg",
+            "description": "The file is a SVG image."
+          },
+          {
+            "name": "AssetType",
+            "value": "AssetType",
+            "description": "The file is an asset type."
+          },
+          {
+            "name": "View",
+            "value": "View",
+            "description": "The file is a view."
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "The file is of other kind."
           }
         ]
       }

@@ -31,7 +31,7 @@ enum Versions {
 }
 
 @doc("A DurableTaskService resource")
-model Namespace is TrackedResource<NamespaceProperties> {
+model Namespace is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
   @doc("The name of the service")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
   @key("namespaceName")
@@ -39,16 +39,11 @@ model Namespace is TrackedResource<NamespaceProperties> {
   @path
   @visibility("read", "create")
   name: string;
-
-  ...ManagedServiceIdentity;
 }
 
 @doc("Update namespace")
 model NamespaceUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** Updatable managed service identity */
-  identity?: ManagedServiceIdentityUpdate;
 
   /** RP-specific properties */
   properties?: NamespaceProperties;
@@ -56,9 +51,6 @@ model NamespaceUpdate {
 
 model NamespacePropertiesUpdate
   is OptionalProperties<UpdateableProperties<NamespaceProperties>>;
-
-model ManagedServiceIdentityUpdate
-  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
 
 @doc("Details of the Namespace.")
 model NamespaceProperties {
@@ -76,7 +68,7 @@ model NamespaceProperties {
 
 @doc("An Task Hub resource belonging to the namespace.")
 @parentResource(Namespace)
-model TaskHub is ProxyResource<TaskHubProperties> {
+model TaskHub is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
   @doc("Task Hub name")
   @key("taskHubName")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
@@ -84,6 +76,8 @@ model TaskHub is ProxyResource<TaskHubProperties> {
   @path
   @visibility("read", "create")
   name: string;
+
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 @doc("The properties of Task Hub")
@@ -91,6 +85,11 @@ model TaskHubProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+}
+
+@doc("Update Task Hub")
+model TaskHubUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 @doc("The status of the current operation.")
@@ -129,6 +128,8 @@ interface TaskHubs {
   get is ArmResourceRead<TaskHub>;
   @doc("Create or update a Task Hub")
   createOrUpdate is ArmResourceCreateOrReplaceSync<TaskHub>;
+  @doc("Update a Task Hub")
+  update is ArmCustomPatchAsync<TaskHub, TaskHubUpdate>;
   @doc("Delete a Task Hub")
   delete is ArmResourceDeleteSync<TaskHub>;
   @doc("List Task Hubs")

@@ -1,0 +1,116 @@
+{
+  "title": "ClusterJobs_Get_AddServerJob",
+  "operationId": "ClusterJobs_Get",
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "subscriptionId": "6D37FF61-4C93-4377-B06B-FC6D6D561A7D",
+    "resourceGroupName": "rghci",
+    "clusterName": "Y-k0MG",
+    "jobsName": "CLPJ9Kj-2y7p271n8nmIp"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobType": "AddServer",
+          "serverName": "Node-2",
+          "deploymentMode": "Deploy",
+          "hostIpv4Address": "192.168.10.10",
+          "secrets": [
+            {
+              "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "LocalAdminCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+            },
+            {
+              "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+              "eceSecretName": "AzureStackLCMUserCredential",
+              "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+            }
+          ],
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Add Server Deployment",
+                  "description": "Add Server.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Add Server Deployment",
+                  "description": "Add Server.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "arcNodeResourceIds": [
+            "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+          ],
+          "status": "NotSpecified"
+        },
+        "kind": "Windows",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/clu1/jobs/addServer",
+        "name": "bxefc",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "systemData": {
+          "createdBy": "zsnvvvbj",
+          "createdByType": "User",
+          "createdAt": "2024-07-01T17:02:21.168Z",
+          "lastModifiedBy": "qxlrx",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-07-01T17:02:21.168Z"
+        }
+      }
+    }
+  }
+}

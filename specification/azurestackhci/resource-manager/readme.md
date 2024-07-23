@@ -60,7 +60,7 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
-      - jobs.json
+      - hci.json
       - hciCommon.json
       - edgeNodePool.json
 
@@ -91,7 +91,7 @@ suppressions:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
-      - jobs.json
+      - hci.json
       - common.json
       - edgeNodePool.json
 
@@ -99,7 +99,7 @@ suppressions:
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
     from:
       - deploymentSettings.json
-      - jobs.json
+      - hci.json
       - clusters.json
       - securitySettings.json
     where:
@@ -115,6 +115,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/securitySettings/{securitySettingsName}"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/triggerLogCollection"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSecretsLocations"]
 
   - code: PatchPropertiesCorrespondToPutProperties
     reason: already used in GA api version, fixing it will cause breaking change
@@ -130,13 +131,13 @@ suppressions:
     reason: already working without the properties section, adding it will break polymorphism
     from:
       - edgeDevices.json
-      - jobs.json
+      - hci.json
       
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
     from:
       - deploymentSettings.json
-      - jobs.json
+      - hci.json
     where:
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
@@ -237,7 +238,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/securitySettings.json
-  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/jobs.json
+  - Microsoft.AzureStackHCI/preview/2023-12-01-preview/hci.json
   - Microsoft.AzureStackHCI/preview/2023-12-01-preview/hciCommon.json
 ```
 

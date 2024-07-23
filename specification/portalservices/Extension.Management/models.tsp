@@ -8,7 +8,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
-using Autorest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -445,6 +444,11 @@ model PortalExtensionListSourcesFile {
    * The last time stamp the file was modified.
    */
   lastModifiedAt: string;
+
+  /**
+   * The kind of source file.
+   */
+  kind: SourceFileKind;
 }
 
 /**
@@ -726,4 +730,20 @@ model PortalExtensionListSourcesOtherFile
    * The content kind
    */
   kind: "Other";
+}
+
+union SourceFileKind {
+  string,
+
+  @doc("The file is a SVG image.")
+  Svg: "Svg",
+
+  @doc("The file is an asset type.")
+  AssetType: "AssetType",
+
+  @doc("The file is a view.")
+  View: "View",
+
+  @doc("The file is of other kind.")
+  Other: "Other",
 }

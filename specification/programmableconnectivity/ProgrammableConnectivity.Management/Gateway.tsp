@@ -14,7 +14,7 @@ namespace Microsoft.ProgrammableConnectivity;
 /**
  * A Programmable Connectivity Gateway resource
  */
-model Gateway is TrackedResource<GatewayProperties> {
+model Gateway is Azure.ResourceManager.TrackedResource<GatewayProperties> {
   /**
    * Azure Programmable Connectivity Gateway Name
    */
@@ -34,7 +34,7 @@ model GatewayProperties {
    * List of Operator API Connections selected by the user
    */
   @visibility("read")
-  operatorApiConnections?: ResourceIdentifier<[
+  operatorApiConnections?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ProgrammableConnectivity/operatorApiConnections";
     }
