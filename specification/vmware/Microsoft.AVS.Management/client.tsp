@@ -27,6 +27,7 @@ using Microsoft.AVS;
 
 // operation
 @@clientName(WorkloadNetworks.getPublicIP, "getPublicIp", "java");
+@@clientName(WorkloadNetworks.createPublicIP, "createPublicIp", "java");
 @@clientName(WorkloadNetworks.deletePublicIP, "deletePublicIp", "java");
 
 // model
