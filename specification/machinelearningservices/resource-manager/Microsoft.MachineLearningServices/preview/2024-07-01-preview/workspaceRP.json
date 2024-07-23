@@ -1125,7 +1125,7 @@
           "V2WorkspaceConnectionResource"
         ],
         "summary": "Gets the specified custom blocklist associated with the Azure OpenAI connection.",
-        "operationId": "ConnectionRaiBlocklistItem_Get",
+        "operationId": "ConnectionRaiBlocklist_Get",
         "produces": [
           "application/json"
         ],
@@ -1232,6 +1232,154 @@
         "x-ms-examples": {
           "Create Rai Blocklist": {
             "$ref": "./examples/WorkspaceConnection/RaiBlocklist/create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems": {
+      "post": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.",
+        "operationId": "ConnectionRaiBlocklistItem_AddBulk",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/RaiBlocklistParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiBlocklistItemsBulkAddRequest"
+            },
+            "description": "Properties describing the custom blocklist items."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RaiBlocklistItemPropertiesBasicResource"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Bulk Rai Blocklist Items": {
+            "$ref": "./examples/WorkspaceConnection/RaiBlocklistItem/addBulk.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems": {
+      "post": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.",
+        "operationId": "ConnectionRaiBlocklistItem_DeleteBulk",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/RaiBlocklistParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiBlocklistItemsBulkDeleteRequest"
+            },
+            "description": "List of RAI Blocklist Items Names."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Bulk Rai Blocklist Items": {
+            "$ref": "./examples/WorkspaceConnection/RaiBlocklistItem/deleteBulk.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1367,7 +1515,7 @@
           "V2WorkspaceConnectionResource"
         ],
         "summary": "Gets the specified custom blocklist item associated with the Azure OpenAI connection.",
-        "operationId": "ConnectionRaiBlocklist_Get",
+        "operationId": "ConnectionRaiBlocklistItem_Get",
         "produces": [
           "application/json"
         ],
@@ -2756,25 +2904,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listConnectionModels": {
       "post": {
         "tags": [
-          "Workspaces"
+          "V2WorkspaceConnectionResource"
         ],
-        "operationId": "Workspaces_ListConnectionModels",
-        "consumes": [
-          "application/json"
-        ],
+        "summary": "Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.",
+        "operationId": "Connection_ListModels",
         "produces": [
           "application/json"
         ],
-        "description": "List available models from all connections.",
-        "x-ms-examples": {
-          "List Connection Models": {
-            "$ref": "./examples/Workspace/listConnectionModels.json"
-          }
-        },
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -2783,6 +2920,9 @@
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2797,6 +2937,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy": {
+            "$ref": "./examples/WorkspaceConnection/listConnectionModels.json"
           }
         }
       }
@@ -3761,74 +3906,6 @@
       },
       "x-ms-discriminator-value": "AccountKey"
     },
-    "AccountModel": {
-      "description": "Cognitive Services account Model.",
-      "type": "object",
-      "properties": {
-        "baseModel": {
-          "type": "object",
-          "description": "Base Model Identifier.",
-          "$ref": "#/definitions/DeploymentModel"
-        },
-        "isDefaultVersion": {
-          "type": "boolean",
-          "description": "If the model is default version."
-        },
-        "skus": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelSku"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "The list of Model Sku."
-        },
-        "maxCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The max capacity."
-        },
-        "capabilities": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The capabilities."
-        },
-        "finetuneCapabilities": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The capabilities for finetune models."
-        },
-        "deprecation": {
-          "type": "object",
-          "$ref": "#/definitions/ModelDeprecationInfo"
-        },
-        "lifecycleStatus": {
-          "type": "string",
-          "enum": [
-            "GenerallyAvailable",
-            "Preview"
-          ],
-          "x-ms-enum": {
-            "name": "ModelLifecycleStatus",
-            "modelAsString": true
-          },
-          "description": "Model lifecycle status."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentModel"
-        }
-      ]
-    },
     "AllowedContentLevel": {
       "description": "Level at which content is filtered.",
       "enum": [
@@ -3856,29 +3933,6 @@
         }
       },
       "x-ms-discriminator-value": "ApiKey"
-    },
-    "CallRateLimit": {
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "number",
-          "description": "The count value of Call Rate Limit."
-        },
-        "renewalPeriod": {
-          "type": "number",
-          "description": "The renewal period in seconds of Call Rate Limit."
-        },
-        "rules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ThrottlingRule"
-          },
-          "x-ms-identifiers": [
-            "key"
-          ]
-        }
-      },
-      "description": "The call rate limit Cognitive Services account."
     },
     "CapacityConfig": {
       "type": "object",
@@ -4010,6 +4064,7 @@
         "Redis",
         "ApiKey",
         "AzureOpenAI",
+        "AIServices",
         "CognitiveSearch",
         "CognitiveService",
         "CustomKeys",
@@ -4122,6 +4177,29 @@
         "modelAsString": true
       }
     },
+    "ServerlessEndpointContentSafety": {
+      "required": [
+        "contentSafetyStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "contentSafetyStatus": {
+          "$ref": "#/definitions/ContentSafetyStatus"
+        }
+      }
+    },
+    "ContentSafetyEndpointDeploymentResourceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Azure.ContentSafety"
+    },
     "ContentSafetyEndpointResourceProperties": {
       "type": "object",
       "allOf": [
@@ -4130,6 +4208,17 @@
         }
       ],
       "x-ms-discriminator-value": "Azure.ContentSafety"
+    },
+    "ContentSafetyStatus": {
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ContentSafetyStatus",
+        "modelAsString": true
+      }
     },
     "CosmosDbSettings": {
       "type": "object",
@@ -4177,7 +4266,9 @@
         "Succeeded",
         "Deleting",
         "Accepted",
-        "Canceled"
+        "Canceled",
+        "Scaling",
+        "Disabled"
       ],
       "type": "string",
       "readOnly": true,
@@ -4188,32 +4279,6 @@
         "name": "DefaultResourceProvisioningState",
         "modelAsString": true
       }
-    },
-    "DeploymentModel": {
-      "type": "object",
-      "properties": {
-        "format": {
-          "type": "string",
-          "description": "Deployment model format."
-        },
-        "name": {
-          "type": "string",
-          "description": "Deployment model name."
-        },
-        "version": {
-          "type": "string",
-          "description": "Optional. Deployment model version. If version is not specified, a default version will be assigned. The default version is different for different models and might change when there is new version available for a model. Default version for a model could be found from list models API."
-        },
-        "source": {
-          "type": "string",
-          "description": "Optional. Deployment model source ARM resource ID."
-        },
-        "callRateLimit": {
-          "readOnly": true,
-          "$ref": "#/definitions/CallRateLimit"
-        }
-      },
-      "description": "Properties of Cognitive Services account deployment model."
     },
     "DiagnoseRequestProperties": {
       "type": "object",
@@ -4481,6 +4546,30 @@
         }
       }
     },
+    "EndpointAuthMode": {
+      "enum": [
+        "AMLToken",
+        "Key",
+        "AADToken"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointAuthMode",
+        "modelAsString": true
+      }
+    },
+    "EndpointComputeType": {
+      "enum": [
+        "Managed",
+        "Kubernetes",
+        "AzureMLCompute"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EndpointComputeType",
+        "modelAsString": true
+      }
+    },
     "EndpointDeploymentModel": {
       "type": "object",
       "properties": {
@@ -4503,18 +4592,27 @@
       }
     },
     "EndpointDeploymentResourceProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
-        }
+      "required": [
+        "type"
       ],
+      "type": "object",
       "properties": {
+        "failureReason": {
+          "description": "The failure reason if the creation failed.",
+          "type": "string"
+        },
         "provisioningState": {
           "description": "Read-only provision state status property.",
           "$ref": "#/definitions/DefaultResourceProvisioningState"
+        },
+        "type": {
+          "description": "Kind of the deployment.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
         }
-      }
+      },
+      "discriminator": "type"
     },
     "EndpointDeploymentResourcePropertiesBasicResource": {
       "required": [
@@ -4529,9 +4627,6 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/EndpointDeploymentResourceProperties"
-        },
-        "sku": {
-          "$ref": "#/definitions/CognitiveServicesSku"
         }
       }
     },
@@ -4559,6 +4654,200 @@
         }
       }
     },
+    "EndpointModelDeprecationProperties": {
+      "type": "object",
+      "properties": {
+        "fineTune": {
+          "description": "The datetime of deprecation of the fineTune Model.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "inference": {
+          "description": "The datetime of deprecation of the inference Model.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "EndpointModelProperties": {
+      "description": "Endpoint Model properties.",
+      "type": "object",
+      "properties": {
+        "capabilities": {
+          "description": "The capabilities.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "deprecation": {
+          "$ref": "#/definitions/EndpointModelDeprecationProperties"
+        },
+        "finetuneCapabilities": {
+          "description": "The capabilities for finetune models.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "format": {
+          "description": "Deployment model format.",
+          "type": "string"
+        },
+        "isDefaultVersion": {
+          "description": "If the model is default version.",
+          "type": "boolean"
+        },
+        "lifecycleStatus": {
+          "type": "string",
+          "enum": [
+            "GenerallyAvailable",
+            "Preview"
+          ],
+          "x-ms-enum": {
+            "name": "ModelLifecycleStatus",
+            "modelAsString": true
+          },
+          "description": "Model lifecycle status."
+        },
+        "maxCapacity": {
+          "description": "The max capacity.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Deployment model name.",
+          "type": "string"
+        },
+        "skus": {
+          "description": "The list of Model Sku.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointModelSkuProperties"
+          }
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        },
+        "version": {
+          "description": "Optional. Deployment model version. If version is not specified, a default version will be assigned. The default version is different for different models and might change when there is new version available for a model. Default version for a model could be found from list models API.",
+          "type": "string"
+        }
+      }
+    },
+    "EndpointModelSkuCapacityProperties": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "description": "The default capacity.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "maximum": {
+          "description": "The maximum capacity.",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "EndpointModelSkuProperties": {
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "$ref": "#/definitions/EndpointModelSkuCapacityProperties"
+        },
+        "connectionIds": {
+          "description": "The list of ARM id for the connection support this SKU.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "arm-id"
+          }
+        },
+        "deprecationDate": {
+          "description": "The datetime of deprecation of the model SKU.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the model SKU.",
+          "type": "string"
+        },
+        "rateLimits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointModelSkuRateLimitProperties"
+          }
+        },
+        "usageName": {
+          "description": "The usage name of the model SKU.",
+          "type": "string"
+        }
+      }
+    },
+    "EndpointModelSkuRateLimitProperties": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The count value of Call Rate Limit.",
+          "format": "float",
+          "type": "number"
+        },
+        "renewalPeriod": {
+          "description": "The renewal period in seconds of Call Rate Limit.",
+          "format": "float",
+          "type": "number"
+        },
+        "rules": {
+          "description": "The call rate limit for the model.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointModelSkuRateLimitRuleProperties"
+          }
+        }
+      }
+    },
+    "EndpointModelSkuRateLimitRulePatternProperties": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "EndpointModelSkuRateLimitRuleProperties": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "float",
+          "type": "number"
+        },
+        "dynamicThrottlingEnabled": {
+          "description": "If the dynamic throttling is enabled.",
+          "type": "boolean"
+        },
+        "key": {
+          "type": "string"
+        },
+        "matchPatterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointModelSkuRateLimitRulePatternProperties"
+          }
+        },
+        "minCount": {
+          "format": "float",
+          "type": "number"
+        },
+        "renewalPeriod": {
+          "format": "float",
+          "type": "number"
+        }
+      }
+    },
     "EndpointModels": {
       "type": "object",
       "properties": {
@@ -4570,7 +4859,7 @@
           "description": "List of models.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AccountModel"
+            "$ref": "#/definitions/EndpointModelProperties"
           }
         }
       }
@@ -4586,6 +4875,13 @@
           "type": "string",
           "format": "arm-id"
         },
+        "deployments": {
+          "description": "Deployments info.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+          }
+        },
         "endpointType": {
           "description": "Type of the endpoint.",
           "type": "string",
@@ -4594,7 +4890,8 @@
             "Azure.Speech",
             "Azure.ContentSafety",
             "Azure.Llama",
-            "managedOnlineEndpoint"
+            "managedOnlineEndpoint",
+            "serverlessEndpoint"
           ],
           "x-ms-enum": {
             "name": "endpointType",
@@ -4608,6 +4905,10 @@
         },
         "failureReason": {
           "description": "The failure reason if the creation failed.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the endpoint.\r\nSince input dto and when parse endpoint resource share the same contract\r\nthis Location field is just for parse the endpoint resource info\r\nwe won't let customer specify the endpoint resource location since we will create it the same location as workspace",
           "type": "string"
         },
         "name": {
@@ -4954,6 +5255,23 @@
         "modelAsString": true
       }
     },
+    "ManagedOnlineEndpointDeploymentResourceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+        }
+      ],
+      "properties": {
+        "endpointComputeType": {
+          "$ref": "#/definitions/EndpointComputeType"
+        },
+        "model": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "managedOnlineEndpoint"
+    },
     "ManagedOnlineEndpointResourceProperties": {
       "type": "object",
       "allOf": [
@@ -4961,60 +5279,73 @@
           "$ref": "#/definitions/EndpointResourceProperties"
         }
       ],
-      "x-ms-discriminator-value": "managedOnlineEndpoint"
-    },
-    "ModelDeprecationInfo": {
-      "description": "Cognitive Services account ModelDeprecationInfo.",
-      "type": "object",
       "properties": {
-        "fineTune": {
-          "type": "string",
-          "description": "The datetime of deprecation of the fineTune Model."
+        "authMode": {
+          "$ref": "#/definitions/EndpointAuthMode"
         },
-        "inference": {
-          "type": "string",
-          "description": "The datetime of deprecation of the inference Model."
-        }
-      }
-    },
-    "ModelSku": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the model SKU."
+        "compute": {
+          "type": "string"
         },
-        "connectionIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of connection ids."
+        "description": {
+          "type": "string"
         },
-        "usageName": {
-          "type": "string",
-          "description": "The usage name of the model SKU."
-        },
-        "deprecationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The datetime of deprecation of the model SKU."
-        },
-        "capacity": {
+        "mirrorTraffic": {
           "type": "object",
-          "description": "The capacity configuration.",
-          "$ref": "#/definitions/CapacityConfig"
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
         },
-        "rateLimits": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CallRateLimit"
-          },
-          "x-ms-identifiers": [],
-          "description": "The list of rateLimit."
+        "scoringUri": {
+          "format": "uri",
+          "type": "string"
+        },
+        "traffic": {
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
         }
       },
-      "description": "Describes an available Cognitive Services Model SKU."
+      "x-ms-discriminator-value": "managedOnlineEndpoint"
+    },
+    "ManagedPERequirement": {
+      "enum": [
+        "Required",
+        "NotRequired",
+        "NotApplicable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedPERequirement",
+        "modelAsString": true
+      }
+    },
+    "ManagedPEStatus": {
+      "enum": [
+        "Inactive",
+        "Active",
+        "NotApplicable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedPEStatus",
+        "modelAsString": true
+      }
+    },
+    "ServerlessEndpointModelSettings": {
+      "required": [
+        "modelId"
+      ],
+      "type": "object",
+      "properties": {
+        "modelId": {
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        }
+      }
     },
     "NoneAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
@@ -5133,6 +5464,18 @@
         }
       },
       "x-ms-discriminator-value": "OAuth2"
+    },
+    "OpenAIEndpointDeploymentResourceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Azure.OpenAI"
     },
     "OpenAIEndpointResourceProperties": {
       "type": "object",
@@ -5350,6 +5693,12 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "parentRuleNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "x-ms-discriminator-value": "PrivateEndpoint"
@@ -5482,6 +5831,36 @@
       "x-ms-enum": {
         "name": "PublicNetworkAccessType",
         "modelAsString": true
+      }
+    },
+    "RaiBlocklistItemsBulkAddRequest": {
+      "description": "The list of Cognitive Services RaiBlocklist Items for batch add.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
+    },
+    "RaiBlocklistItemBulkRequest": {
+      "description": "The Cognitive Services RaiBlocklist Item request body.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/RaiBlocklistItemProperties",
+          "description": "Properties of Cognitive Services RaiBlocklist Item."
+        }
+      }
+    },
+    "RaiBlocklistItemsBulkDeleteRequest": {
+      "description": "The list of Cognitive Services RaiBlocklist Items Names.",
+      "type": "object",
+      "items": {
+        "type": "string"
       }
     },
     "RaiBlocklistConfig": {
@@ -5656,14 +6035,14 @@
         "mode": {
           "$ref": "#/definitions/RaiPolicyMode"
         },
-        "type": {
-          "$ref": "#/definitions/RaiPolicyType"
-        },
         "promptBlocklists": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/RaiBlocklistConfig"
           }
+        },
+        "type": {
+          "$ref": "#/definitions/RaiPolicyType"
         }
       }
     },
@@ -5749,17 +6128,6 @@
         }
       }
     },
-    "RequestMatchPattern": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "string"
-        },
-        "method": {
-          "type": "string"
-        }
-      }
-    },
     "RuleAction": {
       "description": "The action enum for networking rule.",
       "enum": [
@@ -5836,6 +6204,132 @@
         "serverlessComputeNoPublicIP": {
           "description": "The flag to signal if serverless compute nodes deployed in custom vNet would have no public IP addresses for a workspace with private endpoint",
           "type": "boolean"
+        }
+      }
+    },
+    "ServerlessEndpointCapacityReservation": {
+      "required": [
+        "capacityReservationGroupId"
+      ],
+      "type": "object",
+      "properties": {
+        "capacityReservationGroupId": {
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "endpointReservedCapacity": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ServerlessEndpointResourceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointResourceProperties"
+        }
+      ],
+      "properties": {
+        "authMode": {
+          "$ref": "#/definitions/ServerlessInferenceEndpointAuthMode"
+        },
+        "capacityReservation": {
+          "$ref": "#/definitions/ServerlessEndpointCapacityReservation"
+        },
+        "contentSafety": {
+          "$ref": "#/definitions/ServerlessEndpointContentSafety"
+        },
+        "endpointState": {
+          "$ref": "#/definitions/ServerlessEndpointState"
+        },
+        "inferenceEndpoint": {
+          "$ref": "#/definitions/ServerlessEndpointInferenceEndpoint"
+        },
+        "marketplaceSubscriptionId": {
+          "type": "string"
+        },
+        "metadata": {},
+        "modelSettings": {
+          "$ref": "#/definitions/ServerlessEndpointModelSettings"
+        },
+        "offer": {
+          "$ref": "#/definitions/ServerlessOffer"
+        }
+      },
+      "x-ms-discriminator-value": "serverlessEndpoint"
+    },
+    "ServerlessEndpointState": {
+      "enum": [
+        "Unknown",
+        "Creating",
+        "Deleting",
+        "Suspending",
+        "Reinstating",
+        "Online",
+        "Suspended",
+        "CreationFailed",
+        "DeletionFailed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ServerlessEndpointState",
+        "modelAsString": true
+      }
+    },
+    "ServerlessEndpointInferenceEndpoint": {
+      "required": [
+        "uri"
+      ],
+      "type": "object",
+      "properties": {
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "uri": {
+          "format": "uri",
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ServerlessInferenceEndpointAuthMode": {
+      "enum": [
+        "Key",
+        "AAD"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ServerlessInferenceEndpointAuthMode",
+        "modelAsString": true
+      }
+    },
+    "ServerlessOffer": {
+      "required": [
+        "offerName",
+        "publisher"
+      ],
+      "type": "object",
+      "properties": {
+        "offerName": {
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        },
+        "publisher": {
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
         }
       }
     },
@@ -5950,6 +6444,18 @@
         }
       }
     },
+    "SpeechEndpointDeploymentResourceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Azure.Speech"
+    },
     "SpeechEndpointResourceProperties": {
       "type": "object",
       "allOf": [
@@ -5958,36 +6464,6 @@
         }
       ],
       "x-ms-discriminator-value": "Azure.Speech"
-    },
-    "ThrottlingRule": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "renewalPeriod": {
-          "type": "number"
-        },
-        "count": {
-          "type": "number"
-        },
-        "minCount": {
-          "type": "number"
-        },
-        "dynamicThrottlingEnabled": {
-          "type": "boolean"
-        },
-        "matchPatterns": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RequestMatchPattern"
-          },
-          "x-ms-identifiers": [
-            "path",
-            "method"
-          ]
-        }
-      }
     },
     "UsernamePasswordAuthTypeWorkspaceConnectionProperties": {
       "type": "object",
@@ -6048,6 +6524,15 @@
           "type": "string"
         },
         "secretAccessKey": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceConnectionAccountKey": {
+      "description": "Account key object for workspace connection credential.",
+      "type": "object",
+      "properties": {
+        "key": {
           "type": "string"
         }
       }
@@ -6141,6 +6626,9 @@
           "format": "arm-id",
           "readOnly": true
         },
+        "error": {
+          "type": "string"
+        },
         "expiryTime": {
           "format": "date-time",
           "type": "string"
@@ -6160,6 +6648,12 @@
             "type": "string"
           }
         },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement"
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus"
+        },
         "sharedUserList": {
           "type": "array",
           "items": {
@@ -6168,6 +6662,9 @@
         },
         "target": {
           "type": "string"
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
         }
       },
       "discriminator": "authType"
@@ -6222,15 +6719,6 @@
       "properties": {
         "sas": {
           "type": "string"
-        }
-      }
-    },
-    "WorkspaceConnectionAccountKey": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string",
-          "x-ms-secret": true
         }
       }
     },
@@ -6322,6 +6810,10 @@
           "description": "The flag to indicate whether to allow public access when behind VNet.",
           "type": "boolean"
         },
+        "allowRoleAssignmentOnRG": {
+          "description": "The flag to indicate whether we will do role assignment for the workspace MSI on resource group level.",
+          "type": "boolean"
+        },
         "applicationInsights": {
           "description": "ARM id of the application insights associated with this workspace.",
           "type": "string"
@@ -6353,8 +6845,15 @@
         "enableDataIsolation": {
           "type": "boolean"
         },
+        "enableServiceSideCMKEncryption": {
+          "type": "boolean"
+        },
+        "enableSimplifiedCmk": {
+          "description": "Flag to tell if simplified CMK should be enabled for this workspace.",
+          "type": "boolean"
+        },
         "enableSoftwareBillOfMaterials": {
-          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace",
+          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace.",
           "type": "boolean"
         },
         "encryption": {
@@ -6543,6 +7042,9 @@
       "description": "The parameters for updating a machine learning workspace.",
       "type": "object",
       "properties": {
+        "allowRoleAssignmentOnRG": {
+          "type": "boolean"
+        },
         "applicationInsights": {
           "description": "ARM id of the application insights associated with this workspace.",
           "type": "string"
@@ -6704,15 +7206,6 @@
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
     },
-    "RaiPolicyNameParameter": {
-      "in": "path",
-      "name": "raiPolicyName",
-      "description": "Name of the Rai Policy.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-    },
     "RaiBlocklistParameter": {
       "in": "path",
       "name": "raiBlocklistName",
@@ -6726,6 +7219,15 @@
       "in": "path",
       "name": "raiBlocklistItemName",
       "description": "Name of the RaiBlocklist Item",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+    },
+    "RaiPolicyNameParameter": {
+      "in": "path",
+      "name": "raiPolicyName",
+      "description": "Name of the Rai Policy.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",

@@ -75,7 +75,7 @@ suppressions:
     reason: The headers property here is meant to describe a set of request headers that the user must pass along 
       in their inferencing API request. For that reason, this needs to be represented as an additionalProperties.
     where:
-      - $.definitions["ServerlessInferenceEndpoint"].properties["headers"]
+      - $.definitions["ServerlessEndpointInferenceEndpoint"].properties["headers"]
   - code: ProvisioningStateSpecifiedForLROPut
     reason: Below APIs are created for migration, the existing API contract is like this and won't able to change, 
       got exceptions from ARM reviewer.
@@ -105,6 +105,24 @@ suppressions:
     reason: valid usage of UUID format since it is in the AAD objectId
     where:
       - $.definitions.ManagedResourceGroupAssignedIdentities
+  - code: AvoidAdditionalProperties
+    reason: This is cause by renaming some definition and already in prod use.
+    where:
+      - $.definitions.EndpointModelProperties.properties.capabilities
+      - $.definitions.EndpointModelProperties.properties.finetuneCapabilities
+  - code: AvoidAdditionalProperties
+    reason: trying to align with schema here for caller to consume https://github.com/Azure/azure-rest-api-specs/blob/2e5be0e72597c6fc8d438f20e38087d900c16427/specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/preview/2024-04-01-preview/mfe.json#L26070
+    where:
+      - $.definitions.ManagedOnlineEndpointResourceProperties.properties.mirrorTraffic
+      - $.definitions.ManagedOnlineEndpointResourceProperties.properties.traffic
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: CMK is a short term and not violate the camel case rule.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
+  - code: PostResponseCodes
+    reason: This API is intend to align with Cognitive service API which has the same behavior https://github.com/Azure/azure-rest-api-specs/blob/efa7e41b82e82359fc76c0cda1856eb6e44448ec/specification/cognitiveservices/resource-manager/Microsoft.CognitiveServices/preview/2024-04-01-preview/cognitiveservices.json#L2717.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems"].post
   ```
 
 ### Tag: package-2024-04
