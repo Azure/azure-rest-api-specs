@@ -554,6 +554,68 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "DynamicConfigurations_Update",
+        "tags": [
+          "DynamicConfigurations"
+        ],
+        "description": "Update a Dynamic Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the Configuration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "dynamicConfigurationName",
+            "in": "path",
+            "description": "The name of the DynamicConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DynamicConfigurationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DynamicConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DynamicConfigurations_Update": {
+            "$ref": "./examples/DynamicConfigurations_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "DynamicConfigurations_Delete",
         "tags": [
@@ -1175,6 +1237,26 @@
       "required": [
         "currentVersion"
       ]
+    },
+    "DynamicConfigurationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the DynamicConfiguration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DynamicConfigurationUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DynamicConfigurationUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the DynamicConfiguration.",
+      "properties": {
+        "currentVersion": {
+          "type": "string",
+          "description": "Current Version of dynamic configuration"
+        }
+      }
     },
     "DynamicConfigurationVersion": {
       "type": "object",

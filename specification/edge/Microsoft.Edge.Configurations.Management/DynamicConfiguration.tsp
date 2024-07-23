@@ -39,6 +39,9 @@ interface DynamicConfigurations {
     @doc("Create or update a Dynamic Configuration Resource")
     createOrUpdate is ArmResourceCreateOrReplaceAsync<DynamicConfiguration>;
 
+    @doc("Update a Dynamic Configuration Resource")
+    update is ArmResourcePatchSync<DynamicConfiguration, DynamicConfigurationProperties>;
+
     @doc("Delete a Dynamic Configuration Resource")
     delete is ArmResourceDeleteSync<DynamicConfiguration>;
 
