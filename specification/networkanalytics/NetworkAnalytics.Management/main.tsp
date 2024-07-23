@@ -152,7 +152,7 @@ model DataProduct is TrackedResource<DataProductProperties> {
   @maxLength(63)
   name: string;
 
-  ...ManagedServiceIdentityProperty;
+  ...Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("The data product properties.")
@@ -429,9 +429,9 @@ union DataProductUserRole {
   "Reader",
 
   @doc("""
-Field to specify user of type SensitiveReader.
-This user has privileged access to read sensitive data of a data product.
-""")
+    Field to specify user of type SensitiveReader.
+    This user has privileged access to read sensitive data of a data product.
+    """)
   "SensitiveReader",
 }
 
@@ -531,14 +531,25 @@ interface DataProductsCatalogs {
 @added(Versions.v2023_11_15)
 @armResourceOperations
 interface DataTypes {
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create data type resource.")
-  create is ArmResourceCreateOrUpdateAsync<DataType>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    DataType,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Retrieve data type resource.")
   get is ArmResourceRead<DataType>;
 
   @doc("Update data type resource.")
-  update is ArmResourcePatchAsync<DataType, DataTypeProperties>;
+  update is ArmCustomPatchAsync<
+    DataType,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataType,
+      DataTypeProperties
+    >
+  >;
 
   @doc("Delete data type resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
@@ -555,21 +566,32 @@ interface DataTypes {
   >;
 
   @doc("List data type by parent resource.")
-  listByParent is ArmResourceListByParent<DataType>;
+  listByDataProduct is ArmResourceListByParent<DataType>;
 }
 
 @doc("Operations on data product resource.")
 @added(Versions.v2023_11_15)
 @armResourceOperations
 interface DataProducts {
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create data product resource.")
-  create is ArmResourceCreateOrUpdateAsync<DataProduct>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    DataProduct,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Retrieve data product resource.")
   get is ArmResourceRead<DataProduct>;
 
   @doc("Update data product resource.")
-  update is ArmResourcePatchAsync<DataProduct, DataProductProperties>;
+  update is ArmCustomPatchAsync<
+    DataProduct,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataProduct,
+      DataProductProperties
+    >
+  >;
 
   @doc("Delete data product resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;

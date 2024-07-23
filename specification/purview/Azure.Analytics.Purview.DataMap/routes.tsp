@@ -91,32 +91,32 @@ alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTr
 interface Entity {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
-Create or update an entity.
-Existing entity is matched using its unique guid if
-supplied or by its unique attributes eg: qualifiedName.
-Map and array of
-collections are not well supported. E.g., array<array<int>>, array<map<string,
-int>>.
-For each contact type, the maximum number of contacts is 20.
-""")
+    Create or update an entity.
+    Existing entity is matched using its unique guid if
+    supplied or by its unique attributes eg: qualifiedName.
+    Map and array of
+    collections are not well supported. E.g., array<array<int>>, array<map<string,
+    int>>.
+    For each contact type, the maximum number of contacts is 20.
+    """)
   @route("/atlas/v2/entity")
   @post
   createOrUpdate is AtlasOperation<
     {
       @doc("""
-Used to define the update behavior for business attributes when updating
-entities.
-""")
+        Used to define the update behavior for business attributes when updating
+        entities.
+        """)
       @query
       businessAttributeUpdateBehavior?: BusinessAttributeUpdateBehavior;
 
       @doc("""
-The collection where entities will be moved to. Only specify a value if you
-need to move an entity to another collection.
-""")
+        The collection where entities will be moved to. Only specify a value if you
+        need to move an entity to another collection.
+        """)
       @query
       collectionId?: string;
-    } & AtlasEntityWithExtInfo,
+    } & BodyParameter<AtlasEntityWithExtInfo>,
     EntityMutationResult,
     AtlasApiVersionParameterTraits
   >;
@@ -148,33 +148,33 @@ need to move an entity to another collection.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
-Create or update entities in bulk.
-Existing entity is matched using its unique
-guid if supplied or by its unique attributes eg: qualifiedName.
-Map and array
-of collections are not well supported. E.g., array<array<int>>,
-array<map<string, int>>.
-For each contact type, the maximum number of contacts
-is 20.
-""")
+    Create or update entities in bulk.
+    Existing entity is matched using its unique
+    guid if supplied or by its unique attributes eg: qualifiedName.
+    Map and array
+    of collections are not well supported. E.g., array<array<int>>,
+    array<map<string, int>>.
+    For each contact type, the maximum number of contacts
+    is 20.
+    """)
   @route("/atlas/v2/entity/bulk")
   @post
   bulkCreateOrUpdate is AtlasOperation<
     {
       @doc("""
-The collection where entities will be moved to. Only specify a value if you
-need to move an entity to another collection.
-""")
+        The collection where entities will be moved to. Only specify a value if you
+        need to move an entity to another collection.
+        """)
       @query
       collectionId?: string;
 
       @doc("""
-Used to define the update behavior for business attributes when updating
-entities.
-""")
+        Used to define the update behavior for business attributes when updating
+        entities.
+        """)
       @query
       businessAttributeUpdateBehavior?: BusinessAttributeUpdateBehavior;
-    } & AtlasEntitiesWithExtInfo,
+    } & BodyParameter<AtlasEntitiesWithExtInfo>,
     EntityMutationResult,
     AtlasApiVersionParameterTraits
   >;
@@ -183,9 +183,9 @@ entities.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Delete a list of entities in bulk identified by their GUIDs or unique
-attributes.
-""")
+    Delete a list of entities in bulk identified by their GUIDs or unique
+    attributes.
+    """)
   @route("/atlas/v2/entity/bulk")
   @delete
   bulkDelete is AtlasOperation<
@@ -205,7 +205,11 @@ attributes.
   @doc("Associate a classification to multiple entities in bulk.")
   @route("/atlas/v2/entity/bulk/classification")
   @post
-  addClassification is AtlasOperation<ClassificationAssociateOptions, void, {}>;
+  addClassification is AtlasOperation<
+    BodyParameter<ClassificationAssociateOptions>,
+    void,
+    {}
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
@@ -233,12 +237,12 @@ attributes.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Update entity partially - create or update entity attribute identified by its
-GUID.
-Supports only primitive attribute type and entity references.
-It does not support updating complex types like arrays, and maps.
-Null updates are not possible.
-""")
+    Update entity partially - create or update entity attribute identified by its
+    GUID.
+    Supports only primitive attribute type and entity references.
+    It does not support updating complex types like arrays, and maps.
+    Null updates are not possible.
+    """)
   @route("/atlas/v2/entity/guid/{guid}")
   @put
   partialUpdateAttributeByGuid is AtlasOperation<
@@ -371,21 +375,21 @@ Null updates are not possible.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Get complete definition of an entity given its type and unique attribute.
-
-In
-addition to the typeName path parameter, attribute key-value pair(s) can be
-provided in the following format:
-attr:\\<attrName>=<attrValue>.
-
-NOTE: The
-attrName and attrValue should be unique across entities, eg.
-qualifiedName.
-
-The REST request would look something like this:
-GET
-/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
-""")
+    Get complete definition of an entity given its type and unique attribute.
+    
+    In
+    addition to the typeName path parameter, attribute key-value pair(s) can be
+    provided in the following format:
+    attr:\\<attrName>=<attrValue>.
+    
+    NOTE: The
+    attrName and attrValue should be unique across entities, eg.
+    qualifiedName.
+    
+    The REST request would look something like this:
+    GET
+    /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
+    """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @get
   getByUniqueAttributes is AtlasOperation<
@@ -403,9 +407,9 @@ GET
       ignoreRelationships?: boolean;
 
       @doc("""
-The qualified name of the entity. (This is only an example. qualifiedName can
-be changed to other unique attributes)
-""")
+        The qualified name of the entity. (This is only an example. qualifiedName can
+        be changed to other unique attributes)
+        """)
       @query("attr:qualifiedName")
       attribute?: string;
     },
@@ -416,23 +420,23 @@ be changed to other unique attributes)
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Update entity partially - Allow a subset of attributes to be updated on an
-entity which is identified by its type and unique attribute eg:
-Referenceable.qualifiedName. Null updates are not possible.
-
-In addition to the
-typeName path parameter, attribute key-value pair(s) can be provided in the
-following format:
-
-attr:<attrName>=<attrValue>.
-NOTE: The attrName and
-attrValue should be unique across entities, eg. qualifiedName.
-
-The REST
-request would look something like this:
-PUT
-/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
-""")
+    Update entity partially - Allow a subset of attributes to be updated on an
+    entity which is identified by its type and unique attribute eg:
+    Referenceable.qualifiedName. Null updates are not possible.
+    
+    In addition to the
+    typeName path parameter, attribute key-value pair(s) can be provided in the
+    following format:
+    
+    attr:<attrName>=<attrValue>.
+    NOTE: The attrName and
+    attrValue should be unique across entities, eg. qualifiedName.
+    
+    The REST
+    request would look something like this:
+    PUT
+    /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
+    """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @put
   partialUpdateByUniqueAttributes is AtlasOperation<
@@ -442,12 +446,12 @@ PUT
       typeName: string;
 
       @doc("""
-The qualified name of the entity. (This is only an example. qualifiedName can
-be changed to other unique attributes)
-""")
+        The qualified name of the entity. (This is only an example. qualifiedName can
+        be changed to other unique attributes)
+        """)
       @query("attr:qualifiedName")
       attribute?: string;
-    } & AtlasEntityWithExtInfo,
+    } & BodyParameter<AtlasEntityWithExtInfo>,
     EntityMutationResult,
     {}
   >;
@@ -455,19 +459,19 @@ be changed to other unique attributes)
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Delete an entity identified by its type and unique attributes.
-In addition to
-the typeName path parameter, attribute key-value pair(s) can be provided in the
-following format:
-attr:\\<attrName>=\\<attrValue>.
-NOTE: The attrName and
-attrValue should be unique across entities, eg. qualifiedName.
-
-The REST
-request would look something like this:
-DELETE
-/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
-""")
+    Delete an entity identified by its type and unique attributes.
+    In addition to
+    the typeName path parameter, attribute key-value pair(s) can be provided in the
+    following format:
+    attr:\\<attrName>=\\<attrValue>.
+    NOTE: The attrName and
+    attrValue should be unique across entities, eg. qualifiedName.
+    
+    The REST
+    request would look something like this:
+    DELETE
+    /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
+    """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}")
   @delete
   deleteByUniqueAttribute is AtlasOperation<
@@ -477,9 +481,9 @@ DELETE
       typeName: string;
 
       @doc("""
-The qualified name of the entity. (This is only an example. qualifiedName can
-be changed to other unique attributes)
-""")
+        The qualified name of the entity. (This is only an example. qualifiedName can
+        be changed to other unique attributes)
+        """)
       @query("attr:qualifiedName")
       attribute?: string;
     },
@@ -490,9 +494,9 @@ be changed to other unique attributes)
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Delete a given classification from an entity identified by its type and unique
-attributes.
-""")
+    Delete a given classification from an entity identified by its type and unique
+    attributes.
+    """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/classification/{classificationName}")
   @delete
   removeClassificationByUniqueAttribute is AtlasOperation<
@@ -506,9 +510,9 @@ attributes.
       classificationName: string;
 
       @doc("""
-The qualified name of the entity. (This is only an example. qualifiedName can
-be changed to other unique attributes)
-""")
+        The qualified name of the entity. (This is only an example. qualifiedName can
+        be changed to other unique attributes)
+        """)
       @query("attr:qualifiedName")
       attribute?: string;
     },
@@ -529,9 +533,9 @@ be changed to other unique attributes)
       typeName: string;
 
       @doc("""
-The qualified name of the entity. (This is only an example. qualifiedName can
-be changed to other unique attributes)
-""")
+        The qualified name of the entity. (This is only an example. qualifiedName can
+        be changed to other unique attributes)
+        """)
       @query("attr:qualifiedName")
       attribute?: string;
 
@@ -556,9 +560,9 @@ be changed to other unique attributes)
       typeName: string;
 
       @doc("""
-The qualified name of the entity. (This is only an example. qualifiedName can
-be changed to other unique attributes)
-""")
+        The qualified name of the entity. (This is only an example. qualifiedName can
+        be changed to other unique attributes)
+        """)
       @query("attr:qualifiedName")
       attribute?: string;
 
@@ -576,7 +580,7 @@ be changed to other unique attributes)
   @route("/atlas/v2/entity/bulk/setClassifications")
   @post
   bulkSetClassifications is AtlasOperation<
-    AtlasEntityHeaders,
+    BodyParameter<AtlasEntityHeaders>,
     OkResponse<string[]>,
     {}
   >;
@@ -585,25 +589,25 @@ be changed to other unique attributes)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Bulk API to retrieve list of entities identified by its unique attributes.
-In
-addition to the typeName path parameter, attribute key-value pair(s) can be
-provided in the following
-format
-
-typeName=\\<typeName>&attr_1:\\<attrName>=\\<attrValue>&attr_2:\\<attrName>=\\<attrValue>&attr_3:\\<attrName>=\\<attrValue>
-
-NOTE:
-The attrName should be an unique attribute for the given entity-type.
-The REST
-request would look something like this
-
-GET
-/v2/entity/bulk/uniqueAttribute/type/hive_db?attr_1:qualifiedName=db1@cl1&attr_2:qualifiedName=db2@cl1
-
-Note:
-at least one unique attribute must be provided.
-""")
+    Bulk API to retrieve list of entities identified by its unique attributes.
+    In
+    addition to the typeName path parameter, attribute key-value pair(s) can be
+    provided in the following
+    format
+    
+    typeName=\\<typeName>&attr_1:\\<attrName>=\\<attrValue>&attr_2:\\<attrName>=\\<attrValue>&attr_3:\\<attrName>=\\<attrValue>
+    
+    NOTE:
+    The attrName should be an unique attribute for the given entity-type.
+    The REST
+    request would look something like this
+    
+    GET
+    /v2/entity/bulk/uniqueAttribute/type/hive_db?attr_1:qualifiedName=db1@cl1&attr_2:qualifiedName=db2@cl1
+    
+    Note:
+    at least one unique attribute must be provided.
+    """)
   @route("/atlas/v2/entity/bulk/uniqueAttribute/type/{typeName}")
   @get
   listByUniqueAttributes is AtlasOperation<
@@ -621,10 +625,10 @@ at least one unique attribute must be provided.
       ignoreRelationships?: boolean;
 
       @doc("""
-Qualified name of an entity. E.g. to find 2 entities you can set
-attrs_1:qualifiedName=db1@cl1&attrs_2:qualifiedName=db2@cl1. (This is only an
-example. qualifiedName can be changed to other unique attributes)
-""")
+        Qualified name of an entity. E.g. to find 2 entities you can set
+        attrs_1:qualifiedName=db1@cl1&attrs_2:qualifiedName=db2@cl1. (This is only an
+        example. qualifiedName can be changed to other unique attributes)
+        """)
       @query
       `attr_N:qualifiedName`?: string;
     },
@@ -679,9 +683,9 @@ example. qualifiedName can be changed to other unique attributes)
       guid: string;
 
       @doc("""
-Whether to overwrite the existing business metadata on the entity or not,
-default is false.
-""")
+        Whether to overwrite the existing business metadata on the entity or not,
+        default is false.
+        """)
       @query("isOverwrite")
       overwrite?: boolean;
 
@@ -765,7 +769,7 @@ default is false.
   @route("/atlas/v2/entity/businessmetadata/import")
   @post
   importBusinessMetadata is AtlasImportOperation<
-    BusinessMetadataOptions,
+    BodyParameter<BusinessMetadataOptions>,
     BulkImportResult,
     MultipartFormDataRequestHeadersTraits
   >;
@@ -834,20 +838,20 @@ default is false.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Delete given labels to a given entity identified by its type and unique
-attribute.
-
-If labels is null/empty, no labels will be removed.
-
-If any labels
-in labels set are non-existing labels, they will be ignored, only existing
-labels will be removed. In addition to the typeName path parameter, attribute
-key-value pair(s) can be provided in the following format:
-attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique
-across entities, eg. qualifiedName. The REST request would look something like
-this: DELETE
-/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
-""")
+    Delete given labels to a given entity identified by its type and unique
+    attribute.
+    
+    If labels is null/empty, no labels will be removed.
+    
+    If any labels
+    in labels set are non-existing labels, they will be ignored, only existing
+    labels will be removed. In addition to the typeName path parameter, attribute
+    key-value pair(s) can be provided in the following format:
+    attr:<attrName>=<attrValue>. NOTE: The attrName and attrValue should be unique
+    across entities, eg. qualifiedName. The REST request would look something like
+    this: DELETE
+    /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
+    """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @delete
   removeLabelsByUniqueAttribute is AtlasOperation<
@@ -857,9 +861,9 @@ this: DELETE
       typeName: string;
 
       @doc("""
-The qualified name of the entity. (This is only an example. qualifiedName can
-be changed to other unique attributes)
-""")
+        The qualified name of the entity. (This is only an example. qualifiedName can
+        be changed to other unique attributes)
+        """)
       @query("attr:qualifiedName")
       attribute?: string;
 
@@ -875,22 +879,22 @@ be changed to other unique attributes)
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Set labels to a given entity identified by its type and unique attributes.
-
-If
-labels is null/empty, existing labels will all be removed.
-
-In addition to the
-typeName path parameter, attribute key-value pair(s) can be provided in the
-following format: attr:<attrName>=<attrValue>.
-
-NOTE: The attrName and
-attrValue should be unique across entities, eg. qualifiedName.
-
-The REST
-request would look something like this: POST
-/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
-""")
+    Set labels to a given entity identified by its type and unique attributes.
+    
+    If
+    labels is null/empty, existing labels will all be removed.
+    
+    In addition to the
+    typeName path parameter, attribute key-value pair(s) can be provided in the
+    following format: attr:<attrName>=<attrValue>.
+    
+    NOTE: The attrName and
+    attrValue should be unique across entities, eg. qualifiedName.
+    
+    The REST
+    request would look something like this: POST
+    /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
+    """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @post
   setLabelsByUniqueAttribute is AtlasOperation<
@@ -900,9 +904,9 @@ request would look something like this: POST
       typeName: string;
 
       @doc("""
-The qualified name of the entity. (This is only an example. qualifiedName can
-be changed to other unique attributes)
-""")
+        The qualified name of the entity. (This is only an example. qualifiedName can
+        be changed to other unique attributes)
+        """)
       @query("attr:qualifiedName")
       attribute?: string;
 
@@ -918,22 +922,22 @@ be changed to other unique attributes)
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Add given labels to a given entity identified by its type and unique
-attributes.
-
-If labels is null/empty, no labels will be added.
-
-In addition to
-the typeName path parameter, attribute key-value pair(s) can be provided in the
-following format: attr:<attrName>=<attrValue>.
-
-NOTE: The attrName and
-attrValue should be unique across entities, eg. qualifiedName.
-
-The REST
-request would look something like this: PUT
-/v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
-""")
+    Add given labels to a given entity identified by its type and unique
+    attributes.
+    
+    If labels is null/empty, no labels will be added.
+    
+    In addition to
+    the typeName path parameter, attribute key-value pair(s) can be provided in the
+    following format: attr:<attrName>=<attrValue>.
+    
+    NOTE: The attrName and
+    attrValue should be unique across entities, eg. qualifiedName.
+    
+    The REST
+    request would look something like this: PUT
+    /v2/entity/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
+    """)
   @route("/atlas/v2/entity/uniqueAttribute/type/{typeName}/labels")
   @put
   addLabelsByUniqueAttribute is AtlasOperation<
@@ -943,9 +947,9 @@ request would look something like this: PUT
       typeName: string;
 
       @doc("""
-The qualified name of the entity. (This is only an example. qualifiedName can
-be changed to other unique attributes)
-""")
+        The qualified name of the entity. (This is only an example. qualifiedName can
+        be changed to other unique attributes)
+        """)
       @query("attr:qualifiedName")
       attribute?: string;
 
@@ -966,7 +970,7 @@ be changed to other unique attributes)
       @doc("The collection where entities will be moved to.")
       @query
       collectionId: string;
-    } & MoveEntitiesOptions,
+    } & BodyParameter<MoveEntitiesOptions>,
     EntityMutationResult,
     {},
     AtlasErrorResponse
@@ -976,15 +980,11 @@ be changed to other unique attributes)
 interface Glossary {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
-Get all glossaries. Recommend using limit/offset to get pagination result.
-Recommend using 'ignoreTermsAndCategories=true' and fetch terms/categories
-separately using 
-
- 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'
-and 
-
- 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.
-""")
+    Get all glossaries. Recommend using limit/offset to get pagination result.
+    Recommend using 'ignoreTermsAndCategories=true' and fetch terms/categories
+    separately using 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'
+    and 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.
+    """)
   @route("/atlas/v2/glossary")
   @get
   list is AtlasOperation<
@@ -1015,7 +1015,7 @@ and
   @doc("Create a glossary.")
   @route("/atlas/v2/glossary")
   @post
-  create is AtlasOperation<AtlasGlossary, AtlasGlossary, {}>;
+  create is AtlasOperation<BodyParameter<AtlasGlossary>, AtlasGlossary, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
@@ -1039,7 +1039,7 @@ and
   @route("/atlas/v2/glossary/category")
   @post
   createCategory is AtlasOperation<
-    AtlasGlossaryCategory,
+    BodyParameter<AtlasGlossaryCategory>,
     AtlasGlossaryCategory,
     {}
   >;
@@ -1069,7 +1069,7 @@ and
       @doc("The globally unique identifier of the category.")
       @path
       categoryId: string;
-    } & AtlasGlossaryCategory,
+    } & BodyParameter<AtlasGlossaryCategory>,
     AtlasGlossaryCategory,
     {}
   >;
@@ -1093,9 +1093,9 @@ and
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("""
-Update the glossary category partially. So far we only supports partial
-updating shortDescription and longDescription for category.
-""")
+    Update the glossary category partially. So far we only supports partial
+    updating shortDescription and longDescription for category.
+    """)
   @route("/atlas/v2/glossary/category/{categoryId}/partial")
   @put
   partialUpdateCategory is AtlasOperation<
@@ -1105,9 +1105,9 @@ updating shortDescription and longDescription for category.
       categoryId: string;
 
       @doc("""
-A map containing keys as attribute names and values as corresponding attribute
-values for partial update.
-""")
+        A map containing keys as attribute names and values as corresponding attribute
+        values for partial update.
+        """)
       @bodyRoot
       body: Record<string>;
     },
@@ -1118,9 +1118,9 @@ values for partial update.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Get all related categories (parent and children). Limit, offset, and sort
-parameters are currently not being enabled and won't work even they are passed.
-""")
+    Get all related categories (parent and children). Limit, offset, and sort
+    parameters are currently not being enabled and won't work even they are passed.
+    """)
   @route("/atlas/v2/glossary/category/{categoryId}/related")
   @get
   listRelatedCategories is AtlasOperation<
@@ -1182,7 +1182,7 @@ parameters are currently not being enabled and won't work even they are passed.
       @doc("Whether include term hierarchy")
       @query
       includeTermHierarchy?: boolean;
-    } & AtlasGlossaryTerm,
+    } & BodyParameter<AtlasGlossaryTerm>,
     AtlasGlossaryTerm,
     {}
   >;
@@ -1214,7 +1214,7 @@ parameters are currently not being enabled and won't work even they are passed.
       @doc("Whether include term hierarchy")
       @query
       includeTermHierarchy?: boolean;
-    } & AtlasGlossaryTerm,
+    } & BodyParameter<AtlasGlossaryTerm>,
     AtlasGlossaryTerm,
     AtlasApiVersionParameterTraits
   >;
@@ -1237,9 +1237,9 @@ parameters are currently not being enabled and won't work even they are passed.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("""
-Update the glossary term partially. So far we only supports partial updating
-shortDescription, longDescription, abbreviation, usage and status for term.
-""")
+    Update the glossary term partially. So far we only supports partial updating
+    shortDescription, longDescription, abbreviation, usage and status for term.
+    """)
   @route("/atlas/v2/glossary/term/{termId}/partial")
   @put
   partialUpdateTerm is AtlasOperation<
@@ -1253,9 +1253,9 @@ shortDescription, longDescription, abbreviation, usage and status for term.
       includeTermHierarchy?: boolean;
 
       @doc("""
-A map containing keys as attribute names and values as corresponding attribute
-values to be updated.
-""")
+        A map containing keys as attribute names and values as corresponding attribute
+        values to be updated.
+        """)
       @bodyRoot
       body: Record<string>;
     },
@@ -1285,9 +1285,9 @@ values to be updated.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-List all related objects assigned with the specified term. Recommend using
-limit/offset to get pagination result.
-""")
+    List all related objects assigned with the specified term. Recommend using
+    limit/offset to get pagination result.
+    """)
   @route("/atlas/v2/glossary/terms/{termId}/assignedEntities")
   @get
   listEntitiesAssignedWithTerm is AtlasOperation<
@@ -1316,13 +1316,13 @@ limit/offset to get pagination result.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Assign the given term to the provided list of related objects. Recommend using
-small batches with multiple API calls.
-
-[Entities Create Or Update
-operation](https://learn.microsoft.com/en-us/rest/api/purview/datamapdataplane/entity/bulk-create-or-update?tabs=HTTP)
-is an alternative to assign a term to multiple entities.
-""")
+    Assign the given term to the provided list of related objects. Recommend using
+    small batches with multiple API calls.
+    
+    [Entities Create Or Update
+    operation](https://learn.microsoft.com/en-us/rest/api/purview/datamapdataplane/entity/bulk-create-or-update?tabs=HTTP)
+    is an alternative to assign a term to multiple entities.
+    """)
   @route("/atlas/v2/glossary/terms/{termId}/assignedEntities")
   @post
   assignTermToEntities is AtlasOperation<
@@ -1361,9 +1361,9 @@ is an alternative to assign a term to multiple entities.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
-Get all related terms for a specific term by its GUID. Limit, offset, and sort
-parameters are currently not being enabled and won't work even they are passed.
-""")
+    Get all related terms for a specific term by its GUID. Limit, offset, and sort
+    parameters are currently not being enabled and won't work even they are passed.
+    """)
   @route("/atlas/v2/glossary/terms/{termId}/related")
   @get
   listRelatedTerms is AtlasOperation<
@@ -1416,7 +1416,7 @@ parameters are currently not being enabled and won't work even they are passed.
       @doc("Whether ignore terms and categories")
       @query
       ignoreTermsAndCategories?: boolean;
-    } & AtlasGlossary,
+    } & BodyParameter<AtlasGlossary>,
     AtlasGlossary,
     AtlasApiVersionParameterTraits
   >;
@@ -1424,9 +1424,9 @@ parameters are currently not being enabled and won't work even they are passed.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Delete a glossary. Will delete underlying terms/categories together. Recommend
-separate delete terms and categories.
-""")
+    Delete a glossary. Will delete underlying terms/categories together. Recommend
+    separate delete terms and categories.
+    """)
   @route("/atlas/v2/glossary/{glossaryId}")
   @delete
   delete is AtlasOperation<
@@ -1442,9 +1442,9 @@ separate delete terms and categories.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Get the categories belonging to a specific glossary. Recommend using
-limit/offset to get pagination result.
-""")
+    Get the categories belonging to a specific glossary. Recommend using
+    limit/offset to get pagination result.
+    """)
   @route("/atlas/v2/glossary/{glossaryId}/categories")
   @get
   listCategories is AtlasOperation<
@@ -1472,9 +1472,9 @@ limit/offset to get pagination result.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Get the category headers belonging to a specific glossary. Recommend using
-limit/offset to get pagination result.
-""")
+    Get the category headers belonging to a specific glossary. Recommend using
+    limit/offset to get pagination result.
+    """)
   @route("/atlas/v2/glossary/{glossaryId}/categories/headers")
   @get
   listCategoriesHeaders is AtlasOperation<
@@ -1501,15 +1501,15 @@ limit/offset to get pagination result.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
-Get a specific glossary with detailed information. This API is not
-recommend.
-
-Recommend to fetch terms/categories details separately using 
-
-GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms and 
-
-GET /datamap/api/atlas/v2/glossary/{glossaryId}/categories.
-""")
+    Get a specific glossary with detailed information. This API is not
+    recommend.
+    
+    Recommend to fetch terms/categories details separately using 
+    
+    GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms and 
+    
+    GET /datamap/api/atlas/v2/glossary/{glossaryId}/categories.
+    """)
   @route("/atlas/v2/glossary/{glossaryId}/detailed")
   @get
   getDetailed is AtlasOperation<
@@ -1525,15 +1525,15 @@ GET /datamap/api/atlas/v2/glossary/{glossaryId}/categories.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Should use unknown to model Object"
   @doc("""
-Update the glossary partially. Some properties such as qualifiedName are not
-allowed to be updated.
-
-So far we only supports partial updating
-shortDescription, longDescription, language and usage for glossary. 
-
-Recommend
-using 'ignoreTermsAndCategories=true' to reduce response body size.
-""")
+    Update the glossary partially. Some properties such as qualifiedName are not
+    allowed to be updated.
+    
+    So far we only supports partial updating
+    shortDescription, longDescription, language and usage for glossary. 
+    
+    Recommend
+    using 'ignoreTermsAndCategories=true' to reduce response body size.
+    """)
   @route("/atlas/v2/glossary/{glossaryId}/partial")
   @put
   partialUpdate is AtlasOperation<
@@ -1547,9 +1547,9 @@ using 'ignoreTermsAndCategories=true' to reduce response body size.
       ignoreTermsAndCategories?: boolean;
 
       @doc("""
-A map containing keys as attribute names and values as corresponding attribute
-values.
-""")
+        A map containing keys as attribute names and values as corresponding attribute
+        values.
+        """)
       @bodyRoot
       body: Record<string>;
     },
@@ -1559,9 +1559,9 @@ values.
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("""
-Get terms belonging to a specific glossary. Recommend using limit/offset to get
-pagination result.
-""")
+    Get terms belonging to a specific glossary. Recommend using limit/offset to get
+    pagination result.
+    """)
   @route("/atlas/v2/glossary/{glossaryId}/terms")
   @get
   listTerms is AtlasOperation<
@@ -1589,9 +1589,9 @@ pagination result.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Get term headers belonging to a specific glossary. Recommend using limit/offset
-to get pagination result.
-""")
+    Get term headers belonging to a specific glossary. Recommend using limit/offset
+    to get pagination result.
+    """)
   @route("/atlas/v2/glossary/{glossaryId}/terms/headers")
   @get
   listTermHeaders is AtlasOperation<
@@ -1623,7 +1623,7 @@ interface Discovery {
   @route("/search/query")
   @post
   query is Azure.Core.Foundations.Operation<
-    QueryOptions,
+    BodyParameter<QueryOptions>,
     QueryResult,
     {},
     AtlasErrorResponse
@@ -1634,7 +1634,7 @@ interface Discovery {
   @route("/search/suggest")
   @post
   suggest is Azure.Core.Foundations.Operation<
-    SuggestOptions,
+    BodyParameter<SuggestOptions>,
     SuggestResult,
     {},
     AtlasErrorResponse
@@ -1645,7 +1645,7 @@ interface Discovery {
   @route("/search/autocomplete")
   @post
   autoComplete is Azure.Core.Foundations.Operation<
-    AutoCompleteOptions,
+    BodyParameter<AutoCompleteOptions>,
     AutoCompleteResult,
     {},
     AtlasErrorResponse
@@ -1677,7 +1677,7 @@ interface Lineage {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing API"
   @doc("Return immediate next page lineage info about entity with pagination")
-  @route("/lineage/{guid}/next/")
+  @route("/lineage/{guid}/next")
   @get
   getNextPage is Azure.Core.Foundations.Operation<
     {
@@ -1705,23 +1705,23 @@ interface Lineage {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Return lineage info about entity.
-
-In addition to the typeName path parameter,
-attribute key-value pair(s) can be provided in the following
-format
-
-attr:[attrName]=[attrValue]
-
-NOTE: The attrName and attrValue should be
-unique across entities, eg. qualifiedName.
-
-The REST request would look
-something like this:
-
-GET
-/v2/lineage/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
-""")
+    Return lineage info about entity.
+    
+    In addition to the typeName path parameter,
+    attribute key-value pair(s) can be provided in the following
+    format
+    
+    attr:[attrName]=[attrValue]
+    
+    NOTE: The attrName and attrValue should be
+    unique across entities, eg. qualifiedName.
+    
+    The REST request would look
+    something like this:
+    
+    GET
+    /v2/lineage/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.
+    """)
   @route("/atlas/v2/lineage/uniqueAttribute/type/{typeName}")
   @get
   getByUniqueAttribute is AtlasOperation<
@@ -1739,9 +1739,9 @@ GET
       direction: LineageDirection;
 
       @doc("""
-The qualified name of the entity. (This is only an example. qualifiedName can
-be changed to other unique attributes)
-""")
+        The qualified name of the entity. (This is only an example. qualifiedName can
+        be changed to other unique attributes)
+        """)
       @query("attr:qualifiedName")
       attribute?: string;
     },
@@ -1756,14 +1756,22 @@ interface Relationship {
   @doc("Create a new relationship between entities.")
   @route("/atlas/v2/relationship")
   @post
-  create is AtlasOperation<AtlasRelationship, AtlasRelationship, {}>;
+  create is AtlasOperation<
+    BodyParameter<AtlasRelationship>,
+    AtlasRelationship,
+    {}
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Update an existing relationship between entities.")
   @route("/atlas/v2/relationship")
   @put
-  update is AtlasOperation<AtlasRelationship, AtlasRelationship, {}>;
+  update is AtlasOperation<
+    BodyParameter<AtlasRelationship>,
+    AtlasRelationship,
+    {}
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
@@ -2033,10 +2041,10 @@ interface Type {
   list is AtlasOperation<
     {
       @doc("""
-Whether include termtemplatedef when return all typedefs.
-This is always true
-when search filter type=term_template
-""")
+        Whether include termtemplatedef when return all typedefs.
+        This is always true
+        when search filter type=term_template
+        """)
       @query
       includeTermTemplate?: boolean;
 
@@ -2051,30 +2059,28 @@ when search filter type=term_template
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Create all atlas type definitions in bulk, only new definitions will be
-created.
-Any changes to the existing definitions will be discarded.
-""")
+    Create all atlas type definitions in bulk. Please avoid recreating existing types.
+    """)
   @route("/atlas/v2/types/typedefs")
   @post
-  bulkCreate is AtlasOperation<AtlasTypesDef, AtlasTypesDef, {}>;
+  bulkCreate is AtlasOperation<BodyParameter<AtlasTypesDef>, AtlasTypesDef, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
-Update all types in bulk, changes detected in the type definitions would be
-persisted.
-""")
+    Update all types in bulk, changes detected in the type definitions would be
+    persisted.
+    """)
   @route("/atlas/v2/types/typedefs")
   @put
-  bulkUpdate is AtlasOperation<AtlasTypesDef, AtlasTypesDef, {}>;
+  bulkUpdate is AtlasOperation<BodyParameter<AtlasTypesDef>, AtlasTypesDef, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("Delete API for all types in bulk.")
   @route("/atlas/v2/types/typedefs")
   @delete
-  bulkDelete is AtlasOperation<AtlasTypesDef, void, {}>;
+  bulkDelete is AtlasOperation<BodyParameter<AtlasTypesDef>, void, {}>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   @doc("List all type definitions returned as a list of minimal information header.")
@@ -2083,10 +2089,10 @@ persisted.
   listHeaders is AtlasOperation<
     {
       @doc("""
-Whether include termtemplatedef when return all typedefs.
-This is always true
-when search filter type=term_template
-""")
+        Whether include termtemplatedef when return all typedefs.
+        This is always true
+        when search filter type=term_template
+        """)
       @query
       includeTermTemplate?: boolean;
 

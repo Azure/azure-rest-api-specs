@@ -39,7 +39,7 @@ A data-plane service has a path of form:
 
 > [!NOTE]
 > Some existing services follow different directory structure layouts.
-> All such layouts are legacy, deprecated, and not allowed going forward.
+> All such layouts are legacy, deprecated, and strongly discouraged going forward.
 
 For example, [`specification/containerservice/resource-manager/Microsoft.ContainerService/aks`]
 is a folder for the `aks` service within the `Microsoft.ContainerService` ARM Resource Provider namespace.

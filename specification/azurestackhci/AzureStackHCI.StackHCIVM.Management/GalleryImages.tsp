@@ -33,8 +33,13 @@ interface GalleryImages {
   @doc("Gets a gallery image")
   get is ArmResourceRead<GalleryImage>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a gallery image. Please note some properties can be set only during gallery image creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImage>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    GalleryImage,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("The operation to update a gallery image.")
   @parameterVisibility
@@ -44,7 +49,7 @@ interface GalleryImages {
   delete is ArmResourceDeleteWithoutOkAsync<GalleryImage>;
 
   @doc("Lists all of the gallery images in the specified resource group. Use the nextLink property in the response to get the next page of gallery images.")
-  list is ArmResourceListByParent<GalleryImage>;
+  listByResourceGroup is ArmResourceListByParent<GalleryImage>;
 
   @doc("Lists all of the gallery images in the specified subscription. Use the nextLink property in the response to get the next page of gallery images.")
   listAll is ArmListBySubscription<GalleryImage>;
