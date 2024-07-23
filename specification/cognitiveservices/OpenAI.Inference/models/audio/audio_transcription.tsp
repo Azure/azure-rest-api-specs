@@ -4,6 +4,7 @@ import "./common.tsp";
 
 namespace Azure.OpenAI;
 
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
@@ -214,4 +215,16 @@ model AudioTranscription {
     """)
   @added(ServiceApiVersions.v2024_04_01_Preview)
   words?: AudioTranscriptionWord[];
+}
+
+/**
+ * Get audio transcription body.
+ */
+@added(ServiceApiVersions.v2024_02_15_Preview)
+model GetAudioTranscriptionBody {
+  /**
+   * The configuration information for an audio transcription request.
+   */
+  @body
+  body: AudioTranscriptionOptions;
 }
