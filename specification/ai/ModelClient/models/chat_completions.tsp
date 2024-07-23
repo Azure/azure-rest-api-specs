@@ -77,7 +77,8 @@ alias ChatCompletionsOptions = {
 
   @doc("""
   The format that the model must output. Use this to enable JSON mode instead of the default text mode.
-  Note that to enable JSON mode, you must also instruct the model to produce JSON via a system or user message.
+  Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
+  via a system or user message.
   """)
   response_format?: ChatCompletionsResponseFormat;
 
@@ -224,7 +225,8 @@ union ChatRole {
 
 @doc("""
   Represents the format that the model must output. Use this to enable JSON mode instead of the default text mode.
-  Note that to enable JSON mode, you must also instruct the model to produce JSON via a system or user message.
+  Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
+  via a system or user message.
   """)
 model ChatCompletionsResponseFormat {
   @doc("The response format type to use for the chat completions response.")
@@ -245,7 +247,8 @@ union ChatCompletionsResponseFormatType {
 
   @doc("""
     A response format for Chat Completions that restricts responses to emitting valid JSON objects.
-    Note that to enable JSON mode, you must also instruct the model to produce JSON via a system or user message.
+    Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
+    via a system or user message.
     """)
   json_object: "json_object",
 }
