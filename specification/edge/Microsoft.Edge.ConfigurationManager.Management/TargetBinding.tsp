@@ -58,6 +58,6 @@ interface TargetBindings {
     @doc("List by subscription")
     listBySubscription is ArmListBySubscription<TargetBinding>;
 
-    @doc("Post request to deploy for Deployment Target Resource")
+    @doc("Post request to deploy")
     deploy is ArmResourceActionNoResponseContentAsync<TargetBinding, void>;
 }

@@ -215,53 +215,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/useCases/{useCaseName}/helmUseCases": {
-      "get": {
-        "operationId": "HelmUseCases_ListBySubscription",
-        "tags": [
-          "HelmUseCases"
-        ],
-        "description": "List by subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "useCaseName",
-            "in": "path",
-            "description": "The name of the UseCase",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HelmUseCaseListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HelmUseCases_ListBySubscription": {
-            "$ref": "./examples/HelmUseCases_ListBySubscription_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/capabilityLists": {
       "get": {
         "operationId": "CapabilityLists_ListByResourceGroup",
@@ -1042,7 +995,7 @@
         "tags": [
           "TargetBindings"
         ],
-        "description": "Post request to deploy for Deployment Target Resource",
+        "description": "Post request to deploy",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1196,6 +1149,204 @@
         "x-ms-examples": {
           "DeploymentInstances_Get": {
             "$ref": "./examples/DeploymentInstances_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeploymentInstances_CreateOrUpdate",
+        "tags": [
+          "DeploymentInstances"
+        ],
+        "description": "Create or update a Deployment Instance Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "targetBindingName",
+            "in": "path",
+            "description": "The name of the TargetBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "deploymentInstanceName",
+            "in": "path",
+            "description": "The name of the DeploymentInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DeploymentInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeploymentInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'DeploymentInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeploymentInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInstances_CreateOrUpdate": {
+            "$ref": "./examples/DeploymentInstances_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DeploymentInstances_Update",
+        "tags": [
+          "DeploymentInstances"
+        ],
+        "description": "update a Deployment Instance Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "targetBindingName",
+            "in": "path",
+            "description": "The name of the TargetBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "deploymentInstanceName",
+            "in": "path",
+            "description": "The name of the DeploymentInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentInstanceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInstances_Update": {
+            "$ref": "./examples/DeploymentInstances_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeploymentInstances_Delete",
+        "tags": [
+          "DeploymentInstances"
+        ],
+        "description": "Delete a Deployment Instance Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "targetBindingName",
+            "in": "path",
+            "description": "The name of the TargetBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "deploymentInstanceName",
+            "in": "path",
+            "description": "The name of the DeploymentInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInstances_Delete": {
+            "$ref": "./examples/DeploymentInstances_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -1469,7 +1620,7 @@
         "tags": [
           "HelmUseCases"
         ],
-        "description": "List by specified resource group",
+        "description": "List Helm Use Case Resources",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1519,7 +1670,7 @@
         "tags": [
           "HelmUseCases"
         ],
-        "description": "Get a Use Case resource",
+        "description": "Get a Helm Use Case Resource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1572,7 +1723,7 @@
         "tags": [
           "HelmUseCases"
         ],
-        "description": "Create or update a Use Case resource",
+        "description": "Create or update a Helm Use Case Resource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1655,7 +1806,7 @@
         "tags": [
           "HelmUseCases"
         ],
-        "description": "update a Use Case resource",
+        "description": "update a Helm Use Case Resource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1717,7 +1868,7 @@
         "tags": [
           "HelmUseCases"
         ],
-        "description": "Delete a Use Case resource",
+        "description": "Delete a Helm Use Case Resource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1967,6 +2118,30 @@
         "configVersion"
       ]
     },
+    "DeploymentInstanceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the DeploymentInstance.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentInstanceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeploymentInstanceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the DeploymentInstance.",
+      "properties": {
+        "useCaseVersion": {
+          "type": "string",
+          "description": "Use case version of deployment instance"
+        },
+        "configVersion": {
+          "type": "string",
+          "description": "Config Version of deployment instance"
+        }
+      }
+    },
     "DeploymentTarget": {
       "type": "object",
       "description": "Deployment Target Resource",
@@ -2077,7 +2252,7 @@
     },
     "HelmUseCase": {
       "type": "object",
-      "description": "Use Case Resource",
+      "description": "Helm Use Case Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/HelmUseCaseProperties",
@@ -2114,19 +2289,19 @@
     },
     "HelmUseCaseProperties": {
       "type": "object",
-      "description": "Use Cases Resource Properties",
+      "description": "Helm Use Case Properties",
       "properties": {
         "helmChartUri": {
           "type": "string",
-          "description": "Helm Chart URI of use case version"
+          "description": "Helm Chart URI of helm use case"
         },
         "configurationSchema": {
           "type": "string",
-          "description": "Configuration schema of use case version"
+          "description": "Configuration schema of helm use case"
         },
         "configurationTemplate": {
           "type": "string",
-          "description": "Configuration template of use case version"
+          "description": "Configuration template of helm use case"
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -2163,15 +2338,15 @@
       "properties": {
         "helmChartUri": {
           "type": "string",
-          "description": "Helm Chart URI of use case version"
+          "description": "Helm Chart URI of helm use case"
         },
         "configurationSchema": {
           "type": "string",
-          "description": "Configuration schema of use case version"
+          "description": "Configuration schema of helm use case"
         },
         "configurationTemplate": {
           "type": "string",
-          "description": "Configuration template of use case version"
+          "description": "Configuration template of helm use case"
         }
       }
     },

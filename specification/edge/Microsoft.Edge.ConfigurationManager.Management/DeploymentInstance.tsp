@@ -39,6 +39,18 @@ interface DeploymentInstances {
     @doc("Get a Deployment Instance Resource")
     get is ArmResourceRead<DeploymentInstance>;
 
+    @doc("Create or update a Deployment Instance Resource")
+    createOrUpdate is ArmResourceCreateOrReplaceAsync<DeploymentInstance>;
+
+    @doc("update a Deployment Instance Resource")
+    update is ArmResourcePatchSync<
+        DeploymentInstance,
+        DeploymentInstanceProperties
+    >;
+
+    @doc("Delete a Deployment Instance Resource")
+    delete is ArmResourceDeleteSync<DeploymentInstance>;
+
     @doc("List Deployment Instance Resources")
     listByParent is ArmResourceListByParent<DeploymentInstance>;
 }

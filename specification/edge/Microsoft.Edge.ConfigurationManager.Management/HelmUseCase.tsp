@@ -15,15 +15,15 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
-@doc("Use Cases Resource Properties")
+@doc("Helm Use Case Properties")
 model HelmUseCaseProperties {
-    @doc("Helm Chart URI of use case version")
+    @doc("Helm Chart URI of helm use case")
     helmChartUri: string;
 
-    @doc("Configuration schema of use case version")
+    @doc("Configuration schema of helm use case")
     configurationSchema: string;
 
-    @doc("Configuration template of use case version")
+    @doc("Configuration template of helm use case")
     configurationTemplate: string;
 
     @doc("Provisioning state of resource")
@@ -31,7 +31,7 @@ model HelmUseCaseProperties {
     provisioningState?: ResourceProvisioningState;
 }
 
-@doc("Use Case Resource")
+@doc("Helm Use Case Resource")
 @parentResource(UseCase)
 model HelmUseCase is TrackedResource<HelmUseCaseProperties> {
     ...ResourceNameParameter<HelmUseCase>;
@@ -39,21 +39,18 @@ model HelmUseCase is TrackedResource<HelmUseCaseProperties> {
 
 @armResourceOperations
 interface HelmUseCases {
-    @doc("Get a Use Case resource")
+    @doc("Get a Helm Use Case Resource")
     get is ArmResourceRead<HelmUseCase>;
 
-    @doc("Create or update a Use Case resource")
+    @doc("Create or update a Helm Use Case Resource")
     createOrUpdate is ArmResourceCreateOrReplaceAsync<HelmUseCase>;
 
-    @doc("update a Use Case resource")
+    @doc("update a Helm Use Case Resource")
     update is ArmResourcePatchSync<HelmUseCase, HelmUseCaseProperties>;
 
-    @doc("Delete a Use Case resource")
+    @doc("Delete a Helm Use Case Resource")
     delete is ArmResourceDeleteSync<HelmUseCase>;
 
-    @doc("List by specified resource group")
-    listByResourceGroup is ArmResourceListByParent<HelmUseCase>;
-
-    @doc("List by subscription")
-    listBySubscription is ArmListBySubscription<HelmUseCase>;
+    @doc("List Helm Use Case Resources")
+    listByParent is ArmResourceListByParent<HelmUseCase>;
 }

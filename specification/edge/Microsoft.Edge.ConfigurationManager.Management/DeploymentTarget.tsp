@@ -59,8 +59,4 @@ interface DeploymentTargets {
 
     @doc("List by subscription")
     listBySubscription is ArmListBySubscription<DeploymentTarget>;
-
-    // // TODO: move to target binding (move to async)
-    // @doc("Post request to deploy for Deployment Target Resource")
-    // deploy is ArmResourceActionNoContentSync<DeploymentTarget, DeploymentTargetProperties>;
 }
