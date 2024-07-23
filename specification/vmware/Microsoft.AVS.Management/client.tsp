@@ -77,6 +77,10 @@ interface ScriptCmdlets extends Microsoft.AVS.ScriptCmdlets {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
+interface ScriptExecutions extends Microsoft.AVS.ScriptExecutions {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
+@operationGroup
 interface IscsiPaths extends Microsoft.AVS.IscsiPaths {}
 
 // group multiple interfaces into single operation group
