@@ -7,10 +7,20 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Microsoft.AVS;
 
-@client({
-  name: "AvsClient",
-  service: Microsoft.AVS,
-})
+@client(
+  {
+    name: "AvsClient",
+    service: Microsoft.AVS,
+  },
+  "java,csharp,javascript,go"
+)
+@client(
+  {
+    name: "AVSClient",
+    service: Microsoft.AVS,
+  },
+  "python"
+)
 @useDependency(Microsoft.AVS.Versions.v2023_09_01)
 namespace Customization;
 
@@ -19,66 +29,82 @@ namespace Customization;
 @@clientName(Microsoft.AVS, "AVS", "python");
 
 // operation group per interface
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface Operations extends Microsoft.AVS.Operations {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface Locations extends Microsoft.AVS.Locations {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface PrivateClouds extends Microsoft.AVS.PrivateClouds {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface Clusters extends Microsoft.AVS.Clusters {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface Datastores extends Microsoft.AVS.Datastores {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface HcxEnterpriseSites extends Microsoft.AVS.HcxEnterpriseSites {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface Authorizations extends Microsoft.AVS.Authorizations {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface GlobalReachConnections extends Microsoft.AVS.GlobalReachConnections {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface CloudLinks extends Microsoft.AVS.CloudLinks {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface Addons extends Microsoft.AVS.Addons {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface VirtualMachines extends Microsoft.AVS.VirtualMachines {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface PlacementPolicies extends Microsoft.AVS.PlacementPolicies {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface ScriptPackages extends Microsoft.AVS.ScriptPackages {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface ScriptCmdlets extends Microsoft.AVS.ScriptCmdlets {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface ScriptExecutions extends Microsoft.AVS.ScriptExecutions {}
 
+#suppress "@azure-tools/typespec-client-generator-core/client-service" "operationGroup"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "operationGroup"
 @operationGroup
 interface IscsiPaths extends Microsoft.AVS.IscsiPaths {}
