@@ -125,9 +125,12 @@ namespace SplitIO.Experimentation {
       ExperimentationWorkspace,
       LroHeaders = Azure.Core.Foundations.RetryAfterHeader
     >;
-    update is ArmResourcePatchAsync<
+    update is ArmCustomPatchAsync<
       ExperimentationWorkspace,
-      ExperimentationWorkspaceProperties
+      Azure.ResourceManager.Foundations.ResourceUpdateModel<
+        ExperimentationWorkspace,
+        ExperimentationWorkspaceProperties
+      >
     >;
     delete is ArmResourceDeleteWithoutOkAsync<ExperimentationWorkspace>;
     listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;

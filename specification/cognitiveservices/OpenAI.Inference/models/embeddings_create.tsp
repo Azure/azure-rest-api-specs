@@ -102,3 +102,16 @@ model EmbeddingsUsage {
   @encodedName("application/json", "total_tokens")
   totalTokens: int32;
 }
+
+/**
+ * Get embeddings request body.
+ */
+model GetEmbeddingsBody {
+  /**
+   * The configuration information for an embeddings request.
+   * Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
+   * recommendations, and other similar scenarios.
+   */
+  @bodyRoot
+  body: EmbeddingsOptions;
+}
