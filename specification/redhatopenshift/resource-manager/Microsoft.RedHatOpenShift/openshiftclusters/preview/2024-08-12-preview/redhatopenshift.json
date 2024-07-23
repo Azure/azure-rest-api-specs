@@ -1904,7 +1904,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string"
+          "$ref": "#/definitions/IdentityType"
         },
         "principalId": {
           "type": "string",
@@ -1920,6 +1920,17 @@
             "$ref": "#/definitions/ClusterUserAssignedIdentity"
           }
         }
+      }
+    },
+    "IdentityType": {
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
       }
     },
     "IngressProfile": {
