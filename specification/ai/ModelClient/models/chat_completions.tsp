@@ -82,7 +82,11 @@ model ChatCompletionsOptions {
   @minValue(0.0)
   max_tokens?: int32;
 
-  @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
+  @doc("""
+    The format that the model must output. Use this to enable JSON mode instead of the default text mode.
+    Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
+    via a system or user message.
+    """)
   response_format?: ChatCompletionsResponseFormat;
 
   @doc("""
@@ -230,22 +234,32 @@ union ChatRole {
 }
 
 @doc("""
-  An representation of a response format configuration usable by Chat Completions. Can be used to enable JSON
-  mode.
+  Represents the format that the model must output. Use this to enable JSON mode instead of the default text mode.
+  Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
+  via a system or user message.
   """)
-union ChatCompletionsResponseFormat {
-  string,
+@discriminator("type")
+model ChatCompletionsResponseFormat {
+  @doc("The response format type to use for chat completions.")
+  type: string;
+}
 
-  @doc("""
-    The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response
-    content that adheres to a specific schema.
-    """)
-  text: "text",
+@doc("""
+  A response format for Chat Completions that emits text responses. This is the default response format.
+  """)
+model ChatCompletionsResponseFormatText extends ChatCompletionsResponseFormat {
+  @doc("Response format type: always 'text' for this object.")
+  type: "text";
+}
 
-  @doc("""
-    A response format for Chat Completions that restricts responses to emitting valid JSON objects.
-    """)
-  json_object: "json_object",
+@doc("""
+  A response format for Chat Completions that restricts responses to emitting valid JSON objects.
+  Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
+  via a system or user message.
+  """)
+model ChatCompletionsResponseFormatJSON extends ChatCompletionsResponseFormat {
+  @doc("Response format type: always 'json_object' for this object.")
+  type: "json_object";
 }
 
 alias ChatChoiceCommon = {
