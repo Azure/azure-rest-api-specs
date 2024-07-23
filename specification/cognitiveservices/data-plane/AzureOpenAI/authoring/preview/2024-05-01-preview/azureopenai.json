@@ -2851,19 +2851,31 @@
       "x-ms-parameter-location": "client"
     }
   },
-  "securityDefinitions": {
-    "api-key": {
-      "type": "apiKey",
-      "name": "api-key",
-      "in": "header",
-      "description": "Provide your Cognitive Services Azure OpenAI account key here."
-    }
-  },
   "security": [
     {
-      "api-key": [ ]
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
+    }
+  },
   "schemes": [
     "https"
   ],
