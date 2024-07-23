@@ -26,7 +26,7 @@ These are the global settings for the Azure Red Hat OpenShift API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-04-01
+tag: package-2024-08-12-preview
 ```
 
 ### Tag: package-2020-04-30
