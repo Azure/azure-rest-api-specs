@@ -34,9 +34,6 @@ interface MongoClusters {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition. */
-  @sharedRoute
-  updateOld is ArmResourcePatchAsync<MongoCluster, MongoClusterProperties>;
-  @sharedRoute
   @parameterVisibility
   update is ArmCustomPatchAsync<MongoCluster, MongoCluster>;
 
