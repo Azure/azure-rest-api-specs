@@ -3869,94 +3869,6 @@
       },
       "type": "object",
       "description": "Instance view status."
-    },
-    "Gateway": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GatewayProperties",
-          "description": "Hybrid Compute Gateway properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Describes an Arc Gateway."
-    },
-    "GatewayProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state, which only appears in the response.",
-          "readOnly": true
-        },
-        "gatewayId": {
-          "type": "string",
-          "description": "A unique, immutable, identifier for the Gateway.",
-          "readOnly": true
-        },
-        "gatewayType": {
-          "$ref": "#/definitions/GatewayType",
-          "description": "The type of the Gateway resource."
-        },
-        "gatewayEndpoint": {
-          "type": "string",
-          "description": "The endpoint fqdn for the Gateway.",
-          "readOnly": true
-        },
-        "allowedFeatures": {
-          "type": "array",
-          "description": "Specifies the list of features that are enabled for this Gateway.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "description": "Describes the properties of a Gateway Profile."
-    },
-    "GatewayType": {
-      "type": "string",
-      "enum": [
-        "Public"
-      ],
-      "x-ms-enum": {
-        "name": "GatewayType",
-        "modelAsString": true
-      },
-      "description": "The type of the Gateway resource."
-    },
-    "GatewayUpdate": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GatewayUpdateProperties",
-          "description": "Gateway Update properties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceUpdate"
-        }
-      ],
-      "description": "Describes a License Update."
-    },
-    "GatewayUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "allowedFeatures": {
-          "type": "array",
-          "description": "Specifies the list of features that are enabled for this Gateway.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "description": "Describes the Update properties of a Gateway Profile."
     }
   },
   "parameters": {
@@ -3992,15 +3904,6 @@
       "type": "string",
       "pattern": "[a-zA-Z0-9-_\\.]+",
       "description": "The name of the license.",
-      "x-ms-parameter-location": "method"
-    },
-    "gatewayNameParameter": {
-      "name": "gatewayName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "[a-zA-Z0-9-_\\.]+",
-      "description": "The name of the Gateway.",
       "x-ms-parameter-location": "method"
     },
     "baseProviderParameter": {
