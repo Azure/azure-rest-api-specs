@@ -1350,6 +1350,15 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "serviceEndpoint": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "File service endpoint of the Azure File Storage resource. It is mutually exclusive with connectionString, sasUri property."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
