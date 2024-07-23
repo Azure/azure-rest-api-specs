@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-apiview";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
@@ -44,11 +43,11 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 enum Versions {
   /**
-   * The 2024-05-08 API version.
+   * The 2024-07-22 API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_05_08: "2024-05-08",
+  v2024_07_22_preview: "2024-07-22-preview",
 }
 
 @armResourceOperations
@@ -58,7 +57,12 @@ interface Organizations
       OrganizationProperties
     > {
   get is ArmResourceRead<InformaticaOrganizationResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaOrganizationResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    InformaticaOrganizationResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
@@ -84,7 +88,12 @@ interface Organizations
 interface ServerlessRuntimes
   extends ProxyResourceOperations<InformaticaServerlessRuntimeResource> {
   get is ArmResourceRead<InformaticaServerlessRuntimeResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<InformaticaServerlessRuntimeResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    InformaticaServerlessRuntimeResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,
@@ -152,6 +161,24 @@ model InformaticaServerlessRuntimeResourceList {
   informaticaRuntimeResources: InfaRuntimeResourceFetchMetaData[];
 }
 
+@doc("Serverless Runtime Data Disk")
+model ServerlessRuntimeDataDisk {
+  @doc("Type of the data disk")
+  type?: string;
+
+  @doc("Server Host or IP Address")
+  serverHostOrIpAddress?: string;
+
+  @doc("Source mount point")
+  sourceMount?: string;
+
+  @doc("Target mount point")
+  targetMount?: string;
+
+  @doc("Mount options")
+  mountOptions?: string;
+}
+
 @doc("Informatica runtime resource metadata as received via the informatica fetch all runtime environments API")
 model InfaRuntimeResourceFetchMetaData {
   @doc("Environment name")
@@ -208,6 +235,10 @@ model InfaServerlessFetchConfigProperties {
   @doc("Supplementary File location")
   supplementaryFileLocation?: string;
 
+  @doc("Serverless runtime data disks")
+  @extension("x-ms-identifiers", [])
+  serverlessRuntimeDataDisks?: ServerlessRuntimeDataDisk[];
+
   @doc("Serverless Account Platform")
   platform?: string;
 
@@ -224,7 +255,7 @@ model InfaServerlessFetchConfigProperties {
   computeUnits?: string;
 
   @doc("Tenant ID")
-  tenantId?: string;
+  tenantId?: uuid;
 
   @doc("subscription ID")
   subscriptionId?: string;
@@ -233,7 +264,7 @@ model InfaServerlessFetchConfigProperties {
   region?: string;
 
   @doc("Serverless Arm Resource ID")
-  serverlessArmResourceId?: string;
+  serverlessArmResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }
 
 @doc("A Serverless Runtime environment  resource by Informatica.")
@@ -339,7 +370,7 @@ model InformaticaProperties {
   informaticaRegion?: string;
 
   @doc("Single sing on URL for informatica organization")
-  singleSignOnUrl?: string;
+  singleSignOnUrl?: url;
 }
 
 @doc("Link Organization")
@@ -414,6 +445,10 @@ model InformaticaServerlessRuntimeProperties {
 
   @doc("Supplementary file location.")
   supplementaryFileLocation?: string;
+
+  @doc("Serverless runtime data disks")
+  @extension("x-ms-identifiers", [])
+  serverlessRuntimeDataDisks?: ServerlessRuntimeDataDisk[];
 
   @doc("Serverless config properties")
   serverlessRuntimeConfig?: ServerlessRuntimeConfigProperties;
@@ -546,10 +581,10 @@ model ApplicationConfigs {
 @doc("Informatica Serverless Runtime Network Interface configurations.")
 model NetworkInterfaceConfiguration {
   @doc("Virtual network resource id")
-  vnetId: string;
+  vnetId: Azure.Core.armResourceIdentifier<[]>;
 
   @doc("Virtual network subnet resource id")
-  subnetId: string;
+  subnetId: Azure.Core.armResourceIdentifier<[]>;
 
   @doc("Virtual network resource guid")
   vnetResourceGuid?: string;
@@ -645,7 +680,7 @@ model OrganizationPropertiesCustomUpdate {
   companyDetails?: CompanyDetailsUpdate;
 
   @doc("Existing Resource Id")
-  existingResourceId?: string;
+  existingResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }
 
 /** Marketplace details */
@@ -708,6 +743,10 @@ model ServerlessRuntimePropertiesCustomUpdate {
 
   @doc("Supplementary file location.")
   supplementaryFileLocation?: string;
+
+  @doc("Serverless runtime data disks")
+  @extension("x-ms-identifiers", [])
+  serverlessRuntimeDataDisks?: ServerlessRuntimeDataDisk[];
 
   @doc("Serverless config properties")
   serverlessRuntimeConfig?: ServerlessRuntimeConfigPropertiesUpdate;
