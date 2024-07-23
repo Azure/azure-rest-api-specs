@@ -72,10 +72,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 );
 @@clientName(AI.Model.ChatRequestToolMessage, "ToolMessage", "python");
 @@clientName(AI.Model.ChatMessageContentItem, "ContentItem", "python");
-@@clientName(AI.Model.ChatMessageTextContentItem,
-  "TextContentItem",
-  "python"
-);
+@@clientName(AI.Model.ChatMessageTextContentItem, "TextContentItem", "python");
 @@clientName(AI.Model.ChatMessageImageContentItem,
   "ImageContentItem",
   "python"
