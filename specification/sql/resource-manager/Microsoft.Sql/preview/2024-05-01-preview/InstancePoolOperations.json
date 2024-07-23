@@ -25,13 +25,24 @@
         "operationId": "InstancePoolOperations_ListByInstancePool",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group that contains the resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 90,
+            "minLength": 1,
+            "pattern": "^[\\p{L}\\p{N}_().-]*[\\p{L}\\p{N}_()-]$"
           },
           {
             "name": "instancePoolName",
             "in": "path",
+            "description": "The name of the managed instance pool.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 127,
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+(-*[a-z0-9]+)*$"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -76,13 +87,24 @@
         "operationId": "InstancePoolOperations_Get",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group that contains the resource.",
+            "required": true,
+            "type": "string",
+            "maxLength": 90,
+            "minLength": 1,
+            "pattern": "^[\\p{L}\\p{N}_().-]*[\\p{L}\\p{N}_()-]$"
           },
           {
             "name": "instancePoolName",
             "in": "path",
+            "description": "The name of the managed instance pool.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 127,
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+(-*[a-z0-9]+)*$"
           },
           {
             "name": "operationId",
