@@ -43,11 +43,11 @@ interface Operations extends Azure.ResourceManager.Operations {}
  */
 enum Versions {
   /**
-   * The 2024-05-08 API version.
+   * The 2024-07-22 API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_05_08: "2024-05-08",
+  v2024_07_22: "2024-07-22",
 }
 
 @armResourceOperations
@@ -161,6 +161,24 @@ model InformaticaServerlessRuntimeResourceList {
   informaticaRuntimeResources: InfaRuntimeResourceFetchMetaData[];
 }
 
+@doc("Serverless Runtime Data Disk")
+model ServerlessRuntimeDataDisk {
+  @doc("Type of the data disk")
+  type?: string;
+
+  @doc("Server Host or IP Address")
+  serverHostOrIpAddress?: string;
+
+  @doc("Source mount point")
+  sourceMount?: string;
+
+  @doc("Target mount point")
+  targetMount?: string;
+
+  @doc("Mount options")
+  mountOptions?: string;
+}
+
 @doc("Informatica runtime resource metadata as received via the informatica fetch all runtime environments API")
 model InfaRuntimeResourceFetchMetaData {
   @doc("Environment name")
@@ -216,6 +234,10 @@ model InfaServerlessFetchConfigProperties {
 
   @doc("Supplementary File location")
   supplementaryFileLocation?: string;
+
+  @doc("Serverless runtime data disks")
+  @extension("x-ms-identifiers", [])
+  serverlessRuntimeDataDisks?: ServerlessRuntimeDataDisk[];
 
   @doc("Serverless Account Platform")
   platform?: string;
@@ -423,6 +445,10 @@ model InformaticaServerlessRuntimeProperties {
 
   @doc("Supplementary file location.")
   supplementaryFileLocation?: string;
+
+  @doc("Serverless runtime data disks")
+  @extension("x-ms-identifiers", [])
+  serverlessRuntimeDataDisks?: ServerlessRuntimeDataDisk[];
 
   @doc("Serverless config properties")
   serverlessRuntimeConfig?: ServerlessRuntimeConfigProperties;
@@ -717,6 +743,10 @@ model ServerlessRuntimePropertiesCustomUpdate {
 
   @doc("Supplementary file location.")
   supplementaryFileLocation?: string;
+
+  @doc("Serverless runtime data disks")
+  @extension("x-ms-identifiers", [])
+  serverlessRuntimeDataDisks?: ServerlessRuntimeDataDisk[];
 
   @doc("Serverless config properties")
   serverlessRuntimeConfig?: ServerlessRuntimeConfigPropertiesUpdate;

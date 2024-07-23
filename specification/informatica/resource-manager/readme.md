@@ -27,12 +27,21 @@ These are the global settings for the informatica.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-05-08
+tag: package-2024-07-22
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-2024-07-22
+
+These settings apply only when `--tag=package-2024-07-22` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07-22'
+input-file:
+  - Informatica.DataManagement/preview/2024-07-22/openapi.json
 ```
 
 ### Tag: package-2024-05-08
@@ -64,7 +73,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_informaticadatamanagement']
 ```
-
 
 ## Go
 
