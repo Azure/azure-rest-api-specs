@@ -101,7 +101,7 @@ op ReplaceOperation<TResource, TResponse> is RpcOperation<
 
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@doc("New rpc operation allowing multiple repsonses")
+@doc("New rpc operation allowing multiple responses")
 @Foundations.Private.needsRoute
 @head
 op ResourceInfoOperationWithAdditionalResponse<
@@ -183,7 +183,7 @@ alias FileResponseHeaders = {
 
   @header("Content-Length")
   @doc("The length of the file.")
-  contentLength: int64;
+  contentLength: string;
 
   ...BatchEtagResponseHeaders;
 
