@@ -72,6 +72,10 @@ enum VirtualMachineState {
 
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off.")
   Deallocated,
+
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
+  @doc("The virtual machine has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation.")
+  Hibernated,
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
