@@ -5,13 +5,13 @@
 		"ingestionJob": {
 			"kind": "SystemCompute",
 			"searchServiceConnection": {
-				"kind": "EndpointWithManagedIdentity",
+				"kind": "endpointMI",
 				"endpoint": "https://aykame-dev-search.search.windows.net"
 			},
 			"datasource": {
-				"kind": "Storage",
+				"kind": "storage",
 				"storageAccountConnection": {
-					"kind": "EndpointWithManagedIdentity",
+					"kind": "endpointMI",
 					"endpoint": "https://mystorage.blob.core.windows.net/",
 					"resourceId": "ResourceId=/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
 				},
@@ -22,7 +22,7 @@
 				"embeddingsSettings": [
 					{
 						"embeddingResourceConnection": {
-							"kind": "RelativeConnection"
+							"kind": "relativeConnection"
 						},
 						"modelProvider": "AOAI",
 						"deploymentName": "Ada"
@@ -30,7 +30,7 @@
 				]
 			},
 			"dataRefreshIntervalInHours": 24,
-			"completionAction": 0
+			"completionAction": "keepAllAssets"
 		}
 	},
 	"responses": {
@@ -42,13 +42,13 @@
 				"kind": "SystemCompute",
         "jobId": "ingestion-job",
 				"searchServiceConnection": {
-					"kind": "EndpointWithManagedIdentity",
+					"kind": "endpointMI",
 					"endpoint": "https://aykame-dev-search.search.windows.net"
 				},
 				"datasource": {
 					"kind": "Storage",
 					"storageAccountConnection": {
-						"kind": "EndpointWithManagedIdentity",
+						"kind": "endpointMI",
 						"endpoint": "https://mystorage.blob.core.windows.net/",
 						"resourceId": "ResourceId=/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
 					},
@@ -59,7 +59,7 @@
 					"embeddingsSettings": [
 						{
 							"embeddingResourceConnection": {
-								"kind": "RelativeConnection"
+								"kind": "relativeConnection"
 							},
 							"modelProvider": "AOAI",
 							"deploymentName": "Ada"
@@ -67,7 +67,7 @@
 					]
 				},
 				"dataRefreshIntervalInHours": 24,
-				"completionAction": 0
+				"completionAction": "keepAllAssets"
 			}
 		}
 	}
