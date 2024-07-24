@@ -2,6 +2,13 @@ import { expect, test } from "vitest";
 import { Suppression, getSuppressions } from "../src/suppressions.js";
 import { join } from "path";
 
+/**
+ * Returns the suppressions for a tool (default "TestTool") applicable to a path under folder "e2e".
+ *
+ * @param path Relative path to to file or directory to analyze, under folder "e2e".
+ * @param tool Name of tool. Matched against property "tool" in suppressions.yaml.  Defaults to "TestTool".
+ * @returns Array of suppressions matching tool and path (may be empty).
+ */
 async function getTestSuppressions(
   path: string,
   tool: string = "TestTool",

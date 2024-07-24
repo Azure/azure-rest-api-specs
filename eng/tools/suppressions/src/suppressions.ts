@@ -47,7 +47,7 @@ const suppressionSchema = z.array(
  * Suppressions are ordered by file (closest to path is first), then within the file (closest to top is first).
  *
  * @param tool Name of tool. Matched against property "tool" in suppressions.yaml.
- * @param path Path to file or directory under analysis.
+ * @param path Path to file or directory under analysis.[]
  * @returns Array of suppressions matching tool and path (may be empty).
  *
  * @example
