@@ -1045,7 +1045,7 @@
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/SubscriptionUnderManagementGroup"
             }
@@ -1225,45 +1225,6 @@
           "TenantBackfillStatusRequest": {
             "$ref": "./examples/TenantBackfillStatusRequest.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Management/managementGroups": {
-      "get": {
-        "operationId": "ManagementGroups_List",
-        "tags": [
-          "ManagementGroups"
-        ],
-        "description": "List management groups for the authenticated user.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ManagementGroupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListManagementGroups": {
-            "$ref": "./examples/ManagementGroups_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
