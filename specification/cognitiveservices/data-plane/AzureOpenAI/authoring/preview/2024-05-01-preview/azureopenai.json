@@ -2024,7 +2024,7 @@
         }
       }
     ],
-    "x-ms-discriminator-value": "system"
+    "x-ms-discriminator-value": "SystemCompute"
   },
   "IngestionJobUserCompute": {
     "type": "object",
@@ -2055,7 +2055,7 @@
         }
       }
     ],
-    "x-ms-discriminator-value": "user"
+    "x-ms-discriminator-value": "UserCompute"
   },
   "JobCompute": {
     "title": "JobCompute",
@@ -2560,7 +2560,8 @@
       "endpointKey",
       "connectionString",
       "endpointMI",
-      "workspace"
+      "workspace",
+      "relativeConnection"
     ],
     "x-ms-enum": {
       "name": "ConnectionType",
@@ -2684,7 +2685,7 @@
         "$ref": "#/definitions/BaseConnection"
       }
     ],
-    "x-ms-discriminator-value": "relativeDeployment"
+    "x-ms-discriminator-value": "relativeConnection"
   },
   "CompletionAction": {
     "type": "string",
