@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ConnectedKubernetesClient",
-    "version": "2024-07-01-preview",
+    "version": "2024-07-15-preview",
     "description": "Azure Connected Cluster Resource Provider API for onboarding a Kubernetes Cluster to Azure Arc"
   },
   "schemes": [
@@ -850,6 +850,16 @@
           "description": "Sender access token",
           "type": "string",
           "readOnly": true
+        },
+        "relayTid": {
+          "description": "TenantID of the relay",
+          "type": "string",
+          "readOnly": true
+        },
+        "relayType": {
+          "description": "Type of relay",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -918,14 +928,6 @@
         },
         "resourceId": {
           "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.HybridCompute/gateways"
-              }
-            ]
-          },
           "description": "The resource ID of the gateway used for the Arc router feature."
         }
       }
