@@ -30,6 +30,16 @@ openapi-subtype: rpaas
 tag: package-preview-2024-07
 ```
 
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-2023-06-28` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.ConfidentialLedger/stable/2023-06-28/confidentialledger.json
+  - Microsoft.ConfidentialLedger/stable/2023-06-28/managedccf.json
+
+
 ### Tag: package-preview-2024-07
 
 These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
