@@ -16,48 +16,48 @@ namespace Microsoft.Edge;
 
 @doc("Target Binding Properties")
 model TargetBindingProperties {
-    @doc("Use Case of target binding")
-    useCase: string;
+  @doc("Use Case of target binding")
+  useCase: string;
 
-    @doc("Deployment Target of target binding")
-    deploymentTarget: string;
+  @doc("Deployment Target of target binding")
+  deploymentTarget: string;
 
-    @doc("Active Deployment Instance of target binding")
-    activeDeploymentInstance: string;
+  @doc("Active Deployment Instance of target binding")
+  activeDeploymentInstance: string;
 
-    @doc("Scope of target binding")
-    scope: string;
+  @doc("Scope of target binding")
+  scope: string;
 
-    @doc("Provisioning state of resource")
-    @visibility("read")
-    provisioningState?: ResourceProvisioningState;
+  @doc("Provisioning state of resource")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
 }
 
 @doc("Target Binding Resource")
 model TargetBinding is TrackedResource<TargetBindingProperties> {
-    ...ResourceNameParameter<TargetBinding>;
+  ...ResourceNameParameter<TargetBinding>;
 }
 
 @armResourceOperations
 interface TargetBindings {
-    @doc("Get a Target Binding Resource")
-    get is ArmResourceRead<TargetBinding>;
+  @doc("Get a Target Binding Resource")
+  get is ArmResourceRead<TargetBinding>;
 
-    @doc("Create or update a Target Binding Resource")
-    createOrUpdate is ArmResourceCreateOrReplaceAsync<TargetBinding>;
+  @doc("Create or update a Target Binding Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TargetBinding>;
 
-    @doc("update a Target Binding Resource")
-    update is ArmResourcePatchSync<TargetBinding, TargetBindingProperties>;
+  @doc("update a Target Binding Resource")
+  update is ArmResourcePatchSync<TargetBinding, TargetBindingProperties>;
 
-    @doc("Delete a Target Binding Resource")
-    delete is ArmResourceDeleteSync<TargetBinding>;
+  @doc("Delete a Target Binding Resource")
+  delete is ArmResourceDeleteSync<TargetBinding>;
 
-    @doc("List by specified resource group")
-    listByResourceGroup is ArmResourceListByParent<TargetBinding>;
+  @doc("List by specified resource group")
+  listByResourceGroup is ArmResourceListByParent<TargetBinding>;
 
-    @doc("List by subscription")
-    listBySubscription is ArmListBySubscription<TargetBinding>;
+  @doc("List by subscription")
+  listBySubscription is ArmListBySubscription<TargetBinding>;
 
-    @doc("Post request to deploy")
-    deploy is ArmResourceActionNoResponseContentAsync<TargetBinding, void>;
+  @doc("Post request to deploy")
+  deploy is ArmResourceActionNoResponseContentAsync<TargetBinding, void>;
 }

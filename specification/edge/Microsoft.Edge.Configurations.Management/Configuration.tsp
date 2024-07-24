@@ -16,36 +16,36 @@ namespace Microsoft.Edge;
 
 @doc("Configuration Properties")
 model ConfigurationProperties {
-    @doc("Timezone of configuration")
-    timezone: string;
+  @doc("Timezone of configuration")
+  timezone: string;
 
-    @doc("Provisioning state of resource")
-    @visibility("read")
-    provisioningState?: ResourceProvisioningState;
+  @doc("Provisioning state of resource")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
 }
 
 @doc("Configuration Resource")
 model Configuration is TrackedResource<ConfigurationProperties> {
-    ...ResourceNameParameter<Configuration>;
+  ...ResourceNameParameter<Configuration>;
 }
 
 @armResourceOperations
 interface Configurations {
-    @doc("Get a Configuration Resource")
-    get is ArmResourceRead<Configuration>;
+  @doc("Get a Configuration Resource")
+  get is ArmResourceRead<Configuration>;
 
-    @doc("Create or update a Configuration Resource")
-    createOrUpdate is ArmResourceCreateOrReplaceAsync<Configuration>;
+  @doc("Create or update a Configuration Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Configuration>;
 
-    @doc("Update a Configuration Resource")
-    update is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
+  @doc("Update a Configuration Resource")
+  update is ArmResourcePatchSync<Configuration, ConfigurationProperties>;
 
-    @doc("Delete a Configuration Resource")
-    delete is ArmResourceDeleteWithoutOkAsync<Configuration>;
+  @doc("Delete a Configuration Resource")
+  delete is ArmResourceDeleteWithoutOkAsync<Configuration>;
 
-    @doc("List by specified resource group")
-    listByResourceGroup is ArmResourceListByParent<Configuration>;
+  @doc("List by specified resource group")
+  listByResourceGroup is ArmResourceListByParent<Configuration>;
 
-    @doc("List by subscription")
-    listBySubscription is ArmListBySubscription<Configuration>;
+  @doc("List by subscription")
+  listBySubscription is ArmListBySubscription<Configuration>;
 }

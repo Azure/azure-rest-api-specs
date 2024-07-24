@@ -17,41 +17,44 @@ namespace Microsoft.Edge;
 
 @doc("Dynamic Configuration Properties")
 model DynamicConfigurationProperties {
-    @doc("Current Version of dynamic configuration")
-    currentVersion: string;
+  @doc("Current Version of dynamic configuration")
+  currentVersion: string;
 
-    @doc("Provisioning state of resource")
-    @visibility("read")
-    provisioningState?: ResourceProvisioningState;
+  @doc("Provisioning state of resource")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
 }
 
 @doc("Dynamic Configuration Resource")
 @parentResource(Configuration)
 model DynamicConfiguration is ProxyResource<DynamicConfigurationProperties> {
-    ...ResourceNameParameter<DynamicConfiguration>;
+  ...ResourceNameParameter<DynamicConfiguration>;
 }
 
 @armResourceOperations
 interface DynamicConfigurations {
-    @doc("Get a Dynamic Configuration Resource")
-    get is ArmResourceRead<DynamicConfiguration>;
+  @doc("Get a Dynamic Configuration Resource")
+  get is ArmResourceRead<DynamicConfiguration>;
 
-    @doc("Create or update a Dynamic Configuration Resource")
-    createOrUpdate is ArmResourceCreateOrReplaceAsync<DynamicConfiguration>;
+  @doc("Create or update a Dynamic Configuration Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DynamicConfiguration>;
 
-    @doc("Update a Dynamic Configuration Resource")
-    update is ArmResourcePatchSync<DynamicConfiguration, DynamicConfigurationProperties>;
+  @doc("Update a Dynamic Configuration Resource")
+  update is ArmResourcePatchSync<
+    DynamicConfiguration,
+    DynamicConfigurationProperties
+  >;
 
-    @doc("Delete a Dynamic Configuration Resource")
-    delete is ArmResourceDeleteSync<DynamicConfiguration>;
+  @doc("Delete a Dynamic Configuration Resource")
+  delete is ArmResourceDeleteSync<DynamicConfiguration>;
 
-    @doc("List Dynamic Configuration Resources")
-    listByParent is ArmResourceListByParent<DynamicConfiguration>;
+  @doc("List Dynamic Configuration Resources")
+  listByParent is ArmResourceListByParent<DynamicConfiguration>;
 
-    @doc("Post request to resolve configuration")
-    resolveConfiguration is ArmResourceActionSync<
-        DynamicConfiguration,
-        void,
-        DynamicConfigurationProperties
-    >;
+  @doc("Post request to resolve configuration")
+  resolveConfiguration is ArmResourceActionSync<
+    DynamicConfiguration,
+    void,
+    DynamicConfigurationProperties
+  >;
 }

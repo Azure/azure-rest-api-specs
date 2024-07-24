@@ -17,40 +17,40 @@ namespace Microsoft.Edge;
 
 @doc("Deployment Instance Properties")
 model DeploymentInstanceProperties {
-    @doc("Use case version of deployment instance")
-    useCaseVersion: string;
+  @doc("Use case version of deployment instance")
+  useCaseVersion: string;
 
-    @doc("Config Version of deployment instance")
-    configVersion: string;
+  @doc("Config Version of deployment instance")
+  configVersion: string;
 
-    @doc("Provisioning state of resource")
-    @visibility("read")
-    provisioningState?: ResourceProvisioningState;
+  @doc("Provisioning state of resource")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
 }
 
 @doc("Deployment Instance Resource")
 @parentResource(TargetBinding)
 model DeploymentInstance is ProxyResource<DeploymentInstanceProperties> {
-    ...ResourceNameParameter<DeploymentInstance>;
+  ...ResourceNameParameter<DeploymentInstance>;
 }
 
 @armResourceOperations
 interface DeploymentInstances {
-    @doc("Get a Deployment Instance Resource")
-    get is ArmResourceRead<DeploymentInstance>;
+  @doc("Get a Deployment Instance Resource")
+  get is ArmResourceRead<DeploymentInstance>;
 
-    @doc("Create or update a Deployment Instance Resource")
-    createOrUpdate is ArmResourceCreateOrReplaceAsync<DeploymentInstance>;
+  @doc("Create or update a Deployment Instance Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DeploymentInstance>;
 
-    @doc("update a Deployment Instance Resource")
-    update is ArmResourcePatchSync<
-        DeploymentInstance,
-        DeploymentInstanceProperties
-    >;
+  @doc("update a Deployment Instance Resource")
+  update is ArmResourcePatchSync<
+    DeploymentInstance,
+    DeploymentInstanceProperties
+  >;
 
-    @doc("Delete a Deployment Instance Resource")
-    delete is ArmResourceDeleteSync<DeploymentInstance>;
+  @doc("Delete a Deployment Instance Resource")
+  delete is ArmResourceDeleteSync<DeploymentInstance>;
 
-    @doc("List Deployment Instance Resources")
-    listByParent is ArmResourceListByParent<DeploymentInstance>;
+  @doc("List Deployment Instance Resources")
+  listByParent is ArmResourceListByParent<DeploymentInstance>;
 }
