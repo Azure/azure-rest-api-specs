@@ -31,7 +31,7 @@ interface Dashboards {
   /**
    * Gets the Dashboard.
    */
-  get is ArmResourceRead<Resource = Dashboard, Response = ArmResponse<Dashboard> | NotFoundResponse>;
+  get is ArmResourceRead<Dashboard>;
 
   /**
    * Creates or updates a Dashboard.
@@ -42,7 +42,7 @@ interface Dashboards {
    * Updates an existing Dashboard.
    */
   @parameterVisibility
-  update is ArmCustomPatchSync<Resource = Dashboard, PatchModel = PatchableDashboard, Response = ArmResponse<Dashboard> | NotFoundResponse>;
+  update is ArmCustomPatchSync<Dashboard, PatchableDashboard>;
 
   /**
    * Deletes the Dashboard.
