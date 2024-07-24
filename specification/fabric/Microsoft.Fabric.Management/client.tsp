@@ -6,7 +6,7 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.Fabric {
   @@access(Operations.list, Access.internal, "csharp");
 
-  @@clientName(FabricCapacities.checkNameAvailability, "CheckFabricCapacityNameAvailability", "csharp");
+  // @@clientName(FabricCapacities.checkNameAvailability, "CheckFabricCapacityNameAvailability", "csharp"); // this current does not work on C# generator, temporarily remove this customization and will restore this back once the generator solves the issue
   @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest, "FabricNameAvailabilityContent", "csharp");
   @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type, "ResourceType", "csharp");
   @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse, "FabricNameAvailabilityResult", "csharp");
