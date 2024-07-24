@@ -13,10 +13,53 @@ using Microsoft.AVS;
 @@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties
 );
 #suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.ProxyResource.properties);
-#suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
 );
+
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Location.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Cluster.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(Datastore.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(HcxEnterpriseSite.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ExpressRouteAuthorization.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(GlobalReachConnection.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetwork.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkSegment.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkDhcp.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkGateway.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkPortMirroring.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkVMGroup.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkVirtualMachine.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkDnsService.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkDnsZone.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(WorkloadNetworkPublicIP.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(CloudLink.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(VirtualMachine.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ScriptPackage.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ScriptCmdlet.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(ScriptExecution.properties);
+#suppress "deprecated" "property flatten for SDK backward compatibility"
+@@flattenProperty(IscsiPath.properties);
 
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(PrivateCloudUpdate.properties);
