@@ -97,7 +97,7 @@ interface VirtualMachineInstances {
   >;
   /** Lists all of the virtual machine instances within the specified parent resource. */
   @summary("Implements List virtual machine instances.")
-  listByArm is ArmResourceListByParent<VirtualMachineInstance>;
+  list is ArmResourceListByParent<VirtualMachineInstance>;
   /** The operation to power off (stop) a virtual machine instance. */
   @summary("Implements the operation to stop a virtual machine.")
   stop is ArmResourceActionNoResponseContentAsync<
