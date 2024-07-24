@@ -1,0 +1,28 @@
+{
+  "operationId": "BfdProfiles_Get",
+  "title": "BfdProfiles_Get",
+  "parameters": {
+    "resourceUri": "subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.Kubernetes/connectedClusters/cluster1",
+    "bgpPeerName": "testprofile",
+    "api-version": "2024-08-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.Kubernetes/connectedClusters/cluster1/providers/Microsoft.KubernetesRuntime/bfdProfiles/testprofile",
+        "name": "testprofile",
+        "type": "Microsoft.KubernetesRuntime/BfdProfiles",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "receiveInterval": 300,
+          "transmitInterval": 300,
+          "detectMultiplier": 3,
+          "echoInterval": 50,
+          "echoMode": "Disabled",
+          "passiveMode": "Disabled",
+          "minimumTtl": 254
+        }
+      }
+    }
+  }
+}

@@ -28,6 +28,30 @@ model BgpPeerProperties {
   @doc("Peer Address")
   peerAddress: string;
 
+  @doc("BFD Profile")
+  @added(Versions.v2024_08_01)
+  bfdProfile?: string;
+
+  @doc("Peer BGP port")
+  @added(Versions.v2024_08_01)
+  peerPort?: int32;
+
+  @doc("eBGP multiple hop")
+  @added(Versions.v2024_08_01)
+  bgpMultiHop?: EnableState;
+
+  @doc("Hold time")
+  @added(Versions.v2024_08_01)
+  holdTime?: string;
+
+  @doc("Keepalive time")
+  @added(Versions.v2024_08_01)
+  keepAliveTime?: string;
+
+  @doc("BGP Communities")
+  @added(Versions.v2024_08_01)
+  communities?: string[];
+
   @visibility("read")
   @doc("Resource provision state")
   provisioningState?: ProvisioningState;
