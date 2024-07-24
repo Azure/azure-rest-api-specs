@@ -369,7 +369,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations": {
       "get": {
-        "operationId": "DynamicConfigurations_ListByConfiguration",
+        "operationId": "DynamicConfigurations_ListByParent",
         "tags": [
           "DynamicConfigurations"
         ],
@@ -405,11 +405,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DynamicConfigurations_ListByConfiguration": {
-            "$ref": "./examples/DynamicConfigurations_ListByConfiguration_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -672,7 +667,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations/{dynamicConfigurationName}/dynamicConfigurationVersions": {
       "get": {
-        "operationId": "DynamicConfigurationVersions_ListByDynamicConfiguration",
+        "operationId": "DynamicConfigurationVersions_ListByParent",
         "tags": [
           "DynamicConfigurationVersions"
         ],
@@ -716,11 +711,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DynamicConfigurationVersions_ListByDynamicConfiguration": {
-            "$ref": "./examples/DynamicConfigurationVersions_ListByDynamicConfiguration_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1070,6 +1060,24 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -1107,8 +1115,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConfigurationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1156,26 +1163,9 @@
         "timezone"
       ]
     },
-    "ConfigurationUpdate": {
+    "ConfigurationPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Configuration.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/ConfigurationUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ConfigurationUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Configuration.",
+      "description": "Configuration Properties",
       "properties": {
         "timezone": {
           "type": "string",
@@ -1183,14 +1173,28 @@
         }
       }
     },
+    "ConfigurationUpdate": {
+      "type": "object",
+      "description": "Configuration Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "DynamicConfiguration": {
       "type": "object",
       "description": "Dynamic Configuration Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DynamicConfigurationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1238,19 +1242,9 @@
         "currentVersion"
       ]
     },
-    "DynamicConfigurationUpdate": {
+    "DynamicConfigurationPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the DynamicConfiguration.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DynamicConfigurationUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DynamicConfigurationUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the DynamicConfiguration.",
+      "description": "Dynamic Configuration Properties",
       "properties": {
         "currentVersion": {
           "type": "string",
@@ -1258,14 +1252,28 @@
         }
       }
     },
+    "DynamicConfigurationUpdate": {
+      "type": "object",
+      "description": "Dynamic Configuration Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DynamicConfigurationPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "DynamicConfigurationVersion": {
       "type": "object",
       "description": "Dynamic Configuration Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DynamicConfigurationVersionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1313,25 +1321,30 @@
         "values"
       ]
     },
-    "DynamicConfigurationVersionUpdate": {
+    "DynamicConfigurationVersionPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the DynamicConfigurationVersion.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DynamicConfigurationVersionUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DynamicConfigurationVersionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the DynamicConfigurationVersion.",
+      "description": "Dynamic Configuration Properties",
       "properties": {
         "values": {
           "type": "string",
           "description": "Values of configuration version"
         }
       }
+    },
+    "DynamicConfigurationVersionUpdate": {
+      "type": "object",
+      "description": "Dynamic Configuration Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DynamicConfigurationVersionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     }
   },
   "parameters": {}

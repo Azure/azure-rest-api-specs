@@ -1050,7 +1050,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings/{targetBindingName}/deploymentInstances": {
       "get": {
-        "operationId": "DeploymentInstances_ListByTargetBinding",
+        "operationId": "DeploymentInstances_ListByParent",
         "tags": [
           "DeploymentInstances"
         ],
@@ -1086,11 +1086,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DeploymentInstances_ListByTargetBinding": {
-            "$ref": "./examples/DeploymentInstances_ListByTargetBinding_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1616,7 +1611,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/useCases/{useCaseName}/helmUseCases": {
       "get": {
-        "operationId": "HelmUseCases_ListByUseCase",
+        "operationId": "HelmUseCases_ListByParent",
         "tags": [
           "HelmUseCases"
         ],
@@ -1652,11 +1647,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "HelmUseCases_ListByUseCase": {
-            "$ref": "./examples/HelmUseCases_ListByUseCase_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1919,6 +1909,24 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -1974,8 +1982,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CapabilityListProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2027,26 +2034,9 @@
         "capabilities"
       ]
     },
-    "CapabilityListUpdate": {
+    "CapabilityListPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the CapabilityList.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/CapabilityListUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "CapabilityListUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the CapabilityList.",
+      "description": "Capability List Properties",
       "properties": {
         "capabilities": {
           "type": "array",
@@ -2058,14 +2048,28 @@
         }
       }
     },
+    "CapabilityListUpdate": {
+      "type": "object",
+      "description": "Capability List Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapabilityListPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "DeploymentInstance": {
       "type": "object",
       "description": "Deployment Instance Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeploymentInstanceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2118,19 +2122,9 @@
         "configVersion"
       ]
     },
-    "DeploymentInstanceUpdate": {
+    "DeploymentInstancePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the DeploymentInstance.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DeploymentInstanceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DeploymentInstanceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the DeploymentInstance.",
+      "description": "Deployment Instance Properties",
       "properties": {
         "useCaseVersion": {
           "type": "string",
@@ -2142,14 +2136,28 @@
         }
       }
     },
+    "DeploymentInstanceUpdate": {
+      "type": "object",
+      "description": "Deployment Instance Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentInstancePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "DeploymentTarget": {
       "type": "object",
       "description": "Deployment Target Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeploymentTargetProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2211,26 +2219,9 @@
         "capabilities"
       ]
     },
-    "DeploymentTargetUpdate": {
+    "DeploymentTargetPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the DeploymentTarget.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/DeploymentTargetUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DeploymentTargetUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the DeploymentTarget.",
+      "description": "Deployment Target Properties",
       "properties": {
         "displayName": {
           "type": "string",
@@ -2250,14 +2241,28 @@
         }
       }
     },
+    "DeploymentTargetUpdate": {
+      "type": "object",
+      "description": "Deployment Target Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentTargetPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "HelmUseCase": {
       "type": "object",
       "description": "Helm Use Case Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/HelmUseCaseProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2315,19 +2320,9 @@
         "configurationTemplate"
       ]
     },
-    "HelmUseCaseUpdate": {
+    "HelmUseCasePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the HelmUseCase.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HelmUseCaseUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "HelmUseCaseUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the HelmUseCase.",
+      "description": "Helm Use Case Properties",
       "properties": {
         "helmChartUri": {
           "type": "string",
@@ -2343,14 +2338,28 @@
         }
       }
     },
+    "HelmUseCaseUpdate": {
+      "type": "object",
+      "description": "Helm Use Case Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HelmUseCasePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "TargetBinding": {
       "type": "object",
       "description": "Target Binding Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TargetBindingProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2413,26 +2422,9 @@
         "scope"
       ]
     },
-    "TargetBindingUpdate": {
+    "TargetBindingPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the TargetBinding.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/TargetBindingUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "TargetBindingUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the TargetBinding.",
+      "description": "Target Binding Properties",
       "properties": {
         "useCase": {
           "type": "string",
@@ -2452,14 +2444,28 @@
         }
       }
     },
+    "TargetBindingUpdate": {
+      "type": "object",
+      "description": "Target Binding Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TargetBindingPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "UseCase": {
       "type": "object",
       "description": "Use Case Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/UseCaseProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -2532,26 +2538,9 @@
         "description"
       ]
     },
-    "UseCaseUpdate": {
+    "UseCasePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the UseCase.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/UseCaseUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "UseCaseUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the UseCase.",
+      "description": "Use Case Properties",
       "properties": {
         "currentVersion": {
           "type": "string",
@@ -2580,6 +2569,21 @@
           "description": "Description of use case"
         }
       }
+    },
+    "UseCaseUpdate": {
+      "type": "object",
+      "description": "Use Case Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UseCasePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "deploymentModelTypes": {
       "type": "string",
