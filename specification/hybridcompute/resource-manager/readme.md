@@ -132,12 +132,18 @@ directive:
       verb: Set
     remove: true
 
-  # we don't want user to interact with them / we don't support some operations
+  # internal operations
   - remove-operation: AgentVersion_List
   - remove-operation: AgentVersion_Get
+  # we don't use them, pending to remove in the future
   - remove-operation: HybridIdentityMetadata_Get
   - remove-operation: HybridIdentityMetadata_ListByMachines
-  - remove-operation: MachineRunCommands_Update #PATCH
+  # we want to retire them and use setting operations instead
+  - remove-operation: NetworkConfigurations_Get
+  - remove-operation: NetworkConfigurations_Update
+  - remove-operation: NetworkConfigurations_CreateOrUpdate
+  # we don't want enable PATCH for run command
+  - remove-operation: MachineRunCommands_Update
 
 ```
 
