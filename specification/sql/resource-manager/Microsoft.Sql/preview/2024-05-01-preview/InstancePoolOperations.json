@@ -229,9 +229,13 @@
           "type": "integer",
           "readOnly": true
         },
-        "isUserError": {
-          "description": "Whether or not the error is a user error.",
-          "type": "boolean",
+        "errorType": {
+          "description": "Error type (e.g. None, User).",
+          "enum": [
+            "None",
+            "User"
+          ],
+          "type": "string",
           "readOnly": true
         },
         "estimatedCompletionTime": {
