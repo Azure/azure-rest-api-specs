@@ -46,17 +46,17 @@
 					"endpoint": "https://aykame-dev-search.search.windows.net"
 				},
 				"datasource": {
-					"kind": "Storage",
-					"storageAccountConnection": {
+					"kind": "storage",
+					"connection": {
 						"kind": "endpointMI",
 						"endpoint": "https://mystorage.blob.core.windows.net/",
 						"resourceId": "ResourceId=/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
 					},
 					"containerName": "container",
-					"chunkingSettings": {
+					"chunking": {
 						"maxChunkSizeInTokens": 2048
 					},
-					"embeddingsSettings": [
+					"embeddings": [
 						{
 							"embeddingResourceConnection": {
 								"kind": "relativeConnection"
