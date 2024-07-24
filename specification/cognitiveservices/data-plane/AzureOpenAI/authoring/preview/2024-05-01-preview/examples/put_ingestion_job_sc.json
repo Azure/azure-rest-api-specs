@@ -10,18 +10,18 @@
 			},
 			"datasource": {
 				"kind": "storage",
-				"storageAccountConnection": {
+				"connection": {
 					"kind": "endpointMI",
 					"endpoint": "https://mystorage.blob.core.windows.net/",
-					"resourceId": "ResourceId=/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
+					"resourceId": "/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
 				},
 				"containerName": "container",
-				"chunkingSettings": {
+				"chunking": {
 					"maxChunkSizeInTokens": 2048
 				},
-				"embeddingsSettings": [
+				"embeddings": [
 					{
-						"embeddingResourceConnection": {
+						"connection": {
 							"kind": "relativeConnection"
 						},
 						"modelProvider": "AOAI",
@@ -50,7 +50,7 @@
 					"connection": {
 						"kind": "endpointMI",
 						"endpoint": "https://mystorage.blob.core.windows.net/",
-						"resourceId": "ResourceId=/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
+						"resourceId": "/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
 					},
 					"containerName": "container",
 					"chunking": {
@@ -58,10 +58,9 @@
 					},
 					"embeddings": [
 						{
-							"embeddingResourceConnection": {
+							"connection": {
 								"kind": "relativeConnection"
 							},
-							"modelProvider": "AOAI",
 							"deploymentName": "Ada"
 						}
 					]
