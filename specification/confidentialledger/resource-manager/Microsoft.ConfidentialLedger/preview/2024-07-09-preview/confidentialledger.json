@@ -708,9 +708,11 @@
           "description": "CCF Property for the logging level for the untrusted host: Trace, Debug, Info, Fail, Fatal."
         },
         "maxBodySize": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "readOnly": false,
-          "description": "CCF Property for the maximum size of the http request body: 1MB, 5MB, 10MB."
+          "description": "CCF Property for the maximum size of the http request body: 1MB, 5MB, 10MB.",
+          "default": 1
         },
         "subjectName": {
           "type": "string",
