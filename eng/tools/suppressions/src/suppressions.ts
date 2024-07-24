@@ -179,7 +179,9 @@ async function findSuppressionsFiles(path: string): Promise<string[]> {
       // Throws if file cannot be read
       await access(suppressionsFile, constants.R_OK);
       suppressionsFiles.push(suppressionsFile);
-    } catch {}
+    } catch {
+      // File does not exist (or cannot be read), so skip this directory and check the parent
+    }
 
     const parentDirectory: string = dirname(currentDirectory);
     if (parentDirectory !== currentDirectory) {
