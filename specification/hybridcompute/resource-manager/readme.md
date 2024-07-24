@@ -137,15 +137,6 @@ directive:
   - remove-operation: AgentVersion_Get
   - remove-operation: HybridIdentityMetadata_Get
   - remove-operation: HybridIdentityMetadata_ListByMachines
-  - remove-operation: Licenses_ValidateLicense
-  - remove-operation: LicenseProfiles_Get
-  - remove-operation: LicenseProfiles_Delete
-  - remove-operation: LicenseProfiles_Update
-  - remove-operation: LicenseProfiles_List
-  - remove-operation: LicenseProfiles_CreateOrUpdate
-  - remove-operation: NetworkConfigurations_Get
-  - remove-operation: NetworkConfigurations_Update
-  - remove-operation: NetworkConfigurations_CreateOrUpdate
   - remove-operation: MachineRunCommands_Update #PATCH
 
 ```
