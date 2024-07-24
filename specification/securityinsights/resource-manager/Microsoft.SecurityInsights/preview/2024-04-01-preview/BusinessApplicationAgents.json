@@ -879,7 +879,7 @@
           "$ref": "#/definitions/KeyVaultAuthenticationMode"
         },
         "secretSource": {
-          "description": "The secret source of the agent.\r\nAzureKeyVault|EnvironmentVariable are the options",
+          "description": "The secret source of the agent.\r\nAzureKeyVault are the options",
           "$ref": "#/definitions/SecretSource"
         },
         "type": {
@@ -889,10 +889,9 @@
       "x-ms-discriminator-value": "SAP"
     },
     "SecretSource": {
-      "description": "Type for Secret Source - Azure Key Vault or Environment Variable",
+      "description": "Type for Secret Source - Azure Key Vault",
       "enum": [
-        "AzureKeyVault",
-        "EnvironmentVariable"
+        "AzureKeyVault"
       ],
       "type": "string",
       "example": "AzureKeyVault",
@@ -902,9 +901,6 @@
         "values": [
           {
             "value": "AzureKeyVault"
-          },
-          {
-            "value": "EnvironmentVariable"
           }
         ]
       }
