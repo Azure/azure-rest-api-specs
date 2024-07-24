@@ -135,7 +135,7 @@ directive:
   # internal operations
   - remove-operation: AgentVersion_List
   - remove-operation: AgentVersion_Get
-  # we don't use them, pending to remove in the future
+  # we don't use them, remove in the future
   - remove-operation: HybridIdentityMetadata_Get
   - remove-operation: HybridIdentityMetadata_ListByMachines
   # we want to retire them and use setting operations instead
