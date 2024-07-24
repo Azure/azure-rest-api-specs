@@ -253,6 +253,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetEntities": {
+            "$ref": "./examples/GetEntities.json"
+          }
         }
       }
     },
@@ -420,6 +425,23 @@
               }
             }
           },
+          "202": {
+            "description": "Resource 'ManagementGroup' create operation accepted",
+            "schema": {
+              "$ref": "#/definitions/ManagementGroupOperationAcceptance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -523,6 +545,9 @@
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
+            "schema": {
+              "$ref": "#/definitions/ManagementGroupOperationAcceptance"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -649,6 +674,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListHierarchySettings": {
+            "$ref": "./examples/ListHierarchySettings.json"
+          }
         }
       }
     },
@@ -687,6 +717,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListHierarchySettings": {
+            "$ref": "./examples/ListHierarchySettings.json"
+          }
         }
       }
     },
@@ -721,6 +756,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetHierarchySettings": {
+            "$ref": "./examples/GetHierarchySettings.json"
           }
         }
       },
@@ -770,6 +810,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "PutHierarchySettings": {
+            "$ref": "./examples/PutHierarchySettings.json"
+          }
         }
       },
       "patch": {
@@ -812,6 +857,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "PatchHierarchySettings": {
+            "$ref": "./examples/PatchHierarchySettings.json"
+          }
         }
       },
       "delete": {
@@ -844,6 +894,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteHierarchySettings": {
+            "$ref": "./examples/DeleteHierarchySettings.json"
           }
         }
       }
@@ -886,6 +941,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetAllSubscriptionsFromManagementGroup": {
+            "$ref": "./examples/GetAllSubscriptionsFromManagementGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -940,6 +1000,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetSubscriptionFromManagementGroup": {
+            "$ref": "./examples/GetSubscriptionFromManagementGroup.json"
           }
         }
       },
@@ -1005,6 +1070,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "AddManagementGroupSubscription": {
+            "$ref": "./examples/AddManagementGroupSubscription.json"
+          }
         }
       },
       "delete": {
@@ -1054,6 +1124,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "RemoveManagementGroupSubscription": {
+            "$ref": "./examples/RemoveManagementGroupSubscription.json"
+          }
         }
       }
     },
@@ -1083,6 +1158,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1110,6 +1190,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "StartTenantBackfillRequest": {
+            "$ref": "./examples/StartTenantBackfillRequest.json"
+          }
         }
       }
     },
@@ -1134,6 +1219,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TenantBackfillStatusRequest": {
+            "$ref": "./examples/TenantBackfillStatusRequest.json"
           }
         }
       }
@@ -1487,6 +1577,32 @@
         "defaultManagementGroup": {
           "type": "string",
           "description": "Settings that sets the default Management Group under which new subscriptions get added in this tenant. For example, /providers/Microsoft.Management/managementGroups/defaultGroup"
+        }
+      }
+    },
+    "ManagementGroupOperationAcceptance": {
+      "type": "object",
+      "description": "The management group operation acceptance details.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the resource.  For example, /providers/Microsoft.Management/managementGroups/Group1",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, Microsoft.Management/managementGroups",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.  For example, Group1",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The operation status. For example, NotStarted",
+          "readOnly": true
         }
       }
     },
