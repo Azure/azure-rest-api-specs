@@ -6,7 +6,7 @@
       "name": "HybridComputeManagementClient"
     },
     "description": "Azure Arc( Servers and K8s Clusters) API reference for Private Link's Scopes management.",
-    "version": "2024-07-31-preview"
+    "version": "2024-05-20-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -381,7 +381,7 @@
           "200": {
             "description": "Successfully retrieved a specified private link resource.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
+              "$ref": "#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -430,7 +430,7 @@
           "200": {
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -477,7 +477,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           }
         ],
@@ -485,7 +485,7 @@
           "200": {
             "description": "Successfully approved or rejected private endpoint connection.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "202": {
@@ -864,7 +864,7 @@
           "200": {
             "description": "Successfully retrieved network security perimeter configuration details.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
             }
           },
           "default": {
@@ -906,7 +906,7 @@
           "200": {
             "description": "Successfully retrieved network security perimeter configuration details.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
             }
           },
           "default": {
@@ -1082,6 +1082,356 @@
         }
       }
     },
+    "NetworkSecurityPerimeterConfiguration": {
+      "type": "object",
+      "description": "Properties that define a Network Security Perimeter resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties that define a Network Security Perimeter resource.",
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "type": "object",
+      "description": "Properties that define a Network Security Perimeter resource.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of this NetworkSecurityPerimeter: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
+          "readOnly": true
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "description": "Provisioning issues.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ProvisioningIssue"
+          },
+          "x-ms-identifiers": []
+        },
+        "networkSecurityPerimeter": {
+          "description": "The Network Security Perimeter associated with this configuration.",
+          "$ref": "#/definitions/NetworkSecurityPerimeter"
+        },
+        "resourceAssociation": {
+          "description": "The Resource Association.",
+          "$ref": "#/definitions/ResourceAssociation"
+        },
+        "profile": {
+          "description": "Network Security Perimeter profile",
+          "$ref": "#/definitions/NetworkSecurityPerimeterProfile"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterProfile": {
+      "type": "object",
+      "description": "Network Security Perimeter profile",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource",
+          "readOnly": true
+        },
+        "accessRulesVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Access rules version number",
+          "readOnly": true
+        },
+        "accessRules": {
+          "type": "array",
+          "description": "Collection of access rules for the profile",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AccessRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "diagnosticSettingsVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Diagnostic settings version number",
+          "readOnly": true
+        },
+        "enabledLogCategories": {
+          "type": "array",
+          "description": "Collection of enabled log categories for the profile",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningIssue": {
+      "type": "object",
+      "description": "Details on issues that occurred during provisioning.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the provisioning issue.",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Provisioning issue properties",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningIssueProperties"
+        }
+      }
+    },
+    "ProvisioningIssueProperties": {
+      "type": "object",
+      "description": "Properties of a provisioning issue.",
+      "properties": {
+        "issueType": {
+          "description": "Issue type",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningIssueType"
+        },
+        "severity": {
+          "description": "Severity of the provisioning issue.",
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningIssueSeverity"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the provisioning issue.",
+          "readOnly": true
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "description": "ARM Ids of the resources that can be associated to the same perimeter to remediate the issue",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "description": "Access rules that can be added to the perimeter to remediate the issue",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AccessRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisioningIssueType": {
+      "type": "string",
+      "description": "Type of provisioning issue.",
+      "enum": [
+        "MissingPerimeterConfiguration",
+        "MissingIdentityConfiguration",
+        "ConfigurationPropagationFailure",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningIssueType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "MissingPerimeterConfiguration",
+            "description": "Perimeter configuration is missing."
+          },
+          {
+            "value": "MissingIdentityConfiguration",
+            "description": "Identity configuration is missing."
+          },
+          {
+            "value": "ConfigurationPropagationFailure",
+            "description": "Configuration failed to propagate."
+          },
+          {
+            "value": "Other",
+            "description": "Other failure."
+          }
+        ]
+      }
+    },
+    "ProvisioningIssueSeverity": {
+      "type": "string",
+      "description": "Severity of the provisioning issue.",
+      "enum": [
+        "Warning",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningIssueSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Warning",
+            "description": "Warnings can cause connectivity issues after provisioning succeeds."
+          },
+          {
+            "value": "Error",
+            "description": "Errors will cause association provisioning to fail."
+          }
+        ]
+      }
+    },
+    "AccessMode": {
+      "type": "string",
+      "description": "Property that impacts a resource's logging behavior and its connectivity with other resources and public networks.",
+      "enum": [
+        "enforced",
+        "audit",
+        "learning"
+      ],
+      "x-ms-enum": {
+        "name": "AccessMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "enforced",
+            "description": "Indicates that resource access is controlled by the NSP definition."
+          },
+          {
+            "value": "audit",
+            "description": "Dry run mode, where traffic is evaluated against NSP Rules, logged but not enforced."
+          },
+          {
+            "value": "learning",
+            "description": "Enables traffic evaluation to fall back to resource-specific firewall configurations."
+          }
+        ]
+      }
+    },
+    "AccessRuleDirection": {
+      "type": "string",
+      "description": "Indicates direction of an access rule.",
+      "enum": [
+        "Inbound",
+        "Outbound"
+      ],
+      "x-ms-enum": {
+        "name": "AccessRuleDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Inbound",
+            "description": "Traffic originates outside of network."
+          },
+          {
+            "value": "Outbound",
+            "description": "Traffic originates inside the network"
+          }
+        ]
+      }
+    },
+    "AccessRule": {
+      "type": "object",
+      "description": "Access rule.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the access rule.",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Access rule properties",
+          "readOnly": true,
+          "$ref": "#/definitions/AccessRuleProperties"
+        }
+      }
+    },
+    "AccessRuleProperties": {
+      "type": "object",
+      "description": "Properties of an access rule.",
+      "properties": {
+        "direction": {
+          "description": "Direction of the access rule.",
+          "readOnly": true,
+          "$ref": "#/definitions/AccessRuleDirection"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "Address prefixes that are allowed access.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NetworkSecurityPerimeter": {
+      "type": "object",
+      "description": "Properties that define a Network Security Perimeter resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "description": "Guid of the Network Security Perimeter",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Regional location of the perimeter"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "type": "object",
+      "description": "A list of network security perimeter configurations.",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceAssociation": {
+      "type": "object",
+      "description": "Properties that define a Resource Association.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the Resource Association"
+        },
+        "accessMode": {
+          "description": "The access mode",
+          "readOnly": true,
+          "$ref": "#/definitions/AccessMode"
+        }
+      }
+    },
     "PrivateLinkScopesResource": {
       "type": "object",
       "properties": {
@@ -1121,25 +1471,6 @@
       ],
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "A list of private link resources",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "TagsResource": {
       "type": "object",
@@ -1273,6 +1604,72 @@
         }
       }
     },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "A list of private link resources",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "Required DNS zone names of the the private link resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "PrivateEndpointConnectionDataModel": {
       "type": "object",
       "description": "The Data Model for a Private Endpoint Connection associated with a Private Link Scope",
@@ -1325,25 +1722,6 @@
         }
       }
     },
-    "PrivateEndpointConnectionListResult": {
-      "type": "object",
-      "description": "A list of private endpoint connections.",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "PrivateEndpointProperty": {
       "type": "object",
       "description": "Private endpoint which the connection belongs to.",
@@ -1372,6 +1750,45 @@
         },
         "actionsRequired": {
           "description": "The actions required for private link service connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "A private endpoint connection",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "A list of private endpoint connections.",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
         }
