@@ -18,4 +18,5 @@ namespace Microsoft.Fabric {
   @@clientName(RpSkuDetailsForExistingResource, "FabricSkuDetailsForExistingCapacity", "csharp");
   @@clientName(RpSku, "FabricSku", "csharp");
   @@clientName(RpSkuTier, "FabricSkuTier", "csharp");
+  @@clientName(CapacityAdministration, "FabricCapacityAdministration", "csharp");
 }
