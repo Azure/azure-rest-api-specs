@@ -408,7 +408,7 @@ interface DevBoxes {
       @path
       projectName: string;
     },
-    CustomizationTaskDefinitionResult
+    PagedCustomizationTaskDefinition
   >;
 
   @doc("Gets a customization task.")
