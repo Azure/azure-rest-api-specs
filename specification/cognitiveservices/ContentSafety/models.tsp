@@ -173,6 +173,10 @@ model TextBlocklistItem {
   @doc("BlocklistItem content.")
   @maxLength(128)
   text: string;
+
+  @added(ContentSafety.Versions.v2024_09_01)
+  @doc("An optional properties indicating whether this item is to be matched as a regular expression.")
+  isRegex?: boolean;
 }
 
 @doc("The request to add blocklistItems to a text blocklist.")
