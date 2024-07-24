@@ -244,10 +244,10 @@ namespace Language.ConversationsClientCustomizations;
   "csharp"
 );
 @@clientName(analyzeConversationsJobStatus,
-  "AnalyzeConversationOperationStatus",
+  "GetAnalyzeConversationJobStatus",
   "csharp"
 );
 @@clientName(analyzeConversationsCancelJob,
-  "AnalyzeConversationCancelOperation",
+  "CancelAnalyzeConversations",
   "csharp"
 );
