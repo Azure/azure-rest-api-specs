@@ -14,7 +14,7 @@ namespace Microsoft.Edge;
 /**
  * An Edge Aggregation resource for update
  */
-model Update is ExtensionResource<UpdateProperties> {
+model Update is Azure.ResourceManager.ExtensionResource<UpdateProperties> {
   /**
    * Name of update
    */
@@ -45,7 +45,7 @@ interface Updates {
   /**
    * Update a Update
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   modify is ArmCustomPatchSync<Update, ModifyUpdate>;
 
   /**

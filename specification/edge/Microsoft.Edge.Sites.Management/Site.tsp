@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Edge;
 
 @doc("Site as ARM Resource")
-model Site is ProxyResource<SiteProperties> {
+model Site is Azure.ResourceManager.ProxyResource<SiteProperties> {
   @doc("Name of Site resource")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
   @path
@@ -29,7 +29,7 @@ interface Sites {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
   update is ArmCustomPatchSync<Site, SiteUpdate>;
   delete is ArmResourceDeleteSync<Site>;
-  list is ArmResourceListByParent<Site>;
+  listByResourceGroup is ArmResourceListByParent<Site>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of subscription"

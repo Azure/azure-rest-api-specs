@@ -15,7 +15,7 @@ namespace Microsoft.Edge;
 /**
  * A Microsoft.Edge connectivity status resource
  */
-model ConnectivityStatus is ExtensionResource<ConnectivityStatusProperties> {
+model ConnectivityStatus is Azure.ResourceManager.ExtensionResource<ConnectivityStatusProperties> {
   /**
    * Name of ConnectivityStatus
    */
@@ -46,7 +46,7 @@ interface ConnectivityStatuses {
   /**
    * Update a ConnectivityStatus
    */
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchSync<ConnectivityStatus, ConnectivityStatusUpdate>;
 
   /**
