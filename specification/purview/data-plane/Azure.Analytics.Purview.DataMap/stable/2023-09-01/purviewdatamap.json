@@ -101,6 +101,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
@@ -127,6 +128,9 @@
           },
           "Entity_Create": {
             "$ref": "./examples/Entity_Create.json"
+          },
+          "Entity_CreateOrUpdateWithRichText": {
+            "$ref": "./examples/Entity_CreateOrUpdateWithRichText.json"
           },
           "Entity_Update": {
             "$ref": "./examples/Entity_Update.json"
@@ -238,6 +242,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntitiesWithExtInfo"
@@ -309,6 +314,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClassificationAssociateOptions"
@@ -341,6 +347,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntityHeaders"
@@ -435,7 +442,11 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/BusinessMetadataOptions"
+            "name": "file",
+            "in": "formData",
+            "description": "InputStream of file",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
@@ -1234,6 +1245,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasEntityWithExtInfo"
@@ -1601,7 +1613,7 @@
     "/atlas/v2/glossary": {
       "get": {
         "operationId": "Glossary_List",
-        "description": "Get all glossaries. Recommend using limit/offset to get pagination result.\nRecommend using 'ignoreTermsAndCategories=true' and fetch terms/categories\nseparately using \n\n 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'\nand \n\n 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.",
+        "description": "Get all glossaries. Recommend using limit/offset to get pagination result.\nRecommend using 'ignoreTermsAndCategories=true' and fetch terms/categories\nseparately using 'GET /datamap/api/atlas/v2/glossary/{glossaryId}/terms'\nand 'GET '/datamap/api/atlas/v2/glossary/{glossaryId}/categories'.",
         "parameters": [
           {
             "$ref": "#/parameters/AtlasApiVersionParameter"
@@ -1668,6 +1680,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
@@ -1752,6 +1765,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossary"
@@ -2200,6 +2214,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
@@ -2274,6 +2289,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryCategory"
@@ -2516,6 +2532,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
@@ -2609,6 +2626,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasGlossaryTerm"
@@ -3153,6 +3171,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasRelationship"
@@ -3186,6 +3205,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasRelationship"
@@ -3912,6 +3932,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
@@ -3940,11 +3961,12 @@
       },
       "post": {
         "operationId": "Type_BulkCreate",
-        "description": "Create all atlas type definitions in bulk, only new definitions will be\ncreated.\nAny changes to the existing definitions will be discarded.",
+        "description": "Create all atlas type definitions in bulk. Please avoid recreating existing types.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
@@ -3981,6 +4003,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AtlasTypesDef"
@@ -4139,6 +4162,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MoveEntitiesOptions"
@@ -4263,6 +4287,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AutoCompleteOptions"
@@ -4301,6 +4326,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QueryOptions"
@@ -4399,6 +4425,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SuggestOptions"
@@ -8235,14 +8262,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "BusinessMetadataOptions": {
-      "name": "file",
-      "in": "formData",
-      "description": "InputStream of file",
-      "required": true,
-      "type": "file",
-      "x-ms-parameter-location": "method"
     }
   }
 }

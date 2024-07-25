@@ -43,7 +43,7 @@ model StandbyVirtualMachinePoolResourceProperties {
 
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
-  attachedVirtualMachineScaleSetId?: ResourceIdentifier<[
+  attachedVirtualMachineScaleSetId?: armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachineScaleSet";
     }
@@ -55,18 +55,20 @@ model StandbyVirtualMachinePoolResourceProperties {
 }
 
 @doc("State of standby virtual machines")
-enum VirtualMachineState {
+union VirtualMachineState {
+  string,
+
   @doc("The virtual machine is up and running.")
-  Running,
+  Running: "Running",
 
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off.")
-  Deallocated,
+  Deallocated: "Deallocated",
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Details of the elasticity profile.")
 model StandbyVirtualMachinePoolElasticityProfile {
-  @doc("Specifies maximum number of virtual machines in the standby virtual machine pool.")
+  @doc("Specifies the maximum number of virtual machines in the standby virtual machine pool.")
   @maxValue(2000)
   @minValue(0)
   maxReadyCapacity: int64;
@@ -75,11 +77,19 @@ model StandbyVirtualMachinePoolElasticityProfile {
 @armResourceOperations
 interface StandbyVirtualMachinePools {
   get is ArmResourceRead<StandbyVirtualMachinePoolResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyVirtualMachinePoolResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
-  update is ArmResourcePatchSync<
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
     StandbyVirtualMachinePoolResource,
-    StandbyVirtualMachinePoolResourceProperties
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
+  update is ArmCustomPatchSync<
+    StandbyVirtualMachinePoolResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StandbyVirtualMachinePoolResource,
+      StandbyVirtualMachinePoolResourceProperties
+    >
   >;
   listByResourceGroup is ArmResourceListByParent<StandbyVirtualMachinePoolResource>;
   listBySubscription is ArmListBySubscription<StandbyVirtualMachinePoolResource>;

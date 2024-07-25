@@ -11,17 +11,17 @@ namespace Azure.ProgrammableConnectivity;
 /// Interfaces
 
 @doc("""
-  Number operations include Frontend Authentication.
-
-  Users first make a call to the endpoint /Number:verify, which returns a redirect to the device's 
-  Network. This is followed by the device to authenticate directly with the Network. The Network 
-  responds with a token and a redirect. This token can be exchanged with APC for a code.
+    Number operations include Frontend Authentication.
   
-  Users make a second call to the endpoint /Number:verify including the code. The code is used 
-  to verify the device number. The second response is a 200 containing the result of the query.
-
-  For more information on the steps required to use Number Verificaiton, see the APC documentation.
-""")
+    Users first make a call to the endpoint /Number:verify, which returns a redirect to the device's 
+    Network. This is followed by the device to authenticate directly with the Network. The Network 
+    responds with a token and a redirect. This token can be exchanged with APC for a code.
+    
+    Users make a second call to the endpoint /Number:verify including the code. The code is used 
+    to verify the device number. The second response is a 200 containing the result of the query.
+  
+    For more information on the steps required to use Number Verificaiton, see the APC documentation.
+  """)
 interface NumberVerification {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "302 redirect has no response body"
   @doc("Verifies the phone number (MSISDN) associated with a device. As part of the frontend authorization flow, the device is redirected to the operator network to authenticate directly.")
@@ -29,10 +29,12 @@ interface NumberVerification {
   @action("verify")
   verifyWithoutCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
-    NumberVerificationWithoutCodeContent,
+    BodyParameter<NumberVerificationWithoutCodeContent>,
     TypeSpec.Http.Response<302> & {},
     TraitOverride<ResponseHeadersTrait<{
-      @header location: string;
+      @doc("The URI of the network's authorization endpoint, which should be followed by the front-end application.")
+      @header
+      location: url;
     } & RequestIdResponseHeader>>
   >;
 
@@ -41,7 +43,7 @@ interface NumberVerification {
   @action("verify")
   verifyWithCode is Operations.ResourceAction<
     NumberVerificationEndpoint,
-    NumberVerificationWithCodeContent,
+    BodyParameter<NumberVerificationWithCodeContent>,
     NumberVerificationResult
   >;
 }
@@ -65,15 +67,13 @@ model NumberVerificationWithoutCodeContent {
   networkIdentifier: NetworkIdentifier;
 
   ...NumberDevice;
+
+  @doc("Redirect URI to backend application.")
+  redirectUri: url;
 }
 
 @doc("Request to verify number of device - second call")
 model NumberVerificationWithCodeContent {
-  @doc("Identifier for the network to query for this device.")
-  networkIdentifier: NetworkIdentifier;
-
-  ...NumberDevice;
-
   @doc("The code provided by APC in exchange for the operator code.")
   apcCode: string;
 }

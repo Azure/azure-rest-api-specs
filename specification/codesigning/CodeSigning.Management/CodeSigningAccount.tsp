@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -26,11 +25,16 @@ interface CodeSigningAccounts {
   @doc("Get a trusted Signing Account.")
   get is ArmResourceRead<CodeSigningAccount>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create a trusted Signing Account.")
-  create is ArmResourceCreateOrReplaceAsync<CodeSigningAccount>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<
+    CodeSigningAccount,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Update a trusted signing account.")
-  @parameterVisibility("read")
+  @parameterVisibility
   update is ArmCustomPatchAsync<CodeSigningAccount, CodeSigningAccountPatch>;
 
   @doc("Delete a trusted signing account.")

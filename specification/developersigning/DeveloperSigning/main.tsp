@@ -68,7 +68,7 @@ interface CertificateProfileOperations {
   @pollingOperation(CertificateProfileOperations.getSigningStatus)
   sign is StandardResourceOperations.LongRunningResourceAction<
     CertificateProfileName,
-    SigningPayloadOptions,
+    BodyParameter<SigningPayloadOptions>,
     SignResult,
     Foundations.ErrorResponse,
     SigningRequestHeadersTraits
@@ -150,9 +150,9 @@ model SignResult {
   signature?: bytes;
 
   @doc("""
-Signing certificate corresponding to the private key used to sign the requested 
-digest.
-""")
+    Signing certificate corresponding to the private key used to sign the requested 
+    digest.
+    """)
   signingCertificate?: bytes;
 }
 
@@ -180,13 +180,24 @@ model ExtendedKeyUsage {
 @doc("Public root certificate from the certificate chain.")
 model BytesBody<ContentType> {
   @doc("The root certificate of the certificate chain of this profile.")
-  @body
+  @bodyRoot
   body: bytes;
 
   @doc("The content type of the x509 cert.")
   @header
   contentType: ContentType;
 }
+
+alias BodyParameter<
+  T,
+  TName extends valueof string = "body",
+  TDoc extends valueof string = "Body parameter."
+> = {
+  @doc(TDoc)
+  @friendlyName(TName)
+  @bodyRoot
+  body: T;
+};
 
 alias SigningRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTrait<{
   @doc("An optional client version.")

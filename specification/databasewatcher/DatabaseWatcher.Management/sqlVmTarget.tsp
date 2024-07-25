@@ -16,7 +16,7 @@ model SqlVmTargetProperties extends TargetProperties {
   targetType: "SqlVm";
 
   @doc("The Azure ResourceId of an Azure SQL VM target.")
-  sqlVmResourceId: ResourceIdentifier<[
+  sqlVmResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SqlVirtualMachine/sqlVirtualMachines";
     }

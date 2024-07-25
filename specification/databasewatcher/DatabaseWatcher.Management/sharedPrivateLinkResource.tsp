@@ -12,9 +12,14 @@ using TypeSpec.Rest;
 @armResourceOperations
 interface SharedPrivateLinkResources {
   get is ArmResourceRead<SharedPrivateLinkResource>;
-  create is ArmResourceCreateOrUpdateAsync<SharedPrivateLinkResource>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    SharedPrivateLinkResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<SharedPrivateLinkResource>;
-  listByParent is ArmResourceListByParent<SharedPrivateLinkResource>;
+  listByWatcher is ArmResourceListByParent<SharedPrivateLinkResource>;
 }
 
 @parentResource(Watcher)
@@ -31,7 +36,7 @@ model SharedPrivateLinkResource
 @doc("The generic properties of a Shared Private Link resource.")
 model SharedPrivateLinkResourceProperties {
   @doc("The resource id of the resource the shared private link resource is for.")
-  privateLinkResourceId: ResourceIdentifier;
+  privateLinkResourceId: Azure.Core.armResourceIdentifier;
 
   @doc("The group id from the provider of resource the shared private link resource is for.")
   groupId: string;
@@ -52,16 +57,18 @@ model SharedPrivateLinkResourceProperties {
 }
 
 @doc("Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected.")
-enum SharedPrivateLinkResourceStatus {
+union SharedPrivateLinkResourceStatus {
+  string,
+
   @doc("The shared private link connection request was not yet authorized by the resource owner.")
-  Pending,
+  Pending: "Pending",
 
   @doc("The shared private link connection request was approved by the resource owner.")
-  Approved,
+  Approved: "Approved",
 
   @doc("The shared private link connection request was rejected by the resource owner.")
-  Rejected,
+  Rejected: "Rejected",
 
   @doc("The shared private link connection request was disconnected by the resource owner.")
-  Disconnected,
+  Disconnected: "Disconnected",
 }

@@ -1,0 +1,409 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this API specification will be used to manage packet capture resources",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCaptures/{packetCaptureName}": {
+      "put": {
+        "tags": [
+          "PacketCaptures"
+        ],
+        "operationId": "PacketCaptures_CreateOrUpdate",
+        "description": "Creates or updates a packet capture.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCaptureNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PacketCapture"
+            },
+            "description": "Parameters supplied to the create or update packet capture operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns information about the packet capture session.",
+            "schema": {
+              "$ref": "#/definitions/PacketCapture"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns information about the packet capture session.",
+            "schema": {
+              "$ref": "#/definitions/PacketCapture"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create packet capture": {
+            "$ref": "./examples/PacketCaptureCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "tags": [
+          "PacketCaptures"
+        ],
+        "operationId": "PacketCaptures_Get",
+        "description": "Gets information about the specified packet capture session.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCaptureNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns information about the packet capture session.",
+            "schema": {
+              "$ref": "#/definitions/PacketCapture"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get packet capture session": {
+            "$ref": "./examples/PacketCaptureGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PacketCaptures"
+        ],
+        "operationId": "PacketCaptures_Delete",
+        "description": "Deletes the specified packet capture.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCaptureNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete packet capture": {
+            "$ref": "./examples/PacketCaptureDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCaptures/{packetCaptureName}/stop": {
+      "post": {
+        "tags": [
+          "PacketCaptures"
+        ],
+        "operationId": "PacketCaptures_Stop",
+        "description": "Stop a packet capture session.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCaptureNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Async operation completed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/AsyncOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop packet capture session": {
+            "$ref": "./examples/PacketCaptureStop.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCaptures": {
+      "get": {
+        "tags": [
+          "PacketCaptures"
+        ],
+        "operationId": "PacketCaptures_ListByPacketCoreControlPlane",
+        "description": "Lists all the packet capture sessions under a packet core control plane.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of packet capture sessions.",
+            "schema": {
+              "$ref": "#/definitions/PacketCaptureListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List packet capture sessions under a packet core control plane": {
+            "$ref": "./examples/PacketCaptureListByPacketCoreControlPlane.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PacketCapture": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PacketCapturePropertiesFormat",
+          "description": "Packet capture session properties. Packet capture file(s) derived from the name of this session will be uploaded to the Storage Account Container URL in the packet core control plane properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Packet capture session resource."
+    },
+    "PacketCapturePropertiesFormat": {
+      "description": "Packet capture session properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the packet capture session resource."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Stopped",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "PacketCaptureStatus",
+            "modelAsString": true
+          },
+          "description": "The status of the packet capture session."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reason the current packet capture session state."
+        },
+        "captureStartTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the packet capture session."
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "minItems": 1,
+          "description": "List of network interfaces to capture on."
+        },
+        "bytesToCapturePerPacket": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "default": 0,
+          "description": "Number of bytes captured per packet, the remaining bytes are truncated. The default \"0\" means the entire packet is captured."
+        },
+        "totalBytesPerSession": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1000,
+          "maximum": 4294967295,
+          "default": 67108864,
+          "description": "Maximum size of the capture output."
+        },
+        "timeLimitInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5,
+          "maximum": 18000,
+          "default": 18000,
+          "description": "Maximum duration of the capture session in seconds."
+        },
+        "outputFiles": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of output files of a packet capture session."
+        }
+      }
+    },
+    "PacketCaptureListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PacketCapture"
+          },
+          "description": "A list of packet capture sessions under a packet core control plane."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for packet capture API service call."
+    }
+  }
+}
