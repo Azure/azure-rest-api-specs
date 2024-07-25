@@ -124,12 +124,7 @@ model DashboardLens {
   /**
    * The dashboard len's metadata.
    */
-  metadata?: {
-    /**
-     * The dashboard lens's metadata additional properties.
-     */
-    additionalProperties?: {};
-  };
+  metadata?: {};
 }
 
 /**
