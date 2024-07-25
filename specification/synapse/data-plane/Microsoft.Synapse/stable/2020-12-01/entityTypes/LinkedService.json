@@ -1350,6 +1350,15 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "serviceEndpoint": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "File service endpoint of the Azure File Storage resource. It is mutually exclusive with connectionString, sasUri property."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -6196,6 +6205,22 @@
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "server": {
+          "type": "object",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "description": "The port for the connection. Type: integer."
+        },
+        "uid": {
+          "type": "object",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "description": "Database name for connection. Type: string."
         },
         "pwd": {
           "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
