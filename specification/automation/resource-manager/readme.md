@@ -473,7 +473,6 @@ input-file:
 - Microsoft.Automation/stable/2023-11-01/job.json
 - Microsoft.Automation/stable/2023-11-01/jobSchedule.json
 - Microsoft.Automation/stable/2023-11-01/linkedWorkspace.json
-- Microsoft.Automation/preview/2024-08-01-preview/locations.json
 - Microsoft.Automation/stable/2023-11-01/module.json
 - Microsoft.Automation/stable/2023-11-01/powershell72Module.json
 - Microsoft.Automation/stable/2023-11-01/operations.json
@@ -506,7 +505,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 - Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
 - Microsoft.Automation/preview/2024-08-01-preview/account.json
-- Microsoft.Automation/stable/2024-08-01-preview/certificate.json
+- Microsoft.Automation/preview/2024-08-01-preview/certificate.json
 - Microsoft.Automation/preview/2024-08-01-preview/connection.json
 - Microsoft.Automation/preview/2024-08-01-preview/connectionType.json
 - Microsoft.Automation/preview/2024-08-01-preview/credential.json
@@ -527,7 +526,7 @@ input-file:
 - Microsoft.Automation/preview/2024-08-01-preview/schedule.json
 - Microsoft.Automation/preview/2024-08-01-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/preview/2024-08-01-preview/softwareUpdateConfigurationRun.json
-- Microsoft.Automation/preview/22024-08-01-preview/sourceControl.json
+- Microsoft.Automation/preview/2024-08-01-preview/sourceControl.json
 - Microsoft.Automation/preview/2024-08-01-preview/sourceControlSyncJob.json
 - Microsoft.Automation/preview/2024-08-01-preview/sourceControlSyncJobStreams.json
 - Microsoft.Automation/preview/2024-08-01-preview/variable.json
