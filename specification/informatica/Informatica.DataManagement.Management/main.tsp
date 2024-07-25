@@ -255,7 +255,7 @@ model InfaServerlessFetchConfigProperties {
   computeUnits?: string;
 
   @doc("Tenant ID")
-  tenantId?: uuid;
+  tenantId?: string;
 
   @doc("subscription ID")
   subscriptionId?: string;
