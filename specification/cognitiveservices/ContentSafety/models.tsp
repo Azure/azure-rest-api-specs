@@ -170,8 +170,8 @@ model TextBlocklistItem {
   @maxLength(1024)
   description?: string;
 
-  @doc("BlocklistItem content.")
-  @maxLength(128)
+  @doc("BlocklistItem content. The length is counted using Unicode code point.")
+  @maxLength(1000)
   text: string;
 
   @added(ContentSafety.Versions.v2024_09_01)
