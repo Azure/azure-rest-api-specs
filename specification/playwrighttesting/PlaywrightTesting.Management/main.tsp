@@ -13,12 +13,18 @@ using Azure.Core;
 @armProviderNamespace("Microsoft.AzurePlaywrightService")
 @service({
   title: "Microsoft AzurePlaywrightService Management API",
-  version: "2024-08-01-preview",
 })
+@versioned(Versions)
 @doc("Microsoft.AzurePlaywrightService Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Microsoft.AzurePlaywrightService;
+
+@doc("Microsoft.AzurePlaywrightService Management API Versions.")
+enum Versions {
+  @doc("API Version 2024-08-01-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_08_01_preview: "2024-08-01-preview",
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -28,7 +34,7 @@ model Account is TrackedResource<AccountProperties> {
   @minLength(3)
   @maxLength(64)
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
-  @key("name")
+  @key("accountName")
   @path
   @segment("accounts")
   name: string;
@@ -58,12 +64,14 @@ model AccountProperties {
 }
 
 @doc("The enablement status of a feature.")
-enum EnablementStatus {
+union EnablementStatus {
   @doc("The feature is Enabled.")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The feature is Disabled.")
-  Disabled,
+  Disabled: "Disabled",
+
+  string,
 }
 
 @doc("The status of the current operation.")
@@ -103,8 +111,9 @@ model Location {
 @doc("A quota resource.")
 @parentResource(Location)
 model Quota is ProxyResource<QuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The quota name.")
-  @key("name")
+  @key("quotaName")
   @path
   @segment("quotas")
   name: QuotaNames;
@@ -149,6 +158,7 @@ model FreeTrialProperties {
 @doc("A quota resource for an account.")
 @parentResource(Account)
 model AccountQuota is ProxyResource<AccountQuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The quota name.")
   @key("quotaName")
   @path
@@ -188,37 +198,41 @@ model AccountFreeTrialProperties {
   @visibility("read")
   @minValue(0)
   @maxValue(100)
-  percentageUsed: decimal;
+  percentageUsed: float32;
 }
 
 @doc("The free-trial state.")
-enum FreeTrialState {
+union FreeTrialState {
   @doc("The free-trial is Active.")
-  Active,
+  Active: "Active",
 
   @doc("The free-trial is Expired.")
-  Expired,
+  Expired: "Expired",
 
   @doc("The free-trial is Not Eligible.")
-  NotEligible,
+  NotEligible: "NotEligible",
 
   @doc("The free-trial is Not Registered.")
-  NotRegistered,
+  NotRegistered: "NotRegistered",
+
+  string,
 }
 
 @doc("Offering type state.")
-enum OfferingType {
+union OfferingType {
   @doc("The offeringType is NotApplicable.")
-  NotApplicable,
+  NotApplicable: "NotApplicable",
 
   @doc("The offeringType is PrivatePreview.")
-  PrivatePreview,
+  PrivatePreview: "PrivatePreview",
 
   @doc("The offeringType is PublicPreview.")
-  PublicPreview,
+  PublicPreview: "PublicPreview",
 
   @doc("The offeringType is GeneralAvailability.")
-  GeneralAvailability,
+  GeneralAvailability: "GeneralAvailability",
+
+  string,
 }
 
 @armResourceOperations

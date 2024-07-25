@@ -79,11 +79,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -116,11 +111,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Accounts_ListBySubscription": {
-            "$ref": "./examples/Accounts_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -165,11 +155,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Accounts_CheckNameAvailability": {
-            "$ref": "./examples/Accounts_CheckNameAvailability.json"
-          }
         }
       }
     },
@@ -209,17 +194,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Quotas_ListBySubscription": {
-            "$ref": "./examples/Quotas_ListBySubscription.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas/{name}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/locations/{location}/quotas/{quotaName}": {
       "get": {
         "operationId": "Quotas_Get",
         "tags": [
@@ -241,7 +221,7 @@
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "quotaName",
             "in": "path",
             "description": "The quota name.",
             "required": true,
@@ -281,11 +261,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Quotas_Get": {
-            "$ref": "./examples/Quotas_Get.json"
-          }
         }
       }
     },
@@ -321,17 +296,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Accounts_ListByResourceGroup": {
-            "$ref": "./examples/Accounts_ListByResourceGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}": {
       "get": {
         "operationId": "Accounts_Get",
         "tags": [
@@ -349,7 +319,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "accountName",
             "in": "path",
             "description": "Name of account.",
             "required": true,
@@ -372,11 +342,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Accounts_Get": {
-            "$ref": "./examples/Accounts_Get.json"
-          }
         }
       },
       "put": {
@@ -396,7 +361,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "accountName",
             "in": "path",
             "description": "Name of account.",
             "required": true,
@@ -446,11 +411,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Accounts_CreateOrUpdate": {
-            "$ref": "./examples/Accounts_CreateOrUpdate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -473,7 +433,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "accountName",
             "in": "path",
             "description": "Name of account.",
             "required": true,
@@ -505,11 +465,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Accounts_Update": {
-            "$ref": "./examples/Accounts_Update.json"
-          }
         }
       },
       "delete": {
@@ -529,7 +484,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "accountName",
             "in": "path",
             "description": "Name of account.",
             "required": true,
@@ -567,18 +522,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Accounts_Delete": {
-            "$ref": "./examples/Accounts_Delete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}/quotas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}/quotas": {
       "get": {
         "operationId": "AccountQuotas_ListByAccount",
         "tags": [
@@ -596,7 +546,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "accountName",
             "in": "path",
             "description": "Name of account.",
             "required": true,
@@ -620,17 +570,12 @@
             }
           }
         },
-        "x-ms-examples": {
-          "AccountQuotas_ListByAccount": {
-            "$ref": "./examples/AccountQuotas_ListByAccount.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{name}/quotas/{quotaName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{accountName}/quotas/{quotaName}": {
       "get": {
         "operationId": "AccountQuotas_Get",
         "tags": [
@@ -648,7 +593,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "accountName",
             "in": "path",
             "description": "Name of account.",
             "required": true,
@@ -697,11 +642,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "AccountQuotas_Get": {
-            "$ref": "./examples/AccountQuotas_Get.json"
           }
         }
       }
@@ -753,7 +693,7 @@
         },
         "percentageUsed": {
           "type": "number",
-          "format": "decimal",
+          "format": "float",
           "description": "The free-trial percentage used.",
           "minimum": 0,
           "maximum": 100,
@@ -809,7 +749,7 @@
           ],
           "x-ms-enum": {
             "name": "EnablementStatus",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
@@ -834,7 +774,7 @@
           ],
           "x-ms-enum": {
             "name": "EnablementStatus",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
@@ -859,7 +799,7 @@
           ],
           "x-ms-enum": {
             "name": "EnablementStatus",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
@@ -884,7 +824,7 @@
           ],
           "x-ms-enum": {
             "name": "EnablementStatus",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
@@ -988,7 +928,7 @@
           ],
           "x-ms-enum": {
             "name": "EnablementStatus",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
@@ -1013,7 +953,7 @@
           ],
           "x-ms-enum": {
             "name": "EnablementStatus",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
@@ -1038,7 +978,7 @@
           ],
           "x-ms-enum": {
             "name": "EnablementStatus",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
@@ -1063,7 +1003,7 @@
           ],
           "x-ms-enum": {
             "name": "EnablementStatus",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "Enabled",
@@ -1111,7 +1051,7 @@
       ],
       "x-ms-enum": {
         "name": "FreeTrialState",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Active",
@@ -1147,7 +1087,7 @@
       ],
       "x-ms-enum": {
         "name": "OfferingType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "NotApplicable",
