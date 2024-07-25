@@ -281,6 +281,13 @@ model CreateRunOptions {
   @added(ServiceApiVersions.v2024_05_01_preview)
   responseFormat?: AssistantsApiResponseFormatOption | null;
 
+  /**
+   * Whether to enable parallel function calling during tool use.
+   */
+  @encodedName("application/json", "parallel_tool_calls")
+  @added(ServiceApiVersions.v2024_07_01_preview)
+  parallelToolCalls?: boolean = true;
+
   ...OptionalNullableMetadata;
 }
 
@@ -453,6 +460,13 @@ model CreateAndRunThreadOptions {
   @encodedName("application/json", "response_format")
   @added(ServiceApiVersions.v2024_05_01_preview)
   responseFormat?: AssistantsApiResponseFormatOption | null;
+
+    /**
+   * Whether to enable parallel function calling during tool use.
+   */
+    @encodedName("application/json", "parallel_tool_calls")
+    @added(ServiceApiVersions.v2024_07_01_preview)
+    parallelToolCalls?: boolean = true;  
 
   ...OptionalNullableMetadata;
 }

@@ -171,7 +171,7 @@ model ChatCompletionsOptions {
   stream?: boolean;
 
   /**
-   * If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a `data: [DONE]` message.
+   * Options for streaming response. Only set this when you set `stream: true`.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
