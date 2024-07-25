@@ -47,7 +47,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/job.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
 - Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
@@ -75,7 +75,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
 - Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
@@ -106,7 +106,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
 - Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
@@ -141,7 +141,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2015-10-31/jobSchedule.json
 - Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/stable/2015-10-31/module.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
@@ -190,7 +190,7 @@ input-file:
 - Microsoft.Automation/stable/2019-06-01/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2019-06-01/jobSchedule.json
 - Microsoft.Automation/stable/2019-06-01/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/stable/2019-06-01/module.json
 - Microsoft.Automation/stable/2019-06-01/operations.json
 - Microsoft.Automation/stable/2019-06-01/schedule.json
@@ -223,7 +223,7 @@ input-file:
 - Microsoft.Automation/preview/2020-01-13-preview/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/preview/2020-01-13-preview/jobSchedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/preview/2020-01-13-preview/module.json
 - Microsoft.Automation/preview/2020-01-13-preview/schedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/variable.json
@@ -262,7 +262,7 @@ input-file:
 - Microsoft.Automation/stable/2021-06-22/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/preview/2020-01-13-preview/jobSchedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/preview/2020-01-13-preview/module.json
 - Microsoft.Automation/preview/2020-01-13-preview/schedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/variable.json
@@ -302,7 +302,7 @@ input-file:
 - Microsoft.Automation/stable/2021-06-22/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/preview/2020-01-13-preview/jobSchedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/preview/2020-01-13-preview/module.json
 - Microsoft.Automation/preview/2020-01-13-preview/schedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/variable.json
@@ -342,7 +342,7 @@ input-file:
 - Microsoft.Automation/preview/2020-01-13-preview/credential.json
 - Microsoft.Automation/preview/2020-01-13-preview/jobSchedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/preview/2020-01-13-preview/module.json
 - Microsoft.Automation/preview/2020-01-13-preview/schedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/variable.json
@@ -387,7 +387,7 @@ input-file:
 - Microsoft.Automation/stable/2022-08-08/job.json
 - Microsoft.Automation/stable/2022-08-08/jobSchedule.json
 - Microsoft.Automation/stable/2022-08-08/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/stable/2022-08-08/module.json
 - Microsoft.Automation/stable/2022-08-08/operations.json
 - Microsoft.Automation/stable/2022-08-08/python2package.json
@@ -426,7 +426,7 @@ input-file:
 - Microsoft.Automation/preview/2023-05-15-preview/job.json
 - Microsoft.Automation/preview/2023-05-15-preview/jobSchedule.json
 - Microsoft.Automation/preview/2023-05-15-preview/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/preview/2023-05-15-preview/module.json
 - Microsoft.Automation/preview/2023-05-15-preview/operations.json
 - Microsoft.Automation/preview/2023-05-15-preview/package.json
@@ -473,7 +473,7 @@ input-file:
 - Microsoft.Automation/stable/2023-11-01/job.json
 - Microsoft.Automation/stable/2023-11-01/jobSchedule.json
 - Microsoft.Automation/stable/2023-11-01/linkedWorkspace.json
-- Microsoft.Automation/preview/2023-05-15-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/locations.json
 - Microsoft.Automation/stable/2023-11-01/module.json
 - Microsoft.Automation/stable/2023-11-01/powershell72Module.json
 - Microsoft.Automation/stable/2023-11-01/operations.json

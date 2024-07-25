@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AutomationManagement",
-    "version": "2023-05-15-preview",
+    "version": "2023-11-01",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
     }
@@ -44,10 +44,10 @@
         "operationId": "Usages_ListByLocation",
         "description": "Retrieve the usage for the location.",
         "externalDocs": {
-          "url": "http://aka.ms/azureautomationsdk/usageoperations"
+          "url": "http://aka.ms/azureautomationsdk/getUsagesOfLocation"
         },
         "x-ms-examples": {
-          "Get usages of an automation account": {
+          "List usages": {
             "$ref": "./examples/getUsagesOfLocation.json"
           }
         },
@@ -84,7 +84,8 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": null,
+          "itemName": "value"
         }
       }
     }
@@ -138,6 +139,7 @@
     },
     "UsageListResult": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "value": {
           "type": "array",
@@ -151,6 +153,9 @@
           "description": "Gets or sets the next link."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The response model for the get usage operation."
     }
   },
