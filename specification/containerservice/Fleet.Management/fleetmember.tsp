@@ -6,7 +6,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
@@ -25,7 +24,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @visibility("create", "read")
   name: string;
 
-  ...EntityTag;
+  ...EntityTagProperty;
 }
 
 scalar ClusterResourceId
@@ -77,21 +76,28 @@ union FleetMemberProvisioningState {
 interface FleetMembers {
   get is ArmResourceRead<FleetMember>;
 
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "must change at next release"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrUpdateAsync<
     FleetMember,
-    BaseParameters<FleetMember> &
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
       IfMatchParameters<FleetMember> &
-      IfNoneMatchParameters<FleetMember>
+      IfNoneMatchParameters<FleetMember>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
   @sharedRoute
   @added(Versions.v2023_03_15_preview)
   @removed(Versions.v2023_06_15_preview)
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     FleetMember,
-    FleetMemberProperties,
-    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      FleetMember,
+      FleetMemberProperties
+    >,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
+      IfMatchParameters<FleetMember>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
@@ -104,10 +110,14 @@ interface FleetMembers {
       `final-state-via`: "original-uri",
     }
   )
-  updateAsync is ArmResourcePatchAsync<
+  updateAsync is ArmCustomPatchAsync<
     FleetMember,
-    FleetMemberProperties,
-    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      FleetMember,
+      FleetMemberProperties
+    >,
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
+      IfMatchParameters<FleetMember>
   >;
 
   #suppress "deprecated" "Existing API"
@@ -116,8 +126,10 @@ interface FleetMembers {
   // All shared routes must agree on the value of the shared parameter.TypeSpec(@typespec/http/shared-inconsistency)
   delete is ArmResourceDeleteAsync<
     FleetMember,
-    BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
+    Azure.ResourceManager.Foundations.BaseParameters<FleetMember> &
+      IfMatchParameters<FleetMember>
   >;
 
-  listByParent is ArmResourceListByParent<FleetMember>;
+  /** List FleetMember resources by Fleet */
+  listByFleet is ArmResourceListByParent<FleetMember>;
 }
