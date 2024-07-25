@@ -749,6 +749,11 @@
           "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource entity tag (ETag)",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -843,6 +848,11 @@
           "$ref": "#/definitions/Metrics",
           "description": "Information about metrics for the Azure Monitor workspace"
         },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.",
+          "readOnly": true
+        },
         "defaultIngestionSettings": {
           "$ref": "#/definitions/IngestionSettings",
           "description": "The Data Collection Rule and Endpoint used for ingestion by default.",
@@ -860,11 +870,6 @@
           "$ref": "#/definitions/PublicNetworkAccess",
           "description": "Gets or sets allow or disallow public network access to workspace",
           "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.",
-          "readOnly": true
         }
       }
     },
@@ -881,6 +886,7 @@
         },
         "properties": {
           "$ref": "#/definitions/AzureMonitorWorkspaceUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -1344,6 +1350,7 @@
         },
         "properties": {
           "$ref": "#/definitions/PipelineGroupUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -1722,78 +1729,6 @@
         }
       }
     },
-    "StreamEncodingType": {
-      "type": "string",
-      "description": "Encoding types for streams.",
-      "enum": [
-        "nop",
-        "utf-8",
-        "utf-16le",
-        "utf-16be",
-        "ascii",
-        "big5"
-      ],
-      "x-ms-enum": {
-        "name": "StreamEncodingType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "nop",
-            "value": "nop",
-            "description": "No encoding validation. Treats the file as a stream of raw bytes."
-          },
-          {
-            "name": "utf_8",
-            "value": "utf-8",
-            "description": "UTF-8 encoding."
-          },
-          {
-            "name": "utf_16le",
-            "value": "utf-16le",
-            "description": "UTF-16 encoding with little-endian byte order."
-          },
-          {
-            "name": "utf_16be",
-            "value": "utf-16be",
-            "description": "UTF-16 encoding with little-endian byte order."
-          },
-          {
-            "name": "ascii",
-            "value": "ascii",
-            "description": "ASCII encoding."
-          },
-          {
-            "name": "big5",
-            "value": "big5",
-            "description": "The Big5 Chinese character encoding."
-          }
-        ]
-      }
-    },
-    "SyslogProtocol": {
-      "type": "string",
-      "description": "The syslog protocol to parse messages.",
-      "enum": [
-        "rfc3164",
-        "rfc5424"
-      ],
-      "x-ms-enum": {
-        "name": "SyslogProtocol",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "rfc3164",
-            "value": "rfc3164",
-            "description": "rfc3164 protocol."
-          },
-          {
-            "name": "rfc5424",
-            "value": "rfc5424",
-            "description": "rfc5424 protocol."
-          }
-        ]
-      }
-    },
     "SyslogReceiver": {
       "type": "object",
       "description": "Base receiver using TCP as transport protocol.",
@@ -1845,20 +1780,6 @@
       },
       "required": [
         "url"
-      ]
-    },
-    "TcpReceiver": {
-      "type": "object",
-      "description": "Base receiver using TCP as transport protocol.",
-      "properties": {
-        "endpoint": {
-          "type": "string",
-          "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
-          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
-        }
-      },
-      "required": [
-        "endpoint"
       ]
     },
     "UdpReceiver": {
