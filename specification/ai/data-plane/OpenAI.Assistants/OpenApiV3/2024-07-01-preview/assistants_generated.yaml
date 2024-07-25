@@ -18,7 +18,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assistant'
       requestBody:
-        description: Body parameter.
+        description: The request details to use when creating a new assistant.
         required: true
         content:
           application/json:
@@ -125,7 +125,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assistant'
       requestBody:
-        description: Body parameter.
+        description: The request details to use when modifying an existing assistant.
         required: true
         content:
           application/json:
@@ -264,7 +264,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssistantThread'
       requestBody:
-        description: Body parameter.
+        description: The details used to create a new assistant thread.
         required: true
         content:
           application/json:
@@ -283,7 +283,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadRun'
       requestBody:
-        description: Body parameter.
+        description: The details used when creating and immediately running a new assistant thread.
         required: true
         content:
           application/json:
@@ -325,7 +325,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssistantThread'
       requestBody:
-        description: Body parameter.
+        description: The details used to update an existing assistant thread.
         required: true
         content:
           application/json:
@@ -367,7 +367,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadMessage'
       requestBody:
-        description: Body parameter.
+        description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
         required: true
         content:
           application/json:
@@ -529,6 +529,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadRun'
       requestBody:
+        description: The details used when creating a new run of an assistant thread.
         required: true
         content:
           application/json:
@@ -917,7 +918,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/VectorStore'
       requestBody:
-        description: Body parameter.
+        description: Request object for creating a vector store.
         required: true
         content:
           application/json:
@@ -959,7 +960,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/VectorStore'
       requestBody:
-        description: Body parameter.
+        description: Request object for updating a vector store.
         required: true
         content:
           application/json:
@@ -1816,6 +1817,10 @@ components:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
           nullable: true
           description: Specifies the format that the model must output.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
         metadata:
           type: object
           additionalProperties:
@@ -1850,6 +1855,7 @@ components:
       type: object
       required:
         - file_ids
+        - chunking_strategy
       properties:
         file_ids:
           type: array
@@ -1857,6 +1863,10 @@ components:
             type: string
           maxItems: 10000
           description: A list of file IDs to add to the vector store. There can be a maximum of 10000 files in a vector store.
+        chunking_strategy:
+          allOf:
+            - $ref: '#/components/schemas/VectorStoreChunkingStrategyRequest'
+          description: The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.
         metadata:
           type: object
           additionalProperties:
@@ -1960,6 +1970,10 @@ components:
             - $ref: '#/components/schemas/AssistantsApiResponseFormatOption'
           nullable: true
           description: Specifies the format that the model must output.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether to enable parallel function calling during tool use.
+          default: true
         metadata:
           type: object
           additionalProperties:
@@ -2291,6 +2305,7 @@ components:
         mapping:
           file_citation: '#/components/schemas/MessageDeltaTextFileCitationAnnotationObject'
           file_path: '#/components/schemas/MessageDeltaTextFilePathAnnotationObject'
+          url_citation: '#/components/schemas/MessageDeltaTextUrlCitationAnnotation'
       description: The abstract base representation of a streamed text content part's text annotation.
     MessageDeltaTextContent:
       type: object
@@ -2394,6 +2409,43 @@ components:
       allOf:
         - $ref: '#/components/schemas/MessageDeltaTextAnnotation'
       description: Represents a streamed file path annotation applied to a streaming text content part.
+    MessageDeltaTextUrlCitationAnnotation:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - url_citation
+          description: The url citation object type. Always `url_citation`.
+        url_citation:
+          allOf:
+            - $ref: '#/components/schemas/MessageTextUrlCitationDetails'
+          description: The details of  the URL used in the text citation.
+        start_index:
+          type: integer
+          format: int32
+          description: The first text index associated with this text annotation.
+        end_index:
+          type: integer
+          format: int32
+          description: The last text index associated with this text annotation.
+      allOf:
+        - $ref: '#/components/schemas/MessageDeltaTextAnnotation'
+      description: |-
+        A citation within the message that points to a specific quote from the webpage returned by URL.
+        Generated when the assistant uses the "browser" tool to search the web.
+    MessageDeltaTextUrlCitationDetails:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL where the citation is from.
+        title:
+          type: string
+          description: The title of the URL.
+      description: A representation of the URL used for the text citation.
     MessageImageFileContent:
       type: object
       required:
@@ -2487,6 +2539,7 @@ components:
         mapping:
           file_citation: '#/components/schemas/MessageTextFileCitationAnnotation'
           file_path: '#/components/schemas/MessageTextFilePathAnnotation'
+          url_citation: '#/components/schemas/MessageTextUrlCitationAnnotation'
       description: An abstract representation of an annotation to text thread message content.
     MessageTextContent:
       type: object
@@ -2597,6 +2650,47 @@ components:
           type: string
           description: The ID of the specific file that the citation is from.
       description: An encapsulation of an image file ID, as used by message image content.
+    MessageTextUrlCitationAnnotation:
+      type: object
+      required:
+        - type
+        - url_citation
+      properties:
+        type:
+          type: string
+          enum:
+            - url_citation
+          description: The url citation object type. Always `url_citation`.
+        url_citation:
+          allOf:
+            - $ref: '#/components/schemas/MessageTextUrlCitationDetails'
+          description: The details of  the URL used in the text citation.
+        start_index:
+          type: integer
+          format: int32
+          description: The first text index associated with this text annotation.
+        end_index:
+          type: integer
+          format: int32
+          description: The last text index associated with this text annotation.
+      allOf:
+        - $ref: '#/components/schemas/MessageTextAnnotation'
+      description: |-
+        A citation within the message that points to a specific quote from the webpage returned by the URL.
+        Generated when the assistant uses the "browser" tool to search the web.
+    MessageTextUrlCitationDetails:
+      type: object
+      required:
+        - url
+        - title
+      properties:
+        url:
+          type: string
+          description: The URL where the citation is from.
+        title:
+          type: string
+          description: The title of the URL.
+      description: A representation of the URL used for the text citation.
     OpenAIFile:
       type: object
       required:
@@ -2837,6 +2931,25 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: Detailed information about a single step of an assistant thread run.
+    RunStepBingSearchToolCall:
+      type: object
+      required:
+        - type
+        - browser
+      properties:
+        type:
+          type: string
+          enum:
+            - browser
+          description: The type of tool call. This is always going to be `browser` for this type of tool call.
+        browser:
+          type: object
+          additionalProperties:
+            type: string
+          description: For now, this is always going to be an empty object.
+      allOf:
+        - $ref: '#/components/schemas/RunStepToolCall'
+      description: A record of a call to a browser tool
     RunStepCodeInterpreterImageOutput:
       type: object
       required:
@@ -2958,6 +3071,24 @@ components:
             - $ref: '#/components/schemas/RunStepDeltaDetail'
           description: The details of the run step.
       description: Represents the delta payload in a streaming run step delta chunk.
+    RunStepDeltaBingSearchToolCall:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - browser
+          description: The type of tool call. This is always going to be `browser` for this type of tool call.
+        browser:
+          type: object
+          additionalProperties:
+            type: string
+          description: For now, this is always going to be an empty object.
+      allOf:
+        - $ref: '#/components/schemas/RunStepDeltaToolCall'
+      description: Browser tool call.
     RunStepDeltaChunk:
       type: object
       required:
@@ -3179,6 +3310,7 @@ components:
           function: '#/components/schemas/RunStepDeltaFunctionToolCall'
           file_search: '#/components/schemas/RunStepDeltaFileSearchToolCall'
           code_interpreter: '#/components/schemas/RunStepDeltaCodeInterpreterToolCall'
+          browser: '#/components/schemas/RunStepDeltaBingSearchToolCall'
       description: The abstract base representation of a single tool call within a streaming run step's delta tool call details.
     RunStepDeltaToolCallObject:
       type: object
@@ -3363,6 +3495,7 @@ components:
           code_interpreter: '#/components/schemas/RunStepCodeInterpreterToolCall'
           file_search: '#/components/schemas/RunStepFileSearchToolCall'
           function: '#/components/schemas/RunStepFunctionToolCall'
+          browser: '#/components/schemas/RunStepBingSearchToolCall'
       description: An abstract representation of a detailed tool call as recorded within a run step for an existing run.
     RunStepToolCallDetails:
       type: object
