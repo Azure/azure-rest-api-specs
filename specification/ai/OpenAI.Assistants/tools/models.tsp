@@ -275,10 +275,6 @@ model RunStepFunctionToolCallDetails {
   output: string | null;
 }
 
-// Call details: Browser
-
-
-
 //
 // Tool outputs -- structured data that provides requested information from tools back to the model
 //
