@@ -35,4 +35,5 @@ enum Versions {
   v2024_05_01_preview: "2024-05-01-preview",
 }
 
+/** Add for test */
 interface Operations extends Azure.ResourceManager.Operations {}
