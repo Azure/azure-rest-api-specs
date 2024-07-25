@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "accountName": "myAccountName",
+    "chaosFault": "ServiceUnavailability",
+    "api-version": "2024-09-01-preview",
+    "chaosFaultRequest": {
+      "properties": {
+        "action": "Enable",
+        "region": "EastUS",
+        "databaseName": "testDatabase",
+        "containerName": "testCollection"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFault/{chaosFault}/operationsStatus/{operationId}?api-version=2024-05-15-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFault/{chaosFault}/operationsStatus/{operationId}?api-version=2024-05-15-preview"
+      }
+    }
+  }
+}
