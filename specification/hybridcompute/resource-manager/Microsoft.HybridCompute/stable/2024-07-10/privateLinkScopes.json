@@ -812,7 +812,9 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationReconcileResult"
+            }
           },
           "202": {
             "description": "Accepted.",
@@ -1219,6 +1221,28 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationReconcileResult": {
+      "type": "object",
+      "description": "Result of network security perimeter configurations.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
         }
       }
     },
