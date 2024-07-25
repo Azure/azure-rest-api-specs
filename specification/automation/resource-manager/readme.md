@@ -495,41 +495,7 @@ These settings apply only when `--tag=package-2024-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
-- Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
-- Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
-- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
-- Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
-- Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
-- Microsoft.Automation/preview/2020-01-13-preview/watcher.json
-- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
-- Microsoft.Automation/stable/2015-10-31/webhook.json
-- Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
-- Microsoft.Automation/preview/2024-08-01-preview/account.json
-- Microsoft.Automation/preview/2024-08-01-preview/certificate.json
-- Microsoft.Automation/preview/2024-08-01-preview/connection.json
-- Microsoft.Automation/preview/2024-08-01-preview/connectionType.json
-- Microsoft.Automation/preview/2024-08-01-preview/credential.json
-- Microsoft.Automation/preview/2024-08-01-preview/dscConfiguration.json
-- Microsoft.Automation/preview/2024-08-01-preview/dscNodeConfiguration.json
-- Microsoft.Automation/preview/2024-08-01-preview/hybridRunbookWorker.json
-- Microsoft.Automation/preview/2024-08-01-preview/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/preview/2024-08-01-preview/job.json
-- Microsoft.Automation/preview/2024-08-01-preview/jobSchedule.json
-- Microsoft.Automation/preview/2024-08-01-preview/linkedWorkspace.json
 - Microsoft.Automation/preview/2024-08-01-preview/locations.json
-- Microsoft.Automation/preview/2024-08-01-preview/module.json
-- Microsoft.Automation/preview/2024-08-01-preview/powershell72Module.json
-- Microsoft.Automation/preview/2024-08-01-preview/operations.json
-- Microsoft.Automation/preview/2024-08-01-preview/python2package.json
-- Microsoft.Automation/preview/2024-08-01-preview/python3package.json
-- Microsoft.Automation/preview/2024-08-01-preview/runbook.json
-- Microsoft.Automation/preview/2024-08-01-preview/schedule.json
-- Microsoft.Automation/preview/2024-08-01-preview/softwareUpdateConfigurationMachineRun.json
-- Microsoft.Automation/preview/2024-08-01-preview/softwareUpdateConfigurationRun.json
-- Microsoft.Automation/preview/2024-08-01-preview/sourceControl.json
-- Microsoft.Automation/preview/2024-08-01-preview/sourceControlSyncJob.json
-- Microsoft.Automation/preview/2024-08-01-preview/sourceControlSyncJobStreams.json
-- Microsoft.Automation/preview/2024-08-01-preview/variable.json
 ```
 
 
