@@ -952,9 +952,6 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "202": {
             "description": "Accepted.",
             "headers": {
               "Location": {
@@ -968,6 +965,15 @@
               },
               "Azure-AsyncOperation": {
                 "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "OK",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
                 "type": "string"
               }
             }
