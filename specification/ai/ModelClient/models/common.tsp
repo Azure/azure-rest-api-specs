@@ -151,5 +151,5 @@ union ExtraParameters {
   drop: "drop",
 
   @doc("The service will pass unknown parameters to the back-end AI model.")
-  pass_through: "pass_through",
+  pass_through: "pass-through",
 }
