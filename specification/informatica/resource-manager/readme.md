@@ -30,13 +30,13 @@ openapi-subtype: rpaas
 tag: package-2024-07-22-preview
 ```
 
-### Tag: package-2024-07-22
+### Tag: package-2024-07-22-preview
 
-These settings apply only when `--tag=package-2024-07-22` is specified on the command line.
+These settings apply only when `--tag=package-2024-07-22-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-07-22'
+```yaml $(tag) == 'package-2024-07-22-preview'
 input-file:
-  - Informatica.DataManagement/preview/2024-07-22/openapi.json
+  - Informatica.DataManagement/preview/2024-07-22-preview/openapi.json
 ```
 
 ### Tag: package-2024-05-08
