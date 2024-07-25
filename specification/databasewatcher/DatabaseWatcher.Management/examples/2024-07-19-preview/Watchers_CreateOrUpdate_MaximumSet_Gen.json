@@ -1,0 +1,99 @@
+{
+  "title": "Watchers_CreateOrUpdate",
+  "operationId": "Watchers_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-07-19-preview",
+    "subscriptionId": "469DD77C-C8DB-47B7-B9E1-72D29F8C878B",
+    "resourceGroupName": "rgWatcher",
+    "watcherName": "testWatcher",
+    "resource": {
+      "properties": {
+        "status": "Starting",
+        "defaultAlertRuleIdentityResourceId": "/subscriptions/469DD77C-C8DB-47B7-B9E1-72D29F8C878B/resourceGroups/rgWatcher/providers/Microsoft.ManagedIdentity/userAssignedIdentities/3pmtest"
+      },
+      "identity": {
+        "type": "UserAssignedIdentity",
+        "userAssignedIdentities": {
+          "key9289": {}
+        }
+      },
+      "tags": {
+        "key3319": "wzfeuydengfdpvuwkgftea"
+      },
+      "location": "eastus2euap"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "status": "Starting",
+          "provisioningState": "Succeeded",
+          "defaultAlertRuleIdentityResourceId": "/subscriptions/469DD77C-C8DB-47B7-B9E1-72D29F8C878B/resourceGroups/rgWatcher/providers/Microsoft.ManagedIdentity/userAssignedIdentities/3pmtest"
+        },
+        "identity": {
+          "tenantId": "469DD77C-C8DB-47B7-B9E1-72D29F8C878B",
+          "type": "UserAssignedIdentity",
+          "userAssignedIdentities": {
+            "key9289": {
+              "principalId": "vgtpdepcnkeuyqgbxydmgtlubsdgr",
+              "clientId": "nvqrmeyriqyvvzeoofzuh"
+            }
+          }
+        },
+        "tags": {
+          "key3319": "wzfeuydengfdpvuwkgftea"
+        },
+        "location": "eastus2euap",
+        "id": "/subscriptions/469DD77C-C8DB-47B7-B9E1-72D29F8C878B/resourceGroups/rgWatcher/providers/Microsoft.DatabaseWatcher/watchers/testWatcher",
+        "name": "testWatcher",
+        "type": "Microsoft.DatabaseWatcher",
+        "systemData": {
+          "createdBy": "enbpvlpqbwd",
+          "createdByType": "User",
+          "createdAt": "2024-07-25T15:38:47.092Z",
+          "lastModifiedBy": "mxp",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-07-25T15:38:47.092Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "status": "Starting",
+          "provisioningState": "Succeeded",
+          "defaultAlertRuleIdentityResourceId": "/subscriptions/469DD77C-C8DB-47B7-B9E1-72D29F8C878B/resourceGroups/rgWatcher/providers/Microsoft.ManagedIdentity/userAssignedIdentities/3pmtest"
+        },
+        "identity": {
+          "tenantId": "469DD77C-C8DB-47B7-B9E1-72D29F8C878B",
+          "type": "UserAssignedIdentity",
+          "userAssignedIdentities": {
+            "key9289": {
+              "principalId": "vgtpdepcnkeuyqgbxydmgtlubsdgr",
+              "clientId": "nvqrmeyriqyvvzeoofzuh"
+            }
+          }
+        },
+        "tags": {
+          "key3319": "wzfeuydengfdpvuwkgftea"
+        },
+        "location": "eastus2euap",
+        "id": "/subscriptions/469DD77C-C8DB-47B7-B9E1-72D29F8C878B/resourceGroups/rgWatcher/providers/Microsoft.DatabaseWatcher/watchers/testWatcher",
+        "name": "testWatcher",
+        "type": "Microsoft.DatabaseWatcher",
+        "systemData": {
+          "createdBy": "enbpvlpqbwd",
+          "createdByType": "User",
+          "createdAt": "2024-07-25T15:38:47.092Z",
+          "lastModifiedBy": "mxp",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-07-25T15:38:47.092Z"
+        }
+      }
+    }
+  }
+}
