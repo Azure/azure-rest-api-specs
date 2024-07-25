@@ -20,7 +20,7 @@ model DsmsRootFolderResourceProperties {
   @doc("The cloud ID where the root folder should be added. Acceptable values: Public, Fairfax, Mooncake, USSec, USNat")
   cloudId?: string;
 
-  @doc("The ARM location")
+  @doc("The Azure location")
   @added(Versions.v2024_06_24_preview)
   armLocation?: string;
 

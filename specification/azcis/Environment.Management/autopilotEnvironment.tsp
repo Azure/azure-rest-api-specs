@@ -29,7 +29,7 @@ model EnvironmentResourceProperties {
   @visibility("read")
   mode: EnvironmentMode;
 
-  @doc("The ARM location")
+  @doc("The Azure location")
   @added(Versions.v2024_06_24_preview)
   armLocation?: string;
 

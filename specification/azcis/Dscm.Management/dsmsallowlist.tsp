@@ -29,7 +29,7 @@ model DsmsAllowlistResourceProperties {
   @doc("Guids of Azure storage subscriptions in allowlist.")
   storageSubscriptions?: Array<string>;
 
-  @doc("The ARM location")
+  @doc("The Azure location")
   @added(Versions.v2024_06_24_preview)
   armLocation?: string;
 

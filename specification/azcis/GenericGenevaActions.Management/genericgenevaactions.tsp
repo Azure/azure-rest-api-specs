@@ -33,7 +33,7 @@ model GenericGenevaActionsResourceProperties {
   @doc("The input mode for geneva action (single/batch)")
   inputMode?: string;
 
-  @doc("The ARM location")
+  @doc("The Azure location")
   @added(Versions.v2024_06_24_preview)
   armLocation?: string;
 

@@ -33,7 +33,7 @@ model PlannedQuotaResourceProperties {
   @removed(Versions.v2024_06_24_preview)
   region: string;
 
-  @doc("The ARM location")
+  @doc("The Azure location")
   @added(Versions.v2024_06_24_preview)
   armLocation: string;
 
