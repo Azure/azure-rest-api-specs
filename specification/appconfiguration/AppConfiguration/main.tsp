@@ -42,10 +42,5 @@ enum Versions {
 }
 
 @doc("Azure App Configuration Shared Access Signature token auth")
-model SasTokenAuth {
-  @doc("Http auth type")
-  type: AuthType.http;
-
-  @doc("Custom auth scheme")
-  scheme: "SAS";
-}
+model SasTokenAuth
+  is ApiKeyAuth<ApiKeyLocation.header, "Shared Access Signature Token">;
