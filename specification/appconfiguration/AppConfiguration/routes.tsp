@@ -9,13 +9,6 @@ using Azure.Core.Traits;
 
 namespace AzureAppConfiguration;
 
-alias Body<T, TName extends valueof string = "body", TDoc extends valueof string = "The body parameter."> = {
-  @doc(TDoc)
-  @friendlyName(TName)
-  @bodyRoot
-  body: T;
-};
-
 alias appConfigOperation<
   TParams extends Reflection.Model,
   TResponse,
@@ -278,48 +271,52 @@ op checkKeyValues is appConfigOperation<
   OkResponse & AppConfigResponseHeaders
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a single key-value.")
 @doc("Gets a single key-value.")
-op getKeyValue is standardOps.ResourceRead<
-  KeyValue,
-  QueryParametersTrait<{
-    @doc("The label of the key-value to retrieve.")
-    @query("label")
-    label?: string;
+@get
+op getKeyValue is Foundations.ResourceOperation<
+Resource = KeyValue,
+Parameters = {
+  @doc("The label of the key-value to retrieve.")
+  @query("label")
+  label?: string;
 
-    @doc("Used to select what fields are present in the returned resource(s).")
-    @query({
-      name: "$Select",
-      format: "csv",
-    })
-    select?: KeyValueFields[];
-  }> &
-    RequestHeadersTrait<{
-      ...syncTokenHeader;
+  @doc("Used to select what fields are present in the returned resource(s).")
+  @query({
+    name: "$Select",
+    format: "csv",
+  })
+  select?: KeyValueFields[];
+} & {
+  ...syncTokenHeader;
 
-      @doc("""
-        Requests the server to respond with the state of the resource at the specified
-        time.
-        """)
-      @header("Accept-Datetime")
-      acceptDatetime?: string;
+  @doc("""
+    Requests the server to respond with the state of the resource at the specified
+    time.
+    """)
+  @header("Accept-Datetime")
+  acceptDatetime?: string;
 
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag matches the
-        value provided.
-        """)
-      @header("If-Match")
-      ifMatch?: string;
+  @doc("""
+    Used to perform an operation only if the targeted resource's etag matches the
+    value provided.
+    """)
+  @header("If-Match")
+  ifMatch?: string;
 
-      @doc("""
-        Used to perform an operation only if the targeted resource's etag does not
-        match the value provided.
-        """)
-      @header("If-None-Match")
-      ifNoneMatch?: string;
-    }> &
-    ResponseHeadersTrait<AppConfigResponseHeaders &
-      contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">>
+  @doc("""
+    Used to perform an operation only if the targeted resource's etag does not
+    match the value provided.
+    """)
+  @header("If-None-Match")
+  ifNoneMatch?: string;
+
+  ...ClientRequestIdHeader;
+},
+Response = Body<KeyValue> & {...ClientRequestIdHeader; ...AppConfigResponseHeaders; ...contentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">},
+Traits = {},
+ErrorResponse = Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
