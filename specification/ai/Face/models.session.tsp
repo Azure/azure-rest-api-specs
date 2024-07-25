@@ -315,6 +315,7 @@ model CreateLivenessWithVerifySessionRequest {
   body: CreateLivenessWithVerifySessionMultipartBody;
 }
 
+@added(Versions.v1_2_preview_1)
 @doc("Response model of get session image.")
 model SessionImageStream {
   @doc("The format of the HTTP payload.")
