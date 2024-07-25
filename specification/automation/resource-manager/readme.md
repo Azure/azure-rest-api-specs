@@ -495,7 +495,41 @@ These settings apply only when `--tag=package-2024-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
+- Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
+- Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
+- Microsoft.Automation/preview/2020-01-13-preview/watcher.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
+- Microsoft.Automation/stable/2015-10-31/webhook.json
+- Microsoft.Automation/stable/2022-01-31/deletedAutomationAccount.json
+- Microsoft.Automation/stable/2023-11-01/account.json
+- Microsoft.Automation/stable/2023-11-01/certificate.json
+- Microsoft.Automation/stable/2023-11-01/connection.json
+- Microsoft.Automation/stable/2023-11-01/connectionType.json
+- Microsoft.Automation/stable/2023-11-01/credential.json
+- Microsoft.Automation/stable/2023-11-01/dscConfiguration.json
+- Microsoft.Automation/stable/2023-11-01/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2023-11-01/hybridRunbookWorker.json
+- Microsoft.Automation/stable/2023-11-01/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/stable/2023-11-01/job.json
+- Microsoft.Automation/stable/2023-11-01/jobSchedule.json
+- Microsoft.Automation/stable/2023-11-01/linkedWorkspace.json
 - Microsoft.Automation/preview/2024-08-01-preview/locations.json
+- Microsoft.Automation/stable/2023-11-01/module.json
+- Microsoft.Automation/stable/2023-11-01/powershell72Module.json
+- Microsoft.Automation/stable/2023-11-01/operations.json
+- Microsoft.Automation/stable/2023-11-01/python2package.json
+- Microsoft.Automation/stable/2023-11-01/python3package.json
+- Microsoft.Automation/stable/2023-11-01/runbook.json
+- Microsoft.Automation/stable/2023-11-01/schedule.json
+- Microsoft.Automation/stable/2023-11-01/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2023-11-01/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2023-11-01/sourceControl.json
+- Microsoft.Automation/stable/2023-11-01/sourceControlSyncJob.json
+- Microsoft.Automation/stable/2023-11-01/sourceControlSyncJobStreams.json
+- Microsoft.Automation/stable/2023-11-01/variable.json
 ```
 
 
