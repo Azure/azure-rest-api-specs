@@ -116,6 +116,7 @@ model DetectedLanguage {
   scriptCode?: ScriptCode;
 }
 
+/** The script of the text. */
 @added(Versions.v2023_11_15_preview)
 union ScriptKind {
   string,
