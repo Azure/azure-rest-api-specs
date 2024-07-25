@@ -27,7 +27,7 @@ model AlertRuleResource is ProxyResource<AlertRuleResourceProperties> {
   name: string;
 }
 
-@doc("The generic properties of the alert rule resource.")
+@doc("The generic properties of the alert rule proxy resource.")
 model AlertRuleResourceProperties {
   @doc("The resource ID of the alert rule resource.")
   alertRuleResourceId: Azure.Core.armResourceIdentifier<[
@@ -36,7 +36,7 @@ model AlertRuleResourceProperties {
     }
   ]>;
 
-  @doc("Whether the alert rule was created with an action group or not.")
+  @doc("Whether the alert rule was created with an action group.")
   createdWithActionGroup: boolean;
 
   @doc("The creation time of the alert rule resource.")
@@ -45,6 +45,9 @@ model AlertRuleResourceProperties {
   @visibility("read")
   @doc("The provisioning state of the alert rule resource.")
   provisioningState?: ResourceProvisioningState;
+
+  @doc("The template ID associated with alert rule resource.")
+  alertRuleTemplateId: string;
 
   @doc("The alert rule template version.")
   alertRuleTemplateVersion: string;
