@@ -177,7 +177,11 @@ model DashboardPartsPosition {
  */
 @discriminator("type")
 model DashboardPartMetadata {
-  type: DashboardPartMetadataType;
+  /**
+   * The type of dashboard part.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  type: string;
 }
 
 @doc("The dashboard part metadata type.")
@@ -243,7 +247,7 @@ model MarkdownPartMetadata extends DashboardPartMetadata {
   /**
    * The type of dashboard part.
    */
-  type: DashboardPartMetadataType.markdown;
+  type: "Extension/HubsExtension/PartType/MarkdownPart";
 }
 
 /**
