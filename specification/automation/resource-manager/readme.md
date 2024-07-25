@@ -472,6 +472,7 @@ input-file:
 - Microsoft.Automation/stable/2023-11-01/hybridRunbookWorkerGroup.json
 - Microsoft.Automation/stable/2023-11-01/job.json
 - Microsoft.Automation/stable/2023-11-01/jobSchedule.json
+- Microsoft.Automation/preview/2024-08-01-preview/locations.json
 - Microsoft.Automation/stable/2023-11-01/linkedWorkspace.json
 - Microsoft.Automation/stable/2023-11-01/module.json
 - Microsoft.Automation/stable/2023-11-01/powershell72Module.json
