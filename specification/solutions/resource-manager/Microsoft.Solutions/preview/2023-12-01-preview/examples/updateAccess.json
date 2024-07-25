@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "applicationName": "myManagedApplication",
+    "api-version": "2023-12-01-preview",
+    "parameters": {
+      "approver": "amauser",
+      "status": "Elevate",
+      "subStatus": "Approved",
+      "metadata": {
+        "originRequestId": "originRequestId",
+        "requestorId": "RequestorId",
+        "tenantDisplayName": "TenantDisplayName",
+        "subjectDisplayName": "SubjectDisplayName"
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Solutions/pathToOperationResult"
+      },
+      "body": {
+        "approver": "amauser",
+        "status": "Elevate",
+        "subStatus": "Approved",
+        "metadata": {
+          "originRequestId": "originRequestId",
+          "requestorId": "RequestorId",
+          "tenantDisplayName": "TenantDisplayName",
+          "subjectDisplayName": "SubjectDisplayName"
+        }
+      }
+    }
+  }
+}

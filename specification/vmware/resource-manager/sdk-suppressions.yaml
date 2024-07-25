@@ -1,0 +1,104 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-avs
+      breaking-changes:
+        - Model Operation no longer has parameter properties
+        - Operation WorkloadNetworksOperations.get no longer has parameter workload_network_name
+        - Parameter location of model PrivateCloud is now required
+        - Parameter location of model TrackedResource is now required
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/avs/armavs
+      breaking-changes:
+        - Enum `ResourceIdentityType` has been removed
+        - Enum `WorkloadNetworkName` has been removed
+        - Field `AddonList` of struct `AddonsClientListResponse` has been removed
+        - Field `CloudLinkList` of struct `CloudLinksClientListResponse` has been removed
+        - Field `ClusterList` of struct `ClustersClientListResponse` has been removed
+        - Field `DatastoreList` of struct `DatastoresClientListResponse` has been removed
+        - Field `ExpressRouteAuthorizationList` of struct `AuthorizationsClientListResponse` has been removed
+        - Field `GlobalReachConnectionList` of struct `GlobalReachConnectionsClientListResponse` has been removed
+        - Field `HcxEnterpriseSiteList` of struct `HcxEnterpriseSitesClientListResponse` has been removed
+        - Field `OperationList` of struct `OperationsClientListResponse` has been removed
+        - Field `PlacementPoliciesList` of struct `PlacementPoliciesClientListResponse` has been removed
+        - Field `PrivateCloudList` of struct `PrivateCloudsClientListInSubscriptionResponse` has been removed
+        - Field `PrivateCloudList` of struct `PrivateCloudsClientListResponse` has been removed
+        - Field `Properties` of struct `Operation` has been removed
+        - Field `ScriptCmdletsList` of struct `ScriptCmdletsClientListResponse` has been removed
+        - Field `ScriptExecutionsList` of struct `ScriptExecutionsClientListResponse` has been removed
+        - Field `ScriptPackagesList` of struct `ScriptPackagesClientListResponse` has been removed
+        - Field `VirtualMachinesList` of struct `VirtualMachinesClientListResponse` has been removed
+        - Field `WorkloadNetworkDNSServicesList` of struct `WorkloadNetworksClientListDNSServicesResponse` has been removed
+        - Field `WorkloadNetworkDNSZonesList` of struct `WorkloadNetworksClientListDNSZonesResponse` has been removed
+        - Field `WorkloadNetworkDhcpList` of struct `WorkloadNetworksClientListDhcpResponse` has been removed
+        - Field `WorkloadNetworkGatewayList` of struct `WorkloadNetworksClientListGatewaysResponse` has been removed
+        - Field `WorkloadNetworkList` of struct `WorkloadNetworksClientListResponse` has been removed
+        - Field `WorkloadNetworkPortMirroringList` of struct `WorkloadNetworksClientListPortMirroringResponse` has been removed
+        - Field `WorkloadNetworkPublicIPsList` of struct `WorkloadNetworksClientListPublicIPsResponse` has been removed
+        - Field `WorkloadNetworkSegmentsList` of struct `WorkloadNetworksClientListSegmentsResponse` has been removed
+        - Field `WorkloadNetworkVMGroupsList` of struct `WorkloadNetworksClientListVMGroupsResponse` has been removed
+        - Field `WorkloadNetworkVirtualMachinesList` of struct `WorkloadNetworksClientListVirtualMachinesResponse` has been removed
+        - Function `*WorkloadNetworksClient.BeginUpdateDNSService` parameter(s) have been changed from `(context.Context, string, string, string, WorkloadNetworkDNSService, *WorkloadNetworksClientBeginUpdateDNSServiceOptions)` to `(context.Context, string, string, string, WorkloadNetworkDNSServiceUpdate, *WorkloadNetworksClientBeginUpdateDNSServiceOptions)`
+        - Function `*WorkloadNetworksClient.BeginUpdateDNSZone` parameter(s) have been changed from `(context.Context, string, string, string, WorkloadNetworkDNSZone, *WorkloadNetworksClientBeginUpdateDNSZoneOptions)` to `(context.Context, string, string, string, WorkloadNetworkDNSZoneUpdate, *WorkloadNetworksClientBeginUpdateDNSZoneOptions)`
+        - Function `*WorkloadNetworksClient.BeginUpdateDhcp` parameter(s) have been changed from `(context.Context, string, string, string, WorkloadNetworkDhcp, *WorkloadNetworksClientBeginUpdateDhcpOptions)` to `(context.Context, string, string, string, WorkloadNetworkDhcpUpdate, *WorkloadNetworksClientBeginUpdateDhcpOptions)`
+        - Function `*WorkloadNetworksClient.BeginUpdatePortMirroring` parameter(s) have been changed from `(context.Context, string, string, string, WorkloadNetworkPortMirroring, *WorkloadNetworksClientBeginUpdatePortMirroringOptions)` to `(context.Context, string, string, string, WorkloadNetworkPortMirroringUpdate, *WorkloadNetworksClientBeginUpdatePortMirroringOptions)`
+        - Function `*WorkloadNetworksClient.BeginUpdateSegments` parameter(s) have been changed from `(context.Context, string, string, string, WorkloadNetworkSegment, *WorkloadNetworksClientBeginUpdateSegmentsOptions)` to `(context.Context, string, string, string, WorkloadNetworkSegmentUpdate, *WorkloadNetworksClientBeginUpdateSegmentsOptions)`
+        - Function `*WorkloadNetworksClient.BeginUpdateVMGroup` parameter(s) have been changed from `(context.Context, string, string, string, WorkloadNetworkVMGroup, *WorkloadNetworksClientBeginUpdateVMGroupOptions)` to `(context.Context, string, string, string, WorkloadNetworkVMGroupUpdate, *WorkloadNetworksClientBeginUpdateVMGroupOptions)`
+        - Function `*WorkloadNetworksClient.Get` parameter(s) have been changed from `(context.Context, string, string, WorkloadNetworkName, *WorkloadNetworksClientGetOptions)` to `(context.Context, string, string, *WorkloadNetworksClientGetOptions)`
+        - Struct `AddonList` has been removed
+        - Struct `CloudLinkList` has been removed
+        - Struct `ClusterList` has been removed
+        - Struct `DatastoreList` has been removed
+        - Struct `ExpressRouteAuthorizationList` has been removed
+        - Struct `GlobalReachConnectionList` has been removed
+        - Struct `HcxEnterpriseSiteList` has been removed
+        - Struct `LogSpecification` has been removed
+        - Struct `MetricDimension` has been removed
+        - Struct `MetricSpecification` has been removed
+        - Struct `OperationList` has been removed
+        - Struct `OperationProperties` has been removed
+        - Struct `PlacementPoliciesList` has been removed
+        - Struct `PrivateCloudIdentity` has been removed
+        - Struct `PrivateCloudList` has been removed
+        - Struct `ScriptCmdletsList` has been removed
+        - Struct `ScriptExecutionsList` has been removed
+        - Struct `ScriptPackagesList` has been removed
+        - Struct `ServiceSpecification` has been removed
+        - Struct `VirtualMachinesList` has been removed
+        - Struct `WorkloadNetworkDNSServicesList` has been removed
+        - Struct `WorkloadNetworkDNSZonesList` has been removed
+        - Struct `WorkloadNetworkDhcpList` has been removed
+        - Struct `WorkloadNetworkGatewayList` has been removed
+        - Struct `WorkloadNetworkList` has been removed
+        - Struct `WorkloadNetworkPortMirroringList` has been removed
+        - Struct `WorkloadNetworkPublicIPsList` has been removed
+        - Struct `WorkloadNetworkSegmentsList` has been removed
+        - Struct `WorkloadNetworkVMGroupsList` has been removed
+        - Struct `WorkloadNetworkVirtualMachinesList` has been removed
+        - Type of `Operation.Origin` has been changed from `*string` to `*Origin`
+        - Type of `PrivateCloud.Identity` has been changed from `*PrivateCloudIdentity` to `*SystemAssignedServiceIdentity`
+        - Type of `PrivateCloudUpdate.Identity` has been changed from `*PrivateCloudIdentity` to `*SystemAssignedServiceIdentity`
+        - Type of `WorkloadNetworkDNSZoneProperties.DNSServices` has been changed from `*int64` to `*int32`
+        - Type of `WorkloadNetworkDhcpServer.LeaseTime` has been changed from `*int64` to `*int32`
+  azure-sdk-for-js:
+    - package: '@azure/arm-avs'
+      breaking-changes:
+        - Interface Operation no longer has parameter properties
+        - Operation WorkloadNetworks.beginUpdateDhcp has a new signature
+        - Operation WorkloadNetworks.beginUpdateDhcpAndWait has a new signature
+        - Operation WorkloadNetworks.beginUpdateDnsService has a new signature
+        - Operation WorkloadNetworks.beginUpdateDnsServiceAndWait has a new signature
+        - Operation WorkloadNetworks.beginUpdateDnsZone has a new signature
+        - Operation WorkloadNetworks.beginUpdateDnsZoneAndWait has a new signature
+        - Operation WorkloadNetworks.beginUpdatePortMirroring has a new signature
+        - Operation WorkloadNetworks.beginUpdatePortMirroringAndWait has a new signature
+        - Operation WorkloadNetworks.beginUpdateSegments has a new signature
+        - Operation WorkloadNetworks.beginUpdateSegmentsAndWait has a new signature
+        - Operation WorkloadNetworks.beginUpdateVMGroup has a new signature
+        - Operation WorkloadNetworks.beginUpdateVMGroupAndWait has a new signature
+        - Operation WorkloadNetworks.get has a new signature
+        - Parameter location of interface TrackedResource is now required
+        - Removed Enum KnownResourceIdentityType
+        - Removed Enum KnownWorkloadNetworkName
+        - Type of parameter identity of interface PrivateCloud is changed from PrivateCloudIdentity to SystemAssignedServiceIdentity
+        - Type of parameter identity of interface PrivateCloudUpdate is changed from PrivateCloudIdentity to SystemAssignedServiceIdentity
+        - Type of parameter origin of interface Operation is changed from string to Origin

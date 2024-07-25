@@ -1,3 +1,6 @@
+| Short Link: | [aka.ms/azsdk/sdk-suppression](https://aka.ms/azsdk/sdk-suppression) |
+|--|--|
+
 # SDK Breaking Change Review Workflow
 
 When a specification pull request has breaking change for a specific SDK language, such as `Go`, the pull request will be labelled with "BreakingChange-Go-Sdk". According to [the design principles of Azure SDK](https://azure.github.io/azure-sdk/general_introduction.html#dependable), breaking changes are more harmful to a user’s experience than most new features and improvements are beneficial. Therefore, the pull request author will be strongly encouraged to update the API specification to remove the breaking changes for the SDK. If the breaking change cannot be mitigated by a specification change, the author will need to suppress the breaking changes and have the suppression reviewed. See the following section for details on how to suppress breaking changes.

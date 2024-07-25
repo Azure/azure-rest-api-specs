@@ -1,17 +1,18 @@
-# Cognitive Services Face SDK
+# Azure AI Face SDK
 
 > see https://aka.ms/autorest
 
 Configuration for generating Face SDK.
 
-The current release is `v1.0`.
+The current release is `v1.1-preview.1`.
 
 ``` yaml
 
-tag: v1.0
+tag: v1.1-preview.1
 add-credentials: true
 openapi-type: data-plane
 ```
+
 # Releases
 
 ### Release v1.0
@@ -32,4 +33,18 @@ suppressions:
   - code: LroExtension 
     from: Face.json
     reason: Legacy swagger file
+```
+
+### Release v1.1-preview.1
+These settings apply only when `--tag=v1.1-preview.1` is specified on the command line.
+``` yaml $(tag) == 'v1.1-preview.1'
+input-file:
+  - preview/v1.1-preview.1/Face.json
+suppressions:
+  - code: LroExtension
+    from: Face.json
+    reason: Our LRO behavior does not fit the default generated poller
+  - code: AvoidAnonymousParameter
+    from: Face.json
+    reason: Use anonymous parameter to provide interface with flatten parameters
 ```
