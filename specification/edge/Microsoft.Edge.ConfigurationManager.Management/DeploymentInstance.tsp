@@ -52,5 +52,5 @@ interface DeploymentInstances {
   delete is ArmResourceDeleteSync<DeploymentInstance>;
 
   @doc("List Deployment Instance Resources")
-  listByParent is ArmResourceListByParent<DeploymentInstance>;
+  listByTargetBinding is ArmResourceListByParent<DeploymentInstance>;
 }

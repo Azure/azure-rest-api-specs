@@ -52,5 +52,5 @@ interface HelmUseCases {
   delete is ArmResourceDeleteSync<HelmUseCase>;
 
   @doc("List Helm Use Case Resources")
-  listByParent is ArmResourceListByParent<HelmUseCase>;
+  listByUseCase is ArmResourceListByParent<HelmUseCase>;
 }

@@ -49,7 +49,7 @@ interface DynamicConfigurations {
   delete is ArmResourceDeleteSync<DynamicConfiguration>;
 
   @doc("List Dynamic Configuration Resources")
-  listByParent is ArmResourceListByParent<DynamicConfiguration>;
+  listByConfiguration is ArmResourceListByParent<DynamicConfiguration>;
 
   @doc("Post request to resolve configuration")
   resolveConfiguration is ArmResourceActionSync<

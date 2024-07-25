@@ -50,5 +50,5 @@ interface DynamicConfigurationVersions {
   delete is ArmResourceDeleteSync<DynamicConfigurationVersion>;
 
   @doc("List Dynamic Configuration Version Resource")
-  listByParent is ArmResourceListByParent<DynamicConfigurationVersion>;
+  listByDynamicConfiguration is ArmResourceListByParent<DynamicConfigurationVersion>;
 }
