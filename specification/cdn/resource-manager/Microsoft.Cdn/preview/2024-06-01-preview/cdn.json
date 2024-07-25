@@ -3329,6 +3329,92 @@
         }
       }
     },
+    "DeliveryRuleConditionParameters": {
+      "description": "Defines the parameters for delivery rule match conditions",
+      "type": "object",
+      "discriminator": "typeName",
+      "required": [
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleRemoteAddressConditionParameters",
+            "DeliveryRuleRequestMethodConditionParameters",
+            "DeliveryRuleQueryStringConditionParameters",
+            "DeliveryRulePostArgsConditionParameters",
+            "DeliveryRuleRequestUriConditionParameters",
+            "DeliveryRuleRequestHeaderConditionParameters",
+            "DeliveryRuleRequestBodyConditionParameters",
+            "DeliveryRuleRequestSchemeConditionParameters",
+            "DeliveryRuleUrlPathMatchConditionParameters",
+            "DeliveryRuleUrlFileExtensionMatchConditionParameters",
+            "DeliveryRuleUrlFilenameConditionParameters",
+            "DeliveryRuleHttpVersionConditionParameters",
+            "DeliveryRuleCookiesConditionParameters",
+            "DeliveryRuleIsDeviceConditionParameters",
+            "DeliveryRuleSocketAddrConditionParameters",
+            "DeliveryRuleClientPortConditionParameters",
+            "DeliveryRuleServerPortConditionParameters",
+            "DeliveryRuleHostNameConditionParameters",
+            "DeliveryRuleSslProtocolConditionParameters"
+          ],
+          "x-ms-enum": {
+            "name": "DeliveryRuleConditionParametersType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DeliveryRuleActionParameters": {
+      "description": "Defines the parameters for delivery rule actions",
+      "type": "object",
+      "discriminator": "typeName",
+      "required": [
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleUrlRedirectActionParameters",
+            "DeliveryRuleUrlSigningActionParameters",
+            "DeliveryRuleOriginGroupOverrideActionParameters",
+            "DeliveryRuleUrlRewriteActionParameters",
+            "DeliveryRuleHeaderActionParameters",
+            "DeliveryRuleCacheExpirationActionParameters",
+            "DeliveryRuleCacheKeyQueryStringBehaviorActionParameters",
+            "DeliveryRuleRouteConfigurationOverrideActionParameters"
+          ],
+          "x-ms-enum": {
+            "name": "DeliveryRuleActionParametersType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CertificateSourceParameters": {
+      "description": "Defines the parameters for certificate source",
+      "type": "object",
+      "discriminator": "typeName",
+      "required": [
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "CdnCertificateSourceParameters",
+            "KeyVaultCertificateSourceParameters"
+          ],
+          "x-ms-enum": {
+            "name": "CertificateSourceParametersType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "Endpoint": {
       "description": "CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The CDN endpoint uses the URL format <endpointname>.azureedge.net.",
       "type": "object",
@@ -3991,16 +4077,15 @@
     "RemoteAddressMatchConditionParameters": {
       "description": "Defines the parameters for RemoteAddress match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleRemoteAddressConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleRemoteAddressConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4038,16 +4123,15 @@
     "RequestMethodMatchConditionParameters": {
       "description": "Defines the parameters for RequestMethod match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleRequestMethodConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleRequestMethodConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4084,7 +4168,11 @@
               "DELETE",
               "OPTIONS",
               "TRACE"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "RequestMethodMatchValue",
+              "modelAsString": true
+            }
           }
         }
       }
@@ -4092,16 +4180,15 @@
     "QueryStringMatchConditionParameters": {
       "description": "Defines the parameters for QueryString match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleQueryStringConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleQueryStringConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4146,16 +4233,15 @@
     "PostArgsMatchConditionParameters": {
       "description": "Defines the parameters for PostArgs match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRulePostArgsConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRulePostArgsConditionParameters"
-          ]
-        },
         "selector": {
           "description": "Name of PostArg to be matched",
           "type": "string"
@@ -4204,16 +4290,15 @@
     "RequestUriMatchConditionParameters": {
       "description": "Defines the parameters for RequestUri match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleRequestUriConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleRequestUriConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4258,16 +4343,15 @@
     "RequestHeaderMatchConditionParameters": {
       "description": "Defines the parameters for RequestHeader match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleRequestHeaderConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleRequestHeaderConditionParameters"
-          ]
-        },
         "selector": {
           "description": "Name of Header to be matched",
           "type": "string"
@@ -4316,16 +4400,15 @@
     "RequestBodyMatchConditionParameters": {
       "description": "Defines the parameters for RequestBody match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleRequestBodyConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleRequestBodyConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4370,16 +4453,15 @@
     "RequestSchemeMatchConditionParameters": {
       "description": "Defines the parameters for RequestScheme match conditions ",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleRequestSchemeConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleRequestSchemeConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4407,7 +4489,11 @@
             "enum": [
               "HTTP",
               "HTTPS"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "RequestSchemeMatchValue",
+              "modelAsString": true
+            }
           }
         }
       }
@@ -4415,16 +4501,15 @@
     "UrlPathMatchConditionParameters": {
       "description": "Defines the parameters for UrlPath match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleUrlPathMatchConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleUrlPathMatchConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4470,16 +4555,15 @@
     "UrlFileExtensionMatchConditionParameters": {
       "description": "Defines the parameters for UrlFileExtension match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleUrlFileExtensionMatchConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleUrlFileExtensionMatchConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4524,16 +4608,15 @@
     "UrlFileNameMatchConditionParameters": {
       "description": "Defines the parameters for UrlFilename match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleUrlFilenameConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleUrlFilenameConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4578,16 +4661,15 @@
     "HttpVersionMatchConditionParameters": {
       "description": "Defines the parameters for HttpVersion match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleHttpVersionConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleHttpVersionConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4623,16 +4705,15 @@
     "CookiesMatchConditionParameters": {
       "description": "Defines the parameters for Cookies match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleCookiesConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleCookiesConditionParameters"
-          ]
-        },
         "selector": {
           "description": "Name of Cookies to be matched",
           "type": "string"
@@ -4681,16 +4762,15 @@
     "IsDeviceMatchConditionParameters": {
       "description": "Defines the parameters for IsDevice match conditions",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleIsDeviceConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleIsDeviceConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4715,7 +4795,11 @@
             "enum": [
               "Mobile",
               "Desktop"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "IsDeviceMatchValue",
+              "modelAsString": true
+            }
           }
         },
         "transforms": {
@@ -4731,16 +4815,15 @@
       "description": "Defines the parameters for SocketAddress match conditions",
       "type": "object",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleSocketAddrConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleSocketAddrConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4778,16 +4861,15 @@
       "description": "Defines the parameters for ClientPort match conditions",
       "type": "object",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleClientPortConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleClientPortConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4833,16 +4915,15 @@
       "description": "Defines the parameters for ServerPort match conditions",
       "type": "object",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleServerPortConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleServerPortConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4888,16 +4969,15 @@
       "description": "Defines the parameters for HostName match conditions",
       "type": "object",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleHostNameConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleHostNameConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -4943,16 +5023,15 @@
       "description": "Defines the parameters for SslProtocol match conditions",
       "type": "object",
       "required": [
-        "operator",
-        "typeName"
+        "operator"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleSslProtocolConditionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleConditionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleSslProtocolConditionParameters"
-          ]
-        },
         "operator": {
           "description": "Describes operator to be matched",
           "type": "string",
@@ -5008,7 +5087,7 @@
             "AfdUrlSigning"
           ],
           "x-ms-enum": {
-            "name": "DeliveryRuleAction",
+            "name": "DeliveryRuleActionName",
             "modelAsString": true
           }
         }
@@ -5035,16 +5114,15 @@
     "UrlRedirectActionParameters": {
       "description": "Defines the parameters for the url redirect action.",
       "required": [
-        "redirectType",
-        "typeName"
+        "redirectType"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleUrlRedirectActionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleActionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleUrlRedirectActionParameters"
-          ]
-        },
         "redirectType": {
           "description": "The redirect type the rule will use when redirecting traffic.",
           "type": "string",
@@ -5110,16 +5188,13 @@
     },
     "UrlSigningActionParameters": {
       "description": "Defines the parameters for the Url Signing action.",
-      "required": [
-        "typeName"
+      "x-ms-discriminator-value": "DeliveryRuleUrlSigningActionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleActionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleUrlSigningActionParameters"
-          ]
-        },
         "algorithm": {
           "description": "Algorithm to use for URL signing",
           "type": "string",
@@ -5190,16 +5265,15 @@
     "OriginGroupOverrideActionParameters": {
       "description": "Defines the parameters for the origin group override action.",
       "required": [
-        "originGroup",
-        "typeName"
+        "originGroup"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleOriginGroupOverrideActionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleActionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleOriginGroupOverrideActionParameters"
-          ]
-        },
         "originGroup": {
           "description": "defines the OriginGroup that would override the DefaultOriginGroup.",
           "type": "object",
@@ -5229,16 +5303,15 @@
       "description": "Defines the parameters for the url rewrite action.",
       "required": [
         "sourcePattern",
-        "destination",
-        "typeName"
+        "destination"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleUrlRewriteActionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleActionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleUrlRewriteActionParameters"
-          ]
-        },
         "sourcePattern": {
           "description": "define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched.",
           "type": "string"
@@ -5293,16 +5366,15 @@
       "description": "Defines the parameters for the request header action.",
       "required": [
         "headerAction",
-        "headerName",
-        "typeName"
+        "headerName"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleHeaderActionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleActionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleHeaderActionParameters"
-          ]
-        },
         "headerAction": {
           "description": "Action to perform",
           "type": "string",
@@ -5348,16 +5420,15 @@
       "description": "Defines the parameters for the cache expiration action.",
       "required": [
         "cacheBehavior",
-        "cacheType",
-        "typeName"
+        "cacheType"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleCacheExpirationActionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleActionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleCacheExpirationActionParameters"
-          ]
-        },
         "cacheBehavior": {
           "description": "Caching behavior for the requests",
           "type": "string",
@@ -5410,16 +5481,15 @@
     "CacheKeyQueryStringActionParameters": {
       "description": "Defines the parameters for the cache-key query string action.",
       "required": [
-        "queryStringBehavior",
-        "typeName"
+        "queryStringBehavior"
+      ],
+      "x-ms-discriminator-value": "DeliveryRuleCacheKeyQueryStringBehaviorActionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleActionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleCacheKeyQueryStringBehaviorActionParameters"
-          ]
-        },
         "queryStringBehavior": {
           "description": "Caching behavior for the requests",
           "type": "string",
@@ -5463,16 +5533,13 @@
     "RouteConfigurationOverrideActionParameters": {
       "description": "Defines the parameters for the route configuration override action.",
       "type": "object",
-      "required": [
-        "typeName"
+      "x-ms-discriminator-value": "DeliveryRuleRouteConfigurationOverrideActionParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleActionParameters"
+        }
       ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "DeliveryRuleRouteConfigurationOverrideActionParameters"
-          ]
-        },
         "originGroupOverride": {
           "description": "A reference to the origin group override configuration. Leave empty to use the default origin group on route.",
           "type": "object",
@@ -5830,7 +5897,11 @@
           "type": "string",
           "enum": [
             "KeyVaultSigningKeyParameters"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "KeyVaultSigningKeyParametersType",
+            "modelAsString": true
+          }
         },
         "subscriptionId": {
           "description": "Subscription Id of the user's Key Vault containing the secret",
@@ -6464,16 +6535,15 @@
     "CdnCertificateSourceParameters": {
       "description": "Defines the parameters for using CDN managed certificate for securing custom domain.",
       "required": [
-        "typeName",
         "certificateType"
       ],
+      "x-ms-discriminator-value": "CdnCertificateSourceParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateSourceParameters"
+        }
+      ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "CdnCertificateSourceParameters"
-          ]
-        },
         "certificateType": {
           "description": "Type of certificate used",
           "enum": [
@@ -6509,7 +6579,6 @@
     "KeyVaultCertificateSourceParameters": {
       "description": "Describes the parameters for using a user's KeyVault certificate for securing custom domain.",
       "required": [
-        "typeName",
         "subscriptionId",
         "resourceGroupName",
         "vaultName",
@@ -6517,13 +6586,13 @@
         "updateRule",
         "deleteRule"
       ],
+      "x-ms-discriminator-value": "KeyVaultCertificateSourceParameters",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CertificateSourceParameters"
+        }
+      ],
       "properties": {
-        "typeName": {
-          "type": "string",
-          "enum": [
-            "KeyVaultCertificateSourceParameters"
-          ]
-        },
         "subscriptionId": {
           "description": "Subscription Id of the user's Key Vault containing the SSL certificate",
           "type": "string"
