@@ -138,7 +138,7 @@ alias AdditionalRequestHeaders = {
     """)
   @header("extra-parameters")
   extra_params?: ExtraParameters;
-}
+};
 
 @doc("Controls what happens if extra parameters, undefined by the REST ApI are passed in the JSON request payload.")
 union ExtraParameters {
