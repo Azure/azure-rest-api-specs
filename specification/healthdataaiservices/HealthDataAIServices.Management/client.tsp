@@ -1,8 +1,14 @@
-import "./main.tsp";
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
+import "./main.tsp";
+
 using Azure.ClientGenerator.Core;
-using Microsoft.HealthDataAIServices;
+using Azure.ResourceManager.CommonTypes;
 
 @@clientName(PrivateLinkResource,
     "HealthDataAIServicePrivateLinkResourceData",
