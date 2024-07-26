@@ -5227,7 +5227,7 @@
       "description": "GovernedServiceItem Properties",
       "properties": {
         "id": {
-          "type": "string",
+          "$ref": "#/definitions/ServiceIdentifier",
           "description": "service id"
         },
         "name": {
@@ -5271,7 +5271,10 @@
           },
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "IPGroupResourceId": {
       "type": "string",
@@ -5730,6 +5733,108 @@
         ]
       },
       "readOnly": true
+    },
+    "ServiceIdentifier": {
+      "type": "string",
+      "description": "Identifier for governed services.",
+      "enum": [
+        "aks",
+        "appservice",
+        "azurefirewalls",
+        "containerregistry",
+        "cosmosdb",
+        "dataconnectors",
+        "insights",
+        "keyvault",
+        "logic",
+        "microsoftsql",
+        "monitoring",
+        "postgresql",
+        "privatednszones",
+        "servicebus",
+        "storage"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceIdentifier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "aks",
+            "value": "aks",
+            "description": "Service identifier for AKS"
+          },
+          {
+            "name": "appservice",
+            "value": "appservice",
+            "description": "Service identifier for App Service"
+          },
+          {
+            "name": "azurefirewalls",
+            "value": "azurefirewalls",
+            "description": "Service identifier for Azure Firewalls"
+          },
+          {
+            "name": "containerregistry",
+            "value": "containerregistry",
+            "description": "Service identifier for Container Registry"
+          },
+          {
+            "name": "cosmosdb",
+            "value": "cosmosdb",
+            "description": "Service identifier for CosmosDB"
+          },
+          {
+            "name": "dataconnectors",
+            "value": "dataconnectors",
+            "description": "Service identifier for Data Connectors"
+          },
+          {
+            "name": "insights",
+            "value": "insights",
+            "description": "Service identifier for insights"
+          },
+          {
+            "name": "keyvault",
+            "value": "keyvault",
+            "description": "Service identifier for Key Vault"
+          },
+          {
+            "name": "logic",
+            "value": "logic",
+            "description": "Service identifier for Logic"
+          },
+          {
+            "name": "microsoftsql",
+            "value": "microsoftsql",
+            "description": "Service identifier for Microsoft SQL"
+          },
+          {
+            "name": "monitoring",
+            "value": "monitoring",
+            "description": "Service identifier for Monitoring"
+          },
+          {
+            "name": "postgresql",
+            "value": "postgresql",
+            "description": "Service identifier for PostgreSql"
+          },
+          {
+            "name": "privatednszones",
+            "value": "privatednszones",
+            "description": "Service identifier for Private DNS Zones"
+          },
+          {
+            "name": "servicebus",
+            "value": "servicebus",
+            "description": "Service identifier for Service Bus"
+          },
+          {
+            "name": "storage",
+            "value": "storage",
+            "description": "Service identifier for Storage"
+          }
+        ]
+      }
     },
     "StorageAccountResourceId": {
       "type": "string",
