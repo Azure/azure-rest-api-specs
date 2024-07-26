@@ -33,6 +33,9 @@
           "fullyQualifiedDomainName": "replica-server.database.mysql.azure.com",
           "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testgr/providers/Microsoft.DBforMySQL/flexibleServers/source-server",
           "availabilityZone": "3",
+          "maintenancePolicy": {
+            "patchStrategy": "Regular"
+          },
           "maintenanceWindow": {
             "customWindow": "Disabled",
             "dayOfWeek": 0,
@@ -53,7 +56,8 @@
           "highAvailability": {
             "mode": "Disabled",
             "state": "NotEnabled"
-          }
+          },
+          "databasePort": 3306
         },
         "location": "Southeast Asia",
         "tags": {
@@ -103,7 +107,8 @@
           "highAvailability": {
             "mode": "Disabled",
             "state": "NotEnabled"
-          }
+          },
+          "databasePort": 3306
         },
         "location": "Southeast Asia",
         "tags": {

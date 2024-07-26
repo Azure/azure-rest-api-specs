@@ -52,6 +52,9 @@
           },
           "Create a server with byok": {
             "$ref": "./examples/ServerCreateWithBYOK.json"
+          },
+          "Create a server with non-default database port": {
+            "$ref": "./examples/ServerCreateWithDatabasePort.json"
           }
         },
         "description": "Creates a new server or updates an existing server. The update action will overwrite the existing server.",
@@ -119,6 +122,12 @@
           },
           "Update server customer maintenance window": {
             "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
+          },
+          "Update server to opt in virtual canary": {
+            "$ref": "./examples/MaintenancePolicyPatchOptInVirtualCanary.json"
+          },
+          "Update server to opt out virtual canary": {
+            "$ref": "./examples/MaintenancePolicyPatchOptOutVirtualCanary.json"
           },
           "Update server with byok": {
             "$ref": "./examples/ServerUpdateWithBYOK.json"
@@ -901,6 +910,16 @@
         }
       }
     },
+    "MaintenancePolicy": {
+      "type": "object",
+      "description": "Maintenance policy of a server.",
+      "properties": {
+        "patchStrategy": {
+          "$ref": "#/definitions/PatchStrategy",
+          "description": "The patch strategy of this server"
+        }
+      }
+    },
     "MaintenanceWindow": {
       "type": "object",
       "description": "Maintenance window of a server.",
@@ -1252,6 +1271,15 @@
           "description": "The fully qualified domain name of a server.",
           "readOnly": true
         },
+        "databasePort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The server database port. Can only be specified when the server is being created.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "storage": {
           "$ref": "#/definitions/Storage",
           "description": "Storage related properties of a server."
@@ -1280,9 +1308,13 @@
           "description": "PrivateEndpointConnections related properties of a server.",
           "readOnly": true
         },
+        "maintenancePolicy": {
+          "$ref": "#/definitions/MaintenancePolicy",
+          "description": "Maintenance policy of a server."
+        },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a server.",
+          "description": "Maintenance window of a server. Known issue: cannot be set during server creation or updated with other properties during server update; must be updated separately.",
           "x-ms-mutability": [
             "update",
             "read"
@@ -1343,6 +1375,10 @@
         "highAvailability": {
           "$ref": "#/definitions/HighAvailability",
           "description": "High availability related properties of a server."
+        },
+        "maintenancePolicy": {
+          "$ref": "#/definitions/MaintenancePolicy",
+          "description": "Maintenance policy of a server."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
@@ -1507,6 +1543,18 @@
       ],
       "x-ms-enum": {
         "name": "StorageRedundancyEnum",
+        "modelAsString": true
+      }
+    },
+    "PatchStrategy": {
+      "type": "string",
+      "description": "Enum to indicate the patch strategy of a server",
+      "enum": [
+        "Regular",
+        "VirtualCanary"
+      ],
+      "x-ms-enum": {
+        "name": "PatchStrategy",
         "modelAsString": true
       }
     }

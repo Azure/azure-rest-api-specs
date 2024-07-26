@@ -5,19 +5,9 @@
     "api-version": "2024-06-01-preview",
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-identity": {}
-        }
-      },
       "properties": {
-        "dataEncryption": {
-          "type": "AzureKeyVault",
-          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-identity",
-          "primaryKeyURI": "https://test.vault.azure.net/keys/key/c8a92236622244c0a4fdb892666f671a",
-          "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-identity",
-          "geoBackupKeyURI": "https://test-geo.vault.azure.net/keys/key/c8a92236622244c0a4fdb892666f671a"
+        "maintenancePolicy": {
+          "patchStrategy": "VirtualCanary"
         }
       }
     }
@@ -40,15 +30,12 @@
           "version": "5.7",
           "state": "Ready",
           "fullyQualifiedDomainName": "mysqltestserver.database.mysql.azure.com",
-          "availabilityZone": "1",
+          "availabilityZone": "3",
           "maintenancePolicy": {
-            "patchStrategy": "Regular"
+            "patchStrategy": "VirtualCanary"
           },
           "maintenanceWindow": {
-            "customWindow": "Disabled",
-            "dayOfWeek": 0,
-            "startHour": 0,
-            "startMinute": 0
+            "customWindow": "Disabled"
           },
           "replicationRole": "None",
           "replicaCapacity": 10,
@@ -62,9 +49,8 @@
             "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00"
           },
           "highAvailability": {
-            "mode": "ZoneRedundant",
-            "state": "Healthy",
-            "standbyAvailabilityZone": "3"
+            "mode": "Disabled",
+            "state": "NotEnabled"
           },
           "databasePort": 3306
         },
@@ -79,8 +65,8 @@
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-06-01-preview",
-        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-06-01-preview"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-02-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-02-01-preview"
       }
     }
   }
