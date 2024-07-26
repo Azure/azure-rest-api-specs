@@ -1027,6 +1027,30 @@
       ],
       "x-ms-discriminator-value": "AksArcDisk"
     },
+    "BgpMultiHopState": {
+      "type": "string",
+      "description": "State for BGP Multi Hop",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "BgpMultiHopState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "BGP multi hop is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "BGP multi hop is disabled"
+          }
+        ]
+      }
+    },
     "BgpPeer": {
       "type": "object",
       "description": "A BgpPeer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)",
@@ -1091,7 +1115,7 @@
           "description": "Peer BGP port"
         },
         "bgpMultiHop": {
-          "$ref": "#/definitions/EnableState",
+          "$ref": "#/definitions/BgpMultiHopState",
           "description": "eBGP multiple hop"
         },
         "holdTime": {
@@ -1167,30 +1191,6 @@
             "name": "DataResilient",
             "value": "DataResilient",
             "description": "Data resilient"
-          }
-        ]
-      }
-    },
-    "EnableState": {
-      "type": "string",
-      "description": "Common state for enable/disable fields",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "EnableState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "The feature is enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "The feature is disabled"
           }
         ]
       }

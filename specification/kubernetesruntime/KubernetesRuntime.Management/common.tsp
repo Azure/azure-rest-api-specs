@@ -33,17 +33,6 @@ enum Versions {
   v2024_08_01: "2024-08-01",
 }
 
-@doc("Common state for enable/disable fields")
-union EnableState {
-  string,
-
-  @doc("The feature is enabled")
-  Enabled: "Enabled",
-
-  @doc("The feature is disabled")
-  Disabled: "Disabled",
-}
-
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The status of the current operation.")

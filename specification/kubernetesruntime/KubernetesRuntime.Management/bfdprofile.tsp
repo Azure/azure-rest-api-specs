@@ -18,6 +18,28 @@ model BfdProfile is ExtensionResource<BfdProfileProperties> {
   name: string;
 }
 
+@doc("State for BFD Echo Mode")
+union EchoModeState {
+  string,
+
+  @doc("Echo mode is enabled")
+  Enabled: "Enabled",
+
+  @doc("Echo mode is disabled")
+  Disabled: "Disabled",
+}
+
+@doc("State for BFD Passive Mode")
+union PassiveModeState {
+  string,
+
+  @doc("Passive mode is enabled")
+  Enabled: "Enabled",
+
+  @doc("Passive mode is disabled")
+  Disabled: "Disabled",
+}
+
 @added(Versions.v2024_08_01)
 @doc("Details of the BfdProfile.")
 model BfdProfileProperties {
@@ -34,10 +56,10 @@ model BfdProfileProperties {
   echoInterval?: int32;
 
   @doc("Echo mode")
-  echoMode?: EnableState;
+  echoMode?: EchoModeState;
 
   @doc("Passive mode")
-  passiveMode?: EnableState;
+  passiveMode?: PassiveModeState;
 
   @doc("Minimul TTL")
   minimulTtl?: int32;

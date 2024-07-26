@@ -17,6 +17,18 @@ model BgpPeer is ExtensionResource<BgpPeerProperties> {
   name: string;
 }
 
+@doc("State for BGP Multi Hop")
+@added(Versions.v2024_08_01)
+union BgpMultiHopState {
+  string,
+
+  @doc("BGP multi hop is enabled")
+  Enabled: "Enabled",
+
+  @doc("BGP multi hop is disabled")
+  Disabled: "Disabled",
+}
+
 @doc("Details of the BgpPeer.")
 model BgpPeerProperties {
   @doc("My ASN")
@@ -38,7 +50,7 @@ model BgpPeerProperties {
 
   @doc("eBGP multiple hop")
   @added(Versions.v2024_08_01)
-  bgpMultiHop?: EnableState;
+  bgpMultiHop?: BgpMultiHopState;
 
   @doc("Hold time, per RFC4271")
   @added(Versions.v2024_08_01)
