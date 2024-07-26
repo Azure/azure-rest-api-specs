@@ -6356,12 +6356,6 @@
           "format": "double",
           "description": "Default oversampling factor. Oversampling will internally request more documents (specified by this multiplier) in the initial search. This increases the set of results that will be reranked using recomputed similarity scores from full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when rerankWithOriginalVectors is true. Higher values improve recall at the expense of latency.",
           "x-nullable": true
-        },
-        "truncationDimension": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of dimensions to truncate the vectors to. Truncating the vectors reduces the size of the vectors and the amount of data that needs to be transferred during search. This can save storage cost and improve search performance at the expense of recall. It should be only used for embeddings trained with Matryoshka Representation Learning (MRL) such as OpenAI text-embedding-3-large (small). The default value is null, which means no truncation.",
-          "x-nullable": true
         }
       },
       "required": [
@@ -9525,11 +9519,6 @@
           "x-nullable": false,
           "description": "A value indicating which split mode to perform."
         },
-        "unit": {
-          "$ref": "#/definitions/SplitSkillUnit",
-          "x-nullable": true,
-          "description": "Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character."
-        },
         "maximumPageLength": {
           "type": "integer",
           "format": "int32",
@@ -9548,17 +9537,15 @@
           "x-nullable": true,
           "description": "Only applicable when textSplitMode is set to 'pages'. If specified, the SplitSkill will discontinue splitting after processing the first 'maximumPagesToTake' pages, in order to improve performance when only a few initial pages are needed from each document."
         },
-        "tokenizerName": {
-          "$ref": "#/definitions/SplitSkillTokenizerName",
+        "unit": {
+          "$ref": "#/definitions/SplitSkillUnit",
           "x-nullable": true,
-          "description": "Only applies if the unit is set to tokens. Options include 'r50k_base', 'p50k_base', 'p50k_edit' and 'cl100k_base'. The default value is 'cl100k_base'."
+          "description": "Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character."
         },
-        "allowedSpecialTokens": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "(Optional) Only applies if the unit is set to tokens. This parameter defines a collection of special tokens that are permitted within the tokenization process."
+        "azureOpenAITokenizerParameters": {
+          "$ref": "#/definitions/AzureOpenAITokenizerParameters",
+          "x-nullable": true,
+          "description": "Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property."
         }
       },
       "externalDocs": {
@@ -9876,7 +9863,7 @@
       "type": "string",
       "enum": [
         "characters",
-        "tokens"
+        "azureOpenAITokens"
       ],
       "x-ms-enum": {
         "name": "SplitSkillUnit",
@@ -9888,15 +9875,32 @@
             "description": "The length will be measured by character."
           },
           {
-            "value": "tokens",
-            "name": "Tokens",
-            "description": "The length will be measured by token."
+            "value": "azureOpenAITokens",
+            "name": "AzureOpenAITokens",
+            "description": "The length will be measured by an AzureOpenAI tokenizer from the tiktoken library."
           }
         ]
       },
       "description": "A value indicating which unit to use."
     },
-    "SplitSkillTokenizerName": {
+    "AzureOpenAITokenizerParameters": {
+      "type": "object",
+      "properties": {
+        "encoderModelName": {
+          "$ref": "#/definitions/EncoderModelName",
+          "x-nullable": true,
+          "description": "Only applies if the unit is set to azureOpenAITokens. Options include 'R50k_base', 'P50k_base', 'P50k_edit' and 'CL100k_base'. The default value is 'CL100k_base'."
+        },
+        "allowedSpecialTokens": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "(Optional) Only applies if the unit is set to azureOpenAITokens. This parameter defines a collection of special tokens that are permitted within the tokenization process."
+        }
+      }
+    },    
+    "EncoderModelName": {
       "type": "string",
       "enum": [
         "r50k_base",
@@ -9905,27 +9909,27 @@
         "cl100k_base"
       ],
       "x-ms-enum": {
-        "name": "SplitSkillTokenizerName",
+        "name": "SplitSkillEncoderModelName",
         "modelAsString": true,
         "values": [
           {
             "value": "r50k_base",
-            "name": "R50k_Base",
+            "name": "R50kBase",
             "description": "Refers to a base model trained with a 50,000 token vocabulary, often used in general natural language processing tasks."
           },
           {
             "value": "p50k_base",
-            "name": "P50k_Base",
+            "name": "P50kBase",
             "description": "A base model with a 50,000 token vocabulary, optimized for prompt-based tasks."
           },
           {
             "value": "p50k_edit",
-            "name": "P50k_Edit",
+            "name": "P50kEdit",
             "description": "Similar to p50k_base but fine-tuned for editing or rephrasing tasks with a 50,000 token vocabulary."
           },
           {
             "value": "cl100k_base",
-            "name": "Cl100k_Base",
+            "name": "CL100kBase",
             "description": "A base model with a 100,000 token vocabulary."
           }
         ]

@@ -32,6 +32,14 @@
         {
           "textSplitMode": "pages",
           "maximumPageLength": 4000,
+          "unit": "azureOpenAITokens",
+          "azureOpenAITokenizerParameters": {
+            "encoderModelName": "cl100k_base",
+            "allowedSpecialTokens": [
+              "[START]",
+              "[END]"
+            ]
+          },
           "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
           "name": "skill3",
           "inputs": [
@@ -152,6 +160,7 @@
             "maximumPageLength": 4000,
             "pageOverlapLength": null,
             "maximumPagesToTake": null,
+            "unit": "azureOpenAITokens",
             "inputs": [
               {
                 "name": "text",
@@ -171,7 +180,14 @@
                 "name": "textItems",
                 "targetName": "pages"
               }
-            ]
+            ],
+            "azureOpenAITokenizerParameters": {
+              "encoderModelName": "cl100k_base",
+              "allowedSpecialTokens": [
+                "[START]",
+                "[END]"
+              ]
+            }
           },
           {
             "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
