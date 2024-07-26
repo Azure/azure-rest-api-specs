@@ -1904,7 +1904,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/IdentityType"
+          "$ref": "#/definitions/ResourceIdentityType"
         },
         "principalId": {
           "type": "string",
@@ -1920,17 +1920,6 @@
             "$ref": "#/definitions/ClusterUserAssignedIdentity"
           }
         }
-      }
-    },
-    "IdentityType": {
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": false
       }
     },
     "IngressProfile": {
@@ -2414,6 +2403,18 @@
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
+      }
+    },
+    "ResourceIdentityType": {
+      "description": "The identity type.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": false
       }
     },
     "Secret": {
