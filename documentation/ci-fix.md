@@ -94,7 +94,6 @@ If you have an issue or with any of checks listed in the first column of the tab
 | `SDK azure-sdk-for-net`           | Wei Hu         |
 | `SDK azure-sdk-for-net-track2`    | Wei Hu         |
 | `SDK azure-sdk-for-python`        | Yuchao Yan     |
-| `SDK azure-sdk-for-python-track2` | Yuchao Yan     |
 
 Do the following:
 

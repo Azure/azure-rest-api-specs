@@ -16,6 +16,7 @@ namespace Microsoft.Monitor;
  */
 @doc("An investigation definition.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 model InvestigationResource is ExtensionResource<InvestigationProperties> {
   /**
    * The name of the investigation.
@@ -35,6 +36,7 @@ model InvestigationResource is ExtensionResource<InvestigationProperties> {
  */
 @doc("Filter operator for dimensions or tags")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 union FilterOperator {
   @doc("Value is included in the values specified")
   include: "include",
@@ -53,6 +55,7 @@ union FilterOperator {
  */
 @doc("The sensitivity which controls the investigation operation.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 union Sensitivity {
   @doc("Low sensitivity for the investigation")
   low: "low",
@@ -71,6 +74,7 @@ union Sensitivity {
  */
 @doc("Denotes the state of the investigation operation.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 union InvestigationProvisioningState {
   string,
   ResourceProvisioningState,
@@ -87,6 +91,7 @@ union InvestigationProvisioningState {
  */
 @doc("The health state of the investigation's scope")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 union HealthState {
   @doc("Investigation health state is unknown")
   `unknown`: "unknown",
@@ -108,6 +113,7 @@ union HealthState {
  */
 @doc("The confidence level of the investigation result")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 union ConfidenceLevel {
   @doc("Investigation result confidence level is unknown")
   `unknown`: "unknown",
@@ -129,6 +135,7 @@ union ConfidenceLevel {
  */
 @doc("The type of the result returned by the investigation")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 union ResultType {
   @doc("Resource health result")
   resourceHealth: "resourceHealth",
@@ -162,6 +169,7 @@ union ResultType {
  */
 @doc("The type of the scope of the investigation")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 union InvestigationScopeType {
   @doc("The investigation ran on a subscription level")
   subscription: "subscription",
@@ -195,6 +203,7 @@ union InvestigationScopeType {
  */
 @doc("The investigation scope source type.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 union ScopeSourceType {
   @doc("Automatic scope")
   automatic: "automatic",
@@ -210,6 +219,7 @@ union ScopeSourceType {
  */
 @doc("Investigation properties with the investigation result")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 model InvestigationProperties {
   @doc("The target ARM resources which the investigation will use.")
   @extension("x-ms-identifiers", [])
@@ -240,6 +250,7 @@ model InvestigationProperties {
  * The run configuration for the investigation.
  */
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 model InvestigationRunConfiguration {
   @doc("Hints used for the investigation run")
   @extension("x-ms-identifiers", [])
@@ -267,6 +278,7 @@ model InvestigationRunConfiguration {
  * Filter for dimensions or tags.
  */
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 model Filter {
   @doc("The name of the dimension or tag to filter on.")
   name?: string;
@@ -284,6 +296,7 @@ model Filter {
  */
 @doc("The investigation that ran on the given scope.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 model Investigation {
   @doc("The scope of which this investigation ran on.")
   scope?: string;
@@ -310,6 +323,7 @@ model Investigation {
  * The execution details of the investigation.
  */
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 model Execution {
   @doc("The time the investigation completed running")
   completedOn?: utcDateTime;
@@ -323,6 +337,7 @@ model Execution {
  * The investigation result.
  */
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 model InvestigationResult {
   @doc("The investigation scope source type.")
   scopeType?: ScopeSourceType;
@@ -357,6 +372,7 @@ model InvestigationResult {
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 @extension("x-ms-azure-resource", true)
 model Resource {
   /**
@@ -387,12 +403,14 @@ model Resource {
 #suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "For backward compatibility"
 @armResourceOperations(InvestigationResource)
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@removed(Microsoft.Monitor.Versions.v2024_10_01)
 interface Investigations {
   /**
    * Gets an investigation.
    */
   @doc("Returns the specific Investigation data.")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+  @removed(Microsoft.Monitor.Versions.v2024_10_01)
   getAtResource is ArmResourceRead<InvestigationResource>;
 
   /**
@@ -400,6 +418,7 @@ interface Investigations {
    */
   @doc("Create or Update an Investigation")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+  @removed(Microsoft.Monitor.Versions.v2024_10_01)
   createOrUpdateAtResource is ArmResourceCreateOrUpdateAsync<InvestigationResource>;
 
   /**
@@ -407,6 +426,7 @@ interface Investigations {
    */
   @doc("Delete this Investigation.")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+  @removed(Microsoft.Monitor.Versions.v2024_10_01)
   deleteAtResource is ArmResourceDeleteSync<InvestigationResource>;
 
   /**
@@ -416,6 +436,7 @@ interface Investigations {
   @operationId("Investigations_ListAtResource")
   @doc("Returns all the investigations of a specific resource.")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+  @removed(Microsoft.Monitor.Versions.v2024_10_01)
   listAtResource is ArmResourceListByParent<
     InvestigationResource,
     {
@@ -434,6 +455,7 @@ interface Investigations {
    */
   @doc("Returns all the investigations of a specific subscription.")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+  @removed(Microsoft.Monitor.Versions.v2024_10_01)
   listAtSubscription is ArmListBySubscription<
     InvestigationResource,
     {
