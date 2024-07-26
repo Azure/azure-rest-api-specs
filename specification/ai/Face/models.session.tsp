@@ -21,7 +21,7 @@ union LivenessOperationMode {
 }
 
 @doc("Request model for creating liveness session.")
-model CreateLivenessSessionParameters {
+model CreateLivenessSessionContent {
   @doc("Type of liveness mode the client should follow.")
   livenessOperationMode: LivenessOperationMode;
 
@@ -44,8 +44,8 @@ model CreateLivenessSessionParameters {
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
 @doc("Request for creating liveness with verify session.")
-model CreateLivenessWithVerifySessionParameters
-  is CreateLivenessSessionParameters {
+model CreateLivenessWithVerifySessionJsonContent
+  is CreateLivenessSessionContent {
   @doc("Whether or not return the verify image hash.")
   @added(Versions.v1_2_preview_1)
   returnVerifyImageHash?: boolean;
@@ -294,10 +294,10 @@ model LivenessSessionAuditEntry {
 }
 
 @doc("Request of liveness with verify session creation.")
-model CreateLivenessWithVerifySessionMultipartBody {
+model CreateLivenessWithVerifySessionMultipartContent {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
-  Parameters: CreateLivenessWithVerifySessionParameters;
+  Parameters: CreateLivenessWithVerifySessionJsonContent;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
@@ -312,7 +312,7 @@ model CreateLivenessWithVerifySessionRequest {
 
   @doc("Request content of liveness with verify session creation.")
   @body
-  body: CreateLivenessWithVerifySessionMultipartBody;
+  body: CreateLivenessWithVerifySessionMultipartContent;
 }
 
 @added(Versions.v1_2_preview_1)

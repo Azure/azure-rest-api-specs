@@ -70,7 +70,7 @@ interface LivenessSessionOperations {
   @returnsDoc(SessionCreationSuccess)
   createLivenessSession is FaceResourceCreateWithServiceProvidedName<
     LivenessSession,
-    BodyParameter<CreateLivenessSessionParameters>,
+    BodyParameter<CreateLivenessSessionContent>,
     CreateLivenessSessionResult
   >;
 
@@ -119,7 +119,7 @@ interface LivenessSessionOperations {
   @sharedRoute
   createLivenessWithVerifySession is FaceResourceCreateWithServiceProvidedName<
     LivenessWithVerifySession,
-    BodyParameter<CreateLivenessWithVerifySessionParameters>,
+    BodyParameter<CreateLivenessWithVerifySessionJsonContent>,
     CreateLivenessWithVerifySessionResult
   >;
 
