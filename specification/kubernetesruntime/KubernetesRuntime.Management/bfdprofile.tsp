@@ -18,6 +18,7 @@ model BfdProfile is ExtensionResource<BfdProfileProperties> {
   name: string;
 }
 
+@added(Versions.v2024_08_01)
 @doc("State for BFD Echo Mode")
 union EchoModeState {
   string,
@@ -29,6 +30,7 @@ union EchoModeState {
   Disabled: "Disabled",
 }
 
+@added(Versions.v2024_08_01)
 @doc("State for BFD Passive Mode")
 union PassiveModeState {
   string,
