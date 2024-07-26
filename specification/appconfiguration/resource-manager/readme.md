@@ -26,9 +26,18 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-09
+tag: package-preview-2024-07
 ```
 
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.AppConfiguration/preview/2024-07-01-preview/appconfiguration.json
+```
 
 ### Tag: package-preview-2023-09
 
