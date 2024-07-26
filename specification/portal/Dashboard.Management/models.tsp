@@ -225,6 +225,8 @@ model Resource {
   type?: string;
 }
 
+
+
 /**
  * Markdown part metadata.
  */

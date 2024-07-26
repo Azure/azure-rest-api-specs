@@ -33,15 +33,15 @@ interface TenantConfigurations {
   /**
    * Gets the tenant configuration.
    */
-  get is ArmResourceRead<
-    Resource = Configuration,
-    Response = ArmResponse<Configuration> | NotFoundResponse
-  >;
+  get is ArmResourceRead<Resource = Configuration, Response = ArmResponse<Configuration> | NotFoundResponse>;
 
   /**
    * Create the tenant configuration. If configuration already exists - update it. User has to be a Tenant Admin for this operation.
    */
-  create is ArmResourceCreateOrReplaceSync<Configuration, TenantBaseParameters>;
+  create is ArmResourceCreateOrReplaceSync<
+    Configuration,
+    TenantBaseParameters
+  >;
 
   /**
    * Delete the tenant configuration. User has to be a Tenant Admin for this operation.
