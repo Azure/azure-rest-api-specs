@@ -487,14 +487,31 @@
       "description": "A dashboard part metadata.",
       "properties": {
         "type": {
-          "type": "string",
-          "description": "The type of dashboard part."
+          "$ref": "#/definitions/DashboardPartMetadataType"
         }
       },
       "discriminator": "type",
       "required": [
         "type"
       ]
+    },
+    "DashboardPartMetadataType": {
+      "type": "string",
+      "description": "The dashboard part metadata type.",
+      "enum": [
+        "Extension/HubsExtension/PartType/MarkdownPart"
+      ],
+      "x-ms-enum": {
+        "name": "DashboardPartMetadataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "markdown",
+            "value": "Extension/HubsExtension/PartType/MarkdownPart",
+            "description": "The markdown part type."
+          }
+        ]
+      }
     },
     "DashboardParts": {
       "type": "object",
