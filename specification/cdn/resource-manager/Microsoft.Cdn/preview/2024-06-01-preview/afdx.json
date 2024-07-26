@@ -7187,7 +7187,6 @@
             "Microsoft.Cdn/profiles/originGroups/origins",
             "Microsoft.Cdn/profiles/ruleSets",
             "Microsoft.Cdn/profiles/ruleSets/rules",
-            "Microsoft.Cdn/profiles/customDomains",
             "Microsoft.Cdn/profiles/securityPolicies",
             "Microsoft.Network/frontdoorWebApplicationFirewallPolicies"
           ],
@@ -7295,24 +7294,6 @@
         },
         "currentProperties": {
           "$ref": "#/definitions/RuleProperties"
-        }
-      }
-    },
-    "DeploymentVersionAFDDomainChange": {
-      "type": "object",
-      "description": "Deployment change of the custom domain under the profile",
-      "x-ms-discriminator-value": "Microsoft.Cdn/profiles/customDomains",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentVersionChange"
-        }
-      ],
-      "properties": {
-        "previousProperties": {
-          "$ref": "#/definitions/AFDDomainProperties"
-        },
-        "currentProperties": {
-          "$ref": "#/definitions/AFDDomainProperties"
         }
       }
     },
