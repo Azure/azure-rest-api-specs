@@ -63,8 +63,8 @@ model BfdProfileProperties {
   @doc("Passive mode")
   passiveMode?: PassiveModeState;
 
-  @doc("Minimul TTL")
-  minimulTtl?: int32;
+  @doc("Minimum TTL")
+  minimumTtl?: int32;
 
   @visibility("read")
   @doc("Resource provision state")
