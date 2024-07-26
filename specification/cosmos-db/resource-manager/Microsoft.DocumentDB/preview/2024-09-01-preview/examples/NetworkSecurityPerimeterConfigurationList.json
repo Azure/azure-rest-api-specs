@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "res4410",
+    "accountName": "cosmosTest",
+    "api-version": "2024-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/res4410/providers/Microsoft.DocumentDB/databaseAccounts/cosmosTest/networkSecurityPerimeterConfigurations/dbedb4e0-40e6-4145-81f3-f1314c150774.resourceAssociation1",
+            "name": "dbedb4e0-40e6-4145-81f3-f1314c150774.resourceAssociation1",
+            "type": "Microsoft.DocumentDB/databaseAccounts/networkSecurityPerimeterConfigurations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "networkSecurityPerimeter": {
+                "id": "/subscriptions/dbedb4e0-40e6-4145-81f3-f1314c150774/resourceGroups/res4794/providers/Microsoft.Network/networkSecurityPerimeters/nsp1",
+                "perimeterGuid": "ce2d5953-5c15-40ca-9d51-cc3f4a63b0f5",
+                "location": "East US"
+              },
+              "resourceAssociation": {
+                "name": "association1",
+                "accessMode": "Enforced"
+              },
+              "profile": {
+                "name": "profile1",
+                "accessRulesVersion": 10,
+                "accessRules": [
+                  {
+                    "name": "inVpnRule",
+                    "properties": {
+                      "direction": "Inbound",
+                      "addressPrefixes": [
+                        "148.0.0.0/8",
+                        "152.4.6.0/24"
+                      ]
+                    }
+                  }
+                ],
+                "diagnosticSettingsVersion": 5,
+                "enabledLogCategories": [
+                  "NspPublicInboundPerimeterRulesAllowed",
+                  "NspPublicInboundPerimeterRulesDenied"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
