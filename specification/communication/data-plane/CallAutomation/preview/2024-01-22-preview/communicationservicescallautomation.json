@@ -435,7 +435,6 @@
           "MidConnections"
         ],
         "summary": "Plays audio to participants in the call.",
-        "description": "Plays audio to participants in the call.",
         "operationId": "CallMedia_Play",
         "parameters": [
           {
@@ -622,7 +621,6 @@
           "MidConnections"
         ],
         "summary": "Cancel all media operations in a call.",
-        "description": "Cancel all media operations in a call.",
         "operationId": "CallMedia_CancelAllMediaOperations",
         "parameters": [
           {
@@ -660,7 +658,6 @@
           "MidConnections"
         ],
         "summary": "Recognize media from call.",
-        "description": "Recognize media from call.",
         "operationId": "CallMedia_Recognize",
         "parameters": [
           {
@@ -799,7 +796,6 @@
           "MidConnections"
         ],
         "summary": "Hold participant from the call using identifier.",
-        "description": "Hold participant from the call using identifier.",
         "operationId": "CallMedia_Hold",
         "parameters": [
           {
@@ -846,7 +842,6 @@
           "MidConnections"
         ],
         "summary": "Unhold participants from the call using identifier.",
-        "description": "Unhold participants from the call using identifier.",
         "operationId": "CallMedia_Unhold",
         "parameters": [
           {
@@ -893,7 +888,6 @@
           "MidConnections"
         ],
         "summary": "Send dtmf tones.",
-        "description": "Send dtmf tones.",
         "operationId": "CallMedia_SendDtmfTones",
         "parameters": [
           {
@@ -956,28 +950,23 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Start a dialog.",
-        "description": "Start a dialog.",
         "operationId": "CallDialog_StartDialog",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
-            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
             "name": "dialogId",
             "in": "path",
-            "description": "The dialog id",
             "required": true,
             "type": "string"
           },
           {
             "name": "startDialogRequest",
             "in": "body",
-            "description": "The start dialog request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StartDialogRequest"
@@ -1012,7 +1001,6 @@
           "MidConnections"
         ],
         "summary": "Stop a dialog.",
-        "description": "Stop a dialog.",
         "operationId": "CallDialog_StopDialog",
         "parameters": [
           {
@@ -1655,6 +1643,10 @@
         "transcriptionConfiguration": {
           "$ref": "#/definitions/TranscriptionConfiguration",
           "description": "Live Transcription Configuration."
+        },
+        "startInConferenceMode": {
+          "description": "If passed true, the call will start in an escalated state. (i.e. GroupCall)",
+          "type": "boolean"
         }
       }
     },
@@ -1679,7 +1671,7 @@
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "PowerVirtualAgents"
+      "x-ms-discriminator-value": "powerVirtualAgents"
     },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
@@ -1847,6 +1839,10 @@
         "transcriptionConfiguration": {
           "$ref": "#/definitions/TranscriptionConfiguration",
           "description": "Live Transcription Configuration."
+        },
+        "startInConferenceMode": {
+          "description": "If passed true, the call will start in an escalated state. (i.e. GroupCall)",
+          "type": "boolean"
         }
       }
     },
@@ -2776,7 +2772,7 @@
       }
     },
     "CallLocator": {
-      "description": "The locator used for joining or taking action on a call.",
+      "description": "The locator used for joining or taking action on a call",
       "type": "object",
       "properties": {
         "groupCallId": {
@@ -3175,6 +3171,58 @@
         "invitationId": {
           "description": "Invitation ID used to cancel the request.",
           "type": "string"
+        }
+      }
+    },
+    "AnswerFailed": {
+      "description": "The failed to answer call event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
+        }
+      }
+    },
+    "CreateCallFailed": {
+      "description": "The create call failed event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
     },
