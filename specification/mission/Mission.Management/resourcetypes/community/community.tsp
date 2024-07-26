@@ -36,61 +36,11 @@ model EnclaveListItem {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Identifier for governed services.")
-union ServiceIdentifier {
-  @doc("Service identifier for AKS")
-  aks: "aks",
-
-  @doc("Service identifier for App Service")
-  appservice: "appservice",
-
-  @doc("Service identifier for Azure Firewalls")
-  azurefirewalls: "azurefirewalls",
-
-  @doc("Service identifier for Container Registry")
-  containerregistry: "containerregistry",
-
-  @doc("Service identifier for CosmosDB")
-  cosmosdb: "cosmosdb",
-
-  @doc("Service identifier for Data Connectors")
-  dataconnectors: "dataconnectors",
-
-  @doc("Service identifier for insights")
-  insights: "insights",
-
-  @doc("Service identifier for Key Vault")
-  keyvault: "keyvault",
-
-  @doc("Service identifier for Logic")
-  logic: "logic",
-
-  @doc("Service identifier for Microsoft SQL")
-  microsoftsql: "microsoftsql",
-
-  @doc("Service identifier for Monitoring")
-  monitoring: "monitoring",
-
-  @doc("Service identifier for PostgreSql")
-  postgresql: "postgresql",
-
-  @doc("Service identifier for Private DNS Zones")
-  privatednszones: "privatednszones",
-
-  @doc("Service identifier for Service Bus")
-  servicebus: "servicebus",
-
-  @doc("Service identifier for Storage")
-  storage: "storage",
-
-  string,
-}
-
 @added(Microsoft.Mission.Versions.v2024_06_01_preview)
 @doc("GovernedServiceItem Properties")
 model GovernedServiceItem {
   @doc("service id")
-  id: ServiceIdentifier;
+  id?: string;
 
   @doc("service name")
   @visibility("read")
