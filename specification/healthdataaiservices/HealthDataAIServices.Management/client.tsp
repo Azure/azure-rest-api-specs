@@ -1,16 +1,14 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
-using Azure.ResourceManager.CommonTypes;
+using Azure.ResourceManager;
 
-@@clientName(PrivateLinkResource,
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Using the AI acronym similar to what was done for OpenAI"
+namespace Microsoft.HealthDataAIServices;
+
+@@clientName(CommonTypes.PrivateLinkResource,
     "HealthDataAIServicePrivateLinkResourceData",
     "csharp"
 );
