@@ -209,9 +209,12 @@ interface OperatorApiConnections {
   /**
    * Update an Operator API Connection.
    */
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     OperatorApiConnection,
-    OperatorApiConnectionProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      OperatorApiConnection,
+      OperatorApiConnectionProperties
+    >
   >;
 
   /**
