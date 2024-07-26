@@ -77,11 +77,19 @@ model StandbyVirtualMachinePoolElasticityProfile {
 @armResourceOperations
 interface StandbyVirtualMachinePools {
   get is ArmResourceRead<StandbyVirtualMachinePoolResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyVirtualMachinePoolResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
-  update is ArmResourcePatchSync<
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
     StandbyVirtualMachinePoolResource,
-    StandbyVirtualMachinePoolResourceProperties
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
+  update is ArmCustomPatchSync<
+    StandbyVirtualMachinePoolResource,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StandbyVirtualMachinePoolResource,
+      StandbyVirtualMachinePoolResourceProperties
+    >
   >;
   listByResourceGroup is ArmResourceListByParent<StandbyVirtualMachinePoolResource>;
   listBySubscription is ArmListBySubscription<StandbyVirtualMachinePoolResource>;

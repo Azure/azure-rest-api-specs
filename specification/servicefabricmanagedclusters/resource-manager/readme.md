@@ -27,7 +27,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2024-02-preview
+tag: package-2024-04
 
 directive:
   - suppress: ListInOperationName
@@ -67,6 +67,17 @@ directive:
     reason:
       - Currently systemData is not allowed.
 
+```
+
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-04'
+input-file:
+- Microsoft.ServiceFabric/stable/2024-04-01/managedapplication.json
+- Microsoft.ServiceFabric/stable/2024-04-01/managedcluster.json
+- Microsoft.ServiceFabric/stable/2024-04-01/nodetype.json
 ```
 
 ### Tag: package-2024-02-preview
@@ -285,6 +296,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-go
 ```
 
 ## C#
@@ -306,5 +319,10 @@ csharp:
 
 See configuration in [readme.python.md](./readme.python.md)
 
+## TypeScript
 
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
