@@ -39,7 +39,7 @@ model SubnetConfiguration {
 
   @doc("Subnet ID.")
   @visibility("read")
-  id?: string;
+  id?: Azure.Core.armResourceIdentifier;
 
   @doc("Network prefix size.")
   networkPrefixSize: int32;
@@ -53,7 +53,7 @@ model SubnetConfiguration {
 
   @doc("Network security group ID.")
   @visibility("read")
-  networkSecurityGroupId?: string;
+  networkSecurityGroupId?: Azure.Core.armResourceIdentifier;
 }
 
 @doc("Enclave Virtual Network Properties")
