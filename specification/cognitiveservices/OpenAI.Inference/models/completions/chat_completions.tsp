@@ -401,3 +401,17 @@ model ChatTokenLogProbabilityInfo {
     """)
   bytes: int32[] | null;
 }
+
+/**
+ * Get chat completions request body.
+ */
+@added(ServiceApiVersions.v2023_05_15)
+model GetChatCompletionsBody {
+  /**
+   * The configuration information for a chat completions request.
+   * Completions support a wide variety of tasks and generate text that continues from or "completes"
+   * provided prompt data.
+   */
+  @bodyRoot
+  body: ChatCompletionsOptions;
+}
