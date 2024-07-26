@@ -20,7 +20,7 @@
       "put": {
         "operationId": "Subscriptions_PutTargetDirectory",
         "x-ms-examples": {
-          "cancelSubscription": {
+          "putTargetDirectory": {
             "$ref": "./examples/putTargetDirectory.json"
           }
         },
@@ -37,6 +37,12 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TargetDirectoryResult"
+            }
+          },
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
@@ -54,7 +60,7 @@
       "get": {
         "operationId": "Subscriptions_GetTargetDirectory",
         "x-ms-examples": {
-          "renameSubscription": {
+          "getTargetDirectory": {
             "$ref": "./examples/getTargetDirectory.json"
           }
         },
@@ -87,7 +93,7 @@
       "post": {
         "operationId": "Subscriptions_AcceptTargetDirectory",
         "x-ms-examples": {
-          "enableSubscription": {
+          "acceptTargetDirectory": {
             "$ref": "./examples/acceptTargetDirectory.json"
           }
         },
@@ -117,7 +123,7 @@
       "post": {
         "operationId": "Subscriptions_TargetDirectoryStatus",
         "x-ms-examples": {
-          "enableSubscription": {
+          "targetDirectoryStatus": {
             "$ref": "./examples/targetDirectoryStatus.json"
           }
         },
@@ -141,6 +147,36 @@
             "description": "Describes the error if the operation is not successful.",
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/operations": {
+      "get": {
+        "description": "Lists all of the available Microsoft.Subscription API operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "getOperations": {
+            "$ref": "./examples/getOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -184,14 +220,14 @@
       "type": "object",
       "description": "Subscription Request for Changed Target Directory.",
       "properties": {
-          "$ref": "#/definitions/TargetDirectoryRequestProperties",
-          "description": "Target Directory request properties."
-        }
+        "$ref": "#/definitions/TargetDirectoryRequestProperties",
+        "description": "Target Directory request properties."
+      }
     },
     "TargetDirectoryRequestProperties": {
-      "type":"object",
+      "type": "object",
       "description": "Properties of subscription Request for Changed Target Directory.",
-      "properties":{
+      "properties": {
         "destinationEmail": {
           "description": "The destination Email id where subscription needs to be accepted",
           "type": "string",
@@ -204,20 +240,21 @@
         }
       }
     },
-    "TargetDirectoryStatusResult":{
-      "type":"object",
-      "description":"Subscription Status for accepted request.",
-      "properties":{
-        "status":{
-          "description":"Subscription Status",
-          "type":"string",
+    "TargetDirectoryStatusResult": {
+      "type": "object",
+      "description": "Subscription Status for accepted request.",
+      "properties": {
+        "status": {
+          "description": "Subscription Status",
+          "type": "string",
           "readonly": true
         }
       }
     },
-    "TargetDirectoryResult":{
-      "type":"object",
-      "description":"Subscription Response for Changed Target Directory.",
+    "TargetDirectoryResult": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "Subscription Response for Changed Target Directory.",
       "properties": {
         "id": {
           "description": "Fully qualified ID for the Subscription Changed Directory resource.",
@@ -240,10 +277,10 @@
         }
       }
     },
-    "TargetDirectoryResultProperties":{
-      "type":"object",
-      "description":"Properties of subscription Response for Changed Target Directory.",
-      "properties":{
+    "TargetDirectoryResultProperties": {
+      "type": "object",
+      "description": "Properties of subscription Response for Changed Target Directory.",
+      "properties": {
         "destinationTenantId": {
           "description": "Destination Tenant Id where Subscription will be accepted.",
           "readOnly": true,
@@ -271,6 +308,7 @@
   "parameters": {
     "apiVersionParameter": {
       "name": "api-version",
+      "x-ms-parameter-location": "method",
       "in": "query",
       "required": true,
       "type": "string",
@@ -294,7 +332,7 @@
         "$ref": "#/definitions/TargetDirectoryRequest"
       }
     }
-    },
+  },
   "security": [
     {
       "azure_auth": [
