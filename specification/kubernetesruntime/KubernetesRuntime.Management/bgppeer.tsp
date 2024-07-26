@@ -40,11 +40,11 @@ model BgpPeerProperties {
   @added(Versions.v2024_08_01)
   bgpMultiHop?: EnableState;
 
-  @doc("Hold time")
+  @doc("Hold time, per RFC4271")
   @added(Versions.v2024_08_01)
   holdTime?: string;
 
-  @doc("Keepalive time")
+  @doc("Keepalive time, per RFC4271")
   @added(Versions.v2024_08_01)
   keepAliveTime?: string;
 
