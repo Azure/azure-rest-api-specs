@@ -59,7 +59,7 @@ interface ClusterJobs {
   delete is ArmResourceDeleteWithoutOkAsync<ClusterJob>;
 
   @doc("List ClusterJob resources by Clusters")
-  listByClusters is ArmResourceListByParent<ClusterJob>;
+  listByCluster is ArmResourceListByParent<ClusterJob>;
 }
 
 @@doc(ClusterJob.name, "Name of ClusterJob");

@@ -874,6 +874,10 @@ model NetworkInterfaceProperties {
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @added(Versions.v2024_07_15_preview)
+  @doc("Boolean indicating whether this is a local network interface or if one should be created.")
+  createFromLocal?: boolean = false;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
@@ -1128,6 +1132,14 @@ model VirtualHardDiskProperties {
   @secret
   downloadUrl?: string;
 
+  @added(Versions.v2024_07_15_preview)
+  @doc("Boolean indicating whether this is a local hard disk or if one should be created.")
+  createFromLocal?: boolean = false;
+
+  @added(Versions.v2024_07_15_preview)
+  @doc("Operating system type of the OS disk. Possible values are: Windows, Linux.")
+  osType?: OperatingSystemTypes;
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
@@ -1269,6 +1281,10 @@ model VirtualMachineInstanceProperties {
 
   @doc("Unique identifier defined by ARC to identify the guest of the VM.")
   resourceUid?: string;
+
+  @added(Versions.v2024_07_15_preview)
+  @doc("Boolean indicating whether this is a local virtual machine or if one should be created.")
+  createFromLocal?: boolean = false;
 }
 
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
