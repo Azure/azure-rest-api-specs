@@ -39,49 +39,49 @@ model EnclaveListItem {
 @doc("Identifier for governed services.")
 union ServiceIdentifier {
   @doc("Service identifier for AKS")
-  aks: "aks",
+  AKS: "AKS",
 
   @doc("Service identifier for App Service")
-  appservice: "appservice",
+  AppService: "AppService",
 
   @doc("Service identifier for Azure Firewalls")
-  azurefirewalls: "azurefirewalls",
+  AzureFirewalls: "AzureFirewalls",
 
   @doc("Service identifier for Container Registry")
-  containerregistry: "containerregistry",
+  ContainerRegistry: "ContainerRegistry",
 
   @doc("Service identifier for CosmosDB")
-  cosmosdb: "cosmosdb",
+  CosmosDB: "CosmosDB",
 
   @doc("Service identifier for Data Connectors")
-  dataconnectors: "dataconnectors",
+  DataConnectors: "DataConnectors",
 
-  @doc("Service identifier for insights")
-  insights: "insights",
+  @doc("Service identifier for Insights")
+  Insights: "Insights",
 
   @doc("Service identifier for Key Vault")
-  keyvault: "keyvault",
+  KeyVault: "KeyVault",
 
   @doc("Service identifier for Logic")
-  logic: "logic",
+  Logic: "Logic",
 
   @doc("Service identifier for Microsoft SQL")
-  microsoftsql: "microsoftsql",
+  MicrosoftSql: "MicrosoftSQL",
 
   @doc("Service identifier for Monitoring")
-  monitoring: "monitoring",
+  Monitoring: "Monitoring",
 
-  @doc("Service identifier for PostgreSql")
-  postgresql: "postgresql",
+  @doc("Service identifier for PostgreSQL")
+  PostgreSql: "PostgreSQL",
 
   @doc("Service identifier for Private DNS Zones")
-  privatednszones: "privatednszones",
+  PrivateDNSZones: "PrivateDNSZones",
 
   @doc("Service identifier for Service Bus")
-  servicebus: "servicebus",
+  ServiceBus: "ServiceBus",
 
   @doc("Service identifier for Storage")
-  storage: "storage",
+  Storage: "Storage",
 
   string,
 }
