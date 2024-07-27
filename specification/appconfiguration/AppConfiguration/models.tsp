@@ -209,11 +209,8 @@ model SnapshotListResult {
 }
 
 @doc("A snapshot is a named, immutable subset of an App Configuration store's key-values.")
-@resource("snapshots")
 model Snapshot {
-  @key
   @doc("The name of the snapshot.")
-  @visibility("read")
   name: string;
 
   @doc("The current status of the snapshot.")
