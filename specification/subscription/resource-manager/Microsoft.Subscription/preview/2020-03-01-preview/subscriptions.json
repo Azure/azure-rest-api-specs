@@ -37,12 +37,6 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TargetDirectoryResult"
-            }
-          },
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
@@ -170,15 +164,18 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -232,13 +229,11 @@
       "properties": {
         "destinationEmail": {
           "description": "The destination Email id where subscription needs to be accepted",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "destinationTenantId": {
           "description": "The destination Tenant id where subscription needs to be accepted",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -248,8 +243,7 @@
       "properties": {
         "status": {
           "description": "Subscription Status",
-          "type": "string",
-          "readonly": true
+          "type": "string"
         }
       }
     },
@@ -303,49 +297,6 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time"
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of operations."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Subscription",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            }
-          }
         }
       }
     }
