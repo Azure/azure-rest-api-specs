@@ -724,7 +724,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/standbyVirtualMachines": {
       "get": {
-        "operationId": "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource",
+        "operationId": "StandbyVirtualMachines_ListByStandbyPool",
         "tags": [
           "StandbyVirtualMachines"
         ],
@@ -760,11 +760,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource": {
-            "$ref": "./examples/StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource.json"
           }
         },
         "x-ms-pageable": {
@@ -829,6 +824,24 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "ContainerGroupProfile": {
       "type": "object",
       "description": "Details of the ContainerGroupProfile.",
@@ -1013,8 +1026,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyContainerGroupPoolResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1067,26 +1079,9 @@
         "containerGroupProperties"
       ]
     },
-    "StandbyContainerGroupPoolResourceUpdate": {
+    "StandbyContainerGroupPoolResourcePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the StandbyContainerGroupPoolResource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/StandbyContainerGroupPoolResourceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "StandbyContainerGroupPoolResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the StandbyContainerGroupPoolResource.",
+      "description": "Details of the StandbyContainerGroupPool.",
       "properties": {
         "elasticityProfile": {
           "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfileUpdate",
@@ -1097,6 +1092,21 @@
           "description": "Specifies container group properties of standby container group pools."
         }
       }
+    },
+    "StandbyContainerGroupPoolResourceUpdate": {
+      "type": "object",
+      "description": "A StandbyContainerGroupPoolResource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StandbyContainerGroupPoolResourcePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "StandbyVirtualMachinePoolElasticityProfile": {
       "type": "object",
@@ -1133,8 +1143,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyVirtualMachinePoolResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1201,26 +1210,9 @@
         "virtualMachineState"
       ]
     },
-    "StandbyVirtualMachinePoolResourceUpdate": {
+    "StandbyVirtualMachinePoolResourcePropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the StandbyVirtualMachinePoolResource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/StandbyVirtualMachinePoolResourceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "StandbyVirtualMachinePoolResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the StandbyVirtualMachinePoolResource.",
+      "description": "Details of the StandbyVirtualMachinePool.",
       "properties": {
         "elasticityProfile": {
           "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfileUpdate",
@@ -1247,14 +1239,28 @@
         }
       }
     },
+    "StandbyVirtualMachinePoolResourceUpdate": {
+      "type": "object",
+      "description": "A StandbyVirtualMachinePoolResource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolResourcePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "StandbyVirtualMachineResource": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/StandbyVirtualMachineResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
