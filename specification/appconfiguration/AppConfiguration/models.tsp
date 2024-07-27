@@ -167,10 +167,7 @@ model KeyValueListResult {
 }
 
 @doc("A key-value pair representing application settings.")
-@resource("kv")
 model KeyValue {
-  @key
-  @visibility("read")
   @doc("The key of the key-value.")
   key: string;
 
