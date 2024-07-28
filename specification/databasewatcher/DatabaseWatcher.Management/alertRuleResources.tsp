@@ -10,6 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 
 @armResourceOperations
+@added(Versions.v2024_07_19_preview)
 interface AlertRuleResources {
   get is ArmResourceRead<AlertRuleResource>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<AlertRuleResource>;
@@ -18,6 +19,7 @@ interface AlertRuleResources {
 }
 
 @parentResource(Watcher)
+@added(Versions.v2024_07_19_preview)
 model AlertRuleResource is ProxyResource<AlertRuleResourceProperties> {
   @doc("The alert rule proxy resource name.")
   @key("alertRuleResourceName")
@@ -28,6 +30,7 @@ model AlertRuleResource is ProxyResource<AlertRuleResourceProperties> {
 }
 
 @doc("The generic properties of the alert rule proxy resource.")
+@added(Versions.v2024_07_19_preview)
 model AlertRuleResourceProperties {
   @doc("The resource ID of the alert rule resource.")
   alertRuleResourceId: Azure.Core.armResourceIdentifier<[
