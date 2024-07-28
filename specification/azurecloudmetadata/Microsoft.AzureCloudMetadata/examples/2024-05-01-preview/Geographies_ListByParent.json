@@ -3,25 +3,38 @@
   "operationId": "Geographies_ListByCloud",
   "parameters": {
     "api-version": "2024-05-01-preview",
-    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
-    "resourceGroupName": "testrg",
-    "cloudName": "testcloud"
+    "cloudName": "Public"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/testrg/providers/Microsoft.AzureCloudMetadata/geographies/testgeo",
-            "name": "testgeo",
+            "id": "/providers/Microsoft.AzureCloudMetadata/geographies/au",
+            "name": "Australia",
             "type": "Microsoft.AzureCloudMetadata/geographies",
             "properties": {
-              "guid": "aa41550d-0c35-40e5-a0df-28f6a842c18a",
-              "shortId": "tg",
-              "index": 111,
-              "state": "Approved",
+              "guid": "c4dde81f-f036-4e5c-aa0e-46b0d9151281",
+              "shortId": "au",
+              "index": 2,
+              "fullName": "Australia",
+              "state": "Production SLA",
               "provisioningState": "Succeeded",
-              "cloudResourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/testrg/providers/Microsoft.AzureCloudMetadata/clouds/testcloud"
+              "cloudResourceId": "/providers/Microsoft.AzureCloudMetadata/clouds/Public"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.AzureCloudMetadata/geographies/us",
+            "name": "UnitedStates",
+            "type": "Microsoft.AzureCloudMetadata/geographies",
+            "properties": {
+              "guid": "45774fcc-1267-4388-b94d-b8bd0c202cbc",
+              "shortId": "us",
+              "index": 16,
+              "fullName": "United States",
+              "state": "Production SLA",
+              "provisioningState": "Succeeded",
+              "cloudResourceId": "/providers/Microsoft.AzureCloudMetadata/clouds/Public"
             }
           }
         ],

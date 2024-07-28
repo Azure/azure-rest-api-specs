@@ -291,7 +291,7 @@
     },
     "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/inventory": {
       "get": {
-        "operationId": "Inventory_ListBySolutionConfiguration",
+        "operationId": "Inventory_ListByWidget",
         "tags": [
           "Inventory"
         ],
@@ -327,8 +327,8 @@
           }
         },
         "x-ms-examples": {
-          "Inventory_ListBySolutionConfiguration": {
-            "$ref": "./examples/Inventory_ListBySolutionConfiguration.json"
+          "Inventory_ListByWidget": {
+            "$ref": "./examples/Inventory_ListByWidget.json"
           }
         },
         "x-ms-pageable": {
@@ -385,6 +385,62 @@
             "$ref": "./examples/Inventory_Get.json"
           }
         }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/solutionConfigurations/{solutionConfiguration}/syncNow": {
+      "post": {
+        "operationId": "SolutionConfigurations_SyncNow",
+        "tags": [
+          "SolutionConfigurations"
+        ],
+        "description": "Trigger immediate sync with source cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "solutionConfiguration",
+            "in": "path",
+            "description": "Represent Solution Configuration Resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionConfigurations_SyncNow": {
+            "$ref": "./examples/SolutionConfigurations_SyncNow.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridConnectivity/generateAwsTemplate": {
@@ -645,6 +701,10 @@
               "$ref": "#/definitions/PublicCloudConnector"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -968,6 +1028,24 @@
         }
       }
     },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -1093,12 +1171,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InventoryProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1134,12 +1207,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PublicCloudConnectorProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1200,26 +1268,9 @@
         "hostType"
       ]
     },
-    "PublicCloudConnectorUpdate": {
+    "PublicCloudConnectorPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the PublicCloudConnector.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/PublicCloudConnectorUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PublicCloudConnectorUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the PublicCloudConnector.",
+      "description": "Properties of public cloud connectors.",
       "properties": {
         "awsCloudProfile": {
           "$ref": "#/definitions/AwsCloudProfileUpdate",
@@ -1227,18 +1278,28 @@
         }
       }
     },
+    "PublicCloudConnectorUpdate": {
+      "type": "object",
+      "description": "Public Cloud Connector",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicCloudConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "SolutionConfiguration": {
       "type": "object",
       "description": "Solution Configuration",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SolutionConfigurationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1306,6 +1367,20 @@
         "solutionType"
       ]
     },
+    "SolutionConfigurationPropertiesUpdate": {
+      "type": "object",
+      "description": "Solution configuration resource.",
+      "properties": {
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution"
+        },
+        "solutionSettings": {
+          "$ref": "#/definitions/SolutionSettings",
+          "description": "Solution settings"
+        }
+      }
+    },
     "SolutionConfigurationStatus": {
       "type": "string",
       "description": "Solution Configuration Status.",
@@ -1344,27 +1419,18 @@
     },
     "SolutionConfigurationUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the SolutionConfiguration.",
+      "description": "Solution Configuration",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SolutionConfigurationUpdateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/SolutionConfigurationPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "SolutionConfigurationUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the SolutionConfiguration.",
-      "properties": {
-        "solutionType": {
-          "type": "string",
-          "description": "The type of the solution"
-        },
-        "solutionSettings": {
-          "$ref": "#/definitions/SolutionSettings",
-          "description": "Solution settings"
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
-      }
+      ]
     },
     "SolutionSettings": {
       "type": "object",
@@ -1461,12 +1527,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SolutionTypeProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [

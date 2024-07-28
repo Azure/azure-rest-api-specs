@@ -355,6 +355,12 @@ interface SolutionConfigurations {
   >;
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
   listByWidget is ArmResourceListAtScope<SolutionConfiguration>;
+
+  @doc("Trigger immediate sync with source cloud")
+  syncNow is ArmResourceActionNoResponseContentAsync<
+    SolutionConfiguration,
+    void
+  >;
 }
 
 @armResourceOperations

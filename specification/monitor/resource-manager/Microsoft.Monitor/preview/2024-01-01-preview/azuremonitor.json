@@ -1112,6 +1112,11 @@
           "$ref": "#/definitions/Metrics",
           "description": "Information about metrics for the Azure Monitor workspace"
         },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.",
+          "readOnly": true
+        },
         "defaultIngestionSettings": {
           "$ref": "#/definitions/IngestionSettings",
           "description": "The Data Collection Rule and Endpoint used for ingestion by default.",
@@ -1128,11 +1133,6 @@
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
           "description": "Gets or sets allow or disallow public network access to workspace",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.",
           "readOnly": true
         }
       }
@@ -1467,7 +1467,7 @@
     },
     "IngestionSettings": {
       "type": "object",
-      "description": "Settings for data ingestion",
+      "description": "The Data Collection Rule and Endpoint used for ingestion by default.",
       "properties": {
         "dataCollectionRuleResourceId": {
           "type": "string",
@@ -1789,7 +1789,7 @@
     },
     "Metrics": {
       "type": "object",
-      "description": "Information about metrics for the workspace",
+      "description": "Information about metrics for the Azure Monitor workspace.",
       "properties": {
         "prometheusQueryEndpoint": {
           "type": "string",

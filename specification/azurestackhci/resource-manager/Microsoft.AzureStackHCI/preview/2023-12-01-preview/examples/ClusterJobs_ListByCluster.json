@@ -1,0 +1,54 @@
+{
+  "title": "ClusterJobs_ListByCluster",
+  "operationId": "ClusterJobs_ListByCluster",
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "subscriptionId": "6D37FF61-4C93-4377-B06B-FC6D6D561A7D",
+    "resourceGroupName": "rghci",
+    "clusterName": "Ql40O4-I77S"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "jobType": "AddServer",
+              "arcNodeResourceIds": [
+                "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
+              ],
+              "serverName": "Node-2",
+              "deploymentMode": "Deploy",
+              "hostIpv4Address": "192.168.10.10",
+              "secrets": [
+                {
+                  "secretName": "cluster1-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+                  "eceSecretName": "LocalAdminCredential",
+                  "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-LocalAdminCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4b"
+                },
+                {
+                  "secretName": "cluster2-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63",
+                  "eceSecretName": "AzureStackLCMUserCredential",
+                  "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
+                }
+              ]
+            },
+            "kind": "Windows",
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/clu1/jobs/addServer",
+            "name": "bxefc",
+            "type": "Microsoft.AzureStackHCI/clusters/jobs",
+            "systemData": {
+              "createdBy": "zsnvvvbj",
+              "createdByType": "User",
+              "createdAt": "2024-07-01T17:02:21.168Z",
+              "lastModifiedBy": "qxlrx",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-07-01T17:02:21.168Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/axw"
+      }
+    }
+  }
+}

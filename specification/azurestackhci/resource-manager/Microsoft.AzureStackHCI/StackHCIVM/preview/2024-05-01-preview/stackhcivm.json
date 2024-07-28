@@ -3477,6 +3477,80 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualHardDisks/{virtualHardDiskName}/upload": {
+      "post": {
+        "operationId": "VirtualHardDisks_Upload",
+        "tags": [
+          "VirtualHardDisks"
+        ],
+        "description": "The operation to upload a virtual hard disk.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualHardDiskName",
+            "in": "path",
+            "description": "Name of the virtual hard disk",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualHardDiskUploadRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHardDiskUploadResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UploadVirtualHardDisk": {
+            "$ref": "./examples/VirtualHardDisks_Upload.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -3660,8 +3734,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AttestationStatusProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -3938,8 +4011,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryImageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4049,6 +4121,18 @@
           "$ref": "#/definitions/GalleryImageStatus",
           "description": "The observed state of gallery images",
           "readOnly": true
+        },
+        "sourceVirtualMachineId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the source virtual machine from whose OS disk the gallery image is created.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/virtualMachineInstance"
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -4214,8 +4298,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/GuestAgentProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4388,8 +4471,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/HybridIdentityMetadataProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -4699,8 +4781,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/LogicalNetworkProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4851,8 +4932,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/MarketplaceGalleryImageProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5024,8 +5104,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkInterfaceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5194,8 +5273,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkSecurityGroupProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5602,8 +5680,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SecurityRuleProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5939,8 +6016,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/StorageContainerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6212,8 +6288,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualHardDiskProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6243,6 +6318,17 @@
               }
             ]
           }
+        }
+      }
+    },
+    "VirtualHardDiskDownloadStatus": {
+      "type": "object",
+      "description": "The download status of the virtual hard disk",
+      "properties": {
+        "downloadedSizeInMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The downloaded sized of the virtual hard disk in MB"
         }
       }
     },
@@ -6295,6 +6381,12 @@
           "format": "int32",
           "description": "Physical sector in bytes"
         },
+        "downloadUrl": {
+          "type": "string",
+          "format": "password",
+          "description": "URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.",
+          "x-ms-secret": true
+        },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
@@ -6342,6 +6434,14 @@
         "provisioningStatus": {
           "$ref": "#/definitions/VirtualHardDiskStatusProvisioningStatus",
           "description": "Provisioning status of the vhd"
+        },
+        "downloadStatus": {
+          "$ref": "#/definitions/VirtualHardDiskDownloadStatus",
+          "description": "The download status of the virtual hard disk"
+        },
+        "uploadStatus": {
+          "$ref": "#/definitions/VirtualHardDiskUploadStatus",
+          "description": "The upload status of the virtual hard disk"
         }
       },
       "x-ms-client-flatten": true
@@ -6370,6 +6470,58 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "VirtualHardDiskUploadRequest": {
+      "type": "object",
+      "description": "Request for uploading virtual hard disk.",
+      "properties": {
+        "azureManagedDiskUploadUrl": {
+          "type": "string",
+          "format": "password",
+          "description": "The Azure managed disk SAS URL to upload the virtual hard disk to.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "azureManagedDiskUploadUrl"
+      ]
+    },
+    "VirtualHardDiskUploadResponse": {
+      "type": "object",
+      "description": "Response for uploading virtual hard disk.",
+      "properties": {
+        "virtualHardDiskId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM ID for a Virtual Hard Disk.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/virtualHardDisks"
+              }
+            ]
+          }
+        },
+        "uploadStatus": {
+          "$ref": "#/definitions/VirtualHardDiskUploadStatus",
+          "description": "The upload status of the virtual hard disk"
+        }
+      }
+    },
+    "VirtualHardDiskUploadStatus": {
+      "type": "object",
+      "description": "The upload status of the virtual hard disk",
+      "properties": {
+        "uploadedSizeInMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The uploaded sized of the virtual hard disk in MB"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of Uploading virtual hard disk [Succeeded, Failed, InProgress]"
         }
       }
     },
@@ -6428,8 +6580,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualMachineInstanceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
