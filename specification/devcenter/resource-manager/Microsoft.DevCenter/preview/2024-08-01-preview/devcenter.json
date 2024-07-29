@@ -490,7 +490,7 @@
         "tags": [
           "Plans"
         ],
-        "description": "Partially updates a devcenter plan.",
+        "description": "Partially updates a devcenter plan member.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -799,6 +799,9 @@
           },
           "DevCenters_CreateWithDisabledManagedNetworks": {
             "$ref": "./examples/DevCenters_CreateWithDisabledManagedNetworks.json"
+          },
+          "DevCenters_CreateWithRestrictedResourceUsage": {
+            "$ref": "./examples/DevCenters_CreateWithRestrictedResourceUsage.json"
           }
         }
       },
@@ -1180,6 +1183,277 @@
         "x-ms-examples": {
           "EncryptionSets_Delete": {
             "$ref": "./examples/DevCenterEncryptionSets_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/curationProfiles": {
+      "get": {
+        "tags": [
+          "Curation Profiles"
+        ],
+        "description": "Lists all curation profiles in the dev center",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "CurationProfiles_ListByDevCenter",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CurationProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CurationProfiles_ListByDevCenter": {
+            "$ref": "./examples/CurationProfiles_ListByDevCenter.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/curationProfiles/{curationProfileName}": {
+      "get": {
+        "tags": [
+          "Curation Profiles"
+        ],
+        "description": "Gets a specific curation profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CurationProfileNameParameter"
+          }
+        ],
+        "operationId": "CurationProfiles_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CurationProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CurationProfiles_Get": {
+            "$ref": "./examples/CurationProfiles_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Curation Profiles"
+        ],
+        "description": "Creates or updates an curation profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CurationProfileNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents an curation profile.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CurationProfile"
+            }
+          }
+        ],
+        "operationId": "CurationProfiles_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/CurationProfile"
+            }
+          },
+          "201": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CurationProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CurationProfiles_CreateOrUpdate": {
+            "$ref": "./examples/CurationProfiles_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Curation Profiles"
+        ],
+        "description": "Partially updates an curation profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CurationProfileNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable curation profile properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CurationProfileUpdate"
+            }
+          }
+        ],
+        "operationId": "CurationProfiles_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "Succeeded",
+            "schema": {
+              "$ref": "#/definitions/CurationProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CurationProfiles_Update": {
+            "$ref": "./examples/CurationProfiles_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Curation Profiles"
+        ],
+        "description": "Deletes an curation profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CurationProfileNameParameter"
+          }
+        ],
+        "operationId": "CurationProfiles_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CurationProfiles_Delete": {
+            "$ref": "./examples/CurationProfiles_Delete.json"
           }
         }
       }
@@ -5380,6 +5654,11 @@
             "modelAsString": true
           }
         },
+        "syncStatus": {
+          "description": "The sync status of the member.",
+          "$ref": "#/definitions/PlanMemberSyncStatus",
+          "readOnly": true
+        },
         "tags": {
           "$ref": "commonDefinitions.json#/definitions/Tags",
           "description": "Resource tags."
@@ -5388,6 +5667,40 @@
           "description": "The provisioning state of the resource.",
           "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
           "readOnly": true
+        }
+      }
+    },
+    "PlanMemberSyncStatus": {
+      "description": "The sync status of the plan member.",
+      "type": "object",
+      "properties": {
+        "syncState": {
+          "enum": [
+            "Succeeded",
+            "InProgress",
+            "NotStarted",
+            "Failed",
+            "Canceled"
+          ],
+          "description": "The synchronization state of the plan member.",
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PlanMemberSyncState",
+            "modelAsString": true
+          }
+        },
+        "lastSyncError": {
+          "description": "Error response describing why the sync failed.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+          }
+        },
+        "lastSyncTime": {
+          "description": "When the plan member was last synced.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
         }
       }
     },
@@ -5469,6 +5782,13 @@
         "devBoxProvisioningSettings": {
           "$ref": "#/definitions/DevBoxProvisioningSettings",
           "description": "Settings to be used in the provisioning of all Dev Boxes that belong to this dev center."
+        },
+        "restrictedResourceTypes": {
+          "description": "Indicates the resource types that are restricted from being accessed by a project unless allowed by a curation profile.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevCenterResourceType"
+          }
         }
       }
     },
@@ -5542,6 +5862,19 @@
           "description": "Whether project catalogs associated with projects in this dev center can be configured to sync catalog items.",
           "$ref": "#/definitions/CatalogItemSyncEnableStatus"
         }
+      }
+    },
+    "DevCenterResourceType": {
+      "description": "Indicates dev center resource types.",
+      "enum": [
+        "Images",
+        "AttachedNetworks",
+        "Skus"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DevCenterResourceType",
+        "modelAsString": true
       }
     },
     "DevBoxProvisioningSettings": {
@@ -5887,6 +6220,102 @@
           "$ref": "#/definitions/ProjectNetworkSettings",
           "description": "Network settings that will be enforced on this project.",
           "readOnly": true
+        }
+      }
+    },
+    "CurationProfileListResult": {
+      "description": "Results of the curation profile list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CurationProfile"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CurationProfile": {
+      "description": "Represents an curation profile resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CurationProfileProperties",
+          "description": "Properties of an curation profile."
+        }
+      }
+    },
+    "CurationProfileProperties": {
+      "description": "Properties of an curation profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CurationProfileUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "CurationProfileUpdateProperties": {
+      "description": "Properties of an curation profile. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "resourcePolicies": {
+          "description": "Resource policies that are a part of this curation profile.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourcePolicy"
+          }
+        },
+        "scopes": {
+          "description": "Resources that have access to the shared resources that are a part of this curation profile.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourcePolicy": {
+      "description": "A resource policy.",
+      "type": "object",
+      "properties": {
+        "resources": {
+          "description": "Resources that are included and shared as a part of a curation profile.",
+          "type": "string"
+        },
+        "filter": {
+          "description": "Optional. When specified, this expression is used to filter the resources.",
+          "type": "string"
+        }
+      }
+    },
+    "CurationProfileUpdate": {
+      "description": "The curation profile properties for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CurationProfileUpdateProperties",
+          "description": "Properties of an curation profile to be updated."
         }
       }
     },
@@ -7648,6 +8077,17 @@
       "description": "The name of the devcenter encryption set.",
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "CurationProfileNameParameter": {
+      "name": "curationProfileName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the curation profile.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63
     },
