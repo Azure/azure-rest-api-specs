@@ -23,10 +23,7 @@ namespace Azure.OpenAI;
 @get
 @added(ServiceApiVersions.v2024_07_01_Preview)
 @route("/batches")
-op batchList(
-  @query after?: string,
-  @query limit?: int32,
-): ListBatchesResponse;
+op batchList(@query after?: string, @query limit?: int32): ListBatchesResponse;
 
 /**
  * Creates and executes a batch from an uploaded file of requests.

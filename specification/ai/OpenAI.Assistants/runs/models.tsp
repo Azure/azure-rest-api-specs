@@ -461,12 +461,12 @@ model CreateAndRunThreadOptions {
   @added(ServiceApiVersions.v2024_05_01_preview)
   responseFormat?: AssistantsApiResponseFormatOption | null;
 
-    /**
+  /**
    * Whether to enable parallel function calling during tool use.
    */
-    @encodedName("application/json", "parallel_tool_calls")
-    @added(ServiceApiVersions.v2024_07_01_preview)
-    parallelToolCalls?: boolean = true;  
+  @encodedName("application/json", "parallel_tool_calls")
+  @added(ServiceApiVersions.v2024_07_01_preview)
+  parallelToolCalls?: boolean = true;
 
   ...OptionalNullableMetadata;
 }

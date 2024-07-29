@@ -61,21 +61,29 @@ model BatchCreateRequest {
 union BatchStatus {
   /** The input file is being validated before the batch can begin. */
   validating: "validating",
+
   /** The input file has failed the validation process. */
   failed: "failed",
+
   /** The input file was successfully validated and the batch is currently being executed. */
   in_progress: "in_progress",
+
   /** The batch has completed and the results are being prepared. */
   finalizing: "finalizing",
+
   /** The batch has been completed and the results are ready. */
   completed: "completed",
+
   /** The batch was not able to complete within the 24-hour time window. */
   expired: "expired",
+
   /** Cancellation of the batch has been initiated. */
   cancelling: "cancelling",
+
   /** The batch was cancelled. */
   cancelled: "cancelled",
-  string
+
+  string,
 }
 
 /** The Batch object. */
@@ -227,20 +235,24 @@ model BatchRequestOutput {
   };
 }
 
-@added(ServiceApiVersions.v2024_07_01_Preview)
 /** A list of paginated Batch objects. */
+@added(ServiceApiVersions.v2024_07_01_Preview)
 model ListBatchesResponse {
   /** A human-readable error message. */
   data: Batch[];
+
   /** A human-readable error message. */
   @encodedName("application/json", "first_id")
   firstId?: string;
+
   /** A human-readable error message. */
   @encodedName("application/json", "last_id")
   lastId?: string;
+
   /** A human-readable error message. */
   @encodedName("application/json", "has_more")
   hasMore: boolean;
+
   /** The object type. */
   object: "list";
 }

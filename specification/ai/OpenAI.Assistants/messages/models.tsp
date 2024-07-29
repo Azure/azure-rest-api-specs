@@ -238,7 +238,7 @@ model MessageTextFilePathDetails {
 }
 
 // Url citation + details
-/** 
+/**
  * A citation within the message that points to a specific quote from the webpage returned by the URL.
  * Generated when the assistant uses the "browser" tool to search the web.
  */
@@ -478,7 +478,7 @@ model MessageDeltaTextFilePathAnnotation {
   fileId?: string;
 }
 
-/** 
+/**
  * A citation within the message that points to a specific quote from the webpage returned by URL.
  * Generated when the assistant uses the "browser" tool to search the web.
  */

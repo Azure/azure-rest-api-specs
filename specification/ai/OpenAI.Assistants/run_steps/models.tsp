@@ -373,7 +373,6 @@ model RunStepDeltaCodeInterpreterImageOutputObject {
 /** Browser tool call. */
 @added(ServiceApiVersions.v2024_07_01_preview)
 model RunStepDeltaBingSearchToolCall extends RunStepDeltaToolCall {
-
   /** The type of tool call. This is always going to be `browser` for this type of tool call. */
   type: "browser";
 
