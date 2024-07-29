@@ -62,7 +62,7 @@ model WatcherProperties {
   @visibility("read")
   @doc("The provisioning state of the resource watcher.")
   provisioningState?: DatabaseWatcherProvisioningState;
-  
+
   @doc("The resource ID of a user-assigned managed identity that will be assigned to a new alert rule.")
   @added(Versions.v2024_07_19_preview)
   defaultAlertRuleIdentityResourceId?: armResourceIdentifier<[
