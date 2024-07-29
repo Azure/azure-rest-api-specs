@@ -2282,6 +2282,203 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}/environments/{environmentId}/clusters/{clusterId}/topics/{topicName}": {
+      "get": {
+        "tags": [
+          "confluent topics"
+        ],
+        "summary": "Get confluent topic by Name",
+        "operationId": "Topics_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TopicNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TopicRecord"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connector_Get": {
+            "$ref": "./examples/Topics_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "confluent topics"
+        ],
+        "summary": "Create confluent topics by Name",
+        "operationId": "Topics_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TopicNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Confluent Topics resource model",
+            "schema": {
+              "$ref": "#/definitions/TopicRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TopicRecord"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TopicRecord"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Connector_CreateOrUpdate": {
+            "$ref": "./examples/Topics_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "confluent topics"
+        ],
+        "summary": "Delete confluent topic by name",
+        "operationId": "Topics_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TopicNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Connector_Delete": {
+            "$ref": "./examples/Topics_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3420,6 +3617,34 @@
         }
       }
     },
+    "TopicsInputConfigs": {
+      "description": "Topics input config array",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of topic input config payloads",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/TopicsInputConfig"
+          }
+        }
+      }
+    },
+    "TopicsInputConfig": {
+      "description": "Topics input config",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the topic input config",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of the topic input config",
+          "type": "string"
+        }
+      }
+    },
     "SCConfluentListMetadata": {
       "description": "Metadata of the list",
       "type": "object",
@@ -3725,8 +3950,8 @@
           "description": "Type of topic",
           "type": "string"
         },
-        "topicId": {
-          "description": "Topic Id returned by Confluent",
+        "topicName": {
+          "description": "Topic Name returned by Confluent",
           "type": "string"
         },
         "metadata": {
@@ -3740,6 +3965,10 @@
         "configs": {
           "description": "Config Specification of the topic",
           "$ref": "#/definitions/TopicsRelatedLink"
+        },
+        "inputConfigs": {
+          "description": "Input Config Specification of the topic",
+          "$ref": "#/definitions/TopicsInputConfigs"
         },
         "partitionsReassignments": {
           "description": "Partition Reassignment Specification of the topic",
@@ -4514,10 +4743,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "TopicIdParameter": {
+    "TopicNameParameter": {
       "in": "path",
-      "name": "topicId",
-      "description": "Confluent kafka or schema registry topic id",
+      "name": "topicName",
+      "description": "Confluent kafka or schema registry topic name",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
