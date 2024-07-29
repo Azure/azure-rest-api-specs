@@ -59,7 +59,9 @@ interface AzureLargeInstances {
     and instance name.
     """)
   @delete
-  delete(...ResourceInstanceParameters<AzureLargeInstance>): OkResponse | ErrorResponse;
+  delete(
+    ...ResourceInstanceParameters<AzureLargeInstance>,
+  ): OkResponse | ErrorResponse;
 
   @doc("""
     Patches the Tags field of an Azure Large Instance for the specified

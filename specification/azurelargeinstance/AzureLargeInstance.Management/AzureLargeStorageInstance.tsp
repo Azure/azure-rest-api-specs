@@ -33,7 +33,7 @@ interface AzureLargeStorageInstances {
     group, and instance name.
     """)
   get is ArmResourceRead<AzureLargeStorageInstance>;
-  
+
   @doc("""
     Patches the Tags field of a Azure Large Storage Instance for the specified
     subscription, resource group, and instance name.
@@ -50,7 +50,7 @@ interface AzureLargeStorageInstances {
   @put
   create is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<
-    AzureLargeStorageInstance,
+      AzureLargeStorageInstance,
       Azure.ResourceManager.Foundations.BaseParameters<AzureLargeStorageInstance>
     >,
     AzureLargeStorageInstance,
@@ -66,15 +66,17 @@ interface AzureLargeStorageInstances {
     resource group, and instance name.
     """)
   @delete
-  delete(...ResourceInstanceParameters<AzureLargeStorageInstance>): OkResponse | ErrorResponse;
-  
+  delete(
+    ...ResourceInstanceParameters<AzureLargeStorageInstance>,
+  ): OkResponse | ErrorResponse;
+
   @doc("""
     Gets a list of AzureLargeStorageInstances in the specified subscription and
     resource group. The operations returns various properties of each Azure
     LargeStorage instance.
     """)
   listByResourceGroup is ArmResourceListByParent<AzureLargeStorageInstance>;
-  
+
   @doc("""
     Gets a list of AzureLargeStorageInstances in the specified subscription. The
     operations returns various properties of each Azure LargeStorage instance.
