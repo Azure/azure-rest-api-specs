@@ -49,7 +49,7 @@ interface GalleryImages {
   delete is ArmResourceDeleteWithoutOkAsync<GalleryImage>;
 
   @doc("Lists all of the gallery images in the specified resource group. Use the nextLink property in the response to get the next page of gallery images.")
-  list is ArmResourceListByParent<GalleryImage>;
+  listByResourceGroup is ArmResourceListByParent<GalleryImage>;
 
   @doc("Lists all of the gallery images in the specified subscription. Use the nextLink property in the response to get the next page of gallery images.")
   listAll is ArmListBySubscription<GalleryImage>;

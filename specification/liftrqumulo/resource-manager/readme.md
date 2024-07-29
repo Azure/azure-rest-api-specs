@@ -27,7 +27,32 @@ These are the global settings for the Qumulo.Storage.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-10
+tag: package-2024-06-19
+directive:
+  - rename-model: 
+      from: 'LiftrBase.Storage.FileSystemResourceUpdate'
+      to: FileSystemResourceUpdate
+  - rename-model: 
+      from: 'LiftrBase.Storage.FileSystemResource'
+      to: FileSystemResource
+  - rename-model: 
+      from: 'LiftrBase.Storage.FileSystemResourceUpdateProperties'
+      to: FileSystemResourceUpdateProperties
+  - rename-model: 
+      from: 'LiftrBase.Storage.FileSystemResourceProperties'
+      to: FileSystemResourceProperties
+  - rename-model: 
+      from: 'LiftrBase.MarketplaceDetails'
+      to: MarketplaceDetails
+  - rename-model: 
+      from: 'LiftrBase.MarketplaceSubscriptionStatus'
+      to: MarketplaceSubscriptionStatus
+  - rename-model: 
+      from: 'LiftrBase.UserDetails'
+      to: UserDetails
+  - rename-model: 
+      from: 'LiftrBase.ProvisioningState'
+      to: ProvisioningState
 ```
 
 
@@ -55,6 +80,15 @@ These settings apply only when `--tag=package-2022-10-12-preview` is specified o
 ``` yaml $(tag) == 'package-2022-10-12-preview'
 input-file:
   - Qumulo.Storage/preview/2022-10-12-preview/Qumulo.Storage.json
+```
+
+### Tag: package-2024-06-19
+
+These settings apply only when `--tag=package-2024-06-19` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-06-19'
+input-file:
+  - Qumulo.Storage/stable/2024-06-19/Qumulo.Storage.json
 ```
 
 ---
