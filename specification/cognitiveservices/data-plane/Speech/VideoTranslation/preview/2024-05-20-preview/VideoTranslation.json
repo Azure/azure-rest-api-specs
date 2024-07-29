@@ -113,6 +113,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Consent": {
+            "$ref": "./examples/ConsentOperations_ListConsent.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -158,6 +163,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Consent": {
+            "$ref": "./examples/ConsentOperations_GetConsent.json"
           }
         }
       },
@@ -240,7 +250,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/consenttemplates/{DefaultConsentTemplateLocale}": {
+    "/consenttemplates/{locale}": {
       "get": {
         "operationId": "DefaultConsentTemplateOperations_GetDefaultConsentTemplate",
         "tags": [
@@ -252,7 +262,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "DefaultConsentTemplateLocale",
+            "name": "locale",
             "in": "path",
             "description": "Default consent template ID, use locale as ID.",
             "required": true,
@@ -280,6 +290,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get default consent template.": {
+            "$ref": "./examples/DefaultConsentTemplateOperations_GetDefaultConsentTemplate.json"
           }
         }
       }
@@ -765,6 +780,9 @@
         "x-ms-examples": {
           "Create Iteration": {
             "$ref": "./examples/IterationOperations_CreateOrReplaceIteration.json"
+          },
+          "Create consent": {
+            "$ref": "./examples/ConsentOperations_CreateOrReplaceConsent.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -849,6 +867,10 @@
           "$ref": "#/definitions/localeName",
           "description": "Consent locale name."
         },
+        "description": {
+          "type": "string",
+          "description": "Iteration description"
+        },
         "audioUrl": {
           "type": "string",
           "format": "uri",
@@ -862,9 +884,26 @@
           "type": "string",
           "description": "Company name."
         },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Consent status",
+          "readOnly": true
+        },
         "failureReason": {
           "type": "string",
           "description": "Consent failure reason",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "readOnly": true
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
           "readOnly": true
         }
       },

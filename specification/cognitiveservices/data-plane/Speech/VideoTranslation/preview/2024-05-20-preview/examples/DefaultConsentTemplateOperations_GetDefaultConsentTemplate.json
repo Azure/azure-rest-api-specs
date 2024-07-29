@@ -1,0 +1,29 @@
+{
+  "title": "Get default consent template.",
+  "operationId": "DefaultConsentTemplateOperations_GetDefaultConsentTemplate",
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "api-version": "2024-05-20-preview",
+    "locale": "en-US",
+    "Ocp-Apim-Subscription-Key": "{API Key}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "locale": "en-US",
+        "template": "I [Voice talent name] am aware that recordings of my voice will be used by [Company name] to create and use a synthetic version of my voice.",
+        "slots": {
+          "name": {
+            "localizedSlotName": "Voice talent name",
+            "localizedSlotExample": "David Lee"
+          },
+          "company": {
+            "localizedSlotName": "Company name",
+            "localizedSlotExample": "Microsoft"
+          }
+        }
+      }
+    }
+  }
+}

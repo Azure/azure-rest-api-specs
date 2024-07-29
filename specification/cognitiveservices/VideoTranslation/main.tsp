@@ -262,7 +262,7 @@ model Operation {
 @TypeSpec.Rest.resource("consenttemplates")
 model DefaultConsentTemplate {
   @doc("Default consent template ID, use locale as ID.")
-  @key("DefaultConsentTemplateLocale")
+  @key("locale")
   @visibility("read")
   locale: localeName;
 
@@ -296,6 +296,9 @@ model Consent {
   @doc("Consent locale name.")
   locale: localeName;
 
+  @doc("Iteration description")
+  description?: string;
+
   @doc("Audio file url.")
   audioUrl: url;
 
@@ -305,9 +308,21 @@ model Consent {
   @doc("Company name.")
   companyName: string;
 
+  @doc("Consent status")
+  @visibility("read")
+  status?: Status;
+
   @doc("Consent failure reason")
   @visibility("read")
   failureReason?: string;
+
+  @doc("The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
+  @visibility("read")
+  createdDateTime?: utcDateTime;
+
+  @doc("The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
+  @visibility("read")
+  lastActionDateTime?: utcDateTime;
 }
 
 interface TranslationOperations {
