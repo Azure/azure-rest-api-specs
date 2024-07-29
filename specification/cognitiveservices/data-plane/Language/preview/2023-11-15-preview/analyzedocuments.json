@@ -46,6 +46,55 @@
   },
   "tags": [],
   "paths": {
+    "/analyze-documents/jobs": {
+      "post": {
+        "operationId": "AnalyzeDocumentsSubmitJob",
+        "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeDocumentsJobsInput"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SuccessfulAnalyzeDocumentsJobsTaskSubmitRequest": {
+            "$ref": "./examples/SuccessfulAnalyzeDocumentsJobsTaskSubmitRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/analyze-documents/jobs/{jobId}": {
       "get": {
         "operationId": "AnalyzeDocumentsJobStatus",
@@ -114,56 +163,7 @@
         }
       }
     },
-    "/analyze-text/jobs": {
-      "post": {
-        "operationId": "AnalyzeDocumentsSubmitJob",
-        "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AnalyzeDocumentsJobsInput"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulAnalyzeDocumentsJobsTaskSubmitRequest": {
-            "$ref": "./examples/SuccessfulAnalyzeDocumentsJobsTaskSubmitRequest.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/analyze-text/jobs/{jobId}:cancel": {
+    "/analyze-documents/jobs/{jobId}:cancel": {
       "post": {
         "operationId": "AnalyzeDocumentsCancelJob",
         "summary": "Cancel a long-running Text Analysis job.",
