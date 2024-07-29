@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Red Hat OpenShift Client",
     "description": "Rest API for Azure Red Hat OpenShift 4",
-    "version": "2023-11-22"
+    "version": "2024-08-12-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -26,7 +26,7 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -63,13 +63,13 @@
         "operationId": "OpenShiftVersions_List",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -96,6 +96,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/locations/{location}/platformworkloadidentityroleset": {
+      "get": {
+        "tags": [
+          "PlatformWorkloadIdentityRoleSet"
+        ],
+        "summary": "Lists a mapping of OpenShift versions to identity requirements, which include operatorName, roleDefinitionName, roleDefinitionId, and serviceAccounts.",
+        "description": "This operation returns PlatformWorkloadIdentityRoleSet as a string",
+        "operationId": "PlatformWorkloadIdentityRoleSet_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlatformWorkloadIdentityRoleSetList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.  If the resource doesn't exist, 404 (Not Found) is returned.  If any of the input parameters is wrong, 400 (Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists a mapping of OpenShift versions to identity requirements, which include operatorName, roleDefinitionName, roleDefinitionId, and serviceAccounts.": {
+            "$ref": "./examples/PlatformWorkloadIdentityRoleSet_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/openShiftClusters": {
       "get": {
         "tags": [
@@ -106,10 +149,10 @@
         "operationId": "OpenShiftClusters_List",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -146,13 +189,13 @@
         "operationId": "MachinePools_List",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -199,13 +242,13 @@
         "operationId": "Secrets_List",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -252,13 +295,13 @@
         "operationId": "SyncIdentityProviders_List",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -305,13 +348,13 @@
         "operationId": "SyncSets_List",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -358,13 +401,13 @@
         "operationId": "OpenShiftClusters_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -401,13 +444,13 @@
         "operationId": "OpenShiftClusters_Get",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -446,13 +489,13 @@
         "operationId": "OpenShiftClusters_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -507,13 +550,13 @@
         "operationId": "OpenShiftClusters_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -548,18 +591,18 @@
         "tags": [
           "OpenShiftClusters"
         ],
-        "summary": "Updates a OpenShift cluster with the specified subscription, resource group and resource name.",
+        "summary": "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.",
         "description": "The operation returns properties of a OpenShift cluster.",
         "operationId": "OpenShiftClusters_Update",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -600,7 +643,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Updates a OpenShift cluster with the specified subscription, resource group and resource name.": {
+          "Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.": {
             "$ref": "./examples/OpenShiftClusters_Update.json"
           }
         }
@@ -616,13 +659,13 @@
         "operationId": "OpenShiftClusters_ListAdminCredentials",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -663,13 +706,13 @@
         "operationId": "OpenShiftClusters_ListCredentials",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -710,13 +753,13 @@
         "operationId": "MachinePools_Get",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -768,13 +811,13 @@
         "operationId": "MachinePools_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -841,13 +884,13 @@
         "operationId": "MachinePools_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -899,13 +942,13 @@
         "operationId": "MachinePools_Update",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -968,13 +1011,13 @@
         "operationId": "Secrets_Get",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1026,13 +1069,13 @@
         "operationId": "Secrets_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1099,13 +1142,13 @@
         "operationId": "Secrets_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1157,13 +1200,13 @@
         "operationId": "Secrets_Update",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1226,13 +1269,13 @@
         "operationId": "SyncIdentityProviders_Get",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1284,13 +1327,13 @@
         "operationId": "SyncIdentityProviders_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1357,13 +1400,13 @@
         "operationId": "SyncIdentityProviders_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1415,13 +1458,13 @@
         "operationId": "SyncIdentityProviders_Update",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1484,13 +1527,13 @@
         "operationId": "SyncSets_Get",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1542,13 +1585,13 @@
         "operationId": "SyncSets_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1615,13 +1658,13 @@
         "operationId": "SyncSets_Delete",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1673,13 +1716,13 @@
         "operationId": "SyncSets_Update",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1813,6 +1856,10 @@
         "fipsValidatedModules": {
           "$ref": "#/definitions/FipsValidatedModules",
           "description": "If FIPS validated crypto modules are used"
+        },
+        "oidcIssuer": {
+          "$ref": "#/definitions/OIDCIssuer",
+          "description": "The URL of the managed OIDC issuer in a workload identity cluster."
         }
       }
     },
@@ -1936,7 +1983,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -1979,7 +2026,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -1994,6 +2041,47 @@
           "description": "Count represents the desired number of IPv4 outbound IPs created and managed by Azure for the cluster public load balancer.  Allowed values are in the range of 1 - 20.  The default value is 1.",
           "type": "integer"
         }
+      }
+    },
+    "ManagedServiceIdentity": {
+      "description": "ManagedServiceIdentity stores information about the cluster MSI(s) in a workload identity cluster.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedServiceIdentityType",
+          "description": "The type of the ManagedServiceIdentity resource."
+        },
+        "principalId": {
+          "description": "The PrincipalID of the Identity resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The TenantID provided by the MSI RP",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "A map of user assigned identities attached to the cluster, specified in a type required by Microsoft's Managed Identity team.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "ManagedServiceIdentityType": {
+      "description": "The ManagedServiceIdentity type.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "SystemAssigned,UserAssigned",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true
       }
     },
     "MasterProfile": {
@@ -2044,12 +2132,16 @@
         }
       }
     },
+    "OIDCIssuer": {
+      "description": "OIDCIssuer represents the URL of the managed OIDC issuer in a workload identity cluster.",
+      "type": "string"
+    },
     "OpenShiftCluster": {
       "description": "OpenShiftCluster represents an Azure Red Hat OpenShift cluster.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2059,9 +2151,13 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Identity stores information about the cluster MSI(s) in a workload identity cluster."
         }
       }
     },
@@ -2129,6 +2225,10 @@
           "$ref": "#/definitions/ServicePrincipalProfile",
           "description": "The cluster service principal profile."
         },
+        "platformWorkloadIdentityProfile": {
+          "$ref": "#/definitions/PlatformWorkloadIdentityProfile",
+          "description": "The workload identity profile."
+        },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "The cluster network profile."
@@ -2181,8 +2281,12 @@
           "description": "The cluster properties.",
           "x-ms-client-flatten": true
         },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "Identity stores information about the cluster MSI(s) in a workload identity cluster."
+        },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -2203,7 +2307,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -2285,6 +2389,116 @@
         "modelAsString": true
       }
     },
+    "PlatformWorkloadIdentity": {
+      "description": "PlatformWorkloadIdentity stores information representing a single workload identity.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource ID of the PlatformWorkloadIdentity resource",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The ClientID of the PlatformWorkloadIdentity resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "objectId": {
+          "description": "The ObjectID of the PlatformWorkloadIdentity resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PlatformWorkloadIdentityProfile": {
+      "description": "PlatformWorkloadIdentityProfile encapsulates all information that is specific to workload identity clusters.",
+      "type": "object",
+      "properties": {
+        "upgradeableTo": {
+          "$ref": "#/definitions/UpgradeableTo"
+        },
+        "platformWorkloadIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/PlatformWorkloadIdentity"
+          }
+        }
+      }
+    },
+    "PlatformWorkloadIdentityRole": {
+      "description": "PlatformWorkloadIdentityRole represents a mapping from a particular OCP operator to the built-in role that should be assigned to that operator's corresponding managed identity.",
+      "type": "object",
+      "properties": {
+        "operatorName": {
+          "description": "OperatorName represents the name of the operator that this role is for.",
+          "type": "string"
+        },
+        "roleDefinitionName": {
+          "description": "RoleDefinitionName represents the name of the role.",
+          "type": "string"
+        },
+        "roleDefinitionId": {
+          "description": "RoleDefinitionID represents the resource ID of the role definition.",
+          "type": "string"
+        }
+      }
+    },
+    "PlatformWorkloadIdentityRoleSet": {
+      "description": "PlatformWorkloadIdentityRoleSet represents a mapping from the names of OCP operators to the built-in roles that should be assigned to those operator's corresponding managed identities for a particular OCP version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PlatformWorkloadIdentityRoleSetProperties",
+          "description": "The properties for the PlatformWorkloadIdentityRoleSet resource.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "PlatformWorkloadIdentityRoleSetList": {
+      "description": "PlatformWorkloadIdentityRoleSetList represents a List of role sets.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of role sets.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformWorkloadIdentityRoleSet"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Next Link to next operation.",
+          "type": "string"
+        }
+      }
+    },
+    "PlatformWorkloadIdentityRoleSetProperties": {
+      "description": "PlatformWorkloadIdentityRoleSetProperties represents the properties of a PlatformWorkloadIdentityRoleSet resource.",
+      "type": "object",
+      "properties": {
+        "openShiftVersion": {
+          "description": "OpenShiftVersion represents the version associated with this set of roles.",
+          "type": "string"
+        },
+        "platformWorkloadIdentityRoles": {
+          "description": "PlatformWorkloadIdentityRoles represents the set of roles associated with this version.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformWorkloadIdentityRole"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "PreconfiguredNSG": {
       "description": "PreconfiguredNSG represents whether customers want to use their own NSG attached to the subnets",
       "enum": [
@@ -2329,7 +2543,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -2374,7 +2588,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -2409,7 +2623,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -2452,7 +2666,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -2473,7 +2687,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -2517,7 +2731,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "The system meta data relating to this resource.",
           "readOnly": true
         }
@@ -2528,6 +2742,26 @@
       "type": "object",
       "additionalProperties": {
         "type": "string"
+      }
+    },
+    "UpgradeableTo": {
+      "description": "UpgradeableTo stores a single OpenShift version a workload identity cluster can be upgraded to",
+      "type": "string"
+    },
+    "UserAssignedIdentity": {
+      "description": "UserAssignedIdentity stores information about a user-assigned managed identity in a predefined format required by Microsoft's Managed Identity team.",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "The ClientID of the UserAssignedIdentity resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "The PrincipalID of the UserAssignedIdentity resource",
+          "type": "string",
+          "readOnly": true
+        }
       }
     },
     "VMSize": {
@@ -2559,18 +2793,18 @@
           "description": "The size of the worker VMs."
         },
         "diskSizeGB": {
+          "format": "int32",
           "description": "The disk size of the worker VMs.",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         },
         "subnetId": {
           "description": "The Azure resource ID of the worker subnet.",
           "type": "string"
         },
         "count": {
+          "format": "int32",
           "description": "The number of worker VMs.",
-          "type": "integer",
-          "format": "int32"
+          "type": "integer"
         },
         "encryptionAtHost": {
           "$ref": "#/definitions/EncryptionAtHost",

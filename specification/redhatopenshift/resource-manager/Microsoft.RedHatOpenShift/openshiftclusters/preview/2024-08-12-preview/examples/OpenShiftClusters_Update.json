@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "api-version": "2023-11-22",
-    "subscriptionId": "subscriptionId",
+    "api-version": "2024-08-12-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resourceGroup",
     "resourceName": "resourceName",
     "parameters": {
@@ -19,6 +19,11 @@
         "servicePrincipalProfile": {
           "clientId": "clientId",
           "clientSecret": "clientSecret"
+        },
+        "platformWorkloadIdentityProfile": {
+          "platformWorkloadIdentities": {
+            "": {}
+          }
         },
         "networkProfile": {
           "podCidr": "10.128.0.0/14",
@@ -53,6 +58,12 @@
             "visibility": "Public"
           }
         ]
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "": {}
+        }
       }
     }
   },
@@ -117,6 +128,12 @@
               "ip": "1.2.3.4"
             }
           ]
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "": {}
+          }
         }
       }
     },
@@ -180,6 +197,12 @@
               "ip": "1.2.3.4"
             }
           ]
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "": {}
+          }
         }
       }
     }
