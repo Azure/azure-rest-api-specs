@@ -57,7 +57,7 @@
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
+            "$ref": "#/parameters/chaosFault"
           },
           {
             "name": "chaosFaultRequest",
@@ -111,7 +111,7 @@
             "$ref": "cosmos-db.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
+            "$ref": "#/parameters/chaosFault"
           }
         ],
         "responses": {
@@ -119,6 +119,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/chaosFaultResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -153,7 +159,8 @@
           "type": "string",
           "description": "Container name."
         }
-      }
+      },
+      "description": "A request object to enbale/disable the chaos fault."
     },
     "chaosFaultResponse": {
       "type": "object",
@@ -162,7 +169,8 @@
           "type": "string",
           "description": "Container name."
         }
-      }
+      },
+      "description": "A response object for chaos fault status."
     }
   },
   "parameters": {
