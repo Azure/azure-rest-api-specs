@@ -72,6 +72,218 @@
     }
   ],
   "paths": {
+    "/consents": {
+      "get": {
+        "operationId": "ConsentOperations_ListConsent",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "List consent resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedConsent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/consents/{consentId}": {
+      "get": {
+        "operationId": "ConsentOperations_GetConsent",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Fetch a consent by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "consentId",
+            "in": "path",
+            "description": "Consent ID",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConsentOperations_CreateOrReplaceConsent",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Creates an consent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "consentId",
+            "in": "path",
+            "description": "Consent ID",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/OperationIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Consent"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/consenttemplates/{DefaultConsentTemplateLocale}": {
+      "get": {
+        "operationId": "DefaultConsentTemplateOperations_GetDefaultConsentTemplate",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Fetch a default consent template by locale.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "DefaultConsentTemplateLocale",
+            "in": "path",
+            "description": "Default consent template ID, use locale as ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 16,
+            "pattern": "^[A-Za-z]{2,4}([_-][A-Za-z]{4})?([_-]([A-Za-z]{2}|[0-9]{3}))?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DefaultConsentTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/operations/{operationId}": {
       "get": {
         "operationId": "OperationOperations_GetOperation",
@@ -624,6 +836,94 @@
         }
       }
     },
+    "Consent": {
+      "type": "object",
+      "description": "Consent.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/resourceId",
+          "description": "Consent ID",
+          "readOnly": true
+        },
+        "locale": {
+          "$ref": "#/definitions/localeName",
+          "description": "Consent locale name."
+        },
+        "audioUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Audio file url."
+        },
+        "voiceTalentName": {
+          "type": "string",
+          "description": "Voice talent name."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Company name."
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "Consent failure reason",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "locale",
+        "audioUrl",
+        "voiceTalentName",
+        "companyName"
+      ]
+    },
+    "DefaultConsentTemplate": {
+      "type": "object",
+      "description": "Consent template.",
+      "properties": {
+        "locale": {
+          "$ref": "#/definitions/localeName",
+          "description": "Default consent template ID, use locale as ID.",
+          "readOnly": true
+        },
+        "template": {
+          "type": "string",
+          "description": "Default consent template content",
+          "readOnly": true
+        },
+        "slots": {
+          "type": "object",
+          "description": "Iteration input.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DefaultConsentTemplateSlot"
+          }
+        }
+      },
+      "required": [
+        "locale",
+        "template",
+        "slots"
+      ]
+    },
+    "DefaultConsentTemplateSlot": {
+      "type": "object",
+      "description": "Consent template slot.",
+      "properties": {
+        "localizedSlotName": {
+          "type": "string",
+          "description": "Localized slot name.",
+          "readOnly": true
+        },
+        "localizedSlotExample": {
+          "type": "string",
+          "description": "Localized slot example.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "localizedSlotName",
+        "localizedSlotExample"
+      ]
+    },
     "Iteration": {
       "type": "object",
       "description": "Do one iteration to translate one video file from source locale to target locale, webvtt for content editing is optional for requesting parameter.",
@@ -741,6 +1041,27 @@
       },
       "required": [
         "id"
+      ]
+    },
+    "PagedConsent": {
+      "type": "object",
+      "description": "Paged collection of Consent items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Consent items on this page",
+          "items": {
+            "$ref": "#/definitions/Consent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PagedIteration": {

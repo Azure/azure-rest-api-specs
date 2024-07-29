@@ -258,6 +258,58 @@ model Operation {
   status?: Status;
 }
 
+@doc("Consent template.")
+@TypeSpec.Rest.resource("consenttemplates")
+model DefaultConsentTemplate {
+  @doc("Default consent template ID, use locale as ID.")
+  @key("DefaultConsentTemplateLocale")
+  @visibility("read")
+  locale: localeName;
+
+  @doc("Default consent template content")
+  @visibility("read")
+  template: string;
+
+  @doc("Iteration input.")
+  slots: Record<DefaultConsentTemplateSlot>;
+}
+
+@doc("Consent template slot.")
+model DefaultConsentTemplateSlot {
+  @doc("Localized slot name.")
+  @visibility("read")
+  localizedSlotName: string;
+
+  @doc("Localized slot example.")
+  @visibility("read")
+  localizedSlotExample: string;
+}
+
+@doc("Consent.")
+@TypeSpec.Rest.resource("consents")
+model Consent {
+  @doc("Consent ID")
+  @key("consentId")
+  @visibility("read")
+  id: resourceId;
+
+  @doc("Consent locale name.")
+  locale: localeName;
+
+  @doc("Audio file url.")
+  audioUrl: url;
+
+  @doc("Voice talent name.")
+  voiceTalentName: string;
+
+  @doc("Company name.")
+  companyName: string;
+
+  @doc("Consent failure reason")
+  @visibility("read")
+  failureReason?: string;
+}
+
 interface TranslationOperations {
   @doc("Creates a translation.")
   @pollingOperation(OperationOperations.getOperation)
@@ -301,4 +353,28 @@ interface IterationOperations {
 interface OperationOperations {
   @doc("Fetch a operation by ID.")
   getOperation is ops.ResourceRead<Operation>;
+}
+
+interface DefaultConsentTemplateOperations {
+  @doc("Fetch a default consent template by locale.")
+  getDefaultConsentTemplate is ops.ResourceRead<DefaultConsentTemplate>;
+}
+
+interface ConsentOperations {
+  // Due to PR bulid need both "Create" and "Update" word in operation ID.
+  @doc("Creates an consent.")
+  @pollingOperation(OperationOperations.getOperation)
+  createOrReplaceConsent is ops.LongRunningResourceCreateOrReplace<
+    Consent,
+    RequestHeadersTrait<OperationIdHeader>
+  >;
+
+  @doc("Fetch a consent by ID.")
+  getConsent is ops.ResourceRead<Consent>;
+
+  @doc("List consent resources.")
+  listConsent is ops.ResourceList<
+    Consent,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 }
