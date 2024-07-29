@@ -17,3 +17,10 @@ suppressions:
         - Field `Value` of struct `MicrosoftSerialConsoleClientEnableConsoleResponse` has been removed
         - Field `Value` of struct `MicrosoftSerialConsoleClientGetConsoleStatusResponse` has been removed
         - Function `*SerialPortsClient.Delete` has been removed
+  azure-sdk-for-python:
+    - package: azure-mgmt-serialconsole
+      breaking-changes:
+        - Model DisableSerialConsoleResult no longer has parameter disabled
+        - Model EnableSerialConsoleResult no longer has parameter disabled
+        - Model SerialConsoleStatus no longer has parameter disabled
+        - Removed operation SerialPortsOperations.delete
