@@ -42,72 +42,79 @@ union ActionType {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@doc("Representation of the days in a week in a gregorian calendar")
+@doc("Representation of the possible selection of days in a week in a gregorian calendar for auto actions")
 union WeekDay {
-  @doc("Monday weekday.")
-  Monday: "Monday",
 
-  @doc("Tuesday weekday.")
-  Tuesday: "Tuesday",
+  @doc("Monday")
+  Monday : "Monday",
 
-  @doc("Wednesday weekday.")
-  Wednesday: "Wednesday",
+  @doc("Tuesday")
+  Tuesday : "Tuesday",
 
-  @doc("Thursday weekday.")
-  Thursday: "Thursday",
+  @doc("Wednesday")
+  Wednesday : "Wednesday",
 
-  @doc("Friday weekday.")
-  Friday: "Friday",
+  @doc("Thrusday")
+  Thursday : "Thursday",
 
-  @doc("Saturday weekday.")
-  Saturday: "Saturday",
+  @doc("Friday")
+  Friday : "Friday",
 
-  @doc("Sunday weekday.")
-  Sunday: "Sunday",
+  @doc("Saturday")
+  Saturday : "Saturday",
 
-  string,
+  @doc("Sunday")
+  Sunday : "Sunday",
+
+  @doc("All week days")
+  All : "All",
+  
+  string
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@doc("Representation of the months in a gregorian calendar")
+@doc("Representation of the months available selection in a gregorian calendar for auto actions")
 union Month {
-  @doc("The January month.")
-  January: "January",
+  @doc("January")
+  January : "January",
 
-  @doc("The February month.")
-  February: "February",
+  @doc("February")
+  February : "February",
 
-  @doc("The March month.")
-  March: "March",
+  @doc("March")
+  March : "March",
 
-  @doc("The April month.")
-  April: "April",
+  @doc("April")
+  April : "April",
 
-  @doc("The May month.")
-  May: "May",
+  @doc("May")
+  May : "May",
 
-  @doc("The June month.")
-  June: "June",
+  @doc("June")
+  June : "June",
 
-  @doc("The July month.")
-  July: "July",
+  @doc("July")
+  July : "July",
 
-  @doc("The August month.")
-  August: "August",
+  @doc("August")
+  August : "August",
 
-  @doc("The September month.")
-  September: "September",
+  @doc("September")
+  September : "September",
 
-  @doc("The October month.")
-  October: "October",
+  @doc("October")
+  October : "October",
 
-  @doc("The November month.")
-  November: "November",
+  @doc("November")
+  November : "November",
 
-  @doc("The December month.")
-  December: "December",
+  @doc("December")
+  December : "December",
 
-  string,
+  @doc("All months")
+  All : "All",
+  
+  string
 }
 
 @minValue(1)
@@ -131,7 +138,7 @@ model AutoActionSchedule {
   @doc("The months the auto action is supposed to run on")
   requestedMonths: Month[];
 
-  @doc("The days of the month the auto action is supposed to run on")
+  @doc("The days of the month the auto action is supposed to run on. If empty, it means it will run on every day of the month.")
   requestedDaysOfTheMonth: DayOfTheMonth[];
 
   @doc("The execution parameters the auto action is supposed to follow")
@@ -168,24 +175,62 @@ union OccurrenceState {
   string,
 }
 
+@doc("The type of notification we want to send for auto actions operations.")
+union NotificationType {
+  @doc("Notify through e-mail")
+  Email: "Email",
+
+  string,
+}
+
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@doc("The state of a occurrence")
-model OccurrenceView {
-  @doc("The identifier of the occurrence")
-  occurrenceId: string;
+@doc("The support notification languages by auto action")
+union Laguage {
+  @doc("American english language")
+  EnUs : "en-us",
 
-  @doc("The time the occurrence was scheduled for")
-  scheduledTime: utcDateTime;
+  string,
+}
 
-  @doc("The list of resources the occurrence is targeting")
-  resources: armResourceIdentifier[];
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@doc("The information about where notifications should be sent to about auto actions upcoming operations.")
+model NotificationProperties {
 
-  @doc("The current state of the occurrence")
-  state: OccurrenceState;
+  @doc("Where the notification should be sent. For email, it should follow email format.")
+  destination : string;
 
-  @doc("Error details for the occurrence")
-  @OpenAPI.extension("x-ms-identifiers", ["code"])
-  errorDetails?: Azure.Core.Foundations.Error[];
+  @doc("Type of notification to be sent.")
+  type : NotificationType;
+
+  @doc("The language the notification should be sent on.")
+  language : Laguage;
+
+  @doc("Additional optitional metadata regarding notification.")
+  additionalMetadata? : Record<string>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+scalar validAutoActionResourceId extends armResourceIdentifier<[
+      {
+        type: "Microsoft.Compute/virtualMachines"
+      },
+      {
+        type: "Microsoft.Compute/virtualMachineScaleSets"
+      }
+    ]>;
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@parentResource(AutoAction)
+@doc("Represents an auto action resource metadata.")
+model AutoActionResource
+{
+    @doc("The ARM Id of the resource.")
+    resourceId : validAutoActionResourceId;
+
+    @doc("The desired notification settings for the specified resource.")
+    @OpenAPI.extension("x-ms-identifiers", ["destination"])
+    @visibility("read")
+    notificationSettings? : NotificationProperties[]
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
@@ -206,20 +251,16 @@ model AutoActionProperties {
   endTime?: offsetDateTime;
 
   @doc("The list of the resources the auto action is supposed to perform the actions on")
-  resources: armResourceIdentifier[];
+  @visibility("create", "update")
+  @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
+  resources: AutoActionResource[];
 
   @doc("The schedule the auto action is supposed to follow")
   schedule: AutoActionSchedule;
 
-  @doc("The list of upcoming occurrences for the auto action")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["occurrenceId"])
-  upcomingOccurrences: OccurrenceView[];
-
-  @doc("The list of upcoming occurrences for the auto action")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["occurrenceId"])
-  lastOccurrences: OccurrenceView[];
+  @doc("The notification settings for the auto action")
+  @OpenAPI.extension("x-ms-identifiers", ["destination"])
+  notificationSettings: NotificationProperties[];
 
   @doc("Tell if the auto action is disabled or not")
   @visibility("read")
@@ -230,22 +271,14 @@ model AutoActionProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-alias AutoActionParams = {
-  ...ApiVersionParameter;
-  ...SubscriptionIdParameter;
-  ...ResourceGroupParameter;
-  ...ProviderNamespace<AutoAction>;
-
-  @path
-  @minLength(1)
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @segment("virtualMachines")
-  @doc("The virtualMachine name.")
-  vmName: string;
-};
-
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The auto action resource")
 model AutoAction is TrackedResource<AutoActionProperties> {
   ...ResourceNameParameter<AutoAction>;
+}
+
+model AutoActionVmProperties is AutoActionProperties{};
+
+model AutoActionVm is ExtensionResource<AutoActionVmProperties>{
+  ...ResourceNameParameter<AutoActionVm, KeyName="autoActionName", SegmentName="autoActions">;
 }

@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./autoactionmodels.tsp";
+import "./commons.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -24,26 +25,16 @@ interface AutoActions {
   listByResourceGroup is ArmResourceListByParent<AutoAction>;
   listBySubscription is ArmListBySubscription<AutoAction>;
 
-  @doc("Lists Auto actions per VM.")
-  @segment("autoActions")
-  @listsResource(AutoAction)
-  @armResourceList(AutoAction)
-  @get
-  listByVm(
-    ...AutoActionParams
-  ): ArmResponse<ResourceListResult<AutoAction>> | ErrorResponse;
+  @segment("resources")
+  getResources is ArmResourceListActionSync<AutoAction, AutoActionResource>;
+  attachResources is ArmResourceActionNoContentSync<AutoAction, AutoActionResource[]>;
+  detachResources is ArmResourceActionNoContentSync<AutoAction, AutoActionResource[]>;
 
-  attachResources is ArmResourceActionNoContentSync<
-    AutoAction,
-    armResourceIdentifier[]
-  >;
-  detachResources is ArmResourceActionNoContentSync<
-    AutoAction,
-    armResourceIdentifier[]
-  >;
+  @doc("disables the auto action")
+  disable is ArmResourceActionNoContentNoResponseSync<AutoAction>;
+  @doc("enables the auto action")
+  enable is ArmResourceActionNoContentNoResponseSync<AutoAction>;
 
-  disable is ArmResourceActionNoContentSync<AutoAction, void>;
-  enable is ArmResourceActionNoContentSync<AutoAction, void>;
-  cancelNextOccurrence is ArmResourceActionNoResponseContentAsync<AutoAction, void>;
-  triggerManualOccurrence is ArmResourceActionNoResponseContentAsync<AutoAction, void>;
+  cancelNextOccurrence is ArmResourceActionAsync<AutoAction, void, Occurrence>;
+  triggerManualOccurrence is ArmResourceActionAsync<AutoAction, void, Occurrence>;
 }
