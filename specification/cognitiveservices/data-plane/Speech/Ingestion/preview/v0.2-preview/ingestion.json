@@ -1,0 +1,661 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Registrations API",
+    "version": "v0.2-preview"
+  },
+  "paths": {
+    "/{version}/registrations": {
+      "post": {
+        "tags": [
+          "ApplicationControllerV02Preview"
+        ],
+        "description": "Creates a registration for ingestion.",
+        "operationId": "Registration_Create",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Ocp-Apim-Subscription-Key",
+            "in": "header",
+            "description": "Speech/AI Subscription Key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "registration",
+            "required": true,
+            "description": "Registration Definition",
+            "schema": {
+              "$ref": "#/definitions/BatchRegistrationRequestPayloadV02Preview"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BatchRegistrationResponsePayloadV02Preview"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a registration with customer owned Event Grid resource as the trigger": {
+            "$ref": "./examples/Registrations_CreateRegistration_EventGrid.json"
+          },
+          "Create a registration for transcription only": {
+            "$ref": "./examples/Registrations_CreateRegistration_TranscriptionOnly.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApplicationControllerV02Preview"
+        ],
+        "description": "Gets the list of registrations.",
+        "operationId": "Registrations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Ocp-Apim-Subscription-Key",
+            "in": "header",
+            "description": "Speech/AI Subscription Key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BatchRegistrationResponsePayloadV02Preview"
+              }
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List registrations": {
+            "$ref": "./examples/Registrations_ListRegistrations.json"
+          }
+        }
+      }
+    },
+    "/{version}/registrations/{registrationId}": {
+      "patch": {
+        "tags": [
+          "ApplicationControllerV02Preview"
+        ],
+        "description": "Updates the registration identified by the given ID.",
+        "operationId": "Registration_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registrationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Ocp-Apim-Subscription-Key",
+            "in": "header",
+            "description": "Speech/AI Subscription Key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "registration",
+            "required": true,
+            "description": "Registration Definition",
+            "schema": {
+              "$ref": "#/definitions/BatchRegistrationRequestPayloadV02Preview"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchRegistrationResponsePayloadV02Preview"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a registration by id": {
+            "$ref": "./examples/Registrations_PatchRegistration.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ApplicationControllerV02Preview"
+        ],
+        "description": "Gets the registration identified by the given ID.",
+        "operationId": "Registration_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registrationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Ocp-Apim-Subscription-Key",
+            "in": "header",
+            "description": "Speech/AI Subscription Key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchRegistrationResponsePayloadV02Preview"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a registration by id": {
+            "$ref": "./examples/Registrations_GetRegistration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApplicationControllerV02Preview"
+        ],
+        "description": "Deletes the registration identified by the given ID.",
+        "operationId": "Registration_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registrationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Ocp-Apim-Subscription-Key",
+            "in": "header",
+            "description": "Speech/AI Subscription Key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a registration by id": {
+            "$ref": "./examples/Registrations_DeleteRegistration.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AnalyticsKind": {
+      "enum": [
+        "PromptFlow"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AnalyticsKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyticsPropertiesPayloadV02Preview": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyticsKind"
+        },
+        "endpointResourceId": {
+          "type": "string",
+          "description": "The PromptFlow analytics endpoint resourceId. If it is empty, only transcription '<filename>.json' will be saved in output container. If the endpoint is valid, you will see both transcription file and the analytics file '<filename>.analytics.json'."
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchRegistrationRequestPayloadV02Preview": {
+      "required": [
+        "batchTranscription",
+        "storage"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the batch analytics registration."
+        },
+        "batchTranscription": {
+          "$ref": "#/definitions/BatchTranscriptionPropertiesPayload"
+        },
+        "customProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique id of the batch analytics registration in GUID format. This value is generated if not specified."
+        },
+        "storage": {
+          "$ref": "#/definitions/StoragePropertiesPayloadV02Preview"
+        },
+        "analytics": {
+          "$ref": "#/definitions/AnalyticsPropertiesPayloadV02Preview"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchRegistrationResponsePayloadV02Preview": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "batchTranscription": {
+          "$ref": "#/definitions/BatchTranscriptionPropertiesPayload"
+        },
+        "customProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/StatusPayload"
+        },
+        "id": {
+          "type": "string"
+        },
+        "storage": {
+          "$ref": "#/definitions/StoragePropertiesPayloadV02Preview"
+        },
+        "analytics": {
+          "$ref": "#/definitions/AnalyticsPropertiesPayloadV02Preview"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchTranscriptionPropertiesPayload": {
+      "required": [
+        "customDomain",
+        "locale",
+        "transcriptionProperties"
+      ],
+      "type": "object",
+      "properties": {
+        "locale": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The expected locale of the audio data to transcribe. For example, 'en-US', 'fr-FR', 'zh-CN', etc. For a full list of supported locales, see [Supported languages and regions](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt)."
+        },
+        "model": {
+          "$ref": "#/definitions/EntityReference"
+        },
+        "customDomain": {
+          "minLength": 1,
+          "type": "string",
+          "description": "Azure batch transcription custom domain."
+        },
+        "transcriptionProperties": {
+          "$ref": "#/definitions/TranscriptionProperties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DiarizationProperties": {
+      "required": [
+        "speakers"
+      ],
+      "type": "object",
+      "properties": {
+        "speakers": {
+          "$ref": "#/definitions/DiarizationSpeakersProperties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DiarizationSpeakersProperties": {
+      "type": "object",
+      "properties": {
+        "minCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EntityReference": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LanguageIdentificationMode": {
+      "enum": [
+        "Continuous",
+        "Single"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "LanguageIdentificationMode",
+        "modelAsString": true
+      }
+    },
+    "LanguageIdentificationProperties": {
+      "required": [
+        "candidateLocales",
+        "mode"
+      ],
+      "type": "object",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/LanguageIdentificationMode"
+        },
+        "candidateLocales": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "speechModelMapping": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/EntityReference"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ProfanityFilterMode": {
+      "enum": [
+        "None",
+        "Removed",
+        "Tags",
+        "Masked"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProfanityFilterMode",
+        "modelAsString": true
+      }
+    },
+    "PunctuationMode": {
+      "enum": [
+        "None",
+        "Dictated",
+        "Automatic",
+        "DictatedAndAutomatic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PunctuationMode",
+        "modelAsString": true
+      }
+    },
+    "RegistrationStatus": {
+      "enum": [
+        "Active",
+        "Error"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RegistrationStatus",
+        "modelAsString": true
+      }
+    },
+    "StatusPayload": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/RegistrationStatus"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "StoragePropertiesPayloadV02Preview": {
+      "required": [
+        "blobStorageEndpoint",
+        "errorOutputContainerName",
+        "inputContainerName",
+        "processedContainerName",
+        "transcriptionContainerName",
+        "trigger"
+      ],
+      "type": "object",
+      "properties": {
+        "trigger": {
+          "$ref": "#/definitions/TriggerPropertiesPayloadV02Preview"
+        },
+        "blobStorageEndpoint": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The Uri of the blob storage account in the form of 'https://<accountname>.blob.core.windows.net'."
+        },
+        "inputContainerName": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The name of the container that holds the audio files to be processed."
+        },
+        "transcriptionContainerName": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The name of the container that stores the transcription results."
+        },
+        "analyticsOutputContainerName": {
+          "type": "string",
+          "description": "The name of the container that stores the analytics results."
+        },
+        "processedContainerName": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The name of the container that archives the audio files that have been transcribed."
+        },
+        "errorOutputContainerName": {
+          "minLength": 1,
+          "type": "string",
+          "description": "The name of the container that saves the error messages during processing. Please note that the error files will not be automatically cleaned and may incur additional storage charges."
+        }
+      },
+      "additionalProperties": false
+    },
+    "TranscriptionProperties": {
+      "required": [
+        "profanityFilterMode",
+        "punctuationMode"
+      ],
+      "type": "object",
+      "properties": {
+        "wordLevelTimestampsEnabled": {
+          "type": "boolean",
+          "description": "Please enable this setting to generate audioTimings for each word if PII reduction is required in your flow."
+        },
+        "displayFormWordLevelTimestampsEnabled": {
+          "type": "boolean"
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "Channel 0 and 1 are set by default."
+        },
+        "punctuationMode": {
+          "$ref": "#/definitions/PunctuationMode"
+        },
+        "profanityFilterMode": {
+          "$ref": "#/definitions/ProfanityFilterMode"
+        },
+        "diarizationEnabled": {
+          "type": "boolean",
+          "description": "For mono channels, please enable this setting to enable speaker ID recognition. However, for stereo channels, diarization is currently not supported by the batch Speech Recognition API."
+        },
+        "diarization": {
+          "$ref": "#/definitions/DiarizationProperties"
+        },
+        "languageIdentification": {
+          "$ref": "#/definitions/LanguageIdentificationProperties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TriggerPropertiesPayloadV02Preview": {
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "EventGrid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerKind",
+            "modelAsString": true
+          }
+        },
+        "filter": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemTopicResourceId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "subscription_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "description": "Provide your cognitive services subscription key here."
+    }
+  },
+  "security": [
+    {
+      "subscription_key": []
+    }
+  ]
+}

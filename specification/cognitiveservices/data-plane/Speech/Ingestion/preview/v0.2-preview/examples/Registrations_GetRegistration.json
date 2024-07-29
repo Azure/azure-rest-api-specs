@@ -1,0 +1,66 @@
+{
+  "operationId": "Registrations_GetRegistration",
+  "title": "Get a registration by id",
+  "parameters": {
+    "version": "v0.2-preview",
+    "registrationId": "685c9b86-fa59-471f-9a12-9e76cb879d6d",
+    "Ocp-Apim-Subscription-Key": "{API Key}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "685c9b86-fa59-471f-9a12-9e76cb879d6d",
+        "name": "registration1",
+        "storage": {
+          "trigger": {
+            "kind": "EventGrid",
+            "filter": {
+              "subjectEndsWith": ".wav"
+            },
+            "systemTopicResourceId": "/subscriptions/azure-subscription-id/resourceGroups/resource-group-name/providers/Microsoft.EventGrid/systemTopics/system-topic-resource-name"
+          },
+          "blobStorageEndpoint": "https://storage-name.blob.core.windows.net",
+          "inputContainerName": "input",
+          "processedContainerName": "processed",
+          "errorOutputContainerName": "errored",
+          "transcriptionContainerName": "transcriptions",
+          "analyticsOutputContainerName": "analytics"
+        },
+        "batchTranscription": {
+          "locale": "en-US",
+          "model": null,
+          "customDomain": "https://custom-domain-name.cognitiveservices.azure.com",
+          "transcriptionProperties": {
+            "wordLevelTimestampsEnabled": true,
+            "displayFormWordLevelTimestampsEnabled": false,
+            "channels": [
+              0,
+              1
+            ],
+            "punctuationMode": "DictatedAndAutomatic",
+            "profanityFilterMode": "Removed",
+            "diarizationEnabled": false,
+            "diarization": null,
+            "languageIdentification": null
+          }
+        },
+        "analytics": {
+          "kind": "PromptFlow",
+          "endpointResourceId": "/subscriptions/2c2e6d10-4e48-40fd-8f4d-d9fb770d0c6d/resourceGroups/speechingestiontest/providers/Microsoft.MachineLearningServices/workspaces/speechanalyticse2eintegrationtes/onlineEndpoints/speechanalytics-e2e-test"
+        },
+        "status": {
+          "code": "Active"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message",
+          "details": []
+        }
+      }
+    }
+  }
+}
