@@ -12,6 +12,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace AI.Model;
 
@@ -26,7 +27,7 @@ namespace AI.Model;
 op getChatCompletions is Azure.Core.RpcOperation<
   ChatCompletionsOptions,
   ChatCompletions,
-  {RequestHeadersTrait<AdditionalRequestHeaders>}
+  RequestHeadersTrait<AdditionalRequestHeaders>
 >;
 
 @doc("""
