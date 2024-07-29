@@ -529,7 +529,7 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
 @doc("An internet location from which the model may retrieve an image.")
 model ChatMessageImageUrl {
   @doc("The URL of the image.")
-  url: url;
+  url: string;
 
   @doc("""
     The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
