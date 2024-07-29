@@ -178,13 +178,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SpeechGenerationOptions"
-            }
+            "$ref": "#/parameters/GenerateSpeechFromTextBody"
           }
         ],
         "responses": {
@@ -535,13 +529,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatCompletionsOptions"
-            }
+            "$ref": "#/parameters/GetChatCompletionsBody"
           }
         ],
         "responses": {
@@ -608,13 +596,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CompletionsOptions"
-            }
+            "$ref": "#/parameters/GetCompletionsBody"
           }
         ],
         "responses": {
@@ -660,13 +642,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EmbeddingsOptions"
-            }
+            "$ref": "#/parameters/GetEmbeddingsBody"
           }
         ],
         "responses": {
@@ -712,13 +688,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Body parameter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ImageGenerationOptions"
-            }
+            "$ref": "#/parameters/GetImageGenerationsBody"
           }
         ],
         "responses": {
@@ -3176,7 +3146,7 @@
         },
         "stream_options": {
           "type": "object",
-          "description": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a `data: [DONE]` message.",
+          "description": "Options for streaming response. Only set this when you set `stream: true`.",
           "x-nullable": true,
           "allOf": [
             {
@@ -5702,6 +5672,56 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "GenerateSpeechFromTextBody": {
+      "name": "body",
+      "in": "body",
+      "description": "A representation of the request options that control the behavior of a text-to-speech operation.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SpeechGenerationOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetChatCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ChatCompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetEmbeddingsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EmbeddingsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetImageGenerationsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "Represents the request data used to generate images.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ImageGenerationOptions"
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

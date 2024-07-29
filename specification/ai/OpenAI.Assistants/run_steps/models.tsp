@@ -369,3 +369,14 @@ model RunStepDeltaCodeInterpreterImageOutputObject {
   @encodedName("application/json", "file_id")
   fileId?: string;
 }
+
+/** Browser tool call. */
+@added(ServiceApiVersions.v2024_07_01_preview)
+model RunStepDeltaBingSearchToolCall extends RunStepDeltaToolCall {
+
+  /** The type of tool call. This is always going to be `browser` for this type of tool call. */
+  type: "browser";
+
+  /** For now, this is always going to be an empty object. */
+  browser?: Record<string>;
+}

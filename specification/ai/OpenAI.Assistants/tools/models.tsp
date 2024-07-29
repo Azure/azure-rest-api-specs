@@ -198,6 +198,15 @@ model RunStepFunctionToolCall extends RunStepToolCall {
   @doc("The detailed information about the function called by the model.")
   function: RunStepFunctionToolCallDetails;
 }
+/** A record of a call to a browser tool */
+@added(ServiceApiVersions.v2024_07_01_preview)
+model RunStepBingSearchToolCall extends RunStepToolCall {
+  /** The type of tool call. This is always going to be `browser` for this type of tool call.*/
+  type: "browser";
+
+  /** For now, this is always going to be an empty object. */
+  browser: Record<string>;
+}
 
 // Call details: Code Interpreter
 

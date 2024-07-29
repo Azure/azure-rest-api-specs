@@ -179,7 +179,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "The request details to use when creating a new assistant.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssistantCreationOptions"
@@ -242,7 +242,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "The request details to use when modifying an existing assistant.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateAssistantOptions"
@@ -552,7 +552,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "The details used to create a new assistant thread.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AssistantThreadCreationOptions"
@@ -615,7 +615,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "The details used to update an existing assistant thread.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateAssistantThreadOptions"
@@ -804,7 +804,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "A single message within an assistant thread, as provided during that thread's creation for its initial state.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ThreadMessageOptions"
@@ -1046,6 +1046,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "The details used when creating a new run of an assistant thread.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateRunOptions"
@@ -1428,7 +1429,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "The details used when creating and immediately running a new assistant thread.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateAndRunThreadOptions"
@@ -1570,7 +1571,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "Request object for creating a vector store.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VectorStoreOptions"
@@ -1633,7 +1634,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Body parameter.",
+            "description": "Request object for updating a vector store.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VectorStoreUpdateOptions"
@@ -2715,6 +2716,12 @@
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
         },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether to enable parallel function calling during tool use.",
+          "default": true,
+          "x-ms-client-name": "parallelToolCalls"
+        },
         "metadata": {
           "type": "object",
           "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
@@ -2843,6 +2850,12 @@
           "description": "Specifies the format that the model must output.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
+        },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether to enable parallel function calling during tool use.",
+          "default": true,
+          "x-ms-client-name": "parallelToolCalls"
         },
         "metadata": {
           "type": "object",
@@ -3486,6 +3499,56 @@
         "file_id"
       ]
     },
+    "MessageTextUrlCitationAnnotation": {
+      "type": "object",
+      "description": "A citation within the message that points to a specific quote from the webpage returned by the URL.\nGenerated when the assistant uses the \"browser\" tool to search the web.",
+      "properties": {
+        "url_citation": {
+          "$ref": "#/definitions/MessageTextUrlCitationDetails",
+          "description": "The details of  the URL used in the text citation.",
+          "x-ms-client-name": "urlCitation"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
+        }
+      },
+      "required": [
+        "url_citation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageTextAnnotation"
+        }
+      ],
+      "x-ms-discriminator-value": "url_citation"
+    },
+    "MessageTextUrlCitationDetails": {
+      "type": "object",
+      "description": "A representation of the URL used for the text citation.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL where the citation is from."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the URL."
+        }
+      },
+      "required": [
+        "url",
+        "title"
+      ]
+    },
     "OpenAIFile": {
       "type": "object",
       "description": "Represents an assistant that can call the model and use tools.",
@@ -3846,6 +3909,28 @@
         "failed_at",
         "metadata"
       ]
+    },
+    "RunStepBingSearchToolCall": {
+      "type": "object",
+      "description": "A record of a call to a browser tool",
+      "properties": {
+        "browser": {
+          "type": "object",
+          "description": "For now, this is always going to be an empty object.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "browser"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "browser"
     },
     "RunStepCodeInterpreterImageOutput": {
       "type": "object",
