@@ -10,11 +10,12 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+namespace Microsoft.ComputeSchedule;
+
 @doc("Lists {name}", TResponse)
 @get
 @autoRoute
 @listsResource(TResponse)
-@segmentOf(TResponse)
 @armResourceList(TResponse)
 op ArmResourceListActionSync<
 TResource extends Azure.ResourceManager.Foundations.Resource, 
