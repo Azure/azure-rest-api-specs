@@ -140,16 +140,16 @@ alias AdditionalRequestHeaders = {
   extra_params?: ExtraParameters;
 };
 
-@doc("Controls what happens if extra parameters, undefined byt he REST ApI are passed in the JSON request payload.")
+@doc("Controls what happens if extra parameters, undefined by the REST API, are passed in the JSON request payload.")
 union ExtraParameters {
   string,
 
-  @doc("The service will error if it detected unknown parameters in the request payload. This is the service default.")
+  @doc("The service will error if it detected exta parameters in the request payload. This is the service default.")
   error: "error",
 
-  @doc("The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
+  @doc("The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
   drop: "drop",
 
-  @doc("The service will pass unknown parameters to the back-end AI model.")
+  @doc("The service will pass extra parameters to the back-end AI model.")
   pass_through: "pass-through",
 }

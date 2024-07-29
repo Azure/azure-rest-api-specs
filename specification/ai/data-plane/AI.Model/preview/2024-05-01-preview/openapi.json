@@ -71,17 +71,17 @@
                 {
                   "name": "error",
                   "value": "error",
-                  "description": "The service will error if it detected unknown parameters in the request payload. This is the service default."
+                  "description": "The service will error if it detected exta parameters in the request payload. This is the service default."
                 },
                 {
                   "name": "drop",
                   "value": "drop",
-                  "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+                  "description": "The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model."
                 },
                 {
                   "name": "pass_through",
                   "value": "pass-through",
-                  "description": "The service will pass unknown parameters to the back-end AI model."
+                  "description": "The service will pass extra parameters to the back-end AI model."
                 }
               ]
             },
@@ -207,10 +207,10 @@
           }
         },
         "x-ms-examples": {
-          "GetChatCompletions_MaximumSet_Gen": {
+          "maximum set chat completion": {
             "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
           },
-          "GetChatCompletions_MinimumSet_Gen": {
+          "minimum set chat completion": {
             "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
           }
         }
@@ -242,17 +242,17 @@
                 {
                   "name": "error",
                   "value": "error",
-                  "description": "The service will error if it detected unknown parameters in the request payload. This is the service default."
+                  "description": "The service will error if it detected exta parameters in the request payload. This is the service default."
                 },
                 {
                   "name": "drop",
                   "value": "drop",
-                  "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+                  "description": "The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model."
                 },
                 {
                   "name": "pass_through",
                   "value": "pass-through",
-                  "description": "The service will pass unknown parameters to the back-end AI model."
+                  "description": "The service will pass extra parameters to the back-end AI model."
                 }
               ]
             },
@@ -317,10 +317,10 @@
           }
         },
         "x-ms-examples": {
-          "GetEmbeddings_MaximumSet_Gen": {
+          "maximum set embeddings": {
             "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
           },
-          "GetEmbeddings_MinimumSet_Gen": {
+          "minimum set embeddings": {
             "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
           }
         }
@@ -352,17 +352,17 @@
                 {
                   "name": "error",
                   "value": "error",
-                  "description": "The service will error if it detected unknown parameters in the request payload. This is the service default."
+                  "description": "The service will error if it detected exta parameters in the request payload. This is the service default."
                 },
                 {
                   "name": "drop",
                   "value": "drop",
-                  "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+                  "description": "The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model."
                 },
                 {
                   "name": "pass_through",
                   "value": "pass-through",
-                  "description": "The service will pass unknown parameters to the back-end AI model."
+                  "description": "The service will pass extra parameters to the back-end AI model."
                 }
               ]
             },
@@ -428,10 +428,10 @@
           }
         },
         "x-ms-examples": {
-          "GetImageEmbeddings_MaximumSet_Gen": {
+          "maximum set image embeddings": {
             "$ref": "./examples/GetImageEmbeddings_MaximumSet_Gen.json"
           },
-          "GetImageEmbeddings_MinimumSet_Gen": {
+          "minimum set image embeddings": {
             "$ref": "./examples/GetImageEmbeddings_MinimumSet_Gen.json"
           }
         }
@@ -467,10 +467,10 @@
           }
         },
         "x-ms-examples": {
-          "GetModelInfo_MaximumSet_Gen": {
+          "maximum set model information": {
             "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
           },
-          "GetModelInfo_MinimumSet_Gen": {
+          "minimum set model information": {
             "$ref": "./examples/GetModelInfo_MinimumSet_Gen.json"
           }
         }
@@ -854,7 +854,6 @@
       "properties": {
         "url": {
           "type": "string",
-          "format": "uri",
           "description": "The URL of the image."
         },
         "detail": {
@@ -1284,7 +1283,7 @@
     },
     "ExtraParameters": {
       "type": "string",
-      "description": "Controls what happens if extra parameters, undefined byt he REST ApI are passed in the JSON request payload.",
+      "description": "Controls what happens if extra parameters, undefined by the REST API, are passed in the JSON request payload.",
       "enum": [
         "error",
         "drop",
@@ -1297,17 +1296,17 @@
           {
             "name": "error",
             "value": "error",
-            "description": "The service will error if it detected unknown parameters in the request payload. This is the service default."
+            "description": "The service will error if it detected exta parameters in the request payload. This is the service default."
           },
           {
             "name": "drop",
             "value": "drop",
-            "description": "The service will ignore (drop) unknown parameters in the request payload. It will only pass the known parameters to the back-end AI model."
+            "description": "The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model."
           },
           {
             "name": "pass_through",
             "value": "pass-through",
-            "description": "The service will pass unknown parameters to the back-end AI model."
+            "description": "The service will pass extra parameters to the back-end AI model."
           }
         ]
       }

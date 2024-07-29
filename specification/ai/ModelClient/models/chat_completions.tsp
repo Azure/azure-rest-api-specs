@@ -33,6 +33,7 @@ alias ChatCompletionsOptions = {
   @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)
+  @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
   @doc("""
@@ -69,6 +70,7 @@ alias ChatCompletionsOptions = {
     """)
   @maxValue(1.0)
   @minValue(0.0)
+  @clientName("NucleusSamplingFactor", "csharp")
   top_p?: float32 = 1.0;
 
   @doc("The maximum number of tokens to generate.")
@@ -86,6 +88,7 @@ alias ChatCompletionsOptions = {
     A collection of textual sequences that will end completions generation.
     """)
   @minItems(1)
+  @clientName("StopSequences", "csharp")
   stop?: string[];
 
   @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
@@ -519,7 +522,7 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
 @doc("An internet location from which the model may retrieve an image.")
 model ChatMessageImageUrl {
   @doc("The URL of the image.")
-  url: url;
+  url: string;
 
   @doc("""
     The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
