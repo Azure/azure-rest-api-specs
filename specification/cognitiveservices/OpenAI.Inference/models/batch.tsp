@@ -53,7 +53,7 @@ model BatchCreateRequest {
   @encodedName("application/json", "completion_window")
   completionWindow: string;
 
-  /** A set of key-value pairs that can be attached to the batch. This can be useful for storing additional infomration about the batch in a structured format. */
+  /** A set of key-value pairs that can be attached to the batch. This can be useful for storing additional information about the batch in a structured format. */
   metadata?: Record<string>;
 }
 
@@ -179,7 +179,7 @@ model Batch {
     failed: int32;
   };
 
-  /** A set of key-value pairs that can be attached to the batch. This can be useful for storing additional infomration about the batch in a structured format. */
+  /** A set of key-value pairs that can be attached to the batch. This can be useful for storing additional information about the batch in a structured format. */
   metadata?: Record<string>;
 }
 

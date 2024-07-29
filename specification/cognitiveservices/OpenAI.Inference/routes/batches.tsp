@@ -23,7 +23,7 @@ namespace Azure.OpenAI;
 @get
 @added(ServiceApiVersions.v2024_07_01_Preview)
 @route("/batches")
-op batchList(@query after?: string, @query limit?: int32): ListBatchesResponse;
+op listBatches(@query after?: string, @query limit?: int32): ListBatchesResponse;
 
 /**
  * Creates and executes a batch from an uploaded file of requests.
@@ -40,7 +40,7 @@ op batchList(@query after?: string, @query limit?: int32): ListBatchesResponse;
 @post
 @added(ServiceApiVersions.v2024_07_01_Preview)
 @route("/batches")
-op batchCreate(...BatchCreateRequest): Batch;
+op createBatch(...BatchCreateRequest): Batch;
 
 /**
  * Creates and executes a batch from an uploaded file of requests.
@@ -57,7 +57,7 @@ op batchCreate(...BatchCreateRequest): Batch;
 @route("/batches/{batchId}")
 @doc("Gets details for a single batch specified by the given batchID.")
 @added(ServiceApiVersions.v2024_07_01_Preview)
-op batchGet(
+op getBatch(
   @doc("The identifier of the batch.")
   @path
   batchId: string,
@@ -76,7 +76,7 @@ op batchGet(
 @route("/batches/{batchId}/cancel")
 @doc("Gets details for a single batch specified by the given batchID.")
 @added(ServiceApiVersions.v2024_07_01_Preview)
-op batchCancel(
+op cancelBatch(
   @doc("The identifier of the batch.")
   @path
   batchId: string,

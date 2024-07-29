@@ -61,7 +61,7 @@
   "paths": {
     "/batches": {
       "get": {
-        "operationId": "BatchList",
+        "operationId": "ListBatches",
         "description": "Gets a list of all batches owned by the Azure OpenAI resource.",
         "parameters": [
           {
@@ -87,10 +87,15 @@
               "$ref": "#/definitions/ListBatchesResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List batch operations": {
+            "$ref": "./examples/get_batches.json"
+          }
         }
       },
       "post": {
-        "operationId": "BatchCreate",
+        "operationId": "CreateBatch",
         "description": "Creates and executes a batch from an uploaded file of requests.\nResponse includes details of the enqueued job including job status.\nThe ID of the result file is added to the response once complete.",
         "parameters": [
           {
@@ -109,12 +114,17 @@
               "$ref": "#/definitions/Batch"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create a new batch job": {
+            "$ref": "./examples/post_batch.json"
+          }
         }
       }
     },
     "/batches/{batchId}": {
       "get": {
-        "operationId": "BatchGet",
+        "operationId": "GetBatch",
         "description": "Gets details for a single batch specified by the given batchID.",
         "parameters": [
           {
@@ -132,12 +142,17 @@
               "$ref": "#/definitions/Batch"
             }
           }
+        },
+        "x-ms-examples": {
+          "Retrieve a batch job": {
+            "$ref": "./examples/get_batch.json"
+          }
         }
       }
     },
     "/batches/{batchId}/cancel": {
       "get": {
-        "operationId": "BatchCancel",
+        "operationId": "CancelBatch",
         "description": "Gets details for a single batch specified by the given batchID.",
         "parameters": [
           {
@@ -154,6 +169,11 @@
             "schema": {
               "$ref": "#/definitions/Batch"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel an in-progress batch job": {
+            "$ref": "./examples/cancel_batch.json"
           }
         }
       }
@@ -2719,7 +2739,7 @@
         },
         "metadata": {
           "type": "object",
-          "description": "A set of key-value pairs that can be attached to the batch. This can be useful for storing additional infomration about the batch in a structured format.",
+          "description": "A set of key-value pairs that can be attached to the batch. This can be useful for storing additional information about the batch in a structured format.",
           "additionalProperties": {
             "type": "string"
           }
@@ -2766,7 +2786,7 @@
         },
         "metadata": {
           "type": "object",
-          "description": "A set of key-value pairs that can be attached to the batch. This can be useful for storing additional infomration about the batch in a structured format.",
+          "description": "A set of key-value pairs that can be attached to the batch. This can be useful for storing additional information about the batch in a structured format.",
           "additionalProperties": {
             "type": "string"
           }
