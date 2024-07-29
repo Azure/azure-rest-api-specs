@@ -32,6 +32,7 @@ model FabricCapacity is TrackedResource<FabricCapacityProperties> {
 interface FabricCapacities {
   get is ArmResourceRead<FabricCapacity>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<FabricCapacity>;
+  @parameterVisibility
   update is ArmCustomPatchAsync<
     FabricCapacity,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
