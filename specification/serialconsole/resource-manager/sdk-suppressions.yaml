@@ -7,3 +7,13 @@ suppressions:
         - Interface EnableSerialConsoleResult no longer has parameter disabled
         - Interface SerialConsoleStatus no longer has parameter disabled
         - Removed operation SerialPorts.delete
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/serialconsole/armserialconsole
+      breaking-changes:
+        - Field `Disabled` of struct `DisableSerialConsoleResult` has been removed
+        - Field `Disabled` of struct `EnableSerialConsoleResult` has been removed
+        - Field `Disabled` of struct `Status` has been removed
+        - Field `Value` of struct `MicrosoftSerialConsoleClientDisableConsoleResponse` has been removed
+        - Field `Value` of struct `MicrosoftSerialConsoleClientEnableConsoleResponse` has been removed
+        - Field `Value` of struct `MicrosoftSerialConsoleClientGetConsoleStatusResponse` has been removed
+        - Function `*SerialPortsClient.Delete` has been removed
