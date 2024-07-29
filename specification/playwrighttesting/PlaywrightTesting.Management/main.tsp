@@ -115,6 +115,7 @@ model Quota is ProxyResource<QuotaProperties> {
   @doc("The quota name.")
   @key("quotaName")
   @path
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
   @segment("quotas")
   name: QuotaNames;
 }
