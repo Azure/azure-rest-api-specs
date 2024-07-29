@@ -20,3 +20,13 @@ modelerfour:
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql/azure/mgmt/sql
 ```
+
+``` yaml $(python)
+directive:
+  - from: swagger-document
+    where: $.definitions.ManagedInstanceProperties.properties
+    transform: $.storageIOps["x-ms-client-name"] = "storage_iops"
+  - from: swagger-document
+    where: $.definitions.ManagedInstanceProperties.properties
+    transform: $.storageThroughputMBps["x-ms-client-name"] = "storage_throughput_mbps"
+```
