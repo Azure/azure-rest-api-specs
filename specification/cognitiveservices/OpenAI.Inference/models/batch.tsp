@@ -40,11 +40,6 @@ model BatchErrorDatum {
 /** Defines the request to create a batch. */
 @added(ServiceApiVersions.v2024_07_01_Preview)
 model BatchCreateRequest {
-  @doc("""
-    The object type, which is always `batch`.
-    """)
-  object: "batch";
-
   /** The API endpoint used by the batch. */
   endpoint: string;
 
