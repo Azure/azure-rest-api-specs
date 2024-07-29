@@ -36,7 +36,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFault/{chaosFault}": {
       "post": {
-        "operationId": "Enable, Disable Chaos Fault",
+        "operationId": "Chaos Fault",
         "description": "Enable, disable Chaos Fault",
         "x-ms-examples": {
           "ChaosFaultEnableDisable": {
@@ -166,11 +166,9 @@
     "chaosFaultResponse": {
       "type": "object",
       "properties": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "description": "The status of the Chaos fault."
-          }
+        "status": {
+          "type": "string",
+          "description": "The status of the Chaos fault."
         }
       },
       "description": "A response object for chaos fault status."
