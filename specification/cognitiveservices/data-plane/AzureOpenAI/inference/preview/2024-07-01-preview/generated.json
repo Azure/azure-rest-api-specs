@@ -108,8 +108,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The requested list of files.",
+          "201": {
+            "description": "The requested new batch job.",
             "schema": {
               "$ref": "#/definitions/Batch"
             }
@@ -137,7 +137,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested batch.",
+            "description": "The requested existing batch job.",
             "schema": {
               "$ref": "#/definitions/Batch"
             }
@@ -165,7 +165,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Batch that was canceled.",
+            "description": "The updated batch job that was canceled.",
             "schema": {
               "$ref": "#/definitions/Batch"
             }
@@ -4909,18 +4909,15 @@
         },
         "first_id": {
           "type": "string",
-          "description": "A human-readable error message.",
-          "x-ms-client-name": "firstId"
+          "description": "A human-readable error message."
         },
         "last_id": {
           "type": "string",
-          "description": "A human-readable error message.",
-          "x-ms-client-name": "lastId"
+          "description": "A human-readable error message."
         },
         "has_more": {
           "type": "boolean",
-          "description": "A human-readable error message.",
-          "x-ms-client-name": "hasMore"
+          "description": "A human-readable error message."
         },
         "object": {
           "type": "string",

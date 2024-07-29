@@ -1,9 +1,13 @@
+import "@typespec/http";
+import "@typespec/rest";
 import "@typespec/versioning";
 
 import "../main.tsp";
 
 namespace Azure.OpenAI;
 
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 /** A list of Batch errors. */
@@ -55,6 +59,18 @@ model BatchCreateRequest {
 
   /** A set of key-value pairs that can be attached to the batch. This can be useful for storing additional information about the batch in a structured format. */
   metadata?: Record<string>;
+}
+
+/** Defines the response when creating a batch. */
+@added(ServiceApiVersions.v2024_07_01_Preview)
+model BatchCreateResponse {
+  /**
+   * The status code indicating a successful batch creation response.
+   */
+  @statusCode
+  statusCode: 201;
+
+  ...Batch;
 }
 
 /** The status of a batch. */
@@ -242,16 +258,16 @@ model ListBatchesResponse {
   data: Batch[];
 
   /** A human-readable error message. */
-  @encodedName("application/json", "first_id")
-  firstId?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses camel casing"
+  first_id?: string;
 
   /** A human-readable error message. */
-  @encodedName("application/json", "last_id")
-  lastId?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses camel casing"
+  last_id?: string;
 
   /** A human-readable error message. */
-  @encodedName("application/json", "has_more")
-  hasMore: boolean;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses camel casing"
+  has_more: boolean;
 
   /** The object type. */
   object: "list";

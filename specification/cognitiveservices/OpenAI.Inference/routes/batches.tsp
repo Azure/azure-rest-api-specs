@@ -34,7 +34,7 @@ op listBatches(
  * The ID of the result file is added to the response once complete.
  *
  * @param batchCreateRequest The specification of the batch to create and execute.
- * @returns The requested list of files.
+ * @returns The requested new batch job.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -43,14 +43,13 @@ op listBatches(
 @post
 @added(ServiceApiVersions.v2024_07_01_Preview)
 @route("/batches")
-op createBatch(...BatchCreateRequest): Batch;
+op createBatch(...BatchCreateRequest): BatchCreateResponse;
 
 /**
- * Creates and executes a batch from an uploaded file of requests.
- * Response includes details of the enqueued job including job status.
- * The ID of the result file is added to the response once complete.
+ * Retrieves an existing batch job by its ID.
  *
- * @returns The requested batch.
+ * @param batchId The ID of the batch job to retrieve.
+ * @returns The requested existing batch job.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
@@ -67,9 +66,10 @@ op getBatch(
 ): Batch;
 
 /**
- * Cancels the processing of the batch specified by the given batchID.
+ * Cancels the processing of the batch specified by the given ID.
  *
- * @returns The Batch that was canceled.
+ * @param batchId The ID of the batch job to cancel.
+ * @returns The updated batch job that was canceled.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
