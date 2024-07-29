@@ -1938,7 +1938,12 @@ op analyzeConversationsJobStatus is languageOperations.ResourceRead<
 @route("/analyze-conversations/jobs")
 @pollingOperation(analyzeConversationsJobStatus)
 op analyzeConversationsSubmitJob is Foundations.LongRunningOperation<
-  AnalyzeConversationJobsInput,
+  {
+    /** The input for the analyze conversations operation. */
+    @bodyRoot
+    @clientName("AnalyzeConversationOperationInput", "csharp")
+    body: AnalyzeConversationJobsInput;
+  },
   AcceptedResponse,
   {},
   ErrorResponse
