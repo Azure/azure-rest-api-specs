@@ -259,7 +259,7 @@ model Operation {
 }
 
 @doc("Consent template.")
-@TypeSpec.Rest.resource("consenttemplates")
+@TypeSpec.Rest.resource("defaultConsentTemplates")
 model DefaultConsentTemplate {
   @doc("Default consent template ID, use locale as ID.")
   @key("locale")
