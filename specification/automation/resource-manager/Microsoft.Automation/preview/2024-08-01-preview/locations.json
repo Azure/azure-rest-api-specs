@@ -73,7 +73,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UsageListResult"
+              "$ref": "../../common/v5/definitions.json#/definitions/UsageListResult"
             }
           },
           "default": {
@@ -91,73 +91,6 @@
     }
   },
   "definitions": {
-    "Usage": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id of the resource."
-        },
-        "name": {
-          "$ref": "#/definitions/UsageCounterName",
-          "description": "Gets or sets the usage counter name."
-        },
-        "unit": {
-          "type": "string",
-          "description": "Gets or sets the usage unit name."
-        },
-        "currentValue": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets the current usage value."
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets max limit. -1 for unlimited"
-        },
-        "throttleStatus": {
-          "type": "string",
-          "description": "Gets or sets the throttle  status."
-        }
-      },
-      "description": "Definition of Usage."
-    },
-    "UsageCounterName": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Gets or sets the usage counter name."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "Gets or sets the localized usage counter name."
-        }
-      },
-      "description": "Definition of usage counter name."
-    },
-    "UsageListResult": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Usage"
-          },
-          "description": "Gets or sets usage."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The response model for the get usage operation."
-    }
   },
   "parameters": {}
 }
