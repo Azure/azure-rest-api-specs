@@ -39,8 +39,8 @@ model AlertRuleResourceProperties {
     }
   ]>;
 
-  @doc("Whether the alert rule was created with an action group.")
-  createdWithActionGroup: boolean;
+  @doc("The features with which the alert rule resource was created.")
+  createdWithFeatures?: alertRuleCreationFeatures;
 
   @doc("The creation time of the alert rule resource.")
   creationTime: utcDateTime;
@@ -54,4 +54,16 @@ model AlertRuleResourceProperties {
 
   @doc("The alert rule template version.")
   alertRuleTemplateVersion: string;
+}
+
+@doc("The features with which the alert rule resource was created.")
+@added(Versions.v2024_07_19_preview)
+union alertRuleCreationFeatures {
+  string,
+
+  @doc("The alert rule was created with an action group.")
+  CreatedWithActionGroup: "CreatedWithActionGroup",
+
+  @doc("The alert rule was created with no features.")
+  None: "None",
 }
