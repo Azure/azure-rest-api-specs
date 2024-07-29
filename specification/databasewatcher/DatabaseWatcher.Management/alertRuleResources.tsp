@@ -40,7 +40,7 @@ model AlertRuleResourceProperties {
   ]>;
 
   @doc("The properties with which the alert rule resource was created.")
-  createdWithProperties?: alertRuleCreationProperties;
+  createdWithProperties: alertRuleCreationProperties;
 
   @doc("The creation time of the alert rule resource.")
   creationTime: utcDateTime;
