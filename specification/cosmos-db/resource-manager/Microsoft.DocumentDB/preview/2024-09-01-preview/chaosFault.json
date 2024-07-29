@@ -78,6 +78,12 @@
               }
             }
           },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/chaosFaultResponse"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -166,9 +172,11 @@
     "chaosFaultResponse": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "description": "The status of the Chaos fault."
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the Chaos fault."
+          }
         }
       },
       "description": "A response object for chaos fault status."
