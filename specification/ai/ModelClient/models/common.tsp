@@ -144,7 +144,7 @@ alias AdditionalRequestHeaders = {
 union ExtraParameters {
   string,
 
-  @doc("The service will error if it detected exta parameters in the request payload. This is the service default.")
+  @doc("The service will error if it detected extra parameters in the request payload. This is the service default.")
   error: "error",
 
   @doc("The service will ignore (drop) extra parameters in the request payload. It will only pass the known parameters to the back-end AI model.")
