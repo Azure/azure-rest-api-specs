@@ -108,8 +108,8 @@ model PiiEntityRecognitionLROResult extends AnalyzeDocumentsLROResult {
   /** The kind of the task. */
   kind: AnalyzeDocumentsLROResultsKind.PiiEntityRecognitionLROResults;
 
-  /** The list of pii results */
-  results: PiiResult;
+  /** The list of pii document results */
+  results: AnalyzeDocumentsResult;
 }
 
 /** (Optional) describes the PII categories to return */

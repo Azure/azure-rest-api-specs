@@ -99,7 +99,7 @@
       "get": {
         "operationId": "AnalyzeDocumentsJobStatus",
         "summary": "Get analysis status and results",
-        "description": "Get the status of a documentanalysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
+        "description": "Get the status of a document analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -406,6 +406,24 @@
         "summaries"
       ]
     },
+    "AnalyzeDocumentsDocumentError": {
+      "type": "object",
+      "description": "Contains the error object with errors encountered for the processed document.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Document Id."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Document Error."
+        }
+      },
+      "required": [
+        "id",
+        "error"
+      ]
+    },
     "AnalyzeDocumentsJobState": {
       "type": "object",
       "description": "The object containing the analyze job LRO job state.",
@@ -604,6 +622,39 @@
         ]
       }
     },
+    "AnalyzeDocumentsResult": {
+      "type": "object",
+      "description": "Contains the result object for the processed document.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeDocumentsDocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for analysis."
+        },
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/DocumentAnalysisDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "errors",
+        "modelVersion",
+        "documents"
+      ]
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -662,6 +713,46 @@
         "name",
         "iso6391Name",
         "confidenceScore"
+      ]
+    },
+    "DocumentAnalysisDocumentResult": {
+      "type": "object",
+      "description": "Contains the result object for the processed document.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "source": {
+          "$ref": "#/definitions/DocumentLocation",
+          "description": "Location of the input document."
+        },
+        "target": {
+          "type": "array",
+          "description": "Array of document results generated after the analysis.",
+          "items": {
+            "$ref": "#/definitions/DocumentLocation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "source",
+        "target"
       ]
     },
     "DocumentError": {
@@ -754,46 +845,6 @@
       "required": [
         "code",
         "message"
-      ]
-    },
-    "Entity": {
-      "type": "object",
-      "description": "Defines the detected entity object containing the entity category and entity text detected, etc.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Entity text as appears in the request."
-        },
-        "category": {
-          "type": "string",
-          "description": "Entity type."
-        },
-        "subcategory": {
-          "type": "string",
-          "description": "(Optional) Entity sub type."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
-        }
-      },
-      "required": [
-        "text",
-        "category",
-        "offset",
-        "length",
-        "confidenceScore"
       ]
     },
     "Error": {
@@ -963,83 +1014,13 @@
         "error"
       ]
     },
-    "ExtractedSummaryDocumentResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "A ranked list of sentences representing the extracted summary.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "sentences": {
-          "type": "array",
-          "description": "Specifies the the extracted sentences from the input document.",
-          "items": {
-            "$ref": "#/definitions/ExtractedSummarySentence"
-          },
-          "x-ms-identifiers": []
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "sentences"
-      ]
-    },
-    "ExtractedSummarySentence": {
-      "type": "object",
-      "description": "Represents an extracted sentences from the input document.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The extracted sentence text."
-        },
-        "rankScore": {
-          "type": "number",
-          "format": "double",
-          "description": "A double value representing the relevance of the sentence within the summary. Higher values indicate higher importance."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The sentence offset from the start of the document, based on the value of the parameter StringIndexType."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the sentence."
-        }
-      },
-      "required": [
-        "text",
-        "rankScore",
-        "offset",
-        "length"
-      ]
-    },
     "ExtractiveSummarizationLROResult": {
       "type": "object",
       "description": "An object representing the results for an Extractive Summarization task.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/ExtractiveSummarizationResult",
-          "description": "Results of the task."
+          "$ref": "#/definitions/AnalyzeDocumentsResult",
+          "description": "Results of the document task."
         }
       },
       "required": [
@@ -1067,39 +1048,6 @@
         }
       ],
       "x-ms-discriminator-value": "ExtractiveSummarization"
-    },
-    "ExtractiveSummarizationResult": {
-      "type": "object",
-      "description": "An object representing the pre-built Extractive Summarization results of each document.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        },
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
-          }
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion",
-        "documents"
-      ]
     },
     "ExtractiveSummarizationTaskParameters": {
       "type": "object",
@@ -3445,8 +3393,8 @@
       "description": "Contains the PII LRO results.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/PiiResult",
-          "description": "The list of pii results"
+          "$ref": "#/definitions/AnalyzeDocumentsResult",
+          "description": "The list of pii document results"
         }
       },
       "required": [
@@ -3474,79 +3422,6 @@
         }
       ],
       "x-ms-discriminator-value": "PiiEntityRecognition"
-    },
-    "PiiResult": {
-      "type": "object",
-      "description": "Contains the PiiResult.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        },
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/PiiResultWithDetectedLanguage"
-          }
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion",
-        "documents"
-      ]
-    },
-    "PiiResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "Contains the PII results with detected language.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "redactedDocuments": {
-          "type": "string",
-          "description": "Returns redacted text."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "redactedDocuments",
-        "entities"
-      ]
     },
     "PiiTaskParameters": {
       "type": "object",

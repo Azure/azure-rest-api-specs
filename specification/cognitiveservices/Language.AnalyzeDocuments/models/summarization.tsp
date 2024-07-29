@@ -95,8 +95,8 @@ model ExtractiveSummarizationLROResult extends AnalyzeDocumentsLROResult {
   /** Kind of the task. */
   kind: AnalyzeDocumentsLROResultsKind.ExtractiveSummarizationLROResults;
 
-  /** Results of the task. */
-  results: ExtractiveSummarizationResult;
+  /** Results of the document task. */
+  results: AnalyzeDocumentsResult;
 }
 
 /** An object representing the task definition for an Abstractive Summarization task. */

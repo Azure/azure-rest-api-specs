@@ -352,6 +352,12 @@ model Tasks {
   items?: Array<AnalyzeDocumentsLROResult>;
 }
 
+/** Contains the result object for the processed document. */
+model AnalyzeDocumentsResult is AnalyzeDocumentsPreBuiltResult {
+  /** Response by document */
+  documents: Array<DocumentAnalysisDocumentResult>;
+}
+
 /** List of job statuses. */
 union Status {
   string,
