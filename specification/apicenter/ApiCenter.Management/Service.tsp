@@ -6,8 +6,11 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+
 
 namespace Microsoft.ApiCenter;
+
 @doc("The service entity.")
 model Service is TrackedResource<ServiceProperties> {
   @doc("The name of Azure API Center service.")
@@ -18,9 +21,12 @@ model Service is TrackedResource<ServiceProperties> {
   @key("serviceName")
   @segment("services")
   name: string;
-
+  
+  ...ResourceSkuProperty;
   ...ManagedServiceIdentityProperty;
 }
+
+@@added(Service.sku, Versions.v2024_05_01);
 
 @armResourceOperations
 interface Services {
@@ -47,5 +53,12 @@ interface Services {
     Service,
     MetadataSchemaExportRequest,
     MetadataSchemaExportResult
+  >;
+  @doc("Imports APIs from Azure API Management.")
+  @added(Versions.v2024_05_01)
+  importFromApim is ArmResourceActionAsync<
+    Service,
+    ImportFromApimRequest,
+    ImportFromApimSuccessResult
   >;
 }
