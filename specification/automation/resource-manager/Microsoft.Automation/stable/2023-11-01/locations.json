@@ -118,7 +118,16 @@
         },
         "throttleStatus": {
           "type": "string",
-          "description": "Gets or sets the throttle  status."
+          "readOnly": true,
+          "description": "Gets throttling status of subscription",
+          "enum": [
+            "NotThrottled",
+            "ThrottledAtSubscriptionLevel"
+          ],
+          "x-ms-enum": {
+            "name": "ThrottlingState",
+            "modelAsString": true
+          }
         }
       },
       "description": "Definition of Usage."
