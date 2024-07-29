@@ -1078,6 +1078,96 @@
         }
       }
     },
+    "JsonArrayMapperOperator": {
+      "type": "object",
+      "description": "an operator to be used by a receiver for json array parsing.",
+      "properties": {
+        "sourceField": {
+          "type": "string",
+          "description": "Json array mapper source.",
+          "default": "body",
+          "enum": [
+            "body",
+            "attributes"
+          ],
+          "x-ms-enum": {
+            "name": "MessageFieldType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "body",
+                "value": "body",
+                "description": "The message's body field"
+              },
+              {
+                "name": "attributes",
+                "value": "attributes",
+                "description": "The message's attributes field"
+              }
+            ]
+          }
+        },
+        "destinationField": {
+          "type": "string",
+          "description": "Json array mapper destination.",
+          "default": "attributes",
+          "enum": [
+            "body",
+            "attributes"
+          ],
+          "x-ms-enum": {
+            "name": "MessageFieldType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "body",
+                "value": "body",
+                "description": "The message's body field"
+              },
+              {
+                "name": "attributes",
+                "value": "attributes",
+                "description": "The message's attributes field"
+              }
+            ]
+          }
+        },
+        "keys": {
+          "type": "array",
+          "description": "Json array mapper keys. the output will be a map containing keys and its keys and the parsed input json array fields as matching values",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "keys"
+      ]
+    },
+    "MessageFieldType": {
+      "type": "string",
+      "description": "json array source and destination types. This are the options to read the json array from and write the parsed output to.",
+      "enum": [
+        "body",
+        "attributes"
+      ],
+      "x-ms-enum": {
+        "name": "MessageFieldType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "body",
+            "value": "body",
+            "description": "The message's body field"
+          },
+          {
+            "name": "attributes",
+            "value": "attributes",
+            "description": "The message's attributes field"
+          }
+        ]
+      }
+    },
     "Metrics": {
       "type": "object",
       "description": "Information about metrics for the workspace",
@@ -1847,6 +1937,10 @@
           "default": 1000,
           "minimum": 100,
           "maximum": 100000
+        },
+        "jsonArrayMapper": {
+          "$ref": "#/definitions/JsonArrayMapperOperator",
+          "description": "Json array mapping operator."
         }
       },
       "required": [
