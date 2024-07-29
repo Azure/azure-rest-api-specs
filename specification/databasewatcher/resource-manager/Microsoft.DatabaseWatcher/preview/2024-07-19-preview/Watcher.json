@@ -1314,9 +1314,9 @@
             ]
           }
         },
-        "createdWithActionGroup": {
-          "type": "boolean",
-          "description": "Whether the alert rule was created with an action group."
+        "createdWithFeatures": {
+          "$ref": "#/definitions/alertRuleCreationFeatures",
+          "description": "The features with which the alert rule resource was created."
         },
         "creationTime": {
           "type": "string",
@@ -1339,7 +1339,6 @@
       },
       "required": [
         "alertRuleResourceId",
-        "createdWithActionGroup",
         "creationTime",
         "alertRuleTemplateId",
         "alertRuleTemplateVersion"
@@ -2071,6 +2070,30 @@
             ]
           }
         }
+      }
+    },
+    "alertRuleCreationFeatures": {
+      "type": "string",
+      "description": "The features with which the alert rule resource was created.",
+      "enum": [
+        "CreatedWithActionGroup",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "alertRuleCreationFeatures",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CreatedWithActionGroup",
+            "value": "CreatedWithActionGroup",
+            "description": "The alert rule was created with an action group."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The alert rule was created with no features."
+          }
+        ]
       }
     }
   },
