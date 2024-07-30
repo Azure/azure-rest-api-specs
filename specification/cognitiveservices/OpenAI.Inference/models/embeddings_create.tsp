@@ -103,13 +103,15 @@ model EmbeddingsUsage {
   totalTokens: int32;
 }
 
-alias BodyParameter<
-  T,
-  TName extends valueof string = "body",
-  TDoc extends valueof string = "Body parameter."
-> = {
-  @doc(TDoc)
-  @friendlyName(TName)
+/**
+ * Get embeddings request body.
+ */
+model GetEmbeddingsBody {
+  /**
+   * The configuration information for an embeddings request.
+   * Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
+   * recommendations, and other similar scenarios.
+   */
   @bodyRoot
-  body: T;
-};
+  body: EmbeddingsOptions;
+}

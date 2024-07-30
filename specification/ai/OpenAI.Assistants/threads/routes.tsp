@@ -21,7 +21,11 @@ namespace Azure.AI.OpenAI.Assistants;
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/threads")
 op createThread(
-  ...BodyParameter<AssistantThreadCreationOptions>,
+  /**
+   * The details used to create a new assistant thread.
+   */
+  @bodyRoot
+  body: AssistantThreadCreationOptions,
 ): AssistantThread;
 
 // list threads?
@@ -55,7 +59,11 @@ op getThread(@path threadId: string): AssistantThread;
 @route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op updateThread(
-  ...BodyParameter<UpdateAssistantThreadOptions>,
+  /**
+   * The details used to update an existing assistant thread.
+   */
+  @bodyRoot
+  body: UpdateAssistantThreadOptions,
 ): AssistantThread;
 
 /**

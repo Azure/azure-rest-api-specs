@@ -95,12 +95,31 @@
         "typeProperties": {
           "description": "Azure Table Storage linked service properties.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AzureStorageLinkedServiceTypeProperties"
+          "$ref": "#/definitions/AzureTableStorageLinkedServiceTypeProperties"
         }
       },
       "required": [
         "typeProperties"
       ]
+    },
+    "AzureTableStorageLinkedServiceTypeProperties": {
+      "description": "Azure Table Storage linked service properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureStorageLinkedServiceTypeProperties"
+        }
+      ],
+      "properties": {
+        "serviceEndpoint": {
+          "type": "object",
+          "description": "Table service endpoint of the Azure Table Storage resource. It is mutually exclusive with connectionString, sasUri property."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
+        }
+      }
     },
     "AzureStorageLinkedServiceTypeProperties": {
       "description": "Azure Storage linked service properties.",
@@ -916,7 +935,11 @@
         },
         "authenticationType": {
           "type": "object",
-          "description": "The authentication type to connect to Dynamics server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
+          "description": "The authentication type to connect to Dynamics server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario, 'Active Directory' for Dynamics on-premises with IFD. Type: string (or Expression with resultType string)."
+        },
+        "domain": {
+          "type": "object",
+          "description": "The Active Directory domain that will verify user credentials. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
@@ -970,7 +993,8 @@
       "enum": [
         "Office365",
         "Ifd",
-        "AADServicePrincipal"
+        "AADServicePrincipal",
+        "Active Directory"
       ],
       "x-ms-enum": {
         "name": "DynamicsAuthenticationType",
@@ -1023,7 +1047,11 @@
         },
         "authenticationType": {
           "type": "object",
-          "description": "The authentication type to connect to Dynamics CRM server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
+          "description": "The authentication type to connect to Dynamics CRM server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario, 'Active Directory' for Dynamics on-premises with IFD. Type: string (or Expression with resultType string)."
+        },
+        "domain": {
+          "type": "object",
+          "description": "The Active Directory domain that will verify user credentials. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
@@ -1117,7 +1145,11 @@
         },
         "authenticationType": {
           "type": "object",
-          "description": "The authentication type to connect to Common Data Service for Apps server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
+          "description": "The authentication type to connect to Common Data Service for Apps server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. 'AADServicePrincipal' for Server-To-Server authentication in online scenario, 'Active Directory' for Dynamics on-premises with IFD. Type: string (or Expression with resultType string)."
+        },
+        "domain": {
+          "type": "object",
+          "description": "The Active Directory domain that will verify user credentials. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
@@ -1318,6 +1350,15 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "serviceEndpoint": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "File service endpoint of the Azure File Storage resource. It is mutually exclusive with connectionString, sasUri property."
+        },
+        "credential": {
+          "$ref": "../artifacts.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       },
       "required": [
@@ -6164,6 +6205,22 @@
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
+        },
+        "server": {
+          "type": "object",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "description": "The port for the connection. Type: integer."
+        },
+        "uid": {
+          "type": "object",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "description": "Database name for connection. Type: string."
         },
         "pwd": {
           "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
