@@ -69,6 +69,8 @@ input-file:
 directive:
   - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
     where:
+      - $.definitions.AzureLargeInstance
+      - $.definitions.AzureLargeStorageInstance
       - $.definitions.StorageProfile.properties.nfsIpAddress
       - $.definitions.OsProfile.properties.osType
       - $.definitions.AzureLargeInstanceProperties.properties.azureLargeInstanceId
