@@ -15,8 +15,10 @@ using LiftrBase.Data;
 @armProviderNamespace
 @service({
   title: "Neon.Postgres",
+  description: "Azure Native Services Integration for Neon Postgres",
 })
 @versioned(Neon.Postgres.Versions)
+@armCommonTypesVersion("v3")
 namespace Neon.Postgres;
 
 @doc("Supported API versions for the Neon.Postgres resource provider.")
