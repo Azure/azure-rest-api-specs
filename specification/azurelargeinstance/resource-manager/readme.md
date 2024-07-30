@@ -87,6 +87,12 @@ directive:
       - $.definitions.ProvisioningState
     from: azurelargeinstance.json
     reason: 'This property is already a part of our API, cannot remove it'
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where:
+      - $.definitions.Resource.properties.name
+      - $.definitions.Resource.properties.id
+    from: types.json
+    reason: 'This property is already a part of our API, cannot remove it'
 ```
 
 ---
