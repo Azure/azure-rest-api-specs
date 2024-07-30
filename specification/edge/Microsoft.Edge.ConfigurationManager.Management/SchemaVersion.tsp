@@ -1,0 +1,51 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "./Schema.tsp";
+
+using TypeSpec.OpenAPI;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+namespace Microsoft.Edge;
+
+@doc("Schema Version Properties")
+model SchemaVersionProperties {
+  @doc("Value of schema version")
+  value: string;
+
+  @doc("Provisioning state of resource")
+  @visibility("read")
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("Schema Version Resource")
+@parentResource(Schema)
+@resource("versions")
+model SchemaVersion is ProxyResource<SchemaVersionProperties> {
+  ...ResourceNameParameter<SchemaVersion>;
+}
+
+@armResourceOperations
+interface SchemaVersions {
+  @doc("Get a Schema Version Resource")
+  get is ArmResourceRead<SchemaVersion>;
+
+  @doc("Create or update a Schema Version Resource")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SchemaVersion>;
+
+  @doc("update a Schema Version Resource")
+  update is ArmResourcePatchSync<SchemaVersion, SchemaVersionProperties>;
+
+  @doc("Delete a Schema Version Resource")
+  delete is ArmResourceDeleteSync<SchemaVersion>;
+
+  @doc("List by specified resource group")
+  listBySchema is ArmResourceListByParent<SchemaVersion>;
+}

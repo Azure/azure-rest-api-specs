@@ -670,7 +670,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations/{dynamicConfigurationName}/dynamicConfigurationVersions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations/{dynamicConfigurationName}/versions": {
       "get": {
         "operationId": "DynamicConfigurationVersions_ListByDynamicConfiguration",
         "tags": [
@@ -728,7 +728,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations/{dynamicConfigurationName}/dynamicConfigurationVersions/{dynamicConfigurationVersionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations/{dynamicConfigurationName}/versions/{dynamicConfigurationVersionName}": {
       "get": {
         "operationId": "DynamicConfigurationVersions_Get",
         "tags": [
@@ -1012,61 +1012,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurations/{configurationName}/dynamicConfigurations/{dynamicConfigurationName}/resolveConfiguration": {
-      "post": {
-        "operationId": "DynamicConfigurations_ResolveConfiguration",
-        "tags": [
-          "DynamicConfigurations"
-        ],
-        "description": "Post request to resolve configuration",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "description": "The name of the Configuration",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "dynamicConfigurationName",
-            "in": "path",
-            "description": "The name of the DynamicConfiguration",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DynamicConfigurationProperties"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DynamicConfigurations_ResolveConfiguration": {
-            "$ref": "./examples/DynamicConfigurations_ResolveConfiguration_MaximumSet_Gen.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1242,6 +1187,10 @@
           "type": "string",
           "description": "Current Version of dynamic configuration"
         },
+        "dynamicConfigurationType": {
+          "$ref": "#/definitions/DynamicConfigurationType",
+          "description": "Type of dynamic configuration"
+        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of resource",
@@ -1249,7 +1198,8 @@
         }
       },
       "required": [
-        "currentVersion"
+        "currentVersion",
+        "dynamicConfigurationType"
       ]
     },
     "DynamicConfigurationPropertiesUpdate": {
@@ -1259,7 +1209,35 @@
         "currentVersion": {
           "type": "string",
           "description": "Current Version of dynamic configuration"
+        },
+        "dynamicConfigurationType": {
+          "$ref": "#/definitions/DynamicConfigurationType",
+          "description": "Type of dynamic configuration"
         }
+      }
+    },
+    "DynamicConfigurationType": {
+      "type": "string",
+      "description": "Available dynamic configuration types",
+      "enum": [
+        "Shared",
+        "Hierarchy"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Shared",
+            "value": "Shared",
+            "description": "Configuration type Shared"
+          },
+          {
+            "name": "Hierarchy",
+            "value": "Hierarchy",
+            "description": "Configuration type Hierarchy"
+          }
+        ]
       }
     },
     "DynamicConfigurationUpdate": {

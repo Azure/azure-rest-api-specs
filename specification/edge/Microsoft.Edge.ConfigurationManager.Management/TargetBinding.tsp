@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "../Microsoft.Edge.Configurations.Management/SharedModels.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -16,8 +17,8 @@ namespace Microsoft.Edge;
 
 @doc("Target Binding Properties")
 model TargetBindingProperties {
-  @doc("Use Case of target binding")
-  useCase: string;
+  @doc("Solution of target binding")
+  solution: string;
 
   @doc("Deployment Target of target binding")
   deploymentTarget: string;
@@ -60,4 +61,11 @@ interface TargetBindings {
 
   @doc("Post request to deploy")
   deploy is ArmResourceActionNoResponseContentAsync<TargetBinding, void>;
+
+  @doc("Post request to resolve configuration")
+  resolveConfiguration is ArmResourceActionAsync<
+    TargetBinding,
+    void,
+    DynamicConfigurationProperties
+  >;
 }

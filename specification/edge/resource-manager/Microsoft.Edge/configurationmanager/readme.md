@@ -86,3 +86,6 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 suppressions:
   - code: OperationsAPIImplementation
     reason: Operations API for edge RP is already implemented in a common folder "edge" under the RP
+
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Adding provisioning state will break polymorphism

@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./Configuration.tsp";
+import "./SharedModels.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -14,16 +15,6 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
-
-@doc("Dynamic Configuration Properties")
-model DynamicConfigurationProperties {
-  @doc("Current Version of dynamic configuration")
-  currentVersion: string;
-
-  @doc("Provisioning state of resource")
-  @visibility("read")
-  provisioningState?: ResourceProvisioningState;
-}
 
 @doc("Dynamic Configuration Resource")
 @parentResource(Configuration)
@@ -50,11 +41,4 @@ interface DynamicConfigurations {
 
   @doc("List Dynamic Configuration Resources")
   listByConfiguration is ArmResourceListByParent<DynamicConfiguration>;
-
-  @doc("Post request to resolve configuration")
-  resolveConfiguration is ArmResourceActionSync<
-    DynamicConfiguration,
-    void,
-    DynamicConfigurationProperties
-  >;
 }
