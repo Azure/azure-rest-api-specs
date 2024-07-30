@@ -3383,6 +3383,7 @@
       }
     },
     "LexicalNormalizer": {
+      "type": "object",
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -3404,6 +3405,7 @@
       "description": "Base type for normalizers."
     },
     "CustomNormalizer": {
+      "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CustomNormalizer",
       "allOf": [
         {
@@ -7789,6 +7791,7 @@
       "description": "Details the status of an individual indexer execution."
     },
     "IndexerCurrentState": {
+      "type": "object",
       "properties": {
         "mode": {
           "$ref": "#/definitions/IndexingMode",
@@ -8516,6 +8519,7 @@
       "description": "Represents a search index definition, which describes the fields and search behavior of an index."
     },
     "SearchAlias": {
+      "type": "object",
       "properties": {
         "name": {
           "externalDocs": {
@@ -8591,6 +8595,7 @@
       "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes."
     },
     "ListAliasesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "x-ms-client-name": "Aliases",
@@ -9732,6 +9737,7 @@
       "description": "A dictionary of http request headers."
     },
     "AmlSkill": {
+      "type": "object",
       "x-ms-client-name": "AzureMachineLearningSkill",
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.AmlSkill",
       "allOf": [
@@ -12292,6 +12298,7 @@
       "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps."
     },
     "SearchIndexerCache": {
+      "type": "object",
       "properties": {
         "storageConnectionString": {
           "type": "string",
