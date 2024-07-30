@@ -14,29 +14,26 @@ namespace Customizations;
 })
 interface ContentSafetyClient {
   analyzeImage is ContentSafety.ImageOperations.analyzeImage;
-  
-  @@clientName(analyzeImage::parameters.body, "options", "csharp");
-  @@clientName(analyzeImage::parameters.body, "options", "java");
-  @@clientName(analyzeImage::parameters.body, "options", "python");
-
   analyzeText is ContentSafety.TextOperations.analyzeText;
-
-  @@clientName(analyzeText.body, "options", "csharp");
-  @@clientName(analyzeText.body, "options", "java");
-  @@clientName(analyzeText.body, "options", "python");
-
   detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
-  
-  @@clientName(detectTextProtectedMaterial.body, "options", "csharp");
-  @@clientName(detectTextProtectedMaterial.body, "options", "java");
-  @@clientName(detectTextProtectedMaterial.body, "options", "python");
-
   shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
-  
-  @@clientName(shieldPrompt::parameters.body, "options", "csharp");
-  @@clientName(shieldPrompt::parameters.body, "options", "java");
-  @@clientName(shieldPrompt::parameters.body, "options", "python");
 }
+
+@@clientName(ContentSafetyClient.analyzeImage::parameters.body, "options", "csharp");
+@@clientName(ContentSafetyClient.analyzeImage::parameters.body, "options", "java");
+@@clientName(ContentSafetyClient.analyzeImage::parameters.body, "options", "python");
+
+@@clientName(ContentSafetyClient.analyzeText::parameters.body, "options", "csharp");
+@@clientName(ContentSafetyClient.analyzeText::parameters.body, "options", "java");
+@@clientName(ContentSafetyClient.analyzeText::parameters.body, "options", "python");
+
+@@clientName(ContentSafetyClient.detectTextProtectedMaterial::parameters.body, "options", "csharp");
+@@clientName(ContentSafetyClient.detectTextProtectedMaterial::parameters.body, "options", "java");
+@@clientName(ContentSafetyClient.detectTextProtectedMaterial::parameters.body, "options", "python");
+
+@@clientName(ContentSafetyClient.shieldPrompt::parameters.body, "options", "csharp");
+@@clientName(ContentSafetyClient.shieldPrompt::parameters.body, "options", "java");
+@@clientName(ContentSafetyClient.shieldPrompt::parameters.body, "options", "python");
 
 @client({
   name: "BlocklistClient",
@@ -53,10 +50,10 @@ interface BlocklistClient {
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
 
-@@clientName(addOrUpdateBlocklistItems.body, "options", "csharp");
-@@clientName(addOrUpdateBlocklistItems.body, "options", "java");
-@@clientName(addOrUpdateBlocklistItems.body, "options", "python");
+@@clientName(BlocklistClient.addOrUpdateBlocklistItems::parameters.body, "options", "csharp");
+@@clientName(BlocklistClient.addOrUpdateBlocklistItems::parameters.body, "options", "java");
+@@clientName(BlocklistClient.addOrUpdateBlocklistItems::parameters.body, "options", "python");
 
-@@clientName(removeBlocklistItems.body, "options", "csharp");
-@@clientName(removeBlocklistItems.body, "options", "java");
-@@clientName(removeBlocklistItems.body, "options", "python");
+@@clientName(BlocklistClient.removeBlocklistItems::parameters.body, "options", "csharp");
+@@clientName(BlocklistClient.removeBlocklistItems::parameters.body, "options", "java");
+@@clientName(BlocklistClient.removeBlocklistItems::parameters.body, "options", "python");
