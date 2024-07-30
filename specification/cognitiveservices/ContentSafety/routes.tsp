@@ -22,9 +22,6 @@ interface TextOperations {
     {
       @bodyRoot
       @doc("The text analysis request.")
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
       body: AnalyzeTextOptions;
     },
     AnalyzeTextResult
@@ -39,9 +36,6 @@ interface TextOperations {
     {
       @bodyRoot
       @doc("The request body to be detected, which may contain direct or indirect injection attacks.")
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
       body: ShieldPromptOptions;
     },
     ShieldPromptResult
@@ -56,9 +50,6 @@ interface TextOperations {
     {
       @bodyRoot
       @doc("The request body to be detected, which may contain protected material.")
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
       body: DetectTextProtectedMaterialOptions;
     },
     DetectTextProtectedMaterialResult
@@ -74,9 +65,6 @@ interface ImageOperations {
     {
       @doc("The image analysis request.")
       @bodyRoot
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
       body: AnalyzeImageOptions;
     },
     AnalyzeImageResult
@@ -114,9 +102,6 @@ interface TextBlocklists {
     {
       @doc("Options for adding or updating blocklist items.")
       @bodyRoot
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
       body: AddOrUpdateTextBlocklistItemsOptions;
     },
     AddOrUpdateTextBlocklistItemsResult
@@ -129,9 +114,6 @@ interface TextBlocklists {
     {
       @doc("Options for removing blocklist items.")
       @bodyRoot
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
       body: RemoveTextBlocklistItemsOptions;
     },
     NoContentResponse

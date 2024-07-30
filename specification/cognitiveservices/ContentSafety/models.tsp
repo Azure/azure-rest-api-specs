@@ -9,8 +9,7 @@ using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@doc("Text analyze category.")
+@doc("The harm category supported in Text content analysis.")
 union TextCategory {
   string,
   "Hate",
@@ -19,8 +18,7 @@ union TextCategory {
   "Violence",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@doc("Image analyze category.")
+@doc("The harm category supported in Image content analysis.")
 union ImageCategory {
   string,
   "Hate",
