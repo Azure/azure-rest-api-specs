@@ -106,7 +106,7 @@ suppressions:
     from: networkVerifier.json
     reason: False alarm.
   - code: ImplementPrivateEndpointAPIs
-    from: ipAdddressManager.json
+    from: ipAddressManager.json
     reason: False alarm.
   - code: ImplementPrivateEndpointAPIs
     from: networkManagerSecurityAdminConfiguration.json
@@ -115,7 +115,7 @@ suppressions:
     from: networkVerifier.json
     reason: False alarm.
   - code: MissingSegmentsInNestedResourceListOperation
-    from: ipAdddressManager.json
+    from: ipAddressManager.json
     reason: False alarm.
   - code: MissingSegmentsInNestedResourceListOperation
     from: networkManagerSecurityAdminConfiguration.json
@@ -126,7 +126,7 @@ suppressions:
     from: networkVerifier.json
     reason: Bug.
   - code: BodyTopLevelProperties
-    from: ipAdddressManager.json
+    from: ipAddressManager.json
     reason: Bug.
   - code: BodyTopLevelProperties
     from: networkManagerSecurityAdminConfiguration.json
