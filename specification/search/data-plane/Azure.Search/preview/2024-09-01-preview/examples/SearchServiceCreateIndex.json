@@ -35,7 +35,7 @@
           "type": "Collection(Edm.Single)",
           "retrievable": true,
           "searchable": true,
-          "dimensions": 2,
+          "dimensions": 5,
           "vectorSearchProfile": "config3"
         },
         {
@@ -43,7 +43,7 @@
           "type": "Collection(Edm.Single)",
           "retrievable": true,
           "searchable": true,
-          "dimensions": 2,
+          "dimensions": 5,
           "vectorSearchProfile": "config3"
         },
         {
@@ -238,13 +238,15 @@
             "name": "mySQ8",
             "kind": "scalarQuantization",
             "rerankWithOriginalVectors": true,
-            "defaultOversampling": 10
+            "defaultOversampling": 10,
+            "truncationDimension": 2
           },
           {
             "name": "myBQC",
             "kind": "binaryQuantization",
             "rerankWithOriginalVectors": true,
-            "defaultOversampling": 10
+            "defaultOversampling": 10,
+            "truncationDimension": 2
           }
         ]
       }
@@ -329,7 +331,7 @@
             "searchAnalyzer": null,
             "analyzer": null,
             "normalizer": null,
-            "dimensions": 2,
+            "dimensions": 5,
             "vectorSearchProfile": "config3",
             "vectorEncoding": null,
             "synonymMaps": []
@@ -348,7 +350,7 @@
             "searchAnalyzer": null,
             "analyzer": null,
             "normalizer": null,
-            "dimensions": 2,
+            "dimensions": 5,
             "vectorSearchProfile": "config3",
             "vectorEncoding": null,
             "synonymMaps": []
@@ -629,6 +631,7 @@
               "kind": "scalarQuantization",
               "rerankWithOriginalVectors": true,
               "defaultOversampling": 10.0,
+              "truncationDimension": 2,
               "scalarQuantizationParameters": {
                 "quantizedDataType": "int8"
               }
@@ -638,6 +641,7 @@
               "kind": "binaryQuantization",
               "rerankWithOriginalVectors": true,
               "defaultOversampling": 10.0,
+              "truncationDimension": 2,
               "scalarQuantizationParameters": null
             }
           ]
