@@ -51,6 +51,9 @@ input-file:
   - Microsoft.DevCenter/preview/2024-07-01-preview/commonDefinitions.json
   - Microsoft.DevCenter/preview/2024-07-01-preview/devcenter.json
   - Microsoft.DevCenter/preview/2024-07-01-preview/vdi.json
+  - Microsoft.DevCenter/preview/2024-08-01-preview/commonDefinitions.json
+  - Microsoft.DevCenter/preview/2024-08-01-preview/devcenter.json
+  - Microsoft.DevCenter/preview/2024-08-01-preview/vdi.json
 suppressions:
   - code: PatchBodyParametersSchema
     from: vdi.json
