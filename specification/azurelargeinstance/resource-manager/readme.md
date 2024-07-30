@@ -96,6 +96,11 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 These set of linting rules aren't applicable to the AzureLargeInstance RP so suppressing them here.
 
 ``` yaml
+directive:
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where: $.definitions.Resource
+    from: azurelargeinstance.json
+    reason: 'This property is already a part of our API, cannot remove it'
 suppressions:
   - code: TrackedResourcesMustHavePut
     where:
