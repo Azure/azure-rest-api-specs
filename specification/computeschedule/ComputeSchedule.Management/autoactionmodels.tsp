@@ -204,9 +204,6 @@ model NotificationProperties {
 
   @doc("The language the notification should be sent on.")
   language : Language;
-
-  @doc("Optional metadata regarding notification.")
-  metadata? : Record<string>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
