@@ -883,12 +883,7 @@ directive:
   - suppress: AvoidAdditionalProperties
     from: managedCassandra.json
     reason: Temporarily suppressing existing linter errors and will be fixed later
-  - suppress: LroErrorContent
-    from: privateEndpointConnection.json
-    reason: ErrorResponse does contain required fields message and code.
-  - suppress: DefaultErrorResponseSchema
-    from: privateEndpointConnection.json
-    reason: ErrorResponse does contain required fields message and code.
+
 ```
 
 ---
