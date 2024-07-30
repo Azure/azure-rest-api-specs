@@ -17,3 +17,11 @@ suppressions:
         - Type of `ResourceReferenceExtended.Error` has been changed from `*ErrorResponse` to `*ErrorDetail`
         - "`DeploymentStackProvisioningStateLocking` from enum `DeploymentStackProvisioningState` has been removed"
         - "`ResourceStatusModeNone` from enum `ResourceStatusMode` has been removed"
+  azure-sdk-for-js:
+    - package: "@azure/arm-resources"
+      breaking-changes:
+        - Class ResourceManagementClient has a new signature
+        - Removed operation TagsOperations.createOrUpdateAtScope
+        - Removed operation TagsOperations.deleteAtScope
+        - Removed operation TagsOperations.updateAtScope
+        - "Type of parameter parameters of interface DeploymentProperties is changed from Record<string, unknown> to {\n        [propertyName: string]: DeploymentParameter;\n    }"
