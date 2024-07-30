@@ -110,7 +110,8 @@ directive:
   - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
       - $.definitions.AzureLargeInstanceProperties
       - $.definitions.AzureLargeStorageInstanceProperties
-    from: azurelargeinstance.json
+      - $.definitions.StorageProfile.properties
+      - $.definitions.OsProfile.properties
     reason: 'This property is already a part of our API, cannot remove it'
 suppressions:
   - code: TrackedResourcesMustHavePut
