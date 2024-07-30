@@ -12,6 +12,8 @@ using Azure.ResourceManager;
 
 namespace Microsoft.ComputeSchedule;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations must be inside an interface declaration."
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Lists {name}", TResponse)
 @get
 @autoRoute
@@ -24,7 +26,9 @@ TBaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<TResou
   ...ResourceInstanceParameters<TResource, TBaseParameters>
 ): ArmResponse<ResourceListResult<TResponse>> | ErrorResponse;
 
-
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations must be inside an interface declaration."
+@doc("Executes action on {name}", TResource)
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @autoRoute
 @armResourceAction(TResource)
 @post

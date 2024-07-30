@@ -509,6 +509,15 @@
     }
   },
   "definitions": {
+    "AutoActionVm": {
+      "type": "object",
+      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "CancelOperationsRequest": {
       "type": "object",
       "description": "This is the request to cancel running operations in scheduled actions using the operation ids",
@@ -776,6 +785,24 @@
         "location"
       ]
     },
+    "NotificationType": {
+      "type": "string",
+      "description": "The type of notification we want to send for auto actions operations.",
+      "enum": [
+        "Email"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Email",
+            "value": "Email",
+            "description": "Notify through e-mail"
+          }
+        ]
+      }
+    },
     "OperationState": {
       "type": "string",
       "description": "Values that define the states of operations in Scheduled Actions",
@@ -840,7 +867,8 @@
             "description": "Operations that are blocked"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "OptimizationPreference": {
       "type": "string",
@@ -1051,6 +1079,7 @@
               }
             ]
           },
+          "readOnly": true,
           "x-ms-enum.modelAsString": true
         },
         "timeZone": {

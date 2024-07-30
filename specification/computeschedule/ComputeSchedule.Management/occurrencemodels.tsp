@@ -58,9 +58,9 @@ model OccurrenceProperties {
 @parentResource(AutoAction)
 model Occurrence is ProxyResource<OccurrenceProperties>{
   ...ResourceNameParameter<
-  Occurrence, 
-  KeyName="occurrenceId", 
-  NamePattern="[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", 
+  Occurrence,
+  KeyName="occurrenceId",
+  NamePattern="[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
   Type=uuid>
 }
 

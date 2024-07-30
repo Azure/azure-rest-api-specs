@@ -45,26 +45,26 @@ union ActionType {
 @doc("Representation of the possible selection of days in a week in a gregorian calendar for auto actions")
 union WeekDay {
 
-  @doc("Monday")
-  Monday : "Monday",
+  @doc("Monday weekday.")
+  Monday: "Monday",
 
-  @doc("Tuesday")
-  Tuesday : "Tuesday",
+  @doc("Tuesday weekday.")
+  Tuesday: "Tuesday",
 
-  @doc("Wednesday")
-  Wednesday : "Wednesday",
+  @doc("Wednesday weekday.")
+  Wednesday: "Wednesday",
 
-  @doc("Thrusday")
-  Thursday : "Thursday",
+  @doc("Thursday weekday.")
+  Thursday: "Thursday",
 
-  @doc("Friday")
-  Friday : "Friday",
+  @doc("Friday weekday.")
+  Friday: "Friday",
 
-  @doc("Saturday")
-  Saturday : "Saturday",
+  @doc("Saturday weekday.")
+  Saturday: "Saturday",
 
-  @doc("Sunday")
-  Sunday : "Sunday",
+  @doc("Sunday weekday.")
+  Sunday: "Sunday",
 
   @doc("All week days")
   All : "All",
@@ -75,41 +75,41 @@ union WeekDay {
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Representation of the months available selection in a gregorian calendar for auto actions")
 union Month {
-  @doc("January")
-  January : "January",
+  @doc("The January month.")
+  January: "January",
 
-  @doc("February")
-  February : "February",
+  @doc("The February month.")
+  February: "February",
 
-  @doc("March")
-  March : "March",
+  @doc("The March month.")
+  March: "March",
 
-  @doc("April")
-  April : "April",
+  @doc("The April month.")
+  April: "April",
 
-  @doc("May")
-  May : "May",
+  @doc("The May month.")
+  May: "May",
 
-  @doc("June")
-  June : "June",
+  @doc("The June month.")
+  June: "June",
 
-  @doc("July")
-  July : "July",
+  @doc("The July month.")
+  July: "July",
 
-  @doc("August")
-  August : "August",
+  @doc("The August month.")
+  August: "August",
 
-  @doc("September")
-  September : "September",
+  @doc("The September month.")
+  September: "September",
 
-  @doc("October")
-  October : "October",
+  @doc("The October month.")
+  October: "October",
 
-  @doc("November")
-  November : "November",
+  @doc("The November month.")
+  November: "November",
 
-  @doc("December")
-  December : "December",
+  @doc("The December month.")
+  December: "December",
 
   @doc("All months")
   All : "All",

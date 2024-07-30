@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./occurrencemodels.tsp";
+import "./commons.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -14,6 +15,7 @@ using OpenAPI;
 
 namespace Microsoft.ComputeSchedule;
 
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @armResourceOperations
 interface Occurrences {
   get is ArmResourceRead<Occurrence>;

@@ -4,6 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./autoactionmodels.tsp";
+import "./occurrencemodels.tsp";
+import "./occurrenceroutes.tsp";
 import "./commons.tsp";
 
 using Azure.Core;
@@ -37,4 +39,11 @@ interface AutoActions {
 
   cancelNextOccurrence is ArmResourceActionAsync<AutoAction, void, Occurrence>;
   triggerManualOccurrence is ArmResourceActionAsync<AutoAction, void, Occurrence>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@armResourceOperations
+interface AutoActionVms {
+  get is ArmResourceRead<AutoActionVm>;
+  listByVms is ArmResourceListByParent<AutoActionVm>;
 }
