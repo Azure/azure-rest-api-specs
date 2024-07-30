@@ -724,7 +724,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/standbyVirtualMachines": {
       "get": {
-        "operationId": "StandbyVirtualMachines_ListByStandbyPool",
+        "operationId": "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource",
         "tags": [
           "StandbyVirtualMachines"
         ],
@@ -760,6 +760,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource": {
+            "$ref": "./examples/StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource.json"
           }
         },
         "x-ms-pageable": {
