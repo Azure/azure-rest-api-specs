@@ -10675,6 +10675,16 @@
       ],
       "x-ms-discriminator-value": "HanaHSRContainer"
     },
+    "AzureVmWorkloadSAPHanaScaleoutProtectableItem": {
+      "description": "Azure VM workload-specific protectable item representing HANA scale out.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
+        }
+      ],
+      "x-ms-discriminator-value": "HanaScaleoutContainer"
+    },    
     "AzureVmWorkloadSAPHanaSystemWorkloadItem": {
       "description": "Azure VM workload-specific workload item representing SAP HANA System.",
       "type": "object",
@@ -11742,7 +11752,8 @@
             "SQLAGWorkLoadContainer",
             "StorageContainer",
             "GenericContainer",
-            "HanaHSRContainer"
+            "HanaHSRContainer",
+            "HanaScaleoutContainer"
           ],
           "type": "string",
           "x-ms-enum": {
