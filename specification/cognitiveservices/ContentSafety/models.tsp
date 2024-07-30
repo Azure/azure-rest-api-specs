@@ -12,18 +12,34 @@ namespace ContentSafety;
 @doc("The harm category supported in Text content analysis.")
 union TextCategory {
   string,
+
+  @doc("The harm cateogry for Text - Hate.")
   "Hate",
+  
+  @doc("The harm cateogry for Text - SelfHarm.")
   "SelfHarm",
+
+  @doc("The harm cateogry for Text - Sexual.")
   "Sexual",
+
+  @doc("The harm cateogry for Text - Violence.")
   "Violence",
 }
 
 @doc("The harm category supported in Image content analysis.")
 union ImageCategory {
   string,
+
+  @doc("The harm cateogry for Image - Hate.")
   "Hate",
+  
+  @doc("The harm cateogry for Image - SelfHarm.")
   "SelfHarm",
+
+  @doc("The harm cateogry for Image - Sexual.")
   "Sexual",
+
+  @doc("The harm cateogry for Image - Violence.")
   "Violence",
 }
 

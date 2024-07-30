@@ -14,26 +14,29 @@ namespace Customizations;
 })
 interface ContentSafetyClient {
   analyzeImage is ContentSafety.ImageOperations.analyzeImage;
+  
+  @@clientName(analyzeImage::parameters.body, "options", "csharp");
+  @@clientName(analyzeImage::parameters.body, "options", "java");
+  @@clientName(analyzeImage::parameters.body, "options", "python");
+
   analyzeText is ContentSafety.TextOperations.analyzeText;
+
+  @@clientName(analyzeText.body, "options", "csharp");
+  @@clientName(analyzeText.body, "options", "java");
+  @@clientName(analyzeText.body, "options", "python");
+
   detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
+  
+  @@clientName(detectTextProtectedMaterial.body, "options", "csharp");
+  @@clientName(detectTextProtectedMaterial.body, "options", "java");
+  @@clientName(detectTextProtectedMaterial.body, "options", "python");
+
   shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
+  
+  @@clientName(shieldPrompt::parameters.body, "options", "csharp");
+  @@clientName(shieldPrompt::parameters.body, "options", "java");
+  @@clientName(shieldPrompt::parameters.body, "options", "python");
 }
-
-@@clientName(analyzeImage::parameters.body, "options", "csharp");
-@@clientName(analyzeImage::parameters.body, "options", "java");
-@@clientName(analyzeImage::parameters.body, "options", "python");
-
-@@clientName(analyzeText.body, "options", "csharp");
-@@clientName(analyzeText.body, "options", "java");
-@@clientName(analyzeText.body, "options", "python");
-
-@@clientName(detectTextProtectedMaterial.body, "options", "csharp");
-@@clientName(detectTextProtectedMaterial.body, "options", "java");
-@@clientName(detectTextProtectedMaterial.body, "options", "python");
-
-@@clientName(shieldPrompt::parameters.body, "options", "csharp");
-@@clientName(shieldPrompt::parameters.body, "options", "java");
-@@clientName(shieldPrompt::parameters.body, "options", "python");
 
 @client({
   name: "BlocklistClient",
