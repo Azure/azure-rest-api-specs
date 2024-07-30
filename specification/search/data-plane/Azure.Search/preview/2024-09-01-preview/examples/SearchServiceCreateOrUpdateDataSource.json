@@ -44,12 +44,10 @@
   "responses": {
     "200": {
       "body": {
-        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#datasources/$entity",
         "@odata.etag": "0x1234568AE7E58A1",
         "name": "tempdatasource",
         "description": "My Azure Blob data source.",
         "type": "azureblob",
-        "subtype": null,
         "credentials": {
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
         },
@@ -73,12 +71,42 @@
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
-          },
-          "identity": null
-        },
-        "identity": null
+          }
+        }
       }
     },
-    "201": {}
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "tempdatasource",
+        "description": "My Azure Blob data source.",
+        "type": "azureblob",
+        "credentials": {
+          "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
+        },
+        "container": {
+          "name": "doc-extraction-skillset",
+          "query": "E2E_Dsat"
+        },
+        "dataChangeDetectionPolicy": {
+          "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
+          "highWaterMarkColumnName": "metadata_storage_last_modified"
+        },
+        "dataDeletionDetectionPolicy": {
+          "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
+          "softDeleteColumnName": "isDeleted",
+          "softDeleteMarkerValue": "true"
+        },
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        }
+      }
+    }
   }
 }

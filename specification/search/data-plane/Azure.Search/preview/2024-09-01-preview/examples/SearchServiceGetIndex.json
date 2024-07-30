@@ -10,10 +10,8 @@
   "responses": {
     "200": {
       "body": {
-        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#indexes/$entity",
         "@odata.etag": "0x1234568AE7E58A1",
         "name": "preview-test",
-        "defaultScoringProfile": null,
         "fields": [
           {
             "name": "id",
@@ -25,13 +23,6 @@
             "sortable": true,
             "facetable": true,
             "key": true,
-            "indexAnalyzer": null,
-            "searchAnalyzer": null,
-            "analyzer": null,
-            "normalizer": null,
-            "dimensions": null,
-            "vectorSearchProfile": null,
-            "vectorEncoding": null,
             "synonymMaps": []
           },
           {
@@ -44,13 +35,8 @@
             "sortable": false,
             "facetable": false,
             "key": false,
-            "indexAnalyzer": null,
-            "searchAnalyzer": null,
-            "analyzer": null,
-            "normalizer": null,
             "dimensions": 20,
             "vectorSearchProfile": "config1",
-            "vectorEncoding": null,
             "synonymMaps": []
           },
           {
@@ -63,13 +49,8 @@
             "sortable": false,
             "facetable": false,
             "key": false,
-            "indexAnalyzer": null,
-            "searchAnalyzer": null,
-            "analyzer": null,
-            "normalizer": null,
             "dimensions": 10,
             "vectorSearchProfile": "config2",
-            "vectorEncoding": null,
             "synonymMaps": []
           },
           {
@@ -82,13 +63,8 @@
             "sortable": false,
             "facetable": false,
             "key": false,
-            "indexAnalyzer": null,
-            "searchAnalyzer": null,
-            "analyzer": null,
-            "normalizer": null,
             "dimensions": 5,
             "vectorSearchProfile": "config3",
-            "vectorEncoding": null,
             "synonymMaps": []
           },
           {
@@ -101,13 +77,8 @@
             "sortable": false,
             "facetable": false,
             "key": false,
-            "indexAnalyzer": null,
-            "searchAnalyzer": null,
-            "analyzer": null,
-            "normalizer": null,
             "dimensions": 5,
             "vectorSearchProfile": "config3",
-            "vectorEncoding": null,
             "synonymMaps": []
           },
           {
@@ -120,13 +91,8 @@
             "sortable": false,
             "facetable": false,
             "key": false,
-            "indexAnalyzer": null,
-            "searchAnalyzer": null,
-            "analyzer": null,
-            "normalizer": null,
             "dimensions": 10,
             "vectorSearchProfile": "config2",
-            "vectorEncoding": null,
             "synonymMaps": []
           },
           {
@@ -139,13 +105,7 @@
             "sortable": true,
             "facetable": true,
             "key": false,
-            "indexAnalyzer": null,
-            "searchAnalyzer": null,
             "analyzer": "en.lucene",
-            "normalizer": null,
-            "dimensions": null,
-            "vectorSearchProfile": null,
-            "vectorEncoding": null,
             "synonymMaps": []
           },
           {
@@ -158,13 +118,7 @@
             "sortable": true,
             "facetable": true,
             "key": false,
-            "indexAnalyzer": null,
-            "searchAnalyzer": null,
             "analyzer": "standard.lucene",
-            "normalizer": null,
-            "dimensions": null,
-            "vectorSearchProfile": null,
-            "vectorEncoding": null,
             "synonymMaps": []
           },
           {
@@ -177,13 +131,7 @@
             "sortable": true,
             "facetable": true,
             "key": false,
-            "indexAnalyzer": null,
-            "searchAnalyzer": null,
             "analyzer": "en.lucene",
-            "normalizer": null,
-            "dimensions": null,
-            "vectorSearchProfile": null,
-            "vectorEncoding": null,
             "synonymMaps": []
           },
           {
@@ -196,13 +144,7 @@
             "sortable": true,
             "facetable": true,
             "key": false,
-            "indexAnalyzer": null,
-            "searchAnalyzer": null,
             "analyzer": "en.lucene",
-            "normalizer": null,
-            "dimensions": null,
-            "vectorSearchProfile": null,
-            "vectorEncoding": null,
             "synonymMaps": []
           }
         ],
@@ -224,9 +166,6 @@
                 "interpolation": "linear",
                 "type": "tag",
                 "boost": 2.0,
-                "freshness": null,
-                "magnitude": null,
-                "distance": null,
                 "tag": {
                   "tagsParameter": "categoryTag"
                 }
@@ -234,7 +173,6 @@
             ]
           }
         ],
-        "corsOptions": null,
         "suggesters": [
           {
             "name": "sg",
@@ -262,14 +200,10 @@
         "tokenizers": [],
         "tokenFilters": [],
         "charFilters": [],
-        "encryptionKey": null,
         "similarity": {
-          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
-          "k1": null,
-          "b": null
+          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
         },
         "semantic": {
-          "defaultConfiguration": null,
           "configurations": []
         },
         "vectorSearch": {
@@ -282,8 +216,7 @@
                 "m": 4,
                 "efConstruction": 400,
                 "efSearch": 500
-              },
-              "exhaustiveKnnParameters": null
+              }
             },
             {
               "name": "euclidean",
@@ -293,8 +226,7 @@
                 "m": 4,
                 "efConstruction": 400,
                 "efSearch": 500
-              },
-              "exhaustiveKnnParameters": null
+              }
             },
             {
               "name": "dotProduct",
@@ -304,8 +236,7 @@
                 "m": 4,
                 "efConstruction": 400,
                 "efSearch": 500
-              },
-              "exhaustiveKnnParameters": null
+              }
             }
           ],
           "profiles": [
@@ -336,17 +267,12 @@
                 "resourceUri": "https://test-sample.openai.azure.com",
                 "deploymentId": "model",
                 "apiKey": "<redacted>",
-                "modelName": "text-embedding-3-large",
-                "authIdentity": null
-              },
-              "customWebApiParameters": null,
-              "aiServicesVisionParameters": null,
-              "amlParameters": null
+                "modelName": "text-embedding-3-large"
+              }
             },
             {
               "name": "custom-web-api",
               "kind": "customWebApi",
-              "azureOpenAIParameters": null,
               "customWebApiParameters": {
                 "httpMethod": "POST",
                 "uri": "https://my-custom-endpoint.org/",
@@ -357,21 +283,14 @@
                   "header2": "value2"
                 },
                 "authIdentity": {
-                  "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
-                  "userAssignedIdentity": null
+                  "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity"
                 }
-              },
-              "aiServicesVisionParameters": null,
-              "amlParameters": null
+              }
             },
             {
               "name": "aml",
               "kind": "aml",
-              "azureOpenAIParameters": null,
-              "customWebApiParameters": null,
-              "aiServicesVisionParameters": null,
               "amlParameters": {
-                "key": null,
                 "resourceId": "aml resource id",
                 "region": "aml region",
                 "uri": "https://my-custom-endpoint.org/",
@@ -396,8 +315,7 @@
               "kind": "binaryQuantization",
               "rerankWithOriginalVectors": true,
               "defaultOversampling": 10.0,
-              "truncationDimension": 2,
-              "scalarQuantizationParameters": null
+              "truncationDimension": 2
             }
           ]
         }

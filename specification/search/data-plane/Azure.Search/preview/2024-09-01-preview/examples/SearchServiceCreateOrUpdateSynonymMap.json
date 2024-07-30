@@ -27,7 +27,6 @@
   "responses": {
     "200": {
       "body": {
-        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#synonymmaps/$entity",
         "@odata.etag": "0x1234568AE7E58A1",
         "name": "mysynonymmap",
         "format": "solr",
@@ -39,11 +38,26 @@
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
-          },
-          "identity": null
+          }
         }
       }
     },
-    "201": {}
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "mysynonymmap",
+        "format": "solr",
+        "synonyms": "United States, United States of America, USA\nWashington, Wash. => WA",
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        }
+      }
+    }
   }
 }

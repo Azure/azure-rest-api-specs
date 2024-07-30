@@ -118,28 +118,21 @@
   "responses": {
     "201": {
       "body": {
-        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#skillsets/$entity",
         "name": "tempskillset",
         "description": "Skillset for extracting entities and more",
         "skills": [
           {
             "@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",
             "name": "skill2",
-            "description": null,
-            "context": null,
-            "defaultCountryHint": null,
-            "modelVersion": null,
             "inputs": [
               {
                 "name": "text",
                 "source": "/document/content",
-                "sourceContext": null,
                 "inputs": []
               },
               {
                 "name": "countryHint",
                 "source": "/document/countryHint",
-                "sourceContext": null,
                 "inputs": []
               }
             ],
@@ -153,25 +146,18 @@
           {
             "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
             "name": "skill3",
-            "description": null,
-            "context": null,
-            "defaultLanguageCode": null,
             "textSplitMode": "pages",
             "maximumPageLength": 4000,
-            "pageOverlapLength": null,
-            "maximumPagesToTake": null,
             "unit": "azureOpenAITokens",
             "inputs": [
               {
                 "name": "text",
                 "source": "/document/content",
-                "sourceContext": null,
                 "inputs": []
               },
               {
                 "name": "languageCode",
                 "source": "/document/languageCode",
-                "sourceContext": null,
                 "inputs": []
               }
             ],
@@ -192,22 +178,16 @@
           {
             "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
             "name": "skill4",
-            "description": null,
             "context": "/document/pages/*",
-            "defaultLanguageCode": null,
-            "maxKeyPhraseCount": null,
-            "modelVersion": null,
             "inputs": [
               {
                 "name": "text",
                 "source": "/document/content",
-                "sourceContext": null,
                 "inputs": []
               },
               {
                 "name": "languageCode",
                 "source": "/document/languageCode",
-                "sourceContext": null,
                 "inputs": []
               }
             ],
@@ -221,25 +201,18 @@
           {
             "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
             "name": "skill5",
-            "description": null,
-            "context": null,
             "uri": "https://contoso.example.org/",
             "httpMethod": "POST",
             "timeout": "PT5S",
-            "batchSize": null,
-            "degreeOfParallelism": null,
-            "authResourceId": null,
             "inputs": [
               {
                 "name": "text",
                 "source": "/document/content",
-                "sourceContext": null,
                 "inputs": []
               },
               {
                 "name": "languageCode",
                 "source": "/document/languageCode",
-                "sourceContext": null,
                 "inputs": []
               }
             ],
@@ -248,14 +221,9 @@
                 "name": "customresult",
                 "targetName": "result"
               }
-            ],
-            "httpHeaders": null,
-            "authIdentity": null
+            ]
           }
         ],
-        "cognitiveServices": null,
-        "knowledgeStore": null,
-        "indexProjections": null,
         "encryptionKey": {
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
@@ -263,8 +231,7 @@
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
-          },
-          "identity": null
+          }
         }
       }
     }

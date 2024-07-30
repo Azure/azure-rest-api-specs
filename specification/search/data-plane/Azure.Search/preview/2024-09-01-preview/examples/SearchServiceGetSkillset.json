@@ -10,7 +10,6 @@
   "responses": {
     "200": {
       "body": {
-        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#skillsets/$entity",
         "@odata.etag": "0x1234568AE7E58A1",
         "name": "myskillset",
         "description": "Skillset for extracting entities and more",
@@ -18,21 +17,16 @@
           {
             "@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",
             "name": "skill2",
-            "description": null,
             "context": "/document",
-            "defaultCountryHint": null,
-            "modelVersion": null,
             "inputs": [
               {
                 "name": "text",
                 "source": "/document/content",
-                "sourceContext": null,
                 "inputs": []
               },
               {
                 "name": "countryHint",
                 "source": "/document/countryHint",
-                "sourceContext": null,
                 "inputs": []
               }
             ],
@@ -46,7 +40,6 @@
           {
             "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
             "name": "skill3",
-            "description": null,
             "context": "/document",
             "defaultLanguageCode": "en",
             "textSplitMode": "pages",
@@ -58,13 +51,11 @@
               {
                 "name": "text",
                 "source": "/document/content",
-                "sourceContext": null,
                 "inputs": []
               },
               {
                 "name": "languageCode",
                 "source": "/document/languageCode",
-                "sourceContext": null,
                 "inputs": []
               }
             ],
@@ -85,22 +76,17 @@
           {
             "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
             "name": "skill4",
-            "description": null,
             "context": "/document/pages/*",
             "defaultLanguageCode": "en",
-            "maxKeyPhraseCount": null,
-            "modelVersion": null,
             "inputs": [
               {
                 "name": "text",
                 "source": "/document/content",
-                "sourceContext": null,
                 "inputs": []
               },
               {
                 "name": "languageCode",
                 "source": "/document/languageCode",
-                "sourceContext": null,
                 "inputs": []
               }
             ],
@@ -114,25 +100,20 @@
           {
             "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
             "name": "skill5",
-            "description": null,
             "context": "/document",
             "uri": "https://contoso.example.org/",
             "httpMethod": "POST",
             "timeout": "PT5S",
             "batchSize": 1000,
-            "degreeOfParallelism": null,
-            "authResourceId": null,
             "inputs": [
               {
                 "name": "text",
                 "source": "/document/content",
-                "sourceContext": null,
                 "inputs": []
               },
               {
                 "name": "languageCode",
                 "source": "/document/languageCode",
-                "sourceContext": null,
                 "inputs": []
               }
             ],
@@ -142,13 +123,9 @@
                 "targetName": "result"
               }
             ],
-            "httpHeaders": {},
-            "authIdentity": null
+            "httpHeaders": {}
           }
         ],
-        "cognitiveServices": null,
-        "knowledgeStore": null,
-        "indexProjections": null,
         "encryptionKey": {
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
@@ -156,8 +133,7 @@
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
-          },
-          "identity": null
+          }
         }
       }
     }

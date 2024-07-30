@@ -35,7 +35,6 @@
   "responses": {
     "201": {
       "body": {
-        "@odata.context": "https://previewexampleservice.search.windows.net/$metadata#indexers/$entity",
         "name": "myindexer",
         "description": "Description of the indexer",
         "dataSourceName": "mydocdbdatasource",
@@ -47,15 +46,12 @@
           "startTime": "2024-06-06T00:01:50.265Z"
         },
         "parameters": {
-          "batchSize": null,
           "maxFailedItems": 10,
           "maxFailedItemsPerBatch": 5,
-          "base64EncodeKeys": null,
           "configuration": {}
         },
         "fieldMappings": [],
         "outputFieldMappings": [],
-        "cache": null,
         "encryptionKey": {
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
@@ -63,8 +59,7 @@
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
-          },
-          "identity": null
+          }
         }
       }
     }
