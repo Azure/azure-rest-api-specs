@@ -63,6 +63,20 @@ input-file:
 
 ---
 
+## Suppression
+
+```yaml
+directive:
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where:
+      - $.definitions.AzureLargeInstance
+      - $.definitions.AzureLargeStorageInstance
+    from: azurelargeinstance.json
+    reason: 'This property is already a part of our API, cannot remove it'
+```
+
+---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -112,14 +126,4 @@ suppressions:
       - $.definitions.AzureLargeInstance
       - $.definitions.AzureLargeStorageInstance
     reason: All PUT actions are carried out internally by our specialized team utilizing Geneva actions. This process is not currently available for external use.
-```
-
-## Suppression
-
-```yaml
-directive:
-  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
-      - $.definitions.AzureLargeInstance
-      - $.definitions.AzureLargeStorageInstance
-    reason: 'This property is already a part of our API, cannot remove it'
 ```
