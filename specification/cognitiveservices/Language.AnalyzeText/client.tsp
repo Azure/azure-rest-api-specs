@@ -591,7 +591,10 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind", "csharp");
 
 @@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput", "csharp");
-@@clientName(MultiLanguageAnalysisInput.documents, "MultiLanguageInputs", "csharp");
+@@clientName(MultiLanguageAnalysisInput.documents,
+  "MultiLanguageInputs",
+  "csharp"
+);
 @@clientName(LanguageDetectionAnalysisInput,
   "LanguageDetectionTextInput",
   "csharp"
