@@ -18,12 +18,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assistant'
       requestBody:
-        description: The request details to use when creating a new assistant.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AssistantCreationOptions'
+        description: The request details to use when creating a new assistant.
     get:
       operationId: listAssistants
       description: Gets a list of assistants that were previously created.
@@ -125,12 +125,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Assistant'
       requestBody:
-        description: The request details to use when modifying an existing assistant.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAssistantOptions'
+        description: The request details to use when modifying an existing assistant.
     delete:
       operationId: deleteAssistant
       description: Deletes an assistant.
@@ -264,12 +264,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssistantThread'
       requestBody:
-        description: The details used to create a new assistant thread.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AssistantThreadCreationOptions'
+        description: The details used to create a new assistant thread.
   /threads/runs:
     post:
       operationId: createThreadAndRun
@@ -283,12 +283,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadRun'
       requestBody:
-        description: The details used when creating and immediately running a new assistant thread.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAndRunThreadOptions'
+        description: The details used when creating and immediately running a new assistant thread.
   /threads/{threadId}:
     get:
       operationId: getThread
@@ -325,12 +325,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssistantThread'
       requestBody:
-        description: The details used to update an existing assistant thread.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAssistantThreadOptions'
+        description: The details used to update an existing assistant thread.
     delete:
       operationId: deleteThread
       description: Deletes an existing thread.
@@ -367,12 +367,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadMessage'
       requestBody:
-        description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ThreadMessageOptions'
+        description: A single message within an assistant thread, as provided during that thread's creation for its initial state.
     get:
       operationId: listMessages
       description: Gets a list of messages that exist on a thread.
@@ -529,12 +529,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThreadRun'
       requestBody:
-        description: The details used when creating a new run of an assistant thread.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateRunOptions'
+        description: The details used when creating a new run of an assistant thread.
     get:
       operationId: listRuns
       description: Gets a list of runs for a specified thread.
@@ -918,12 +918,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/VectorStore'
       requestBody:
-        description: Request object for creating a vector store.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/VectorStoreOptions'
+        description: Request object for creating a vector store.
   /vector_stores/{vectorStoreId}:
     get:
       operationId: getVectorStore
@@ -960,12 +960,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/VectorStore'
       requestBody:
-        description: Request object for updating a vector store.
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/VectorStoreUpdateOptions'
+        description: Request object for updating a vector store.
     delete:
       operationId: deleteVectorStore
       description: Deletes the vector store object matching the specified ID.
