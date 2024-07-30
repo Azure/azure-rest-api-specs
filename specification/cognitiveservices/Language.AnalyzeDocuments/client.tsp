@@ -574,3 +574,29 @@ namespace Language.AnalyzeTextClientCustomizations;
   "AnalyzeDocumentsOperationActionKind",
   "csharp"
 );
+
+@@clientName(AbstractiveSummarizationLROTask,
+  "AbstractiveSummarizationOperationAction",
+  "csharp"
+);
+@@clientName(AbstractiveSummarizationLROTask.parameters,
+  "ActionContent",
+  "csharp"
+);
+@@clientName(AbstractiveSummarizationTaskParameters,
+  "AbstractiveSummarizationActionContent",
+  "csharp"
+);
+
+@@clientName(ExtractiveSummarizationLROTask,
+  "ExtractiveSummarizationOperationAction",
+  "csharp"
+);
+@@clientName(ExtractiveSummarizationLROTask.parameters,
+  "ActionContent",
+  "csharp"
+);
+@@clientName(ExtractiveSummarizationTaskParameters,
+  "ExtractiveSummarizationActionContent",
+  "csharp"
+);
