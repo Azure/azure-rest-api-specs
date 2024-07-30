@@ -23,7 +23,6 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsNamedToolSelection, Access.public);
-@@access(AI.Model.ChatCompletionsNamedFunctionToolSelection, Access.public);
 @@access(AI.Model.ChatCompletionsFunctionToolSelection, Access.public);
 @@access(AI.Model.ChatCompletionsResponseFormat, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);

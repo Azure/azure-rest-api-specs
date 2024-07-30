@@ -619,37 +619,28 @@
         "name"
       ]
     },
-    "ChatCompletionsNamedFunctionToolSelection": {
+    "ChatCompletionsNamedToolSelection": {
       "type": "object",
       "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the tool. Currently, only `function` is supported.",
+          "enum": [
+            "function"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
         "function": {
           "$ref": "#/definitions/ChatCompletionsFunctionToolSelection",
           "description": "The function that should be called."
         }
       },
       "required": [
+        "type",
         "function"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatCompletionsNamedToolSelection"
-        }
-      ],
-      "x-ms-discriminator-value": "function"
-    },
-    "ChatCompletionsNamedToolSelection": {
-      "type": "object",
-      "description": "An abstract representation of an explicit, named tool selection to use for a chat completions request.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The object type."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
       ]
     },
     "ChatCompletionsResponseFormat": {

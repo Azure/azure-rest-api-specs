@@ -413,17 +413,9 @@ union ChatCompletionsToolSelectionPreset {
   required: "required",
 }
 
-@discriminator("type")
-@doc("An abstract representation of an explicit, named tool selection to use for a chat completions request.")
-model ChatCompletionsNamedToolSelection {
-  @doc("The object type.")
-  type: string;
-}
-
 @doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
-model ChatCompletionsNamedFunctionToolSelection
-  extends ChatCompletionsNamedToolSelection {
-  @doc("The object type, which is always 'function'.")
+model ChatCompletionsNamedToolSelection {
+  @doc("The type of the tool. Currently, only `function` is supported.")
   type: "function";
 
   @doc("The function that should be called.")
