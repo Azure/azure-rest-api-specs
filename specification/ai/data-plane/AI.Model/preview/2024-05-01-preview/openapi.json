@@ -159,7 +159,7 @@
                 },
                 "tools": {
                   "type": "array",
-                  "description": "The available tool definitions that the chat completions request can use, including caller-defined functions.",
+                  "description": "A list of tools the model may request to call. Currently, only functions are supported as a tool. The model\nmay response with a function call request and provide the input arguments in JSON format for that function.",
                   "minItems": 1,
                   "items": {
                     "$ref": "#/definitions/ChatCompletionsToolDefinition"
@@ -182,7 +182,8 @@
               },
               "required": [
                 "messages"
-              ]
+              ],
+              "additionalProperties": {}
             }
           }
         ],
@@ -292,7 +293,8 @@
               },
               "required": [
                 "input"
-              ]
+              ],
+              "additionalProperties": {}
             }
           }
         ],
@@ -403,7 +405,8 @@
               },
               "required": [
                 "input"
-              ]
+              ],
+              "additionalProperties": {}
             }
           }
         ],
@@ -603,44 +606,6 @@
         "choices"
       ]
     },
-    "ChatCompletionsFunctionToolCall": {
-      "type": "object",
-      "description": "A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents\na function invocation needed for a subsequent chat completions request to resolve.",
-      "properties": {
-        "function": {
-          "$ref": "#/definitions/FunctionCall",
-          "description": "The details of the function invocation requested by the tool call."
-        }
-      },
-      "required": [
-        "function"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatCompletionsToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "function"
-    },
-    "ChatCompletionsFunctionToolDefinition": {
-      "type": "object",
-      "description": "The definition information for a chat completions function tool that can call a function in response to a tool call.",
-      "properties": {
-        "function": {
-          "$ref": "#/definitions/FunctionDefinition",
-          "description": "The function definition details for the function tool."
-        }
-      },
-      "required": [
-        "function"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatCompletionsToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "function"
-    },
     "ChatCompletionsFunctionToolSelection": {
       "type": "object",
       "description": "A tool selection of a specific, named function tool that will limit chat completions to using the named function.",
@@ -723,35 +688,55 @@
     },
     "ChatCompletionsToolCall": {
       "type": "object",
-      "description": "An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested\nchat completion.",
+      "description": "A function tool call requested by the AI model.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The object type."
-        },
         "id": {
           "type": "string",
           "description": "The ID of the tool call."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of tool call. Currently, only `function` is supported.",
+          "enum": [
+            "function"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "function": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The details of the function call requested by the AI model."
         }
       },
-      "discriminator": "type",
       "required": [
+        "id",
         "type",
-        "id"
+        "function"
       ]
     },
     "ChatCompletionsToolDefinition": {
       "type": "object",
-      "description": "An abstract representation of a tool that can be used by the model to improve a chat completions response.",
+      "description": "The definition of a chat completions tool that can call a function.",
       "properties": {
         "type": {
           "type": "string",
-          "description": "The object type."
+          "description": "The type of the tool. Currently, only `function` is supported.",
+          "enum": [
+            "function"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "function": {
+          "$ref": "#/definitions/FunctionDefinition",
+          "description": "The function definition details for the function tool."
         }
       },
-      "discriminator": "type",
       "required": [
-        "type"
+        "type",
+        "function"
       ]
     },
     "ChatCompletionsToolSelectionPreset": {
@@ -1342,7 +1327,9 @@
           "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
         },
         "parameters": {
-          "description": "The parameters the function accepts, described as a JSON Schema object."
+          "type": "object",
+          "description": "The parameters the function accepts, described as a JSON Schema object.",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -1435,7 +1422,7 @@
           "x-nullable": true
         },
         "delta": {
-          "$ref": "#/definitions/ChatResponseMessage",
+          "$ref": "#/definitions/StreamingChatResponseMessageUpdate",
           "description": "An update to the chat message for a given chat completions prompt."
         }
       },
@@ -1482,6 +1469,42 @@
         "model",
         "usage",
         "choices"
+      ]
+    },
+    "StreamingChatResponseMessageUpdate": {
+      "type": "object",
+      "description": "A representation of a chat message update as received in a streaming response.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message."
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "items": {
+            "$ref": "#/definitions/StreamingChatResponseToolCallUpdate"
+          },
+          "x-ms-client-name": "toolCalls"
+        }
+      }
+    },
+    "StreamingChatResponseToolCallUpdate": {
+      "type": "object",
+      "description": "An update to the function tool call information requested by the AI model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the tool call."
+        },
+        "function": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "Updates to the function call requested by the AI model."
+        }
+      },
+      "required": [
+        "id",
+        "function"
       ]
     }
   },
