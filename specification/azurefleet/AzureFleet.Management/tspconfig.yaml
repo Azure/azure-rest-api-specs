@@ -37,3 +37,13 @@ options:
     service-name: Compute Fleet
     examples-directory: "examples"
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/computefleet"
+    package-dir: "armcomputefleet"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}
+    flavor: "azure"
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
+    examples-directory: ./examples

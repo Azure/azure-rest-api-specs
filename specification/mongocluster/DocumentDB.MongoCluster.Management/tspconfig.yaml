@@ -23,6 +23,16 @@ options:
     namespace: "com.azure.resourcemanager.mongocluster"
     service-name: "Mongo Cluster"
     examples-directory: "examples"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/mongocluster"
+    package-dir: "armmongocluster"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}
+    flavor: "azure"
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
+    examples-directory: ./examples
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

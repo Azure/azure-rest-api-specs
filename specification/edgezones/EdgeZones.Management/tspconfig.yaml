@@ -27,3 +27,13 @@ options:
     namespace: "com.azure.resourcemanager.edgezones"
     service-name: "Edge Zones"
     examples-directory: "examples"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/edgezones"
+    package-dir: "armedgezones"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}
+    flavor: "azure"
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
+    examples-directory: ./examples
