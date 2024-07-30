@@ -108,7 +108,8 @@ These set of linting rules aren't applicable to the AzureLargeInstance RP so sup
 ``` yaml
 directive:
   - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
-    where: $.definitions
+      - $.definitions.AzureLargeInstance
+      - $.definitions.AzureLargeStorageInstance
     from: azurelargeinstance.json
     reason: 'This property is already a part of our API, cannot remove it'
 suppressions:
