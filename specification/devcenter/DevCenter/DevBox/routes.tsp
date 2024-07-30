@@ -529,7 +529,7 @@ interface DevBoxes {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No model for this."
   @doc("Gets the log for an imaging build task.")
-  @route("/projects/{projectName}/imagebuildLogs/{imagebuildLogId}")
+  @route("/projects/{projectName}/imageBuildLogs/{imageBuildLogId}")
   @get
   @added(APIVersions.v2024_08_01_preview)
   getImagingTaskLog is Azure.Core.Foundations.Operation<
@@ -543,7 +543,7 @@ interface DevBoxes {
 
       @doc("An imaging build log id.")
       @path
-      imagebuildLogId: uuid;
+      imageBuildLogId: uuid;
     },
     {
       @doc("Set producer to text/plain")
