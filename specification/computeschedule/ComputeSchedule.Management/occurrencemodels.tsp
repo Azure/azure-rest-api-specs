@@ -60,13 +60,12 @@ model Occurrence is ProxyResource<OccurrenceProperties>{
   ...ResourceNameParameter<
   Occurrence,
   KeyName="occurrenceId",
-  NamePattern="[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
-  Type=uuid>
+  NamePattern="[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}">
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 model OccurrenceResource is AutoActionResource {
-  @doc("The time the occurrence is schedulded for the resource.")
+  @doc("The time the occurrence is scheduled for the resource.")
   @visibility("read")
   scheduledTime : utcDateTime;
 

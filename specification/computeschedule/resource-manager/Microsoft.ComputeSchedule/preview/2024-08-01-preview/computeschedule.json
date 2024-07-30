@@ -1264,7 +1264,6 @@
             "description": "The name of the Occurrence",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
           }
         ],
@@ -1320,7 +1319,6 @@
             "description": "The name of the Occurrence",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
           },
           {
@@ -1386,7 +1384,6 @@
             "description": "The name of the Occurrence",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
           },
           {
@@ -1448,7 +1445,6 @@
             "description": "The name of the Occurrence",
             "required": true,
             "type": "string",
-            "format": "uuid",
             "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
           }
         ],
@@ -2443,14 +2439,14 @@
         "location"
       ]
     },
-    "Laguage": {
+    "Language": {
       "type": "string",
       "description": "The support notification languages by auto action",
       "enum": [
         "en-us"
       ],
       "x-ms-enum": {
-        "name": "Laguage",
+        "name": "Language",
         "modelAsString": true,
         "values": [
           {
@@ -2564,12 +2560,12 @@
           "description": "Type of notification to be sent."
         },
         "language": {
-          "$ref": "#/definitions/Laguage",
+          "$ref": "#/definitions/Language",
           "description": "The language the notification should be sent on."
         },
-        "additionalMetadata": {
+        "metadata": {
           "type": "object",
-          "description": "Additional optitional metadata regarding notification.",
+          "description": "Optional metadata regarding notification.",
           "additionalProperties": {
             "type": "string"
           }
@@ -2683,7 +2679,7 @@
         "scheduledTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the occurrence is schedulded for the resource.",
+          "description": "The time the occurrence is scheduled for the resource.",
           "readOnly": true
         },
         "provisioningState": {

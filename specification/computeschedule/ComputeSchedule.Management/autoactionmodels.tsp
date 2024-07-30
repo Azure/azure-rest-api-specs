@@ -185,7 +185,7 @@ union NotificationType {
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The support notification languages by auto action")
-union Laguage {
+union Language {
   @doc("American english language")
   EnUs : "en-us",
 
@@ -203,10 +203,10 @@ model NotificationProperties {
   type : NotificationType;
 
   @doc("The language the notification should be sent on.")
-  language : Laguage;
+  language : Language;
 
-  @doc("Additional optitional metadata regarding notification.")
-  additionalMetadata? : Record<string>;
+  @doc("Optional metadata regarding notification.")
+  metadata? : Record<string>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
