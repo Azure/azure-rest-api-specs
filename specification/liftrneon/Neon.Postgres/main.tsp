@@ -40,8 +40,6 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
   @doc("Name of the Neon Organizations resource")
   @path
   name: string;
-
-  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations
