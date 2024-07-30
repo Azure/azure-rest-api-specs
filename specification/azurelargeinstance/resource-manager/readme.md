@@ -106,27 +106,20 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 These set of linting rules aren't applicable to the AzureLargeInstance RP so suppressing them here.
 
 ``` yaml
-directive:
-  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
-      - $.definitions.StorageProfile.properties.nfsIpAddress
-      - $.definitions.OsProfile.properties.osType
-      - $.definitions.AzureLargeInstanceProperties.properties.azureLargeInstanceId
-      - $.definitions.AzureLargeInstanceProperties.properties.powerState
-      - $.definitions.AzureLargeInstanceProperties.properties.proximityPlacementGroup
-      - $.definitions.AzureLargeInstanceProperties.properties.hwRevision
-      - $.definitions.AzureLargeInstanceProperties.properties.provisioningState
-      - $.definitions.AzureLargeInstanceProvisioningStatesEnum
-      - $.definitions.Disk.properties.lun
-      - $.definitions.HardwareProfile.hardwareType
-      - $.definitions.HardwareProfile.properties.azureLargeInstanceSize
-      - $.definitions.NetworkProfile.properties.circuitId
-      - $.definitions.OsProfile.properties.version
-      - $.definitions.ProvisioningState
-    reason: 'This property is already a part of our API, cannot remove it'
 suppressions:
   - code: TrackedResourcesMustHavePut
     where:
       - $.definitions.AzureLargeInstance
       - $.definitions.AzureLargeStorageInstance
     reason: All PUT actions are carried out internally by our specialized team utilizing Geneva actions. This process is not currently available for external use.
+```
+
+## Suppression
+
+```yaml
+directive:
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+      - $.definitions.AzureLargeInstance
+      - $.definitions.AzureLargeStorageInstance
+    reason: 'This property is already a part of our API, cannot remove it'
 ```
