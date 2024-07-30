@@ -4051,12 +4051,111 @@
         }
       }
     },
+    "AzureCosmosDBSinkConnectorServiceInfo": {
+      "x-ms-discriminator-value": "AzureCosmosDBSinkConnector",
+      "type": "object",
+      "description": "The authentication info when auth_type is AzureCosmosDBSinkConnector",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorServiceTypeInfoBase"
+        }
+      ],
+      "properties": {
+        "cosmosDatabaseName": {
+          "description": "Azure Cosmos Database Name",
+          "type": "string"
+        },
+        "cosmosMasterKey": {
+          "description": "Azure Cosmos Database Master Key",
+          "type": "string"
+        },
+        "cosmosConnectionEndpoint": {
+          "description": "Azure Cosmos Database Connection Endpoint",
+          "type": "string"
+        },
+        "cosmosContainersTopicMapping": {
+          "description": "Azure Cosmos Database Containers Topic Mapping",
+          "type": "string"
+        },
+        "cosmosIdStrategy": {
+          "description": "Azure Cosmos Database Id Strategy",
+          "type": "string"
+        }
+      }
+    },
+    "AzureCosmosDBSourceConnectorServiceInfo": {
+      "x-ms-discriminator-value": "AzureCosmosDBSourceConnector",
+      "type": "object",
+      "description": "The authentication info when auth_type is AzureCosmosDBSourceConnector",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorServiceTypeInfoBase"
+        }
+      ],
+      "properties": {
+        "cosmosDatabaseName": {
+          "description": "Azure Cosmos Database Name",
+          "type": "string"
+        },
+        "cosmosMasterKey": {
+          "description": "Azure Cosmos Database Master Key",
+          "type": "string"
+        },
+        "cosmosConnectionEndpoint": {
+          "description": "Azure Cosmos Database Connection Endpoint",
+          "type": "string"
+        },
+        "cosmosContainersTopicMapping": {
+          "description": "Azure Cosmos Database Containers Topic Mapping",
+          "type": "string"
+        },
+        "cosmosMessageKeyEnabled": {
+          "description": "Azure Cosmos Database Message Key Enabled",
+          "type": "boolean"
+        },
+        "cosmosMessageKeyField": {
+          "description": "Azure Cosmos Database Message Key Field",
+          "type": "string"
+        }
+      }
+    },
+    "AzureSynapseAnalyticsSinkConnectorServiceInfo": {
+      "x-ms-discriminator-value": "AzureSynapseAnalyticsSinkConnector",
+      "type": "object",
+      "description": "The authentication info when auth_type is AzureSynapseAnalyticsSinkConnector",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorServiceTypeInfoBase"
+        }
+      ],
+      "properties": {
+        "synapseSqlServerName": {
+          "description": "Azure Synapse Analytics SQL Server Name",
+          "type": "string"
+        },
+        "synapseSqlUser": {
+          "description": "Azure Synapse SQL login details",
+          "type": "string"
+        },
+        "synapseSqlPassword": {
+          "description": "Azure Synapse SQL login details",
+          "type": "string"
+        },
+        "synapseSqlDatabaseName": {
+          "description": "Azure Synapse Dedicated SQL Pool Database Name",
+          "type": "string"
+        }
+      }
+    },
     "ConnectorServiceType": {
       "description": "The connector service type.",
       "type": "string",
       "enum": [
         "AzureBlobStorageSinkConnector",
-        "AzureBlobStorageSourceConnector"
+        "AzureBlobStorageSourceConnector",
+        "AzureCosmosDBSinkConnector",
+        "AzureCosmosDBSourceConnector",
+        "AzureSynapseAnalyticsSinkConnector"
       ],
       "x-ms-enum": {
         "name": "ConnectorServiceType",
@@ -4214,12 +4313,182 @@
         }
       }
     },
+    "KafkaAzureCosmosDBSinkConnectorInfo": {
+      "x-ms-discriminator-value": "KafkaAzureCosmosDBSink",
+      "type": "object",
+      "description": "The partner connector type is KafkaAzureCosmosDBSink",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartnerInfoBase"
+        }
+      ],
+      "properties": {
+        "authType": {
+          "description": "Kafka Auth Type",
+          "$ref": "#/definitions/authType"
+        },
+        "inputFormat": {
+          "description": "Kafka Input Data Format Type",
+          "$ref": "#/definitions/DataFormatType"
+        },
+        "outputFormat": {
+          "description": "Kafka Output Data Format Type",
+          "$ref": "#/definitions/DataFormatType"
+        },
+        "apiKey": {
+          "description": "Kafka API Key",
+          "type": "string"
+        },
+        "apiSecret": {
+          "description": "Kafka API Key Secret",
+          "type": "string"
+        },
+        "serviceAccountId": {
+          "description": "Kafka Service Account Id",
+          "type": "string"
+        },
+        "topics": {
+          "description": "Kafka topics list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "topicsDir": {
+          "description": "Kafka topics directory",
+          "type": "string"
+        },
+        "flushSize": {
+          "description": "Flush size",
+          "type": "string"
+        },
+        "maxTasks": {
+          "description": "Maximum Tasks",
+          "type": "string"
+        },
+        "timeInterval": {
+          "description": "Time Interval",
+          "type": "string"
+        }
+      }
+    },
+    "KafkaAzureCosmosDBSourceConnectorInfo": {
+      "x-ms-discriminator-value": "KafkaAzureCosmosDBSource",
+      "type": "object",
+      "description": "The partner connector type is KafkaAzureCosmosDBSource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartnerInfoBase"
+        }
+      ],
+      "properties": {
+        "authType": {
+          "description": "Kafka Auth Type",
+          "$ref": "#/definitions/authType"
+        },
+        "inputFormat": {
+          "description": "Kafka Input Data Format Type",
+          "$ref": "#/definitions/DataFormatType"
+        },
+        "outputFormat": {
+          "description": "Kafka Output Data Format Type",
+          "$ref": "#/definitions/DataFormatType"
+        },
+        "apiKey": {
+          "description": "Kafka API Key",
+          "type": "string"
+        },
+        "apiSecret": {
+          "description": "Kafka API Secret",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "serviceAccountId": {
+          "description": "Kafka Service Account Id",
+          "type": "string"
+        },
+        "topicRegex": {
+          "description": "Kafka topics Regex pattern",
+          "type": "string"
+        },
+        "topicsDir": {
+          "description": "Kafka topics directory",
+          "type": "string"
+        },
+        "maxTasks": {
+          "description": "Maximum Tasks",
+          "type": "string"
+        }
+      }
+    },
+    "KafkaAzureSynapseAnalyticsSinkConnectorInfo": {
+      "x-ms-discriminator-value": "KafkaAzureSynapseAnalyticsSink",
+      "type": "object",
+      "description": "The partner connector type is KafkaAzureSynapseAnalyticsSink",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartnerInfoBase"
+        }
+      ],
+      "properties": {
+        "authType": {
+          "description": "Kafka Auth Type",
+          "$ref": "#/definitions/authType"
+        },
+        "inputFormat": {
+          "description": "Kafka Input Data Format Type",
+          "$ref": "#/definitions/DataFormatType"
+        },
+        "outputFormat": {
+          "description": "Kafka Output Data Format Type",
+          "$ref": "#/definitions/DataFormatType"
+        },
+        "apiKey": {
+          "description": "Kafka API Key",
+          "type": "string"
+        },
+        "apiSecret": {
+          "description": "Kafka API Key Secret",
+          "type": "string"
+        },
+        "serviceAccountId": {
+          "description": "Kafka Service Account Id",
+          "type": "string"
+        },
+        "topics": {
+          "description": "Kafka topics list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "topicsDir": {
+          "description": "Kafka topics directory",
+          "type": "string"
+        },
+        "flushSize": {
+          "description": "Flush size",
+          "type": "string"
+        },
+        "maxTasks": {
+          "description": "Maximum Tasks",
+          "type": "string"
+        },
+        "timeInterval": {
+          "description": "Time Interval",
+          "type": "string"
+        }
+      }
+    },
     "PartnerConnectorType": {
       "description": "Partner Connector type.",
       "type": "string",
       "enum": [
         "KafkaAzureBlobStorageSource",
-        "KafkaAzureBlobStorageSink"
+        "KafkaAzureBlobStorageSink",
+        "KafkaAzureCosmosDBSource",
+        "KafkaAzureCosmosDBSink",
+        "KafkaAzureSynapseAnalyticsSink"
       ],
       "x-ms-enum": {
         "name": "PartnerConnectorType",
