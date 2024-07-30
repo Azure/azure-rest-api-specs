@@ -23,9 +23,9 @@ interface ContentSafetyClient {
 @@clientName(ContentSafetyClient.analyzeImage.body, "options", "java");
 @@clientName(ContentSafetyClient.analyzeImage.body, "options", "python");
 
-@@clientName(ContentSafetyClient.analyzeText::parameters.body, "options", "csharp");
-@@clientName(ContentSafetyClient.analyzeText::parameters.body, "options", "java");
-@@clientName(ContentSafetyClient.analyzeText::parameters.body, "options", "python");
+@@clientName(ContentSafetyClient.analyzeText::body, "options", "csharp");
+@@clientName(ContentSafetyClient.analyzeText::body, "options", "java");
+@@clientName(ContentSafetyClient.analyzeText::body, "options", "python");
 
 @@clientName(ContentSafetyClient.detectTextProtectedMaterial::parameters.body, "options", "csharp");
 @@clientName(ContentSafetyClient.detectTextProtectedMaterial::parameters.body, "options", "java");
