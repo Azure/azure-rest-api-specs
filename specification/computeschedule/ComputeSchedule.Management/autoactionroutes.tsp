@@ -37,7 +37,7 @@ interface AutoActions {
   @doc("enables the auto action")
   enable is ArmResourceActionNoContentNoResponseSync<AutoAction>;
 
-  cancelNextOccurrence is ArmResourceActionAsync<AutoAction, void, Occurrence>;
+  cancelNextOccurrence is ArmResourceActionAsync<AutoAction, OccurrenceResource[], Occurrence>;
   triggerManualOccurrence is ArmResourceActionAsync<AutoAction, void, Occurrence>;
 }
 
