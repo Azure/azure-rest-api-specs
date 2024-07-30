@@ -98,8 +98,8 @@ model CompanyDetails {
   @doc("Office address of the company")
   officeAddress?: string;
 
-  @doc("Bussiness phone number of the company")
-  bussinessPhone?: string;
+  @doc("Business phone number of the company")
+  businessPhone?: string;
 
   @doc("Domain of the user")
   domain?: string;
