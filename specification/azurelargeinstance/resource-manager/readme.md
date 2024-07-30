@@ -80,6 +80,7 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
+
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
@@ -107,7 +108,7 @@ These set of linting rules aren't applicable to the AzureLargeInstance RP so sup
 ``` yaml
 directive:
   - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
-    where: $.definitions.Resource
+    where: $.definitions
     from: azurelargeinstance.json
     reason: 'This property is already a part of our API, cannot remove it'
 suppressions:
