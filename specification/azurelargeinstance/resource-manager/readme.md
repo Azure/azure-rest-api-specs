@@ -69,8 +69,20 @@ input-file:
 directive:
   - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
     where:
-      - $.definitions.AzureLargeInstance
-      - $.definitions.AzureLargeStorageInstance
+      - $.definitions.StorageProfile.properties.nfsIpAddress
+      - $.definitions.OsProfile.properties.osType
+      - $.definitions.AzureLargeInstanceProperties.properties.azureLargeInstanceId
+      - $.definitions.AzureLargeInstanceProperties.properties.powerState
+      - $.definitions.AzureLargeInstanceProperties.properties.proximityPlacementGroup
+      - $.definitions.AzureLargeInstanceProperties.properties.hwRevision
+      - $.definitions.AzureLargeInstanceProperties.properties.provisioningState
+      - $.definitions.AzureLargeInstanceProvisioningStatesEnum
+      - $.definitions.Disk.properties.lun
+      - $.definitions.HardwareProfile.hardwareType
+      - $.definitions.HardwareProfile.properties.azureLargeInstanceSize
+      - $.definitions.NetworkProfile.properties.circuitId
+      - $.definitions.OsProfile.properties.version
+      - $.definitions.ProvisioningState
     from: azurelargeinstance.json
     reason: 'This property is already a part of our API, cannot remove it'
 ```
