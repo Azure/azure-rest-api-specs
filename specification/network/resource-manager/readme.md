@@ -122,6 +122,15 @@ suppressions:
     reason: False alarm.
   - code: PatchIdentityProperty
     reason: False alarm.
+  - code: BodyTopLevelProperties
+    from: networkVerifier.json
+    reason: Bug.
+  - code: BodyTopLevelProperties
+    from: ipAdddressManager.json
+    reason: Bug.
+  - code: BodyTopLevelProperties
+    from: networkManagerSecurityAdminConfiguration.json
+    reason: Bug.
 ```
 
 ### Tag: package-2023-11-preview
