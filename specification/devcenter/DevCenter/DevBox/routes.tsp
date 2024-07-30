@@ -528,11 +528,11 @@ interface DevBoxes {
   getOperation is StandardResourceOperations.ResourceRead<DevBoxOperation>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No model for this."
-  @doc("Gets the log for an imaging customization task.")
-  @route("/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/customizationGroups/{customizationGroupName}/logs/{customizationTaskId}")
+  @doc("Gets the log for an imaging build task.")
+  @route("/projects/{projectName}/imagebuildLogs/{imagebuildLogId}")
   @get
   @added(APIVersions.v2024_08_01_preview)
-  getImagingCustomizationTaskLog is Azure.Core.Foundations.Operation<
+  getImagingTaskLog is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @maxLength(63)
@@ -541,40 +541,9 @@ interface DevBoxes {
       @path
       projectName: string;
 
-      @doc("The name of the catalog hosting the image definition.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @doc("An imaging build log id.")
       @path
-      catalogName: string;
-
-      @doc("The name of the image definition.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      imageDefinitionName: string;
-
-      @doc("The name of the build.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      buildName: string;
-
-      @doc("A customization group name.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      customizationGroupName: string;
-
-      @doc("A customization task ID.")
-      @maxLength(36)
-      @minLength(36)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
-      @path
-      customizationTaskId: string;
+      imagebuildLogId: uuid;
     },
     {
       @doc("Set producer to text/plain")

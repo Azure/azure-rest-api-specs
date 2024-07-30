@@ -470,106 +470,6 @@
         }
       }
     },
-    "/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/customizationGroups/{customizationGroupName}/logs/{customizationTaskId}": {
-      "get": {
-        "operationId": "DevBoxes_GetImagingCustomizationTaskLog",
-        "description": "Gets the log for an imaging customization task.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "description": "The name of the catalog hosting the image definition.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "imageDefinitionName",
-            "in": "path",
-            "description": "The name of the image definition.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "buildName",
-            "in": "path",
-            "description": "The name of the build.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "customizationGroupName",
-            "in": "path",
-            "description": "A customization group name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "customizationTaskId",
-            "in": "path",
-            "description": "A customization task ID.",
-            "required": true,
-            "type": "string",
-            "minLength": 36,
-            "maxLength": 36,
-            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the log for a customization task.": {
-            "$ref": "./examples/DevBoxes_GetImagingCustomizationTaskLog.json"
-          }
-        }
-      }
-    },
     "/projects/{projectName}/customizationTasks": {
       "get": {
         "operationId": "DevBoxes_ListCustomizationTaskDefinitionsByProject",
@@ -957,6 +857,64 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/projects/{projectName}/imagebuildLogs/{imagebuildLogId}": {
+      "get": {
+        "operationId": "DevBoxes_GetImagingTaskLog",
+        "description": "Gets the log for an imaging build task.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The DevCenter Project upon which to execute operations.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "imagebuildLogId",
+            "in": "path",
+            "description": "An imaging build log id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the log for an imaging build task.": {
+            "$ref": "./examples/DevBoxes_GetImagingTaskLog.json"
+          }
         }
       }
     },
