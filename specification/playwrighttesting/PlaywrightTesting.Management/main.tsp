@@ -95,6 +95,16 @@ interface Accounts
   extends TrackedResourceOperations<Account, AccountProperties> {
   @doc("Adds check global name availability operation, normally used if a resource name must be globally unique.")
   checkNameAvailability is checkGlobalNameAvailability;
+
+  delete is ArmResourceDeleteWithoutOkAsync<Account>;
+
+  update is ArmCustomPatchSync<
+    Account,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Account,
+      OmitDefaults<AccountProperties>
+    >
+  >;
 }
 
 @doc("The location of quota resource.")
@@ -111,7 +121,6 @@ model Location {
 @doc("A quota resource.")
 @parentResource(Location)
 model Quota is ProxyResource<QuotaProperties> {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The quota name.")
   @key("quotaName")
   @path
