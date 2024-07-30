@@ -3,8 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.CommonTypes;
-
-namespace Microsoft.DocumentDB;
+using Microsoft.DocumentDB;
 
 @@clientName(Microsoft.DocumentDB, "MongoClusterMgmtClient", "python");
 @@access(Operations.list, Access.internal, "csharp");
@@ -14,10 +13,6 @@ namespace Microsoft.DocumentDB;
 );
 @@clientName(MongoClusterRestoreParameters,
     "MongoClusterRestoreContent",
-    "csharp"
-);
-@@clientName(PrivateLinkResource,
-    "MongoClusterPrviateLinkResourceData",
     "csharp"
 );
 @@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");

@@ -6,7 +6,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Private;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /** Represents a mongo cluster resource. */
