@@ -58,6 +58,10 @@ enum ApiVersions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2024-05-20-preview version of the VideoTranslation service.")
   v2024_05_20_preview: "2024-05-20-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("The 2024-07-30-preview version of the VideoTranslation service.")
+  v2024_07_30_preview: "2024-07-30-preview",
 }
 
 @doc("Task status.")
@@ -164,8 +168,15 @@ model IterationInput {
   @doc("Speaker count of the video.")
   speakerCount?: int32;
 
+  @doc("Speaker count of the video.")
+  enableLipSync?: boolean;
+
   @doc("Subtitle max char count per segment.")
   subtitleMaxCharCountPerSegment?: int32;
+
+  @doc("Speaker consents.")
+  @added(ApiVersions.v2024_07_30_preview)
+  speakerConsents?: Array<SpakerConsent>;
 
   @doc("Webvtt file for content editing.")
   webvttFile?: WebvttFile;
@@ -258,7 +269,8 @@ model Operation {
   status?: Status;
 }
 
-@doc("Consent template.")
+@doc("Default consent template.")
+@added(ApiVersions.v2024_07_30_preview)
 @TypeSpec.Rest.resource("defaultConsentTemplates")
 model DefaultConsentTemplate {
   @doc("Default consent template ID, use locale as ID.")
@@ -275,6 +287,7 @@ model DefaultConsentTemplate {
 }
 
 @doc("Consent template slot.")
+@added(ApiVersions.v2024_07_30_preview)
 model DefaultConsentTemplateSlot {
   @doc("Localized slot name.")
   @visibility("read")
@@ -287,6 +300,7 @@ model DefaultConsentTemplateSlot {
 
 @doc("Consent.")
 @TypeSpec.Rest.resource("consents")
+@added(ApiVersions.v2024_07_30_preview)
 model Consent {
   @doc("Consent ID")
   @key("consentId")
@@ -296,7 +310,10 @@ model Consent {
   @doc("Consent locale name.")
   locale: localeName;
 
-  @doc("Iteration description")
+  @doc("Consent name")
+  displayName?: string;
+
+  @doc("Consent description")
   description?: string;
 
   @doc("Audio file url.")
@@ -307,6 +324,9 @@ model Consent {
 
   @doc("Company name.")
   companyName: string;
+
+  @doc("Template name.")
+  templateName: string;
 
   @doc("Consent status")
   @visibility("read")
@@ -323,6 +343,17 @@ model Consent {
   @doc("The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
   @visibility("read")
   lastActionDateTime?: utcDateTime;
+}
+
+@doc("Consent used by speaker used by iteration creation or.")
+@added(ApiVersions.v2024_07_30_preview)
+model SpakerConsent {
+  @doc("Consent ID")
+  @visibility("read")
+  consentId: resourceId;
+
+  @doc("Speaker ID.")
+  speakerId: string;
 }
 
 interface TranslationOperations {
@@ -370,11 +401,13 @@ interface OperationOperations {
   getOperation is ops.ResourceRead<Operation>;
 }
 
+@added(ApiVersions.v2024_07_30_preview)
 interface DefaultConsentTemplateOperations {
   @doc("Fetch a default consent template by locale.")
   getDefaultConsentTemplate is ops.ResourceRead<DefaultConsentTemplate>;
 }
 
+@added(ApiVersions.v2024_07_30_preview)
 interface ConsentOperations {
   // Due to PR bulid need both "Create" and "Update" word in operation ID.
   @doc("Creates an consent.")
