@@ -244,6 +244,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create consent": {
+            "$ref": "./examples/ConsentOperations_CreateOrReplaceConsent.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
         },
@@ -780,9 +785,6 @@
         "x-ms-examples": {
           "Create Iteration": {
             "$ref": "./examples/IterationOperations_CreateOrReplaceIteration.json"
-          },
-          "Create consent": {
-            "$ref": "./examples/ConsentOperations_CreateOrReplaceConsent.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -888,10 +890,6 @@
           "type": "string",
           "description": "Company name."
         },
-        "templateName": {
-          "type": "string",
-          "description": "Template name."
-        },
         "status": {
           "$ref": "#/definitions/Status",
           "description": "Consent status",
@@ -920,8 +918,7 @@
         "locale",
         "audioUrl",
         "voiceTalentName",
-        "companyName",
-        "templateName"
+        "companyName"
       ]
     },
     "DefaultConsentTemplate": {

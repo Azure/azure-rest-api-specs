@@ -325,9 +325,6 @@ model Consent {
   @doc("Company name.")
   companyName: string;
 
-  @doc("Template name.")
-  templateName: string;
-
   @doc("Consent status")
   @visibility("read")
   status?: Status;
