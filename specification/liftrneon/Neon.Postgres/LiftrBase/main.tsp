@@ -34,8 +34,8 @@ scalar Uri extends string;
 
 @doc("Marketplace details for an organization")
 model MarketplaceDetails {
-  @doc("Azure subscription id for the the marketplace offer is purchased from")
-  subscriptionId: string;
+  @doc("SaaS subscription id for the the marketplace offer")
+  subscriptionId?: string;
 
   @doc("Marketplace subscription status")
   subscriptionStatus?: MarketplaceSubscriptionStatus;
@@ -58,10 +58,10 @@ model OfferDetails {
   @doc("Plan Name for the marketplace offer")
   planName?: string;
 
-  @doc("Plan Display Name for the marketplace offer")
+  @doc("Term Name for the marketplace offer")
   termUnit?: string;
 
-  @doc("Plan Display Name for the marketplace offer")
+  @doc("Term Id for the marketplace offer")
   termId?: string;
 }
 
@@ -87,14 +87,38 @@ model UserDetails {
   phoneNumber?: string;
 }
 
+@doc("Company details for an organization")
+model CompanyDetails {
+  @doc("Company name")
+  companyName?: string;
+
+  @doc("Country name of the company")
+  country?: string;
+
+  @doc("Office address of the company")
+  officeAddress?: string;
+
+  @doc("Bussiness phone number of the company")
+  bussinessPhone?: string;
+
+  @doc("Domain of the user")
+  domain?: string;
+
+  @doc("Number of employees in the company")
+  numberOfEmployees?: int64;
+}
+
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties {
   @doc("Marketplace details of the resource.")
   @visibility("create", "read")
-  marketplace: MarketplaceDetails;
+  marketplaceDetails: MarketplaceDetails;
 
   @doc("Details of the user.")
-  user: UserDetails;
+  userDetails: UserDetails;
+
+  @doc("Details of the company.")
+  companyDetails: CompanyDetails;
 
   @doc("Provisioning state of the resource.")
   @visibility("read")

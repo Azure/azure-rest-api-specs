@@ -496,11 +496,42 @@
         ]
       }
     },
+    "LiftrBase.CompanyDetails": {
+      "type": "object",
+      "description": "Company details for an organization",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "Company name"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country name of the company"
+        },
+        "officeAddress": {
+          "type": "string",
+          "description": "Office address of the company"
+        },
+        "bussinessPhone": {
+          "type": "string",
+          "description": "Bussiness phone number of the company"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the user"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of employees in the company"
+        }
+      }
+    },
     "LiftrBase.Data.OrganizationProperties": {
       "type": "object",
       "description": "Properties specific to Data Organization resource",
       "properties": {
-        "marketplace": {
+        "marketplaceDetails": {
           "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
           "description": "Marketplace details of the resource.",
           "x-ms-mutability": [
@@ -508,9 +539,13 @@
             "create"
           ]
         },
-        "user": {
+        "userDetails": {
           "$ref": "#/definitions/LiftrBase.UserDetails",
           "description": "Details of the user."
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/LiftrBase.CompanyDetails",
+          "description": "Details of the company."
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -523,17 +558,22 @@
         }
       },
       "required": [
-        "marketplace",
-        "user"
+        "marketplaceDetails",
+        "userDetails",
+        "companyDetails"
       ]
     },
     "LiftrBase.Data.OrganizationPropertiesUpdate": {
       "type": "object",
       "description": "Properties specific to Data Organization resource",
       "properties": {
-        "user": {
+        "userDetails": {
           "$ref": "#/definitions/LiftrBase.UserDetails",
           "description": "Details of the user."
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/LiftrBase.CompanyDetails",
+          "description": "Details of the company."
         },
         "partnerOrganizationProperties": {
           "$ref": "#/definitions/LiftrBase.Data.PartnerOrganizationPropertiesUpdate",
@@ -592,7 +632,7 @@
       "properties": {
         "subscriptionId": {
           "type": "string",
-          "description": "Azure subscription id for the the marketplace offer is purchased from"
+          "description": "SaaS subscription id for the the marketplace offer"
         },
         "subscriptionStatus": {
           "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
@@ -604,7 +644,6 @@
         }
       },
       "required": [
-        "subscriptionId",
         "offerDetails"
       ]
     },
@@ -666,11 +705,11 @@
         },
         "termUnit": {
           "type": "string",
-          "description": "Plan Display Name for the marketplace offer"
+          "description": "Term Name for the marketplace offer"
         },
         "termId": {
           "type": "string",
-          "description": "Plan Display Name for the marketplace offer"
+          "description": "Term Id for the marketplace offer"
         }
       },
       "required": [
