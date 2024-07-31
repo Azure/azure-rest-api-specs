@@ -86,7 +86,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_informaticadatamanagement']
 ```
 
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -109,19 +108,16 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ### AutoRest v3 Suppressions
 
-``` yaml
+```yaml
 suppressions:
-    
   - code: OperationIdNounVerb
     reason: Any changes on top of this spec may induce a breaking change as this is already getting followed in the preview version.
-
 ```
+
 ### AutoRest v3 Suppressions
 
-``` yaml
+```yaml
 suppressions:
-    
   - code: OperationIdNounVerb
     reason: Any changes on top of this spec may induce a breaking change as this is already getting followed in the preview version.
-
 ```
