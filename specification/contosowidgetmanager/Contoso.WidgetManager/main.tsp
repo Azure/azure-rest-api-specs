@@ -43,20 +43,13 @@ interface Widgets {
   getWidget is ResourceRead<WidgetSuite>;
 
   @doc("Gets status of a Widget operation.")
-  @sharedRoute
   getWidgetOperationStatus is GetResourceOperationStatus<WidgetSuite>;
-
-  @doc("Gets status of a Widget delete operation.")
-  @sharedRoute
-  getWidgetDeleteOperationStatus is GetResourceOperationStatus<WidgetSuite, never>;
-
 
   @doc("Creates or updates a Widget asynchronously.")
   @pollingOperation(Widgets.getWidgetOperationStatus)
   createOrUpdateWidget is StandardResourceOperations.LongRunningResourceCreateOrUpdate<WidgetSuite>;
 
   @doc("Delete a Widget asynchronously.")
-  @pollingOperation(Widgets.getWidgetDeleteOperationStatus)
   deleteWidget is LongRunningResourceDelete<WidgetSuite>;
 
   @doc("List Widget resources")
