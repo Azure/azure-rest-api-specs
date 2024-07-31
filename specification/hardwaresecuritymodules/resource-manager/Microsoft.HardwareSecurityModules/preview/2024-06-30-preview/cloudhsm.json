@@ -1425,34 +1425,43 @@
       "type": "object",
       "properties": {
         "properties": {
-          "azureStorageBlobContainerUri": {
-            "type": "string",
-            "description": "The Azure blob storage container Uri which contains the backup",
-            "format": "uri"
-          },
-          "backupId": {
-            "type": "string",
-            "description": "The ID of the backup."
-          }
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BackupResultProperties",
+          "description": "Properties of the Cloud HSM Cluster"
+        }
+      },
+      "description": "Backup operation Result"
+    },
+    "BackupResultProperties": {
+      "type": "object",
+      "properties": {
+        "azureStorageBlobContainerUri": {
+          "type": "string",
+          "description": "The Azure blob storage container Uri which contains the backup",
+          "format": "uri"
+        },
+        "backupId": {
+          "type": "string",
+          "description": "The ID of the backup."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BackupRestoreBaseResult"
+          "$ref": "#/definitions/BackupRestoreBaseResultProperties"
         }
-      ],
-      "description": "Backup operation Result"
+      ]
     },
     "RestoreResult": {
       "type": "object",
       "description": "Restore operation properties",
+      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BackupRestoreBaseResult"
+          "$ref": "#/definitions/BackupRestoreBaseResultProperties"
         }
       }
     },
-    "BackupRestoreBaseResult": {
+    "BackupRestoreBaseResultProperties": {
       "type": "object",
       "properties": {
         "status": {
