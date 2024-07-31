@@ -251,3 +251,8 @@ namespace Language.ConversationsClientCustomizations;
   "CancelAnalyzeConversations",
   "csharp"
 );
+
+@@clientName(ConversationalPiiResultWithResultBase,
+  "ConversationalPiiResult",
+  "csharp"
+);
