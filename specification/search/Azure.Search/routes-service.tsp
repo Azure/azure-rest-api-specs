@@ -1,0 +1,931 @@
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "./models-service.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+
+namespace SearchClient;
+
+interface DataSourcesOperations {
+    /**
+     * Creates a new datasource or updates a datasource if it already exists.
+     */
+    @route("/datasources('{dataSourceName}')")
+    @put
+    createOrUpdate is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the datasource to create or update.
+             */
+            @path
+            dataSourceName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * Defines the If-Match condition. The operation will be performed only if the
+             * ETag on the server matches this value.
+             */
+            @header
+            `If-Match`?: string;
+
+            /**
+             * Defines the If-None-Match condition. The operation will be performed only if
+             * the ETag on the server does not match this value.
+             */
+            @header
+            `If-None-Match`?: string;
+
+            /**
+             * For HTTP PUT requests, instructs the service to return the created/updated
+             * resource on success.
+             */
+            @header
+            Prefer: Enum0;
+
+            /**
+             * The definition of the datasource to create or update.
+             */
+            @body
+            dataSource: SearchIndexerDataSource;
+        },
+        SearchIndexerDataSource
+    >;
+
+    /**
+     * Deletes a datasource.
+     */
+    @route("/datasources('{dataSourceName}')")
+    @delete
+    delete is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the datasource to delete.
+             */
+            @path
+            dataSourceName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * Defines the If-Match condition. The operation will be performed only if the
+             * ETag on the server matches this value.
+             */
+            @header
+            `If-Match`?: string;
+
+            /**
+             * Defines the If-None-Match condition. The operation will be performed only if
+             * the ETag on the server does not match this value.
+             */
+            @header
+            `If-None-Match`?: string;
+        },
+        void
+    >;
+
+    /**
+     * Retrieves a datasource definition.
+     */
+    @route("/datasources('{dataSourceName}')")
+    @get
+    get is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the datasource to retrieve.
+             */
+            @path
+            dataSourceName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        SearchIndexerDataSource
+    >;
+
+    /**
+     * Lists all datasources available for a search service.
+     */
+    @route("/datasources")
+    @get
+    list is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * Selects which top-level properties of the data sources to retrieve. Specified
+             * as a comma-separated list of JSON property names, or '*' for all properties.
+             * The default is all properties.
+             */
+            @query("$select")
+            $select?: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        ListDataSourcesResult
+    >;
+
+    /**
+     * Creates a new datasource.
+     */
+    @route("/datasources")
+    @post
+    create is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * The definition of the datasource to create.
+             */
+            @body
+            dataSource: SearchIndexerDataSource;
+        },
+        SearchIndexerDataSource
+    >;
+}
+
+interface IndexersOperations {
+    /**
+     * Resets the change tracking state associated with an indexer.
+     */
+    @route("/indexers('{indexerName}')/search.reset")
+    @post
+    reset is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the indexer to reset.
+             */
+            @path
+            indexerName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        void
+    >;
+
+    /**
+     * Runs an indexer on-demand.
+     */
+    @route("/indexers('{indexerName}')/search.run")
+    @post
+    run is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the indexer to run.
+             */
+            @path
+            indexerName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        void
+    >;
+
+    /**
+     * Creates a new indexer or updates an indexer if it already exists.
+     */
+    @route("/indexers('{indexerName}')")
+    @put
+    createOrUpdate is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the indexer to create or update.
+             */
+            @path
+            indexerName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * Defines the If-Match condition. The operation will be performed only if the
+             * ETag on the server matches this value.
+             */
+            @header
+            `If-Match`?: string;
+
+            /**
+             * Defines the If-None-Match condition. The operation will be performed only if
+             * the ETag on the server does not match this value.
+             */
+            @header
+            `If-None-Match`?: string;
+
+            /**
+             * For HTTP PUT requests, instructs the service to return the created/updated
+             * resource on success.
+             */
+            @header
+            Prefer: Enum0;
+
+            /**
+             * The definition of the indexer to create or update.
+             */
+            @body
+            indexer: SearchIndexer;
+        },
+        SearchIndexer
+    >;
+
+    /**
+     * Deletes an indexer.
+     */
+    @route("/indexers('{indexerName}')")
+    @delete
+    delete is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the indexer to delete.
+             */
+            @path
+            indexerName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * Defines the If-Match condition. The operation will be performed only if the
+             * ETag on the server matches this value.
+             */
+            @header
+            `If-Match`?: string;
+
+            /**
+             * Defines the If-None-Match condition. The operation will be performed only if
+             * the ETag on the server does not match this value.
+             */
+            @header
+            `If-None-Match`?: string;
+        },
+        void
+    >;
+
+    /**
+     * Retrieves an indexer definition.
+     */
+    @route("/indexers('{indexerName}')")
+    @get
+    get is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the indexer to retrieve.
+             */
+            @path
+            indexerName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        SearchIndexer
+    >;
+
+    /**
+     * Lists all indexers available for a search service.
+     */
+    @route("/indexers")
+    @get
+    list is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * Selects which top-level properties of the indexers to retrieve. Specified as a
+             * comma-separated list of JSON property names, or '*' for all properties. The
+             * default is all properties.
+             */
+            @query("$select")
+            $select?: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        ListIndexersResult
+    >;
+
+    /**
+     * Creates a new indexer.
+     */
+    @route("/indexers")
+    @post
+    create is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * The definition of the indexer to create.
+             */
+            @body
+            indexer: SearchIndexer;
+        },
+        SearchIndexer
+    >;
+
+    /**
+     * Returns the current status and execution history of an indexer.
+     */
+    @route("/indexers('{indexerName}')/search.status")
+    @get
+    getStatus is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the indexer for which to retrieve status.
+             */
+            @path
+            indexerName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        SearchIndexerStatus
+    >;
+}
+
+interface SkillsetsOperations {
+    /**
+     * Creates a new skillset in a search service or updates the skillset if it
+     * already exists.
+     */
+    @route("/skillsets('{skillsetName}')")
+    @put
+    createOrUpdate is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the skillset to create or update.
+             */
+            @path
+            skillsetName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * Defines the If-Match condition. The operation will be performed only if the
+             * ETag on the server matches this value.
+             */
+            @header
+            `If-Match`?: string;
+
+            /**
+             * Defines the If-None-Match condition. The operation will be performed only if
+             * the ETag on the server does not match this value.
+             */
+            @header
+            `If-None-Match`?: string;
+
+            /**
+             * For HTTP PUT requests, instructs the service to return the created/updated
+             * resource on success.
+             */
+            @header
+            Prefer: Enum0;
+
+            /**
+             * The skillset containing one or more skills to create or update in a search
+             * service.
+             */
+            @body
+            skillset: SearchIndexerSkillset;
+        },
+        SearchIndexerSkillset
+    >;
+
+    /**
+     * Deletes a skillset in a search service.
+     */
+    @route("/skillsets('{skillsetName}')")
+    @delete
+    delete is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the skillset to delete.
+             */
+            @path
+            skillsetName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * Defines the If-Match condition. The operation will be performed only if the
+             * ETag on the server matches this value.
+             */
+            @header
+            `If-Match`?: string;
+
+            /**
+             * Defines the If-None-Match condition. The operation will be performed only if
+             * the ETag on the server does not match this value.
+             */
+            @header
+            `If-None-Match`?: string;
+        },
+        void
+    >;
+
+    /**
+     * Retrieves a skillset in a search service.
+     */
+    @route("/skillsets('{skillsetName}')")
+    @get
+    get is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the skillset to retrieve.
+             */
+            @path
+            skillsetName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        SearchIndexerSkillset
+    >;
+
+    /**
+     * List all skillsets in a search service.
+     */
+    @route("/skillsets")
+    @get
+    list is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * Selects which top-level properties of the skillsets to retrieve. Specified as a
+             * comma-separated list of JSON property names, or '*' for all properties. The
+             * default is all properties.
+             */
+            @query("$select")
+            $select?: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        ListSkillsetsResult
+    >;
+
+    /**
+     * Creates a new skillset in a search service.
+     */
+    @route("/skillsets")
+    @post
+    create is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * The skillset containing one or more skills to create in a search service.
+             */
+            @body
+            skillset: SearchIndexerSkillset;
+        },
+        SearchIndexerSkillset
+    >;
+}
+
+interface SynonymMapsOperations {
+    /**
+     * Creates a new synonym map or updates a synonym map if it already exists.
+     */
+    @route("/synonymmaps('{synonymMapName}')")
+    @put
+    createOrUpdate is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the synonym map to create or update.
+             */
+            @path
+            synonymMapName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * Defines the If-Match condition. The operation will be performed only if the
+             * ETag on the server matches this value.
+             */
+            @header
+            `If-Match`?: string;
+
+            /**
+             * Defines the If-None-Match condition. The operation will be performed only if
+             * the ETag on the server does not match this value.
+             */
+            @header
+            `If-None-Match`?: string;
+
+            /**
+             * For HTTP PUT requests, instructs the service to return the created/updated
+             * resource on success.
+             */
+            @header
+            Prefer: Enum0;
+
+            /**
+             * The definition of the synonym map to create or update.
+             */
+            @body
+            synonymMap: SynonymMap;
+        },
+        SynonymMap
+    >;
+
+    /**
+     * Deletes a synonym map.
+     */
+    @route("/synonymmaps('{synonymMapName}')")
+    @delete
+    delete is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the synonym map to delete.
+             */
+            @path
+            synonymMapName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * Defines the If-Match condition. The operation will be performed only if the
+             * ETag on the server matches this value.
+             */
+            @header
+            `If-Match`?: string;
+
+            /**
+             * Defines the If-None-Match condition. The operation will be performed only if
+             * the ETag on the server does not match this value.
+             */
+            @header
+            `If-None-Match`?: string;
+        },
+        void
+    >;
+
+    /**
+     * Retrieves a synonym map definition.
+     */
+    @route("/synonymmaps('{synonymMapName}')")
+    @get
+    get is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the synonym map to retrieve.
+             */
+            @path
+            synonymMapName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        SynonymMap
+    >;
+
+    /**
+     * Lists all synonym maps available for a search service.
+     */
+    @route("/synonymmaps")
+    @get
+    list is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * Selects which top-level properties of the synonym maps to retrieve. Specified
+             * as a comma-separated list of JSON property names, or '*' for all properties.
+             * The default is all properties.
+             */
+            @query("$select")
+            $select?: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        ListSynonymMapsResult
+    >;
+
+    /**
+     * Creates a new synonym map.
+     */
+    @route("/synonymmaps")
+    @post
+    create is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * The definition of the synonym map to create.
+             */
+            @body
+            synonymMap: SynonymMap;
+        },
+        SynonymMap
+    >;
+}
+
+interface IndexesOperations {
+    /**
+     * Creates a new search index.
+     */
+    @route("/indexes")
+    @post
+    create is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * The definition of the index to create.
+             */
+            @body
+            index: SearchIndex;
+        },
+        SearchIndex
+    >;
+
+    /**
+     * Lists all indexes available for a search service.
+     */
+    @route("/indexes")
+    @get
+    list is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * Selects which top-level properties of the index definitions to retrieve.
+             * Specified as a comma-separated list of JSON property names, or '*' for all
+             * properties. The default is all properties.
+             */
+            @query("$select")
+            $select?: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        ListIndexesResult
+    >;
+
+    /**
+     * Creates a new search index or updates an index if it already exists.
+     */
+    @route("/indexes('{indexName}')")
+    @put
+    createOrUpdate is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The definition of the index to create or update.
+             */
+            @path
+            indexName: string;
+
+            /**
+             * Allows new analyzers, tokenizers, token filters, or char filters to be added to
+             * an index by taking the index offline for at least a few seconds. This
+             * temporarily causes indexing and query requests to fail. Performance and write
+             * availability of the index can be impaired for several minutes after the index
+             * is updated, or longer for very large indexes.
+             */
+            @query("allowIndexDowntime")
+            allowIndexDowntime?: boolean;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * Defines the If-Match condition. The operation will be performed only if the
+             * ETag on the server matches this value.
+             */
+            @header
+            `If-Match`?: string;
+
+            /**
+             * Defines the If-None-Match condition. The operation will be performed only if
+             * the ETag on the server does not match this value.
+             */
+            @header
+            `If-None-Match`?: string;
+
+            /**
+             * For HTTP PUT requests, instructs the service to return the created/updated
+             * resource on success.
+             */
+            @header
+            Prefer: Enum0;
+
+            /**
+             * The definition of the index to create or update.
+             */
+            @body
+            index: SearchIndex;
+        },
+        SearchIndex
+    >;
+
+    /**
+     * Deletes a search index and all the documents it contains. This operation is
+     * permanent, with no recovery option. Make sure you have a master copy of your
+     * index definition, data ingestion code, and a backup of the primary data source
+     * in case you need to re-build the index.
+     */
+    @route("/indexes('{indexName}')")
+    @delete
+    delete is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the index to delete.
+             */
+            @path
+            indexName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * Defines the If-Match condition. The operation will be performed only if the
+             * ETag on the server matches this value.
+             */
+            @header
+            `If-Match`?: string;
+
+            /**
+             * Defines the If-None-Match condition. The operation will be performed only if
+             * the ETag on the server does not match this value.
+             */
+            @header
+            `If-None-Match`?: string;
+        },
+        void
+    >;
+
+    /**
+     * Retrieves an index definition.
+     */
+    @route("/indexes('{indexName}')")
+    @get
+    get is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the index to retrieve.
+             */
+            @path
+            indexName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        SearchIndex
+    >;
+
+    /**
+     * Returns statistics for the given index, including a document count and storage
+     * usage.
+     */
+    @route("/indexes('{indexName}')/search.stats")
+    @get
+    getStatistics is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the index for which to retrieve statistics.
+             */
+            @path
+            indexName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+        },
+        GetIndexStatisticsResult
+    >;
+
+    /**
+     * Shows how an analyzer breaks text into tokens.
+     */
+    @route("/indexes('{indexName}')/search.analyze")
+    @post
+    analyze is Azure.Core.Foundations.Operation<
+        {
+            /**
+             * The name of the index for which to test an analyzer.
+             */
+            @path
+            indexName: string;
+
+            /**
+             * The tracking ID sent with the request to help with debugging.
+             */
+            @header
+            `x-ms-client-request-id`?: string;
+
+            /**
+             * The text and analyzer or analysis components to test.
+             */
+            @body
+            request: AnalyzeRequest;
+        },
+        AnalyzeResult
+    >;
+}
+
+/**
+ * Gets service level statistics for a search service.
+ */
+@route("/servicestats")
+@get
+op getServiceStatistics is Azure.Core.Foundations.Operation<
+    {
+        /**
+         * The tracking ID sent with the request to help with debugging.
+         */
+        @header
+        `x-ms-client-request-id`?: string;
+    },
+    SearchServiceStatistics
+>;
