@@ -11,7 +11,7 @@ The current release of Language is 2023-11-11-preview.
 <!-- The current stable release of Language is 2023-11-11-preview. -->
 
 ```yaml
-tag: release_2023-11-11-preview
+tag: release_2023-11-15-preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -22,7 +22,7 @@ directive:
 
 ### Release
 
-``` yaml $(tag) == 'release_2023-11-11-preview'
+``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
   - analyzedocuments.json
   - analyzetext.json
