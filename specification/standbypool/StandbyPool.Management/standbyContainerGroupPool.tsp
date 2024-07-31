@@ -108,9 +108,12 @@ interface StandbyContainerGroupPools {
   get is ArmResourceRead<StandbyContainerGroupPoolResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyContainerGroupPoolResource>;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyContainerGroupPoolResource>;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     StandbyContainerGroupPoolResource,
-    StandbyContainerGroupPoolResourceProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      StandbyContainerGroupPoolResource,
+      StandbyContainerGroupPoolResourceProperties
+    >
   >;
   listByResourceGroup is ArmResourceListByParent<StandbyContainerGroupPoolResource>;
   listBySubscription is ArmListBySubscription<StandbyContainerGroupPoolResource>;

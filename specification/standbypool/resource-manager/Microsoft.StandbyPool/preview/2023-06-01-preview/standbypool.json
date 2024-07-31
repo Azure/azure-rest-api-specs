@@ -536,24 +536,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning state",
@@ -662,9 +644,26 @@
         "virtualMachineState"
       ]
     },
-    "StandbyVirtualMachinePoolResourcePropertiesUpdate": {
+    "StandbyVirtualMachinePoolResourceUpdate": {
       "type": "object",
-      "description": "Details of the StandbyVirtualMachinePool.",
+      "description": "The type used for update operations of the StandbyVirtualMachinePoolResource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "StandbyVirtualMachinePoolResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the StandbyVirtualMachinePoolResource.",
       "properties": {
         "maxReadyCapacity": {
           "type": "integer",
@@ -687,21 +686,6 @@
           }
         }
       }
-    },
-    "StandbyVirtualMachinePoolResourceUpdate": {
-      "type": "object",
-      "description": "A StandbyVirtualMachinePoolResource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/StandbyVirtualMachinePoolResourcePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "StandbyVirtualMachineResource": {
       "type": "object",
