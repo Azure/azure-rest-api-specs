@@ -419,6 +419,20 @@
               "$ref": "#/definitions/FabricCapacity"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -430,7 +444,11 @@
           "Update capacity properties": {
             "$ref": "./examples/FabricCapacities_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "FabricCapacities_Delete",
@@ -460,8 +478,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -477,7 +506,11 @@
           "Delete a capacity": {
             "$ref": "./examples/FabricCapacities_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric/capacities/{capacityName}/resume": {
@@ -669,19 +702,6 @@
         "members"
       ]
     },
-    "CapacityAdministrationUpdate": {
-      "type": "object",
-      "description": "The administration properties of the Fabric capacity resource",
-      "properties": {
-        "members": {
-          "type": "array",
-          "description": "An array of administrator user identities.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "FabricCapacity": {
       "type": "object",
       "description": "Fabric Capacity resource",
@@ -746,7 +766,6 @@
         }
       },
       "required": [
-        "state",
         "administration"
       ]
     },
@@ -755,7 +774,7 @@
       "description": "The type used for update operations of the FabricCapacity.",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/RpSkuUpdate",
+          "$ref": "#/definitions/RpSku",
           "description": "The SKU details"
         },
         "tags": {
@@ -767,6 +786,7 @@
         },
         "properties": {
           "$ref": "#/definitions/FabricCapacityUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
@@ -776,7 +796,7 @@
       "description": "The updatable properties of the FabricCapacity.",
       "properties": {
         "administration": {
-          "$ref": "#/definitions/CapacityAdministrationUpdate",
+          "$ref": "#/definitions/CapacityAdministration",
           "description": "The capacity administration"
         }
       }
@@ -1055,20 +1075,6 @@
             "description": "Fabric tier"
           }
         ]
-      }
-    },
-    "RpSkuUpdate": {
-      "type": "object",
-      "description": "Represents the SKU name and Azure pricing tier for Microsoft Fabric capacity resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the SKU level."
-        },
-        "tier": {
-          "$ref": "#/definitions/RpSkuTier",
-          "description": "The name of the Azure pricing tier to which the SKU applies."
-        }
       }
     }
   },

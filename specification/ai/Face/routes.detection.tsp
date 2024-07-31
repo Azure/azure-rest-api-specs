@@ -6,6 +6,7 @@ import "./models.detect.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Traits;
@@ -16,7 +17,7 @@ namespace Face;
 @summary("Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.")
 @doc("""
   > [!IMPORTANT]
-  > Microsoft has retired or restricted facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The restricted capabilities are age, smile, facial hair, hair and makeup. Email Azure Face API <azureface@microsoft.com> if you have a responsible use case that would benefit from the use of any of the restricted capabilities. Read more about this decision https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/.
+  > Microsoft has retired or limited facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The limited capabilities are age, smile, facial hair, hair and makeup. Email Azure Face API <azureface@microsoft.com> if you have a responsible use case that would benefit from the use of any of the limited capabilities. Read more about this decision https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/.
   
   *
     * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.
@@ -61,5 +62,15 @@ interface FaceDetectionOperations {
     @doc("The input image binary.")
     @body
     imageContent: bytes;
+  }>;
+
+  @added(Versions.v1_2_preview_1)
+  detectFromSessionImageId is DetectOperation<{
+    @doc("The format of the HTTP payload.")
+    @header
+    contentType: "application/json";
+
+    @doc("Id of session image.")
+    sessionImageId: string;
   }>;
 }

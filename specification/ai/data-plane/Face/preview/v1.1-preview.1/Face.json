@@ -88,7 +88,7 @@
       "post": {
         "operationId": "FaceDetectionOperations_DetectFromUrl",
         "summary": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.",
-        "description": "> [!IMPORTANT]\n> Microsoft has retired or restricted facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The restricted capabilities are age, smile, facial hair, hair and makeup. Email Azure Face API <azureface@microsoft.com> if you have a responsible use case that would benefit from the use of any of the restricted capabilities. Read more about this decision https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/.\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_02': Face attributes and landmarks are disabled if you choose this detection model.\n    * 'detection_03': Face attributes (mask, blur, and headPose) and landmarks are supported if you choose this detection model.\n  * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model.",
+        "description": "> [!IMPORTANT]\n> Microsoft has retired or limited facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The limited capabilities are age, smile, facial hair, hair and makeup. Email Azure Face API <azureface@microsoft.com> if you have a responsible use case that would benefit from the use of any of the limited capabilities. Read more about this decision https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/.\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_02': Face attributes and landmarks are disabled if you choose this detection model.\n    * 'detection_03': Face attributes (mask, blur, and headPose) and landmarks are supported if you choose this detection model.\n  * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model.",
         "parameters": [
           {
             "name": "detectionModel",
@@ -408,6 +408,7 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateLivenessSessionContent"
@@ -641,10 +642,18 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/CreateLivenessWithVerifySessionContent.Parameters"
+            "name": "Parameters",
+            "in": "formData",
+            "description": "The parameters for creating session.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/CreateLivenessWithVerifySessionContent.VerifyImage"
+            "name": "VerifyImage",
+            "in": "formData",
+            "description": "The image stream for verify. Content-Disposition header field for this part must have filename.",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
@@ -5584,7 +5593,7 @@
       "post": {
         "operationId": "FaceDetectionOperations_Detect",
         "summary": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.",
-        "description": "> [!IMPORTANT]\n> Microsoft has retired or restricted facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The restricted capabilities are age, smile, facial hair, hair and makeup. Email Azure Face API <azureface@microsoft.com> if you have a responsible use case that would benefit from the use of any of the restricted capabilities. Read more about this decision https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/.\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_02': Face attributes and landmarks are disabled if you choose this detection model.\n    * 'detection_03': Face attributes (mask, blur, and headPose) and landmarks are supported if you choose this detection model.\n  * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model.",
+        "description": "> [!IMPORTANT]\n> Microsoft has retired or limited facial recognition capabilities that can be used to try to infer emotional states and identity attributes which, if misused, can subject people to stereotyping, discrimination or unfair denial of services. The retired capabilities are emotion and gender. The limited capabilities are age, smile, facial hair, hair and makeup. Email Azure Face API <azureface@microsoft.com> if you have a responsible use case that would benefit from the use of any of the limited capabilities. Read more about this decision https://azure.microsoft.com/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/.\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in \"Identify\", \"Verify\", and \"Find Similar\". The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying \"Identify\", \"Verify\", and \"Find Similar\" ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_02': Face attributes and landmarks are disabled if you choose this detection model.\n    * 'detection_03': Face attributes (mask, blur, and headPose) and landmarks are supported if you choose this detection model.\n  * Different 'recognitionModel' values are provided. If follow-up operations like \"Verify\", \"Identify\", \"Find Similar\" are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/azure/ai-services/computer-vision/how-to/specify-recognition-model.",
         "consumes": [
           "application/octet-stream"
         ],
@@ -5846,9 +5855,10 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Body parameter.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateLivenessSessionContent"
+              "$ref": "#/definitions/CreateLivenessWithVerifySessionJsonContent"
             }
           }
         ],
@@ -7432,7 +7442,7 @@
     },
     "CreateLivenessSessionContent": {
       "type": "object",
-      "description": "Request for creating liveness session.",
+      "description": "Request model for creating liveness session.",
       "properties": {
         "livenessOperationMode": {
           "$ref": "#/definitions/LivenessOperationMode",
@@ -7481,12 +7491,45 @@
         "authToken"
       ]
     },
-    "CreateLivenessWithVerifySessionContent": {
+    "CreateLivenessWithVerifySessionJsonContent": {
+      "type": "object",
+      "description": "Request for creating liveness with verify session.",
+      "properties": {
+        "livenessOperationMode": {
+          "$ref": "#/definitions/LivenessOperationMode",
+          "description": "Type of liveness mode the client should follow."
+        },
+        "sendResultsToClient": {
+          "type": "boolean",
+          "description": "Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented."
+        },
+        "deviceCorrelationIdSetInClient": {
+          "type": "boolean",
+          "description": "Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body."
+        },
+        "deviceCorrelationId": {
+          "type": "string",
+          "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null."
+        },
+        "authTokenTimeToLiveInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
+        }
+      },
+      "required": [
+        "livenessOperationMode"
+      ]
+    },
+    "CreateLivenessWithVerifySessionMultipartContent": {
       "type": "object",
       "description": "Request of liveness with verify session creation.",
       "properties": {
         "Parameters": {
-          "$ref": "#/definitions/CreateLivenessSessionContent",
+          "$ref": "#/definitions/CreateLivenessWithVerifySessionJsonContent",
           "description": "The parameters for creating session."
         },
         "VerifyImage": {
@@ -8597,37 +8640,27 @@
       "type": "string",
       "description": "The model version used for liveness classification.",
       "enum": [
-        "2020-02-15-preview.01",
-        "2021-11-12-preview.03",
         "2022-10-15-preview.04",
-        "2023-03-02-preview.05"
+        "2023-12-20-preview.06"
       ],
       "x-ms-enum": {
         "name": "LivenessModel",
         "modelAsString": true,
         "values": [
           {
-            "name": "v2020_02_15_preview_01",
-            "value": "2020-02-15-preview.01"
-          },
-          {
-            "name": "v2021_11_12_preview_03",
-            "value": "2021-11-12-preview.03"
-          },
-          {
             "name": "v2022_10_15_preview_04",
             "value": "2022-10-15-preview.04"
           },
           {
-            "name": "v2023_03_02_preview_05",
-            "value": "2023-03-02-preview.05"
+            "name": "v2023_12_20_preview_06",
+            "value": "2023-12-20-preview.06"
           }
         ]
       }
     },
     "LivenessOperationMode": {
       "type": "string",
-      "description": "The liveness operation mode to drive the client’s end-user experience.",
+      "description": "The liveness operation mode to drive the client's end-user experience.",
       "enum": [
         "Passive",
         "PassiveActive"
@@ -8639,12 +8672,12 @@
           {
             "name": "Passive",
             "value": "Passive",
-            "description": "Utilizes a passive liveness technique that requires no additional actions from the user. Requires normal indoor lighting and high screen brightness for optimal performance. And thus, this mode has a narrow operational envelope and will not be suitable for scenarios that requires the end-user’s to be in bright lighting conditions. Note: this is the only supported mode for the Mobile (iOS and Android) solution."
+            "description": "Utilizes a passive liveness technique that requires no additional actions from the user. Requires normal indoor lighting and high screen brightness for optimal performance. And thus, this mode has a narrow operational envelope and will not be suitable for scenarios that requires the end-user's to be in bright lighting conditions. Note: this is the only supported mode for the Mobile (iOS and Android) solution."
           },
           {
             "name": "PassiveActive",
             "value": "PassiveActive",
-            "description": "This mode utilizes a hybrid passive or active liveness technique that necessitates user cooperation. It is optimized to require active motion only under suboptimal lighting conditions. Unlike the passive mode, this mode has no lighting restrictions, and thus offering a broader operational envelope. This mode is preferable on Web based solutions due to the lack of automatic screen brightness control available on browsers which hinders the Passive mode’s operational envelope on Web based solutions."
+            "description": "This mode utilizes a hybrid passive or active liveness technique that necessitates user cooperation. It is optimized to require active motion only under suboptimal lighting conditions. Unlike the passive mode, this mode has no lighting restrictions, and thus offering a broader operational envelope. This mode is preferable on Web based solutions due to the lack of automatic screen brightness control available on browsers which hinders the Passive mode's operational envelope on Web based solutions."
           }
         ]
       }
@@ -9403,22 +9436,5 @@
       "pattern": "^[a-z0-9-_]+$"
     }
   },
-  "parameters": {
-    "CreateLivenessWithVerifySessionContent.Parameters": {
-      "name": "Parameters",
-      "in": "formData",
-      "description": "The parameters for creating session.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "CreateLivenessWithVerifySessionContent.VerifyImage": {
-      "name": "VerifyImage",
-      "in": "formData",
-      "description": "The image stream for verify. Content-Disposition header field for this part must have filename.",
-      "required": true,
-      "type": "file",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }
