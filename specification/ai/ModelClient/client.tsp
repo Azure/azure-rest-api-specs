@@ -25,6 +25,8 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatCompletionsNamedToolSelection, Access.public);
 @@access(AI.Model.ChatCompletionsFunctionToolSelection, Access.public);
 @@access(AI.Model.ChatCompletionsResponseFormat, Access.public);
+@@access(AI.Model.ChatCompletionsResponseFormatJSON, Access.public);
+@@access(AI.Model.ChatCompletionsResponseFormatText, Access.public);
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsToolSelectionPreset, Access.public);

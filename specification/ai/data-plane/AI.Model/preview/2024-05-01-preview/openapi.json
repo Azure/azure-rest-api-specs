@@ -1466,6 +1466,10 @@
       "type": "object",
       "description": "A representation of a chat message update as received in a streaming response.",
       "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message. If present, should always be 'assistant'"
+        },
         "content": {
           "type": "string",
           "description": "The content of the message."

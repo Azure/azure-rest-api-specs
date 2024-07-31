@@ -357,6 +357,9 @@ model ChatRequestToolMessage extends ChatRequestMessage {
 
 @doc("A representation of a chat message update as received in a streaming response.")
 model StreamingChatResponseMessageUpdate {
+  @doc("The chat role associated with the message. If present, should always be 'assistant'")
+  role?: ChatRole;
+
   //#suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
   content?: string;
