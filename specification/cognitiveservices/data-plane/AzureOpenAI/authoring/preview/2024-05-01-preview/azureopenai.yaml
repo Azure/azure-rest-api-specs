@@ -1873,14 +1873,23 @@ parameters:
     type: string
     x-ms-client-default: 2024-05-01-preview
     x-ms-parameter-location: client
+security:
+  - ApiKeyAuth: []
+  - OAuth2Auth:
+      - https://cognitiveservices.azure.com/.default
 securityDefinitions:
-  api-key:
+  ApiKeyAuth:
+    description: API key authentication
     type: apiKey
     name: api-key
     in: header
-    description: Provide your Cognitive Services Azure OpenAI account key here.
-security:
-  - api-key: [ ]
+  OAuth2Auth:
+    description: OAuth2 authentication
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+    scopes:
+      https://cognitiveservices.azure.com/.default: ''
 schemes:
   - https
 x-ms-parameterized-host:

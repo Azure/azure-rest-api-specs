@@ -116,6 +116,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
+  - repo: azure-sdk-for-js
 ```
 
 ## Go
@@ -125,3 +126,8 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+

@@ -14,7 +14,7 @@ interface OracleSubscriptions
       OracleSubscriptionProperties
     > {
   @doc("List Cloud Account Details")
-  @example(
+  @Autorest.example(
     "./examples/oracleSubscriptions_listCloudAccountDetails.json",
     "List Cloud Account details for the Oracle Subscription"
   )
@@ -24,7 +24,7 @@ interface OracleSubscriptions
   >;
 
   @doc("List Saas Subscription Details")
-  @example(
+  @Autorest.example(
     "./examples/oracleSubscriptions_listSaasSubscriptionDetails.json",
     "List Saas Subscription details for the Oracle Subscription"
   )
@@ -34,7 +34,7 @@ interface OracleSubscriptions
   >;
 
   @doc("List Activation Links")
-  @example(
+  @Autorest.example(
     "./examples/oracleSubscriptions_listActivationLinks.json",
     "List Activation Links for the Oracle Subscription"
   )
@@ -45,7 +45,7 @@ interface OracleSubscriptions
 
   @added(Versions.v20240601_preview)
   @doc("Add Azure Subscriptions")
-  @example(
+  @Autorest.example(
     "./examples/oracleSubscriptions_addAzureSubscriptions.json",
     "Add Azure Subscriptions to the OracleSubscription"
   )
@@ -70,23 +70,23 @@ interface OracleSubscriptions
   >;
 }
 
-@@example(OracleSubscriptions.listBySubscription,
+@@Autorest.example(OracleSubscriptions.listBySubscription,
   "./examples/oracleSubscriptions_listBySubscription.json",
   "List Oracle Subscriptions by subscription"
 );
-@@example(OracleSubscriptions.createOrUpdate,
+@@Autorest.example(OracleSubscriptions.createOrUpdate,
   "./examples/oracleSubscriptions_create.json",
   "Create or Update Oracle Subscription"
 );
-@@example(OracleSubscriptions.get,
+@@Autorest.example(OracleSubscriptions.get,
   "./examples/oracleSubscriptions_get.json",
   "Get Oracle Subscription"
 );
-@@example(OracleSubscriptions.update,
+@@Autorest.example(OracleSubscriptions.update,
   "./examples/oracleSubscriptions_patch.json",
   "Patch Oracle Subscription"
 );
-@@example(OracleSubscriptions.delete,
+@@Autorest.example(OracleSubscriptions.delete,
   "./examples/oracleSubscriptions_delete.json",
   "Delete Oracle Subscription"
 );
