@@ -9,163 +9,46 @@
     "brokerName": "resource-name123",
     "resource": {
       "properties": {
-        "advanced": {
-          "clients": {
-            "maxSessionExpirySeconds": 8980,
-            "maxMessageExpirySeconds": 4070,
-            "maxPacketSizeBytes": 9140,
-            "subscriberQueueLimit": {
-              "length": 27,
-              "strategy": "None"
-            },
-            "maxReceiveMaximum": 7597,
-            "maxKeepAliveSeconds": 2264
-          },
-          "encryptInternalTraffic": "Enabled",
-          "internalCerts": {
-            "duration": "mbuzbxzzvaeow",
-            "renewBefore": "uveyjmvgxedobfsnudwp",
-            "privateKey": {
-              "algorithm": "Ec256",
-              "rotationPolicy": "Always"
-            }
-          }
+        "memoryProfile": "Medium",
+        "generateResourceLimits": {
+          "cpu": "Disabled"
         },
         "cardinality": {
           "backendChain": {
-            "partitions": 10,
-            "redundancyFactor": 4,
-            "workers": 2
+            "partitions": 2,
+            "workers": 2,
+            "redundancyFactor": 2
           },
           "frontend": {
-            "replicas": 4,
+            "replicas": 2,
             "workers": 2
           }
+        },
+        "advanced": {
+          "encryptInternalTraffic": "Enabled"
         },
         "diagnostics": {
           "logs": {
-            "opentelemetryExportConfig": {
-              "otlpGrpcEndpoint": "oyembrvhzogggkodr",
-              "intervalSeconds": 23,
-              "level": "tmcrcih"
-            },
-            "level": "tpjixxzdjmkvfnctjbkycswmyrnskf"
+            "level": "info"
           },
           "metrics": {
-            "opentelemetryExportConfig": {
-              "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
-              "intervalSeconds": 207
-            },
-            "prometheusPort": 87
+            "prometheusPort": 9600
           },
           "selfCheck": {
+            "intervalSeconds": 30,
             "mode": "Enabled",
-            "intervalSeconds": 136,
-            "timeoutSeconds": 18
+            "timeoutSeconds": 15
           },
           "traces": {
+            "cacheSizeMegabytes": 16,
             "mode": "Enabled",
-            "opentelemetryExportConfig": {
-              "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
-              "intervalSeconds": 207
-            },
-            "cacheSizeMegabytes": 69,
             "selfTracing": {
-              "mode": "Enabled",
-              "intervalSeconds": 290
+              "intervalSeconds": 30,
+              "mode": "Enabled"
             },
-            "spanChannelCapacity": 6083
+            "spanChannelCapacity": 1000
           }
-        },
-        "diskBackedMessageBuffer": {
-          "maxSize": "500M",
-          "ephemeralVolumeClaimSpec": {
-            "volumeName": "rtcwnl",
-            "volumeMode": "okijxud",
-            "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
-            "accessModes": [
-              "hfsrutijzeymyvcvomq"
-            ],
-            "dataSource": {
-              "apiGroup": "bi",
-              "kind": "opiekgewvltli",
-              "name": "hmzeclkrckkvflbuwejvael"
-            },
-            "dataSourceRef": {
-              "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
-              "kind": "ztgklwne",
-              "name": "vlgbalrnjuksdxtclhlmlfvx",
-              "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
-            },
-            "resources": {
-              "limits": {
-                "key2700": "bgqvrfll"
-              },
-              "requests": {
-                "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
-              }
-            },
-            "selector": {
-              "matchExpressions": [
-                {
-                  "key": "smuxyuxautqizhqpoqptao",
-                  "operator": "In",
-                  "values": [
-                    "gwwdwkwiifcwkubcwzgc"
-                  ]
-                }
-              ],
-              "matchLabels": {
-                "key3277": "yrorgczpgmwujcxdcgkhbwxb"
-              }
-            }
-          },
-          "persistentVolumeClaimSpec": {
-            "volumeName": "rtcwnl",
-            "volumeMode": "okijxud",
-            "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
-            "accessModes": [
-              "hfsrutijzeymyvcvomq"
-            ],
-            "dataSource": {
-              "apiGroup": "bi",
-              "kind": "opiekgewvltli",
-              "name": "hmzeclkrckkvflbuwejvael"
-            },
-            "dataSourceRef": {
-              "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
-              "kind": "ztgklwne",
-              "name": "vlgbalrnjuksdxtclhlmlfvx",
-              "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
-            },
-            "resources": {
-              "limits": {
-                "key2700": "bgqvrfll"
-              },
-              "requests": {
-                "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
-              }
-            },
-            "selector": {
-              "matchExpressions": [
-                {
-                  "key": "smuxyuxautqizhqpoqptao",
-                  "operator": "In",
-                  "values": [
-                    "gwwdwkwiifcwkubcwzgc"
-                  ]
-                }
-              ],
-              "matchLabels": {
-                "key3277": "yrorgczpgmwujcxdcgkhbwxb"
-              }
-            }
-          }
-        },
-        "generateResourceLimits": {
-          "cpu": "Enabled"
-        },
-        "memoryProfile": "Tiny"
+        }
       },
       "extendedLocation": {
         "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
@@ -177,164 +60,46 @@
     "200": {
       "body": {
         "properties": {
-          "advanced": {
-            "clients": {
-              "maxSessionExpirySeconds": 8980,
-              "maxMessageExpirySeconds": 4070,
-              "maxPacketSizeBytes": 9140,
-              "subscriberQueueLimit": {
-                "length": 27,
-                "strategy": "None"
-              },
-              "maxReceiveMaximum": 7597,
-              "maxKeepAliveSeconds": 2264
-            },
-            "encryptInternalTraffic": "Enabled",
-            "internalCerts": {
-              "duration": "mbuzbxzzvaeow",
-              "renewBefore": "uveyjmvgxedobfsnudwp",
-              "privateKey": {
-                "algorithm": "Ec256",
-                "rotationPolicy": "Always"
-              }
-            }
+          "memoryProfile": "Medium",
+          "generateResourceLimits": {
+            "cpu": "Disabled"
           },
           "cardinality": {
             "backendChain": {
-              "partitions": 10,
-              "redundancyFactor": 4,
-              "workers": 2
+              "partitions": 2,
+              "workers": 2,
+              "redundancyFactor": 2
             },
             "frontend": {
-              "replicas": 4,
+              "replicas": 2,
               "workers": 2
             }
+          },
+          "advanced": {
+            "encryptInternalTraffic": "Enabled"
           },
           "diagnostics": {
             "logs": {
-              "opentelemetryExportConfig": {
-                "otlpGrpcEndpoint": "oyembrvhzogggkodr",
-                "intervalSeconds": 23,
-                "level": "tmcrcih"
-              },
-              "level": "tpjixxzdjmkvfnctjbkycswmyrnskf"
+              "level": "info"
             },
             "metrics": {
-              "opentelemetryExportConfig": {
-                "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
-                "intervalSeconds": 207
-              },
-              "prometheusPort": 87
+              "prometheusPort": 9600
             },
             "selfCheck": {
+              "intervalSeconds": 30,
               "mode": "Enabled",
-              "intervalSeconds": 136,
-              "timeoutSeconds": 18
+              "timeoutSeconds": 15
             },
             "traces": {
+              "cacheSizeMegabytes": 16,
               "mode": "Enabled",
-              "opentelemetryExportConfig": {
-                "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
-                "intervalSeconds": 207
-              },
-              "cacheSizeMegabytes": 69,
               "selfTracing": {
-                "mode": "Enabled",
-                "intervalSeconds": 290
+                "intervalSeconds": 30,
+                "mode": "Enabled"
               },
-              "spanChannelCapacity": 6083
+              "spanChannelCapacity": 1000
             }
-          },
-          "diskBackedMessageBuffer": {
-            "maxSize": "500M",
-            "ephemeralVolumeClaimSpec": {
-              "volumeName": "rtcwnl",
-              "volumeMode": "okijxud",
-              "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
-              "accessModes": [
-                "hfsrutijzeymyvcvomq"
-              ],
-              "dataSource": {
-                "apiGroup": "bi",
-                "kind": "opiekgewvltli",
-                "name": "hmzeclkrckkvflbuwejvael"
-              },
-              "dataSourceRef": {
-                "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
-                "kind": "ztgklwne",
-                "name": "vlgbalrnjuksdxtclhlmlfvx",
-                "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
-              },
-              "resources": {
-                "limits": {
-                  "key2700": "bgqvrfll"
-                },
-                "requests": {
-                  "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
-                }
-              },
-              "selector": {
-                "matchExpressions": [
-                  {
-                    "key": "smuxyuxautqizhqpoqptao",
-                    "operator": "In",
-                    "values": [
-                      "gwwdwkwiifcwkubcwzgc"
-                    ]
-                  }
-                ],
-                "matchLabels": {
-                  "key3277": "yrorgczpgmwujcxdcgkhbwxb"
-                }
-              }
-            },
-            "persistentVolumeClaimSpec": {
-              "volumeName": "rtcwnl",
-              "volumeMode": "okijxud",
-              "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
-              "accessModes": [
-                "hfsrutijzeymyvcvomq"
-              ],
-              "dataSource": {
-                "apiGroup": "bi",
-                "kind": "opiekgewvltli",
-                "name": "hmzeclkrckkvflbuwejvael"
-              },
-              "dataSourceRef": {
-                "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
-                "kind": "ztgklwne",
-                "name": "vlgbalrnjuksdxtclhlmlfvx",
-                "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
-              },
-              "resources": {
-                "limits": {
-                  "key2700": "bgqvrfll"
-                },
-                "requests": {
-                  "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
-                }
-              },
-              "selector": {
-                "matchExpressions": [
-                  {
-                    "key": "smuxyuxautqizhqpoqptao",
-                    "operator": "In",
-                    "values": [
-                      "gwwdwkwiifcwkubcwzgc"
-                    ]
-                  }
-                ],
-                "matchLabels": {
-                  "key3277": "yrorgczpgmwujcxdcgkhbwxb"
-                }
-              }
-            }
-          },
-          "generateResourceLimits": {
-            "cpu": "Enabled"
-          },
-          "memoryProfile": "Tiny",
-          "provisioningState": "Succeeded"
+          }
         },
         "extendedLocation": {
           "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
@@ -359,164 +124,46 @@
       },
       "body": {
         "properties": {
-          "advanced": {
-            "clients": {
-              "maxSessionExpirySeconds": 8980,
-              "maxMessageExpirySeconds": 4070,
-              "maxPacketSizeBytes": 9140,
-              "subscriberQueueLimit": {
-                "length": 27,
-                "strategy": "None"
-              },
-              "maxReceiveMaximum": 7597,
-              "maxKeepAliveSeconds": 2264
-            },
-            "encryptInternalTraffic": "Enabled",
-            "internalCerts": {
-              "duration": "mbuzbxzzvaeow",
-              "renewBefore": "uveyjmvgxedobfsnudwp",
-              "privateKey": {
-                "algorithm": "Ec256",
-                "rotationPolicy": "Always"
-              }
-            }
+          "memoryProfile": "Medium",
+          "generateResourceLimits": {
+            "cpu": "Disabled"
           },
           "cardinality": {
             "backendChain": {
-              "partitions": 10,
-              "redundancyFactor": 4,
-              "workers": 2
+              "partitions": 2,
+              "workers": 2,
+              "redundancyFactor": 2
             },
             "frontend": {
-              "replicas": 4,
+              "replicas": 2,
               "workers": 2
             }
+          },
+          "advanced": {
+            "encryptInternalTraffic": "Enabled"
           },
           "diagnostics": {
             "logs": {
-              "opentelemetryExportConfig": {
-                "otlpGrpcEndpoint": "oyembrvhzogggkodr",
-                "intervalSeconds": 23,
-                "level": "tmcrcih"
-              },
-              "level": "tpjixxzdjmkvfnctjbkycswmyrnskf"
+              "level": "info"
             },
             "metrics": {
-              "opentelemetryExportConfig": {
-                "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
-                "intervalSeconds": 207
-              },
-              "prometheusPort": 87
+              "prometheusPort": 9600
             },
             "selfCheck": {
+              "intervalSeconds": 30,
               "mode": "Enabled",
-              "intervalSeconds": 136,
-              "timeoutSeconds": 18
+              "timeoutSeconds": 15
             },
             "traces": {
+              "cacheSizeMegabytes": 16,
               "mode": "Enabled",
-              "opentelemetryExportConfig": {
-                "otlpGrpcEndpoint": "dngpjdmfecwmrheyzc",
-                "intervalSeconds": 207
-              },
-              "cacheSizeMegabytes": 69,
               "selfTracing": {
-                "mode": "Enabled",
-                "intervalSeconds": 290
+                "intervalSeconds": 30,
+                "mode": "Enabled"
               },
-              "spanChannelCapacity": 6083
+              "spanChannelCapacity": 1000
             }
-          },
-          "diskBackedMessageBuffer": {
-            "maxSize": "500M",
-            "ephemeralVolumeClaimSpec": {
-              "volumeName": "rtcwnl",
-              "volumeMode": "okijxud",
-              "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
-              "accessModes": [
-                "hfsrutijzeymyvcvomq"
-              ],
-              "dataSource": {
-                "apiGroup": "bi",
-                "kind": "opiekgewvltli",
-                "name": "hmzeclkrckkvflbuwejvael"
-              },
-              "dataSourceRef": {
-                "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
-                "kind": "ztgklwne",
-                "name": "vlgbalrnjuksdxtclhlmlfvx",
-                "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
-              },
-              "resources": {
-                "limits": {
-                  "key2700": "bgqvrfll"
-                },
-                "requests": {
-                  "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
-                }
-              },
-              "selector": {
-                "matchExpressions": [
-                  {
-                    "key": "smuxyuxautqizhqpoqptao",
-                    "operator": "In",
-                    "values": [
-                      "gwwdwkwiifcwkubcwzgc"
-                    ]
-                  }
-                ],
-                "matchLabels": {
-                  "key3277": "yrorgczpgmwujcxdcgkhbwxb"
-                }
-              }
-            },
-            "persistentVolumeClaimSpec": {
-              "volumeName": "rtcwnl",
-              "volumeMode": "okijxud",
-              "storageClassName": "sdidejnhpdeickiowrwnuqdthbuto",
-              "accessModes": [
-                "hfsrutijzeymyvcvomq"
-              ],
-              "dataSource": {
-                "apiGroup": "bi",
-                "kind": "opiekgewvltli",
-                "name": "hmzeclkrckkvflbuwejvael"
-              },
-              "dataSourceRef": {
-                "apiGroup": "ijxtvgdpmfsidjllzhfezleicqazg",
-                "kind": "ztgklwne",
-                "name": "vlgbalrnjuksdxtclhlmlfvx",
-                "namespace": "uvjwhpdpfelibhrzhbnfcpmlu"
-              },
-              "resources": {
-                "limits": {
-                  "key2700": "bgqvrfll"
-                },
-                "requests": {
-                  "key1544": "imdgrglgisgnmgffyubokbsbcycsk"
-                }
-              },
-              "selector": {
-                "matchExpressions": [
-                  {
-                    "key": "smuxyuxautqizhqpoqptao",
-                    "operator": "In",
-                    "values": [
-                      "gwwdwkwiifcwkubcwzgc"
-                    ]
-                  }
-                ],
-                "matchLabels": {
-                  "key3277": "yrorgczpgmwujcxdcgkhbwxb"
-                }
-              }
-            }
-          },
-          "generateResourceLimits": {
-            "cpu": "Enabled"
-          },
-          "memoryProfile": "Tiny",
-          "provisioningState": "Succeeded"
+          }
         },
         "extendedLocation": {
           "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",

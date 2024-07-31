@@ -431,7 +431,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/brokers": {
       "get": {
-        "operationId": "Broker_ListByInstanceResource",
+        "operationId": "Broker_ListByResourceGroup",
         "tags": [
           "Broker"
         ],
@@ -469,11 +469,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Broker_ListByInstanceResource": {
-            "$ref": "./examples/Broker_ListByInstanceResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -701,7 +696,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/brokers/{brokerName}/authentications": {
       "get": {
-        "operationId": "BrokerAuthentication_ListByBrokerResource",
+        "operationId": "BrokerAuthentication_ListByResourceGroup",
         "tags": [
           "BrokerAuthentication"
         ],
@@ -749,11 +744,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "BrokerAuthentication_ListByBrokerResource": {
-            "$ref": "./examples/BrokerAuthentication_ListByBrokerResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1011,7 +1001,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/brokers/{brokerName}/authorizations": {
       "get": {
-        "operationId": "BrokerAuthorization_ListByBrokerResource",
+        "operationId": "BrokerAuthorization_ListByResourceGroup",
         "tags": [
           "BrokerAuthorization"
         ],
@@ -1059,11 +1049,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "BrokerAuthorization_ListByBrokerResource": {
-            "$ref": "./examples/BrokerAuthorization_ListByBrokerResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1321,7 +1306,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/brokers/{brokerName}/listeners": {
       "get": {
-        "operationId": "BrokerListener_ListByBrokerResource",
+        "operationId": "BrokerListener_ListByResourceGroup",
         "tags": [
           "BrokerListener"
         ],
@@ -1369,11 +1354,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "BrokerListener_ListByBrokerResource": {
-            "$ref": "./examples/BrokerListener_ListByBrokerResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1631,7 +1611,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowEndpoints": {
       "get": {
-        "operationId": "DataFlowEndpoint_ListByInstanceResource",
+        "operationId": "DataFlowEndpoint_ListByResourceGroup",
         "tags": [
           "DataFlowEndpoint"
         ],
@@ -1669,11 +1649,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataFlowEndpoint_ListByInstanceResource": {
-            "$ref": "./examples/DataFlowEndpoint_ListByInstanceResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1901,7 +1876,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/dataflowProfiles": {
       "get": {
-        "operationId": "DataFlowProfile_ListByInstanceResource",
+        "operationId": "DataFlowProfile_ListByResourceGroup",
         "tags": [
           "DataFlowProfile"
         ],
@@ -1939,11 +1914,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataFlowProfile_ListByInstanceResource": {
-            "$ref": "./examples/DataFlowProfile_ListByInstanceResource_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2776,8 +2746,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BrokerAuthenticationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -2965,8 +2934,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BrokerAuthorizationProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3100,8 +3068,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BrokerListenerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3296,8 +3263,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BrokerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4476,8 +4442,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataFlowEndpointProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4620,8 +4585,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataFlowProfileProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -4720,8 +4684,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataFlowProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5030,8 +4993,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InstanceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
