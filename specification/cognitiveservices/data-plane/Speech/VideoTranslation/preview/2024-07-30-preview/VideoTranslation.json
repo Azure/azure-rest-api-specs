@@ -253,6 +253,50 @@
           "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ConsentOperations_DeleteConsent",
+        "tags": [
+          "VideoTranslation"
+        ],
+        "description": "Delete a consent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "consentId",
+            "in": "path",
+            "description": "Consent ID",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{1,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Consent": {
+            "$ref": "./examples/ConsentOperations_DeleteConsent.json"
+          }
+        }
       }
     },
     "/defaultConsentTemplates/{locale}": {

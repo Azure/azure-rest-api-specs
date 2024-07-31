@@ -422,4 +422,7 @@ interface ConsentOperations {
     Consent,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
+
+  @doc("Delete a consent.")
+  deleteConsent is ops.ResourceDelete<Consent>;
 }
