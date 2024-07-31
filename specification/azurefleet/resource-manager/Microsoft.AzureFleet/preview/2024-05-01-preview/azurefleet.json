@@ -1086,11 +1086,8 @@
           "description": "Configuration Options for Regular instances in Compute Fleet."
         },
         "vmSizesProfile": {
-          "type": "array",
+          "$ref": "#/definitions/VmSizeProfile",
           "description": "List of VM sizes supported for Compute Fleet",
-          "items": {
-            "$ref": "#/definitions/VmSizeProfile"
-          },
           "x-ms-identifiers": []
         },
         "computeProfile": {
@@ -1101,7 +1098,9 @@
           "type": "string",
           "format": "date-time",
           "description": "Specifies the time at which the Compute Fleet is created.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "uniqueId": {
           "type": "string",
