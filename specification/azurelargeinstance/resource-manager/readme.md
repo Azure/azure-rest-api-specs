@@ -124,6 +124,15 @@ These set of linting rules aren't applicable to the AzureLargeInstance RP so sup
 
 ``` yaml
 suppressions:
+  - code: PutResponseCodes
+    from: azurelargeinstance.json
+    reason: The PUT method only creates resource for the RP. The operation to update an existing instance is unsupported. This is because instances that are 'created' are simply assigned to customers, and have already been provisioned. ARM operations to change the provisioning status of a resource are unsupported.
+  - code: DeleteResponseCodes
+    from: azurelargeinstance.json
+    reason: The DELETE method either removes an instance from the DB or returns an error. Since only one successful outcome is possible, it doesn't make sense for our RP to support both 200 and 204.
+  - code: DeleteOperationResponses
+    from: azurelargeinstance.json
+    reason: Customers deleting resources don't request any new information from the operation besides its result. Therefore it makes sense to return no content when the operation succeeds.
   - code: TrackedResourcesMustHavePut
     where:
       - $.definitions.AzureLargeInstance
