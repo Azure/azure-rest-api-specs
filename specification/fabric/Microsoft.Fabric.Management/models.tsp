@@ -20,7 +20,7 @@ model FabricCapacityProperties {
 
   @doc("The current state of Microsoft Fabric resource. The state is to indicate more states outside of resource provisioning.")
   @visibility("read")
-  state: ResourceState;
+  state?: ResourceState;
 
   @doc("The capacity administration")
   administration: CapacityAdministration;
