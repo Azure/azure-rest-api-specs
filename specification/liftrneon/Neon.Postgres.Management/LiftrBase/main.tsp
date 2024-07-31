@@ -140,10 +140,6 @@ model SingleSignOnProperties {
 
   @doc("List of AAD domains fetched from Microsoft Graph for user.")
   aadDomains?: string[];
-
-  @visibility("read")
-  @doc("Provisioning State of the resource")
-  provisioningState?: ResourceProvisioningState;
 }
 
 @doc("Various states of the SSO resource")
