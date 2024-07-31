@@ -39,6 +39,10 @@ These settings apply only when `--tag=package-2024-08-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
   - Microsoft.AzurePlaywrightService/preview/2024-08-01-preview/playwrighttesting.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: playwrighttesting.json
+    reason: We have enums defined for quota resource names which doesn't support string pattern validation.
 ```
 
 ### Tag: package-2024-01-01-preview
