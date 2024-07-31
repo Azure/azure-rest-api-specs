@@ -85,3 +85,13 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Suppression
+
+```yaml
+directive:
+  - from: mongoCluster.json
+    suppress: BodyTopLevelProperties
+    reason: https://github.com/Azure/azure-openapi-validator/issues/722
+    where: $.definitions.ReplicaListResult.properties
+```
