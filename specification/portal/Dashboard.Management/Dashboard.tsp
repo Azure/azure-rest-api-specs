@@ -19,9 +19,7 @@ namespace Microsoft.Portal;
 model Dashboard
   is Azure.ResourceManager.TrackedResource<DashboardPropertiesWithProvisioningState> {
   ...ResourceNameParameter<
-    Resource = Dashboard,
-    KeyName = "dashboardName",
-    SegmentName = "dashboards"
+    Resource = Dashboard
   >;
 }
 
