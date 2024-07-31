@@ -14,7 +14,7 @@ interface CloudExadataInfrastructures
     > {
   //OCI addStorageCapacityCloudExadataInfrastructure API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/CloudExadataInfrastructure/AddStorageCapacityCloudExadataInfrastructure
   @doc("Perform add storage capacity on exadata infra")
-  @example(
+  @Autorest.example(
     "./examples/exaInfra_addStorageCapacity.json",
     "Perform add storage capacity on exadata infra"
   )
@@ -25,27 +25,27 @@ interface CloudExadataInfrastructures
   >;
 }
 
-@@example(CloudExadataInfrastructures.listBySubscription,
+@@Autorest.example(CloudExadataInfrastructures.listBySubscription,
   "./examples/exaInfra_listBySubscription.json",
   "List Exadata Infrastructure by subscription"
 );
-@@example(CloudExadataInfrastructures.listByResourceGroup,
+@@Autorest.example(CloudExadataInfrastructures.listByResourceGroup,
   "./examples/exaInfra_listByResourceGroup.json",
   "List Exadata Infrastructure by resource group"
 );
-@@example(CloudExadataInfrastructures.createOrUpdate,
+@@Autorest.example(CloudExadataInfrastructures.createOrUpdate,
   "./examples/exaInfra_create.json",
   "Create Exadata Infrastructure"
 );
-@@example(CloudExadataInfrastructures.get,
+@@Autorest.example(CloudExadataInfrastructures.get,
   "./examples/exaInfra_get.json",
   "Get Exadata Infrastructure"
 );
-@@example(CloudExadataInfrastructures.update,
+@@Autorest.example(CloudExadataInfrastructures.update,
   "./examples/exaInfra_patch.json",
   "Patch Exadata Infrastructure"
 );
-@@example(CloudExadataInfrastructures.delete,
+@@Autorest.example(CloudExadataInfrastructures.delete,
   "./examples/exaInfra_delete.json",
   "Delete Exadata Infrastructure"
 );
