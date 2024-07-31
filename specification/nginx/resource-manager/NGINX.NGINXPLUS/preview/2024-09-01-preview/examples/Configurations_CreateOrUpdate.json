@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "deploymentName": "myDeployment",
+    "configurationName": "default",
+    "requestBody": {
+      "properties": {
+        "files": [
+          {
+            "content": "ABCDEF==",
+            "virtualPath": "/etc/nginx/nginx.conf"
+          }
+        ],
+        "package": {
+          "data": null
+        },
+        "rootFile": "/etc/nginx/nginx.conf"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/configurations/default",
+        "name": "default",
+        "type": "nginx.nginxplus/nginxDeployments/configurations",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "files": [
+            {
+              "content": "ABCDEF==",
+              "virtualPath": "/etc/nginx/nginx.conf"
+            }
+          ],
+          "package": {
+            "data": null
+          },
+          "rootFile": "/etc/nginx/nginx.conf"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/configurations/default",
+        "name": "default",
+        "type": "nginx.nginxplus/nginxDeployments/configurations",
+        "properties": {
+          "provisioningState": "Accepted",
+          "files": [
+            {
+              "content": "ABCDEF==",
+              "virtualPath": "/etc/nginx/nginx.conf"
+            }
+          ],
+          "package": {
+            "data": null
+          },
+          "rootFile": "/etc/nginx/nginx.conf"
+        }
+      }
+    }
+  }
+}
