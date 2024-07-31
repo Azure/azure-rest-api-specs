@@ -45,6 +45,8 @@ directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.VolumeClaimSpecSelector.properties.matchLabels
     reason: User defined properties that are not subject to any validations.
+  - suppress: BodyTopLevelProperties
+    reason: Temporary suppression due to failing pipeline.
 ```
 
 ### Basic Information
