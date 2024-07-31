@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Nginx.NginxPlus",
-    "version": "2024-06-01-preview"
+    "version": "2024-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1056,6 +1056,25 @@
         }
       }
     },
+    "NginxConfigurationProtectedFile": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the protected file. This value is a PUT only value. If you perform a GET request on this value, it will be empty because it is a protected file."
+        },
+        "virtualPath": {
+          "type": "string",
+          "description": "The virtual path of the protected file.",
+          "example": "/etc/nginx/protected-file.cert"
+        },
+        "contentHash": {
+          "type": "string",
+          "description": "The hash of the content of the file. This value is used to determine if the file has changed.",
+          "example": "sha256:1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF"
+        }
+      }
+    },
     "NginxConfigurationPackage": {
       "type": "object",
       "properties": {
@@ -1087,7 +1106,7 @@
         "protectedFiles": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NginxConfigurationFile"
+            "$ref": "#/definitions/NginxConfigurationProtectedFile"
           },
           "x-ms-identifiers": []
         },
@@ -1586,7 +1605,7 @@
             "protectedFiles": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/NginxConfigurationFile"
+                "$ref": "#/definitions/NginxConfigurationProtectedFile"
               },
               "x-ms-identifiers": []
             },
