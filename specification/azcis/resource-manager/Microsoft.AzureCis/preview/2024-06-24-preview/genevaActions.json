@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure CIS FRP",
-    "version": "2023-08-22",
-    "description": "Planned Quota Provider",
+    "version": "2024-06-24-preview",
+    "description": "GenericGenevaActions Provider",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "PlannedQuota"
+      "name": "GenericGenevaActions"
     }
   ],
   "paths": {
@@ -56,26 +56,26 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "List Operations PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_Operations.json"
+          "List Operations GenericGenevaActions": {
+            "$ref": "./examples/GenericGenevaActions_Operations.json"
           }
         },
         "x-ms-pageable": {
@@ -83,38 +83,38 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/plannedQuotas": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/genericGenevaActions": {
       "get": {
-        "operationId": "PlannedQuota_ListBySubscription",
+        "operationId": "GenericGenevaActions_ListBySubscription",
         "tags": [
-          "PlannedQuota"
+          "GenericGenevaActions"
         ],
-        "description": "List PlannedQuotaResource resources by subscription ID",
+        "description": "List GenericGenevaActionsResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PlannedQuotaResourceListResult"
+              "$ref": "#/definitions/GenericGenevaActionsResourceListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "ListBySubscription PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_ListBySubscription.json"
+          "ListBySubscription GenericGenevaActions": {
+            "$ref": "./examples/GenericGenevaActions_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -122,41 +122,41 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/plannedQuotas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/genericGenevaActions": {
       "get": {
-        "operationId": "PlannedQuota_ListByResourceGroup",
+        "operationId": "GenericGenevaActions_ListByResourceGroup",
         "tags": [
-          "PlannedQuota"
+          "GenericGenevaActions"
         ],
-        "description": "List PlannedQuotaResource resources by resource group",
+        "description": "List GenericGenevaActionsResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PlannedQuotaResourceListResult"
+              "$ref": "#/definitions/GenericGenevaActionsResourceListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "ListByResourceGroup PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_ListByResourceGroup.json"
+          "ListByResourceGroup GenericGenevaActions": {
+            "$ref": "./examples/GenericGenevaActions_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -164,22 +164,22 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/plannedQuotas/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/genericGenevaActions/{resourceName}": {
       "get": {
-        "operationId": "PlannedQuota_Get",
+        "operationId": "GenericGenevaActions_Get",
         "tags": [
-          "PlannedQuota"
+          "GenericGenevaActions"
         ],
-        "description": "Get a PlannedQuotaResource",
+        "description": "Get a GenericGenevaActionsResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -194,37 +194,37 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PlannedQuotaResource"
+              "$ref": "#/definitions/GenericGenevaActionsResource"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Get PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_Get.json"
+          "Get GenericGenevaActions": {
+            "$ref": "./examples/GenericGenevaActions_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "PlannedQuota_CreateOrUpdate",
+        "operationId": "GenericGenevaActions_CreateOrUpdate",
         "tags": [
-          "PlannedQuota"
+          "GenericGenevaActions"
         ],
-        "description": "Create a PlannedQuotaResource",
+        "description": "Create a GenericGenevaActionsResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -240,21 +240,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PlannedQuotaResource"
+              "$ref": "#/definitions/GenericGenevaActionsResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PlannedQuotaResource' update operation succeeded",
+            "description": "Resource 'GenericGenevaActionsResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PlannedQuotaResource"
+              "$ref": "#/definitions/GenericGenevaActionsResource"
             }
           },
           "201": {
-            "description": "Resource 'PlannedQuotaResource' create operation succeeded",
+            "description": "Resource 'GenericGenevaActionsResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PlannedQuotaResource"
+              "$ref": "#/definitions/GenericGenevaActionsResource"
             },
             "headers": {
               "Retry-After": {
@@ -267,13 +267,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Create PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_CreateOrUpdate.json"
+          "Create GenericGenevaActions": {
+            "$ref": "./examples/GenericGenevaActions_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -284,7 +284,7 @@
     }
   },
   "definitions": {
-    "PlannedQuotaProvisioningState": {
+    "GenericGenevaActionsProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
       "enum": [
@@ -294,7 +294,7 @@
         "Accepted"
       ],
       "x-ms-enum": {
-        "name": "PlannedQuotaProvisioningState",
+        "name": "GenericGenevaActionsProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -321,12 +321,12 @@
       },
       "readOnly": true
     },
-    "PlannedQuotaResource": {
+    "GenericGenevaActionsResource": {
       "type": "object",
-      "description": "plannedQuota Resource",
+      "description": "genericGenevaActions Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PlannedQuotaResourceProperties",
+          "$ref": "#/definitions/GenericGenevaActionsResourceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-mutability": [
             "read",
@@ -336,19 +336,19 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
-    "PlannedQuotaResourceListResult": {
+    "GenericGenevaActionsResourceListResult": {
       "type": "object",
-      "description": "The response of a PlannedQuotaResource list operation.",
+      "description": "The response of a GenericGenevaActionsResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PlannedQuotaResource items on this page",
+          "description": "The GenericGenevaActionsResource items on this page",
           "items": {
-            "$ref": "#/definitions/PlannedQuotaResource"
+            "$ref": "#/definitions/GenericGenevaActionsResource"
           }
         },
         "nextLink": {
@@ -361,75 +361,76 @@
         "value"
       ]
     },
-    "PlannedQuotaResourceProperties": {
+    "GenericGenevaActionsResourceProperties": {
       "type": "object",
-      "description": "plannedQuota properties",
+      "description": "GenericGenevaActions properties",
       "properties": {
-        "plannedQuotaName": {
+        "actionName": {
           "type": "string",
-          "description": "Name of the resource template"
+          "description": "User given name for geneva action"
         },
-        "contactEmail": {
+        "environment": {
           "type": "string",
-          "description": "Contact email for manual approval"
+          "description": "The execution environment for geneva action"
         },
-        "subscriptionNameInPlan": {
+        "extension": {
           "type": "string",
-          "description": "Subscription Name in plan"
+          "description": "The extension name for geneva action"
         },
-        "stage": {
+        "endpoint": {
           "type": "string",
-          "description": "Stage name"
+          "description": "The endpoint name for geneva action"
         },
-        "region": {
+        "operation": {
           "type": "string",
-          "description": "Region name"
+          "description": "The operation for geneva action"
         },
-        "planVersion": {
+        "inputMode": {
           "type": "string",
-          "description": "Plan version"
+          "description": "The input mode for geneva action (single/batch)"
         },
-        "propertyBindings": {
+        "armLocation": {
+          "type": "string",
+          "description": "The Azure location"
+        },
+        "parameters": {
           "type": "array",
-          "description": "Property bindings",
+          "description": "The parameter list for geneva action",
           "items": {
-            "$ref": "#/definitions/PropertyBinding"
+            "$ref": "#/definitions/Parameter"
           },
           "x-ms-identifiers": []
         },
-        "skipUnsupportedSilently": {
-          "type": "boolean",
-          "description": "Skip unsupported silently"
-        },
         "provisioningState": {
-          "$ref": "#/definitions/PlannedQuotaProvisioningState",
+          "$ref": "#/definitions/GenericGenevaActionsProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
         }
       },
       "required": [
-        "plannedQuotaName",
-        "contactEmail",
-        "subscriptionNameInPlan",
-        "region"
+        "actionName",
+        "environment",
+        "extension",
+        "endpoint",
+        "operation"
       ]
     },
-    "PropertyBinding": {
+    "Parameter": {
       "type": "object",
-      "description": "plannedQuota Property Binding",
+      "description": "GenericGenevaActions Resource Parameter",
       "properties": {
-        "placeholder": {
+        "name": {
           "type": "string",
-          "description": "Property binding placeholder"
+          "description": "Parameter name."
         },
-        "resourceName": {
+        "value": {
           "type": "string",
-          "description": "Resource name of the property"
+          "description": "Parameter value."
         }
       },
       "required": [
-        "placeholder",
-        "resourceName"
+        "name",
+        "value"
       ]
     }
   },

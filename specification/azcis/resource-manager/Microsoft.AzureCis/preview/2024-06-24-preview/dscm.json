@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure CIS FRP",
-    "version": "2023-08-22-preview",
+    "version": "2024-06-24-preview",
     "description": "dscm Service",
     "x-typespec-generated": [
       {
@@ -43,9 +43,6 @@
       "name": "Operations"
     },
     {
-      "name": "DstsApplications"
-    },
-    {
       "name": "DsmsAllowlist"
     },
     {
@@ -68,20 +65,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -91,9 +88,6 @@
           },
           "List Operations DsmsRootFolder": {
             "$ref": "./examples/DsmsRootFolder_Operations.json"
-          },
-          "List Operations DstsApplication": {
-            "$ref": "./examples/DstsApplications_Operations.json"
           },
           "List Operations DstsServiceAccount": {
             "$ref": "./examples/DstsServiceAccount_Operations.json"
@@ -116,10 +110,10 @@
         "description": "List DsmsAllowlistResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -132,7 +126,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -155,10 +149,10 @@
         "description": "List DsmsRootFolderResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -171,52 +165,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "ListBySubscription DsmsRootFolder": {
             "$ref": "./examples/DsmsRootFolder_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/dstsApplications": {
-      "get": {
-        "operationId": "DstsApplications_ListBySubscription",
-        "tags": [
-          "DstsApplications"
-        ],
-        "description": "List DstsApplicationResource resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DstsApplicationResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListBySubscription DstsApplication": {
-            "$ref": "./examples/DstsApplications_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -233,10 +188,10 @@
         "description": "List DstsServiceAccountResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -249,7 +204,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -272,10 +227,10 @@
         "description": "List DstsServiceClientIdentityResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -288,7 +243,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -311,13 +266,13 @@
         "description": "List DsmsAllowlistResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -330,7 +285,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -353,13 +308,13 @@
         "description": "Get a DsmsAllowlistResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -380,7 +335,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -398,13 +353,13 @@
         "description": "Create a DsmsAllowlistResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -447,7 +402,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -471,13 +426,13 @@
         "description": "List DsmsRootFolderResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -490,7 +445,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -513,13 +468,13 @@
         "description": "Get a DsmsRootFolderResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -540,7 +495,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -558,13 +513,13 @@
         "description": "Create a DsmsRootFolderResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -607,173 +562,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Create DsmsRootFolder": {
             "$ref": "./examples/DsmsRootFolder_CreateOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dstsApplications": {
-      "get": {
-        "operationId": "DstsApplications_ListByResourceGroup",
-        "tags": [
-          "DstsApplications"
-        ],
-        "description": "List DstsApplicationResource resources by resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DstsApplicationResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListByResourceGroup DstsApplication": {
-            "$ref": "./examples/DstsApplications_ListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dstsApplications/{resourceName}": {
-      "get": {
-        "operationId": "DstsApplications_Get",
-        "tags": [
-          "DstsApplications"
-        ],
-        "description": "Get a DstsApplicationResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,80}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DstsApplicationResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get DstsApplication": {
-            "$ref": "./examples/DstsApplications_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "DstsApplications_CreateOrUpdate",
-        "tags": [
-          "DstsApplications"
-        ],
-        "description": "Create a DstsApplicationResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,80}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DstsApplicationResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'DstsApplicationResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DstsApplicationResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'DstsApplicationResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DstsApplicationResource"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create DstsApplication": {
-            "$ref": "./examples/DstsApplications_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -791,13 +586,13 @@
         "description": "List DstsServiceAccountResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -810,7 +605,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -833,13 +628,13 @@
         "description": "Get a DstsServiceAccountResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -860,7 +655,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -878,13 +673,13 @@
         "description": "Create a DstsServiceAccountResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -927,7 +722,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -951,13 +746,13 @@
         "description": "List DstsServiceClientIdentityResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -970,7 +765,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -993,13 +788,13 @@
         "description": "Get a DstsServiceClientIdentityResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1020,7 +815,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1038,13 +833,13 @@
         "description": "Create a DstsServiceClientIdentityResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "resourceName",
@@ -1087,7 +882,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1104,319 +899,6 @@
     }
   },
   "definitions": {
-    "ApplicationAccount": {
-      "type": "object",
-      "description": "Application. Optional.",
-      "properties": {
-        "dstsInstance": {
-          "type": "string",
-          "description": "The dSTS instance where the Application resides. Required."
-        },
-        "applicationAccountName": {
-          "type": "string",
-          "description": "The name of the Application. Required."
-        },
-        "realms": {
-          "type": "array",
-          "description": "The realms of the application. Optional.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "servicePrincipalNames": {
-          "type": "array",
-          "description": "The Service Principal Names of the application. Optional.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "replyToAddresses": {
-          "type": "array",
-          "description": "The Reply Addresses of application. Optional.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "groupId": {
-          "type": "string",
-          "description": "GUID of the dSCM Application group to which the Application belongs. Optional."
-        },
-        "groupName": {
-          "type": "string",
-          "description": "Group name of the dSCM Application group to which the Application belongs. Optional."
-        },
-        "isMfaEnabled": {
-          "type": "boolean",
-          "description": "If set to true, authenticating to the application requires MFA. Optional.",
-          "default": true
-        },
-        "sawDeviceEnforcement": {
-          "type": "string",
-          "description": "If it is null, full SAW enforcement will apply to the application. Possible options are NoEnforcement, SAWFull, SAWElevatedOnly. Optional."
-        },
-        "isElevatedAccess": {
-          "type": "boolean",
-          "description": "If your application (service) is exclusively limited to System Metadata, Read-Only access levels, set it to false. Optional."
-        },
-        "isProduction": {
-          "type": "boolean",
-          "description": "If your application (service) is exclusively NonProduction, set it to false. Optional.",
-          "default": true
-        },
-        "claimRules": {
-          "type": "array",
-          "description": "The claim rule which apply to this Application. Optional.",
-          "items": {
-            "$ref": "#/definitions/ApplicationClaimRule"
-          },
-          "x-ms-identifiers": []
-        },
-        "applicationClientIdentity": {
-          "$ref": "#/definitions/ApplicationClientIdentity",
-          "description": "Client identity when using the application as a client. Optional."
-        }
-      },
-      "required": [
-        "dstsInstance",
-        "applicationAccountName"
-      ]
-    },
-    "ApplicationClaimRule": {
-      "type": "object",
-      "description": "The claim rule which apply to Application.",
-      "properties": {
-        "clientIdentifier": {
-          "$ref": "#/definitions/Claim",
-          "description": "A claim used to identify client. e.g., group claim, application name claim, object id claim."
-        },
-        "claim": {
-          "$ref": "#/definitions/Claim",
-          "description": "The claim"
-        },
-        "clientIdentityOrigin": {
-          "type": "string",
-          "description": "The name of the original identity provider of the client. e.g., federation for user or dsts instance for applications."
-        },
-        "isRegionalEnforced": {
-          "type": "boolean",
-          "description": "If true, when the claim is scoped to service account group, only SCIs on the same dsts instance where the service accounts exist can get the claim.",
-          "default": true
-        }
-      },
-      "required": [
-        "clientIdentifier",
-        "claim",
-        "clientIdentityOrigin"
-      ]
-    },
-    "ApplicationClientIdentity": {
-      "type": "object",
-      "description": "Represents application client identity.",
-      "properties": {
-        "dmsiInfo": {
-          "$ref": "#/definitions/DmsiInfo",
-          "description": "Dmsi client."
-        },
-        "certificateBasedIdentity": {
-          "$ref": "#/definitions/CertificateBasedIdentity",
-          "description": "Certificate client."
-        },
-        "subjectNameBasedIdentity": {
-          "$ref": "#/definitions/SubjectNameBasedIdentity",
-          "description": "Subject name client."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of your client identity.e.g., Dmsi, Certificate, SubjectName."
-        },
-        "clientTokenIpRangeRestrictions": {
-          "type": "array",
-          "description": "Provide a list IP address ranges to restrict where this application's client token can be requested. Optional.",
-          "items": {
-            "$ref": "#/definitions/IpRange"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "ApplicationGroup": {
-      "type": "object",
-      "description": "The application group. Optional.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Group id. Optional."
-        },
-        "applicationGroupName": {
-          "type": "string",
-          "description": "Name of the Application Group. Required."
-        },
-        "applicationName": {
-          "type": "string",
-          "description": "Common Name for all Applications inside the group. Required."
-        },
-        "servicePrincipalNames": {
-          "type": "array",
-          "description": "The Service Principal Names of the application. Optional.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "realms": {
-          "type": "array",
-          "description": "Actor realm. Optional.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "replyToAddresses": {
-          "type": "array",
-          "description": "The Reply Addresses of application. Optional.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "isMfaEnabled": {
-          "type": "boolean",
-          "description": "If set to true, authenticating to the application requires MFA. Optional.",
-          "default": true
-        },
-        "isGlobalService": {
-          "type": "boolean",
-          "description": "If not set, default is regional service. Optional."
-        },
-        "sawDeviceEnforcement": {
-          "type": "string",
-          "description": "If it is null, full SAW enforcement will apply to the application. Possible options are NoEnforcement, SAWFull, SAWElevatedOnly. Optional."
-        },
-        "clientTokenIpRangeRestrictions": {
-          "type": "array",
-          "description": "Change.Remove client token ip range. Optional.",
-          "items": {
-            "$ref": "#/definitions/IpRange"
-          },
-          "x-ms-identifiers": []
-        },
-        "cloudId": {
-          "type": "string",
-          "description": "The cloud identifier for the application group. Possible options are PROD, blackforest, fairfax, mooncake. Required.",
-          "default": "PROD"
-        },
-        "clientSubscriptions": {
-          "type": "array",
-          "description": "Client subscriptions. Optional.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "regions": {
-          "type": "array",
-          "description": "Specific dSTS instances to create applications on. Optional.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "claimRules": {
-          "type": "array",
-          "description": "The claim rules that apply to this Application Group. Optional.",
-          "items": {
-            "$ref": "#/definitions/ApplicationClaimRule"
-          },
-          "x-ms-identifiers": []
-        },
-        "applicationClientIdentity": {
-          "$ref": "#/definitions/ApplicationClientIdentity",
-          "description": "Client identity when using the application as a client. Optional."
-        }
-      },
-      "required": [
-        "applicationGroupName",
-        "applicationName",
-        "cloudId"
-      ]
-    },
-    "CertificateBasedIdentity": {
-      "type": "object",
-      "description": "Represents certificate based authentication.",
-      "properties": {
-        "certificates": {
-          "type": "array",
-          "description": "Certificate",
-          "items": {
-            "$ref": "#/definitions/CertificateInfo"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "certificates"
-      ]
-    },
-    "CertificateInfo": {
-      "type": "object",
-      "description": "Certification based application client identity.",
-      "properties": {
-        "thumbprint": {
-          "type": "string",
-          "description": "Certificate thumbprint information"
-        },
-        "expiryDate": {
-          "type": "string",
-          "description": "Certificate expiry date"
-        }
-      },
-      "required": [
-        "thumbprint",
-        "expiryDate"
-      ]
-    },
-    "Claim": {
-      "type": "object",
-      "description": "A claim used to identify client. e.g., group claim, application name claim, object id claim.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of the claim"
-        },
-        "value": {
-          "type": "string",
-          "description": "Value of claim"
-        }
-      },
-      "required": [
-        "type",
-        "value"
-      ]
-    },
-    "DmsiInfo": {
-      "type": "object",
-      "description": "Dmsi information",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "Dmsi path"
-        },
-        "region": {
-          "type": "string",
-          "description": "Dmsi region"
-        },
-        "subscriptions": {
-          "type": "array",
-          "description": "Dmsi subscriptions",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "path",
-        "region",
-        "subscriptions"
-      ]
-    },
     "DscmProvisioningState": {
       "type": "string",
       "description": "Provisioning status of the resource.",
@@ -1469,7 +951,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1530,6 +1012,10 @@
             "type": "string"
           }
         },
+        "armLocation": {
+          "type": "string",
+          "description": "The Azure location"
+        },
         "provisioningState": {
           "$ref": "#/definitions/DscmProvisioningState",
           "description": "Provisioning state",
@@ -1555,7 +1041,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1592,6 +1078,10 @@
           "type": "string",
           "description": "The cloud ID where the root folder should be added. Acceptable values: Public, Fairfax, Mooncake, USSec, USNat"
         },
+        "armLocation": {
+          "type": "string",
+          "description": "The Azure location"
+        },
         "provisioningState": {
           "$ref": "#/definitions/DscmProvisioningState",
           "description": "Provisioning state",
@@ -1601,65 +1091,6 @@
       "required": [
         "folderName"
       ]
-    },
-    "DstsApplicationResource": {
-      "type": "object",
-      "description": "dstsApplication Resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DstsApplicationResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "DstsApplicationResourceListResult": {
-      "type": "object",
-      "description": "The response of a DstsApplicationResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DstsApplicationResource items on this page",
-          "items": {
-            "$ref": "#/definitions/DstsApplicationResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "DstsApplicationResourceProperties": {
-      "type": "object",
-      "description": "dstsApplication properties",
-      "properties": {
-        "applicationAccount": {
-          "$ref": "#/definitions/ApplicationAccount",
-          "description": "Application."
-        },
-        "applicationGroup": {
-          "$ref": "#/definitions/ApplicationGroup",
-          "description": "The application group. Optional."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/DscmProvisioningState",
-          "description": "Provisioning state",
-          "readOnly": true
-        }
-      }
     },
     "DstsAuthenticationRequirement": {
       "type": "object",
@@ -1774,7 +1205,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1858,6 +1289,10 @@
             "type": "string"
           }
         },
+        "armLocation": {
+          "type": "string",
+          "description": "The Azure location"
+        },
         "provisioningState": {
           "$ref": "#/definitions/DscmProvisioningState",
           "description": "Provisioning state.",
@@ -1884,7 +1319,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1960,6 +1395,10 @@
             "type": "string"
           }
         },
+        "armLocation": {
+          "type": "string",
+          "description": "The Azure location"
+        },
         "provisioningState": {
           "$ref": "#/definitions/DscmProvisioningState",
           "description": "Provisioning state",
@@ -1970,24 +1409,6 @@
         "accountName",
         "dstsInstance",
         "subjectNames"
-      ]
-    },
-    "IpRange": {
-      "type": "object",
-      "description": "Class for a contiguous range of IP Addresses.",
-      "properties": {
-        "fromIpAddress": {
-          "type": "string",
-          "description": "From IP address."
-        },
-        "toIpAddress": {
-          "type": "string",
-          "description": "To IP address."
-        }
-      },
-      "required": [
-        "fromIpAddress",
-        "toIpAddress"
       ]
     },
     "RequiredIpRange": {
@@ -2006,22 +1427,6 @@
       "required": [
         "fromIpAddress",
         "toIpAddress"
-      ]
-    },
-    "SubjectNameBasedIdentity": {
-      "type": "object",
-      "description": "Represents application subject name base identity.",
-      "properties": {
-        "subjectNames": {
-          "type": "array",
-          "description": "List of subject names for sni based auth",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "subjectNames"
       ]
     }
   },
