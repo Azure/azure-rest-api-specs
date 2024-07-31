@@ -243,13 +243,6 @@ model ChatCompletionsOptions {
     If specified, the model will configure which of the provided tools it can use for the chat completions response.
     """)
   toolChoice?: ChatCompletionsToolSelection;
-
-  /**
-   * Whether to enable parallel function calling during tool use.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
-  @added(ServiceApiVersions.v2024_07_01_Preview)
-  parallel_tool_calls?: boolean = true;
 }
 
 @doc("""
