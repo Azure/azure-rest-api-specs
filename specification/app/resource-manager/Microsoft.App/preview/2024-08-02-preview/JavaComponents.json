@@ -360,6 +360,43 @@
     }
   },
   "definitions": {
+    "ScgRoute": {
+      "description": "Spring Cloud Gateway route definition",
+      "type": "object",
+      "required": [
+        "id",
+        "uri"
+      ],
+      "properties": {
+        "id": {
+          "description": "Id of the route",
+          "type": "string"
+        },
+        "uri": {
+          "description": "Uri of the route",
+          "type": "string"
+        },
+        "predicates": {
+          "description": "Predicates of the route",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filters": {
+          "description": "Filters of the route",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "order": {
+          "description": "Order of the route",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "JavaComponentConfigurationProperty": {
       "description": "Configuration properties for a Java Component",
       "type": "object",
@@ -418,6 +455,7 @@
             "SpringBootAdmin",
             "SpringCloudEureka",
             "SpringCloudConfig",
+            "SpringCloudGateway",
             "Nacos"
           ],
           "type": "string",
@@ -452,6 +490,22 @@
             "propertyName"
           ]
         },
+        "scale": {
+          "description": "Java component scaling configurations",
+          "type": "object",
+          "properties": {
+            "minReplicas": {
+              "format": "int32",
+              "description": "Optional. Minimum number of Java component replicas. Defaults to 1 if not set",
+              "type": "integer"
+            },
+            "maxReplicas": {
+              "format": "int32",
+              "description": "Optional. Maximum number of Java component replicas",
+              "type": "integer"
+            }
+          }
+        },
         "serviceBinds": {
           "description": "List of Java Components that are bound to the Java component",
           "type": "array",
@@ -476,6 +530,32 @@
           "readOnly": true
         }
       }
+    },
+    "SpringCloudGatewayComponent": {
+      "description": "Spring Cloud Gateway properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      ],
+      "properties": {
+        "ingress": {
+          "$ref": "#/definitions/JavaComponentIngress",
+          "description": "Java Component Ingress configurations."
+        },
+        "springCloudGatewayRoutes": {
+          "description": "Gateway route definition",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScgRoute"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "SpringCloudGateway"
     },
     "SpringBootAdminComponent": {
       "description": "Spring Boot Admin properties.",
@@ -559,4 +639,3 @@
     }
   }
 }
-
