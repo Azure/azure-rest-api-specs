@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Nginx.NginxPlus",
-    "version": "2024-01-01-preview"
+    "version": "2024-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -850,7 +850,7 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "List all operations provided by Nginx.NginxPlus for the 2024-01-01-preview api version.",
+        "summary": "List all operations provided by Nginx.NginxPlus for the 2024-06-01-preview api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -1382,6 +1382,22 @@
         },
         "userProfile": {
           "$ref": "#/definitions/NginxDeploymentUserProfile"
+        },
+        "nginxAppProtect": {
+          "type": "object",
+          "description": "Settings for NGINX App Protect (NAP)",
+          "required": [
+            "webApplicationFirewallSettings"
+          ],
+          "properties": {
+            "webApplicationFirewallSettings": {
+              "$ref": "#/definitions/WebApplicationFirewallSettings"
+            },
+            "webApplicationFirewallStatus": {
+              "$ref": "#/definitions/WebApplicationFirewallStatus",
+              "readOnly": true
+            }
+          }
         }
       }
     },
@@ -1442,6 +1458,15 @@
         },
         "autoUpgradeProfile": {
           "$ref": "#/definitions/AutoUpgradeProfile"
+        },
+        "nginxAppProtect": {
+          "type": "object",
+          "description": "Update settings for NGINX App Protect (NAP)",
+          "properties": {
+            "webApplicationFirewallSettings": {
+              "$ref": "#/definitions/WebApplicationFirewallSettings"
+            }
+          }
         }
       }
     },
@@ -1639,6 +1664,92 @@
         "rule": {
           "type": "string",
           "example": "nginx-azure-load-balancer-allowed-directives"
+        }
+      }
+    },
+    "WebApplicationFirewallSettings": {
+      "type": "object",
+      "description": "Settings for the NGINX App Protect Web Application Firewall (WAF)",
+      "properties": {
+        "activationState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "The activation state of the WAF. Use 'Enabled' to enable the WAF and 'Disabled' to disable it.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "WebApplicationFirewallSettings"
+          }
+        }
+      }
+    },
+    "WebApplicationFirewallStatus": {
+      "type": "object",
+      "description": "The status of the NGINX App Protect Web Application Firewall",
+      "properties": {
+        "attackSignaturesPackage": {
+          "$ref": "#/definitions/WebApplicationFirewallPackage",
+          "readOnly": true,
+          "description": "Package containing attack signatures for the NGINX App Protect Web Application Firewall (WAF)."
+        },
+        "botSignaturesPackage": {
+          "$ref": "#/definitions/WebApplicationFirewallPackage",
+          "readOnly": true,
+          "description": "Package containing bot signatures for the NGINX App Protect Web Application Firewall (WAF)."
+        },
+        "threatCampaignsPackage": {
+          "$ref": "#/definitions/WebApplicationFirewallPackage",
+          "readOnly": true,
+          "description": "Package containing threat campaigns for the NGINX App Protect Web Application Firewall (WAF)."
+        },
+        "componentVersions": {
+          "$ref": "#/definitions/WebApplicationFirewallComponentVersions",
+          "readOnly": true,
+          "description": "Versions of the NGINX App Protect Web Application Firewall (WAF) components."
+        }
+      }
+    },
+    "WebApplicationFirewallPackage": {
+      "type": "object",
+      "description": "NGINX App Protect Web Application Firewall (WAF) Package. Contains the version and revision date of the package.",
+      "required": [
+        "version",
+        "revisionDatetime"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "example": "2.02",
+          "description": "The version of the NGINX App Protect Web Application Firewall (WAF) package."
+        },
+        "revisionDatetime": {
+          "type": "string",
+          "example": "2024-02-21T15:50:53Z",
+          "format": "date-time",
+          "description": "The date and time of the package revision."
+        }
+      }
+    },
+    "WebApplicationFirewallComponentVersions": {
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "wafEngineVersion",
+        "wafNginxVersion"
+      ],
+      "description": "Versions of the NGINX App Protect Web Application Firewall (WAF) components.",
+      "properties": {
+        "wafEngineVersion": {
+          "type": "string",
+          "example": "10.624.0",
+          "description": "The version of the NGINX App Protect Web Application Firewall (WAF) engine."
+        },
+        "wafNginxVersion": {
+          "type": "string",
+          "example": "4.815.0",
+          "description": "The version of the NGINX App Protect Web Application Firewall (WAF) module for NGINX."
         }
       }
     }

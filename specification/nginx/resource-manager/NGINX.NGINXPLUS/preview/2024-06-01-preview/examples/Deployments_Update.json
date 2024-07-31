@@ -1,12 +1,19 @@
 {
   "parameters": {
-    "api-version": "2024-01-01-preview",
+    "api-version": "2024-06-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "deploymentName": "myDeployment",
-    "body": {
+    "requestBody": {
       "tags": {
         "Environment": "Dev"
+      },
+      "properties": {
+        "nginxAppProtect": {
+          "webApplicationFirewallSettings": {
+            "activationState": "Enabled"
+          }
+        }
       }
     }
   },
@@ -52,6 +59,29 @@
           },
           "autoUpgradeProfile": {
             "upgradeChannel": "stable"
+          },
+          "nginxAppProtect": {
+            "webApplicationFirewallSettings": {
+              "activationState": "Enabled"
+            },
+            "webApplicationFirewallStatus": {
+              "attackSignaturesPackage": {
+                "version": "2024.02.21",
+                "revisionDatetime": "2024-02-21T15:50:53Z"
+              },
+              "botSignaturesPackage": {
+                "version": "2024.02.22",
+                "revisionDatetime": "2024-02-22T15:50:53Z"
+              },
+              "threatCampaignsPackage": {
+                "version": "2024.02.23",
+                "revisionDatetime": "2024-02-23T15:50:53Z"
+              },
+              "componentVersions": {
+                "wafEngineVersion": "10.624.0",
+                "wafNginxVersion": "4.815.0"
+              }
+            }
           }
         }
       }
@@ -93,6 +123,11 @@
           },
           "autoUpgradeProfile": {
             "upgradeChannel": "stable"
+          },
+          "nginxAppProtect": {
+            "webApplicationFirewallSettings": {
+              "activationState": "Enabled"
+            }
           }
         }
       }
