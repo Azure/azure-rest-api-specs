@@ -2535,13 +2535,6 @@ configuration:
       - and:
         - isPullRequest
       then:
-      - if:
-        - commentContains:
-            pattern: "^/pr RequestMerge$"
-            isRegex: true
-        then:
-        - addLabel:
-            label: MergeRequested
     - if:
       - payloadType: Pull_Request
       then:
