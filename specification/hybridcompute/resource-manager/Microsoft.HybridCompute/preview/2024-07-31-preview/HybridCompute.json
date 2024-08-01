@@ -3001,13 +3001,16 @@
     },
     "FirmwareProfile": {
       "type": "object",
+      "readOnly": true,
       "properties": {
         "serialNumber": {
           "type": "string",
+          "readOnly": true,
           "description": "The serial number of the firmware"
         },
         "type": {
           "type": "string",
+          "readOnly": true,
           "description": "The type of the firmware"
         }
       },
@@ -3015,15 +3018,18 @@
     },
     "HardwareProfile": {
       "type": "object",
+      "readOnly": true,
       "properties": {
         "totalPhysicalMemoryInBytes": {
           "type": "integer",
           "format": "int64",
+          "readOnly": true,
           "description": "The total physical memory on the machine"
         },
         "numberOfCpuSockets": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "The total number of CPU sockets available on the machine"
         },
         "processors": {
@@ -3031,6 +3037,7 @@
           "items": {
             "$ref": "#/definitions/Processor"
           },
+          "readOnly": true,
           "description": "The physical processors of the machine."
         }
       },
@@ -3038,14 +3045,17 @@
     },
     "Processor": {
       "type": "object",
+      "readOnly": true,
       "properties": {
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "The name of the processor."
         },
         "numberOfCores": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "The total number of physical cores on the processor."
         }
       },
@@ -3062,10 +3072,12 @@
           "description": "The disks on the machine."
         }
       },
+      "readOnly": true,
       "description": "Describes the storage configuration of the machine"
     },
     "Disk": {
       "type": "object",
+      "readOnly": true,
       "properties": {
         "path": {
           "type": "string",
