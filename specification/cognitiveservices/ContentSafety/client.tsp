@@ -4,7 +4,6 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2023_10_01)
 @TypeSpec.Versioning.useDependency(ContentSafety.Versions.v2024_09_01)
 namespace Customizations;
 
@@ -18,22 +17,6 @@ interface ContentSafetyClient {
   detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
   shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
 }
-
-@@clientName(ContentSafetyClient.analyzeImage::parameters.body, "options", "csharp");
-@@clientName(ContentSafetyClient.analyzeImage::parameters.apiVersion, "options", "java");
-@@clientName(ContentSafetyClient.analyzeImage.body, "options", "python");
-
-@@clientName(ContentSafetyClient.analyzeText::body, "options", "csharp");
-@@clientName(ContentSafetyClient.analyzeText::body, "options", "java");
-@@clientName(ContentSafetyClient.analyzeText::body, "options", "python");
-
-@@clientName(ContentSafetyClient.detectTextProtectedMaterial::parameters.body, "options", "csharp");
-@@clientName(ContentSafetyClient.detectTextProtectedMaterial::parameters.body, "options", "java");
-@@clientName(ContentSafetyClient.detectTextProtectedMaterial::parameters.body, "options", "python");
-
-@@clientName(ContentSafetyClient.shieldPrompt::parameters.body, "options", "csharp");
-@@clientName(ContentSafetyClient.shieldPrompt::parameters.body, "options", "java");
-@@clientName(ContentSafetyClient.shieldPrompt::parameters.body, "options", "python");
 
 @client({
   name: "BlocklistClient",
@@ -50,11 +33,3 @@ interface BlocklistClient {
   listTextBlocklists is ContentSafety.TextBlocklists.listTextBlocklists;
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
-
-@@clientName(BlocklistClient.addOrUpdateBlocklistItems::parameters.body, "options", "csharp");
-@@clientName(BlocklistClient.addOrUpdateBlocklistItems::parameters.body, "options", "java");
-@@clientName(BlocklistClient.addOrUpdateBlocklistItems::parameters.body, "options", "python");
-
-@@clientName(BlocklistClient.removeBlocklistItems::parameters.body, "options", "csharp");
-@@clientName(BlocklistClient.removeBlocklistItems::parameters.body, "options", "java");
-@@clientName(BlocklistClient.removeBlocklistItems::parameters.body, "options", "python");
