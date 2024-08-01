@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "../Common/models.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
