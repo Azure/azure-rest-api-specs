@@ -93,5 +93,5 @@ directive:
   - from: mongoCluster.json
     suppress: BodyTopLevelProperties
     reason: https://github.com/Azure/azure-openapi-validator/issues/722
-    where: $.definitions.ReplicaListResult.properties
+    where: $.definitions.ReplicaListResult
 ```
