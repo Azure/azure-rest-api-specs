@@ -1341,6 +1341,80 @@
           }
         }
       }
+    },
+    "SqlServerInstanceManagedInstanceLinkAssessmentRequest": {
+      "description": "The MI Link assessment request for the SQL Server instance.",
+      "type": "object",
+      "properties": {
+        "azureManagedInstanceResourceId": {
+          "type": "string",
+          "description": "The Azure SQL Managed Instance resource ID to link with the SQL Server instance."
+        }
+      },
+      "required": [
+        "azureManagedInstanceResourceId"
+      ]
+    },
+    "SqlServerInstanceManagedInstanceLinkAssessmentResponse": {
+      "description": "The response containing the results of the MI Link assessment.",
+      "type": "object",
+      "properties": {
+        "assessmentResults": {
+          "type": "array",
+          "description": "The list of the results for MI Link assessment.",
+          "items": {
+            "$ref": "#/definitions/SqlServerInstanceManagedInstanceLinkAssessmentResult"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "SqlServerInstanceManagedInstanceLinkAssessmentResult": {
+      "description": "The status of an individual requirement for MI Link.",
+      "type": "object",
+      "properties": {
+        "requirementName": {
+          "type": "string",
+          "description": "The name of the requirement."
+        },
+        "requirementCategory": {
+          "type": "string",
+          "description": "The category of the requirement.",
+          "enum": [
+            "SQLServer",
+            "ManagedInstance",
+            "ManagedInstanceCrossValidation",
+            "Dag"
+          ],
+          "x-ms-enum": {
+            "name": "requirementCategory",
+            "modelAsString": true
+          }
+        },
+        "requirementStatus": {
+          "type": "string",
+          "description": "The status of the requirement.",
+          "enum": [
+            "Success",
+            "Warning",
+            "Failure"
+          ],
+          "x-ms-enum": {
+            "name": "requirementStatus",
+            "modelAsString": true
+          }
+        },
+        "requirementInfoText": {
+          "type": "string",
+          "description": "The information text about requirement."
+        },
+        "requirementErrorMessage": {
+          "type": "string",
+          "description": "The error message if the requirement failed."
+        }
+      }
     }
   },
   "parameters": {
