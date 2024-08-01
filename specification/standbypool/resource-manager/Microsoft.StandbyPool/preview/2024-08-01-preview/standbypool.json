@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.StandbyPool",
-    "version": "2024-03-01-preview",
+    "version": "2024-08-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1735,7 +1735,8 @@
       "description": "State of standby virtual machines",
       "enum": [
         "Running",
-        "Deallocated"
+        "Deallocated",
+        "Hibernated"
       ],
       "x-ms-enum": {
         "name": "VirtualMachineState",
@@ -1750,6 +1751,11 @@
             "name": "Deallocated",
             "value": "Deallocated",
             "description": "The virtual machine has released the lease on the underlying hardware and is powered off."
+          },
+          {
+            "name": "Hibernated",
+            "value": "Hibernated",
+            "description": "The virtual machine has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation."
           }
         ]
       }

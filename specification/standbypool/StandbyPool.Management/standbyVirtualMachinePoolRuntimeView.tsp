@@ -62,5 +62,5 @@ model VirtualMachineInstanceCountSummary {
 @armResourceOperations
 interface StandbyVirtualMachinePoolRuntimeViews {
   get is ArmResourceRead<StandbyVirtualMachinePoolRuntimeViewResource>;
-  listByStandbyPool is ArmResourceListByParent<StandbyVirtualMachinePoolRuntimeViewResource>;
+  listByStandbyVirtualMachinePoolResource is ArmResourceListByParent<StandbyVirtualMachinePoolRuntimeViewResource>;
 }
