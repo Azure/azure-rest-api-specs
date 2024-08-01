@@ -1049,8 +1049,19 @@ directive:
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: BodyTopLevelProperties
     from: policyAssignments.json
-    where: $.definitions.PolicyAssignment.properties
-    reason: Currently systemData is not allowed
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: policyDefinitions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: policyDefinitionVersions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: policySetDefinitions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: policySetDefinitionVersions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
     from: policyExemptions.json
     where: $.definitions.PolicyExemption.properties
