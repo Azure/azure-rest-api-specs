@@ -3997,60 +3997,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/deploymentVersions/{versionName}/rollback": {
-      "post": {
-        "operationId": "DeploymentVersions_Rollback",
-        "tags": [
-          "DeploymentVersions"
-        ],
-        "description": "Roll back a deployment version",
-        "x-ms-examples": {
-          "DeploymentVersions_Rollback": {
-            "$ref": "./examples/DeploymentVersions_Rollback.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/profileNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/deploymentVersionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
-            "headers": {
-              "location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "CDN error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/getLogAnalyticsMetrics": {
       "get": {
         "tags": [
@@ -7428,8 +7374,8 @@
         "approvalStatus": {
           "type": "string",
           "enum": [
-            "Approved",
-            "NotApproved"
+            "NotApproved",
+            "Approved"
           ],
           "x-ms-enum": {
             "name": "ApprovalStatus",
