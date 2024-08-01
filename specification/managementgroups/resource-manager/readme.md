@@ -121,6 +121,15 @@ input-file:
 
 ---
 
+# Suppression
+
+``` yaml
+list-exception:
+- /providers/Microsoft.Management/managementGroups/{groupId}
+```
+
+---
+
 # Code Generation
 
 ## Swagger to SDK
