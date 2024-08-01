@@ -237,39 +237,6 @@ model MessageTextFilePathDetails {
   fileId: string;
 }
 
-// Url citation + details
-/**
- * A citation within the message that points to a specific quote from the webpage returned by the URL.
- * Generated when the assistant uses the "browser" tool to search the web.
- */
-@added(ServiceApiVersions.v2024_07_01_preview)
-model MessageTextUrlCitationAnnotation extends MessageTextAnnotation {
-  /** The url citation object type. Always `url_citation`. */
-  type: "url_citation";
-
-  /** The details of  the URL used in the text citation. */
-  @encodedName("application/json", "url_citation")
-  urlCitation: MessageTextUrlCitationDetails;
-
-  /** The first text index associated with this text annotation. */
-  @encodedName("application/json", "start_index")
-  startIndex?: int32;
-
-  /** The last text index associated with this text annotation. */
-  @encodedName("application/json", "end_index")
-  endIndex?: int32;
-}
-
-/** A representation of the URL used for the text citation. */
-@added(ServiceApiVersions.v2024_07_01_preview)
-model MessageTextUrlCitationDetails {
-  /** The URL where the citation is from. */
-  url: string;
-
-  /** The title of the URL. */
-  title: string;
-}
-
 // Image file content details
 
 @doc("An image reference, as represented in thread message content.")
@@ -476,28 +443,6 @@ model MessageDeltaTextFilePathAnnotation {
   /** The file ID for the annotation. */
   @encodedName("application/json", "file_id")
   fileId?: string;
-}
-
-/**
- * A citation within the message that points to a specific quote from the webpage returned by URL.
- * Generated when the assistant uses the "browser" tool to search the web.
- */
-@added(ServiceApiVersions.v2024_07_01_preview)
-model MessageDeltaTextUrlCitationAnnotation extends MessageDeltaTextAnnotation {
-  /** The url citation object type. Always `url_citation`. */
-  type: "url_citation";
-
-  /** The details of  the URL used in the text citation. */
-  @encodedName("application/json", "url_citation")
-  urlCitation?: MessageTextUrlCitationDetails;
-
-  /** The first text index associated with this text annotation. */
-  @encodedName("application/json", "start_index")
-  startIndex?: int32;
-
-  /** The last text index associated with this text annotation. */
-  @encodedName("application/json", "end_index")
-  endIndex?: int32;
 }
 
 /** A representation of the URL used for the text citation. */

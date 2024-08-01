@@ -50,26 +50,6 @@ model FunctionToolDefinition extends ToolDefinition {
   function: FunctionDefinition;
 }
 
-/** The input definition for the Bing search tool */
-@added(ServiceApiVersions.v2024_07_01_preview)
-model BingSearchToolDefinition extends ToolDefinition {
-  /** "The object type, which is always 'browser'. */
-  type: "browser";
-
-  /** The Bing search configuration details */
-  browser: BingSearchToolDetails;
-}
-
-// Definition details: Bing Search
-
-/** Tool params for the browser tool. */
-@added(ServiceApiVersions.v2024_07_01_preview)
-model BingSearchToolDetails {
-  /** The Bing resource ID to use for the search. */
-  @encodedName("application/json", "bing_resource_id")
-  bingResourceId: string;
-}
-
 // Definition details: File Search
 
 /**
@@ -197,15 +177,6 @@ model RunStepFunctionToolCall extends RunStepToolCall {
 
   @doc("The detailed information about the function called by the model.")
   function: RunStepFunctionToolCallDetails;
-}
-/** A record of a call to a browser tool */
-@added(ServiceApiVersions.v2024_07_01_preview)
-model RunStepBingSearchToolCall extends RunStepToolCall {
-  /** The type of tool call. This is always going to be `browser` for this type of tool call. */
-  type: "browser";
-
-  /** For now, this is always going to be an empty object. */
-  browser: Record<string>;
 }
 
 // Call details: Code Interpreter

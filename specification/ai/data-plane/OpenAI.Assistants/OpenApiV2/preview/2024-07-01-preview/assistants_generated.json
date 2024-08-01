@@ -2555,39 +2555,6 @@
     },
     "AssistantsApiResponseFormatOption": {},
     "AssistantsApiToolChoiceOption": {},
-    "BingSearchToolDefinition": {
-      "type": "object",
-      "description": "The input definition for the Bing search tool",
-      "properties": {
-        "browser": {
-          "$ref": "#/definitions/BingSearchToolDetails",
-          "description": "The Bing search configuration details"
-        }
-      },
-      "required": [
-        "browser"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "browser"
-    },
-    "BingSearchToolDetails": {
-      "type": "object",
-      "description": "Tool params for the browser tool.",
-      "properties": {
-        "bing_resource_id": {
-          "type": "string",
-          "description": "The Bing resource ID to use for the search.",
-          "x-ms-client-name": "bingResourceId"
-        }
-      },
-      "required": [
-        "bing_resource_id"
-      ]
-    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an assistant.",
@@ -3487,56 +3454,6 @@
         "file_id"
       ]
     },
-    "MessageTextUrlCitationAnnotation": {
-      "type": "object",
-      "description": "A citation within the message that points to a specific quote from the webpage returned by the URL.\nGenerated when the assistant uses the \"browser\" tool to search the web.",
-      "properties": {
-        "url_citation": {
-          "$ref": "#/definitions/MessageTextUrlCitationDetails",
-          "description": "The details of  the URL used in the text citation.",
-          "x-ms-client-name": "urlCitation"
-        },
-        "start_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The first text index associated with this text annotation.",
-          "x-ms-client-name": "startIndex"
-        },
-        "end_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The last text index associated with this text annotation.",
-          "x-ms-client-name": "endIndex"
-        }
-      },
-      "required": [
-        "url_citation"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/MessageTextAnnotation"
-        }
-      ],
-      "x-ms-discriminator-value": "url_citation"
-    },
-    "MessageTextUrlCitationDetails": {
-      "type": "object",
-      "description": "A representation of the URL used for the text citation.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "The URL where the citation is from."
-        },
-        "title": {
-          "type": "string",
-          "description": "The title of the URL."
-        }
-      },
-      "required": [
-        "url",
-        "title"
-      ]
-    },
     "OpenAIFile": {
       "type": "object",
       "description": "Represents an assistant that can call the model and use tools.",
@@ -3897,28 +3814,6 @@
         "failed_at",
         "metadata"
       ]
-    },
-    "RunStepBingSearchToolCall": {
-      "type": "object",
-      "description": "A record of a call to a browser tool",
-      "properties": {
-        "browser": {
-          "type": "object",
-          "description": "For now, this is always going to be an empty object.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "browser"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/RunStepToolCall"
-        }
-      ],
-      "x-ms-discriminator-value": "browser"
     },
     "RunStepCodeInterpreterImageOutput": {
       "type": "object",
