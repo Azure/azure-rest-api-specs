@@ -347,7 +347,7 @@
           "200": {
             "description": "A key bundle containing the key, its attributes and attestation blob.",
             "schema": {
-              "$ref": "#/definitions/KeyBundle"
+              "$ref": "#/definitions/KeyBundleAttestation"
             }
           },
           "default": {
@@ -1458,6 +1458,58 @@
       },
       "description": "As of http://tools.ietf.org/html/draft-ietf-jose-json-web-key-18"
     },
+    "KeyAttributesWithAttestation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KeyAttributes"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "attestation": {
+          "$ref": "#/definitions/KeyAttestation",
+          "description": "The key or key version attestation."
+        }
+      },
+      "description": "The attributes of a key managed by the key vault service."
+    },
+    "KeyAttestation": {
+      "type": "object",
+      "properties": {
+        "certificates": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The certificates used for validating attestation."
+        },
+        "firmwareVersion": {
+          "$ref": "#/definitions/FirmwareVersion",
+          "description": "The firmware version of the HSM."
+        },
+        "privateKey": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The private key."
+        },
+        "publicKey": {
+          "type": "string",
+          "format": "base64url",
+          "description": "The public key in case of asymmetric keys."
+        }
+      }
+    },
+    "FirmwareVersion": {
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "string",
+          "description": "The major version of firmware."
+        },
+        "minor": {
+          "type": "string",
+          "description": "The minor version of firmware."
+        }
+      }
+    },
     "KeyAttributes": {
       "allOf": [
         {
@@ -1528,58 +1580,16 @@
           "type": "string",
           "description": "The underlying HSM Platform.",
           "readOnly": true
-        },
-        "attestation": {
-          "$ref": "#/definitions/KeyAttestation",
-          "description": "The key or key version attestation."
         }
       },
       "description": "The attributes of a key managed by the key vault service."
     },
-    "KeyAttestation": {
-      "properties": {
-        "certificates": {
-          "type": "string",
-          "format": "base64url",
-          "description": "The certificates used for validating attestation."
-        },
-        "firmwareVersion": {
-          "$ref": "#/definitions/FirmwareVersion",
-          "description": "The firmware version of the HSM."
-        },
-        "privateKey": {
-          "type": "string",
-          "format": "base64url",
-          "description": "The private key."
-        },
-        "publicKey": {
-          "type": "string",
-          "format": "base64url",
-          "description": "The public key in case of asymmetric keys."
-        }
-      }
-    },
-    "FirmwareVersion": {
-      "properties": {
-        "major": {
-          "type": "string",
-          "description": "The major version of firmware."
-        },
-        "minor": {
-          "type": "string",
-          "description": "The minor version of firmware."
-        }
-      }
-    },
-    "KeyBundle": {
+    "BaseKeyBundle": {
+      "type": "object",
       "properties": {
         "key": {
           "$ref": "#/definitions/JsonWebKey",
           "description": "The Json web key."
-        },
-        "attributes": {
-          "$ref": "#/definitions/KeyAttributes",
-          "description": "The key management attributes."
         },
         "tags": {
           "type": "object",
@@ -1598,8 +1608,39 @@
           "x-nullable": true,
           "description": "The policy rules under which the key can be exported."
         }
+      }
+    },
+    "KeyBundle": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseKeyBundle"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/KeyAttributes",
+          "description": "The key management attributes."
+        }
       },
       "description": "A KeyBundle consisting of a WebKey plus its attributes."
+    },
+    "KeyBundleAttestation": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseKeyBundle"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "attributes": {
+            "$ref": "#/definitions/KeyAttributesWithAttestation",
+            "description": "The key management attributes."
+          }
+        },
+        "description": "A KeyBundle consisting of a WebKey plus its attributes and attestation."
+      }
     },
     "KeyItem": {
       "properties": {
