@@ -10,8 +10,6 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Portal;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 @doc("The configuration name")
 union ConfigurationName {
   string,

@@ -20,6 +20,7 @@ using TypeSpec.Versioning;
 /**
  * Allows creation and deletion of Azure Shared Dashboards.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
 @armProviderNamespace
 @service({
   title: "portal",
