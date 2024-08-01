@@ -48,7 +48,7 @@ interface VirtualHardDisks {
   delete is ArmResourceDeleteWithoutOkAsync<VirtualHardDisk>;
 
   @doc("Lists all of the virtual hard disks in the specified resource group. Use the nextLink property in the response to get the next page of virtual hard disks.")
-  list is ArmResourceListByParent<VirtualHardDisk>;
+  listByResourceGroup is ArmResourceListByParent<VirtualHardDisk>;
 
   @doc("Lists all of the virtual hard disks in the specified subscription. Use the nextLink property in the response to get the next page of virtual hard disks.")
   listAll is ArmListBySubscription<VirtualHardDisk>;
