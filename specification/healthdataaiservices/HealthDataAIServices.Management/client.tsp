@@ -3,4 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.HealthDataAIServices, "HealthDataAIServicesMgmt", "python");
+@@clientName(Microsoft.HealthDataAIServices,
+  "HealthDataAIServicesMgmt",
+  "python"
+);
