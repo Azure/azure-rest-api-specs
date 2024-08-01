@@ -15,7 +15,7 @@ union TextCategory {
 
   @doc("The harm category for Text - Hate.")
   "Hate",
-  
+
   @doc("The harm category for Text - SelfHarm.")
   "SelfHarm",
 
@@ -32,7 +32,7 @@ union ImageCategory {
 
   @doc("The harm category for Image - Hate.")
   "Hate",
-  
+
   @doc("The harm category for Image - SelfHarm.")
   "SelfHarm",
 
