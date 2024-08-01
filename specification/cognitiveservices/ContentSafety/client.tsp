@@ -20,8 +20,8 @@ interface ContentSafetyClient {
   shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
 }
 
-@@clientName(ContentSafetyClient.analyzeImage::parameters.text, "options", "csharp");
-@@clientName(ContentSafetyClient.analyzeImage.body, "options", "java");
+@@clientName(ContentSafetyClient.analyzeImage::parameters.body, "options", "csharp");
+@@clientName(ContentSafetyClient.analyzeImage::parameters.apiVersion, "options", "java");
 @@clientName(ContentSafetyClient.analyzeImage.body, "options", "python");
 
 @@clientName(ContentSafetyClient.analyzeText::body, "options", "csharp");
