@@ -933,7 +933,7 @@
     },
     "ImageCategory": {
       "type": "string",
-      "description": "Image analyze category.",
+      "description": "The harm category supported in Image content analysis.",
       "enum": [
         "Hate",
         "SelfHarm",
@@ -942,7 +942,29 @@
       ],
       "x-ms-enum": {
         "name": "ImageCategory",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm cateogry for Image - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm cateogry for Image - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm cateogry for Image - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm cateogry for Image - Violence."
+          }
+        ]
       }
     },
     "ImageData": {
@@ -1132,8 +1154,8 @@
         },
         "text": {
           "type": "string",
-          "description": "BlocklistItem content.",
-          "maxLength": 128
+          "description": "BlocklistItem content. The length is counted using Unicode code point.",
+          "maxLength": 1000
         },
         "isRegex": {
           "type": "boolean",
@@ -1191,7 +1213,7 @@
     },
     "TextCategory": {
       "type": "string",
-      "description": "Text analyze category.",
+      "description": "The harm category supported in Text content analysis.",
       "enum": [
         "Hate",
         "SelfHarm",
@@ -1200,7 +1222,29 @@
       ],
       "x-ms-enum": {
         "name": "TextCategory",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm cateogry for Text - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm cateogry for Text - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm cateogry for Text - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm cateogry for Text - Violence."
+          }
+        ]
       }
     },
     "TextProtectedMaterialAnalysisResult": {
