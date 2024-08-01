@@ -2300,7 +2300,7 @@
         "datasetId",
         "datasetType"
       ],
-      "x-ms-discriminator-value": "dataset",
+      "x-ms-discriminator-value": "Dataset",
       "allOf": [
         {
           "$ref": "#/definitions/UserComputeDatasource"
@@ -2335,7 +2335,7 @@
         "urls",
         "embeddings"
       ],
-      "x-ms-discriminator-value": "urls",
+      "x-ms-discriminator-value": "Urls",
       "allOf": [
         {
           "$ref": "#/definitions/UserComputeDatasource"
@@ -2382,8 +2382,8 @@
       "type": "string",
       "description": "The datasource type.",
       "enum": [
-        "storage",
-        "urls"
+        "Storage",
+        "Urls"
       ],
       "x-ms-enum": {
         "name": "SystemComputeDatasourceType",
@@ -2391,12 +2391,12 @@
         "values": [
           {
             "name": "Storage",
-            "value": "storage",
+            "value": "Storage",
             "description": "Azure Storage Account."
           },
           {
             "name": "Urls",
-            "value": "urls",
+            "value": "Urls",
             "description": "URLs."
           }
         ]
@@ -2410,7 +2410,7 @@
         "containerName",
         "embeddings"
       ],
-      "x-ms-discriminator-value": "storage",
+      "x-ms-discriminator-value": "Storage",
       "allOf": [
         {
           "$ref": "#/definitions/SystemComputeDatasource"
@@ -2447,7 +2447,7 @@
         "containerName",
         "embeddings"
       ],
-      "x-ms-discriminator-value": "urls",
+      "x-ms-discriminator-value": "Urls",
       "allOf": [
         {
           "$ref": "#/definitions/SystemComputeDatasource"
@@ -2569,39 +2569,39 @@
       "type": "string",
       "description": "The connection type.",
       "enum": [
-        "endpointKey",
-        "connectionString",
-        "endpointMI",
-        "workspace",
-        "relativeConnection"
+        "EndpointWithKey",
+        "ConnectionString",
+        "EndpointWithManagedIdentity",
+        "WorkspaceConnection",
+        "RelativeConnection"
       ],
       "x-ms-enum": {
         "name": "ConnectionType",
         "modelAsString": true,
         "values": [
           {
-            "name": "EndpointKey",
-            "value": "endpointKey",
+            "name": "EndpointWithKey",
+            "value": "EndpointWithKey",
             "description": "Endpoint and key connection."
           },
           {
             "name": "ConnectionString",
-            "value": "connectionString",
+            "value": "ConnectionString",
             "description": "Connection string."
           },
           {
-            "name": "EndpointManagedIdentity",
-            "value": "endpointMI",
+            "name": "EndpointWithManagedIdentity",
+            "value": "EndpointWithManagedIdentity",
             "description": "Endpoint and managed identity."
           },
           {
-            "name": "AMLWorkspace",
-            "value": "workspace",
+            "name": "WorkspaceConnection",
+            "value": "WorkspaceConnection",
             "description": "AML Workspace connection."
           },
           {
-            "name": "RelativeDeployment",
-            "value": "relativeDeployment",
+            "name": "RelativeConnection",
+            "value": "RelativeConnection",
             "description": "Relative deployment"
           }
         ]
@@ -2631,7 +2631,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "endpointKey"
+      "x-ms-discriminator-value": "EndpointWithKey"
     },
     "ConnectionStringConnection": {
       "description": "Connection string connection.",
@@ -2652,7 +2652,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "connectionString"
+      "x-ms-discriminator-value": "ConnectionString"
     },
     "EndpointMIConnection": {
       "description": "Endpoint Managed Identity connection.",
@@ -2677,7 +2677,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "endpointMI"
+      "x-ms-discriminator-value": "EndpointWithManagedIdentity"
     },
     "WorkspaceConnection": {
       "description": "AML Workspace connection.",
@@ -2698,7 +2698,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "workspace"
+      "x-ms-discriminator-value": "WorkspaceConnection"
     },
     "DeploymentConnection": {
       "description": "Relative deployment connection.",
@@ -2707,13 +2707,13 @@
           "$ref": "#/definitions/BaseConnection"
         }
       ],
-      "x-ms-discriminator-value": "relativeConnection"
+      "x-ms-discriminator-value": "RelativeConnection"
     },
     "CompletionAction": {
       "type": "string",
       "description": "The completion action.",
       "enum": [
-        "cleanUpAssets",
+        "cleanUpTempAssets",
         "keepAllAssets"
       ],
       "x-ms-enum": {
@@ -2726,8 +2726,8 @@
             "description": "Will not clean up any of the intermediate assets created during the ingestion process."
           },
           {
-            "name": "cleanUpAssets",
-            "value": "cleanUpAssets",
+            "name": "cleanUpTempAssets",
+            "value": "cleanUpTempAssets",
             "description": "Will clean up intermediate assets created during the ingestion process."
           }
         ]
