@@ -68,3 +68,7 @@ test.concurrent("Convert keyvault/data-plane", async ({ expect }) => {
 test.concurrent("Convert sphere/resource-manager", async ({ expect }) => {
   await convert(expect, "specification/sphere/resource-manager/readme.md");
 });
+
+test.concurrent("Convert compute/resource-manager", async ({ expect }) => {
+  await convert(expect, "specification/compute/resource-manager/readme.md");
+});
