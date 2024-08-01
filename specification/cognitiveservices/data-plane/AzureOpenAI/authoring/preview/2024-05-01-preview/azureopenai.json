@@ -2077,8 +2077,8 @@
       "type": "string",
       "description": "The compute type.",
       "enum": [
-        "serverless",
-        "custom"
+        "ServerlessCompute",
+        "CustomCompute"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
@@ -2086,12 +2086,12 @@
         "values": [
           {
             "name": "ServerlessCompute",
-            "value": "serverless",
+            "value": "ServerlessCompute",
             "description": "Serverless user compute."
           },
           {
             "name": "CustomCompute",
-            "value": "custom",
+            "value": "CustomCompute",
             "description": "Custom user compute."
           }
         ]
@@ -2117,7 +2117,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "serverless"
+      "x-ms-discriminator-value": "ServerlessCompute"
     },
     "CustomCompute": {
       "description": "Custom compute.",
@@ -2138,7 +2138,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "custom"
+      "x-ms-discriminator-value": "CustomCompute"
     },
     "TargetIndex": {
       "title": "TargetIndex",
@@ -2158,27 +2158,27 @@
       "type": "string",
       "description": "The target type.",
       "enum": [
-        "acs",
-        "cosmosdb",
-        "pinecone"
+        "AzureAISearch",
+        "CosmosDB",
+        "Pinecone"
       ],
       "x-ms-enum": {
         "name": "TargetType",
         "modelAsString": true,
         "values": [
           {
-            "name": "AzureSearch",
-            "value": "acs",
+            "name": "AzureAISearch",
+            "value": "AzureAISearch",
             "description": "Azure AI Search Index."
           },
           {
             "name": "CosmosDB",
-            "value": "cosmosdb",
+            "value": "CosmosDB",
             "description": "CosmosDB Index."
           },
           {
             "name": "Pinecone",
-            "value": "pinecone",
+            "value": "Pinecone",
             "description": "Pinecone Index."
           }
         ]
