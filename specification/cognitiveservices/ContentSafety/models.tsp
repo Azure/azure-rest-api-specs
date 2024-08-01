@@ -13,16 +13,16 @@ namespace ContentSafety;
 union TextCategory {
   string,
 
-  @doc("The harm cateogry for Text - Hate.")
+  @doc("The harm category for Text - Hate.")
   "Hate",
   
-  @doc("The harm cateogry for Text - SelfHarm.")
+  @doc("The harm category for Text - SelfHarm.")
   "SelfHarm",
 
-  @doc("The harm cateogry for Text - Sexual.")
+  @doc("The harm category for Text - Sexual.")
   "Sexual",
 
-  @doc("The harm cateogry for Text - Violence.")
+  @doc("The harm category for Text - Violence.")
   "Violence",
 }
 
@@ -30,16 +30,16 @@ union TextCategory {
 union ImageCategory {
   string,
 
-  @doc("The harm cateogry for Image - Hate.")
+  @doc("The harm category for Image - Hate.")
   "Hate",
   
-  @doc("The harm cateogry for Image - SelfHarm.")
+  @doc("The harm category for Image - SelfHarm.")
   "SelfHarm",
 
-  @doc("The harm cateogry for Image - Sexual.")
+  @doc("The harm category for Image - Sexual.")
   "Sexual",
 
-  @doc("The harm cateogry for Image - Violence.")
+  @doc("The harm category for Image - Violence.")
   "Violence",
 }
 
