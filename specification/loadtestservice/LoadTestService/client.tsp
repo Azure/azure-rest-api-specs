@@ -23,7 +23,7 @@ namespace Customizations;
   service: Microsoft.LoadTestService,
 })
 interface AdministrationOperations {
-  createOrUpdateTest is LoadTestAdministration.createOrUpdateTest;
+  createOrUpdateTest is LoadTestAdministration.createOrUpdateTest;  
   createOrUpdateAppComponents is LoadTestAdministration.createOrUpdateAppComponents;
   createOrUpdateServerMetricsConfig is LoadTestAdministration.createOrUpdateServerMetricsConfig;
   getAppComponents is LoadTestAdministration.getAppComponents;
