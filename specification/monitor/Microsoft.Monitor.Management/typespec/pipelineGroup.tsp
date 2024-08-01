@@ -257,7 +257,13 @@ interface PipelineGroups {
   delete is ArmResourceDeleteWithoutOkAsync<PipelineGroup>;
 
   @doc("Updates a pipeline group instance")
-  update is ArmResourcePatchAsync<PipelineGroup, PipelineGroupProperties>;
+  update is ArmCustomPatchAsync<
+    PipelineGroup,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      PipelineGroup,
+      PipelineGroupProperties
+    >
+  >;
 
   @doc("Lists all workspaces in the specified resource group")
   listByResourceGroup is ArmResourceListByParent<PipelineGroup>;

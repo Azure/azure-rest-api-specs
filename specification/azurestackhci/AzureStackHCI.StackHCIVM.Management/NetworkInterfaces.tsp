@@ -49,7 +49,7 @@ interface NetworkInterfaces {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkInterface>;
 
   @doc("Lists all of the network interfaces in the specified resource group. Use the nextLink property in the response to get the next page of network interfaces.")
-  list is ArmResourceListByParent<NetworkInterface>;
+  listByResourceGroup is ArmResourceListByParent<NetworkInterface>;
 
   @doc("Lists all of the network interfaces in the specified subscription. Use the nextLink property in the response to get the next page of network interfaces.")
   listAll is ArmListBySubscription<NetworkInterface>;
