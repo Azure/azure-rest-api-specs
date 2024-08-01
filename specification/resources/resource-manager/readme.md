@@ -1361,6 +1361,9 @@ directive:
   - suppress: PathForTrackedResourceTypes
     from: resources.json
     reason: Not a tracked resource type. Cannot change anything due to design philosophy in ARM.
+  - suppress: PathForTrackedResourceTypes
+    from: policyAssignments.json
+    reason: Not a tracked resource type. The API has never been changed since inception. Would be a breaking change.
   - suppress: PostResponseCodes
     from: resources.json
     reason: Breaking change in order to change the API response code.
@@ -1387,6 +1390,9 @@ directive:
     reason: Shared swagger with other teams. We cannot make changes to the API as we don't own it.
   - suppress: EvenSegmentedPathForPutOperation
     from: resources.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: policyAssignments.json
     reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
   - suppress: DeleteResponseCodes
     from: resources.json
