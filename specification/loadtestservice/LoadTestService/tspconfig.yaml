@@ -3,6 +3,14 @@ parameters:
     default: "sdk/loadtesting"
 emit:
   - "@azure-tools/typespec-autorest"
+  # add "@azure-tools/typespec-python" to your package.json to generate Python code
+  - "@azure-tools/typespec-python"
+  # add "@azure-tools/typespec-java" to your package.json to generate Java code
+  - "@azure-tools/typespec-java"
+  # add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  - "@azure-tools/typespec-csharp"
+  # add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
+  - "@azure-tools/typespec-ts"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
