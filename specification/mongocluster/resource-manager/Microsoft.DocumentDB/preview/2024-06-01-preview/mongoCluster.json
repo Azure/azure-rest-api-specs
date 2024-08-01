@@ -1198,7 +1198,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/mongoClusters/{mongoClusterName}/replicas": {
       "get": {
-        "operationId": "Replicas_ListByMongoCluster",
+        "operationId": "Replicas_ListByParent",
         "tags": [
           "Replicas"
         ],
@@ -1639,6 +1639,7 @@
         },
         "properties": {
           "$ref": "#/definitions/MongoClusterUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
       }
