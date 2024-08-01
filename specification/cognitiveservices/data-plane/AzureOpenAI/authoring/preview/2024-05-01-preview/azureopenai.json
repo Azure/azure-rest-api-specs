@@ -2184,8 +2184,8 @@
         ]
       }
     },
-    "ACSIndex": {
-      "description": "ACS Index.",
+    "AzureAISearchIndex": {
+      "description": "Azure AI Search Index.",
       "required": [
         "connectionId"
       ],
@@ -2198,12 +2198,12 @@
           "properties": {
             "connectionId": {
               "type": "string",
-              "description": "The id of the connection pointing to the ACS Index."
+              "description": "The id of the connection pointing to the Azure AI Search Index."
             }
           }
         }
       ],
-      "x-ms-discriminator-value": "acs"
+      "x-ms-discriminator-value": "AzureAISearch"
     },
     "CosmosDBIndex": {
       "description": "CosmosDB Index.",
@@ -2232,7 +2232,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "cosmosdb"
+      "x-ms-discriminator-value": "CosmosDB"
     },
     "PineconeIndex": {
       "description": "Pinecone Index.",
@@ -2253,7 +2253,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "pinecone"
+      "x-ms-discriminator-value": "Pinecone"
     },
     "UserComputeDatasource": {
       "title": "UserComputeDatasource",
