@@ -11,11 +11,9 @@ namespace: azure.mgmt.contoso
 package-name: azure-mgmt-contoso
 package-version: 0.1.0
 clear-output-folder: true
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/cosmos/azure-mgmt-contoso/azure/mgmt/contoso
+output-folder: $(python-sdks-folder)/contoso/azure-mgmt-contoso/azure/mgmt/contoso
 ```
