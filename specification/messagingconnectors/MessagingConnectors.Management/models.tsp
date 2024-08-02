@@ -178,7 +178,7 @@ model EventHubConfig {
 union SourceDataFormatTypes {
   @doc("JSON format")
   JSON: "JSON",
-  
+
   @doc("CSV format")
   CSV: "CSV",
 
@@ -187,7 +187,7 @@ union SourceDataFormatTypes {
 
 @doc("Source DataFormat Base model")
 @discriminator("type")
-model SourceDataFormat{
+model SourceDataFormat {
   @doc("Type of dataformat")
   type: SourceDataFormatTypes;
 }
@@ -201,7 +201,7 @@ union TextCharsets {
 }
 
 @doc("JSON Source DataFormat Base model")
-model JsonSourceDataFormat{
+model JsonSourceDataFormat {
   @doc("Type of dataformat")
   type: SourceDataFormatTypes.JSON;
 
@@ -230,7 +230,7 @@ union CsvDelimiters {
 }
 
 @doc("CSV Source DataFormat Base model")
-model CsvSourceDataFormat{
+model CsvSourceDataFormat {
   @doc("Type of dataformat")
   type: SourceDataFormatTypes.CSV;
 
@@ -238,10 +238,10 @@ model CsvSourceDataFormat{
   withHeader: boolean;
 
   @doc("CSV Delimiter")
-  delimiter: CsvDelimiters;   
+  delimiter: CsvDelimiters;
 
   @doc("Charset")
-  textCharset: TextCharsets;  
+  textCharset: TextCharsets;
 }
 
 @doc("Properties of one arm resource")
@@ -271,7 +271,7 @@ model ConnectorProperties {
 
   @doc("connectionString of the EventHub.")
   eventHubConfig: EventHubConfig;
-  
+
   @doc("DataFormat of the data source")
   sourceDataFormat?: SourceDataFormat;
 
