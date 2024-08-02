@@ -1825,9 +1825,11 @@
       "type": "object",
       "properties": {
         "clientId": {
+          "description": "The ClientID of the ClusterUserAssignedIdentity resource",
           "type": "string"
         },
         "principalId": {
+          "description": "The PrincipalID of the ClusterUserAssignedIdentity resource",
           "type": "string"
         }
       }
@@ -1904,17 +1906,21 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ResourceIdentityType"
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The type of the Identity resource."
         },
         "principalId": {
+          "description": "The PrincipalID of the Identity resource.",
           "type": "string",
           "readOnly": true
         },
         "tenantId": {
+          "description": "The TenantID provided by the MSI RP",
           "type": "string",
           "readOnly": true
         },
         "userAssignedIdentities": {
+          "description": "A map of ClusterUserAssigned identities attached to the cluster, specified in a type required by Microsoft's Managed Identity team.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ClusterUserAssignedIdentity"
@@ -2345,16 +2351,20 @@
       "type": "object",
       "properties": {
         "operatorName": {
+          "description": "The name of the operator for which the PlatformWorkloadIdentity is used for",
           "type": "string"
         },
         "resourceId": {
+          "description": "The resource ID of the PlatformWorkloadIdentity resource",
           "type": "string"
         },
         "clientId": {
+          "description": "The ClientID of the PlatformWorkloadIdentity resource",
           "type": "string",
           "readOnly": true
         },
         "objectId": {
+          "description": "The ObjectID of the PlatformWorkloadIdentity resource",
           "type": "string",
           "readOnly": true
         }
