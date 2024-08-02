@@ -13,10 +13,18 @@
     }
   },
   "responses": {
-    "202": {
-      "headers": {
-        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFault/{chaosFault}/operationsStatus/{operationId}?api-version=2024-05-15-preview",
-        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFault/{chaosFault}/operationsStatus/{operationId}?api-version=2024-05-15-preview"
+    "200": {
+      "body": {
+        "properties": {
+          "ProvisioningState": "Completed"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "ProvisioningState": "Completed"
+        }
       }
     }
   }

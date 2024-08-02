@@ -34,9 +34,48 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFault": {
+      "get": {
+        "operationId": "ChaosFault_List",
+        "description": "list Chaos Faults",
+        "x-ms-examples": {
+          "ChaosFaultList": {
+            "$ref": "./examples/ChaosFaultList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/chaosFaultsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFault/{chaosFault}": {
       "put": {
-        "operationId": "Chaos Fault",
+        "operationId": "ChaosFault_EnableDisable",
         "description": "Enable, disable Chaos Fault",
         "x-ms-examples": {
           "ChaosFaultEnableDisable": {
@@ -70,12 +109,16 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request to Enable/disable Chaos fault is accepted.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/chaosFaultResponse"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/chaosFaultResponse"
             }
           },
           "default": {
@@ -91,7 +134,7 @@
         }
       },
       "get": {
-        "operationId": "Get Chaos Fault",
+        "operationId": "ChaosFault_Get",
         "description": "Get Chaos Fault",
         "x-ms-examples": {
           "ChaosFaultGet": {
@@ -133,6 +176,22 @@
     }
   },
   "definitions": {
+    "ProvisioningState": {
+      "description": "The provisioning state of the resource.",
+      "type": "string",
+      "enum": [
+        "Enabling",
+        "Disabling",
+        "InProgress",
+        "Failed",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "status",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
     "chaosFaultRequest": {
       "type": "object",
       "properties": {
@@ -166,22 +225,59 @@
     "chaosFaultResponse": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "description": "The status of the Chaos fault."
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/chaosFaultResponseProperties"
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          }
+        ]
+      },
+      "description": "A response object for chaos fault."
+    },
+    "chaosFaultsResponse": {
+      "type": "Dictionary",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/chaosFaultsResponseProperties"
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          }
+        ]
+      },
+      "description": "A response object for chaos fault."
+    },
+    "chaosFaultResponseProperties": {
+      "description": "Properties of Chaos Fault API response.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "A provisioning state of the Chaos Fault."
+        }
+      }
+    },
+    "chaosFaultsResponseProperties": {
+        "description": "Properties of List Chaos Faults API response.",
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
         }
       },
-      "description": "A response object for chaos fault status."
+      "parameters": {
+        "chaosFault": {
+          "name": "chaosFault",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the ChaosFault.",
+          "x-ms-parameter-location": "method"
+        }
+      }
     }
-  },
-  "parameters": {
-    "chaosFault": {
-      "name": "chaosFault",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the ChaosFault.",
-      "x-ms-parameter-location": "method"
-    }
-  }
 }
