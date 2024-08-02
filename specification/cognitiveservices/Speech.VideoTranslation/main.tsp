@@ -308,22 +308,13 @@ model Consent {
   id: resourceId;
 
   @doc("Consent locale name.")
-  locale: localeName;
+  input: ConsentInput;
 
   @doc("Consent name")
   displayName?: string;
 
   @doc("Consent description")
   description?: string;
-
-  @doc("Audio file url.")
-  audioUrl: url;
-
-  @doc("Voice talent name.")
-  voiceTalentName: string;
-
-  @doc("Company name.")
-  companyName: string;
 
   @doc("Consent status")
   @visibility("read")
@@ -340,6 +331,22 @@ model Consent {
   @doc("The timestamp when the current status was entered. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
   @visibility("read")
   lastActionDateTime?: utcDateTime;
+}
+
+@doc("Consent input.")
+@added(ApiVersions.v2024_07_30_preview)
+model ConsentInput {
+  @doc("Consent locale name.")
+  locale: localeName;
+
+  @doc("Audio file url.")
+  audioUrl: url;
+
+  @doc("Voice talent name.")
+  voiceTalentName: string;
+
+  @doc("Company name.")
+  companyName: string;
 }
 
 @doc("Consent used by speaker used by iteration creation or.")

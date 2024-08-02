@@ -909,8 +909,8 @@
           "description": "Consent ID",
           "readOnly": true
         },
-        "locale": {
-          "$ref": "#/definitions/localeName",
+        "input": {
+          "$ref": "#/definitions/ConsentInput",
           "description": "Consent locale name."
         },
         "displayName": {
@@ -920,19 +920,6 @@
         "description": {
           "type": "string",
           "description": "Consent description"
-        },
-        "audioUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Audio file url."
-        },
-        "voiceTalentName": {
-          "type": "string",
-          "description": "Voice talent name."
-        },
-        "companyName": {
-          "type": "string",
-          "description": "Company name."
         },
         "status": {
           "$ref": "#/definitions/Status",
@@ -959,6 +946,32 @@
       },
       "required": [
         "id",
+        "input"
+      ]
+    },
+    "ConsentInput": {
+      "type": "object",
+      "description": "Consent input.",
+      "properties": {
+        "locale": {
+          "$ref": "#/definitions/localeName",
+          "description": "Consent locale name."
+        },
+        "audioUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Audio file url."
+        },
+        "voiceTalentName": {
+          "type": "string",
+          "description": "Voice talent name."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Company name."
+        }
+      },
+      "required": [
         "locale",
         "audioUrl",
         "voiceTalentName",
