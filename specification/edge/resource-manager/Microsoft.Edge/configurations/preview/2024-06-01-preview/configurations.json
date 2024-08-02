@@ -1100,6 +1100,30 @@
         "value"
       ]
     },
+    "ConfigurationModel": {
+      "type": "string",
+      "description": "Available configuration models",
+      "enum": [
+        "Application",
+        "Common"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigurationModel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Configuration model Application"
+          },
+          {
+            "name": "Common",
+            "value": "Common",
+            "description": "Configuration model Common"
+          }
+        ]
+      }
+    },
     "ConfigurationProperties": {
       "type": "object",
       "description": "Configuration Properties",
@@ -1126,6 +1150,30 @@
           "type": "string",
           "description": "Timezone of configuration"
         }
+      }
+    },
+    "ConfigurationType": {
+      "type": "string",
+      "description": "Available configuration types",
+      "enum": [
+        "Shared",
+        "Hierarchy"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Shared",
+            "value": "Shared",
+            "description": "Configuration type Shared"
+          },
+          {
+            "name": "Hierarchy",
+            "value": "Hierarchy",
+            "description": "Configuration type Hierarchy"
+          }
+        ]
       }
     },
     "ConfigurationUpdate": {
@@ -1188,18 +1236,23 @@
           "description": "Current Version of dynamic configuration"
         },
         "dynamicConfigurationType": {
-          "$ref": "#/definitions/DynamicConfigurationType",
-          "description": "Type of dynamic configuration"
+          "$ref": "#/definitions/ConfigurationType",
+          "description": "Type of dynamic configuration",
+          "readOnly": true
+        },
+        "dynamicConfigurationModel": {
+          "$ref": "#/definitions/ConfigurationModel",
+          "description": "Type of dynamic configuration model",
+          "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
       },
       "required": [
-        "currentVersion",
-        "dynamicConfigurationType"
+        "currentVersion"
       ]
     },
     "DynamicConfigurationPropertiesUpdate": {
@@ -1209,35 +1262,7 @@
         "currentVersion": {
           "type": "string",
           "description": "Current Version of dynamic configuration"
-        },
-        "dynamicConfigurationType": {
-          "$ref": "#/definitions/DynamicConfigurationType",
-          "description": "Type of dynamic configuration"
         }
-      }
-    },
-    "DynamicConfigurationType": {
-      "type": "string",
-      "description": "Available dynamic configuration types",
-      "enum": [
-        "Shared",
-        "Hierarchy"
-      ],
-      "x-ms-enum": {
-        "name": "DynamicConfigurationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Shared",
-            "value": "Shared",
-            "description": "Configuration type Shared"
-          },
-          {
-            "name": "Hierarchy",
-            "value": "Hierarchy",
-            "description": "Configuration type Hierarchy"
-          }
-        ]
       }
     },
     "DynamicConfigurationUpdate": {
@@ -1300,7 +1325,7 @@
           "description": "Values of configuration version"
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
@@ -1333,6 +1358,49 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Initialized",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Initialized",
+            "value": "Initialized",
+            "description": "Resource Provisioning is initialized"
+          },
+          {
+            "name": "Inprogress",
+            "value": "InProgress",
+            "description": "Resource Provisioning is in progress"
+          }
+        ]
+      },
+      "readOnly": true
     }
   },
   "parameters": {}

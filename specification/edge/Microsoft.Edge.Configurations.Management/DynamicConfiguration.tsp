@@ -5,7 +5,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./Configuration.tsp";
-import "./SharedModels.tsp";
+import "../Microsoft.Edge.ConfigurationManager.Management/ConfigurationModel.tsp";
+import "../Microsoft.Edge.ConfigurationManager.Management/ConfigurationType.tsp";
+import "../Microsoft.Edge.ConfigurationManager.Management/ProvisioningState.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -15,6 +17,24 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
+
+@doc("Dynamic Configuration Properties")
+model DynamicConfigurationProperties {
+  @doc("Current Version of dynamic configuration")
+  currentVersion: string;
+
+  @doc("Type of dynamic configuration")
+  @visibility("read")
+  dynamicConfigurationType?: ConfigurationType;
+
+  @doc("Type of dynamic configuration model")
+  @visibility("read")
+  dynamicConfigurationModel?: ConfigurationModel;
+
+  @doc("Provisioning state of resource")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
 
 @doc("Dynamic Configuration Resource")
 @parentResource(Configuration)

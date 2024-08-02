@@ -5,11 +5,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./CapabilityList.tsp";
 import "./DeploymentTarget.tsp";
-import "./TargetBinding.tsp";
 import "./Schema.tsp";
 import "./SchemaVersion.tsp";
 import "./SchemaReference.tsp";
 import "./Solution.tsp";
+import "./SolutionBinding.tsp";
+import "./SolutionBindingConfiguration.tsp";
 import "./SolutionInstance.tsp";
 import "./SolutionVersion.tsp";
 

@@ -14,8 +14,8 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
-@doc("Available dynamic configuration types")
-union DynamicConfigurationType {
+@doc("Available configuration types")
+union ConfigurationType {
   @doc("Configuration type Shared")
   Shared: "Shared",
 
@@ -23,17 +23,4 @@ union DynamicConfigurationType {
   Hierarchy: "Hierarchy",
 
   string,
-}
-
-@doc("Dynamic Configuration Properties")
-model DynamicConfigurationProperties {
-  @doc("Current Version of dynamic configuration")
-  currentVersion: string;
-
-  @doc("Type of dynamic configuration")
-  dynamicConfigurationType: DynamicConfigurationType;
-
-  @doc("Provisioning state of resource")
-  @visibility("read")
-  provisioningState?: ResourceProvisioningState;
 }

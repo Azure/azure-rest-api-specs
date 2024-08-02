@@ -46,9 +46,6 @@
       "name": "DeploymentTargets"
     },
     {
-      "name": "TargetBindings"
-    },
-    {
       "name": "Schemas"
     },
     {
@@ -61,7 +58,13 @@
       "name": "Solutions"
     },
     {
+      "name": "SolutionBindings"
+    },
+    {
       "name": "SolutionInstances"
+    },
+    {
+      "name": "SolutionBindingConfigurations"
     },
     {
       "name": "SolutionVersions"
@@ -394,7 +397,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/schema": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/schemas": {
       "get": {
         "operationId": "Schemas_ListBySubscription",
         "tags": [
@@ -426,6 +429,45 @@
         "x-ms-examples": {
           "Schemas_ListBySubscription": {
             "$ref": "./examples/Schemas_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/solutionBindings": {
+      "get": {
+        "operationId": "SolutionBindings_ListBySubscription",
+        "tags": [
+          "SolutionBindings"
+        ],
+        "description": "List by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindings_ListBySubscription": {
+            "$ref": "./examples/SolutionBindings_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -465,45 +507,6 @@
         "x-ms-examples": {
           "Solutions_ListBySubscription": {
             "$ref": "./examples/Solutions_ListBySubscription_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/targetBindings": {
-      "get": {
-        "operationId": "TargetBindings_ListBySubscription",
-        "tags": [
-          "TargetBindings"
-        ],
-        "description": "List by subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TargetBindingListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TargetBindings_ListBySubscription": {
-            "$ref": "./examples/TargetBindings_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1022,7 +1025,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schema": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schemas": {
       "get": {
         "operationId": "Schemas_ListByResourceGroup",
         "tags": [
@@ -1064,7 +1067,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schema/{schemaName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schemas/{schemaName}": {
       "get": {
         "operationId": "Schemas_Get",
         "tags": [
@@ -1285,7 +1288,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schema/{schemaName}/versions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schemas/{schemaName}/versions": {
       "get": {
         "operationId": "SchemaVersions_ListBySchema",
         "tags": [
@@ -1335,7 +1338,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schema/{schemaName}/versions/{schemaVersionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schemas/{schemaName}/versions/{schemaVersionName}": {
       "get": {
         "operationId": "SchemaVersions_Get",
         "tags": [
@@ -1584,6 +1587,1082 @@
         "x-ms-examples": {
           "SchemaVersions_Delete": {
             "$ref": "./examples/SchemaVersions_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionBindings": {
+      "get": {
+        "operationId": "SolutionBindings_ListByResourceGroup",
+        "tags": [
+          "SolutionBindings"
+        ],
+        "description": "List by specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindings_ListByResourceGroup": {
+            "$ref": "./examples/SolutionBindings_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionBindings/{solutionBindingName}": {
+      "get": {
+        "operationId": "SolutionBindings_Get",
+        "tags": [
+          "SolutionBindings"
+        ],
+        "description": "Get a Solution Binding Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionBinding"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindings_Get": {
+            "$ref": "./examples/SolutionBindings_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SolutionBindings_CreateOrUpdate",
+        "tags": [
+          "SolutionBindings"
+        ],
+        "description": "Create or update a Solution Binding Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionBinding"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SolutionBinding' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionBinding"
+            }
+          },
+          "201": {
+            "description": "Resource 'SolutionBinding' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionBinding"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindings_CreateOrUpdate": {
+            "$ref": "./examples/SolutionBindings_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SolutionBindings_Update",
+        "tags": [
+          "SolutionBindings"
+        ],
+        "description": "update a Solution Binding Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionBinding"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindings_Update": {
+            "$ref": "./examples/SolutionBindings_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SolutionBindings_Delete",
+        "tags": [
+          "SolutionBindings"
+        ],
+        "description": "Delete a Solution Binding Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindings_Delete": {
+            "$ref": "./examples/SolutionBindings_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionBindings/{solutionBindingName}/deploy": {
+      "post": {
+        "operationId": "SolutionBindings_Deploy",
+        "tags": [
+          "SolutionBindings"
+        ],
+        "description": "Post request to deploy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindings_Deploy": {
+            "$ref": "./examples/SolutionBindings_Deploy_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionBindings/{solutionBindingName}/publish": {
+      "post": {
+        "operationId": "SolutionBindings_Publish",
+        "tags": [
+          "SolutionBindings"
+        ],
+        "description": "Post request to publish",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindings_Publish": {
+            "$ref": "./examples/SolutionBindings_Publish_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionBindings/{solutionBindingName}/resolveConfiguration": {
+      "post": {
+        "operationId": "SolutionBindings_ResolveConfiguration",
+        "tags": [
+          "SolutionBindings"
+        ],
+        "description": "Post request to resolve configuration",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingConfiguration"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindings_ResolveConfiguration": {
+            "$ref": "./examples/SolutionBindings_ResolveConfiguration_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionBindings/{solutionBindingName}/solutionBindingConfigurations": {
+      "get": {
+        "operationId": "SolutionBindingConfigurations_ListBySolutionBinding",
+        "tags": [
+          "SolutionBindingConfigurations"
+        ],
+        "description": "List Solution Binding Configuration resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindingConfigurations_ListBySolutionBinding": {
+            "$ref": "./examples/SolutionBindingConfigurations_ListBySolutionBinding_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionBindings/{solutionBindingName}/solutionBindingConfigurations/{solutionBindingConfigurationName}": {
+      "get": {
+        "operationId": "SolutionBindingConfigurations_Get",
+        "tags": [
+          "SolutionBindingConfigurations"
+        ],
+        "description": "Get a Solution Binding Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "solutionBindingConfigurationName",
+            "in": "path",
+            "description": "The name of the SolutionBindingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindingConfigurations_Get": {
+            "$ref": "./examples/SolutionBindingConfigurations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SolutionBindingConfigurations_CreateOrUpdate",
+        "tags": [
+          "SolutionBindingConfigurations"
+        ],
+        "description": "Create or update a Solution Binding Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "solutionBindingConfigurationName",
+            "in": "path",
+            "description": "The name of the SolutionBindingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SolutionBindingConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'SolutionBindingConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindingConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/SolutionBindingConfigurations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SolutionBindingConfigurations_Update",
+        "tags": [
+          "SolutionBindingConfigurations"
+        ],
+        "description": "update a Solution Binding Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "solutionBindingConfigurationName",
+            "in": "path",
+            "description": "The name of the SolutionBindingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingConfigurationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionBindingConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindingConfigurations_Update": {
+            "$ref": "./examples/SolutionBindingConfigurations_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SolutionBindingConfigurations_Delete",
+        "tags": [
+          "SolutionBindingConfigurations"
+        ],
+        "description": "Delete a Solution Binding Configuration Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "solutionBindingConfigurationName",
+            "in": "path",
+            "description": "The name of the SolutionBindingConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionBindingConfigurations_Delete": {
+            "$ref": "./examples/SolutionBindingConfigurations_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionBindings/{solutionBindingName}/solutionInstances": {
+      "get": {
+        "operationId": "SolutionInstances_ListBySolutionBinding",
+        "tags": [
+          "SolutionInstances"
+        ],
+        "description": "List Solution Instance Resources",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionInstances_ListBySolutionBinding": {
+            "$ref": "./examples/SolutionInstances_ListBySolutionBinding_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/solutionBindings/{solutionBindingName}/solutionInstances/{solutionInstanceName}": {
+      "get": {
+        "operationId": "SolutionInstances_Get",
+        "tags": [
+          "SolutionInstances"
+        ],
+        "description": "Get a Solution Instance Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "solutionInstanceName",
+            "in": "path",
+            "description": "The name of the SolutionInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionInstances_Get": {
+            "$ref": "./examples/SolutionInstances_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SolutionInstances_CreateOrUpdate",
+        "tags": [
+          "SolutionInstances"
+        ],
+        "description": "Create or update a Solution Instance Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "solutionInstanceName",
+            "in": "path",
+            "description": "The name of the SolutionInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SolutionInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'SolutionInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionInstances_CreateOrUpdate": {
+            "$ref": "./examples/SolutionInstances_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SolutionInstances_Update",
+        "tags": [
+          "SolutionInstances"
+        ],
+        "description": "update a Solution Instance Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "solutionInstanceName",
+            "in": "path",
+            "description": "The name of the SolutionInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SolutionInstanceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SolutionInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionInstances_Update": {
+            "$ref": "./examples/SolutionInstances_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SolutionInstances_Delete",
+        "tags": [
+          "SolutionInstances"
+        ],
+        "description": "Delete a Solution Instance Resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "solutionBindingName",
+            "in": "path",
+            "description": "The name of the SolutionBinding",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "solutionInstanceName",
+            "in": "path",
+            "description": "The name of the SolutionInstance",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SolutionInstances_Delete": {
+            "$ref": "./examples/SolutionInstances_Delete_MaximumSet_Gen.json"
           }
         }
       }
@@ -2091,696 +3170,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings": {
-      "get": {
-        "operationId": "TargetBindings_ListByResourceGroup",
-        "tags": [
-          "TargetBindings"
-        ],
-        "description": "List by specified resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TargetBindingListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TargetBindings_ListByResourceGroup": {
-            "$ref": "./examples/TargetBindings_ListByResourceGroup_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings/{targetBindingName}": {
-      "get": {
-        "operationId": "TargetBindings_Get",
-        "tags": [
-          "TargetBindings"
-        ],
-        "description": "Get a Target Binding Resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TargetBinding"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TargetBindings_Get": {
-            "$ref": "./examples/TargetBindings_Get_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "TargetBindings_CreateOrUpdate",
-        "tags": [
-          "TargetBindings"
-        ],
-        "description": "Create or update a Target Binding Resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TargetBinding"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'TargetBinding' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/TargetBinding"
-            }
-          },
-          "201": {
-            "description": "Resource 'TargetBinding' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/TargetBinding"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TargetBindings_CreateOrUpdate": {
-            "$ref": "./examples/TargetBindings_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "TargetBindings_Update",
-        "tags": [
-          "TargetBindings"
-        ],
-        "description": "update a Target Binding Resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TargetBindingUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TargetBinding"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TargetBindings_Update": {
-            "$ref": "./examples/TargetBindings_Update_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "TargetBindings_Delete",
-        "tags": [
-          "TargetBindings"
-        ],
-        "description": "Delete a Target Binding Resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TargetBindings_Delete": {
-            "$ref": "./examples/TargetBindings_Delete_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings/{targetBindingName}/deploy": {
-      "post": {
-        "operationId": "TargetBindings_Deploy",
-        "tags": [
-          "TargetBindings"
-        ],
-        "description": "Post request to deploy",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TargetBindings_Deploy": {
-            "$ref": "./examples/TargetBindings_Deploy_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings/{targetBindingName}/resolveConfiguration": {
-      "post": {
-        "operationId": "TargetBindings_ResolveConfiguration",
-        "tags": [
-          "TargetBindings"
-        ],
-        "description": "Post request to resolve configuration",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DynamicConfigurationProperties"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TargetBindings_ResolveConfiguration": {
-            "$ref": "./examples/TargetBindings_ResolveConfiguration_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings/{targetBindingName}/solutionInstances": {
-      "get": {
-        "operationId": "SolutionInstances_ListByTargetBinding",
-        "tags": [
-          "SolutionInstances"
-        ],
-        "description": "List Solution Instance Resources",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SolutionInstanceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SolutionInstances_ListByTargetBinding": {
-            "$ref": "./examples/SolutionInstances_ListByTargetBinding_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/targetBindings/{targetBindingName}/solutionInstances/{solutionInstanceName}": {
-      "get": {
-        "operationId": "SolutionInstances_Get",
-        "tags": [
-          "SolutionInstances"
-        ],
-        "description": "Get a Solution Instance Resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "solutionInstanceName",
-            "in": "path",
-            "description": "The name of the SolutionInstance",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SolutionInstance"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SolutionInstances_Get": {
-            "$ref": "./examples/SolutionInstances_Get_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "SolutionInstances_CreateOrUpdate",
-        "tags": [
-          "SolutionInstances"
-        ],
-        "description": "Create or update a Solution Instance Resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "solutionInstanceName",
-            "in": "path",
-            "description": "The name of the SolutionInstance",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SolutionInstance"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'SolutionInstance' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SolutionInstance"
-            }
-          },
-          "201": {
-            "description": "Resource 'SolutionInstance' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SolutionInstance"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SolutionInstances_CreateOrUpdate": {
-            "$ref": "./examples/SolutionInstances_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "SolutionInstances_Update",
-        "tags": [
-          "SolutionInstances"
-        ],
-        "description": "update a Solution Instance Resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "solutionInstanceName",
-            "in": "path",
-            "description": "The name of the SolutionInstance",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SolutionInstanceUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SolutionInstance"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SolutionInstances_Update": {
-            "$ref": "./examples/SolutionInstances_Update_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "SolutionInstances_Delete",
-        "tags": [
-          "SolutionInstances"
-        ],
-        "description": "Delete a Solution Instance Resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "targetBindingName",
-            "in": "path",
-            "description": "The name of the TargetBinding",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "solutionInstanceName",
-            "in": "path",
-            "description": "The name of the SolutionInstance",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SolutionInstances_Delete": {
-            "$ref": "./examples/SolutionInstances_Delete_MaximumSet_Gen.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -2801,37 +3190,6 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
-    },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      },
-      "readOnly": true
     },
     "Capability": {
       "type": "object",
@@ -2900,7 +3258,7 @@
           "x-ms-identifiers": []
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
@@ -2937,6 +3295,72 @@
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
       ]
+    },
+    "ConfigurationLink": {
+      "type": "object",
+      "description": "Configuration Link",
+      "properties": {
+        "hierarchyType": {
+          "type": "string",
+          "description": "Hierarchy Type of Configuration Link"
+        },
+        "configurationId": {
+          "type": "string",
+          "description": "Configuration Id of Configuration Link"
+        }
+      },
+      "required": [
+        "hierarchyType",
+        "configurationId"
+      ]
+    },
+    "ConfigurationModel": {
+      "type": "string",
+      "description": "Available configuration models",
+      "enum": [
+        "Application",
+        "Common"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigurationModel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Configuration model Application"
+          },
+          {
+            "name": "Common",
+            "value": "Common",
+            "description": "Configuration model Common"
+          }
+        ]
+      }
+    },
+    "ConfigurationType": {
+      "type": "string",
+      "description": "Available configuration types",
+      "enum": [
+        "Shared",
+        "Hierarchy"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Shared",
+            "value": "Shared",
+            "description": "Configuration type Shared"
+          },
+          {
+            "name": "Hierarchy",
+            "value": "Hierarchy",
+            "description": "Configuration type Hierarchy"
+          }
+        ]
+      }
     },
     "DeploymentTarget": {
       "type": "object",
@@ -2995,7 +3419,7 @@
           "x-ms-identifiers": []
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
@@ -3043,53 +3467,6 @@
         }
       ]
     },
-    "DynamicConfigurationProperties": {
-      "type": "object",
-      "description": "Dynamic Configuration Properties",
-      "properties": {
-        "currentVersion": {
-          "type": "string",
-          "description": "Current Version of dynamic configuration"
-        },
-        "dynamicConfigurationType": {
-          "$ref": "#/definitions/DynamicConfigurationType",
-          "description": "Type of dynamic configuration"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "Provisioning state of resource",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "currentVersion",
-        "dynamicConfigurationType"
-      ]
-    },
-    "DynamicConfigurationType": {
-      "type": "string",
-      "description": "Available dynamic configuration types",
-      "enum": [
-        "Shared",
-        "Hierarchy"
-      ],
-      "x-ms-enum": {
-        "name": "DynamicConfigurationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Shared",
-            "value": "Shared",
-            "description": "Configuration type Shared"
-          },
-          {
-            "name": "Hierarchy",
-            "value": "Hierarchy",
-            "description": "Configuration type Hierarchy"
-          }
-        ]
-      }
-    },
     "HelmSolution": {
       "type": "object",
       "description": "Helm Use Case Properties",
@@ -3122,7 +3499,7 @@
           "description": "Configuration template of helm solution"
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
@@ -3131,6 +3508,49 @@
         "helmChartUri",
         "configurationTemplate"
       ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Initialized",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Initialized",
+            "value": "Initialized",
+            "description": "Resource Provisioning is initialized"
+          },
+          {
+            "name": "Inprogress",
+            "value": "InProgress",
+            "description": "Resource Provisioning is in progress"
+          }
+        ]
+      },
+      "readOnly": true
     },
     "Schema": {
       "type": "object",
@@ -3176,8 +3596,18 @@
           "type": "string",
           "description": "Current Version of schema"
         },
+        "configurationType": {
+          "$ref": "#/definitions/ConfigurationType",
+          "description": "Type of configuration",
+          "readOnly": true
+        },
+        "configurationModel": {
+          "$ref": "#/definitions/ConfigurationModel",
+          "description": "Type of configuration model",
+          "readOnly": true
+        },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
@@ -3241,7 +3671,7 @@
           "description": "Schema Id of schema reference"
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
@@ -3335,7 +3765,7 @@
           "description": "Value of schema version"
         },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
@@ -3384,6 +3814,200 @@
         }
       ]
     },
+    "SolutionBinding": {
+      "type": "object",
+      "description": "Solution Binding Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionBindingProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SolutionBindingConfiguration": {
+      "type": "object",
+      "description": "Solution Binding Configuration Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionBindingConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionBindingConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a SolutionBindingConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SolutionBindingConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/SolutionBindingConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SolutionBindingConfigurationProperties": {
+      "type": "object",
+      "description": "Solution Binding Configuration Properties",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of Solution Binding Configuration"
+        },
+        "revision": {
+          "type": "string",
+          "description": "Revision of Solution Binding Configuration"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value",
+        "revision"
+      ]
+    },
+    "SolutionBindingConfigurationPropertiesUpdate": {
+      "type": "object",
+      "description": "Solution Binding Configuration Properties",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of Solution Binding Configuration"
+        },
+        "revision": {
+          "type": "string",
+          "description": "Revision of Solution Binding Configuration"
+        }
+      }
+    },
+    "SolutionBindingConfigurationUpdate": {
+      "type": "object",
+      "description": "Solution Binding Configuration Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionBindingConfigurationPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SolutionBindingListResult": {
+      "type": "object",
+      "description": "The response of a SolutionBinding list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SolutionBinding items on this page",
+          "items": {
+            "$ref": "#/definitions/SolutionBinding"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SolutionBindingProperties": {
+      "type": "object",
+      "description": "Solution Binding Properties",
+      "properties": {
+        "solution": {
+          "type": "string",
+          "description": "Solution of target binding"
+        },
+        "deploymentTarget": {
+          "type": "string",
+          "description": "Deployment Target of target binding"
+        },
+        "activeSolutionInstance": {
+          "type": "string",
+          "description": "Active Deployment Instance of target binding"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of target binding"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "solution",
+        "deploymentTarget",
+        "activeSolutionInstance",
+        "scope"
+      ]
+    },
+    "SolutionBindingPropertiesUpdate": {
+      "type": "object",
+      "description": "Solution Binding Properties",
+      "properties": {
+        "solution": {
+          "type": "string",
+          "description": "Solution of target binding"
+        },
+        "deploymentTarget": {
+          "type": "string",
+          "description": "Deployment Target of target binding"
+        },
+        "activeSolutionInstance": {
+          "type": "string",
+          "description": "Active Deployment Instance of target binding"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of target binding"
+        }
+      }
+    },
+    "SolutionBindingUpdate": {
+      "type": "object",
+      "description": "Solution Binding Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionBindingPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "SolutionInstance": {
       "type": "object",
       "description": "Solution Instance Resource",
@@ -3424,34 +4048,39 @@
       "type": "object",
       "description": "Solution Instance Properties",
       "properties": {
-        "solutionVersion": {
+        "solutionVersionId": {
           "type": "string",
           "description": "Solution version of solution instance"
         },
-        "configurationVersion": {
+        "solutionBindingConfigurationId": {
           "type": "string",
           "description": "Configuration version of solution instance"
         },
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "State of solution instance",
+          "readOnly": true
+        },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
       },
       "required": [
-        "solutionVersion",
-        "configurationVersion"
+        "solutionVersionId",
+        "solutionBindingConfigurationId"
       ]
     },
     "SolutionInstancePropertiesUpdate": {
       "type": "object",
       "description": "Solution Instance Properties",
       "properties": {
-        "solutionVersion": {
+        "solutionVersionId": {
           "type": "string",
           "description": "Solution version of solution instance"
         },
-        "configurationVersion": {
+        "solutionBindingConfigurationId": {
           "type": "string",
           "description": "Configuration version of solution instance"
         }
@@ -3513,8 +4142,17 @@
           "type": "string",
           "description": "Description of solution"
         },
+        "configurationLinks": {
+          "type": "array",
+          "description": "List of configuration links",
+          "items": {
+            "$ref": "#/definitions/ConfigurationLink"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
@@ -3624,111 +4262,47 @@
         ]
       }
     },
-    "TargetBinding": {
-      "type": "object",
-      "description": "Target Binding Resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TargetBindingProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "TargetBindingListResult": {
-      "type": "object",
-      "description": "The response of a TargetBinding list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TargetBinding items on this page",
-          "items": {
-            "$ref": "#/definitions/TargetBinding"
+    "State": {
+      "type": "string",
+      "description": "Solution Instance State",
+      "enum": [
+        "ReadyToDeploy",
+        "Deploying",
+        "Deployed",
+        "Failed",
+        "Undeployed"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadyToDeploy",
+            "value": "ReadyToDeploy",
+            "description": "Solution Instance is ready to deploy"
+          },
+          {
+            "name": "Deploying",
+            "value": "Deploying",
+            "description": "Solution Instance is deploying"
+          },
+          {
+            "name": "Deployed",
+            "value": "Deployed",
+            "description": "Solution Instance is deployed"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Solution Instance failed to deploy"
+          },
+          {
+            "name": "Undeployed",
+            "value": "Undeployed",
+            "description": "Solution Instance is undeployed"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "TargetBindingProperties": {
-      "type": "object",
-      "description": "Target Binding Properties",
-      "properties": {
-        "solution": {
-          "type": "string",
-          "description": "Solution of target binding"
-        },
-        "deploymentTarget": {
-          "type": "string",
-          "description": "Deployment Target of target binding"
-        },
-        "activeDeploymentInstance": {
-          "type": "string",
-          "description": "Active Deployment Instance of target binding"
-        },
-        "scope": {
-          "type": "string",
-          "description": "Scope of target binding"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-          "description": "Provisioning state of resource",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "solution",
-        "deploymentTarget",
-        "activeDeploymentInstance",
-        "scope"
-      ]
-    },
-    "TargetBindingPropertiesUpdate": {
-      "type": "object",
-      "description": "Target Binding Properties",
-      "properties": {
-        "solution": {
-          "type": "string",
-          "description": "Solution of target binding"
-        },
-        "deploymentTarget": {
-          "type": "string",
-          "description": "Deployment Target of target binding"
-        },
-        "activeDeploymentInstance": {
-          "type": "string",
-          "description": "Active Deployment Instance of target binding"
-        },
-        "scope": {
-          "type": "string",
-          "description": "Scope of target binding"
-        }
+        ]
       }
-    },
-    "TargetBindingUpdate": {
-      "type": "object",
-      "description": "Target Binding Resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TargetBindingPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     }
   },
   "parameters": {

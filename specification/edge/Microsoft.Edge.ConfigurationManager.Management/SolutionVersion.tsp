@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "./ProvisioningState.tsp";
 import "./Solution.tsp";
 
 using TypeSpec.OpenAPI;
@@ -25,7 +26,7 @@ model HelmSolutionProperties {
 
   @doc("Provisioning state of resource")
   @visibility("read")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Available solution version types")

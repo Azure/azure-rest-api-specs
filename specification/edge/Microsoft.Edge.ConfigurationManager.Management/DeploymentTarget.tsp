@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./CapabilityList.tsp";
+import "./ProvisioningState.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -29,7 +30,7 @@ model DeploymentTargetProperties {
 
   @doc("Provisioning state of resource")
   @visibility("read")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Deployment Target Resource")

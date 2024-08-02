@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "./ProvisioningState.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -21,7 +22,7 @@ model SchemaReferenceProperties {
 
   @doc("Provisioning state of resource")
   @visibility("read")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Schema Reference Resource")

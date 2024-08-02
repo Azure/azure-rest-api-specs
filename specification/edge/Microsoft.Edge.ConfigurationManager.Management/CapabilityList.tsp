@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "./ProvisioningState.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -31,7 +32,7 @@ model CapabilityListProperties {
 
   @doc("Provisioning state of resource")
   @visibility("read")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Capability List Resource")
@@ -39,7 +40,6 @@ model CapabilityList is TrackedResource<CapabilityListProperties> {
   ...ResourceNameParameter<CapabilityList>;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "We dont want to expose delete operation"
 @armResourceOperations
 interface CapabilityLists {
   @doc("Get a Capability List Resource")
