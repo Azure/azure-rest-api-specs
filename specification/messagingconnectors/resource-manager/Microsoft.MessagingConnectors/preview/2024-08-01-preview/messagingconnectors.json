@@ -105,7 +105,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorInstanceListResult"
+              "$ref": "#/definitions/MessagingConnectorListResult"
             }
           },
           "default": {
@@ -213,7 +213,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorInstanceListResult"
+              "$ref": "#/definitions/MessagingConnectorListResult"
             }
           },
           "default": {
@@ -263,7 +263,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorInstance"
+              "$ref": "#/definitions/MessagingConnector"
             }
           },
           "default": {
@@ -330,21 +330,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectorInstance"
+              "$ref": "#/definitions/MessagingConnector"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ConnectorInstance' update operation succeeded",
+            "description": "Resource 'MessagingConnector' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectorInstance"
+              "$ref": "#/definitions/MessagingConnector"
             }
           },
           "201": {
-            "description": "Resource 'ConnectorInstance' create operation succeeded",
+            "description": "Resource 'MessagingConnector' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectorInstance"
+              "$ref": "#/definitions/MessagingConnector"
             }
           },
           "default": {
@@ -411,7 +411,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectorInstanceTagsUpdate"
+              "$ref": "#/definitions/MessagingConnectorTagsUpdate"
             }
           }
         ],
@@ -419,7 +419,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectorInstance"
+              "$ref": "#/definitions/MessagingConnector"
             }
           },
           "default": {
@@ -793,55 +793,6 @@
       ],
       "x-ms-discriminator-value": "ConfluentSource"
     },
-    "ConnectorInstance": {
-      "type": "object",
-      "description": "A Connector resource Azure",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ResourceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "ConnectorInstanceListResult": {
-      "type": "object",
-      "description": "The response of a ConnectorInstance list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ConnectorInstance items on this page",
-          "items": {
-            "$ref": "#/definitions/ConnectorInstance"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ConnectorInstanceTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in ConnectorInstance resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ConnectorProperties": {
       "type": "object",
       "description": "Basic info for Connector",
@@ -866,6 +817,10 @@
         "eventHubConfig": {
           "$ref": "#/definitions/EventHubConfig",
           "description": "connectionString of the EventHub."
+        },
+        "sourceDataFormat": {
+          "$ref": "#/definitions/SourceDataFormat",
+          "description": "DataFormat of the data source"
         },
         "connectorState": {
           "$ref": "#/definitions/ConnectorState",
@@ -1199,6 +1154,82 @@
       ],
       "x-ms-discriminator-value": "CosmosDbSource"
     },
+    "CsvDelimiters": {
+      "type": "string",
+      "description": "Delimiter for csv",
+      "enum": [
+        "Pipe",
+        "Comma",
+        "SemiColon",
+        "Space",
+        "Tab"
+      ],
+      "x-ms-enum": {
+        "name": "CsvDelimiters",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pipe",
+            "value": "Pipe",
+            "description": "Pipe"
+          },
+          {
+            "name": "Comma",
+            "value": "Comma",
+            "description": "Comma"
+          },
+          {
+            "name": "SemiColon",
+            "value": "SemiColon",
+            "description": "SemiColon"
+          },
+          {
+            "name": "Space",
+            "value": "Space",
+            "description": "Space"
+          },
+          {
+            "name": "Tab",
+            "value": "Tab",
+            "description": "Tab"
+          }
+        ]
+      }
+    },
+    "CsvSourceDataFormat": {
+      "type": "object",
+      "description": "CSV Source DataFormat Base model",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of dataformat",
+          "enum": [
+            "CSV"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "withHeader": {
+          "type": "boolean",
+          "description": "Contain header or not"
+        },
+        "delimiter": {
+          "$ref": "#/definitions/CsvDelimiters",
+          "description": "CSV Delimiter"
+        },
+        "textCharset": {
+          "$ref": "#/definitions/TextCharsets",
+          "description": "Charset"
+        }
+      },
+      "required": [
+        "type",
+        "withHeader",
+        "delimiter",
+        "textCharset"
+      ]
+    },
     "DataPreviewInstance": {
       "type": "object",
       "description": "A dataPreview resource Azure",
@@ -1429,6 +1460,30 @@
       ],
       "x-ms-discriminator-value": "GooglePubSubSource"
     },
+    "JsonSourceDataFormat": {
+      "type": "object",
+      "description": "JSON Source DataFormat Base model",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of dataformat",
+          "enum": [
+            "JSON"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "textCharset": {
+          "$ref": "#/definitions/TextCharsets",
+          "description": "Charset"
+        }
+      },
+      "required": [
+        "type",
+        "textCharset"
+      ]
+    },
     "KinesisSourceConnectorProperties": {
       "type": "object",
       "description": "Configuration for KinesisSourceConnector",
@@ -1495,6 +1550,55 @@
         }
       ],
       "x-ms-discriminator-value": "KinesisSource"
+    },
+    "MessagingConnector": {
+      "type": "object",
+      "description": "A Connector resource Azure",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MessagingConnectorListResult": {
+      "type": "object",
+      "description": "The response of a MessagingConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MessagingConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/MessagingConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MessagingConnectorTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in MessagingConnector resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "MySqlSourceConnectorProperties": {
       "type": "object",
@@ -1594,7 +1698,7 @@
           {
             "name": "UseLatestSourceOffset",
             "value": "UseLatestSourceOffset",
-            "description": "use the latest (most recent) source offset,"
+            "description": "use the latest (most recent) source offset"
           },
           {
             "name": "UseEarliestRecordedOffset",
@@ -1705,6 +1809,44 @@
         "connectorProperties"
       ]
     },
+    "SourceDataFormat": {
+      "type": "object",
+      "description": "Source DataFormat Base model",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SourceDataFormatTypes",
+          "description": "Type of dataformat"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "SourceDataFormatTypes": {
+      "type": "string",
+      "description": "Source DataFormat Types",
+      "enum": [
+        "JSON",
+        "CSV"
+      ],
+      "x-ms-enum": {
+        "name": "SourceDataFormatTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "JSON",
+            "value": "JSON",
+            "description": "JSON format"
+          },
+          {
+            "name": "CSV",
+            "value": "CSV",
+            "description": "CSV format"
+          }
+        ]
+      }
+    },
     "SqlServerSourceConnectorProperties": {
       "type": "object",
       "description": "Configuration for SqlServerSqlSourceConnector",
@@ -1782,6 +1924,24 @@
         }
       ],
       "x-ms-discriminator-value": "SqlServerSource"
+    },
+    "TextCharsets": {
+      "type": "string",
+      "description": "Charsets",
+      "enum": [
+        "UTF8"
+      ],
+      "x-ms-enum": {
+        "name": "TextCharsets",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UTF8",
+            "value": "UTF8",
+            "description": "utf-8"
+          }
+        ]
+      }
     }
   },
   "parameters": {}

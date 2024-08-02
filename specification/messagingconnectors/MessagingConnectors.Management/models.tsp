@@ -152,7 +152,7 @@ union ConverterType {
 
 @doc("Enum of the OffsetPolicy for CosmosDB connector")
 union OffsetPolicyForCosmosDB {
-  @doc("use the latest (most recent) source offset,")
+  @doc("use the latest (most recent) source offset")
   UseLatestSourceOffset: "UseLatestSourceOffset",
 
   @doc("use the earliest recorded offset")
@@ -172,6 +172,76 @@ model EventHubConfig {
   @doc("connectionString of the EventHub.")
   @secret
   connectionString: string;
+}
+
+@doc("Source DataFormat Types")
+union SourceDataFormatTypes {
+  @doc("JSON format")
+  JSON: "JSON",
+  
+  @doc("CSV format")
+  CSV: "CSV",
+
+  string,
+}
+
+@doc("Source DataFormat Base model")
+@discriminator("type")
+model SourceDataFormat{
+  @doc("Type of dataformat")
+  type: SourceDataFormatTypes;
+}
+
+@doc("Charsets")
+union TextCharsets {
+  @doc("utf-8")
+  UTF8: "UTF8",
+
+  string,
+}
+
+@doc("JSON Source DataFormat Base model")
+model JsonSourceDataFormat{
+  @doc("Type of dataformat")
+  type: SourceDataFormatTypes.JSON;
+
+  @doc("Charset")
+  textCharset: TextCharsets;
+}
+
+@doc("Delimiter for csv")
+union CsvDelimiters {
+  @doc("Pipe")
+  Pipe: "Pipe",
+
+  @doc("Comma")
+  Comma: "Comma",
+
+  @doc("SemiColon")
+  SemiColon: "SemiColon",
+
+  @doc("Space")
+  Space: "Space",
+
+  @doc("Tab")
+  Tab: "Tab",
+
+  string,
+}
+
+@doc("CSV Source DataFormat Base model")
+model CsvSourceDataFormat{
+  @doc("Type of dataformat")
+  type: SourceDataFormatTypes.CSV;
+
+  @doc("Contain header or not")
+  withHeader: boolean;
+
+  @doc("CSV Delimiter")
+  delimiter: CsvDelimiters;   
+
+  @doc("Charset")
+  textCharset: TextCharsets;  
 }
 
 @doc("Properties of one arm resource")
@@ -201,6 +271,9 @@ model ConnectorProperties {
 
   @doc("connectionString of the EventHub.")
   eventHubConfig: EventHubConfig;
+  
+  @doc("DataFormat of the data source")
+  sourceDataFormat?: SourceDataFormat;
 
   @doc("State of the MessagingConnector")
   connectorState?: ConnectorState;
@@ -429,7 +502,7 @@ model DataRangeLimit extends DataRangeBaseConfig {
   limit: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Properties of one DataPreview")
 model DataPreviewProperties {
   @doc("Properties of one Connector Source")
