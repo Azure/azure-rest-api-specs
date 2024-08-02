@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "routeMatrixRequest": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+              [
+                9.15049,
+                45.458545
+              ],
+              [
+                11.050541,
+                45.403337
+              ]
+            ]
+          },
+          "properties": {
+            "pointType": "origins"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+              [
+                11.499931,
+                48.149853
+              ],
+              [
+                14.538226,
+                50.033688
+              ]
+            ]
+          },
+          "properties": {
+            "pointType": "destinations"
+          }
+        }
+      ],
+      "departAt": "2022-12-19T16:39:57+01:00",
+      "optimizeRoute": "fastest",
+      "traffic": "historical",
+      "travelMode": "truck",
+      "avoid": [
+        "unpavedRoads"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Feature",
+        "geometry": null,
+        "properties": {
+          "summary": {
+            "totalCount": 4,
+            "successfulCount": 2
+          },
+          "matrix": [
+            {
+              "originIndex": 0,
+              "destinationIndex": 0,
+              "departureTime": "2022-12-19T16:39:57+01:00",
+              "arrivalTime": "2022-12-20T00:21:14+01:00",
+              "distanceInMeters": 573064,
+              "durationInSeconds": 27677,
+              "durationTrafficInSeconds": 27677
+            },
+            {
+              "originIndex": 0,
+              "destinationIndex": 1,
+              "error": {
+                "code": "OUT_OF_REGION",
+                "message": "Input coordinates out of region"
+              }
+            },
+            {
+              "originIndex": 1,
+              "destinationIndex": 0,
+              "departureTime": "2022-12-19T16:39:57+01:00",
+              "arrivalTime": "2022-12-19T22:19:10+01:00",
+              "distanceInMeters": 452488,
+              "durationInSeconds": 20353,
+              "durationTrafficInSeconds": 20353
+            },
+            {
+              "originIndex": 1,
+              "destinationIndex": 1,
+              "error": {
+                "code": "OUT_OF_REGION",
+                "message": "Input coordinates out of region"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

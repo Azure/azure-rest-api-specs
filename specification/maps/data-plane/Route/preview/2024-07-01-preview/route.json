@@ -68,6 +68,16 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "client"
+    },
+    "OperationId": {
+      "name": "id",
+      "description": "System generated unique identifier for the asynchronous operation after it has been submitted.",
+      "type": "string",
+      "maxLength": 36,
+      "minLength": 36,
+      "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$",
+      "in": "path",
+      "required": true
     }
   },
   "paths": {
@@ -423,6 +433,228 @@
           }
         }
       }
+    },
+    "/route/matrix": {
+      "post": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Post Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using a sync request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. As an example, let's say a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call Matrix Route API.\n\n\nFor each route, the travel times and distances are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for sync request it's **2500** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 2500, you might want to make synchronous request. The maximum size of a matrix for this API is **2500** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x50, 60x40, 90x20 (it does not need to be square).",
+        "operationId": "Route_PostRouteMatrix",
+        "consumes": [
+          "application/geo+json"
+        ],
+        "produces": [
+          "application/geo+json"
+        ],
+        "x-ms-client-name": "Route_PostRouteMatrix",
+        "x-ms-examples": {
+          "Successfully retrieve a route matrix with additional parameters in the body": {
+            "$ref": "./examples/PostRouteMatrix.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "name": "routeMatrixRequest",
+            "in": "body",
+            "description": "Request body of RouteMatrix API in GeoJSON format.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteMatrixRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RouteMatrixResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/route/matrix:async": {
+      "post": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe `Post Route Matrix` API is an HTTP `POST` request that allows calculation of a matrix of route summaries for a set of routes defined by origin and destination locations by using an asynchronous (async) request. For every given origin, the service calculates the cost of routing from that origin to every given destination. The set of origins and the set of destinations can be thought of as the column and row headers of a table and each cell in the table contains the costs of routing from the origin to the destination for that cell. As an example, let's say a food delivery company has 20 drivers and they need to find the closest driver to pick up the delivery from the restaurant. To solve this use case, they can call Matrix Route API.\n\n\nFor each route, the travel times and distances are returned. You can use the computed costs to determine which detailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for async request is **50000** and for sync request it's **2500** (the number of origins multiplied by the number of destinations).\n\n\n\n### Submit Synchronous Route Matrix Request\nIf your scenario requires synchronous requests and the maximum size of the matrix is less than or equal to 2500, you might want to make synchronous request. The maximum size of a matrix for this API is **2500** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 50x50, 60x40, 90x20 (it does not need to be square).\n\n```\nPOST https://atlas.microsoft.com/route/matrix?api-version=2024-06-01-preview&subscription-key={subscription-key}\n```\n\n### Submit Asynchronous Route Matrix Request\nThe Asynchronous API is appropriate for processing big volumes of relatively complex routing requests. When you make a request by using async request, by default the service returns a 202 response code along a URL in the Operation-Location field of the response header with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com. This URL should be checked periodically until the status is Succeeded. \n\n\nThe maximum size of a matrix for this API is **50000** (the number of origins multiplied by the number of destinations). With that constraint in mind, examples of possible matrix dimensions are: 500x100, 100x100, 280x170. 100x50 (it does not need to be square).\n\n\nThe asynchronous responses are stored for **24** hours. The redirect URL returns a 404 response if used after the expiration period.\n\n\n\n\n```\nPOST https://atlas.microsoft.com/route/matrix:async?api-version=2024-06-01-preview&subscription-key={subscription-key}\n```\n\nHere's a typical sequence of asynchronous operations:\n1. Client sends a Route Matrix POST request to Azure Maps\n\n2. The server will respond with one of the following:\n\n    > HTTP `202 Accepted` -  Route Matrix request has been accepted.\n\n    > HTTP `Error` - There was an error processing your Route Matrix request. This could either be a 400 Bad Request or any other Error status code.\n\n\n3. If the Matrix Route request was accepted successfully, the Location header in the response contains the URL to get the status of the request. This status URI looks like the following:\n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{id}?api-version=1.0?subscription-key={subscription-key}\n  ```\n\n\n4. Client issues a GET request on the resultUrl obtained in Step 3 to get the results\n\n \n\n  ```\n    GET https://atlas.microsoft.com/route/operations/{id}/result?api-version=1.0?subscription-key={subscription-key}\n   ```\n\n\n\n",
+        "operationId": "Route_PostRouteMatrixAsync",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location",
+          "final-state-schema": "#/definitions/RouteOperation"
+        },
+        "consumes": [
+          "application/geo+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_PostRouteMatrixAsync",
+        "x-ms-examples": {
+          "Submit an asynchronous request for matrix": {
+            "$ref": "./examples/PostRouteMatrixAsync.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "name": "routeMatrixAsyncRequest",
+            "in": "body",
+            "description": "Request body of RouteMatrix API in GeoJSON format.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteMatrixAsyncRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/route/operations/{id}": {
+      "get": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n Get the status of an asynchronous operation by its operation ID.",
+        "operationId": "Route_GetRouteOperationsStatus",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a succeeded operation status": {
+            "$ref": "./examples/GetRouteOperationStatusSucceeded.json"
+          },
+          "Get a running operation status": {
+            "$ref": "./examples/GetRouteOperationStatusRunning.json"
+          },
+          "Get a failed operation status": {
+            "$ref": "./examples/GetRouteOperationStatusFailed.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RouteOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/route/operations/{id}/result": {
+      "get": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nGet the result of an asynchronous operation by its operation ID.",
+        "operationId": "Route_GetRouteOperationResult",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_GetOperationResult",
+        "x-ms-examples": {
+          "Successfully retrieve the async matrix result": {
+            "$ref": "./examples/GetRouteMatrixAsyncResult.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "$ref": "#/parameters/OperationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RouteOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -714,6 +946,193 @@
           }
         }
       }
+    },
+    "RouteMatrixRequest": {
+      "description": "Use to get a route matrix showing the travel time and distance for all possible pairs in a list of origins and destination. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "type": "object",
+      "required": [
+        "type",
+        "features"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "A set of MultiPoint for matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "minimum": 2,
+          "maximum": 2,
+          "items": {
+            "$ref": "#/definitions/InputRouteMatrixFeaturesItem"
+          }
+        },
+        "departAt": {
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "arriveAt": {
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "travelMode": {
+          "$ref": "#/definitions/RouteMatrixTravelModeEnum"
+        },
+        "optimizeRoute": {
+          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastest\" which returns the route to minimize the travel time.\n\nExample: \"optimizeRoute\":\"fastest \"",
+          "type": "string",
+          "default": "fastest",
+          "enum": [
+            "fastest"
+          ],
+          "x-ms-enum": {
+            "name": "RouteMatrixOptimizeRouteEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "fastest",
+                "name": "Fastest",
+                "description": "Finds the fastest route"
+              }
+            ]
+          }
+        },
+        "traffic": {
+          "$ref": "#/definitions/RouteMatrixTrafficEnum"
+        },
+        "avoid": {
+          "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteMatrixAvoidEnum"
+          }
+        },
+        "vehicleSpec": {
+          "$ref": "#/definitions/RouteMatrixVehicleSpec"
+        }
+      }
+    },
+    "RouteMatrixAsyncRequest": {
+      "description": "Use to get a route matrix showing the travel time and distance for all possible pairs in a list of origins and destination. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "type": "object",
+      "required": [
+        "type",
+        "features"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "A set of MultiPoint for matrix. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "minimum": 2,
+          "maximum": 2,
+          "items": {
+            "$ref": "#/definitions/InputRouteMatrixFeaturesItem"
+          }
+        },
+        "departAt": {
+          "description": "The date and time of departure from the origin point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `departAt` value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "arriveAt": {
+          "description": "The date and time of arrival at the destination point formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe `arriveAt` value must be in the future. The `arriveAt` parameter cannot be used in conjunction with `departAt`.\n\nExample: \"arriveAt\": \"2023-06-01T09:30:00.000-07:00\"",
+          "type": "string",
+          "format": "date-time"
+        },
+        "travelMode": {
+          "$ref": "#/definitions/RouteMatrixTravelModeEnum"
+        },
+        "optimizeRoute": {
+          "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastest\" which returns the route to minimize the travel time.\n\nExample: \"optimizeRoute\":\"shortest\"",
+          "type": "string",
+          "default": "fastest",
+          "enum": [
+            "shortest",
+            "fastest"
+          ],
+          "x-ms-enum": {
+            "name": "RouteMatrixAsyncOptimizeRouteEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "shortest",
+                "name": "Shortest",
+                "description": "The route is calculated to minimize the distance."
+              },
+              {
+                "value": "fastest",
+                "name": "Fastest",
+                "description": "Finds the fastest route"
+              }
+            ]
+          }
+        },
+        "traffic": {
+          "$ref": "#/definitions/RouteMatrixTrafficEnum"
+        },
+        "avoid": {
+          "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteMatrixAvoidEnum"
+          }
+        },
+        "vehicleSpec": {
+          "$ref": "#/definitions/RouteMatrixVehicleSpec"
+        }
+      }
+    },
+    "RouteMatrixResponse": {
+      "description": "This object is returned from a successful call.",
+      "type": "object",
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
+        },
+        "geometry": {
+          "description": "The geometry object is null",
+          "type": "object"
+        },
+        "properties": {
+          "$ref": "#/definitions/RouteMatrixFeatureProperties"
+        }
+      }
+    },
+    "RouteOperationResponse": {
+      "type": "object",
+      "description": "This object is returned from a successful call.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/RouteOperationKindEnum"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "RouteMatrixAsyncResponse": {
+      "type": "object",
+      "x-ms-discriminator-value": "RouteMatrix",
+      "description": "Specifies the driving instructions and additional properties for each maneuver point in the route Leg.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouteOperationResponse"
+        },
+        {
+          "$ref": "#/definitions/RouteMatrixResponse"
+        }
+      ]
     },
     "FeatureCollection": {
       "description": "`GeoJSON` `FeatureCollection` object that contains a list of Features. For more information, see [RFC 7946, section 3.3](https://www.rfc-editor.org/rfc/rfc7946#section-3.3).",
@@ -2063,6 +2482,15 @@
         }
       ]
     },
+    "RouteMatrixVehicleSpec": {
+      "type": "object",
+      "description": "Specifies the vehicle attributes such as vehicle height, weight, max speed, type of cargo, etc. to consider when calculating the route matrix. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications. Vehicle attributes are specified within the vehicleSpec property.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VehicleSpec"
+        }
+      ]
+    },
     "VehicleSpec": {
       "description": "Specifies the vehicle attributes such as size, weight, max speed, type of cargo, etc. for truck routing only. This helps avoid low bridge clearances, road restrictions, difficult right turns to provide the optimized truck route based on the vehicle specifications.\n\n`Note`: Only supported for truck travelMode.",
       "type": "object",
@@ -2357,6 +2785,55 @@
         }
       }
     },
+    "RouteMatrixAvoidEnum": {
+      "description": "Specifies something that the route calculation should try to avoid when determining the route.",
+      "type": "string",
+      "enum": [
+        "tollRoads",
+        "unpavedRoads"
+      ],
+      "x-ms-enum": {
+        "name": "RouteMatrixAvoidEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "tollRoads",
+            "name": "TollRoads",
+            "description": "Avoids toll roads."
+          },
+          {
+            "value": "unpavedRoads",
+            "name": "UnpavedRoads",
+            "description": "Avoids unpaved roads."
+          }
+        ]
+      }
+    },
+    "RouteMatrixTrafficEnum": {
+      "description": "Decides how traffic is considered for computing routes.",
+      "type": "string",
+      "default": "historical",
+      "enum": [
+        "historical",
+        "live"
+      ],
+      "x-ms-enum": {
+        "name": "RouteMatrixTrafficEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "historical",
+            "name": "Historical",
+            "description": "Finds the route based on historical traffic data"
+          },
+          {
+            "value": "live",
+            "name": "Live",
+            "description": "Finds the route based on live traffic data."
+          }
+        ]
+      }
+    },
     "OptionalId": {
       "type": "object",
       "description": "optional Id",
@@ -2396,6 +2873,34 @@
           {
             "value": "other",
             "description": "RouteTravelMode is returned as \"other\" for the truck travelMode when the truck route is not available for a particular section of a route."
+          }
+        ]
+      }
+    },
+    "RouteMatrixTravelModeEnum": {
+      "description": "Specifies the travel profile to consider when calculating the matrix. If not specified, the default value is \"driving\".\n\nExample: \"travelMode\":\"driving\"",
+      "type": "string",
+      "default": "driving",
+      "enum": [
+        "driving",
+        "truck",
+        "walking"
+      ],
+      "x-ms-enum": {
+        "name": "RouteMatrixTravelModeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "driving",
+            "description": "Routing profile suitable for cars are used for route matrix calculation."
+          },
+          {
+            "value": "truck",
+            "description": "Routing profile suitable for commercial vehicles like trucks are used for range polygon calculation."
+          },
+          {
+            "value": "walking",
+            "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
           }
         ]
       }
@@ -2643,6 +3148,220 @@
               }
             ]
           }
+        }
+      }
+    },
+    "InputRouteMatrixFeaturesItem": {
+      "type": "object",
+      "description": "Specifies the input origins and destination points. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiPoint"
+        },
+        "properties": {
+          "description": "Feature properties.",
+          "type": "object",
+          "$ref": "#/definitions/InputRouteMatrixProperties"
+        }
+      },
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ]
+    },
+    "InputRouteMatrixProperties": {
+      "type": "object",
+      "description": "Specifies the properties of Route Matrix",
+      "properties": {
+        "pointType": {
+          "description": "The type of the route matrix.",
+          "type": "string",
+          "enum": [
+            "origins",
+            "destinations"
+          ],
+          "x-ms-enum": {
+            "name": "RouteMatrixTypeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "origins",
+                "description": "The route matrix is calculated based on the distance between the points."
+              },
+              {
+                "value": "destinations",
+                "description": "The route matrix is calculated based on the duration between the points."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "RouteMatrixFeatureProperties": {
+      "description": "Route Matrix properties.",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/RouteMatrixSummary"
+        },
+        "matrix": {
+          "description": "The matrix of route results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteMatrixItemResult"
+          }
+        }
+      }
+    },
+    "RouteMatrixItemResult": {
+      "type": "object",
+      "description": "Route Matrix item result",
+      "properties": {
+        "originIndex": {
+          "description": "Index of the origin point",
+          "type": "integer",
+          "format": "int32"
+        },
+        "destinationIndex": {
+          "description": "Index of the destination point",
+          "type": "integer",
+          "format": "int32"
+        },
+        "departureTime": {
+          "description": "The estimated departure time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "arrivalTime": {
+          "description": "The estimated arrival time, which takes into account the traffic conditions, is formatted as a `dateTime` value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). It will reference the timezone offset by either `departAt` or `arrivalAt`. If not, then the UTC time will be used.",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "distanceInMeters": {
+          "description": "Length In Meters property",
+          "type": "number",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "description": "Estimated travel time in seconds that does not include delays on the route due to traffic conditions.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "durationTrafficInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding `TravelDistance` with current traffic conditions. This value is provided if `optimizeRoute` includes traffic considerations.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "RouteOperation": {
+      "type": "object",
+      "description": "This object is returned from a successful Get Operation request.",
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the asynchronous operation.",
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the async operation.",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "StatusEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "The operation has not started yet."
+              },
+              {
+                "value": "Running",
+                "description": "The operation is running."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The operation has completed successfully."
+              },
+              {
+                "value": "Failed",
+                "description": "The operation has failed."
+              }
+            ]
+          }
+        },
+        "kind": {
+          "$ref": "#/definitions/RouteOperationKindEnum"
+        },
+        "result": {
+          "description": "The result of async operation",
+          "type": "object",
+          "properties": {
+            "resultUrl": {
+              "description": "URL to the get the result of async operation",
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the operation was created."
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the operation status was updated."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "RouteOperationKindEnum": {
+      "type": "string",
+      "description": "Type of asynchronous operation",
+      "enum": [
+        "RouteMatrix"
+      ],
+      "x-ms-enum": {
+        "name": "RouteOperationKindEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "RouteMatrix",
+            "description": "Route matrix asynchronous job."
+          }
+        ]
+      }
+    },
+    "RouteMatrixSummary": {
+      "type": "object",
+      "description": "Summary for the route matrix request",
+      "properties": {
+        "successfulCount": {
+          "description": "Number of successful routes within this matrix.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalCount": {
+          "description": "Total number of routes within this matrix.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

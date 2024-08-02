@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "id": "bc3f9365-3ee0-4564-aa27-825016325557"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "RouteMatrix",
+        "type": "Feature",
+        "geometry": null,
+        "properties": {
+          "summary": {
+            "totalCount": 4,
+            "successfulCount": 2
+          },
+          "matrix": [
+            {
+              "originIndex": 0,
+              "destinationIndex": 0,
+              "departureTime": "2022-12-19T16:39:57+01:00",
+              "arrivalTime": "2022-12-20T00:21:14+01:00",
+              "distanceInMeters": 573064,
+              "durationInSeconds": 27677,
+              "durationTrafficInSeconds": 27677
+            },
+            {
+              "originIndex": 0,
+              "destinationIndex": 1,
+              "error": {
+                "code": "OUT_OF_REGION",
+                "message": "Input coordinates out of region"
+              }
+            },
+            {
+              "originIndex": 1,
+              "destinationIndex": 0,
+              "departureTime": "2022-12-19T16:39:57+01:00",
+              "arrivalTime": "2022-12-19T22:19:10+01:00",
+              "distanceInMeters": 452488,
+              "durationInSeconds": 20353,
+              "durationTrafficInSeconds": 20353
+            },
+            {
+              "originIndex": 1,
+              "destinationIndex": 1,
+              "error": {
+                "code": "OUT_OF_REGION",
+                "message": "Input coordinates out of region"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
