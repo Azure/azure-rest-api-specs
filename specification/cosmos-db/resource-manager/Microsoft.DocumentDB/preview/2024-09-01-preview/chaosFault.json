@@ -70,11 +70,14 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFault/{chaosFault}": {
-      "put": {
+      "post": {
         "operationId": "ChaosFault_EnableDisable",
         "description": "Enable, disable Chaos Fault",
         "x-ms-examples": {
@@ -238,17 +241,21 @@
       "description": "A response object for chaos fault."
     },
     "chaosFaultsResponse": {
-      "type": "Dictionary",
+      "type": "object",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/chaosFaultsResponseProperties"
-        },
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        "value": {
+          "description": "List of Chaos Faults.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/chaosFaultResponseProperties"
           }
-        ]
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
       },
       "description": "A response object for chaos fault."
     },
@@ -260,13 +267,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "A provisioning state of the Chaos Fault."
         }
-      }
-    },
-    "chaosFaultsResponseProperties": {
-      "description": "Properties of List Chaos Faults API response.",
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
       }
     }
   },
