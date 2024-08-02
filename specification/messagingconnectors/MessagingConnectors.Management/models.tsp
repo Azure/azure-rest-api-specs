@@ -174,7 +174,7 @@ model EventHubConfig {
   connectionString: string;
 }
 
-@doc("Source DataFormat Types")
+@doc("Source data format Types")
 union SourceDataFormatTypes {
   @doc("JSON format")
   JSON: "JSON",
@@ -185,10 +185,10 @@ union SourceDataFormatTypes {
   string,
 }
 
-@doc("Source DataFormat Base model")
+@doc("Source data format base model")
 @discriminator("type")
 model SourceDataFormat {
-  @doc("Type of dataformat")
+  @doc("Type of data format")
   type: SourceDataFormatTypes;
 }
 
@@ -200,9 +200,9 @@ union TextCharsets {
   string,
 }
 
-@doc("JSON Source DataFormat Base model")
+@doc("JSON source data format model")
 model JsonSourceDataFormat {
-  @doc("Type of dataformat")
+  @doc("Type of data format")
   type: SourceDataFormatTypes.JSON;
 
   @doc("Charset")
@@ -211,27 +211,27 @@ model JsonSourceDataFormat {
 
 @doc("Delimiter for csv")
 union CsvDelimiters {
-  @doc("Pipe")
+  @doc("Pipe delimiter")
   Pipe: "Pipe",
 
-  @doc("Comma")
+  @doc("Comma delimiter")
   Comma: "Comma",
 
-  @doc("SemiColon")
+  @doc("SemiColon delimiter")
   SemiColon: "SemiColon",
 
-  @doc("Space")
+  @doc("Space delimiter")
   Space: "Space",
 
-  @doc("Tab")
+  @doc("Tab delimiter")
   Tab: "Tab",
 
   string,
 }
 
-@doc("CSV Source DataFormat Base model")
+@doc("CSV Source data format model")
 model CsvSourceDataFormat {
-  @doc("Type of dataformat")
+  @doc("Type of data format")
   type: SourceDataFormatTypes.CSV;
 
   @doc("Contain header or not")
@@ -272,7 +272,7 @@ model ConnectorProperties {
   @doc("connectionString of the EventHub.")
   eventHubConfig: EventHubConfig;
 
-  @doc("DataFormat of the data source")
+  @doc("Data format of the data source")
   sourceDataFormat?: SourceDataFormat;
 
   @doc("State of the MessagingConnector")

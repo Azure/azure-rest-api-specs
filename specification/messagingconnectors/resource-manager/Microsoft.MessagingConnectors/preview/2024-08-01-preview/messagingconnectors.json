@@ -820,7 +820,7 @@
         },
         "sourceDataFormat": {
           "$ref": "#/definitions/SourceDataFormat",
-          "description": "DataFormat of the data source"
+          "description": "Data format of the data source"
         },
         "connectorState": {
           "$ref": "#/definitions/ConnectorState",
@@ -1171,38 +1171,38 @@
           {
             "name": "Pipe",
             "value": "Pipe",
-            "description": "Pipe"
+            "description": "Pipe delimiter"
           },
           {
             "name": "Comma",
             "value": "Comma",
-            "description": "Comma"
+            "description": "Comma delimiter"
           },
           {
             "name": "SemiColon",
             "value": "SemiColon",
-            "description": "SemiColon"
+            "description": "SemiColon delimiter"
           },
           {
             "name": "Space",
             "value": "Space",
-            "description": "Space"
+            "description": "Space delimiter"
           },
           {
             "name": "Tab",
             "value": "Tab",
-            "description": "Tab"
+            "description": "Tab delimiter"
           }
         ]
       }
     },
     "CsvSourceDataFormat": {
       "type": "object",
-      "description": "CSV Source DataFormat Base model",
+      "description": "CSV Source data format model",
       "properties": {
         "type": {
           "type": "string",
-          "description": "Type of dataformat",
+          "description": "Type of data format",
           "enum": [
             "CSV"
           ],
@@ -1462,11 +1462,11 @@
     },
     "JsonSourceDataFormat": {
       "type": "object",
-      "description": "JSON Source DataFormat Base model",
+      "description": "JSON source data format model",
       "properties": {
         "type": {
           "type": "string",
-          "description": "Type of dataformat",
+          "description": "Type of data format",
           "enum": [
             "JSON"
           ],
@@ -1811,11 +1811,11 @@
     },
     "SourceDataFormat": {
       "type": "object",
-      "description": "Source DataFormat Base model",
+      "description": "Source data format base model",
       "properties": {
         "type": {
           "$ref": "#/definitions/SourceDataFormatTypes",
-          "description": "Type of dataformat"
+          "description": "Type of data format"
         }
       },
       "discriminator": "type",
@@ -1825,7 +1825,7 @@
     },
     "SourceDataFormatTypes": {
       "type": "string",
-      "description": "Source DataFormat Types",
+      "description": "Source data format Types",
       "enum": [
         "JSON",
         "CSV"
