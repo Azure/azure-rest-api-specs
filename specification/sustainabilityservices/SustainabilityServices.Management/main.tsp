@@ -12,9 +12,8 @@ using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.SustainabilityServices")
 @service({
-  title: "Microsoft.SustainabilityServices"
+  title: "Microsoft.SustainabilityServices",
 })
-
 @versioned(Microsoft.SustainabilityServices.Versions)
 namespace Microsoft.SustainabilityServices;
 
@@ -25,7 +24,6 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_10_01_preview: "2024-10-01-preview",
 }
-
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -150,13 +148,16 @@ model AzureFrontDoorProfile {
   @doc("Resource Id of AzureFrontDoor Resource")
   @visibility("read")
   id?: string;
-  }
+}
 
 @armResourceOperations(CalculationResource)
-interface Calculations  {
+interface Calculations {
   get is ArmResourceRead<CalculationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CalculationResource>;
-  update is ArmResourcePatchAsync<CalculationResource, CalculationResourceProperties>;
+  update is ArmResourcePatchAsync<
+    CalculationResource,
+    CalculationResourceProperties
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<CalculationResource>;
   listByResourceGroup is ArmResourceListByParent<CalculationResource>;
   listBySubscription is ArmListBySubscription<CalculationResource>;
