@@ -34,6 +34,7 @@ model InformaticaOrganizationResource
   @doc("Name of the Organizations resource")
   @path
   name: string;
+
   ...ManagedServiceIdentityProperty;
 }
 
@@ -49,13 +50,6 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_07_22_preview: "2024-07-22-preview",
-
-  /**
-   * The 2024-05-08 API version.
-   */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_05_08: "2024-05-08",
 }
 
 @armResourceOperations
