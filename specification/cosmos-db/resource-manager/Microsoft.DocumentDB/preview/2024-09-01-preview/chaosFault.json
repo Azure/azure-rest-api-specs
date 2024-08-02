@@ -106,7 +106,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/chaosFaultRequest"
+              "$ref": "#/definitions/chaosFaultResource"
             },
             "description": "A request object to enable/disable the chaos fault."
           }
@@ -115,13 +115,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/chaosFaultRequest"
+              "$ref": "#/definitions/chaosFaultResource"
             }
           },
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/chaosFaultRequest"
+              "$ref": "#/definitions/chaosFaultResource"
             }
           },
           "default": {
@@ -165,7 +165,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/chaosFaultRequest"
+              "$ref": "#/definitions/chaosFaultResource"
             }
           },
           "default": {
@@ -197,7 +197,22 @@
       },
       "readOnly": true
     },
-    "chaosFaultRequest": {
+    "chaosFaultResource": {
+      "description": "A request object to enable/disable the chaos fault",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/chaosFaultProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "chaosFaultProperties": {
       "type": "object",
       "properties": {
         "action": {
@@ -239,7 +254,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/chaosFaultRequest"
+            "$ref": "#/definitions/chaosFaultResource"
           }
         },
         "nextLink": {
