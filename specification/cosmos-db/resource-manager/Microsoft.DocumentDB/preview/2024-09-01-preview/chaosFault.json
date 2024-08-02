@@ -189,7 +189,7 @@
         "Failed",
         "Completed",
         "Succeeded",
-        "Cancelled"
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "status",
@@ -246,7 +246,22 @@
       },
       "description": "A request object to enable/disable the chaos fault."
     },
-    "chaosFaultsResponse": {
+    "chaosFaultSResponse": {
+      "description": "A request object to enable/disable the chaos fault",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/chaosFaultsProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "chaosFaultsProperties": {
       "type": "object",
       "properties": {
         "value": {
