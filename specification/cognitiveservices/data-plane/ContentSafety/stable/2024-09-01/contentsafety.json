@@ -913,6 +913,19 @@
         "protectedMaterialAnalysis"
       ]
     },
+    "DocumentInjectionAnalysisResult": {
+      "type": "object",
+      "description": "The individual analysis result of potential injection attacks in the given documents.",
+      "properties": {
+        "attackDetected": {
+          "type": "boolean",
+          "description": "Whether a potential injection attack is detected or not."
+        }
+      },
+      "required": [
+        "attackDetected"
+      ]
+    },
     "ImageCategoriesAnalysis": {
       "type": "object",
       "description": "Image analysis result.",
@@ -1027,19 +1040,6 @@
         "value"
       ]
     },
-    "PromptInjectionAnalysisResult": {
-      "type": "object",
-      "description": "The individual analysis result of potential direct or indirect injection attacks.",
-      "properties": {
-        "attackDetected": {
-          "type": "boolean",
-          "description": "Whether a potential injection attack is detected or not."
-        }
-      },
-      "required": [
-        "attackDetected"
-      ]
-    },
     "RemoveTextBlocklistItemsOptions": {
       "type": "object",
       "description": "The request to remove blocklistItems from a text blocklist.",
@@ -1068,6 +1068,7 @@
         "documents": {
           "type": "array",
           "description": "The documents needs to be analyzed, which may contain direct or indirect injection attacks.",
+          "maxItems": 5,
           "items": {
             "type": "string"
           }
@@ -1079,14 +1080,14 @@
       "description": "The combined analysis results of potential direct or indirect injection attacks.",
       "properties": {
         "userPromptAnalysis": {
-          "$ref": "#/definitions/PromptInjectionAnalysisResult",
+          "$ref": "#/definitions/UserPromptInjectionAnalysisResult",
           "description": "Direct injection attacks analysis result for the given user prompt."
         },
         "documentsAnalysis": {
           "type": "array",
           "description": "Direct and indirect injection attacks analysis result for the given documents.",
           "items": {
-            "$ref": "#/definitions/PromptInjectionAnalysisResult"
+            "$ref": "#/definitions/DocumentInjectionAnalysisResult"
           },
           "x-ms-identifiers": []
         }
@@ -1258,6 +1259,19 @@
       },
       "required": [
         "detected"
+      ]
+    },
+    "UserPromptInjectionAnalysisResult": {
+      "type": "object",
+      "description": "The individual analysis result of potential injection attacks in the given user prompt.",
+      "properties": {
+        "attackDetected": {
+          "type": "boolean",
+          "description": "Whether a potential injection attack is detected or not."
+        }
+      },
+      "required": [
+        "attackDetected"
       ]
     }
   },

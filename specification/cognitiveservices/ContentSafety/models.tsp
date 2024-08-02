@@ -219,6 +219,7 @@ model ShieldPromptOptions {
   userPrompt?: string;
 
   @doc("The documents needs to be analyzed, which may contain direct or indirect injection attacks.")
+  @maxItems(5)
   documents?: string[];
 }
 
@@ -226,15 +227,22 @@ model ShieldPromptOptions {
 @doc("The combined analysis results of potential direct or indirect injection attacks.")
 model ShieldPromptResult {
   @doc("Direct injection attacks analysis result for the given user prompt.")
-  userPromptAnalysis?: PromptInjectionAnalysisResult;
+  userPromptAnalysis?: UserPromptInjectionAnalysisResult;
 
   @doc("Direct and indirect injection attacks analysis result for the given documents.")
-  documentsAnalysis?: PromptInjectionAnalysisResult[];
+  documentsAnalysis?: DocumentInjectionAnalysisResult[];
 }
 
 @added(ContentSafety.Versions.v2024_09_01)
-@doc("The individual analysis result of potential direct or indirect injection attacks.")
-model PromptInjectionAnalysisResult {
+@doc("The individual analysis result of potential injection attacks in the given user prompt.")
+model UserPromptInjectionAnalysisResult {
+  @doc("Whether a potential injection attack is detected or not.")
+  attackDetected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_09_01)
+@doc("The individual analysis result of potential injection attacks in the given documents.")
+model DocumentInjectionAnalysisResult {
   @doc("Whether a potential injection attack is detected or not.")
   attackDetected: boolean;
 }
