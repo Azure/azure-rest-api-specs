@@ -15,7 +15,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 
-namespace Microsoft.ComputeSchedule;
+namespace Microsoft.ComputeSchedule; 
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @armResourceOperations
