@@ -29,6 +29,13 @@ openapi-type: arm
 tag: package-preview-2023-11
 ```
 
+### Tag: package-2024-08-01-preview
+
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
+```yaml $(tag) == 'package-2024-08-01-preview'
+input-file:
+  - Microsoft.BareMetalInfrastructure/preview/2024-08-01-preview/baremetalinfrastructure.json
+```
 
 ### Tag: package-preview-2023-11
 
@@ -76,6 +83,21 @@ input-file:
 
 ---
 
+## Suppression
+
+```yaml
+directive:
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    from: baremetalinfrastructure.json
+    reason: 'This property is already a part of our API, cannot remove it'
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where:
+      - $.definitions.Resource.properties.name
+      - $.definitions.Resource.properties.id
+    from: types.json
+    reason: 'This property is already a part of our API, cannot remove it'
+```
+
 # Code Generation
 
 ## Swagger to SDK
@@ -114,3 +136,20 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Suppress linting rules
+
+These set of linting rules aren't applicable to the AzureLargeInstance RP so suppressing them here.
+
+``` yaml
+suppressions:
+  - code: PutResponseCodes
+    from: baremetalinfrastructure.json
+    reason: The PUT method only creates resource for the RP. The operation to update an existing instance is unsupported. This is because instances that are 'created' are simply assigned to customers, and have already been provisioned. ARM operations to change the provisioning status of a resource are unsupported.
+  - code: DeleteResponseCodes
+    from: baremetalinfrastructure.json
+    reason: The DELETE method either removes an instance from the DB or returns an error. Since only one successful outcome is possible, it doesn't make sense for our RP to support both 200 and 204.
+  - code: DeleteOperationResponses
+    from: baremetalinfrastructure.json
+    reason: Customers deleting resources don't request any new information from the operation besides its result. Therefore it makes sense to return no content when the operation succeeds.
+```
