@@ -340,7 +340,7 @@ model ConsentInput {
   locale: localeName;
 
   @doc("Audio file url.")
-  audioUrl: url;
+  audioFileUrl: url;
 
   @doc("Voice talent name.")
   voiceTalentName: string;
