@@ -37,35 +37,28 @@ model CalculationResource is TrackedResource<CalculationResourceProperties> {
   @path
   name: string;
 
-  ...ManagedServiceIdentity;
-  ...ResourceSku;
+  ...ManagedServiceIdentityProperty;
+  ...ResourceSkuProperty;
 }
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
-
-  @doc("Initial provisioning in progress")
-  Provisioning,
-
-  @doc("Update in progress")
-  Updating,
-
-  @doc("Deletion in progress")
-  Deleting,
-
-  @doc("Change accepted for processing")
-  Accepted,
-
-  @doc("Resource has been created")
-  Succeeded,
-
-  @doc("Resource has been failed")
-  Failed,
-
-  @doc("Resource has been canceled")
-  Canceled,
+union ProvisioningState {
+  string,
+  /** Resource has been created. */
+  Succeeded:"Succeeded",
+  /** Resource creation failed. */
+  Failed:"Failed",
+  /** Resource creation was canceled. */
+  Canceled:"Canceled",
+  /** The resource is being provisioned */
+  Provisioning:"Provisioning",
+  /** The resource is updating */
+  Updating:"Updating",
+  /** The resource is being deleted */
+  Deleting:"Deleting",
+  /** The resource create request has been accepted */
+  Accepted:"Accepted"
 }
 
 @doc("Details of the SustainabilityServices Calculations.")
