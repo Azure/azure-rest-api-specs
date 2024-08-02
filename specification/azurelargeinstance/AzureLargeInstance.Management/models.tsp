@@ -459,5 +459,5 @@ model StorageBillingProperties {
   billingMode?: string;
 
   @doc("the SKU type that is provisioned")
-  sku?: string;
+  azureLargeStorageInstanceSize?: string;
 }
