@@ -13,26 +13,26 @@ options:
     examples-directory: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-python":    
-    package-dir: "azure-search"
-    package-name: "{package-dir}"  
+    package-dir: "azure-search-documents"
+    package-name: "{package-dir}"
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Search"
+    package-dir: "Azure.Search.Documents"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "azure-search-rest"
+    package-dir: "azure-search-documents-rest"
     generateMetadata: true
     generateTest: true
     flavor: azure
     packageDetails:
-      name: "@azure-rest/azure-search-rest"
+      name: "@azure-rest/azure-search-documents-rest"
       description: "Azure.Search Service"
   "@azure-tools/typespec-java":
-    package-dir: "azure-search"
-    namespace: com.azure.search
+    package-dir: "azure-search-documents"
+    namespace: com.azure.search.documents
     flavor: azure
 linter:
   extends:
