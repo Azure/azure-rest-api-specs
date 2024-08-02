@@ -65,7 +65,7 @@ enum ProvisioningState {
   Failed,
 
   @doc("Resource has been canceled")
-  Canceled
+  Canceled,
 }
 
 @doc("Details of the SustainabilityServices Calculations.")
