@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -58,6 +57,15 @@ enum ProvisioningState {
 
   @doc("Change accepted for processing")
   Accepted,
+
+  @doc("Resource has been created")
+  Succeeded,
+
+  @doc("Resource has been failed")
+  Failed,
+
+  @doc("Resource has been canceled")
+  Canceled
 }
 
 @doc("Details of the SustainabilityServices Calculations.")
