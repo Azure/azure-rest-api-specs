@@ -34,6 +34,7 @@ model InformaticaOrganizationResource
   @doc("Name of the Organizations resource")
   @path
   name: string;
+  ...ManagedServiceIdentityProperty;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
