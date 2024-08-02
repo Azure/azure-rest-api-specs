@@ -79,7 +79,7 @@ model CalculationResourceProperties {
 
   @doc("DDoS Protection Plan")
   @visibility("read", "create")
-  ddosplan?: string;
+  ddosPlan?: string;
 
   @visibility("read")
   @doc("Service Url")
