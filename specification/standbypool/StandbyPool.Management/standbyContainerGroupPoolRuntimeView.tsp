@@ -59,5 +59,5 @@ model ContainerGroupInstanceCountSummary {
 @armResourceOperations
 interface StandbyContainerGroupPoolRuntimeViews {
   get is ArmResourceRead<StandbyContainerGroupPoolRuntimeViewResource>;
-  listByStandbyPool is ArmResourceListByParent<StandbyContainerGroupPoolRuntimeViewResource>;
+  listByStandbyContainerGroupPoolResource is ArmResourceListByParent<StandbyContainerGroupPoolRuntimeViewResource>;
 }
