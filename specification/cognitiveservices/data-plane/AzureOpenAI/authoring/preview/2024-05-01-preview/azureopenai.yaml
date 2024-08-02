@@ -108,7 +108,7 @@ paths:
       x-ms-examples:
         Upload a file.:
           $ref: ./examples/upload_file.json
-  '/files/{file-id}':
+  /files/{file-id}:
     get:
       tags:
         - 'Files:'
@@ -161,7 +161,7 @@ paths:
       x-ms-examples:
         Deleting a file.:
           $ref: ./examples/delete_file.json
-  '/files/{file-id}/content':
+  /files/{file-id}/content:
     get:
       tags:
         - 'Files:'
@@ -295,7 +295,7 @@ paths:
       x-ms-examples:
         Creating a fine tuning job.:
           $ref: ./examples/post_finetuning_job.json
-  '/fine_tuning/jobs/{fine-tuning-job-id}':
+  /fine_tuning/jobs/{fine-tuning-job-id}:
     get:
       tags:
         - 'Fine-tuning:'
@@ -346,7 +346,7 @@ paths:
       x-ms-examples:
         Deleting a fine tuning job.:
           $ref: ./examples/delete_finetuning_job.json
-  '/fine_tuning/jobs/{fine-tuning-job-id}/events':
+  /fine_tuning/jobs/{fine-tuning-job-id}/events:
     get:
       tags:
         - 'Fine-tuning:'
@@ -383,7 +383,7 @@ paths:
       x-ms-examples:
         Getting events of a fine tuning job.:
           $ref: ./examples/get_finetuning_job_events.json
-  '/fine_tuning/jobs/{fine-tuning-job-id}/checkpoints':
+  /fine_tuning/jobs/{fine-tuning-job-id}/checkpoints:
     get:
       tags:
         - 'Fine-tuning:'
@@ -422,7 +422,7 @@ paths:
       x-ms-examples:
         Getting checkpoints of a fine tuning job.:
           $ref: ./examples/get_finetuning_job_checkpoints.json
-  '/fine_tuning/jobs/{fine-tuning-job-id}/cancel':
+  /fine_tuning/jobs/{fine-tuning-job-id}/cancel:
     post:
       tags:
         - 'Fine-tuning:'
@@ -473,7 +473,7 @@ paths:
       x-ms-examples:
         Getting all models owned by account.:
           $ref: ./examples/get_models.json
-  '/models/{model-id}':
+  /models/{model-id}:
     get:
       tags:
         - 'Models:'
@@ -530,7 +530,7 @@ paths:
       x-ms-examples:
         List all ingestion jobs:
           $ref: ./examples/list_ingestion_jobs.json
-  '/ingestion/jobs/{job-id}':
+  /ingestion/jobs/{job-id}:
     put:
       tags:
         - 'Ingestion:'
@@ -603,7 +603,7 @@ paths:
       x-ms-examples:
         Get ingestion job:
           $ref: ./examples/get_ingestion_job.json
-  '/ingestion/jobs/{job-id}/runs':
+  /ingestion/jobs/{job-id}/runs:
     get:
       tags:
         - 'Ingestion:'
@@ -636,7 +636,7 @@ paths:
       x-ms-examples:
         List ingestion job runs:
           $ref: ./examples/list_ingestion_job_runs.json
-  '/ingestion/jobs/{job-id}/runs/{run-id}':
+  /ingestion/jobs/{job-id}/runs/{run-id}:
     get:
       tags:
         - 'Ingestion:'
@@ -2025,7 +2025,7 @@ parameters:
 security:
   - ApiKeyAuth: []
   - OAuth2Auth:
-      - 'https://cognitiveservices.azure.com/.default'
+      - https://cognitiveservices.azure.com/.default
 securityDefinitions:
   ApiKeyAuth:
     description: API key authentication
@@ -2036,9 +2036,9 @@ securityDefinitions:
     description: OAuth2 authentication
     type: oauth2
     flow: implicit
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize'
+    authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
     scopes:
-      'https://cognitiveservices.azure.com/.default': ''
+      https://cognitiveservices.azure.com/.default: ''
 schemes:
   - https
 x-ms-parameterized-host:
