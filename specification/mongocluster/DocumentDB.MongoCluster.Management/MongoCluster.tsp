@@ -224,6 +224,7 @@ model ConnectionString {
 }
 
 /** The status of the Mongo cluster resource. */
+@clientName("MongoClusterStatus", "go")
 union MongoClusterStatus {
   string,
 
