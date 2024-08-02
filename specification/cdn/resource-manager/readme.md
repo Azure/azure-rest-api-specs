@@ -41,6 +41,7 @@ input-file:
   - Microsoft.Cdn/preview/2024-06-01-preview/afdx.json
   - Microsoft.Cdn/preview/2024-06-01-preview/cdn.json
   - Microsoft.Cdn/preview/2024-06-01-preview/cdnwebapplicationfirewall.json 
+  - Microsoft.Cdn/preview/2024-06-01-preview/frontdoorwebapplicationfirewall.json 
 ```
 
 ### Tag: package-preview-2024-05

@@ -33,6 +33,7 @@
       }
     }
   },
+  "paths": {},
   "definitions": {
     "WebApplicationFirewallPolicyProperties": {
       "description": "Defines web application firewall policy properties.",
@@ -500,31 +501,6 @@
             "$ref": "#/definitions/ManagedRuleExclusion"
           },
           "description": "Describes the exclusions that are applied to this specific rule."
-        }
-      }
-    },
-    "ManagedRuleDefinition": {
-      "description": "Describes a managed rule definition.",
-      "properties": {
-        "ruleId": {
-          "description": "Identifier for the managed rule.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "defaultState": {
-          "description": "Describes the default state for the managed rule.",
-          "readOnly": true,
-          "$ref": "#/definitions/ManagedRuleEnabledState"
-        },
-        "defaultAction": {
-          "description": "Describes the default action to be applied when the managed rule matches.",
-          "readOnly": true,
-          "$ref": "#/definitions/ActionType"
-        },
-        "description": {
-          "description": "Describes the functionality of the managed rule.",
-          "readOnly": true,
-          "type": "string"
         }
       }
     },
