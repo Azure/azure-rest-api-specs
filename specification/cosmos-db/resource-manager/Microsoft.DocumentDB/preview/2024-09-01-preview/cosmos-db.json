@@ -7250,6 +7250,48 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFault": {
+      "get": {
+        "operationId": "ChaosFault_List",
+        "description": "list Chaos Faults",
+        "x-ms-examples": {
+          "ChaosFaultList": {
+            "$ref": "./examples/ChaosFaultList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/chaosFaultsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "null"
+        }
+      }
     }
   },
   "definitions": {
@@ -12158,6 +12200,64 @@
         "name": "DefaultPriorityLevel",
         "modelAsString": true
       }
+    },
+    "chaosFaultResource": {
+      "description": "A request object to enable/disable the chaos fault",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/chaosFaultProperties"
+        }
+      }
+    },
+    "chaosFaultProperties": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "description": "Indicates whether what action to take for the Chaos Fault.",
+          "x-ms-enum": {
+            "name": "SupportedActions",
+            "modelAsString": false
+          }
+        },
+        "region": {
+          "type": "string",
+          "description": "Region of the account where the Chaos Fault is to be enabled/disabled."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database name."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Container name."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "A provisioning state of the Chaos Fault."
+        }
+      },
+      "description": "A request object to enable/disable the chaos fault."
+    },
+    "chaosFaultsResponse": {
+      "description": "A request object to enable/disable the chaos fault",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Chaos Faults.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/chaosFaultResource"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -12350,6 +12450,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB view name."
+    },
+    "chaosFault": {
+      "name": "chaosFault",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the ChaosFault.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
