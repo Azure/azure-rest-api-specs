@@ -1200,16 +1200,6 @@
       "type": "object",
       "description": "CSV Source data format model",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of data format",
-          "enum": [
-            "CSV"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "withHeader": {
           "type": "boolean",
           "description": "Contain header or not"
@@ -1224,11 +1214,16 @@
         }
       },
       "required": [
-        "type",
         "withHeader",
         "delimiter",
         "textCharset"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceDataFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "CSV"
     },
     "DataPreviewInstance": {
       "type": "object",
@@ -1464,25 +1459,20 @@
       "type": "object",
       "description": "JSON source data format model",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of data format",
-          "enum": [
-            "JSON"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
         "textCharset": {
           "$ref": "#/definitions/TextCharsets",
           "description": "Charset"
         }
       },
       "required": [
-        "type",
         "textCharset"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceDataFormat"
+        }
+      ],
+      "x-ms-discriminator-value": "JSON"
     },
     "KinesisSourceConnectorProperties": {
       "type": "object",

@@ -201,7 +201,7 @@ union TextCharsets {
 }
 
 @doc("JSON source data format model")
-model JsonSourceDataFormat {
+model JsonSourceDataFormat extends SourceDataFormat  {
   @doc("Type of data format")
   type: SourceDataFormatTypes.JSON;
 
@@ -230,7 +230,7 @@ union CsvDelimiters {
 }
 
 @doc("CSV Source data format model")
-model CsvSourceDataFormat {
+model CsvSourceDataFormat extends SourceDataFormat {
   @doc("Type of data format")
   type: SourceDataFormatTypes.CSV;
 
