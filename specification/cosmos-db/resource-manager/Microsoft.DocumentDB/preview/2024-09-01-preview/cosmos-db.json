@@ -7278,7 +7278,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/chaosFaultsResponse"
+              "$ref": "#/definitions/chaosFaultListResponse"
             }
           },
           "default": {
@@ -7289,7 +7289,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "null"
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -12346,7 +12346,7 @@
       },
       "description": "A request object to enable/disable the chaos fault."
     },
-    "chaosFaultsResponse": {
+    "chaosFaultListResponse": {
       "description": "A request object to enable/disable the chaos fault",
       "type": "object",
       "properties": {
@@ -12357,6 +12357,10 @@
           "items": {
             "$ref": "#/definitions/chaosFaultResource"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
         }
       }
     }
