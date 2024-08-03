@@ -205,12 +205,7 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/chaosFaultProperties"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "chaosFaultProperties": {
       "type": "object",
@@ -263,31 +258,7 @@
           "type": "string",
           "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "chaosFaultsProperties": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of Chaos Faults.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/chaosFaultResource"
-          }
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "description": "A response object for chaos fault."
+      }
     }
   },
   "parameters": {
