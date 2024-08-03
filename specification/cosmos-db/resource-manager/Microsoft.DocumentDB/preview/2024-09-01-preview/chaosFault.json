@@ -205,7 +205,12 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/chaosFaultProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "chaosFaultProperties": {
       "type": "object",
