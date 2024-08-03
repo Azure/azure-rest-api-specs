@@ -7292,7 +7292,121 @@
           "nextLinkName": "null"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFault/{chaosFault}": {
+      "put": {
+        "operationId": "ChaosFault_EnableDisable",
+        "description": "Enable, disable Chaos Fault",
+        "x-ms-examples": {
+          "ChaosFaultEnableDisable": {
+            "$ref": "./examples/ChaosFaultEnableDisable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/chaosFault"
+          },
+          {
+            "name": "chaosFaultRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/chaosFaultResource"
+            },
+            "description": "A request object to enable/disable the chaos fault."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/chaosFaultResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "value": {
+                "description": "List of Chaos Faults.",
+                "readOnly": true,
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/chaosFaultResource"
+                }
+              },
+              "nextLink": {
+                "description": "The link used to get the next page of results.",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "operationId": "ChaosFault_Get",
+        "description": "Get Chaos Fault",
+        "x-ms-examples": {
+          "ChaosFaultGet": {
+            "$ref": "./examples/ChaosFaultGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/chaosFault"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/chaosFaultResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
+
   },
   "definitions": {
     "ClientEncryptionKeysListResult": {
