@@ -201,7 +201,7 @@ union TextCharsets {
 }
 
 @doc("JSON source data format model")
-model JsonSourceDataFormat extends SourceDataFormat  {
+model JsonSourceDataFormat extends SourceDataFormat {
   @doc("Type of data format")
   type: SourceDataFormatTypes.JSON;
 
