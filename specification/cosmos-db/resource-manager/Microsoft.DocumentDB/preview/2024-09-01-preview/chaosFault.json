@@ -250,9 +250,18 @@
       "description": "A request object to enable/disable the chaos fault",
       "type": "object",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/chaosFaultsProperties"
+        "value": {
+          "description": "List of Chaos Faults.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/chaosFaultResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "allOf": [
