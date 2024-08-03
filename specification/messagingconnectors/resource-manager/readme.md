@@ -38,6 +38,18 @@ input-file:
 
 ---
 
+## Suppression
+
+``` yaml
+input-file:
+  - Microsoft.MessagingConnectors/preview/2024-08-01-preview/messagingconnectors.json
+
+suppressions:
+  - code: BodyTopLevelProperties
+    from: messagingconnectors.json
+    reason: Issue https://github.com/Azure/azure-openapi-validator/issues/722. The BodyTopLevelProperties check failing.
+ ```
+
 # Code Generation
 
 ## Swagger to SDK
