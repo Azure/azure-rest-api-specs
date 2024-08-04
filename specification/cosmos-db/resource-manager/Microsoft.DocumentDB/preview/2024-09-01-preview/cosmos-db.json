@@ -12307,26 +12307,16 @@
       "description": "A request object to enable/disable the chaos fault",
       "type": "object",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unique resource identifier of the database account."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the database account."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of Azure resource."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/chaosFaultProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMProxyResource"
+        }
+      ]
     },
     "chaosFaultProperties": {
       "type": "object",
@@ -12360,7 +12350,6 @@
           "description": "A provisioning state of the Chaos Fault."
         }
       },
-      "x-ms-azure-resource": true,
       "description": "A request object to enable/disable the chaos fault."
     },
     "chaosFaultListResponse": {
@@ -12379,7 +12368,12 @@
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMProxyResource"
+        }
+      ]
     }
   },
   "parameters": {
