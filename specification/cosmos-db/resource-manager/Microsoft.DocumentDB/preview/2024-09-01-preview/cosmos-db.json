@@ -7378,12 +7378,6 @@
             "schema": {
               "$ref": "#/definitions/chaosFaultResource"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
           }
         }
       }
@@ -12347,18 +12341,18 @@
       "description": "A request object to enable/disable the chaos fault."
     },
     "chaosFaultListResponse": {
-      "description": "A request object to enable/disable the chaos fault",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of Chaos Faults.",
           "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/chaosFaultResource"
-          }
+          },
+          "description": "List of Chaos Faults."
         }
-      }
+      },
+      "description": "Chaos Fault List Response."
     }
   },
   "parameters": {
