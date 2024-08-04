@@ -88,4 +88,7 @@ suppressions:
     reason: Operations API for edge RP is already implemented in a common folder "edge" under the RP
 
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: Adding provisioning state will break polymorphism
+    reason: Adding provisioning state will break polymorphism but we want polymorphism
+
+  - code: BodyTopLevelProperties
+    reason: This lintdiff error showing is bug, same issue raised on https://github.com/Azure/azure-openapi-validator/issues/722

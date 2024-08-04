@@ -86,3 +86,6 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 suppressions:
   - code: OperationsAPIImplementation
     reason: Operations API for edge RP is already implemented in a common folder "edge" under the RP
+
+  - code: BodyTopLevelProperties
+    reason: This lintdiff error showing is bug, same issue raised on https://github.com/Azure/azure-openapi-validator/issues/722
