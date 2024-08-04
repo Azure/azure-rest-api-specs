@@ -590,137 +590,136 @@
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        }
-      },
-      "tags": {
-        "type": "object",
-        "description": "Resource tags.",
-        "additionalProperties": {
-          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
-    }
-  },
-  "CalculationResourceUpdateProperties": {
-    "type": "object",
-    "description": "The updatable properties of the CalculationResource.",
-    "properties": {
-      "version": {
-        "type": "string",
-        "description": "Calculation Resource Version.",
-        "x-ms-mutability": [
-          "read",
-          "update",
-          "create"
+    },
+    "CalculationResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the CalculationResource.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Calculation Resource Version.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "MonitoringProfile": {
+      "type": "object",
+      "description": "The properties related to Monitoring Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Application Insights Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      }
+    },
+    "RedisProfile": {
+      "type": "object",
+      "description": "The properties related to Azure Redis Cache Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Azure Redis Cache Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageProfile": {
+      "type": "object",
+      "description": "The properties related to Storage Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Storage Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Supported API versions for the Microsoft.SustainabilityServices resource provider.",
+      "enum": [
+        "2024-10-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_10_01_preview",
+            "value": "2024-10-01-preview",
+            "description": "The 2024-10-01-preview version."
+          }
         ]
       }
     }
   },
-  "MonitoringProfile": {
-    "type": "object",
-    "description": "The properties related to Monitoring Resource",
-    "properties": {
-      "id": {
-        "type": "string",
-        "description": "Resource Id of Application Insights Resource",
-        "readOnly": true
-      }
-    }
-  },
-  "ProvisioningState": {
-    "type": "string",
-    "description": "The status of the current operation.",
-    "enum": [
-      "Succeeded",
-      "Failed",
-      "Canceled",
-      "Provisioning",
-      "Updating",
-      "Deleting",
-      "Accepted"
-    ],
-    "x-ms-enum": {
-      "name": "ProvisioningState",
-      "modelAsString": true,
-      "values": [
-        {
-          "name": "Succeeded",
-          "value": "Succeeded",
-          "description": "Resource has been created."
-        },
-        {
-          "name": "Failed",
-          "value": "Failed",
-          "description": "Resource creation failed."
-        },
-        {
-          "name": "Canceled",
-          "value": "Canceled",
-          "description": "Resource creation was canceled."
-        },
-        {
-          "name": "Provisioning",
-          "value": "Provisioning",
-          "description": "The resource is being provisioned"
-        },
-        {
-          "name": "Updating",
-          "value": "Updating",
-          "description": "The resource is updating"
-        },
-        {
-          "name": "Deleting",
-          "value": "Deleting",
-          "description": "The resource is being deleted"
-        },
-        {
-          "name": "Accepted",
-          "value": "Accepted",
-          "description": "The resource create request has been accepted"
-        }
-      ]
-    }
-  },
-  "RedisProfile": {
-    "type": "object",
-    "description": "The properties related to Azure Redis Cache Resource",
-    "properties": {
-      "id": {
-        "type": "string",
-        "description": "Resource Id of Azure Redis Cache Resource",
-        "readOnly": true
-      }
-    }
-  },
-  "StorageProfile": {
-    "type": "object",
-    "description": "The properties related to Storage Resource",
-    "properties": {
-      "id": {
-        "type": "string",
-        "description": "Resource Id of Storage Resource",
-        "readOnly": true
-      }
-    }
-  },
-  "Versions": {
-    "type": "string",
-    "description": "Supported API versions for the Microsoft.SustainabilityServices resource provider.",
-    "enum": [
-      "2024-10-01-preview"
-    ],
-    "x-ms-enum": {
-      "name": "Versions",
-      "modelAsString": true,
-      "values": [
-        {
-          "name": "v2024_10_01_preview",
-          "value": "2024-10-01-preview",
-          "description": "The 2024-10-01-preview version."
-        }
-      ]
-    }
-  }
-},
   "parameters": {}
 }
