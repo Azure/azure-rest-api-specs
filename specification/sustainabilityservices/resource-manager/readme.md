@@ -37,6 +37,9 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
   - Microsoft.SustainabilityServices/preview/2024-10-01-preview/openapi.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    reason: Suppress PATCH rule as the required properties are defined during typespec generation. Also, empty object can still be passed, properties are not mandatory for the update schema.
 ```
 
 ---
