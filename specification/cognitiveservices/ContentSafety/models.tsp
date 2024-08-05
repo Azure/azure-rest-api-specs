@@ -295,6 +295,7 @@ union GroundednessTask {
   QnA: "QnA",
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The options for QnA task.")
 model QnAOptions {
@@ -303,6 +304,7 @@ model QnAOptions {
   query: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The LLM resource type supported in Text Groundedness analysis.")
 union LLMResourceType {
@@ -312,6 +314,7 @@ union LLMResourceType {
   AzureOpenAI: "AzureOpenAI",
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("Details of the given LLM resource.")
 model LLMResource {
@@ -491,9 +494,17 @@ model AutoReviewerLabelDetails {
 @doc("The possible status of an Auto Reviewer operation.")
 union AutoReviewerOperationStatus {
   string,
+  
+  @doc("Auto Reviewer operation status - NotStarted")
   "NotStarted",
+  
+  @doc("Auto Reviewer operation status - Running")
   "Running",
+  
+  @doc("Auto Reviewer operation status - Succeeded")
   "Succeeded",
+  
+  @doc("Auto Reviewer operation status - Failed")
   "Failed",
 }
 
@@ -550,10 +561,20 @@ model AutoReviewerOperationDetail {
 @doc("The possible status of a content safety incident operation.")
 union IncidentOperationStatus {
   string,
+
+  @doc("Content Safety Incident operation status - NotStarted")
   "NotStarted",
+
+  @doc("Content Safety Incident operation status - Running")
   "Running",
+
+  @doc("Content Safety Incident operation status - Succeeded")
   "Succeeded",
+
+  @doc("Content Safety Incident operation status - Failed")
   "Failed",
+
+  @doc("Content Safety Incident operation status - Canceled")
   "Canceled",
 }
 
