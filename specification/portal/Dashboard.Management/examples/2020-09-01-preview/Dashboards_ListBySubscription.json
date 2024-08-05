@@ -1,6 +1,5 @@
 {
   "parameters": {
-    "resourceGroupName": "testRG",
     "api-version": "2020-09-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
@@ -9,6 +8,10 @@
       "body": {
         "value": [
           {
+            "name": "testDashboard",
+            "type": "Microsoft.Portal/dashboards",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testDashboard",
+            "location": "eastus",
             "properties": {
               "lenses": [
                 {
@@ -16,18 +19,18 @@
                   "parts": [
                     {
                       "position": {
-                        "x": 1,
-                        "y": 2,
+                        "colSpan": 3,
                         "rowSpan": 4,
-                        "colSpan": 3
+                        "x": 1,
+                        "y": 2
                       }
                     },
                     {
                       "position": {
-                        "x": 5,
-                        "y": 5,
+                        "colSpan": 6,
                         "rowSpan": 6,
-                        "colSpan": 6
+                        "x": 5,
+                        "y": 5
                       }
                     }
                   ]
@@ -39,23 +42,23 @@
               ],
               "metadata": {
                 "metadata": {
-                  "X": 4,
-                  "Y": 3,
+                  "ColSpan": 2,
                   "RowSpan": 1,
-                  "ColSpan": 2
+                  "X": 4,
+                  "Y": 3
                 }
               }
             },
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testDashboard",
-            "name": "testDashboard",
-            "type": "Microsoft.Portal/dashboards",
-            "location": "eastus",
             "tags": {
               "aKey": "aValue",
               "anotherKey": "anotherValue"
             }
           },
           {
+            "name": "testDashboard2",
+            "type": "Microsoft.Portal/dashboards",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testDashboard2",
+            "location": "eastus",
             "properties": {
               "lenses": [
                 {
@@ -63,18 +66,18 @@
                   "parts": [
                     {
                       "position": {
-                        "x": 1,
-                        "y": 2,
+                        "colSpan": 3,
                         "rowSpan": 4,
-                        "colSpan": 3
+                        "x": 1,
+                        "y": 2
                       }
                     },
                     {
                       "position": {
-                        "x": 5,
-                        "y": 5,
+                        "colSpan": 6,
                         "rowSpan": 6,
-                        "colSpan": 6
+                        "x": 5,
+                        "y": 5
                       }
                     }
                   ]
@@ -86,17 +89,13 @@
               ],
               "metadata": {
                 "metadata": {
-                  "X": 4,
-                  "Y": 3,
+                  "ColSpan": 2,
                   "RowSpan": 1,
-                  "ColSpan": 2
+                  "X": 4,
+                  "Y": 3
                 }
               }
             },
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Portal/dashboards/testDashboard2",
-            "name": "testDashboard2",
-            "type": "Microsoft.Portal/dashboards",
-            "location": "eastus",
             "tags": {
               "aKey": "aValue",
               "anotherKey": "anotherValue"
@@ -105,5 +104,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "Dashboards_ListBySubscription",
+  "title": "List all custom resource providers on the subscription"
 }
