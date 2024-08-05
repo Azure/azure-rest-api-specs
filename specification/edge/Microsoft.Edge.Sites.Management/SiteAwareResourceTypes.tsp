@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -18,8 +17,7 @@ namespace Microsoft.Edge;
 @singleton("default")
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
-model SiteAwareResourceType
-  is Azure.ResourceManager.ProxyResource<SiteAwareResourceTypeProperties> {
+model SiteAwareResourceType is ProxyResource<SiteAwareResourceTypeProperties> {
   @doc("Name of the resource")
   @path
   @key("siteAwareResourceType")

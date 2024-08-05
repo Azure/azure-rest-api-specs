@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -15,8 +14,7 @@ namespace Microsoft.Edge;
 /**
  * A Microsoft.Edge connectivity status resource
  */
-model ConnectivityStatus
-  is Azure.ResourceManager.ExtensionResource<ConnectivityStatusProperties> {
+model ConnectivityStatus is ExtensionResource<ConnectivityStatusProperties> {
   /**
    * Name of ConnectivityStatus
    */
@@ -40,7 +38,7 @@ interface ConnectivityStatuses {
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ConnectivityStatus,
-    BaseParameters<ConnectivityStatus>,
+    Azure.ResourceManager.Foundations.BaseParameters<ConnectivityStatus>,
     ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 

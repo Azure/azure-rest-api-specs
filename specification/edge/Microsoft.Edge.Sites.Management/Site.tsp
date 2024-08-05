@@ -6,14 +6,13 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Edge;
 
 @doc("Site as ARM Resource")
-model Site is Azure.ResourceManager.ProxyResource<SiteProperties> {
+model Site is ProxyResource<SiteProperties> {
   @doc("Name of Site resource")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
   @path
@@ -32,21 +31,22 @@ interface Sites {
   listByResourceGroup is ArmResourceListByParent<Site>;
 }
 
+alias SubscriptionParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of subscription"
 interface SitesBySubscription {
   list is ArmListBySubscription<Site>;
-  get is ArmResourceRead<Site, BaseParameters = SubscriptionBaseParameters>;
+  get is ArmResourceRead<Site, BaseParameters = SubscriptionParameters>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Site,
-    BaseParameters = SubscriptionBaseParameters
+    BaseParameters = SubscriptionParameters
   >;
   update is ArmCustomPatchSync<
     Site,
     SiteUpdate,
-    BaseParameters = SubscriptionBaseParameters
+    BaseParameters = SubscriptionParameters
   >;
   delete is ArmResourceDeleteSync<
     Site,
-    BaseParameters = SubscriptionBaseParameters
+    BaseParameters = SubscriptionParameters
   >;
 }

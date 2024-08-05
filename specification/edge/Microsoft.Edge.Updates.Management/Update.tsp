@@ -6,7 +6,6 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -14,7 +13,7 @@ namespace Microsoft.Edge;
 /**
  * An Edge Aggregation resource for update
  */
-model Update is Azure.ResourceManager.ExtensionResource<UpdateProperties> {
+model Update is ExtensionResource<UpdateProperties> {
   /**
    * Name of update
    */
@@ -38,7 +37,7 @@ interface Updates {
    */
   createOrModify is ArmResourceCreateOrReplaceAsync<
     Update,
-    BaseParameters<Update>,
+    Azure.ResourceManager.Foundations.BaseParameters<Update>,
     Azure.Core.Foundations.RetryAfterHeader & ArmAsyncOperationHeader
   >;
 
