@@ -981,3 +981,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(SentimentDocumentResultWithDetectedLanguage, "SentimentTextResult", "csharp");
 @@clientName(ExtractedSummaryDocumentResultWithDetectedLanguage, "ExtractedSummaryTextResult", "csharp");
 @@clientName(AbstractiveSummaryDocumentResultWithDetectedLanguage, "AbstractiveSummaryTextResult", "csharp");
+@@clientName(CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage, "CustomHealthcareTextResult", "csharp");
+@@clientName(CustomLabelClassificationResultWithDocumentDetectedLanguage, "CustomLabelClassificationTextResult", "csharp");
+@@clientName(HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage, "HealthcareTextResult", "csharp");
+@@clientName(CustomEntitiesResultWithDocumentDetectedLanguage, "CustomEntitiesTextResult", "csharp");
