@@ -18,24 +18,24 @@ namespace Microsoft.ComputeSchedule;
 @doc("The status of the resources")
 model ResourceResultSummary {
   @doc("The error code for those resources. In case of success, code is populated with Success.")
-  code : string;
+  code: string;
 
   @doc("The number of resources that the code applies to.")
-  count : int32;
+  count: int32;
 
   @doc("The error details for the resources. Not populated on success cases.")
-  errorDetails? : Azure.Core.Foundations.Error;
+  errorDetails?: Azure.Core.Foundations.Error;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The summarized provisioning result of an occurrence")
 model OccurrenceResultSummary {
   @doc("The total number of resources that the occurrence was supposed to act on.")
-  total : int32;
+  total: int32;
 
   @doc("The summarized status of the resources.")
   @OpenAPI.extension("x-ms-identifiers", ["code"])
-  statuses : ResourceResultSummary[];
+  statuses: ResourceResultSummary[];
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
@@ -56,35 +56,36 @@ model OccurrenceProperties {
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @parentResource(AutoAction)
-model Occurrence is ProxyResource<OccurrenceProperties>{
+model Occurrence is ProxyResource<OccurrenceProperties> {
   ...ResourceNameParameter<
-  Occurrence,
-  KeyName="occurrenceId",
-  NamePattern="[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}">
+    Occurrence,
+    KeyName = "occurrenceId",
+    NamePattern = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+  >;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 model OccurrenceResource is AutoActionResource {
   @doc("The time the occurrence is scheduled for the resource.")
   @visibility("read")
-  scheduledTime : utcDateTime;
+  scheduledTime: utcDateTime;
 
   @doc("The current state of the resource")
   @visibility("read")
-  provisioningState? : ResourceProvisioningState;
+  provisioningState?: ResourceProvisioningState;
 
   @doc("Error details for the resource. Only populated if resource is in failed state.")
   @visibility("read")
-  errorDetails? : Azure.Core.Foundations.Error;
+  errorDetails?: Azure.Core.Foundations.Error;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Request to ask for a delay in an occurrence")
 model DelayRequest {
   @doc("The amount of delay the occurrence should have")
-  delay : duration;
+  delay: duration;
 
   @doc("The resources that should be delayed. If empty, the delay will apply to the whole occurrence.")
   @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
-  resources : OccurrenceResource[];
+  resources: OccurrenceResource[];
 }

@@ -44,7 +44,6 @@ union ActionType {
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("Representation of the possible selection of days in a week in a gregorian calendar for auto actions")
 union WeekDay {
-
   @doc("Monday weekday.")
   Monday: "Monday",
 
@@ -67,9 +66,9 @@ union WeekDay {
   Sunday: "Sunday",
 
   @doc("All week days")
-  All : "All",
-  
-  string
+  All: "All",
+
+  string,
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
@@ -112,9 +111,9 @@ union Month {
   December: "December",
 
   @doc("All months")
-  All : "All",
-  
-  string
+  All: "All",
+
+  string,
 }
 
 @minValue(1)
@@ -187,7 +186,7 @@ union NotificationType {
 @doc("The support notification languages by auto action")
 union Language {
   @doc("American english language")
-  EnUs : "en-us",
+  EnUs: "en-us",
 
   string,
 }
@@ -195,39 +194,38 @@ union Language {
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The information about where notifications should be sent to about auto actions upcoming operations.")
 model NotificationProperties {
-
   @doc("Where the notification should be sent. For email, it should follow email format.")
-  destination : string;
+  destination: string;
 
   @doc("Type of notification to be sent.")
-  type : NotificationType;
+  type: NotificationType;
 
   @doc("The language the notification should be sent on.")
-  language : Language;
+  language: Language;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-scalar validAutoActionResourceId extends armResourceIdentifier<[
-      {
-        type: "Microsoft.Compute/virtualMachines"
-      },
-      {
-        type: "Microsoft.Compute/virtualMachineScaleSets"
-      }
-    ]>;
+scalar validAutoActionResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines",
+    },
+    {
+      type: "Microsoft.Compute/virtualMachineScaleSets",
+    }
+  ]>;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @parentResource(AutoAction)
 @doc("Represents an auto action resource metadata.")
-model AutoActionResource
-{
-    @doc("The ARM Id of the resource.")
-    resourceId : validAutoActionResourceId;
+model AutoActionResource {
+  @doc("The ARM Id of the resource.")
+  resourceId: validAutoActionResourceId;
 
-    @doc("The desired notification settings for the specified resource.")
-    @OpenAPI.extension("x-ms-identifiers", ["destination"])
-    @visibility("read")
-    notificationSettings? : NotificationProperties[]
+  @doc("The desired notification settings for the specified resource.")
+  @OpenAPI.extension("x-ms-identifiers", ["destination"])
+  @visibility("read")
+  notificationSettings?: NotificationProperties[];
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)

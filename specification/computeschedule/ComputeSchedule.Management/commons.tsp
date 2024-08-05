@@ -20,10 +20,11 @@ namespace Microsoft.ComputeSchedule;
 @listsResource(TResponse)
 @armResourceList(TResponse)
 op ArmResourceListActionSync<
-TResource extends Azure.ResourceManager.Foundations.Resource, 
-TResponse extends TypeSpec.Reflection.Model,
-TBaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<TResource>>(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>
+  TResource extends Azure.ResourceManager.Foundations.Resource,
+  TResponse extends TypeSpec.Reflection.Model,
+  TBaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<ResourceListResult<TResponse>> | ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "All operations must be inside an interface declaration."
@@ -33,7 +34,8 @@ TBaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<TResou
 @armResourceAction(TResource)
 @post
 op ArmResourceActionNoContentNoResponseSync<
-TResource extends Azure.ResourceManager.Foundations.Resource,
-TBaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<TResource>>(
+  TResource extends Azure.ResourceManager.Foundations.Resource,
+  TBaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<TResource>
+>(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
-) : ArmNoContentResponse | ErrorResponse;
+): ArmNoContentResponse | ErrorResponse;

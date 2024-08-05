@@ -15,7 +15,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 
-namespace Microsoft.ComputeSchedule; 
+namespace Microsoft.ComputeSchedule;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @armResourceOperations
@@ -29,16 +29,30 @@ interface AutoActions {
 
   @segment("resources")
   getResources is ArmResourceListActionSync<AutoAction, AutoActionResource>;
-  attachResources is ArmResourceActionNoContentSync<AutoAction, AutoActionResource[]>;
-  detachResources is ArmResourceActionNoContentSync<AutoAction, AutoActionResource[]>;
+  attachResources is ArmResourceActionNoContentSync<
+    AutoAction,
+    AutoActionResource[]
+  >;
+  detachResources is ArmResourceActionNoContentSync<
+    AutoAction,
+    AutoActionResource[]
+  >;
 
   @doc("disables the auto action")
   disable is ArmResourceActionNoContentNoResponseSync<AutoAction>;
   @doc("enables the auto action")
   enable is ArmResourceActionNoContentNoResponseSync<AutoAction>;
 
-  cancelNextOccurrence is ArmResourceActionAsync<AutoAction, OccurrenceResource[], Occurrence>;
-  triggerManualOccurrence is ArmResourceActionAsync<AutoAction, void, Occurrence>;
+  cancelNextOccurrence is ArmResourceActionAsync<
+    AutoAction,
+    OccurrenceResource[],
+    Occurrence
+  >;
+  triggerManualOccurrence is ArmResourceActionAsync<
+    AutoAction,
+    void,
+    Occurrence
+  >;
 
   @doc("List auto actions associated to the resource. This is intended to be used for Microsoft.Compute/virtualMachines only")
   @segment("autoActions")
