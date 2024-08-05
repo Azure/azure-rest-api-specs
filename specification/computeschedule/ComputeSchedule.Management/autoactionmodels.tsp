@@ -273,9 +273,3 @@ model AutoActionProperties {
 model AutoAction is TrackedResource<AutoActionProperties> {
   ...ResourceNameParameter<AutoAction>;
 }
-
-model AutoActionVmProperties is AutoActionProperties{};
-
-model AutoActionVm is ExtensionResource<AutoActionVmProperties>{
-  ...ResourceNameParameter<AutoActionVm, KeyName="autoActionName", SegmentName="autoActions">;
-}

@@ -509,15 +509,6 @@
     }
   },
   "definitions": {
-    "AutoActionVm": {
-      "type": "object",
-      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "CancelOperationsRequest": {
       "type": "object",
       "description": "This is the request to cancel running operations in scheduled actions using the operation ids",
@@ -867,7 +858,8 @@
             "description": "Operations that are blocked"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "OptimizationPreference": {
       "type": "string",
@@ -1078,6 +1070,7 @@
               }
             ]
           },
+          "readOnly": true,
           "x-ms-enum.modelAsString": true
         },
         "timeZone": {
