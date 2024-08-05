@@ -972,3 +972,12 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(analyzeTextSubmitJob, "AnalyzeTextSubmitOperation", "csharp");
 @@clientName(analyzeTextJobStatus, "AnalyzeTextOperationStatus", "csharp");
 @@clientName(analyzeTextCancelJob, "AnalyzeTextCancelOperation", "csharp");
+
+@@clientName(EntitiesDocumentResultWithDetectedLanguage, "EntityTextResult", "csharp");
+@@clientName(ClassificationDocumentResultWithDetectedLanguage, "ClassificationDocumenTextResult", "csharp");
+@@clientName(EntityLinkingResultWithDetectedLanguage, "EntityLinkingTextResult", "csharp");
+@@clientName(KeyPhrasesDocumentResultWithDetectedLanguage, "KeyPhrasesTextResult", "csharp");
+@@clientName(PiiResultWithDetectedLanguage, "PiiTextResult", "csharp");
+@@clientName(SentimentDocumentResultWithDetectedLanguage, "SentimentTextResult", "csharp");
+@@clientName(ExtractedSummaryDocumentResultWithDetectedLanguage, "ExtractedSummaryTextResult", "csharp");
+@@clientName(AbstractiveSummaryDocumentResultWithDetectedLanguage, "AbstractiveSummaryTextResult", "csharp");
