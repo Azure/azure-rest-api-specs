@@ -268,3 +268,655 @@ model TextProtectedMaterialAnalysisResult {
   @doc("Whether potential protected material is detected or not.")
   detected: boolean;
 }
+
+
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The domain supported in Text Groundedness analysis.")
+union GroundednessDomain {
+  string,
+
+  @doc("The domain for Groundedness analysis - Generic.")
+  Generic: "Generic",
+
+  @doc("The domain for Groundedness analysis - Medical.")
+  Medical: "Medical",
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The task type supported in Text Groundedness analysis.")
+union GroundednessTask {
+  string,
+
+  @doc("The task type for Groundedness analysis - Summarization.")
+  Summarization: "Summarization",
+
+  @doc("The task type for Groundedness analysis - QnA.")
+  QnA: "QnA",
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The options for QnA task.")
+model QnAOptions {
+  @doc("The user's question input in a QnA task.")
+  @maxLength(7500)
+  query: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The LLM resource type supported in Text Groundedness analysis.")
+union LLMResourceType {
+  string,
+
+  @doc("The LLM resource type for Groundedness analysis - Azure OpenAI.")
+  AzureOpenAI: "AzureOpenAI",
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Details of the given LLM resource.")
+model LLMResource {
+  @doc("LLM resource type.")
+  resourceType?: LLMResourceType = LLMResourceType.AzureOpenAI;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  @doc("Endpoint for Azure OpenAI resource.")
+  azureOpenAIEndpoint: string;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
+  @doc("Deployment name.")
+  azureOpenAIDeploymentName: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request of test groundedness analysis.")
+model AnalyzeTextGroundednessOptions {
+  @doc("""
+  The domain of the text for analysis. Allowed values: Medical, Generic.
+  This field is optional, with a default value of Generic.
+  """)
+  domain?: GroundednessDomain = GroundednessDomain.Generic;
+
+  @doc("""
+  The task type for the text analysis. Type of task: QnA, Summarization.
+  This field is optional, with a default value of Summarization.
+  """)
+  task?: GroundednessTask = GroundednessTask.Summarization;
+
+  @doc("""
+  The user's question input in a QnA scenario.
+  This field is optional, but cannot be omitted when task type is QnA.
+  """)
+  qna?: QnAOptions;
+
+  @doc("The text to be analyzed. Usually, it's the LLM output and may contain ungrounded content.")
+  @maxLength(7500)
+  text: string;
+
+  @doc("""
+  The grounding sources to be used for validating the groundedness.
+  Limit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters (in Unicode code point).
+  """)
+  groundingSources: string[];
+
+  @doc("""
+  A value indicating if to generate mitigated content for the ungrounded content and included in the response.
+  This field is optional, with a default value of false.
+  """)
+  mitigating?: boolean;
+
+  @doc("""
+  A value indicating if to generate an explanation for the groundedness analysis result and included in the response.
+  This field is optional, with a default value of false.
+  """)
+  reasoning?: boolean;
+
+  @doc("""
+  Connection details for the LLM resource. 
+  This field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored.
+  """)
+  llmResource?: LLMResource;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("To describe the string index in different representations.")
+model IndexDetails {
+  @doc("Indicate the index when encoding is UTF-8.")
+  utf8: int64;
+
+  @doc("Indicate the index when encoding is UTF-16.")
+  utf16: int64;
+
+  @doc("Indicate the index with code point format.")
+  codePoint: int64;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Details of the content that identified as ungroundedness.")
+model UngroundednessDetails {
+  @doc("The original text which is considered as ungrounded.")
+  text: string;
+
+  @doc("The offset that the ungrounded content starts in the original text.")
+  offset: IndexDetails;
+
+  @doc("The length of the ungrounded content.")
+  length: IndexDetails;
+
+  @doc("""
+  The explanation for detected ungroundedness.
+  It's available only when the 'reasoning' field in the input is set to true.
+  """)
+  reason?: string;
+
+  @doc("""
+  The mitigation for detected ungroundedness.
+  It's available only when the 'mitigating' field in the input is set to true.
+  """)
+  mitigatedText?: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The response of text groundedness analysis.")
+model AnalyzeTextGroundednessResult {
+  @doc("Indicates whether ungrounded content is detected.")
+  ungroundedDetected: boolean;
+
+  @doc("""
+  Specifies the proportion of the text identified as ungrounded, 
+  expressed as a decimal between 0 and 1,
+  where 0 indicates no ungrounded content and 1 indicates the entire given text is considered ungrounded.
+  """)
+  ungroundedPercentage: float32;
+
+  @doc("Provides insights into ungrounded content with specific examples and percentages.")
+  ungroundedDetails: UngroundednessDetails[];
+}
+
+
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Definition of an Auto Reviewer version.")
+@resource("text/autoReviewers")
+model AutoReviewerVersion {
+  @key
+  @visibility("read", "create", "update")
+  @pattern("^[0-9A-Za-z._~-]+$")
+  @maxLength(64)
+  @doc("The name of the Auto Reviewer.")
+  autoReviewerName: string;
+
+  @doc("The labels defined in the Auto Reviewer. There should be a label named 'Other' in the list. The 'Other' label is the default one to represent the content that does not classified as any other labels.")
+  labels: AutoReviewerLabelDetails[];
+
+  @doc("The blob URL which should be a jsonl that contains the examples of an Auto Reviewer. Read & write access to the upper layer virtual directory is required. This is optional.")
+  @visibility("create", "read", "update")
+  exampleBlobUrl?: string;
+
+  @doc("Delimiter of the given blob URL. If omitted, '/' will be used as the delimiter to parse the exampleBlobUrl.")
+  @visibility("created", "update", "read")
+  blobDelimiter?: string;
+
+  @doc("The blob URL that contains a snapshot of exampleBlobUrl. It's available in the response only when exampleBlobUrl is provided in the request.")
+  @visibility("read")
+  exampleBlobCopyUrl?: string;
+
+  @doc("The version of Auto Reviewer.")
+  @visibility("read")
+  version: int32;
+
+  @doc("The creation time of this Auto Reviewer version. The time is in UTC.")
+  @visibility("read")
+  createdTime: utcDateTime;
+
+  @doc("The status of this Auto Reviewer version.")
+  @visibility("read")
+  status: AutoReviewerOperationStatus;
+
+  @doc("The error details of this Auto Reviewer version.")
+  @visibility("read")
+  error?: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The label details of an Auto Reviewer version.")
+model AutoReviewerLabelDetails {
+  @doc("The name of the label.")
+  labelName: string;
+
+  @doc("The description of the label.")
+  description: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The possible status of an Auto Reviewer operation.")
+union AutoReviewerOperationStatus {
+  string,
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("All versions of an Auto Reviewer.")
+model AutoReviewerVersionList {
+  @doc("List of auto reviewer versions.")
+  value: AutoReviewerVersion[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request to analyze the given text with the Auto Reviewer version defined.")
+model AutoReviewTextOptions {
+  @doc("The text to be analyzed.")
+  text: string;
+
+  @doc("The name of the Auto Reviewer.")
+  autoReviewerName: string;
+
+  @doc("The version of the Auto Reviewer. The latest version will be used if omitted.")
+  autoReviewerVersion?: int32;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The response of analyzing text with Auto Reviewer.")
+model AutoReviewTextResult {
+  @doc("The label classified by the given Auto Reviewer.")
+  labelName: string;
+
+  @doc("To provide more details of the analysis result.")
+  reasoning: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The details of a long running operation of Auto Reviewer.")
+@resource("text/autoReviewers/operations")
+model AutoReviewerOperationDetail {
+  @doc("The id of this operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of this operation.")
+  status: AutoReviewerOperationStatus;
+
+  @doc("The error details when this operation failed.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The possible status of a content safety incident operation.")
+union IncidentOperationStatus {
+  string,
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+  "Canceled",
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Definition of a content safety Text Incident.")
+@resource("text/incidents")
+model TextIncident {
+  @doc("The name of the incident.")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @key("incidentName")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  incidentName: string;
+
+  @doc("The guideline to define this incident.")
+  @maxLength(1024)
+  incidentDefinition?: string;
+
+  @doc("The created time of this incident.")
+  @visibility("read", "query")
+  created: utcDateTime;
+
+  @doc("The latest updated time of this incident.")
+  @visibility("read", "query")
+  lastUpdated: utcDateTime;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Definition of a sample in a Text Incident.")
+@resource("incidentSamples")
+@parentResource(TextIncident)
+model TextIncidentSample {
+  @doc("The name of this incident sample.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+
+  @doc("The text content of this incident sample.")
+  @maxLength(1024)
+  text?: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request to add incident samples to a Text Incident.")
+model AddTextIncidentSamplesOptions {
+  @doc("Incident samples to be added.")
+  incidentSamples: TextIncidentSample[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The response of adding incident samples to a Text Incident.")
+model AddTextIncidentSamplesResult {
+  @doc("Incident samples have been added.")
+  incidentSamples: TextIncidentSample[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request to remove incident samples from a Text Incident.")
+model RemoveTextIncidentSamplesOptions {
+  @doc("Incident samples to be removed.")
+  incidentSampleIds: string[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request to analyze given text content with content safety Text Incidents defined.")
+model AnalyzeTextDetectIncidentsOptions {
+  @doc("The text to be analyzed.")
+  @maxLength(10000)
+  text: string;
+
+  @doc("The incidents defined.")
+  incidentNames: string[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The definition of a matched content safety incident.")
+model IncidentMatch {
+  @doc("The name of the matched incident.")
+  @maxLength(64)
+  incidentName: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The response of analyzing given content with content safety incidents defined.")
+model DetectIncidentsResult {
+  @doc("The details of matched incidents.")
+  incidentMatches: IncidentMatch[];
+}
+
+
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Definition of a content safety Image Incident.")
+@resource("image/incidents")
+model ImageIncident {
+  @doc("The name of the incident.")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @key("incidentName")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  incidentName: string;
+
+  @doc("The created time of this incident.")
+  @visibility("read", "query")
+  created: utcDateTime;
+
+  @doc("The latest updated time of this incident.")
+  @visibility("read", "query")
+  lastUpdated: utcDateTime;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Definition of an Image Incident sample in a request.")
+@resource("incidentSamples")
+@parentResource(ImageIncident)
+model ImageIncidentSample {
+  @doc("The name of this incident sample.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+
+  @doc("The image content of this incident sample.")
+  image?: ImageData;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request to add incident samples to an Image Incident.")
+model AddImageIncidentSamplesOptions {
+  @doc("Incident samples to be added.")
+  incidentSamples: ImageIncidentSample[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("A single sample in an Image Incident sample list.")
+@resource("incidentSamples")
+@parentResource(ImageIncident)
+model ListImageIncidentSampleResult {
+  @doc("The name of this incident sample.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The response of adding incident samples to an Image Incident.")
+model AddImageIncidentSamplesResult {
+  @doc("Array of incidentSamples have been added.")
+  incidentSamples: ListImageIncidentSampleResult[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Definition of an image in a response.")
+model ImageDataResult {
+  @doc("Base64-encoded image.")
+  content?: bytes;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Definition of an Image Incident sample in a response.")
+@resource("incidentSamples")
+@parentResource(ImageIncident)
+model ImageIncidentSampleResult {
+  @doc("The name of this incident sample.")
+  @key("incidentSampleId")
+  @visibility("read")
+  @maxLength(64)
+  incidentSampleId: string;
+
+  @doc("The image content of this incident sample.")
+  image?: ImageDataResult;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request to remove incident samples from an Image Incident.")
+model RemoveImageIncidentSamplesOptions {
+  @doc("Incident samples to be removed.")
+  incidentSampleIds: string[];
+}
+
+
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request to analyze given image with content safety Image Incidents defined.")
+model AnalyzeImageDetectIncidentsOptions {
+  @doc("The image to be analyzed.")
+  image: ImageData;
+
+  @doc("The incidents defined.")
+  incidentNames: string[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The details of a long running operation of Text Incident.")
+@resource("text/incidents/operations")
+model TextIncidentOperationResult {
+  @doc("The id of this operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of this operation.")
+  @visibility("read")
+  status: IncidentOperationStatus;
+
+  @doc("The error details when this operation failed.")
+  errorMessage?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The details of a long running operation of Image Incident.")
+@resource("image/incidents/operations")
+model ImageIncidentOperationResult {
+  @doc("The id of this operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of this operation.")
+  @visibility("read")
+  status: IncidentOperationStatus;
+
+  @doc("The error details when this operation failed.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("Incident operation id options.")
+model IncidentOperationIdOptions {
+  @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+  @header("Operation-Id")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  operationId?: string;
+}
+
+
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@resource("text/categories")
+@doc("Definition of a Customer Category version.")
+model TextCustomCategoryVersion {
+  @key
+  @visibility("read", "create", "update")
+  @doc("The name of this Custom Category")
+  categoryName: string;
+
+  @doc("The definition or description of this Custom Category version.")
+  @visibility("read", "create", "update")
+  definition: string;
+
+  @doc("The blob URL which should be a jsonl that contains the samples. Read & write access to the upper layer virtual directory is required.")
+  @visibility("create", "read", "update")
+  sampleBlobUrl: string;
+
+  @doc("The blob URL that contains a snapshot of sampleBlobUrl.")
+  @visibility("read")
+  sampleBlobSnapshotUrl: string;
+
+  @doc("The version of Custom Category.")
+  @visibility("read")
+  version: int32;
+
+  @doc("The creation time of this Custom Category version. The time is in UTC.")
+  @visibility("read")
+  createdTime: utcDateTime;
+
+  @doc("The status of this Custom Category version")
+  @visibility("read")
+  status: CustomCategoryStatus;
+
+  @doc("The error details of this Custom Category version.")
+  @visibility("read")
+  errorMessage?: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The possible status of building a Custom Category.")
+union CustomCategoryStatus {
+  string,
+
+  @doc("Custom Category building status - NotStarted")
+  "NotStarted",
+
+  @doc("Custom Category building status - Running")
+  "Running",
+
+  @doc("Custom Category building status - Succeeded")
+  "Succeeded",
+
+  @doc("Custom Category building status - Failed")
+  "Failed",
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("All versions of a Custom Category.")
+model TextCustomCategoryVersionList {
+  @doc("List of custom category versions.")
+  value: TextCustomCategoryVersion[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The possible status of a Custom Category operation.")
+union CustomCategoryOperationStatus {
+  string,
+
+  @doc("Custom Category operation status - NotStarted")
+  "NotStarted",
+
+  @doc("Custom Category operation status - Running")
+  "Running",
+
+  @doc("Custom Category operation status - Succeeded")
+  "Succeeded",
+
+  @doc("Custom Category operation status - Failed")
+  "Failed",
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The details of a long running operation of Custom Category.")
+@resource("text/categories/operations")
+model CustomCategoryOperationDetail {
+  @doc("The id of this operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of this operation.")
+  @visibility("read")
+  status: CustomCategoryOperationStatus;
+
+  @doc("The error details when this operation failed.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request to analyze given text content with the Custom Category version defined.")
+model AnalyzeTextCustomCategoryOption {
+  @doc("The text needs to be analyzed.")
+  text: string;
+
+  @doc("Custom category name.")
+  categoryName: string;
+
+  @doc("Custom category version, if not assigned use the latest version.")
+  version?: int32;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The analysis result of Custom Category.")
+model TextCustomCategoryAnalysis {
+  @doc("Whether the Custom Category is detected.")
+  detected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The response of analyzing text with Custom Category.")
+model AnalyzeTextCustomCategoryResult {
+  @doc("The analysis result with Custom Category.")
+  customCategoryAnalysis: TextCustomCategoryAnalysis;
+}
