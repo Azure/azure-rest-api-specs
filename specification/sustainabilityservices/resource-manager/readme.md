@@ -40,6 +40,8 @@ input-file:
 suppressions:
   - code: PatchBodyParametersSchema
     reason: Suppress PATCH rule as the required properties are defined during typespec generation. Also, empty object can still be passed, properties are not mandatory for the update schema.
+  - code: BodyTopLevelProperties
+    reason: Suppress Body rule as the top level properties are included.
 ```
 
 ---
