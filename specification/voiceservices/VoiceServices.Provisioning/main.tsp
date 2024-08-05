@@ -633,7 +633,6 @@ model BatchNumbersDelete {
   numbers: NumberIdentifier[];
 }
 
-@friendlyName("PagedNumberList")
 model PagedNumberList is Azure.Core.Page<NumberResource>;
 
 /*
