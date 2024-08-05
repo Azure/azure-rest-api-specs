@@ -3681,9 +3681,6 @@
               "tool_choice": {
                 "$ref": "#/components/schemas/chatCompletionToolChoiceOption"
               },
-              "stream_options": {
-                "$ref": "#/components/schemas/chatCompletionStreamOptions"
-              },
               "functions": {
                 "description": "Deprecated in favor of `tools`. A list of functions the model may generate JSON inputs for.",
                 "type": "array",
@@ -5570,18 +5567,6 @@
           "assistant"
         ],
         "description": "The role of the author of the response message."
-      },
-      "chatCompletionStreamOptions": {
-        "type": "object",
-        "nullable": true,
-        "default": null,
-        "properties": {
-          "include_usage": {
-            "type": "boolean",
-            "description": "If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value."
-          }
-        },
-        "description": "Options for streaming response. Only set this when you set `stream: true`."
       },
       "chatCompletionToolChoiceOption": {
         "description": "Controls which (if any) tool is called by the model. `none` means the model will not call any tool and instead generates a message. `auto` means the model can pick between generating a message or calling one or more tools. `required` means the model must call one or more tools. Specifying a particular tool via `{\"type\": \"function\", \"function\": {\"name\": \"my_function\"}}` forces the model to call that tool. `none` is the default when no tools are present. `auto` is the default if tools are present.",
