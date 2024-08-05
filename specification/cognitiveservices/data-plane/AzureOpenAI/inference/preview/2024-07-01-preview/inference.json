@@ -7028,18 +7028,18 @@
             }
           },
           "file_search": {
-              "type": "object",
-              "description": "Overrides for the file search tool.",
-              "properties": {
-                "max_num_results": {
-                  "type": "integer",
-                  "minimum": 1,
-                  "maximum": 50,
-                  "description": "The maximum number of results the file search tool should output. The default is 20 for gpt-4* models and 5 for gpt-3.5-turbo. This number should be between 1 and 50 inclusive.\n\nNote that the file search tool may output fewer than `max_num_results` results. See the [file search tool documentation](/docs/assistants/tools/file-search/number-of-chunks-returned) for more information.\n"
-                }
+            "type": "object",
+            "description": "Overrides for the file search tool.",
+            "properties": {
+              "max_num_results": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 50,
+                "description": "The maximum number of results the file search tool should output. The default is 20 for gpt-4* models and 5 for gpt-3.5-turbo. This number should be between 1 and 50 inclusive.\n\nNote that the file search tool may output fewer than `max_num_results` results. See the [file search tool documentation](/docs/assistants/tools/file-search/number-of-chunks-returned) for more information.\n"
               }
             }
-          },
+          }
+        },
         "required": [
           "type"
         ]
@@ -7054,8 +7054,7 @@
             "enum": [
               "file_search"
             ],
-            "x-ms-enum":
-            {
+            "x-ms-enum": {
               "name": "assistantToolsFileSearchType",
               "modelAsString": true,
               "values": [
@@ -10401,23 +10400,23 @@
         "additionalProperties": false,
         "properties": {
           "type": {
-          "type": "string",
-          "description": "Always `static`.",
-          "enum": [
-            "static"
-          ],
-          "x-ms-enum": {
-            "name": "StaticChunkingStrategyResponseParamType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "static"
-              }
-            ]
+            "type": "string",
+            "description": "Always `static`.",
+            "enum": [
+              "static"
+            ],
+            "x-ms-enum": {
+              "name": "StaticChunkingStrategyResponseParamType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "static"
+                }
+              ]
             }
           },
           "static": {
-          "$ref": "#/components/schemas/staticChunkingStrategy"
+            "$ref": "#/components/schemas/staticChunkingStrategy"
           }
         },
         "required": [
