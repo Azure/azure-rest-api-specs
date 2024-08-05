@@ -697,36 +697,6 @@
       "title": "NodeCount",
       "default": 3
     },
-    "CustomizationData": {
-      "type": "object",
-      "description": "Object representing the different fields of customization data.",
-      "title": "CustomizationData",
-      "properties": {
-        "hostLevel": {
-          "type": "string",
-          "readOnly": false,
-          "description": "CCF Property for the logging level for the untrusted host: Trace, Debug, Info, Fail, Fatal."
-        },
-        "maxBodySizeInMb": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": false,
-          "description": "CCF Property for the maximum size of the http request body: 1MB, 5MB, 10MB.",
-          "default": 1
-        },
-        "subjectName": {
-          "type": "string",
-          "readOnly": false,
-          "description": "CCF Property for the subject name to include in the node certificate. Default: CN=CCF Node."
-        },
-        "nodeCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of CCF nodes in the ACC Ledger.",
-          "$ref": "#/definitions/NodeCount"
-        }
-      }
-    },
     "LedgerProperties": {
       "type": "object",
       "description": "Additional Confidential Ledger properties.",
@@ -787,12 +757,28 @@
           },
           "x-ms-identifiers": []
         },
-        "customizationDatas": {
-          "type": "array",
-          "description": "Additional ACC Ledger deployment-time customizations.",
-          "items": {
-            "$ref": "#/definitions/CustomizationData"
-          }
+        "hostLevel": {
+          "type": "string",
+          "readOnly": false,
+          "description": "CCF Property for the logging level for the untrusted host: Trace, Debug, Info, Fail, Fatal."
+        },
+        "maxBodySizeInMb": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": false,
+          "description": "CCF Property for the maximum size of the http request body: 1MB, 5MB, 10MB.",
+          "default": 1
+        },
+        "subjectName": {
+          "type": "string",
+          "readOnly": false,
+          "description": "CCF Property for the subject name to include in the node certificate. Default: CN=CCF Node."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of CCF nodes in the ACC Ledger.",
+          "$ref": "#/definitions/NodeCount"
         }
       }
     },
