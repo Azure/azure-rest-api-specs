@@ -40,7 +40,7 @@ interface AutoActions {
   cancelNextOccurrence is ArmResourceActionAsync<AutoAction, OccurrenceResource[], Occurrence>;
   triggerManualOccurrence is ArmResourceActionAsync<AutoAction, void, Occurrence>;
 
-  @doc("List auto actions associated to the resource. This is intended to be used for Microsft.Compute/virtualMachines only")
+  @doc("List auto actions associated to the resource. This is intended to be used for Microsoft.Compute/virtualMachines only")
   @segment("autoActions")
   listByVms is Azure.ResourceManager.Foundations.ArmReadOperation<
     ResourceUriParameter &
