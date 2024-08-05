@@ -50,7 +50,7 @@ model SolutionVersion is ProxyResource<{}> {
   kind: SolutionVersionType;
 }
 
-@doc("Helm Use Case Properties")
+@doc("Helm Solution Properties")
 model HelmSolution extends SolutionVersion {
   @doc("properties of helm solution")
   properties: HelmSolutionProperties;
