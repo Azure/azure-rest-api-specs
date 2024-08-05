@@ -2304,8 +2304,6 @@ components:
           type: boolean
           nullable: true
           default: false
-        stream_options:
-          $ref: '#/components/schemas/chatCompletionStreamOptions'
         stop:
           description: Up to 4 sequences where the API will stop generating further tokens.
           oneOf:
@@ -3674,17 +3672,6 @@ components:
       enum:
         - assistant
       description: The role of the author of the response message.
-    chatCompletionStreamOptions:
-      description: |
-        Options for streaming response. Only set this when you set `stream: true`.
-      type: object
-      nullable: true
-      default: null
-      properties:
-        include_usage:
-          type: boolean
-          description: |
-            If set, an additional chunk will be streamed before the `data: [DONE]` message. The `usage` field on this chunk shows the token usage statistics for the entire request, and the `choices` field will always be an empty array. All other chunks will also include a `usage` field, but with a null value.
     chatCompletionToolChoiceOption:
       description: |
         Controls which (if any) tool is called by the model.
