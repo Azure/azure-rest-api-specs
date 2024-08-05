@@ -43,7 +43,7 @@
       "name": "ConnectorOperations"
     },
     {
-      "name": "DataPreviewInstanceOperations"
+      "name": "DataPreviewOperations"
     },
     {
       "name": "Operations"
@@ -127,9 +127,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/locations/{location}/dataPreview/default/preview": {
       "post": {
-        "operationId": "DataPreviewInstanceOperations_Preview",
+        "operationId": "DataPreviewOperations_Preview",
         "tags": [
-          "DataPreviewInstanceOperations"
+          "DataPreviewOperations"
         ],
         "description": "create one dataPreview task",
         "parameters": [
@@ -178,11 +178,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataPreview SqlServerSourceConnector": {
-            "$ref": "./examples/DataPreview_SqlServerSourceConnector.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1196,25 +1191,49 @@
         ]
       }
     },
+    "CsvHeaderTypes": {
+      "type": "string",
+      "description": "CsvHeader types",
+      "enum": [
+        "IncludeHeader",
+        "ExcludeHeader"
+      ],
+      "x-ms-enum": {
+        "name": "CsvHeaderTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IncludeHeader",
+            "value": "IncludeHeader",
+            "description": "include CSV header"
+          },
+          {
+            "name": "ExcludeHeader",
+            "value": "ExcludeHeader",
+            "description": "exclude CSV header"
+          }
+        ]
+      }
+    },
     "CsvSourceDataFormat": {
       "type": "object",
       "description": "CSV Source data format model",
       "properties": {
-        "withHeader": {
-          "type": "boolean",
-          "description": "Contain header or not"
+        "header": {
+          "$ref": "#/definitions/CsvHeaderTypes",
+          "description": "CSV header type"
         },
         "delimiter": {
           "$ref": "#/definitions/CsvDelimiters",
           "description": "CSV Delimiter"
         },
         "textCharset": {
-          "$ref": "#/definitions/TextCharsets",
-          "description": "Charset"
+          "type": "string",
+          "description": "Charset supported by Java language"
         }
       },
       "required": [
-        "withHeader",
+        "header",
         "delimiter",
         "textCharset"
       ],
@@ -1225,7 +1244,7 @@
       ],
       "x-ms-discriminator-value": "CSV"
     },
-    "DataPreviewInstance": {
+    "DataPreview": {
       "type": "object",
       "description": "A dataPreview resource Azure",
       "properties": {
@@ -1460,8 +1479,8 @@
       "description": "JSON source data format model",
       "properties": {
         "textCharset": {
-          "$ref": "#/definitions/TextCharsets",
-          "description": "Charset"
+          "type": "string",
+          "description": "Charset supported by Java language"
         }
       },
       "required": [
@@ -1914,24 +1933,6 @@
         }
       ],
       "x-ms-discriminator-value": "SqlServerSource"
-    },
-    "TextCharsets": {
-      "type": "string",
-      "description": "Charsets",
-      "enum": [
-        "UTF8"
-      ],
-      "x-ms-enum": {
-        "name": "TextCharsets",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UTF8",
-            "value": "UTF8",
-            "description": "utf-8"
-          }
-        ]
-      }
     }
   },
   "parameters": {}

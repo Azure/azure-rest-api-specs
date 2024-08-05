@@ -192,21 +192,13 @@ model SourceDataFormat {
   type: SourceDataFormatTypes;
 }
 
-@doc("Charsets")
-union TextCharsets {
-  @doc("utf-8")
-  UTF8: "UTF8",
-
-  string,
-}
-
 @doc("JSON source data format model")
 model JsonSourceDataFormat extends SourceDataFormat {
   @doc("Type of data format")
   type: SourceDataFormatTypes.JSON;
 
-  @doc("Charset")
-  textCharset: TextCharsets;
+  @doc("Charset supported by Java language")
+  textCharset: string;
 }
 
 @doc("Delimiter for csv")
@@ -229,19 +221,30 @@ union CsvDelimiters {
   string,
 }
 
+@doc("CsvHeader types")
+union CsvHeaderTypes {
+  @doc("include CSV header")
+  IncludeHeader: "IncludeHeader",
+
+  @doc("exclude CSV header")
+  ExcludeHeader: "ExcludeHeader",
+
+  string,
+}
+
 @doc("CSV Source data format model")
 model CsvSourceDataFormat extends SourceDataFormat {
   @doc("Type of data format")
   type: SourceDataFormatTypes.CSV;
 
-  @doc("Contain header or not")
-  withHeader: boolean;
+  @doc("CSV header type")
+  header: CsvHeaderTypes;
 
   @doc("CSV Delimiter")
   delimiter: CsvDelimiters;
 
-  @doc("Charset")
-  textCharset: TextCharsets;
+  @doc("Charset supported by Java language")
+  textCharset: string;
 }
 
 @doc("Properties of one arm resource")
