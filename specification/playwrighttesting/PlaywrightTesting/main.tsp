@@ -30,7 +30,7 @@ using Autorest;
   ]
 )
 @service({
-  title: "Microsoft PlaywrightTesting AuthManager Service API",
+  title: "Microsoft PlaywrightTesting AuthManager Service API testtest",
 })
 @versioned(Microsoft.PlaywrightTesting.AuthManager.Versions)
 namespace Microsoft.PlaywrightTesting.AuthManager;
