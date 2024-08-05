@@ -10,16 +10,16 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 @doc("""
-A specific representation of configurable options for Azure Search when using it as an Azure OpenAI chat
-extension.
-""")
+  A specific representation of configurable options for Azure Search when using it as an Azure OpenAI chat
+  extension.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model AzureSearchChatExtensionConfiguration
   extends AzureChatExtensionConfiguration {
   @doc("""
-  The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
-  default value for Azure Cognitive Search.
-  """)
+    The type label to use when configuring Azure OpenAI chat extensions. This should typically not be changed from its
+    default value for Azure Cognitive Search.
+    """)
   type: AzureChatExtensionType.azureSearch;
 
   @doc("The parameters to use when configuring Azure Search.")
@@ -100,8 +100,8 @@ model AzureSearchIndexFieldMappingOptions {
 }
 
 @doc("""
-The type of Azure Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.
-""")
+  The type of Azure Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.
+  """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
 union AzureSearchQueryType {
   string,
