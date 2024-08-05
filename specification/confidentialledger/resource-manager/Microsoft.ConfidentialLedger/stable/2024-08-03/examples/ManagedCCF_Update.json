@@ -1,14 +1,27 @@
 {
   "parameters": {
-    "api-version": "2023-06-28",
+    "api-version": "2024-08-03",
     "subscriptionId": "0000000-0000-0000-0000-000000000001",
     "resourceGroupName": "DummyResourceGroupName",
-    "appName": "DummyMccfAppName"
+    "appName": "DummyMccfAppName",
+    "ManagedCCF": {
+      "properties": {
+        "deploymentType": {
+          "languageRuntime": "CPP",
+          "appSourceUri": "https://myaccount.blob.core.windows.net/storage/mccfsource?sv=2022-02-11%st=2022-03-11"
+        }
+      },
+      "location": "EastUS",
+      "tags": {
+        "additionalProps1": "additional properties"
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
+          "runningState": "Active",
           "appName": "DummyMccfAppName",
           "appUri": "https://dummy.accledger.domain.com/DummyLedgerName",
           "identityServiceUri": "https://dummy.accledger.identity.com/DummyLedgerName",
@@ -24,10 +37,11 @@
                 "additionalProps1": "additional properties"
               }
             }
-          ]
+          ],
+          "provisioningState": "Succeeded"
         },
-        "name": "DummyMccfAppName",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/providers/Microsoft.ConfidentialLedger/ManagedCCFs/DummyLedgerName",
+        "name": "DummyLedgerName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/providers/Microsoft.ConfidentialLedger/ledgers/DummyLedgerName",
         "type": "Microsoft.ConfidentialLedger/ManagedCCFs",
         "location": "EastUS",
         "tags": {
@@ -41,6 +55,11 @@
           "lastModifiedByType": "Admin2",
           "lastModifiedAt": "2020-12-02T00:00:00.1234567Z"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
       }
     }
   }
