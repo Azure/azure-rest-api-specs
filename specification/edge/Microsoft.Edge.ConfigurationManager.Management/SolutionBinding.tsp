@@ -19,16 +19,16 @@ namespace Microsoft.Edge;
 
 @doc("Solution Binding Properties")
 model SolutionBindingProperties {
-  @doc("Solution of target binding")
+  @doc("Solution of solution binding")
   solution: string;
 
-  @doc("Deployment Target of target binding")
+  @doc("Deployment Target of solution binding")
   deploymentTarget: string;
 
-  @doc("Active Deployment Instance of target binding")
+  @doc("Active Deployment Instance of solution binding")
   activeSolutionInstance: string;
 
-  @doc("Scope of target binding")
+  @doc("Scope of solution binding")
   scope: string;
 
   @doc("Provisioning state of resource")
