@@ -15,11 +15,8 @@ using TypeSpec.OpenAPI;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-/**
- * GPU resource
- */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
-@doc("Gpus resource")
+@doc("GPU resource")
 @parentResource(EdgeDevice)
 @discriminator("kind")
 model Gpu is Azure.ResourceManager.ExtensionResource<{}> {
@@ -53,9 +50,7 @@ interface Gpus {
 
 ///////////////////models///////////
 
-/**
- * GPU Vendor Type supported.
- */
+@doc("GPU Vendor Type supported.")
 union GpuVendorType {
   string,
 
@@ -69,9 +64,7 @@ union GpuVendorType {
   Intel: "Intel",
 }
 
-/**
- * GPU modes supported.
- */
+@doc("GPU modes supported.")
 union GpuMode {
   string,
 
@@ -91,9 +84,7 @@ model HciGpu extends Gpu {
   kind: EdgeDeviceKind.HCI;
 }
 
-/**
- * Represents the properties of a GPU.
- */
+@doc("Represents the properties of a GPU.")
 model HciGpuProperties {
   @doc("The name of the node.")
   nodeName?: string;
@@ -106,9 +97,7 @@ model HciGpuProperties {
   desiredProperties?: HciGpuDesiredProperties;
 }
 
-/**
- * Represents the desired properties of a GPU.
- */
+@doc("Represents the desired properties of a GPU.")
 model HciGpuDesiredProperties {
   @doc("Desired partition size (default: 0 for DDA) For e.g. 2, 4, etc. across all nodes ")
   partitionSizeGb?: int32;
@@ -116,9 +105,7 @@ model HciGpuDesiredProperties {
   @doc("Specified by admin whether this GPU can be used as DDA, GPU-P, GPU-P with LM. Can only be updated when the GPU is not attached to any VM. ")
   gpuMode?: GpuMode;
 }
-/**
- * Represents the reported properties of a log collection job.
- */
+@doc("Represents the reported properties of a log collection job.")
 model HciGpuReportedProperties {
   @doc("List of GPU details for this edge device.")
   @visibility("read")
@@ -154,7 +141,7 @@ model GpuDetails {
 
   @doc("Reported partition size (default: 0 for DDA) For e.g. 2, 4, etc. ")
   @visibility("read")
-  partitionSizeGb: int32;
+  partitionSizeGb: string;
 
   @doc("This is the count of total partitions.")
   @visibility("read")
@@ -206,46 +193,53 @@ model GpuDetails {
   workloads?: WorkloadDetails[];
 }
 
-/**
- * Represents the details of a workload.
- */
+@doc("Represents the details of a workload.")
 model WorkloadDetails {
   @doc("workload Id to which GPU is assigned.")
   @visibility("read")
   workloadId?: string;
 
-  /**
-   * This gives information about workload name (VM/AKS) specifically the VM Name or AKS Name.
-   */
-  @doc("This gives information about workload name (VM/AKS) specifically the VM Name or AKS Name")
+  @doc("This gives information about workload name (VM/AKS) specifically the VM Name or AKS Name.")
   @visibility("read")
   workloadName?: string;
 
-  /**
-   * This gives information about workload status, running or down.
-   */
-  @doc("This gives information about workload status, running or down")
+  @doc("This gives information about workload status, running or down.")
   @visibility("read")
   workloadStatus?: string;
 
-  /**
-   * This tells if workload is VM, AKS, etc.
-   */
   @doc("This tells if workload is VM, AKS, etc.")
   @visibility("read")
   workloadType?: string;
 
-  /**
-   * This is the unique partition ID for a workload using GPU-P.
-   */
-  @doc("This is the unique partition ID for a workload using GPU-P.")
+  @doc("The partition details for a workload using GPU-P.")
+  @extension("x-ms-identifiers", ["uniqueId"])
   @visibility("read")
-  partitionId?: string[];
+  partitionDetails?: PartitionDetails[];
 
-  /**
-   * This is the unique instance path for a workload using GPU-P.
-   */
   @doc("This is the unique instance path for a workload using GPU-P.")
   @visibility("read")
   slotLocation?: string;
+}
+
+@doc("Represents the GPU partition details")
+model PartitionDetails {
+  @doc("Unique identifier for the partition")
+  @visibility("read")
+  uniqueId?: string;
+
+  @doc("The partition number that is being used by the workload")
+  @visibility("read")
+  partitionId?: int32;
+
+  @doc("The current vRAM that is used by the partition")
+  @visibility("read")
+  currentVram?: string;
+
+  @doc("The current encode that is used by the partition")
+  @visibility("read")
+  currentEncode?: string;
+
+  @doc("The current decode that is used by the partition")
+  @visibility("read")
+  currentDecode?: string;
 }

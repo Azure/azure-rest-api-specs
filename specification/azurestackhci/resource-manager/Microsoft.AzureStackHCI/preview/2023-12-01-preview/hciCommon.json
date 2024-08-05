@@ -38,7 +38,7 @@
   "definitions": {
     "DeploymentMode": {
       "type": "string",
-      "description": "The deployment mode of ECE action for a cluster.",
+      "description": "The deployment mode of EnterpriseCloudEngine(ECE) action for a cluster.",
       "enum": [
         "Validate",
         "Deploy"
@@ -278,6 +278,31 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
+      }
+    },
+    "ClusterKind": {
+      "type": "string",
+      "description": "Cluster kind.",
+      "enum": [
+        "Windows",
+        "AzureLinux"
+      ],
+      "default": "Windows",
+      "x-ms-enum": {
+        "name": "ClusterKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "Cluster created with Windows-based host machines."
+          },
+          {
+            "name": "AzureLinux",
+            "value": "AzureLinux",
+            "description": "Cluster created with AzureLinux-based host machines."
+          }
+        ]
       }
     },
     "PrecheckResult": {

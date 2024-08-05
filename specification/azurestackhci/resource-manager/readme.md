@@ -132,7 +132,9 @@ suppressions:
     from:
       - edgeDevices.json
       - hci.json
-      
+  - code: BodyTopLevelProperties
+    reason: The BodyTopLevelProperties rule is mistakenly flagging paged responses #722
+
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
     from:
@@ -654,7 +656,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
+#  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
