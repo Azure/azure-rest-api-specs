@@ -21,7 +21,7 @@ namespace Microsoft.SustainabilityServices;
 enum Versions {
   @doc("The 2024-10-01-preview version.")
   @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2024_10_01_preview: "2024-10-01-preview",
 }
 
