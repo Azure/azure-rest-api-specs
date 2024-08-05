@@ -37,6 +37,8 @@ alias ImageEmbeddingsOptions = {
     ID of the specific AI model to use, if more than one model is available on the endpoint.
     """)
   `model`?: string;
+
+  ...Record<unknown>;
 };
 
 @doc("Represents an image with optional text.")

@@ -96,7 +96,10 @@ model ChatCompletionsOptions {
   @clientName("StopSequences", "csharp")
   stop?: string[];
 
-  @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
+  @doc("""
+    A list of tools the model may request to call. Currently, only functions are supported as a tool. The model
+    may response with a function call request and provide the input arguments in JSON format for that function.
+    """)
   @minItems(1)
   tools?: ChatCompletionsToolDefinition[];
 
@@ -294,7 +297,7 @@ model StreamingChatChoiceUpdate {
   ...ChatChoiceCommon;
 
   @doc("An update to the chat message for a given chat completions prompt.")
-  delta: ChatResponseMessage;
+  delta: StreamingChatResponseMessageUpdate;
 }
 
 @discriminator("role")
@@ -357,6 +360,23 @@ model ChatRequestToolMessage extends ChatRequestMessage {
   toolCallId: string;
 }
 
+@doc("A representation of a chat message update as received in a streaming response.")
+model StreamingChatResponseMessageUpdate {
+  @doc("The chat role associated with the message. If present, should always be 'assistant'")
+  role?: ChatRole;
+
+  //#suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  @doc("The content of the message.")
+  content?: string;
+
+  @encodedName("application/json", "tool_calls")
+  @doc("""
+    The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
+    completions request to resolve as configured.
+    """)
+  toolCalls?: StreamingChatResponseToolCallUpdate[];
+}
+
 @doc("A representation of a chat message as received in a response.")
 model ChatResponseMessage {
   @doc("The chat role associated with the message.")
@@ -401,17 +421,9 @@ union ChatCompletionsToolSelectionPreset {
   required: "required",
 }
 
-@discriminator("type")
-@doc("An abstract representation of an explicit, named tool selection to use for a chat completions request.")
-model ChatCompletionsNamedToolSelection {
-  @doc("The object type.")
-  type: string;
-}
-
 @doc("A tool selection of a specific, named function tool that will limit chat completions to using the named function.")
-model ChatCompletionsNamedFunctionToolSelection
-  extends ChatCompletionsNamedToolSelection {
-  @doc("The object type, which is always 'function'.")
+model ChatCompletionsNamedToolSelection {
+  @doc("The type of the tool. Currently, only `function` is supported.")
   type: "function";
 
   @doc("The function that should be called.")
@@ -424,19 +436,11 @@ model ChatCompletionsFunctionToolSelection {
   name: string;
 }
 
-@discriminator("type")
-@doc("An abstract representation of a tool that can be used by the model to improve a chat completions response.")
-model ChatCompletionsToolDefinition {
-  @doc("The object type.")
-  type: string;
-}
-
 @doc("""
-  The definition information for a chat completions function tool that can call a function in response to a tool call.
+  The definition of a chat completions tool that can call a function.
   """)
-model ChatCompletionsFunctionToolDefinition
-  extends ChatCompletionsToolDefinition {
-  @doc("The object name, which is always 'function'.")
+model ChatCompletionsToolDefinition {
+  @doc("The type of the tool. Currently, only `function` is supported.")
   type: "function";
 
   @doc("The function definition details for the function tool.")
@@ -456,33 +460,33 @@ model FunctionDefinition {
     """)
   description?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("The parameters the function accepts, described as a JSON Schema object.")
-  parameters?: unknown;
+  parameters?: Record<unknown>;
 }
 
-@discriminator("type")
 @doc("""
-  An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested
-  chat completion.
+  An update to the function tool call information requested by the AI model.
   """)
-model ChatCompletionsToolCall {
-  @doc("The object type.")
-  type: string;
-
+model StreamingChatResponseToolCallUpdate {
   @doc("The ID of the tool call.")
   id: string;
+
+  @doc("Updates to the function call requested by the AI model.")
+  function: FunctionCall;
 }
 
 @doc("""
-  A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents
-  a function invocation needed for a subsequent chat completions request to resolve.
+  A function tool call requested by the AI model.
   """)
-model ChatCompletionsFunctionToolCall extends ChatCompletionsToolCall {
-  @doc("The type of tool call, in this case always 'function'.")
+model ChatCompletionsToolCall {
+  @doc("The ID of the tool call.")
+  id: string;
+
+  @doc("The type of tool call. Currently, only `function` is supported.")
   type: "function";
 
-  @doc("The details of the function invocation requested by the tool call.")
+  @doc("The details of the function call requested by the AI model.")
   function: FunctionCall;
 }
 
