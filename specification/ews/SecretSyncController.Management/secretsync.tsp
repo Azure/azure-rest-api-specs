@@ -125,7 +125,13 @@ interface SecretSyncs {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<SecretSync>;
 
   @doc("Updates a SecretSync instance.")
-  update is ArmResourcePatchAsync<SecretSync, SecretSyncProperties>;
+  update is ArmCustomPatchAsync<
+    SecretSync,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      SecretSync,
+      SecretSyncProperties
+    >
+  >;
 
   @doc("Deletes a SecretSync instance.")
   delete is ArmResourceDeleteWithoutOkAsync<SecretSync>;

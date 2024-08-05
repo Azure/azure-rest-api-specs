@@ -82,9 +82,12 @@ interface AzureKeyVaultSecretProviderClasses {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AzureKeyVaultSecretProviderClass>;
 
   @doc("Updates an AzureKeyVaultSecretProviderClass instance.")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     AzureKeyVaultSecretProviderClass,
-    AzureKeyVaultSecretProviderClassProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      AzureKeyVaultSecretProviderClass,
+      AzureKeyVaultSecretProviderClassProperties
+    >
   >;
 
   @doc("Deletes an AzureKeyVaultSecretProviderClass instance.")

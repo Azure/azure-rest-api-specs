@@ -47,9 +47,224 @@
     },
     {
       "name": "Gpus"
+    },
+    {
+      "name": "EdgeDeviceMetadata"
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDeviceMetadata": {
+      "get": {
+        "operationId": "EdgeDeviceMetadata_ListByEdgeDevice",
+        "tags": [
+          "EdgeDeviceMetadata"
+        ],
+        "description": "List EdgeDeviceMetadata resources by EdgeDevice",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceMetadata_List": {
+            "$ref": "./examples/EdgeDeviceMetadata_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDeviceMetadata/{default}": {
+      "get": {
+        "operationId": "EdgeDeviceMetadata_Get",
+        "tags": [
+          "EdgeDeviceMetadata"
+        ],
+        "description": "Get a EdgeDeviceMetadata",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Name of EdgeDevice metadata",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceMetadata_Get": {
+            "$ref": "./examples/EdgeDeviceMetadata_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeDeviceMetadata_CreateOrUpdate",
+        "tags": [
+          "EdgeDeviceMetadata"
+        ],
+        "description": "Create a EdgeDeviceMetadata",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Name of EdgeDevice metadata",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DeviceMetadata' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeviceMetadata"
+            }
+          },
+          "201": {
+            "description": "Resource 'DeviceMetadata' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeviceMetadata"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceMetadata_CreateOrUpdate": {
+            "$ref": "./examples/EdgeDeviceMetadata_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeDeviceMetadata_Delete",
+        "tags": [
+          "EdgeDeviceMetadata"
+        ],
+        "description": "Delete a EdgeDeviceMetadata",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "default",
+            "in": "path",
+            "description": "Name of EdgeDevice metadata",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceMetadata_Delete": {
+            "$ref": "./examples/EdgeDeviceMetadata_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/gpus": {
       "get": {
         "operationId": "Gpus_ListByEdgeDevice",
@@ -1372,8 +1587,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ClusterProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1388,8 +1602,7 @@
       "properties": {
         "properties": {
           "type": "object",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "kind": {
           "$ref": "#/definitions/EdgeSolutionType",
@@ -1731,6 +1944,42 @@
         }
       }
     },
+    "DeviceMetadata": {
+      "type": "object",
+      "description": "EdgeDevice Metadata resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeDeviceMetadataProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceMetadataListResult": {
+      "type": "object",
+      "description": "The response of a DeviceMetadata list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "EceActionStatus": {
       "type": "object",
       "description": "Validation / deployment status details for Job.",
@@ -1814,8 +2063,7 @@
       "properties": {
         "properties": {
           "type": "object",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1830,8 +2078,7 @@
       "properties": {
         "properties": {
           "type": "object",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "kind": {
           "$ref": "#/definitions/EdgeDeviceKind",
@@ -2009,6 +2256,21 @@
         ]
       }
     },
+    "EdgeDeviceMetadataProperties": {
+      "type": "object",
+      "description": "Edge device metadata properties",
+      "properties": {
+        "validatedRecipe": {
+          "type": "string",
+          "description": "Validated Recipe."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      }
+    },
     "EdgeSolutionType": {
       "type": "string",
       "description": "Edge solution type.",
@@ -2035,12 +2297,11 @@
     },
     "Gpu": {
       "type": "object",
-      "description": "Gpus resource",
+      "description": "GPU resource",
       "properties": {
         "properties": {
           "type": "object",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "kind": {
           "$ref": "#/definitions/EdgeDeviceKind",
@@ -2096,8 +2357,7 @@
           "readOnly": true
         },
         "partitionSizeGb": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "Reported partition size (default: 0 for DDA) For e.g. 2, 4, etc. ",
           "readOnly": true
         },
@@ -3063,6 +3323,38 @@
       },
       "readOnly": true
     },
+    "PartitionDetails": {
+      "type": "object",
+      "description": "Represents the GPU partition details",
+      "properties": {
+        "uniqueId": {
+          "type": "string",
+          "description": "Unique identifier for the partition",
+          "readOnly": true
+        },
+        "partitionId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The partition number that is being used by the workload",
+          "readOnly": true
+        },
+        "currentVram": {
+          "type": "string",
+          "description": "The current vRAM that is used by the partition",
+          "readOnly": true
+        },
+        "currentEncode": {
+          "type": "string",
+          "description": "The current encode that is used by the partition",
+          "readOnly": true
+        },
+        "currentDecode": {
+          "type": "string",
+          "description": "The current decode that is used by the partition",
+          "readOnly": true
+        }
+      }
+    },
     "PauseServerJobProperties": {
       "type": "object",
       "description": "Properties for pausing a server in the cluster.",
@@ -3659,12 +3951,12 @@
         },
         "workloadName": {
           "type": "string",
-          "description": "This gives information about workload name (VM/AKS) specifically the VM Name or AKS Name",
+          "description": "This gives information about workload name (VM/AKS) specifically the VM Name or AKS Name.",
           "readOnly": true
         },
         "workloadStatus": {
           "type": "string",
-          "description": "This gives information about workload status, running or down",
+          "description": "This gives information about workload status, running or down.",
           "readOnly": true
         },
         "workloadType": {
@@ -3672,13 +3964,16 @@
           "description": "This tells if workload is VM, AKS, etc.",
           "readOnly": true
         },
-        "partitionId": {
+        "partitionDetails": {
           "type": "array",
-          "description": "This is the unique partition ID for a workload using GPU-P.",
+          "description": "The partition details for a workload using GPU-P.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/PartitionDetails"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "uniqueId"
+          ]
         },
         "slotLocation": {
           "type": "string",

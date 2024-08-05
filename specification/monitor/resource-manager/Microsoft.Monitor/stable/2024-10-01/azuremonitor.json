@@ -599,6 +599,9 @@
           "Create a PipelineGroup instance using UDP receiver": {
             "$ref": "./examples/PipelineGroupCreateUdp.json"
           },
+          "Create a PipelineGroup instance using a UDP receiver with json array mapper": {
+            "$ref": "./examples/PipelineGroupCreateUdpWithJsonArrayMapper.json"
+          },
           "Create a PipelineGroup instance using a syslog receiver": {
             "$ref": "./examples/PipelineGroupCreateSyslogs.json"
           },
@@ -749,14 +752,31 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "AzureMonitorWorkspace": {
       "type": "object",
       "description": "An Azure Monitor Workspace definition.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "etag": {
           "type": "string",
@@ -883,30 +903,18 @@
     },
     "AzureMonitorWorkspaceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the AzureMonitorWorkspace.",
+      "description": "An Azure Monitor Workspace definition.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/AzureMonitorWorkspaceUpdateProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "AzureMonitorWorkspaceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the AzureMonitorWorkspace.",
-      "properties": {
-        "metrics": {
-          "$ref": "#/definitions/Metrics",
-          "description": "Information about metrics for the Azure Monitor workspace"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "BatchProcessor": {
       "type": "object",
@@ -1085,6 +1093,75 @@
         }
       }
     },
+    "JsonArrayMapper": {
+      "type": "object",
+      "description": "A component that allows parsing a value from sourceField as a json array, match a key to each parsed value from keys, and output the key-value map to destinationField field.",
+      "properties": {
+        "sourceField": {
+          "$ref": "#/definitions/JsonMapperSourceField",
+          "description": "Define a source field from which a json array will be read and parsed to it's elements. The number of elements in the json array is expected to be the same as the length of keys"
+        },
+        "destinationField": {
+          "$ref": "#/definitions/JsonMapperDestinationField",
+          "description": "Define a destination field to which the parsed output will be written. The output is a map, it's keys is the given keys array and the matching values are the parsed json array elements"
+        },
+        "keys": {
+          "type": "array",
+          "description": "Define the names of the keys in the resulting map. The input json array elements are mapped in order, one for every key.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "keys"
+      ]
+    },
+    "JsonMapperDestinationField": {
+      "type": "object",
+      "description": "JsonArrayMapper destination field used to describe the field to which the parsed output will be written",
+      "properties": {
+        "destination": {
+          "type": "string",
+          "description": "Define the destination's element. The element is the body or the attributes of the message, to which the json array mapper will write the output map",
+          "default": "attributes",
+          "enum": [
+            "body",
+            "attributes"
+          ],
+          "x-ms-enum": {
+            "name": "JsonMapperElement",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Body",
+                "value": "body",
+                "description": "Read or write the json array from or to the body of the message."
+              },
+              {
+                "name": "Attributes",
+                "value": "attributes",
+                "description": "Read or write the json array from or to the attributes of the message."
+              }
+            ]
+          }
+        },
+        "fieldName": {
+          "type": "string",
+          "description": "Define a destination field name under the given element. Leaving this empty, means the root of the element. In case element=attributes and fieldName is empty, the object's attributes themselves will contain the key value output pairs"
+        }
+      }
+    },
+    "JsonMapperSourceField": {
+      "type": "object",
+      "description": "JsonArrayMapper source field used to describe the field from which the json array will be read",
+      "properties": {
+        "fieldName": {
+          "type": "string",
+          "description": "Define a source field name from which the json array mapper will read the json array. Leaving this empty, means reading the body of the message itself"
+        }
+      }
+    },
     "Metrics": {
       "type": "object",
       "description": "Information about metrics for the Azure Monitor workspace.",
@@ -1247,8 +1324,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PipelineGroupProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -1344,26 +1420,9 @@
         "service"
       ]
     },
-    "PipelineGroupUpdate": {
+    "PipelineGroupPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the PipelineGroup.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/PipelineGroupUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PipelineGroupUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the PipelineGroup.",
+      "description": "Properties that need to be specified to create a new pipeline group instance.",
       "properties": {
         "replicas": {
           "type": "integer",
@@ -1407,6 +1466,21 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "PipelineGroupUpdate": {
+      "type": "object",
+      "description": "A pipeline group definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineGroupPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "PipelineType": {
       "type": "string",
@@ -1853,6 +1927,10 @@
           "default": 1000,
           "minimum": 100,
           "maximum": 100000
+        },
+        "jsonArrayMapper": {
+          "$ref": "#/definitions/JsonArrayMapper",
+          "description": "Json array mapper - allows this udp receiver to parse a value from a given source field as a json array, match a key to each parsed value and output the key-value map to a given output field."
         }
       },
       "required": [
