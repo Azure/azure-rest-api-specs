@@ -697,6 +697,13 @@
       "title": "NodeCount",
       "default": 3
     },
+    "MaxBodySizeInMb": {
+      "type": "integer",
+      "format": "int32",
+      "description": "CCF Property for the maximum size of the http request body: 1MB, 5MB, 10MB.",
+      "title": "maxBodySizeInMb",
+      "default": 1
+    },
     "LedgerProperties": {
       "type": "object",
       "description": "Additional Confidential Ledger properties.",
@@ -765,9 +772,8 @@
         "maxBodySizeInMb": {
           "type": "integer",
           "format": "int32",
-          "readOnly": false,
           "description": "CCF Property for the maximum size of the http request body: 1MB, 5MB, 10MB.",
-          "default": 1
+          "$ref": "#/definitions/MaxBodySizeInMb"
         },
         "subjectName": {
           "type": "string",
