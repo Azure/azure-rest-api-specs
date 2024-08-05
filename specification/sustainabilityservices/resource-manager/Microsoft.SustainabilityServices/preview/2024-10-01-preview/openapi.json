@@ -72,9 +72,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Operations_List": {
             "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
@@ -82,6 +79,9 @@
           "Operations_List_MinimumSet": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -114,13 +114,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Calculations_ListBySubscription": {
             "$ref": "./examples/Calculations_ListBySubscription_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -156,13 +156,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Calculations_ListByResourceGroup": {
             "$ref": "./examples/Calculations_ListByResourceGroup_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -259,10 +259,6 @@
               "$ref": "#/definitions/CalculationResource"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -277,15 +273,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Calculations_CreateOrUpdate": {
             "$ref": "./examples/Calculations_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Calculations_Update",
@@ -349,15 +345,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Calculations_Update": {
             "$ref": "./examples/Calculations_Update_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Calculations_Delete",
@@ -409,15 +405,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Calculations_Delete": {
             "$ref": "./examples/Calculations_Delete_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -660,22 +656,22 @@
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "The resource is being provisioned"
+            "description": "Initial provisioning in progress"
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The resource is updating"
+            "description": "Update in progress"
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "The resource is being deleted"
+            "description": "Deletion in progress"
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "The resource create request has been accepted"
+            "description": "Change accepted for processing"
           }
         ]
       },

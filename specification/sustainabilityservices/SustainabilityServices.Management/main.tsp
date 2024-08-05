@@ -52,13 +52,13 @@ union ProvisioningState {
   Failed:"Failed",
   /** Resource creation was canceled. */
   Canceled:"Canceled",
-  /** The resource is being provisioned */
+  /** Initial provisioning in progress */
   Provisioning:"Provisioning",
-  /** The resource is updating */
+  /** Update in progress */
   Updating:"Updating",
-  /** The resource is being deleted */
+  /** Deletion in progress */
   Deleting:"Deleting",
-  /** The resource create request has been accepted */
+  /** Change accepted for processing */
   Accepted:"Accepted"
 }
 
