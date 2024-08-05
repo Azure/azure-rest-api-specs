@@ -974,7 +974,7 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(analyzeTextCancelJob, "AnalyzeTextCancelOperation", "csharp");
 
 @@clientName(EntitiesDocumentResultWithDetectedLanguage, "EntityTextResult", "csharp");
-@@clientName(ClassificationDocumentResultWithDetectedLanguage, "ClassificationDocumenTextResult", "csharp");
+@@clientName(ClassificationDocumentResultWithDetectedLanguage, "ClassificationTextResult", "csharp");
 @@clientName(EntityLinkingResultWithDetectedLanguage, "EntityLinkingTextResult", "csharp");
 @@clientName(KeyPhrasesDocumentResultWithDetectedLanguage, "KeyPhrasesTextResult", "csharp");
 @@clientName(PiiResultWithDetectedLanguage, "PiiTextResult", "csharp");
