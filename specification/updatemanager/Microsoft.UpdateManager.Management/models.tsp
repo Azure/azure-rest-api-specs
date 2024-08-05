@@ -27,6 +27,7 @@ model UpdateRuleSetProperties {
 
   @doc("Approve patches after days.")
   @minValue(0)
+  @maxValue(35)
   approvePatchesAfterDays?: int32;
 
   @doc("The status of the last operation.")
@@ -51,9 +52,11 @@ union rebootSettings {
 @doc("Linux parameters.")
 model LinuxParameters {
   @doc("The package name masks to exclude.")
+  @maxItems(100)
   packageNameMasksToExclude?: string[];
 
   @doc("The package name masks to include.")
+  @maxItems(100)
   packageNameMasksToInclude?: string[];
 
   @doc("The classifications to include.")
@@ -63,9 +66,11 @@ model LinuxParameters {
 @doc("Windows parameters.")
 model WindowsParameters {
   @doc("The KB numbers to exclude.")
+  @maxItems(100)
   kbNumbersToExclude?: string[];
 
   @doc("The KB numbers to include.")
+  @maxItems(100)
   kbNumbersToInclude?: string[];
 
   @doc("The classifications to include.")
