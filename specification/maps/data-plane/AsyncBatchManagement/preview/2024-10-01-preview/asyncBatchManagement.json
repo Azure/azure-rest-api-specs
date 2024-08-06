@@ -81,7 +81,7 @@
   "paths": {
     "/asyncBatch/operations/{id}": {
       "get": {
-        "description": "Get the status of an asynchronous batch operation by its operation ID.",
+        "description": "Get the status of an asynchronous batch operation by its ID.",
         "operationId": "AsynchronousBatchManagement_GetOperation",
         "produces": [
           "application/json"
@@ -211,19 +211,19 @@
             ]
           }
         },
-        "inputFolderPath": {
-          "description": "The URL that points to a Azure blob storage folder where the batch input blobs will be stored.",
+        "inputContainerUri": {
+          "description": "The URI for the Azure Blob Storage container with the input blobs to be processed.",
           "type": "string",
           "format": "uri"
         },
-        "outputFolderPath": {
-          "description": "The URL that points to a Azure blob storage folder where the batch results will be stored.",
+        "outputContainerUri": {
+          "description": "The URI for the Azure Blob Storage container where the output blobs will be stored.",
           "type": "string",
           "format": "uri"
         },
         "allowBlobOverwrite": {
-          "description": "If a blob with the same name as the batch result already exists in the output folder, the transformation will terminate to avoid overwriting the existing blob. If the allowBlobOverwrite option is set to true, the existing blob will be overwritten.",
-          "type": "boolean",
+          "description": "If a blob with the same name as the batch result output already exists in the output container, the transformation will terminate to avoid overwriting the existing blob. If allowBlobOverwrite option is set to true, the existing blob will be overwritten.",
+          "type": "boolean"
           "default": false
         },
         "msiClientId": {
@@ -240,9 +240,15 @@
           "format": "date-time",
           "description": "Timestamp when the operation status was updated."
         },
-        "progress": {
-          "type": "string",
-          "description": "X out of Y indicating how many input blobs have been transformed."
+        "processedBlobCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicate how many input blobs have been transformed."
+        },
+        "totalBlobCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicate how many input blobs to transform."
         },
         "status": {
           "type": "string",
@@ -301,11 +307,12 @@
       "required": [
         "id",
         "kind",
-        "inputFolderPath",
-        "outputFolderPath",
+        "inputContainerUri",
+        "outputContainerUri",
         "createdDateTime",
         "lastActionDateTime",
-        "progress",
+        "processedBlobCount",
+        "totalBlobCount",
         "status"
       ]
     },
