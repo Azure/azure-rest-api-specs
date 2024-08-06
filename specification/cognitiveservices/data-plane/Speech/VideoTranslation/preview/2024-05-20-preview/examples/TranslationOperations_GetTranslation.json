@@ -1,0 +1,57 @@
+{
+  "title": "Get Translation",
+  "operationId": "TranslationOperations_GetTranslation",
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "api-version": "2024-05-20-preview",
+    "translationId": "TranslateMyZhCNVideo",
+    "Ocp-Apim-Subscription-Key": "{API Key}"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "TranslateMyZhCNVideo",
+        "displayName": "hello.mp4",
+        "description": "Translate video from en-US to zh-CN.",
+        "input": {
+          "sourceLocale": "en-US",
+          "targetLocale": "zh-CN",
+          "voiceKind": "PlatformVoice",
+          "videoFileUrl": "https://xxx.blob.core.windows.net/container1/myvtt.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+        },
+        "createdDateTime": "2023-04-01T05:30:00.000Z",
+        "latestIteration": {
+          "id": "xxx",
+          "description": "Iteration1",
+          "status": "Running",
+          "input": {
+            "speakerCount": 3,
+            "subtitleMaxCharCountPerSegment": 80,
+            "webvttFile": {
+              "url": "https://xxx.blob.core.windows.net/container1/myvtt.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+              "kind": "MetadataJson"
+            }
+          }
+        },
+        "latestSucceededIteration": {
+          "id": "xxx",
+          "description": "Iteration1",
+          "input": {
+            "webvttFile": {
+              "url": "https://xxx.blob.core.windows.net/container1/myvtt.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+              "kind": "MetadataJson"
+            }
+          },
+          "result": {
+            "translatedVideoFileUrl": "https://xxx.blob.core.windows.net/container1/video.mp4?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+            "sourceLocaleSubtitleWebvttFileUrl": "https://xxx.blob.core.windows.net/container1/sourceLocale.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+            "targetLocaleSubtitleWebvttFileUrl": "https://xxx.blob.core.windows.net/container1/targetLocale.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+            "metadataJsonWebvttFileUrl": "https://xxx.blob.core.windows.net/container1/metadataJsonLocale.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx",
+            "reportFileUrl": "https://xxx.blob.core.windows.net/container1/metadataJsonLocale.vtt?sv=2023-01-03&st=2024-05-20T08%3A27%3A15Z&se=2024-05-21T08%3A27%3A15Z&sr=b&sp=r&sig=xxx"
+          }
+        }
+      }
+    }
+  }
+}
