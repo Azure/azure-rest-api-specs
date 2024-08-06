@@ -26,6 +26,10 @@
           "type": "string",
           "description": "Type of linked service."
         },
+        "version": {
+          "type": "string",
+          "description": "Version of the linked service."
+        },
         "connectVia": {
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
@@ -1500,6 +1504,15 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
+        },
+        "serviceEndpoint": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "File service endpoint of the Azure File Storage resource. It is mutually exclusive with connectionString, sasUri property."
+        },
+        "credential": {
+          "$ref": "../datafactory.json#/definitions/CredentialReference",
+          "description": "The credential reference containing authentication information."
         }
       }
     },
@@ -6746,8 +6759,28 @@
       "properties": {
         "connectionString": {
           "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "x-ms-format": "dfe-string",
+          "type": "object"
+        },
+        "server": {
           "type": "object",
-          "x-ms-format": "dfe-string"
+          "x-ms-format": "dfe-string",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port for the connection. Type: integer."
+        },
+        "uid": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database name for connection. Type: string."
         },
         "pwd": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
