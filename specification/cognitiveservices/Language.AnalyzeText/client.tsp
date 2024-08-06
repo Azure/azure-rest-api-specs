@@ -973,15 +973,48 @@ namespace Language.AnalyzeTextClientCustomizations;
 @@clientName(analyzeTextJobStatus, "AnalyzeTextOperationStatus", "csharp");
 @@clientName(analyzeTextCancelJob, "AnalyzeTextCancelOperation", "csharp");
 
-@@clientName(EntitiesDocumentResultWithDetectedLanguage, "EntityTextResult", "csharp");
-@@clientName(ClassificationDocumentResultWithDetectedLanguage, "ClassificationTextResult", "csharp");
-@@clientName(EntityLinkingResultWithDetectedLanguage, "EntityLinkingTextResult", "csharp");
-@@clientName(KeyPhrasesDocumentResultWithDetectedLanguage, "KeyPhrasesTextResult", "csharp");
+@@clientName(EntitiesDocumentResultWithDetectedLanguage,
+  "EntityTextResult",
+  "csharp"
+);
+@@clientName(ClassificationDocumentResultWithDetectedLanguage,
+  "ClassificationTextResult",
+  "csharp"
+);
+@@clientName(EntityLinkingResultWithDetectedLanguage,
+  "EntityLinkingTextResult",
+  "csharp"
+);
+@@clientName(KeyPhrasesDocumentResultWithDetectedLanguage,
+  "KeyPhrasesTextResult",
+  "csharp"
+);
 @@clientName(PiiResultWithDetectedLanguage, "PiiTextResult", "csharp");
-@@clientName(SentimentDocumentResultWithDetectedLanguage, "SentimentTextResult", "csharp");
-@@clientName(ExtractedSummaryDocumentResultWithDetectedLanguage, "ExtractedSummaryTextResult", "csharp");
-@@clientName(AbstractiveSummaryDocumentResultWithDetectedLanguage, "AbstractiveSummaryTextResult", "csharp");
-@@clientName(CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage, "CustomHealthcareTextResult", "csharp");
-@@clientName(CustomLabelClassificationResultWithDocumentDetectedLanguage, "CustomLabelClassificationTextResult", "csharp");
-@@clientName(HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage, "HealthcareTextResult", "csharp");
-@@clientName(CustomEntitiesResultWithDocumentDetectedLanguage, "CustomEntitiesTextResult", "csharp");
+@@clientName(SentimentDocumentResultWithDetectedLanguage,
+  "SentimentTextResult",
+  "csharp"
+);
+@@clientName(ExtractedSummaryDocumentResultWithDetectedLanguage,
+  "ExtractedSummaryTextResult",
+  "csharp"
+);
+@@clientName(AbstractiveSummaryDocumentResultWithDetectedLanguage,
+  "AbstractiveSummaryTextResult",
+  "csharp"
+);
+@@clientName(CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage,
+  "CustomHealthcareTextResult",
+  "csharp"
+);
+@@clientName(CustomLabelClassificationResultWithDocumentDetectedLanguage,
+  "CustomLabelClassificationTextResult",
+  "csharp"
+);
+@@clientName(HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage,
+  "HealthcareTextResult",
+  "csharp"
+);
+@@clientName(CustomEntitiesResultWithDocumentDetectedLanguage,
+  "CustomEntitiesTextResult",
+  "csharp"
+);
