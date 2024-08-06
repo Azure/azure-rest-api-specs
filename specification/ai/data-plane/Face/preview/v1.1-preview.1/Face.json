@@ -5858,7 +5858,7 @@
             "description": "Body parameter.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateLivenessSessionContent"
+              "$ref": "#/definitions/CreateLivenessWithVerifySessionJsonContent"
             }
           }
         ],
@@ -7442,7 +7442,7 @@
     },
     "CreateLivenessSessionContent": {
       "type": "object",
-      "description": "Request for creating liveness session.",
+      "description": "Request model for creating liveness session.",
       "properties": {
         "livenessOperationMode": {
           "$ref": "#/definitions/LivenessOperationMode",
@@ -7491,12 +7491,45 @@
         "authToken"
       ]
     },
-    "CreateLivenessWithVerifySessionContent": {
+    "CreateLivenessWithVerifySessionJsonContent": {
+      "type": "object",
+      "description": "Request for creating liveness with verify session.",
+      "properties": {
+        "livenessOperationMode": {
+          "$ref": "#/definitions/LivenessOperationMode",
+          "description": "Type of liveness mode the client should follow."
+        },
+        "sendResultsToClient": {
+          "type": "boolean",
+          "description": "Whether or not to allow a '200 - Success' response body to be sent to the client, which may be undesirable for security reasons. Default is false, clients will receive a '204 - NoContent' empty body response. Regardless of selection, calling Session GetResult will always contain a response body enabling business logic to be implemented."
+        },
+        "deviceCorrelationIdSetInClient": {
+          "type": "boolean",
+          "description": "Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body."
+        },
+        "deviceCorrelationId": {
+          "type": "string",
+          "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null."
+        },
+        "authTokenTimeToLiveInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
+        }
+      },
+      "required": [
+        "livenessOperationMode"
+      ]
+    },
+    "CreateLivenessWithVerifySessionMultipartContent": {
       "type": "object",
       "description": "Request of liveness with verify session creation.",
       "properties": {
         "Parameters": {
-          "$ref": "#/definitions/CreateLivenessSessionContent",
+          "$ref": "#/definitions/CreateLivenessWithVerifySessionJsonContent",
           "description": "The parameters for creating session."
         },
         "VerifyImage": {
@@ -8607,37 +8640,27 @@
       "type": "string",
       "description": "The model version used for liveness classification.",
       "enum": [
-        "2020-02-15-preview.01",
-        "2021-11-12-preview.03",
         "2022-10-15-preview.04",
-        "2023-03-02-preview.05"
+        "2023-12-20-preview.06"
       ],
       "x-ms-enum": {
         "name": "LivenessModel",
         "modelAsString": true,
         "values": [
           {
-            "name": "v2020_02_15_preview_01",
-            "value": "2020-02-15-preview.01"
-          },
-          {
-            "name": "v2021_11_12_preview_03",
-            "value": "2021-11-12-preview.03"
-          },
-          {
             "name": "v2022_10_15_preview_04",
             "value": "2022-10-15-preview.04"
           },
           {
-            "name": "v2023_03_02_preview_05",
-            "value": "2023-03-02-preview.05"
+            "name": "v2023_12_20_preview_06",
+            "value": "2023-12-20-preview.06"
           }
         ]
       }
     },
     "LivenessOperationMode": {
       "type": "string",
-      "description": "The liveness operation mode to drive the client’s end-user experience.",
+      "description": "The liveness operation mode to drive the client's end-user experience.",
       "enum": [
         "Passive",
         "PassiveActive"
@@ -8649,12 +8672,12 @@
           {
             "name": "Passive",
             "value": "Passive",
-            "description": "Utilizes a passive liveness technique that requires no additional actions from the user. Requires normal indoor lighting and high screen brightness for optimal performance. And thus, this mode has a narrow operational envelope and will not be suitable for scenarios that requires the end-user’s to be in bright lighting conditions. Note: this is the only supported mode for the Mobile (iOS and Android) solution."
+            "description": "Utilizes a passive liveness technique that requires no additional actions from the user. Requires normal indoor lighting and high screen brightness for optimal performance. And thus, this mode has a narrow operational envelope and will not be suitable for scenarios that requires the end-user's to be in bright lighting conditions. Note: this is the only supported mode for the Mobile (iOS and Android) solution."
           },
           {
             "name": "PassiveActive",
             "value": "PassiveActive",
-            "description": "This mode utilizes a hybrid passive or active liveness technique that necessitates user cooperation. It is optimized to require active motion only under suboptimal lighting conditions. Unlike the passive mode, this mode has no lighting restrictions, and thus offering a broader operational envelope. This mode is preferable on Web based solutions due to the lack of automatic screen brightness control available on browsers which hinders the Passive mode’s operational envelope on Web based solutions."
+            "description": "This mode utilizes a hybrid passive or active liveness technique that necessitates user cooperation. It is optimized to require active motion only under suboptimal lighting conditions. Unlike the passive mode, this mode has no lighting restrictions, and thus offering a broader operational envelope. This mode is preferable on Web based solutions due to the lack of automatic screen brightness control available on browsers which hinders the Passive mode's operational envelope on Web based solutions."
           }
         ]
       }
