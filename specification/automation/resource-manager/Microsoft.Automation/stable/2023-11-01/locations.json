@@ -66,7 +66,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "account.json#/definitions/UsageListResult"
+              "$ref": "#/definitions/UsageListResult"
             }
           },
           "default": {
@@ -83,6 +83,28 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "UsageListResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "account.json#/definitions/Usage"
+          },
+          "description": "Gets or sets usage."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets or sets the next link."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The response model for the get usage operation."
+    }
+  },
   "parameters": {}
 }
