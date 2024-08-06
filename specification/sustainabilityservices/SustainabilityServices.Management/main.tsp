@@ -46,20 +46,27 @@ model CalculationResource is TrackedResource<CalculationResourceProperties> {
 @Azure.Core.lroStatus
 union ProvisioningState {
   string,
+
   /** Resource has been created. */
-  Succeeded:"Succeeded",
+  Succeeded: "Succeeded",
+
   /** Resource creation failed. */
-  Failed:"Failed",
+  Failed: "Failed",
+
   /** Resource creation was canceled. */
-  Canceled:"Canceled",
+  Canceled: "Canceled",
+
   /** Initial provisioning in progress */
-  Provisioning:"Provisioning",
+  Provisioning: "Provisioning",
+
   /** Update in progress */
-  Updating:"Updating",
+  Updating: "Updating",
+
   /** Deletion in progress */
-  Deleting:"Deleting",
+  Deleting: "Deleting",
+
   /** Change accepted for processing */
-  Accepted:"Accepted"
+  Accepted: "Accepted",
 }
 
 @doc("Details of the SustainabilityServices Calculations.")
