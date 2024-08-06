@@ -166,6 +166,23 @@ interface ImageOperations {
     },
     DetectIncidentsResult
   >;
+
+  @added(ContentSafety.Versions.v2024_09_30_Preview)
+  @summary("Detect the content credentials from assets.")
+  @doc("A synchronous API for detecting the content credentials from assets.")
+  @route("/image:detectContentCredential")
+  @post
+  detectContentCredential is Azure.Core.RpcOperation<
+    {
+      @bodyRoot
+      @doc("The image to be decoded, which is in base64 string format.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: DetectImageContentCredentialOptions;
+    },
+    DetectImageContentCredentialResult
+  >;
 }
 
 interface BlockOps

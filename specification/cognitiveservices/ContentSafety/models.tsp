@@ -941,3 +941,34 @@ model AnalyzeTextCustomCategoryResult {
   @doc("The analysis result with Custom Category.")
   customCategoryAnalysis: TextCustomCategoryAnalysis;
 }
+
+@added(ContentSafety.Versions.v2024_09_30_Preview)
+@doc("The image to be analyzed.")
+model ContentCredentialImageData {
+  @doc("The Base64 encoding of the image.")
+  content: bytes;
+}
+
+@added(ContentSafety.Versions.v2024_09_30_Preview)
+@doc("The request of detecting content credential in the given image.")
+model DetectImageContentCredentialOptions {
+  @doc("The image to be analyzed.")
+  image: ContentCredentialImageData;
+}
+
+@added(ContentSafety.Versions.v2024_09_30_Preview)
+@doc("The detection results of content credential.")
+model DetectImageContentCredentialResult {
+  @doc("Analysis result for the given image.")
+  contentCredentialAnalysis: ImageContentCredentialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2024_09_30_Preview)
+@doc("The detection result of content credential.")
+model ImageContentCredentialAnalysisResult {
+  @doc("The C2PA Manifest information that baked in the image.")
+  imageManifest: string;
+
+  @doc("Image Manifest added by Encode Model.")
+  watermarkStickyManifest: string;
+}
