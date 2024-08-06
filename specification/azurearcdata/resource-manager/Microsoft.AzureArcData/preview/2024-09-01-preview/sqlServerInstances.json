@@ -1349,10 +1349,20 @@
         "azureManagedInstanceResourceId": {
           "type": "string",
           "description": "The Azure SQL Managed Instance resource ID to link with the SQL Server instance."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database to be replicated to the Azure SQL Managed Instance."
+        },
+        "availabilityGroupName": {
+          "type": "string",
+          "description": "The name of the availability group to be used for the database replication."
         }
       },
       "required": [
-        "azureManagedInstanceResourceId"
+        "azureManagedInstanceResourceId",
+        "databaseName",
+        "availabilityGroupName"
       ]
     },
     "SqlServerInstanceManagedInstanceLinkAssessmentResponse": {
