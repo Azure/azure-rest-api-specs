@@ -150,7 +150,7 @@ op getKeyValues is Foundations.ResourceList<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$select")
+    @query("$Select")
     select?: KeyValueFields[];
 
     @doc("""
@@ -174,7 +174,7 @@ op getKeyValues is Foundations.ResourceList<
     @header("If-None-Match")
     ifNoneMatch?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/keyvaluefiltering
@@ -227,7 +227,7 @@ op checkKeyValues is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$select")
+    @query("$Select")
     select?: KeyValueFields[];
 
     @doc("A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.")
@@ -248,12 +248,12 @@ op checkKeyValues is appConfigOperation<
     @header("If-None-Match")
     ifNoneMatch?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/keyvaluefiltering
       """)
-    @query(#{ name: "tags", exlode: true })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders
@@ -269,7 +269,7 @@ op getKeyValue is standardOps.ResourceRead<
     label?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$select")
+    @query("$Select")
     select?: KeyValueFields[];
   }> &
     RequestHeadersTrait<{
@@ -424,7 +424,7 @@ op checkKeyValue is appConfigOperation<
     ifNoneMatch?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$select")
+    @query("$Select")
     select?: KeyValueFields[];
   },
   OkResponse & AppConfigResponseHeaders
@@ -492,7 +492,7 @@ op getSnapshot is standardOps.ResourceRead<
   Snapshot,
   QueryParametersTrait<{
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$select")
+    @query("$Select")
     select?: SnapshotFields[];
   }> &
     RequestHeadersTrait<{
@@ -669,7 +669,7 @@ op getLabels is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$select")
+    @query("$Select")
     select?: LabelFields[];
   },
   LabelListResult & {
@@ -706,7 +706,7 @@ op checkLabels is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$select")
+    @query("$Select")
     select?: LabelFields[];
   },
   OkResponse & {
@@ -824,15 +824,15 @@ op getRevisions is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$select")
+    @query("$Select")
     select?: KeyValueFields[];
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/restapirevisions
       """)
-    @query(#{ name: "tags", exlode: true })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   KeyValueListResult &
@@ -878,15 +878,15 @@ op checkRevisions is appConfigOperation<
     acceptDatetime?: string;
 
     @doc("Used to select what fields are present in the returned resource(s).")
-    @query("$select")
+    @query("$Select")
     select?: KeyValueFields[];
 
-    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
     @doc("""
       A filter used to query by tags. Syntax reference:
       https://aka.ms/azconfig/docs/restapirevisions
       """)
-    @query(#{ name: "tags", exlode: true })
+    @query(#{ name: "tags", explode: true })
     tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders
