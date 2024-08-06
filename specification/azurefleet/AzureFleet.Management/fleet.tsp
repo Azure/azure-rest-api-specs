@@ -82,13 +82,13 @@ model FleetProperties {
 
   @extension("x-ms-identifiers", [])
   @doc("List of VM sizes supported for Compute Fleet")
-  vmSizesProfile: Array<VmSizeProfile>;
+  vmSizesProfile: VmSizeProfile;
 
   @doc("Compute Profile to use for running user's workloads.")
   computeProfile: ComputeProfile;
 
   @doc("Specifies the time at which the Compute Fleet is created.")
-  @visibility("read")
+  @visibility("update")
   timeCreated?: utcDateTime;
 
   @doc("Specifies the ID which uniquely identifies a Compute Fleet.")
