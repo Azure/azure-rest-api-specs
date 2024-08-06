@@ -26,7 +26,7 @@ These are the global settings for the computefleet.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-preview-2024-07
 suppressions:
   - code: PatchBodyParametersSchema
     from: azurefleet.json
@@ -47,6 +47,16 @@ suppressions:
     reason: Property "diskIOPSReadWrite" does not follow Camel Case and can't be changed as it is being 
             defined previously in Microsoft.Compute like this.
 ```
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.AzureFleet/preview/2024-07-01-preview/azurefleet.json
+```
+
 
 ### Tag: package-preview-2023-11
 
