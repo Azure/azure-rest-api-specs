@@ -48,7 +48,7 @@ async function convert(expect: ExpectStatic, readme: string) {
     await access(mainTsp, constants.R_OK);
     console.log(`File exists: ${mainTsp}`);
 
-    ({ stdout, all, exitCode } = await npmExec("tsp", "compile", outputFolder));
+    ({ stdout, all, exitCode } = await npmExec("tsp", "compile", "--no-emit", outputFolder));
 
     expect(stdout).toContain("TypeSpec compiler");
     expect(exitCode, all).toBe(0);
