@@ -48,6 +48,7 @@ async function convert(expect: ExpectStatic, readme: string) {
     await access(mainTsp, constants.R_OK);
     console.log(`File exists: ${mainTsp}`);
 
+    // Use "--no-emit" to avoid generating output files that would need to be cleaned up
     ({ stdout, all, exitCode } = await npmExec("tsp", "compile", "--no-emit", outputFolder));
 
     expect(stdout).toContain("TypeSpec compiler");
