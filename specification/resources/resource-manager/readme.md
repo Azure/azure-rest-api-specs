@@ -1416,9 +1416,6 @@ directive:
   - supress: OperationsAPIImplementation
     from: deploymentStacks.json
     reason: This comes from resources.json
-  - supress: OperationsAPIImplementation
-    from: dataBoundaries.json
-    reason: This comes from resources.json
   - suppress: PathForPutOperation
     from: policyDefinitions.json
     reason: Policy definitions can be created at management group or subscriptions
