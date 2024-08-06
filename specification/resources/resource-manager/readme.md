@@ -46,7 +46,7 @@ tag: package-policy-2023-04
 ```
 
 ``` yaml $(package-databoundaries)
-tag: package-databoundaries-2024-03
+tag: package-databoundaries-2024-08
 ```
 
 ``` yaml $(package-resources)
@@ -280,13 +280,13 @@ input-file:
 - Microsoft.Resources/preview/2022-11-01-preview/snapshots.json
 ```
 
-### Tag: package-databoundaries-2024-03
+### Tag: package-databoundaries-2024-08
 
-These settings apply only when `--tag=package-databoundaries-2024-03` is specified on the command line.
+These settings apply only when `--tag=package-databoundaries-2024-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-databoundaries-2024-03-preview'
+``` yaml $(tag) == 'package-databoundaries-2024-08'
 input-file:
-  - Microsoft.Resources/stable/2024-03-01/dataBoundaries.json
+  - Microsoft.Resources/stable/2024-08-01/dataBoundaries.json
 ```
 
 ### Tag: package-changes-2022-05
