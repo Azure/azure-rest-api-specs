@@ -37,9 +37,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFaults": {
       "get": {
         "operationId": "ChaosFault_List",
-        "description": "list Chaos Faults",
+        "description": "List Chaos Faults for CosmosDB account.",
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "ChaosFaultList": {
@@ -79,7 +79,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/chaosFaults/{chaosFault}": {
       "put": {
         "operationId": "ChaosFault_EnableDisable",
-        "description": "Enable, disable Chaos Fault",
+        "description": "Enable, disable Chaos Fault in a CosmosDB account.",
         "x-ms-examples": {
           "ChaosFaultEnableDisable": {
             "$ref": "./examples/ChaosFaultEnableDisable.json"
@@ -138,7 +138,7 @@
       },
       "get": {
         "operationId": "ChaosFault_Get",
-        "description": "Get Chaos Fault",
+        "description": "Get Chaos Fault for a CosmosdB account for a particular Chaos Fault.",
         "x-ms-examples": {
           "ChaosFaultGet": {
             "$ref": "./examples/ChaosFaultGet.json"
@@ -243,11 +243,6 @@
             "$ref": "#/definitions/chaosFaultResource"
           },
           "description": "List of Chaos Faults."
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       },
       "description": "Chaos Fault List Response."

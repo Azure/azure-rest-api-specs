@@ -887,6 +887,9 @@ directive:
   - suppress: AvoidAdditionalProperties
     from: managedCassandra.json
     reason: Temporarily suppressing existing linter errors and will be fixed later
+  - suppress: BodyTopLevelProperties
+    from: chaosFault.json
+    reason: Temporarily suppressing existing linter errors due to known issue in linter validation as discussed in the ARM Office hours.
 
 ```
 
