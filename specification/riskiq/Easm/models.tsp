@@ -2048,9 +2048,7 @@ model ResponseTypeParameter {
 @doc("The prameter of responseIncludes")
 @Versioning.added(Versions.v2024_03_01_preview)
 model ResponseIncludesParameter {
-  @query({
-    format: "csv",
-  })
+  @query
   @doc("The properties to include in the response.")
   responseIncludes?: string[];
 }

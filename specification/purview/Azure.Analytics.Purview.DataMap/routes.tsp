@@ -129,9 +129,7 @@ interface Entity {
   listByGuids is AtlasOperation<
     {
       @doc("An array of GUIDs of entities to list.")
-      @query({
-        format: "multi",
-      })
+      @query(#{ explode: true })
       guid: string[];
 
       @doc("Whether to return minimal information for referred entities.")
@@ -191,9 +189,7 @@ interface Entity {
   bulkDelete is AtlasOperation<
     {
       @doc("An array of GUIDs of entities to delete.")
-      @query({
-        format: "multi",
-      })
+      @query(#{ explode: true })
       guid: string[];
     },
     EntityMutationResult,
