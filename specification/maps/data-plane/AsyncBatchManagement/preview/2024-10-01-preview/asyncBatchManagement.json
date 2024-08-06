@@ -223,8 +223,7 @@
         },
         "allowBlobOverwrite": {
           "description": "If a blob with the same name as the batch result already exists in the output folder, the transformation will terminate to avoid overwriting the existing blob. If the allowBlobOverwrite option is set to true, the existing blob will be overwritten.",
-          "type": "boolean",
-          "default": false
+          "type": "boolean"
         },
         "msiClientId": {
           "type": "string",
@@ -240,9 +239,15 @@
           "format": "date-time",
           "description": "Timestamp when the operation status was updated."
         },
-        "progress": {
-          "type": "string",
-          "description": "X out of Y indicating how many input blobs have been transformed."
+        "processedBlobCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicate how many input blobs have been transformed."
+        },
+        "totalBlobCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicate how many input blobs to transform."
         },
         "status": {
           "type": "string",
@@ -305,7 +310,8 @@
         "outputFolderPath",
         "createdDateTime",
         "lastActionDateTime",
-        "progress",
+        "processedBlobCount",
+        "totalBlobCount",
         "status"
       ]
     },
