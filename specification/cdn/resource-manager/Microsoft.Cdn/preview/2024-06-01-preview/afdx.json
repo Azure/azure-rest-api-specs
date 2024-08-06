@@ -7103,8 +7103,7 @@
             "Microsoft.Cdn/profiles/originGroups/origins",
             "Microsoft.Cdn/profiles/ruleSets",
             "Microsoft.Cdn/profiles/ruleSets/rules",
-            "Microsoft.Cdn/profiles/securityPolicies",
-            "Microsoft.Network/frontdoorWebApplicationFirewallPolicies"
+            "Microsoft.Cdn/profiles/securityPolicies"
           ],
           "x-ms-enum": {
             "name": "PreviewSupportedResourceType",
@@ -7228,24 +7227,6 @@
         },
         "currentProperties": {
           "$ref": "#/definitions/SecurityPolicyProperties"
-        }
-      }
-    },
-    "DeploymentVersionWafChange": {
-      "type": "object",
-      "description": "Deployment change of the waf related to the profile",
-      "x-ms-discriminator-value": "Microsoft.Network/frontdoorWebApplicationFirewallPolicies",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentVersionChange"
-        }
-      ],
-      "properties": {
-        "previousProperties": {
-          "$ref": "./frontdoorwebapplicationfirewall.json#/definitions/WebApplicationFirewallPolicyProperties"
-        },
-        "currentProperties": {
-          "$ref": "./frontdoorwebapplicationfirewall.json#/definitions/WebApplicationFirewallPolicyProperties"
         }
       }
     },
