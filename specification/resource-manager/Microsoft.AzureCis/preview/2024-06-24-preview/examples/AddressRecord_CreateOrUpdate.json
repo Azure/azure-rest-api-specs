@@ -1,0 +1,45 @@
+{
+  "title": "Create AddressRecord",
+  "operationId": "AddressRecord_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "prodUSEastAzcis",
+    "api-version": "2023-08-22-preview",
+    "resource": {
+      "properties": {
+        "dnsName": "azcistest20240115.debug.msftdomains.com",
+        "ipAddress": "192.168.1.1",
+        "ttl": "10"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/addressRecords/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/addressRecords",
+        "properties": {
+          "provisioningState": "Accepted",
+          "dnsName": "azcistest20240115.debug.msftdomains.com",
+          "ipAddress": "192.168.1.1",
+          "ttl": "10"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/addressRecords/prodUSEastAzcis",
+        "name": "prodUSEastAzcis",
+        "type": "Microsoft.AzureCis/addressRecords",
+        "properties": {
+          "provisioningState": "Accepted",
+          "dnsName": "azcistest20240115.debug.msftdomains.com",
+          "ipAddress": "192.168.1.1",
+          "ttl": "10"
+        }
+      }
+    }
+  }
+}
