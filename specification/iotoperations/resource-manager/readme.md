@@ -56,7 +56,7 @@ These are the global settings for the IoTOperationsOrchestrator.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-07-01-preview
+tag: package-2024-08-15-preview
 ```
 
 ### Tag: package-2024-07-01-preview
@@ -66,4 +66,13 @@ These settings apply only when `--tag=package-2024-07-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-07-01-preview'
 input-file:
   - Microsoft.IoTOperations/preview/2024-07-01-preview/iotoperations.json
+```
+
+### Tag: package-2024-08-15-preview
+
+These settings apply only when `--tag=package-2024-08-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-15-preview'
+input-file:
+  - Microsoft.IoTOperations/preview/2024-08-15-preview/iotoperations.json
 ```
