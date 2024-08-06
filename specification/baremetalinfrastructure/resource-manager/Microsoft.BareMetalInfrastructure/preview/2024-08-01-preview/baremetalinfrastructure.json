@@ -803,61 +803,63 @@
   },
   "definitions": {
     "AzureBareMetalInstancesListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureBareMetalInstance"
           },
-          "description": "The list of Azure Bare Metal Instances."
+          "description": "The list of Azure BareMetal instances."
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to get the next set of Azure Bare Metal Instances."
+          "description": "The URL to get the next set of AzureBareMetal instances."
         }
       },
-      "description": "The response from the List Azure Bare Metal Instances operation."
+      "description": "The response from the List AzureBareMetal Instances operation."
     },
     "AzureBareMetalInstance": {
-      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AzureBareMetalInstanceProperties",
           "description": "AzureBareMetal instance properties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "AzureBareMetal instance info on Azure (ARM properties and AzureBareMetal properties)"
     },
     "AzureBareMetalInstanceProperties": {
-      "type": "object",
       "properties": {
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
-          "description": "Specifies the hardware settings for the Azure Bare Metal Instance."
+          "description": "Specifies the hardware settings for the AzureBareMetal instance."
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
-          "description": "Specifies the storage settings for the Azure Bare Metal Instance disks."
+          "description": "Specifies the storage settings for the AzureBareMetal instance disks."
         },
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
-          "description": "Specifies the operating system settings for the Azure Bare Metal Instance."
+          "description": "Specifies the operating system settings for the AzureBareMetal instance."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
-          "description": "Specifies the network settings for the Azure Bare Metal Instance."
+          "description": "Specifies the network settings for the AzureBareMetal instance."
         },
         "azureBareMetalInstanceId": {
           "readOnly": true,
           "type": "string",
-          "description": "Specifies the Azure Bare Metal Instance unique ID."
+          "description": "Specifies the AzureBareMetal instance unique ID."
         },
         "powerState": {
           "readOnly": true,
@@ -884,7 +886,7 @@
         "hwRevision": {
           "readOnly": true,
           "type": "string",
-          "description": "Hardware revision of an Azure Bare Metal Instance"
+          "description": "Hardware revision of an AzureBareMetal instance"
         },
         "partnerNodeId": {
           "type": "string",
@@ -909,10 +911,9 @@
           "description": "State of provisioning of the AzureBareMetalInstance"
         }
       },
-      "description": "Describes the properties of an Azure Bare Metal Instance."
+      "description": "Describes the properties of an AzureBareMetal instance."
     },
     "HardwareProfile": {
-      "type": "object",
       "properties": {
         "hardwareType": {
           "readOnly": true,
@@ -981,13 +982,12 @@
             "name": "azureBareMetalInstanceSizeNamesEnum",
             "modelAsString": true
           },
-          "description": "Specifies the Azure Bare Metal Instance SKU."
+          "description": "Specifies the AzureBareMetal instance SKU."
         }
       },
-      "description": "Specifies the hardware settings for the Azure Bare Metal Instance."
+      "description": "Specifies the hardware settings for the AzureBareMetal instance."
     },
     "Disk": {
-      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1005,10 +1005,9 @@
           "description": "Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM."
         }
       },
-      "description": "Specifies the disk information fo the Azure Bare Metal Instance"
+      "description": "Specifies the disk information fo the AzureBareMetal instance"
     },
     "StorageProfile": {
-      "type": "object",
       "properties": {
         "nfsIpAddress": {
           "readOnly": true,
@@ -1023,10 +1022,10 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "Specifies information about the operating system disk used by bare metal instance."
+          "description": "Specifies information about the operating system disk used by baremetal instance."
         }
       },
-      "description": "Specifies the storage settings for the Azure Bare Metal instance disks."
+      "description": "Specifies the storage settings for the AzureBareMetal instance disks."
     },
     "OSProfile": {
       "type": "object",
@@ -1053,17 +1052,16 @@
       "description": "Specifies the operating system settings for the Azure Bare Metal instance."
     },
     "NetworkProfile": {
-      "type": "object",
       "properties": {
         "networkInterfaces": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkInterface"
+            "$ref": "#/definitions/IpAddress"
           },
           "x-ms-identifiers": [
             "ipAddress"
           ],
-          "description": "Specifies the network interfaces for the Azure Bare Metal Instance."
+          "description": "Specifies the network interfaces for the AzureBareMetal instance."
         },
         "circuitId": {
           "readOnly": true,
@@ -1071,17 +1069,16 @@
           "description": "Specifies the circuit id for connecting to express route."
         }
       },
-      "description": "Specifies the network settings for the Azure Bare Metal Instance disks."
+      "description": "Specifies the network settings for the AzureBareMetal instance disks."
     },
-    "NetworkInterface": {
-      "type": "object",
+    "IpAddress": {
       "properties": {
         "ipAddress": {
           "type": "string",
           "description": "Specifies the IP address of the network interface."
         }
       },
-      "description": "Specifies the network interfaces of a bare metal resource."
+      "description": "Specifies the IP address of the network interface."
     },
     "AzureBareMetalStorageInstancesListResult": {
       "type": "object",
@@ -1110,14 +1107,14 @@
           "$ref": "#/definitions/AzureBareMetalStorageInstanceProperties",
           "description": "AzureBareMetalStorageInstance properties"
         },
-        "identity": {
-          "$ref": "#/definitions/AzureBareMetalStorageInstanceIdentity",
-          "description": "The identity of Azure Bare Metal Storage Instance, if configured."
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "AzureBareMetalStorageInstance info on Azure (ARM properties and AzureBareMetalStorage properties)"
@@ -1135,23 +1132,6 @@
         }
       },
       "description": "Describes the properties of an AzureBareMetalStorageInstance."
-    },
-    "AzureBareMetalStorageInstanceBody": {
-      "type": "object",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/AzureBareMetalStorageInstanceIdentity",
-          "description": "The identity of Azure Bare Metal Storage Instance, if configured."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Tags field of the AzureBareMetal/AzureBareMetaStorage instance."
-        }
-      },
-      "description": "properties of body during PUT/PATCH for an AzureBareMetalStorageInstance."
     },
     "AzureBareMetalStorageInstanceIdentity": {
       "type": "object",
@@ -1227,7 +1207,7 @@
           "description": "the billing related information for the resource"
         }
       },
-      "description": "described the storage properties of the azure bare metal storage instance"
+      "description": "described the storage properties of the azure baremetalstorage instance"
     },
     "StorageBillingProperties": {
       "type": "object",
@@ -1323,8 +1303,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]+$",
-      "description": "Name of the Azure Bare Metal Instance, also known as the ResourceName.",
+      "description": "Name of the Azure BareMetal on Azure instance.",
       "x-ms-parameter-location": "method"
     },
     "AzureBareMetalStorageInstanceNameParameter": {
@@ -1333,7 +1312,7 @@
       "required": true,
       "type": "string",
       "pattern": ".*",
-      "description": "Name of the Azure Bare Metal Storage Instance, also known as the ResourceName.",
+      "description": "Name of the AzureBareMetalStorage on Azure instance.",
       "x-ms-parameter-location": "method"
     },
     "ForcePowerManagementOperationParameter": {
@@ -1354,16 +1333,6 @@
         "$ref": "#/definitions/Tags"
       },
       "description": "Request body that only contains the new Tags field",
-      "x-ms-parameter-location": "method"
-    },
-    "AzureBareMetalStorageInstanceBodyParameter": {
-      "name": "azureBareMetalStorageInstanceBodyParameter",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/AzureBareMetalStorageInstanceBody"
-      },
-      "description": "Request body that only contains the Tags and Identity Field",
       "x-ms-parameter-location": "method"
     }
   }
