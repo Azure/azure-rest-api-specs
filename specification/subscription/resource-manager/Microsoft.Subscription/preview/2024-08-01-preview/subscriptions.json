@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-03-01-preview",
+    "version": "2024-08-01-preview",
     "title": "SubscriptionClient",
     "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
   },
@@ -178,6 +178,108 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
+      "post": {
+        "operationId": "Subscription_Cancel",
+        "x-ms-examples": {
+          "cancelSubscription": {
+            "$ref": "./examples/cancelSubscription.json"
+          }
+        },
+        "description": "The operation to cancel a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CanceledSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/rename": {
+      "post": {
+        "operationId": "Subscription_Rename",
+        "x-ms-examples": {
+          "renameSubscription": {
+            "$ref": "./examples/renameSubscription.json"
+          }
+        },
+        "description": "The operation to rename a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RenamedSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/enable": {
+      "post": {
+        "operationId": "Subscription_Enable",
+        "x-ms-examples": {
+          "enableSubscription": {
+            "$ref": "./examples/enableSubscription.json"
+          }
+        },
+        "description": "The operation to enable a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnabledSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -227,8 +329,8 @@
       "type": "object",
       "description": "Properties of subscription Request for Changed Target Directory.",
       "properties": {
-        "destinationEmail": {
-          "description": "The destination Email id where subscription needs to be accepted",
+        "destinationOwnerId": {
+          "description": "The destination OwnerId, can be object id or email address",
           "type": "string"
         },
         "destinationTenantId": {
@@ -282,6 +384,11 @@
           "readOnly": true,
           "type": "string"
         },
+        "destinationObjectId": {
+          "description": "Destination Object Id where Subscription will be accepted.",
+          "readOnly": true,
+          "type": "string"
+        },
         "destinationEmailId": {
           "description": "Destination Email Id where Subscription will be accepted.",
           "readOnly": true,
@@ -308,7 +415,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2020-03-01-preview"
+      "description": "Version of the API to be used with the client request. Current version is 2024-08-01-preview"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
