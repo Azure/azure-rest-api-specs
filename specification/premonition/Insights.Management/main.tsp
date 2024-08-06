@@ -19,6 +19,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The Microsoft Premonition Microsoft,Premonition.Insights service version.")
 enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_09_01_preview: "2024-09-01-preview",
 }

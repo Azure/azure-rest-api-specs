@@ -1,14 +1,18 @@
-import "@azure-tools/typespec-azure-resource-manager";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 
 namespace Microsoft.Premonition.Insights;
 
-@doc("A collection of genomics samples and analysis")
+@doc("A collection of genomics samples and analyses")
 model Library is TrackedResource<LibraryProperties> {
-  // Defines required `name` parameter of the resource
-  ...ResourceNameParameter<Library>;
+  @doc("Name of the library")
+  @key("libraryName")
+  @segment("libraries")
+  @path
+  @visibility("read", "create")
+  @pattern("^[\\w\\-]{3,24}$")
+  name: string;
 }
 
 @doc("The properties of Library")
@@ -16,16 +20,21 @@ model LibraryProperties {
   @doc("The blob container URL where data files are stored")
   container: string;
 
+  @doc("Provisioning state of the resource")
   @visibility("read")
-  @doc("The current status of the library")
   provisioningState?: ResourceProvisioningState;
 }
 
 @doc("Genetic sequence data from a biological sample")
 @parentResource(Library)
 model Sample is TrackedResource<SampleProperties> {
-  // Defines required `name` parameter of the resource
-  ...ResourceNameParameter<Sample>;
+  @doc("Name of the sample")
+  @key("sampleName")
+  @segment("sameples")
+  @path
+  @visibility("read", "create")
+  @pattern("^[\\w\\-]{3,24}$")
+  name: string;
 }
 
 @doc("The properties of Sample")
@@ -36,88 +45,113 @@ model SampleProperties {
   @doc("Location of the fastq files")
   paths: Array<string>;
 
+  @doc("Provisioning state of the resource")
   @visibility("read")
-  @doc("The current status of the library")
   provisioningState?: ResourceProvisioningState;
 }
 
 @doc("Analysis of one or more samples")
 @parentResource(Library)
 model Analysis is TrackedResource<AnalysisProperties> {
-  // Defines required `name` parameter of the resource
-  ...ResourceNameParameter<Analysis>;
+  @doc("Name of the analysis")
+  @key("analysisName")
+  @segment("analyses")
+  @path
+  @visibility("read", "create")
+  @pattern("^[\\w\\-]{3,24}$")
+  name: string;
 }
 
 @doc("The properties of Analysis")
 model AnalysisProperties {
-  @visibility("create")
-  @doc("The samples being analyzed")
+  @visibility("create", "read")
+  @doc("The sample names being analyzed")
   samples: Array<string>;
 
-  @visibility("create")
+  @visibility("create", "read")
   @doc("The settings for the analysis")
   settings: AnalysisSettings;
 
   @visibility("read")
-  @doc("The current status of the analysis")
+  @doc("The time this analysis started")
+  startedAt?: utcDateTime;
+
+  @visibility("read")
+  @doc("The time this analysis finished")
+  finishedAt?: utcDateTime;
+
+  @doc("Provisioning state of the resource")
+  @visibility("read")
   provisioningState?: AnalysisState;
 
   @visibility("read")
-  @doc("The result of the analysis")
+  @doc("The result if the analysis succeeded")
   result?: AnalysisResult;
+
+  @visibility("read")
+  @doc("The error if the analysis failed")
+  error?: {
+    code: string;
+    message: string;
+  };
 }
 
-@doc("The status of the analysis")
+@doc("The status of an analysis")
 union AnalysisState {
-  // standard Succeeded, Failed, Cancelled states
+  // Succeeded: "Succeeded",
+  // Failed: "Failed",
+  // Canceled: "Canceled",
   ResourceProvisioningState,
 
   @doc("Submitted for processing")
   Queued: "Queued",
 
   @doc("In progress")
-  Running: "Running",
-}
-
-@doc("Base settings for analysis")
-@discriminator("type")
-model AnalysisSettings {
-  @doc("The type of the analysis")
-  type: AnalysisType;
-}
-
-@doc("Settings for a metagenomics analysis")
-model MetagenomicsAnalysisSettings extends AnalysisSettings {
-  type: "Metagenomics";
-
-  @doc("The version of taxonomy database to use")
-  taxonomyVersion: TaxonomyVersion;
-}
-
-@doc("Base result of an analysis")
-@discriminator("type")
-model AnalysisResult {
-  @doc("The type of the analysis")
-  type: AnalysisType;
-
-  @doc("The path to the output files")
-  files?: Array<string>;
+  Started: "Started",
 }
 
 @doc("Supported types of analysis")
-union AnalysisType {
+union AnalysisKind {
   string,
 
   @doc("Metagenomics analysis: identify the sources of genetic material in a sample")
   Metagenomics: "Metagenomics",
 }
 
+@doc("Base settings for analysis")
+@discriminator("kind")
+model AnalysisSettings {
+  @doc("The type of the analysis")
+  kind: AnalysisKind;
+}
+
+@doc("Settings for a metagenomics analysis")
+model MetagenomicsAnalysisSettings extends AnalysisSettings {
+  kind: AnalysisKind.Metagenomics;
+
+  @doc("The version of taxonomy database to use. Default is the latest version.")
+  taxonomyVersion?: TaxonomyVersion;
+}
+
+@doc("Base result of an analysis")
+@discriminator("kind")
+model AnalysisResult {
+  @doc("The type of the analysis")
+  kind: AnalysisKind;
+
+  @doc("The path to the output files")
+  files?: Array<string>;
+}
+
 @doc("Result for a metagenomics analysis")
 model MetagenomicsAnalysisResult extends AnalysisResult {
-  type: "Metagenomics";
+  kind: AnalysisKind.Metagenomics;
 
-  @doc("The number of pairs read")
-  totalRead: TaxonomyVersion;
+  @doc("The version of taxonomy database used")
+  taxonomyVersion: TaxonomyVersion;
+
+  @doc("The number of base pairs read")
+  totalReads: int32;
 }
 
 @doc("Valid taxonomy database versions")

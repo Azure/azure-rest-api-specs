@@ -12,7 +12,7 @@ namespace Microsoft.Premonition.Insights;
 @armResourceOperations(Library)
 interface LibraryOperations {
   get is ArmResourceRead<Library>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Library>;
+  create is ArmResourceCreateOrReplaceSync<Library>;
   update is ArmResourcePatchSync<Library, LibraryProperties>;
   delete is ArmResourceDeleteSync<Library>;
   listByResourceGroup is ArmResourceListByParent<Library>;
@@ -22,32 +22,32 @@ interface LibraryOperations {
 @armResourceOperations(Analysis)
 interface AnalysisOperations {
   get is ArmResourceRead<Analysis>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Analysis>;
-  delete is ArmResourceDeleteSync<Analysis>;
+  create is ArmResourceCreateOrUpdateAsync<Analysis>;
+  delete is ArmResourceDeleteWithoutOkAsync<Analysis>;
   listByParent is ArmResourceListByParent<Analysis>;
 }
 
 @armResourceOperations(Sample)
 interface SampleOperations {
   get is ArmResourceRead<Sample>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Sample>;
+  create is ArmResourceCreateOrReplaceSync<Sample>;
   update is ArmResourcePatchSync<Sample, SampleProperties>;
   delete is ArmResourceDeleteSync<Sample>;
   listByParent is ArmResourceListByParent<Sample>;
 
-  @post
-  @doc("Starts a metagenomics analysis of this sample")
-  @armResourceAction(Analysis)
+  @put
+  @doc("Create a metagenomics analysis of this sample")
+  @armResourceCreateOrUpdate(Analysis)
   identify(
-    @doc("The name for the job")
+    ...Azure.ResourceManager.ApiVersionParameter,
+
+    @doc("The name for the new analysis")
     @query
-    @pattern("^[a-zA-Z0-9-]{3,24}$")
-    jobName: string,
+    @pattern("^[\\w\\-]{3,24}$")
+    analysisName: string,
 
     @doc("The settings for metagenomics analysis")
-    @body
+    @bodyRoot
     settings: MetagenomicsAnalysisSettings,
-
-    ...Azure.ResourceManager.ApiVersionParameter,
-  ): ArmResponse<Analysis> | ErrorResponse;
+  ): ArmResourceUpdatedResponse<Analysis> | ArmResourceCreatedResponse<Analysis> | ErrorResponse;
 }
