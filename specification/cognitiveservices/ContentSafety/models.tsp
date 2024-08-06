@@ -331,7 +331,7 @@ model LLMResource {
 }
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
-@doc("The request of test groundedness analysis.")
+@doc("The request of text groundedness analysis.")
 model AnalyzeTextGroundednessOptions {
   @doc("""
   The domain of the text for analysis. Allowed values: Medical, Generic.
@@ -410,12 +410,6 @@ model UngroundednessDetails {
   It's available only when the 'reasoning' field in the input is set to true.
   """)
   reason?: string;
-
-  @doc("""
-  The mitigation for detected ungroundedness.
-  It's available only when the 'mitigating' field in the input is set to true.
-  """)
-  mitigatedText?: string;
 }
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
@@ -433,6 +427,12 @@ model AnalyzeTextGroundednessResult {
 
   @doc("Provides insights into ungrounded content with specific examples and percentages.")
   ungroundedDetails: UngroundednessDetails[];
+
+  @doc("""
+  The mitigation for detected ungroundedness.
+  It's available only when the 'mitigating' field in the input is set to true.
+  """)
+  mitigatedText?: string;
 }
 
 
