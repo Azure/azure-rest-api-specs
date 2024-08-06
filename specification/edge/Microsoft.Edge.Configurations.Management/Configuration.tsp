@@ -16,9 +16,6 @@ namespace Microsoft.Edge;
 
 @doc("Configuration Properties")
 model ConfigurationProperties {
-  @doc("Timezone of configuration")
-  timezone: string;
-
   @doc("Provisioning state of resource")
   @visibility("read")
   provisioningState?: ResourceProvisioningState;

@@ -1128,27 +1128,10 @@
       "type": "object",
       "description": "Configuration Properties",
       "properties": {
-        "timezone": {
-          "type": "string",
-          "description": "Timezone of configuration"
-        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
-        }
-      },
-      "required": [
-        "timezone"
-      ]
-    },
-    "ConfigurationPropertiesUpdate": {
-      "type": "object",
-      "description": "Configuration Properties",
-      "properties": {
-        "timezone": {
-          "type": "string",
-          "description": "Timezone of configuration"
         }
       }
     },
@@ -1181,7 +1164,7 @@
       "description": "Configuration Resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ConfigurationPropertiesUpdate",
+          "$ref": "#/definitions/ConfigurationProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
