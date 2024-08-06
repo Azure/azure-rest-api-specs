@@ -716,11 +716,11 @@
       },
       "patch": {
         "tags": [
-          "Bare Metal Storage Instances"
+          "BareMetalInfrastructure"
         ],
         "operationId": "AzureBareMetalStorageInstances_Update",
-        "summary": "Patches the Tags field of a Azure Bare Metal Storage instance.",
-        "description": "Patches the Tags field of a Azure Bare Metal Storage instance for the specified subscription, resource group, and instance name.",
+        "summary": "Patches the Tags field of a Azure BareMetalStorage instance.",
+        "description": "Patches the Tags field of a Azure BareMetalStorage instance for the specified subscription, resource group, and instance name.",
         "x-ms-examples": {
           "Update Tags field of an AzureBareMetalStorage instance": {
             "$ref": "./examples/AzureBareMetalStorageInstances_PatchTags.json"
@@ -731,19 +731,19 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/AzureBareMetalStorageInstanceNameParameter"
           },
           {
-            "$ref": "#/parameters/AzureBareMetalStorageInstanceBodyParameter"
+            "$ref": "#/parameters/TagsParameter"
           }
         ],
         "responses": {
@@ -756,7 +756,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
