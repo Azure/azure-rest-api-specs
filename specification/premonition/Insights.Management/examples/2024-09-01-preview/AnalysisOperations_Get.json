@@ -1,0 +1,44 @@
+{
+  "title": "AnalysisOperations_Get",
+  "operationId": "AnalysisOperations_Get",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "default-rg",
+    "libraryName": "fastlib",
+    "analysisName": "metagenomic-analysis"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "settings": {
+            "type": "AnalysisSettings"
+          },
+          "provisioningState": "Succeeded",
+          "result": {
+            "type": "AnalysisResult",
+            "files": [
+              "output/fastlib/metagenomic-analysis/result.txt"
+            ]
+          }
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "location": "uswest2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/default-rg/providers/Microsoft.Premonition/libraries/fastlib/analysis/metagenomic-analysis",
+        "name": "metagenomic-analysis",
+        "type": "Microsoft.Premonition/analysis",
+        "systemData": {
+          "createdBy": "jane",
+          "createdByType": "User",
+          "createdAt": "2024-08-05T19:37:32.909Z",
+          "lastModifiedBy": "john",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-05T19:37:32.909Z"
+        }
+      }
+    }
+  }
+}

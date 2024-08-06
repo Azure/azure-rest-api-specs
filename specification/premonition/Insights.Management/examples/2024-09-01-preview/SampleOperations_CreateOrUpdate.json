@@ -1,0 +1,80 @@
+{
+  "title": "SampleOperations_CreateOrUpdate",
+  "operationId": "SampleOperations_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "default-rg",
+    "libraryName": "fastlib",
+    "sampleName": "fastsample",
+    "resource": {
+      "properties": {
+        "description": "cnsa",
+        "paths": [
+          "fastlib/fastsample/fast5.zip"
+        ]
+      },
+      "tags": {
+        "key1": "value1"
+      },
+      "location": "uswest2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "description": "cnsa",
+          "paths": [
+            "fastlib/fastsample/fast5.zip"
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "location": "uswest2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/default-rg/providers/Microsoft.Premonition/libraries/fastlib/samples/fastsample",
+        "name": "fastsample",
+        "type": "Microsoft.Premonition/samples",
+        "systemData": {
+          "createdBy": "jane",
+          "createdByType": "User",
+          "createdAt": "2024-08-05T19:37:32.909Z",
+          "lastModifiedBy": "john",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-05T19:37:32.909Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/default-rg/providers/Microsoft.Premonition/libraries/fastlib/samples/fastsample/operationStatus?api-version=2023-05-01"
+      },
+      "body": {
+        "properties": {
+          "description": "N/A",
+          "paths": [
+            "fastlib/fastsample/fast5.zip"
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "location": "uswest2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/default-rg/providers/Microsoft.Premonition/libraries/fastlib/samples/fastsample",
+        "name": "fastsample",
+        "type": "Microsoft.Premonition/samples",
+        "systemData": {
+          "createdBy": "jane",
+          "createdByType": "User",
+          "createdAt": "2024-08-05T19:37:32.909Z",
+          "lastModifiedBy": "john",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-05T19:37:32.909Z"
+        }
+      }
+    }
+  }
+}
