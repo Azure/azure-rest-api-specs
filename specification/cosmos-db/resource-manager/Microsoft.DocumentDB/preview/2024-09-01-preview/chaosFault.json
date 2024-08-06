@@ -39,7 +39,7 @@
         "operationId": "ChaosFault_List",
         "description": "list Chaos Faults",
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "ChaosFaultList": {
@@ -65,6 +65,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/chaosFaultListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -161,6 +167,12 @@
             "schema": {
               "$ref": "#/definitions/chaosFaultResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -231,6 +243,11 @@
             "$ref": "#/definitions/chaosFaultResource"
           },
           "description": "List of Chaos Faults."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "description": "Chaos Fault List Response."
