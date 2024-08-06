@@ -4,6 +4,7 @@ suppressions:
       breaking-changes:
         - Model ManagedIdentityCredential no longer has parameter resource_id
         - Model ExpressionV2 no longer has parameter operator
+        - Model HDInsightOnDemandLinkedService has a new required parameter version_type_properties_version
   azure-sdk-for-go:
     - package: sdk/resourcemanager/datafactory/armdatafactory
       breaking-changes:
@@ -11,11 +12,4 @@ suppressions:
   azure-sdk-for-js:
     - package: "@azure/arm-datafactory"
       breaking-changes:
-        - Interface ManagedIdentityCredential no longer has parameter resourceId
-        - Operation CredentialOperations.createOrUpdate has a new signature
-        - "Type of parameter headers of interface AzureFunctionActivity is changed from {\n        [propertyName: string]: string;\n    } to {\n        [propertyName: string]: any;\n    }"
-        - "Type of parameter headers of interface WebActivity is changed from {\n        [propertyName: string]: string;\n    } to {\n        [propertyName: string]: any;\n    }"
-        - "Type of parameter headers of interface WebHookActivity is changed from {\n        [propertyName: string]: string;\n    } to {\n        [propertyName: string]: any;\n    }"
-        - Type of parameter type of interface ScriptActivityScriptBlock is changed from ScriptType to any
-        - Type of parameter value of interface CredentialListResponse is changed from ManagedIdentityCredentialResource[] to CredentialResource[]
-        - Interface ExpressionV2 no longer has parameter operator
+        - Interface HDInsightOnDemandLinkedService has a new required parameter versionTypePropertiesVersion
