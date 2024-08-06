@@ -89,9 +89,9 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Suppression
 
 ```yaml
-directive:
-  - from: mongoCluster.json
-    suppress: BodyTopLevelProperties
+suppressions:
+  - code: BodyTopLevelProperties
+    from: mongoCluster.json
     reason: https://github.com/Azure/azure-openapi-validator/issues/722
     where: $.definitions.ReplicaListResult
 ```
