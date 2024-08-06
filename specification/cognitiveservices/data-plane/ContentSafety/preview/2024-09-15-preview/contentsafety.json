@@ -2703,7 +2703,7 @@
     },
     "AnalyzeTextGroundednessOptions": {
       "type": "object",
-      "description": "The request of test groundedness analysis.",
+      "description": "The request of text groundedness analysis.",
       "properties": {
         "domain": {
           "type": "string",
@@ -2809,6 +2809,10 @@
             "$ref": "#/definitions/UngroundednessDetails"
           },
           "x-ms-identifiers": []
+        },
+        "mitigatedText": {
+          "type": "string",
+          "description": "The mitigation for detected ungroundedness.\nIt's available only when the 'mitigating' field in the input is set to true."
         }
       },
       "required": [
@@ -4380,10 +4384,6 @@
         "reason": {
           "type": "string",
           "description": "The explanation for detected ungroundedness.\nIt's available only when the 'reasoning' field in the input is set to true."
-        },
-        "mitigatedText": {
-          "type": "string",
-          "description": "The mitigation for detected ungroundedness.\nIt's available only when the 'mitigating' field in the input is set to true."
         }
       },
       "required": [
