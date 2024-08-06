@@ -50,7 +50,6 @@ interface Widgets {
   createOrUpdateWidget is StandardResourceOperations.LongRunningResourceCreateOrUpdate<WidgetSuite>;
 
   @doc("Delete a Widget asynchronously.")
-  @pollingOperation(Widgets.getWidgetOperationStatus)
   deleteWidget is LongRunningResourceDelete<WidgetSuite>;
 
   @doc("List Widget resources")
