@@ -48,6 +48,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2024-09-01-preview/restorable.json
   - Microsoft.DocumentDB/preview/2024-09-01-preview/services.json
   - Microsoft.DocumentDB/preview/2024-09-01-preview/throughputpool.json
+  - Microsoft.DocumentDB/preview/2024-09-01-preview/chaosFault.json
 ```
 
 ### Tag: package-preview-2024-05
@@ -886,6 +887,12 @@ directive:
   - suppress: AvoidAdditionalProperties
     from: managedCassandra.json
     reason: Temporarily suppressing existing linter errors and will be fixed later
+  - suppress: BodyTopLevelProperties
+    from: chaosFault.json
+    reason: Temporarily suppressing existing linter errors due to known issue in linter validation as discussed in the ARM Office hours.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: chaosFault.json
+    reason: Temporarily suppressing existing linter errors due to known issue in linter validation as discussed in the ARM Office hours.
 
 ```
 
