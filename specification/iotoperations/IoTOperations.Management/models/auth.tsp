@@ -103,7 +103,7 @@ model BrokerAuthenticatorCustomAuth {
 @doc("X509 Certificate Authentication properties.")
 model X509ManualCertificate {
   @doc("Kubernetes secret containing an X.509 client certificate. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretRef: string;
+  secretRef: KubernetesReferenceKnownType;
 }
 
 @doc("X509 for BrokerAuthentication.")
