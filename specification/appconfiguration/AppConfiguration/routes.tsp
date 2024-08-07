@@ -286,6 +286,17 @@ op getKeyValue is standardOps.ResourceRead<
       format: "csv",
     })
     select?: KeyValueFields[];
+
+    #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Pre-existing API contract"
+    @doc("""
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+      """)
+    @query({
+      name: "tags",
+      format: "multi",
+    })
+    tags?: string[];
   }> &
     RequestHeadersTrait<{
       ...syncTokenHeader;
