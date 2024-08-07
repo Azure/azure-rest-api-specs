@@ -23,7 +23,7 @@ namespace Azure.OpenAI;
 @action("completions") //@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<
   Deployment,
-  BodyParameter<CompletionsOptions>,
+  GetCompletionsBody,
   Completions
 >;
 
@@ -37,6 +37,6 @@ op getCompletions is Azure.Core.ResourceAction<
 @action("chat/completions") //@convenientAPI(true)
 op getChatCompletions is ResourceAction<
   Deployment,
-  ChatCompletionsOptions,
+  GetChatCompletionsBody,
   ChatCompletions
 >;
