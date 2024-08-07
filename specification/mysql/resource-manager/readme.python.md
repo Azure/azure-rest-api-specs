@@ -7,6 +7,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 no-namespace-folders: true
+clear-output-folder: true
 ```
 
 ### Tag: package-flexibleserver-2024-02-01-preview and python
@@ -28,6 +29,7 @@ These settings apply only when `--tag=package-2020-01-01 --python` is specified 
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2020-01-01' && $(python)
+title: MySQLManagementClient
 package-name: azure-mgmt-rdbms
 package-version: 1.0.0b1
 namespace: azure.mgmt.rdbms.mysql
