@@ -3275,6 +3275,10 @@
         "windowsProfile": {
           "$ref": "#/definitions/AgentPoolWindowsProfile",
           "description": "The Windows agent pool's specific profile."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/AgentPoolSecurityProfile",
+          "description": "The security settings of an agent pool."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -6144,6 +6148,20 @@
           "description": "The default value is false. Outbound NAT can only be disabled if the cluster outboundType is NAT Gateway and the Windows agent pool does not have node public IP enabled."
         }
       }
+    },
+    "AgentPoolSecurityProfile": {
+      "type": "object",
+      "properties": {
+        "enableVTPM": {
+          "type": "boolean",
+          "description": "vTPM is a Trusted Launch feature for configuring a dedicated secure vault for keys and measurements held locally on the node. For more details, see aka.ms/aks/trustedlaunch. If not specified, the default is false."
+        },
+        "enableSecureBoot": {
+          "type": "boolean",
+          "description": "Secure Boot is a feature of Trusted Launch which ensures that only signed operating systems and drivers can boot. For more details, see aka.ms/aks/trustedlaunch.  If not specified, the default is false."
+        }
+      },
+      "description": "The security settings of an agent pool."
     },
     "SysctlConfig": {
       "description": "Sysctl settings for Linux agent nodes.",
