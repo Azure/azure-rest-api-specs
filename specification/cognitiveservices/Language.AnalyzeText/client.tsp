@@ -1026,4 +1026,3 @@ namespace Language.AnalyzeTextClientCustomizations;
   "CustomEntitiesActionResult",
   "csharp"
 );
-
