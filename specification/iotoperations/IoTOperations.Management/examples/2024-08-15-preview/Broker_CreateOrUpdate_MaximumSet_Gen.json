@@ -2,56 +2,173 @@
   "title": "Broker_CreateOrUpdate",
   "operationId": "Broker_CreateOrUpdate",
   "parameters": {
-    "api-version": "2024-07-01-preview",
-    "subscriptionId": "9265A271-C9EC-4648-9AF8-B575759AB43E",
+    "api-version": "2024-08-15-preview",
+    "subscriptionId": "391CCEC9-340F-4903-96F7-629CEEAC0696",
     "resourceGroupName": "rgiotoperations",
-    "instanceName": "aio-instance",
-    "brokerName": "aio-broker",
+    "instanceName": "resource-name123",
+    "brokerName": "resource-name123",
     "resource": {
       "properties": {
-        "memoryProfile": "Medium",
-        "generateResourceLimits": {
-          "cpu": "Disabled"
+        "advanced": {
+          "clients": {
+            "maxSessionExpirySeconds": 1589,
+            "maxMessageExpirySeconds": 1350,
+            "maxPacketSizeBytes": 2472,
+            "subscriberQueueLimit": {
+              "length": 29,
+              "strategy": "None"
+            },
+            "maxReceiveMaximum": 2925,
+            "maxKeepAliveSeconds": 9654
+          },
+          "encryptInternalTraffic": "Enabled",
+          "internalCerts": {
+            "duration": "h",
+            "renewBefore": "u",
+            "privateKey": {
+              "algorithm": "Ec256",
+              "rotationPolicy": "Always"
+            }
+          }
         },
         "cardinality": {
           "backendChain": {
-            "partitions": 2,
-            "workers": 2,
-            "redundancyFactor": 2
+            "partitions": 6,
+            "redundancyFactor": 4,
+            "workers": 4
           },
           "frontend": {
-            "replicas": 2,
-            "workers": 2
+            "replicas": 6,
+            "workers": 12
           }
-        },
-        "advanced": {
-          "encryptInternalTraffic": "Enabled"
         },
         "diagnostics": {
           "logs": {
-            "level": "info"
+            "opentelemetryExportConfig": {
+              "otlpGrpcEndpoint": "uvymwgfpkhmohmkwgmiowrvkjno",
+              "intervalSeconds": 184,
+              "level": "dvkkeezbzfzvkrzefizjfqqf"
+            },
+            "level": "vxzpnwbtvavlncsmkiehnasnuhq"
           },
           "metrics": {
-            "prometheusPort": 9600
+            "opentelemetryExportConfig": {
+              "otlpGrpcEndpoint": "tp",
+              "intervalSeconds": 118
+            },
+            "prometheusPort": 3858
           },
           "selfCheck": {
-            "intervalSeconds": 30,
             "mode": "Enabled",
-            "timeoutSeconds": 15
+            "intervalSeconds": 107,
+            "timeoutSeconds": 43
           },
           "traces": {
-            "cacheSizeMegabytes": 16,
             "mode": "Enabled",
-            "selfTracing": {
-              "intervalSeconds": 30,
-              "mode": "Enabled"
+            "opentelemetryExportConfig": {
+              "otlpGrpcEndpoint": "tp",
+              "intervalSeconds": 118
             },
-            "spanChannelCapacity": 1000
+            "cacheSizeMegabytes": 71,
+            "selfTracing": {
+              "mode": "Enabled",
+              "intervalSeconds": 30
+            },
+            "spanChannelCapacity": 1811
           }
-        }
+        },
+        "diskBackedMessageBuffer": {
+          "maxSize": "500M",
+          "ephemeralVolumeClaimSpec": {
+            "volumeName": "qeydglvv",
+            "volumeMode": "wlplstxnbrfsvngoykqozyqibelluz",
+            "storageClassName": "pbassilqhprudtnziacvgd",
+            "accessModes": [
+              "ujmumjbvkpvonvim"
+            ],
+            "dataSource": {
+              "apiGroup": "umnvpbjkszhballbfghbrmttfgsg",
+              "kind": "kkvobukujgddambebgbj",
+              "name": "qfksjczhvhswmsmkvlz"
+            },
+            "dataSourceRef": {
+              "apiGroup": "oddvkikfvfdmpkayzjrlqipffejzvl",
+              "kind": "gbiqcegjjwqwlwxmfssfmy",
+              "name": "zqps",
+              "namespace": "icxlnviiydipukjoefcj"
+            },
+            "resources": {
+              "limits": {
+                "key7709": "lyiqq"
+              },
+              "requests": {
+                "key7133": "thtllrwmavftyan"
+              }
+            },
+            "selector": {
+              "matchExpressions": [
+                {
+                  "key": "ixwjvgraghuozznjwrl",
+                  "operator": "In",
+                  "values": [
+                    "okweffhvwdsuxkvywxmiyuzlf"
+                  ]
+                }
+              ],
+              "matchLabels": {
+                "key8218": "borjffgkogvybbtat"
+              }
+            }
+          },
+          "persistentVolumeClaimSpec": {
+            "volumeName": "qeydglvv",
+            "volumeMode": "wlplstxnbrfsvngoykqozyqibelluz",
+            "storageClassName": "pbassilqhprudtnziacvgd",
+            "accessModes": [
+              "ujmumjbvkpvonvim"
+            ],
+            "dataSource": {
+              "apiGroup": "umnvpbjkszhballbfghbrmttfgsg",
+              "kind": "kkvobukujgddambebgbj",
+              "name": "qfksjczhvhswmsmkvlz"
+            },
+            "dataSourceRef": {
+              "apiGroup": "oddvkikfvfdmpkayzjrlqipffejzvl",
+              "kind": "gbiqcegjjwqwlwxmfssfmy",
+              "name": "zqps",
+              "namespace": "icxlnviiydipukjoefcj"
+            },
+            "resources": {
+              "limits": {
+                "key7709": "lyiqq"
+              },
+              "requests": {
+                "key7133": "thtllrwmavftyan"
+              }
+            },
+            "selector": {
+              "matchExpressions": [
+                {
+                  "key": "ixwjvgraghuozznjwrl",
+                  "operator": "In",
+                  "values": [
+                    "okweffhvwdsuxkvywxmiyuzlf"
+                  ]
+                }
+              ],
+              "matchLabels": {
+                "key8218": "borjffgkogvybbtat"
+              }
+            }
+          }
+        },
+        "generateResourceLimits": {
+          "cpu": "Enabled"
+        },
+        "memoryProfile": "Tiny"
       },
       "extendedLocation": {
-        "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+        "name": "ftnhaefblzdrxqhjupthnyd",
         "type": "CustomLocation"
       }
     }
@@ -60,61 +177,179 @@
     "200": {
       "body": {
         "properties": {
-          "memoryProfile": "Medium",
-          "generateResourceLimits": {
-            "cpu": "Disabled"
+          "advanced": {
+            "clients": {
+              "maxSessionExpirySeconds": 1589,
+              "maxMessageExpirySeconds": 1350,
+              "maxPacketSizeBytes": 2472,
+              "subscriberQueueLimit": {
+                "length": 29,
+                "strategy": "None"
+              },
+              "maxReceiveMaximum": 2925,
+              "maxKeepAliveSeconds": 9654
+            },
+            "encryptInternalTraffic": "Enabled",
+            "internalCerts": {
+              "duration": "h",
+              "renewBefore": "u",
+              "privateKey": {
+                "algorithm": "Ec256",
+                "rotationPolicy": "Always"
+              }
+            }
           },
           "cardinality": {
             "backendChain": {
-              "partitions": 2,
-              "workers": 2,
-              "redundancyFactor": 2
+              "partitions": 6,
+              "redundancyFactor": 4,
+              "workers": 4
             },
             "frontend": {
-              "replicas": 2,
-              "workers": 2
+              "replicas": 6,
+              "workers": 12
             }
-          },
-          "advanced": {
-            "encryptInternalTraffic": "Enabled"
           },
           "diagnostics": {
             "logs": {
-              "level": "info"
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "uvymwgfpkhmohmkwgmiowrvkjno",
+                "intervalSeconds": 184,
+                "level": "dvkkeezbzfzvkrzefizjfqqf"
+              },
+              "level": "vxzpnwbtvavlncsmkiehnasnuhq"
             },
             "metrics": {
-              "prometheusPort": 9600
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "tp",
+                "intervalSeconds": 118
+              },
+              "prometheusPort": 3858
             },
             "selfCheck": {
-              "intervalSeconds": 30,
               "mode": "Enabled",
-              "timeoutSeconds": 15
+              "intervalSeconds": 107,
+              "timeoutSeconds": 43
             },
             "traces": {
-              "cacheSizeMegabytes": 16,
               "mode": "Enabled",
-              "selfTracing": {
-                "intervalSeconds": 30,
-                "mode": "Enabled"
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "tp",
+                "intervalSeconds": 118
               },
-              "spanChannelCapacity": 1000
+              "cacheSizeMegabytes": 71,
+              "selfTracing": {
+                "mode": "Enabled",
+                "intervalSeconds": 30
+              },
+              "spanChannelCapacity": 1811
             }
-          }
+          },
+          "diskBackedMessageBuffer": {
+            "maxSize": "500M",
+            "ephemeralVolumeClaimSpec": {
+              "volumeName": "qeydglvv",
+              "volumeMode": "wlplstxnbrfsvngoykqozyqibelluz",
+              "storageClassName": "pbassilqhprudtnziacvgd",
+              "accessModes": [
+                "ujmumjbvkpvonvim"
+              ],
+              "dataSource": {
+                "apiGroup": "umnvpbjkszhballbfghbrmttfgsg",
+                "kind": "kkvobukujgddambebgbj",
+                "name": "qfksjczhvhswmsmkvlz"
+              },
+              "dataSourceRef": {
+                "apiGroup": "oddvkikfvfdmpkayzjrlqipffejzvl",
+                "kind": "gbiqcegjjwqwlwxmfssfmy",
+                "name": "zqps",
+                "namespace": "icxlnviiydipukjoefcj"
+              },
+              "resources": {
+                "limits": {
+                  "key7709": "lyiqq"
+                },
+                "requests": {
+                  "key7133": "thtllrwmavftyan"
+                }
+              },
+              "selector": {
+                "matchExpressions": [
+                  {
+                    "key": "ixwjvgraghuozznjwrl",
+                    "operator": "In",
+                    "values": [
+                      "okweffhvwdsuxkvywxmiyuzlf"
+                    ]
+                  }
+                ],
+                "matchLabels": {
+                  "key8218": "borjffgkogvybbtat"
+                }
+              }
+            },
+            "persistentVolumeClaimSpec": {
+              "volumeName": "qeydglvv",
+              "volumeMode": "wlplstxnbrfsvngoykqozyqibelluz",
+              "storageClassName": "pbassilqhprudtnziacvgd",
+              "accessModes": [
+                "ujmumjbvkpvonvim"
+              ],
+              "dataSource": {
+                "apiGroup": "umnvpbjkszhballbfghbrmttfgsg",
+                "kind": "kkvobukujgddambebgbj",
+                "name": "qfksjczhvhswmsmkvlz"
+              },
+              "dataSourceRef": {
+                "apiGroup": "oddvkikfvfdmpkayzjrlqipffejzvl",
+                "kind": "gbiqcegjjwqwlwxmfssfmy",
+                "name": "zqps",
+                "namespace": "icxlnviiydipukjoefcj"
+              },
+              "resources": {
+                "limits": {
+                  "key7709": "lyiqq"
+                },
+                "requests": {
+                  "key7133": "thtllrwmavftyan"
+                }
+              },
+              "selector": {
+                "matchExpressions": [
+                  {
+                    "key": "ixwjvgraghuozznjwrl",
+                    "operator": "In",
+                    "values": [
+                      "okweffhvwdsuxkvywxmiyuzlf"
+                    ]
+                  }
+                ],
+                "matchLabels": {
+                  "key8218": "borjffgkogvybbtat"
+                }
+              }
+            }
+          },
+          "generateResourceLimits": {
+            "cpu": "Enabled"
+          },
+          "memoryProfile": "Tiny",
+          "provisioningState": "Succeeded"
         },
         "extendedLocation": {
-          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "name": "ftnhaefblzdrxqhjupthnyd",
           "type": "CustomLocation"
         },
         "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123",
-        "name": "dnpky",
-        "type": "tdsdsqy",
+        "name": "tbbfbynuywlxhpvdpkbvd",
+        "type": "owhoybjfc",
         "systemData": {
-          "createdBy": "ijyjtvjpfwt",
+          "createdBy": "rlsbkcnhuwhtozwvktfg",
           "createdByType": "User",
-          "createdAt": "2024-06-26T23:49:23.909Z",
-          "lastModifiedBy": "fkfrkewn",
+          "createdAt": "2024-08-07T14:53:15.147Z",
+          "lastModifiedBy": "pbdp",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+          "lastModifiedAt": "2024-08-07T14:53:15.147Z"
         }
       }
     },
@@ -124,61 +359,179 @@
       },
       "body": {
         "properties": {
-          "memoryProfile": "Medium",
-          "generateResourceLimits": {
-            "cpu": "Disabled"
+          "advanced": {
+            "clients": {
+              "maxSessionExpirySeconds": 1589,
+              "maxMessageExpirySeconds": 1350,
+              "maxPacketSizeBytes": 2472,
+              "subscriberQueueLimit": {
+                "length": 29,
+                "strategy": "None"
+              },
+              "maxReceiveMaximum": 2925,
+              "maxKeepAliveSeconds": 9654
+            },
+            "encryptInternalTraffic": "Enabled",
+            "internalCerts": {
+              "duration": "h",
+              "renewBefore": "u",
+              "privateKey": {
+                "algorithm": "Ec256",
+                "rotationPolicy": "Always"
+              }
+            }
           },
           "cardinality": {
             "backendChain": {
-              "partitions": 2,
-              "workers": 2,
-              "redundancyFactor": 2
+              "partitions": 6,
+              "redundancyFactor": 4,
+              "workers": 4
             },
             "frontend": {
-              "replicas": 2,
-              "workers": 2
+              "replicas": 6,
+              "workers": 12
             }
-          },
-          "advanced": {
-            "encryptInternalTraffic": "Enabled"
           },
           "diagnostics": {
             "logs": {
-              "level": "info"
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "uvymwgfpkhmohmkwgmiowrvkjno",
+                "intervalSeconds": 184,
+                "level": "dvkkeezbzfzvkrzefizjfqqf"
+              },
+              "level": "vxzpnwbtvavlncsmkiehnasnuhq"
             },
             "metrics": {
-              "prometheusPort": 9600
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "tp",
+                "intervalSeconds": 118
+              },
+              "prometheusPort": 3858
             },
             "selfCheck": {
-              "intervalSeconds": 30,
               "mode": "Enabled",
-              "timeoutSeconds": 15
+              "intervalSeconds": 107,
+              "timeoutSeconds": 43
             },
             "traces": {
-              "cacheSizeMegabytes": 16,
               "mode": "Enabled",
-              "selfTracing": {
-                "intervalSeconds": 30,
-                "mode": "Enabled"
+              "opentelemetryExportConfig": {
+                "otlpGrpcEndpoint": "tp",
+                "intervalSeconds": 118
               },
-              "spanChannelCapacity": 1000
+              "cacheSizeMegabytes": 71,
+              "selfTracing": {
+                "mode": "Enabled",
+                "intervalSeconds": 30
+              },
+              "spanChannelCapacity": 1811
             }
-          }
+          },
+          "diskBackedMessageBuffer": {
+            "maxSize": "500M",
+            "ephemeralVolumeClaimSpec": {
+              "volumeName": "qeydglvv",
+              "volumeMode": "wlplstxnbrfsvngoykqozyqibelluz",
+              "storageClassName": "pbassilqhprudtnziacvgd",
+              "accessModes": [
+                "ujmumjbvkpvonvim"
+              ],
+              "dataSource": {
+                "apiGroup": "umnvpbjkszhballbfghbrmttfgsg",
+                "kind": "kkvobukujgddambebgbj",
+                "name": "qfksjczhvhswmsmkvlz"
+              },
+              "dataSourceRef": {
+                "apiGroup": "oddvkikfvfdmpkayzjrlqipffejzvl",
+                "kind": "gbiqcegjjwqwlwxmfssfmy",
+                "name": "zqps",
+                "namespace": "icxlnviiydipukjoefcj"
+              },
+              "resources": {
+                "limits": {
+                  "key7709": "lyiqq"
+                },
+                "requests": {
+                  "key7133": "thtllrwmavftyan"
+                }
+              },
+              "selector": {
+                "matchExpressions": [
+                  {
+                    "key": "ixwjvgraghuozznjwrl",
+                    "operator": "In",
+                    "values": [
+                      "okweffhvwdsuxkvywxmiyuzlf"
+                    ]
+                  }
+                ],
+                "matchLabels": {
+                  "key8218": "borjffgkogvybbtat"
+                }
+              }
+            },
+            "persistentVolumeClaimSpec": {
+              "volumeName": "qeydglvv",
+              "volumeMode": "wlplstxnbrfsvngoykqozyqibelluz",
+              "storageClassName": "pbassilqhprudtnziacvgd",
+              "accessModes": [
+                "ujmumjbvkpvonvim"
+              ],
+              "dataSource": {
+                "apiGroup": "umnvpbjkszhballbfghbrmttfgsg",
+                "kind": "kkvobukujgddambebgbj",
+                "name": "qfksjczhvhswmsmkvlz"
+              },
+              "dataSourceRef": {
+                "apiGroup": "oddvkikfvfdmpkayzjrlqipffejzvl",
+                "kind": "gbiqcegjjwqwlwxmfssfmy",
+                "name": "zqps",
+                "namespace": "icxlnviiydipukjoefcj"
+              },
+              "resources": {
+                "limits": {
+                  "key7709": "lyiqq"
+                },
+                "requests": {
+                  "key7133": "thtllrwmavftyan"
+                }
+              },
+              "selector": {
+                "matchExpressions": [
+                  {
+                    "key": "ixwjvgraghuozznjwrl",
+                    "operator": "In",
+                    "values": [
+                      "okweffhvwdsuxkvywxmiyuzlf"
+                    ]
+                  }
+                ],
+                "matchLabels": {
+                  "key8218": "borjffgkogvybbtat"
+                }
+              }
+            }
+          },
+          "generateResourceLimits": {
+            "cpu": "Enabled"
+          },
+          "memoryProfile": "Tiny",
+          "provisioningState": "Succeeded"
         },
         "extendedLocation": {
-          "name": "ycsyubcxttlusbhfdqaynmkaatnbyv",
+          "name": "ftnhaefblzdrxqhjupthnyd",
           "type": "CustomLocation"
         },
         "id": "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123",
-        "name": "dnpky",
-        "type": "tdsdsqy",
+        "name": "tbbfbynuywlxhpvdpkbvd",
+        "type": "owhoybjfc",
         "systemData": {
-          "createdBy": "ijyjtvjpfwt",
+          "createdBy": "rlsbkcnhuwhtozwvktfg",
           "createdByType": "User",
-          "createdAt": "2024-06-26T23:49:23.909Z",
-          "lastModifiedBy": "fkfrkewn",
+          "createdAt": "2024-08-07T14:53:15.147Z",
+          "lastModifiedBy": "pbdp",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2024-06-26T23:49:23.909Z"
+          "lastModifiedAt": "2024-08-07T14:53:15.147Z"
         }
       }
     }

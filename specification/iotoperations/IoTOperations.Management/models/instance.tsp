@@ -28,6 +28,8 @@ model InstanceResource is TrackedResource<InstanceProperties> {
   @doc("Edge location of the resource.")
   @visibility("read", "create")
   extendedLocation: ExtendedLocation;
+
+  ...ManagedSystemAssignedIdentityProperty;
 }
 
 @doc("The properties of a Instance resource.")
@@ -42,4 +44,23 @@ model InstanceProperties {
   @doc("The Azure IoT Operations version.")
   @visibility("read")
   version?: string;
+
+  @doc("The reference to the Schema Registry for this AIO Instance.")
+  schemaRegistryRef: SchemaRegistryReference;
 }
+
+@doc("An object for referencing a Schema Registry.")
+model SchemaRegistryReference {
+  @doc("The resource Id for the Schema Registry in Azure.")
+  resourceId: SchemaRegistryResourceId;
+
+  @doc("The namespace in the Schema Registry to use.")
+  `namespace`: string;
+}
+
+scalar SchemaRegistryResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/schemaRegistries",
+    }
+  ]>;
