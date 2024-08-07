@@ -215,11 +215,9 @@ model RemoveTextBlocklistItemsOptions {
 @doc("The request of analyzing potential direct or indirect injection attacks.")
 model ShieldPromptOptions {
   @doc("The user prompt to be analyzed, which may contain direct injection attacks.")
-  @maxLength(10000)
   userPrompt?: string;
 
   @doc("The documents to be analyzed, which may contain direct or indirect injection attacks.")
-  @maxItems(5)
   documents?: string[];
 }
 
@@ -251,7 +249,6 @@ model DocumentInjectionAnalysisResult {
 @doc("The request of detecting potential protected material present in the given text.")
 model DetectTextProtectedMaterialOptions {
   @doc("The text to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
-  @maxLength(10000)
   text: string;
 }
 
