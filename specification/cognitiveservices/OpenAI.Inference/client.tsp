@@ -41,6 +41,18 @@ interface OpenAIClient {
   generateSpeechFromText is Azure.OpenAI.generateSpeechFromText;
 
   getEmbeddings is Azure.OpenAI.getEmbeddings;
+
+  // listFiles is Azure.OpenAI.listFiles;
+  // uploadFile is Azure.OpenAI.uploadFile;
+  // deleteFile is Azure.OpenAI.deleteFile;
+  // getFile is Azure.OpenAI.getFile;
+  getFileContent is Azure.OpenAI.getFileContent;
+
+  // listBatches is Azure.OpenAI.listBatches;
+  // createBatch is Azure.OpenAI.createBatch;
+  // getBatch is Azure.OpenAI.getBatch;
+  // cancelBatch is Azure.OpenAI.cancelBatch;
+
 }
 
 @@clientName(Azure.OpenAI.GenerateSpeechFromTextBody.body,
