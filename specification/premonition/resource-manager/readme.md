@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-01-preview'
 input-file:
-  - Microsoft.Premonition.Insights/preview/2024-09-01-preview/openapi.json
+  - Microsoft.Premonition/preview/2024-09-01-preview/insights.json
 ```
 
 ---

@@ -8,12 +8,12 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@versioned(Microsoft.Premonition.Insights.Versions)
+@versioned(Microsoft.Premonition.Versions)
 @service({
   title: "Microsoft Premonition Insights",
 })
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-namespace Microsoft.Premonition.Insights;
+namespace Microsoft.Premonition;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 

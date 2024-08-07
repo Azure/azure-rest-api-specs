@@ -52,74 +52,7 @@
     }
   ],
   "paths": {
-    "/": {
-      "put": {
-        "operationId": "SampleOperations_Identify",
-        "tags": [
-          "SampleOperations"
-        ],
-        "description": "Create a Metagenomics analysis of this sample",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "analysisName",
-            "in": "query",
-            "description": "The name for the new analysis",
-            "required": true,
-            "type": "string",
-            "pattern": "^[\\w\\-]{3,24}$"
-          },
-          {
-            "name": "settings",
-            "in": "body",
-            "description": "The settings for Metagenomics analysis",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MetagenomicsAnalysisSettings"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'Analysis' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Analysis"
-            }
-          },
-          "201": {
-            "description": "Resource 'Analysis' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Analysis"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SampleOperations_Identify": {
-            "$ref": "./examples/SampleOperations_Identify.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/providers/Microsoft.Premonition.Insights/operations": {
+    "/providers/Microsoft.Premonition/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
@@ -155,7 +88,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Premonition.Insights/libraries": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Premonition/libraries": {
       "get": {
         "operationId": "LibraryOperations_ListBySubscription",
         "tags": [
@@ -194,7 +127,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition.Insights/libraries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition/libraries": {
       "get": {
         "operationId": "LibraryOperations_ListByResourceGroup",
         "tags": [
@@ -236,7 +169,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition.Insights/libraries/{libraryName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition/libraries/{libraryName}": {
       "get": {
         "operationId": "LibraryOperations_Get",
         "tags": [
@@ -442,7 +375,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition.Insights/libraries/{libraryName}/analyses": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition/libraries/{libraryName}/analyses": {
       "get": {
         "operationId": "AnalysisOperations_ListByParent",
         "tags": [
@@ -492,7 +425,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition.Insights/libraries/{libraryName}/analyses/{analysisName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition/libraries/{libraryName}/analyses/{analysisName}": {
       "get": {
         "operationId": "AnalysisOperations_Get",
         "tags": [
@@ -693,12 +626,12 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition.Insights/libraries/{libraryName}/samples": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition/libraries/{libraryName}/samples": {
       "get": {
         "operationId": "SampleOperations_ListByParent",
         "tags": [
@@ -748,7 +681,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition.Insights/libraries/{libraryName}/samples/{sampleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition/libraries/{libraryName}/samples/{sampleName}": {
       "get": {
         "operationId": "SampleOperations_Get",
         "tags": [
@@ -984,6 +917,103 @@
             "$ref": "./examples/SampleOperations_Delete.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition/libraries/{libraryName}/samples/{sampleName}/identify": {
+      "post": {
+        "operationId": "SampleOperations_Identify",
+        "tags": [
+          "SampleOperations"
+        ],
+        "description": "Create a Metagenomics analysis of this sample",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "libraryName",
+            "in": "path",
+            "description": "Name of the library",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w\\-]{3,24}$"
+          },
+          {
+            "name": "sampleName",
+            "in": "path",
+            "description": "Name of the sample",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w\\-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name for the new analysis",
+                  "pattern": "^[\\w\\-]{3,24}$"
+                },
+                "settings": {
+                  "$ref": "#/definitions/MetagenomicsAnalysisSettings",
+                  "description": "The settings for Metagenomics analysis"
+                }
+              },
+              "required": [
+                "name",
+                "settings"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Analysis"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SampleOperations_Identify": {
+            "$ref": "./examples/SampleOperations_Identify.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1399,7 +1429,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Description"
+          "description": "Description of this sample, such as source, collection method, etc."
         },
         "paths": {
           "type": "array",
@@ -1424,7 +1454,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Description"
+          "description": "Description of this sample, such as source, collection method, etc."
         },
         "paths": {
           "type": "array",

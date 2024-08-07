@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Premonition.Insights
-  output-folder: $(csharp-sdks-folder)/Premonition/management/Microsoft.Premonition.Insights/GeneratedProtocol
+  namespace: Microsoft.Premonition
+  output-folder: $(csharp-sdks-folder)/Premonition/management/Microsoft.Premonition/GeneratedProtocol
 ```

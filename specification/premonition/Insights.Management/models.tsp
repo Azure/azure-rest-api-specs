@@ -2,7 +2,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
-namespace Microsoft.Premonition.Insights;
+namespace Microsoft.Premonition;
 
 @doc("A collection of genomics samples and analyses")
 model Library is TrackedResource<LibraryProperties> {
@@ -39,7 +39,7 @@ model Sample is TrackedResource<SampleProperties> {
 
 @doc("The properties of Sample")
 model SampleProperties {
-  @doc("Description")
+  @doc("Description of this sample, such as source, collection method, etc.")
   description?: string;
 
   @doc("Location of the fastq files")

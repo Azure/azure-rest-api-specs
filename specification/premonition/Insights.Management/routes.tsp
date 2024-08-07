@@ -3,11 +3,12 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 
+using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 
-namespace Microsoft.Premonition.Insights;
+namespace Microsoft.Premonition;
 
 @armResourceOperations(Library)
 interface LibraryOperations {
@@ -22,7 +23,23 @@ interface LibraryOperations {
 @armResourceOperations(Analysis)
 interface AnalysisOperations {
   get is ArmResourceRead<Analysis>;
+
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   create is ArmResourceCreateOrUpdateAsync<Analysis>;
+
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   delete is ArmResourceDeleteWithoutOkAsync<Analysis>;
   listByParent is ArmResourceListByParent<Analysis>;
 }
@@ -35,19 +52,24 @@ interface SampleOperations {
   delete is ArmResourceDeleteSync<Sample>;
   listByParent is ArmResourceListByParent<Sample>;
 
-  @put
   @doc("Create a Metagenomics analysis of this sample")
-  @armResourceCreateOrUpdate(Analysis)
-  identify(
-    ...Azure.ResourceManager.ApiVersionParameter,
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  identify is ArmResourceActionAsync<
+    Sample,
+    {
+      @doc("The name for the new analysis")
+      @pattern("^[\\w\\-]{3,24}$")
+      name: string;
 
-    @doc("The name for the new analysis")
-    @query
-    @pattern("^[\\w\\-]{3,24}$")
-    analysisName: string,
-
-    @doc("The settings for Metagenomics analysis")
-    @bodyRoot
-    settings: MetagenomicsAnalysisSettings,
-  ): ArmResourceUpdatedResponse<Analysis> | ArmResourceCreatedResponse<Analysis> | ErrorResponse;
+      @doc("The settings for Metagenomics analysis")
+      settings: MetagenomicsAnalysisSettings;
+    },
+    Analysis
+  >;
 }
