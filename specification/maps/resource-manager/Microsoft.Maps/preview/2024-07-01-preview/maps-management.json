@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Maps Resource Provider",
     "description": "Resource Provider",
-    "version": "2023-06-01"
+    "version": "2024-07-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -42,9 +42,6 @@
         "description": "Create or update a Maps Account. A Maps Account holds the keys which allow access to the Maps REST APIs.",
         "operationId": "Accounts_CreateOrUpdate",
         "x-ms-examples": {
-          "Create Gen1 Account": {
-            "$ref": "./examples/CreateAccount.json"
-          },
           "Create Gen2 Account": {
             "$ref": "./examples/CreateAccountGen2.json"
           },
@@ -111,9 +108,6 @@
           },
           "Update to Gen2 Account": {
             "$ref": "./examples/UpdateAccountGen2.json"
-          },
-          "Update to Gen1 Account": {
-            "$ref": "./examples/UpdateAccountGen1.json"
           },
           "Update Account Managed Identities": {
             "$ref": "./examples/UpdateAccountManagedIdentity.json"
@@ -955,9 +949,8 @@
     "Kind": {
       "description": "The Kind of the Maps Account.",
       "type": "string",
-      "default": "Gen1",
+      "default": "Gen2",
       "enum": [
-        "Gen1",
         "Gen2"
       ],
       "x-ms-enum": {
@@ -973,8 +966,6 @@
           "description": "The name of the SKU, in standard format (such as S0).",
           "type": "string",
           "enum": [
-            "S0",
-            "S1",
             "G2"
           ],
           "x-ms-enum": {
@@ -1327,6 +1318,10 @@
         },
         "encryption": {
           "$ref": "../../../../../common-types/resource-management/v4/customermanagedkeys.json#/definitions/encryption"
+        },
+        "locations": {
+          "$ref": "#/definitions/Locations",
+          "description": "List of enabled data processing locations for the Maps Account. If no locations are set, Azure REST APIs will only enable features available in the Maps Account's location."
         }
       }
     },
@@ -1387,6 +1382,26 @@
         "allowedOrigins"
       ],
       "description": "Specifies a CORS rule for the Map Account."
+    },
+    "Locations": {
+      "description": "The list of data processing locations for the Maps Account.",
+      "type": "array",
+      "items": {
+        "description": "Data processing location.",
+        "type": "object",
+        "properties": {
+          "locationName": {
+            "type": "string",
+            "description": "The location name."
+          }
+        },
+        "required": [
+          "locationName"
+        ]
+      },
+      "x-ms-identifiers": [
+        "locationName"
+      ]
     },
     "CreatorProperties": {
       "description": "Creator resource properties",
