@@ -271,6 +271,10 @@
               "$ref": "#/definitions/InformaticaOrganizationResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -681,6 +685,10 @@
               "$ref": "#/definitions/InformaticaServerlessRuntimeResource"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -1102,23 +1110,6 @@
         }
       }
     },
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
-          }
-        }
-      }
-    },
     "CdiConfigProps": {
       "type": "object",
       "description": "Informatica CDI Configuration Properties.",
@@ -1343,14 +1334,6 @@
           "type": "string",
           "description": "Supplementary File location"
         },
-        "serverlessRuntimeDataDisks": {
-          "type": "array",
-          "description": "Serverless runtime data disks",
-          "items": {
-            "$ref": "#/definitions/ServerlessRuntimeDataDisk"
-          },
-          "x-ms-identifiers": []
-        },
         "platform": {
           "type": "string",
           "description": "Serverless Account Platform"
@@ -1385,11 +1368,7 @@
         },
         "serverlessArmResourceId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Serverless Arm Resource ID",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "description": "Serverless Arm Resource ID"
         }
       }
     },
@@ -1399,11 +1378,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OrganizationProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1437,10 +1413,6 @@
       "type": "object",
       "description": "The template for adding optional properties.",
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -1472,7 +1444,6 @@
         },
         "singleSignOnUrl": {
           "type": "string",
-          "format": "uri",
           "description": "Single sing on URL for informatica organization"
         }
       }
@@ -1526,14 +1497,6 @@
           "type": "string",
           "description": "Supplementary file location."
         },
-        "serverlessRuntimeDataDisks": {
-          "type": "array",
-          "description": "Serverless runtime data disks",
-          "items": {
-            "$ref": "#/definitions/ServerlessRuntimeDataDisk"
-          },
-          "x-ms-identifiers": []
-        },
         "serverlessRuntimeConfig": {
           "$ref": "#/definitions/ServerlessRuntimeConfigProperties",
           "description": "Serverless config properties"
@@ -1561,7 +1524,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/InformaticaServerlessRuntimeProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -1664,19 +1628,11 @@
       "properties": {
         "vnetId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Virtual network resource id",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "description": "Virtual network resource id"
         },
         "subnetId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Virtual network subnet resource id",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "description": "Virtual network subnet resource id"
         },
         "vnetResourceGuid": {
           "type": "string",
@@ -1694,19 +1650,11 @@
       "properties": {
         "vnetId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Virtual network resource id",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "description": "Virtual network resource id"
         },
         "subnetId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Virtual network subnet resource id",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "description": "Virtual network subnet resource id"
         },
         "vnetResourceGuid": {
           "type": "string",
@@ -1846,11 +1794,7 @@
         },
         "existingResourceId": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Existing Resource Id",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "description": "Existing Resource Id"
         }
       }
     },
@@ -2070,32 +2014,6 @@
         }
       }
     },
-    "ServerlessRuntimeDataDisk": {
-      "type": "object",
-      "description": "Serverless Runtime Data Disk",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of the data disk"
-        },
-        "serverHostOrIpAddress": {
-          "type": "string",
-          "description": "Server Host or IP Address"
-        },
-        "sourceMount": {
-          "type": "string",
-          "description": "Source mount point"
-        },
-        "targetMount": {
-          "type": "string",
-          "description": "Target mount point"
-        },
-        "mountOptions": {
-          "type": "string",
-          "description": "Mount options"
-        }
-      }
-    },
     "ServerlessRuntimeDependency": {
       "type": "object",
       "description": "Dependency reference for a serverless runtime resource",
@@ -2200,14 +2118,6 @@
         "supplementaryFileLocation": {
           "type": "string",
           "description": "Supplementary file location."
-        },
-        "serverlessRuntimeDataDisks": {
-          "type": "array",
-          "description": "Serverless runtime data disks",
-          "items": {
-            "$ref": "#/definitions/ServerlessRuntimeDataDisk"
-          },
-          "x-ms-identifiers": []
         },
         "serverlessRuntimeConfig": {
           "$ref": "#/definitions/ServerlessRuntimeConfigPropertiesUpdate",

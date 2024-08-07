@@ -10,7 +10,7 @@ import "@azure-tools/typespec-azure-resource-manager";
   description: "Azure Native Services Informatica DataManagement",
 })
 @versioned(Versions)
-@armCommonTypesVersion("v3")
+@armCommonTypesVersion("v5")
 namespace Informatica.DataManagement;
 
 using Azure.Core;
