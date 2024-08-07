@@ -562,6 +562,68 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "AnalysisOperations_Update",
+        "tags": [
+          "AnalysisOperations"
+        ],
+        "description": "Update a Analysis",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "libraryName",
+            "in": "path",
+            "description": "Name of the library",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w\\-]{3,24}$"
+          },
+          {
+            "name": "analysisName",
+            "in": "path",
+            "description": "Name of the analysis",
+            "required": true,
+            "type": "string",
+            "pattern": "^[\\w\\-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalysisUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Analysis"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalysisOperations_Update": {
+            "$ref": "./examples/AnalysisOperations_Update.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "AnalysisOperations_Delete",
         "tags": [
@@ -958,22 +1020,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "The name for the new analysis",
-                  "pattern": "^[\\w\\-]{3,24}$"
-                },
-                "settings": {
-                  "$ref": "#/definitions/MetagenomicsAnalysisSettings",
-                  "description": "The settings for Metagenomics analysis"
-                }
-              },
-              "required": [
-                "name",
-                "settings"
-              ]
+              "$ref": "#/definitions/IdentifyRequest"
             }
           }
         ],
@@ -1140,6 +1187,10 @@
         "settings"
       ]
     },
+    "AnalysisPropertiesUpdate": {
+      "type": "object",
+      "description": "The properties of Analysis"
+    },
     "AnalysisResult": {
       "type": "object",
       "description": "Base result of an analysis",
@@ -1218,6 +1269,21 @@
       },
       "readOnly": true
     },
+    "AnalysisUpdate": {
+      "type": "object",
+      "description": "Analysis of one or more samples",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AnalysisPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
@@ -1266,6 +1332,25 @@
         ]
       },
       "readOnly": true
+    },
+    "IdentifyRequest": {
+      "type": "object",
+      "description": "Request to identify the sources of genetic material in a sample",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for the new analysis",
+          "pattern": "^[\\w\\-]{3,24}$"
+        },
+        "settings": {
+          "$ref": "#/definitions/MetagenomicsAnalysisSettings",
+          "description": "The settings for Metagenomics analysis"
+        }
+      },
+      "required": [
+        "name",
+        "settings"
+      ]
     },
     "Library": {
       "type": "object",

@@ -164,3 +164,13 @@ union TaxonomyVersion {
   @doc("The latest version of the taxonomy database")
   Latest: "Latest",
 }
+
+@doc("Request to identify the sources of genetic material in a sample")
+model IdentifyRequest {
+  @doc("The name for the new analysis")
+  @pattern("^[\\w\\-]{3,24}$")
+  name: string;
+
+  @doc("The settings for Metagenomics analysis")
+  settings: MetagenomicsAnalysisSettings;
+}

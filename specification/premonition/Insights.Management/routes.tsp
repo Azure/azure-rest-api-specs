@@ -33,6 +33,8 @@ interface AnalysisOperations {
   )
   create is ArmResourceCreateOrUpdateAsync<Analysis>;
 
+  update is ArmResourcePatchSync<Analysis, AnalysisProperties>;
+
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
@@ -60,16 +62,5 @@ interface SampleOperations {
       `final-state-via`: "azure-async-operation",
     }
   )
-  identify is ArmResourceActionAsync<
-    Sample,
-    {
-      @doc("The name for the new analysis")
-      @pattern("^[\\w\\-]{3,24}$")
-      name: string;
-
-      @doc("The settings for Metagenomics analysis")
-      settings: MetagenomicsAnalysisSettings;
-    },
-    Analysis
-  >;
+  identify is ArmResourceActionAsync<Sample, IdentifyRequest, Analysis>;
 }
