@@ -74,6 +74,8 @@ input-file:
   - Microsoft.Network/stable/2024-03-01/networkManagerGroup.json
   - Microsoft.Network/stable/2024-03-01/networkManagerScopeConnection.json
   - Microsoft.Network/stable/2024-03-01/networkManagerSecurityAdminConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerSecurityUserConfiguration.json
+  - Microsoft.Network/stable/2024-03-01/networkManagerRoutingConfiguration.json
   - Microsoft.Network/stable/2024-03-01/networkProfile.json
   - Microsoft.Network/stable/2024-03-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2024-03-01/networkVirtualAppliance.json
@@ -3325,6 +3327,12 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManagerActiveConfiguration.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: DeleteResponseCodes
+    from: networkManagerRoutingConfiguration.json
+    reason: support response code 200 for delete operations 
+  - suppress: DeleteResponseCodes
+    from: networkManagerSecurityUserConfiguration.json
+    reason: support response code 200 for delete operations
   - suppress: RequiredPropertiesMissingInResourceModel
     from: applicationGateway.json
     reason: name, id and type properties are inherited from the upper level
