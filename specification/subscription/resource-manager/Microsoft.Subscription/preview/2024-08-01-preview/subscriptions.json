@@ -181,21 +181,13 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Subscription/policies/default": {
       "get": {
+        "description": "Get Billing Account Policy.",
         "operationId": "BillingAccount_GetPolicy",
         "x-ms-examples": {
           "GetBillingAccountPolicy": {
             "$ref": "./examples/getBillingAccountPolicy.json"
           }
         },
-        "description": "Get Billing Account Policy.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Normal response for a successful query.",
@@ -209,23 +201,26 @@
               "$ref": "#/definitions/ErrorResponseBody"
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
       }
     },
     "/providers/Microsoft.Subscription/aliases": {
       "get": {
+        "description": "List Alias Subscription.",
         "operationId": "Alias_List",
         "x-ms-examples": {
           "ListAlias": {
             "$ref": "./examples/listAlias.json"
           }
         },
-        "description": "List Alias Subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Subscription details.",
@@ -240,6 +235,11 @@
             }
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -247,29 +247,13 @@
     },
     "/providers/Microsoft.Subscription/aliases/{aliasName}": {
       "put": {
+        "description": "Create Alias Subscription.",
         "operationId": "Alias_Create",
         "x-ms-examples": {
           "CreateAlias": {
             "$ref": "./examples/createAlias.json"
           }
         },
-        "description": "Create Alias Subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/aliasNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PutAliasRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
         "x-ms-long-running-operation": true,
         "responses": {
           "200": {
@@ -287,27 +271,35 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutAliasRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
       },
       "get": {
+        "description": "Get Alias Subscription.",
         "operationId": "Alias_Get",
         "x-ms-examples": {
           "GetAlias": {
             "$ref": "./examples/getAlias.json"
           }
         },
-        "description": "Get Alias Subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/aliasNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Subscription details.",
@@ -321,16 +313,7 @@
               "$ref": "#/definitions/ErrorResponseBody"
             }
           }
-        }
-      },
-      "delete": {
-        "operationId": "Alias_Delete",
-        "x-ms-examples": {
-          "DeleteAlias": {
-            "$ref": "./examples/deleteAlias.json"
-          }
         },
-        "description": "Delete Alias.",
         "parameters": [
           {
             "$ref": "#/parameters/aliasNameParameter"
@@ -338,7 +321,16 @@
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
-        ],
+        ]
+      },
+      "delete": {
+        "description": "Delete Alias.",
+        "operationId": "Alias_Delete",
+        "x-ms-examples": {
+          "DeleteAlias": {
+            "$ref": "./examples/deleteAlias.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Deleted the alias"
@@ -352,23 +344,26 @@
               "$ref": "#/definitions/ErrorResponseBody"
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
       }
     },
     "/providers/Microsoft.Subscription/policies": {
       "get": {
+        "description": "Get the subscription tenant policy for the user's tenant.",
         "operationId": "SubscriptionPolicy_ListPolicyForTenant",
         "x-ms-examples": {
           "getTenantPolicyList": {
             "$ref": "./examples/getTenantPolicyList.json"
           }
         },
-        "description": "Get the subscription tenant policy for the user's tenant.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Subscription tenant policy details for user's tenant.",
@@ -385,31 +380,23 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
       }
     },
     "/providers/Microsoft.Subscription/policies/default": {
       "put": {
+        "description": "Create or Update Subscription tenant policy for user's tenant.",
         "operationId": "SubscriptionPolicy_AddUpdatePolicyForTenant",
         "x-ms-examples": {
           "TenantPolicy": {
             "$ref": "./examples/changeTenantPolicy.json"
           }
         },
-        "description": "Create or Update Subscription tenant policy for user's tenant.",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PutTenantPolicyRequestProperties"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Subscription tenant policy has been successfully created/updated.",
@@ -423,21 +410,29 @@
               "$ref": "#/definitions/ErrorResponseBody"
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutTenantPolicyRequestProperties"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
       },
       "get": {
+        "description": "Get the subscription tenant policy for the user's tenant.",
         "operationId": "SubscriptionPolicy_GetPolicyForTenant",
         "x-ms-examples": {
           "getTenantPolicy": {
             "$ref": "./examples/getTenantPolicy.json"
           }
         },
-        "description": "Get the subscription tenant policy for the user's tenant.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Subscription tenant policy details for user's tenant.",
@@ -451,30 +446,23 @@
               "$ref": "#/definitions/ErrorResponseBody"
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
       }
     },
     "/providers/Microsoft.Subscription/subscriptionOperations/{operationId}": {
       "get": {
+        "description": "Get the status of the pending Microsoft.Subscription API operations.",
         "operationId": "SubscriptionOperation_Get",
         "x-ms-examples": {
           "getPendingSubscriptionOperations": {
             "$ref": "./examples/getSubscriptionOperation.json"
           }
         },
-        "description": "Get the status of the pending Microsoft.Subscription API operations.",
-        "parameters": [
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successful completion of the asynchronous operation",
@@ -502,34 +490,30 @@
               "$ref": "#/definitions/ErrorResponseBody"
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID, which can be found from the Location field in the generate recommendation response header.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
       }
     },
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership": {
       "post": {
+        "description": "Accept subscription ownership.",
         "operationId": "Subscription_AcceptOwnership",
         "x-ms-examples": {
           "AcceptOwnership": {
             "$ref": "./examples/acceptSubscriptionOwnership.json"
           }
         },
-        "description": "Accept subscription ownership.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AcceptOwnershipRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
         "x-ms-long-running-operation": true,
         "responses": {
           "202": {
@@ -552,26 +536,34 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcceptOwnershipRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
       }
     },
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnershipStatus": {
       "get": {
+        "description": "Accept subscription ownership status.",
         "operationId": "Subscription_AcceptOwnershipStatus",
         "x-ms-examples": {
           "AcceptOwnershipStatus": {
             "$ref": "./examples/acceptOwnershipStatus.json"
           }
         },
-        "description": "Accept subscription ownership status.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "Subscription details.",
@@ -585,7 +577,15 @@
               "$ref": "#/definitions/ErrorResponseBody"
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
@@ -690,7 +690,7 @@
         }
       }
     }
-  },
+  }, 
   "definitions": {
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
