@@ -2249,6 +2249,111 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles": {
+      "put": {
+        "tags": [
+          "GalleryInVMAccessControlProfiles"
+        ],
+        "operationId": "GalleryInVMAccessControlProfiles_ListByGallery",
+        "description": "List gallery inVMAccessControlProfiles in a gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery from which the InVMAccessControlProfiles are to be listed."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery inVMAccessControlProfiles in a gallery.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfile_ListByGallery.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{inVMAccessControlProfileName}/versions": {
+      "put": {
+        "tags": [
+          "GalleryInVMAccessControlProfileVersions"
+        ],
+        "operationId": "GalleryInVMAccessControlProfileVersions_ListByGalleryInVMAccessControlProfile",
+        "description": "List gallery inVMAccessControlProfile versions in a gallery inVMAccessControlProfile",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the inVMAccessControlProfile resides."
+          },
+          {
+            "name": "inVMAccessControlProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery inVMAccessControlProfile from which the inVMAccessControlProfile versions are to be listed."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryInVMAccessControlProfileVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery inVMAccessControlProfile versions in a gallery inVMAccessControlProfile.": {
+            "$ref": "./examples/galleryResourceProfileExamples/GalleryInVMAccessControlProfileVersion_ListByGalleryInVMAccessControlProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -4071,6 +4176,44 @@
         }
       },
       "description": "The properties of a gallery ResourceProfile version."
+    },
+    "GalleryInVMAccessControlProfileList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryInVMAccessControlProfile"
+          },
+          "description": "A list of Gallery InVMAccessControlProfiles."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of inVMAccessControlProfiles in the gallery. Call ListNext() with this to fetch the next page of gallery inVMAccessControlProfiles."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Gallery InVMAccessControlProfiles operation response."
+    },
+    "GalleryInVMAccessControlProfileVersionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryInVMAccessControlProfileVersion"
+          },
+          "description": "A list of Gallery InVMAccessControlProfile Versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of inVMAccessControlProfile versions. Call ListNext() with this to fetch the next page of gallery inVMAccessControlProfile versions."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Gallery InVMAccessControlProfile Versions operation response."
     }
   },
   "parameters": {
