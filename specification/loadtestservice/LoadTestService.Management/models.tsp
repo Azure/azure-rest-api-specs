@@ -280,5 +280,5 @@ model QuotaBucketRequestPropertiesDimensions {
 }
 
 @doc("Values returned by the List operation.")
-model OutboundEnvironmentEndpointCollection
+model PagedOutboundEnvironmentEndpoint
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;
