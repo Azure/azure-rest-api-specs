@@ -13,7 +13,7 @@ namespace TextTranslation;
 model TranslateParameters {
   ...CommonParameters;
 
-  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Existing Spec"
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing Spec"
   @query(#{ explode: true })
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
