@@ -32,7 +32,13 @@ model DataFlowEndpointAuthenticationSasl {
   saslType: DataFlowEndpointAuthenticationSaslType;
 
   @doc("Token secret name.")
-  tokenSecretRef: string;
+  secretRef: string;
+}
+
+@doc("DataFlowEndpoint Authentication Access Token properties")
+model DataFlowEndpointAuthenticationAccessToken {
+  @doc("Token secret name.")
+  secretRef: string;
 }
 
 @doc("DataFlowEndpoint Authentication Sasl Type properties")

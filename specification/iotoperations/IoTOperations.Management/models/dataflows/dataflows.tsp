@@ -34,9 +34,6 @@ model DataFlowResource is ProxyResource<DataFlowProperties> {
 
 @doc("DataFlow Resource properties")
 model DataFlowProperties {
-  @doc("Reference to the DataflowProfile CR.")
-  profileRef: string;
-
   @doc("Mode for DataFlow. Optional; defaults to Enabled.")
   mode?: OperationalMode = OperationalMode.Enabled;
 
@@ -49,6 +46,7 @@ model DataFlowProperties {
   provisioningState?: ProvisioningState;
 }
 
+@discriminator("operationType")
 @doc("DataFlow Operation properties. NOTE - One only method is allowed to be used for one entry.")
 model DataFlowOperation {
   @doc("Type of operation.")
@@ -58,14 +56,14 @@ model DataFlowOperation {
   @maxLength(64)
   name?: string;
 
-  @doc("Transformation configuration.")
-  builtInTransformationSettings?: DataFlowBuiltInTransformation;
+  @doc("Source configuration.")
+  sourceSettings?: DataFlowSourceOperationSettings;
+
+  @doc("Built In Transformation configuration.")
+  builtInTransformationSettings?: DataFlowBuiltInTransformationSettings;
 
   @doc("Destination configuration.")
-  destinationSettings: DataFlowDestinationOperation;
-
-  @doc("Source configuration.")
-  sourceSettings: DataFlowSourceOperation;
+  destinationSettings?: DataFlowDestinationOperationSettings;
 }
 
 @doc("DataFlow Operation Type properties")
@@ -83,7 +81,7 @@ union OperationType {
 }
 
 @doc("DataFlow BuiltIn Transformation properties")
-model DataFlowBuiltInTransformation {
+model DataFlowBuiltInTransformationSettings {
   @doc("Serialization format. Optional; defaults to JSON. Allowed value JSON Schema/draft-7, Parquet. Default: Json")
   serializationFormat?: TransformationSerializationFormat = TransformationSerializationFormat.Json;
 
@@ -210,7 +208,7 @@ union TransformationSerializationFormat {
 }
 
 @doc("DataFlow Destination Operation properties")
-model DataFlowDestinationOperation {
+model DataFlowDestinationOperationSettings {
   @doc("Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type.")
   endpointRef: string;
 
@@ -219,7 +217,7 @@ model DataFlowDestinationOperation {
 }
 
 @doc("DataFlow Source Operation properties")
-model DataFlowSourceOperation {
+model DataFlowSourceOperationSettings {
   @doc("Reference to the Dataflow Endpoint resource. Can only be of Broker and Kafka type.")
   endpointRef: string;
 

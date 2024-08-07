@@ -111,7 +111,7 @@ model DataFlowEndpointAuthentication {
   userAssignedManagedIdentitySettings?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
 
   @doc("SAS token authentication.")
-  accessTokenSecretRef?: string;
+  accessTokenSettings?: DataFlowEndpointAuthenticationAccessToken;
 
   @doc("SASL authentication.")
   saslSettings?: DataFlowEndpointAuthenticationSasl;

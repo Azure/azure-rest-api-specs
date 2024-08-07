@@ -3537,75 +3537,6 @@
         }
       }
     },
-    "DataFlowBuiltInTransformation": {
-      "type": "object",
-      "description": "DataFlow BuiltIn Transformation properties",
-      "properties": {
-        "serializationFormat": {
-          "type": "string",
-          "description": "Serialization format. Optional; defaults to JSON. Allowed value JSON Schema/draft-7, Parquet. Default: Json",
-          "default": "Json",
-          "enum": [
-            "Delta",
-            "Json",
-            "Parquet"
-          ],
-          "x-ms-enum": {
-            "name": "TransformationSerializationFormat",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Delta",
-                "value": "Delta",
-                "description": "Delta Format"
-              },
-              {
-                "name": "Json",
-                "value": "Json",
-                "description": "JSON Format"
-              },
-              {
-                "name": "Parquet",
-                "value": "Parquet",
-                "description": "Parquet Format"
-              }
-            ]
-          }
-        },
-        "schemaRef": {
-          "type": "string",
-          "description": "Reference to the schema that describes the output of the transformation."
-        },
-        "datasets": {
-          "type": "array",
-          "description": "Enrich data from Broker State Store. Dataset references a key in Broker State Store.",
-          "default": [],
-          "maxItems": 1,
-          "items": {
-            "$ref": "#/definitions/DataFlowBuiltInTransformationDataset"
-          },
-          "x-ms-identifiers": []
-        },
-        "filter": {
-          "type": "array",
-          "description": "Filters input record or datapoints based on condition.",
-          "default": [],
-          "items": {
-            "$ref": "#/definitions/DataFlowBuiltInTransformationFilter"
-          },
-          "x-ms-identifiers": []
-        },
-        "map": {
-          "type": "array",
-          "description": "Maps input to output message.",
-          "default": [],
-          "items": {
-            "$ref": "#/definitions/DataFlowBuiltInTransformationMap"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "DataFlowBuiltInTransformationDataset": {
       "type": "object",
       "description": "DataFlow BuiltIn Transformation dataset properties",
@@ -3720,7 +3651,114 @@
         "output"
       ]
     },
+    "DataFlowBuiltInTransformationOperation": {
+      "type": "object",
+      "description": "DataFlow Built In Transformation Operation",
+      "properties": {
+        "builtInTransformationSettings": {
+          "$ref": "#/definitions/DataFlowBuiltInTransformationSettings",
+          "description": "Built In Transformation configuration."
+        }
+      },
+      "required": [
+        "builtInTransformationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFlowOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "BuiltInTransformation"
+    },
+    "DataFlowBuiltInTransformationSettings": {
+      "type": "object",
+      "description": "DataFlow BuiltIn Transformation properties",
+      "properties": {
+        "serializationFormat": {
+          "type": "string",
+          "description": "Serialization format. Optional; defaults to JSON. Allowed value JSON Schema/draft-7, Parquet. Default: Json",
+          "default": "Json",
+          "enum": [
+            "Delta",
+            "Json",
+            "Parquet"
+          ],
+          "x-ms-enum": {
+            "name": "TransformationSerializationFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Delta",
+                "value": "Delta",
+                "description": "Delta Format"
+              },
+              {
+                "name": "Json",
+                "value": "Json",
+                "description": "JSON Format"
+              },
+              {
+                "name": "Parquet",
+                "value": "Parquet",
+                "description": "Parquet Format"
+              }
+            ]
+          }
+        },
+        "schemaRef": {
+          "type": "string",
+          "description": "Reference to the schema that describes the output of the transformation."
+        },
+        "datasets": {
+          "type": "array",
+          "description": "Enrich data from Broker State Store. Dataset references a key in Broker State Store.",
+          "default": [],
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/DataFlowBuiltInTransformationDataset"
+          },
+          "x-ms-identifiers": []
+        },
+        "filter": {
+          "type": "array",
+          "description": "Filters input record or datapoints based on condition.",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/DataFlowBuiltInTransformationFilter"
+          },
+          "x-ms-identifiers": []
+        },
+        "map": {
+          "type": "array",
+          "description": "Maps input to output message.",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/DataFlowBuiltInTransformationMap"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "DataFlowDestinationOperation": {
+      "type": "object",
+      "description": "DataFlow Destination Operation",
+      "properties": {
+        "destinationSettings": {
+          "$ref": "#/definitions/DataFlowDestinationOperationSettings",
+          "description": "Destination configuration."
+        }
+      },
+      "required": [
+        "destinationSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFlowOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "Destination"
+    },
+    "DataFlowDestinationOperationSettings": {
       "type": "object",
       "description": "DataFlow Destination Operation properties",
       "properties": {
@@ -4567,24 +4605,11 @@
           "type": "string",
           "description": "Optional user provided name of the transformation.",
           "maxLength": 64
-        },
-        "builtInTransformationSettings": {
-          "$ref": "#/definitions/DataFlowBuiltInTransformation",
-          "description": "Transformation configuration."
-        },
-        "destinationSettings": {
-          "$ref": "#/definitions/DataFlowDestinationOperation",
-          "description": "Destination configuration."
-        },
-        "sourceSettings": {
-          "$ref": "#/definitions/DataFlowSourceOperation",
-          "description": "Source configuration."
         }
       },
+      "discriminator": "operationType",
       "required": [
-        "operationType",
-        "destinationSettings",
-        "sourceSettings"
+        "operationType"
       ]
     },
     "DataFlowProfileProperties": {
@@ -4692,9 +4717,7 @@
         "operations": {
           "type": "array",
           "description": "List of operations including source and destination references as well as transformation.",
-          "items": {
-            "$ref": "#/definitions/DataFlowOperation"
-          },
+          "items": {},
           "x-ms-identifiers": []
         },
         "provisioningState": {
@@ -4756,6 +4779,25 @@
       ]
     },
     "DataFlowSourceOperation": {
+      "type": "object",
+      "description": "DataFlow Source Operation",
+      "properties": {
+        "sourceSettings": {
+          "$ref": "#/definitions/DataFlowSourceOperationSettings",
+          "description": "Source configuration."
+        }
+      },
+      "required": [
+        "sourceSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFlowOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "Source"
+    },
+    "DataFlowSourceOperationSettings": {
       "type": "object",
       "description": "DataFlow Source Operation properties",
       "properties": {

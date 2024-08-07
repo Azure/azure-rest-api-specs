@@ -32,9 +32,6 @@ model BrokerListenerResource is ProxyResource<BrokerListenerProperties> {
 
 @doc("Defines a Broker listener. A listener is a collection of ports on which the broker accepts connections from clients.")
 model BrokerListenerProperties {
-  @doc("Broker associated with this listener.")
-  brokerRef: string;
-
   @doc("Kubernetes Service name of this listener.")
   serviceName?: string = "aio-mq-dmqtt-frontend";
 
