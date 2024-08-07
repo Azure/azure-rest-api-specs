@@ -2416,6 +2416,52 @@
         }
       }
     },
+    "/text:detectProtectedMaterialForCode": {
+      "post": {
+        "operationId": "TextOperations_DetectCodeProtectedMaterial",
+        "summary": "Detect Protected Material for Code",
+        "description": "A synchronous API for detecting protected material in the given code.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body to be detected, which may contain protected material.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectCodeProtectedMaterialOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DetectCodeProtectedMaterialResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect Protected Material For Code": {
+            "$ref": "./examples/DetectProtectedMaterialForCode.json"
+          }
+        }
+      }
+    },
     "/text:shieldPrompt": {
       "post": {
         "operationId": "TextOperations_ShieldPrompt",
@@ -3221,6 +3267,49 @@
         ]
       }
     },
+    "CodeCitation": {
+      "type": "object",
+      "description": "The code citation of potential protected material for code.",
+      "properties": {
+        "license": {
+          "type": "string",
+          "description": "The license for detected code. If the value is NOASSERTION, it means the code hasn't assertted in the repo."
+        },
+        "sourceUrls": {
+          "type": "array",
+          "description": "The URLs of the source code.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "license",
+        "sourceUrls"
+      ]
+    },
+    "CodeProtectedMaterialAnalysisResult": {
+      "type": "object",
+      "description": "The individual detection result of potential protected material for code.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether potential protected material is detected or not."
+        },
+        "codeCitations": {
+          "type": "array",
+          "description": "The code citation of potential protected material for code.",
+          "items": {
+            "$ref": "#/definitions/CodeCitation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "detected",
+        "codeCitations"
+      ]
+    },
     "CustomCategoryOperationDetail": {
       "type": "object",
       "description": "The details of a long running operation of Custom Category.",
@@ -3320,6 +3409,33 @@
           }
         ]
       }
+    },
+    "DetectCodeProtectedMaterialOptions": {
+      "type": "object",
+      "description": "The request of detecting potential protected material present in the given code.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The code to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.",
+          "maxLength": 10000
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "DetectCodeProtectedMaterialResult": {
+      "type": "object",
+      "description": "The combined detection results of potential protected material for code.",
+      "properties": {
+        "protectedMaterialAnalysis": {
+          "$ref": "#/definitions/CodeProtectedMaterialAnalysisResult",
+          "description": "Analysis result for the given text."
+        }
+      },
+      "required": [
+        "protectedMaterialAnalysis"
+      ]
     },
     "DetectIncidentsResult": {
       "type": "object",

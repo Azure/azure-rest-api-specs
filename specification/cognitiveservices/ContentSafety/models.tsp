@@ -269,6 +269,39 @@ model TextProtectedMaterialAnalysisResult {
   detected: boolean;
 }
 
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The request of detecting potential protected material present in the given code.")
+model DetectCodeProtectedMaterialOptions {
+  @doc("The code to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
+  @maxLength(10000)
+  code: string;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The combined detection results of potential protected material for code.")
+model DetectCodeProtectedMaterialResult {
+  @doc("Analysis result for the given text.")
+  protectedMaterialAnalysis: CodeProtectedMaterialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The code citation of potential protected material for code.")
+model CodeCitation {
+  @doc("The license for detected code. If the value is NOASSERTION, it means the code hasn't assertted in the repo.")
+  license: string;
+  @doc("The URLs of the source code.")
+  sourceUrls: string[];
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The individual detection result of potential protected material for code.")
+model CodeProtectedMaterialAnalysisResult {
+  @doc("Whether potential protected material is detected or not.")
+  detected: boolean;
+
+  @doc("The code citation of potential protected material for code.")
+  codeCitations: CodeCitation[];
+}
 
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)

@@ -65,6 +65,23 @@ interface TextOperations {
   >;
 
   @added(ContentSafety.Versions.v2024_09_15_Preview)
+  @summary("Detect Protected Material for Code")
+  @doc("A synchronous API for detecting protected material in the given code.")
+  @route("/text:detectProtectedMaterialForCode")
+  @post
+  detectCodeProtectedMaterial is Azure.Core.RpcOperation<
+    {
+      @bodyRoot
+      @doc("The request body to be detected, which may contain protected material.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: DetectCodeProtectedMaterialOptions;
+    },
+    DetectCodeProtectedMaterialResult
+  >;
+
+  @added(ContentSafety.Versions.v2024_09_15_Preview)
   @summary("Analyze Text with Custom Category")
   @doc("A synchronous API to analyze content with Custom Category defined.")
   @route("/text:analyzeCustomCategory")
