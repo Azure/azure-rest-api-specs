@@ -101,7 +101,7 @@ model TextBlocklistMatch {
   blocklistItemId: string;
 
   @doc("The content of the matched item.")
-  @maxLength(128)
+  @maxLength(1000)
   blocklistItemText: string;
 }
 
