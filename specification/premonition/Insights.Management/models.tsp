@@ -30,7 +30,7 @@ model LibraryProperties {
 model Sample is TrackedResource<SampleProperties> {
   @doc("Name of the sample")
   @key("sampleName")
-  @segment("sameples")
+  @segment("samples")
   @path
   @visibility("read", "create")
   @pattern("^[\\w\\-]{3,24}$")
@@ -125,7 +125,7 @@ model AnalysisSettings {
   kind: AnalysisKind;
 }
 
-@doc("Settings for a metagenomics analysis")
+@doc("Settings for a Metagenomics analysis")
 model MetagenomicsAnalysisSettings extends AnalysisSettings {
   kind: AnalysisKind.Metagenomics;
 
@@ -143,7 +143,7 @@ model AnalysisResult {
   files?: Array<string>;
 }
 
-@doc("Result for a metagenomics analysis")
+@doc("Result for a Metagenomics analysis")
 model MetagenomicsAnalysisResult extends AnalysisResult {
   kind: AnalysisKind.Metagenomics;
 

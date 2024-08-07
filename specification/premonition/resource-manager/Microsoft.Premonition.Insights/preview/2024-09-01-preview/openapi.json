@@ -58,7 +58,7 @@
         "tags": [
           "SampleOperations"
         ],
-        "description": "Create a metagenomics analysis of this sample",
+        "description": "Create a Metagenomics analysis of this sample",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -74,7 +74,7 @@
           {
             "name": "settings",
             "in": "body",
-            "description": "The settings for metagenomics analysis",
+            "description": "The settings for Metagenomics analysis",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MetagenomicsAnalysisSettings"
@@ -698,7 +698,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition.Insights/libraries/{libraryName}/sameples": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition.Insights/libraries/{libraryName}/samples": {
       "get": {
         "operationId": "SampleOperations_ListByParent",
         "tags": [
@@ -748,7 +748,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition.Insights/libraries/{libraryName}/sameples/{sampleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Premonition.Insights/libraries/{libraryName}/samples/{sampleName}": {
       "get": {
         "operationId": "SampleOperations_Get",
         "tags": [
@@ -1318,7 +1318,7 @@
     },
     "MetagenomicsAnalysisResult": {
       "type": "object",
-      "description": "Result for a metagenomics analysis",
+      "description": "Result for a Metagenomics analysis",
       "properties": {
         "taxonomyVersion": {
           "$ref": "#/definitions/TaxonomyVersion",
@@ -1343,7 +1343,7 @@
     },
     "MetagenomicsAnalysisSettings": {
       "type": "object",
-      "description": "Settings for a metagenomics analysis",
+      "description": "Settings for a Metagenomics analysis",
       "properties": {
         "taxonomyVersion": {
           "$ref": "#/definitions/TaxonomyVersion",

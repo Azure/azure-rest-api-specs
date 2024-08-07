@@ -36,7 +36,7 @@ interface SampleOperations {
   listByParent is ArmResourceListByParent<Sample>;
 
   @put
-  @doc("Create a metagenomics analysis of this sample")
+  @doc("Create a Metagenomics analysis of this sample")
   @armResourceCreateOrUpdate(Analysis)
   identify(
     ...Azure.ResourceManager.ApiVersionParameter,
@@ -46,7 +46,7 @@ interface SampleOperations {
     @pattern("^[\\w\\-]{3,24}$")
     analysisName: string,
 
-    @doc("The settings for metagenomics analysis")
+    @doc("The settings for Metagenomics analysis")
     @bodyRoot
     settings: MetagenomicsAnalysisSettings,
   ): ArmResourceUpdatedResponse<Analysis> | ArmResourceCreatedResponse<Analysis> | ErrorResponse;
