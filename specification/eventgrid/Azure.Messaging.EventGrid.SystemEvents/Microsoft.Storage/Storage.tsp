@@ -196,6 +196,9 @@ namespace Microsoft.EventGrid.SystemEvents {
     /** The blob is in access tier Archive */
     "Archive",
 
+    /** The blob is in access tier Default(Inferred) */
+    "Default",
+
     string,
   }
 
