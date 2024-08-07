@@ -46,21 +46,6 @@ model InstanceProperties {
   version?: string;
 
   @doc("The reference to the Schema Registry for this AIO Instance.")
-  schemaRegistryRef: SchemaRegistryReference;
+  @pattern("<will-be-provided-by-shweta>")
+  schemaRegistryNamespace: string;
 }
-
-@doc("An object for referencing a Schema Registry.")
-model SchemaRegistryReference {
-  @doc("The resource Id for the Schema Registry in Azure.")
-  resourceId: SchemaRegistryResourceId;
-
-  @doc("The namespace in the Schema Registry to use.")
-  `namespace`: string;
-}
-
-scalar SchemaRegistryResourceId
-  extends Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.DeviceRegistry/schemaRegistries",
-    }
-  ]>;
