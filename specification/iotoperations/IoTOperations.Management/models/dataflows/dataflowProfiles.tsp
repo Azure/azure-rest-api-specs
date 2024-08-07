@@ -40,7 +40,7 @@ model DataflowProfileProperties {
   @doc("To manually scale the dataflow profile, specify the maximum number of instances you want to run.")
   @minValue(1)
   @maxValue(20)
-  instanceCount?: int32;
+  instanceCount?: int32 = 1;
 
   @visibility("read")
   @doc("The status of the last operation.")

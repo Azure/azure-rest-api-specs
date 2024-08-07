@@ -120,7 +120,7 @@ model DataflowEndpointAuthentication {
   serviceAccountTokenSettings?: DataflowEndpointAuthenticationServiceAccountToken;
 
   @doc("X.509 certificate authentication.")
-  x509CredentialsSettings?: DataflowEndpointAuthenticationX509;
+  x509Settings?: DataflowEndpointAuthenticationX509;
 }
 
 @doc("Authentication Mode properties")
@@ -139,8 +139,8 @@ union AuthenticationMethod {
   @doc("Sasl Option")
   Sasl: "Sasl",
 
-  @doc("X509Credentials Option")
-  X509Credentials: "X509Credentials",
+  @doc("x509Certificate Option")
+  x509Certificate: "x509Certificate",
 }
 
 @doc("Azure Data Lake endpoint properties")
@@ -201,7 +201,7 @@ model DataflowEndpointKafka {
   batching?: DataflowEndpointKafkaBatching;
 
   @doc("Copy Broker properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an Broker source.")
-  copyMqttProperties?: OperationalMode = OperationalMode.Disabled;
+  copyMqttProperties?: OperationalMode = OperationalMode.Enabled;
 
   @doc("Compression. Can be none, gzip, lz4, or snappy. No effect if the endpoint is used as a source.")
   compression?: DataflowEndpointKafkaCompression = DataflowEndpointKafkaCompression.None;
@@ -297,7 +297,7 @@ model DataflowEndpointMqtt {
   clientIdPrefix?: string;
 
   @doc("Host of the Broker in the form of <hostname>:<port>. Optional; connects to Broker if omitted.")
-  host?: string = "aio-mq-dmqtt-frontend:1883";
+  host?: string = "aio-mq-dmqtt-frontend:8883";
 
   @doc("Enable or disable websockets.")
   protocol?: BrokerProtocolType = BrokerProtocolType.Mqtt;

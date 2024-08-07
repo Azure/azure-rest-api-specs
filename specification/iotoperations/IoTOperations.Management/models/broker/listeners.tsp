@@ -92,7 +92,7 @@ model TlsCertMethod {
   mode: TlsCertMethodMode;
 
   @doc("Option 1 - Automatic TLS server certificate management with cert-manager.")
-  automatic?: AutomaticCertMethod;
+  certManagerCertificateSpec?: CertManagerCertificateSpec;
 
   @doc("Option 2 - Manual TLS server certificate management through a defined secret.")
   manual?: X509ManualCertificate;
@@ -110,12 +110,12 @@ union TlsCertMethodMode {
 }
 
 @doc("Automatic TLS server certificate management with cert-manager")
-model AutomaticCertMethod {
+model CertManagerCertificateSpec {
   @doc("Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   duration?: string;
 
   @doc("Secret for storing server certificate. Any existing data will be overwritten. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretRef?: string;
+  secretName?: string;
 
   @doc("When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   renewBefore?: string;
