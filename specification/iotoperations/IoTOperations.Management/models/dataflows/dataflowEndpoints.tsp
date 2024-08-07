@@ -15,7 +15,7 @@ namespace Microsoft.IoTOperations;
  */
 @doc("Instance dataflowEndpoint resource")
 @parentResource(InstanceResource)
-model DataFlowEndpointResource is ProxyResource<DataFlowEndpointProperties> {
+model DataflowEndpointResource is ProxyResource<DataflowEndpointProperties> {
   @doc("Name of Instance dataflowEndpoint resource")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("dataflowEndpointName")
@@ -32,38 +32,38 @@ model DataFlowEndpointResource is ProxyResource<DataFlowEndpointProperties> {
   extendedLocation: ExtendedLocation;
 }
 
-@doc("DataFlowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")
-model DataFlowEndpointProperties {
+@doc("DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")
+model DataflowEndpointProperties {
   @doc("Endpoint Type.")
   endpointType: EndpointType;
 
   @doc("Authentication configuration.")
-  authentication: DataFlowEndpointAuthentication;
+  authentication: DataflowEndpointAuthentication;
 
   @doc("Azure Data Explorer endpoint.")
-  dataExplorerSettings?: DataFlowEndpointDataExplorer;
+  dataExplorerSettings?: DataflowEndpointDataExplorer;
 
   @doc("Azure Data Lake endpoint.")
-  dataLakeStorageSettings?: DataFlowEndpointDataLakeStorage;
+  dataLakeStorageSettings?: DataflowEndpointDataLakeStorage;
 
   @doc("Microsoft Fabric endpoint.")
-  fabricOneLakeSettings?: DataFlowEndpointFabricOneLake;
+  fabricOneLakeSettings?: DataflowEndpointFabricOneLake;
 
   @doc("Kafka endpoint.")
-  kafkaSettings?: DataFlowEndpointKafka;
+  kafkaSettings?: DataflowEndpointKafka;
 
   @doc("Local persistent volume endpoint.")
-  localStorageSettings?: DataFlowEndpointLocalStorage;
+  localStorageSettings?: DataflowEndpointLocalStorage;
 
   @doc("Broker endpoint.")
-  mqttSettings?: DataFlowEndpointMqtt;
+  mqttSettings?: DataflowEndpointMqtt;
 
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
 
-@doc("DataFlowEndpoint Type properties")
+@doc("DataflowEndpoint Type properties")
 union EndpointType {
   string,
 
@@ -87,7 +87,7 @@ union EndpointType {
 }
 
 @doc("Azure Data Explorer endpoint properties")
-model DataFlowEndpointDataExplorer {
+model DataflowEndpointDataExplorer {
   @doc("Database name.")
   database: string;
 
@@ -100,27 +100,27 @@ model DataFlowEndpointDataExplorer {
 }
 
 @doc("Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.")
-model DataFlowEndpointAuthentication {
+model DataflowEndpointAuthentication {
   @doc("Mode of Authentication.")
   method: AuthenticationMethod;
 
   @doc("System-assigned managed identity authentication.")
-  systemAssignedManagedIdentitySettings?: DataFlowEndpointAuthenticationSystemAssignedManagedIdentity;
+  systemAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationSystemAssignedManagedIdentity;
 
   @doc("User-assigned managed identity authentication.")
-  userAssignedManagedIdentitySettings?: DataFlowEndpointAuthenticationUserAssignedManagedIdentity;
+  userAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationUserAssignedManagedIdentity;
 
   @doc("SAS token authentication.")
-  accessTokenSettings?: DataFlowEndpointAuthenticationAccessToken;
+  accessTokenSettings?: DataflowEndpointAuthenticationAccessToken;
 
   @doc("SASL authentication.")
-  saslSettings?: DataFlowEndpointAuthenticationSasl;
+  saslSettings?: DataflowEndpointAuthenticationSasl;
 
   @doc("Service Account Token authentication.")
-  serviceAccountTokenSettings?: DataFlowEndpointAuthenticationServiceAccountToken;
+  serviceAccountTokenSettings?: DataflowEndpointAuthenticationServiceAccountToken;
 
   @doc("X.509 certificate authentication.")
-  x509CredentialsSettings?: DataFlowEndpointAuthenticationX509;
+  x509CredentialsSettings?: DataflowEndpointAuthenticationX509;
 }
 
 @doc("Authentication Mode properties")
@@ -144,7 +144,7 @@ union AuthenticationMethod {
 }
 
 @doc("Azure Data Lake endpoint properties")
-model DataFlowEndpointDataLakeStorage {
+model DataflowEndpointDataLakeStorage {
   @doc("Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .")
   @pattern(".+\\.blob\\.core\\.windows\\.net")
   host: string;
@@ -154,12 +154,12 @@ model DataFlowEndpointDataLakeStorage {
 }
 
 @doc("Microsoft Fabric endpoint properties")
-model DataFlowEndpointFabricOneLake {
+model DataflowEndpointFabricOneLake {
   @doc("Names of the workspace and lakehouse.")
-  names: DataFlowEndpointFabricOneLakeNames;
+  names: DataflowEndpointFabricOneLakeNames;
 
   @doc("Type of location of the data in the workspace. Can be either tables or files.")
-  oneLakePathType: DataFlowEndpointFabricPathType;
+  oneLakePathType: DataflowEndpointFabricPathType;
 
   @doc("Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com.")
   @pattern(".+\\.fabric\\.microsoft\\.com")
@@ -170,7 +170,7 @@ model DataFlowEndpointFabricOneLake {
 }
 
 @doc("Microsoft Fabric endpoint Names properties")
-model DataFlowEndpointFabricOneLakeNames {
+model DataflowEndpointFabricOneLakeNames {
   @doc("Lakehouse name.")
   lakehouseName: string;
 
@@ -178,8 +178,8 @@ model DataFlowEndpointFabricOneLakeNames {
   workspaceName: string;
 }
 
-@doc("DataFlowEndpoint Fabric Path Type properties")
-union DataFlowEndpointFabricPathType {
+@doc("DataflowEndpoint Fabric Path Type properties")
+union DataflowEndpointFabricPathType {
   string,
 
   @doc("FILES Type")
@@ -190,7 +190,7 @@ union DataFlowEndpointFabricPathType {
 }
 
 @doc("Kafka endpoint properties")
-model DataFlowEndpointKafka {
+model DataflowEndpointKafka {
   @doc("Consumer group ID.")
   consumerGroupId?: string;
 
@@ -198,26 +198,26 @@ model DataFlowEndpointKafka {
   host?: string;
 
   @doc("Batching configuration.")
-  batching?: DataFlowEndpointKafkaBatching;
+  batching?: DataflowEndpointKafkaBatching;
 
   @doc("Copy Broker properties. No effect if the endpoint is used as a source or if the dataflow doesn't have an Broker source.")
   copyMqttProperties?: OperationalMode = OperationalMode.Disabled;
 
   @doc("Compression. Can be none, gzip, lz4, or snappy. No effect if the endpoint is used as a source.")
-  compression?: DataFlowEndpointKafkaCompression = DataFlowEndpointKafkaCompression.None;
+  compression?: DataflowEndpointKafkaCompression = DataflowEndpointKafkaCompression.None;
 
   @doc("Kafka acks. Can be all, one, or zero. No effect if the endpoint is used as a source.")
-  kafkaAcks?: DataFlowEndpointKafkaAcks = DataFlowEndpointKafkaAcks.All;
+  kafkaAcks?: DataflowEndpointKafkaAcks = DataflowEndpointKafkaAcks.All;
 
   @doc("Partition handling strategy. Can be default or static. No effect if the endpoint is used as a source.")
-  partitionStrategy?: DataFlowEndpointKafkaPartitionStrategy = DataFlowEndpointKafkaPartitionStrategy.Default;
+  partitionStrategy?: DataflowEndpointKafkaPartitionStrategy = DataflowEndpointKafkaPartitionStrategy.Default;
 
   @doc("TLS configuration.")
   tls: TlsProperties;
 }
 
 @doc("Kafka endpoint Batching properties")
-model DataFlowEndpointKafkaBatching {
+model DataflowEndpointKafkaBatching {
   @doc("Mode for batching.")
   mode?: OperationalMode = OperationalMode.Enabled;
 
@@ -238,7 +238,7 @@ model DataFlowEndpointKafkaBatching {
 }
 
 @doc("Kafka endpoint Compression properties")
-union DataFlowEndpointKafkaCompression {
+union DataflowEndpointKafkaCompression {
   string,
 
   @doc("NONE Option")
@@ -254,8 +254,8 @@ union DataFlowEndpointKafkaCompression {
   Lz4: "Lz4",
 }
 
-@doc("DataFlowEndpoint Kafka Acks properties")
-union DataFlowEndpointKafkaAcks {
+@doc("DataflowEndpoint Kafka Acks properties")
+union DataflowEndpointKafkaAcks {
   string,
 
   @doc("ZERO Option")
@@ -268,8 +268,8 @@ union DataFlowEndpointKafkaAcks {
   All: "All",
 }
 
-@doc("DataFlowEndpoint Kafka Partition Strategy properties")
-union DataFlowEndpointKafkaPartitionStrategy {
+@doc("DataflowEndpoint Kafka Partition Strategy properties")
+union DataflowEndpointKafkaPartitionStrategy {
   string,
 
   @doc("Default: Assigns messages to random partitions, using a round-robin algorithm.")
@@ -286,13 +286,13 @@ union DataFlowEndpointKafkaPartitionStrategy {
 }
 
 @doc("Local persistent volume endpoint properties")
-model DataFlowEndpointLocalStorage {
+model DataflowEndpointLocalStorage {
   @doc("Persistent volume claim name.")
   persistentVolumeClaimRef: string;
 }
 
 @doc("Broker endpoint properties")
-model DataFlowEndpointMqtt {
+model DataflowEndpointMqtt {
   @doc("Client ID prefix. Client ID generated by the dataflow is <prefix>-TBD. Optional; no prefix if omitted.")
   clientIdPrefix?: string;
 

@@ -49,12 +49,12 @@ for file in resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/
         jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("BrokerListener") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123/listeners/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
     elif [[ $operationId == Broker* ]]; then
         jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("Broker") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/brokers/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
-    elif [[ $operationId == DataFlowProfile* ]]; then
-        jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("DataFlowProfile") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
-    elif [[ $operationId == DataFlowEndpoint* ]]; then
-        jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("DataFlowEndpoint") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
-    elif [[ $operationId == DataFlow* ]]; then
-        jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("DataFlow") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123/dataflows/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
+    elif [[ $operationId == DataflowProfile* ]]; then
+        jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("DataflowProfile") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
+    elif [[ $operationId == DataflowEndpoint* ]]; then
+        jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("DataflowEndpoint") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowEndpoints/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
+    elif [[ $operationId == Dataflow* ]]; then
+        jq --arg operationId "$operationId" 'walk(if type == "object" and .id? then if $operationId | startswith("Dataflow") then .id = "/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup123/providers/Microsoft.IoTOperations/instances/resource-name123/dataflowProfiles/resource-name123/dataflows/resource-name123" else . end else . end)' $file > temp.json && mv temp.json $file
     fi
 
     # The following Jq command chops down numbers that are greater than 10000 to 10000, the OAV generate examples tool will not respect the min/max value required by typespec
