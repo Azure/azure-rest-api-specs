@@ -2775,12 +2775,12 @@
             }
           },
           {
-            "name": "forceAfterSeconds",
+            "name": "force",
+            "default": false,
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "The maximum time in seconds that the server can spend waiting for processing of the delete operation. Beyond this time, the server will forcefully delete the JobSchedule. If this value is not specified, Batch will wait indefinitely.",
+            "type": "boolean",
+            "description": "If true, the server will delete the JobSchedule even if the corresponding nodes have not fully processed the deletion. The default value is false.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -3711,13 +3711,15 @@
             }
           },
           {
-            "name": "jobScheduleTerminateParameter",
-            "in": "body",
+            "name": "force",
+            "default": false,
+            "in": "query",
             "required": false,
-            "schema": {
-              "$ref": "#/definitions/JobScheduleTerminateParameter"
-            },
-            "description": "The parameters for the request."
+            "type": "boolean",
+            "description": "If true, the server will terminate the JobSchedule even if the corresponding nodes have not fully processed the termination. The default value is false.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4133,12 +4135,12 @@
             }
           },
           {
-            "name": "forceAfterSeconds",
+            "name": "force",
+            "default": false,
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "The maximum time in seconds that the server can spend waiting for processing of the delete operation. Beyond this time, the server will forcefully delete the Job. If this value is not specified, Batch will wait indefinitely.",
+            "type": "boolean",
+            "description": "If true, the server will delete the Job even if the corresponding nodes have not fully processed the deletion. The default value is false.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -5084,6 +5086,17 @@
             "type": "string",
             "format": "date-time-rfc1123",
             "description": "A timestamp indicating the last modified time of the resource known to the client. The operation will be performed only if the resource on the service has not been modified since the specified time.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "force",
+            "default": false,
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "If true, the server will terminate the Job even if the corresponding nodes have not fully processed the termination. The default value is false.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -16343,17 +16356,6 @@
       },
       "title": "The set of changes to be made to a Job Schedule."
     },
-    "JobScheduleTerminateParameter": {
-      "type": "object",
-      "properties": {
-        "forceAfterSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The maximum time in seconds that the server can spend waiting for processing of the terminate operation. Beyond this time, the server will forcefully terminate the JobSchedule. If this value is not specified, Batch will wait indefinitely."
-        }
-      },
-      "title": "Options when terminating a JobSchedule."
-    },
     "JobScheduleUpdateParameter": {
       "type": "object",
       "properties": {
@@ -16424,11 +16426,6 @@
         "terminateReason": {
           "type": "string",
           "title": "The text you want to appear as the Job's TerminateReason. The default is 'UserTerminate'."
-        },
-        "forceAfterSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The maximum time in seconds that the server can spend waiting for processing of the terminate operation. Beyond this time, the server will forcefully terminate the Job. If this value is not specified, Batch will wait indefinitely."
         }
       },
       "title": "Options when terminating a Job."

@@ -245,6 +245,8 @@ directive:
       - $.paths["/pools/{poolId}/removenodes"].post
       - $.paths["/pools/{poolId}/nodes/{nodeId}/reboot"].post
       - $.paths["/pools/{poolId}/nodes/{nodeId}/reimage"].post
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/start"].post
+      - $.paths["/pools/{poolId}/nodes/{nodeId}/deallocate"].post
     reason: Service does not return 200, nor supply location header.
 
   - suppress: R2017
