@@ -5117,6 +5117,23 @@
         "name"
       ]
     },
+    "KubernetesReferenceKnownType": {
+      "type": "object",
+      "description": "Kubernetes reference with known type",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name is the name of resource being referenced"
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace is the namespace of the resource being referenced. This field is required when the resource has a namespace."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "ListenerPort": {
       "type": "object",
       "description": "Defines a TCP port on which a `BrokerListener` listens.",
@@ -6188,7 +6205,7 @@
       "description": "X509 Certificate Authentication properties.",
       "properties": {
         "secretRef": {
-          "type": "string",
+          "$ref": "#/definitions/KubernetesReferenceKnownType",
           "description": "Kubernetes secret containing an X.509 client certificate. This is a reference to the secret through an identifying name, not the secret itself."
         }
       },
