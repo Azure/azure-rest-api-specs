@@ -122,12 +122,12 @@ interface Entity {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
-  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "This is an existing Atlas API"
   @doc("List entities in bulk identified by its GUIDs.")
   @route("/atlas/v2/entity/bulk")
   @get
   listByGuids is AtlasOperation<
     {
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing Atlas API"
       @doc("An array of GUIDs of entities to list.")
       @query(#{ explode: true })
       guid: string[];
@@ -177,7 +177,7 @@ interface Entity {
     AtlasApiVersionParameterTraits
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "This is an existing Atlas API"
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing Atlas API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   @doc("""
