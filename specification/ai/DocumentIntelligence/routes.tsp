@@ -52,9 +52,9 @@ model DocumentModelAnalyzeRequestParams {
   pages?: string;
 
   @doc("""
-  Locale hint for text recognition and document analysis.  Value may contain only
-  the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").
-  """)
+    Locale hint for text recognition and document analysis.  Value may contain only
+    the language code (ex. \"en\", \"fr\") or BCP 47 language tag (ex. \"en-US\").
+    """)
   @query
   locale?: string;
 
@@ -77,6 +77,13 @@ model DocumentModelAnalyzeRequestParams {
   @doc("Format of the analyze result top-level content.")
   @query
   outputContentFormat?: ContentFormat = ContentFormat.text;
+
+  @added(Versions.v2024_07_31_preview)
+  @doc("Additional outputs to generate during analysis.")
+  @query({
+    format: "csv",
+  })
+  output?: AnalyzeOutputOption[];
 }
 
 @doc("Document classifier analyze request parameters.")
@@ -94,6 +101,12 @@ model DocumentClassifierAnalyzeRequestParams {
   @doc("Document splitting mode.")
   @query
   split?: SplitMode = SplitMode.none;
+
+  @added(Versions.v2024_07_31_preview)
+  @doc("List of 1-based page numbers to analyze.  Ex. \"1-3,5,7-9\"")
+  @query
+  @pattern("^(\\d+(-\\d+)?)(,\\s*(\\d+(-\\d+)?))*$")
+  pages?: string;
 }
 
 @doc("Analyze from stream request parameters.")
@@ -115,7 +128,7 @@ model AnalyzeFromStreamRequestParams {
     | "application/vnd.openxmlformats-officedocument.presentationml.presentation";
 
   @doc("Input content.")
-  @body
+  @bodyRoot
   input: bytes;
 }
 
@@ -137,6 +150,66 @@ interface DocumentModels {
       resultId: uuid;
     },
     AnalyzeResultOperation
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
+  @doc("Gets the generated searchable PDF output from document analysis.")
+  @route("/documentModels/{modelId}/analyzeResults/{resultId}/pdf")
+  @get
+  getAnalyzeResultPdf is DocumentIntelligenceOperation<
+    {
+      @doc("Unique document model name.")
+      @path
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+      @maxLength(64)
+      modelId: string;
+
+      @doc("Analyze operation result ID.")
+      @path
+      resultId: uuid;
+    },
+    {
+      @doc("Response content type.")
+      @header
+      contentType: "application/pdf";
+
+      @doc("Response PDF.")
+      @body
+      pdf: bytes;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
+  @doc("Gets the generated cropped image of specified figure from document analysis.")
+  @route("/documentModels/{modelId}/analyzeResults/{resultId}/figures/{figureId}")
+  @get
+  getAnalyzeResultFigure is DocumentIntelligenceOperation<
+    {
+      @doc("Unique document model name.")
+      @path
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+      @maxLength(64)
+      modelId: string;
+
+      @doc("Analyze operation result ID.")
+      @path
+      resultId: uuid;
+
+      @doc("Figure ID.")
+      @path
+      figureId: string;
+    },
+    {
+      @doc("Response content type.")
+      @header
+      contentType: "image/png";
+
+      @doc("Response image.")
+      @body
+      image: bytes;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/byos" "Support uploading input files"
@@ -164,15 +237,56 @@ interface DocumentModels {
     {
       ...DocumentModelAnalyzeRequestParams;
 
-      @doc("Input content type")
+      @doc("Input content type.")
       @header
       contentType: "application/json";
 
       @doc("Analyze request parameters.")
-      @body
+      @bodyRoot
       analyzeRequest?: AnalyzeDocumentRequest;
     },
     AnalyzeResultOperation
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
+  @doc("Gets the result of batch document analysis.")
+  @route("/documentModels/{modelId}/analyzeBatchResults/{resultId}")
+  @get
+  getAnalyzeBatchResult is DocumentIntelligenceOperation<
+    {
+      @doc("Unique document model name.")
+      @path
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+      @maxLength(64)
+      modelId: string;
+
+      @doc("Analyze batch operation result ID.")
+      @path
+      resultId: uuid;
+    },
+    AnalyzeBatchResultOperation
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
+  @doc("Analyzes batch documents with document model.")
+  @post
+  @pollingOperation(DocumentModels.getAnalyzeBatchResult)
+  @route("/documentModels/{modelId}:analyzeBatch")
+  analyzeBatchDocuments is DocumentIntelligenceLongRunningOperation<
+    {
+      ...DocumentModelAnalyzeRequestParams;
+
+      @doc("Input content type")
+      @header
+      contentType: "application/json";
+
+      @doc("Analyze batch request parameters.")
+      @body
+      analyzeBatchRequest?: AnalyzeBatchDocumentsRequest;
+    },
+    AnalyzeBatchResultOperation
   >;
 
   @doc("Gets detailed document model information.")
@@ -186,7 +300,7 @@ interface DocumentModels {
   buildModel is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Build request parameters.")
-      @body
+      @bodyRoot
       buildRequest: BuildDocumentModelRequest;
     },
     DocumentModelBuildOperationDetails
@@ -200,7 +314,7 @@ interface DocumentModels {
   composeModel is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Compose request parameters.")
-      @body
+      @bodyRoot
       composeRequest: ComposeDocumentModelRequest;
     },
     DocumentModelComposeOperationDetails
@@ -208,15 +322,15 @@ interface DocumentModels {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("""
-  Generates authorization to copy a document model to this location with
-  specified modelId and optional description.
-  """)
+    Generates authorization to copy a document model to this location with
+    specified modelId and optional description.
+    """)
   @route("/documentModels:authorizeCopy")
   @post
   authorizeModelCopy is DocumentIntelligenceOperation<
     {
       @doc("Authorize copy request parameters.")
-      @body
+      @bodyRoot
       authorizeCopyRequest: AuthorizeCopyRequest;
     },
     CopyAuthorization
@@ -236,7 +350,7 @@ interface DocumentModels {
       modelId: string;
 
       @doc("Copy to request parameters.")
-      @body
+      @bodyRoot
       copyToRequest: CopyAuthorization;
     },
     DocumentModelCopyToOperationDetails
@@ -266,6 +380,11 @@ interface MiscellaneousOperations {
   @doc("Gets operation info.")
   getDocumentModelCopyToOperation is DIResourceOperations.ResourceRead<DocumentModelCopyToOperationDetails>;
 
+  @added(Versions.v2024_07_31_preview)
+  @sharedRoute
+  @doc("Gets operation info.")
+  getDocumentClassifierCopyToOperation is DIResourceOperations.ResourceRead<DocumentClassifierCopyToOperationDetails>;
+
   @sharedRoute
   @doc("Gets operation info.")
   getDocumentClassifierBuildOperation is DIResourceOperations.ResourceRead<DocumentClassifierBuildOperationDetails>;
@@ -290,7 +409,7 @@ interface DocumentClassifiers {
   buildClassifier is DocumentIntelligenceLongRunningOperation<
     {
       @doc("Build request parameters.")
-      @body
+      @bodyRoot
       buildRequest: BuildDocumentClassifierRequest;
     },
     DocumentClassifierBuildOperationDetails
@@ -335,7 +454,7 @@ interface DocumentClassifiers {
       contentType: "application/json";
 
       @doc("Classify request parameters.")
-      @body
+      @bodyRoot
       classifyRequest: ClassifyDocumentRequest;
     },
     AnalyzeResultOperation
@@ -358,5 +477,45 @@ interface DocumentClassifiers {
       resultId: uuid;
     },
     AnalyzeResultOperation
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
+  @doc("""
+    Generates authorization to copy a document classifier to this location with
+    specified classifierId and optional description.
+    """)
+  @route("/documentClassifiers:authorizeCopy")
+  @post
+  authorizeClassifierCopy is DocumentIntelligenceOperation<
+    {
+      @doc("Authorize copy request parameters.")
+      @body
+      authorizeCopyRequest: AuthorizeClassifierCopyRequest;
+    },
+    ClassifierCopyAuthorization
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @added(Versions.v2024_07_31_preview)
+  @doc("Copies document classifier to the target resource, region, and classifierId.")
+  @pollingOperation(
+    MiscellaneousOperations.getDocumentClassifierCopyToOperation
+  )
+  @route("/documentClassifiers/{classifierId}:copyTo")
+  @post
+  copyClassifierTo is DocumentIntelligenceLongRunningOperation<
+    {
+      @doc("Unique document classifier name.")
+      @path
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+      @maxLength(64)
+      classifierId: string;
+
+      @doc("Copy to request parameters.")
+      @body
+      copyToRequest: ClassifierCopyAuthorization;
+    },
+    DocumentClassifierCopyToOperationDetails
   >;
 }

@@ -30,6 +30,10 @@ openapi-subtype: providerHub
 tag: package-preview-2024-04
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
 
 ### Tag: package-preview-2024-04
 
