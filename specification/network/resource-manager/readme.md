@@ -3333,16 +3333,16 @@ directive:
   - suppress: DeleteResponseCodes
     from: networkManagerSecurityUserConfiguration.json
     reason: support response code 200 for delete operations
-  - code: BodyTopLevelProperties
+  - suppress: BodyTopLevelProperties
     from: networkManagerSecurityUserConfiguration.json
     reason: This is a false alarm for a list response. Arm documentation states 'Collection Get calls must only have "value" and "nextLink" as top level properties in its model.'
-  - code: BodyTopLevelProperties
+  - suppress: BodyTopLevelProperties
     from: networkManagerRoutingConfiguration.json
     reason: This is a false alarm for a list response. Arm documentation states 'Collection Get calls must only have "value" and "nextLink" as top level properties in its model.'
-  - code: SystemDataDefinitionsCommonTypes
+  - suppress: SystemDataDefinitionsCommonTypes
     from: networkManagerSecurityUserConfiguration.json
     reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
-  - code: SystemDataDefinitionsCommonTypes
+  - suppress: SystemDataDefinitionsCommonTypes
     from: networkManagerRoutingConfiguration.json
     reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
   - suppress: RequiredPropertiesMissingInResourceModel
