@@ -123,7 +123,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           }
         ],
@@ -170,7 +169,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -229,7 +227,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           }
         ],
@@ -272,7 +269,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -326,7 +322,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -377,7 +372,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -473,7 +467,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -531,7 +524,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -539,8 +531,7 @@
             "in": "path",
             "description": "The name of this incident sample.",
             "required": true,
-            "type": "string",
-            "maxLength": 64
+            "type": "string"
           }
         ],
         "responses": {
@@ -584,8 +575,7 @@
             "in": "path",
             "description": "The id of this operation.",
             "required": true,
-            "type": "string",
-            "maxLength": 64
+            "type": "string"
           }
         ],
         "responses": {
@@ -707,6 +697,52 @@
         }
       }
     },
+    "/imageWithText:analyze": {
+      "post": {
+        "operationId": "ImageWithTextOperations_AnalyzeImageWithText",
+        "summary": "Analyze Image with Text",
+        "description": "A synchronous API to analyze image content with embedded or custom text content.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body of image-with-text analysis.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageWithTextOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeImageWithTextResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze Image With Text": {
+            "$ref": "./examples/AnalyzeImageWithText.json"
+          }
+        }
+      }
+    },
     "/text/autoReviewers": {
       "get": {
         "operationId": "AutoReviewerOperations_ListAutoReviewers",
@@ -811,7 +847,6 @@
             "description": "The name of the Auto Reviewer.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^[0-9A-Za-z._~-]+$"
           },
           {
@@ -820,7 +855,6 @@
             "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
             "required": false,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^[0-9A-Za-z._~-]+$",
             "x-ms-client-name": "operationId"
           },
@@ -844,7 +878,6 @@
               "Operation-Id": {
                 "type": "string",
                 "description": "The operation id passed by the user in the request or a random UUID generated by server side.",
-                "maxLength": 64,
                 "pattern": "^[0-9A-Za-z._~-]+$"
               },
               "Operation-Location": {
@@ -863,7 +896,6 @@
               "Operation-Id": {
                 "type": "string",
                 "description": "The operation id passed by the user in the request or a random UUID generated by server side.",
-                "maxLength": 64,
                 "pattern": "^[0-9A-Za-z._~-]+$"
               },
               "Operation-Location": {
@@ -902,7 +934,6 @@
             "description": "The name of the Auto Reviewer.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^[0-9A-Za-z._~-]+$"
           },
           {
@@ -947,8 +978,7 @@
             "in": "path",
             "description": "The id of this operation.",
             "required": true,
-            "type": "string",
-            "maxLength": 64
+            "type": "string"
           }
         ],
         "responses": {
@@ -1683,8 +1713,7 @@
             "in": "path",
             "description": "The id of this operation.",
             "required": true,
-            "type": "string",
-            "maxLength": 64
+            "type": "string"
           }
         ],
         "responses": {
@@ -1773,7 +1802,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           }
         ],
@@ -1820,7 +1848,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -1879,7 +1906,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           }
         ],
@@ -1922,7 +1948,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -1976,7 +2001,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -2027,7 +2051,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -2123,7 +2146,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -2181,7 +2203,6 @@
             "description": "The name of the incident.",
             "required": true,
             "type": "string",
-            "maxLength": 64,
             "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
           },
           {
@@ -2189,8 +2210,7 @@
             "in": "path",
             "description": "The name of this incident sample.",
             "required": true,
-            "type": "string",
-            "maxLength": 64
+            "type": "string"
           }
         ],
         "responses": {
@@ -2234,8 +2254,7 @@
             "in": "path",
             "description": "The id of this operation.",
             "required": true,
-            "type": "string",
-            "maxLength": 64
+            "type": "string"
           }
         ],
         "responses": {
@@ -2799,6 +2818,52 @@
         "categoriesAnalysis"
       ]
     },
+    "AnalyzeImageWithTextOptions": {
+      "type": "object",
+      "description": "The request to analyze an image with embedded or custom text.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ImageData",
+          "description": "The image content to be analyzed."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text related to the given image."
+        },
+        "categories": {
+          "type": "array",
+          "description": "The harm categories to be detected. A default set of harm categories will be applied if omitted.",
+          "items": {
+            "$ref": "#/definitions/ImageWithTextCategory"
+          }
+        },
+        "enableOcr": {
+          "type": "boolean",
+          "description": "When set to true, the embedded text in given image will be recognized and concatenated with the given text for analysis."
+        }
+      },
+      "required": [
+        "image",
+        "enableOcr"
+      ]
+    },
+    "AnalyzeImageWithTextResult": {
+      "type": "object",
+      "description": "The response of analyzing an image with embedded or custom text.",
+      "properties": {
+        "categoriesAnalysis": {
+          "type": "array",
+          "description": "The individual analysis result for each harm category.",
+          "items": {
+            "$ref": "#/definitions/ImageWithTextCategoriesAnalysis"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "categoriesAnalysis"
+      ]
+    },
     "AnalyzeTextCustomCategoryOption": {
       "type": "object",
       "description": "The request to analyze given text content with the Custom Category version defined.",
@@ -2841,8 +2906,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The text to be analyzed.",
-          "maxLength": 10000
+          "description": "The text to be analyzed."
         },
         "incidentNames": {
           "type": "array",
@@ -2917,8 +2981,7 @@
         },
         "text": {
           "type": "string",
-          "description": "The text to be analyzed. Usually, it's the LLM output and may contain ungrounded content.",
-          "maxLength": 7500
+          "description": "The text to be analyzed. Usually, it's the LLM output and may contain ungrounded content."
         },
         "groundingSources": {
           "type": "array",
@@ -3125,7 +3188,6 @@
         "id": {
           "type": "string",
           "description": "The id of this operation.",
-          "maxLength": 64,
           "x-ms-mutability": [
             "read",
             "create"
@@ -3188,7 +3250,6 @@
         "autoReviewerName": {
           "type": "string",
           "description": "The name of the Auto Reviewer.",
-          "maxLength": 64,
           "pattern": "^[0-9A-Za-z._~-]+$",
           "x-ms-mutability": [
             "read",
@@ -3383,11 +3444,11 @@
       "properties": {
         "license": {
           "type": "string",
-          "description": "The license for detected code. If the value is NOASSERTION, it means the code hasn't assertted in the repo."
+          "description": "The license type fetched from source repository."
         },
         "sourceUrls": {
           "type": "array",
-          "description": "The URLs of the source code.",
+          "description": "The repository URLs of the source code detected.",
           "items": {
             "type": "string"
           }
@@ -3427,7 +3488,6 @@
         "id": {
           "type": "string",
           "description": "The id of this operation.",
-          "maxLength": 64,
           "x-ms-mutability": [
             "read",
             "create"
@@ -3526,8 +3586,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "The code to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.",
-          "maxLength": 10000
+          "description": "The code to be analyzed, which may contain protected material. The characters will be counted in Unicode code points."
         }
       },
       "required": [
@@ -3691,7 +3750,6 @@
         "incidentName": {
           "type": "string",
           "description": "The name of the incident.",
-          "maxLength": 64,
           "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
           "x-ms-mutability": [
             "read",
@@ -3728,7 +3786,6 @@
         "incidentName": {
           "type": "string",
           "description": "The name of the incident.",
-          "maxLength": 64,
           "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
           "x-ms-mutability": [
             "read",
@@ -3744,7 +3801,6 @@
         "id": {
           "type": "string",
           "description": "The id of this operation.",
-          "maxLength": 64,
           "x-ms-mutability": [
             "read",
             "create"
@@ -3772,7 +3828,6 @@
         "incidentSampleId": {
           "type": "string",
           "description": "The name of this incident sample.",
-          "maxLength": 64,
           "readOnly": true
         },
         "image": {
@@ -3791,7 +3846,6 @@
         "incidentSampleId": {
           "type": "string",
           "description": "The name of this incident sample.",
-          "maxLength": 64,
           "readOnly": true
         },
         "image": {
@@ -3803,14 +3857,67 @@
         "incidentSampleId"
       ]
     },
+    "ImageWithTextCategoriesAnalysis": {
+      "type": "object",
+      "description": "The definition of individual result for analyzing an image with embedded or custom text.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ImageWithTextCategory",
+          "description": "The harm category detected."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "It indicates the severity of the harm. 0 means the content is considered as safe in this harm category."
+        }
+      },
+      "required": [
+        "category"
+      ]
+    },
+    "ImageWithTextCategory": {
+      "type": "string",
+      "description": "The harm category supported in Image-with-Text content analysis.",
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "ImageWithTextCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm category for Image-with-Text - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm category for Image-with-Text - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm category for Image-with-Text - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm category for Image-with-Text - Violence."
+          }
+        ]
+      }
+    },
     "IncidentMatch": {
       "type": "object",
       "description": "The definition of a matched content safety incident.",
       "properties": {
         "incidentName": {
           "type": "string",
-          "description": "The name of the matched incident.",
-          "maxLength": 64
+          "description": "The name of the matched incident."
         }
       },
       "required": [
@@ -3929,7 +4036,6 @@
         "incidentSampleId": {
           "type": "string",
           "description": "The name of this incident sample.",
-          "maxLength": 64,
           "readOnly": true
         }
       },
@@ -4119,8 +4225,7 @@
       "properties": {
         "query": {
           "type": "string",
-          "description": "The user's question input in a QnA task.",
-          "maxLength": 7500
+          "description": "The user's question input in a QnA task."
         }
       },
       "required": [
@@ -4471,7 +4576,6 @@
         "incidentName": {
           "type": "string",
           "description": "The name of the incident.",
-          "maxLength": 64,
           "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
           "x-ms-mutability": [
             "read",
@@ -4480,8 +4584,7 @@
         },
         "incidentDefinition": {
           "type": "string",
-          "description": "The guideline to define this incident.",
-          "maxLength": 1024
+          "description": "The guideline to define this incident."
         },
         "created": {
           "type": "string",
@@ -4513,7 +4616,6 @@
         "incidentName": {
           "type": "string",
           "description": "The name of the incident.",
-          "maxLength": 64,
           "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
           "x-ms-mutability": [
             "read",
@@ -4522,8 +4624,7 @@
         },
         "incidentDefinition": {
           "type": "string",
-          "description": "The guideline to define this incident.",
-          "maxLength": 1024
+          "description": "The guideline to define this incident."
         }
       }
     },
@@ -4534,7 +4635,6 @@
         "id": {
           "type": "string",
           "description": "The id of this operation.",
-          "maxLength": 64,
           "x-ms-mutability": [
             "read",
             "create"
@@ -4562,13 +4662,11 @@
         "incidentSampleId": {
           "type": "string",
           "description": "The name of this incident sample.",
-          "maxLength": 64,
           "readOnly": true
         },
         "text": {
           "type": "string",
-          "description": "The text content of this incident sample.",
-          "maxLength": 1024
+          "description": "The text content of this incident sample."
         }
       },
       "required": [

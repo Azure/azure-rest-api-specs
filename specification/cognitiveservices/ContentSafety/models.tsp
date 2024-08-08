@@ -270,7 +270,6 @@ model TextProtectedMaterialAnalysisResult {
 @doc("The request of detecting potential protected material present in the given code.")
 model DetectCodeProtectedMaterialOptions {
   @doc("The code to be analyzed, which may contain protected material. The characters will be counted in Unicode code points.")
-  @maxLength(10000)
   code: string;
 }
 
@@ -284,10 +283,10 @@ model DetectCodeProtectedMaterialResult {
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The code citation of potential protected material for code.")
 model CodeCitation {
-  @doc("The license for detected code. If the value is NOASSERTION, it means the code hasn't assertted in the repo.")
+  @doc("The license type fetched from source repository.")
   license: string;
 
-  @doc("The URLs of the source code.")
+  @doc("The repository URLs of the source code detected.")
   sourceUrls: string[];
 }
 
@@ -330,7 +329,6 @@ union GroundednessTask {
 @doc("The options for QnA task.")
 model QnAOptions {
   @doc("The user's question input in a QnA task.")
-  @maxLength(7500)
   query: string;
 }
 
@@ -382,7 +380,6 @@ model AnalyzeTextGroundednessOptions {
   qna?: QnAOptions;
 
   @doc("The text to be analyzed. Usually, it's the LLM output and may contain ungrounded content.")
-  @maxLength(7500)
   text: string;
 
   @doc("""
@@ -472,7 +469,6 @@ model AutoReviewerVersion {
   @key
   @visibility("read", "create", "update")
   @pattern("^[0-9A-Za-z._~-]+$")
-  @maxLength(64)
   @doc("The name of the Auto Reviewer.")
   autoReviewerName: string;
 
@@ -573,7 +569,6 @@ model AutoReviewerOperationDetail {
   @doc("The id of this operation.")
   @key("operationId")
   @visibility("read", "create", "query")
-  @maxLength(64)
   id: string;
 
   @doc("The status of this operation.")
@@ -612,11 +607,9 @@ model TextIncident {
   @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   @key("incidentName")
   @visibility("read", "create", "query")
-  @maxLength(64)
   incidentName: string;
 
   @doc("The guideline to define this incident.")
-  @maxLength(1024)
   incidentDefinition?: string;
 
   @doc("The created time of this incident.")
@@ -636,11 +629,9 @@ model TextIncidentSample {
   @doc("The name of this incident sample.")
   @key("incidentSampleId")
   @visibility("read")
-  @maxLength(64)
   incidentSampleId: string;
 
   @doc("The text content of this incident sample.")
-  @maxLength(1024)
   text?: string;
 }
 
@@ -669,7 +660,6 @@ model RemoveTextIncidentSamplesOptions {
 @doc("The request to analyze given text content with content safety Text Incidents defined.")
 model AnalyzeTextDetectIncidentsOptions {
   @doc("The text to be analyzed.")
-  @maxLength(10000)
   text: string;
 
   @doc("The incidents defined.")
@@ -680,7 +670,6 @@ model AnalyzeTextDetectIncidentsOptions {
 @doc("The definition of a matched content safety incident.")
 model IncidentMatch {
   @doc("The name of the matched incident.")
-  @maxLength(64)
   incidentName: string;
 }
 
@@ -699,7 +688,6 @@ model ImageIncident {
   @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   @key("incidentName")
   @visibility("read", "create", "query")
-  @maxLength(64)
   incidentName: string;
 
   @doc("The created time of this incident.")
@@ -719,7 +707,6 @@ model ImageIncidentSample {
   @doc("The name of this incident sample.")
   @key("incidentSampleId")
   @visibility("read")
-  @maxLength(64)
   incidentSampleId: string;
 
   @doc("The image content of this incident sample.")
@@ -741,7 +728,6 @@ model ListImageIncidentSampleResult {
   @doc("The name of this incident sample.")
   @key("incidentSampleId")
   @visibility("read")
-  @maxLength(64)
   incidentSampleId: string;
 }
 
@@ -767,7 +753,6 @@ model ImageIncidentSampleResult {
   @doc("The name of this incident sample.")
   @key("incidentSampleId")
   @visibility("read")
-  @maxLength(64)
   incidentSampleId: string;
 
   @doc("The image content of this incident sample.")
@@ -798,7 +783,6 @@ model TextIncidentOperationResult {
   @doc("The id of this operation.")
   @key("operationId")
   @visibility("read", "create", "query")
-  @maxLength(64)
   id: string;
 
   @doc("The status of this operation.")
@@ -816,7 +800,6 @@ model ImageIncidentOperationResult {
   @doc("The id of this operation.")
   @key("operationId")
   @visibility("read", "create", "query")
-  @maxLength(64)
   id: string;
 
   @doc("The status of this operation.")
@@ -924,7 +907,6 @@ model CustomCategoryOperationDetail {
   @doc("The id of this operation.")
   @key("operationId")
   @visibility("read", "create", "query")
-  @maxLength(64)
   id: string;
 
   @doc("The status of this operation.")
@@ -962,44 +944,55 @@ model AnalyzeTextCustomCategoryResult {
   customCategoryAnalysis: TextCustomCategoryAnalysis;
 }
 
+
+
 @added(ContentSafety.Versions.v2024_09_15_Preview)
-@doc("ImageWithText analyze category.")
-enum ImageWithTextCategory {
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+@doc("The harm category supported in Image-with-Text content analysis.")
+union ImageWithTextCategory {
+  string,
+
+  @doc("The harm category for Image-with-Text - Hate.")
+  "Hate",
+
+  @doc("The harm category for Image-with-Text - SelfHarm.")
+  "SelfHarm",
+
+  @doc("The harm category for Image-with-Text - Sexual.")
+  "Sexual",
+
+  @doc("The harm category for Image-with-Text - Violence.")
+  "Violence",
 }
 
 @added(ContentSafety.Versions.v2024_09_15_Preview)
-@doc("The analysis request of the image with text.")
+@doc("The request to analyze an image with embedded or custom text.")
 model AnalyzeImageWithTextOptions {
-  @doc("The image needs to be analyzed.")
+  @doc("The image content to be analyzed.")
   image: ImageData;
 
-  @doc("The text attached to the image.")
+  @doc("The text related to the given image.")
   text?: string;
 
-  @doc("The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
+  @doc("The harm categories to be detected. A default set of harm categories will be applied if omitted.")
   categories?: ImageWithTextCategory[];
 
-  @doc("When set to true, our service will perform OCR and concatenate the recognized text with input text before analyzing. We will recognize at most 256 characters (unicode code points) from input image. The others will be truncated.")
+  @doc("When set to true, the embedded text in given image will be recognized and concatenated with the given text for analysis.")
   enableOcr: boolean;
 }
 
 @added(Versions.v2024_09_15_Preview)
-@doc("ImageWithText analysis result.")
+@doc("The definition of individual result for analyzing an image with embedded or custom text.")
 model ImageWithTextCategoriesAnalysis {
-  @doc("The imageWithtext analysis category.")
+  @doc("The harm category detected.")
   category: ImageWithTextCategory;
 
-  @doc("The higher the severity of input content, the larger this value is.")
+  @doc("It indicates the severity of the harm. 0 means the content is considered as safe in this harm category.")
   severity?: int32;
 }
 
 @added(Versions.v2024_09_15_Preview)
-@doc("The analysis response of the image with text.")
+@doc("The response of analyzing an image with embedded or custom text.")
 model AnalyzeImageWithTextResult {
-  @doc("Analysis result for categories.")
+  @doc("The individual analysis result for each harm category.")
   categoriesAnalysis: ImageWithTextCategoriesAnalysis[];
 }
