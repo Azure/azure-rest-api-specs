@@ -34,6 +34,9 @@ model DataflowEndpointResource is ProxyResource<DataflowEndpointProperties> {
 
 @doc("DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")
 model DataflowEndpointProperties {
+  @doc("Endpoint Type.")
+  endpointType: EndpointType;
+
   @doc("Azure Data Explorer endpoint.")
   dataExplorerSettings?: DataflowEndpointDataExplorer;
 

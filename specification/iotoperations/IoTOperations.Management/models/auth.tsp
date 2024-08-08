@@ -31,7 +31,8 @@ model DataflowEndpointAuthenticationSasl {
   @doc("Type of SASL authentication. Can be PLAIN, SCRAM-SHA-256, or SCRAM-SHA-512.")
   saslType: DataflowEndpointAuthenticationSaslType;
 
-  ...DataflowEndpointAuthenticationAccessToken;
+  @doc("Token secret name.")
+  secretRef: string;
 }
 
 @doc("DataflowEndpoint Authentication Access Token properties")
@@ -124,7 +125,6 @@ model BrokerAuthenticatorMethodX509Attributes {
   @doc("Subject of the X509 attribute.")
   subject: string;
 }
-
 
 @doc("System and Use Assigned Managed Identity properties")
 model ManagedIdentity {

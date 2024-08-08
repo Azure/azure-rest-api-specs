@@ -4549,6 +4549,10 @@
       "type": "object",
       "description": "DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource",
       "properties": {
+        "endpointType": {
+          "$ref": "#/definitions/EndpointType",
+          "description": "Endpoint Type."
+        },
         "dataExplorerSettings": {
           "$ref": "#/definitions/DataflowEndpointDataExplorer",
           "description": "Azure Data Explorer endpoint."
@@ -4578,7 +4582,10 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "endpointType"
+      ]
     },
     "DataflowEndpointResource": {
       "type": "object",
