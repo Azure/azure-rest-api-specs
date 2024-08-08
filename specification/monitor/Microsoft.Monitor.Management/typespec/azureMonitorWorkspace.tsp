@@ -100,6 +100,7 @@ interface AzureMonitorWorkspaces {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   @doc("Updates part of a workspace")
+  @parameterVisibility
   update is ArmCustomPatchSync<
     AzureMonitorWorkspace,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
