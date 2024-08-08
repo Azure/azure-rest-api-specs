@@ -117,11 +117,12 @@
   "definitions": {
     "NetworkManagerBillingMeter": {
       "type": "object",
-	  "billingMeterType": {
-          "type": "string",
-		  "$ref": "#/definitions/BillingMeterType"
-        },
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkManagerBillingMeterProperties",
+          "description": "The NetworkManagerBillingMeter properties"
+        },
         "etag": {
           "readOnly": true,
           "type": "string",
@@ -135,10 +136,22 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ProxyResource"
+          "$ref": "./network.json#/definitions/ChildResource"
         }
       ],
       "description": "The Managed Network resource"
+    },
+    "NetworkManagerBillingMeterProperties": {
+      "properties": {
+        "networkManagerId": {
+          "type": "string",
+          "description": "Network Manager Id."
+        },
+        "billingMeterType": {
+          "type": "string",
+          "$ref": "#/definitions/BillingMeterType"
+        }
+      }
     },
     "BillingMeterType": {
       "type": "string",
