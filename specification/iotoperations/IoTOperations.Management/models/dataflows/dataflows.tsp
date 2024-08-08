@@ -46,7 +46,6 @@ model DataflowProperties {
   provisioningState?: ProvisioningState;
 }
 
-@discriminator("operationType")
 @doc("Dataflow Operation properties. NOTE - One only method is allowed to be used for one entry.")
 model DataflowOperation {
   @doc("Type of operation.")
