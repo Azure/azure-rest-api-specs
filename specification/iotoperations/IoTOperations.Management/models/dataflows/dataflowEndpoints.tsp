@@ -101,6 +101,9 @@ model DataflowEndpointDataExplorer {
 
 @doc("Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.")
 model DataflowEndpointDataExplorerAuthentication {
+  @doc("Mode of Authentication.")
+  method: AuthenticationMethod;
+
   ...ManagedIdentity;
 }
 
@@ -139,6 +142,9 @@ model DataflowEndpointDataLakeStorage {
 
 @doc("Azure Data Lake endpoint Authentication properties.  NOTE Enum - Only one method is supported for one entry")
 model DataflowEndpointDataLakeStorageAuthentication {
+  @doc("Mode of Authentication.")
+  method: AuthenticationMethod;
+
   // What is accessTokenSecretName now?
   @doc("SAS token authentication.")
   accessTokenSettings?: DataflowEndpointAuthenticationAccessToken;
@@ -167,6 +173,9 @@ model DataflowEndpointFabricOneLake {
 
 @doc("Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry")
 model DataFlowEndpointFabricOneLakeAuthentication {
+  @doc("Mode of Authentication.")
+  method: AuthenticationMethod;
+
   ...ManagedIdentity;
 }
 
@@ -225,6 +234,9 @@ model DataflowEndpointKafka {
 
 @doc("Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry")
 model DataFlowEndpointKafkaAuthentication {
+  @doc("Mode of Authentication.")
+  method: AuthenticationMethod;
+
   ...ManagedIdentity;
 
   @doc("SASL authentication.")
@@ -352,6 +364,9 @@ model DataflowEndpointMqtt {
 
 @doc("Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry.")
 model DataflowEndpointMqttAuthentication {
+  @doc("Mode of Authentication.")
+  method: AuthenticationMethod;
+
   ...ManagedIdentity;
 
   @doc("Kubernetes service account token authentication. Default audience if not set is aio-mq-internal")
