@@ -3532,6 +3532,36 @@
         }
       }
     },
+    "CloudEventMappingType": {
+      "type": "string",
+      "description": "How to map events to the cloud.",
+      "enum": [
+        "PassThrough",
+        "Always",
+        "Never"
+      ],
+      "x-ms-enum": {
+        "name": "CloudEventMappingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PassThrough",
+            "value": "PassThrough",
+            "description": "PassThrough"
+          },
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Always"
+          },
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "Never"
+          }
+        ]
+      }
+    },
     "DataflowBuiltInTransformationDataset": {
       "type": "object",
       "description": "Dataflow BuiltIn Transformation dataset properties",
@@ -4153,6 +4183,10 @@
         "tls": {
           "$ref": "#/definitions/TlsProperties",
           "description": "TLS configuration."
+        },
+        "cloudEventMapping": {
+          "$ref": "#/definitions/CloudEventMappingType",
+          "description": "Cloud event mapping config."
         }
       },
       "required": [
@@ -4424,6 +4458,10 @@
         "tls": {
           "$ref": "#/definitions/TlsProperties",
           "description": "TLS configuration."
+        },
+        "cloudEventMapping": {
+          "$ref": "#/definitions/CloudEventMappingType",
+          "description": "Cloud event mapping config."
         }
       }
     },
@@ -5018,13 +5056,14 @@
           "description": "The Azure IoT Operations version.",
           "readOnly": true
         },
-        "schemaRegistryRef": {
-          "$ref": "#/definitions/SchemaRegistryReference",
-          "description": "The reference to the Schema Registry for this AIO Instance."
+        "schemaRegistryNamespace": {
+          "type": "string",
+          "description": "The reference to the Schema Registry for this AIO Instance.",
+          "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
         }
       },
       "required": [
-        "schemaRegistryRef"
+        "schemaRegistryNamespace"
       ]
     },
     "InstanceResource": {
@@ -5615,36 +5654,6 @@
         "dns",
         "ip"
       ]
-    },
-    "SchemaRegistryReference": {
-      "type": "object",
-      "description": "An object for referencing a Schema Registry.",
-      "properties": {
-        "resourceId": {
-          "$ref": "#/definitions/SchemaRegistryResourceId",
-          "description": "The resource Id for the Schema Registry in Azure."
-        },
-        "namespace": {
-          "type": "string",
-          "description": "The namespace in the Schema Registry to use."
-        }
-      },
-      "required": [
-        "resourceId",
-        "namespace"
-      ]
-    },
-    "SchemaRegistryResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.DeviceRegistry/schemaRegistries"
-          }
-        ]
-      }
     },
     "SelfCheck": {
       "type": "object",
