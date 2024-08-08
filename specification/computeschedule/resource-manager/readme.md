@@ -23,7 +23,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 ### Basic Information
 
 These are the global settings for the computeschedule.
-
+ 
 ```yaml
 openapi-subtype: rpaas
 openapi-type: arm
