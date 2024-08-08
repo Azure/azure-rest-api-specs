@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
 import "./common.tsp";
 import "./azure_content_filtering.tsp";
@@ -8,17 +9,18 @@ import "./azure_content_filtering.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
 @doc("""
-The configuration information for a completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  The configuration information for a completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 model CompletionsOptions {
   @doc("The prompts to generate completions from.")
-  @projectedName("csharp", "Prompts")
+  @clientName("Prompts", "csharp")
   prompt: string[];
 
   @doc("The maximum number of tokens to generate.")
@@ -43,7 +45,7 @@ model CompletionsOptions {
     interaction of these two settings is difficult to predict.
     """)
   @encodedName("application/json", "top_p")
-  @projectedName("csharp", "NucleusSamplingFactor")
+  @clientName("NucleusSamplingFactor", "csharp")
   topP?: float32;
 
   @doc("""
@@ -54,7 +56,7 @@ model CompletionsOptions {
     score varies by model.
     """)
   @encodedName("application/json", "logit_bias")
-  @projectedName("csharp", "TokenSelectionBiases")
+  @clientName("TokenSelectionBiases", "csharp")
   logitBias?: Record<int32>;
 
   @doc("""
@@ -69,15 +71,18 @@ model CompletionsOptions {
     Because this setting can generate many completions, it may quickly consume your token quota.
     Use carefully and ensure reasonable settings for max_tokens and stop.
     """)
-  @projectedName("csharp", "ChoicesPerPrompt")
+  @clientName("ChoicesPerPrompt", "csharp")
   n?: int32;
 
   @doc("""
     A value that controls the emission of log probabilities for the provided number of most likely
     tokens within a completions response.
     """)
-  @projectedName("csharp", "LogProbabilityCount")
+  @clientName("LogProbabilityCount", "csharp")
   logprobs?: int32;
+
+  @doc("The suffix that comes after a completion of inserted text")
+  suffix?: string;
 
   @doc("""
     A value specifying whether completions responses should include input prompts as prefixes to
@@ -88,7 +93,7 @@ model CompletionsOptions {
   @doc("""
     A collection of textual sequences that will end completions generation.
     """)
-  @projectedName("csharp", "StopSequences")
+  @clientName("StopSequences", "csharp")
   stop?: string[];
 
   @doc("""
@@ -118,13 +123,13 @@ model CompletionsOptions {
     Use carefully and ensure reasonable settings for max_tokens and stop.
     """)
   @encodedName("application/json", "best_of")
-  @projectedName("csharp", "GenerationSampleCount")
+  @clientName("GenerationSampleCount", "csharp")
   bestOf?: int32;
 
   @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)
-  @projectedName("csharp", "InternalShouldStreamResponse")
+  @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
   @doc("""
@@ -132,15 +137,15 @@ model CompletionsOptions {
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
-  @projectedName("csharp", "DeploymentName")
+  @clientName("DeploymentName", "csharp")
   `model`?: string;
 }
 
 @doc("""
-Representation of the response data from a completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
+  Representation of the response data from a completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 model Completions {
   @doc("A unique identifier associated with this completions response.")
   id: string;
@@ -149,14 +154,14 @@ model Completions {
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
-  @projectedName("java", "createdAt")
+  @clientName("createdAt", "java")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
   @doc("""
-  Content filtering results for zero or more prompts in the request. In a streaming request,
-  results for different prompts may arrive at different times or in different orders.
-  """)
+    Content filtering results for zero or more prompts in the request. In a streaming request,
+    results for different prompts may arrive at different times or in different orders.
+    """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @encodedName("application/json", "prompt_filter_results")
   promptFilterResults?: ContentFilterResultsForPrompt[];
@@ -175,10 +180,10 @@ model Completions {
 }
 
 @doc("""
-The representation of a single prompt completion as part of an overall completions request.
-Generally, `n` choices are generated per provided prompt with a default value of 1.
-Token limits and other settings may limit the number of choices generated.
-""")
+  The representation of a single prompt completion as part of an overall completions request.
+  Generally, `n` choices are generated per provided prompt with a default value of 1.
+  Token limits and other settings may limit the number of choices generated.
+  """)
 model Choice {
   @doc("The generated text for a given completions prompt.")
   text: string;
@@ -187,17 +192,17 @@ model Choice {
   index: int32;
 
   @doc("""
-  Information about the content filtering category (hate, sexual, violence, self_harm), if it
-  has been detected, as well as the severity level (very_low, low, medium, high-scale that
-  determines the intensity and risk level of harmful content) and if it has been filtered or not.
-  """)
+    Information about the content filtering category (hate, sexual, violence, self_harm), if it
+    has been detected, as well as the severity level (very_low, low, medium, high-scale that
+    determines the intensity and risk level of harmful content) and if it has been filtered or not.
+    """)
   @added(ServiceApiVersions.v2023_06_01_Preview)
   @encodedName("application/json", "content_filter_results")
   contentFilterResults?: ContentFilterResultsForChoice;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   @doc("The log probabilities model for tokens associated with this completions choice.")
-  @projectedName("csharp", "LogProbabilityModel")
+  @clientName("LogProbabilityModel", "csharp")
   logprobs: CompletionsLogProbabilityModel | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
@@ -210,27 +215,40 @@ model Choice {
 alias NullableFloat = float32 | null;
 
 @doc("""
-Representation of a log probabilities model for a completions generation.
-""")
+  Representation of a log probabilities model for a completions generation.
+  """)
 model CompletionsLogProbabilityModel {
   @doc("The textual forms of tokens evaluated in this probability model.")
   tokens: string[];
 
   @doc("A collection of log probability values for the tokens in this completions data.")
   @encodedName("application/json", "token_logprobs")
-  @projectedName("csharp", "TokenLogProbabilities")
-  @projectedName("java", "tokenLogProbabilities")
+  @clientName("TokenLogProbabilities", "csharp")
+  @clientName("tokenLogProbabilities", "java")
   tokenLogprobs: NullableFloat[];
 
   @doc("A mapping of tokens to maximum log probability values in this completions data.")
   @encodedName("application/json", "top_logprobs")
-  @projectedName("csharp", "TopLogProbabilities")
-  @projectedName("java", "topLogProbabilities")
+  @clientName("TopLogProbabilities", "csharp")
+  @clientName("topLogProbabilities", "java")
   topLogprobs: Record<NullableFloat>[];
 
   @doc("The text offsets associated with tokens in this completions data.")
   @encodedName("application/json", "text_offset")
-  @projectedName("csharp", "TextOffsets")
-  @projectedName("java", "textOffsets")
+  @clientName("TextOffsets", "csharp")
+  @clientName("textOffsets", "java")
   textOffset: int32[];
+}
+
+/**
+ * Get completions request body.
+ */
+model GetCompletionsBody {
+  /**
+   * The configuration information for a completions request.
+   * Completions support a wide variety of tasks and generate text that continues from or "completes"
+   * provided prompt data.
+   */
+  @bodyRoot
+  body: CompletionsOptions;
 }

@@ -143,11 +143,6 @@
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
               },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Repeatability-Result": {
                 "type": "string",
                 "description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -171,6 +166,11 @@
                     }
                   ]
                 }
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -332,11 +332,6 @@
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
               },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Repeatability-Result": {
                 "type": "string",
                 "description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -360,6 +355,11 @@
                     }
                   ]
                 }
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -521,11 +521,6 @@
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
               },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Repeatability-Result": {
                 "type": "string",
                 "description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -549,6 +544,11 @@
                     }
                   ]
                 }
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -710,11 +710,6 @@
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
               },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
               "Repeatability-Result": {
                 "type": "string",
                 "description": "Indicates whether the repeatable request was accepted or rejected.",
@@ -738,6 +733,11 @@
                     }
                   ]
                 }
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1405,7 +1405,7 @@
     },
     "ClinicalTrials": {
       "type": "object",
-      "description": "The clinical trials that the patient(s) should be matched to. \nThe trial selection can be given as a list of custom clinical trials and/or a list of filters to known clinical trial registries.\nIn case both are given, the resulting trial set is a union of the two sets.",
+      "description": "The clinical trials that the patient(s) should be matched to.\nThe trial selection can be given as a list of custom clinical trials and/or a list of filters to known clinical trial registries.\nIn case both are given, the resulting trial set is a union of the two sets.",
       "properties": {
         "customTrials": {
           "type": "array",
@@ -1566,7 +1566,7 @@
     },
     "DocumentContentSourceType": {
       "type": "string",
-      "description": "The type of the content's source. \nIn case the source type is 'inline', the content is given as a string (for instance, text). \nIn case the source type is 'reference', the content is given as a URI.",
+      "description": "The type of the content's source.\nIn case the source type is 'inline', the content is given as a string (for instance, text).\nIn case the source type is 'reference', the content is given as a URI.",
       "enum": [
         "inline",
         "reference"
@@ -1669,7 +1669,7 @@
           {
             "name": "Observation",
             "value": "observation",
-            "description": "An encounter where the patient usually will start in different encounter, such as one in the emergency department but then transition to this type of encounter because they require a significant period of treatment and monitoring to determine whether or not their condition warrants an inpatient admission or discharge. "
+            "description": "An encounter where the patient usually will start in different encounter, such as one in the emergency department but then transition to this type of encounter because they require a significant period of treatment and monitoring to determine whether or not their condition warrants an inpatient admission or discharge."
           },
           {
             "name": "Emergency",
@@ -2757,7 +2757,7 @@
     },
     "Fhir.R4.ResearchStudy": {
       "type": "object",
-      "description": "Detailed information about Research Study \nBased on [FHIR ResearchStudy](https://www.hl7.org/fhir/R4/researchstudy.html)",
+      "description": "Detailed information about Research Study\nBased on [FHIR ResearchStudy](https://www.hl7.org/fhir/R4/researchstudy.html)",
       "properties": {
         "identifier": {
           "type": "array",

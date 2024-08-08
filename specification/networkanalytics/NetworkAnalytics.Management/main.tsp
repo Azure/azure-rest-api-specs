@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 
 using TypeSpec.Versioning;
 using TypeSpec.Http;
@@ -24,6 +25,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 enum Versions {
   @doc("The 2023-11-15 stable version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_11_15: "2023-11-15",
 }
 
@@ -150,7 +152,7 @@ model DataProduct is TrackedResource<DataProductProperties> {
   @maxLength(63)
   name: string;
 
-  ...ManagedServiceIdentity;
+  ...Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("The data product properties.")
@@ -271,7 +273,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of ingestion endpoint.")
   @visibility("read")
-  ingestionResourceId?: ResourceIdentifier<[
+  ingestionResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
     }
@@ -283,7 +285,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of file access endpoint.")
   @visibility("read")
-  fileAccessResourceId?: ResourceIdentifier<[
+  fileAccessResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
     }
@@ -295,7 +297,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of query endpoint.")
   @visibility("read")
-  queryResourceId?: ResourceIdentifier<[
+  queryResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
     }
@@ -427,9 +429,9 @@ union DataProductUserRole {
   "Reader",
 
   @doc("""
-Field to specify user of type SensitiveReader.
-This user has privileged access to read sensitive data of a data product.
-""")
+    Field to specify user of type SensitiveReader.
+    This user has privileged access to read sensitive data of a data product.
+    """)
   "SensitiveReader",
 }
 
@@ -459,6 +461,7 @@ model RoleAssignmentCommonProperties {
 @singleton
 @added(Versions.v2023_11_15)
 model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The data catalog name")
   @key("dataProductsCatalogName")
   @segment("dataProductsCatalogs")
@@ -474,6 +477,7 @@ model DataProductsCatalogProperties {
   provisioningState?: ProvisioningState;
 
   @doc("The data product publisher information.")
+  @extension("x-ms-identifiers", [])
   publishers: PublisherInformation[];
 }
 
@@ -484,6 +488,7 @@ model PublisherInformation {
   publisherName: string;
 
   @doc("Data product information.")
+  @extension("x-ms-identifiers", [])
   dataProducts: DataProductInformation[];
 }
 
@@ -497,6 +502,7 @@ model DataProductInformation {
   description: string;
 
   @doc("Version information of data product.")
+  @extension("x-ms-identifiers", [])
   dataProductVersions: DataProductVersion[];
 }
 
@@ -525,18 +531,30 @@ interface DataProductsCatalogs {
 @added(Versions.v2023_11_15)
 @armResourceOperations
 interface DataTypes {
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create data type resource.")
-  create is ArmResourceCreateOrUpdateAsync<DataType>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    DataType,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Retrieve data type resource.")
   get is ArmResourceRead<DataType>;
 
   @doc("Update data type resource.")
-  update is ArmResourcePatchAsync<DataType, DataTypeProperties>;
+  update is ArmCustomPatchAsync<
+    DataType,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataType,
+      DataTypeProperties
+    >
+  >;
 
   @doc("Delete data type resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataType>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Delete data for data type.")
   deleteData is ArmResourceActionNoContentAsync<DataType, {}>;
 
@@ -548,21 +566,32 @@ interface DataTypes {
   >;
 
   @doc("List data type by parent resource.")
-  listByParent is ArmResourceListByParent<DataType>;
+  listByDataProduct is ArmResourceListByParent<DataType>;
 }
 
 @doc("Operations on data product resource.")
 @added(Versions.v2023_11_15)
 @armResourceOperations
 interface DataProducts {
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create data product resource.")
-  create is ArmResourceCreateOrUpdateAsync<DataProduct>;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrUpdateAsync<
+    DataProduct,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   @doc("Retrieve data product resource.")
   get is ArmResourceRead<DataProduct>;
 
   @doc("Update data product resource.")
-  update is ArmResourcePatchAsync<DataProduct, DataProductProperties>;
+  update is ArmCustomPatchAsync<
+    DataProduct,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      DataProduct,
+      DataProductProperties
+    >
+  >;
 
   @doc("Delete data product resource.")
   delete is ArmResourceDeleteWithoutOkAsync<DataProduct>;

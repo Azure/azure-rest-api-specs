@@ -786,15 +786,17 @@
         },
         "destination": {
           "$ref": "#/definitions/RoutingRuleRouteDestination",
-          "required": true,
           "description": "Indicates the destination for this particular rule."
         },
         "nextHop": {
           "$ref": "#/definitions/RoutingRuleNextHop",
-          "required": true,
           "description": "Indicates the next hop for this particular rule."
         }
       },
+      "required": [
+        "destination",
+        "nextHop"
+      ],
       "description": "Routing routing rule resource."
     },
     "RoutingRuleRouteDestination": {

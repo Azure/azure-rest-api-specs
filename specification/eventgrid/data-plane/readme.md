@@ -144,6 +144,7 @@ input-file:
 - Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
 - Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
+- Microsoft.ApiCenter/stable/2018-01-01/ApiCenter.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -243,6 +244,24 @@ input-file:
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
 - Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 
+```
+
+### Tag: package-2024-01-01
+
+These settings apply only when `--tag=package-2024-01-01` is specified on the command line. Will generate EventGrid SystemEvents from TypeSpec.
+
+``` yaml $(tag) == 'package-2024-01-01'
+input-file:
+- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.EventGrid/stable/2024-01-01/GeneratedSystemEvents.json
+```
+
+### Tag: package-2018-01-01-generated
+These settings apply only when `--tag=package-2018-01-01-generated` is specified on the command line. Will generate EventGrid SystemEvents from TypeSpec, with backcompat from what Swagger was doing for optional extensible enums.
+``` yaml $(tag) == '2018-01-01-generated'
+input-file:
+- Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.EventGrid/stable/2018-01-01/GeneratedSystemEvents.json
 ```
 
 ### Suppression

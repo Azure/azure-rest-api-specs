@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "simGroupName": "testSimGroup",
+    "parameters": {
+      "version": 1,
+      "azureKeyIdentifier": 1,
+      "vendorKeyFingerprint": "ABC123",
+      "encryptedTransportKey": "ABC123",
+      "signedTransportKey": "ABC123",
+      "sims": [
+        {
+          "name": "testSim",
+          "properties": {
+            "integratedCircuitCardIdentifier": "8900000000000000000",
+            "internationalMobileSubscriberIdentity": "00000",
+            "encryptedCredentials": "ABC123",
+            "deviceType": "Video camera",
+            "simPolicy": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/MySimPolicy"
+            },
+            "staticIpConfiguration": [
+              {
+                "attachedDataNetwork": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestAttachedDataNetwork"
+                },
+                "slice": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/slices/testSlice"
+                },
+                "staticIp": {
+                  "ipv4Address": "2.4.0.1"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "testSim2",
+          "properties": {
+            "integratedCircuitCardIdentifier": "8900000000000000001",
+            "internationalMobileSubscriberIdentity": "00000",
+            "encryptedCredentials": "ABC123",
+            "deviceType": "Video camera",
+            "simPolicy": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/simPolicies/MySimPolicy"
+            },
+            "staticIpConfiguration": [
+              {
+                "attachedDataNetwork": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/TestPacketCoreCP/packetCoreDataPlanes/TestPacketCoreDP/attachedDataNetworks/TestAttachedDataNetwork"
+                },
+                "slice": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/slices/testSlice"
+                },
+                "staticIp": {
+                  "ipv4Address": "2.4.0.2"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation",
+        "name": "testOperation",
+        "status": "Succeeded",
+        "startTime": "2021-08-19T03:36:07.000Z",
+        "endTime": "2021-08-19T03:38:07.000Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2024-04-01"
+      }
+    }
+  }
+}

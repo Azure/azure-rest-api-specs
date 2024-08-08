@@ -20,7 +20,13 @@ namespace Azure.AI.OpenAI.Assistants;
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/threads")
-op createThread(...AssistantThreadCreationOptions): AssistantThread;
+op createThread(
+  /**
+   * The details used to create a new assistant thread.
+   */
+  @bodyRoot
+  body: AssistantThreadCreationOptions,
+): AssistantThread;
 
 // list threads?
 
@@ -43,6 +49,7 @@ op getThread(@path threadId: string): AssistantThread;
  * Modifies an existing thread.
  *
  * @param threadId The ID of the thread to modify.
+ * @param updateAssistantThreadOptions The details of the modification to perform on a specified thread.
  * @returns Information about the modified thread.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -52,8 +59,11 @@ op getThread(@path threadId: string): AssistantThread;
 @route("/threads/{threadId}")
 @added(ServiceApiVersions.v2024_02_15_preview)
 op updateThread(
-  @path threadId: string,
-  ...OptionalNullableMetadata,
+  /**
+   * The details used to update an existing assistant thread.
+   */
+  @bodyRoot
+  body: UpdateAssistantThreadOptions,
 ): AssistantThread;
 
 /**

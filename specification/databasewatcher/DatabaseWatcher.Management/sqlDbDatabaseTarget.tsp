@@ -1,13 +1,13 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-providerhub";
 import "./baseTarget.tsp";
 
 namespace Microsoft.DatabaseWatcher;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -16,8 +16,8 @@ model SqlDbSingleDatabaseTargetProperties extends TargetProperties {
   @doc("The Azure SQL DB single database target.")
   targetType: "SqlDb";
 
-  @doc("The ARM ResourceId of an Azure SQL DB single database target.")
-  sqlDbResourceId: ResourceIdentifier<[
+  @doc("The Azure ResourceId of an Azure SQL DB single database target.")
+  sqlDbResourceId: armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/databases";
     }

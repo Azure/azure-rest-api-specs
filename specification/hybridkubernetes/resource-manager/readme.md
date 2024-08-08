@@ -27,9 +27,34 @@ These are the global settings for the Kubernetes Connect RP.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01
+tag: package-2024-07-15-preview
+```
+### Tag: package-2024-07-15-preview
+
+These settings apply only when `--tag=package-2024-07-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07-15-preview'
+input-file:
+  - Microsoft.Kubernetes/preview/2024-07-15-preview/connectedClusters.json
 ```
 
+### Tag: package-2024-07-01-preview
+
+These settings apply only when `--tag=package-2024-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-07-01-preview'
+input-file:
+  - Microsoft.Kubernetes/preview/2024-07-01-preview/connectedClusters.json
+```
+
+### Tag: package-preview-2024-06-01
+
+These settings apply only when `--tag=package-preview-2024-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-06-01'
+input-file:
+  - Microsoft.Kubernetes/preview/2024-06-01-preview/connectedClusters.json
+```
 
 ### Tag: package-preview-2024-02-01
 
@@ -122,7 +147,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-ruby

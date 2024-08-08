@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "clusterName": "testcluster1",
+    "serverName": "testcluster1-c",
+    "api-version": "2023-03-02-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster1/servers/testcluster1-c",
+        "name": "testcluster1-c",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/servers",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "fullyQualifiedDomainName": "testcluster1-c.postgres.database.azure.com",
+          "postgresqlVersion": "12",
+          "citusVersion": "9.5",
+          "availabilityZone": "1",
+          "role": "Coordinator",
+          "serverEdition": "MemoryOptimized",
+          "storageQuotaInMb": 10000,
+          "vCores": 4,
+          "enableHa": true,
+          "enablePublicIpAccess": true,
+          "state": "Ready",
+          "haState": "Healthy",
+          "administratorLogin": "citus",
+          "isReadOnly": false
+        }
+      }
+    }
+  }
+}

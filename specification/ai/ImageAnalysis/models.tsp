@@ -1,7 +1,9 @@
 import "@typespec/http";
+import "@azure-tools/typespec-client-generator-core";
 
 namespace ImageAnalysis;
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 @doc("A basic rectangle specifying a sub-region of the image.")
 model ImageBoundingBox {
@@ -27,9 +29,9 @@ model ImageBoundingBox {
 @doc("Represents a generated phrase that describes the content of the whole image.")
 model CaptionResult {
   @doc("""
-  A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.
-  Higher values indicating higher confidence.
-  """)
+    A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.
+    Higher values indicating higher confidence.
+    """)
   @minValue(0.0)
   @maxValue(1.0)
   confidence: float32;
@@ -40,16 +42,16 @@ model CaptionResult {
 }
 
 @doc("""
-A region at the desired aspect ratio that can be used as image thumbnail.
-The region preserves as much content as possible from the analyzed image, with priority given to detected faces.
-""")
+  A region at the desired aspect ratio that can be used as image thumbnail.
+  The region preserves as much content as possible from the analyzed image, with priority given to detected faces.
+  """)
 model CropRegion {
   @doc("""
-  The aspect ratio of the crop region.
-  Aspect ratio is calculated by dividing the width of the region in pixels by its height in pixels.
-  The aspect ratio will be in the range 0.75 to 1.8 (inclusive) if provided by the developer during the analyze call.
-  Otherwise, it will be in the range 0.5 to 2.0 (inclusive).
-  """)
+    The aspect ratio of the crop region.
+    Aspect ratio is calculated by dividing the width of the region in pixels by its height in pixels.
+    The aspect ratio will be in the range 0.75 to 1.8 (inclusive) if provided by the developer during the analyze call.
+    Otherwise, it will be in the range 0.5 to 2.0 (inclusive).
+    """)
   @minValue(0.0)
   aspectRatio: float32;
 
@@ -60,9 +62,9 @@ model CropRegion {
 @doc("Represents a generated phrase that describes the content of the whole image or a region in the image")
 model DenseCaption {
   @doc("""
-  A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.
-  Higher values indicating higher confidence.
-  """)
+    A score, in the range of 0 to 1 (inclusive), representing the confidence that this description is accurate.
+    Higher values indicating higher confidence.
+    """)
   @minValue(0.0)
   @maxValue(1.0)
   confidence: float32;
@@ -76,13 +78,13 @@ model DenseCaption {
 }
 
 @doc("""
-Represents a list of up to 10 image captions for different regions of the image.
-The first caption always applies to the whole image.
-""")
+  Represents a list of up to 10 image captions for different regions of the image.
+  The first caption always applies to the whole image.
+  """)
 model DenseCaptionsResult {
   @doc("The list of image captions.")
   @minItems(1)
-  @projectedName("python", "list")
+  @clientName("list", "python")
   values: Array<DenseCaption>;
 }
 
@@ -103,9 +105,9 @@ model DetectedPerson {
   boundingBox: ImageBoundingBox;
 
   @doc("""
-  A score, in the range of 0 to 1 (inclusive), representing the confidence that this detection was accurate.
-  Higher values indicating higher confidence.
-  """)
+    A score, in the range of 0 to 1 (inclusive), representing the confidence that this detection was accurate.
+    Higher values indicating higher confidence.
+    """)
   @visibility("read")
   @minValue(0.0)
   @maxValue(1.0)
@@ -170,9 +172,9 @@ model ImageAnalysisResult {
   caption?: CaptionResult;
 
   @doc("""
-  The up to 10 generated phrases, the first describing the content of the whole image,
-  and the others describing the content of different regions of the image.
-  """)
+    The up to 10 generated phrases, the first describing the content of the whole image,
+    and the others describing the content of different regions of the image.
+    """)
   @encodedName("application/json", "denseCaptionsResult")
   denseCaptions?: DenseCaptionsResult;
 
@@ -195,9 +197,9 @@ model ImageAnalysisResult {
   read?: ReadResult;
 
   @doc("""
-  A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
-  These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
-  """)
+    A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
+    These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
+    """)
   @encodedName("application/json", "smartCropsResult")
   smartCrops?: SmartCropsResult;
 
@@ -221,7 +223,7 @@ model ImageMetadata {
 model ObjectsResult {
   @doc("A list of physical object detected in an image and their location.")
   @minItems(0)
-  @projectedName("python", "list")
+  @clientName("list", "python")
   values: Array<DetectedObject>;
 }
 
@@ -229,7 +231,7 @@ model ObjectsResult {
 model PeopleResult {
   @doc("A list of people detected in an image and their location.")
   @minItems(0)
-  @projectedName("python", "list")
+  @clientName("list", "python")
   values: Array<DetectedPerson>;
 }
 
@@ -242,25 +244,25 @@ model ReadResult {
 }
 
 @doc("""
-Smart cropping result. A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
-These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
-""")
+  Smart cropping result. A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
+  These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
+  """)
 model SmartCropsResult {
   @doc("A list of crop regions.")
   @minItems(1)
-  @projectedName("python", "list")
+  @clientName("list", "python")
   values: Array<CropRegion>;
 }
 
 @doc("""
-A content entity observation in the image. A tag can be a physical object, living being, scenery, or action
-that appear in the image.
-""")
+  A content entity observation in the image. A tag can be a physical object, living being, scenery, or action
+  that appear in the image.
+  """)
 model DetectedTag {
   @doc("""
-  A score, in the range of 0 to 1 (inclusive), representing the confidence that this entity was observed.
-  Higher values indicating higher confidence.
-  """)
+    A score, in the range of 0 to 1 (inclusive), representing the confidence that this entity was observed.
+    Higher values indicating higher confidence.
+    """)
   @minValue(0.0)
   @maxValue(1.0)
   confidence: float32;
@@ -271,38 +273,40 @@ model DetectedTag {
 }
 
 @doc("""
-A list of entities observed in the image. Tags can be physical objects, living being, scenery, or actions
-that appear in the image.
-""")
+  A list of entities observed in the image. Tags can be physical objects, living being, scenery, or actions
+  that appear in the image.
+  """)
 model TagsResult {
   @doc("A list of tags.")
   @minItems(0)
-  @projectedName("python", "list")
+  @clientName("list", "python")
   values: Array<DetectedTag>;
 }
 
 @doc("The visual features supported by the Image Analysis service")
-enum VisualFeatures {
+union VisualFeatures {
+  string,
+
   @doc("Extract content tags for thousands of recognizable objects, living beings, scenery, and actions that appear in the image.")
-  tags,
+  "tags",
 
   @doc("Generate a human-readable caption sentence that describes the content of the image.")
-  caption,
+  "caption",
 
   @doc("Generate human-readable caption sentences for up to 10 different regions in the image, including one for the whole image.")
-  denseCaptions,
+  "denseCaptions",
 
   @doc("Object detection. This is similar to tags, but focused on detecting physical objects in the image and returning their location.")
-  objects,
+  "objects",
 
   @doc("Extract printed or handwritten text from the image. Also known as Optical Character Recognition (OCR).")
-  read,
+  "read",
 
   @doc("Find representative sub-regions of the image for thumbnail generation, at desired aspect ratios, with priority given to detected faces.")
-  smartCrops,
+  "smartCrops",
 
   @doc("Detect people in the image and return their location.")
-  people,
+  "people",
 }
 
 @doc("An object holding the publicly reachable URL of an image to analyze.")
