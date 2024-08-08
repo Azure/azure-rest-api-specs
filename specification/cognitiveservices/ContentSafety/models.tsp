@@ -977,8 +977,7 @@ model AnalyzeImageWithTextOptions {
   @doc("The image needs to be analyzed.")
   image: ImageData;
 
-  @doc("The text attached to the image. We support at most 1k characters (unicode code points) in one text request.")
-  @maxLength(1000)
+  @doc("The text attached to the image.")
   text?: string;
 
   @doc("The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
@@ -994,7 +993,7 @@ model ImageWithTextCategoriesAnalysis {
   @doc("The imageWithtext analysis category.")
   category: ImageWithTextCategory;
 
-  @doc("The higher the severity of input content, the larger this value is. The values could be: 0,2,4,6.")
+  @doc("The higher the severity of input content, the larger this value is.")
   severity?: int32;
 }
 
