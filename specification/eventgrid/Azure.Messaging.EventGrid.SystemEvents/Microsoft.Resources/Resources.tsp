@@ -48,25 +48,25 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** The details of the HTTP request. */
   model ResourceHttpRequest {
     /** The client request ID. */
-    clientRequestId?: string;
+    clientRequestId: string;
 
     /** The client IP address. */
-    clientIpAddress?: string;
+    clientIpAddress: string;
 
     /** The request method. */
-    method?: string;
+    method: string;
 
     /** The url used in the request. */
-    url?: string;
+    url: string;
   }
 
   /** The details of the authorization for the resource. */
   model ResourceAuthorization {
     /** The scope of the authorization. */
-    scope?: string;
+    scope: string;
 
     /** The action being requested. */
-    action?: string;
+    action: string;
 
     /** The evidence for the authorization. */
     evidence: Record<string>;
@@ -74,25 +74,25 @@ namespace Microsoft.EventGrid.SystemEvents {
 
   alias ResourceBaseEventData = {
     /** The tenant ID of the resource. */
-    tenantId?: string;
+    tenantId: string;
 
     /** The subscription ID of the resource. */
-    subscriptionId?: string;
+    subscriptionId: string;
 
     /** The resource group of the resource. */
-    resourceGroup?: string;
+    resourceGroup: string;
 
     /** The resource provider performing the operation. */
-    resourceProvider?: string;
+    resourceProvider: string;
 
     /** The URI of the resource in the operation. */
-    resourceUri?: string;
+    resourceUri: string;
 
     /** The operation that was performed. */
-    operationName?: string;
+    operationName: string;
 
     /** The status of the operation. */
-    status?: string;
+    status: string;
 
     /** The requested authorization for the operation. */
     authorization: ResourceAuthorization;
@@ -101,7 +101,7 @@ namespace Microsoft.EventGrid.SystemEvents {
     claims: Record<string>;
 
     /** An operation ID used for troubleshooting. */
-    correlationId?: string;
+    correlationId: string;
 
     /** The details of the operation. */
     httpRequest: ResourceHttpRequest;

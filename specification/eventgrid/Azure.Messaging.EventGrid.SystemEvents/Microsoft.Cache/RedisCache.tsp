@@ -8,10 +8,10 @@ namespace Microsoft.EventGrid.SystemEvents {
     timestamp: utcDateTime;
 
     /** The name of this event. */
-    name?: string;
+    name: string;
 
     /** The status of this event. Failed or  succeeded */
-    status?: string;
+    status: string;
   };
 
   /** Schema of the Data property of an EventGridEvent for a Microsoft.Cache.PatchingCompleted event. */

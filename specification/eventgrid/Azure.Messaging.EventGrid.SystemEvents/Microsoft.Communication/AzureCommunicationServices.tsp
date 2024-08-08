@@ -12,19 +12,19 @@ model AcsIncomingCallEventData {
   from: CommunicationIdentifierModel;
 
   /** The Id of the server call */
-  serverCallId?: string;
+  serverCallId: string;
 
   /** Display name of caller. */
-  callerDisplayName?: string;
+  callerDisplayName: string;
 
   /** Custom Context of Incoming Call */
   customContext: AcsIncomingCallCustomContext;
 
   /** Signed incoming call context. */
-  incomingCallContext?: string;
+  incomingCallContext: string;
 
   /** CorrelationId (CallId). */
-  correlationId?: string;
+  correlationId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event. */
@@ -168,7 +168,8 @@ model AcsChatParticipantAddedToThreadEventData
   ...AcsChatParticipantBaseEventData;
 
   /** The version of the thread */
-  version?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  version: int64;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event. */
@@ -186,17 +187,18 @@ model AcsChatParticipantRemovedFromThreadEventData
   participantRemoved: AcsChatThreadParticipantProperties;
 
   /** The version of the thread */
-  version?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  version: int64;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   /** Status of Delivery */
-  deliveryStatus?: string;
+  deliveryStatus: string;
 
   /** Details about Delivery Status */
-  deliveryStatusDetails?: string;
+  deliveryStatusDetails: string;
 
   /** List of details of delivery attempts made */
   deliveryAttempts: AcsSmsDeliveryAttemptProperties[];
@@ -206,14 +208,14 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   receivedTimestamp: utcDateTime;
 
   /** Customer Content */
-  tag?: string;
+  tag: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   /** The SMS content */
-  message?: string;
+  message: string;
 
   /** The time at which the SMS was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -231,7 +233,8 @@ model AcsRecordingFileStatusUpdatedEventData {
   recordingStartTime: utcDateTime;
 
   /** The recording duration in milliseconds */
-  recordingDurationMs?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  recordingDurationMs: int64;
 
   /** The recording content type- AudioVideo, or Audio */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -246,19 +249,19 @@ model AcsRecordingFileStatusUpdatedEventData {
   recordingFormatType: recordingFormatType;
 
   /** The reason for ending recording session */
-  sessionEndReason?: string;
+  sessionEndReason: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event. */
 model AcsEmailDeliveryReportReceivedEventData {
   /** The Sender Email Address */
-  sender?: string;
+  sender: string;
 
   /** The recipient Email Address */
-  recipient?: string;
+  recipient: string;
 
   /** The Id of the email been sent */
-  messageId?: string;
+  messageId: string;
 
   /** The status of the email. Any value other than Delivered is considered failed. */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -275,23 +278,23 @@ model AcsEmailDeliveryReportReceivedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event. */
 model AcsEmailEngagementTrackingReportReceivedEventData {
   /** The Sender Email Address */
-  sender?: string;
+  sender: string;
 
   /** The Recipient Email Address */
-  recipient?: string;
+  recipient: string;
 
   /** The Id of the email that has been sent */
-  messageId?: string;
+  messageId: string;
 
   /** The time at which the user interacted with the email */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   userActionTimestamp: utcDateTime;
 
   /** The context of the type of engagement user had with email */
-  engagementContext?: string;
+  engagementContext: string;
 
   /** The user agent interacting with the email */
-  userAgent?: string;
+  userAgent: string;
 
   /** The type of engagement user have with email */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -302,17 +305,17 @@ model AcsEmailEngagementTrackingReportReceivedEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobCancelledEventData extends AcsRouterJobEventData {
   /** Router Job Note */
-  note?: string;
+  note: string;
 
   /** Router Job Disposition Code */
-  dispositionCode?: string;
+  dispositionCode: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobClassificationFailed event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobClassificationFailedEventData extends AcsRouterJobEventData {
   /** Router Job Classification Policy Id */
-  classificationPolicyId?: string;
+  classificationPolicyId: string;
 
   /** Router Job Classification Failed Errors */
   errors: AcsRouterCommunicationError[];
@@ -325,10 +328,11 @@ model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
   queueDetails: AcsRouterQueueDetails;
 
   /** Router Job Classification Policy Id */
-  classificationPolicyId?: string;
+  classificationPolicyId: string;
 
   /** Router Job Priority */
-  priority?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  priority: int32;
 
   /** Router Job Attached Worker Selector */
   attachedWorkerSelectors: AcsRouterWorkerSelector[];
@@ -338,23 +342,23 @@ model AcsRouterJobClassifiedEventData extends AcsRouterJobEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobClosedEventData extends AcsRouterJobEventData {
   /** Router Job Closed Assignment Id */
-  assignmentId?: string;
+  assignmentId: string;
 
   /** Router Job Closed Worker Id */
-  workerId?: string;
+  workerId: string;
 
   /** Router Job Closed Disposition Code */
-  dispositionCode?: string;
+  dispositionCode: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobCompleted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobCompletedEventData extends AcsRouterJobEventData {
   /** Router Job Completed Assignment Id */
-  assignmentId?: string;
+  assignmentId: string;
 
   /** Router Job Completed Worker Id */
-  workerId?: string;
+  workerId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobDeleted event */
@@ -365,17 +369,18 @@ model AcsRouterJobDeletedEventData extends AcsRouterJobEventData {}
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobExceptionTriggeredEventData extends AcsRouterJobEventData {
   /** Router Job Exception Triggered Rule Key */
-  ruleKey?: string;
+  ruleKey: string;
 
   /** Router Job Exception Triggered Rule Id */
-  exceptionRuleId?: string;
+  exceptionRuleId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobQueued event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
   /** Router Job Priority */
-  priority?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  priority: int32;
 
   /** Router Job Queued Attached Worker Selector */
   attachedWorkerSelectors: AcsRouterWorkerSelector[];
@@ -392,10 +397,11 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
   jobStatus: AcsRouterJobStatus;
 
   /** Router Job Classification Policy Id */
-  classificationPolicyId?: string;
+  classificationPolicyId: string;
 
   /** Router Job Priority */
-  priority?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  priority: int32;
 
   /** Router Job Received Requested Worker Selectors */
   requestedWorkerSelectors: AcsRouterWorkerSelector[];
@@ -453,7 +459,8 @@ union AcsRouterJobStatus {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
   /** Router Job Priority */
-  priority?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  priority: int32;
 
   /** Router Job Scheduling Failed Attached Worker Selector Expired */
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
@@ -467,24 +474,25 @@ model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
   scheduledOn: utcDateTime;
 
   /** Router Job Scheduling Failed Reason */
-  failureReason?: string;
+  failureReason: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobUnassigned event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobUnassignedEventData extends AcsRouterJobEventData {
   /** Router Job Unassigned Assignment Id */
-  assignmentId?: string;
+  assignmentId: string;
 
   /** Router Job Unassigned Worker Id */
-  workerId?: string;
+  workerId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterJobWaitingForActivation event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   /** Router Job Waiting For Activation Priority */
-  priority?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  priority: int32;
 
   /** Router Job Waiting For Activation Worker Selector Expired */
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
@@ -519,23 +527,24 @@ model AcsRouterWorkerDeletedEventData extends AcsRouterWorkerEventData {}
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerDeregistered event */
 model AcsRouterWorkerDeregisteredEventData {
   /** Router Worker Deregistered Worker Id */
-  workerId?: string;
+  workerId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferAccepted event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Accepted Queue Id */
-  queueId?: string;
+  queueId: string;
 
   /** Router Worker Offer Accepted Offer Id */
-  offerId?: string;
+  offerId: string;
 
   /** Router Worker Offer Accepted Assignment Id */
-  assignmentId?: string;
+  assignmentId: string;
 
   /** Router Worker Offer Accepted Job Priority */
-  jobPriority?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  jobPriority: int32;
 
   /** Router Worker Offer Accepted Worker Labels */
   workerLabels: Record<string>;
@@ -554,33 +563,34 @@ model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterWorkerOfferDeclinedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Declined Queue Id */
-  queueId?: string;
+  queueId: string;
 
   /** Router Worker Offer Declined Offer Id */
-  offerId?: string;
+  offerId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferExpired event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterWorkerOfferExpiredEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Expired Queue Id */
-  queueId?: string;
+  queueId: string;
 
   /** Router Worker Offer Expired Offer Id */
-  offerId?: string;
+  offerId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerOfferIssued event */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Issued Queue Id */
-  queueId?: string;
+  queueId: string;
 
   /** Router Worker Offer Issued Offer Id */
-  offerId?: string;
+  offerId: string;
 
   /** Router Worker Offer Issued Job Priority */
-  jobPriority?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  jobPriority: int32;
 
   /** Router Worker Offer Issued Worker Labels */
   workerLabels: Record<string>;
@@ -609,16 +619,16 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterWorkerOfferRevokedEventData extends AcsRouterWorkerEventData {
   /** Router Worker Offer Revoked Queue Id */
-  queueId?: string;
+  queueId: string;
 
   /** Router Worker Offer Revoked Offer Id */
-  offerId?: string;
+  offerId: string;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerRegistered event */
 model AcsRouterWorkerRegisteredEventData {
   /** Router Worker Registered Worker Id */
-  workerId?: string;
+  workerId: string;
 
   /** Router Worker Registered Queue Info */
   queueAssignments: AcsRouterQueueDetails[];
@@ -627,7 +637,8 @@ model AcsRouterWorkerRegisteredEventData {
   channelConfigurations: AcsRouterChannelConfiguration[];
 
   /** Router Worker Register Total Capacity */
-  totalCapacity?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  totalCapacity: int32;
 
   /** Router Worker Registered Labels */
   labels: Record<string>;
@@ -641,7 +652,7 @@ model AcsRouterWorkerRegisteredEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobEventData extends AcsRouterEventData {
   /** Router Job events Queue Id */
-  queueId?: string;
+  queueId: string;
 
   /** Router Job events Labels */
   labels: Record<string>;
@@ -654,40 +665,42 @@ model AcsRouterJobEventData extends AcsRouterEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterWorkerEventData extends AcsRouterEventData {
   /** Router Worker events Worker Id */
-  workerId?: string;
+  workerId: string;
 }
 
 /** Schema of common properties of all Router events */
 model AcsRouterEventData {
   /** Router Event Job ID */
-  jobId?: string;
+  jobId: string;
 
   /** Router Event Channel Reference */
-  channelReference?: string;
+  channelReference: string;
 
   /** Router Event Channel ID */
-  channelId?: string;
+  channelId: string;
 }
 
 /** Router Channel Configuration */
 model AcsRouterChannelConfiguration {
   /** Channel ID for Router Job */
-  channelId?: string;
+  channelId: string;
 
   /** Capacity Cost Per Job for Router Job */
-  capacityCostPerJob?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  capacityCostPerJob: int32;
 
   /** Max Number of Jobs for Router Job */
-  maxNumberOfJobs?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  maxNumberOfJobs: int32;
 }
 
 /** Router Queue Details */
 model AcsRouterQueueDetails {
   /** Router Queue Id */
-  id?: string;
+  id: string;
 
   /** Router Queue Name */
-  name?: string;
+  name: string;
 
   /** Router Queue Labels */
   labels: Record<string>;
@@ -696,13 +709,13 @@ model AcsRouterQueueDetails {
 /** Router Communication Error */
 model AcsRouterCommunicationError {
   /** Router Communication Error Code */
-  code?: string;
+  code: string;
 
   /** Router Communication Error Message */
-  message?: string;
+  message: string;
 
   /** Router Communication Error Target */
-  target?: string;
+  target: string;
 
   /** Router Communication Inner Error */
   innererror: AcsRouterCommunicationError;
@@ -714,7 +727,7 @@ model AcsRouterCommunicationError {
 /** Router Job Worker Selector */
 model AcsRouterWorkerSelector {
   /** Router Job Worker Selector Key */
-  key?: string;
+  key: string;
 
   /** Router Job Worker Selector Label Operator */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -738,7 +751,7 @@ model AcsRouterWorkerSelector {
 
 alias AcsChatMessageBaseEventData = {
   /** The body of the chat message */
-  messageBody?: string;
+  messageBody: string;
 
   /** The chat message metadata */
   metadata: Record<string>;
@@ -892,7 +905,7 @@ union AcsEmailDeliveryReportStatus {
 /** Detailed information about the status if any */
 model AcsEmailDeliveryReportStatusDetails {
   /** Detailed status message */
-  statusMessage?: string;
+  statusMessage: string;
 }
 
 /** Schema of common properties of all chat thread events */
@@ -903,7 +916,8 @@ model AcsChatThreadEventBaseProperties extends AcsChatEventBaseProperties {
   createTime: utcDateTime;
 
   /** The version of the thread */
-  version?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  version: int64;
 }
 
 /** Schema of common properties of all chat thread events */
@@ -915,30 +929,32 @@ model AcsChatThreadEventInThreadBaseProperties
   createTime: utcDateTime;
 
   /** The version of the thread */
-  version?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  version: int64;
 }
 
 /** Schema of common properties of all chat message events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   /** The chat message id */
-  messageId?: string;
+  messageId: string;
 
   /** The communication identifier of the sender */
   senderCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The display name of the sender */
-  senderDisplayName?: string;
+  senderDisplayName: string;
 
   /** The original compose time of the message */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   composeTime: utcDateTime;
 
   /** The type of the message */
-  type?: string;
+  type: string;
 
   /** The version of the message */
-  version?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  version: int64;
 }
 
 /** Schema of common properties of all thread-level chat message events */
@@ -946,32 +962,33 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 model AcsChatMessageEventInThreadBaseProperties
   extends AcsChatEventInThreadBaseProperties {
   /** The chat message id */
-  messageId?: string;
+  messageId: string;
 
   /** The communication identifier of the sender */
   senderCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The display name of the sender */
-  senderDisplayName?: string;
+  senderDisplayName: string;
 
   /** The original compose time of the message */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   composeTime: utcDateTime;
 
   /** The type of the message */
-  type?: string;
+  type: string;
 
   /** The version of the message */
-  version?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  version: int64;
 }
 
 /** Schema of common properties of all thread-level chat events */
 model AcsChatEventInThreadBaseProperties {
   /** The transaction id will be used as co-relation vector */
-  transactionId?: string;
+  transactionId: string;
 
   /** The chat thread id */
-  threadId?: string;
+  threadId: string;
 }
 
 /** Schema of common properties of all chat events */
@@ -985,7 +1002,7 @@ model AcsChatEventBaseProperties {
 /** Schema of the chat thread participant */
 model AcsChatThreadParticipantProperties {
   /** The name of the user */
-  displayName?: string;
+  displayName: string;
 
   /** The communication identifier of the user */
   participantCommunicationIdentifier: CommunicationIdentifierModel;
@@ -997,13 +1014,13 @@ model AcsChatThreadParticipantProperties {
 /** Schema of common properties of all SMS events */
 model AcsSmsEventBaseProperties {
   /** The identity of the SMS message */
-  messageId?: string;
+  messageId: string;
 
   /** The identity of SMS message sender */
-  from?: string;
+  from: string;
 
   /** The identity of SMS message receiver */
-  to?: string;
+  to: string;
 }
 
 /** Schema for details of a delivery attempt */
@@ -1013,10 +1030,12 @@ model AcsSmsDeliveryAttemptProperties {
   timestamp: utcDateTime;
 
   /** Number of segments that were successfully delivered */
-  segmentsSucceeded?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  segmentsSucceeded: int32;
 
   /** Number of segments whose delivery failed */
-  segmentsFailed?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  segmentsFailed: int32;
 }
 
 /** Schema for all properties of Recording Storage Information. */
@@ -1028,22 +1047,23 @@ model AcsRecordingStorageInfoProperties {
 /** Schema for all properties of  Recording Chunk Information. */
 model AcsRecordingChunkInfoProperties {
   /** The documentId of the recording chunk */
-  documentId?: string;
+  documentId: string;
 
   /** The index of the recording chunk */
-  index?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  index: int64;
 
   /** The reason for ending the recording chunk */
-  endReason?: string;
+  endReason: string;
 
   /** The location of the metadata for this chunk */
-  metadataLocation?: string;
+  metadataLocation: string;
 
   /** The location of the content for this chunk */
-  contentLocation?: string;
+  contentLocation: string;
 
   /** The location to delete all chunk storage */
-  deleteLocation?: string;
+  deleteLocation: string;
 }
 
 /** Custom Context of Incoming Call */
@@ -1073,7 +1093,7 @@ model CommunicationIdentifierModel {
   kind: CommunicationIdentifierModelKind;
 
   /** Raw Id of the identifier. Optional in requests, required in responses. */
-  rawId?: string;
+  rawId: string;
 
   /** The communication user. */
   communicationUser: CommunicationUserIdentifierModel;
@@ -1121,7 +1141,8 @@ model MicrosoftTeamsUserIdentifierModel {
   userId: string;
 
   /** True if the Microsoft Teams user is anonymous. By default false if missing. */
-  isAnonymous?: boolean;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  isAnonymous: boolean;
 
   /** The cloud that the Microsoft Teams user belongs to. By default 'public' if missing. */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -1143,7 +1164,7 @@ model CommunicationUserIdentifierModel {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.RouterWorkerUpdated event. */
 model AcsRouterWorkerUpdatedEventData {
   /** Router Worker Updated Worker Id */
-  workerId?: string;
+  workerId: string;
 
   /** Router Worker Updated Queue Info */
   queueAssignments: AcsRouterQueueDetails[];
@@ -1152,7 +1173,8 @@ model AcsRouterWorkerUpdatedEventData {
   channelConfigurations: AcsRouterChannelConfiguration[];
 
   /** Router Worker Updated Total Capacity */
-  totalCapacity?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  totalCapacity: int32;
 
   /** Router Worker Updated Labels */
   labels: Record<string>;
@@ -1168,7 +1190,7 @@ model AcsRouterWorkerUpdatedEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
   /** The message id */
-  messageId?: string;
+  messageId: string;
 
   /** The updated message status */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -1183,7 +1205,7 @@ model AcsMessageDeliveryStatusUpdatedEventData extends AcsMessageEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsMessageReceivedEventData extends AcsMessageEventData {
   /** The message content */
-  content?: string;
+  content: string;
 
   /** The message channel type */
   channelType: AcsMessageChannelKind;
@@ -1204,34 +1226,34 @@ model AcsMessageReceivedEventData extends AcsMessageEventData {
 /** Message Media Content */
 model AcsMessageMediaContent {
   /** The MIME type of the file this media represents */
-  mimeType?: string;
+  mimeType: string;
 
   /** The media identifier */
-  id?: string;
+  id: string;
 
   /** The filename of the underlying media file as specified when uploaded */
-  fileName?: string;
+  fileName: string;
 
   /** The caption for the media object, if supported and provided */
-  caption?: string;
+  caption: string;
 }
 
 /** Message Context */
 model AcsMessageContext {
   /** The WhatsApp ID for the customer who replied to an inbound message. */
-  from?: string;
+  from: string;
 
   /** The message ID for the sent message for an inbound reply */
-  id?: string;
+  id: string;
 }
 
 /** Message Button Content */
 model AcsMessageButtonContent {
   /** The Text of the button */
-  text?: string;
+  text: string;
 
   /** The Payload of the button which was clicked by the user, setup by the business */
-  payload?: string;
+  payload: string;
 }
 
 /** Message Interactive Content */
@@ -1250,31 +1272,31 @@ model AcsMessageInteractiveContent {
 /** Message Interactive button reply content for a user to business message */
 model AcsMessageInteractiveButtonReplyContent {
   /** The ID of the button */
-  id?: string;
+  id: string;
 
   /** The title of the button */
-  title?: string;
+  title: string;
 }
 
 /** Message Interactive list reply content for a user to business message */
 model AcsMessageInteractiveListReplyContent {
   /** The ID of the selected list item */
-  id?: string;
+  id: string;
 
   /** The title of the selected list item */
-  title?: string;
+  title: string;
 
   /** The description of the selected row */
-  description?: string;
+  description: string;
 }
 
 /** Schema of common properties of all chat thread events */
 model AcsMessageEventData {
   /** The message sender */
-  from?: string;
+  from: string;
 
   /** The message recipient */
-  to?: string;
+  to: string;
 
   /** The time message was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -1287,10 +1309,10 @@ model AcsMessageEventData {
 /** Message Channel Event Error */
 model AcsMessageChannelEventError {
   /** The channel error code */
-  channelCode?: string;
+  channelCode: string;
 
   /** The channel error message */
-  channelMessage?: string;
+  channelMessage: string;
 }
 
 /** Interactive reply kind */
