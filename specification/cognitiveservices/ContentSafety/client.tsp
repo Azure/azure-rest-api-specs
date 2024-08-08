@@ -16,7 +16,6 @@ interface ContentSafetyClient {
   analyzeText is ContentSafety.TextOperations.analyzeText;
   detectTextProtectedMaterial is ContentSafety.TextOperations.detectTextProtectedMaterial;
   shieldPrompt is ContentSafety.TextOperations.shieldPrompt;
-  analyzeImageWithText is ContentSafety.ImageWithTextOperations.analyzeImageWithText;
 }
 
 @client({
