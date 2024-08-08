@@ -98,6 +98,11 @@ model NodeImageSelection {
   @visibility("create", "read")
   @doc("The node image upgrade type.")
   type: NodeImageSelectionType;
+
+  @added(Versions.v2024_05_02_preview)
+  @doc("Custom node image versions to upgrade the nodes to. This field is required if node image selection type is Custom. Otherwise, it must be empty. For each node image family (e.g., 'AKSUbuntu-1804gen2containerd'), this field can contain at most one version (e.g., only one of 'AKSUbuntu-1804gen2containerd-2023.01.12' or 'AKSUbuntu-1804gen2containerd-2023.02.12', not both). If the nodes belong to a family without a matching image version in this field, they are not upgraded.")
+  @extension("x-ms-identifiers", ["version"])
+  customNodeImageVersions?: NodeImageVersion[];
 }
 
 @doc("The node image upgrade type.")
@@ -110,6 +115,10 @@ union NodeImageSelectionType {
 
   @doc("The image versions to upgrade nodes to are selected as described below: for each node pool in managed clusters affected by the update run, the system selects the latest image version such that it is available across all other node pools (in all other clusters) of the same image type. As a result, all node pools of the same image type will be upgraded to the same image version. For example, if the latest image version for image type 'AKSUbuntu-1804gen2containerd' is 'AKSUbuntu-1804gen2containerd-2021.10.12' for a node pool in cluster A in region X, and is 'AKSUbuntu-1804gen2containerd-2021.10.17' for a node pool in cluster B in region Y, the system will upgrade both node pools to image version 'AKSUbuntu-1804gen2containerd-2021.10.12'.")
   "Consistent",
+
+  @added(Versions.v2024_05_02_preview)
+  @doc("Upgrade the nodes to the custom image versions. When set, update run will use node image versions provided in customNodeImageVersions to upgrade the nodes. If set, customNodeImageVersions must not be empty.")
+  "Custom",
 }
 
 scalar KubernetesVersion extends string;
