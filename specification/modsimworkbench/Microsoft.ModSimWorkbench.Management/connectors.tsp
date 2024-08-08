@@ -160,6 +160,7 @@ model ConnectorProperties {
 @parentResource(Chamber)
 model Connector is TrackedResource<ConnectorProperties> {
   @doc("The name of the Connector")
+  @visibility("read", "create")
   @segment("connectors")
   @key("connectorName")
   @TypeSpec.Http.path
