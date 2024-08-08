@@ -567,3 +567,18 @@ interface TextCustomizedCategoryOperations {
   @doc("Get details of the given Custom Category operation.")
   getCustomCategoryOperation is Azure.Core.ResourceRead<CustomCategoryOperationDetail>;
 }
+
+interface ImageWithTextOperations {
+  @summary("Analyze Image With Text")
+  @doc("A synchronous API for the analysis of potentially harmful image with text content. Currently, it supports four categories: Hate, SelfHarm, Sexual, and Violence.")
+  @route("/imageWithText:analyze")
+  @post
+  analyzeImageWithText is Azure.Core.RpcOperation<
+    {
+      @doc("The image with text analysis request.")
+      @body
+      body: AnalyzeImageWithTextOptions;
+    },
+    AnalyzeImageWithTextResult
+  >;
+}

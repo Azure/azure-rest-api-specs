@@ -961,3 +961,46 @@ model AnalyzeTextCustomCategoryResult {
   @doc("The analysis result with Custom Category.")
   customCategoryAnalysis: TextCustomCategoryAnalysis;
 }
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("ImageWithText analyze category.")
+enum ImageWithTextCategory {
+  Hate,
+  SelfHarm,
+  Sexual,
+  Violence,
+}
+
+@added(ContentSafety.Versions.v2024_09_15_Preview)
+@doc("The analysis request of the image with text.")
+model AnalyzeImageWithTextOptions {
+  @doc("The image needs to be analyzed.")
+  image: ImageData;
+
+  @doc("The text attached to the image. We support at most 1k characters (unicode code points) in one text request.")
+  @maxLength(1000)
+  text?: string;
+
+  @doc("The categories will be analyzed. If they are not assigned, a default set of analysis results for the categories will be returned.")
+  categories?: ImageWithTextCategory[];
+
+  @doc("When set to true, our service will perform OCR and concatenate the recognized text with input text before analyzing. We will recognize at most 256 characters (unicode code points) from input image. The others will be truncated.")
+  enableOcr: boolean;
+}
+
+@added(Versions.v2024_09_15_Preview)
+@doc("ImageWithText analysis result.")
+model ImageWithTextCategoriesAnalysis {
+  @doc("The imageWithtext analysis category.")
+  category: ImageWithTextCategory;
+
+  @doc("The higher the severity of input content, the larger this value is. The values could be: 0,2,4,6.")
+  severity?: int32;
+}
+
+@added(Versions.v2024_09_15_Preview)
+@doc("The analysis response of the image with text.")
+model AnalyzeImageWithTextResult {
+  @doc("Analysis result for categories.")
+  categoriesAnalysis: ImageWithTextCategoriesAnalysis[];
+}
