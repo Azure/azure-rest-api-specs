@@ -29,7 +29,7 @@ model InstanceResource is TrackedResource<InstanceProperties> {
   @visibility("read", "create")
   extendedLocation: ExtendedLocation;
 
-  ...ManagedSystemAssignedIdentityProperty;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("The properties of a Instance resource.")
@@ -46,21 +46,6 @@ model InstanceProperties {
   version?: string;
 
   @doc("The reference to the Schema Registry for this AIO Instance.")
-  schemaRegistryRef: SchemaRegistryReference;
+  @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
+  schemaRegistryNamespace: string;
 }
-
-@doc("An object for referencing a Schema Registry.")
-model SchemaRegistryReference {
-  @doc("The resource Id for the Schema Registry in Azure.")
-  resourceId: SchemaRegistryResourceId;
-
-  @doc("The namespace in the Schema Registry to use.")
-  `namespace`: string;
-}
-
-scalar SchemaRegistryResourceId
-  extends Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.DeviceRegistry/schemaRegistries",
-    }
-  ]>;
