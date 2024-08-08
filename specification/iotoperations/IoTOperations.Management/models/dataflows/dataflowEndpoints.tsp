@@ -83,27 +83,6 @@ union EndpointType {
   Mqtt: "Mqtt",
 }
 
-@doc("Authentication Mode properties")
-union AuthenticationMethod {
-  string,
-
-  @doc("SystemAssignedManagedIdentity Option")
-  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
-
-  @doc("UserAssignedManagedIdentity Option")
-  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
-
-  @doc("AccessToken Option")
-  AccessToken: "AccessToken",
-
-  @doc("Sasl Option")
-  Sasl: "Sasl",
-
-  @doc("x509Certificate Option")
-  x509Certificate: "x509Certificate",
-}
-
-
 @doc("Azure Data Explorer endpoint properties")
 model DataflowEndpointDataExplorer {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
@@ -290,7 +269,6 @@ model DataFlowEndpointKafkaAuthentication {
 @doc("DataflowEndpoint Kafka Authentication Method properties")
 union KafkaAuthMethod  {
   string,
-
 
   @doc("SystemAssignedManagedIdentity Option")
   SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
