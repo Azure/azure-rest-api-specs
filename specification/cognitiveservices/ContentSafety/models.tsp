@@ -101,7 +101,7 @@ model TextBlocklistMatch {
   blocklistItemId: string;
 
   @doc("The content of the matched item.")
-  @maxLength(1000)
+  @maxLength(128)
   blocklistItemText: string;
 }
 
@@ -185,7 +185,7 @@ model TextBlocklistItem {
   description?: string;
 
   @doc("BlocklistItem content. The length is counted using Unicode code point.")
-  @maxLength(1000)
+  @maxLength(128)
   text: string;
 
   @added(ContentSafety.Versions.v2024_09_01)
