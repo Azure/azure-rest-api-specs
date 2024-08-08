@@ -4,12 +4,11 @@
   "parameters": {
     "api-version": "2024-09-15-preview",
     "body": {
-      "text": "This is a test image",
+      "text": "the text to be combined with image to be analyzed",
       "image": {
         "content": "YSBiYXNlNjQgZW5jb2RlZCBpbWFnZQ=="
       },
-      "categories": ["Hate", "SelfHarm", "Sexual", "Violence"],
-      "enableOcr": true
+      "enableOcr": false
     }
   },
   "responses": {
@@ -30,7 +29,7 @@
           },
           {
             "category": "Violence",
-            "severity": 2
+            "severity": 0
           }
         ]
       }
