@@ -63,7 +63,9 @@ for file in resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/
     # Replace description strings with some Lorem Ipsum text.
     jq 'walk(if type == "object" and .description? then .description = "Lorem ipsum odor amet, consectetuer adipiscing elit." else . end)' $file > temp.json && mv temp.json $file
 
-    
+    # Replace identity strings with GUIDs.
+    jq 'walk(if type == "object" and .principalId? then .principalId = "4a6e4195-75b8-4685-aa0c-0b5704779327" else . end)' $file > temp.json && mv temp.json $file
+    jq 'walk(if type == "object" and .tenantId? then .tenantId = "ed060aa2-71ff-4d3f-99c4-a9138356fdec" else . end)' $file > temp.json && mv temp.json $file
 done
 
 # Copy the examples to the management directory

@@ -347,12 +347,12 @@ union MqttRetainType {
 union CloudEventMappingType {
   string,
 
-  @doc("PassThrough")
+  @doc("PassThrough type")
   PassThrough: "PassThrough",
 
-  @doc("Always")
+  @doc("Always type")
   Always: "Always",
 
-  @doc("Never")
+  @doc("Never type")
   Never: "Never",
 }

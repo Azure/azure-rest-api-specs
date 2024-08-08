@@ -29,7 +29,7 @@ model InstanceResource is TrackedResource<InstanceProperties> {
   @visibility("read", "create")
   extendedLocation: ExtendedLocation;
 
-  ...ManagedSystemAssignedIdentityProperty;
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("The properties of a Instance resource.")
