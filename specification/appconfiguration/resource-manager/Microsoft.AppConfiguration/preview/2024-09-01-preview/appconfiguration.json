@@ -215,6 +215,9 @@
           },
           "ConfigurationStores_Create_With_Telemetry_And_Experimentation": {
             "$ref": "./examples/ConfigurationStoresCreateWithTelemetryAndExperimentation.json"
+          },
+          "ConfigurationStores_Create_With_Sas_Auth_Enabled": {
+            "$ref": "./examples/ConfigurationStoresCreateWithSasAuthEnabled.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -321,6 +324,9 @@
           },
           "ConfigurationStores_Update_Disable_Local_Auth": {
             "$ref": "./examples/ConfigurationStoresUpdateDisableLocalAuth.json"
+          },
+          "ConfigurationStores_Update_Enable_Sas_Auth": {
+            "$ref": "./examples/ConfigurationStoresUpdateEnableSasAuth.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1700,7 +1706,12 @@
         "disableLocalAuth": {
           "type": "boolean",
           "default": false,
-          "description": "Disables all authentication methods other than AAD authentication."
+          "description": "Disables access key authentication."
+        },
+        "enableSasAuth": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enables SAS token authentication."
         },
         "softDeleteRetentionInDays": {
           "type": "integer",
@@ -1878,7 +1889,11 @@
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "Disables all authentication methods other than AAD authentication."
+          "description": "Disables access key authentication."
+        },
+        "enableSasAuth": {
+          "type": "boolean",
+          "description": "Enables SAS token authentication."
         },
         "publicNetworkAccess": {
           "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
