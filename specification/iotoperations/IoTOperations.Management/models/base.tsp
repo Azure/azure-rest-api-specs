@@ -193,3 +193,44 @@ union CertManagerIssuerKind {
   @doc("ClusterIssuer kind.")
   ClusterIssuer: "ClusterIssuer",
 }
+
+alias SystemAssignedManagedIdentity = "SystemAssignedManagedIdentity";
+alias UserAssignedManagedIdentity = "UserAssignedManagedIdentity";
+alias AccessToken = "AccessToken";
+alias Sasl = "Sasl";
+alias x509Certificate = "x509Certificate";
+
+@doc("Managed Identity Method")
+union ManagedIdentityMethod {
+  string,
+
+  @doc("SystemAssignedManagedIdentity type")
+  SystemAssignedManagedIdentity: SystemAssignedManagedIdentity,
+
+  @doc("UserAssignedManagedIdentity type")
+  UserAssignedManagedIdentity: UserAssignedManagedIdentity,
+}
+
+@doc("Access Token Method")
+union AccessTokeMethod {
+  string,
+
+  @doc("AccessToken Option")
+  AccessToken: AccessToken,
+}
+
+@doc("Sasl Method")
+union SaslMethod {
+  string,
+
+  @doc("Sasl Option")
+  Sasl: Sasl,
+}
+
+@doc("x509 Certificate Method")
+union x509CertificateMethod {
+  string,
+
+  @doc("x509Certificate Option")
+  x509Certificate: x509Certificate,
+}

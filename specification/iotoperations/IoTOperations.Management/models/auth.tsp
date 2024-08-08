@@ -125,3 +125,12 @@ model BrokerAuthenticatorMethodX509Attributes {
   @doc("Subject of the X509 attribute.")
   subject: string;
 }
+
+@doc("System and Use Assigned Managed Identity properties")
+model ManagedIdentity {
+  @doc("System-assigned managed identity authentication.")
+  systemAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationSystemAssignedManagedIdentity;
+
+  @doc("User-assigned managed identity authentication.")
+  userAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationUserAssignedManagedIdentity;
+}
