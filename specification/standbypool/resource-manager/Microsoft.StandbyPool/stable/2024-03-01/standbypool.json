@@ -1,0 +1,1758 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.StandbyPool",
+    "version": "2024-03-01",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "StandbyVirtualMachinePools"
+    },
+    {
+      "name": "StandbyVirtualMachines"
+    },
+    {
+      "name": "StandbyVirtualMachinePoolRuntimeViews"
+    },
+    {
+      "name": "StandbyContainerGroupPools"
+    },
+    {
+      "name": "StandbyContainerGroupPoolRuntimeViews"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.StandbyPool/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StandbyPool/standbyContainerGroupPools": {
+      "get": {
+        "operationId": "StandbyContainerGroupPools_ListBySubscription",
+        "tags": [
+          "StandbyContainerGroupPools"
+        ],
+        "description": "List StandbyContainerGroupPoolResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyContainerGroupPoolResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyContainerGroupPools_ListBySubscription": {
+            "$ref": "./examples/StandbyContainerGroupPools_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools": {
+      "get": {
+        "operationId": "StandbyVirtualMachinePools_ListBySubscription",
+        "tags": [
+          "StandbyVirtualMachinePools"
+        ],
+        "description": "List StandbyVirtualMachinePoolResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachinePools_ListBySubscription": {
+            "$ref": "./examples/StandbyVirtualMachinePools_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools": {
+      "get": {
+        "operationId": "StandbyContainerGroupPools_ListByResourceGroup",
+        "tags": [
+          "StandbyContainerGroupPools"
+        ],
+        "description": "List StandbyContainerGroupPoolResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyContainerGroupPoolResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyContainerGroupPools_ListByResourceGroup": {
+            "$ref": "./examples/StandbyContainerGroupPools_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyContainerGroupPoolName}": {
+      "get": {
+        "operationId": "StandbyContainerGroupPools_Get",
+        "tags": [
+          "StandbyContainerGroupPools"
+        ],
+        "description": "Get a StandbyContainerGroupPoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyContainerGroupPoolName",
+            "in": "path",
+            "description": "Name of the standby container group pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyContainerGroupPoolResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyContainerGroupPools_Get": {
+            "$ref": "./examples/StandbyContainerGroupPools_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StandbyContainerGroupPools_CreateOrUpdate",
+        "tags": [
+          "StandbyContainerGroupPools"
+        ],
+        "description": "Create a StandbyContainerGroupPoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyContainerGroupPoolName",
+            "in": "path",
+            "description": "Name of the standby container group pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StandbyContainerGroupPoolResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StandbyContainerGroupPoolResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StandbyContainerGroupPoolResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'StandbyContainerGroupPoolResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StandbyContainerGroupPoolResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyContainerGroupPools_CreateOrUpdate": {
+            "$ref": "./examples/StandbyContainerGroupPools_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "StandbyContainerGroupPools_Update",
+        "tags": [
+          "StandbyContainerGroupPools"
+        ],
+        "description": "Update a StandbyContainerGroupPoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyContainerGroupPoolName",
+            "in": "path",
+            "description": "Name of the standby container group pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StandbyContainerGroupPoolResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyContainerGroupPoolResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyContainerGroupPools_Update": {
+            "$ref": "./examples/StandbyContainerGroupPools_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StandbyContainerGroupPools_Delete",
+        "tags": [
+          "StandbyContainerGroupPools"
+        ],
+        "description": "Delete a StandbyContainerGroupPoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyContainerGroupPoolName",
+            "in": "path",
+            "description": "Name of the standby container group pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyContainerGroupPools_Delete": {
+            "$ref": "./examples/StandbyContainerGroupPools_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyContainerGroupPoolName}/runtimeViews": {
+      "get": {
+        "operationId": "StandbyContainerGroupPoolRuntimeViews_ListByStandbyPool",
+        "tags": [
+          "StandbyContainerGroupPoolRuntimeViews"
+        ],
+        "description": "List StandbyContainerGroupPoolRuntimeViewResource resources by StandbyContainerGroupPoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyContainerGroupPoolName",
+            "in": "path",
+            "description": "Name of the standby container group pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyContainerGroupPoolRuntimeViewResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyContainerGroupPoolRuntimeViews_ListByStandbyPool": {
+            "$ref": "./examples/StandbyContainerGroupPoolRuntimeViews_ListByStandbyPool.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyContainerGroupPoolName}/runtimeViews/{runtimeView}": {
+      "get": {
+        "operationId": "StandbyContainerGroupPoolRuntimeViews_Get",
+        "tags": [
+          "StandbyContainerGroupPoolRuntimeViews"
+        ],
+        "description": "Get a StandbyContainerGroupPoolRuntimeViewResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyContainerGroupPoolName",
+            "in": "path",
+            "description": "Name of the standby container group pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "runtimeView",
+            "in": "path",
+            "description": "The unique identifier for the runtime view. The input string should be the word 'latest', which will get the latest runtime view of the pool, otherwise the request will fail with NotFound exception.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{0,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyContainerGroupPoolRuntimeViewResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyContainerGroupPoolRuntimeViews_Get": {
+            "$ref": "./examples/StandbyContainerGroupPoolRuntimeViews_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools": {
+      "get": {
+        "operationId": "StandbyVirtualMachinePools_ListByResourceGroup",
+        "tags": [
+          "StandbyVirtualMachinePools"
+        ],
+        "description": "List StandbyVirtualMachinePoolResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachinePools_ListByResourceGroup": {
+            "$ref": "./examples/StandbyVirtualMachinePools_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}": {
+      "get": {
+        "operationId": "StandbyVirtualMachinePools_Get",
+        "tags": [
+          "StandbyVirtualMachinePools"
+        ],
+        "description": "Get a StandbyVirtualMachinePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyVirtualMachinePoolName",
+            "in": "path",
+            "description": "Name of the standby virtual machine pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachinePools_Get": {
+            "$ref": "./examples/StandbyVirtualMachinePools_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StandbyVirtualMachinePools_CreateOrUpdate",
+        "tags": [
+          "StandbyVirtualMachinePools"
+        ],
+        "description": "Create a StandbyVirtualMachinePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyVirtualMachinePoolName",
+            "in": "path",
+            "description": "Name of the standby virtual machine pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StandbyVirtualMachinePoolResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'StandbyVirtualMachinePoolResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachinePools_CreateOrUpdate": {
+            "$ref": "./examples/StandbyVirtualMachinePools_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "StandbyVirtualMachinePools_Update",
+        "tags": [
+          "StandbyVirtualMachinePools"
+        ],
+        "description": "Update a StandbyVirtualMachinePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyVirtualMachinePoolName",
+            "in": "path",
+            "description": "Name of the standby virtual machine pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachinePools_Update": {
+            "$ref": "./examples/StandbyVirtualMachinePools_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "StandbyVirtualMachinePools_Delete",
+        "tags": [
+          "StandbyVirtualMachinePools"
+        ],
+        "description": "Delete a StandbyVirtualMachinePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyVirtualMachinePoolName",
+            "in": "path",
+            "description": "Name of the standby virtual machine pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachinePools_Delete": {
+            "$ref": "./examples/StandbyVirtualMachinePools_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/runtimeViews": {
+      "get": {
+        "operationId": "StandbyVirtualMachinePoolRuntimeViews_ListByStandbyPool",
+        "tags": [
+          "StandbyVirtualMachinePoolRuntimeViews"
+        ],
+        "description": "List StandbyVirtualMachinePoolRuntimeViewResource resources by StandbyVirtualMachinePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyVirtualMachinePoolName",
+            "in": "path",
+            "description": "Name of the standby virtual machine pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolRuntimeViewResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachinePoolRuntimeViews_ListByStandbyPool": {
+            "$ref": "./examples/StandbyVirtualMachinePoolRuntimeViews_ListByStandbyPool.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/runtimeViews/{runtimeView}": {
+      "get": {
+        "operationId": "StandbyVirtualMachinePoolRuntimeViews_Get",
+        "tags": [
+          "StandbyVirtualMachinePoolRuntimeViews"
+        ],
+        "description": "Get a StandbyVirtualMachinePoolRuntimeViewResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyVirtualMachinePoolName",
+            "in": "path",
+            "description": "Name of the standby virtual machine pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "runtimeView",
+            "in": "path",
+            "description": "The unique identifier for the runtime view. The input string should be the word 'latest', which will get the latest runtime view of the pool, otherwise the request will fail with NotFound exception.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{0,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolRuntimeViewResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachinePoolRuntimeViews_Get": {
+            "$ref": "./examples/StandbyVirtualMachinePoolRuntimeViews_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/standbyVirtualMachines": {
+      "get": {
+        "operationId": "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource",
+        "tags": [
+          "StandbyVirtualMachines"
+        ],
+        "description": "List StandbyVirtualMachineResource resources by StandbyVirtualMachinePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyVirtualMachinePoolName",
+            "in": "path",
+            "description": "Name of the standby virtual machine pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachineResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource": {
+            "$ref": "./examples/StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyVirtualMachinePools/{standbyVirtualMachinePoolName}/standbyVirtualMachines/{standbyVirtualMachineName}": {
+      "get": {
+        "operationId": "StandbyVirtualMachines_Get",
+        "tags": [
+          "StandbyVirtualMachines"
+        ],
+        "description": "Get a StandbyVirtualMachineResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyVirtualMachinePoolName",
+            "in": "path",
+            "description": "Name of the standby virtual machine pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "standbyVirtualMachineName",
+            "in": "path",
+            "description": "Name of the standby virtual machine",
+            "required": true,
+            "type": "string",
+            "pattern": "^[_a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachineResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachines_Get": {
+            "$ref": "./examples/StandbyVirtualMachines_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ContainerGroupInstanceCountSummary": {
+      "type": "object",
+      "description": "Displays the counts of container groups in each state, as known by the StandbyPool resource provider.",
+      "properties": {
+        "instanceCountsByState": {
+          "type": "array",
+          "description": "The count of pooled resources in each state.",
+          "items": {
+            "$ref": "#/definitions/PoolResourceStateCount"
+          },
+          "x-ms-identifiers": [
+            "state"
+          ]
+        }
+      },
+      "required": [
+        "instanceCountsByState"
+      ]
+    },
+    "ContainerGroupProfile": {
+      "type": "object",
+      "description": "Details of the ContainerGroupProfile.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies container group profile id of standby container groups.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerInstance/containerGroupProfiles"
+              }
+            ]
+          }
+        },
+        "revision": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies revision of container group profile."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ContainerGroupProfileUpdate": {
+      "type": "object",
+      "description": "Details of the ContainerGroupProfile.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies container group profile id of standby container groups.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerInstance/containerGroupProfiles"
+              }
+            ]
+          }
+        },
+        "revision": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies revision of container group profile."
+        }
+      }
+    },
+    "ContainerGroupProperties": {
+      "type": "object",
+      "description": "Details of the ContainerGroupProperties.",
+      "properties": {
+        "containerGroupProfile": {
+          "$ref": "#/definitions/ContainerGroupProfile",
+          "description": "Specifies container group profile of standby container groups."
+        },
+        "subnetIds": {
+          "type": "array",
+          "description": "Specifies subnet Ids for container group.",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          }
+        }
+      },
+      "required": [
+        "containerGroupProfile"
+      ]
+    },
+    "ContainerGroupPropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the ContainerGroupProperties.",
+      "properties": {
+        "containerGroupProfile": {
+          "$ref": "#/definitions/ContainerGroupProfileUpdate",
+          "description": "Specifies container group profile of standby container groups."
+        },
+        "subnetIds": {
+          "type": "array",
+          "description": "Specifies subnet Ids for container group.",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          }
+        }
+      }
+    },
+    "PoolResourceStateCount": {
+      "type": "object",
+      "description": "Displays the counts of pooled resources in each state, as known by the StandbyPool resource provider.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state that the pooled resources count is for."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of pooled resources in the given state."
+        }
+      },
+      "required": [
+        "state",
+        "count"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RefillPolicy": {
+      "type": "string",
+      "description": "Refill policy of standby pool",
+      "enum": [
+        "always"
+      ],
+      "x-ms-enum": {
+        "name": "RefillPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "always",
+            "value": "always",
+            "description": "A refill policy that standby pool is automatically refilled to maintain maxReadyCapacity."
+          }
+        ]
+      }
+    },
+    "StandbyContainerGroupPoolElasticityProfile": {
+      "type": "object",
+      "description": "Specifies the elasticity profile of the standby container group pools.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of standby container groups in the standby pool.",
+          "minimum": 0,
+          "maximum": 2000
+        },
+        "refillPolicy": {
+          "$ref": "#/definitions/RefillPolicy",
+          "description": "Specifies refill policy of the pool."
+        }
+      },
+      "required": [
+        "maxReadyCapacity"
+      ]
+    },
+    "StandbyContainerGroupPoolElasticityProfileUpdate": {
+      "type": "object",
+      "description": "Specifies the elasticity profile of the standby container group pools.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of standby container groups in the standby pool.",
+          "minimum": 0,
+          "maximum": 2000
+        },
+        "refillPolicy": {
+          "$ref": "#/definitions/RefillPolicy",
+          "description": "Specifies refill policy of the pool."
+        }
+      }
+    },
+    "StandbyContainerGroupPoolResource": {
+      "type": "object",
+      "description": "A StandbyContainerGroupPoolResource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StandbyContainerGroupPoolResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StandbyContainerGroupPoolResourceListResult": {
+      "type": "object",
+      "description": "The response of a StandbyContainerGroupPoolResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StandbyContainerGroupPoolResource items on this page",
+          "items": {
+            "$ref": "#/definitions/StandbyContainerGroupPoolResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StandbyContainerGroupPoolResourceProperties": {
+      "type": "object",
+      "description": "Details of the StandbyContainerGroupPool.",
+      "properties": {
+        "elasticityProfile": {
+          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfile",
+          "description": "Specifies elasticity profile of standby container group pools."
+        },
+        "containerGroupProperties": {
+          "$ref": "#/definitions/ContainerGroupProperties",
+          "description": "Specifies container group properties of standby container group pools."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "elasticityProfile",
+        "containerGroupProperties"
+      ]
+    },
+    "StandbyContainerGroupPoolResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the StandbyContainerGroupPoolResource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/StandbyContainerGroupPoolResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StandbyContainerGroupPoolResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the StandbyContainerGroupPoolResource.",
+      "properties": {
+        "elasticityProfile": {
+          "$ref": "#/definitions/StandbyContainerGroupPoolElasticityProfileUpdate",
+          "description": "Specifies elasticity profile of standby container group pools."
+        },
+        "containerGroupProperties": {
+          "$ref": "#/definitions/ContainerGroupPropertiesUpdate",
+          "description": "Specifies container group properties of standby container group pools."
+        }
+      }
+    },
+    "StandbyContainerGroupPoolRuntimeViewResource": {
+      "type": "object",
+      "description": "Contains information about a standby container group pool as last known by the StandbyPool resource provider.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StandbyContainerGroupPoolRuntimeViewResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StandbyContainerGroupPoolRuntimeViewResourceListResult": {
+      "type": "object",
+      "description": "The response of a StandbyContainerGroupPoolRuntimeViewResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StandbyContainerGroupPoolRuntimeViewResource items on this page",
+          "items": {
+            "$ref": "#/definitions/StandbyContainerGroupPoolRuntimeViewResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StandbyContainerGroupPoolRuntimeViewResourceProperties": {
+      "type": "object",
+      "description": "Contains information about a standby pool as last known by the StandbyPool resource provider.",
+      "properties": {
+        "instanceCountSummary": {
+          "type": "array",
+          "description": "A list containing the counts of container groups in each possible state, as known by the StandbyPool resource provider.",
+          "items": {
+            "$ref": "#/definitions/ContainerGroupInstanceCountSummary"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Displays the provisioning state of the standby pool",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "instanceCountSummary"
+      ]
+    },
+    "StandbyVirtualMachinePoolElasticityProfile": {
+      "type": "object",
+      "description": "Details of the elasticity profile.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the maximum number of virtual machines in the standby virtual machine pool.",
+          "minimum": 0,
+          "maximum": 2000
+        },
+        "minReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.",
+          "minimum": 0,
+          "maximum": 2000
+        }
+      },
+      "required": [
+        "maxReadyCapacity"
+      ]
+    },
+    "StandbyVirtualMachinePoolElasticityProfileUpdate": {
+      "type": "object",
+      "description": "Details of the elasticity profile.",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the maximum number of virtual machines in the standby virtual machine pool.",
+          "minimum": 0,
+          "maximum": 2000
+        },
+        "minReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the desired minimum number of virtual machines in the standby virtual machine pool. MinReadyCapacity cannot exceed MaxReadyCapacity.",
+          "minimum": 0,
+          "maximum": 2000
+        }
+      }
+    },
+    "StandbyVirtualMachinePoolResource": {
+      "type": "object",
+      "description": "A StandbyVirtualMachinePoolResource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StandbyVirtualMachinePoolResourceListResult": {
+      "type": "object",
+      "description": "The response of a StandbyVirtualMachinePoolResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StandbyVirtualMachinePoolResource items on this page",
+          "items": {
+            "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StandbyVirtualMachinePoolResourceProperties": {
+      "type": "object",
+      "description": "Details of the StandbyVirtualMachinePool.",
+      "properties": {
+        "elasticityProfile": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfile",
+          "description": "Specifies the elasticity profile of the standby virtual machine pools."
+        },
+        "virtualMachineState": {
+          "$ref": "#/definitions/VirtualMachineState",
+          "description": "Specifies the desired state of virtual machines in the pool.",
+          "x-ms-identifiers": [
+            "vmState"
+          ]
+        },
+        "attachedVirtualMachineScaleSetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachineScaleSet"
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "virtualMachineState"
+      ]
+    },
+    "StandbyVirtualMachinePoolResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the StandbyVirtualMachinePoolResource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StandbyVirtualMachinePoolResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the StandbyVirtualMachinePoolResource.",
+      "properties": {
+        "elasticityProfile": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolElasticityProfileUpdate",
+          "description": "Specifies the elasticity profile of the standby virtual machine pools."
+        },
+        "virtualMachineState": {
+          "$ref": "#/definitions/VirtualMachineState",
+          "description": "Specifies the desired state of virtual machines in the pool.",
+          "x-ms-identifiers": [
+            "vmState"
+          ]
+        },
+        "attachedVirtualMachineScaleSetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/virtualMachineScaleSet"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "StandbyVirtualMachinePoolRuntimeViewResource": {
+      "type": "object",
+      "description": "Contains information about a standby virtual machine pool as last known by the StandbyPool resource provider.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolRuntimeViewResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StandbyVirtualMachinePoolRuntimeViewResourceListResult": {
+      "type": "object",
+      "description": "The response of a StandbyVirtualMachinePoolRuntimeViewResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StandbyVirtualMachinePoolRuntimeViewResource items on this page",
+          "items": {
+            "$ref": "#/definitions/StandbyVirtualMachinePoolRuntimeViewResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StandbyVirtualMachinePoolRuntimeViewResourceProperties": {
+      "type": "object",
+      "description": "Contains information about a standby pool as last known by the StandbyPool resource provider.",
+      "properties": {
+        "instanceCountSummary": {
+          "type": "array",
+          "description": "A list containing the counts of virtual machines in each possible power state for each zone if enabled, as known by the StandbyPool resource provider.\nIf zones are not enabled on the attached VMSS, the list will contain a single entry with null zone values.\nNote: any updates to pool resources outside of StandbyPoolRP (i.e deleting a VM through portal) are not reflected here.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineInstanceCountSummary"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Displays the provisioning state of the standby pool",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "instanceCountSummary"
+      ]
+    },
+    "StandbyVirtualMachineResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StandbyVirtualMachineResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "StandbyVirtualMachineResourceListResult": {
+      "type": "object",
+      "description": "The response of a StandbyVirtualMachineResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StandbyVirtualMachineResource items on this page",
+          "items": {
+            "$ref": "#/definitions/StandbyVirtualMachineResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StandbyVirtualMachineResourceProperties": {
+      "type": "object",
+      "description": "Details of the StandbyVirtualMachine.",
+      "properties": {
+        "virtualMachineResourceId": {
+          "type": "string",
+          "description": "Resource id of the virtual machine."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "virtualMachineResourceId"
+      ]
+    },
+    "Subnet": {
+      "type": "object",
+      "description": "Subnet of container group",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Specifies ARM resource id of the subnet.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "VirtualMachineInstanceCountSummary": {
+      "type": "object",
+      "description": "Contains the counts of VMs in each power state in a given zone, fault domain, as known by the StandbyPool resource provider.\nNote: any updates to pool resources outside of StandbyPoolRP (i.e deleting a VM through portal) are not reflected here.\nNote: any resources in the Running state may still be installing extensions / not fully provisioned.",
+      "properties": {
+        "zone": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The zone that the provided counts are in. This is null if zones are not enabled on the attached VMSS."
+        },
+        "instanceCountsByState": {
+          "type": "array",
+          "description": "The count of pooled resources in each state for the given zone.",
+          "items": {
+            "$ref": "#/definitions/PoolResourceStateCount"
+          },
+          "x-ms-identifiers": [
+            "state"
+          ]
+        }
+      },
+      "required": [
+        "instanceCountsByState"
+      ]
+    },
+    "VirtualMachineState": {
+      "type": "string",
+      "description": "State of standby virtual machines",
+      "enum": [
+        "Running",
+        "Deallocated"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The virtual machine is up and running."
+          },
+          {
+            "name": "Deallocated",
+            "value": "Deallocated",
+            "description": "The virtual machine has released the lease on the underlying hardware and is powered off."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
