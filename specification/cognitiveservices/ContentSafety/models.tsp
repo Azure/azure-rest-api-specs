@@ -944,8 +944,6 @@ model AnalyzeTextCustomCategoryResult {
   customCategoryAnalysis: TextCustomCategoryAnalysis;
 }
 
-
-
 @added(ContentSafety.Versions.v2024_09_15_Preview)
 @doc("The harm category supported in Image-with-Text content analysis.")
 union ImageWithTextCategory {
