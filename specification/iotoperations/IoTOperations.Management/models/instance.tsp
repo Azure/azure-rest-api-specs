@@ -48,4 +48,8 @@ model InstanceProperties {
   @doc("The reference to the Schema Registry for this AIO Instance.")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   schemaRegistryNamespace: string;
+
+  @doc("The service accounts to be used for federated credentials.")
+  @visibility("read")
+  serviceAccounts?: string[];
 }
