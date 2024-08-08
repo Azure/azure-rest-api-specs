@@ -51,9 +51,11 @@ model InstanceProperties {
 
   @doc("The service accounts to be used for federated credentials.")
   @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers",[])
   serviceAccounts?: ServiceAccountProperties[];
 }
 
+@doc("The properties of a Service Account.")
 model ServiceAccountProperties {
   @doc("The name of the service account.")
   name: string;
