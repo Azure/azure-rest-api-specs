@@ -34,12 +34,6 @@ model DataflowEndpointResource is ProxyResource<DataflowEndpointProperties> {
 
 @doc("DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource")
 model DataflowEndpointProperties {
-  @doc("Endpoint Type.")
-  endpointType: EndpointType;
-
-  @doc("Authentication configuration.")
-  authentication: DataflowEndpointAuthentication;
-
   @doc("Azure Data Explorer endpoint.")
   dataExplorerSettings?: DataflowEndpointDataExplorer;
 
@@ -88,6 +82,9 @@ union EndpointType {
 
 @doc("Azure Data Explorer endpoint properties")
 model DataflowEndpointDataExplorer {
+  @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
+  authentication: DataflowEndpointDataExplorerAuthentication;
+
   @doc("Database name.")
   database: string;
 
@@ -100,27 +97,8 @@ model DataflowEndpointDataExplorer {
 }
 
 @doc("Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.")
-model DataflowEndpointAuthentication {
-  @doc("Mode of Authentication.")
-  method: AuthenticationMethod;
-
-  @doc("System-assigned managed identity authentication.")
-  systemAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationSystemAssignedManagedIdentity;
-
-  @doc("User-assigned managed identity authentication.")
-  userAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationUserAssignedManagedIdentity;
-
-  @doc("SAS token authentication.")
-  accessTokenSettings?: DataflowEndpointAuthenticationAccessToken;
-
-  @doc("SASL authentication.")
-  saslSettings?: DataflowEndpointAuthenticationSasl;
-
-  @doc("Service Account Token authentication.")
-  serviceAccountTokenSettings?: DataflowEndpointAuthenticationServiceAccountToken;
-
-  @doc("X.509 certificate authentication.")
-  x509Settings?: DataflowEndpointAuthenticationX509;
+model DataflowEndpointDataExplorerAuthentication {
+  ...ManagedIdentity;
 }
 
 @doc("Authentication Mode properties")
@@ -145,6 +123,9 @@ union AuthenticationMethod {
 
 @doc("Azure Data Lake endpoint properties")
 model DataflowEndpointDataLakeStorage {
+  @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
+  authentication: DataflowEndpointDataLakeStorageAuthentication;
+
   @doc("Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .")
   @pattern(".+\\.blob\\.core\\.windows\\.net")
   host: string;
@@ -153,8 +134,20 @@ model DataflowEndpointDataLakeStorage {
   batching?: BatchingConfiguration;
 }
 
+@doc("Azure Data Lake endpoint Authentication properties.  NOTE Enum - Only one method is supported for one entry")
+model DataflowEndpointDataLakeStorageAuthentication {
+  // What is accessTokenSecretName now?
+  @doc("SAS token authentication.")
+  accessTokenSettings?: DataflowEndpointAuthenticationAccessToken;
+
+  ...ManagedIdentity;
+}
+
 @doc("Microsoft Fabric endpoint properties")
 model DataflowEndpointFabricOneLake {
+  @doc("Authentication configuration. NOTE - only one authentication property is allowed per entry.")
+  authentication: DataFlowEndpointFabricOneLakeAuthentication;
+
   @doc("Names of the workspace and lakehouse.")
   names: DataflowEndpointFabricOneLakeNames;
 
@@ -167,6 +160,15 @@ model DataflowEndpointFabricOneLake {
 
   @doc("Batching configuration.")
   batching?: BatchingConfiguration;
+}
+
+@doc("Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry")
+model DataFlowEndpointFabricOneLakeAuthentication {
+  // What is accessTokenSecretName now?
+  @doc("SAS token authentication.")
+  accessTokenSettings?: DataflowEndpointAuthenticationAccessToken;
+
+  ...ManagedIdentity;
 }
 
 @doc("Microsoft Fabric endpoint Names properties")
@@ -191,6 +193,9 @@ union DataflowEndpointFabricPathType {
 
 @doc("Kafka endpoint properties")
 model DataflowEndpointKafka {
+  @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
+  authentication?: DataFlowEndpointKafkaAuthentication;
+
   @doc("Consumer group ID.")
   consumerGroupId?: string;
 
@@ -217,6 +222,17 @@ model DataflowEndpointKafka {
 
   @doc("Cloud event mapping config.")
   cloudEventMapping?: CloudEventMappingType;
+}
+
+@doc("Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry")
+model DataFlowEndpointKafkaAuthentication {
+  ...ManagedIdentity;
+
+  @doc("SASL authentication.")
+  saslSettings?: DataflowEndpointAuthenticationSasl;
+
+  @doc("X.509 certificate authentication.")
+  x509Settings?: DataflowEndpointAuthenticationX509;
 }
 
 @doc("Kafka endpoint Batching properties")
@@ -296,6 +312,9 @@ model DataflowEndpointLocalStorage {
 
 @doc("Broker endpoint properties")
 model DataflowEndpointMqtt {
+  @doc("authentication properties. DEFAULT: kubernetes.audience=aio-mq-internal. NOTE - Enum field only property is allowed")
+  authentication?: DataflowEndpointMqttAuthentication;
+
   @doc("Client ID prefix. Client ID generated by the dataflow is <prefix>-TBD. Optional; no prefix if omitted.")
   clientIdPrefix?: string;
 
@@ -330,6 +349,17 @@ model DataflowEndpointMqtt {
 
   @doc("Cloud event mapping config.")
   cloudEventMapping?: CloudEventMappingType;
+}
+
+@doc("Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry. Default Kubernetes authentication with audience set to aio-mq-internal")
+model DataflowEndpointMqttAuthentication {
+  ...ManagedIdentity;
+
+  @doc("Kubernetes service account token authentication. Default audience if not set is aio-mq-internal")
+  saslSettings?: DataflowEndpointAuthenticationSasl;
+
+  @doc("X.509 certificate authentication.")
+  x509Settings?: DataflowEndpointAuthenticationX509;
 }
 
 @doc("Broker Retain types")
