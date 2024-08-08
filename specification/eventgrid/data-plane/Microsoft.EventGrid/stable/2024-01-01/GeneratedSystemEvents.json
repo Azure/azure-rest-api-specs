@@ -8288,6 +8288,10 @@
           "type": "string",
           "description": "The type of blob."
         },
+        "accessTier": {
+          "$ref": "#/definitions/StorageBlobAccessTier",
+          "description": "The current tier of the blob."
+        },
         "url": {
           "type": "string",
           "description": "The path to the blob."
@@ -8307,6 +8311,7 @@
         }
       },
       "required": [
+        "accessTier",
         "storageDiagnostics"
       ]
     },
