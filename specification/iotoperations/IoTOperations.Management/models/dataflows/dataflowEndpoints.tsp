@@ -128,13 +128,15 @@ model DataflowEndpointDataExplorerAuthentication {
   ...ManagedIdentity;
 }
 
-#suppress "@azure-tools/typespec-autorest/union-unsupported"
 @doc("DataflowEndpoint Data Explorer Authentication Method properties")
 union DataExplorerAuthMethod  {
   string,
 
-  AuthenticationMethod.SystemAssignedManagedIdentity,
-  AuthenticationMethod.UserAssignedManagedIdentity,
+  @doc("SystemAssignedManagedIdentity Option")
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+
+  @doc("UserAssignedManagedIdentity Option")
+  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
 };
 
 @doc("Azure Data Lake endpoint properties")
@@ -167,9 +169,15 @@ model DataflowEndpointDataLakeStorageAuthentication {
 union DataLakeStorageAuthMethod  {
   string,
 
-  AuthenticationMethod.SystemAssignedManagedIdentity,
-  AuthenticationMethod.UserAssignedManagedIdentity,
-  AuthenticationMethod.AccessToken
+
+  @doc("SystemAssignedManagedIdentity Option")
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+
+  @doc("UserAssignedManagedIdentity Option")
+  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
+
+  @doc("AccessToken Option")
+  AccessToken: "AccessToken",
 };
 
 @doc("Microsoft Fabric endpoint properties")
@@ -204,8 +212,11 @@ model DataFlowEndpointFabricOneLakeAuthentication {
 union FabricOneLakeAuthMethod  {
   string,
 
-  AuthenticationMethod.SystemAssignedManagedIdentity,
-  AuthenticationMethod.UserAssignedManagedIdentity,
+  @doc("SystemAssignedManagedIdentity Option")
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+
+  @doc("UserAssignedManagedIdentity Option")
+  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
 };
 
 @doc("Microsoft Fabric endpoint Names properties")
@@ -280,10 +291,18 @@ model DataFlowEndpointKafkaAuthentication {
 union KafkaAuthMethod  {
   string,
 
-  AuthenticationMethod.SystemAssignedManagedIdentity,
-  AuthenticationMethod.UserAssignedManagedIdentity,
-  AuthenticationMethod.Sasl,
-  AuthenticationMethod.x509Certificate,
+
+  @doc("SystemAssignedManagedIdentity Option")
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+
+  @doc("UserAssignedManagedIdentity Option")
+  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
+
+  @doc("Sasl Option")
+  Sasl: "Sasl",
+
+  @doc("x509Certificate Option")
+  x509Certificate: "x509Certificate",
 };
 
 @doc("Kafka endpoint Batching properties")
@@ -421,10 +440,18 @@ model DataflowEndpointMqttAuthentication {
 union MqttAuthMethod  {
   string,
 
-  AuthenticationMethod.SystemAssignedManagedIdentity,
-  AuthenticationMethod.UserAssignedManagedIdentity,
-  AuthenticationMethod.Sasl,
-  AuthenticationMethod.x509Certificate,
+  @doc("SystemAssignedManagedIdentity Option")
+  SystemAssignedManagedIdentity: "SystemAssignedManagedIdentity",
+
+  @doc("UserAssignedManagedIdentity Option")
+  UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
+
+
+  @doc("Sasl Option")
+  Sasl: "Sasl",
+
+  @doc("x509Certificate Option")
+  x509Certificate: "x509Certificate",
 };
 
 @doc("Broker Retain types")
