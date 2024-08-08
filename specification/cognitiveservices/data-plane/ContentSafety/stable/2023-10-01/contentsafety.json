@@ -601,7 +601,7 @@
       "properties": {
         "image": {
           "$ref": "#/definitions/ImageData",
-          "description": "The image needs to be analyzed."
+          "description": "The image to be analyzed."
         },
         "categories": {
           "type": "array",
@@ -657,7 +657,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The text needs to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.",
+          "description": "The text to be analyzed. We support a maximum of 10k Unicode characters (Unicode code points) in the text of one request.",
           "maxLength": 10000
         },
         "categories": {
@@ -814,7 +814,7 @@
     },
     "ImageCategory": {
       "type": "string",
-      "description": "Image analyze category.",
+      "description": "The harm category supported in Image content analysis.",
       "enum": [
         "Hate",
         "SelfHarm",
@@ -823,7 +823,29 @@
       ],
       "x-ms-enum": {
         "name": "ImageCategory",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm category for Image - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm category for Image - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm category for Image - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm category for Image - Violence."
+          }
+        ]
       }
     },
     "ImageData": {
@@ -964,7 +986,7 @@
         },
         "text": {
           "type": "string",
-          "description": "BlocklistItem content.",
+          "description": "BlocklistItem content. The length is counted using Unicode code point.",
           "maxLength": 128
         }
       },
@@ -1019,7 +1041,7 @@
     },
     "TextCategory": {
       "type": "string",
-      "description": "Text analyze category.",
+      "description": "The harm category supported in Text content analysis.",
       "enum": [
         "Hate",
         "SelfHarm",
@@ -1028,7 +1050,29 @@
       ],
       "x-ms-enum": {
         "name": "TextCategory",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hate",
+            "value": "Hate",
+            "description": "The harm category for Text - Hate."
+          },
+          {
+            "name": "SelfHarm",
+            "value": "SelfHarm",
+            "description": "The harm category for Text - SelfHarm."
+          },
+          {
+            "name": "Sexual",
+            "value": "Sexual",
+            "description": "The harm category for Text - Sexual."
+          },
+          {
+            "name": "Violence",
+            "value": "Violence",
+            "description": "The harm category for Text - Violence."
+          }
+        ]
       }
     }
   },

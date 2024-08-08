@@ -120,7 +120,6 @@ model FileSystemResourceUpdateProperties {
   delegatedSubnetId?: string;
 }
 
-@Azure.ResourceManager.Private.armResourceInternal(FileSystemResourceProperties)
 model FileSystemResource
   is Azure.ResourceManager.TrackedResource<FileSystemResourceProperties> {
   /**
