@@ -3562,6 +3562,46 @@
         ]
       }
     },
+    "DataFlowEndpointFabricOneLakeAuthentication": {
+      "type": "object",
+      "description": "Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry",
+      "properties": {
+        "accessTokenSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationAccessToken",
+          "description": "SAS token authentication."
+        },
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        }
+      }
+    },
+    "DataFlowEndpointKafkaAuthentication": {
+      "type": "object",
+      "description": "Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry",
+      "properties": {
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        },
+        "saslSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSasl",
+          "description": "SASL authentication."
+        },
+        "x509Settings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
+          "description": "X.509 certificate authentication."
+        }
+      }
+    },
     "DataflowBuiltInTransformationDataset": {
       "type": "object",
       "description": "Dataflow BuiltIn Transformation dataset properties",
@@ -3763,43 +3803,6 @@
         "dataDestination"
       ]
     },
-    "DataflowEndpointAuthentication": {
-      "type": "object",
-      "description": "Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/AuthenticationMethod",
-          "description": "Mode of Authentication."
-        },
-        "systemAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
-          "description": "System-assigned managed identity authentication."
-        },
-        "userAssignedManagedIdentitySettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
-          "description": "User-assigned managed identity authentication."
-        },
-        "accessTokenSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationAccessToken",
-          "description": "SAS token authentication."
-        },
-        "saslSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationSasl",
-          "description": "SASL authentication."
-        },
-        "serviceAccountTokenSettings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationServiceAccountToken",
-          "description": "Service Account Token authentication."
-        },
-        "x509Settings": {
-          "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
-          "description": "X.509 certificate authentication."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
     "DataflowEndpointAuthenticationAccessToken": {
       "type": "object",
       "description": "DataflowEndpoint Authentication Access Token properties",
@@ -3927,6 +3930,10 @@
       "type": "object",
       "description": "Azure Data Explorer endpoint properties",
       "properties": {
+        "authentication": {
+          "$ref": "#/definitions/DataflowEndpointDataExplorerAuthentication",
+          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
+        },
         "database": {
           "type": "string",
           "description": "Database name."
@@ -3942,14 +3949,33 @@
         }
       },
       "required": [
+        "authentication",
         "database",
         "host"
       ]
+    },
+    "DataflowEndpointDataExplorerAuthentication": {
+      "type": "object",
+      "description": "Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.",
+      "properties": {
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        }
+      }
     },
     "DataflowEndpointDataLakeStorage": {
       "type": "object",
       "description": "Azure Data Lake endpoint properties",
       "properties": {
+        "authentication": {
+          "$ref": "#/definitions/DataflowEndpointDataLakeStorageAuthentication",
+          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
+        },
         "host": {
           "type": "string",
           "description": "Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .",
@@ -3961,13 +3987,36 @@
         }
       },
       "required": [
+        "authentication",
         "host"
       ]
+    },
+    "DataflowEndpointDataLakeStorageAuthentication": {
+      "type": "object",
+      "description": "Azure Data Lake endpoint Authentication properties.  NOTE Enum - Only one method is supported for one entry",
+      "properties": {
+        "accessTokenSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationAccessToken",
+          "description": "SAS token authentication."
+        },
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        }
+      }
     },
     "DataflowEndpointFabricOneLake": {
       "type": "object",
       "description": "Microsoft Fabric endpoint properties",
       "properties": {
+        "authentication": {
+          "$ref": "#/definitions/DataFlowEndpointFabricOneLakeAuthentication",
+          "description": "Authentication configuration. NOTE - only one authentication property is allowed per entry."
+        },
         "names": {
           "$ref": "#/definitions/DataflowEndpointFabricOneLakeNames",
           "description": "Names of the workspace and lakehouse."
@@ -3987,6 +4036,7 @@
         }
       },
       "required": [
+        "authentication",
         "names",
         "oneLakePathType",
         "host"
@@ -4038,6 +4088,10 @@
       "type": "object",
       "description": "Kafka endpoint properties",
       "properties": {
+        "authentication": {
+          "$ref": "#/definitions/DataFlowEndpointKafkaAuthentication",
+          "description": "Authentication configuration. NOTE - only authentication property is allowed per entry."
+        },
         "consumerGroupId": {
           "type": "string",
           "description": "Consumer group ID."
@@ -4367,6 +4421,10 @@
       "type": "object",
       "description": "Broker endpoint properties",
       "properties": {
+        "authentication": {
+          "$ref": "#/definitions/DataflowEndpointMqttAuthentication",
+          "description": "authentication properties. DEFAULT: kubernetes.audience=aio-mq-internal. NOTE - Enum field only property is allowed"
+        },
         "clientIdPrefix": {
           "type": "string",
           "description": "Client ID prefix. Client ID generated by the dataflow is <prefix>-TBD. Optional; no prefix if omitted."
@@ -4465,18 +4523,32 @@
         }
       }
     },
+    "DataflowEndpointMqttAuthentication": {
+      "type": "object",
+      "description": "Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry. Default Kubernetes authentication with audience set to aio-mq-internal",
+      "properties": {
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        },
+        "saslSettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSasl",
+          "description": "Kubernetes service account token authentication. Default audience if not set is aio-mq-internal"
+        },
+        "x509Settings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationX509",
+          "description": "X.509 certificate authentication."
+        }
+      }
+    },
     "DataflowEndpointProperties": {
       "type": "object",
       "description": "DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource",
       "properties": {
-        "endpointType": {
-          "$ref": "#/definitions/EndpointType",
-          "description": "Endpoint Type."
-        },
-        "authentication": {
-          "$ref": "#/definitions/DataflowEndpointAuthentication",
-          "description": "Authentication configuration."
-        },
         "dataExplorerSettings": {
           "$ref": "#/definitions/DataflowEndpointDataExplorer",
           "description": "Azure Data Explorer endpoint."
@@ -4506,11 +4578,7 @@
           "description": "The status of the last operation.",
           "readOnly": true
         }
-      },
-      "required": [
-        "endpointType",
-        "authentication"
-      ]
+      }
     },
     "DataflowEndpointResource": {
       "type": "object",
@@ -5254,6 +5322,20 @@
         "kind",
         "name"
       ]
+    },
+    "ManagedIdentity": {
+      "type": "object",
+      "description": "System and Use Assigned Managed Identity properties",
+      "properties": {
+        "systemAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationSystemAssignedManagedIdentity",
+          "description": "System-assigned managed identity authentication."
+        },
+        "userAssignedManagedIdentitySettings": {
+          "$ref": "#/definitions/DataflowEndpointAuthenticationUserAssignedManagedIdentity",
+          "description": "User-assigned managed identity authentication."
+        }
+      }
     },
     "MetricProperties": {
       "type": "object",
