@@ -45,6 +45,7 @@ namespace ClientCustomizations;
 @@access(MaskType, Access.public);
 @@access(QualityForRecognition, Access.public);
 @@access(CreateLivenessWithVerifySessionResult, Access.public);
+@@access(CreateLivenessWithVerifySessionJsonContent, Access.public);
 
 @client({
   name: "FaceClient",

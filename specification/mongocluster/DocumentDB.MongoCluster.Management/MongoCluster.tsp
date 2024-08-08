@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Private;
 using Azure.ClientGenerator.Core;
@@ -55,7 +56,22 @@ interface MongoClusters {
   /** Check if mongo cluster name is available for use. */
   @action("checkMongoClusterNameAvailability")
   checkNameAvailability is checkLocalNameAvailability;
+  /** Promotes a replica mongo cluster to a primary role. */
+  @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  promote is ArmResourceActionNoResponseContentAsync<
+    MongoCluster,
+    PromoteReplicaRequest
+  >;
 }
+
+/** Identifier for a mongo cluster resource. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+scalar MongoClusterResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DocumentDB/mongoClusters",
+    }
+  ]>;
 
 /** The properties of a mongo cluster. */
 model MongoClusterProperties {
@@ -66,6 +82,11 @@ model MongoClusterProperties {
   /** The parameters to create a point-in-time restore mongo cluster. */
   @visibility("create")
   restoreParameters?: MongoClusterRestoreParameters;
+
+  /** The parameters to create a replica mongo cluster. */
+  @visibility("create")
+  @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  replicaParameters?: MongoClusterReplicaParameters;
 
   /** The administrator's login for the mongo cluster. */
   @visibility("read", "create", "update")
@@ -105,6 +126,20 @@ model MongoClusterProperties {
   /** List of private endpoint connections. */
   @visibility("read")
   privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /** List of private endpoint connections. */
+  @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  previewFeatures?: PreviewFeature[];
+
+  /** The replication properties for the mongo cluster */
+  @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  @visibility("read")
+  replica?: ReplicationProperties;
+
+  /** The infrastructure version the cluster is provisioned on. */
+  @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  @visibility("read")
+  infrastructureVersion?: string;
 }
 
 /** The mode that the Mongo Cluster is created with. */
@@ -116,6 +151,14 @@ union CreateMode {
 
   /** Create a mongo cluster from a restore point-in-time. */
   "PointInTimeRestore",
+
+  /** Create a replica cluster in distinct geographic region from the source cluster. */
+  @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  "GeoReplica",
+
+  /** Create a replica cluster in the same geographic region as the source cluster. */
+  @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+  "Replica",
 }
 
 /** The kind of the node on the cluster. */
@@ -133,7 +176,8 @@ model MongoClusterRestoreParameters {
   pointInTimeUTC?: utcDateTime;
 
   /** Resource ID to locate the source cluster to restore */
-  sourceResourceId?: string;
+  @typeChangedFrom(Microsoft.DocumentDB.Versions.v2024_06_01_preview, string)
+  sourceResourceId?: MongoClusterResourceId;
 }
 
 /** Specification for a node group. */
@@ -180,6 +224,7 @@ model ConnectionString {
 }
 
 /** The status of the Mongo cluster resource. */
+@clientName("MongoClusterStatus", "go")
 union MongoClusterStatus {
   string,
 
@@ -214,4 +259,106 @@ union PublicNetworkAccess {
 
   /** If set, the private endpoints are the exclusive access method. */
   "Disabled",
+}
+
+/** Preview features that can be enabled on a mongo cluster. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+union PreviewFeature {
+  string,
+
+  /** Enables geo replicas preview feature. The feature must be set at create-time on new cluster to enable linking a geo-replica cluster to it. */
+  "GeoReplicas",
+}
+
+/** Parameters used for replica operations. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+model MongoClusterReplicaParameters {
+  /** The id of the replication source cluster. */
+  sourceResourceId: MongoClusterResourceId;
+
+  /** The location of the source cluster */
+  sourceLocation: Azure.Core.azureLocation;
+}
+
+/** Promote replica request properties. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+model PromoteReplicaRequest {
+  /** The promote option to apply to the operation. */
+  promoteOption: PromoteOption;
+
+  /** The mode to apply to the promote operation. Value is optional and default value is 'Switchover'. */
+  mode?: PromoteMode;
+}
+
+/** The option to apply to a promote operation. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+union PromoteOption {
+  string,
+
+  /** Promote option forces the promotion without waiting for the replica to be caught up to the primary. This can result in data-loss so should only be used during disaster recovery scenarios. */
+  "Forced",
+}
+
+/** The mode to apply to a promote operation. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+union PromoteMode {
+  string,
+
+  /** Promotion will switch the current replica cluster to the primary role and the original primary will be switched to a replica role, maintaining the replication link. */
+  "Switchover",
+}
+
+/** Replica properties of the mongo cluster. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+model ReplicationProperties {
+  /** The resource id the source cluster for the replica cluster. */
+  @visibility("read")
+  sourceResourceId?: MongoClusterResourceId;
+
+  /** The replication role of the cluster */
+  @visibility("read")
+  role?: ReplicationRole;
+
+  /** The replication link state of the replica cluster. */
+  @visibility("read")
+  replicationState?: ReplicationState;
+}
+
+/** Replication role of the mongo cluster. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+union ReplicationRole {
+  string,
+
+  /** The cluster is a primary replica. */
+  "Primary",
+
+  /** The cluster is a local asynchronous replica. */
+  "AsyncReplica",
+
+  /** The cluster is a geo-asynchronous replica. */
+  "GeoAsyncReplica",
+}
+
+/** The state of the replication link between the replica and source cluster. */
+@added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
+union ReplicationState {
+  string,
+
+  /** Replication link is active. */
+  "Active",
+
+  /** Replica is catching-up with the primary. This can occur after the replica is created or after a promotion is triggered. */
+  "Catchup",
+
+  /** Replica and replication link to the primary is being created. */
+  "Provisioning",
+
+  /** Replication link is being updated due to a change on the replica or an upgrade. */
+  "Updating",
+
+  /** Replication link is broken and the replica may need to be recreated. */
+  "Broken",
+
+  /** Replication link is re-configuring due to a promotion event. */
+  "Reconfiguring",
 }
