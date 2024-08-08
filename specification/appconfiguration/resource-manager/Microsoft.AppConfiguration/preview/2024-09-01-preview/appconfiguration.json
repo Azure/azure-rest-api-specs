@@ -1708,10 +1708,27 @@
           "default": false,
           "description": "Disables access key authentication."
         },
-        "enableSasAuth": {
-          "type": "boolean",
-          "default": false,
-          "description": "Enables SAS token authentication."
+        "sasAuth": {
+          "description": "This property manages if SAS token authentication is enabled or disabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SasAuth",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "SAS token authentication is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "SAS token authentication is disabled."
+              }
+            ]
+          }
         },
         "softDeleteRetentionInDays": {
           "type": "integer",
@@ -1891,9 +1908,27 @@
           "type": "boolean",
           "description": "Disables access key authentication."
         },
-        "enableSasAuth": {
-          "type": "boolean",
-          "description": "Enables SAS token authentication."
+        "sasAuth": {
+          "description": "This property manages if SAS token authentication is enabled or disabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SasAuth",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Enabled",
+                "description": "SAS token authentication is enabled."
+              },
+              {
+                "value": "Disabled",
+                "description": "SAS token authentication is disabled."
+              }
+            ]
+          }
         },
         "publicNetworkAccess": {
           "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
