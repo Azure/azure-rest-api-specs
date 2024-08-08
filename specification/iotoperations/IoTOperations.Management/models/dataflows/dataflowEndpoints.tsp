@@ -83,30 +83,6 @@ union EndpointType {
   Mqtt: "Mqtt",
 }
 
-@doc("Azure Data Explorer endpoint properties")
-model DataflowEndpointDataExplorer {
-  @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
-  authentication: DataflowEndpointDataExplorerAuthentication;
-
-  @doc("Database name.")
-  database: string;
-
-  @doc("Host of the Azure Data Explorer in the form of <cluster>.<region>.kusto.windows.net .")
-  @pattern(".+\\..+\\.kusto\\.windows\\.net")
-  host: string;
-
-  @doc("Azure Data Explorer endpoint batching configuration.")
-  batching?: BatchingConfiguration;
-}
-
-@doc("Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.")
-model DataflowEndpointDataExplorerAuthentication {
-  @doc("Mode of Authentication.")
-  method: AuthenticationMethod;
-
-  ...ManagedIdentity;
-}
-
 @doc("Authentication Mode properties")
 union AuthenticationMethod {
   string,
@@ -127,6 +103,40 @@ union AuthenticationMethod {
   x509Certificate: "x509Certificate",
 }
 
+
+@doc("Azure Data Explorer endpoint properties")
+model DataflowEndpointDataExplorer {
+  @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
+  authentication: DataflowEndpointDataExplorerAuthentication;
+
+  @doc("Database name.")
+  database: string;
+
+  @doc("Host of the Azure Data Explorer in the form of <cluster>.<region>.kusto.windows.net .")
+  @pattern(".+\\..+\\.kusto\\.windows\\.net")
+  host: string;
+
+  @doc("Azure Data Explorer endpoint batching configuration.")
+  batching?: BatchingConfiguration;
+}
+
+@doc("Azure Data Explorer Authentication properties. NOTE - only authentication property is allowed per entry.")
+model DataflowEndpointDataExplorerAuthentication {
+  @doc("Mode of Authentication.")
+  method: DataExplorerAuthMethod;
+
+  ...ManagedIdentity;
+}
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported"
+@doc("DataflowEndpoint Data Explorer Authentication Method properties")
+union DataExplorerAuthMethod  {
+  string,
+
+  AuthenticationMethod.SystemAssignedManagedIdentity,
+  AuthenticationMethod.UserAssignedManagedIdentity,
+};
+
 @doc("Azure Data Lake endpoint properties")
 model DataflowEndpointDataLakeStorage {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
@@ -143,7 +153,7 @@ model DataflowEndpointDataLakeStorage {
 @doc("Azure Data Lake endpoint Authentication properties.  NOTE Enum - Only one method is supported for one entry")
 model DataflowEndpointDataLakeStorageAuthentication {
   @doc("Mode of Authentication.")
-  method: AuthenticationMethod;
+  method: DataLakeStorageAuthMethod;
 
   // What is accessTokenSecretName now?
   @doc("SAS token authentication.")
@@ -151,6 +161,16 @@ model DataflowEndpointDataLakeStorageAuthentication {
 
   ...ManagedIdentity;
 }
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported"
+@doc("DataflowEndpoint Data Lake Storage Authentication Method properties")
+union DataLakeStorageAuthMethod  {
+  string,
+
+  AuthenticationMethod.SystemAssignedManagedIdentity,
+  AuthenticationMethod.UserAssignedManagedIdentity,
+  AuthenticationMethod.AccessToken
+};
 
 @doc("Microsoft Fabric endpoint properties")
 model DataflowEndpointFabricOneLake {
@@ -174,10 +194,19 @@ model DataflowEndpointFabricOneLake {
 @doc("Microsoft Fabric endpoint. Authentication properties. NOTE - Only one method is supported for one entry")
 model DataFlowEndpointFabricOneLakeAuthentication {
   @doc("Mode of Authentication.")
-  method: AuthenticationMethod;
+  method: FabricOneLakeAuthMethod;
 
   ...ManagedIdentity;
 }
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported"
+@doc("DataflowEndpoint Fabric One Lake Authentication Method properties")
+union FabricOneLakeAuthMethod  {
+  string,
+
+  AuthenticationMethod.SystemAssignedManagedIdentity,
+  AuthenticationMethod.UserAssignedManagedIdentity,
+};
 
 @doc("Microsoft Fabric endpoint Names properties")
 model DataflowEndpointFabricOneLakeNames {
@@ -235,7 +264,7 @@ model DataflowEndpointKafka {
 @doc("Kafka endpoint Authentication properties. NOTE - only authentication property is allowed per entry")
 model DataFlowEndpointKafkaAuthentication {
   @doc("Mode of Authentication.")
-  method: AuthenticationMethod;
+  method: KafkaAuthMethod;
 
   ...ManagedIdentity;
 
@@ -245,6 +274,17 @@ model DataFlowEndpointKafkaAuthentication {
   @doc("X.509 certificate authentication.")
   x509Settings?: DataflowEndpointAuthenticationX509;
 }
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported"
+@doc("DataflowEndpoint Kafka Authentication Method properties")
+union KafkaAuthMethod  {
+  string,
+
+  AuthenticationMethod.SystemAssignedManagedIdentity,
+  AuthenticationMethod.UserAssignedManagedIdentity,
+  AuthenticationMethod.Sasl,
+  AuthenticationMethod.x509Certificate,
+};
 
 @doc("Kafka endpoint Batching properties")
 model DataflowEndpointKafkaBatching {
@@ -365,7 +405,7 @@ model DataflowEndpointMqtt {
 @doc("Mqtt endpoint Authentication properties. NOTE - only authentication property is allowed per entry.")
 model DataflowEndpointMqttAuthentication {
   @doc("Mode of Authentication.")
-  method: AuthenticationMethod;
+  method: MqttAuthMethod;
 
   ...ManagedIdentity;
 
@@ -375,6 +415,17 @@ model DataflowEndpointMqttAuthentication {
   @doc("X.509 certificate authentication.")
   x509Settings?: DataflowEndpointAuthenticationX509;
 }
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported"
+@doc("DataflowEndpoint Mqtt Authentication Method properties")
+union MqttAuthMethod  {
+  string,
+
+  AuthenticationMethod.SystemAssignedManagedIdentity,
+  AuthenticationMethod.UserAssignedManagedIdentity,
+  AuthenticationMethod.Sasl,
+  AuthenticationMethod.x509Certificate,
+};
 
 @doc("Broker Retain types")
 union MqttRetainType {
