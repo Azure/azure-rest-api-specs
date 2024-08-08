@@ -1,0 +1,58 @@
+{
+  "title": "Update machines in group.",
+  "operationId": "GroupsOperations_UpdateMachines",
+  "parameters": {
+    "api-version": "2023-05-01-preview",
+    "subscriptionId": "4bd2aa0f-2bd2-4d67-91a8-5a4533d58600",
+    "resourceGroupName": "ayagrawrg",
+    "projectName": "app18700project",
+    "groupName": "kuchatur-test",
+    "body": {
+      "eTag": "*",
+      "properties": {
+        "operationType": "Add",
+        "machines": [
+          "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/ayagrawrg/providers/Microsoft.Migrate/assessmentprojects/app18700project/machines/18895660-c5e5-4247-8cfc-cd24e1fe57f3"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "groupStatus": "Completed",
+          "machineCount": 20,
+          "assessments": [
+            "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/ayagrawrg/providers/Microsoft.Migrate/assessmentprojects/app18700project/groups/kuchatur-test/assessments/asm1"
+          ],
+          "supportedAssessmentTypes": [
+            "MachineAssessment",
+            "AvsAssessment"
+          ],
+          "areAssessmentsRunning": true,
+          "createdTimestamp": "2023-09-15T07:22:29.161Z",
+          "updatedTimestamp": "2023-09-15T07:22:29.161Z",
+          "groupType": "Default",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/4bd2aa0f-2bd2-4d67-91a8-5a4533d58600/resourceGroups/ayagrawrg/providers/Microsoft.Migrate/assessmentprojects/app18700project/groups/kuchatur-test",
+        "name": "kuchatur-test",
+        "type": "Microsoft.Migrate/assessmentprojects/groups",
+        "systemData": {
+          "createdBy": "bhjfiiwermbzqfoqxtxpjigj",
+          "createdByType": "User",
+          "createdAt": "2023-09-15T07:22:18.589Z",
+          "lastModifiedBy": "lrmhonmbodwva",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-15T07:22:18.589Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
